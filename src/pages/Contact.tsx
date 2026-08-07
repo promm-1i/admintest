@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createReservation, reservationSchema, type ReservationInput } from "@/lib/api/reservations";
+import { PRODUCT_TYPES } from "@/lib/pricing";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const EMPTY: ReservationInput = {
@@ -18,10 +20,10 @@ const EMPTY: ReservationInput = {
   message: "",
 };
 
-export default function Reserve() {
+export default function Contact() {
   usePageTitle(
-    "예약 문의 — MINTCL STUDIO",
-    "원하시는 일정과 코스를 남겨 주시면 확인 후 연락드립니다.",
+    "제작 문의 — MINTCL",
+    "홈페이지 제작 문의, 상담 문의를 남겨 주시면 확인 후 연락드립니다.",
   );
 
   const [form, setForm] = useState<ReservationInput>(EMPTY);
@@ -32,7 +34,7 @@ export default function Reserve() {
     onSuccess: () => {
       setForm(EMPTY);
       setErrors({});
-      toast.success("예약 문의가 접수되었습니다. 확인 후 연락드리겠습니다.");
+      toast.success("문의가 접수되었습니다. 확인 후 연락드리겠습니다.");
     },
     onError: () => toast.error("접수에 실패했습니다. 잠시 후 다시 시도해 주세요."),
   });
@@ -57,9 +59,9 @@ export default function Reserve() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-14">
-      <h1 className="text-3xl font-semibold">예약 문의</h1>
+      <h1 className="text-3xl font-semibold">제작 문의</h1>
       <p className="mt-4 text-sm text-muted-foreground">
-        아래 내용을 남겨 주시면 담당자가 확인 후 연락드립니다.
+        업종과 제작 희망 내용을 남겨 주시면 담당자가 확인 후 연락드립니다.
       </p>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-5 rounded-lg border border-border bg-card p-6">
@@ -82,24 +84,32 @@ export default function Reserve() {
             onChange={(e) => set("email")(e.target.value)}
           />
         </Field>
-        <Field label="희망 서비스" error={errors["service"]}>
-          <Input
-            value={form.service}
-            maxLength={100}
-            placeholder="예: 베이직 케어"
-            onChange={(e) => set("service")(e.target.value)}
-          />
+        <Field label="희망 제작 유형" error={errors["service"]}>
+          <Select value={form.service} onValueChange={set("service")}>
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="선택해 주세요" />
+            </SelectTrigger>
+            <SelectContent>
+              {PRODUCT_TYPES.map((type) => (
+                <SelectItem key={type.name} value={type.name}>
+                  {type.name}
+                </SelectItem>
+              ))}
+              <SelectItem value="기타">기타 (문의 내용에 설명)</SelectItem>
+            </SelectContent>
+          </Select>
         </Field>
-        <Field label="희망 일시" error={errors["preferred_at"]}>
+        <Field label="연락 희망 일시" error={errors["preferred_at"]}>
           <Input
             type="datetime-local"
             value={form.preferred_at}
             onChange={(e) => set("preferred_at")(e.target.value)}
           />
         </Field>
-        <Field label="문의 내용" error={errors["message"]}>
+        <Field label="제작 희망 내용" error={errors["message"]}>
           <Textarea
             rows={5}
+            placeholder="어떤 업종이고, 어떤 페이지가 필요한지 자유롭게 적어 주세요."
             value={form.message}
             maxLength={1000}
             onChange={(e) => set("message")(e.target.value)}
@@ -107,7 +117,7 @@ export default function Reserve() {
         </Field>
 
         <Button type="submit" className="w-full" disabled={mutation.isPending}>
-          {mutation.isPending ? "접수 중…" : "예약 문의 보내기"}
+          {mutation.isPending ? "접수 중…" : "문의 보내기"}
         </Button>
       </form>
     </div>

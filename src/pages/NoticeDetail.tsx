@@ -5,7 +5,7 @@ import { NoticeImage } from "@/components/site/NoticeImage";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function NoticeDetail() {
-  usePageTitle("공지사항 상세 — MINTCL STUDIO", "MINTCL STUDIO 공지사항 상세 내용입니다.");
+  usePageTitle("공지사항 상세 — MINTCL", "MINTCL 공지사항 상세 내용입니다.");
 
   const { noticeId } = useParams<{ noticeId: string }>();
   const { data, isLoading } = useQuery({

@@ -8,9 +8,8 @@ const NAV = [
   { to: "/", label: "홈" },
   { to: "/about", label: "소개" },
   { to: "/services", label: "서비스" },
-  { to: "/gallery", label: "갤러리" },
+  { to: "/samples", label: "샘플" },
   { to: "/notices", label: "공지사항" },
-  { to: "/reserve", label: "예약 문의" },
 ] as const;
 
 export function SiteHeader() {
@@ -21,7 +20,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="text-lg font-semibold tracking-tight">
-          MINT<span className="text-primary">CL</span> STUDIO
+          MINT<span className="text-primary">CL</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
@@ -45,18 +44,22 @@ export function SiteHeader() {
             </Link>
           )}
           <Button asChild size="sm">
-            <Link to="/reserve">예약하기</Link>
+            <Link to="/contact">상담 문의</Link>
           </Button>
         </nav>
 
-        <button
-          type="button"
-          aria-label="메뉴 열기"
-          className="md:hidden"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
+        <div className="flex items-center gap-2 md:hidden">
+          <Button asChild size="sm">
+            <Link to="/contact">문의</Link>
+          </Button>
+          <button
+            type="button"
+            aria-label="메뉴 열기"
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
       </div>
 
       {open && (

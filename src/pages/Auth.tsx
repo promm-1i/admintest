@@ -8,7 +8,7 @@ import { signInWithEmail, useAuth } from "@/hooks/useAuth";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function Auth() {
-  usePageTitle("관리자 로그인 — MINTCL STUDIO", "MINTCL STUDIO 운영자 전용 로그인 페이지입니다.");
+  usePageTitle("관리자 로그인 — MINTCL", "MINTCL 운영자 전용 로그인 페이지입니다.");
 
   const navigate = useNavigate();
   const { session, loading } = useAuth();

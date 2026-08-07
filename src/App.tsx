@@ -6,10 +6,11 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
-import Gallery from "@/pages/Gallery";
+import Samples from "@/pages/Samples";
+import SampleDetail from "@/pages/SampleDetail";
 import Notices from "@/pages/Notices";
 import NoticeDetail from "@/pages/NoticeDetail";
-import Reserve from "@/pages/Reserve";
+import Contact from "@/pages/Contact";
 import Auth from "@/pages/Auth";
 import Admin from "@/pages/Admin";
 import NotFound from "@/pages/NotFound";
@@ -23,10 +24,11 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
-          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/samples" element={<Samples />} />
+          <Route path="/samples/:slug" element={<SampleDetail />} />
           <Route path="/notices" element={<Notices />} />
           <Route path="/notices/:noticeId" element={<NoticeDetail />} />
-          <Route path="/reserve" element={<Reserve />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/auth" element={<Auth />} />
           <Route
             path="/admin"

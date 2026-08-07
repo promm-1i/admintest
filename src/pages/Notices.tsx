@@ -5,8 +5,8 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function Notices() {
   usePageTitle(
-    "공지사항 — MINTCL STUDIO",
-    "MINTCL STUDIO의 휴무, 일정 변경, 신규 프로그램 소식을 확인하세요.",
+    "공지사항 — MINTCL",
+    "MINTCL의 서비스 안내, 일정 변경 등 소식을 확인하세요.",
   );
 
   const { data, isLoading, error } = useQuery({

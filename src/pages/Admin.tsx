@@ -7,8 +7,14 @@ import { ReservationManager } from "@/components/admin/ReservationManager";
 import { signOut, useAuth } from "@/hooks/useAuth";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
+// 새 관리 영역(예: 샘플 사이트 관리)을 추가할 때는 이 배열에 탭을 하나 더하면 된다.
+const ADMIN_TABS = [
+  { value: "notices", label: "공지사항", content: <NoticeManager /> },
+  { value: "inquiries", label: "제작 문의", content: <ReservationManager /> },
+];
+
 export default function Admin() {
-  usePageTitle("관리자 — MINTCL STUDIO", "공지사항과 예약 문의를 관리하는 운영자 페이지입니다.");
+  usePageTitle("관리자 — MINTCL", "공지사항과 제작 문의를 관리하는 운영자 페이지입니다.");
 
   const { isAdmin, loading, user } = useAuth();
   const navigate = useNavigate();
@@ -39,24 +45,26 @@ export default function Admin() {
         <div className="mt-10 rounded-lg border border-border bg-card p-8">
           <p className="font-medium">관리자 권한이 없습니다.</p>
           <p className="mt-2 text-sm text-muted-foreground">
-            이 계정에는 관리자 권한이 부여되어 있지 않습니다. 공지사항 및 예약 데이터는 데이터베이스
+            이 계정에는 관리자 권한이 부여되어 있지 않습니다. 공지사항 및 문의 데이터는 데이터베이스
             보안 정책(RLS)에 의해서도 차단됩니다.
           </p>
         </div>
       )}
 
       {!loading && isAdmin && (
-        <Tabs defaultValue="notices" className="mt-8">
+        <Tabs defaultValue={ADMIN_TABS[0]!.value} className="mt-8">
           <TabsList>
-            <TabsTrigger value="notices">공지사항</TabsTrigger>
-            <TabsTrigger value="reservations">예약 문의</TabsTrigger>
+            {ADMIN_TABS.map((tab) => (
+              <TabsTrigger key={tab.value} value={tab.value}>
+                {tab.label}
+              </TabsTrigger>
+            ))}
           </TabsList>
-          <TabsContent value="notices" className="mt-6">
-            <NoticeManager />
-          </TabsContent>
-          <TabsContent value="reservations" className="mt-6">
-            <ReservationManager />
-          </TabsContent>
+          {ADMIN_TABS.map((tab) => (
+            <TabsContent key={tab.value} value={tab.value} className="mt-6">
+              {tab.content}
+            </TabsContent>
+          ))}
         </Tabs>
       )}
     </div>

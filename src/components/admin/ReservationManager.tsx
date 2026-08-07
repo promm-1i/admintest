@@ -33,7 +33,7 @@ export function ReservationManager() {
   });
 
   if (isLoading) return <p className="text-sm text-muted-foreground">불러오는 중…</p>;
-  if (error) return <p className="text-sm text-destructive">예약 목록을 불러오지 못했습니다.</p>;
+  if (error) return <p className="text-sm text-destructive">문의 목록을 불러오지 못했습니다.</p>;
 
   return (
     <ul className="space-y-4">
@@ -74,7 +74,7 @@ export function ReservationManager() {
       ))}
       {(data ?? []).length === 0 && (
         <li className="rounded-lg border border-border bg-card px-5 py-10 text-center text-sm text-muted-foreground">
-          접수된 예약 문의가 없습니다.
+          접수된 제작 문의가 없습니다.
         </li>
       )}
     </ul>
