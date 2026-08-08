@@ -11,6 +11,7 @@ import SampleDetail from "@/pages/SampleDetail";
 import Notices from "@/pages/Notices";
 import NoticeDetail from "@/pages/NoticeDetail";
 import Contact from "@/pages/Contact";
+import ContactStatus from "@/pages/ContactStatus";
 import Auth from "@/pages/Auth";
 import Admin from "@/pages/Admin";
 import NotFound from "@/pages/NotFound";
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/notices" element={<Notices />} />
           <Route path="/notices/:noticeId" element={<NoticeDetail />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/contact/status/:token" element={<ContactStatus />} />
           <Route path="/auth" element={<Auth />} />
           <Route
             path="/admin"

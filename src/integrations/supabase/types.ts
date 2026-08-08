@@ -55,6 +55,7 @@ export type Database = {
       }
       reservations: {
         Row: {
+          access_token: string
           admin_note: string | null
           created_at: string
           email: string | null
@@ -68,6 +69,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
+          access_token?: string
           admin_note?: string | null
           created_at?: string
           email?: string | null
@@ -81,6 +83,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
+          access_token?: string
           admin_note?: string | null
           created_at?: string
           email?: string | null
@@ -127,6 +130,14 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      get_reservation_by_token: {
+        Args: { _token: string }
+        Returns: Database["public"]["Tables"]["reservations"]["Row"]
+      }
+      cancel_reservation_by_token: {
+        Args: { _token: string }
+        Returns: Database["public"]["Tables"]["reservations"]["Row"]
       }
     }
     Enums: {

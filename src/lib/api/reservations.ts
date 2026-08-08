@@ -61,18 +61,37 @@ async function notifyByEmail(parsed: ReservationInput): Promise<void> {
 }
 
 /** 누구나 예약 문의를 등록할 수 있다 (RLS: anon/authenticated INSERT 허용) */
-export async function createReservation(input: ReservationInput): Promise<void> {
+export async function createReservation(input: ReservationInput): Promise<{ access_token: string }> {
   const parsed = reservationSchema.parse(input);
-  const { error } = await supabase.from("reservations").insert({
-    name: parsed.name,
-    phone: parsed.phone,
-    email: parsed.email || null,
-    service: parsed.service || null,
-    preferred_at: parsed.preferred_at ? new Date(parsed.preferred_at).toISOString() : null,
-    message: parsed.message || null,
-  });
+  const { data, error } = await supabase
+    .from("reservations")
+    .insert({
+      name: parsed.name,
+      phone: parsed.phone,
+      email: parsed.email || null,
+      service: parsed.service || null,
+      preferred_at: parsed.preferred_at ? new Date(parsed.preferred_at).toISOString() : null,
+      message: parsed.message || null,
+    })
+    .select("access_token")
+    .single();
   if (error) throw error;
   void notifyByEmail(parsed);
+  return data;
+}
+
+/** 회원가입 없이, 발급받은 조회 토큰으로 본인 문의 1건을 조회한다 */
+export async function getReservationByToken(token: string): Promise<Reservation | null> {
+  const { data, error } = await supabase.rpc("get_reservation_by_token", { _token: token });
+  if (error) throw error;
+  return data ?? null;
+}
+
+/** 회원가입 없이, 발급받은 조회 토큰으로 본인 문의를 취소한다 */
+export async function cancelReservationByToken(token: string): Promise<Reservation> {
+  const { data, error } = await supabase.rpc("cancel_reservation_by_token", { _token: token });
+  if (error) throw error;
+  return data;
 }
 
 /** 관리자 전용 목록 조회 (RLS로 관리자만 통과) */

@@ -46,7 +46,7 @@ export function ReservationManager() {
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
                 신청 {new Date(r.created_at).toLocaleString("ko-KR")}
-                {r.preferred_at && ` · 희망 ${new Date(r.preferred_at).toLocaleString("ko-KR")}`}
+                {r.preferred_at && ` · 완료 희망 ${new Date(r.preferred_at).toLocaleDateString("ko-KR")}`}
                 {r.service && ` · ${r.service}`}
               </p>
               {r.email && <p className="mt-1 text-xs text-muted-foreground">{r.email}</p>}
