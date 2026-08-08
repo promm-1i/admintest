@@ -17,10 +17,10 @@ export function PortfolioSection() {
           전체 보기 →
         </Link>
       </div>
-      <div className="mt-12 grid gap-5 sm:grid-cols-2">
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
         {SAMPLES.slice(0, 5).map((sample, i) => (
-          <FadeIn key={sample.slug} delay={i * 60} className={i === 0 ? "sm:col-span-2" : undefined}>
-            <PortfolioCard sample={sample} size={i === 0 ? "large" : "normal"} />
+          <FadeIn key={sample.slug} delay={i * 60}>
+            <PortfolioCard sample={sample} />
           </FadeIn>
         ))}
       </div>

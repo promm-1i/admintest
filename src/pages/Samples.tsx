@@ -17,10 +17,10 @@ export default function Samples() {
         없어도 상담을 통해 맞춤 구성으로 제작해 드립니다.
       </p>
 
-      <div className="mt-10 grid gap-5 sm:grid-cols-2">
+      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {SAMPLES.map((sample, i) => (
-          <FadeIn key={sample.slug} delay={i * 60} className={i === 0 ? "sm:col-span-2" : undefined}>
-            <PortfolioCard sample={sample} size={i === 0 ? "large" : "normal"} />
+          <FadeIn key={sample.slug} delay={i * 60}>
+            <PortfolioCard sample={sample} />
           </FadeIn>
         ))}
       </div>

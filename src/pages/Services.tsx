@@ -20,9 +20,9 @@ export default function Services() {
       </p>
 
       <h2 className="mt-12 text-xl font-semibold">제작 유형</h2>
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {PRODUCT_TYPES.map((type, i) => (
-          <ServiceCard key={type.name} {...type} tinted={i % 2 === 1} />
+      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+        {PRODUCT_TYPES.map((type) => (
+          <ServiceCard key={type.name} {...type} />
         ))}
       </div>
 

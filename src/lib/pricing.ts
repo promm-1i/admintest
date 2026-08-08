@@ -3,6 +3,7 @@ export type ProductType = {
   desc: string;
   bullets: string[];
   price: string;
+  image?: string;
 };
 
 export const PRODUCT_TYPES: ProductType[] = [
@@ -11,30 +12,35 @@ export const PRODUCT_TYPES: ProductType[] = [
     desc: "간단한 서비스 소개, 이벤트 페이지, 광고용 랜딩페이지에 적합합니다.",
     bullets: ["간단한 서비스 소개", "이벤트 페이지", "광고용 랜딩페이지"],
     price: "30만 원부터",
+    image: "/images/service-onepage.webp",
   },
   {
     name: "소상공인 홈페이지",
     desc: "매장 소개와 서비스 안내, 연락 수단을 한 화면에 정리합니다.",
     bullets: ["매장 소개", "서비스 안내", "지도 / 전화 / 카카오톡 연결"],
     price: "35만 원부터",
+    image: "/images/service-smallbiz.webp",
   },
   {
     name: "기업 홈페이지",
     desc: "회사 소개와 사업 영역, 실적을 정리해 신뢰를 전달합니다.",
     bullets: ["회사 소개", "사업 영역", "주요 실적", "문의 접수"],
     price: "65만 원부터",
+    image: "/images/service-corporate.webp",
   },
   {
     name: "포트폴리오 홈페이지",
     desc: "작가, 강사, 프리랜서 등 작업물을 보여주는 데 적합합니다.",
     bullets: ["작가 / 강사 / 프리랜서", "작업물 소개"],
     price: "구성에 따라 협의",
+    image: "/images/service-portfolio.webp",
   },
   {
     name: "기존 홈페이지 리뉴얼",
     desc: "낡은 디자인을 개선하고 기존 자료를 기반으로 다시 정리합니다.",
     bullets: ["낡은 디자인 개선", "모바일 최적화", "문구 재정리"],
     price: "기존 자료 기반 협의",
+    image: "/images/service-renewal.webp",
   },
 ];
 
