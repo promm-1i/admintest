@@ -4,9 +4,11 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { SampleMarquee } from "@/components/sections/SampleMarquee";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 import { Button } from "@/components/ui/button";
 import { SAMPLES } from "@/lib/samples";
 import { cn } from "@/lib/utils";
+import bgTexture from "@/assets/images/bg_texture_1.jpg";
 
 type PortfolioSectionProps = {
   selectedType?: string;
@@ -38,7 +40,13 @@ export function PortfolioSection({
     FILTERS.find((f) => f.value === selectedType)?.label || "전체";
 
   return (
-    <section id="portfolio-section" className="mx-auto max-w-6xl px-4 sm:px-6 py-20 lg:py-28">
+    <section id="portfolio-section" className="relative overflow-hidden py-20 lg:py-28">
+      <SectionBackground
+        src={bgTexture}
+        opacity={0.1}
+        overlayClassName="bg-gradient-to-b from-background/70 via-background/45 to-background/75"
+      />
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border/80 pb-8">
         <SectionHeader
           label="PORTFOLIO"
@@ -121,6 +129,7 @@ export function PortfolioSection({
           </div>
         </div>
       </FadeIn>
+      </div>
     </section>
   );
 }
