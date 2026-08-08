@@ -1,6 +1,8 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { SectionBackground } from "@/components/ui/SectionBackground";
 import { Search, Layout, ArrowRight, CheckCircle2 } from "lucide-react";
+import bgTexture from "@/assets/images/bg_texture_1.jpg";
 
 const WORKFLOW_STEPS = [
   {
@@ -29,6 +31,10 @@ const WORKFLOW_STEPS = [
 export function ProblemSection() {
   return (
     <section className="relative overflow-hidden border-y border-border bg-secondary/30 py-20 lg:py-28">
+      <SectionBackground
+        src={bgTexture}
+        overlayClassName="bg-gradient-to-b from-secondary/55 via-secondary/25 to-secondary/60"
+      />
       <div
         aria-hidden
         className="motion-safe:animate-float-slow pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"
