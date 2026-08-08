@@ -1,5 +1,6 @@
 import koreanRestaurantImg from "@/assets/images/korean_restaurant_no_people_1786182882900.jpg";
 import beautySkincareImg from "@/assets/images/beauty_skincare_1786182932542.jpg";
+import hospitalImg from "@/assets/images/hospital_tjaspdlf.jpg";
 
 export type Sample = {
   slug: string;
@@ -24,7 +25,7 @@ export const SAMPLES: Sample[] = [
     purpose: "진료 정보, 의료진 소개, 위치 안내를 신뢰감 있게 정리한 병원 / 의원형 홈페이지 샘플입니다.",
     features: ["진료과목 안내", "의료진 소개", "오시는 길/지도", "예약·전화 문의 버튼"],
     idealFor: "신뢰감 있는 정보 전달이 우선인 병·의원, 한의원",
-    image: "/images/portfolio-clinic.webp",
+    image: hospitalImg,
   },
   {
     slug: "beauty",
