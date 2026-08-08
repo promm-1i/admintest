@@ -6,7 +6,6 @@ import { ServiceTypesSection } from "@/components/sections/ServiceTypesSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { AdminFeatureSection } from "@/components/sections/AdminFeatureSection";
-import { NoticesPreviewSection } from "@/components/sections/NoticesPreviewSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 
@@ -26,7 +25,6 @@ export default function Home() {
       <AdminFeatureSection />
       <PricingSection />
       <ProblemSection />
-      <NoticesPreviewSection />
       <FaqSection />
       <FinalCtaSection />
     </div>

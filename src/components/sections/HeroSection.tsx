@@ -11,6 +11,7 @@ export function HeroSection() {
       <CoverImage
         src={mainBanner}
         alt="MintCL 제작 홈페이지 예시"
+        priority
         className="motion-safe:animate-[hero-zoom_20s_ease-out_forwards]"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/95 via-foreground/55 to-foreground/20" />

@@ -1,8 +1,8 @@
-import serviceOnepageImg from "@/assets/images/service_onepage.png";
-import serviceSmallbizImg from "@/assets/images/service_smallbiz.png";
-import serviceCorporateImg from "@/assets/images/service_corporate.png";
-import servicePortfolioImg from "@/assets/images/service_portfolio.png";
-import serviceRenewalImg from "@/assets/images/service_renewal.png";
+import serviceOnepageImg from "@/assets/images/service_onepage.jpg";
+import serviceSmallbizImg from "@/assets/images/service_smallbiz.jpg";
+import serviceCorporateImg from "@/assets/images/service_corporate.jpg";
+import servicePortfolioImg from "@/assets/images/service_portfolio.jpg";
+import serviceRenewalImg from "@/assets/images/service_renewal.jpg";
 
 export type ProductType = {
   num: string;
