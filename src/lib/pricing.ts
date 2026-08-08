@@ -1,3 +1,9 @@
+import serviceOnepageImg from "@/assets/images/service_onepage.png";
+import serviceSmallbizImg from "@/assets/images/service_smallbiz.png";
+import serviceCorporateImg from "@/assets/images/service_corporate.png";
+import servicePortfolioImg from "@/assets/images/service_portfolio.png";
+import serviceRenewalImg from "@/assets/images/service_renewal.png";
+
 export type ProductType = {
   num: string;
   name: string;
@@ -16,7 +22,7 @@ export const PRODUCT_TYPES: ProductType[] = [
     desc: "핵심 내용을 한 페이지에 집중해서 전달하는 간결한 홈페이지",
     bullets: ["서비스 소개", "이벤트 페이지", "광고용 랜딩페이지"],
     price: "30만 원부터",
-    image: "/images/service-onepage.webp",
+    image: serviceOnepageImg,
   },
   {
     num: "02",
@@ -25,7 +31,7 @@ export const PRODUCT_TYPES: ProductType[] = [
     desc: "매장과 서비스를 소개하고 고객 문의로 연결하는 홈페이지",
     bullets: ["매장 소개", "서비스 안내", "지도 / 전화 / 카카오톡 연결"],
     price: "35만 원부터",
-    image: "/images/service-smallbiz.webp",
+    image: serviceSmallbizImg,
   },
   {
     num: "03",
@@ -34,7 +40,7 @@ export const PRODUCT_TYPES: ProductType[] = [
     desc: "회사 정보와 사업 내용을 신뢰감 있게 전달하는 기업용 홈페이지",
     bullets: ["회사 소개", "사업 영역", "주요 실적", "문의 / 상담"],
     price: "65만 원부터",
-    image: "/images/service-corporate.webp",
+    image: serviceCorporateImg,
   },
   {
     num: "04",
@@ -43,7 +49,7 @@ export const PRODUCT_TYPES: ProductType[] = [
     desc: "작업물과 전문성을 효과적으로 보여주는 포트폴리오 중심 홈페이지",
     bullets: ["작가 / 강사", "디자인 스튜디오", "인테리어", "개인 브랜드"],
     price: "협의",
-    image: "/images/service-portfolio.webp",
+    image: servicePortfolioImg,
   },
   {
     num: "05",
@@ -52,7 +58,7 @@ export const PRODUCT_TYPES: ProductType[] = [
     desc: "오래된 홈페이지의 디자인과 사용성을 현재 기준에 맞게 개선",
     bullets: ["디자인 개선", "모바일 최적화", "구조 재정리", "기존 자료 활용"],
     price: "협의",
-    image: "/images/service-renewal.webp",
+    image: serviceRenewalImg,
   },
 ];
 
