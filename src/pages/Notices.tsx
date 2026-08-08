@@ -25,7 +25,19 @@ export default function Notices() {
         {(data ?? []).map((notice) => (
           <li key={notice.id}>
             <Link to={`/notices/${notice.id}`} className="block px-5 py-5 hover:bg-muted/60">
-              <p className="font-medium">{notice.title}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                {notice.is_pinned && (
+                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                    고정
+                  </span>
+                )}
+                {notice.category && (
+                  <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+                    {notice.category}
+                  </span>
+                )}
+                <p className="font-medium">{notice.title}</p>
+              </div>
               <p className="mt-1 text-xs text-muted-foreground">
                 {new Date(notice.created_at).toLocaleDateString("ko-KR")}
               </p>

@@ -17,30 +17,36 @@ export type Database = {
       notices: {
         Row: {
           author_id: string | null
+          category: string | null
           content: string
           created_at: string
           id: string
           image_url: string | null
+          is_pinned: boolean
           published: boolean
           title: string
           updated_at: string
         }
         Insert: {
           author_id?: string | null
+          category?: string | null
           content?: string
           created_at?: string
           id?: string
           image_url?: string | null
+          is_pinned?: boolean
           published?: boolean
           title: string
           updated_at?: string
         }
         Update: {
           author_id?: string | null
+          category?: string | null
           content?: string
           created_at?: string
           id?: string
           image_url?: string | null
+          is_pinned?: boolean
           published?: boolean
           title?: string
           updated_at?: string

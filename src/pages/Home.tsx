@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { SAMPLES } from "@/lib/samples";
 import { BENEFITS, PRODUCT_TYPES, PRICING, ADDONS, PRICING_NOTE, PROCESS_STEPS } from "@/lib/pricing";
+import { FAQ } from "@/lib/faq";
+import { listPublishedNotices } from "@/lib/api/notices";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function Home() {
@@ -9,6 +13,11 @@ export default function Home() {
     "MINTCL — 소상공인·1인기업 홈페이지 제작",
     "30만 원부터 시작하는 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다.",
   );
+
+  const { data: notices } = useQuery({
+    queryKey: ["notices", "published"],
+    queryFn: listPublishedNotices,
+  });
 
   return (
     <div>
@@ -92,6 +101,16 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 중간 CTA */}
+      <section className="mx-auto max-w-6xl px-4 py-12 text-center">
+        <p className="text-sm text-muted-foreground">가격이나 제작 범위가 궁금하시면 지금 바로 문의해 보세요.</p>
+        <div className="mt-4">
+          <Button asChild>
+            <Link to="/contact">제작 문의하기</Link>
+          </Button>
+        </div>
+      </section>
+
       {/* 제작 절차 */}
       <section className="mx-auto max-w-6xl px-4 py-16">
         <h2 className="text-2xl font-semibold">제작 절차</h2>
@@ -128,6 +147,58 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* 공지사항 */}
+      <section className="mx-auto max-w-6xl px-4 py-16">
+        <div className="flex items-end justify-between">
+          <h2 className="text-2xl font-semibold">공지사항</h2>
+          <Link to="/notices" className="text-sm text-primary">
+            전체보기
+          </Link>
+        </div>
+        <ul className="mt-6 divide-y divide-border rounded-lg border border-border bg-card">
+          {(notices ?? []).slice(0, 3).map((notice) => (
+            <li key={notice.id}>
+              <Link
+                to={`/notices/${notice.id}`}
+                className="flex items-center justify-between gap-4 px-5 py-4 text-sm hover:bg-muted/60"
+              >
+                <span className="flex min-w-0 items-center gap-2">
+                  {notice.is_pinned && (
+                    <span className="shrink-0 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                      고정
+                    </span>
+                  )}
+                  <span className="truncate">{notice.title}</span>
+                </span>
+                <span className="shrink-0 text-xs text-muted-foreground">
+                  {new Date(notice.created_at).toLocaleDateString("ko-KR")}
+                </span>
+              </Link>
+            </li>
+          ))}
+          {(notices ?? []).length === 0 && (
+            <li className="px-5 py-8 text-center text-sm text-muted-foreground">
+              등록된 공지사항이 없습니다.
+            </li>
+          )}
+        </ul>
+      </section>
+
+      {/* FAQ */}
+      <section className="border-y border-border bg-secondary/30">
+        <div className="mx-auto max-w-3xl px-4 py-16">
+          <h2 className="text-2xl font-semibold">자주 묻는 질문</h2>
+          <Accordion type="single" collapsible className="mt-8">
+            {FAQ.map((item) => (
+              <AccordionItem key={item.question} value={item.question}>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 

@@ -27,7 +27,19 @@ export default function NoticeDetail() {
 
       {data && (
         <article className="mt-6">
-          <h1 className="text-2xl font-semibold">{data.title}</h1>
+          <div className="flex flex-wrap items-center gap-2">
+            {data.is_pinned && (
+              <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                고정
+              </span>
+            )}
+            {data.category && (
+              <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
+                {data.category}
+              </span>
+            )}
+          </div>
+          <h1 className="mt-2 text-2xl font-semibold">{data.title}</h1>
           <p className="mt-2 text-xs text-muted-foreground">
             {new Date(data.created_at).toLocaleDateString("ko-KR")}
           </p>

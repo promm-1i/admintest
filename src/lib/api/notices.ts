@@ -7,12 +7,24 @@ export type NoticeInput = {
   title: string;
   content: string;
   image_url: string | null;
+  category: string | null;
+  is_pinned: boolean;
   published: boolean;
 };
 
+export const NOTICE_CATEGORIES = ["공지", "이벤트", "안내"] as const;
+
 const NOTICE_BUCKET = "notice-images";
 
-/** 공개된 공지사항 목록 (비로그인 사용자 포함) */
+/** 상단 고정 공지가 먼저 오도록 정렬 */
+function sortPinnedFirst(notices: Notice[]): Notice[] {
+  return [...notices].sort((a, b) => {
+    if (a.is_pinned !== b.is_pinned) return a.is_pinned ? -1 : 1;
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
+}
+
+/** 공개된 공지사항 목록 (비로그인 사용자 포함), 상단 고정 우선 정렬 */
 export async function listPublishedNotices(): Promise<Notice[]> {
   const { data, error } = await supabase
     .from("notices")
@@ -20,17 +32,17 @@ export async function listPublishedNotices(): Promise<Notice[]> {
     .eq("published", true)
     .order("created_at", { ascending: false });
   if (error) throw error;
-  return data ?? [];
+  return sortPinnedFirst(data ?? []);
 }
 
-/** 관리자용 전체 공지사항 목록 (비공개 포함) */
+/** 관리자용 전체 공지사항 목록 (비공개 포함), 상단 고정 우선 정렬 */
 export async function listAllNotices(): Promise<Notice[]> {
   const { data, error } = await supabase
     .from("notices")
     .select("*")
     .order("created_at", { ascending: false });
   if (error) throw error;
-  return data ?? [];
+  return sortPinnedFirst(data ?? []);
 }
 
 export async function getNotice(id: string): Promise<Notice | null> {
