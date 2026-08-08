@@ -35,6 +35,31 @@ export const reservationSchema = z.object({
 
 export type ReservationInput = z.infer<typeof reservationSchema>;
 
+// Formspree 엔드포인트는 클라이언트에 노출되도록 설계된 공개 폼 URL이라 안전하다
+// (Resend API 키 같은 비밀값과 다름). 실제 문의 기록은 Supabase가 정본이며,
+// 이 요청은 이메일 알림용 best-effort 전송이라 실패해도 문의 접수 자체는 성공 처리한다.
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mvkpzklq";
+
+async function notifyByEmail(parsed: ReservationInput): Promise<void> {
+  try {
+    await fetch(FORMSPREE_ENDPOINT, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({
+        _subject: "MINTCL 새 제작 문의",
+        이름: parsed.name,
+        연락처: parsed.phone,
+        이메일: parsed.email || "(미입력)",
+        희망제작유형: parsed.service || "(미입력)",
+        연락희망일시: parsed.preferred_at || "(미입력)",
+        문의내용: parsed.message || "(미입력)",
+      }),
+    });
+  } catch (e) {
+    console.error("[Formspree] 이메일 알림 전송 실패", e);
+  }
+}
+
 /** 누구나 예약 문의를 등록할 수 있다 (RLS: anon/authenticated INSERT 허용) */
 export async function createReservation(input: ReservationInput): Promise<void> {
   const parsed = reservationSchema.parse(input);
@@ -47,6 +72,7 @@ export async function createReservation(input: ReservationInput): Promise<void> 
     message: parsed.message || null,
   });
   if (error) throw error;
+  void notifyByEmail(parsed);
 }
 
 /** 관리자 전용 목록 조회 (RLS로 관리자만 통과) */
