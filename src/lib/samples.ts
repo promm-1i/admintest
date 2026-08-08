@@ -1,6 +1,9 @@
 import koreanRestaurantImg from "@/assets/images/korean_restaurant_no_people_1786182882900.jpg";
 import beautySkincareImg from "@/assets/images/beauty_skincare_1786182932542.jpg";
 import hospitalImg from "@/assets/images/hospital_tjaspdlf.jpg";
+import interiorConstructionImg from "@/assets/images/interior_construction.jpg";
+import moveInCleaningImg from "@/assets/images/move_in_cleaning.jpg";
+import corporateImg from "@/assets/images/corporate.jpg";
 
 export type Sample = {
   slug: string;
@@ -58,7 +61,7 @@ export const SAMPLES: Sample[] = [
     purpose: "시공 사례와 전문성을 중심으로 보여주는 건설 / 인테리어 업종 홈페이지 샘플입니다.",
     features: ["시공 사례 갤러리", "작업 절차 안내", "견적 문의 폼", "회사 소개"],
     idealFor: "시공 사례를 자산으로 활용하고 싶은 인테리어·건설업체",
-    image: "/images/portfolio-interior.webp",
+    image: interiorConstructionImg,
   },
   {
     slug: "move-in-cleaning",
@@ -69,6 +72,7 @@ export const SAMPLES: Sample[] = [
     purpose: "서비스 범위, 작업 전후 이미지, 문의 연결을 한 페이지 흐름으로 정리한 청소 서비스 홈페이지 샘플입니다.",
     features: ["서비스 범위 안내", "청소 전후 사진", "빠른 전화/카카오톡 문의", "간단 견적 안내"],
     idealFor: "문의 전화 응대 부담을 줄이고 싶은 청소 업체",
+    image: moveInCleaningImg,
   },
   {
     slug: "corporate",
@@ -79,6 +83,7 @@ export const SAMPLES: Sample[] = [
     purpose: "사업 영역, 연혁, 연락처를 정리해 회사에 대한 신뢰를 주는 정보 전달형 구성입니다.",
     features: ["사업 영역 소개", "회사 연혁/개요", "오시는 길", "문의 폼"],
     idealFor: "홈페이지가 없거나 정보가 오래된 중소기업, 스타트업",
+    image: corporateImg,
   },
 ];
 
