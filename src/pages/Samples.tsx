@@ -1,6 +1,5 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
+import { FadeIn } from "@/components/ui/FadeIn";
+import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { SAMPLES } from "@/lib/samples";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -18,27 +17,11 @@ export default function Samples() {
         없어도 상담을 통해 맞춤 구성으로 제작해 드립니다.
       </p>
 
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {SAMPLES.map((sample) => (
-          <article key={sample.slug} className="overflow-hidden rounded-lg border border-border bg-card">
-            <ImagePlaceholder ratio="video" label={sample.industry} className="rounded-none border-0" />
-            <div className="p-6">
-              <p className="text-xs font-medium tracking-wide text-primary">{sample.industry}</p>
-              <h2 className="mt-2 font-medium">{sample.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{sample.purpose}</p>
-              <ul className="mt-3 flex flex-wrap gap-1.5">
-                {sample.features.map((f) => (
-                  <li key={f} className="rounded-full bg-secondary px-2.5 py-1 text-xs text-secondary-foreground">
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-3 text-xs text-muted-foreground">적합한 고객: {sample.idealFor}</p>
-              <Button asChild size="sm" variant="outline" className="mt-4 w-full">
-                <Link to={`/samples/${sample.slug}`}>샘플 보기</Link>
-              </Button>
-            </div>
-          </article>
+      <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        {SAMPLES.map((sample, i) => (
+          <FadeIn key={sample.slug} delay={i * 60} className={i === 0 ? "sm:col-span-2" : undefined}>
+            <PortfolioCard sample={sample} size={i === 0 ? "large" : "normal"} />
+          </FadeIn>
         ))}
       </div>
     </div>
