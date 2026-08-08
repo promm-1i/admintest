@@ -32,7 +32,7 @@ export default function SampleDetail() {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   usePageTitle(
-    sample ? `${sample.industry} 실시간 미리보기 — MintCL` : "샘플을 찾을 수 없습니다 — MintCL",
+    sample ? `${sample.industry} 실시간 미리보기 — MintCL` : "포트폴리오를 찾을 수 없습니다 — MintCL",
     sample?.purpose,
   );
 
@@ -66,7 +66,7 @@ export default function SampleDetail() {
             to="/samples"
             className="inline-flex items-center text-xs font-semibold text-primary hover:underline mb-2"
           >
-            <ArrowLeft className="h-3.5 w-3.5 mr-1" /> 전체 샘플 목록으로
+            <ArrowLeft className="h-3.5 w-3.5 mr-1" /> 전체 포트폴리오 목록으로
           </Link>
           <div className="flex items-center gap-2">
             <span className="rounded bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">
@@ -162,7 +162,7 @@ export default function SampleDetail() {
             <ImagePlaceholder
               src={sample.image}
               ratio="wide"
-              label={`${sample.industry} 샘플 대표 이미지`}
+              label={`${sample.industry} 포트폴리오 대표 이미지`}
             />
           </div>
 
@@ -221,10 +221,10 @@ export default function SampleDetail() {
               </a>
             </Button>
           </div>
-          {/* Bottom row: 샘플 다시보기 / 목록 */}
+          {/* Bottom row: 포트폴리오 다시보기 / 목록 */}
           <div className="mt-1 flex justify-center">
             <Button asChild variant="ghost" size="lg" className="font-semibold text-muted-foreground hover:text-foreground">
-              <Link to="/samples">다른 샘플 다시 보기</Link>
+              <Link to="/samples">다른 포트폴리오 보기</Link>
             </Button>
           </div>
         </div>

@@ -55,7 +55,7 @@ export function PortfolioCard({
         )}
 
         <div className="mt-auto pt-4 flex items-center justify-between text-sm font-medium text-primary border-t border-border/40">
-          <span>샘플 보기</span>
+          <span>포트폴리오 보기</span>
           <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </div>
       </div>

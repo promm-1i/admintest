@@ -31,6 +31,9 @@ export function PortfolioSection({
       ? SAMPLES
       : SAMPLES.filter((site) => site.type?.includes(selectedType));
 
+  // 메인페이지에는 최신 포트폴리오 6건만 노출 (SAMPLES는 최신순 정렬, 전체 목록은 /samples)
+  const displaySamples = filteredSamples.slice(0, 6);
+
   const activeFilterLabel =
     FILTERS.find((f) => f.value === selectedType)?.label || "전체";
 
@@ -39,7 +42,7 @@ export function PortfolioSection({
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border/80 pb-8">
         <SectionHeader
           label="PORTFOLIO"
-          title="샘플 사이트"
+          title="포트폴리오"
           description="업종과 목적에 따라 서로 다른 구성과 디자인으로 제작합니다."
         />
 
@@ -47,7 +50,7 @@ export function PortfolioSection({
           to="/samples"
           className="text-sm font-medium text-primary hover:underline self-start md:self-auto shrink-0"
         >
-          전체 샘플 모아보기 →
+          전체 포트폴리오 보기 →
         </Link>
       </div>
 
@@ -80,21 +83,21 @@ export function PortfolioSection({
       {/* Active Filter Indicator */}
       {selectedType !== "all" && (
         <p className="mt-4 text-xs font-medium text-primary">
-          ‘{activeFilterLabel}’ 유형과 연결된 샘플 {filteredSamples.length}건이 표시되고 있습니다.
+          ‘{activeFilterLabel}’ 유형과 연결된 포트폴리오 {filteredSamples.length}건이 표시되고 있습니다.
         </p>
       )}
 
       {/* Samples Grid with Unified Card Heights */}
       <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
-        {filteredSamples.length > 0 ? (
-          filteredSamples.map((sample, i) => (
+        {displaySamples.length > 0 ? (
+          displaySamples.map((sample, i) => (
             <FadeIn key={sample.slug} delay={i * 60} className="h-full">
               <PortfolioCard sample={sample} size="normal" />
             </FadeIn>
           ))
         ) : (
           <div className="col-span-full py-16 text-center text-sm text-muted-foreground bg-card rounded-xl border border-border/60">
-            해당 카테고리의 샘플 사이트를 준비 중입니다. 원하시는 업종을 문의해주시면 맞춤 구성안을 보여드립니다.
+            해당 카테고리의 포트폴리오를 준비 중입니다. 원하시는 업종을 문의해주시면 맞춤 구성안을 보여드립니다.
           </div>
         )}
       </div>

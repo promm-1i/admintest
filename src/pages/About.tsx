@@ -135,7 +135,7 @@ export default function About() {
           </Button>
           <Button asChild variant="outline" size="lg" className="px-8 font-medium">
             <Link to="/samples" className="gap-2">
-              샘플 사이트 확인하기 <ArrowRight className="h-4 w-4" />
+              포트폴리오 확인하기 <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
         </div>

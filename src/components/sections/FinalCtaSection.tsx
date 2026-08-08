@@ -38,10 +38,10 @@ export function FinalCtaSection() {
               </a>
             </Button>
           </div>
-          {/* Bottom row: 샘플 다시보기 centered */}
+          {/* Bottom row: 포트폴리오 다시보기 centered */}
           <div className="mt-1 flex justify-center">
             <Button asChild size="lg" variant="ghost" className="font-semibold text-muted-foreground hover:text-foreground">
-              <Link to="/samples">샘플 다시 보기</Link>
+              <Link to="/samples">포트폴리오 다시 보기</Link>
             </Button>
           </div>
         </div>

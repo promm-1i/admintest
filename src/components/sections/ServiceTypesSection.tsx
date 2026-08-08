@@ -80,7 +80,7 @@ export function ServiceTypesSection({
                     onClick={() => handleItemClick(activeItem)}
                     className="mt-5 w-full rounded-md border border-primary/30 bg-secondary/50 py-2.5 text-center text-xs font-medium text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
                   >
-                    이 유형의 샘플 사이트 보기 ↓
+                    이 유형의 포트폴리오 보기 ↓
                   </button>
                 </div>
               </div>

@@ -38,7 +38,7 @@ export function HeroSection() {
               variant="outline"
               className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
             >
-              <Link to="/samples">샘플 보기</Link>
+              <Link to="/samples">포트폴리오 보기</Link>
             </Button>
           </div>
 

@@ -9,7 +9,7 @@ const NAV = [
   { to: "/", label: "홈" },
   { to: "/about", label: "소개" },
   { to: "/services", label: "서비스" },
-  { to: "/samples", label: "샘플" },
+  { to: "/samples", label: "포트폴리오" },
   { to: "/notices", label: "공지사항" },
 ] as const;
 

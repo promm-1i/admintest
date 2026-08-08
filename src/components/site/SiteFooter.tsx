@@ -32,7 +32,7 @@ export function SiteFooter() {
             </li>
             <li>
               <Link to="/samples" className="hover:text-foreground transition-colors">
-                업종별 샘플 사이트
+                업종별 포트폴리오
               </Link>
             </li>
           </ul>

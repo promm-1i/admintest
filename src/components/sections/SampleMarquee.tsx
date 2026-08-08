@@ -3,8 +3,10 @@ import { SAMPLES } from "@/lib/samples";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 
 export function SampleMarquee() {
+  // 가장 최근 등록된 6개만 슬라이드에 노출 (SAMPLES는 최신순 정렬)
+  const latest = SAMPLES.slice(0, 6);
   // Double the array to create a seamless infinite loop effect
-  const marqueeItems = [...SAMPLES, ...SAMPLES];
+  const marqueeItems = [...latest, ...latest];
 
   return (
     <div className="w-full overflow-hidden py-6 bg-secondary/20 border-y border-border/60">
