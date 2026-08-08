@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { createReservation, reservationSchema, type ReservationInput } from "@/lib/api/reservations";
 import { PRODUCT_TYPES } from "@/lib/pricing";
 import { QUOTE_FEATURES, getQuoteConfig, calculateQuote, formatQuoteSummary } from "@/lib/quote";
+import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const EMPTY: ReservationInput = {
@@ -143,6 +144,14 @@ export default function Contact() {
       <p className="mt-4 text-sm text-muted-foreground">
         업종과 제작 희망 내용을 남겨 주시면 담당자가 확인 후 연락드립니다.
       </p>
+      <a
+        href={KAKAO_CHANNEL_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+      >
+        카카오톡으로 바로 문의하기 →
+      </a>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-5 rounded-lg border border-border bg-card p-6">
         <Field label="이름" required error={errors["name"]}>

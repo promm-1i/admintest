@@ -27,7 +27,7 @@ export default function SampleDetail() {
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">{sample.purpose}</p>
 
       <div className="mt-8">
-        <ImagePlaceholder ratio="wide" label={`${sample.industry} 샘플 이미지`} />
+        <ImagePlaceholder src={sample.image} ratio="wide" label={`${sample.industry} 샘플 이미지`} />
       </div>
 
       <div className="mt-10 grid gap-8 sm:grid-cols-2">

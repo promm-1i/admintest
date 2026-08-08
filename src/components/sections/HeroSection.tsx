@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { BrowserMockup } from "@/components/ui/BrowserMockup";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { STATS, PROCESS_STEPS } from "@/lib/pricing";
@@ -39,10 +40,21 @@ export function HeroSection() {
           </dl>
         </FadeIn>
 
-        <FadeIn direction="left" delay={120} className="relative">
-          <div className="relative ml-auto max-w-sm">
-            <ImagePlaceholder ratio="portrait" label="제작 홈페이지 미리보기" className="shadow-sm" />
-            <div className="absolute -bottom-8 -left-8 w-48 rounded-xl border border-border bg-card p-4 shadow-lg sm:-left-12 sm:w-56">
+        <FadeIn direction="left" delay={120}>
+          <div className="relative mx-auto max-w-sm pb-10 pl-6 pt-6 sm:pl-10 sm:pt-10">
+            <BrowserMockup src="/images/hero-main.webp" alt="제작 홈페이지 미리보기" label="제작 홈페이지 미리보기" />
+
+            <div className="absolute -top-0 -right-2 w-32 overflow-hidden rounded-lg border border-border bg-card shadow-lg sm:w-40">
+              <ImagePlaceholder
+                src="/images/admin-dashboard.webp"
+                ratio="square"
+                label="관리자 화면"
+                className="rounded-none border-0"
+              />
+              <p className="px-2 py-1.5 text-[11px] font-medium text-muted-foreground">관리자 화면</p>
+            </div>
+
+            <div className="absolute bottom-0 left-0 w-44 rounded-xl border border-border bg-card p-4 shadow-lg sm:w-52">
               <p className="text-xs font-medium text-muted-foreground">제작 진행 상태</p>
               <ul className="mt-2 space-y-1.5">
                 {PROCESS_STEPS.slice(0, 3).map((s, i) => (

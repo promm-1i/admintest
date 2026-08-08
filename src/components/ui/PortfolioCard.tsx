@@ -14,6 +14,7 @@ export function PortfolioCard({ sample, size = "normal" }: { sample: Sample; siz
     >
       <div className="overflow-hidden">
         <ImagePlaceholder
+          src={sample.image}
           ratio={size === "large" ? "wide" : "video"}
           label={sample.industry}
           className="rounded-none border-0 transition-transform duration-500 ease-out group-hover:scale-[1.03]"

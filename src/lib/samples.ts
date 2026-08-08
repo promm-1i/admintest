@@ -5,6 +5,8 @@ export type Sample = {
   purpose: string;
   features: string[];
   idealFor: string;
+  /** public/images 안의 정적 파일 경로 (파일이 없으면 자동으로 그라데이션 placeholder로 대체됨) */
+  image?: string;
 };
 
 export const SAMPLES: Sample[] = [
@@ -15,6 +17,7 @@ export const SAMPLES: Sample[] = [
     purpose: "환자가 진료과목과 위치, 운영시간을 빠르게 확인하고 예약 문의로 이어지도록 설계합니다.",
     features: ["진료과목 안내", "의료진 소개", "오시는 길/지도", "예약·전화 문의 버튼"],
     idealFor: "신뢰감 있는 정보 전달이 우선인 병·의원, 한의원",
+    image: "/images/portfolio-clinic.webp",
   },
   {
     slug: "beauty",
@@ -23,6 +26,7 @@ export const SAMPLES: Sample[] = [
     purpose: "시술 종류와 가격을 명확히 보여주고, 카카오톡·전화 예약 문의로 자연스럽게 연결합니다.",
     features: ["시술 메뉴/가격표", "시술 사진 갤러리", "카카오톡 상담 연결", "오시는 길"],
     idealFor: "네일샵, 헤어샵, 피부관리실 등 예약 기반 매장",
+    image: "/images/portfolio-beauty.webp",
   },
   {
     slug: "korean-restaurant",
@@ -31,6 +35,7 @@ export const SAMPLES: Sample[] = [
     purpose: "대표 메뉴와 가격, 매장 사진을 통해 방문 전 신뢰를 주고 위치 안내까지 연결합니다.",
     features: ["대표 메뉴 소개", "메뉴판/가격 안내", "매장 사진", "지도/전화 연결"],
     idealFor: "단골 확보와 신규 방문객 유입이 모두 필요한 식당",
+    image: "/images/portfolio-restaurant.webp",
   },
   {
     slug: "interior-construction",
@@ -39,6 +44,7 @@ export const SAMPLES: Sample[] = [
     purpose: "시공 전후 사진과 진행 절차를 보여주어 상담 문의로 이어지는 구조를 만듭니다.",
     features: ["시공 사례 갤러리", "작업 절차 안내", "견적 문의 폼", "회사 소개"],
     idealFor: "시공 사례를 자산으로 활용하고 싶은 인테리어·건설업체",
+    image: "/images/portfolio-interior.webp",
   },
   {
     slug: "move-in-cleaning",

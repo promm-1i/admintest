@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 
 export function FinalCtaSection() {
   return (
@@ -19,7 +20,9 @@ export function FinalCtaSection() {
             <Link to="/contact">제작 상담하기</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
-            <Link to="/contact">카카오톡 문의</Link>
+            <a href={KAKAO_CHANNEL_URL} target="_blank" rel="noopener noreferrer">
+              카카오톡 문의
+            </a>
           </Button>
           <Button asChild size="lg" variant="ghost">
             <Link to="/samples">샘플 다시 보기</Link>
