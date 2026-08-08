@@ -3,38 +3,61 @@ import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { cn } from "@/lib/utils";
 import type { Sample } from "@/lib/samples";
 
-export function PortfolioCard({ sample, size = "normal" }: { sample: Sample; size?: "large" | "normal" }) {
+export function PortfolioCard({
+  sample,
+  size = "normal",
+}: {
+  sample: Sample;
+  size?: "large" | "normal";
+}) {
   return (
     <Link
       to={`/samples/${sample.slug}`}
       className={cn(
-        "group block overflow-hidden rounded-2xl border border-border bg-card",
-        size === "large" && "sm:col-span-2",
+        "group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-sm",
+        size === "large" && "md:col-span-2",
       )}
     >
-      <div className="overflow-hidden">
+      <div className="relative overflow-hidden bg-muted/40 shrink-0">
         <ImagePlaceholder
           src={sample.image}
           ratio={size === "large" ? "wide" : "video"}
           label={sample.industry}
-          className="rounded-none border-0 transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+          className="rounded-none border-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
         />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
-      <div className="p-6">
-        <p className="text-xs font-medium tracking-wide text-primary">{sample.industry}</p>
-        <h3 className="mt-2 font-medium">{sample.title}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{sample.purpose}</p>
-        <ul className="mt-3 flex flex-wrap gap-1.5">
-          {sample.features.slice(0, 3).map((f) => (
-            <li key={f} className="rounded-full bg-secondary px-2.5 py-1 text-xs text-secondary-foreground">
-              {f}
-            </li>
-          ))}
-        </ul>
-        <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary">
-          샘플 보기
-          <span className="transition-transform group-hover:translate-x-0.5">→</span>
-        </span>
+
+      <div className="flex flex-1 flex-col p-6">
+        <div className="flex items-center justify-between gap-2 shrink-0">
+          <span className="inline-block rounded bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">
+            {sample.tag || sample.industry}
+          </span>
+          <span className="text-xs text-muted-foreground">{sample.industry}</span>
+        </div>
+
+        <h3 className="mt-3 text-lg font-semibold text-foreground transition-colors group-hover:text-primary shrink-0 break-keep">
+          {sample.title}
+        </h3>
+
+        <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3 break-keep min-h-[3.8rem]">
+          {sample.purpose}
+        </p>
+
+        {sample.features && sample.features.length > 0 && (
+          <ul className="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-border/60">
+            {sample.features.slice(0, 3).map((f) => (
+              <li key={f} className="text-xs text-muted-foreground">
+                · {f}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <div className="mt-auto pt-4 flex items-center justify-between text-sm font-medium text-primary border-t border-border/40">
+          <span>샘플 보기</span>
+          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+        </div>
       </div>
     </Link>
   );

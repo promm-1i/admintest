@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
+import { MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -148,8 +149,9 @@ export default function Contact() {
         href={KAKAO_CHANNEL_URL}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary"
+        className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#FEE500] px-4 py-2.5 text-sm font-bold text-[#191919] hover:bg-[#FADA00] shadow-xs transition-colors"
       >
+        <MessageCircle className="h-4 w-4 fill-[#191919]" />
         카카오톡으로 바로 문의하기 →
       </a>
 

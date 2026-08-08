@@ -2,8 +2,8 @@ import { FadeIn } from "@/components/ui/FadeIn";
 
 type SectionHeaderProps = {
   label?: string;
-  title: string;
-  description?: string;
+  title: React.ReactNode;
+  description?: React.ReactNode;
   align?: "left" | "center";
 };
 

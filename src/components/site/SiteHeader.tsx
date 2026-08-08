@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
@@ -57,14 +57,20 @@ export function SiteHeader() {
               관리자
             </Link>
           )}
-          <Button asChild size="sm">
-            <Link to="/contact">상담 문의</Link>
+          <Button asChild size="sm" className="font-bold gap-1.5 shadow-xs">
+            <Link to="/contact">
+              <Send className="h-3.5 w-3.5" />
+              상담 문의
+            </Link>
           </Button>
         </nav>
 
         <div className="flex items-center gap-2 md:hidden">
-          <Button asChild size="sm">
-            <Link to="/contact">문의</Link>
+          <Button asChild size="sm" className="font-bold gap-1">
+            <Link to="/contact">
+              <Send className="h-3.5 w-3.5" />
+              문의
+            </Link>
           </Button>
           <button
             type="button"

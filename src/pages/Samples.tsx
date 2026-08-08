@@ -1,5 +1,6 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { PortfolioCard } from "@/components/ui/PortfolioCard";
+import { SampleMarquee } from "@/components/sections/SampleMarquee";
 import { SAMPLES } from "@/lib/samples";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -17,9 +18,14 @@ export default function Samples() {
         없어도 상담을 통해 맞춤 구성으로 제작해 드립니다.
       </p>
 
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Live Sample Captures Carousel / Marquee */}
+      <div className="mt-8 rounded-2xl overflow-hidden">
+        <SampleMarquee />
+      </div>
+
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
         {SAMPLES.map((sample, i) => (
-          <FadeIn key={sample.slug} delay={i * 60}>
+          <FadeIn key={sample.slug} delay={i * 60} className="h-full">
             <PortfolioCard sample={sample} />
           </FadeIn>
         ))}
