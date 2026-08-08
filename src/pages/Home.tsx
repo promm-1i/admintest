@@ -13,7 +13,7 @@ export default function Home() {
   const [selectedType, setSelectedType] = useState<string>("all");
 
   usePageTitle(
-    "MintCL — 소상공인·1인기업 홈페이지 제작",
+    "MintCL — 소상공인·기업 홈페이지 제작",
     "30만 원부터 시작하는 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다.",
   );
 

@@ -25,7 +25,7 @@ export function HeroSection() {
             제대로 보이게.
           </h1>
           <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-white/75">
-            소상공인·1인기업을 위한 홈페이지 제작. 기획, 디자인, 배포, 기본 유지보수까지 — 처음
+            소상공인·기업을 위한 홈페이지 제작. 기획, 디자인, 배포, 기본 유지보수까지 — 처음
             홈페이지를 만드는 분도 이해하기 쉽게 진행합니다.
           </p>
           <div className="mt-9 flex flex-wrap gap-3">

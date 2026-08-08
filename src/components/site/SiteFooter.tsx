@@ -7,7 +7,7 @@ export function SiteFooter() {
         <div className="lg:col-span-2">
           <p className="text-base font-semibold text-foreground">MintCL (민트클)</p>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
-            소상공인과 1인 기업을 위한 맞춤형 홈페이지 제작 스튜디오입니다.
+            소상공인과 기업을 위한 맞춤형 홈페이지 제작 스튜디오입니다.
           </p>
 
           <div className="mt-6 space-y-1.5 text-xs leading-relaxed text-muted-foreground">

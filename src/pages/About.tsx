@@ -40,7 +40,7 @@ const STAT_ITEMS = [
 export default function About() {
   usePageTitle(
     "민트클 소개 — MintCL",
-    "소상공인과 1인 기업을 위한 민트클의 홈페이지 제작 철학과 신뢰 가치를 소개합니다."
+    "소상공인과 기업을 위한 민트클의 홈페이지 제작 철학과 신뢰 가치를 소개합니다."
   );
 
   return (
@@ -51,7 +51,7 @@ export default function About() {
           <Sparkles className="h-3.5 w-3.5" /> MintCL PHILOSOPHY
         </div>
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-foreground break-keep leading-tight">
-          소상공인과 1인 기업의 <br className="hidden sm:inline" />
+          소상공인과 기업의 <br className="hidden sm:inline" />
           가장 확실한 첫인상을 만듭니다
         </h1>
         <p className="text-base sm:text-lg leading-relaxed text-muted-foreground break-keep">
