@@ -27,7 +27,7 @@ const EMPTY: ReservationInput = {
 
 export default function Contact() {
   usePageTitle(
-    "제작 문의 — MINTCL",
+    "제작 문의 — MintCL",
     "홈페이지 제작 문의, 상담 문의를 남겨 주시면 확인 후 연락드립니다.",
   );
 

@@ -14,7 +14,7 @@ const ADMIN_TABS = [
 ];
 
 export default function Admin() {
-  usePageTitle("관리자 — MINTCL", "공지사항과 제작 문의를 관리하는 운영자 페이지입니다.");
+  usePageTitle("관리자 — MintCL", "공지사항과 제작 문의를 관리하는 운영자 페이지입니다.");
 
   const { isAdmin, loading, user } = useAuth();
   const navigate = useNavigate();

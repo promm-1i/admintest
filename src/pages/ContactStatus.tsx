@@ -10,7 +10,7 @@ import {
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function ContactStatus() {
-  usePageTitle("내 문의 확인 — MINTCL", "접수하신 제작 문의 내용을 확인하고 취소할 수 있습니다.");
+  usePageTitle("내 문의 확인 — MintCL", "접수하신 제작 문의 내용을 확인하고 취소할 수 있습니다.");
 
   const { token } = useParams<{ token: string }>();
   const qc = useQueryClient();

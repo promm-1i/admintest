@@ -7,7 +7,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function Services() {
   usePageTitle(
-    "제작 상품 및 가격 안내 — MINTCL",
+    "제작 상품 및 가격 안내 — MintCL",
     "민트클 홈페이지 제작 상품 구성과 가격을 안내합니다.",
   );
 

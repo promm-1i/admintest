@@ -28,10 +28,18 @@ const WORKFLOW_STEPS = [
 
 export function ProblemSection() {
   return (
-    <section className="border-y border-border bg-secondary/30 py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="relative overflow-hidden border-y border-border bg-secondary/30 py-20 lg:py-28">
+      <div
+        aria-hidden
+        className="motion-safe:animate-float-slow pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"
+      />
+      <div
+        aria-hidden
+        className="motion-safe:animate-float-slow pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-accent/20 blur-3xl [animation-delay:2s]"
+      />
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
-          label="WHY MINTCL"
+          label="WHY MintCL"
           title={
             <>
               SNS나 블로그만으로는
@@ -89,7 +97,7 @@ export function ProblemSection() {
                   </div>
 
                   <div className="mt-6 pt-4 border-t border-border/50 flex items-center justify-between text-xs font-medium text-muted-foreground group-hover:text-primary transition-colors">
-                    <span>MINTCL Workflow</span>
+                    <span>MintCL Workflow</span>
                     <span className="font-mono">0{i + 1}</span>
                   </div>
                 </div>

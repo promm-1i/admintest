@@ -32,7 +32,7 @@ export default function SampleDetail() {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   usePageTitle(
-    sample ? `${sample.industry} 실시간 미리보기 — MINTCL` : "샘플을 찾을 수 없습니다 — MINTCL",
+    sample ? `${sample.industry} 실시간 미리보기 — MintCL` : "샘플을 찾을 수 없습니다 — MintCL",
     sample?.purpose,
   );
 

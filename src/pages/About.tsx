@@ -39,7 +39,7 @@ const STAT_ITEMS = [
 
 export default function About() {
   usePageTitle(
-    "민트클 소개 — MINTCL",
+    "민트클 소개 — MintCL",
     "소상공인과 1인 기업을 위한 민트클의 홈페이지 제작 철학과 신뢰 가치를 소개합니다."
   );
 
@@ -48,14 +48,14 @@ export default function About() {
       {/* Editorial Hero Header */}
       <div className="max-w-3xl space-y-5">
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3.5 py-1 text-xs font-medium text-primary">
-          <Sparkles className="h-3.5 w-3.5" /> MINTCL PHILOSOPHY
+          <Sparkles className="h-3.5 w-3.5" /> MintCL PHILOSOPHY
         </div>
         <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-foreground break-keep leading-tight">
           소상공인과 1인 기업의 <br className="hidden sm:inline" />
           가장 확실한 첫인상을 만듭니다
         </h1>
         <p className="text-base sm:text-lg leading-relaxed text-muted-foreground break-keep">
-          민트클(MINTCL)은 블로그나 SNS만으로는 부족했던 비즈니스의 신뢰감을 채워주는 맞춤형 홈페이지 제작 스튜디오입니다. 복잡한 거품을 빼고, 실제 고객 문의로 이어지는 실용적인 사이트를 함께 만듭니다.
+          민트클(MintCL)은 블로그나 SNS만으로는 부족했던 비즈니스의 신뢰감을 채워주는 맞춤형 홈페이지 제작 스튜디오입니다. 복잡한 거품을 빼고, 실제 고객 문의로 이어지는 실용적인 사이트를 함께 만듭니다.
         </p>
       </div>
 

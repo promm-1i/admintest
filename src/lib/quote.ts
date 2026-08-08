@@ -2,9 +2,8 @@ export type QuoteFeature = { key: string; label: string; price: number };
 
 export const QUOTE_FEATURES: QuoteFeature[] = [
   { key: "map", label: "네이버/카카오 지도 연동", price: 50000 },
-  { key: "tap-contact", label: "모바일 원터치 전화/카톡 연결", price: 30000 },
-  { key: "inquiry-form", label: "문의·예약 폼 추가", price: 100000 },
-  { key: "multilingual", label: "다국어 추가", price: 200000 },
+  { key: "inquiry-form", label: "문의·예약 폼 추가", price: 50000 },
+  { key: "admin", label: "관리자 기능", price: 100000 },
 ];
 
 export type QuoteConfig = {

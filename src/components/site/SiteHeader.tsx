@@ -34,7 +34,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link to="/" className="text-lg font-semibold tracking-tight">
-          MINT<span className="text-primary">CL</span>
+          Mint<span className="text-primary">CL</span>
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">

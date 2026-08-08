@@ -6,7 +6,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function Samples() {
   usePageTitle(
-    "업종별 샘플 사이트 — MINTCL",
+    "업종별 샘플 사이트 — MintCL",
     "병원, 뷰티샵, 식당 등 업종별 홈페이지 제작 샘플을 확인하세요.",
   );
 

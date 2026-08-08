@@ -27,8 +27,12 @@ const ADMIN_FEATURES = [
 
 export function AdminFeatureSection() {
   return (
-    <section className="mx-auto max-w-6xl px-4 sm:px-6 py-20 lg:py-28">
-      <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
+    <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
+      <div
+        aria-hidden
+        className="motion-safe:animate-float-slow pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-full bg-accent/25 blur-3xl [animation-delay:1s]"
+      />
+      <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-12 lg:items-center">
         {/* Left Info Column */}
         <div className="lg:col-span-6 space-y-6">
           <SectionHeader
@@ -119,7 +123,7 @@ export function AdminFeatureSection() {
                   <div className="space-y-2 text-xs">
                     <div className="flex items-center justify-between rounded bg-secondary/40 p-2.5">
                       <span className="truncate font-medium text-foreground max-w-[200px] sm:max-w-[280px]">
-                        [공지] MINTCL 홈페이지 서비스 개선 안내
+                        [공지] MintCL 홈페이지 서비스 개선 안내
                       </span>
                       <span className="rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] text-emerald-600 font-medium">
                         게시중

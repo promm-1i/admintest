@@ -3,16 +3,21 @@ import { Button } from "@/components/ui/button";
 import { CoverImage } from "@/components/ui/CoverImage";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { STATS } from "@/lib/pricing";
+import mainBanner from "@/assets/images/mainbanner.jpg";
 
 export function HeroSection() {
   return (
     <section className="relative isolate min-h-[560px] overflow-hidden bg-gradient-to-br from-foreground via-foreground/90 to-primary/60 sm:min-h-[640px]">
-      <CoverImage src="/images/hero-main.webp" alt="MINTCL 제작 홈페이지 예시" />
+      <CoverImage
+        src={mainBanner}
+        alt="MintCL 제작 홈페이지 예시"
+        className="motion-safe:animate-[hero-zoom_20s_ease-out_forwards]"
+      />
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/95 via-foreground/55 to-foreground/20" />
 
       <div className="relative mx-auto flex min-h-[560px] max-w-6xl flex-col justify-end px-4 pb-16 pt-32 sm:min-h-[640px] sm:pb-20">
         <FadeIn>
-          <p className="text-sm font-medium tracking-widest text-primary">MINTCL</p>
+          <p className="text-sm font-medium tracking-widest text-primary">MintCL</p>
           <h1 className="mt-5 max-w-2xl text-balance text-4xl font-semibold leading-[1.15] tracking-tight text-white sm:text-5xl lg:text-6xl">
             작은 회사도
             <br />

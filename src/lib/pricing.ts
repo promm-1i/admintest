@@ -85,21 +85,12 @@ export const PRICING: PriceItem[] = [
 export const ADDONS: PriceItem[] = [
   { name: "문의 / 예약 폼", price: "개당 5만 원", features: [] },
   { name: "관리자 기능 / 공지사항 관리", price: "10만 원", features: [] },
-  { name: "기존 홈페이지 리뉴얼", price: "10만 원 추가", features: [] },
+  { name: "네이버 카카오 지도연동", price: "5만 원", features: [] },
   { name: "추가 페이지", price: "페이지당 15만 원", features: [] },
 ];
 
 export const PRICING_NOTE =
   "최종 견적은 페이지 수, 디자인 난이도, 기능 범위, 자료 정리 정도에 따라 달라질 수 있습니다.";
-
-export const PROCESS_STEPS = [
-  { step: "01", title: "상담 접수", desc: "업종, 제작 목적, 필요한 페이지, 참고 사이트, 원하는 분위기를 확인합니다." },
-  { step: "02", title: "자료 전달", desc: "로고, 사진, 소개 문구 등 보유하신 자료를 전달받습니다." },
-  { step: "03", title: "구성안 정리", desc: "메인 문구, 섹션 순서, 페이지 구조, 필요한 기능을 먼저 정리합니다." },
-  { step: "04", title: "디자인 제작", desc: "구성안을 기반으로 반응형 홈페이지를 디자인하고 개발합니다." },
-  { step: "05", title: "검수 및 수정", desc: "시안을 확인하시고 필요한 부분을 수정합니다." },
-  { step: "06", title: "배포 및 유지보수", desc: "도메인 연결과 배포를 안내하고, 이후 수정 요청도 대응해 드립니다." },
-];
 
 export const STATS = [
   { value: "30만 원부터", label: "원페이지 제작" },

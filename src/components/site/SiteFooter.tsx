@@ -5,7 +5,7 @@ export function SiteFooter() {
     <footer className="mt-20 border-t border-border bg-secondary/40">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <p className="text-base font-semibold text-foreground">MINTCL (민트클)</p>
+          <p className="text-base font-semibold text-foreground">MintCL (민트클)</p>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
             소상공인과 1인 기업을 위한 맞춤형 홈페이지 제작 스튜디오입니다.
           </p>
@@ -66,7 +66,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} MINTCL (민트클). All rights reserved.
+        © {new Date().getFullYear()} MintCL (민트클). All rights reserved.
       </div>
     </footer>
   );
