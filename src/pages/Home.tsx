@@ -23,9 +23,9 @@ export default function Home() {
       <HeroSection />
       <ServiceTypesSection selectedType={selectedType} onSelectType={setSelectedType} />
       <PortfolioSection selectedType={selectedType} onSelectType={setSelectedType} />
-      <ProblemSection />
-      <PricingSection />
       <AdminFeatureSection />
+      <PricingSection />
+      <ProblemSection />
       <NoticesPreviewSection />
       <FaqSection />
       <FinalCtaSection />
