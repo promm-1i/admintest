@@ -4,6 +4,7 @@ import hospitalImg from "@/assets/images/hospital_tjaspdlf.jpg";
 import interiorConstructionImg from "@/assets/images/interior_construction.jpg";
 import moveInCleaningImg from "@/assets/images/move_in_cleaning.jpg";
 import corporateImg from "@/assets/images/corporate.jpg";
+import oleaImg from "@/assets/images/olea_thumbnail.jpg";
 
 export type Sample = {
   slug: string;
@@ -16,6 +17,8 @@ export type Sample = {
   idealFor: string;
   /** src/assets 번들 이미지 또는 public/images 정적 경로 (없으면 자동으로 그라데이션 placeholder로 대체됨) */
   image?: string;
+  /** 실제 배포된 사이트 URL이 있으면 상세페이지 미리보기 탭에서 iframe으로 그 사이트를 그대로 보여준다 */
+  liveUrl?: string;
 };
 
 /**
@@ -24,6 +27,18 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "olea-food-brand",
+    industry: "식품 브랜드 홈페이지",
+    title: "식품 브랜드 홈페이지",
+    type: ["business"],
+    tag: "기업 · 식품 브랜드",
+    purpose: "프리미엄 올리브오일 브랜드의 제품 라인업과 브랜드 스토리를 감각적으로 담은 식품 브랜드 홈페이지 포트폴리오입니다.",
+    features: ["제품 라인업 소개", "브랜드 스토리텔링", "쇼핑몰형 구매 연결", "뉴스레터 구독"],
+    idealFor: "제품과 브랜드 감성을 함께 보여주고 싶은 식품·리테일 브랜드",
+    image: oleaImg,
+    liveUrl: "https://oleaoil.netlify.app/",
+  },
   {
     slug: "hospital",
     industry: "병원 홈페이지",

@@ -33,7 +33,7 @@ export function ServiceTypesSection({
   };
 
   return (
-    <section id="services-section" className="relative overflow-hidden border-y border-border bg-background py-20 lg:py-28">
+    <section id="services-section" className="relative border-y border-border bg-background py-20 lg:py-28">
       <SectionBackground
         src={bgTexture}
         opacity={0.1}

@@ -23,6 +23,7 @@ import { BeautyPreview } from "@/components/samples/BeautyPreview";
 import { InteriorPreview } from "@/components/samples/InteriorPreview";
 import { CleaningPreview } from "@/components/samples/CleaningPreview";
 import { CorporatePreview } from "@/components/samples/CorporatePreview";
+import { ExternalSitePreview } from "@/components/samples/ExternalSitePreview";
 
 export default function SampleDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -39,6 +40,8 @@ export default function SampleDetail() {
   if (!sample) return <NotFound />;
 
   const renderSamplePreview = () => {
+    if (sample.liveUrl) return <ExternalSitePreview url={sample.liveUrl} />;
+
     switch (sample.slug) {
       case "hospital":
         return <HospitalPreview />;
