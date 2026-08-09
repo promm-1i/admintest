@@ -14,6 +14,7 @@ import {
   CheckCircle2,
   Send,
   MessageCircle,
+  ExternalLink,
 } from "lucide-react";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 
@@ -114,11 +115,28 @@ export default function SampleDetail() {
         <div className="mt-8 space-y-6">
           {/* Device Frame Controls & Info Banner */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border bg-secondary/30 px-5 py-3.5">
-            <p className="text-xs text-muted-foreground break-keep">
-              💡 실제 고객 연결 동선(예약, 메뉴판, 카카오톡 상담)을 모방한 <strong>실시간 인터랙티브 데모</strong>입니다.
-            </p>
+            {sample.liveUrl ? (
+              <p className="text-xs text-muted-foreground break-keep">
+                💡 실제로 배포된 사이트입니다. 화면 안 미리보기는 좁게 잘려 보일 수 있으니,{" "}
+                <strong>새 탭에서 직접 방문</strong>하시면 원래 화면 그대로 보실 수 있습니다.
+              </p>
+            ) : (
+              <p className="text-xs text-muted-foreground break-keep">
+                💡 실제 고객 연결 동선(예약, 메뉴판, 카카오톡 상담)을 모방한 <strong>실시간 인터랙티브 데모</strong>입니다.
+              </p>
+            )}
 
-            <div className="flex items-center gap-2 text-xs">
+            <div className="flex items-center gap-2 text-xs shrink-0">
+              {sample.liveUrl && (
+                <a
+                  href={sample.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 font-semibold text-primary-foreground shadow-xs transition-colors hover:bg-primary/90"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" /> 실제 웹사이트 방문하기
+                </a>
+              )}
               <span className="text-muted-foreground font-medium hidden sm:inline">화면 크기:</span>
               <button
                 onClick={() => setDevice("desktop")}
