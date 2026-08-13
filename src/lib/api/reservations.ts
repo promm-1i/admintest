@@ -60,24 +60,24 @@ async function notifyByEmail(parsed: ReservationInput): Promise<void> {
   }
 }
 
-/** 누구나 예약 문의를 등록할 수 있다 (RLS: anon/authenticated INSERT 허용) */
+/**
+ * 누구나 예약 문의를 등록할 수 있다. reservations의 SELECT는 관리자 전용이라
+ * 일반 insert().select()는 RETURNING 단계에서 RLS에 막히므로,
+ * SECURITY DEFINER RPC(create_reservation)를 통해 access_token만 안전하게 돌려받는다.
+ */
 export async function createReservation(input: ReservationInput): Promise<{ access_token: string }> {
   const parsed = reservationSchema.parse(input);
-  const { data, error } = await supabase
-    .from("reservations")
-    .insert({
-      name: parsed.name,
-      phone: parsed.phone,
-      email: parsed.email || null,
-      service: parsed.service || null,
-      preferred_at: parsed.preferred_at ? new Date(parsed.preferred_at).toISOString() : null,
-      message: parsed.message || null,
-    })
-    .select("access_token")
-    .single();
+  const { data, error } = await supabase.rpc("create_reservation", {
+    _name: parsed.name,
+    _phone: parsed.phone,
+    _email: parsed.email || null,
+    _service: parsed.service || null,
+    _preferred_at: parsed.preferred_at ? new Date(parsed.preferred_at).toISOString() : null,
+    _message: parsed.message || null,
+  });
   if (error) throw error;
   void notifyByEmail(parsed);
-  return data;
+  return { access_token: data as string };
 }
 
 /** 회원가입 없이, 발급받은 조회 토큰으로 본인 문의 1건을 조회한다 */

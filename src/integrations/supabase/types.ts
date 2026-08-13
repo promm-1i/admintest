@@ -139,6 +139,17 @@ export type Database = {
         Args: { _token: string }
         Returns: Database["public"]["Tables"]["reservations"]["Row"]
       }
+      create_reservation: {
+        Args: {
+          _email: string | null
+          _message: string | null
+          _name: string
+          _phone: string
+          _preferred_at: string | null
+          _service: string | null
+        }
+        Returns: string
+      }
     }
     Enums: {
       app_role: "admin" | "user"
