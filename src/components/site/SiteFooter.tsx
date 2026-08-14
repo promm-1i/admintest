@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
 
 export function SiteFooter() {
   return (
@@ -16,7 +17,15 @@ export function SiteFooter() {
               <span><strong>사업자등록번호:</strong> 266-07-03678</span>
             </p>
             <p className="flex flex-wrap gap-x-4 gap-y-1">
+              <span>
+                <strong>전화:</strong>{" "}
+                <a href={PHONE_TEL_HREF} className="hover:text-foreground transition-colors">
+                  {PHONE_NUMBER}
+                </a>
+              </span>
               <span><strong>이메일:</strong> 6gsmake@gmail.com</span>
+            </p>
+            <p className="flex flex-wrap gap-x-4 gap-y-1">
               <span><strong>운영시간:</strong> 평일 09:00 ~ 18:00</span>
             </p>
           </div>

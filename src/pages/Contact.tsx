@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -13,7 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { createReservation, reservationSchema, type ReservationInput } from "@/lib/api/reservations";
 import { PRODUCT_TYPES } from "@/lib/pricing";
 import { QUOTE_FEATURES, getQuoteConfig, calculateQuote, formatQuoteSummary } from "@/lib/quote";
-import { KAKAO_CHANNEL_URL } from "@/lib/contact";
+import { KAKAO_CHANNEL_URL, PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const EMPTY: ReservationInput = {
@@ -145,15 +145,24 @@ export default function Contact() {
       <p className="mt-4 text-sm text-muted-foreground">
         업종과 제작 희망 내용을 남겨 주시면 담당자가 확인 후 연락드립니다.
       </p>
-      <a
-        href={KAKAO_CHANNEL_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="mt-4 inline-flex items-center gap-2 rounded-xl bg-[#FEE500] px-4 py-2.5 text-sm font-bold text-[#191919] hover:bg-[#FADA00] shadow-xs transition-colors"
-      >
-        <MessageCircle className="h-4 w-4 fill-[#191919]" />
-        카카오톡으로 바로 문의하기 →
-      </a>
+      <div className="mt-4 flex flex-wrap gap-3">
+        <a
+          href={KAKAO_CHANNEL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-xl bg-[#FEE500] px-4 py-2.5 text-sm font-bold text-[#191919] hover:bg-[#FADA00] shadow-xs transition-colors"
+        >
+          <MessageCircle className="h-4 w-4 fill-[#191919]" />
+          카카오톡으로 바로 문의하기 →
+        </a>
+        <a
+          href={PHONE_TEL_HREF}
+          className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-bold text-foreground hover:bg-secondary shadow-xs transition-colors"
+        >
+          <Phone className="h-4 w-4 text-primary" />
+          {PHONE_NUMBER}
+        </a>
+      </div>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-5 rounded-lg border border-border bg-card p-6">
         <Field label="이름" required error={errors["name"]}>

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import { Send, MessageCircle } from "lucide-react";
+import { Send, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { KAKAO_CHANNEL_URL } from "@/lib/contact";
+import { KAKAO_CHANNEL_URL, PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
 
 export function FinalCtaSection() {
   return (
@@ -35,6 +35,12 @@ export function FinalCtaSection() {
               <a href={KAKAO_CHANNEL_URL} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="h-4 w-4 fill-[#191919]" />
                 카카오톡 문의
+              </a>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="font-bold gap-2 shadow-sm">
+              <a href={PHONE_TEL_HREF}>
+                <Phone className="h-4 w-4" />
+                {PHONE_NUMBER}
               </a>
             </Button>
           </div>
