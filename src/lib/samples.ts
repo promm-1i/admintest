@@ -5,6 +5,9 @@ import interiorConstructionImg from "@/assets/images/interior_construction.jpg";
 import moveInCleaningImg from "@/assets/images/move_in_cleaning.jpg";
 import corporateImg from "@/assets/images/corporate.jpg";
 import oleaImg from "@/assets/images/olea_thumbnail.jpg";
+import movingImg from "@/assets/images/moving_thumbnail.jpg";
+import mujinImg from "@/assets/images/mujin_thumbnail.jpg";
+import auraImg from "@/assets/images/aura_thumbnail.jpg";
 
 export type Sample = {
   slug: string;
@@ -27,6 +30,42 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "moving-company",
+    industry: "이삿짐센터 홈페이지",
+    title: "이삿짐센터 홈페이지",
+    type: ["one-page", "small-business"],
+    tag: "원페이지 · 소상공인",
+    purpose: "서비스 종류와 신뢰 요소를 한눈에 보여주고 무료 견적 신청으로 자연스럽게 연결되는 이삿짐센터 홈페이지 포트폴리오입니다.",
+    features: ["서비스 종류 안내", "무료 견적 신청 폼", "고객 후기 슬라이더", "전화/카카오 상담 연결"],
+    idealFor: "견적 문의 전환이 중요한 이사·용달 서비스 업체",
+    image: movingImg,
+    liveUrl: "https://24com.netlify.app/design-1",
+  },
+  {
+    slug: "mujin-shop",
+    industry: "쇼핑몰 홈페이지",
+    title: "쇼핑몰 홈페이지",
+    type: ["business"],
+    tag: "기업 · 쇼핑몰",
+    purpose: "데일리 의류 브랜드의 제품 라인업과 사이즈 가이드를 감각적으로 담은 커머스형 쇼핑몰 홈페이지 포트폴리오입니다.",
+    features: ["상품 상세/사이즈 가이드", "리뷰·후기 섹션", "회원 등급 혜택 안내", "뉴스레터 구독"],
+    idealFor: "온라인으로 제품을 직접 판매하고 싶은 패션·리테일 브랜드",
+    image: mujinImg,
+    liveUrl: "https://mujinshop.netlify.app/",
+  },
+  {
+    slug: "aura-academy",
+    industry: "입시학원 홈페이지",
+    title: "입시학원 홈페이지",
+    type: ["business"],
+    tag: "기업 · 교육",
+    purpose: "1:1 학습 진단과 맞춤 커리큘럼을 신뢰감 있게 전달하는 프리미엄 입시학원 홈페이지 포트폴리오입니다.",
+    features: ["학습 진단 프로그램 소개", "커리큘럼 안내", "상담 신청 폼", "레벨테스트 연결"],
+    idealFor: "전문성과 신뢰감을 강조하고 싶은 입시·교육 브랜드",
+    image: auraImg,
+    liveUrl: "https://aura-academy.netlify.app/",
+  },
   {
     slug: "olea-food-brand",
     industry: "식품 브랜드 홈페이지",
