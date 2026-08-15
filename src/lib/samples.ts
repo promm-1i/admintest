@@ -8,6 +8,7 @@ import oleaImg from "@/assets/images/olea_thumbnail.jpg";
 import movingImg from "@/assets/images/moving_thumbnail.jpg";
 import mujinImg from "@/assets/images/mujin_thumbnail.jpg";
 import auraImg from "@/assets/images/aura_thumbnail.jpg";
+import nexmotionImg from "@/assets/images/nexmotion_thumbnail.jpg";
 
 export type Sample = {
   slug: string;
@@ -30,6 +31,18 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "nexmotion",
+    industry: "제조/자동화 기업 홈페이지",
+    title: "제조/자동화 기업 홈페이지",
+    type: ["business"],
+    tag: "기업 · 산업 자동화",
+    purpose: "로봇 자동화, AI Vision, 스마트팩토리 솔루션을 기술 중심으로 신뢰감 있게 전달하는 제조/자동화 기업 홈페이지 포트폴리오입니다.",
+    features: ["솔루션/장비 라인업 소개", "산업별 적용 사례", "공정 단계 스토리텔링", "프로젝트 문의 폼"],
+    idealFor: "기술력과 전문성을 강조하고 싶은 제조·엔지니어링·B2B 기업",
+    image: nexmotionImg,
+    liveUrl: "https://nexmotion.netlify.app/",
+  },
   {
     slug: "moving-company",
     industry: "이삿짐센터 홈페이지",
