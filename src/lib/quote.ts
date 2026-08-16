@@ -16,9 +16,10 @@ export type QuoteConfig = {
 
 /** PRODUCT_TYPES의 name과 동일한 키를 사용한다 */
 export const QUOTE_CONFIGS: Record<string, QuoteConfig> = {
-  "원페이지 홈페이지": { basePrice: 300000, includedPages: 1, extraPagePrice: 0, pagesAdjustable: false },
-  "소상공인 홈페이지": { basePrice: 350000, includedPages: 3, extraPagePrice: 30000, pagesAdjustable: true },
-  "기업 홈페이지": { basePrice: 650000, includedPages: 5, extraPagePrice: 30000, pagesAdjustable: true },
+  "원페이지 홈페이지": { basePrice: 400000, includedPages: 1, extraPagePrice: 0, pagesAdjustable: false },
+  "소상공인 홈페이지": { basePrice: 500000, includedPages: 3, extraPagePrice: 30000, pagesAdjustable: true },
+  "기업 홈페이지": { basePrice: 1000000, includedPages: 5, extraPagePrice: 30000, pagesAdjustable: true },
+  "쇼핑몰 홈페이지": { basePrice: 2000000, includedPages: 8, extraPagePrice: 30000, pagesAdjustable: true },
 };
 
 export function getQuoteConfig(serviceType: string): QuoteConfig | null {

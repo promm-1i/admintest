@@ -20,6 +20,7 @@ const FILTERS = [
   { label: "원페이지", value: "one-page" },
   { label: "소상공인", value: "small-business" },
   { label: "기업", value: "business" },
+  { label: "쇼핑몰", value: "shopping-mall" },
   { label: "포트폴리오", value: "portfolio" },
   { label: "리뉴얼", value: "renewal" },
 ];

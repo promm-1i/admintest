@@ -20,14 +20,14 @@ export default function Services() {
       </p>
 
       <h2 className="mt-12 text-xl font-semibold">제작 유형</h2>
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {PRODUCT_TYPES.map((type) => (
           <ServiceCard key={type.name} {...type} />
         ))}
       </div>
 
       <h2 className="mt-14 text-xl font-semibold">가격 안내</h2>
-      <div className="mt-6 grid gap-5 sm:grid-cols-3">
+      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {PRICING.map((item) => (
           <PriceCard key={item.name} {...item} />
         ))}

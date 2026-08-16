@@ -32,7 +32,7 @@ const CORE_VALUES = [
 ];
 
 const STAT_ITEMS = [
-  { value: "30만원대~", label: "부담 없는 합리적 시작가" },
+  { value: "40만원대~", label: "부담 없는 합리적 시작가" },
   { value: "1:1 Direct", label: "담당자 직통 피드백" },
   { value: "100% Mobile", label: "완벽한 반응형 디바이스 대응" },
 ];

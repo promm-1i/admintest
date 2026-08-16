@@ -59,7 +59,7 @@ export const SAMPLES: Sample[] = [
     slug: "mujin-shop",
     industry: "쇼핑몰 홈페이지",
     title: "쇼핑몰 홈페이지",
-    type: ["business"],
+    type: ["business", "shopping-mall"],
     tag: "기업 · 쇼핑몰",
     purpose: "데일리 의류 브랜드의 제품 라인업과 사이즈 가이드를 감각적으로 담은 커머스형 쇼핑몰 홈페이지 포트폴리오입니다.",
     features: ["상품 상세/사이즈 가이드", "리뷰·후기 섹션", "회원 등급 혜택 안내", "뉴스레터 구독"],
