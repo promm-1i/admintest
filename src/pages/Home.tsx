@@ -6,6 +6,7 @@ import { ProblemSection } from "@/components/sections/ProblemSection";
 import { ServiceTypesSection } from "@/components/sections/ServiceTypesSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { PricingSection } from "@/components/sections/PricingSection";
+import { ProcessSection } from "@/components/sections/ProcessSection";
 import { AdminFeatureSection } from "@/components/sections/AdminFeatureSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { RecommendedForSection } from "@/components/sections/RecommendedForSection";
@@ -29,6 +30,7 @@ export default function Home() {
       <ServiceTypesSection selectedType={selectedType} onSelectType={setSelectedType} />
       <AdminFeatureSection />
       <PricingSection />
+      <ProcessSection />
       <ReviewsSection />
       <RecommendedForSection />
       <FaqSection />

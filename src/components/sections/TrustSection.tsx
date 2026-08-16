@@ -36,7 +36,7 @@ const TRUST_ITEMS = [
 export function TrustSection() {
   return (
     <section className="relative overflow-hidden bg-background py-16 lg:py-20">
-      <SectionPhoto src={photo} className="-right-16 -top-20 h-72 w-72" />
+      <SectionPhoto src={photo} />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <FadeIn>
           <p className="text-center text-sm font-medium tracking-widest text-primary">MINTCL WEB STUDIO</p>

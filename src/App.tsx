@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { MobileStickyCta } from "@/components/site/MobileStickyCta";
 import { Toaster } from "@/components/ui/sonner";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -19,7 +20,7 @@ import NotFound from "@/pages/NotFound";
 
 export default function App() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col pb-[76px] md:pb-0">
       <ScrollToTop />
       <SiteHeader />
       <main className="flex-1">
@@ -46,6 +47,7 @@ export default function App() {
         </Routes>
       </main>
       <SiteFooter />
+      <MobileStickyCta />
       <Toaster />
     </div>
   );

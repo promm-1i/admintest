@@ -9,7 +9,7 @@ import photo from "@/assets/images/01_hero_imac.jpg";
 export function PricingSection() {
   return (
     <section className="relative overflow-hidden border-y border-border bg-secondary/30 py-20 lg:py-28">
-      <SectionPhoto src={photo} className="-right-16 -top-16 h-72 w-72" />
+      <SectionPhoto src={photo} />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           label="PRICING"

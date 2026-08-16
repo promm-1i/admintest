@@ -35,7 +35,7 @@ export function ReviewsSection() {
 
   return (
     <section className="relative overflow-hidden bg-background py-20 lg:py-28">
-      <SectionPhoto src={photo} className="-left-16 -top-14 h-64 w-64" />
+      <SectionPhoto src={photo} />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           label="REVIEWS"

@@ -113,12 +113,6 @@ export const ADDONS: PriceItem[] = [
 export const PRICING_NOTE =
   "최종 견적은 페이지 수, 디자인 난이도, 기능 범위, 자료 정리 정도에 따라 달라질 수 있습니다.";
 
-export const STATS = [
-  { value: "40만 원부터", label: "원페이지 제작" },
-  { value: "50만 원부터", label: "소상공인 홈페이지" },
-  { value: "5~10영업일", label: "기본 제작 기간" },
-];
-
 export const BENEFITS = [
   "모바일 반응형",
   "카카오톡 / 전화 / 지도 연결",

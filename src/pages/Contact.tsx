@@ -34,6 +34,7 @@ export default function Contact() {
   const [form, setForm] = useState<ReservationInput>(EMPTY);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [accessToken, setAccessToken] = useState<string | null>(null);
+  const [showOptional, setShowOptional] = useState(false);
 
   // 실시간 견적 계산기 상태 — 제작 유형을 바꾸면 초기화되고, 사용자가 문의 내용을
   // 직접 수정하면 더 이상 자동으로 덮어쓰지 않는다.
@@ -168,8 +169,13 @@ export default function Contact() {
       </p>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-5 rounded-lg border border-border bg-card p-6">
-        <Field label="이름" required error={errors["name"]}>
-          <Input value={form.name} maxLength={50} onChange={(e) => set("name")(e.target.value)} />
+        <Field label="성함 / 업체명" required error={errors["name"]}>
+          <Input
+            value={form.name}
+            maxLength={50}
+            placeholder="김민수 / OO인테리어"
+            onChange={(e) => set("name")(e.target.value)}
+          />
         </Field>
         <Field label="연락처" required error={errors["phone"]}>
           <Input
@@ -177,14 +183,6 @@ export default function Contact() {
             maxLength={30}
             placeholder="010-0000-0000"
             onChange={(e) => set("phone")(e.target.value)}
-          />
-        </Field>
-        <Field label="이메일" error={errors["email"]}>
-          <Input
-            type="email"
-            value={form.email}
-            maxLength={255}
-            onChange={(e) => set("email")(e.target.value)}
           />
         </Field>
         <Field label="희망 제작 유형" error={errors["service"]}>
@@ -267,14 +265,6 @@ export default function Contact() {
           </div>
         )}
 
-        <Field label="완료 희망 날짜" error={errors["preferred_at"]}>
-          <Input
-            type="date"
-            value={form.preferred_at}
-            onChange={(e) => set("preferred_at")(e.target.value)}
-          />
-          <p className="text-xs text-muted-foreground">언제까지 완성되면 좋을지 알려주시면 일정 조율에 참고합니다.</p>
-        </Field>
         <Field label="제작 희망 내용" error={errors["message"]}>
           <Textarea
             rows={7}
@@ -296,6 +286,35 @@ export default function Contact() {
             </button>
           )}
         </Field>
+
+        {showOptional ? (
+          <div className="space-y-5 rounded-lg border border-dashed border-border p-4">
+            <Field label="이메일" error={errors["email"]}>
+              <Input
+                type="email"
+                value={form.email}
+                maxLength={255}
+                onChange={(e) => set("email")(e.target.value)}
+              />
+            </Field>
+            <Field label="완료 희망 날짜" error={errors["preferred_at"]}>
+              <Input
+                type="date"
+                value={form.preferred_at}
+                onChange={(e) => set("preferred_at")(e.target.value)}
+              />
+              <p className="text-xs text-muted-foreground">언제까지 완성되면 좋을지 알려주시면 일정 조율에 참고합니다.</p>
+            </Field>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="text-xs text-muted-foreground underline"
+            onClick={() => setShowOptional(true)}
+          >
+            + 이메일 · 희망 완료일 추가 입력 (선택)
+          </button>
+        )}
 
         <Button type="submit" className="w-full" disabled={mutation.isPending}>
           {mutation.isPending ? "접수 중…" : "문의 보내기"}

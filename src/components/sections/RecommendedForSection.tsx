@@ -30,7 +30,7 @@ const RECOMMENDED_FOR = [
 export function RecommendedForSection() {
   return (
     <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
-      <SectionPhoto src={photo} className="-right-16 -top-14 h-64 w-64" />
+      <SectionPhoto src={photo} />
       <div className="relative mx-auto max-w-6xl">
         <SectionHeader label="FOR YOU" title="이런 분께 추천합니다" align="center" />
 
