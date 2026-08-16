@@ -5,7 +5,7 @@ import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { SectionBackground } from "@/components/ui/SectionBackground";
 import { PRODUCT_TYPES, type ProductType } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
-import bgTexture from "@/assets/images/bg_texture_3.jpg";
+import bgTexture from "@/assets/images/bg_texture_1.jpg";
 
 type ServiceTypesSectionProps = {
   selectedType?: string;

@@ -2,7 +2,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SectionBackground } from "@/components/ui/SectionBackground";
 import { FileText, Inbox, Eye, Lock, ShieldCheck } from "lucide-react";
-import bgTexture from "@/assets/images/bg_texture_3.jpg";
+import bgTexture from "@/assets/images/bg_texture_2.jpg";
 
 const ADMIN_FEATURES = [
   {

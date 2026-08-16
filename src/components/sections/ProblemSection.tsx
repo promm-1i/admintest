@@ -2,7 +2,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SectionBackground } from "@/components/ui/SectionBackground";
 import { Search, Layout, ArrowRight, CheckCircle2 } from "lucide-react";
-import bgTexture from "@/assets/images/bg_texture_1.jpg";
+import bgTexture from "@/assets/images/bg_texture_3.jpg";
 
 const WORKFLOW_STEPS = [
   {

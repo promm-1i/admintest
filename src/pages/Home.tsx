@@ -1,11 +1,14 @@
 import { useState } from "react";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { HeroSection } from "@/components/sections/HeroSection";
+import { TrustSection } from "@/components/sections/TrustSection";
 import { ProblemSection } from "@/components/sections/ProblemSection";
 import { ServiceTypesSection } from "@/components/sections/ServiceTypesSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { AdminFeatureSection } from "@/components/sections/AdminFeatureSection";
+import { ReviewsSection } from "@/components/sections/ReviewsSection";
+import { RecommendedForSection } from "@/components/sections/RecommendedForSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 
@@ -20,11 +23,14 @@ export default function Home() {
   return (
     <div>
       <HeroSection />
-      <ServiceTypesSection selectedType={selectedType} onSelectType={setSelectedType} />
+      <TrustSection />
       <PortfolioSection selectedType={selectedType} onSelectType={setSelectedType} />
+      <ProblemSection />
+      <ServiceTypesSection selectedType={selectedType} onSelectType={setSelectedType} />
       <AdminFeatureSection />
       <PricingSection />
-      <ProblemSection />
+      <ReviewsSection />
+      <RecommendedForSection />
       <FaqSection />
       <FinalCtaSection />
     </div>

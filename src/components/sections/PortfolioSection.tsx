@@ -8,7 +8,7 @@ import { SectionBackground } from "@/components/ui/SectionBackground";
 import { Button } from "@/components/ui/button";
 import { SAMPLES } from "@/lib/samples";
 import { cn } from "@/lib/utils";
-import bgTexture from "@/assets/images/bg_texture_1.jpg";
+import bgTexture from "@/assets/images/bg_texture_2.jpg";
 
 type PortfolioSectionProps = {
   selectedType?: string;

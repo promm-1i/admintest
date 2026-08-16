@@ -4,7 +4,7 @@ import { PriceCard } from "@/components/ui/PriceCard";
 import { SectionBackground } from "@/components/ui/SectionBackground";
 import { PRICING, ADDONS, PRICING_NOTE } from "@/lib/pricing";
 import { PlusCircle } from "lucide-react";
-import bgTexture from "@/assets/images/bg_texture_2.jpg";
+import bgTexture from "@/assets/images/bg_texture_3.jpg";
 
 export function PricingSection() {
   return (
