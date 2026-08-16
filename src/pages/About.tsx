@@ -63,7 +63,7 @@ export default function About() {
       <div className="grid gap-6 sm:grid-cols-3 border-y border-border/80 py-8">
         {STAT_ITEMS.map((stat) => (
           <div key={stat.label} className="space-y-1">
-            <p className="text-2xl sm:text-3xl font-semibold text-primary font-mono">{stat.value}</p>
+            <p className="text-3xl sm:text-4xl font-extrabold tracking-tight text-primary">{stat.value}</p>
             <p className="text-xs sm:text-sm text-muted-foreground font-medium">{stat.label}</p>
           </div>
         ))}
