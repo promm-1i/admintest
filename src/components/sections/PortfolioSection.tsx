@@ -4,9 +4,11 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { SampleMarquee } from "@/components/sections/SampleMarquee";
+import { SectionPhoto } from "@/components/ui/SectionPhoto";
 import { Button } from "@/components/ui/button";
 import { SAMPLES } from "@/lib/samples";
 import { cn } from "@/lib/utils";
+import photo from "@/assets/images/portfolio_photo.jpg";
 
 type PortfolioSectionProps = {
   selectedType?: string;
@@ -40,6 +42,7 @@ export function PortfolioSection({
 
   return (
     <section id="portfolio-section" className="relative overflow-hidden py-20 lg:py-28">
+      <SectionPhoto src={photo} fade="right" opacity={0.25} />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border/80 pb-8">
         <SectionHeader
