@@ -1,6 +1,8 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { SectionPhoto } from "@/components/ui/SectionPhoto";
 import { HelpCircle, RefreshCw, Gem, MessageSquareWarning } from "lucide-react";
+import photo from "@/assets/images/04_code_editor.jpg";
 
 const RECOMMENDED_FOR = [
   {
@@ -27,8 +29,9 @@ const RECOMMENDED_FOR = [
 
 export function RecommendedForSection() {
   return (
-    <section className="px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
+      <SectionPhoto src={photo} className="-right-16 -top-14 h-64 w-64" />
+      <div className="relative mx-auto max-w-6xl">
         <SectionHeader label="FOR YOU" title="이런 분께 추천합니다" align="center" />
 
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">

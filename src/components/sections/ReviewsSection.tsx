@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { SectionPhoto } from "@/components/ui/SectionPhoto";
 import { Star, ArrowRight } from "lucide-react";
 import { REVIEWS } from "@/lib/reviews";
+import photo from "@/assets/images/06_laptop_phone_site.jpg";
 
 function ReviewCard({ quote, author, project, rating }: (typeof REVIEWS)[number]) {
   return (
@@ -32,8 +34,9 @@ export function ReviewsSection() {
   const track = [...REVIEWS, ...REVIEWS];
 
   return (
-    <section className="bg-background py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-background py-20 lg:py-28">
+      <SectionPhoto src={photo} className="-left-16 -top-14 h-64 w-64" />
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           label="REVIEWS"
           title="함께한 고객들의 이야기"

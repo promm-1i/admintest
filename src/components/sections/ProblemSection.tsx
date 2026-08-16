@@ -1,6 +1,8 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { SectionPhoto } from "@/components/ui/SectionPhoto";
 import { Search, Layout, ArrowRight, CheckCircle2 } from "lucide-react";
+import photo from "@/assets/images/03_wireframe_sketch.jpg";
 
 const WORKFLOW_STEPS = [
   {
@@ -28,8 +30,9 @@ const WORKFLOW_STEPS = [
 
 export function ProblemSection() {
   return (
-    <section className="border-y border-border bg-secondary/30 py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="relative overflow-hidden border-y border-border bg-secondary/30 py-20 lg:py-28">
+      <SectionPhoto src={photo} className="-right-14 -bottom-16 h-72 w-72" />
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           label="WHY MintCL"
           title={

@@ -1,5 +1,7 @@
 import { FadeIn } from "@/components/ui/FadeIn";
+import { SectionPhoto } from "@/components/ui/SectionPhoto";
 import { Palette, MonitorSmartphone, Layers, LifeBuoy } from "lucide-react";
+import photo from "@/assets/images/02_laptop_tablet.jpg";
 
 const PERFORMANCE_STATS = [
   { value: "일 3건+", label: "평균 문의 접수" },
@@ -33,8 +35,9 @@ const TRUST_ITEMS = [
 
 export function TrustSection() {
   return (
-    <section className="bg-background py-16 lg:py-20">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-background py-16 lg:py-20">
+      <SectionPhoto src={photo} className="-right-16 -top-20 h-72 w-72" />
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <FadeIn>
           <p className="text-center text-sm font-medium tracking-widest text-primary">MINTCL WEB STUDIO</p>
           <h2 className="mt-3 text-balance text-center text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
