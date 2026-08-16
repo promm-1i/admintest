@@ -1,7 +1,5 @@
 import { FadeIn } from "@/components/ui/FadeIn";
-import { SectionBackground } from "@/components/ui/SectionBackground";
 import { Palette, MonitorSmartphone, Layers, LifeBuoy } from "lucide-react";
-import bgTexture from "@/assets/images/bg_texture_1.jpg";
 
 const PERFORMANCE_STATS = [
   { value: "일 3건+", label: "평균 문의 접수" },
@@ -35,13 +33,8 @@ const TRUST_ITEMS = [
 
 export function TrustSection() {
   return (
-    <section className="relative overflow-hidden bg-background py-16 lg:py-20">
-      <SectionBackground
-        src={bgTexture}
-        opacity={0.08}
-        overlayClassName="bg-gradient-to-b from-background/75 via-background/50 to-background/80"
-      />
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="bg-background py-16 lg:py-20">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <FadeIn>
           <p className="text-center text-sm font-medium tracking-widest text-primary">MINTCL WEB STUDIO</p>
           <h2 className="mt-3 text-balance text-center text-xl font-semibold tracking-tight text-foreground sm:text-2xl">

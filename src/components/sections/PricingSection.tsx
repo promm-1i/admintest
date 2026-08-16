@@ -1,18 +1,12 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { PriceCard } from "@/components/ui/PriceCard";
-import { SectionBackground } from "@/components/ui/SectionBackground";
 import { PRICING, ADDONS, PRICING_NOTE } from "@/lib/pricing";
 import { PlusCircle } from "lucide-react";
-import bgTexture from "@/assets/images/bg_texture_3.jpg";
 
 export function PricingSection() {
   return (
     <section className="relative overflow-hidden border-y border-border bg-secondary/30 py-20 lg:py-28">
-      <SectionBackground
-        src={bgTexture}
-        overlayClassName="bg-gradient-to-b from-secondary/55 via-secondary/25 to-secondary/60"
-      />
       <div
         aria-hidden
         className="motion-safe:animate-float-slow pointer-events-none absolute left-1/3 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl"

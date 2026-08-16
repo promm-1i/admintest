@@ -1,8 +1,6 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { SectionBackground } from "@/components/ui/SectionBackground";
 import { FileText, Inbox, Eye, Lock, ShieldCheck } from "lucide-react";
-import bgTexture from "@/assets/images/bg_texture_2.jpg";
 
 const ADMIN_FEATURES = [
   {
@@ -30,7 +28,6 @@ const ADMIN_FEATURES = [
 export function AdminFeatureSection() {
   return (
     <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
-      <SectionBackground src={bgTexture} opacity={0.1} />
       <div
         aria-hidden
         className="motion-safe:animate-float-slow pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-full bg-accent/25 blur-3xl [animation-delay:1s]"

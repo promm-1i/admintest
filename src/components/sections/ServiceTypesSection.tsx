@@ -2,10 +2,8 @@ import { useState } from "react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
-import { SectionBackground } from "@/components/ui/SectionBackground";
 import { PRODUCT_TYPES, type ProductType } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
-import bgTexture from "@/assets/images/bg_texture_1.jpg";
 
 type ServiceTypesSectionProps = {
   selectedType?: string;
@@ -33,13 +31,8 @@ export function ServiceTypesSection({
   };
 
   return (
-    <section id="services-section" className="relative border-y border-border bg-background py-20 lg:py-28">
-      <SectionBackground
-        src={bgTexture}
-        opacity={0.1}
-        overlayClassName="bg-gradient-to-b from-background/70 via-background/45 to-background/75"
-      />
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+    <section id="services-section" className="border-y border-border bg-background py-20 lg:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           label="SERVICE"
           title="제작 유형"
