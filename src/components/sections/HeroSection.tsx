@@ -3,7 +3,9 @@ import { Button } from "@/components/ui/button";
 import { CoverImage } from "@/components/ui/CoverImage";
 import { FadeIn } from "@/components/ui/FadeIn";
 import heroBanner from "@/assets/images/hero_banner.jpg";
-import heroDevices from "@/assets/images/hero_devices.jpg";
+
+const HERO_ALT =
+  "MintCL이 제작한 반응형 웹사이트가 모니터, 노트북, 모바일 화면에 표시된 화이트톤 오피스";
 
 export function HeroSection() {
   return (
@@ -11,14 +13,14 @@ export function HeroSection() {
       {/* Desktop: full-bleed 16:9 banner fills the first screen */}
       <img
         src={heroBanner}
-        alt="MintCL이 제작한 반응형 웹사이트가 모니터, 노트북, 모바일 화면에 표시된 화이트톤 오피스"
+        alt={HERO_ALT}
         loading="eager"
         fetchPriority="high"
         className="absolute inset-0 hidden h-full w-full object-cover lg:block"
       />
 
-      <div className="relative mx-auto flex max-w-7xl flex-col lg:h-full">
-        <div className="max-w-md px-4 py-14 sm:px-6 lg:absolute lg:left-12 lg:top-[18%] lg:px-0 lg:py-0">
+      <div className="relative mx-auto flex max-w-7xl flex-col lg:h-full lg:justify-center">
+        <div className="max-w-md px-4 py-14 sm:px-6 lg:px-12 lg:py-0">
           <FadeIn>
             <p className="text-sm font-medium tracking-widest text-primary">MintCL</p>
             <h1 className="mt-5 text-balance text-4xl font-semibold leading-[1.15] tracking-tight text-foreground sm:text-5xl">
@@ -38,20 +40,13 @@ export function HeroSection() {
                 <Link to="/samples">포트폴리오 보기</Link>
               </Button>
             </div>
-            <p className="mt-4 inline-block rounded bg-background/90 px-2 py-1 text-xs text-muted-foreground lg:bg-background/70 lg:backdrop-blur-sm">
-              40만 원부터 · 5~10영업일 · 반응형 기본
-            </p>
+            <p className="mt-4 text-xs text-muted-foreground">40만 원부터 · 5~10영업일 · 반응형 기본</p>
           </FadeIn>
         </div>
 
-        {/* Mobile: text above a shorter device-photo band */}
+        {/* Mobile: text above a shorter device-photo band, biased right to feature the devices */}
         <div className="relative h-64 shrink-0 sm:h-96 lg:hidden">
-          <CoverImage
-            src={heroDevices}
-            alt="MintCL이 제작한 반응형 웹사이트가 모니터, 노트북, 모바일 화면에 표시된 화이트톤 오피스"
-            priority
-            className="object-[center_30%]"
-          />
+          <CoverImage src={heroBanner} alt={HERO_ALT} priority className="object-[80%_center]" />
         </div>
       </div>
     </section>
