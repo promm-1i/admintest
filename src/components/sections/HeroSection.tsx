@@ -9,14 +9,14 @@ const HERO_ALT =
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-background lg:aspect-video">
-      {/* Desktop: full-bleed 16:9 banner fills the first screen */}
+    <section className="relative overflow-hidden bg-background lg:mx-auto lg:aspect-video lg:max-w-[1920px]">
+      {/* Desktop: full-bleed 16:9 banner, capped at 1920x1080 so it doesn't overgrow on wider screens */}
       <img
         src={heroBanner}
         alt={HERO_ALT}
         loading="eager"
         fetchPriority="high"
-        className="absolute inset-0 hidden h-full w-full object-cover lg:block"
+        className="absolute inset-0 hidden h-full w-full object-cover opacity-80 lg:block"
       />
 
       <div className="relative mx-auto flex max-w-7xl flex-col lg:h-full lg:justify-center">
@@ -46,7 +46,12 @@ export function HeroSection() {
 
         {/* Mobile: text above a shorter device-photo band, biased right to feature the devices */}
         <div className="relative h-64 shrink-0 sm:h-96 lg:hidden">
-          <CoverImage src={heroBanner} alt={HERO_ALT} priority className="object-[80%_center]" />
+          <CoverImage
+            src={heroBanner}
+            alt={HERO_ALT}
+            priority
+            className="object-[80%_center] opacity-80"
+          />
         </div>
       </div>
     </section>
