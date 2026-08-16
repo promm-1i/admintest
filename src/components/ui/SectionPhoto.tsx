@@ -15,15 +15,15 @@ const FADE_MASK: Record<NonNullable<SectionPhotoProps["fade"]>, string> = {
 };
 
 /**
- * 화이트 배경 위에 거의 안 보일 정도로만 스며드는 장식용 사진.
- * 섹션 전체를 덮는 배경으로 깔고 opacity를 아주 낮게(기본 5%) 줘서
- * 카드/텍스트 뒤에서 텍스처로만 느껴지게 한다.
+ * 화이트 배경 위에 은은하게 스며드는 장식용 사진.
+ * 섹션 전체를 덮는 배경으로 깔고 opacity를 낮게(기본 20%) 줘서
+ * 카드/텍스트 뒤에서 텍스처로 느껴지게 한다.
  */
 export function SectionPhoto({
   src,
   className,
   fade = "radial",
-  opacity = 0.05,
+  opacity = 0.2,
   grayscale = true,
 }: SectionPhotoProps) {
   return (

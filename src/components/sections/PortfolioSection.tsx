@@ -42,7 +42,7 @@ export function PortfolioSection({
 
   return (
     <section id="portfolio-section" className="relative overflow-hidden py-20 lg:py-28">
-      <SectionPhoto src={photo} fade="left" opacity={0.07} />
+      <SectionPhoto src={photo} fade="left" opacity={0.25} />
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border/80 pb-8">
         <SectionHeader
