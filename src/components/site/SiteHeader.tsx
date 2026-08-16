@@ -33,8 +33,13 @@ export function SiteHeader() {
       )}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
-        <Link to="/" className="text-lg font-semibold tracking-tight">
-          Mint<span className="text-primary">CL</span>
+        <Link to="/" className="flex items-center text-lg font-semibold tracking-tight">
+          Mint
+          <span
+            aria-hidden="true"
+            className="mx-[3px] inline-block h-[0.85em] w-[3px] rounded-sm bg-primary motion-safe:animate-[cursor-blink_1.1s_steps(1)_infinite]"
+          />
+          CL
         </Link>
 
         <nav className="hidden items-center gap-6 md:flex">
