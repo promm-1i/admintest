@@ -6,7 +6,7 @@ import { SampleMarquee } from "@/components/sections/SampleMarquee";
 import { SAMPLES } from "@/lib/samples";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
-const PAGE_SIZE = 8;
+const PAGE_SIZE = 6;
 
 export default function Samples() {
   const [page, setPage] = useState(1);
