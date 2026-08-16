@@ -27,12 +27,8 @@ const ADMIN_FEATURES = [
 
 export function AdminFeatureSection() {
   return (
-    <section className="relative overflow-hidden px-4 py-20 sm:px-6 lg:py-28">
-      <div
-        aria-hidden
-        className="motion-safe:animate-float-slow pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-full bg-accent/25 blur-3xl [animation-delay:1s]"
-      />
-      <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-12 lg:items-center">
+    <section className="px-4 py-20 sm:px-6 lg:py-28">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12 lg:items-center">
         {/* Left Info Column */}
         <div className="lg:col-span-6 space-y-6">
           <SectionHeader

@@ -28,16 +28,8 @@ const WORKFLOW_STEPS = [
 
 export function ProblemSection() {
   return (
-    <section className="relative overflow-hidden border-y border-border bg-secondary/30 py-20 lg:py-28">
-      <div
-        aria-hidden
-        className="motion-safe:animate-float-slow pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/10 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="motion-safe:animate-float-slow pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-accent/20 blur-3xl [animation-delay:2s]"
-      />
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="border-y border-border bg-secondary/30 py-20 lg:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           label="WHY MintCL"
           title={
@@ -58,7 +50,7 @@ export function ProblemSection() {
 
         {/* Highlight Banner */}
         <FadeIn delay={60} className="mt-6 flex justify-center text-center">
-          <p className="inline-block rounded-full border border-primary/25 bg-primary/10 px-6 py-2.5 text-xs sm:text-sm font-semibold text-primary shadow-2xs break-keep">
+          <p className="inline-block rounded-full border border-border bg-secondary px-6 py-2.5 text-xs sm:text-sm font-semibold text-foreground shadow-2xs break-keep">
             어떤 페이지가 필요한지, 어떤 기능이 필요한지, 예산 안에서 가능한 범위를
             <br />
             먼저 안내드립니다.

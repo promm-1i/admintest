@@ -6,12 +6,8 @@ import { PlusCircle } from "lucide-react";
 
 export function PricingSection() {
   return (
-    <section className="relative overflow-hidden border-y border-border bg-secondary/30 py-20 lg:py-28">
-      <div
-        aria-hidden
-        className="motion-safe:animate-float-slow pointer-events-none absolute left-1/3 -top-10 h-64 w-64 rounded-full bg-primary/10 blur-3xl"
-      />
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+    <section className="border-y border-border bg-secondary/30 py-20 lg:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           label="PRICING"
           title="투명한 가격 안내"
