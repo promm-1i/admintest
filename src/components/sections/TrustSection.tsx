@@ -54,7 +54,7 @@ export function TrustSection() {
             {PERFORMANCE_STATS.map((s) => (
               <div key={s.label} className="text-center">
                 <dt className="sr-only">{s.label}</dt>
-                <dd className="font-mono text-2xl font-bold tracking-tight text-primary sm:text-3xl">
+                <dd className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
                   {s.value}
                 </dd>
                 <p className="mt-1 text-xs leading-snug text-muted-foreground">{s.label}</p>

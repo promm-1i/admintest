@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { PriceItem } from "@/lib/pricing";
 
-export function PriceCard({ name, price, features, recommended, compareNote }: PriceItem) {
+export function PriceCard({ name, price, features, recommended }: PriceItem) {
   return (
     <div
       className={cn(
@@ -26,9 +26,6 @@ export function PriceCard({ name, price, features, recommended, compareNote }: P
         <p className="mt-2 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
           {price}
         </p>
-        {compareNote && (
-          <p className="mt-2 text-xs leading-relaxed text-primary/80 break-keep">{compareNote}</p>
-        )}
         {features.length > 0 && (
           <ul className="mt-6 space-y-2.5 text-sm text-muted-foreground">
             {features.map((f) => (

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
+import { PhoneCallbackButton } from "@/components/site/PhoneCallbackButton";
 
 export function SiteFooter() {
   return (
@@ -16,12 +16,12 @@ export function SiteFooter() {
               <span><strong>상호명:</strong> 민트클</span>
               <span><strong>사업자등록번호:</strong> 266-07-03678</span>
             </p>
-            <p className="flex flex-wrap gap-x-4 gap-y-1">
+            <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
               <span>
                 <strong>전화:</strong>{" "}
-                <a href={PHONE_TEL_HREF} className="hover:text-foreground transition-colors">
-                  {PHONE_NUMBER}
-                </a>
+                <PhoneCallbackButton className="hover:text-foreground transition-colors">
+                  전화 문의 요청
+                </PhoneCallbackButton>
               </span>
               <span><strong>이메일:</strong> 6gsmake@gmail.com</span>
             </p>

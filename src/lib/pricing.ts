@@ -77,8 +77,6 @@ export type PriceItem = {
   price: string;
   features: string[];
   recommended?: boolean;
-  /** 특정 상품에 대한 가격 포지셔닝 문구 (예: 타 업체 대비 비교) */
-  compareNote?: string;
 };
 
 export const PRICING: PriceItem[] = [
@@ -97,7 +95,6 @@ export const PRICING: PriceItem[] = [
     name: "기업 홈페이지",
     price: "100만 원부터",
     features: ["회사 소개", "사업 영역", "포트폴리오", "문의 폼", "기본 SEO"],
-    compareNote: "다른 업체는 보통 300만 원 이상부터 시작하는 경우가 많지만, 민트클은 100만 원부터 시작합니다.",
   },
   {
     name: "쇼핑몰 홈페이지",

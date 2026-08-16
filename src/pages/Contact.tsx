@@ -13,7 +13,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { createReservation, reservationSchema, type ReservationInput } from "@/lib/api/reservations";
 import { PRODUCT_TYPES } from "@/lib/pricing";
 import { QUOTE_FEATURES, getQuoteConfig, calculateQuote, formatQuoteSummary } from "@/lib/quote";
-import { KAKAO_CHANNEL_URL, PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
+import { KAKAO_CHANNEL_URL } from "@/lib/contact";
+import { PhoneCallbackButton } from "@/components/site/PhoneCallbackButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const EMPTY: ReservationInput = {
@@ -155,14 +156,14 @@ export default function Contact() {
           <MessageCircle className="h-4 w-4 fill-[#191919]" />
           카카오톡으로 바로 문의하기 →
         </a>
-        <a
-          href={PHONE_TEL_HREF}
-          className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-bold text-foreground hover:bg-secondary shadow-xs transition-colors"
-        >
+        <PhoneCallbackButton className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-4 py-2.5 text-sm font-bold text-foreground hover:bg-secondary shadow-xs transition-colors">
           <Phone className="h-4 w-4 text-primary" />
-          {PHONE_NUMBER}
-        </a>
+          전화 문의 요청
+        </PhoneCallbackButton>
       </div>
+      <p className="mt-2 text-xs text-muted-foreground">
+        접수: 24시간 언제든 가능 · 응답: 1일 이내 회신
+      </p>
 
       <form onSubmit={onSubmit} className="mt-8 space-y-5 rounded-lg border border-border bg-card p-6">
         <Field label="이름" required error={errors["name"]}>
