@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { PhoneCallbackButton } from "@/components/site/PhoneCallbackButton";
+import { PHONE_TEL_HREF } from "@/lib/contact";
 
 export function SiteFooter() {
   return (
@@ -19,9 +19,9 @@ export function SiteFooter() {
             <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
               <span>
                 <strong>전화:</strong>{" "}
-                <PhoneCallbackButton className="hover:text-foreground transition-colors">
-                  전화 문의 요청
-                </PhoneCallbackButton>
+                <a href={PHONE_TEL_HREF} className="hover:text-foreground transition-colors">
+                  전화 문의
+                </a>
               </span>
               <span><strong>이메일:</strong> 6gsmake@gmail.com</span>
             </p>

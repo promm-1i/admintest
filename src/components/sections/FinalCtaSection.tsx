@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 import { Send, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { PhoneCallbackButton } from "@/components/site/PhoneCallbackButton";
-import { KAKAO_CHANNEL_URL, PHONE_NUMBER } from "@/lib/contact";
+import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
 
 export function FinalCtaSection() {
   return (
@@ -38,10 +37,12 @@ export function FinalCtaSection() {
                 카카오톡 문의
               </a>
             </Button>
-            <PhoneCallbackButton className="inline-flex h-10 items-center justify-center gap-2 whitespace-nowrap rounded-md border border-input bg-background px-8 text-sm font-bold shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground [&_svg]:size-4">
-              <Phone className="h-4 w-4" />
-              {PHONE_NUMBER}
-            </PhoneCallbackButton>
+            <Button asChild size="lg" variant="outline" className="font-bold gap-2 shadow-sm">
+              <a href={PHONE_TEL_HREF}>
+                <Phone className="h-4 w-4" />
+                전화 문의
+              </a>
+            </Button>
           </div>
           {/* Bottom row: 포트폴리오 다시보기 centered */}
           <div className="mt-1 flex justify-center">
