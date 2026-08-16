@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { PriceItem } from "@/lib/pricing";
 
-export function PriceCard({ name, price, features, recommended }: PriceItem) {
+export function PriceCard({ name, price, features, recommended, compareNote }: PriceItem) {
   return (
     <div
       className={cn(
-        "group relative flex flex-col justify-between rounded-2xl border bg-card p-7 transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:border-primary hover:ring-2 hover:ring-primary/20 hover:shadow-2xl z-0 hover:z-10",
+        "group relative flex h-full flex-col justify-between rounded-2xl border bg-card p-7 transition-all duration-300 ease-out hover:scale-[1.03] hover:-translate-y-1 hover:border-primary hover:ring-2 hover:ring-primary/20 hover:shadow-2xl z-0 hover:z-10",
         recommended
           ? "border-primary/60 shadow-md shadow-primary/10 bg-gradient-to-b from-card via-card to-primary/5"
           : "border-border shadow-xs",
@@ -26,6 +26,9 @@ export function PriceCard({ name, price, features, recommended }: PriceItem) {
         <p className="mt-2 text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
           {price}
         </p>
+        {compareNote && (
+          <p className="mt-2 text-xs leading-relaxed text-primary/80 break-keep">{compareNote}</p>
+        )}
         {features.length > 0 && (
           <ul className="mt-6 space-y-2.5 text-sm text-muted-foreground">
             {features.map((f) => (

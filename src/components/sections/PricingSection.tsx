@@ -24,9 +24,9 @@ export function PricingSection() {
           description="시작가 기준으로 거품 없이 명확한 가격 정책을 제공합니다."
         />
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {PRICING.map((item, i) => (
-            <FadeIn key={item.name} delay={i * 80}>
+            <FadeIn key={item.name} delay={i * 80} className="h-full">
               <PriceCard {...item} />
             </FadeIn>
           ))}

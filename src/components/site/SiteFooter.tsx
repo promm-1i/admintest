@@ -26,7 +26,7 @@ export function SiteFooter() {
               <span><strong>이메일:</strong> 6gsmake@gmail.com</span>
             </p>
             <p className="flex flex-wrap gap-x-4 gap-y-1">
-              <span><strong>운영시간:</strong> 평일 09:00 ~ 18:00</span>
+              <span><strong>문의 접수:</strong> 24시간 언제든 가능 (1일 이내 회신)</span>
             </p>
           </div>
         </div>

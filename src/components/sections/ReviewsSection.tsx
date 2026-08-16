@@ -2,11 +2,37 @@ import { Link } from "react-router-dom";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { SectionBackground } from "@/components/ui/SectionBackground";
-import { Quote, ArrowRight } from "lucide-react";
+import { Star, ArrowRight } from "lucide-react";
 import { REVIEWS } from "@/lib/reviews";
 import bgTexture from "@/assets/images/bg_texture_1.jpg";
 
+function ReviewCard({ quote, author, project, rating }: (typeof REVIEWS)[number]) {
+  return (
+    <div className="inline-flex w-80 shrink-0 flex-col gap-3 whitespace-normal rounded-xl border border-border bg-card p-6 align-top shadow-xs">
+      <div className="flex items-center gap-0.5">
+        {Array.from({ length: 5 }, (_, i) => (
+          <Star
+            key={i}
+            className={
+              i < rating
+                ? "h-3.5 w-3.5 fill-primary text-primary"
+                : "h-3.5 w-3.5 fill-none text-border"
+            }
+          />
+        ))}
+      </div>
+      <p className="text-sm leading-relaxed text-foreground break-keep">{quote}</p>
+      <div className="mt-auto border-t border-border/60 pt-3">
+        <p className="text-xs font-medium text-foreground">{author}</p>
+        <p className="mt-0.5 text-xs text-muted-foreground">{project}</p>
+      </div>
+    </div>
+  );
+}
+
 export function ReviewsSection() {
+  const track = [...REVIEWS, ...REVIEWS];
+
   return (
     <section className="relative overflow-hidden bg-background py-20 lg:py-28">
       <SectionBackground
@@ -18,25 +44,20 @@ export function ReviewsSection() {
         <SectionHeader
           label="REVIEWS"
           title="함께한 고객들의 이야기"
-          description="제작이 끝난 고객님들의 실제 후기를 순서대로 채워가고 있습니다."
+          description="제작이 끝난 고객님들의 실제 후기입니다."
         />
+      </div>
 
-        {REVIEWS.length > 0 ? (
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {REVIEWS.map((r, i) => (
-              <FadeIn key={r.id} delay={i * 70}>
-                <div className="flex h-full flex-col gap-4 rounded-xl border border-border bg-card p-6 shadow-xs">
-                  <Quote className="h-5 w-5 text-primary/60" />
-                  <p className="flex-1 text-sm leading-relaxed text-foreground break-keep">{r.quote}</p>
-                  <div className="border-t border-border/60 pt-3">
-                    <p className="text-xs font-medium text-foreground">{r.author}</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{r.project}</p>
-                  </div>
-                </div>
-              </FadeIn>
+      {REVIEWS.length > 0 ? (
+        <div className="relative mt-12 flex w-full overflow-x-hidden group">
+          <div className="flex animate-marquee gap-4 py-2 group-hover:[animation-play-state:paused]">
+            {track.map((r, i) => (
+              <ReviewCard key={`${r.id}-${i}`} {...r} />
             ))}
           </div>
-        ) : (
+        </div>
+      ) : (
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
           <FadeIn delay={80} className="mt-12">
             <div className="rounded-xl border border-dashed border-border bg-card/40 p-10 text-center">
               <p className="text-sm text-muted-foreground break-keep">
@@ -51,8 +72,8 @@ export function ReviewsSection() {
               </Link>
             </div>
           </FadeIn>
-        )}
-      </div>
+        </div>
+      )}
     </section>
   );
 }
