@@ -6,7 +6,7 @@ import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { SampleMarquee } from "@/components/sections/SampleMarquee";
 import { SectionPhoto } from "@/components/ui/SectionPhoto";
 import { Button } from "@/components/ui/button";
-import { SAMPLES } from "@/lib/samples";
+import { SAMPLES, PORTFOLIO_FILTERS } from "@/lib/samples";
 import { cn } from "@/lib/utils";
 import photo from "@/assets/images/portfolio_photo.jpg";
 
@@ -14,16 +14,6 @@ type PortfolioSectionProps = {
   selectedType?: string;
   onSelectType?: (filterValue: string) => void;
 };
-
-const FILTERS = [
-  { label: "전체", value: "all" },
-  { label: "원페이지", value: "one-page" },
-  { label: "소상공인", value: "small-business" },
-  { label: "기업", value: "business" },
-  { label: "쇼핑몰", value: "shopping-mall" },
-  { label: "포트폴리오", value: "portfolio" },
-  { label: "리뉴얼", value: "renewal" },
-];
 
 export function PortfolioSection({
   selectedType = "all",
@@ -38,7 +28,7 @@ export function PortfolioSection({
   const displaySamples = filteredSamples.slice(0, 6);
 
   const activeFilterLabel =
-    FILTERS.find((f) => f.value === selectedType)?.label || "전체";
+    PORTFOLIO_FILTERS.find((f) => f.value === selectedType)?.label || "전체";
 
   return (
     <section id="portfolio-section" className="relative overflow-hidden py-20 lg:py-28">
@@ -66,7 +56,7 @@ export function PortfolioSection({
 
       {/* Filter Bar */}
       <div className="mt-10 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
-        {FILTERS.map((f) => {
+        {PORTFOLIO_FILTERS.map((f) => {
           const isActive = selectedType === f.value;
           return (
             <button

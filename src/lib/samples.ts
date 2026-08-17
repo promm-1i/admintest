@@ -1,3 +1,4 @@
+import objetbathImg from "@/assets/images/objetbath_thumbnail.jpg";
 import koreanRestaurantImg from "@/assets/images/korean_restaurant_no_people_1786182882900.jpg";
 import beautySkincareImg from "@/assets/images/beauty_skincare_1786182932542.jpg";
 import hospitalImg from "@/assets/images/hospital_tjaspdlf.jpg";
@@ -31,6 +32,18 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "objetbath",
+    industry: "욕실 리모델링 홈페이지",
+    title: "욕실 리모델링 홈페이지",
+    type: ["business", "portfolio"],
+    tag: "기업 · 리모델링",
+    purpose: "아파트 욕실 리모델링 상담부터 시공, 마감 점검까지 전문적으로 안내하는 욕실 리모델링 브랜드 홈페이지 포트폴리오입니다.",
+    features: ["시공 사례 Before/After", "패키지별 견적 비교", "온라인 예산 계산기", "카카오톡 사진 상담"],
+    idealFor: "시공 전후 비교와 신뢰감 있는 상담 과정을 보여주고 싶은 인테리어·리모델링 업체",
+    image: objetbathImg,
+    liveUrl: "https://objetbath.netlify.app/",
+  },
   {
     slug: "nexmotion",
     industry: "제조/자동화 기업 홈페이지",
@@ -157,6 +170,16 @@ export const SAMPLES: Sample[] = [
     idealFor: "홈페이지가 없거나 정보가 오래된 중소기업, 스타트업",
     image: corporateImg,
   },
+];
+
+export const PORTFOLIO_FILTERS = [
+  { label: "전체", value: "all" },
+  { label: "원페이지", value: "one-page" },
+  { label: "소상공인", value: "small-business" },
+  { label: "기업", value: "business" },
+  { label: "쇼핑몰", value: "shopping-mall" },
+  { label: "포트폴리오", value: "portfolio" },
+  { label: "리뉴얼", value: "renewal" },
 ];
 
 export function getSampleBySlug(slug: string): Sample | undefined {
