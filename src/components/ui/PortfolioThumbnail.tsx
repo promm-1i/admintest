@@ -13,7 +13,10 @@ type Props = {
 // 카드가 좁을 때 사이트 자체가 모바일 레이아웃으로 렌더링되는 걸 막기 위해,
 // 항상 이 데스크톱 폭으로 렌더링한 뒤 카드 실제 폭에 맞춰 통째로 축소한다.
 const VIRTUAL_WIDTH = 1280;
-const SCROLL_MULTIPLE = 3;
+// 실제 페이지 전체 높이는 크로스오리진 iframe이라 알 수 없다(contentDocument 접근 불가).
+// 대부분의 실제 홈페이지가 다 들어올 만큼 넉넉하게 고정값으로 잡는다 — 페이지가 이보다
+// 짧으면 스크롤 끝부분엔 그냥 빈 여백이 보인다.
+const TALL_HEIGHT = 7000;
 
 const ASPECT: Record<NonNullable<Props["ratio"]>, number> = {
   video: 16 / 9,
@@ -26,9 +29,9 @@ const ASPECT: Record<NonNullable<Props["ratio"]>, number> = {
  * VIRTUAL_WIDTH(데스크톱 폭)로 렌더링해서 사이트의 데스크톱 레이아웃이 뜨게 하고,
  * 카드 실제 폭에 맞춰 ResizeObserver로 잰 배율만큼 CSS scale로 축소한다.
  *
- * 스크롤은 CSS @keyframes(portfolio-preview-scroll, index.css)로 무한 반복
- * + alternate 시켜서, 마우스가 계속 올라가 있으면 아래까지 내려갔다가 다시
- * 위로 올라오는 식으로 hover가 끝날 때까지 절대 멈추지 않는다.
+ * 스크롤은 CSS @keyframes(portfolio-preview-scroll, index.css)로 무한 반복시켜서,
+ * 맨 아래까지 다 내려간 뒤 처음(맨 위)으로 되돌아가 다시 내려가는 걸 hover가
+ * 끝날 때까지 반복한다(왕복이 아니라 매번 위에서부터 다시 시작).
  *
  * 스크롤 시작을 iframe의 load 이벤트에 맞추지 않는다 — 대상 사이트가 무거우면
  * (이미지 많은 실제 홈페이지) load가 몇 초씩 걸리거나 hover가 끝날 때까지 안 뜰 수
@@ -60,7 +63,7 @@ export function PortfolioThumbnail({ src, label, liveUrl, ratio = "video", class
   }, [hovering]);
 
   const visibleHeight = VIRTUAL_WIDTH / ASPECT[ratio];
-  const tallHeight = visibleHeight * SCROLL_MULTIPLE;
+  const tallHeight = TALL_HEIGHT;
   const scrollDistance = tallHeight - visibleHeight;
 
   return (
@@ -88,7 +91,7 @@ export function PortfolioThumbnail({ src, label, liveUrl, ratio = "video", class
             tabIndex={-1}
             className={cn(
               "border-0 bg-background will-change-transform",
-              scrolling && "animate-[portfolio-preview-scroll_1333ms_linear_infinite_alternate]",
+              scrolling && "animate-[portfolio-preview-scroll_5800ms_linear_infinite]",
             )}
             style={{
               width: VIRTUAL_WIDTH,
