@@ -82,7 +82,7 @@ export function PortfolioThumbnail({ src, label, liveUrl, ratio = "video", class
             src={liveUrl}
             title={`${label} 실시간 미리보기`}
             tabIndex={-1}
-            className={cn("border-0 bg-background", scrolling && "transition-transform duration-[6000ms] ease-linear")}
+            className={cn("border-0 bg-background", scrolling && "transition-transform duration-[2000ms] ease-linear")}
             style={{
               width: VIRTUAL_WIDTH,
               height: tallHeight,
