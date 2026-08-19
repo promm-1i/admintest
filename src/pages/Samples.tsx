@@ -7,7 +7,7 @@ import { SAMPLES, PORTFOLIO_FILTERS } from "@/lib/samples";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 8;
 
 export default function Samples() {
   const [page, setPage] = useState(1);

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
+import { PortfolioThumbnail } from "@/components/ui/PortfolioThumbnail";
 import { cn } from "@/lib/utils";
 import type { Sample } from "@/lib/samples";
 
@@ -19,13 +19,13 @@ export function PortfolioCard({
       )}
     >
       <div className="relative overflow-hidden bg-muted/40 shrink-0">
-        <ImagePlaceholder
+        <PortfolioThumbnail
           src={sample.image}
+          liveUrl={sample.liveUrl}
           ratio={size === "large" ? "wide" : "video"}
           label={sample.industry}
-          className="rounded-none border-0 transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+          className="rounded-none border-0"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>
 
       <div className="flex flex-1 flex-col p-6">

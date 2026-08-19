@@ -1,3 +1,5 @@
+import roadinImg from "@/assets/images/roadin_thumbnail.jpg";
+import carplanImg from "@/assets/images/carplan_thumbnail.jpg";
 import objetbathImg from "@/assets/images/objetbath_thumbnail.jpg";
 import koreanRestaurantImg from "@/assets/images/korean_restaurant_no_people_1786182882900.jpg";
 import beautySkincareImg from "@/assets/images/beauty_skincare_1786182932542.jpg";
@@ -32,6 +34,30 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "roadin-rentcar",
+    industry: "렌터카 홈페이지",
+    title: "멀티브랜드 렌터카 홈페이지",
+    type: ["business"],
+    tag: "기업 · 렌터카",
+    purpose: "국산부터 수입차까지 조건별로 차량을 비교하고 견적을 받을 수 있는 멀티브랜드 렌터카 비교 플랫폼 홈페이지 포트폴리오입니다.",
+    features: ["조건별 차량 필터링", "차급별 요금 비교표", "전국 지점 안내", "실시간 견적 신청"],
+    idealFor: "다양한 차량 재고를 한눈에 비교해서 보여주고 싶은 렌터카·리스 업체",
+    image: roadinImg,
+    liveUrl: "https://roadin.netlify.app/",
+  },
+  {
+    slug: "carplan-rentcar",
+    industry: "장기렌트카 홈페이지",
+    title: "장기렌트카 상담 홈페이지",
+    type: ["business"],
+    tag: "기업 · 장기렌트",
+    purpose: "실시간 계약 현황과 고객 후기로 신뢰감을 전달하고 장기렌트·리스 상담으로 자연스럽게 연결하는 렌터카 홈페이지 포트폴리오입니다.",
+    features: ["실시간 계약 카운터", "차종별 월 렌트료 비교", "고객 후기 슬라이더", "무심사 상담 프로그램 안내"],
+    idealFor: "신뢰 지표와 실시간성으로 상담 전환을 높이고 싶은 장기렌트·리스 업체",
+    image: carplanImg,
+    liveUrl: "https://carplanrentcar.netlify.app/",
+  },
   {
     slug: "objetbath",
     industry: "욕실 리모델링 홈페이지",
