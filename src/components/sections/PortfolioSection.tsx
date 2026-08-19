@@ -33,7 +33,7 @@ export function PortfolioSection({
   return (
     <section id="portfolio-section" className="relative overflow-hidden py-20 lg:py-28">
       <SectionPhoto src={photo} fade="right" opacity={0.25} />
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 border-b border-border/80 pb-8">
         <SectionHeader
           label="PORTFOLIO"
@@ -83,7 +83,7 @@ export function PortfolioSection({
       )}
 
       {/* Samples Grid with Unified Card Heights */}
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
+      <div className="mt-8 grid gap-8 sm:grid-cols-2 items-stretch">
         {displaySamples.length > 0 ? (
           displaySamples.map((sample, i) => (
             <FadeIn key={sample.slug} delay={i * 60} className="h-full">

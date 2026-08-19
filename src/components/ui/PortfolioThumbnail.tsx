@@ -26,6 +26,10 @@ const ASPECT: Record<NonNullable<Props["ratio"]>, number> = {
  * VIRTUAL_WIDTH(데스크톱 폭)로 렌더링해서 사이트의 데스크톱 레이아웃이 뜨게 하고,
  * 카드 실제 폭에 맞춰 ResizeObserver로 잰 배율만큼 CSS scale로 축소한다.
  *
+ * 스크롤은 CSS @keyframes(portfolio-preview-scroll, index.css)로 무한 반복
+ * + alternate 시켜서, 마우스가 계속 올라가 있으면 아래까지 내려갔다가 다시
+ * 위로 올라오는 식으로 hover가 끝날 때까지 절대 멈추지 않는다.
+ *
  * 스크롤 시작을 iframe의 load 이벤트에 맞추지 않는다 — 대상 사이트가 무거우면
  * (이미지 많은 실제 홈페이지) load가 몇 초씩 걸리거나 hover가 끝날 때까지 안 뜰 수
  * 있어서, 대신 마운트 후 고정 지연(500ms)이 지나면 무조건 스크롤을 시작한다.
@@ -82,11 +86,16 @@ export function PortfolioThumbnail({ src, label, liveUrl, ratio = "video", class
             src={liveUrl}
             title={`${label} 실시간 미리보기`}
             tabIndex={-1}
-            className={cn("border-0 bg-background", scrolling && "transition-transform duration-[2000ms] ease-linear")}
+            className={cn(
+              "border-0 bg-background will-change-transform",
+              scrolling && "animate-[portfolio-preview-scroll_1333ms_linear_infinite_alternate]",
+            )}
             style={{
               width: VIRTUAL_WIDTH,
               height: tallHeight,
-              transform: scrolling ? `translateY(-${scrollDistance}px)` : "translateY(0px)",
+              transform: scrolling ? undefined : "translateY(0px)",
+              // @ts-expect-error -- CSS custom properties aren't in React's CSSProperties type
+              "--scroll-distance": `-${scrollDistance}px`,
             }}
           />
         </div>

@@ -25,7 +25,7 @@ export function SampleMarquee() {
             <Link
               key={`${sample.slug}-${idx}`}
               to={`/samples/${sample.slug}`}
-              className="inline-block w-72 shrink-0 rounded-xl border border-border/80 bg-card p-3 shadow-xs transition-all duration-300 hover:border-primary hover:shadow-md hover:-translate-y-1"
+              className="inline-block w-96 shrink-0 rounded-xl border border-border/80 bg-card p-3 shadow-xs transition-all duration-300 hover:border-primary hover:shadow-md hover:-translate-y-1"
             >
               <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-muted">
                 <ImagePlaceholder
@@ -39,7 +39,7 @@ export function SampleMarquee() {
                 </div>
               </div>
               <div className="mt-2.5 flex items-center justify-between">
-                <span className="text-xs font-semibold text-foreground truncate max-w-[170px]">
+                <span className="text-xs font-semibold text-foreground truncate max-w-[280px]">
                   {sample.title}
                 </span>
                 <span className="text-[11px] font-medium text-primary">미리보기 →</span>
