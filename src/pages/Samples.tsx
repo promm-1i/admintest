@@ -38,7 +38,7 @@ export default function Samples() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14">
+    <div className="mx-auto max-w-7xl px-4 py-14">
       <h1 className="text-3xl font-semibold">업종별 포트폴리오</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
         업종별로 실제 홈페이지 제작 시 자주 요청되는 구성을 포트폴리오로 정리했습니다. 원하시는
@@ -71,7 +71,7 @@ export default function Samples() {
         })}
       </div>
 
-      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 items-stretch">
+      <div className="mt-8 grid gap-8 sm:grid-cols-2 items-stretch">
         {pageSamples.length > 0 ? (
           pageSamples.map((sample, i) => (
             <FadeIn key={sample.slug} delay={i * 60} className="h-full">
