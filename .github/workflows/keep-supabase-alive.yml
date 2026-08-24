@@ -1,0 +1,19 @@
+name: Keep Supabase project alive
+
+on:
+  schedule:
+    - cron: "0 3 */3 * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST endpoint
+        run: |
+          curl -sS -o /dev/null -w "status: %{http_code}\n" --fail \
+            "https://zedooweakrtfxgrruwoz.supabase.co/rest/v1/reservations?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}"
+        env:
+          SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplZG9vd2Vha3J0ZnhncnJ1d296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxNjM2MzYsImV4cCI6MjEwMTczOTYzNn0.UFfj5CfXcyPnw5Oak0G75MkEKwhgDpnebhx1I8tF_tQ"
