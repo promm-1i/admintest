@@ -9,6 +9,7 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
 import WebSolutions from "@/pages/WebSolutions";
+import ProductQuoteSolution from "@/pages/solutions/ProductQuoteSolution";
 import Samples from "@/pages/Samples";
 import SampleDetail from "@/pages/SampleDetail";
 import Notices from "@/pages/Notices";
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/web-solutions" element={<WebSolutions />} />
+          <Route path="/web-solutions/product-quotes" element={<ProductQuoteSolution />} />
           <Route path="/samples" element={<Samples />} />
           <Route path="/samples/:slug" element={<SampleDetail />} />
           <Route path="/notices" element={<Notices />} />

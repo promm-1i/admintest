@@ -27,6 +27,7 @@ export const WEB_SOLUTION_CATEGORIES: { icon: typeof Building2; title: string; d
     icon: Package,
     title: "제품 / 견적관리",
     desc: "제품관리 · 카테고리 · 검색 · 자료실 · 견적문의",
+    href: "/web-solutions/product-quotes",
   },
   {
     icon: CalendarCheck,
