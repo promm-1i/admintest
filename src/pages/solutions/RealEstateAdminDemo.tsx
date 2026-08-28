@@ -128,12 +128,7 @@ export function RealEstateAdminDemo() {
 
   return (
     <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-      <div className="flex items-center justify-between border-b border-border bg-secondary/50 px-4 py-3">
-        <div className="flex items-center gap-1.5">
-          <span className="h-3 w-3 rounded-full bg-red-400/80" />
-          <span className="h-3 w-3 rounded-full bg-yellow-400/80" />
-          <span className="h-3 w-3 rounded-full bg-green-400/80" />
-        </div>
+      <div className="flex items-center justify-end border-b border-border bg-secondary/50 px-4 py-3">
         <div className="flex items-center gap-1.5 rounded-md border border-border/60 bg-background px-3 py-1 text-[11px] font-mono text-muted-foreground">
           <Settings className="h-3 w-3 text-primary" />
           부동산 관리자 모드 (데모)

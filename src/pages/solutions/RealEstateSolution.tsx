@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import { Building2, Search, MapPin, Settings, Send, LayoutDashboard } from "lucide-react";
+import { Building2, Search, MapPin, Settings, Send, LayoutDashboard, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { RealEstateAdminDemo } from "@/pages/solutions/RealEstateAdminDemo";
 
 const FEATURES = [
   {
@@ -67,14 +66,30 @@ export default function RealEstateSolution() {
         <LayoutDashboard className="h-5 w-5 text-primary" />
         관리자 기능 직접 체험해보기
       </h2>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
         매물, 고객·문의, 일정, 직원 권한, 게시판까지 — 실제 관리자 페이지와 동일한 방식으로
-        체험해볼 수 있는 데모입니다. 이 데모의 데이터는 저장되지 않으며, 지도 등 외부 서비스
-        연동이 필요한 기능은 실제 구축 시 연결됩니다.
+        체험해볼 수 있는 데모를 새 창에서 열어드립니다. 이 데모의 데이터는 저장되지 않으며,
+        지도 등 외부 서비스 연동이 필요한 기능은 실제 구축 시 연결됩니다.
       </p>
 
-      <div className="mt-6">
-        <RealEstateAdminDemo />
+      <div className="mt-6 flex flex-col items-start gap-5 rounded-2xl border border-border bg-secondary/40 p-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <LayoutDashboard className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-foreground">관리자 데모 새 창에서 열기</p>
+            <p className="mt-1 text-xs text-muted-foreground break-keep">
+              매물·고객·일정·직원·게시판 관리를 실제 관리자 화면처럼 체험해보세요.
+            </p>
+          </div>
+        </div>
+        <Button asChild className="shrink-0 gap-1.5 font-bold">
+          <a href="/web-solutions/real-estate/demo" target="_blank" rel="noopener noreferrer">
+            데모 열기
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </Button>
       </div>
 
       <div className="mt-12 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
