@@ -49,9 +49,6 @@ export function SiteHeader() {
           <NavLink to="/" end className={NAV_LINK_CLASS}>
             홈
           </NavLink>
-          <NavLink to="/about" className={NAV_LINK_CLASS}>
-            소개
-          </NavLink>
           <Link to="/services#types" className={ANCHOR_LINK_CLASS}>
             홈페이지 제작
           </Link>
@@ -62,9 +59,6 @@ export function SiteHeader() {
           <Link to="/services#pricing" className={ANCHOR_LINK_CLASS}>
             제작비용
           </Link>
-          <NavLink to="/notices" className={NAV_LINK_CLASS}>
-            공지사항
-          </NavLink>
           {isAdmin && (
             <Link to="/admin" className="text-sm text-primary">
               관리자
@@ -102,11 +96,6 @@ export function SiteHeader() {
             <li>
               <Link to="/" onClick={() => setOpen(false)} className="block py-3 text-sm text-muted-foreground">
                 홈
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" onClick={() => setOpen(false)} className="block py-3 text-sm text-muted-foreground">
-                소개
               </Link>
             </li>
             <li>
@@ -162,15 +151,6 @@ export function SiteHeader() {
                 className="block py-3 text-sm text-muted-foreground"
               >
                 제작비용
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/notices"
-                onClick={() => setOpen(false)}
-                className="block py-3 text-sm text-muted-foreground"
-              >
-                공지사항
               </Link>
             </li>
             {isAdmin && (
