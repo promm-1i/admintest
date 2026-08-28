@@ -11,7 +11,7 @@ export default function RealEstateAdminDemoPage() {
 
   return (
     <div className="min-h-screen bg-secondary/30">
-      <header className="flex items-center justify-between border-b border-border bg-background px-4 py-3 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-30 flex items-center justify-between border-b border-border bg-background px-4 py-3 sm:px-6">
         <div>
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
             WEB SOLUTION DEMO
@@ -29,9 +29,7 @@ export default function RealEstateAdminDemoPage() {
         </Link>
       </header>
 
-      <main className="px-4 py-6 sm:px-6 lg:px-8">
-        <RealEstateAdminDemo />
-      </main>
+      <RealEstateAdminDemo />
     </div>
   );
 }
