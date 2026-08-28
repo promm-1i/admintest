@@ -17,13 +17,13 @@ const TIERS: Tier[] = [
     name: "베이직",
     setupFee: "49만 원",
     monthlyFee: "9.9만 원",
-    features: ["관리자 시스템", "데이터베이스 연동", "검색 기능"],
+    features: ["관리자 시스템 · 데이터베이스 · 검색 기능", "관리자 계정 1개"],
   },
   {
     name: "프로",
     setupFee: "99만 원",
     monthlyFee: "14.9만 원",
-    features: ["베이직 포함 기능", "더 넓은 데이터 처리 범위", "확장 기능 우선 대응"],
+    features: ["베이직 기능 전체 포함", "관리자 계정 여러 개 발급", "직원별 접근 권한 개별 설정"],
     recommended: true,
   },
 ];
