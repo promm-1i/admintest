@@ -42,6 +42,7 @@ export const WEB_SOLUTION_CATEGORIES: { icon: typeof Building2; title: string; d
     icon: CircleDollarSign,
     title: "기능 및 요금",
     desc: "웹 솔루션 구축 범위와 이용방식 안내",
+    href: "/web-solutions",
   },
   {
     icon: MessageSquare,
