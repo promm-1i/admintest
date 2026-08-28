@@ -8,6 +8,7 @@ import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { PricingSection } from "@/components/sections/PricingSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { AdminFeatureSection } from "@/components/sections/AdminFeatureSection";
+import { WebSolutionTeaserSection } from "@/components/sections/WebSolutionTeaserSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
 import { RecommendedForSection } from "@/components/sections/RecommendedForSection";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -29,6 +30,7 @@ export default function Home() {
       <ProblemSection />
       <ServiceTypesSection selectedType={selectedType} onSelectType={setSelectedType} />
       <AdminFeatureSection />
+      <WebSolutionTeaserSection />
       <PricingSection />
       <ProcessSection />
       <ReviewsSection />
