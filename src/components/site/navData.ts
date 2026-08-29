@@ -1,37 +1,11 @@
-import {
-  Route,
-  CircleDollarSign,
-  ListChecks,
-  LifeBuoy,
-  Building2,
-  Car,
-  HeartPulse,
-  BookOpen,
-  Hammer,
-  PackageSearch,
-  UtensilsCrossed,
-  Briefcase,
-  LayoutTemplate,
-  ShieldCheck,
-  FolderKanban,
-  Grid3x3,
-  HelpCircle,
-  MessageSquare,
-  Newspaper,
-  type LucideIcon,
-} from "lucide-react";
+import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, type LucideIcon } from "lucide-react";
 
 export type NavItem = { icon: LucideIcon; title: string; desc: string; href?: string };
-export type NavGroup = {
-  key: string;
-  label: string;
-  items: NavItem[];
-  promo?: { title: string; desc: string; href: string; linkLabel: string };
-};
 
 // href가 없는 항목은 아직 실제 페이지가 없는 항목입니다 — 링크로 위장하지 않고
 // "준비 중" 표시만 붙여둔 정적 항목으로 렌더링합니다. 나중에 페이지가 생기면
 // href만 채우면 됩니다.
+// WebSolutions 페이지, 홈 티저 섹션 등 카드형 레이아웃에서 사용합니다.
 export const INDUSTRY_ITEMS: NavItem[] = [
   {
     icon: Car,
@@ -81,57 +55,41 @@ export const INDUSTRY_ITEMS: NavItem[] = [
   },
 ];
 
-export const NAV_GROUPS: NavGroup[] = [
+/**
+ * Header / Mega Menu 전용 텍스트 중심 내비게이션 구조.
+ * 카드·아이콘 박스·설명문 없이 항목명만 나열하는 정돈된 드롭다운을 위한 데이터다.
+ */
+export type NavLink = { label: string; href: string };
+export type NavDropdownEntry = { type: "dropdown"; key: string; label: string; items: NavLink[] };
+export type NavLinkEntry = { type: "link"; key: string; label: string; href: string; external?: boolean };
+export type NavEntry = NavDropdownEntry | NavLinkEntry;
+
+export const HEADER_NAV: NavEntry[] = [
   {
+    type: "dropdown",
     key: "build",
     label: "홈페이지 제작",
     items: [
-      { icon: LayoutTemplate, title: "제작 과정", desc: "상담부터 배포까지 제작 유형과 흐름 안내", href: "/services#types" },
-      { icon: CircleDollarSign, title: "제작 비용", desc: "홈페이지 유형별 가격 안내", href: "/services#pricing" },
-      { icon: ListChecks, title: "기본 제공 기능", desc: "모든 홈페이지에 포함되는 기본 기능", href: "/services#features" },
-      { icon: LifeBuoy, title: "유지보수", desc: "제작 이후 운영 지원 안내", href: "/services#maintenance" },
+      { label: "제작 방법", href: "/services#types" },
+      { label: "제작 비용", href: "/services#pricing" },
+      { label: "기능 소개", href: "/services#features" },
+      { label: "유지보수 안내", href: "/services#maintenance" },
     ],
   },
   {
+    type: "dropdown",
     key: "industry",
     label: "업종별 맞춤 제작",
-    items: INDUSTRY_ITEMS,
-    promo: {
-      title: "렌트카 · 부동산처럼\n업종별 기능까지 갖춘 홈페이지",
-      desc: "업종마다 필요한 기능이 다릅니다. 관리자 시스템, 데이터베이스, 검색, 예약 등 업종에 맞는 기능까지 갖춘 홈페이지를 구축합니다.",
-      href: "/web-solutions",
-      linkLabel: "업종별 맞춤 홈페이지 보기",
-    },
-  },
-  {
-    key: "demo",
-    label: "데모 보기",
     items: [
-      { icon: Grid3x3, title: "전체 데모", desc: "업종별 맞춤 홈페이지 한눈에 보기", href: "/web-solutions" },
-      { icon: Car, title: "렌트카 데모", desc: "고객이 보는 렌트카 홈페이지 화면", href: "/web-solutions/rentcar/demo/site" },
-      { icon: Building2, title: "부동산 데모", desc: "고객이 보는 부동산 홈페이지 화면", href: "/web-solutions/real-estate/demo/site" },
-      { icon: HeartPulse, title: "병원 · 의원 데모", desc: "고객이 보는 병원 홈페이지 화면", href: "/web-solutions/hospital/demo/site" },
-      { icon: BookOpen, title: "학원 데모", desc: "고객이 보는 학원 홈페이지 화면", href: "/web-solutions/academy/demo/site" },
-      { icon: Hammer, title: "인테리어 데모", desc: "고객이 보는 인테리어 홈페이지 화면", href: "/web-solutions/interior/demo/site" },
-      { icon: PackageSearch, title: "이사 · 청소 데모", desc: "고객이 보는 이사·청소 홈페이지 화면", href: "/web-solutions/moving/demo/site" },
-      { icon: ShieldCheck, title: "관리자 페이지 데모", desc: "매물·문의·직원 등을 관리하는 화면", href: "/web-solutions/real-estate/demo" },
+      { label: "부동산", href: "/web-solutions/real-estate" },
+      { label: "렌트카", href: "/web-solutions/rentcar" },
+      { label: "병원 · 의원", href: "/web-solutions/hospital" },
+      { label: "학원", href: "/web-solutions/academy" },
+      { label: "인테리어 · 리모델링", href: "/web-solutions/interior" },
+      { label: "이사 · 청소업체", href: "/web-solutions/moving" },
     ],
   },
-  {
-    key: "portfolio",
-    label: "포트폴리오",
-    items: [
-      { icon: FolderKanban, title: "제작 사례", desc: "지금까지 제작한 홈페이지 모아보기", href: "/samples" },
-      { icon: Route, title: "업종별 사례", desc: "업종별 맞춤 제작 사례 살펴보기", href: "/web-solutions" },
-    ],
-  },
-  {
-    key: "support",
-    label: "고객센터",
-    items: [
-      { icon: HelpCircle, title: "자주 묻는 질문", desc: "제작 기간, 비용, 절차 등 자주 묻는 내용", href: "/faq" },
-      { icon: MessageSquare, title: "상담 문의", desc: "필요한 기능에 맞춘 맞춤 상담", href: "/contact" },
-      { icon: Newspaper, title: "블로그", desc: "제작 후기와 운영 팁", href: "/blog" },
-    ],
-  },
+  { type: "link", key: "templates", label: "홈페이지 템플릿", href: "/templates" },
+  { type: "link", key: "portfolio", label: "포트폴리오", href: "/samples" },
+  { type: "link", key: "support", label: "고객센터", href: "https://blog.naver.com/rlarlffhe", external: true },
 ];

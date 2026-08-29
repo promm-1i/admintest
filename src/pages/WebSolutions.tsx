@@ -245,7 +245,7 @@ export default function WebSolutions() {
             <Link to="/contact">구축 문의하기</Link>
           </Button>
           <Button asChild variant="outline">
-            <Link to="/web-solutions/real-estate/demo/site">데모 보기</Link>
+            <Link to="/web-solutions/demos">데모 보기</Link>
           </Button>
         </div>
       </div>

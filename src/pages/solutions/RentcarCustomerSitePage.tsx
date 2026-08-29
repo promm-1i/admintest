@@ -182,7 +182,9 @@ export default function RentcarCustomerSitePage() {
                 onClick={() => setSelected(v)}
                 className="flex flex-col items-start overflow-hidden rounded-xl border border-border bg-card text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
               >
-                <div className="flex h-32 w-full items-center justify-center bg-secondary/50 text-5xl">{v.image}</div>
+                <div className="flex h-32 w-full items-center justify-center bg-secondary/50">
+                  <Car className="h-8 w-8 text-muted-foreground/40" strokeWidth={1.25} />
+                </div>
                 <div className="p-4">
                   <span className="inline-block rounded bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
                     {v.type} · {v.category}
@@ -253,7 +255,9 @@ export default function RentcarCustomerSitePage() {
       <Modal open={!!selected} onClose={() => setSelected(null)} title={selected?.name ?? ""}>
         {selected && (
           <div>
-            <div className="flex h-36 items-center justify-center rounded-lg bg-secondary/50 text-6xl">{selected.image}</div>
+            <div className="flex h-36 items-center justify-center rounded-lg bg-secondary/50">
+              <Car className="h-10 w-10 text-muted-foreground/40" strokeWidth={1.25} />
+            </div>
             <dl className="mt-4 grid grid-cols-2 gap-3 text-xs">
               <div>
                 <dt className="text-muted-foreground">차종</dt>
