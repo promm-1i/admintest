@@ -30,8 +30,11 @@ function ReviewCard({ quote, author, project, rating }: (typeof REVIEWS)[number]
   );
 }
 
+// 메인페이지는 업종이 겹치지 않는 대표 후기 6건만 노출한다 (전체 후기는 실제 REVIEWS 데이터 그대로 유지).
+const FEATURED_REVIEWS = REVIEWS.slice(0, 6);
+
 export function ReviewsSection() {
-  const track = [...REVIEWS, ...REVIEWS];
+  const track = [...FEATURED_REVIEWS, ...FEATURED_REVIEWS];
 
   return (
     <section className="relative overflow-hidden bg-background py-20 lg:py-28">

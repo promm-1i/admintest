@@ -1,4 +1,5 @@
 import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, type LucideIcon } from "lucide-react";
+import { NAVER_BLOG_URL } from "@/lib/contact";
 
 export type NavItem = { icon: LucideIcon; title: string; desc: string; href?: string };
 
@@ -91,5 +92,5 @@ export const HEADER_NAV: NavEntry[] = [
   },
   { type: "link", key: "templates", label: "홈페이지 템플릿", href: "/templates" },
   { type: "link", key: "portfolio", label: "포트폴리오", href: "/samples" },
-  { type: "link", key: "support", label: "고객센터", href: "https://blog.naver.com/rlarlffhe", external: true },
+  { type: "link", key: "support", label: "고객센터", href: NAVER_BLOG_URL, external: true },
 ];

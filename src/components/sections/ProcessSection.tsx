@@ -3,10 +3,10 @@ import { SectionHeader } from "@/components/sections/SectionHeader";
 import { MessageSquare, PenTool, Code2, Rocket, ArrowRight } from "lucide-react";
 
 const STEPS = [
-  { num: "01", title: "상담", desc: "원하는 구성과 기능을 확인합니다.", icon: MessageSquare },
-  { num: "02", title: "기획·디자인", desc: "구조와 디자인 방향을 확정합니다.", icon: PenTool },
-  { num: "03", title: "개발", desc: "PC·모바일 반응형으로 구축합니다.", icon: Code2 },
-  { num: "04", title: "검수·오픈", desc: "최종 확인 후 홈페이지를 배포합니다.", icon: Rocket },
+  { num: "01", title: "상담", desc: "필요한 페이지, 기능, 예산을 확인합니다.", icon: MessageSquare },
+  { num: "02", title: "기획·디자인", desc: "메뉴 구조와 디자인 방향을 결정합니다.", icon: PenTool },
+  { num: "03", title: "개발", desc: "반응형 화면과 필요한 기능을 구축합니다.", icon: Code2 },
+  { num: "04", title: "검수·오픈", desc: "PC·모바일 검수 후 도메인 연결 및 배포합니다.", icon: Rocket },
 ];
 
 export function ProcessSection() {

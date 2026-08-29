@@ -3,13 +3,11 @@ import { ArrowRight, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { INDUSTRY_ITEMS } from "@/components/site/navData";
-
-const SOLUTION_CATEGORIES = INDUSTRY_ITEMS.filter((item) => Boolean(item.href));
+import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 
 export function WebSolutionTeaserSection() {
   return (
-    <section className="px-4 py-20 sm:px-6 lg:py-28">
+    <section id="industry-section" className="px-4 py-20 sm:px-6 lg:py-28">
       <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-secondary/30 p-8 sm:p-12">
         <SectionHeader
           label="CUSTOM BY INDUSTRY"
@@ -17,7 +15,7 @@ export function WebSolutionTeaserSection() {
             <>
               업종에 맞게 바로 쓰는
               <br />
-              맞춤형 홈페이지
+              맞춤형 웹솔루션
             </>
           }
           description={
@@ -29,24 +27,24 @@ export function WebSolutionTeaserSection() {
           }
         />
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {SOLUTION_CATEGORIES.map((item, i) => {
-            const Icon = item.icon;
-            return (
-              <FadeIn key={item.title} delay={i * 60}>
-                <Link
-                  to={item.href!}
-                  className="group flex h-full flex-col items-start gap-3 rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:border-primary/50 hover:shadow-xs"
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Icon className="h-4.5 w-4.5" />
-                  </div>
-                  <h4 className="text-sm font-semibold text-foreground break-keep">{item.title}</h4>
-                  <p className="text-xs leading-relaxed text-muted-foreground break-keep">{item.desc}</p>
-                </Link>
-              </FadeIn>
-            );
-          })}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {INDUSTRY_SHOWCASES.map((industry, i) => (
+            <FadeIn key={industry.key} delay={i * 60}>
+              <Link
+                to={industry.solutionHref}
+                className="group flex h-full flex-col rounded-xl border border-border bg-card p-5 transition-all duration-300 hover:border-primary/50 hover:shadow-xs"
+              >
+                <h4 className="text-sm font-semibold text-foreground">{industry.name}</h4>
+                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground break-keep">
+                  {industry.cardTagline}
+                </p>
+                <span className="mt-auto flex items-center gap-1 pt-4 text-xs font-medium text-primary">
+                  상세보기
+                  <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
+              </Link>
+            </FadeIn>
+          ))}
         </div>
 
         <div className="mt-9 flex flex-wrap gap-3">
