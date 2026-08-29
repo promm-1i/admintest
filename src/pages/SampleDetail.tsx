@@ -187,28 +187,22 @@ export default function SampleDetail() {
             />
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-xl border border-border bg-card p-6 shadow-xs space-y-4">
-              <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary" /> 주요 구성 및 특징
-              </h2>
-              <ul className="space-y-2.5 text-sm text-muted-foreground">
+          <div className="grid gap-8 border-t border-border pt-8 md:grid-cols-2">
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">주요 구성 및 특징</h2>
+              <ul className="mt-4 space-y-2.5 text-sm">
                 {sample.features.map((f) => (
                   <li key={f} className="flex items-start gap-2">
-                    <span className="text-primary font-bold">·</span>
+                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     <span className="text-foreground font-medium">{f}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
-            <div className="rounded-xl border border-border bg-card p-6 shadow-xs space-y-4">
-              <h2 className="text-base font-semibold text-foreground flex items-center gap-2">
-                <CheckCircle2 className="h-4 w-4 text-primary" /> 추천 대상
-              </h2>
-              <p className="text-sm text-muted-foreground leading-relaxed break-keep">
-                {sample.idealFor}
-              </p>
+            <div className="md:border-l md:border-border md:pl-8">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">추천 대상</h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep">{sample.idealFor}</p>
             </div>
           </div>
         </div>

@@ -51,22 +51,17 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
       </ul>
 
       <h2 className="mt-14 text-xl font-semibold">핵심 기능</h2>
-      <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-5 grid gap-x-8 gap-y-3 border-t border-border pt-5 sm:grid-cols-2 lg:grid-cols-3">
         {industry.features.map((f) => {
           const Icon = f.icon;
           return (
-            <div
-              key={f.label}
-              className="flex items-center gap-3 rounded-xl border border-border bg-card p-4"
-            >
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <Icon className="h-4.5 w-4.5" />
-              </div>
-              <p className="text-sm font-medium text-foreground">{f.label}</p>
-            </div>
+            <li key={f.label} className="flex items-center gap-2.5 text-sm font-medium text-foreground">
+              <Icon className="h-4 w-4 shrink-0 text-primary" />
+              {f.label}
+            </li>
           );
         })}
-      </div>
+      </ul>
 
       <h2 className="mt-14 text-xl font-semibold">관리자 화면</h2>
       <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
