@@ -42,6 +42,7 @@ export function ReviewsSection() {
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeader
           label="REVIEWS"
+          align="center"
           title="함께한 고객들의 이야기"
           description="제작이 끝난 고객님들의 실제 후기입니다."
         />

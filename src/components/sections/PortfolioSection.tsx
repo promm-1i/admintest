@@ -43,12 +43,14 @@ export function PortfolioSection() {
         </div>
 
         <FadeIn delay={40}>
-          <dl className="mt-8 grid grid-cols-2 gap-6 rounded-2xl border border-border bg-card px-6 py-6 sm:grid-cols-4 sm:gap-4">
+          <dl className="mt-8 grid grid-cols-2 gap-8 divide-y divide-border px-2 py-8 sm:grid-cols-4 sm:gap-4 sm:divide-y-0 sm:divide-x">
             {PERFORMANCE_STATS.map((s) => (
-              <div key={s.label} className="text-center">
+              <div key={s.label} className="pt-6 text-center first:pt-0 sm:pt-0">
                 <dt className="sr-only">{s.label}</dt>
-                <dd className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">{s.value}</dd>
-                <p className="mt-1 text-xs leading-snug text-muted-foreground">{s.label}</p>
+                <dd className="text-4xl font-black tracking-tighter text-foreground sm:text-5xl">
+                  {s.value}
+                </dd>
+                <p className="mt-2 text-sm font-medium leading-snug text-muted-foreground">{s.label}</p>
               </div>
             ))}
           </dl>

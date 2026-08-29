@@ -1,3 +1,4 @@
+import { Monitor, SlidersHorizontal, Rocket } from "lucide-react";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { FadeIn } from "@/components/ui/FadeIn";
 
@@ -5,16 +6,19 @@ const FEATURE_GROUPS = [
   {
     num: "01",
     title: "기본 웹 기능",
+    icon: Monitor,
     items: ["PC / 모바일 반응형", "기본 SEO", "문의 / 상담 폼", "전화 · 카카오톡 연결", "지도 연동", "게시판 / 공지사항"],
   },
   {
     num: "02",
     title: "운영 기능",
+    icon: SlidersHorizontal,
     items: ["관리자 페이지", "데이터베이스", "검색 / 필터", "고객 문의 관리", "파일 관리"],
   },
   {
     num: "03",
     title: "확장 기능",
+    icon: Rocket,
     items: ["결제 연동", "회원 기능", "외부 API 연동", "AI 기능"],
   },
 ];
@@ -30,10 +34,15 @@ export function FeaturesSection() {
         />
 
         <div className="mt-14 grid gap-10 sm:grid-cols-3">
-          {FEATURE_GROUPS.map((group, i) => (
+          {FEATURE_GROUPS.map((group, i) => {
+            const Icon = group.icon;
+            return (
             <FadeIn key={group.title} delay={i * 80}>
               <div className={i > 0 ? "sm:border-l sm:border-border sm:pl-10" : ""}>
-                <span className="font-mono text-xs font-bold text-primary">{group.num}</span>
+                <div className="flex items-center justify-between">
+                  <span className="font-mono text-xs font-bold text-primary">{group.num}</span>
+                  <Icon className="h-6 w-6 text-muted-foreground/40" strokeWidth={1.5} />
+                </div>
                 <h3 className="mt-2 text-base font-semibold text-foreground">{group.title}</h3>
                 <ul className="mt-4 space-y-2.5">
                   {group.items.map((item) => (
@@ -44,7 +53,8 @@ export function FeaturesSection() {
                 </ul>
               </div>
             </FadeIn>
-          ))}
+            );
+          })}
         </div>
 
         <p className="mt-10 text-xs leading-relaxed text-muted-foreground/80 break-keep">

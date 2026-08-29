@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, Lock } from "lucide-react";
 import { PHONE_TEL_HREF, NAVER_BLOG_URL } from "@/lib/contact";
 
 const FOOTER_GROUPS = [
@@ -73,7 +73,7 @@ export function SiteFooter() {
 
         {FOOTER_GROUPS.map((group) => (
           <div key={group.title} className="text-sm text-muted-foreground">
-            <p className="mb-3 font-medium text-foreground">{group.title}</p>
+            <p className="mb-3 font-bold text-foreground">{group.title}</p>
             <ul className="space-y-2">
               {group.links.map((link) => (
                 <li key={link.label}>
@@ -103,7 +103,11 @@ export function SiteFooter() {
       <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} MintCL (민트클). All rights reserved.
         {" · "}
-        <Link to="/auth" className="hover:text-foreground transition-colors">
+        <Link
+          to="/auth"
+          className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1 hover:text-foreground hover:border-foreground/30 transition-colors"
+        >
+          <Lock className="size-3" />
           관리자 로그인
         </Link>
       </div>

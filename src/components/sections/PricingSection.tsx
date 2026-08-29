@@ -21,7 +21,9 @@ export function PricingSection() {
                   <h3 className="text-base font-semibold text-foreground">{type.name}</h3>
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground break-keep">{type.desc}</p>
                 </div>
-                <span className="shrink-0 text-base font-bold text-primary sm:text-lg">{type.price}</span>
+                <span className="shrink-0 text-xl font-black tracking-tight text-foreground sm:text-2xl">
+                  {type.price}
+                </span>
               </div>
             </FadeIn>
           ))}

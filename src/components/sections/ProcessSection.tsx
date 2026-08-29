@@ -22,13 +22,18 @@ export function ProcessSection() {
 
             return (
               <FadeIn key={step.num} delay={i * 80} className="relative">
-                <div className="flex h-full flex-col items-center rounded-2xl border border-border bg-card p-6 text-center shadow-xs">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-primary">
+                <div className="relative flex h-full flex-col items-center overflow-hidden rounded-2xl border border-border bg-card p-6 text-center shadow-xs">
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -top-3 right-2 select-none font-black text-6xl text-secondary/80"
+                  >
+                    {step.num}
+                  </span>
+                  <div className="relative flex h-11 w-11 items-center justify-center rounded-xl bg-secondary text-primary">
                     <IconComp className="h-5 w-5" />
                   </div>
-                  <span className="mt-4 font-mono text-xs font-bold text-primary">{step.num}</span>
-                  <h3 className="mt-1 text-base font-bold tracking-tight text-foreground">{step.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">{step.desc}</p>
+                  <h3 className="relative mt-4 text-base font-bold tracking-tight text-foreground">{step.title}</h3>
+                  <p className="relative mt-2 text-xs leading-relaxed text-muted-foreground break-keep">{step.desc}</p>
                 </div>
 
                 {!isLast && (

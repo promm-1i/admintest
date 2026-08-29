@@ -3,6 +3,7 @@ import { Route, Routes, Outlet } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { MobileStickyCta } from "@/components/site/MobileStickyCta";
+import { FloatingQuickActions } from "@/components/site/FloatingQuickActions";
 import { Toaster } from "@/components/ui/sonner";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -73,6 +74,7 @@ function SiteLayout() {
       </main>
       <SiteFooter />
       <MobileStickyCta />
+      <FloatingQuickActions />
     </div>
   );
 }
