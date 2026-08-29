@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { toast } from "sonner";
-import { Globe, ShieldCheck, Info, Phone } from "lucide-react";
+import { Globe, ShieldCheck, Info } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
@@ -226,53 +226,6 @@ export function AiSettingsView() {
       </div>
 
       <Button size="sm" className="mt-5 font-bold" onClick={() => toast.success("AI 설정이 저장되었습니다. (데모)")}>
-        저장하기
-      </Button>
-    </div>
-  );
-}
-
-export function ZerocallView() {
-  const [form, setForm] = useState({
-    enabled: false,
-    mainNumber: "070-8098-8054",
-    staffConnect: true,
-    missedCallHandling: true,
-    recordCalls: true,
-  });
-
-  return (
-    <div>
-      <PanelHeader title="제로콜 설정" description="전화 연결 서비스 설정 영역입니다." />
-      <DemoNote>
-        <Phone className="h-3 w-3" />
-        실제 API 연결 없음 — 설정 구조만 데모로 제공됩니다
-      </DemoNote>
-
-      <div className="space-y-3">
-        <div className="flex items-center justify-between rounded-lg border border-border bg-secondary/30 px-3 py-2.5">
-          <span className="text-xs font-medium text-foreground">서비스 사용</span>
-          <Switch checked={form.enabled} onCheckedChange={(v) => setForm((f) => ({ ...f, enabled: v }))} />
-        </div>
-        <div>
-          <label className="text-xs font-medium text-muted-foreground">대표번호</label>
-          <Input className="mt-1.5" value={form.mainNumber} onChange={(e) => setForm((f) => ({ ...f, mainNumber: e.target.value }))} />
-        </div>
-        <div className="flex items-center justify-between rounded-lg border border-border bg-secondary/30 px-3 py-2.5">
-          <span className="text-xs font-medium text-foreground">담당자 자동 연결</span>
-          <Switch checked={form.staffConnect} onCheckedChange={(v) => setForm((f) => ({ ...f, staffConnect: v }))} />
-        </div>
-        <div className="flex items-center justify-between rounded-lg border border-border bg-secondary/30 px-3 py-2.5">
-          <span className="text-xs font-medium text-foreground">부재중 처리</span>
-          <Switch checked={form.missedCallHandling} onCheckedChange={(v) => setForm((f) => ({ ...f, missedCallHandling: v }))} />
-        </div>
-        <div className="flex items-center justify-between rounded-lg border border-border bg-secondary/30 px-3 py-2.5">
-          <span className="text-xs font-medium text-foreground">통화 기록 저장</span>
-          <Switch checked={form.recordCalls} onCheckedChange={(v) => setForm((f) => ({ ...f, recordCalls: v }))} />
-        </div>
-      </div>
-
-      <Button size="sm" className="mt-5 font-bold" onClick={() => toast.success("제로콜 설정이 저장되었습니다. (데모)")}>
         저장하기
       </Button>
     </div>

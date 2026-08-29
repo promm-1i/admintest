@@ -13,7 +13,9 @@ const Services = lazy(() => import("@/pages/Services"));
 const WebSolutions = lazy(() => import("@/pages/WebSolutions"));
 const ProductQuoteSolution = lazy(() => import("@/pages/solutions/ProductQuoteSolution"));
 const RealEstateSolution = lazy(() => import("@/pages/solutions/RealEstateSolution"));
+const RealEstateDemoLayout = lazy(() => import("@/pages/solutions/RealEstateDemoLayout"));
 const RealEstateAdminDemoPage = lazy(() => import("@/pages/solutions/RealEstateAdminDemoPage"));
+const RealEstateCustomerSitePage = lazy(() => import("@/pages/solutions/RealEstateCustomerSitePage"));
 const ReservationSolution = lazy(() => import("@/pages/solutions/ReservationSolution"));
 const PlatformSolution = lazy(() => import("@/pages/solutions/PlatformSolution"));
 const Samples = lazy(() => import("@/pages/Samples"));
@@ -53,7 +55,10 @@ export default function App() {
       <ScrollToTop />
       <Suspense fallback={<RouteLoadingFallback />}>
         <Routes>
-          <Route path="/web-solutions/real-estate/demo" element={<RealEstateAdminDemoPage />} />
+          <Route path="/web-solutions/real-estate/demo" element={<RealEstateDemoLayout />}>
+            <Route index element={<RealEstateAdminDemoPage />} />
+            <Route path="site" element={<RealEstateCustomerSitePage />} />
+          </Route>
           <Route element={<SiteLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

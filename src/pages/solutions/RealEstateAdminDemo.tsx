@@ -2,7 +2,6 @@ import { useState, type ReactNode } from "react";
 import { Menu, ChevronDown, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MENU, FLAT_MENU } from "./real-estate-admin/menu";
-import { RealEstateAdminProvider } from "./real-estate-admin/store";
 import { DashboardView } from "./real-estate-admin/views/DashboardView";
 import {
   PropertyListView,
@@ -39,11 +38,10 @@ import {
   SiteScreenSettingsView,
   SiteAdvancedSettingsView,
   AiSettingsView,
-  ZerocallView,
 } from "./real-estate-admin/views/SettingsViews";
 import { AiSearchView, ChatbotView } from "./real-estate-admin/views/AiViews";
 
-function AdminShell() {
+export function RealEstateAdminDemo() {
   const [activeKey, setActiveKey] = useState("dashboard");
   const [openGroups, setOpenGroups] = useState<Set<string>>(new Set(["property"]));
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
@@ -223,9 +221,6 @@ function AdminShell() {
     case "ai-settings":
       content = <AiSettingsView />;
       break;
-    case "zerocall":
-      content = <ZerocallView />;
-      break;
     case "ai-search":
       content = <AiSearchView />;
       break;
@@ -284,13 +279,5 @@ function AdminShell() {
 
       <main className="min-w-0 flex-1 p-5 sm:p-6">{content}</main>
     </div>
-  );
-}
-
-export function RealEstateAdminDemo() {
-  return (
-    <RealEstateAdminProvider>
-      <AdminShell />
-    </RealEstateAdminProvider>
   );
 }

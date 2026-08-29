@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Home } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { RealEstateAdminDemo } from "@/pages/solutions/RealEstateAdminDemo";
 
@@ -20,13 +21,21 @@ export default function RealEstateAdminDemoPage() {
             부동산 매물관리 관리자 데모
           </h1>
         </div>
-        <Link
-          to="/web-solutions/real-estate"
-          className="flex shrink-0 items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          솔루션 페이지로 돌아가기
-        </Link>
+        <div className="flex shrink-0 items-center gap-4">
+          <Button asChild size="sm" variant="outline" className="gap-1.5">
+            <Link to="/web-solutions/real-estate/demo/site">
+              <Home className="h-3.5 w-3.5" />
+              홈페이지 가기
+            </Link>
+          </Button>
+          <Link
+            to="/web-solutions/real-estate"
+            className="hidden items-center gap-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground sm:flex"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            솔루션 페이지로 돌아가기
+          </Link>
+        </div>
       </header>
 
       <RealEstateAdminDemo />
