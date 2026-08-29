@@ -1,26 +1,78 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CoverImage } from "@/components/ui/CoverImage";
 import { FadeIn } from "@/components/ui/FadeIn";
-import heroBanner from "@/assets/images/hero_banner.jpg";
-
-const HERO_HIGHLIGHTS = ["40만 원부터 합리적인 시작", "PC·모바일 100% 반응형 최적화", "사업 특성에 맞는 맞춤 기능 개발 가능"];
-
-const HERO_ALT =
-  "MintCL이 제작한 반응형 웹사이트가 모니터, 노트북, 모바일 화면에 표시된 화이트톤 오피스";
+import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { HERO_SLIDES } from "@/lib/heroSlides";
+import { cn } from "@/lib/utils";
 
 export function HeroSection() {
+  const [active, setActive] = useState(0);
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const videoRefs = useRef<Array<HTMLVideoElement | null>>([]);
+  const slide = HERO_SLIDES[active];
+
+  // 활성 슬라이드가 바뀔 때마다 해당 영상만 처음부터 재생하고 나머지는 멈춘다.
+  useEffect(() => {
+    if (reducedMotion) return;
+    HERO_SLIDES.forEach((_, i) => {
+      const v = videoRefs.current[i];
+      if (!v) return;
+      if (i === active) {
+        v.currentTime = 0;
+        v.play().catch(() => {});
+      } else {
+        v.pause();
+      }
+    });
+  }, [active, reducedMotion, isDesktop]);
+
+  const handleEnded = () => setActive((i) => (i + 1) % HERO_SLIDES.length);
+
+  // 첫 영상 재생이 실제로 시작되면 나머지 두 개를 백그라운드에서 미리 받아둔다.
+  const handleFirstPlaying = () => {
+    HERO_SLIDES.forEach((_, i) => {
+      if (i === 0) return;
+      const v = videoRefs.current[i];
+      if (v && v.preload !== "auto") {
+        v.preload = "auto";
+        v.load();
+      }
+    });
+  };
+
+  const renderVideo = (s: (typeof HERO_SLIDES)[number], i: number, mobileObjectPosition?: string) => (
+    <video
+      key={s.id}
+      ref={(el) => {
+        videoRefs.current[i] = el;
+      }}
+      src={s.video}
+      poster={s.poster}
+      muted
+      playsInline
+      preload={i === 0 ? "auto" : "metadata"}
+      onEnded={handleEnded}
+      onPlaying={i === 0 ? handleFirstPlaying : undefined}
+      style={mobileObjectPosition ? { objectPosition: mobileObjectPosition } : undefined}
+      className={cn(
+        "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out",
+        i === active ? "opacity-80" : "opacity-0",
+      )}
+    />
+  );
+
   return (
     <section className="relative overflow-hidden bg-background lg:mx-auto lg:aspect-video lg:max-w-[1920px]">
-      {/* Desktop: full-bleed 16:9 banner, capped at 1920x1080 so it doesn't overgrow on wider screens */}
-      <img
-        src={heroBanner}
-        alt={HERO_ALT}
-        loading="eager"
-        fetchPriority="high"
-        className="absolute inset-0 hidden h-full w-full object-cover opacity-80 lg:block"
-      />
+      {/* Desktop: full-bleed 16:9 video stage, capped at 1920x1080 so it doesn't overgrow on wider screens */}
+      {isDesktop && (
+        <div className="absolute inset-0 hidden lg:block">
+          {HERO_SLIDES.map((s, i) => renderVideo(s, i))}
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-background via-background/55 to-transparent" />
+        </div>
+      )}
 
       <div className="relative mx-auto flex max-w-7xl flex-col lg:h-full lg:justify-center">
         <div className="max-w-md px-4 py-14 sm:px-6 lg:px-12 lg:py-0">
@@ -28,43 +80,76 @@ export function HeroSection() {
             <span className="inline-block rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
               맞춤형 웹사이트 제작 전문
             </span>
-            <h1 className="mt-5 text-balance text-4xl font-extrabold leading-[1.2] tracking-tight text-foreground sm:text-5xl">
-              작은 회사도
-              <br />
-              제대로 보이게.
-            </h1>
-            <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-muted-foreground">
-              소상공인·기업을 위한 맞춤형 홈페이지 제작. 기획부터 디자인, 개발, 배포까지 한 번에
-              진행합니다.
-            </p>
-            <ul className="mt-6 flex flex-col gap-2">
-              {HERO_HIGHLIGHTS.map((item) => (
-                <li key={item} className="flex items-center gap-2 text-sm font-medium text-foreground/80">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 flex flex-wrap gap-3">
+
+            <div key={slide.id} className="motion-safe:animate-hero-text-fade">
+              <h1 className="mt-5 text-balance text-4xl font-extrabold leading-[1.2] tracking-tight text-foreground sm:text-5xl">
+                {slide.title[0]}
+                <br />
+                {slide.title[1]}
+              </h1>
+              <p className="mt-6 max-w-md text-pretty text-base leading-relaxed text-muted-foreground">
+                {slide.subtitle}
+              </p>
+              <ul className="mt-6 flex flex-col gap-2">
+                {slide.highlights.map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-sm font-medium text-foreground/80">
+                    <CheckCircle2 className="h-4 w-4 shrink-0 text-primary" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div key={`${slide.id}-cta`} className="mt-8 flex flex-wrap gap-3 motion-safe:animate-hero-text-fade">
               <Button asChild size="lg">
-                <Link to="/contact">제작 상담하기</Link>
+                <Link to={slide.ctaPrimary.to}>{slide.ctaPrimary.label}</Link>
               </Button>
               <Button asChild size="lg" variant="outline">
-                <Link to="/samples">포트폴리오 보기</Link>
+                <Link to={slide.ctaSecondary.to}>{slide.ctaSecondary.label}</Link>
               </Button>
             </div>
           </FadeIn>
+
+          {/* 슬라이드 내비게이션: 01 / 02 / 03 + 얇은 진행률 표시 */}
+          <div className="mt-8 flex items-center gap-5 lg:mt-10">
+            {HERO_SLIDES.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-label={`${i + 1}번째 소개 보기: ${s.title.join(" ")}`}
+                aria-current={i === active}
+                className="group flex flex-col items-start gap-1.5"
+              >
+                <span
+                  className={cn(
+                    "font-mono text-xs font-bold tabular-nums transition-colors",
+                    i === active ? "text-foreground" : "text-muted-foreground/50 group-hover:text-muted-foreground",
+                  )}
+                >
+                  0{i + 1}
+                </span>
+                <span className="relative h-[2px] w-8 overflow-hidden rounded-full bg-border">
+                  {i === active && (
+                    <span
+                      className={cn(
+                        "absolute inset-y-0 left-0 bg-primary",
+                        reducedMotion ? "w-full" : "w-0 motion-safe:animate-hero-progress",
+                      )}
+                    />
+                  )}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Mobile: text above a shorter device-photo band, biased right to feature the devices */}
-        <div className="relative h-64 shrink-0 sm:h-96 lg:hidden">
-          <CoverImage
-            src={heroBanner}
-            alt={HERO_ALT}
-            priority
-            className="object-[80%_center] opacity-80"
-          />
-        </div>
+        {/* Mobile: text above a shorter video band, object-position tuned per clip */}
+        {!isDesktop && (
+          <div className="relative h-64 shrink-0 overflow-hidden sm:h-96 lg:hidden">
+            {HERO_SLIDES.map((s, i) => renderVideo(s, i, s.mobileObjectPosition))}
+          </div>
+        )}
       </div>
     </section>
   );
