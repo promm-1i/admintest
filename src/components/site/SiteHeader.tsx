@@ -86,7 +86,7 @@ export function SiteHeader() {
         </Link>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 xl:flex"
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-14 xl:flex"
           onMouseLeave={scheduleCloseMega}
         >
           {HEADER_NAV.map((entry) =>

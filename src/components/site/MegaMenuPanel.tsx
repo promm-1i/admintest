@@ -23,9 +23,8 @@ export function MegaMenuPanel({ entries, onNavigate, onMouseEnter, onMouseLeave 
     >
       <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-x-14 gap-y-8 px-4 py-10 sm:px-6 lg:px-10">
         {entries.map((entry) => (
-          <div key={entry.key}>
-            <p className="text-xs font-bold uppercase tracking-wider text-primary">{entry.label}</p>
-            <ul className="mt-4 space-y-2.5">
+          <div key={entry.key} role="group" aria-label={entry.label}>
+            <ul className="space-y-2.5">
               {entry.items.map((item) => (
                 <li key={item.label}>
                   <Link
