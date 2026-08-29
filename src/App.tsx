@@ -20,6 +20,22 @@ const RentcarSolution = lazy(() => import("@/pages/solutions/RentcarSolution"));
 const RentcarDemoLayout = lazy(() => import("@/pages/solutions/RentcarDemoLayout"));
 const RentcarAdminDemoPage = lazy(() => import("@/pages/solutions/RentcarAdminDemoPage"));
 const RentcarCustomerSitePage = lazy(() => import("@/pages/solutions/RentcarCustomerSitePage"));
+const HospitalSolution = lazy(() => import("@/pages/solutions/HospitalSolution"));
+const HospitalDemoLayout = lazy(() => import("@/pages/solutions/HospitalDemoLayout"));
+const HospitalAdminDemoPage = lazy(() => import("@/pages/solutions/HospitalAdminDemoPage"));
+const HospitalCustomerSitePage = lazy(() => import("@/pages/solutions/HospitalCustomerSitePage"));
+const AcademySolution = lazy(() => import("@/pages/solutions/AcademySolution"));
+const AcademyDemoLayout = lazy(() => import("@/pages/solutions/AcademyDemoLayout"));
+const AcademyAdminDemoPage = lazy(() => import("@/pages/solutions/AcademyAdminDemoPage"));
+const AcademyCustomerSitePage = lazy(() => import("@/pages/solutions/AcademyCustomerSitePage"));
+const InteriorSolution = lazy(() => import("@/pages/solutions/InteriorSolution"));
+const InteriorDemoLayout = lazy(() => import("@/pages/solutions/InteriorDemoLayout"));
+const InteriorAdminDemoPage = lazy(() => import("@/pages/solutions/InteriorAdminDemoPage"));
+const InteriorCustomerSitePage = lazy(() => import("@/pages/solutions/InteriorCustomerSitePage"));
+const MovingSolution = lazy(() => import("@/pages/solutions/MovingSolution"));
+const MovingDemoLayout = lazy(() => import("@/pages/solutions/MovingDemoLayout"));
+const MovingAdminDemoPage = lazy(() => import("@/pages/solutions/MovingAdminDemoPage"));
+const MovingCustomerSitePage = lazy(() => import("@/pages/solutions/MovingCustomerSitePage"));
 const ReservationSolution = lazy(() => import("@/pages/solutions/ReservationSolution"));
 const PlatformSolution = lazy(() => import("@/pages/solutions/PlatformSolution"));
 const Samples = lazy(() => import("@/pages/Samples"));
@@ -69,6 +85,22 @@ export default function App() {
             <Route index element={<RentcarAdminDemoPage />} />
             <Route path="site" element={<RentcarCustomerSitePage />} />
           </Route>
+          <Route path="/web-solutions/hospital/demo" element={<HospitalDemoLayout />}>
+            <Route index element={<HospitalAdminDemoPage />} />
+            <Route path="site" element={<HospitalCustomerSitePage />} />
+          </Route>
+          <Route path="/web-solutions/academy/demo" element={<AcademyDemoLayout />}>
+            <Route index element={<AcademyAdminDemoPage />} />
+            <Route path="site" element={<AcademyCustomerSitePage />} />
+          </Route>
+          <Route path="/web-solutions/interior/demo" element={<InteriorDemoLayout />}>
+            <Route index element={<InteriorAdminDemoPage />} />
+            <Route path="site" element={<InteriorCustomerSitePage />} />
+          </Route>
+          <Route path="/web-solutions/moving/demo" element={<MovingDemoLayout />}>
+            <Route index element={<MovingAdminDemoPage />} />
+            <Route path="site" element={<MovingCustomerSitePage />} />
+          </Route>
           <Route element={<SiteLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -77,6 +109,10 @@ export default function App() {
             <Route path="/web-solutions/product-quotes" element={<ProductQuoteSolution />} />
             <Route path="/web-solutions/real-estate" element={<RealEstateSolution />} />
             <Route path="/web-solutions/rentcar" element={<RentcarSolution />} />
+            <Route path="/web-solutions/hospital" element={<HospitalSolution />} />
+            <Route path="/web-solutions/academy" element={<AcademySolution />} />
+            <Route path="/web-solutions/interior" element={<InteriorSolution />} />
+            <Route path="/web-solutions/moving" element={<MovingSolution />} />
             <Route path="/web-solutions/reservations" element={<ReservationSolution />} />
             <Route path="/web-solutions/platform" element={<PlatformSolution />} />
             <Route path="/samples" element={<Samples />} />
