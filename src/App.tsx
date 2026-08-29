@@ -11,6 +11,7 @@ import Home from "@/pages/Home";
 
 const About = lazy(() => import("@/pages/About"));
 const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
+const AdminSystemService = lazy(() => import("@/pages/services/AdminSystemService"));
 const WebSolutions = lazy(() => import("@/pages/WebSolutions"));
 const DemoHub = lazy(() => import("@/pages/solutions/DemoHub"));
 const Templates = lazy(() => import("@/pages/Templates"));
@@ -112,6 +113,7 @@ export default function App() {
           <Route element={<SiteLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/services/admin-system" element={<AdminSystemService />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/web-solutions" element={<WebSolutions />} />
             <Route path="/web-solutions/demos" element={<DemoHub />} />
