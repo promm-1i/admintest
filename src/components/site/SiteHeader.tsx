@@ -75,7 +75,7 @@ export function SiteHeader() {
         scrolled ? "border-border shadow-[0_1px_0_rgba(0,0,0,0.02)]" : "border-transparent",
       )}
     >
-      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <div className="relative flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
         <Link to="/" className="flex items-center text-lg font-semibold tracking-tight">
           Mint
           <span
