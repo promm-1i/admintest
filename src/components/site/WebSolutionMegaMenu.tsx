@@ -2,9 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Building2,
-  Package,
-  CalendarCheck,
-  LayoutGrid,
   CircleDollarSign,
   MessageSquare,
   ChevronDown,
@@ -23,24 +20,6 @@ export const WEB_SOLUTION_CATEGORIES: { icon: typeof Building2; title: string; d
     title: "부동산 매물관리",
     desc: "매물 등록 · 검색 · 지도 · 관리자",
     href: "/web-solutions/real-estate",
-  },
-  {
-    icon: Package,
-    title: "제품 / 견적관리",
-    desc: "제품관리 · 카테고리 · 검색 · 자료실 · 견적문의",
-    href: "/web-solutions/product-quotes",
-  },
-  {
-    icon: CalendarCheck,
-    title: "예약 / 고객관리",
-    desc: "예약접수 · 일정관리 · 고객관리 · 관리자",
-    href: "/web-solutions/reservations",
-  },
-  {
-    icon: LayoutGrid,
-    title: "플랫폼형 웹서비스",
-    desc: "회원 · 권한 · 데이터베이스 · 업무관리 · API 연동",
-    href: "/web-solutions/platform",
   },
   {
     icon: CircleDollarSign,

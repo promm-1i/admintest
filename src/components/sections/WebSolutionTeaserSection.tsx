@@ -5,7 +5,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { WEB_SOLUTION_CATEGORIES } from "@/components/site/WebSolutionMegaMenu";
 
-const SOLUTION_CATEGORIES = WEB_SOLUTION_CATEGORIES.slice(0, 4);
+const SOLUTION_CATEGORIES = WEB_SOLUTION_CATEGORIES.filter((item) => item.href?.startsWith("/web-solutions/"));
 
 export function WebSolutionTeaserSection() {
   return (
@@ -29,7 +29,7 @@ export function WebSolutionTeaserSection() {
           }
         />
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
           {SOLUTION_CATEGORIES.map((item, i) => {
             const Icon = item.icon;
             return (
