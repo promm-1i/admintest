@@ -28,19 +28,19 @@ const FEATURES = [
 
 export default function RealEstateSolution() {
   usePageTitle(
-    "부동산 매물관리 웹 솔루션 — MintCL",
-    "매물 등록, 검색, 지도, 관리자 기능을 갖춘 부동산 매물관리 웹 솔루션을 안내합니다.",
+    "부동산 맞춤형 홈페이지 — MintCL",
+    "매물 등록, 검색, 지도, 관리자 기능을 갖춘 부동산 업종 맞춤형 홈페이지를 안내합니다.",
   );
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14">
       <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
-        WEB SOLUTION
+        CUSTOM BY INDUSTRY
       </p>
-      <h1 className="mt-3 text-3xl font-semibold">부동산 매물관리 웹 솔루션</h1>
+      <h1 className="mt-3 text-3xl font-semibold">부동산 맞춤형 홈페이지</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        매물을 등록하고 지도와 조건별 검색으로 고객이 원하는 매물을 쉽게 찾을 수 있는 웹
-        솔루션입니다. 부동산 중개업소, 분양·임대 사무실에 적합합니다.
+        매물을 등록하고 지도와 조건별 검색으로 고객이 원하는 매물을 쉽게 찾을 수 있는 부동산
+        업종 맞춤형 홈페이지입니다. 부동산 중개업소, 분양·임대 사무실에 적합합니다.
       </p>
 
       <h2 className="mt-12 text-xl font-semibold">주요 기능</h2>
@@ -94,7 +94,7 @@ export default function RealEstateSolution() {
 
       <div className="mt-12 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
         <p className="text-sm text-muted-foreground">
-          구축비와 월 이용료 등 자세한 요금은 웹 솔루션 요금 페이지에서 확인하실 수 있습니다.
+          구축비와 월 이용료 등 자세한 요금은 업종별 맞춤 홈페이지 요금 페이지에서 확인하실 수 있습니다.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <Button asChild variant="outline">

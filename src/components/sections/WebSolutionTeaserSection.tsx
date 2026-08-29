@@ -12,19 +12,19 @@ export function WebSolutionTeaserSection() {
     <section className="px-4 py-20 sm:px-6 lg:py-28">
       <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-secondary/30 p-8 sm:p-12">
         <SectionHeader
-          label="WEB SOLUTION"
+          label="CUSTOM BY INDUSTRY"
           title={
             <>
-              홈페이지를 넘어, 실제 업무가
+              업종에 맞게 바로 쓰는
               <br />
-              돌아가는 웹서비스까지
+              맞춤형 홈페이지
             </>
           }
           description={
             <>
-              관리자 시스템, 데이터베이스, 검색, 예약, 회원관리 등 실제 업무에 활용할 수 있는
+              관리자 시스템, 데이터베이스, 검색, 예약 등 업종마다 필요한 기능까지 갖춘
               <br />
-              웹서비스까지 구축합니다.
+              맞춤형 홈페이지를 구축합니다.
             </>
           }
         />

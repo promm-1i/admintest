@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
-import { Check, Send } from "lucide-react";
+import { Check, Minus, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
+import { WEB_SOLUTION_CATEGORIES } from "@/components/site/WebSolutionMegaMenu";
+
+const INDUSTRIES = WEB_SOLUTION_CATEGORIES.filter(
+  (item) => item.title !== "기능 및 요금" && item.title !== "구축 문의",
+);
 
 type Tier = {
   name: string;
   setupFee: string;
   monthlyFee: string;
-  features: string[];
+  highlight: string;
   recommended?: boolean;
 };
 
@@ -17,33 +22,106 @@ const TIERS: Tier[] = [
     name: "베이직",
     setupFee: "49만 원",
     monthlyFee: "9.9만 원",
-    features: ["관리자 시스템 · 데이터베이스 · 검색 기능", "관리자 계정 1개"],
+    highlight: "소규모 매장 · 단독 운영에 적합",
   },
   {
     name: "프로",
     setupFee: "99만 원",
     monthlyFee: "14.9만 원",
-    features: ["베이직 기능 전체 포함", "관리자 계정 여러 개 발급", "직원별 접근 권한 개별 설정"],
+    highlight: "직원이 여러 명인 사업장에 적합",
     recommended: true,
   },
 ];
 
+type FeatureValue = boolean | string;
+type FeatureRow = { label: string; basic: FeatureValue; pro: FeatureValue };
+
+const FEATURE_ROWS: FeatureRow[] = [
+  { label: "관리자 페이지 (콘텐츠 · 데이터 관리)", basic: true, pro: true },
+  { label: "데이터베이스 연동", basic: true, pro: true },
+  { label: "검색 · 필터 기능", basic: true, pro: true },
+  { label: "문의 · 예약 접수 관리", basic: true, pro: true },
+  { label: "관리자 계정", basic: "1개", pro: "여러 개" },
+  { label: "직원별 접근 권한 설정", basic: false, pro: true },
+  { label: "작업 이력(활동 로그) 관리", basic: false, pro: true },
+  { label: "통계 대시보드", basic: "기본", pro: "상세" },
+  { label: "우선 기술지원", basic: false, pro: true },
+  { label: "유지보수 옵션 (월 3회, 선택)", basic: true, pro: true },
+];
+
+function FeatureCell({ value }: { value: FeatureValue }) {
+  if (typeof value === "string") {
+    return <span className="text-sm font-medium text-foreground">{value}</span>;
+  }
+  return value ? (
+    <Check className="mx-auto size-4 text-primary" />
+  ) : (
+    <Minus className="mx-auto size-4 text-muted-foreground/40" />
+  );
+}
+
 export default function WebSolutions() {
   usePageTitle(
-    "웹 솔루션 요금 안내 — MintCL",
-    "관리자 시스템, 데이터베이스, 검색, 예약 등 웹 솔루션 구축 범위와 이용 요금을 안내합니다.",
+    "업종별 맞춤 홈페이지 제작 — MintCL",
+    "부동산, 렌트카, 병원 등 업종에 맞는 관리자 시스템과 기능까지 갖춘 맞춤형 홈페이지 제작 범위와 요금을 안내합니다.",
   );
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14">
-      <h1 className="text-3xl font-semibold">웹 솔루션 요금 안내</h1>
-      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
-        홈페이지를 넘어 실제 업무에 활용할 수 있는 웹 솔루션(관리자 시스템, 데이터베이스, 검색, 예약,
-        회원관리 등)의 구축 방식과 이용 요금을 안내합니다. 정확한 기능 구성과 견적은 상담 후 맞춤
-        확정됩니다.
+      <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
+        CUSTOM BY INDUSTRY
+      </p>
+      <h1 className="mt-3 text-3xl font-semibold">업종별 맞춤 홈페이지 제작</h1>
+      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
+        업종에 맞게 바로 쓰는 맞춤형 홈페이지를 만듭니다. 관리자 시스템, 데이터베이스, 검색, 예약 등
+        업종마다 필요한 기능까지 갖춰서 구축하며, 정확한 기능 구성과 견적은 상담 후 맞춤 확정됩니다.
       </p>
 
-      <h2 className="mt-12 text-xl font-semibold">요금제</h2>
+      <h2 className="mt-12 text-xl font-semibold">업종</h2>
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {INDUSTRIES.map((item) => {
+          const Icon = item.icon;
+          const isReal = Boolean(item.href);
+          const content = (
+            <>
+              <div
+                className={cn(
+                  "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
+                  isReal ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground",
+                )}
+              >
+                <Icon className="h-5 w-5" />
+              </div>
+              <p className="mt-3 flex items-center gap-1.5 text-sm font-semibold text-foreground">
+                {item.title}
+                {!isReal && (
+                  <span className="rounded bg-secondary px-1.5 py-0.5 text-[10px] font-normal text-muted-foreground">
+                    준비 중
+                  </span>
+                )}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">
+                {item.desc}
+              </p>
+            </>
+          );
+          return isReal ? (
+            <Link
+              key={item.title}
+              to={item.href!}
+              className="flex flex-col items-start rounded-xl border border-primary/20 bg-primary/5 p-5 transition-colors hover:border-primary/40 hover:bg-primary/10"
+            >
+              {content}
+            </Link>
+          ) : (
+            <div key={item.title} className="flex flex-col items-start rounded-xl border border-border p-5">
+              {content}
+            </div>
+          );
+        })}
+      </div>
+
+      <h2 className="mt-14 text-xl font-semibold">요금제</h2>
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         {TIERS.map((tier) => (
           <div
@@ -70,15 +148,7 @@ export default function WebSolutions() {
                 + 월 이용료 <span className="font-semibold text-foreground">{tier.monthlyFee}</span>
               </p>
               <p className="mt-1 text-xs text-muted-foreground/80">부가세 별도</p>
-
-              <ul className="mt-6 space-y-2.5 text-sm text-muted-foreground">
-                {tier.features.map((f) => (
-                  <li key={f} className="flex items-start gap-2">
-                    <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-4 text-sm text-muted-foreground break-keep">{tier.highlight}</p>
             </div>
 
             <Button
@@ -92,6 +162,32 @@ export default function WebSolutions() {
             </Button>
           </div>
         ))}
+      </div>
+
+      <h3 className="mt-10 text-base font-semibold">기능 비교</h3>
+      <div className="mt-4 overflow-x-auto rounded-2xl border border-border">
+        <table className="w-full min-w-[520px] border-collapse text-left text-sm">
+          <thead>
+            <tr className="border-b border-border bg-secondary/40">
+              <th className="px-5 py-3 font-medium text-muted-foreground">기능</th>
+              <th className="px-5 py-3 text-center font-semibold text-foreground">베이직</th>
+              <th className="px-5 py-3 text-center font-semibold text-foreground">프로</th>
+            </tr>
+          </thead>
+          <tbody>
+            {FEATURE_ROWS.map((row) => (
+              <tr key={row.label} className="border-b border-border/60 last:border-b-0">
+                <td className="px-5 py-3 text-foreground">{row.label}</td>
+                <td className="px-5 py-3 text-center">
+                  <FeatureCell value={row.basic} />
+                </td>
+                <td className="px-5 py-3 text-center">
+                  <FeatureCell value={row.pro} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <div className="mt-10 grid gap-5 sm:grid-cols-2">

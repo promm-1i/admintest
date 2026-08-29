@@ -196,7 +196,7 @@ export default function Contact() {
                   {type.name}
                 </SelectItem>
               ))}
-              <SelectItem value="웹 솔루션">웹 솔루션 (관리자 · DB · 예약 등)</SelectItem>
+              <SelectItem value="업종별 맞춤 홈페이지">업종별 맞춤 홈페이지 (관리자 · DB · 예약 등)</SelectItem>
               <SelectItem value="기타">기타 (문의 내용에 설명)</SelectItem>
             </SelectContent>
           </Select>

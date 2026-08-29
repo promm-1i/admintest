@@ -2,6 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Building2,
+  Car,
+  HeartPulse,
+  GraduationCap,
+  UtensilsCrossed,
+  Coffee,
+  Briefcase,
+  Gem,
   CircleDollarSign,
   MessageSquare,
   ChevronDown,
@@ -17,14 +24,49 @@ const CLOSE_DELAY = 150;
 export const WEB_SOLUTION_CATEGORIES: { icon: typeof Building2; title: string; desc: string; href?: string }[] = [
   {
     icon: Building2,
-    title: "부동산 매물관리",
+    title: "부동산",
     desc: "매물 등록 · 검색 · 지도 · 관리자",
     href: "/web-solutions/real-estate",
   },
   {
+    icon: Car,
+    title: "렌트카",
+    desc: "차량 등록 · 예약 · 관리자",
+  },
+  {
+    icon: HeartPulse,
+    title: "병원",
+    desc: "진료과 안내 · 예약 · 관리자",
+  },
+  {
+    icon: GraduationCap,
+    title: "학원",
+    desc: "커리큘럼 · 수강신청 · 관리자",
+  },
+  {
+    icon: UtensilsCrossed,
+    title: "음식점",
+    desc: "메뉴 안내 · 예약 · 관리자",
+  },
+  {
+    icon: Coffee,
+    title: "카페",
+    desc: "메뉴 안내 · 매장정보 · 관리자",
+  },
+  {
+    icon: Briefcase,
+    title: "기업",
+    desc: "회사소개 · 사업영역 · 채용정보",
+  },
+  {
+    icon: Gem,
+    title: "브랜드",
+    desc: "브랜드 스토리 · 제품 소개",
+  },
+  {
     icon: CircleDollarSign,
     title: "기능 및 요금",
-    desc: "웹 솔루션 구축 범위와 이용방식 안내",
+    desc: "업종별 맞춤 홈페이지 구축 범위와 이용방식 안내",
     href: "/web-solutions",
   },
   {
@@ -86,7 +128,7 @@ export function WebSolutionMegaMenu() {
           if (e.key === "Escape") closeAndFocusTrigger();
         }}
       >
-        웹 솔루션
+        업종별 맞춤
         <ChevronDown className={cn("size-3.5 transition-transform duration-200", open && "rotate-180")} />
       </button>
 
@@ -94,7 +136,7 @@ export function WebSolutionMegaMenu() {
         <div
           id="web-solution-menu"
           role="region"
-          aria-label="웹 솔루션 메뉴"
+          aria-label="업종별 맞춤 메뉴"
           className="absolute inset-x-0 top-full z-50 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-1 motion-safe:duration-150"
           onMouseEnter={openNow}
           onMouseLeave={scheduleClose}
@@ -154,13 +196,13 @@ export function WebSolutionMegaMenu() {
 
               <div className="rounded-2xl bg-secondary/50 p-6">
                 <p className="text-base font-semibold leading-snug text-foreground break-keep">
-                  홈페이지를 넘어, 실제 업무가
+                  렌트카 · 부동산처럼
                   <br />
-                  돌아가는 웹서비스까지
+                  업종별 기능까지 갖춘 홈페이지
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
-                  기업 홈페이지부터 관리자 시스템, 데이터베이스, 검색, 예약, 회원관리 등 실제 업무에
-                  활용할 수 있는 웹서비스까지 구축합니다.
+                  업종마다 필요한 기능이 다릅니다. 관리자 시스템, 데이터베이스, 검색, 예약 등 업종에
+                  맞는 기능까지 갖춘 홈페이지를 구축합니다.
                 </p>
                 <Link
                   to="/contact"

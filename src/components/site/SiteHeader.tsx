@@ -111,7 +111,7 @@ export function SiteHeader() {
               <Accordion type="single" collapsible>
                 <AccordionItem value="web-solution" className="border-b-0">
                   <AccordionTrigger className="py-3 text-sm text-muted-foreground hover:no-underline data-[state=open]:text-foreground">
-                    웹 솔루션
+                    업종별 맞춤
                   </AccordionTrigger>
                   <AccordionContent>
                     <ul className="space-y-3 pb-2 pl-1">
