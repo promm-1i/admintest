@@ -32,7 +32,7 @@ export function SupportSection() {
         </ul>
 
         <Link
-          to="/services#maintenance"
+          to="/website/maintenance"
           className="mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
         >
           유지보수 정책 자세히 보기

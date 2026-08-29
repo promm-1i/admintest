@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { MessageCircle, Phone } from "lucide-react";
 import { toast } from "sonner";
@@ -31,7 +31,11 @@ export default function Contact() {
     "홈페이지 제작 문의, 상담 문의를 남겨 주시면 확인 후 연락드립니다.",
   );
 
-  const [form, setForm] = useState<ReservationInput>(EMPTY);
+  const [searchParams] = useSearchParams();
+  const [form, setForm] = useState<ReservationInput>(() => {
+    const service = searchParams.get("service");
+    return service ? { ...EMPTY, service } : EMPTY;
+  });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [showOptional, setShowOptional] = useState(false);
@@ -197,6 +201,7 @@ export default function Contact() {
                 </SelectItem>
               ))}
               <SelectItem value="업종별 맞춤 홈페이지">업종별 맞춤 홈페이지 (관리자 · DB · 예약 등)</SelectItem>
+              <SelectItem value="유지보수 / 수정 문의">유지보수 / 수정 문의</SelectItem>
               <SelectItem value="기타">기타 (문의 내용에 설명)</SelectItem>
             </SelectContent>
           </Select>

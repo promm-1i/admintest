@@ -89,7 +89,7 @@ export default function Templates() {
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <Button asChild variant="outline">
-            <Link to="/services">제작 비용 확인하기</Link>
+            <Link to="/website/price">제작 비용 확인하기</Link>
           </Button>
           <Button asChild className="gap-1.5 font-bold">
             <Link to="/contact">

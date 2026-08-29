@@ -61,7 +61,18 @@ export const INDUSTRY_ITEMS: NavItem[] = [
  * 카드·아이콘 박스·설명문 없이 항목명만 나열하는 정돈된 드롭다운을 위한 데이터다.
  */
 export type NavLink = { label: string; href: string };
-export type NavDropdownEntry = { type: "dropdown"; key: string; label: string; items: NavLink[] };
+export type NavExternalNote = { text: string; label: string; href: string };
+export type NavDropdownEntry = {
+  type: "dropdown";
+  key: string;
+  label: string;
+  /** 드롭다운 안에서 항목들 위에 붙는 그룹명 (예: "제작안내") */
+  groupLabel?: string;
+  items: NavLink[];
+  /** 항목 리스트 아래, 구분선을 두고 붙는 외부 링크 안내 블록 (예: 고객센터의 블로그 버튼) */
+  externalNote?: NavExternalNote;
+  columns?: 1 | 2;
+};
 export type NavLinkEntry = { type: "link"; key: string; label: string; href: string; external?: boolean };
 export type NavEntry = NavDropdownEntry | NavLinkEntry;
 
@@ -70,11 +81,13 @@ export const HEADER_NAV: NavEntry[] = [
     type: "dropdown",
     key: "build",
     label: "홈페이지 제작",
+    groupLabel: "제작안내",
+    columns: 2,
     items: [
-      { label: "제작 방법", href: "/services#types" },
-      { label: "제작 비용", href: "/services#pricing" },
-      { label: "기능 소개", href: "/services#features" },
-      { label: "유지보수 안내", href: "/services#maintenance" },
+      { label: "제작 방법", href: "/website/process" },
+      { label: "제작 비용", href: "/website/price" },
+      { label: "기능 소개", href: "/website/features" },
+      { label: "유지보수", href: "/website/maintenance" },
     ],
   },
   {
@@ -92,5 +105,19 @@ export const HEADER_NAV: NavEntry[] = [
   },
   { type: "link", key: "templates", label: "홈페이지 템플릿", href: "/templates" },
   { type: "link", key: "portfolio", label: "포트폴리오", href: "/samples" },
-  { type: "link", key: "support", label: "고객센터", href: NAVER_BLOG_URL, external: true },
+  {
+    type: "dropdown",
+    key: "support",
+    label: "고객센터",
+    items: [
+      { label: "문의하기", href: "/contact" },
+      { label: "공지사항", href: "/notices" },
+      { label: "자주 묻는 질문", href: "/faq" },
+    ],
+    externalNote: {
+      text: "MintCL 블로그에서 홈페이지 제작 관련 정보를 확인해보세요.",
+      label: "네이버 블로그 보기",
+      href: NAVER_BLOG_URL,
+    },
+  },
 ];

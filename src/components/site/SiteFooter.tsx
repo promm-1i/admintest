@@ -1,10 +1,50 @@
 import { Link } from "react-router-dom";
-import { PHONE_TEL_HREF } from "@/lib/contact";
+import { ExternalLink } from "lucide-react";
+import { PHONE_TEL_HREF, NAVER_BLOG_URL } from "@/lib/contact";
+
+const FOOTER_GROUPS = [
+  {
+    title: "홈페이지 제작",
+    links: [
+      { label: "제작 방법", to: "/website/process" },
+      { label: "제작 비용", to: "/website/price" },
+      { label: "기능 소개", to: "/website/features" },
+      { label: "유지보수", to: "/website/maintenance" },
+    ],
+  },
+  {
+    title: "업종별 맞춤 제작",
+    links: [
+      { label: "부동산", to: "/web-solutions/real-estate" },
+      { label: "렌트카", to: "/web-solutions/rentcar" },
+      { label: "병원 · 의원", to: "/web-solutions/hospital" },
+      { label: "학원", to: "/web-solutions/academy" },
+      { label: "인테리어 · 리모델링", to: "/web-solutions/interior" },
+      { label: "이사 · 청소업체", to: "/web-solutions/moving" },
+    ],
+  },
+  {
+    title: "홈페이지",
+    links: [
+      { label: "홈페이지 템플릿", to: "/templates" },
+      { label: "포트폴리오", to: "/samples" },
+      { label: "민트클 소개", to: "/about" },
+    ],
+  },
+  {
+    title: "고객센터",
+    links: [
+      { label: "문의하기", to: "/contact" },
+      { label: "공지사항", to: "/notices" },
+      { label: "자주 묻는 질문", to: "/faq" },
+    ],
+  },
+];
 
 export function SiteFooter() {
   return (
     <footer className="mt-20 border-t border-border bg-secondary/40">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-2">
           <p className="text-base font-semibold text-foreground">MintCL (민트클)</p>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
@@ -31,53 +71,42 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="text-sm text-muted-foreground">
-          <p className="mb-3 font-medium text-foreground">제작 서비스</p>
-          <ul className="space-y-2">
-            <li>
-              <Link to="/services" className="hover:text-foreground transition-colors">
-                제작 상품 및 가격 안내
-              </Link>
-            </li>
-            <li>
-              <Link to="/samples" className="hover:text-foreground transition-colors">
-                업종별 포트폴리오
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        <div className="text-sm text-muted-foreground">
-          <p className="mb-3 font-medium text-foreground">바로가기</p>
-          <ul className="space-y-2">
-            <li>
-              <Link to="/about" className="hover:text-foreground transition-colors">
-                민트클 소개
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" className="hover:text-foreground transition-colors">
-                제작 문의
-              </Link>
-            </li>
-            <li>
-              <Link to="/notices" className="hover:text-foreground transition-colors">
-                공지사항
-              </Link>
-            </li>
-            <li>
-              <Link to="/auth" className="hover:text-foreground transition-colors">
-                관리자 로그인
-              </Link>
-            </li>
-          </ul>
-        </div>
+        {FOOTER_GROUPS.map((group) => (
+          <div key={group.title} className="text-sm text-muted-foreground">
+            <p className="mb-3 font-medium text-foreground">{group.title}</p>
+            <ul className="space-y-2">
+              {group.links.map((link) => (
+                <li key={link.label}>
+                  <Link to={link.to} className="hover:text-foreground transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              {group.title === "고객센터" && (
+                <li>
+                  <a
+                    href={NAVER_BLOG_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
+                  >
+                    네이버 블로그
+                    <ExternalLink className="size-3" />
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+        ))}
       </div>
 
       <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} MintCL (민트클). All rights reserved.
+        {" · "}
+        <Link to="/auth" className="hover:text-foreground transition-colors">
+          관리자 로그인
+        </Link>
       </div>
     </footer>
   );
 }
-

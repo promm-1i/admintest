@@ -16,6 +16,11 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
           {entry.label}
         </AccordionTrigger>
         <AccordionContent>
+          {entry.groupLabel && (
+            <p className="pb-1.5 pl-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
+              {entry.groupLabel}
+            </p>
+          )}
           <ul className="space-y-3 pb-2 pl-1">
             {entry.items.map((item) => (
               <li key={item.label}>
@@ -30,6 +35,21 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
               </li>
             ))}
           </ul>
+          {entry.externalNote && (
+            <div className="mt-1 border-t border-border pb-2 pl-1 pt-3">
+              <p className="text-xs leading-relaxed text-muted-foreground break-keep">{entry.externalNote.text}</p>
+              <a
+                href={entry.externalNote.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onNavigate}
+                className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+              >
+                {entry.externalNote.label}
+                <ExternalLink className="size-3" />
+              </a>
+            </div>
+          )}
         </AccordionContent>
       </AccordionItem>
     </Accordion>

@@ -13,6 +13,10 @@ const Services = lazy(() => import("@/pages/Services"));
 const WebSolutions = lazy(() => import("@/pages/WebSolutions"));
 const DemoHub = lazy(() => import("@/pages/solutions/DemoHub"));
 const Templates = lazy(() => import("@/pages/Templates"));
+const ProcessLanding = lazy(() => import("@/pages/website/ProcessLanding"));
+const PriceLanding = lazy(() => import("@/pages/website/PriceLanding"));
+const FeaturesLanding = lazy(() => import("@/pages/website/FeaturesLanding"));
+const MaintenanceLanding = lazy(() => import("@/pages/website/MaintenanceLanding"));
 const ProductQuoteSolution = lazy(() => import("@/pages/solutions/ProductQuoteSolution"));
 const RealEstateSolution = lazy(() => import("@/pages/solutions/RealEstateSolution"));
 const RealEstateDemoLayout = lazy(() => import("@/pages/solutions/RealEstateDemoLayout"));
@@ -110,6 +114,10 @@ export default function App() {
             <Route path="/web-solutions" element={<WebSolutions />} />
             <Route path="/web-solutions/demos" element={<DemoHub />} />
             <Route path="/templates" element={<Templates />} />
+            <Route path="/website/process" element={<ProcessLanding />} />
+            <Route path="/website/price" element={<PriceLanding />} />
+            <Route path="/website/features" element={<FeaturesLanding />} />
+            <Route path="/website/maintenance" element={<MaintenanceLanding />} />
             <Route path="/web-solutions/product-quotes" element={<ProductQuoteSolution />} />
             <Route path="/web-solutions/real-estate" element={<RealEstateSolution />} />
             <Route path="/web-solutions/rentcar" element={<RentcarSolution />} />
