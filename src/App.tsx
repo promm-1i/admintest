@@ -16,6 +16,10 @@ const RealEstateSolution = lazy(() => import("@/pages/solutions/RealEstateSoluti
 const RealEstateDemoLayout = lazy(() => import("@/pages/solutions/RealEstateDemoLayout"));
 const RealEstateAdminDemoPage = lazy(() => import("@/pages/solutions/RealEstateAdminDemoPage"));
 const RealEstateCustomerSitePage = lazy(() => import("@/pages/solutions/RealEstateCustomerSitePage"));
+const RentcarSolution = lazy(() => import("@/pages/solutions/RentcarSolution"));
+const RentcarDemoLayout = lazy(() => import("@/pages/solutions/RentcarDemoLayout"));
+const RentcarAdminDemoPage = lazy(() => import("@/pages/solutions/RentcarAdminDemoPage"));
+const RentcarCustomerSitePage = lazy(() => import("@/pages/solutions/RentcarCustomerSitePage"));
 const ReservationSolution = lazy(() => import("@/pages/solutions/ReservationSolution"));
 const PlatformSolution = lazy(() => import("@/pages/solutions/PlatformSolution"));
 const Samples = lazy(() => import("@/pages/Samples"));
@@ -26,6 +30,8 @@ const Contact = lazy(() => import("@/pages/Contact"));
 const ContactStatus = lazy(() => import("@/pages/ContactStatus"));
 const Auth = lazy(() => import("@/pages/Auth"));
 const Admin = lazy(() => import("@/pages/Admin"));
+const FAQ = lazy(() => import("@/pages/FAQ"));
+const Blog = lazy(() => import("@/pages/Blog"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 function RouteLoadingFallback() {
@@ -59,6 +65,10 @@ export default function App() {
             <Route index element={<RealEstateAdminDemoPage />} />
             <Route path="site" element={<RealEstateCustomerSitePage />} />
           </Route>
+          <Route path="/web-solutions/rentcar/demo" element={<RentcarDemoLayout />}>
+            <Route index element={<RentcarAdminDemoPage />} />
+            <Route path="site" element={<RentcarCustomerSitePage />} />
+          </Route>
           <Route element={<SiteLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
@@ -66,6 +76,7 @@ export default function App() {
             <Route path="/web-solutions" element={<WebSolutions />} />
             <Route path="/web-solutions/product-quotes" element={<ProductQuoteSolution />} />
             <Route path="/web-solutions/real-estate" element={<RealEstateSolution />} />
+            <Route path="/web-solutions/rentcar" element={<RentcarSolution />} />
             <Route path="/web-solutions/reservations" element={<ReservationSolution />} />
             <Route path="/web-solutions/platform" element={<PlatformSolution />} />
             <Route path="/samples" element={<Samples />} />
@@ -74,6 +85,8 @@ export default function App() {
             <Route path="/notices/:noticeId" element={<NoticeDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/contact/status/:token" element={<ContactStatus />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/blog" element={<Blog />} />
             <Route path="/auth" element={<Auth />} />
             <Route
               path="/admin"

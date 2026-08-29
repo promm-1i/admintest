@@ -3,32 +3,47 @@ import { Check, Minus, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
-import { WEB_SOLUTION_CATEGORIES } from "@/components/site/WebSolutionMegaMenu";
-
-const INDUSTRIES = WEB_SOLUTION_CATEGORIES.filter(
-  (item) => item.title !== "기능 및 요금" && item.title !== "구축 문의",
-);
+import { INDUSTRY_ITEMS } from "@/components/site/navData";
 
 type Tier = {
   name: string;
   setupFee: string;
   monthlyFee: string;
-  highlight: string;
+  tagline: string;
+  features: string[];
   recommended?: boolean;
 };
 
 const TIERS: Tier[] = [
   {
-    name: "베이직",
+    name: "스타터",
     setupFee: "49만 원",
     monthlyFee: "9.9만 원",
-    highlight: "소규모 매장 · 단독 운영에 적합",
+    tagline: "처음 시작하는 사업장을 위한 입문형",
+    features: [
+      "호스팅 포함",
+      "월 3회 간단 수정 포함",
+      "기본 홈페이지 구성",
+      "상담 문의 폼",
+      "반응형 모바일 화면",
+      "기본 SEO 세팅",
+    ],
   },
   {
     name: "프로",
     setupFee: "99만 원",
     monthlyFee: "14.9만 원",
-    highlight: "직원이 여러 명인 사업장에 적합",
+    tagline: "사업을 운영하는 사업장을 위한 운영형",
+    features: [
+      "호스팅 포함",
+      "월 3회 간단 수정 포함",
+      "프리미엄 디자인 구성",
+      "업종 맞춤 기능",
+      "관리자 페이지 연동",
+      "문의 관리 기능",
+      "검색 · 필터 기능",
+      "포트폴리오 / 사례형 구성 가능",
+    ],
     recommended: true,
   },
 ];
@@ -73,13 +88,14 @@ export default function WebSolutions() {
       </p>
       <h1 className="mt-3 text-3xl font-semibold">업종별 맞춤 홈페이지 제작</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        업종에 맞게 바로 쓰는 맞춤형 홈페이지를 만듭니다. 관리자 시스템, 데이터베이스, 검색, 예약 등
-        업종마다 필요한 기능까지 갖춰서 구축하며, 정확한 기능 구성과 견적은 상담 후 맞춤 확정됩니다.
+        업종에 맞게 바로 쓰는 맞춤형 홈페이지를 만듭니다. 렌트카, 부동산처럼 고객 문의와 관리
+        기능이 중요한 업종에 맞춰 홈페이지와 관리자 시스템을 함께 구축하며, 정확한 기능 구성과
+        견적은 상담 후 맞춤 확정됩니다.
       </p>
 
       <h2 className="mt-12 text-xl font-semibold">업종</h2>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {INDUSTRIES.map((item) => {
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {INDUSTRY_ITEMS.map((item) => {
           const Icon = item.icon;
           const isReal = Boolean(item.href);
           const content = (
@@ -121,7 +137,10 @@ export default function WebSolutions() {
         })}
       </div>
 
-      <h2 className="mt-14 text-xl font-semibold">요금제</h2>
+      <p className="mt-14 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
+        PRICING
+      </p>
+      <h2 className="mt-2 text-xl font-semibold">처음에는 작게 시작하고, 필요할 때 확장하세요</h2>
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
         {TIERS.map((tier) => (
           <div
@@ -148,7 +167,16 @@ export default function WebSolutions() {
                 + 월 이용료 <span className="font-semibold text-foreground">{tier.monthlyFee}</span>
               </p>
               <p className="mt-1 text-xs text-muted-foreground/80">부가세 별도</p>
-              <p className="mt-4 text-sm text-muted-foreground break-keep">{tier.highlight}</p>
+              <p className="mt-4 text-sm font-medium text-foreground break-keep">{tier.tagline}</p>
+
+              <ul className="mt-5 space-y-2 text-sm text-muted-foreground">
+                {tier.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <Check className="mt-0.5 size-4 shrink-0 text-primary" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             <Button
@@ -170,7 +198,7 @@ export default function WebSolutions() {
           <thead>
             <tr className="border-b border-border bg-secondary/40">
               <th className="px-5 py-3 font-medium text-muted-foreground">기능</th>
-              <th className="px-5 py-3 text-center font-semibold text-foreground">베이직</th>
+              <th className="px-5 py-3 text-center font-semibold text-foreground">스타터</th>
               <th className="px-5 py-3 text-center font-semibold text-foreground">프로</th>
             </tr>
           </thead>
@@ -198,9 +226,9 @@ export default function WebSolutions() {
           </p>
         </div>
         <div className="rounded-2xl border border-border bg-card p-6">
-          <p className="mb-2 text-sm font-medium text-foreground">유지보수 (선택)</p>
+          <p className="mb-2 text-sm font-medium text-foreground">유지보수 (기본 포함)</p>
           <p className="text-sm leading-relaxed text-muted-foreground break-keep">
-            월 5만 원(부가세 별도)에 문구 수정 등 간단한 요청을 월 3회까지 지원합니다.
+            모든 요금제에 문구 수정 등 간단한 요청을 월 3회까지 기본으로 지원합니다.
           </p>
         </div>
       </div>
@@ -212,9 +240,14 @@ export default function WebSolutions() {
 
       <div className="mt-12 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
         <p className="text-sm text-muted-foreground">필요한 기능에 맞춘 맞춤 상담을 도와드립니다.</p>
-        <Button asChild className="mt-4">
-          <Link to="/contact">구축 문의하기</Link>
-        </Button>
+        <div className="mt-4 flex flex-wrap justify-center gap-3">
+          <Button asChild>
+            <Link to="/contact">구축 문의하기</Link>
+          </Button>
+          <Button asChild variant="outline">
+            <Link to="/web-solutions/real-estate/demo/site">데모 보기</Link>
+          </Button>
+        </div>
       </div>
     </div>
   );

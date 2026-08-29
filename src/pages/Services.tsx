@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { PriceCard } from "@/components/ui/PriceCard";
-import { PRODUCT_TYPES, PRICING, ADDONS, PRICING_NOTE } from "@/lib/pricing";
+import { Check } from "lucide-react";
+import { PRODUCT_TYPES, PRICING, ADDONS, PRICING_NOTE, BENEFITS } from "@/lib/pricing";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function Services() {
@@ -44,6 +45,31 @@ export default function Services() {
         </ul>
       </div>
       <p className="mt-4 text-xs text-muted-foreground">{PRICING_NOTE}</p>
+
+      <h2 id="features" className="mt-14 text-xl font-semibold scroll-mt-24">기본 제공 기능</h2>
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
+        모든 홈페이지 제작에 기본으로 포함되는 기능입니다.
+      </p>
+      <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+        {BENEFITS.map((b) => (
+          <li
+            key={b}
+            className="flex items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-3 text-sm text-foreground"
+          >
+            <Check className="size-4 shrink-0 text-primary" />
+            {b}
+          </li>
+        ))}
+      </ul>
+
+      <h2 id="maintenance" className="mt-14 text-xl font-semibold scroll-mt-24">유지보수</h2>
+      <div className="mt-6 rounded-2xl border border-border bg-card p-6">
+        <p className="text-sm leading-relaxed text-muted-foreground break-keep">
+          제작 완료 후에도 문구 수정, 이미지 교체 등 간단한 요청은 상담을 통해 도와드립니다.
+          업종별 맞춤 홈페이지(스타터/프로)는 월 3회 간단 수정을 기본으로 제공합니다. 그 외
+          유지보수 범위와 방법은 제작 상담 시 함께 안내드립니다.
+        </p>
+      </div>
 
       <div className="mt-12 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
         <p className="text-sm text-muted-foreground">어떤 유형이 맞을지 고민되신다면 먼저 문의해 주세요.</p>

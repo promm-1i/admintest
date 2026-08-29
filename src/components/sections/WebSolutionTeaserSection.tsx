@@ -3,9 +3,9 @@ import { ArrowRight, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { WEB_SOLUTION_CATEGORIES } from "@/components/site/WebSolutionMegaMenu";
+import { INDUSTRY_ITEMS } from "@/components/site/navData";
 
-const SOLUTION_CATEGORIES = WEB_SOLUTION_CATEGORIES.filter((item) => item.href?.startsWith("/web-solutions/"));
+const SOLUTION_CATEGORIES = INDUSTRY_ITEMS.filter((item) => Boolean(item.href));
 
 export function WebSolutionTeaserSection() {
   return (
@@ -22,9 +22,9 @@ export function WebSolutionTeaserSection() {
           }
           description={
             <>
-              관리자 시스템, 데이터베이스, 검색, 예약 등 업종마다 필요한 기능까지 갖춘
+              렌트카, 부동산처럼 고객 문의와 관리 기능이 중요한 업종에 맞춰 홈페이지와
               <br />
-              맞춤형 홈페이지를 구축합니다.
+              관리자 시스템을 함께 구축합니다.
             </>
           }
         />
