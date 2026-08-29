@@ -1,5 +1,4 @@
 import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, type LucideIcon } from "lucide-react";
-import { NAVER_BLOG_URL } from "@/lib/contact";
 
 export type NavItem = { icon: LucideIcon; title: string; desc: string; href?: string };
 
@@ -61,14 +60,11 @@ export const INDUSTRY_ITEMS: NavItem[] = [
  * 카드·아이콘 박스·설명문 없이 항목명만 나열하는 정돈된 드롭다운을 위한 데이터다.
  */
 export type NavLink = { label: string; href: string };
-export type NavExternalNote = { text: string; label: string; href: string };
 export type NavDropdownEntry = {
   type: "dropdown";
   key: string;
   label: string;
   items: NavLink[];
-  /** 항목 리스트 아래, 구분선을 두고 붙는 외부 링크 안내 블록 (예: 고객센터의 블로그 버튼) */
-  externalNote?: NavExternalNote;
 };
 export type NavLinkEntry = { type: "link"; key: string; label: string; href: string; external?: boolean };
 export type NavEntry = NavDropdownEntry | NavLinkEntry;
@@ -110,10 +106,5 @@ export const HEADER_NAV: NavEntry[] = [
       { label: "공지사항", href: "/notices" },
       { label: "자주 묻는 질문", href: "/faq" },
     ],
-    externalNote: {
-      text: "MintCL 블로그에서 홈페이지 제작 관련 정보를 확인해보세요.",
-      label: "네이버 블로그 보기",
-      href: NAVER_BLOG_URL,
-    },
   },
 ];
