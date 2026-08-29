@@ -1,7 +1,10 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { toast } from "sonner";
+import { useLocalStorageState } from "@/lib/useLocalStorageState";
 import * as M from "./mockData";
 import type { Case, QuoteInquiry, Package, Staff, ActivityLog } from "./types";
+
+const NS = "mintcl-demo-interior";
 
 type Ctx = {
   cases: Case[];
@@ -20,11 +23,11 @@ type Ctx = {
 const InteriorAdminContext = createContext<Ctx | null>(null);
 
 export function InteriorAdminProvider({ children }: { children: ReactNode }) {
-  const [cases, setCases] = useState<Case[]>(M.INITIAL_CASES);
-  const [inquiries, setInquiries] = useState<QuoteInquiry[]>(M.INITIAL_INQUIRIES);
-  const [packages, setPackages] = useState<Package[]>(M.INITIAL_PACKAGES);
-  const [staff, setStaff] = useState<Staff[]>(M.INITIAL_STAFF);
-  const [activityLog, setActivityLog] = useState<ActivityLog[]>([]);
+  const [cases, setCases] = useLocalStorageState<Case[]>(`${NS}:cases`, M.INITIAL_CASES);
+  const [inquiries, setInquiries] = useLocalStorageState<QuoteInquiry[]>(`${NS}:inquiries`, M.INITIAL_INQUIRIES);
+  const [packages, setPackages] = useLocalStorageState<Package[]>(`${NS}:packages`, M.INITIAL_PACKAGES);
+  const [staff, setStaff] = useLocalStorageState<Staff[]>(`${NS}:staff`, M.INITIAL_STAFF);
+  const [activityLog, setActivityLog] = useLocalStorageState<ActivityLog[]>(`${NS}:activityLog`, []);
 
   const logActivity = (action: string, target: string) => {
     setActivityLog((prev) =>

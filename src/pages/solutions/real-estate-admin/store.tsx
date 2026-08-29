@@ -1,6 +1,9 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { toast } from "sonner";
+import { useLocalStorageState } from "@/lib/useLocalStorageState";
 import * as M from "./mockData";
+
+const NS = "mintcl-demo-real-estate";
 import type {
   Listing,
   DeletedListing,
@@ -70,28 +73,28 @@ type Ctx = {
 const RealEstateAdminContext = createContext<Ctx | null>(null);
 
 export function RealEstateAdminProvider({ children }: { children: ReactNode }) {
-  const [listings, setListings] = useState<Listing[]>(M.INITIAL_LISTINGS);
-  const [deletedListings, setDeletedListings] = useState<DeletedListing[]>(M.INITIAL_DELETED_LISTINGS);
-  const [categories, setCategories] = useState<PropertyCategory[]>(M.INITIAL_CATEGORIES);
+  const [listings, setListings] = useLocalStorageState<Listing[]>(`${NS}:listings`, M.INITIAL_LISTINGS);
+  const [deletedListings, setDeletedListings] = useLocalStorageState<DeletedListing[]>(`${NS}:deletedListings`, M.INITIAL_DELETED_LISTINGS);
+  const [categories, setCategories] = useLocalStorageState<PropertyCategory[]>(`${NS}:categories`, M.INITIAL_CATEGORIES);
   const [complexes] = useState<Complex[]>(M.INITIAL_COMPLEXES);
-  const [complexIcons, setComplexIcons] = useState<ComplexIcon[]>(M.INITIAL_COMPLEX_ICONS);
+  const [complexIcons, setComplexIcons] = useLocalStorageState<ComplexIcon[]>(`${NS}:complexIcons`, M.INITIAL_COMPLEX_ICONS);
   const [complexSystems] = useState<ComplexSystem[]>(M.INITIAL_COMPLEX_SYSTEMS);
   const [propertyLogs] = useState<PropertyLogEntry[]>(M.INITIAL_PROPERTY_LOGS);
-  const [fieldVisits, setFieldVisits] = useState<FieldVisit[]>(M.INITIAL_FIELD_VISITS);
-  const [customers, setCustomers] = useState<Customer[]>(M.INITIAL_CUSTOMERS);
-  const [inquiries, setInquiries] = useState<Inquiry[]>(M.INITIAL_INQUIRIES);
+  const [fieldVisits, setFieldVisits] = useLocalStorageState<FieldVisit[]>(`${NS}:fieldVisits`, M.INITIAL_FIELD_VISITS);
+  const [customers, setCustomers] = useLocalStorageState<Customer[]>(`${NS}:customers`, M.INITIAL_CUSTOMERS);
+  const [inquiries, setInquiries] = useLocalStorageState<Inquiry[]>(`${NS}:inquiries`, M.INITIAL_INQUIRIES);
   const [homeRequests] = useState<HomeRequest[]>(M.INITIAL_HOME_REQUESTS);
-  const [schedules, setSchedules] = useState<Schedule[]>(M.INITIAL_SCHEDULES);
-  const [messages, setMessages] = useState<Message[]>(M.INITIAL_MESSAGES);
-  const [staff, setStaff] = useState<Staff[]>(M.INITIAL_STAFF);
+  const [schedules, setSchedules] = useLocalStorageState<Schedule[]>(`${NS}:schedules`, M.INITIAL_SCHEDULES);
+  const [messages, setMessages] = useLocalStorageState<Message[]>(`${NS}:messages`, M.INITIAL_MESSAGES);
+  const [staff, setStaff] = useLocalStorageState<Staff[]>(`${NS}:staff`, M.INITIAL_STAFF);
   const [dealCases] = useState<DealCase[]>(M.INITIAL_DEAL_CASES);
   const [payments] = useState<Payment[]>(M.INITIAL_PAYMENTS);
   const [payroll] = useState<Payroll[]>(M.INITIAL_PAYROLL);
   const [provisionalContracts] = useState<ProvisionalContract[]>(M.INITIAL_PROVISIONAL_CONTRACTS);
   const [moveInOut] = useState<MoveInOut[]>(M.INITIAL_MOVE_IN_OUT);
-  const [notices, setNotices] = useState<Notice[]>(M.INITIAL_NOTICES);
-  const [partners, setPartners] = useState<Partner[]>(M.INITIAL_PARTNERS);
-  const [activityLog, setActivityLog] = useState<ActivityLog[]>([]);
+  const [notices, setNotices] = useLocalStorageState<Notice[]>(`${NS}:notices`, M.INITIAL_NOTICES);
+  const [partners, setPartners] = useLocalStorageState<Partner[]>(`${NS}:partners`, M.INITIAL_PARTNERS);
+  const [activityLog, setActivityLog] = useLocalStorageState<ActivityLog[]>(`${NS}:activityLog`, []);
 
   const logActivity = (action: string, target: string) => {
     setActivityLog((prev) =>

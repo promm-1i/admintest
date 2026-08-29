@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Search, Plus, Trash2, Pencil, Car as CarIcon, MessageSquare, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -175,7 +175,9 @@ export function VehicleListView({ onNavigate }: { onNavigate: (key: string) => v
 function VehicleEditModal({ vehicle, onClose }: { vehicle: Vehicle | null; onClose: () => void }) {
   const { setVehicles, logActivity } = useRentcarAdmin();
   const [form, setForm] = useState<Vehicle | null>(vehicle);
-  if (vehicle && form?.id !== vehicle.id) setForm(vehicle);
+  useEffect(() => {
+    setForm(vehicle);
+  }, [vehicle]);
 
   const handleSave = (e: FormEvent) => {
     e.preventDefault();

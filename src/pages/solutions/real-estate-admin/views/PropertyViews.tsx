@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Search, MapPin, Plus, Trash2, Pencil, RotateCcw, GripVertical, ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -212,7 +212,9 @@ function ListingEditModal({ listing, onClose }: { listing: Listing | null; onClo
   const { setListings, logActivity } = useRealEstateAdmin();
   const [form, setForm] = useState<Listing | null>(listing);
 
-  if (listing && form?.id !== listing.id) setForm(listing);
+  useEffect(() => {
+    setForm(listing);
+  }, [listing]);
 
   const handleSave = (e: FormEvent) => {
     e.preventDefault();

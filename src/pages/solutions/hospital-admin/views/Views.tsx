@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Search, Plus, Trash2, Pencil, Stethoscope, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -119,7 +119,9 @@ export function DepartmentListView({ onNavigate }: { onNavigate: (key: string) =
 function DepartmentEditModal({ department, onClose }: { department: Department | null; onClose: () => void }) {
   const { setDepartments, logActivity } = useHospitalAdmin();
   const [form, setForm] = useState<Department | null>(department);
-  if (department && form?.id !== department.id) setForm(department);
+  useEffect(() => {
+    setForm(department);
+  }, [department]);
 
   const handleSave = (e: FormEvent) => {
     e.preventDefault();

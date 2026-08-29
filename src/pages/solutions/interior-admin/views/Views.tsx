@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Search, Plus, Trash2, Pencil, Hammer, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -131,7 +131,9 @@ export function CaseListView({ onNavigate }: { onNavigate: (key: string) => void
 function CaseEditModal({ caseItem, onClose }: { caseItem: Case | null; onClose: () => void }) {
   const { setCases, logActivity } = useInteriorAdmin();
   const [form, setForm] = useState<Case | null>(caseItem);
-  if (caseItem && form?.id !== caseItem.id) setForm(caseItem);
+  useEffect(() => {
+    setForm(caseItem);
+  }, [caseItem]);
 
   const handleSave = (e: FormEvent) => {
     e.preventDefault();

@@ -1,7 +1,10 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { toast } from "sonner";
+import { useLocalStorageState } from "@/lib/useLocalStorageState";
 import * as M from "./mockData";
 import type { Vehicle, RentalInquiry, Notice, Staff, ActivityLog } from "./types";
+
+const NS = "mintcl-demo-rentcar";
 
 type Ctx = {
   vehicles: Vehicle[];
@@ -20,11 +23,11 @@ type Ctx = {
 const RentcarAdminContext = createContext<Ctx | null>(null);
 
 export function RentcarAdminProvider({ children }: { children: ReactNode }) {
-  const [vehicles, setVehicles] = useState<Vehicle[]>(M.INITIAL_VEHICLES);
-  const [inquiries, setInquiries] = useState<RentalInquiry[]>(M.INITIAL_INQUIRIES);
-  const [notices, setNotices] = useState<Notice[]>(M.INITIAL_NOTICES);
-  const [staff, setStaff] = useState<Staff[]>(M.INITIAL_STAFF);
-  const [activityLog, setActivityLog] = useState<ActivityLog[]>([]);
+  const [vehicles, setVehicles] = useLocalStorageState<Vehicle[]>(`${NS}:vehicles`, M.INITIAL_VEHICLES);
+  const [inquiries, setInquiries] = useLocalStorageState<RentalInquiry[]>(`${NS}:inquiries`, M.INITIAL_INQUIRIES);
+  const [notices, setNotices] = useLocalStorageState<Notice[]>(`${NS}:notices`, M.INITIAL_NOTICES);
+  const [staff, setStaff] = useLocalStorageState<Staff[]>(`${NS}:staff`, M.INITIAL_STAFF);
+  const [activityLog, setActivityLog] = useLocalStorageState<ActivityLog[]>(`${NS}:activityLog`, []);
 
   const logActivity = (action: string, target: string) => {
     setActivityLog((prev) =>

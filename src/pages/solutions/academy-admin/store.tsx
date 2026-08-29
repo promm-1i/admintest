@@ -1,7 +1,10 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { toast } from "sonner";
+import { useLocalStorageState } from "@/lib/useLocalStorageState";
 import * as M from "./mockData";
 import type { Course, ConsultInquiry, Review, Staff, ActivityLog } from "./types";
+
+const NS = "mintcl-demo-academy";
 
 type Ctx = {
   courses: Course[];
@@ -20,11 +23,11 @@ type Ctx = {
 const AcademyAdminContext = createContext<Ctx | null>(null);
 
 export function AcademyAdminProvider({ children }: { children: ReactNode }) {
-  const [courses, setCourses] = useState<Course[]>(M.INITIAL_COURSES);
-  const [inquiries, setInquiries] = useState<ConsultInquiry[]>(M.INITIAL_INQUIRIES);
-  const [reviews, setReviews] = useState<Review[]>(M.INITIAL_REVIEWS);
-  const [staff, setStaff] = useState<Staff[]>(M.INITIAL_STAFF);
-  const [activityLog, setActivityLog] = useState<ActivityLog[]>([]);
+  const [courses, setCourses] = useLocalStorageState<Course[]>(`${NS}:courses`, M.INITIAL_COURSES);
+  const [inquiries, setInquiries] = useLocalStorageState<ConsultInquiry[]>(`${NS}:inquiries`, M.INITIAL_INQUIRIES);
+  const [reviews, setReviews] = useLocalStorageState<Review[]>(`${NS}:reviews`, M.INITIAL_REVIEWS);
+  const [staff, setStaff] = useLocalStorageState<Staff[]>(`${NS}:staff`, M.INITIAL_STAFF);
+  const [activityLog, setActivityLog] = useLocalStorageState<ActivityLog[]>(`${NS}:activityLog`, []);
 
   const logActivity = (action: string, target: string) => {
     setActivityLog((prev) =>

@@ -1,7 +1,10 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
 import { toast } from "sonner";
+import { useLocalStorageState } from "@/lib/useLocalStorageState";
 import * as M from "./mockData";
 import type { Department, ReservationInquiry, NonCoveredItem, Staff, ActivityLog } from "./types";
+
+const NS = "mintcl-demo-hospital";
 
 type Ctx = {
   departments: Department[];
@@ -20,11 +23,11 @@ type Ctx = {
 const HospitalAdminContext = createContext<Ctx | null>(null);
 
 export function HospitalAdminProvider({ children }: { children: ReactNode }) {
-  const [departments, setDepartments] = useState<Department[]>(M.INITIAL_DEPARTMENTS);
-  const [inquiries, setInquiries] = useState<ReservationInquiry[]>(M.INITIAL_INQUIRIES);
-  const [nonCovered, setNonCovered] = useState<NonCoveredItem[]>(M.INITIAL_NONCOVERED);
-  const [staff, setStaff] = useState<Staff[]>(M.INITIAL_STAFF);
-  const [activityLog, setActivityLog] = useState<ActivityLog[]>([]);
+  const [departments, setDepartments] = useLocalStorageState<Department[]>(`${NS}:departments`, M.INITIAL_DEPARTMENTS);
+  const [inquiries, setInquiries] = useLocalStorageState<ReservationInquiry[]>(`${NS}:inquiries`, M.INITIAL_INQUIRIES);
+  const [nonCovered, setNonCovered] = useLocalStorageState<NonCoveredItem[]>(`${NS}:nonCovered`, M.INITIAL_NONCOVERED);
+  const [staff, setStaff] = useLocalStorageState<Staff[]>(`${NS}:staff`, M.INITIAL_STAFF);
+  const [activityLog, setActivityLog] = useLocalStorageState<ActivityLog[]>(`${NS}:activityLog`, []);
 
   const logActivity = (action: string, target: string) => {
     setActivityLog((prev) =>

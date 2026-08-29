@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { Search, Plus, Trash2, Pencil, BookOpen, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -131,7 +131,9 @@ export function CourseListView({ onNavigate }: { onNavigate: (key: string) => vo
 function CourseEditModal({ course, onClose }: { course: Course | null; onClose: () => void }) {
   const { setCourses, logActivity } = useAcademyAdmin();
   const [form, setForm] = useState<Course | null>(course);
-  if (course && form?.id !== course.id) setForm(course);
+  useEffect(() => {
+    setForm(course);
+  }, [course]);
 
   const handleSave = (e: FormEvent) => {
     e.preventDefault();
