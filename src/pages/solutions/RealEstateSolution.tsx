@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Building2, Search, MapPin, Settings, Send, LayoutDashboard, ExternalLink } from "lucide-react";
+import { Building2, Search, MapPin, Settings, Send, LayoutDashboard, ExternalLink, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -63,6 +63,35 @@ export default function RealEstateSolution() {
       </div>
 
       <h2 className="mt-16 flex items-center gap-2 text-xl font-semibold">
+        <Eye className="h-5 w-5 text-primary" />
+        실제 홈페이지 미리보기
+      </h2>
+      <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
+        고객이 실제로 보게 될 화면을 새 창에서 바로 확인할 수 있습니다. 관리자에서 등록·공개한
+        매물이 이 화면에 그대로 반영됩니다.
+      </p>
+
+      <div className="mt-6 flex flex-col items-start gap-5 rounded-2xl border border-primary/30 bg-primary/5 p-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <Eye className="h-6 w-6" />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-foreground">고객 홈페이지 미리보기</p>
+            <p className="mt-1 text-xs text-muted-foreground break-keep">
+              검색·필터·지도·중개보수 계산기까지 갖춘 실제 고객용 화면을 확인해보세요.
+            </p>
+          </div>
+        </div>
+        <Button asChild className="shrink-0 gap-1.5 font-bold">
+          <a href="/web-solutions/real-estate/demo/site" target="_blank" rel="noopener noreferrer">
+            미리보기 열기
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        </Button>
+      </div>
+
+      <h2 className="mt-10 flex items-center gap-2 text-xl font-semibold">
         <LayoutDashboard className="h-5 w-5 text-primary" />
         관리자 기능 직접 체험해보기
       </h2>
@@ -84,7 +113,7 @@ export default function RealEstateSolution() {
             </p>
           </div>
         </div>
-        <Button asChild className="shrink-0 gap-1.5 font-bold">
+        <Button asChild variant="outline" className="shrink-0 gap-1.5 font-bold">
           <a href="/web-solutions/real-estate/demo" target="_blank" rel="noopener noreferrer">
             데모 열기
             <ExternalLink className="h-3.5 w-3.5" />
