@@ -95,8 +95,21 @@ export const HEADER_NAV: NavEntry[] = [
       { label: "검색엔진 최적화", href: "/services/seo" },
     ],
   },
-  { type: "link", key: "templates", label: "홈페이지 템플릿", href: "/templates" },
-  { type: "link", key: "portfolio", label: "포트폴리오", href: "/samples" },
+  {
+    type: "dropdown",
+    key: "templates",
+    label: "홈페이지 템플릿",
+    items: [
+      { label: "기본형 디자인 템플릿", href: "/templates" },
+      { label: "랜딩형 디자인 템플릿", href: "/templates?type=one-page" },
+    ],
+  },
+  {
+    type: "dropdown",
+    key: "portfolio",
+    label: "포트폴리오",
+    items: [{ label: "제작 사례", href: "/samples" }],
+  },
   {
     type: "dropdown",
     key: "support",

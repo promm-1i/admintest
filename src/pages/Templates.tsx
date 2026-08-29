@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -12,8 +12,12 @@ import { cn } from "@/lib/utils";
 const PAGE_SIZE = 8;
 
 export default function Templates() {
+  const [searchParams] = useSearchParams();
   const [page, setPage] = useState(1);
-  const [selectedType, setSelectedType] = useState("all");
+  const [selectedType, setSelectedType] = useState(() => {
+    const type = searchParams.get("type");
+    return type && PORTFOLIO_FILTERS.some((f) => f.value === type) ? type : "all";
+  });
 
   usePageTitle(
     "홈페이지 템플릿 — MintCL",

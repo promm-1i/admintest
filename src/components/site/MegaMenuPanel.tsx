@@ -21,7 +21,7 @@ export function MegaMenuPanel({ entries, onNavigate, onMouseEnter, onMouseLeave 
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className="mx-auto flex max-w-4xl justify-center gap-20 px-4 py-10 sm:px-6 lg:px-10">
+      <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-x-14 gap-y-8 px-4 py-10 sm:px-6 lg:px-10">
         {entries.map((entry) => (
           <div key={entry.key}>
             <p className="text-xs font-bold uppercase tracking-wider text-primary">{entry.label}</p>
