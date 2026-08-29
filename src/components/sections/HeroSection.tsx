@@ -70,12 +70,12 @@ export function HeroSection() {
       {isDesktop && (
         <div className="absolute inset-0 hidden lg:block">
           {HERO_SLIDES.map((s, i) => renderVideo(s, i))}
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-[58%] bg-gradient-to-r from-background via-background/55 to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-[62%] bg-gradient-to-r from-background via-background/60 to-transparent" />
         </div>
       )}
 
-      <div className="relative mx-auto flex max-w-7xl flex-col lg:h-full lg:justify-center">
-        <div className="max-w-md px-4 py-14 sm:px-6 lg:px-12 lg:py-0">
+      <div className="relative flex flex-col lg:h-full lg:max-w-3xl lg:justify-center">
+        <div className="max-w-md px-4 py-14 sm:px-6 lg:px-10 lg:py-0">
           <FadeIn>
             <span className="inline-block rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
               맞춤형 웹사이트 제작 전문
