@@ -1,33 +1,28 @@
-import { useEffect, useState, type FormEvent } from "react";
-import { toast } from "sonner";
-import { Search, Plus, Trash2, Pencil, PackageSearch, MessageSquare } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { MessageSquare, CalendarCheck, Truck, Wallet } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useMovingAdmin } from "../store";
-import { REGIONS } from "../mockData";
-import { EMPTY_CASE_FORM } from "../types";
 import {
   PanelHeader,
   StatusBadge,
   StatCard,
-  Modal,
   Row,
   EmptyResult,
 } from "@/pages/solutions/real-estate-admin/components";
-import type { Case } from "../types";
+import type { QuoteInquiry } from "../types";
 
 export function DashboardView() {
-  const { cases, inquiries, activityLog } = useMovingAdmin();
+  const { inquiries, reservations, workStatus, payments, activityLog } = useMovingAdmin();
+  const today = "2026-09-10";
+  const unpaidCount = payments.filter((p) => p.status !== "완납").length;
   const stats = [
-    { label: "전체 작업 사례", value: cases.length, icon: PackageSearch },
-    { label: "공개 사례", value: cases.filter((c) => c.status === "공개").length, icon: PackageSearch },
     { label: "견적 문의", value: inquiries.length, icon: MessageSquare },
-    { label: "상담중", value: inquiries.filter((i) => i.status === "상담중").length, icon: MessageSquare },
+    { label: "오늘 예약 작업", value: reservations.filter((r) => r.moveDate === today).length, icon: CalendarCheck },
+    { label: "작업중", value: workStatus.filter((w) => w.stage !== "완료").length, icon: Truck },
+    { label: "결제 미완료", value: unpaidCount, icon: Wallet },
   ];
   return (
     <div>
-      <PanelHeader title="대시보드" description="작업 사례·견적문의 현황을 한눈에 확인합니다. 아래 숫자는 이 데모에서 실제로 조작한 데이터를 기준으로 계산됩니다." />
+      <PanelHeader title="대시보드" description="견적·예약·작업·결제 현황을 한눈에 확인합니다. 아래 숫자는 이 데모에서 실제로 조작한 데이터를 기준으로 계산됩니다." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
           <StatCard key={s.label} label={s.label} value={s.value} icon={s.icon} />
@@ -37,10 +32,10 @@ export function DashboardView() {
       <div className="mt-3 space-y-2">
         {activityLog.length === 0 && (
           <p className="rounded-lg border border-dashed border-border bg-secondary/30 p-6 text-center text-xs text-muted-foreground break-keep">
-            아직 작업 내역이 없습니다. 왼쪽 메뉴에서 작업 사례를 등록하거나 상태를 변경해보면 여기에 기록됩니다.
+            아직 작업 내역이 없습니다. 왼쪽 메뉴에서 견적 문의를 처리하거나 상태를 변경해보면 여기에 기록됩니다.
           </p>
         )}
-        {activityLog.map((log) => (
+        {activityLog.slice(0, 10).map((log) => (
           <div key={log.id} className="flex items-center gap-3 rounded-lg border border-border bg-secondary/30 px-3 py-2 text-xs">
             <span className="shrink-0 text-muted-foreground">{log.time}</span>
             <span className="shrink-0 font-medium text-foreground">{log.action}</span>
@@ -52,177 +47,7 @@ export function DashboardView() {
   );
 }
 
-export function CaseListView({ onNavigate }: { onNavigate: (key: string) => void }) {
-  const { cases, setCases, deleteCase, logActivity } = useMovingAdmin();
-  const [query, setQuery] = useState("");
-  const [regionFilter, setRegionFilter] = useState("전체");
-  const [editTarget, setEditTarget] = useState<Case | null>(null);
-
-  const filtered = cases.filter((c) => {
-    const matchesRegion = regionFilter === "전체" || c.region === regionFilter;
-    const matchesQuery = query.trim() === "" || c.name.includes(query);
-    return matchesRegion && matchesQuery;
-  });
-
-  return (
-    <div>
-      <PanelHeader title="작업 사례 목록" description="완료된 이사·청소 작업 사례를 관리합니다." />
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="작업명 검색" className="pl-9" />
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {["전체", ...REGIONS].map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setRegionFilter(r)}
-              className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
-                regionFilter === r ? "border-primary bg-primary text-primary-foreground" : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-              }`}
-            >
-              {r}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="mt-4 space-y-2">
-        {filtered.length === 0 && <EmptyResult message="조건에 맞는 작업 사례가 없습니다." />}
-        {filtered.map((c) => (
-          <Row key={c.id}>
-            <div className="min-w-0">
-              <p className="text-sm font-medium text-foreground">
-                <span className="mr-1.5">{c.icon}</span>
-                {c.name}
-              </p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{c.region} · {c.price}</p>
-            </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <StatusBadge
-                label={c.status}
-                tone={c.status === "공개" ? "success" : "neutral"}
-                onClick={() => {
-                  setCases((prev) => prev.map((p) => (p.id === c.id ? { ...p, status: p.status === "공개" ? "비공개" : "공개" } : p)));
-                  logActivity("작업 사례 공개상태 변경", c.name);
-                }}
-              />
-              <button type="button" onClick={() => setEditTarget(c)} className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" aria-label={`${c.name} 수정`}>
-                <Pencil className="h-3.5 w-3.5" />
-              </button>
-              <button type="button" onClick={() => deleteCase(c.id)} className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive" aria-label={`${c.name} 삭제`}>
-                <Trash2 className="h-3.5 w-3.5" />
-              </button>
-            </div>
-          </Row>
-        ))}
-      </div>
-      <div className="mt-4">
-        <Button size="sm" className="gap-1.5 font-bold" onClick={() => onNavigate("case-register")}>
-          <Plus className="h-3.5 w-3.5" />
-          신규 작업 사례 등록
-        </Button>
-      </div>
-      <CaseEditModal caseItem={editTarget} onClose={() => setEditTarget(null)} />
-    </div>
-  );
-}
-
-function CaseEditModal({ caseItem, onClose }: { caseItem: Case | null; onClose: () => void }) {
-  const { setCases, logActivity } = useMovingAdmin();
-  const [form, setForm] = useState<Case | null>(caseItem);
-  useEffect(() => {
-    setForm(caseItem);
-  }, [caseItem]);
-
-  const handleSave = (e: FormEvent) => {
-    e.preventDefault();
-    if (!form) return;
-    setCases((prev) => prev.map((c) => (c.id === form.id ? form : c)));
-    toast.success("작업 사례 정보가 수정되었습니다.");
-    logActivity("작업 사례 수정", form.name);
-    onClose();
-  };
-
-  return (
-    <Modal open={!!caseItem} onClose={onClose} title="작업 사례 수정">
-      {form && (
-        <form onSubmit={handleSave} className="grid gap-4 sm:grid-cols-2">
-          <div className="sm:col-span-2">
-            <label className="text-xs font-medium text-muted-foreground">작업명</label>
-            <Input className="mt-1.5" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-          </div>
-          <div>
-            <label className="text-xs font-medium text-muted-foreground">지역</label>
-            <Input className="mt-1.5" value={form.region} onChange={(e) => setForm({ ...form, region: e.target.value })} />
-          </div>
-          <div>
-            <label className="text-xs font-medium text-muted-foreground">비용</label>
-            <Input className="mt-1.5" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
-          </div>
-          <div className="sm:col-span-2">
-            <Button type="submit" className="gap-1.5 font-bold">저장</Button>
-          </div>
-        </form>
-      )}
-    </Modal>
-  );
-}
-
-export function CaseRegisterView({ onNavigate }: { onNavigate: (key: string) => void }) {
-  const { setCases, logActivity } = useMovingAdmin();
-  const [form, setForm] = useState(EMPTY_CASE_FORM);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.price.trim()) {
-      toast.error("모든 항목을 입력해 주세요.");
-      return;
-    }
-    setCases((prev) => [{ id: Date.now(), ...form, status: "공개", icon: "📦" }, ...prev]);
-    toast.success("작업 사례가 등록되었습니다.");
-    logActivity("작업 사례 등록", form.name);
-    setForm(EMPTY_CASE_FORM);
-    onNavigate("case-list");
-  };
-
-  return (
-    <div>
-      <PanelHeader title="작업 사례 등록" description="새 작업 사례의 기본 정보를 입력합니다." />
-      <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
-        <div className="sm:col-span-2">
-          <label className="text-xs font-medium text-muted-foreground">작업명</label>
-          <Input className="mt-1.5" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} placeholder="예: 강남구 30평대 포장이사" />
-        </div>
-        <div>
-          <label className="text-xs font-medium text-muted-foreground">지역</label>
-          <Select value={form.region} onValueChange={(v) => setForm((f) => ({ ...f, region: v }))}>
-            <SelectTrigger className="mt-1.5">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {REGIONS.map((r) => (
-                <SelectItem key={r} value={r}>{r}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <label className="text-xs font-medium text-muted-foreground">비용</label>
-          <Input className="mt-1.5" value={form.price} onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))} placeholder="예: 120만원" />
-        </div>
-        <div className="sm:col-span-2">
-          <Button type="submit" className="gap-1.5 font-bold">
-            <Plus className="h-3.5 w-3.5" />
-            작업 사례 등록하기
-          </Button>
-        </div>
-      </form>
-    </div>
-  );
-}
-
-function cycleStatus(status: "접수" | "상담중" | "완료") {
+function cycleQuoteStatus(status: QuoteInquiry["status"]) {
   if (status === "접수") return "상담중" as const;
   if (status === "상담중") return "완료" as const;
   return "접수" as const;
@@ -239,7 +64,7 @@ export function QuoteView() {
           <Row key={i.id}>
             <div className="min-w-0">
               <p className="text-sm font-medium text-foreground">
-                {i.name} <span className="font-normal text-muted-foreground">· {i.phone} · {i.region}</span>
+                {i.name} <span className="font-normal text-muted-foreground">· {i.phone} · {i.serviceType} · {i.fromAddress} → {i.toAddress} · {i.moveDate}</span>
               </p>
               <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground break-keep">{i.content}</p>
             </div>
@@ -247,7 +72,7 @@ export function QuoteView() {
               label={i.status}
               tone={i.status === "완료" ? "success" : i.status === "상담중" ? "warning" : "info"}
               onClick={() => {
-                setInquiries((prev) => prev.map((p) => (p.id === i.id ? { ...p, status: cycleStatus(p.status) } : p)));
+                setInquiries((prev) => prev.map((p) => (p.id === i.id ? { ...p, status: cycleQuoteStatus(p.status) } : p)));
                 logActivity("견적 문의 상태 변경", i.name);
               }}
             />
@@ -258,39 +83,29 @@ export function QuoteView() {
   );
 }
 
-export function RegionView() {
-  const { regions, setRegions, logActivity } = useMovingAdmin();
-  const [draft, setDraft] = useState("");
-
-  const addRegion = (e: FormEvent) => {
-    e.preventDefault();
-    if (!draft.trim()) return;
-    setRegions((prev) => [{ id: Date.now(), name: draft.trim(), published: true }, ...prev]);
-    toast.success("서비스 지역이 등록되었습니다.");
-    logActivity("서비스 지역 등록", draft.trim());
-    setDraft("");
-  };
-
+export function EstimateView() {
+  const { quotes, setQuotes, logActivity } = useMovingAdmin();
+  const STATUSES = ["작성중", "발송완료", "승인", "반려"] as const;
   return (
     <div>
-      <PanelHeader title="서비스 지역 관리" description="홈페이지에 노출되는 서비스 가능 지역을 관리합니다." />
-      <form onSubmit={addRegion} className="flex gap-2">
-        <Input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="예: 서울 전지역" className="flex-1" />
-        <Button type="submit" size="sm" className="shrink-0 gap-1.5 font-bold">
-          <Plus className="h-3.5 w-3.5" />
-          등록
-        </Button>
-      </form>
-      <div className="mt-4 space-y-2">
-        {regions.map((r) => (
-          <Row key={r.id}>
-            <p className="truncate text-sm font-medium text-foreground">{r.name}</p>
+      <PanelHeader title="견적 관리" description="이사·청소 유형별 항목 견적을 확인합니다." />
+      <div className="space-y-2">
+        {quotes.map((q) => (
+          <Row key={q.id}>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                {q.customerName} <span className="font-normal text-muted-foreground">· {q.serviceType} · {q.moveDate}</span>
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{q.items.map((item) => `${item.name} ${item.cost}`).join(" · ")}</p>
+              <p className="mt-0.5 text-xs font-semibold text-foreground">총액 {q.totalAmount}</p>
+            </div>
             <StatusBadge
-              label={r.published ? "게시중" : "비공개"}
-              tone={r.published ? "success" : "neutral"}
+              label={q.status}
+              tone={q.status === "승인" ? "success" : q.status === "반려" ? "danger" : q.status === "발송완료" ? "info" : "neutral"}
               onClick={() => {
-                setRegions((prev) => prev.map((x) => (x.id === r.id ? { ...x, published: !x.published } : x)));
-                logActivity(r.published ? "지역 비공개 전환" : "지역 게시", r.name);
+                const next = STATUSES[(STATUSES.indexOf(q.status) + 1) % STATUSES.length];
+                setQuotes((prev) => prev.map((p) => (p.id === q.id ? { ...p, status: next } : p)));
+                logActivity("견적 상태 변경", `${q.customerName} → ${next}`);
               }}
             />
           </Row>
@@ -300,34 +115,193 @@ export function RegionView() {
   );
 }
 
-export function StaffView() {
-  const { staff, setStaff, logActivity } = useMovingAdmin();
+export function ReservationView() {
+  const { reservations, setReservations, teams, vehicles, logActivity } = useMovingAdmin();
+  const STATUSES = ["대기", "확정", "완료", "취소"] as const;
   return (
     <div>
-      <PanelHeader title="관리자 모드" description="관리자 · 직원 계정과 권한을 관리합니다." />
+      <PanelHeader title="예약 관리" description="확정된 작업 예약과 배정된 팀·차량을 관리합니다." />
       <div className="space-y-2">
-        {staff.map((s) => (
-          <Row key={s.id}>
+        {reservations.map((r) => (
+          <Row key={r.id}>
             <div className="min-w-0">
-              <p className="text-sm font-medium text-foreground">{s.name}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{s.position} · {s.phone}</p>
+              <p className="text-sm font-medium text-foreground">
+                {r.customerName} <span className="font-normal text-muted-foreground">· {r.serviceType} · {r.moveDate} {r.time}</span>
+              </p>
+              <p className="mt-0.5 flex flex-wrap gap-2 text-xs text-muted-foreground">
+                <Select
+                  value={r.team}
+                  onValueChange={(v) => {
+                    setReservations((prev) => prev.map((p) => (p.id === r.id ? { ...p, team: v } : p)));
+                    logActivity("작업팀 배정 변경", `${r.customerName} → ${v}`);
+                  }}
+                >
+                  <SelectTrigger className="h-7 w-28 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {teams.map((t) => (
+                      <SelectItem key={t.id} value={t.name}>{t.name}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Select
+                  value={r.vehicle}
+                  onValueChange={(v) => {
+                    setReservations((prev) => prev.map((p) => (p.id === r.id ? { ...p, vehicle: v } : p)));
+                    logActivity("차량 배정 변경", `${r.customerName} → ${v}`);
+                  }}
+                >
+                  <SelectTrigger className="h-7 w-36 text-xs">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {vehicles.map((v) => (
+                      <SelectItem key={v.id} value={`${v.type} (${v.plateNumber})`}>{v.type} ({v.plateNumber})</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </p>
             </div>
-            <Select
-              value={s.role}
-              onValueChange={(v) => {
-                setStaff((prev) => prev.map((p) => (p.id === s.id ? { ...p, role: v as typeof s.role } : p)));
-                logActivity("권한 변경", `${s.name} → ${v}`);
-                toast.success("권한이 변경되었습니다.");
+            <StatusBadge
+              label={r.status}
+              tone={r.status === "완료" ? "success" : r.status === "취소" ? "danger" : r.status === "확정" ? "info" : "warning"}
+              onClick={() => {
+                const next = STATUSES[(STATUSES.indexOf(r.status) + 1) % STATUSES.length];
+                setReservations((prev) => prev.map((p) => (p.id === r.id ? { ...p, status: next } : p)));
+                logActivity("예약 상태 변경", `${r.customerName} → ${next}`);
               }}
-            >
-              <SelectTrigger className="w-28">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="관리자">관리자</SelectItem>
-                <SelectItem value="직원">직원</SelectItem>
-              </SelectContent>
-            </Select>
+            />
+          </Row>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function TeamView() {
+  const { teams, setTeams, logActivity } = useMovingAdmin();
+  const STATUSES = ["대기", "작업중", "휴무"] as const;
+  return (
+    <div>
+      <PanelHeader title="작업팀 관리" description="이사·청소 작업팀 현황을 관리합니다." />
+      <div className="space-y-2">
+        {teams.map((t) => (
+          <Row key={t.id}>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                {t.name} <span className="font-normal text-muted-foreground">· 팀장 {t.leader} · {t.members}명 · {t.phone}</span>
+              </p>
+            </div>
+            <StatusBadge
+              label={t.status}
+              tone={t.status === "작업중" ? "info" : t.status === "휴무" ? "neutral" : "success"}
+              onClick={() => {
+                const next = STATUSES[(STATUSES.indexOf(t.status) + 1) % STATUSES.length];
+                setTeams((prev) => prev.map((p) => (p.id === t.id ? { ...p, status: next } : p)));
+                logActivity("작업팀 상태 변경", `${t.name} → ${next}`);
+              }}
+            />
+          </Row>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function VehicleView() {
+  const { vehicles, setVehicles, logActivity } = useMovingAdmin();
+  const STATUSES = ["대기", "운행중", "정비중"] as const;
+  return (
+    <div>
+      <PanelHeader title="차량 관리" description="보유 차량의 배정과 운행 상태를 관리합니다." />
+      <div className="space-y-2">
+        {vehicles.map((v) => (
+          <Row key={v.id}>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                {v.plateNumber} <span className="font-normal text-muted-foreground">· {v.type} · 배정팀 {v.assignedTeam}</span>
+              </p>
+            </div>
+            <StatusBadge
+              label={v.status}
+              tone={v.status === "운행중" ? "info" : v.status === "정비중" ? "danger" : "success"}
+              onClick={() => {
+                const next = STATUSES[(STATUSES.indexOf(v.status) + 1) % STATUSES.length];
+                setVehicles((prev) => prev.map((p) => (p.id === v.id ? { ...p, status: next } : p)));
+                logActivity("차량 상태 변경", `${v.plateNumber} → ${next}`);
+              }}
+            />
+          </Row>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function WorkStatusView() {
+  const { workStatus, setWorkStatus, logActivity } = useMovingAdmin();
+  const STAGES = ["출발전", "이동중", "작업중", "완료"] as const;
+  const byDate = workStatus.reduce<Record<string, typeof workStatus>>((acc, w) => {
+    (acc[w.date] ??= []).push(w);
+    return acc;
+  }, {});
+  const dates = Object.keys(byDate).sort();
+
+  return (
+    <div>
+      <PanelHeader title="작업 현황" description="당일 작업의 진행 단계를 실시간으로 관리합니다." />
+      <div className="space-y-4">
+        {dates.map((date) => (
+          <div key={date} className="rounded-xl border border-border bg-card p-4">
+            <p className="text-sm font-semibold text-foreground">{date}</p>
+            <div className="mt-2 space-y-1.5">
+              {byDate[date].map((w) => (
+                <div key={w.id} className="flex items-center gap-3 rounded-lg bg-secondary/30 px-3 py-2 text-xs">
+                  <span className="min-w-0 flex-1 truncate text-foreground">{w.customerName} <span className="text-muted-foreground">· {w.serviceType} · {w.team}</span></span>
+                  <StatusBadge
+                    label={w.stage}
+                    tone={w.stage === "완료" ? "success" : w.stage === "작업중" ? "info" : w.stage === "이동중" ? "warning" : "neutral"}
+                    onClick={() => {
+                      const next = STAGES[(STAGES.indexOf(w.stage) + 1) % STAGES.length];
+                      setWorkStatus((prev) => prev.map((p) => (p.id === w.id ? { ...p, stage: next } : p)));
+                      logActivity("작업 현황 변경", `${w.customerName} → ${next}`);
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function PaymentView() {
+  const { payments, setPayments, logActivity } = useMovingAdmin();
+  const STATUSES = ["완납", "부분납부", "미납"] as const;
+  return (
+    <div>
+      <PanelHeader title="결제 관리" description="작업별 결제 현황을 관리합니다. 배지를 클릭하면 상태가 변경됩니다." />
+      <div className="space-y-2">
+        {payments.map((p) => (
+          <Row key={p.id}>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                {p.customerName} <span className="font-normal text-muted-foreground">· {p.serviceType}</span>
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{p.amount} · 납부기한 {p.dueDate}</p>
+            </div>
+            <StatusBadge
+              label={p.status}
+              tone={p.status === "완납" ? "success" : p.status === "부분납부" ? "warning" : "danger"}
+              onClick={() => {
+                const next = STATUSES[(STATUSES.indexOf(p.status) + 1) % STATUSES.length];
+                setPayments((prev) => prev.map((x) => (x.id === p.id ? { ...x, status: next } : x)));
+                logActivity("결제 상태 변경", `${p.customerName} → ${next}`);
+              }}
+            />
           </Row>
         ))}
       </div>

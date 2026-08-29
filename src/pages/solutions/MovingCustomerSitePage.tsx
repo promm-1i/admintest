@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { ArrowLeft, Building2, Phone } from "lucide-react";
+import { ArrowLeft, Building2, Phone, Star, PackageSearch } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -16,7 +16,7 @@ export default function MovingCustomerSitePage() {
     "MintCL 이사·청소업체 맞춤형 홈페이지 웹 솔루션으로 구축한 고객용 홈페이지 데모입니다.",
   );
 
-  const { cases, regions, setInquiries, logActivity } = useMovingAdmin();
+  const { cases, services, regions, reviews, siteSettings, setInquiries, logActivity } = useMovingAdmin();
   const [regionFilter, setRegionFilter] = useState("전체");
   const [selected, setSelected] = useState<Case | null>(null);
   const [target, setTarget] = useState<Case | null>(null);
@@ -27,7 +27,9 @@ export default function MovingCustomerSitePage() {
   const publicCases = cases.filter((c) => c.status === "공개");
   const filterRegions = ["전체", ...new Set(publicCases.map((c) => c.region))];
   const filtered = publicCases.filter((c) => regionFilter === "전체" || c.region === regionFilter);
+  const publishedServices = services.filter((s) => s.published);
   const publishedRegions = regions.filter((r) => r.published);
+  const publishedReviews = reviews.filter((r) => r.published);
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
@@ -36,7 +38,19 @@ export default function MovingCustomerSitePage() {
       return;
     }
     setInquiries((prev) => [
-      { id: Date.now(), name: name.trim(), phone: phone.trim(), region: target?.region ?? "미지정", content: memo.trim() || "견적 요청", status: "접수" },
+      {
+        id: Date.now(),
+        name: name.trim(),
+        phone: phone.trim(),
+        region: target?.region ?? "미지정",
+        serviceType: target?.name ?? "일반 문의",
+        fromAddress: "미입력",
+        toAddress: "미입력",
+        moveDate: "미정",
+        content: memo.trim() || "견적 요청",
+        status: "접수",
+        assignee: "-",
+      },
       ...prev,
     ]);
     logActivity("홈페이지 견적 문의 접수", target?.name ?? "일반 문의");
@@ -50,7 +64,7 @@ export default function MovingCustomerSitePage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="flex items-center justify-center gap-1.5 bg-foreground px-4 py-1.5 text-center text-[11px] text-background">
-        <span>이 화면은 관리자 페이지에서 등록·공개한 작업 사례가 실시간 반영되는 고객용 홈페이지 데모입니다.</span>
+        <span>이 화면은 관리자 페이지에서 등록·공개한 내용이 실시간 반영되는 고객용 홈페이지 데모입니다.</span>
         <Link to="/web-solutions/moving/demo" className="inline-flex items-center gap-1 font-semibold underline underline-offset-2">
           <ArrowLeft className="h-3 w-3" />
           관리자 페이지로
@@ -64,64 +78,100 @@ export default function MovingCustomerSitePage() {
               <Building2 className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-sm font-bold text-foreground">MintCL 이사·청소</p>
-              <p className="text-[11px] text-muted-foreground">MintCL 업종별 맞춤 홈페이지 데모</p>
+              <p className="text-sm font-bold text-foreground">{siteSettings.companyName}</p>
+              <p className="text-[11px] text-muted-foreground">{siteSettings.tagline}</p>
             </div>
           </div>
           <span className="hidden items-center gap-1.5 text-sm font-medium text-foreground sm:flex">
             <Phone className="h-3.5 w-3.5 text-primary" />
-            1588-0000
+            {siteSettings.phone}
           </span>
         </div>
       </header>
 
-      <section className="bg-secondary/40 px-4 py-14 text-center">
-        <p className="text-xs font-semibold uppercase tracking-widest text-primary">WORK CASES</p>
-        <h1 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">작업 사례</h1>
-        <p className="mt-2 text-sm text-muted-foreground">지역별 작업 사례를 확인하고 견적을 문의해보세요</p>
-        <div className="mx-auto mt-6 flex max-w-xl flex-wrap justify-center gap-1.5">
-          {filterRegions.map((r) => (
-            <button
-              key={r}
-              type="button"
-              onClick={() => setRegionFilter(r)}
-              className={cn(
-                "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
-                regionFilter === r ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:border-primary/50 hover:text-foreground",
-              )}
-            >
-              {r}
-            </button>
-          ))}
-        </div>
-      </section>
+      {siteSettings.showServices && publishedServices.length > 0 && (
+        <section className="bg-secondary/40 px-4 py-14 text-center">
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">SERVICES</p>
+          <h1 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">서비스 안내</h1>
+          <div className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {publishedServices.map((s) => (
+              <div key={s.id} className="rounded-xl border border-border bg-card p-4 text-left">
+                <p className="text-sm font-semibold text-foreground">{s.name}</p>
+                <p className="mt-1 text-xs text-muted-foreground break-keep">{s.desc}</p>
+                <p className="mt-2 text-xs font-medium text-primary">{s.basePrice}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       <section className="mx-auto max-w-6xl px-4 py-12">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((c) => (
-            <button
-              key={c.id}
-              type="button"
-              onClick={() => setSelected(c)}
-              className="flex flex-col items-start overflow-hidden rounded-xl border border-border bg-card text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
-            >
-              <div className="flex h-32 w-full items-center justify-center bg-secondary/50 text-5xl">{c.icon}</div>
-              <div className="p-4">
-                <span className="inline-block rounded bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">{c.region}</span>
-                <p className="mt-2 text-sm font-semibold text-foreground">{c.name}</p>
-                <p className="mt-2 text-sm font-bold text-foreground">{c.price}</p>
-              </div>
-            </button>
-          ))}
-        </div>
-        {filtered.length === 0 && <p className="py-16 text-center text-sm text-muted-foreground">조건에 맞는 작업 사례가 없습니다.</p>}
+        {siteSettings.showCases && (
+          <>
+            <h2 className="text-lg font-semibold text-foreground">작업 사례</h2>
+            <div className="mx-auto mt-4 flex max-w-xl flex-wrap gap-1.5">
+              {filterRegions.map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => setRegionFilter(r)}
+                  className={cn(
+                    "rounded-full border px-3 py-1 text-xs font-medium transition-colors",
+                    regionFilter === r ? "border-primary bg-primary text-primary-foreground" : "border-border bg-background text-muted-foreground hover:border-primary/50 hover:text-foreground",
+                  )}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {filtered.map((c) => (
+                <button
+                  key={c.id}
+                  type="button"
+                  onClick={() => setSelected(c)}
+                  className="flex flex-col items-start overflow-hidden rounded-xl border border-border bg-card text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
+                >
+                  <div className="flex h-32 w-full items-center justify-center bg-secondary/50">
+                    <PackageSearch className="h-8 w-8 text-muted-foreground/40" strokeWidth={1.25} />
+                  </div>
+                  <div className="p-4">
+                    <span className="inline-block rounded bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">{c.region}</span>
+                    <p className="mt-2 text-sm font-semibold text-foreground">{c.name}</p>
+                    <p className="mt-2 text-sm font-bold text-foreground">{c.price}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+            {filtered.length === 0 && <p className="py-16 text-center text-sm text-muted-foreground">조건에 맞는 작업 사례가 없습니다.</p>}
+          </>
+        )}
 
-        {publishedRegions.length > 0 && (
+        {siteSettings.showRegions && publishedRegions.length > 0 && (
           <div className="mt-14">
             <h2 className="text-lg font-semibold text-foreground">서비스 지역</h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {publishedRegions.map((r) => (
                 <span key={r.id} className="rounded-full border border-border bg-secondary/30 px-4 py-2 text-sm text-foreground">{r.name}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {publishedReviews.length > 0 && (
+          <div className="mt-14">
+            <h2 className="text-lg font-semibold text-foreground">고객 후기</h2>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {publishedReviews.map((r) => (
+                <div key={r.id} className="rounded-xl border border-border bg-card p-4">
+                  <p className="flex items-center gap-0.5 text-amber-500">
+                    {Array.from({ length: r.rating }).map((_, i) => (
+                      <Star key={i} className="h-3 w-3 fill-current" />
+                    ))}
+                  </p>
+                  <p className="mt-2 text-xs leading-relaxed text-foreground break-keep">{r.content}</p>
+                  <p className="mt-2 text-[11px] text-muted-foreground">{r.customerName} · {r.serviceType}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -134,9 +184,9 @@ export default function MovingCustomerSitePage() {
             <p className="text-xs font-semibold uppercase tracking-widest text-background/70">Contact</p>
             <h2 className="mt-2 text-2xl font-bold">견적 문의</h2>
             <p className="mt-3 text-sm leading-6 text-background/70">지역과 평수를 남기면 담당자가 확인 후 연락드립니다.</p>
-            <a href="tel:1588-0000" className="mt-5 inline-flex items-center gap-2 text-lg font-bold">
+            <a href={`tel:${siteSettings.phone}`} className="mt-5 inline-flex items-center gap-2 text-lg font-bold">
               <Phone className="h-5 w-5" />
-              1588-0000
+              {siteSettings.phone}
             </a>
           </div>
           <form onSubmit={submit} className="rounded-xl border border-background/15 bg-background p-5 text-foreground">
@@ -157,14 +207,16 @@ export default function MovingCustomerSitePage() {
       </section>
 
       <footer className="border-t border-border bg-secondary/30 px-4 py-8 text-center text-xs text-muted-foreground">
-        <p>MintCL 이사·청소 (데모) · 1588-0000</p>
+        <p>{siteSettings.companyName} (데모) · {siteSettings.phone}</p>
         <p className="mt-1">이 페이지는 MintCL 업종별 맞춤 홈페이지로 구축 가능한 고객용 홈페이지 예시입니다.</p>
       </footer>
 
       <Modal open={!!selected} onClose={() => setSelected(null)} title={selected?.name ?? ""}>
         {selected && (
           <div>
-            <div className="flex h-32 items-center justify-center rounded-lg bg-secondary/50 text-6xl">{selected.icon}</div>
+            <div className="flex h-32 items-center justify-center rounded-lg bg-secondary/50">
+              <PackageSearch className="h-9 w-9 text-muted-foreground/40" strokeWidth={1.25} />
+            </div>
             <p className="mt-3 text-sm text-muted-foreground">{selected.region}</p>
             <p className="mt-1 text-sm font-bold text-foreground">{selected.price}</p>
             <Button

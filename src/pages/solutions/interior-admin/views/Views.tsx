@@ -1,12 +1,7 @@
-import { useEffect, useState, type FormEvent } from "react";
-import { toast } from "sonner";
-import { Search, Plus, Trash2, Pencil, Hammer, MessageSquare } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { MessageSquare, FolderKanban, Wallet } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useInteriorAdmin } from "../store";
-import { AREAS } from "../mockData";
-import { EMPTY_CASE_FORM } from "../types";
 import {
   PanelHeader,
   StatusBadge,
@@ -15,19 +10,20 @@ import {
   Row,
   EmptyResult,
 } from "@/pages/solutions/real-estate-admin/components";
-import type { Case } from "../types";
+import type { Estimate, QuoteInquiry } from "../types";
 
 export function DashboardView() {
-  const { cases, inquiries, activityLog } = useInteriorAdmin();
+  const { inquiries, projects, payments, activityLog } = useInteriorAdmin();
+  const unpaidCount = payments.filter((p) => p.status !== "완납").length;
   const stats = [
-    { label: "전체 시공 사례", value: cases.length, icon: Hammer },
-    { label: "공개 사례", value: cases.filter((c) => c.status === "공개").length, icon: Hammer },
     { label: "견적 문의", value: inquiries.length, icon: MessageSquare },
-    { label: "상담중", value: inquiries.filter((i) => i.status === "상담중").length, icon: MessageSquare },
+    { label: "진행중 프로젝트", value: projects.filter((p) => p.status === "진행중").length, icon: FolderKanban },
+    { label: "완료 프로젝트", value: projects.filter((p) => p.status === "완료").length, icon: FolderKanban },
+    { label: "결제 미완료", value: unpaidCount, icon: Wallet },
   ];
   return (
     <div>
-      <PanelHeader title="대시보드" description="시공 사례·견적문의 현황을 한눈에 확인합니다. 아래 숫자는 이 데모에서 실제로 조작한 데이터를 기준으로 계산됩니다." />
+      <PanelHeader title="대시보드" description="견적·프로젝트·결제 현황을 한눈에 확인합니다. 아래 숫자는 이 데모에서 실제로 조작한 데이터를 기준으로 계산됩니다." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
           <StatCard key={s.label} label={s.label} value={s.value} icon={s.icon} />
@@ -37,10 +33,10 @@ export function DashboardView() {
       <div className="mt-3 space-y-2">
         {activityLog.length === 0 && (
           <p className="rounded-lg border border-dashed border-border bg-secondary/30 p-6 text-center text-xs text-muted-foreground break-keep">
-            아직 작업 내역이 없습니다. 왼쪽 메뉴에서 시공 사례를 등록하거나 상태를 변경해보면 여기에 기록됩니다.
+            아직 작업 내역이 없습니다. 왼쪽 메뉴에서 견적 문의를 처리하거나 상태를 변경해보면 여기에 기록됩니다.
           </p>
         )}
-        {activityLog.map((log) => (
+        {activityLog.slice(0, 10).map((log) => (
           <div key={log.id} className="flex items-center gap-3 rounded-lg border border-border bg-secondary/30 px-3 py-2 text-xs">
             <span className="shrink-0 text-muted-foreground">{log.time}</span>
             <span className="shrink-0 font-medium text-foreground">{log.action}</span>
@@ -52,177 +48,7 @@ export function DashboardView() {
   );
 }
 
-export function CaseListView({ onNavigate }: { onNavigate: (key: string) => void }) {
-  const { cases, setCases, deleteCase, logActivity } = useInteriorAdmin();
-  const [query, setQuery] = useState("");
-  const [areaFilter, setAreaFilter] = useState("전체");
-  const [editTarget, setEditTarget] = useState<Case | null>(null);
-
-  const filtered = cases.filter((c) => {
-    const matchesArea = areaFilter === "전체" || c.area === areaFilter;
-    const matchesQuery = query.trim() === "" || c.name.includes(query);
-    return matchesArea && matchesQuery;
-  });
-
-  return (
-    <div>
-      <PanelHeader title="시공 사례 목록" description="완료된 시공 사례를 관리합니다." />
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="relative flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-          <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="사례명 검색" className="pl-9" />
-        </div>
-        <div className="flex flex-wrap gap-1.5">
-          {["전체", ...AREAS].map((a) => (
-            <button
-              key={a}
-              type="button"
-              onClick={() => setAreaFilter(a)}
-              className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
-                areaFilter === a ? "border-primary bg-primary text-primary-foreground" : "border-border text-muted-foreground hover:border-primary/50 hover:text-foreground"
-              }`}
-            >
-              {a}
-            </button>
-          ))}
-        </div>
-      </div>
-      <div className="mt-4 space-y-2">
-        {filtered.length === 0 && <EmptyResult message="조건에 맞는 시공 사례가 없습니다." />}
-        {filtered.map((c) => (
-          <Row key={c.id}>
-            <div className="min-w-0">
-              <p className="text-sm font-medium text-foreground">
-                <span className="mr-1.5">{c.icon}</span>
-                {c.name}
-              </p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{c.area} · {c.price}</p>
-            </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <StatusBadge
-                label={c.status}
-                tone={c.status === "공개" ? "success" : "neutral"}
-                onClick={() => {
-                  setCases((prev) => prev.map((p) => (p.id === c.id ? { ...p, status: p.status === "공개" ? "비공개" : "공개" } : p)));
-                  logActivity("시공 사례 공개상태 변경", c.name);
-                }}
-              />
-              <button type="button" onClick={() => setEditTarget(c)} className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground" aria-label={`${c.name} 수정`}>
-                <Pencil className="h-3.5 w-3.5" />
-              </button>
-              <button type="button" onClick={() => deleteCase(c.id)} className="rounded-md p-1.5 text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive" aria-label={`${c.name} 삭제`}>
-                <Trash2 className="h-3.5 w-3.5" />
-              </button>
-            </div>
-          </Row>
-        ))}
-      </div>
-      <div className="mt-4">
-        <Button size="sm" className="gap-1.5 font-bold" onClick={() => onNavigate("case-register")}>
-          <Plus className="h-3.5 w-3.5" />
-          신규 시공 사례 등록
-        </Button>
-      </div>
-      <CaseEditModal caseItem={editTarget} onClose={() => setEditTarget(null)} />
-    </div>
-  );
-}
-
-function CaseEditModal({ caseItem, onClose }: { caseItem: Case | null; onClose: () => void }) {
-  const { setCases, logActivity } = useInteriorAdmin();
-  const [form, setForm] = useState<Case | null>(caseItem);
-  useEffect(() => {
-    setForm(caseItem);
-  }, [caseItem]);
-
-  const handleSave = (e: FormEvent) => {
-    e.preventDefault();
-    if (!form) return;
-    setCases((prev) => prev.map((c) => (c.id === form.id ? form : c)));
-    toast.success("시공 사례 정보가 수정되었습니다.");
-    logActivity("시공 사례 수정", form.name);
-    onClose();
-  };
-
-  return (
-    <Modal open={!!caseItem} onClose={onClose} title="시공 사례 수정">
-      {form && (
-        <form onSubmit={handleSave} className="grid gap-4 sm:grid-cols-2">
-          <div className="sm:col-span-2">
-            <label className="text-xs font-medium text-muted-foreground">사례명</label>
-            <Input className="mt-1.5" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-          </div>
-          <div>
-            <label className="text-xs font-medium text-muted-foreground">평형</label>
-            <Input className="mt-1.5" value={form.area} onChange={(e) => setForm({ ...form, area: e.target.value })} />
-          </div>
-          <div>
-            <label className="text-xs font-medium text-muted-foreground">시공비</label>
-            <Input className="mt-1.5" value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })} />
-          </div>
-          <div className="sm:col-span-2">
-            <Button type="submit" className="gap-1.5 font-bold">저장</Button>
-          </div>
-        </form>
-      )}
-    </Modal>
-  );
-}
-
-export function CaseRegisterView({ onNavigate }: { onNavigate: (key: string) => void }) {
-  const { setCases, logActivity } = useInteriorAdmin();
-  const [form, setForm] = useState(EMPTY_CASE_FORM);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!form.name.trim() || !form.price.trim()) {
-      toast.error("모든 항목을 입력해 주세요.");
-      return;
-    }
-    setCases((prev) => [{ id: Date.now(), ...form, status: "공개", icon: "🏠" }, ...prev]);
-    toast.success("시공 사례가 등록되었습니다.");
-    logActivity("시공 사례 등록", form.name);
-    setForm(EMPTY_CASE_FORM);
-    onNavigate("case-list");
-  };
-
-  return (
-    <div>
-      <PanelHeader title="시공 사례 등록" description="새 시공 사례의 기본 정보를 입력합니다." />
-      <form onSubmit={handleSubmit} className="grid gap-4 sm:grid-cols-2">
-        <div className="sm:col-span-2">
-          <label className="text-xs font-medium text-muted-foreground">사례명</label>
-          <Input className="mt-1.5" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} placeholder="예: 역삼동 24평 아파트 전체 리모델링" />
-        </div>
-        <div>
-          <label className="text-xs font-medium text-muted-foreground">평형</label>
-          <Select value={form.area} onValueChange={(v) => setForm((f) => ({ ...f, area: v }))}>
-            <SelectTrigger className="mt-1.5">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {AREAS.map((a) => (
-                <SelectItem key={a} value={a}>{a}</SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <label className="text-xs font-medium text-muted-foreground">시공비</label>
-          <Input className="mt-1.5" value={form.price} onChange={(e) => setForm((f) => ({ ...f, price: e.target.value }))} placeholder="예: 3,200만원" />
-        </div>
-        <div className="sm:col-span-2">
-          <Button type="submit" className="gap-1.5 font-bold">
-            <Plus className="h-3.5 w-3.5" />
-            시공 사례 등록하기
-          </Button>
-        </div>
-      </form>
-    </div>
-  );
-}
-
-function cycleStatus(status: "접수" | "상담중" | "완료") {
+function cycleQuoteStatus(status: QuoteInquiry["status"]) {
   if (status === "접수") return "상담중" as const;
   if (status === "상담중") return "완료" as const;
   return "접수" as const;
@@ -239,7 +65,7 @@ export function QuoteView() {
           <Row key={i.id}>
             <div className="min-w-0">
               <p className="text-sm font-medium text-foreground">
-                {i.name} <span className="font-normal text-muted-foreground">· {i.phone} · {i.area}</span>
+                {i.name} <span className="font-normal text-muted-foreground">· {i.phone} · {i.area} · {i.spaceType} · 예산 {i.budget}</span>
               </p>
               <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground break-keep">{i.content}</p>
             </div>
@@ -247,7 +73,7 @@ export function QuoteView() {
               label={i.status}
               tone={i.status === "완료" ? "success" : i.status === "상담중" ? "warning" : "info"}
               onClick={() => {
-                setInquiries((prev) => prev.map((p) => (p.id === i.id ? { ...p, status: cycleStatus(p.status) } : p)));
+                setInquiries((prev) => prev.map((p) => (p.id === i.id ? { ...p, status: cycleQuoteStatus(p.status) } : p)));
                 logActivity("견적 문의 상태 변경", i.name);
               }}
             />
@@ -258,39 +84,28 @@ export function QuoteView() {
   );
 }
 
-export function PackageView() {
-  const { packages, setPackages, logActivity } = useInteriorAdmin();
-  const [draft, setDraft] = useState("");
-
-  const addPackage = (e: FormEvent) => {
-    e.preventDefault();
-    if (!draft.trim()) return;
-    setPackages((prev) => [{ id: Date.now(), title: draft.trim(), published: true }, ...prev]);
-    toast.success("패키지가 등록되었습니다.");
-    logActivity("패키지 등록", draft.trim());
-    setDraft("");
-  };
-
+export function SurveyView() {
+  const { surveys, setSurveys, logActivity } = useInteriorAdmin();
+  const STATUSES = ["예정", "완료", "취소"] as const;
   return (
     <div>
-      <PanelHeader title="평형별 패키지 관리" description="평형대별 시공 패키지와 가격을 관리합니다." />
-      <form onSubmit={addPackage} className="flex gap-2">
-        <Input value={draft} onChange={(e) => setDraft(e.target.value)} placeholder="예: 20평대 패키지 - 2,200만원부터" className="flex-1" />
-        <Button type="submit" size="sm" className="shrink-0 gap-1.5 font-bold">
-          <Plus className="h-3.5 w-3.5" />
-          등록
-        </Button>
-      </form>
-      <div className="mt-4 space-y-2">
-        {packages.map((p) => (
-          <Row key={p.id}>
-            <p className="truncate text-sm font-medium text-foreground">{p.title}</p>
+      <PanelHeader title="현장 실측 관리" description="방문 실측 일정과 결과를 관리합니다." />
+      <div className="space-y-2">
+        {surveys.map((s) => (
+          <Row key={s.id}>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                {s.customerName} <span className="font-normal text-muted-foreground">· {s.address} · {s.area} · {s.scheduledDate} · 담당 {s.surveyor}</span>
+              </p>
+              {s.memo && <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground break-keep">{s.memo}</p>}
+            </div>
             <StatusBadge
-              label={p.published ? "게시중" : "비공개"}
-              tone={p.published ? "success" : "neutral"}
+              label={s.status}
+              tone={s.status === "완료" ? "success" : s.status === "취소" ? "danger" : "info"}
               onClick={() => {
-                setPackages((prev) => prev.map((x) => (x.id === p.id ? { ...x, published: !x.published } : x)));
-                logActivity(p.published ? "패키지 비공개 전환" : "패키지 게시", p.title);
+                const next = STATUSES[(STATUSES.indexOf(s.status) + 1) % STATUSES.length];
+                setSurveys((prev) => prev.map((p) => (p.id === s.id ? { ...p, status: next } : p)));
+                logActivity("현장 실측 상태 변경", `${s.customerName} → ${next}`);
               }}
             />
           </Row>
@@ -300,34 +115,191 @@ export function PackageView() {
   );
 }
 
-export function StaffView() {
-  const { staff, setStaff, logActivity } = useInteriorAdmin();
+export function EstimateView() {
+  const { estimates, setEstimates, logActivity } = useInteriorAdmin();
+  const [detail, setDetail] = useState<Estimate | null>(null);
+  const [query, setQuery] = useState("");
+  const STATUSES = ["작성중", "발송완료", "승인", "반려"] as const;
+  const filtered = estimates.filter((e) => query.trim() === "" || e.customerName.includes(query) || e.projectName.includes(query));
+
   return (
     <div>
-      <PanelHeader title="관리자 모드" description="관리자 · 직원 계정과 권한을 관리합니다." />
-      <div className="space-y-2">
-        {staff.map((s) => (
-          <Row key={s.id}>
-            <div className="min-w-0">
-              <p className="text-sm font-medium text-foreground">{s.name}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{s.position} · {s.phone}</p>
-            </div>
-            <Select
-              value={s.role}
-              onValueChange={(v) => {
-                setStaff((prev) => prev.map((p) => (p.id === s.id ? { ...p, role: v as typeof s.role } : p)));
-                logActivity("권한 변경", `${s.name} → ${v}`);
-                toast.success("권한이 변경되었습니다.");
+      <PanelHeader title="견적서 관리" description="항목별 견적 내역을 확인합니다. 행을 클릭하면 세부 항목을 볼 수 있습니다." />
+      <div className="relative">
+        <Input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="고객명 · 프로젝트명 검색" />
+      </div>
+      <div className="mt-4 space-y-2">
+        {filtered.length === 0 && <EmptyResult message="조건에 맞는 견적서가 없습니다." />}
+        {filtered.map((e) => (
+          <Row key={e.id}>
+            <button type="button" onClick={() => setDetail(e)} className="min-w-0 flex-1 text-left">
+              <p className="text-sm font-medium text-foreground">
+                {e.customerName} <span className="font-normal text-muted-foreground">· {e.projectName}</span>
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">총액 {e.totalAmount} · 작성일 {e.createdDate}</p>
+            </button>
+            <StatusBadge
+              label={e.status}
+              tone={e.status === "승인" ? "success" : e.status === "반려" ? "danger" : e.status === "발송완료" ? "info" : "neutral"}
+              onClick={() => {
+                const next = STATUSES[(STATUSES.indexOf(e.status) + 1) % STATUSES.length];
+                setEstimates((prev) => prev.map((p) => (p.id === e.id ? { ...p, status: next } : p)));
+                logActivity("견적서 상태 변경", `${e.customerName} → ${next}`);
               }}
-            >
-              <SelectTrigger className="w-28">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="관리자">관리자</SelectItem>
-                <SelectItem value="직원">직원</SelectItem>
-              </SelectContent>
-            </Select>
+            />
+          </Row>
+        ))}
+      </div>
+      <Modal open={!!detail} onClose={() => setDetail(null)} title="견적서 상세">
+        {detail && (
+          <div>
+            <p className="text-sm font-medium text-foreground">{detail.customerName} · {detail.projectName}</p>
+            <p className="mt-1 text-xs text-muted-foreground">{detail.area} · 작성일 {detail.createdDate}</p>
+            <div className="mt-4 overflow-hidden rounded-lg border border-border">
+              <table className="w-full border-collapse text-left text-sm">
+                <tbody>
+                  {detail.items.map((item, idx) => (
+                    <tr key={idx} className="border-b border-border/60 last:border-b-0">
+                      <td className="px-3 py-2 text-foreground">{item.name}</td>
+                      <td className="px-3 py-2 text-right text-muted-foreground">{item.cost}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-3 text-right text-sm font-bold text-foreground">총액 {detail.totalAmount}</p>
+          </div>
+        )}
+      </Modal>
+    </div>
+  );
+}
+
+export function ContractView() {
+  const { contracts, setContracts, logActivity } = useInteriorAdmin();
+  const STATUSES = ["계약대기", "계약완료", "취소"] as const;
+  return (
+    <div>
+      <PanelHeader title="계약 관리" description="고객별 계약 현황을 관리합니다." />
+      <div className="space-y-2">
+        {contracts.map((c) => (
+          <Row key={c.id}>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                {c.customerName} <span className="font-normal text-muted-foreground">· {c.projectName}</span>
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">계약금액 {c.contractAmount} · 계약일 {c.contractDate}</p>
+            </div>
+            <StatusBadge
+              label={c.status}
+              tone={c.status === "계약완료" ? "success" : c.status === "취소" ? "danger" : "warning"}
+              onClick={() => {
+                const next = STATUSES[(STATUSES.indexOf(c.status) + 1) % STATUSES.length];
+                setContracts((prev) => prev.map((p) => (p.id === c.id ? { ...p, status: next } : p)));
+                logActivity("계약 상태 변경", `${c.customerName} → ${next}`);
+              }}
+            />
+          </Row>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ProjectView() {
+  const { projects, setProjects, logActivity } = useInteriorAdmin();
+  const STATUSES = ["진행전", "진행중", "완료", "보류"] as const;
+  return (
+    <div>
+      <PanelHeader title="프로젝트 관리" description="계약 이후 시공 프로젝트의 진행 현황을 관리합니다." />
+      <div className="space-y-2">
+        {projects.map((p) => (
+          <Row key={p.id}>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                {p.customerName} <span className="font-normal text-muted-foreground">· {p.projectName}</span>
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{p.area} · {p.startDate} ~ {p.endDate} · 담당 {p.manager}</p>
+            </div>
+            <StatusBadge
+              label={p.status}
+              tone={p.status === "완료" ? "success" : p.status === "보류" ? "danger" : p.status === "진행중" ? "info" : "neutral"}
+              onClick={() => {
+                const next = STATUSES[(STATUSES.indexOf(p.status) + 1) % STATUSES.length];
+                setProjects((prev) => prev.map((x) => (x.id === p.id ? { ...x, status: next } : x)));
+                logActivity("프로젝트 상태 변경", `${p.customerName} → ${next}`);
+              }}
+            />
+          </Row>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function ProcessView() {
+  const { process, setProcess, logActivity } = useInteriorAdmin();
+  const STATUSES = ["예정", "진행중", "완료"] as const;
+  const byProject = process.reduce<Record<string, typeof process>>((acc, s) => {
+    (acc[s.projectName] ??= []).push(s);
+    return acc;
+  }, {});
+
+  return (
+    <div>
+      <PanelHeader title="공정 관리" description="프로젝트별 공정 단계를 확인하고 진행 상태를 변경합니다." />
+      <div className="space-y-4">
+        {Object.entries(byProject).map(([projectName, steps]) => (
+          <div key={projectName} className="rounded-xl border border-border bg-card p-4">
+            <p className="text-sm font-semibold text-foreground">{projectName}</p>
+            <div className="mt-2 space-y-1.5">
+              {steps.map((s) => (
+                <div key={s.id} className="flex items-center gap-3 rounded-lg bg-secondary/30 px-3 py-2 text-xs">
+                  <span className="shrink-0 font-medium text-foreground">{s.stepName}</span>
+                  <span className="min-w-0 flex-1 truncate text-muted-foreground">{s.scheduledDate} · {s.worker}</span>
+                  <StatusBadge
+                    label={s.status}
+                    tone={s.status === "완료" ? "success" : s.status === "진행중" ? "info" : "neutral"}
+                    onClick={() => {
+                      const next = STATUSES[(STATUSES.indexOf(s.status) + 1) % STATUSES.length];
+                      setProcess((prev) => prev.map((p) => (p.id === s.id ? { ...p, status: next } : p)));
+                      logActivity("공정 상태 변경", `${projectName} · ${s.stepName} → ${next}`);
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function MaterialView() {
+  const { materials, setMaterials, logActivity } = useInteriorAdmin();
+  const STATUSES = ["주문", "입고", "사용완료"] as const;
+  return (
+    <div>
+      <PanelHeader title="자재 관리" description="프로젝트별 자재 발주·입고 현황을 관리합니다." />
+      <div className="space-y-2">
+        {materials.map((m) => (
+          <Row key={m.id}>
+            <div className="min-w-0">
+              <p className="text-sm font-medium text-foreground">
+                {m.name} <span className="font-normal text-muted-foreground">· {m.category} · {m.supplier}</span>
+              </p>
+              <p className="mt-0.5 text-xs text-muted-foreground">{m.unitPrice} · {m.projectName}</p>
+            </div>
+            <StatusBadge
+              label={m.status}
+              tone={m.status === "사용완료" ? "success" : m.status === "입고" ? "info" : "neutral"}
+              onClick={() => {
+                const next = STATUSES[(STATUSES.indexOf(m.status) + 1) % STATUSES.length];
+                setMaterials((prev) => prev.map((p) => (p.id === m.id ? { ...p, status: next } : p)));
+                logActivity("자재 상태 변경", `${m.name} → ${next}`);
+              }}
+            />
           </Row>
         ))}
       </div>
