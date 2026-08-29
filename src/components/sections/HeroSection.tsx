@@ -65,8 +65,8 @@ export function HeroSection() {
   );
 
   return (
-    <section className="relative overflow-hidden bg-background lg:mx-auto lg:h-[min(82vh,820px)] lg:max-w-[1920px]">
-      {/* Desktop: full-bleed video stage, height capped to the viewport so it fits in one glance instead of forcing a 16:9-at-full-width scroll */}
+    <section className="relative overflow-hidden bg-background lg:mx-auto lg:h-[min(82vh,860px)] lg:max-w-[1680px]">
+      {/* Desktop: video stage sized to stay close to the source 16:9 so object-cover doesn't crop it heavily, while still fitting one viewport */}
       {isDesktop && (
         <div className="absolute inset-0 hidden lg:block">
           {HERO_SLIDES.map((s, i) => renderVideo(s, i))}

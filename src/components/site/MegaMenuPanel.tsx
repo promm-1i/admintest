@@ -22,7 +22,7 @@ export function MegaMenuPanel({ entries, onNavigate, onMouseEnter, onMouseLeave 
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className="mx-auto grid max-w-5xl gap-10 px-10 py-8 sm:grid-cols-3">
+      <div className="ml-auto grid max-w-3xl gap-10 px-4 py-8 sm:px-6 sm:grid-cols-3 lg:px-10">
         {entries.map((entry) => (
           <div key={entry.key}>
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">{entry.label}</p>
