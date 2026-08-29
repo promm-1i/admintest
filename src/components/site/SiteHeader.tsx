@@ -3,11 +3,13 @@ import { Link } from "react-router-dom";
 import { Menu, X, Send, ArrowRight, ChevronDown, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { MegaMenuPanel } from "@/components/site/MegaMenuPanel";
 import { HEADER_NAV, type NavDropdownEntry } from "@/components/site/navData";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 
 const MEGA_CLOSE_DELAY = 150;
+const DROPDOWN_ENTRIES = HEADER_NAV.filter((e): e is NavDropdownEntry => e.type === "dropdown");
 
 function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavigate: () => void }) {
   return (
@@ -89,35 +91,17 @@ export function SiteHeader() {
         >
           {HEADER_NAV.map((entry) =>
             entry.type === "dropdown" ? (
-              <div key={entry.key} className="relative">
-                <button
-                  type="button"
-                  aria-expanded={megaOpen}
-                  className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  onMouseEnter={openMega}
-                  onClick={() => (megaOpen ? scheduleCloseMega() : openMega())}
-                >
-                  {entry.label}
-                  <ChevronDown className={cn("size-3.5 transition-transform duration-200", megaOpen && "rotate-180")} />
-                </button>
-                {megaOpen && (
-                  <div className="absolute left-0 top-full pt-3 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-1 motion-safe:duration-150">
-                    <ul className="min-w-44 whitespace-nowrap rounded-md border border-border bg-card py-2 shadow-lg">
-                      {entry.items.map((item) => (
-                        <li key={item.label}>
-                          <Link
-                            to={item.href}
-                            onClick={closeMegaNow}
-                            className="block px-4 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
+              <button
+                key={entry.key}
+                type="button"
+                aria-expanded={megaOpen}
+                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                onMouseEnter={openMega}
+                onClick={() => (megaOpen ? scheduleCloseMega() : openMega())}
+              >
+                {entry.label}
+                <ChevronDown className={cn("size-3.5 transition-transform duration-200", megaOpen && "rotate-180")} />
+              </button>
             ) : entry.external ? (
               <a
                 key={entry.key}
@@ -140,6 +124,15 @@ export function SiteHeader() {
             ),
           )}
         </nav>
+
+        {megaOpen && (
+          <MegaMenuPanel
+            entries={DROPDOWN_ENTRIES}
+            onNavigate={closeMegaNow}
+            onMouseEnter={openMega}
+            onMouseLeave={scheduleCloseMega}
+          />
+        )}
 
         <div className="hidden items-center gap-4 xl:flex">
           {isAdmin && (

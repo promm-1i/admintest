@@ -75,7 +75,7 @@ export function HeroSection() {
         </div>
       )}
 
-      <div className="relative flex flex-col lg:h-full lg:max-w-3xl lg:justify-center">
+      <div className="relative flex flex-col lg:h-full lg:max-w-3xl lg:justify-center lg:pl-[10%]">
         <div className="max-w-md px-4 py-14 sm:px-6 lg:px-10 lg:py-0">
           <FadeIn>
             <span className="inline-block rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
