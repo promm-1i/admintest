@@ -19,11 +19,6 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
           {entry.label}
         </AccordionTrigger>
         <AccordionContent>
-          {entry.groupLabel && (
-            <p className="pb-1.5 pl-1 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
-              {entry.groupLabel}
-            </p>
-          )}
           <ul className="space-y-3 pb-2 pl-1">
             {entry.items.map((item) => (
               <li key={item.label}>
@@ -105,7 +100,10 @@ export function SiteHeader() {
           CL
         </Link>
 
-        <nav className="hidden items-center gap-6 xl:flex" onMouseLeave={scheduleCloseMega}>
+        <nav
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-6 xl:flex"
+          onMouseLeave={scheduleCloseMega}
+        >
           {HEADER_NAV.map((entry) =>
             entry.type === "dropdown" ? (
               <button
@@ -140,6 +138,9 @@ export function SiteHeader() {
               </Link>
             ),
           )}
+        </nav>
+
+        <div className="hidden items-center gap-4 xl:flex">
           {isAdmin && (
             <Link to="/admin" className="text-sm text-primary">
               관리자
@@ -151,7 +152,7 @@ export function SiteHeader() {
               상담 문의
             </Link>
           </Button>
-        </nav>
+        </div>
 
         {megaOpen && (
           <MegaMenuPanel

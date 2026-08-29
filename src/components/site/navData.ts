@@ -66,12 +66,9 @@ export type NavDropdownEntry = {
   type: "dropdown";
   key: string;
   label: string;
-  /** 드롭다운 안에서 항목들 위에 붙는 그룹명 (예: "제작안내") */
-  groupLabel?: string;
   items: NavLink[];
   /** 항목 리스트 아래, 구분선을 두고 붙는 외부 링크 안내 블록 (예: 고객센터의 블로그 버튼) */
   externalNote?: NavExternalNote;
-  columns?: 1 | 2;
 };
 export type NavLinkEntry = { type: "link"; key: string; label: string; href: string; external?: boolean };
 export type NavEntry = NavDropdownEntry | NavLinkEntry;
@@ -81,8 +78,6 @@ export const HEADER_NAV: NavEntry[] = [
     type: "dropdown",
     key: "build",
     label: "홈페이지 제작",
-    groupLabel: "제작안내",
-    columns: 2,
     items: [
       { label: "제작 방법", href: "/website/process" },
       { label: "제작 비용", href: "/website/price" },
@@ -92,15 +87,16 @@ export const HEADER_NAV: NavEntry[] = [
   },
   {
     type: "dropdown",
-    key: "industry",
-    label: "업종별 맞춤 제작",
+    key: "custom-service",
+    label: "맞춤형 서비스",
     items: [
-      { label: "부동산", href: "/web-solutions/real-estate" },
-      { label: "렌트카", href: "/web-solutions/rentcar" },
-      { label: "병원 · 의원", href: "/web-solutions/hospital" },
-      { label: "학원", href: "/web-solutions/academy" },
-      { label: "인테리어 · 리모델링", href: "/web-solutions/interior" },
-      { label: "이사 · 청소업체", href: "/web-solutions/moving" },
+      { label: "관리자 시스템", href: "/services/admin-system" },
+      { label: "문의 · 예약 관리", href: "/services/inquiry-reservation" },
+      { label: "검색 · 필터 기능", href: "/services/search-filter" },
+      { label: "콘텐츠 관리", href: "/services/content-management" },
+      { label: "DB · API 연동", href: "/services/database-api" },
+      { label: "반응형 웹 제작", href: "/services/responsive" },
+      { label: "검색엔진 최적화", href: "/services/seo" },
     ],
   },
   { type: "link", key: "templates", label: "홈페이지 템플릿", href: "/templates" },

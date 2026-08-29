@@ -22,16 +22,11 @@ export function MegaMenuPanel({ entries, onNavigate, onMouseEnter, onMouseLeave 
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className="ml-auto grid max-w-3xl gap-10 px-4 py-8 sm:px-6 sm:grid-cols-3 lg:px-10">
+      <div className="mx-auto grid max-w-3xl gap-10 px-4 py-8 sm:px-6 sm:grid-cols-3 lg:px-10">
         {entries.map((entry) => (
           <div key={entry.key}>
             <p className="text-xs font-semibold uppercase tracking-wider text-primary">{entry.label}</p>
-            {entry.groupLabel && (
-              <p className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
-                {entry.groupLabel}
-              </p>
-            )}
-            <ul className={cnColumns(entry)}>
+            <ul className="mt-3 space-y-0.5">
               {entry.items.map((item) => (
                 <li key={item.label}>
                   <Link
@@ -65,8 +60,4 @@ export function MegaMenuPanel({ entries, onNavigate, onMouseEnter, onMouseLeave 
       </div>
     </div>
   );
-}
-
-function cnColumns(entry: NavDropdownEntry) {
-  return entry.columns === 2 ? "mt-3 grid grid-cols-2 gap-x-4" : "mt-3 space-y-0.5";
 }
