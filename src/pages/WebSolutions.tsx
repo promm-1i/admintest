@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
 import { INDUSTRY_ITEMS } from "@/components/site/navData";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 type Tier = {
   name: string;
@@ -69,7 +70,7 @@ export default function WebSolutions() {
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14">
+    <div className="mx-auto max-w-7xl px-3 py-14 sm:px-5">
       <div className="flex items-center gap-2">
         <span className="rounded-full border border-primary/40 bg-primary/[0.07] px-3 py-1 text-[11px] font-bold tracking-wide text-primary">
           PREMIUM LINE
@@ -89,7 +90,8 @@ export default function WebSolutions() {
 
       {/* 템플릿형과의 차이 */}
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-border bg-secondary/30 p-5">
+        <FadeIn direction="left">
+        <div className="h-full rounded-2xl border border-border bg-secondary/30 p-5">
           <p className="text-xs font-bold text-muted-foreground">템플릿형</p>
           <p className="mt-1.5 text-sm font-semibold text-foreground">완성된 디자인을 골라 빠르게</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
@@ -103,7 +105,9 @@ export default function WebSolutions() {
             템플릿 보기 · 64만 원부터
           </Link>
         </div>
-        <div className="rounded-2xl border border-primary/40 bg-primary/[0.04] p-5">
+        </FadeIn>
+        <FadeIn direction="right" delay={100}>
+        <div className="h-full rounded-2xl border border-primary/40 bg-primary/[0.04] p-5">
           <p className="text-xs font-bold text-primary">맞춤형 · 프리미엄</p>
           <p className="mt-1.5 text-sm font-semibold text-foreground">업무 방식에 맞춰 처음부터</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
@@ -112,11 +116,12 @@ export default function WebSolutions() {
           </p>
           <p className="mt-3 text-xs font-semibold text-primary">150만 원부터</p>
         </div>
+        </FadeIn>
       </div>
 
       <h2 className="mt-12 text-xl font-semibold">업종</h2>
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {INDUSTRY_ITEMS.map((item) => {
+        {INDUSTRY_ITEMS.map((item, idx) => {
           const Icon = item.icon;
           const isReal = Boolean(item.href);
           const content = (
@@ -143,17 +148,20 @@ export default function WebSolutions() {
             </>
           );
           return isReal ? (
+            <FadeIn key={item.title} delay={(idx % 3) * 80}>
             <Link
-              key={item.title}
               to={item.href!}
-              className="flex flex-col items-start rounded-xl border border-primary/20 bg-primary/5 p-5 transition-colors hover:border-primary/40 hover:bg-primary/10"
+              className="flex h-full flex-col items-start rounded-xl border border-primary/20 bg-primary/5 p-5 transition-colors hover:border-primary/40 hover:bg-primary/10"
             >
               {content}
             </Link>
+            </FadeIn>
           ) : (
-            <div key={item.title} className="flex flex-col items-start rounded-xl border border-border p-5">
+            <FadeIn key={item.title} delay={(idx % 3) * 80}>
+            <div className="flex h-full flex-col items-start rounded-xl border border-border p-5">
               {content}
             </div>
+            </FadeIn>
           );
         })}
       </div>
@@ -168,12 +176,12 @@ export default function WebSolutions() {
       </p>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {TIERS.map((tier) => (
+        {TIERS.map((tier, idx) => (
+          <FadeIn key={tier.name} delay={idx * 90} className="h-full">
           <div
-            key={tier.name}
             className={cn(
-              "relative flex h-full flex-col justify-between rounded-2xl border bg-card p-6",
-              tier.recommended ? "border-primary/60 shadow-md shadow-primary/10" : "border-border shadow-xs",
+              "relative flex h-full flex-col justify-between rounded-2xl border bg-card p-6 transition-all duration-300 motion-safe:hover:-translate-y-1.5 hover:shadow-lg hover:shadow-primary/10 motion-reduce:transition-none",
+              tier.recommended ? "border-primary/60 shadow-md shadow-primary/10" : "border-border shadow-xs hover:border-primary/40",
             )}
           >
             <div>
@@ -203,11 +211,13 @@ export default function WebSolutions() {
               </Link>
             </Button>
           </div>
+          </FadeIn>
         ))}
       </div>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2">
-        <div className="rounded-2xl border border-border bg-secondary/30 p-6">
+        <FadeIn>
+        <div className="h-full rounded-2xl border border-border bg-secondary/30 p-6">
           <p className="mb-3 text-sm font-bold text-foreground">구축비에 포함되는 것</p>
           <ul className="space-y-2 text-sm text-muted-foreground">
             {INCLUDED_IN_SETUP.map((f) => (
@@ -218,7 +228,9 @@ export default function WebSolutions() {
             ))}
           </ul>
         </div>
-        <div className="rounded-2xl border border-border bg-card p-6">
+        </FadeIn>
+        <FadeIn delay={100}>
+        <div className="h-full rounded-2xl border border-border bg-card p-6">
           <p className="mb-3 text-sm font-bold text-foreground">2년차부터 운영 비용</p>
           <p className="flex items-baseline gap-1.5">
             <span className="text-2xl font-extrabold tracking-tight text-primary">연 39만 원</span>
@@ -238,9 +250,11 @@ export default function WebSolutions() {
             문구 수정 등 간단한 요청은 월 3회까지 기본으로 지원합니다.
           </p>
         </div>
+        </FadeIn>
       </div>
 
       <h3 className="mt-10 text-base font-semibold">맞춤형에 모두 포함되는 기능</h3>
+      <FadeIn>
       <ul className="mt-4 grid gap-2.5 rounded-2xl border border-border bg-card p-6 sm:grid-cols-2">
         {COMMON_FEATURES.map((f) => (
           <li key={f} className="flex items-start gap-2 text-sm text-foreground">
@@ -249,12 +263,14 @@ export default function WebSolutions() {
           </li>
         ))}
       </ul>
+      </FadeIn>
 
       <p className="mt-4 text-xs text-muted-foreground">
         ※ 표시 금액은 부가세 별도이며, 정확한 견적은 필요한 기능과 데이터 규모에 따라 상담 후
         확정됩니다.
       </p>
 
+      <FadeIn>
       <div className="mt-12 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
         <p className="text-sm text-muted-foreground">필요한 기능에 맞춘 맞춤 상담을 도와드립니다.</p>
         <div className="mt-4 flex flex-wrap justify-center gap-3">
@@ -266,6 +282,7 @@ export default function WebSolutions() {
           </Button>
         </div>
       </div>
+      </FadeIn>
     </div>
   );
 }
