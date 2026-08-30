@@ -67,6 +67,27 @@ export function useLazyMount<T extends HTMLElement>() {
 }
 
 /**
+ * 요소가 뷰포트 근처에 있는 동안 계속 true/false로 갱신되는 훅(useLazyMount와 달리 한 번
+ * 트리거되고 끝나지 않는다). 반복 애니메이션을 화면 밖에서는 멈추기 위한 용도다.
+ */
+export function useInViewport<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      rootMargin: "200px",
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return { ref, inView };
+}
+
+/**
  * 스크롤로 뷰포트에 들어오면 서서히 나타나는 래퍼. prefers-reduced-motion에서는 transition
  * 자체가 꺼져 즉시 나타난다. stagger가 필요하면 delay(ms)를 다르게 준다.
  */
@@ -138,16 +159,17 @@ export function LoopingBeforeAfter({
   intervalMs?: number;
 }) {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const { ref, inView } = useInViewport<HTMLDivElement>();
   const [showAfter, setShowAfter] = useState(false);
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || !inView) return;
     const id = window.setInterval(() => setShowAfter((v) => !v), intervalMs);
     return () => window.clearInterval(id);
-  }, [reducedMotion, intervalMs]);
+  }, [reducedMotion, inView, intervalMs]);
 
   return (
-    <div className="relative">
+    <div ref={ref} className="relative">
       <div className={cn("transition-opacity duration-500", showAfter ? "opacity-0" : "opacity-100")}>{before}</div>
       <div
         className={cn(

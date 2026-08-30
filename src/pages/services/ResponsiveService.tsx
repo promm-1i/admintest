@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
-import { useLazyMount, Reveal } from "@/pages/services/previewKit";
+import { useLazyMount, useInViewport, Reveal } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "responsive");
 
@@ -74,19 +74,26 @@ function DeviceFrame({
 /** 실제 /about 페이지를 담은 프레임의 폭이 데스크톱↔모바일로 자동으로 늘었다 줄었다 하며, 실시간 재배치를 보여준다. */
 function BreathingPreview() {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
-  const { ref, shouldLoad } = useLazyMount<HTMLDivElement>();
+  const { ref: lazyRef, shouldLoad } = useLazyMount<HTMLDivElement>();
+  const { ref: viewRef, inView } = useInViewport<HTMLDivElement>();
   const [wide, setWide] = useState(true);
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || !inView) return;
     const id = window.setInterval(() => setWide((v) => !v), 3200);
     return () => window.clearInterval(id);
-  }, [reducedMotion]);
+  }, [reducedMotion, inView]);
 
   const wideState = reducedMotion || wide;
 
   return (
-    <div ref={ref} className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+    <div
+      ref={(el) => {
+        lazyRef.current = el;
+        viewRef.current = el;
+      }}
+      className="overflow-hidden rounded-xl border border-border bg-card shadow-sm"
+    >
       <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-3.5 py-2.5">
         <span className="h-2.5 w-2.5 rounded-full bg-border" />
         <span className="h-2.5 w-2.5 rounded-full bg-border" />
