@@ -16,6 +16,12 @@ const INDUSTRY_SPEC: Record<
     adminDemoHref: "/web-solutions/real-estate/demo",
     siteDemoHref: "/web-solutions/real-estate/demo/site",
   },
+  hospital: {
+    label: "병원 · 의원",
+    dedicated: "진료과목 관리 + 의료진 소개 + 진료 예약 문의",
+    adminDemoHref: "/web-solutions/hospital/demo",
+    siteDemoHref: "/web-solutions/hospital/demo/site",
+  },
 };
 
 const BASE_FEATURES = "일반게시판 + 갤러리 + 오시는 길 + FAQ";

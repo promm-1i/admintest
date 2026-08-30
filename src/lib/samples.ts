@@ -42,6 +42,34 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-basic-template",
+    industry: "병원 · 의원 홈페이지",
+    title: "병원 · 의원 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "business"],
+    tag: "기본형 템플릿 · 병원 · 의원",
+    purpose:
+      "진료안내 · 의료진 · 둘러보기 · 진료시간 · 오시는길 구성을 차분하고 신뢰감 있게 담은 의원 홈페이지 템플릿입니다.",
+    features: ["진료과목 안내", "의료진 소개", "시설 둘러보기", "진료시간 · 오시는 길"],
+    idealFor: "신뢰감 있는 첫인상과 예약 문의 연결이 필요한 병 · 의원, 클리닉",
+    image: "/templates/clinic-landing/assets/hero-poster-BLXKH_62.jpg",
+    liveUrl: "/templates/clinic-basic/",
+    industryKey: "hospital",
+  },
+  {
+    slug: "clinic-landing-template",
+    industry: "병원 · 의원 홈페이지",
+    title: "병원 · 의원 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "business"],
+    tag: "랜딩형 템플릿 · 병원 · 의원",
+    purpose:
+      "스크롤 연출이 더해진 프리미엄 원페이지 구성으로, 방문자가 자연스럽게 예약 문의까지 이어지는 의원 홈페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "진료과목 안내", "의료진 소개", "온라인 예약 CTA"],
+    idealFor: "브랜드 인상과 예약 전환율을 함께 끌어올리고 싶은 병 · 의원, 클리닉",
+    image: "/templates/clinic-landing/assets/hero-poster-BLXKH_62.jpg",
+    liveUrl: "/templates/clinic-landing/",
+    industryKey: "hospital",
+  },
+  {
     slug: "real-estate-basic-template",
     industry: "부동산 중개업소 홈페이지",
     title: "부동산 홈페이지 (기본형 템플릿)",

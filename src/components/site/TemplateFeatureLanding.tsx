@@ -9,6 +9,8 @@ import {
   Megaphone,
   Check,
   ArrowRight,
+  Stethoscope,
+  CalendarCheck,
   type LucideIcon,
 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -48,6 +50,30 @@ const INDUSTRY_CONTENT: Record<string, IndustryContent> = {
         points: [
           "거래유형·매물종류·지역·가격대로 원하는 매물만 좁혀서 확인",
           "고객이 많이 찾는 조건을 파악해 매물 확보 전략에 활용",
+        ],
+      },
+    ],
+  },
+  hospital: {
+    label: "병원 · 의원",
+    designNote:
+      "병원·의원에 맞는 차분하고 신뢰감 있는 디자인 컨셉으로, 진료과목과 예약 동선처럼 중요한 요소는 눈에 띄게 하고 가독성은 높였습니다. 문장의 위치와 크기, 색상까지 모두 고려해 제작해 드립니다.",
+    subPages: ["진료과목 안내", "의료진 소개", "온라인 예약 문의", "공지사항"],
+    dedicated: [
+      {
+        icon: Stethoscope,
+        title: "진료과목 · 의료진 관리",
+        points: [
+          "진료과목과 의료진 정보를 직접 등록·수정하고 노출 순서까지 관리",
+          "비급여 항목 등 안내 페이지도 관리자에서 바로 갱신",
+        ],
+      },
+      {
+        icon: CalendarCheck,
+        title: "진료 예약 문의",
+        points: [
+          "홈페이지에서 접수된 예약 문의를 한 화면에서 확인·응대",
+          "문자 알림과 연결해 접수 즉시 확인 가능",
         ],
       },
     ],
