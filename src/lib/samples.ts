@@ -37,6 +37,8 @@ export type Sample = {
   liveUrl?: string;
   /** 있으면 카드가 /samples/:slug 대신 이 경로로 연결된다 (예: 이미 자체 소개 페이지가 있는 플랫폼형 솔루션) */
   detailHref?: string;
+  /** 있으면 상세 미리보기 상단에 관리자 시스템 데모로 가는 버튼이 함께 노출된다 */
+  adminDemoHref?: string;
   /** type에 "basic-template"/"landing-template"가 있는 항목만 사용 — /templates 페이지의 업종 필터 값 */
   industryKey?: string;
 };
@@ -152,7 +154,8 @@ export const SAMPLES: Sample[] = [
     features: ["진료과목 안내", "의료진 소개", "공지 · 이벤트 관리", "예약 문의 접수", "관리자 페이지"],
     idealFor: "홈페이지 콘텐츠를 직접 수정 · 운영하고 싶은 병 · 의원, 클리닉",
     image: hospitalSolutionImg,
-    detailHref: "/web-solutions/hospital",
+    liveUrl: "/templates/clinic-landing/",
+    adminDemoHref: "/web-solutions/hospital/demo",
   },
   {
     slug: "academy-solution",
@@ -165,7 +168,8 @@ export const SAMPLES: Sample[] = [
     features: ["개설 강의 안내", "과목별 필터", "상담 신청 접수", "강의 · 강사 관리", "관리자 페이지"],
     idealFor: "강의 개설 · 마감을 수시로 업데이트해야 하는 학원 · 교습소",
     image: academySolutionImg,
-    detailHref: "/web-solutions/academy",
+    liveUrl: "/templates/academy-landing/",
+    adminDemoHref: "/web-solutions/academy/demo",
   },
   {
     slug: "rentcar-solution",

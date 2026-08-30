@@ -15,6 +15,7 @@ import {
   Send,
   MessageCircle,
   ExternalLink,
+  LayoutDashboard,
 } from "lucide-react";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 
@@ -171,6 +172,14 @@ export default function SampleDetail() {
                 >
                   <ExternalLink className="h-3.5 w-3.5" /> 실제 웹사이트 방문하기
                 </a>
+              )}
+              {sample.adminDemoHref && (
+                <Link
+                  to={sample.adminDemoHref}
+                  className="flex items-center gap-1.5 rounded-md border border-border bg-card px-3 py-1.5 font-semibold text-foreground shadow-xs transition-colors hover:bg-secondary"
+                >
+                  <LayoutDashboard className="h-3.5 w-3.5 text-primary" /> 관리자 시스템 데모
+                </Link>
               )}
               <span className="text-muted-foreground font-medium hidden sm:inline">화면 크기:</span>
               <button
