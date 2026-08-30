@@ -1,7 +1,10 @@
+import { Link } from "react-router-dom";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { PlusCircle } from "lucide-react";
-import { PRODUCT_TYPES, ADDONS, PRICING_NOTE } from "@/lib/pricing";
+import { PlusCircle, ArrowRight } from "lucide-react";
+import { ADDONS } from "@/lib/pricing";
+import { TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
+import { cn } from "@/lib/utils";
 
 export function PricingSection() {
   return (
@@ -10,24 +13,54 @@ export function PricingSection() {
         <SectionHeader
           label="TYPE & PRICING"
           title="제작 유형과 가격"
-          description="필요한 규모에 맞는 유형을 선택하시면 됩니다. 시작가 기준으로 거품 없이 안내합니다."
+          description="호스팅·셋팅·업종 전용 기능이 모두 포함된 금액입니다. 필요한 구성에 맞춰 선택하시면 됩니다."
         />
 
-        <div className="mt-12 divide-y divide-border rounded-xl border border-border bg-card">
-          {PRODUCT_TYPES.map((type, i) => (
-            <FadeIn key={type.name} delay={i * 50}>
-              <div className="flex flex-col gap-2 p-6 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
-                <div className="min-w-0">
-                  <h3 className="text-base font-semibold text-foreground">{type.name}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground break-keep">{type.desc}</p>
-                </div>
-                <span className="shrink-0 text-xl font-black tracking-tight text-foreground sm:text-2xl">
-                  {type.price}
-                </span>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {TEMPLATE_PACKAGES.map((p, i) => (
+            <FadeIn key={p.key} delay={i * 60} className="h-full">
+              <div
+                className={cn(
+                  "flex h-full flex-col rounded-xl border bg-card p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm",
+                  p.badgeTone === "recommended"
+                    ? "border-primary/40"
+                    : "border-border hover:border-primary/30",
+                )}
+              >
+                {p.badge ? (
+                  <span
+                    className={cn(
+                      "mb-2 inline-block w-fit rounded-full px-2.5 py-0.5 text-[10px] font-bold text-white",
+                      p.badgeTone === "recommended" ? "bg-primary" : "bg-emerald-500",
+                    )}
+                  >
+                    {p.badge}
+                  </span>
+                ) : (
+                  <span className="mb-2 h-[18px]" />
+                )}
+                <h3 className="text-base font-bold text-foreground">{p.label}</h3>
+                <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted-foreground break-keep">
+                  {p.desc}
+                </p>
+                <p className="mt-4 text-xl font-black tracking-tight text-primary">
+                  {formatMan(p.total)}
+                  <span className="ml-0.5 text-sm font-bold text-muted-foreground">~</span>
+                </p>
               </div>
             </FadeIn>
           ))}
         </div>
+
+        <FadeIn delay={260} className="mt-5 flex justify-center">
+          <Link
+            to="/website/price"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+          >
+            항목별 상세 비용 비교 보기
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </FadeIn>
 
         <FadeIn delay={240} className="mt-8 rounded-xl border border-border bg-card p-6 sm:p-8 shadow-xs">
           <div className="flex items-center gap-2 mb-4 pb-3 border-b border-border/60">
@@ -47,7 +80,9 @@ export function PricingSection() {
           </ul>
         </FadeIn>
 
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground/80 break-keep">※ {PRICING_NOTE}</p>
+        <p className="mt-5 text-xs leading-relaxed text-muted-foreground/80 break-keep">
+          ※ 모든 금액은 VAT 별도이며, 페이지 수와 추가 기능 범위에 따라 최종 견적은 상담 후 확정됩니다.
+        </p>
       </div>
     </section>
   );

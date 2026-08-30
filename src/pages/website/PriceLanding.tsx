@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Send, Check, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { PRODUCT_TYPES, ADDONS, PRICING_NOTE } from "@/lib/pricing";
+import { ADDONS } from "@/lib/pricing";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { Reveal } from "@/pages/services/previewKit";
 import { PricingComparison } from "@/components/site/PricingComparison";
@@ -92,24 +92,6 @@ export default function PriceLanding() {
           제작 방식 자세히 보기
           <ArrowRight className="h-4 w-4" />
         </Link>
-
-        {/* 대표 제작유형 / 시작가격 */}
-        <Reveal className="mt-20">
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">대표 제작유형과 시작 가격</h2>
-        </Reveal>
-        <Reveal delay={100} className="mt-8 divide-y divide-border rounded-xl border border-border bg-card">
-          {PRODUCT_TYPES.map((type) => (
-            <div key={type.name} className="flex flex-col gap-3 p-7 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
-              <div className="min-w-0">
-                <h3 className="text-xl font-bold text-foreground">{type.name}</h3>
-                <p className="mt-1.5 text-base leading-relaxed text-muted-foreground break-keep">{type.desc}</p>
-                <p className="mt-2.5 text-sm text-muted-foreground/80 break-keep">적합한 대상: {type.bullets.join(" · ")}</p>
-              </div>
-              <span className="shrink-0 text-2xl font-bold text-primary">{type.price}</span>
-            </div>
-          ))}
-        </Reveal>
-        <p className="mt-4 text-sm leading-relaxed text-muted-foreground/80 break-keep">※ {PRICING_NOTE}</p>
 
         {/* 왜 홈페이지마다 가격이 다를까요 */}
         <Reveal className="mt-20">
