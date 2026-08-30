@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowDown, Send, Info } from "lucide-react";
+import { ArrowDown, ArrowRight, Send, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
@@ -247,7 +247,19 @@ export function PricingComparison() {
         </div>
       </div>
 
-      <div className="mt-8 flex justify-center">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+        <Button asChild size="lg" variant="outline" className="gap-1.5 font-semibold">
+          <Link to="/templates?style=basic-template">
+            기본형 살펴보기
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </Button>
+        <Button asChild size="lg" variant="outline" className="gap-1.5 font-semibold">
+          <Link to="/templates?style=landing-template">
+            랜딩형 살펴보기
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        </Button>
         <Button asChild size="lg" className="gap-2 font-bold">
           <Link to="/contact">
             <Send className="h-4 w-4" />
