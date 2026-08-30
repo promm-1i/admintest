@@ -9,7 +9,7 @@ import { PanelHeader, DemoNote } from "../components";
 
 export function SiteScreenSettingsView() {
   const [form, setForm] = useState({
-    siteName: "부동산에 기술을 더하는 사람들",
+    siteName: "부동산 샘플",
     mainTitle: "믿을 수 있는 부동산 파트너",
     subTitle: "매물 검색부터 상담까지 한 번에",
     phone: "070-8098-8054",
@@ -97,7 +97,7 @@ export function SiteScreenSettingsView() {
 
 export function SiteAdvancedSettingsView() {
   const [form, setForm] = useState({
-    seoTitle: "부동산에 기술을 더하는 사람들 — 부기사 데모",
+    seoTitle: "부동산 샘플 — 부기사 데모",
     metaDescription: "매물 검색, 상담, 계약까지 한 곳에서 처리하는 부동산 플랫폼입니다.",
     domain: "demo1.mintcl-realestate.co.kr",
     ga: "",

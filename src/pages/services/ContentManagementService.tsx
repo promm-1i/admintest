@@ -1,15 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { Send, ArrowRight, ArrowDown, FileText, ImageIcon } from "lucide-react";
+import { Send, ArrowRight, ArrowDown, FileText, ImageIcon, Check, Layers } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
 import { listPublishedNotices } from "@/lib/api/notices";
-import { BrowserFrame } from "@/pages/services/previewKit";
+import { BrowserFrame, LoopingBeforeAfter, Reveal } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "content-management");
+
+const BUILDABLE_CONTENT = [
+  { label: "상품 · 매물 · 차량", example: "가격, 옵션, 이미지, 공개 여부를 관리자가 직접 등록" },
+  { label: "후기 · 시공사례", example: "완료된 사례를 사진과 함께 등록해 포트폴리오처럼 노출" },
+  { label: "배너 · 팝업", example: "홈페이지 상단 배너나 이벤트 팝업을 기간 지정해 관리" },
+  { label: "강의 · 의료진 소개", example: "강사 · 의료진 정보를 개별 페이지로 등록하고 노출 순서 조정" },
+];
+
+const INDUSTRY_USES = [
+  { label: "부동산", content: "매물 카드, 단지 정보, 상담 후기" },
+  { label: "병원 · 의원", content: "의료진 소개, 비급여 안내, 공지사항" },
+  { label: "학원", content: "강의 소개, 합격 후기, 시간표 공지" },
+  { label: "인테리어", content: "시공 사례, 평형별 패키지, 견적 공지" },
+];
 
 /**
  * NoticeManager의 실제 필드 구성을 그대로 옮긴 정적 미리보기다. react-query mutation, Supabase
@@ -17,9 +31,9 @@ const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "content-managem
  */
 function NoticeFormPreview() {
   return (
-    <div className="pointer-events-none select-none rounded-lg border border-border bg-card p-6" inert>
-      <h3 className="text-sm font-semibold text-foreground">공지 작성</h3>
-      <div className="mt-5 space-y-4">
+    <div className="pointer-events-none select-none rounded-lg border border-border bg-card p-7" inert>
+      <h3 className="text-base font-semibold text-foreground">공지 작성</h3>
+      <div className="mt-6 space-y-5">
         <div className="space-y-1.5">
           <Label className="text-xs">제목</Label>
           <Input readOnly value="9월 정기 휴무 안내" className="text-sm" />
@@ -39,7 +53,7 @@ function NoticeFormPreview() {
         </div>
         <div className="space-y-1.5">
           <Label className="text-xs">내용</Label>
-          <div className="h-20 rounded-md border border-border bg-background px-3 py-2 text-xs text-muted-foreground">
+          <div className="h-24 rounded-md border border-border bg-background px-3 py-2 text-sm text-muted-foreground">
             추석 연휴 기간 중 고객센터 운영이 일시 중단됩니다...
           </div>
         </div>
@@ -47,19 +61,19 @@ function NoticeFormPreview() {
           <ImageIcon className="h-3.5 w-3.5" />
           이미지 첨부
         </div>
-        <div className="flex items-center justify-between border-t border-border pt-4 text-xs">
+        <div className="flex items-center justify-between border-t border-border pt-4 text-sm">
           <span className="text-muted-foreground">상단 고정</span>
           <span className="h-5 w-9 rounded-full bg-secondary p-0.5">
             <span className="block h-4 w-4 rounded-full bg-background shadow-sm" />
           </span>
         </div>
-        <div className="flex items-center justify-between text-xs">
+        <div className="flex items-center justify-between text-sm">
           <span className="text-muted-foreground">노출</span>
           <span className="flex h-5 w-9 items-center justify-end rounded-full bg-primary p-0.5">
             <span className="block h-4 w-4 rounded-full bg-primary-foreground shadow-sm" />
           </span>
         </div>
-        <div className="rounded-md bg-primary px-3 py-2 text-center text-xs font-bold text-primary-foreground">
+        <div className="rounded-md bg-primary px-3 py-2.5 text-center text-sm font-bold text-primary-foreground">
           등록
         </div>
       </div>
@@ -74,37 +88,64 @@ function PublishedNoticesPreview() {
 
   return (
     <div className="rounded-lg border border-border bg-card">
-      <div className="border-b border-border px-5 py-3">
-        <p className="text-xs font-semibold text-foreground">/notices</p>
+      <div className="border-b border-border px-6 py-3.5">
+        <p className="text-sm font-semibold text-foreground">/notices</p>
       </div>
-      {isLoading && <p className="px-5 py-6 text-xs text-muted-foreground">불러오는 중…</p>}
+      {isLoading && <p className="px-6 py-8 text-sm text-muted-foreground">불러오는 중…</p>}
       <ul className="divide-y divide-border">
         {notices.slice(0, 6).map((notice) => (
-          <li key={notice.id} className="px-5 py-3.5">
+          <li key={notice.id} className="px-6 py-4">
             <div className="flex flex-wrap items-center gap-2">
               {notice.is_pinned && (
-                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[11px] font-medium text-primary">
+                <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
                   고정
                 </span>
               )}
               {notice.category && (
-                <span className="rounded-full bg-secondary px-2 py-0.5 text-[11px] text-secondary-foreground">
+                <span className="rounded-full bg-secondary px-2 py-0.5 text-xs text-secondary-foreground">
                   {notice.category}
                 </span>
               )}
-              <p className="text-sm font-medium text-foreground">{notice.title}</p>
+              <p className="text-base font-medium text-foreground">{notice.title}</p>
             </div>
-            <p className="mt-1 text-[11px] text-muted-foreground">
+            <p className="mt-1.5 text-xs text-muted-foreground">
               {new Date(notice.created_at).toLocaleDateString("ko-KR")}
             </p>
           </li>
         ))}
         {!isLoading && notices.length === 0 && (
-          <li className="px-5 py-8 text-center text-xs text-muted-foreground">
+          <li className="px-6 py-10 text-center text-sm text-muted-foreground">
             등록된 공지사항이 없습니다.
           </li>
         )}
       </ul>
+    </div>
+  );
+}
+
+/** 공개 스위치가 꺼짐 ↔ 켜짐으로 번갈아 보이며, 상태 전환을 동작으로 보여준다. */
+function PublishToggleLoop() {
+  const off = (
+    <div className="flex h-full flex-col items-center justify-center gap-3 rounded-xl border border-border bg-card p-6 text-center">
+      <span className="h-6 w-11 rounded-full bg-secondary p-0.5">
+        <span className="block h-5 w-5 rounded-full bg-background shadow-sm" />
+      </span>
+      <p className="text-sm font-bold text-foreground">비공개</p>
+      <p className="text-xs text-muted-foreground break-keep">아직 고객에게 보이지 않습니다.</p>
+    </div>
+  );
+  const on = (
+    <div className="flex h-full flex-col items-center justify-center gap-3 rounded-xl border border-primary/30 bg-primary/5 p-6 text-center">
+      <span className="flex h-6 w-11 items-center justify-end rounded-full bg-primary p-0.5">
+        <span className="block h-5 w-5 rounded-full bg-primary-foreground shadow-sm" />
+      </span>
+      <p className="text-sm font-bold text-primary">공개</p>
+      <p className="text-xs text-muted-foreground break-keep">/notices 페이지에 즉시 노출됩니다.</p>
+    </div>
+  );
+  return (
+    <div className="h-[160px]">
+      <LoopingBeforeAfter before={off} after={on} intervalMs={2200} />
     </div>
   );
 }
@@ -144,54 +185,131 @@ export default function ContentManagementService() {
         </div>
       </div>
 
-      {/* 세로 Before/After: 작성 → 반영 */}
+      {/* 세로 Before/After: 작성 → 반영 (확대) */}
       <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-2xl px-4">
-          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">관리자 → 홈페이지</p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground">작성한 그대로, 공지사항 페이지에 반영됩니다</h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
-            아래 작성 화면은 실제 조작 화면이 아니라 구조를 보여주는 미리보기입니다. 저장·수정·삭제는
-            관리자 계정으로 로그인했을 때만 동작합니다.
-          </p>
+          <Reveal>
+            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">관리자 → 홈페이지</p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground">작성한 그대로, 공지사항 페이지에 반영됩니다</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
+              아래 작성 화면은 실제 조작 화면이 아니라 구조를 보여주는 미리보기입니다. 저장·수정·삭제는
+              관리자 계정으로 로그인했을 때만 동작합니다.
+            </p>
+          </Reveal>
 
-          <div className="mt-10">
+          <Reveal delay={100} className="mt-10">
             <p className="mb-3 font-mono text-xs font-bold text-primary">01 · 관리자에서 공지 작성</p>
             <NoticeFormPreview />
-          </div>
+          </Reveal>
 
           <div className="flex items-center justify-center py-4 text-muted-foreground/50">
             <ArrowDown className="h-6 w-6" />
           </div>
 
-          <div>
-            <p className="mb-3 font-mono text-xs font-bold text-primary">02 · 실제 /notices 페이지에 노출</p>
+          <Reveal delay={100}>
+            <p className="mb-3 font-mono text-xs font-bold text-primary">02 · 공개 여부 결정</p>
+            <PublishToggleLoop />
+          </Reveal>
+
+          <div className="flex items-center justify-center py-4 text-muted-foreground/50">
+            <ArrowDown className="h-6 w-6" />
+          </div>
+
+          <Reveal delay={100}>
+            <p className="mb-3 font-mono text-xs font-bold text-primary">03 · 실제 /notices 페이지에 노출</p>
             <BrowserFrame label="mintcl.app/notices" heightClassName="h-auto">
               <div className="p-1">
                 <PublishedNoticesPreview />
               </div>
             </BrowserFrame>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* 관리 가능한 콘텐츠 범위 */}
+      <div className="py-14 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4">
+          <Reveal>
+            <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
+              <Layers className="h-3.5 w-3.5" />
+              구축 가능한 범위
+            </p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground">공지사항 외에도 이렇게 확장할 수 있습니다</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
+              지금 보여드린 공지사항은 실제로 작동 중인 화면입니다. 아래 항목들은 같은 구조를
+              기반으로 업종에 맞게 구축하는 예시입니다.
+            </p>
+          </Reveal>
+          <div className="mt-8 divide-y divide-border border-t border-border">
+            {BUILDABLE_CONTENT.map((item, i) => (
+              <Reveal key={item.label} delay={i * 70} className="py-5">
+                <p className="text-sm font-bold text-foreground">{item.label}</p>
+                <p className="mt-1 text-sm text-muted-foreground break-keep">{item.example}</p>
+              </Reveal>
+            ))}
           </div>
         </div>
       </div>
 
+      {/* 업종별 활용 */}
+      <div className="border-t border-border bg-secondary/30 py-14 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4">
+          <Reveal>
+            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground">업종마다 관리하는 콘텐츠가 다릅니다</h2>
+          </Reveal>
+          <div className="mt-8 divide-y divide-border border-t border-border">
+            {INDUSTRY_USES.map((item, i) => (
+              <Reveal key={item.label} delay={i * 60} className="flex items-center justify-between gap-4 py-4">
+                <p className="text-sm font-bold text-foreground">{item.label}</p>
+                <p className="text-xs text-muted-foreground">{item.content}</p>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* 이런 경우 추천합니다 */}
+      <Reveal className="py-14 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4">
+          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
+          <h2 className="mt-3 text-2xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
+          <div className="mt-8 space-y-4">
+            {[
+              "공지, 이벤트, 상품 정보가 자주 바뀌는 경우",
+              "수정할 때마다 제작자에게 요청하고 기다려야 하는 경우",
+              "아직 준비되지 않은 콘텐츠를 미리 만들어두고 싶은 경우",
+              "여러 담당자가 각자 맡은 콘텐츠를 나눠 관리해야 하는 경우",
+            ].map((text) => (
+              <div key={text} className="flex items-start gap-3">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <p className="text-sm leading-relaxed text-foreground break-keep">{text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
       {/* 다른 맞춤형 서비스 */}
-      <div className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {OTHER_SERVICES.map((s) => (
-            <Link
-              key={s.slug}
-              to={`/services/${s.slug}`}
-              className="rounded-full border border-border px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-            >
-              {s.navLabel}
-            </Link>
-          ))}
+      <div className="border-t border-border bg-secondary/30">
+        <div className="mx-auto max-w-6xl px-4 py-12">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {OTHER_SERVICES.map((s) => (
+              <Link
+                key={s.slug}
+                to={`/services/${s.slug}`}
+                className="rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+              >
+                {s.navLabel}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* 마무리 CTA */}
-      <div className="border-t border-border bg-secondary/30 py-14 text-center">
+      <div className="py-14 text-center">
         <div className="mx-auto max-w-md px-4">
           <p className="text-base font-bold text-foreground break-keep">직접 관리하고 싶은 콘텐츠가 있으신가요?</p>
           <p className="mt-2 text-sm text-muted-foreground break-keep">

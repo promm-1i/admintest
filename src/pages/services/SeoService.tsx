@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Send, ArrowRight, SearchCheck } from "lucide-react";
+import { Send, ArrowRight, SearchCheck, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
+import { useLazyMount, Reveal } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "seo");
 
@@ -20,6 +21,50 @@ const TITLE_EXAMPLES = [
   { title: "제작 방법 — MintCL", desc: "홈페이지 제작 의뢰 시 상담부터 배포까지 실제로 어떻게 진행되는지 단계별로 안내합니다." },
   { title: "공지사항 — MintCL", desc: "MintCL의 서비스 안내, 일정 변경 등 소식을 확인하세요." },
 ];
+
+const DOES = [
+  "페이지마다 다른 title · description 설정",
+  "robots.txt · sitemap.xml로 수집 경로 안내",
+  "이미지 대체 텍스트, 시맨틱 마크업 정리",
+  "공유 시 보이는 정보(og 태그) 설정",
+];
+const DOES_NOT = [
+  "검색 순위를 인위적으로 조작",
+  "허위 백링크나 트래픽 구매",
+  "키워드를 부자연스럽게 반복 삽입",
+  "특정 순위를 숫자로 보장",
+];
+
+/** 실제 홈페이지를 브라우저 탭 형태로 감싸, title이 실제로 어디에 표시되는지 보여준다. */
+function TitleTabDemo() {
+  const { ref, shouldLoad } = useLazyMount<HTMLDivElement>();
+  return (
+    <div ref={ref}>
+      <p className="mx-auto mb-2 w-fit rounded-full bg-foreground px-3 py-1 text-center text-[11px] font-medium text-background">
+        ↓ 이 문구가 브라우저 탭에 그대로 표시됩니다
+      </p>
+      <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+        <div className="flex items-end gap-1 bg-secondary/50 px-3 pt-2.5">
+          <div className="flex items-center gap-2 rounded-t-lg border border-b-0 border-border bg-background px-3 py-2">
+            <span className="h-2.5 w-2.5 shrink-0 rounded-sm bg-primary/70" />
+            <span className="max-w-[220px] truncate text-xs font-medium text-foreground">
+              MintCL — 소상공인·기업 홈페이지 제작
+            </span>
+          </div>
+        </div>
+        <div className="h-[300px] overflow-hidden border-t border-border bg-background">
+          {shouldLoad ? (
+            <div className="origin-top-left" style={{ transform: "scale(0.42)", width: `${100 / 0.42}%` }}>
+              <iframe src="/" title="MintCL 홈페이지" style={{ width: "100%", height: 900, border: 0 }} />
+            </div>
+          ) : (
+            <div className="h-full w-full bg-secondary/20" />
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 /** 실제 배포된 robots.txt를 그 자리에서 fetch해 보여준다 — 하드코딩된 예시가 아니라 실제 파일이다. */
 function RobotsTxtPreview() {
@@ -70,8 +115,21 @@ export default function SeoService() {
         </div>
       </div>
 
+      {/* 실제 화면 + annotation */}
+      <div className="py-14 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4">
+          <Reveal className="mb-8 text-center">
+            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면에서</p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground">title은 이렇게, 실제로 보입니다</h2>
+          </Reveal>
+          <Reveal delay={100}>
+            <TitleTabDemo />
+          </Reveal>
+        </div>
+      </div>
+
       {/* 실제 적용 항목 */}
-      <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
+      <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-2xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 적용된 기본 설정</p>
           <h2 className="mt-3 text-2xl font-bold text-foreground">지금 이 사이트에 적용되어 있는 항목입니다</h2>
@@ -84,77 +142,129 @@ export default function SeoService() {
             ))}
           </div>
         </div>
-      </div>
+      </Reveal>
 
-      {/* 페이지별 title/description */}
-      <div className="mx-auto max-w-2xl px-4 py-14 sm:py-20">
-        <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">페이지마다 다르게</p>
-        <h2 className="mt-3 text-2xl font-bold text-foreground">모든 페이지가 같은 제목을 쓰지 않습니다</h2>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
-          페이지 진입 시 제목과 설명이 그 페이지 내용에 맞게 바뀝니다. 실제로 이 사이트에 적용된
-          제목입니다.
-        </p>
-        <div className="mt-8 space-y-3">
-          {TITLE_EXAMPLES.map((t) => (
-            <div key={t.title} className="rounded-lg border border-border bg-card p-4">
-              <p className="font-mono text-sm font-semibold text-foreground">{t.title}</p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">{t.desc}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* SERP 미리보기 */}
-        <p className="mt-10 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
-          검색결과에서는 이렇게 보일 수 있습니다
-        </p>
-        <div className="mt-4 rounded-lg border border-border bg-card p-5">
-          <p className="text-xs text-muted-foreground">mintcl.netlify.app</p>
-          <p className="mt-1 text-lg text-[#1a0dab] break-keep">MintCL — 소상공인·기업 홈페이지 제작</p>
-          <p className="mt-1 text-sm leading-relaxed text-muted-foreground break-keep">
-            40만 원부터 시작하는 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다.
-          </p>
-        </div>
-        <p className="mt-3 text-xs text-muted-foreground break-keep">
-          실제 검색결과 디자인은 검색엔진과 시기에 따라 달라질 수 있어, 위 미리보기는 title과
-          description이 어떻게 읽힐 수 있는지 보여주는 예시입니다.
-        </p>
-      </div>
-
-      {/* robots.txt 실제 파일 */}
-      <div className="border-t border-border bg-secondary/30 py-14 sm:py-20">
+      {/* 페이지별 title/description + 큰 SERP 미리보기 */}
+      <div className="py-14 sm:py-20">
         <div className="mx-auto max-w-2xl px-4">
-          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">robots.txt</p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground">
-            검색엔진에게 어디를 수집해도 되는지 알려줍니다
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
-            아래는 이 사이트에 실제로 배포되어 있는 robots.txt 파일입니다. 관리자 화면처럼 검색에
-            노출되면 안 되는 경로는 명시적으로 제외합니다.
-          </p>
-          <div className="mt-6">
-            <RobotsTxtPreview />
+          <Reveal>
+            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">페이지마다 다르게</p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground">모든 페이지가 같은 제목을 쓰지 않습니다</h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
+              페이지 진입 시 제목과 설명이 그 페이지 내용에 맞게 바뀝니다. 실제로 이 사이트에 적용된
+              제목입니다.
+            </p>
+          </Reveal>
+          <Reveal delay={100} className="mt-8 space-y-3">
+            {TITLE_EXAMPLES.map((t) => (
+              <div key={t.title} className="rounded-lg border border-border bg-card p-4">
+                <p className="font-mono text-sm font-semibold text-foreground">{t.title}</p>
+                <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">{t.desc}</p>
+              </div>
+            ))}
+          </Reveal>
+
+          {/* SERP 미리보기 (확대) */}
+          <Reveal delay={160} className="mt-12">
+            <p className="text-center text-xs font-mono font-semibold uppercase tracking-widest text-primary">
+              검색결과에서는 이렇게 보일 수 있습니다
+            </p>
+            <div className="mt-4 rounded-xl border border-border bg-card p-7">
+              <p className="text-sm text-muted-foreground">mintcl.netlify.app</p>
+              <p className="mt-1.5 text-xl text-[#1a0dab] break-keep">MintCL — 소상공인·기업 홈페이지 제작</p>
+              <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">
+                40만 원부터 시작하는 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다.
+              </p>
+              <div className="mt-4 flex flex-wrap gap-3 border-t border-border pt-4 text-xs text-muted-foreground">
+                <span>↑ 파란 글씨 = title</span>
+                <span>↑ 회색 글씨 = description</span>
+              </div>
+            </div>
+            <p className="mt-3 text-xs text-muted-foreground break-keep">
+              실제 검색결과 디자인은 검색엔진과 시기에 따라 달라질 수 있어, 위 미리보기는 title과
+              description이 어떻게 읽힐 수 있는지 보여주는 예시입니다.
+            </p>
+          </Reveal>
+        </div>
+      </div>
+
+      {/* 하는 것 / 하지 않는 것 */}
+      <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
+        <div className="mx-auto max-w-3xl px-4">
+          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">범위를 정확하게</p>
+          <h2 className="mt-3 text-2xl font-bold text-foreground">SEO에서 하는 것 / 하지 않는 것</h2>
+          <div className="mt-8 grid gap-8 sm:grid-cols-2">
+            <div>
+              <p className="flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-widest text-emerald-600">
+                <Check className="h-3.5 w-3.5" />
+                하는 것
+              </p>
+              <ul className="mt-4 space-y-3">
+                {DOES.map((text) => (
+                  <li key={text} className="flex items-start gap-2 text-sm text-foreground break-keep">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                    {text}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <p className="flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+                <X className="h-3.5 w-3.5" />
+                하지 않는 것
+              </p>
+              <ul className="mt-4 space-y-3">
+                {DOES_NOT.map((text) => (
+                  <li key={text} className="flex items-start gap-2 text-sm text-muted-foreground break-keep">
+                    <X className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60" />
+                    {text}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
+        </div>
+      </Reveal>
+
+      {/* robots.txt 실제 파일 (핵심만 발췌, 보조 위치) */}
+      <div className="py-14 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4">
+          <Reveal>
+            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">robots.txt</p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground">
+              검색엔진에게 어디를 수집해도 되는지 알려줍니다
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
+              아래는 이 사이트에 실제로 배포되어 있는 robots.txt 파일입니다. 관리자 화면처럼 검색에
+              노출되면 안 되는 경로는 명시적으로 제외합니다.
+            </p>
+          </Reveal>
+          <Reveal delay={100} className="mt-6">
+            <RobotsTxtPreview />
+          </Reveal>
         </div>
       </div>
 
       {/* 다른 맞춤형 서비스 */}
-      <div className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {OTHER_SERVICES.map((s) => (
-            <Link
-              key={s.slug}
-              to={`/services/${s.slug}`}
-              className="rounded-full border border-border px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-            >
-              {s.navLabel}
-            </Link>
-          ))}
+      <div className="border-t border-border bg-secondary/30">
+        <div className="mx-auto max-w-6xl px-4 py-12">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {OTHER_SERVICES.map((s) => (
+              <Link
+                key={s.slug}
+                to={`/services/${s.slug}`}
+                className="rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+              >
+                {s.navLabel}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* 마무리 CTA */}
-      <div className="border-t border-border bg-secondary/30 py-14 text-center">
+      <div className="py-14 text-center">
         <div className="mx-auto max-w-md px-4">
           <p className="text-base font-bold text-foreground break-keep">기본 구조부터 정확하게 갖추고 싶으신가요?</p>
           <p className="mt-2 text-sm text-muted-foreground break-keep">

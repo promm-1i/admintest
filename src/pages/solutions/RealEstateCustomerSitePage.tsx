@@ -155,7 +155,7 @@ function calculateCommission(deal: CalculatorDeal, amountManwon: number, deposit
 
 export default function RealEstateCustomerSitePage() {
   usePageTitle(
-    "부동산에 기술을 더하는 사람들 (데모)",
+    "부동산 샘플 (데모)",
     "MintCL 부동산 매물관리 웹 솔루션으로 구축한 고객용 홈페이지 데모입니다.",
   );
 
@@ -273,7 +273,7 @@ export default function RealEstateCustomerSitePage() {
               <Building2 className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-sm font-bold leading-tight">부동산에 기술을 더하는 사람들</p>
+              <p className="text-sm font-bold leading-tight">부동산 샘플</p>
               <p className="text-[11px] text-muted-foreground">MintCL 웹 솔루션 데모</p>
             </div>
           </Link>
@@ -556,7 +556,7 @@ export default function RealEstateCustomerSitePage() {
       </main>
 
       <footer className="border-t border-border bg-secondary/30 px-4 py-8 text-center text-xs text-muted-foreground">
-        <p>부동산에 기술을 더하는 사람들 (데모) · 070-8098-8054</p>
+        <p>부동산 샘플 (데모) · 070-8098-8054</p>
         <p className="mt-1">MintCL 웹 솔루션으로 구축 가능한 고객용 홈페이지 예시입니다.</p>
       </footer>
 

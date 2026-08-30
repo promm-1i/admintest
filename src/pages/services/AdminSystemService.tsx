@@ -1,15 +1,26 @@
 import { Link } from "react-router-dom";
-import { Send, ArrowRight, ExternalLink, LayoutDashboard, ArrowDown, ArrowRight as ArrowRightIcon } from "lucide-react";
+import {
+  Send,
+  ArrowRight,
+  ExternalLink,
+  LayoutDashboard,
+  ArrowDown,
+  ArrowRight as ArrowRightIcon,
+  PhoneOff,
+  MessagesSquare,
+  Check,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { CUSTOM_SERVICES } from "@/components/site/customServices";
+import { CUSTOM_SERVICES, getCustomService } from "@/components/site/customServices";
 import { RealEstateAdminProvider, useRealEstateAdmin } from "@/pages/solutions/real-estate-admin/store";
 import { DashboardView } from "@/pages/solutions/real-estate-admin/views/DashboardView";
 import { PanelHeader, StatusBadge } from "@/pages/solutions/real-estate-admin/components";
 import { MENU } from "@/pages/solutions/real-estate-admin/menu";
-import { BrowserFrame, LiveComponentPreview, LazyIframePreview } from "@/pages/services/previewKit";
+import { BrowserFrame, LiveComponentPreview, LazyIframePreview, Reveal } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "admin-system");
+const ADMIN_SERVICE = getCustomService("admin-system")!;
 
 const INDUSTRY_DEMOS = [
   { label: "부동산", flow: "매물 등록 → 노출 → 상담 접수", href: "/web-solutions/real-estate/demo" },
@@ -18,6 +29,24 @@ const INDUSTRY_DEMOS = [
   { label: "학원", flow: "강의 · 시간표 관리 → 수강 상담", href: "/web-solutions/academy/demo" },
   { label: "인테리어 · 리모델링", flow: "시공 사례 관리 → 견적 문의", href: "/web-solutions/interior/demo" },
   { label: "이사 · 청소업체", flow: "서비스 지역 관리 → 견적 문의", href: "/web-solutions/moving/demo" },
+];
+
+const FEATURED_ITEMS = [
+  {
+    title: "고객 문의 관리",
+    scenario: "전화, 문자, 카카오톡으로 흩어져 들어오던 문의를",
+    benefit: "관리자 화면 하나에서 확인하고, 상담중 · 완료 상태로 정리할 수 있습니다.",
+  },
+  {
+    title: "상품 / 매물 / 차량 관리",
+    scenario: "새 매물이나 상품이 생길 때마다 제작자에게 연락하는 대신",
+    benefit: "관리자가 직접 등록하고, 즉시 홈페이지에 반영할 수 있습니다.",
+  },
+  {
+    title: "공개 / 비공개",
+    scenario: "아직 준비되지 않은 콘텐츠는",
+    benefit: "비공개로 두었다가, 준비되면 버튼 하나로 공개 전환할 수 있습니다.",
+  },
 ];
 
 /** PropertyListView의 검색·필터·수정·삭제 UI 없이, 같은 실제 매물 데이터만 읽기 전용으로 보여준다. */
@@ -58,6 +87,19 @@ function PropertyListPreview() {
   );
 }
 
+/** 실제 listings 데이터를 기준으로 "공개 매물 N건"이 살아있는 화면임을 보여주는 카운터. */
+function PublicCountBadge() {
+  const { listings } = useRealEstateAdmin();
+  const publicCount = listings.filter((l) => l.status === "공개").length;
+  return (
+    <div className="inline-flex items-center gap-2 rounded-full border border-primary/25 bg-primary/5 px-4 py-2">
+      <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-primary" />
+      <span className="text-sm font-bold text-foreground">공개 매물 {publicCount}건</span>
+      <span className="text-xs text-muted-foreground">— 지금 고객 화면에 노출 중</span>
+    </div>
+  );
+}
+
 export default function AdminSystemService() {
   usePageTitle(
     "관리자 시스템 — MintCL",
@@ -65,12 +107,13 @@ export default function AdminSystemService() {
   );
 
   const menuGroups = MENU.filter((item) => item.key !== "dashboard");
+  const otherIncludes = ADMIN_SERVICE.includes.filter((i) => !FEATURED_ITEMS.some((f) => f.title === i));
 
   return (
     <div>
-      {/* Hero: 문제 정의 + 실제 대시보드 큰 미리보기 (비대칭) */}
+      {/* Hero: 문제 정의 + 실제 대시보드 큰 미리보기 */}
       <div className="mx-auto max-w-6xl px-4 pb-4 pt-14 sm:pt-20">
-        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
           <div>
             <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
               <LayoutDashboard className="h-3.5 w-3.5" />
@@ -83,8 +126,7 @@ export default function AdminSystemService() {
             </h1>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground break-keep">
               공지 등록, 콘텐츠 수정, 상품 · 매물 · 차량 관리, 문의 · 예약 관리를 홈페이지 운영자가
-              직접 처리할 수 있도록 관리자 화면을 구축합니다. 오른쪽은 실제로 구축되어 있는 부동산
-              매물관리 관리자 데모의 대시보드 화면입니다.
+              직접 처리할 수 있도록 관리자 화면을 구축합니다.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button asChild size="lg" className="gap-2 font-bold">
@@ -102,9 +144,9 @@ export default function AdminSystemService() {
             </div>
           </div>
 
-          <BrowserFrame label="/web-solutions/real-estate/demo" heightClassName="h-[320px] sm:h-[380px] lg:h-[420px]">
+          <BrowserFrame label="/web-solutions/real-estate/demo" heightClassName="h-[420px] sm:h-[520px] lg:h-[620px]">
             <RealEstateAdminProvider>
-              <LiveComponentPreview scale={0.58}>
+              <LiveComponentPreview scale={0.88}>
                 <DashboardView />
               </LiveComponentPreview>
             </RealEstateAdminProvider>
@@ -112,19 +154,74 @@ export default function AdminSystemService() {
         </div>
       </div>
 
-      {/* 실제 관리자 메뉴 구조 + 실제 목록 화면 */}
-      <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
+      {/* 왜 필요한가 */}
+      <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4">
+          <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
+            <PhoneOff className="h-3.5 w-3.5" />
+            왜 필요한가
+          </p>
+          <h2 className="mt-3 text-2xl font-bold text-foreground break-keep">
+            새 상품 하나 올리는데, 왜 매번 개발자를 거쳐야 할까요
+          </h2>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep">
+            홈페이지에 관리자 화면이 없으면, 공지 하나 수정하는 일도 제작자에게 연락하고 기다려야
+            합니다. 바쁜 시기일수록 이런 사소한 수정이 늦어지고, 홈페이지는 점점 방치됩니다.
+          </p>
+          <div className="mt-6 flex items-start gap-3 rounded-lg border border-primary/20 bg-primary/5 p-4">
+            <MessagesSquare className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+            <p className="text-sm font-medium text-foreground break-keep">
+              관리자 시스템이 있으면, 운영자가 필요한 순간 직접 바꿉니다. 개발자를 기다릴 필요가
+              없습니다.
+            </p>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* 관리 가능한 항목 */}
+      <div className="mx-auto max-w-4xl px-4 py-14 sm:py-20">
+        <Reveal>
+          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">관리 가능한 항목</p>
+          <h2 className="mt-3 text-2xl font-bold text-foreground">이런 항목을 직접 관리합니다</h2>
+        </Reveal>
+
+        <div className="mt-8 divide-y divide-border border-t border-border">
+          {FEATURED_ITEMS.map((item, i) => (
+            <Reveal key={item.title} delay={i * 80} className="py-6">
+              <p className="font-mono text-xs font-bold text-primary">0{i + 1}</p>
+              <h3 className="mt-1.5 text-base font-bold text-foreground">{item.title}</h3>
+              <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground break-keep">
+                {item.scenario} {item.benefit}
+              </p>
+            </Reveal>
+          ))}
+        </div>
+
+        <Reveal className="mt-8 flex flex-wrap gap-2">
+          {otherIncludes.map((label) => (
+            <span
+              key={label}
+              className="rounded-full border border-border px-3.5 py-1.5 text-xs font-medium text-muted-foreground"
+            >
+              {label}
+            </span>
+          ))}
+        </Reveal>
+      </div>
+
+      {/* 실제 관리자 메뉴 구조 + 실제 목록 화면 (확대) */}
+      <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-6xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면에서 사용합니다</p>
           <h2 className="mt-3 max-w-xl text-2xl font-bold text-foreground">
             부동산 데모 기준, 관리자 메뉴는 이렇게 구성되어 있습니다
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
-            아래는 실제 구축되어 있는 부동산 매물관리 관리자 데모의 메뉴 구조입니다. 업종과 필요에
-            따라 메뉴 구성은 달라집니다.
+            아래는 실제 구축되어 있는 부동산 매물관리 관리자 데모의 메뉴 구조와, 실제 매물 목록
+            화면입니다. 업종과 필요에 따라 메뉴 구성은 달라집니다.
           </p>
 
-          <div className="mt-10 grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+          <div className="mt-10 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
             <ul className="divide-y divide-border border-t border-border">
               {menuGroups.map((item) => (
                 <li key={item.key} className="flex items-center justify-between gap-4 py-3">
@@ -138,33 +235,42 @@ export default function AdminSystemService() {
               ))}
             </ul>
 
-            <BrowserFrame label="전체 매물 목록" heightClassName="h-[420px] sm:h-[480px]">
+            <BrowserFrame label="전체 매물 목록" heightClassName="h-[520px] sm:h-[600px]">
               <RealEstateAdminProvider>
-                <LiveComponentPreview scale={0.6}>
+                <LiveComponentPreview scale={0.92}>
                   <PropertyListPreview />
                 </LiveComponentPreview>
               </RealEstateAdminProvider>
             </BrowserFrame>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* 관리자 ↔ 고객 화면 연결 */}
       <div className="py-14 sm:py-20">
         <div className="mx-auto max-w-6xl px-4">
-          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">관리자와 고객 화면의 연결</p>
-          <h2 className="mt-3 max-w-xl text-2xl font-bold text-foreground">
-            관리자가 등록한 내용이 고객 화면에 그대로 반영됩니다
-          </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
-            관리자 화면에서 매물을 등록하고 공개 상태로 전환하면, 별도 작업 없이 고객이 보는
-            홈페이지에 실시간으로 노출됩니다.
-          </p>
-
-          <div className="mt-10 grid items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
-            <BrowserFrame label="관리자 — 매물 관리" heightClassName="h-[300px] sm:h-[340px]">
+          <Reveal>
+            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
+              관리자와 고객 화면의 연결
+            </p>
+            <h2 className="mt-3 max-w-xl text-2xl font-bold text-foreground">
+              관리자가 등록한 내용이 고객 화면에 그대로 반영됩니다
+            </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
+              관리자 화면에서 매물을 등록하고 공개 상태로 전환하면, 별도 작업 없이 고객이 보는
+              홈페이지에 실시간으로 노출됩니다.
+            </p>
+            <div className="mt-6">
               <RealEstateAdminProvider>
-                <LiveComponentPreview scale={0.55}>
+                <PublicCountBadge />
+              </RealEstateAdminProvider>
+            </div>
+          </Reveal>
+
+          <Reveal delay={120} className="mt-10 grid items-center gap-4 lg:grid-cols-[1fr_auto_1fr]">
+            <BrowserFrame label="관리자 — 매물 관리" heightClassName="h-[340px] sm:h-[400px]">
+              <RealEstateAdminProvider>
+                <LiveComponentPreview scale={0.68}>
                   <PropertyListPreview />
                 </LiveComponentPreview>
               </RealEstateAdminProvider>
@@ -175,65 +281,95 @@ export default function AdminSystemService() {
               <ArrowRightIcon className="hidden h-6 w-6 lg:block" />
             </div>
 
-            <BrowserFrame label="고객 홈페이지 — 매물검색" heightClassName="h-[300px] sm:h-[340px]">
+            <BrowserFrame label="고객 홈페이지 — 매물검색" heightClassName="h-[340px] sm:h-[400px]">
               <LazyIframePreview
                 src="/web-solutions/real-estate/demo/site"
-                scale={0.42}
+                scale={0.5}
                 title="MintCL 고객용 홈페이지 데모"
               />
             </BrowserFrame>
-          </div>
+          </Reveal>
         </div>
       </div>
 
       {/* 업종별 활용 */}
       <div className="border-t border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-4xl px-4">
-          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground">업종에 맞게 관리자 화면을 다르게 구성합니다</h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
-            같은 관리자 시스템이라도 업종마다 필요한 항목은 다릅니다. 아래 업종은 실제로 구축되어
-            있는 데모로 직접 확인할 수 있습니다.
-          </p>
+          <Reveal>
+            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground">업종에 맞게 관리자 화면을 다르게 구성합니다</h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
+              같은 관리자 시스템이라도 업종마다 필요한 항목은 다릅니다. 아래 업종은 실제로 구축되어
+              있는 데모로 직접 확인할 수 있습니다.
+            </p>
+          </Reveal>
 
           <div className="mt-8 divide-y divide-border border-t border-border">
-            {INDUSTRY_DEMOS.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center justify-between gap-4 py-4 transition-colors"
-              >
-                <div>
-                  <p className="text-sm font-bold text-foreground">{item.label}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{item.flow}</p>
-                </div>
-                <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
-              </a>
+            {INDUSTRY_DEMOS.map((item, i) => (
+              <Reveal key={item.href} delay={i * 60}>
+                <a
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group flex items-center justify-between gap-4 py-4 transition-colors"
+                >
+                  <div>
+                    <p className="text-sm font-bold text-foreground">{item.label}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">{item.flow}</p>
+                  </div>
+                  <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                </a>
+              </Reveal>
             ))}
           </div>
         </div>
       </div>
 
+      {/* 커스터마이징 가능한 범위 */}
+      <Reveal className="py-14 sm:py-20">
+        <div className="mx-auto max-w-2xl px-4">
+          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
+          <h2 className="mt-3 text-2xl font-bold text-foreground">필요한 범위만 골라서 구축할 수 있습니다</h2>
+          <div className="mt-8 space-y-4">
+            {[
+              "홈페이지 오픈 이후에도 콘텐츠가 자주 바뀌는 경우",
+              "직원마다 다른 권한으로 접근해야 하는 경우",
+              "문의 · 예약이 여러 채널로 흩어져 관리가 안 되는 경우",
+              "상품 · 매물 · 차량처럼 목록형 콘텐츠가 계속 늘어나는 경우",
+            ].map((text) => (
+              <div key={text} className="flex items-start gap-3">
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <p className="text-sm leading-relaxed text-foreground break-keep">{text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-6 text-sm leading-relaxed text-muted-foreground break-keep">
+            반대로 콘텐츠 변경이 거의 없는 소개형 홈페이지라면, 관리자 시스템 없이도 충분한 경우가
+            많습니다. 필요 여부부터 상담을 통해 함께 판단합니다.
+          </p>
+        </div>
+      </Reveal>
+
       {/* 다른 맞춤형 서비스 */}
-      <div className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {OTHER_SERVICES.map((s) => (
-            <Link
-              key={s.slug}
-              to={`/services/${s.slug}`}
-              className="rounded-full border border-border px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-            >
-              {s.navLabel}
-            </Link>
-          ))}
+      <div className="border-t border-border bg-secondary/30">
+        <div className="mx-auto max-w-6xl px-4 py-12">
+          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {OTHER_SERVICES.map((s) => (
+              <Link
+                key={s.slug}
+                to={`/services/${s.slug}`}
+                className="rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+              >
+                {s.navLabel}
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* 마무리 CTA */}
-      <div className="border-t border-border bg-secondary/30 py-14 text-center">
+      <div className="py-14 text-center">
         <div className="mx-auto max-w-md px-4">
           <p className="text-base font-bold text-foreground break-keep">필요한 범위만 골라 구축할 수 있습니다.</p>
           <p className="mt-2 text-sm text-muted-foreground break-keep">
