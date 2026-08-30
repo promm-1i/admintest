@@ -2,13 +2,11 @@ import { Link } from "react-router-dom";
 import { Send, Check, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { ADDONS } from "@/lib/pricing";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { Reveal } from "@/pages/services/previewKit";
 import { PricingComparison } from "@/components/site/PricingComparison";
 
 const EXTRA_FEATURES = [
-  ...ADDONS.map((a) => ({ name: a.name, price: a.price })),
   { name: "다국어 지원", price: "별도 협의" },
   { name: "회원 기능", price: "별도 협의" },
   { name: "결제 연동", price: "별도 협의" },

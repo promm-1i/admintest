@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { PlusCircle, ArrowRight } from "lucide-react";
-import { ADDONS } from "@/lib/pricing";
+import { ArrowRight } from "lucide-react";
 import { TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import { cn } from "@/lib/utils";
 
@@ -62,25 +61,7 @@ export function PricingSection() {
           </Link>
         </FadeIn>
 
-        <FadeIn delay={240} className="mt-8 rounded-xl border border-border bg-card p-6 sm:p-8 shadow-xs">
-          <div className="flex items-center gap-2 mb-4 pb-3 border-b border-border/60">
-            <PlusCircle className="h-4 w-4 text-primary" />
-            <h3 className="text-sm font-semibold text-foreground">필요 시 선택 가능한 추가 옵션</h3>
-          </div>
-          <ul className="grid gap-3 text-xs sm:text-sm text-muted-foreground sm:grid-cols-2">
-            {ADDONS.map((item) => (
-              <li
-                key={item.name}
-                className="flex items-center justify-between gap-4 rounded-lg bg-secondary/40 px-4 py-3 border border-border/40"
-              >
-                <span className="font-medium text-foreground break-keep">{item.name}</span>
-                <span className="shrink-0 font-semibold text-primary">{item.price}</span>
-              </li>
-            ))}
-          </ul>
-        </FadeIn>
-
-        <p className="mt-5 text-xs leading-relaxed text-muted-foreground/80 break-keep">
+        <p className="mt-8 text-xs leading-relaxed text-muted-foreground/80 break-keep">
           ※ 모든 금액은 VAT 별도이며, 페이지 수와 추가 기능 범위에 따라 최종 견적은 상담 후 확정됩니다.
         </p>
       </div>

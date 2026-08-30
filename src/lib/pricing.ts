@@ -69,20 +69,6 @@ export const PRODUCT_TYPES: ProductType[] = [
   },
 ];
 
-export type PriceItem = {
-  name: string;
-  price: string;
-  features: string[];
-  recommended?: boolean;
-};
-
-export const ADDONS: PriceItem[] = [
-  { name: "문의 / 예약 폼", price: "5만 원", features: [] },
-  { name: "관리자 기능 / 공지사항 관리", price: "10만 원", features: [] },
-  { name: "네이버 카카오 지도연동", price: "5만 원", features: [] },
-  { name: "추가 페이지", price: "페이지당 5만 원", features: [] },
-];
-
 export const BENEFITS = [
   "모바일 반응형",
   "카카오톡 / 전화 / 지도 연결",
