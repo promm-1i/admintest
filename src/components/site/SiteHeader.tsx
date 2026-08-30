@@ -20,18 +20,27 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
         </AccordionTrigger>
         <AccordionContent>
           <ul className="space-y-3 pb-2 pl-1">
-            {entry.items.map((item) => (
-              <li key={item.label}>
-                <Link
-                  to={item.href}
-                  onClick={onNavigate}
-                  className="flex items-center gap-1.5 text-sm font-medium text-foreground"
-                >
-                  {item.label}
-                  <ArrowRight className="size-3.5" />
-                </Link>
-              </li>
-            ))}
+            {entry.items.map((item, i) => {
+              // 데스크톱 드롭다운과 동일하게, group이 바뀌는 지점에 구분선 + 소제목
+              const groupStart = item.group && item.group !== entry.items[i - 1]?.group;
+              return (
+                <li key={item.label}>
+                  {groupStart && (
+                    <p className="mb-3 border-t border-border pt-3 text-xs font-semibold tracking-wide text-muted-foreground">
+                      {item.group}
+                    </p>
+                  )}
+                  <Link
+                    to={item.href}
+                    onClick={onNavigate}
+                    className="flex items-center gap-1.5 text-sm font-medium text-foreground"
+                  >
+                    {item.label}
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </AccordionContent>
       </AccordionItem>

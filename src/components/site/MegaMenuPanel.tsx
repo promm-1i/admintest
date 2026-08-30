@@ -23,17 +23,28 @@ export function MegaMenuPanel({ entry, onNavigate, onMouseEnter, onMouseLeave }:
       onMouseLeave={onMouseLeave}
     >
       <ul className="min-w-[220px] rounded-2xl border border-border bg-background py-2.5 shadow-xl motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-2 motion-safe:duration-200 motion-safe:ease-out">
-        {entry.items.map((item) => (
-          <li key={item.label}>
-            <Link
-              to={item.href}
-              onClick={onNavigate}
-              className="block whitespace-nowrap rounded-lg px-5 py-2.5 text-base text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
-            >
-              {item.label}
-            </Link>
-          </li>
-        ))}
+        {entry.items.map((item, i) => {
+          // 앞 항목과 group이 달라지는 지점에 얇은 구분선 + 소제목을 넣는다
+          const groupStart = item.group && item.group !== entry.items[i - 1]?.group;
+          return (
+            <li key={item.label}>
+              {groupStart && (
+                <div className="mx-5 mb-1 mt-2 border-t border-border pt-2">
+                  <p className="text-xs font-semibold tracking-wide text-muted-foreground">
+                    {item.group}
+                  </p>
+                </div>
+              )}
+              <Link
+                to={item.href}
+                onClick={onNavigate}
+                className="block whitespace-nowrap rounded-lg px-5 py-2.5 text-base text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+              >
+                {item.label}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

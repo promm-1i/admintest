@@ -59,7 +59,12 @@ export const INDUSTRY_ITEMS: NavItem[] = [
  * Header / Mega Menu 전용 텍스트 중심 내비게이션 구조.
  * 카드·아이콘 박스·설명문 없이 항목명만 나열하는 정돈된 드롭다운을 위한 데이터다.
  */
-export type NavLink = { label: string; href: string };
+export type NavLink = {
+  label: string;
+  href: string;
+  /** 있으면 드롭다운에서 같은 group끼리 묶여 구분선 + 소제목 아래 렌더링된다 */
+  group?: string;
+};
 export type NavDropdownEntry = {
   type: "dropdown";
   key: string;
@@ -86,13 +91,15 @@ export const HEADER_NAV: NavEntry[] = [
     key: "custom-service",
     label: "맞춤형 서비스",
     items: [
-      { label: "관리자 시스템", href: "/services/admin-system" },
-      { label: "문의 · 예약 관리", href: "/services/inquiry-reservation" },
-      { label: "검색 · 필터 기능", href: "/services/search-filter" },
-      { label: "콘텐츠 관리", href: "/services/content-management" },
-      { label: "DB · API 연동", href: "/services/database-api" },
-      { label: "반응형 웹 제작", href: "/services/responsive" },
-      { label: "검색엔진 최적화", href: "/services/seo" },
+      { label: "커스텀 개발이란?", href: "/services/custom" },
+      { label: "업종별 솔루션 · 데모 체험", href: "/web-solutions" },
+      { label: "관리자 시스템", href: "/services/admin-system", group: "기능별 개발" },
+      { label: "문의 · 예약 관리", href: "/services/inquiry-reservation", group: "기능별 개발" },
+      { label: "검색 · 필터 기능", href: "/services/search-filter", group: "기능별 개발" },
+      { label: "콘텐츠 관리", href: "/services/content-management", group: "기능별 개발" },
+      { label: "DB · API 연동", href: "/services/database-api", group: "기능별 개발" },
+      { label: "반응형 웹 제작", href: "/services/responsive", group: "기능별 개발" },
+      { label: "검색엔진 최적화", href: "/services/seo", group: "기능별 개발" },
     ],
   },
   {

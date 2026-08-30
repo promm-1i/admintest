@@ -11,6 +11,7 @@ import Home from "@/pages/Home";
 
 const About = lazy(() => import("@/pages/About"));
 const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
+const CustomDevService = lazy(() => import("@/pages/services/CustomDevService"));
 const AdminSystemService = lazy(() => import("@/pages/services/AdminSystemService"));
 const InquiryReservationService = lazy(() => import("@/pages/services/InquiryReservationService"));
 const SearchFilterService = lazy(() => import("@/pages/services/SearchFilterService"));
@@ -119,6 +120,7 @@ export default function App() {
           <Route element={<SiteLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/services/custom" element={<CustomDevService />} />
             <Route path="/services/admin-system" element={<AdminSystemService />} />
             <Route path="/services/inquiry-reservation" element={<InquiryReservationService />} />
             <Route path="/services/search-filter" element={<SearchFilterService />} />
