@@ -243,6 +243,12 @@ export const SAMPLES: Sample[] = [
   },
 ];
 
+/**
+ * 포트폴리오(=실제 제작 사례) 목록. industryKey가 붙은 항목은 판매용 템플릿이라
+ * /templates에서만 노출하고, 포트폴리오 목록·슬라이더에서는 제외한다.
+ */
+export const PORTFOLIO_SAMPLES: Sample[] = SAMPLES.filter((s) => !s.industryKey);
+
 export const PORTFOLIO_FILTERS = [
   { label: "전체", value: "all" },
   { label: "플랫폼·시스템", value: "platform" },

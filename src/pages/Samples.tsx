@@ -3,7 +3,7 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { Pagination } from "@/components/ui/Pagination";
 import { SampleMarquee } from "@/components/sections/SampleMarquee";
-import { SAMPLES, PORTFOLIO_FILTERS } from "@/lib/samples";
+import { PORTFOLIO_SAMPLES, PORTFOLIO_FILTERS } from "@/lib/samples";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
 
@@ -20,8 +20,8 @@ export default function Samples() {
 
   const filteredSamples =
     selectedType === "all"
-      ? SAMPLES
-      : SAMPLES.filter((site) => site.type?.includes(selectedType));
+      ? PORTFOLIO_SAMPLES
+      : PORTFOLIO_SAMPLES.filter((site) => site.type?.includes(selectedType));
 
   const totalPages = Math.max(1, Math.ceil(filteredSamples.length / PAGE_SIZE));
   const pageSamples = filteredSamples.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);

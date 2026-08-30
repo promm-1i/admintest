@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { SAMPLES } from "@/lib/samples";
+import { PORTFOLIO_SAMPLES } from "@/lib/samples";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 
 export function SampleMarquee() {
-  // 가장 최근 등록된 6개만 슬라이드에 노출 (SAMPLES는 최신순 정렬)
-  const latest = SAMPLES.slice(0, 6);
+  // 가장 최근 등록된 6개만 슬라이드에 노출 (PORTFOLIO_SAMPLES는 최신순 정렬)
+  const latest = PORTFOLIO_SAMPLES.slice(0, 6);
   // Double the array to create a seamless infinite loop effect
   const marqueeItems = [...latest, ...latest];
 

@@ -5,14 +5,16 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { Button } from "@/components/ui/button";
-import { SAMPLES, PORTFOLIO_FILTERS } from "@/lib/samples";
+import { PORTFOLIO_SAMPLES, PORTFOLIO_FILTERS } from "@/lib/samples";
 import { cn } from "@/lib/utils";
 
 export function PortfolioSection() {
   const [selectedType, setSelectedType] = useState("all");
 
   const filteredSamples =
-    selectedType === "all" ? SAMPLES : SAMPLES.filter((site) => site.type?.includes(selectedType));
+    selectedType === "all"
+      ? PORTFOLIO_SAMPLES
+      : PORTFOLIO_SAMPLES.filter((site) => site.type?.includes(selectedType));
 
   // 메인페이지는 최신 대표 사례 6건만 노출한다 (전체 목록은 /samples).
   const displaySamples = filteredSamples.slice(0, 6);
