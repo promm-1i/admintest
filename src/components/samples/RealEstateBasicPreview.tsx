@@ -1,4 +1,5 @@
 import { Phone, MapPin, Clock, Search, Train, Car, FileText, ChevronRight } from "lucide-react";
+import { RealEstateMapSearch } from "@/components/samples/RealEstateMapSearch";
 import aptExterior from "@/assets/images/re_apt_exterior.jpg";
 import living01 from "@/assets/images/re_living_01.jpg";
 import living02 from "@/assets/images/re_living_02.jpg";
@@ -7,6 +8,8 @@ import studio from "@/assets/images/re_studio.jpg";
 import oneroom from "@/assets/images/re_oneroom.jpg";
 import retail from "@/assets/images/re_retail.jpg";
 import keys from "@/assets/images/re_keys.jpg";
+import villaPool from "@/assets/images/re_villa_pool.jpg";
+import officeTower from "@/assets/images/re_office_tower.jpg";
 
 const NAV = ["사무소 소개", "매물 정보", "중개보수 안내", "공지사항", "오시는 길"];
 
@@ -58,6 +61,22 @@ const LISTINGS = [
     price: "2억 9,000만원",
     specs: ["빌라/투룸", "전용 42.6㎡", "3/5층", "남향"],
     note: "선릉역 도보 7분 · 신축 3년차",
+  },
+  {
+    img: villaPool,
+    deal: "매매",
+    title: "대치동 신축 하이엔드 빌라",
+    price: "18억 5,000만원",
+    specs: ["빌라", "전용 142.8㎡", "3/4층", "테라스"],
+    note: "대치역 도보 6분 · 개별 수영장",
+  },
+  {
+    img: officeTower,
+    deal: "임대",
+    title: "삼성동 프라임 사무실",
+    price: "보증 3억 / 월 1,850",
+    specs: ["사무실", "전용 331㎡", "14층", "전면 통창"],
+    note: "삼성역 직결 · 무권리",
   },
 ];
 
@@ -164,41 +183,51 @@ export function RealEstateBasicPreview() {
         </div>
       </section>
 
-      {/* 추천 매물 */}
+      {/* 지도로 매물 찾기 */}
       <section className="px-6 py-14">
+        <div className="flex items-end justify-between pb-4">
+          <div>
+            <p className="text-[11px] font-semibold tracking-widest text-neutral-400">MAP SEARCH</p>
+            <h2 className="mt-1.5 text-xl font-bold">지도로 매물 찾기</h2>
+            <p className="mt-1.5 text-xs text-neutral-500">
+              지도를 움직이면 그 지역의 공개 매물이 실시간으로 표시됩니다.
+            </p>
+          </div>
+          <span className="flex items-center gap-0.5 text-xs font-medium text-neutral-500">
+            목록으로 보기 <ChevronRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
+        <RealEstateMapSearch tone="light" />
+      </section>
+
+      {/* 추천 매물 */}
+      <section className="border-t border-neutral-200 px-6 py-14">
         <div className="flex items-end justify-between border-b border-neutral-200 pb-4">
           <div>
             <p className="text-[11px] font-semibold tracking-widest text-neutral-400">LISTINGS</p>
-            <h2 className="mt-1.5 text-xl font-bold">이번 주 추천 매물</h2>
+            <h2 className="mt-1.5 text-xl font-bold">
+              이번 주 추천 매물 <span className="text-sm font-semibold text-neutral-400">공개 매물 128건</span>
+            </h2>
           </div>
           <span className="flex items-center gap-0.5 text-xs font-medium text-neutral-500">
             전체 매물 보기 <ChevronRight className="h-3.5 w-3.5" />
           </span>
         </div>
 
-        <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {LISTINGS.map((item) => (
             <article key={item.title} className="overflow-hidden rounded-lg border border-neutral-200">
               <div className="relative">
-                <img src={item.img} alt="" className="h-44 w-full object-cover" />
-                <span className="absolute left-3 top-3 rounded bg-neutral-900/85 px-2 py-0.5 text-[11px] font-bold text-white">
+                <img src={item.img} alt="" className="h-32 w-full object-cover" />
+                <span className="absolute left-2.5 top-2.5 rounded bg-neutral-900/85 px-1.5 py-0.5 text-[10px] font-bold text-white">
                   {item.deal}
                 </span>
               </div>
-              <div className="p-4">
-                <h3 className="text-sm font-bold">{item.title}</h3>
-                <p className="mt-1 text-lg font-extrabold">{item.price}</p>
-                <ul className="mt-2.5 flex flex-wrap gap-1.5">
-                  {item.specs.map((s) => (
-                    <li
-                      key={s}
-                      className="rounded border border-neutral-200 bg-neutral-50 px-1.5 py-0.5 text-[10px] text-neutral-600"
-                    >
-                      {s}
-                    </li>
-                  ))}
-                </ul>
-                <p className="mt-3 border-t border-neutral-100 pt-2.5 text-[11px] text-neutral-500">
+              <div className="p-3">
+                <p className="text-base font-extrabold leading-tight">{item.price}</p>
+                <h3 className="mt-0.5 truncate text-[13px] font-semibold text-neutral-800">{item.title}</h3>
+                <p className="mt-1 truncate text-[11px] text-neutral-500">{item.specs.join(" · ")}</p>
+                <p className="mt-2 truncate border-t border-neutral-100 pt-2 text-[10px] text-neutral-400">
                   {item.note}
                 </p>
               </div>

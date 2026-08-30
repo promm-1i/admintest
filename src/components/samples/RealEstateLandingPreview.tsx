@@ -21,6 +21,8 @@ import living01 from "@/assets/images/re_living_01.jpg";
 import living02 from "@/assets/images/re_living_02.jpg";
 import living03 from "@/assets/images/re_living_03.jpg";
 import retail from "@/assets/images/re_retail.jpg";
+import studio from "@/assets/images/re_studio.jpg";
+import { RealEstateMapSearch } from "@/components/samples/RealEstateMapSearch";
 
 const STATS = [
   { to: 20, suffix: "년", label: "지역 중개 경력" },
@@ -53,6 +55,30 @@ const LISTINGS = [
     price: "보증 3억 / 월 1,850",
     specs: "전용 331㎡ · 14층 · 전면 통창",
     tags: ["삼성역 직결", "무권리"],
+  },
+  {
+    img: living02,
+    deal: "전세",
+    title: "삼성동 아이파크 24평",
+    price: "6억 2,000",
+    specs: "전용 59.8㎡ · 8/20층 · 남동향",
+    tags: ["삼성역 8분", "올수리"],
+  },
+  {
+    img: studio,
+    deal: "월세",
+    title: "논현동 리버스텔 오피스텔",
+    price: "3,000 / 월 130",
+    specs: "전용 33.1㎡ · 11/15층 · 풀옵션",
+    tags: ["논현역 3분", "관리비 8만"],
+  },
+  {
+    img: retail,
+    deal: "임대",
+    title: "신사동 가로수길 1층 상가",
+    price: "1억 / 월 550",
+    specs: "전용 49.5㎡ · 1/5층 · 권리금 협의",
+    tags: ["가로수길 메인", "유동인구"],
   },
 ];
 
@@ -295,19 +321,20 @@ export function RealEstateLandingPreview() {
           <p className="text-[11px] font-semibold tracking-widest text-amber-400">CURATED LISTINGS</p>
           <h2 className="mt-2.5 text-2xl font-bold sm:text-3xl">지금 확인 가능한 대표 매물</h2>
           <p className="mx-auto mt-3 max-w-md text-sm text-white/55">
-            직접 방문해 상태를 확인하고, 권리관계까지 검증을 마친 매물만 올립니다.
+            직접 방문해 상태를 확인하고, 권리관계까지 검증을 마친 매물만 올립니다. 현재 공개 매물{" "}
+            <span className="font-bold text-amber-400">128건</span>
           </p>
         </Reveal>
 
-        <div className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto mt-10 grid max-w-5xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {LISTINGS.map((item, i) => (
-            <RevealScale key={item.title} delay={i * 110}>
+            <RevealScale key={item.title} delay={(i % 3) * 110}>
               <article className="group h-full overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] transition-all duration-300 hover:-translate-y-1.5 hover:border-amber-400/40 hover:shadow-xl hover:shadow-amber-400/10">
                 <div className="relative overflow-hidden">
                   <img
                     src={item.img}
                     alt=""
-                    className="h-48 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    className="h-40 w-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/70 to-transparent" />
                   <span className="absolute left-3 top-3 rounded-full bg-amber-400 px-2.5 py-0.5 text-[10px] font-bold text-neutral-950">
@@ -333,6 +360,20 @@ export function RealEstateLandingPreview() {
             </RevealScale>
           ))}
         </div>
+      </section>
+
+      {/* 지도 기반 매물 탐색 */}
+      <section className="border-t border-white/10 bg-neutral-900/40 px-6 py-20">
+        <Reveal className="text-center">
+          <p className="text-[11px] font-semibold tracking-widest text-amber-400">MAP SEARCH</p>
+          <h2 className="mt-2.5 text-2xl font-bold sm:text-3xl">지도에서 바로 확인하세요</h2>
+          <p className="mx-auto mt-3 max-w-md text-sm text-white/55">
+            원하는 동네를 움직이면 그 지역의 공개 매물과 시세가 실시간으로 표시됩니다.
+          </p>
+        </Reveal>
+        <RevealScale delay={120} className="mx-auto mt-10 max-w-5xl">
+          <RealEstateMapSearch tone="dark" />
+        </RevealScale>
       </section>
 
       {/* 차별점 */}
