@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { MessageCircle, Phone } from "lucide-react";
@@ -8,23 +8,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Switch } from "@/components/ui/switch";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { createReservation, reservationSchema, type ReservationInput } from "@/lib/api/reservations";
-import { PRODUCT_TYPES } from "@/lib/pricing";
-import { QUOTE_FEATURES, getQuoteConfig, calculateQuote, formatQuoteSummary } from "@/lib/quote";
 import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
-const EMPTY: ReservationInput = {
-  name: "",
-  phone: "",
-  email: "",
-  service: "",
-  preferred_at: "",
-  message: "",
-};
-
+/**
+ * 문의 폼은 이탈을 줄이기 위해 성함 · 연락처 · 제작 희망 내용 세 칸만 받는다.
+ * 템플릿/서비스 페이지에서 넘어온 ?service= 값은 화면에 노출하지 않고 접수 데이터에만 실어 보낸다.
+ */
 export default function Contact() {
   usePageTitle(
     "제작 문의 — NOVERIQ",
@@ -32,53 +23,16 @@ export default function Contact() {
   );
 
   const [searchParams] = useSearchParams();
-  const [form, setForm] = useState<ReservationInput>(() => {
-    const service = searchParams.get("service");
-    return service ? { ...EMPTY, service } : EMPTY;
-  });
+  const serviceFromLink = searchParams.get("service") ?? "";
+
+  const [form, setForm] = useState({ name: "", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [showOptional, setShowOptional] = useState(false);
-
-  // 실시간 견적 계산기 상태 — 제작 유형을 바꾸면 초기화되고, 사용자가 문의 내용을
-  // 직접 수정하면 더 이상 자동으로 덮어쓰지 않는다.
-  const [pageCount, setPageCount] = useState(1);
-  const [features, setFeatures] = useState<string[]>([]);
-  const [messageAutoManaged, setMessageAutoManaged] = useState(true);
-
-  const quoteConfig = getQuoteConfig(form.service);
-  const estimatedTotal = quoteConfig ? calculateQuote(quoteConfig, pageCount, features) : 0;
-
-  // 제작 유형이 바뀌면 견적 입력값을 그 유형에 맞게 초기화한다.
-  useEffect(() => {
-    const config = getQuoteConfig(form.service);
-    if (config) {
-      setPageCount(config.includedPages);
-      setFeatures([]);
-      setMessageAutoManaged(true);
-    } else if (messageAutoManaged) {
-      setForm((p) => ({ ...p, message: "" }));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form.service]);
-
-  // 견적 입력값이 바뀌면(그리고 사용자가 문의 내용을 직접 건드리지 않았다면)
-  // 문의 내용 칸에 견적 요약을 자동으로 채워 넣는다.
-  useEffect(() => {
-    if (!quoteConfig || !messageAutoManaged) return;
-    const summary = formatQuoteSummary(form.service, pageCount, features, estimatedTotal);
-    setForm((p) => ({ ...p, message: summary }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [form.service, pageCount, features, messageAutoManaged]);
-
-  const toggleFeature = (key: string) => {
-    setFeatures((prev) => (prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]));
-  };
 
   const mutation = useMutation({
     mutationFn: createReservation,
     onSuccess: (data) => {
-      setForm(EMPTY);
+      setForm({ name: "", phone: "", message: "" });
       setErrors({});
       setAccessToken(data.access_token);
       toast.success("문의가 접수되었습니다. 확인 후 연락드리겠습니다.");
@@ -86,12 +40,20 @@ export default function Contact() {
     onError: () => toast.error("접수에 실패했습니다. 잠시 후 다시 시도해 주세요."),
   });
 
-  const set = (key: keyof ReservationInput) => (value: string) =>
+  const set = (key: keyof typeof form) => (value: string) =>
     setForm((prev) => ({ ...prev, [key]: value }));
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const result = reservationSchema.safeParse(form);
+    const payload: ReservationInput = {
+      name: form.name,
+      phone: form.phone,
+      message: form.message,
+      service: serviceFromLink,
+      email: "",
+      preferred_at: "",
+    };
+    const result = reservationSchema.safeParse(payload);
     if (!result.success) {
       const next: Record<string, string> = {};
       for (const issue of (result.error as z.ZodError).issues) {
@@ -189,142 +151,22 @@ export default function Contact() {
             onChange={(e) => set("phone")(e.target.value)}
           />
         </Field>
-        <Field label="희망 제작 유형" error={errors["service"]}>
-          <Select value={form.service} onValueChange={set("service")}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="선택해 주세요" />
-            </SelectTrigger>
-            <SelectContent>
-              {PRODUCT_TYPES.map((type) => (
-                <SelectItem key={type.name} value={type.name}>
-                  {type.name}
-                </SelectItem>
-              ))}
-              <SelectItem value="업종별 맞춤 홈페이지">업종별 맞춤 홈페이지 (관리자 · DB · 예약 등)</SelectItem>
-              <SelectItem value="유지보수 / 수정 문의">유지보수 / 수정 문의</SelectItem>
-              <SelectItem value="기타">기타 (문의 내용에 설명)</SelectItem>
-            </SelectContent>
-          </Select>
-        </Field>
-
-        {quoteConfig && (
-          <div className="space-y-4 rounded-lg border border-dashed border-primary/40 bg-secondary/30 p-4">
-            <p className="text-sm font-medium text-primary">실시간 견적 계산기</p>
-
-            {quoteConfig.pagesAdjustable && (
-              <div className="space-y-2">
-                <Label>예상 페이지 수</Label>
-                <Input
-                  type="number"
-                  min={1}
-                  max={30}
-                  value={pageCount}
-                  onChange={(e) => setPageCount(Math.max(1, Number(e.target.value) || 1))}
-                />
-              </div>
-            )}
-
-            <div className="space-y-2">
-              <Label>선택 기능</Label>
-              <div className="space-y-2">
-                {QUOTE_FEATURES.map((f) => (
-                  <div key={f.key} className="flex items-center justify-between">
-                    <span className="text-sm">
-                      {f.label}
-                      <span className="ml-1 text-xs text-muted-foreground">
-                        (+{f.price.toLocaleString("ko-KR")}원)
-                      </span>
-                    </span>
-                    <Switch checked={features.includes(f.key)} onCheckedChange={() => toggleFeature(f.key)} />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-md bg-card p-4 text-sm">
-              <p>
-                선택 유형: <span className="font-medium">{form.service}</span>
-              </p>
-              <p>
-                예상 페이지 수:{" "}
-                <span className="font-medium">
-                  {quoteConfig.pagesAdjustable ? pageCount : quoteConfig.includedPages}페이지
-                </span>
-              </p>
-              <p>
-                선택 기능:{" "}
-                <span className="font-medium">
-                  {features.length > 0
-                    ? QUOTE_FEATURES.filter((f) => features.includes(f.key))
-                        .map((f) => f.label)
-                        .join(", ")
-                    : "없음"}
-                </span>
-              </p>
-              <p className="mt-2 text-base font-semibold text-primary">
-                산출 예상 비용: 약 {estimatedTotal.toLocaleString("ko-KR")}원
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                실제 견적은 상담 후 확정되며, 아래 문의 내용에 자동으로 반영됩니다(자유롭게 수정 가능).
-              </p>
-            </div>
-          </div>
-        )}
-
         <Field label="제작 희망 내용" error={errors["message"]}>
           <Textarea
-            rows={7}
-            placeholder="어떤 업종이고, 어떤 페이지가 필요한지 자유롭게 적어 주세요."
+            rows={6}
+            placeholder="어떤 업종이고, 어떤 홈페이지가 필요한지 자유롭게 적어 주세요. 간단히 적어주셔도 됩니다."
             value={form.message}
             maxLength={1000}
-            onChange={(e) => {
-              set("message")(e.target.value);
-              setMessageAutoManaged(false);
-            }}
+            onChange={(e) => set("message")(e.target.value)}
           />
-          {quoteConfig && !messageAutoManaged && (
-            <button
-              type="button"
-              className="text-xs text-primary underline"
-              onClick={() => setMessageAutoManaged(true)}
-            >
-              견적 요약으로 다시 채우기
-            </button>
-          )}
         </Field>
-
-        {showOptional ? (
-          <div className="space-y-5 rounded-lg border border-dashed border-border p-4">
-            <Field label="이메일" error={errors["email"]}>
-              <Input
-                type="email"
-                value={form.email}
-                maxLength={255}
-                onChange={(e) => set("email")(e.target.value)}
-              />
-            </Field>
-            <Field label="완료 희망 날짜" error={errors["preferred_at"]}>
-              <Input
-                type="date"
-                value={form.preferred_at}
-                onChange={(e) => set("preferred_at")(e.target.value)}
-              />
-              <p className="text-xs text-muted-foreground">언제까지 완성되면 좋을지 알려주시면 일정 조율에 참고합니다.</p>
-            </Field>
-          </div>
-        ) : (
-          <button
-            type="button"
-            className="text-xs text-muted-foreground underline"
-            onClick={() => setShowOptional(true)}
-          >
-            + 이메일 · 희망 완료일 추가 입력 (선택)
-          </button>
-        )}
 
         <Button type="submit" className="w-full" disabled={mutation.isPending}>
           {mutation.isPending ? "접수 중…" : "문의 보내기"}
         </Button>
+        <p className="text-center text-xs text-muted-foreground">
+          연락처는 상담 회신 용도로만 사용됩니다.
+        </p>
       </form>
     </div>
   );
