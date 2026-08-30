@@ -97,11 +97,11 @@ export const PRICING_ROWS: PricingRow[] = [
   {
     label: "도메인 1개",
     info: [
-      "한글·영문 도메인 모두 가능합니다.",
-      "com / co.kr / kr 중에서 선택하실 수 있습니다.",
-      "이미 보유한 도메인이 있다면 연결만 해드립니다.",
+      "첫 1년은 무료로 제공됩니다.",
+      "이후 연 30,000원이 호스팅료에 추가됩니다.",
+      "한글·영문 모두 가능하며 com / co.kr / kr 중 선택하실 수 있습니다.",
     ],
-    values: ["무료", "무료", "무료", "무료"],
+    values: ["1년 무료", "1년 무료", "1년 무료", "1년 무료"],
   },
   {
     label: "디자인 비용",
@@ -138,10 +138,12 @@ export const PRICING_ROWS: PricingRow[] = [
   {
     label: "호스팅 1년",
     required: true,
-    info: HOSTING_DISCOUNTS.map(
-      (h) =>
-        `${h.years}년 ${Math.round(h.rate * 100)}%할인 ${h.total.toLocaleString("ko-KR")}원`,
-    ),
+    info: [
+      ...HOSTING_DISCOUNTS.map(
+        (h) => `${h.years}년 ${Math.round(h.rate * 100)}%할인 ${h.total.toLocaleString("ko-KR")}원`,
+      ),
+      "2년차부터 도메인 연 30,000원이 추가됩니다.",
+    ],
     values: ["24만원", "24만원", "24만원", "24만원"],
   },
 ];
