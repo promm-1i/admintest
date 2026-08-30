@@ -8,13 +8,6 @@ import { Button } from "@/components/ui/button";
 import { SAMPLES, PORTFOLIO_FILTERS } from "@/lib/samples";
 import { cn } from "@/lib/utils";
 
-const PERFORMANCE_STATS = [
-  { value: "일 3건+", label: "평균 문의 접수" },
-  { value: "50+", label: "누적 프로젝트 완료" },
-  { value: "20+", label: "재계약 고객" },
-  { value: "80%+", label: "재계약률" },
-];
-
 export function PortfolioSection() {
   const [selectedType, setSelectedType] = useState("all");
 
@@ -41,20 +34,6 @@ export function PortfolioSection() {
             전체 포트폴리오 보기 →
           </Link>
         </div>
-
-        <FadeIn delay={40}>
-          <dl className="mt-8 grid grid-cols-2 gap-8 divide-y divide-border px-2 py-8 sm:grid-cols-4 sm:gap-4 sm:divide-y-0 sm:divide-x">
-            {PERFORMANCE_STATS.map((s) => (
-              <div key={s.label} className="pt-6 text-center first:pt-0 sm:pt-0">
-                <dt className="sr-only">{s.label}</dt>
-                <dd className="text-4xl font-black tracking-tighter text-foreground sm:text-5xl">
-                  {s.value}
-                </dd>
-                <p className="mt-2 text-sm font-medium leading-snug text-muted-foreground">{s.label}</p>
-              </div>
-            ))}
-          </dl>
-        </FadeIn>
 
         <div className="mt-10 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
           {PORTFOLIO_FILTERS.map((f) => {
