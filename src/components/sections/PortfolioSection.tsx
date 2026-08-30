@@ -9,18 +9,20 @@ import { PORTFOLIO_SAMPLES, PORTFOLIO_FILTERS, MAIN_PORTFOLIO_CAROUSEL } from "@
 import { cn } from "@/lib/utils";
 import type { Sample } from "@/lib/samples";
 
-/** 자동 슬라이드 속도 (px/초). 카드 한 장을 훑는 데 10초 안팎이 되는 느긋한 속도. */
-const AUTO_SCROLL_SPEED = 45;
+/** 자동 슬라이드 속도 (px/초). 카드 한 장이 3~4초 안에 지나가는 속도. */
+const AUTO_SCROLL_SPEED = 130;
 
 /**
  * 좌→우로 흐르는 무한 루프 캐러셀.
- * - 마우스를 올리면 자동 슬라이드가 멈추고, 휠로 직접 좌우 이동할 수 있다.
+ * - 마우스를 올리면 자동 슬라이드가 멈추고, 좌클릭한 채 좌우로 끌어서 직접 이동할 수 있다.
  * - 목록을 두 번 이어 붙이고 scrollLeft를 한 세트 폭만큼 되감아 이음새 없이 순환한다.
  * - prefers-reduced-motion 사용자에게는 자동 슬라이드 없이 일반 가로 스크롤로 동작한다.
  */
 function PortfolioCarousel({ items }: { items: Sample[] }) {
   const trackRef = useRef<HTMLDivElement | null>(null);
   const pausedRef = useRef(false);
+  // 드래그로 이동한 뒤 손을 뗄 때 카드 링크가 클릭되는 것을 막기 위한 플래그
+  const draggedRef = useRef(false);
 
   useEffect(() => {
     const el = trackRef.current;
@@ -55,20 +57,43 @@ function PortfolioCarousel({ items }: { items: Sample[] }) {
     };
     if (!reduceMotion) raf = requestAnimationFrame(tick);
 
-    // 휠 세로 스크롤을 가로 이동으로 변환 (페이지 스크롤은 막는다)
-    const onWheel = (e: WheelEvent) => {
-      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-      el.scrollLeft += delta;
-      wrap();
-      e.preventDefault();
+    // 마우스 좌클릭 드래그로 좌우 이동 (터치는 브라우저 기본 스와이프 스크롤을 그대로 쓴다)
+    let dragging = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+    const onPointerDown = (e: PointerEvent) => {
+      if (e.pointerType !== "mouse" || e.button !== 0) return;
+      dragging = true;
+      draggedRef.current = false;
+      startX = e.clientX;
+      startScrollLeft = el.scrollLeft;
+      el.setPointerCapture(e.pointerId);
     };
-    el.addEventListener("wheel", onWheel, { passive: false });
+    const onPointerMove = (e: PointerEvent) => {
+      if (!dragging) return;
+      const dx = e.clientX - startX;
+      if (Math.abs(dx) > 5) draggedRef.current = true;
+      el.scrollLeft = startScrollLeft - dx;
+      wrap();
+    };
+    const onPointerUp = (e: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      el.releasePointerCapture(e.pointerId);
+    };
+    el.addEventListener("pointerdown", onPointerDown);
+    el.addEventListener("pointermove", onPointerMove);
+    el.addEventListener("pointerup", onPointerUp);
+    el.addEventListener("pointercancel", onPointerUp);
     const onScroll = () => wrap();
     el.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
-      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("pointerdown", onPointerDown);
+      el.removeEventListener("pointermove", onPointerMove);
+      el.removeEventListener("pointerup", onPointerUp);
+      el.removeEventListener("pointercancel", onPointerUp);
       el.removeEventListener("scroll", onScroll);
     };
   }, [items]);
@@ -90,7 +115,16 @@ function PortfolioCarousel({ items }: { items: Sample[] }) {
       onTouchEnd={() => {
         pausedRef.current = false;
       }}
-      className="mt-8 flex items-stretch gap-6 overflow-x-auto pb-2 scrollbar-none"
+      onClickCapture={(e) => {
+        // 드래그 직후 발생하는 클릭은 카드 이동으로 이어지지 않게 삼킨다
+        if (draggedRef.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          draggedRef.current = false;
+        }
+      }}
+      onDragStart={(e) => e.preventDefault()}
+      className="mt-8 flex cursor-grab select-none items-stretch gap-6 overflow-x-auto pb-2 scrollbar-none active:cursor-grabbing"
     >
       {loopItems.map((sample, i) => (
         <div key={`${sample.slug}-${i}`} className="w-[340px] shrink-0 sm:w-[420px] lg:w-[480px]">
