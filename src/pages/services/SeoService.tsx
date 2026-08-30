@@ -4,7 +4,7 @@ import { Send, ArrowRight, SearchCheck, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
-import { useLazyMount, Reveal } from "@/pages/services/previewKit";
+import { useLazyMount, Reveal, RevealScale, NextStepsSection } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "seo");
 
@@ -40,14 +40,14 @@ function TitleTabDemo() {
   const { ref, shouldLoad } = useLazyMount<HTMLDivElement>();
   return (
     <div ref={ref}>
-      <p className="mx-auto mb-2 w-fit rounded-full bg-foreground px-3 py-1 text-center text-[11px] font-medium text-background">
+      <p className="mx-auto mb-2 w-fit rounded-full bg-foreground px-3 py-1 text-center text-xs font-medium text-background">
         ↓ 이 문구가 브라우저 탭에 그대로 표시됩니다
       </p>
       <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
         <div className="flex items-end gap-1 bg-secondary/50 px-3 pt-2.5">
           <div className="flex items-center gap-2 rounded-t-lg border border-b-0 border-border bg-background px-3 py-2">
             <span className="h-2.5 w-2.5 shrink-0 rounded-sm bg-primary/70" />
-            <span className="max-w-[220px] truncate text-xs font-medium text-foreground">
+            <span className="max-w-[220px] truncate text-sm font-medium text-foreground">
               MintCL — 소상공인·기업 홈페이지 제작
             </span>
           </div>
@@ -98,18 +98,24 @@ export default function SeoService() {
           <SearchCheck className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 검색엔진 최적화
         </p>
-        <h1 className="mx-auto mt-4 max-w-lg text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="mx-auto mt-4 max-w-lg text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           검색엔진이 페이지를 이해할 수 있도록 구조를 만듭니다
         </h1>
-        <p className="mx-auto mt-4 max-w-md text-base leading-relaxed text-muted-foreground break-keep">
+        <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground break-keep">
           검색 상위 노출이나 순위 상승을 보장하는 작업이 아닙니다. 검색엔진이 페이지의 제목, 설명,
           구조를 정확히 읽고 수집할 수 있도록 기본기를 갖추는 작업입니다.
         </p>
-        <div className="mt-8">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
             <Link to="/contact">
               <Send className="h-4 w-4" />
               구축 상담하기
+            </Link>
+          </Button>
+          <Button asChild size="lg" variant="ghost" className="gap-1.5 text-primary hover:bg-primary/5">
+            <Link to="/website/features">
+              구현 가능한 기능 보기
+              <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </Button>
         </div>
@@ -120,11 +126,11 @@ export default function SeoService() {
         <div className="mx-auto max-w-2xl px-4">
           <Reveal className="mb-8 text-center">
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면에서</p>
-            <h2 className="mt-3 text-2xl font-bold text-foreground">title은 이렇게, 실제로 보입니다</h2>
+            <h2 className="mt-3 text-3xl font-bold text-foreground">title은 이렇게, 실제로 보입니다</h2>
           </Reveal>
-          <Reveal delay={100}>
+          <RevealScale delay={100}>
             <TitleTabDemo />
-          </Reveal>
+          </RevealScale>
         </div>
       </div>
 
@@ -132,14 +138,28 @@ export default function SeoService() {
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-2xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 적용된 기본 설정</p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground">지금 이 사이트에 적용되어 있는 항목입니다</h2>
+          <h2 className="mt-3 text-3xl font-bold text-foreground">지금 이 사이트에 적용되어 있는 항목입니다</h2>
           <div className="mt-8 divide-y divide-border border-t border-border">
             {APPLIED_ITEMS.map((item) => (
               <div key={item.name} className="py-4">
-                <p className="font-mono text-sm font-semibold text-foreground">{item.name}</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground break-keep">{item.desc}</p>
+                <p className="font-mono text-base font-semibold text-foreground">{item.name}</p>
+                <p className="mt-1.5 text-base leading-relaxed text-muted-foreground break-keep">{item.desc}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-10">
+            <Reveal delay={150} className="flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-6 py-5">
+              <p className="text-base font-medium text-foreground break-keep">
+                기본 설정 외에 어떤 것까지 구현 가능한지 확인해보세요.
+              </p>
+              <Button asChild variant="outline" className="shrink-0 gap-1.5">
+                <Link to="/website/features">
+                  전체 기능 보기
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+              </Button>
+            </Reveal>
           </div>
         </div>
       </Reveal>
@@ -149,8 +169,8 @@ export default function SeoService() {
         <div className="mx-auto max-w-2xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">페이지마다 다르게</p>
-            <h2 className="mt-3 text-2xl font-bold text-foreground">모든 페이지가 같은 제목을 쓰지 않습니다</h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
+            <h2 className="mt-3 text-3xl font-bold text-foreground">모든 페이지가 같은 제목을 쓰지 않습니다</h2>
+            <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">
               페이지 진입 시 제목과 설명이 그 페이지 내용에 맞게 바뀝니다. 실제로 이 사이트에 적용된
               제목입니다.
             </p>
@@ -158,14 +178,14 @@ export default function SeoService() {
           <Reveal delay={100} className="mt-8 space-y-3">
             {TITLE_EXAMPLES.map((t) => (
               <div key={t.title} className="rounded-lg border border-border bg-card p-4">
-                <p className="font-mono text-sm font-semibold text-foreground">{t.title}</p>
-                <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">{t.desc}</p>
+                <p className="font-mono text-base font-semibold text-foreground">{t.title}</p>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground break-keep">{t.desc}</p>
               </div>
             ))}
           </Reveal>
 
           {/* SERP 미리보기 (확대) */}
-          <Reveal delay={160} className="mt-12">
+          <RevealScale delay={200} className="mt-12">
             <p className="text-center text-xs font-mono font-semibold uppercase tracking-widest text-primary">
               검색결과에서는 이렇게 보일 수 있습니다
             </p>
@@ -184,7 +204,7 @@ export default function SeoService() {
               실제 검색결과 디자인은 검색엔진과 시기에 따라 달라질 수 있어, 위 미리보기는 title과
               description이 어떻게 읽힐 수 있는지 보여주는 예시입니다.
             </p>
-          </Reveal>
+          </RevealScale>
         </div>
       </div>
 
@@ -192,7 +212,7 @@ export default function SeoService() {
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-3xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">범위를 정확하게</p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground">SEO에서 하는 것 / 하지 않는 것</h2>
+          <h2 className="mt-3 text-3xl font-bold text-foreground">SEO에서 하는 것 / 하지 않는 것</h2>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
             <div>
               <p className="flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-widest text-emerald-600">
@@ -201,7 +221,7 @@ export default function SeoService() {
               </p>
               <ul className="mt-4 space-y-3">
                 {DOES.map((text) => (
-                  <li key={text} className="flex items-start gap-2 text-sm text-foreground break-keep">
+                  <li key={text} className="flex items-start gap-2 text-base text-foreground break-keep">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     {text}
                   </li>
@@ -215,7 +235,7 @@ export default function SeoService() {
               </p>
               <ul className="mt-4 space-y-3">
                 {DOES_NOT.map((text) => (
-                  <li key={text} className="flex items-start gap-2 text-sm text-muted-foreground break-keep">
+                  <li key={text} className="flex items-start gap-2 text-base text-muted-foreground break-keep">
                     <X className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground/60" />
                     {text}
                   </li>
@@ -231,10 +251,10 @@ export default function SeoService() {
         <div className="mx-auto max-w-2xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">robots.txt</p>
-            <h2 className="mt-3 text-2xl font-bold text-foreground">
+            <h2 className="mt-3 text-3xl font-bold text-foreground">
               검색엔진에게 어디를 수집해도 되는지 알려줍니다
             </h2>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">
               아래는 이 사이트에 실제로 배포되어 있는 robots.txt 파일입니다. 관리자 화면처럼 검색에
               노출되면 안 되는 경로는 명시적으로 제외합니다.
             </p>
@@ -245,47 +265,12 @@ export default function SeoService() {
         </div>
       </div>
 
-      {/* 다른 맞춤형 서비스 */}
-      <div className="border-t border-border bg-secondary/30">
-        <div className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {OTHER_SERVICES.map((s) => (
-              <Link
-                key={s.slug}
-                to={`/services/${s.slug}`}
-                className="rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-              >
-                {s.navLabel}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* 마무리 CTA */}
-      <div className="py-14 text-center">
-        <div className="mx-auto max-w-md px-4">
-          <p className="text-base font-bold text-foreground break-keep">기본 구조부터 정확하게 갖추고 싶으신가요?</p>
-          <p className="mt-2 text-sm text-muted-foreground break-keep">
-            페이지 구조, 제목, 설명 설정부터 검색엔진 등록까지 기본 작업을 함께 안내드립니다.
-          </p>
-          <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <Button asChild className="gap-2 font-bold">
-              <Link to="/contact">
-                <Send className="h-4 w-4" />
-                구축 상담하기
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="gap-1.5">
-              <Link to="/website/features">
-                전체 기능 소개 보기
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </div>
+      {/* 다른 맞춤형 서비스 + 마무리 CTA (하나의 이어진 section) */}
+      <NextStepsSection
+        otherServices={OTHER_SERVICES}
+        ctaTitle="기본 구조부터 정확하게 갖추고 싶으신가요?"
+        ctaDesc="페이지 구조, 제목, 설명 설정부터 검색엔진 등록까지 기본 작업을 함께 안내드립니다."
+      />
     </div>
   );
 }

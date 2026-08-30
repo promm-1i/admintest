@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
-import { useLazyMount, useInViewport, Reveal } from "@/pages/services/previewKit";
+import { useLazyMount, useInViewport, Reveal, RevealScale, NextStepsSection } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "responsive");
 
@@ -44,7 +44,7 @@ function DeviceFrame({
   const scale = displayWidth / width;
 
   return (
-    <Reveal delay={delay} className="flex flex-col items-center">
+    <RevealScale delay={delay} className="flex flex-col items-center">
       <p className="mb-3 font-mono text-xs font-bold text-primary">
         {label} · {width}px
       </p>
@@ -66,8 +66,8 @@ function DeviceFrame({
           )}
         </div>
       </div>
-      <p className="mt-3 max-w-[220px] text-center text-xs text-muted-foreground break-keep">{note}</p>
-    </Reveal>
+      <p className="mt-3 max-w-[220px] text-center text-sm text-muted-foreground break-keep">{note}</p>
+    </RevealScale>
   );
 }
 
@@ -133,14 +133,14 @@ export default function ResponsiveService() {
           <Smartphone className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 반응형 웹 제작
         </p>
-        <h1 className="mx-auto mt-4 max-w-xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="mx-auto mt-4 max-w-xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           하나의 홈페이지가, 모든 화면에서 자연스럽습니다
         </h1>
-        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-muted-foreground break-keep">
+        <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
           PC, 태블릿, 모바일 화면 크기에 맞춰 콘텐츠 배치와 크기가 자동으로 바뀝니다. 아래는 실제
           MintCL 소개 페이지가 화면 폭에 따라 실시간으로 재배치되는 모습입니다.
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
             <Link to="/contact">
               <Send className="h-4 w-4" />
@@ -153,6 +153,12 @@ export default function ResponsiveService() {
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </Button>
+          <Button asChild size="lg" variant="ghost" className="gap-1.5 text-primary hover:bg-primary/5">
+            <Link to="/website/features">
+              구현 가능한 기능 보기
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </Button>
         </div>
       </div>
 
@@ -161,7 +167,7 @@ export default function ResponsiveService() {
         <div className="mx-auto max-w-3xl px-4">
           <Reveal className="mb-8 text-center">
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실시간으로 보기</p>
-            <h2 className="mt-3 text-2xl font-bold text-foreground">화면 폭이 줄어들면, 이렇게 반응합니다</h2>
+            <h2 className="mt-3 text-3xl font-bold text-foreground">화면 폭이 줄어들면, 이렇게 반응합니다</h2>
           </Reveal>
           <Reveal delay={100}>
             <BreathingPreview />
@@ -174,19 +180,31 @@ export default function ResponsiveService() {
         <div className="mx-auto max-w-6xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면 비교</p>
-            <h2 className="mt-3 max-w-xl text-2xl font-bold text-foreground">
+            <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
               같은 페이지, 화면 폭에 따라 다르게 배치됩니다
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
               세 화면 모두 실제 MintCL 소개 페이지를 기기별 논리 해상도로 그대로 불러온 결과입니다.
             </p>
           </Reveal>
 
           <div className="mt-10 flex items-end gap-8 overflow-x-auto px-1 pb-2">
             {DEVICES.map((d, i) => (
-              <DeviceFrame key={d.label} {...d} delay={i * 100} />
+              <DeviceFrame key={d.label} {...d} delay={i * 150} />
             ))}
           </div>
+
+          <Reveal delay={450} className="mt-10 flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-6 py-5">
+            <p className="text-base font-medium text-foreground break-keep">
+              반응형 외에 어떤 것까지 구현 가능한지 확인해보세요.
+            </p>
+            <Button asChild variant="outline" className="shrink-0 gap-1.5">
+              <Link to="/website/features">
+                전체 기능 보기
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </Button>
+          </Reveal>
         </div>
       </div>
 
@@ -197,61 +215,26 @@ export default function ResponsiveService() {
             <AlertTriangle className="h-3.5 w-3.5" />
             반응형이 아니라면
           </p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground break-keep">
+          <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
             PC 화면 그대로 축소된 모바일 페이지는 이런 문제가 생깁니다
           </h2>
           <div className="mt-8 space-y-4">
             {PROBLEMS_WITHOUT.map((text) => (
               <div key={text} className="flex items-start gap-3">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <p className="text-sm leading-relaxed text-foreground break-keep">{text}</p>
+                <p className="text-base leading-relaxed text-foreground break-keep">{text}</p>
               </div>
             ))}
           </div>
         </div>
       </Reveal>
 
-      {/* 다른 맞춤형 서비스 */}
-      <div className="border-t border-border bg-secondary/30">
-        <div className="mx-auto max-w-6xl px-4 py-12">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
-          <div className="mt-4 flex flex-wrap gap-2">
-            {OTHER_SERVICES.map((s) => (
-              <Link
-                key={s.slug}
-                to={`/services/${s.slug}`}
-                className="rounded-full border border-border bg-background px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-              >
-                {s.navLabel}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* 마무리 CTA */}
-      <div className="py-14 text-center">
-        <div className="mx-auto max-w-md px-4">
-          <p className="text-base font-bold text-foreground break-keep">모바일 방문자가 더 많다면, 더 중요합니다.</p>
-          <p className="mt-2 text-sm text-muted-foreground break-keep">
-            업종별 방문 기기 비율을 고려해 반응형 우선순위를 함께 설계합니다.
-          </p>
-          <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <Button asChild className="gap-2 font-bold">
-              <Link to="/contact">
-                <Send className="h-4 w-4" />
-                구축 상담하기
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="gap-1.5">
-              <Link to="/website/features">
-                전체 기능 소개 보기
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </div>
+      {/* 다른 맞춤형 서비스 + 마무리 CTA (하나의 이어진 section) */}
+      <NextStepsSection
+        otherServices={OTHER_SERVICES}
+        ctaTitle="모바일 방문자가 더 많다면, 더 중요합니다."
+        ctaDesc="업종별 방문 기기 비율을 고려해 반응형 우선순위를 함께 설계합니다."
+      />
     </div>
   );
 }

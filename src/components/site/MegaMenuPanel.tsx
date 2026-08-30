@@ -17,20 +17,20 @@ export function MegaMenuPanel({ entries, onNavigate, onMouseEnter, onMouseLeave 
     <div
       role="region"
       aria-label="전체 메뉴"
-      className="absolute inset-x-0 top-full z-50 border-t border-border bg-card shadow-lg motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-1 motion-safe:duration-150"
+      className="absolute inset-x-0 top-full z-50 bg-neutral-950 shadow-xl motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-2 motion-safe:duration-200"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-x-14 gap-y-8 px-4 py-10 sm:px-6 lg:px-10">
+      <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-x-16 gap-y-9 px-4 py-12 sm:px-6 lg:px-10">
         {entries.map((entry) => (
           <div key={entry.key} role="group" aria-label={entry.label}>
-            <ul className="space-y-2.5">
+            <ul className="space-y-3.5">
               {entry.items.map((item) => (
                 <li key={item.label}>
                   <Link
                     to={item.href}
                     onClick={onNavigate}
-                    className="block whitespace-nowrap text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="block whitespace-nowrap text-base text-neutral-300 transition-colors hover:text-white"
                   >
                     {item.label}
                   </Link>

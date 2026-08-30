@@ -42,9 +42,10 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
+  const [activeKey, setActiveKey] = useState<string | null>(null);
   const closeTimer = useRef<number | undefined>(undefined);
   const { isAdmin } = useAuth();
+  const megaOpen = activeKey !== null;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -55,17 +56,20 @@ export function SiteHeader() {
 
   useEffect(() => () => window.clearTimeout(closeTimer.current), []);
 
-  const openMega = () => {
+  const openMega = (key: string) => {
     window.clearTimeout(closeTimer.current);
-    setMegaOpen(true);
+    setActiveKey(key);
   };
   const scheduleCloseMega = () => {
     window.clearTimeout(closeTimer.current);
-    closeTimer.current = window.setTimeout(() => setMegaOpen(false), MEGA_CLOSE_DELAY);
+    closeTimer.current = window.setTimeout(() => setActiveKey(null), MEGA_CLOSE_DELAY);
   };
   const closeMegaNow = () => {
     window.clearTimeout(closeTimer.current);
-    setMegaOpen(false);
+    setActiveKey(null);
+  };
+  const keepMegaOpen = () => {
+    window.clearTimeout(closeTimer.current);
   };
 
   return (
@@ -94,13 +98,20 @@ export function SiteHeader() {
               <button
                 key={entry.key}
                 type="button"
-                aria-expanded={megaOpen}
-                className="flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
-                onMouseEnter={openMega}
-                onClick={() => (megaOpen ? scheduleCloseMega() : openMega())}
+                aria-expanded={activeKey === entry.key}
+                className={cn(
+                  "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-medium transition-colors duration-150",
+                  activeKey === entry.key
+                    ? "bg-neutral-950 text-white"
+                    : "text-muted-foreground hover:bg-neutral-950 hover:text-white",
+                )}
+                onMouseEnter={() => openMega(entry.key)}
+                onClick={() => (activeKey === entry.key ? scheduleCloseMega() : openMega(entry.key))}
               >
                 {entry.label}
-                <ChevronDown className={cn("size-3.5 transition-transform duration-200", megaOpen && "rotate-180")} />
+                <ChevronDown
+                  className={cn("size-3.5 transition-transform duration-200", activeKey === entry.key && "rotate-180")}
+                />
               </button>
             ) : entry.external ? (
               <a
@@ -129,7 +140,7 @@ export function SiteHeader() {
           <MegaMenuPanel
             entries={DROPDOWN_ENTRIES}
             onNavigate={closeMegaNow}
-            onMouseEnter={openMega}
+            onMouseEnter={keepMegaOpen}
             onMouseLeave={scheduleCloseMega}
           />
         )}

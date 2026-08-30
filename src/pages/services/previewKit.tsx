@@ -1,4 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
+import { Send, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
@@ -117,6 +120,35 @@ export function Reveal({
 }
 
 /**
+ * 스크롤로 들어오면 살짝 확대되며 나타나는 래퍼. 텍스트(Reveal)와 달리 실제 화면 Preview에
+ * 쓴다 — "화면이 켜지는" 느낌. prefers-reduced-motion에서는 즉시 나타난다.
+ */
+export function RevealScale({
+  children,
+  className,
+  delay = 0,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const { ref, shouldLoad } = useLazyMount<HTMLDivElement>();
+  return (
+    <div
+      ref={ref}
+      className={cn(
+        "transition-all duration-700 ease-out motion-reduce:transition-none",
+        shouldLoad ? "scale-100 opacity-100" : "scale-[0.97] opacity-0",
+        className,
+      )}
+      style={{ transitionDelay: shouldLoad ? `${delay}ms` : "0ms" }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/**
  * 실제 컴포넌트를 큰 배율로(거의 원본 크기 또는 확대) 보여주면서 관심 영역만 crop한다.
  * LiveComponentPreview보다 훨씬 큰 scale을 쓰기 위한 버전 — 글자가 실제로 읽혀야 하는 곳에 쓴다.
  */
@@ -198,6 +230,60 @@ export function LazyIframePreview({ src, scale, title }: { src: string; scale: n
         ) : (
           <div style={{ width: "100%", height: 900 }} className="bg-secondary/20" />
         )}
+      </div>
+    </div>
+  );
+}
+
+/**
+ * "다른 맞춤형 서비스" 링크와 마무리 CTA를 하나의 이어진 section으로 묶은 공용 블록.
+ * 두 블록을 서로 다른 배경/큰 여백으로 분리하지 않고, 하나의 "다음 행동" 영역으로 보여준다.
+ */
+export function NextStepsSection({
+  otherServices,
+  ctaTitle,
+  ctaDesc,
+}: {
+  otherServices: { slug: string; navLabel: string }[];
+  ctaTitle: string;
+  ctaDesc: string;
+}) {
+  return (
+    <div className="border-t border-border bg-secondary/30 py-16 sm:py-20">
+      <div className="mx-auto max-w-4xl px-4">
+        <Reveal>
+          <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
+          <div className="mt-4 flex flex-wrap gap-2">
+            {otherServices.map((s) => (
+              <Link
+                key={s.slug}
+                to={`/services/${s.slug}`}
+                className="rounded-full border border-border bg-background px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
+              >
+                {s.navLabel}
+              </Link>
+            ))}
+          </div>
+        </Reveal>
+
+        <Reveal delay={120} className="mt-10 border-t border-border/60 pt-10 text-center">
+          <p className="text-xl font-bold text-foreground break-keep">{ctaTitle}</p>
+          <p className="mx-auto mt-2 max-w-md text-base leading-relaxed text-muted-foreground break-keep">{ctaDesc}</p>
+          <div className="mt-6 flex flex-wrap justify-center gap-3">
+            <Button asChild size="lg" className="gap-2 font-bold">
+              <Link to="/contact">
+                <Send className="h-4 w-4" />
+                구축 상담하기
+              </Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="gap-1.5">
+              <Link to="/website/features">
+                구현 가능한 기능 보기
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </Button>
+          </div>
+        </Reveal>
       </div>
     </div>
   );

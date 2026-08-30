@@ -14,7 +14,15 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
 import { RealEstateAdminProvider, useRealEstateAdmin } from "@/pages/solutions/real-estate-admin/store";
 import { PanelHeader, StatusBadge } from "@/pages/solutions/real-estate-admin/components";
-import { BrowserFrame, LiveComponentPreview, LazyIframePreview, LoopingBeforeAfter, Reveal } from "@/pages/services/previewKit";
+import {
+  BrowserFrame,
+  LiveComponentPreview,
+  LazyIframePreview,
+  LoopingBeforeAfter,
+  Reveal,
+  RevealScale,
+  NextStepsSection,
+} from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "inquiry-reservation");
 
@@ -109,14 +117,14 @@ export default function InquiryReservationService() {
           <Inbox className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 문의 · 예약 관리
         </p>
-        <h1 className="mx-auto mt-4 max-w-2xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="mx-auto mt-4 max-w-2xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           문의가 접수되면, 끝까지 놓치지 않고 관리합니다
         </h1>
-        <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
+        <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
           고객이 남긴 문의는 관리자 화면에 실시간으로 쌓이고, 상담 진행 상태를 그때그때 바꿔가며
           이력을 관리할 수 있습니다.
         </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
             <Link to="/contact">
               <Send className="h-4 w-4" />
@@ -129,6 +137,12 @@ export default function InquiryReservationService() {
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
           </Button>
+          <Button asChild size="lg" variant="ghost" className="gap-1.5 text-primary hover:bg-primary/5">
+            <Link to="/website/features">
+              구현 가능한 기능 보기
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </Button>
         </div>
       </div>
 
@@ -139,16 +153,16 @@ export default function InquiryReservationService() {
             <MessagesSquare className="h-3.5 w-3.5" />
             왜 필요한가
           </p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground break-keep">
+          <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
             전화, 문자, 카카오톡 — 문의가 흩어지면 놓칩니다
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep">
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground break-keep">
             채널마다 따로 확인하다 보면 어떤 문의가 처리됐는지, 누가 담당인지 헷갈리기 쉽습니다.
             바쁜 날에는 문의 하나가 그대로 묻히기도 합니다.
           </p>
           <div className="mt-6 flex items-start gap-3 rounded-lg border border-primary/20 bg-primary/5 p-4">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-            <p className="text-sm font-medium text-foreground break-keep">
+            <p className="text-base font-medium text-foreground break-keep">
               홈페이지로 들어온 문의를 담당자가 한 화면에서 확인하고, 상담중 · 완료 상태를 바꾸며
               처리 이력까지 남깁니다.
             </p>
@@ -161,13 +175,13 @@ export default function InquiryReservationService() {
         <div className="mx-auto max-w-6xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 처리 흐름</p>
-            <h2 className="mt-3 max-w-xl text-2xl font-bold text-foreground">
+            <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
               문의 하나가 접수부터 완료까지 이렇게 이동합니다
             </h2>
           </Reveal>
 
           <div className="mt-10 grid items-start gap-6 lg:grid-cols-3">
-            <Reveal>
+            <RevealScale>
               <p className="mb-3 font-mono text-xs font-bold text-primary">01 · 고객 접수</p>
               <BrowserFrame label="고객 홈페이지 — 상담 문의" heightClassName="h-[340px]">
                 <LazyIframePreview
@@ -176,9 +190,9 @@ export default function InquiryReservationService() {
                   title="MintCL 고객용 문의 폼 데모"
                 />
               </BrowserFrame>
-            </Reveal>
+            </RevealScale>
 
-            <Reveal delay={100}>
+            <RevealScale delay={150}>
               <p className="mb-3 font-mono text-xs font-bold text-primary">02 · 관리자 확인</p>
               <BrowserFrame label="/web-solutions/real-estate/demo" heightClassName="h-[340px]">
                 <RealEstateAdminProvider>
@@ -187,9 +201,9 @@ export default function InquiryReservationService() {
                   </LiveComponentPreview>
                 </RealEstateAdminProvider>
               </BrowserFrame>
-            </Reveal>
+            </RevealScale>
 
-            <Reveal delay={200}>
+            <RevealScale delay={300}>
               <p className="mb-3 font-mono text-xs font-bold text-primary">03 · 상태 변경</p>
               <BrowserFrame label="상담중 ↔ 완료" heightClassName="h-[340px]">
                 <RealEstateAdminProvider>
@@ -198,15 +212,27 @@ export default function InquiryReservationService() {
                   </div>
                 </RealEstateAdminProvider>
               </BrowserFrame>
-            </Reveal>
+            </RevealScale>
           </div>
 
           <div className="mt-6 flex items-center justify-center gap-2 text-muted-foreground/50 lg:hidden">
             <ArrowDown className="h-5 w-5" />
           </div>
-          <p className="mt-4 text-center text-xs text-muted-foreground break-keep">
+          <p className="mt-4 text-center text-sm text-muted-foreground break-keep">
             변경 이력은 활동 로그에 자동으로 남아, 누가 언제 처리했는지 나중에도 확인할 수 있습니다.
           </p>
+
+          <Reveal delay={400} className="mt-10 flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-6 py-5">
+            <p className="text-base font-medium text-foreground break-keep">
+              이 기능 외에 어떤 것까지 구현 가능한지 확인해보세요.
+            </p>
+            <Button asChild variant="outline" className="shrink-0 gap-1.5">
+              <Link to="/website/features">
+                전체 기능 보기
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </Button>
+          </Reveal>
         </div>
       </div>
 
@@ -217,15 +243,15 @@ export default function InquiryReservationService() {
             <CalendarDays className="h-3.5 w-3.5" />
             예약 · 일정도 함께
           </p>
-          <h2 className="mt-3 max-w-xl text-2xl font-bold text-foreground">
+          <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
             문의뿐 아니라 예약 · 일정도 같은 화면에서 관리합니다
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
+          <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
             임장, 계약, 상담, 전화, 입주처럼 업종에 필요한 일정 유형을 만들고, 담당자별로 배정해
             진행 상태를 확인할 수 있습니다. 아래는 실제 일정 데이터입니다.
           </p>
 
-          <div className="mt-8">
+          <RevealScale delay={120} className="mt-8">
             <BrowserFrame label="/web-solutions/real-estate/demo" heightClassName="h-[360px]">
               <RealEstateAdminProvider>
                 <LiveComponentPreview scale={0.85}>
@@ -233,7 +259,7 @@ export default function InquiryReservationService() {
                 </LiveComponentPreview>
               </RealEstateAdminProvider>
             </BrowserFrame>
-          </div>
+          </RevealScale>
         </div>
       </Reveal>
 
@@ -242,13 +268,13 @@ export default function InquiryReservationService() {
         <div className="mx-auto max-w-2xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
-            <h2 className="mt-3 text-2xl font-bold text-foreground">업종마다 문의 · 예약의 흐름이 다릅니다</h2>
+            <h2 className="mt-3 text-3xl font-bold text-foreground">업종마다 문의 · 예약의 흐름이 다릅니다</h2>
           </Reveal>
           <div className="mt-8 divide-y divide-border border-t border-border">
             {INDUSTRY_USES.map((item, i) => (
               <Reveal key={item.label} delay={i * 60} className="flex items-center justify-between gap-4 py-4">
-                <p className="text-sm font-bold text-foreground">{item.label}</p>
-                <p className="text-xs text-muted-foreground">{item.flow}</p>
+                <p className="text-base font-bold text-foreground">{item.label}</p>
+                <p className="text-sm text-muted-foreground">{item.flow}</p>
               </Reveal>
             ))}
           </div>
@@ -259,7 +285,7 @@ export default function InquiryReservationService() {
       <Reveal className="border-t border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-2xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
+          <h2 className="mt-3 text-3xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
           <div className="mt-8 space-y-4">
             {[
               "전화, 문자, 카카오톡, 홈페이지 문의가 각각 따로 관리되는 경우",
@@ -269,52 +295,19 @@ export default function InquiryReservationService() {
             ].map((text) => (
               <div key={text} className="flex items-start gap-3">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <p className="text-sm leading-relaxed text-foreground break-keep">{text}</p>
+                <p className="text-base leading-relaxed text-foreground break-keep">{text}</p>
               </div>
             ))}
           </div>
         </div>
       </Reveal>
 
-      {/* 다른 맞춤형 서비스 */}
-      <div className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {OTHER_SERVICES.map((s) => (
-            <Link
-              key={s.slug}
-              to={`/services/${s.slug}`}
-              className="rounded-full border border-border px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-            >
-              {s.navLabel}
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* 마무리 CTA */}
-      <div className="border-t border-border bg-secondary/30 py-14 text-center">
-        <div className="mx-auto max-w-md px-4">
-          <p className="text-base font-bold text-foreground break-keep">문의부터 예약까지 한 화면에서 관리하세요.</p>
-          <p className="mt-2 text-sm text-muted-foreground break-keep">
-            업종과 필요한 처리 흐름을 알려주시면 적합한 구성을 안내드립니다.
-          </p>
-          <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <Button asChild className="gap-2 font-bold">
-              <Link to="/contact">
-                <Send className="h-4 w-4" />
-                구축 상담하기
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="gap-1.5">
-              <Link to="/website/features">
-                전체 기능 소개 보기
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </div>
+      {/* 다른 맞춤형 서비스 + 마무리 CTA (하나의 이어진 section) */}
+      <NextStepsSection
+        otherServices={OTHER_SERVICES}
+        ctaTitle="문의부터 예약까지 한 화면에서 관리하세요."
+        ctaDesc="업종과 필요한 처리 흐름을 알려주시면 적합한 구성을 안내드립니다."
+      />
     </div>
   );
 }

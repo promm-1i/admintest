@@ -6,7 +6,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
 import { RealEstateAdminProvider, useRealEstateAdmin } from "@/pages/solutions/real-estate-admin/store";
-import { BrowserFrame, LazyIframePreview, Reveal } from "@/pages/services/previewKit";
+import { BrowserFrame, LazyIframePreview, Reveal, RevealScale, NextStepsSection } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "search-filter");
 
@@ -80,10 +80,10 @@ function SearchFilterContent() {
           <Search className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 검색 · 필터 기능
         </p>
-        <h1 className="mx-auto mt-4 max-w-xl text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h1 className="mx-auto mt-4 max-w-xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
           조건을 좁힐수록, 원하는 결과만 남습니다
         </h1>
-        <p className="mx-auto mt-4 max-w-lg text-base leading-relaxed text-muted-foreground break-keep">
+        <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
           매물, 상품, 차량처럼 목록이 많은 홈페이지에서 고객이 조건을 선택하면 결과가 그 자리에서
           바뀝니다. 아래 숫자는 조건 없음부터 복수 조건 조합까지, 실제 데모 데이터를 그대로
           계산한 결과입니다.
@@ -91,7 +91,7 @@ function SearchFilterContent() {
 
         <CyclingHeroCounter />
 
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
             <Link to="/contact">
               <Send className="h-4 w-4" />
@@ -100,9 +100,15 @@ function SearchFilterContent() {
           </Button>
           <Button asChild size="lg" variant="outline" className="gap-1.5">
             <a href="/web-solutions/real-estate/demo/site#listings" target="_blank" rel="noopener noreferrer">
-              직접 조건 선택해보기
+              실제 검색 직접 체험하기
               <ExternalLink className="h-3.5 w-3.5" />
             </a>
+          </Button>
+          <Button asChild size="lg" variant="ghost" className="gap-1.5 text-primary hover:bg-primary/5">
+            <Link to="/website/features">
+              구현 가능한 기능 보기
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
           </Button>
         </div>
       </div>
@@ -114,17 +120,17 @@ function SearchFilterContent() {
             <SlidersHorizontal className="h-3.5 w-3.5" />
             조건은 어떻게 설계할까
           </p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground break-keep">
+          <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
             목록이 많을수록, 고객은 끝까지 넘겨보지 않습니다
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep">
+          <p className="mt-4 text-base leading-relaxed text-muted-foreground break-keep">
             매물이나 상품이 수십, 수백 건이면 고객은 원하는 것을 찾다가 포기하기 쉽습니다. 실제로
             자주 찾는 기준(가격대, 지역, 종류)을 조건으로 만들어두면, 고객이 몇 번의 클릭만으로
             원하는 결과에 도달합니다.
           </p>
           <div className="mt-6 flex items-start gap-3 rounded-lg border border-primary/20 bg-primary/5 p-4">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-            <p className="text-sm font-medium text-foreground break-keep">
+            <p className="text-base font-medium text-foreground break-keep">
               조건은 업종마다 다릅니다. 실제 고객이 무엇을 기준으로 고르는지부터 함께 정리한 뒤
               필터를 설계합니다.
             </p>
@@ -137,15 +143,15 @@ function SearchFilterContent() {
         <div className="mx-auto max-w-5xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면</p>
-            <h2 className="mt-3 max-w-xl text-2xl font-bold text-foreground">
+            <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
               거래유형 · 가격대 · 매물종류를 조합해 검색합니다
             </h2>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
               아래는 실제로 작동하는 고객용 검색 화면입니다. 조건 버튼을 조합할 때마다 결과 목록이
               실시간으로 바뀝니다.
             </p>
           </Reveal>
-          <Reveal delay={120} className="mt-8">
+          <RevealScale delay={120} className="mt-8">
             <BrowserFrame label="고객 홈페이지 — 매물 검색" heightClassName="h-[520px] sm:h-[640px]">
               <LazyIframePreview
                 src="/web-solutions/real-estate/demo/site#listings"
@@ -153,6 +159,18 @@ function SearchFilterContent() {
                 title="MintCL 고객용 검색 화면 데모"
               />
             </BrowserFrame>
+          </RevealScale>
+
+          <Reveal delay={240} className="mt-8 flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-6 py-5">
+            <p className="text-base font-medium text-foreground break-keep">
+              이 기능 외에 어떤 것까지 구현 가능한지 확인해보세요.
+            </p>
+            <Button asChild variant="outline" className="shrink-0 gap-1.5">
+              <Link to="/website/features">
+                전체 기능 보기
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </Button>
           </Reveal>
         </div>
       </div>
@@ -162,12 +180,12 @@ function SearchFilterContent() {
         <div className="mx-auto max-w-2xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">조건별 결과</p>
-            <h2 className="mt-3 text-2xl font-bold text-foreground">조건을 바꿀 때마다 이렇게 달라집니다</h2>
+            <h2 className="mt-3 text-3xl font-bold text-foreground">조건을 바꿀 때마다 이렇게 달라집니다</h2>
           </Reveal>
           <div className="mt-8 divide-y divide-border border-t border-border">
             {rows.map((r, i) => (
               <Reveal key={r.condition} delay={i * 60} className="flex items-center justify-between gap-4 py-4">
-                <span className="text-sm text-foreground">{r.condition}</span>
+                <span className="text-base text-foreground">{r.condition}</span>
                 <span className="font-mono text-lg font-bold tabular-nums text-foreground">{r.count}건</span>
               </Reveal>
             ))}
@@ -180,13 +198,13 @@ function SearchFilterContent() {
         <div className="mx-auto max-w-2xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
-            <h2 className="mt-3 text-2xl font-bold text-foreground">조건은 업종마다 다르게 설계합니다</h2>
+            <h2 className="mt-3 text-3xl font-bold text-foreground">조건은 업종마다 다르게 설계합니다</h2>
           </Reveal>
           <div className="mt-8 divide-y divide-border border-t border-border">
             {INDUSTRY_USES.map((item, i) => (
               <Reveal key={item.label} delay={i * 60} className="py-4">
-                <p className="text-sm font-bold text-foreground">{item.label}</p>
-                <p className="mt-1 text-xs text-muted-foreground break-keep">{item.desc}</p>
+                <p className="text-base font-bold text-foreground">{item.label}</p>
+                <p className="mt-1 text-sm text-muted-foreground break-keep">{item.desc}</p>
               </Reveal>
             ))}
           </div>
@@ -197,7 +215,7 @@ function SearchFilterContent() {
       <Reveal className="border-t border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-2xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
+          <h2 className="mt-3 text-3xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
           <div className="mt-8 space-y-4">
             {[
               "매물, 상품, 차량 등 목록형 콘텐츠가 20건 이상인 경우",
@@ -207,52 +225,19 @@ function SearchFilterContent() {
             ].map((text) => (
               <div key={text} className="flex items-start gap-3">
                 <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <p className="text-sm leading-relaxed text-foreground break-keep">{text}</p>
+                <p className="text-base leading-relaxed text-foreground break-keep">{text}</p>
               </div>
             ))}
           </div>
         </div>
       </Reveal>
 
-      {/* 다른 맞춤형 서비스 */}
-      <div className="mx-auto max-w-6xl px-4 py-12">
-        <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">다른 맞춤형 서비스</h2>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {OTHER_SERVICES.map((s) => (
-            <Link
-              key={s.slug}
-              to={`/services/${s.slug}`}
-              className="rounded-full border border-border px-3.5 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:border-primary/40 hover:text-foreground"
-            >
-              {s.navLabel}
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      {/* 마무리 CTA */}
-      <div className="border-t border-border bg-secondary/30 py-14 text-center">
-        <div className="mx-auto max-w-md px-4">
-          <p className="text-base font-bold text-foreground break-keep">필요한 검색 조건을 알려주세요.</p>
-          <p className="mt-2 text-sm text-muted-foreground break-keep">
-            업종에 맞는 조건과 필터 구성을 정리해 예상 비용을 안내드립니다.
-          </p>
-          <div className="mt-5 flex flex-wrap justify-center gap-3">
-            <Button asChild className="gap-2 font-bold">
-              <Link to="/contact">
-                <Send className="h-4 w-4" />
-                구축 상담하기
-              </Link>
-            </Button>
-            <Button asChild variant="outline" className="gap-1.5">
-              <Link to="/website/features">
-                전체 기능 소개 보기
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </div>
+      {/* 다른 맞춤형 서비스 + 마무리 CTA (하나의 이어진 section) */}
+      <NextStepsSection
+        otherServices={OTHER_SERVICES}
+        ctaTitle="필요한 검색 조건을 알려주세요."
+        ctaDesc="업종에 맞는 조건과 필터 구성을 정리해 예상 비용을 안내드립니다."
+      />
     </div>
   );
 }
