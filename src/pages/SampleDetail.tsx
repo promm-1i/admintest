@@ -25,6 +25,8 @@ import { InteriorPreview } from "@/components/samples/InteriorPreview";
 import { CleaningPreview } from "@/components/samples/CleaningPreview";
 import { CorporatePreview } from "@/components/samples/CorporatePreview";
 import { ExternalSitePreview } from "@/components/samples/ExternalSitePreview";
+import { RealEstateBasicPreview } from "@/components/samples/RealEstateBasicPreview";
+import { RealEstateLandingPreview } from "@/components/samples/RealEstateLandingPreview";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
 
 export default function SampleDetail() {
@@ -58,6 +60,10 @@ export default function SampleDetail() {
         return <CleaningPreview />;
       case "corporate":
         return <CorporatePreview />;
+      case "real-estate-basic-template":
+        return <RealEstateBasicPreview />;
+      case "real-estate-landing-template":
+        return <RealEstateLandingPreview />;
       default:
         return <HospitalPreview />;
     }

@@ -1,4 +1,6 @@
 import realEstatePlatformImg from "@/assets/images/real_estate_platform_thumbnail.jpg";
+import realEstateBasicTemplateImg from "@/assets/images/real_estate_basic_template_thumbnail.jpg";
+import realEstateLandingTemplateImg from "@/assets/images/real_estate_landing_template_thumbnail.jpg";
 import roadinImg from "@/assets/images/roadin_thumbnail.jpg";
 import carplanImg from "@/assets/images/carplan_thumbnail.jpg";
 import objetbathImg from "@/assets/images/objetbath_thumbnail.jpg";
@@ -37,6 +39,28 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "real-estate-basic-template",
+    industry: "부동산 중개업소 홈페이지",
+    title: "부동산 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 부동산",
+    purpose: "애니메이션 없이 회사소개, 취급 업무, 매물 리스트, 연락처를 정직하게 정리한 기본형 부동산 중개업소 홈페이지입니다.",
+    features: ["회사소개", "취급 업무 안내", "매물 리스트", "연락처 · 오시는 길"],
+    idealFor: "빠르고 합리적인 비용으로 기본기만 갖춘 홈페이지가 필요한 공인중개사사무소",
+    image: realEstateBasicTemplateImg,
+  },
+  {
+    slug: "real-estate-landing-template",
+    industry: "부동산 중개업소 홈페이지",
+    title: "부동산 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 부동산",
+    purpose: "스크롤 reveal과 스케일 연출이 들어간 프리미엄 톤의 부동산 중개업소 랜딩 페이지입니다.",
+    features: ["스크롤 애니메이션", "매물 큐레이션 섹션", "고객 후기", "상담 CTA"],
+    idealFor: "브랜드 신뢰감과 상담 전환율을 함께 끌어올리고 싶은 공인중개사사무소",
+    image: realEstateLandingTemplateImg,
+  },
   {
     slug: "commercial-real-estate-platform",
     industry: "상업용 부동산 플랫폼",
@@ -217,6 +241,8 @@ export const SAMPLES: Sample[] = [
 
 export const PORTFOLIO_FILTERS = [
   { label: "전체", value: "all" },
+  { label: "기본형 템플릿", value: "basic-template" },
+  { label: "랜딩형 템플릿", value: "landing-template" },
   { label: "플랫폼·시스템", value: "platform" },
   { label: "원페이지", value: "one-page" },
   { label: "소상공인", value: "small-business" },
