@@ -5,19 +5,18 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { Button } from "@/components/ui/button";
-import { PORTFOLIO_SAMPLES, PORTFOLIO_FILTERS } from "@/lib/samples";
+import { PORTFOLIO_SAMPLES, PORTFOLIO_FILTERS, MAIN_PORTFOLIO_SAMPLES } from "@/lib/samples";
 import { cn } from "@/lib/utils";
 
 export function PortfolioSection() {
   const [selectedType, setSelectedType] = useState("all");
 
-  const filteredSamples =
+  // 메인페이지 기본 화면은 업종별 대표 사례 6건으로 고정한다 (전체 목록은 /samples).
+  // 필터를 선택했을 때만 해당 분류 전체에서 최대 6건을 보여준다.
+  const displaySamples =
     selectedType === "all"
-      ? PORTFOLIO_SAMPLES
-      : PORTFOLIO_SAMPLES.filter((site) => site.type?.includes(selectedType));
-
-  // 메인페이지는 최신 대표 사례 6건만 노출한다 (전체 목록은 /samples).
-  const displaySamples = filteredSamples.slice(0, 6);
+      ? MAIN_PORTFOLIO_SAMPLES
+      : PORTFOLIO_SAMPLES.filter((site) => site.type?.includes(selectedType)).slice(0, 6);
 
   return (
     <section id="portfolio-section" className="relative overflow-hidden py-20 lg:py-28">

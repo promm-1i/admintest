@@ -1,6 +1,7 @@
 import realEstatePlatformImg from "@/assets/images/real_estate_platform_thumbnail.jpg";
 import hospitalSolutionImg from "@/assets/images/hospital_solution_thumbnail.jpg";
 import academySolutionImg from "@/assets/images/academy_solution_thumbnail.jpg";
+import academyTemplateImg from "@/assets/images/academy_template_thumbnail.jpg";
 import rentcarSolutionImg from "@/assets/images/rentcar_solution_thumbnail.jpg";
 import interiorSolutionImg from "@/assets/images/interior_solution_thumbnail.jpg";
 import movingSolutionImg from "@/assets/images/moving_solution_thumbnail.jpg";
@@ -46,6 +47,34 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "academy-basic-template",
+    industry: "학원 홈페이지",
+    title: "학원 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "business"],
+    tag: "기본형 템플릿 · 학원",
+    purpose:
+      "과정안내 · 커리큘럼 · 강사진 · 시간표 · 오시는 길 구성을 학년별로 정돈해 담은 학원 홈페이지 템플릿입니다.",
+    features: ["학년별 과정 안내", "학습 관리 커리큘럼", "강사진 소개", "시간표 · 오시는 길"],
+    idealFor: "수업 구성과 관리 방식을 신뢰감 있게 보여주고 상담 신청으로 연결하고 싶은 학원 · 교습소",
+    image: academyTemplateImg,
+    liveUrl: "/templates/academy-basic/",
+    industryKey: "academy",
+  },
+  {
+    slug: "academy-landing-template",
+    industry: "학원 홈페이지",
+    title: "학원 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "business"],
+    tag: "랜딩형 템플릿 · 학원",
+    purpose:
+      "스크롤 연출이 더해진 원페이지 구성으로, 학년별 과정과 학습 관리 방식을 따라 읽다 자연스럽게 상담 신청까지 이어지는 학원 홈페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "학년별 과정 안내", "강사진 소개", "상담 신청 CTA"],
+    idealFor: "학원의 관리 방식을 흐름 있게 보여주고 상담 전환율을 함께 끌어올리고 싶은 학원 · 교습소",
+    image: academyTemplateImg,
+    liveUrl: "/templates/academy-landing/",
+    industryKey: "academy",
+  },
   {
     slug: "clinic-basic-template",
     industry: "병원 · 의원 홈페이지",
@@ -346,6 +375,24 @@ export const SAMPLES: Sample[] = [
  * /templates에서만 노출하고, 포트폴리오 목록·슬라이더에서는 제외한다.
  */
 export const PORTFOLIO_SAMPLES: Sample[] = SAMPLES.filter((s) => !s.industryKey);
+
+/**
+ * 메인페이지 PORTFOLIO 섹션에 고정 노출하는 업종별 대표 사례 6건.
+ * 새 포트폴리오를 배열 앞에 추가해도 메인 화면 구성이 밀리지 않도록 슬러그로 고정한다.
+ * (필터를 선택했을 때는 아래 고정 목록 대신 해당 분류 전체에서 보여준다.)
+ */
+const MAIN_PORTFOLIO_SLUGS = [
+  "commercial-real-estate-platform",
+  "hospital-solution",
+  "academy-solution",
+  "rentcar-solution",
+  "interior-solution",
+  "moving-solution",
+];
+
+export const MAIN_PORTFOLIO_SAMPLES: Sample[] = MAIN_PORTFOLIO_SLUGS.map(
+  (slug) => PORTFOLIO_SAMPLES.find((s) => s.slug === slug),
+).filter((s): s is Sample => Boolean(s));
 
 export const PORTFOLIO_FILTERS = [
   { label: "전체", value: "all" },
