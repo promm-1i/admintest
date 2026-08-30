@@ -3,7 +3,6 @@ import {
   Send,
   MessageCircle,
   Phone,
-  Mail,
   Check,
   ArrowRight,
   Smartphone,
@@ -172,7 +171,7 @@ export default function ProcessLanding() {
 
   return (
     <div>
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-5 sm:py-20 lg:px-6">
         <Reveal>
           <p className="text-sm font-mono font-semibold uppercase tracking-widest text-primary">HOW WE BUILD</p>
           <h1 className="mt-4 text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
@@ -196,9 +195,10 @@ export default function ProcessLanding() {
         <Reveal className="mt-20">
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식 2가지</h2>
         </Reveal>
-        <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-16">
-          <Reveal delay={80}>
-            <h3 className="text-2xl font-bold text-foreground">템플릿형 홈페이지 제작</h3>
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <Reveal delay={80} className="h-full rounded-2xl border border-border bg-secondary/30 p-7 sm:p-8">
+            <p className="text-xs font-bold tracking-wide text-muted-foreground">TEMPLATE</p>
+            <h3 className="mt-2 text-2xl font-bold text-foreground">템플릿형 홈페이지 제작</h3>
             <p className="mt-3 text-lg font-medium text-foreground break-keep">
               검증된 디자인을 선택해 더 빠르고 합리적으로 시작합니다.
             </p>
@@ -219,8 +219,9 @@ export default function ProcessLanding() {
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Reveal>
-          <Reveal delay={160} className="lg:border-l lg:border-border lg:pl-16">
-            <h3 className="text-2xl font-bold text-foreground">맞춤형 홈페이지 제작</h3>
+          <Reveal delay={160} className="h-full rounded-2xl border border-primary/40 bg-primary/[0.04] p-7 sm:p-8">
+            <p className="text-xs font-bold tracking-wide text-primary">CUSTOM · PREMIUM</p>
+            <h3 className="mt-2 text-2xl font-bold text-foreground">맞춤형 홈페이지 제작</h3>
             <p className="mt-3 text-lg font-medium text-foreground break-keep">
               사업에 필요한 구조와 기능부터 새롭게 설계합니다.
             </p>
@@ -280,33 +281,49 @@ export default function ProcessLanding() {
         <Reveal className="mt-8">
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">홈페이지 제작 전 준비해주세요</h2>
         </Reveal>
-        <Reveal delay={80} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {REQUIRED_MATERIALS.map((m) => (
-            <div key={m.title} className="rounded-xl border border-border bg-card p-6">
-              <h3 className="text-lg font-semibold text-foreground">{m.title}</h3>
-              <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">{m.desc}</p>
-            </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {REQUIRED_MATERIALS.map((m, i) => (
+            <Reveal
+              key={m.title}
+              delay={i * 80}
+              className="group rounded-xl border border-border bg-card p-6 transition-colors hover:border-primary/40"
+            >
+              <div className="flex items-center gap-2.5">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 font-mono text-xs font-bold text-primary">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="text-lg font-semibold text-foreground">{m.title}</h3>
+              </div>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">{m.desc}</p>
+            </Reveal>
           ))}
-        </Reveal>
+        </div>
       </div>
 
       {/* 홈페이지 제작 시 기본적으로 고려하는 항목 */}
       <div className="border-y border-border bg-secondary/30 py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-5 lg:px-6">
           <Reveal>
             <h2 className="text-3xl font-bold text-foreground sm:text-4xl">홈페이지 제작, 이런 부분까지 함께 고려합니다</h2>
           </Reveal>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {CONSIDERATION_POINTS.map((point, i) => {
               const Icon = point.icon;
               return (
-                <Reveal key={point.num} delay={i * 70} className="rounded-xl border border-border bg-card p-6">
+                <Reveal
+                  key={point.num}
+                  delay={(i % 4) * 70}
+                  className={
+                    "rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40" +
+                    (point.examples ? " sm:col-span-2" : "")
+                  }
+                >
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-sm font-bold text-primary">POINT {point.num}</span>
                     <Icon className="ml-auto h-5 w-5 text-muted-foreground/50" />
                   </div>
                   <h3 className="mt-3 text-lg font-bold text-foreground">{point.title}</h3>
-                  <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">{point.desc}</p>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">{point.desc}</p>
                   {point.examples && (
                     <ul className="mt-4 grid gap-2.5 border-t border-border/60 pt-4 sm:grid-cols-3">
                       {point.examples.map((ex) => {
@@ -347,32 +364,29 @@ export default function ProcessLanding() {
             </Link>
           </Button>
         </div>
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
+        <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
           <a
             href={KAKAO_CHANNEL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 hover:text-foreground"
+            className="inline-flex items-center gap-2 rounded-xl bg-[#FEE500] px-5 py-3 text-base font-bold text-[#191919] shadow-xs transition-colors hover:bg-[#FADA00]"
           >
-            <MessageCircle className="h-3.5 w-3.5" />
+            <MessageCircle className="h-5 w-5 fill-[#191919]" />
             카카오톡 상담
           </a>
-          <span className="text-border">·</span>
-          <a href={PHONE_TEL_HREF} className="inline-flex items-center gap-1 hover:text-foreground">
-            <Phone className="h-3.5 w-3.5" />
+          <a
+            href={PHONE_TEL_HREF}
+            className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-5 py-3 text-base font-bold text-foreground shadow-xs transition-colors hover:bg-secondary"
+          >
+            <Phone className="h-5 w-5 text-primary" />
             전화 상담
           </a>
-          <span className="text-border">·</span>
-          <Link to="/contact" className="inline-flex items-center gap-1 hover:text-foreground">
-            <Mail className="h-3.5 w-3.5" />
-            온라인 문의
-          </Link>
         </div>
       </Reveal>
 
       {/* 관리자 시스템 강조 영역 */}
       <Reveal className="bg-neutral-950 py-16 text-white sm:py-20">
-        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-10">
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-5 lg:grid-cols-12 lg:items-center lg:px-6">
           <div className="lg:col-span-6">
             <p className="text-sm font-bold tracking-widest text-primary uppercase">ADMIN SYSTEM</p>
             <h2 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
