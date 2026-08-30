@@ -38,6 +38,21 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
                     {item.label}
                     <ArrowRight className="size-3.5" />
                   </Link>
+                  {item.children && (
+                    <ul className="mt-2 space-y-2 border-l border-border pl-3">
+                      {item.children.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            to={child.href}
+                            onClick={onNavigate}
+                            className="text-sm text-muted-foreground"
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               );
             })}

@@ -1,4 +1,14 @@
 import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, type LucideIcon } from "lucide-react";
+import { SAMPLES } from "@/lib/samples";
+
+/** 실제 판매 중인 템플릿을 스타일별로 뽑아 드롭다운 플라이아웃 항목으로 만든다 */
+function templateChildren(styleKey: "basic-template" | "landing-template") {
+  return SAMPLES.filter((s) => s.industryKey && s.type.includes(styleKey)).map((s) => ({
+    label: s.industry.replace(" 홈페이지", ""),
+    href: `/samples/${s.slug}`,
+    ...(s.image ? { image: s.image } : {}),
+  }));
+}
 
 export type NavItem = { icon: LucideIcon; title: string; desc: string; href?: string };
 
@@ -64,6 +74,8 @@ export type NavLink = {
   href: string;
   /** 있으면 드롭다운에서 같은 group끼리 묶여 구분선 + 소제목 아래 렌더링된다 */
   group?: string;
+  /** 있으면 데스크톱에서 hover 시 우측 플라이아웃으로, 모바일에서는 들여쓰기 목록으로 펼쳐진다 */
+  children?: { label: string; href: string; image?: string }[];
 };
 export type NavDropdownEntry = {
   type: "dropdown";
@@ -107,8 +119,16 @@ export const HEADER_NAV: NavEntry[] = [
     key: "templates",
     label: "홈페이지 템플릿",
     items: [
-      { label: "기본형 디자인 템플릿", href: "/templates?style=basic-template" },
-      { label: "랜딩형 디자인 템플릿", href: "/templates?style=landing-template" },
+      {
+        label: "기본형 디자인 템플릿",
+        href: "/templates?style=basic-template",
+        children: templateChildren("basic-template"),
+      },
+      {
+        label: "랜딩형 디자인 템플릿",
+        href: "/templates?style=landing-template",
+        children: templateChildren("landing-template"),
+      },
     ],
   },
   {
