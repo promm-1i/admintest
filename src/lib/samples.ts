@@ -1,4 +1,9 @@
 import realEstatePlatformImg from "@/assets/images/real_estate_platform_thumbnail.jpg";
+import hospitalSolutionImg from "@/assets/images/hospital_solution_thumbnail.jpg";
+import academySolutionImg from "@/assets/images/academy_solution_thumbnail.jpg";
+import rentcarSolutionImg from "@/assets/images/rentcar_solution_thumbnail.jpg";
+import interiorSolutionImg from "@/assets/images/interior_solution_thumbnail.jpg";
+import movingSolutionImg from "@/assets/images/moving_solution_thumbnail.jpg";
 import realEstateBasicTemplateImg from "@/assets/images/real_estate_basic_template_thumbnail.jpg";
 import realEstateLandingTemplateImg from "@/assets/images/real_estate_landing_template_thumbnail.jpg";
 import roadinImg from "@/assets/images/roadin_thumbnail.jpg";
@@ -106,6 +111,71 @@ export const SAMPLES: Sample[] = [
       "매물 검색, 상담 접수부터 매물·고객·일정·직원 관리까지 하나의 시스템으로 운영하고 싶은 부동산 중개·분양 플랫폼",
     image: realEstatePlatformImg,
     detailHref: "/web-solutions/real-estate",
+  },
+  {
+    slug: "hospital-solution",
+    industry: "병원 · 의원 고객 + 관리자 시스템",
+    title: "병원 · 의원 홈페이지 + 관리자 시스템",
+    type: ["platform", "business"],
+    tag: "플랫폼 · 병원 · 의원",
+    purpose:
+      "진료과목 · 의료진 · 공지를 관리자 페이지에서 등록하면 고객용 홈페이지에 실시간 반영되는 병원 · 의원 운영 시스템 구축 사례입니다.",
+    features: ["진료과목 안내", "의료진 소개", "공지 · 이벤트 관리", "예약 문의 접수", "관리자 페이지"],
+    idealFor: "홈페이지 콘텐츠를 직접 수정 · 운영하고 싶은 병 · 의원, 클리닉",
+    image: hospitalSolutionImg,
+    detailHref: "/web-solutions/hospital",
+  },
+  {
+    slug: "academy-solution",
+    industry: "학원 고객 + 관리자 시스템",
+    title: "학원 홈페이지 + 관리자 시스템",
+    type: ["platform", "business"],
+    tag: "플랫폼 · 학원",
+    purpose:
+      "개설 강의와 강사 정보를 관리자 페이지에서 등록 · 관리하고, 고객용 홈페이지에서 과목별로 탐색 · 상담 신청까지 이어지는 학원 운영 시스템 구축 사례입니다.",
+    features: ["개설 강의 안내", "과목별 필터", "상담 신청 접수", "강의 · 강사 관리", "관리자 페이지"],
+    idealFor: "강의 개설 · 마감을 수시로 업데이트해야 하는 학원 · 교습소",
+    image: academySolutionImg,
+    detailHref: "/web-solutions/academy",
+  },
+  {
+    slug: "rentcar-solution",
+    industry: "렌트카 고객 + 관리자 시스템",
+    title: "렌트카 홈페이지 + 관리자 시스템",
+    type: ["platform", "business"],
+    tag: "플랫폼 · 렌트카",
+    purpose:
+      "차종 · 가격대 · 지점별 차량 검색과 상담 문의 접수, 차량 등록 · 관리까지 하나로 연결한 렌트카 운영 시스템 구축 사례입니다.",
+    features: ["차량 검색 · 필터", "차량 등록 관리", "상담 문의 접수", "지점 안내", "관리자 페이지"],
+    idealFor: "보유 차량을 직접 등록 · 관리하며 운영하고 싶은 렌터카 · 리스 업체",
+    image: rentcarSolutionImg,
+    detailHref: "/web-solutions/rentcar",
+  },
+  {
+    slug: "interior-solution",
+    industry: "인테리어 고객 + 관리자 시스템",
+    title: "인테리어 홈페이지 + 관리자 시스템",
+    type: ["platform", "business"],
+    tag: "플랫폼 · 인테리어",
+    purpose:
+      "평형대별 시공 사례를 관리자 페이지에서 등록하면 고객용 홈페이지에 바로 반영되고, 견적 문의 접수까지 이어지는 인테리어 운영 시스템 구축 사례입니다.",
+    features: ["시공 사례 관리", "평형대별 필터", "견적 문의 접수", "관리자 페이지"],
+    idealFor: "시공 사례를 계속 쌓아가며 영업 자산으로 쓰고 싶은 인테리어 · 리모델링 업체",
+    image: interiorSolutionImg,
+    detailHref: "/web-solutions/interior",
+  },
+  {
+    slug: "moving-solution",
+    industry: "이사 · 청소 고객 + 관리자 시스템",
+    title: "이사 · 청소 홈페이지 + 관리자 시스템",
+    type: ["platform", "small-business"],
+    tag: "플랫폼 · 이사 · 청소",
+    purpose:
+      "서비스 안내와 지역별 작업 사례를 관리자 페이지에서 관리하고, 견적 문의 접수로 이어지는 이사 · 청소 업체 운영 시스템 구축 사례입니다.",
+    features: ["서비스 안내", "지역별 작업 사례 관리", "견적 문의 접수", "관리자 페이지"],
+    idealFor: "작업 사례와 견적 문의를 체계적으로 관리하고 싶은 이사 · 청소 업체",
+    image: movingSolutionImg,
+    detailHref: "/web-solutions/moving",
   },
   {
     slug: "roadin-rentcar",
