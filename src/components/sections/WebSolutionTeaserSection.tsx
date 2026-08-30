@@ -8,7 +8,7 @@ import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 export function WebSolutionTeaserSection() {
   return (
     <section id="industry-section" className="px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto max-w-6xl rounded-3xl border border-border bg-secondary/30 p-8 sm:p-12">
+      <div className="mx-auto max-w-7xl rounded-3xl border border-border bg-secondary/30 p-8 sm:p-12">
         <SectionHeader
           label="CUSTOM BY INDUSTRY"
           title={

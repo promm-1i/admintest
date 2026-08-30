@@ -7,7 +7,7 @@ import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
 export function FinalCtaSection() {
   return (
     <section className="bg-neutral-950 px-4 py-24 text-center text-white">
-      <FadeIn className="mx-auto max-w-6xl">
+      <FadeIn className="mx-auto max-w-7xl">
         <h2 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
           홈페이지가 필요한 상황이라면,
           <br />

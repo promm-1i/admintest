@@ -12,7 +12,7 @@ const STEPS = [
 export function ProcessSection() {
   return (
     <section className="py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader label="PROCESS" title="제작 절차" align="center" />
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

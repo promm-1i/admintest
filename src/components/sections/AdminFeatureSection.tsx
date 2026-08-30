@@ -14,7 +14,7 @@ const ADMIN_CAPABILITIES = [
 export function AdminFeatureSection() {
   return (
     <section className="bg-neutral-950 px-4 py-20 text-white sm:px-6 lg:py-28">
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-12 lg:items-center">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12 lg:items-center">
         {/* Left Info Column */}
         <div className="lg:col-span-6 space-y-6">
           <p className="text-sm font-bold tracking-widest text-primary uppercase">ADMIN SYSTEM</p>

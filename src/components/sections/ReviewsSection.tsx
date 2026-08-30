@@ -39,7 +39,7 @@ export function ReviewsSection() {
   return (
     <section className="relative overflow-hidden bg-background py-20 lg:py-28">
       <SectionPhoto src={photo} />
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader
           label="REVIEWS"
           align="center"
@@ -57,7 +57,7 @@ export function ReviewsSection() {
           </div>
         </div>
       ) : (
-        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
           <FadeIn delay={80} className="mt-12">
             <div className="rounded-xl border border-dashed border-border bg-card/40 p-10 text-center">
               <p className="text-sm text-muted-foreground break-keep">

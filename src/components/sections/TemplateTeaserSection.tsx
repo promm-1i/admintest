@@ -5,12 +5,29 @@ import { SectionHeader } from "@/components/sections/SectionHeader";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { SAMPLES } from "@/lib/samples";
 
-const TEMPLATE_PREVIEW = SAMPLES.slice(0, 4);
+/** 판매 중인 템플릿(industryKey 보유)을 기본형/랜딩형 두 그룹으로 나눠 전부 표출한다. */
+const STYLE_GROUPS = [
+  {
+    key: "basic-template",
+    label: "기본형 템플릿",
+    desc: "핵심 정보만 담백하게 담은 표준 구성",
+    href: "/templates?style=basic-template",
+  },
+  {
+    key: "landing-template",
+    label: "랜딩형 템플릿",
+    desc: "스크롤 연출이 더해진 프리미엄 원페이지",
+    href: "/templates?style=landing-template",
+  },
+].map((g) => ({
+  ...g,
+  items: SAMPLES.filter((s) => s.industryKey && s.type.includes(g.key)),
+}));
 
 export function TemplateTeaserSection() {
   return (
-    <section className="px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto max-w-6xl">
+    <section className="px-3 py-20 sm:px-5 lg:py-28">
+      <div className="mx-auto max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <SectionHeader
             label="TEMPLATE"
@@ -26,20 +43,47 @@ export function TemplateTeaserSection() {
           </Link>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 lg:grid-cols-4">
-          {TEMPLATE_PREVIEW.map((sample, i) => (
-            <FadeIn key={sample.slug} delay={i * 60}>
-              <Link to="/templates" className="group relative block overflow-hidden rounded-lg border border-border">
-                <ImagePlaceholder
-                  src={sample.image}
-                  ratio="portrait"
-                  label={sample.industry}
-                  className="rounded-none border-0 transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/70 via-black/0 to-transparent p-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <p className="truncate text-xs font-semibold text-white">{sample.industry}</p>
+        <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          {STYLE_GROUPS.map((group, gi) => (
+            <FadeIn key={group.key} delay={gi * 80}>
+              <div className="flex h-full flex-col rounded-xl border border-border bg-card p-5 sm:p-6">
+                <div className="flex items-end justify-between gap-4">
+                  <div>
+                    <h3 className="text-lg font-bold text-foreground">{group.label}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{group.desc}</p>
+                  </div>
+                  <Link
+                    to={group.href}
+                    className="flex shrink-0 items-center gap-1 text-xs font-semibold text-primary hover:underline"
+                  >
+                    전체 보기
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
                 </div>
-              </Link>
+
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  {group.items.map((sample) => (
+                    <Link
+                      key={sample.slug}
+                      to={`/samples/${sample.slug}`}
+                      className="group relative block overflow-hidden rounded-lg border border-border"
+                    >
+                      <ImagePlaceholder
+                        src={sample.image}
+                        ratio="video"
+                        label={sample.industry}
+                        className="rounded-none border-0 transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="flex items-center justify-between gap-2 border-t border-border bg-background px-3 py-2">
+                        <p className="truncate text-xs font-semibold text-foreground">
+                          {sample.industry.replace(" 홈페이지", "")}
+                        </p>
+                        <ArrowRight className="h-3 w-3 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-primary" />
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </FadeIn>
           ))}
         </div>

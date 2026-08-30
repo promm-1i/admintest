@@ -26,7 +26,7 @@ const FEATURE_GROUPS = [
 export function FeaturesSection() {
   return (
     <section className="border-y border-border bg-secondary/30 py-20 lg:py-28">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader
           label="FEATURES"
           title="필요한 기능을 홈페이지 안에 함께 구축합니다."
