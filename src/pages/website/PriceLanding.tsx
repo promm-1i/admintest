@@ -7,33 +7,58 @@ import { Reveal } from "@/pages/services/previewKit";
 import { PricingComparison } from "@/components/site/PricingComparison";
 
 const EXTRA_FEATURES = [
-  { name: "다국어 지원", price: "별도 협의" },
-  { name: "회원 기능", price: "별도 협의" },
+  { name: "예약 기능", price: "별도 협의" },
   { name: "결제 연동", price: "별도 협의" },
+  { name: "다국어 지원", price: "별도 협의" },
   { name: "외부 API 연동", price: "별도 협의" },
-  { name: "업종별 관리자 시스템", price: "별도 협의" },
+  { name: "AI 기능", price: "별도 협의" },
 ];
 
+/** 마우스를 올리면 칩이 살짝 커지면서 항목 설명이 말풍선으로 뜬다 */
 const QUOTE_FACTORS = [
-  "페이지 수",
-  "디자인 난이도",
-  "관리자 기능",
-  "데이터베이스",
-  "회원 기능",
-  "예약 기능",
-  "결제 연동",
-  "외부 API 연동",
-  "다국어 지원",
-  "자료 정리 정도",
+  { label: "페이지 수", desc: "만들어야 하는 화면의 개수입니다. 페이지가 많을수록 디자인·개발 시간이 늘어납니다." },
+  { label: "디자인 난이도", desc: "맞춤 그래픽, 애니메이션, 인터랙션이 많이 들어갈수록 작업 범위가 커집니다." },
+  { label: "관리자 기능", desc: "공지·매물·상품 등을 직접 등록하고 수정하는 관리 화면의 범위입니다." },
+  { label: "데이터베이스", desc: "매물·상품·예약처럼 저장하고 검색해야 하는 데이터의 종류와 양입니다." },
+  { label: "회원 기능", desc: "회원가입·로그인, 마이페이지 등 회원 체계를 어디까지 갖출지에 따라 달라집니다." },
+  { label: "예약 기능", desc: "날짜·시간 선택, 예약 확정과 취소 알림 등 실시간 예약 처리의 범위입니다." },
+  { label: "결제 연동", desc: "카드·간편결제 등 온라인 결제 모듈을 연동하는 작업입니다." },
+  { label: "외부 API 연동", desc: "지도, 문자, 공공데이터처럼 외부 서비스와 데이터를 주고받는 연결 작업입니다." },
+  { label: "다국어 지원", desc: "영어·중국어 등 언어별 페이지 구성과 전환 기능입니다." },
+  { label: "자료 정리 정도", desc: "문구·사진 같은 원고가 정리되어 있을수록 제작 기간과 비용이 줄어듭니다." },
 ];
 
 const INCLUDED_BY_DEFAULT = [
-  "PC · 모바일 반응형",
+  "관리자 모드 (공지 · 문의 · 콘텐츠 관리)",
+  "회원 기능",
+  "모바일 웹 기본타입",
+  "도메인 1개 (첫 1년 무료)",
+  "DB · 파일 무제한",
+  "실시간 문자 기능 (무료 설치)",
   "기본 SEO 설정",
   "문의 · 상담 연결",
-  "도메인 연결 지원",
   "배포 및 오픈 지원",
 ];
+
+function FactorChip({ label, desc }: { label: string; desc: string }) {
+  return (
+    <span className="group relative inline-flex">
+      <button
+        type="button"
+        className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 ease-out hover:scale-110 hover:border-primary/50 hover:text-primary hover:shadow-sm focus-visible:scale-110 focus-visible:border-primary/50 focus-visible:text-primary focus-visible:outline-none motion-reduce:transition-none"
+      >
+        {label}
+      </button>
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute left-0 top-full z-20 mt-2 w-64 translate-y-1 rounded-lg bg-neutral-800 px-3.5 py-2.5 text-xs font-medium leading-relaxed text-white opacity-0 shadow-lg transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none"
+      >
+        <span className="absolute -top-1 left-4 h-2 w-2 rotate-45 bg-neutral-800" />
+        {desc}
+      </span>
+    </span>
+  );
+}
 
 export default function PriceLanding() {
   usePageTitle(
@@ -101,11 +126,12 @@ export default function PriceLanding() {
         </Reveal>
         <Reveal delay={100} className="mt-6 flex flex-wrap gap-2.5">
           {QUOTE_FACTORS.map((f) => (
-            <span key={f} className="rounded-full border border-border px-4 py-2 text-sm font-medium text-muted-foreground">
-              {f}
-            </span>
+            <FactorChip key={f.label} label={f.label} desc={f.desc} />
           ))}
         </Reveal>
+        <p className="mt-3 text-xs text-muted-foreground">
+          각 항목에 마우스를 올리면 어떤 작업인지 확인하실 수 있습니다.
+        </p>
 
         {/* 기본으로 제공되는 것 */}
         <Reveal className="mt-20">
@@ -160,7 +186,8 @@ export default function PriceLanding() {
         </Reveal>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
+      {/* 좌우 여백을 줄여 비교표가 최대한 넓게 나오도록 별도 컨테이너를 쓴다 */}
+      <div className="mx-auto max-w-7xl px-3 py-16 sm:px-5 sm:py-20">
         {/* 템플릿 요금제 4구조 비교 */}
         <Reveal>
           <PricingComparison />

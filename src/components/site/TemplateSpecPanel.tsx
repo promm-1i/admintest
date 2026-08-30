@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { Send, ShieldCheck, LayoutGrid, Link2, ExternalLink, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { TEMPLATE_PACKAGES, LUMP_SUM, formatMan, PRODUCTION_PERIOD } from "@/lib/templatePackages";
+import { TEMPLATE_PACKAGES, formatMan, PRODUCTION_PERIOD } from "@/lib/templatePackages";
 import type { Sample } from "@/lib/samples";
 
 /** 업종별 전용 기능과 관리자 데모 경로 */
@@ -36,7 +36,6 @@ const SPEC_ROWS = [
 export function TemplateSpecPanel({ sample }: { sample: Sample }) {
   const isLanding = sample.type.includes("landing-template");
   const pkg = TEMPLATE_PACKAGES.find((p) => p.key === (isLanding ? "landing" : "basic"))!;
-  const lump = isLanding ? LUMP_SUM[1] : LUMP_SUM[0];
   const industry = sample.industryKey ? INDUSTRY_SPEC[sample.industryKey] : undefined;
   const designCode = `${(sample.industryKey ?? "tpl").split("-")[0]?.slice(0, 2).toUpperCase()}${
     isLanding ? "L" : "B"
@@ -83,7 +82,6 @@ export function TemplateSpecPanel({ sample }: { sample: Sample }) {
           {pkg.designCost > 0 && ` + 디자인 ${formatMan(pkg.designCost)}`} 포함
         </p>
         <p className="mt-2 rounded-md bg-secondary/60 px-3 py-2 text-[11px] text-muted-foreground">
-          일시불 구매 시 <strong className="font-bold text-foreground">{formatMan(lump.price)}</strong> ·
           제작 기간 {PRODUCTION_PERIOD}
         </p>
       </div>

@@ -89,6 +89,8 @@ export type PricingRow = {
   note?: string;
   /** ⓘ 아이콘에 마우스를 올렸을 때 뜨는 툴팁 (줄 단위) */
   info?: string[];
+  /** 표 아래쪽 행은 툴팁이 표 밖으로 잘리지 않도록 위로 연다 */
+  infoSide?: "top" | "bottom";
   /** TEMPLATE_PACKAGES와 같은 순서 */
   values: [string, string, string, string];
 };
@@ -138,6 +140,7 @@ export const PRICING_ROWS: PricingRow[] = [
   {
     label: "호스팅 1년",
     required: true,
+    infoSide: "top",
     info: [
       ...HOSTING_DISCOUNTS.map(
         (h) => `${h.years}년 ${Math.round(h.rate * 100)}%할인 ${h.total.toLocaleString("ko-KR")}원`,
@@ -150,11 +153,5 @@ export const PRICING_ROWS: PricingRow[] = [
 
 /** 표 맨 아래 "제작 기간" 행 툴팁 */
 export const PERIOD_INFO = ["진행 자료 전달과 수정 범위에 따라", "제작 기간이 달라질 수 있습니다."];
-
-/** 월 이용료 없이 한 번에 구매하는 옵션 */
-export const LUMP_SUM = [
-  { label: "기본형 일시불", price: 100 * MAN },
-  { label: "랜딩형 일시불", price: 150 * MAN },
-];
 
 export const PRODUCTION_PERIOD = "영업일 7일 ~";
