@@ -27,7 +27,6 @@ const CORE_VALUES = [
 ];
 
 const STAT_ITEMS = [
-  { value: "40만 원부터", label: "부담 없는 합리적 시작가" },
   { value: "1:1", label: "담당자 직통 피드백" },
   { value: "100%", label: "PC · 모바일 반응형 대응" },
 ];
@@ -53,7 +52,7 @@ export default function About() {
       </Reveal>
 
       <div className="border-y border-border py-10">
-        <div className="mx-auto grid max-w-3xl gap-6 px-4 sm:grid-cols-3">
+        <div className="mx-auto grid max-w-3xl gap-6 px-4 sm:grid-cols-2">
           {STAT_ITEMS.map((stat, i) => (
             <FadeIn key={stat.label} direction="up" delay={i * 90}>
               <p className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">{stat.value}</p>
