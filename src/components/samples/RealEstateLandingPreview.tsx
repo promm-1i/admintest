@@ -23,7 +23,10 @@ export function RealEstateLandingPreview() {
         <span className="text-lg font-bold tracking-tight">
           마루<span className="text-amber-400">부동산</span>
         </span>
-        <a href="#contact" className="rounded-full bg-amber-400 px-4 py-2 text-sm font-bold text-neutral-950">
+        <a
+          href="#contact"
+          className="rounded-full bg-amber-400 px-4 py-2 text-sm font-bold text-neutral-950 transition-transform duration-200 hover:scale-105 active:scale-95"
+        >
           매물 상담 신청
         </a>
       </header>
@@ -41,9 +44,9 @@ export function RealEstateLandingPreview() {
         </p>
         <a
           href="#contact"
-          className="mt-7 inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-neutral-950"
+          className="mt-7 inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-neutral-950 transition-transform duration-200 hover:scale-105 active:scale-95"
         >
-          지금 매물 상담받기 <ArrowRight className="h-4 w-4" />
+          지금 매물 상담받기 <ArrowRight className="h-4 w-4 motion-safe:animate-[bounce-x_1.2s_ease-in-out_infinite]" />
         </a>
 
         <div className="mx-auto mt-14 grid max-w-lg grid-cols-3 gap-4">
@@ -66,7 +69,7 @@ export function RealEstateLandingPreview() {
         <div className="mt-8 grid gap-5 sm:grid-cols-3">
           {LISTINGS.map((item, i) => (
             <RevealScale key={item.title} delay={i * 100}>
-              <div className="rounded-xl border border-white/10 bg-white/5 p-5 transition-colors hover:border-amber-400/40">
+              <div className="rounded-xl border border-white/10 bg-white/5 p-5 transition-all duration-300 hover:-translate-y-1.5 hover:border-amber-400/40 hover:shadow-lg hover:shadow-amber-400/10">
                 <span className="rounded-full bg-amber-400/15 px-2.5 py-1 text-[11px] font-bold text-amber-400">
                   {item.type}
                 </span>
@@ -108,7 +111,7 @@ export function RealEstateLandingPreview() {
         </div>
         <a
           href="#contact"
-          className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-neutral-950"
+          className="mt-6 inline-flex items-center gap-1.5 rounded-full bg-amber-400 px-6 py-3 text-sm font-bold text-neutral-950 transition-transform duration-200 hover:scale-105 active:scale-95"
         >
           매물 상담 신청하기 <ArrowRight className="h-4 w-4" />
         </a>

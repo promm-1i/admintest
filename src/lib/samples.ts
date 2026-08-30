@@ -31,6 +31,8 @@ export type Sample = {
   liveUrl?: string;
   /** 있으면 카드가 /samples/:slug 대신 이 경로로 연결된다 (예: 이미 자체 소개 페이지가 있는 플랫폼형 솔루션) */
   detailHref?: string;
+  /** type에 "basic-template"/"landing-template"가 있는 항목만 사용 — /templates 페이지의 업종 필터 값 */
+  industryKey?: string;
 };
 
 /**
@@ -49,6 +51,7 @@ export const SAMPLES: Sample[] = [
     features: ["회사소개", "취급 업무 안내", "매물 리스트", "연락처 · 오시는 길"],
     idealFor: "빠르고 합리적인 비용으로 기본기만 갖춘 홈페이지가 필요한 공인중개사사무소",
     image: realEstateBasicTemplateImg,
+    industryKey: "real-estate",
   },
   {
     slug: "real-estate-landing-template",
@@ -60,6 +63,7 @@ export const SAMPLES: Sample[] = [
     features: ["스크롤 애니메이션", "매물 큐레이션 섹션", "고객 후기", "상담 CTA"],
     idealFor: "브랜드 신뢰감과 상담 전환율을 함께 끌어올리고 싶은 공인중개사사무소",
     image: realEstateLandingTemplateImg,
+    industryKey: "real-estate",
   },
   {
     slug: "commercial-real-estate-platform",
@@ -241,8 +245,6 @@ export const SAMPLES: Sample[] = [
 
 export const PORTFOLIO_FILTERS = [
   { label: "전체", value: "all" },
-  { label: "기본형 템플릿", value: "basic-template" },
-  { label: "랜딩형 템플릿", value: "landing-template" },
   { label: "플랫폼·시스템", value: "platform" },
   { label: "원페이지", value: "one-page" },
   { label: "소상공인", value: "small-business" },
@@ -250,6 +252,19 @@ export const PORTFOLIO_FILTERS = [
   { label: "쇼핑몰", value: "shopping-mall" },
   { label: "포트폴리오", value: "portfolio" },
   { label: "리뉴얼", value: "renewal" },
+];
+
+/** /templates 페이지의 업종 필터 — industryKey가 있는(=실제 템플릿인) 항목만 대상으로 한다. */
+export const TEMPLATE_INDUSTRY_FILTERS = [
+  { label: "전체", value: "all" },
+  { label: "부동산", value: "real-estate" },
+  { label: "렌트카", value: "rentcar" },
+  { label: "병원·의원", value: "hospital" },
+  { label: "학원", value: "academy" },
+  { label: "인테리어·리모델링", value: "interior" },
+  { label: "이사·청소업체", value: "moving" },
+  { label: "음식점·카페", value: "restaurant" },
+  { label: "기업·브랜드", value: "corporate" },
 ];
 
 export function getSampleBySlug(slug: string): Sample | undefined {

@@ -100,8 +100,8 @@ export const HEADER_NAV: NavEntry[] = [
     key: "templates",
     label: "홈페이지 템플릿",
     items: [
-      { label: "기본형 디자인 템플릿", href: "/templates?type=basic-template" },
-      { label: "랜딩형 디자인 템플릿", href: "/templates?type=landing-template" },
+      { label: "기본형 디자인 템플릿", href: "/templates?style=basic-template" },
+      { label: "랜딩형 디자인 템플릿", href: "/templates?style=landing-template" },
     ],
   },
   {
