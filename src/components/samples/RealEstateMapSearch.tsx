@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Plus, Minus, Crosshair, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { KakaoAreaMap, hasKakaoKey } from "@/components/samples/KakaoAreaMap";
 import living01 from "@/assets/images/re_living_01.jpg";
 import living02 from "@/assets/images/re_living_02.jpg";
 import studio from "@/assets/images/re_studio.jpg";
@@ -50,6 +52,9 @@ type Tone = "light" | "dark";
  */
 export function RealEstateMapSearch({ tone }: { tone: Tone }) {
   const light = tone === "light";
+  // 카카오 JS 키가 있으면 실제 지도(강서구 일대), 없거나 로드 실패 시 SVG 약도 폴백
+  const [kakaoFailed, setKakaoFailed] = useState(false);
+  const useKakao = hasKakaoKey && !kakaoFailed;
 
   return (
     <div
@@ -96,6 +101,10 @@ export function RealEstateMapSearch({ tone }: { tone: Tone }) {
       <div className="grid lg:grid-cols-[minmax(0,1fr)_300px]">
         {/* 지도 */}
         <div className="relative h-[360px] overflow-hidden sm:h-[440px]">
+          {useKakao ? (
+            <KakaoAreaMap tone={tone} onError={() => setKakaoFailed(true)} />
+          ) : (
+            <>
           <svg
             viewBox="0 0 800 480"
             preserveAspectRatio="xMidYMid slice"
@@ -231,6 +240,8 @@ export function RealEstateMapSearch({ tone }: { tone: Tone }) {
           >
             <Crosshair className="h-4 w-4" />
           </span>
+            </>
+          )}
         </div>
 
         {/* 우측 매물 리스트 */}
