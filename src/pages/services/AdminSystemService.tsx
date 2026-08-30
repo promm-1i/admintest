@@ -1,14 +1,13 @@
-import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { Send, ArrowRight, ExternalLink, LayoutDashboard, ArrowDown, ArrowRight as ArrowRightIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { cn } from "@/lib/utils";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
-import { RealEstateAdminProvider } from "@/pages/solutions/real-estate-admin/store";
+import { RealEstateAdminProvider, useRealEstateAdmin } from "@/pages/solutions/real-estate-admin/store";
 import { DashboardView } from "@/pages/solutions/real-estate-admin/views/DashboardView";
-import { PropertyListView } from "@/pages/solutions/real-estate-admin/views/PropertyViews";
+import { PanelHeader, StatusBadge } from "@/pages/solutions/real-estate-admin/components";
 import { MENU } from "@/pages/solutions/real-estate-admin/menu";
+import { BrowserFrame, LiveComponentPreview, LazyIframePreview } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "admin-system");
 
@@ -21,53 +20,39 @@ const INDUSTRY_DEMOS = [
   { label: "이사 · 청소업체", flow: "서비스 지역 관리 → 견적 문의", href: "/web-solutions/moving/demo" },
 ];
 
-function BrowserFrame({
-  label,
-  heightClassName,
-  children,
-}: {
-  label: string;
-  heightClassName: string;
-  children: ReactNode;
-}) {
+/** PropertyListView의 검색·필터·수정·삭제 UI 없이, 같은 실제 매물 데이터만 읽기 전용으로 보여준다. */
+function PropertyListPreview() {
+  const { listings } = useRealEstateAdmin();
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
-      <div className="flex items-center gap-1.5 border-b border-border bg-secondary/60 px-3.5 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="h-2.5 w-2.5 rounded-full bg-border" />
-        <span className="ml-2 truncate font-mono text-[11px] text-muted-foreground">{label}</span>
-      </div>
-      <div className={cn("overflow-hidden bg-background", heightClassName)}>{children}</div>
-    </div>
-  );
-}
-
-/**
- * 실제 관리자 데모 컴포넌트를 축소해 보여주는 미리보기. inert로 전체 서브트리를 포인터/키보드
- * 조작과 접근성 트리에서 완전히 제외해, 미리보기 안의 버튼을 눌러 데모 데이터가 바뀌지 않게 한다.
- */
-function LiveComponentPreview({ scale, children }: { scale: number; children: ReactNode }) {
-  return (
-    <div className="select-none" inert>
-      <div className="origin-top-left p-5" style={{ transform: `scale(${scale})`, width: `${100 / scale}%` }}>
-        {children}
-      </div>
-    </div>
-  );
-}
-
-/** 실제 고객용 데모 페이지를 iframe으로 그대로 불러와 축소 표시한다. inert로 포커스·클릭을 모두 막는다. */
-function LiveSitePreview({ src, scale }: { src: string; scale: number }) {
-  return (
-    <div className="h-full w-full overflow-hidden" inert>
-      <div className="origin-top-left" style={{ transform: `scale(${scale})`, width: `${100 / scale}%` }}>
-        <iframe
-          src={src}
-          title="MintCL 고객용 홈페이지 데모"
-          loading="lazy"
-          style={{ width: "100%", height: 900, border: 0 }}
-        />
+    <div>
+      <PanelHeader title="전체 매물 목록" description="등록된 모든 매물을 검색·필터·일괄관리합니다." />
+      <div className="overflow-hidden rounded-lg border border-border">
+        <table className="w-full text-left text-xs">
+          <thead className="bg-secondary/50 text-muted-foreground">
+            <tr>
+              <th className="px-3 py-2 font-medium">매물명</th>
+              <th className="px-3 py-2 font-medium">지역</th>
+              <th className="px-3 py-2 font-medium">가격</th>
+              <th className="px-3 py-2 font-medium">담당자</th>
+              <th className="px-3 py-2 font-medium">상태</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border">
+            {listings.map((l) => (
+              <tr key={l.id}>
+                <td className="px-3 py-2 font-medium text-foreground">
+                  {l.image} {l.title}
+                </td>
+                <td className="px-3 py-2 text-muted-foreground">{l.region}</td>
+                <td className="px-3 py-2 font-semibold text-foreground">{l.price}</td>
+                <td className="px-3 py-2 text-muted-foreground">{l.manager}</td>
+                <td className="px-3 py-2">
+                  <StatusBadge label={l.status} tone={l.status === "공개" ? "success" : "neutral"} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -156,7 +141,7 @@ export default function AdminSystemService() {
             <BrowserFrame label="전체 매물 목록" heightClassName="h-[420px] sm:h-[480px]">
               <RealEstateAdminProvider>
                 <LiveComponentPreview scale={0.6}>
-                  <PropertyListView onNavigate={() => {}} />
+                  <PropertyListPreview />
                 </LiveComponentPreview>
               </RealEstateAdminProvider>
             </BrowserFrame>
@@ -180,7 +165,7 @@ export default function AdminSystemService() {
             <BrowserFrame label="관리자 — 매물 관리" heightClassName="h-[300px] sm:h-[340px]">
               <RealEstateAdminProvider>
                 <LiveComponentPreview scale={0.55}>
-                  <PropertyListView onNavigate={() => {}} />
+                  <PropertyListPreview />
                 </LiveComponentPreview>
               </RealEstateAdminProvider>
             </BrowserFrame>
@@ -191,7 +176,11 @@ export default function AdminSystemService() {
             </div>
 
             <BrowserFrame label="고객 홈페이지 — 매물검색" heightClassName="h-[300px] sm:h-[340px]">
-              <LiveSitePreview src="/web-solutions/real-estate/demo/site" scale={0.42} />
+              <LazyIframePreview
+                src="/web-solutions/real-estate/demo/site"
+                scale={0.42}
+                title="MintCL 고객용 홈페이지 데모"
+              />
             </BrowserFrame>
           </div>
         </div>

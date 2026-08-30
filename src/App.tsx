@@ -12,6 +12,12 @@ import Home from "@/pages/Home";
 const About = lazy(() => import("@/pages/About"));
 const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
 const AdminSystemService = lazy(() => import("@/pages/services/AdminSystemService"));
+const InquiryReservationService = lazy(() => import("@/pages/services/InquiryReservationService"));
+const SearchFilterService = lazy(() => import("@/pages/services/SearchFilterService"));
+const ContentManagementService = lazy(() => import("@/pages/services/ContentManagementService"));
+const DatabaseApiService = lazy(() => import("@/pages/services/DatabaseApiService"));
+const ResponsiveService = lazy(() => import("@/pages/services/ResponsiveService"));
+const SeoService = lazy(() => import("@/pages/services/SeoService"));
 const WebSolutions = lazy(() => import("@/pages/WebSolutions"));
 const DemoHub = lazy(() => import("@/pages/solutions/DemoHub"));
 const Templates = lazy(() => import("@/pages/Templates"));
@@ -114,6 +120,12 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services/admin-system" element={<AdminSystemService />} />
+            <Route path="/services/inquiry-reservation" element={<InquiryReservationService />} />
+            <Route path="/services/search-filter" element={<SearchFilterService />} />
+            <Route path="/services/content-management" element={<ContentManagementService />} />
+            <Route path="/services/database-api" element={<DatabaseApiService />} />
+            <Route path="/services/responsive" element={<ResponsiveService />} />
+            <Route path="/services/seo" element={<SeoService />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/web-solutions" element={<WebSolutions />} />
             <Route path="/web-solutions/demos" element={<DemoHub />} />
