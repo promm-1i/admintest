@@ -45,7 +45,7 @@ function FactorChip({ label, desc }: { label: string; desc: string }) {
     <span className="group relative inline-flex">
       <button
         type="button"
-        className="rounded-full border border-border bg-card px-4 py-2 text-sm font-medium text-muted-foreground transition-all duration-200 ease-out hover:scale-110 hover:border-primary/50 hover:text-primary hover:shadow-sm focus-visible:scale-110 focus-visible:border-primary/50 focus-visible:text-primary focus-visible:outline-none motion-reduce:transition-none"
+        className="rounded-full border border-border bg-card px-5 py-2.5 text-base font-medium text-foreground/80 transition-all duration-200 ease-out hover:scale-110 hover:border-primary/50 hover:text-primary hover:shadow-sm focus-visible:scale-110 focus-visible:border-primary/50 focus-visible:text-primary focus-visible:outline-none motion-reduce:transition-none"
       >
         {label}
       </button>
@@ -68,7 +68,7 @@ export default function PriceLanding() {
 
   return (
     <div>
-      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-5 sm:py-20 lg:px-6">
         <Reveal>
           <p className="text-sm font-mono font-semibold uppercase tracking-widest text-primary">PRICING</p>
           <h1 className="mt-4 text-5xl font-bold leading-tight tracking-tight sm:text-6xl">
@@ -95,14 +95,16 @@ export default function PriceLanding() {
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식 2가지</h2>
         </Reveal>
         <div className="mt-8 grid gap-5 sm:grid-cols-2">
-          <Reveal delay={80} className="rounded-xl border border-border bg-card p-6">
-            <h3 className="text-lg font-bold text-foreground">템플릿으로 빠르게 제작</h3>
+          <Reveal delay={80} className="rounded-xl border border-border bg-secondary/30 p-6">
+            <p className="text-xs font-bold tracking-wide text-muted-foreground">TEMPLATE</p>
+            <h3 className="mt-1.5 text-lg font-bold text-foreground">템플릿으로 빠르게 제작</h3>
             <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">
               검증된 디자인을 선택해 더 빠르고 합리적인 비용으로 시작합니다.
             </p>
           </Reveal>
-          <Reveal delay={160} className="rounded-xl border border-border bg-card p-6">
-            <h3 className="text-lg font-bold text-foreground">처음부터 맞춤 제작</h3>
+          <Reveal delay={160} className="rounded-xl border border-primary/40 bg-primary/[0.04] p-6">
+            <p className="text-xs font-bold tracking-wide text-primary">CUSTOM · PREMIUM</p>
+            <h3 className="mt-1.5 text-lg font-bold text-foreground">처음부터 맞춤 제작</h3>
             <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">
               사업에 필요한 구조와 기능부터 새롭게 설계합니다.
             </p>
@@ -124,12 +126,12 @@ export default function PriceLanding() {
             기능과 데이터 처리 범위가 가격 대부분을 결정합니다.
           </p>
         </Reveal>
-        <Reveal delay={100} className="mt-6 flex flex-wrap gap-2.5">
+        <Reveal delay={100} className="mt-7 flex flex-wrap gap-3">
           {QUOTE_FACTORS.map((f) => (
             <FactorChip key={f.label} label={f.label} desc={f.desc} />
           ))}
         </Reveal>
-        <p className="mt-3 text-xs text-muted-foreground">
+        <p className="mt-4 text-sm text-muted-foreground">
           각 항목에 마우스를 올리면 어떤 작업인지 확인하실 수 있습니다.
         </p>
 
@@ -138,10 +140,15 @@ export default function PriceLanding() {
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">기본으로 제공되는 것</h2>
         </Reveal>
         <Reveal delay={100}>
-          <ul className="mt-7 grid gap-3.5 sm:grid-cols-2">
+          <ul className="mt-7 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
             {INCLUDED_BY_DEFAULT.map((item) => (
-              <li key={item} className="flex items-center gap-2.5 text-lg text-foreground break-keep">
-                <Check className="h-4 w-4 shrink-0 text-primary" />
+              <li
+                key={item}
+                className="flex items-center gap-3 rounded-xl border border-border bg-card px-5 py-4 text-base font-medium text-foreground break-keep transition-colors hover:border-primary/40 sm:text-lg"
+              >
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10">
+                  <Check className="h-4 w-4 text-primary" />
+                </span>
                 {item}
               </li>
             ))}
@@ -157,10 +164,10 @@ export default function PriceLanding() {
             {EXTRA_FEATURES.map((item) => (
               <li
                 key={item.name}
-                className="flex items-center justify-between gap-4 rounded-lg bg-secondary/40 px-5 py-4 border border-border/40"
+                className="flex items-center justify-between gap-4 rounded-xl border border-border bg-card px-5 py-4 transition-colors hover:border-primary/40"
               >
-                <span className="text-base font-medium text-foreground break-keep">{item.name}</span>
-                <span className="shrink-0 text-lg font-semibold text-primary">{item.price}</span>
+                <span className="text-base font-semibold text-foreground break-keep sm:text-lg">{item.name}</span>
+                <span className="shrink-0 text-base font-semibold text-primary sm:text-lg">{item.price}</span>
               </li>
             ))}
           </ul>
