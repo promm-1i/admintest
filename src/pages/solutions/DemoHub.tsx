@@ -1,8 +1,28 @@
 import { Link } from "react-router-dom";
-import { ExternalLink, ShieldCheck, Globe } from "lucide-react";
+import { ExternalLink, ShieldCheck, Globe, Paintbrush, LayoutTemplate, Puzzle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { FadeIn } from "@/components/ui/FadeIn";
 import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
+
+/** 데모는 기능 시연용이고, 실제 납품물은 업체별 맞춤 제작이라는 점을 앞세운다 */
+const CUSTOM_POINTS = [
+  {
+    icon: Paintbrush,
+    title: "디자인 전부 맞춤",
+    desc: "데모의 화면은 기능 시연용 예시입니다. 실제 제작 시 색상 · 폰트 · 레이아웃을 업체 브랜드에 맞춰 새로 디자인합니다.",
+  },
+  {
+    icon: LayoutTemplate,
+    title: "화면 구성도 맞춤",
+    desc: "메뉴 구조, 섹션 배치, 노출 항목을 업체의 영업 방식에 맞게 처음부터 설계합니다.",
+  },
+  {
+    icon: Puzzle,
+    title: "기능 추가 · 변경 가능",
+    desc: "데모에 없는 기능도 필요하면 추가하고, 불필요한 기능은 뺄 수 있습니다. 업종이 달라도 같은 방식으로 구축합니다.",
+  },
+];
 
 export default function DemoHub() {
   usePageTitle(
@@ -11,8 +31,8 @@ export default function DemoHub() {
   );
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-14">
-      <div className="text-center">
+    <div className="mx-auto max-w-7xl px-3 py-14 sm:px-5">
+      <FadeIn className="text-center">
         <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
           INTERACTIVE DEMO
         </p>
@@ -24,27 +44,77 @@ export default function DemoHub() {
         <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
           고객 홈페이지부터 관리자 시스템까지, 실제 동작하는 인터랙티브 데모를 제공합니다.
         </p>
-      </div>
+      </FadeIn>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {INDUSTRY_SHOWCASES.map((industry) => {
+      {/* 맞춤형 안내 — 데모 화면이 곧 최종 디자인이라는 오해를 막는다 */}
+      <FadeIn delay={100} className="mt-10 rounded-2xl border border-primary/30 bg-primary/[0.04] p-6 sm:p-8">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <p className="text-base font-bold text-foreground sm:text-lg">
+            고객 홈페이지는 <span className="text-primary">맞춤형 개발</span>이라 모두 커스텀할 수 있습니다.
+          </p>
+          <p className="text-xs text-muted-foreground">데모 화면은 기능 확인용 예시 구성입니다.</p>
+        </div>
+        <div className="mt-5 grid gap-4 sm:grid-cols-3">
+          {CUSTOM_POINTS.map((p) => {
+            const Icon = p.icon;
+            return (
+              <div key={p.title} className="flex items-start gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Icon className="h-4.5 w-4.5" />
+                </span>
+                <span>
+                  <span className="block text-sm font-bold text-foreground">{p.title}</span>
+                  <span className="mt-1 block text-xs leading-relaxed text-muted-foreground break-keep">
+                    {p.desc}
+                  </span>
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </FadeIn>
+
+      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {INDUSTRY_SHOWCASES.map((industry, idx) => {
           const Icon = industry.icon;
           return (
-            <div
+            <FadeIn
               key={industry.key}
-              className="flex flex-col rounded-2xl border border-border bg-card p-6"
+              delay={(idx % 3) * 80}
+              className="flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/5 motion-safe:hover:-translate-y-1"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                <Icon className="h-5 w-5" />
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div>
+                  <Link
+                    to={industry.solutionHref}
+                    className="text-base font-bold text-foreground hover:underline"
+                  >
+                    {industry.cardTitle}
+                  </Link>
+                  <p className="text-[11px] text-muted-foreground">{industry.cardTagline}</p>
+                </div>
               </div>
-              <Link
-                to={industry.solutionHref}
-                className="mt-4 text-base font-semibold text-foreground hover:underline"
-              >
-                {industry.cardTitle}
-              </Link>
-              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground break-keep">
-                {industry.cardTagline}
+
+              <ul className="mt-4 flex flex-wrap gap-1.5">
+                {industry.features.slice(0, 4).map((f) => {
+                  const FIcon = f.icon;
+                  return (
+                    <li
+                      key={f.label}
+                      className="inline-flex items-center gap-1 rounded-full border border-border bg-secondary/40 px-2.5 py-1 text-[11px] font-medium text-foreground/80"
+                    >
+                      <FIcon className="h-3 w-3 text-primary/70" />
+                      {f.label}
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <p className="mt-4 border-t border-border/60 pt-3 text-xs leading-relaxed text-muted-foreground break-keep">
+                {industry.connectionNote}
               </p>
 
               <div className="mt-5 flex flex-1 flex-col justify-end gap-2">
@@ -63,12 +133,12 @@ export default function DemoHub() {
                   </a>
                 </Button>
               </div>
-            </div>
+            </FadeIn>
           );
         })}
       </div>
 
-      <div className="mt-14 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
+      <FadeIn className="mt-14 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
         <p className="text-sm text-muted-foreground">
           원하는 업종이 목록에 없거나, 다른 방식의 맞춤 기능이 필요하신가요?
         </p>
@@ -80,7 +150,7 @@ export default function DemoHub() {
             <Link to="/contact">구축 문의하기</Link>
           </Button>
         </div>
-      </div>
+      </FadeIn>
     </div>
   );
 }
