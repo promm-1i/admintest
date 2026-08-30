@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Send } from "lucide-react";
+import { ArrowRight, Check, Send } from "lucide-react";
 import { Reveal } from "@/pages/services/previewKit";
 import { FadeIn } from "@/components/ui/FadeIn";
 
@@ -29,6 +29,8 @@ const CORE_VALUES = [
 const STAT_ITEMS = [
   { value: "1:1", label: "담당자 직통 피드백" },
   { value: "100%", label: "PC · 모바일 반응형 대응" },
+  { value: "7일~", label: "템플릿 제작 기간 (영업일)" },
+  { value: "24시간", label: "문의 접수 · 1일 이내 회신" },
 ];
 
 export default function About() {
@@ -39,47 +41,54 @@ export default function About() {
 
   return (
     <div>
-      <Reveal className="mx-auto max-w-3xl px-4 pb-10 pt-14 sm:pt-20">
+      <Reveal className="mx-auto max-w-4xl px-4 pb-12 pt-16 sm:pt-24">
         <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">NOVERIQ PHILOSOPHY</p>
-        <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl break-keep">
-          소상공인과 기업의 가장 확실한 첫인상을 만듭니다.
+        <h1 className="mt-5 text-4xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-5xl break-keep">
+          소상공인과 기업의
+          <br />
+          가장 확실한 첫인상을 만듭니다.
         </h1>
-        <p className="mt-5 text-base leading-relaxed text-muted-foreground break-keep">
+        <div className="mt-6 h-1 w-14 bg-primary" aria-hidden />
+        <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground break-keep sm:text-lg">
           NOVERIQ은 블로그나 SNS만으로는 부족했던 비즈니스의 신뢰감을 채워주는 맞춤형 홈페이지 제작
           스튜디오입니다. 복잡한 거품을 빼고, 실제 고객 문의로 이어지는 실용적인 사이트를 함께
           만듭니다.
         </p>
       </Reveal>
 
-      <div className="border-y border-border py-10">
-        <div className="mx-auto grid max-w-3xl gap-6 px-4 sm:grid-cols-2">
+      <div className="border-y border-border bg-secondary/20 py-12">
+        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-x-6 gap-y-8 px-4 lg:grid-cols-4">
           {STAT_ITEMS.map((stat, i) => (
             <FadeIn key={stat.label} direction="up" delay={i * 90}>
               <p className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">{stat.value}</p>
-              <p className="mt-1 text-sm font-medium text-muted-foreground">{stat.label}</p>
+              <p className="mt-1.5 text-sm font-medium text-muted-foreground break-keep">{stat.label}</p>
             </FadeIn>
           ))}
         </div>
       </div>
 
-      <div className="mx-auto max-w-3xl px-4 py-14 sm:py-20">
+      <div className="mx-auto max-w-4xl px-4 py-16 sm:py-24">
         <Reveal>
-          <h2 className="text-2xl font-bold text-foreground">NOVERIQ이 약속하는 3가지</h2>
+          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">NOVERIQ이 약속하는 3가지</h2>
         </Reveal>
         <div className="mt-8 divide-y divide-border border-t border-border">
           {CORE_VALUES.map((item, i) => (
-            <FadeIn key={item.num} direction="left" delay={i * 150} className="py-8">
-              <div className="grid gap-3 sm:grid-cols-12 sm:gap-6">
+            <FadeIn key={item.num} direction="left" delay={i * 150} className="py-9">
+              <div className="grid gap-4 sm:grid-cols-12 sm:gap-8">
                 <div className="sm:col-span-4">
-                  <span className="font-mono text-3xl font-bold text-primary/25">{item.num}</span>
-                  <h3 className="mt-1 text-lg font-bold text-foreground break-keep">{item.title}</h3>
+                  <span className="font-mono text-4xl font-bold text-primary/20">{item.num}</span>
+                  <h3 className="mt-1.5 text-xl font-bold text-foreground break-keep">{item.title}</h3>
                 </div>
                 <div className="sm:col-span-8">
-                  <p className="text-sm leading-relaxed text-muted-foreground break-keep">{item.desc}</p>
-                  <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-1.5">
+                  <p className="text-base leading-relaxed text-muted-foreground break-keep">{item.desc}</p>
+                  <ul className="mt-4 flex flex-wrap gap-2">
                     {item.points.map((pt) => (
-                      <li key={pt} className="text-xs font-medium text-foreground/80 break-keep">
-                        · {pt}
+                      <li
+                        key={pt}
+                        className="inline-flex items-center gap-1.5 rounded-full border border-border bg-secondary/40 px-3 py-1.5 text-xs font-medium text-foreground/80 break-keep"
+                      >
+                        <Check className="h-3 w-3 text-primary" />
+                        {pt}
                       </li>
                     ))}
                   </ul>
@@ -91,11 +100,11 @@ export default function About() {
       </div>
 
       <Reveal className="border-t border-border bg-secondary/30 py-16 text-center sm:py-20">
-        <div className="mx-auto max-w-md px-4">
-          <h2 className="text-2xl font-bold text-foreground break-keep">
+        <div className="mx-auto max-w-lg px-4">
+          <h2 className="text-2xl font-bold text-foreground break-keep sm:text-3xl">
             어떤 홈페이지가 필요한지 고민되시나요?
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-muted-foreground break-keep">
+          <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">
             업종과 갖고 계신 생각만 간단히 들려주세요. 부담 없는 맞춤 구성안과 견적을 정리해
             드립니다.
           </p>
