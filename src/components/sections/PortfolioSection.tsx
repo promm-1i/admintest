@@ -1,22 +1,114 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Send } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { Button } from "@/components/ui/button";
-import { PORTFOLIO_SAMPLES, PORTFOLIO_FILTERS, MAIN_PORTFOLIO_SAMPLES } from "@/lib/samples";
+import { PORTFOLIO_SAMPLES, PORTFOLIO_FILTERS, MAIN_PORTFOLIO_CAROUSEL } from "@/lib/samples";
 import { cn } from "@/lib/utils";
+import type { Sample } from "@/lib/samples";
+
+/** 자동 슬라이드 속도 (px/초). 카드 한 장을 훑는 데 10초 안팎이 되는 느긋한 속도. */
+const AUTO_SCROLL_SPEED = 45;
+
+/**
+ * 좌→우로 흐르는 무한 루프 캐러셀.
+ * - 마우스를 올리면 자동 슬라이드가 멈추고, 휠로 직접 좌우 이동할 수 있다.
+ * - 목록을 두 번 이어 붙이고 scrollLeft를 한 세트 폭만큼 되감아 이음새 없이 순환한다.
+ * - prefers-reduced-motion 사용자에게는 자동 슬라이드 없이 일반 가로 스크롤로 동작한다.
+ */
+function PortfolioCarousel({ items }: { items: Sample[] }) {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const pausedRef = useRef(false);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+
+    // 두 번째 세트 첫 카드와 첫 세트 첫 카드의 간격 = 정확한 한 바퀴 폭
+    const first = el.children[0] as HTMLElement | undefined;
+    const second = el.children[items.length] as HTMLElement | undefined;
+    if (!first || !second) return;
+    const period = second.offsetLeft - first.offsetLeft;
+
+    // 콘텐츠가 화면보다 좁으면 순환할 필요가 없다
+    if (el.scrollWidth <= el.clientWidth + 50) return;
+
+    el.scrollLeft = period; // 중간 지점에서 시작해 양방향 모두 여유를 확보
+
+    const wrap = () => {
+      if (el.scrollLeft < period * 0.25) el.scrollLeft += period;
+      else if (el.scrollLeft > period * 1.25) el.scrollLeft -= period;
+    };
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let raf = 0;
+    let last = performance.now();
+    const tick = (now: number) => {
+      const dt = Math.min(now - last, 100);
+      last = now;
+      // 좌→우 흐름: 카드가 오른쪽으로 이동하도록 scrollLeft를 줄인다
+      if (!pausedRef.current) el.scrollLeft -= (dt / 1000) * AUTO_SCROLL_SPEED;
+      wrap();
+      raf = requestAnimationFrame(tick);
+    };
+    if (!reduceMotion) raf = requestAnimationFrame(tick);
+
+    // 휠 세로 스크롤을 가로 이동으로 변환 (페이지 스크롤은 막는다)
+    const onWheel = (e: WheelEvent) => {
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      el.scrollLeft += delta;
+      wrap();
+      e.preventDefault();
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    const onScroll = () => wrap();
+    el.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      cancelAnimationFrame(raf);
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("scroll", onScroll);
+    };
+  }, [items]);
+
+  const loopItems = [...items, ...items];
+
+  return (
+    <div
+      ref={trackRef}
+      onMouseEnter={() => {
+        pausedRef.current = true;
+      }}
+      onMouseLeave={() => {
+        pausedRef.current = false;
+      }}
+      onTouchStart={() => {
+        pausedRef.current = true;
+      }}
+      onTouchEnd={() => {
+        pausedRef.current = false;
+      }}
+      className="mt-8 flex items-stretch gap-6 overflow-x-auto pb-2 scrollbar-none"
+    >
+      {loopItems.map((sample, i) => (
+        <div key={`${sample.slug}-${i}`} className="w-[340px] shrink-0 sm:w-[420px] lg:w-[480px]">
+          <PortfolioCard sample={sample} size="normal" />
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export function PortfolioSection() {
   const [selectedType, setSelectedType] = useState("all");
 
-  // 메인페이지 기본 화면은 업종별 대표 사례 6건으로 고정한다 (전체 목록은 /samples).
-  // 필터를 선택했을 때만 해당 분류 전체에서 최대 6건을 보여준다.
+  // 기본 화면은 대표 12건 슬라이드, 필터 선택 시 해당 분류 전체를 같은 슬라이드로 보여준다.
   const displaySamples =
     selectedType === "all"
-      ? MAIN_PORTFOLIO_SAMPLES
-      : PORTFOLIO_SAMPLES.filter((site) => site.type?.includes(selectedType)).slice(0, 6);
+      ? MAIN_PORTFOLIO_CAROUSEL
+      : PORTFOLIO_SAMPLES.filter((site) => site.type?.includes(selectedType));
 
   return (
     <section id="portfolio-section" className="relative overflow-hidden py-20 lg:py-28">
@@ -56,19 +148,13 @@ export function PortfolioSection() {
           })}
         </div>
 
-        <div className="mt-8 grid gap-8 sm:grid-cols-2 items-stretch">
-          {displaySamples.length > 0 ? (
-            displaySamples.map((sample, i) => (
-              <FadeIn key={sample.slug} delay={i * 60} className="h-full">
-                <PortfolioCard sample={sample} size="normal" />
-              </FadeIn>
-            ))
-          ) : (
-            <div className="col-span-full py-16 text-center text-sm text-muted-foreground bg-card rounded-xl border border-border/60">
-              해당 카테고리의 포트폴리오를 준비 중입니다. 원하시는 업종을 문의해주시면 맞춤 구성안을 보여드립니다.
-            </div>
-          )}
-        </div>
+        {displaySamples.length > 0 ? (
+          <PortfolioCarousel key={selectedType} items={displaySamples} />
+        ) : (
+          <div className="mt-8 py-16 text-center text-sm text-muted-foreground bg-card rounded-xl border border-border/60">
+            해당 카테고리의 포트폴리오를 준비 중입니다. 원하시는 업종을 문의해주시면 맞춤 구성안을 보여드립니다.
+          </div>
+        )}
 
         <FadeIn className="mt-16">
           <div className="rounded-xl border border-border bg-card/60 p-8 sm:p-10 text-center shadow-xs">

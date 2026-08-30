@@ -400,6 +400,26 @@ export const MAIN_PORTFOLIO_SAMPLES: Sample[] = MAIN_PORTFOLIO_SLUGS.map(
   (slug) => PORTFOLIO_SAMPLES.find((s) => s.slug === slug),
 ).filter((s): s is Sample => Boolean(s));
 
+/**
+ * 메인 슬라이더용 12건: 고정 6건 뒤에 추가 사례를 이어 붙인다.
+ * roadin · objetbath는 위 솔루션 카드와 같은 사이트라 중복 노출을 피하려고 제외했다.
+ */
+const MAIN_CAROUSEL_EXTRA_SLUGS = [
+  "carplan-rentcar",
+  "nexmotion",
+  "moving-company",
+  "mujin-shop",
+  "aura-academy",
+  "olea-food-brand",
+];
+
+export const MAIN_PORTFOLIO_CAROUSEL: Sample[] = [
+  ...MAIN_PORTFOLIO_SLUGS,
+  ...MAIN_CAROUSEL_EXTRA_SLUGS,
+]
+  .map((slug) => PORTFOLIO_SAMPLES.find((s) => s.slug === slug))
+  .filter((s): s is Sample => Boolean(s));
+
 export const PORTFOLIO_FILTERS = [
   { label: "전체", value: "all" },
   { label: "플랫폼·시스템", value: "platform" },
