@@ -52,10 +52,10 @@ function TitleTabDemo() {
             </span>
           </div>
         </div>
-        <div className="h-[300px] overflow-hidden border-t border-border bg-background">
+        <div className="aspect-video overflow-hidden border-t border-border bg-background">
           {shouldLoad ? (
             <div className="origin-top-left" style={{ transform: "scale(0.42)", width: `${100 / 0.42}%` }}>
-              <iframe src="/" title="NOVERIQ 홈페이지" style={{ width: "100%", height: 900, border: 0 }} />
+              <iframe src="/" title="NOVERIQ 홈페이지" style={{ width: "100%", height: 1500, border: 0 }} />
             </div>
           ) : (
             <div className="h-full w-full bg-secondary/20" />

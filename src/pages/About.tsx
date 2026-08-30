@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Send } from "lucide-react";
+import { Reveal } from "@/pages/services/previewKit";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 const CORE_VALUES = [
   {
@@ -38,7 +40,7 @@ export default function About() {
 
   return (
     <div>
-      <div className="mx-auto max-w-3xl px-4 pb-10 pt-14 sm:pt-20">
+      <Reveal className="mx-auto max-w-3xl px-4 pb-10 pt-14 sm:pt-20">
         <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">NOVERIQ PHILOSOPHY</p>
         <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl break-keep">
           소상공인과 기업의 가장 확실한 첫인상을 만듭니다.
@@ -48,44 +50,48 @@ export default function About() {
           스튜디오입니다. 복잡한 거품을 빼고, 실제 고객 문의로 이어지는 실용적인 사이트를 함께
           만듭니다.
         </p>
-      </div>
+      </Reveal>
 
       <div className="border-y border-border py-10">
         <div className="mx-auto grid max-w-3xl gap-6 px-4 sm:grid-cols-3">
-          {STAT_ITEMS.map((stat) => (
-            <div key={stat.label}>
+          {STAT_ITEMS.map((stat, i) => (
+            <FadeIn key={stat.label} direction="up" delay={i * 90}>
               <p className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">{stat.value}</p>
               <p className="mt-1 text-sm font-medium text-muted-foreground">{stat.label}</p>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </div>
 
       <div className="mx-auto max-w-3xl px-4 py-14 sm:py-20">
-        <h2 className="text-2xl font-bold text-foreground">NOVERIQ이 약속하는 3가지</h2>
+        <Reveal>
+          <h2 className="text-2xl font-bold text-foreground">NOVERIQ이 약속하는 3가지</h2>
+        </Reveal>
         <div className="mt-8 divide-y divide-border border-t border-border">
-          {CORE_VALUES.map((item) => (
-            <div key={item.num} className="grid gap-3 py-8 sm:grid-cols-12 sm:gap-6">
-              <div className="sm:col-span-4">
-                <span className="font-mono text-3xl font-bold text-primary/25">{item.num}</span>
-                <h3 className="mt-1 text-lg font-bold text-foreground break-keep">{item.title}</h3>
+          {CORE_VALUES.map((item, i) => (
+            <FadeIn key={item.num} direction="left" delay={i * 150} className="py-8">
+              <div className="grid gap-3 sm:grid-cols-12 sm:gap-6">
+                <div className="sm:col-span-4">
+                  <span className="font-mono text-3xl font-bold text-primary/25">{item.num}</span>
+                  <h3 className="mt-1 text-lg font-bold text-foreground break-keep">{item.title}</h3>
+                </div>
+                <div className="sm:col-span-8">
+                  <p className="text-sm leading-relaxed text-muted-foreground break-keep">{item.desc}</p>
+                  <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-1.5">
+                    {item.points.map((pt) => (
+                      <li key={pt} className="text-xs font-medium text-foreground/80 break-keep">
+                        · {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="sm:col-span-8">
-                <p className="text-sm leading-relaxed text-muted-foreground break-keep">{item.desc}</p>
-                <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-1.5">
-                  {item.points.map((pt) => (
-                    <li key={pt} className="text-xs font-medium text-foreground/80 break-keep">
-                      · {pt}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </div>
 
-      <div className="border-t border-border bg-secondary/30 py-16 text-center sm:py-20">
+      <Reveal className="border-t border-border bg-secondary/30 py-16 text-center sm:py-20">
         <div className="mx-auto max-w-md px-4">
           <h2 className="text-2xl font-bold text-foreground break-keep">
             어떤 홈페이지가 필요한지 고민되시나요?
@@ -109,7 +115,7 @@ export default function About() {
             </Button>
           </div>
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

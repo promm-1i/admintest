@@ -2,11 +2,12 @@ import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { NAVER_BLOG_URL } from "@/lib/contact";
+import { RevealScale } from "@/pages/services/previewKit";
 
 export function BlogTeaserSection() {
   return (
     <section className="px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto max-w-4xl rounded-2xl border border-border bg-secondary/30 p-8 sm:p-12 text-center">
+      <RevealScale className="mx-auto max-w-4xl rounded-2xl border border-border bg-secondary/30 p-8 sm:p-12 text-center">
         <SectionHeader
           label="BLOG"
           align="center"
@@ -21,7 +22,7 @@ export function BlogTeaserSection() {
             </a>
           </Button>
         </div>
-      </div>
+      </RevealScale>
     </section>
   );
 }

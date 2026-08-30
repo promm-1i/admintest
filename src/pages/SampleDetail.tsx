@@ -25,6 +25,7 @@ import { InteriorPreview } from "@/components/samples/InteriorPreview";
 import { CleaningPreview } from "@/components/samples/CleaningPreview";
 import { CorporatePreview } from "@/components/samples/CorporatePreview";
 import { ExternalSitePreview } from "@/components/samples/ExternalSitePreview";
+import { Reveal, RevealScale } from "@/pages/services/previewKit";
 
 export default function SampleDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -163,7 +164,7 @@ export default function SampleDetail() {
           </div>
 
           {/* Interactive Live Website Frame Wrapper */}
-          <div className="flex justify-center transition-all duration-300">
+          <RevealScale className="flex justify-center">
             <div
               className={`w-full transition-all duration-500 ${
                 device === "mobile" ? "max-w-md my-4 shadow-2xl rounded-2xl border-4 border-slate-800" : "max-w-full"
@@ -171,25 +172,27 @@ export default function SampleDetail() {
             >
               {renderSamplePreview()}
             </div>
-          </div>
+          </RevealScale>
         </div>
       ) : (
         /* Plan Overview Tab */
         <div className="mt-8 space-y-8">
-          <p className="text-sm leading-relaxed text-muted-foreground max-w-3xl break-keep">
-            {sample.purpose}
-          </p>
+          <Reveal>
+            <p className="text-sm leading-relaxed text-muted-foreground max-w-3xl break-keep">
+              {sample.purpose}
+            </p>
+          </Reveal>
 
-          <div className="rounded-xl border border-border bg-card p-6 shadow-xs">
+          <Reveal delay={80} className="rounded-xl border border-border bg-card p-6 shadow-xs">
             <ImagePlaceholder
               src={sample.image}
               ratio="wide"
               label={`${sample.industry} 포트폴리오 대표 이미지`}
             />
-          </div>
+          </Reveal>
 
           <div className="grid gap-8 border-t border-border pt-8 md:grid-cols-2">
-            <div>
+            <Reveal delay={140}>
               <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">주요 구성 및 특징</h2>
               <ul className="mt-4 space-y-2.5 text-sm">
                 {sample.features.map((f) => (
@@ -199,12 +202,12 @@ export default function SampleDetail() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </Reveal>
 
-            <div className="md:border-l md:border-border md:pl-8">
+            <Reveal delay={200} className="md:border-l md:border-border md:pl-8">
               <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground/70">추천 대상</h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep">{sample.idealFor}</p>
-            </div>
+            </Reveal>
           </div>
         </div>
       )}

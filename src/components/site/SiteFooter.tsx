@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ExternalLink, Lock } from "lucide-react";
 import { PHONE_TEL_HREF, NAVER_BLOG_URL } from "@/lib/contact";
+import { Logo } from "@/components/site/Logo";
 
 const FOOTER_GROUPS = [
   {
@@ -46,7 +47,8 @@ export function SiteFooter() {
     <footer className="mt-20 border-t border-border bg-secondary/40">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-2">
-          <p className="text-base font-semibold text-foreground">NOVERIQ (노베릭)</p>
+          <Logo wordmarkClassName="text-lg" />
+          <p className="mt-1 text-xs text-muted-foreground">노베릭</p>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
             소상공인과 기업을 위한 맞춤형 홈페이지 제작 스튜디오입니다.
           </p>

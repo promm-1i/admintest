@@ -4,6 +4,7 @@ import { Menu, X, Send, ArrowRight, ChevronDown, ExternalLink } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { MegaMenuPanel } from "@/components/site/MegaMenuPanel";
+import { Logo } from "@/components/site/Logo";
 import { HEADER_NAV, type NavDropdownEntry } from "@/components/site/navData";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
@@ -78,13 +79,8 @@ export function SiteHeader() {
       )}
     >
       <div className="relative flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
-        <Link to="/" className="flex items-center text-lg font-semibold tracking-tight">
-          NOVER
-          <span
-            aria-hidden="true"
-            className="mx-[3px] inline-block h-[0.85em] w-[3px] rounded-sm bg-primary"
-          />
-          IQ
+        <Link to="/" className="flex items-center">
+          <Logo wordmarkClassName="text-xl sm:text-2xl" />
         </Link>
 
         <nav

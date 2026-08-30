@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Link2, BookOpen, PenLine, Bug, FilePlus, Puzzle, Paintbrush, MessagesSquare } from "lucide-react";
 import { SectionHeader } from "@/components/sections/SectionHeader";
+import { FadeIn } from "@/components/ui/FadeIn";
 
 const SUPPORT_ITEMS = [
   { icon: Link2, label: "도메인 연결" },
@@ -24,15 +25,16 @@ export function SupportSection() {
         />
 
         <ul className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {SUPPORT_ITEMS.map((item) => {
+          {SUPPORT_ITEMS.map((item, i) => {
             const Icon = item.icon;
             return (
-              <li
-                key={item.label}
-                className="flex items-center gap-2.5 rounded-lg border border-border bg-card px-4 py-3.5 text-sm font-medium text-foreground shadow-xs break-keep"
-              >
-                <Icon className="h-4 w-4 shrink-0 text-primary" />
-                {item.label}
+              <li key={item.label}>
+                <FadeIn delay={i * 50} direction="up">
+                  <div className="flex items-center gap-2.5 rounded-lg border border-border bg-card px-4 py-3.5 text-sm font-medium text-foreground shadow-xs break-keep">
+                    <Icon className="h-4 w-4 shrink-0 text-primary" />
+                    {item.label}
+                  </div>
+                </FadeIn>
               </li>
             );
           })}
