@@ -70,15 +70,49 @@ export default function WebSolutions() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-14">
-      <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
-        CUSTOM BY INDUSTRY
-      </p>
-      <h1 className="mt-3 text-3xl font-semibold">업종별 맞춤 홈페이지 제작</h1>
+      <div className="flex items-center gap-2">
+        <span className="rounded-full border border-primary/40 bg-primary/[0.07] px-3 py-1 text-[11px] font-bold tracking-wide text-primary">
+          PREMIUM LINE
+        </span>
+        <p className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground">
+          CUSTOM BY INDUSTRY
+        </p>
+      </div>
+      <h1 className="mt-4 text-3xl font-semibold break-keep">
+        업종별 맞춤 홈페이지 제작
+      </h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        업종에 맞게 바로 쓰는 맞춤형 홈페이지를 만듭니다. 렌트카, 부동산처럼 고객 문의와 관리
-        기능이 중요한 업종에 맞춰 홈페이지와 관리자 시스템을 함께 구축하며, 정확한 기능 구성과
-        견적은 상담 후 맞춤 확정됩니다.
+        정해진 템플릿을 고르는 것이 아니라, 업종의 업무 방식에 맞춰 화면과 기능을 처음부터 설계하는
+        프리미엄 라인입니다. 반응형 제작과 관리자 시스템, 데이터베이스까지 모두 기본으로 포함되며,
+        정확한 기능 구성과 견적은 상담 후 확정됩니다.
       </p>
+
+      {/* 템플릿형과의 차이 */}
+      <div className="mt-8 grid gap-4 sm:grid-cols-2">
+        <div className="rounded-2xl border border-border bg-secondary/30 p-5">
+          <p className="text-xs font-bold text-muted-foreground">템플릿형</p>
+          <p className="mt-1.5 text-sm font-semibold text-foreground">완성된 디자인을 골라 빠르게</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
+            이미 만들어 둔 디자인에 문구·이미지를 적용해 빠르고 합리적으로 시작합니다. 반응형은
+            선택해서 추가할 수 있습니다.
+          </p>
+          <Link
+            to="/templates"
+            className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
+          >
+            템플릿 보기 · 64만 원부터
+          </Link>
+        </div>
+        <div className="rounded-2xl border border-primary/40 bg-primary/[0.04] p-5">
+          <p className="text-xs font-bold text-primary">맞춤형 · 프리미엄</p>
+          <p className="mt-1.5 text-sm font-semibold text-foreground">업무 방식에 맞춰 처음부터</p>
+          <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
+            화면 구성과 기능을 직접 설계합니다. 반응형 제작과 관리자 시스템, 데이터베이스, 직원 권한
+            관리까지 모두 기본으로 포함됩니다.
+          </p>
+          <p className="mt-3 text-xs font-semibold text-primary">150만 원부터</p>
+        </div>
+      </div>
 
       <h2 className="mt-12 text-xl font-semibold">업종</h2>
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -127,10 +161,10 @@ export default function WebSolutions() {
       <p className="mt-14 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
         PRICING
       </p>
-      <h2 className="mt-2 text-xl font-semibold">업종에 맞춰 처음부터 맞춤으로 구축합니다</h2>
+      <h2 className="mt-2 text-xl font-semibold">프리미엄 라인 구축 비용</h2>
       <p className="mt-2 text-sm text-muted-foreground break-keep">
         모든 구성이 반응형으로 제작되며, 구축비에 첫 해 호스팅료와 셋팅비용, 도메인 1개(1년)가 모두
-        포함됩니다.
+        포함됩니다. 반응형을 따로 추가하실 필요가 없습니다.
       </p>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
