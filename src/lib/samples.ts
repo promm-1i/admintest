@@ -196,7 +196,8 @@ export const SAMPLES: Sample[] = [
     features: ["시공 사례 관리", "평형대별 필터", "견적 문의 접수", "관리자 페이지"],
     idealFor: "시공 사례를 계속 쌓아가며 영업 자산으로 쓰고 싶은 인테리어 · 리모델링 업체",
     image: interiorSolutionImg,
-    detailHref: "/web-solutions/interior",
+    liveUrl: "https://objetbath.netlify.app/",
+    adminDemoHref: "/web-solutions/interior/demo",
   },
   {
     slug: "moving-solution",
