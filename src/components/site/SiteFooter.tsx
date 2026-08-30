@@ -58,11 +58,14 @@ export function SiteFooter() {
               <span><strong>상호명:</strong> 민트클</span>
               <span><strong>사업자등록번호:</strong> 266-07-03678</span>
             </p>
+            <p className="flex flex-wrap gap-x-4 gap-y-1">
+              <span><strong>통신판매업신고번호:</strong> 제2026-서울강남-00480호</span>
+            </p>
             <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
               <span>
                 <strong>전화:</strong>{" "}
                 <a href={PHONE_TEL_HREF} className="hover:text-foreground transition-colors">
-                  전화 문의
+                  010-4894-4905
                 </a>
               </span>
               <span><strong>이메일:</strong> 6gsmake@gmail.com</span>
