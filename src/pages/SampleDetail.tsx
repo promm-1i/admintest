@@ -30,6 +30,7 @@ import { RealEstateLandingPreview } from "@/components/samples/RealEstateLanding
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
 import { TemplateSpecPanel } from "@/components/site/TemplateSpecPanel";
 import { PricingComparison } from "@/components/site/PricingComparison";
+import { TemplateFeatureLanding } from "@/components/site/TemplateFeatureLanding";
 import { cn } from "@/lib/utils";
 
 export default function SampleDetail() {
@@ -144,7 +145,9 @@ export default function SampleDetail() {
             isTemplate ? "grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start" : "space-y-6",
           )}
         >
-          <div className="space-y-6">
+          {/* min-w-0: grid 자식의 기본 min-width:auto 때문에 미리보기 내부의 min-width(표 등)가
+              그대로 열 폭이 되어 모바일에서 가로 스크롤이 생기는 것을 막는다 */}
+          <div className="min-w-0 space-y-6">
           {/* Device Frame Controls & Info Banner */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border bg-secondary/30 px-5 py-3.5">
             {sample.liveUrl ? (
@@ -249,11 +252,14 @@ export default function SampleDetail() {
         </div>
       )}
 
-      {/* 템플릿 요금제 비교 (템플릿 상세에서만) */}
+      {/* 템플릿 기능 소개 랜딩 + 요금제 비교 (템플릿 상세에서만) */}
       {isTemplate && (
-        <Reveal className="mt-16 rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8">
-          <PricingComparison />
-        </Reveal>
+        <>
+          <TemplateFeatureLanding sample={sample} />
+          <Reveal className="mt-16 rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8">
+            <PricingComparison />
+          </Reveal>
+        </>
       )}
 
       {/* Bottom CTA Box */}
