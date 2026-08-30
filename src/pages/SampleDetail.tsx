@@ -37,12 +37,20 @@ export default function SampleDetail() {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   usePageTitle(
-    sample ? `${sample.industry} 실시간 미리보기 — NOVERIQ` : "포트폴리오를 찾을 수 없습니다 — NOVERIQ",
+    sample
+      ? sample.industryKey
+        ? `${sample.title} — NOVERIQ`
+        : `${sample.industry} 실시간 미리보기 — NOVERIQ`
+      : "포트폴리오를 찾을 수 없습니다 — NOVERIQ",
     sample?.purpose,
   );
 
   if (!sample) return <NotFound />;
   if (sample.detailHref) return <Navigate to={sample.detailHref} replace />;
+
+  // 템플릿 항목은 포트폴리오가 아니라 /templates 목록에서 넘어오므로 되돌아가는 링크도 그쪽으로 보낸다.
+  const isTemplate = Boolean(sample.industryKey);
+  const templateStyle = sample.type.includes("landing-template") ? "landing-template" : "basic-template";
 
   const renderSamplePreview = () => {
     if (sample.liveUrl) return <ExternalSitePreview url={sample.liveUrl} />;
@@ -75,10 +83,11 @@ export default function SampleDetail() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-6">
         <div>
           <Link
-            to="/samples"
+            to={isTemplate ? `/templates?style=${templateStyle}` : "/samples"}
             className="inline-flex items-center text-xs font-semibold text-primary hover:underline mb-2"
           >
-            <ArrowLeft className="h-3.5 w-3.5 mr-1" /> 전체 포트폴리오 목록으로
+            <ArrowLeft className="h-3.5 w-3.5 mr-1" />
+            {isTemplate ? "전체 템플릿 목록으로" : "전체 포트폴리오 목록으로"}
           </Link>
           <div className="flex items-center gap-2">
             <span className="rounded bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">
@@ -249,7 +258,9 @@ export default function SampleDetail() {
           {/* Bottom row: 포트폴리오 다시보기 / 목록 */}
           <div className="mt-1 flex justify-center">
             <Button asChild variant="ghost" size="lg" className="font-semibold text-muted-foreground hover:text-foreground">
-              <Link to="/samples">다른 포트폴리오 보기</Link>
+              <Link to={isTemplate ? `/templates?style=${templateStyle}` : "/samples"}>
+                {isTemplate ? "다른 템플릿 보기" : "다른 포트폴리오 보기"}
+              </Link>
             </Button>
           </div>
         </div>

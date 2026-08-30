@@ -254,17 +254,27 @@ export const PORTFOLIO_FILTERS = [
   { label: "리뉴얼", value: "renewal" },
 ];
 
-/** /templates 페이지의 업종 필터 — industryKey가 있는(=실제 템플릿인) 항목만 대상으로 한다. */
+/**
+ * 업종 key → 표시 라벨. 새 업종 템플릿을 추가할 때 여기에 라벨을 넣고 SAMPLES 항목에
+ * industryKey를 지정하면, /templates 업종 필터에 자동으로 칩이 하나 늘어난다.
+ */
+const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
+  "real-estate": "부동산",
+  rentcar: "렌트카",
+  hospital: "병원·의원",
+  academy: "학원",
+  interior: "인테리어·리모델링",
+  moving: "이사·청소업체",
+  restaurant: "음식점·카페",
+  corporate: "기업·브랜드",
+};
+
+/** 실제로 템플릿이 존재하는 업종만 필터로 노출한다 (준비 안 된 업종 칩을 띄우지 않는다). */
 export const TEMPLATE_INDUSTRY_FILTERS = [
   { label: "전체", value: "all" },
-  { label: "부동산", value: "real-estate" },
-  { label: "렌트카", value: "rentcar" },
-  { label: "병원·의원", value: "hospital" },
-  { label: "학원", value: "academy" },
-  { label: "인테리어·리모델링", value: "interior" },
-  { label: "이사·청소업체", value: "moving" },
-  { label: "음식점·카페", value: "restaurant" },
-  { label: "기업·브랜드", value: "corporate" },
+  ...Object.entries(TEMPLATE_INDUSTRY_LABELS)
+    .filter(([key]) => SAMPLES.some((s) => s.industryKey === key))
+    .map(([value, label]) => ({ label, value })),
 ];
 
 export function getSampleBySlug(slug: string): Sample | undefined {
