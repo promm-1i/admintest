@@ -5,6 +5,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { PRODUCT_TYPES, ADDONS, PRICING_NOTE } from "@/lib/pricing";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { Reveal } from "@/pages/services/previewKit";
+import { PricingComparison } from "@/components/site/PricingComparison";
 
 const EXTRA_FEATURES = [
   ...ADDONS.map((a) => ({ name: a.name, price: a.price })),
@@ -190,9 +191,14 @@ export default function PriceLanding() {
       </div>
 
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
-        {/* 가격 비교표 */}
+        {/* 템플릿 요금제 4구조 비교 */}
         <Reveal>
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">한눈에 보는 가격 비교</h2>
+          <PricingComparison />
+        </Reveal>
+
+        {/* 제작 방식별 가격 비교 */}
+        <Reveal className="mt-20">
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식별 비교</h2>
         </Reveal>
         <Reveal delay={100} className="mt-8 overflow-x-auto rounded-xl border border-border">
           <table className="w-full min-w-[640px] border-collapse text-base">
@@ -217,7 +223,7 @@ export default function PriceLanding() {
               ))}
               <tr className="border-t border-border bg-secondary/30">
                 <td className="p-5 text-lg font-bold text-foreground">가격</td>
-                <td className="p-5 text-lg font-bold text-primary">40만 원~</td>
+                <td className="p-5 text-lg font-bold text-primary">64만 원~</td>
                 <td className="p-5 text-lg font-bold text-primary">100만 원~</td>
                 <td className="p-5 text-lg font-bold text-primary">상담 후 견적</td>
               </tr>

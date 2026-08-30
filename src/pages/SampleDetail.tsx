@@ -28,6 +28,9 @@ import { ExternalSitePreview } from "@/components/samples/ExternalSitePreview";
 import { RealEstateBasicPreview } from "@/components/samples/RealEstateBasicPreview";
 import { RealEstateLandingPreview } from "@/components/samples/RealEstateLandingPreview";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
+import { TemplateSpecPanel } from "@/components/site/TemplateSpecPanel";
+import { PricingComparison } from "@/components/site/PricingComparison";
+import { cn } from "@/lib/utils";
 
 export default function SampleDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -78,7 +81,13 @@ export default function SampleDetail() {
   };
 
   return (
-    <div className="mx-auto max-w-6xl px-4 sm:px-6 py-10 lg:py-16">
+    <div
+      className={cn(
+        "mx-auto py-10 lg:py-14",
+        // 템플릿은 실제 화면을 크게 보여주는 게 목적이라 좌우 여백을 최대한 줄인다.
+        isTemplate ? "max-w-[1720px] px-3 sm:px-5 lg:px-8" : "max-w-6xl px-4 sm:px-6",
+      )}
+    >
       {/* Top Breadcrumb Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-6">
         <div>
@@ -129,7 +138,13 @@ export default function SampleDetail() {
 
       {/* Main Content Area */}
       {viewTab === "preview" ? (
-        <div className="mt-8 space-y-6">
+        <div
+          className={cn(
+            "mt-8",
+            isTemplate ? "grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start" : "space-y-6",
+          )}
+        >
+          <div className="space-y-6">
           {/* Device Frame Controls & Info Banner */}
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border bg-secondary/30 px-5 py-3.5">
             {sample.liveUrl ? (
@@ -188,6 +203,13 @@ export default function SampleDetail() {
               {renderSamplePreview()}
             </div>
           </RevealScale>
+          </div>
+
+          {isTemplate && (
+            <div className="xl:sticky xl:top-24">
+              <TemplateSpecPanel sample={sample} />
+            </div>
+          )}
         </div>
       ) : (
         /* Plan Overview Tab */
@@ -225,6 +247,13 @@ export default function SampleDetail() {
             </Reveal>
           </div>
         </div>
+      )}
+
+      {/* 템플릿 요금제 비교 (템플릿 상세에서만) */}
+      {isTemplate && (
+        <Reveal className="mt-16 rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8">
+          <PricingComparison />
+        </Reveal>
       )}
 
       {/* Bottom CTA Box */}
