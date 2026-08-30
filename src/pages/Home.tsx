@@ -17,7 +17,7 @@ import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 export default function Home() {
   usePageTitle(
     "NOVERIQ — 소상공인·기업 홈페이지 제작",
-    "소상공인과 기업을 위한 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다.",
+    "홈페이지부터 플랫폼형 웹까지, 기획·디자인·개발·관리를 한 번에. 업종 전용 기능과 관리자 시스템까지 직접 설계·구축하는 웹 스튜디오입니다.",
   );
 
   return (

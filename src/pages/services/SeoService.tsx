@@ -17,7 +17,7 @@ const APPLIED_ITEMS = [
 ];
 
 const TITLE_EXAMPLES = [
-  { title: "NOVERIQ — 소상공인·기업 홈페이지 제작", desc: "소상공인과 기업을 위한 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다." },
+  { title: "NOVERIQ — 소상공인·기업 홈페이지 제작", desc: "홈페이지부터 플랫폼형 웹까지, 기획·디자인·개발·관리를 한 번에 진행하는 웹 스튜디오입니다." },
   { title: "제작 방법 — NOVERIQ", desc: "홈페이지 제작 의뢰 시 상담부터 배포까지 실제로 어떻게 진행되는지 단계별로 안내합니다." },
   { title: "공지사항 — NOVERIQ", desc: "NOVERIQ의 서비스 안내, 일정 변경 등 소식을 확인하세요." },
 ];
@@ -193,7 +193,7 @@ export default function SeoService() {
               <p className="text-sm text-muted-foreground">www.noveriq.co.kr</p>
               <p className="mt-1.5 text-xl text-[#1a0dab] break-keep">NOVERIQ — 소상공인·기업 홈페이지 제작</p>
               <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">
-                소상공인과 기업을 위한 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다.
+                홈페이지부터 플랫폼형 웹까지, 기획·디자인·개발·관리를 한 번에 진행하는 웹 스튜디오입니다.
               </p>
               <div className="mt-4 flex flex-wrap gap-3 border-t border-border pt-4 text-xs text-muted-foreground">
                 <span>↑ 파란 글씨 = title</span>
