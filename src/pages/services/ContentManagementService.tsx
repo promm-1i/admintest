@@ -152,14 +152,14 @@ function PublishToggleLoop() {
 
 export default function ContentManagementService() {
   usePageTitle(
-    "콘텐츠 관리 — MintCL",
+    "콘텐츠 관리 — NOVERIQ",
     "공지사항, 상품, 매물 같은 홈페이지 콘텐츠를 관리자가 직접 등록·수정하는 구조를 확인하세요.",
   );
 
   return (
     <div>
       {/* 히어로 */}
-      <div className="mx-auto max-w-3xl px-4 pb-4 pt-14 text-center sm:pt-20">
+      <div className="mx-auto max-w-5xl px-4 pb-4 pt-14 text-center sm:pt-20">
         <p className="mx-auto flex w-fit items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
           <FileText className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 콘텐츠 관리
@@ -169,7 +169,7 @@ export default function ContentManagementService() {
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
           공지사항, 상품, 매물처럼 자주 바뀌는 콘텐츠를 관리자가 직접 작성·수정하고 공개 여부까지
-          결정합니다. 아래는 실제 MintCL 관리자 화면의 공지 작성 구조와, 그 결과가 반영되는 실제
+          결정합니다. 아래는 실제 NOVERIQ 관리자 화면의 공지 작성 구조와, 그 결과가 반영되는 실제
           공지사항 페이지입니다.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -193,7 +193,7 @@ export default function ContentManagementService() {
 
       {/* 세로 Before/After: 작성 → 반영 (확대) */}
       <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-6xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">관리자 → 홈페이지</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">작성한 그대로, 공지사항 페이지에 반영됩니다</h2>
@@ -223,7 +223,7 @@ export default function ContentManagementService() {
 
           <RevealScale delay={400}>
             <p className="mb-3 font-mono text-xs font-bold text-primary">03 · 실제 /notices 페이지에 노출</p>
-            <BrowserFrame label="mintcl.app/notices" heightClassName="h-auto">
+            <BrowserFrame label="noveriq.app/notices" heightClassName="h-auto">
               <div className="p-1">
                 <PublishedNoticesPreview />
               </div>
@@ -246,7 +246,7 @@ export default function ContentManagementService() {
 
       {/* 관리 가능한 콘텐츠 범위 */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
               <Layers className="h-3.5 w-3.5" />
@@ -271,7 +271,7 @@ export default function ContentManagementService() {
 
       {/* 업종별 활용 */}
       <div className="border-t border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">업종마다 관리하는 콘텐츠가 다릅니다</h2>
@@ -289,7 +289,7 @@ export default function ContentManagementService() {
 
       {/* 이런 경우 추천합니다 */}
       <Reveal className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
           <div className="mt-8 space-y-4">

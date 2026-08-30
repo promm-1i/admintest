@@ -6,7 +6,7 @@ import { RentcarAdminDemo } from "@/pages/solutions/RentcarAdminDemo";
 
 export default function RentcarAdminDemoPage() {
   usePageTitle(
-    "렌트카 관리자 데모 — MintCL",
+    "렌트카 관리자 데모 — NOVERIQ",
     "렌트카 맞춤형 홈페이지의 관리자 기능을 직접 체험해볼 수 있는 데모 페이지입니다.",
   );
 

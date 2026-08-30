@@ -14,7 +14,7 @@ export default function Samples() {
   const [selectedType, setSelectedType] = useState("all");
 
   usePageTitle(
-    "업종별 포트폴리오 — MintCL",
+    "업종별 포트폴리오 — NOVERIQ",
     "병원, 뷰티샵, 식당 등 업종별 홈페이지 제작 포트폴리오를 확인하세요.",
   );
 
@@ -39,8 +39,8 @@ export default function Samples() {
 
   return (
     <div className="mx-auto max-w-[1536px] px-4 py-14">
-      <h1 className="text-3xl font-semibold">업종별 포트폴리오</h1>
-      <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+      <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">업종별 포트폴리오</h1>
+      <p className="mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
         업종별로 실제 홈페이지 제작 시 자주 요청되는 구성을 포트폴리오로 정리했습니다. 원하시는
         업종이 없어도 상담을 통해 맞춤 구성으로 제작해 드립니다.
       </p>

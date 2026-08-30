@@ -32,19 +32,19 @@ const STAT_ITEMS = [
 
 export default function About() {
   usePageTitle(
-    "민트클 소개 — MintCL",
-    "소상공인과 기업을 위한 민트클의 홈페이지 제작 철학과 신뢰 가치를 소개합니다.",
+    "노베릭 소개 — NOVERIQ",
+    "소상공인과 기업을 위한 노베릭의 홈페이지 제작 철학과 신뢰 가치를 소개합니다.",
   );
 
   return (
     <div>
       <div className="mx-auto max-w-3xl px-4 pb-10 pt-14 sm:pt-20">
-        <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">MINTCL PHILOSOPHY</p>
+        <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">NOVERIQ PHILOSOPHY</p>
         <h1 className="mt-4 text-3xl font-bold leading-tight tracking-tight text-foreground sm:text-4xl break-keep">
           소상공인과 기업의 가장 확실한 첫인상을 만듭니다.
         </h1>
         <p className="mt-5 text-base leading-relaxed text-muted-foreground break-keep">
-          MintCL은 블로그나 SNS만으로는 부족했던 비즈니스의 신뢰감을 채워주는 맞춤형 홈페이지 제작
+          NOVERIQ은 블로그나 SNS만으로는 부족했던 비즈니스의 신뢰감을 채워주는 맞춤형 홈페이지 제작
           스튜디오입니다. 복잡한 거품을 빼고, 실제 고객 문의로 이어지는 실용적인 사이트를 함께
           만듭니다.
         </p>
@@ -62,7 +62,7 @@ export default function About() {
       </div>
 
       <div className="mx-auto max-w-3xl px-4 py-14 sm:py-20">
-        <h2 className="text-2xl font-bold text-foreground">MintCL이 약속하는 3가지</h2>
+        <h2 className="text-2xl font-bold text-foreground">NOVERIQ이 약속하는 3가지</h2>
         <div className="mt-8 divide-y divide-border border-t border-border">
           {CORE_VALUES.map((item) => (
             <div key={item.num} className="grid gap-3 py-8 sm:grid-cols-12 sm:gap-6">

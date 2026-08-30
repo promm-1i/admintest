@@ -156,7 +156,7 @@ function calculateCommission(deal: CalculatorDeal, amountManwon: number, deposit
 export default function RealEstateCustomerSitePage() {
   usePageTitle(
     "부동산 샘플 (데모)",
-    "MintCL 부동산 매물관리 웹 솔루션으로 구축한 고객용 홈페이지 데모입니다.",
+    "NOVERIQ 부동산 매물관리 웹 솔루션으로 구축한 고객용 홈페이지 데모입니다.",
   );
 
   const { listings, setInquiries, logActivity } = useRealEstateAdmin();
@@ -274,7 +274,7 @@ export default function RealEstateCustomerSitePage() {
             </div>
             <div>
               <p className="text-sm font-bold leading-tight">부동산 샘플</p>
-              <p className="text-[11px] text-muted-foreground">MintCL 웹 솔루션 데모</p>
+              <p className="text-[11px] text-muted-foreground">NOVERIQ 웹 솔루션 데모</p>
             </div>
           </Link>
           <nav className="hidden items-center gap-6 text-sm font-medium text-muted-foreground lg:flex">
@@ -557,7 +557,7 @@ export default function RealEstateCustomerSitePage() {
 
       <footer className="border-t border-border bg-secondary/30 px-4 py-8 text-center text-xs text-muted-foreground">
         <p>부동산 샘플 (데모) · 070-8098-8054</p>
-        <p className="mt-1">MintCL 웹 솔루션으로 구축 가능한 고객용 홈페이지 예시입니다.</p>
+        <p className="mt-1">NOVERIQ 웹 솔루션으로 구축 가능한 고객용 홈페이지 예시입니다.</p>
       </footer>
 
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 px-3 py-2 backdrop-blur lg:hidden">

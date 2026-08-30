@@ -34,7 +34,7 @@ export default function SampleDetail() {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   usePageTitle(
-    sample ? `${sample.industry} 실시간 미리보기 — MintCL` : "포트폴리오를 찾을 수 없습니다 — MintCL",
+    sample ? `${sample.industry} 실시간 미리보기 — NOVERIQ` : "포트폴리오를 찾을 수 없습니다 — NOVERIQ",
     sample?.purpose,
   );
 
@@ -214,7 +214,7 @@ export default function SampleDetail() {
           이 구성과 스타일로 제작을 원하시나요?
         </h3>
         <p className="text-xs sm:text-sm text-muted-foreground max-w-xl mx-auto break-keep">
-          원하시는 문구, 로고, 색상, 메뉴 구성을 전달해 주시면 민트클에서 빠르게 맞춤 제작해 드립니다.
+          원하시는 문구, 로고, 색상, 메뉴 구성을 전달해 주시면 노베릭에서 빠르게 맞춤 제작해 드립니다.
         </p>
         <div className="pt-2 flex flex-col items-center gap-3">
           {/* Top row: 제작상담 & 카카오톡 */}

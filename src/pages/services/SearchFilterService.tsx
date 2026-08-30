@@ -58,7 +58,7 @@ function CyclingHeroCounter() {
 
 export default function SearchFilterService() {
   usePageTitle(
-    "검색 · 필터 기능 — MintCL",
+    "검색 · 필터 기능 — NOVERIQ",
     "조건을 선택하면 결과가 실시간으로 좁혀지는 검색·필터 기능을 실제 데모 데이터로 확인하세요.",
   );
 
@@ -75,7 +75,7 @@ function SearchFilterContent() {
   return (
     <div>
       {/* 히어로: 순환하는 큰 숫자 전환이 곧 비주얼 */}
-      <div className="mx-auto max-w-3xl px-4 pb-4 pt-14 text-center sm:pt-20">
+      <div className="mx-auto max-w-5xl px-4 pb-4 pt-14 text-center sm:pt-20">
         <p className="mx-auto flex w-fit items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
           <Search className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 검색 · 필터 기능
@@ -115,7 +115,7 @@ function SearchFilterContent() {
 
       {/* 왜 필요한가 */}
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
             <SlidersHorizontal className="h-3.5 w-3.5" />
             조건은 어떻게 설계할까
@@ -140,7 +140,7 @@ function SearchFilterContent() {
 
       {/* 실제 라이브 검색 화면 (확대) */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-5xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면</p>
             <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
@@ -156,7 +156,7 @@ function SearchFilterContent() {
               <LazyIframePreview
                 src="/web-solutions/real-estate/demo/site#listings"
                 scale={0.8}
-                title="MintCL 고객용 검색 화면 데모"
+                title="NOVERIQ 고객용 검색 화면 데모"
               />
             </BrowserFrame>
           </RevealScale>
@@ -177,7 +177,7 @@ function SearchFilterContent() {
 
       {/* 조건별 결과 변화 표 */}
       <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">조건별 결과</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">조건을 바꿀 때마다 이렇게 달라집니다</h2>
@@ -195,7 +195,7 @@ function SearchFilterContent() {
 
       {/* 업종별 활용 */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">조건은 업종마다 다르게 설계합니다</h2>
@@ -213,7 +213,7 @@ function SearchFilterContent() {
 
       {/* 이런 경우 추천합니다 */}
       <Reveal className="border-t border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
           <div className="mt-8 space-y-4">

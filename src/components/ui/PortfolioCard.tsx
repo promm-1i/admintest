@@ -28,33 +28,33 @@ export function PortfolioCard({
         />
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-7">
         <div className="flex items-center justify-between gap-2 shrink-0">
-          <span className="inline-block rounded bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">
+          <span className="inline-block rounded bg-secondary px-2.5 py-1 text-sm font-medium text-secondary-foreground">
             {sample.tag || sample.industry}
           </span>
-          <span className="text-xs text-muted-foreground">{sample.industry}</span>
+          <span className="text-sm text-muted-foreground">{sample.industry}</span>
         </div>
 
-        <h3 className="mt-3 text-lg font-semibold text-foreground transition-colors group-hover:text-primary shrink-0 break-keep">
+        <h3 className="mt-3.5 text-xl font-bold text-foreground transition-colors group-hover:text-primary shrink-0 break-keep">
           {sample.title}
         </h3>
 
-        <p className="mt-2 text-sm leading-relaxed text-muted-foreground line-clamp-3 break-keep min-h-[3.8rem]">
+        <p className="mt-2.5 text-base leading-relaxed text-muted-foreground line-clamp-3 break-keep min-h-[4.3rem]">
           {sample.purpose}
         </p>
 
         {sample.features && sample.features.length > 0 && (
-          <ul className="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-border/60">
+          <ul className="mt-4 flex flex-wrap gap-2 pt-3.5 border-t border-border/60">
             {sample.features.slice(0, 3).map((f) => (
-              <li key={f} className="text-xs text-muted-foreground">
+              <li key={f} className="text-sm text-muted-foreground">
                 · {f}
               </li>
             ))}
           </ul>
         )}
 
-        <div className="mt-auto pt-4 flex items-center justify-between text-sm font-medium text-primary border-t border-border/40">
+        <div className="mt-auto pt-4 flex items-center justify-between text-base font-medium text-primary border-t border-border/40">
           <span>포트폴리오 보기</span>
           <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </div>

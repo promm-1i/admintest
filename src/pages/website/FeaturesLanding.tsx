@@ -96,17 +96,17 @@ export default function FeaturesLanding() {
   const industry = INDUSTRY_SHOWCASES[activeIndustry];
 
   usePageTitle(
-    "기능 소개 — MintCL",
-    "MintCL 홈페이지 제작에서 구현 가능한 기본 기능, 고객 편의 기능, 관리자 기능, 확장 기능을 안내합니다.",
+    "기능 소개 — NOVERIQ",
+    "NOVERIQ 홈페이지 제작에서 구현 가능한 기본 기능, 고객 편의 기능, 관리자 기능, 확장 기능을 안내합니다.",
   );
 
   return (
     <div>
       {/* 01 Hero */}
-      <div className="mx-auto max-w-6xl px-4 pb-16 pt-14 sm:pb-24 sm:pt-20">
+      <div className="mx-auto max-w-[1400px] px-4 pb-16 pt-14 sm:px-6 sm:pb-24 sm:pt-20 lg:px-10">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
           <div className="lg:col-span-6">
-            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary motion-safe:animate-hero-text-fade">
+            <p className="text-sm font-mono font-semibold uppercase tracking-widest text-primary motion-safe:animate-hero-text-fade">
               FEATURES
             </p>
             <h1
@@ -173,7 +173,7 @@ export default function FeaturesLanding() {
 
       {/* 02 구축 수준 */}
       <div className="border-y border-border bg-secondary/30 py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <Reveal>
             <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               필요한 수준에 따라 여기까지 확장할 수 있습니다
@@ -188,7 +188,7 @@ export default function FeaturesLanding() {
               >
                 <span className="shrink-0 text-base font-bold text-foreground sm:w-40">{lvl.level}</span>
                 <div className="flex flex-wrap items-center gap-x-2 gap-y-1.5 text-sm text-muted-foreground">
-                  {lvl.prefix && <span className="rounded-full bg-primary/10 px-2.5 py-1 text-xs font-medium text-primary">{lvl.prefix}</span>}
+                  {lvl.prefix && <span className="rounded-full bg-primary/10 px-2.5 py-1 text-sm font-medium text-primary">{lvl.prefix}</span>}
                   {lvl.chain.map((step, i) => (
                     <span key={step} className="flex items-center gap-2">
                       <span className="rounded-full bg-secondary px-2.5 py-1 text-foreground">{step}</span>
@@ -202,7 +202,7 @@ export default function FeaturesLanding() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         {/* 03 기본 웹사이트 기능 */}
         <div className="border-b border-border py-16 sm:py-24">
           <div className="grid gap-10 lg:grid-cols-12">
@@ -217,7 +217,7 @@ export default function FeaturesLanding() {
               <div className="grid gap-x-8 gap-y-8 sm:grid-cols-2">
                 {BASIC_FEATURE_GROUPS.map((group) => (
                   <div key={group.title}>
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground/70">
                       {group.title}
                     </h3>
                     <ul className="mt-3 space-y-2">
@@ -309,7 +309,7 @@ export default function FeaturesLanding() {
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               홈페이지를 직접 운영할 수 있는 관리자 시스템
             </h2>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
               문의 확인부터 콘텐츠 등록, 예약·고객·직원관리까지. 필요한 업무를 하나의 관리자 화면으로
               구성할 수 있습니다.
             </p>
@@ -344,7 +344,7 @@ export default function FeaturesLanding() {
           <Reveal>
             <span className="font-mono text-5xl font-bold text-primary/25">04</span>
             <h2 className="mt-2 text-3xl font-bold text-foreground">다른 서비스와 연결할 수 있습니다</h2>
-            <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
               필요한 경우 데이터베이스, 결제, 지도, 문자, 외부 서비스까지 홈페이지와 연결해 구축할 수
               있습니다.
             </p>
@@ -373,7 +373,7 @@ export default function FeaturesLanding() {
 
           <Reveal delay={200} className="mt-14 flex flex-col items-center">
             <div className="rounded-xl border border-primary/30 bg-primary/5 px-6 py-3">
-              <span className="text-base font-bold text-foreground">MintCL 홈페이지</span>
+              <span className="text-base font-bold text-foreground">NOVERIQ 홈페이지</span>
             </div>
             <div className="h-6 w-px bg-border" />
             <div className="flex w-full max-w-2xl flex-wrap justify-center gap-x-8 gap-y-4 border-t border-border pt-0 sm:justify-between">
@@ -396,10 +396,10 @@ export default function FeaturesLanding() {
 
       {/* 07 업종별 활용 예 */}
       <div className="border-y border-border bg-secondary/30 py-16 sm:py-24">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
           <Reveal>
             <h2 className="text-3xl font-bold text-foreground">업종별 실제 활용 예</h2>
-            <p className="mt-2 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-2 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
               업종별 맞춤 제작에서는 실제 업무 흐름에 맞춰 관리자 기능이 연결됩니다.
             </p>
           </Reveal>
@@ -459,12 +459,12 @@ export default function FeaturesLanding() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-10">
         {/* 08 관리자 ↔ 홈페이지 연결 */}
         <div className="border-b border-border py-16 sm:py-24">
           <Reveal>
             <h2 className="text-3xl font-bold text-foreground">관리하면, 홈페이지에 반영됩니다</h2>
-            <p className="mt-2 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-2 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
               예를 들어 관리자가 새로운 매물을 등록하고 공개하면, 데이터가 저장되고 고객 홈페이지의 매물
               목록에 바로 표시됩니다.
             </p>
@@ -478,7 +478,7 @@ export default function FeaturesLanding() {
         <div className="py-16 sm:py-24">
           <Reveal>
             <h2 className="text-3xl font-bold text-foreground">필요한 기능만 선택하면 됩니다</h2>
-            <p className="mt-2 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-2 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
               모든 기능을 처음부터 사용할 필요는 없습니다. 사업에 필요한 페이지와 기능만 선택해 구성하며,
               향후 필요할 때 추가 기능을 확장할 수도 있습니다.
             </p>
@@ -488,7 +488,7 @@ export default function FeaturesLanding() {
             {GROWTH_STAGES.map((stage, i) => (
               <Reveal key={stage.stage} delay={i * 150} className="flex items-center gap-4 sm:flex-col sm:items-start sm:gap-0">
                 <div className="rounded-xl border border-border bg-card p-5 flex-1 sm:w-full">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70">{stage.stage}</p>
+                  <p className="text-sm font-semibold uppercase tracking-wider text-muted-foreground/70">{stage.stage}</p>
                   <ul className="mt-3 space-y-1.5">
                     {stage.items.map((item) => (
                       <li key={item} className="flex items-center gap-2 text-base font-medium text-foreground">

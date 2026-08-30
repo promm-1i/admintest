@@ -5,8 +5,8 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function Blog() {
   usePageTitle(
-    "블로그 — MintCL",
-    "MintCL의 제작 후기와 운영 팁을 전합니다.",
+    "블로그 — NOVERIQ",
+    "NOVERIQ의 제작 후기와 운영 팁을 전합니다.",
   );
 
   return (

@@ -33,7 +33,7 @@ const FEATURES = [
 
 export default function PlatformSolution() {
   usePageTitle(
-    "플랫폼형 웹서비스 — MintCL",
+    "플랫폼형 웹서비스 — NOVERIQ",
     "회원, 권한, 데이터베이스, 업무관리, API 연동을 갖춘 플랫폼형 웹서비스 구축을 안내합니다.",
   );
 

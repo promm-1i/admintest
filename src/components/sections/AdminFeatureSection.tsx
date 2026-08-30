@@ -87,7 +87,7 @@ export function AdminFeatureSection() {
                   <div className="space-y-2 text-xs">
                     <div className="flex items-center justify-between rounded bg-white/5 p-2.5">
                       <span className="truncate font-medium max-w-[200px] sm:max-w-[280px]">
-                        [공지] MintCL 홈페이지 서비스 개선 안내
+                        [공지] NOVERIQ 홈페이지 서비스 개선 안내
                       </span>
                       <span className="rounded bg-emerald-500/15 px-2 py-0.5 text-[10px] text-emerald-400 font-medium">
                         게시중

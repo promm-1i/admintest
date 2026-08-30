@@ -132,7 +132,7 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  companyName: "MintCL 이사·청소",
+  companyName: "NOVERIQ 이사·청소",
   tagline: "믿고 맡기는 포장이사 · 입주청소",
   phone: "1588-0000",
   address: "서울특별시 강남구 테헤란로 123",

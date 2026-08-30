@@ -77,7 +77,7 @@ function FeatureCell({ value }: { value: FeatureValue }) {
 
 export default function WebSolutions() {
   usePageTitle(
-    "업종별 맞춤 홈페이지 제작 — MintCL",
+    "업종별 맞춤 홈페이지 제작 — NOVERIQ",
     "부동산, 렌트카, 병원 등 업종에 맞는 관리자 시스템과 기능까지 갖춘 맞춤형 홈페이지 제작 범위와 요금을 안내합니다.",
   );
 
@@ -222,7 +222,7 @@ export default function WebSolutions() {
         <div className="rounded-2xl border border-border bg-card p-6">
           <p className="mb-2 text-sm font-medium text-foreground">호스팅 · 도메인</p>
           <p className="text-sm leading-relaxed text-muted-foreground break-keep">
-            호스팅은 MintCL이 제공합니다. 도메인만 준비해 주시면 연결해 드립니다.
+            호스팅은 NOVERIQ이 제공합니다. 도메인만 준비해 주시면 연결해 드립니다.
           </p>
         </div>
         <div className="rounded-2xl border border-border bg-card p-6">

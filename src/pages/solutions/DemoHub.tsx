@@ -6,8 +6,8 @@ import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 
 export default function DemoHub() {
   usePageTitle(
-    "업종별 데모 — MintCL",
-    "업종에 맞게 설계된 MintCL 웹 솔루션을 직접 확인해보세요. 고객 홈페이지부터 관리자 시스템까지 실제 동작하는 인터랙티브 데모를 제공합니다.",
+    "업종별 데모 — NOVERIQ",
+    "업종에 맞게 설계된 NOVERIQ 웹 솔루션을 직접 확인해보세요. 고객 홈페이지부터 관리자 시스템까지 실제 동작하는 인터랙티브 데모를 제공합니다.",
   );
 
   return (

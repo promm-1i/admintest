@@ -93,7 +93,7 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  hospitalName: "MintCL 의원",
+  hospitalName: "NOVERIQ 의원",
   tagline: "믿을 수 있는 진료, 편안한 병원",
   phone: "02-000-0000",
   address: "서울특별시 강남구 테헤란로 123",

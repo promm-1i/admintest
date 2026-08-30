@@ -99,7 +99,7 @@ export function SiteAdvancedSettingsView() {
   const [form, setForm] = useState({
     seoTitle: "부동산 샘플 — 부기사 데모",
     metaDescription: "매물 검색, 상담, 계약까지 한 곳에서 처리하는 부동산 플랫폼입니다.",
-    domain: "demo1.mintcl-realestate.co.kr",
+    domain: "demo1.noveriq-realestate.co.kr",
     ga: "",
     naverAuth: "",
     indexable: true,

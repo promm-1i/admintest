@@ -28,7 +28,7 @@ const FOOTER_GROUPS = [
     links: [
       { label: "홈페이지 템플릿", to: "/templates" },
       { label: "포트폴리오", to: "/samples" },
-      { label: "민트클 소개", to: "/about" },
+      { label: "NOVERIQ 소개", to: "/about" },
     ],
   },
   {
@@ -46,7 +46,7 @@ export function SiteFooter() {
     <footer className="mt-20 border-t border-border bg-secondary/40">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-6">
         <div className="lg:col-span-2">
-          <p className="text-base font-semibold text-foreground">MintCL (민트클)</p>
+          <p className="text-base font-semibold text-foreground">NOVERIQ (노베릭)</p>
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
             소상공인과 기업을 위한 맞춤형 홈페이지 제작 스튜디오입니다.
           </p>
@@ -101,7 +101,7 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} MintCL (민트클). All rights reserved.
+        © {new Date().getFullYear()} NOVERIQ (노베릭). All rights reserved.
         {" · "}
         <Link
           to="/auth"

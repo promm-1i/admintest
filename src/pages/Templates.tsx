@@ -20,8 +20,8 @@ export default function Templates() {
   });
 
   usePageTitle(
-    "홈페이지 템플릿 — MintCL",
-    "MintCL이 제작한 디자인을 기반으로 빠르게 시작할 수 있는 홈페이지 템플릿을 확인하세요.",
+    "홈페이지 템플릿 — NOVERIQ",
+    "NOVERIQ이 제작한 디자인을 기반으로 빠르게 시작할 수 있는 홈페이지 템플릿을 확인하세요.",
   );
 
   const filteredSamples =
@@ -45,7 +45,7 @@ export default function Templates() {
     <div className="mx-auto max-w-[1536px] px-4 py-14">
       <h1 className="text-3xl font-semibold">홈페이지 템플릿</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        MintCL이 이미 제작한 디자인 중에서 마음에 드는 스타일을 골라 빠르게 제작을 시작할 수
+        NOVERIQ이 이미 제작한 디자인 중에서 마음에 드는 스타일을 골라 빠르게 제작을 시작할 수
         있습니다. 선택한 템플릿을 기반으로 문구와 이미지, 구성을 원하는 대로 조정해 드립니다.
       </p>
 

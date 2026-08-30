@@ -12,8 +12,8 @@ import type { Course } from "./academy-admin/types";
 
 export default function AcademyCustomerSitePage() {
   usePageTitle(
-    "MintCL 학원 (데모)",
-    "MintCL 학원 맞춤형 홈페이지 웹 솔루션으로 구축한 고객용 홈페이지 데모입니다.",
+    "NOVERIQ 학원 (데모)",
+    "NOVERIQ 학원 맞춤형 홈페이지 웹 솔루션으로 구축한 고객용 홈페이지 데모입니다.",
   );
 
   const { courses, teachers, reviews, achievements, notices, siteSettings, setConsults, logActivity } = useAcademyAdmin();
@@ -223,7 +223,7 @@ export default function AcademyCustomerSitePage() {
 
       <footer className="border-t border-border bg-secondary/30 px-4 py-8 text-center text-xs text-muted-foreground">
         <p>{siteSettings.academyName} (데모) · {siteSettings.phone}</p>
-        <p className="mt-1">이 페이지는 MintCL 업종별 맞춤 홈페이지로 구축 가능한 고객용 홈페이지 예시입니다.</p>
+        <p className="mt-1">이 페이지는 NOVERIQ 업종별 맞춤 홈페이지로 구축 가능한 고객용 홈페이지 예시입니다.</p>
       </footer>
 
       <Modal open={!!selected} onClose={() => setSelected(null)} title={selected?.name ?? ""}>

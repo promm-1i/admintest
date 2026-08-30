@@ -6,7 +6,7 @@ import { RealEstateAdminDemo } from "@/pages/solutions/RealEstateAdminDemo";
 
 export default function RealEstateAdminDemoPage() {
   usePageTitle(
-    "부동산 관리자 데모 — MintCL",
+    "부동산 관리자 데모 — NOVERIQ",
     "부동산 매물관리 웹 솔루션의 관리자 기능을 직접 체험해볼 수 있는 데모 페이지입니다.",
   );
 

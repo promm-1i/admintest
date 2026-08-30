@@ -11,7 +11,7 @@ export function BlogTeaserSection() {
           label="BLOG"
           align="center"
           title="홈페이지 제작 TIP"
-          description="제작 사례와 운영 팁을 MintCL 블로그에서 확인하실 수 있습니다."
+          description="제작 사례와 운영 팁을 NOVERIQ 블로그에서 확인하실 수 있습니다."
         />
         <div className="mt-6 flex justify-center">
           <Button asChild variant="outline" className="gap-1.5 font-bold">

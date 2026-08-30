@@ -109,7 +109,7 @@ function PublicCountBadge() {
 
 export default function AdminSystemService() {
   usePageTitle(
-    "관리자 시스템 — MintCL",
+    "관리자 시스템 — NOVERIQ",
     "문의 확인부터 콘텐츠, 예약, 고객, 직원 관리까지. 실제로 구축되어 있는 관리자 시스템 데모를 직접 확인하세요.",
   );
 
@@ -119,7 +119,7 @@ export default function AdminSystemService() {
   return (
     <div>
       {/* Hero: 문제 정의 + 실제 대시보드 큰 미리보기 */}
-      <div className="mx-auto max-w-6xl px-4 pb-4 pt-14 sm:pt-20">
+      <div className="mx-auto max-w-[1400px] px-4 pb-4 pt-14 sm:pt-20">
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
           <div>
             <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
@@ -171,7 +171,7 @@ export default function AdminSystemService() {
 
       {/* 왜 필요한가 */}
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
             <PhoneOff className="h-3.5 w-3.5" />
             왜 필요한가
@@ -194,7 +194,7 @@ export default function AdminSystemService() {
       </Reveal>
 
       {/* 관리 가능한 항목 */}
-      <div className="mx-auto max-w-4xl px-4 py-14 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 py-14 sm:py-20">
         <Reveal>
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">관리 가능한 항목</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground">이런 항목을 직접 관리합니다</h2>
@@ -226,7 +226,7 @@ export default function AdminSystemService() {
 
       {/* 실제 관리자 메뉴 구조 + 실제 목록 화면 (확대) */}
       <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면에서 사용합니다</p>
             <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
@@ -281,7 +281,7 @@ export default function AdminSystemService() {
 
       {/* 관리자 ↔ 고객 화면 연결 */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
               관리자와 고객 화면의 연결
@@ -321,7 +321,7 @@ export default function AdminSystemService() {
                 <LazyIframePreview
                   src="/web-solutions/real-estate/demo/site"
                   scale={0.5}
-                  title="MintCL 고객용 홈페이지 데모"
+                  title="NOVERIQ 고객용 홈페이지 데모"
                 />
               </BrowserFrame>
             </RevealScale>
@@ -331,7 +331,7 @@ export default function AdminSystemService() {
 
       {/* 업종별 활용 */}
       <div className="border-t border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-4xl px-4">
+        <div className="mx-auto max-w-6xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">업종에 맞게 관리자 화면을 다르게 구성합니다</h2>
@@ -364,7 +364,7 @@ export default function AdminSystemService() {
 
       {/* 커스터마이징 가능한 범위 */}
       <Reveal className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground">필요한 범위만 골라서 구축할 수 있습니다</h2>
           <div className="mt-8 space-y-4">

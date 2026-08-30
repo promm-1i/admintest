@@ -29,6 +29,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
+import { Reveal } from "@/pages/services/previewKit";
 
 const STEPS = [
   {
@@ -82,7 +83,7 @@ const REQUIRED_MATERIALS = [
   },
   {
     title: "홈페이지 메뉴",
-    desc: '예: "회사소개 / 서비스 / 포트폴리오 / 고객센터 / 문의하기". 정해진 메뉴가 없다면 MintCL에서 기본 구성을 제안해드립니다.',
+    desc: '예: "회사소개 / 서비스 / 포트폴리오 / 고객센터 / 문의하기". 정해진 메뉴가 없다면 NOVERIQ에서 기본 구성을 제안해드립니다.',
   },
   {
     title: "서비스 및 상품 자료",
@@ -165,142 +166,154 @@ const ADMIN_EXAMPLES = [
 
 export default function ProcessLanding() {
   usePageTitle(
-    "제작 방법 — MintCL",
+    "제작 방법 — NOVERIQ",
     "홈페이지 제작 의뢰 시 상담부터 배포까지 실제로 어떻게 진행되는지 단계별로 안내합니다.",
   );
 
   return (
     <div>
-      <div className="mx-auto max-w-4xl px-4 py-14">
-        <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">HOW WE BUILD</p>
-        <h1 className="mt-3 text-3xl font-semibold">홈페이지 제작은 이렇게 진행됩니다.</h1>
-        <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-          처음 홈페이지를 제작하는 경우에도 필요한 페이지와 기능부터 함께 정리해드립니다. 상담부터
-          디자인, 개발, 검수, 배포까지 단계별로 진행합니다.
-        </p>
-        <div className="mt-6">
-          <Button asChild size="lg" className="gap-2 font-bold">
-            <Link to="/contact">
-              <Send className="h-4 w-4" />
-              제작 상담하기
-            </Link>
-          </Button>
-        </div>
+      <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
+        <Reveal>
+          <p className="text-sm font-mono font-semibold uppercase tracking-widest text-primary">HOW WE BUILD</p>
+          <h1 className="mt-4 text-5xl font-bold tracking-tight text-foreground sm:text-6xl">
+            홈페이지 제작은 이렇게 진행됩니다.
+          </h1>
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground break-keep sm:text-xl">
+            처음 홈페이지를 제작하는 경우에도 필요한 페이지와 기능부터 함께 정리해드립니다. 상담부터
+            디자인, 개발, 검수, 배포까지 단계별로 진행합니다.
+          </p>
+          <div className="mt-8">
+            <Button asChild size="lg" className="gap-2 font-bold">
+              <Link to="/contact">
+                <Send className="h-4 w-4" />
+                제작 상담하기
+              </Link>
+            </Button>
+          </div>
+        </Reveal>
 
         {/* 제작 방식 2가지 */}
-        <h2 className="mt-16 text-xl font-semibold">제작 방식 2가지</h2>
-        <div className="mt-6 grid gap-10 sm:grid-cols-2">
-          <div>
-            <h3 className="text-base font-bold text-foreground">템플릿형 홈페이지 제작</h3>
-            <p className="mt-2 text-sm font-medium text-foreground break-keep">
+        <Reveal className="mt-20">
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식 2가지</h2>
+        </Reveal>
+        <div className="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-16">
+          <Reveal delay={80}>
+            <h3 className="text-2xl font-bold text-foreground">템플릿형 홈페이지 제작</h3>
+            <p className="mt-3 text-lg font-medium text-foreground break-keep">
               검증된 디자인을 선택해 더 빠르고 합리적으로 시작합니다.
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
               미리 제작된 홈페이지 디자인을 기반으로 업체 정보, 이미지, 문구, 메뉴 등을 변경하여
               제작합니다. 처음 홈페이지를 제작하거나 복잡한 기능이 필요하지 않은 경우 적합합니다.
             </p>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-5 space-y-2.5">
               {["제작기간 단축", "비용 절감", "PC / 모바일 반응형", "원하는 업종 디자인 선택"].map((b) => (
-                <li key={b} className="flex items-start gap-2 text-sm text-foreground break-keep">
+                <li key={b} className="flex items-start gap-2.5 text-base text-foreground break-keep">
                   <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                   {b}
                 </li>
               ))}
             </ul>
-            <Link to="/templates" className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+            <Link to="/templates" className="mt-5 inline-flex items-center gap-1.5 text-base font-medium text-primary hover:underline">
               홈페이지 템플릿 보기
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
-          <div className="sm:border-l sm:border-border sm:pl-10">
-            <h3 className="text-base font-bold text-foreground">맞춤형 홈페이지 제작</h3>
-            <p className="mt-2 text-sm font-medium text-foreground break-keep">
+          </Reveal>
+          <Reveal delay={160} className="lg:border-l lg:border-border lg:pl-16">
+            <h3 className="text-2xl font-bold text-foreground">맞춤형 홈페이지 제작</h3>
+            <p className="mt-3 text-lg font-medium text-foreground break-keep">
               사업에 필요한 구조와 기능부터 새롭게 설계합니다.
             </p>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
               기존 템플릿에 맞추는 것이 아니라 업체의 서비스, 고객 흐름, 운영방식에 맞춰 홈페이지를
               제작합니다. 필요에 따라 아래 기능도 함께 구축할 수 있습니다.
             </p>
-            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2">
+            <ul className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2.5">
               {["관리자 페이지", "문의 / 예약", "상품·매물 관리", "검색 / 필터", "고객 관리", "DB 구축", "외부 API 연동"].map(
                 (b) => (
-                  <li key={b} className="flex items-start gap-2 text-sm text-foreground break-keep">
+                  <li key={b} className="flex items-start gap-2.5 text-base text-foreground break-keep">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
                     {b}
                   </li>
                 ),
               )}
             </ul>
-            <Link to="/contact" className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
+            <Link to="/contact" className="mt-5 inline-flex items-center gap-1.5 text-base font-medium text-primary hover:underline">
               맞춤 제작 문의하기
-              <ArrowRight className="h-3.5 w-3.5" />
+              <ArrowRight className="h-4 w-4" />
             </Link>
-          </div>
+          </Reveal>
         </div>
 
         {/* 제작 과정 */}
-        <h2 className="mt-20 text-xl font-semibold">홈페이지 제작은 이렇게 진행됩니다</h2>
-        <div className="mt-8 space-y-0">
+        <Reveal className="mt-24">
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">홈페이지 제작은 이렇게 진행됩니다</h2>
+        </Reveal>
+        <div className="mt-10 max-w-3xl space-y-0">
           {STEPS.map((step, i) => (
-            <div key={step.num} className="flex gap-5">
+            <Reveal key={step.num} delay={i * 90} className="flex gap-6">
               <div className="flex flex-col items-center">
-                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-primary/40 font-mono text-xs font-bold text-primary">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-primary/40 font-mono text-sm font-bold text-primary">
                   {step.num}
                 </span>
                 {i < STEPS.length - 1 && <span className="mt-1 w-px flex-1 bg-border" />}
               </div>
-              <div className="pb-10">
-                <h3 className="pt-1 text-base font-bold text-foreground">{step.title}</h3>
-                <p className="mt-1 text-sm font-medium text-foreground break-keep">{step.lede}</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground break-keep">{step.desc}</p>
+              <div className="pb-11">
+                <h3 className="pt-1.5 text-xl font-bold text-foreground">{step.title}</h3>
+                <p className="mt-1.5 text-lg font-medium text-foreground break-keep">{step.lede}</p>
+                <p className="mt-2 text-lg leading-relaxed text-muted-foreground break-keep">{step.desc}</p>
                 {step.cta && (
                   <Link
                     to={step.cta.to}
-                    className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+                    className="mt-2.5 inline-flex items-center gap-1.5 text-base font-medium text-primary hover:underline"
                   >
                     {step.cta.label}
-                    <ArrowRight className="h-3.5 w-3.5" />
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 )}
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
 
         {/* 제작 전에 필요한 자료 */}
-        <h2 className="mt-4 text-xl font-semibold">홈페이지 제작 전 준비해주세요</h2>
-        <div className="mt-6 divide-y divide-border rounded-xl border border-border bg-card">
+        <Reveal className="mt-8">
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">홈페이지 제작 전 준비해주세요</h2>
+        </Reveal>
+        <Reveal delay={80} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {REQUIRED_MATERIALS.map((m) => (
-            <div key={m.title} className="p-5">
-              <h3 className="text-sm font-semibold text-foreground">{m.title}</h3>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground break-keep">{m.desc}</p>
+            <div key={m.title} className="rounded-xl border border-border bg-card p-6">
+              <h3 className="text-lg font-semibold text-foreground">{m.title}</h3>
+              <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">{m.desc}</p>
             </div>
           ))}
-        </div>
+        </Reveal>
       </div>
 
       {/* 홈페이지 제작 시 기본적으로 고려하는 항목 */}
-      <div className="border-y border-border bg-secondary/30 py-16">
-        <div className="mx-auto max-w-4xl px-4">
-          <h2 className="text-xl font-semibold">홈페이지 제작, 이런 부분까지 함께 고려합니다</h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2">
-            {CONSIDERATION_POINTS.map((point) => {
+      <div className="border-y border-border bg-secondary/30 py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
+          <Reveal>
+            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">홈페이지 제작, 이런 부분까지 함께 고려합니다</h2>
+          </Reveal>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+            {CONSIDERATION_POINTS.map((point, i) => {
               const Icon = point.icon;
               return (
-                <div key={point.num} className="rounded-xl border border-border bg-card p-5">
+                <Reveal key={point.num} delay={i * 70} className="rounded-xl border border-border bg-card p-6">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-primary">POINT {point.num}</span>
-                    <Icon className="ml-auto h-4 w-4 text-muted-foreground/50" />
+                    <span className="font-mono text-sm font-bold text-primary">POINT {point.num}</span>
+                    <Icon className="ml-auto h-5 w-5 text-muted-foreground/50" />
                   </div>
-                  <h3 className="mt-2 text-sm font-bold text-foreground">{point.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground break-keep">{point.desc}</p>
+                  <h3 className="mt-3 text-lg font-bold text-foreground">{point.title}</h3>
+                  <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">{point.desc}</p>
                   {point.examples && (
-                    <ul className="mt-3 grid gap-2 border-t border-border/60 pt-3 sm:grid-cols-3">
+                    <ul className="mt-4 grid gap-2.5 border-t border-border/60 pt-4 sm:grid-cols-3">
                       {point.examples.map((ex) => {
                         const ExIcon = ex.icon;
                         return (
-                          <li key={ex.label} className="flex items-start gap-1.5 text-xs text-muted-foreground">
-                            <ExIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary/70" />
+                          <li key={ex.label} className="flex items-start gap-1.5 text-sm text-muted-foreground">
+                            <ExIcon className="mt-0.5 h-4 w-4 shrink-0 text-primary/70" />
                             <span>
                               <span className="font-medium text-foreground">{ex.label}</span>
                               <br />
@@ -311,7 +324,7 @@ export default function ProcessLanding() {
                       })}
                     </ul>
                   )}
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -319,11 +332,11 @@ export default function ProcessLanding() {
       </div>
 
       {/* 중간 CTA */}
-      <div className="mx-auto max-w-4xl px-4 py-16 text-center">
-        <p className="text-lg font-semibold text-foreground break-keep">
+      <Reveal className="mx-auto max-w-4xl px-4 py-16 text-center sm:py-20">
+        <p className="text-xl font-semibold text-foreground break-keep">
           어떤 홈페이지가 필요한지 아직 모르셔도 괜찮습니다.
         </p>
-        <p className="mt-2 text-sm text-muted-foreground break-keep">
+        <p className="mt-2.5 text-base text-muted-foreground break-keep">
           업종과 필요한 내용만 알려주시면 적합한 제작 방식과 예상 비용을 안내해드립니다.
         </p>
         <div className="mt-6">
@@ -334,7 +347,7 @@ export default function ProcessLanding() {
             </Link>
           </Button>
         </div>
-        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-xs text-muted-foreground">
+        <div className="mt-4 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
           <a
             href={KAKAO_CHANNEL_URL}
             target="_blank"
@@ -355,33 +368,33 @@ export default function ProcessLanding() {
             온라인 문의
           </Link>
         </div>
-      </div>
+      </Reveal>
 
       {/* 관리자 시스템 강조 영역 */}
-      <div className="bg-neutral-950 py-16 text-white sm:py-20">
-        <div className="mx-auto grid max-w-5xl gap-12 px-4 lg:grid-cols-12 lg:items-center">
+      <Reveal className="bg-neutral-950 py-16 text-white sm:py-20">
+        <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:items-center lg:px-10">
           <div className="lg:col-span-6">
             <p className="text-sm font-bold tracking-widest text-primary uppercase">ADMIN SYSTEM</p>
-            <h2 className="mt-3 text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl">
+            <h2 className="mt-3 text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
               홈페이지에서 끝나지 않습니다.
             </h2>
-            <p className="mt-2 text-base font-medium text-neutral-300">
+            <p className="mt-3 text-lg font-medium text-neutral-300">
               운영에 필요한 관리자 시스템까지 직접 구축합니다.
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-neutral-400 break-keep">
+            <p className="mt-4 text-base leading-relaxed text-neutral-400 break-keep">
               홈페이지를 만든 이후 매번 제작자에게 수정 요청을 할 필요 없이, 필요한 콘텐츠와 데이터를
               직접 관리할 수 있습니다.
             </p>
 
-            <ul className="mt-6 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+            <ul className="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3">
               {ADMIN_EXAMPLES.map((item) => {
                 const Icon = item.icon;
                 return (
                   <li
                     key={item.label}
-                    className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5 text-xs font-medium"
+                    className="flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3.5 py-3 text-sm font-medium"
                   >
-                    <Icon className="h-3.5 w-3.5 shrink-0 text-primary" />
+                    <Icon className="h-4 w-4 shrink-0 text-primary" />
                     {item.label}
                   </li>
                 );
@@ -440,18 +453,18 @@ export default function ProcessLanding() {
             </div>
           </div>
         </div>
-      </div>
+      </Reveal>
 
       {/* 마지막 상담 CTA */}
-      <div className="mx-auto max-w-4xl px-4 py-16 text-center sm:py-20">
-        <h2 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-3xl">
+      <Reveal className="mx-auto max-w-4xl px-4 py-16 text-center sm:py-20">
+        <h2 className="text-3xl font-extrabold tracking-tight text-foreground sm:text-4xl">
           이제 홈페이지 제작을 시작해보세요.
         </h2>
-        <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground break-keep">
+        <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
           간단한 소개 홈페이지부터 관리자와 DB가 연결된 맞춤형 웹사이트까지 제작할 수 있습니다. 현재
           필요한 범위에 맞춰 견적을 안내드립니다.
         </p>
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <div className="mt-7 flex flex-wrap justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold shadow-md">
             <Link to="/contact">
               <Send className="h-4 w-4" />
@@ -469,7 +482,7 @@ export default function ProcessLanding() {
             </a>
           </Button>
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

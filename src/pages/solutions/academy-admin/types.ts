@@ -124,7 +124,7 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  academyName: "MintCL 학원",
+  academyName: "NOVERIQ 학원",
   tagline: "결과로 증명하는 학습 관리",
   phone: "02-000-0000",
   address: "서울특별시 강남구 테헤란로 123",

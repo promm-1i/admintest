@@ -58,7 +58,7 @@ function DeviceFrame({
           {shouldLoad ? (
             <iframe
               src="/about"
-              title={`MintCL 소개 페이지 — ${label} 화면`}
+              title={`NOVERIQ 소개 페이지 — ${label} 화면`}
               style={{ width, height, border: 0 }}
             />
           ) : (
@@ -99,7 +99,7 @@ function BreathingPreview() {
         <span className="h-2.5 w-2.5 rounded-full bg-border" />
         <span className="h-2.5 w-2.5 rounded-full bg-border" />
         <span className="ml-2 truncate font-mono text-[11px] text-muted-foreground">
-          mintcl.app/about — 화면 폭 실시간 변화
+          noveriq.app/about — 화면 폭 실시간 변화
         </span>
       </div>
       <div className="flex justify-center bg-secondary/20 px-4 py-8">
@@ -121,14 +121,14 @@ function BreathingPreview() {
 
 export default function ResponsiveService() {
   usePageTitle(
-    "반응형 웹 제작 — MintCL",
+    "반응형 웹 제작 — NOVERIQ",
     "하나의 홈페이지가 데스크톱, 태블릿, 모바일에서 어떻게 자연스럽게 재배치되는지 실제 화면으로 확인하세요.",
   );
 
   return (
     <div>
       {/* 히어로 */}
-      <div className="mx-auto max-w-3xl px-4 pb-4 pt-14 text-center sm:pt-20">
+      <div className="mx-auto max-w-5xl px-4 pb-4 pt-14 text-center sm:pt-20">
         <p className="mx-auto flex w-fit items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
           <Smartphone className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 반응형 웹 제작
@@ -138,7 +138,7 @@ export default function ResponsiveService() {
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
           PC, 태블릿, 모바일 화면 크기에 맞춰 콘텐츠 배치와 크기가 자동으로 바뀝니다. 아래는 실제
-          MintCL 소개 페이지가 화면 폭에 따라 실시간으로 재배치되는 모습입니다.
+          NOVERIQ 소개 페이지가 화면 폭에 따라 실시간으로 재배치되는 모습입니다.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
@@ -164,7 +164,7 @@ export default function ResponsiveService() {
 
       {/* 실시간 폭 변화 */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4">
+        <div className="mx-auto max-w-5xl px-4">
           <Reveal className="mb-8 text-center">
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실시간으로 보기</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">화면 폭이 줄어들면, 이렇게 반응합니다</h2>
@@ -177,14 +177,14 @@ export default function ResponsiveService() {
 
       {/* 3단 실제 화면 비교 (확대 + annotation) */}
       <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면 비교</p>
             <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
               같은 페이지, 화면 폭에 따라 다르게 배치됩니다
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
-              세 화면 모두 실제 MintCL 소개 페이지를 기기별 논리 해상도로 그대로 불러온 결과입니다.
+              세 화면 모두 실제 NOVERIQ 소개 페이지를 기기별 논리 해상도로 그대로 불러온 결과입니다.
             </p>
           </Reveal>
 
@@ -210,7 +210,7 @@ export default function ResponsiveService() {
 
       {/* 반응형이 아니면 생기는 문제 */}
       <Reveal className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
             <AlertTriangle className="h-3.5 w-3.5" />
             반응형이 아니라면

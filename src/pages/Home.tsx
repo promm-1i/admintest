@@ -16,7 +16,7 @@ import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 
 export default function Home() {
   usePageTitle(
-    "MintCL — 소상공인·기업 홈페이지 제작",
+    "NOVERIQ — 소상공인·기업 홈페이지 제작",
     "40만 원부터 시작하는 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다.",
   );
 

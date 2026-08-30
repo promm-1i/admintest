@@ -105,14 +105,14 @@ function StatusLoopPreview() {
 
 export default function InquiryReservationService() {
   usePageTitle(
-    "문의 · 예약 관리 — MintCL",
+    "문의 · 예약 관리 — NOVERIQ",
     "홈페이지로 들어온 문의와 예약을 관리자 화면에서 확인하고 처리 상태까지 관리하는 흐름을 실제 데모로 확인하세요.",
   );
 
   return (
     <div>
       {/* 히어로 */}
-      <div className="mx-auto max-w-4xl px-4 pb-4 pt-14 text-center sm:pt-20">
+      <div className="mx-auto max-w-6xl px-4 pb-4 pt-14 text-center sm:pt-20">
         <p className="mx-auto flex w-fit items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
           <Inbox className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 문의 · 예약 관리
@@ -148,7 +148,7 @@ export default function InquiryReservationService() {
 
       {/* 왜 필요한가 */}
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
             <MessagesSquare className="h-3.5 w-3.5" />
             왜 필요한가
@@ -172,7 +172,7 @@ export default function InquiryReservationService() {
 
       {/* 3단 Flow: 접수 → 확인 → 상태 변경 (확대) */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 처리 흐름</p>
             <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
@@ -187,7 +187,7 @@ export default function InquiryReservationService() {
                 <LazyIframePreview
                   src="/web-solutions/real-estate/demo/site#contact"
                   scale={0.6}
-                  title="MintCL 고객용 문의 폼 데모"
+                  title="NOVERIQ 고객용 문의 폼 데모"
                 />
               </BrowserFrame>
             </RevealScale>
@@ -238,7 +238,7 @@ export default function InquiryReservationService() {
 
       {/* 예약 · 일정 관리 */}
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4">
           <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
             <CalendarDays className="h-3.5 w-3.5" />
             예약 · 일정도 함께
@@ -265,7 +265,7 @@ export default function InquiryReservationService() {
 
       {/* 업종별 활용 */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">업종별 활용</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">업종마다 문의 · 예약의 흐름이 다릅니다</h2>
@@ -283,7 +283,7 @@ export default function InquiryReservationService() {
 
       {/* 이런 경우 추천합니다 */}
       <Reveal className="border-t border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
           <div className="mt-8 space-y-4">

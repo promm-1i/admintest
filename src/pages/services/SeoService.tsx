@@ -17,9 +17,9 @@ const APPLIED_ITEMS = [
 ];
 
 const TITLE_EXAMPLES = [
-  { title: "MintCL — 소상공인·기업 홈페이지 제작", desc: "40만 원부터 시작하는 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다." },
-  { title: "제작 방법 — MintCL", desc: "홈페이지 제작 의뢰 시 상담부터 배포까지 실제로 어떻게 진행되는지 단계별로 안내합니다." },
-  { title: "공지사항 — MintCL", desc: "MintCL의 서비스 안내, 일정 변경 등 소식을 확인하세요." },
+  { title: "NOVERIQ — 소상공인·기업 홈페이지 제작", desc: "40만 원부터 시작하는 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다." },
+  { title: "제작 방법 — NOVERIQ", desc: "홈페이지 제작 의뢰 시 상담부터 배포까지 실제로 어떻게 진행되는지 단계별로 안내합니다." },
+  { title: "공지사항 — NOVERIQ", desc: "NOVERIQ의 서비스 안내, 일정 변경 등 소식을 확인하세요." },
 ];
 
 const DOES = [
@@ -48,14 +48,14 @@ function TitleTabDemo() {
           <div className="flex items-center gap-2 rounded-t-lg border border-b-0 border-border bg-background px-3 py-2">
             <span className="h-2.5 w-2.5 shrink-0 rounded-sm bg-primary/70" />
             <span className="max-w-[220px] truncate text-sm font-medium text-foreground">
-              MintCL — 소상공인·기업 홈페이지 제작
+              NOVERIQ — 소상공인·기업 홈페이지 제작
             </span>
           </div>
         </div>
         <div className="h-[300px] overflow-hidden border-t border-border bg-background">
           {shouldLoad ? (
             <div className="origin-top-left" style={{ transform: "scale(0.42)", width: `${100 / 0.42}%` }}>
-              <iframe src="/" title="MintCL 홈페이지" style={{ width: "100%", height: 900, border: 0 }} />
+              <iframe src="/" title="NOVERIQ 홈페이지" style={{ width: "100%", height: 900, border: 0 }} />
             </div>
           ) : (
             <div className="h-full w-full bg-secondary/20" />
@@ -86,14 +86,14 @@ function RobotsTxtPreview() {
 
 export default function SeoService() {
   usePageTitle(
-    "검색엔진 최적화 — MintCL",
+    "검색엔진 최적화 — NOVERIQ",
     "검색엔진이 홈페이지를 이해하고 수집할 수 있도록 기본 구조를 설정하는 실제 적용 항목을 확인하세요.",
   );
 
   return (
     <div>
       {/* 히어로 */}
-      <div className="mx-auto max-w-2xl px-4 pb-4 pt-14 text-center sm:pt-20">
+      <div className="mx-auto max-w-4xl px-4 pb-4 pt-14 text-center sm:pt-20">
         <p className="mx-auto flex w-fit items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
           <SearchCheck className="h-3.5 w-3.5" />
           CUSTOM SERVICE — 검색엔진 최적화
@@ -123,7 +123,7 @@ export default function SeoService() {
 
       {/* 실제 화면 + annotation */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-6xl px-4">
           <Reveal className="mb-8 text-center">
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면에서</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">title은 이렇게, 실제로 보입니다</h2>
@@ -136,7 +136,7 @@ export default function SeoService() {
 
       {/* 실제 적용 항목 */}
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 적용된 기본 설정</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground">지금 이 사이트에 적용되어 있는 항목입니다</h2>
           <div className="mt-8 divide-y divide-border border-t border-border">
@@ -166,7 +166,7 @@ export default function SeoService() {
 
       {/* 페이지별 title/description + 큰 SERP 미리보기 */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-6xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">페이지마다 다르게</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">모든 페이지가 같은 제목을 쓰지 않습니다</h2>
@@ -191,7 +191,7 @@ export default function SeoService() {
             </p>
             <div className="mt-4 rounded-xl border border-border bg-card p-7">
               <p className="text-sm text-muted-foreground">mintcl.netlify.app</p>
-              <p className="mt-1.5 text-xl text-[#1a0dab] break-keep">MintCL — 소상공인·기업 홈페이지 제작</p>
+              <p className="mt-1.5 text-xl text-[#1a0dab] break-keep">NOVERIQ — 소상공인·기업 홈페이지 제작</p>
               <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">
                 40만 원부터 시작하는 맞춤형 홈페이지 제작. 상담부터 배포까지 정리해 드립니다.
               </p>
@@ -210,7 +210,7 @@ export default function SeoService() {
 
       {/* 하는 것 / 하지 않는 것 */}
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4">
+        <div className="mx-auto max-w-5xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">범위를 정확하게</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground">SEO에서 하는 것 / 하지 않는 것</h2>
           <div className="mt-8 grid gap-8 sm:grid-cols-2">
@@ -248,7 +248,7 @@ export default function SeoService() {
 
       {/* robots.txt 실제 파일 (핵심만 발췌, 보조 위치) */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">robots.txt</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">

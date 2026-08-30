@@ -9,7 +9,7 @@ import type { IndustryShowcase } from "./industryShowcase";
 
 export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
   usePageTitle(
-    `${industry.heroTitle} — MintCL`,
+    `${industry.heroTitle} — NOVERIQ`,
     industry.heroDesc,
   );
 

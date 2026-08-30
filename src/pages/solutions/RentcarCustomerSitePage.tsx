@@ -23,8 +23,8 @@ const PRICE_BANDS: PriceBand[] = ["전체", "5만원 이하", "5~10만원", "10�
 
 export default function RentcarCustomerSitePage() {
   usePageTitle(
-    "MintCL 렌트카 (데모)",
-    "MintCL 렌트카 맞춤형 홈페이지 웹 솔루션으로 구축한 고객용 홈페이지 데모입니다.",
+    "NOVERIQ 렌트카 (데모)",
+    "NOVERIQ 렌트카 맞춤형 홈페이지 웹 솔루션으로 구축한 고객용 홈페이지 데모입니다.",
   );
 
   const { vehicles, setInquiries, logActivity } = useRentcarAdmin();
@@ -98,8 +98,8 @@ export default function RentcarCustomerSitePage() {
               <Building2 className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-sm font-bold text-foreground">MintCL 렌트카</p>
-              <p className="text-[11px] text-muted-foreground">MintCL 업종별 맞춤 홈페이지 데모</p>
+              <p className="text-sm font-bold text-foreground">NOVERIQ 렌트카</p>
+              <p className="text-[11px] text-muted-foreground">NOVERIQ 업종별 맞춤 홈페이지 데모</p>
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -248,8 +248,8 @@ export default function RentcarCustomerSitePage() {
       </section>
 
       <footer className="border-t border-border bg-secondary/30 px-4 py-8 text-center text-xs text-muted-foreground">
-        <p>MintCL 렌트카 (데모) · 1544-0000</p>
-        <p className="mt-1">이 페이지는 MintCL 업종별 맞춤 홈페이지로 구축 가능한 고객용 홈페이지 예시입니다.</p>
+        <p>NOVERIQ 렌트카 (데모) · 1544-0000</p>
+        <p className="mt-1">이 페이지는 NOVERIQ 업종별 맞춤 홈페이지로 구축 가능한 고객용 홈페이지 예시입니다.</p>
       </footer>
 
       <Modal open={!!selected} onClose={() => setSelected(null)} title={selected?.name ?? ""}>

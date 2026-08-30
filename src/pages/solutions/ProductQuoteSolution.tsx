@@ -33,7 +33,7 @@ const FEATURES = [
 
 export default function ProductQuoteSolution() {
   usePageTitle(
-    "제품 / 견적관리 웹 솔루션 — MintCL",
+    "제품 / 견적관리 웹 솔루션 — NOVERIQ",
     "제품을 체계적으로 관리하고 고객이 바로 견적을 요청할 수 있는 웹 솔루션을 안내합니다.",
   );
 

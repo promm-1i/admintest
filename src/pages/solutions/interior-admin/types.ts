@@ -138,7 +138,7 @@ export type SiteSettings = {
 };
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
-  companyName: "MintCL 인테리어",
+  companyName: "NOVERIQ 인테리어",
   tagline: "설계부터 시공까지, 믿을 수 있는 리모델링",
   phone: "02-000-0000",
   address: "서울특별시 강남구 테헤란로 123",

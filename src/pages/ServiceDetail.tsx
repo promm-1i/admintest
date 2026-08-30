@@ -10,7 +10,7 @@ export default function ServiceDetail() {
   const service = slug ? getCustomService(slug) : undefined;
 
   usePageTitle(
-    service ? `${service.title} — MintCL` : "서비스를 찾을 수 없습니다 — MintCL",
+    service ? `${service.title} — NOVERIQ` : "서비스를 찾을 수 없습니다 — NOVERIQ",
     service?.desc,
   );
 

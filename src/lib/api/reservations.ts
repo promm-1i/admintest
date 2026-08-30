@@ -46,7 +46,7 @@ async function notifyByEmail(parsed: ReservationInput): Promise<void> {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify({
-        _subject: "MintCL 새 제작 문의",
+        _subject: "NOVERIQ 새 제작 문의",
         이름: parsed.name,
         연락처: parsed.phone,
         이메일: parsed.email || "(미입력)",

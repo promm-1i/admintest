@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 export default function NotFound() {
-  usePageTitle("Page not found — MintCL");
+  usePageTitle("Page not found — NOVERIQ");
 
   return (
     <div className="flex min-h-[60vh] items-center justify-center bg-background px-4">

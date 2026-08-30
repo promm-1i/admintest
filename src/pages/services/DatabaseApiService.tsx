@@ -29,14 +29,14 @@ const NEED_CASES = [
 
 export default function DatabaseApiService() {
   usePageTitle(
-    "DB · API 연동 — MintCL",
-    "MintCL이 실제로 사용 중인 데이터베이스 구조와, 필요 시 연동 가능한 외부 서비스를 구분해서 확인하세요.",
+    "DB · API 연동 — NOVERIQ",
+    "NOVERIQ이 실제로 사용 중인 데이터베이스 구조와, 필요 시 연동 가능한 외부 서비스를 구분해서 확인하세요.",
   );
 
   return (
     <div>
       {/* 히어로 */}
-      <div className="mx-auto max-w-3xl px-4 pb-4 pt-14 text-center sm:pt-20">
+      <div className="mx-auto max-w-5xl px-4 pb-4 pt-14 text-center sm:pt-20">
         <p className="mx-auto flex w-fit items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
           <Database className="h-3.5 w-3.5" />
           CUSTOM SERVICE — DB · API 연동
@@ -67,7 +67,7 @@ export default function DatabaseApiService() {
 
       {/* 쉬운 설명 */}
       <Reveal className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
             <Lightbulb className="h-3.5 w-3.5" />
             쉽게 말하면
@@ -85,7 +85,7 @@ export default function DatabaseApiService() {
 
       {/* 데이터 흐름 다이어그램 */}
       <div className="py-14 sm:py-20">
-        <div className="mx-auto max-w-3xl px-4">
+        <div className="mx-auto max-w-5xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">데이터 흐름</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">고객 화면과 관리자 화면이 하나의 DB를 함께 봅니다</h2>
@@ -145,7 +145,7 @@ export default function DatabaseApiService() {
 
       {/* 실제 사용 중 vs 연동 가능 */}
       <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
-        <div className="mx-auto max-w-5xl px-4">
+        <div className="mx-auto max-w-[1400px] px-4">
           <div className="grid gap-10 lg:grid-cols-2">
             <Reveal>
               <p className="flex items-center gap-1.5 text-xs font-mono font-semibold uppercase tracking-widest text-emerald-600">
@@ -189,7 +189,7 @@ export default function DatabaseApiService() {
 
       {/* 이런 경우 추천합니다 */}
       <Reveal className="py-14 sm:py-20">
-        <div className="mx-auto max-w-2xl px-4">
+        <div className="mx-auto max-w-4xl px-4">
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">이런 경우 추천합니다</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground">이런 상황에서 특히 필요합니다</h2>
           <div className="mt-8 space-y-4">

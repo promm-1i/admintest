@@ -28,7 +28,7 @@ const FEATURES = [
 
 export default function ReservationSolution() {
   usePageTitle(
-    "예약 / 고객관리 웹 솔루션 — MintCL",
+    "예약 / 고객관리 웹 솔루션 — NOVERIQ",
     "예약접수, 일정관리, 고객관리 기능을 갖춘 예약·고객관리 웹 솔루션을 안내합니다.",
   );
 
