@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { getSampleBySlug } from "@/lib/samples";
@@ -39,6 +39,7 @@ export default function SampleDetail() {
   );
 
   if (!sample) return <NotFound />;
+  if (sample.detailHref) return <Navigate to={sample.detailHref} replace />;
 
   const renderSamplePreview = () => {
     if (sample.liveUrl) return <ExternalSitePreview url={sample.liveUrl} />;

@@ -12,7 +12,7 @@ export function PortfolioCard({
 }) {
   return (
     <Link
-      to={`/samples/${sample.slug}`}
+      to={sample.detailHref ?? `/samples/${sample.slug}`}
       className={cn(
         "group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-sm",
         size === "large" && "md:col-span-2",

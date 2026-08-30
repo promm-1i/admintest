@@ -1,3 +1,4 @@
+import realEstatePlatformImg from "@/assets/images/real_estate_platform_thumbnail.jpg";
 import roadinImg from "@/assets/images/roadin_thumbnail.jpg";
 import carplanImg from "@/assets/images/carplan_thumbnail.jpg";
 import objetbathImg from "@/assets/images/objetbath_thumbnail.jpg";
@@ -26,6 +27,8 @@ export type Sample = {
   image?: string;
   /** 실제 배포된 사이트 URL이 있으면 상세페이지 미리보기 탭에서 iframe으로 그 사이트를 그대로 보여준다 */
   liveUrl?: string;
+  /** 있으면 카드가 /samples/:slug 대신 이 경로로 연결된다 (예: 이미 자체 소개 페이지가 있는 플랫폼형 솔루션) */
+  detailHref?: string;
 };
 
 /**
@@ -34,6 +37,20 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "commercial-real-estate-platform",
+    industry: "상업용 부동산 플랫폼",
+    title: "상업용 부동산 플랫폼 구축",
+    type: ["platform"],
+    tag: "플랫폼 · 부동산",
+    purpose:
+      "지도 기반 매물 검색부터 상담 접수, 매물·고객·일정 관리까지 하나의 시스템으로 연결한 상업용 부동산 플랫폼 구축 사례입니다.",
+    features: ["지도 기반 검색", "매물 관리", "관리자 CMS", "문의 CRM", "반응형"],
+    idealFor:
+      "매물 검색, 상담 접수부터 매물·고객·일정·직원 관리까지 하나의 시스템으로 운영하고 싶은 부동산 중개·분양 플랫폼",
+    image: realEstatePlatformImg,
+    detailHref: "/web-solutions/real-estate",
+  },
   {
     slug: "roadin-rentcar",
     industry: "렌터카 홈페이지",
@@ -200,6 +217,7 @@ export const SAMPLES: Sample[] = [
 
 export const PORTFOLIO_FILTERS = [
   { label: "전체", value: "all" },
+  { label: "플랫폼·시스템", value: "platform" },
   { label: "원페이지", value: "one-page" },
   { label: "소상공인", value: "small-business" },
   { label: "기업", value: "business" },

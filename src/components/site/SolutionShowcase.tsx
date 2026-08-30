@@ -103,7 +103,10 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
       </div>
 
       <div className="mt-14 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm font-medium text-foreground">
+          업종과 업무 방식에 맞춰 기능·디자인·관리자 시스템을 커스터마이징할 수 있습니다.
+        </p>
+        <p className="mt-2 text-sm text-muted-foreground">
           구축비와 월 이용료 등 자세한 요금은 업종별 맞춤 홈페이지 요금 페이지에서 확인하실 수 있습니다.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
