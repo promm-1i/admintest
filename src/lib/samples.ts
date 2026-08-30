@@ -182,7 +182,8 @@ export const SAMPLES: Sample[] = [
     features: ["차량 검색 · 필터", "차량 등록 관리", "상담 문의 접수", "지점 안내", "관리자 페이지"],
     idealFor: "보유 차량을 직접 등록 · 관리하며 운영하고 싶은 렌터카 · 리스 업체",
     image: rentcarSolutionImg,
-    detailHref: "/web-solutions/rentcar",
+    liveUrl: "https://roadin.netlify.app/",
+    adminDemoHref: "/web-solutions/rentcar/demo",
   },
   {
     slug: "interior-solution",
