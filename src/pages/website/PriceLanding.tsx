@@ -37,16 +37,6 @@ const INCLUDED_BY_DEFAULT = [
   "배포 및 오픈 지원",
 ];
 
-const COMPARISON_ROWS: { label: string; values: [string, string, string] }[] = [
-  { label: "디자인", values: ["기존 디자인 활용", "맞춤 디자인", "맞춤 디자인"] },
-  { label: "반응형", values: ["기본", "기본", "기본"] },
-  { label: "문의", values: ["가능", "가능", "가능"] },
-  { label: "관리자", values: ["선택", "선택", "포함 / 선택"] },
-  { label: "DB", values: ["선택", "선택", "가능"] },
-  { label: "예약 / 검색", values: ["별도", "별도", "맞춤 구축"] },
-  { label: "업무 시스템", values: ["-", "별도", "가능"] },
-];
-
 export default function PriceLanding() {
   usePageTitle(
     "제작 비용 — NOVERIQ",
@@ -196,40 +186,6 @@ export default function PriceLanding() {
           <PricingComparison />
         </Reveal>
 
-        {/* 제작 방식별 가격 비교 */}
-        <Reveal className="mt-20">
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식별 비교</h2>
-        </Reveal>
-        <Reveal delay={100} className="mt-8 overflow-x-auto rounded-xl border border-border">
-          <table className="w-full min-w-[640px] border-collapse text-base">
-            <thead>
-              <tr className="bg-secondary/50">
-                <th className="p-5 text-left text-lg font-semibold text-foreground">구분</th>
-                <th className="p-5 text-left text-lg font-semibold text-foreground">템플릿형</th>
-                <th className="p-5 text-left text-lg font-semibold text-foreground">맞춤 홈페이지</th>
-                <th className="p-5 text-left text-lg font-semibold text-foreground">기능형 홈페이지</th>
-              </tr>
-            </thead>
-            <tbody>
-              {COMPARISON_ROWS.map((row) => (
-                <tr key={row.label} className="border-t border-border">
-                  <td className="p-5 font-medium text-foreground">{row.label}</td>
-                  {row.values.map((v, i) => (
-                    <td key={i} className="p-5 text-muted-foreground">
-                      {v}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-              <tr className="border-t border-border bg-secondary/30">
-                <td className="p-5 text-lg font-bold text-foreground">가격</td>
-                <td className="p-5 text-lg font-bold text-primary">64만 원~</td>
-                <td className="p-5 text-lg font-bold text-primary">100만 원~</td>
-                <td className="p-5 text-lg font-bold text-primary">상담 후 견적</td>
-              </tr>
-            </tbody>
-          </table>
-        </Reveal>
 
         {/* 최종 CTA */}
         <Reveal delay={150} className="mt-20 rounded-2xl border border-border bg-secondary/40 p-10 text-center">

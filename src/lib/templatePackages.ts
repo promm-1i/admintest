@@ -68,11 +68,27 @@ export function formatMan(won: number): string {
   return `${(won / MAN).toLocaleString("ko-KR")}만원`;
 }
 
+/**
+ * 호스팅 장기 계약 할인. 연 24만원을 기준으로 계약 연수만큼 곱한 뒤 할인율을 적용한 총액이다.
+ * (사용자가 정한 구간은 1~3년까지라 그 이상은 표기하지 않는다.)
+ */
+export const HOSTING_DISCOUNTS = [
+  { years: 1, rate: 0 },
+  { years: 2, rate: 0.1 },
+  { years: 3, rate: 0.2 },
+].map(({ years, rate }) => ({
+  years,
+  rate,
+  total: Math.round(BASE_COST.hosting * years * (1 - rate)),
+}));
+
 export type PricingRow = {
   label: string;
   /** 필수 항목이면 라벨 옆에 "필수" 뱃지 */
   required?: boolean;
   note?: string;
+  /** ⓘ 아이콘에 마우스를 올렸을 때 뜨는 툴팁 (줄 단위) */
+  info?: string[];
   /** TEMPLATE_PACKAGES와 같은 순서 */
   values: [string, string, string, string];
 };
@@ -80,7 +96,11 @@ export type PricingRow = {
 export const PRICING_ROWS: PricingRow[] = [
   {
     label: "도메인 1개",
-    note: "한글·영문 / com · co.kr · kr 선택 가능",
+    info: [
+      "한글·영문 도메인 모두 가능합니다.",
+      "com / co.kr / kr 중에서 선택하실 수 있습니다.",
+      "이미 보유한 도메인이 있다면 연결만 해드립니다.",
+    ],
     values: ["무료", "무료", "무료", "무료"],
   },
   {
@@ -102,17 +122,32 @@ export const PRICING_ROWS: PricingRow[] = [
   { label: "DB · 파일", values: ["무제한", "무제한", "무제한", "무제한"] },
   {
     label: "실시간 문자 기능",
-    note: "무료 설치 · 발송 건당 16원 별도",
+    info: [
+      "설치 비용은 0원입니다.",
+      "발송 건당 16원의 요금만 별도로 부과됩니다.",
+      "문의 접수 시 실시간으로 알림을 받아보실 수 있습니다.",
+    ],
     values: ["0원", "0원", "0원", "0원"],
   },
-  { label: "셋팅비용", required: true, values: ["10만원", "10만원", "10만원", "10만원"] },
+  {
+    label: "셋팅비용",
+    required: true,
+    info: ["도메인 연결, 서버 셋팅, 초기 데이터 등록에 필요한 1회성 비용입니다."],
+    values: ["10만원", "10만원", "10만원", "10만원"],
+  },
   {
     label: "호스팅 1년",
     required: true,
-    note: "2년 연속 10% · 3년 연속 20% 할인",
+    info: HOSTING_DISCOUNTS.map(
+      (h) =>
+        `${h.years}년 ${Math.round(h.rate * 100)}%할인 ${h.total.toLocaleString("ko-KR")}원`,
+    ),
     values: ["24만원", "24만원", "24만원", "24만원"],
   },
 ];
+
+/** 표 맨 아래 "제작 기간" 행 툴팁 */
+export const PERIOD_INFO = ["진행 자료 전달과 수정 범위에 따라", "제작 기간이 달라질 수 있습니다."];
 
 /** 월 이용료 없이 한 번에 구매하는 옵션 */
 export const LUMP_SUM = [
