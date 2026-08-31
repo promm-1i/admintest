@@ -185,9 +185,9 @@ export function WebSolutionTeaserSection() {
 
         <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
           <div>
-            <p className="text-sm font-bold text-foreground">기능이 더 필요하신가요? — 맞춤 제작 · 관리자 시스템</p>
+            <p className="text-sm font-bold text-foreground">템플릿에 없는 그림이 있으신가요? — 맞춤형 커스텀 개발</p>
             <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">
-              예약 접수, 매물 · 고객 관리처럼 운영 기능이 필요하면 관리자 시스템까지 별도 커스텀으로 구축해 드립니다.
+              원하시는 디자인과 기능을 기획 단계부터 함께 설계해, 하나부터 열까지 사장님만의 홈페이지로 개발해 드립니다.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-3">
