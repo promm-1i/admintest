@@ -59,6 +59,12 @@ export function PricingSection() {
             항목별 상세 비용 비교 보기
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
+          <Link
+            to="/estimate"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-5 py-3 text-sm font-bold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
+          >
+            1분 견적 계산기
+          </Link>
         </FadeIn>
 
         <p className="mt-8 text-xs leading-relaxed text-muted-foreground/80 break-keep">

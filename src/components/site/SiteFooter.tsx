@@ -28,6 +28,8 @@ const FOOTER_GROUPS = [
     title: "홈페이지",
     links: [
       { label: "홈페이지 템플릿", to: "/templates" },
+      { label: "업종별 홈페이지 제작", to: "/homepage" },
+      { label: "견적 계산기", to: "/estimate" },
       { label: "포트폴리오", to: "/samples" },
       { label: "NOVERIQ 소개", to: "/about" },
     ],

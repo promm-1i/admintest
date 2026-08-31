@@ -10,6 +10,9 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import Home from "@/pages/Home";
 
 const About = lazy(() => import("@/pages/About"));
+const IndustryIndex = lazy(() => import("@/pages/IndustryIndex"));
+const IndustryLanding = lazy(() => import("@/pages/IndustryLanding"));
+const Estimate = lazy(() => import("@/pages/Estimate"));
 const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
 const CustomDevService = lazy(() => import("@/pages/services/CustomDevService"));
 const AdminSystemService = lazy(() => import("@/pages/services/AdminSystemService"));
@@ -132,6 +135,9 @@ export default function App() {
             <Route path="/web-solutions" element={<WebSolutions />} />
             <Route path="/web-solutions/demos" element={<DemoHub />} />
             <Route path="/templates" element={<Templates />} />
+            <Route path="/homepage" element={<IndustryIndex />} />
+            <Route path="/homepage/:key" element={<IndustryLanding />} />
+            <Route path="/estimate" element={<Estimate />} />
             <Route path="/website/process" element={<ProcessLanding />} />
             <Route path="/website/price" element={<PriceLanding />} />
             <Route path="/website/features" element={<FeaturesLanding />} />
