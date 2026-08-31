@@ -80,7 +80,7 @@ export function WebSolutionTeaserSection() {
 
   return (
     <section id="industry-section" className="px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto max-w-7xl rounded-3xl border border-border bg-secondary/30 p-8 sm:p-12">
+      <div className="mx-auto max-w-[1400px] rounded-3xl border border-border bg-secondary/30 p-5 sm:p-8">
         <SectionHeader
           label="CUSTOM BY INDUSTRY"
           title={
@@ -99,7 +99,7 @@ export function WebSolutionTeaserSection() {
           }
         />
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[260px_1fr]">
+        <div className="mt-8 grid gap-5 lg:grid-cols-[235px_1fr]">
           {/* 업종 리스트 — 모바일에서는 가로 스크롤 칩, 데스크톱에서는 세로 목록 */}
           <ul className="flex gap-2 overflow-x-auto pb-1 scrollbar-none lg:max-h-[560px] lg:flex-col lg:gap-1 lg:overflow-y-auto lg:overscroll-contain lg:pb-0 lg:pr-1">
             <li className="hidden px-4 pb-1 text-[11px] font-bold tracking-wide text-muted-foreground/70 lg:block">
@@ -196,7 +196,7 @@ export function WebSolutionTeaserSection() {
                   key={activeKey}
                   src={active.img}
                   alt={`${active.name} 구축 화면`}
-                  className="aspect-[16/8] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] motion-safe:animate-in motion-safe:fade-in motion-safe:duration-300"
+                  className="aspect-[16/9] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] motion-safe:animate-in motion-safe:fade-in motion-safe:duration-300"
                 />
                 <span className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
                   {active.name} · 실제 구축 화면

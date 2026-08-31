@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Monitor, SlidersHorizontal, Rocket, MapPin, ChevronRight } from "lucide-react";
+import { Monitor, SlidersHorizontal, Rocket, ChevronRight } from "lucide-react";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { cn } from "@/lib/utils";
@@ -9,8 +9,6 @@ type FeatureItem = {
   desc: string;
   /** 실제 구축 화면 캡처 (/thumbs/features/). 없으면 아이콘 패널로 표시 */
   img?: string;
-  /** "map"이면 지도 미리보기를 그려서 보여준다 */
-  visual?: "map";
 };
 
 const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items: FeatureItem[] }[] = [
@@ -27,6 +25,7 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
       {
         label: "기본 SEO",
         desc: "네이버 · 구글 검색엔진이 페이지를 잘 읽어가도록 제목 · 설명 · 구조를 설정합니다.",
+        img: "/thumbs/features/seo.jpg",
       },
       {
         label: "문의 / 상담 폼",
@@ -41,7 +40,7 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
       {
         label: "지도 연동",
         desc: "카카오지도로 사업장 위치를 표시하고 길찾기로 연결합니다.",
-        visual: "map",
+        img: "/thumbs/features/map.jpg",
       },
       {
         label: "게시판 / 공지사항",
@@ -75,10 +74,6 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
         desc: "접수된 문의를 상태별로 확인하고 처리 이력까지 관리합니다.",
         img: "/thumbs/features/inquiry.jpg",
       },
-      {
-        label: "파일 관리",
-        desc: "이미지 · 문서 파일을 업로드하고 홈페이지에서 바로 사용할 수 있습니다.",
-      },
     ],
   },
   {
@@ -89,51 +84,21 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
       {
         label: "결제 연동",
         desc: "카드 · 간편결제 모듈을 연동해 홈페이지에서 바로 결제받을 수 있습니다.",
+        img: "/thumbs/features/pay.jpg",
       },
       {
         label: "회원 기능",
-        desc: "회원가입 · 로그인, 마이페이지 등 회원 체계를 구축합니다.",
+        desc: "회원가입 · 로그인, 등급 · 포인트 · 주문내역이 있는 마이페이지까지 회원 체계를 구축합니다.",
+        img: "/thumbs/features/member.jpg",
       },
       {
         label: "외부 API 연동",
-        desc: "지도, 문자 발송, 공공데이터 등 외부 서비스와 데이터를 주고받습니다.",
-      },
-      {
-        label: "AI 기능",
-        desc: "챗봇 응대, 콘텐츠 자동 생성 등 AI 기능을 필요한 범위에 맞춰 연동합니다.",
+        desc: "지도, 문자 발송, 공공데이터 등 외부 서비스와 데이터를 주고받고, 연동 상태를 한 화면에서 관리합니다.",
+        img: "/thumbs/features/api.jpg",
       },
     ],
   },
 ];
-
-/** 지도 연동 패널에 들어가는 지도 미리보기 (도로 + 현재 위치 핀) */
-function MapPreview() {
-  return (
-    <span className="relative block aspect-[16/9] w-full overflow-hidden bg-[#EAE7E1]">
-      <svg viewBox="0 0 224 126" className="absolute inset-0 h-full w-full" aria-hidden>
-        <rect x="8" y="8" width="60" height="40" rx="3" fill="#DDD9CF" />
-        <rect x="8" y="64" width="60" height="54" rx="3" fill="#E2DED4" />
-        <rect x="84" y="8" width="56" height="40" rx="3" fill="#E2DED4" />
-        <rect x="84" y="64" width="56" height="54" rx="3" fill="#DDD9CF" />
-        <rect x="156" y="8" width="60" height="40" rx="3" fill="#E2DED4" />
-        <rect x="156" y="64" width="60" height="54" rx="3" fill="#CBDCC2" />
-        <rect x="0" y="50" width="224" height="11" fill="#FFFFFF" />
-        <rect x="72" y="0" width="10" height="126" fill="#FFFFFF" />
-        <rect x="144" y="0" width="10" height="126" fill="#FFFFFF" />
-        <line x1="0" y1="55.5" x2="224" y2="55.5" stroke="#F5C63F" strokeWidth="1.5" strokeDasharray="6 5" />
-      </svg>
-      <span className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-full flex-col items-center">
-        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary shadow-md">
-          <MapPin className="h-4.5 w-4.5 text-white" />
-        </span>
-        <span className="-mt-0.5 block h-0 w-0 border-x-[5px] border-t-[8px] border-x-transparent border-t-primary" />
-      </span>
-      <span className="absolute bottom-2 right-2.5 rounded bg-white/85 px-2 py-1 text-[10px] font-semibold text-neutral-600">
-        카카오지도 연동
-      </span>
-    </span>
-  );
-}
 
 /**
  * 좌측 분류 → 가운데 기능 목록 → 우측 실제 화면 캡처.
@@ -153,7 +118,7 @@ export function FeaturesSection() {
 
   return (
     <section className="border-y border-border bg-secondary/30 py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
         <SectionHeader
           label="FEATURES"
           title="필요한 기능을 홈페이지 안에 함께 구축합니다."
@@ -161,7 +126,7 @@ export function FeaturesSection() {
         />
 
         <FadeIn className="mt-12">
-          <div className="grid gap-4 lg:grid-cols-[220px_250px_1fr] lg:gap-0 lg:overflow-hidden lg:rounded-2xl lg:border lg:border-border lg:bg-card lg:shadow-xs">
+          <div className="grid gap-4 lg:grid-cols-[230px_260px_1fr] lg:gap-0 lg:overflow-hidden lg:rounded-2xl lg:border lg:border-border lg:bg-card lg:shadow-xs">
             {/* 1단 · 분류 */}
             <ul className="flex gap-2 overflow-x-auto pb-1 scrollbar-none lg:flex-col lg:gap-0 lg:overflow-visible lg:border-r lg:border-border lg:bg-secondary/40 lg:p-3 lg:pb-3">
               {FEATURE_GROUPS.map((g, gi) => {
@@ -218,9 +183,7 @@ export function FeaturesSection() {
             {/* 3단 · 실제 화면 미리보기 */}
             <div key={`${groupIdx}-${itemIdx}`} className="overflow-hidden rounded-2xl border border-border bg-card lg:rounded-none lg:border-0 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-300">
               <div className="relative border-b border-border bg-secondary/30">
-                {item.visual === "map" ? (
-                  <MapPreview />
-                ) : item.img ? (
+                {item.img ? (
                   <>
                     <img src={item.img} alt={`${item.label} 실제 화면`} loading="lazy" className="aspect-[16/9] w-full object-cover object-top" />
                     <span className="absolute left-3.5 top-3.5 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
