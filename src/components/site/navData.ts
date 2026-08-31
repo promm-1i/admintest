@@ -1,4 +1,4 @@
-import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, type LucideIcon } from "lucide-react";
+import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, type LucideIcon } from "lucide-react";
 import { SAMPLES } from "@/lib/samples";
 
 /** 실제 판매 중인 템플릿을 스타일별로 뽑아 드롭다운 플라이아웃 항목으로 만든다 */
@@ -100,6 +100,24 @@ export const INDUSTRY_ITEMS: NavItem[] = [
     title: "사진관 · 스튜디오 맞춤형",
     desc: "갤러리 · 촬영 상품 · 촬영 예약",
     href: "/templates?industry=photo",
+  },
+  {
+    icon: Calculator,
+    title: "세무사 · 회계사무소 맞춤형",
+    desc: "기장료 요금표 · 세무 일정 · 상담",
+    href: "/templates?industry=tax",
+  },
+  {
+    icon: Wrench,
+    title: "자동차정비소 맞춤형",
+    desc: "공임표 · 오일 패키지 · 정비 예약",
+    href: "/templates?industry=auto",
+  },
+  {
+    icon: Flower2,
+    title: "꽃집 · 플라워샵 맞춤형",
+    desc: "상품 가격 · 당일배달 · 주문 문의",
+    href: "/templates?industry=flower",
   },
 ];
 

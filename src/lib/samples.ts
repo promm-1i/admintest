@@ -41,6 +41,90 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "tax-basic-template",
+    industry: "세무사·회계사무소 홈페이지",
+    title: "세무사·회계사무소 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "business"],
+    tag: "기본형 템플릿 · 세무·회계",
+    purpose:
+      "매출 구간별 기장료 요금표, 월별 세무 일정 캘린더, 업무 안내, 세무사 소개까지 — 원장 괘선처럼 정갈하게 담은 사무소 홈페이지 템플릿입니다.",
+    features: ["기장료 요금표", "월별 세무 일정", "업무 안내", "상담 문의 문자"],
+    idealFor: "기장 거래처를 늘리고 싶은 세무사·회계사무소",
+    image: "/thumbs/tax.jpg",
+    liveUrl: "/templates/tax-basic/",
+    industryKey: "tax",
+  },
+  {
+    slug: "tax-landing-template",
+    industry: "세무사·회계사무소 홈페이지",
+    title: "세무사·회계사무소 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "business"],
+    tag: "랜딩형 템플릿 · 세무·회계",
+    purpose:
+      "괘선 드로잉과 차분한 세리프 연출로, 업무 소개에서 상담 문의까지 신뢰감 있게 이어지는 사무소 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "기장료 요금표", "세무 일정 캘린더", "상담 CTA"],
+    idealFor: "전문성과 신뢰로 수임을 늘리고 싶은 세무사·회계사무소",
+    image: "/thumbs/tax.jpg",
+    liveUrl: "/templates/tax-landing/",
+    industryKey: "tax",
+  },
+  {
+    slug: "auto-basic-template",
+    industry: "자동차정비소 홈페이지",
+    title: "자동차정비소 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 자동차정비",
+    purpose:
+      "부품비·공임 분리 공임표, 엔진오일 패키지, 견적 승인 후 작업 원칙까지 — 투명한 정비소의 신뢰를 담은 홈페이지 템플릿입니다.",
+    features: ["부품·공임 분리 공임표", "오일 패키지 가격", "작업 과정 안내", "정비 예약 문자"],
+    idealFor: "과잉정비 걱정을 덜어주는 투명함으로 단골을 만들고 싶은 정비소·카센터",
+    image: "/thumbs/auto.jpg",
+    liveUrl: "/templates/auto-basic/",
+    industryKey: "auto",
+  },
+  {
+    slug: "auto-landing-template",
+    industry: "자동차정비소 홈페이지",
+    title: "자동차정비소 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 자동차정비",
+    purpose:
+      "세이프티 오렌지 스플릿 히어로와 인더스트리얼 연출로, 공임표에서 정비 예약까지 이어지는 정비소 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "공임표", "오일 패키지", "예약 문자"],
+    idealFor: "강한 첫인상과 예약 전환을 함께 원하는 정비소·수입차 전문점",
+    image: "/thumbs/auto.jpg",
+    liveUrl: "/templates/auto-landing/",
+    industryKey: "auto",
+  },
+  {
+    slug: "flower-basic-template",
+    industry: "꽃집·플라워샵 홈페이지",
+    title: "꽃집·플라워샵 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 꽃집",
+    purpose:
+      "용도별 상품 가격, 당일배달 마감 실시간 배지, 정기구독, 꽃 관리법까지 — 아치형 상품 그리드로 담은 플라워샵 홈페이지 템플릿입니다.",
+    features: ["용도별 상품 · 가격", "당일배달 실시간 표시", "정기구독 요금", "주문 문의 문자"],
+    idealFor: "전화·문자 주문을 늘리고 싶은 꽃집·플라워스튜디오",
+    image: "/thumbs/flower.jpg",
+    liveUrl: "/templates/flower-basic/",
+    industryKey: "flower",
+  },
+  {
+    slug: "flower-landing-template",
+    industry: "꽃집·플라워샵 홈페이지",
+    title: "꽃집·플라워샵 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 꽃집",
+    purpose:
+      "보태니컬 세리프와 부드러운 연출로, 상품 감상에서 주문 문의까지 자연스럽게 이어지는 플라워샵 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "용도별 상품 그리드", "정기구독", "주문 문자"],
+    idealFor: "감성과 주문 전환을 함께 원하는 꽃집·플라워샵",
+    image: "/thumbs/flower.jpg",
+    liveUrl: "/templates/flower-landing/",
+    industryKey: "flower",
+  },
+  {
     slug: "dental-basic-template",
     industry: "치과 홈페이지",
     title: "치과 홈페이지 (기본형 템플릿)",
@@ -750,6 +834,9 @@ const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
   dental: "치과",
   vet: "동물병원",
   photo: "사진관",
+  tax: "세무·회계",
+  auto: "자동차정비",
+  flower: "꽃집",
 };
 
 /** 실제로 템플릿이 존재하는 업종만 필터로 노출한다 (준비 안 된 업종 칩을 띄우지 않는다). */

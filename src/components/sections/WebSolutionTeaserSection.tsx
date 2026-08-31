@@ -14,6 +14,9 @@ import {
   Smile,
   PawPrint,
   Camera,
+  Calculator,
+  Wrench,
+  Flower2,
   type LucideIcon,
 } from "lucide-react";
 
@@ -48,6 +51,9 @@ const TEMPLATE_INDUSTRIES: TemplateIndustry[] = [
   { key: "dental", name: "치과", icon: Smile, img: "/thumbs/dental.jpg", href: "/templates?industry=dental", title: "치과 홈페이지", note: "임플란트 단계 안내와 비급여 진료비 표로 과쟉진료 걱정을 덜어줍니다.", points: ["실시간 진료중 표시", "임플란트 단계 안내", "비급여 진료비 표", "진료 예약 문자"] },
   { key: "vet", name: "동물병원", icon: PawPrint, img: "/thumbs/vet.jpg", href: "/templates?industry=vet", title: "동물병원 홈페이지", note: "진료 · 미용 · 호텔 요금과 접종 스케줄을 보호자에게 투명하게 안내합니다.", points: ["진료 · 미용 · 호텔 요금표", "접종 스케줄", "야간 응급 안내", "예약 문자"] },
   { key: "photo", name: "사진관 · 스튜디오", icon: Camera, img: "/thumbs/photo.jpg", href: "/templates?industry=photo", title: "사진관 · 스튜디오 홈페이지", note: "다크 갤러리 톤으로 작품과 촬영 상품 가격을 함께 보여줍니다.", points: ["작품 갤러리", "촬영 상품 가격표", "촬영 과정 안내", "촬영 예약 문자"] },
+  { key: "tax", name: "세무사 · 회계", icon: Calculator, img: "/thumbs/tax.jpg", href: "/templates?industry=tax", title: "세무사·회계사무소 홈페이지", note: "기장료 요금표와 월별 세무 일정으로 수임 문의를 만드는 구성입니다.", points: ["기장료 요금표", "세무 일정 캘린더", "업무 안내", "상담 문자"] },
+  { key: "auto", name: "자동차정비소", icon: Wrench, img: "/thumbs/auto.jpg", href: "/templates?industry=auto", title: "자동차정비소 홈페이지", note: "부품·공임 분리 공임표와 견적 승인 원칙으로 신뢰를 만드는 정비소 구성입니다.", points: ["공임표", "오일 패키지", "작업 과정", "정비 예약 문자"] },
+  { key: "flower", name: "꽃집 · 플라워샵", icon: Flower2, img: "/thumbs/flower.jpg", href: "/templates?industry=flower", title: "꽃집·플라워샵 홈페이지", note: "용도별 상품 가격과 당일배달 안내로 문자 주문을 늘리는 구성입니다.", points: ["용도별 상품 가격", "당일배달 표시", "정기구독", "주문 문자"] },
 ];
 
 /**
