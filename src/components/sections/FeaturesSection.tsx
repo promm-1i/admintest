@@ -1,4 +1,5 @@
-import { Monitor, SlidersHorizontal, Rocket, MapPin } from "lucide-react";
+import { useState } from "react";
+import { Monitor, SlidersHorizontal, Rocket, MapPin, ChevronRight } from "lucide-react";
 import { SectionHeader } from "@/components/sections/SectionHeader";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { cn } from "@/lib/utils";
@@ -6,7 +7,9 @@ import { cn } from "@/lib/utils";
 type FeatureItem = {
   label: string;
   desc: string;
-  /** "map"이면 팝업에 지도 미리보기를 함께 띄운다 */
+  /** 실제 구축 화면 캡처 (/thumbs/features/). 없으면 아이콘 패널로 표시 */
+  img?: string;
+  /** "map"이면 지도 미리보기를 그려서 보여준다 */
   visual?: "map";
 };
 
@@ -19,6 +22,7 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
       {
         label: "PC / 모바일 반응형",
         desc: "하나의 홈페이지가 PC · 태블릿 · 모바일 화면 크기에 맞춰 자동으로 재배치됩니다.",
+        img: "/thumbs/features/responsive.jpg",
       },
       {
         label: "기본 SEO",
@@ -26,11 +30,13 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
       },
       {
         label: "문의 / 상담 폼",
-        desc: "방문자가 이름 · 연락처 · 내용을 남기면 바로 접수되어 확인할 수 있습니다.",
+        desc: "방문자가 원하는 항목을 고르고 연락처를 남기면 바로 접수되어 확인할 수 있습니다.",
+        img: "/thumbs/features/form.jpg",
       },
       {
         label: "전화 · 카카오톡 연결",
-        desc: "버튼 한 번으로 전화 걸기나 카카오톡 채널 상담으로 바로 이어집니다.",
+        desc: "버튼 한 번으로 전화 걸기, 문자 보내기, 카카오톡 채널 상담으로 바로 이어집니다.",
+        img: "/thumbs/features/call.jpg",
       },
       {
         label: "지도 연동",
@@ -40,6 +46,7 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
       {
         label: "게시판 / 공지사항",
         desc: "공지 · 소식을 직접 등록하고 수정할 수 있는 게시판을 제공합니다.",
+        img: "/thumbs/features/board.jpg",
       },
     ],
   },
@@ -51,18 +58,22 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
       {
         label: "관리자 페이지",
         desc: "콘텐츠 · 문의 · 데이터를 제작자 없이 직접 등록 · 수정하는 전용 관리 화면입니다.",
+        img: "/thumbs/features/admin.jpg",
       },
       {
         label: "데이터베이스",
         desc: "매물 · 상품 · 예약처럼 쌓이는 데이터를 저장하고 검색할 수 있게 구축합니다.",
+        img: "/thumbs/features/db.jpg",
       },
       {
         label: "검색 / 필터",
         desc: "조건을 선택하면 목록이 바로 좁혀지는 검색 기능입니다.",
+        img: "/thumbs/features/search.jpg",
       },
       {
         label: "고객 문의 관리",
         desc: "접수된 문의를 상태별로 확인하고 처리 이력까지 관리합니다.",
+        img: "/thumbs/features/inquiry.jpg",
       },
       {
         label: "파일 관리",
@@ -95,102 +106,145 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
   },
 ];
 
-/** 지도 연동 팝업에 들어가는 미니 지도 미리보기 (도로 + 현재 위치 핀) */
+/** 지도 연동 패널에 들어가는 지도 미리보기 (도로 + 현재 위치 핀) */
 function MapPreview() {
   return (
-    <span className="relative mb-2.5 block h-28 w-full overflow-hidden rounded-md bg-[#EAE7E1]">
-      <svg viewBox="0 0 224 112" className="absolute inset-0 h-full w-full" aria-hidden>
-        {/* 블록(건물 영역) */}
-        <rect x="8" y="8" width="60" height="34" rx="3" fill="#DDD9CF" />
-        <rect x="8" y="56" width="60" height="48" rx="3" fill="#E2DED4" />
-        <rect x="84" y="8" width="56" height="34" rx="3" fill="#E2DED4" />
-        <rect x="84" y="56" width="56" height="48" rx="3" fill="#DDD9CF" />
-        <rect x="156" y="8" width="60" height="34" rx="3" fill="#E2DED4" />
-        <rect x="156" y="56" width="60" height="48" rx="3" fill="#DDD9CF" />
-        {/* 공원 */}
-        <rect x="160" y="60" width="52" height="40" rx="3" fill="#CBDCC2" />
-        {/* 도로 */}
-        <rect x="0" y="44" width="224" height="10" fill="#FFFFFF" />
-        <rect x="72" y="0" width="10" height="112" fill="#FFFFFF" />
-        <rect x="144" y="0" width="10" height="112" fill="#FFFFFF" />
-        <line x1="0" y1="49" x2="224" y2="49" stroke="#F5C63F" strokeWidth="1.5" strokeDasharray="6 5" />
+    <span className="relative block aspect-[16/9] w-full overflow-hidden bg-[#EAE7E1]">
+      <svg viewBox="0 0 224 126" className="absolute inset-0 h-full w-full" aria-hidden>
+        <rect x="8" y="8" width="60" height="40" rx="3" fill="#DDD9CF" />
+        <rect x="8" y="64" width="60" height="54" rx="3" fill="#E2DED4" />
+        <rect x="84" y="8" width="56" height="40" rx="3" fill="#E2DED4" />
+        <rect x="84" y="64" width="56" height="54" rx="3" fill="#DDD9CF" />
+        <rect x="156" y="8" width="60" height="40" rx="3" fill="#E2DED4" />
+        <rect x="156" y="64" width="60" height="54" rx="3" fill="#CBDCC2" />
+        <rect x="0" y="50" width="224" height="11" fill="#FFFFFF" />
+        <rect x="72" y="0" width="10" height="126" fill="#FFFFFF" />
+        <rect x="144" y="0" width="10" height="126" fill="#FFFFFF" />
+        <line x1="0" y1="55.5" x2="224" y2="55.5" stroke="#F5C63F" strokeWidth="1.5" strokeDasharray="6 5" />
       </svg>
-      {/* 위치 핀 */}
       <span className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-full flex-col items-center">
-        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary shadow-md">
-          <MapPin className="h-3.5 w-3.5 text-white" />
+        <span className="flex h-8 w-8 items-center justify-center rounded-full bg-primary shadow-md">
+          <MapPin className="h-4.5 w-4.5 text-white" />
         </span>
-        <span className="-mt-0.5 block h-0 w-0 border-x-4 border-t-[6px] border-x-transparent border-t-primary" />
+        <span className="-mt-0.5 block h-0 w-0 border-x-[5px] border-t-[8px] border-x-transparent border-t-primary" />
       </span>
-      <span className="absolute bottom-1.5 right-2 rounded bg-white/85 px-1.5 py-0.5 text-[9px] font-semibold text-neutral-600">
+      <span className="absolute bottom-2 right-2.5 rounded bg-white/85 px-2 py-1 text-[10px] font-semibold text-neutral-600">
         카카오지도 연동
       </span>
     </span>
   );
 }
 
-/** 기능 항목에 마우스를 올리면 설명(지도 연동은 지도 미리보기 포함)이 팝업으로 뜬다 */
-function FeatureTip({ item }: { item: FeatureItem }) {
-  return (
-    <span className="group relative inline-flex">
-      <button
-        type="button"
-        className="cursor-default text-left text-sm leading-relaxed text-muted-foreground underline decoration-border decoration-dotted underline-offset-4 transition-colors break-keep hover:text-primary focus-visible:text-primary focus-visible:outline-none"
-      >
-        {item.label}
-      </button>
-      <span
-        role="tooltip"
-        className={cn(
-          "pointer-events-none absolute left-0 top-full z-30 mt-2 translate-y-1 rounded-lg bg-neutral-800 px-3.5 py-3 text-xs font-medium leading-relaxed text-white opacity-0 shadow-lg transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none",
-          item.visual === "map" ? "w-64" : "w-60",
-        )}
-      >
-        <span className="absolute -top-1 left-4 h-2 w-2 rotate-45 bg-neutral-800" />
-        {item.visual === "map" && <MapPreview />}
-        {item.desc}
-      </span>
-    </span>
-  );
-}
-
+/**
+ * 좌측 분류 → 가운데 기능 목록 → 우측 실제 화면 캡처.
+ * 기능에 마우스를 올리거나 클릭하면 우측 미리보기가 그 기능의 실제 화면으로 바뀐다.
+ */
 export function FeaturesSection() {
+  const [groupIdx, setGroupIdx] = useState(0);
+  const [itemIdx, setItemIdx] = useState(0);
+  const group = FEATURE_GROUPS[groupIdx]!;
+  const item = group.items[itemIdx] ?? group.items[0]!;
+  const GroupIcon = group.icon;
+
+  const pickGroup = (gi: number) => {
+    setGroupIdx(gi);
+    setItemIdx(0);
+  };
+
   return (
     <section className="border-y border-border bg-secondary/30 py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeader
           label="FEATURES"
           title="필요한 기능을 홈페이지 안에 함께 구축합니다."
-          description="기본적인 웹 기능부터 예약·문의를 관리하는 운영 기능, 결제·회원 같은 확장 기능까지 필요한 범위에 맞춰 구성합니다."
+          description="기본적인 웹 기능부터 예약·문의를 관리하는 운영 기능, 결제·회원 같은 확장 기능까지 필요한 범위에 맞춰 구성합니다. 기능을 선택하면 실제 구축 화면으로 보여드립니다."
         />
 
-        <div className="mt-14 grid gap-10 sm:grid-cols-3">
-          {FEATURE_GROUPS.map((group, i) => {
-            const Icon = group.icon;
-            return (
-            <FadeIn key={group.title} delay={i * 80}>
-              <div className={i > 0 ? "sm:border-l sm:border-border sm:pl-10" : ""}>
-                <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-primary">{group.num}</span>
-                  <Icon className="h-6 w-6 text-muted-foreground/40" strokeWidth={1.5} />
-                </div>
-                <h3 className="mt-2 text-base font-semibold text-foreground">{group.title}</h3>
-                <ul className="mt-4 space-y-2.5">
-                  {group.items.map((item) => (
-                    <li key={item.label}>
-                      <FeatureTip item={item} />
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </FadeIn>
-            );
-          })}
-        </div>
+        <FadeIn className="mt-12">
+          <div className="grid gap-4 lg:grid-cols-[220px_250px_1fr] lg:gap-0 lg:overflow-hidden lg:rounded-2xl lg:border lg:border-border lg:bg-card lg:shadow-xs">
+            {/* 1단 · 분류 */}
+            <ul className="flex gap-2 overflow-x-auto pb-1 scrollbar-none lg:flex-col lg:gap-0 lg:overflow-visible lg:border-r lg:border-border lg:bg-secondary/40 lg:p-3 lg:pb-3">
+              {FEATURE_GROUPS.map((g, gi) => {
+                const Icon = g.icon;
+                const on = gi === groupIdx;
+                return (
+                  <li key={g.title} className="shrink-0 lg:shrink">
+                    <button
+                      type="button"
+                      onMouseEnter={() => pickGroup(gi)}
+                      onFocus={() => pickGroup(gi)}
+                      onClick={() => pickGroup(gi)}
+                      className={cn(
+                        "flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left transition-colors lg:py-3.5",
+                        on ? "bg-card shadow-xs ring-1 ring-border lg:ring-primary/25" : "text-muted-foreground hover:bg-card/70",
+                      )}
+                    >
+                      <Icon className={cn("h-5 w-5 shrink-0", on ? "text-primary" : "text-muted-foreground/50")} strokeWidth={1.5} />
+                      <span className="min-w-0">
+                        <span className="block font-mono text-[10px] font-bold text-primary/70">{g.num}</span>
+                        <span className={cn("block whitespace-nowrap text-sm font-bold", on ? "text-foreground" : "")}>{g.title}</span>
+                      </span>
+                      <ChevronRight className={cn("ml-auto hidden h-3.5 w-3.5 lg:block", on ? "text-primary" : "opacity-0")} />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
 
-        <p className="mt-10 text-xs leading-relaxed text-muted-foreground/80 break-keep">
-          ※ 각 기능에 마우스를 올리면 설명을 확인하실 수 있습니다. 모든 기능이 기본 포함되는 것은
-          아니며, 필요한 범위는 상담 후 맞춤으로 결정됩니다.
+            {/* 2단 · 기능 목록 */}
+            <ul className="flex gap-2 overflow-x-auto pb-1 scrollbar-none lg:flex-col lg:gap-0.5 lg:overflow-visible lg:border-r lg:border-border lg:p-3">
+              {group.items.map((it, ii) => {
+                const on = ii === itemIdx;
+                return (
+                  <li key={it.label} className="shrink-0 lg:shrink">
+                    <button
+                      type="button"
+                      onMouseEnter={() => setItemIdx(ii)}
+                      onFocus={() => setItemIdx(ii)}
+                      onClick={() => setItemIdx(ii)}
+                      className={cn(
+                        "flex w-full items-center justify-between gap-2 whitespace-nowrap rounded-lg px-4 py-2.5 text-left text-sm transition-colors",
+                        on ? "bg-primary/8 font-bold text-primary" : "font-medium text-muted-foreground hover:bg-secondary hover:text-foreground",
+                      )}
+                    >
+                      {it.label}
+                      <ChevronRight className={cn("hidden h-3.5 w-3.5 shrink-0 lg:block", on ? "opacity-100" : "opacity-0")} />
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+
+            {/* 3단 · 실제 화면 미리보기 */}
+            <div key={`${groupIdx}-${itemIdx}`} className="overflow-hidden rounded-2xl border border-border bg-card lg:rounded-none lg:border-0 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-300">
+              <div className="relative border-b border-border bg-secondary/30">
+                {item.visual === "map" ? (
+                  <MapPreview />
+                ) : item.img ? (
+                  <>
+                    <img src={item.img} alt={`${item.label} 실제 화면`} loading="lazy" className="aspect-[16/9] w-full object-cover object-top" />
+                    <span className="absolute left-3.5 top-3.5 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
+                      실제 구축 화면
+                    </span>
+                  </>
+                ) : (
+                  <div className="flex aspect-[16/9] w-full items-center justify-center bg-gradient-to-br from-secondary/60 to-primary/10">
+                    <span className="flex h-20 w-20 items-center justify-center rounded-3xl bg-card shadow-sm ring-1 ring-border">
+                      <GroupIcon className="h-9 w-9 text-primary" strokeWidth={1.4} />
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div className="p-6">
+                <p className="text-lg font-bold text-foreground">{item.label}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground break-keep">{item.desc}</p>
+              </div>
+            </div>
+          </div>
+        </FadeIn>
+
+        <p className="mt-8 text-xs leading-relaxed text-muted-foreground/80 break-keep">
+          ※ 모든 기능이 기본 포함되는 것은 아니며, 필요한 범위는 상담 후 맞춤으로 결정됩니다.
         </p>
       </div>
     </section>

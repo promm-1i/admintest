@@ -74,11 +74,15 @@ export function TemplateTeaserSection() {
                         label={sample.industry}
                         className="rounded-none border-0 transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div className="flex items-center justify-between gap-2 border-t border-border bg-background px-3 py-2">
-                        <p className="truncate text-xs font-semibold text-foreground">
-                          {sample.industry.replace(" 홈페이지", "")}
-                        </p>
-                        <ArrowRight className="h-3 w-3 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-primary" />
+                      {/* 썸네일만 보고도 무슨 업종인지 바로 읽히도록 그라데이션 위에 크게 표기 */}
+                      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-3.5 pb-3 pt-10">
+                        <p className="text-[11px] font-semibold text-white/70">{sample.tag}</p>
+                        <div className="mt-0.5 flex items-center justify-between gap-2">
+                          <p className="truncate text-base font-extrabold text-white drop-shadow-sm">
+                            {sample.industry.replace(" 홈페이지", "")}
+                          </p>
+                          <ArrowRight className="h-4 w-4 shrink-0 text-white/80 transition-transform duration-300 group-hover:translate-x-0.5" />
+                        </div>
                       </div>
                     </Link>
                   ))}
