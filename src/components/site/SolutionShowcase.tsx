@@ -97,7 +97,36 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
         </p>
       </Reveal>
       <RevealScale className="mt-5" delay={80}>
-        <CustomerSitePreview />
+        {(() => {
+          // 실제 구축 예시가 배포된 업종은 실물 페이지를 그대로 축소해 보여준다
+          const TEMPLATE_SLUGS: Record<string, string> = {
+            rentcar: "rentcar",
+            hospital: "clinic",
+            academy: "academy",
+            interior: "interior",
+            moving: "moving",
+          };
+          const slug = TEMPLATE_SLUGS[industry.key];
+          if (!slug) return <CustomerSitePreview />;
+          return (
+            <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+              <div className="flex items-center gap-1.5 border-b border-border bg-secondary/50 px-4 py-2.5">
+                <span className="size-2.5 rounded-full bg-border" />
+                <span className="size-2.5 rounded-full bg-border" />
+                <span className="size-2.5 rounded-full bg-border" />
+                <span className="ml-2 text-[11px] font-medium text-muted-foreground">
+                  실제 구축 예시 — 스크롤해서 둘러보세요
+                </span>
+              </div>
+              <iframe
+                src={`/templates/${slug}-landing/`}
+                title={`${industry.heroTitle} 고객 홈페이지 실물 예시`}
+                loading="lazy"
+                className="h-[560px] w-full border-0"
+              />
+            </div>
+          );
+        })()}
       </RevealScale>
       <div className="mt-5">
         <Button asChild variant="outline" className="gap-1.5 font-bold">
