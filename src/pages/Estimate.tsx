@@ -42,7 +42,9 @@ export default function Estimate() {
     () =>
       Object.keys(INDUSTRY_LANDING)
         .map((key) => {
-          const s = SAMPLES.find((x) => x.industryKey === key && x.type.includes("landing-template"));
+          const s = SAMPLES.find(
+            (x) => x.industryKey === key && x.type.includes("landing-template") && !x.designCode,
+          );
           return s ? { key, label: s.industry.replace(" 홈페이지", "") } : null;
         })
         .filter((x): x is NonNullable<typeof x> => Boolean(x))

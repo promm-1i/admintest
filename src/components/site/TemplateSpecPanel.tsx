@@ -3,6 +3,7 @@ import { toast } from "sonner";
 import { Send, ShieldCheck, LayoutGrid, Link2, ExternalLink, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TEMPLATE_PACKAGES, formatMan, PRODUCTION_PERIOD } from "@/lib/templatePackages";
+import { getDesignCode } from "@/lib/designCode";
 import type { Sample } from "@/lib/samples";
 
 /** 업종별 전용 기능과 관리자 데모 경로 */
@@ -43,9 +44,7 @@ export function TemplateSpecPanel({ sample }: { sample: Sample }) {
   const isLanding = sample.type.includes("landing-template");
   const pkg = TEMPLATE_PACKAGES.find((p) => p.key === (isLanding ? "landing" : "basic"))!;
   const industry = sample.industryKey ? INDUSTRY_SPEC[sample.industryKey] : undefined;
-  const designCode = `${(sample.industryKey ?? "tpl").split("-")[0]?.slice(0, 2).toUpperCase()}${
-    isLanding ? "L" : "B"
-  }-1001`;
+  const designCode = getDesignCode(sample);
 
   const copyLink = () => {
     void navigator.clipboard.writeText(window.location.href);
@@ -121,7 +120,7 @@ export function TemplateSpecPanel({ sample }: { sample: Sample }) {
       {/* CTA */}
       <div className="mt-5 space-y-2">
         <Button asChild size="lg" className="w-full gap-2 font-bold">
-          <Link to="/contact">
+          <Link to={`/contact?design=${encodeURIComponent(designCode)}`}>
             <Send className="h-4 w-4" />이 디자인으로 상담받기
           </Link>
         </Button>

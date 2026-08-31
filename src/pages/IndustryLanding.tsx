@@ -8,9 +8,11 @@ import { SAMPLES } from "@/lib/samples";
 import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 
-/** industryKey → 랜딩형 대표 샘플 */
+/** industryKey → 랜딩형 대표 샘플. 추가 디자인 시안(designCode 지정)은 대표에서 제외한다 */
 function landingSampleOf(key: string) {
-  return SAMPLES.find((s) => s.industryKey === key && s.type.includes("landing-template"));
+  return SAMPLES.find(
+    (s) => s.industryKey === key && s.type.includes("landing-template") && !s.designCode,
+  );
 }
 
 const PACKAGES = [

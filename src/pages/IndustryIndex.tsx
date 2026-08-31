@@ -15,7 +15,9 @@ export default function IndustryIndex() {
 
   const items = Object.entries(INDUSTRY_LANDING)
     .map(([key, copy]) => {
-      const s = SAMPLES.find((x) => x.industryKey === key && x.type.includes("landing-template"));
+      const s = SAMPLES.find(
+        (x) => x.industryKey === key && x.type.includes("landing-template") && !x.designCode,
+      );
       return s ? { key, copy, sample: s, label: s.industry.replace(" 홈페이지", "") } : null;
     })
     .filter((x): x is NonNullable<typeof x> => Boolean(x))

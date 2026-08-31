@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { MessageCircle, Phone } from "lucide-react";
@@ -8,6 +8,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { getDesignCodeOptions } from "@/lib/designCode";
 import { createReservation, reservationSchema, type ReservationInput } from "@/lib/api/reservations";
 import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -25,6 +35,22 @@ export default function Contact() {
   const [searchParams] = useSearchParams();
   const serviceFromLink = searchParams.get("service") ?? "";
 
+  // 템플릿 상세의 "이 디자인으로 상담받기"에서 넘어온 ?design= 값. 폼의 디자인 코드 셀렉트에 미리 선택해 둔다.
+  const designOptions = useMemo(() => getDesignCodeOptions(), []);
+  const designFromLink = searchParams.get("design") ?? "";
+  const [designCode, setDesignCode] = useState(() =>
+    designOptions.some((o) => o.code === designFromLink) ? designFromLink : "",
+  );
+  const designGroups = useMemo(() => {
+    const groups = new Map<string, typeof designOptions>();
+    for (const o of designOptions) {
+      const list = groups.get(o.industry) ?? [];
+      list.push(o);
+      groups.set(o.industry, list);
+    }
+    return [...groups.entries()];
+  }, [designOptions]);
+
   const [form, setForm] = useState({ name: "", phone: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [accessToken, setAccessToken] = useState<string | null>(null);
@@ -33,6 +59,7 @@ export default function Contact() {
     mutationFn: createReservation,
     onSuccess: (data) => {
       setForm({ name: "", phone: "", message: "" });
+      setDesignCode("");
       setErrors({});
       setAccessToken(data.access_token);
       toast.success("문의가 접수되었습니다. 확인 후 연락드리겠습니다.");
@@ -49,7 +76,10 @@ export default function Contact() {
       name: form.name,
       phone: form.phone,
       message: form.message,
-      service: serviceFromLink,
+      service: [serviceFromLink, designCode && `디자인 ${designCode}`]
+        .filter(Boolean)
+        .join(" · ")
+        .slice(0, 100),
       email: "",
       preferred_at: "",
     };
@@ -150,6 +180,25 @@ export default function Contact() {
             placeholder="010-0000-0000"
             onChange={(e) => set("phone")(e.target.value)}
           />
+        </Field>
+        <Field label="관심 디자인 코드 (선택)">
+          <Select value={designCode} onValueChange={setDesignCode}>
+            <SelectTrigger>
+              <SelectValue placeholder="템플릿에서 마음에 든 디자인이 있다면 선택해 주세요" />
+            </SelectTrigger>
+            <SelectContent>
+              {designGroups.map(([industry, options]) => (
+                <SelectGroup key={industry}>
+                  <SelectLabel>{industry}</SelectLabel>
+                  {options.map((o) => (
+                    <SelectItem key={o.code} value={o.code}>
+                      {o.code} · {o.title}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              ))}
+            </SelectContent>
+          </Select>
         </Field>
         <Field label="제작 희망 내용" error={errors["message"]}>
           <Textarea

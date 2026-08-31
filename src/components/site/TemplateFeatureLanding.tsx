@@ -17,6 +17,7 @@ import { Link } from "react-router-dom";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/button";
+import { getDesignCode } from "@/lib/designCode";
 import type { Sample } from "@/lib/samples";
 import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
 
@@ -498,7 +499,9 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
 
         <Reveal delay={150} className="mt-8 flex flex-wrap justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
-            <Link to="/contact">이 디자인으로 상담받기</Link>
+            <Link to={`/contact?design=${encodeURIComponent(getDesignCode(sample))}`}>
+              이 디자인으로 상담받기
+            </Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="gap-1.5">
             <Link to="/website/process">
