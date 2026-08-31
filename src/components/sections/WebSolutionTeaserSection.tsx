@@ -3,9 +3,14 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Send, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 import { cn } from "@/lib/utils";
 import {
+  Building2,
+  Car,
+  HeartPulse,
+  BookOpen,
+  Hammer,
+  PackageSearch,
   UtensilsCrossed,
   Briefcase,
   Scissors,
@@ -17,18 +22,14 @@ import {
   Calculator,
   Wrench,
   Flower2,
+  Scale,
+  Lamp,
+  HeartHandshake,
+  Blocks,
+  Flag,
+  Palette,
   type LucideIcon,
 } from "lucide-react";
-
-/** 업종 key → 우측 프리뷰에 띄우는 실물 캐처 (/thumbs/, 템플릿 갱신 시 자동 최신화) */
-const INDUSTRY_PREVIEWS: Record<string, string> = {
-  "real-estate": "/thumbs/realestate.jpg",
-  rentcar: "/thumbs/rentcar.jpg",
-  hospital: "/thumbs/clinic.jpg",
-  academy: "/thumbs/academy.jpg",
-  interior: "/thumbs/interior.jpg",
-  moving: "/thumbs/moving.jpg",
-};
 
 /** 관리자 솔루션 없이 템플릿으로 시작하는 업종 — 리스트 아래쪽에 이어서 노출한다 */
 type TemplateIndustry = {
@@ -43,6 +44,12 @@ type TemplateIndustry = {
 };
 
 const TEMPLATE_INDUSTRIES: TemplateIndustry[] = [
+  { key: "real-estate", name: "부동산", icon: Building2, img: "/thumbs/realestate.jpg", href: "/templates?industry=real-estate", title: "부동산 중개업소 홈페이지", note: "거래유형 필터 매물 장부와 중개보수 계산기로 매물이 많아 보이게 설계했습니다.", points: ["매물 장부 · 필터", "중개보수 계산기", "거래 절차", "상담 전화 CTA"] },
+  { key: "rentcar", name: "렌트카", icon: Car, img: "/thumbs/rentcar.jpg", href: "/templates?industry=rentcar", title: "렌트카 홈페이지", note: "차종 필터와 대여료 즉시 계산으로 견적 문의까지 이어지는 구성입니다.", points: ["차종 필터 라인업", "대여료 계산", "보험 안내", "예약 문의"] },
+  { key: "hospital", name: "병원 · 의원", icon: HeartPulse, img: "/thumbs/clinic.jpg", href: "/templates?industry=hospital", title: "병원 · 의원 홈페이지", note: "진료중 실시간 표시와 의료진 소개로 신뢰를 만들고 예약으로 연결합니다.", points: ["실시간 진료중 표시", "진료과목 안내", "의료진 소개", "예약 문의"] },
+  { key: "academy", name: "학원", icon: BookOpen, img: "/thumbs/academy.jpg", href: "/templates?industry=academy", title: "학원 홈페이지", note: "학년별 과정과 오늘 시간표로 관리 방식을 보여주고 상담 신청을 받습니다.", points: ["학년별 과정", "오늘 시간표", "강사진 소개", "상담 신청"] },
+  { key: "interior", name: "인테리어 · 리모델링", icon: Hammer, img: "/thumbs/interior.jpg", href: "/templates?industry=interior", title: "인테리어 · 리모델링 홈페이지", note: "시공 전후 슬라이더와 평형별 비용 계산으로 상담 신청을 만드는 구성입니다.", points: ["전후 비교 슬라이더", "평형별 비용", "시공 사례", "상담 신청"] },
+  { key: "moving", name: "이사 · 청소업체", icon: PackageSearch, img: "/thumbs/moving.jpg", href: "/templates?industry=moving", title: "이사 · 청소업체 홈페이지", note: "30초 간편 견적과 작업 전후 비교로 전화 상담까지 이어집니다.", points: ["30초 간편 견적", "전후 비교", "작업 사례", "전화 상담 CTA"] },
   { key: "restaurant", name: "음식점 · 카페", icon: UtensilsCrossed, img: "/thumbs/restaurant.jpg", href: "/templates?industry=restaurant", title: "음식점 · 카페 홈페이지", note: "실시간 영업중 배지와 메뉴판, 예약 문의까지 메뉴판처럼 정갈하게 담습니다.", points: ["실시간 영업중 표시", "카테고리 메뉴판", "오늘의 추천", "예약 문의 문자"] },
   { key: "corporate", name: "기업 · 브랜드", icon: Briefcase, img: "/thumbs/corporate.jpg", href: "/templates?industry=corporate", title: "기업 · 브랜드 홈페이지", note: "사업영역 · 지표 · 연혁으로 과장 없이 숫자로 신뢰를 만드는 B2B 구성입니다.", points: ["사업영역 그리드", "핵심 지표", "연혁 타임라인", "견적 문의"] },
   { key: "beauty", name: "미용실 · 뷰티샵", icon: Scissors, img: "/thumbs/beauty.jpg", href: "/templates?industry=beauty", title: "미용실 · 뷰티샵 홈페이지", note: "시술 가격 메뉴판과 스타일 갤러리, 디자이너 지명 예약까지 이어집니다.", points: ["시술 가격 메뉴판", "스타일 갤러리", "디자이너 지명 예약", "이용 안내"] },
@@ -54,6 +61,12 @@ const TEMPLATE_INDUSTRIES: TemplateIndustry[] = [
   { key: "tax", name: "세무사 · 회계", icon: Calculator, img: "/thumbs/tax.jpg", href: "/templates?industry=tax", title: "세무사·회계사무소 홈페이지", note: "기장료 요금표와 월별 세무 일정으로 수임 문의를 만드는 구성입니다.", points: ["기장료 요금표", "세무 일정 캘린더", "업무 안내", "상담 문자"] },
   { key: "auto", name: "자동차정비소", icon: Wrench, img: "/thumbs/auto.jpg", href: "/templates?industry=auto", title: "자동차정비소 홈페이지", note: "부품·공임 분리 공임표와 견적 승인 원칙으로 신뢰를 만드는 정비소 구성입니다.", points: ["공임표", "오일 패키지", "작업 과정", "정비 예약 문자"] },
   { key: "flower", name: "꽃집 · 플라워샵", icon: Flower2, img: "/thumbs/flower.jpg", href: "/templates?industry=flower", title: "꽃집·플라워샵 홈페이지", note: "용도별 상품 가격과 당일배달 안내로 문자 주문을 늘리는 구성입니다.", points: ["용도별 상품 가격", "당일배달 표시", "정기구독", "주문 문자"] },
+  { key: "law", name: "법률사무소", icon: Scale, img: "/thumbs/law.jpg", href: "/templates?industry=law", title: "법률사무소 홈페이지", note: "수행 분야와 수임료 원칙을 투명하게 안내해 신뢰를 만드는 구성입니다.", points: ["수행 분야 목차", "진행 절차", "수임료 원칙", "비밀 상담"] },
+  { key: "study", name: "스터디카페", icon: Lamp, img: "/thumbs/study.jpg", href: "/templates?industry=study", title: "스터디카페 홈페이지", note: "실시간 잔여석 보드와 요금표로 방문 전 확신을 주는 구성입니다.", points: ["잔여석 보드", "시간권 · 기간권 요금", "좌석 안내", "무인 이용 안내"] },
+  { key: "care", name: "요양원 · 주간보호", icon: HeartHandshake, img: "/thumbs/care.jpg", href: "/templates?industry=care", title: "요양원 · 주간보호 홈페이지", note: "등급별 비용과 하루 일과를 큰 글자로 안내해 보호자를 안심시키는 구성입니다.", points: ["등급별 비용", "하루 일과", "입소 절차", "전화 상담 CTA"] },
+  { key: "kids", name: "어린이집 · 유치원", icon: Blocks, img: "/thumbs/kids.jpg", href: "/templates?industry=kids", title: "어린이집 · 유치원 홈페이지", note: "반별 정원과 급식, 하루 일과를 투명하게 보여주는 구성입니다.", points: ["반별 정원표", "하루 일과", "급식 안내", "입소 대기 상담"] },
+  { key: "golf", name: "스크린골프", icon: Flag, img: "/thumbs/golf.jpg", href: "/templates?industry=golf", title: "스크린골프 홈페이지", note: "시간대별 요금과 레슨 · 회원권으로 예약을 만드는 다크 톤 구성입니다.", points: ["타석 요금표", "룸 · 타석 안내", "레슨 · 회원권", "예약 문자"] },
+  { key: "craft", name: "공방 · 클래스", icon: Palette, img: "/thumbs/craft.jpg", href: "/templates?industry=craft", title: "공방 · 클래스 홈페이지", note: "원데이 가격과 주간 일정표로 수강 신청을 만드는 콜라주형 구성입니다.", points: ["원데이 가격", "주간 일정표", "작품 갤러리", "수강 신청"] },
 ];
 
 /**
@@ -61,46 +74,25 @@ const TEMPLATE_INDUSTRIES: TemplateIndustry[] = [
  * 해당 업종의 실제 구축 화면과 관리 항목으로 바뀐다.
  */
 export function WebSolutionTeaserSection() {
-  const [activeKey, setActiveKey] = useState(INDUSTRY_SHOWCASES[0]!.key);
-  const activeSolution = INDUSTRY_SHOWCASES.find((s) => s.key === activeKey);
-  const activeTemplate = TEMPLATE_INDUSTRIES.find((t) => t.key === activeKey);
-  const active = activeSolution
-    ? {
-        name: activeSolution.name,
-        img: INDUSTRY_PREVIEWS[activeSolution.key]!,
-        href: activeSolution.solutionHref,
-        title: activeSolution.heroTitle,
-        note: activeSolution.connectionNote,
-        points: activeSolution.manageables.slice(0, 4),
-        badge: "홈페이지 + 관리자",
-      }
-    : {
-        name: activeTemplate!.name,
-        img: activeTemplate!.img,
-        href: activeTemplate!.href,
-        title: activeTemplate!.title,
-        note: activeTemplate!.note,
-        points: activeTemplate!.points,
-        badge: "템플릿 · 맞춤 제작",
-      };
+  const [activeKey, setActiveKey] = useState(TEMPLATE_INDUSTRIES[0]!.key);
+  const active = TEMPLATE_INDUSTRIES.find((t) => t.key === activeKey) ?? TEMPLATE_INDUSTRIES[0]!;
 
   return (
     <section id="industry-section" className="px-4 py-20 sm:px-6 lg:py-28">
       <div className="mx-auto max-w-[1400px] rounded-3xl border border-border bg-secondary/30 p-5 sm:p-8">
         <SectionHeader
-          label="CUSTOM BY INDUSTRY"
+          label="TEMPLATES BY INDUSTRY"
           title={
             <>
-              업종에 맞게 바로 쓰는
+              업종 템플릿으로
               <br />
-              맞춤형 웹솔루션
+              바로 시작하세요
             </>
           }
           description={
             <>
-              렌트카, 부동산처럼 고객 문의와 관리 기능이 중요한 업종에 맞춰 홈페이지와
-              <br />
-              관리자 시스템을 함께 구축합니다.
+              업종을 고르면 실제 구축된 화면을 바로 볼 수 있습니다. 문구 · 사진 · 회사정보만
+              바꿔 빠르게 제작해 드립니다.
             </>
           }
         />
@@ -108,51 +100,6 @@ export function WebSolutionTeaserSection() {
         <div className="mt-8 grid gap-5 lg:grid-cols-[235px_1fr]">
           {/* 업종 리스트 — 모바일에서는 가로 스크롤 칩, 데스크톱에서는 세로 목록 */}
           <ul className="flex gap-2 overflow-x-auto pb-1 scrollbar-none lg:max-h-[560px] lg:flex-col lg:gap-1 lg:overflow-y-auto lg:overscroll-contain lg:pb-0 lg:pr-1">
-            <li className="hidden px-4 pb-1 text-[11px] font-bold tracking-wide text-muted-foreground/70 lg:block">
-              홈페이지 + 관리자 시스템
-            </li>
-            {INDUSTRY_SHOWCASES.map((industry) => {
-              const Icon = industry.icon;
-              const isActive = industry.key === activeKey;
-              return (
-                <li key={industry.key} className="shrink-0 lg:shrink">
-                  <button
-                    type="button"
-                    onMouseEnter={() => setActiveKey(industry.key)}
-                    onFocus={() => setActiveKey(industry.key)}
-                    onClick={() => setActiveKey(industry.key)}
-                    className={cn(
-                      "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors lg:py-3.5",
-                      isActive
-                        ? "border-primary/40 bg-card shadow-xs"
-                        : "border-transparent text-muted-foreground hover:bg-card/70",
-                    )}
-                  >
-                    <Icon
-                      className={cn("h-5 w-5 shrink-0", isActive ? "text-primary" : "text-muted-foreground/60")}
-                      strokeWidth={1.5}
-                    />
-                    <span
-                      className={cn(
-                        "whitespace-nowrap text-sm font-semibold",
-                        isActive ? "text-foreground" : "text-muted-foreground",
-                      )}
-                    >
-                      {industry.name}
-                    </span>
-                    <ArrowRight
-                      className={cn(
-                        "ml-auto hidden h-3.5 w-3.5 transition-opacity lg:block",
-                        isActive ? "text-primary opacity-100" : "opacity-0",
-                      )}
-                    />
-                  </button>
-                </li>
-              );
-            })}
-            <li className="hidden border-t border-border/70 px-4 pb-1 pt-3 text-[11px] font-bold tracking-wide text-muted-foreground/70 lg:block">
-              업종 템플릿 · 맞춤 제작
-            </li>
             {TEMPLATE_INDUSTRIES.map((industry) => {
               const Icon = industry.icon;
               const isActive = industry.key === activeKey;
@@ -207,9 +154,7 @@ export function WebSolutionTeaserSection() {
                 <span className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
                   {active.name} · 실제 구축 화면
                 </span>
-                <span className="absolute right-4 top-4 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold text-primary-foreground">
-                  {active.badge}
-                </span>
+
               </div>
             </Link>
 
@@ -238,19 +183,27 @@ export function WebSolutionTeaserSection() {
           </div>
         </div>
 
-        <div className="mt-9 flex flex-wrap gap-3">
-          <Button asChild className="gap-1.5 font-bold">
-            <Link to="/web-solutions">
-              기능 및 요금 보기
-              <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
-          </Button>
-          <Button asChild variant="outline" className="gap-1.5">
-            <Link to="/contact">
-              <Send className="h-3.5 w-3.5" />
-              구축 문의하기
-            </Link>
-          </Button>
+        <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div>
+            <p className="text-sm font-bold text-foreground">기능이 더 필요하신가요? — 맞춤 제작 · 관리자 시스템</p>
+            <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">
+              예약 접수, 매물 · 고객 관리처럼 운영 기능이 필요하면 관리자 시스템까지 별도 커스텀으로 구축해 드립니다.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-wrap gap-3">
+            <Button asChild className="gap-1.5 font-bold">
+              <Link to="/web-solutions">
+                맞춤 제작 알아보기
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="gap-1.5">
+              <Link to="/contact">
+                <Send className="h-3.5 w-3.5" />
+                구축 문의
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </section>

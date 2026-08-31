@@ -1,4 +1,4 @@
-import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, type LucideIcon } from "lucide-react";
+import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, type LucideIcon } from "lucide-react";
 import { SAMPLES } from "@/lib/samples";
 
 /** 실제 판매 중인 템플릿을 스타일별로 뽑아 드롭다운 플라이아웃 항목으로 만든다 */
@@ -118,6 +118,42 @@ export const INDUSTRY_ITEMS: NavItem[] = [
     title: "꽃집 · 플라워샵 맞춤형",
     desc: "상품 가격 · 당일배달 · 주문 문의",
     href: "/templates?industry=flower",
+  },
+  {
+    icon: Scale,
+    title: "법률사무소 맞춤형",
+    desc: "수행 분야 · 수임료 원칙 · 비밀 상담",
+    href: "/templates?industry=law",
+  },
+  {
+    icon: Lamp,
+    title: "스터디카페 맞춤형",
+    desc: "잔여석 보드 · 요금표 · 좌석 안내",
+    href: "/templates?industry=study",
+  },
+  {
+    icon: HeartHandshake,
+    title: "요양원 · 주간보호 맞춤형",
+    desc: "등급별 비용 · 하루 일과 · 입소 상담",
+    href: "/templates?industry=care",
+  },
+  {
+    icon: Blocks,
+    title: "어린이집 · 유치원 맞춤형",
+    desc: "반별 정원 · 급식 안내 · 입소 대기",
+    href: "/templates?industry=kids",
+  },
+  {
+    icon: Flag,
+    title: "스크린골프 맞춤형",
+    desc: "타석 요금 · 레슨 · 룸 예약",
+    href: "/templates?industry=golf",
+  },
+  {
+    icon: Palette,
+    title: "공방 · 클래스 맞춤형",
+    desc: "클래스 가격 · 일정표 · 수강 신청",
+    href: "/templates?industry=craft",
   },
 ];
 
