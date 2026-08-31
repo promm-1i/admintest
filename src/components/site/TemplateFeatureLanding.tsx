@@ -135,6 +135,8 @@ const BUILD_STEPS = [
  */
 export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
   const isLanding = sample.type.includes("landing-template");
+  // /templates/{slug}-basic|landing/ 형태의 liveUrl에서 섹션 미리보기 이미지 슬러그를 뽑는다
+  const sectionSlug = sample.liveUrl?.match(/\/templates\/([a-z]+)-(?:basic|landing)\//)?.[1];
   const industry = sample.industryKey ? INDUSTRY_CONTENT[sample.industryKey] : undefined;
   const features = [...(industry?.dedicated ?? []), ...COMMON_FEATURES];
 
@@ -221,6 +223,31 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
             </p>
           </Reveal>
         </div>
+        {/* 실제 화면 미리보기 — 위 미리보기를 스크롤하지 않아도 안쪽 구성이 보이도록 */}
+        {sectionSlug && (
+          <div className="mt-6">
+            <Reveal>
+              <p className="text-sm font-semibold text-foreground">
+                실제 화면 미리보기
+                <span className="ml-2 text-xs font-normal text-muted-foreground">
+                  이 템플릿 안쪽 화면을 잘라 담았습니다
+                </span>
+              </p>
+            </Reveal>
+            <div className="mt-3 grid gap-3 sm:grid-cols-3">
+              {[1, 2, 3].map((n, i) => (
+                <FadeIn key={n} direction="up" delay={i * 90}>
+                  <img
+                    src={`/thumbs/sections/${sectionSlug}-${n}.jpg`}
+                    alt={`템플릿 화면 ${n}`}
+                    loading="lazy"
+                    className="w-full rounded-xl border border-border object-cover shadow-xs"
+                  />
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* 주요 기능 */}

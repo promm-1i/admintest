@@ -31,7 +31,7 @@ export function MegaMenuPanel({ entry, onNavigate, onMouseEnter, onMouseLeave }:
             <li key={item.label} className={item.children ? "group/fly relative" : undefined}>
               {groupStart && (
                 <div className="mx-5 mb-1 mt-2 border-t border-border pt-2">
-                  <p className="text-xs font-semibold tracking-wide text-muted-foreground">
+                  <p className="text-center text-xs font-semibold tracking-wide text-muted-foreground">
                     {item.group}
                   </p>
                 </div>
@@ -39,10 +39,12 @@ export function MegaMenuPanel({ entry, onNavigate, onMouseEnter, onMouseLeave }:
               <Link
                 to={item.href}
                 onClick={onNavigate}
-                className="flex items-center justify-between gap-3 whitespace-nowrap rounded-lg px-5 py-2.5 text-base text-foreground/80 transition-colors hover:bg-secondary hover:text-foreground"
+                className="relative flex items-center justify-center whitespace-nowrap rounded-lg px-9 py-2.5 text-center text-base text-foreground/80 transition-colors hover:bg-secondary hover:font-semibold hover:text-foreground"
               >
                 {item.label}
-                {item.children && <ChevronRight className="size-4 text-muted-foreground" />}
+                {item.children && (
+                  <ChevronRight className="absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                )}
               </Link>
 
               {/* hover 시 우측으로 펼쳐지는 실제 템플릿 목록 플라이아웃 */}
@@ -54,17 +56,19 @@ export function MegaMenuPanel({ entry, onNavigate, onMouseEnter, onMouseLeave }:
                         <Link
                           to={child.href}
                           onClick={onNavigate}
-                          className="flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-secondary"
+                          className="group/item flex items-center gap-3 rounded-lg p-2 ring-primary/70 ring-inset transition-all hover:bg-primary/5 hover:ring-2"
                         >
                           {child.image && (
                             <img
                               src={child.image}
                               alt=""
                               loading="lazy"
-                              className="h-10 w-16 shrink-0 rounded-md border border-border object-cover"
+                              className="h-10 w-16 shrink-0 rounded-md border border-border object-cover transition-transform group-hover/item:scale-105"
                             />
                           )}
-                          <span className="text-sm font-medium text-foreground/90">{child.label}</span>
+                          <span className="origin-left text-sm font-medium text-foreground/90 transition-transform group-hover/item:scale-110 group-hover/item:font-bold group-hover/item:text-primary">
+                            {child.label}
+                          </span>
                         </Link>
                       </li>
                     ))}
