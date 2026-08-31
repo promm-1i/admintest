@@ -41,6 +41,90 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "dental-basic-template",
+    industry: "치과 홈페이지",
+    title: "치과 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 치과",
+    purpose:
+      "진료 안내, 임플란트 진행 단계 타임라인, 의료법 형식의 비급여 진료비 표, 의료진 소개, 진료 예약 문자까지 담은 치과 홈페이지 템플릿입니다.",
+    features: ["실시간 진료중 표시", "임플란트 단계 안내", "비급여 진료비 표", "진료 예약 문자"],
+    idealFor: "과잉진료 걱정을 덜어주는 투명한 안내로 신뢰를 쌓고 싶은 치과의원",
+    image: "/thumbs/dental.jpg",
+    liveUrl: "/templates/dental-basic/",
+    industryKey: "dental",
+  },
+  {
+    slug: "dental-landing-template",
+    industry: "치과 홈페이지",
+    title: "치과 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 치과",
+    purpose:
+      "타임라인 드로잉과 지표 카운터 연출이 더해진 구성으로, 진료 철학에서 예약까지 이어지는 치과 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "임플란트 단계 타임라인", "비급여 진료비 표", "예약 CTA"],
+    idealFor: "신뢰감 있는 첫인상과 예약 전환을 함께 원하는 치과의원",
+    image: "/thumbs/dental.jpg",
+    liveUrl: "/templates/dental-landing/",
+    industryKey: "dental",
+  },
+  {
+    slug: "vet-basic-template",
+    industry: "동물병원 홈페이지",
+    title: "동물병원 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 동물병원",
+    purpose:
+      "진료 · 미용 · 호텔 요금 안내, 강아지 · 고양이 예방접종 스케줄, 첫 방문 안내, 예약 문자까지 담은 동물병원 홈페이지 템플릿입니다.",
+    features: ["진료 · 미용 · 호텔 요금표", "접종 스케줄 (강아지/고양이)", "야간 응급 안내", "예약 문자"],
+    idealFor: "보호자에게 비용과 일정을 투명하게 안내하고 싶은 동물병원 · 애견샵",
+    image: "/thumbs/vet.jpg",
+    liveUrl: "/templates/vet-basic/",
+    industryKey: "vet",
+  },
+  {
+    slug: "vet-landing-template",
+    industry: "동물병원 홈페이지",
+    title: "동물병원 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 동물병원",
+    purpose:
+      "따뜻한 라운드 연출과 통통 튀는 카드 모션으로, 진료 소개에서 예약 문의까지 부드럽게 이어지는 동물병원 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "요금표 탭", "접종 스케줄 타임라인", "예약 문자"],
+    idealFor: "친근한 브랜드 인상과 신규 보호자 유입을 함께 원하는 동물병원",
+    image: "/thumbs/vet.jpg",
+    liveUrl: "/templates/vet-landing/",
+    industryKey: "vet",
+  },
+  {
+    slug: "photo-basic-template",
+    industry: "사진관 · 스튜디오 홈페이지",
+    title: "사진관 · 스튜디오 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 사진관",
+    purpose:
+      "갤러리, 촬영 상품별 가격 · 포함 내역, 촬영 과정 안내, 사진가 소개, FAQ, 촬영 예약 문자로 구성된 다크 갤러리 톤의 사진관 홈페이지 템플릿입니다.",
+    features: ["작품 갤러리", "촬영 상품 가격표", "촬영 과정 안내", "촬영 예약 문자"],
+    idealFor: "작품과 가격을 함께 보여주고 예약 문의를 받고 싶은 사진관 · 프로필 스튜디오",
+    image: "/thumbs/photo.jpg",
+    liveUrl: "/templates/photo-basic/",
+    industryKey: "photo",
+  },
+  {
+    slug: "photo-landing-template",
+    industry: "사진관 · 스튜디오 홈페이지",
+    title: "사진관 · 스튜디오 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 사진관",
+    purpose:
+      "인화지가 현상되듯 떠오르는 이미지 연출과 흑백 → 컬러 호버로, 작품 감상에서 촬영 예약까지 이어지는 사진관 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "현상 효과 갤러리", "촬영 상품 가격표", "예약 CTA"],
+    idealFor: "작품 감도로 차별화하고 싶은 사진관 · 인물 전문 스튜디오",
+    image: "/thumbs/photo.jpg",
+    liveUrl: "/templates/photo-landing/",
+    industryKey: "photo",
+  },
+  {
     slug: "beauty-basic-template",
     industry: "미용실 · 뷰티샵 홈페이지",
     title: "미용실 · 뷰티샵 홈페이지 (기본형 템플릿)",
@@ -663,6 +747,9 @@ const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
   beauty: "뷰티샵",
   fitness: "필라테스·헬스",
   stay: "펜션·스테이",
+  dental: "치과",
+  vet: "동물병원",
+  photo: "사진관",
 };
 
 /** 실제로 템플릿이 존재하는 업종만 필터로 노출한다 (준비 안 된 업종 칩을 띄우지 않는다). */

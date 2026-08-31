@@ -1,4 +1,4 @@
-import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, type LucideIcon } from "lucide-react";
+import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, type LucideIcon } from "lucide-react";
 import { SAMPLES } from "@/lib/samples";
 
 /** 실제 판매 중인 템플릿을 스타일별로 뽑아 드롭다운 플라이아웃 항목으로 만든다 */
@@ -82,6 +82,24 @@ export const INDUSTRY_ITEMS: NavItem[] = [
     title: "펜션 · 스테이 맞춤형",
     desc: "객실 요금 · 이용 안내 · 예약 문의",
     href: "/templates?industry=stay",
+  },
+  {
+    icon: Smile,
+    title: "치과 맞춤형",
+    desc: "임플란트 안내 · 비급여 표 · 진료 예약",
+    href: "/templates?industry=dental",
+  },
+  {
+    icon: PawPrint,
+    title: "동물병원 맞춤형",
+    desc: "요금표 · 접종 스케줄 · 예약 문의",
+    href: "/templates?industry=vet",
+  },
+  {
+    icon: Camera,
+    title: "사진관 · 스튜디오 맞춤형",
+    desc: "갤러리 · 촬영 상품 · 촬영 예약",
+    href: "/templates?industry=photo",
   },
 ];
 
