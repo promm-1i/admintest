@@ -50,7 +50,8 @@ export function MegaMenuPanel({ entry, onNavigate, onMouseEnter, onMouseLeave }:
               {/* hover 시 우측으로 펼쳐지는 실제 템플릿 목록 플라이아웃 */}
               {item.children && (
                 <div className="invisible absolute left-full top-0 z-10 pl-2 opacity-0 transition-all duration-200 group-hover/fly:visible group-hover/fly:opacity-100 group-focus-within/fly:visible group-focus-within/fly:opacity-100 motion-reduce:transition-none">
-                  <ul className="w-60 rounded-2xl border border-border bg-background p-2 shadow-xl">
+                  {/* 업종이 많아도 잘리지 않도록 3열 그리드 + 화면 높이 초과 시 스크롤 */}
+                  <ul className="grid max-h-[76vh] w-[720px] max-w-[78vw] grid-cols-3 gap-x-1 gap-y-0.5 overflow-y-auto overscroll-contain rounded-2xl border border-border bg-background p-2.5 shadow-xl">
                     {item.children.map((child) => (
                       <li key={child.href}>
                         <Link
