@@ -1,4 +1,4 @@
-import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, type LucideIcon } from "lucide-react";
+import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, type LucideIcon } from "lucide-react";
 import { SAMPLES } from "@/lib/samples";
 
 /** 실제 판매 중인 템플릿을 스타일별로 뽑아 드롭다운 플라이아웃 항목으로 만든다 */
@@ -64,6 +64,24 @@ export const INDUSTRY_ITEMS: NavItem[] = [
     title: "기업 · 브랜드 맞춤형",
     desc: "사업영역 · 지표 · 연혁 · 견적 문의",
     href: "/templates?industry=corporate",
+  },
+  {
+    icon: Scissors,
+    title: "미용실 · 뷰티샵 맞춤형",
+    desc: "시술 가격표 · 스타일 갤러리 · 지명 예약",
+    href: "/templates?industry=beauty",
+  },
+  {
+    icon: Dumbbell,
+    title: "필라테스 · 헬스 맞춤형",
+    desc: "주간 시간표 · 회원권 · 체험 신청",
+    href: "/templates?industry=fitness",
+  },
+  {
+    icon: TreePine,
+    title: "펜션 · 스테이 맞춤형",
+    desc: "객실 요금 · 이용 안내 · 예약 문의",
+    href: "/templates?industry=stay",
   },
 ];
 

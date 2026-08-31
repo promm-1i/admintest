@@ -227,3 +227,33 @@
     display: none;
   }
 }
+
+
+/* 실시간 접수 현황 — 아래에서 위로 흐르는 세로 티커 */
+.inquiry-ticker {
+  animation: inquiry-up 32s linear infinite;
+}
+@keyframes inquiry-up {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+.live-ping {
+  animation: live-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes live-ping {
+  75%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .inquiry-ticker,
+  .live-ping {
+    animation: none !important;
+  }
+}

@@ -9,6 +9,7 @@ import { PricingSection } from "@/components/sections/PricingSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { SupportSection } from "@/components/sections/SupportSection";
 import { ReviewsSection } from "@/components/sections/ReviewsSection";
+import { LiveInquiriesSection } from "@/components/sections/LiveInquiriesSection";
 import { BlogTeaserSection } from "@/components/sections/BlogTeaserSection";
 import { RecommendedForSection } from "@/components/sections/RecommendedForSection";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -32,6 +33,7 @@ export default function Home() {
       <ProcessSection />
       <SupportSection />
       <ReviewsSection />
+      <LiveInquiriesSection />
       <BlogTeaserSection />
       <RecommendedForSection />
       <FaqSection />

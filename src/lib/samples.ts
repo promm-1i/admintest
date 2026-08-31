@@ -41,6 +41,90 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "beauty-basic-template",
+    industry: "미용실 · 뷰티샵 홈페이지",
+    title: "미용실 · 뷰티샵 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 뷰티샵",
+    purpose:
+      "시술 카테고리별 가격 메뉴판, 스타일 갤러리, 디자이너 소개와 지명 예약 문자까지 — 패션 매거진처럼 정돈한 미용실 홈페이지 템플릿입니다.",
+    features: ["시술 가격 메뉴판", "스타일 갤러리", "디자이너 지명 예약", "이용 안내 · 노쇼 규정"],
+    idealFor: "가격과 디자이너를 투명하게 보여주고 예약 문의로 연결하고 싶은 미용실 · 네일 · 피부관리샵",
+    image: "/thumbs/beauty.jpg",
+    liveUrl: "/templates/beauty-basic/",
+    industryKey: "beauty",
+  },
+  {
+    slug: "beauty-landing-template",
+    industry: "미용실 · 뷰티샵 홈페이지",
+    title: "미용실 · 뷰티샵 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 뷰티샵",
+    purpose:
+      "에디토리얼 세리프와 커튼 리빌 연출이 더해진 구성으로, 스타일 감상에서 디자이너 지명 예약까지 이어지는 뷰티샵 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "시술 가격 메뉴판", "디자이너 지명 예약", "예약 문의 문자"],
+    idealFor: "브랜드 감도와 예약 전환을 함께 원하는 미용실 · 헤어 살롱",
+    image: "/thumbs/beauty.jpg",
+    liveUrl: "/templates/beauty-landing/",
+    industryKey: "beauty",
+  },
+  {
+    slug: "fitness-basic-template",
+    industry: "필라테스 · 헬스장 홈페이지",
+    title: "필라테스 · 헬스장 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 필라테스 · 헬스",
+    purpose:
+      "요일별 주간 시간표, 회원권 가격표, 코치 자격 소개, 체험 신청 문자로 구성된 피트니스 스튜디오 홈페이지 템플릿입니다.",
+    features: ["주간 시간표 (요일 탭)", "회원권 · PT 가격표", "코치 자격 소개", "체험 신청 문자"],
+    idealFor: "시간표와 가격을 투명하게 공개하고 체험 신청을 받고 싶은 필라테스 · 헬스 · PT 스튜디오",
+    image: "/thumbs/fitness.jpg",
+    liveUrl: "/templates/fitness-basic/",
+    industryKey: "fitness",
+  },
+  {
+    slug: "fitness-landing-template",
+    industry: "필라테스 · 헬스장 홈페이지",
+    title: "필라테스 · 헬스장 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 필라테스 · 헬스",
+    purpose:
+      "지표 카운터와 스크롤 연출이 더해진 구성으로, 프로그램 소개에서 체험 신청까지 이어지는 피트니스 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "주간 시간표", "회원권 가격표", "체험 신청 CTA"],
+    idealFor: "전문성 있는 첫인상과 체험 전환율을 함께 원하는 필라테스 · 헬스 스튜디오",
+    image: "/thumbs/fitness.jpg",
+    liveUrl: "/templates/fitness-landing/",
+    industryKey: "fitness",
+  },
+  {
+    slug: "stay-basic-template",
+    industry: "펜션 · 스테이 홈페이지",
+    title: "펜션 · 스테이 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 펜션 · 스테이",
+    purpose:
+      "독채 객실별 요금, 성수기 요금 안내, 취소 규정, 이용 안내 아코디언, 날짜·인원 예약 문자까지 담은 감성 스테이 홈페이지 템플릿입니다.",
+    features: ["객실별 요금 안내", "성수기 · 취소 규정", "이용 안내 아코디언", "날짜 · 인원 예약 문자"],
+    idealFor: "객실과 요금을 정직하게 보여주고 직접 예약 문의를 받고 싶은 펜션 · 독채 스테이",
+    image: "/thumbs/stay.jpg",
+    liveUrl: "/templates/stay-basic/",
+    industryKey: "stay",
+  },
+  {
+    slug: "stay-landing-template",
+    industry: "펜션 · 스테이 홈페이지",
+    title: "펜션 · 스테이 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 펜션 · 스테이",
+    purpose:
+      "풀스크린 히어로와 느린 줌, 명조 산문 톤의 연출로 머무는 상상을 먼저 하게 만드는 감성 스테이 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "풀스크린 히어로", "객실별 요금 안내", "예약 문의 문자"],
+    idealFor: "감성 숙소의 분위기를 그대로 전하고 직접 예약을 늘리고 싶은 펜션 · 스테이",
+    image: "/thumbs/stay.jpg",
+    liveUrl: "/templates/stay-landing/",
+    industryKey: "stay",
+  },
+  {
     slug: "restaurant-basic-template",
     industry: "음식점 · 카페 홈페이지",
     title: "음식점 · 카페 홈페이지 (기본형 템플릿)",
@@ -576,6 +660,9 @@ const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
   moving: "이사·청소업체",
   restaurant: "음식점·카페",
   corporate: "기업·브랜드",
+  beauty: "뷰티샵",
+  fitness: "필라테스·헬스",
+  stay: "펜션·스테이",
 };
 
 /** 실제로 템플릿이 존재하는 업종만 필터로 노출한다 (준비 안 된 업종 칩을 띄우지 않는다). */
