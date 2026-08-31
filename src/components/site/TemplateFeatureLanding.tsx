@@ -123,6 +123,34 @@ const COMMON_FEATURES: { icon: LucideIcon; title: string; points: [string, strin
   },
 ];
 
+/** 템플릿 구매 전 공통 질문 — 상담 직전 망설임을 줄이는 답 */
+const BUY_FAQ = [
+  {
+    q: "쓸 만한 사진이 없어요.",
+    a: "업종에 맞는 고품질 이미지를 저희가 준비해 드립니다. 매장 사진이 있으면 더 좋지만, 없어도 제작에는 문제가 없습니다.",
+  },
+  {
+    q: "문구를 어떻게 써야 할지 모르겠어요.",
+    a: "업종별로 검증된 문구 구성이 템플릿에 들어 있습니다. 상호 · 주소 · 가격만 알려주시면 나머지는 저희가 다듬어 드립니다.",
+  },
+  {
+    q: "수정은 몇 번까지 되나요?",
+    a: "제작 중 검수 단계에서 문구 · 사진 교체는 횟수 제한 없이 반영합니다. 구성 자체를 바꾸는 큰 수정은 상담 시 범위를 정합니다.",
+  },
+  {
+    q: "여기서 색이나 메뉴를 바꿀 수 있나요?",
+    a: "네. 템플릿은 시작점이고, 브랜드 색 · 메뉴 구성 · 섹션 순서를 원하시는 대로 조정해 제작합니다.",
+  },
+  {
+    q: "제작 후에 내용은 어떻게 고치나요?",
+    a: "공지 · 게시글 · 팝업은 관리자 모드에서 직접 수정하실 수 있고, 디자인 수정이 필요하면 건별로 빠르게 처리해 드립니다.",
+  },
+  {
+    q: "매달 나가는 비용이 있나요?",
+    a: "호스팅(연 24만원)과 2년차부터의 도메인 연 3만원이 전부입니다. 그 외 숨은 월 비용은 없습니다.",
+  },
+];
+
 const BUILD_STEPS = [
   { no: "01", title: "디자인 선택", desc: "마음에 드는 템플릿을 고르고 상담을 신청합니다." },
   { no: "02", title: "자료 전달", desc: "로고, 문구, 사진 등 넣고 싶은 내용을 전달해 주세요." },
@@ -353,6 +381,78 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
                 );
               })}
             </div>
+          </div>
+        </FadeIn>
+      </section>
+
+      {/* 모바일 미리보기 — 손님 절반은 폰으로 봅니다 */}
+      {sectionSlug && (
+        <section className="overflow-hidden rounded-2xl border border-border bg-foreground p-8 text-background sm:p-12">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_auto]">
+            <Reveal>
+              <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary-foreground/60">
+                MOBILE
+              </p>
+              <h2 className="mt-3 text-2xl font-bold sm:text-3xl break-keep">
+                손님 절반은
+                <br />
+                휴대폰으로 봅니다
+              </h2>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-background/70 break-keep">
+                같은 홈페이지가 모바일 화면 크기에 맞춰 자동으로 재배치됩니다. 왼쪽 화면 그대로,
+                줄바꿈과 버튼 크기까지 손가락에 맞게 조정된 실제 모바일 화면입니다.
+              </p>
+              <ul className="mt-6 space-y-2">
+                {["전화 · 문자 버튼이 항상 손 닿는 곳에", "표와 가격도 가로 스크롤 없이", "하단 고정 상담 바 기본 제공"].map((t) => (
+                  <li key={t} className="flex items-center gap-2.5 text-sm text-background/80">
+                    <Check className="h-4 w-4 shrink-0 text-primary-foreground/70" />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <FadeIn direction="up" delay={120} className="mx-auto flex gap-5">
+              {[1, 2].map((n) => (
+                <div
+                  key={n}
+                  className={`w-[190px] shrink-0 overflow-hidden rounded-[26px] border-[6px] border-black/80 bg-black shadow-2xl sm:w-[210px] ${n === 2 ? "hidden sm:block sm:translate-y-6" : ""}`}
+                >
+                  <img
+                    src={`/thumbs/mobile/${sectionSlug}-${n}.jpg`}
+                    alt={`모바일 화면 ${n}`}
+                    loading="lazy"
+                    className="aspect-[390/780] w-full object-cover object-top"
+                  />
+                </div>
+              ))}
+            </FadeIn>
+          </div>
+        </section>
+      )}
+
+      {/* 제작 전에 자주 묻는 질문 */}
+      <section>
+        <Reveal>
+          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">FAQ</p>
+          <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
+            제작 전에 자주 묻는 질문
+          </h2>
+        </Reveal>
+        <FadeIn direction="up" delay={100}>
+          <div className="mt-7 grid gap-x-10 gap-y-6 sm:grid-cols-2">
+            {BUY_FAQ.map((f) => (
+              <div key={f.q} className="rounded-2xl border border-border bg-card p-6">
+                <p className="flex items-start gap-2.5 text-[15px] font-bold text-foreground break-keep">
+                  <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-primary/10 text-[11px] font-extrabold text-primary">
+                    Q
+                  </span>
+                  {f.q}
+                </p>
+                <p className="mt-2.5 pl-[30px] text-sm leading-relaxed text-muted-foreground break-keep">
+                  {f.a}
+                </p>
+              </div>
+            ))}
           </div>
         </FadeIn>
       </section>
