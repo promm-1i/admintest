@@ -100,6 +100,7 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
         {(() => {
           // 실제 구축 예시가 배포된 업종은 실물 페이지를 그대로 축소해 보여준다
           const TEMPLATE_SLUGS: Record<string, string> = {
+            "real-estate": "realestate",
             rentcar: "rentcar",
             hospital: "clinic",
             academy: "academy",
