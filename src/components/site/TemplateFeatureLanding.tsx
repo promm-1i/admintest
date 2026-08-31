@@ -18,6 +18,7 @@ import { Reveal, RevealScale } from "@/pages/services/previewKit";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/button";
 import type { Sample } from "@/lib/samples";
+import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
 
 type IndustryContent = {
   label: string;
@@ -138,7 +139,7 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
   // /templates/{slug}-basic|landing/ 형태의 liveUrl에서 섹션 미리보기 이미지 슬러그를 뽑는다
   const sectionSlug = sample.liveUrl?.match(/\/templates\/([a-z]+)-(?:basic|landing)\//)?.[1];
   const industry = sample.industryKey ? INDUSTRY_CONTENT[sample.industryKey] : undefined;
-  const features = [...(industry?.dedicated ?? []), ...COMMON_FEATURES];
+  const sectionShots = sectionSlug ? (TEMPLATE_SECTIONS[sectionSlug] ?? []) : [];
 
   return (
     <div className="mt-16 space-y-16 sm:space-y-20">
@@ -223,32 +224,65 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
             </p>
           </Reveal>
         </div>
-        {/* 실제 화면 미리보기 — 위 미리보기를 스크롤하지 않아도 안쪽 구성이 보이도록 */}
-        {sectionSlug && (
-          <div className="mt-6">
-            <Reveal>
-              <p className="text-sm font-semibold text-foreground">
-                실제 화면 미리보기
-                <span className="ml-2 text-xs font-normal text-muted-foreground">
-                  이 템플릿 안쪽 화면을 잘라 담았습니다
-                </span>
-              </p>
-            </Reveal>
-            <div className="mt-3 grid gap-3 sm:grid-cols-3">
-              {[1, 2, 3].map((n, i) => (
-                <FadeIn key={n} direction="up" delay={i * 90}>
-                  <img
-                    src={`/thumbs/sections/${sectionSlug}-${n}.jpg`}
-                    alt={`템플릿 화면 ${n}`}
-                    loading="lazy"
-                    className="w-full rounded-xl border border-border object-cover shadow-xs"
-                  />
-                </FadeIn>
-              ))}
-            </div>
-          </div>
-        )}
       </section>
+
+      {/* 이 템플릿에 담긴 화면들 — 실물 섹션 캡처 + 실제 섹션 제목 */}
+      {sectionShots.length > 0 && (
+        <section>
+          <Reveal>
+            <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
+              INSIDE THIS TEMPLATE
+            </p>
+            <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
+              이 템플릿에 담긴 화면들
+            </h2>
+            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
+              실제 배포된 템플릿에서 화면을 그대로 잘라왔습니다. 문구 · 사진 · 가격만 바꾸면 이
+              구성이 그대로 사장님 홈페이지가 됩니다.
+            </p>
+          </Reveal>
+
+          {sample.features && (
+            <Reveal delay={80} className="mt-5 flex flex-wrap gap-2">
+              {sample.features.map((f) => (
+                <span
+                  key={f}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-primary/8 px-3.5 py-1.5 text-xs font-bold text-primary"
+                >
+                  <Check className="h-3 w-3" />
+                  {f}
+                </span>
+              ))}
+            </Reveal>
+          )}
+
+          <div className="mt-7 grid gap-5 sm:grid-cols-2">
+            {sectionShots.map((shot, i) => (
+              <FadeIn key={shot.img} direction="up" delay={(i % 2) * 90}>
+                <figure className="group overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
+                  <div className="overflow-hidden border-b border-border">
+                    <img
+                      src={shot.img}
+                      alt={shot.title}
+                      loading="lazy"
+                      className="max-h-[340px] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                  <figcaption className="flex items-center gap-3 px-5 py-3.5">
+                    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary/10 font-mono text-[11px] font-bold text-primary">
+                      {i + 1}
+                    </span>
+                    <span className="truncate text-sm font-bold text-foreground">{shot.title}</span>
+                    <span className="ml-auto shrink-0 text-[11px] font-medium text-muted-foreground">
+                      실물 캡처
+                    </span>
+                  </figcaption>
+                </figure>
+              </FadeIn>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 주요 기능 */}
       <section>
@@ -256,57 +290,71 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
             FEATURES
           </p>
-          <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">주요 기능</h2>
+          <h2 className="mt-3 text-2xl font-bold text-foreground sm:text-3xl">
+            함께 제공되는 기능
+          </h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-            운영 시스템부터 마케팅까지, 홈페이지를 가장 간편하고 효율적으로 이용하실 수 있도록
-            도와드립니다.
+            화면 뒤에서 운영을 받쳐주는 기능들입니다. 전부 기본 제공되며, 별도 프로그램 없이
+            관리자 화면에서 직접 다룹니다.
           </p>
         </Reveal>
 
-        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {features.map((f, i) => {
-            const Icon = f.icon;
-            const isDedicated = i < (industry?.dedicated.length ?? 0);
-            return (
-              <FadeIn key={f.title} direction="up" delay={(i % 3) * 80}>
-                <div
-                  className={`h-full rounded-xl border p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm ${
-                    isDedicated
-                      ? "border-primary/30 bg-primary/[0.04] hover:border-primary/50"
-                      : "border-border bg-card hover:border-primary/30"
-                  }`}
-                >
-                  <div className="flex items-center gap-2.5">
-                    <span
-                      className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-                        isDedicated ? "bg-primary/12" : "bg-secondary"
-                      }`}
-                    >
+        {industry && industry.dedicated.length > 0 && (
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {industry.dedicated.map((f, i) => {
+              const Icon = f.icon;
+              return (
+                <FadeIn key={f.title} direction="up" delay={i * 90}>
+                  <div className="h-full rounded-2xl bg-primary/[0.05] p-6 ring-1 ring-primary/15">
+                    <div className="flex items-center gap-3">
+                      <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+                        <Icon className="h-4.5 w-4.5" />
+                      </span>
+                      <div>
+                        <p className="text-[11px] font-bold tracking-wide text-primary">업종 전용</p>
+                        <p className="text-base font-bold text-foreground">{f.title}</p>
+                      </div>
+                    </div>
+                    <ul className="mt-4 space-y-1.5">
+                      {f.points.map((pt) => (
+                        <li key={pt} className="flex items-start gap-2 text-sm leading-relaxed text-foreground/75 break-keep">
+                          <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </FadeIn>
+              );
+            })}
+          </div>
+        )}
+
+        <FadeIn direction="up" delay={120}>
+          <div className="mt-5 overflow-hidden rounded-2xl border border-border bg-card">
+            <div className="grid sm:grid-cols-2">
+              {COMMON_FEATURES.map((f, i) => {
+                const Icon = f.icon;
+                return (
+                  <div
+                    key={f.title}
+                    className={`flex items-start gap-4 px-6 py-5 ${i > 0 ? "border-t border-border/70" : ""} ${i > 1 ? "" : "sm:border-t-0"} ${i % 2 === 1 ? "sm:border-l sm:border-border/70" : ""} ${i > 1 ? "sm:border-t sm:border-border/70" : ""}`}
+                  >
+                    <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-secondary">
                       <Icon className="h-4 w-4 text-primary" />
                     </span>
-                    <h3 className="text-sm font-bold text-foreground break-keep">{f.title}</h3>
+                    <div className="min-w-0">
+                      <p className="text-sm font-bold text-foreground">{f.title}</p>
+                      <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground break-keep">
+                        {f.points[0]} · {f.points[1]}
+                      </p>
+                    </div>
                   </div>
-                  {isDedicated && (
-                    <span className="mt-3 inline-block rounded-full bg-primary px-2 py-0.5 text-[10px] font-bold text-primary-foreground">
-                      {industry?.label} 전용
-                    </span>
-                  )}
-                  <ul className="mt-3 space-y-1.5">
-                    {f.points.map((p) => (
-                      <li
-                        key={p}
-                        className="flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground break-keep"
-                      >
-                        <span className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary/50" />
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </FadeIn>
-            );
-          })}
-        </div>
+                );
+              })}
+            </div>
+          </div>
+        </FadeIn>
       </section>
 
       {/* 제작 방식 */}

@@ -3,11 +3,13 @@ import { SAMPLES } from "@/lib/samples";
 
 /** 실제 판매 중인 템플릿을 스타일별로 뽑아 드롭다운 플라이아웃 항목으로 만든다 */
 function templateChildren(styleKey: "basic-template" | "landing-template") {
-  return SAMPLES.filter((s) => s.industryKey && s.type.includes(styleKey)).map((s) => ({
-    label: s.industry.replace(" 홈페이지", ""),
-    href: `/samples/${s.slug}`,
-    ...(s.image ? { image: s.image } : {}),
-  }));
+  return SAMPLES.filter((s) => s.industryKey && s.type.includes(styleKey))
+    .map((s) => ({
+      label: s.industry.replace(" 홈페이지", ""),
+      href: `/samples/${s.slug}`,
+      ...(s.image ? { image: s.image } : {}),
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label, "ko"));
 }
 
 export type NavItem = { icon: LucideIcon; title: string; desc: string; href?: string };
