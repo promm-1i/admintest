@@ -29,7 +29,7 @@ export function PricingSection() {
                 {p.badge ? (
                   <span
                     className={cn(
-                      "mb-2 inline-block w-fit rounded-full px-2.5 py-0.5 text-[10px] font-bold text-white",
+                      "idle-breath mb-2 inline-block w-fit rounded-full px-2.5 py-0.5 text-[10px] font-bold text-white",
                       p.badgeTone === "recommended" ? "bg-primary" : "bg-emerald-500",
                     )}
                   >

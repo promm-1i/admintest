@@ -28,7 +28,7 @@ function FloatingItem({
 
 export function FloatingQuickActions() {
   return (
-    <div className="fixed bottom-8 right-6 z-40 hidden flex-col gap-3 md:flex">
+    <div className="idle-float fixed bottom-8 right-6 z-40 hidden flex-col gap-3 md:flex">
       <Link to="/estimate" aria-label="1분 견적 계산기">
         <FloatingItem
           label="1분 견적 계산기"

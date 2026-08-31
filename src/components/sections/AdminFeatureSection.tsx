@@ -310,7 +310,7 @@ export function AdminFeatureSection() {
         {/* Right Dashboard Mockup Column — 좌측 선택에 따라 실시간 전환 */}
         <div className="lg:col-span-6">
           <FadeIn delay={120}>
-            <div className="overflow-hidden rounded-xl border border-white/10 bg-neutral-900 shadow-2xl">
+            <div className="idle-float-slow overflow-hidden rounded-xl border border-white/10 bg-neutral-900 shadow-2xl">
               <div className="flex items-center justify-between border-b border-white/10 bg-black/40 px-4 py-3">
                 <span className="text-xs font-mono uppercase tracking-widest text-neutral-500">
                   Admin Dashboard

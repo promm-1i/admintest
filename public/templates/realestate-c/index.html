@@ -127,6 +127,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #C9
 .lt-row:hover{transform:translateX(4px)}
 .b-step{transition:transform .6s cubic-bezier(.32,.72,0,1)}
 .b-step:hover{transform:translateY(-4px)}
+
+/* - ambient - */
+.hero::before{content:"";position:absolute;top:-180px;right:-160px;width:560px;height:560px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,39,.1),transparent 65%);pointer-events:none}
+@keyframes drift{0%,100%{transform:translate(0,0)}50%{transform:translate(-46px,34px)}}
+.hero::before{animation:drift 16s ease-in-out infinite}
+@keyframes up-blink{0%,100%{opacity:1}50%{opacity:.45}}
+.report td .up{animation:up-blink 2.6s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.hero::before,.report td .up{animation:none}}
 </style>
 </head>
 <body>

@@ -75,10 +75,15 @@ export function HeroSection() {
         </div>
       )}
 
+      {/* 앰비언트: 텍스트 뒤에서 은은히 떠다니는 브랜드 컬러 글로우 */}
+      <div
+        aria-hidden
+        className="idle-glow pointer-events-none absolute -left-20 top-1/3 z-0 h-72 w-72 rounded-full bg-primary/10 blur-[110px]"
+      />
       <div className="relative flex flex-col lg:h-full lg:max-w-3xl lg:justify-center lg:pl-[10%]">
         <div className="max-w-md px-4 py-14 sm:px-6 lg:px-10 lg:py-0">
           <FadeIn>
-            <span className="inline-block rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
+            <span className="idle-breath inline-block rounded-full border border-primary/15 bg-primary/10 px-3 py-1 text-xs font-bold text-primary">
               맞춤형 웹사이트 제작 전문
             </span>
 
