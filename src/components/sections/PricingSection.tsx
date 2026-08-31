@@ -61,9 +61,16 @@ export function PricingSection() {
           </Link>
           <Link
             to="/estimate"
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-5 py-3 text-sm font-bold text-foreground transition-colors hover:border-primary/50 hover:text-primary"
+            className="group flex w-full items-center justify-between gap-4 rounded-2xl bg-foreground px-6 py-5 text-background shadow-md transition-transform hover:-translate-y-0.5 sm:w-auto sm:min-w-[340px]"
           >
-            1분 견적 계산기
+            <span>
+              <span className="block text-[11px] font-mono font-semibold uppercase tracking-widest text-background/60">Estimate</span>
+              <span className="mt-0.5 block text-base font-extrabold">1분 견적 계산기</span>
+              <span className="mt-0.5 block text-xs text-background/60">업종 · 형태만 고르면 예상 비용이 바로</span>
+            </span>
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-primary text-primary-foreground transition-transform group-hover:translate-x-0.5">
+              →
+            </span>
           </Link>
         </FadeIn>
 

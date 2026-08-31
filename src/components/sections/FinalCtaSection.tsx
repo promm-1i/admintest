@@ -6,7 +6,10 @@ import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
 
 export function FinalCtaSection() {
   return (
-    <section className="bg-neutral-950 px-4 py-24 text-center text-white">
+    <section className="relative overflow-hidden bg-neutral-950 px-4 py-24 text-center text-white">
+      {/* Ambient glow — 정지 화면에 은은한 숨결 */}
+      <div aria-hidden className="idle-glow pointer-events-none absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-primary/15 blur-[110px]" />
+      <div aria-hidden className="idle-float-slower pointer-events-none absolute -right-20 bottom-0 h-80 w-80 rounded-full bg-primary/10 blur-[120px]" />
       <FadeIn className="mx-auto max-w-7xl">
         <h2 className="text-balance text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">
           홈페이지가 필요한 상황이라면,

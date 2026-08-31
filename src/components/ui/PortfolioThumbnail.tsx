@@ -6,7 +6,7 @@ type Props = {
   src?: string;
   label: string;
   liveUrl?: string;
-  ratio?: "video" | "wide";
+  ratio?: "video" | "photo" | "wide";
   className?: string;
 };
 
@@ -24,6 +24,7 @@ const TALL_HEIGHT = 1600;
 
 const ASPECT: Record<NonNullable<Props["ratio"]>, number> = {
   video: 16 / 9,
+  photo: 4 / 3,
   wide: 21 / 9,
 };
 
@@ -75,7 +76,7 @@ export function PortfolioThumbnail({ src, label, liveUrl, ratio = "video", class
       ref={containerRef}
       className={cn(
         "relative overflow-hidden rounded-lg border border-border",
-        ratio === "wide" ? "aspect-[21/9]" : "aspect-video",
+        ratio === "wide" ? "aspect-[21/9]" : ratio === "photo" ? "aspect-[4/3]" : "aspect-video",
         className,
       )}
       onMouseEnter={() => setHovering(true)}

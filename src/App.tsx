@@ -1,5 +1,6 @@
-import { lazy, Suspense } from "react";
-import { Route, Routes, Outlet } from "react-router-dom";
+import { lazy, Suspense, useEffect } from "react";
+import { trackPageView } from "@/lib/analytics";
+import { Route, Routes, Outlet, useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { MobileStickyCta } from "@/components/site/MobileStickyCta";
@@ -90,12 +91,21 @@ function SiteLayout() {
   );
 }
 
+function AnalyticsPageView() {
+  const location = useLocation();
+  useEffect(() => {
+    trackPageView(location.pathname + location.search);
+  }, [location.pathname, location.search]);
+  return null;
+}
+
 export default function App() {
   return (
     <>
       <ScrollToTop />
       <Suspense fallback={<RouteLoadingFallback />}>
-        <Routes>
+        <AnalyticsPageView />
+      <Routes>
           <Route path="/web-solutions/real-estate/demo" element={<RealEstateDemoLayout />}>
             <Route index element={<RealEstateAdminDemoPage />} />
             <Route path="site" element={<RealEstateCustomerSitePage />} />

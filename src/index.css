@@ -218,6 +218,13 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+
+  /* 모바일에서 애니메이션 중간 상태 등으로 요소가 뷰포트 밖으로 삐져나가도
+     문서 자체가 옆으로 스크롤되지 않게 잘라낸다 (hidden 대신 clip: sticky 보존) */
+  html,
+  body {
+    overflow-x: clip;
+  }
 }
 
 /* 가로 스크롤 트랙(필터 바 · 포트폴리오 슬라이더)에서 스크롤바를 숨긴다 */
@@ -254,6 +261,44 @@
 @media (prefers-reduced-motion: reduce) {
   .inquiry-ticker,
   .live-ping {
+    animation: none !important;
+  }
+}
+
+
+/* ── Idle / Ambient 애니메이션 — 정지 화면에 미세한 생동감 (transform 충돌 방지: 전용 래퍼에만 사용) ── */
+@keyframes idleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+@keyframes idleFloatSlow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(1.2deg); }
+}
+@keyframes idleBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+}
+@keyframes idleGlow {
+  0%, 100% { opacity: 0.65; transform: translate(0, 0); }
+  50% { opacity: 1; transform: translate(10px, -8px); }
+}
+.idle-float { animation: idleFloat 9s ease-in-out infinite; }
+.idle-float-slow { animation: idleFloatSlow 14s ease-in-out -5s infinite; }
+.idle-float-slower { animation: idleFloatSlow 18s ease-in-out -11s infinite; }
+.idle-breath { animation: idleBreath 7s ease-in-out infinite; }
+.idle-glow { animation: idleGlow 16s ease-in-out -6s infinite; }
+@keyframes idleZoom {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+.idle-zoom { animation: idleZoom 22s ease-in-out infinite; }
+
+@media (max-width: 768px) {
+  .idle-float, .idle-float-slow, .idle-float-slower { animation-duration: 16s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .idle-float, .idle-float-slow, .idle-float-slower, .idle-breath, .idle-glow, .idle-zoom {
     animation: none !important;
   }
 }

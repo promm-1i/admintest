@@ -58,7 +58,7 @@ export function HeroSection() {
       onPlaying={i === 0 ? handleFirstPlaying : undefined}
       style={mobileObjectPosition ? { objectPosition: mobileObjectPosition } : undefined}
       className={cn(
-        "absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out",
+        "idle-zoom absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out",
         i === active ? "opacity-80" : "opacity-0",
       )}
     />

@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calculator, Check, Send } from "lucide-react";
+import { ArrowRight, Calculator, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Reveal } from "@/pages/services/previewKit";
@@ -22,7 +22,12 @@ const HOSTING = [
   { years: 3, label: "3년", cost: 576_000, saveLabel: "20% 할인" },
 ] as const;
 
-const FIXED = { feature: 300_000, setup: 100_000, responsiveAdd: 300_000 };
+const DOMAINS = [
+  { key: "free", name: "무료 도메인 제공", desc: "com · co.kr · kr 등 여러 도메인 중 원하시는 것으로 — 첫 1년 무료" },
+  { key: "own", name: "보유 도메인 연동", desc: "이미 쓰고 계신 도메인이 있다면 그대로 연결해 드립니다" },
+] as const;
+
+const FIXED = { feature: 300_000, setup: 100_000 };
 
 const won = (n: number) => n.toLocaleString("ko-KR");
 
@@ -47,23 +52,24 @@ export default function Estimate() {
 
   const [industry, setIndustry] = useState(industries[0]?.key ?? "");
   const [style, setStyle] = useState<(typeof STYLES)[number]["key"]>("landing");
-  const [responsive, setResponsive] = useState(false);
+  const [domain, setDomain] = useState<(typeof DOMAINS)[number]["key"]>("free");
   const [hostingYears, setHostingYears] = useState<1 | 2 | 3>(1);
 
   const styleInfo = STYLES.find((s) => s.key === style)!;
   const hosting = HOSTING.find((h) => h.years === hostingYears)!;
   const industryLabel = industries.find((i) => i.key === industry)?.label ?? "";
 
+  const domainInfo = DOMAINS.find((d) => d.key === domain)!;
   const rows = [
     { name: `디자인 (${styleInfo.name})`, cost: styleInfo.design, note: styleInfo.design === 0 ? "무료" : "" },
-    ...(responsive ? [{ name: "반응형 추가", cost: FIXED.responsiveAdd, note: "PC · 모바일 한 몸" }] : []),
+    { name: domain === "free" ? "도메인 (신규)" : "보유 도메인 연동", cost: 0, note: domain === "free" ? "첫 1년 무료" : "연동 무료" },
     { name: "업종 전용 기능", cost: FIXED.feature, note: `${industryLabel} 맞춤` },
     { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 초기 등록" },
     { name: `호스팅 ${hosting.label}`, cost: hosting.cost, note: hosting.saveLabel },
   ];
   const total = rows.reduce((a, r) => a + r.cost, 0);
 
-  const summary = `${industryLabel} · ${styleInfo.name}${responsive ? "+반응형" : ""} · 호스팅 ${hosting.label}`;
+  const summary = `${industryLabel} · ${styleInfo.name} · ${domainInfo.name} · 호스팅 ${hosting.label}`;
   const smsBody = `[견적상담] ${summary} / 예상 ${won(total)}원(VAT별도) — 이 구성으로 상담받고 싶습니다.`;
 
   return (
@@ -132,30 +138,23 @@ export default function Estimate() {
           </div>
 
           <div>
-            <p className="text-sm font-bold text-foreground">03 · 반응형</p>
-            <button
-              type="button"
-              onClick={() => setResponsive((v) => !v)}
-              className={cn(
-                "mt-3 flex w-full items-center justify-between rounded-xl border p-4 text-left transition-colors",
-                responsive ? "border-primary bg-primary/5 ring-1 ring-primary/30" : "border-border hover:border-primary/40",
-              )}
-            >
-              <span>
-                <span className="text-sm font-bold text-foreground">PC · 모바일 반응형으로 제작</span>
-                <span className="mt-1 block text-xs leading-relaxed text-muted-foreground break-keep">
-                  체크하지 않으면 모바일 웹은 기본 타입으로 무료 제공됩니다
-                </span>
-              </span>
-              <span
-                className={cn(
-                  "grid h-6 w-6 shrink-0 place-items-center rounded-md border",
-                  responsive ? "border-primary bg-primary text-primary-foreground" : "border-border text-transparent",
-                )}
-              >
-                <Check className="h-4 w-4" />
-              </span>
-            </button>
+            <p className="text-sm font-bold text-foreground">03 · 도메인</p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {DOMAINS.map((d) => (
+                <button
+                  key={d.key}
+                  type="button"
+                  onClick={() => setDomain(d.key)}
+                  className={cn(
+                    "rounded-xl border p-4 text-left transition-colors",
+                    domain === d.key ? "border-primary bg-primary/5 ring-1 ring-primary/30" : "border-border hover:border-primary/40",
+                  )}
+                >
+                  <p className="text-sm font-bold text-foreground">{d.name}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">{d.desc}</p>
+                </button>
+              ))}
+            </div>
           </div>
 
           <div>

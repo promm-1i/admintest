@@ -341,24 +341,56 @@ export default function AdminSystemService() {
             </p>
           </Reveal>
 
-          <div className="mt-8 divide-y divide-border border-t border-border">
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {INDUSTRY_DEMOS.map((item, i) => (
               <Reveal key={item.href} delay={i * 60}>
                 <a
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-4 py-4 transition-colors"
+                  className="group flex h-full flex-col justify-between rounded-2xl border border-border bg-card p-5 shadow-xs transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-md"
                 >
                   <div>
-                    <p className="text-base font-bold text-foreground">{item.label}</p>
-                    <p className="mt-0.5 text-sm text-muted-foreground">{item.flow}</p>
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-base font-bold text-foreground">{item.label}</p>
+                      <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[10px] font-bold text-primary">
+                        관리자 데모
+                      </span>
+                    </div>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">{item.flow}</p>
                   </div>
-                  <ExternalLink className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
+                  <p className="mt-4 flex items-center gap-1.5 text-xs font-bold text-primary">
+                    데모 직접 조작해 보기 <ExternalLink className="h-3.5 w-3.5" />
+                  </p>
                 </a>
               </Reveal>
             ))}
           </div>
+
+          <Reveal delay={120} className="mt-8 rounded-2xl border border-border bg-card p-6">
+            <p className="text-sm font-bold text-foreground">그 외 17개 업종도 같은 방식으로 구축합니다</p>
+            <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground break-keep">
+              아래 업종은 템플릿 홈페이지가 준비되어 있으며, 필요한 관리자 기능을 상담으로 정해 맞춤
+              구축해 드립니다.
+            </p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              {[
+                ["restaurant", "음식점 · 카페"], ["corporate", "기업 · 브랜드"], ["beauty", "미용실 · 뷰티샵"],
+                ["fitness", "필라테스 · 헬스"], ["stay", "펜션 · 스테이"], ["dental", "치과"], ["vet", "동물병원"],
+                ["photo", "사진관 · 스튜디오"], ["tax", "세무 · 회계"], ["auto", "자동차정비"], ["flower", "꽃집"],
+                ["law", "법률사무소"], ["study", "스터디카페"], ["care", "요양원 · 주간보호"],
+                ["kids", "어린이집 · 유치원"], ["golf", "스크린골프"], ["craft", "공방 · 클래스"],
+              ].map(([k, name]) => (
+                <Link
+                  key={k}
+                  to={`/templates?industry=${k}`}
+                  className="rounded-full border border-border px-3.5 py-1.5 text-xs font-semibold text-foreground/70 transition-colors hover:border-primary/50 hover:text-primary"
+                >
+                  {name}
+                </Link>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </div>
 

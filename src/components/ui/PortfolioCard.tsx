@@ -22,7 +22,7 @@ export function PortfolioCard({
         <PortfolioThumbnail
           src={sample.image}
           liveUrl={sample.liveUrl}
-          ratio={size === "large" ? "wide" : "video"}
+          ratio={size === "large" ? "wide" : "photo"}
           label={sample.industry}
           className="rounded-none border-0"
         />

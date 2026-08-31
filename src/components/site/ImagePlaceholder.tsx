@@ -5,7 +5,7 @@ type Props = {
   /** public/images 안의 정적 파일 경로 (예: /images/portfolio-beauty.webp) */
   src?: string | null;
   alt?: string;
-  ratio?: "square" | "video" | "portrait" | "wide";
+  ratio?: "square" | "video" | "photo" | "portrait" | "wide";
   label?: string;
   className?: string;
 };
@@ -13,6 +13,7 @@ type Props = {
 const ratioClass: Record<NonNullable<Props["ratio"]>, string> = {
   square: "aspect-square",
   video: "aspect-video",
+  photo: "aspect-[4/3]",
   portrait: "aspect-[3/4]",
   wide: "aspect-[21/9]",
 };

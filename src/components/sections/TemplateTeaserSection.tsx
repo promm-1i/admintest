@@ -70,7 +70,7 @@ export function TemplateTeaserSection() {
                     >
                       <ImagePlaceholder
                         src={sample.image}
-                        ratio="video"
+                        ratio="photo"
                         label={sample.industry}
                         className="rounded-none border-0 transition-transform duration-500 group-hover:scale-105"
                       />

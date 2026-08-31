@@ -399,8 +399,8 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
                 휴대폰으로 봅니다
               </h2>
               <p className="mt-4 max-w-md text-sm leading-relaxed text-background/70 break-keep">
-                같은 홈페이지가 모바일 화면 크기에 맞춰 자동으로 재배치됩니다. 왼쪽 화면 그대로,
-                줄바꿈과 버튼 크기까지 손가락에 맞게 조정된 실제 모바일 화면입니다.
+                같은 홈페이지가 태블릿 · 모바일 화면 크기에 맞춰 자동으로 재배치됩니다. 줄바꿈과
+                버튼 크기까지 손가락에 맞게 조정된 실제 화면 그대로입니다.
               </p>
               <ul className="mt-6 space-y-2">
                 {["전화 · 문자 버튼이 항상 손 닿는 곳에", "표와 가격도 가로 스크롤 없이", "하단 고정 상담 바 기본 제공"].map((t) => (
@@ -411,20 +411,36 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
                 ))}
               </ul>
             </Reveal>
-            <FadeIn direction="up" delay={120} className="mx-auto flex gap-5">
-              {[1, 2].map((n) => (
-                <div
-                  key={n}
-                  className={`w-[190px] shrink-0 overflow-hidden rounded-[26px] border-[6px] border-black/80 bg-black shadow-2xl sm:w-[210px] ${n === 2 ? "hidden sm:block sm:translate-y-6" : ""}`}
-                >
-                  <img
-                    src={`/thumbs/mobile/${sectionSlug}-${n}.jpg`}
-                    alt={`모바일 화면 ${n}`}
-                    loading="lazy"
-                    className="aspect-[390/780] w-full object-cover object-top"
-                  />
-                </div>
-              ))}
+            <FadeIn direction="up" delay={120} className="mx-auto flex items-end gap-5 lg:gap-6">
+              {/* 태블릿 — 얇은 균일 베젤 */}
+              <div className="hidden shrink-0 overflow-hidden rounded-[22px] border-[9px] border-neutral-800 bg-black shadow-2xl md:block md:w-[250px] lg:w-[280px]">
+                <img
+                  src={`/thumbs/tablet/${sectionSlug}.jpg`}
+                  alt="태블릿 화면"
+                  loading="lazy"
+                  className="aspect-[768/1024] w-full object-cover object-top"
+                />
+              </div>
+              {/* iPhone 17 Pro Max — 큰 라운드 코너 + 다이나믹 아일랜드 */}
+              <div className="relative w-[190px] shrink-0 overflow-hidden rounded-[34px] border-[7px] border-black bg-black shadow-2xl sm:w-[210px]">
+                <div className="absolute left-1/2 top-2 z-10 h-[18px] w-[74px] -translate-x-1/2 rounded-full bg-black" />
+                <img
+                  src={`/thumbs/mobile/${sectionSlug}-1.jpg`}
+                  alt="모바일 화면 1"
+                  loading="lazy"
+                  className="aspect-[390/780] w-full rounded-[27px] object-cover object-top"
+                />
+              </div>
+              {/* Galaxy S25 Ultra — 각진 코너 + 중앙 펀치홀 */}
+              <div className="relative hidden w-[190px] shrink-0 overflow-hidden rounded-[16px] border-[6px] border-neutral-900 bg-black shadow-2xl sm:block sm:w-[210px] sm:translate-y-5">
+                <div className="absolute left-1/2 top-2.5 z-10 h-2.5 w-2.5 -translate-x-1/2 rounded-full bg-black ring-1 ring-white/10" />
+                <img
+                  src={`/thumbs/mobile/${sectionSlug}-2.jpg`}
+                  alt="모바일 화면 2"
+                  loading="lazy"
+                  className="aspect-[390/780] w-full rounded-[10px] object-cover object-top"
+                />
+              </div>
             </FadeIn>
           </div>
         </section>

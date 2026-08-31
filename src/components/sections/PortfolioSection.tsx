@@ -50,8 +50,8 @@ function PortfolioCarousel({ items }: { items: Sample[] }) {
     const tick = (now: number) => {
       const dt = Math.min(now - last, 100);
       last = now;
-      // 좌→우 흐름: 카드가 오른쪽으로 이동하도록 scrollLeft를 줄인다
-      if (!pausedRef.current) el.scrollLeft -= (dt / 1000) * AUTO_SCROLL_SPEED;
+      // 우→좌 흐름: 카드가 왼쪽으로 이동하도록 scrollLeft를 늘린다
+      if (!pausedRef.current) el.scrollLeft += (dt / 1000) * AUTO_SCROLL_SPEED;
       wrap();
       raf = requestAnimationFrame(tick);
     };
