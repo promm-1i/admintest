@@ -56,12 +56,14 @@ export const INDUSTRY_ITEMS: NavItem[] = [
   {
     icon: UtensilsCrossed,
     title: "음식점 · 카페 맞춤형",
-    desc: "메뉴 안내 · 예약 · 관리자",
+    desc: "메뉴 안내 · 실시간 영업중 · 예약 문의",
+    href: "/templates?industry=restaurant",
   },
   {
     icon: Briefcase,
     title: "기업 · 브랜드 맞춤형",
-    desc: "회사소개 · 사업영역 · 브랜드 스토리",
+    desc: "사업영역 · 지표 · 연혁 · 견적 문의",
+    href: "/templates?industry=corporate",
   },
 ];
 

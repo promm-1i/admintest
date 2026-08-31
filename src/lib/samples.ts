@@ -50,6 +50,62 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "restaurant-basic-template",
+    industry: "음식점 · 카페 홈페이지",
+    title: "음식점 · 카페 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "business"],
+    tag: "기본형 템플릿 · 음식점 · 카페",
+    purpose:
+      "실시간 영업중 배지, 카테고리 메뉴판(점선 가격표), 오늘의 추천, 공간 소개, 예약 문의까지 — 메뉴판처럼 정갈하게 구성한 다이닝 템플릿입니다.",
+    features: ["실시간 영업중 표시", "카테고리 메뉴판", "오늘의 추천", "전화 · 문자 예약"],
+    idealFor: "메뉴와 분위기로 손님을 끌어오고 싶은 식당 · 카페 · 다이닝 바",
+    image: "/templates/restaurant-landing/og.jpg",
+    liveUrl: "/templates/restaurant-basic/",
+    industryKey: "restaurant",
+  },
+  {
+    slug: "restaurant-landing-template",
+    industry: "음식점 · 카페 홈페이지",
+    title: "음식점 · 카페 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "business"],
+    tag: "랜딩형 템플릿 · 음식점 · 카페",
+    purpose:
+      "세리프 타이포와 스크롤 연출이 더해진 프리미엄 구성으로, 메뉴 감상에서 예약까지 자연스럽게 이어지는 다이닝 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "실시간 영업중 표시", "카테고리 메뉴판", "인원 선택 예약 문자"],
+    idealFor: "브랜드 감도와 예약 전환을 함께 원하는 식당 · 카페 · 다이닝 바",
+    image: "/templates/restaurant-landing/og.jpg",
+    liveUrl: "/templates/restaurant-landing/",
+    industryKey: "restaurant",
+  },
+  {
+    slug: "corporate-basic-template",
+    industry: "기업 · 브랜드 홈페이지",
+    title: "기업 · 브랜드 홈페이지 (기본형 템플릿)",
+    type: ["basic-template", "business"],
+    tag: "기본형 템플릿 · 기업 · 브랜드",
+    purpose:
+      "사업영역 · 핵심 지표 · 연혁 · 함께한 기업 · 뉴스룸 · 견적 문의로 구성된 B2B 기업 홈페이지 템플릿입니다. 과장 없이 숫자로 신뢰를 만듭니다.",
+    features: ["사업영역 그리드", "핵심 지표 카운터", "연혁 타임라인", "견적 문의 폼"],
+    idealFor: "제조 · 솔루션 · 전문 서비스 등 신뢰가 곧 영업인 B2B 기업",
+    image: "/templates/corporate-landing/og.jpg",
+    liveUrl: "/templates/corporate-basic/",
+    industryKey: "corporate",
+  },
+  {
+    slug: "corporate-landing-template",
+    industry: "기업 · 브랜드 홈페이지",
+    title: "기업 · 브랜드 홈페이지 (랜딩형 템플릿)",
+    type: ["landing-template", "business"],
+    tag: "랜딩형 템플릿 · 기업 · 브랜드",
+    purpose:
+      "그라파이트 히어로와 그리드 연출의 스위스 스타일 구성으로, 회사 소개에서 견적 문의까지 이어지는 기업 원페이지 템플릿입니다.",
+    features: ["스크롤 애니메이션", "지표 카운터", "연혁 타임라인", "다크 문의 섹션"],
+    idealFor: "정제된 첫인상이 필요한 기업 · 브랜드 · 스타트업",
+    image: "/templates/corporate-landing/og.jpg",
+    liveUrl: "/templates/corporate-landing/",
+    industryKey: "corporate",
+  },
+  {
     slug: "interior-basic-template",
     industry: "인테리어 · 리모델링 홈페이지",
     title: "인테리어 · 리모델링 홈페이지 (기본형 템플릿)",

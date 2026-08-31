@@ -31,7 +31,7 @@ export function TemplateTeaserSection() {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
           <SectionHeader
             label="TEMPLATE"
-            title="빠르게 시작하려면, 미리 제작된 템플릿도 있습니다."
+            title={<>빠르게 시작하려면,<br />미리 제작된 템플릿도 있습니다.</>}
             description="완성된 디자인을 기반으로 문구·이미지·회사정보를 적용해 빠르게 제작할 수 있습니다. 맞춤 제작과 달리 정해진 구성 안에서 빠르게 시작하는 상품입니다."
           />
           <Link
