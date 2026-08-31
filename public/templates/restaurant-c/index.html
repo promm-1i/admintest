@@ -105,6 +105,23 @@ footer b{color:#fff}
 .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
 .rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.strip-track{animation:none}.open-now .lamp{animation:none}}
+
+/* - refine: motion & haptics - */
+.rv{transform:translateY(34px);filter:blur(10px);transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1),filter 1s cubic-bezier(.32,.72,0,1)}
+.rv.on{filter:blur(0)}
+::selection{background:#E8402A;color:#FFF8EC}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #E8402A;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;transform:none;filter:none;opacity:1}}
+
+.sticker{transition:transform .45s cubic-bezier(.32,.72,0,1)}
+.sticker:hover{transform:rotate(0deg) scale(1.06)}
+.mi{transition:transform .55s cubic-bezier(.32,.72,0,1),box-shadow .55s}
+.mi:hover{box-shadow:6px 6px 0 var(--ink)}
+.sp{transition:transform .55s cubic-bezier(.32,.72,0,1)}
+.sp:hover{transform:translateY(-5px) rotate(-.5deg)}
+.btn{transition:transform .3s cubic-bezier(.32,.72,0,1),box-shadow .3s}
+.hero-photo img{transition:transform .8s cubic-bezier(.32,.72,0,1),box-shadow .8s}
+.hero-photo:hover img{transform:translate(-2px,-2px);box-shadow:11px 11px 0 var(--red)}
 </style>
 </head>
 <body>
@@ -215,6 +232,9 @@ footer b{color:#fff}
 <script>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}});
+
 </script>
 </body>
 </html>

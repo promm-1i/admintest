@@ -115,6 +115,24 @@ footer b{color:var(--ink)}
 .rv{opacity:0;transform:translateY(24px);transition:opacity .75s ease,transform .75s ease}
 .rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* - refine: motion & haptics - */
+.rv{transform:translateY(34px);filter:blur(10px);transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1),filter 1s cubic-bezier(.32,.72,0,1)}
+.rv.on{filter:blur(0)}
+::selection{background:#5B7B4C;color:#FBF8EF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #5B7B4C;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;transform:none;filter:none;opacity:1}}
+
+.pola{transition:transform .6s cubic-bezier(.32,.72,0,1),box-shadow .6s}
+.pola:hover{box-shadow:0 18px 40px rgba(74,59,42,.26)}
+.rm{transition:transform .6s cubic-bezier(.32,.72,0,1),box-shadow .6s}
+.rm:hover{transform:translateY(-5px) rotate(-.3deg);box-shadow:0 20px 44px rgba(74,59,42,.18)}
+.btn-g{transition:transform .3s cubic-bezier(.32,.72,0,1),box-shadow .3s,filter .3s}
+.btn-g:hover{filter:brightness(1.05)}
+.kp{transition:transform .5s cubic-bezier(.32,.72,0,1),border-color .4s}
+.kp:hover{transform:translateY(-3px);border-color:var(--green)}
+.note{transition:transform .5s cubic-bezier(.32,.72,0,1)}
+.note:hover{transform:rotate(0deg) scale(1.03)}
 </style>
 </head>
 <body>
@@ -238,6 +256,9 @@ footer b{color:var(--ink)}
 <script>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}});
+
 </script>
 </body>
 </html>

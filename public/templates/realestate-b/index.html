@@ -91,6 +91,22 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 .rv{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease}
 .rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.piece img{transition:none}}
+
+/* - refine: motion & haptics - */
+.rv{transform:translateY(34px);filter:blur(10px);transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1),filter 1s cubic-bezier(.32,.72,0,1)}
+.rv.on{filter:blur(0)}
+::selection{background:#1C1A17;color:#FDFCFA}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #9C6B3F;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;transform:none;filter:none;opacity:1}}
+
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.04;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E")}
+.piece img{transition:transform 1.6s cubic-bezier(.32,.72,0,1),filter .8s}
+.piece:hover img{filter:contrast(1.04)}
+.p-tag{transition:background .4s,color .4s}
+.piece:hover .p-tag{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+.svc-row{transition:padding-left .6s cubic-bezier(.32,.72,0,1)}
+.svc-row:hover{padding-left:10px}
+.map-card{box-shadow:0 1px 0 rgba(0,0,0,.02),0 24px 60px -30px rgba(28,26,23,.18)}
 </style>
 </head>
 <body>
@@ -202,6 +218,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <script>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}});
+
 </script>
 </body>
 </html>

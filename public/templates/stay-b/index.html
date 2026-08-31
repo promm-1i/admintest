@@ -103,6 +103,20 @@ footer b{color:var(--ink);font-weight:500}
 .rv{opacity:0;transform:translateY(30px);transition:opacity 1s ease,transform 1s ease}
 .rv.on{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}.room img,.m-grid img{transition:none}}
+
+/* - refine: motion & haptics - */
+.rv{transform:translateY(34px);filter:blur(10px);transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1),filter 1s cubic-bezier(.32,.72,0,1)}
+.rv.on{filter:blur(0)}
+::selection{background:#26282A;color:#FAFAF8}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #5E6E78;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;transform:none;filter:none;opacity:1}}
+
+.room img,.m-grid img{transition:transform 2s cubic-bezier(.32,.72,0,1),filter 1s}
+.room figure:hover img{filter:brightness(1.03)}
+.g-row{transition:padding-left .6s cubic-bezier(.32,.72,0,1)}
+.g-row:hover{padding-left:8px}
+.hero-frame img{transition:transform 2.4s cubic-bezier(.32,.72,0,1)}
+.hero-frame img:hover{transform:scale(1.02)}
 </style>
 </head>
 <body>
@@ -254,6 +268,9 @@ footer b{color:var(--ink);font-weight:500}
 <script>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}});
+
 </script>
 </body>
 </html>
