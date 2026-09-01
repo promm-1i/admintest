@@ -139,6 +139,22 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #5B
 body{word-break:keep-all;overflow-wrap:break-word}
 h1,h2,h3,blockquote{text-wrap:balance}
 p,li,dd,figcaption{text-wrap:pretty}
+
+/* 전경 밴드 */
+.band{position:relative;margin:0;overflow:hidden}
+.band>img{width:100%;height:clamp(230px,32vw,390px);object-fit:cover;display:block}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 26px 26px;background:linear-gradient(transparent,rgba(10,10,14,.82));color:#fff}
+.band figcaption b{display:block;font-size:clamp(17px,2.4vw,22px);font-weight:700}
+.band figcaption span{display:block;margin-top:7px;font-size:13px;color:rgba(255,255,255,.82);max-width:660px}
+/* 사진 그리드 */
+.pgrid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pgrid{grid-template-columns:1fr}}
+.pg{margin:0;position:relative;overflow:hidden;border-radius:14px}
+.pg img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .7s cubic-bezier(.32,.72,0,1)}
+.pg:hover img{transform:scale(1.05)}
+.pg figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;background:linear-gradient(transparent,rgba(10,10,14,.8));color:#fff;font-size:12.5px;font-weight:700}
+.pg figcaption em{display:block;font-style:normal;font-weight:400;font-size:11.5px;color:rgba(255,255,255,.78);margin-top:3px}
 </style>
 </head>
 <body>
@@ -196,6 +212,11 @@ p,li,dd,figcaption{text-wrap:pretty}
     </div>
   </div>
 </section>
+
+<figure class="band">
+<img src="./assets/hero.jpg" alt="고객사 스마트팩토리 라인">
+<figcaption><b>데이터를 만드는 곳에서 시작합니다</b><span>설비에서 나오는 신호를 그대로 받는 것이 첫 단계입니다. 현장을 보지 않고 만든 대시보드는 쓰이지 않습니다.</span></figcaption>
+</figure>
 
 <div class="logos" aria-label="주요 고객사">
   <div class="wrap">
