@@ -3877,12 +3877,19 @@ export const MAIN_PORTFOLIO_SAMPLES: Sample[] = MAIN_PORTFOLIO_SLUGS.map(
  */
 const CAROUSEL_EXCLUDED_SLUGS = ["roadin-rentcar", "objetbath"];
 
+/**
+ * 메인 PORTFOLIO 슬라이드에 올리는 대표 12건.
+ * PORTFOLIO_SAMPLES에는 판매용 랜딩 템플릿이 전부 들어 있어서, 상한을 두지 않으면
+ * 홈 한 페이지에 썸네일 수백 장이 깔린다. 전체는 /samples 에서 본다.
+ */
+const MAIN_CAROUSEL_LIMIT = 12;
+
 export const MAIN_PORTFOLIO_CAROUSEL: Sample[] = [
   ...MAIN_PORTFOLIO_SAMPLES,
   ...PORTFOLIO_SAMPLES.filter(
     (s) => !MAIN_PORTFOLIO_SLUGS.includes(s.slug) && !CAROUSEL_EXCLUDED_SLUGS.includes(s.slug),
   ),
-];
+].slice(0, MAIN_CAROUSEL_LIMIT);
 
 export const PORTFOLIO_FILTERS = [
   { label: "전체", value: "all" },

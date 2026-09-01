@@ -142,7 +142,7 @@ export function PortfolioSection() {
   const displaySamples =
     selectedType === "all"
       ? MAIN_PORTFOLIO_CAROUSEL
-      : PORTFOLIO_SAMPLES.filter((site) => site.type?.includes(selectedType));
+      : PORTFOLIO_SAMPLES.filter((site) => site.type?.includes(selectedType)).slice(0, 12);
 
   return (
     <section id="portfolio-section" className="relative overflow-hidden py-20 lg:py-28">

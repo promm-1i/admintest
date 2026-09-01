@@ -5,92 +5,126 @@ import { SectionHeader } from "@/components/sections/SectionHeader";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { SAMPLES } from "@/lib/samples";
 
-/** 판매 중인 템플릿(industryKey 보유)을 기본형/랜딩형 두 그룹으로 나눠 전부 표출한다. */
-const STYLE_GROUPS = [
-  {
-    key: "basic-template",
-    label: "기본형 템플릿",
-    desc: "핵심 정보만 담백하게 담은 표준 구성",
-    href: "/templates?style=basic-template",
-  },
-  {
-    key: "landing-template",
-    label: "랜딩형 템플릿",
-    desc: "스크롤 연출이 더해진 프리미엄 원페이지",
-    href: "/templates?style=landing-template",
-  },
-].map((g) => ({
-  ...g,
-  items: SAMPLES.filter((s) => s.industryKey && s.type.includes(g.key)),
-}));
+/**
+ * 홈에서는 "이런 게 있다"만 보여주고 고르는 건 /templates 에서 한다.
+ * 전량을 깔면 홈 한 페이지에서 썸네일을 수백 장 내려받게 되고,
+ * 카드가 끝없이 반복되는 화면이 된다.
+ */
+const LANDING = SAMPLES.filter((s) => s.industryKey && s.type.includes("landing-template"));
+
+/** 업종이 겹치지 않게 앞에서부터 하나씩 골라 다양성을 보여준다 */
+function pickByIndustry(limit: number) {
+  const seen = new Set<string>();
+  const out: typeof LANDING = [];
+  for (const s of LANDING) {
+    if (seen.has(s.industryKey!)) continue;
+    seen.add(s.industryKey!);
+    out.push(s);
+    if (out.length === limit) break;
+  }
+  return out;
+}
+
+const FEATURED = pickByIndustry(5);
+const [LEAD, ...REST] = FEATURED;
+
+const INDUSTRY_COUNT = new Set(SAMPLES.filter((s) => s.industryKey).map((s) => s.industryKey)).size;
+const TOTAL = SAMPLES.filter((s) => s.industryKey).length;
 
 export function TemplateTeaserSection() {
   return (
-    <section className="px-3 py-20 sm:px-5 lg:py-28">
+    <section className="border-y border-border bg-secondary/25 px-3 py-20 sm:px-5 lg:py-28">
       <div className="mx-auto max-w-7xl">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeader
             label="TEMPLATE"
-            title={<>빠르게 시작하려면,<br />미리 제작된 템플릿도 있습니다.</>}
-            description="완성된 디자인을 기반으로 문구·이미지·회사정보를 적용해 빠르게 제작할 수 있습니다. 맞춤 제작과 달리 정해진 구성 안에서 빠르게 시작하는 상품입니다."
+            title={
+              <>
+                빠르게 시작하려면,
+                <br />
+                미리 제작된 템플릿도 있습니다.
+              </>
+            }
+            description="완성된 디자인에 문구 · 이미지 · 회사정보만 적용해 시작합니다. 맞춤 제작과 달리 정해진 구성 안에서 빠르게 여는 상품입니다."
           />
-          <Link
-            to="/templates"
-            className="flex shrink-0 items-center gap-1.5 self-start text-sm font-medium text-primary hover:underline md:self-auto"
-          >
-            홈페이지 템플릿 보기
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
+          <dl className="flex shrink-0 gap-8">
+            <div>
+              <dt className="text-xs text-muted-foreground">업종</dt>
+              <dd className="mt-1 font-mono text-3xl font-bold tabular-nums text-foreground">
+                {INDUSTRY_COUNT}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs text-muted-foreground">디자인 시안</dt>
+              <dd className="mt-1 font-mono text-3xl font-bold tabular-nums text-primary">{TOTAL}</dd>
+            </div>
+          </dl>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          {STYLE_GROUPS.map((group, gi) => (
-            <FadeIn key={group.key} delay={gi * 80}>
-              <div className="flex h-full flex-col rounded-xl border border-border bg-card p-5 sm:p-6">
-                <div className="flex items-end justify-between gap-4">
-                  <div>
-                    <h3 className="text-lg font-bold text-foreground">{group.label}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">{group.desc}</p>
-                  </div>
-                  <Link
-                    to={group.href}
-                    className="flex shrink-0 items-center gap-1 text-xs font-semibold text-primary hover:underline"
-                  >
-                    전체 보기
-                    <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  {group.items.map((sample) => (
-                    <Link
-                      key={sample.slug}
-                      to={`/samples/${sample.slug}`}
-                      className="group relative block overflow-hidden rounded-lg border border-border"
-                    >
-                      <ImagePlaceholder
-                        src={sample.image}
-                        ratio="photo"
-                        label={sample.industry}
-                        className="rounded-none border-0 transition-transform duration-500 group-hover:scale-105"
-                      />
-                      {/* 썸네일만 보고도 무슨 업종인지 바로 읽히도록 그라데이션 위에 크게 표기 */}
-                      <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent px-3.5 pb-3 pt-10">
-                        <p className="text-[11px] font-semibold text-white/70">{sample.tag}</p>
-                        <div className="mt-0.5 flex items-center justify-between gap-2">
-                          <p className="truncate text-base font-extrabold text-white drop-shadow-sm">
-                            {sample.industry.replace(" 홈페이지", "")}
-                          </p>
-                          <ArrowRight className="h-4 w-4 shrink-0 text-white/80 transition-transform duration-300 group-hover:translate-x-0.5" />
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
+        {/* 큰 한 장 + 작은 넉 장. 균일 그리드를 피해 시선 순서를 만든다 */}
+        <div className="mt-10 grid gap-4 lg:grid-cols-12">
+          <FadeIn className="lg:col-span-7">
+            <Link
+              to={`/samples/${LEAD.slug}`}
+              className="group relative block h-full overflow-hidden rounded-2xl border border-border bg-card"
+            >
+              <ImagePlaceholder
+                src={LEAD.image}
+                ratio="photo"
+                label={LEAD.industry}
+                className="h-full rounded-none border-0 transition-transform duration-700 ease-[cubic-bezier(.32,.72,0,1)] group-hover:scale-[1.03]"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent px-6 pb-5 pt-16">
+                <p className="text-xs font-semibold tracking-wide text-white/70">
+                  {LEAD.tag ?? "랜딩형 템플릿"}
+                </p>
+                <p className="mt-1 flex items-center gap-2 text-2xl font-extrabold text-white">
+                  {LEAD.industry.replace(" 홈페이지", "")}
+                  <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
+                </p>
               </div>
-            </FadeIn>
-          ))}
+            </Link>
+          </FadeIn>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:col-span-5 lg:grid-rows-2">
+            {REST.map((s, i) => (
+              <FadeIn key={s.slug} delay={80 + i * 70}>
+                <Link
+                  to={`/samples/${s.slug}`}
+                  className="group relative block h-full overflow-hidden rounded-xl border border-border bg-card"
+                >
+                  <ImagePlaceholder
+                    src={s.image}
+                    ratio="photo"
+                    label={s.industry}
+                    className="h-full rounded-none border-0 transition-transform duration-700 ease-[cubic-bezier(.32,.72,0,1)] group-hover:scale-[1.04]"
+                  />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-4 pb-3 pt-10">
+                    <p className="truncate text-sm font-bold text-white">
+                      {s.industry.replace(" 홈페이지", "")}
+                    </p>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
         </div>
+
+        <FadeIn delay={200} className="mt-6">
+          <div className="flex flex-col gap-3 rounded-xl border border-border bg-background px-5 py-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm text-muted-foreground break-keep">
+              업종마다 기본형 · 랜딩형 각 5종씩 준비돼 있습니다. 목록에서 업종을 고르면 시안이 한눈에
+              보입니다.
+            </p>
+            <Link
+              to="/templates"
+              className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+            >
+              템플릿 {TOTAL}종 전체 보기
+              <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </FadeIn>
       </div>
     </section>
   );
