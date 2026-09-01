@@ -95,6 +95,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer b{color:var(--ink)}
 @keyframes fill-b{from{width:0}}
 .bar i{animation:fill-b 1.4s cubic-bezier(.2,.8,.2,1) both}
+
+/* 전경 밴드 */
+.band{position:relative;margin:0;overflow:hidden}
+.band>img{width:100%;height:clamp(230px,32vw,380px);object-fit:cover;display:block}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 26px 26px;background:linear-gradient(transparent,rgba(10,10,14,.82));color:#fff}
+.band figcaption b{display:block;font-size:clamp(17px,2.4vw,22px);font-weight:700}
+.band figcaption span{display:block;margin-top:7px;font-size:13px;color:rgba(255,255,255,.84);max-width:660px}
+/* 강사진 */
+.tchx{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:860px){.tchx{grid-template-columns:1fr 1fr}}
+@media(max-width:460px){.tchx{grid-template-columns:1fr}}
+.tcx{margin:0}
+.tcx img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px}
+.tcx b{display:block;margin-top:12px;font-size:15.5px;font-weight:700}
+.tcx .sb{display:block;margin-top:4px;font-size:11.5px;letter-spacing:.1em;font-weight:700}
+.tcx p{margin-top:8px;font-size:12.5px;line-height:1.75}
+/* 공간 그리드 */
+.pgrid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pgrid{grid-template-columns:1fr}}
+.pg{margin:0;position:relative;overflow:hidden;border-radius:12px}
+.pg img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .7s cubic-bezier(.32,.72,0,1)}
+.pg:hover img{transform:scale(1.05)}
+.pg figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;background:linear-gradient(transparent,rgba(10,10,14,.82));color:#fff;font-size:12.5px;font-weight:700}
+.pg figcaption em{display:block;font-style:normal;font-weight:400;font-size:11.5px;color:rgba(255,255,255,.8);margin-top:3px}
 </style>
 </head>
 <body>
@@ -123,6 +148,11 @@ footer b{color:var(--ink)}
 <p class="note">진도율은 보호자 앱에서 실시간으로 확인하실 수 있습니다.</p>
 </aside>
 </div></section>
+
+<figure class="band">
+<img src="./assets/hero.jpg" alt="코드를 작성하는 학생">
+<figcaption><b>결과물이 남는 수업</b><span>수업이 끝나면 실행되는 프로그램이 남습니다. 학기마다 만든 것을 모아 포트폴리오로 정리합니다.</span></figcaption>
+</figure>
 
 <section id="level" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">LEVEL TRACK</p><h2>여덟 단계로 올라갑니다</h2><p class="sub">레벨 테스트로 시작 지점을 정합니다. 초등 3학년부터 고등학생까지.</p></div>
@@ -157,6 +187,16 @@ footer b{color:var(--ink)}
 <div class="rv"><p class="kicker">SPACE</p><h2>수업 공간</h2></div>
 <div class="gal rv">
 <img src="./assets/facility-1.jpg" alt="강의실"><img src="./assets/facility-4.jpg" alt="라운지 데스크"><img src="./assets/facility-5.jpg" alt="사물함 복도">
+</div>
+</div></section>
+
+<section id="mentors" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">MENTORS</p><h2>현업에서 온 멘토들</h2><p class="sub">전공 강사가 아니라 실제로 만들어 본 사람들이 가르칩니다. 한 멘토가 최대 8명을 봅니다.</p></div>
+<div class="tchx rv">
+<figure class="tcx"><img src="./assets/teacher-2.jpg" alt="서도현 PYTHON · 기초"><b>서도현</b><span class="sb" style="color:var(--purple)">PYTHON · 기초</span><p>처음 오는 학생을 맡습니다. 문법보다 만드는 순서를 먼저 가르칩니다.</p></figure>
+<figure class="tcx"><img src="./assets/teacher-4.jpg" alt="임태경 WEB · 프론트엔드"><b>임태경</b><span class="sb" style="color:var(--purple)">WEB · 프론트엔드</span><p>직접 만든 페이지를 배포까지 시킵니다. 주소가 생겨야 재미가 붙습니다.</p></figure>
+<figure class="tcx"><img src="./assets/teacher-1.jpg" alt="노예린 ALGORITHM"><b>노예린</b><span class="sb" style="color:var(--lime)">ALGORITHM</span><p>정보올림피아드와 대회반을 담당합니다. 풀이 과정을 말로 설명시킵니다.</p></figure>
+<figure class="tcx"><img src="./assets/teacher-3.jpg" alt="강하은 ROBOTICS"><b>강하은</b><span class="sb" style="color:var(--lime)">ROBOTICS</span><p>피지컬 컴퓨팅과 로봇 제어를 맡습니다. 저학년 수업 전담.</p></figure>
 </div>
 </div></section>
 
