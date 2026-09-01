@@ -52,6 +52,11 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdro
 .btn:active{transform:scale(.97)}
 .btn-c{background:var(--coral);color:#fff}.btn-c:hover{background:var(--deep)}
 .btn-w{background:#fff;border:2.5px solid var(--coral);color:var(--coral)}
+/* 히어로 사진 + 견적 카드 콜라주 */
+.hero-media{position:relative;padding-bottom:8px}
+.hero-media>img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px}
+.hero-media .quote{position:relative;z-index:2;width:calc(100% - 30px);margin:-64px 0 0 30px}
+@media(max-width:860px){.hero-media>img{aspect-ratio:16/10}.hero-media .quote{width:100%;margin:-48px 0 0}}
 /* 견적 카드 */
 .quote{background:#fff;border-radius:24px;padding:26px;box-shadow:0 18px 40px -22px rgba(44,36,34,.3)}
 .quote h3{font-family:"Jua";font-size:18px;color:var(--coral)}
@@ -85,6 +90,27 @@ header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdro
 .safe div .em{font-size:26px}
 .safe div b{display:block;font-family:"Jua";font-size:17px;margin-top:8px;font-weight:400}
 .safe div p{font-size:13px;color:#DFF6EF;margin-top:6px}
+/* 이사 전 · 후 */
+.ba{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.ba{grid-template-columns:1fr}}
+.ba figure{margin:0;position:relative;border-radius:22px;overflow:hidden;border:3px solid var(--pale)}
+.ba img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.ba figcaption{position:absolute;top:14px;left:14px;font-family:"Jua";font-size:14px;background:rgba(44,36,34,.82);color:#fff;padding:5px 15px;border-radius:99px}
+.ba figure:last-child figcaption{background:var(--mint)}
+.ba-note{margin-top:16px;font-size:13px;color:var(--soft)}
+/* 최근 작업 */
+.cases{margin-top:44px;display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.cases figure{margin:0;border-radius:18px;overflow:hidden;position:relative}
+.cases img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.32,.72,0,1)}
+.cases figure:hover img{transform:scale(1.05)}
+.cases figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 11px;font-size:12.5px;font-weight:700;color:#fff;background:linear-gradient(transparent,rgba(44,36,34,.8))}
+.cases figure:nth-child(1){grid-column:span 3;grid-row:span 2}
+.cases figure:nth-child(2){grid-column:span 3}
+.cases figure:nth-child(3),.cases figure:nth-child(4){grid-column:span 3}
+.cases figure:nth-child(5){grid-column:span 6}
+.cases figure:nth-child(1) img{aspect-ratio:1/1}
+.cases figure:nth-child(n+2) img{aspect-ratio:16/9}
+@media(max-width:760px){.cases{grid-template-columns:1fr 1fr}.cases figure:nth-child(n){grid-column:span 1;grid-row:span 1}.cases figure:nth-child(5){grid-column:span 2}.cases img{aspect-ratio:4/3!important}}
 /* 후기 */
 .rev{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:760px){.rev{grid-template-columns:1fr}}
@@ -107,7 +133,7 @@ footer b{color:#fff}
 
 <header><div class="wrap nav">
 <a class="logo" href="#">가볍게<b>이사</b></a>
-<ul><li><a href="#check">짐 체크</a></li><li><a href="#opt">옵션 요금</a></li><li><a href="#safe">안심 서비스</a></li></ul>
+<ul><li><a href="#check">짐 체크</a></li><li><a href="#opt">옵션 요금</a></li><li><a href="#ba">이사 전·후</a></li><li><a href="#cases">최근 작업</a></li><li><a href="#safe">안심 서비스</a></li></ul>
 <a class="tel" href="tel:0507-000-0000">견적 문의</a>
 </div></header>
 
@@ -118,8 +144,10 @@ footer b{color:#fff}
 <p>1톤 · 1.4톤으로 딱 맞게. 가볍게이사는 원룸 이사만 8년 했습니다. 짐 사진만 보내주시면 30분 안에 견적 드려요.</p>
 <div class="hero-cta"><a class="btn btn-c" href="tel:0507-000-0000">사진으로 견적받기</a><a class="btn btn-w" href="#opt">요금 보기</a></div>
 </div>
-<aside class="quote rv">
-<h3>💬 견적 예시 — 원룸 8평 · 3층 → 2층</h3>
+<div class="hero-media rv">
+<img src="./assets/hero.jpg" alt="1톤 트럭에 원룸 짐을 싣는 작업">
+<aside class="quote">
+<h3>견적 예시 — 원룸 8평 · 3층 → 2층</h3>
 <div class="qr"><b>차량 (1톤)</b><span class="v">150,000원</span></div>
 <div class="qr"><b>인력 2명</b><span class="v">140,000원</span></div>
 <div class="qr"><b>사다리차</b><span class="v">불필요</span></div>
@@ -127,6 +155,7 @@ footer b{color:#fff}
 <div class="total"><span>예상 총액</span><b>290,000원</b></div>
 <p class="note">* 실제 견적은 짐 양과 층수, 주차 여건에 따라 달라집니다.</p>
 </aside>
+</div>
 </div></section>
 
 <section id="check"><div class="wrap">
@@ -157,6 +186,26 @@ footer b{color:#fff}
 <div><span class="em">👩</span><b>여성 기사 요청 가능</b><p>미리 말씀 주시면 여성 인력으로 배정해 드립니다.</p></div>
 <div><span class="em">📱</span><b>실시간 위치 공유</b><p>출발부터 도착까지 차량 위치를 알려드려요.</p></div>
 <div><span class="em">🧾</span><b>계약서 문자 발송</b><p>구두 약속 없이, 금액과 조건을 문자로 남깁니다.</p></div>
+</div>
+</div></section>
+
+<section id="ba" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">이사 전 · 후</span><h2>짐 빼고 이렇게 두고 나옵니다</h2><p class="sub">빈집 청소까지 기본입니다. 보증금 정산에서 트집 잡히지 않게, 나온 자리를 사진으로 남겨 보내드려요.</p></div>
+<div class="ba rv">
+<figure><img src="./assets/ba-before.jpg" alt="짐을 뺀 직후의 원룸"><figcaption>BEFORE · 짐 뺀 직후</figcaption></figure>
+<figure><img src="./assets/ba-after.jpg" alt="청소를 마친 빈 원룸"><figcaption>AFTER · 청소 후</figcaption></figure>
+</div>
+<p class="ba-note rv">* 바닥 · 창틀 · 붙박이장 내부까지. 도배 · 장판 교체가 필요한 상태면 미리 알려드립니다.</p>
+</div></section>
+
+<section id="cases" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">최근 작업</span><h2>이번 달에 다녀온 집들</h2><p class="sub">원룸 · 투룸 위주로 하루 두 건만 받습니다. 서두르지 않아야 짐이 상하지 않아요.</p></div>
+<div class="cases rv">
+<figure><img src="./assets/case-1.jpg" alt="원룸 이사 상차"><figcaption>망원동 원룸 · 1톤 · 반포장</figcaption></figure>
+<figure><img src="./assets/case-2.jpg" alt="가전 운반"><figcaption>신림동 투룸 · 1.4톤</figcaption></figure>
+<figure><img src="./assets/case-3.jpg" alt="박스 포장"><figcaption>연희동 원룸 · 포장이사</figcaption></figure>
+<figure><img src="./assets/case-4.jpg" alt="창틀을 닦는 빈집 청소"><figcaption>서대문 원룸 · 창틀 청소</figcaption></figure>
+<figure><img src="./assets/case-5.jpg" alt="가스레인지를 닦는 빈집 청소"><figcaption>합정동 투룸 · 주방 기름때까지</figcaption></figure>
 </div>
 </div></section>
 
