@@ -96,6 +96,59 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx : 히어로 재구성 — 오브젝트(진료 유닛)가 화면을 채우고 글자가 그 위에 얹힌다 ── */
+.hx-hero{position:relative;overflow:hidden;padding:148px 0 96px;min-height:614px;
+  background-color:var(--navy);
+  background-image:radial-gradient(74% 78% at 74% 42%,#1B2E52 0%,rgba(16,30,56,0) 66%)}
+.hx-hero .wrap{display:block;grid-template-columns:none;gap:0;position:relative;z-index:4}
+.hx-copy{max-width:560px}
+.hx-hero h1{position:relative}
+.hx-mline{display:none}
+
+/* 오브젝트 레이어 : 히어로의 오른쪽 74%를 채우고 왼쪽 끝은 배경색으로 녹는다 */
+.hx-object{position:absolute;top:0;right:0;bottom:0;left:18%;overflow:hidden}
+.hx-object>img{width:100%;height:100%;object-fit:cover;object-position:50% 60%;
+  transform:scale(1.42);transform-origin:0 52%}
+.hx-veil{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(95deg,#101E38 0 6%,rgba(16,30,56,.88) 20%,rgba(16,30,56,.6) 33%,rgba(16,30,56,.28) 48%,rgba(16,30,56,.07) 66%,rgba(16,30,56,0) 84%)}
+/* 글자가 사진 위로 넘어가는 구간의 대비 확보용 색면 */
+.hx-hero::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(46% 84% at 20% 52%,rgba(16,30,56,.95) 0 36%,rgba(16,30,56,.5) 64%,rgba(16,30,56,0) 100%)}
+
+/* 정보 조각 — 사진 위에 얹힌 세 가지 사실 */
+.hx-chips{position:absolute;inset:0;z-index:3;pointer-events:none}
+.hx-chip{position:absolute;animation:hx-rise .85s cubic-bezier(.32,.72,0,1) both}
+.hx-c1{left:46%;top:17%;width:min(304px,46%);animation-delay:.25s}
+.hx-c2{left:64%;top:45%;width:min(268px,40%);animation-delay:.45s}
+.hx-c3{left:50%;top:72%;width:min(300px,45%);animation-delay:.65s}
+.hx-cbox{pointer-events:auto;background:rgba(16,30,56,.92);padding:15px 20px 17px;
+  box-shadow:0 16px 38px rgba(5,10,22,.42);
+  transition:transform .4s cubic-bezier(.32,.72,0,1),box-shadow .4s}
+.hx-cbox:hover{transform:translateY(-2px);box-shadow:0 26px 52px rgba(5,10,22,.6)}
+.hx-num{display:block;font-family:"Noto Serif KR",serif;font-size:27px;font-weight:700;
+  color:var(--gold);line-height:1.2}
+.hx-cbox span{display:block;font-size:12.5px;line-height:1.65;color:#C6CEE0;margin-top:5px}
+.hx-cbox em{display:block;font-style:normal;font-weight:700;font-size:13.5px;color:#EDEAE0;margin-bottom:2px}
+@keyframes hx-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+@media(max-width:880px){
+  /* 겹침을 풀고 상하로 재구성 : 오브젝트는 16:10 띠, 조각은 1개만 사진 위에 남긴다 */
+  .hx-hero{padding:68px 0 46px;min-height:0;background-image:none}
+  .hx-hero::before{display:none}
+  .hx-object{position:relative;inset:auto;left:auto;width:100%;aspect-ratio:16/10}
+  .hx-object>img{transform:none;object-position:44% 62%}
+  .hx-veil{background:linear-gradient(0deg,rgba(16,30,56,.96) 0 13%,rgba(16,30,56,.6) 38%,rgba(16,30,56,.06) 70%,rgba(16,30,56,0) 100%)}
+  .hx-hero .wrap{padding-top:26px}
+  .hx-c2,.hx-c3{display:none}
+  .hx-c1{left:18px;right:18px;top:auto;bottom:14px;width:auto}
+  .hx-cbox{padding:12px 16px 14px}
+  .hx-num{display:inline;font-size:19px;margin-right:7px}
+  .hx-cbox span{display:inline;font-size:12.5px;margin:0}
+  .hx-mline{display:block;margin-top:14px;font-size:12.5px;line-height:1.7;color:var(--gold);max-width:none}
+  .hx-copy{max-width:none}
+}
+@media(prefers-reduced-motion:reduce){.hx-chip{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -106,15 +159,26 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">상담 예약</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<figure class="hx-object">
+<img src="./assets/hero.jpg" alt="더바른치과 임플란트 진료 유닛과 원내 디지털 장비">
+<span class="hx-veil" aria-hidden="true"></span>
+<div class="hx-chips">
+<div class="hx-chip hx-c1"><div class="hx-cbox"><b class="hx-num">10년</b><span>무상 보증 · 연 1회 정기검진</span></div></div>
+<div class="hx-chip hx-c2"><div class="hx-cbox"><span><em>정품 보증서</em>제조사 · 로트번호 기재</span></div></div>
+<div class="hx-chip hx-c3"><div class="hx-cbox"><span><em>원내 기공소</em>본뜨기 없이 스캔 · 제작 기간 절반</span></div></div>
+</div>
+</figure>
+<div class="wrap">
+<div class="hx-copy">
 <p class="kicker">IMPLANT &amp; PROSTHETICS</p>
 <h1>10년을 쓰는 치아는<br><b>10년을 책임집니다</b></h1>
 <p>더바른치과의 임플란트에는 보증서가 따라옵니다. 정품 보증 · 수술 기록 공개 · 10년 정기검진 — 문서로 약속합니다.</p>
+<p class="hx-mline">정품 보증서 발급 · 원내 기공소 운영 — 제작 기간 절반</p>
 <div class="hero-cta"><a class="btn btn-g" href="tel:010-4894-4905">상담 예약하기</a><a class="btn btn-l" href="#warranty">보증 제도 보기</a></div>
 </div>
-<figure class="hero-img rv"><img src="./assets/hero.jpg" alt="진료실"></figure>
-</div></section>
+</div>
+</section>
 
 <section id="warranty"><div class="wrap">
 <div class="rv"><p class="kicker">WARRANTY</p><h2>문서로 남기는 세 가지 약속</h2></div>

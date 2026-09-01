@@ -96,6 +96,43 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx: 히어로 재구성 — 사진 3장 콜라주가 글자 뒤로 침범한다 ── */
+.hx-hero{position:relative;overflow:hidden;background:var(--pale);padding:76px 0 92px;min-height:620px;border-radius:0 0 50px 50px}
+.hx-hero .wrap{display:block;grid-template-columns:none;position:relative;z-index:3}
+.hx-stage{position:absolute;inset:0;z-index:1;pointer-events:none;transform:rotate(1.4deg);transform-origin:62% 50%;transition:transform .9s cubic-bezier(.32,.72,0,1)}
+.hx-hero:hover .hx-stage{transform:rotate(0deg)}
+.hx-card{position:absolute;margin:0;overflow:hidden;border:7px solid #fff;border-radius:22px;box-shadow:0 20px 44px rgba(38,51,60,.16);transform:rotate(var(--rot))}
+.hx-card img{width:100%;height:100%;object-fit:cover;border-radius:15px}
+.hx-c1{--rot:-4deg;left:29%;top:-8%;width:50%;aspect-ratio:16/11;z-index:1}
+.hx-c1 img{object-position:50% 58%}
+.hx-c3{--rot:-3deg;left:36%;top:58%;width:30%;aspect-ratio:5/4;z-index:2}
+.hx-c3 img{object-position:51% 73%;transform:scale(3);transform-origin:51% 73%}
+.hx-c2{--rot:2deg;left:69%;top:8%;width:34%;aspect-ratio:3/4;z-index:3;animation:hx-float 8s ease-in-out infinite}
+.hx-c2 img{object-position:50% 14%}
+.hx-sticker{position:absolute;z-index:4;left:63%;top:59%;width:96px;height:96px;border-radius:50%;background:var(--yellow);color:#5A4400;display:grid;place-items:center;text-align:center;font-family:"Bagel Fat One";font-size:14px;line-height:1.25;transform:rotate(-9deg);box-shadow:0 10px 22px rgba(38,51,60,.18)}
+.hx-veil{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(93deg,var(--pale) 0%,var(--pale) 20%,rgba(233,247,253,.92) 30%,rgba(233,247,253,.80) 44%,rgba(233,247,253,.42) 55%,rgba(233,247,253,.10) 64%,rgba(233,247,253,0) 72%)}
+.hx-copy{max-width:430px}
+.hx-hero .hx-copy h1{font-size:clamp(30px,4.2vw,46px);line-height:1.28;color:#227FA4;margin-top:16px}
+.hx-hero .hx-copy h1 em{color:#C06400}
+.hx-hero .hx-copy p{margin-top:14px;color:var(--ink);font-size:15px;max-width:360px}
+.hx-cta{margin-top:26px}
+.hx-btn2{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 2px var(--sky)}
+.hx-hero .hx-copy p.hx-hours{margin-top:16px;font-size:13.5px;color:var(--ink);max-width:330px}
+@keyframes hx-float{0%,100%{transform:rotate(var(--rot)) translateY(0)}50%{transform:rotate(var(--rot)) translateY(-5px)}}
+@media(max-width:860px){
+ .hx-hero{display:flex;flex-direction:column;padding:34px 0 44px;min-height:0;border-radius:0 0 34px 34px}
+ .hx-hero .wrap{order:1}
+ .hx-veil{display:none}
+ .hx-stage{order:2;position:relative;inset:auto;transform:none;width:min(100% - 40px,520px);margin:28px auto 0;aspect-ratio:335/292}
+ .hx-copy,.hx-hero .hx-copy p,.hx-hero .hx-copy p.hx-hours{max-width:none}
+ .hx-card{border-width:5px;border-radius:18px}
+ .hx-c1{--rot:-2deg;left:0;top:0;width:74%;aspect-ratio:4/3}
+ .hx-c2{--rot:2deg;left:auto;right:0;top:auto;bottom:0;width:44%;aspect-ratio:4/5}
+ .hx-c3{display:none}
+ .hx-sticker{left:1%;top:55%;width:74px;height:74px;font-size:11.5px}
+}
+@media(prefers-reduced-motion:reduce){.hx-stage,.hx-hero:hover .hx-stage{transform:none}}
 </style>
 </head>
 <body>
@@ -106,15 +143,24 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">예약하기</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<span class="badge">만 12세 이하 어린이 전문</span>
-<h1 style="margin-top:16px">치과에서<br><em>칭찬받고</em> 가는 곳</h1>
-<p>뽀득뽀득은 아이를 혼내지 않습니다. 오늘 입만 벌려도 뱃지를 드려요. 다음에 또 오고 싶어야 하니까요.</p>
-<div class="hero-cta"><a class="btn btn-s" href="tel:010-4894-4905">예약 전화</a><a class="btn btn-y" href="#first">첫 방문 안내</a></div>
+<section class="hero hx-hero">
+<div class="hx-stage">
+<figure class="hx-card hx-c1"><img src="./assets/hero.jpg" alt="창가 햇빛이 드는 어린이 진료실 전경"></figure>
+<figure class="hx-card hx-c3"><img src="./assets/consult.jpg" alt="상담 책상 위에 놓인 어린이 치아 모형"></figure>
+<figure class="hx-card hx-c2"><img src="./assets/doctor-2.jpg" alt="태블릿으로 치료 계획을 설명하는 원장"></figure>
+<span class="hx-sticker">참 잘했어요</span>
 </div>
-<figure class="hero-img rv"><img src="./assets/hero.jpg" alt="어린이 진료실"><span class="medal">참 잘했어요</span></figure>
-</div></section>
+<div class="hx-veil"></div>
+<div class="wrap">
+<div class="hx-copy rv">
+<span class="badge">만 12세 이하 어린이 전문</span>
+<h1>치과에서<br><em>칭찬받고</em> 가는 곳</h1>
+<p>뽀득뽀득은 아이를 혼내지 않습니다. 오늘 입만 벌려도 뱃지를 드려요. 다음에 또 오고 싶어야 하니까요.</p>
+<div class="hero-cta hx-cta"><a class="btn btn-y" href="tel:010-4894-4905">예약 전화</a><a class="btn hx-btn2" href="#first">첫 방문 안내</a></div>
+<p class="hx-hours">평일 10:00 – 19:00 · 토 10:00 – 14:00<br>예약제로 대기 없이 진료합니다</p>
+</div>
+</div>
+</section>
 
 <section id="badge"><div class="wrap">
 <div class="rv" style="text-align:center"><span class="badge">용기 뱃지</span><h2>단계마다 뱃지를 모아요</h2></div>

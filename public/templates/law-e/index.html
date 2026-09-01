@@ -119,6 +119,64 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx — 비공개 상담실 오브젝트 히어로 ===== */
+.hero.hx{position:relative;overflow:hidden;padding:0;text-align:left;
+  min-height:clamp(540px,43vw,644px);display:flex;align-items:center}
+.hx-photo{position:absolute;top:0;right:0;bottom:0;left:29%;z-index:0;overflow:hidden}
+.hx-photo>img{position:absolute;top:0;right:0;width:158%;max-width:none;height:100%;object-fit:cover;object-position:100% 48%}
+.hx-veil{position:absolute;inset:0;
+  background:
+    radial-gradient(44% 64% at 20% 48%,rgba(255,255,255,.30),rgba(255,255,255,0) 72%),
+    linear-gradient(96deg,var(--rose) 0 12%,rgba(245,238,233,.96) 20%,rgba(245,238,233,.74) 29%,rgba(245,238,233,.24) 39%,rgba(245,238,233,0) 48%)}
+.hx-inner{position:relative;z-index:3;width:100%;padding-top:72px;padding-bottom:72px}
+.hero.hx .hx-kicker{margin:0;max-width:none;font-size:11px;letter-spacing:.38em;color:#7E5748;font-weight:500}
+.hero.hx h1{margin-top:18px;max-width:470px}
+.hero.hx .hx-lead{max-width:372px;margin:20px 0 0;color:#55504C;font-size:14.5px}
+.hero.hx .hx-cta{margin-top:28px;display:flex;gap:12px;justify-content:flex-start;flex-wrap:wrap}
+.hero.hx .hx-lock{margin:22px 0 0;max-width:340px;font-size:12.5px;color:#7E5748;letter-spacing:.03em}
+/* 정보 조각 — 최대 3개 */
+.hx-facts{position:absolute;inset:0;z-index:2;list-style:none;margin:0;padding:0;pointer-events:none}
+.hx-fact{position:absolute;pointer-events:auto;opacity:0;transform:translateY(16px);
+  animation:hx-rise .75s cubic-bezier(.32,.72,0,1) forwards}
+.hx-fact:nth-child(1){animation-delay:.30s}
+.hx-fact:nth-child(2){animation-delay:.50s}
+.hx-fact:nth-child(3){animation-delay:.70s}
+@keyframes hx-rise{to{opacity:1;transform:none}}
+.hx-fx{display:flex;gap:13px;align-items:center;padding:13px 16px;background:rgba(13,22,36,.90);
+  box-shadow:0 12px 30px rgba(12,20,32,.28);
+  transition:transform .4s cubic-bezier(.32,.72,0,1),box-shadow .4s,background .3s}
+.hx-fact:hover .hx-fx{transform:translateY(-2px);box-shadow:0 20px 40px rgba(12,20,32,.44);background:rgba(13,22,36,.96)}
+.hx-fx>img{width:46px;height:58px;object-fit:cover;object-position:50% 24%;flex:none}
+.hx-fx>span{display:block;min-width:0;color:#fff;font-size:13.5px}
+.hx-fx .hx-ic{flex:none;font-size:16px;color:#C9A896;line-height:1}
+.hx-fx b{display:block;font-family:"Noto Serif KR",serif;font-size:13.5px;font-weight:500;color:#fff;line-height:1.5}
+.hx-fx .hx-d{display:block;margin-top:3px;font-size:11.5px;line-height:1.6;color:#C6D0DD}
+.hx-f1{top:12%;right:6%;width:min(312px,27vw)}
+.hx-f2{top:41%;right:15%;width:min(290px,25vw)}
+.hx-f3{bottom:12%;right:27%;width:min(238px,21vw)}
+.hx-mline{display:none}
+@media(prefers-reduced-motion:reduce){.hx-fact{opacity:1;transform:none}}
+@media(max-width:860px){
+  .hero.hx{display:flex;flex-direction:column;align-items:stretch;min-height:0;padding:30px 0 34px}
+  .hx-inner{order:1;padding-top:0;padding-bottom:0}
+  .hx-photo{order:2;position:relative;left:auto;right:auto;top:auto;bottom:auto;
+    width:100%;aspect-ratio:16/10;margin-top:24px;overflow:hidden}
+  .hx-photo>img{position:absolute;inset:0;width:100%;max-width:100%;height:100%;object-position:66% 52%}
+  .hx-veil{background:linear-gradient(180deg,rgba(11,18,30,0) 30%,rgba(11,18,30,.34) 58%,rgba(11,18,30,.74) 100%)}
+  .hero.hx h1{max-width:none}
+  .hero.hx .hx-lead{max-width:none;margin-top:15px}
+  .hero.hx .hx-cta{margin-top:22px}
+  .hero.hx .hx-lock{margin-top:16px;max-width:none}
+  .hx-f1{top:auto;bottom:12px;left:12px;right:12px;width:auto}
+  .hx-f2,.hx-f3{display:none}
+  .hero.hx .hx-mline{display:block;order:3;margin:13px 0 0;padding:0 26px;max-width:none;
+    font-size:12.5px;line-height:1.75;color:#55504C}
+}
+@media(max-width:400px){
+  .hx-fx{padding:11px 13px;gap:11px}
+  .hx-fx>img{width:42px;height:52px}
+}
 </style>
 </head>
 <body>
@@ -129,14 +187,32 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">비밀 상담</a>
 </div></header>
 
-<div class="hero">
-<div class="wrap">
-<p class="kicker">FAMILY LAW OFFICE</p>
-<h1 style="margin-top:20px">가장 사적인 일을<br>가장 조심스럽게<br><em>다루겠습니다</em></h1>
-<p>다솜은 가사사건만 다룹니다. 이혼과 상속은 법률 문제이기 전에 사람의 일이라는 것을, 20년 동안 배웠습니다.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">비밀 상담 예약</a><a class="btn ghost" href="#type">사건 유형 보기</a></div>
-<p class="lock"><svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> 상담 내용은 어떤 경우에도 외부에 알려지지 않습니다</p>
+<div class="hero hx">
+<div class="hx-photo">
+<img src="./assets/3.jpg" alt="다솜 가사법률 비공개 상담실">
+<div class="hx-veil" aria-hidden="true"></div>
+<ul class="hx-facts">
+<li class="hx-fact hx-f1"><div class="hx-fx">
+<img src="./assets/2.jpg" alt="서민경 변호사">
+<span><b>여성 변호사 배정 가능</b><span class="hx-d">요청하시면 서민경 변호사가 맡습니다</span></span>
+</div></li>
+<li class="hx-fact hx-f2"><div class="hx-fx">
+<svg class="nq hx-ic" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+<span><b>비공개 상담실</b><span class="hx-d">대기실에서 마주치지 않도록 시간을 띄워 예약을 받습니다</span></span>
+</div></li>
+<li class="hx-fact hx-f3"><div class="hx-fx">
+<span><b>상담 60분 · 55,000원</b><span class="hx-d">수임 시 공제 · 예약제</span></span>
+</div></li>
+</ul>
 </div>
+<div class="wrap hx-inner">
+<p class="hx-kicker">FAMILY LAW OFFICE</p>
+<h1>가장 사적인 일을<br>가장 조심스럽게<br><em>다루겠습니다</em></h1>
+<p class="hx-lead">다솜은 가사사건만 다룹니다. 이혼과 상속은 법률 문제이기 전에 사람의 일이라는 것을, 20년 동안 배웠습니다.</p>
+<div class="hx-cta"><a class="btn" href="tel:010-4894-4905">비밀 상담 예약</a><a class="btn ghost" href="#type">사건 유형 보기</a></div>
+<p class="hx-lock"><svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg> 상담 내용은 어떤 경우에도 외부에 알려지지 않습니다</p>
+</div>
+<p class="hx-mline">비공개 상담실 · 대기실 동선 분리 · 상담 60분 55,000원 (수임 시 공제)</p>
 </div>
 
 <figure class="band">

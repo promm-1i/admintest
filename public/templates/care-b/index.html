@@ -103,6 +103,74 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 .ic-sub{margin-top:8px;font-size:14px;color:var(--soft)}
 /* 대비 보정 — 자동 계산 */
 .extra li{color:#77634F}
+
+/* ───── 히어로: 하루의 세 장면 콜라주 ───── */
+.hx-hero{position:relative;overflow:hidden;padding:84px 0 66px}
+.hx-hero .wrap{display:block;grid-template-columns:none;position:relative}
+
+/* 글자 — 폭을 좁게 잡고 사진 덩어리 위로 올린다 */
+.hx-copy{position:relative;z-index:3;max-width:470px}
+.hx-copy .kicker{color:#A6522F}
+.hx-copy h1{font-family:"Gowun Batang",serif;font-size:clamp(30px,3.1vw,44px);line-height:1.5;margin-top:8px}
+.hx-hero .hx-lead{margin-top:18px;color:#7A6650;font-size:16.5px;max-width:330px}
+.hx-hero .hero-cta{margin-top:30px}
+.hx-copy .btn-t{background:#B25A37}
+.hx-copy .btn-t:hover{background:#9C4C2C}
+.hx-hero .hx-note{margin-top:16px;margin-bottom:0;font-size:14px;color:#7A6650;max-width:330px}
+.hx-hero .hx-note b{color:#A6522F}
+
+/* 종이 — 사진이 글자 쪽으로 넘어오는 구간을 크림색으로 덮어 대비를 지킨다 */
+.hx-veil{position:absolute;z-index:2;top:-160px;bottom:-160px;left:-50vw;width:calc(50vw + 475px);
+background:rgba(251,245,238,.94);pointer-events:none;
+-webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 200px),rgba(0,0,0,0) 100%);
+mask-image:linear-gradient(90deg,#000 0,#000 calc(100% - 200px),rgba(0,0,0,0) 100%)}
+
+/* 콜라주 — 배율·각도가 다른 인화지 석 장 */
+.hx-collage{position:absolute;z-index:1;right:-300px;top:50%;margin-top:-240px;width:840px;height:480px;pointer-events:none}
+.hx-tilt{position:absolute;inset:0}
+.hx-ph{position:absolute;margin:0;background:#fff;padding:9px 9px 34px;border-radius:4px;
+box-shadow:0 26px 50px -28px rgba(61,46,36,.62),0 3px 8px rgba(61,46,36,.07);
+--k:1;transform:rotate(calc(var(--r) * var(--k)));transition:transform 1s cubic-bezier(.32,.72,0,1)}
+.hx-ph .hx-shot{display:block;width:100%;height:100%;overflow:hidden;border-radius:2px}
+.hx-ph img{width:100%;height:100%;object-fit:cover}
+.hx-ph figcaption{position:absolute;left:14px;right:14px;bottom:5px;font-size:13px;line-height:26px;
+color:var(--ink);white-space:nowrap;overflow:hidden}
+.hx-ph figcaption b{color:#A6522F;font-weight:700;margin-right:7px}
+/* 겹쳐 가려지는 쪽·크림색에 잠기는 쪽을 피해 글자를 반대편에 둔다 */
+.hx-a figcaption,.hx-c figcaption{text-align:right}
+.hx-a{--r:-3deg;left:-8%;top:1%;width:52%;height:52%;z-index:2}
+.hx-b{--r:2deg;left:40%;top:6%;width:60%;height:90%;z-index:1}
+.hx-c{--r:3.2deg;left:-15%;top:46%;width:40%;height:46%;z-index:3}
+.hx-c img{transform:scale(1.5);transform-origin:26% 70%}
+/* 정지 시 한 장만 뜬다 · 마우스가 오면 덩어리가 펴진다 */
+@keyframes hx-drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+.hx-a .hx-shot{animation:hx-drift 8s ease-in-out infinite}
+.hx-hero:hover .hx-ph{--k:.42}
+@media(prefers-reduced-motion:reduce){.hx-hero:hover .hx-ph{--k:1}}
+
+@media(max-width:1120px){
+.hx-collage{right:-190px;width:700px;height:420px;margin-top:-210px}
+.hx-hero .hx-lead,.hx-hero .hx-note{max-width:300px}
+}
+/* 모바일 — 겹침은 남기고 상하로 다시 쌓는다 */
+@media(max-width:860px){
+.hx-hero{padding:34px 0 44px}
+.hx-veil{display:none}
+.hx-copy{max-width:none}
+.hx-hero .hx-lead,.hx-hero .hx-note{max-width:none}
+.hx-hero .hx-lead{font-size:15.5px;margin-top:14px}
+.hx-hero .hero-cta{margin-top:22px}
+.hx-collage{position:relative;z-index:1;right:auto;top:auto;margin:26px 0 0;width:100%;height:264px}
+.hx-tilt{position:static}
+.hx-ph{padding:7px 7px 28px}
+.hx-ph figcaption{left:11px;right:11px;bottom:3px;font-size:12.5px;line-height:24px}
+.hx-a figcaption{text-align:left}
+.hx-a{--r:-1.5deg;left:0;top:36px;width:73%;height:62%}
+.hx-b{--r:1deg;left:auto;right:0;top:112px;width:56%;height:55%}
+.hx-c{position:static;width:auto;height:auto;padding:0;background:none;box-shadow:none;transform:none;border-radius:0}
+.hx-c .hx-shot{display:none}
+.hx-c figcaption{position:static;text-align:left;font-size:14px;line-height:1.6;white-space:normal;color:#7A6650}
+}
 </style>
 </head>
 <body>
@@ -113,14 +181,22 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">입소 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero"><div class="wrap">
+<div class="hx-veil" aria-hidden="true"></div>
+<div class="hx-copy rv">
 <p class="kicker">노인장기요양기관 · 정원 29명</p>
 <h1>부모님의 하루가<br><em>봄날</em>이면 좋겠습니다</h1>
-<p>봄날의집은 어르신 세 분마다 요양보호사 한 분이 함께합니다. 식사 · 산책 · 잠자리까지, 자식 마음으로 돌봅니다.</p>
+<p class="hx-lead">봄날의집은 어르신 세 분마다 요양보호사 한 분이 함께합니다. 식사 · 산책 · 잠자리까지, 자식 마음으로 돌봅니다.</p>
 <div class="hero-cta"><a class="btn btn-t" href="tel:010-4894-4905">입소 상담 전화</a><a class="btn btn-w" href="#day">하루 일과 보기</a></div>
+<p class="hx-note">보호자 안심 알림 <b>매일 발송</b></p>
 </div>
-<figure class="hero-img rv"><img src="./assets/1.jpg" alt="어르신 생활실"><span class="chip">보호자 안심 알림 <b>매일 발송</b></span></figure>
+<div class="hx-collage rv">
+<div class="hx-tilt">
+<figure class="hx-ph hx-c"><span class="hx-shot"><img src="./assets/2.jpg" alt="재활 운동실 보행 훈련 바"></span><figcaption><b>10:00</b> 재활 운동</figcaption></figure>
+<figure class="hx-ph hx-a"><span class="hx-shot"><img src="./assets/4.jpg" alt="점심상이 차려지는 식당"></span><figcaption><b>12:00</b> 점심상</figcaption></figure>
+<figure class="hx-ph hx-b"><span class="hx-shot"><img src="./assets/1.jpg" alt="오후 볕이 드는 창가 생활실"></span><figcaption><b>15:00</b> 창가 티타임</figcaption></figure>
+</div>
+</div>
 </div></section>
 
 <section id="day" style="padding-top:0"><div class="wrap">

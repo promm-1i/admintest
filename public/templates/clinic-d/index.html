@@ -116,6 +116,58 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 .pd figcaption{padding:18px 20px}
 .pd b{display:block;font-size:15.5px;color:var(--ink)}
 .pd p{margin-top:7px;font-size:13.5px;line-height:1.75;color:var(--soft)}
+
+/* ───── hx : 소아과 콜라주 히어로 (놀이 대기실 · 스티커 클로즈업 · 진료실) ───── */
+.hero.hx-hero{position:relative;overflow:hidden;padding:0;background:var(--cream);border-radius:0 0 60px 60px}
+.hx-stage{position:absolute;inset:0;overflow:hidden;z-index:1}
+.hx-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;
+ background:radial-gradient(66% 132% at 1% 50%,#FFF4E6 0 26%,rgba(255,244,230,.9) 40%,rgba(255,244,230,.34) 57%,rgba(255,244,230,0) 71%)}
+.hx-inner{position:relative;z-index:3;max-width:1160px;margin:0 auto;padding:96px 24px 104px;min-height:648px;display:flex;align-items:center}
+.hx-copy{max-width:412px}
+.hx-hero .hx-badge{background:var(--sky);color:var(--ink)}
+.hx-hero h1{margin-top:18px}
+.hx-hero h1 em{color:#b95c22}
+.hx-hero .hx-lead{max-width:340px;color:#5E4E3F}
+.hx-hero .hx-cta{margin-top:28px}
+.hx-hero .hx-cta .btn-o{background:#AF5720}
+.hx-hero .hx-cta .btn-w{color:#AF5720;border-color:#AF5720}
+
+.hx-p{position:absolute;transition:transform .85s cubic-bezier(.32,.72,0,1)}
+.hx-p>span{display:block;width:100%;height:100%;border-radius:26px;overflow:hidden;box-shadow:0 22px 46px rgba(74,58,44,.17)}
+.hx-p img{width:100%;height:100%;object-fit:cover}
+.hx-p1{left:41.5%;top:46px;width:45%;height:334px;transform:rotate(-2.4deg)}
+.hx-p1 img{object-position:52% 68%}
+.hx-p2{left:63%;top:326px;width:41%;height:344px;transform:rotate(3.2deg)}
+.hx-p2 img{object-position:64% 52%}
+.hx-p3{left:28.5%;top:236px;width:19%;height:302px;z-index:2;transform:rotate(-3.6deg)}
+.hx-p3 img{object-position:56% 76%}
+.hx-p3>span{animation:hx-rise 8s ease-in-out infinite}
+@keyframes hx-rise{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hx-hero:hover .hx-p1{transform:rotate(-1deg)}
+.hx-hero:hover .hx-p2{transform:rotate(1.3deg)}
+.hx-hero:hover .hx-p3{transform:rotate(-1.7deg)}
+
+.hx-hero .hx-wait{position:absolute;left:57%;top:344px;z-index:3;margin:0;max-width:none;
+ display:flex;align-items:baseline;gap:9px;white-space:nowrap;font-size:12px;color:#5E4E3F;
+ background:#fff;border-radius:20px;padding:12px 20px;box-shadow:0 14px 30px rgba(74,58,44,.16)}
+.hx-hero .hx-wait b{font-family:"Jua";font-weight:400;font-size:18px;color:#AF5720}
+
+@media(max-width:900px){
+ .hero.hx-hero{display:flex;flex-direction:column;border-radius:0 0 36px 36px}
+ .hx-scrim{display:none}
+ .hx-inner{order:1;position:static;display:block;max-width:none;min-height:0;padding:34px 20px 0}
+ .hx-copy{max-width:none}
+ .hx-hero .hx-lead{max-width:none}
+ .hx-stage{order:2;position:relative;inset:auto;height:300px;margin:26px 0 40px;overflow:visible}
+ .hx-p>span{border-radius:20px;box-shadow:0 14px 28px rgba(74,58,44,.16)}
+ .hx-p1{left:14px;top:0;width:226px;height:168px;transform:rotate(-1.2deg)}
+ .hx-p2{display:none}
+ .hx-p3{left:152px;top:84px;width:196px;height:208px;transform:rotate(-1.8deg)}
+ .hx-hero:hover .hx-p1{transform:rotate(-1.2deg)}
+ .hx-hero:hover .hx-p3{transform:rotate(-1.8deg)}
+ .hx-hero .hx-wait{left:12px;top:212px;padding:11px 18px;font-size:11.5px;gap:8px}
+ .hx-hero .hx-wait b{font-size:16px}
+}
 </style>
 </head>
 <body>
@@ -126,15 +178,21 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">진료 예약</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<span class="badge">영유아 검진 · 예방접종 지정 의료기관</span>
-<h1 style="margin-top:16px">우는 아이도<br><em>금방 그치는 병원</em></h1>
-<p>아이맘은 진료실에 장난감이 있고, 주사실에 스티커가 있습니다. 아이가 병원을 덜 무서워하는 게 첫 번째 목표예요.</p>
-<div class="hero-cta"><a class="btn btn-o" href="tel:010-4894-4905">예약 전화</a><a class="btn btn-w" href="#vax">접종 일정 보기</a></div>
+<section class="hero hx-hero">
+<div class="hx-stage rv">
+<figure class="hx-p hx-p1"><span><img src="./assets/ped-2.jpg" alt="그림책과 원목 교구를 둔 아이맘 대기실 놀이 공간"></span></figure>
+<figure class="hx-p hx-p2"><span><img src="./assets/hero.jpg" alt="기린 키재기 자와 장난감 바구니가 있는 진료실"></span></figure>
+<figure class="hx-p hx-p3"><span><img src="./assets/ped-1.jpg" alt="접종을 마친 아이 손등에 스티커를 붙여 주는 간호사"></span></figure>
+<p class="hx-wait"><span>지금 대기</span><b>3명 · 약 15분</b></p>
 </div>
-<figure class="hero-img rv"><img src="./assets/hero.jpg" alt="밝은 소아과 진료실"><div class="wait"><span>지금 대기</span><b>3명 · 약 15분</b></div></figure>
-</div></section>
+<div class="hx-scrim" aria-hidden="true"></div>
+<div class="hx-inner rv"><div class="hx-copy">
+<span class="badge hx-badge">영유아 검진 · 예방접종 지정 의료기관</span>
+<h1>우는 아이도<br><em>금방 그치는 병원</em></h1>
+<p class="hx-lead">아이맘은 진료실에 장난감이 있고, 주사실에 스티커가 있습니다. 아이가 병원을 덜 무서워하는 게 첫 번째 목표예요.</p>
+<div class="hero-cta hx-cta"><a class="btn btn-o" href="tel:010-4894-4905">예약 전화</a><a class="btn btn-w" href="#vax">접종 일정 보기</a></div>
+</div></div>
+</section>
 
 <section id="vax"><div class="wrap">
 <div class="rv"><span class="badge">예방접종</span><h2>우리 아이 접종 달력</h2><p class="sub">국가필수예방접종(NIP)은 전액 무료입니다. 접종 전날 문자로 안내해 드려요.</p></div>

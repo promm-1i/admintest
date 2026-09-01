@@ -130,6 +130,68 @@ footer b{color:#fff}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 재구성: 1톤 트럭 오브젝트 중심 ───────────────── */
+.hx-hero{position:relative;overflow:hidden;padding:0}
+.hx-hero .wrap{display:block;grid-template-columns:none;position:relative;z-index:3;padding-top:94px;padding-bottom:112px}
+/* 트럭이 우측을 채우고 화면 밖으로 나간다. 왼쪽 끝은 배경색으로 녹는다 */
+.hx-obj{position:absolute;top:0;right:0;bottom:0;width:67%;z-index:1;overflow:hidden;
+-webkit-mask-image:linear-gradient(97deg,rgba(0,0,0,0) 2%,rgba(0,0,0,.2) 15%,#000 40%);
+mask-image:linear-gradient(97deg,rgba(0,0,0,0) 2%,rgba(0,0,0,.2) 15%,#000 40%)}
+.hx-obj img{width:116%;max-width:none;height:112%;object-fit:cover;object-position:44% 64%;margin:-6% 0 0 -13%}
+.hx-glow{position:absolute;z-index:0;right:1%;top:3%;width:62%;height:88%;
+background:radial-gradient(closest-side,#fff 0,rgba(255,255,255,0) 72%);opacity:.75}
+.hx-veil{position:absolute;inset:0;z-index:2;background:linear-gradient(94deg,
+var(--pale) 0 27%,rgba(255,241,239,.95) 43%,rgba(255,241,239,.5) 57%,rgba(255,241,239,0) 69%)}
+.hx-copy{max-width:445px}
+.hx-hero .badge{background:var(--ink);color:#fff}
+.hx-hero h1{margin-top:16px}
+.hx-hero h1 em{color:var(--deep)}
+.hx-copy p{color:#6E615D}
+.hx-hero .btn-c{background:var(--coral);color:var(--ink)}
+.hx-hero .btn-c:hover{background:#FF8175}
+.hx-hero .btn-w{color:var(--ink);border-color:var(--coral)}
+/* 트럭에 붙는 정보 조각 3개 */
+.hx-facts{position:absolute;inset:0;z-index:4;pointer-events:none}
+.hx-tag{position:absolute;pointer-events:auto;background:#fff;border-radius:16px;padding:13px 18px;
+box-shadow:0 16px 34px -20px rgba(44,36,34,.55);animation:hxRise .55s cubic-bezier(.32,.72,0,1) backwards;
+transition:transform .35s cubic-bezier(.32,.72,0,1),box-shadow .35s}
+.hx-tag:hover{transform:translateY(-2px);box-shadow:0 24px 44px -18px rgba(44,36,34,.62)}
+.hx-t1 b,.hx-t2 b{display:block;font-family:"Jua";font-weight:400;font-size:16.5px;color:var(--ink)}
+.hx-t1 span,.hx-t2 span{display:block;font-size:12.5px;color:var(--soft);margin-top:2px}
+.hx-t1{top:6%;left:39%;animation-delay:.1s}
+.hx-t2{bottom:11%;left:43%;animation-delay:.5s}
+.hx-bill{right:0;top:23%;width:340px;padding:18px 20px 16px;animation-delay:.3s}
+.hx-bill-t{display:block;font-family:"Jua";font-weight:400;font-size:15px;color:var(--ink)}
+.hx-rows{margin-top:11px;display:grid;grid-template-columns:1fr 1fr;gap:7px 18px}
+.hx-r{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
+padding-bottom:6px;border-bottom:2px dotted var(--line);font-size:12.5px;color:var(--soft)}
+.hx-r i{font-style:normal;font-family:"Jua";font-size:14px;color:var(--ink)}
+.hx-total{margin-top:13px;background:var(--pale);border-radius:13px;padding:10px 16px;
+display:flex;justify-content:space-between;align-items:center}
+.hx-total span{font-size:12.5px;font-weight:700;color:var(--ink)}
+.hx-total b{font-family:"Jua";font-weight:400;font-size:26px;color:var(--deep)}
+.hx-bill .hx-note{margin-top:9px;font-size:11.5px;color:var(--soft);max-width:none}
+@keyframes hxRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+/* 모바일: 겹침을 풀고 위아래로. 사진 위 조각은 1개만 */
+@media(max-width:860px){
+.hx-hero{display:flex;flex-direction:column;padding:26px 0 32px}
+.hx-hero .wrap{display:contents}
+.hx-glow,.hx-veil{display:none}
+.hx-copy{order:1;max-width:none;padding:0 24px}
+.hx-obj{order:2;position:relative;width:100%;height:auto;aspect-ratio:16/10;margin-top:22px;
+-webkit-mask-image:none;mask-image:none}
+.hx-obj img{width:100%;height:100%;margin:0;object-position:46% 62%}
+.hx-facts{order:3;position:relative;inset:auto;padding:0 24px;margin-top:-30px;
+display:flex;flex-direction:column;gap:13px;align-items:flex-start}
+.hx-tag{position:static;animation-delay:0s}
+.hx-t2{background:none;box-shadow:none;padding:2px;display:flex;gap:4px 9px;
+align-items:baseline;flex-wrap:wrap}
+.hx-t2 b{font-size:15px}
+.hx-t2 span{margin-top:0}
+.hx-t2:hover{transform:none;box-shadow:none}
+.hx-bill{width:100%}
+}
 </style>
 </head>
 <body>
@@ -140,24 +202,31 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">견적 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="hx-glow" aria-hidden="true"></div>
+<div class="hx-obj"><img src="./assets/hero.jpg" alt="1톤 트럭에 원룸 짐을 싣는 작업"></div>
+<div class="hx-veil" aria-hidden="true"></div>
+<div class="wrap">
+<div class="hx-copy">
 <span class="badge">원룸 · 투룸 전문</span>
-<h1 style="margin-top:16px">짐 적은 이사에<br><em>큰 트럭</em>은 낭비예요</h1>
+<h1>짐 적은 이사에<br><em>큰 트럭</em>은 낭비예요</h1>
 <p>1톤 · 1.4톤으로 딱 맞게. 가볍게이사는 원룸 이사만 8년 했습니다. 짐 사진만 보내주시면 30분 안에 견적 드려요.</p>
 <div class="hero-cta"><a class="btn btn-c" href="tel:010-4894-4905">사진으로 견적받기</a><a class="btn btn-w" href="#opt">요금 보기</a></div>
 </div>
-<div class="hero-media rv">
-<img src="./assets/hero.jpg" alt="1톤 트럭에 원룸 짐을 싣는 작업">
-<aside class="quote">
-<h3>견적 예시 — 원룸 8평 · 3층 → 2층</h3>
-<div class="qr"><b>차량 (1톤)</b><span class="v">150,000원</span></div>
-<div class="qr"><b>인력 2명</b><span class="v">140,000원</span></div>
-<div class="qr"><b>사다리차</b><span class="v">불필요</span></div>
-<div class="qr"><b>박스 20개</b><span class="v">무료</span></div>
-<div class="total"><span>예상 총액</span><b>290,000원</b></div>
-<p class="note">* 실제 견적은 짐 양과 층수, 주차 여건에 따라 달라집니다.</p>
-</aside>
+<div class="hx-facts">
+<div class="hx-tag hx-t1"><b>1톤 · 반포장</b><span>짐은 직접 싸고, 운반 · 배치만</span></div>
+<div class="hx-tag hx-t2"><b>상 · 하차 2시간</b><span>짐 사진 보내면 30분 안에 견적</span></div>
+<div class="hx-tag hx-bill">
+<b class="hx-bill-t">견적 예시 — 원룸 8평 · 3층 → 2층</b>
+<div class="hx-rows">
+<div class="hx-r"><span>차량 (1톤)</span><i>150,000원</i></div>
+<div class="hx-r"><span>인력 2명</span><i>140,000원</i></div>
+<div class="hx-r"><span>사다리차</span><i>불필요</i></div>
+<div class="hx-r"><span>박스 20개</span><i>무료</i></div>
+</div>
+<div class="hx-total"><span>예상 총액</span><b>290,000원</b></div>
+<p class="hx-note">* 실제 견적은 짐 양과 층수, 주차 여건에 따라 달라집니다.</p>
+</div>
 </div>
 </div></section>
 

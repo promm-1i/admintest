@@ -115,6 +115,66 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 .tu .won{color:#cc4c2b}
 .tu .note{color:#6F6D5F}
 .tuit-foot{color:#6C6A5C}
+
+/* ── 히어로 재구성: 첨삭 노트 오브젝트 ── */
+.hero{position:relative;overflow:hidden;padding:0;text-align:left;
+  background-color:var(--paper);
+  background-image:
+    radial-gradient(88% 78% at 58% 50%,rgba(255,226,74,.16),rgba(253,251,244,0) 62%),
+    linear-gradient(rgba(55,87,201,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(55,87,201,.06) 1px,transparent 1px);
+  background-size:auto,28px 28px,28px 28px}
+.hx-obj{position:absolute;left:28%;right:-4%;top:0;bottom:0}
+.hx-frame{position:absolute;inset:0;
+  background-image:url("./assets/hero.jpg");
+  background-repeat:no-repeat;background-size:170% auto;background-position:70% 86%}
+.hx-frame::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,var(--paper) 0 16%,rgba(253,251,244,.95) 27%,rgba(253,251,244,0) 46%),
+  linear-gradient(0deg,var(--paper),rgba(253,251,244,0) 14%),
+  linear-gradient(180deg,var(--paper),rgba(253,251,244,0) 9%)}
+.hx-wrap{position:relative;z-index:1;display:flex;align-items:flex-start;min-height:clamp(560px,68vh,660px)}
+.hx-copy{max-width:410px;padding:56px 0 40px}
+.hero .hx-memo{font-size:24px;color:#B33A1C;line-height:1.4}
+.hero .hx-copy h1{font-size:clamp(28px,3.2vw,44px);margin-top:8px}
+.hero .hx-lede{margin:16px 0 0;max-width:380px;color:#6B6959;font-size:15px}
+.hero .hx-cta{justify-content:flex-start;margin-top:26px}
+/* 정보 조각 — 노트 첨삭 쪽지 */
+.hx-slips{position:absolute;inset:0;margin:0;padding:0;list-style:none;pointer-events:none}
+.hx-slip{position:absolute;z-index:2;opacity:0;pointer-events:auto;
+  animation:hx-rise .62s cubic-bezier(.32,.72,0,1) forwards}
+.hx-a{left:19%;top:63%;width:290px;--r:-1.4deg;animation-delay:.15s}
+.hx-b{right:7%;top:10%;width:210px;--r:1deg;animation-delay:.35s}
+.hx-c{right:26%;bottom:9%;width:200px;--r:-.8deg;animation-delay:.55s}
+@keyframes hx-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hx-note{background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:14px 18px;
+  box-shadow:0 14px 30px rgba(43,43,35,.12);transform:rotate(var(--r,0deg));
+  transition:transform .3s cubic-bezier(.32,.72,0,1),box-shadow .3s}
+.hx-slip:hover .hx-note{transform:rotate(var(--r,0deg)) translateY(-2px);box-shadow:0 22px 42px rgba(43,43,35,.2)}
+.hx-tag{display:block;font-family:"Nanum Pen Script",cursive;font-size:18px;line-height:1.2;color:#B33A1C}
+.hx-num{display:block;font-size:26px;font-weight:400;line-height:1.35}
+.hx-key{display:block;font-size:16.5px;font-weight:400;line-height:1.4}
+.hx-cap{display:block;margin-top:3px;font-size:12.5px;line-height:1.55;color:#6B6959}
+.hero .hx-facts{display:none}
+@media(max-width:860px){
+  .hero{display:flex;flex-direction:column;padding:0 0 30px}
+  .hx-wrap{order:1;display:block;min-height:0}
+  .hx-copy{max-width:none;padding:32px 0 0}
+  .hero .hx-memo{font-size:22px}
+  .hero .hx-copy h1{font-size:clamp(27px,7.4vw,34px)}
+  .hero .hx-lede{max-width:none;font-size:14.5px}
+  .hero .hx-cta{margin-top:20px}
+  .hx-obj{order:2;position:relative;left:auto;right:auto;top:auto;bottom:auto;
+    margin:24px 0 44px;aspect-ratio:16/10}
+  .hx-frame{background-size:235% auto;background-position:64% 91%}
+  .hx-frame::after{background:linear-gradient(0deg,rgba(43,43,35,.24),rgba(43,43,35,0) 34%)}
+  .hx-b,.hx-c{display:none}
+  .hx-a{left:24px;right:24px;top:auto;bottom:-22px;width:auto;--r:0deg}
+  .hx-note{padding:11px 15px}
+  .hx-num{font-size:23px}
+  .hero .hx-facts{order:3;display:block;align-self:center;width:100%;max-width:960px;
+    margin:0;padding:0 24px;font-size:13px;line-height:1.6;color:#6B6959}
+}
+@media(prefers-reduced-motion:reduce){.hx-slip{opacity:1;animation:none}}
 </style>
 </head>
 <body>
@@ -125,12 +185,23 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905"><svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4 5.2 2 2 0 0 1 6 3Z"/></svg> 상담하기</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<p class="memo">— 정원 24명, 작아서 가능한 것들 —</p>
+<section class="hero">
+<div class="hx-obj">
+<div class="hx-frame" role="img" aria-label="빨간 펜이 지나간 풀이 노트와 연필이 놓인 책상"></div>
+<ul class="hx-slips">
+<li class="hx-slip hx-a"><div class="hx-note"><span class="hx-tag">첨삭 누적</span><b class="hx-num">3,200장</b><span class="hx-cap">매일 걷어서 다음 날 아침에 돌려드립니다</span></div></li>
+<li class="hx-slip hx-b"><div class="hx-note"><b class="hx-key">1:1 피드백</b><span class="hx-cap">노트마다 이름을 적어 손으로</span></div></li>
+<li class="hx-slip hx-c"><div class="hx-note"><b class="hx-key">한 반 6명</b><span class="hx-cap">선생님이 자리를 돌며 봅니다</span></div></li>
+</ul>
+</div>
+<div class="wrap hx-wrap"><div class="hx-copy">
+<p class="memo hx-memo">— 정원 24명, 작아서 가능한 것들 —</p>
 <h1>한 명 한 명의 노트를<br><span class="hl">끝까지 봐주는 곳</span></h1>
-<p>연필과노트는 큰 학원이 못 하는 걸 합니다. 아이의 풀이 과정을 매일 들여다보고, 어디서 막혔는지 노트에 적어 돌려줍니다.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">상담 전화하기</a><a class="btn ghost" href="#today">시간표 보기</a></div>
-</div></section>
+<p class="hx-lede">연필과노트는 큰 학원이 못 하는 걸 합니다. 아이의 풀이 과정을 매일 들여다보고, 어디서 막혔는지 노트에 적어 돌려줍니다.</p>
+<div class="hero-cta hx-cta"><a class="btn" href="tel:010-4894-4905">상담 전화하기</a><a class="btn ghost" href="#today">시간표 보기</a></div>
+</div></div>
+<p class="hx-facts">1:1 손글씨 피드백 · 한 반 최대 6명</p>
+</section>
 
 <figure class="band">
 <img src="./assets/hero.jpg" alt="노트를 쓰는 학생">

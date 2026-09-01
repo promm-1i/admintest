@@ -97,6 +97,64 @@ footer b{color:var(--sand)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx : 대형견 오브젝트 히어로 ─────────────────────────────── */
+.hero.hx{position:relative;padding:0;overflow:hidden;
+  background:radial-gradient(72% 86% at 70% 42%,#FCF9F1 0%,var(--sand) 64%)}
+.hero.hx .wrap{position:relative;z-index:3;width:100%;display:block;grid-template-columns:none}
+.hx-stage{position:relative;display:flex;align-items:center;min-height:clamp(500px,64vh,620px)}
+
+.hx-media{position:absolute;top:0;right:0;bottom:0;width:72%}
+.hx-frame{position:absolute;inset:0;overflow:hidden}
+.hero.hx .hx-obj{position:absolute;top:0;bottom:0;right:-6%;left:auto;width:145%;height:100%;
+  border-radius:0;object-fit:cover;object-position:60% 70%}
+.hx-melt{position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(90deg,var(--sand) 0 3%,rgba(245,241,230,.82) 10%,rgba(245,241,230,0) 22%),
+    linear-gradient(0deg,var(--sand) 0 2%,rgba(245,241,230,0) 18%)}
+
+.hx-copy{position:relative;max-width:520px;padding:58px 0 64px}
+.hx-copy::before{content:"";position:absolute;z-index:-1;top:-34px;bottom:-34px;left:-900px;right:-56px;
+  background:linear-gradient(90deg,var(--sand) 0 calc(100% - 150px),rgba(245,241,230,.7) calc(100% - 46px),rgba(245,241,230,0) 100%)}
+.hero.hx .hx-line{margin-top:11px;font-size:13.5px;color:var(--khaki);font-weight:500;max-width:420px;display:none}
+
+.hx-marks{position:absolute;inset:0;list-style:none;margin:0;padding:0;z-index:4;pointer-events:none}
+.hx-mark{position:absolute;pointer-events:auto}
+.hx-m1{top:9%;right:5.5%;width:min(244px,42%)}
+.hx-m2{top:41%;right:32%;width:min(206px,36%)}
+.hx-m3{bottom:11%;right:9%;width:min(272px,46%)}
+.hx-mk{display:block;background:#fff;border-radius:12px;padding:13px 18px;
+  box-shadow:0 12px 28px rgba(46,56,38,.16);
+  transition:transform .38s cubic-bezier(.32,.72,0,1),box-shadow .38s cubic-bezier(.32,.72,0,1)}
+.hx-mark:hover .hx-mk,.hx-mark:focus-within .hx-mk{transform:translateY(-2px);box-shadow:0 20px 40px rgba(46,56,38,.24)}
+.hx-mk b{display:block;font-family:"Do Hyeon",sans-serif;font-weight:400;font-size:17px;line-height:1.35;color:var(--khaki)}
+.hx-mk span{display:block;margin-top:3px;font-size:12.5px;line-height:1.45;color:#5E6654}
+
+@keyframes hxrise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:no-preference){
+  .hx-copy>*{animation:hxrise .8s cubic-bezier(.32,.72,0,1) backwards}
+  .hx-copy>:nth-child(2){animation-delay:.06s}
+  .hx-copy>:nth-child(3){animation-delay:.12s}
+  .hx-copy>:nth-child(4){animation-delay:.16s}
+  .hx-copy>:nth-child(5){animation-delay:.2s}
+  .hx-mark{animation:hxrise .8s cubic-bezier(.32,.72,0,1) backwards}
+  .hx-m1{animation-delay:.4s}.hx-m2{animation-delay:.6s}.hx-m3{animation-delay:.8s}
+}
+
+@media(max-width:900px){
+  .hero.hx{background:var(--sand)}
+  .hx-stage{display:block;min-height:0}
+  .hx-media{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden}
+  .hero.hx .hx-obj{right:0;width:100%;object-position:62% 74%}
+  .hx-melt{background:linear-gradient(0deg,var(--sand) 0 3%,rgba(245,241,230,0) 24%)}
+  .hx-m2,.hx-m3{display:none}
+  .hx-m1{top:auto;right:auto;bottom:14px;left:14px;width:auto;max-width:calc(100% - 28px)}
+  .hx-mk{padding:11px 16px;border-radius:10px}
+  .hx-mk b{font-size:16px}
+  .hx-copy{max-width:none;padding:20px 0 44px}
+  .hx-copy::before{display:none}
+  .hero.hx .hx-line{display:block}
+}
 </style>
 </head>
 <body>
@@ -107,14 +165,28 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">진료 예약</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx"><div class="hx-stage">
+
+<div class="hx-media">
+<div class="hx-frame">
+<img class="hx-obj" src="./assets/doctor-1.jpg" alt="들판 동물병원에서 진료받는 골든리트리버">
+<span class="hx-melt" aria-hidden="true"></span>
+</div>
+<ul class="hx-marks">
+<li class="hx-mark hx-m1"><span class="hx-mk"><b>고관절 이형성증</b><span>엑스레이 촬영 · 당일 판독</span></span></li>
+<li class="hx-mark hx-m2"><span class="hx-mk"><b>슬개골 · 십자인대</b><span>파행 보행 검사</span></span></li>
+<li class="hx-mark hx-m3"><span class="hx-mk"><b>수술 후 재활실</b><span>수중 트레드밀 · 주차별 보행 리포트</span></span></li>
+</ul>
+</div>
+
+<div class="wrap"><div class="hx-copy">
 <span class="tag">중 · 대형견 전문</span>
 <h1 style="margin-top:16px">큰 아이들은<br><em>다리가 먼저</em> 옵니다</h1>
 <p>들판 동물병원은 15kg 이상 대형견을 주로 봅니다. 관절과 체중, 활동량 — 대형견에게 중요한 것부터 챙깁니다.</p>
+<p class="hx-line">슬개골 · 십자인대 파행 검사부터 수술 후 재활실 운영까지.</p>
 <div class="hero-cta"><a class="btn btn-o" href="tel:010-4894-4905">진료 예약</a><a class="btn btn-k" href="#joint">관절 검진 보기</a></div>
-</div>
-<img class="rv" src="./assets/doctor-1.jpg" alt="대형견 진료">
+</div></div>
+
 </div></section>
 
 <section id="joint"><div class="wrap">

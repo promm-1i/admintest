@@ -98,6 +98,48 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 재구성: 야간 가공 라인 풀블리드 + 스펙 패널 ── */
+.hx-hero{padding:0;background:#0B0B0C;color:#fff}
+.hx-stage{position:relative;overflow:hidden;display:flex;align-items:stretch;min-height:clamp(520px,62vw,660px)}
+.hx-shot{position:absolute;top:0;bottom:0;left:-24%;right:-21%;z-index:0;overflow:hidden}
+.hx-hero .hx-shot img{width:100%;height:100%;margin:0;object-fit:cover;object-position:38% 44%;transform:scaleX(-1);filter:grayscale(1) contrast(1.06) brightness(.94)}
+.hx-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,#0B0B0C 0%,#0B0B0C 17%,rgba(11,11,12,.96) 33%,rgba(11,11,12,.80) 50%,rgba(11,11,12,.34) 72%,rgba(11,11,12,.05) 100%),linear-gradient(0deg,rgba(11,11,12,.88) 0%,rgba(11,11,12,.30) 24%,rgba(11,11,12,0) 50%)}
+.hx-inner{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:minmax(0,540px) minmax(0,1fr);column-gap:40px;align-items:end;padding-top:92px;padding-bottom:56px}
+.hx-copy{max-width:540px;animation:hxRise .8s cubic-bezier(.32,.72,0,1) both}
+.hx-kicker{display:block;font-size:11.5px;letter-spacing:.16em;color:#B9BDC3;margin-bottom:18px}
+.hx-hero h1{font-size:clamp(38px,5.4vw,68px);line-height:1.03;color:#fff}
+.hx-lead{margin-top:20px;max-width:430px;font-size:15px;line-height:1.75;font-weight:300;color:#C9CCD1}
+.hx-cta{margin-top:28px;display:flex;gap:10px;flex-wrap:wrap}
+.hx-btn-ghost{border:2px solid rgba(255,255,255,.55);color:#fff}
+.hx-btn-ghost:hover{background:#fff;color:var(--ink);border-color:#fff}
+.hx-specs{justify-self:end;width:min(300px,100%);display:flex;flex-direction:column;gap:1px}
+.hx-spec{opacity:0;background:rgba(11,11,12,.82);border-top:1px solid rgba(255,255,255,.2);padding:13px 16px 15px;animation:hxRise .75s cubic-bezier(.32,.72,0,1) forwards;transition:transform .3s cubic-bezier(.32,.72,0,1),background .3s,box-shadow .3s}
+.hx-spec:nth-child(1){animation-delay:.35s}
+.hx-spec:nth-child(2){animation-delay:.55s}
+.hx-spec:nth-child(3){animation-delay:.75s}
+.hx-spec:hover{transform:translateY(-2px);background:rgba(11,11,12,.92);box-shadow:0 12px 28px rgba(0,0,0,.55)}
+.hx-spec span{display:block;font-size:10.5px;letter-spacing:.14em;color:#9BA0A6}
+.hx-spec b{display:block;margin-top:5px;font-size:16px;font-weight:900;letter-spacing:-.02em;color:#fff}
+.hx-spec b i{font-style:normal;font-size:12px;font-weight:500;color:#A8ACB2}
+.hx-specline{display:none}
+@keyframes hxRise{from{opacity:0;translate:0 16px}to{opacity:1;translate:0 0}}
+@media(max-width:900px){
+.hx-stage{display:block;min-height:0}
+.hx-shot{position:relative;left:0;right:0;top:auto;bottom:auto;width:100%;aspect-ratio:4/3;max-height:320px}
+.hx-shot::after{content:'';position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(0deg,#0B0B0C 0%,rgba(11,11,12,0) 100%)}
+.hx-hero .hx-shot img{object-position:38% 46%}
+.hx-veil{display:none}
+.hx-inner{display:block;padding-top:22px;padding-bottom:36px}
+.hx-copy{max-width:none}
+.hx-kicker{margin-bottom:14px}
+.hx-lead{max-width:none;margin-top:16px;font-size:14px}
+.hx-cta{margin-top:22px}
+.hx-specs{width:100%;margin-top:26px}
+.hx-spec:nth-child(2),.hx-spec:nth-child(3){display:none}
+.hx-specline{display:block;margin-top:11px;font-size:11px;letter-spacing:.06em;color:#9BA0A6}
+}
+@media(prefers-reduced-motion:reduce){.hx-spec,.hx-copy{opacity:1;translate:none}}
 </style>
 </head>
 <body>
@@ -108,16 +150,26 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">견적 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div class="grid">
+<section class="hero hx-hero">
+<div class="hx-stage">
+<div class="hx-shot"><img src="./assets/hero.jpg" alt="정밀 가공 현장"></div>
+<div class="hx-veil"></div>
+<div class="wrap hx-inner">
+<div class="hx-copy">
+<span class="hx-kicker mono">PRECISION SINCE 1998</span>
 <h1>0.001mm의<br>차이가<br><em>전부입니다</em></h1>
-<div class="meta">
-<p>한성정밀은 1998년부터 반도체 · 자동차 부품용 초정밀 금형과 가공을 해왔습니다. 도면 그대로, 공차 안에서.</p>
-<div class="cta"><a class="btn btn-r" href="tel:010-4894-4905">견적 문의</a><a class="btn btn-k" href="#biz">사업영역</a></div>
+<p class="hx-lead">한성정밀은 1998년부터 반도체 · 자동차 부품용 초정밀 금형과 가공을 해왔습니다. 도면 그대로, 공차 안에서.</p>
+<div class="hx-cta"><a class="btn btn-r" href="tel:010-4894-4905">견적 문의</a><a class="btn hx-btn-ghost" href="#biz">사업영역</a></div>
 </div>
-<img src="./assets/hero.jpg" alt="정밀 가공 현장">
+<div class="hx-specs">
+<div class="hx-spec"><span class="mono">MACHINING TOLERANCE</span><b>공차 ±0.001<i>mm</i></b></div>
+<div class="hx-spec"><span class="mono">FIRST ARTICLE INSPECTION</span><b>초도품 전수 검사</b></div>
+<div class="hx-spec"><span class="mono">5-AXIS MACHINING</span><b>5축 가공기 12<i>대</i></b></div>
+<p class="hx-specline mono">초도품 전수 검사 · 5축 가공기 12대</p>
 </div>
-</div></section>
+</div>
+</div>
+</section>
 
 <section id="num"><div class="wrap">
 <div class="nums rv">

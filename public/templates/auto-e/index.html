@@ -116,6 +116,67 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 오브젝트 중심 히어로 (리프트 위 전기차 하부) ===== */
+.hx-hero{position:relative;overflow:hidden;background:#F7FCFA;padding:60px 0 72px;min-height:clamp(500px,63vh,624px);display:flex;align-items:center}
+.hx-hero::before{content:"";position:absolute;z-index:0;top:-24%;right:-12%;width:74%;height:140%;background:radial-gradient(closest-side,rgba(255,255,255,.96),rgba(255,255,255,0));pointer-events:none}
+/* 오브젝트 아래쪽 끝을 배경색으로 녹인다 */
+.hx-hero::after{content:"";position:absolute;z-index:1;left:0;right:0;bottom:0;height:13%;background:linear-gradient(to top,#F7FCFA 8%,rgba(247,252,250,0));pointer-events:none}
+.hx-hero .wrap{display:block;grid-template-columns:none;position:relative;z-index:2;width:100%}
+.hx-copy{max-width:min(556px,56%)}
+.hx-hero h1{margin-top:14px;font-size:clamp(30px,4.4vw,46px)}
+.hx-hero p{max-width:400px}
+.hx-hero .hero-cta{margin-top:24px}
+
+/* 오브젝트: 좌측은 배경색으로 녹고 우·상·하는 화면 밖으로 나간다 */
+.hx-obj{position:absolute;z-index:1;left:46%;right:-6%;top:-9%;bottom:-11%;margin:0}
+.hx-obj>img{width:100%;height:100%;object-fit:cover;object-position:56% 38%;
+-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.13) 17%,rgba(0,0,0,.62) 33%,#000 47%);
+mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.13) 17%,rgba(0,0,0,.62) 33%,#000 47%)}
+
+/* 오브젝트에 붙는 정보 조각 3개 */
+.hx-chips{position:absolute;z-index:3;left:20%;right:8%;top:50%;transform:translateY(-48%);display:grid;gap:11px;justify-items:start}
+.hx-chip{background:#fff;border-radius:14px;box-shadow:0 10px 26px rgba(11,31,26,.16);transition:transform .35s cubic-bezier(.32,.72,0,1),box-shadow .35s ease;animation:hx-rise .62s cubic-bezier(.2,.8,.2,1) backwards}
+.hx-chip:hover{transform:translateY(-2px);box-shadow:0 18px 38px rgba(11,31,26,.26)}
+.hx-chip:nth-child(1){animation-delay:.15s}
+.hx-chip:nth-child(2){animation-delay:.35s;margin-left:15%}
+.hx-chip:nth-child(3){animation-delay:.55s;margin-left:7%}
+@keyframes hx-rise{from{opacity:0;transform:translateY(15px)}}
+.hx-data{background:var(--ink);color:#fff;padding:18px 20px 16px;width:min(268px,90%)}
+.hx-data h3{font-family:"IBM Plex Mono";font-size:9.5px;letter-spacing:.18em;color:#7FD9BE}
+.hx-data .soh{display:flex;align-items:baseline;gap:8px;margin-top:9px}
+.hx-data .soh b{font-family:"IBM Plex Mono";font-size:31px;line-height:1.1;color:var(--mint)}
+.hx-data .soh span{font-size:11px;color:#9CB4AD}
+.hx-data .cells{gap:3px;margin-top:12px}
+.hx-data .cells i{height:15px;border-radius:2px}
+.hx-data .rows{margin-top:12px;border-top:1px solid #1D3A32;padding-top:9px}
+.hx-data .rw{display:flex;justify-content:space-between;gap:12px;font-size:11.5px;line-height:1.7;color:#9CB4AD;padding:1px 0}
+.hx-data .rw b{color:#fff;font-family:"IBM Plex Mono";font-weight:500}
+.hx-note{padding:12px 17px;font-size:12.5px;line-height:1.5;color:var(--soft);max-width:min(298px,94%)}
+.hx-note b{display:block;font-size:13.5px;font-weight:900;color:var(--ink)}
+.hx-note em{font-style:normal;font-family:"IBM Plex Mono";font-size:12.5px}
+.hx-mline{display:none}
+
+@media(max-width:880px){
+.hx-hero{display:block;min-height:0;padding:30px 0 0}
+.hx-hero::before,.hx-hero::after{display:none}
+.hx-copy{max-width:none}
+.hx-hero p{max-width:none}
+.hx-hero .hero-cta{margin-top:20px}
+.hx-mline{display:block;margin-top:16px;font-size:12.5px;line-height:1.6;color:var(--soft)}
+.hx-mline b{font-weight:700;color:var(--ink)}
+.hx-obj{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin-top:22px;aspect-ratio:4/3;overflow:hidden}
+.hx-obj>img{-webkit-mask-image:none;mask-image:none;object-position:58% 34%}
+.hx-chips{left:14px;right:14px;top:auto;bottom:14px;transform:none;justify-items:stretch}
+.hx-chip{margin-left:0!important}
+.hx-chip.hx-note{display:none}
+.hx-data{width:auto;max-width:268px;padding:14px 16px 12px}
+.hx-data .soh{margin-top:7px}
+.hx-data .soh b{font-size:27px}
+.hx-data .cells{display:none}
+.hx-data .rows{margin-top:10px;padding-top:8px}
+.hx-data .rw{font-size:11px;line-height:1.6}
+}
 </style>
 </head>
 <body>
@@ -126,14 +187,20 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">진단 예약</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="wrap">
+<div class="hx-copy">
 <span class="kicker">EV &amp; HYBRID SPECIALIST</span>
-<h1 style="margin-top:16px">전기차는<br><em>정비소부터 달라야</em> 합니다</h1>
+<h1>전기차는<br><em>정비소부터 달라야</em> 합니다</h1>
 <p>고전압 자격을 갖춘 정비사와 EV 전용 장비. 볼트정비소는 전기차와 하이브리드만 봅니다.</p>
 <div class="hero-cta"><a class="btn btn-m" href="tel:010-4894-4905">배터리 진단 예약</a><a class="btn btn-w" href="#svc">정비 항목</a></div>
+<p class="hx-mline"><b>고전압 안전 자격 보유 정비사 상주</b> · 배터리 정밀 진단 40분 · 리포트 즉시 발급</p>
 </div>
-<aside class="batt rv">
+</div>
+<figure class="hx-obj">
+<img src="./assets/1.jpg" alt="리프트에 올린 전기차 하부에서 배터리팩과 냉각 라인을 점검하는 정비사">
+<div class="hx-chips">
+<div class="hx-chip hx-data">
 <h3>BATTERY HEALTH REPORT — 예시</h3>
 <div class="soh"><b>94.2%</b><span>SOH · 배터리 잔존 수명</span></div>
 <div class="cells" aria-hidden="true">
@@ -144,8 +211,12 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <div class="rw"><span>급속충전 누적</span><b>146 회</b></div>
 <div class="rw"><span>추정 주행 가능</span><b>412 km</b></div>
 </div>
-</aside>
-</div></section>
+</div>
+<div class="hx-chip hx-note"><b>고전압 안전 자격 보유</b>정비사 상주 · 절연 점검 기록 발급</div>
+<div class="hx-chip hx-note"><b>배터리 정밀 진단 <em>40분</em></b>리포트 즉시 발급 · 공임 정찰제</div>
+</div>
+</figure>
+</section>
 
 <figure class="band">
 <img src="./assets/3.jpg" alt="볼트정비소 작업장">
