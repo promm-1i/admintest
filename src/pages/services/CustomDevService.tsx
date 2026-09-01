@@ -16,6 +16,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { CUSTOM_SERVICES } from "@/components/site/customServices";
 import { Reveal, NextStepsSection } from "@/pages/services/previewKit";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { CustomBuildPreviewSection } from "@/components/sections/CustomBuildPreviewSection";
 
 /** 템플릿형과 커스텀 개발의 차이 */
 const COMPARE = [
@@ -83,10 +84,10 @@ export default function CustomDevService() {
             </Link>
           </Button>
           <Button asChild size="lg" variant="ghost" className="gap-1.5 text-primary hover:bg-primary/5">
-            <Link to="/web-solutions/demos">
-              실제 데모 체험하기
+            <a href="#how">
+              커스텀 개발 방식 보기
               <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+            </a>
           </Button>
         </div>
       </div>
@@ -134,8 +135,11 @@ export default function CustomDevService() {
         </div>
       </div>
 
+      {/* 커스텀 개발에서 실제로 일어나는 일 — hover 미리보기 */}
+      <CustomBuildPreviewSection />
+
       {/* 기능별 개발 */}
-      <div className="border-y border-border bg-secondary/30 py-14 sm:py-20">
+      <div className="border-b border-border bg-secondary/30 py-14 sm:py-20">
         <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">기능별 개발</p>
@@ -247,10 +251,12 @@ export default function CustomDevService() {
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
               직접 확인해 보세요
             </p>
-            <h2 className="mt-3 text-3xl font-bold text-foreground">말보다 데모가 빠릅니다</h2>
+            <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
+              이렇게 설계한 결과물을 그대로 열어 보실 수 있습니다
+            </h2>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground break-keep">
-              부동산 · 렌트카 · 병원 등 업종별로 실제로 구축해 둔 관리자 시스템과 고객 홈페이지를
-              지금 바로 체험하실 수 있습니다.
+              부동산 · 렌트카 · 병원 등 업종별로 이미 이런 방식으로 구축해 둔 관리자 시스템과 고객
+              홈페이지가 있습니다. 설명 대신 실제 화면으로 확인해 보세요.
             </p>
           </Reveal>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
@@ -282,10 +288,10 @@ export default function CustomDevService() {
                 </span>
                 <span>
                   <span className="block text-base font-bold text-foreground group-hover:text-primary">
-                    데모 체험하기
+                    실제 구현 예시 보기
                   </span>
                   <span className="mt-1 block text-xs leading-relaxed text-muted-foreground break-keep">
-                    관리자 모드와 고객 홈페이지를 실제 화면으로 조작해 봅니다.
+                    구축해 둔 관리자 모드와 고객 홈페이지를 직접 조작해 봅니다.
                   </span>
                 </span>
               </Link>
