@@ -4,6 +4,21 @@ import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
+import { SAMPLES, TEMPLATE_INDUSTRY_FILTERS } from "@/lib/samples";
+
+/** 위 쇼케이스에서 이미 다루는 업종 — 아래 템플릿 목록에서는 뺀다 */
+const SHOWCASED = new Set(["real-estate", "rentcar", "hospital", "academy", "interior", "moving"]);
+
+const OTHER_INDUSTRIES = TEMPLATE_INDUSTRY_FILTERS.filter(
+  (f) => f.value !== "all" && !SHOWCASED.has(f.value),
+).map((f) => ({
+  ...f,
+  count: new Set(
+    SAMPLES.filter((s) => s.industryKey === f.value && s.type.includes("landing-template")).map(
+      (s) => s.slug,
+    ),
+  ).size,
+}));
 
 /** 데모는 기능 시연용이고, 실제 납품물은 업체별 맞춤 제작이라는 점을 앞세운다 */
 const CUSTOM_POINTS = [
@@ -137,6 +152,34 @@ export default function DemoHub() {
           );
         })}
       </div>
+
+      {/* 관리자 시스템까지 갖춘 업종은 위 6개다. 나머지 업종은 홈페이지 템플릿으로 만들어 뒀으니
+          같은 페이지에서 이어 볼 수 있게 한다 — 관리자 데모가 있는 것처럼 보이면 안 되므로 따로 묶는다. */}
+      {OTHER_INDUSTRIES.length > 0 && (
+        <FadeIn className="mt-16">
+          <h2 className="text-xl font-semibold sm:text-2xl">그 외 업종은 홈페이지 템플릿으로 보실 수 있습니다</h2>
+          <p className="mt-2.5 max-w-3xl text-sm leading-relaxed text-muted-foreground break-keep">
+            아래 업종은 관리자 시스템 없이 홈페이지만 제작한 시안입니다. 업종당 디자인이 여러 종이며,
+            클릭하면 실제 화면을 그대로 보실 수 있습니다. 이 업종도 관리자 시스템이 필요하시면 위 여섯 개와
+            같은 방식으로 구축해 드립니다.
+          </p>
+          <ul className="mt-6 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3">
+            {OTHER_INDUSTRIES.map((ind) => (
+              <li key={ind.value}>
+                <Link
+                  to={`/templates?industry=${ind.value}`}
+                  className="group flex items-center justify-between gap-3 rounded-xl border border-border bg-card px-4 py-3.5 transition-colors hover:border-primary/50 hover:bg-primary/5"
+                >
+                  <span className="text-sm font-semibold text-foreground group-hover:text-primary">
+                    {ind.label}
+                  </span>
+                  <span className="font-mono text-xs text-muted-foreground">디자인 {ind.count}종</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </FadeIn>
+      )}
 
       <FadeIn className="mt-14 rounded-2xl border border-border bg-secondary/40 p-8 text-center">
         <p className="text-sm text-muted-foreground">

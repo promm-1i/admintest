@@ -1,4 +1,4 @@
-import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, type LucideIcon } from "lucide-react";
+import { Car, CarFront, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, type LucideIcon } from "lucide-react";
 import { SAMPLES } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
 
@@ -200,6 +200,12 @@ export const INDUSTRY_ITEMS: NavItem[] = [
     title: "공방 · 클래스 맞춤형",
     desc: "클래스 가격 · 일정표 · 수강 신청",
     href: "/templates?industry=craft",
+  },
+  {
+    icon: CarFront,
+    title: "중고차 맞춤형",
+    desc: "매물 시세 · 실차 확인 · 매입 문의",
+    href: "/templates?industry=usedcar",
   },
 ];
 

@@ -16,6 +16,13 @@ const GLOSSARY = [
   },
 ];
 
+/** 받침이 있으면 "이란", 없으면 "란". 도메인·호스팅은 "이란", 유지보수는 "란". */
+function ranSuffix(word: string) {
+  const last = word.charCodeAt(word.length - 1);
+  const hasBatchim = last >= 0xac00 && last <= 0xd7a3 && (last - 0xac00) % 28 !== 0;
+  return hasBatchim ? "이란" : "란";
+}
+
 const SUPPORT_POLICY = [
   "제작 완료 후 일정 기간 기본 지원",
   "단순 문구 / 이미지 수정 등 지원",
@@ -78,7 +85,7 @@ export default function MaintenanceLanding() {
                 <p className="mt-1.5 text-sm font-semibold uppercase tracking-widest text-muted-foreground/70">
                   {g.eyebrow}
                 </p>
-                <h3 className="mt-1.5 text-2xl font-bold text-foreground">{g.term}이란?</h3>
+                <h3 className="mt-1.5 text-2xl font-bold text-foreground">{g.term}{ranSuffix(g.term)}?</h3>
               </div>
               <p className="text-lg leading-relaxed text-muted-foreground break-keep sm:col-span-9 sm:pt-1">
                 {g.desc}

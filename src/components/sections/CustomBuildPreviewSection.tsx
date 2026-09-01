@@ -126,7 +126,8 @@ function PreviewCard({ item, index }: { item: BuildPreview; index: number }) {
 export function CustomBuildPreviewSection() {
   return (
     <div id="how" className="scroll-mt-24 border-y border-border bg-secondary/20 py-14 sm:py-20">
-      <div className="mx-auto max-w-6xl px-4">
+      {/* 미리보기 영상이 주인공이라 이 섹션만 폭을 넓게 쓴다 — 카드가 커야 화면 안이 보인다 */}
+      <div className="mx-auto max-w-[1600px] px-4 sm:px-6">
         <Reveal>
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">개발 방식</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
@@ -137,7 +138,9 @@ export function CustomBuildPreviewSection() {
             탭하면) 짧은 미리보기가 재생됩니다.
           </p>
         </Reveal>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* 카드가 충분히 커야 화면 안이 읽힌다. 4개 한 줄은 1536px 이상에서만 —
+            그 아래에서는 2개씩 놓아 카드 크기를 우선한다. */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 2xl:grid-cols-4">
           {PREVIEWS.map((p, i) => (
             <PreviewCard key={p.slug} item={p} index={i} />
           ))}
