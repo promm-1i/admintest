@@ -165,10 +165,14 @@ const BUILD_STEPS = [
  */
 export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
   const isLanding = sample.type.includes("landing-template");
-  // /templates/{slug}-basic|landing/ 형태의 liveUrl에서 섹션 미리보기 이미지 슬러그를 뽑는다
-  const sectionSlug = sample.liveUrl?.match(/\/templates\/([a-z]+)-(?:basic|landing)\//)?.[1];
+  // liveUrl의 템플릿 폴더명으로 섹션 캡처를 찾는다.
+  // 기본형 · 랜딩형(A 시안)은 업종 단위로 한 벌을 공유하고, B~E 시안은 폴더별로 따로 가진다.
+  const folder = sample.liveUrl?.match(/\/templates\/([a-z0-9-]+)\//)?.[1];
+  const sectionKey = folder?.replace(/-(?:basic|landing)$/, "");
+  // 태블릿 · 모바일 목업 캡처는 A 시안(기본형 · 랜딩형)에만 있어서 그때만 노출한다
+  const sectionSlug = folder && /-(?:basic|landing)$/.test(folder) ? sectionKey : undefined;
   const industry = sample.industryKey ? INDUSTRY_CONTENT[sample.industryKey] : undefined;
-  const sectionShots = sectionSlug ? (TEMPLATE_SECTIONS[sectionSlug] ?? []) : [];
+  const sectionShots = sectionKey ? (TEMPLATE_SECTIONS[sectionKey] ?? []) : [];
 
   return (
     <div className="mt-16 space-y-16 sm:space-y-20">

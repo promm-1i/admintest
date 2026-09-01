@@ -1,420 +1,705 @@
-// 자동 생성 파일 — scratchpad/tools/capture-sections.mjs 가 템플릿 실물에서 추출합니다.
+// 자동 생성 파일 — scratchpad/capture_sections.js 가 템플릿 실물에서 추출합니다.
 // 템플릿을 수정하면 캡처 스크립트를 다시 돌려 갱신하세요.
+// 키: 기본형 · 랜딩형(A 시안)은 업종명, B~E 시안은 템플릿 폴더명입니다.
 export type TemplateSectionShot = { img: string; title: string };
 
 export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
-  "realestate": [
-    {
-      "img": "/thumbs/sections/realestate-1.jpg",
-      "title": "매물 장부"
-    },
-    {
-      "img": "/thumbs/sections/realestate-2.jpg",
-      "title": "이주의 매물"
-    },
-    {
-      "img": "/thumbs/sections/realestate-3.jpg",
-      "title": "중개보수, 먼저 계산해 보세요"
-    },
-    {
-      "img": "/thumbs/sections/realestate-4.jpg",
-      "title": "거래는 이렇게 진행됩니다"
-    }
-  ],
-  "clinic": [
-    {
-      "img": "/thumbs/sections/clinic-1.jpg",
-      "title": "진료 안내"
-    },
-    {
-      "img": "/thumbs/sections/clinic-2.jpg",
-      "title": "의료진 소개"
-    },
-    {
-      "img": "/thumbs/sections/clinic-3.jpg",
-      "title": "병원 둘러보기"
-    },
-    {
-      "img": "/thumbs/sections/clinic-4.jpg",
-      "title": "진료시간 안내"
-    }
-  ],
   "academy": [
-    {
-      "img": "/thumbs/sections/academy-1.jpg",
-      "title": "학년별 과정"
-    },
-    {
-      "img": "/thumbs/sections/academy-2.jpg",
-      "title": "입학부터 리포트까지, 전부 연결됩니다"
-    },
-    {
-      "img": "/thumbs/sections/academy-3.jpg",
-      "title": "가르치는 사람이 전부입니다"
-    },
-    {
-      "img": "/thumbs/sections/academy-4.jpg",
-      "title": "주간 시간표"
-    }
+    { img: "/thumbs/sections/academy-1.jpg", title: "학년별 과정" },
+    { img: "/thumbs/sections/academy-2.jpg", title: "입학부터 리포트까지, 전부 연결됩니다" },
+    { img: "/thumbs/sections/academy-3.jpg", title: "가르치는 사람이 전부입니다" },
+    { img: "/thumbs/sections/academy-4.jpg", title: "주간 시간표" },
   ],
-  "moving": [
-    {
-      "img": "/thumbs/sections/moving-1.jpg",
-      "title": "하는 일"
-    },
-    {
-      "img": "/thumbs/sections/moving-2.jpg",
-      "title": "간편 견적 전표"
-    },
-    {
-      "img": "/thumbs/sections/moving-3.jpg",
-      "title": "작업 순서"
-    },
-    {
-      "img": "/thumbs/sections/moving-4.jpg",
-      "title": "현장 기록"
-    }
+  "academy-b": [
+    { img: "/thumbs/sections/academy-b-1.jpg", title: "숫자로 보여드리는 관리의 결과" },
+    { img: "/thumbs/sections/academy-b-2.jpg", title: "반별 커리큘럼" },
+    { img: "/thumbs/sections/academy-b-3.jpg", title: "일주일 관리 사이클" },
+    { img: "/thumbs/sections/academy-b-4.jpg", title: "학습 공간" },
   ],
-  "interior": [
-    {
-      "img": "/thumbs/sections/interior-1.jpg",
-      "title": "지은 공간들"
-    },
-    {
-      "img": "/thumbs/sections/interior-2.jpg",
-      "title": "같은 집이 맞습니다"
-    },
-    {
-      "img": "/thumbs/sections/interior-3.jpg",
-      "title": "여덟 주의 계획"
-    },
-    {
-      "img": "/thumbs/sections/interior-4.jpg",
-      "title": "비용을 먼저 말합니다"
-    }
+  "academy-c": [
+    { img: "/thumbs/sections/academy-c-1.jpg", title: "수업은 최대 6명씩 앉습니다" },
+    { img: "/thumbs/sections/academy-c-2.jpg", title: "두 사람이 전 과목을 끝까지" },
+    { img: "/thumbs/sections/academy-c-3.jpg", title: "매일 하는 네 가지 약속" },
+    { img: "/thumbs/sections/academy-c-4.jpg", title: "여섯 자리뿐인 교실" },
   ],
-  "rentcar": [
-    {
-      "img": "/thumbs/sections/rentcar-1.jpg",
-      "title": "오늘 나갈 수 있는 차"
-    },
-    {
-      "img": "/thumbs/sections/rentcar-2.jpg",
-      "title": "요금, 미리 계산해 보세요"
-    },
-    {
-      "img": "/thumbs/sections/rentcar-3.jpg",
-      "title": "이용 방법"
-    },
-    {
-      "img": "/thumbs/sections/rentcar-4.jpg",
-      "title": "한 달 이상은 장기렌트"
-    }
+  "academy-d": [
+    { img: "/thumbs/sections/academy-d-1.jpg", title: "여덟 단계로 올라갑니다" },
+    { img: "/thumbs/sections/academy-d-2.jpg", title: "이번 달 미션" },
+    { img: "/thumbs/sections/academy-d-3.jpg", title: "코드런의 기록" },
+    { img: "/thumbs/sections/academy-d-4.jpg", title: "수업 공간" },
   ],
-  "restaurant": [
-    {
-      "img": "/thumbs/sections/restaurant-1.jpg",
-      "title": "오늘의 추천"
-    },
-    {
-      "img": "/thumbs/sections/restaurant-2.jpg",
-      "title": "메뉴판"
-    },
-    {
-      "img": "/thumbs/sections/restaurant-3.jpg",
-      "title": "자리"
-    },
-    {
-      "img": "/thumbs/sections/restaurant-4.jpg",
-      "title": "자리를 잡아드릴게요"
-    }
-  ],
-  "corporate": [
-    {
-      "img": "/thumbs/sections/corporate-1.jpg",
-      "title": "세 가지만 합니다"
-    },
-    {
-      "img": "/thumbs/sections/corporate-2.jpg",
-      "title": "16년의 기록"
-    },
-    {
-      "img": "/thumbs/sections/corporate-3.jpg",
-      "title": "함께한 기업"
-    },
-    {
-      "img": "/thumbs/sections/corporate-4.jpg",
-      "title": "바움 소식"
-    }
-  ],
-  "beauty": [
-    {
-      "img": "/thumbs/sections/beauty-1.jpg",
-      "title": "시술 안내"
-    },
-    {
-      "img": "/thumbs/sections/beauty-2.jpg",
-      "title": "이번 시즌, 무드가 만든 머리"
-    },
-    {
-      "img": "/thumbs/sections/beauty-3.jpg",
-      "title": "손을 맡길 사람을, 먼저 보여드립니다"
-    },
-    {
-      "img": "/thumbs/sections/beauty-4.jpg",
-      "title": "처음 오시기 전에"
-    }
-  ],
-  "fitness": [
-    {
-      "img": "/thumbs/sections/fitness-1.jpg",
-      "title": "한 공간, 두 가지 운동"
-    },
-    {
-      "img": "/thumbs/sections/fitness-2.jpg",
-      "title": "주간 시간표"
-    },
-    {
-      "img": "/thumbs/sections/fitness-3.jpg",
-      "title": "회원권 안내"
-    },
-    {
-      "img": "/thumbs/sections/fitness-4.jpg",
-      "title": "자격부터 보여드립니다"
-    }
-  ],
-  "stay": [
-    {
-      "img": "/thumbs/sections/stay-1.jpg",
-      "title": "독채 세 동"
-    },
-    {
-      "img": "/thumbs/sections/stay-2.jpg",
-      "title": "요금 안내"
-    },
-    {
-      "img": "/thumbs/sections/stay-3.jpg",
-      "title": "여백에서 머무는 법"
-    },
-    {
-      "img": "/thumbs/sections/stay-4.jpg",
-      "title": "이용 안내"
-    }
-  ],
-  "dental": [
-    {
-      "img": "/thumbs/sections/dental-1.jpg",
-      "title": "진료 안내"
-    },
-    {
-      "img": "/thumbs/sections/dental-2.jpg",
-      "title": "임플란트, 이렇게 진행됩니다"
-    },
-    {
-      "img": "/thumbs/sections/dental-3.jpg",
-      "title": "비급여 진료비 안내"
-    },
-    {
-      "img": "/thumbs/sections/dental-4.jpg",
-      "title": "의료진 소개"
-    }
-  ],
-  "vet": [
-    {
-      "img": "/thumbs/sections/vet-1.jpg",
-      "title": "진료 안내"
-    },
-    {
-      "img": "/thumbs/sections/vet-2.jpg",
-      "title": "요금 안내"
-    },
-    {
-      "img": "/thumbs/sections/vet-3.jpg",
-      "title": "예방접종 스케줄"
-    },
-    {
-      "img": "/thumbs/sections/vet-4.jpg",
-      "title": "의료진 소개"
-    }
-  ],
-  "photo": [
-    {
-      "img": "/thumbs/sections/photo-1.jpg",
-      "title": "기록의 장면들"
-    },
-    {
-      "img": "/thumbs/sections/photo-2.jpg",
-      "title": "촬영 상품"
-    },
-    {
-      "img": "/thumbs/sections/photo-3.jpg",
-      "title": "촬영은 이렇게 진행됩니다"
-    },
-    {
-      "img": "/thumbs/sections/photo-4.jpg",
-      "title": "사진가 한기록"
-    }
-  ],
-  "tax": [
-    {
-      "img": "/thumbs/sections/tax-1.jpg",
-      "title": "맡기실 수 있는 일"
-    },
-    {
-      "img": "/thumbs/sections/tax-2.jpg",
-      "title": "기장료 안내"
-    },
-    {
-      "img": "/thumbs/sections/tax-3.jpg",
-      "title": "한 해 세무 일정"
-    },
-    {
-      "img": "/thumbs/sections/tax-4.jpg",
-      "title": "담당 세무사를 알고 맡기세요"
-    }
+  "academy-e": [
+    { img: "/thumbs/sections/academy-e-1.jpg", title: "지난해 합격 실적" },
+    { img: "/thumbs/sections/academy-e-2.jpg", title: "개설 과정" },
+    { img: "/thumbs/sections/academy-e-3.jpg", title: "학사 일정" },
+    { img: "/thumbs/sections/academy-e-4.jpg", title: "공부만 하도록 만든 공간" },
   ],
   "auto": [
-    {
-      "img": "/thumbs/sections/auto-1.jpg",
-      "title": "정비 안내"
-    },
-    {
-      "img": "/thumbs/sections/auto-2.jpg",
-      "title": "공임표"
-    },
-    {
-      "img": "/thumbs/sections/auto-3.jpg",
-      "title": "엔진오일 패키지"
-    },
-    {
-      "img": "/thumbs/sections/auto-4.jpg",
-      "title": "작업은 이렇게 진행됩니다"
-    }
+    { img: "/thumbs/sections/auto-1.jpg", title: "정비 안내" },
+    { img: "/thumbs/sections/auto-2.jpg", title: "공임표" },
+    { img: "/thumbs/sections/auto-3.jpg", title: "엔진오일 패키지" },
+    { img: "/thumbs/sections/auto-4.jpg", title: "작업은 이렇게 진행됩니다" },
   ],
-  "flower": [
-    {
-      "img": "/thumbs/sections/flower-1.jpg",
-      "title": "꽃이 있는 생활, 정기구독"
-    },
-    {
-      "img": "/thumbs/sections/flower-2.jpg",
-      "title": "만드는 사람, 오월"
-    },
-    {
-      "img": "/thumbs/sections/flower-3.jpg",
-      "title": "꽃을 오래 보는 법"
-    },
-    {
-      "img": "/thumbs/sections/flower-4.jpg",
-      "title": "자주 묻는 질문"
-    }
+  "auto-b": [
+    { img: "/thumbs/sections/auto-b-1.jpg", title: "정비 요금, 벽에 붙인 그대로" },
+    { img: "/thumbs/sections/auto-b-2.jpg", title: "세 단계면 끝납니다" },
+    { img: "/thumbs/sections/auto-b-3.jpg", title: "고친 곳은 책임집니다" },
+    { img: "/thumbs/sections/auto-b-4.jpg", title: "이상한 소리, 미루지 마세요" },
   ],
-  "law": [
-    {
-      "img": "/thumbs/sections/law-1.jpg",
-      "title": "수행 분야"
-    },
-    {
-      "img": "/thumbs/sections/law-2.jpg",
-      "title": "사건은 이렇게 진행됩니다"
-    },
-    {
-      "img": "/thumbs/sections/law-3.jpg",
-      "title": "수임료 원칙"
-    },
-    {
-      "img": "/thumbs/sections/law-4.jpg",
-      "title": "변호사 소개"
-    }
+  "auto-c": [
+    { img: "/thumbs/sections/auto-c-1.jpg", title: "전화 전에 가격부터 확인하세요" },
+    { img: "/thumbs/sections/auto-c-2.jpg", title: "기다림 없는 예약제" },
+    { img: "/thumbs/sections/auto-c-3.jpg", title: "바로카가 지키는 세 가지" },
+    { img: "/thumbs/sections/auto-c-4.jpg", title: "오늘 예약, 내일 출고" },
   ],
-  "study": [
-    {
-      "img": "/thumbs/sections/study-1.jpg",
-      "title": "요금 안내"
-    },
-    {
-      "img": "/thumbs/sections/study-2.jpg",
-      "title": "좌석 안내"
-    },
-    {
-      "img": "/thumbs/sections/study-3.jpg",
-      "title": "시설 · 서비스"
-    },
-    {
-      "img": "/thumbs/sections/study-4.jpg",
-      "title": "이용 안내"
-    }
+  "auto-d": [
+    { img: "/thumbs/sections/auto-d-1.jpg", title: "정비 메뉴판" },
+    { img: "/thumbs/sections/auto-d-2.jpg", title: "오래된 차, 환영합니다" },
+    { img: "/thumbs/sections/auto-d-3.jpg", title: "단골 정기 관리" },
+    { img: "/thumbs/sections/auto-d-4.jpg", title: "차에 대해 물어볼 곳하나쯤은 있어야죠" },
+  ],
+  "auto-e": [
+    { img: "/thumbs/sections/auto-e-1.jpg", title: "전기차 전용 정비 항목" },
+    { img: "/thumbs/sections/auto-e-2.jpg", title: "정비 받는 동안 충전하세요" },
+    { img: "/thumbs/sections/auto-e-3.jpg", title: "이런 곳에서 작업합니다" },
+    { img: "/thumbs/sections/auto-e-4.jpg", title: "배터리 상태,숫자로 확인하세요" },
+  ],
+  "beauty": [
+    { img: "/thumbs/sections/beauty-1.jpg", title: "시술 안내" },
+    { img: "/thumbs/sections/beauty-2.jpg", title: "이번 시즌, 무드가 만든 머리" },
+    { img: "/thumbs/sections/beauty-3.jpg", title: "손을 맡길 사람을, 먼저 보여드립니다" },
+    { img: "/thumbs/sections/beauty-4.jpg", title: "처음 오시기 전에" },
+  ],
+  "beauty-b": [
+    { img: "/thumbs/sections/beauty-b-1.jpg", title: "오늘의 디자이너" },
+    { img: "/thumbs/sections/beauty-b-2.jpg", title: "시술 메뉴" },
+    { img: "/thumbs/sections/beauty-b-3.jpg", title: "이번 달의 스타일" },
+    { img: "/thumbs/sections/beauty-b-4.jpg", title: "처음 오시는 분께" },
+  ],
+  "beauty-c": [
+    { img: "/thumbs/sections/beauty-c-1.jpg", title: "스타일 아카이브" },
+    { img: "/thumbs/sections/beauty-c-2.jpg", title: "가격은 하나, 결과도 하나" },
+    { img: "/thumbs/sections/beauty-c-3.jpg", title: "자주 오시면, 계산이 달라집니다" },
+    { img: "/thumbs/sections/beauty-c-4.jpg", title: "Walk in gray,walk out you." },
+  ],
+  "beauty-d": [
+    { img: "/thumbs/sections/beauty-d-1.jpg", title: "이번 달 인기 아트" },
+    { img: "/thumbs/sections/beauty-d-2.jpg", title: "시술 메뉴" },
+    { img: "/thumbs/sections/beauty-d-3.jpg", title: "오래 예쁘게 쓰는 법" },
+    { img: "/thumbs/sections/beauty-d-4.jpg", title: "다음 예쁨,언제로 잡아드릴까요?" },
+  ],
+  "beauty-e": [
+    { img: "/thumbs/sections/beauty-e-1.jpg", title: "시술 메뉴" },
+    { img: "/thumbs/sections/beauty-e-2.jpg", title: "세 사람의 가위" },
+    { img: "/thumbs/sections/beauty-e-3.jpg", title: "의자 하나,비워 두겠습니다" },
   ],
   "care": [
-    {
-      "img": "/thumbs/sections/care-1.jpg",
-      "title": "시설 둘러보기"
-    },
-    {
-      "img": "/thumbs/sections/care-2.jpg",
-      "title": "비용, 숨기지 않고 안내합니다"
-    },
-    {
-      "img": "/thumbs/sections/care-3.jpg",
-      "title": "어르신의 하루"
-    },
-    {
-      "img": "/thumbs/sections/care-4.jpg",
-      "title": "입소까지 네 걸음"
-    }
+    { img: "/thumbs/sections/care-1.jpg", title: "시설 둘러보기" },
+    { img: "/thumbs/sections/care-2.jpg", title: "비용, 숨기지 않고 안내합니다" },
+    { img: "/thumbs/sections/care-3.jpg", title: "어르신의 하루" },
+    { img: "/thumbs/sections/care-4.jpg", title: "입소까지 네 걸음" },
   ],
-  "kids": [
-    {
-      "img": "/thumbs/sections/kids-1.jpg",
-      "title": "다섯 개의 반"
-    },
-    {
-      "img": "/thumbs/sections/kids-2.jpg",
-      "title": "숲속의 하루"
-    },
-    {
-      "img": "/thumbs/sections/kids-3.jpg",
-      "title": "아이 곁의 어른들"
-    },
-    {
-      "img": "/thumbs/sections/kids-4.jpg",
-      "title": "이번 주 밥상"
-    }
+  "care-b": [
+    { img: "/thumbs/sections/care-b-1.jpg", title: "어르신의 하루는 이렇게 흘러갑니다" },
+    { img: "/thumbs/sections/care-b-2.jpg", title: "집처럼 꾸몄습니다" },
+    { img: "/thumbs/sections/care-b-3.jpg", title: "입소와 면회, 궁금하신 것" },
+    { img: "/thumbs/sections/care-b-4.jpg", title: "모시고 한번 다녀가세요" },
   ],
-  "golf": [
-    {
-      "img": "/thumbs/sections/golf-1.jpg",
-      "title": "타석 요금"
-    },
-    {
-      "img": "/thumbs/sections/golf-2.jpg",
-      "title": "룸 · 타석 안내"
-    },
-    {
-      "img": "/thumbs/sections/golf-3.jpg",
-      "title": "레슨 안내"
-    },
-    {
-      "img": "/thumbs/sections/golf-4.jpg",
-      "title": "회원권"
-    }
+  "care-c": [
+    { img: "/thumbs/sections/care-c-1.jpg", title: "오전 9시부터 오후 5시까지" },
+    { img: "/thumbs/sections/care-c-2.jpg", title: "돌봄을 시스템으로" },
+    { img: "/thumbs/sections/care-c-3.jpg", title: "등급이 있으면 부담은 낮아집니다" },
+    { img: "/thumbs/sections/care-c-4.jpg", title: "센터를 미리 둘러보세요" },
+  ],
+  "care-d": [
+    { img: "/thumbs/sections/care-d-1.jpg", title: "이런 것들을 도와드립니다" },
+    { img: "/thumbs/sections/care-d-2.jpg", title: "맞는 분을 찾아드립니다" },
+    { img: "/thumbs/sections/care-d-3.jpg", title: "등급이 있으면 대부분 지원됩니다" },
+    { img: "/thumbs/sections/care-d-4.jpg", title: "혼자 감당하지 마세요" },
+  ],
+  "care-e": [
+    { img: "/thumbs/sections/care-e-1.jpg", title: "계절이 바뀌는 걸 아시게" },
+    { img: "/thumbs/sections/care-e-2.jpg", title: "집밥처럼, 매일 다르게" },
+    { img: "/thumbs/sections/care-e-3.jpg", title: "자주 오세요, 언제든" },
+    { img: "/thumbs/sections/care-e-4.jpg", title: "한번 와 보시면마음이 놓이실 거예요" },
+  ],
+  "clinic": [
+    { img: "/thumbs/sections/clinic-1.jpg", title: "진료 안내" },
+    { img: "/thumbs/sections/clinic-2.jpg", title: "의료진 소개" },
+    { img: "/thumbs/sections/clinic-3.jpg", title: "병원 둘러보기" },
+    { img: "/thumbs/sections/clinic-4.jpg", title: "진료시간 안내" },
+  ],
+  "clinic-b": [
+    { img: "/thumbs/sections/clinic-b-1.jpg", title: "진료 안내" },
+    { img: "/thumbs/sections/clinic-b-2.jpg", title: "의료진 소개" },
+    { img: "/thumbs/sections/clinic-b-3.jpg", title: "숨 내과의 진료 원칙" },
+    { img: "/thumbs/sections/clinic-b-4.jpg", title: "진료 공간" },
+  ],
+  "clinic-c": [
+    { img: "/thumbs/sections/clinic-c-1.jpg", title: "접수부터 치료까지, 평균 40분" },
+    { img: "/thumbs/sections/clinic-c-2.jpg", title: "진료 분야" },
+    { img: "/thumbs/sections/clinic-c-3.jpg", title: "보유 장비" },
+    { img: "/thumbs/sections/clinic-c-4.jpg", title: "비급여 수가, 먼저 공개합니다" },
+  ],
+  "clinic-d": [
+    { img: "/thumbs/sections/clinic-d-1.jpg", title: "우리 아이 접종 달력" },
+    { img: "/thumbs/sections/clinic-d-2.jpg", title: "이런 진료를 봅니다" },
+    { img: "/thumbs/sections/clinic-d-3.jpg", title: "오실 때 챙겨주세요" },
+    { img: "/thumbs/sections/clinic-d-4.jpg", title: "아플 땐 늦게라도" },
+  ],
+  "clinic-e": [
+    { img: "/thumbs/sections/clinic-e-1.jpg", title: "검진 패키지" },
+    { img: "/thumbs/sections/clinic-e-2.jpg", title: "검진 당일, 이렇게 진행됩니다" },
+    { img: "/thumbs/sections/clinic-e-3.jpg", title: "검진실을 미리 보여드립니다" },
+    { img: "/thumbs/sections/clinic-e-4.jpg", title: "결과를 설명하는 사람들" },
+  ],
+  "corporate": [
+    { img: "/thumbs/sections/corporate-1.jpg", title: "세 가지만 합니다" },
+    { img: "/thumbs/sections/corporate-2.jpg", title: "16년의 기록" },
+    { img: "/thumbs/sections/corporate-3.jpg", title: "함께한 기업" },
+    { img: "/thumbs/sections/corporate-4.jpg", title: "바움 소식" },
+  ],
+  "corporate-b": [
+    { img: "/thumbs/sections/corporate-b-1.jpg", title: "사업영역" },
+    { img: "/thumbs/sections/corporate-b-2.jpg", title: "도입 기업이 확인한 변화" },
+    { img: "/thumbs/sections/corporate-b-3.jpg", title: "연혁" },
+    { img: "/thumbs/sections/corporate-b-4.jpg", title: "우리 공장에 맞을지,30분 화상 진단으로 확인하세요" },
+  ],
+  "corporate-c": [
+    { img: "/thumbs/sections/corporate-c-1.jpg", title: "발전소를 짓는 일은땅을 빌리는 일입니다" },
+    { img: "/thumbs/sections/corporate-c-2.jpg", title: "사업영역" },
+    { img: "/thumbs/sections/corporate-c-3.jpg", title: "숫자로 남는 환경 성과" },
+    { img: "/thumbs/sections/corporate-c-4.jpg", title: "부지 진단부터 준공까지" },
+  ],
+  "corporate-d": [
+    { img: "/thumbs/sections/corporate-d-1.jpg", title: "사업영역" },
+    { img: "/thumbs/sections/corporate-d-2.jpg", title: "연혁" },
+    { img: "/thumbs/sections/corporate-d-3.jpg", title: "인증 현황" },
+    { img: "/thumbs/sections/corporate-d-4.jpg", title: "도면 보내주시면2영업일 안에 회신드립니다" },
+  ],
+  "corporate-e": [
+    { img: "/thumbs/sections/corporate-e-1.jpg", title: "다섯 단계 일관 공정" },
+    { img: "/thumbs/sections/corporate-e-2.jpg", title: "설비 보유 현황" },
+    { img: "/thumbs/sections/corporate-e-3.jpg", title: "안전이 곧 납기입니다" },
+    { img: "/thumbs/sections/corporate-e-4.jpg", title: "도면과 물량만 주시면공법부터 제안드립니다" },
   ],
   "craft": [
-    {
-      "img": "/thumbs/sections/craft-1.jpg",
-      "title": "원데이 클래스"
-    },
-    {
-      "img": "/thumbs/sections/craft-2.jpg",
-      "title": "정규 과정"
-    },
-    {
-      "img": "/thumbs/sections/craft-3.jpg",
-      "title": "주간 일정표"
-    },
-    {
-      "img": "/thumbs/sections/craft-4.jpg",
-      "title": "가마에서 나온 것들"
-    }
-  ]
+    { img: "/thumbs/sections/craft-1.jpg", title: "원데이 클래스" },
+    { img: "/thumbs/sections/craft-2.jpg", title: "정규 과정" },
+    { img: "/thumbs/sections/craft-3.jpg", title: "주간 일정표" },
+    { img: "/thumbs/sections/craft-4.jpg", title: "가마에서 나온 것들" },
+  ],
+  "craft-b": [
+    { img: "/thumbs/sections/craft-b-1.jpg", title: "두 가지 클래스" },
+    { img: "/thumbs/sections/craft-b-2.jpg", title: "컵 하나가 오는 길" },
+    { img: "/thumbs/sections/craft-b-3.jpg", title: "공방 풍경" },
+    { img: "/thumbs/sections/craft-b-4.jpg", title: "이번 주말,흙 만지러 오세요" },
+  ],
+  "craft-c": [
+    { img: "/thumbs/sections/craft-c-1.jpg", title: "이번 가마에서 나온 것들" },
+    { img: "/thumbs/sections/craft-c-2.jpg", title: "클래스는 조용히, 깊게" },
+    { img: "/thumbs/sections/craft-c-3.jpg", title: "작품 구입과 주문 제작" },
+    { img: "/thumbs/sections/craft-c-4.jpg", title: "천천히 보고 가세요" },
+  ],
+  "craft-d": [
+    { img: "/thumbs/sections/craft-d-1.jpg", title: "이번 계절의 세 가지 향" },
+    { img: "/thumbs/sections/craft-d-2.jpg", title: "직접 만들어 가세요" },
+    { img: "/thumbs/sections/craft-d-3.jpg", title: "향 맡으러 들르세요" },
+  ],
+  "craft-e": [
+    { img: "/thumbs/sections/craft-e-1.jpg", title: "가방 하나가 오는 길" },
+    { img: "/thumbs/sections/craft-e-2.jpg", title: "만들고 있는 것들" },
+    { img: "/thumbs/sections/craft-e-3.jpg", title: "배우거나, 고치거나" },
+    { img: "/thumbs/sections/craft-e-4.jpg", title: "만들고 싶은 게 있으신가요?" },
+  ],
+  "dental": [
+    { img: "/thumbs/sections/dental-1.jpg", title: "진료 안내" },
+    { img: "/thumbs/sections/dental-2.jpg", title: "임플란트, 이렇게 진행됩니다" },
+    { img: "/thumbs/sections/dental-3.jpg", title: "비급여 진료비 안내" },
+    { img: "/thumbs/sections/dental-4.jpg", title: "의료진 소개" },
+  ],
+  "dental-b": [
+    { img: "/thumbs/sections/dental-b-1.jpg", title: "겁내지 않아도 되는 세 가지 이유" },
+    { img: "/thumbs/sections/dental-b-2.jpg", title: "처음 오신 날, 이렇게 진행돼요" },
+    { img: "/thumbs/sections/dental-b-3.jpg", title: "이런 진료를 합니다" },
+    { img: "/thumbs/sections/dental-b-4.jpg", title: "오래 미루셨어도,혼내지 않아요" },
+  ],
+  "dental-c": [
+    { img: "/thumbs/sections/dental-c-1.jpg", title: "문서로 남기는 세 가지 약속" },
+    { img: "/thumbs/sections/dental-c-2.jpg", title: "디지털로 오차를 줄입니다" },
+    { img: "/thumbs/sections/dental-c-3.jpg", title: "바른 진료가 결국 빠릅니다" },
+    { img: "/thumbs/sections/dental-c-4.jpg", title: "수술은 원장이 직접" },
+  ],
+  "dental-d": [
+    { img: "/thumbs/sections/dental-d-1.jpg", title: "어떤 장치가 맞을까요?" },
+    { img: "/thumbs/sections/dental-d-2.jpg", title: "분납하면 부담이 줄어요" },
+    { img: "/thumbs/sections/dental-d-3.jpg", title: "궁금하실 것 같아서" },
+    { img: "/thumbs/sections/dental-d-4.jpg", title: "상담은 무료,정밀검사도 상담 후에" },
+  ],
+  "dental-e": [
+    { img: "/thumbs/sections/dental-e-1.jpg", title: "단계마다 뱃지를 모아요" },
+    { img: "/thumbs/sections/dental-e-2.jpg", title: "처음엔 치료 안 해요" },
+    { img: "/thumbs/sections/dental-e-3.jpg", title: "안 아플 때 오는 게 제일 좋아요" },
+    { img: "/thumbs/sections/dental-e-4.jpg", title: "부모님께 부탁드려요" },
+  ],
+  "fitness": [
+    { img: "/thumbs/sections/fitness-1.jpg", title: "한 공간, 두 가지 운동" },
+    { img: "/thumbs/sections/fitness-2.jpg", title: "주간 시간표" },
+    { img: "/thumbs/sections/fitness-3.jpg", title: "회원권 안내" },
+    { img: "/thumbs/sections/fitness-4.jpg", title: "자격부터 보여드립니다" },
+  ],
+  "fitness-b": [
+    { img: "/thumbs/sections/fitness-b-1.jpg", title: "회원들의 12주 평균" },
+    { img: "/thumbs/sections/fitness-b-2.jpg", title: "세 가지 트랙" },
+    { img: "/thumbs/sections/fitness-b-3.jpg", title: "코치가 전부다" },
+    { img: "/thumbs/sections/fitness-b-4.jpg", title: "시작이 제일 가볍다" },
+  ],
+  "fitness-c": [
+    { img: "/thumbs/sections/fitness-c-1.jpg", title: "주간 시간표" },
+    { img: "/thumbs/sections/fitness-c-2.jpg", title: "수업은 세 결로 나뉩니다" },
+    { img: "/thumbs/sections/fitness-c-3.jpg", title: "강사 소개" },
+    { img: "/thumbs/sections/fitness-c-4.jpg", title: "첫 수업은 몸을 아는 시간" },
+  ],
+  "fitness-d": [
+    { img: "/thumbs/sections/fitness-d-1.jpg", title: "클래스 시간표" },
+    { img: "/thumbs/sections/fitness-d-2.jpg", title: "처음 3주는 따로 갑니다" },
+    { img: "/thumbs/sections/fitness-d-3.jpg", title: "공간" },
+    { img: "/thumbs/sections/fitness-d-4.jpg", title: "회원권" },
+  ],
+  "fitness-e": [
+    { img: "/thumbs/sections/fitness-e-1.jpg", title: "네 가지 결" },
+    { img: "/thumbs/sections/fitness-e-2.jpg", title: "주간 시간표" },
+    { img: "/thumbs/sections/fitness-e-3.jpg", title: "처음 오시는 날" },
+    { img: "/thumbs/sections/fitness-e-4.jpg", title: "회원권" },
+  ],
+  "flower": [
+    { img: "/thumbs/sections/flower-1.jpg", title: "꽃이 있는 생활, 정기구독" },
+    { img: "/thumbs/sections/flower-2.jpg", title: "만드는 사람, 오월" },
+    { img: "/thumbs/sections/flower-3.jpg", title: "꽃을 오래 보는 법" },
+    { img: "/thumbs/sections/flower-4.jpg", title: "자주 묻는 질문" },
+  ],
+  "flower-b": [
+    { img: "/thumbs/sections/flower-b-1.jpg", title: "이번 주의 작업" },
+    { img: "/thumbs/sections/flower-b-2.jpg", title: "주문은 이렇게" },
+    { img: "/thumbs/sections/flower-b-3.jpg", title: "오늘 가장 좋은 꽃을골라 두겠습니다" },
+  ],
+  "flower-c": [
+    { img: "/thumbs/sections/flower-c-1.jpg", title: "시장에서 방금 온 아이들" },
+    { img: "/thumbs/sections/flower-c-2.jpg", title: "자주 오시면 좋은 일이 생겨요" },
+    { img: "/thumbs/sections/flower-c-3.jpg", title: "꽃 한 단이면오늘 하루가 달라져요" },
+  ],
+  "flower-d": [
+    { img: "/thumbs/sections/flower-d-1.jpg", title: "세 가지 시그니처" },
+    { img: "/thumbs/sections/flower-d-2.jpg", title: "하루를 위한 꽃" },
+    { img: "/thumbs/sections/flower-d-3.jpg", title: "이런 의뢰를 받습니다" },
+    { img: "/thumbs/sections/flower-d-4.jpg", title: "어떤 자리의 꽃인가요?" },
+  ],
+  "flower-e": [
+    { img: "/thumbs/sections/flower-e-1.jpg", title: "이런 것들을 만들어요" },
+    { img: "/thumbs/sections/flower-e-2.jpg", title: "이것만 지키면 2년은 가요" },
+    { img: "/thumbs/sections/flower-e-3.jpg", title: "직접 만들어 가실래요?" },
+    { img: "/thumbs/sections/flower-e-4.jpg", title: "오래 두고 볼 꽃,골라드릴게요" },
+  ],
+  "golf": [
+    { img: "/thumbs/sections/golf-1.jpg", title: "타석 요금" },
+    { img: "/thumbs/sections/golf-2.jpg", title: "룸 · 타석 안내" },
+    { img: "/thumbs/sections/golf-3.jpg", title: "레슨 안내" },
+    { img: "/thumbs/sections/golf-4.jpg", title: "회원권" },
+  ],
+  "golf-b": [
+    { img: "/thumbs/sections/golf-b-1.jpg", title: "요금 스코어보드" },
+    { img: "/thumbs/sections/golf-b-2.jpg", title: "룸 안내" },
+    { img: "/thumbs/sections/golf-b-3.jpg", title: "버디존이 챙겨드리는 것" },
+    { img: "/thumbs/sections/golf-b-4.jpg", title: "오늘 밤, 버디 잡으러 갈까요?" },
+  ],
+  "golf-c": [
+    { img: "/thumbs/sections/golf-c-1.jpg", title: "세 가지 멤버십" },
+    { img: "/thumbs/sections/golf-c-2.jpg", title: "클럽하우스처럼" },
+    { img: "/thumbs/sections/golf-c-3.jpg", title: "라운지 투어를먼저 해보시죠" },
+  ],
+  "golf-d": [
+    { img: "/thumbs/sections/golf-d-1.jpg", title: "매 스윙, 이 네 가지를 봅니다" },
+    { img: "/thumbs/sections/golf-d-2.jpg", title: "8주 커리큘럼" },
+    { img: "/thumbs/sections/golf-d-3.jpg", title: "가르치는 사람들" },
+    { img: "/thumbs/sections/golf-d-4.jpg", title: "레슨 요금" },
+  ],
+  "golf-e": [
+    { img: "/thumbs/sections/golf-e-1.jpg", title: "인원수대로 골라 보세요" },
+    { img: "/thumbs/sections/golf-e-2.jpg", title: "알아두시면 편해요" },
+    { img: "/thumbs/sections/golf-e-3.jpg", title: "이번 모임, 나인홀 어때요?" },
+  ],
+  "interior": [
+    { img: "/thumbs/sections/interior-1.jpg", title: "지은 공간들" },
+    { img: "/thumbs/sections/interior-2.jpg", title: "같은 집이 맞습니다" },
+    { img: "/thumbs/sections/interior-3.jpg", title: "여덟 주의 계획" },
+    { img: "/thumbs/sections/interior-4.jpg", title: "비용을 먼저 말합니다" },
+  ],
+  "interior-b": [
+    { img: "/thumbs/sections/interior-b-1.jpg", title: "같은 집이 맞습니다" },
+    { img: "/thumbs/sections/interior-b-2.jpg", title: "최근 시공 사례" },
+    { img: "/thumbs/sections/interior-b-3.jpg", title: "실측은 무료, 견적은 상세하게" },
+  ],
+  "interior-c": [
+    { img: "/thumbs/sections/interior-c-1.jpg", title: "최근 작업" },
+    { img: "/thumbs/sections/interior-c-2.jpg", title: "진행은 이렇게" },
+    { img: "/thumbs/sections/interior-c-3.jpg", title: "주방 하나로 집이 달라집니다" },
+    { img: "/thumbs/sections/interior-c-4.jpg", title: "이런 공간도 합니다" },
+  ],
+  "interior-d": [
+    { img: "/thumbs/sections/interior-d-1.jpg", title: "업종마다 다르게 접근합니다" },
+    { img: "/thumbs/sections/interior-d-2.jpg", title: "오픈일에서 거꾸로 셉니다" },
+    { img: "/thumbs/sections/interior-d-3.jpg", title: "예산 구간 안내" },
+    { img: "/thumbs/sections/interior-d-4.jpg", title: "진행 방식" },
+  ],
+  "interior-e": [
+    { img: "/thumbs/sections/interior-e-1.jpg", title: "급한 곳부터 딱 그것만" },
+    { img: "/thumbs/sections/interior-e-2.jpg", title: "전체를 하신다면" },
+    { img: "/thumbs/sections/interior-e-3.jpg", title: "이 세 가지는 지킵니다" },
+    { img: "/thumbs/sections/interior-e-4.jpg", title: "주방만 해도 이만큼 달라집니다" },
+  ],
+  "kids": [
+    { img: "/thumbs/sections/kids-1.jpg", title: "다섯 개의 반" },
+    { img: "/thumbs/sections/kids-2.jpg", title: "숲속의 하루" },
+    { img: "/thumbs/sections/kids-3.jpg", title: "아이 곁의 어른들" },
+    { img: "/thumbs/sections/kids-4.jpg", title: "이번 주 밥상" },
+  ],
+  "kids-b": [
+    { img: "/thumbs/sections/kids-b-1.jpg", title: "알록달록의 하루" },
+    { img: "/thumbs/sections/kids-b-2.jpg", title: "교실도 급식도 자신 있어요" },
+    { img: "/thumbs/sections/kids-b-3.jpg", title: "부모님과의 네 가지 약속" },
+    { img: "/thumbs/sections/kids-b-4.jpg", title: "우리 아이 자리,남아 있는지 물어보세요" },
+  ],
+  "kids-c": [
+    { img: "/thumbs/sections/kids-c-1.jpg", title: "계절이 커리큘럼입니다" },
+    { img: "/thumbs/sections/kids-c-2.jpg", title: "서두르지 않는 하루" },
+    { img: "/thumbs/sections/kids-c-3.jpg", title: "부모님께 드리는 약속" },
+    { img: "/thumbs/sections/kids-c-4.jpg", title: "숲으로 오세요,아이와 함께" },
+  ],
+  "kids-d": [
+    { img: "/thumbs/sections/kids-d-1.jpg", title: "네 가지 축으로 짭니다" },
+    { img: "/thumbs/sections/kids-d-2.jpg", title: "담임 한국인 · 원어민 두 명" },
+    { img: "/thumbs/sections/kids-d-3.jpg", title: "하루 일과" },
+    { img: "/thumbs/sections/kids-d-4.jpg", title: "입학 안내" },
+  ],
+  "kids-e": [
+    { img: "/thumbs/sections/kids-e-1.jpg", title: "다섯 개의 교구 영역" },
+    { img: "/thumbs/sections/kids-e-2.jpg", title: "세 시간의 작업 주기" },
+    { img: "/thumbs/sections/kids-e-3.jpg", title: "점수 대신 관찰 기록" },
+    { img: "/thumbs/sections/kids-e-4.jpg", title: "부모님도 함께 배웁니다" },
+  ],
+  "law": [
+    { img: "/thumbs/sections/law-1.jpg", title: "수행 분야" },
+    { img: "/thumbs/sections/law-2.jpg", title: "사건은 이렇게 진행됩니다" },
+    { img: "/thumbs/sections/law-3.jpg", title: "수임료 원칙" },
+    { img: "/thumbs/sections/law-4.jpg", title: "변호사 소개" },
+  ],
+  "law-b": [
+    { img: "/thumbs/sections/law-b-1.jpg", title: "수행 분야 目次" },
+    { img: "/thumbs/sections/law-b-2.jpg", title: "변호사 소개" },
+    { img: "/thumbs/sections/law-b-3.jpg", title: "수임 원칙" },
+    { img: "/thumbs/sections/law-b-4.jpg", title: "모든 상담은비밀이 보장됩니다" },
+  ],
+  "law-c": [
+    { img: "/thumbs/sections/law-c-1.jpg", title: "업무 분야" },
+    { img: "/thumbs/sections/law-c-2.jpg", title: "사건은 이렇게 대응합니다" },
+    { img: "/thumbs/sections/law-c-3.jpg", title: "전원이 법정에 섭니다" },
+    { img: "/thumbs/sections/law-c-4.jpg", title: "지금이 골든타임입니다" },
+  ],
+  "law-d": [
+    { img: "/thumbs/sections/law-d-1.jpg", title: "신청부터 면책까지" },
+    { img: "/thumbs/sections/law-d-2.jpg", title: "비용도 나눠 내실 수 있습니다" },
+    { img: "/thumbs/sections/law-d-3.jpg", title: "이건 걱정 안 하셔도 됩니다" },
+    { img: "/thumbs/sections/law-d-4.jpg", title: "가장 많이 물어보시는 것" },
+  ],
+  "law-e": [
+    { img: "/thumbs/sections/law-e-1.jpg", title: "이런 사건을 맡습니다" },
+    { img: "/thumbs/sections/law-e-2.jpg", title: "진행은 이렇게" },
+    { img: "/thumbs/sections/law-e-3.jpg", title: "상담 안내" },
+    { img: "/thumbs/sections/law-e-4.jpg", title: "두 사람이 맡습니다" },
+  ],
+  "moving": [
+    { img: "/thumbs/sections/moving-1.jpg", title: "하는 일" },
+    { img: "/thumbs/sections/moving-2.jpg", title: "간편 견적 전표" },
+    { img: "/thumbs/sections/moving-3.jpg", title: "작업 순서" },
+    { img: "/thumbs/sections/moving-4.jpg", title: "현장 기록" },
+  ],
+  "moving-b": [
+    { img: "/thumbs/sections/moving-b-1.jpg", title: "딱 세 단계, 값은 그대로" },
+    { img: "/thumbs/sections/moving-b-2.jpg", title: "정리까지가 이사입니다" },
+    { img: "/thumbs/sections/moving-b-3.jpg", title: "깨지면 물어드립니다" },
+    { img: "/thumbs/sections/moving-b-4.jpg", title: "이번 주 작업" },
+  ],
+  "moving-c": [
+    { img: "/thumbs/sections/moving-c-1.jpg", title: "같은 날 오전과 오후입니다" },
+    { img: "/thumbs/sections/moving-c-2.jpg", title: "여기까지 해야 입주청소" },
+    { img: "/thumbs/sections/moving-c-3.jpg", title: "평형별 정찰 요금" },
+    { img: "/thumbs/sections/moving-c-4.jpg", title: "손이 잘 안 가는 곳부터 합니다" },
+  ],
+  "moving-d": [
+    { img: "/thumbs/sections/moving-d-1.jpg", title: "이런 짐, 미리 알려주세요" },
+    { img: "/thumbs/sections/moving-d-2.jpg", title: "필요한 것만 골라 담으세요" },
+    { img: "/thumbs/sections/moving-d-3.jpg", title: "혼자 사는 분들을 위해" },
+    { img: "/thumbs/sections/moving-d-4.jpg", title: "짐 빼고 이렇게 두고 나옵니다" },
+  ],
+  "moving-e": [
+    { img: "/thumbs/sections/moving-e-1.jpg", title: "주말 48시간 무중단 이전" },
+    { img: "/thumbs/sections/moving-e-2.jpg", title: "자산은 번호로 관리합니다" },
+    { img: "/thumbs/sections/moving-e-3.jpg", title: "기밀은 새어나가지 않습니다" },
+    { img: "/thumbs/sections/moving-e-4.jpg", title: "수행 실적" },
+  ],
+  "photo": [
+    { img: "/thumbs/sections/photo-1.jpg", title: "기록의 장면들" },
+    { img: "/thumbs/sections/photo-2.jpg", title: "촬영 상품" },
+    { img: "/thumbs/sections/photo-3.jpg", title: "촬영은 이렇게 진행됩니다" },
+    { img: "/thumbs/sections/photo-4.jpg", title: "사진가 한기록" },
+  ],
+  "photo-b": [
+    { img: "/thumbs/sections/photo-b-1.jpg", title: "이번 달의 인화" },
+    { img: "/thumbs/sections/photo-b-2.jpg", title: "촬영 상품" },
+    { img: "/thumbs/sections/photo-b-3.jpg", title: "암실의 붉은 불이켜져 있습니다" },
+  ],
+  "photo-c": [
+    { img: "/thumbs/sections/photo-c-1.jpg", title: "세 가지 패키지" },
+    { img: "/thumbs/sections/photo-c-2.jpg", title: "예약은 네 걸음" },
+    { img: "/thumbs/sections/photo-c-3.jpg", title: "찍는 사람" },
+  ],
+  "photo-d": [
+    { img: "/thumbs/sections/photo-d-1.jpg", title: "촬영 상품" },
+    { img: "/thumbs/sections/photo-d-2.jpg", title: "예약부터 전달까지" },
+    { img: "/thumbs/sections/photo-d-3.jpg", title: "예약 · 취소 규정" },
+    { img: "/thumbs/sections/photo-d-4.jpg", title: "더 보여드릴 컷" },
+  ],
+  "photo-e": [
+    { img: "/thumbs/sections/photo-e-1.jpg", title: "어떤 사진 찍어드릴까요?" },
+    { img: "/thumbs/sections/photo-e-2.jpg", title: "서두르지 않을게요" },
+    { img: "/thumbs/sections/photo-e-3.jpg", title: "이것만 챙겨 오세요" },
+    { img: "/thumbs/sections/photo-e-4.jpg", title: "우리 아이 사진,미루지 마세요" },
+  ],
+  "realestate": [
+    { img: "/thumbs/sections/realestate-1.jpg", title: "매물 장부" },
+    { img: "/thumbs/sections/realestate-2.jpg", title: "이주의 매물" },
+    { img: "/thumbs/sections/realestate-3.jpg", title: "중개보수, 먼저 계산해 보세요" },
+    { img: "/thumbs/sections/realestate-4.jpg", title: "거래는 이렇게 진행됩니다" },
+  ],
+  "realestate-b": [
+    { img: "/thumbs/sections/realestate-b-1.jpg", title: "과장 없이,본 대로만 말합니다" },
+    { img: "/thumbs/sections/realestate-b-2.jpg", title: "이달의 매물" },
+    { img: "/thumbs/sections/realestate-b-3.jpg", title: "중개, 그 전후까지" },
+    { img: "/thumbs/sections/realestate-b-4.jpg", title: "상담은 언제나차 한 잔과 함께" },
+  ],
+  "realestate-c": [
+    { img: "/thumbs/sections/realestate-c-1.jpg", title: "더키움이 다뤄 온 숫자" },
+    { img: "/thumbs/sections/realestate-c-2.jpg", title: "이번 주 수익형 매물" },
+    { img: "/thumbs/sections/realestate-c-3.jpg", title: "브리핑은 이렇게 진행됩니다" },
+    { img: "/thumbs/sections/realestate-c-4.jpg", title: "더키움의 신뢰 기준" },
+  ],
+  "realestate-d": [
+    { img: "/thumbs/sections/realestate-d-1.jpg", title: "지금 보러 갈 수 있는 집" },
+    { img: "/thumbs/sections/realestate-d-2.jpg", title: "이번 달 우리 동네 평균" },
+    { img: "/thumbs/sections/realestate-d-3.jpg", title: "계약 전에 챙겨드립니다" },
+    { img: "/thumbs/sections/realestate-d-4.jpg", title: "조건 하나만 남겨두세요" },
+  ],
+  "realestate-e": [
+    { img: "/thumbs/sections/realestate-e-1.jpg", title: "“이 동네 집은제가 다 압니다”" },
+    { img: "/thumbs/sections/realestate-e-2.jpg", title: "매물 광장" },
+    { img: "/thumbs/sections/realestate-e-3.jpg", title: "이달의 시세표" },
+    { img: "/thumbs/sections/realestate-e-4.jpg", title: "사무소 알림" },
+  ],
+  "rentcar": [
+    { img: "/thumbs/sections/rentcar-1.jpg", title: "오늘 나갈 수 있는 차" },
+    { img: "/thumbs/sections/rentcar-2.jpg", title: "요금, 미리 계산해 보세요" },
+    { img: "/thumbs/sections/rentcar-3.jpg", title: "이용 방법" },
+    { img: "/thumbs/sections/rentcar-4.jpg", title: "한 달 이상은 장기렌트" },
+  ],
+  "rentcar-b": [
+    { img: "/thumbs/sections/rentcar-b-1.jpg", title: "차량 쇼룸" },
+    { img: "/thumbs/sections/rentcar-b-2.jpg", title: "기간별 요금" },
+    { img: "/thumbs/sections/rentcar-b-3.jpg", title: "보험, 처음부터 포함해서 말씀드립니다" },
+    { img: "/thumbs/sections/rentcar-b-4.jpg", title: "예약부터 반납까지" },
+  ],
+  "rentcar-c": [
+    { img: "/thumbs/sections/rentcar-c-1.jpg", title: "우리 가족에게 맞는 차" },
+    { img: "/thumbs/sections/rentcar-c-2.jpg", title: "여행 티켓 고르듯, 요금제 고르기" },
+    { img: "/thumbs/sections/rentcar-c-3.jpg", title: "차 빌린 김에, 여기까지" },
+    { img: "/thumbs/sections/rentcar-c-4.jpg", title: "이번 주말, 어디로 갈까요?" },
+  ],
+  "rentcar-d": [
+    { img: "/thumbs/sections/rentcar-d-1.jpg", title: "티켓 한 장 = 차 한 대" },
+    { img: "/thumbs/sections/rentcar-d-2.jpg", title: "탑승까지 네 걸음" },
+    { img: "/thumbs/sections/rentcar-d-3.jpg", title: "여행 첫 30분을기다림으로 쓰지 마세요" },
+  ],
+  "rentcar-e": [
+    { img: "/thumbs/sections/rentcar-e-1.jpg", title: "요금표" },
+    { img: "/thumbs/sections/rentcar-e-2.jpg", title: "숫자" },
+    { img: "/thumbs/sections/rentcar-e-3.jpg", title: "규칙" },
+    { img: "/thumbs/sections/rentcar-e-4.jpg", title: "고민할 시간에전화하세요" },
+  ],
+  "restaurant": [
+    { img: "/thumbs/sections/restaurant-1.jpg", title: "오늘의 추천" },
+    { img: "/thumbs/sections/restaurant-2.jpg", title: "메뉴판" },
+    { img: "/thumbs/sections/restaurant-3.jpg", title: "자리" },
+    { img: "/thumbs/sections/restaurant-4.jpg", title: "자리를 잡아드릴게요" },
+  ],
+  "restaurant-b": [
+    { img: "/thumbs/sections/restaurant-b-1.jpg", title: "가을 상차림" },
+    { img: "/thumbs/sections/restaurant-b-2.jpg", title: "방마다 다른 달" },
+    { img: "/thumbs/sections/restaurant-b-3.jpg", title: "오늘 저녁, 자리를 비워 두겠습니다" },
+  ],
+  "restaurant-c": [
+    { img: "/thumbs/sections/restaurant-c-1.jpg", title: "요일마다 바뀌는 한 접시" },
+    { img: "/thumbs/sections/restaurant-c-2.jpg", title: "뭐 먹을지 고민되면위에서 세 번째!" },
+    { img: "/thumbs/sections/restaurant-c-3.jpg", title: "밥때 맞춰 오세요" },
+    { img: "/thumbs/sections/restaurant-c-4.jpg", title: "오늘 저녁, 뭐 드실래요?" },
+  ],
+  "restaurant-d": [
+    { img: "/thumbs/sections/restaurant-d-1.jpg", title: "메뉴판" },
+    { img: "/thumbs/sections/restaurant-d-2.jpg", title: "영업 안내" },
+    { img: "/thumbs/sections/restaurant-d-3.jpg", title: "오늘 저녁, 옛날 그 맛" },
+  ],
+  "restaurant-e": [
+    { img: "/thumbs/sections/restaurant-e-1.jpg", title: "오후네시의 세 접시" },
+    { img: "/thumbs/sections/restaurant-e-2.jpg", title: "이용 안내" },
+    { img: "/thumbs/sections/restaurant-e-3.jpg", title: "창가 자리, 비워두고 있을게요" },
+  ],
+  "stay": [
+    { img: "/thumbs/sections/stay-1.jpg", title: "독채 세 동" },
+    { img: "/thumbs/sections/stay-2.jpg", title: "요금 안내" },
+    { img: "/thumbs/sections/stay-3.jpg", title: "여백에서 머무는 법" },
+    { img: "/thumbs/sections/stay-4.jpg", title: "이용 안내" },
+  ],
+  "stay-b": [
+    { img: "/thumbs/sections/stay-b-1.jpg", title: "덜어낸 만큼깊어지는 쉼" },
+    { img: "/thumbs/sections/stay-b-2.jpg", title: "객실 세 동" },
+    { img: "/thumbs/sections/stay-b-3.jpg", title: "여기서 보내게 될 시간들" },
+    { img: "/thumbs/sections/stay-b-4.jpg", title: "이용 안내" },
+  ],
+  "stay-c": [
+    { img: "/thumbs/sections/stay-c-1.jpg", title: "방 세 칸, 이야기 세 개" },
+    { img: "/thumbs/sections/stay-c-2.jpg", title: "가볍게 오셔도 됩니다" },
+    { img: "/thumbs/sections/stay-c-3.jpg", title: "다녀간 분들의 한 줄" },
+  ],
+  "stay-d": [
+    { img: "/thumbs/sections/stay-d-1.jpg", title: "세 가지 오션뷰" },
+    { img: "/thumbs/sections/stay-d-2.jpg", title: "머무는 동안" },
+    { img: "/thumbs/sections/stay-d-3.jpg", title: "시즌 요금표" },
+    { img: "/thumbs/sections/stay-d-4.jpg", title: "일출 시간에 맞춰방을 잡아 두겠습니다" },
+  ],
+  "stay-e": [
+    { img: "/thumbs/sections/stay-e-1.jpg", title: "세 채" },
+    { img: "/thumbs/sections/stay-e-2.jpg", title: "머무는 법" },
+    { img: "/thumbs/sections/stay-e-3.jpg", title: "이용 예절" },
+    { img: "/thumbs/sections/stay-e-4.jpg", title: "하룻밤 비워두겠습니다" },
+  ],
+  "study": [
+    { img: "/thumbs/sections/study-1.jpg", title: "요금 안내" },
+    { img: "/thumbs/sections/study-2.jpg", title: "좌석 안내" },
+    { img: "/thumbs/sections/study-3.jpg", title: "시설 · 서비스" },
+    { img: "/thumbs/sections/study-4.jpg", title: "이용 안내" },
+  ],
+  "study-b": [
+    { img: "/thumbs/sections/study-b-1.jpg", title: "몰입의 세 가지 방" },
+    { img: "/thumbs/sections/study-b-2.jpg", title: "이용권" },
+    { img: "/thumbs/sections/study-b-3.jpg", title: "서로의 몰입을 지키는 약속" },
+    { img: "/thumbs/sections/study-b-4.jpg", title: "오늘 밤도서재의 불은 켜져 있습니다" },
+  ],
+  "study-c": [
+    { img: "/thumbs/sections/study-c-1.jpg", title: "이용권 안내" },
+    { img: "/thumbs/sections/study-c-2.jpg", title: "학부모님께는 이렇게" },
+    { img: "/thumbs/sections/study-c-3.jpg", title: "내일 아침,이 책상에서 시작하세요" },
+  ],
+  "study-d": [
+    { img: "/thumbs/sections/study-d-1.jpg", title: "네 가지 좌석" },
+    { img: "/thumbs/sections/study-d-2.jpg", title: "이용권" },
+    { img: "/thumbs/sections/study-d-3.jpg", title: "편안하되, 조용하게" },
+    { img: "/thumbs/sections/study-d-4.jpg", title: "한 번 앉아보면알게 되실 거예요" },
+  ],
+  "study-e": [
+    { img: "/thumbs/sections/study-e-1.jpg", title: "세 가지 룸" },
+    { img: "/thumbs/sections/study-e-2.jpg", title: "시간당 요금" },
+    { img: "/thumbs/sections/study-e-3.jpg", title: "예약은 4단계" },
+    { img: "/thumbs/sections/study-e-4.jpg", title: "이런 것들이 있습니다" },
+  ],
+  "tax": [
+    { img: "/thumbs/sections/tax-1.jpg", title: "맡기실 수 있는 일" },
+    { img: "/thumbs/sections/tax-2.jpg", title: "기장료 안내" },
+    { img: "/thumbs/sections/tax-3.jpg", title: "한 해 세무 일정" },
+    { img: "/thumbs/sections/tax-4.jpg", title: "담당 세무사를 알고 맡기세요" },
+  ],
+  "tax-b": [
+    { img: "/thumbs/sections/tax-b-1.jpg", title: "수임료, 여기 다 적혀 있습니다" },
+    { img: "/thumbs/sections/tax-b-2.jpg", title: "기장료에 다 포함됩니다" },
+    { img: "/thumbs/sections/tax-b-3.jpg", title: "놓치면 가산세, 저희가 챙깁니다" },
+    { img: "/thumbs/sections/tax-b-4.jpg", title: "첫 상담에서 알려드립니다 —지금 새는 세금이 있는지" },
+  ],
+  "tax-c": [
+    { img: "/thumbs/sections/tax-c-1.jpg", title: "사장님 업종, 이미 잘 압니다" },
+    { img: "/thumbs/sections/tax-c-2.jpg", title: "월 구독처럼, 부담 없이" },
+    { img: "/thumbs/sections/tax-c-3.jpg", title: "갈아타기, 어렵지 않습니다" },
+    { img: "/thumbs/sections/tax-c-4.jpg", title: "사장님 담당은 이 두 사람입니다" },
+  ],
+  "tax-d": [
+    { img: "/thumbs/sections/tax-d-1.jpg", title: "부동산 세금, 세 가지 축" },
+    { img: "/thumbs/sections/tax-d-2.jpg", title: "많이들 놓치시는 것" },
+    { img: "/thumbs/sections/tax-d-3.jpg", title: "신고 기한을 놓치면 가산세" },
+    { img: "/thumbs/sections/tax-d-4.jpg", title: "부동산 세금만 봐 온 사람들" },
+  ],
+  "tax-e": [
+    { img: "/thumbs/sections/tax-e-1.jpg", title: "네 개 부문" },
+    { img: "/thumbs/sections/tax-e-2.jpg", title: "부문을 맡고 있는 사람들" },
+    { img: "/thumbs/sections/tax-e-3.jpg", title: "인력 구성" },
+    { img: "/thumbs/sections/tax-e-4.jpg", title: "연혁" },
+  ],
+  "usedcar-b": [
+    { img: "/thumbs/sections/usedcar-b-1.jpg", title: "102개 항목을 통과해야 GRADE입니다" },
+    { img: "/thumbs/sections/usedcar-b-2.jpg", title: "이번 주 쇼케이스" },
+    { img: "/thumbs/sections/usedcar-b-3.jpg", title: "주말엔 시승 대기가 있습니다" },
+  ],
+  "usedcar-c": [
+    { img: "/thumbs/sections/usedcar-c-1.jpg", title: "월 얼마까지 괜찮으세요?" },
+    { img: "/thumbs/sections/usedcar-c-2.jpg", title: "첫차상회의 첫차 3종 세트" },
+    { img: "/thumbs/sections/usedcar-c-3.jpg", title: "이것만 알면 안 속아요" },
+    { img: "/thumbs/sections/usedcar-c-4.jpg", title: "첫차 살 땐, 아는 형한테 묻듯이" },
+  ],
+  "usedcar-d": [
+    { img: "/thumbs/sections/usedcar-d-1.jpg", title: "하루면 끝납니다" },
+    { img: "/thumbs/sections/usedcar-d-2.jpg", title: "이것만 챙겨두세요" },
+    { img: "/thumbs/sections/usedcar-d-3.jpg", title: "이건 약속합니다" },
+    { img: "/thumbs/sections/usedcar-d-4.jpg", title: "값을 올리거나 내리는 것들" },
+  ],
+  "usedcar-e": [
+    { img: "/thumbs/sections/usedcar-e-1.jpg", title: "이번 달 컬렉션" },
+    { img: "/thumbs/sections/usedcar-e-2.jpg", title: "모든 차에 이력서가 따라갑니다" },
+    { img: "/thumbs/sections/usedcar-e-3.jpg", title: "매입 기준" },
+    { img: "/thumbs/sections/usedcar-e-4.jpg", title: "천천히 보고 가세요" },
+  ],
+  "vet": [
+    { img: "/thumbs/sections/vet-1.jpg", title: "진료 안내" },
+    { img: "/thumbs/sections/vet-2.jpg", title: "요금 안내" },
+    { img: "/thumbs/sections/vet-3.jpg", title: "예방접종 스케줄" },
+    { img: "/thumbs/sections/vet-4.jpg", title: "의료진 소개" },
+  ],
+  "vet-b": [
+    { img: "/thumbs/sections/vet-b-1.jpg", title: "무서움을 줄이는 세 가지" },
+    { img: "/thumbs/sections/vet-b-2.jpg", title: "우리 아이, 접종 시기 맞나요?" },
+    { img: "/thumbs/sections/vet-b-3.jpg", title: "아이 이름 먼저 외우는 선생님들" },
+    { img: "/thumbs/sections/vet-b-4.jpg", title: "오늘도 잘 먹고 잘 놀았나요?그거면 충분해요" },
+  ],
+  "vet-c": [
+    { img: "/thumbs/sections/vet-c-1.jpg", title: "도착 전부터 치료는 시작됩니다" },
+    { img: "/thumbs/sections/vet-c-2.jpg", title: "낮에는 진료, 밤에는 응급" },
+    { img: "/thumbs/sections/vet-c-3.jpg", title: "검사는 원내에서 바로" },
+    { img: "/thumbs/sections/vet-c-4.jpg", title: "번호 하나만 저장해 두세요" },
+  ],
+  "vet-d": [
+    { img: "/thumbs/sections/vet-d-1.jpg", title: "고양이 스트레스를 줄이는 네 가지" },
+    { img: "/thumbs/sections/vet-d-2.jpg", title: "연령별 건강검진" },
+    { img: "/thumbs/sections/vet-d-3.jpg", title: "진료 과목" },
+    { img: "/thumbs/sections/vet-d-4.jpg", title: "우리 고양이도조용히 진료받을 수 있어요" },
+  ],
+  "vet-e": [
+    { img: "/thumbs/sections/vet-e-1.jpg", title: "대형견이 잘 겪는 세 가지" },
+    { img: "/thumbs/sections/vet-e-2.jpg", title: "1kg이 관절엔 4kg입니다" },
+    { img: "/thumbs/sections/vet-e-3.jpg", title: "병원에서 안 되는 건 훈련사와" },
+    { img: "/thumbs/sections/vet-e-4.jpg", title: "오래 같이 걷고 싶다면" },
+  ],
 };
