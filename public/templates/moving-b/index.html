@@ -86,13 +86,41 @@ footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
 footer b{color:var(--ink)}
 @keyframes truck-m{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
 .logo i{animation:truck-m 3.6s ease-in-out infinite}
+
+/* 요금 기준표 */
+.fee{margin-top:46px;border:2.5px solid var(--ink);background:#fff;box-shadow:6px 6px 0 var(--line)}
+.fr{display:grid;grid-template-columns:1.35fr .8fr .8fr auto;gap:16px;padding:16px 22px;border-top:2px solid var(--line);align-items:center;font-size:14px}
+.fr:first-child{border-top:0;background:var(--ink);color:var(--paper);font-family:"Do Hyeon";font-size:13px;letter-spacing:.06em}
+.fr b{font-family:"Do Hyeon";font-size:16.5px;font-weight:400}
+.fr .d{font-size:12.5px;color:var(--soft);display:block;margin-top:2px}
+.fr .c{color:var(--soft);font-size:13px}
+.fr .won{font-family:"Do Hyeon";font-size:19px;white-space:nowrap}
+@media(max-width:760px){.fr{grid-template-columns:1fr auto;gap:8px}.fr .c{display:none}}
+.fee-note{margin-top:14px;font-size:12.5px;color:var(--soft)}
+/* 서비스 지역 */
+.area{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.area{grid-template-columns:1fr}}
+.ar{border:2.5px solid var(--ink);background:#fff;padding:22px;box-shadow:5px 5px 0 var(--line)}
+.ar b{font-family:"Do Hyeon";font-size:17px;font-weight:400;display:block}
+.ar p{font-size:13px;color:var(--soft);margin-top:8px}
+.ar .tag{display:inline-block;font-family:"Do Hyeon";font-size:11.5px;background:var(--yellow);border:2px solid var(--ink);padding:2px 9px;margin-top:12px}
+/* 자주 묻는 질문 */
+.qa{margin-top:46px;border:2.5px solid var(--ink);background:#fff;box-shadow:6px 6px 0 var(--line)}
+.qa details{border-top:2px solid var(--line)}
+.qa details:first-child{border-top:0}
+.qa summary{cursor:pointer;list-style:none;padding:18px 22px;font-family:"Do Hyeon";font-size:16px;font-weight:400;display:flex;justify-content:space-between;gap:14px;align-items:center;transition:background .25s}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary:hover,.qa details[open] summary{background:var(--yellow)}
+.qa summary::after{content:"＋";font-family:"Do Hyeon";font-size:18px}
+.qa details[open] summary::after{content:"－"}
+.qa .a{padding:0 22px 20px;font-size:13.5px;color:var(--soft);max-width:760px}
 </style>
 </head>
 <body>
 
 <header><div class="wrap nav">
 <a class="logo" href="#"><i>📦</i>네모박스 이사</a>
-<ul><li><a href="#step">견적 절차</a></li><li><a href="#ba">작업 전후</a></li><li><a href="#comp">보상제</a></li></ul>
+<ul><li><a href="#step">견적 절차</a></li><li><a href="#ba">작업 전후</a></li><li><a href="#comp">보상제</a></li><li><a href="#fee">요금 기준</a></li><li><a href="#qa">자주 묻는 질문</a></li></ul>
 <a class="tel" href="tel:0507-000-0000">30초 견적</a>
 </div></header>
 <div class="hazard" aria-hidden="true"></div>
@@ -137,6 +165,40 @@ footer b{color:var(--ink)}
 <div class="rv"><span class="tape">작업 기록</span><h2>이번 주 작업</h2></div>
 <div class="gal rv">
 <img src="./assets/case-1.jpg" alt="작업 사진"><img src="./assets/case-2.jpg" alt="작업 사진"><img src="./assets/case-3.jpg" alt="작업 사진">
+</div>
+</div></section>
+
+
+<section id="fee"><div class="wrap">
+<div class="rv"><span class="tape">요금 기준</span><h2>부르는 값이 아니라, 정해진 값</h2><p class="sub">아래는 평일 · 1층 기준 표준가입니다. 층수와 사다리차, 짐 양에 따라 조정되고, 조정된 금액은 계약서에 그대로 적힙니다.</p></div>
+<div class="fee rv">
+<div class="fr"><span>이사 종류</span><span>인원 · 차량</span><span>소요 시간</span><span>기준가</span></div>
+<div class="fr"><div><b>원룸 반포장</b><span class="d">짐은 직접 싸고 운반 · 배치만</span></div><span class="c">2인 · 1톤</span><span class="c">3 – 4시간</span><span class="won">29만원~</span></div>
+<div class="fr"><div><b>원룸 포장이사</b><span class="d">싸는 것부터 정리까지 전부</span></div><span class="c">3인 · 1톤</span><span class="c">5 – 6시간</span><span class="won">45만원~</span></div>
+<div class="fr"><div><b>가정 포장이사 (20 – 30평)</b><span class="d">주방 · 옷장 정리까지 포함</span></div><span class="c">4 – 5인 · 5톤</span><span class="c">7 – 9시간</span><span class="won">89만원~</span></div>
+<div class="fr"><div><b>보관이사</b><span class="d">입주일이 뜰 때 · 컨테이너 보관</span></div><span class="c">별도 산정</span><span class="c">월 단위</span><span class="won">15만원 / 월~</span></div>
+<div class="fr"><div><b>사무실 이전</b><span class="d">주말 · 야간 작업 가능</span></div><span class="c">현장 실사 후</span><span class="c">협의</span><span class="won">견적 문의</span></div>
+</div>
+<p class="fee-note rv">＊ 사다리차(+8만), 에어컨 이전 설치(+15만), 폐기물 처리(+5만~)는 필요할 때만 붙습니다. 필요 없으면 권하지 않습니다.</p>
+</div></section>
+
+<section id="area"><div class="wrap">
+<div class="rv"><span class="tape">서비스 지역</span><h2>어디까지 가느냐면</h2><p class="sub">차고지가 강북이라 서울 · 경기 북부는 당일 배차가 빠릅니다. 그 외 지역도 갑니다.</p></div>
+<div class="area rv">
+<div class="ar"><b>서울 전역</b><p>강북 · 노원 · 도봉 · 성북은 30분 내 도착. 강남권도 추가 요금 없이 같은 요금표를 적용합니다.</p><span class="tag">당일 배차 가능</span></div>
+<div class="ar"><b>경기 · 인천</b><p>의정부 · 남양주 · 고양 · 김포 · 부천까지 정규 권역입니다. 그 외 시군은 거리에 따라 이동비가 붙습니다.</p><span class="tag">1일 전 예약</span></div>
+<div class="ar"><b>지방 장거리</b><p>충청 · 강원권은 왕복 기준으로 계산합니다. 편도 요금만 받고, 돌아오는 길은 청구하지 않습니다.</p><span class="tag">3일 전 예약</span></div>
+</div>
+</div></section>
+
+<section id="qa"><div class="wrap">
+<div class="rv"><span class="tape">자주 묻는 질문</span><h2>이런 걸 많이 물어보십니다</h2></div>
+<div class="qa rv">
+<details><summary>사진 견적이 실제와 다르면 어떻게 되나요?</summary><p class="a">사진에 안 보이던 짐이 나오면 그 자리에서 알려드리고, 진행할지 여쭤봅니다. 말없이 금액을 올리지 않습니다. 저희가 잘못 본 것이면 계약서 금액 그대로 갑니다.</p></details>
+<details><summary>이사 전날 뭘 준비해야 하나요?</summary><p class="a">귀중품 · 서류 · 약은 따로 챙겨서 직접 가지고 다니세요. 냉장고는 전날 저녁에 비우고 코드를 뽑아 성에를 녹여 두시면 좋습니다. 나머지는 저희가 합니다.</p></details>
+<details><summary>주차 자리가 없으면요?</summary><p class="a">전날 관리사무소에 사다리차 · 화물차 자리를 요청해 두시면 가장 좋습니다. 어려우면 말씀만 주세요. 저희가 관리사무소에 대신 연락드립니다.</p></details>
+<details><summary>손 없는 날은 얼마나 비싼가요?</summary><p class="a">손 없는 날과 주말은 표준가에서 10 – 20% 올라갑니다. 대신 화요일 · 수요일은 같은 조건에 10% 내려갑니다. 날짜를 옮길 수 있으시면 미리 알려드립니다.</p></details>
+<details><summary>취소하면 위약금이 있나요?</summary><p class="a">이사 3일 전까지는 없습니다. 전날 취소는 배차된 차량 때문에 5만원, 당일 취소는 10만원을 받습니다. 계약서에 그대로 적혀 있습니다.</p></details>
 </div>
 </div></section>
 
