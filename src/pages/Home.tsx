@@ -5,16 +5,16 @@ import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { WebSolutionTeaserSection } from "@/components/sections/WebSolutionTeaserSection";
 import { AdminFeatureSection } from "@/components/sections/AdminFeatureSection";
 import { TemplateTeaserSection } from "@/components/sections/TemplateTeaserSection";
-import { PricingSection } from "@/components/sections/PricingSection";
-import { ProcessSection } from "@/components/sections/ProcessSection";
-import { SupportSection } from "@/components/sections/SupportSection";
-import { ReviewsSection } from "@/components/sections/ReviewsSection";
-import { LiveInquiriesSection } from "@/components/sections/LiveInquiriesSection";
-import { BlogTeaserSection } from "@/components/sections/BlogTeaserSection";
-import { RecommendedForSection } from "@/components/sections/RecommendedForSection";
-import { FaqSection } from "@/components/sections/FaqSection";
+import { ProcessPricingBand } from "@/components/sections/ProcessPricingBand";
+import { TrustBand } from "@/components/sections/TrustBand";
+import { AfterLaunchBand } from "@/components/sections/AfterLaunchBand";
+import { FaqBand } from "@/components/sections/FaqBand";
 import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 
+/**
+ * 섹션 순서는 "무엇을 만드는가 → 어떻게 만드는가 → 믿을 만한가 → 문의"의 한 흐름이다.
+ * 같은 일을 하는 섹션을 따로 쌓지 않는다. 15개였던 것을 11개로 묶었다.
+ */
 export default function Home() {
   usePageTitle(
     "NOVERIQ — 소상공인·기업 홈페이지 제작",
@@ -23,20 +23,27 @@ export default function Home() {
 
   return (
     <div>
+      {/* 무엇을 만드는가 */}
       <HeroSection />
       <PortfolioSection />
-      <FeaturesSection />
+
+      {/* 두 가지 방식 — 커스텀과 템플릿 */}
       <WebSolutionTeaserSection />
-      <AdminFeatureSection />
       <TemplateTeaserSection />
-      <PricingSection />
-      <ProcessSection />
-      <SupportSection />
-      <ReviewsSection />
-      <LiveInquiriesSection />
-      <BlogTeaserSection />
-      <RecommendedForSection />
-      <FaqSection />
+
+      {/* 무엇이 들어가는가 */}
+      <FeaturesSection />
+      <AdminFeatureSection />
+
+      {/* 어떻게, 얼마에 */}
+      <ProcessPricingBand />
+
+      {/* 믿을 만한가 */}
+      <TrustBand />
+      <AfterLaunchBand />
+
+      {/* 결정 */}
+      <FaqBand />
       <FinalCtaSection />
     </div>
   );
