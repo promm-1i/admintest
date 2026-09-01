@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Send, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { SectionHeader } from "@/components/sections/SectionHeader";
-import { cn } from "@/lib/utils";
 import {
+  ArrowRight,
+  Send,
+  Check,
   Building2,
   Car,
   HeartPulse,
@@ -30,8 +29,17 @@ import {
   Palette,
   type LucideIcon,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { SectionHeader } from "@/components/sections/SectionHeader";
+import { FadeIn } from "@/components/ui/FadeIn";
+import { SAMPLES } from "@/lib/samples";
+import { cn } from "@/lib/utils";
 
-/** 관리자 솔루션 없이 템플릿으로 시작하는 업종 — 리스트 아래쪽에 이어서 노출한다 */
+/**
+ * 시작하는 방법은 두 가지뿐이라 한 섹션에서 대비시킨다.
+ * 업종을 고르면 실제 구축 화면이 바뀌는 선택기가 이 섹션에서 가장 강한 요소라
+ * 그것을 중심에 두고, 템플릿 규모(업종 수 · 시안 수)는 숫자로만 붙인다.
+ */
 type TemplateIndustry = {
   key: string;
   name: string;
@@ -66,40 +74,49 @@ const TEMPLATE_INDUSTRIES: TemplateIndustry[] = [
   { key: "care", name: "요양원 · 주간보호", icon: HeartHandshake, img: "/thumbs/care.jpg", href: "/templates?industry=care", title: "요양원 · 주간보호 홈페이지", note: "등급별 비용과 하루 일과를 큰 글자로 안내해 보호자를 안심시키는 구성입니다.", points: ["등급별 비용", "하루 일과", "입소 절차", "전화 상담 CTA"] },
   { key: "kids", name: "어린이집 · 유치원", icon: Blocks, img: "/thumbs/kids.jpg", href: "/templates?industry=kids", title: "어린이집 · 유치원 홈페이지", note: "반별 정원과 급식, 하루 일과를 투명하게 보여주는 구성입니다.", points: ["반별 정원표", "하루 일과", "급식 안내", "입소 대기 상담"] },
   { key: "golf", name: "스크린골프", icon: Flag, img: "/thumbs/golf.jpg", href: "/templates?industry=golf", title: "스크린골프 홈페이지", note: "시간대별 요금과 레슨 · 회원권으로 예약을 만드는 다크 톤 구성입니다.", points: ["타석 요금표", "룸 · 타석 안내", "레슨 · 회원권", "예약 문자"] },
+  { key: "usedcar", name: "중고차", icon: Car, img: "/thumbs/usedcar-a.jpg", href: "/templates?industry=usedcar", title: "중고차 매매 홈페이지", note: "차량별 실사진과 성능점검 기록을 함께 보여주고 시세 문의로 연결하는 구성입니다.", points: ["차량 라인업", "성능점검 · 사고이력", "매입 시세 안내", "상담 문의"] },
   { key: "craft", name: "공방 · 클래스", icon: Palette, img: "/thumbs/craft.jpg", href: "/templates?industry=craft", title: "공방 · 클래스 홈페이지", note: "원데이 가격과 주간 일정표로 수강 신청을 만드는 콜라주형 구성입니다.", points: ["원데이 가격", "주간 일정표", "작품 갤러리", "수강 신청"] },
 ];
 
-/**
- * 좌측 업종 리스트에 마우스를 올리면(클릭 · 포커스 동일) 우측 프리뷰가
- * 해당 업종의 실제 구축 화면과 관리 항목으로 바뀐다.
- */
-export function WebSolutionTeaserSection() {
+const INDUSTRY_COUNT = new Set(SAMPLES.filter((s) => s.industryKey).map((s) => s.industryKey)).size;
+const DESIGN_COUNT = SAMPLES.filter((s) => s.industryKey).length;
+
+export function StartOptionsSection() {
   const [activeKey, setActiveKey] = useState(TEMPLATE_INDUSTRIES[0]!.key);
   const active = TEMPLATE_INDUSTRIES.find((t) => t.key === activeKey) ?? TEMPLATE_INDUSTRIES[0]!;
 
   return (
-    <section id="industry-section" className="px-4 py-20 sm:px-6 lg:py-28">
-      <div className="mx-auto max-w-[1400px] rounded-3xl border border-border bg-secondary/30 p-5 sm:p-8">
-        <SectionHeader
-          label="TEMPLATES BY INDUSTRY"
-          title={
-            <>
-              업종 템플릿으로
-              <br />
-              바로 시작하세요
-            </>
-          }
-          description={
-            <>
-              업종을 고르면 실제 구축된 화면을 바로 볼 수 있습니다.
-              <br />
-              문구 · 사진 · 회사정보만 바꿔 빠르게 제작해 드립니다.
-            </>
-          }
-        />
+    <section id="industry-section" className="border-y border-border bg-secondary/25 px-4 py-20 sm:px-6 lg:py-28">
+      <div className="mx-auto max-w-[1400px]">
+        <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+          <SectionHeader
+            label="HOW TO START"
+            title={
+              <>
+                시작하는 방법은
+                <br />두 가지입니다
+              </>
+            }
+            description="완성된 업종 템플릿을 골라 빠르게 열거나, 업무 방식에 맞춰 처음부터 설계하거나. 아래에서 업종을 고르면 실제 구축된 화면을 그대로 보실 수 있습니다."
+          />
+          <dl className="flex shrink-0 gap-10">
+            <div>
+              <dt className="text-xs text-muted-foreground">업종</dt>
+              <dd className="mt-1 font-mono text-4xl font-bold tabular-nums text-foreground">
+                {INDUSTRY_COUNT}
+              </dd>
+            </div>
+            <div>
+              <dt className="text-xs text-muted-foreground">디자인 시안</dt>
+              <dd className="mt-1 font-mono text-4xl font-bold tabular-nums text-primary">
+                {DESIGN_COUNT}
+              </dd>
+            </div>
+          </dl>
+        </div>
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-[235px_1fr]">
-          {/* 업종 리스트 — 모바일에서는 가로 스크롤 칩, 데스크톱에서는 세로 목록 */}
+        <div className="mt-10 grid gap-5 lg:grid-cols-[235px_1fr]">
+          {/* 업종 선택 — 모바일은 가로 스크롤 칩, 데스크톱은 세로 목록 */}
           <ul className="flex gap-2 overflow-x-auto pb-1 scrollbar-none lg:max-h-[560px] lg:flex-col lg:gap-1 lg:overflow-y-auto lg:overscroll-contain lg:pb-0 lg:pr-1">
             {TEMPLATE_INDUSTRIES.map((industry) => {
               const Icon = industry.icon;
@@ -111,15 +128,19 @@ export function WebSolutionTeaserSection() {
                     onMouseEnter={() => setActiveKey(industry.key)}
                     onFocus={() => setActiveKey(industry.key)}
                     onClick={() => setActiveKey(industry.key)}
+                    aria-current={isActive}
                     className={cn(
-                      "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors lg:py-3",
+                      "flex w-full items-center gap-3 rounded-xl border px-4 py-3 text-left transition-colors",
                       isActive
                         ? "border-primary/40 bg-card shadow-xs"
                         : "border-transparent text-muted-foreground hover:bg-card/70",
                     )}
                   >
                     <Icon
-                      className={cn("h-5 w-5 shrink-0", isActive ? "text-primary" : "text-muted-foreground/60")}
+                      className={cn(
+                        "h-5 w-5 shrink-0",
+                        isActive ? "text-primary" : "text-muted-foreground/60",
+                      )}
                       strokeWidth={1.5}
                     />
                     <span
@@ -142,7 +163,7 @@ export function WebSolutionTeaserSection() {
             })}
           </ul>
 
-          {/* 선택된 업종의 실제 구축 화면 + 문구 */}
+          {/* 선택한 업종의 실제 구축 화면 */}
           <div className="overflow-hidden rounded-2xl border border-border bg-card">
             <Link to={active.href} className="group block">
               <div className="relative overflow-hidden">
@@ -150,12 +171,12 @@ export function WebSolutionTeaserSection() {
                   key={activeKey}
                   src={active.img}
                   alt={`${active.name} 구축 화면`}
+                  loading="lazy"
                   className="aspect-[16/9] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02] motion-safe:animate-in motion-safe:fade-in motion-safe:duration-300"
                 />
                 <span className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
                   {active.name} · 실제 구축 화면
                 </span>
-
               </div>
             </Link>
 
@@ -184,28 +205,53 @@ export function WebSolutionTeaserSection() {
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col gap-4 rounded-2xl border border-border bg-card p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-          <div>
-            <p className="text-sm font-bold text-foreground">템플릿에 없는 그림이 있으신가요? — 맞춤형 커스텀 개발</p>
-            <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">
-              원하시는 디자인과 기능을 기획 단계부터 함께 설계해, 하나부터 열까지 사장님만의 홈페이지로 개발해 드립니다.
-            </p>
-          </div>
-          <div className="flex shrink-0 flex-wrap gap-3">
-            <Button asChild className="gap-1.5 font-bold">
-              <Link to="/web-solutions">
-                맞춤 제작 알아보기
+        {/* 두 가지 방식 대비 — 이 섹션의 결론 */}
+        <FadeIn delay={120} className="mt-10">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
+            <div className="flex flex-col bg-card p-6 sm:p-8">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
+                Template
+              </p>
+              <h3 className="mt-3 text-xl font-bold text-foreground">완성된 디자인으로 빠르게</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground break-keep">
+                업종마다 기본형 · 랜딩형 각 5종이 이미 만들어져 있습니다. 문구 · 사진 · 회사정보만
+                바꿔 여는 방식이라 제작 기간이 짧고 비용이 낮습니다.
+              </p>
+              <Link
+                to="/templates"
+                className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+              >
+                템플릿 {DESIGN_COUNT}종 보기
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
-            </Button>
-            <Button asChild variant="outline" className="gap-1.5">
-              <Link to="/contact">
-                <Send className="h-3.5 w-3.5" />
-                구축 문의
-              </Link>
-            </Button>
+            </div>
+
+            <div className="flex flex-col bg-primary/[0.04] p-6 sm:p-8">
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">
+                Custom
+              </p>
+              <h3 className="mt-3 text-xl font-bold text-foreground">업무 방식에 맞춰 처음부터</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground break-keep">
+                템플릿에 없는 화면과 기능은 기획 단계부터 함께 설계합니다. 관리자 시스템과
+                데이터베이스까지 하나로 구축합니다.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                <Button asChild size="sm" className="gap-1.5 font-bold">
+                  <Link to="/web-solutions">
+                    맞춤 제작 알아보기
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+                <Button asChild size="sm" variant="outline" className="gap-1.5">
+                  <Link to="/contact">
+                    <Send className="h-3.5 w-3.5" />
+                    구축 문의
+                  </Link>
+                </Button>
+              </div>
+            </div>
           </div>
-        </div>
+        </FadeIn>
       </div>
     </section>
   );

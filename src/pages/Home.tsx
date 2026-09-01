@@ -2,9 +2,8 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
-import { WebSolutionTeaserSection } from "@/components/sections/WebSolutionTeaserSection";
 import { AdminFeatureSection } from "@/components/sections/AdminFeatureSection";
-import { TemplateTeaserSection } from "@/components/sections/TemplateTeaserSection";
+import { StartOptionsSection } from "@/components/sections/StartOptionsSection";
 import { ProcessPricingBand } from "@/components/sections/ProcessPricingBand";
 import { TrustBand } from "@/components/sections/TrustBand";
 import { AfterLaunchBand } from "@/components/sections/AfterLaunchBand";
@@ -13,7 +12,7 @@ import { FinalCtaSection } from "@/components/sections/FinalCtaSection";
 
 /**
  * 섹션 순서는 "무엇을 만드는가 → 어떻게 만드는가 → 믿을 만한가 → 문의"의 한 흐름이다.
- * 같은 일을 하는 섹션을 따로 쌓지 않는다. 15개였던 것을 11개로 묶었다.
+ * 같은 일을 하는 섹션을 따로 쌓지 않는다. 15개였던 것을 10개로 묶었다.
  */
 export default function Home() {
   usePageTitle(
@@ -27,9 +26,8 @@ export default function Home() {
       <HeroSection />
       <PortfolioSection />
 
-      {/* 두 가지 방식 — 커스텀과 템플릿 */}
-      <WebSolutionTeaserSection />
-      <TemplateTeaserSection />
+      {/* 시작하는 두 가지 방법 */}
+      <StartOptionsSection />
 
       {/* 무엇이 들어가는가 */}
       <FeaturesSection />
