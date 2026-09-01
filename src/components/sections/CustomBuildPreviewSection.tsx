@@ -70,10 +70,8 @@ function PreviewCard({ item, index }: { item: BuildPreview; index: number }) {
     setPlaying(false);
   }, []);
 
-  const Icon = item.icon;
-
   return (
-    <FadeIn direction="up" delay={(index % 2) * 110}>
+    <FadeIn direction="up" delay={index * 90}>
       <button
         type="button"
         onMouseEnter={start}
@@ -85,13 +83,13 @@ function PreviewCard({ item, index }: { item: BuildPreview; index: number }) {
         className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border border-border bg-card text-left transition-all duration-500 ease-[cubic-bezier(.32,.72,0,1)] hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg focus-visible:-translate-y-1 focus-visible:border-primary/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
       >
         <span className="relative block aspect-video w-full overflow-hidden bg-gradient-to-br from-primary/[0.07] via-secondary/40 to-background">
-          {/* 영상 파일이 아직 없을 때 보이는 브랜드 플레이스홀더 */}
+          {/* 포스터를 배경으로도 깔아 둔다 — video의 poster는 메타데이터를 받은 뒤에야
+              그려져서, 카드가 잠깐 빈 채로 보이는 일이 있다. */}
           <span
             aria-hidden
-            className="absolute inset-0 flex items-center justify-center [background-image:linear-gradient(hsl(var(--primary)/0.07)_1px,transparent_1px),linear-gradient(90deg,hsl(var(--primary)/0.07)_1px,transparent_1px)] [background-size:22px_22px]"
-          >
-            <Icon className="h-9 w-9 text-primary/25" strokeWidth={1.5} />
-          </span>
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(/videos/custom/${item.slug}.jpg)` }}
+          />
           <video
             ref={videoRef}
             className="relative h-full w-full object-cover"
@@ -128,7 +126,7 @@ function PreviewCard({ item, index }: { item: BuildPreview; index: number }) {
 export function CustomBuildPreviewSection() {
   return (
     <div id="how" className="scroll-mt-24 border-y border-border bg-secondary/20 py-14 sm:py-20">
-      <div className="mx-auto max-w-4xl px-4">
+      <div className="mx-auto max-w-6xl px-4">
         <Reveal>
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">개발 방식</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
@@ -139,7 +137,7 @@ export function CustomBuildPreviewSection() {
             탭하면) 짧은 미리보기가 재생됩니다.
           </p>
         </Reveal>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PREVIEWS.map((p, i) => (
             <PreviewCard key={p.slug} item={p} index={i} />
           ))}

@@ -17,6 +17,7 @@ import { CUSTOM_SERVICES } from "@/components/site/customServices";
 import { Reveal, NextStepsSection } from "@/pages/services/previewKit";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { CustomBuildPreviewSection } from "@/components/sections/CustomBuildPreviewSection";
+import { TemplatePickVisual, CustomBuildVisual } from "@/components/sections/CompareVisuals";
 
 /** 템플릿형과 커스텀 개발의 차이 */
 const COMPARE = [
@@ -109,6 +110,7 @@ export default function CustomDevService() {
                     c.highlight ? "border-primary/40 bg-primary/[0.04]" : "border-border bg-card"
                   }`}
                 >
+                  {c.highlight ? <CustomBuildVisual /> : <TemplatePickVisual />}
                   <p className={`text-sm font-bold ${c.highlight ? "text-primary" : "text-muted-foreground"}`}>
                     {c.name}
                   </p>
