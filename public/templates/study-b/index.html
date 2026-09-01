@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>새벽서재 스터디카페 — 스터디카페 홈페이지 템플릿 (디자인 B)</title>
+<meta name="description" content="딥네이비와 앰버 조명의 심야 몰입 무드 스터디카페 홈페이지 템플릿. 좌석 요금제, 존 안내, 이용 규칙으로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="새벽서재 스터디카페 — 스터디카페 홈페이지 템플릿 (디자인 B)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600&family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#E5A84B;color:#0F1626}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #E5A84B;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--navy:#0F1626;--panel:#161F33;--line:#26314A;--ink:#EAE7DF;--soft:#7E88A0;--amber:#E5A84B}
+body{background:var(--navy);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.8}
+.serif{font-family:"Noto Serif KR",serif}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+section{padding:94px 0}
+.kicker{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.26em;color:var(--amber)}
+h2{font-family:"Noto Serif KR",serif;font-size:clamp(25px,3.8vw,36px);font-weight:600;margin-top:14px;line-height:1.55}
+.sub{color:var(--soft);margin-top:12px;font-size:14px;max-width:500px}
+header{position:sticky;top:0;z-index:50;background:rgba(15,22,38,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:"Noto Serif KR",serif;font-weight:600;font-size:19px}
+.logo i{font-style:normal;color:var(--amber)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13px;color:var(--soft)}
+.nav ul a:hover{color:var(--ink)}
+.nav .tel{background:var(--amber);color:var(--navy);font-weight:700;font-size:13px;padding:10px 20px;border-radius:6px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:86px 0 70px}
+.hero .wrap{display:grid;grid-template-columns:1fr .95fr;gap:46px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Noto Serif KR",serif;font-size:clamp(30px,5.2vw,50px);font-weight:600;line-height:1.5}
+.hero h1 em{font-style:normal;color:var(--amber)}
+.hero p{margin-top:18px;color:var(--soft);font-size:14.5px;max-width:430px}
+.hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;border-radius:6px;font-weight:700;font-size:14.5px;transition:transform .4s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.97)}
+.btn-a{background:var(--amber);color:var(--navy)}
+.btn-l{border:1px solid var(--line);color:var(--ink)}.btn-l:hover{border-color:var(--amber);color:var(--amber)}
+.hero-img{position:relative;border-radius:12px;overflow:hidden}
+.hero-img img{height:410px;width:100%;object-fit:cover}
+.hero-img .now{position:absolute;bottom:14px;left:14px;background:rgba(15,22,38,.88);border:1px solid var(--amber);border-radius:8px;padding:12px 18px;font-family:"IBM Plex Mono";font-size:12px}
+.hero-img .now b{color:var(--amber)}
+.zones{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+@media(max-width:820px){.zones{grid-template-columns:1fr}}
+.zn{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .5s cubic-bezier(.32,.72,0,1),border-color .3s}
+.zn:hover{transform:translateY(-4px);border-color:var(--amber)}
+.zn img{height:180px;width:100%;object-fit:cover}
+.zn .b{padding:20px 22px}
+.zn b{font-family:"Noto Serif KR";font-size:16px;font-weight:600}
+.zn p{font-size:12.5px;color:var(--soft);margin-top:6px}
+.price{margin-top:46px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.p-row{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:17px 24px;border-top:1px solid var(--line);font-size:14px;align-items:baseline}
+.p-row:first-child{border-top:0;background:#0B1120;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.2em;color:var(--soft)}
+.p-row b{font-weight:700}
+.p-row span.d{display:block;font-size:12px;color:var(--soft)}
+.p-row .t{font-family:"IBM Plex Mono";font-size:12px;color:var(--soft)}
+.p-row .won{font-family:"IBM Plex Mono";color:var(--amber);font-weight:500;white-space:nowrap}
+.rules{margin-top:46px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:820px){.rules{grid-template-columns:1fr 1fr}}
+.ru{border:1px dashed var(--line);border-radius:10px;padding:20px;text-align:center}
+.ru .em{font-size:24px}
+.ru b{display:block;font-size:13.5px;margin-top:10px}
+.ru p{font-size:11.5px;color:var(--soft);margin-top:4px}
+.cta{background:linear-gradient(180deg,var(--panel),var(--navy));border-top:1px solid var(--line);text-align:center;padding:96px 24px}
+.cta p{margin-top:12px;color:var(--soft);font-size:13.5px}
+.cta .btn{margin-top:26px;font-size:15.5px}
+footer{padding:44px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes lamp-warm{0%,100%{opacity:1}50%{opacity:.65}}
+.hero-img .now b{animation:lamp-warm 3.4s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">새벽<i>서재</i></a>
+<ul><li><a href="#zone">좌석 존</a></li><li><a href="#price">이용권</a></li><li><a href="#rule">몰입 규칙</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">잔여석 문의</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">24H STUDY LOUNGE</p>
+<h1 style="margin-top:14px">모두 잠든 시간에<br><em>당신의 페이지</em>는 넘어갑니다</h1>
+<p>새벽서재는 24시간 무인 운영 스터디카페입니다. 방해 없는 조도, 백색소음, 그리고 같은 시간에 공부하는 사람들.</p>
+<div class="hero-cta"><a class="btn btn-a" href="tel:0507-000-0000">잔여석 확인 전화</a><a class="btn btn-l" href="#price">이용권 보기</a></div>
+</div>
+<figure class="hero-img rv"><img src="./assets/1.jpg" alt="심야의 열람실"><span class="now">현재 잔여석 <b>17 / 42</b></span></figure>
+</div></section>
+
+<section id="zone" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">ZONES</p><h2>몰입의 세 가지 방</h2></div>
+<div class="zones rv">
+<div class="zn"><img src="./assets/2.jpg" alt="집중 존"><div class="b"><b>딥포커스 존</b><p>1인 부스 · 스탠드 개별 조광 · 완전 무음</p></div></div>
+<div class="zn"><img src="./assets/3.jpg" alt="오픈 존"><div class="b"><b>서재 존</b><p>널찍한 오픈 테이블 · 낮은 백색소음</p></div></div>
+<div class="zn"><img src="./assets/1.jpg" alt="새벽 존"><div class="b"><b>심야 존</b><p>암막 커튼 · 앰버 조명 — 밤 10시 이후 인기</p></div></div>
+</div>
+</div></section>
+
+<section id="price" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">PASS</p><h2>이용권</h2><p class="sub">전 좌석 자유석 · 지정석은 4주권부터 선택 가능합니다.</p></div>
+<div class="price rv">
+<div class="p-row"><span>PASS</span><span>TIME</span><span>PRICE</span></div>
+<div class="p-row"><div><b>당일권</b><span class="d">첫 방문 체험 겸</span></div><span class="t">6시간</span><span class="won">6,000원</span></div>
+<div class="p-row"><div><b>50시간권</b><span class="d">30일 내 자유 사용</span></div><span class="t">50h</span><span class="won">45,000원</span></div>
+<div class="p-row"><div><b>4주 자유석</b><span class="d">기간 내 무제한</span></div><span class="t">28일</span><span class="won">99,000원</span></div>
+<div class="p-row"><div><b>4주 지정석</b><span class="d">내 자리 고정 + 사물함</span></div><span class="t">28일</span><span class="won">139,000원</span></div>
+</div>
+</div></section>
+
+<section id="rule" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">RULES</p><h2>서로의 몰입을 지키는 약속</h2></div>
+<div class="rules rv">
+<div class="ru"><span class="em">🤫</span><b>통화는 밖에서</b><p>출입문 앞 통화 부스</p></div>
+<div class="ru"><span class="em">⌨️</span><b>저소음 키보드</b><p>기계식은 정숙존 불가</p></div>
+<div class="ru"><span class="em">☕</span><b>뚜껑 있는 음료만</b><p>커피 머신 무료</p></div>
+<div class="ru"><span class="em">💤</span><b>30분 자리비움</b><p>초과 시 자동 퇴실 처리</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<p class="kicker rv">TONIGHT</p>
+<h2 class="rv">오늘 밤도<br>서재의 불은 켜져 있습니다</h2>
+<p class="rv">24시간 무인 운영 · 앱 없이 키오스크 결제 · 관리자 상주 14:00 – 22:00</p>
+<a class="btn btn-a rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>새벽서재 스터디카페</b> · 대표 남새벽<br>서울특별시 관악구 신림로 000, 3층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 요금 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

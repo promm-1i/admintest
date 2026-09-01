@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>연필과노트 교습소 — 학원 홈페이지 템플릿 (디자인 C)</title>
+<meta name="description" content="모눈 노트 무드의 따뜻한 학원 · 교습소 홈페이지 템플릿. 형광펜 하이라이트, 오늘의 시간표, 선생님 소개, 상담 안내로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="연필과노트 교습소 — 학원 홈페이지 템플릿 (디자인 C)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#FFE24A;color:#2B2B23}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #3757C9;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--paper:#FDFBF4;--ink:#2B2B23;--soft:#7A7869;--blue:#3757C9;--hl:#FFE24A;--red:#E0532F;--line:#E4E0CF}
+body{background:var(--paper);color:var(--ink);font-family:"Gowun Dodum",sans-serif;line-height:1.85;background-image:linear-gradient(rgba(55,87,201,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(55,87,201,.06) 1px,transparent 1px);background-size:28px 28px}
+.pen{font-family:"Nanum Pen Script",cursive}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.stamp{display:inline-block;font-family:"Nanum Pen Script";font-size:20px;color:var(--blue);border:2px solid var(--blue);border-radius:10px;padding:2px 14px;transform:rotate(-2deg);background:var(--paper)}
+h2{font-size:clamp(24px,3.6vw,34px);font-weight:400;margin-top:16px;line-height:1.55}
+.hl{background:linear-gradient(transparent 55%,var(--hl) 0)}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:500px}
+header{position:sticky;top:0;z-index:50;background:rgba(253,251,244,.94);backdrop-filter:blur(8px);border-bottom:2px solid var(--ink)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"Nanum Pen Script";font-size:26px}
+.logo b{color:var(--blue)}
+.nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--blue)}
+.nav .tel{font-family:"Nanum Pen Script";font-size:19px;background:var(--ink);color:var(--paper);padding:7px 18px;border-radius:8px;transform:rotate(-1deg)}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:84px 0 70px;text-align:center}
+.hero .memo{font-family:"Nanum Pen Script";font-size:22px;color:var(--red)}
+.hero h1{font-size:clamp(32px,5.6vw,52px);font-weight:400;line-height:1.5;margin-top:10px}
+.hero p{margin:20px auto 0;color:var(--soft);max-width:460px;font-size:15px}
+.hero-cta{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--blue);color:#fff;font-size:15.5px;padding:14px 30px;border-radius:10px;box-shadow:3px 4px 0 rgba(43,43,35,.25);transition:transform .15s,box-shadow .15s}
+.btn:active{transform:translate(2px,3px);box-shadow:0 0 0 rgba(43,43,35,.25)}
+.btn.ghost{background:var(--paper);color:var(--ink);border:2px solid var(--ink);box-shadow:3px 4px 0 rgba(43,43,35,.18)}
+.note-card{background:#fff;border:1.5px solid var(--line);border-radius:6px;box-shadow:0 14px 30px rgba(43,43,35,.07);padding:30px 32px;position:relative}
+.note-card::before{content:"";position:absolute;top:-11px;left:50%;transform:translateX(-50%) rotate(-2deg);width:92px;height:22px;background:rgba(255,226,74,.75)}
+.tt{margin-top:44px;border:2px solid var(--ink);border-radius:10px;overflow:hidden;background:#fff}
+.tt-row{display:grid;grid-template-columns:96px 1fr 120px;border-top:1.5px solid var(--line);padding:15px 20px;font-size:14px;align-items:center}
+.tt-row:first-child{border-top:0;background:var(--ink);color:var(--paper);font-size:12.5px;letter-spacing:.1em}
+.tt-row .t{font-family:"Nanum Pen Script";font-size:19px;color:var(--blue)}
+.tt-row .who{font-size:12px;color:var(--soft);text-align:right}
+@media(max-width:600px){.tt-row{grid-template-columns:80px 1fr}.tt-row .who{display:none}}
+.teach{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+@media(max-width:720px){.teach{grid-template-columns:1fr}}
+.tc{background:#fff;border:1.5px solid var(--line);border-radius:6px;padding:18px;display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:center;transition:transform .5s cubic-bezier(.32,.72,0,1),box-shadow .5s}
+.tc:hover{transform:rotate(-.5deg) translateY(-3px);box-shadow:0 16px 32px rgba(43,43,35,.1)}
+.tc img{width:120px;height:130px;object-fit:cover;border-radius:4px}
+.tc b{font-size:16px}
+.tc .role{font-family:"Nanum Pen Script";font-size:17px;color:var(--red)}
+.tc p{font-size:12.5px;color:var(--soft);margin-top:6px}
+.chk{margin-top:44px;display:grid;gap:0;max-width:640px}
+.chk div{display:flex;gap:14px;align-items:baseline;padding:16px 4px;border-bottom:1.5px dashed var(--line);font-size:15px}
+.chk .pen{color:var(--blue);font-size:22px}
+.chk b{font-weight:400}
+.chk span{color:var(--soft);font-size:12.5px;margin-left:auto;white-space:nowrap}
+.cta{text-align:center;padding:92px 24px}
+.cta .big{font-family:"Nanum Pen Script";font-size:clamp(30px,5vw,44px);line-height:1.5;transform:rotate(-1deg);display:inline-block}
+.cta .big b{color:var(--blue);font-weight:400}
+.cta p{margin-top:14px;color:var(--soft);font-size:14px}
+.cta .btn{margin-top:26px;font-size:17px}
+footer{border-top:2px solid var(--ink);padding:42px 0;font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes wiggle{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(-3.5deg)}}
+.stamp{animation:wiggle 5s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">연필과<b>노트</b></a>
+<ul><li><a href="#today">오늘의 시간표</a></li><li><a href="#teacher">선생님</a></li><li><a href="#how">관리 방식</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">☎ 상담하기</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<p class="memo">— 정원 24명, 작아서 가능한 것들 —</p>
+<h1>한 명 한 명의 노트를<br><span class="hl">끝까지 봐주는 곳</span></h1>
+<p>연필과노트는 큰 학원이 못 하는 걸 합니다. 아이의 풀이 과정을 매일 들여다보고, 어디서 막혔는지 노트에 적어 돌려줍니다.</p>
+<div class="hero-cta"><a class="btn" href="tel:0507-000-0000">상담 전화하기</a><a class="btn ghost" href="#today">시간표 보기</a></div>
+</div></section>
+
+<section id="today" style="padding-top:40px"><div class="wrap">
+<div class="rv"><span class="stamp">오늘의 시간표</span><h2>수업은 <span class="hl">최대 6명</span>씩 앉습니다</h2></div>
+<div class="tt rv">
+<div class="tt-row"><span>시간</span><span>수업</span><span></span></div>
+<div class="tt-row"><span class="t">3:00</span><div><b>초등 연산 교실</b></div><span class="who">담임 이연필</span></div>
+<div class="tt-row"><span class="t">4:30</span><div><b>초등 독해 · 어휘</b></div><span class="who">담임 박노트</span></div>
+<div class="tt-row"><span class="t">6:00</span><div><b>중등 수학 개념반</b></div><span class="who">담임 이연필</span></div>
+<div class="tt-row"><span class="t">7:40</span><div><b>중등 영어 문법반</b></div><span class="who">담임 박노트</span></div>
+</div>
+</div></section>
+
+<section id="teacher" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="stamp">선생님 소개</span><h2>두 사람이 <span class="hl">전 과목을 끝까지</span></h2></div>
+<div class="teach rv">
+<div class="tc"><img src="./assets/teacher-1.jpg" alt="수학 선생님"><div><b>이연필 선생님</b><p class="role">수학 · 과학 담당</p><p>OO대 수학교육과 · 12년째 동네에서 아이들을 가르치고 있습니다.</p></div></div>
+<div class="tc"><img src="./assets/teacher-2.jpg" alt="영어 선생님"><div><b>박노트 선생님</b><p class="role">영어 · 국어 담당</p><p>OO대 영어영문과 · 아이마다 오답 노트를 함께 만듭니다.</p></div></div>
+</div>
+</div></section>
+
+<section id="how" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="stamp">관리 방식</span><h2>매일 하는 <span class="hl">네 가지 약속</span></h2></div>
+<div class="note-card rv" style="margin-top:40px">
+<div class="chk">
+<div><span class="pen">✓</span><b>풀이 노트 매일 검사</b><span>과정이 맞아야 답도 맞습니다</span></div>
+<div><span class="pen">✓</span><b>등 · 하원 문자</b><span>도착하면 1분 안에</span></div>
+<div><span class="pen">✓</span><b>숙제는 교습소에서</b><span>집에서는 쉬게 해 주세요</span></div>
+<div><span class="pen">✓</span><b>월말 손편지 리포트</b><span>점수 말고 변화를 적습니다</span></div>
+</div>
+</div>
+</div></section>
+
+<div class="cta">
+<p class="big rv">우리 아이 노트,<br><b>한번 들고 와 보세요</b></p>
+<p class="rv">노트만 봐도 어디서 막혔는지 보입니다 · 상담 무료 · 평일 13:00–20:00</p>
+<a class="btn rv" href="tel:0507-000-0000">☎ 0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>연필과노트 교습소</b> · 원장 이연필 · 교습소 신고 제0000호<br>경기도 수원시 영통구 동수원로 000, 2층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 시간표 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

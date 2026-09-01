@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>그레이드 모터스 — 중고차 매매 홈페이지 템플릿 (디자인 B)</title>
+<meta name="description" content="다크 쇼룸의 프리미엄 인증 중고차 홈페이지 템플릿. 인증 기준, 프리미엄 매물, 딜러 소개로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="그레이드 모터스 — 중고차 매매 홈페이지 템플릿 (디자인 B)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#8FB6FF;color:#0D1017}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #8FB6FF;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--bg:#0D1017;--panel:#151A23;--line:#262D3A;--ink:#EEF0F4;--soft:#8A93A5;--silver:#C9CFD8;--blue:#8FB6FF}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.75}
+.en{font-family:"Archivo",sans-serif}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+.kicker{font-family:"Archivo";font-size:11.5px;letter-spacing:.3em;color:var(--blue);font-weight:600}
+h2{font-size:clamp(26px,4vw,38px);font-weight:700;margin-top:14px;letter-spacing:-.02em}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:520px;font-weight:300}
+header{position:sticky;top:0;z-index:50;background:rgba(13,16,23,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:"Archivo";font-weight:800;font-size:17px;letter-spacing:.12em}
+.logo b{color:var(--blue)}
+.nav ul{display:flex;gap:28px;list-style:none;font-size:13px;color:var(--soft)}
+.nav ul a:hover{color:var(--ink)}
+.nav .tel{border:1px solid var(--blue);color:var(--blue);font-family:"Archivo";font-size:12px;letter-spacing:.14em;padding:10px 20px;transition:background .3s,color .3s}
+.nav .tel:hover{background:var(--blue);color:var(--bg)}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:88px 0 70px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1fr .98fr;gap:46px;align-items:center}
+@media(max-width:880px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(34px,5.8vw,58px);font-weight:700;line-height:1.22;letter-spacing:-.03em}
+.hero h1 b{color:var(--blue)}
+.hero p{margin-top:18px;color:var(--soft);font-size:15px;max-width:440px;font-weight:300}
+.hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;font-weight:700;font-size:14.5px;transition:transform .4s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.97)}
+.btn-b{background:var(--blue);color:var(--bg)}
+.btn-l{border:1px solid var(--line);color:var(--ink)}.btn-l:hover{border-color:var(--blue);color:var(--blue)}
+.hero-img{position:relative}
+.hero-img img{height:420px;width:100%;object-fit:cover}
+.hero-img::after{content:"";position:absolute;inset:10px;border:1px solid rgba(143,182,255,.4);pointer-events:none}
+.hero-img .cert{position:absolute;top:18px;left:18px;background:rgba(13,16,23,.9);border:1px solid var(--blue);color:var(--blue);font-family:"Archivo";font-size:10.5px;letter-spacing:.22em;padding:8px 14px}
+.check{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:52px}
+@media(max-width:820px){.check{grid-template-columns:1fr 1fr}}
+.check div{background:var(--panel);padding:24px 20px}
+.check b{font-family:"Archivo";font-size:24px;color:var(--blue)}
+.check span{display:block;margin-top:6px;font-size:12px;color:var(--soft)}
+.show{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:46px}
+@media(max-width:760px){.show{grid-template-columns:1fr}}
+.sh{background:var(--panel);border:1px solid var(--line);overflow:hidden;transition:transform .5s cubic-bezier(.32,.72,0,1),border-color .3s}
+.sh:hover{transform:translateY(-4px);border-color:var(--blue)}
+.sh img{height:230px;width:100%;object-fit:cover;filter:saturate(.92)}
+.sh .b{padding:20px 24px}
+.sh .no{font-family:"Archivo";font-size:10px;letter-spacing:.24em;color:var(--blue)}
+.sh h3{font-size:17px;font-weight:700;margin-top:8px}
+.sh p{font-size:12.5px;color:var(--soft);margin-top:4px}
+.sh .row{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;border-top:1px dashed var(--line);padding-top:12px}
+.sh .pr{font-family:"Archivo";font-size:19px;font-weight:800;color:var(--silver)}
+.sh .mo{font-size:11.5px;color:var(--soft)}
+.dealer{margin-top:46px;background:var(--panel);border:1px solid var(--line);padding:34px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}
+@media(max-width:720px){.dealer{grid-template-columns:1fr}}
+.dealer h3{font-size:19px;font-weight:700}
+.dealer p{font-size:13.5px;color:var(--soft);margin-top:8px;max-width:520px;font-weight:300}
+.cta{border-top:1px solid var(--line);text-align:center;padding:96px 24px}
+.cta h2 b{color:var(--blue)}
+.cta p{margin-top:12px;color:var(--soft);font-size:14px;font-weight:300}
+.cta .btn{margin-top:26px;font-size:15.5px}
+footer{padding:44px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes cert-b{0%,100%{opacity:1}50%{opacity:.55}}
+.hero-img .cert{animation:cert-b 3.2s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">GRADE <b>MOTORS</b></a>
+<ul><li><a href="#cert">인증 기준</a></li><li><a href="#show">쇼케이스</a></li><li><a href="#dealer">전담 딜러</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">TEST DRIVE</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">CERTIFIED PRE-OWNED</p>
+<h1 style="margin-top:14px">신차의 설렘,<br><b>절반의 가격</b></h1>
+<p>그레이드는 아무 차나 들이지 않습니다. 102개 항목 인증을 통과한 준신차급만 — 떨어지면 경매장으로 보냅니다.</p>
+<div class="hero-cta"><a class="btn btn-b" href="tel:0507-000-0000">시승 예약</a><a class="btn btn-l" href="#cert">인증 기준 보기</a></div>
+</div>
+<figure class="hero-img rv"><img src="./assets/car-3.jpg" alt="쇼룸 차량"><span class="cert">GRADE CERTIFIED — 102 CHECKS</span></figure>
+</div></section>
+
+<section id="cert" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">CERTIFICATION</p><h2>102개 항목을 통과해야 GRADE입니다</h2></div>
+<div class="check rv">
+<div><b>102</b><span>외판 · 하체 · 전장 점검 항목</span></div>
+<div><b>0</b><span>침수 · 전손 이력 — 전산 3중 조회</span></div>
+<div><b>5년</b><span>연식 상한 · 8만km 이하만 입고</span></div>
+<div><b>1년</b><span>자체 보증 (엔진 · 미션 · 전장)</span></div>
+</div>
+</div></section>
+
+<section id="show" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">SHOWCASE</p><h2>이번 주 쇼케이스</h2><p class="sub">월 할부 표기는 선수금 30% · 60개월 기준 예시입니다.</p></div>
+<div class="show rv">
+<div class="sh"><img src="./assets/car-3.jpg" alt="매물"><div class="b"><span class="no">GRADE No.041</span><h3>그랜저 GN7 캘리그래피</h3><p>23년식 · 1.9만km · 무사고 1인신조</p><div class="row"><span class="pr">3,590만</span><span class="mo">월 52만원~</span></div></div></div>
+<div class="sh"><img src="./assets/car-5.jpg" alt="매물"><div class="b"><span class="no">GRADE No.040</span><h3>팰리세이드 프레스티지</h3><p>22년식 · 3.1만km · 무사고 · 4WD</p><div class="row"><span class="pr">3,970만</span><span class="mo">월 58만원~</span></div></div></div>
+<div class="sh"><img src="./assets/car-2.jpg" alt="매물"><div class="b"><span class="no">GRADE No.039</span><h3>쏘나타 하이브리드</h3><p>23년식 · 2.4만km · 제조사 보증 잔여</p><div class="row"><span class="pr">2,690만</span><span class="mo">월 39만원~</span></div></div></div>
+<div class="sh"><img src="./assets/car-6.jpg" alt="매물"><div class="b"><span class="no">GRADE No.038</span><h3>카니발 시그니처</h3><p>22년식 · 4.2만km · 무사고 9인승</p><div class="row"><span class="pr">3,290만</span><span class="mo">월 48만원~</span></div></div></div>
+</div>
+</div></section>
+
+<section id="dealer" style="padding-top:0"><div class="wrap">
+<div class="dealer rv">
+<div><h3>계약부터 출고까지, 딜러 한 사람</h3><p>중간에 사람이 바뀌면 말도 바뀝니다. 그레이드는 상담한 딜러가 시승 · 계약 · 출고 · 보증 접수까지 전담합니다. 출고 후에도 같은 번호로 연락하세요.</p></div>
+<a class="btn btn-b" href="tel:0507-000-0000">전담 딜러 배정</a>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">주말엔 <b>시승 대기</b>가 있습니다</h2>
+<p class="rv">평일 시승 예약 추천 · 매일 09:30 – 20:00 · 실내 쇼룸 30대 상시 전시</p>
+<a class="btn btn-b rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>그레이드 모터스</b> · 대표 한등급 · 자동차매매업 등록 제0000호<br>서울특별시 강서구 공항대로 000 오토몰 2층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 매물 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

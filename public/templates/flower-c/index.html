@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>꽃요일 — 꽃집 · 플라워샵 홈페이지 템플릿 (디자인 C)</title>
+<meta name="description" content="마카롱 파스텔의 경쾌한 동네 꽃집 홈페이지 템플릿. 오늘의 단 스페셜, 가격 태그 보드, 단골 쿠폰으로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="꽃요일 — 꽃집 · 플라워샵 홈페이지 템플릿 (디자인 C)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Single+Day&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#C77DC2;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #C77DC2;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--cream:#FBF6F0;--lilac:#C77DC2;--peach:#EF9AA2;--butter:#F5C544;--mint:#8FBF8B;--ink:#4A3D46;--soft:#95848F;--line:#EBDCE6}
+body{background:var(--cream);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.8}
+.disp{font-family:"Single Day",cursive;font-weight:400}
+.wrap{max-width:960px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.badge{display:inline-block;font-family:"Single Day";font-size:17px;background:var(--butter);color:#5C4A0E;border-radius:99px;padding:6px 18px;transform:rotate(-2deg)}
+h2{font-family:"Single Day";font-size:clamp(28px,4.4vw,42px);font-weight:400;margin-top:14px;line-height:1.4}
+.sub{color:var(--soft);margin-top:10px;font-size:14.5px;max-width:480px}
+header{position:sticky;top:0;z-index:50;background:rgba(251,246,240,.94);backdrop-filter:blur(8px);border-bottom:2px dotted var(--lilac)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:"Single Day";font-size:26px}
+.logo b{color:var(--lilac);font-weight:400}
+.nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--lilac)}
+.nav .tel{font-family:"Single Day";font-size:17px;background:var(--lilac);color:#fff;padding:8px 20px;border-radius:99px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:80px 0 66px}
+.hero .wrap{display:grid;grid-template-columns:1fr .95fr;gap:44px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Single Day";font-size:clamp(38px,6.6vw,62px);font-weight:400;line-height:1.25}
+.hero h1 .a{color:var(--lilac)}.hero h1 .b{color:var(--peach)}.hero h1 .c{color:var(--mint)}
+.hero p{margin-top:14px;color:var(--soft);font-size:15px;max-width:420px}
+.hero-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;font-family:"Single Day";font-size:18px;padding:13px 30px;border-radius:99px;transition:transform .35s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.96)}
+.btn-l{background:var(--lilac);color:#fff}
+.btn-o{background:#fff;border:2px solid var(--lilac);color:var(--lilac)}
+.hero-img{position:relative}
+.hero-img img{border-radius:24px;height:400px;width:100%;object-fit:cover;border:4px solid #fff;box-shadow:0 18px 40px rgba(74,61,70,.14)}
+.hero-img .tagp{position:absolute;top:-12px;left:18px;background:var(--peach);color:#fff;font-family:"Single Day";font-size:16px;padding:8px 16px;border-radius:99px;transform:rotate(-4deg)}
+.today{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.today{grid-template-columns:1fr}}
+.td{background:#fff;border-radius:20px;padding:14px 14px 20px;box-shadow:0 12px 26px rgba(74,61,70,.08);transition:transform .5s cubic-bezier(.32,.72,0,1)}
+.td:hover{transform:translateY(-5px) rotate(-.5deg)}
+.td img{border-radius:14px;height:190px;width:100%;object-fit:cover}
+.td .b{padding:14px 8px 0}
+.td b{font-family:"Single Day";font-size:19px;font-weight:400}
+.td p{font-size:12.5px;color:var(--soft);margin-top:4px}
+.td .tag{display:inline-block;margin-top:10px;background:var(--cream);border:1.5px dashed var(--lilac);color:var(--lilac);font-family:"Single Day";font-size:16px;border-radius:8px;padding:4px 12px}
+.board{margin-top:44px;background:#fff;border-radius:22px;padding:34px;box-shadow:0 12px 30px rgba(74,61,70,.08)}
+.board h3{font-family:"Single Day";font-size:22px;color:var(--lilac)}
+.bd-row{display:flex;justify-content:space-between;align-items:baseline;gap:14px;padding:13px 2px;border-bottom:2px dotted var(--line);font-size:14.5px}
+.bd-row b{font-weight:700}
+.bd-row span{font-size:12px;color:var(--soft)}
+.bd-row .pr{font-family:"Single Day";font-size:18px;color:var(--peach);white-space:nowrap}
+.coupon{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:720px){.coupon{grid-template-columns:1fr}}
+.cp{border:2.5px dashed var(--lilac);border-radius:18px;padding:26px;background:#FDF9FC;position:relative}
+.cp b{font-family:"Single Day";font-size:20px;color:var(--lilac);font-weight:400}
+.cp p{font-size:13px;color:var(--soft);margin-top:8px}
+.cp .em{position:absolute;right:18px;top:18px;font-size:26px}
+.cta{text-align:center;padding:92px 24px;background:linear-gradient(135deg,#F6E7F4,#FBEDE4)}
+.cta h2{font-size:clamp(30px,5vw,46px)}
+.cta p{margin-top:10px;color:var(--soft);font-size:14px}
+.cta .btn{margin-top:26px;font-size:20px}
+footer{background:var(--ink);color:#D8C9D3;padding:42px 0;font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:#fff}
+@keyframes tag-sw{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(-1deg)}}
+.hero-img .tagp{animation:tag-sw 4.4s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">🌷 꽃<b>요일</b></a>
+<ul><li><a href="#today">오늘의 단</a></li><li><a href="#price">가격표</a></li><li><a href="#coupon">단골 쿠폰</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">☎ 꽃 주문</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<span class="badge">퇴근길에 한 단 어때요?</span>
+<h1 style="margin-top:16px">오늘이 무슨 요일?<br><span class="a">꽃</span><span class="b">요</span><span class="c">일</span>이죠!</h1>
+<p>매일 아침 시장 다녀와서 문 엽니다. 한 단에 오천 원부터 — 꽃은 특별한 날에만 사는 게 아니니까요.</p>
+<div class="hero-cta"><a class="btn btn-l" href="tel:0507-000-0000">전화 주문하기</a><a class="btn btn-o" href="#price">가격표 보기</a></div>
+</div>
+<figure class="hero-img rv"><img src="./assets/1.jpg" alt="오늘 들어온 꽃"><span class="tagp">오늘 입고 완료!</span></figure>
+</div></section>
+
+<section id="today" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">오늘의 단 스페셜</span><h2>시장에서 방금 온 아이들</h2></div>
+<div class="today rv">
+<div class="td"><img src="./assets/4.jpg" alt="한 단"><div class="b"><b>거베라 한 단</b><p>알록달록 · 물올림 완료</p><span class="tag">5,000원</span></div></div>
+<div class="td"><img src="./assets/5.jpg" alt="한 단"><div class="b"><b>장미 반 다발</b><p>오늘 색 : 살구 · 크림</p><span class="tag">12,000원</span></div></div>
+<div class="td"><img src="./assets/6.jpg" alt="한 단"><div class="b"><b>계절 믹스 한 아름</b><p>사장님 마음대로 (제일 인기)</p><span class="tag">20,000원</span></div></div>
+</div>
+</div></section>
+
+<section id="price" style="padding-top:0"><div class="wrap">
+<div class="board rv">
+<h3>벽에 붙은 가격표 그대로</h3>
+<div class="bd-row"><div><b>미니 다발</b> <span>· 포장 포함</span></div><span class="pr">15,000원</span></div>
+<div class="bd-row"><div><b>선물 부케</b> <span>· 꽃말 카드 무료</span></div><span class="pr">35,000원~</span></div>
+<div class="bd-row"><div><b>화분 · 공기정화 식물</b> <span>· 분갈이 서비스</span></div><span class="pr">18,000원~</span></div>
+<div class="bd-row"><div><b>축하 화환</b> <span>· 시내 당일 배송</span></div><span class="pr">90,000원~</span></div>
+<div class="bd-row"><div><b>꽃바구니</b> <span>· 병문안 · 기념일</span></div><span class="pr">50,000원~</span></div>
+</div>
+</div></section>
+
+<section id="coupon" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">단골 대접</span><h2>자주 오시면 좋은 일이 생겨요</h2></div>
+<div class="coupon rv">
+<div class="cp"><span class="em">🌼</span><b>꽃도장 쿠폰</b><p>한 단 살 때마다 도장 하나 — 열 개 모으면 믹스 한 아름이 공짜.</p></div>
+<div class="cp"><span class="em">💌</span><b>기념일 알림</b><p>기념일 알려주시면 이틀 전에 문자 드려요. 깜빡할 틈이 없게.</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">꽃 한 단이면<br>오늘 하루가 달라져요</h2>
+<p class="rv">매일 10:00 – 20:30 · 시장 가는 월요일 오전만 쉬어요</p>
+<a class="btn btn-l rv" href="tel:0507-000-0000">☎ 0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>꽃요일</b> · 대표 오화영<br>대구광역시 수성구 들안로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 가격 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>새아침 입주청소 — 이사 · 청소업체 홈페이지 템플릿 (디자인 C)</title>
+<meta name="description" content="하늘색과 화이트의 산뜻한 입주청소 홈페이지 템플릿. 청소 범위 체크리스트, 작업 전후, 요금 안내로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="새아침 입주청소 — 이사 · 청소업체 홈페이지 템플릿 (디자인 C)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#3BA7DB;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #3BA7DB;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--sky:#3BA7DB;--mist:#EAF6FC;--deep:#1E7CAD;--ink:#20313B;--soft:#6C8391;--line:#DBEBF4}
+body{background:#fff;color:var(--ink);font-family:"Gothic A1",sans-serif;line-height:1.78}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+section{padding:92px 0}
+.kicker{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--sky);background:var(--mist);padding:6px 15px;border-radius:99px}
+h2{font-size:clamp(25px,3.8vw,36px);font-weight:900;margin-top:16px;letter-spacing:-.02em}
+.sub{color:var(--soft);margin-top:11px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:900;font-size:19px}
+.logo i{font-style:normal;color:var(--sky)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13.5px;font-weight:500;color:var(--soft)}
+.nav ul a:hover{color:var(--sky)}
+.nav .tel{background:var(--sky);color:#fff;font-weight:900;font-size:13.5px;padding:10px 20px;border-radius:99px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{background:linear-gradient(180deg,var(--mist),#fff 82%);padding:84px 0 66px;text-align:center}
+.hero h1{font-size:clamp(30px,5.2vw,48px);font-weight:900;line-height:1.4;letter-spacing:-.03em}
+.hero h1 em{font-style:normal;color:var(--sky)}
+.hero p{margin:16px auto 0;color:var(--soft);max-width:480px;font-size:15px}
+.hero-cta{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 32px;border-radius:99px;font-weight:900;font-size:15px;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:active{transform:scale(.97)}
+.btn-s{background:var(--sky);color:#fff}.btn-s:hover{background:var(--deep)}
+.btn-w{background:#fff;border:1.5px solid var(--line)}.btn-w:hover{border-color:var(--sky);color:var(--sky)}
+.shine{margin-top:38px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.shine span{background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:9px 18px;font-size:12.5px;font-weight:700;color:var(--soft)}
+.shine b{color:var(--sky);margin-right:5px}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:48px}
+@media(max-width:720px){.ba{grid-template-columns:1fr}}
+.ba figure{border-radius:18px;overflow:hidden;position:relative;box-shadow:0 14px 32px rgba(32,49,59,.1)}
+.ba img{height:270px;width:100%;object-fit:cover}
+.ba figcaption{position:absolute;top:12px;left:12px;background:rgba(32,49,59,.85);color:#fff;font-size:11.5px;font-weight:900;letter-spacing:.14em;padding:7px 14px;border-radius:99px}
+.ba figure.af figcaption{background:var(--sky)}
+.check{margin-top:48px;display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:720px){.check{grid-template-columns:1fr}}
+.ck{display:flex;gap:14px;align-items:flex-start;border:1.5px solid var(--line);border-radius:16px;padding:20px 22px;transition:border-color .3s,transform .45s cubic-bezier(.32,.72,0,1)}
+.ck:hover{border-color:var(--sky);transform:translateY(-3px)}
+.ck .c{width:26px;height:26px;border-radius:8px;background:var(--sky);color:#fff;display:grid;place-items:center;font-weight:900;font-size:14px;flex:none}
+.ck b{font-size:15px;font-weight:900}
+.ck p{font-size:12.5px;color:var(--soft);margin-top:4px}
+.price{margin-top:48px;border:1.5px solid var(--line);border-radius:18px;overflow:hidden}
+.p-row{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:17px 24px;border-top:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.p-row:first-child{border-top:0;background:var(--ink);color:#fff;font-size:12.5px;letter-spacing:.08em}
+.p-row b{font-weight:900}
+.p-row .t{font-size:12px;color:var(--soft)}
+.p-row .won{font-weight:900;color:var(--sky);white-space:nowrap}
+@media(max-width:640px){.p-row{grid-template-columns:1fr auto}.p-row .t{display:none}}
+.insp{margin-top:48px;background:var(--mist);border-radius:22px;padding:36px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+@media(max-width:680px){.insp{grid-template-columns:1fr}}
+.insp .em{font-size:44px}
+.insp b{font-size:17px;font-weight:900}
+.insp p{font-size:13.5px;color:var(--soft);margin-top:6px}
+.cta{background:var(--sky);color:#fff;text-align:center;padding:88px 24px}
+.cta h2{color:#fff}
+.cta p{margin-top:10px;color:#D7EEFA;font-size:14px}
+.cta .btn{margin-top:26px;background:#fff;color:var(--deep);font-size:16.5px}
+footer{padding:44px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes sparkle{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.75}}
+.insp .em{animation:sparkle 3.6s ease-in-out infinite;display:inline-block}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">새아침 <i>입주청소</i></a>
+<ul><li><a href="#ba">작업 전후</a></li><li><a href="#scope">청소 범위</a></li><li><a href="#price">요금</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">예약 문의</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<span class="kicker">입주 전 단 하루, 평생 기분</span>
+<h1 style="margin-top:16px">새집 냄새 말고<br><em>새집 컨디션</em>으로 입주하세요</h1>
+<p>공사 먼지, 실리콘 자국, 창틀 틈새까지 — 입주 전에만 할 수 있는 청소가 있습니다. 새아침은 그 하루를 책임집니다.</p>
+<div class="hero-cta"><a class="btn btn-s" href="tel:0507-000-0000">예약 문의하기</a><a class="btn btn-w" href="#scope">청소 범위 보기</a></div>
+<div class="shine"><span><b>✓</b>친환경 약품만 사용</span><span><b>✓</b>새집증후군 베이크아웃 안내</span><span><b>✓</b>60항목 검수표 제공</span></div>
+</div></section>
+
+<section id="ba" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="kicker">작업 전후</span><h2>같은 날 오전과 오후입니다</h2></div>
+<div class="ba rv">
+<figure><img src="./assets/ba-before.jpg" alt="청소 전"><figcaption>BEFORE 09:00</figcaption></figure>
+<figure class="af"><img src="./assets/ba-after.jpg" alt="청소 후"><figcaption>AFTER 16:00</figcaption></figure>
+</div>
+</div></section>
+
+<section id="scope" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="kicker">청소 범위</span><h2>여기까지 해야 입주청소</h2></div>
+<div class="check rv">
+<div class="ck"><span class="c">✓</span><div><b>주방 — 상하부장 속까지</b><p>새 그릇 바로 넣어도 되는 상태로</p></div></div>
+<div class="ck"><span class="c">✓</span><div><b>욕실 — 실리콘 · 줄눈 곰팡이 방지</b><p>변기 · 욕조 뒤편 사각지대 포함</p></div></div>
+<div class="ck"><span class="c">✓</span><div><b>창틀 · 샷시 레일 분해 청소</b><p>공사 먼지가 가장 많이 남는 곳</p></div></div>
+<div class="ck"><span class="c">✓</span><div><b>붙박이장 · 신발장 내부</b><p>보양지 제거 후 접착제 자국까지</p></div></div>
+<div class="ck"><span class="c">✓</span><div><b>바닥 — 왁스 아닌 중성 세척</b><p>마루 손상 없는 전용 약품</p></div></div>
+<div class="ck"><span class="c">✓</span><div><b>현관 · 베란다 · 조명갓</b><p>입주 당일 손 안 대도 되게</p></div></div>
+</div>
+</div></section>
+
+<section id="price" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="kicker">요금</span><h2>평형별 정찰 요금</h2><p class="sub">공실 기준 · 짐이 있는 거주청소는 상담 후 안내드립니다.</p></div>
+<div class="price rv">
+<div class="p-row"><span>평형</span><span>소요 시간</span><span>요금</span></div>
+<div class="p-row"><b>원룸 · 오피스텔 (~14평)</b><span class="t">2인 · 약 4시간</span><span class="won">180,000원</span></div>
+<div class="p-row"><b>20평대 아파트</b><span class="t">3인 · 약 6시간</span><span class="won">280,000원</span></div>
+<div class="p-row"><b>30평대 아파트</b><span class="t">4인 · 약 7시간</span><span class="won">380,000원</span></div>
+<div class="p-row"><b>준공 · 상가 청소</b><span class="t">현장 답사 후</span><span class="won">견적 문의</span></div>
+</div>
+<div class="insp rv"><span class="em">🔎</span><div><b>끝나면 함께 검수합니다</b><p>60항목 체크리스트를 들고 한 바퀴 — 아쉬운 곳은 그 자리에서 다시 합니다. 검수 없이 철수하지 않습니다.</p></div></div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">입주일이 잡혔다면,<br>청소일부터 잡으세요</h2>
+<p class="rv">입주 전날 · 당일 오전 작업 가능 · 연중무휴</p>
+<a class="btn rv" href="tel:0507-000-0000">☎ 0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>새아침 입주청소</b> · 대표 정새벽<br>인천광역시 연수구 송도과학로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 요금 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

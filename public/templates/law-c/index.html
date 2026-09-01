@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>법무법인 리버티 — 법률사무소 홈페이지 템플릿 (디자인 C)</title>
+<meta name="description" content="차콜과 스틸 톤의 소송 전문 법무법인 홈페이지 템플릿. 수행 실적 수치, 절차 안내, 팀 소개로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="법무법인 리버티 — 법률사무소 홈페이지 템플릿 (디자인 C)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#B9BEC7;color:#15171B}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #B9BEC7;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--char:#15171B;--panel:#1D2026;--line:#31353D;--ink:#E9EAED;--soft:#8B909B;--steel:#B9BEC7}
+body{background:var(--char);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.75}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+.kicker{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.26em;color:var(--steel)}
+h2{font-size:clamp(25px,3.8vw,37px);font-weight:900;margin-top:12px;letter-spacing:-.02em}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:rgba(21,23,27,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:900;font-size:18px;letter-spacing:.08em}
+.logo b{color:var(--steel)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--ink)}
+.nav .tel{background:var(--steel);color:var(--char);font-weight:900;font-size:13px;padding:10px 20px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:90px 0 70px}
+.hero h1{font-size:clamp(34px,6vw,60px);font-weight:900;line-height:1.25;letter-spacing:-.03em;max-width:720px}
+.hero h1 b{color:var(--steel)}
+.hero p{margin-top:20px;color:var(--soft);font-size:15px;max-width:520px}
+.hero-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;font-weight:900;font-size:14.5px;transition:transform .4s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.97)}
+.btn-s{background:var(--steel);color:var(--char)}
+.btn-l{border:1px solid var(--line);color:var(--ink)}.btn-l:hover{border-color:var(--steel);color:var(--steel)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:56px}
+@media(max-width:820px){.stats{grid-template-columns:1fr 1fr}}
+.stats div{background:var(--panel);padding:26px 22px}
+.stats b{font-family:"IBM Plex Mono";font-size:26px;color:var(--steel)}
+.stats span{display:block;margin-top:6px;font-size:12px;color:var(--soft)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:46px}
+@media(max-width:720px){.fields{grid-template-columns:1fr}}
+.fd{background:var(--panel);border:1px solid var(--line);padding:26px;border-left:3px solid var(--steel);transition:transform .5s cubic-bezier(.32,.72,0,1),background .3s}
+.fd:hover{transform:translateX(5px);background:#232730}
+.fd b{font-size:16.5px;font-weight:900}
+.fd p{font-size:13px;color:var(--soft);margin-top:8px}
+.flow{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:f}
+@media(max-width:760px){.flow{grid-template-columns:1fr}}
+.fl{background:var(--panel);border:1px solid var(--line);padding:26px}
+.fl::before{counter-increment:f;content:"0" counter(f);font-family:"IBM Plex Mono";color:var(--steel);font-size:13px}
+.fl b{display:block;font-size:15.5px;font-weight:900;margin-top:10px}
+.fl p{font-size:12.5px;color:var(--soft);margin-top:8px}
+.team{margin-top:46px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.team{grid-template-columns:1fr}}
+.tm{display:grid;grid-template-columns:120px 1fr;gap:20px;background:var(--panel);border:1px solid var(--line);padding:22px;align-items:center}
+.tm img{width:120px;height:140px;object-fit:cover;filter:grayscale(.3)}
+.tm b{font-size:16px;font-weight:900}
+.tm .role{font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.16em;color:var(--steel);margin-top:4px}
+.tm p{font-size:12px;color:var(--soft);margin-top:8px}
+.notice{margin-top:46px;border:1px dashed var(--line);padding:24px 28px;font-size:13px;color:var(--soft)}
+.notice b{color:var(--steel)}
+.cta{background:var(--steel);color:var(--char);text-align:center;padding:88px 24px}
+.cta h2{color:inherit}
+.cta p{margin-top:10px;font-weight:500;opacity:.75}
+.cta a{display:inline-block;margin-top:26px;background:var(--char);color:var(--steel);font-weight:900;font-size:17px;padding:16px 38px}
+footer{padding:44px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes tick-b{0%,100%{opacity:1}50%{opacity:.5}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">LIBERTY <b>LAW</b></a>
+<ul><li><a href="#record">수행 실적</a></li><li><a href="#fields">업무 분야</a></li><li><a href="#flow">대응 절차</a></li><li><a href="#team">변호사</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">긴급 상담</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<p class="kicker">CRIMINAL &amp; CORPORATE LITIGATION</p>
+<h1 style="margin-top:16px">골든타임은<br>수사 <b>첫 72시간</b>입니다</h1>
+<p>소환 통보를 받으셨다면, 검색보다 전화가 먼저입니다. 리버티는 24시간 안에 대응 전략 보고서를 드립니다.</p>
+<div class="hero-cta"><a class="btn btn-s" href="tel:0507-000-0000">긴급 상담 연결</a><a class="btn btn-l" href="#flow">대응 절차 보기</a></div>
+<div id="record" class="stats rv">
+<div><b>1,800+</b><span>누적 수행 사건</span></div>
+<div><b>24h</b><span>초동 대응 보고</span></div>
+<div><b>6인</b><span>소속 변호사 · 전원 송무</span></div>
+<div><b>0건</b><span>징계 · 수임 분쟁</span></div>
+</div>
+</div></section>
+
+<section id="fields" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">PRACTICE</p><h2>업무 분야</h2></div>
+<div class="fields rv">
+<div class="fd"><b>형사 변호</b><p>압수수색 · 소환 조사 동행 · 구속영장 대응 · 공판 변론</p></div>
+<div class="fd"><b>기업 분쟁</b><p>주주 간 분쟁 · 영업비밀 · 기술 유출 · 가처분</p></div>
+<div class="fd"><b>건설 · 부동산 소송</b><p>공사대금 · 하자 · 분양 분쟁</p></div>
+<div class="fd"><b>임원 · 전문직 방어</b><p>배임 · 횡령 · 의료 · 세무 관련 형사 대응</p></div>
+</div>
+</div></section>
+
+<section id="flow" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">RESPONSE</p><h2>사건은 이렇게 대응합니다</h2></div>
+<div class="flow rv">
+<div class="fl"><b>72시간 초동 대응</b><p>사실관계 정리 · 진술 전략 수립 · 조사 동행 일정 확보.</p></div>
+<div class="fl"><b>전담팀 배당</b><p>주임 변호사 1인 + 서면 전담 1인 — 담당이 바뀌지 않습니다.</p></div>
+<div class="fl"><b>주간 전략 보고</b><p>기록 검토 진행률과 다음 절차를 매주 문서로 보고합니다.</p></div>
+</div>
+</div></section>
+
+<section id="team" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">ATTORNEYS</p><h2>전원이 법정에 섭니다</h2></div>
+<div class="team rv">
+<div class="tm"><img src="./assets/1.jpg" alt="대표 변호사"><div><b>한자유 대표변호사</b><p class="role">MANAGING PARTNER</p><p>사법연수원 00기 · 前 OO지방검찰청 검사 · 형사 전문</p></div></div>
+<div class="tm"><img src="./assets/2.jpg" alt="파트너 변호사"><div><b>서정의 파트너변호사</b><p class="role">PARTNER</p><p>OO대 법학전문대학원 · 기업 소송 · 가처분 전문</p></div></div>
+</div>
+<div class="notice rv"><b>NOTICE —</b> 본 페이지의 실적 수치는 템플릿 데모용 예시입니다. 변호사 광고 규정에 따라 실제 제작 시 검증 가능한 수치만 게재합니다.</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">지금이 골든타임입니다</h2>
+<p class="rv">24시간 긴급 상담 · 야간 · 주말 접수 가능</p>
+<a class="rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>법무법인 리버티</b> · 대표변호사 한자유 · 서울지방변호사회 등록<br>서울특별시 강남구 테헤란로 000, 12층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 실적 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>
