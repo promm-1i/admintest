@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>젤리네일 살롱 — 뷰티샵 홈페이지 템플릿 (디자인 D)</title>
+<meta name="description" content="파스텔 젤리 무드의 네일 · 속눈썹 샵 홈페이지 템플릿. 아트 갤러리, 시술 메뉴, 예약 안내로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="젤리네일 살롱 — 뷰티샵 홈페이지 템플릿 (디자인 D)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poor+Story&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#F5A3C7;color:#4A2E3D}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #E07BA8;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--pink:#F5A3C7;--deep-pink:#E07BA8;--lilac:#C9B6ED;--mint:#A8E6D4;--cream:#FFF7FA;--ink:#4A2E3D;--soft:#9A8391;--line:#F5E1EA}
+body{background:var(--cream);color:var(--ink);font-family:"Gowun Dodum",sans-serif;line-height:1.85}
+.disp{font-family:"Poor Story",cursive;font-weight:400}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+section{padding:86px 0}
+.badge{display:inline-block;font-family:"Poor Story";font-size:17px;background:var(--lilac);color:#fff;border-radius:99px;padding:6px 18px;transform:rotate(-2deg)}
+h2{font-family:"Poor Story";font-size:clamp(28px,4.4vw,42px);font-weight:400;margin-top:14px;color:var(--deep-pink)}
+.sub{color:var(--soft);margin-top:10px;font-size:14.5px;max-width:480px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,247,250,.95);backdrop-filter:blur(8px);border-bottom:2px dotted var(--pink)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"Poor Story";font-size:26px;color:var(--deep-pink)}
+.nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--deep-pink)}
+.nav .tel{font-family:"Poor Story";font-size:19px;background:var(--pink);color:#fff;padding:7px 20px;border-radius:99px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:76px 0 62px;text-align:center;position:relative;overflow:hidden}
+.blob{position:absolute;border-radius:50%;filter:blur(50px);pointer-events:none}
+.b1{width:280px;height:280px;background:rgba(245,163,199,.4);top:-60px;left:-60px}
+.b2{width:240px;height:240px;background:rgba(201,182,237,.35);top:40px;right:-70px}
+.b3{width:200px;height:200px;background:rgba(168,230,212,.3);bottom:-60px;left:40%}
+.hero-in{position:relative}
+.hero h1{font-family:"Poor Story";font-size:clamp(36px,6.4vw,60px);font-weight:400;line-height:1.3}
+.hero h1 em{font-style:normal;color:var(--deep-pink)}
+.hero p{margin:14px auto 0;color:var(--soft);max-width:420px;font-size:15px}
+.hero-cta{margin-top:24px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;font-family:"Poor Story";font-size:20px;padding:12px 30px;border-radius:99px;transition:transform .4s cubic-bezier(.32,.72,0,1),box-shadow .4s}
+.btn:active{transform:scale(.96)}
+.btn-p{background:var(--pink);color:#fff;box-shadow:0 8px 20px rgba(224,123,168,.3)}
+.btn-w{background:#fff;border:2.5px solid var(--pink);color:var(--deep-pink)}
+/* 갤러리 */
+.gal{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:760px){.gal{grid-template-columns:1fr 1fr}}
+.gal figure{border-radius:24px;overflow:hidden;background:#fff;padding:8px;box-shadow:0 10px 24px rgba(74,46,61,.08);transition:transform .5s cubic-bezier(.32,.72,0,1)}
+.gal figure:hover{transform:translateY(-6px) rotate(-1deg)}
+.gal img{height:180px;width:100%;object-fit:cover;border-radius:18px}
+.gal figcaption{font-family:"Poor Story";font-size:16px;text-align:center;padding:8px 0 4px;color:var(--soft)}
+/* 메뉴 */
+.menu{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.menu{grid-template-columns:1fr}}
+.mn{background:#fff;border-radius:22px;padding:22px 26px;display:flex;justify-content:space-between;align-items:baseline;gap:14px;box-shadow:0 8px 20px rgba(74,46,61,.06);transition:transform .45s cubic-bezier(.32,.72,0,1)}
+.mn:hover{transform:translateX(4px)}
+.mn b{font-size:15.5px}
+.mn span.d{display:block;font-size:12px;color:var(--soft);margin-top:4px}
+.mn .pr{font-family:"Poor Story";font-size:20px;color:var(--deep-pink);white-space:nowrap}
+/* 케어 */
+.care{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.care{grid-template-columns:1fr}}
+.cr{border:2.5px dashed var(--pink);border-radius:22px;padding:24px;background:#fff}
+.cr .em{font-size:26px}
+.cr b{display:block;font-family:"Poor Story";font-size:19px;margin-top:8px;color:var(--deep-pink);font-weight:400}
+.cr p{font-size:13px;color:var(--soft);margin-top:6px}
+/* 예약 규정 */
+.rule{margin-top:44px;background:var(--lilac);border-radius:26px;padding:34px;color:#fff}
+.rule h3{font-family:"Poor Story";font-size:22px}
+.rule ul{list-style:none;margin-top:14px;display:grid;gap:10px;font-size:14px}
+.rule li::before{content:"💗 ";}
+.cta{text-align:center;padding:86px 24px}
+.cta h2{font-size:clamp(30px,5vw,46px)}
+.cta p{margin-top:10px;color:var(--soft);font-size:14px}
+.cta .btn{margin-top:24px;font-size:22px}
+footer{background:#fff;border-top:2px dotted var(--pink);padding:38px 0;font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes float-b{0%,100%{transform:translate(0,0)}50%{transform:translate(20px,-16px)}}
+.b1{animation:float-b 16s ease-in-out infinite}
+.b2{animation:float-b 20s ease-in-out -6s infinite}
+.b3{animation:float-b 18s ease-in-out -12s infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">🍡 젤리네일</a>
+<ul><li><a href="#gal">아트 갤러리</a></li><li><a href="#menu">시술 메뉴</a></li><li><a href="#care">케어 안내</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">예약하기</a>
+</div></header>
+
+<section class="hero">
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+<div class="wrap hero-in">
+<span class="badge">1인샵 · 완전 예약제</span>
+<h1 style="margin-top:16px">손끝이 예쁘면<br><em>기분도 예뻐져요</em></h1>
+<p>한 분만 받습니다. 옆자리 눈치 볼 일 없이, 두 시간 온전히 손끝에만 집중해요.</p>
+<div class="hero-cta"><a class="btn btn-p" href="tel:0507-000-0000">예약 문의</a><a class="btn btn-w" href="#gal">아트 구경</a></div>
+</div>
+</section>
+
+<section id="gal" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><span class="badge">ART GALLERY</span><h2>이번 달 인기 아트</h2></div>
+<div class="gal rv">
+<figure><img src="./assets/style-1.jpg" alt="네일 아트"><figcaption>글레이즈 젤</figcaption></figure>
+<figure><img src="./assets/style-2.jpg" alt="네일 아트"><figcaption>프렌치 라인</figcaption></figure>
+<figure><img src="./assets/style-3.jpg" alt="네일 아트"><figcaption>오로라 크롬</figcaption></figure>
+<figure><img src="./assets/style-4.jpg" alt="네일 아트"><figcaption>미니 파츠</figcaption></figure>
+</div>
+</div></section>
+
+<section id="menu" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><span class="badge">MENU</span><h2>시술 메뉴</h2><p class="sub" style="margin-left:auto;margin-right:auto">제거는 자사 시술 시 무료예요.</p></div>
+<div class="menu rv">
+<div class="mn"><div><b>원컬러 젤네일</b><span class="d">약 70분 · 제거 포함</span></div><span class="pr">45,000</span></div>
+<div class="mn"><div><b>프렌치 · 그라데이션</b><span class="d">약 90분</span></div><span class="pr">55,000</span></div>
+<div class="mn"><div><b>아트 3개 이상</b><span class="d">약 120분 · 디자인 상담</span></div><span class="pr">70,000~</span></div>
+<div class="mn"><div><b>패디큐어</b><span class="d">약 80분 · 각질 케어 포함</span></div><span class="pr">60,000</span></div>
+<div class="mn"><div><b>속눈썹 연장</b><span class="d">약 90분 · 100모 기준</span></div><span class="pr">55,000</span></div>
+<div class="mn"><div><b>타사 제거</b><span class="d">약 30분</span></div><span class="pr">15,000</span></div>
+</div>
+</div></section>
+
+<section id="care" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><span class="badge">CARE</span><h2>오래 예쁘게 쓰는 법</h2></div>
+<div class="care rv">
+<div class="cr"><span class="em">🧤</span><b>설거지는 장갑</b><p>물에 오래 닿으면 들뜸이 빨리 와요. 고무장갑 하나면 2주는 더 갑니다.</p></div>
+<div class="cr"><span class="em">💧</span><b>큐티클 오일</b><p>자기 전에 한 방울. 손톱 주변이 갈라지지 않아요.</p></div>
+<div class="cr"><span class="em">🚫</span><b>직접 뜯지 마세요</b><p>자연손톱이 같이 뜯겨요. 들뜨면 바로 연락 주세요.</p></div>
+</div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+<div class="rule rv">
+<h3>예약 전에 확인해 주세요</h3>
+<ul>
+<li>1인샵이라 예약 없이 오시면 시술이 어려워요</li>
+<li>변경 · 취소는 하루 전까지 부탁드려요</li>
+<li>손 상태에 따라 시간이 조금 길어질 수 있어요</li>
+<li>주차는 건물 뒤편 2대, 만차 시 골목 공영주차장</li>
+</ul>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">다음 예쁨,<br>언제로 잡아드릴까요?</h2>
+<p class="rv">화 – 일 11:00 – 20:00 · 월요일 휴무 · 문자 · 카톡 예약 환영</p>
+<a class="btn btn-p rv" href="tel:0507-000-0000">💅 0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>젤리네일 살롱</b> · 대표 손예쁨 · 미용업 신고 제0000호<br>서울특별시 관악구 봉천로 000, 2층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 가격 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

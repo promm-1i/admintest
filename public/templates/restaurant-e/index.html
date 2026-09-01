@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>오후네시 브런치 — 음식점 · 카페 홈페이지 템플릿 (디자인 E)</title>
+<meta name="description" content="크림과 세이지의 부드러운 브런치 카페 홈페이지 템플릿. 라운드 사진 그리드, 시그니처 메뉴, 공간 안내로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="오후네시 브런치 — 음식점 · 카페 홈페이지 템플릿 (디자인 E)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300;500;700&family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#7E9B7A;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #7E9B7A;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--cream:#FAF6EF;--sage:#7E9B7A;--deep:#5E7A5B;--tan:#C8A98B;--ink:#3D3A33;--soft:#8B857A;--line:#EDE5D8}
+body{background:var(--cream);color:var(--ink);font-family:"Sunflower",sans-serif;font-weight:300;line-height:1.9}
+.serif{font-family:"Gowun Batang",serif}
+.wrap{max-width:980px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.kicker{font-size:11.5px;letter-spacing:.34em;color:var(--sage);font-weight:500}
+h2{font-family:"Gowun Batang",serif;font-size:clamp(25px,3.6vw,35px);font-weight:700;margin-top:14px;line-height:1.55}
+.sub{color:var(--soft);margin-top:12px;font-size:14px;max-width:460px}
+header{position:sticky;top:0;z-index:50;background:rgba(250,246,239,.94);backdrop-filter:blur(8px)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px;border-bottom:1px solid var(--line)}
+.logo{font-family:"Gowun Batang",serif;font-weight:700;font-size:19px}
+.logo i{font-style:normal;color:var(--sage)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13px;color:var(--soft)}
+.nav ul a:hover{color:var(--sage)}
+.nav .tel{border:1px solid var(--sage);color:var(--sage);font-size:13px;padding:10px 22px;border-radius:99px;transition:background .3s,color .3s}
+.nav .tel:hover{background:var(--sage);color:#fff}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:80px 0 66px;text-align:center}
+.hero h1{font-family:"Gowun Batang",serif;font-size:clamp(28px,4.8vw,44px);font-weight:700;line-height:1.6}
+.hero h1 em{font-style:normal;color:var(--sage)}
+.hero p{margin:18px auto 0;color:var(--soft);max-width:440px;font-size:14.5px}
+.hero-cta{margin-top:26px;display:flex;gap:13px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--sage);color:#fff;font-size:14.5px;padding:15px 32px;border-radius:99px;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:hover{background:var(--deep)}.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;border:1px solid var(--sage);color:var(--sage)}
+/* 라운드 그리드 */
+.round{margin-top:50px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:center}
+@media(max-width:760px){.round{grid-template-columns:1fr 1fr}}
+.round img{width:100%;object-fit:cover}
+.round .r1{height:230px;border-radius:130px 130px 24px 24px}
+.round .r2{height:290px;border-radius:24px}
+.round .r3{height:230px;border-radius:24px 24px 130px 130px}
+@media(max-width:760px){.round .r3{display:none}}
+/* 시그니처 */
+.sig{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:820px){.sig{grid-template-columns:1fr}}
+.sg{background:#fff;border-radius:24px;overflow:hidden;transition:transform .55s cubic-bezier(.32,.72,0,1),box-shadow .55s}
+.sg:hover{transform:translateY(-5px);box-shadow:0 22px 44px -26px rgba(61,58,51,.28)}
+.sg img{height:200px;width:100%;object-fit:cover}
+.sg .b{padding:22px 24px 26px}
+.sg .n{font-size:11px;letter-spacing:.2em;color:var(--tan)}
+.sg h3{font-family:"Gowun Batang";font-size:18px;font-weight:700;margin-top:7px}
+.sg p{font-size:12.5px;color:var(--soft);margin-top:8px}
+.sg .pr{margin-top:12px;font-family:"Gowun Batang";font-size:16px;color:var(--sage)}
+/* 시간 */
+.hours{margin-top:48px;background:#fff;border-radius:26px;padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:34px}
+@media(max-width:760px){.hours{grid-template-columns:1fr}}
+.hr-row{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.hr-row:last-child{border-bottom:0}
+.hr-row b{font-weight:500}
+.hr-row.off span{color:var(--tan)}
+.hours .note{font-size:13px;color:var(--soft);line-height:2}
+.hours .note b{color:var(--sage);font-weight:500}
+/* 대관 */
+.rent{margin-top:48px;border:1px solid var(--line);border-radius:26px;padding:38px;text-align:center;background:#fff}
+.rent h3{font-family:"Gowun Batang";font-size:19px;font-weight:700}
+.rent p{font-size:13.5px;color:var(--soft);margin-top:10px;max-width:520px;margin-left:auto;margin-right:auto}
+.cta{text-align:center;padding:96px 24px}
+.cta h2{font-size:clamp(26px,4vw,38px)}
+.cta p{margin-top:12px;color:var(--soft);font-size:13.5px}
+.cta .btn{margin-top:26px;font-size:15.5px}
+footer{border-top:1px solid var(--line);padding:42px 0;font-size:12px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes steam{0%,100%{opacity:.5;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.logo i{display:inline-block;animation:steam 4s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">오후네시 <i>☕</i></a>
+<ul><li><a href="#signature">시그니처</a></li><li><a href="#hours">이용 안내</a></li><li><a href="#rent">단체 · 대관</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">예약 문의</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<p class="kicker">BRUNCH &amp; DESSERT</p>
+<h1 style="margin-top:16px">해가 가장 좋은<br><em>오후 네 시의 창가</em></h1>
+<p>서두를 이유가 없는 시간을 위해 만든 카페입니다. 늦은 브런치도, 이른 저녁도 괜찮아요.</p>
+<div class="hero-cta"><a class="btn" href="tel:0507-000-0000">자리 문의하기</a><a class="btn ghost" href="#signature">메뉴 보기</a></div>
+<div class="round rv">
+<img class="r1" src="./assets/space-1.jpg" alt="창가 자리">
+<img class="r2" src="./assets/hero.jpg" alt="브런치 플레이트">
+<img class="r3" src="./assets/space-2.jpg" alt="카페 내부">
+</div>
+</div></section>
+
+<section id="signature" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><p class="kicker">SIGNATURE</p><h2>오후네시의 세 접시</h2></div>
+<div class="sig rv">
+<div class="sg"><img src="./assets/hero.jpg" alt="브런치"><div class="b"><span class="n">NO.01</span><h3>계절 채소 브런치</h3><p>그날 들어온 채소와 수란, 직접 구운 캉파뉴 한 조각</p><p class="pr">16,000원</p></div></div>
+<div class="sg"><img src="./assets/space-3.jpg" alt="파스타"><div class="b"><span class="n">NO.02</span><h3>레몬 크림 파스타</h3><p>산미가 부담스럽지 않게, 오후에 어울리는 가벼움</p><p class="pr">17,000원</p></div></div>
+<div class="sg"><img src="./assets/space-1.jpg" alt="디저트"><div class="b"><span class="n">NO.03</span><h3>오늘의 홈메이드 케이크</h3><p>매일 두 종류만 구워요. 소진되면 그날은 끝</p><p class="pr">7,500원</p></div></div>
+</div>
+</div></section>
+
+<section id="hours" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><p class="kicker">INFORMATION</p><h2>이용 안내</h2></div>
+<div class="hours rv">
+<div>
+<div class="hr-row"><b>화 – 금</b><span>11:00 – 21:00</span></div>
+<div class="hr-row"><b>토 · 일</b><span>10:00 – 21:00</span></div>
+<div class="hr-row"><b>라스트 오더</b><span>20:00</span></div>
+<div class="hr-row off"><b>월요일</b><span>휴무</span></div>
+</div>
+<div class="note">
+<b>노트북</b> 창가 4석에서만 이용 가능해요.<br>
+<b>반려동물</b> 테라스석은 함께 앉으실 수 있습니다.<br>
+<b>주차</b> 건물 뒤편 3대 · 만차 시 공영주차장 안내<br>
+<b>예약</b> 4인 이상만 받습니다. 그 외는 워크인.
+</div>
+</div>
+</div></section>
+
+<section id="rent" style="padding-top:0"><div class="wrap">
+<div class="rent rv">
+<p class="kicker">PRIVATE</p>
+<h3 style="margin-top:12px">모임과 대관</h3>
+<p>브라이덜 샤워, 소규모 북토크, 촬영 대관까지. 영업시간 외에는 공간 전체를 비워드릴 수 있습니다. 인원과 시간대만 알려주시면 견적을 보내드릴게요.</p>
+<a class="btn ghost" style="margin-top:22px" href="tel:0507-000-0000">대관 문의</a>
+</div>
+</div></section>
+
+<div class="cta">
+<p class="kicker rv">VISIT</p>
+<h2 class="rv">창가 자리, 비워두고 있을게요</h2>
+<p class="rv">서울특별시 종로구 계동길 000 · 안국역 3번 출구 도보 7분</p>
+<a class="btn rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>오후네시 브런치</b> · 대표 정오후<br>서울특별시 종로구 계동길 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 메뉴 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

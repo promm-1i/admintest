@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>박스 크로스핏 — 필라테스 · 헬스장 홈페이지 템플릿 (디자인 D)</title>
+<meta name="description" content="콘크리트와 옐로의 크로스핏 박스 홈페이지 템플릿. 오늘의 WOD, 클래스 시간표, 신규 등록 안내로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="박스 크로스핏 — 필라테스 · 헬스장 홈페이지 템플릿 (디자인 D)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=IBM+Plex+Mono:wght@500&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#F2C230;color:#1A1A18}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #F2C230;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--concrete:#1A1A18;--panel:#232320;--line:#34342F;--ink:#EDEDE8;--soft:#8B8B82;--yellow:#F2C230}
+body{background:var(--concrete);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.7}
+.disp{font-family:"Black Han Sans",sans-serif;font-weight:400}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.kicker{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.24em;color:var(--yellow)}
+h2{font-family:"Black Han Sans";font-size:clamp(28px,4.4vw,44px);font-weight:400;margin-top:12px;letter-spacing:.01em}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:520px}
+.tape{height:16px;background:repeating-linear-gradient(-45deg,var(--yellow) 0 20px,var(--concrete) 20px 40px)}
+header{position:sticky;top:0;z-index:50;background:rgba(26,26,24,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"Black Han Sans";font-size:21px;letter-spacing:.02em}
+.logo b{color:var(--yellow);font-weight:400}
+.nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px;font-weight:500;color:var(--soft)}
+.nav ul a:hover{color:var(--ink)}
+.nav .tel{background:var(--yellow);color:var(--concrete);font-weight:700;font-size:13.5px;padding:10px 20px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:76px 0 66px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Black Han Sans";font-size:clamp(38px,6.6vw,66px);font-weight:400;line-height:1.12}
+.hero h1 b{color:var(--yellow);font-weight:400}
+.hero p{margin-top:16px;color:var(--soft);font-size:15px;max-width:430px}
+.hero-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;font-family:"Black Han Sans";font-size:18px;padding:14px 30px;transition:transform .4s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.97)}
+.btn-y{background:var(--yellow);color:var(--concrete)}
+.btn-l{border:2px solid var(--line);color:var(--ink)}.btn-l:hover{border-color:var(--yellow);color:var(--yellow)}
+/* WOD 보드 */
+.wod{background:var(--panel);border:2px solid var(--yellow);padding:26px}
+.wod .h{display:flex;justify-content:space-between;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.2em;color:var(--soft);border-bottom:1px solid var(--line);padding-bottom:12px}
+.wod h3{font-family:"Black Han Sans";font-size:26px;color:var(--yellow);margin-top:16px}
+.wod .set{margin-top:14px;font-family:"IBM Plex Mono";font-size:14px;line-height:2}
+.wod .set span{color:var(--yellow)}
+.wod .note{margin-top:16px;border-top:1px dashed var(--line);padding-top:12px;font-size:12px;color:var(--soft)}
+/* 시간표 */
+.tt{margin-top:46px;border:1px solid var(--line)}
+.tt-h{background:var(--yellow);color:var(--concrete);font-family:"Black Han Sans";font-size:16px;padding:12px 22px;letter-spacing:.04em}
+.tt-r{display:grid;grid-template-columns:110px 1fr 1fr;gap:16px;padding:16px 22px;border-top:1px solid var(--line);font-size:14px;align-items:center}
+.tt-r .t{font-family:"IBM Plex Mono";color:var(--yellow)}
+.tt-r span i{font-style:normal;display:block;font-size:11.5px;color:var(--soft);margin-top:2px}
+@media(max-width:680px){.tt-r{grid-template-columns:80px 1fr}.tt-r span:last-child{display:none}}
+/* 온보딩 */
+.onb{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:o}
+@media(max-width:760px){.onb{grid-template-columns:1fr}}
+.ob{background:var(--panel);border-top:4px solid var(--yellow);padding:26px;transition:transform .5s cubic-bezier(.32,.72,0,1)}
+.ob:hover{transform:translateY(-5px)}
+.ob::before{counter-increment:o;content:"WEEK " counter(o);font-family:"IBM Plex Mono";font-size:11.5px;color:var(--yellow);letter-spacing:.14em}
+.ob b{display:block;font-family:"Black Han Sans";font-size:19px;margin-top:10px;font-weight:400}
+.ob p{font-size:13px;color:var(--soft);margin-top:8px}
+/* 공간 */
+.gal{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:760px){.gal{grid-template-columns:1fr}}
+.gal img{height:220px;width:100%;object-fit:cover;filter:grayscale(.4) contrast(1.1);transition:filter .6s}
+.gal img:hover{filter:none}
+/* 요금 */
+.price{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line)}
+@media(max-width:760px){.price{grid-template-columns:1fr}}
+.pc{padding:30px;border-right:1px solid var(--line)}
+.pc:last-child{border-right:0}
+.pc h3{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.2em;color:var(--soft)}
+.pc .n{font-family:"Black Han Sans";font-size:32px;color:var(--yellow);margin-top:10px}
+.pc .n small{font-size:13px;color:var(--soft);font-family:"Noto Sans KR"}
+.pc p{font-size:12.5px;color:var(--soft);margin-top:10px}
+.cta{background:var(--yellow);color:var(--concrete);text-align:center;padding:80px 24px}
+.cta h2{color:inherit}
+.cta p{margin-top:10px;font-weight:500;opacity:.8}
+.cta a{display:inline-block;margin-top:24px;background:var(--concrete);color:var(--yellow);font-family:"Black Han Sans";font-size:20px;padding:14px 36px}
+footer{padding:42px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes blink-y{0%,100%{opacity:1}50%{opacity:.45}}
+.wod .h .live{animation:blink-y 2.2s ease-in-out infinite;color:var(--yellow)}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">BOX <b>CROSSFIT</b></a>
+<ul><li><a href="#wod">오늘의 WOD</a></li><li><a href="#tt">시간표</a></li><li><a href="#onb">신규 등록</a></li><li><a href="#price">요금</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">체험 신청</a>
+</div></header>
+<div class="tape" aria-hidden="true"></div>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">FUNCTIONAL FITNESS BOX</p>
+<h1 style="margin-top:12px">기록은<br><b>거짓말을 안 한다</b></h1>
+<p>혼자 하는 운동은 늘 협상하게 됩니다. 박스에서는 같은 시간에 같은 걸 하는 사람들이 옆에 있습니다.</p>
+<div class="hero-cta"><a class="btn btn-y" href="tel:0507-000-0000">무료 체험</a><a class="btn btn-l" href="#tt">시간표 보기</a></div>
+</div>
+<aside class="wod rv" id="wod">
+<div class="h"><span class="live">● TODAY'S WOD</span><span>2026.09.01 MON</span></div>
+<h3>"FRAN"</h3>
+<div class="set">
+21 – 15 – 9 <span>REPS FOR TIME</span><br>
+· 스러스터 <span>43kg</span><br>
+· 풀업 <span>KIPPING</span>
+</div>
+<p class="note">스케일링 가능합니다. 처음이면 코치가 무게와 동작을 낮춰 드립니다.</p>
+</aside>
+</div></section>
+
+<section id="tt" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">TIMETABLE</p><h2>클래스 시간표</h2><p class="sub">전 클래스 코치 상시 지도 · 정원 12명. 앱 없이 전화로 예약하셔도 됩니다.</p></div>
+<div class="tt rv">
+<div class="tt-h">MON – FRI</div>
+<div class="tt-r"><span class="t">06:00</span><span>얼리버드 WOD<i>출근 전 60분</i></span><span>정원 10명</span></div>
+<div class="tt-r"><span class="t">12:00</span><span>런치 WOD<i>점심시간 45분 압축</i></span><span>정원 8명</span></div>
+<div class="tt-r"><span class="t">19:00</span><span>프라임 WOD<i>가장 붐비는 시간</i></span><span>정원 12명</span></div>
+<div class="tt-r"><span class="t">20:30</span><span>스트렝스 클래스<i>바벨 3대 운동 집중</i></span><span>정원 8명</span></div>
+<div class="tt-h" style="border-top:1px solid var(--line)">SAT</div>
+<div class="tt-r"><span class="t">10:00</span><span>파트너 WOD<i>2인 1조 · 커뮤니티 데이</i></span><span>정원 16명</span></div>
+</div>
+</div></section>
+
+<section id="onb" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">ONBOARDING</p><h2>처음 3주는 따로 갑니다</h2></div>
+<div class="onb rv">
+<div class="ob"><b>동작 배우기</b><p>스쿼트 · 데드리프트 · 프레스. 빈 봉으로 자세만 3주 중 1주.</p></div>
+<div class="ob"><b>가벼운 WOD</b><p>스케일 버전으로 강도 조절. 숨차는 게 목표가 아니라 자세가 목표.</p></div>
+<div class="ob"><b>정규반 합류</b><p>코치가 준비됐다고 판단하면 그때 일반 클래스로 넘어갑니다.</p></div>
+</div>
+</div></section>
+
+<section id="space" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">THE BOX</p><h2>공간</h2></div>
+<div class="gal rv">
+<img src="./assets/space-1.jpg" alt="박스 내부"><img src="./assets/space-2.jpg" alt="바벨 존"><img src="./assets/space-3.jpg" alt="리깅">
+</div>
+</div></section>
+
+<section id="price" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">MEMBERSHIP</p><h2>회원권</h2></div>
+<div class="price rv">
+<div class="pc"><h3>ONBOARDING</h3><p class="n">150,000<small>원 / 3주</small></p><p>신규 필수 · 주 3회 소그룹 지도</p></div>
+<div class="pc"><h3>MONTHLY</h3><p class="n">180,000<small>원 / 월</small></p><p>전 클래스 무제한 · 락커 제공</p></div>
+<div class="pc"><h3>6 MONTHS</h3><p class="n">930,000<small>원 / 6개월</small></p><p>월 환산 155,000원 · 티셔츠 증정</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">첫 WOD는 무료다</h2>
+<p class="rv">운동복과 실내용 운동화만 챙겨 오세요 · 평일 06:00 – 22:00</p>
+<a class="rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>박스 크로스핏</b> · 대표 강박스 · 체육시설업 신고 제0000호<br>서울특별시 광진구 아차산로 000, B1 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 요금 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

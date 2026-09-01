@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>토지세무회계 — 세무사 · 회계사무소 홈페이지 템플릿 (디자인 D)</title>
+<meta name="description" content="테라코타와 크림의 부동산 세금 전문 세무사무소 홈페이지 템플릿. 양도세 · 상속세 사례, 절세 포인트, 상담 안내로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="토지세무회계 — 세무사 · 회계사무소 홈페이지 템플릿 (디자인 D)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#A85B3C;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #8E4A2E;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--cream:#FAF5EE;--terra:#A85B3C;--deep:#8E4A2E;--ink:#332B25;--soft:#867A70;--line:#E8DED0}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans KR",sans-serif;font-weight:300;line-height:1.9}
+.serif{font-family:"Gowun Batang",serif}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+section{padding:90px 0}
+.kicker{font-size:11.5px;letter-spacing:.3em;color:var(--terra);font-weight:500}
+h2{font-family:"Gowun Batang",serif;font-size:clamp(25px,3.8vw,36px);font-weight:700;margin-top:14px;line-height:1.5}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:"Gowun Batang",serif;font-weight:700;font-size:20px}
+.logo b{color:var(--terra)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--terra)}
+.nav .tel{background:var(--terra);color:#fff;font-size:13.5px;padding:10px 22px;border-radius:99px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{background:var(--cream);padding:78px 0 68px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Gowun Batang",serif;font-size:clamp(30px,5vw,46px);font-weight:700;line-height:1.5}
+.hero h1 em{font-style:normal;color:var(--terra)}
+.hero p{margin-top:16px;color:var(--soft);font-size:15px;max-width:430px}
+.hero-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;border-radius:99px;font-weight:500;font-size:15px;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:active{transform:scale(.97)}
+.btn-t{background:var(--terra);color:#fff}.btn-t:hover{background:var(--deep)}
+.btn-w{background:#fff;border:1.5px solid var(--line)}.btn-w:hover{border-color:var(--terra);color:var(--terra)}
+/* 사례 카드 */
+.case{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:26px}
+.case h3{font-family:"Gowun Batang";font-size:16px;font-weight:700;color:var(--terra)}
+.cs{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.cs:last-of-type{border-bottom:0}
+.cs .v{font-family:"Gowun Batang";font-weight:700}
+.case .save{margin-top:14px;background:var(--cream);border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center}
+.case .save span{font-size:13.5px;font-weight:700}
+.case .save b{font-family:"Gowun Batang";font-size:22px;color:var(--terra)}
+.case .note{margin-top:10px;font-size:11px;color:var(--soft)}
+/* 업무 */
+.svc{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:820px){.svc{grid-template-columns:1fr}}
+.sv{border:1.5px solid var(--line);border-radius:18px;padding:30px;transition:border-color .35s,transform .5s cubic-bezier(.32,.72,0,1)}
+.sv:hover{border-color:var(--terra);transform:translateY(-4px)}
+.sv .n{font-family:"Gowun Batang";font-size:14px;color:var(--terra);font-weight:700}
+.sv h3{font-family:"Gowun Batang";font-size:19px;font-weight:700;margin-top:10px}
+.sv p{font-size:13.5px;color:var(--soft);margin-top:10px}
+.sv ul{list-style:none;margin-top:14px;display:grid;gap:8px;font-size:13px}
+.sv li::before{content:"— ";color:var(--terra)}
+/* 절세 */
+.tip{margin-top:46px;background:var(--cream);border-radius:22px;padding:36px}
+.tp{display:grid;grid-template-columns:40px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid #E4D8C7;font-size:14.5px}
+.tp:last-child{border-bottom:0}
+.tp .n{font-family:"Gowun Batang";font-size:18px;color:var(--terra);font-weight:700}
+.tp b{font-weight:700}
+.tp p{font-size:13px;color:var(--soft);margin-top:4px}
+/* 기한 */
+.cal{margin-top:46px;border:1.5px solid var(--line);border-radius:18px;overflow:hidden}
+.cl{display:grid;grid-template-columns:1fr auto;gap:16px;padding:17px 24px;border-top:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.cl:first-child{border-top:0;background:var(--ink);color:#fff;font-size:13px}
+.cl b{font-weight:700}
+.cl span.d{display:block;font-size:12.5px;color:var(--soft);margin-top:2px}
+.cl .t{font-family:"Gowun Batang";font-weight:700;color:var(--terra);white-space:nowrap}
+.cta{background:var(--terra);color:#fff;text-align:center;padding:86px 24px}
+.cta h2{color:#fff}
+.cta p{margin-top:12px;color:#EBD3C7;font-size:14px}
+.cta .btn{margin-top:26px;background:#fff;color:var(--deep);font-size:16.5px}
+footer{padding:42px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes house{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.logo b{display:inline-block;animation:house 4.5s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">토지<b>세무회계</b></a>
+<ul><li><a href="#svc">업무 분야</a></li><li><a href="#tip">절세 포인트</a></li><li><a href="#cal">신고 기한</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">사전 상담</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">REAL ESTATE TAX SPECIALIST</p>
+<h1 style="margin-top:14px">집을 팔기 <em>전에</em><br>오셔야 합니다</h1>
+<p>양도세는 계약서에 도장 찍는 순간 대부분 결정됩니다. 토지세무회계는 거래 전 상담으로 세금을 설계합니다.</p>
+<div class="hero-cta"><a class="btn btn-t" href="tel:0507-000-0000">사전 상담 예약</a><a class="btn btn-w" href="#svc">업무 분야</a></div>
+</div>
+<aside class="case rv">
+<h3>실제 상담 사례 (예시)</h3>
+<div class="cs"><span>1주택 · 2년 보유 아파트 양도</span><span class="v">—</span></div>
+<div class="cs"><span>상담 전 예상 세액</span><span class="v">4,820만원</span></div>
+<div class="cs"><span>상담 후 (보유·거주 요건 조정)</span><span class="v">1,140만원</span></div>
+<div class="save"><span>절감액</span><b>3,680만원</b></div>
+<p class="note">* 템플릿 데모용 예시입니다. 실제 세액은 개별 상황에 따라 크게 달라집니다.</p>
+</aside>
+</div></section>
+
+<section id="svc"><div class="wrap">
+<div class="rv"><p class="kicker">SERVICE</p><h2>부동산 세금, 세 가지 축</h2></div>
+<div class="svc rv">
+<div class="sv"><span class="n">業 一</span><h3>양도소득세</h3><p>파는 시점과 순서를 바꾸면 세금이 달라집니다.</p><ul><li>비과세 요건 검토</li><li>다주택 중과 판단</li><li>취득가액 입증 · 필요경비</li></ul></div>
+<div class="sv"><span class="n">業 二</span><h3>상속세</h3><p>돌아가신 뒤에는 선택지가 줄어듭니다. 미리 준비하세요.</p><ul><li>사전 증여 시뮬레이션</li><li>상속재산 평가 · 감정</li><li>분할 협의 세무 자문</li></ul></div>
+<div class="sv"><span class="n">業 三</span><h3>증여세</h3><p>10년 단위로 나누면 세율 구간이 내려갑니다.</p><ul><li>증여 시기 · 금액 설계</li><li>부담부증여 검토</li><li>가족 간 거래 적정성</li></ul></div>
+</div>
+</div></section>
+
+<section id="tip" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">KEY POINTS</p><h2>많이들 놓치시는 것</h2></div>
+<div class="tip rv">
+<div class="tp"><span class="n">一</span><div><b>취득 당시 영수증을 버리지 마세요</b><p>인테리어 · 중개보수 · 취득세 영수증은 나중에 필요경비로 인정됩니다.</p></div></div>
+<div class="tp"><span class="n">二</span><div><b>잔금일이 세금을 바꿉니다</b><p>보유 · 거주 기간이 며칠 차이로 요건을 못 채우는 경우가 많습니다.</p></div></div>
+<div class="tp"><span class="n">三</span><div><b>증여는 10년 주기로</b><p>10년 이내 증여는 합산됩니다. 미리 시작할수록 유리합니다.</p></div></div>
+<div class="tp"><span class="n">四</span><div><b>상속은 3개월이 골든타임</b><p>한정승인 · 포기 판단 기한입니다. 채무가 있다면 특히 서두르셔야 합니다.</p></div></div>
+</div>
+</div></section>
+
+<section id="cal" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">DEADLINE</p><h2>신고 기한을 놓치면 가산세</h2></div>
+<div class="cal rv">
+<div class="cl"><span>세목</span><span>기한</span></div>
+<div class="cl"><div><b>양도소득세 예정신고</b><span class="d">양도일이 속한 달의 말일부터</span></div><span class="t">2개월 이내</span></div>
+<div class="cl"><div><b>상속세</b><span class="d">상속개시일이 속한 달의 말일부터</span></div><span class="t">6개월 이내</span></div>
+<div class="cl"><div><b>증여세</b><span class="d">증여일이 속한 달의 말일부터</span></div><span class="t">3개월 이내</span></div>
+<div class="cl"><div><b>종합소득세 확정신고</b><span class="d">임대소득 등 합산</span></div><span class="t">5월 31일</span></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">계약서 쓰기 전에<br>전화 한 통만 주세요</h2>
+<p class="rv">사전 상담 60분 · 예약제 · 평일 09:30 – 18:30</p>
+<a class="btn rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>토지세무회계사무소</b> · 대표세무사 지대상 · 세무사등록 제00000호<br>서울특별시 송파구 올림픽로 000, 8층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 사례 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>명륜학당 — 학원 홈페이지 템플릿 (디자인 E)</title>
+<meta name="description" content="딥그린과 골드의 클래식 명문 학원 홈페이지 템플릿. 크레스트 엠블럼, 학사 일정, 합격 실적으로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="명륜학당 — 학원 홈페이지 템플릿 (디자인 E)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#1F4432;color:#F6F2E6}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #B08D3E;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--green:#1F4432;--deep:#153024;--gold:#B08D3E;--ivory:#F6F2E6;--ink:#22271F;--soft:#77796C;--line:#E1DACA}
+body{background:var(--ivory);color:var(--ink);font-family:"Noto Sans KR",sans-serif;font-weight:300;line-height:1.85}
+.serif{font-family:"Nanum Myeongjo",serif}
+.wrap{max-width:1000px;margin:0 auto;padding:0 26px}
+section{padding:94px 0}
+.kicker{font-size:11px;letter-spacing:.42em;color:var(--gold);font-weight:500}
+h2{font-family:"Nanum Myeongjo",serif;font-size:clamp(25px,3.6vw,35px);font-weight:800;margin-top:16px;line-height:1.5}
+.sub{color:var(--soft);margin-top:12px;font-size:14px;max-width:480px}
+header{position:sticky;top:0;z-index:50;background:var(--green);color:var(--ivory)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:20px;letter-spacing:.14em}
+.logo b{color:var(--gold)}
+.nav ul{display:flex;gap:28px;list-style:none;font-size:13px;color:#B7C6BC}
+.nav ul a:hover{color:var(--gold)}
+.nav .tel{border:1px solid var(--gold);color:var(--gold);font-size:13px;padding:10px 22px;transition:background .3s,color .3s}
+.nav .tel:hover{background:var(--gold);color:var(--green)}
+@media(max-width:820px){.nav ul{display:none}}
+/* 크레스트 히어로 */
+.hero{background:var(--green);color:var(--ivory);text-align:center;padding:78px 0 88px;position:relative}
+.crest{width:88px;height:104px;margin:0 auto;border:2px solid var(--gold);border-radius:0 0 44px 44px;display:grid;place-items:center;position:relative}
+.crest span{font-family:"Nanum Myeongjo";font-size:30px;font-weight:800;color:var(--gold)}
+.crest::before{content:"";position:absolute;inset:6px;border:1px solid rgba(176,141,62,.5);border-radius:0 0 40px 40px}
+.hero h1{font-family:"Nanum Myeongjo",serif;font-size:clamp(28px,4.8vw,46px);font-weight:800;line-height:1.5;margin-top:24px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero .est{margin-top:14px;font-size:11.5px;letter-spacing:.4em;color:#9DB2A4}
+.hero p{margin:20px auto 0;max-width:460px;font-size:14.5px;color:#B7C6BC}
+.hero-cta{margin-top:30px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 32px;font-size:14.5px;font-weight:500;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:active{transform:scale(.97)}
+.btn-g{background:var(--gold);color:var(--green)}
+.btn-o{border:1px solid rgba(246,242,230,.5);color:var(--ivory)}.btn-o:hover{background:rgba(246,242,230,.12)}
+/* 실적 */
+.rec{margin-top:48px;border:1.5px solid var(--green)}
+.rec-h{background:var(--green);color:var(--gold);padding:14px 24px;font-family:"Nanum Myeongjo";font-size:13px;letter-spacing:.2em;font-weight:700}
+.rec-r{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:15px 24px;border-top:1px solid var(--line);font-size:14.5px;align-items:baseline;background:#fff}
+.rec-r b{font-family:"Nanum Myeongjo";font-weight:700}
+.rec-r .y{font-size:12.5px;color:var(--soft)}
+.rec-r .n{font-family:"Nanum Myeongjo";font-weight:800;color:var(--green);white-space:nowrap}
+.rec .note{background:#fff;border-top:1px solid var(--line);padding:14px 24px;font-size:11.5px;color:var(--soft)}
+/* 과정 */
+.course{margin-top:48px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:820px){.course{grid-template-columns:1fr}}
+.cs{background:#fff;border:1px solid var(--line);padding:32px;transition:transform .5s cubic-bezier(.32,.72,0,1),border-color .35s}
+.cs:hover{transform:translateY(-5px);border-color:var(--gold)}
+.cs .t{font-size:11px;letter-spacing:.24em;color:var(--gold)}
+.cs h3{font-family:"Nanum Myeongjo";font-size:20px;font-weight:800;margin-top:12px}
+.cs p{font-size:13px;color:var(--soft);margin-top:10px}
+.cs ul{list-style:none;margin-top:16px;display:grid;gap:8px;font-size:13px}
+.cs li::before{content:"· ";color:var(--gold);font-weight:700}
+/* 학사 일정 */
+.cal{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-left:1px solid var(--line)}
+@media(max-width:760px){.cal{grid-template-columns:1fr 1fr}}
+.cl{border-right:1px solid var(--line);border-top:1.5px solid var(--green);padding:24px 20px}
+.cl .m{font-family:"Nanum Myeongjo";font-size:14px;color:var(--gold);font-weight:700}
+.cl b{display:block;font-size:15px;font-weight:500;margin-top:8px}
+.cl p{font-size:12px;color:var(--soft);margin-top:5px}
+/* 시설 */
+.fac{margin-top:48px;display:grid;grid-template-columns:2fr 1fr;gap:16px}
+@media(max-width:720px){.fac{grid-template-columns:1fr}}
+.fac img{width:100%;height:100%;min-height:210px;object-fit:cover;filter:sepia(.1)}
+.fac .side{display:grid;gap:16px}
+.cta{background:var(--deep);color:var(--ivory);text-align:center;padding:92px 24px}
+.cta h2{color:var(--ivory)}
+.cta p{margin-top:12px;color:#9DB2A4;font-size:13.5px}
+.cta .tel{display:inline-block;margin-top:28px;font-family:"Nanum Myeongjo";font-size:clamp(24px,3.6vw,34px);font-weight:800;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:6px;letter-spacing:.1em}
+footer{padding:42px 0;font-size:12px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes crest-g{0%,100%{opacity:.85}50%{opacity:1}}
+.crest{animation:crest-g 5.5s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">明倫<b>學堂</b></a>
+<ul><li><a href="#record">합격 실적</a></li><li><a href="#course">개설 과정</a></li><li><a href="#cal">학사 일정</a></li><li><a href="#fac">시설</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">입학 상담</a>
+</div></header>
+
+<div class="hero">
+<div class="crest"><span>明</span></div>
+<h1>가르치는 곳이 아니라<br><em>버티게 하는 곳</em>입니다</h1>
+<p class="est">SINCE 1991 · 재수 · 편입 전문</p>
+<p>명륜학당은 34년간 한 가지만 해왔습니다. 한 해를 다시 시작하는 학생들이 끝까지 앉아 있게 만드는 일.</p>
+<div class="hero-cta"><a class="btn btn-g" href="tel:0507-000-0000">입학 상담 예약</a><a class="btn btn-o" href="#record">합격 실적 보기</a></div>
+</div>
+
+<section id="record"><div class="wrap">
+<div class="rv"><p class="kicker">ADMISSION RECORD</p><h2>지난해 합격 실적</h2></div>
+<div class="rec rv">
+<div class="rec-h">2026학년도 주요 합격 현황</div>
+<div class="rec-r"><b>의 · 치 · 한 계열</b><span class="y">정시 · 편입</span><span class="n">18명</span></div>
+<div class="rec-r"><b>서울 주요 10개 대학</b><span class="y">정시</span><span class="n">126명</span></div>
+<div class="rec-r"><b>교육대학교</b><span class="y">정시</span><span class="n">21명</span></div>
+<div class="rec-r"><b>일반 편입 (3학년)</b><span class="y">편입</span><span class="n">64명</span></div>
+<p class="note">* 템플릿 데모용 예시 수치입니다. 실제 제작 시 학원법 광고 기준에 맞춰 검증 가능한 실적만 게재합니다.</p>
+</div>
+</div></section>
+
+<section id="course" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">COURSES</p><h2>개설 과정</h2></div>
+<div class="course rv">
+<div class="cs"><span class="t">COURSE 一</span><h3>재수 정규반</h3><p>3월 개강 · 수능까지 전 과정</p><ul><li>주 6일 관리형 자습</li><li>월 2회 전국 모의고사</li><li>담임 개별 면담 주 1회</li></ul></div>
+<div class="cs"><span class="t">COURSE 二</span><h3>편입 종합반</h3><p>영어 · 수학 · 논술 통합</p><ul><li>대학별 기출 분석 강의</li><li>주 1회 실전 모의</li><li>서류 · 면접 지도 포함</li></ul></div>
+<div class="cs"><span class="t">COURSE 三</span><h3>논술 · 면접 특강</h3><p>수시 대비 단기 집중</p><ul><li>대학별 유형 첨삭</li><li>1:1 답안 피드백</li><li>모의 면접 3회</li></ul></div>
+</div>
+</div></section>
+
+<section id="cal" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">ACADEMIC CALENDAR</p><h2>학사 일정</h2></div>
+<div class="cal rv">
+<div class="cl"><span class="m">1–2월</span><b>예비 과정</b><p>기초 정리 · 학습 습관 형성</p></div>
+<div class="cl"><span class="m">3–6월</span><b>정규 1학기</b><p>개념 완성 · 첫 모의 평가</p></div>
+<div class="cl"><span class="m">7–9월</span><b>정규 2학기</b><p>실전 문제 · 취약 단원 클리닉</p></div>
+<div class="cl"><span class="m">10–11월</span><b>파이널</b><p>실전 모의 · 컨디션 관리</p></div>
+</div>
+</div></section>
+
+<section id="fac" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">FACILITY</p><h2>공부만 하도록 만든 공간</h2><p class="sub">1인 1석 고정 지정석 · 휴대폰 보관제 · 야간 자습 22시까지 운영합니다.</p></div>
+<div class="fac rv">
+<img src="./assets/facility-2.jpg" alt="자습실">
+<div class="side"><img src="./assets/facility-1.jpg" alt="강의실"><img src="./assets/facility-3.jpg" alt="상담실"></div>
+</div>
+</div></section>
+
+<div class="cta">
+<p class="kicker rv">ADMISSION</p>
+<h2 class="rv">다시 시작하는 일 년,<br>혼자 두지 않겠습니다</h2>
+<p class="rv">입학 상담 평일 10:00 – 20:00 · 학부모 동반 상담 환영</p>
+<a class="tel rv" href="tel:0507-000-0000">0507 · 000 · 0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>명륜학당</b> · 원장 명정헌 · 학원설립운영등록 제0000호<br>서울특별시 동작구 사당로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 실적 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

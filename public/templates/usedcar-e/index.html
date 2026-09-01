@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>헤리티지 오토 — 중고차 매매 홈페이지 템플릿 (디자인 E)</title>
+<meta name="description" content="버건디와 크림의 클래식 · 수입 중고차 홈페이지 템플릿. 컬렉션 쇼케이스, 히스토리 리포트, 위탁 판매로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="헤리티지 오토 — 중고차 매매 홈페이지 템플릿 (디자인 E)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#6E2230;color:#F7F1E5}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #6E2230;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--cream:#F7F1E5;--wine:#6E2230;--deep:#551620;--ink:#2C2622;--soft:#7E756A;--line:#E3D9C6}
+body{background:var(--cream);color:var(--ink);font-family:"Noto Sans KR",sans-serif;font-weight:300;line-height:1.9}
+.serif{font-family:"Nanum Myeongjo",serif}
+.wrap{max-width:1020px;margin:0 auto;padding:0 26px}
+section{padding:94px 0}
+.kicker{font-size:11px;letter-spacing:.42em;color:var(--wine);font-weight:500}
+h2{font-family:"Nanum Myeongjo",serif;font-size:clamp(25px,3.8vw,36px);font-weight:800;margin-top:16px;line-height:1.5}
+.sub{color:var(--soft);margin-top:12px;font-size:14px;max-width:500px}
+header{position:sticky;top:0;z-index:50;background:rgba(247,241,229,.95);backdrop-filter:blur(8px);border-bottom:2px solid var(--wine)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:19px;letter-spacing:.12em}
+.logo b{color:var(--wine)}
+.nav ul{display:flex;gap:28px;list-style:none;font-size:12.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--wine)}
+.nav .tel{background:var(--wine);color:var(--cream);font-size:12.5px;padding:11px 22px;transition:background .3s}
+.nav .tel:hover{background:var(--deep)}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:84px 0 74px}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:48px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Nanum Myeongjo",serif;font-size:clamp(29px,5vw,46px);font-weight:800;line-height:1.5}
+.hero h1 em{font-style:normal;color:var(--wine)}
+.hero p{margin-top:20px;color:var(--soft);font-size:14.5px;max-width:420px}
+.hero-cta{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;background:var(--wine);color:var(--cream);font-size:14px;padding:15px 32px;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:hover{background:var(--deep)}.btn:active{transform:scale(.97)}
+.btn.ghost{background:transparent;border:1px solid var(--wine);color:var(--wine)}
+.hero figure{position:relative}
+.hero img{width:100%;height:420px;object-fit:cover;filter:sepia(.12) contrast(1.04)}
+.hero figcaption{position:absolute;left:14px;bottom:12px;background:var(--cream);color:var(--wine);font-family:"Nanum Myeongjo";font-size:11.5px;letter-spacing:.2em;padding:7px 14px;font-weight:700}
+/* 컬렉션 */
+.coll{margin-top:52px;display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+@media(max-width:760px){.coll{grid-template-columns:1fr}}
+.cl{background:#fff;border:1px solid var(--line);overflow:hidden;transition:transform .6s cubic-bezier(.32,.72,0,1),box-shadow .6s}
+.cl:hover{transform:translateY(-5px);box-shadow:0 24px 46px -28px rgba(44,38,34,.35)}
+.cl img{height:250px;width:100%;object-fit:cover;filter:sepia(.08)}
+.cl .b{padding:24px 26px 28px}
+.cl .no{font-family:"Nanum Myeongjo";font-size:11.5px;letter-spacing:.22em;color:var(--wine)}
+.cl h3{font-family:"Nanum Myeongjo";font-size:20px;font-weight:800;margin-top:8px}
+.cl .spec{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12.5px;color:var(--soft)}
+.cl .pr{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-family:"Nanum Myeongjo";font-size:19px;font-weight:800;color:var(--wine)}
+/* 히스토리 */
+.hist{margin-top:52px;background:#fff;border:1px solid var(--line);padding:36px}
+.hist h3{font-family:"Nanum Myeongjo";font-size:19px;font-weight:800;color:var(--wine)}
+.hs{display:grid;grid-template-columns:120px 1fr;gap:22px;padding:15px 0;border-bottom:1px solid var(--line);font-size:14px}
+.hs:last-child{border-bottom:0}
+.hs .k{font-family:"Nanum Myeongjo";font-weight:800}
+.hs p{color:var(--soft);font-size:13px}
+/* 위탁 */
+.consign{margin-top:52px;background:var(--wine);color:var(--cream);padding:42px;display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center}
+@media(max-width:720px){.consign{grid-template-columns:1fr}}
+.consign h3{font-family:"Nanum Myeongjo";font-size:22px;font-weight:800}
+.consign p{font-size:13.5px;color:#DDC7CB;margin-top:12px;max-width:520px}
+.consign .btn{background:var(--cream);color:var(--wine)}
+/* 기준 */
+.std{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:820px){.std{grid-template-columns:1fr}}
+.sd{border:1px solid var(--line);padding:30px;background:#fff;transition:border-color .35s}
+.sd:hover{border-color:var(--wine)}
+.sd .n{font-family:"Nanum Myeongjo";font-size:14px;color:var(--wine);font-weight:800}
+.sd b{display:block;font-family:"Nanum Myeongjo";font-size:17px;font-weight:800;margin-top:10px}
+.sd p{font-size:13px;color:var(--soft);margin-top:10px}
+.cta{text-align:center;padding:100px 24px;border-top:2px solid var(--wine)}
+.cta p{margin-top:14px;color:var(--soft);font-size:13.5px}
+.cta .tel{display:inline-block;margin-top:28px;font-family:"Nanum Myeongjo";font-size:clamp(24px,3.6vw,34px);font-weight:800;color:var(--wine);border-bottom:1px solid var(--wine);padding-bottom:8px;letter-spacing:.1em}
+footer{padding:44px 0;font-size:12px;color:var(--soft);border-top:1px solid var(--line)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes plate{0%,100%{opacity:.85}50%{opacity:1}}
+.hero figcaption{animation:plate 5s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">HERITAGE <b>AUTO</b></a>
+<ul><li><a href="#coll">컬렉션</a></li><li><a href="#hist">히스토리 리포트</a></li><li><a href="#consign">위탁 판매</a></li><li><a href="#std">매입 기준</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">상담 문의</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">CURATED PRE-OWNED · SINCE 2011</p>
+<h1 style="margin-top:16px">모든 차에는<br><em>지나온 시간</em>이 있습니다</h1>
+<p>헤리티지는 아무 차나 들이지 않습니다. 전 차량의 등록 이력, 정비 기록, 소유자 변경 내역을 문서로 정리해 함께 드립니다.</p>
+<div class="hero-cta"><a class="btn" href="tel:0507-000-0000">상담 문의</a><a class="btn ghost" href="#coll">컬렉션 보기</a></div>
+</div>
+<figure class="rv"><img src="./assets/car-3.jpg" alt="컬렉션 차량"><figcaption>HERITAGE COLLECTION</figcaption></figure>
+</div></section>
+
+<section id="coll" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><p class="kicker">COLLECTION</p><h2>이번 달 컬렉션</h2></div>
+<div class="coll rv">
+<div class="cl"><img src="./assets/car-3.jpg" alt="차량"><div class="b"><span class="no">No. 041</span><h3>대형 세단 · 정기 관리 이력 완비</h3><div class="spec"><span>2019년식</span><span>3.6만km</span><span>무사고</span><span>1인 신조</span></div><p class="pr">4,280만원</p></div></div>
+<div class="cl"><img src="./assets/car-5.jpg" alt="차량"><div class="b"><span class="no">No. 040</span><h3>대형 SUV · 정품 옵션 풀사양</h3><div class="spec"><span>2021년식</span><span>2.8만km</span><span>무사고</span><span>보증 잔여</span></div><p class="pr">5,690만원</p></div></div>
+<div class="cl"><img src="./assets/car-2.jpg" alt="차량"><div class="b"><span class="no">No. 039</span><h3>중형 세단 · 단일 소유자</h3><div class="spec"><span>2020년식</span><span>4.1만km</span><span>무사고</span><span>정비 기록 전량</span></div><p class="pr">2,940만원</p></div></div>
+<div class="cl"><img src="./assets/car-6.jpg" alt="차량"><div class="b"><span class="no">No. 038</span><h3>9인승 밴 · 법인 관리 차량</h3><div class="spec"><span>2021년식</span><span>5.2만km</span><span>단순교환 1</span><span>정비 이력 공개</span></div><p class="pr">3,480만원</p></div></div>
+</div>
+</div></section>
+
+<section id="hist" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">HISTORY REPORT</p><h2>모든 차에 이력서가 따라갑니다</h2><p class="sub">계약 전에 아래 항목을 전부 문서로 보여드립니다. 감출 것이 없어야 헤리티지에 들어옵니다.</p></div>
+<div class="hist rv">
+<h3>HERITAGE HISTORY REPORT — 포함 항목</h3>
+<div class="hs"><span class="k">등록 이력</span><div>최초 등록일 · 소유자 변경 횟수<p>법인 · 렌트 · 리스 이력 포함 여부까지 표기</p></div></div>
+<div class="hs"><span class="k">사고 · 보험</span><div>보험개발원 전산 조회 원본<p>단순교환과 골격 손상을 구분해 설명드립니다</p></div></div>
+<div class="hs"><span class="k">정비 기록</span><div>공식 서비스센터 정비 내역<p>소모품 교환 주기와 미이행 항목을 표시</p></div></div>
+<div class="hs"><span class="k">실주행 검증</span><div>계기판 · 정비 기록 대조<p>주행거리 조작 의심 시 매입하지 않습니다</p></div></div>
+<div class="hs"><span class="k">현재 상태</span><div>도장 두께 측정 · 하부 촬영<p>사진 40장 이상을 그대로 제공합니다</p></div></div>
+</div>
+</div></section>
+
+<section id="consign" style="padding-top:0"><div class="wrap">
+<div class="consign rv">
+<div><h3>위탁 판매</h3><p>아끼던 차를 헐값에 넘기기 아쉬우시다면 위탁을 검토해 보세요. 전시장에 두고 제값에 팔릴 때까지 저희가 관리합니다. 보관 · 세차 · 시운전 대응은 헤리티지가 맡습니다.</p></div>
+<a class="btn" href="tel:0507-000-0000">위탁 상담</a>
+</div>
+</div></section>
+
+<section id="std" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><p class="kicker">STANDARD</p><h2>매입 기준</h2></div>
+<div class="std rv">
+<div class="sd"><span class="n">基準 一</span><b>침수 · 전손 이력 무조건 제외</b><p>전산 조회에서 걸리면 시세와 무관하게 매입하지 않습니다.</p></div>
+<div class="sd"><span class="n">基準 二</span><b>정비 기록이 없으면 보류</b><p>어떻게 관리됐는지 모르는 차는 팔지 않습니다.</p></div>
+<div class="sd"><span class="n">基準 三</span><b>출고 전 정밀 점검</b><p>제휴 공업사에서 60항목 점검 후 소모품을 교체해 내보냅니다.</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<p class="kicker rv">VISIT</p>
+<h2 class="rv">천천히 보고 가세요</h2>
+<p class="rv">전시장 방문 예약제 · 매일 10:00 – 19:00 · 시승 사전 예약</p>
+<a class="tel rv" href="tel:0507-000-0000">0507 · 000 · 0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>헤리티지 오토</b> · 대표 유산기 · 자동차매매업 등록 제0000호<br>서울특별시 성동구 왕십리로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 매물 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

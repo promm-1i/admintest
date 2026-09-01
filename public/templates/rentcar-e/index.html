@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>직진렌트카 — 렌트카 홈페이지 템플릿 (디자인 E)</title>
+<meta name="description" content="두꺼운 테두리와 대형 숫자의 브루탈리스트 무드 렌트카 홈페이지 템플릿. 요금 우선 구성과 직설적 카피로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="직진렌트카 — 렌트카 홈페이지 템플릿 (디자인 E)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#141414;color:#F5E14C}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #141414;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--ink:#141414;--yellow:#F5E14C;--paper:#FBFBF6;--soft:#5C5C56;--line:#141414}
+body{background:var(--paper);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.6}
+.disp{font-family:"Black Han Sans",sans-serif;font-weight:400}
+.wrap{max-width:1080px;margin:0 auto;padding:0 22px}
+section{padding:0 0 72px}
+h2{font-family:"Black Han Sans";font-size:clamp(30px,5vw,52px);font-weight:400;line-height:1.1}
+.bar{background:var(--ink);color:var(--paper);font-family:"Black Han Sans";font-size:13px;letter-spacing:.2em;padding:10px 0}
+.bar .wrap{display:flex;justify-content:space-between}
+header{position:sticky;top:0;z-index:50;background:var(--yellow);border-bottom:4px solid var(--ink)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:62px}
+.logo{font-family:"Black Han Sans";font-size:23px}
+.nav ul{display:flex;gap:22px;list-style:none;font-size:14px;font-weight:700}
+.nav ul a{border-bottom:3px solid transparent}
+.nav ul a:hover{border-bottom-color:var(--ink)}
+.nav .tel{background:var(--ink);color:var(--yellow);font-family:"Black Han Sans";font-size:15px;padding:9px 18px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{border-bottom:4px solid var(--ink);padding:0}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:0;align-items:stretch}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero .left{padding:56px 32px 56px 0}
+@media(max-width:860px){.hero .left{padding:44px 0}}
+.hero h1{font-family:"Black Han Sans";font-size:clamp(42px,8vw,86px);font-weight:400;line-height:.98;letter-spacing:-.01em}
+.hero h1 mark{background:var(--yellow);padding:0 6px}
+.hero p{margin-top:22px;font-size:16px;font-weight:500;max-width:400px}
+.hero .cta{margin-top:28px;display:flex;gap:0;flex-wrap:wrap}
+.btn{display:inline-block;font-family:"Black Han Sans";font-size:19px;padding:16px 32px;border:4px solid var(--ink);transition:transform .2s}
+.btn:active{transform:translate(3px,3px)}
+.btn-k{background:var(--ink);color:var(--yellow)}
+.btn-y{background:var(--yellow);border-left-width:0}
+@media(max-width:520px){.btn-y{border-left-width:4px}}
+.hero .right{border-left:4px solid var(--ink);display:flex;align-items:center;justify-content:center;background:var(--yellow)}
+@media(max-width:860px){.hero .right{border-left:0;border-top:4px solid var(--ink);padding:30px 0}}
+.hero .big{text-align:center}
+.hero .big span{font-family:"Black Han Sans";font-size:14px;letter-spacing:.14em;display:block}
+.hero .big b{font-family:"Black Han Sans";font-size:clamp(64px,12vw,120px);line-height:.9;display:block;margin:6px 0}
+.hero .big small{font-size:13px;font-weight:700}
+/* 요금 그리드 */
+.sec-h{border-bottom:4px solid var(--ink);padding:36px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);border-left:4px solid var(--ink)}
+@media(max-width:820px){.grid{grid-template-columns:1fr}}
+.cell{border-right:4px solid var(--ink);border-bottom:4px solid var(--ink);padding:26px;transition:background .25s}
+.cell:hover{background:var(--yellow)}
+.cell img{width:100%;height:150px;object-fit:cover;border:3px solid var(--ink);filter:grayscale(1) contrast(1.1)}
+.cell:hover img{filter:none}
+.cell h3{font-family:"Black Han Sans";font-size:21px;margin-top:16px;font-weight:400}
+.cell p{font-size:13px;font-weight:500;color:var(--soft);margin-top:4px}
+.cell .won{font-family:"Black Han Sans";font-size:32px;margin-top:14px;display:block}
+.cell .won small{font-size:13px;font-weight:700}
+/* 팩트 */
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-left:4px solid var(--ink);border-top:4px solid var(--ink)}
+@media(max-width:820px){.facts{grid-template-columns:1fr 1fr}}
+.fc{border-right:4px solid var(--ink);border-bottom:4px solid var(--ink);padding:26px;background:var(--ink);color:var(--paper)}
+.fc b{font-family:"Black Han Sans";font-size:30px;color:var(--yellow);display:block}
+.fc span{font-size:12.5px;font-weight:500;margin-top:6px;display:block}
+/* 규칙 */
+.rules{border-left:4px solid var(--ink);border-top:4px solid var(--ink)}
+.ru{border-right:4px solid var(--ink);border-bottom:4px solid var(--ink);padding:22px 26px;display:grid;grid-template-columns:64px 1fr;gap:20px;align-items:baseline;transition:background .25s}
+.ru:hover{background:var(--yellow)}
+.ru .n{font-family:"Black Han Sans";font-size:26px}
+.ru b{font-size:17px;font-weight:900}
+.ru p{font-size:13.5px;color:var(--soft);font-weight:500;margin-top:4px}
+.cta-big{background:var(--yellow);border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);text-align:center;padding:64px 22px}
+.cta-big a{display:inline-block;margin-top:20px;font-family:"Black Han Sans";font-size:clamp(30px,6vw,54px);background:var(--ink);color:var(--yellow);padding:14px 34px}
+footer{padding:34px 0;font-size:12.5px;font-weight:500;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+@keyframes blinky{0%,100%{opacity:1}50%{opacity:.35}}
+.bar .live{animation:blinky 2s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="wrap"><span class="live">● 지금 예약 가능 12대</span><span>보험료 포함 · 추가금 없음</span></div></div>
+<header><div class="wrap nav">
+<a class="logo" href="#">직진렌트카</a>
+<ul><li><a href="#price">요금</a></li><li><a href="#fact">숫자</a></li><li><a href="#rule">규칙</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">전화</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div class="left">
+<h1>싸게.<br><mark>빠르게.</mark><br>말 그대로.</h1>
+<p>홍보 문구 없이 요금표부터 봅니다. 직진렌트카는 전화 한 통에 30분이면 차 키를 드립니다.</p>
+<div class="cta"><a class="btn btn-k" href="tel:0507-000-0000">전화 예약</a><a class="btn btn-y" href="#price">요금 보기</a></div>
+</div>
+<div class="right"><div class="big"><span>1일 최저</span><b>39,000</b><small>원 · 보험료 포함</small></div></div>
+</div></section>
+
+<section id="price">
+<div class="wrap sec-h"><h2>요금표</h2></div>
+<div class="wrap" style="padding:0"><div class="grid rv">
+<div class="cell"><img src="./assets/car-1.jpg" alt="경형"><h3>경형 · 소형</h3><p>레이 · 모닝 · 아반떼</p><span class="won">39,000<small>원/일</small></span></div>
+<div class="cell"><img src="./assets/car-2.jpg" alt="중형"><h3>중형</h3><p>쏘나타 · K5</p><span class="won">65,000<small>원/일</small></span></div>
+<div class="cell"><img src="./assets/car-3.jpg" alt="준대형"><h3>준대형</h3><p>그랜저 · K8</p><span class="won">89,000<small>원/일</small></span></div>
+<div class="cell"><img src="./assets/car-4.jpg" alt="SUV"><h3>SUV</h3><p>쏘렌토 · 싼타페</p><span class="won">99,000<small>원/일</small></span></div>
+<div class="cell"><img src="./assets/car-5.jpg" alt="대형SUV"><h3>대형 SUV</h3><p>팰리세이드</p><span class="won">125,000<small>원/일</small></span></div>
+<div class="cell"><img src="./assets/car-6.jpg" alt="승합"><h3>승합</h3><p>카니발 9인승</p><span class="won">119,000<small>원/일</small></span></div>
+</div></div>
+</section>
+
+<section id="fact">
+<div class="wrap sec-h"><h2>숫자</h2></div>
+<div class="wrap" style="padding:0"><div class="facts rv">
+<div class="fc"><b>30분</b><span>전화 후 출고까지</span></div>
+<div class="fc"><b>0원</b><span>숨은 추가 요금</span></div>
+<div class="fc"><b>42대</b><span>보유 차량</span></div>
+<div class="fc"><b>24H</b><span>긴급출동</span></div>
+</div></div>
+</section>
+
+<section id="rule">
+<div class="wrap sec-h"><h2>규칙</h2></div>
+<div class="wrap" style="padding:0"><div class="rules rv">
+<div class="ru"><span class="n">01</span><div><b>표시 요금이 최종 요금입니다</b><p>보험료 · 기본 주행거리 포함. 현장에서 붙는 돈 없습니다.</p></div></div>
+<div class="ru"><span class="n">02</span><div><b>연료는 받은 만큼만</b><p>게이지 사진으로 인수인계. 유류비 정산 없습니다.</p></div></div>
+<div class="ru"><span class="n">03</span><div><b>취소 수수료 없음</b><p>출고 2시간 전까지 전화 한 통이면 끝.</p></div></div>
+</div></div>
+</section>
+
+<div class="cta-big">
+<h2 class="rv">고민할 시간에<br>전화하세요</h2>
+<a class="rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>직진렌트카</b> · 대표 곧장 · 자동차대여사업 등록 제0000호<br>대구광역시 동구 동대구로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 요금 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>

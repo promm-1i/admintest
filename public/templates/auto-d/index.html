@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>태평양모터스 — 자동차정비소 홈페이지 템플릿 (디자인 D)</title>
+<meta name="description" content="빈티지 주유소 사인 무드의 자동차정비소 홈페이지 템플릿. 배지 로고, 정비 메뉴, 클래식카 정비 안내로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="태평양모터스 — 자동차정비소 홈페이지 템플릿 (디자인 D)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yeon+Sung&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#C4362F;color:#F7EFDF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #C4362F;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--cream:#F7EFDF;--red:#C4362F;--deep:#96261F;--navy:#26303C;--ink:#2A2520;--soft:#7C7264;--line:#E3D7C0}
+body{background:var(--cream);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.72}
+.disp{font-family:"Yeon Sung",cursive;font-weight:400}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+section{padding:86px 0}
+.tag{display:inline-block;font-family:"Yeon Sung";font-size:16px;background:var(--navy);color:var(--cream);padding:5px 18px;border-radius:99px;letter-spacing:.04em}
+h2{font-family:"Yeon Sung";font-size:clamp(28px,4.4vw,44px);font-weight:400;margin-top:14px;color:var(--red)}
+.sub{color:var(--soft);margin-top:10px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:var(--navy);color:var(--cream);border-bottom:5px solid var(--red)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"Yeon Sung";font-size:24px;color:var(--cream)}
+.logo b{color:#E9B23C;font-weight:400}
+.nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px;font-weight:700}
+.nav ul a:hover{color:#E9B23C}
+.nav .tel{background:var(--red);color:var(--cream);font-family:"Yeon Sung";font-size:16px;padding:8px 20px;border-radius:99px}
+@media(max-width:820px){.nav ul{display:none}}
+/* 배지 히어로 */
+.hero{padding:70px 0 62px;text-align:center;background:radial-gradient(circle at 50% 0%,#FBF5E9,var(--cream) 65%)}
+.badge-lg{width:150px;height:150px;margin:0 auto;border-radius:50%;background:var(--red);border:6px solid var(--navy);display:grid;place-items:center;position:relative;box-shadow:0 10px 0 rgba(38,48,60,.18)}
+.badge-lg::before{content:"";position:absolute;inset:10px;border:2px solid rgba(247,239,223,.6);border-radius:50%}
+.badge-lg span{font-family:"Yeon Sung";font-size:34px;color:var(--cream);line-height:1.1;text-align:center}
+.badge-lg small{display:block;font-family:"Noto Sans KR";font-size:9.5px;letter-spacing:.24em;font-weight:700}
+.hero h1{font-family:"Yeon Sung";font-size:clamp(34px,6vw,58px);font-weight:400;margin-top:26px;line-height:1.3;color:var(--navy)}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p{margin:14px auto 0;color:var(--soft);max-width:450px;font-size:15px}
+.hero-cta{margin-top:26px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-block;font-family:"Yeon Sung";font-size:18px;padding:12px 30px;border-radius:99px;border:3px solid var(--navy);transition:transform .3s cubic-bezier(.32,.72,0,1),box-shadow .3s;box-shadow:4px 4px 0 var(--navy)}
+.btn:active{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--navy)}
+.btn-r{background:var(--red);color:var(--cream)}
+.btn-c{background:var(--cream);color:var(--navy)}
+/* 스트라이프 */
+.stripe{height:14px;background:repeating-linear-gradient(-45deg,var(--red) 0 16px,var(--cream) 16px 32px);border-top:3px solid var(--navy);border-bottom:3px solid var(--navy)}
+/* 메뉴판 */
+.menu{margin-top:38px;background:var(--navy);color:var(--cream);border-radius:14px;padding:36px 34px;border:5px solid var(--red)}
+.menu h3{font-family:"Yeon Sung";font-size:26px;text-align:center;color:#E9B23C;letter-spacing:.06em}
+.mrow{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:14px 0;border-bottom:2px dotted rgba(247,239,223,.3);font-size:15px}
+.mrow:last-child{border-bottom:0}
+.mrow b{font-weight:700}
+.mrow span.d{display:block;font-size:12px;color:#A6B0BC;margin-top:3px}
+.mrow .pr{font-family:"Yeon Sung";font-size:20px;color:#E9B23C;white-space:nowrap}
+/* 클래식 */
+.classic{margin-top:38px;display:grid;grid-template-columns:1.1fr .9fr;gap:26px;align-items:center;background:#fff;border:3px solid var(--navy);border-radius:14px;overflow:hidden}
+@media(max-width:760px){.classic{grid-template-columns:1fr}}
+.classic img{width:100%;height:280px;object-fit:cover;filter:sepia(.25)}
+.classic .b{padding:30px 32px}
+.classic h3{font-family:"Yeon Sung";font-size:24px;color:var(--red)}
+.classic p{font-size:13.5px;color:var(--soft);margin-top:10px}
+.classic ul{list-style:none;margin-top:14px;display:grid;gap:8px;font-size:13.5px}
+.classic li::before{content:"◆ ";color:var(--red)}
+/* 멤버십 */
+.mem{margin-top:38px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.mem{grid-template-columns:1fr}}
+.mm{background:#fff;border:3px solid var(--navy);border-radius:14px;padding:24px;text-align:center;transition:transform .45s cubic-bezier(.32,.72,0,1)}
+.mm:hover{transform:translateY(-5px)}
+.mm .em{font-size:26px}
+.mm b{display:block;font-family:"Yeon Sung";font-size:18px;margin-top:10px;color:var(--red);font-weight:400}
+.mm p{font-size:12.5px;color:var(--soft);margin-top:6px}
+.cta{background:var(--red);color:var(--cream);text-align:center;padding:76px 24px;border-top:5px solid var(--navy)}
+.cta h2{color:var(--cream)}
+.cta p{margin-top:10px;font-size:14px;opacity:.9}
+.cta a{display:inline-block;margin-top:22px;background:var(--navy);color:#E9B23C;font-family:"Yeon Sung";font-size:24px;padding:12px 34px;border-radius:99px}
+footer{background:var(--navy);color:#A6B0BC;padding:38px 0;font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--cream)}
+@keyframes badge-t{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+.badge-lg{animation:badge-t 6s ease-in-out infinite}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">태평양<b>모터스</b></a>
+<ul><li><a href="#menu">정비 메뉴</a></li><li><a href="#classic">클래식카</a></li><li><a href="#mem">멤버십</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">전화하기</a>
+</div></header>
+
+<div class="hero">
+<div class="badge-lg"><span>太<small>SINCE 1983</small></span></div>
+<h1>사십 년째<br><em>같은 자리</em>에서</h1>
+<p>아버지가 맡기던 차를 이제 아들이 맡깁니다. 태평양모터스는 3대째 이 골목에서 차를 고칩니다.</p>
+<div class="hero-cta"><a class="btn btn-r" href="tel:0507-000-0000">정비 문의</a><a class="btn btn-c" href="#menu">메뉴 보기</a></div>
+</div>
+<div class="stripe" aria-hidden="true"></div>
+
+<section id="menu"><div class="wrap">
+<div class="rv" style="text-align:center"><span class="tag">SERVICE MENU</span><h2>정비 메뉴판</h2></div>
+<div class="menu rv">
+<h3>― 공임 정찰표 ―</h3>
+<div class="mrow"><div><b>엔진오일 교환</b><span class="d">합성유 · 필터 포함</span></div><span class="pr">50,000</span></div>
+<div class="mrow"><div><b>타이밍벨트 교체</b><span class="d">워터펌프 동시 교체 권장</span></div><span class="pr">280,000~</span></div>
+<div class="mrow"><div><b>브레이크 정비</b><span class="d">패드 · 디스크 연마</span></div><span class="pr">95,000~</span></div>
+<div class="mrow"><div><b>하체 부싱 교체</b><span class="d">승차감 개선 · 소음 제거</span></div><span class="pr">180,000~</span></div>
+<div class="mrow"><div><b>종합 점검</b><span class="d">40개 항목 · 사진 리포트</span></div><span class="pr">무료</span></div>
+</div>
+</div></section>
+
+<section id="classic" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><span class="tag">CLASSIC CAR</span><h2>오래된 차, 환영합니다</h2></div>
+<div class="classic rv">
+<img src="./assets/1.jpg" alt="정비 작업">
+<div class="b">
+<h3>단종 부품도 찾아드립니다</h3>
+<p>연식 20년 넘은 차를 거절당하셨나요? 태평양은 오래된 차를 더 반깁니다. 손으로 고칠 수 있는 시대의 차니까요.</p>
+<ul><li>단종 부품 수배 · 리빌트 대응</li><li>구형 캬브레터 · 배전기 세팅</li><li>녹 제거 · 판금 도장 연계</li><li>클래식카 정기 관리 프로그램</li></ul>
+</div>
+</div>
+</div></section>
+
+<section id="mem" style="padding-top:0"><div class="wrap">
+<div class="rv" style="text-align:center"><span class="tag">MEMBERSHIP</span><h2>단골 정기 관리</h2></div>
+<div class="mem rv">
+<div class="mm"><span class="em">🛢️</span><b>연 4회 오일 관리</b><p>연간 회원 등록 시 오일 교환 20% 할인</p></div>
+<div class="mm"><span class="em">📋</span><b>차량 카르테</b><p>정비 이력을 종이 장부에 그대로 기록해 드립니다</p></div>
+<div class="mm"><span class="em">🚨</span><b>단골 우선 배정</b><p>급하실 때 리프트를 먼저 비워 드립니다</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">차에 대해 물어볼 곳<br>하나쯤은 있어야죠</h2>
+<p class="rv">평일 08:30 – 19:00 · 토요일 08:30 – 15:00 · 일요일 휴무</p>
+<a class="rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>태평양모터스</b> · 대표 오태평 · 자동차관리사업 등록 제0000호<br>부산광역시 중구 대청로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 요금 · 연락처는 예시입니다.</div>
+</div></footer>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+</body>
+</html>
