@@ -122,6 +122,46 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 재구성: 차 사진 위로 요금이 올라오는 레이어 (hx-) ── */
+.hx-hero{position:relative;overflow:hidden;background:var(--ink);color:var(--paper);border-bottom-color:var(--yellow)}
+.hx-shot{position:absolute;top:0;bottom:0;right:-6%;width:64%;z-index:0;overflow:hidden}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 55%;transform-origin:62% 58%;animation:hxZoom 24s ease-in-out infinite alternate}
+@keyframes hxZoom{from{transform:scale(1.03)}to{transform:scale(1.16)}}
+.hx-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(94deg,#141414 0%,#141414 43%,rgba(20,20,20,.74) 56%,rgba(20,20,20,.2) 73%,rgba(20,20,20,0) 88%)}
+.hx-inner{position:relative;z-index:2;max-width:1080px;margin:0 auto;padding:clamp(52px,6.4vw,84px) 22px clamp(56px,7vw,94px)}
+.hx-copy{max-width:min(520px,46vw)}
+.hx-hero .hx-eyebrow{margin:0 0 14px;max-width:none;font-family:"Black Han Sans",sans-serif;font-size:13px;font-weight:400;letter-spacing:.16em;color:var(--yellow)}
+.hx-hero h1{font-size:clamp(40px,6.6vw,82px)}
+.hx-hero h1 mark{color:var(--ink)}
+.hx-hero .hx-lead{margin-top:20px;max-width:400px;color:#DEDED4}
+.hx-hero .btn{border-color:var(--yellow)}
+.hx-hero .btn-y{color:var(--ink)}
+.hx-price{position:absolute;z-index:3;right:max(22px,calc(50% - 518px));bottom:clamp(30px,4.6vw,58px);background:var(--yellow);color:var(--ink);border:4px solid var(--ink);padding:14px 24px 16px;transform:rotate(-1.6deg);box-shadow:12px 12px 0 rgba(0,0,0,.45)}
+.hx-price span{display:block;font-family:"Black Han Sans",sans-serif;font-size:12.5px;letter-spacing:.16em}
+.hx-price b{display:block;font-family:"Black Han Sans",sans-serif;font-size:clamp(44px,5.6vw,78px);line-height:.92;margin:2px 0}
+.hx-price small{display:block;font-size:12.5px;font-weight:700}
+@media(max-width:940px){
+ .hx-hero{display:flex;flex-direction:column}
+ .hx-shot{position:relative;order:1;right:auto;top:auto;bottom:auto;width:100%;aspect-ratio:16/9}
+ .hx-shot img{position:absolute;left:0;top:-4%;width:100%;height:108%;object-position:50% 50%;transform-origin:center;animation:hxPan 24s ease-in-out infinite alternate}
+ .hx-veil{display:none}
+ .hx-price{position:relative;order:2;right:auto;bottom:auto;border:0;transform:none;box-shadow:none;display:flex;align-items:baseline;justify-content:center;gap:10px;flex-wrap:wrap;padding:11px 20px 13px}
+ .hx-price span{font-size:12px}
+ .hx-price b{font-size:clamp(30px,8.6vw,40px);margin:0}
+ .hx-price small{font-size:12px}
+ .hx-inner{order:3;padding:26px 22px 40px}
+ .hx-copy{max-width:none}
+ .hx-hero h1{font-size:clamp(36px,10vw,54px)}
+ .hx-hero .hx-lead{margin-top:16px;font-size:15px}
+ .hx-hero .cta{margin-top:22px}
+}
+@keyframes hxPan{from{transform:translateY(-3.2%)}to{transform:translateY(3.2%)}}
+@media(max-width:560px){
+ .hx-hero .cta{flex-wrap:nowrap}
+ .hx-hero .cta .btn{flex:1 1 0;text-align:center;font-size:18px;padding:16px 8px}
+}
+@media(prefers-reduced-motion:reduce){.hx-shot img{animation:none;transform:none}}
 </style>
 </head>
 <body>
@@ -133,14 +173,17 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">전화</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div class="left">
+<section class="hero hx-hero">
+<div class="hx-shot"><img src="./assets/car-1.jpg" alt="직진렌트카 경형 · 소형 렌트 차량"></div>
+<div class="hx-veil" aria-hidden="true"></div>
+<div class="hx-inner"><div class="hx-copy">
+<p class="hx-eyebrow">대구 동구 · 연중무휴 08–20</p>
 <h1>싸게.<br><mark>빠르게.</mark><br>말 그대로.</h1>
-<p>홍보 문구 없이 요금표부터 봅니다. 직진렌트카는 전화 한 통에 30분이면 차 키를 드립니다.</p>
+<p class="hx-lead">홍보 문구 없이 요금표부터 봅니다. 직진렌트카는 전화 한 통에 30분이면 차 키를 드립니다.</p>
 <div class="cta"><a class="btn btn-k" href="tel:010-4894-4905">전화 예약</a><a class="btn btn-y" href="#price">요금 보기</a></div>
-</div>
-<div class="right"><div class="big"><span>1일 최저</span><b>39,000</b><small>원 · 보험료 포함</small></div></div>
-</div></section>
+</div></div>
+<div class="hx-price"><span>1일 최저</span><b>39,000</b><small>원 · 보험료 포함</small></div>
+</section>
 
 <section id="price">
 <div class="wrap sec-h"><h2>요금표</h2></div>

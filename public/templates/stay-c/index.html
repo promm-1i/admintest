@@ -153,6 +153,82 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hero rebuild: 하루치 스크랩 (hx-) ── */
+.hero{padding:clamp(40px,5.2vw,74px) 0 clamp(56px,6vw,86px);text-align:left;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;right:-8%;top:-16%;width:76%;height:132%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(251,248,239,.94),rgba(251,248,239,0))}
+
+.hero .hx-shell{position:relative;z-index:1;max-width:1200px;
+  padding-left:clamp(20px,4vw,48px);padding-right:clamp(20px,4vw,48px);
+  display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);
+  grid-template-areas:"head stage" "tail stage";
+  column-gap:clamp(24px,4.2vw,64px);row-gap:0;align-items:start}
+.hero .hx-head{grid-area:head;align-self:end;max-width:420px}
+.hero .hx-stage{grid-area:stage;align-self:center;width:100%}
+.hero .hx-tail{grid-area:tail;align-self:start;max-width:420px;
+  margin-top:26px;padding-top:22px;border-top:1.5px dashed var(--line)}
+
+.hero .date{font-size:25px;line-height:1.4}
+.hero h1{font-size:clamp(30px,3.2vw,41px);line-height:1.45;margin-top:12px}
+.hero .memo{font-size:24px;line-height:1.5;margin-top:16px;transform:rotate(-.8deg)}
+
+.hero .hx-facts{list-style:none;margin-top:20px;display:grid;gap:7px;
+  font-size:13px;line-height:1.55;color:var(--ink)}
+.hero .hx-facts li{display:flex;align-items:baseline;gap:9px}
+.hero .hx-facts li::before{content:"";flex:none;width:5px;height:5px;border-radius:50%;
+  background:var(--green);transform:translateY(-3px)}
+.hero .hx-facts b{flex:none;font-weight:700}
+
+.hero .hx-cluster{position:relative;width:100%;aspect-ratio:1 / .92;
+  transform:rotate(var(--hx-rot,0deg));transform-origin:52% 56%;
+  transition:transform 1.1s cubic-bezier(.32,.72,0,1)}
+.hero .hx-shot{position:absolute;background:#fff;padding:9px 9px 0;
+  box-shadow:0 12px 30px rgba(74,59,42,.17);transform:rotate(var(--rot,0deg))}
+.hero .hx-shot::before{content:"";position:absolute;top:-11px;left:50%;width:62px;height:21px;
+  background:var(--tape);transform:translateX(-50%) rotate(var(--tape-r,-2deg))}
+.hero .hx-frame{display:block;overflow:hidden;aspect-ratio:var(--ar, 4 / 3)}
+.hero .hx-frame img{width:100%;height:100%;object-fit:cover;
+  object-position:var(--op,50% 50%);transform:scale(var(--z,1));transform-origin:var(--op,50% 50%)}
+.hero .hx-shot figcaption{display:flex;align-items:center;gap:7px;padding:9px 3px 11px;
+  font-family:"Nanum Pen Script",cursive;font-size:18px;line-height:1.3;color:#5B4A35;
+  white-space:nowrap;overflow:hidden}
+.hero .hx-shot figcaption i{flex:none;font-style:normal;font-family:"Gowun Batang",serif;
+  font-size:10.5px;font-weight:700;letter-spacing:.04em;line-height:1.55;
+  color:#fff;background:var(--rust);padding:2px 7px;border-radius:3px}
+
+.hero .hx-a{left:0;top:0;width:46%;--rot:-2.4deg;--tape-r:-3deg;--ar:.78 / 1;--op:50% 44%;--z:1.02}
+.hero .hx-c{left:29%;bottom:0;width:55%;--rot:-1.6deg;--tape-r:2.6deg;--ar:1.62 / 1;--op:54% 64%;--z:1.14}
+.hero .hx-b{right:1%;top:24%;width:37%;--rot:3.4deg;--tape-r:-1.4deg;--ar:1.15 / 1;--op:58% 76%;--z:1.55}
+
+@keyframes hx-drift{0%,100%{transform:rotate(var(--rot,0deg)) translateY(0)}
+  50%{transform:rotate(var(--rot,0deg)) translateY(-4px)}}
+.hero .hx-b{animation:hx-drift 8s ease-in-out infinite}
+
+@media(max-width:760px){
+  .hero{padding:30px 0 46px}
+  .hero .hx-shell{grid-template-columns:minmax(0,1fr);
+    grid-template-areas:"head" "stage" "tail";column-gap:0}
+  .hero .hx-head,.hero .hx-tail{max-width:none;align-self:auto}
+  .hero .hx-stage{align-self:auto;margin-top:20px}
+  .hero .date{font-size:24px}
+  .hero h1{font-size:clamp(29px,7.4vw,34px);line-height:1.4}
+  .hero .memo{font-size:24px;line-height:1.45;margin-top:14px}
+  .hero .hx-tail{margin-top:22px;padding-top:18px}
+  .hero .hx-tail .btn-g{display:block;text-align:center;padding:15px 24px}
+  .hero .hx-cluster{aspect-ratio:auto;height:300px;transform:none}
+  .hero .hx-c{display:none}
+  .hero .hx-a{left:0;top:0;width:62%;--rot:-1.2deg}
+  .hero .hx-b{right:2%;top:auto;bottom:0;width:47%;--rot:1.7deg;--z:1.22;--op:52% 74%}
+  .hero .hx-shot{padding:7px 7px 0}
+  .hero .hx-shot figcaption{font-size:16px;padding:7px 2px 9px;gap:6px}
+  .hero .hx-shot figcaption i{font-size:9.5px;padding:2px 6px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .hero .hx-b{animation:none}
+  .hero .hx-cluster{transform:none;transition:none}
+}
 </style>
 </head>
 <body>
@@ -170,18 +246,40 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </header>
 
 <section class="hero">
-  <div class="wrap">
-    <p class="date">— 어느 좋은 날, 강원도 홍천 —</p>
-    <h1>하루를 천천히 넘기는<br><span class="grn">숲속의 일기장</span></h1>
-    <p class="memo">“도착하면 일단 낮잠부터 자세요. 그러라고 있는 곳이에요.”</p>
-    <div class="polas rv">
-      <div class="pola p1"><img src="./assets/hero.jpg" alt="펜션 전경"><span class="cap">첫째 날, 도착!</span></div>
-      <div class="pola p2"><img src="./assets/enjoy-1.jpg" alt="창가의 티타임"><span class="cap">창가에서 차 한 잔</span></div>
-      <div class="pola p3"><img src="./assets/enjoy-3.jpg" alt="밤의 모닥불"><span class="cap">밤엔 불멍 <svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c4 0 6-2.6 6-6 0-4-3-6-4-9-2 2-2 4-3 4s-1-1.5-1-3c-2 1.5-4 4-4 8 0 3.4 2 6 6 6Z"/></svg></span></div>
+  <div class="wrap hx-shell">
+
+    <div class="hx-head">
+      <p class="date">— 어느 좋은 날, 강원도 홍천 —</p>
+      <h1>하루를 천천히 넘기는<br><span class="grn">숲속의 일기장</span></h1>
+      <p class="memo">“도착하면 일단 낮잠부터 자세요. 그러라고 있는 곳이에요.”</p>
     </div>
-    <div class="hero-cta rv">
+
+    <div class="hx-stage rv">
+      <div class="hx-cluster">
+        <figure class="hx-shot hx-a">
+          <span class="hx-frame"><img src="./assets/hero.jpg" alt="숲에 둘러싸인 펜션 전경과 앞마당 테라스"></span>
+          <figcaption><i>오후 3시</i>숲길 끝, 도착</figcaption>
+        </figure>
+        <figure class="hx-shot hx-c">
+          <span class="hx-frame"><img src="./assets/room-1.jpg" alt="창밖 자작나무 숲이 보이는 객실의 정돈된 침구"></span>
+          <figcaption><i>밤 10시</i>삶아 말린 이불 속으로</figcaption>
+        </figure>
+        <figure class="hx-shot hx-b">
+          <span class="hx-frame"><img src="./assets/enjoy-1.jpg" alt="창가 나무 탁자에 놓인 찻주전자와 잔"></span>
+          <figcaption><i>저녁 6시</i>창가에서 차 한 잔</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="hx-tail">
       <a class="btn-g" href="tel:010-4894-4905">빈 날짜 물어보기</a>
+      <ul class="hx-facts">
+        <li><b>방 세 칸</b> 전 객실 개별 바비큐장</li>
+        <li><b>800평 마당</b> 저녁 8시 모닥불</li>
+        <li><b>전화 · 문자</b> 07:00 – 22:00</li>
+      </ul>
     </div>
+
   </div>
 </section>
 
@@ -279,6 +377,19 @@ document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 const _rvs=[...document.querySelectorAll('.rv')];
 _rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}});
 
+// 히어로 콜라주: 커서 위치에 따라 덩어리 전체가 ±1.5도만 펴진다
+(function(){
+  const hero=document.querySelector('.hero'), cluster=document.querySelector('.hx-cluster');
+  if(!hero||!cluster) return;
+  if(!matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+  hero.addEventListener('pointermove',e=>{
+    const r=hero.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-.5;
+    cluster.style.setProperty('--hx-rot',(x*3).toFixed(2)+'deg');
+  });
+  hero.addEventListener('pointerleave',()=>cluster.style.setProperty('--hx-rot','0deg'));
+})();
 </script>
 </body>
 </html>

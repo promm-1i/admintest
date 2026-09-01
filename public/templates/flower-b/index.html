@@ -90,6 +90,47 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 콜라주 (hx-) ─────────────────────────────────────── */
+.hero{padding:76px 0 92px;text-align:left;background:var(--w)}
+.hero>.wrap{display:grid;grid-template-columns:42% 1fr;gap:44px;align-items:center}
+.hx-copy{max-width:420px}
+.hero .hx-kicker{margin:0;font-size:11px;color:var(--green);letter-spacing:.4em}
+.hero .hx-title{margin-top:16px;font-size:clamp(30px,3vw,40px)}
+.hero .hx-lead{margin:18px 0 0;max-width:380px;color:#66736A;font-size:15px}
+.hx-meta{list-style:none;display:flex;flex-wrap:wrap;margin-top:20px;font-size:12px;letter-spacing:.05em;color:var(--green)}
+.hx-meta li+li{margin-left:14px;padding-left:14px;border-left:1px solid var(--line)}
+.hx-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+
+.hx-stage{position:relative}
+.hx-cluster{position:relative;width:100%;aspect-ratio:1/.94;rotate:-1.2deg;transition:rotate .9s cubic-bezier(.32,.72,0,1)}
+.hx-stage:hover .hx-cluster{rotate:0deg}
+.hx-plate{position:absolute;right:0;top:4%;width:82%;height:86%;background:var(--mist);border-radius:28px}
+.hx-shot{position:absolute;overflow:hidden;border:6px solid var(--w);border-radius:16px;background:var(--mist);box-shadow:0 28px 54px -30px rgba(38,48,42,.55)}
+.hx-shot img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.hx-shot figcaption{position:absolute;left:10px;bottom:10px;background:rgba(38,48,42,.92);color:var(--w);font-size:11px;letter-spacing:.05em;line-height:1.5;padding:5px 12px;border-radius:99px}
+.hx-shot--scene{left:0;top:3%;width:50%;aspect-ratio:4/5;rotate:-3deg;z-index:2}
+.hx-shot--bloom{left:53%;top:0;width:43%;aspect-ratio:3/4;rotate:3deg;z-index:1;animation:hx-lift 8s ease-in-out infinite}
+.hx-shot--detail{left:29%;top:60%;width:52%;aspect-ratio:16/10;rotate:-1.5deg;z-index:3}
+.hx-shot--detail img{object-position:50% 54%;transform:scale(1.5)}
+@keyframes hx-lift{0%,100%{translate:0 0}50%{translate:0 -5px}}
+
+@media(max-width:820px){
+.hero{padding:34px 0 54px}
+.hero>.wrap{grid-template-columns:1fr;gap:28px}
+.hx-copy{max-width:none}
+.hero .hx-lead{max-width:none;font-size:14.5px}
+.hx-cluster{aspect-ratio:1/.84;rotate:-.6deg}
+.hx-plate{display:none}
+.hx-shot{border-width:5px;border-radius:14px;box-shadow:0 20px 38px -24px rgba(38,48,42,.5)}
+.hx-shot--scene{left:2%;top:0;width:56%;rotate:-1.5deg}
+.hx-shot--bloom{left:46%;top:15%;width:49%;rotate:1.5deg}
+.hx-shot--detail{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+.hx-shot--bloom{animation:none}
+.hx-cluster{transition:none}
+}
 </style>
 </head>
 <body>
@@ -101,15 +142,31 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </div></header>
 
 <section class="hero"><div class="wrap">
-<p class="kicker">FLOWER ATELIER · 연남</p>
-<h1 style="margin-top:18px">그날 새벽 시장에서<br><em>가장 싱싱한 것들로</em></h1>
-<p>보태니크는 수입 프리저브드보다 그 주의 생화를 믿습니다. 화요일과 금요일, 꽃이 바뀝니다.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">주문 문의하기</a><a class="btn ghost" href="#subscribe">꽃 구독 보기</a></div>
-<div class="hero-gal rv">
-<img class="s" src="./assets/2.jpg" alt="스탠드 화환">
-<img class="m" src="./assets/1.jpg" alt="시즌 부케">
-<img class="s" src="./assets/3.jpg" alt="꽃 상자">
+
+<div class="hx-copy">
+<p class="kicker hx-kicker">FLOWER ATELIER · 연남</p>
+<h1 class="hx-title">그날 새벽 시장에서<br><em>가장 싱싱한 것들로</em></h1>
+<p class="hx-lead">보태니크는 수입 프리저브드보다 그 주의 생화를 믿습니다. 화요일과 금요일, 꽃이 바뀝니다.</p>
+<ul class="hx-meta"><li>화 · 금 새벽 입고</li><li>당일 부케 14시 마감</li></ul>
+<div class="hx-cta"><a class="btn" href="tel:010-4894-4905">주문 문의하기</a><a class="btn ghost" href="#subscribe">꽃 구독 보기</a></div>
 </div>
+
+<div class="hx-stage rv">
+<div class="hx-cluster">
+<span class="hx-plate" aria-hidden="true"></span>
+<figure class="hx-shot hx-shot--scene">
+<img src="./assets/7.jpg" alt="새벽에 들어온 꽃을 작업대에서 가위로 손질하는 모습">
+<figcaption>오늘 아침 손질</figcaption>
+</figure>
+<figure class="hx-shot hx-shot--bloom">
+<img src="./assets/1.jpg" alt="크라프트지로 감싼 완성 부케">
+</figure>
+<figure class="hx-shot hx-shot--detail">
+<img src="./assets/4.jpg" alt="이번 주 들어온 꽃송이 클로즈업">
+</figure>
+</div>
+</div>
+
 </div></section>
 
 <section id="season" style="padding-top:0"><div class="wrap">

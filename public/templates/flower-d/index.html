@@ -95,6 +95,109 @@ footer b{color:var(--cream)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== 히어로 재구성 : 어둠 속의 오브젝트 ===== */
+.hero.hx-hero{position:relative;overflow:hidden;padding:72px 0 88px}
+.hx-hero .hx-stage{display:grid;grid-template-columns:minmax(0,1fr);gap:0;align-items:center;position:relative}
+.hx-hero .hx-stage::before{content:"";position:absolute;z-index:0;top:50%;left:44%;width:62%;height:118%;transform:translateY(-50%);pointer-events:none;background:radial-gradient(closest-side,rgba(142,43,63,.32),rgba(142,43,63,.11) 56%,rgba(22,36,29,0) 100%)}
+
+.hx-obj{grid-area:1/1;justify-self:end;position:relative;overflow:hidden;width:66%;height:clamp(400px,44vw,520px);animation:hxFade 1.15s ease .06s backwards}
+.hx-hero .hx-obj img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:44% 40%;filter:brightness(.6) contrast(1.16) saturate(.62) sepia(.16) hue-rotate(-12deg)}
+.hx-fade{position:absolute;inset:0;pointer-events:none;background:linear-gradient(96deg,var(--dark) 0 8%,rgba(22,36,29,.84) 15%,rgba(22,36,29,.46) 30%,rgba(22,36,29,.12) 48%,rgba(22,36,29,0) 66%),linear-gradient(to top,var(--dark) 0 3%,rgba(22,36,29,0) 26%),linear-gradient(190deg,rgba(93,26,44,.30) 0%,rgba(22,36,29,.28) 60%,rgba(22,36,29,.52) 100%)}
+
+.hx-chips{position:absolute;right:18px;bottom:18px;z-index:3;list-style:none;margin:0;padding:0;display:grid;gap:9px;justify-items:end}
+.hx-chip{min-width:168px;background:var(--panel);border:1px solid var(--line);padding:11px 15px 12px;box-shadow:0 6px 16px rgba(0,0,0,.34);transition:transform .35s cubic-bezier(.32,.72,0,1),box-shadow .35s,border-color .35s;animation:hxRise .8s cubic-bezier(.32,.72,0,1) backwards}
+.hx-chip:nth-child(1){animation-delay:.45s}
+.hx-chip:nth-child(2){animation-delay:.65s}
+.hx-chip:nth-child(3){animation-delay:.85s}
+.hx-chip:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(0,0,0,.55);border-color:var(--wine)}
+.hx-k{display:block;font-size:9.5px;letter-spacing:.26em;color:var(--soft);line-height:1.6}
+.hx-v{display:block;margin-top:3px;font-family:"Diphylleia",serif;font-size:14px;letter-spacing:.05em;color:var(--cream);line-height:1.5;white-space:nowrap}
+
+.hx-copy{grid-area:1/1;justify-self:start;position:relative;z-index:2;width:42%;animation:hxFade 1s ease backwards}
+.hx-hero .hx-kicker{margin:0;font-size:11px;letter-spacing:.42em;color:var(--sage);line-height:1.8}
+.hx-hero .hx-h1{margin-top:14px;font-size:clamp(30px,3.6vw,42px);line-height:1.42}
+.hx-hero .hx-lead{margin-top:18px;max-width:min(340px,88%);font-size:14.5px;color:var(--soft)}
+.hx-hero .hero-cta{margin-top:26px}
+
+@keyframes hxFade{from{opacity:0}}
+@keyframes hxRise{from{opacity:0;transform:translateY(16px)}}
+
+@media(max-width:880px){
+.hero.hx-hero{padding:20px 0 68px}
+.hx-hero .hx-stage{display:block}
+.hx-hero .hx-stage::before{top:20%;left:50%;width:88%;height:36%;transform:translate(-50%,-50%)}
+.hx-obj{justify-self:stretch;width:auto;height:auto;aspect-ratio:16/10;margin:0 -24px}
+.hx-hero .hx-obj img{object-position:50% 38%}
+.hx-fade{background:linear-gradient(to top,var(--dark) 0 4%,rgba(22,36,29,0) 34%),linear-gradient(to bottom,rgba(22,36,29,.52) 0 2%,rgba(22,36,29,0) 24%),linear-gradient(190deg,rgba(93,26,44,.28) 0%,rgba(22,36,29,.30) 58%,rgba(22,36,29,.52) 100%)}
+.hx-chips{right:auto;left:48px;bottom:14px}
+.hx-chip:nth-child(n+2){display:none}
+.hx-copy{justify-self:stretch;width:auto;margin-top:20px}
+.hx-hero .hx-h1{margin-top:12px;font-size:clamp(27px,7.2vw,34px);line-height:1.4}
+.hx-hero .hx-lead{margin-top:16px;max-width:none}
+.hx-hero .hero-cta{margin-top:20px}
+}
+
+@media(prefers-reduced-motion:reduce){
+.hx-obj,.hx-copy,.hx-chip{animation:none}
+.hx-chip{transition:none}
+.hx-chip:hover{transform:none}
+}
+
+/* ===== 히어로 재구성 v2 : 풀블리드 오브젝트 ===== */
+.hero.hx-hero{position:relative;overflow:hidden;padding:0;isolation:isolate}
+.hx-bleed{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hx-hero .hx-shot{width:100%;height:100%;object-fit:cover;object-position:52% 40%;filter:brightness(.44) contrast(1.22) saturate(.44) sepia(.26) hue-rotate(-26deg);animation:hxIn 1.3s ease both}
+.hx-veil{position:absolute;inset:0;pointer-events:none;background:
+ linear-gradient(101deg,rgba(17,28,23,.9) 0%,rgba(17,28,23,.84) 26%,rgba(17,28,23,.55) 48%,rgba(17,28,23,.14) 70%,rgba(17,28,23,.34) 100%),
+ linear-gradient(to bottom,rgba(22,36,29,.8) 0%,rgba(22,36,29,0) 24%),
+ linear-gradient(to top,var(--dark) 0%,rgba(22,36,29,.74) 12%,rgba(22,36,29,0) 42%),
+ radial-gradient(62% 72% at 64% 44%,rgba(142,43,63,.26),rgba(22,36,29,0) 72%),
+ linear-gradient(rgba(66,18,33,.4),rgba(24,14,18,.46))}
+
+.hero.hx-hero .hx-inner{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;grid-template-columns:none;gap:0;min-height:clamp(540px,76vh,700px);padding-top:88px;padding-bottom:40px}
+.hx-text{width:100%;max-width:min(560px,64%);animation:hxIn 1s ease .1s both}
+.hx-hero .hx-eyebrow{font-size:11px;letter-spacing:.42em;color:var(--sage);line-height:1.8}
+.hx-hero .hx-title{margin-top:14px;font-family:"Diphylleia",serif;font-weight:400;font-size:clamp(31px,3.8vw,46px);line-height:1.42;letter-spacing:.03em}
+.hx-hero .hx-title em{font-style:normal;color:#D98B9C}
+.hx-hero .hx-sub{margin-top:18px;font-size:14.5px;color:#B6C4B9;max-width:400px;text-shadow:0 1px 12px rgba(11,19,15,.8)}
+.hero.hx-hero .hero-cta{margin-top:28px}
+
+.hx-meta{list-style:none;margin:44px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.hx-fact{background:rgba(20,32,26,.78);border:1px solid var(--line);padding:11px 18px 12px;transition:transform .35s cubic-bezier(.32,.72,0,1),box-shadow .35s,border-color .35s;animation:hxUp .8s cubic-bezier(.32,.72,0,1) both}
+.hx-fact:nth-child(1){animation-delay:.5s}
+.hx-fact:nth-child(2){animation-delay:.7s}
+.hx-fact:nth-child(3){animation-delay:.9s}
+.hx-fact:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(0,0,0,.5);border-color:var(--wine)}
+.hx-t{display:block;font-size:9.5px;letter-spacing:.26em;color:var(--soft);line-height:1.6}
+.hx-d{display:block;margin-top:2px;font-family:"Diphylleia",serif;font-size:14px;letter-spacing:.05em;color:var(--cream);line-height:1.5;white-space:nowrap}
+
+@keyframes hxIn{from{opacity:0}}
+@keyframes hxUp{from{opacity:0;transform:translateY(14px)}}
+
+@media(max-width:880px){
+.hero.hx-hero{padding:0 0 56px}
+.hx-bleed{position:relative;inset:auto;width:100%;height:auto;aspect-ratio:16/10}
+.hx-hero .hx-shot{position:absolute;inset:0;height:100%;object-position:52% 36%;filter:brightness(.5) contrast(1.18) saturate(.48) sepia(.24) hue-rotate(-26deg)}
+.hx-veil{background:
+ linear-gradient(to bottom,rgba(22,36,29,.62) 0%,rgba(22,36,29,0) 26%),
+ linear-gradient(to top,var(--dark) 0%,rgba(22,36,29,.72) 16%,rgba(22,36,29,0) 52%),
+ radial-gradient(70% 60% at 52% 40%,rgba(142,43,63,.2),rgba(22,36,29,0) 74%),
+ linear-gradient(rgba(66,18,33,.38),rgba(24,14,18,.44))}
+.hero.hx-hero .hx-inner{display:block;min-height:0;padding-top:0;padding-bottom:0;margin-top:-30px}
+.hx-text{max-width:none}
+.hx-hero .hx-title{margin-top:12px;font-size:clamp(26px,7vw,33px);line-height:1.42}
+.hx-hero .hx-sub{margin-top:15px;max-width:none}
+.hero.hx-hero .hero-cta{margin-top:22px}
+.hx-meta{margin-top:24px}
+.hx-fact:nth-child(n+2){display:none}
+}
+
+@media(prefers-reduced-motion:reduce){
+.hx-shot,.hx-text,.hx-fact{animation:none}
+.hx-fact{transition:none}
+.hx-fact:hover{transform:none}
+}
 </style>
 </head>
 <body>
@@ -105,15 +208,25 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<p class="kicker">FLOWER ATELIER · SEOUL</p>
-<h1 style="margin-top:16px">밝은 꽃만<br>꽃이 아닙니다<br><em>어두운 색도 아름답습니다</em></h1>
-<p>느와르 플레르는 버건디, 다크 퍼플, 브라운 톤의 꽃을 다룹니다. 화려하지 않고 깊은 쪽을 선택하는 분들을 위해.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">주문 문의</a><a class="btn line" href="#signature">작업 보기</a></div>
+<section class="hero hx-hero">
+<div class="hx-bleed">
+<img class="hx-shot" src="./assets/1.jpg" alt="버건디와 다크 퍼플 톤으로 짠 느와르 플레르 시그니처 부케">
+<span class="hx-veil" aria-hidden="true"></span>
 </div>
-<figure class="rv"><img src="./assets/1.jpg" alt="다크 무드 부케"><figcaption>SIGNATURE — AUTUMN 2026</figcaption></figure>
-</div></section>
+<div class="wrap hx-inner">
+<div class="hx-text">
+<p class="hx-eyebrow">FLOWER ATELIER · SEOUL</p>
+<h1 class="hx-title">밝은 꽃만<br>꽃이 아닙니다<br><em>어두운 색도 아름답습니다</em></h1>
+<p class="hx-sub">느와르 플레르는 버건디, 다크 퍼플, 브라운 톤의 꽃을 다룹니다. 화려하지 않고 깊은 쪽을 선택하는 분들을 위해.</p>
+<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">주문 문의</a><a class="btn line" href="#signature">작업 보기</a></div>
+<ul class="hx-meta">
+<li class="hx-fact"><span class="hx-t">TONE</span><span class="hx-d">다크 톤 전문</span></li>
+<li class="hx-fact"><span class="hx-t">MADE</span><span class="hx-d">당일 제작</span></li>
+<li class="hx-fact"><span class="hx-t">SIGNATURE</span><span class="hx-d">AUTUMN 2026</span></li>
+</ul>
+</div>
+</div>
+</section>
 
 <section id="signature" style="padding-top:0"><div class="wrap">
 <div class="rv" style="text-align:center"><p class="kicker">SIGNATURE</p><h2>세 가지 시그니처</h2></div>

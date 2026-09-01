@@ -88,6 +88,62 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx: 히어로 재구성 — 야간 타석 풀블리드 ─────────────────── */
+.hx-hero{position:relative;overflow:hidden;padding:0;background:#070C09;
+ min-height:clamp(560px,80vh,760px);display:flex;flex-direction:column;justify-content:flex-end;
+ margin-bottom:clamp(54px,7vw,76px)}
+.hx-shot{position:absolute;inset:0;z-index:0;width:100%;height:100%;max-width:none;
+ object-fit:cover;object-position:50% 50%;
+ transform:scale(1.34) translateX(10.5%);
+ animation:hx-drift 23s cubic-bezier(.45,0,.55,1) infinite alternate;
+ will-change:transform;backface-visibility:hidden}
+@keyframes hx-drift{from{transform:scale(1.34) translateX(10.5%)}to{transform:scale(1.42) translateX(10.5%)}}
+@keyframes hx-drift-t{from{transform:scale(1.14) translateX(5%)}to{transform:scale(1.21) translateX(5%)}}
+@keyframes hx-drift-m{from{transform:scale(1.03)}to{transform:scale(1.09)}}
+.hx-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:radial-gradient(122% 104% at 4% 97%,rgba(6,11,8,.60) 0%,rgba(6,11,8,.46) 30%,rgba(6,11,8,.16) 58%,rgba(6,11,8,0) 80%)}
+.hx-lede{position:relative;z-index:2;width:100%;padding-top:clamp(120px,20vh,180px);padding-bottom:clamp(46px,6vh,66px)}
+.hx-lede>*{max-width:560px}
+.hx-hero h1{font-size:clamp(36px,5.6vw,60px);font-weight:800;line-height:1.22;letter-spacing:-.025em;
+ margin-top:14px;text-shadow:0 2px 26px rgba(4,8,5,.6)}
+.hx-hero h1 b{color:var(--neon)}
+.hx-body{margin-top:16px;font-size:15.5px;color:rgba(237,243,238,.9);max-width:456px;
+ text-shadow:0 1px 16px rgba(4,8,5,.7)}
+.hx-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-hero .btn-l{background:#101A13;border-color:#33493C}
+.hx-hero .btn-l:hover{border-color:var(--neon);color:var(--neon)}
+.hx-facts{list-style:none;display:flex;flex-wrap:wrap;gap:11px 26px;margin-top:30px;padding-top:20px;
+ border-top:1px solid rgba(237,243,238,.18);font-size:13px;color:rgba(237,243,238,.9);line-height:1.5}
+.hx-facts li{display:flex;align-items:baseline;gap:9px;text-shadow:0 1px 14px rgba(4,8,5,.75)}
+.hx-fk{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.2em;color:var(--neon)}
+.hx-live{position:absolute;z-index:2;top:clamp(20px,4vh,34px);right:clamp(20px,4vw,44px);
+ font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;color:var(--neon);
+ background:rgba(9,15,11,.86);border:1px solid rgba(53,227,127,.5);padding:8px 13px;border-radius:4px;
+ animation:live-b 2.2s ease-in-out infinite}
+@media(max-width:900px){
+ .hx-shot{transform:scale(1.14) translateX(5%);animation-name:hx-drift-t}
+ .hx-veil{background:linear-gradient(to top,rgba(6,11,8,.60) 0%,rgba(6,11,8,.52) 28%,rgba(6,11,8,.22) 50%,rgba(6,11,8,0) 74%)}
+}
+@media(max-width:640px){
+ .hx-hero{min-height:min(74vh,600px);margin-bottom:44px}
+ .hx-shot{object-position:34% 50%;transform:scale(1.03);animation-name:hx-drift-m}
+ .hx-veil{background:linear-gradient(to top,rgba(6,11,8,.60) 0%,rgba(6,11,8,.60) 30%,rgba(6,11,8,.52) 46%,rgba(6,11,8,.38) 58%,rgba(6,11,8,.14) 72%,rgba(6,11,8,0) 86%)}
+ .hx-lede{padding-top:88px;padding-bottom:30px}
+ .hx-lede>*{max-width:none}
+ .hx-hero h1{font-size:clamp(30px,8.4vw,38px);line-height:1.26;margin-top:11px}
+ .hx-body{margin-top:12px;font-size:14px;max-width:none}
+ .hx-cta{margin-top:20px;gap:9px}
+ .hx-hero .btn{padding:14px 20px;font-size:14.5px}
+ .hx-facts{margin-top:20px;padding-top:15px;gap:8px 18px;font-size:12px}
+ .hx-live{top:14px;right:14px;font-size:10px;padding:6px 10px;letter-spacing:.12em}
+}
+@media(prefers-reduced-motion:reduce){
+ .hx-shot{animation:none!important;transform:scale(1.34) translateX(10.5%)}
+ .hx-live{animation:none!important}
+ @media(max-width:900px){.hx-shot{transform:scale(1.14) translateX(5%)}}
+ @media(max-width:640px){.hx-shot{transform:scale(1.03)}}
+}
 </style>
 </head>
 <body>
@@ -98,15 +154,22 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">타석 예약</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<p class="kicker">SCREEN GOLF · 24H</p>
-<h1>퇴근 후 18홀,<br><b>새벽까지 OK</b></h1>
-<p>최신 시뮬레이터 8룸 · 전 룸 신형 센서. 혼자 연습도, 넷이서 내기 라운드도 — 버디존은 새벽 2시까지 불이 켜져 있습니다.</p>
-<div class="hero-cta"><a class="btn btn-n" href="tel:010-4894-4905">지금 타석 예약</a><a class="btn btn-l" href="#price">요금 보기</a></div>
+<section class="hx-hero">
+<img class="hx-shot" src="./assets/1.jpg" alt="새벽까지 불을 켜고 운영 중인 버디존 스크린골프 타석" fetchpriority="high">
+<div class="hx-veil" aria-hidden="true"></div>
+<span class="hx-live">● 3 ROOMS OPEN</span>
+<div class="wrap hx-lede">
+<p class="kicker rv">SCREEN GOLF · 24H</p>
+<h1 class="rv">퇴근 후 18홀,<br><b>새벽까지 OK</b></h1>
+<p class="hx-body rv">최신 시뮬레이터 8룸 · 전 룸 신형 센서. 혼자 연습도, 넷이서 내기 라운드도 — 버디존은 새벽 2시까지 불이 켜져 있습니다.</p>
+<div class="hx-cta rv"><a class="btn btn-n" href="tel:010-4894-4905">지금 타석 예약</a><a class="btn btn-l" href="#price">요금 보기</a></div>
+<ul class="hx-facts rv">
+<li><span class="hx-fk">OPEN</span>09:00 – 익일 02:00</li>
+<li><span class="hx-fk">ROOMS</span>시뮬레이터 8룸</li>
+<li><span class="hx-fk">PARK</span>주차 3시간 무료</li>
+</ul>
 </div>
-<figure class="hero-img rv"><img src="./assets/1.jpg" alt="스크린 룸"><span class="live">● 3 ROOMS OPEN</span></figure>
-</div></section>
+</section>
 
 <section id="price" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">PRICE BOARD</p><h2>요금 스코어보드</h2><p class="sub">18홀 기준 1인 요금 · 룸 단위 이용도 가능합니다.</p></div>

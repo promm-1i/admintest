@@ -115,3 +115,99 @@ footer b{color:var(--ink)}
 
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
+
+/* ── 히어로 v2 · 견적 시트 (hx-) ─────────────────── */
+.hx-hero{background:var(--paper);padding:52px 0 78px}
+.hx-hero .wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:32px;align-items:start}
+
+.hx-top{display:grid;grid-template-columns:minmax(0,1fr) 206px;gap:44px;align-items:end}
+.hx-copy h1{margin-top:6px}
+.hx-facts{list-style:none;display:grid;gap:17px;border-left:1.5px solid var(--linec);padding:2px 0 2px 20px}
+.hx-facts b{display:block;font-family:"IBM Plex Mono",monospace;font-size:22px;font-weight:500;line-height:1.15;color:var(--blue)}
+.hx-facts span{display:block;margin-top:3px;font-size:12.5px;line-height:1.5;color:var(--soft)}
+
+.hx-sheet{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(0,1fr);
+ grid-template-areas:"hd hd" "tb pl" "sm sm";
+ background:#fff;border:1.5px solid var(--blue);box-shadow:0 22px 46px -30px rgba(23,58,107,.5)}
+.hx-sheet-h{grid-area:hd;display:flex;flex-wrap:wrap;align-items:center;gap:6px 18px;
+ padding:11px 20px;background:var(--blue);color:#fff;
+ font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em}
+.hx-site{color:#C6D9F5;letter-spacing:.06em}
+.hx-scale{margin-left:auto;color:#C6D9F5}
+
+.hx-tbl{grid-area:tb;padding:4px 0 6px}
+.hx-th,.hx-row{display:grid;grid-template-columns:minmax(0,1fr) 88px 104px;gap:14px;padding:9px 20px 9px 22px}
+.hx-th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.14em;color:var(--soft);border-bottom:1px solid var(--line)}
+.hx-th span:nth-child(2),.hx-th span:nth-child(3){text-align:right}
+.hx-row{position:relative;align-items:baseline;border-bottom:1px solid var(--line);cursor:default;
+ transition:background-color .35s cubic-bezier(.32,.72,0,1),box-shadow .35s cubic-bezier(.32,.72,0,1)}
+.hx-tbl>.hx-row:nth-child(7){border-bottom:0}
+.hx-row::before{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(45,116,217,.055);opacity:1;
+ animation:hx-lit 6s cubic-bezier(.32,.72,0,1) calc(var(--i)*.22s) infinite backwards}
+.hx-row>span{position:relative;z-index:1}
+.hx-row:hover{background-color:#EBF2FD;box-shadow:inset 3px 0 0 var(--acc)}
+.hx-nm{font-size:14px;color:var(--ink)}
+.hx-sp{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--soft);text-align:right}
+.hx-amt{font-family:"IBM Plex Mono",monospace;font-size:13.5px;font-weight:500;color:var(--blue);text-align:right;white-space:nowrap}
+.hx-bar{position:absolute;left:22px;right:124px;bottom:-1px;height:1.2px;background:var(--acc);pointer-events:none;
+ transform:scaleX(1);transform-origin:left center;
+ animation:hx-fill 6s cubic-bezier(.32,.72,0,1) calc(var(--i)*.22s) infinite backwards}
+.hx-more{display:none;padding:10px 20px 2px 22px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--soft)}
+
+.hx-plan{grid-area:pl;position:relative;display:flex;flex-direction:column;justify-content:center;gap:12px;
+ padding:20px;border-left:1.5px solid var(--line)}
+.hx-plan svg{display:block;width:100%;height:auto}
+.hx-w{fill:none;stroke:var(--blue);stroke-width:1.8}
+.hx-w2{fill:none;stroke:var(--blue);stroke-width:1.3}
+.hx-f{fill:none;stroke:var(--linec);stroke-width:1}
+.hx-d{fill:none;stroke:var(--acc);stroke-width:1.1;opacity:.65}
+.hx-rl{fill:var(--blue);font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.04em}
+.hx-dim{display:flex;justify-content:space-between;padding-top:8px;border-top:1px solid var(--linec);
+ font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.06em;color:var(--blue)}
+.hx-wipe{position:absolute;inset:0;background:#fff;border-left:1.5px solid var(--acc);pointer-events:none;
+ transform:scaleX(0);transform-origin:right center;animation:hx-draw 6s cubic-bezier(.45,0,.15,1) infinite}
+
+.hx-sum{grid-area:sm;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;
+ padding:13px 20px 13px 22px;background:var(--paper);border-top:1.5px solid var(--blue)}
+.hx-sum-l{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.16em;color:var(--blue)}
+.hx-tot{display:inline-flex;align-items:flex-end;gap:2px;font-family:"IBM Plex Mono",monospace;color:var(--blue)}
+.hx-reel{display:block;overflow:hidden;height:1.2em;font-size:21px}
+.hx-reel-i{display:block;transform:translateY(-66.667%);animation:hx-roll 6s cubic-bezier(.32,.72,0,1) infinite}
+.hx-reel b{display:block;height:1.2em;line-height:1.2em;font-weight:500}
+.hx-won{font-size:14px;line-height:1.2;padding-bottom:.1em}
+.hx-note{margin-left:auto;font-size:12px;color:var(--ink)}
+
+@keyframes hx-lit{0%,4%{opacity:0}16%,86%{opacity:1}94%,100%{opacity:0}}
+@keyframes hx-fill{0%,4%{transform:scaleX(0)}16%,86%{transform:scaleX(1)}94%,100%{transform:scaleX(0)}}
+@keyframes hx-draw{0%{transform:scaleX(1)}24%,92%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+@keyframes hx-roll{0%,18%{transform:translateY(0)}26%,38%{transform:translateY(-33.334%)}46%,92%{transform:translateY(-66.667%)}100%{transform:translateY(0)}}
+
+@media(max-width:900px){
+ .hx-top{grid-template-columns:minmax(0,1fr);gap:26px}
+ .hx-facts{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;border-left:0;border-top:1.5px solid var(--linec);padding:16px 0 0}
+}
+@media(max-width:720px){
+ .hx-hero{padding:40px 0 56px}
+ .hx-hero .wrap{gap:26px}
+ .hx-sheet{grid-template-columns:minmax(0,1fr);grid-template-areas:"hd" "tb" "sm" "pl"}
+ .hx-sheet-h{font-size:10px;letter-spacing:.12em;padding:10px 16px;gap:4px 12px}
+ .hx-scale{display:none}
+ .hx-th,.hx-row{grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:10px 16px}
+ .hx-th span:nth-child(2),.hx-sp{display:none}
+ .hx-row.hx-x{display:none}
+ .hx-bar{left:16px;right:116px}
+ .hx-more{display:block;padding:10px 16px 2px}
+ .hx-plan{border-left:0;border-top:1.5px solid var(--line);padding:16px}
+ .hx-sum{padding:12px 16px;gap:4px 12px}
+ .hx-facts b{font-size:19px}
+ .hx-facts span{font-size:11.5px}
+ .hx-reel{font-size:19px}
+ .hx-note{margin-left:0;flex-basis:100%;font-size:11.5px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hx-row{transition:none}
+ .hx-row::before{animation:none;opacity:1}
+ .hx-bar{animation:none;transform:scaleX(1)}
+ .hx-reel-i{animation:none;transform:translateY(-66.667%)}
+ .hx-wipe{animation:none;transform:scaleX(0)}
+}

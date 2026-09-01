@@ -94,6 +94,42 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 교체: 창가 빛이 글자 뒤로 파고드는 레이어 (hx-) ── */
+.hx-hero{position:relative;overflow:hidden;background:var(--cream);text-align:left;padding:clamp(76px,8.5vw,112px) 0 clamp(88px,10vw,128px)}
+.hx-stage{position:absolute;inset:0;z-index:0;pointer-events:none}
+.hx-photo{position:absolute;top:0;bottom:0;left:38%;right:-7vw;overflow:hidden}
+.hx-photo img{width:100%;height:100%;object-fit:cover;object-position:58% 50%;transform-origin:66% 46%;animation:hx-breathe 24s ease-in-out infinite alternate}
+/* 사진이 크림 배경으로 녹아들어가는 면. 글자가 놓이는 구간은 크림 93% 이상으로 덮인다 */
+.hx-wash{position:absolute;inset:0;background:
+ linear-gradient(to top,var(--cream) 0,rgba(250,246,239,0) 24%),
+ linear-gradient(98deg,var(--cream) 0,rgba(250,246,239,.95) 22%,rgba(250,246,239,.9) 29%,rgba(250,246,239,.38) 44%,rgba(250,246,239,0) 58%)}
+.hx-chip{position:absolute;right:clamp(24px,5vw,84px);bottom:clamp(30px,4.5vw,58px);background:#fff;color:var(--ink);font-size:12px;letter-spacing:.1em;padding:10px 18px;border-radius:99px;box-shadow:0 16px 34px -20px rgba(61,58,51,.55);white-space:nowrap}
+.hx-inner{position:relative;z-index:2}
+.hx-copy{max-width:min(560px,62%)}
+.hx-copy .kicker{margin:0;max-width:none;color:var(--ink);font-size:11.5px;letter-spacing:.34em;font-weight:500}
+.hx-copy h1{margin-top:16px}
+.hx-copy h1 em{color:var(--deep)}
+.hx-copy .hx-lead{margin:16px 0 0;max-width:412px;color:var(--ink);font-size:14.5px}
+.hx-cta{justify-content:flex-start;margin-top:28px}
+.hx-facts{list-style:none;display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line);max-width:462px;font-size:12.5px;color:var(--ink)}
+.hx-facts li{display:flex;align-items:center;gap:8px}
+.hx-facts li::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--tan);flex:none}
+.hx-facts b{font-weight:500}
+@keyframes hx-breathe{from{transform:scale(1.02)}to{transform:scale(1.13)}}
+/* 좁은 화면: 겹침을 풀고 사진 띠 → 글 순서로 나눈다 */
+@media(max-width:900px){
+ .hx-hero{padding:0 0 46px}
+ .hx-stage{position:relative;inset:auto;height:clamp(196px,50vw,248px);margin-bottom:26px}
+ .hx-photo{top:0;bottom:0;left:0;right:0}
+ /* 좁은 화면에서는 확대가 화면 밖으로 밀려나므로 사진을 고정한다 */
+ .hx-photo img{object-position:60% 46%;animation:none;transform:none}
+ .hx-wash{background:linear-gradient(to top,var(--cream) 0,rgba(250,246,239,0) 32%)}
+ .hx-chip{left:24px;right:auto;bottom:14px;font-size:11px;letter-spacing:.08em;padding:8px 15px}
+ .hx-copy,.hx-copy .hx-lead,.hx-facts{max-width:none}
+ .hx-facts{margin-top:22px;padding-top:18px;gap:6px 16px}
+}
+@media(prefers-reduced-motion:reduce){.hx-photo img{animation:none;transform:scale(1.02)}}
 </style>
 </head>
 <body>
@@ -104,17 +140,25 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">예약 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<p class="kicker">BRUNCH &amp; DESSERT</p>
-<h1 style="margin-top:16px">해가 가장 좋은<br><em>오후 네 시의 창가</em></h1>
-<p>서두를 이유가 없는 시간을 위해 만든 카페입니다. 늦은 브런치도, 이른 저녁도 괜찮아요.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">자리 문의하기</a><a class="btn ghost" href="#signature">메뉴 보기</a></div>
-<div class="round rv">
-<img class="r1" src="./assets/space-1.jpg" alt="창가 자리">
-<img class="r2" src="./assets/hero.jpg" alt="브런치 플레이트">
-<img class="r3" src="./assets/space-2.jpg" alt="카페 내부">
+<section class="hero hx-hero">
+<div class="hx-stage">
+<div class="hx-photo"><img src="./assets/space-1.jpg" alt="오후 네 시, 햇빛이 길게 드는 창가 자리"><span class="hx-wash"></span></div>
+<span class="hx-chip">PM 4:00 · 창가 자리</span>
 </div>
-</div></section>
+<div class="wrap hx-inner">
+<div class="hx-copy">
+<p class="kicker">BRUNCH &amp; DESSERT</p>
+<h1>해가 가장 좋은<br><em>오후 네 시의 창가</em></h1>
+<p class="hx-lead">서두를 이유가 없는 시간을 위해 만든 카페입니다. 늦은 브런치도, 이른 저녁도 괜찮아요.</p>
+<div class="hero-cta hx-cta"><a class="btn" href="tel:010-4894-4905">자리 문의하기</a><a class="btn ghost" href="#signature">메뉴 보기</a></div>
+<ul class="hx-facts">
+<li><b>화–일</b> 11:00 – 21:00</li>
+<li><b>월요일</b> 휴무</li>
+<li><b>안국역</b> 3번 출구 7분</li>
+</ul>
+</div>
+</div>
+</section>
 
 <section id="signature" style="padding-top:0"><div class="wrap">
 <div class="rv" style="text-align:center"><p class="kicker">SIGNATURE</p><h2>오후네시의 세 접시</h2></div>

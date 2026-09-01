@@ -150,6 +150,124 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx: 예약 데모 히어로 (날짜 → 차종 → 결과, 8초 루프) ── */
+.hx-hero{padding:58px 0 74px;background:linear-gradient(180deg,#FFFCF4 0%,var(--cream) 58%)}
+.hero .hx-wrap{display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(26px,3.6vw,52px);align-items:start}
+.hx-copy{padding-top:8px}
+.hx-copy h1{margin-top:14px;font-size:clamp(32px,3.2vw,46px)}
+.hx-copy p{max-width:34ch}
+
+.hx-stage{position:relative}
+.hx-board{position:relative;background:var(--paper);border:2px solid var(--ink);border-radius:26px;padding:20px 22px 24px;box-shadow:6px 8px 0 rgba(58,46,34,.13);transform:rotate(-.5deg);cursor:default}
+.hx-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-bottom:13px;border-bottom:2px dashed var(--line)}
+.hx-demo{font-family:"Jua";font-size:12.5px;color:var(--ink);background:var(--cream);border:1.5px solid var(--line);border-radius:99px;padding:4px 11px;white-space:nowrap}
+.hx-dots{display:flex;gap:5px;flex:none}
+.hx-dots i{display:block;width:8px;height:8px;border-radius:50%;background:var(--line)}
+.hx-step{margin-top:16px}
+.hx-label{display:flex;align-items:center;gap:7px;font-family:"Jua";font-size:13px;color:var(--ink)}
+.hx-label::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--coral);flex:none}
+.hx-fill{position:absolute;inset:-1.5px;border-radius:inherit;background:var(--sun);box-shadow:inset 0 0 0 1.5px var(--ink);z-index:1}
+.hx-dates{margin-top:9px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.hx-day{position:relative;background:var(--cream);border:1.5px solid var(--line);border-radius:12px;padding:8px 2px;text-align:center}
+.hx-day b{position:relative;z-index:2;font-family:"Jua";font-weight:400;font-size:12.5px;color:var(--ink)}
+.hx-chips{margin-top:9px;display:flex;flex-wrap:wrap;gap:7px}
+.hx-chip{position:relative;background:var(--paper);border:1.5px solid var(--line);border-radius:99px;padding:7px 15px;transition:transform .3s cubic-bezier(.32,.72,0,1)}
+.hx-chip b{position:relative;z-index:2;font-family:"Jua";font-weight:400;font-size:13px;color:var(--ink)}
+.hx-chip::after{content:"";position:absolute;inset:-1.5px;border-radius:99px;background:var(--sun);box-shadow:inset 0 0 0 1.5px var(--ink);opacity:0;transition:opacity .25s;z-index:1}
+.hx-chip:hover{transform:translateY(-2px)}
+.hx-chip:hover::after{opacity:1}
+.hx-go{margin-top:16px;display:flex;align-items:center;justify-content:center;background:var(--ink);border-radius:14px;padding:12px;box-shadow:0 4px 0 rgba(58,46,34,.3)}
+.hx-go span{font-family:"Jua";font-size:14.5px;color:var(--cream)}
+.hx-results{margin-top:9px;display:grid;gap:8px}
+.hx-res{position:relative;height:68px;border:1.5px dashed var(--line);border-radius:14px;overflow:hidden}
+.hx-res-in{position:relative;z-index:1;height:100%;display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--cream);border:1.5px solid var(--line);border-radius:13px;padding:8px}
+.hx-res img{width:60px;aspect-ratio:4/3;object-fit:cover;border-radius:9px;border:1.5px solid var(--line)}
+.hx-res-t{min-width:0}
+.hx-res-t b{display:block;font-family:"Jua";font-weight:400;font-size:13.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hx-res-t i{display:block;font-style:normal;font-size:12px;color:var(--ink);opacity:.75;margin-top:1px}
+.hx-ok{font-family:"Jua";font-size:11.5px;color:var(--ink);background:var(--sun);border-radius:99px;padding:4px 10px;white-space:nowrap}
+.hx-sticker{position:absolute;left:18px;bottom:-22px;background:var(--paper);border:2px solid var(--ink);border-radius:14px;padding:10px 16px;font-family:"Jua";font-size:13.5px;color:var(--ink);transform:rotate(-2deg);box-shadow:3px 4px 0 rgba(58,46,34,.2);animation:memo-bob 4.2s ease-in-out infinite}
+.hx-sticker b{display:inline-block;font-weight:400;box-shadow:inset 0 -5px 0 rgba(255,201,60,.75)}
+.hx-flow{margin-top:30px;padding-top:18px;border-top:2px dashed var(--line);display:flex;flex-wrap:wrap;gap:8px 16px}
+.hx-flow span{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink)}
+.hx-flow b{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--paper);border:1.5px solid var(--ink);font-family:"Jua";font-weight:400;font-size:11px;color:var(--ink);flex:none}
+
+/* 8초 루프: 날짜 → 칩 → 검색 → 결과 카드 (transform·opacity만) */
+@keyframes hx-lit-a{0%,3%{opacity:0}7%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes hx-lit-b{0%,6%{opacity:0}10%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes hx-lit-c{0%,14%{opacity:0}18%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes hx-lit-d{0%,18%{opacity:0}22%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes hx-lit-e{0%,22%{opacity:0}26%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes hx-lit-f{0%,26%{opacity:0}30%,90%{opacity:1}96%,100%{opacity:0}}
+@keyframes hx-press{0%,19%{transform:none}22%{transform:scale(.965)}25%,100%{transform:none}}
+@keyframes hx-rise-a{0%,24%{opacity:0;transform:translateY(18px)}30%,92%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateY(12px)}}
+@keyframes hx-rise-b{0%,25%{opacity:0;transform:translateY(18px)}31%,92%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateY(12px)}}
+@keyframes hx-rise-c{0%,26%{opacity:0;transform:translateY(18px)}32%,92%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateY(12px)}}
+.hx-a1{animation:hx-lit-a 8s ease-out infinite}
+.hx-a2{animation:hx-lit-b 8s ease-out infinite}
+.hx-a3{animation:hx-lit-c 8s ease-out infinite}
+.hx-a4{animation:hx-lit-d 8s ease-out infinite}
+.hx-a5{animation:hx-lit-e 8s ease-out infinite}
+.hx-a6{animation:hx-lit-f 8s ease-out infinite}
+.hx-go{animation:hx-press 8s ease-in-out infinite}
+.hx-r1{animation:hx-rise-a 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r2{animation:hx-rise-b 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r3{animation:hx-rise-c 8s cubic-bezier(.32,.72,0,1) infinite}
+
+@media(max-width:900px){
+  .hero .hx-wrap{grid-template-columns:minmax(0,1fr);gap:34px}
+  .hx-copy{padding-top:0}
+  .hx-copy h1{font-size:clamp(32px,5.2vw,44px)}
+  .hx-copy p{max-width:52ch}
+  .hx-stage{max-width:520px}
+}
+@media(max-width:600px){
+  .hx-hero{padding:32px 0 52px}
+  .hero .hx-wrap{gap:28px}
+  .hx-copy h1{margin-top:12px;font-size:34px}
+  .hx-copy p{margin-top:14px;font-size:15px}
+  .hx-copy .hero-cta{margin-top:22px}
+  .hx-board{padding:16px 14px 18px;border-radius:20px;transform:rotate(-.35deg)}
+  .hx-step{margin-top:14px}
+  .hx-step-date{display:none}
+  .hx-chips{gap:6px}
+  .hx-chip{padding:7px 12px}
+  .hx-res{height:76px}
+  .hx-res::before{width:72px;height:54px;top:9px}
+  .hx-res::after{left:95px;top:32px;width:100px}
+  .hx-res-in{grid-template-columns:72px minmax(0,1fr) auto}
+  .hx-res img{width:72px}
+  .hx-res+.hx-res{display:none}
+  .hx-flow{margin-top:24px;padding-top:16px;gap:8px 14px}
+  .hx-sticker{left:10px;bottom:-18px;font-size:12.5px;padding:9px 13px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hx-a1,.hx-a2,.hx-a3,.hx-a4,.hx-a5,.hx-a6,.hx-go,.hx-r1,.hx-r2,.hx-r3,.hx-sticker{animation:none}
+  .hx-chip{transition:none}
+  .hx-chip::after{transition:none}
+}
+
+/* 히어로 재구성 — 텍스트 열과 보드 사이의 빈 거터를 없앤다.
+   보드가 오른쪽 화면 밖으로 이어지고, 왼쪽 끝은 종이색으로 녹아 문구 아래로 들어간다. */
+.hx-hero{overflow:hidden}
+.hero .hx-wrap{display:block;position:relative;min-height:548px}
+.hx-copy{position:relative;z-index:3;max-width:min(45%,420px);padding-top:34px}
+.hx-stage{position:absolute;z-index:1;top:6px;left:33%;width:min(76%,920px);transform:rotate(-.6deg);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 5%,rgba(0,0,0,.9) 12%,#000 19%);
+  mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 5%,rgba(0,0,0,.9) 12%,#000 19%)}
+.hx-board{transform:none;padding-left:clamp(84px,13%,150px)}
+.hx-sticker{left:auto;right:5%;top:auto;bottom:16px}
+.hx-flow{position:relative;z-index:3;max-width:min(52%,520px)}
+@media(max-width:960px){
+ .hero .hx-wrap{min-height:0}
+ .hx-copy,.hx-flow{max-width:none}
+ .hx-stage{position:relative;left:auto;top:auto;width:auto;margin-top:26px;transform:none;
+   -webkit-mask-image:none;mask-image:none}
+ .hx-board{padding-left:20px;transform:rotate(-.5deg)}
+ .hx-sticker{right:auto;left:18px}
+}
+@media(prefers-reduced-motion:reduce){.hx-sticker{animation:none}}
 </style>
 </head>
 <body>
@@ -166,9 +284,9 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div>
+<section class="hero hx-hero">
+  <div class="wrap hx-wrap">
+    <div class="hx-copy">
       <span class="badge">가족 여행 전문 렌트카</span>
       <h1>좋은 차 한 대면,<br><em>여행 준비 끝!</em></h1>
       <p>카시트 무료, 공항 픽업 무료, 유류비 정산 없음. 아이와 함께하는 여행에 필요한 것부터 챙겨 두었습니다.</p>
@@ -176,10 +294,52 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
         <a class="btn-main" href="tel:010-4894-4905"><svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4 5.2 2 2 0 0 1 6 3Z"/></svg> 010-4894-4905</a>
         <a class="btn-sub" href="#cars">차량 보러 가기</a>
       </div>
+      <div class="hx-flow">
+        <span><b>1</b>날짜 고르기</span>
+        <span><b>2</b>차종 고르기</span>
+        <span><b>3</b>바로 예약</span>
+      </div>
     </div>
-    <div class="hero-photo">
-      <img src="./assets/hero.jpg" alt="여행 중인 렌트카">
-      <div class="hero-note">이번 주 예약 시 <b>카시트 무료</b></div>
+
+    <div class="hx-stage">
+      <div class="hx-board" aria-hidden="true">
+        <div class="hx-head">
+          <span class="hx-demo">예약 화면 미리보기 · 데모</span>
+          <span class="hx-dots"><i></i><i></i><i></i></span>
+        </div>
+
+        <div class="hx-step hx-step-date">
+          <span class="hx-label">여행 날짜</span>
+          <div class="hx-dates">
+            <span class="hx-day"><b>금 8/29</b></span>
+            <span class="hx-day"><i class="hx-fill hx-a1"></i><b>토 8/30</b></span>
+            <span class="hx-day"><i class="hx-fill hx-a2"></i><b>일 8/31</b></span>
+            <span class="hx-day"><b>월 9/1</b></span>
+          </div>
+        </div>
+
+        <div class="hx-step">
+          <span class="hx-label">차종 고르기</span>
+          <div class="hx-chips">
+            <span class="hx-chip"><i class="hx-fill hx-a3"></i><b>경차</b></span>
+            <span class="hx-chip"><i class="hx-fill hx-a4"></i><b>세단</b></span>
+            <span class="hx-chip"><i class="hx-fill hx-a5"></i><b>SUV</b></span>
+            <span class="hx-chip"><i class="hx-fill hx-a6"></i><b>승합</b></span>
+          </div>
+        </div>
+
+        <div class="hx-go"><span>차량 찾기</span></div>
+
+        <div class="hx-step">
+          <span class="hx-label">검색 결과</span>
+          <div class="hx-results">
+            <div class="hx-res"><span class="hx-res-in hx-r1"><img src="./assets/car-2.jpg" alt=""><span class="hx-res-t"><b>쏘나타 · K5</b><i>69,000원 / 1일</i></span><span class="hx-ok">예약 가능</span></span></div>
+            <div class="hx-res"><span class="hx-res-in hx-r2"><img src="./assets/car-4.jpg" alt=""><span class="hx-res-t"><b>쏘렌토 · 싼타페</b><i>99,000원 / 1일</i></span><span class="hx-ok">예약 가능</span></span></div>
+            <div class="hx-res"><span class="hx-res-in hx-r3"><img src="./assets/car-6.jpg" alt=""><span class="hx-res-t"><b>카니발 9인승</b><i>119,000원 / 1일</i></span><span class="hx-ok">예약 가능</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="hx-sticker">이번 주 예약 시 <b>카시트 무료</b></div>
     </div>
   </div>
 </section>

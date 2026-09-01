@@ -88,6 +88,60 @@ footer b{color:var(--paper)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로: 인물 컷 풀블리드 ───────────────────────────── */
+.hero.hx-hero{position:relative;padding:0;margin-bottom:92px;overflow:hidden;background:#0B0908;
+  height:calc(100vh - 68px);max-height:780px;min-height:520px;
+  display:flex;align-items:flex-end}
+.hx-frame{position:absolute;inset:0;overflow:hidden}
+.hx-shot{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;
+  filter:grayscale(.18) contrast(1.07) brightness(.97);
+  transform:translateX(9%) scale(1.18);transform-origin:50% 50%;will-change:transform;
+  animation:hx-breathe 24s ease-in-out infinite alternate}
+@keyframes hx-breathe{from{transform:translateX(9%) scale(1.18)}to{transform:translateX(12.6%) scale(1.252)}}
+/* 글자가 앉는 왼쪽 아래 구석만 어둡게 눕힌다. 얼굴이 있는 오른쪽 위는 손대지 않는다 */
+.hx-veil{position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(88% 66% at 0% 100%,rgba(9,8,7,.62) 0%,rgba(9,8,7,.40) 42%,rgba(9,8,7,.10) 70%,rgba(9,8,7,0) 88%),
+    linear-gradient(to top,rgba(9,8,7,.88) 0%,rgba(9,8,7,.70) 22%,rgba(9,8,7,.34) 41%,rgba(9,8,7,.06) 58%,rgba(9,8,7,0) 72%),
+    linear-gradient(to right,rgba(9,8,7,.60) 0%,rgba(9,8,7,.46) 22%,rgba(9,8,7,.24) 40%,rgba(9,8,7,.05) 56%,rgba(9,8,7,0) 68%)}
+.hero.hx-hero .hx-kicker,.hero.hx-hero h1,.hero.hx-hero .hx-lead,.hero.hx-hero .hx-slate{
+  text-shadow:0 0 3px rgba(9,8,7,.62),0 0 11px rgba(9,8,7,.86),0 2px 26px rgba(9,8,7,.72)}
+.hx-body{position:relative;z-index:2;width:100%;max-width:1000px;margin:0 auto;padding:0 24px 56px;
+  display:flex;align-items:flex-end;justify-content:space-between;gap:28px}
+.hx-copy{max-width:500px}
+.hero.hx-hero .hx-kicker{color:#C6BBA7}
+.hero.hx-hero .hx-lead{margin-top:20px;color:#D6CCB9;font-size:15px;max-width:430px}
+.hero.hx-hero .btn.line{background:var(--panel);border-color:#4B4238;color:var(--paper)}
+.hero.hx-hero .hx-slate{margin:0;max-width:none;font-family:"IBM Plex Mono",monospace;font-size:10.5px;
+  letter-spacing:.22em;color:#B7AC99;white-space:nowrap;padding-bottom:8px}
+@media(max-width:1080px){.hx-slate{display:none}}
+/* 태블릿: 글자 기둥이 화면의 절반을 넘어 얼굴에 걸친다. 아래쪽 그늘을 더 눕힌다 */
+@media(min-width:761px) and (max-width:1024px){
+  .hx-copy{max-width:440px}
+  .hx-veil{background:
+    radial-gradient(96% 76% at 0% 100%,rgba(9,8,7,.66) 0%,rgba(9,8,7,.48) 44%,rgba(9,8,7,.14) 72%,rgba(9,8,7,0) 90%),
+    linear-gradient(to top,rgba(9,8,7,.90) 0%,rgba(9,8,7,.78) 24%,rgba(9,8,7,.50) 44%,rgba(9,8,7,.14) 60%,rgba(9,8,7,0) 74%),
+    linear-gradient(to right,rgba(9,8,7,.66) 0%,rgba(9,8,7,.54) 26%,rgba(9,8,7,.30) 46%,rgba(9,8,7,.06) 62%,rgba(9,8,7,0) 74%)}
+}
+
+@media(max-width:760px){
+  .hero.hx-hero{height:calc(100vh - 68px);height:calc(100svh - 68px);max-height:none;min-height:560px;margin-bottom:64px}
+  .hx-shot{top:-4%;height:108%;object-position:34% 50%;
+    transform:none;animation:hx-drift 22s ease-in-out infinite alternate}
+  .hx-veil{background:linear-gradient(to top,rgba(9,8,7,.95) 0%,rgba(9,8,7,.92) 22%,rgba(9,8,7,.74) 40%,rgba(9,8,7,.32) 56%,rgba(9,8,7,.06) 68%,rgba(9,8,7,0) 80%)}
+  .hero.hx-hero .hx-kicker{color:#DCD2C0}
+  .hx-body{display:block;padding:0 22px 34px}
+  .hx-copy{max-width:none}
+  .hero.hx-hero .hx-lead{margin-top:16px;font-size:14.5px;max-width:none}
+  .hero.hx-hero .hero-cta{margin-top:24px;gap:10px}
+  .hero.hx-hero .btn{padding:14px 26px}
+}
+@keyframes hx-drift{from{transform:translateY(0)}to{transform:translateY(-3.2%)}}
+@media(prefers-reduced-motion:reduce){
+  .hx-shot{animation:none!important;transform:translateX(10.8%) scale(1.216)}
+  @media(max-width:760px){.hx-shot{transform:none}}
+}
 </style>
 </head>
 <body>
@@ -98,15 +152,21 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">BOOKING</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<p class="kicker">PORTRAIT DARKROOM STUDIO</p>
+<section class="hero hx-hero">
+<div class="hx-frame">
+<img class="hx-shot" src="./assets/g-1.jpg" alt="필름달 사진관에서 촬영한 흑백 인물 초상" fetchpriority="high">
+<div class="hx-veil" aria-hidden="true"></div>
+</div>
+<div class="hx-body">
+<div class="hx-copy rv">
+<p class="kicker hx-kicker">PORTRAIT DARKROOM STUDIO</p>
 <h1 style="margin-top:16px">잘 나온 사진 말고,<br><em>당신다운 사진</em></h1>
-<p>필름달은 보정으로 다른 사람을 만들지 않습니다. 조명과 대화로, 그날의 당신에게서 가장 좋은 순간을 꺼냅니다.</p>
+<p class="hx-lead">필름달은 보정으로 다른 사람을 만들지 않습니다. 조명과 대화로, 그날의 당신에게서 가장 좋은 순간을 꺼냅니다.</p>
 <div class="hero-cta"><a class="btn" href="tel:010-4894-4905">촬영 예약</a><a class="btn line" href="#menu">상품 보기</a></div>
 </div>
-<figure class="hero-img rv"><img src="./assets/g-1.jpg" alt="인물 사진"><span class="neg">FILM No.035</span></figure>
-</div></section>
+<p class="hx-slate">FILM No.035 · ILFORD HP5 400</p>
+</div>
+</section>
 
 <section id="sheet" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">CONTACT SHEET</p><h2>이번 달의 인화</h2><p class="sub">마우스를 올리면 컬러 원본이 보입니다.</p></div>

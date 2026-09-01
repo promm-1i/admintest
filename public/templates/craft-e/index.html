@@ -97,6 +97,31 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로: 가죽 한 장이 오른쪽 화면 밖에서 글자 뒤로 밀고 들어온다 ── */
+.hx-hero{position:relative;overflow:hidden;display:flex;align-items:center;min-height:min(78vh,640px);padding:58px 0 66px}
+.hx-hero .hx-wrap{display:block;grid-template-columns:none;position:relative;z-index:2;width:100%}
+.hx-copy{max-width:min(540px,50vw)}
+.hx-hero .hx-copy .kicker{margin-top:0;max-width:none;font-size:11.5px;color:var(--leather)}
+.hx-hero .hx-copy h1{margin-top:14px}
+.hx-hero .hx-lead{margin-top:18px;max-width:420px;font-size:14.5px;color:var(--ink);opacity:.82}
+.hx-hero .hx-note{margin-top:22px;max-width:420px;font-size:12.5px;color:var(--ink);opacity:.72}
+.hx-stage{position:absolute;inset:0;z-index:0}
+.hx-shot{position:absolute;top:0;bottom:0;left:34%;right:-6vw;margin:0;overflow:hidden}
+.hx-shot img{width:100%;height:100%;object-fit:cover;filter:sepia(.14);transform-origin:56% 46%;animation:hxDrift 24s ease-in-out infinite alternate}
+@keyframes hxDrift{from{transform:scale(1.04)}to{transform:scale(1.16)}}
+.hx-veil{position:absolute;inset:0;background:linear-gradient(90deg,var(--cream) 0 34%,rgba(246,239,228,.9) 47%,rgba(246,239,228,.45) 60%,rgba(246,239,228,0) 75%)}
+.hx-hero .hx-tag{position:absolute;right:7vw;bottom:34px;max-width:min(300px,58vw);margin:0;padding:10px 16px;background:var(--char);color:var(--cream);border:2px dashed var(--leather);border-radius:10px;font-size:12.5px;line-height:1.55}
+@media(prefers-reduced-motion:reduce){.hx-shot img{animation:none;transform:none}}
+@media(max-width:860px){
+.hx-hero{display:block;min-height:0;padding:30px 0 30px}
+.hx-copy,.hx-hero .hx-lead,.hx-hero .hx-note{max-width:none}
+.hx-stage{position:relative;inset:auto;margin-top:30px}
+.hx-shot{position:relative;left:auto;right:auto;top:auto;bottom:auto;height:clamp(210px,54vw,290px);border-top:2px dashed var(--leather)}
+.hx-shot img{animation:none;transform:none}
+.hx-veil{display:none}
+.hx-hero .hx-tag{left:16px;right:auto;bottom:14px;max-width:calc(100% - 32px);padding:9px 14px;font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -107,15 +132,22 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="wrap hx-wrap">
+<div class="hx-copy">
 <p class="kicker">HAND-STITCHED LEATHER · SINCE 2014</p>
-<h1 style="margin-top:14px">기계는 빠르고<br><em>손은 오래갑니다</em></h1>
-<p>한땀공방은 새들 스티치로만 박습니다. 실 한 올이 끊어져도 전체가 풀리지 않는, 느리지만 튼튼한 방식입니다.</p>
+<h1>기계는 빠르고<br><em>손은 오래갑니다</em></h1>
+<p class="hx-lead">한땀공방은 새들 스티치로만 박습니다. 실 한 올이 끊어져도 전체가 풀리지 않는, 느리지만 튼튼한 방식입니다.</p>
 <div class="hero-cta"><a class="btn btn-l" href="tel:010-4894-4905">주문 · 수선 문의</a><a class="btn btn-o" href="#class">클래스 보기</a></div>
+<p class="hx-note">화 – 토 13:00 – 20:00 · 서울 을지로 공방</p>
 </div>
-<figure class="hero-img rv"><img src="./assets/1.jpg" alt="새들 스티치로 가죽을 박는 손"></figure>
-</div></section>
+</div>
+<div class="hx-stage">
+<figure class="hx-shot"><img src="./assets/1.jpg" alt="새들 스티치로 가죽을 박는 손"></figure>
+<span class="hx-veil"></span>
+<p class="hx-tag">새들 스티치 · 바늘 두 개로 한 땀씩</p>
+</div>
+</section>
 
 <section id="proc" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">PROCESS</p><h2>가방 하나가 오는 길</h2></div>

@@ -131,6 +131,57 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* - hx: fullbleed room hero - */
+.hx-hero{position:relative;padding:0;overflow:hidden;background:var(--white);
+  height:min(100vh,900px);height:min(100svh,900px);min-height:600px;
+  display:flex;align-items:flex-end}
+.hx-shot{position:absolute;inset:0;overflow:hidden}
+.hx-img{width:100%;height:100%;object-fit:cover;object-position:58% 54%;
+  transform-origin:62% 58%;animation:hx-drift 24s ease-in-out infinite alternate}
+@keyframes hx-drift{from{transform:scale(1)}to{transform:scale(1.06)}}
+.hx-veil{position:absolute;inset:0;pointer-events:none;background:
+  radial-gradient(112% 104% at 2% 94%,rgba(250,250,248,.90) 0%,rgba(250,250,248,.80) 24%,rgba(250,250,248,.56) 44%,rgba(250,250,248,.24) 62%,rgba(250,250,248,0) 80%),
+  linear-gradient(to top,rgba(250,250,248,.34) 0%,rgba(250,250,248,0) 30%)}
+.hx-inner{position:relative;z-index:2;width:100%;max-width:1080px;margin:0 auto;
+  padding:0 28px 68px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.hx-copy{max-width:520px}
+.hx-eyebrow{font-family:"Jost",sans-serif;font-size:11px;font-weight:500;letter-spacing:.42em;color:var(--fog-deep)}
+.hx-hero h1{margin-top:22px;font-size:clamp(30px,3.9vw,46px);font-weight:200;letter-spacing:.12em;line-height:1.46;color:var(--ink)}
+.hx-hero h1 b{font-weight:600}
+.hx-sub{margin-top:20px;font-size:13.5px;letter-spacing:.14em;color:#43464A}
+.hx-act{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px}
+.hx-btn{display:inline-block;font-size:12.5px;letter-spacing:.18em;padding:15px 30px;
+  border:1px solid var(--ink);background:var(--ink);color:var(--white);
+  transition:transform .5s cubic-bezier(.32,.72,0,1)}
+.hx-btn-2{background:var(--white);color:var(--ink)}
+.hx-btn:hover{transform:translateY(-2px)}
+.hx-cap{flex:0 0 auto;font-size:11px;font-weight:400;letter-spacing:.1em;color:var(--ink);padding-bottom:7px;text-align:right}
+.hx-cap .en{letter-spacing:.3em;margin-right:9px;color:var(--fog-deep)}
+@keyframes hx-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hx-copy>*{animation:hx-rise .9s cubic-bezier(.32,.72,0,1) both}
+.hx-copy>*:nth-child(2){animation-delay:.09s}
+.hx-copy>*:nth-child(3){animation-delay:.18s}
+.hx-copy>*:nth-child(4){animation-delay:.27s}
+@media(max-width:900px){.hx-cap{display:none}}
+@media(max-width:760px){
+  .hx-hero{height:calc(100vh - 26px);height:calc(100svh - 26px);max-height:820px;min-height:530px}
+  .hx-img{object-position:64% 46%}
+  .hx-veil{background:
+    radial-gradient(154% 86% at 20% 100%,rgba(250,250,248,.95) 0%,rgba(250,250,248,.88) 30%,rgba(250,250,248,.62) 50%,rgba(250,250,248,.22) 70%,rgba(250,250,248,0) 88%),
+    linear-gradient(to top,rgba(250,250,248,.40) 0%,rgba(250,250,248,0) 44%)}
+  .hx-inner{display:block;padding:0 22px 44px}
+  .hx-copy{max-width:none}
+  .hx-hero h1{margin-top:16px;font-size:clamp(24px,7vw,30px);letter-spacing:.06em;line-height:1.5}
+  .hx-sub{margin-top:14px;font-size:13px;letter-spacing:.08em}
+  .hx-act{margin-top:26px;gap:8px}
+  .hx-btn{padding:14px 22px;font-size:12px;letter-spacing:.12em}
+}
+@media(prefers-reduced-motion:reduce){
+  .hx-img{animation:none}
+  .hx-copy>*{animation:none}
+  .hx-btn{transition:none}
+}
 </style>
 </head>
 <body>
@@ -147,17 +198,22 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <p class="label">YANGYANG, KOREA</p>
-    <h1 style="margin-top:26px">아무것도 하지 않는,<br><b>휘게 스테이</b></h1>
-    <p class="sub-line">바다와 숲 사이, 독채 세 동 · 각 동 최대 4인</p>
-    <div class="hero-frame rv">
-      <img class="h-side" src="./assets/enjoy-1.jpg" alt="창가의 티타임">
-      <img class="h-main" src="./assets/hero.jpg" alt="스테이 전경">
-      <img class="h-side" src="./assets/enjoy-2.jpg" alt="해안 산책로">
+<section class="hx-hero">
+  <div class="hx-shot">
+    <img class="hx-img" src="./assets/room-1.jpg" alt="숲을 마주한 통창이 있는 객실">
+  </div>
+  <div class="hx-veil" aria-hidden="true"></div>
+  <div class="hx-inner">
+    <div class="hx-copy">
+      <p class="hx-eyebrow">YANGYANG, KOREA</p>
+      <h1>아무것도 하지 않는,<br><b>휘게 스테이</b></h1>
+      <p class="hx-sub">바다와 숲 사이, 독채 세 동 · 각 동 최대 4인</p>
+      <div class="hx-act">
+        <a class="hx-btn" href="tel:010-4894-4905">예약 문의</a>
+        <a class="hx-btn hx-btn-2" href="#rooms">객실 보기</a>
+      </div>
     </div>
-    <p class="hero-cap en">SCENES FROM THE STAY — 03</p>
+    <p class="hx-cap"><span class="en">STAY 01</span>숲을 마주한 통창</p>
   </div>
 </section>
 

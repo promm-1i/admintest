@@ -88,6 +88,98 @@ footer b{color:#fff}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx : 히어로 재구성 — 물레 위 그릇 한 점 + 정보 조각 ───────────── */
+.hx-hero{position:relative;overflow:hidden;padding:56px 0 88px;
+  background:radial-gradient(46% 56% at 71% 50%,#F4E4D3 0%,rgba(244,228,211,0) 72%)}
+.hx-inner{position:relative;max-width:980px;margin:0 auto;min-height:600px;display:flex;align-items:center}
+.hx-copy{position:relative;z-index:2;flex:0 0 492px;max-width:492px;padding:0 84px 0 24px}
+.hx-copy h1{font-family:"Gowun Batang",serif;font-weight:700;line-height:1.48;font-size:clamp(27px,3.5vw,38px);margin-top:14px}
+.hx-copy h1 em{font-style:normal;color:var(--terra)}
+.hx-lead{margin-top:16px;font-size:15px;line-height:1.8;color:var(--ink)}
+.hx-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-shot{position:absolute;z-index:1;top:0;bottom:0;left:444px;right:clamp(-160px,calc(474px - 50vw),-40px);
+  overflow:hidden;border-radius:190px 0 0 26px;box-shadow:0 46px 92px -58px rgba(74,56,44,.75)}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 72%}
+.hx-chips{position:absolute;z-index:3;left:28px;bottom:30px;list-style:none;display:grid;gap:9px;justify-items:start}
+.hx-chip{display:inline-flex;align-items:center;gap:9px;background:#fff;border:1px solid var(--line);
+  border-radius:99px;padding:9px 18px;font-size:13px;line-height:1.35;color:var(--ink);white-space:nowrap;
+  box-shadow:0 12px 24px -16px rgba(74,56,44,.7);
+  animation:hx-rise .72s cubic-bezier(.32,.72,0,1) backwards;
+  transition:transform .35s cubic-bezier(.32,.72,0,1),box-shadow .35s}
+.hx-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--terra);flex:none}
+.hx-chip:nth-child(1){margin-left:38px;animation-delay:.30s}
+.hx-chip:nth-child(2){margin-left:19px;animation-delay:.50s}
+.hx-chip:nth-child(3){animation-delay:.70s}
+.hx-chip:hover{transform:translateY(-2px);box-shadow:0 20px 34px -16px rgba(74,56,44,.75)}
+@keyframes hx-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(max-width:900px){
+  .hx-hero{padding:24px 0 52px;background:radial-gradient(72% 42% at 58% 26%,#F4E4D3 0%,rgba(244,228,211,0) 74%)}
+  .hx-inner{display:block;min-height:0;padding:0 24px}
+  .hx-copy{flex:none;max-width:none;padding:0;margin-top:26px}
+  .hx-copy h1{font-size:clamp(26px,7.4vw,31px)}
+  .hx-shot{position:relative;top:auto;right:auto;bottom:auto;left:auto;width:100%;aspect-ratio:16/10;
+    border-radius:96px 18px 18px 18px;box-shadow:0 26px 52px -34px rgba(74,56,44,.6)}
+  .hx-shot img{object-position:50% 60%}
+  .hx-chips{left:16px;bottom:16px}
+  .hx-chips .hx-chip{margin-left:0;font-size:12.5px;padding:8px 15px}
+  .hx-chips .hx-chip:nth-child(n+2){display:none}
+}
+@media(prefers-reduced-motion:reduce){.hx-chip{animation:none;opacity:1;transform:none}}
+
+/* ── hxo : 히어로 재구성 v2 — 물레 위 그릇 한 점을 화면 밖까지 키운다 ───── */
+.hxo-hero{position:relative;overflow:hidden;background:var(--clay);
+  display:flex;align-items:center;min-height:clamp(556px,74vh,690px)}
+.hxo-hero::before{content:"";position:absolute;inset:0;z-index:0;
+  background:radial-gradient(56% 66% at 65% 54%,#F7E9DA 0%,rgba(247,233,218,0) 72%)}
+.hxo-shot{position:absolute;z-index:1;top:-7%;bottom:-2%;left:18%;right:-17%;margin:0;
+  -webkit-mask-image:linear-gradient(97deg,rgba(0,0,0,0) 4%,rgba(0,0,0,.12) 21%,rgba(0,0,0,.58) 40%,rgba(0,0,0,1) 59%),
+    linear-gradient(to bottom,rgba(0,0,0,1) 82%,rgba(0,0,0,0) 99%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(97deg,rgba(0,0,0,0) 4%,rgba(0,0,0,.12) 21%,rgba(0,0,0,.58) 40%,rgba(0,0,0,1) 59%),
+    linear-gradient(to bottom,rgba(0,0,0,1) 82%,rgba(0,0,0,0) 99%);
+  mask-composite:intersect}
+.hxo-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 66%;display:block}
+.hxo-veil{position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(56% 82% at 14% 50%,rgba(251,243,236,.95) 0%,rgba(251,243,236,.66) 44%,rgba(251,243,236,0) 75%)}
+.hxo-copy{position:relative;z-index:3;width:100%;max-width:1160px;margin:0 auto;padding:0 24px}
+.hxo-text{max-width:462px}
+.hxo-text h1{font-family:"Gowun Batang",serif;font-weight:700;line-height:1.46;
+  font-size:clamp(29px,3.5vw,41px);margin-top:14px;color:var(--ink)}
+.hxo-text h1 em{font-style:normal;color:var(--terra)}
+.hxo-lead{margin-top:18px;font-size:15px;line-height:1.85;color:var(--ink);max-width:415px}
+.hxo-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+.hxo-chips{position:absolute;z-index:4;left:48%;bottom:15%;margin:0;padding:0;list-style:none;
+  display:grid;gap:10px;justify-items:start}
+.hxo-chip{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.94);
+  border:1px solid var(--line);border-radius:99px;padding:9px 18px;font-size:13px;line-height:1.35;
+  color:var(--ink);white-space:nowrap;box-shadow:0 14px 28px -18px rgba(74,56,44,.85);
+  animation:hxo-rise .7s cubic-bezier(.32,.72,0,1) backwards;
+  transition:transform .35s cubic-bezier(.32,.72,0,1),box-shadow .35s}
+.hxo-chip::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--terra);flex:none}
+.hxo-chip:nth-child(1){animation-delay:.30s}
+.hxo-chip:nth-child(2){margin-left:24px;animation-delay:.50s}
+.hxo-chip:nth-child(3){margin-left:48px;animation-delay:.70s}
+.hxo-chip:hover{transform:translateY(-2px);box-shadow:0 22px 34px -18px rgba(74,56,44,.9)}
+@keyframes hxo-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(max-width:860px){
+  .hxo-hero{display:block;min-height:0;padding:0 0 44px}
+  .hxo-hero::before{background:radial-gradient(88% 36% at 60% 18%,#F7E9DA 0%,rgba(247,233,218,0) 74%)}
+  .hxo-shot{position:relative;top:auto;right:auto;bottom:auto;left:auto;width:100%;aspect-ratio:16/10;
+    -webkit-mask-image:linear-gradient(to bottom,#000 70%,rgba(0,0,0,0) 100%);
+    mask-image:linear-gradient(to bottom,#000 70%,rgba(0,0,0,0) 100%)}
+  .hxo-shot img{object-position:52% 56%}
+  .hxo-veil{display:none}
+  .hxo-copy{padding:12px 20px 0}
+  .hxo-text{max-width:none}
+  .hxo-text h1{font-size:clamp(25px,7vw,31px)}
+  .hxo-lead{max-width:none;font-size:14.5px;margin-top:14px}
+  .hxo-cta{margin-top:22px}
+  .hxo-chips{left:18px;bottom:auto;top:calc(62.5vw - 44px)}
+  .hxo-chip{margin-left:0}
+  .hxo-chip:nth-child(n+2){display:none}
+}
+@media(prefers-reduced-motion:reduce){.hxo-chip{animation:none}}
 </style>
 </head>
 <body>
@@ -98,17 +190,23 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">수강 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hxo-hero">
+<figure class="hxo-shot">
+<img src="./assets/1.jpg" alt="물레 위에서 두 손으로 형태를 잡고 있는 그릇">
+</figure>
+<div class="hxo-veil"></div>
+<ul class="hxo-chips">
+<li class="hxo-chip">주 1회 · 2시간</li>
+<li class="hxo-chip">4주 정규 과정</li>
+<li class="hxo-chip">흙 · 유약 재료 포함</li>
+</ul>
+<div class="hxo-copy"><div class="hxo-text">
 <p class="kicker">POTTERY STUDIO · 성수동</p>
-<h1 style="margin-top:14px">서두르면 무너지는 게<br><em>흙의 좋은 점</em>입니다</h1>
-<p>물레 앞에 앉으면 두 시간이 금방 갑니다. 느려야만 만들어지는 것들을, 흙과물레에서 경험해 보세요.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">수강 문의하기</a><a class="btn ghost" href="#class">클래스 보기</a></div>
-<div class="hero-strip rv">
-<img class="side" src="./assets/2.jpg" alt="선반 위 기물들">
-<img class="main" src="./assets/1.jpg" alt="물레 성형">
-<img class="side" src="./assets/3.jpg" alt="공방 풍경">
-</div>
-</div></section>
+<h1>서두르면 무너지는 게<br><em>흙의 좋은 점</em>입니다</h1>
+<p class="hxo-lead">물레 앞에 앉으면 두 시간이 금방 갑니다. 느려야만 만들어지는 것들을, 흙과물레에서 경험해 보세요.</p>
+<div class="hxo-cta"><a class="btn" href="tel:010-4894-4905">수강 문의하기</a><a class="btn ghost" href="#class">클래스 보기</a></div>
+</div></div>
+</section>
 
 <section id="class" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">CLASS</p><h2>두 가지 클래스</h2></div>

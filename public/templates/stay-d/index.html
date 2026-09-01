@@ -106,6 +106,13 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 .gr{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 24px}
 .gr b{display:block;font-size:13.5px;color:var(--deep)}
 .gr p{margin-top:8px;font-size:13.5px;line-height:1.8;color:var(--soft)}
+
+/* 영상 슬롯 — assets/hero.mp4 를 넣고 아래 <video> 주석을 풀면 바로 재생된다.
+   모바일과 모션 최소화 설정에서는 영상을 내려받지 않고 poster 이미지만 쓴다. */
+.hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;display:block}
+.hero-bg:has(.hero-vid){animation:none}
+@media(max-width:760px){.hero-vid{display:none}}
+@media(prefers-reduced-motion:reduce){.hero-vid{display:none}}
 </style>
 </head>
 <body>
@@ -117,7 +124,11 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </div></header>
 
 <section class="hero">
-<div class="hero-bg"></div><div class="hero-veil"></div>
+<div class="hero-bg"><!-- 영상 준비 시 이 주석을 풀면 됩니다. 파일: ./assets/hero.mp4 (+ 선택 hero.webm)
+<video class="hero-vid" autoplay muted loop playsinline preload="metadata" poster="./assets/hero.jpg">
+<source src="./assets/hero.webm" type="video/webm"><source src="./assets/hero.mp4" type="video/mp4">
+</video>
+--></div><div class="hero-veil"></div>
 <div class="hero-in">
 <p class="loc">GANGNEUNG · EAST SEA</p>
 <h1>파도 소리가 가장 큰 방,<br><b>블루아워</b></h1>

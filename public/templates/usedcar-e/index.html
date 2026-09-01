@@ -98,6 +98,58 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 재구성: 아카이브 프린트 콜라주 ───────────────────── */
+.hx-hero{padding:72px 0 86px}
+.hero .hx-wrap{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:44px;align-items:center}
+.hx-copy h1{font-size:clamp(28px,3.6vw,38px)}
+.hx-copy p{max-width:340px}
+
+.hx-collage{position:relative;aspect-ratio:10/7}
+.hx-shot{position:absolute;transform:rotate(var(--r));transition:transform .9s cubic-bezier(.32,.72,0,1)}
+.hx-card{position:relative;background:#fff;border:1px solid var(--line);padding:7px;box-shadow:0 26px 44px -30px rgba(44,38,34,.7)}
+.hx-crop{position:relative;overflow:hidden;width:100%;background:var(--ink) no-repeat}
+.hx-crop img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:50% 50%;filter:sepia(.14) contrast(1.05) saturate(.92)}
+/* 배율이 다른 두 장은 배경 창으로 잘라낸다 — 상자를 키우지 않아야 좁은 화면에서 삐져나가지 않는다 */
+.hx-bg2,.hx-bg3{filter:sepia(.14) contrast(1.05) saturate(.92)}
+.hx-bg2{background-image:url(./assets/car-1.jpg);background-size:320% auto;background-position:18% 52%}
+.hx-bg3{background-image:url(./assets/car-6.jpg);background-size:240% auto;background-position:50% 70%}
+.hx-tab{position:absolute;left:0;top:0;background:var(--wine);color:var(--cream);font-family:"Nanum Myeongjo",serif;font-size:10.5px;font-weight:700;letter-spacing:.2em;padding:7px 13px;line-height:1}
+
+.hx-s1{left:0;top:4%;width:64%;z-index:1;--r:-2.8deg}
+.hx-s1 .hx-crop{aspect-ratio:5/4}
+
+.hx-s2{left:48%;top:50%;width:30%;z-index:3;--r:2.4deg}
+.hx-s2 .hx-crop{aspect-ratio:1}
+
+.hx-s3{left:66%;top:2%;width:32%;z-index:2;--r:3.4deg}
+.hx-s3 .hx-crop{aspect-ratio:4/5}
+
+.hx-chip{position:absolute;left:0;top:72%;width:46%;z-index:4;background:var(--cream);border:1px solid var(--line);padding:13px 16px 15px}
+.hx-chip-k{display:block;font-family:"Nanum Myeongjo",serif;font-size:10.5px;font-weight:700;letter-spacing:.22em;color:var(--wine)}
+.hx-chip b{display:block;margin-top:7px;font-size:12.5px;font-weight:500;color:var(--ink);line-height:1.65}
+
+@keyframes hxDrift{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.hx-s2 .hx-card{animation:hxDrift 8s ease-in-out infinite}
+.hx-collage:hover .hx-shot{transform:rotate(calc(var(--r) * .35))}
+
+@media(max-width:900px){.hero .hx-wrap{grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:32px}}
+@media(max-width:820px){
+.hx-hero{padding:44px 0 62px}
+.hero .hx-wrap{grid-template-columns:1fr;gap:36px}
+.hx-copy p{max-width:460px}
+.hx-collage{aspect-ratio:100/86;width:100%;max-width:420px;margin:0 auto}
+.hx-s3{display:none}
+.hx-s1{left:0;top:0;width:70%;--r:-1.4deg}
+.hx-s2{left:56%;top:34%;width:40%;--r:1.2deg}
+.hx-chip{left:0;top:auto;bottom:0;width:54%;padding:11px 13px 13px}
+.hx-chip b{font-size:12px}
+}
+@media(prefers-reduced-motion:reduce){
+.hx-s2 .hx-card{animation:none}
+.hx-shot{transition:none}
+.hx-collage:hover .hx-shot{transform:rotate(var(--r))}
+}
 </style>
 </head>
 <body>
@@ -108,14 +160,19 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">상담 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero"><div class="wrap hx-wrap">
+<div class="hx-copy">
 <p class="kicker">CURATED PRE-OWNED · SINCE 2011</p>
 <h1 style="margin-top:16px">모든 차에는<br><em>지나온 시간</em>이 있습니다</h1>
 <p>한 대에 서류 한 묶음이 따라옵니다. 등록 이력, 정비 기록, 소유자 변경 내역까지 정리해 차와 같이 넘겨 드립니다.</p>
 <div class="hero-cta"><a class="btn" href="tel:010-4894-4905">상담 문의</a><a class="btn ghost" href="#coll">컬렉션 보기</a></div>
 </div>
-<figure class="rv"><img src="./assets/car-3.jpg" alt="컬렉션 차량"><figcaption>HERITAGE COLLECTION</figcaption></figure>
+<div class="hx-collage rv">
+<div class="hx-shot hx-s1"><figure class="hx-card"><div class="hx-crop"><img src="./assets/car-3.jpg" alt="전시장에 놓인 대형 세단"><span class="hx-tab">HERITAGE COLLECTION</span></div></figure></div>
+<div class="hx-shot hx-s3"><figure class="hx-card"><div class="hx-crop hx-bg3" role="img" aria-label="차체 측면 라인 근접"></div></figure></div>
+<div class="hx-shot hx-s2"><figure class="hx-card"><div class="hx-crop hx-bg2" role="img" aria-label="전면 램프와 그릴 근접"></div></figure></div>
+<div class="hx-chip"><span class="hx-chip-k">HISTORY REPORT</span><b>등록 이력 · 정비 기록 · 실주행 검증</b></div>
+</div>
 </div></section>
 
 <section id="coll" style="padding-top:0"><div class="wrap">

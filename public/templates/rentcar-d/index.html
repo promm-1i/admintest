@@ -128,6 +128,13 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
  .boardbar div:nth-child(2n){border-right:0}
 }
 @media(prefers-reduced-motion:reduce){.hero-stage img,.hero .chip,.hero-bg,.hero-col figure{animation:none!important;transform:none!important}}
+
+/* 영상 슬롯 — assets/hero.mp4 를 넣고 아래 <video> 주석을 풀면 바로 재생된다.
+   모바일과 모션 최소화 설정에서는 영상을 내려받지 않고 poster 이미지만 쓴다. */
+.hero-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;display:block}
+.hero-bg:has(.hero-vid){animation:none}
+@media(max-width:760px){.hero-vid{display:none}}
+@media(prefers-reduced-motion:reduce){.hero-vid{display:none}}
 </style>
 </head>
 <body>
@@ -139,7 +146,11 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </div></header>
 
 <section class="hero">
-<div class="hero-bg" aria-hidden="true"><img src="./assets/hero.jpg" alt=""></div>
+<div class="hero-bg" aria-hidden="true"><img src="./assets/hero.jpg" alt=""><!-- 영상 준비 시 이 주석을 풀면 됩니다. 파일: ./assets/hero.mp4 (+ 선택 hero.webm)
+<video class="hero-vid" autoplay muted loop playsinline preload="metadata" poster="./assets/hero.jpg">
+<source src="./assets/hero.webm" type="video/webm"><source src="./assets/hero.mp4" type="video/mp4">
+</video>
+--></div>
 <div class="wrap">
 <span class="kicker">AIRPORT PICK-UP</span>
 <h1 style="margin-top:16px">차를 빌리는 게 아니라<br><em>여행을 예약하는 것</em></h1>

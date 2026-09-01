@@ -96,6 +96,62 @@ footer b{color:var(--cream)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hero: 전후 비교 밴드 (hx-) ===== */
+.hx-hero{padding:56px 0 0}
+.hx-hero .kicker{color:var(--gold)}
+.hx-hero h1{max-width:840px}
+.hx-hero .hx-lede{max-width:none}
+/* 사진 두 장. 밴드는 화면 폭 전체를 쓴다 */
+.hx-band{position:relative;width:100%;height:clamp(320px,44vh,480px);margin-top:32px;overflow:hidden;background:var(--panel)}
+.hx-band img{width:100%;height:100%;margin:0;object-fit:cover;filter:contrast(1.05)}
+.hx-base{position:absolute;inset:0}
+/* 오른쪽 고정 scaleX 로 폭이 변한다. 안쪽 이미지는 역스케일로 위치가 고정된다 */
+.hx-after{position:absolute;inset:0;overflow:hidden;transform-origin:100% 50%;transform:scaleX(.52);animation:hxS 8s linear infinite;animation-delay:var(--hxd,0s)}
+.hx-after img{position:absolute;inset:0;transform-origin:100% 50%;transform:scaleX(1.9154);animation:hxInv 8s linear infinite;animation-delay:var(--hxd,0s)}
+.hx-after::before{content:"";position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);z-index:2;transform-origin:0 50%;transform:scaleX(1.9154);animation:hxInv 8s linear infinite;animation-delay:var(--hxd,0s)}
+@keyframes hxS{
+0%,100%{transform:scaleX(.300)}5%,95%{transform:scaleX(.311)}10%,90%{transform:scaleX(.342)}
+15%,85%{transform:scaleX(.391)}20%,80%{transform:scaleX(.452)}25%,75%{transform:scaleX(.520)}
+30%,70%{transform:scaleX(.588)}35%,65%{transform:scaleX(.649)}40%,60%{transform:scaleX(.698)}
+45%,55%{transform:scaleX(.729)}50%{transform:scaleX(.740)}}
+/* hxS 의 역수 ×.996 — 안쪽 이미지가 밴드를 넘지 않고 항상 살짝 안쪽에 물린다 */
+@keyframes hxInv{
+0%,100%{transform:scaleX(3.3200)}5%,95%{transform:scaleX(3.2025)}10%,90%{transform:scaleX(2.9123)}
+15%,85%{transform:scaleX(2.5473)}20%,80%{transform:scaleX(2.2036)}25%,75%{transform:scaleX(1.9154)}
+30%,70%{transform:scaleX(1.6939)}35%,65%{transform:scaleX(1.5346)}40%,60%{transform:scaleX(1.4270)}
+45%,55%{transform:scaleX(1.3662)}50%{transform:scaleX(1.3460)}}
+/* 마우스가 들어오면 경계선이 커서를 따라간다 */
+.hx-band.is-manual .hx-after{animation:none;transform:scaleX(var(--hxs,.52))}
+.hx-band.is-manual .hx-after img,.hx-band.is-manual .hx-after::before{animation:none;transform:scaleX(var(--hxi,1.9154))}
+/* 전 · 후 라벨은 경계선과 무관하게 항상 보인다 */
+.hx-tag{position:absolute;bottom:0;z-index:4;display:flex;align-items:baseline;gap:11px;background:var(--dark);padding:11px 18px;font-size:10.5px;letter-spacing:.3em;color:var(--gold);line-height:1.5}
+.hx-tag i{font-style:normal;font-size:11.5px;letter-spacing:.02em;color:var(--cream)}
+.hx-tag-b{left:0}
+.hx-tag-a{right:0}
+/* CTA 는 비교 영역 바깥 아래 */
+.hx-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:18px 40px;flex-wrap:wrap;margin-top:26px;padding-bottom:34px;border-bottom:1px solid var(--line)}
+.hx-say{max-width:480px}
+.hx-act{display:flex;gap:12px;flex-wrap:wrap}
+.hx-meta{display:flex;flex-wrap:wrap;gap:6px 22px;list-style:none;margin-top:10px;font-size:12px;letter-spacing:.05em;color:var(--soft)}
+.hx-meta li::before{content:"— ";color:var(--gold)}
+/* 모바일: 밴드 다음 바로 CTA. 설명과 정보는 그 아래로 내린다 */
+@media(max-width:600px){
+.hx-hero{padding:44px 0 0}
+.hx-hero .hx-lede{font-size:13.5px}
+.hx-band{height:248px;margin-top:24px}
+.hx-tag{padding:9px 12px;font-size:9.5px;letter-spacing:.2em;gap:8px}
+.hx-tag i{font-size:10.5px}
+.hx-foot{flex-direction:column;align-items:stretch;margin-top:20px;padding-bottom:26px;gap:16px}
+.hx-act{order:-1;width:100%;gap:10px}
+.hx-act .btn{flex:1 1 0;text-align:center;padding:14px 10px;font-size:13.5px}
+.hx-say{max-width:none}
+.hx-meta{font-size:11.5px;gap:6px 16px}
+}
+@media(prefers-reduced-motion:reduce){
+.hx-after{animation:none!important;transform:scaleX(.52)!important}
+.hx-after img,.hx-after::before{animation:none!important;transform:scaleX(1.9154)!important}
+}
 </style>
 </head>
 <body>
@@ -106,15 +162,45 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">현장 실측</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hero hx-hero">
+<div class="wrap hx-head rv">
 <p class="kicker">COMMERCIAL INTERIOR</p>
 <h1 style="margin-top:20px">매출이 나오는 공간에는<br><em>이유가 있습니다</em></h1>
-<div class="row">
-<p>스페이스랩은 상업공간만 합니다. 동선, 좌석 회전율, 조도까지 — 예쁜 것보다 장사가 되는 쪽을 먼저 설계합니다.</p>
-<div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="tel:010-4894-4905">현장 실측 요청</a><a class="btn line" href="#type">사례 보기</a></div>
 </div>
-<img class="rv" src="./assets/hero.jpg" alt="주거 시공 사례">
-</div></section>
+<div class="hx-band" id="hxBand">
+<img class="hx-base" src="./assets/ba-before.jpg" alt="시공 전 매장 내부">
+<div class="hx-after"><img src="./assets/ba-after.jpg" alt="스페이스랩 시공 후 같은 각도의 매장 내부"></div>
+<span class="hx-tag hx-tag-b">BEFORE<i>인수 당시</i></span>
+<span class="hx-tag hx-tag-a">AFTER<i>오픈 직전</i></span>
+</div>
+<div class="wrap hx-foot rv">
+<div class="hx-say">
+<p class="hx-lede">스페이스랩은 상업공간만 합니다. 동선, 좌석 회전율, 조도까지 — 예쁜 것보다 장사가 되는 쪽을 먼저 설계합니다.</p>
+<ul class="hx-meta"><li>23평 로스터리 카페</li><li>공사 5주</li><li>성수동</li></ul>
+</div>
+<div class="hx-act"><a class="btn" href="tel:010-4894-4905">현장 실측 요청</a><a class="btn line" href="#type">사례 보기</a></div>
+</div>
+<script>
+(function(){
+var b=document.getElementById('hxBand');if(!b)return;
+if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;
+if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+b.addEventListener('pointermove',function(e){
+  var r=b.getBoundingClientRect();if(!r.width)return;
+  var s=Math.max(.18,Math.min(.86,1-(e.clientX-r.left)/r.width));
+  b.style.setProperty('--hxs',s.toFixed(4));
+  b.style.setProperty('--hxi',(.996/s).toFixed(4));
+  b.classList.add('is-manual');
+});
+b.addEventListener('pointerleave',function(){
+  var s=parseFloat(b.style.getPropertyValue('--hxs'))||.52;
+  var u=Math.acos(Math.max(-1,Math.min(1,(.52-s)/.22)))/(2*Math.PI);
+  b.style.setProperty('--hxd',(-u*8).toFixed(2)+'s');
+  b.classList.remove('is-manual');
+});
+})();
+</script>
+</section>
 
 <section id="type"><div class="wrap">
 <div class="rv"><p class="kicker">BY CATEGORY</p><h2>업종마다 다르게 접근합니다</h2></div>

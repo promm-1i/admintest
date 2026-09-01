@@ -102,6 +102,49 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 재구성 : 마른 다발이 문구 뒤로 넓게 깔리는 레이어형 ───────────── */
+.hx-hero{position:relative;overflow:hidden;padding:0;text-align:left;background:var(--paper)}
+.hx-hero>.wrap{position:relative;z-index:1}
+/* 사진층 — 오른쪽·위·아래로 화면 밖까지 흘려보낸다 */
+.hx-shot{position:absolute;z-index:0;top:-9%;bottom:-9%;left:calc(50% - 8vw);right:-9vw;overflow:hidden;background:var(--paper)}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:54% 46%;border-radius:0;
+ transform-origin:64% 50%;animation:hx-breathe 24s ease-in-out infinite alternate}
+@keyframes hx-breathe{from{transform:scale(1.01)}to{transform:scale(1.11)}}
+/* 문구가 얹히는 왼쪽 끝은 종이색으로 완전히 덮는다 */
+.hx-veil{position:absolute;inset:0;pointer-events:none;background:
+ linear-gradient(90deg,var(--paper) 0,var(--paper) 120px,rgba(247,241,233,.8) 210px,rgba(247,241,233,.35) 320px,rgba(247,241,233,0) 440px),
+ linear-gradient(180deg,rgba(247,241,233,.5) 0,rgba(247,241,233,0) 11%,rgba(247,241,233,0) 84%,rgba(247,241,233,.78) 100%)}
+.hx-note{position:absolute;z-index:2;right:calc(9vw + 40px);bottom:64px;
+ font-family:"Gaegu";font-size:18px;font-weight:700;line-height:1.3;white-space:nowrap;
+ color:var(--ink);background:rgba(247,241,233,.94);padding:8px 18px;border-radius:99px;
+ box-shadow:0 10px 26px rgba(74,63,57,.16)}
+/* 문구층 */
+.hx-copy{width:min(100%,520px);padding:112px 0 118px}
+.hx-copy h1{font-size:clamp(34px,5.2vw,62px);line-height:1.26;margin-top:16px;letter-spacing:-.01em;white-space:nowrap}
+.hx-copy h1 em{display:inline-block;margin-left:clamp(0px,9vw,130px)}
+.hx-copy>p{margin:18px 0 0;max-width:430px}
+.hx-cta{justify-content:flex-start;margin-top:28px}
+.hx-copy .hx-hours{font-family:"Gaegu";font-size:18px;font-weight:400;color:var(--ink);line-height:1.6;
+ max-width:none;margin:30px 0 0;padding-top:16px;border-top:1.5px dashed var(--line)}
+/* 좁은 화면 — 겹침을 풀고 사진과 문구를 위아래로 나눈다 */
+@media(max-width:980px){
+ .hx-hero{padding:0 0 56px}
+ .hx-shot{position:relative;top:0;left:0;right:0;bottom:0;width:100%;height:clamp(200px,34vh,300px)}
+ /* 좁은 화면에선 확대 대신 같은 24초 세로 흐름 — 확대하면 사진 상자가 화면 밖으로 나간다 */
+ .hx-shot img{position:absolute;top:0;left:0;width:100%;height:120%;object-position:52% 42%;
+  transform-origin:50% 0;animation:hx-drift 24s ease-in-out infinite alternate}
+ @keyframes hx-drift{from{transform:translateY(0)}to{transform:translateY(-15%)}}
+ .hx-veil{background:linear-gradient(180deg,rgba(247,241,233,.45) 0,rgba(247,241,233,0) 16%,rgba(247,241,233,0) 62%,rgba(247,241,233,.92) 100%)}
+ .hx-note{right:18px;bottom:16px;font-size:16px;padding:7px 15px}
+ .hx-copy{width:100%;padding:26px 0 0}
+ .hx-copy h1{margin-top:12px;line-height:1.3}
+ .hx-copy h1 em{margin-left:0}
+ .hx-copy>p{margin-top:14px;max-width:none}
+ .hx-cta{margin-top:22px}
+ .hx-copy .hx-hours{margin-top:24px;padding-top:14px}
+}
+@media(prefers-reduced-motion:reduce){.hx-shot img{animation:none;transform:none}}
 </style>
 </head>
 <body>
@@ -112,17 +155,20 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">주문 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<span class="tag">시들지 않는 꽃</span>
-<h1 style="margin-top:16px">마르면서<br><em>더 예뻐지는 것들</em></h1>
-<p>생화의 화려함은 없지만, 계절이 지나도 그대로 있어요. 이사 갈 때 같이 데려가는 꽃입니다.</p>
-<div class="hero-cta"><a class="btn btn-r" href="tel:010-4894-4905">주문 문의</a><a class="btn btn-w" href="#items">상품 보기</a></div>
-<div class="hero-grid rv">
-<figure><img src="./assets/1.jpg" alt="드라이 부케"><figcaption>다발</figcaption></figure>
-<figure><img src="./assets/3.jpg" alt="그린 플랜트"><figcaption>리스</figcaption></figure>
-<figure><img src="./assets/5.jpg" alt="스와그"><figcaption>스와그</figcaption></figure>
+<section class="hero hx-hero">
+<div class="hx-shot">
+<img src="./assets/5.jpg" alt="팜파스와 바니테일, 마른 소국을 항아리에 담은 드라이플라워 다발">
+<span class="hx-veil" aria-hidden="true"></span>
+<span class="hx-note">말린 다발 · 28,000원~</span>
 </div>
-</div></section>
+<div class="wrap"><div class="hx-copy">
+<span class="tag rv">시들지 않는 꽃</span>
+<h1 class="rv">마르면서<br><em>더 예뻐지는 것들</em></h1>
+<p class="rv">생화의 화려함은 없지만, 계절이 지나도 그대로 있어요. 이사 갈 때 같이 데려가는 꽃입니다.</p>
+<div class="hero-cta hx-cta rv"><a class="btn btn-r" href="tel:010-4894-4905">주문 문의</a><a class="btn btn-w" href="#items">상품 보기</a></div>
+<p class="hx-hours rv">수 – 일 12:00 – 19:00 · 월 · 화 휴무 · 선물 포장은 무료</p>
+</div></div>
+</section>
 
 <section id="items" style="padding-top:0"><div class="wrap">
 <div class="rv"><span class="tag">상품 안내</span><h2>이런 것들을 만들어요</h2></div>
