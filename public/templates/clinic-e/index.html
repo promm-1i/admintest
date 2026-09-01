@@ -104,6 +104,32 @@ footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 footer b{color:var(--char)}
 @keyframes pulse-line{0%,100%{opacity:.4}50%{opacity:.9}}
 .hero-img::after{animation:pulse-line 6s ease-in-out infinite}
+
+/* 전경 밴드 */
+.band{position:relative;margin:0;overflow:hidden}
+.band>img{width:100%;height:clamp(230px,32vw,390px);object-fit:cover;display:block}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 26px 26px;background:linear-gradient(transparent,rgba(10,10,14,.82));color:#fff}
+.band figcaption b{display:block;font-size:clamp(17px,2.4vw,22px);font-weight:700}
+.band figcaption span{display:block;margin-top:7px;font-size:13px;color:rgba(255,255,255,.82);max-width:660px}
+/* 사진 그리드 */
+.pgrid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pgrid{grid-template-columns:1fr}}
+.pgrid.two{grid-template-columns:1fr 1fr}
+@media(max-width:520px){.pgrid.two{grid-template-columns:1fr}}
+.pg{margin:0;position:relative;overflow:hidden;border-radius:14px}
+.pg img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .7s cubic-bezier(.32,.72,0,1)}
+.pg:hover img{transform:scale(1.05)}
+.pg figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;background:linear-gradient(transparent,rgba(10,10,14,.82));color:#fff;font-size:12.5px;font-weight:700}
+.pg figcaption em{display:block;font-style:normal;font-weight:400;font-size:11.5px;color:rgba(255,255,255,.78);margin-top:3px}
+/* 인물 */
+.docs{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.docs{grid-template-columns:1fr}}
+.dc{margin:0}
+.dc img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px}
+.dc b{display:block;margin-top:14px;font-size:16px;font-weight:700}
+.dc .rl{display:block;margin-top:5px;font-size:11.5px;letter-spacing:.14em;color:#5B626B}
+.dc p{margin-top:9px;font-size:13px;line-height:1.7}
 </style>
 </head>
 <body>
@@ -123,6 +149,11 @@ footer b{color:var(--char)}
 </div>
 <figure class="hero-img rv"><img src="./assets/gallery-2.jpg" alt="검진센터 내부"></figure>
 </div></section>
+
+<figure class="band">
+<img src="./assets/gallery-8.jpg" alt="검진센터 접수 데스크">
+<figcaption><b>문진표부터 결과 상담까지 한 층에서</b><span>접수 · 채혈 · 영상 · 상담이 같은 층에 있습니다. 검진 가운을 입고 층을 옮겨 다니실 일이 없습니다.</span></figcaption>
+</figure>
 
 <section id="package"><div class="wrap">
 <div class="rv" style="text-align:center"><p class="kicker">PACKAGE</p><h2>검진 패키지</h2><p class="sub" style="margin-left:auto;margin-right:auto">모든 패키지에 전문의 결과 상담이 포함됩니다.</p></div>
@@ -164,6 +195,25 @@ footer b{color:var(--char)}
 <div class="corp rv">
 <div><h3>기업 · 단체 검진</h3><p>임직원 정기 검진을 단체로 진행합니다. 인원과 희망 일정만 주시면 맞춤 패키지와 단가를 제안해 드리고, 결과는 개인정보 보호 원칙에 따라 본인에게만 전달됩니다.</p></div>
 <a class="btn" href="tel:0507-000-0000">단체 검진 문의</a>
+</div>
+</div></section>
+
+<section id="rooms" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">FACILITY</p><h2>검진실을 미리 보여드립니다</h2><p class="sub">검진 당일 이 순서로 지나가시게 됩니다. 대기 동선과 검사실이 분리돼 있습니다.</p></div>
+<div class="pgrid rv">
+<figure class="pg"><img src="./assets/hero-poster.jpg" alt="검진 동선"><figcaption>검진 동선<em>탈의실에서 검사실까지 외부 동선과 분리</em></figcaption></figure>
+<figure class="pg"><img src="./assets/gallery-6.jpg" alt="기초 검사실"><figcaption>기초 검사실<em>혈압 · 신체 계측 · 시력 · 청력</em></figcaption></figure>
+<figure class="pg"><img src="./assets/gallery-1.jpg" alt="진찰실"><figcaption>진찰실<em>문진과 이학적 검사 · 창가 채광</em></figcaption></figure>
+<figure class="pg"><img src="./assets/gallery-3.jpg" alt="영상 검사 장비"><figcaption>영상 검사 장비<em>초음파 · 골밀도 검사</em></figcaption></figure>
+<figure class="pg"><img src="./assets/gallery-5.jpg" alt="검사실"><figcaption>검사실<em>내시경 · 심전도 · 회복 침상</em></figcaption></figure>
+<figure class="pg"><img src="./assets/gallery-7.jpg" alt="결과 판독"><figcaption>결과 판독<em>판독 전문의가 이틀 안에 소견을 씁니다</em></figcaption></figure>
+</div>
+</div></section>
+
+<section id="doctors" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">DOCTORS</p><h2>결과를 설명하는 사람들</h2><p class="sub">검진 결과지를 우편으로만 보내지 않습니다. 판독한 전문의가 직접 설명 상담을 합니다.</p></div>
+<div class="docs rv">
+<figure class="dc"><img src="./assets/doctor-1.jpg" alt="이정한 원장"><b>이정한 <span style="font-size:12px;font-weight:400">원장</span></b><span class="rl">내과 전문의 · 소화기내시경 세부전문의</span><p>위 · 대장내시경과 종합검진 판독을 맡습니다. 진정내시경 누적 2만 건.</p></figure><figure class="dc"><img src="./assets/doctor-2.jpg" alt="한서윤 과장"><b>한서윤 <span style="font-size:12px;font-weight:400">과장</span></b><span class="rl">영상의학과 전문의</span><p>초음파 · CT · 유방촬영 판독을 담당합니다. 여성 검진은 여의사 진료로 배정 가능합니다.</p></figure><figure class="dc"><img src="./assets/doctor-3.jpg" alt="최도현 과장"><b>최도현 <span style="font-size:12px;font-weight:400">과장</span></b><span class="rl">가정의학과 전문의</span><p>결과 설명 상담과 생활습관 관리 계획을 함께 정리해 드립니다.</p></figure>
 </div>
 </div></section>
 
