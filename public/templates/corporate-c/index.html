@@ -133,6 +133,50 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hero: 태양광 평원 풀블리드 ── */
+.hx-hero{position:relative;min-height:min(90vh,780px);padding:0;display:flex;align-items:flex-end;overflow:hidden;background:#0B2418;isolation:isolate}
+.hx-media{position:absolute;inset:0;overflow:hidden;z-index:0}
+.hx-hero .hx-img{width:100%;height:100%;max-width:none;object-fit:cover;object-position:66% 64%}
+@keyframes hx-zoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+@media(min-width:881px){.hx-hero .hx-img{animation:hx-zoom 24s linear both}}
+.hx-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(8,26,17,.60) 0%,rgba(8,26,17,.58) 38%,rgba(8,26,17,.46) 52%,rgba(8,26,17,.20) 70%,rgba(8,26,17,0) 88%)}
+.hx-inner{position:relative;z-index:2;width:100%;max-width:1100px;margin:0 auto;padding:180px 24px 74px}
+.hx-copy{max-width:560px}
+.hx-hero .kicker{color:var(--sand);text-shadow:0 1px 12px rgba(6,20,13,.6)}
+.hx-hero h1{font-family:"Gowun Batang",serif;font-size:clamp(38px,5.2vw,58px);font-weight:700;line-height:1.38;letter-spacing:-.01em;margin-top:16px;color:var(--sand);text-shadow:0 2px 22px rgba(6,20,13,.5)}
+.hx-hero h1 em{font-style:normal;color:#A8D08A}
+.hx-hero .hx-lead{margin-top:20px;max-width:470px;font-size:16px;line-height:1.85;color:#DEE6D9;text-shadow:0 1px 14px rgba(6,20,13,.6)}
+.hx-hero .hx-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-hero .btn-f{background:var(--leaf);color:var(--forest-2);font-weight:700}
+.hx-hero .btn-f:hover{background:#93C27C}
+.hx-hero .hx-btn2{background:var(--forest);color:var(--sand);font-weight:500;font-size:15px;padding:16px 28px;border-radius:99px;border:1px solid rgba(239,233,220,.34);transition:background .25s,transform .4s cubic-bezier(.32,.72,0,1)}
+.hx-hero .hx-btn2:hover{background:var(--forest-2)}
+.hx-hero .hx-btn2:active{transform:scale(.97)}
+.hx-hero .hx-stat{margin-top:30px;max-width:470px;padding-top:17px;border-top:1px solid rgba(239,233,220,.3);font-size:14px;color:#DEE6D9;text-shadow:0 1px 14px rgba(6,20,13,.6)}
+.hx-hero .hx-stat b{font-family:"Gowun Batang",serif;font-size:22px;font-weight:700;color:#A8D08A}
+.hx-hero+.curve{background:#0E2E20}
+@keyframes hx-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.hx-copy>*{animation:hx-rise .7s cubic-bezier(.32,.72,0,1) both}
+.hx-copy>*:nth-child(2){animation-delay:.07s}
+.hx-copy>*:nth-child(3){animation-delay:.14s}
+.hx-copy>*:nth-child(4){animation-delay:.21s}
+.hx-copy>*:nth-child(5){animation-delay:.28s}
+@media(max-width:880px){
+  .hx-hero{min-height:min(88vh,660px)}
+  /* 가로 사진을 그대로 줄이지 않고 세로로 다시 크롭한다 — 하늘을 덜어내고 패널을 살린다 */
+  .hx-hero .hx-img{position:absolute;left:0;top:-45%;width:100%;height:145%;object-position:56% 50%}
+  .hx-hero .kicker{font-size:10.5px;letter-spacing:.18em}
+  .hx-scrim{background:linear-gradient(180deg,rgba(8,26,17,.34) 0%,rgba(8,26,17,.06) 22%,rgba(8,26,17,.30) 52%,rgba(8,26,17,.56) 78%,rgba(8,26,17,.60) 100%)}
+  .hx-inner{padding:110px 20px 30px}
+  .hx-hero h1{font-size:clamp(27px,8.2vw,34px);line-height:1.42;margin-top:12px}
+  .hx-hero .hx-lead{margin-top:14px;font-size:14px;line-height:1.75}
+  .hx-hero .hx-cta{margin-top:22px;gap:9px}
+  .hx-hero .btn-f,.hx-hero .hx-btn2{padding:14px 19px;font-size:14px}
+  .hx-hero .hx-stat{margin-top:20px;padding-top:14px;font-size:13px}
+  .hx-hero .hx-stat b{font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){.hx-hero .hx-img,.hx-copy>*{animation:none}}
 </style>
 </head>
 <body>
@@ -151,20 +195,21 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div>
+<section class="hero hx-hero">
+  <div class="hx-media">
+    <img class="hx-img" src="./assets/hero.jpg" alt="산등성이를 따라 이어진 태양광 발전 단지" fetchpriority="high">
+  </div>
+  <div class="hx-scrim"></div>
+  <div class="hx-inner">
+    <div class="hx-copy">
       <p class="kicker"><span class="leaf-dot"></span>RENEWABLE ENERGY PARTNER</p>
-      <h1 style="margin-top:18px">다음 세대의 땅에,<br><em>오늘 심는 에너지</em></h1>
-      <p>에코원은 태양광 발전소의 개발 · 시공 · 운영을 한 번에 맡는 재생에너지 전문기업입니다. 유휴 부지가 수익이 되고, 수익이 다시 숲이 됩니다.</p>
-      <div class="hero-cta">
+      <h1>다음 세대의 땅에,<br><em>오늘 심는 에너지</em></h1>
+      <p class="hx-lead">에코원은 태양광 발전소의 개발 · 시공 · 운영을 한 번에 맡는 재생에너지 전문기업입니다. 유휴 부지가 수익이 되고, 수익이 다시 숲이 됩니다.</p>
+      <div class="hx-cta">
         <a class="btn-f" href="tel:010-4894-4905">부지 진단 신청</a>
-        <a class="btn-t" href="#business">사업 소개 보기</a>
+        <a class="hx-btn2" href="#business">사업 소개 보기</a>
       </div>
-    </div>
-    <div class="arch rv">
-      <img src="./assets/hero.jpg" alt="태양광 발전 단지">
-      <div class="chip">지금까지 <b>142MW</b> 준공 · 운영</div>
+      <p class="hx-stat">지금까지 <b>142MW</b> 준공 · 운영</p>
     </div>
   </div>
 </section>

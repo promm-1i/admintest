@@ -120,6 +120,46 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ============ hero — full-bleed living room (hx-) ============ */
+.hx-hero{position:relative;display:flex;align-items:flex-end;height:100vh;height:100svh;min-height:600px;max-height:920px;padding:0;overflow:hidden;background:#171310;isolation:isolate}
+.hx-shot{position:absolute;inset:0;overflow:hidden}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:56% 46%;transform-origin:66% 56%;animation:hx-zoom 24s ease-in-out infinite alternate;will-change:transform}
+@keyframes hx-zoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+.hx-scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(78deg,rgba(20,16,12,.58) 0%,rgba(20,16,12,.56) 26%,rgba(20,16,12,.47) 42%,rgba(20,16,12,.24) 58%,rgba(20,16,12,.05) 74%,rgba(20,16,12,0) 88%)}
+.hx-body{position:relative;width:100%;padding-bottom:clamp(46px,7.5vh,86px)}
+.hx-col{max-width:620px;color:var(--paper)}
+.hx-kicker{font-size:12px;letter-spacing:.34em;font-weight:500;color:#E9CDA6}
+.hx-title{font-family:"Noto Serif KR",serif;font-weight:600;font-size:clamp(30px,4.2vw,55px);line-height:1.36;letter-spacing:-.015em;margin-top:18px;text-shadow:0 2px 30px rgba(16,12,9,.5)}
+.hx-title em{font-style:normal;color:#E9CDA6}
+.hx-stats{list-style:none;display:flex;flex-wrap:wrap;gap:14px 52px;margin-top:34px;padding-top:22px;border-top:1px solid rgba(253,252,250,.36)}
+.hx-stats li{font-size:13px;color:rgba(253,252,250,.88)}
+.hx-stats b{display:block;font-family:"Noto Serif KR",serif;font-weight:600;font-size:25px;line-height:1.35;color:var(--paper)}
+.hx-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px}
+.hx-btn{display:inline-block;font-size:14px;font-weight:500;letter-spacing:.02em;line-height:1.5;padding:14px 26px;border-radius:2px;border:1px solid transparent;transition:transform .35s cubic-bezier(.32,.72,0,1),background .35s}
+.hx-btn-1{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.hx-btn-1:hover{background:#EFE7DA}
+.hx-btn-2{background:#1C1A17;color:var(--paper);border-color:rgba(253,252,250,.36)}
+.hx-btn-2:hover{background:#332E28}
+.hx-btn:hover{transform:translateY(-2px)}
+.hx-credit{margin-top:30px;font-size:11.5px;letter-spacing:.18em;color:rgba(253,252,250,.8)}
+@media(max-width:900px){.hx-stats{gap:14px 36px}}
+@media(max-width:760px){
+  .hx-hero{max-height:none;min-height:560px}
+  .hx-shot img{object-position:63% 44%;transform-origin:60% 50%}
+  .hx-scrim{background:linear-gradient(to top,rgba(20,16,12,.58) 0%,rgba(20,16,12,.56) 30%,rgba(20,16,12,.49) 46%,rgba(20,16,12,.26) 62%,rgba(20,16,12,.05) 79%,rgba(20,16,12,0) 90%)}
+  .hx-body{padding-bottom:34px}
+  .hx-col{max-width:none}
+  .hx-kicker{font-size:11px;letter-spacing:.28em}
+  .hx-title{font-size:clamp(25px,7.2vw,32px);line-height:1.4;margin-top:13px}
+  .hx-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:24px;padding-top:15px}
+  .hx-stats li{font-size:11px;line-height:1.5}
+  .hx-stats b{font-size:17px;line-height:1.4}
+  .hx-cta{flex-direction:column;align-items:stretch;gap:9px;margin-top:22px}
+  .hx-btn{text-align:center;padding:13px 18px;font-size:13.5px}
+  .hx-credit{margin-top:18px;font-size:10.5px;letter-spacing:.14em}
+}
+@media(prefers-reduced-motion:reduce){.hx-shot img{animation:none}.hx-btn{transition:none}}
 </style>
 </head>
 <body>
@@ -136,19 +176,28 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
   </div>
 </header>
 
-<section class="hero" style="padding-bottom:0">
-  <div class="wrap">
-    <p class="kicker">SINCE 2009 · 서울 성북구</p>
-    <h1 class="rv">집을 소개하는 일은,<br>결국 <em>삶을 소개하는&nbsp;일</em>입니다.</h1>
-    <div class="hero-meta rv">
-      <div><b>1,240건</b>누적 중개 거래</div>
-      <div><b>16년</b>한 동네에서</div>
-      <div><b>0건</b>중개사고 · 분쟁</div>
+<section class="hx-hero">
+  <div class="hx-shot">
+    <img src="./assets/listing-3.jpg" alt="큰 창 너머로 북한산이 보이는 복층 빌라 거실" fetchpriority="high">
+  </div>
+  <div class="hx-scrim" aria-hidden="true"></div>
+  <div class="hx-body">
+    <div class="wrap">
+      <div class="hx-col">
+        <p class="hx-kicker">SINCE 2009 · 서울 성북구</p>
+        <h1 class="hx-title">집을 소개하는 일은,<br>결국 <em>삶을 소개하는&nbsp;일</em>입니다.</h1>
+        <ul class="hx-stats">
+          <li><b>1,240건</b>누적 중개 거래</li>
+          <li><b>16년</b>한 동네에서</li>
+          <li><b>0건</b>중개사고 · 분쟁</li>
+        </ul>
+        <div class="hx-cta">
+          <a class="hx-btn hx-btn-1" href="tel:010-4894-4905">전화 상담 010-4894-4905</a>
+          <a class="hx-btn hx-btn-2" href="#listings">이달의 매물 보기</a>
+        </div>
+        <p class="hx-credit">정릉동 복층 빌라, 거실 — 2026</p>
+      </div>
     </div>
-    <figure class="hero-img rv">
-      <img src="./assets/hero.jpg" alt="동네 전경">
-      <figcaption>성북동에서 바라본 저녁 — 2026</figcaption>
-    </figure>
   </div>
 </section>
 

@@ -101,6 +101,43 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx : 히어로 (레이어형) ───────────────────────────────── */
+.hx-hero{position:relative;background:var(--navy);color:#fff;padding:0;overflow:hidden}
+/* 교실 사진 : 오른쪽 화면 밖으로 흘려보내고 왼쪽 끝은 네이비로 녹인다 */
+.hx-shot{position:absolute;top:0;bottom:0;left:42%;right:-5%;margin:0;overflow:hidden}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:60% 55%;transform-origin:64% 52%;animation:hxZoom 24s ease-in-out infinite alternate}
+.hx-shot::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(96deg,var(--navy) 0 6%,rgba(18,49,92,.97) 20%,rgba(18,49,92,.6) 46%,rgba(18,49,92,0) 74%)}
+.hx-cap{position:absolute;left:16%;right:8.2%;bottom:0;z-index:2;padding:56px 22px 18px 4px;
+  font-size:11.5px;letter-spacing:.16em;font-weight:500;color:#fff;text-align:right;
+  background:linear-gradient(to top,rgba(9,26,50,.92) 0 28%,rgba(9,26,50,.62) 56%,rgba(9,26,50,0))}
+@keyframes hxZoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+
+.hx-hero .kicker{color:#FF8B9C}
+.hx-wrap{position:relative;z-index:3;padding-top:98px;padding-bottom:106px}
+.hx-copy{max-width:540px}
+.hx-h1{font-family:"Noto Serif KR",serif;font-size:clamp(30px,5.2vw,50px);font-weight:700;line-height:1.42;margin-top:16px}
+.hx-h1 em{font-style:normal;color:#FF8B9C}
+.hx-lead{margin-top:16px;color:#A8B4C8;font-size:15px;max-width:430px}
+.hx-facts{margin-top:14px;font-size:13px;color:#A8B4C8;border-top:1px solid rgba(168,180,200,.32);padding-top:12px;max-width:430px}
+.hx-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+
+/* 모바일 : 겹침을 풀고 사진을 세로로 다시 크롭해 위, 글을 아래로 */
+@media(max-width:900px){
+  .hx-shot{position:relative;top:auto;bottom:auto;left:auto;right:auto;width:100%;height:clamp(230px,34vh,290px)}
+  .hx-shot img{object-position:58% 58%;transform-origin:58% 55%}
+  .hx-shot::after{background:linear-gradient(to top,var(--navy) 0 2%,rgba(18,49,92,.72) 22%,rgba(18,49,92,0) 62%)}
+  .hx-cap{left:0;right:0;padding:44px 20px 12px;text-align:left;
+    background:linear-gradient(to top,rgba(9,26,50,.88) 0 34%,rgba(9,26,50,.5) 62%,rgba(9,26,50,0))}
+  .hx-wrap{padding-top:26px;padding-bottom:38px}
+  .hx-copy{max-width:none}
+  .hx-lead,.hx-facts{max-width:none}
+  .hx-lead{margin-top:13px}
+  .hx-facts{margin-top:13px;padding-top:11px;font-size:12.5px}
+  .hx-cta{margin-top:20px;gap:9px}
+  .hx-cta .btn{padding:14px 22px}
+}
 </style>
 </head>
 <body>
@@ -111,15 +148,21 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">입학 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hx-hero">
+<figure class="hx-shot rv">
+<img src="./assets/1.jpg" alt="브릭스 잉글리시 교실에서 아이들이 크레파스로 그림을 그리는 모습">
+<figcaption class="hx-cap">11:00 PROJECT TIME · 미술 활동도 영어로</figcaption>
+</figure>
+<div class="wrap hx-wrap">
+<div class="hx-copy rv">
 <p class="kicker">ENGLISH KINDERGARTEN · AGE 5–7</p>
-<h1 style="margin-top:16px">영어를 배우는 게 아니라<br><em>영어로 지내는</em> 하루</h1>
-<p>브릭스에서는 수업 시간에만 영어를 쓰지 않습니다. 놀이도, 간식도, 다툼을 푸는 것도 영어로 합니다.</p>
-<div class="hero-cta"><a class="btn btn-r" href="tel:010-4894-4905">입학 상담 예약</a><a class="btn btn-l" href="#cur">커리큘럼 보기</a></div>
+<h1 class="hx-h1">영어를 배우는 게 아니라<br><em>영어로 지내는</em> 하루</h1>
+<p class="hx-lead">브릭스에서는 수업 시간에만 영어를 쓰지 않습니다. 놀이도, 간식도, 다툼을 푸는 것도 영어로 합니다.</p>
+<p class="hx-facts">반당 12명 · 교사 2인 · 09:00–15:30 (연장 17:30)</p>
+<div class="hx-cta"><a class="btn btn-r" href="tel:010-4894-4905">입학 상담 예약</a><a class="btn btn-l" href="#cur">커리큘럼 보기</a></div>
 </div>
-<img class="rv" src="./assets/2.jpg" alt="교실 활동">
-</div></section>
+</div>
+</section>
 <div class="stripe" aria-hidden="true"></div>
 
 <section id="cur"><div class="wrap">

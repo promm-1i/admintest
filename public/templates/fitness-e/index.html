@@ -98,6 +98,47 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 .cl .who::before{content:"지도 ";color:var(--clay)}
 /* 대비 보정 — 자동 계산 */
 .cl .who{color:#636156}
+
+/* ===== 히어로 재구성 (레이어형) ===== */
+.hx-hero{position:relative;overflow:hidden;padding:0;text-align:left;min-height:clamp(540px,74vh,668px);display:flex;align-items:center;background:var(--sand)}
+.hx-photo{position:absolute;top:0;bottom:0;left:32%;right:-7vw;z-index:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.38) 9%,rgba(0,0,0,.88) 22%,#000 34%);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.38) 9%,rgba(0,0,0,.88) 22%,#000 34%)}
+.hx-hero .hx-photo img{width:100%;height:100%;border-radius:0;object-fit:cover;object-position:52% 64%;filter:saturate(.88);transform-origin:64% 54%;animation:hxDrift 24s ease-in-out infinite alternate}
+@keyframes hxDrift{from{transform:scale(1)}to{transform:scale(1.06)}}
+.hx-photo::after{content:"";position:absolute;left:0;right:0;bottom:0;height:118px;background:linear-gradient(180deg,rgba(239,234,223,0),var(--sand))}
+.hx-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(92deg,var(--sand) 0%,var(--sand) 30%,rgba(239,234,223,.88) 42%,rgba(239,234,223,.44) 54%,rgba(239,234,223,0) 68%)}
+.hx-wrap{position:relative;z-index:2;width:100%;padding-top:clamp(70px,8.5vw,100px);padding-bottom:clamp(74px,9.5vw,108px)}
+.hx-copy{max-width:472px}
+.hx-hero .kicker{color:var(--ink);opacity:.72}
+.hx-hero h1{margin-top:18px;font-size:clamp(27px,4.3vw,41px);line-height:1.62}
+.hx-hero h1 em{color:var(--deep)}
+.hx-hero .hx-lead{margin:18px 0 0;max-width:400px;color:#5C5A50;font-size:14.5px;line-height:1.95}
+.hx-hero .hx-cta{margin-top:28px;justify-content:flex-start}
+.hx-hero .hx-cta .btn{background:var(--deep)}
+.hx-hero .hx-cta .btn:hover{background:#586A42}
+.hx-hero .hx-cta .btn.ghost{background:transparent;border-color:var(--deep);color:#4B5A38}
+.hx-hero .hx-cta .btn.ghost:hover{background:rgba(102,117,78,.08)}
+.hx-hero .hx-meta{margin:26px 0 0;max-width:440px;color:#5F5D53;font-size:12.5px;line-height:1.85;letter-spacing:.01em}
+.hx-hero .hx-meta b{font-weight:500;color:#4B5A38}
+@media(max-width:900px){.hx-photo{left:38%;right:-10vw}
+  .hx-veil{background:linear-gradient(92deg,var(--sand) 0%,var(--sand) 36%,rgba(239,234,223,.9) 50%,rgba(239,234,223,.42) 62%,rgba(239,234,223,0) 76%)}
+  .hx-copy{max-width:400px}}
+@media(max-width:760px){
+  .hx-hero{display:block;min-height:0;padding:0 0 8px}
+  .hx-photo{position:relative;left:auto;right:auto;top:auto;bottom:auto;width:100%;height:252px;-webkit-mask-image:none;mask-image:none}
+  .hx-photo::after{height:62px}
+  .hx-hero .hx-photo img{object-position:52% 72%}
+  .hx-veil{display:none}
+  .hx-wrap{padding-top:14px;padding-bottom:14px}
+  .hx-copy{max-width:none}
+  .hx-hero h1{margin-top:14px;line-height:1.6}
+  .hx-hero .hx-lead{margin-top:15px;max-width:none;font-size:14px}
+  .hx-hero .hx-cta{margin-top:22px;gap:10px}
+  .hx-hero .hx-cta .btn{padding:14px 26px}
+  .hx-hero .hx-meta{margin-top:20px;max-width:none;font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -108,13 +149,17 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">수련 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hero hx-hero">
+<div class="hx-photo"><img src="./assets/hero.jpg" alt="아침 햇살이 드는 수련실에 매트가 나란히 깔려 있다"></div>
+<div class="hx-veil"></div>
+<div class="wrap hx-wrap"><div class="hx-copy">
 <p class="kicker">YOGA &amp; MEDITATION</p>
-<h1 style="margin-top:20px">잘하려 하지 않는 것이<br><em>수련의 시작</em>입니다</h1>
-<p>숨결은 자세의 완성을 목표로 하지 않습니다. 오늘 내 몸이 어디까지 가는지를 아는 것, 거기까지가 수련입니다.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">첫 수련 신청</a><a class="btn ghost" href="#tt">시간표 보기</a></div>
-<figure class="rv"><img src="./assets/space-1.jpg" alt="아침 햇살이 드는 수련실"></figure>
-</div></section>
+<h1>잘하려 하지 않는 것이<br><em>수련의 시작</em>입니다</h1>
+<p class="hx-lead">숨결은 자세의 완성을 목표로 하지 않습니다. 오늘 내 몸이 어디까지 가는지를 아는 것, 거기까지가 수련입니다.</p>
+<div class="hero-cta hx-cta"><a class="btn" href="tel:010-4894-4905">첫 수련 신청</a><a class="btn ghost" href="#tt">시간표 보기</a></div>
+<p class="hx-meta"><b>아침 06:30 · 낮 10:00 · 저녁 19:00 · 밤 20:30</b><br>서울 은평구 통일로 000 3층 · 매트는 빌려드립니다</p>
+</div></div>
+</section>
 
 <section id="class" style="padding-top:0"><div class="wrap">
 <div class="rv" style="text-align:center"><p class="kicker">CLASSES</p><h2>네 가지 결</h2></div>

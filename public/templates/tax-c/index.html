@@ -117,6 +117,45 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 레이어형 히어로 (상담 테이블 사진이 텍스트 뒤로 파고든다) ===== */
+.hx-hero{position:relative;background:var(--navy);color:#fff;padding:0;overflow:hidden;isolation:isolate}
+.hx-shot{position:absolute;top:0;right:0;bottom:0;width:68%;z-index:1;overflow:hidden}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 54%;transform-origin:74% 50%;animation:hx-zoom 24s ease-in-out infinite alternate}
+.hx-shot::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,var(--navy) 0,rgba(18,35,63,.96) 8%,rgba(18,35,63,.8) 21%,rgba(18,35,63,.33) 54%,rgba(18,35,63,.5) 100%)}
+.hx-place{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:60px 26px 18px;text-align:right;
+  font-size:12.5px;font-weight:700;letter-spacing:.01em;color:#EDF2F9;
+  background:linear-gradient(transparent,rgba(8,16,30,.86))}
+@keyframes hx-zoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+.hx-inner{position:relative;z-index:2;max-width:1020px;margin:0 auto;padding:92px 24px 96px;
+  min-height:clamp(500px,58vh,620px);display:flex;flex-direction:column;justify-content:center}
+.hx-copy{max-width:556px}
+.hx-copy h1{margin-top:16px;font-size:clamp(30px,5vw,46px);font-weight:900;line-height:1.38;letter-spacing:-.02em}
+.hx-copy h1 em{font-style:normal;color:var(--mint)}
+.hx-lead{margin-top:16px;max-width:430px;color:#A9BAD4;font-size:15px}
+.hx-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-ledger{margin-top:34px;max-width:452px}
+.hx-ledger h2{margin:0;font-size:12px;font-weight:900;letter-spacing:.14em;color:var(--mint)}
+.hx-ledger dl{margin-top:10px}
+.hx-row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;
+  border-top:1px solid rgba(214,228,255,.17);font-size:13.5px;color:#B8C6DD}
+.hx-row dt,.hx-row dd{margin:0}
+.hx-row dd{color:#fff;font-weight:700}
+.hx-note{margin-top:9px;font-size:11px;color:#8FA2C0}
+@media(max-width:860px){
+  .hx-shot{position:relative;top:auto;right:auto;bottom:auto;width:100%;height:clamp(178px,46vw,240px)}
+  .hx-shot img{object-position:52% 60%}
+  .hx-shot::after{background:linear-gradient(180deg,rgba(18,35,63,.3),rgba(18,35,63,.08) 42%,rgba(18,35,63,.6))}
+  .hx-place{padding:42px 20px 12px;font-size:11.5px}
+  .hx-inner{display:block;min-height:0;padding:26px 24px 44px}
+  .hx-copy{max-width:none}
+  .hx-lead{max-width:none;margin-top:13px;font-size:14.5px}
+  .hx-cta{margin-top:22px}
+  .hx-cta .btn{padding:14px 22px}
+  .hx-ledger{margin-top:28px;max-width:none}
+}
+@media(prefers-reduced-motion:reduce){.hx-shot img{animation:none}}
 </style>
 </head>
 <body>
@@ -127,21 +166,29 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">무료 진단</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<span class="kicker">사업의 숫자 파트너</span>
-<h1 style="margin-top:16px">세무사를 바꾸면<br><em>순이익이 달라집니다</em></h1>
-<p>누리는 신고 대행에서 멈추지 않습니다. 분기마다 절세 리포트를 보내고, 결정 전에 세금부터 시뮬레이션합니다.</p>
-<div class="hero-cta"><a class="btn btn-m" href="tel:010-4894-4905">무료 세무 진단</a><a class="btn btn-w" href="#plan">플랜 보기</a></div>
+<section class="hx-hero">
+<div class="hx-shot">
+<img src="./assets/3.jpg" alt="누리 세무회계 상담실 — 원형 상담 테이블과 기장 서류 서가">
+<p class="hx-place">누리 세무회계 상담실 · 을지로</p>
 </div>
-<aside class="hero-card rv">
-<h3>지난 분기 고객 절세 리포트</h3>
-<div class="hc-row"><span>경정청구 환급</span><b>평균 340만원</b></div>
-<div class="hc-row"><span>놓친 공제 발굴</span><b>거래처의 61%</b></div>
-<div class="hc-row"><span>리포트 발송</span><b>분기 1회 · 전 고객</b></div>
-<p class="note">* 템플릿 데모용 예시 수치입니다.</p>
-</aside>
-</div></section>
+<div class="hx-inner">
+<div class="hx-copy">
+<span class="kicker">사업의 숫자 파트너</span>
+<h1>세무사를 바꾸면<br><em>순이익이 달라집니다</em></h1>
+<p class="hx-lead">누리는 신고 대행에서 멈추지 않습니다. 분기마다 절세 리포트를 보내고, 결정 전에 세금부터 시뮬레이션합니다.</p>
+<div class="hx-cta"><a class="btn btn-m" href="tel:010-4894-4905">무료 세무 진단</a><a class="btn btn-w" href="#plan">플랜 보기</a></div>
+<div class="hx-ledger rv">
+<h2>지난 분기 고객 절세 리포트</h2>
+<dl>
+<div class="hx-row"><dt>경정청구 환급</dt><dd>평균 340만원</dd></div>
+<div class="hx-row"><dt>놓친 공제 발굴</dt><dd>거래처의 61%</dd></div>
+<div class="hx-row"><dt>리포트 발송</dt><dd>분기 1회 · 전 고객</dd></div>
+</dl>
+<p class="hx-note">* 템플릿 데모용 예시 수치입니다.</p>
+</div>
+</div>
+</div>
+</section>
 
 <figure class="band">
 <img src="./assets/4.jpg" alt="세무법인 사무실">

@@ -89,6 +89,42 @@ footer b{color:#fff}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ─── hx: 레이어형 히어로 (사진이 텍스트 뒤로 파고들고 오른쪽 화면 밖으로 흘러나간다) ─── */
+.hx-hero{position:relative;overflow:hidden;background:var(--pale);padding:84px 0 34px}
+.hx-hero .wrap{display:block;grid-template-columns:none;position:relative;z-index:2}
+.hx-hero .btn-b{background:var(--deep)}
+.hx-hero .btn-b:hover{background:#17537F}
+.hx-photo{position:absolute;top:0;bottom:0;left:42%;right:-5vw;z-index:0;overflow:hidden}
+.hx-hero .hx-photo img{width:100%;height:100%;border-radius:0;object-fit:cover;object-position:88% 40%;transform-origin:64% 52%;animation:hx-zoom 24s ease-in-out infinite alternate}
+.hx-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--pale) 0%,var(--pale) 9%,rgba(234,244,251,.9) 19%,rgba(234,244,251,.42) 32%,rgba(234,244,251,0) 46%)}
+@keyframes hx-zoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+@media(prefers-reduced-motion:reduce){.hx-hero .hx-photo img{animation:none!important;transform:none!important}}
+
+.hx-text{max-width:540px}
+.hx-kicker{background:#fff;color:var(--deep)}
+.hx-hero h1{margin-top:18px}
+.hx-hero p{color:#4A5A66;max-width:470px}
+.hx-bar{margin-top:38px;display:flex;background:#fff;border:2px solid var(--line);border-radius:16px;overflow:hidden}
+.hx-fact{flex:1;padding:15px 24px;border-left:1px solid var(--line)}
+.hx-fact:first-child{border-left:0}
+.hx-fact span{display:block;font-size:12.5px;font-weight:700;letter-spacing:.05em;color:var(--soft);line-height:1.6}
+.hx-fact b{display:block;font-size:15.5px;font-weight:900;line-height:1.55;color:var(--ink)}
+@media(max-width:1080px){.hx-text{max-width:500px}.hx-hero p{max-width:440px}}
+@media(max-width:900px){
+.hx-hero{padding:0 0 32px}
+.hx-photo{position:relative;top:auto;bottom:auto;left:auto;right:auto;height:248px}
+.hx-hero .hx-photo img{object-position:92% 38%}
+.hx-photo::after{background:linear-gradient(180deg,rgba(234,244,251,0) 52%,rgba(234,244,251,.5) 82%,var(--pale) 100%)}
+.hx-hero .wrap{padding-top:26px}
+.hx-text{max-width:none}
+.hx-hero p{max-width:none}
+.hx-bar{margin-top:26px;display:block;padding:2px 20px}
+.hx-fact{flex:none;padding:12px 0;border-left:0;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.hx-fact:first-child{border-top:0}
+.hx-fact span{font-size:13px;white-space:nowrap}
+.hx-fact b{font-size:14.5px;text-align:right}
+}
 </style>
 </head>
 <body>
@@ -99,14 +135,20 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">무료 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<span class="kicker">재가 방문요양 · 방문목욕 · 방문간호</span>
-<h1 style="margin-top:16px">집에서 모시는 게<br><em>가장 좋다면</em></h1>
+<section class="hero hx-hero">
+<div class="hx-photo"><img src="./assets/1.jpg" alt="햇살이 드는 창가와 어르신이 쓰시던 자리"></div>
+<div class="wrap">
+<div class="hx-text rv">
+<span class="kicker hx-kicker">재가 방문요양 · 방문목욕 · 방문간호</span>
+<h1>집에서 모시는 게<br><em>가장 좋다면</em></h1>
 <p>익숙한 집, 익숙한 이불에서 지내시게 하세요. 요양보호사가 매일 찾아가 식사와 목욕, 말벗까지 함께합니다.</p>
 <div class="hero-cta"><a class="btn btn-b" href="tel:010-4894-4905">무료 상담 전화</a><a class="btn btn-w" href="#cost">비용 알아보기</a></div>
 </div>
-<img class="rv" src="./assets/1.jpg" alt="어르신 방문 돌봄">
+<div class="hx-bar rv">
+<div class="hx-fact"><span>방문 지역</span><b>대구 달서구 · 달성군 전역</b></div>
+<div class="hx-fact"><span>상담 시간</span><b>평일 09:00 – 18:00</b></div>
+<div class="hx-fact"><span>장기요양기관</span><b>지정 제0000호</b></div>
+</div>
 </div></section>
 
 <section id="svc"><div class="wrap">
