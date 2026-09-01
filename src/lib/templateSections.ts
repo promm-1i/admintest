@@ -144,8 +144,8 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   "clinic-d": [
     { img: "/thumbs/sections/clinic-d-1.jpg", title: "우리 아이 접종 달력" },
     { img: "/thumbs/sections/clinic-d-2.jpg", title: "이런 진료를 봅니다" },
-    { img: "/thumbs/sections/clinic-d-3.jpg", title: "오실 때 챙겨주세요" },
-    { img: "/thumbs/sections/clinic-d-4.jpg", title: "아플 땐 늦게라도" },
+    { img: "/thumbs/sections/clinic-d-3.jpg", title: "덜 무섭게, 덜 기다리게" },
+    { img: "/thumbs/sections/clinic-d-4.jpg", title: "오실 때 챙겨주세요" },
   ],
   "clinic-e": [
     { img: "/thumbs/sections/clinic-e-1.jpg", title: "검진 패키지" },
@@ -365,7 +365,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   ],
   "kids-b": [
     { img: "/thumbs/sections/kids-b-1.jpg", title: "알록달록의 하루" },
-    { img: "/thumbs/sections/kids-b-2.jpg", title: "교실도 급식도 자신 있어요" },
+    { img: "/thumbs/sections/kids-b-2.jpg", title: "우리 아이가 지내는 교실" },
     { img: "/thumbs/sections/kids-b-3.jpg", title: "부모님과의 네 가지 약속" },
     { img: "/thumbs/sections/kids-b-4.jpg", title: "우리 아이 자리,남아 있는지 물어보세요" },
   ],
@@ -532,7 +532,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/rentcar-e-1.jpg", title: "요금표" },
     { img: "/thumbs/sections/rentcar-e-2.jpg", title: "숫자" },
     { img: "/thumbs/sections/rentcar-e-3.jpg", title: "규칙" },
-    { img: "/thumbs/sections/rentcar-e-4.jpg", title: "고민할 시간에전화하세요" },
+    { img: "/thumbs/sections/rentcar-e-4.jpg", title: "빌리기 전에 이것만" },
   ],
   "restaurant": [
     { img: "/thumbs/sections/restaurant-1.jpg", title: "오늘의 추천" },
@@ -582,13 +582,13 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/stay-d-1.jpg", title: "세 가지 오션뷰" },
     { img: "/thumbs/sections/stay-d-2.jpg", title: "머무는 동안" },
     { img: "/thumbs/sections/stay-d-3.jpg", title: "시즌 요금표" },
-    { img: "/thumbs/sections/stay-d-4.jpg", title: "일출 시간에 맞춰방을 잡아 두겠습니다" },
+    { img: "/thumbs/sections/stay-d-4.jpg", title: "예약 전에 확인해 주세요" },
   ],
   "stay-e": [
     { img: "/thumbs/sections/stay-e-1.jpg", title: "세 채" },
     { img: "/thumbs/sections/stay-e-2.jpg", title: "머무는 법" },
     { img: "/thumbs/sections/stay-e-3.jpg", title: "이용 예절" },
-    { img: "/thumbs/sections/stay-e-4.jpg", title: "하룻밤 비워두겠습니다" },
+    { img: "/thumbs/sections/stay-e-4.jpg", title: "미리 알아두실 것" },
   ],
   "study": [
     { img: "/thumbs/sections/study-1.jpg", title: "요금 안내" },
