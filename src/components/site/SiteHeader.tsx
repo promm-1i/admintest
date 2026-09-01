@@ -39,19 +39,45 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
                     <ArrowRight className="size-3.5" />
                   </Link>
                   {item.children && (
-                    <ul className="mt-2 space-y-2 border-l border-border pl-3">
-                      {item.children.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            to={child.href}
-                            onClick={onNavigate}
-                            className="text-sm text-muted-foreground"
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
+                    // 업종을 먼저 펼치고 그 안에서 디자인을 고른다 — 평면 목록이면
+                    // 같은 업종명이 시안 수만큼 반복돼 읽기 어렵다.
+                    <Accordion type="single" collapsible className="mt-2 border-l border-border pl-3">
+                      {item.children.map((group) => (
+                        <AccordionItem key={group.key} value={group.key} className="border-b-0">
+                          <AccordionTrigger className="py-2 text-sm text-muted-foreground hover:no-underline data-[state=open]:text-foreground">
+                            {group.label}
+                            <span className="ml-auto mr-2 text-xs text-muted-foreground/70">
+                              {group.designs.length}종
+                            </span>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <ul className="grid grid-cols-2 gap-2 pb-2">
+                              {group.designs.map((d) => (
+                                <li key={d.href}>
+                                  <Link
+                                    to={d.href}
+                                    onClick={onNavigate}
+                                    className="block overflow-hidden rounded-lg border border-border"
+                                  >
+                                    {d.image && (
+                                      <img
+                                        src={d.image}
+                                        alt=""
+                                        loading="lazy"
+                                        className="aspect-[4/3] w-full object-cover object-top"
+                                      />
+                                    )}
+                                    <span className="block px-2 py-1.5 text-xs font-semibold text-foreground/90">
+                                      {d.label}
+                                    </span>
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </AccordionContent>
+                        </AccordionItem>
                       ))}
-                    </ul>
+                    </Accordion>
                   )}
                 </li>
               );

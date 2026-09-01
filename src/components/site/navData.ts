@@ -1,16 +1,48 @@
 import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, type LucideIcon } from "lucide-react";
 import { SAMPLES } from "@/lib/samples";
+import { getDesignCode } from "@/lib/designCode";
 
-/** 실제 판매 중인 템플릿을 스타일별로 뽑아 드롭다운 플라이아웃 항목으로 만든다 */
-function templateChildren(styleKey: "basic-template" | "landing-template") {
-  return SAMPLES.filter((s) => s.industryKey && s.type.includes(styleKey))
-    .map((s) => ({
-      label: s.industry.replace(" 홈페이지", ""),
+/**
+ * 실제 판매 중인 템플릿을 스타일별로 뽑아 **업종 → 디자인** 2단계로 묶는다.
+ * 업종당 시안이 여러 개라 평면 목록으로 두면 같은 업종명이 그 수만큼 반복돼 읽기 어렵다.
+ */
+function templateGroups(styleKey: "basic-template" | "landing-template"): NavTemplateGroup[] {
+  const byIndustry = new Map<string, NavTemplateGroup>();
+
+  for (const s of SAMPLES) {
+    if (!s.industryKey || !s.type.includes(styleKey)) continue;
+    const label = s.industry.replace(" 홈페이지", "");
+    let group = byIndustry.get(s.industryKey);
+    if (!group) {
+      group = { key: s.industryKey, label, designs: [] };
+      byIndustry.set(s.industryKey, group);
+    }
+    // 대표 시안(코드 1001)의 이미지를 업종 썸네일로 쓴다
+    if (!group.image && s.image && !s.designCode) group.image = s.image;
+    group.designs.push({
+      label: "",
+      code: getDesignCode(s),
       href: `/samples/${s.slug}`,
       ...(s.image ? { image: s.image } : {}),
-    }))
-    .sort((a, b) => a.label.localeCompare(b.label, "ko"));
+    });
+  }
+
+  const groups = [...byIndustry.values()];
+  for (const g of groups) {
+    g.designs.sort((a, b) => a.code.localeCompare(b.code));
+    // 코드 순서대로 디자인 A · B · C … 라벨을 붙인다
+    g.designs.forEach((d, i) => {
+      d.label = `디자인 ${String.fromCharCode(65 + i)}`;
+    });
+    if (!g.image) g.image = g.designs[0]?.image;
+  }
+  return groups.sort((a, b) => a.label.localeCompare(b.label, "ko"));
 }
+
+/** 업종 하나에 딸린 개별 디자인 시안 */
+export type NavTemplateDesign = { label: string; code: string; href: string; image?: string };
+/** 업종 단위 묶음 — 메뉴에서 1단계로 고르고, 그 안에서 디자인을 2단계로 고른다 */
+export type NavTemplateGroup = { key: string; label: string; image?: string; designs: NavTemplateDesign[] };
 
 export type NavItem = { icon: LucideIcon; title: string; desc: string; href?: string };
 
@@ -169,7 +201,7 @@ export type NavLink = {
   /** 있으면 드롭다운에서 같은 group끼리 묶여 구분선 + 소제목 아래 렌더링된다 */
   group?: string;
   /** 있으면 데스크톱에서 hover 시 우측 플라이아웃으로, 모바일에서는 들여쓰기 목록으로 펼쳐진다 */
-  children?: { label: string; href: string; image?: string }[];
+  children?: NavTemplateGroup[];
 };
 export type NavDropdownEntry = {
   type: "dropdown";
@@ -216,12 +248,12 @@ export const HEADER_NAV: NavEntry[] = [
       {
         label: "기본형 디자인 템플릿",
         href: "/templates?style=basic-template",
-        children: templateChildren("basic-template"),
+        children: templateGroups("basic-template"),
       },
       {
         label: "랜딩형 디자인 템플릿",
         href: "/templates?style=landing-template",
-        children: templateChildren("landing-template"),
+        children: templateGroups("landing-template"),
       },
     ],
   },

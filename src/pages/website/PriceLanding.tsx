@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Send, Check, ArrowRight, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -40,23 +41,45 @@ const INCLUDED_BY_DEFAULT = [
   "배포 및 오픈 지원",
 ];
 
-function FactorChip({ label, desc }: { label: string; desc: string }) {
+/**
+ * 항목을 고르면 설명이 칩 목록 아래 고정 영역에 나온다.
+ * 떠 있는 툴팁은 오른쪽 끝 칩에서 화면 밖으로 잘리고, 터치 기기에는 hover가 없어서 쓰기 어렵다.
+ */
+function FactorPicker({ factors }: { factors: readonly { label: string; desc: string }[] }) {
+  const [active, setActive] = useState<string | null>(null);
+  const activeFactor = factors.find((f) => f.label === active);
+
   return (
-    <span className="group relative inline-flex">
-      <button
-        type="button"
-        className="rounded-full border border-border bg-card px-5 py-2.5 text-base font-medium text-foreground/80 transition-all duration-200 ease-out hover:scale-110 hover:border-primary/50 hover:text-primary hover:shadow-sm focus-visible:scale-110 focus-visible:border-primary/50 focus-visible:text-primary focus-visible:outline-none motion-reduce:transition-none"
+    <div className="mt-7">
+      <div className="flex flex-wrap gap-3">
+        {factors.map((f) => {
+          const isActive = f.label === active;
+          return (
+            <button
+              key={f.label}
+              type="button"
+              aria-pressed={isActive}
+              onMouseEnter={() => setActive(f.label)}
+              onFocus={() => setActive(f.label)}
+              onClick={() => setActive(f.label)}
+              className={`rounded-full border px-5 py-2.5 text-base font-medium transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 motion-reduce:transition-none ${
+                isActive
+                  ? "border-primary/50 bg-primary/5 text-primary"
+                  : "border-border bg-card text-foreground/80 hover:border-primary/50 hover:text-primary"
+              }`}
+            >
+              {f.label}
+            </button>
+          );
+        })}
+      </div>
+      <p
+        aria-live="polite"
+        className="mt-4 min-h-[3rem] rounded-xl border border-border bg-secondary/30 px-4 py-3 text-sm leading-relaxed text-muted-foreground break-keep"
       >
-        {label}
-      </button>
-      <span
-        role="tooltip"
-        className="pointer-events-none absolute left-0 top-full z-20 mt-2 w-64 translate-y-1 rounded-lg bg-neutral-800 px-3.5 py-2.5 text-xs font-medium leading-relaxed text-white opacity-0 shadow-lg transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none"
-      >
-        <span className="absolute -top-1 left-4 h-2 w-2 rotate-45 bg-neutral-800" />
-        {desc}
-      </span>
-    </span>
+        {activeFactor ? activeFactor.desc : "각 항목을 누르면 어떤 작업인지 확인하실 수 있습니다."}
+      </p>
+    </div>
   );
 }
 
@@ -126,14 +149,9 @@ export default function PriceLanding() {
             기능과 데이터 처리 범위가 가격 대부분을 결정합니다.
           </p>
         </Reveal>
-        <Reveal delay={100} className="mt-7 flex flex-wrap gap-3">
-          {QUOTE_FACTORS.map((f) => (
-            <FactorChip key={f.label} label={f.label} desc={f.desc} />
-          ))}
+        <Reveal delay={100}>
+          <FactorPicker factors={QUOTE_FACTORS} />
         </Reveal>
-        <p className="mt-4 text-sm text-muted-foreground">
-          각 항목에 마우스를 올리면 어떤 작업인지 확인하실 수 있습니다.
-        </p>
 
         {/* 기본으로 제공되는 것 */}
         <Reveal className="mt-20">

@@ -1,6 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
-import type { NavDropdownEntry } from "./navData";
+import type { NavDropdownEntry, NavTemplateGroup } from "./navData";
 
 type Props = {
   entry: NavDropdownEntry;
@@ -8,6 +9,74 @@ type Props = {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 };
+
+/**
+ * 업종을 먼저 고르고(왼쪽), 그 업종의 디자인 시안을 고르는(오른쪽) 2단 패널.
+ * 업종당 시안이 여러 개라 한 번에 다 펼치면 같은 업종명이 반복돼 읽기 어렵다.
+ */
+function TemplateFlyout({ groups, onNavigate }: { groups: NavTemplateGroup[]; onNavigate: () => void }) {
+  const [activeKey, setActiveKey] = useState(groups[0]?.key ?? "");
+  const active = groups.find((g) => g.key === activeKey) ?? groups[0];
+
+  return (
+    <div className="flex max-h-[76vh] w-[640px] max-w-[78vw] overflow-hidden rounded-2xl border border-border bg-background shadow-xl">
+      <ul className="w-[190px] shrink-0 overflow-y-auto overscroll-contain border-r border-border p-2">
+        {groups.map((g) => (
+          <li key={g.key}>
+            <button
+              type="button"
+              onMouseEnter={() => setActiveKey(g.key)}
+              onFocus={() => setActiveKey(g.key)}
+              aria-current={g.key === active?.key}
+              className={`flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
+                g.key === active?.key
+                  ? "bg-primary/8 font-semibold text-primary"
+                  : "text-foreground/80 hover:bg-secondary"
+              }`}
+            >
+              {g.label}
+              <ChevronRight className="size-3.5 shrink-0 opacity-50" />
+            </button>
+          </li>
+        ))}
+      </ul>
+
+      {active && (
+        <div className="flex-1 overflow-y-auto overscroll-contain p-3">
+          <p className="px-1 pb-2 text-xs font-semibold text-muted-foreground">
+            {active.label} · 디자인 {active.designs.length}종
+          </p>
+          <ul className="grid grid-cols-2 gap-2">
+            {active.designs.map((d) => (
+              <li key={d.href}>
+                <Link
+                  to={d.href}
+                  onClick={onNavigate}
+                  className="group/item block overflow-hidden rounded-lg border border-border transition-colors hover:border-primary/60 hover:bg-primary/5"
+                >
+                  {d.image && (
+                    <img
+                      src={d.image}
+                      alt=""
+                      loading="lazy"
+                      className="aspect-[4/3] w-full object-cover object-top"
+                    />
+                  )}
+                  <span className="flex items-baseline justify-between gap-1 px-2 py-1.5">
+                    <span className="text-xs font-semibold text-foreground/90 group-hover/item:text-primary">
+                      {d.label}
+                    </span>
+                    <span className="font-mono text-[10px] text-muted-foreground">{d.code}</span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
 
 /**
  * 대메뉴 트리거 바로 아래, 정확히 같은 중심축에 뜨는 드롭다운 패널.
@@ -47,33 +116,10 @@ export function MegaMenuPanel({ entry, onNavigate, onMouseEnter, onMouseLeave }:
                 )}
               </Link>
 
-              {/* hover 시 우측으로 펼쳐지는 실제 템플릿 목록 플라이아웃 */}
+              {/* hover 시 우측으로 펼쳐지는 업종 → 디자인 2단계 플라이아웃 */}
               {item.children && (
                 <div className="invisible absolute left-full top-0 z-10 pl-2 opacity-0 transition-all duration-200 group-hover/fly:visible group-hover/fly:opacity-100 group-focus-within/fly:visible group-focus-within/fly:opacity-100 motion-reduce:transition-none">
-                  {/* 업종이 많아도 잘리지 않도록 3열 그리드 + 화면 높이 초과 시 스크롤 */}
-                  <ul className="grid max-h-[76vh] w-[720px] max-w-[78vw] grid-cols-3 gap-x-1 gap-y-0.5 overflow-y-auto overscroll-contain rounded-2xl border border-border bg-background p-2.5 shadow-xl">
-                    {item.children.map((child) => (
-                      <li key={child.href}>
-                        <Link
-                          to={child.href}
-                          onClick={onNavigate}
-                          className="group/item flex items-center gap-3 rounded-lg p-2 ring-primary/70 ring-inset transition-all hover:bg-primary/5 hover:ring-2"
-                        >
-                          {child.image && (
-                            <img
-                              src={child.image}
-                              alt=""
-                              loading="lazy"
-                              className="h-10 w-16 shrink-0 rounded-md border border-border object-cover transition-transform group-hover/item:scale-105"
-                            />
-                          )}
-                          <span className="origin-left text-sm font-medium text-foreground/90 transition-transform group-hover/item:scale-110 group-hover/item:font-bold group-hover/item:text-primary">
-                            {child.label}
-                          </span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                  <TemplateFlyout groups={item.children} onNavigate={onNavigate} />
                 </div>
               )}
             </li>
