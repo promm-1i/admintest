@@ -51,6 +51,13 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
                             </span>
                           </AccordionTrigger>
                           <AccordionContent>
+                            <Link
+                              to={group.href}
+                              onClick={onNavigate}
+                              className="mb-2 block text-xs font-medium text-primary"
+                            >
+                              이 업종만 모아 보기
+                            </Link>
                             <ul className="grid grid-cols-2 gap-2 pb-2">
                               {group.designs.map((d) => (
                                 <li key={d.href}>

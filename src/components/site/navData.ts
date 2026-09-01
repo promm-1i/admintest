@@ -14,7 +14,12 @@ function templateGroups(styleKey: "basic-template" | "landing-template"): NavTem
     const label = s.industry.replace(" 홈페이지", "");
     let group = byIndustry.get(s.industryKey);
     if (!group) {
-      group = { key: s.industryKey, label, designs: [] };
+      group = {
+        key: s.industryKey,
+        label,
+        href: `/templates?style=${styleKey}&industry=${s.industryKey}`,
+        designs: [],
+      };
       byIndustry.set(s.industryKey, group);
     }
     // 대표 시안(코드 1001)의 이미지를 업종 썸네일로 쓴다
@@ -42,7 +47,14 @@ function templateGroups(styleKey: "basic-template" | "landing-template"): NavTem
 /** 업종 하나에 딸린 개별 디자인 시안 */
 export type NavTemplateDesign = { label: string; code: string; href: string; image?: string };
 /** 업종 단위 묶음 — 메뉴에서 1단계로 고르고, 그 안에서 디자인을 2단계로 고른다 */
-export type NavTemplateGroup = { key: string; label: string; image?: string; designs: NavTemplateDesign[] };
+export type NavTemplateGroup = {
+  key: string;
+  label: string;
+  /** 전체 템플릿 목록을 이 업종으로 필터링해 여는 주소 */
+  href: string;
+  image?: string;
+  designs: NavTemplateDesign[];
+};
 
 export type NavItem = { icon: LucideIcon; title: string; desc: string; href?: string };
 

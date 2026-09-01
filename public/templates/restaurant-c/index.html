@@ -137,6 +137,30 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* hero redesign */
+
+.hero .wrap{display:grid;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);gap:38px;align-items:center}
+.hero-col{position:relative;height:clamp(300px,38vw,430px)}
+.hero-col figure{position:absolute;margin:0;border:3px solid var(--ink);border-radius:22px;overflow:hidden;
+  box-shadow:7px 7px 0 var(--red);background:var(--cream)}
+.hero-col figure img{display:block;width:100%;height:100%;object-fit:cover}
+.hero-col .f1{width:60%;height:74%;left:0;top:0;transform:rotate(-2.5deg);z-index:3;
+  animation:col-rise .9s cubic-bezier(.32,.72,0,1) both}
+.hero-col .f2{width:47%;height:56%;right:2%;top:8%;transform:rotate(3deg);z-index:2;
+  box-shadow:7px 7px 0 var(--green);animation:col-rise 1s cubic-bezier(.32,.72,0,1) .14s both}
+.hero-col .f3{width:44%;height:46%;right:14%;bottom:0;transform:rotate(-1.5deg);z-index:4;
+  box-shadow:7px 7px 0 var(--yellow);animation:col-rise 1.1s cubic-bezier(.32,.72,0,1) .28s both}
+@keyframes col-rise{from{opacity:0;transform:translateY(24px) rotate(0deg)}}
+.hero-col .stk1{position:absolute;top:-14px;left:44%;z-index:6;transform:rotate(6deg)}
+.hero-col .stk2{position:absolute;bottom:6px;left:-8px;z-index:6;background:var(--green);color:#fff;transform:rotate(-4deg)}
+@media(max-width:900px){
+ .hero .wrap{grid-template-columns:1fr;gap:24px}
+ .hero-col{order:-1;height:270px}
+ .hero-col .f1{width:64%;height:78%} .hero-col .f2{width:44%;height:52%} .hero-col .f3{display:none}
+ .hero-col .stk1{left:auto;right:2%}
+}
+@media(prefers-reduced-motion:reduce){.hero-stage img,.hero .chip,.hero-bg,.hero-col figure{animation:none!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -164,8 +188,10 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
         <a class="btn btn-cream" href="#menu">메뉴판 보기</a>
       </div>
     </div>
-    <div class="hero-photo">
-      <img src="./assets/hero.jpg" alt="가게 대표 메뉴">
+    <div class="hero-col">
+      <figure class="f1"><img src="./assets/hero.jpg" alt="오늘의 백반 한 상"></figure>
+      <figure class="f2"><img src="./assets/space-1.jpg" alt="점심때 홀 자리"></figure>
+      <figure class="f3"><img src="./assets/space-2.jpg" alt="주방에서 끓고 있는 찌개"></figure>
       <span class="sticker stk1">포장 10% 할인</span>
       <span class="sticker stk2">주차 2대 가능</span>
     </div>

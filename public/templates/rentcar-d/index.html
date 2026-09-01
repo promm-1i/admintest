@@ -102,6 +102,32 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* hero redesign */
+
+.hero{position:relative;padding:0;overflow:hidden;background:var(--ink)}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;animation:bg-drift 30s ease-in-out infinite alternate}
+@keyframes bg-drift{from{transform:scale(1.02)}to{transform:scale(1.11)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(96deg,rgba(18,32,58,.93) 8%,rgba(18,32,58,.72) 46%,rgba(18,32,58,.34))}
+.hero .wrap{position:relative;z-index:2;display:block;padding-top:clamp(78px,11vw,124px);padding-bottom:34px}
+.hero h1{color:#fff;max-width:14ch}
+.hero h1 em{color:#8FB6FF}
+.hero p{color:#C3CEE4;max-width:44ch}
+.hero .kicker{background:rgba(255,255,255,.14);color:#DCE7FF}
+.boardbar{position:relative;z-index:2;margin-top:38px;display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid rgba(255,255,255,.2)}
+.boardbar div{padding:18px 4px 26px;border-right:1px solid rgba(255,255,255,.14)}
+.boardbar div:last-child{border-right:0}
+.boardbar span{display:block;font-size:10.5px;letter-spacing:.18em;color:#93A6C6}
+.boardbar b{display:block;margin-top:6px;font-size:clamp(15px,2.1vw,19px);color:#fff;font-weight:800}
+@media(max-width:760px){
+ .hero::after{background:linear-gradient(180deg,rgba(18,32,58,.72),rgba(18,32,58,.95) 62%)}
+ .boardbar{grid-template-columns:1fr 1fr}
+ .boardbar div:nth-child(2n){border-right:0}
+}
+@media(prefers-reduced-motion:reduce){.hero-stage img,.hero .chip,.hero-bg,.hero-col figure{animation:none!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -112,26 +138,21 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">예약하기</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero">
+<div class="hero-bg" aria-hidden="true"><img src="./assets/hero.jpg" alt=""></div>
+<div class="wrap">
 <span class="kicker">AIRPORT PICK-UP</span>
 <h1 style="margin-top:16px">차를 빌리는 게 아니라<br><em>여행을 예약하는 것</em></h1>
 <p>도착 게이트 앞에서 키를 받고 바로 출발. 티켓렌트카는 예약부터 반납까지를 항공권 한 장처럼 단순하게 만들었습니다.</p>
 <div class="hero-cta"><a class="btn btn-b" href="tel:010-4894-4905">지금 예약하기</a><a class="btn btn-w" href="#fleet">차량 보기</a></div>
-</div>
-<aside class="pass rv">
-<div class="main">
-<div class="brandline"><span>TICKET RENT A CAR</span><span>BOARDING PASS</span></div>
-<img src="./assets/hero.jpg" alt="렌트 차량">
-<div class="rowg">
-<div><span>PICK-UP</span><b>공항 1층</b></div>
-<div><span>CLASS</span><b>SUV</b></div>
-<div><span>TIME</span><b>10분</b></div>
+<div class="boardbar">
+<div><span>PICK-UP</span><b>공항 1층 도착층</b></div>
+<div><span>WAIT</span><b>대기 10분</b></div>
+<div><span>CLASS</span><b>경차 – 대형 SUV</b></div>
+<div><span>RETURN</span><b>주차 후 키 반납</b></div>
 </div>
 </div>
-<div class="stub"><small>GATE</small><span class="big">01</span><small>NO WAIT</small></div>
-</aside>
-</div></section>
+</section>
 
 <section id="fleet" style="padding-top:0"><div class="wrap">
 <div class="rv"><span class="kicker">FLEET TICKETS</span><h2>티켓 한 장 = 차 한 대</h2><p class="sub">표시 요금은 자차보험 포함 1일 기준입니다. 편도 반납도 가능합니다.</p></div>

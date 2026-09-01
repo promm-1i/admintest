@@ -23,8 +23,10 @@ function TemplateFlyout({ groups, onNavigate }: { groups: NavTemplateGroup[]; on
       <ul className="w-[190px] shrink-0 overflow-y-auto overscroll-contain border-r border-border p-2">
         {groups.map((g) => (
           <li key={g.key}>
-            <button
-              type="button"
+            {/* 올리면 오른쪽에 시안이 펼쳐지고, 누르면 그 업종만 걸러진 전체 목록으로 간다 */}
+            <Link
+              to={g.href}
+              onClick={onNavigate}
               onMouseEnter={() => setActiveKey(g.key)}
               onFocus={() => setActiveKey(g.key)}
               aria-current={g.key === active?.key}
@@ -36,16 +38,25 @@ function TemplateFlyout({ groups, onNavigate }: { groups: NavTemplateGroup[]; on
             >
               {g.label}
               <ChevronRight className="size-3.5 shrink-0 opacity-50" />
-            </button>
+            </Link>
           </li>
         ))}
       </ul>
 
       {active && (
         <div className="flex-1 overflow-y-auto overscroll-contain p-3">
-          <p className="px-1 pb-2 text-xs font-semibold text-muted-foreground">
-            {active.label} · 디자인 {active.designs.length}종
-          </p>
+          <div className="flex items-baseline justify-between gap-2 px-1 pb-2">
+            <p className="text-xs font-semibold text-muted-foreground">
+              {active.label} · 디자인 {active.designs.length}종
+            </p>
+            <Link
+              to={active.href}
+              onClick={onNavigate}
+              className="text-xs font-medium text-primary hover:underline"
+            >
+              이 업종만 모아 보기
+            </Link>
+          </div>
           <ul className="grid grid-cols-2 gap-2">
             {active.designs.map((d) => (
               <li key={d.href}>

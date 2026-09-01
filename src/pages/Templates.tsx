@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -57,6 +57,16 @@ export default function Templates() {
     setIndustry(value);
     setPage(1);
   };
+
+  // 이미 이 페이지에 있는 상태에서 메뉴로 다른 업종을 고르면 주소만 바뀌고
+  // 목록은 그대로였다. 주소의 필터를 화면에 다시 맞춘다.
+  useEffect(() => {
+    const s = searchParams.get("style");
+    if (STYLES.some((v) => v.value === s)) setStyle(s!);
+    const i = searchParams.get("industry");
+    setIndustry(i && TEMPLATE_INDUSTRY_FILTERS.some((f) => f.value === i) ? i : "all");
+    setPage(1);
+  }, [searchParams]);
 
   return (
     <div className="mx-auto max-w-[1536px] px-4 py-14">

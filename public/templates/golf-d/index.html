@@ -110,6 +110,40 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* hero redesign */
+
+.hero .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:0;align-items:center}
+.hero-copy{grid-area:1/1/2/7;position:relative;z-index:3}
+.hero-stage{grid-area:1/6/2/13;position:relative;z-index:1}
+.hero-stage img{width:100%;aspect-ratio:4/3.1;object-fit:cover;border-radius:20px;display:block;
+  animation:hs-drift 26s ease-in-out infinite alternate}
+.hero-stage::after{content:"";position:absolute;inset:0;border-radius:20px;pointer-events:none;
+  background:linear-gradient(102deg,rgba(18,22,28,.94) 3%,rgba(18,22,28,.94) 26%,transparent 58%)}
+@keyframes hs-drift{from{transform:scale(1)}to{transform:scale(1.055)}}
+.hero .chip{position:absolute;z-index:4;background:rgba(18,22,28,.88);border:1px solid rgba(255,255,255,.16);
+  border-radius:13px;padding:11px 15px;box-shadow:0 12px 30px rgba(0,0,0,.13);
+  opacity:0;animation:chip-in .9s cubic-bezier(.32,.72,0,1) forwards}
+.hero .chip b{display:block;font-size:19px;font-weight:900;line-height:1.1;color:var(--orange)}
+.hero .chip span{display:block;margin-top:3px;font-size:11px;color:#98A2AE;letter-spacing:.02em}
+@keyframes chip-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero .c1{left:-34px;top:12%;animation-delay:.35s}
+.hero .c2{right:14px;top:40%;animation-delay:.55s}
+.hero .c3{left:4%;bottom:18px;animation-delay:.75s}
+@media(max-width:900px){
+ .hero .wrap{grid-template-columns:1fr;gap:26px}
+ .hero-copy,.hero-stage{grid-area:auto/1/auto/-1}
+ .hero-stage{order:-1}
+ .hero-stage img{aspect-ratio:16/10;border-radius:14px}
+ .hero-stage::after{background:linear-gradient(180deg,transparent 52%,rgba(18,22,28,.94))}
+ .hero .c1{left:10px;top:auto;bottom:12px}
+ .hero .c2,.hero .c3{display:none}
+}
+.hero{padding:74px 0 66px;overflow:hidden}
+.hero .rep{margin-top:26px;border-top:1px solid rgba(255,255,255,.14);padding-top:16px;display:flex;gap:26px;flex-wrap:wrap}
+.hero .rep div span{display:block;font-size:11px;color:#8A94A0}
+.hero .rep div b{font-size:14px;color:#fff;font-weight:700}
+@media(prefers-reduced-motion:reduce){.hero-stage img,.hero .chip,.hero-bg,.hero-col figure{animation:none!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -121,26 +155,23 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </div></header>
 
 <section class="hero"><div class="wrap">
-<div>
+<div class="hero-copy">
 <span class="kicker" style="background:rgba(242,106,33,.15);color:#F9A276">DATA-DRIVEN GOLF ACADEMY</span>
 <h1 style="margin-top:16px">"공을 잘 보세요"<br>같은 말은<br><em>하지 않습니다</em></h1>
 <p>스윙랩은 감각 대신 숫자로 가르칩니다. 헤드 스피드, 어택 앵글, 페이스 각도 — 무엇을 얼마나 바꿔야 하는지 알려드립니다.</p>
 <div class="hero-cta"><a class="btn btn-o" href="tel:010-4894-4905">체험 레슨 신청</a><a class="btn btn-l" href="#metric">분석 항목</a></div>
+<div class="rep">
+<div><span>스매시 팩터</span><b>1.42 → 1.47</b></div>
+<div><span>백스핀</span><b>3,180 → 2,640 rpm</b></div>
+<div><span>발사각</span><b>9.8° → 12.4°</b></div>
 </div>
-<aside class="dash rv">
-<h3>SWING REPORT — 8주 변화 예시</h3>
-<div class="dg">
-<div><b>+12.4</b><span>헤드 스피드 (m/s)</span></div>
-<div><b>-3.2°</b><span>클럽 패스 편차</span></div>
-<div><b>+18m</b><span>드라이버 캐리</span></div>
-<div><b>72%</b><span>페어웨이 안착률</span></div>
 </div>
-<div class="trend">
-<div class="tr"><span>스매시 팩터</span><b>1.42 → 1.47</b></div>
-<div class="tr"><span>백스핀</span><b>3,180 → 2,640 rpm</b></div>
-<div class="tr"><span>발사각</span><b>9.8° → 12.4°</b></div>
+<div class="hero-stage">
+<img src="./assets/1.jpg" alt="스윙을 분석하는 타석">
+<div class="chip c1"><b>+12.4</b><span>헤드 스피드 m/s</span></div>
+<div class="chip c2"><b>-3.2°</b><span>클럽 패스 편차</span></div>
+<div class="chip c3"><b>+18m</b><span>드라이버 캐리 · 8주</span></div>
 </div>
-</aside>
 </div></section>
 
 <section id="metric"><div class="wrap">

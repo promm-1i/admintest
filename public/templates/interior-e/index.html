@@ -132,6 +132,38 @@ footer b{color:#fff}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* hero redesign */
+
+.hero .wrap{display:grid;grid-template-columns:repeat(12,1fr);gap:0;align-items:center}
+.hero-copy{grid-area:1/1/2/7;position:relative;z-index:3}
+.hero-stage{grid-area:1/6/2/13;position:relative;z-index:1}
+.hero-stage img{width:100%;aspect-ratio:4/3.1;object-fit:cover;border-radius:22px;display:block;
+  animation:hs-drift 26s ease-in-out infinite alternate}
+.hero-stage::after{content:"";position:absolute;inset:0;border-radius:22px;pointer-events:none;
+  background:linear-gradient(102deg,rgba(240,251,248,.96) 3%,rgba(240,251,248,.96) 26%,transparent 58%)}
+@keyframes hs-drift{from{transform:scale(1)}to{transform:scale(1.055)}}
+.hero .chip{position:absolute;z-index:4;background:#fff;border:1px solid var(--line);
+  border-radius:13px;padding:11px 15px;box-shadow:0 12px 30px rgba(0,0,0,.13);
+  opacity:0;animation:chip-in .9s cubic-bezier(.32,.72,0,1) forwards}
+.hero .chip b{display:block;font-size:19px;font-weight:900;line-height:1.1;color:var(--deep)}
+.hero .chip span{display:block;margin-top:3px;font-size:11px;color:var(--soft);letter-spacing:.02em}
+@keyframes chip-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero .c1{left:-34px;top:12%;animation-delay:.35s}
+.hero .c2{right:14px;top:40%;animation-delay:.55s}
+.hero .c3{left:4%;bottom:18px;animation-delay:.75s}
+@media(max-width:900px){
+ .hero .wrap{grid-template-columns:1fr;gap:26px}
+ .hero-copy,.hero-stage{grid-area:auto/1/auto/-1}
+ .hero-stage{order:-1}
+ .hero-stage img{aspect-ratio:16/10;border-radius:14px}
+ .hero-stage::after{background:linear-gradient(180deg,transparent 52%,rgba(240,251,248,.96))}
+ .hero .c1{left:10px;top:auto;bottom:12px}
+ .hero .c2,.hero .c3{display:none}
+}
+.hero{padding:66px 0 62px;overflow:hidden}
+.hero .chip b{font-family:"Jua";font-weight:400}
+@media(prefers-reduced-motion:reduce){.hero-stage img,.hero .chip,.hero-bg,.hero-col figure{animation:none!important;transform:none!important}}
 </style>
 </head>
 <body>
@@ -143,13 +175,18 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </div></header>
 
 <section class="hero"><div class="wrap">
-<div>
+<div class="hero-copy">
 <span class="badge">부분 시공 전문</span>
 <h1 style="margin-top:16px">전체 말고<br><span class="m">필요한</span> <span class="c">곳만</span></h1>
 <p>화장실만, 주방만, 도배만. 전체 리모델링이 부담되면 급한 곳부터 하나씩 고치세요. 최소 100만원부터 시작합니다.</p>
 <div class="hero-cta"><a class="btn btn-m" href="tel:010-4894-4905">견적 문의하기</a><a class="btn btn-c" href="#pkg">패키지 보기</a></div>
 </div>
-<img class="rv" src="./assets/hero.jpg" alt="시공 사례">
+<div class="hero-stage">
+<img src="./assets/hero.jpg" alt="부분 시공을 마친 욕실">
+<div class="chip c1"><b>100만원~</b><span>욕실 부분 시공</span></div>
+<div class="chip c2"><b>3일</b><span>평균 시공 기간</span></div>
+<div class="chip c3"><b>거주 중 가능</b><span>이사 없이 진행</span></div>
+</div>
 </div></section>
 
 <section id="pkg"><div class="wrap">
