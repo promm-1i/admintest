@@ -169,8 +169,9 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
   // 기본형 · 랜딩형(A 시안)은 업종 단위로 한 벌을 공유하고, B~E 시안은 폴더별로 따로 가진다.
   const folder = sample.liveUrl?.match(/\/templates\/([a-z0-9-]+)\//)?.[1];
   const sectionKey = folder?.replace(/-(?:basic|landing)$/, "");
-  // 태블릿 · 모바일 목업 캡처는 A 시안(기본형 · 랜딩형)에만 있어서 그때만 노출한다
-  const sectionSlug = folder && /-(?:basic|landing)$/.test(folder) ? sectionKey : undefined;
+  // 태블릿 · 모바일 목업 캡처는 A 시안(<업종>-basic · <업종>-landing)에만 있다.
+  // tax-c-basic 같은 B~E 기본형은 여기 걸리면 안 되므로 업종명만 오는 형태로 한정한다.
+  const sectionSlug = folder && /^[a-z]+-(?:basic|landing)$/.test(folder) ? sectionKey : undefined;
   const industry = sample.industryKey ? INDUSTRY_CONTENT[sample.industryKey] : undefined;
   const sectionShots = sectionKey ? (TEMPLATE_SECTIONS[sectionKey] ?? []) : [];
 

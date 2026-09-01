@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>가볍게이사 — 이사 · 청소업체 홈페이지 템플릿 (기본형 · 디자인 D)</title>
+<meta name="description" content="코랄과 화이트의 1인 가구 원룸이사 홈페이지 템플릿. 간편 견적, 짐 체크리스트, 당일 이사로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="가볍게이사 — 이사 · 청소업체 홈페이지 템플릿 (기본형 · 디자인 D)">
+<meta property="og:image" content="../moving-d/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gothic+A1:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#FF6B5B;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #E4523F;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--coral:#FF6B5B;--deep:#E4523F;--pale:#FFF1EF;--ink:#2C2422;--soft:#7C6E6A;--line:#F4DEDA;--mint:#3EC9A7}
+body{background:#fff;color:var(--ink);font-family:"Gothic A1",sans-serif;line-height:1.75}
+.disp{font-family:"Jua",sans-serif;font-weight:400}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+section{padding:86px 0}
+.badge{display:inline-block;font-family:"Jua";font-size:15px;background:var(--coral);color:#fff;border-radius:99px;padding:6px 18px}
+h2{font-family:"Jua";font-size:clamp(27px,4.2vw,40px);font-weight:400;margin-top:14px}
+.sub{color:var(--soft);margin-top:10px;font-size:14.5px;max-width:500px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:3px solid var(--pale)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"Jua";font-size:22px}
+.logo b{color:var(--coral);font-weight:400}
+.nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px;font-weight:500;color:var(--soft)}
+.nav ul a:hover{color:var(--coral)}
+.nav .tel{font-family:"Jua";font-size:15px;background:var(--coral);color:#fff;padding:9px 20px;border-radius:99px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{background:var(--pale);padding:70px 0 60px;border-radius:0 0 44px 44px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Jua";font-size:clamp(33px,5.8vw,54px);font-weight:400;line-height:1.28}
+.hero h1 em{font-style:normal;color:var(--coral)}
+.hero p{margin-top:14px;color:var(--soft);font-size:15px;max-width:420px}
+.hero-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;font-family:"Jua";font-size:17px;padding:13px 30px;border-radius:16px;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:active{transform:scale(.97)}
+.btn-c{background:var(--coral);color:#fff}.btn-c:hover{background:var(--deep)}
+.btn-w{background:#fff;border:2.5px solid var(--coral);color:var(--coral)}
+/* 히어로 사진 + 견적 카드 콜라주 */
+.hero-media{position:relative;padding-bottom:8px}
+.hero-media>img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px}
+.hero-media .quote{position:relative;z-index:2;width:calc(100% - 30px);margin:-64px 0 0 30px}
+@media(max-width:860px){.hero-media>img{aspect-ratio:16/10}.hero-media .quote{width:100%;margin:-48px 0 0}}
+/* 견적 카드 */
+.quote{background:#fff;border-radius:24px;padding:26px;box-shadow:0 18px 40px -22px rgba(44,36,34,.3)}
+.quote h3{font-family:"Jua";font-size:18px;color:var(--coral)}
+.qr{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:2px dotted var(--line);font-size:14.5px}
+.qr:last-of-type{border-bottom:0}
+.qr b{font-weight:900}
+.qr .v{font-family:"Jua";font-size:17px;color:var(--ink)}
+.quote .total{margin-top:14px;background:var(--pale);border-radius:16px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.quote .total span{font-size:13.5px;font-weight:700}
+.quote .total b{font-family:"Jua";font-size:26px;color:var(--coral)}
+.quote .note{margin-top:10px;font-size:11.5px;color:var(--soft)}
+/* 짐 체크 */
+.check{margin-top:44px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:820px){.check{grid-template-columns:1fr 1fr}}
+.ck{background:var(--pale);border-radius:18px;padding:22px;text-align:center;transition:transform .45s cubic-bezier(.32,.72,0,1)}
+.ck:hover{transform:translateY(-4px)}
+.ck .em{font-size:28px}
+.ck b{display:block;font-family:"Jua";font-size:15px;margin-top:8px;font-weight:400}
+.ck p{font-size:12px;color:var(--soft);margin-top:4px}
+/* 옵션 */
+.opts{margin-top:44px;border:2.5px solid var(--line);border-radius:20px;overflow:hidden}
+.op{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:17px 24px;border-top:2px solid var(--line);font-size:14.5px;align-items:baseline}
+.op:first-child{border-top:0;background:var(--ink);color:#fff;font-size:13px;font-weight:700}
+.op b{font-weight:900}
+.op .d{font-size:12.5px;color:var(--soft)}
+.op .won{font-family:"Jua";font-size:17px;color:var(--coral);white-space:nowrap}
+@media(max-width:640px){.op{grid-template-columns:1fr auto}.op .d{display:none}}
+/* 안심 */
+.safe{margin-top:44px;background:var(--mint);color:#fff;border-radius:24px;padding:34px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:760px){.safe{grid-template-columns:1fr}}
+.safe div .em{font-size:26px}
+.safe div b{display:block;font-family:"Jua";font-size:17px;margin-top:8px;font-weight:400}
+.safe div p{font-size:13px;color:#DFF6EF;margin-top:6px}
+/* 이사 전 · 후 */
+.ba{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.ba{grid-template-columns:1fr}}
+.ba figure{margin:0;position:relative;border-radius:22px;overflow:hidden;border:3px solid var(--pale)}
+.ba img{width:100%;aspect-ratio:4/3;object-fit:cover}
+.ba figcaption{position:absolute;top:14px;left:14px;font-family:"Jua";font-size:14px;background:rgba(44,36,34,.82);color:#fff;padding:5px 15px;border-radius:99px}
+.ba figure:last-child figcaption{background:#0E7A5E}
+.ba-note{margin-top:16px;font-size:13px;color:var(--soft)}
+/* 최근 작업 */
+.cases{margin-top:44px;display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.cases figure{margin:0;border-radius:18px;overflow:hidden;position:relative}
+.cases img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.32,.72,0,1)}
+.cases figure:hover img{transform:scale(1.05)}
+.cases figcaption{position:absolute;left:0;right:0;bottom:0;padding:22px 14px 11px;font-size:12.5px;font-weight:700;color:#fff;background:linear-gradient(transparent,rgba(44,36,34,.8))}
+.cases figure:nth-child(1){grid-column:span 3;grid-row:span 2}
+.cases figure:nth-child(2){grid-column:span 3}
+.cases figure:nth-child(3),.cases figure:nth-child(4){grid-column:span 3}
+.cases figure:nth-child(5){grid-column:span 6}
+.cases figure:nth-child(1) img{aspect-ratio:1/1}
+.cases figure:nth-child(n+2) img{aspect-ratio:16/9}
+@media(max-width:760px){.cases{grid-template-columns:1fr 1fr}.cases figure:nth-child(n){grid-column:span 1;grid-row:span 1}.cases figure:nth-child(5){grid-column:span 2}.cases img{aspect-ratio:4/3!important}}
+/* 후기 */
+.rev{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.rev{grid-template-columns:1fr}}
+.rv-c{background:#fff;border:2.5px solid var(--line);border-radius:18px;padding:24px}
+.rv-c .st{color:#FFC53D;font-size:14px}
+.rv-c p{font-size:13.5px;margin-top:8px}
+.rv-c .who{font-size:12px;color:var(--soft);margin-top:10px}
+.cta{background:var(--coral);color:#fff;text-align:center;padding:80px 24px}
+.cta h2{color:#fff}
+.cta p{margin-top:10px;color:#FFE0DB;font-size:14px}
+.cta .btn{margin-top:24px;background:#fff;color:var(--deep);font-size:19px}
+footer{background:var(--ink);color:#A99C98;padding:40px 0;font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:#fff}
+
+.logo b{display:inline-block;}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">가볍게<b>이사</b></a>
+<ul><li><a href="#check">짐 체크</a></li><li><a href="#opt">옵션 요금</a></li><li><a href="#ba">이사 전·후</a></li><li><a href="#cases">최근 작업</a></li><li><a href="#safe">안심 서비스</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">견적 문의</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<span class="badge">원룸 · 투룸 전문</span>
+<h1 style="margin-top:16px">짐 적은 이사에<br><em>큰 트럭</em>은 낭비예요</h1>
+<p>1톤 · 1.4톤으로 딱 맞게. 가볍게이사는 원룸 이사만 8년 했습니다. 짐 사진만 보내주시면 30분 안에 견적 드려요.</p>
+<div class="hero-cta"><a class="btn btn-c" href="tel:0507-000-0000">사진으로 견적받기</a><a class="btn btn-w" href="#opt">요금 보기</a></div>
+</div>
+<div class="hero-media rv">
+<img src="../moving-d/assets/hero.jpg" alt="1톤 트럭에 원룸 짐을 싣는 작업">
+<aside class="quote">
+<h3>견적 예시 — 원룸 8평 · 3층 → 2층</h3>
+<div class="qr"><b>차량 (1톤)</b><span class="v">150,000원</span></div>
+<div class="qr"><b>인력 2명</b><span class="v">140,000원</span></div>
+<div class="qr"><b>사다리차</b><span class="v">불필요</span></div>
+<div class="qr"><b>박스 20개</b><span class="v">무료</span></div>
+<div class="total"><span>예상 총액</span><b>290,000원</b></div>
+<p class="note">* 실제 견적은 짐 양과 층수, 주차 여건에 따라 달라집니다.</p>
+</aside>
+</div>
+</div></section>
+
+<section id="check"><div class="wrap">
+<div class="rv"><span class="badge">짐 체크리스트</span><h2>이런 짐, 미리 알려주세요</h2><p class="sub">견적이 정확해지고 당일에 당황할 일이 없어요.</p></div>
+<div class="check rv">
+<div class="ck"><span class="em">🛏️</span><b>침대 · 매트리스</b><p>사이즈와 분해 여부</p></div>
+<div class="ck"><span class="em">🧊</span><b>냉장고 · 세탁기</b><p>양문형이면 꼭 말씀을</p></div>
+<div class="ck"><span class="em">🪴</span><b>화분 · 수조</b><p>깨지기 쉬운 것들</p></div>
+<div class="ck"><span class="em">📚</span><b>책 · 옷 박스 수</b><p>대략 몇 개인지만</p></div>
+</div>
+</div></section>
+
+<section id="opt" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">옵션 요금</span><h2>필요한 것만 골라 담으세요</h2></div>
+<div class="opts rv">
+<div class="op"><span>서비스</span><span>내용</span><span>요금</span></div>
+<div class="op"><b>반포장 이사</b><span class="d">짐은 직접 싸고, 운반 · 배치만</span><span class="won">기본</span></div>
+<div class="op"><b>포장 이사</b><span class="d">싸는 것부터 정리까지 전부</span><span class="won">+120,000원</span></div>
+<div class="op"><b>사다리차</b><span class="d">4층 이상 · 엘리베이터 없을 때</span><span class="won">+80,000원</span></div>
+<div class="op"><b>에어컨 이전 설치</b><span class="d">벽걸이 기준 · 배관 별도</span><span class="won">+150,000원</span></div>
+<div class="op"><b>폐기물 처리</b><span class="d">버릴 가구 · 가전 대신 처리</span><span class="won">+50,000원~</span></div>
+</div>
+</div></section>
+
+<section id="safe" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">안심 서비스</span><h2>혼자 사는 분들을 위해</h2></div>
+<div class="safe rv">
+<div><span class="em">👩</span><b>여성 기사 요청 가능</b><p>미리 말씀 주시면 여성 인력으로 배정해 드립니다.</p></div>
+<div><span class="em">📱</span><b>실시간 위치 공유</b><p>출발부터 도착까지 차량 위치를 알려드려요.</p></div>
+<div><span class="em">🧾</span><b>계약서 문자 발송</b><p>구두 약속 없이, 금액과 조건을 문자로 남깁니다.</p></div>
+</div>
+</div></section>
+
+<section id="ba" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">이사 전 · 후</span><h2>짐 빼고 이렇게 두고 나옵니다</h2><p class="sub">빈집 청소까지 기본입니다. 보증금 정산에서 트집 잡히지 않게, 나온 자리를 사진으로 남겨 보내드려요.</p></div>
+<div class="ba rv">
+<figure><img src="../moving-d/assets/ba-before.jpg" alt="짐을 뺀 직후의 원룸"><figcaption>BEFORE · 짐 뺀 직후</figcaption></figure>
+<figure><img src="../moving-d/assets/ba-after.jpg" alt="청소를 마친 빈 원룸"><figcaption>AFTER · 청소 후</figcaption></figure>
+</div>
+<p class="ba-note rv">* 바닥 · 창틀 · 붙박이장 내부까지. 도배 · 장판 교체가 필요한 상태면 미리 알려드립니다.</p>
+</div></section>
+
+<section id="cases" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">최근 작업</span><h2>이번 달에 다녀온 집들</h2><p class="sub">원룸 · 투룸 위주로 하루 두 건만 받습니다. 서두르지 않아야 짐이 상하지 않아요.</p></div>
+<div class="cases rv">
+<figure><img src="../moving-d/assets/case-1.jpg" alt="원룸 이사 상차"><figcaption>망원동 원룸 · 1톤 · 반포장</figcaption></figure>
+<figure><img src="../moving-d/assets/case-2.jpg" alt="가전 운반"><figcaption>신림동 투룸 · 1.4톤</figcaption></figure>
+<figure><img src="../moving-d/assets/case-3.jpg" alt="박스 포장"><figcaption>연희동 원룸 · 포장이사</figcaption></figure>
+<figure><img src="../moving-d/assets/case-4.jpg" alt="창틀을 닦는 빈집 청소"><figcaption>서대문 원룸 · 창틀 청소</figcaption></figure>
+<figure><img src="../moving-d/assets/case-5.jpg" alt="가스레인지를 닦는 빈집 청소"><figcaption>합정동 투룸 · 주방 기름때까지</figcaption></figure>
+</div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="badge">후기</span><h2>이사하신 분들 이야기</h2></div>
+<div class="rev rv">
+<div class="rv-c"><p class="st">★★★★★</p><p>"짐이 적어서 다른 데선 거절당했는데 여기는 흔쾌히 와주셨어요."</p><p class="who">— 망원동 원룸 이사</p></div>
+<div class="rv-c"><p class="st">★★★★★</p><p>"견적 그대로였어요. 당일에 돈 더 달라는 말 한마디도 없었습니다."</p><p class="who">— 신림동 투룸 이사</p></div>
+<div class="rv-c"><p class="st">★★★★★</p><p>"여성 기사님 요청드렸는데 배려해 주셔서 마음 편했어요."</p><p class="who">— 서대문 원룸 이사</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">짐 사진 한 장이면<br>견적 끝!</h2>
+<p class="rv">문자 · 카톡으로 사진 보내주세요 · 연중무휴 07:00 – 21:00</p>
+<a class="btn rv" href="tel:0507-000-0000">📞 0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>가볍게이사</b> · 대표 짐가벼 · 화물자동차운송주선사업 허가 제0000호<br>서울특별시 마포구 월드컵로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 요금 · 연락처는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>

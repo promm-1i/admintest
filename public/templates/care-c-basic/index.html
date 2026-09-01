@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>온케어 주간보호센터 — 요양원 · 주간보호 홈페이지 템플릿 (기본형 · 디자인 C)</title>
+<meta name="description" content="틸 그린의 전문 케어 시스템 무드 주간보호센터 홈페이지 템플릿. 인력 배치, 하루 프로그램 표, 송영 차량, 비용 안내로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="온케어 주간보호센터 — 요양원 · 주간보호 홈페이지 템플릿 (기본형 · 디자인 C)">
+<meta property="og:image" content="../care-c/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#0E7C7B;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #0E7C7B;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--teal:#0E7C7B;--teal-soft:#E4F2F1;--amber:#E8A33D;--ink:#1E2B2A;--soft:#5F7472;--line:#DCE8E6}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.75;font-size:15.5px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+section{padding:92px 0}
+.kicker{display:inline-block;font-size:12px;font-weight:900;letter-spacing:.12em;color:var(--teal);background:var(--teal-soft);padding:6px 14px;border-radius:8px}
+h2{font-size:clamp(25px,3.8vw,36px);font-weight:900;margin-top:16px;letter-spacing:-.02em}
+.sub{color:var(--soft);margin-top:12px;font-size:15px;max-width:540px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:900;font-size:19px}
+.logo i{font-style:normal;color:var(--teal)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:14px;color:var(--soft)}
+.nav ul a:hover{color:var(--teal)}
+.nav .tel{background:var(--teal);color:#fff;font-weight:900;font-size:14px;padding:10px 20px;border-radius:10px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{background:var(--teal);color:#fff;padding:84px 0}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(30px,5vw,46px);font-weight:900;line-height:1.4;letter-spacing:-.02em}
+.hero h1 em{font-style:normal;color:#FFD98F}
+.hero p{margin-top:18px;color:#CBE5E4;font-size:15.5px;max-width:460px}
+.hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;border-radius:12px;font-weight:900;font-size:15.5px;transition:transform .4s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.97)}
+.btn-w{background:#fff;color:var(--teal)}
+.btn-a{background:var(--amber);color:#3D2E10}
+.stat-card{background:#fff;color:var(--ink);border-radius:18px;padding:28px;box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+.stat-card h3{font-size:12.5px;letter-spacing:.1em;color:var(--soft);font-weight:700}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border-radius:12px;overflow:hidden;margin-top:16px}
+.stat-grid div{background:var(--teal-soft);padding:18px}
+.stat-grid b{font-size:26px;font-weight:900;color:var(--teal)}
+.stat-grid span{display:block;font-size:12px;color:var(--soft);margin-top:4px}
+.tt{margin-top:44px;border:1.5px solid var(--line);border-radius:16px;overflow:hidden}
+.tt-row{display:grid;grid-template-columns:110px 1fr;padding:16px 22px;border-top:1px solid var(--line);font-size:15px;align-items:baseline}
+.tt-row:first-child{border-top:0;background:var(--ink);color:#fff;font-size:12.5px;letter-spacing:.1em}
+.tt-row .t{font-weight:900;color:var(--teal)}
+.tt-row p{font-size:12.5px;color:var(--soft);margin-top:2px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+@media(max-width:820px){.grid3{grid-template-columns:1fr}}
+.g3{border:1.5px solid var(--line);border-radius:16px;padding:26px;transition:transform .5s cubic-bezier(.32,.72,0,1),border-color .3s}
+.g3:hover{transform:translateY(-4px);border-color:var(--teal)}
+.g3 .ico{width:46px;height:46px;border-radius:12px;background:var(--teal-soft);display:grid;place-items:center;font-size:21px}
+.g3 b{display:block;margin-top:14px;font-size:16px;font-weight:900}
+.g3 p{margin-top:6px;font-size:13px;color:var(--soft)}
+.van{margin-top:48px;background:var(--teal-soft);border-radius:20px;padding:34px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+@media(max-width:680px){.van{grid-template-columns:1fr}}
+.van .em{font-size:44px}
+.van b{font-size:17px;font-weight:900}
+.van p{font-size:13.5px;color:var(--soft);margin-top:6px}
+.cost{margin-top:44px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:720px){.cost{grid-template-columns:1fr}}
+.co{border:1.5px solid var(--line);border-radius:16px;padding:28px}
+.co h3{font-weight:900;font-size:15px;color:var(--teal)}
+.co .big{font-size:30px;font-weight:900;margin-top:10px}
+.co .big small{font-size:13px;color:var(--soft);font-weight:400}
+.co p{font-size:12.5px;color:var(--soft);margin-top:10px}
+.cta{background:var(--ink);color:#fff;text-align:center;padding:88px 24px}
+.cta h2{color:#fff}
+.cta p{margin-top:12px;color:#9DB4B2;font-size:14px}
+.cta .btn{margin-top:26px;background:var(--amber);color:#3D2E10;font-size:17px}
+footer{padding:44px 0;border-top:1px solid var(--line);font-size:13px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+.van .em{display:inline-block}
+
+/* 전경 밴드 */
+.band{position:relative;margin:0;overflow:hidden}
+.band>img{width:100%;height:clamp(230px,32vw,390px);object-fit:cover;display:block}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 26px 26px;background:linear-gradient(transparent,rgba(10,10,14,.82));color:#fff}
+.band figcaption b{display:block;font-size:clamp(17px,2.4vw,22px);font-weight:700}
+.band figcaption span{display:block;margin-top:7px;font-size:13px;color:rgba(255,255,255,.82);max-width:660px}
+/* 사진 그리드 */
+.pgrid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pgrid{grid-template-columns:1fr}}
+.pg{margin:0;position:relative;overflow:hidden;border-radius:16px}
+.pg img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .7s cubic-bezier(.32,.72,0,1)}
+.pg:hover img{transform:scale(1.05)}
+.pg figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;background:linear-gradient(transparent,rgba(10,10,14,.8));color:#fff;font-size:12.5px;font-weight:700}
+.pg figcaption em{display:block;font-style:normal;font-weight:400;font-size:11.5px;color:rgba(255,255,255,.78);margin-top:3px}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">온케어 <i>주간보호센터</i></a>
+<ul><li><a href="#program">하루 프로그램</a></li><li><a href="#care">케어 시스템</a></li><li><a href="#cost">이용 비용</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">이용 상담</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker" style="background:rgba(255,255,255,.14);color:#fff">어르신 낮 시간 전문 돌봄</p>
+<h1 style="margin-top:16px">아침에 모시러 가고,<br>저녁에 <em>웃는 얼굴로</em><br>모셔다드립니다</h1>
+<p>온케어는 낮 동안의 돌봄을 시스템으로 만듭니다. 송영부터 프로그램, 귀가 보고까지 — 전 과정이 기록되고 공유됩니다.</p>
+<div class="hero-cta"><a class="btn btn-a" href="tel:0507-000-0000">이용 상담 전화</a><a class="btn btn-w" href="#program">프로그램 보기</a></div>
+</div>
+<aside class="stat-card rv">
+<h3>온케어 케어 시스템</h3>
+<div class="stat-grid">
+<div><b>2.5 : 1</b><span>어르신 대비 직원 비율</span></div>
+<div><b>3회</b><span>하루 보호자 알림 발송</span></div>
+<div><b>4대</b><span>휠체어 리프트 송영 차량</span></div>
+<div><b>주 5일</b><span>물리 · 인지 프로그램</span></div>
+</div>
+</aside>
+</div></section>
+
+<section id="program"><div class="wrap">
+<div class="rv"><span class="kicker">하루 프로그램</span><h2>오전 9시부터 오후 5시까지</h2></div>
+<div class="tt rv">
+<div class="tt-row"><span>시간</span><span>프로그램</span></div>
+<div class="tt-row"><span class="t">09:00</span><div>송영 도착 · 건강 체크<p>혈압 · 체온 측정 후 보호자 알림 1회차</p></div></div>
+<div class="tt-row"><span class="t">10:00</span><div>재활 체조 · 보행 훈련<p>물리치료사 주 5일 상주</p></div></div>
+<div class="tt-row"><span class="t">12:00</span><div>점심 · 구강 관리<p>연하 상태별 맞춤 식단</p></div></div>
+<div class="tt-row"><span class="t">14:00</span><div>인지 활동 · 취미 교실<p>요일별 미술 · 원예 · 노래 교실</p></div></div>
+<div class="tt-row"><span class="t">16:30</span><div>귀가 준비 · 하루 보고<p>오늘의 사진과 특이사항을 보호자께</p></div></div>
+</div>
+</div></section>
+
+<section id="care" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="kicker">케어 시스템</span><h2>돌봄을 시스템으로</h2></div>
+<div class="grid3 rv">
+<div class="g3"><div class="ico">🩺</div><b>간호 인력 상주</b><p>투약 관리와 응급 대응 — 협력 병원 핫라인 운영.</p></div>
+<div class="g3"><div class="ico">📋</div><b>개인별 케어 플랜</b><p>입소 시 기능 평가 후 월 단위로 목표를 조정합니다.</p></div>
+<div class="g3"><div class="ico">📱</div><b>보호자 알림</b><p>등원 · 식사 · 귀가, 하루 세 번 사진과 함께.</p></div>
+</div>
+<div class="van rv"><span class="em">🚐</span><div><b>휠체어 리프트 차량 4대 · 왕복 송영</b><p>반경 8km 무료 송영 · 차량 도착 10분 전 문자를 드립니다. 승하차는 항상 두 명이 함께 부축합니다.</p></div></div>
+</div></section>
+
+<section id="cost" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="kicker">이용 비용</span><h2>등급이 있으면 부담은 낮아집니다</h2><p class="sub">노인장기요양보험 적용 기준 예시이며, 등급 · 이용 일수에 따라 달라집니다. 등급 신청도 무료로 도와드립니다.</p></div>
+<div class="cost rv">
+<div class="co"><h3>3등급 · 주 5일 이용 시</h3><p class="big">월 12만원대<small> 본인부담 예시</small></p><p>식사 · 간식 · 송영 포함 — 세부 내역은 상담 시 서면으로 드립니다.</p></div>
+<div class="co"><h3>등급이 아직 없다면</h3><p class="big">신청 대행 무료</p><p>방문 조사 준비부터 의사소견서 안내까지 함께 진행합니다.</p></div>
+</div>
+</div></section>
+
+<section id="space" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">OUR SPACE</p><h2>센터를 미리 둘러보세요</h2><p class="sub">모시기 전에 보호자님이 먼저 오셔서 보셔도 됩니다. 예약 없이 오셔도 안내해 드립니다.</p></div>
+<div class="pgrid rv">
+<figure class="pg"><img src="../care-c/assets/1.jpg" alt="생활실"><figcaption>생활실<em>낮잠과 휴식을 위한 공간 · 1인용 침상 6개</em></figcaption></figure>
+<figure class="pg"><img src="../care-c/assets/2.jpg" alt="재활 운동실"><figcaption>재활 운동실<em>평행봉 · 실내 자전거 · 낙상 방지 매트</em></figcaption></figure>
+<figure class="pg"><img src="../care-c/assets/4.jpg" alt="식당"><figcaption>식당<em>영양사가 짠 식단으로 점심과 간식을 드립니다</em></figcaption></figure>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">낮 시간이 걱정이라면,<br>온케어가 함께하겠습니다</h2>
+<p class="rv">상담 · 견학 평일 09:00 – 18:00 · 어르신과 함께 오셔도 좋습니다</p>
+<a class="btn rv" href="tel:0507-000-0000">☎ 0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>온케어 주간보호센터</b> · 센터장 온보람 · 장기요양기관 지정 제0000호<br>경기도 부천시 소사로 000, 2층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 비용 · 연락처는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>

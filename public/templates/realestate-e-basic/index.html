@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>대성부동산 — 부동산 홈페이지 템플릿 (기본형 · 디자인 E)</title>
+<meta name="description" content="동네 부동산 정보지를 닮은 흑백 신문 무드 부동산 홈페이지 템플릿. 컬럼 레이아웃 매물 목록, 시세표, 상담 안내로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="대성부동산 — 부동산 홈페이지 템플릿 (기본형 · 디자인 E)">
+<meta property="og:image" content="../realestate-e/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#1A1A1A;color:#F7F5F0}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #8C1F1F;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--paper:#F7F5F0;--ink:#1A1A1A;--soft:#6B665C;--red:#8C1F1F;--line:#CFC9BC}
+body{background:var(--paper);color:var(--ink);font-family:"Noto Sans KR",sans-serif;font-weight:300;line-height:1.8}
+.serif{font-family:"Nanum Myeongjo",serif}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+section{padding:56px 0}
+h2{font-family:"Nanum Myeongjo",serif;font-size:clamp(22px,3.2vw,30px);font-weight:800;border-bottom:3px double var(--ink);padding-bottom:10px}
+.sub{color:var(--soft);margin-top:10px;font-size:13.5px}
+/* 제호 */
+.masthead{border-bottom:4px double var(--ink);padding:26px 0 14px;text-align:center}
+.masthead .top{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.14em;color:var(--soft);margin-bottom:14px}
+.masthead h1{font-family:"Nanum Myeongjo",serif;font-size:clamp(34px,7vw,66px);font-weight:800;letter-spacing:.1em}
+.masthead .sub-h{margin-top:8px;font-size:12px;letter-spacing:.3em;color:var(--soft)}
+header{position:sticky;top:0;z-index:50;background:var(--paper);border-bottom:1.5px solid var(--ink)}
+.nav{display:flex;justify-content:center;gap:32px;height:46px;align-items:center;list-style:none;font-size:13px;letter-spacing:.08em}
+.nav a:hover{color:var(--red)}
+.nav .tel{color:var(--red);font-weight:700}
+@media(max-width:640px){.nav{gap:18px;font-size:12px}}
+/* 톱기사 */
+.lead{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;padding-top:34px}
+@media(max-width:820px){.lead{grid-template-columns:1fr}}
+.lead img{width:100%;height:330px;object-fit:cover;filter:grayscale(.35) contrast(1.05)}
+.lead figcaption{font-size:11.5px;color:var(--soft);margin-top:8px;border-bottom:1px solid var(--line);padding-bottom:8px}
+.lead h2{border:0;padding:0;font-size:clamp(24px,3.6vw,34px);line-height:1.5}
+.lead .dek{margin-top:14px;font-size:14px;color:#3E3A33;line-height:2}
+.lead .byline{margin-top:16px;font-size:11.5px;letter-spacing:.1em;color:var(--red);border-top:1px solid var(--line);padding-top:12px}
+/* 매물 컬럼 */
+.cols{column-count:3;column-gap:26px;column-rule:1px solid var(--line);margin-top:24px}
+@media(max-width:860px){.cols{column-count:2}}
+@media(max-width:560px){.cols{column-count:1}}
+.item{break-inside:avoid;padding:16px 0;border-bottom:1px solid var(--line)}
+.item .thumb{width:100%;aspect-ratio:4/3;object-fit:cover;margin-bottom:10px;border:1px solid var(--line)}
+.item .cat{font-size:10.5px;letter-spacing:.16em;color:var(--red);font-weight:700}
+.item h3{font-family:"Nanum Myeongjo";font-size:16.5px;font-weight:700;margin-top:5px;line-height:1.5}
+.item p{font-size:12.5px;color:var(--soft);margin-top:6px}
+.item .pr{font-family:"Nanum Myeongjo";font-size:15px;font-weight:800;margin-top:8px;display:block}
+/* 시세표 */
+.table{margin-top:20px;width:100%;border-collapse:collapse;font-size:13.5px;background:#fff}
+.table th{background:var(--ink);color:var(--paper);text-align:left;padding:11px 16px;font-size:11.5px;letter-spacing:.1em;font-weight:500}
+.table td{padding:11px 16px;border-bottom:1px solid var(--line)}
+.table td:last-child,.table th:last-child{text-align:right;font-family:"Nanum Myeongjo";font-weight:700}
+.table tr:hover td{background:#FBF9F4}
+/* 사고 */
+.notice-box{margin-top:24px;border:1.5px solid var(--ink);padding:26px;display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:720px){.notice-box{grid-template-columns:1fr}}
+.notice-box b{font-family:"Nanum Myeongjo";font-size:16px;font-weight:800;display:block}
+.notice-box p{font-size:13px;color:var(--soft);margin-top:8px}
+.stat-line{margin-top:24px;display:flex;justify-content:space-around;border-top:3px double var(--ink);border-bottom:3px double var(--ink);padding:20px 0;flex-wrap:wrap;gap:16px;text-align:center}
+.stat-line div b{font-family:"Nanum Myeongjo";font-size:26px;font-weight:800;display:block}
+.stat-line div span{font-size:11.5px;color:var(--soft)}
+.cta{border-top:4px double var(--ink);text-align:center;padding:56px 24px}
+.cta .tel{display:inline-block;margin-top:16px;font-family:"Nanum Myeongjo";font-size:clamp(26px,4.4vw,40px);font-weight:800;letter-spacing:.08em;border-bottom:3px solid var(--red);padding-bottom:6px}
+.cta p{margin-top:14px;font-size:12.5px;color:var(--soft)}
+footer{border-top:1.5px solid var(--ink);padding:28px 0;font-size:11.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><ul class="nav wrap">
+<li><a href="#lead">머리기사</a></li><li><a href="#list">매물 광장</a></li><li><a href="#rate">시세표</a></li><li><a href="#office">사무소</a></li><li><a class="tel" href="tel:0507-000-0000">0507-000-0000</a></li>
+</ul></header>
+
+<div class="wrap masthead">
+<div class="top"><span>제 1,204 호</span><span>대성부동산 매물 정보</span><span>중개업 32년</span></div>
+<h1>大成不動産</h1>
+<p class="sub-h">동 · 네 · 소 · 식 · 부 · 동 · 산 · 정 · 보 · 지</p>
+</div>
+
+<section id="lead" style="padding-top:0"><div class="wrap">
+<div class="lead">
+<figure class="rv"><img src="../realestate-e/assets/hero.jpg" alt="동네 전경"><figcaption>32년째 같은 자리에서 본 우리 동네 — 대성부동산 사무소 앞에서</figcaption></figure>
+<div class="rv">
+<h2>“이 동네 집은<br>제가 다 압니다”</h2>
+<p class="dek">1994년에 문을 열어 올해로 32년. 대성부동산은 이 동네에서 두 번 이사한 집도, 세 번 주인이 바뀐 상가도 기억합니다. 인터넷에 안 올라온 매물이 아직 장부에 있습니다.</p>
+<p class="byline">대표 공인중개사 · 박대성</p>
+</div>
+</div>
+</div></section>
+
+<section id="list" style="padding-top:20px"><div class="wrap">
+<h2 class="rv">매물 광장</h2>
+<p class="sub rv">전화 주시면 장부에 있는 매물까지 안내드립니다.</p>
+<div class="cols rv">
+<div class="item"><img class="thumb" src="../realestate-e/assets/listing-2.jpg" alt="중앙아파트 24평 거실"><span class="cat">아파트 · 매매</span><h3>중앙아파트 24평</h3><p>7층 · 남향 · 리모델링 완료 · 초등학교 도보 5분</p><span class="pr">4억 2,000</span></div>
+<div class="item"><img class="thumb" src="../realestate-e/assets/listing-6.jpg" alt="한빛아파트 32평 주방"><span class="cat">아파트 · 전세</span><h3>한빛아파트 32평</h3><p>12층 · 확장형 · 즉시 입주 가능</p><span class="pr">3억 5,000</span></div>
+<div class="item"><img class="thumb" src="../realestate-e/assets/listing-1.jpg" alt="구도심 단독주택 외관"><span class="cat">단독 · 매매</span><h3>구도심 단독주택</h3><p>대지 62평 · 2층 · 마당 · 주차 2대</p><span class="pr">6억 8,000</span></div>
+<div class="item"><img class="thumb" src="../realestate-e/assets/listing-7.jpg" alt="대로변 1층 상가"><span class="cat">상가 · 임대</span><h3>대로변 1층 상가</h3><p>전용 22평 · 코너 · 권리금 없음</p><span class="pr">2,000 / 180</span></div>
+<div class="item"><img class="thumb" src="../realestate-e/assets/listing-9.jpg" alt="신축 빌라 외관"><span class="cat">빌라 · 매매</span><h3>신축 빌라 18평</h3><p>3층 · 준공 1년 · 주차 가능</p><span class="pr">2억 1,000</span></div>
+<div class="item"><span class="cat">토지</span><h3>계획관리지역 임야</h3><p>1,240㎡ · 도로 접함 · 전원주택 가능</p><span class="pr">평당 48만</span></div>
+<div class="item"><img class="thumb" src="../realestate-e/assets/listing-5.jpg" alt="역세권 풀옵션 원룸"><span class="cat">원룸 · 월세</span><h3>역세권 풀옵션 원룸</h3><p>5평 · 5층 · 관리비 5만 포함</p><span class="pr">300 / 45</span></div>
+<div class="item"><img class="thumb" src="../realestate-e/assets/listing-11.jpg" alt="대로변 3층 사무실"><span class="cat">사무실 · 임대</span><h3>대로변 사무실 3층</h3><p>전용 30평 · 엘리베이터 · 주차 2</p><span class="pr">3,000 / 220</span></div>
+<div class="item"><img class="thumb" src="../realestate-e/assets/listing-3.jpg" alt="강변타운 34평 거실"><span class="cat">아파트 · 매매</span><h3>강변타운 34평</h3><p>15층 · 한강 조망 · 확장형</p><span class="pr">7억 5,000</span></div>
+</div>
+</div></section>
+
+<section id="rate" style="padding-top:20px"><div class="wrap">
+<h2 class="rv">이달의 시세표</h2>
+<table class="table rv">
+<tr><th>구분</th><th>단지 · 지역</th><th>평형</th><th>시세</th></tr>
+<tr><td>아파트 매매</td><td>중앙아파트</td><td>24평</td><td>4억 1,000 ~ 4억 3,000</td></tr>
+<tr><td>아파트 전세</td><td>한빛아파트</td><td>32평</td><td>3억 4,000 ~ 3억 6,000</td></tr>
+<tr><td>빌라 매매</td><td>신축 3년 이내</td><td>18평</td><td>2억 ~ 2억 3,000</td></tr>
+<tr><td>상가 임대</td><td>대로변 1층</td><td>20평대</td><td>보증 2,000 / 월 170~200</td></tr>
+</table>
+<p class="sub rv">* 템플릿 데모용 예시 시세이며, 실제 제작 시 매월 갱신 안내를 넣을 수 있습니다.</p>
+</div></section>
+
+<section id="office" style="padding-top:20px"><div class="wrap">
+<h2 class="rv">사무소 알림</h2>
+<div class="notice-box rv">
+<div><b>계약 전, 서류부터 봅니다</b><p>등기부등본 · 건축물대장 · 토지대장을 함께 펼쳐놓고 설명드린 뒤 계약합니다. 모르는 채로 도장 찍게 하지 않습니다.</p></div>
+<div><b>법정 중개보수만 받습니다</b><p>요율표를 사무소 벽에 붙여두었고, 계약 전에 정확한 금액을 문자로 먼저 알려드립니다.</p></div>
+</div>
+<div class="stat-line rv">
+<div><b>32년</b><span>같은 자리에서</span></div>
+<div><b>2,600건</b><span>누적 중개</span></div>
+<div><b>0건</b><span>중개사고</span></div>
+<div><b>매일</b><span>장부 갱신</span></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv" style="border:0">전화 한 통이면 됩니다</h2>
+<a class="tel rv" href="tel:0507-000-0000">0507 · 000 · 0000</a>
+<p class="rv">평일 08:30 – 19:00 · 토요일 09:00 – 17:00 · 일요일 예약 상담</p>
+</div>
+
+<footer><div class="wrap">
+<div><b>대성부동산 공인중개사사무소</b> · 대표 박대성 · 등록번호 제0000-000호<br>충청북도 청주시 상당구 중앙로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 매물 · 시세는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>

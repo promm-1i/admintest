@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>오피스무브 — 이사 · 청소업체 홈페이지 템플릿 (기본형 · 디자인 E)</title>
+<meta name="description" content="다크 네이비와 실버의 사무실 · 기업 이사 홈페이지 템플릿. 야간 무중단 이사, 자산 관리, 보안 서약으로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="오피스무브 — 이사 · 청소업체 홈페이지 템플릿 (기본형 · 디자인 E)">
+<meta property="og:image" content="../moving-e/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#5B9BD5;color:#0E1420}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #5B9BD5;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--navy:#0E1420;--panel:#161E2C;--line:#26303F;--ink:#E6EBF2;--soft:#8592A5;--blue:#5B9BD5}
+body{background:var(--navy);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.75}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+section{padding:90px 0}
+.kicker{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.24em;color:var(--blue)}
+h2{font-size:clamp(25px,3.8vw,36px);font-weight:900;margin-top:12px;letter-spacing:-.02em}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:rgba(14,20,32,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-weight:900;font-size:18px;letter-spacing:.02em}
+.logo b{color:var(--blue)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13px;color:var(--soft)}
+.nav ul a:hover{color:var(--ink)}
+.nav .tel{background:var(--blue);color:var(--navy);font-weight:900;font-size:13px;padding:10px 20px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:84px 0 72px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(30px,5.2vw,50px);font-weight:900;line-height:1.28;letter-spacing:-.03em}
+.hero h1 b{color:var(--blue)}
+.hero p{margin-top:18px;color:var(--soft);font-size:15px;max-width:450px}
+.hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;font-weight:900;font-size:14.5px;transition:transform .4s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.97)}
+.btn-b{background:var(--blue);color:var(--navy)}
+.btn-l{border:1px solid var(--line);color:var(--ink)}.btn-l:hover{border-color:var(--blue);color:var(--blue)}
+.hero img{width:100%;height:380px;object-fit:cover;filter:grayscale(.35) contrast(1.05)}
+/* 무중단 */
+.night{margin-top:48px;background:var(--panel);border:1px solid var(--line);padding:0;overflow:hidden}
+.night-h{background:var(--blue);color:var(--navy);padding:14px 24px;font-weight:900;font-size:14px;letter-spacing:.04em}
+.nt{display:grid;grid-template-columns:110px 1fr 1fr;gap:18px;padding:17px 24px;border-top:1px solid var(--line);font-size:14px;align-items:baseline}
+.nt .t{font-family:"IBM Plex Mono";color:var(--blue)}
+.nt b{font-weight:900}
+.nt p{font-size:12.5px;color:var(--soft)}
+@media(max-width:720px){.nt{grid-template-columns:90px 1fr}.nt p{grid-column:2}}
+/* 자산 */
+.asset{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:820px){.asset{grid-template-columns:1fr 1fr}}
+.as{background:var(--panel);border:1px solid var(--line);padding:24px;transition:border-color .3s,transform .45s cubic-bezier(.32,.72,0,1)}
+.as:hover{border-color:var(--blue);transform:translateY(-4px)}
+.as .n{font-family:"IBM Plex Mono";font-size:11px;color:var(--blue);letter-spacing:.14em}
+.as b{display:block;font-size:15.5px;font-weight:900;margin-top:8px}
+.as p{font-size:12px;color:var(--soft);margin-top:6px}
+/* 보안 */
+.sec{margin-top:48px;background:var(--panel);border-left:0;border:1px solid var(--line);padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:34px}
+@media(max-width:760px){.sec{grid-template-columns:1fr}}
+.sec h3{font-size:19px;font-weight:900}
+.sec p{font-size:13.5px;color:var(--soft);margin-top:10px}
+.sec ul{list-style:none;margin-top:14px;display:grid;gap:10px;font-size:13.5px}
+.sec li::before{content:"🔒 "}
+/* 실적 */
+.rec{margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+@media(max-width:820px){.rec{grid-template-columns:1fr 1fr}}
+.rec div{background:var(--panel);padding:26px 22px}
+.rec b{font-family:"IBM Plex Mono";font-size:26px;color:var(--blue);display:block}
+.rec span{display:block;font-size:12px;color:var(--soft);margin-top:6px}
+/* 프로세스 */
+.pro{margin-top:48px;border-top:1px solid var(--line)}
+.pr{display:grid;grid-template-columns:70px 1fr 1.1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--line);align-items:baseline}
+@media(max-width:760px){.pr{grid-template-columns:60px 1fr}.pr .d{grid-column:2}}
+.pr .n{font-family:"IBM Plex Mono";color:var(--blue);font-size:13px}
+.pr b{font-size:15.5px;font-weight:900}
+.pr .d{font-size:13px;color:var(--soft)}
+.cta{background:var(--blue);color:var(--navy);text-align:center;padding:86px 24px}
+.cta h2{color:inherit}
+.cta p{margin-top:10px;font-weight:500;opacity:.8}
+.cta a{display:inline-block;margin-top:24px;background:var(--navy);color:var(--blue);font-weight:900;font-size:17px;padding:16px 38px}
+footer{padding:42px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+/* 전경 밴드 */
+.band{position:relative;margin:0;overflow:hidden}
+.band>img{width:100%;height:clamp(230px,32vw,390px);object-fit:cover;display:block}
+.band figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 26px 26px;background:linear-gradient(transparent,rgba(10,10,14,.82));color:#fff}
+.band figcaption b{display:block;font-size:clamp(17px,2.4vw,22px);font-weight:700}
+.band figcaption span{display:block;margin-top:7px;font-size:13px;color:rgba(255,255,255,.82);max-width:660px}
+/* 사진 그리드 */
+.pgrid{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:820px){.pgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.pgrid{grid-template-columns:1fr}}
+.pgrid.two{grid-template-columns:1fr 1fr}
+@media(max-width:520px){.pgrid.two{grid-template-columns:1fr}}
+.pg{margin:0;position:relative;overflow:hidden;border-radius:14px}
+.pg img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .7s cubic-bezier(.32,.72,0,1)}
+.pg:hover img{transform:scale(1.05)}
+.pg figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 14px 12px;background:linear-gradient(transparent,rgba(10,10,14,.82));color:#fff;font-size:12.5px;font-weight:700}
+.pg figcaption em{display:block;font-style:normal;font-weight:400;font-size:11.5px;color:rgba(255,255,255,.78);margin-top:3px}
+/* 인물 */
+.docs{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.docs{grid-template-columns:1fr}}
+.dc{margin:0}
+.dc img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:14px}
+.dc b{display:block;margin-top:14px;font-size:16px;font-weight:700}
+.dc .rl{display:block;margin-top:5px;font-size:11.5px;letter-spacing:.14em}
+.dc p{margin-top:9px;font-size:13px;line-height:1.7}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">OFFICE<b>MOVE</b></a>
+<ul><li><a href="#night">무중단 이사</a></li><li><a href="#asset">자산 관리</a></li><li><a href="#sec">보안</a></li><li><a href="#pro">진행</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">기업 견적</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">CORPORATE RELOCATION</p>
+<h1 style="margin-top:14px">금요일 퇴근 후 시작해서<br><b>월요일 아침엔</b> 업무 개시</h1>
+<p>오피스무브는 사무실 · 공장 · 기관 이전만 합니다. 업무 공백 없이, 자산 하나도 잃어버리지 않게.</p>
+<div class="hero-cta"><a class="btn btn-b" href="tel:0507-000-0000">기업 견적 요청</a><a class="btn btn-l" href="#night">진행 방식</a></div>
+</div>
+<img class="rv" src="../moving-e/assets/hero.jpg" alt="이사 상차 작업">
+</div></section>
+
+<figure class="band">
+<img src="../moving-e/assets/case-3.jpg" alt="이전 전날 포장을 마친 사무실">
+<figcaption><b>금요일 저녁, 사무실은 이렇게 포장됩니다</b><span>모니터와 본체는 부서별 색 라벨을 붙여 개별 포장합니다. 월요일 아침 같은 자리에 같은 구성으로 놓이게 하기 위해서입니다.</span></figcaption>
+</figure>
+
+<section id="night"><div class="wrap">
+<div class="rv"><p class="kicker">NON-STOP</p><h2>주말 48시간 무중단 이전</h2><p class="sub">평일 업무를 멈추지 않습니다. 금요일 저녁부터 일요일까지 전 과정을 끝냅니다.</p></div>
+<div class="night rv">
+<div class="night-h">● 표준 48시간 이전 스케줄</div>
+<div class="nt"><span class="t">금 19:00</span><div><b>포장 개시</b><p>부서별 라벨링 · 서버 셧다운 입회</p></div><p>IT 담당자 입회 필수</p></div>
+<div class="nt"><span class="t">토 08:00</span><div><b>운송 · 하역</b><p>차량 6대 · 인력 24명 동시 투입</p></div><p>엘리베이터 사전 점유</p></div>
+<div class="nt"><span class="t">토 18:00</span><div><b>배치 · 조립</b><p>도면대로 좌석 배치 · 파티션 조립</p></div><p>레이아웃 도면 기준</p></div>
+<div class="nt"><span class="t">일 10:00</span><div><b>IT 구축 · 시운전</b><p>네트워크 · PC 연결 및 통신 테스트</p></div><p>협력 IT 업체 연계</p></div>
+<div class="nt"><span class="t">일 17:00</span><div><b>검수 · 인계</b><p>자산 대장 대조 후 서면 인계</p></div><p>담당자 확인 서명</p></div>
+</div>
+</div></section>
+
+<section id="asset" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">ASSET CONTROL</p><h2>자산은 번호로 관리합니다</h2></div>
+<div class="asset rv">
+<div class="as"><span class="n">A-01</span><b>바코드 라벨링</b><p>전 자산에 라벨 부착 후 스캔 관리</p></div>
+<div class="as"><span class="n">A-02</span><b>부서별 색상 코드</b><p>박스와 좌석에 동일 색상 매칭</p></div>
+<div class="as"><span class="n">A-03</span><b>자산 대장 대조</b><p>출발 · 도착지 2회 전수 검수</p></div>
+<div class="as"><span class="n">A-04</span><b>파손 보상 보험</b><p>적재물배상책임보험 5억 가입</p></div>
+</div>
+</div></section>
+
+<section id="sec" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">SECURITY</p><h2>기밀은 새어나가지 않습니다</h2></div>
+<div class="sec rv">
+<div>
+<h3>보안 서약과 통제</h3>
+<p>투입 인력 전원이 사전에 보안 서약서를 작성하고, 신원 확인 후 출입증을 발급받습니다.</p>
+<ul>
+<li>전 인력 보안 서약 · 신원 확인</li>
+<li>작업 구역 CCTV 임시 설치 가능</li>
+<li>휴대폰 촬영 금지 구역 운영</li>
+</ul>
+</div>
+<div>
+<h3>문서 · 매체 처리</h3>
+<p>이전 과정에서 나오는 폐기 문서와 저장 매체는 별도 절차로 처리합니다.</p>
+<ul>
+<li>기밀 문서 현장 파쇄 · 파쇄 증명서 발급</li>
+<li>하드디스크 물리 파기 대행</li>
+<li>처리 전 과정 입회 · 영상 기록</li>
+</ul>
+</div>
+</div>
+</div></section>
+
+<section style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">TRACK RECORD</p><h2>수행 실적</h2></div>
+<div class="rec rv">
+<div><b>1,240</b><span>기업 이전 수행 건수</span></div>
+<div><b>0건</b><span>기밀 유출 사고</span></div>
+<div><b>99.4%</b><span>일정 준수율</span></div>
+<div><b>18년</b><span>기업 물류 경력</span></div>
+</div>
+</div></section>
+
+<section id="pro" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">PROCESS</p><h2>견적부터 인계까지</h2></div>
+<div class="pro rv">
+<div class="pr"><span class="n">01</span><b>현장 실사</b><span class="d">출발지 · 도착지 답사 후 물량 산정 (무료)</span></div>
+<div class="pr"><span class="n">02</span><b>제안서 · 견적</b><span class="d">인력 · 차량 · 일정이 명시된 제안서 제출</span></div>
+<div class="pr"><span class="n">03</span><b>사전 회의</b><span class="d">부서 담당자와 라벨링 규칙 · 배치 도면 확정</span></div>
+<div class="pr"><span class="n">04</span><b>이전 실행</b><span class="d">현장 총괄 PM 상주 · 시간대별 진행 보고</span></div>
+<div class="pr"><span class="n">05</span><b>검수 · 정산</b><span class="d">자산 대조 후 서면 인계 · 세금계산서 발행</span></div>
+</div>
+</div></section>
+
+<section id="field" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">ON SITE</p><h2>현장은 이렇게 돌아갑니다</h2><p class="sub">주말 48시간 동안 PM이 상주하며 시간대별로 진행 상황을 보고합니다.</p></div>
+<div class="pgrid rv">
+<figure class="pg"><img src="../moving-e/assets/case-1.jpg" alt="대형 자산 포장"><figcaption>대형 자산 포장<em>캐비닛 · 금고는 완충 포장 후 번호 부착</em></figcaption></figure>
+<figure class="pg"><img src="../moving-e/assets/case-2.jpg" alt="중량물 운반"><figcaption>중량물 운반<em>복합기 · 서버랙은 전용 장비로 계단 이동</em></figcaption></figure>
+<figure class="pg"><img src="../moving-e/assets/hero.jpg" alt="차량 상차"><figcaption>차량 상차<em>자산 번호 대조 후 상차 · 봉인</em></figcaption></figure>
+<figure class="pg"><img src="../moving-e/assets/ba-after.jpg" alt="원상복구 완료"><figcaption>원상복구 완료<em>반출 후 바닥 · 벽면 복구까지 마치고 인계</em></figcaption></figure>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">이전 일정이 잡혔다면<br>실사부터 잡으시죠</h2>
+<p class="rv">현장 실사 무료 · 전국 대응 · 제안서 3영업일 내 제출</p>
+<a class="rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>(주)오피스무브</b> · 대표이사 문이전 · 화물자동차운송주선사업 허가 제0000호<br>경기도 성남시 중원구 사기막골로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 실적 · 연락처는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>

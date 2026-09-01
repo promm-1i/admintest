@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>버디존 스크린골프 — 스크린골프 홈페이지 템플릿 (기본형 · 디자인 B)</title>
+<meta name="description" content="다크 그린 네온의 스코어보드 무드 스크린골프 홈페이지 템플릿. 타석 요금, 룸 안내, 이용 방법으로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="버디존 스크린골프 — 스크린골프 홈페이지 템플릿 (기본형 · 디자인 B)">
+<meta property="og:image" content="../golf-b/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#35E37F;color:#0B120D}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #35E37F;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--bg:#0B120D;--panel:#121A14;--line:#243328;--ink:#EDF3EE;--soft:#7E9284;--neon:#35E37F}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.75}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+section{padding:94px 0}
+.kicker{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.26em;color:var(--neon)}
+h2{font-size:clamp(26px,4vw,38px);font-weight:700;margin-top:12px;letter-spacing:-.02em}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:rgba(11,18,13,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:800;font-size:18px;letter-spacing:.04em}
+.logo b{color:var(--neon)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--ink)}
+.nav .tel{background:var(--neon);color:#0B120D;font-weight:800;font-size:13.5px;padding:10px 20px;border-radius:6px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:80px 0 66px}
+.hero .wrap{display:grid;grid-template-columns:1fr .95fr;gap:44px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(34px,5.8vw,58px);font-weight:800;line-height:1.25;letter-spacing:-.02em}
+.hero h1 b{color:var(--neon)}
+.hero p{margin-top:16px;color:var(--soft);font-size:15px;max-width:430px}
+.hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;border-radius:6px;font-weight:800;font-size:15px;transition:transform .4s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.97)}
+.btn-n{background:var(--neon);color:#0B120D}
+.btn-l{border:1px solid var(--line);color:var(--ink)}.btn-l:hover{border-color:var(--neon);color:var(--neon)}
+.hero-img{position:relative}
+.hero-img img{border-radius:10px;height:400px;width:100%;object-fit:cover}
+.hero-img .live{position:absolute;top:14px;right:14px;background:rgba(11,18,13,.85);border:1px solid var(--neon);color:var(--neon);font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.14em;padding:8px 12px;border-radius:4px}
+.score{margin-top:48px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.sc-head{display:grid;grid-template-columns:1fr auto auto;gap:14px;padding:14px 22px;background:#0E1610;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.18em;color:var(--soft)}
+.sc-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;padding:17px 22px;border-top:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.sc-row b{font-weight:700}
+.sc-row span.d{display:block;font-size:12px;color:var(--soft);margin-top:2px}
+.sc-row .t{font-family:"IBM Plex Mono";color:var(--soft);font-size:12px}
+.sc-row .pr{font-family:"IBM Plex Mono";color:var(--neon);font-weight:600}
+.rooms{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:48px}
+@media(max-width:760px){.rooms{grid-template-columns:1fr}}
+.ro{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .5s cubic-bezier(.32,.72,0,1),border-color .3s}
+.ro:hover{transform:translateY(-4px);border-color:var(--neon)}
+.ro img{height:220px;width:100%;object-fit:cover}
+.ro .b{padding:20px 22px}
+.ro b{font-size:16px}
+.ro p{font-size:12.5px;color:var(--soft);margin-top:6px}
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:48px}
+@media(max-width:820px){.perks{grid-template-columns:1fr 1fr}}
+.pk{border:1px dashed var(--line);border-radius:10px;padding:20px;text-align:center}
+.pk .em{font-size:26px}
+.pk b{display:block;font-size:14px;margin-top:10px}
+.pk p{font-size:11.5px;color:var(--soft);margin-top:5px}
+.cta{background:var(--panel);border-top:1px solid var(--line);text-align:center;padding:92px 24px}
+.cta h2 b{color:var(--neon)}
+.cta p{margin-top:12px;color:var(--soft);font-size:14px}
+.cta .btn{margin-top:26px;font-size:16px}
+footer{padding:44px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">BIRDIE<b>ZONE</b></a>
+<ul><li><a href="#price">이용 요금</a></li><li><a href="#room">룸 안내</a></li><li><a href="#perk">서비스</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">타석 예약</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">SCREEN GOLF · 24H</p>
+<h1>퇴근 후 18홀,<br><b>새벽까지 OK</b></h1>
+<p>최신 시뮬레이터 8룸 · 전 룸 신형 센서. 혼자 연습도, 넷이서 내기 라운드도 — 버디존은 새벽 2시까지 불이 켜져 있습니다.</p>
+<div class="hero-cta"><a class="btn btn-n" href="tel:0507-000-0000">지금 타석 예약</a><a class="btn btn-l" href="#price">요금 보기</a></div>
+</div>
+<figure class="hero-img rv"><img src="../golf-b/assets/1.jpg" alt="스크린 룸"><span class="live">● 3 ROOMS OPEN</span></figure>
+</div></section>
+
+<section id="price" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">PRICE BOARD</p><h2>요금 스코어보드</h2><p class="sub">18홀 기준 1인 요금 · 룸 단위 이용도 가능합니다.</p></div>
+<div class="score rv">
+<div class="sc-head"><span>PLAY</span><span>TIME</span><span>PRICE</span></div>
+<div class="sc-row"><div><b>주간 라운드</b><span class="d">평일 09:00 – 18:00</span></div><span class="t">18홀</span><span class="pr">18,000원</span></div>
+<div class="sc-row"><div><b>피크 라운드</b><span class="d">평일 저녁 · 주말</span></div><span class="t">18홀</span><span class="pr">25,000원</span></div>
+<div class="sc-row"><div><b>심야 라운드</b><span class="d">22:00 이후 — 야식 서비스</span></div><span class="t">18홀</span><span class="pr">15,000원</span></div>
+<div class="sc-row"><div><b>연습 타석</b><span class="d">스윙 분석 영상 포함</span></div><span class="t">60분</span><span class="pr">12,000원</span></div>
+</div>
+</div></section>
+
+<section id="room" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">ROOMS</p><h2>룸 안내</h2></div>
+<div class="rooms rv">
+<div class="ro"><img src="../golf-b/assets/2.jpg" alt="스탠다드 룸"><div class="b"><b>스탠다드 룸 × 6</b><p>최대 4인 · 신형 센서 · 음료 반입 가능</p></div></div>
+<div class="ro"><img src="../golf-b/assets/3.jpg" alt="파티 룸"><div class="b"><b>단체전 파티룸 × 2</b><p>최대 8인 · 소파 좌석 · 회식 · 모임 대관</p></div></div>
+</div>
+</div></section>
+
+<section id="perk" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">SERVICE</p><h2>버디존이 챙겨드리는 것</h2></div>
+<div class="perks rv">
+<div class="pk"><span class="em">🏌️</span><b>초보 레슨 타임</b><p>평일 오전 프로 상주</p></div>
+<div class="pk"><span class="em">🍗</span><b>야식 주문 연동</b><p>룸에서 QR로 바로</p></div>
+<div class="pk"><span class="em">🏆</span><b>월례 버디컵</b><p>매월 마지막 토요일</p></div>
+<div class="pk"><span class="em">🅿️</span><b>주차 3시간 무료</b><p>건물 지하 주차장</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">오늘 밤, <b>버디</b> 잡으러 갈까요?</h2>
+<p class="rv">연중무휴 09:00 – 익일 02:00 · 예약 없이 오셔도 빈 룸 안내해 드립니다</p>
+<a class="btn btn-n rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>버디존 스크린골프</b> · 대표 나버디 · 체육시설업 신고 제0000호<br>경기도 고양시 덕양구 화정로 000, 4층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 요금 · 연락처는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>

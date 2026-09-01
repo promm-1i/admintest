@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>들판 동물병원 — 동물병원 홈페이지 템플릿 (기본형 · 디자인 E)</title>
+<meta name="description" content="카키와 오렌지의 대형견 전문 동물병원 홈페이지 템플릿. 관절 관리, 재활 치료, 훈련 연계로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="들판 동물병원 — 동물병원 홈페이지 템플릿 (기본형 · 디자인 E)">
+<meta property="og:image" content="../vet-e/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#E2762B;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #C55F1B;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--khaki:#3E4A32;--deep:#2E3826;--orange:#E2762B;--sand:#F5F1E6;--ink:#2B3024;--soft:#7C8471;--line:#E0DCCB}
+body{background:var(--sand);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.8}
+.disp{font-family:"Do Hyeon",sans-serif;font-weight:400}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+section{padding:86px 0}
+.tag{display:inline-block;font-family:"Do Hyeon";font-size:15px;background:var(--orange);color:#fff;padding:5px 18px;border-radius:6px}
+h2{font-family:"Do Hyeon";font-size:clamp(27px,4.2vw,42px);font-weight:400;margin-top:14px;color:var(--khaki)}
+.sub{color:var(--soft);margin-top:10px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:var(--khaki);color:var(--sand)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"Do Hyeon";font-size:22px}
+.logo b{color:var(--orange);font-weight:400}
+.nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px}
+.nav ul a:hover{color:var(--orange)}
+.nav .tel{background:var(--orange);color:#fff;font-family:"Do Hyeon";font-size:15px;padding:8px 20px;border-radius:6px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:72px 0 62px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Do Hyeon";font-size:clamp(34px,6vw,56px);font-weight:400;line-height:1.24;color:var(--khaki)}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero p{margin-top:14px;color:var(--soft);font-size:15px;max-width:420px}
+.hero-cta{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;font-family:"Do Hyeon";font-size:18px;padding:13px 30px;border-radius:8px;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:active{transform:scale(.97)}
+.btn-o{background:var(--orange);color:#fff}.btn-o:hover{background:var(--deep-o,#C55F1B)}
+.btn-k{background:var(--khaki);color:var(--sand)}
+.hero img{border-radius:14px;height:360px;width:100%;object-fit:cover}
+/* 관절 */
+.joint{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.joint{grid-template-columns:1fr}}
+.jt{background:#fff;border-radius:16px;padding:26px;transition:transform .5s cubic-bezier(.32,.72,0,1)}
+.jt::before{content:"";display:block;width:28px;height:3px;border-radius:2px;background:var(--orange);margin-bottom:14px}
+.jt:hover{transform:translateY(-5px)}
+.jt .em{font-size:28px}
+.jt b{display:block;font-family:"Do Hyeon";font-size:19px;margin-top:10px;font-weight:400}
+.jt p{font-size:13.5px;color:var(--soft);margin-top:8px}
+.jt .risk{margin-top:10px;font-size:12px;color:var(--orange);font-weight:700}
+/* 재활 */
+.rehab{margin-top:44px;background:var(--khaki);color:var(--sand);border-radius:20px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+@media(max-width:760px){.rehab{grid-template-columns:1fr}}
+.rehab img{width:100%;height:250px;object-fit:cover;border-radius:14px}
+.rehab h3{font-family:"Do Hyeon";font-size:24px;color:var(--orange)}
+.rehab p{font-size:14px;color:#C6CDBB;margin-top:10px}
+.rehab ul{list-style:none;margin-top:14px;display:grid;gap:9px;font-size:14px}
+.rehab li::before{content:"🦴 "}
+/* 체중 */
+.weight{margin-top:44px;border:2px solid var(--line);border-radius:18px;overflow:hidden;background:#fff}
+.wt{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:17px 24px;border-top:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.wt:first-child{border-top:0;background:var(--khaki);color:var(--sand);font-size:13px}
+.wt b{font-weight:700}
+.wt .d{font-size:12.5px;color:var(--soft)}
+.wt .v{font-family:"Do Hyeon";font-size:17px;color:var(--orange);white-space:nowrap}
+@media(max-width:640px){.wt{grid-template-columns:1fr auto}.wt .d{display:none}}
+/* 훈련 */
+.train{margin-top:44px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.train{grid-template-columns:1fr}}
+.tr{background:#fff;border-radius:16px;padding:24px;border:2px solid var(--line)}
+.tr b{font-family:"Do Hyeon";font-size:18px;color:var(--khaki);font-weight:400}
+.tr p{font-size:13px;color:var(--soft);margin-top:7px}
+.cta{background:var(--orange);color:#fff;text-align:center;padding:80px 24px}
+.cta h2{color:#fff}
+.cta p{margin-top:10px;color:#FBE0CE;font-size:14px}
+.cta a{display:inline-block;margin-top:24px;background:var(--khaki);color:var(--sand);font-family:"Do Hyeon";font-size:20px;padding:14px 36px;border-radius:8px}
+footer{background:var(--khaki);color:#AFB8A2;padding:40px 0;font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--sand)}
+
+.logo b{display:inline-block;}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">들판 <b>동물병원</b></a>
+<ul><li><a href="#joint">관절 관리</a></li><li><a href="#rehab">재활</a></li><li><a href="#weight">체중 관리</a></li><li><a href="#train">훈련 연계</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">진료 예약</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<span class="tag">중 · 대형견 전문</span>
+<h1 style="margin-top:16px">큰 아이들은<br><em>다리가 먼저</em> 옵니다</h1>
+<p>들판 동물병원은 15kg 이상 대형견을 주로 봅니다. 관절과 체중, 활동량 — 대형견에게 중요한 것부터 챙깁니다.</p>
+<div class="hero-cta"><a class="btn btn-o" href="tel:0507-000-0000">진료 예약</a><a class="btn btn-k" href="#joint">관절 검진 보기</a></div>
+</div>
+<img class="rv" src="../vet-e/assets/doctor-1.jpg" alt="대형견 진료">
+</div></section>
+
+<section id="joint"><div class="wrap">
+<div class="rv"><span class="tag">관절 관리</span><h2>대형견이 잘 겪는 세 가지</h2></div>
+<div class="joint rv">
+<div class="jt"><span class="em">🦵</span><b>고관절 이형성증</b><p>엉덩이를 흔들며 걷거나, 앉았다 일어날 때 힘들어하면 검사해 보세요.</p><p class="risk">리트리버 · 셰퍼드 · 말라뮤트</p></div>
+<div class="jt"><span class="em">🩻</span><b>슬개골 · 십자인대</b><p>뒷다리를 들고 뛰거나 갑자기 절뚝이면 인대 손상을 의심합니다.</p><p class="risk">활동량 많은 아이들</p></div>
+<div class="jt"><span class="em">🌀</span><b>위 염전 (GDV)</b><p>배가 빵빵하고 헛구역질을 하면 응급입니다. 바로 오세요.</p><p class="risk">가슴 깊은 대형견</p></div>
+</div>
+</div></section>
+
+<section id="rehab" style="padding-top:0"><div class="wrap">
+<div class="rehab rv">
+<img src="../vet-e/assets/facility-1.jpg" alt="고양이 전용 공간">
+<div>
+<span class="tag">재활 치료</span>
+<h3 style="margin-top:12px">수술만으로는 안 돌아옵니다</h3>
+<p>수술 후 근육이 붙어야 다시 걷습니다. 들판은 재활실을 따로 두고 단계별 프로그램을 운영합니다.</p>
+<ul>
+<li>수중 트레드밀 (관절 부담 없이 걷기)</li>
+<li>레이저 · 체외충격파 통증 치료</li>
+<li>밸런스 운동 · 근력 회복</li>
+<li>주차별 보행 영상 비교 리포트</li>
+</ul>
+</div>
+</div>
+</div></section>
+
+<section id="weight" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="tag">체중 관리</span><h2>1kg이 관절엔 4kg입니다</h2><p class="sub">대형견 비만은 관절 수명을 직접 깎습니다. 무리한 굶기기 말고, 단계적으로 줄입니다.</p></div>
+<div class="weight rv">
+<div class="wt"><span>단계</span><span>내용</span><span>기간</span></div>
+<div class="wt"><b>1단계 · 체성분 측정</b><span class="d">근육량 · 체지방 · BCS 평가</span><span class="v">1일</span></div>
+<div class="wt"><b>2단계 · 식이 설계</b><span class="d">칼로리 계산 · 사료 및 간식 조정</span><span class="v">2주</span></div>
+<div class="wt"><b>3단계 · 운동 처방</b><span class="d">관절 상태에 맞는 산책 · 수중 운동</span><span class="v">8주</span></div>
+<div class="wt"><b>4단계 · 재측정</b><span class="d">2주 간격 체중 · 사진 기록 비교</span><span class="v">유지</span></div>
+</div>
+</div></section>
+
+<section id="train" style="padding-top:0"><div class="wrap">
+<div class="rv"><span class="tag">훈련 연계</span><h2>병원에서 안 되는 건 훈련사와</h2></div>
+<div class="train rv">
+<div class="tr"><b>병원 공포 완화</b><p>진료대에 올라가는 것부터 훈련합니다. 무는 아이도 포기하지 않습니다.</p></div>
+<div class="tr"><b>산책 리드 교육</b><p>당기는 힘이 세서 산책이 힘드시면, 협력 훈련사를 연결해 드립니다.</p></div>
+<div class="tr"><b>노즈워크 · 실내 활동</b><p>재활 기간에 활동량을 채울 방법을 함께 찾습니다.</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">오래 같이 걷고 싶다면</h2>
+<p class="rv">관절 검진 예약 · 평일 09:30 – 20:00 · 토 · 일 09:30 – 18:00</p>
+<a class="rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>들판 동물병원</b> · 원장 강들판 · 동물병원 개설 제0000호<br>경기도 남양주시 다산중앙로 000 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 의료진 · 연락처는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>

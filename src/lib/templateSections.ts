@@ -649,6 +649,12 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/tax-e-3.jpg", title: "인력 구성" },
     { img: "/thumbs/sections/tax-e-4.jpg", title: "연혁" },
   ],
+  "usedcar-a": [
+    { img: "/thumbs/sections/usedcar-a-1.jpg", title: "오늘 보러 오실 수 있는 차" },
+    { img: "/thumbs/sections/usedcar-a-2.jpg", title: "말이 아니라 각서로 약속합니다" },
+    { img: "/thumbs/sections/usedcar-a-3.jpg", title: "보고, 타보고, 그 다음에 계약" },
+    { img: "/thumbs/sections/usedcar-a-4.jpg", title: "타던 차 팔 때도 믿을차" },
+  ],
   "usedcar-b": [
     { img: "/thumbs/sections/usedcar-b-1.jpg", title: "102개 항목을 통과해야 GRADE입니다" },
     { img: "/thumbs/sections/usedcar-b-2.jpg", title: "이번 주 쇼케이스" },

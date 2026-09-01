@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>에코원 에너지 — 기업 홈페이지 템플릿 (기본형 · 디자인 C)</title>
+<meta name="description" content="친환경 에너지 기업 무드의 홈페이지 템플릿. 아치형 이미지 프레임, 사업영역, 환경 성과 지표, 협력 문의로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="에코원 에너지 — 기업 홈페이지 템플릿">
+<meta property="og:image" content="../corporate-c/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#143D2B;--forest-2:#0E2E20;--sand:#EFE9DC;--sand-2:#F7F3EA;--ink:#1D2A22;--soft:#6C7A6F;--leaf:#7FB069;--line:#DDD4C2}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--sand-2);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.75}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+.serif{font-family:"Gowun Batang",serif}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+section{padding:100px 0}
+.kicker{display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.24em;color:var(--forest);font-weight:500}
+.kicker .leaf-dot{width:8px;height:8px;background:var(--leaf);border-radius:50% 50% 50% 0}
+h2{font-family:"Gowun Batang",serif;font-size:clamp(27px,4vw,42px);font-weight:700;margin-top:16px;line-height:1.45;letter-spacing:-.01em}
+.sub{color:var(--soft);margin-top:14px;font-size:15px;max-width:540px}
+/* header */
+header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(247,243,234,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.logo{display:flex;align-items:center;gap:9px;font-family:"Gowun Batang",serif;font-weight:700;font-size:19px}
+.logo svg{width:26px;height:26px}
+.nav ul{display:flex;gap:30px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--forest)}
+.nav .tel{background:var(--forest);color:var(--sand);font-size:13px;font-weight:500;padding:10px 20px;border-radius:99px}
+.nav .tel:hover{background:var(--forest-2)}
+@media(max-width:840px){.nav ul{display:none}}
+/* hero */
+.hero{padding:160px 0 80px}
+.hero .wrap{display:grid;grid-template-columns:1fr .9fr;gap:60px;align-items:center}
+@media(max-width:880px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Gowun Batang",serif;font-size:clamp(36px,5.6vw,58px);font-weight:700;line-height:1.42;letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--forest);position:relative}
+.hero p{margin-top:22px;color:var(--soft);font-size:16px;max-width:440px}
+.hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.btn-f{background:var(--forest);color:var(--sand);font-weight:500;font-size:15px;padding:16px 32px;border-radius:99px;transition:background .25s}
+.btn-f:hover{background:var(--forest-2)}
+.btn-t{color:var(--forest);font-weight:500;font-size:15px;padding:16px 10px;border-bottom:1.5px solid var(--forest)}
+.arch{position:relative;width:min(400px,88%);margin:0 auto}
+.arch img{width:100%;height:500px;object-fit:cover;border-radius:220px 220px 24px 24px}
+.arch::after{content:"";position:absolute;inset:14px;border:1.5px solid rgba(247,243,234,.75);border-radius:210px 210px 18px 18px;pointer-events:none}
+.arch .chip{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);background:var(--sand-2);border-radius:99px;padding:11px 22px;font-size:13px;font-weight:700;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.arch .chip b{color:var(--forest)}
+/* curve */
+.curve{display:block;width:100%;height:64px;margin-bottom:-1px}
+/* mission */
+.mission{background:var(--forest);color:var(--sand);text-align:center}
+.mission .kicker{color:var(--leaf)}
+.mission h2{color:var(--sand)}
+.mission blockquote{font-family:"Gowun Batang",serif;font-size:clamp(18px,2.4vw,23px);line-height:2.1;margin:36px auto 0;max-width:660px}
+.mission blockquote b{color:var(--leaf);font-weight:700}
+/* business */
+.biz{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:860px){.biz{grid-template-columns:1fr}}
+.bz{background:#fff;border:1px solid var(--line);border-radius:28px;padding:36px 32px;transition:transform .3s,box-shadow .3s}
+.bz:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(0,0,0,.09)}
+.bz .no{font-family:"Gowun Batang",serif;font-size:14px;color:var(--leaf);font-weight:700}
+.bz h3{font-family:"Gowun Batang",serif;font-size:21px;font-weight:700;margin-top:12px}
+.bz p{margin-top:12px;font-size:13.5px;color:var(--soft)}
+.bz ul{margin-top:18px;list-style:none;display:grid;gap:8px;font-size:13px;color:var(--ink)}
+.bz li{display:flex;gap:9px;align-items:baseline}
+.bz li::before{content:"";width:7px;height:7px;background:var(--leaf);border-radius:50% 50% 50% 0;flex:none;transform:translateY(-1px)}
+/* impact */
+.impact{background:var(--sand)}
+.imp-grid{margin-top:56px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:820px){.imp-grid{grid-template-columns:1fr}}
+.imp{background:var(--sand-2);border-radius:24px;padding:38px 32px;text-align:center;border:1px solid var(--line)}
+.imp b{font-family:"Gowun Batang",serif;font-size:44px;font-weight:700;color:var(--forest)}
+.imp b i{font-style:normal;font-size:20px}
+.imp span{display:block;margin-top:10px;font-size:13.5px;color:var(--soft)}
+.imp .eq{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line);font-size:12.5px;color:var(--forest);font-weight:500}
+/* partners flow */
+.flow{margin-top:56px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+@media(max-width:820px){.flow{grid-template-columns:1fr;gap:26px}}
+.fl{text-align:center;padding:0 18px;position:relative}
+.fl:not(:last-child)::after{content:"→";position:absolute;right:-9px;top:26px;color:var(--leaf);font-size:20px}
+@media(max-width:820px){.fl:not(:last-child)::after{content:"↓";right:auto;left:50%;top:auto;bottom:-24px}}
+.fl .cir{width:68px;height:68px;margin:0 auto;border-radius:50%;background:#fff;border:1.5px solid var(--forest);display:grid;place-items:center;font-size:26px}
+.fl b{display:block;margin-top:16px;font-size:15.5px}
+.fl p{margin-top:6px;font-size:12.5px;color:var(--soft)}
+/* cta */
+.cta{background:var(--forest);color:var(--sand);text-align:center;padding:96px 24px;border-radius:40px 40px 0 0}
+.cta h2{color:var(--sand)}
+.cta p{margin-top:14px;color:#A9BFA9;font-size:14.5px}
+.cta .btn-big{display:inline-block;margin-top:32px;background:var(--leaf);color:var(--forest-2);font-weight:700;font-size:16px;padding:17px 40px;border-radius:99px}
+.cta .btn-big:hover{filter:brightness(1.06)}
+footer{background:var(--forest-2);color:#87A28E;padding:48px 0;font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer b{color:var(--sand)}
+/* reveal */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .85s ease,transform .85s ease}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* - refine: motion & haptics - */
+.rv{transform:translateY(34px);filter:blur(10px);transition:opacity 1s cubic-bezier(.32,.72,0,1),transform 1s cubic-bezier(.32,.72,0,1),filter 1s cubic-bezier(.32,.72,0,1)}
+.rv.on{filter:blur(0)}
+::selection{background:#143D2B;color:#EFE9DC}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #5F8A6F;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){.rv{transition:none;transform:none;filter:none;opacity:1}}
+
+.arch img{transition:transform 1.6s cubic-bezier(.32,.72,0,1)}
+.arch:hover img{transform:scale(1.035)}
+.btn-f,.btn-big{transition:background .35s,transform .4s cubic-bezier(.32,.72,0,1)}
+.btn-f:active,.btn-big:active{transform:scale(.97)}
+.bz{transition:transform .7s cubic-bezier(.32,.72,0,1),box-shadow .7s}
+.imp{transition:transform .7s cubic-bezier(.32,.72,0,1),box-shadow .7s}
+.imp:hover{transform:translateY(-5px);box-shadow:0 22px 50px -22px rgba(0,0,0,.2)}
+.fl .cir{transition:transform .5s cubic-bezier(.32,.72,0,1),box-shadow .5s}
+.fl:hover .cir{transform:translateY(-4px);box-shadow:0 14px 30px -12px rgba(0,0,0,.24)}
+@media(prefers-reduced-motion:reduce){}
+
+/* - korean line-break polish - */
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#">
+      <svg viewBox="0 0 26 26" aria-hidden="true"><path d="M13 24 C4 18 3 8 13 2 C23 8 22 18 13 24 Z" fill="#143D2B"/><path d="M13 22 V8 M13 12 C10 11 8.5 9 8 6.5 M13 16 C16 15 17.5 13 18 10.5" stroke="#7FB069" stroke-width="1.6" fill="none"/></svg>
+      에코원 에너지
+    </a>
+    <ul>
+      <li><a href="#mission">우리의 약속</a></li>
+      <li><a href="#business">사업영역</a></li>
+      <li><a href="#impact">환경 성과</a></li>
+      <li><a href="#process">진행 절차</a></li>
+    </ul>
+    <a class="tel" href="tel:0507-000-0000">협력 문의</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker"><span class="leaf-dot"></span>RENEWABLE ENERGY PARTNER</p>
+      <h1 style="margin-top:18px">다음 세대의 땅에,<br><em>오늘 심는 에너지</em></h1>
+      <p>에코원은 태양광 발전소의 개발 · 시공 · 운영을 한 번에 맡는 재생에너지 전문기업입니다. 유휴 부지가 수익이 되고, 수익이 다시 숲이 됩니다.</p>
+      <div class="hero-cta">
+        <a class="btn-f" href="tel:0507-000-0000">부지 진단 신청</a>
+        <a class="btn-t" href="#business">사업 소개 보기</a>
+      </div>
+    </div>
+    <div class="arch rv">
+      <img src="../corporate-c/assets/hero.jpg" alt="태양광 발전 단지">
+      <div class="chip">지금까지 <b>142MW</b> 준공 · 운영</div>
+    </div>
+  </div>
+</section>
+
+<svg class="curve" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path d="M0,64 C300,0 900,0 1200,64 Z" fill="#143D2B"/></svg>
+
+<section id="mission" class="mission" style="margin-top:-2px">
+  <div class="wrap">
+    <p class="kicker" style="justify-content:center"><span class="leaf-dot"></span>OUR PROMISE</p>
+    <h2>발전소를 짓는 일은<br>땅을 빌리는 일입니다</h2>
+    <blockquote class="rv">
+      저희는 20년 뒤 철거까지 계약서에 먼저 씁니다.<br>
+      부지는 원상 복구하고, 운영 기간에는 수익의 1%를<br>
+      <b>지역 숲 조성 기금</b>으로 되돌립니다.
+    </blockquote>
+  </div>
+</section>
+
+<section id="business">
+  <div class="wrap">
+    <div class="rv">
+      <p class="kicker"><span class="leaf-dot"></span>BUSINESS</p>
+      <h2>사업영역</h2>
+      <p class="sub">개발 인허가부터 준공 후 운영까지, 단계별로 다른 회사를 찾을 필요가 없습니다.</p>
+    </div>
+    <div class="biz rv">
+      <div class="bz"><span class="no">사업 01</span><h3>태양광 발전소 개발 · 시공</h3><p>부지 타당성 검토부터 계통 연계, 준공까지.</p><ul><li>임야 · 농지 · 건물 지붕형</li><li>인허가 대행 일체</li><li>평균 공사 기간 4개월</li></ul></div>
+      <div class="bz"><span class="no">사업 02</span><h3>ESS · 계통 안정화</h3><p>발전량 변동을 저장장치로 안정화합니다.</p><ul><li>발전소 연계형 ESS 설계</li><li>소방 · 안전 기준 초과 시공</li><li>원격 모니터링 기본</li></ul></div>
+      <div class="bz"><span class="no">사업 03</span><h3>운영 · 유지관리 (O&amp;M)</h3><p>준공 후 20년, 발전 효율을 지킵니다.</p><ul><li>모듈 세척 · 정기 점검</li><li>고장 24시간 출동</li><li>월간 발전 리포트 발송</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="impact" class="impact">
+  <div class="wrap">
+    <div class="rv">
+      <p class="kicker"><span class="leaf-dot"></span>IMPACT</p>
+      <h2>숫자로 남는 환경 성과</h2>
+      <p class="sub">2020년 창립 이후 누적 기준입니다.</p>
+    </div>
+    <div class="imp-grid rv">
+      <div class="imp"><b>142<i>MW</i></b><span>누적 준공 용량</span><p class="eq">4인 가구 약 47,000세대의 연간 전기</p></div>
+      <div class="imp"><b>9.8<i>만 톤</i></b><span>연간 탄소 감축량</span><p class="eq">30년생 소나무 약 1,480만 그루의 흡수량</p></div>
+      <div class="imp"><b>3.2<i>억 원</i></b><span>지역 숲 조성 기금 적립</span><p class="eq">발전 수익 1% 적립 · 6개 지자체 협약</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="rv">
+      <p class="kicker"><span class="leaf-dot"></span>PROCESS</p>
+      <h2>부지 진단부터 준공까지</h2>
+    </div>
+    <div class="flow rv">
+      <div class="fl"><div class="cir">🗺</div><b>무료 부지 진단</b><p>주소만 주시면 일조량 · 계통 여유를 분석해 예상 수익을 드립니다</p></div>
+      <div class="fl"><div class="cir">📋</div><b>인허가 대행</b><p>개발행위허가 · 발전사업허가 전 과정 대행</p></div>
+      <div class="fl"><div class="cir">🏗</div><b>시공 · 준공</b><p>자체 시공팀 · 주 단위 공정 보고</p></div>
+      <div class="fl"><div class="cir">🌱</div><b>운영 20년</b><p>O&amp;M · 월간 리포트 · 수익 정산</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="cta">
+  <h2 class="rv">놀고 있는 땅이 있다면,<br>일하게 해 주세요</h2>
+  <p class="rv">부지 진단은 무료이며, 결과 리포트에는 어떤 조건도 붙지 않습니다.</p>
+  <a class="btn-big rv" href="tel:0507-000-0000">0507-000-0000 · 부지 진단 신청</a>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><b>㈜에코원 에너지</b> · 대표 정에코<br>전라남도 나주시 빛가람로 000 · 사업자등록번호 000-00-00000 · 발전사업 허가 제0000호</div>
+    <div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 수치 · 연락처는 예시입니다.</div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>스틸백 스튜디오 — 필라테스 · 헬스장 홈페이지 템플릿 (기본형 · 디자인 B)</title>
+<meta name="description" content="블랙과 크림슨의 에너지 넘치는 퍼스널 트레이닝 스튜디오 홈페이지 템플릿. 변화 수치, 프로그램, 코치 소개로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="스틸백 스튜디오 — 필라테스 · 헬스장 홈페이지 템플릿 (기본형 · 디자인 B)">
+<meta property="og:image" content="../fitness-b/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#FF3B5C;color:#101114}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #FF3B5C;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--bg:#101114;--panel:#191B1F;--line:#2A2D33;--ink:#F1F1F2;--soft:#8F939B;--red:#FF3B5C}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.7}
+.disp{font-family:"Black Han Sans",sans-serif;font-weight:400}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+section{padding:96px 0}
+.kicker{font-family:"IBM Plex Mono";font-size:12px;letter-spacing:.24em;color:var(--red)}
+h2{font-family:"Black Han Sans";font-size:clamp(28px,4.4vw,44px);font-weight:400;margin-top:12px;letter-spacing:.01em}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:rgba(16,17,20,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:"Black Han Sans";font-size:20px;letter-spacing:.04em}
+.logo b{color:var(--red);font-weight:400}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--ink)}
+.nav .tel{background:var(--red);color:#fff;font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:4px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:80px 0 70px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Black Han Sans";font-size:clamp(40px,7vw,72px);font-weight:400;line-height:1.12}
+.hero h1 b{color:var(--red);font-weight:400}
+.hero p{margin-top:16px;color:var(--soft);font-size:15.5px;max-width:430px}
+.hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;border-radius:4px;font-weight:700;font-size:15px;transition:transform .4s cubic-bezier(.32,.72,0,1)}
+.btn:active{transform:scale(.97)}
+.btn-r{background:var(--red);color:#fff}
+.btn-l{border:1px solid var(--line);color:var(--ink)}.btn-l:hover{border-color:var(--red);color:var(--red)}
+.hero-img{position:relative}
+.hero-img img{height:430px;width:100%;object-fit:cover;border-radius:8px;filter:contrast(1.06) saturate(.92)}
+.hero-img .rec{position:absolute;top:14px;left:14px;background:rgba(16,17,20,.85);border:1px solid var(--red);color:var(--red);font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.16em;padding:8px 13px}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:48px}
+@media(max-width:820px){.nums{grid-template-columns:1fr 1fr}}
+.nums div{background:var(--panel);padding:26px 22px}
+.nums b{font-family:"IBM Plex Mono";font-size:28px;color:var(--red)}
+.nums span{display:block;margin-top:6px;font-size:12px;color:var(--soft)}
+.prog{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+@media(max-width:820px){.prog{grid-template-columns:1fr}}
+.pg{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:28px;transition:transform .5s cubic-bezier(.32,.72,0,1),box-shadow .5s}
+.pg::before{content:"";display:block;width:26px;height:3px;background:var(--red);margin-bottom:16px}
+.pg:hover{transform:translateY(-5px);box-shadow:0 24px 44px rgba(0,0,0,.45)}
+.pg .tag{font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.2em;color:var(--red)}
+.pg h3{font-family:"Black Han Sans";font-size:21px;margin-top:12px;font-weight:400}
+.pg p{font-size:13px;color:var(--soft);margin-top:10px}
+.pg ul{list-style:none;margin-top:16px;display:grid;gap:8px;font-size:13px}
+.pg li::before{content:"+ ";color:var(--red);font-weight:700}
+.coach{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+@media(max-width:820px){.coach{grid-template-columns:1fr}}
+.co{position:relative;border-radius:8px;overflow:hidden}
+.co img{height:320px;width:100%;object-fit:cover;filter:saturate(.9);transition:transform 1.2s cubic-bezier(.32,.72,0,1)}
+.co:hover img{transform:scale(1.05)}
+.co .b{position:absolute;inset:auto 0 0 0;background:linear-gradient(transparent,rgba(16,17,20,.95));padding:40px 18px 16px}
+.co b{font-family:"Black Han Sans";font-size:17px;font-weight:400}
+.co p{font-size:11.5px;color:var(--soft);margin-top:3px}
+.rules{margin-top:48px;border:1px dashed var(--line);border-radius:8px;padding:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:760px){.rules{grid-template-columns:1fr}}
+.rules b{font-family:"IBM Plex Mono";color:var(--red);font-size:13px}
+.rules p{font-size:13px;color:var(--soft);margin-top:8px}
+.cta{background:var(--red);color:#fff;text-align:center;padding:88px 24px}
+.cta h2{color:#fff}
+.cta p{margin-top:10px;opacity:.85;font-weight:500}
+.cta a{display:inline-block;margin-top:26px;background:#101114;color:var(--red);font-family:"Black Han Sans";font-size:19px;padding:15px 38px;border-radius:4px}
+footer{padding:44px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">STEEL<b>BACK</b></a>
+<ul><li><a href="#result">변화 기록</a></li><li><a href="#program">프로그램</a></li><li><a href="#coach">코치</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">체험 신청</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">PERSONAL TRAINING STUDIO</p>
+<h1>몸은<br>거짓말을 <b>안 한다</b></h1>
+<p>의지 말고 시스템에 기대세요. 스틸백은 식단 · 수면 · 운동을 주 단위로 기록하고, 숫자가 바뀔 때까지 함께 갑니다.</p>
+<div class="hero-cta"><a class="btn btn-r" href="tel:0507-000-0000">무료 체험 신청</a><a class="btn btn-l" href="#result">변화 기록 보기</a></div>
+</div>
+<figure class="hero-img rv"><img src="../fitness-b/assets/hero.jpg" alt="트레이닝 존"><span class="rec">● REC — 오늘의 수업</span></figure>
+</div></section>
+
+<section id="result" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">RESULTS</p><h2>회원들의 12주 평균</h2></div>
+<div class="nums rv">
+<div><b>-6.8kg</b><span>체지방량 변화 (예시)</span></div>
+<div><b>+2.1kg</b><span>골격근량 변화 (예시)</span></div>
+<div><b>92%</b><span>12주 프로그램 완주율</span></div>
+<div><b>4,300+</b><span>누적 수업 세션</span></div>
+</div>
+</div></section>
+
+<section id="program" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">PROGRAM</p><h2>세 가지 트랙</h2></div>
+<div class="prog rv">
+<div class="pg"><span class="tag">1:1</span><h3>퍼스널 트레이닝</h3><p>체형 분석 후 완전 맞춤 설계.</p><ul><li>주 2–3회 · 50분</li><li>식단 코칭 · 인바디 격주</li><li>담당 코치 고정</li></ul></div>
+<div class="pg"><span class="tag">2:1</span><h3>듀엣 트레이닝</h3><p>친구 · 커플이 함께, 비용은 나눠서.</p><ul><li>주 2회 · 50분</li><li>페어 프로그램 설계</li><li>1:1 대비 40% 절감</li></ul></div>
+<div class="pg"><span class="tag">GROUP</span><h3>새벽 그룹 클래스</h3><p>6시 정각, 최대 6명 서킷.</p><ul><li>월 – 금 06:00</li><li>출석 리워드 제도</li><li>월 12회권</li></ul></div>
+</div>
+</div></section>
+
+<section id="coach" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">COACH</p><h2>코치가 전부다</h2></div>
+<div class="coach rv">
+<div class="co"><img src="../fitness-b/assets/coach-1.jpg" alt="헤드 코치"><div class="b"><b>강스틸 헤드코치</b><p>생활스포츠지도사 2급 · 재활 트레이닝 10년</p></div></div>
+<div class="co"><img src="../fitness-b/assets/coach-2.jpg" alt="코치"><div class="b"><b>백은지 코치</b><p>여성 바디 리컴포지션 · 대회 입상</p></div></div>
+<div class="co"><img src="../fitness-b/assets/coach-3.jpg" alt="코치"><div class="b"><b>한파워 코치</b><p>스트렝스 · 리프팅 세미나 강사</p></div></div>
+</div>
+<div class="rules rv">
+<div><b>RULE 01</b><p>수업에 늦으면 코치가 벌칙 — 회원이 아니라.</p></div>
+<div><b>RULE 02</b><p>안 되는 자세는 무게를 낮춥니다. 무리한 중량 금지.</p></div>
+<div><b>RULE 03</b><p>기록 없는 수업은 없습니다. 전 세션 기록 공유.</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">시작이 제일 가볍다</h2>
+<p class="rv">첫 체험 무료 · 체형 분석 리포트 포함 · 오늘 신청하면 이번 주 배정</p>
+<a class="rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>스틸백 스튜디오</b> · 대표 강스틸 · 체육시설업 신고 제0000호<br>서울특별시 강남구 테헤란로 000, B1 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 수치 · 연락처는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>

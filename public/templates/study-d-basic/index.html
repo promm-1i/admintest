@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>책상하나 스터디카페 — 스터디카페 홈페이지 템플릿 (기본형 · 디자인 D)</title>
+<meta name="description" content="우드와 크림의 카페형 스터디카페 홈페이지 템플릿. 좌석 타입, 음료 바, 이용권으로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="책상하나 스터디카페 — 스터디카페 홈페이지 템플릿 (기본형 · 디자인 D)">
+<meta property="og:image" content="../study-d/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gothic+A1:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#9C7B54;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #846343;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--cream:#F7F1E7;--wood:#9C7B54;--deep:#846343;--ink:#3A3227;--soft:#877D6E;--line:#E7DCCA}
+body{background:#fff;color:var(--ink);font-family:"Gothic A1",sans-serif;line-height:1.8}
+.serif{font-family:"Gowun Batang",serif}
+.wrap{max-width:1020px;margin:0 auto;padding:0 24px}
+section{padding:88px 0}
+.kicker{font-size:11.5px;letter-spacing:.3em;color:var(--wood);font-weight:700}
+h2{font-family:"Gowun Batang",serif;font-size:clamp(26px,4vw,38px);font-weight:700;margin-top:14px;line-height:1.5}
+.sub{color:var(--soft);margin-top:12px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{font-family:"Gowun Batang",serif;font-weight:700;font-size:20px}
+.logo i{font-style:normal;color:var(--wood)}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--wood)}
+.nav .tel{background:var(--wood);color:#fff;font-weight:700;font-size:13.5px;padding:10px 20px;border-radius:99px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{background:var(--cream);padding:76px 0 66px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:42px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-family:"Gowun Batang",serif;font-size:clamp(30px,5.2vw,48px);font-weight:700;line-height:1.45}
+.hero h1 em{font-style:normal;color:var(--wood)}
+.hero p{margin-top:16px;color:var(--soft);font-size:15px;max-width:430px}
+.hero-cta{margin-top:26px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 30px;border-radius:99px;font-weight:700;font-size:15px;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:active{transform:scale(.97)}
+.btn-w{background:var(--wood);color:#fff}.btn-w:hover{background:var(--deep)}
+.btn-o{background:#fff;border:1.5px solid var(--line)}.btn-o:hover{border-color:var(--wood);color:var(--wood)}
+.hero img{border-radius:18px;height:370px;width:100%;object-fit:cover}
+/* 좌석 */
+.seats{margin-top:46px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:820px){.seats{grid-template-columns:1fr 1fr}}
+.st{border:1.5px solid var(--line);border-radius:18px;padding:26px;transition:border-color .3s,transform .45s cubic-bezier(.32,.72,0,1)}
+.st:hover{border-color:var(--wood);transform:translateY(-4px)}
+.st .em{font-size:26px}
+.st b{display:block;font-family:"Gowun Batang";font-size:17px;font-weight:700;margin-top:10px}
+.st p{font-size:12.5px;color:var(--soft);margin-top:6px}
+.st .cnt{margin-top:10px;font-size:12px;color:var(--wood);font-weight:700}
+/* 음료바 */
+.bar{margin-top:46px;background:var(--cream);border-radius:22px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center}
+@media(max-width:760px){.bar{grid-template-columns:1fr}}
+.bar img{width:100%;height:260px;object-fit:cover;border-radius:16px}
+.bar h3{font-family:"Gowun Batang";font-size:22px;font-weight:700}
+.bar p{font-size:14px;color:var(--soft);margin-top:10px}
+.bar ul{list-style:none;margin-top:14px;display:grid;gap:8px;font-size:14px}
+.bar li::before{content:"☕ "}
+/* 요금 */
+.price{margin-top:46px;border:1.5px solid var(--line);border-radius:18px;overflow:hidden}
+.pr{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:17px 24px;border-top:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.pr:first-child{border-top:0;background:var(--ink);color:#fff;font-size:12.5px;letter-spacing:.06em}
+.pr b{font-weight:700}
+.pr .d{font-size:12.5px;color:var(--soft)}
+.pr .won{font-family:"Gowun Batang";font-weight:700;color:var(--wood);white-space:nowrap}
+@media(max-width:640px){.pr{grid-template-columns:1fr auto}.pr .d{display:none}}
+/* 규칙 */
+.rule{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.rule{grid-template-columns:1fr}}
+.rl{background:var(--cream);border-radius:18px;padding:26px}
+.rl .em{font-size:24px}
+.rl b{display:block;font-family:"Gowun Batang";font-size:17px;font-weight:700;margin-top:10px}
+.rl p{font-size:13px;color:var(--soft);margin-top:6px}
+.cta{background:var(--wood);color:#fff;text-align:center;padding:84px 24px}
+.cta h2{color:#fff}
+.cta p{margin-top:12px;color:#E7D8C4;font-size:14px}
+.cta .btn{margin-top:24px;background:#fff;color:var(--deep);font-size:17px}
+footer{padding:42px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+.logo i{display:inline-block;}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#">책상하나 <i>☕</i></a>
+<ul><li><a href="#seat">좌석</a></li><li><a href="#bar">음료 바</a></li><li><a href="#price">이용권</a></li><li><a href="#rule">이용 규칙</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">문의하기</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">CAFE STYLE STUDY LOUNGE</p>
+<h1 style="margin-top:14px">독서실은 답답하고<br>카페는 시끄러웠다면<br><em>여기가 중간입니다</em></h1>
+<p>책상하나는 카페의 편안함과 독서실의 집중을 반씩 섞었습니다. 원목 책상, 낮은 조도, 그리고 무료 음료 바.</p>
+<div class="hero-cta"><a class="btn btn-w" href="tel:0507-000-0000">이용 문의</a><a class="btn btn-o" href="#seat">좌석 보기</a></div>
+</div>
+<img class="rv" src="../study-d/assets/2.jpg" alt="스터디카페 내부">
+</div></section>
+
+<section id="seat"><div class="wrap">
+<div class="rv"><p class="kicker">SEATS</p><h2>네 가지 좌석</h2><p class="sub">전 좌석 원목 상판 · 개별 조명 · 콘센트 2구. 처음 오시면 둘러보고 고르셔도 됩니다.</p></div>
+<div class="seats rv">
+<div class="st"><span class="em">🪑</span><b>오픈 라운지석</b><p>널찍한 6인 테이블 · 노트북 이용 가능</p><p class="cnt">18석</p></div>
+<div class="st"><span class="em">🖥️</span><b>1인 부스석</b><p>3면 칸막이 · 완전 개인 공간</p><p class="cnt">24석</p></div>
+<div class="st"><span class="em">🌿</span><b>창가 뷰석</b><p>공원이 보이는 자리 · 인기 좌석</p><p class="cnt">10석</p></div>
+<div class="st"><span class="em">🗣️</span><b>스터디룸</b><p>4–6인 · 화이트보드 · 예약제</p><p class="cnt">3룸</p></div>
+</div>
+</div></section>
+
+<section id="bar" style="padding-top:0"><div class="wrap">
+<div class="bar rv">
+<img src="../study-d/assets/3.jpg" alt="유리 스터디룸">
+<div>
+<p class="kicker">FREE BAR</p>
+<h3 style="margin-top:10px">음료는 마음껏 드세요</h3>
+<p>이용료에 다 포함되어 있습니다. 커피 사러 나갔다 흐름 끊길 일 없게 만들었어요.</p>
+<ul>
+<li>원두 커피 (에스프레소 머신)</li>
+<li>티백 6종 · 코코아</li>
+<li>정수기 · 제빙기</li>
+<li>전자레인지 · 간이 취식 공간 별도</li>
+</ul>
+</div>
+</div>
+</div></section>
+
+<section id="price" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">PASS</p><h2>이용권</h2></div>
+<div class="price rv">
+<div class="pr"><span>이용권</span><span>내용</span><span>요금</span></div>
+<div class="pr"><b>시간권 (4시간)</b><span class="d">음료 바 포함</span><span class="won">6,000원</span></div>
+<div class="pr"><b>당일권</b><span class="d">오픈부터 마감까지</span><span class="won">10,000원</span></div>
+<div class="pr"><b>30일 자유석</b><span class="d">기간 내 무제한</span><span class="won">129,000원</span></div>
+<div class="pr"><b>30일 지정석</b><span class="d">고정석 + 개인 사물함</span><span class="won">169,000원</span></div>
+<div class="pr"><b>스터디룸</b><span class="d">시간당 · 최대 6인</span><span class="won">12,000원</span></div>
+</div>
+</div></section>
+
+<section id="rule" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">RULES</p><h2>편안하되, 조용하게</h2></div>
+<div class="rule rv">
+<div class="rl"><span class="em">💻</span><b>노트북은 라운지석에서</b><p>부스석과 창가석은 타건 소음 때문에 필기 전용으로 운영합니다.</p></div>
+<div class="rl"><span class="em">🍱</span><b>취식은 별도 공간에서</b><p>간식과 도시락은 취식 라운지에서 드실 수 있어요.</p></div>
+<div class="rl"><span class="em">📵</span><b>통화는 복도에서</b><p>문 앞에 통화 부스가 있습니다. 진동으로 부탁드려요.</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">한 번 앉아보면<br>알게 되실 거예요</h2>
+<p class="rv">첫 방문 4시간권 3,000원 · 매일 07:00 – 24:00 · 연중무휴</p>
+<a class="btn rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>책상하나 스터디카페</b> · 대표 목책상<br>대전광역시 서구 둔산로 000, 5층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 요금 · 연락처는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>

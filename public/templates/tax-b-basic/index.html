@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>바른숫자 세무회계 — 세무사 · 회계사무소 홈페이지 템플릿 (기본형 · 디자인 B)</title>
+<meta name="description" content="장부 원장의 그린 라인 무드 세무회계사무소 홈페이지 템플릿. 수임료 표, 기장 서비스 범위, 세무 일정으로 구성된 원페이지 기본형입니다.">
+<meta property="og:title" content="바른숫자 세무회계 — 세무사 · 회계사무소 홈페이지 템플릿 (기본형 · 디자인 B)">
+<meta property="og:image" content="../tax-b/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+.rv{opacity:0;transform:translateY(30px);filter:blur(9px);transition:opacity .95s cubic-bezier(.32,.72,0,1),transform .95s cubic-bezier(.32,.72,0,1),filter .95s cubic-bezier(.32,.72,0,1)}
+.rv.on{opacity:1;transform:none;filter:none}
+::selection{background:#1E6E52;color:#FFFFFF}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #1E6E52;outline-offset:3px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important}.rv{opacity:1;transform:none;filter:none}}
+
+:root{--green:#1E6E52;--mint:#EAF4EF;--ink:#1E2A24;--soft:#66786E;--line:#DCE8E1;--ruled:#EFF5F1}
+body{background:#fff;color:var(--ink);font-family:"Noto Sans KR",sans-serif;line-height:1.78;background-image:linear-gradient(var(--ruled) 1px,transparent 1px);background-size:100% 34px}
+.mono{font-family:"IBM Plex Mono",monospace}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+section{padding:92px 0}
+.kicker{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.22em;color:var(--green)}
+h2{font-size:clamp(25px,3.8vw,36px);font-weight:700;margin-top:14px;letter-spacing:-.02em}
+.sub{color:var(--soft);margin-top:11px;font-size:14.5px;max-width:520px}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-bottom:2px solid var(--green)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-weight:700;font-size:18px;display:flex;gap:9px;align-items:center}
+.logo i{font-style:normal;font-family:"IBM Plex Mono";font-size:11px;background:var(--green);color:#fff;padding:4px 8px;border-radius:4px}
+.nav ul{display:flex;gap:26px;list-style:none;font-size:13.5px;color:var(--soft)}
+.nav ul a:hover{color:var(--green)}
+.nav .tel{background:var(--green);color:#fff;font-weight:700;font-size:13px;padding:10px 18px;border-radius:6px}
+@media(max-width:820px){.nav ul{display:none}}
+.hero{padding:80px 0 66px}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:46px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}}
+.hero h1{font-size:clamp(30px,5vw,46px);font-weight:700;line-height:1.4;letter-spacing:-.03em}
+.hero h1 b{color:var(--green)}
+.hero p{margin-top:16px;color:var(--soft);font-size:15px;max-width:440px}
+.hero-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:15px 28px;border-radius:8px;font-weight:700;font-size:14.5px;transition:transform .4s cubic-bezier(.32,.72,0,1),background .3s}
+.btn:active{transform:scale(.97)}
+.btn-g{background:var(--green);color:#fff}.btn-g:hover{background:#15543E}
+.btn-o{border:1.5px solid var(--line);background:#fff}.btn-o:hover{border-color:var(--green);color:var(--green)}
+.ledger{background:#fff;border:1.5px solid var(--green);border-radius:10px;overflow:hidden;box-shadow:0 20px 44px -26px rgba(0,0,0,.26)}
+.lg-head{background:var(--green);color:#fff;padding:13px 22px;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.2em}
+.lg-row{display:flex;justify-content:space-between;gap:14px;padding:13px 22px;border-top:1px solid var(--line);font-size:13.5px}
+.lg-row b{font-weight:700}
+.lg-row .won{font-family:"IBM Plex Mono";color:var(--green)}
+.price{margin-top:46px;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.p-row{display:grid;grid-template-columns:1fr auto auto;gap:16px;padding:17px 24px;border-top:1px solid var(--line);font-size:14.5px;align-items:baseline}
+.p-row:first-child{border-top:0;background:var(--ink);color:#fff;font-size:12px;letter-spacing:.12em}
+.p-row b{font-weight:700}
+.p-row span.d{display:block;font-size:12px;color:var(--soft)}
+.p-row .t{font-size:12px;color:var(--soft)}
+.p-row .won{font-family:"IBM Plex Mono";color:var(--green);font-weight:500;white-space:nowrap}
+@media(max-width:640px){.p-row{grid-template-columns:1fr auto}.p-row .t{display:none}}
+.scope{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:760px){.scope{grid-template-columns:1fr}}
+.sc{background:var(--mint);border-radius:12px;padding:24px}
+.sc b{font-size:15.5px;font-weight:700;color:var(--green)}
+.sc ul{list-style:none;margin-top:12px;display:grid;gap:8px;font-size:13px;color:var(--ink)}
+.sc li::before{content:"✓ ";color:var(--green);font-weight:700}
+.cal{margin-top:46px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media(max-width:820px){.cal{grid-template-columns:1fr 1fr}}
+.ca{border:1.5px solid var(--line);border-radius:10px;padding:18px;text-align:center}
+.ca .m{font-family:"IBM Plex Mono";font-size:12px;color:var(--green)}
+.ca b{display:block;font-size:14px;margin-top:8px}
+.ca p{font-size:11.5px;color:var(--soft);margin-top:4px}
+.who{margin-top:46px;display:grid;grid-template-columns:150px 1fr;gap:26px;align-items:center;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:28px}
+@media(max-width:640px){.who{grid-template-columns:1fr}}
+.who img{width:150px;height:170px;object-fit:cover;border-radius:8px}
+.who h3{font-size:17px;font-weight:700}
+.who .role{font-size:12px;color:var(--green);font-weight:700;margin-top:3px}
+.who p{font-size:13px;color:var(--soft);margin-top:8px}
+.cta{background:var(--green);color:#fff;text-align:center;padding:86px 24px}
+.cta h2{color:#fff}
+.cta p{margin-top:10px;color:#BFDCCF;font-size:14px}
+.cta .btn{margin-top:26px;background:#fff;color:var(--green);font-size:16px}
+footer{padding:44px 0;border-top:1px solid var(--line);font-size:12.5px;color:var(--soft);background:#fff}
+footer .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+footer b{color:var(--ink)}
+
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+</style>
+</head>
+<body>
+
+<header><div class="wrap nav">
+<a class="logo" href="#"><i>TAX</i>바른숫자 세무회계</a>
+<ul><li><a href="#fee">수임료</a></li><li><a href="#scope">기장 범위</a></li><li><a href="#cal">세무 일정</a></li><li><a href="#who">세무사</a></li></ul>
+<a class="tel" href="tel:0507-000-0000">상담 예약</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+<div>
+<p class="kicker">TAX &amp; ACCOUNTING</p>
+<h1>사장님 장부는<br><b>바른 숫자</b>여야 합니다</h1>
+<p>기장료가 얼마인지, 뭘 해주는지 물어보기 어려우셨죠. 바른숫자는 수임료와 업무 범위를 홈페이지에 다 적어 둡니다.</p>
+<div class="hero-cta"><a class="btn btn-g" href="tel:0507-000-0000">기장 상담 예약</a><a class="btn btn-o" href="#fee">수임료 보기</a></div>
+</div>
+<aside class="ledger rv">
+<div class="lg-head">LEDGER — 이번 달 처리 현황</div>
+<div class="lg-row"><b>부가세 신고</b><span class="won">42건 완료</span></div>
+<div class="lg-row"><b>원천세 신고</b><span class="won">67건 완료</span></div>
+<div class="lg-row"><b>기장 거래처</b><span class="won">128개사</span></div>
+<div class="lg-row"><b>세무조사 대응</b><span class="won">진행 2건</span></div>
+</aside>
+</div></section>
+
+<section id="fee" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">FEE TABLE</p><h2>수임료, 여기 다 적혀 있습니다</h2><p class="sub">매출 규모 기준 월 기장료 — 부가세 별도, 신고 대행 포함입니다.</p></div>
+<div class="price rv">
+<div class="p-row"><span>구분</span><span>대상</span><span>월 기장료</span></div>
+<div class="p-row"><div><b>간편 기장</b><span class="d">프리랜서 · 1인 사업자</span></div><span class="t">연매출 ~1억</span><span class="won">80,000원</span></div>
+<div class="p-row"><div><b>표준 기장</b><span class="d">일반 소상공인 · 음식점</span></div><span class="t">연매출 ~5억</span><span class="won">120,000원</span></div>
+<div class="p-row"><div><b>법인 기장</b><span class="d">법인 결산 · 조정 포함</span></div><span class="t">연매출 ~20억</span><span class="won">180,000원~</span></div>
+<div class="p-row"><div><b>양도 · 상속 · 증여</b><span class="d">건별 신고 대행</span></div><span class="t">건별</span><span class="won">견적 안내</span></div>
+</div>
+</div></section>
+
+<section id="scope" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">SCOPE</p><h2>기장료에 다 포함됩니다</h2></div>
+<div class="scope rv">
+<div class="sc"><b>매월 하는 일</b><ul><li>장부 기장 · 증빙 정리</li><li>원천세 신고</li><li>급여대장 · 4대보험 신고</li></ul></div>
+<div class="sc"><b>분기 · 반기</b><ul><li>부가가치세 신고</li><li>예상 세액 미리 안내</li><li>절세 항목 점검 리포트</li></ul></div>
+<div class="sc"><b>연 1회</b><ul><li>종합소득세 · 법인세 신고</li><li>결산 상담 (대면 · 화상)</li><li>다음 해 절세 플랜</li></ul></div>
+</div>
+</div></section>
+
+<section id="cal" style="padding-top:0"><div class="wrap">
+<div class="rv"><p class="kicker">TAX CALENDAR</p><h2>놓치면 가산세, 저희가 챙깁니다</h2></div>
+<div class="cal rv">
+<div class="ca"><span class="m">1월</span><b>부가세 확정신고</b><p>전년 2기분</p></div>
+<div class="ca"><span class="m">3월</span><b>법인세 신고</b><p>12월 결산 법인</p></div>
+<div class="ca"><span class="m">5월</span><b>종합소득세</b><p>성실신고는 6월</p></div>
+<div class="ca"><span class="m">7월</span><b>부가세 확정신고</b><p>1기분 · 예정고지</p></div>
+</div>
+</div></section>
+
+<section id="who" style="padding-top:0"><div class="wrap">
+<div class="who rv">
+<img src="../tax-b/assets/1.jpg" alt="대표 세무사">
+<div><h3>정바른 대표세무사</h3><p class="role">세무사 제00000호 · 국세청 근무 12년</p><p>"세금은 아는 만큼 줄어듭니다. 어려운 말 대신, 사장님 업종의 언어로 설명드리겠습니다."</p></div>
+</div>
+</div></section>
+
+<div class="cta">
+<h2 class="rv">첫 상담에서 알려드립니다 —<br>지금 새는 세금이 있는지</h2>
+<p class="rv">초회 상담 무료 · 평일 09:00 – 18:00 · 국세청 홈택스 위임 처리</p>
+<a class="btn rv" href="tel:0507-000-0000">0507-000-0000</a>
+</div>
+
+<footer><div class="wrap">
+<div><b>바른숫자 세무회계</b> · 대표세무사 정바른 · 세무사등록 제00000호<br>서울특별시 금천구 가산디지털1로 000, 7층 · 사업자등록번호 000-00-00000</div>
+<div>이 페이지는 홈페이지 제작 템플릿 데모입니다.<br>상호 · 수임료 · 연락처는 예시입니다.</div>
+</div></footer>
+
+</body>
+</html>
