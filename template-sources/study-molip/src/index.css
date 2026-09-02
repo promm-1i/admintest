@@ -115,20 +115,6 @@ html {
   }
 }
 
-/* 전광판 잔여석 바 — 좌→우 채움 */
-.bar-fill {
-  transform-origin: left;
-  animation: barFill 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
-}
-@keyframes barFill {
-  from {
-    transform: scaleX(0);
-  }
-  to {
-    transform: scaleX(1);
-  }
-}
-
 .menu-in {
   animation: menuIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
@@ -152,8 +138,7 @@ html {
     animation: none !important;
     transition: none !important;
   }
-  .lamp-glow,
-  .bar-fill {
+  .lamp-glow {
     animation: none !important;
   }
 }
@@ -171,12 +156,77 @@ html {
   opacity: 1 !important;
   transform: none !important;
 }
-[data-motion='off'] .lamp-glow,
-[data-motion='off'] .bar-fill {
+[data-motion='off'] .lamp-glow {
   animation: none !important;
 }
 [data-motion='off'] {
   scroll-behavior: auto;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   히어로 — 좌석 전경 풀블리드
+══════════════════════════════════════════════════════════════════════════════ */
+.hx-hero-img {
+  object-fit: cover;
+  object-position: 56% 46%;
+}
+
+/* 사진 위 카피 자리만 눌러 준다 — 어느 지점도 0.6을 넘지 않는다 */
+.hx-scrim {
+  background: linear-gradient(
+    to bottom,
+    rgba(20, 24, 42, 0.6) 0%,
+    rgba(20, 24, 42, 0.6) 58%,
+    rgba(20, 24, 42, 0.34) 76%,
+    rgba(20, 24, 42, 0) 100%
+  );
+}
+
+@media (min-width: 768px) {
+  .hx-hero-img {
+    object-position: 50% 35%;
+  }
+  .hx-scrim {
+    background: linear-gradient(
+      100deg,
+      rgba(20, 24, 42, 0.6) 0%,
+      rgba(20, 24, 42, 0.58) 32%,
+      rgba(20, 24, 42, 0.36) 52%,
+      rgba(20, 24, 42, 0.1) 74%,
+      rgba(20, 24, 42, 0) 92%
+    );
+  }
+}
+
+/* 스탠드 조명 블룸 — 히어로의 유일한 반복 모션. 기본 상태에서도 켜져 있다.
+   사진에서 스탠드 등이 몰려 있는 지점 위에 얹어, 안개가 아니라 빛 번짐으로 읽히게 한다.
+   screen 합성 = 빛은 더해진다. 글자는 z-10 로 이 레이어보다 위에 그려지므로 영향 없다. */
+.hx-lampglow {
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 214, 120, 0.42),
+    rgba(255, 200, 90, 0.18) 45%,
+    rgba(255, 190, 70, 0) 100%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.62;
+}
+html:not([data-motion='off']) .hx-lampglow {
+  animation: hxLampGlow 8s ease-in-out infinite;
+}
+@keyframes hxLampGlow {
+  0%,
+  100% {
+    opacity: 0.32;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-lampglow {
+    animation: none !important;
+  }
 }
 
 section[id] {

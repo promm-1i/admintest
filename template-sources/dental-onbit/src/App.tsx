@@ -3,7 +3,6 @@ import { MOTION } from './variant'
 
 /* 이미지 — src/images/ 안의 파일을 같은 이름으로 덮어쓰면 그대로 반영됩니다 */
 import heroImg from './images/hero.jpg'
-import consultImg from './images/consult.jpg'
 import doctorImg1 from './images/doctor-1.jpg'
 import doctorImg2 from './images/doctor-2.jpg'
 
@@ -52,7 +51,6 @@ const SITE = {
 
   // 여기에 히어로 사진 교체
   heroPhoto: heroImg,
-  consultPhoto: consultImg,
 
   nav: [
     { label: '진료 안내', href: '#care' },
@@ -250,52 +248,189 @@ function Header({ active }: { active: string }) {
 
 // ─── 히어로 ───────────────────────────────────────────────────────────────────
 
+/** 예약 데모의 요일 칩. key 는 Date#getDay 값이라 SITE.openTable 과 그대로 맞물립니다. */
+const HERO_DAYS = [
+  { key: 1, label: '월' },
+  { key: 2, label: '화' },
+  { key: 3, label: '수' },
+  { key: 4, label: '목' },
+  { key: 5, label: '금' },
+  { key: 6, label: '토' },
+  { key: 0, label: '일' },
+] as const
+
+/** 요일 → SITE.hours 의 몇 번째 행인지 */
+const HERO_HOURS_ROW: Record<number, number> = { 1: 0, 3: 0, 5: 0, 2: 1, 4: 1, 6: 2, 0: 3 }
+
+function hhmm(m: number) {
+  return `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`
+}
+
+/** openTable 로 예약 가능 시간을 만든다 — 점심(13-14시) 제외, 접수 마감(종료 30분 전)까지 */
+function heroSlots(dow: number) {
+  const row = SITE.openTable[dow]
+  if (!row) return []
+  const out: string[] = []
+  for (let t = row[0]; t <= row[1] - 30; t += 90) {
+    if (t >= 780 && t < 840) continue
+    out.push(hhmm(t))
+  }
+  return out
+}
+
+/**
+ * 자동 재생 대본. 고정 시퀀스라 실행·빌드마다 결과가 같습니다.
+ * 마지막 상태가 초기 상태(ti1 · di1 · si4)와 같아 이음매 없이 반복됩니다.
+ */
+const HERO_SCRIPT: { t?: number; d?: number; s?: number; hold: number }[] = [
+  { hold: 2600 },
+  { t: 2, hold: 900 },
+  { d: 3, hold: 900 },
+  { s: 6, hold: 2600 },
+  { t: 0, hold: 900 },
+  { d: 5, hold: 900 },
+  { s: 1, hold: 2600 },
+  { t: 4, hold: 900 },
+  { d: 0, hold: 900 },
+  { s: 3, hold: 2600 },
+  { t: 1, hold: 900 },
+  { d: 1, hold: 900 },
+  { s: 4, hold: 2600 },
+]
+
 function Hero() {
+  // 초기값이 곧 "완성된 선택 상태"입니다. 모션이 없는 기본형에서도 결과가 그대로 보입니다.
+  const [ti, setTi] = useState(1)
+  const [di, setDi] = useState(1)
+  const [si, setSi] = useState(4)
+
+  useEffect(() => {
+    if (!MOTION) return
+    let i = 0
+    let id = 0
+    const run = () => {
+      const st = HERO_SCRIPT[i % HERO_SCRIPT.length]
+      if (st.t !== undefined) setTi(st.t)
+      if (st.d !== undefined) setDi(st.d)
+      if (st.s !== undefined) setSi(st.s)
+      i += 1
+      id = window.setTimeout(run, st.hold)
+    }
+    run()
+    return () => clearTimeout(id)
+  }, [])
+
+  const day = HERO_DAYS[di]
+  const slots = heroSlots(day.key)
+  const sIdx = Math.min(si, slots.length - 1)
+  const time = slots[sIdx] ?? '휴진'
+  const hours = SITE.hours[HERO_HOURS_ROW[day.key]]
+  const item = SITE.reserve.options[ti]
+  const smsHref = `sms:${SITE.smsPhone}?body=${encodeURIComponent(`[진료예약] 진료: ${item} / 희망: ${day.label}요일 ${time}`)}`
+
   return (
-    <section className="pt-[72px]">
-      <div className="mx-auto max-w-6xl px-5 pt-10 md:pt-14">
-        <div className={`grid grid-cols-[1.5fr_1fr] gap-4 ${MOTION ? 'hero-photo' : ''}`}>
-          {/* 여기에 히어로 사진 교체 */}
-          <img src={SITE.heroPhoto} alt="온빛치과 진료실" className="w-full h-[240px] md:h-[340px] object-cover rounded-xl" />
-          {/* 여기에 상담실 사진 교체 */}
-          <img src={SITE.consultPhoto} alt="상담실" className="w-full h-[240px] md:h-[340px] object-cover rounded-xl" />
-        </div>
-        <div className="grid md:grid-cols-[1fr_auto] gap-x-14 gap-y-8 items-start py-10 md:py-14">
-          <div>
-            <p className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-mint/12 text-mint-d text-[0.8rem] font-bold ${MOTION ? 'hero-in' : ''}`}>
-              자연 치아 보존 우선 진료
-            </p>
-            <h1 className={`mt-5 text-[clamp(2.1rem,5.4vw,3.4rem)] font-extrabold tracking-[-0.04em] leading-[1.18] whitespace-pre-line ${MOTION ? 'hero-in d150' : ''}`}>
-              {SITE.slogan}
-            </h1>
-            <p className={`mt-5 max-w-lg text-[1rem] leading-relaxed text-navy/60 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
-            <div className={`mt-8 flex flex-wrap items-center gap-4 ${MOTION ? 'hero-in d450' : ''}`}>
-              <button
-                onClick={() => goTo('#reserve')}
-                className="px-7 py-4 rounded-lg bg-navy text-snow text-[0.95rem] font-bold hover:bg-mint-d"
-                style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-              >
-                진료 예약하기
-              </button>
-              <button
-                onClick={() => goTo('#fees')}
-                className="px-7 py-4 rounded-lg border-2 border-navy/15 text-[0.95rem] font-bold hover:border-mint-d hover:text-mint-d"
-                style={{ transition: MOTION ? 'all 0.2s' : 'none' }}
-              >
-                비급여 비용 보기
-              </button>
-            </div>
+    <section className="hero relative overflow-hidden bg-snow pt-[72px]">
+      <div className="mx-auto max-w-6xl px-5 lg:grid lg:grid-cols-[minmax(0,600px)_minmax(0,1fr)]">
+        {/* 카피 */}
+        <div className={`relative z-10 pt-9 lg:self-center lg:max-w-[480px] lg:py-20 ${MOTION ? 'hero-in' : ''}`}>
+          <span className="hx-rule" aria-hidden />
+          <p className="mt-3.5 text-[0.8rem] font-bold tracking-[0.14em] text-navy/70">자연 치아 보존 우선 진료</p>
+          <h1 className="mt-4 text-[clamp(2.05rem,4.4vw,3rem)] font-extrabold tracking-[-0.04em] leading-[1.16] whitespace-pre-line">
+            {SITE.slogan}
+          </h1>
+          <p className="mt-4 text-[0.98rem] leading-relaxed text-navy/70">{SITE.sloganSub}</p>
+          <div className="mt-7 flex flex-wrap items-center gap-3">
+            <a
+              href="#reserve"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#reserve')
+              }}
+              className="hx-cta px-7 py-4 rounded-lg bg-navy text-snow text-[0.95rem] font-bold hover:bg-mint-d"
+              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+            >
+              진료 예약하기
+            </a>
+            <a
+              href="#fees"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#fees')
+              }}
+              className="px-7 py-4 rounded-lg border-2 border-navy/20 text-[0.95rem] font-bold hover:border-mint-d hover:text-mint-d"
+              style={{ transition: MOTION ? 'all 0.2s' : 'none' }}
+            >
+              비급여 비용 보기
+            </a>
           </div>
-          <div className={`grid grid-cols-2 md:grid-cols-1 gap-x-10 gap-y-5 md:border-l md:border-navy/10 md:pl-10 ${MOTION ? 'hero-in d450' : ''}`}>
+          <div className="mt-9 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-navy/12 pt-6 sm:grid-cols-4 sm:gap-x-4">
             {SITE.stats.map((st) => (
               <div key={st.label}>
-                <p className="nums text-[1.35rem] font-extrabold leading-none">
+                <p className="nums text-[1.3rem] font-extrabold leading-none">
                   {st.n.toLocaleString()}
-                  <span className="text-mint-d text-[0.95rem] ml-0.5">{st.suffix}</span>
+                  {st.suffix}
                 </p>
-                <p className="mt-1.5 text-[0.8rem] text-navy/55">{st.label}</p>
+                <p className="mt-1.5 text-[0.78rem] text-navy/65">{st.label}</p>
               </div>
             ))}
+          </div>
+        </div>
+
+        {/* 예약 화면 데모 — 화면 오른쪽으로 흘러나가고, 왼쪽 끝은 마스크로 배경에 녹습니다 */}
+        <div
+          className={`hx-panel relative z-10 mt-10 -ml-5 -mr-5 py-10 pl-5 pr-5 lg:mt-0 lg:ml-[-228px] lg:mr-[-212px] lg:flex lg:flex-col lg:justify-center lg:py-[52px] lg:pl-[276px] lg:pr-[156px] ${MOTION ? 'hero-in d300' : ''}`}
+        >
+          {/* 여기에 히어로 사진 교체 */}
+          <img src={SITE.heroPhoto} alt="" className="hx-shot" aria-hidden />
+          <span className="hx-veil" aria-hidden />
+
+          <div className="relative">
+            <p className="hx-tag">
+              <span className="hx-dot" aria-hidden />
+              예약 화면 데모 · 실제 접수는 전화 · 문자로 확정됩니다
+            </p>
+
+            <p className="hx-step mt-6">01 · 진료 항목</p>
+            <div className="mt-2.5 flex flex-wrap gap-2">
+              {SITE.reserve.options.map((o, i) => (
+                <span key={o} className={`hx-chip${i === ti ? ' is-on' : ''}`}>
+                  {o}
+                </span>
+              ))}
+            </div>
+
+            <p className="hx-step mt-5">02 · 요일</p>
+            <div className="mt-2.5 grid grid-cols-7 gap-1.5">
+              {HERO_DAYS.map((d, i) => (
+                <span key={d.key} className={`hx-day${i === di ? ' is-on' : ''}${SITE.openTable[d.key] ? '' : ' is-off'}`}>
+                  {d.label}
+                </span>
+              ))}
+            </div>
+            <p className="nums mt-2.5 text-[0.78rem] text-snow/70">
+              {hours.day} · {hours.time}
+            </p>
+
+            <p className="hx-step mt-5">03 · 시간</p>
+            <div className="hx-slots mt-2.5 grid grid-cols-4 gap-1.5">
+              {slots.map((s, i) => (
+                <span key={s} className={`hx-slot${i === sIdx ? ' is-on' : ''}`}>
+                  {s}
+                </span>
+              ))}
+            </div>
+
+            <div className="hx-result mt-6">
+              <p className="text-[0.72rem] font-bold tracking-[0.14em] text-mint">선택한 예약</p>
+              <p className="mt-2 text-[1.02rem] font-extrabold text-snow">{item}</p>
+              <p className="nums mt-0.5 text-[1.28rem] font-extrabold text-mint">
+                {day.label}요일 {time}
+              </p>
+              <p className="mt-2.5 text-[0.76rem] leading-relaxed text-snow/70">{SITE.lunchNote}</p>
+              <a href={smsHref} className="hx-send mt-3.5">
+                이 시간으로 문자 예약 문의
+              </a>
+            </div>
           </div>
         </div>
       </div>

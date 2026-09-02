@@ -638,6 +638,8 @@ function Hero() {
         className="hx-photo relative h-[190px] lg:absolute lg:inset-y-0 lg:h-auto lg:left-[46%] lg:right-[-6%]"
         style={{ backgroundImage: `url(${SITE.heroImage})` }}
       >
+        {/* 헤더 뒤 좁은 띠 — 사진이 내비 글자 뒤까지 올라와 대비가 떨어지는 것을 막습니다 */}
+        <div className="hx-topwash hidden lg:block absolute inset-x-0 top-0 h-[168px]" />
         <div className="hidden lg:block absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#FBFAF7] to-transparent" />
       </div>
 

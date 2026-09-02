@@ -42,6 +42,25 @@ const SITE = {
   heroPhoto: heroImg,
   heroPhotoNote: '오전 8시, 화곡동 현장',
 
+  // 히어로 예약 시연 — 평수 목록과 금액은 아래 quote 의 요율을 그대로 씁니다
+  heroDemo: {
+    title: '예약 견적 미리보기',
+    badge: '데모',
+    sizeLabel: '평수',
+    distLabel: '이사 거리',
+    dateLabel: '희망일',
+    // 여기에 예약 가능일 교체 (full: true 면 마감으로 표시)
+    dates: [
+      { day: '3월 6일', dow: '금', full: false },
+      { day: '3월 7일', dow: '토', full: true },
+      { day: '3월 8일', dow: '일', full: false },
+    ],
+    // 부가 서비스의 '이사와 함께 예약 시 10% 할인' 과 같은 값입니다
+    bundleDiscount: 0.1,
+    stamp: '방문견적 시 확정',
+    note: '시연용 화면입니다. 확정 금액은 무료 방문 견적에서 드립니다.',
+  },
+
   // 원장(元帳) 한 줄 — 신뢰 지표
   ledger: [
     { k: '작업 누적', v: '4,800건+' },
@@ -307,49 +326,230 @@ function Header({ active }: { active: string }) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// 히어로 — 타이포 중심 + 원장 한 줄 + 테이프로 붙인 현장 사진
+// 히어로 — 예약 견적 전표 시연
+//   마크업의 기본 상태가 곧 완성 화면입니다. (기본형은 이 상태 그대로 멈춰 있습니다)
+//   랜딩형에서만 선택 칩이 저절로 바뀌며 전표 금액이 다시 계산됩니다.
 // ══════════════════════════════════════════════════════════════════════════════
+
+/* 자동 시연 순서 — 마감(1번 날짜)은 고르지 않습니다 */
+const HERO_STEPS = [
+  { g: 'size', v: 3 }, { g: 'dist', v: 2 }, { g: 'date', v: 2 },
+  { g: 'size', v: 1 }, { g: 'dist', v: 0 }, { g: 'date', v: 0 },
+  { g: 'size', v: 4 }, { g: 'dist', v: 1 }, { g: 'date', v: 2 },
+  { g: 'size', v: 2 }, { g: 'dist', v: 0 }, { g: 'date', v: 0 },
+] as const
+
+function HeroPick({
+  label,
+  items,
+  active,
+  onPick,
+}: {
+  label: string
+  items: { main: string; sub?: string; off?: boolean }[]
+  active: number
+  onPick: (i: number) => void
+}) {
+  return (
+    <div className="hx-row">
+      <span className="hx-row-k">{label}</span>
+      <div className="hx-chips">
+        {items.map((it, i) => (
+          <button
+            key={it.main}
+            type="button"
+            aria-pressed={i === active}
+            disabled={it.off}
+            onClick={() => onPick(i)}
+            className={`hx-chip ${i === active ? 'is-on' : ''} ${it.off ? 'is-off' : ''}`}
+          >
+            {it.main}
+            {it.sub && <em className="hx-chip-sub">{it.sub}</em>}
+          </button>
+        ))}
+      </div>
+    </div>
+  )
+}
 
 function Hero() {
   const { ref, inView } = useInView(0.05)
+  const D = SITE.heroDemo
+  const MOVE = SITE.quote.types[1]   // 포장이사
+  const CLEAN = SITE.quote.types[2]  // 입주 · 이사청소
+
   // {마커} 구간 파싱
   const lines = SITE.heroTitle.split('\n').map((line) => {
     const m = line.match(/^(.*)\{(.+)\}(.*)$/)
     return m ? { pre: m[1], mark: m[2], post: m[3] } : { pre: line, mark: '', post: '' }
   })
+
+  /* 처음부터 골라져 있는 상태 — 기본형 화면이 이 상태입니다 */
+  const [sizeIdx, setSizeIdx] = useState(2)
+  const [distIdx, setDistIdx] = useState(0)
+  const [dateIdx, setDateIdx] = useState(0)
+  const [touched, setTouched] = useState(false)
+
+  /* 랜딩형에서만 자동으로 다음 조건을 골라 봅니다. 손대면 멈춥니다 */
+  useEffect(() => {
+    if (!MOTION || touched) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    let i = 0
+    let iv = 0
+    const step = () => {
+      const s = HERO_STEPS[i % HERO_STEPS.length]
+      i += 1
+      if (s.g === 'size') setSizeIdx(s.v)
+      else if (s.g === 'dist') setDistIdx(s.v)
+      else setDateIdx(s.v)
+    }
+    const t0 = window.setTimeout(() => {
+      step()
+      iv = window.setInterval(step, 1700)
+    }, 3000)
+    return () => {
+      window.clearTimeout(t0)
+      window.clearInterval(iv)
+    }
+  }, [touched])
+
+  const pick = (g: string) => (i: number) => {
+    setTouched(true)
+    if (g === 'size') setSizeIdx(i)
+    else if (g === 'dist') setDistIdx(i)
+    else setDateIdx(i)
+  }
+
+  const size = SITE.quote.sizes[sizeIdx]
+  const dist = SITE.quote.distances[distIdx]
+  const date = D.dates[dateIdx]
+
+  /* 견적서 — 줄마다 반올림한 값을 그대로 더해 합계가 맞아떨어집니다 */
+  const bill = useMemo(() => {
+    const add = dist.add
+    const moveLo = Math.round(MOVE.base[0] * size.moveFactor)
+    const moveHi = Math.round(MOVE.base[1] * size.moveFactor)
+    const cleanLo = Math.round(CLEAN.perPy[0] * size.py)
+    const cleanHi = Math.round(CLEAN.perPy[1] * size.py)
+    const discLo = Math.round(cleanLo * D.bundleDiscount)
+    const discHi = Math.round(cleanHi * D.bundleDiscount)
+    const won = (a: number, b: number) => `${fmt(a)}만 ~ ${fmt(b)}만원`
+    /* 줄 수는 늘 넷 — 조건이 바뀌어도 전표 높이가 출렁이지 않습니다 */
+    return {
+      rows: [
+        { n: `${MOVE.label} · ${size.label}`, v: won(moveLo, moveHi) },
+        { n: `${CLEAN.label} · ${size.py}평 기준`, v: won(cleanLo, cleanHi) },
+        { n: `이사 거리 · ${dist.label}`, v: add ? `+ ${fmt(add)}만원` : '거리 할증 없음' },
+        { n: `청소 동시 예약 ${Math.round(D.bundleDiscount * 100)}% 할인`, v: won(-discLo, -discHi) },
+      ],
+      lo: moveLo + cleanLo + add - discLo,
+      hi: moveHi + cleanHi + add - discHi,
+    }
+  }, [sizeIdx, distIdx])
+
   return (
-    <section ref={ref} className="pt-28 md:pt-36 pb-0">
-      <div className="max-w-6xl mx-auto px-5 md:px-6">
-        <p className={`anim-fade-up ${inView ? 'in-view' : ''} text-[0.9375rem] font-bold text-ink-60 mb-5`}>
-          {SITE.heroKicker} · {SITE.since}년부터
-        </p>
-        <h1 className={`anim-fade-up d80 ${inView ? 'in-view' : ''} f-display text-[3rem] md:text-[5.2rem] leading-[1.08] mb-7`}>
-          {lines.map((l, i) => (
-            <span key={i} className="block">
-              {l.pre}
-              {l.mark && <span className="mark">{l.mark}</span>}
-              {l.post}
-            </span>
-          ))}
-        </h1>
-        <p className={`anim-fade-up d160 ${inView ? 'in-view' : ''} whitespace-pre-line text-[1rem] md:text-[1.0625rem] text-ink-60 leading-[1.85] mb-9`}>
-          {SITE.heroSub}
-        </p>
-        <div className={`anim-fade-up d240 ${inView ? 'in-view' : ''} flex flex-wrap items-center gap-x-6 gap-y-4 mb-14`}>
-          <button
-            onClick={() => document.querySelector('#quote')?.scrollIntoView({ behavior: MOTION ? 'smooth' : 'auto' })}
-            className="px-7 py-4 bg-ink text-paper text-[1.0625rem] font-bold hover:bg-orange hover:text-ink"
-            style={{ transition: MOTION ? 'background-color 0.2s, color 0.2s' : 'none' }}
-          >
-            30초 간편 견적 →
-          </button>
-          <a href={`tel:${SITE.phone}`} className="nums text-[1.35rem] font-extrabold underline decoration-orange decoration-[4px] underline-offset-[7px]">
-            {SITE.phone}
-          </a>
+    <section ref={ref} className="hx-hero">
+      <div className="hx-top">
+        <div className="hx-wrap max-w-6xl mx-auto px-5 md:px-6">
+          <div className="hx-copy">
+            <p className={`anim-fade-up ${inView ? 'in-view' : ''} text-[0.9375rem] font-bold text-ink-60 mb-4`}>
+              {SITE.heroKicker} · {SITE.since}년부터
+            </p>
+            <h1 className={`anim-fade-up d80 ${inView ? 'in-view' : ''} f-display text-[3rem] md:text-[3.8rem] leading-[1.08] mb-6`}>
+              {lines.map((l, i) => (
+                <span key={i} className="block">
+                  {l.pre}
+                  {l.mark && <span className="mark">{l.mark}</span>}
+                  {l.post}
+                </span>
+              ))}
+            </h1>
+            <p className={`anim-fade-up d160 ${inView ? 'in-view' : ''} whitespace-pre-line text-[1rem] md:text-[1.0625rem] text-ink-60 leading-[1.85] mb-8`}>
+              {SITE.heroSub}
+            </p>
+            <div className={`anim-fade-up d240 ${inView ? 'in-view' : ''} flex flex-wrap items-center gap-x-6 gap-y-4`}>
+              <button
+                onClick={() => document.querySelector('#quote')?.scrollIntoView({ behavior: MOTION ? 'smooth' : 'auto' })}
+                className="px-7 py-4 bg-ink text-paper text-[1.0625rem] font-bold hover:bg-orange hover:text-ink"
+                style={{ transition: MOTION ? 'background-color 0.2s, color 0.2s' : 'none' }}
+              >
+                30초 간편 견적 →
+              </button>
+              <a
+                href={`tel:${SITE.phone}`}
+                className="hx-cta-tel nums text-[1.35rem] font-extrabold underline decoration-orange decoration-[4px] underline-offset-[7px]"
+              >
+                {SITE.phone}
+              </a>
+            </div>
+          </div>
         </div>
 
-        {/* 원장 한 줄 */}
-        <div className={`anim-fade-up d320 ${inView ? 'in-view' : ''} border-y-2 border-rule`}>
+        {/* 예약 전표 + 현장 사진 — PC 에서는 오른쪽 화면 밖으로 흘러 나갑니다 */}
+        <div className={`hx-stage anim-fade-up d320 ${inView ? 'in-view' : ''}`}>
+          <div className="hx-photo-wrap">
+            <img className="hx-photo" src={SITE.heroPhoto} alt="이사 작업 현장" />
+            <p className="hx-photo-cap f-pen">{SITE.heroPhotoNote}</p>
+          </div>
+
+          <div className="hx-slip">
+            <span className="tape" style={{ top: -13, left: 24, transform: 'rotate(-4deg)' }} aria-hidden="true" />
+
+            <div className="hx-slip-head">
+              <p className="f-display text-[1.15rem] leading-none">{D.title}</p>
+              <span className="hx-tag">{D.badge}</span>
+            </div>
+
+            <HeroPick
+              label={D.sizeLabel}
+              items={SITE.quote.sizes.map((s) => ({ main: s.label }))}
+              active={sizeIdx}
+              onPick={pick('size')}
+            />
+            <HeroPick
+              label={D.distLabel}
+              items={SITE.quote.distances.map((d) => ({ main: d.label }))}
+              active={distIdx}
+              onPick={pick('dist')}
+            />
+            <HeroPick
+              label={D.dateLabel}
+              items={D.dates.map((d) => ({ main: d.day, sub: d.full ? '마감' : d.dow, off: d.full }))}
+              active={dateIdx}
+              onPick={pick('date')}
+            />
+
+            <hr className="cutline my-4" />
+
+            <div>
+              {bill.rows.map((r) => (
+                <div key={r.n} className="hx-bill-r">
+                  <span className="hx-bill-n">{r.n}</span>
+                  <span className="hx-bill-v nums">{r.v}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="hx-total">
+              <div>
+                <p className="hx-total-k">
+                  예상 합계 · {date.day}({date.dow}) 작업
+                </p>
+                <p className="hx-total-v f-display nums">
+                  {fmt(bill.lo)}만 ~ {fmt(bill.hi)}만원
+                </p>
+              </div>
+              <span className="hx-stamp">{D.stamp}</span>
+            </div>
+
+            <p className="hx-note f-pen">{D.note}</p>
+          </div>
+        </div>
+      </div>
+
+      {/* 원장 한 줄 */}
+      <div className="hx-wrap max-w-6xl mx-auto px-5 md:px-6">
+        <div className={`anim-fade-up d400 ${inView ? 'in-view' : ''} hx-ledger border-y-2 border-rule`}>
           <dl className="grid grid-cols-2 md:grid-cols-4">
             {SITE.ledger.map((l, i) => (
               <div key={l.k} className={`py-4 px-1 md:px-5 flex items-baseline gap-2.5 ${i > 0 ? 'md:border-l border-dashed border-ink/25' : ''}`}>
@@ -359,20 +559,6 @@ function Hero() {
             ))}
           </dl>
         </div>
-      </div>
-
-      {/* 현장 사진 — 테이프로 붙인 인화지처럼 */}
-      <div className="max-w-6xl mx-auto px-5 md:px-6 mt-12 md:mt-16">
-        <figure className={`anim-fade-up d400 ${inView ? 'in-view' : ''} relative`}>
-          <div className="relative bg-white p-2.5 pb-3 shadow-[0_2px_0_rgba(26,26,24,0.18)]" style={{ transform: 'rotate(-0.4deg)' }}>
-            <span className="tape" style={{ top: -12, left: 36, transform: 'rotate(-8deg)' }} aria-hidden="true" />
-            <span className="tape" style={{ top: -12, right: 52, transform: 'rotate(6deg)' }} aria-hidden="true" />
-            <img src={SITE.heroPhoto} alt="이사 작업 현장" className="w-full h-[300px] md:h-[460px] object-cover" />
-          </div>
-          <figcaption className="f-pen text-[1.35rem] text-ink-60 mt-3 ml-2" style={{ transform: 'rotate(-0.5deg)' }}>
-            {SITE.heroPhotoNote}
-          </figcaption>
-        </figure>
       </div>
     </section>
   )

@@ -130,18 +130,6 @@ function goTo(href: string) {
   document.querySelector(href)?.scrollIntoView({ behavior: MOTION ? 'smooth' : 'auto' })
 }
 
-/** 잔여석 연출 — 시간대에 따라 그럴듯하게 변하는 값 (표시용) */
-function useSeats() {
-  const now = new Date()
-  const h = now.getHours()
-  const seed = h * 7 + now.getDate() * 3
-  const busy = h >= 9 && h <= 22 ? 0.55 : 0.2
-  const free = Math.max(3, Math.round(SITE.board.total.free * (1 - busy) - (seed % 5)))
-  const fixed = Math.max(1, Math.round(SITE.board.total.fixed * (1 - busy * 0.7) - (seed % 3)))
-  const room = Math.max(0, SITE.board.total.room - (h >= 18 ? 3 : 1))
-  return { free, fixed, room }
-}
-
 // ─── 공통 섹션 헤드 ───────────────────────────────────────────────────────────
 
 function Head({ en, title, sub, inView }: { en: string; title: React.ReactNode; sub?: string; inView: boolean }) {
@@ -199,66 +187,62 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 잔여석 전광판이 주인공 ─────────────────────────────────────────
+// ─── 히어로 — 좌석 전경이 화면을 채운다 ──────────────────────────────────────
 
 function Hero() {
-  const seats = useSeats()
-  const rows = [
-    { k: '자유석', free: seats.free, total: SITE.board.total.free },
-    { k: '고정석', free: seats.fixed, total: SITE.board.total.fixed },
-    { k: '스터디룸', free: seats.room, total: SITE.board.total.room },
-  ]
+  const cap = SITE.board.total
+  const tr = (v: string) => ({ transition: MOTION ? v : 'none' })
   return (
-    <section className="pt-[70px]">
-      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20 grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-center">
-        <div className="order-2 lg:order-1">
-          <h1 className={`text-[clamp(2.4rem,6vw,4rem)] font-extrabold tracking-[-0.04em] leading-[1.1] whitespace-pre-line text-white ${MOTION ? 'hero-in' : ''}`}>
+    <section className="hero hx-hero relative isolate w-full overflow-hidden h-[100svh] min-h-[600px] max-h-[880px]">
+      {/* 여기에 좌석 전경 사진 교체 */}
+      <img src={img1} alt="줄지어 선 몰입 좌석과 좌석별 스탠드 조명" className="hx-hero-img absolute inset-0 h-full w-full" />
+      <div className="hx-scrim absolute inset-0" aria-hidden />
+      <div className="hx-lampglow absolute left-[68.5%] top-[68%] hidden h-[320px] w-[440px] -translate-x-1/2 -translate-y-1/2 md:block" aria-hidden />
+
+      <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-start px-5 pt-[100px] pb-12 md:justify-center md:pt-[70px]">
+        <div className="md:max-w-[34rem]">
+          <p className={`f-mono text-[0.72rem] uppercase tracking-[0.22em] text-lamp ${MOTION ? 'hero-in' : ''}`}>
+            {SITE.nameEn} · {SITE.tagline}
+          </p>
+          <h1
+            className={`mt-5 whitespace-pre-line text-[clamp(2.5rem,6.2vw,4.4rem)] font-extrabold leading-[1.05] tracking-[-0.04em] text-white ${MOTION ? 'hero-in' : ''}`}
+          >
             {SITE.slogan}
           </h1>
-          <p className={`mt-6 max-w-md text-[1rem] leading-relaxed text-fogb/70 ${MOTION ? 'hero-in d150' : ''}`}>{SITE.sloganSub}</p>
-          <div className={`mt-9 flex flex-wrap items-center gap-5 ${MOTION ? 'hero-in d300' : ''}`}>
-            <button
-              onClick={() => goTo('#price')}
-              className="px-8 py-4 rounded-lg bg-lamp text-night text-[0.95rem] font-extrabold hover:bg-white"
-              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+          <p className={`mt-5 max-w-md text-[1rem] leading-relaxed text-fogb/90 ${MOTION ? 'hero-in d150' : ''}`}>{SITE.sloganSub}</p>
+          <div className={`mt-8 flex flex-wrap items-center gap-5 ${MOTION ? 'hero-in d300' : ''}`}>
+            <a
+              href="#price"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#price')
+              }}
+              className="hx-cta rounded-lg bg-lamp px-8 py-4 text-[0.95rem] font-extrabold text-night hover:bg-white"
+              style={tr('background-color 0.2s')}
             >
               요금 보기
-            </button>
-            <button
-              onClick={() => goTo('#seats')}
-              className="text-[0.95rem] font-bold text-fogb border-b-2 border-fogb/50 pb-0.5 hover:text-lamp hover:border-lamp"
-              style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
+            </a>
+            <a
+              href="#seats"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#seats')
+              }}
+              className="border-b-2 border-fogb/60 pb-0.5 text-[0.95rem] font-bold text-white hover:border-lamp hover:text-lamp"
+              style={tr('color 0.2s, border-color 0.2s')}
             >
               좌석 둘러보기
-            </button>
+            </a>
           </div>
-        </div>
-        <div className={`order-1 lg:order-2 ${MOTION ? 'hero-in d150' : ''}`}>
-          <div className="rounded-2xl border border-white/12 bg-boardbg p-7 md:p-9 shadow-[0_24px_70px_rgba(0,0,0,0.45)]">
-            <div className="flex items-center justify-between">
-              <p className="f-mono text-[0.72rem] tracking-[0.3em] text-lamp uppercase">Live · Seats Now</p>
-              <span className="inline-flex items-center gap-1.5 text-[0.72rem] font-bold text-fogb/60">
-                <span className={`w-1.5 h-1.5 rounded-full bg-lamp ${MOTION ? 'lamp-glow' : ''}`} />
-                실시간
-              </span>
-            </div>
-            <div className="mt-6 space-y-5">
-              {rows.map((r) => (
-                <div key={r.k}>
-                  <div className="flex items-baseline justify-between">
-                    <span className="text-[0.95rem] font-bold text-fogb">{r.k}</span>
-                    <span className="f-mono text-[1.6rem] font-bold text-white">
-                      <span className="text-lamp">{r.free}</span>
-                      <span className="text-fogb/40 text-[1rem]"> / {r.total}</span>
-                    </span>
-                  </div>
-                  <div className="mt-2 h-1.5 rounded-full bg-white/8 overflow-hidden">
-                    <div className={`h-full rounded-full bg-lamp ${MOTION ? 'bar-fill' : ''}`} style={{ width: `${Math.round((r.free / r.total) * 100)}%` }} />
-                  </div>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 pt-5 border-t border-white/10 text-[0.8rem] text-fogb/50">{SITE.board.note}</p>
+          <div className={`mt-8 max-w-md border-t border-white/25 pt-4 ${MOTION ? 'hero-in d300' : ''}`}>
+            <p className="text-[0.88rem] font-bold text-white">
+              자유석 <span className="f-mono nums text-lamp">{cap.free}</span>석
+              <span className="mx-2 text-white/45">·</span>
+              고정석 <span className="f-mono nums text-lamp">{cap.fixed}</span>석
+              <span className="mx-2 text-white/45">·</span>
+              스터디룸 <span className="f-mono nums text-lamp">{cap.room}</span>룸
+            </p>
+            <p className="mt-1.5 text-[0.83rem] text-fogb">{SITE.board.note}</p>
           </div>
         </div>
       </div>
