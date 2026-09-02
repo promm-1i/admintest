@@ -1,0 +1,176 @@
+/* ─── 폰트: Pretendard — 테라코타 점토 톤 ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 샌드 · 소일 · 테라코타 ─── */
+@theme {
+  --color-sand2: #f7f1e8;
+  --color-kiln: #efe6d8;
+  --color-soil: #3b2c23;
+  --color-terra: #b25b3a;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f7f1e8;
+  color: #3b2c23;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #b25b3a;
+  color: #f7f1e8;
+}
+:focus-visible {
+  outline: 2px solid #b25b3a;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(178, 91, 58, 0.45) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(178, 91, 58, 0.4);
+  border: 3px solid #f7f1e8;
+  border-radius: 99px;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 물레가 돌 듯 부드럽게
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d70 { transition-delay: 70ms; }
+.d80 { transition-delay: 80ms; }
+.d120 { transition-delay: 120ms; }
+.d140 { transition-delay: 140ms; }
+.d160 { transition-delay: 160ms; }
+.d180 { transition-delay: 180ms; }
+.d210 { transition-delay: 210ms; }
+.d240 { transition-delay: 240ms; }
+.d280 { transition-delay: 280ms; }
+.d320 { transition-delay: 320ms; }
+.d350 { transition-delay: 350ms; }
+
+/* 히어로 타일 — 점토를 빚듯 차례로 안착 */
+.hero-in {
+  animation: tileIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 { animation-delay: 150ms; }
+.hero-in.d300 { animation-delay: 300ms; }
+.hero-in.d450 { animation-delay: 450ms; }
+@keyframes tileIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 섹션 헤드 점토 점 — 눌리며 등장 */
+.clay-dot {
+  transform: scale(0);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+.clay-dot.in-view,
+.in-view .clay-dot,
+.anim-fade-up.in-view .clay-dot {
+  transform: scale(1);
+}
+
+/* 클래스 카드 호버 */
+.clay-card {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+}
+.clay-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(59, 44, 35, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .clay-dot {
+    transform: scale(1) !important;
+    transition: none !important;
+  }
+  .clay-card {
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .clay-dot {
+  transform: scale(1) !important;
+}
+[data-motion='off'] .clay-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

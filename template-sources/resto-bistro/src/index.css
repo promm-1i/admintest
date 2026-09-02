@@ -1,0 +1,217 @@
+/* ─── 폰트: Noto Serif KR(제목·메뉴명) + Pretendard(본문) ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@600;900&display=swap');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 아이보리 메뉴판 · 토마토 ─── */
+@theme {
+  --color-ivory:   #faf6ef;
+  --color-ivory-d: #f1ead9;
+  --color-ink:     #241b12;
+  --color-ink-55:  #7a6f5f;
+  --color-tomato:  #c7371f;
+  --color-tomato-d:#a52b16;
+  --color-line:    #e7dfd2;
+  --font-sans:     'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #faf6ef;
+  color: #241b12;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #c7371f;
+  color: #faf6ef;
+}
+:focus-visible {
+  outline: 2px solid #c7371f;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(199, 55, 31, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(199, 55, 31, 0.35);
+  border: 3px solid #faf6ef;
+  border-radius: 99px;
+}
+
+/* 메뉴판 세리프 */
+.f-serif {
+  font-family: 'Noto Serif KR', Georgia, serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.f-serif-md {
+  font-family: 'Noto Serif KR', Georgia, serif;
+  font-weight: 600;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── 메뉴판 부품 ─── */
+
+/* 점선 리더 — 메뉴명 ····· 가격 */
+.leader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+}
+.leader::after {
+  content: '';
+  order: 2;
+  flex: 1;
+  border-bottom: 2px dotted rgba(36, 27, 18, 0.25);
+  transform: translateY(-0.3em);
+}
+.leader > .leader-price {
+  order: 3;
+}
+
+/* 오늘의 추천 별표 */
+.star::before {
+  content: '★ ';
+  color: #c7371f;
+  font-size: 0.8em;
+}
+
+/* 가로 스크롤 */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #e7dfd2 transparent;
+}
+.scroll-x::-webkit-scrollbar {
+  height: 4px;
+}
+.scroll-x::-webkit-scrollbar-thumb {
+  background: #e7dfd2;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+
+/* 메뉴 리스트 — 탭 전환 시 재등장 */
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.menu-in {
+  animation: menu-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 사진 절제 확대 */
+.ph {
+  overflow: hidden;
+}
+.ph img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ph:hover img {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .menu-in {
+    animation: none !important;
+  }
+  .ph img {
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .menu-in {
+  opacity: 1 !important;
+}
+[data-motion='off'] .ph:hover img {
+  transform: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더 앵커 보정 */
+section[id] {
+  scroll-margin-top: 76px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

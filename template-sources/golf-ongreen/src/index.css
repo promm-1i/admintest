@@ -1,0 +1,198 @@
+/* ─── 폰트: Pretendard — 시뮬레이터 다크 톤 ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 터프 차콜 · 트레이서 그린 ─── */
+@theme {
+  --color-turf: #171a17;
+  --color-rough: #1f231f;
+  --color-smoke: #ccd2cc;
+  --color-tracer: #8cf24c;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #171a17;
+  color: #ccd2cc;
+  letter-spacing: -0.014em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #8cf24c;
+  color: #171a17;
+}
+:focus-visible {
+  outline: 2px solid #8cf24c;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(140, 242, 76, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(140, 242, 76, 0.35);
+  border: 3px solid #171a17;
+  border-radius: 99px;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 샷처럼 시원하게
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 { transition-delay: 80ms; }
+.d120 { transition-delay: 120ms; }
+.d160 { transition-delay: 160ms; }
+.d180 { transition-delay: 180ms; }
+.d240 { transition-delay: 240ms; }
+.d280 { transition-delay: 280ms; }
+
+.hero-in {
+  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 { animation-delay: 150ms; }
+.hero-in.d300 { animation-delay: 300ms; }
+.hero-in.d450 { animation-delay: 450ms; }
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 트레이서 아크 — 샷 궤적이 그려짐 */
+.tracer-path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: tracerDraw 2s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+  filter: drop-shadow(0 0 6px rgba(140, 242, 76, 0.6));
+}
+@keyframes tracerDraw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.tracer-ball {
+  opacity: 0;
+  animation: ballLand 0.5s ease-out 2.3s forwards;
+  filter: drop-shadow(0 0 8px rgba(140, 242, 76, 0.8));
+}
+@keyframes ballLand {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    transform-origin: center;
+    transform-box: fill-box;
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 섹션 헤드 대시 */
+.tracer-dash {
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+.in-view .tracer-dash,
+.anim-fade-up.in-view .tracer-dash {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .tracer-path {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+  .tracer-ball {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .tracer-dash {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .tracer-path {
+  stroke-dashoffset: 0 !important;
+}
+[data-motion='off'] .tracer-ball {
+  opacity: 1 !important;
+}
+[data-motion='off'] .tracer-dash {
+  transform: scaleX(1) !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

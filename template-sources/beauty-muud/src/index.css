@@ -1,0 +1,229 @@
+/* ─── 폰트: Pretendard + Cormorant Garamond(에디토리얼 이탤릭) ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,500;1,600&display=swap');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 포슬린 · 에스프레소 · 로즈브라운 ─── */
+@theme {
+  --color-porcelain: #faf6f2;
+  --color-blush: #f2e9e1;
+  --color-ink: #1f1815;
+  --color-rose: #b7563f;
+  --color-rose-l: #dc9b82;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #faf6f2;
+  color: #1f1815;
+  letter-spacing: -0.012em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #b7563f;
+  color: #faf6f2;
+}
+:focus-visible {
+  outline: 2px solid #b7563f;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(183, 86, 63, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(183, 86, 63, 0.35);
+  border: 3px solid #faf6f2;
+  border-radius: 99px;
+}
+
+/* 에디토리얼 세리프 — 이탤릭 영문 포인트 */
+.f-serif {
+  font-family: 'Cormorant Garamond', 'Pretendard', serif;
+  font-weight: 600;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 가격표 점선 리더 */
+.leader {
+  border-bottom: 2px dotted rgba(31, 24, 21, 0.22);
+  transform: translateY(-4px);
+  min-width: 24px;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d120 {
+  transition-delay: 120ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d280 {
+  transition-delay: 280ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+.d360 {
+  transition-delay: 360ms;
+}
+
+/* 히어로 등장 — 로드 시 1회 */
+.hero-in {
+  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d120 {
+  animation-delay: 120ms;
+}
+.hero-in.d240 {
+  animation-delay: 240ms;
+}
+.hero-in.d360 {
+  animation-delay: 360ms;
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 히어로 사진 — 커튼 리빌 */
+.hero-photo {
+  animation: photoIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+}
+@keyframes photoIn {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+/* 섹션 헤드 룰 — 좌→우 드로잉 */
+.ed-rule {
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.in-view .ed-rule,
+.anim-fade-up.in-view .ed-rule {
+  transform: scaleX(1);
+}
+
+/* 메뉴 탭 전환 */
+.menu-in {
+  animation: menuIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in,
+  .hero-photo,
+  .menu-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    clip-path: none !important;
+  }
+  .ed-rule {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in,
+[data-motion='off'] .hero-photo,
+[data-motion='off'] .menu-in {
+  opacity: 1 !important;
+  transform: none !important;
+  clip-path: none !important;
+}
+[data-motion='off'] .ed-rule {
+  transform: scaleX(1) !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더 앵커 보정 */
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

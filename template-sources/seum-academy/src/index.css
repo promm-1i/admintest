@@ -1,0 +1,256 @@
+/* ─── 폰트: Pretendard 단일 — 굵기 400/600/800 과 크기 대비만으로 위계를 만듭니다 ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 흰 종이 · 잉크 · 라임 형광펜 ─── */
+@theme {
+  --color-paper:  #ffffff;
+  --color-paper2: #f6f6f4;
+  --color-ink:    #141412;
+  --color-ink-55: #6d6b66;
+  --color-lime:   #d9f548;
+  --color-lime-d: #c3e32c;
+  --color-line:   #e7e6e2;
+  --font-sans:    'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #ffffff;
+  color: #141412;
+  letter-spacing: -0.012em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #d9f548;
+  color: #141412;
+}
+:focus-visible {
+  outline: 2px solid #141412;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(20, 20, 18, 0.35) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(20, 20, 18, 0.3);
+  border: 3px solid #ffffff;
+  border-radius: 99px;
+}
+
+/* 디스플레이 — 꽉 조인 잉크 타이포 */
+.f-display {
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.06;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── 형광펜 ───
+   글자 뒤에 라임 띠. 화면에 들어오면 왼쪽부터 칠해집니다. */
+.hl {
+  background-image: linear-gradient(#d9f548, #d9f548);
+  background-repeat: no-repeat;
+  background-position: 0 62%;
+  background-size: 0% 45%;
+  transition: background-size 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+  padding: 0 0.06em;
+  margin: 0 -0.06em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+.in-view .hl,
+.hl.in-view {
+  background-size: 100% 45%;
+}
+
+/* 작은 형광 마커 (호버용 밑줄) */
+.mark-row {
+  background-image: linear-gradient(#d9f548, #d9f548);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 3px;
+  transition: background-size 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.mark-row:hover {
+  background-size: 100% 3px;
+}
+
+/* 폼 밑줄 입력 (다크 상담 섹션) */
+.field-dark {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.35);
+  padding: 0.65rem 0.1rem;
+  font-size: 1rem;
+  color: #ffffff;
+  border-radius: 0;
+}
+.field-dark::placeholder {
+  color: rgba(255, 255, 255, 0.35);
+}
+.field-dark:focus {
+  outline: none;
+  border-bottom-color: #d9f548;
+}
+select.field-dark {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.2rem center;
+  padding-right: 1.6rem;
+}
+select.field-dark option {
+  color: #141412;
+}
+
+/* 가로 스크롤 (시간표 · 수강료) */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #e7e6e2 transparent;
+}
+.scroll-x::-webkit-scrollbar {
+  height: 4px;
+}
+.scroll-x::-webkit-scrollbar-thumb {
+  background: #e7e6e2;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 모든 애니메이션 클래스 모음
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+.d400 {
+  transition-delay: 400ms;
+}
+
+/* 탭 전환 — key 교체로 재실행 */
+@keyframes tab-fadein {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.tab-fadein {
+  animation: tab-fadein 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 사진 호버 — 절제된 확대 */
+.ph {
+  overflow: hidden;
+}
+.ph img {
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ph:hover img {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .hl {
+    background-size: 100% 45% !important;
+    transition: none !important;
+  }
+  .tab-fadein {
+    animation: none !important;
+  }
+  .ph img,
+  .mark-row {
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic) — 움직임 전부 차단
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .hl {
+  background-size: 100% 45% !important;
+}
+[data-motion='off'] .tab-fadein {
+  opacity: 1 !important;
+}
+[data-motion='off'] .ph:hover img {
+  transform: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더에 가려지지 않도록 앵커 이동 위치 보정 */
+section[id] {
+  scroll-margin-top: 76px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

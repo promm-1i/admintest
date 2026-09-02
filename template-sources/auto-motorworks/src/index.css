@@ -1,0 +1,290 @@
+/* ─── 폰트: Pretendard 단일 — 인더스트리얼 스텐실 톤 ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 콘크리트 · 스틸 · 세이프티 오렌지 ─── */
+@theme {
+  --color-concrete: #f2f0ea;
+  --color-fog: #e7e4dc;
+  --color-steel: #1a1c1e;
+  --color-safety: #ff7a1a;
+  --color-safety-d: #d95900;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f2f0ea;
+  color: #1a1c1e;
+  letter-spacing: -0.015em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #ff7a1a;
+  color: #1a1c1e;
+}
+:focus-visible {
+  outline: 2px solid #d95900;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 89, 0, 0.45) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(217, 89, 0, 0.4);
+  border: 3px solid #f2f0ea;
+  border-radius: 99px;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 해저드 스트라이프 (오렌지-블랙 사선) */
+.hazard-band {
+  background: repeating-linear-gradient(-45deg, #1a1c1e 0 14px, #ff7a1a 14px 28px);
+}
+.hazard-chip {
+  width: 26px;
+  height: 8px;
+  background: repeating-linear-gradient(-45deg, #1a1c1e 0 5px, #ff7a1a 5px 10px);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 공구처럼 단단하게, 짧고 정확하게
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d120 {
+  transition-delay: 120ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d180 {
+  transition-delay: 180ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d280 {
+  transition-delay: 280ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+
+/* 히어로 등장 — 좌 패널 텍스트 */
+.hero-in {
+  animation: heroIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 {
+  animation-delay: 150ms;
+}
+.hero-in.d300 {
+  animation-delay: 300ms;
+}
+.hero-in.d450 {
+  animation-delay: 450ms;
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateX(-22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 히어로 사진 — 우측에서 밀려 들어옴 */
+.hero-photo {
+  animation: photoSlide 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
+@keyframes photoSlide {
+  from {
+    opacity: 0;
+    transform: translateX(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* 마퀴 밴드 — 왼쪽으로 끝없이 흐름 */
+.marquee {
+  display: inline-flex;
+  animation: marqueeMove 26s linear infinite;
+}
+@keyframes marqueeMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* 해저드 스트라이프 — 이발소 기둥처럼 천천히 회전 */
+.hazard-band {
+  background-size: 40px 100%;
+  animation: hazardMove 1.6s linear infinite;
+}
+@keyframes hazardMove {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 40px 0;
+  }
+}
+
+/* 공임표 행 — 섹션 진입 시 위에서부터 차례로 */
+.anim-fade-up.in-view tbody tr {
+  opacity: 0;
+  animation: laborRow 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.anim-fade-up.in-view tbody tr:nth-child(1) { animation-delay: 100ms; }
+.anim-fade-up.in-view tbody tr:nth-child(2) { animation-delay: 170ms; }
+.anim-fade-up.in-view tbody tr:nth-child(3) { animation-delay: 240ms; }
+.anim-fade-up.in-view tbody tr:nth-child(4) { animation-delay: 310ms; }
+.anim-fade-up.in-view tbody tr:nth-child(5) { animation-delay: 380ms; }
+.anim-fade-up.in-view tbody tr:nth-child(6) { animation-delay: 450ms; }
+.anim-fade-up.in-view tbody tr:nth-child(7) { animation-delay: 520ms; }
+.anim-fade-up.in-view tbody tr:nth-child(8) { animation-delay: 590ms; }
+@keyframes laborRow {
+  from {
+    opacity: 0;
+    transform: translateX(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* BEST 오일 카드 — 진입 시 살짝 팝 */
+.oil-hot.in-view {
+  animation: oilPop 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+@keyframes oilPop {
+  0% {
+    transform: scale(0.97);
+  }
+  60% {
+    transform: scale(1.015);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* 정비 카드 호버 — 오렌지 프레임 */
+.svc {
+  transition: border-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.svc:hover {
+  border-color: #ff7a1a;
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in,
+  .hero-photo {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .svc {
+    transition: none !important;
+  }
+  .marquee,
+  .hazard-band,
+  .oil-hot.in-view {
+    animation: none !important;
+  }
+  .anim-fade-up.in-view tbody tr {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in,
+[data-motion='off'] .hero-photo {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .marquee,
+[data-motion='off'] .hazard-band,
+[data-motion='off'] .oil-hot {
+  animation: none !important;
+}
+[data-motion='off'] tbody tr {
+  animation: none !important;
+  opacity: 1 !important;
+}
+[data-motion='off'] .svc:hover {
+  border-color: rgba(26, 28, 30, 0.12) !important;
+  transform: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더 앵커 보정 */
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

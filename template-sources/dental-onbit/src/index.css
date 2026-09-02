@@ -1,0 +1,242 @@
+/* ─── 폰트: Pretendard 단일 — 정밀 클리닉 톤 ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 스노우 · 미드나이트 네이비 · 민트 ─── */
+@theme {
+  --color-snow: #fbfdfe;
+  --color-ice: #eaf3f5;
+  --color-navy: #102a43;
+  --color-mint: #7fe3d2;
+  --color-mint-d: #17a08c;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #fbfdfe;
+  color: #102a43;
+  letter-spacing: -0.014em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #17a08c;
+  color: #fbfdfe;
+}
+:focus-visible {
+  outline: 2px solid #17a08c;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(23, 160, 140, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(23, 160, 140, 0.35);
+  border: 3px solid #fbfdfe;
+  border-radius: 99px;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 섹션 헤드 십자(+) 룰 — 치과다운 정밀 마크 */
+.cross-rule {
+  position: relative;
+  width: 34px;
+  height: 2px;
+}
+.cross-rule .cross-h {
+  position: absolute;
+  inset: 0;
+  background: #17a08c;
+  transform-origin: left;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d120 {
+  transition-delay: 120ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d180 {
+  transition-delay: 180ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d280 {
+  transition-delay: 280ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+
+/* 히어로 등장 */
+.hero-in {
+  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 {
+  animation-delay: 150ms;
+}
+.hero-in.d300 {
+  animation-delay: 300ms;
+}
+.hero-in.d450 {
+  animation-delay: 450ms;
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-photo {
+  animation: photoIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+@keyframes photoIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 십자 룰 드로잉 */
+.cross-rule .cross-h {
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+}
+.in-view .cross-rule .cross-h,
+.anim-fade-up.in-view .cross-h {
+  transform: scaleX(1);
+}
+
+/* 임플란트 타임라인 세로선 — 위에서 아래로 */
+.tl-line {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.tl-line.in-view {
+  transform: scaleY(1);
+}
+
+/* 진료 카드 호버 */
+.care {
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+.care:hover {
+  border-color: rgba(23, 160, 140, 0.5);
+  box-shadow: 0 10px 30px rgba(16, 42, 67, 0.08);
+  transform: translateY(-3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in,
+  .hero-photo {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .cross-rule .cross-h {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+  .tl-line {
+    transform: scaleY(1) !important;
+    transition: none !important;
+  }
+  .care {
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in,
+[data-motion='off'] .hero-photo {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .cross-rule .cross-h {
+  transform: scaleX(1) !important;
+}
+[data-motion='off'] .tl-line {
+  transform: scaleY(1) !important;
+}
+[data-motion='off'] .care:hover {
+  border-color: rgba(16, 42, 67, 0.1) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더 앵커 보정 */
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

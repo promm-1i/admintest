@@ -1,0 +1,189 @@
+/* ─── 폰트: Pretendard + IBM Plex Mono(필름 데이터 톤) ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;700&display=swap');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 카본 블랙 · 실버 · 플래시 옐로우 ─── */
+@theme {
+  --color-carbon: #101012;
+  --color-dark: #17181b;
+  --color-silver: #c9cbd1;
+  --color-white: #f5f5f4;
+  --color-flash: #e8c547;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #101012;
+  color: #c9cbd1;
+  letter-spacing: -0.012em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #e8c547;
+  color: #101012;
+}
+:focus-visible {
+  outline: 2px solid #e8c547;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(232, 197, 71, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(232, 197, 71, 0.35);
+  border: 3px solid #101012;
+  border-radius: 99px;
+}
+
+/* 필름 데이터 모노 */
+.f-mono {
+  font-family: 'IBM Plex Mono', 'Pretendard', monospace;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 암실에서 인화지가 떠오르듯
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d120 {
+  transition-delay: 120ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d280 {
+  transition-delay: 280ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+
+/* 히어로 등장 */
+.hero-in {
+  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 {
+  animation-delay: 150ms;
+}
+.hero-in.d300 {
+  animation-delay: 300ms;
+}
+.hero-in.d450 {
+  animation-delay: 450ms;
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 히어로 사진 — 인화지 현상 (그레이스케일 → 컬러) */
+.hero-photo {
+  animation: develop 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+@keyframes develop {
+  from {
+    opacity: 0;
+    filter: grayscale(100%) brightness(1.5) contrast(0.7);
+  }
+  40% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    filter: grayscale(0%) brightness(1) contrast(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in,
+  .hero-photo {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in,
+[data-motion='off'] .hero-photo {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+[data-motion='off'] img {
+  filter: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더 앵커 보정 */
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

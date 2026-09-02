@@ -1,0 +1,213 @@
+/* ─── 폰트: Pretendard + Song Myung(보태니컬 디스플레이) ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=Song+Myung&display=swap');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 크림 · 플럼 · 스템 그린 ─── */
+@theme {
+  --color-cream: #fbf7f2;
+  --color-blossom: #f5ebe6;
+  --color-plum: #582b40;
+  --color-stem: #5a7a52;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #fbf7f2;
+  color: #582b40;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #582b40;
+  color: #fbf7f2;
+}
+:focus-visible {
+  outline: 2px solid #5a7a52;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(90, 122, 82, 0.45) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(90, 122, 82, 0.4);
+  border: 3px solid #fbf7f2;
+  border-radius: 99px;
+}
+
+/* 보태니컬 디스플레이 */
+.f-disp {
+  font-family: 'Song Myung', 'Pretendard', serif;
+  font-weight: 400;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 꽃이 피듯 부드럽게
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d120 {
+  transition-delay: 120ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d170 {
+  transition-delay: 170ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d260 {
+  transition-delay: 260ms;
+}
+.d280 {
+  transition-delay: 280ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+
+/* 히어로 등장 */
+.hero-in {
+  animation: heroIn 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 {
+  animation-delay: 150ms;
+}
+.hero-in.d300 {
+  animation-delay: 300ms;
+}
+.hero-in.d450 {
+  animation-delay: 450ms;
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* 상품 아치 — 아래에서 피어나는 블룸 리빌 */
+.bloom {
+  clip-path: inset(72% 12% 0 12% round 120px 120px 16px 16px);
+  transition: clip-path 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+.anim-fade-up.in-view .bloom,
+.in-view .bloom {
+  clip-path: inset(0 0 0 0 round 0 0 0 0);
+}
+
+/* ✿ 부유 — 아주 느린 상하 흔들림 */
+.float-slow {
+  display: inline-block;
+  animation: floatSlow 4.5s ease-in-out infinite;
+}
+@keyframes floatSlow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    filter: none !important;
+  }
+  .bloom {
+    clip-path: none !important;
+    transition: none !important;
+  }
+  .float-slow {
+    animation: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in {
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+[data-motion='off'] .bloom {
+  clip-path: none !important;
+}
+[data-motion='off'] .float-slow {
+  animation: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더 앵커 보정 */
+section[id],
+div[id='shop'] {
+  scroll-margin-top: 72px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

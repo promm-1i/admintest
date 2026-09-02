@@ -1,0 +1,180 @@
+/* ─── 폰트: Pretendard + EB Garamond(판례집 라틴) ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,500;1,500;1,600&display=swap');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 크림 · 잉크그린 · 파인 ─── */
+@theme {
+  --color-cream: #f9f7f1;
+  --color-mistg: #efece3;
+  --color-inkg: #1f2a22;
+  --color-pine: #1e4634;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f9f7f1;
+  color: #1f2a22;
+  letter-spacing: -0.012em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #1e4634;
+  color: #f9f7f1;
+}
+:focus-visible {
+  outline: 2px solid #1e4634;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(30, 70, 52, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(30, 70, 52, 0.35);
+  border: 3px solid #f9f7f1;
+  border-radius: 99px;
+}
+
+.f-latin {
+  font-family: 'EB Garamond', 'Pretendard', serif;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 서면처럼 절제되게
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d70 { transition-delay: 70ms; }
+.d80 { transition-delay: 80ms; }
+.d120 { transition-delay: 120ms; }
+.d140 { transition-delay: 140ms; }
+.d160 { transition-delay: 160ms; }
+.d190 { transition-delay: 190ms; }
+.d200 { transition-delay: 200ms; }
+.d210 { transition-delay: 210ms; }
+.d240 { transition-delay: 240ms; }
+.d280 { transition-delay: 280ms; }
+.d300 { transition-delay: 300ms; }
+.d320 { transition-delay: 320ms; }
+.d350 { transition-delay: 350ms; }
+
+/* 히어로 등장 */
+.hero-in {
+  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 { animation-delay: 150ms; }
+.hero-in.d300 { animation-delay: 300ms; }
+.hero-in.d450 { animation-delay: 450ms; }
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 진행 절차 세로선 — 위에서 아래로 */
+.vline {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.vline.in-view {
+  transform: scaleY(1);
+}
+
+/* 수행 분야 행 — 호버 시 로마숫자 · 제목 파인 강조 */
+.field {
+  transition: background-color 0.25s ease;
+}
+.field:hover {
+  background-color: rgba(30, 70, 52, 0.045);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .vline {
+    transform: scaleY(1) !important;
+    transition: none !important;
+  }
+  .field {
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .vline {
+  transform: scaleY(1) !important;
+}
+[data-motion='off'] .field:hover {
+  background-color: transparent !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

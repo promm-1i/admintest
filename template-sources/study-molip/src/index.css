@@ -1,0 +1,192 @@
+/* ─── 폰트: Pretendard + DM Mono(전광판 숫자) ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 미드나이트 · 램프 옐로 ─── */
+@theme {
+  --color-night: #14182a;
+  --color-boardbg: #1b2138;
+  --color-fogb: #c3c8dc;
+  --color-lamp: #ffd84d;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #14182a;
+  color: #c3c8dc;
+  letter-spacing: -0.012em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #ffd84d;
+  color: #14182a;
+}
+:focus-visible {
+  outline: 2px solid #ffd84d;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 216, 77, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 216, 77, 0.35);
+  border: 3px solid #14182a;
+  border-radius: 99px;
+}
+
+.f-mono {
+  font-family: 'DM Mono', 'Pretendard', monospace;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 도서관처럼 조용하게
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 { transition-delay: 80ms; }
+.d120 { transition-delay: 120ms; }
+.d160 { transition-delay: 160ms; }
+.d180 { transition-delay: 180ms; }
+.d240 { transition-delay: 240ms; }
+.d280 { transition-delay: 280ms; }
+
+.hero-in {
+  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 { animation-delay: 150ms; }
+.hero-in.d300 { animation-delay: 300ms; }
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 램프 점등 — 은은한 글로우 펄스 */
+.lamp-glow {
+  animation: lampGlow 2.4s ease-in-out infinite;
+}
+@keyframes lampGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 216, 77, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 10px 3px rgba(255, 216, 77, 0.35);
+  }
+}
+
+/* 전광판 잔여석 바 — 좌→우 채움 */
+.bar-fill {
+  transform-origin: left;
+  animation: barFill 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both;
+}
+@keyframes barFill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.menu-in {
+  animation: menuIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in,
+  .menu-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .lamp-glow,
+  .bar-fill {
+    animation: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in,
+[data-motion='off'] .menu-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .lamp-glow,
+[data-motion='off'] .bar-fill {
+  animation: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

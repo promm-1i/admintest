@@ -1,0 +1,234 @@
+/* ─── 폰트: Pretendard 단일 — 스튜디오 그리드 톤 ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 샌드 · 콜 · 딥세이지 ─── */
+@theme {
+  --color-sand: #f4f1ea;
+  --color-mist: #ebe7dc;
+  --color-coal: #23241f;
+  --color-leaf: #3d5a45;
+  --color-leaf-l: #a8c3a0;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #f4f1ea;
+  color: #23241f;
+  letter-spacing: -0.015em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #3d5a45;
+  color: #f4f1ea;
+}
+:focus-visible {
+  outline: 2px solid #3d5a45;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(61, 90, 69, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(61, 90, 69, 0.35);
+  border: 3px solid #f4f1ea;
+  border-radius: 99px;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d120 {
+  transition-delay: 120ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d180 {
+  transition-delay: 180ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d280 {
+  transition-delay: 280ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+
+/* 히어로 등장 */
+.hero-in {
+  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d200 {
+  animation-delay: 200ms;
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 히어로 사진 — 아래에서 확대되며 안착 */
+.hero-photo {
+  animation: photoIn 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+@keyframes photoIn {
+  from {
+    opacity: 0;
+    transform: translateY(36px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 섹션 헤드 짧은 룰 */
+.grow-rule {
+  transform-origin: left;
+  animation: none;
+}
+.in-view .grow-rule {
+  animation: growRule 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes growRule {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* 요일 탭 전환 */
+.menu-in {
+  animation: menuIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 프로그램 카드 — 호버 시 리프 침투 */
+.prog {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.prog:hover {
+  background-color: #3d5a45;
+  border-color: #3d5a45;
+  color: #f4f1ea;
+}
+.prog:hover .prog-d {
+  color: rgba(244, 241, 234, 0.65);
+}
+.prog:hover .prog-lv {
+  background: rgba(244, 241, 234, 0.15);
+  color: rgba(244, 241, 234, 0.85);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in,
+  .hero-photo,
+  .menu-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .in-view .grow-rule {
+    animation: none !important;
+  }
+  .prog {
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in,
+[data-motion='off'] .hero-photo,
+[data-motion='off'] .menu-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .prog:hover {
+  background-color: transparent !important;
+  border-color: rgba(35, 36, 31, 0.1) !important;
+  color: inherit !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더 앵커 보정 */
+section[id] {
+  scroll-margin-top: 70px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

@@ -1,0 +1,190 @@
+/* ─── 폰트: Pretendard — 큰 글자 · 높은 대비 ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 웜 베이지 · 바크 브라운 · 세이지 ─── */
+@theme {
+  --color-warm: #faf6ef;
+  --color-bark: #3d3229;
+  --color-sage: #a9c4a0;
+  --color-sage-d: #4c7a4a;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #faf6ef;
+  color: #3d3229;
+  letter-spacing: -0.008em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #4c7a4a;
+  color: #faf6ef;
+}
+:focus-visible {
+  outline: 3px solid #4c7a4a;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(76, 122, 74, 0.45) transparent;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(76, 122, 74, 0.4);
+  border: 3px solid #faf6ef;
+  border-radius: 99px;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS — 천천히, 놀라지 않게
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d70 { transition-delay: 70ms; }
+.d80 { transition-delay: 80ms; }
+.d120 { transition-delay: 120ms; }
+.d140 { transition-delay: 140ms; }
+.d160 { transition-delay: 160ms; }
+.d200 { transition-delay: 200ms; }
+.d210 { transition-delay: 210ms; }
+.d240 { transition-delay: 240ms; }
+.d280 { transition-delay: 280ms; }
+
+.hero-in {
+  animation: heroIn 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 { animation-delay: 150ms; }
+.hero-in.d300 { animation-delay: 300ms; }
+.hero-in.d450 { animation-delay: 450ms; }
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 전화 CTA — 은은한 그림자 숨쉬기 (주의를 끌되 놀라지 않게) */
+.phone-cta {
+  box-shadow: 0 10px 30px rgba(76, 122, 74, 0.28);
+  animation: ctaBreath 3.6s ease-in-out infinite;
+}
+@keyframes ctaBreath {
+  0%,
+  100% {
+    box-shadow: 0 10px 30px rgba(76, 122, 74, 0.28);
+  }
+  50% {
+    box-shadow: 0 14px 44px rgba(76, 122, 74, 0.42);
+  }
+}
+
+/* 섹션 헤드 세이지 룰 */
+.sage-rule {
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.sage-rule.in-view,
+.in-view .sage-rule {
+  transform: scaleX(1);
+}
+
+/* 하루 일과 세로선 */
+.dline {
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+}
+.dline.in-view {
+  transform: scaleY(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .phone-cta {
+    animation: none !important;
+  }
+  .sage-rule,
+  .dline {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .phone-cta {
+  animation: none !important;
+}
+[data-motion='off'] .sage-rule,
+[data-motion='off'] .dline {
+  transform: none !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+section[id] {
+  scroll-margin-top: 76px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}

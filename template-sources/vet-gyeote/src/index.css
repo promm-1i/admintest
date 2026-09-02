@@ -1,0 +1,225 @@
+/* ─── 폰트: Pretendard 단일 — 따뜻한 라운드 톤 ─── */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+
+@import 'tailwindcss';
+
+/* ─── 디자인 토큰: 크림 · 버터 · 코코아 · 앰버 ─── */
+@theme {
+  --color-cream: #fdfaf4;
+  --color-butter: #f6ecd9;
+  --color-cocoa: #3b2a1f;
+  --color-amber: #f0b34c;
+  --color-amber-d: #c67f1f;
+  --font-sans: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #fdfaf4;
+  color: #3b2a1f;
+  letter-spacing: -0.012em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── 브라우저 기본 UI ─── */
+::selection {
+  background: #c67f1f;
+  color: #fdfaf4;
+}
+:focus-visible {
+  outline: 2px solid #c67f1f;
+  outline-offset: 3px;
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(198, 127, 31, 0.4) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(198, 127, 31, 0.35);
+  border: 3px solid #fdfaf4;
+  border-radius: 99px;
+}
+
+.nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 요금표 점선 리더 */
+.leader {
+  border-bottom: 2px dotted rgba(59, 42, 31, 0.22);
+  transform: translateY(-4px);
+  min-width: 24px;
+}
+
+/* 섹션 헤드 발자국 점 */
+.paw-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 99px;
+  background: currentColor;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ANIMATIONS
+══════════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.anim-fade-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.d80 {
+  transition-delay: 80ms;
+}
+.d120 {
+  transition-delay: 120ms;
+}
+.d160 {
+  transition-delay: 160ms;
+}
+.d240 {
+  transition-delay: 240ms;
+}
+.d280 {
+  transition-delay: 280ms;
+}
+.d320 {
+  transition-delay: 320ms;
+}
+
+/* 히어로 등장 */
+.hero-in {
+  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.hero-in.d150 {
+  animation-delay: 150ms;
+}
+.hero-in.d300 {
+  animation-delay: 300ms;
+}
+.hero-in.d450 {
+  animation-delay: 450ms;
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 히어로 사진 — 살짝 통통 튀며 안착 */
+.hero-photo {
+  animation: photoPop 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s both;
+}
+@keyframes photoPop {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 탭 전환 */
+.menu-in {
+  animation: menuIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 진료 카드 호버 — 살짝 들리기 */
+.care {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.care:hover {
+  transform: translateY(-4px);
+  border-color: rgba(240, 179, 76, 0.6);
+  box-shadow: 0 12px 28px rgba(59, 42, 31, 0.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-fade-up,
+  .hero-in,
+  .hero-photo,
+  .menu-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+  .care {
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   기본형(--mode basic)
+══════════════════════════════════════════════════════════════════════════════ */
+[data-motion='off'] * {
+  animation: none !important;
+  transition: none !important;
+}
+[data-motion='off'] .anim-fade-up,
+[data-motion='off'] .hero-in,
+[data-motion='off'] .hero-photo,
+[data-motion='off'] .menu-in {
+  opacity: 1 !important;
+  transform: none !important;
+}
+[data-motion='off'] .care:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: rgba(59, 42, 31, 0.1) !important;
+}
+[data-motion='off'] {
+  scroll-behavior: auto;
+}
+
+/* 고정 헤더 앵커 보정 */
+section[id] {
+  scroll-margin-top: 72px;
+}
+
+/* 모바일 줄바꿈 자연화 — 제목은 균형, 본문은 외톨이 줄 방지 */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+p, li, dd, figcaption {
+  text-wrap: pretty;
+}
