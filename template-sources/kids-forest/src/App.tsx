@@ -209,7 +209,7 @@ function Hero() {
   return (
     <section className="hero hx-hero relative overflow-hidden bg-milk pt-[74px]">
       <div className="mx-auto max-w-6xl px-5 pt-8 pb-14 lg:pt-14 lg:pb-24">
-        <div className="relative lg:h-[580px]">
+        <div className="hx-stage relative lg:h-[580px]">
           {/* 콜라주 첫 장 — 모바일에서는 카피 위 가로 띠로 먼저 놓인다 */}
           <Shot i={0} />
           {/* 카피 — 사진 위에 놓이므로 lg 에서는 밀크 종이면을 깐다 */}
@@ -249,7 +249,7 @@ function Hero() {
           </div>
 
           {/* 두 번째 장 — 모바일에서는 겹침을 풀고 카피 아래로 내려온다 */}
-          <div className="mt-3 lg:mt-0">
+          <div className="hx-slot1 mt-3 lg:mt-0">
             <Shot i={1} />
           </div>
         </div>

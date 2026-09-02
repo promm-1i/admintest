@@ -181,3 +181,53 @@ h1, h2, h3 {
 p, li, dd, figcaption {
   text-wrap: pretty;
 }
+
+/* ── 작은 화면부터 태블릿까지(600–1023) — 두 장이 세로로 쌓여 히어로가
+      길어지던 것을 겹쳐서 줄인다. 하한을 768 로 두면 그 바로 아래 폭이
+      그대로 남으므로 600 까지 내린다. ── */
+@media (min-width: 600px) and (max-width: 1023.98px) {
+  .hx-hero .hx-stage > .hx-slot {
+    width: 48%;
+  }
+  .hx-hero .hx-stage > .hx-slot .hx-shot {
+    transform: rotate(-1.6deg);
+  }
+  .hx-hero .hx-slot1 {
+    position: absolute;
+    top: 0;
+    left: 44%;
+    width: 32%;
+    margin-top: 10.5%;
+    z-index: 30;
+  }
+  .hx-hero .hx-slot1 .hx-shot {
+    transform: rotate(2.6deg);
+  }
+  .hx-hero .hx-slot1 img {
+    aspect-ratio: 4 / 5;
+  }
+  .hx-hero .hx-copy {
+    margin-top: 23%;
+  }
+}
+
+/* ── 세로가 짧은 소형 폰 — 히어로 CTA 가 하단 고정바에 가리지 않도록 위를 조인다 ── */
+@media (max-width: 767px) and (max-height: 760px) {
+  .hx-hero > div {
+    padding-top: 0.75rem;
+  }
+  .hx-hero .hx-copy {
+    margin-top: 0.75rem;
+  }
+}
+
+/* ── 더 짧은 폰(iPhone SE 등) — 사진 높이를 조여 CTA 가 고정바 위에 온전히 놓이게 한다 ── */
+@media (max-width: 767px) and (max-height: 700px) {
+  .hx-hero .hx-stage > .hx-slot img {
+    max-height: 6.5rem;
+    object-fit: cover;
+  }
+  .hx-hero .hx-copy {
+    margin-top: 0.5rem;
+  }
+}
