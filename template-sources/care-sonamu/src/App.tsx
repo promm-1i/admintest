@@ -194,36 +194,50 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 전화번호가 주인공인 초대형 CTA형 ────────────────────────────────
+// ─── 히어로 — 햇살 드는 생활공간 풀블리드 + 전화번호 CTA ──────────────────────
 
 function Hero() {
   return (
-    <section className="pt-[76px] bg-sage/12">
-      <div className="mx-auto max-w-4xl px-5 pt-16 md:pt-22 pb-14 text-center">
-        <p className={`inline-block px-4 py-2 rounded-full bg-sage/20 text-sage-d text-[0.95rem] font-extrabold ${MOTION ? 'hero-in' : ''}`}>
-          {SITE.designation}
-        </p>
-        <h1 className={`mt-7 text-[clamp(2.1rem,5.6vw,3.6rem)] font-extrabold tracking-[-0.03em] leading-[1.3] whitespace-pre-line ${MOTION ? 'hero-in d150' : ''}`}>
-          {SITE.slogan}
-        </h1>
-        <p className={`mx-auto mt-6 max-w-xl text-[1.12rem] leading-[1.85] text-bark/65 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
-        {/* 전화가 가장 큰 요소 — 보호자 세대 최우선 동선 */}
-        <div className={`mt-10 ${MOTION ? 'hero-in d450' : ''}`}>
-          <a
-            href={`tel:${SITE.phone}`}
-            className="phone-cta inline-flex items-center gap-4 rounded-2xl bg-sage-d text-warm px-9 py-6 hover:bg-bark"
-            style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-          >
-            <span className="text-[1.05rem] font-bold opacity-85">입소 상담</span>
-            <span className="nums text-[clamp(1.8rem,4.5vw,2.6rem)] font-extrabold tracking-tight">{SITE.phone}</span>
-          </a>
-          <p className="mt-4 text-[0.95rem] text-bark/55">
-            평일 · 주말 09:00 – 20:00 · 통화가 어려우시면{' '}
-            <button onClick={() => goTo('#consult')} className="font-extrabold text-sage-d underline underline-offset-4">
-              문자 상담
-            </button>
-            을 남겨주세요
-          </p>
+    <section className="hero pt-[76px]">
+      <div className="hx-fill relative flex items-end overflow-hidden md:items-center">
+        {/* 여기에 히어로 사진 교체 — 가로로 넓은 실내 전경이 좋습니다 */}
+        <img src={img4} alt="햇살이 드는 소나무집 요양원 프로그램실과 식당" className="hx-photo absolute inset-0 h-full w-full object-cover" />
+        <div className="hx-veil absolute inset-0" aria-hidden />
+        <div className="relative mx-auto w-full max-w-6xl px-5 pb-9 pt-14 md:py-14">
+          <div className="hx-copy">
+            <p className={`hx-onphoto inline-block rounded-full border border-warm/35 bg-[rgba(24,17,11,0.42)] px-4 py-2 text-[0.92rem] font-extrabold text-warm ${MOTION ? 'hero-in' : ''}`}>
+              {SITE.designation}
+            </p>
+            <h1
+              className={`hx-onphoto mt-6 whitespace-pre-line text-[clamp(1.9rem,3.6vw,3rem)] font-extrabold leading-[1.3] tracking-[-0.03em] text-warm ${MOTION ? 'hero-in d150' : ''}`}
+            >
+              {SITE.slogan}
+            </h1>
+            <p className={`hx-onphoto hx-lede mt-5 text-[1.05rem] leading-[1.8] text-warm ${MOTION ? 'hero-in d300' : ''}`}>
+              {SITE.sloganSub}
+            </p>
+            {/* 전화가 가장 큰 요소 — 보호자 세대 최우선 동선 */}
+            <div className={`mt-8 ${MOTION ? 'hero-in d450' : ''}`}>
+              <span className="relative inline-flex w-full sm:w-auto">
+                <span className="hx-halo" aria-hidden />
+                <a
+                  href={`tel:${SITE.phone}`}
+                  className="phone-cta relative flex w-full items-center justify-center gap-3 rounded-2xl bg-sage-d px-5 py-5 text-warm hover:bg-bark sm:w-auto sm:justify-start sm:gap-4 sm:px-9 sm:py-6"
+                  style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+                >
+                  <span className="whitespace-nowrap text-[1rem] font-bold opacity-90">입소 상담</span>
+                  <span className="nums whitespace-nowrap text-[clamp(1.55rem,3.2vw,2.6rem)] font-extrabold tracking-tight">{SITE.phone}</span>
+                </a>
+              </span>
+              <p className="hx-onphoto mt-4 text-[0.95rem] leading-relaxed text-warm">
+                평일 · 주말 09:00 – 20:00 · 통화가 어려우시면{' '}
+                <button onClick={() => goTo('#consult')} className="font-extrabold text-warm underline underline-offset-4">
+                  문자 상담
+                </button>
+                을 남겨주세요
+              </p>
+            </div>
+          </div>
         </div>
       </div>
       <Trust />

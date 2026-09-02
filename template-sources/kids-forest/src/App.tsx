@@ -33,8 +33,11 @@ const SITE = {
     { label: '입소 상담', href: '#apply' },
   ],
 
-  // 히어로 콜라주 — 여기에 사진 교체
-  heroPhotos: [img1, img2],
+  // 히어로 콜라주 — 여기에 사진 교체 (시간 순서로 두 장, 하루 일과 시각과 맞춰주세요)
+  heroPhotos: [
+    { src: img2, time: '07:30', label: '등원 · 자유놀이', alt: '교실에서 자유놀이 중인 아이들' },
+    { src: img1, time: '09:30', label: '오전 간식 · 주제 활동', alt: '크레용으로 그림을 그리는 아이들' },
+  ],
 
   // 반별 안내
   classNote: '교사 1인당 아동 수는 법정 기준보다 적게 운영합니다 · 연령은 3월 1일 기준',
@@ -193,57 +196,82 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 좌 도형·사진 콜라주 / 우 문구 ───────────────────────────────────
+// ─── 히어로 — 하루 사진 두 장이 겹치는 콜라주 + 그 위 카피 ────────────────────
+
+// 콜라주 배치. lg 이상에서만 절대배치로 겹치고, 그 아래에서는 흐름대로 풀린다.
+// 두 장이므로 크기 · 크롭 · 각도를 확실히 달리해야 2단 그리드로 보이지 않는다.
+const SHOTS = [
+  { slot: 'lg:absolute lg:left-[30%] lg:top-[2%] lg:w-[48%] lg:z-10', tilt: 'lg:-rotate-[1.6deg]', ratio: 'aspect-[16/9] lg:aspect-[4/3]', delay: 'd150' },
+  { slot: 'lg:absolute lg:right-0 lg:bottom-[4%] lg:w-[32%] lg:z-30', tilt: 'lg:rotate-[2.6deg]', ratio: 'aspect-square lg:aspect-[4/5]', delay: 'd300' },
+]
 
 function Hero() {
   return (
-    <section className="pt-[74px] overflow-hidden">
-      <div className="mx-auto max-w-6xl px-5 py-14 md:py-20 grid md:grid-cols-[1.05fr_1fr] gap-12 items-center">
-        {/* 좌: 콜라주 */}
-        <div className={`relative h-[340px] md:h-[440px] ${MOTION ? 'hero-in' : ''}`}>
-          <span className={`absolute left-[4%] top-[6%] w-24 h-24 rounded-full bg-sun/80 ${MOTION ? 'bob b1' : ''}`} aria-hidden />
-          <span className={`absolute right-[6%] top-[2%] w-14 h-14 rounded-2xl bg-skyb/70 rotate-12 ${MOTION ? 'bob b3' : ''}`} aria-hidden />
-          <span className={`absolute left-[10%] bottom-[4%] w-16 h-16 rounded-2xl bg-coral/70 -rotate-6 ${MOTION ? 'bob b2' : ''}`} aria-hidden />
-          {/* 여기에 아이들 활동 사진 교체 */}
-          <img
-            src={SITE.heroPhotos[0]}
-            alt="놀이 중인 아이들"
-            className="absolute left-[8%] top-[12%] w-[62%] aspect-square object-cover rounded-[36px] border-[6px] border-milk shadow-[0_16px_40px_rgba(64,52,44,0.16)] rotate-[-2deg]"
-          />
-          <img
-            src={SITE.heroPhotos[1]}
-            alt="미술 활동"
-            className="absolute right-[2%] bottom-[6%] w-[44%] aspect-square object-cover rounded-[28px] border-[6px] border-milk shadow-[0_16px_40px_rgba(64,52,44,0.16)] rotate-[3deg]"
-          />
-        </div>
-        {/* 우: 문구 */}
-        <div>
-          <p className={`inline-block px-4 py-2 rounded-full bg-sun/25 text-choco text-[0.88rem] font-extrabold ${MOTION ? 'hero-in d150' : ''}`}>
-            {SITE.license}
-          </p>
-          <h1 className={`mt-6 text-[clamp(2.2rem,5.6vw,3.6rem)] font-extrabold tracking-[-0.03em] leading-[1.2] whitespace-pre-line ${MOTION ? 'hero-in d300' : ''}`}>
-            {SITE.slogan}
-          </h1>
-          <p className={`mt-5 max-w-md text-[1.05rem] leading-[1.8] text-choco/60 ${MOTION ? 'hero-in d450' : ''}`}>{SITE.sloganSub}</p>
-          <div className={`mt-8 flex flex-wrap items-center gap-4 ${MOTION ? 'hero-in d450' : ''}`}>
-            <button
-              onClick={() => goTo('#apply')}
-              className="px-8 py-4 rounded-full bg-coral text-milk text-[1rem] font-extrabold hover:bg-choco"
-              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-            >
-              입소 상담 신청
-            </button>
-            <button
-              onClick={() => goTo('#classes')}
-              className="text-[1rem] font-extrabold border-b-[3px] border-sun pb-0.5 hover:text-coral"
-              style={{ transition: MOTION ? 'color 0.2s' : 'none' }}
-            >
-              반 안내 보기
-            </button>
+    <section className="hero hx-hero relative overflow-hidden bg-milk pt-[74px]">
+      <div className="mx-auto max-w-6xl px-5 pt-8 pb-14 lg:pt-14 lg:pb-24">
+        <div className="relative lg:h-[580px]">
+          {/* 콜라주 첫 장 — 모바일에서는 카피 위 가로 띠로 먼저 놓인다 */}
+          <Shot i={0} />
+          {/* 카피 — 사진 위에 놓이므로 lg 에서는 밀크 종이면을 깐다 */}
+          <div
+            className={`hx-copy relative z-40 mt-7 lg:mt-0 lg:absolute lg:left-0 lg:top-[12%] lg:w-[42%] lg:rounded-[28px] lg:border-2 lg:border-choco/8 lg:bg-milk lg:p-8 lg:shadow-[0_18px_50px_rgba(64,52,44,0.10)] ${MOTION ? 'hero-in' : ''}`}
+          >
+            <p className="inline-block rounded-full bg-sun/25 px-4 py-2 text-[0.88rem] font-extrabold text-choco">{SITE.license}</p>
+            <h1 className="mt-6 whitespace-pre-line text-[clamp(2.2rem,5.6vw,3.6rem)] font-extrabold leading-[1.2] tracking-[-0.03em] text-choco">
+              {SITE.slogan}
+            </h1>
+            <p className="mt-5 text-[1.05rem] leading-[1.8] text-choco/75">{SITE.sloganSub}</p>
+            <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a
+                href="#apply"
+                onClick={(e) => {
+                  e.preventDefault()
+                  goTo('#apply')
+                }}
+                className="hx-cta rounded-full bg-coral px-8 py-4 text-[1.2rem] font-extrabold text-milk hover:bg-choco"
+                style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+              >
+                입소 상담 신청
+              </a>
+              <a
+                href="#classes"
+                onClick={(e) => {
+                  e.preventDefault()
+                  goTo('#classes')
+                }}
+                className="border-b-[3px] border-sun pb-0.5 text-[1.02rem] font-extrabold text-choco hover:text-coral"
+                style={{ transition: MOTION ? 'color 0.2s' : 'none' }}
+              >
+                반 안내 보기
+              </a>
+            </div>
+            <p className="nums mt-5 text-[0.9rem] font-bold text-choco/75">{SITE.tagline}</p>
+          </div>
+
+          {/* 두 번째 장 — 모바일에서는 겹침을 풀고 카피 아래로 내려온다 */}
+          <div className="mt-3 lg:mt-0">
+            <Shot i={1} />
           </div>
         </div>
       </div>
     </section>
+  )
+}
+
+function Shot({ i }: { i: number }) {
+  const p = SITE.heroPhotos[i]
+  const s = SHOTS[i]
+  return (
+    <div className={`hx-slot min-w-0 flex-1 ${s.slot} ${MOTION ? `hero-in ${s.delay}` : ''}`}>
+      <figure className={`hx-shot rounded-[22px] border-2 border-choco/8 bg-milk p-2 shadow-[0_14px_36px_rgba(64,52,44,0.14)] ${s.tilt}`}>
+        {/* 시각을 사진 위쪽에 둔다 — 겹쳐도 두 장의 순서가 가려지지 않는다 */}
+        <figcaption className="flex items-baseline gap-2 px-1.5 pt-1 pb-2.5">
+          <span className="nums text-[0.86rem] font-extrabold text-choco">{p.time}</span>
+          <span className="text-[0.86rem] font-bold text-choco/75">{p.label}</span>
+        </figcaption>
+        <img src={p.src} alt={p.alt} className={`w-full ${s.ratio} rounded-[15px] object-cover`} />
+      </figure>
+    </div>
   )
 }
 

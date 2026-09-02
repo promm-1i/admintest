@@ -47,6 +47,9 @@ const SITE = {
 
   // 여기에 히어로 사진 교체
   heroPhoto: heroImg,
+  // 히어로 사진 아래 한 줄 — 무엇을 하는 곳인지 · 언제부터인지
+  heroCaption: 'Hair & Scalp — Yeonnam',
+  heroEst: 'est. 2014',
 
   nav: [
     { label: '시술 안내', href: '#price' },
@@ -249,46 +252,81 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 매거진 커버 ─────────────────────────────────────────────────────
+// ─── 히어로 — 풀블리드 살롱 전경 ──────────────────────────────────────────────
 
 function Hero() {
+  const jump = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    goTo(href)
+  }
   return (
-    <section className="relative pt-[72px] overflow-hidden">
-      <div className="mx-auto max-w-6xl px-5 pt-12 md:pt-16">
-        <p className={`f-serif italic text-[clamp(2.6rem,8vw,5.6rem)] leading-none text-rose/90 ${MOTION ? 'hero-in' : ''}`}>Salon Muud</p>
-        <div className={`mt-6 md:mt-8 flex flex-col md:flex-row md:items-end justify-between gap-7 pb-10 md:pb-12 ${MOTION ? 'hero-in d120' : ''}`}>
-          <h1 className="text-[clamp(1.9rem,4.6vw,3rem)] font-extrabold tracking-[-0.03em] leading-[1.2] whitespace-pre-line">
-            {SITE.slogan}
-          </h1>
-          <div className="max-w-sm">
-            <p className="text-[0.98rem] leading-relaxed text-ink/65">{SITE.sloganSub}</p>
-            <div className="mt-6 flex items-center gap-5">
-              <button
-                onClick={() => goTo('#reserve')}
-                className="px-7 py-3.5 bg-ink text-porcelain text-[0.92rem] font-bold hover:bg-rose"
+    <section className="hero relative pt-[72px] overflow-hidden">
+      <div className="hx-stage relative w-full overflow-hidden">
+        {/* 여기에 히어로 사진 교체 — 화면 폭을 끝까지 채웁니다 */}
+        <img
+          src={SITE.heroPhoto}
+          alt="살롱 무드 내부 — 창가 미러 스테이션"
+          className={`hx-shot absolute inset-0 h-full w-full object-cover object-[28%_50%] md:object-[50%_54%] ${MOTION ? 'hx-shot-in' : ''}`}
+        />
+        {/* 글자가 앉는 쪽만 눌러 준다 — 모바일은 아래, PC는 왼쪽 */}
+        <div className="hx-scrim absolute inset-0" aria-hidden="true" />
+
+        <div className="relative mx-auto flex h-full max-w-6xl flex-col justify-end px-5 pb-[108px] md:justify-center md:pb-0">
+          <div className="max-w-[34rem]">
+            <p className={`text-porcelain ${MOTION ? 'hero-in' : ''}`}>
+              <span className="f-serif italic text-[clamp(1.5rem,4.2vw,2.4rem)] leading-none">Salon Muud</span>
+              <span className="mt-1.5 block text-[0.78rem] tracking-[0.2em] text-porcelain/90 md:mt-0 md:ml-3.5 md:inline">
+                {SITE.tagline}
+              </span>
+            </p>
+
+            <h1
+              className={`mt-4 whitespace-pre-line text-[clamp(2rem,4.3vw,3.25rem)] font-extrabold leading-[1.18] tracking-[-0.03em] text-porcelain md:mt-5 ${MOTION ? 'hero-in d120' : ''}`}
+            >
+              {SITE.slogan}
+            </h1>
+
+            <p className={`mt-4 max-w-[26rem] text-[0.96rem] leading-relaxed text-porcelain/90 md:mt-5 ${MOTION ? 'hero-in d240' : ''}`}>
+              {SITE.sloganSub}
+            </p>
+
+            <div className={`mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 ${MOTION ? 'hero-in d360' : ''}`}>
+              <a
+                href="#reserve"
+                onClick={jump('#reserve')}
+                className="hx-cta inline-block bg-porcelain px-7 py-3.5 text-[0.95rem] font-bold text-ink hover:bg-rose-l"
                 style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
               >
                 예약 문의하기
-              </button>
-              <button
-                onClick={() => goTo('#price')}
-                className="text-[0.92rem] font-bold border-b-2 border-ink pb-0.5 hover:text-rose hover:border-rose"
-                style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
+              </a>
+              <a
+                href="#price"
+                onClick={jump('#price')}
+                className="border-b-2 border-porcelain/70 pb-0.5 text-[0.95rem] font-bold text-porcelain hover:border-rose-l"
+                style={{ transition: MOTION ? 'border-color 0.2s' : 'none' }}
               >
                 시술 가격 보기
-              </button>
+              </a>
+            </div>
+
+            <div className={`mt-7 max-w-[26rem] border-t border-porcelain/30 pt-5 md:mt-9 ${MOTION ? 'hero-in d360' : ''}`}>
+              <dl className="flex flex-wrap gap-x-5 gap-y-1 text-[0.82rem] text-porcelain">
+                {SITE.hours.map((h) => (
+                  <div key={h.day} className="flex items-baseline gap-1.5 whitespace-nowrap">
+                    <dt className="text-porcelain/90">{h.day}</dt>
+                    <dd className="nums font-bold">{h.time}</dd>
+                  </div>
+                ))}
+              </dl>
+              <p className="mt-1.5 text-[0.82rem] text-porcelain/90">{SITE.location.walk}</p>
+              <p className="mt-3 flex items-baseline justify-between gap-3 text-[0.78rem] tracking-[0.14em] text-porcelain">
+                <span>{SITE.heroCaption}</span>
+                <span className="f-serif italic tracking-normal shrink-0">{SITE.heroEst}</span>
+              </p>
             </div>
           </div>
         </div>
       </div>
-      <figure className={`mx-auto max-w-6xl px-5 ${MOTION ? 'hero-photo' : ''}`}>
-        {/* 여기에 히어로 사진 교체 */}
-        <img src={SITE.heroPhoto} alt="살롱 내부" className="w-full aspect-[16/7] object-cover object-[center_62%]" />
-        <figcaption className="flex items-baseline justify-between pt-3">
-          <span className="f-serif italic text-[0.92rem] text-rose">Hair &amp; Scalp — Yeonnam</span>
-          <span className="text-[0.75rem] tracking-[0.22em] uppercase text-ink/40">est. 2014</span>
-        </figcaption>
-      </figure>
     </section>
   )
 }

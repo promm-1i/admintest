@@ -106,32 +106,6 @@ html {
   transition-delay: 320ms;
 }
 
-/* 히어로 등장 */
-.hero-in {
-  animation: heroIn 0.95s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.hero-in.d150 {
-  animation-delay: 150ms;
-}
-.hero-in.d300 {
-  animation-delay: 300ms;
-}
-.hero-in.d450 {
-  animation-delay: 450ms;
-}
-@keyframes heroIn {
-  from {
-    opacity: 0;
-    transform: translateY(22px);
-    filter: blur(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
 /* 상품 아치 — 아래에서 피어나는 블룸 리빌 */
 .bloom {
   clip-path: inset(72% 12% 0 12% round 120px 120px 16px 16px);
@@ -158,8 +132,7 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .anim-fade-up,
-  .hero-in {
+  .anim-fade-up {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
@@ -182,8 +155,7 @@ html {
   animation: none !important;
   transition: none !important;
 }
-[data-motion='off'] .anim-fade-up,
-[data-motion='off'] .hero-in {
+[data-motion='off'] .anim-fade-up {
   opacity: 1 !important;
   transform: none !important;
   filter: none !important;
@@ -210,4 +182,294 @@ h1, h2, h3 {
 }
 p, li, dd, figcaption {
   text-wrap: pretty;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   HERO — 작업대 풀블리드 (hx-)
+   기본 상태가 곧 최종 상태다. 모션은 그 위에 얹는 연출일 뿐이라
+   기본형(data-motion="off")에서도 모든 글자·버튼·정보가 그대로 보인다.
+══════════════════════════════════════════════════════════════════════════════ */
+
+.hx-hero {
+  padding-top: 72px; /* 고정 헤더 */
+}
+
+.hx-stage {
+  position: relative;
+  overflow: hidden;
+  background: #2b1421; /* 사진이 오기 전 바닥색 */
+}
+
+/* 사진은 화면 폭을 끝까지 채운다. 액자·카드 없음 */
+.hx-shot {
+  position: absolute;
+  inset: 0;
+  right: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+}
+
+/* 글자가 앉는 쪽만 국소적으로 누른다 (최대 0.60) */
+.hx-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(38, 16, 27, 0.6) 0px,
+    rgba(38, 16, 27, 0.6) 330px,
+    rgba(38, 16, 27, 0.4) 410px,
+    rgba(38, 16, 27, 0.1) 470px,
+    rgba(38, 16, 27, 0) 510px
+  );
+}
+
+.hx-copy {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 72rem;
+  padding: clamp(260px, 80vw, 320px) 20px 30px;
+  color: #fbf7f2;
+  text-shadow: 0 1px 16px rgba(28, 10, 18, 0.55);
+}
+
+.hx-eyebrow {
+  width: fit-content;
+  max-width: 100%;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  color: #fbf7f2;
+}
+
+.hx-title {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 0.7rem;
+  font-size: clamp(2rem, 4.6vw, 3.2rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+  white-space: pre-line;
+}
+
+.hx-lead {
+  margin-top: 0.9rem;
+  max-width: 27rem;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: rgba(251, 247, 242, 0.92);
+}
+
+.hx-status {
+  display: block;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 1.15rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: #fbf7f2;
+  color: #582b40;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-shadow: none;
+}
+
+.hx-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: 1.4rem;
+}
+
+.hx-btn,
+.hx-btn-ghost {
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-shadow: none;
+  white-space: nowrap;
+}
+.hx-btn {
+  padding: 0.95rem 1.9rem;
+  background: #582b40;
+  color: #fbf7f2;
+}
+.hx-btn:hover {
+  background: #5a7a52;
+}
+.hx-btn-ghost {
+  padding: 0.95rem 1.6rem;
+  border: 1.5px solid rgba(251, 247, 242, 0.6);
+  background: rgba(38, 16, 27, 0.34);
+  color: #fbf7f2;
+}
+.hx-btn-ghost:hover {
+  background: rgba(38, 16, 27, 0.6);
+  border-color: #fbf7f2;
+}
+html:not([data-motion='off']) .hx-btn,
+html:not([data-motion='off']) .hx-btn-ghost {
+  transition:
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+/* 사진 아래 정보 띠 — 배달 · 영업시간 · 시작가 */
+.hx-facts {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 72rem;
+  padding: 0.6rem 20px 0;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.hx-fact {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid rgba(88, 43, 64, 0.12);
+}
+.hx-fact-k {
+  flex: none;
+  min-width: 5.6rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #5a7a52;
+}
+.hx-fact-v {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #582b40;
+}
+
+@media (min-width: 768px) {
+  .hx-stage {
+    display: flex;
+    align-items: center;
+    min-height: clamp(560px, 86vh, 780px);
+  }
+  /* 피사체를 오른쪽으로 밀어 왼쪽을 글자 자리로 비운다 */
+  .hx-shot {
+    width: 112%;
+    /* 작업대가 화면을 채우도록 아래쪽을 잡는다 — 꽃 색이 먼저 읽힌다 */
+    object-position: 50% 88%;
+  }
+  .hx-scrim {
+    background: linear-gradient(
+      97deg,
+      rgba(38, 16, 27, 0.6) 0%,
+      rgba(38, 16, 27, 0.58) 30%,
+      rgba(38, 16, 27, 0.46) 42%,
+      rgba(38, 16, 27, 0.2) 55%,
+      rgba(38, 16, 27, 0) 70%
+    );
+  }
+  .hx-copy {
+    padding: 40px 20px;
+  }
+  /* 글자 덩어리는 눌러 둔 왼쪽 안에서만 끝난다 */
+  .hx-copy > * {
+    max-width: 28rem;
+  }
+  .hx-lead {
+    max-width: 26rem;
+    /* ::before 가 사진 뒤로 빠지지 않도록 리드 자신이 스태킹 컨텍스트가 된다 */
+    position: relative;
+    z-index: 0;
+  }
+  /* 리드 글자가 지나가는 띠만 한 겹 더 누른다.
+     전체 스크림은 그대로 둬서 꽃 색이 죽지 않고, 밝은 꽃잎에 걸리는
+     오른쪽 끝 글자 픽셀만 올라온다. 알파는 대각 스크림이 옅어지는 만큼만
+     오른쪽으로 키워 합산이 0.60 을 넘지 않는다. 절대 배치라 레이아웃은 그대로. */
+  .hx-lead::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -1.8rem -4rem -1.8rem -1.1rem;
+    pointer-events: none;
+    background: linear-gradient(
+      to right,
+      rgba(38, 16, 27, 0) 0%,
+      rgba(38, 16, 27, 0.018) 43%,
+      rgba(38, 16, 27, 0.036) 55%,
+      rgba(38, 16, 27, 0.082) 63%,
+      rgba(38, 16, 27, 0.132) 71%,
+      rgba(38, 16, 27, 0.176) 79%,
+      rgba(38, 16, 27, 0.21) 87%,
+      rgba(38, 16, 27, 0) 100%
+    );
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 24%, #000 76%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, #000 24%, #000 76%, transparent 100%);
+  }
+  .hx-facts {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 20px;
+  }
+  .hx-fact {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding: 1.5rem 1.75rem;
+    border-bottom: 0;
+    border-left: 1px solid rgba(88, 43, 64, 0.12);
+  }
+  .hx-fact:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+  .hx-fact-v {
+    font-size: 1rem;
+  }
+}
+
+/* 모션 — 랜딩형에서만 얹는다. 무한 반복 없음(등장 1회) */
+html:not([data-motion='off']) .hx-shot {
+  animation: hxShot 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes hxShot {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+html:not([data-motion='off']) .hx-rise {
+  animation: hxRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes hxRise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+html:not([data-motion='off']) .hx-r1 {
+  animation-delay: 0.1s;
+}
+html:not([data-motion='off']) .hx-r2 {
+  animation-delay: 0.22s;
+}
+html:not([data-motion='off']) .hx-r3 {
+  animation-delay: 0.34s;
+}
+html:not([data-motion='off']) .hx-r4 {
+  animation-delay: 0.46s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-shot,
+  .hx-rise {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }

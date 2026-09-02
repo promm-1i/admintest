@@ -245,8 +245,8 @@ function Header({ active }: { active: string }) {
   }, [])
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 ${scrolled ? 'bg-sand/95 shadow-[0_1px_0_rgba(35,36,31,0.1)]' : ''}`}
-      style={{ transition: MOTION ? 'background-color 0.25s, box-shadow 0.25s' : 'none', backdropFilter: scrolled ? 'blur(10px)' : 'none' }}
+      className={`fixed top-0 inset-x-0 z-50 bg-sand ${scrolled ? 'shadow-[0_1px_0_rgba(35,36,31,0.1)]' : ''}`}
+      style={{ transition: MOTION ? 'box-shadow 0.25s' : 'none' }}
     >
       <div className="mx-auto max-w-6xl px-5 h-[70px] flex items-center justify-between">
         <button onClick={() => window.scrollTo({ top: 0, behavior: MOTION ? 'smooth' : 'auto' })} className="flex items-center gap-2.5">
@@ -281,37 +281,67 @@ function Header({ active }: { active: string }) {
 // ─── 히어로 ───────────────────────────────────────────────────────────────────
 
 function Hero() {
+  const [line1, line2] = SITE.slogan.split('\n')
+  const meta = [SITE.location.walk, ...SITE.hours.slice(0, 2).map((h) => `${h.day} ${h.time}`)].join(' · ')
   return (
-    <section className="relative pt-[70px]">
-      <div className="mx-auto max-w-6xl px-5 pt-12 md:pt-20 pb-10">
-        <h1 className={`text-[clamp(2.6rem,7.5vw,5rem)] font-extrabold tracking-[-0.04em] leading-[1.05] whitespace-pre-line ${MOTION ? 'hero-in' : ''}`}>
-          {SITE.slogan.split('\n')[0]}
-          <br />
-          <span className="text-leaf">{SITE.slogan.split('\n')[1]}</span>
-        </h1>
-        <div className={`mt-7 flex flex-col md:flex-row md:items-end justify-between gap-6 ${MOTION ? 'hero-in d200' : ''}`}>
-          <p className="max-w-lg text-[1.02rem] leading-relaxed text-coal/65">{SITE.sloganSub}</p>
-          <div className="flex items-center gap-4 shrink-0">
-            <button
-              onClick={() => goTo('#trial')}
-              className="px-7 py-4 rounded-full bg-coal text-sand text-[0.95rem] font-bold hover:bg-leaf"
+    <section className="hero relative pt-[70px]">
+      <div className="hx-stage relative overflow-hidden">
+        {/* 여기에 히어로 사진 교체 */}
+        <img
+          src={SITE.heroPhoto}
+          alt="리포머 6대가 놓인 스튜디오 전경"
+          className="hx-hero-img absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="hx-scrim absolute inset-0" aria-hidden="true" />
+        <div className="hx-floor absolute inset-0" aria-hidden="true" />
+        <div className="relative h-full mx-auto max-w-6xl px-5 flex flex-col justify-end md:justify-center pb-[92px] md:pb-0">
+          <p className={`hx-ht text-[0.82rem] md:text-[0.86rem] font-bold tracking-[0.2em] text-sand ${MOTION ? 'hero-in' : ''}`}>
+            {SITE.tagline}
+          </p>
+          <h1
+            className={`hx-ht mt-4 md:mt-5 text-[clamp(2.5rem,6.2vw,4.6rem)] font-extrabold tracking-[-0.04em] leading-[1.05] text-sand ${MOTION ? 'hero-in d80' : ''}`}
+          >
+            {line1}
+            <br />
+            {line2}
+          </h1>
+          <p className={`hx-ht mt-5 md:mt-6 max-w-[30rem] text-[1rem] md:text-[1.08rem] leading-relaxed text-sand ${MOTION ? 'hero-in d160' : ''}`}>
+            {SITE.sloganSub}
+          </p>
+          <div className={`mt-7 md:mt-9 flex flex-wrap items-center gap-x-6 gap-y-4 ${MOTION ? 'hero-in d240' : ''}`}>
+            <a
+              href="#trial"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#trial')
+              }}
+              className="hx-btn-primary px-7 py-4 rounded-full bg-leaf-l text-coal text-[0.95rem] font-extrabold hover:bg-sand"
               style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
             >
               체험 수업 신청 →
-            </button>
-            <button
-              onClick={() => goTo('#timetable')}
-              className="text-[0.95rem] font-bold border-b-2 border-coal pb-0.5 hover:text-leaf hover:border-leaf"
+            </a>
+            <a
+              href="#timetable"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#timetable')
+              }}
+              className="hx-ht text-[0.95rem] font-bold text-sand border-b-2 border-sand/70 pb-1 hover:text-leaf-l hover:border-leaf-l"
               style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
             >
               시간표 보기
-            </button>
+            </a>
+          </div>
+          <p className={`hx-ht mt-7 md:mt-9 max-w-[30rem] text-[0.84rem] leading-relaxed text-sand ${MOTION ? 'hero-in d320' : ''}`}>
+            {meta}
+          </p>
+          <div className="hx-cue hidden md:flex" aria-hidden="true">
+            <span className="hx-cue-label">SCROLL</span>
+            <span className="hx-cue-rail">
+              <span className="hx-cue-dot" />
+            </span>
           </div>
         </div>
-      </div>
-      <div className={`mx-auto max-w-6xl px-5 ${MOTION ? 'hero-photo' : ''}`}>
-        {/* 여기에 히어로 사진 교체 */}
-        <img src={SITE.heroPhoto} alt="스튜디오 전경" className="w-full aspect-[16/8] object-cover rounded-2xl" />
       </div>
       <Stats />
     </section>

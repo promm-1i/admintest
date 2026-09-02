@@ -227,3 +227,63 @@ h1, h2, h3 {
 p, li, dd, figcaption {
   text-wrap: pretty;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   히어로 — 풀블리드 살롱 전경
+══════════════════════════════════════════════════════════════════════════════ */
+
+/* 사진 무대 — 헤더(72px)를 뺀 첫 화면 높이. svh 미지원 브라우저는 vh 로 내려간다 */
+.hx-stage {
+  height: calc(100vh - 72px);
+  height: calc(100svh - 72px);
+  min-height: 560px;
+  max-height: 820px;
+}
+
+/* 스크림 — 글자가 앉는 쪽만 누른다. 모바일은 아래, PC(≥768px)는 왼쪽.
+   최대 불투명도 0.60 을 넘기지 않아 사진이 계속 보인다. */
+.hx-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(20, 14, 11, 0.6) 0%,
+    rgba(20, 14, 11, 0.6) 62%,
+    rgba(20, 14, 11, 0.34) 78%,
+    rgba(20, 14, 11, 0.08) 92%,
+    rgba(20, 14, 11, 0) 100%
+  );
+}
+@media (min-width: 768px) {
+  .hx-scrim {
+    background: linear-gradient(
+      92deg,
+      rgba(20, 14, 11, 0.6) 0%,
+      rgba(20, 14, 11, 0.6) 36%,
+      rgba(20, 14, 11, 0.55) 50%,
+      rgba(20, 14, 11, 0.26) 66%,
+      rgba(20, 14, 11, 0.05) 82%,
+      rgba(20, 14, 11, 0) 92%
+    );
+  }
+}
+
+/* 사진 안착 — 로드 시 1회. 기본 상태가 최종 상태이므로 기본형에서는 그냥 정지 화면이다 */
+html:not([data-motion='off']) .hx-shot-in {
+  animation: hxShotIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes hxShotIn {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-shot-in {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

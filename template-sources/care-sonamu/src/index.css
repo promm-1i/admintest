@@ -100,18 +100,81 @@ html {
   }
 }
 
-/* 전화 CTA — 은은한 그림자 숨쉬기 (주의를 끌되 놀라지 않게) */
-.phone-cta {
-  box-shadow: 0 10px 30px rgba(76, 122, 74, 0.28);
-  animation: ctaBreath 3.6s ease-in-out infinite;
+/* ─── 히어로 풀블리드 — 사진이 화면 폭을 끝까지 채우고 좌측에 글자가 앉는다 ─── */
+.hx-fill {
+  min-height: clamp(520px, 78vh, 660px);
 }
-@keyframes ctaBreath {
+/* 글자 덩어리는 항상 그라디언트가 눌러 준 폭 안에 머문다 (태블릿 폭 포함) */
+@media (min-width: 768px) {
+  .hx-copy {
+    max-width: min(34rem, 46vw);
+  }
+  .hx-lede {
+    max-width: min(30rem, 41vw);
+  }
+}
+/* 크롭 지점 — 창가 햇살과 식탁이 함께 들어오게 */
+.hx-photo {
+  object-position: 52% 46%;
+}
+/* 글자가 앉는 쪽만 눌러 바닥을 만든다. 우측 사진은 건드리지 않는다. */
+.hx-veil {
+  background: linear-gradient(
+    93deg,
+    rgba(24, 17, 11, 0.6) 0%,
+    rgba(24, 17, 11, 0.6) 48%,
+    rgba(24, 17, 11, 0.34) 58%,
+    rgba(24, 17, 11, 0.1) 65%,
+    rgba(24, 17, 11, 0) 72%
+  );
+}
+@media (max-width: 767px) {
+  /* 모바일은 겹침을 풀어 상하로: 위는 사진, 아래는 글자 */
+  .hx-fill {
+    min-height: min(690px, 85vh);
+  }
+  .hx-photo {
+    object-position: 56% 50%;
+  }
+  .hx-veil {
+    background: linear-gradient(
+      to top,
+      rgba(24, 17, 11, 0.6) 0%,
+      rgba(24, 17, 11, 0.6) 66%,
+      rgba(24, 17, 11, 0.3) 84%,
+      rgba(24, 17, 11, 0) 100%
+    );
+  }
+}
+.hx-onphoto {
+  text-shadow:
+    0 1px 2px rgba(18, 12, 7, 0.5),
+    0 6px 22px rgba(18, 12, 7, 0.32);
+}
+
+/* 전화 CTA — 그림자로 무게를 준다 */
+.phone-cta {
+  box-shadow: 0 14px 38px rgba(18, 12, 7, 0.42);
+}
+/* CTA 뒤 은은한 숨쉬기 — 히어로에서 유일한 무한 모션, 글자 위가 아니다 */
+.hx-halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  background: #4c7a4a;
+  filter: blur(22px);
+  opacity: 0.55;
+}
+html:not([data-motion='off']) .hx-halo {
+  animation: hxBreath 4.4s ease-in-out infinite;
+}
+@keyframes hxBreath {
   0%,
   100% {
-    box-shadow: 0 10px 30px rgba(76, 122, 74, 0.28);
+    opacity: 0.42;
   }
   50% {
-    box-shadow: 0 14px 44px rgba(76, 122, 74, 0.42);
+    opacity: 0.72;
   }
 }
 
@@ -144,7 +207,7 @@ html {
     animation: none !important;
     transition: none !important;
   }
-  .phone-cta {
+  .hx-halo {
     animation: none !important;
   }
   .sage-rule,
@@ -165,9 +228,6 @@ html {
 [data-motion='off'] .hero-in {
   opacity: 1 !important;
   transform: none !important;
-}
-[data-motion='off'] .phone-cta {
-  animation: none !important;
 }
 [data-motion='off'] .sage-rule,
 [data-motion='off'] .dline {

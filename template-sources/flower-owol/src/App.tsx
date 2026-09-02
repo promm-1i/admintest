@@ -54,6 +54,10 @@ const SITE = {
     { label: '주문 문의', href: '#order' },
   ],
 
+  // 여기에 히어로 사진 교체 — 작업대 전경, 꽃 색이 화면을 채우는 세로 사진
+  heroImg: img7,
+  heroAlt: '작업대에 꽃을 펼쳐놓고 다듬는 모습',
+
   // 용도별 상품 — 여기에 상품 사진 교체
   shop: [
     { img: img1, name: '오월의 꽃다발', use: '생일 · 기념일', price: '35,000원부터', note: '당일 제작 · 예산에 맞춰 구성' },
@@ -214,39 +218,62 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 컴팩트 센터 + 당일배달 배지 ─────────────────────────────────────
+// ─── 히어로 — 작업대 풀블리드 ─────────────────────────────────────────────────
 
 function Hero() {
   const st = sameDayStatus()
+  const facts = [
+    { k: '당일 배달', v: SITE.deliveryNote.split('(')[0].trim() },
+    { k: '영업시간', v: `${SITE.hours[0].day} ${SITE.hours[0].time}` },
+    { k: SITE.shop[0].name, v: SITE.shop[0].price },
+  ]
   return (
-    <section className="pt-[72px]">
-      <div className="mx-auto max-w-3xl px-5 pt-14 md:pt-20 pb-12 text-center">
-        <p className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-[0.85rem] font-bold ${st.on ? 'bg-stem/12 text-stem' : 'bg-plum/8 text-plum/60'} ${MOTION ? 'hero-in' : ''}`}>
-          🚚 {st.label}
-        </p>
-        <h1 className={`f-disp mt-7 text-[clamp(2.3rem,6.2vw,4rem)] tracking-tight leading-[1.22] whitespace-pre-line ${MOTION ? 'hero-in d150' : ''}`}>
-          {SITE.slogan}
-        </h1>
-        <p className={`mx-auto mt-6 max-w-md text-[1rem] leading-relaxed text-plum/60 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
-        <div className={`mt-9 flex justify-center items-center gap-5 ${MOTION ? 'hero-in d450' : ''}`}>
-          <button
-            onClick={() => goTo('#order')}
-            className="px-8 py-4 rounded-full bg-plum text-cream text-[0.95rem] font-bold hover:bg-stem"
-            style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-          >
-            문자로 주문하기
-          </button>
-          <button
-            onClick={() => goTo('#shop')}
-            className="text-[0.95rem] font-bold border-b-2 border-plum pb-0.5 hover:text-stem hover:border-stem"
-            style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
-          >
-            상품 보기
-          </button>
+    <>
+      <section className="hx-hero">
+        <div className="hx-stage">
+          {/* 여기에 히어로 사진 교체 — 가로로 넓게 잘리니 인물·주요 피사체가 위쪽에 있는 세로 사진이 좋습니다 */}
+          <img className="hx-shot" src={SITE.heroImg} alt={`${SITE.name} — ${SITE.heroAlt}`} />
+          <div className="hx-scrim" aria-hidden="true" />
+          <div className="hx-copy">
+            <p className={`hx-eyebrow ${MOTION ? 'hx-rise' : ''}`}>{SITE.nameEn}</p>
+            <h1 className={`hx-title f-disp ${MOTION ? 'hx-rise hx-r1' : ''}`}>{SITE.slogan}</h1>
+            <p className={`hx-lead ${MOTION ? 'hx-rise hx-r2' : ''}`}>{SITE.sloganSub}</p>
+            <p className={`hx-status ${MOTION ? 'hx-rise hx-r3' : ''}`}>🚚 {st.label}</p>
+            <div className={`hx-actions ${MOTION ? 'hx-rise hx-r4' : ''}`}>
+              <a
+                href="#order"
+                onClick={(e) => {
+                  e.preventDefault()
+                  goTo('#order')
+                }}
+                className="hx-btn"
+              >
+                문자로 주문하기
+              </a>
+              <a
+                href="#shop"
+                onClick={(e) => {
+                  e.preventDefault()
+                  goTo('#shop')
+                }}
+                className="hx-btn-ghost"
+              >
+                상품 보기
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
+        <div className="hx-facts">
+          {facts.map((x) => (
+            <div key={x.k} className="hx-fact">
+              <span className="hx-fact-k">{x.k}</span>
+              <span className="hx-fact-v nums">{x.v}</span>
+            </div>
+          ))}
+        </div>
+      </section>
       <Shop />
-    </section>
+    </>
   )
 }
 
@@ -255,7 +282,7 @@ function Hero() {
 function Shop() {
   const { ref, inView } = useInView(0.05)
   return (
-    <div id="shop" ref={ref as React.RefObject<HTMLDivElement>} className="mx-auto max-w-6xl px-5 pb-20 md:pb-28 pt-4">
+    <div id="shop" ref={ref as React.RefObject<HTMLDivElement>} className="mx-auto max-w-6xl px-5 pb-20 md:pb-28 pt-14 md:pt-20">
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-5 gap-y-10">
         {SITE.shop.map((p, i) => (
           <article key={p.name} className={`group ${MOTION ? `anim-fade-up d${(i % 3) * 90 + 80}` : ''} ${inView ? 'in-view' : ''}`}>
