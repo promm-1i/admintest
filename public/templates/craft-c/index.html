@@ -83,6 +83,56 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── HERO : 온도 스케일 조판 (hx-) ───────────────────────────── */
+.hero.hx-hero{padding:78px 0 92px;text-align:left;overflow:hidden}
+.hx-wrap{max-width:1040px;margin:0 auto;padding:0 26px}
+.hx-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto 1fr;grid-template-areas:"head gauge" "body gauge";column-gap:46px}
+.hx-head{grid-area:head}
+.hx-body{grid-area:body;align-self:end;margin-top:34px}
+.hx-gauge{grid-area:gauge;align-self:end;display:flex;align-items:stretch;gap:18px}
+.hx-hero .hx-kicker{margin:0;max-width:none;font-size:11px;letter-spacing:.4em;font-weight:500;color:#6B6259}
+.hx-hero .hx-h1{margin:18px 0 0;font-family:"Noto Serif KR",serif;font-weight:600;font-size:clamp(27px,4.5vw,58px);line-height:1.3;letter-spacing:-.02em;color:var(--ink);text-wrap:wrap}
+.hx-hero .hx-h1 span{display:block}
+.hx-hero .hx-h1 .hx-em{color:var(--accent)}
+.hx-hero .hx-lede{margin:0;max-width:32em;color:#6B6259;font-size:14px;line-height:1.95}
+.hx-acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin-top:28px}
+.hx-cta{display:inline-block;background:var(--ink);color:var(--bg);font-size:13px;letter-spacing:.06em;padding:13px 26px;transition:background .3s}
+.hx-cta:hover{background:#2C2823}
+.hx-cta2{font-size:13px;letter-spacing:.06em;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:3px}
+.hx-scale{position:relative;flex:none;width:clamp(58px,6.4vw,96px)}
+.hx-scale::before{content:"";position:absolute;right:0;top:2px;bottom:2px;width:1px;background:var(--line)}
+.hx-hero .hx-tick{position:absolute;right:0;width:100%;transform:translateY(50%);display:flex;align-items:center;justify-content:flex-end;gap:8px;font-size:11px;letter-spacing:.12em;color:#6B6259;font-variant-numeric:tabular-nums}
+.hx-hero .hx-tick::after{content:"";width:14px;height:1px;background:#B8AFA3}
+.hx-hero .hx-tick.on{color:var(--ink);font-weight:500}
+.hx-hero .hx-tick.on::after{width:28px;background:var(--ink)}
+.hx-pillar{position:relative;overflow:hidden;width:clamp(60px,9.2vw,134px);background:var(--ink);padding:22px 0;display:flex;align-items:center;justify-content:center}
+.hx-pillar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.17}
+.hx-digits{position:relative;display:flex;flex-direction:column;align-items:center;font-family:"Noto Serif KR",serif;font-weight:600;color:#F4F1ED;font-size:clamp(38px,7vw,90px);line-height:1.02;letter-spacing:.01em}
+.hx-digits .hx-unit{font-size:.3em;letter-spacing:.16em;margin-top:.44em;font-weight:500}
+@keyframes hxRise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hx-hero .hx-kicker,.hx-h1 span,.hx-hero .hx-lede,.hx-acts,.hx-gauge{animation:hxRise .8s cubic-bezier(.32,.72,0,1) both}
+.hx-hero .hx-kicker{animation-delay:.05s}
+.hx-h1 span:nth-child(1){animation-delay:.17s}
+.hx-h1 span:nth-child(2){animation-delay:.29s}
+.hx-hero .hx-lede{animation-delay:.41s}
+.hx-acts{animation-delay:.53s}
+.hx-gauge{animation-delay:.12s}
+@media(max-width:720px){
+.hero.hx-hero{padding:52px 0 62px}
+.hx-wrap{padding:0 20px}
+.hx-grid{grid-template-areas:"head head" "body gauge";column-gap:14px}
+.hx-body{margin-top:24px}
+.hx-gauge{gap:10px}
+.hx-scale{width:44px}
+.hx-hero .hx-tick{font-size:10px;letter-spacing:.06em;gap:5px}
+.hx-hero .hx-tick::after{width:8px}
+.hx-hero .hx-tick.on::after{width:15px}
+.hx-pillar{width:52px;padding:16px 0}
+.hx-digits{font-size:38px}
+.hx-acts{margin-top:22px;gap:12px 16px}
+.hx-cta{padding:12px 20px}
+}
 </style>
 </head>
 <body>
@@ -93,11 +143,36 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">010-4894-4905</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<p class="kicker">CERAMIC ATELIER</p>
-<h1 style="margin-top:20px">1250도를 견딘 것들만<br><em>선반에 올립니다</em></h1>
-<p>소성온도는 작은 도자 아틀리에입니다. 쓰임이 분명한 그릇을 만들고, 그 과정을 배우고 싶은 분들과 나눕니다.</p>
-<div class="hr"></div>
+<section class="hero hx-hero"><div class="hx-wrap">
+<div class="hx-grid">
+
+<div class="hx-head">
+<p class="hx-kicker">CERAMIC ATELIER</p>
+<h1 class="hx-h1"><span>1250도를 견딘 것들만</span><span class="hx-em">선반에 올립니다</span></h1>
+</div>
+
+<div class="hx-body">
+<p class="hx-lede">소성온도는 작은 도자 아틀리에입니다. 쓰임이 분명한 그릇을 만들고, 그 과정을 배우고 싶은 분들과 나눕니다.</p>
+<div class="hx-acts">
+<a class="hx-cta" href="#class">클래스 보기</a>
+<a class="hx-cta2" href="#works">이번 가마 작품</a>
+</div>
+</div>
+
+<div class="hx-gauge">
+<div class="hx-scale">
+<span class="hx-tick" style="bottom:12.5%">600</span>
+<span class="hx-tick" style="bottom:37.5%">800</span>
+<span class="hx-tick" style="bottom:62.5%">1000</span>
+<span class="hx-tick on" style="bottom:93.75%">1250</span>
+</div>
+<div class="hx-pillar">
+<img src="./assets/3.jpg" alt="" aria-hidden="true">
+<div class="hx-digits"><span>1</span><span>2</span><span>5</span><span>0</span><span class="hx-unit">℃</span></div>
+</div>
+</div>
+
+</div>
 </div></section>
 
 <section id="works" style="padding-top:0"><div class="wrap">

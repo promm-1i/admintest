@@ -84,6 +84,60 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 세로 간판 히어로 (한자 세로 기둥 + 가로 한글) ===== */
+section.hx-hero{
+  --hx-sign:clamp(46px,6.7vw,96px);
+  --hx-gut:calc(var(--hx-sign) * 1.9);
+  --hx-rule:calc(24px + var(--hx-gut) - 30px);
+  --hx-mr:calc(var(--hx-gut) - 30px);
+  position:relative;overflow:hidden;padding:0;
+  border-bottom:4px double var(--ink);
+  background-color:var(--paper);
+  background-image:repeating-linear-gradient(to bottom,rgba(26,26,26,.05) 0 1px,rgba(26,26,26,0) 1px 34px);
+}
+.hx-inner{position:relative;max-width:1040px;margin:0 auto;padding:22px 24px 46px;min-height:calc(var(--hx-sign) * 6.3 + 24px)}
+/* 간판 기둥을 감싸는 세로 괘선 — 가로 괘선과 교차한다 */
+.hx-inner::after{content:"";position:absolute;top:0;bottom:0;right:var(--hx-rule);width:1px;background:var(--line)}
+.hx-meta{display:flex;justify-content:space-between;gap:14px;padding:0 var(--hx-gut) 9px 0;border-bottom:1.5px solid var(--ink);font-size:11px;letter-spacing:.14em;color:var(--soft)}
+/* 세로 기둥 — 가로 괘선 두 줄을 가로지른다 */
+.hx-sign{position:absolute;top:0;right:24px;display:flex;flex-direction:row-reverse;align-items:flex-start;gap:calc(var(--hx-sign) * .2)}
+.hx-sign-main{font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:var(--hx-sign);line-height:1;letter-spacing:.05em;writing-mode:vertical-rl;text-orientation:upright;color:var(--ink)}
+.hx-sign-sub{font-size:max(11px,calc(var(--hx-sign) * .155));font-weight:400;line-height:1;letter-spacing:.4em;writing-mode:vertical-rl;text-orientation:upright;color:var(--soft);margin-top:calc(var(--hx-sign) * .3)}
+.hx-main{padding:30px var(--hx-gut) 0 0}
+.hx-eyebrow{font-size:11px;letter-spacing:.3em;color:var(--soft)}
+.hx-head{font-family:"Nanum Myeongjo",serif;font-weight:800;border:0;padding:0;margin-top:14px;font-size:clamp(29px,6.8vw,96px);line-height:1.3;letter-spacing:-.015em}
+.hx-head span{display:block}
+.hx-dek{margin-top:20px;max-width:29em;font-size:14px;line-height:2;color:#3E3A33}
+.hx-foot{margin-top:26px;margin-right:var(--hx-mr);padding:16px 0 0;border-top:1.5px solid var(--ink)}
+.hx-by{font-size:11.5px;letter-spacing:.1em;color:var(--red)}
+.hx-act{margin-top:16px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.hx-cta-tel{display:inline-block;background:var(--ink);color:var(--paper);font-family:"Nanum Myeongjo",serif;font-weight:800;font-size:19px;letter-spacing:.07em;padding:13px 24px}
+.hx-cta-tel:hover{background:var(--red)}
+.hx-cta-more{font-size:13px;letter-spacing:.06em;color:var(--red);font-weight:500;border-bottom:1.5px solid var(--red);padding-bottom:3px}
+.hx-cta-more:hover{color:var(--ink);border-bottom-color:var(--ink)}
+@keyframes hx-rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.hx-meta,.hx-sign-main,.hx-sign-sub,.hx-eyebrow,.hx-head span,.hx-dek,.hx-foot{animation:hx-rise .66s cubic-bezier(.22,.7,.2,1) both}
+.hx-sign-main{animation-delay:.08s}
+.hx-sign-sub,.hx-eyebrow{animation-delay:.16s}
+.hx-head span:first-child{animation-delay:.24s}
+.hx-head span:last-child{animation-delay:.36s}
+.hx-dek{animation-delay:.44s}
+.hx-foot{animation-delay:.52s}
+@media(max-width:760px){
+  section.hx-hero{--hx-sign:clamp(34px,14vw,58px);--hx-gut:calc(var(--hx-sign) * 1.2 + 41px);--hx-rule:var(--hx-gut);--hx-mr:calc(var(--hx-gut) - 16px)}
+  .hx-inner{padding:16px 16px 32px}
+  .hx-sign{right:16px}
+  .hx-meta{flex-direction:column;gap:2px;font-size:10px;letter-spacing:.08em;padding-bottom:8px}
+  .hx-main{padding-top:20px}
+  .hx-eyebrow{font-size:9.5px;letter-spacing:.08em}
+  .hx-head{font-size:clamp(23px,7.9vw,36px);line-height:1.3;margin-top:10px}
+  .hx-dek{margin-top:14px;font-size:13px;line-height:1.85}
+  .hx-foot{margin-top:20px;padding-top:14px}
+  .hx-act{margin-top:13px;gap:18px}
+  .hx-cta-tel{font-size:17px;padding:12px 18px}
+}
+@media(prefers-reduced-motion:reduce){.hx-meta,.hx-sign-main,.hx-sign-sub,.hx-eyebrow,.hx-head span,.hx-dek,.hx-foot{animation:none!important;opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -92,22 +146,27 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <li><a href="#lead">머리기사</a></li><li><a href="#list">매물 광장</a></li><li><a href="#rate">시세표</a></li><li><a href="#office">사무소</a></li><li><a class="tel" href="tel:010-4894-4905">010-4894-4905</a></li>
 </ul></header>
 
-<div class="wrap masthead">
-<div class="top"><span>제 1,204 호</span><span>대성부동산 매물 정보</span><span>중개업 32년</span></div>
-<h1>大成不動産</h1>
-<p class="sub-h">동 · 네 · 소 · 식 · 부 · 동 · 산 · 정 · 보 · 지</p>
+<section id="lead" class="hx-hero">
+<div class="hx-inner">
+<p class="hx-meta"><span>제 1,204 호 · 대성부동산 매물 정보</span><span>1994년 개업 · 중개업 32년</span></p>
+<div class="hx-sign">
+<h1 class="hx-sign-main">大成不動産</h1>
+<p class="hx-sign-sub">공인중개사사무소</p>
 </div>
-
-<section id="lead" style="padding-top:0"><div class="wrap">
-<div class="lead">
-<figure class="rv"><img src="./assets/hero.jpg" alt="동네 전경"><figcaption>32년째 같은 자리에서 본 우리 동네 — 대성부동산 사무소 앞에서</figcaption></figure>
-<div class="rv">
-<h2>“이 동네 집은<br>제가 다 압니다”</h2>
-<p class="dek">1994년에 문을 열어 올해로 32년. 대성부동산은 이 동네에서 두 번 이사한 집도, 세 번 주인이 바뀐 상가도 기억합니다. 인터넷에 안 올라온 매물이 아직 장부에 있습니다.</p>
-<p class="byline">대표 공인중개사 · 박대성</p>
+<div class="hx-main">
+<p class="hx-eyebrow">동 · 네 · 소 · 식 · 부 · 동 · 산 · 정 · 보 · 지</p>
+<h2 class="hx-head"><span>“이 동네 집은</span><span>제가 다 압니다”</span></h2>
+<p class="hx-dek">1994년에 문을 열어 올해로 32년. 대성부동산은 이 동네에서 두 번 이사한 집도, 세 번 주인이 바뀐 상가도 기억합니다. 인터넷에 안 올라온 매물이 아직 장부에 있습니다.</p>
+</div>
+<div class="hx-foot">
+<p class="hx-by">대표 공인중개사 · 박대성</p>
+<div class="hx-act">
+<a class="hx-cta-tel" href="tel:010-4894-4905">010 · 4894 · 4905</a>
+<a class="hx-cta-more" href="#list">오늘의 매물 광장 보기</a>
 </div>
 </div>
-</div></section>
+</div>
+</section>
 
 <section id="list" style="padding-top:20px"><div class="wrap">
 <h2 class="rv">매물 광장</h2>

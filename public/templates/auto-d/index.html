@@ -94,6 +94,37 @@ footer b{color:var(--cream)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx 히어로 : 숫자 단독 거대화 ── */
+.hero.hx-hero{padding:clamp(24px,3vw,40px) 0 clamp(28px,3.4vw,44px);text-align:left;background-color:var(--cream);background-image:repeating-linear-gradient(to bottom,rgba(38,48,60,.065) 0 1px,rgba(38,48,60,0) 1px 38px);border-bottom:2px solid var(--line);overflow:hidden}
+.hero .hx-eyebrow{margin:0 0 clamp(10px,1.5vw,18px);max-width:none;font-size:11.5px;font-weight:700;letter-spacing:.22em;line-height:1.5;color:var(--navy)}
+.hx-plate{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:clamp(14px,2.2vw,30px);align-items:end}
+.hero .hx-h1{display:contents;margin:0;font-family:"Noto Sans KR",sans-serif;font-weight:900;line-height:1;color:var(--navy)}
+.hx-40{display:block;font-size:clamp(150px,39vw,560px);font-weight:900;line-height:.72;letter-spacing:-.055em;color:var(--navy)}
+.hx-tail{display:block;padding-bottom:clamp(6px,1.3vw,22px)}
+.hx-t{display:block;font-family:"Yeon Sung",cursive;font-weight:400;font-size:clamp(26px,3.2vw,46px);line-height:1.2;letter-spacing:.01em;color:var(--navy)}
+.hx-t2{color:var(--red)}
+.hero .hx-lead{grid-column:2;margin:clamp(14px,1.8vw,22px) 0 0;max-width:36ch;font-size:14px;line-height:1.8;color:var(--ink)}
+.hx-foot{margin-top:clamp(16px,2vw,24px);display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.hx-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hx-mini{margin:0 0 0 auto;display:flex;align-items:center;gap:12px}
+.hx-mini img{width:70px;height:92px;object-fit:cover;object-position:50% 26%;filter:sepia(.32) saturate(.85)}
+.hx-mini figcaption{font-size:11px;font-weight:700;line-height:1.65;letter-spacing:.02em;color:var(--navy)}
+@media(max-width:760px){
+  .hero.hx-hero{padding:24px 0 32px}
+  .hx-plate{display:block}
+  .hx-40{font-size:min(62vw,240px);line-height:.8;letter-spacing:-.06em}
+  .hx-tail{padding:0 0 0 36%;margin-top:2px}
+  .hx-t{font-size:clamp(21px,6.4vw,27px);line-height:1.28}
+  .hero .hx-lead{margin-top:18px;max-width:none;font-size:13.5px;line-height:1.75}
+  .hx-foot{margin-top:20px;gap:14px}
+  .hx-mini{margin-left:0;width:100%}
+  .hx-mini img{width:58px;height:74px}
+}
+.hx-rise{opacity:0;animation:hx-rise .72s cubic-bezier(.32,.72,0,1) both}
+@keyframes hx-rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hx-d1{animation-delay:.02s}.hx-d2{animation-delay:.14s}.hx-d3{animation-delay:.26s}.hx-d4{animation-delay:.38s}.hx-d5{animation-delay:.5s}.hx-d6{animation-delay:.62s}
+@media(prefers-reduced-motion:reduce){.hx-rise{opacity:1;transform:none;animation:none}}
 </style>
 </head>
 <body>
@@ -104,11 +135,18 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">전화하기</a>
 </div></header>
 
-<div class="hero">
-<div class="badge-lg"><span>太<small>SINCE 1983</small></span></div>
-<h1>사십 년째<br><em>같은 자리</em>에서</h1>
-<p>아버지가 맡기던 차를 이제 아들이 맡깁니다. 태평양모터스는 3대째 이 골목에서 차를 고칩니다.</p>
-<div class="hero-cta"><a class="btn btn-r" href="tel:010-4894-4905">정비 문의</a><a class="btn btn-c" href="#menu">메뉴 보기</a></div>
+<div class="hero hx-hero">
+<div class="wrap">
+<p class="hx-eyebrow hx-rise hx-d1">태평양모터스 · SINCE 1983 · 부산 중구 대청로</p>
+<div class="hx-plate">
+<h1 class="hx-h1"><span class="hx-40 hx-rise hx-d2">40</span><span class="hx-tail"><span class="hx-t hx-rise hx-d3">년째</span><span class="hx-t hx-t2 hx-rise hx-d4">같은 자리에서</span></span></h1>
+<p class="hx-lead hx-rise hx-d5">아버지가 맡기던 차를 이제 아들이 맡깁니다. 태평양모터스는 3대째 이 골목에서 차를 고칩니다.</p>
+</div>
+<div class="hx-foot hx-rise hx-d6">
+<div class="hx-cta"><a class="btn btn-r" href="tel:010-4894-4905">정비 문의</a><a class="btn btn-c" href="#menu">메뉴 보기</a></div>
+<figure class="hx-mini"><img src="./assets/2.jpg" alt="태평양모터스 정비사"><figcaption>대표 오태평<br>1983년 개업</figcaption></figure>
+</div>
+</div>
 </div>
 <div class="stripe" aria-hidden="true"></div>
 

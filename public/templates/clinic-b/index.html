@@ -167,6 +167,76 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hero 재조판: 행간 호흡형 (hx-) ── */
+.hx-hero{padding:116px 0 74px;text-align:left;position:relative;overflow:hidden;background:var(--mist)}
+/* 서류 괘선 질감 — 왼쪽에서만 옅게 */
+.hx-hero::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(to bottom,rgba(51,70,58,.07) 0 1px,transparent 1px 34px);-webkit-mask-image:linear-gradient(100deg,#000 0 21%,rgba(0,0,0,0) 52%);mask-image:linear-gradient(100deg,#000 0 21%,rgba(0,0,0,0) 52%);pointer-events:none}
+.hx-hero .hx-wrap{position:relative;display:grid;grid-template-columns:120px minmax(0,1fr);column-gap:40px;align-items:start}
+
+/* 세로 눈금선 (1칸 = 1분, 20분 눈금) */
+.hx-scale{--t:26px;position:relative;height:calc(var(--t)*20 + 1px);margin-top:12px}
+.hx-axis{position:absolute;right:0;top:0;bottom:0;width:1px;background:rgba(51,70,58,.22)}
+.hx-axis::after{content:"";position:absolute;left:0;top:0;width:1px;height:calc(var(--t)*12);background:var(--pine)}
+.hx-t1,.hx-t5{position:absolute;right:0;top:0;bottom:0}
+.hx-t1{width:11px;background-image:repeating-linear-gradient(to bottom,rgba(51,70,58,.3) 0 1px,transparent 1px var(--t))}
+.hx-t5{width:23px;background-image:repeating-linear-gradient(to bottom,rgba(51,70,58,.5) 0 1px,transparent 1px calc(var(--t)*5))}
+.hx-mark{position:absolute;right:-3px;top:calc(var(--t)*12);transform:translateY(-50%);display:flex;align-items:center;gap:9px}
+.hx-num{font-family:"Nanum Myeongjo",serif;font-size:27px;font-weight:700;color:var(--pine);line-height:1;white-space:nowrap}
+.hx-num i{font-style:normal;font-size:13px;margin-left:2px}
+.hx-rule{width:27px;height:1px;background:var(--pine);flex:none}
+.hx-dot{width:7px;height:7px;border-radius:50%;background:var(--pine);flex:none}
+.hx-cap{position:absolute;right:100%;margin-right:13px;top:-5px;writing-mode:vertical-rl;font-size:10.5px;letter-spacing:.2em;font-weight:500;color:var(--pine);white-space:nowrap}
+
+/* 문장 — 줄마다 들여쓰기를 조금씩 다르게, 행간을 넓게 */
+.hx-hero .hx-eyebrow{margin:0;max-width:none;font-size:11.5px;letter-spacing:.3em;color:var(--pine);font-weight:500}
+.hx-hero .hx-h1{font-family:"Nanum Myeongjo",serif;font-weight:700;font-size:clamp(30px,6.4vw,86px);line-height:1.92;letter-spacing:-.022em;margin-top:24px}
+.hx-hero .hx-h1 span{display:block}
+.hx-hero .hx-h1 .hx-l2{padding-left:.92em;color:var(--sage-deep)}
+.hx-hero .hx-lead{margin:30px 0 0;max-width:none;color:var(--pine);font-size:16px;line-height:2.05}
+.hx-hero .hx-lead span{display:block}
+.hx-hero .hx-lead span:first-child{padding-left:.2em}
+.hx-hero .hx-lead span+span{padding-left:1.3em}
+.hx-hero .hx-cta{margin-top:44px;display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-start}
+.hx-foot{margin-top:38px;display:flex;align-items:flex-end;justify-content:space-between;gap:26px}
+.hx-hero .hx-hours{margin:0;max-width:none;color:var(--pine);font-size:13px;line-height:1.9}
+.hx-hours b{font-weight:700}
+.hx-photo{position:absolute;right:0;bottom:2px;margin:0;width:126px;flex:none}
+.hx-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:8px}
+.hx-photo figcaption{margin-top:9px;font-size:11px;color:var(--pine);letter-spacing:.02em}
+
+/* 로드 때 줄 단위로 한 번만 */
+@keyframes hxRise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.hx-r{animation:hxRise .7s cubic-bezier(.32,.72,0,1) both}
+.hx-d1{animation-delay:.12s}.hx-d2{animation-delay:.24s}.hx-d3{animation-delay:.36s}
+.hx-d4{animation-delay:.48s}.hx-d5{animation-delay:.6s}.hx-d6{animation-delay:.72s}
+@media(prefers-reduced-motion:reduce){.hx-r{animation:none;opacity:1;transform:none}}
+
+/* 모바일 — 눈금을 가로로 눕히고 글자를 화면 폭 기준으로 다시 잡는다 */
+@media(max-width:860px){
+  .hx-hero{padding:92px 0 54px}
+  .hx-hero .hx-wrap{grid-template-columns:minmax(0,1fr);column-gap:0}
+  .hx-scale{height:74px;width:100%;margin:0 0 22px}
+  .hx-axis{top:auto;bottom:0;left:0;right:0;width:auto;height:1px}
+  .hx-axis::after{top:auto;bottom:0;left:0;width:60%;height:1px}
+  .hx-t1,.hx-t5{top:auto;bottom:0;left:0;right:0;width:auto}
+  .hx-t1{height:8px;background-image:repeating-linear-gradient(to right,rgba(51,70,58,.3) 0 1px,transparent 1px 5%)}
+  .hx-t5{height:15px;background-image:repeating-linear-gradient(to right,rgba(51,70,58,.5) 0 1px,transparent 1px 25%)}
+  .hx-mark{left:60%;right:auto;top:auto;bottom:0;transform:translateX(-50%);flex-direction:column;align-items:center;gap:4px}
+  .hx-cap{position:static;writing-mode:horizontal-tb;margin:0;letter-spacing:.16em}
+  .hx-num{font-size:21px}
+  .hx-rule{width:1px;height:13px}
+  .hx-hero .hx-h1{font-size:clamp(28px,8.9vw,38px);line-height:1.88;margin-top:20px}
+  .hx-hero .hx-h1 .hx-l2{padding-left:.7em}
+  .hx-hero .hx-lead{margin-top:22px;font-size:14.5px;line-height:1.95}
+  .hx-hero .hx-lead span+span{padding-left:.8em}
+  .hx-hero .hx-cta{margin-top:28px;gap:10px}
+  .hx-hero .hx-cta a{padding:14px 24px;font-size:14px}
+  .hx-foot{margin-top:26px;gap:16px}
+  .hx-hero .hx-hours{font-size:12px}
+  .hx-photo{position:static;width:78px}
+  .hx-photo figcaption{margin-top:6px;font-size:10.5px}
+}
 </style>
 </head>
 <body>
@@ -183,17 +253,35 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
   </div>
 </header>
 
-<section class="hero">
-  <div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
-  <div class="wrap hero-inner">
-    <p class="kicker">내과 · 건강검진 · 만성질환 관리</p>
-    <h1 style="margin-top:18px">숨 고르듯, 천천히<br><em>충분히 듣는 진료</em></h1>
-    <p>숨 내과는 초진 15분 예약제를 지킵니다. 증상보다 생활을 먼저 여쭙고, 꼭 필요한 검사만 권해 드립니다.</p>
-    <div class="hero-cta">
-      <a class="btn-p" href="tel:010-4894-4905">진료 예약하기</a>
-      <a class="btn-w" href="#dept">진료 안내 보기</a>
+<section class="hero hx-hero">
+  <div class="wrap hero-inner hx-wrap">
+    <div class="hx-scale hx-r">
+      <div class="hx-axis"></div>
+      <div class="hx-t1"></div>
+      <div class="hx-t5"></div>
+      <div class="hx-mark">
+        <span class="hx-cap">평균 진료 시간</span>
+        <b class="hx-num">12<i>분</i></b>
+        <span class="hx-rule"></span>
+        <span class="hx-dot"></span>
+      </div>
     </div>
-    <div class="today">평일 <b>09:00 – 18:00</b> · 점심시간 13:00–14:00 · 접수 마감 17:30</div>
+    <div class="hx-body">
+      <p class="kicker hx-eyebrow hx-r hx-d1">내과 · 건강검진 · 만성질환 관리</p>
+      <h1 class="hx-h1"><span class="hx-r hx-d2">숨 고르듯, 천천히</span><span class="hx-l2 hx-r hx-d3">충분히 듣는 진료</span></h1>
+      <p class="hx-lead hx-r hx-d4"><span>숨 내과는 초진 15분 예약제를 지킵니다.</span><span>증상보다 생활을 먼저 여쭙고, 꼭 필요한 검사만 권해 드립니다.</span></p>
+      <div class="hero-cta hx-cta hx-r hx-d5">
+        <a class="btn-p" href="tel:010-4894-4905">진료 예약하기</a>
+        <a class="btn-w" href="#dept">진료 안내 보기</a>
+      </div>
+      <div class="hx-foot hx-r hx-d6">
+        <p class="hx-hours">평일 <b>09:00 – 18:00</b> · 점심시간 13:00–14:00<br>접수 마감 17:30</p>
+        <figure class="hx-photo">
+          <img src="./assets/gallery-7.jpg" alt="숨 내과의원 상담 진찰실">
+          <figcaption>상담 진찰실</figcaption>
+        </figure>
+      </div>
+    </div>
   </div>
 </section>
 

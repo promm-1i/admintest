@@ -96,6 +96,49 @@ footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .nums-note{margin-top:14px;font-size:12px;color:var(--soft)}
+
+/* ===== hx : hero 재조판 — 초대형 단어 겹침 ===== */
+.hx-hero{position:relative;overflow:hidden;background:#0B0C0E;padding:74px 0 80px}
+.hx-hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(to bottom,rgba(241,241,242,.05) 0 1px,transparent 1px 46px)}
+.hx-hero .wrap{position:relative;z-index:1}
+.hx-kicker{position:relative;z-index:3;font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.24em;color:var(--red)}
+
+.hx-stack{position:relative;display:flex;align-items:center;
+  min-height:clamp(230px,32vw,430px);margin-top:26px}
+.hx-ghostwrap{position:absolute;top:0;bottom:0;left:50%;width:100vw;transform:translateX(-50%);
+  overflow:hidden;z-index:0;pointer-events:none}
+.hx-ghost{position:absolute;left:50%;top:50%;transform:translate(-50%,-52%);
+  font-family:"Black Han Sans",sans-serif;font-weight:400;font-size:52vw;line-height:.8;
+  letter-spacing:-.03em;white-space:nowrap;color:#3B3F45;z-index:0;user-select:none}
+.hx-head{position:relative;z-index:2;font-family:"Black Han Sans",sans-serif;font-weight:400;
+  font-size:clamp(30px,8.6vw,68px);line-height:1.04;letter-spacing:-.015em;color:var(--ink)}
+.hx-head span{display:block}
+.hx-head .hx-l1{margin-left:.06em;font-size:.5em;letter-spacing:.03em;color:var(--ink)}
+.hx-head b{color:var(--red);font-weight:400}
+
+.hx-lede{position:relative;z-index:3;margin-top:30px;max-width:440px;color:var(--soft);font-size:15px}
+.hx-cta{position:relative;z-index:3;margin-top:44px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-cta .btn{font-size:19px;padding:16px 30px}
+
+.hx-rise{opacity:0;transform:translateY(24px);animation:hx-up .82s cubic-bezier(.32,.72,0,1) both}
+.hx-fade{opacity:0;animation:hx-in .9s ease-out both}
+@keyframes hx-up{to{opacity:1;transform:none}}
+@keyframes hx-in{to{opacity:1}}
+.hx-d1{animation-delay:.06s}.hx-d2{animation-delay:.18s}.hx-d3{animation-delay:.30s}
+.hx-d4{animation-delay:.42s}.hx-d5{animation-delay:.54s}
+
+@media(max-width:640px){
+  .hx-hero{padding:44px 0 56px}
+  .hx-stack{margin-top:16px;min-height:190px}
+  .hx-ghost{font-size:58vw}
+  .hx-lede{margin-top:24px;font-size:14px}
+  .hx-cta{margin-top:30px;gap:10px}
+  .hx-cta .btn{padding:14px 20px;font-size:19px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hx-rise,.hx-fade{opacity:1!important;transform:none!important}
+}
 </style>
 </head>
 <body>
@@ -106,14 +149,14 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">체험 신청</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<p class="kicker">PERSONAL TRAINING STUDIO</p>
-<h1>몸은<br>거짓말을 <b>안 한다</b></h1>
-<p>의지 말고 시스템에 기대세요. 스틸백은 식단 · 수면 · 운동을 주 단위로 기록하고, 숫자가 바뀔 때까지 함께 갑니다.</p>
-<div class="hero-cta"><a class="btn btn-r" href="tel:010-4894-4905">무료 체험 신청</a><a class="btn btn-l" href="#result">변화 기록 보기</a></div>
+<section class="hx-hero"><div class="wrap">
+<p class="hx-kicker hx-rise hx-d1">PERSONAL TRAINING STUDIO</p>
+<div class="hx-stack">
+<span class="hx-ghostwrap" aria-hidden="true"><span class="hx-ghost hx-fade hx-d2">거짓말</span></span>
+<h1 class="hx-head"><span class="hx-l1 hx-rise hx-d2">몸은</span><span class="hx-l2 hx-rise hx-d3">거짓말을 <b>안 한다</b></span></h1>
 </div>
-<figure class="hero-img rv"><img src="./assets/hero.jpg" alt="트레이닝 존"><span class="rec">● REC — 오늘의 수업</span></figure>
+<p class="hx-lede hx-rise hx-d4">의지 말고 시스템에 기대세요. 스틸백은 식단 · 수면 · 운동을 주 단위로 기록하고, 숫자가 바뀔 때까지 함께 갑니다.</p>
+<div class="hx-cta hx-rise hx-d5"><a class="btn btn-r" href="tel:010-4894-4905">무료 체험 신청</a><a class="btn btn-l" href="#result">변화 기록 보기</a></div>
 </div></section>
 
 <section id="result" style="padding-top:0"><div class="wrap">
