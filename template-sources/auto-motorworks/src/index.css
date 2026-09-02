@@ -131,18 +131,17 @@ html {
   }
 }
 
-/* 히어로 사진 — 우측에서 밀려 들어옴 */
-.hero-photo {
-  animation: photoSlide 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+/* 해저드 스트라이프 — 이발소 기둥처럼 천천히 회전 */
+.hazard-band {
+  background-size: 40px 100%;
+  animation: hazardMove 1.6s linear infinite;
 }
-@keyframes photoSlide {
+@keyframes hazardMove {
   from {
-    opacity: 0;
-    transform: translateX(26px);
+    background-position: 0 0;
   }
   to {
-    opacity: 1;
-    transform: translateX(0);
+    background-position: 40px 0;
   }
 }
 
@@ -157,20 +156,6 @@ html {
   }
   to {
     transform: translateX(-50%);
-  }
-}
-
-/* 해저드 스트라이프 — 이발소 기둥처럼 천천히 회전 */
-.hazard-band {
-  background-size: 40px 100%;
-  animation: hazardMove 1.6s linear infinite;
-}
-@keyframes hazardMove {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 40px 0;
   }
 }
 
@@ -225,8 +210,7 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .anim-fade-up,
-  .hero-in,
-  .hero-photo {
+  .hero-in {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
@@ -237,6 +221,7 @@ html {
   }
   .marquee,
   .hazard-band,
+  .hx-tape-run,
   .oil-hot.in-view {
     animation: none !important;
   }
@@ -254,13 +239,13 @@ html {
   transition: none !important;
 }
 [data-motion='off'] .anim-fade-up,
-[data-motion='off'] .hero-in,
-[data-motion='off'] .hero-photo {
+[data-motion='off'] .hero-in {
   opacity: 1 !important;
   transform: none !important;
 }
 [data-motion='off'] .marquee,
 [data-motion='off'] .hazard-band,
+[data-motion='off'] .hx-tape-run,
 [data-motion='off'] .oil-hot {
   animation: none !important;
 }
@@ -287,4 +272,298 @@ h1, h2, h3 {
 }
 p, li, dd, figcaption {
   text-wrap: pretty;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   HERO [layer] — 리프트 사진이 텍스트 블록 뒤로 파고들어 화면 밖으로 잘려나간다
+   기본 상태가 곧 최종 상태다. 모션은 그 위에만 얹는다.
+══════════════════════════════════════════════════════════════════════════════ */
+
+.hx-hero {
+  position: relative;
+  overflow: hidden;
+  background: #1a1c1e;
+  color: #f2f0ea;
+}
+
+/* 정비 베이 — 사진과 텍스트가 겹치는 판. 크롭은 여기서 일어난다 */
+.hx-bay {
+  position: relative;
+  overflow: hidden;
+}
+
+.hx-bay-copy {
+  position: relative;
+  z-index: 2;
+  padding-top: 2.25rem;
+  /* 모바일 첫 화면: 실적 레일 첫 줄이 하단 고정바에 반쯤 걸리지 않도록 24px 더 내린다 */
+  padding-bottom: 3.75rem;
+}
+
+/* ── 사진: 모바일은 텍스트 아래로 내려와 전폭, PC는 텍스트 뒤로 파고든다 ── */
+.hx-photo {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 14rem;
+  overflow: hidden;
+}
+.hx-photo-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 12%;
+}
+/* 겹침 구간에만 까는 국소 그라디언트 — 모바일은 아래쪽만 */
+.hx-photo-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(26, 28, 30, 0.78) 0%, rgba(26, 28, 30, 0) 46%);
+}
+
+/* 작업 베이 경계선 — 히어로의 유일한 무한 반복 모션 (면적 1%, 글자 없음, transform 만) */
+.hx-floorline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 8px;
+  z-index: 3;
+  overflow: hidden;
+}
+.hx-tape {
+  position: absolute;
+  top: -40px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: repeating-linear-gradient(-45deg, #1a1c1e 0 14px, #ff7a1a 14px 28px);
+}
+.hx-nowrap {
+  white-space: nowrap;
+}
+
+/* ── 텍스트 ── */
+.hx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #ff7a1a;
+}
+.hx-title {
+  margin-top: 1rem;
+  max-width: 40rem;
+  font-size: clamp(2rem, 4.4vw, 3.3rem);
+  font-weight: 800;
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+  white-space: pre-line;
+  color: #f2f0ea;
+  text-shadow: 0 1px 2px rgba(26, 28, 30, 0.85), 0 8px 28px rgba(26, 28, 30, 0.7);
+}
+.hx-sub {
+  margin-top: 1.15rem;
+  max-width: 31rem;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #adaba6;
+  text-shadow: 0 1px 2px rgba(26, 28, 30, 0.8);
+}
+.hx-actions {
+  margin-top: 1.7rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+.hx-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.05rem 1.9rem;
+  background: #ff7a1a;
+  color: #1a1c1e;
+  font-size: 0.95rem;
+  font-weight: 800;
+  transition: background-color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hx-cta:hover {
+  background: #f2f0ea;
+}
+html:not([data-motion='off']) .hx-cta:hover {
+  transform: translateY(-2px);
+}
+.hx-cta-ghost {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #f2f0ea;
+  border-bottom: 2px solid rgba(242, 240, 234, 0.5);
+  padding-bottom: 3px;
+  transition: border-color 0.2s ease;
+}
+.hx-cta-ghost:hover {
+  border-color: #ff7a1a;
+}
+.hx-meta {
+  margin-top: 1.2rem;
+  max-width: 34rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.7;
+  color: #adaba6;
+  text-shadow: 0 1px 2px rgba(26, 28, 30, 0.8);
+}
+.hx-meta-tel {
+  color: #f2f0ea;
+  border-bottom: 1px solid rgba(242, 240, 234, 0.35);
+}
+.hx-meta-tel:hover {
+  border-color: #ff7a1a;
+}
+
+/* ── 하단 실적 레일 — 사진의 아래끝을 잘라 히어로를 바닥에 앉힌다 ── */
+.hx-rail {
+  position: relative;
+  z-index: 2;
+  background: #1a1c1e;
+}
+.hx-rail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.hx-fact {
+  padding: 1rem 0.9rem 1.1rem;
+}
+.hx-fact:nth-child(odd) {
+  padding-left: 0;
+}
+.hx-fact:nth-child(even) {
+  border-left: 1px solid rgba(242, 240, 234, 0.13);
+}
+.hx-fact:nth-child(n + 3) {
+  border-top: 1px solid rgba(242, 240, 234, 0.13);
+}
+.hx-fact-n {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #ff7a1a;
+}
+.hx-fact-l {
+  margin-top: 0.45rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #adaba6;
+}
+
+/* ── PC: 사진이 텍스트 뒤로 파고들고 오른쪽 끝은 화면 밖으로 흘러나간다 ── */
+@media (min-width: 768px) {
+  .hx-bay-copy {
+    padding-top: 5rem;
+    padding-bottom: 5.5rem;
+    min-height: 30rem;
+  }
+  .hx-title {
+    margin-top: 1.1rem;
+  }
+  .hx-sub {
+    margin-top: 1.3rem;
+  }
+  .hx-actions {
+    margin-top: 2rem;
+  }
+  .hx-meta {
+    margin-top: 1.5rem;
+  }
+  .hx-photo {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 24%;
+    right: -6%;
+    width: auto;
+    height: auto;
+  }
+  .hx-photo-img {
+    object-position: 50% 16%;
+  }
+  .hx-photo-veil {
+    background:
+      linear-gradient(
+        to right,
+        #1a1c1e 0%,
+        rgba(26, 28, 30, 0.985) 16%,
+        rgba(26, 28, 30, 0.94) 27%,
+        rgba(26, 28, 30, 0.7) 35%,
+        rgba(26, 28, 30, 0.3) 43%,
+        rgba(26, 28, 30, 0.05) 52%,
+        rgba(26, 28, 30, 0) 58%
+      ),
+      linear-gradient(to top, rgba(26, 28, 30, 0.6) 0%, rgba(26, 28, 30, 0) 22%);
+  }
+  .hx-rail-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+  .hx-fact {
+    padding: 1.4rem 1.6rem 1.5rem;
+    border-left: 1px solid rgba(242, 240, 234, 0.13);
+  }
+  .hx-fact:nth-child(odd) {
+    padding-left: 1.6rem;
+  }
+  .hx-fact:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+  .hx-fact:nth-child(n + 3) {
+    border-top: 0;
+  }
+  .hx-fact-n {
+    font-size: 1.6rem;
+  }
+}
+
+/* 베이 경계선 흐름 · 사진 등장 — 랜딩형에서만. 기본형은 클래스 자체가 붙지 않는다 */
+html:not([data-motion='off']) .hx-tape-run {
+  animation: hxTape 1.6s linear infinite;
+}
+@keyframes hxTape {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(39.6px);
+  }
+}
+
+html:not([data-motion='off']) .hx-photo-in {
+  animation: hxPhotoIn 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+@keyframes hxPhotoIn {
+  from {
+    opacity: 0;
+    transform: translateX(44px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-photo-in {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .hx-cta,
+  .hx-cta-ghost {
+    transition: none !important;
+  }
 }

@@ -223,47 +223,73 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 수직 스플릿 (좌 오렌지 패널 / 우 사진) ─────────────────────────
+// ─── 히어로 — [layer] 리프트에 올린 차가 텍스트 뒤로 파고들어 화면 밖으로 흘러나간다 ──
 
 function Hero() {
   return (
-    <section className="pt-[70px]">
-      <div className="grid md:grid-cols-[1fr_1.1fr] min-h-[560px]">
-        <div className="relative bg-safety text-steel px-6 py-14 md:px-12 md:py-20 flex flex-col justify-center overflow-hidden">
-          <span className="hazard-band absolute top-0 left-0 right-0 h-3" aria-hidden />
-          <p className={`text-[0.78rem] tracking-[0.3em] uppercase font-extrabold ${MOTION ? 'hero-in' : ''}`}>NO APPROVAL, NO WORK</p>
-          <h1 className={`mt-5 text-[clamp(2rem,4.6vw,3.3rem)] font-extrabold tracking-[-0.035em] leading-[1.15] whitespace-pre-line ${MOTION ? 'hero-in d150' : ''}`}>
-            {SITE.slogan}
-          </h1>
-          <p className={`mt-6 max-w-md text-[1rem] leading-relaxed text-steel/75 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
-          <div className={`mt-9 flex flex-wrap items-center gap-4 ${MOTION ? 'hero-in d450' : ''}`}>
-            <button
-              onClick={() => goTo('#reserve')}
-              className="px-7 py-4 bg-steel text-concrete text-[0.95rem] font-extrabold hover:bg-white hover:text-steel"
-              style={{ transition: MOTION ? 'all 0.2s' : 'none' }}
+    <section className="hero hx-hero pt-[70px]">
+      <div className="hx-bay">
+        <div className="hx-bay-copy mx-auto max-w-6xl px-5">
+          <p className={`hx-eyebrow ${MOTION ? 'hero-in' : ''}`}>
+            <span className="hazard-chip" aria-hidden />
+            NO APPROVAL, NO WORK
+          </p>
+          <h1 className={`hx-title ${MOTION ? 'hero-in d150' : ''}`}>{SITE.slogan}</h1>
+          <p className={`hx-sub ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
+          <div className={`hx-actions ${MOTION ? 'hero-in d450' : ''}`}>
+            <a
+              href="#reserve"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#reserve')
+              }}
+              className="hx-cta"
             >
               정비 예약하기
-            </button>
-            <button
-              onClick={() => goTo('#labor')}
-              className="text-[0.95rem] font-extrabold border-b-2 border-steel pb-0.5 hover:opacity-60"
-              style={{ transition: MOTION ? 'opacity 0.2s' : 'none' }}
+            </a>
+            <a
+              href="#labor"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#labor')
+              }}
+              className="hx-cta-ghost"
             >
               공임표 보기
-            </button>
+            </a>
           </div>
-          <div className={`mt-10 grid grid-cols-2 gap-x-8 gap-y-4 max-w-sm ${MOTION ? 'hero-in d450' : ''}`}>
-            {SITE.facts.map((f) => (
-              <div key={f.label} className="border-l-[3px] border-steel/40 pl-3">
-                <p className="nums text-[1.25rem] font-extrabold leading-none">{f.n}</p>
-                <p className="mt-1 text-[0.78rem] text-steel/65 font-semibold">{f.label}</p>
-              </div>
-            ))}
-          </div>
+          <p className={`hx-meta nums ${MOTION ? 'hero-in d450' : ''}`}>
+            <a href={`tel:${SITE.phone}`} className="hx-meta-tel">
+              {SITE.phone}
+            </a>
+            {` · ${SITE.location.walk} · `}
+            <span className="hx-nowrap">{`${SITE.hours[0].day} ${SITE.hours[0].time}`}</span>
+          </p>
         </div>
-        <div className={`relative min-h-[320px] ${MOTION ? 'hero-photo' : ''}`}>
+
+        <div className={`hx-photo ${MOTION ? 'hx-photo-in' : ''}`}>
           {/* 여기에 히어로 사진 교체 */}
-          <img src={SITE.heroPhoto} alt="모터웍스 작업장" className="absolute inset-0 w-full h-full object-cover" />
+          <img
+            src={SITE.heroPhoto}
+            alt="리프트에 올린 차량 하체를 점검하는 모터웍스 정비사"
+            className="hx-photo-img"
+          />
+          <span className="hx-photo-veil" aria-hidden />
+        </div>
+
+        <span className="hx-floorline" aria-hidden>
+          <span className={`hx-tape ${MOTION ? 'hx-tape-run' : ''}`} />
+        </span>
+      </div>
+
+      <div className="hx-rail">
+        <div className="mx-auto max-w-6xl px-5 hx-rail-grid">
+          {SITE.facts.map((f) => (
+            <div key={f.label} className="hx-fact">
+              <p className="nums hx-fact-n">{f.n}</p>
+              <p className="hx-fact-l">{f.label}</p>
+            </div>
+          ))}
         </div>
       </div>
     </section>
