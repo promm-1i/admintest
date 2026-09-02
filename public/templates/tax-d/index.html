@@ -124,6 +124,74 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== 히어로 : 필지 지도 (hx-) ===== */
+.hx{position:relative;background:var(--cream);overflow:hidden;padding:82px 0 74px;min-height:606px;display:flex;align-items:center}
+.hx-map{position:absolute;inset:0 0 0 37%;z-index:0;background:#F3EADD;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.22) 10%,#000 29%);
+          mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.22) 10%,#000 29%)}
+.hx-plate{position:absolute;inset:-30%;transform:rotate(-9deg);
+  background-image:
+    repeating-linear-gradient(90deg,#FCF8F2 0 19px,transparent 19px 232px),
+    repeating-linear-gradient(0deg,#FCF8F2 0 15px,transparent 15px 204px),
+    repeating-linear-gradient(90deg,rgba(228,216,199,.9) 0 1px,transparent 1px 54px),
+    repeating-linear-gradient(0deg,rgba(228,216,199,.9) 0 1px,transparent 1px 54px)}
+.hx-fld{position:absolute;background:#E6EAE0;transform:rotate(-9deg)}
+.hx-fld.riv{left:-8%;top:76%;width:118%;height:38px;background:#E1E8E6}
+.hx-fld.prk{left:6%;top:6%;width:22%;height:24%;border-radius:8px}
+.hx-lot{position:absolute;z-index:2;border:1.5px solid rgba(168,91,60,.42);background:rgba(168,91,60,.12);transform:rotate(-9deg);transition:border-color .3s,background .3s}
+.hx-lot.l1{left:33%;top:55%;width:22%;height:24%}
+.hx-lot.l2{left:68%;top:14%;width:20%;height:22%}
+.hx-lot.l3{left:43%;top:20%;width:26%;height:27%;border-width:2px;border-color:var(--terra);background:rgba(168,91,60,.24)}
+.hx-tag{position:absolute;z-index:4;background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 11px;box-shadow:0 8px 20px -14px rgba(51,43,37,.5);transition:transform .35s cubic-bezier(.32,.72,0,1),border-color .3s}
+.hx-tag b{display:block;font-size:12.5px;font-weight:700;color:var(--ink);white-space:nowrap}
+.hx-tag i{display:block;margin-top:2px;font-style:normal;font-size:11px;color:#726859;white-space:nowrap}
+.hx-tag.t1{left:29%;top:81%}
+.hx-tag.t2{left:66%;top:3%}
+.hx-tag.t3{left:43%;top:8%;border-color:rgba(168,91,60,.5)}
+.hx-tag:hover,.hx-lot:hover{z-index:6}
+.hx-tag:hover{transform:translateY(-3px);border-color:var(--terra)}
+.hx-lot:hover{background:rgba(168,91,60,.22);border-color:var(--terra)}
+.hx-pin{position:absolute;z-index:5;left:53%;top:35%;width:17px;height:17px;border-radius:50% 50% 50% 0;background:var(--terra);transform:rotate(-45deg);box-shadow:0 4px 9px rgba(51,43,37,.3)}
+.hx-pin::before{content:"";position:absolute;left:5px;top:5px;width:7px;height:7px;border-radius:50%;background:var(--cream)}
+.hx-pin::after{content:"";position:absolute;left:50%;top:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;border:2px solid var(--terra);animation:hxping 2.4s cubic-bezier(.22,.6,.3,1) infinite}
+@keyframes hxping{0%{transform:scale(.42);opacity:.6}70%{transform:scale(1.55);opacity:0}100%{transform:scale(1.55);opacity:0}}
+.hx-card{position:absolute;z-index:3;left:70.5%;top:43%;width:272px;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:15px 17px 13px;box-shadow:0 20px 44px -24px rgba(51,43,37,.45)}
+.hx-card h3{font-family:"Gowun Batang",serif;font-size:15px;font-weight:700;color:#96502F}
+.hx-card .sub{margin-top:3px;font-size:11.5px;color:#726859}
+.hx-rows{margin-top:11px}
+.hx-cs{display:flex;justify-content:space-between;align-items:flex-start;gap:9px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:12px;color:#4A4139;line-height:1.55}
+.hx-cs:last-of-type{border-bottom:0}
+.hx-cs b{font-family:"Gowun Batang",serif;font-weight:700;color:var(--ink);font-size:13.5px;white-space:nowrap}
+.hx-sv{margin-top:9px;background:var(--cream);border-radius:10px;padding:9px 12px;display:flex;justify-content:space-between;align-items:center}
+.hx-sv span{font-size:12px;font-weight:700;color:var(--ink)}
+.hx-sv b{font-family:"Gowun Batang",serif;font-size:19px;color:var(--terra)}
+.hx-note{margin-top:8px;font-size:10.5px;color:#7C7266;line-height:1.5}
+.hx-inner{position:relative;z-index:4;width:100%}
+.hx-copy{max-width:456px}
+.hx h1{font-family:"Gowun Batang",serif;font-size:clamp(30px,4.6vw,46px);font-weight:700;line-height:1.5;margin-top:13px}
+.hx h1 em{font-style:normal;color:var(--terra)}
+.hx-copy .d{margin-top:16px;color:#6E6459;font-size:15px;max-width:418px;line-height:1.75}
+.hx-line{display:none}
+@media(prefers-reduced-motion:reduce){.hx-pin::after{animation:none;opacity:.3;transform:scale(1)}.hx-tag{transition:none}}
+@media(max-width:860px){
+  .hx{display:block;padding:0 0 38px;min-height:0}
+  .hx-map{position:relative;inset:auto;width:100%;height:176px;
+    -webkit-mask-image:linear-gradient(180deg,#000 72%,transparent);mask-image:linear-gradient(180deg,#000 72%,transparent)}
+  .hx-lot.l1{left:5%;top:14%;width:25%;height:42%}
+  .hx-lot.l2{left:73%;top:12%;width:22%;height:38%}
+  .hx-lot.l3{left:35%;top:18%;width:30%;height:46%}
+  .hx-fld.riv{top:72%;height:26px}
+  .hx-fld.prk{left:4%;top:64%;width:26%;height:30%}
+  .hx-tag{display:none}
+  .hx-pin{left:46%;top:33%}
+  .hx-line{display:block;padding:12px 24px 0;font-size:12.5px;line-height:1.65;color:#6E6459}
+  .hx-line b{color:var(--ink);font-weight:700}
+  .hx-inner{padding-top:18px}
+  .hx-copy{max-width:none}
+  .hx-copy .d{max-width:none}
+  .hx-card{position:static;width:auto;margin:22px 24px 0}
+}
 </style>
 </head>
 <body>
@@ -134,22 +202,42 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">사전 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<p class="kicker">REAL ESTATE TAX SPECIALIST</p>
-<h1 style="margin-top:14px">집을 팔기 <em>전에</em><br>오셔야 합니다</h1>
-<p>양도세는 계약서에 도장 찍는 순간 대부분 결정됩니다. 토지세무회계는 거래 전 상담으로 세금을 설계합니다.</p>
-<div class="hero-cta"><a class="btn btn-t" href="tel:010-4894-4905">사전 상담 예약</a><a class="btn btn-w" href="#svc">업무 분야</a></div>
+<section class="hx hx-hero">
+
+<div class="hx-map hx-panel">
+  <div class="hx-plate"></div>
+  <span class="hx-fld prk"></span>
+  <span class="hx-fld riv"></span>
+  <div class="hx-lot l1"></div>
+  <div class="hx-lot l2"></div>
+  <div class="hx-lot l3"></div>
+  <div class="hx-tag t1"><b>보유 B · 다가구</b><i>대지 132㎡ · 2011년 취득 · 2주택</i></div>
+  <div class="hx-tag t2"><b>보유 C · 나대지</b><i>대지 340㎡ · 2006년 상속 · 비사업용</i></div>
+  <div class="hx-tag t3"><b>보유 A · 아파트</b><i>전용 84㎡ · 2019년 취득 · 1세대 1주택</i></div>
+  <span class="hx-pin"></span>
 </div>
-<aside class="case rv">
-<h3>실제 상담 사례 (예시)</h3>
-<div class="cs"><span>1주택 · 2년 보유 아파트 양도</span><span class="v">—</span></div>
-<div class="cs"><span>상담 전 예상 세액</span><span class="v">4,820만원</span></div>
-<div class="cs"><span>상담 후 (보유·거주 요건 조정)</span><span class="v">1,140만원</span></div>
-<div class="save"><span>절감액</span><b>3,680만원</b></div>
-<p class="note">* 템플릿 데모용 예시입니다. 실제 세액은 개별 상황에 따라 크게 달라집니다.</p>
+
+<p class="hx-line"><b>보유 A · 아파트</b> 전용 84㎡ · 2019년 취득 · 1세대 1주택 — 사전 검토 중<br>보유 B · 다가구 대지 132㎡ · 2주택 / 보유 C · 나대지 대지 340㎡ · 비사업용</p>
+
+<div class="wrap hx-inner"><div class="hx-copy">
+<p class="kicker">REAL ESTATE TAX SPECIALIST</p>
+<h1>집을 팔기 <em>전에</em><br>오셔야 합니다</h1>
+<p class="d">양도세는 계약서에 도장 찍는 순간 대부분 결정됩니다. 토지세무회계는 거래 전 상담으로 세금을 설계합니다.</p>
+<div class="hero-cta"><a class="btn btn-t" href="tel:010-4894-4905">사전 상담 예약</a><a class="btn btn-w" href="#svc">업무 분야</a></div>
+</div></div>
+
+<aside class="hx-card">
+<h3>양도세 사전 검토</h3>
+<p class="sub">보유 A · 아파트 · 1주택 · 2년 보유 양도</p>
+<div class="hx-rows">
+<div class="hx-cs"><span>상담 전 예상 세액</span><b>4,820만원</b></div>
+<div class="hx-cs"><span>상담 후 (보유 · 거주 요건 조정)</span><b>1,140만원</b></div>
+</div>
+<div class="hx-sv"><span>절감액</span><b>3,680만원</b></div>
+<p class="hx-note">* 템플릿 데모용 예시입니다. 실제 세액은 개별 상황에 따라 크게 달라집니다.</p>
 </aside>
-</div></section>
+
+</section>
 
 <figure class="band">
 <img src="./assets/3.jpg" alt="상담실">

@@ -109,6 +109,81 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== 히어로 — 송영 노선 지도 ===== */
+.hx-hero{position:relative;overflow:hidden;padding:0;background:var(--teal);color:#fff;min-height:636px;display:flex;flex-direction:column;justify-content:center;isolation:isolate}
+.hx-map{position:absolute;inset:0;z-index:0}
+.hx-map::before{content:"";position:absolute;inset:0;
+  background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 46px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 46px),
+    linear-gradient(100deg,transparent 46%,rgba(0,0,0,.08) 78%,rgba(0,0,0,.14) 100%)}
+.hx-plot{position:absolute;inset:0}
+.hx-plot svg{position:absolute;inset:0;width:100%;height:100%}
+.hx-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,var(--teal) 0%,var(--teal) 38%,rgba(14,124,123,.86) 50%,rgba(14,124,123,.34) 62%,rgba(14,124,123,0) 74%)}
+
+.hx-stop{position:absolute;z-index:3;display:flex;align-items:center;gap:9px;margin:-9px 0 0 -9px}
+.hx-dot{position:relative;flex:none;width:18px;height:18px;border-radius:50%;background:#fff;border:5px solid var(--amber);box-shadow:0 6px 14px -4px rgba(0,0,0,.5)}
+.hx-stop-end .hx-dot{width:22px;height:22px;border:6px solid #fff;background:var(--teal);margin:-2px}
+.hx-tag{background:#fff;color:var(--ink);border-radius:9px;padding:7px 11px;font-size:12.5px;font-weight:900;white-space:nowrap;display:flex;align-items:center;gap:9px;box-shadow:0 14px 28px -16px rgba(0,0,0,.75);transition:transform .35s cubic-bezier(.32,.72,0,1)}
+.hx-tag i{font-style:normal;font-weight:900;color:var(--teal);font-variant-numeric:tabular-nums;border-left:1px solid var(--line);padding-left:9px}
+.hx-stop-end .hx-tag{background:var(--ink);color:#fff}
+.hx-stop-end .hx-tag i{color:#FFD98F;border-left-color:rgba(255,255,255,.28)}
+.hx-stop:hover{z-index:5}
+.hx-stop:hover .hx-tag{transform:translateY(-3px)}
+.hx-stop-live .hx-dot::after{content:"";position:absolute;left:50%;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;border:2px solid var(--amber);animation:hxPing 2.4s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes hxPing{0%{transform:scale(1);opacity:.9}70%,100%{transform:scale(2.7);opacity:0}}
+@media(prefers-reduced-motion:reduce){.hx-stop-live .hx-dot::after{animation:none;opacity:0}}
+
+.hx-shot{position:absolute;z-index:2;right:-44px;bottom:-58px;width:min(374px,30vw);height:266px;margin:0;overflow:hidden;border-radius:20px 0 0 0}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:56% 52%}
+.hx-shot figcaption{position:absolute;left:0;right:0;top:0;padding:14px 18px 42px;font-size:12.5px;font-weight:700;color:#fff;
+  background:linear-gradient(rgba(5,28,27,.94),rgba(5,28,27,.6) 52%,transparent)}
+.hx-shot figcaption em{display:block;font-style:normal;font-weight:400;color:rgba(255,255,255,.88);margin-top:2px}
+
+.hx-note{position:absolute;z-index:3;left:max(24px,calc(50% - 496px));bottom:24px;font-size:12px;font-weight:700;color:rgba(255,255,255,.94);letter-spacing:.01em}
+.hx-line{display:none}
+.hx-m{display:none}
+
+.hx-wrap{position:relative;z-index:4}
+.hx-copy{max-width:492px;padding:78px 0}
+.hx-copy h1{font-size:clamp(30px,4.5vw,46px);font-weight:900;line-height:1.34;letter-spacing:-.02em;margin-top:16px}
+.hx-copy h1 em{font-style:normal;color:#FFD98F}
+.hx-copy p{margin-top:18px;color:#EDF7F6;font-size:15.5px;line-height:1.75;max-width:424px}
+.hx-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-copy p.hx-facts{margin-top:26px;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.94);line-height:1.9;max-width:430px}
+.hx-facts b{color:#fff;font-weight:900}
+
+@media(max-width:900px){
+  .hx-shot{width:min(300px,34vw);height:230px;bottom:-46px}
+  .hx-copy{max-width:400px;padding:66px 0}
+}
+@media(max-width:760px){
+  .hx-hero{min-height:0;display:flex;flex-direction:column}
+  .hx-wrap{order:1}
+  .hx-copy{max-width:none;padding:40px 0 6px}
+  .hx-copy p{max-width:none}
+  .hx-scrim{display:none}
+  .hx-map{position:relative;inset:auto;order:2;height:196px;margin-top:26px}
+  .hx-map::before{background:
+    repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 1px 38px),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 38px),
+    rgba(0,0,0,.1)}
+  .hx-d{display:none}
+  .hx-m{display:block}
+  .hx-tag{display:none}
+  .hx-stop:nth-of-type(1){left:12%!important}
+  .hx-stop:nth-of-type(2){left:45%!important}
+  .hx-stop:nth-of-type(3){left:78%!important}
+  .hx-stop:nth-of-type(4){left:45%!important}
+  .hx-dot{width:15px;height:15px;border-width:4px}
+  .hx-stop-end .hx-dot{width:19px;height:19px;border-width:5px}
+  .hx-line{display:block;order:3;padding:13px 24px 0;font-size:12.5px;font-weight:700;color:rgba(255,255,255,.94);line-height:1.85}
+  .hx-line b{font-weight:900;color:#FFD98F}
+  .hx-note{position:static;order:4;padding:7px 24px 0;font-size:12px;line-height:1.7}
+  .hx-shot{position:relative;order:5;bottom:auto;right:auto;width:100%;height:162px;margin-top:22px;border-radius:0}
+}
 </style>
 </head>
 <body>
@@ -119,23 +194,67 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">이용 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
-<p class="kicker" style="background:rgba(255,255,255,.14);color:#fff">어르신 낮 시간 전문 돌봄</p>
-<h1 style="margin-top:16px">아침에 모시러 가고,<br>저녁에 <em>웃는 얼굴로</em><br>모셔다드립니다</h1>
+<section class="hx-hero">
+
+<div class="hx-map">
+<div class="hx-plot">
+<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+<g class="hx-d">
+<rect x="68" y="55" width="19" height="21" fill="rgba(255,255,255,.06)"/>
+<rect x="83" y="14" width="21" height="16" fill="rgba(255,255,255,.05)"/>
+<rect x="38" y="14" width="13" height="16" fill="rgba(255,255,255,.045)"/>
+<path d="M34 104 L58 92 L79 98 L104 88 L104 106 L34 106 Z" fill="rgba(255,255,255,.07)"/>
+<g fill="none" stroke="rgba(255,255,255,.15)" stroke-width="9" vector-effect="non-scaling-stroke">
+<path d="M32 88 H104"/><path d="M32 72 H104"/><path d="M32 52 H104"/><path d="M40 34 H104"/>
+<path d="M55.6 32 V104"/><path d="M68.5 -4 V104"/><path d="M82 -4 V104"/>
+</g>
+<g fill="none" stroke="rgba(255,255,255,.1)" stroke-width="3" vector-effect="non-scaling-stroke">
+<path d="M34 106 L104 42"/><path d="M40 18 H104"/><path d="M91 8 V104"/><path d="M58 40 V104"/>
+</g>
+<path d="M55.6 88 L55.6 72 L68.5 72 L68.5 52 L82 52 L82 34 L68.5 34 L68.5 24" fill="none" stroke="rgba(232,163,61,.2)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+<path d="M55.6 88 L55.6 72 L68.5 72 L68.5 52 L82 52 L82 34 L68.5 34 L68.5 24" fill="none" stroke="#E8A33D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+</g>
+<g class="hx-m">
+<rect x="52" y="46" width="27" height="30" fill="rgba(255,255,255,.06)"/>
+<rect x="16" y="8" width="23" height="22" fill="rgba(255,255,255,.05)"/>
+<path d="M0 96 L38 86 L70 94 L100 84 L100 110 L0 110 Z" fill="rgba(255,255,255,.07)"/>
+<g fill="none" stroke="rgba(255,255,255,.15)" stroke-width="9" vector-effect="non-scaling-stroke">
+<path d="M-4 88 H104"/><path d="M-4 72 H104"/><path d="M-4 52 H104"/><path d="M-4 34 H104"/>
+<path d="M12 -4 V104"/><path d="M45 -4 V104"/><path d="M78 -4 V104"/>
+</g>
+<g fill="none" stroke="rgba(255,255,255,.1)" stroke-width="3" vector-effect="non-scaling-stroke">
+<path d="M-4 110 L104 26"/><path d="M-4 18 H104"/><path d="M29 -4 V104"/><path d="M62 -4 V104"/>
+</g>
+<path d="M12 88 L12 72 L45 72 L45 52 L78 52 L78 34 L45 34 L45 24" fill="none" stroke="rgba(232,163,61,.2)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+<path d="M12 88 L12 72 L45 72 L45 52 L78 52 L78 34 L45 34 L45 24" fill="none" stroke="#E8A33D" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
+</g>
+</svg>
+<div class="hx-stop" style="left:55.6%;top:80%"><span class="hx-dot"></span><span class="hx-tag">소사본동 회관 앞<i>08:10</i></span></div>
+<div class="hx-stop hx-stop-live" style="left:68.5%;top:62%"><span class="hx-dot"></span><span class="hx-tag">괴안동 우리약국<i>08:25</i></span></div>
+<div class="hx-stop" style="left:82%;top:44%"><span class="hx-dot"></span><span class="hx-tag">역곡동 성당 정류장<i>08:40</i></span></div>
+<div class="hx-stop hx-stop-end" style="left:68.5%;top:24%"><span class="hx-dot"></span><span class="hx-tag">온케어 센터 도착<i>09:00</i></span></div>
+</div>
+</div>
+<div class="hx-scrim"></div>
+
+<figure class="hx-shot">
+<img src="./assets/1.jpg" alt="온케어 주간보호센터 생활실 내부">
+<figcaption>도착하면 이 생활실에서 쉬십니다<em>창가 침상</em></figcaption>
+</figure>
+
+<div class="wrap hx-wrap">
+<div class="hx-copy">
+<p class="kicker" style="background:rgba(6,44,43,.55);color:#fff">어르신 낮 시간 전문 돌봄</p>
+<h1>아침에 모시러 가고,<br>저녁에 <em>웃는 얼굴로</em><br>모셔다드립니다</h1>
 <p>온케어는 낮 동안의 돌봄을 시스템으로 만듭니다. 송영부터 프로그램, 귀가 보고까지 — 전 과정이 기록되고 공유됩니다.</p>
-<div class="hero-cta"><a class="btn btn-a" href="tel:010-4894-4905">이용 상담 전화</a><a class="btn btn-w" href="#program">프로그램 보기</a></div>
+<div class="hx-cta"><a class="btn btn-a" href="tel:010-4894-4905">이용 상담 전화</a><a class="btn btn-w" href="#program">프로그램 보기</a></div>
+<p class="hx-facts">어르신 대비 직원 <b>2.5 : 1</b> · 하루 보호자 알림 <b>3회</b><br>휠체어 리프트 송영 차량 <b>4대</b> · 물리 · 인지 프로그램 <b>주 5일</b></p>
 </div>
-<aside class="stat-card rv">
-<h3>온케어 케어 시스템</h3>
-<div class="stat-grid">
-<div><b>2.5 : 1</b><span>어르신 대비 직원 비율</span></div>
-<div><b>3회</b><span>하루 보호자 알림 발송</span></div>
-<div><b>4대</b><span>휠체어 리프트 송영 차량</span></div>
-<div><b>주 5일</b><span>물리 · 인지 프로그램</span></div>
 </div>
-</aside>
-</div></section>
+
+<p class="hx-line">아침 노선 — <b>소사본동 08:10</b> · <b>괴안동 08:25</b> · <b>역곡동 08:40</b> · <b>센터 도착 09:00</b></p>
+<p class="hx-note">1호차 아침 노선 예시 · 반경 8km 무료 송영</p>
+</section>
 
 <section id="program"><div class="wrap">
 <div class="rv"><span class="kicker">하루 프로그램</span><h2>오전 9시부터 오후 5시까지</h2></div>
@@ -170,7 +289,7 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <section id="space" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">OUR SPACE</p><h2>센터를 미리 둘러보세요</h2><p class="sub">모시기 전에 보호자님이 먼저 오셔서 보셔도 됩니다. 예약 없이 오셔도 안내해 드립니다.</p></div>
 <div class="pgrid rv">
-<figure class="pg"><img src="./assets/1.jpg" alt="생활실"><figcaption>생활실<em>낮잠과 휴식을 위한 공간 · 1인용 침상 6개</em></figcaption></figure>
+<figure class="pg"><img src="./assets/1.jpg" alt="생활실"><figcaption>생활실<em>낮잠과 휴식을 위한 창가 침상</em></figcaption></figure>
 <figure class="pg"><img src="./assets/2.jpg" alt="재활 운동실"><figcaption>재활 운동실<em>평행봉 · 실내 자전거 · 낙상 방지 매트</em></figcaption></figure>
 <figure class="pg"><img src="./assets/4.jpg" alt="식당"><figcaption>식당<em>영양사가 짠 식단으로 점심과 간식을 드립니다</em></figcaption></figure>
 </div>

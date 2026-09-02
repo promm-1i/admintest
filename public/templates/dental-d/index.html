@@ -95,6 +95,53 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* ===== hero (layered) ===== */
+.hx-hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--pale) 0%,var(--pale) 52%,#fff 100%);padding:84px 0 92px}
+.hx-hero .hx-wrap{display:block;grid-template-columns:none;gap:0;position:relative;z-index:2;min-height:396px}
+.hx-hero .kicker{color:var(--deep);background:rgba(255,255,255,.94)}
+.hx-hero .btn-l{background:var(--deep)}
+.hx-hero .btn-l:hover{background:var(--ink)}
+.hx-copy{max-width:552px}
+.hx-copy h1{margin-top:16px;font-size:clamp(30px,5vw,46px);font-weight:900;line-height:1.36;letter-spacing:-.04em}
+.hx-copy h1 em{font-style:normal;color:var(--deep)}
+.hx-copy p{margin-top:16px;color:var(--soft);font-size:15px;line-height:1.78;max-width:388px}
+.hx-stage{position:absolute;inset:0;z-index:1}
+.hx-shot{position:absolute;top:0;bottom:0;right:-10vw;width:72vw;
+-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.45) 9%,#000 24%);
+mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.45) 9%,#000 24%)}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:36% 58%;display:block;border-radius:0}
+.hx-shot::after{content:"";position:absolute;inset:0;pointer-events:none;
+background:linear-gradient(90deg,rgba(241,238,252,.94) 0,rgba(241,238,252,.6) 18%,rgba(241,238,252,.22) 34%,rgba(241,238,252,0) 50%),
+linear-gradient(180deg,var(--pale) 0,rgba(241,238,252,0) 15%,rgba(255,255,255,0) 72%,rgba(255,255,255,.5) 90%,#fff 100%)}
+.hx-panel{position:absolute;left:calc(50% + 12px);right:0;bottom:0;
+padding:58px max(24px,calc((100vw - 1216px)/2)) 30px 112px}
+.hx-panel::before{content:"";position:absolute;inset:0;pointer-events:none;
+background:linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,.55) 14%,rgba(255,255,255,.84) 26%,rgba(255,255,255,.91) 46%,rgba(255,255,255,.93) 100%);
+-webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,#000 15%);
+mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,#000 15%)}
+.hx-panel h3,.hx-fig{position:relative;z-index:1}
+.hx-panel h3{font-size:11.5px;font-weight:900;letter-spacing:.1em;color:var(--deep)}
+.hx-fig{margin-top:10px}
+.hx-fig div{display:flex;gap:14px;align-items:baseline;padding:7px 0;border-top:1px solid rgba(114,97,196,.22)}
+.hx-fig div:first-child{border-top:0;padding-top:2px}
+.hx-fig b{flex:0 0 48px;font-size:11.5px;font-weight:900;letter-spacing:.02em;color:var(--soft)}
+.hx-fig span{font-size:13.5px;font-weight:800;color:var(--ink);letter-spacing:-.015em;line-height:1.5}
+.hx-fig span i{font-style:normal;font-weight:700;color:var(--soft)}
+@media(max-width:880px){
+.hx-hero{padding:52px 0 0}
+.hx-hero .hx-wrap{min-height:0}
+.hx-copy p{max-width:none}
+.hx-stage{position:relative;inset:auto;margin-top:26px}
+.hx-shot{position:relative;top:auto;bottom:auto;right:auto;width:auto;height:250px;-webkit-mask-image:none;mask-image:none}
+.hx-shot img{object-position:36% 60%}
+.hx-shot::after{background:linear-gradient(180deg,var(--pale) 0,rgba(241,238,252,0) 22%)}
+.hx-panel{position:relative;left:auto;right:auto;bottom:auto;margin-top:-44px;padding:44px 24px 26px}
+.hx-panel::before{background:linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,.86) 30%,#fff 58%,#fff 100%);-webkit-mask-image:none;mask-image:none}
+.hx-fig div{gap:10px}
+.hx-fig b{flex-basis:44px}
+.hx-fig span{font-size:13px}
+}
+@media(prefers-reduced-motion:reduce){.hx-shot img,.hx-panel,.hx-copy{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
@@ -105,20 +152,28 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">무료 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="wrap hx-wrap">
+<div class="hx-copy">
 <span class="kicker">치과교정과 전문의 진료</span>
-<h1 style="margin-top:16px">교정은 예뻐지는 게 아니라<br><em>편해지는 일</em>입니다</h1>
+<h1>교정은 예뻐지는 게 아니라<br><em>편해지는 일</em>입니다</h1>
 <p>씹는 게 편하고, 잇몸이 오래 갑니다. 미소는 그 다음에 따라옵니다. 라인교정치과는 기능부터 봅니다.</p>
 <div class="hero-cta"><a class="btn btn-l" href="tel:010-4894-4905">무료 교정 상담</a><a class="btn btn-w" href="#cost">비용 보기</a></div>
-<div class="tl rv">
+</div>
+</div>
+<div class="hx-stage">
+<div class="hx-shot"><img src="./assets/hero.jpg" alt="라인교정치과 진료실"></div>
+<div class="hx-panel">
 <h3>평균 교정 진행 (24개월 기준 예시)</h3>
-<div class="tl-bar"><i></i></div>
-<div class="tl-mark"><span>정밀검사</span><span>배열</span><span>공간 폐쇄</span><span>마무리</span><span>유지장치</span></div>
+<div class="hx-fig">
+<div><b>기간</b><span>18–26개월 <i>· 부분 교정은 6–10개월</i></span></div>
+<div><b>단계</b><span>정밀검사 · 배열 · 공간 폐쇄 · 마무리 · 유지장치</span></div>
+<div><b>장치</b><span>메탈 · 세라믹 · 투명 · 설측 <i>중 검사 후 권유</i></span></div>
+<div><b>진료</b><span>평일 10–19시 <i>· 목 야간 21시 · 토 10–15시</i></span></div>
 </div>
 </div>
-<img class="rv" src="./assets/hero.jpg" alt="교정 진료실">
-</div></section>
+</div>
+</section>
 
 <section id="cmp"><div class="wrap">
 <div class="rv"><span class="kicker">장치 비교</span><h2>어떤 장치가 맞을까요?</h2><p class="sub">정밀검사 후 치아 상태에 맞는 장치를 권해드립니다. 무조건 비싼 걸 권하지 않습니다.</p></div>

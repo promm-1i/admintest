@@ -178,6 +178,38 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+/* ===== hero 재구성: 판독 모니터 오브젝트 중심 (hx-) ===== */
+.hero.hx-hero{position:relative;overflow:hidden;padding:0;background:var(--bg);min-height:min(90vh,780px);display:flex;align-items:center}
+.hx-stage{position:absolute;top:0;right:0;bottom:0;left:29%;overflow:hidden}
+.hx-stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:100% 0;transform:scale(1.5);transform-origin:100% 4%;border-radius:0}
+.hx-veil{position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0,var(--bg) 21%,rgba(245,247,251,.7) 27%,rgba(245,247,251,.22) 32%,rgba(245,247,251,0) 37%)}
+.hx-hero .hx-wrap{position:relative;z-index:2;display:block;width:100%;padding-top:150px;padding-bottom:84px}
+.hx-copy{max-width:508px}
+.hx-h1{margin-top:18px;font-size:clamp(31px,4.1vw,50px);font-weight:900;letter-spacing:-.03em;line-height:1.28;color:var(--ink)}
+.hx-h1 em{font-style:normal;color:var(--cobalt)}
+.hx-lede{margin-top:18px;color:var(--soft);font-size:15.5px;line-height:1.75;max-width:432px}
+.hx-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-checks{margin:26px 0 0;padding:0;display:grid;gap:9px;font-size:13.5px;color:var(--soft)}
+.hx-checks li{list-style:none;display:flex;gap:9px;align-items:center}
+.hx-checks .ck{width:18px;height:18px;border-radius:50%;background:#0A7B57;color:#fff;font-size:11px;display:grid;place-items:center;flex:none}
+.hx-note{position:absolute;z-index:3;left:55%;top:63.5%;max-width:284px;padding:13px 17px;border-radius:10px;background:rgba(255,255,255,.92);box-shadow:0 14px 32px -18px rgba(15,26,46,.6)}
+.hx-note b{display:block;font-size:14.5px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.hx-note span{display:block;margin-top:5px;font-size:12.5px;line-height:1.6;color:var(--soft)}
+@media(max-width:860px){
+  .hero.hx-hero{display:block;min-height:0}
+  .hx-stage{position:relative;left:0;right:0;width:100%;height:232px;margin-top:65px}
+  .hx-stage img{object-position:100% 0;transform:scale(1.34);transform-origin:100% 6%}
+  .hx-veil{background:linear-gradient(90deg,rgba(245,247,251,.86) 0,rgba(245,247,251,.2) 26%,rgba(245,247,251,0) 40%),linear-gradient(0deg,rgba(245,247,251,.9) 0,rgba(245,247,251,0) 18%)}
+  .hx-note{position:static;max-width:none;padding:0;background:none;box-shadow:none;margin:14px 24px 0}
+  .hx-note b{font-size:13.5px}
+  .hx-note span{display:inline;margin:0;font-size:12.5px}
+  .hx-hero .hx-wrap{padding-top:20px;padding-bottom:44px}
+  .hx-h1{font-size:clamp(27px,7.6vw,34px);line-height:1.3}
+  .hx-lede{font-size:14.5px;margin-top:14px;max-width:none}
+  .hx-cta{margin-top:22px}
+  .hx-cta .btn-c,.hx-cta .btn-w{padding:14px 22px;font-size:14.5px}
+  .hx-checks{margin-top:20px;gap:8px;font-size:12.8px}
+}
 </style>
 </head>
 <body>
@@ -195,26 +227,26 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
   </div>
 </header>
 
-<section class="hero">
-  <div class="wrap">
-    <div>
+<section class="hero hx-hero">
+  <div class="hx-stage">
+    <img src="./assets/gallery-1.jpg" alt="진료실 벽 모니터에 띄워 놓은 무릎 X-ray 영상">
+    <span class="hx-veil" aria-hidden="true"></span>
+  </div>
+  <p class="hx-note"><b>당일 촬영 · 당일 판독 · 바로 치료</b><span>진료실 화면에 띄운 무릎 X-ray — 촬영 직후 결과를 함께 봅니다</span></p>
+  <div class="wrap hx-wrap">
+    <div class="hx-copy">
       <span class="kicker">정형외과 · 재활의학 · 도수치료</span>
-      <h1 style="margin-top:20px">아픈 이유를<br><em>영상으로 보여드리고</em><br>바로 치료합니다</h1>
-      <p class="lede">진단 없는 치료는 하지 않습니다. C-arm · 초음파로 통증의 원인을 눈으로 확인시켜 드린 뒤 치료 계획을 함께 정합니다.</p>
-      <div class="hero-cta">
+      <h1 class="hx-h1">아픈 이유를<br><em>영상으로 보여드리고</em><br>바로 치료합니다</h1>
+      <p class="hx-lede">진단 없는 치료는 하지 않습니다. C-arm · 초음파로 통증의 원인을 눈으로 확인시켜 드린 뒤 치료 계획을 함께 정합니다.</p>
+      <div class="hx-cta">
         <a class="btn-c" href="tel:010-4894-4905">당일 예약 전화</a>
         <a class="btn-w" href="#price">비급여 수가 보기</a>
       </div>
-      <ul class="checks">
+      <ul class="hx-checks">
         <li><span class="ck">✓</span>당일 X-ray · 초음파 검사 후 즉시 결과 설명</li>
         <li><span class="ck">✓</span>물리치료사 1:1 전담 도수치료 (50분)</li>
         <li><span class="ck">✓</span>실손보험 청구 서류 당일 발급</li>
       </ul>
-    </div>
-    <div class="hero-visual rv">
-      <img src="./assets/gallery-1.jpg" alt="진료실 전경">
-      <div class="stat-float sf1"><span class="mono">17,400+</span><span>누적 도수치료 세션</span></div>
-      <div class="stat-float sf2"><span class="mono">4.9 / 5.0</span><span>환자 만족도 (자체 설문)</span></div>
     </div>
   </div>
 </section>

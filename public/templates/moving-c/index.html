@@ -112,6 +112,60 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx: 전후 비교 히어로 ───────────────────────────── */
+.hero.hx-hero{padding:0;text-align:left;background:#fff}
+.hx-stage{position:relative}
+.hx-band{position:relative;width:100%;height:clamp(350px,46vw,560px);overflow:hidden;background:var(--ink)}
+.hx-base{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1}
+.hx-cut{position:absolute;left:46%;right:0;top:0;bottom:0;z-index:2;
+  background-image:linear-gradient(90deg,rgba(255,255,255,.95) 0 2px,rgba(9,25,34,.34) 2px,rgba(9,25,34,0) 18px),url("./assets/ba-before.jpg");
+  background-repeat:no-repeat,no-repeat;
+  background-size:18px 100%,185.1852% auto;
+  background-position:0 top,100% center;
+  clip-path:inset(0 0 0 0);
+  animation:hx-wipe 6s cubic-bezier(.62,0,.38,1) infinite}
+@keyframes hx-wipe{
+  0%,100%{clip-path:inset(0 0 0 0);background-position:0 top,100% center}
+  50%{clip-path:inset(0 0 0 44.4444%);background-position:calc(44.4444% + 8px) top,100% center}}
+
+.hx-scrim{position:absolute;inset:0;z-index:4;pointer-events:none;
+  background:
+    linear-gradient(to top,rgba(9,25,34,.42) 0,rgba(9,25,34,0) 15%),
+    linear-gradient(94deg,rgba(9,25,34,.92) 0,rgba(9,25,34,.84) 27%,rgba(9,25,34,.56) 39%,rgba(9,25,34,.17) 52%,rgba(9,25,34,0) 63%)}
+
+.hx-copy{position:absolute;inset:0;z-index:5;max-width:1000px;margin:0 auto;padding:0 24px;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.hx-copy>*{max-width:368px}
+.hx-hero h1{margin-top:15px;color:#fff;line-height:1.3;text-shadow:0 2px 20px rgba(9,25,34,.5)}
+.hx-hero h1 em{color:var(--sky)}
+.hx-hero .hx-lead{margin:14px 0 0;max-width:368px;color:#DCEAF2;font-size:15px;line-height:1.72;text-shadow:0 1px 12px rgba(9,25,34,.6)}
+
+.hx-tag{position:absolute;bottom:20px;z-index:5;font-size:11.5px;font-weight:900;letter-spacing:.14em;
+  color:#fff;background:rgba(9,25,34,.68);padding:7px 14px;border-radius:99px}
+.hx-tag i{font-style:normal;color:#9FD3EC;margin-left:8px;letter-spacing:.02em;font-weight:700}
+.hx-tag-a{left:max(24px,calc(50% - 476px))}
+.hx-tag-b{right:24px}
+
+.hx-foot{padding:30px 0 58px}
+.hx-hero .hx-cta{margin-top:0;justify-content:flex-start}
+.hx-hero .hx-shine{margin-top:20px;justify-content:flex-start}
+
+@media(max-width:760px){
+  .hx-stage{display:flex;flex-direction:column}
+  .hx-copy{position:static;order:-1;inset:auto;padding:28px 24px 22px;display:block;max-width:none}
+  .hx-copy>*{max-width:none}
+  .hx-scrim{background:linear-gradient(to top,rgba(9,25,34,.58) 0,rgba(9,25,34,0) 26%)}
+  .hx-hero h1{font-size:28px;line-height:1.34;color:var(--ink);text-shadow:none}
+  .hx-hero .hx-lead{max-width:none;color:var(--soft);font-size:14.5px;line-height:1.7;text-shadow:none}
+  .hx-band{height:min(46vw,220px)}
+  .hx-tag{bottom:12px;font-size:10.5px;padding:6px 11px}
+  .hx-tag i{display:none}
+  .hx-tag-a{left:16px}.hx-tag-b{right:16px}
+  .hx-foot{padding:22px 0 44px}
+  .hx-hero .hx-shine{margin-top:16px}
+}
+@media(prefers-reduced-motion:reduce){.hx-cut{animation:none}}
 </style>
 </head>
 <body>
@@ -122,13 +176,26 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">예약 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hero hx-hero">
+<div class="hx-stage">
+<div class="hx-band" role="img" aria-label="같은 거실의 입주 전후 비교 — 왼쪽(AFTER 16:00)은 짐과 먼지를 걷어낸 청소 후, 오른쪽(BEFORE 09:00)은 이삿짐 박스와 포장 쓰레기가 남아 있는 청소 전">
+<img class="hx-base" src="./assets/ba-after.jpg" alt="">
+<div class="hx-cut"></div>
+<div class="hx-scrim"></div>
+<span class="hx-tag hx-tag-a">AFTER <i>16:00</i></span>
+<span class="hx-tag hx-tag-b">BEFORE <i>09:00</i></span>
+</div>
+<div class="hx-copy">
 <span class="kicker">입주 전 단 하루, 평생 기분</span>
-<h1 style="margin-top:16px">새집 냄새 말고<br><em>새집 컨디션</em>으로 입주하세요</h1>
-<p>공사 먼지, 실리콘 자국, 창틀 틈새까지 — 입주 전에만 할 수 있는 청소가 있습니다. 새아침은 그 하루를 책임집니다.</p>
-<div class="hero-cta"><a class="btn btn-s" href="tel:010-4894-4905">예약 문의하기</a><a class="btn btn-w" href="#scope">청소 범위 보기</a></div>
-<div class="shine"><span><b>✓</b>친환경 약품만 사용</span><span><b>✓</b>새집증후군 베이크아웃 안내</span><span><b>✓</b>60항목 검수표 제공</span></div>
-</div></section>
+<h1>새집 냄새 말고<br><em>새집 컨디션</em>으로 입주하세요</h1>
+<p class="hx-lead">공사 먼지, 실리콘 자국, 창틀 틈새까지 — 입주 전에만 할 수 있는 청소가 있습니다. 새아침은 그 하루를 책임집니다.</p>
+</div>
+</div>
+<div class="hx-foot"><div class="wrap">
+<div class="hero-cta hx-cta"><a class="btn btn-s" href="tel:010-4894-4905">예약 문의하기</a><a class="btn btn-w" href="#scope">청소 범위 보기</a></div>
+<div class="shine hx-shine"><span><b>✓</b>친환경 약품만 사용</span><span><b>✓</b>새집증후군 베이크아웃 안내</span><span><b>✓</b>60항목 검수표 제공</span></div>
+</div></div>
+</section>
 
 <section id="ba" style="padding-top:0"><div class="wrap">
 <div class="rv"><span class="kicker">작업 전후</span><h2>같은 날 오전과 오후입니다</h2></div>
