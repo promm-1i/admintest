@@ -55,7 +55,7 @@ header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(14,27,51,.94);ba
 .report td .up{color:#E8C15A}
 .report .note{margin-top:14px;font-size:11px;color:#6E7A90}
 .ribbon{margin-top:90px;background:var(--gold);color:var(--navy);padding:16px 0;overflow:hidden}
-.ribbon-track{display:flex;gap:64px;white-space:nowrap;animation:mv 30s linear infinite;font-size:13px;font-weight:700;letter-spacing:.08em}
+.ribbon-track{display:flex;gap:64px;white-space:nowrap;font-size:13px;font-weight:700;letter-spacing:.08em}
 @keyframes mv{to{transform:translateX(-50%)}}
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:52px}
@@ -237,6 +237,13 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
    글자와 배경을 함께 지정해 한쪽만 덮여 같은 색이 되는 일이 없게 한다. */
 .tel.tel.tel{color:#856B1A;background:transparent}
 .tel.tel.tel:hover{color:#675314}
+
+/* 자동 스크롤 제거 — 무한히 흐르면 읽는 속도를 뺏고 항상 절반이 가려진다.
+   실적 숫자는 가만히 있어도 읽히는 정보다. 폭이 좁으면 손가락으로 밀어 볼 수 있게만 한다. */
+.ribbon{overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.ribbon::-webkit-scrollbar{display:none}
+.ribbon-track{animation:none!important;justify-content:center;padding:0 24px}
+@media(max-width:900px){.ribbon-track{justify-content:flex-start}}
 </style>
 </head>
 <body>

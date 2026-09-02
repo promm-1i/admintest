@@ -171,7 +171,7 @@ footer .nvq b{font-weight:700}
 .hx-q em{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--soft)}
 .hx-q em b{font-weight:500;color:var(--navy)}
 
-.hx-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;align-items:flex-end;gap:44px;flex-wrap:wrap}
+.hx-foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);display:flex;align-items:flex-end;column-gap:44px;row-gap:6px;flex-wrap:wrap}
 .hx-avg{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.12em;color:var(--soft)}
 .hx-reel{height:30px;overflow:hidden;margin-top:2px}
 .hx-reel div{animation:hx-reel 8s cubic-bezier(.32,.72,0,1) infinite}
@@ -215,6 +215,11 @@ footer .nvq b{font-weight:700}
   .hx-ind{transform:translateX(84px)}
   .hx-reel div{transform:translateY(-60px)}
 }
+
+/* 패널 전체에 aria-hidden 을 걸어 대시보드 내용은 물론 '템플릿 데모용 예시
+   데이터입니다' 고지까지 스크린리더에서 사라졌다. 패널은 읽히게 두고,
+   숫자를 그리는 장식 요소(스파크라인 · 창 3점 · 진행 인디케이터)만 감춘다. */
+.hx-sp,.hx-dots,.hx-ind,.hx-reel{speak:none}
 </style>
 </head>
 <body>
@@ -227,30 +232,30 @@ footer .nvq b{font-weight:700}
 
 <section class="hero hx-hero">
 
-<div class="hx-panel" aria-hidden="true">
+<div class="hx-panel" role="group" aria-label="담임 관리 콘솔 예시 화면">
 <div class="hx-card">
 <div class="hx-top">
 <div><span class="hx-t1">담임 관리 콘솔 — 성적 추이</span><span class="hx-t2">AVG. SCORE GROWTH — 2026 1학기</span></div>
 <span class="hx-demo">DEMO</span>
 </div>
 
-<div class="hx-seg"><i class="hx-ind"></i><span>전체</span><span>중2 수학</span><span>중3 영어</span></div>
+<div class="hx-seg"><i class="hx-ind" aria-hidden="true"></i><span>전체</span><span>중2 수학</span><span>중3 영어</span></div>
 
 <div class="hx-main">
 <div>
 <div class="hx-r hx-hd"><span>학생</span><span class="hx-cls">반</span><span class="hx-prev">지난</span><span>이번</span><span>추이</span><span style="text-align:right">향상</span></div>
 
-<div class="hx-r hx-row" style="--d:0s"><span class="hx-nm">김서연<span class="hx-sub">BASIC · 지난 68</span></span><span class="hx-cls">BASIC</span><span class="hx-prev">68</span><span class="hx-now">84</span><span class="hx-sp"><i style="height:9px"></i><i style="height:12px"></i><i style="height:16px"></i><i style="height:22px"></i></span><span class="hx-gain">+16</span></div>
+<div class="hx-r hx-row" style="--d:0s"><span class="hx-nm">김서연<span class="hx-sub">BASIC · 지난 68</span></span><span class="hx-cls">BASIC</span><span class="hx-prev">68</span><span class="hx-now">84</span><span class="hx-sp" aria-hidden="true"><i style="height:9px"></i><i style="height:12px"></i><i style="height:16px"></i><i style="height:22px"></i></span><span class="hx-gain">+16</span></div>
 
-<div class="hx-r hx-row" style="--d:.2s"><span class="hx-nm">이준호<span class="hx-sub">DRIVE · 지난 72</span></span><span class="hx-cls">DRIVE</span><span class="hx-prev">72</span><span class="hx-now">85</span><span class="hx-sp"><i style="height:11px"></i><i style="height:10px"></i><i style="height:17px"></i><i style="height:22px"></i></span><span class="hx-gain">+13</span></div>
+<div class="hx-r hx-row" style="--d:.2s"><span class="hx-nm">이준호<span class="hx-sub">DRIVE · 지난 72</span></span><span class="hx-cls">DRIVE</span><span class="hx-prev">72</span><span class="hx-now">85</span><span class="hx-sp" aria-hidden="true"><i style="height:11px"></i><i style="height:10px"></i><i style="height:17px"></i><i style="height:22px"></i></span><span class="hx-gain">+13</span></div>
 
-<div class="hx-r hx-row" style="--d:.4s"><span class="hx-nm">박하은<span class="hx-sub">DRIVE · 지난 79</span></span><span class="hx-cls">DRIVE</span><span class="hx-prev">79</span><span class="hx-now">88</span><span class="hx-sp"><i style="height:14px"></i><i style="height:16px"></i><i style="height:15px"></i><i style="height:21px"></i></span><span class="hx-gain">+9</span></div>
+<div class="hx-r hx-row" style="--d:.4s"><span class="hx-nm">박하은<span class="hx-sub">DRIVE · 지난 79</span></span><span class="hx-cls">DRIVE</span><span class="hx-prev">79</span><span class="hx-now">88</span><span class="hx-sp" aria-hidden="true"><i style="height:14px"></i><i style="height:16px"></i><i style="height:15px"></i><i style="height:21px"></i></span><span class="hx-gain">+9</span></div>
 
-<div class="hx-r hx-row" style="--d:.6s"><span class="hx-nm">정민재<span class="hx-sub">BASIC · 지난 61</span></span><span class="hx-cls">BASIC</span><span class="hx-prev">61</span><span class="hx-now">76</span><span class="hx-sp"><i style="height:7px"></i><i style="height:11px"></i><i style="height:13px"></i><i style="height:19px"></i></span><span class="hx-gain">+15</span></div>
+<div class="hx-r hx-row" style="--d:.6s"><span class="hx-nm">정민재<span class="hx-sub">BASIC · 지난 61</span></span><span class="hx-cls">BASIC</span><span class="hx-prev">61</span><span class="hx-now">76</span><span class="hx-sp" aria-hidden="true"><i style="height:7px"></i><i style="height:11px"></i><i style="height:13px"></i><i style="height:19px"></i></span><span class="hx-gain">+15</span></div>
 
-<div class="hx-r hx-row hx-x" style="--d:.8s"><span class="hx-nm">최유진<span class="hx-sub">SKY · 지난 85</span></span><span class="hx-cls">SKY</span><span class="hx-prev">85</span><span class="hx-now">93</span><span class="hx-sp"><i style="height:16px"></i><i style="height:18px"></i><i style="height:19px"></i><i style="height:22px"></i></span><span class="hx-gain">+8</span></div>
+<div class="hx-r hx-row hx-x" style="--d:.8s"><span class="hx-nm">최유진<span class="hx-sub">SKY · 지난 85</span></span><span class="hx-cls">SKY</span><span class="hx-prev">85</span><span class="hx-now">93</span><span class="hx-sp" aria-hidden="true"><i style="height:16px"></i><i style="height:18px"></i><i style="height:19px"></i><i style="height:22px"></i></span><span class="hx-gain">+8</span></div>
 
-<div class="hx-r hx-row hx-x" style="--d:1s"><span class="hx-nm">한지우<span class="hx-sub">SKY · 지난 74</span></span><span class="hx-cls">SKY</span><span class="hx-prev">74</span><span class="hx-now">86</span><span class="hx-sp"><i style="height:10px"></i><i style="height:14px"></i><i style="height:18px"></i><i style="height:21px"></i></span><span class="hx-gain">+12</span></div>
+<div class="hx-r hx-row hx-x" style="--d:1s"><span class="hx-nm">한지우<span class="hx-sub">SKY · 지난 74</span></span><span class="hx-cls">SKY</span><span class="hx-prev">74</span><span class="hx-now">86</span><span class="hx-sp" aria-hidden="true"><i style="height:10px"></i><i style="height:14px"></i><i style="height:18px"></i><i style="height:21px"></i></span><span class="hx-gain">+12</span></div>
 
 <p class="hx-more">최유진 +8 · 한지우 +12 — 정규반 24명 전원 같은 표로 관리합니다.</p>
 </div>
