@@ -254,3 +254,73 @@ h1, h2, h3 {
 p, li, dd, figcaption {
   text-wrap: pretty;
 }
+
+/* ══════════════════════════════════════════════════════════════
+   히어로 — 진단 테스트 예약 화면이 주인공.
+   패널을 wrap 밖으로 흘려보내고 왼쪽 끝을 지면색으로 녹여, 카피와
+   좌우로 나란한 2단이 되지 않게 한다.
+   ══════════════════════════════════════════════════════════════ */
+.hx-hero { position: relative; overflow: hidden; }
+.hx-wrap { position: relative; }
+.hx-copy { position: relative; z-index: 3; max-width: 30rem; }
+.hx-meta { max-width: 30rem; }
+
+.hx-board {
+  position: absolute; z-index: 1; top: 0.5rem; left: 44%; right: -14vw;
+  background: #fff; border: 1px solid #e6e4de; border-radius: 1.25rem;
+  box-shadow: 0 24px 60px -34px rgba(28, 27, 24, 0.45);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, rgba(0,0,0,.5) 7%, #000 16%);
+          mask-image: linear-gradient(90deg, transparent 0, rgba(0,0,0,.5) 7%, #000 16%);
+}
+.hx-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
+  padding: 0.9rem 1.35rem 0.9rem 5.5rem; border-bottom: 1px solid #efeee9;
+}
+.hx-bt   { font-size: 0.9375rem; font-weight: 800; }
+.hx-demo { font-size: 0.75rem; color: #6d6b66; border: 1px solid #e6e4de; border-radius: 999px; padding: 0.15rem 0.6rem; }
+.hx-body { padding: 1.1rem 1.35rem 1.35rem 5.5rem; }
+
+.hx-step { display: flex; align-items: center; gap: 0.9rem; margin-bottom: 0.7rem; }
+.hx-k    { flex: none; width: 2.6rem; font-size: 0.8125rem; color: #6d6b66; }
+.hx-opts { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.hx-o {
+  font-size: 0.8125rem; padding: 0.35rem 0.8rem; border-radius: 999px;
+  border: 1px solid #e6e4de; color: #6d6b66; white-space: nowrap;
+}
+.hx-o.is-on { background: #d9f548; border-color: #cbe83a; color: #1c1b18; font-weight: 700; }
+
+.hx-out {
+  display: flex; align-items: center; gap: 0.7rem; margin-top: 1rem;
+  padding: 0.85rem 1rem; background: #fbfaf6; border: 1px solid #eeece6; border-radius: 0.85rem;
+}
+.hx-ok { flex: none; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #7bb661; }
+.hx-otext b    { display: block; font-size: 0.9375rem; }
+.hx-otext span { display: block; margin-top: 0.15rem; font-size: 0.8125rem; color: #6d6b66; }
+.hx-note { margin-top: 0.8rem; font-size: 0.75rem; color: #8b8983; }
+
+/* 스스로 채워지는 흐름 — 한 단계씩 켜지고 마지막에 결과가 올라온다 */
+html:not([data-motion='off']) .hx-o.is-on { animation: hx-pick 9s ease-out infinite; animation-delay: calc(var(--i) * 0.55s); }
+html:not([data-motion='off']) .hx-out     { animation: hx-res 9s ease-out infinite; }
+@keyframes hx-pick {
+  0%, 2%   { background: transparent; border-color: #e6e4de; color: #6d6b66; font-weight: 400; }
+  7%, 93%  { background: #d9f548; border-color: #cbe83a; color: #1c1b18; font-weight: 700; }
+  99%,100% { background: transparent; border-color: #e6e4de; color: #6d6b66; font-weight: 400; }
+}
+@keyframes hx-res {
+  0%, 20%  { opacity: 0; transform: translateY(0.5rem); }
+  27%, 93% { opacity: 1; transform: none; }
+  99%,100% { opacity: 0; transform: translateY(0.35rem); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-o.is-on, .hx-out { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+@media (max-width: 900px) {
+  .hx-copy, .hx-meta { max-width: none; }
+  .hx-board {
+    position: relative; left: auto; right: auto; top: auto; margin-top: 1.75rem;
+    -webkit-mask-image: none; mask-image: none;
+  }
+  .hx-bar  { padding-left: 1.1rem; }
+  .hx-body { padding-left: 1.1rem; }
+}

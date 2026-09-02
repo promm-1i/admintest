@@ -393,18 +393,27 @@ function Header({ active }: { active: string }) {
 function Hero() {
   const { ref, inView } = useInView(0.05)
   const [first, ...restLines] = SITE.slogan.split('\n')
+  // 진단 테스트 예약 화면 — 학년 → 과목 → 시간 순으로 스스로 채워진다.
+  // MOTION 이 꺼진 기본형에서는 마지막 상태로 고정돼 정보는 그대로 남는다.
+  const STEPS = [
+    { k: '학년', pick: '고등부', opts: ['초등부', '중등부', '고등부'] },
+    { k: '과목', pick: '수학',   opts: ['국어', '영어', '수학'] },
+    { k: '시간', pick: '평일 17:00', opts: ['평일 15:00', '평일 17:00', '토 10:00'] },
+  ]
   return (
-    <section ref={ref} className={`pt-32 md:pt-44 pb-16 md:pb-24 ${inView ? 'in-view' : ''}`}>
-      <div className="max-w-6xl mx-auto px-5 md:px-6">
-        <h1 className={`anim-fade-up ${inView ? 'in-view' : ''} f-display text-[3.2rem] md:text-[5.4rem] mb-8`}>
-          <span className="hl">{first}</span>
-          {restLines.map((l) => (
-            <span key={l} className="block">{l}</span>
-          ))}
-        </h1>
-        <div className={`anim-fade-up d80 ${inView ? 'in-view' : ''} flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-12`}>
-          <p className="text-[1.0625rem] text-ink-55 leading-[1.85] max-w-md">{SITE.sloganSub}</p>
-          <div className="flex items-center gap-4 shrink-0">
+    <section ref={ref} className={`pt-28 md:pt-36 pb-16 md:pb-24 hx-hero ${inView ? 'in-view' : ''}`}>
+      <div className="hx-wrap max-w-6xl mx-auto px-5 md:px-6">
+        <div className="hx-copy">
+          <h1 className={`anim-fade-up ${inView ? 'in-view' : ''} f-display text-[3rem] md:text-[4.6rem] mb-7`}>
+            <span className="hl">{first}</span>
+            {restLines.map((l) => (
+              <span key={l} className="block">{l}</span>
+            ))}
+          </h1>
+          <p className={`anim-fade-up d80 ${inView ? 'in-view' : ''} text-[1.0625rem] text-ink-55 leading-[1.85] max-w-md mb-8`}>
+            {SITE.sloganSub}
+          </p>
+          <div className={`anim-fade-up d80 ${inView ? 'in-view' : ''} flex items-center gap-4 mb-6`}>
             <button
               onClick={() => goTo('#consult')}
               className="px-7 py-4 rounded-full bg-lime text-ink text-[1rem] font-extrabold hover:bg-lime-d"
@@ -416,20 +425,37 @@ function Hero() {
               과정 보기
             </button>
           </div>
+          <p className={`anim-fade-up d160 ${inView ? 'in-view' : ''} hx-meta text-[0.875rem] text-ink-55`}>
+            이번 주 상담 가능 <b className="nums text-ink">8팀</b> · {SITE.hours.consult}
+          </p>
         </div>
 
-        <figure className={`anim-fade-up d160 ${inView ? 'in-view' : ''}`}>
-          <div className="ph rounded-3xl">
-            <img src={SITE.heroPhoto} alt="자습 중인 세움학원 학생" className="w-full aspect-[16/7] object-cover" />
+        <div className={`hx-board anim-fade-up d160 ${inView ? 'in-view' : ''}`} role="group" aria-label="진단 테스트 예약 화면 예시">
+          <div className="hx-bar">
+            <span className="hx-bt">진단 테스트 예약</span>
+            <span className="hx-demo">데모 화면</span>
           </div>
-          <figcaption className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-1.5 text-[0.875rem] text-ink-55">
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-lime" aria-hidden="true" />
-              이번 주 상담 가능 <b className="nums text-ink">8팀</b>
-            </span>
-            <span>{SITE.hours.consult}</span>
-          </figcaption>
-        </figure>
+          <div className="hx-body">
+            {STEPS.map((st, i) => (
+              <div className="hx-step" key={st.k} style={{ ['--i']: String(i) }}>
+                <span className="hx-k">{st.k}</span>
+                <span className="hx-opts">
+                  {st.opts.map((o) => (
+                    <span key={o} className={`hx-o ${o === st.pick ? 'is-on' : ''}`}>{o}</span>
+                  ))}
+                </span>
+              </div>
+            ))}
+            <div className="hx-out">
+              <span className="hx-ok" aria-hidden="true" />
+              <span className="hx-otext">
+                <b>고등부 수학 · 평일 17:00</b>
+                <span>이 시간에 진단 테스트 가능합니다 · 소요 40분</span>
+              </span>
+            </div>
+            <p className="hx-note">화면은 예약 흐름을 보여 주는 예시입니다.</p>
+          </div>
+        </div>
       </div>
     </section>
   )
