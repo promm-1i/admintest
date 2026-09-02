@@ -502,57 +502,105 @@ function Nav({ active }: { active: string }) {
   );
 }
 
-/* ── Hero ─────────────────────────────────────────────────────── */
+/* ── Hero — 예약 화면 데모 ────────────────────────────────────── */
+
+/* SITE.schedule 에서 예약 가능한 날과 시간 슬롯을 뽑습니다.
+   오늘이 휴진이거나 진료가 끝났으면 다음 진료일로 넘어갑니다.
+   시간은 지어내지 않고 진료시간·점심시간에서 계산합니다. */
+function bookingDay() {
+  const now = new Date();
+  const today = (now.getDay() + 6) % 7; // 0=월 … 6=일
+  const cur = now.getHours() * 60 + now.getMinutes();
+  const lm = SITE.schedule.lunch.match(/(\d{2}):(\d{2})\s*[–-]\s*(\d{2}):(\d{2})/);
+
+  for (let d = 0; d < 7; d++) {
+    const idx = (today + d) % 7;
+    const row = SITE.schedule.rows[idx];
+    const m = row.time.match(/(\d{2}):(\d{2})\s*[–-]\s*(\d{2}):(\d{2})/);
+    if (!m) continue;
+    const open = +m[1] * 60 + +m[2];
+    const close = +m[3] * 60 + +m[4];
+    if (d === 0 && cur >= close - 30) continue; // 오늘은 이미 마감
+    const weekday = idx <= 4;
+    const ls = lm && weekday ? +lm[1] * 60 + +lm[2] : -1;
+    const le = lm && weekday ? +lm[3] * 60 + +lm[4] : -1;
+    const slots: string[] = [];
+    for (let t = open; t <= close - 30; t += 90) {
+      if (t >= ls && t < le) continue; // 점심시간 제외
+      slots.push(
+        `${String(Math.floor(t / 60)).padStart(2, "0")}:${String(t % 60).padStart(2, "0")}`
+      );
+    }
+    const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + d);
+    return { row, slots, dateLabel: `${date.getMonth() + 1}월 ${date.getDate()}일` };
+  }
+  return { row: SITE.schedule.rows[0], slots: [], dateLabel: "" };
+}
+
+/* 단계 표식 — 지난 단계는 체크, 진행 중은 채움, 남은 단계는 테두리 */
+function StepMark({ n, state }: { n: number; state: "done" | "now" | "next" }) {
+  return (
+    <span
+      className={`grid place-items-center w-[22px] h-[22px] rounded-full shrink-0 t-micro leading-none transition-colors duration-300 ${
+        state === "now"
+          ? "bg-[#2F6B58] text-white"
+          : state === "done"
+            ? "bg-[#E8EFEA] text-[#2F6B58]"
+            : "border border-[#DDD8CE] text-[#16211C]/65"
+      }`}
+    >
+      {state === "done" ? (
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M20 6 9 17l-5-5" />
+        </svg>
+      ) : (
+        n
+      )}
+    </span>
+  );
+}
+
+/* 데모 한 바퀴 = 9틱 × 600ms = 5.4초.
+   4틱에서 시작하므로 첫 화면은 언제나 "예약 완료" 상태이고,
+   모션이 없는 기본형은 이 상태 그대로 멈춰 있습니다. */
+const DEMO_TICK = 600;
+const DEMO_CYCLE = 9;
+const DEMO_START = 4;
 
 function Hero() {
-  const [scrollY, setScrollY] = useState(0);
+  const [tick, setTick] = useState(DEMO_START);
+  const [book] = useState(bookingDay);
 
   useEffect(() => {
-    const fn = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
+    if (!MOTION) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = setInterval(() => setTick((t) => t + 1), DEMO_TICK);
+    return () => clearInterval(id);
   }, []);
 
-  // JS: 0=Sun, 1=Mon…6=Sat → 내 배열: 0=Mon…6=Sun
-  const todayIndex = (new Date().getDay() + 6) % 7;
-  const todayRow = SITE.schedule.rows[todayIndex];
+  const cycle = Math.floor(tick / DEMO_CYCLE);
+  const phase = tick % DEMO_CYCLE;
+  const step = phase < 2 ? 0 : phase < 4 ? 1 : 2; // 0 진료항목 · 1 시간 · 2 확인
+  const svcIdx = cycle % SITE.services.length;
+  const slotIdx = book.slots.length ? (cycle * 2 + 1) % book.slots.length : 0;
+  const service = SITE.services[svcIdx].name;
+  const slot = book.slots[slotIdx] ?? book.row.time;
 
-  const parallaxOffset = MOTION ? Math.min(scrollY * 0.18, 120) : 0;
+  const todayRow = SITE.schedule.rows[(new Date().getDay() + 6) % 7];
 
   return (
     <section
       id="home"
       data-section="home"
-      className="relative h-screen overflow-hidden flex flex-col justify-center"
+      className="hero hx-hero relative overflow-hidden bg-[#FBFAF7] lg:h-screen lg:min-h-[760px] lg:flex lg:flex-col lg:justify-center"
     >
-      {/* 배경 이미지 — 아주 느린 확대 (ken burns) */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          className="absolute inset-0"
-          style={{ transform: `translateY(${parallaxOffset}px)`, willChange: "transform" }}
-        >
-          <img
-            src={SITE.heroImage}
-            alt=""
-            className={`w-full h-full object-cover ${MOTION ? "hero-zoom" : ""}`}
-            style={{ height: "130%", marginTop: "-15%" }}
-          />
-        </div>
-        {/* 흰색 그라디언트 오버레이 */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FBFAF7]/95 via-[#FBFAF7]/75 to-[#FBFAF7]/25" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#FBFAF7] via-transparent to-[#FBFAF7]/10" />
-      </div>
-
-      {/* 콘텐츠 */}
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-20">
-        <h1 className="font-serif t-display text-[#16211C] mb-7 max-w-xl">
+      {/* 카피 — 패널보다 위에 놓아 패널이 카피 뒤로 들어가게 합니다 */}
+      <div className="relative z-20 w-full max-w-6xl mx-auto px-6 pt-24 lg:pt-0 pb-9 lg:pb-0">
+        <h1 className="font-serif hx-title text-[#16211C] mb-5 max-w-[26rem]">
           {MOTION ? (
             SITE.clinic.slogan.split("\n").map((line, i) => (
               <span key={i} className="block overflow-hidden py-[0.06em]">
-                <span
-                  className="block hero-line"
-                  style={{ animationDelay: `${160 + i * 150}ms` }}
-                >
+                <span className="block hero-line" style={{ animationDelay: `${140 + i * 140}ms` }}>
                   {line}
                 </span>
               </span>
@@ -561,7 +609,7 @@ function Hero() {
             <span className="whitespace-pre-line">{SITE.clinic.slogan}</span>
           )}
         </h1>
-        <p className="t-body text-[#16211C]/55 mb-10 max-w-sm">
+        <p className="t-body text-[#16211C]/70 mb-7 max-w-[22rem]">
           환자 한 분 한 분의 이야기를 끝까지 듣고,
           <br />
           근거 있는 진료로 건강을 함께 관리합니다.
@@ -569,7 +617,7 @@ function Hero() {
         <div className="flex flex-wrap gap-3">
           <a
             href={`tel:${SITE.clinic.phone}`}
-            className="inline-flex items-center px-7 py-3.5 rounded-full bg-[#2F6B58] text-white t-action hover:bg-[#265d4c] transition-colors duration-200"
+            className="hx-btn inline-flex items-center px-7 py-3.5 rounded-full bg-[#2F6B58] text-white t-action hover:bg-[#265d4c] transition-colors duration-200"
           >
             예약하기
           </a>
@@ -577,20 +625,166 @@ function Hero() {
             onClick={() =>
               document.getElementById("services")?.scrollIntoView({ behavior: "smooth" })
             }
-            className="inline-flex items-center px-7 py-3.5 rounded-full border border-[#DDD8CE] text-[#16211C]/75 t-action bg-white/60 hover:border-[#2F6B58] hover:text-[#2F6B58] transition-colors duration-200"
+            className="inline-flex items-center px-7 py-3.5 rounded-full border border-[#DDD8CE] text-[#16211C]/75 t-action bg-white/70 hover:border-[#2F6B58] hover:text-[#2F6B58] transition-colors duration-200"
           >
             진료안내
           </button>
         </div>
       </div>
 
+      {/* 사진 — 모바일은 가로 띠, PC는 오른쪽을 채우고 화면 밖으로 흘러나갑니다.
+          왼쪽 끝은 마스크로 배경색에 녹아 액자가 생기지 않습니다 */}
+      <div
+        className="hx-photo relative h-[190px] lg:absolute lg:inset-y-0 lg:h-auto lg:left-[46%] lg:right-[-6%]"
+        style={{ backgroundImage: `url(${SITE.heroImage})` }}
+      >
+        <div className="hidden lg:block absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#FBFAF7] to-transparent" />
+      </div>
+
+      {/* 예약 화면 데모 — 왼쪽 끝은 마스크로 녹아 카피 뒤로 들어가고,
+          오른쪽은 화면 밖으로 흘러나갑니다 */}
+      <div className="hx-panel relative z-10 lg:absolute lg:top-1/2 lg:mt-9 lg:-translate-y-1/2 lg:left-[30%] lg:right-[-4%]">
+        <div className="hx-panel-sheet">
+          <div className="px-6 lg:pl-[178px] lg:pr-24 py-6 lg:py-7">
+            {/* 패널 머리 */}
+            <div className="flex items-center justify-between gap-4 pb-4 border-b border-[#DDD8CE]">
+              <div>
+                <p className="t-brand text-[#16211C]/65">{SITE.clinic.nameEn} · ONLINE BOOKING</p>
+                <p className="t-h3 font-medium text-[#16211C] mt-1.5">{SITE.clinic.name} 예약 접수</p>
+              </div>
+              <span className="inline-flex items-center gap-2 shrink-0 rounded-full bg-[#E8EFEA] px-3 py-1.5 t-micro text-[#2F6B58]">
+                <span className="hx-live block w-1.5 h-1.5 rounded-full bg-[#2F6B58]" aria-hidden="true" />
+                예약 화면 데모
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_0.82fr_1.06fr] gap-6 lg:gap-0 mt-5">
+              {/* ① 진료 항목 */}
+              <div>
+                <p
+                  className={`flex items-center gap-2 t-meta transition-colors duration-300 ${
+                    step === 0 ? "text-[#2F6B58] font-medium" : "text-[#16211C]/65"
+                  }`}
+                >
+                  <StepMark n={1} state={step === 0 ? "now" : "done"} />
+                  진료 항목
+                </p>
+                <ul className="mt-3 grid grid-cols-2 lg:grid-cols-1 gap-1">
+                  {SITE.services.map((s, i) => (
+                    <li
+                      key={i}
+                      className={`flex items-center justify-between gap-2 rounded-md px-2.5 py-1.5 t-body-sm transition-colors duration-300 ${
+                        i === svcIdx
+                          ? "bg-[#E8EFEA] text-[#2F6B58] font-medium"
+                          : "text-[#16211C]/70"
+                      }`}
+                    >
+                      <span>{s.name}</span>
+                      {i === svcIdx && (
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="shrink-0" aria-hidden="true">
+                          <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* ② 시간 */}
+              <div className="lg:pl-7 lg:border-l lg:border-[#DDD8CE]">
+                <p
+                  className={`flex items-center gap-2 t-meta transition-colors duration-300 ${
+                    step === 1 ? "text-[#2F6B58] font-medium" : "text-[#16211C]/65"
+                  }`}
+                >
+                  <StepMark n={2} state={step === 1 ? "now" : step > 1 ? "done" : "next"} />
+                  시간 선택
+                </p>
+                <p className="mt-3 t-micro text-[#16211C]/65">{book.dateLabel} {book.row.day}</p>
+                <p className="t-micro t-num text-[#16211C]/65">
+                  {book.row.time}
+                  {book.row.note && <span className="ml-2 text-[#2F6B58]">{book.row.note}</span>}
+                </p>
+                <div className="mt-2.5 grid grid-cols-3 lg:grid-cols-2 gap-1.5">
+                  {book.slots.map((t, i) => (
+                    <span
+                      key={t}
+                      className={`block text-center rounded-md py-1.5 t-micro t-num transition-colors duration-300 ${
+                        i === slotIdx
+                          ? "bg-[#2F6B58] text-white"
+                          : "border border-[#DDD8CE] text-[#16211C]/70"
+                      }`}
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <p className="mt-3 t-micro text-[#16211C]/65">
+                  {SITE.schedule.lunch}
+                </p>
+              </div>
+
+              {/* ③ 확인 — 처음부터 채워진 채로 그려집니다 */}
+              <div className="lg:pl-7 lg:border-l lg:border-[#DDD8CE]">
+                <p
+                  className={`flex items-center gap-2 t-meta transition-colors duration-300 ${
+                    step === 2 ? "text-[#2F6B58] font-medium" : "text-[#16211C]/65"
+                  }`}
+                >
+                  <StepMark n={3} state={step === 2 ? "now" : "next"} />
+                  예약 확인
+                </p>
+                <div className="mt-3 rounded-lg border border-[#DDD8CE] bg-[#FBFAF7] p-3.5">
+                  <span
+                    className={`inline-block rounded-full px-2.5 py-1 t-micro transition-colors duration-300 ${
+                      step === 2 ? "bg-[#2F6B58] text-white" : "bg-[#E8EFEA] text-[#2F6B58]"
+                    }`}
+                  >
+                    {step === 2 ? "예약 완료" : "접수 확인 중"}
+                  </span>
+                  <dl className="mt-3 space-y-1.5">
+                    <div className="flex gap-3">
+                      <dt className="w-12 shrink-0 t-micro text-[#16211C]/65">항목</dt>
+                      <dd className="t-body-sm text-[#16211C]">{service}</dd>
+                    </div>
+                    <div className="flex gap-3">
+                      <dt className="w-12 shrink-0 t-micro text-[#16211C]/65">일시</dt>
+                      <dd className="t-body-sm t-num text-[#16211C]">
+                        {book.dateLabel} ({book.row.day.slice(0, 1)}) · {slot}
+                      </dd>
+                    </div>
+                    <div className="flex gap-3">
+                      <dt className="w-12 shrink-0 t-micro text-[#16211C]/65">장소</dt>
+                      <dd className="t-body-sm text-[#16211C]">
+                        {SITE.clinic.name} · {SITE.clinic.addressShort}
+                      </dd>
+                    </div>
+                    <div className="flex gap-3">
+                      <dt className="w-12 shrink-0 t-micro text-[#16211C]/65">문의</dt>
+                      <dd className="t-body-sm t-num text-[#16211C]">{SITE.clinic.phone}</dd>
+                    </div>
+                  </dl>
+                  <p className="mt-3 pt-3 border-t border-[#DDD8CE] t-micro text-[#16211C]/65">
+                    {SITE.schedule.parking}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-5 pt-4 border-t border-[#DDD8CE] t-micro text-[#16211C]/65">
+              {SITE.firstVisit.note} 위 화면은 예약 흐름을 보여 주는 데모입니다.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* 오늘 진료시간 바 */}
-      <div className="absolute bottom-0 left-0 right-0 z-10 bg-white/88 backdrop-blur-md border-t border-[#DDD8CE]">
+      <div className="relative z-30 lg:absolute lg:bottom-0 lg:left-0 lg:right-0 bg-white/92 backdrop-blur-md border-t border-[#DDD8CE]">
         <div className="max-w-6xl mx-auto px-6 py-3 flex flex-wrap items-center gap-x-6 gap-y-1 t-body-sm">
           <span className="text-[#2F6B58] font-medium">오늘 진료</span>
           {(() => { const st = openStatus(); return (
-            <span className={`inline-flex items-center gap-1.5 t-micro font-medium px-2.5 py-0.5 rounded-full ${st.on ? "bg-[#2F6B58] text-white" : "bg-[#16211C]/8 text-[#16211C]/55"}`}>
-              <span className={`w-1.5 h-1.5 rounded-full ${st.on ? "bg-white" : "bg-[#16211C]/35"}`} aria-hidden="true" />
+            <span className={`inline-flex items-center gap-1.5 t-micro font-medium px-2.5 py-0.5 rounded-full ${st.on ? "bg-[#2F6B58] text-white" : "bg-[#16211C]/8 text-[#16211C]/70"}`}>
+              <span className={`w-1.5 h-1.5 rounded-full ${st.on ? "bg-white" : "bg-[#16211C]/45"}`} aria-hidden="true" />
               {st.label}
             </span>
           ); })()}
@@ -602,7 +796,7 @@ function Hero() {
               </span>
             )}
           </span>
-          <span className="text-[#16211C]/40 t-micro hidden sm:inline">
+          <span className="text-[#16211C]/65 t-micro hidden sm:inline">
             {SITE.schedule.lunch}
           </span>
           <a

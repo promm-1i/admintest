@@ -135,21 +135,6 @@ html {
   }
 }
 
-/* 히어로 배경 아주 느린 확대 */
-@keyframes heroZoom {
-  from { transform: scale(1); }
-  to   { transform: scale(1.12); }
-}
-
-.hero-zoom {
-  animation: heroZoom 26s ease-out forwards;
-  transform-origin: 60% 50%;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-zoom { animation: none; }
-}
-
 /* ══════════════════════════════════════════════════════════════
    타이포 스케일 — 역할 기반. 값이 아니라 역할로 부르세요.
    본문 1rem 기준, 사용자 브라우저 글자 크기 설정을 존중합니다.
@@ -262,9 +247,6 @@ html {
   opacity: 1 !important;
   transform: none !important;
 }
-[data-motion="off"] .hero-zoom {
-  transform: none !important;
-}
 [data-motion="off"] {
   scroll-behavior: auto;
 }
@@ -367,4 +349,67 @@ html {
 /* 고정 헤더에 가려지지 않도록 앵커 이동 위치 보정 */
 section[id] {
   scroll-margin-top: 84px;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   히어로 — 예약 화면 데모
+   기본 상태가 곧 최종 상태입니다. 아래 CSS 는 연출만 얹습니다.
+   ══════════════════════════════════════════════════════════════ */
+
+/* 히어로 제목 — 패널이 주인공이므로 디스플레이보다 한 단계 낮춥니다 */
+.hx-title {
+  font-size: clamp(2.1rem, 3.9vw, 3.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* 히어로 사진 — 액자 없이 화면 밖으로 흘러나가고 왼쪽 끝은 배경색에 녹습니다 */
+.hx-photo {
+  background-size: cover;
+  background-position: 58% 46%;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 1024px) {
+  .hx-photo {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 26%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 26%);
+  }
+
+  /* 예약 패널 — 왼쪽 끝이 배경색으로 사라지며 카피 뒤로 들어갑니다 */
+  .hx-panel-sheet {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 155px);
+    mask-image: linear-gradient(90deg, transparent 0, #000 155px);
+    box-shadow: 0 26px 64px -30px rgba(22, 33, 28, 0.34);
+  }
+}
+
+.hx-panel-sheet {
+  background: #ffffff;
+  border-top: 1px solid #ddd8ce;
+  border-bottom: 1px solid #ddd8ce;
+}
+
+/* 데모가 재생 중이라는 표시 — 히어로에서 유일하게 무한 반복하는 요소입니다 */
+@keyframes hxLive {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.9);
+    opacity: 0.35;
+  }
+}
+
+html:not([data-motion='off']) .hx-live {
+  animation: hxLive 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-motion='off']) .hx-live {
+    animation: none;
+  }
 }
