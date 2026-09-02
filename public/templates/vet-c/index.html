@@ -93,6 +93,56 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── hx : 야간 입원실 히어로 (시네마그래프 — 입원장 한 칸의 불빛만 움직인다) ── */
+.hero.hx-hero{position:relative;isolation:isolate;overflow:hidden;background:#0B1212;padding:0;min-height:640px;display:flex;align-items:flex-end}
+.hx-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 6%;filter:brightness(.43) saturate(.86) contrast(1.06);z-index:0}
+.hx-night{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(10,16,16,.42) 0%,rgba(10,16,16,.2) 38%,rgba(8,13,13,.92) 100%),radial-gradient(120% 105% at 18% 58%,rgba(8,13,13,.86) 0%,rgba(8,13,13,.06) 70%)}
+.hx-scrim{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(96deg,rgba(8,13,13,.93) 0%,rgba(8,13,13,.84) 34%,rgba(8,13,13,.42) 60%,rgba(8,13,13,.1) 100%)}
+.hx-glow{position:absolute;z-index:3;pointer-events:none;left:63.7%;top:34px;width:21.7%;height:156px;background:radial-gradient(60% 62% at 50% 46%,rgba(255,240,210,.60) 0%,rgba(255,214,152,.34) 42%,rgba(255,190,110,.12) 68%,rgba(255,180,96,0) 84%);-webkit-backdrop-filter:brightness(2.05) saturate(1.18);backdrop-filter:brightness(2.05) saturate(1.18);-webkit-mask-image:radial-gradient(58% 60% at 50% 46%,#000 0%,rgba(0,0,0,.72) 46%,rgba(0,0,0,.22) 70%,transparent 86%);mask-image:radial-gradient(58% 60% at 50% 46%,#000 0%,rgba(0,0,0,.72) 46%,rgba(0,0,0,.22) 70%,transparent 86%);animation:hx-vetc-lamp 5.2s ease-in-out infinite}
+@keyframes hx-vetc-lamp{0%,100%{opacity:.94}50%{opacity:1}}
+.hx-cap{position:absolute;z-index:4;right:26px;bottom:24px;font-size:11.5px;letter-spacing:.01em;color:rgba(216,238,238,.74);text-shadow:0 1px 10px rgba(0,0,0,.85)}
+.hero.hx-hero .wrap.hx-inner{display:block;grid-template-columns:none;position:relative;z-index:4;width:100%;padding-top:112px;padding-bottom:100px}
+.hx-copy{max-width:560px}
+.hx-hero .kicker{background:none;padding:0;border-radius:0;color:#7CE3E1;font-size:12px;letter-spacing:.14em}
+.hx-hero h1{color:#fff;font-size:clamp(32px,4.6vw,52px);line-height:1.32;text-shadow:0 2px 20px rgba(0,0,0,.55)}
+.hx-hero h1 em{color:#7CE3E1}
+.hx-hero p{margin-top:16px;color:rgba(228,243,243,.88);max-width:432px;font-size:15.5px;line-height:1.75;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.hx-hero .hero-cta{margin-top:30px}
+.hx-hero .btn{font-size:19px;padding:17px 34px}
+.hx-hero .btn-w{background:#fff;border-color:transparent;color:var(--ink)}
+.hx-hero .hx-meta{margin-top:24px;font-size:12.5px;line-height:1.7;color:rgba(206,231,231,.72);max-width:432px}
+.hx-hero .hx-meta b{color:#fff;font-weight:800}
+@media(max-width:760px){
+ .hero.hx-hero{min-height:0;align-items:stretch}
+ .hx-photo{height:260px;object-position:50% 6%;filter:brightness(.3) saturate(.86) contrast(1.1)}
+ .hx-night{bottom:auto;height:260px;background:linear-gradient(180deg,rgba(10,16,16,.34) 0%,rgba(9,14,14,.4) 46%,rgba(8,13,13,.9) 84%,#0B1212 100%),radial-gradient(92% 120% at 12% 45%,rgba(8,13,13,.82) 0%,rgba(8,13,13,0) 66%)}
+ .hx-scrim{display:none}
+ .hx-glow{left:63.7%;top:14px;width:21.7%;height:41px}
+ .hx-cap{top:228px;bottom:auto;right:16px;font-size:11px}
+ .hero.hx-hero .wrap.hx-inner{padding-top:292px;padding-bottom:56px}
+ .hx-copy,.hx-hero p,.hx-hero .hx-meta{max-width:none}
+ .hx-hero h1{line-height:1.34}
+}
+@media(prefers-reduced-motion:reduce){.hx-glow{animation:none}}
+
+/* 사진은 한낮 입원실이다. 밤인 척 눌러 놓았던 처리를 걷고 실제 밝기로 되돌린다.
+   글자 대비는 왼쪽 스크림만으로 만든다. 움직이는 단 하나는 사진에 실제로 켜져 있는
+   입원장 LED 조명 한 칸 — CSS 로 만든 광원이 아니라 사진 안의 광원이다. */
+.hx-photo{filter:saturate(.97) contrast(1.03)!important}
+.hx-night{display:none!important}
+.hx-scrim{background:linear-gradient(96deg,rgba(8,13,13,.92) 0%,rgba(8,13,13,.86) 30%,rgba(8,13,13,.5) 54%,rgba(8,13,13,.12) 78%,rgba(8,13,13,0) 100%)}
+.hx-glow{left:52.4%;top:5.5%;width:12%;height:15%;
+  background:radial-gradient(58% 60% at 50% 50%,rgba(255,236,196,.55) 0%,rgba(255,220,160,.28) 48%,rgba(255,210,140,0) 100%);
+  -webkit-backdrop-filter:none;backdrop-filter:none;mix-blend-mode:screen;
+  animation:hx-kennel 5.4s ease-in-out infinite alternate}
+@keyframes hx-kennel{from{opacity:.55}to{opacity:1}}
+@media(max-width:820px){
+  /* 모바일에서 밝기 .3 까지 눌러 장면을 알아볼 수 없었다 */
+  .hx-photo{filter:saturate(.97) contrast(1.03) brightness(.86)!important}
+  .hx-glow{display:none}
+}
+@media(prefers-reduced-motion:reduce){.hx-glow{animation:none;opacity:.8}}
 </style>
 </head>
 <body>
@@ -104,15 +154,21 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">응급 전화</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<img class="hx-photo" src="./assets/facility-2.jpg" alt="입원장마다 개별 조명이 켜진 튼튼 24시 동물의료센터 입원실">
+<span class="hx-scrim" aria-hidden="true"></span>
+<span class="hx-glow" aria-hidden="true"></span>
+<span class="hx-cap">입원장마다 개별 조명 — 24시간 켜 둡니다</span>
+<div class="wrap hx-inner">
+<div class="hx-copy">
 <span class="kicker">연중무휴 · 수의사 야간 상주</span>
 <h1 style="margin-top:16px">새벽 3시에도<br><em>불이 꺼지지 않는</em> 병원</h1>
 <p>응급은 예고 없이 옵니다. 튼튼은 365일 24시간 수의사가 상주하며, 도착 전 전화로 응급처치를 안내해 드립니다.</p>
 <div class="hero-cta"><a class="btn btn-r" href="tel:010-4894-4905"><svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 20h20Z"/><path d="M12 10v4M12 17h.01"/></svg> 응급 전화</a><a class="btn btn-w" href="#dept">일반 진료 안내</a></div>
+<p class="hx-meta">지금 <b>야간 당직 수의사</b>가 병원에 있습니다 · 24H 응급 접수 · 010-4894-4905</p>
 </div>
-<figure class="hero-img rv"><img src="./assets/facility-1.jpg" alt="진료실"><span class="t24"><i>●</i> 24H 진료 중</span></figure>
-</div></section>
+</div>
+</section>
 
 <section id="er" style="padding-top:0"><div class="wrap">
 <div class="rv"><span class="kicker">응급 절차</span><h2>도착 전부터 치료는 시작됩니다</h2></div>

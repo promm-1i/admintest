@@ -89,6 +89,42 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 새벽 열람실 히어로 (시네마그래프 — 스탠드 하나만) ===== */
+.hero-img .now b{animation:none}
+
+.hero.hx-hero{position:relative;padding:0;overflow:hidden;background:#070B14;isolation:isolate}
+.hx-photo{position:absolute;inset:0;z-index:0}
+.hx-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%;filter:brightness(.82) contrast(1.05) saturate(.95)}
+.hx-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+ linear-gradient(96deg,rgba(7,11,20,.97) 0%,rgba(7,11,20,.94) 30%,rgba(7,11,20,.86) 46%,rgba(7,11,20,.48) 64%,rgba(7,11,20,.14) 82%,rgba(7,11,20,.4) 100%),
+ linear-gradient(180deg,rgba(7,11,20,.82) 0%,rgba(7,11,20,.1) 32%,rgba(7,11,20,.2) 62%,rgba(7,11,20,.72) 100%)}
+
+/* 움직이는 단 하나 — 오른쪽 스탠드 불빛 */
+.hx-lamp{position:absolute;z-index:2;left:84%;top:52%;width:236px;height:168px;transform:translate(-50%,-50%);pointer-events:none;mix-blend-mode:screen;
+ background:radial-gradient(50% 50% at 50% 50%,rgba(255,199,116,.4) 0%,rgba(233,172,80,.19) 36%,rgba(229,168,75,.06) 62%,rgba(229,168,75,0) 79%);
+ animation:hx-lampbreath 5.2s ease-in-out infinite}
+@keyframes hx-lampbreath{0%,100%{filter:brightness(1)}50%{filter:brightness(1.07)}}
+
+.hero .hx-wrap{position:relative;z-index:3;display:flex;grid-template-columns:none;align-items:flex-end;min-height:640px;padding:134px 24px 86px}
+.hx-copy{max-width:560px}
+.hero .hx-h1{margin-top:16px;text-shadow:0 2px 26px rgba(7,11,20,.92)}
+.hero .hx-lead{max-width:462px;margin-top:20px;color:#B4BCCE;line-height:1.85;text-shadow:0 1px 16px rgba(7,11,20,.9)}
+.hx-meta{margin-top:30px;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.06em;color:var(--soft)}
+.hx-meta b{color:var(--amber);font-weight:600}
+.hx-meta i{font-style:normal;color:#48536E;margin:0 9px}
+.hero .hx-cta{margin-top:20px}
+
+@media(max-width:860px){
+ .hx-photo{inset:0 0 auto 0;height:340px}
+ .hx-photo img{height:340px;object-position:100% 50%}
+ .hx-veil{background:linear-gradient(180deg,rgba(7,11,20,.5) 0%,rgba(7,11,20,.16) 110px,rgba(7,11,20,.62) 232px,rgba(7,11,20,.95) 306px,#070B14 340px)}
+ .hx-lamp{left:75%;top:177px;width:140px;height:104px}
+ .hero .hx-wrap{min-height:0;padding:296px 24px 52px}
+ .hx-copy{max-width:none}
+ .hero .hx-lead{max-width:none;font-size:14px}
+}
+@media(prefers-reduced-motion:reduce){.hx-lamp{animation:none}}
 </style>
 </head>
 <body>
@@ -99,15 +135,20 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">잔여석 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="hx-photo"><img src="./assets/1.jpg" alt="불 꺼진 새벽 열람실, 스탠드만 켜져 있는 좌석들"></div>
+<div class="hx-veil"></div>
+<div class="hx-lamp" aria-hidden="true"></div>
+<div class="wrap hx-wrap">
+<div class="hx-copy">
 <p class="kicker">24H STUDY LOUNGE</p>
-<h1 style="margin-top:14px">모두 잠든 시간에<br><em>당신의 페이지</em>는 넘어갑니다</h1>
-<p>새벽서재는 24시간 무인 운영 스터디카페입니다. 방해 없는 조도, 백색소음, 그리고 같은 시간에 공부하는 사람들.</p>
-<div class="hero-cta"><a class="btn btn-a" href="tel:010-4894-4905">잔여석 확인 전화</a><a class="btn btn-l" href="#price">이용권 보기</a></div>
+<h1 class="hx-h1">모두 잠든 시간에<br><em>당신의 페이지</em>는 넘어갑니다</h1>
+<p class="hx-lead">새벽서재는 24시간 무인 운영 스터디카페입니다. 방해 없는 조도, 백색소음, 그리고 같은 시간에 공부하는 사람들.</p>
+<p class="hx-meta">AM 03:14 <i>·</i> 현재 잔여석 <b>17 / 42</b></p>
+<div class="hero-cta hx-cta"><a class="btn btn-a" href="tel:010-4894-4905">잔여석 확인 전화</a><a class="btn btn-l" href="#price">이용권 보기</a></div>
 </div>
-<figure class="hero-img rv"><img src="./assets/1.jpg" alt="심야의 열람실"><span class="now">현재 잔여석 <b>17 / 42</b></span></figure>
-</div></section>
+</div>
+</section>
 
 <section id="zone" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">ZONES</p><h2>몰입의 세 가지 방</h2></div>

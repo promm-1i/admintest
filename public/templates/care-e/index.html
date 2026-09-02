@@ -100,6 +100,80 @@ footer b{color:#fff}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 마당 정지 컷 + 빨래처럼 흔들리는 천 한 자락 (시네마그래프) ===== */
+.hx-hero{position:relative;isolation:isolate;overflow:hidden;padding:0;display:grid;align-items:center;min-height:clamp(560px,80vh,700px);background:#22241B}
+.hx-photo{position:absolute;inset:0;z-index:0}
+.hx-photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 46%}
+/* 움직이는 단 한 곳 — 오른쪽 끝 천 자락. 히어로 면적의 6% 남짓, 글자에서 멀리 떨어져 있다 */
+.hx-cloth{position:absolute;top:0;right:0;width:9.5%;height:64%;overflow:hidden;z-index:0;
+ -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,#000 28%),linear-gradient(to bottom,#000 0,#000 54%,rgba(0,0,0,0) 97%);
+ -webkit-mask-composite:source-in;
+ mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,#000 28%),linear-gradient(to bottom,#000 0,#000 54%,rgba(0,0,0,0) 97%);
+ mask-composite:intersect;
+ will-change:transform;animation:hx-cloth-sway 5.4s ease-in-out infinite}
+.hx-cloth img{position:absolute;top:0;right:0;width:1052.7%;height:156.25%;object-fit:cover;object-position:50% 46%}
+@keyframes hx-cloth-sway{0%,100%{transform:translate3d(0,0,0);filter:brightness(1)}50%{transform:translate3d(-3px,0,0);filter:brightness(1.055)}}
+.hx-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+ background:linear-gradient(96deg,rgba(24,26,18,.94) 0%,rgba(24,26,18,.89) 36%,rgba(24,26,18,.64) 54%,rgba(24,26,18,.2) 74%,rgba(24,26,18,0) 90%),
+ linear-gradient(to bottom,rgba(24,26,18,.32) 0%,rgba(24,26,18,0) 30%),
+ linear-gradient(to bottom,rgba(245,242,231,0) 88%,var(--paper) 100%)}
+.hx-inner{position:relative;z-index:2;width:100%;max-width:1180px;margin:0 auto;padding:108px clamp(24px,5vw,60px) 122px}
+.hx-kicker{color:#C2D29A}
+.hx-hero h1{font-family:"Gowun Batang",serif;font-size:clamp(33px,4.6vw,54px);font-weight:700;line-height:1.42;color:#FBFAF4;margin-top:14px;max-width:15ch;text-shadow:0 2px 18px rgba(18,20,13,.45)}
+.hx-hero h1 em{font-style:normal;color:#CBDCA3}
+.hx-lead{margin-top:18px;max-width:400px;color:#E4E1D1;font-size:16.5px;line-height:1.85;text-shadow:0 1px 12px rgba(18,20,13,.5)}
+.hx-cta{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-cta .btn{background:var(--deep);box-shadow:0 10px 28px rgba(14,16,10,.32)}
+.hx-cta .btn:hover{background:#495630}
+.hx-cta .btn.ghost{background:rgba(245,242,231,.08);border-color:rgba(240,237,224,.6);color:#F2EFE3;box-shadow:none}
+.hx-cta .btn.ghost:hover{background:rgba(245,242,231,.17)}
+@media(max-width:760px){
+ .hx-hero{min-height:auto;align-items:end}
+ .hx-photo>img,.hx-cloth img{object-position:84% 44%}
+ .hx-cloth{width:17%;height:46%}
+ .hx-cloth img{width:588.2%;height:217.4%}
+ .hx-scrim{background:linear-gradient(180deg,rgba(24,26,18,.6) 0%,rgba(24,26,18,.36) 24%,rgba(24,26,18,.86) 58%,rgba(24,26,18,.95) 100%),linear-gradient(to bottom,rgba(245,242,231,0) 94%,var(--paper) 100%)}
+ .hx-inner{padding:178px 24px 62px}
+ .hx-hero h1{max-width:none}
+ .hx-lead{max-width:none;font-size:15.5px}
+ .hx-cta{gap:10px}
+ .hx-cta .btn{flex:1 1 100%;text-align:center;padding:15px 20px}
+}
+
+/* ===== hx-fix : 흔들리는 곳을 '창가 속커튼 한 자락'으로 정렬 ===== */
+/* 첫 화면 안에서 살아 있는 지점은 하나여야 한다 — 헤더 로고 잎사귀는 끈다 */
+.logo i{animation:none}
+
+/* 흔들리는 상자는 창가 속커튼 자락만 덮는 좁은 띠(히어로의 6%)로 줄이고,
+   그 안의 사진은 배경 사진과 완전히 같은 상자·같은 cover 계산이 되도록 되돌려 확대한다.
+   → 정지 상태에서 배경과 픽셀이 일치하므로 이중노출 얼룩이 생기지 않는다 */
+.hx-cloth{position:absolute;top:0;right:0;left:auto;bottom:auto;width:8.6%;height:68%;overflow:hidden;z-index:0;
+ -webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,#000 26%),linear-gradient(to bottom,#000 0,#000 78%,rgba(0,0,0,0) 100%);
+ -webkit-mask-composite:source-in;
+ mask-image:linear-gradient(to right,rgba(0,0,0,0) 0,#000 26%),linear-gradient(to bottom,#000 0,#000 78%,rgba(0,0,0,0) 100%);
+ mask-composite:intersect;
+ will-change:transform;animation:hx-sheer 5.4s ease-in-out infinite}
+/* 1162.7907% = 100/8.6, 147.0588% = 100/68 → 띠 안에서 사진 상자가 정확히 히어로 크기로 복원된다.
+   이전 반려 원인: img{max-width:100%} 리셋이 이 확대를 띠 폭으로 잘라
+   벽등·콘센트·베개가 찍힌 엉뚱한 크롭이 커튼 위에 겹쳐 있었다 */
+.hx-cloth img{position:absolute;top:0;right:0;left:auto;bottom:auto;width:1162.7907%;height:147.0588%;
+ max-width:none;object-fit:cover;object-position:50% 46%}
+@keyframes hx-sheer{0%,100%{transform:translate3d(0,0,0);filter:brightness(1)}
+ 50%{transform:translate3d(3px,0,0);filter:brightness(1.05)}}
+
+@media(max-width:760px){
+ /* 모바일 크롭에서는 커튼 자락이 사실상 보이지 않는다 — 덧댄 사진을 아예 걷는다 */
+ .hx-cloth{display:none}
+ /* 밝은 커튼 위에 놓이는 킥커·h1 대비 확보 */
+ .hx-scrim{background:linear-gradient(180deg,rgba(24,26,18,.5) 0%,rgba(24,26,18,.3) 12%,rgba(24,26,18,.72) 22%,rgba(24,26,18,.88) 30%,rgba(24,26,18,.92) 62%,rgba(24,26,18,.96) 100%),linear-gradient(to bottom,rgba(245,242,231,0) 94%,var(--paper) 100%)}
+ .hx-kicker{color:#E3EDCC}
+}
+
+/* 히어로 종횡비가 4:3 아래로 내려가면(뷰포트 약 930px 미만) 사진의 cover 크롭이 가로로 밀린다.
+   천 조각은 레이아웃 %로 고정돼 있어 그 아래에서는 커튼이 아니라 창틀·나뭇잎을 덮는다.
+   태블릿 세로(768·820·834)가 전부 이 구간에 들어가므로 모바일 차단선(760px)과 별도로 끊는다. */
+@media(max-width:940px){.hx-cloth{display:none}}
 </style>
 </head>
 <body>
@@ -110,16 +184,19 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">입소 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<p class="kicker">노인요양시설 · 정원 24명</p>
-<h1 style="margin-top:16px">마당이 있는 집에서<br><em>천천히 나이 드시게</em></h1>
-<p>들녘의집은 논밭 한가운데 있는 작은 요양원입니다. 담이 낮고 마당이 넓어, 언제든 밖에 나가 앉아 계실 수 있습니다.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">상담 · 견학 신청</a><a class="btn ghost" href="#prog">하루 보기</a></div>
-<div class="hero-img rv">
-<img class="m" src="./assets/1.jpg" alt="요양원 생활실">
-<div class="side"><img src="./assets/2.jpg" alt="재활 운동실"><img src="./assets/4.jpg" alt="식당"></div>
+<section class="hx-hero">
+<div class="hx-photo">
+<img src="./assets/1.jpg" alt="마당 쪽 창을 열어 둔 들녘의집 생활실" fetchpriority="high">
+<div class="hx-cloth" aria-hidden="true"><img src="./assets/1.jpg" alt=""></div>
 </div>
-</div></section>
+<div class="hx-scrim" aria-hidden="true"></div>
+<div class="hx-inner">
+<p class="kicker hx-kicker">노인요양시설 · 정원 24명</p>
+<h1>마당이 있는 집에서<br><em>천천히 나이 드시게</em></h1>
+<p class="hx-lead">들녘의집은 논밭 한가운데 있는 작은 요양원입니다. 담이 낮고 마당이 넓어, 언제든 밖에 나가 앉아 계실 수 있습니다.</p>
+<div class="hx-cta"><a class="btn" href="tel:010-4894-4905">상담 · 견학 신청</a><a class="btn ghost" href="#prog">하루 보기</a></div>
+</div>
+</section>
 
 <section id="season" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">사계절</p><h2>계절이 바뀌는 걸 아시게</h2><p class="sub">방 안에만 계시면 계절을 잊으십니다. 들녘의집은 계절마다 마당에서 할 일을 만듭니다.</p></div>

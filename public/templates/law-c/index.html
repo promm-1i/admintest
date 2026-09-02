@@ -88,6 +88,43 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ───── hx : 시네마그래프 히어로 (어두운 회의실 정지 컷 + 초 단위로 줄어드는 숫자 하나) ───── */
+@property --hxs{syntax:'<integer>';inherits:false;initial-value:47}
+.hero.hx-hero{position:relative;padding:0;overflow:hidden;margin-bottom:clamp(50px,7vh,82px)}
+.hx-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 56%;filter:grayscale(.34) brightness(.86) contrast(1.04);animation:none}
+.hx-veil{position:absolute;inset:0;background:
+ linear-gradient(97deg,rgba(21,23,27,.96) 0%,rgba(21,23,27,.9) 28%,rgba(21,23,27,.5) 50%,rgba(21,23,27,.32) 72%,rgba(21,23,27,.7) 100%),
+ linear-gradient(to top,rgba(21,23,27,.92) 0%,rgba(21,23,27,0) 42%);animation:none}
+.hx-inner{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(18px,4.5vw,60px);padding:clamp(104px,17vh,166px) 24px clamp(42px,6.5vh,62px)}
+.hx-copy{flex:1 1 auto;max-width:600px}
+.hx-hero .hx-kicker{margin:0;font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.26em;color:var(--steel)}
+.hx-hero .hx-copy h1{margin-top:18px;max-width:none;font-size:clamp(32px,4.5vw,55px);line-height:1.22;text-shadow:0 2px 24px rgba(21,23,27,.9)}
+.hx-hero .hx-lead{margin-top:18px;max-width:430px;font-size:15px;line-height:1.8;color:#C9CCD3;text-shadow:0 1px 16px rgba(21,23,27,.95)}
+.hx-hero .hero-cta{margin-top:28px}
+.hx-clock{flex:0 0 auto;margin-right:calc(50% - 50vw);padding:20px clamp(26px,3.6vw,52px) 20px clamp(22px,2.6vw,34px);text-align:right;background:linear-gradient(90deg,rgba(21,23,27,.42),rgba(21,23,27,.86) 34%);border-top:1px solid rgba(185,190,199,.3);border-left:1px solid rgba(185,190,199,.14)}
+.hx-hero .hx-clabel{margin:0;font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.2em;color:var(--steel)}
+.hx-hero .hx-time{margin:9px 0 0;display:flex;align-items:baseline;justify-content:flex-end;font-family:"IBM Plex Mono",monospace;font-weight:500;font-size:clamp(38px,4.3vw,56px);line-height:1;color:var(--ink)}
+.hx-hero .hx-time i{font-style:normal;color:var(--soft);padding:0 3px}
+.hx-sec{--hxs:47;counter-reset:hxs var(--hxs);color:var(--steel);animation:hx-tick 60s steps(60,end) infinite}
+.hx-sec::after{content:counter(hxs,decimal-leading-zero)}
+@keyframes hx-tick{from{--hxs:59}to{--hxs:-1}}
+.hx-hero .hx-cnote{margin:11px 0 0;font-size:12px;color:var(--soft)}
+.hx-bar{position:relative;z-index:2;border-top:1px solid rgba(185,190,199,.16);background:rgba(21,23,27,.82)}
+.hx-hero .stats{margin-top:0;border:0;background:transparent;gap:0}
+.hx-hero .stats div{background:transparent;padding:20px 20px;border-left:1px solid rgba(185,190,199,.13)}
+.hx-hero .stats div:first-child{border-left:0;padding-left:0}
+.hx-hero .stats b{font-size:23px}
+@media(max-width:860px){
+ .hx-inner{flex-direction:column;align-items:stretch;padding:72px 24px 24px}
+ .hx-copy{max-width:none}
+ .hx-hero .hx-lead{max-width:none}
+ .hx-clock{margin:24px calc(50% - 50vw) 0;padding:16px 24px 18px;text-align:left;border-left:0;background:linear-gradient(180deg,rgba(21,23,27,.5),rgba(21,23,27,.88))}
+ .hx-hero .hx-time{justify-content:flex-start;font-size:38px}
+ .hx-hero .stats div{padding:16px 14px}
+ .hx-hero .stats div:nth-child(odd){border-left:0;padding-left:0}
+}
+@media(prefers-reduced-motion:reduce){.hx-sec{animation:none}}
 </style>
 </head>
 <body>
@@ -98,18 +135,31 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">긴급 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<p class="kicker">CRIMINAL &amp; CORPORATE LITIGATION</p>
-<h1 style="margin-top:16px">골든타임은<br>수사 <b>첫 72시간</b>입니다</h1>
-<p>소환 통보를 받으셨다면, 검색보다 전화가 먼저입니다. 리버티는 24시간 안에 대응 전략 보고서를 드립니다.</p>
+<section class="hero hx-hero">
+<img class="hx-photo" src="./assets/3.jpg" alt="법무법인 리버티 회의실">
+<div class="hx-veil"></div>
+<div class="wrap hx-inner">
+<div class="hx-copy">
+<p class="hx-kicker">CRIMINAL &amp; CORPORATE LITIGATION</p>
+<h1>골든타임은<br>수사 <b>첫 72시간</b>입니다</h1>
+<p class="hx-lead">소환 통보를 받으셨다면, 검색보다 전화가 먼저입니다. 리버티는 24시간 안에 대응 전략 보고서를 드립니다.</p>
 <div class="hero-cta"><a class="btn btn-s" href="tel:010-4894-4905">긴급 상담 연결</a><a class="btn btn-l" href="#flow">대응 절차 보기</a></div>
+</div>
+<aside class="hx-clock">
+<p class="hx-clabel">GOLDEN TIME REMAINING</p>
+<p class="hx-time"><span>71</span><i>:</i><span>58</span><i>:</i><span class="hx-sec"></span></p>
+<p class="hx-cnote">소환 통보 시각 기준 · 남은 초동 대응 시간</p>
+</aside>
+</div>
+<div class="hx-bar"><div class="wrap">
 <div id="record" class="stats rv">
 <div><b>1,800+</b><span>누적 수행 사건</span></div>
 <div><b>24h</b><span>초동 대응 보고</span></div>
 <div><b>6인</b><span>소속 변호사 · 전원 송무</span></div>
 <div><b>0건</b><span>징계 · 수임 분쟁</span></div>
 </div>
-</div></section>
+</div></div>
+</section>
 
 <section id="fields" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">PRACTICE</p><h2>업무 분야</h2></div>

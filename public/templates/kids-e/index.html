@@ -91,6 +91,63 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 : 교실 정지 컷 + 창가 화분만 흔들리는 시네마그래프 ── */
+.hx-hero{position:relative;display:grid;align-items:center;min-height:clamp(516px,76vh,668px);padding:0;overflow:hidden;background:var(--paper)}
+.hx-stage{position:absolute;inset:0;overflow:hidden}
+.hx-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:52% 34%;border-radius:0}
+.hx-veil{position:absolute;inset:0;background:
+linear-gradient(101deg,rgba(244,239,230,0) 31%,rgba(244,239,230,.48) 47%,rgba(244,239,230,.9) 59%,rgba(244,239,230,.965) 71%),
+linear-gradient(to bottom,rgba(244,239,230,.24) 0,rgba(244,239,230,0) 15%),
+linear-gradient(to bottom,rgba(244,239,230,0) 74%,var(--paper) 100%)}
+.hx-wrap{position:relative;z-index:2;padding-top:92px;padding-bottom:98px}
+.hx-copy{max-width:430px;margin-left:auto}
+.hx-copy h1{font-family:"Gowun Batang",serif;font-size:clamp(27px,3.5vw,40px);font-weight:700;line-height:1.62;margin-top:17px;letter-spacing:-.01em}
+.hx-copy h1 em{font-style:normal;color:var(--deep)}
+.hx-copy p{margin-top:17px;color:#6B6155;font-size:14.5px;max-width:404px}
+.hx-cta{margin-top:29px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-cta .btn{background:#7B6242}
+.hx-cta .btn:hover{background:#634E33}
+.hx-cta .btn.ghost{background:transparent;border:1px solid var(--deep);color:var(--ink)}
+.hx-cta .btn.ghost:hover{background:#7B6242;color:#fff}
+/* 창가 화분 — 히어로에서 움직이는 단 하나.
+   CSS 도형이 아니라 2.jpg 안의 그 화분 픽셀을 그대로 겹쳐 아주 느리게 기울인다.
+   같은 사진이라 아웃포커스 정도·그림자·색이 배경과 자동으로 일치한다. */
+.hx-stage{container-type:size}
+.hx-sway{position:absolute;pointer-events:none;
+left:40.9375cqw;top:calc(34cqh - 16.375cqw);width:19.5cqw;height:10.625cqw;
+background-image:url(./assets/2.jpg);background-repeat:no-repeat;
+background-position:-40.9375cqw -17.625cqw;background-size:100cqw 100cqw;
+-webkit-mask-image:radial-gradient(ellipse 42% 60% at 50% 66%,#000 0 62%,rgba(0,0,0,.5) 82%,transparent 100%),linear-gradient(to top,transparent 0,#000 26%);
+mask-image:radial-gradient(ellipse 42% 60% at 50% 66%,#000 0 62%,rgba(0,0,0,.5) 82%,transparent 100%),linear-gradient(to top,transparent 0,#000 26%);
+-webkit-mask-composite:source-in;mask-composite:intersect;
+-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+transform-origin:50% 100%;animation:hx-sway 6s ease-in-out infinite;will-change:transform}
+@keyframes hx-sway{0%,100%{transform:rotate(-.75deg)}50%{transform:rotate(.75deg)}}
+@media(prefers-reduced-motion:reduce){.hx-sway{animation:none!important;transform:none!important}}
+/* 글자가 앉는 띠에만 반투명 색면을 한 겹 더 — 가로 그라데이션 × 세로 마스크라
+   사진 왼쪽(아이들·교구)과 위쪽 화분은 건드리지 않는다. */
+.hx-veil::after{content:"";position:absolute;inset:0;
+background:linear-gradient(101deg,rgba(244,239,230,0) 22%,rgba(244,239,230,.62) 40%,rgba(244,239,230,.66) 100%);
+-webkit-mask-image:linear-gradient(to bottom,transparent 0 21%,#000 27% 86%,transparent 100%);
+mask-image:linear-gradient(to bottom,transparent 0 21%,#000 27% 86%,transparent 100%)}
+.hx-copy .kicker{color:#4A3B22}
+.hx-copy h1 em{color:#63492B}
+.hx-copy p{color:#403930}
+@media(max-width:760px){
+.hx-hero{display:block;min-height:0}
+.hx-stage{position:relative;inset:auto;height:min(38vh,268px)}
+.hx-photo{object-position:56% 36%}
+.hx-veil{background:linear-gradient(to bottom,rgba(244,239,230,.4) 0,rgba(244,239,230,0) 26%,rgba(244,239,230,0) 60%,rgba(244,239,230,.9) 93%,var(--paper) 100%)}
+.hx-wrap{padding-top:17px;padding-bottom:32px}
+.hx-copy{max-width:none;margin-left:0}
+.hx-copy h1{font-size:clamp(25px,6.9vw,31px);line-height:1.55;margin-top:13px}
+.hx-copy p{margin-top:13px;font-size:14px;max-width:none;line-height:1.85}
+.hx-cta{margin-top:21px;gap:10px}
+.hx-cta .btn{flex:1 1 auto;text-align:center;padding:14px 16px}
+.hx-sway{top:calc(36cqh - 18.375cqw)}
+.hx-veil::after{display:none}
+}
 </style>
 </head>
 <body>
@@ -101,13 +158,19 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">상담 예약</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hx-hero">
+<div class="hx-stage">
+<img class="hx-photo" src="./assets/2.jpg" alt="교구가 정돈된 고요한아이 몬테소리 교실">
+<div class="hx-sway" aria-hidden="true"></div>
+<div class="hx-veil"></div>
+</div>
+<div class="wrap hx-wrap"><div class="hx-copy rv">
 <p class="kicker">MONTESSORI HOUSE · AGE 3–5</p>
-<h1 style="margin-top:20px">아이가 스스로 고른 일에<br><em>깊이 몰두하는 시간</em></h1>
+<h1>아이가 스스로 고른 일에<br><em>깊이 몰두하는 시간</em></h1>
 <p>고요한아이에서는 선생님이 앞에서 지시하지 않습니다. 아이가 교구를 고르고, 끝까지 하고, 제자리에 두는 것 — 그 흐름을 지켜봅니다.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">상담 예약하기</a><a class="btn ghost" href="#area">교구 보기</a></div>
-<figure class="rv"><img src="./assets/2.jpg" alt="몬테소리 교실"></figure>
-</div></section>
+<div class="hx-cta"><a class="btn" href="tel:010-4894-4905">상담 예약하기</a><a class="btn ghost" href="#area">교구 보기</a></div>
+</div></div>
+</section>
 
 <section id="area" style="padding-top:0"><div class="wrap">
 <div class="rv" style="text-align:center"><p class="kicker">AREAS</p><h2>다섯 개의 교구 영역</h2></div>

@@ -128,6 +128,48 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx — hero: 시네마그래프 (뚝배기 김만 움직인다) ===== */
+.hero{display:block;place-items:normal;text-align:left;padding:0;min-height:100svh;position:relative;overflow:hidden;background:var(--ink)}
+.hero .hero-bg{animation:none}
+.hero .scroll-hint{animation:none;opacity:.72;z-index:3}
+.hx-stage{position:absolute;inset:0;overflow:hidden}
+.hx-frame{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:max(100%,178svh);aspect-ratio:2048/1152}
+.hx-photo{width:100%;height:100%;object-fit:cover;filter:brightness(.87) saturate(1.03)}
+/* 움직이는 단 하나 — 오른쪽 뚝배기 위 김 */
+.hx-steam{position:absolute;left:61.8%;top:18.5%;width:11.6%;height:21%;pointer-events:none;
+  transform-origin:50% 100%;mix-blend-mode:screen;filter:blur(9px);opacity:.75;
+  background:
+    radial-gradient(ellipse 40% 46% at 44% 76%,rgba(237,232,221,.30),rgba(237,232,221,0) 72%),
+    radial-gradient(ellipse 32% 36% at 63% 47%,rgba(237,232,221,.23),rgba(237,232,221,0) 74%),
+    radial-gradient(ellipse 27% 30% at 41% 21%,rgba(237,232,221,.15),rgba(237,232,221,0) 76%);
+  animation:hx-steam 5.4s ease-in-out infinite}
+@keyframes hx-steam{0%,100%{opacity:.72;transform:translateY(0) scaleY(1)}50%{opacity:.78;transform:translateY(-4px) scaleY(1.04)}}
+.hx-scrim{position:absolute;inset:0;pointer-events:none;
+  background:
+   linear-gradient(100deg,rgba(16,19,20,.95) 0%,rgba(16,19,20,.9) 24%,rgba(16,19,20,.55) 44%,rgba(16,19,20,.1) 64%,rgba(16,19,20,.5) 100%),
+   linear-gradient(to bottom,rgba(16,19,20,.7) 0%,rgba(16,19,20,0) 18%,rgba(16,19,20,0) 62%,var(--ink) 100%)}
+.hx-copy{position:absolute;z-index:3;left:clamp(22px,6.5vw,104px);top:50%;transform:translateY(-50%);
+  max-width:min(46%,520px);display:flex;gap:clamp(16px,2.2vw,32px);align-items:flex-start}
+.hx-vert{writing-mode:vertical-rl;letter-spacing:.42em;font-size:13px;color:var(--gold);height:148px;flex:none;margin-top:8px}
+.hx-copy h1{font-family:"Song Myung",serif;font-size:clamp(40px,6.4vw,78px);letter-spacing:.2em;font-weight:400;line-height:1.16}
+.hx-season{margin-top:22px;font-size:14px;color:var(--soft);letter-spacing:.18em}
+.hx-season b{color:var(--rice);font-weight:400}
+.hx-cta{margin-top:38px;display:flex;gap:14px;flex-wrap:wrap}
+@media(max-width:760px){
+  .hero{display:flex;flex-direction:column;min-height:auto;padding-bottom:14px}
+  .hx-stage{position:relative;inset:auto;height:46svh;min-height:274px;flex:none;margin-top:64px}
+  .hx-frame{left:37%;width:max(100%,76svh)}
+  .hx-scrim{background:linear-gradient(to bottom,rgba(16,19,20,.62) 0%,rgba(16,19,20,0) 26%,rgba(16,19,20,0) 56%,var(--ink) 100%)}
+  .hx-copy{position:static;transform:none;max-width:none;display:block;padding:22px 22px 34px}
+  .hx-vert{writing-mode:horizontal-tb;height:auto;margin:0 0 12px;font-size:11px;letter-spacing:.34em}
+  .hx-copy h1{font-size:clamp(38px,10.5vw,52px);letter-spacing:.16em}
+  .hx-season{margin-top:16px;font-size:13px}
+  .hx-cta{margin-top:26px;gap:10px}
+  .hx-cta .btn-gold,.hx-cta .btn-line{padding:14px 24px;font-size:13px}
+  .hero .scroll-hint{display:none}
+}
+@media(prefers-reduced-motion:reduce){.hx-steam{animation:none;opacity:.75}}
 </style>
 </head>
 <body>
@@ -145,14 +187,22 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </header>
 
 <section class="hero">
-  <div class="hero-bg"></div><div class="hero-veil"></div>
-  <div class="hero-inner">
-    <p class="vert">계절을 차리는 저녁</p>
-    <h1>달빛한상</h1>
-    <p class="season">이달의 상차림 — <b>가을 · 송이와 은행</b></p>
-    <div class="hero-cta">
-      <a class="btn-gold" href="tel:010-4894-4905">저녁 예약</a>
-      <a class="btn-line" href="#course">코스 보기</a>
+  <div class="hx-stage">
+    <div class="hx-frame">
+      <img class="hx-photo" src="./assets/hero.jpg" alt="달빛한상 저녁 상차림 — 김이 오르는 뚝배기와 계절 찬">
+      <span class="hx-steam" aria-hidden="true"></span>
+    </div>
+    <div class="hx-scrim" aria-hidden="true"></div>
+  </div>
+  <div class="hx-copy">
+    <p class="hx-vert">계절을 차리는 저녁</p>
+    <div class="hx-text">
+      <h1>달빛한상</h1>
+      <p class="hx-season">이달의 상차림 — <b>가을 · 송이와 은행</b></p>
+      <div class="hx-cta">
+        <a class="btn-gold" href="tel:010-4894-4905">저녁 예약</a>
+        <a class="btn-line" href="#course">코스 보기</a>
+      </div>
     </div>
   </div>
   <span class="scroll-hint">SCROLL</span>

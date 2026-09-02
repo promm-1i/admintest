@@ -101,6 +101,54 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 .hband figcaption{position:absolute;left:0;right:0;bottom:0;padding:46px 26px 26px;background:linear-gradient(transparent,rgba(20,14,8,.85));color:var(--cream)}
 .hband figcaption b{display:block;font-size:clamp(17px,2.4vw,22px)}
 .hband figcaption span{display:block;margin-top:7px;font-size:13px;color:rgba(255,251,243,.8);max-width:640px}
+
+/* ── hero 교체 (hx-) ─────────────────────────────────────────── */
+/* 배경 장식처럼 보이던 큰 광원 맥동을 끈다. 움직이는 것은 불꽃 하나뿐. */
+.glow{animation:none}
+.flame{animation:none}
+
+.hx-hero{position:relative;overflow:hidden;padding:0;text-align:left;background:#14100A;
+  min-height:clamp(540px,58vw,640px);display:flex;align-items:center}
+.hx-photo{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hx-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:52.9% 46.15%;transform:scale(1.25)}
+.hx-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(101deg,rgba(14,10,6,.95) 0%,rgba(14,10,6,.9) 27%,rgba(14,10,6,.58) 45%,rgba(14,10,6,.14) 62%,rgba(14,10,6,0) 75%)}
+
+/* 사진 속 불꽃(x757~778 / y269~319 @1440) 위에 얹히는 단 하나의 움직이는 요소 */
+.hx-flame{position:absolute;left:53.3%;top:34.45%;width:44px;height:68px;z-index:2;pointer-events:none;
+  border-radius:50%;mix-blend-mode:screen;filter:blur(5px);
+  background:radial-gradient(closest-side,rgba(255,236,196,.72),rgba(255,212,140,.58) 50%,rgba(246,180,86,.3) 76%,rgba(240,169,59,0) 100%);
+  transform:translate(-50%,-52%);
+  animation:hx-flick 4.8s ease-in-out infinite}
+@keyframes hx-flick{
+  0%,100%{opacity:.9;transform:translate(-50%,-52%) scale(1)}
+  50%{opacity:.97;transform:translate(-50%,calc(-52% - 2px)) scale(1.025)}
+}
+@media(prefers-reduced-motion:reduce){.hx-flame{animation:none;opacity:.93}}
+
+.hx-in{position:relative;z-index:3;width:100%}
+.hx-copy{max-width:432px}
+.hx-kicker{margin:0;font-size:12px;letter-spacing:.14em;color:#E0BA7E}
+.hx-hero h1{margin-top:14px;font-size:clamp(31px,4.3vw,50px);line-height:1.4;
+  text-shadow:0 2px 20px rgba(0,0,0,.55)}
+.hx-hero .hx-lead{margin:15px 0 0;max-width:400px;color:#D9C7AD;font-size:14.5px;line-height:1.85;
+  text-shadow:0 1px 10px rgba(0,0,0,.5)}
+.hx-cta{margin-top:29px;justify-content:flex-start}
+.hx-cta .btn{color:#241B12;font-weight:700}
+.hx-cta .btn:hover{background:#E3A659}
+.hx-cta .btn.ghost{color:#F3E3CA;border-color:rgba(243,227,202,.62)}
+.hx-cta .btn.ghost:hover{background:rgba(243,227,202,.12)}
+
+@media(max-width:760px){
+  .hx-hero{min-height:636px;align-items:flex-end;padding-bottom:42px}
+  .hx-scrim{background:linear-gradient(180deg,rgba(14,10,6,.5) 0%,rgba(14,10,6,.22) 26%,rgba(14,10,6,.8) 57%,rgba(14,10,6,.95) 76%)}
+  .hx-photo img{transform:none}
+  .hx-flame{left:52.4%;top:41.7%;width:32px;height:54px}
+  .hx-copy{max-width:none}
+  .hx-hero .hx-lead{max-width:none;font-size:14px}
+  .hx-cta{margin-top:22px;gap:10px}
+  .hx-cta .btn{padding:14px 24px;font-size:14px}
+}
 </style>
 </head>
 <body>
@@ -111,13 +159,17 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">문의하기</a>
 </div></header>
 
-<div class="hero">
-<div class="glow" aria-hidden="true"></div>
-<div class="wrap hero-in">
-<div class="flame" aria-hidden="true"></div>
+<div class="hero hx-hero">
+<div class="hx-photo"><img src="./assets/hero.jpg" alt="심지공방 작업대 위에서 불을 켜 둔 소이 캔들"></div>
+<div class="hx-scrim" aria-hidden="true"></div>
+<span class="hx-flame" aria-hidden="true"></span>
+<div class="wrap hero-in hx-in">
+<div class="hx-copy">
+<p class="hx-kicker">심지공방 · 캔들 클래스와 주문 제작</p>
 <h1>불을 켜는 순간<br><em>공간이 바뀝니다</em></h1>
-<p>심지공방은 소이왁스와 천연 프래그런스만 씁니다. 태울 때 그을음이 적고, 향이 오래 남습니다.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">클래스 문의</a><a class="btn ghost" href="#note">향 살펴보기</a></div>
+<p class="hx-lead">심지공방은 소이왁스와 천연 프래그런스만 씁니다. 태울 때 그을음이 적고, 향이 오래 남습니다.</p>
+<div class="hero-cta hx-cta"><a class="btn" href="tel:010-4894-4905">클래스 문의</a><a class="btn ghost" href="#note">향 살펴보기</a></div>
+</div>
 </div>
 </div>
 

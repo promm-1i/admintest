@@ -105,6 +105,101 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 .gr p{margin-top:9px;font-size:13.5px;line-height:1.85;color:var(--soft)}
 /* 대비 보정 — 자동 계산 */
 .gr p{color:#696154}
+
+/* ===== hx — 히어로 재구성 : 마당 정지 컷 + 처마 끝 풍경 하나만 흔들림 ===== */
+.hero.hx-hero{padding:0;position:relative;overflow:hidden;background:#0E1116;
+  height:clamp(540px,84vh,690px);display:flex;align-items:flex-end}
+.hero .hx-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:56% 62%;filter:sepia(.1) saturate(1.03) brightness(.98)}
+.hx-veil{position:absolute;inset:0;
+  background:linear-gradient(102deg,rgba(11,14,19,.9) 0%,rgba(11,14,19,.78) 26%,rgba(11,14,19,.34) 52%,rgba(11,14,19,0) 74%),
+             linear-gradient(to top,rgba(11,14,19,.7) 0%,rgba(11,14,19,.12) 34%,rgba(11,14,19,0) 56%)}
+.hero .wrap.hx-inner{display:block;position:relative;z-index:3;width:100%;padding-top:70px;padding-bottom:62px}
+.hx-copy{max-width:480px}
+.hx-eyebrow{font-size:11.5px;letter-spacing:.36em;color:#D7B98A}
+.hx-title{font-family:"Song Myung",serif;font-weight:400;color:#F7F2E7;margin-top:20px;
+  font-size:clamp(31px,4.4vw,50px);line-height:1.48;letter-spacing:.1em}
+.hx-title em{font-style:normal;color:#E0A07E;margin-left:.08em}
+.hx-line{margin-top:20px;font-size:14px;line-height:1.95;color:#D6CBB7;letter-spacing:.04em}
+.hx-copy .hero-cta{margin-top:30px}
+.hero .btn.hx-a{background:var(--hanji);color:var(--ink);border:1px solid var(--hanji)}
+.hero .btn.hx-a:hover{background:#fff;border-color:#fff}
+.hero .btn.hx-b{background:transparent;border:1px solid rgba(242,237,225,.6);color:#F2EDE1}
+.hero .btn.hx-b:hover{background:rgba(242,237,225,.14)}
+
+/* 처마 끝 풍경 — 히어로 안에서 유일하게 무한 반복되는 모션 */
+.hx-eave{position:absolute;top:0;right:11%;width:26px;height:140px;z-index:2;pointer-events:none}
+.hx-chime{position:absolute;inset:0;transform-origin:50% 0;
+  animation:hx-sway 5.4s cubic-bezier(.45,0,.55,1) infinite}
+.hx-cord{position:absolute;top:0;left:50%;width:1px;height:63px;transform:translateX(-.5px);
+  background:linear-gradient(to bottom,rgba(46,36,24,0) 0,rgba(58,46,30,.9) 16px,rgba(96,78,52,.95) 100%)}
+.hx-bell{position:absolute;top:60px;left:50%;width:25px;height:30px;transform:translateX(-12.5px);
+  background:linear-gradient(152deg,#D2AC6D 0%,#9A7940 38%,#5A421F 72%,#33240F 100%);
+  clip-path:polygon(34% 0,66% 0,79% 28%,100% 86%,100% 100%,0 100%,0 86%,21% 28%);
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+.hx-drop{position:absolute;top:85px;left:50%;width:1px;height:25px;transform:translateX(-.5px);
+  background:rgba(92,74,48,.9)}
+.hx-fish{position:absolute;top:108px;left:50%;width:23px;height:13px;transform:translateX(-11.5px) rotate(-6deg);
+  background:linear-gradient(148deg,#B08D55,#6A4E27 58%,#31220F);
+  clip-path:polygon(0 50%,25% 12%,64% 5%,87% 33%,100% 2%,100% 98%,87% 67%,64% 95%,25% 88%);
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.45))}
+@keyframes hx-sway{0%,100%{transform:rotate(-.55deg)}50%{transform:rotate(.55deg)}}
+@media(prefers-reduced-motion:reduce){.hx-chime{animation:none;transform:none}}
+
+@media(max-width:820px){
+  .hero.hx-hero{height:clamp(500px,74vh,620px)}
+  .hero .hx-photo{object-position:60% 60%}
+  .hx-veil{background:linear-gradient(to top,rgba(11,14,19,.9) 0%,rgba(11,14,19,.66) 40%,rgba(11,14,19,.2) 72%,rgba(11,14,19,.05) 100%)}
+  .hero .wrap.hx-inner{padding-top:54px;padding-bottom:44px}
+  .hx-copy{max-width:none}
+  .hx-title{font-size:clamp(27px,7.6vw,34px);line-height:1.5;letter-spacing:.08em;margin-top:15px}
+  .hx-line{margin-top:14px;font-size:13.5px}
+  .hx-copy .hero-cta{margin-top:22px;gap:10px}
+  .hero .btn.hx-a,.hero .btn.hx-b{padding:13px 24px;font-size:14px}
+  .hx-eave{right:7%;transform:scale(.8);transform-origin:100% 0}
+}
+@media(max-width:400px){
+  .hero .btn.hx-a,.hero .btn.hx-b{padding:12px 20px;font-size:13.5px;letter-spacing:.1em}
+}
+
+/* ===== hx2 — 검수 반영 : 그린 벡터 풍경 폐기, 사진 속 마당 소나무 가지 끝만 흔들린다 ===== */
+/* 폐기 — 사진 위에 CSS로 그린 풍경. 마크업에서 뺐고 남은 규칙도 무력화한다. */
+.hx-eave{display:none!important}
+.hx-chime{animation:none!important;transform:none!important}
+
+/* 사진 조각 겹치기 — 안쪽 img 는 .hx-photo 와 같은 크기·object-position 으로 놓이므로
+   히어로 크기가 변해도 아래 사진과 어긋나지 않는다. 바깥 상자만 아주 조금 회전한다.
+   상자 = 히어로의 6.5%,5.5% 지점 19%×24% (= 마당 소나무 우듬지). 회전축은 가지가 붙은 아래쪽. */
+.hero .hx-sway{position:absolute;left:6.5%;top:5.5%;width:19%;height:24%;overflow:hidden;pointer-events:none;
+  -webkit-mask-image:radial-gradient(ellipse 44% 44% at 52% 45%,#000 0,#000 34%,rgba(0,0,0,.55) 64%,rgba(0,0,0,0) 100%);
+          mask-image:radial-gradient(ellipse 44% 44% at 52% 45%,#000 0,#000 34%,rgba(0,0,0,.55) 64%,rgba(0,0,0,0) 100%);
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  transform-origin:48% 113%;
+  animation:hx-breeze 5.6s cubic-bezier(.45,0,.55,1) infinite}
+.hero .hx-sway img{position:absolute;left:-34.2105%;top:-22.9167%;width:526.3158%;height:416.6667%;max-width:none;
+  object-fit:cover;object-position:56% 62%;filter:sepia(.1) saturate(1.03) brightness(.98)}
+@keyframes hx-breeze{0%,100%{transform:rotate(-.38deg)}50%{transform:rotate(.38deg)}}
+@media(prefers-reduced-motion:reduce){.hero .hx-sway{animation:none;transform:none}}
+
+@media(max-width:820px){
+  /* 모바일 크롭에는 이 소나무가 들어오지 않는다 — 흔들 대상이 없으므로 정지 사진으로 둔다. */
+  .hero .hx-sway{display:none}
+  /* 아이브로우가 밝은 창호지 위에 얹혀 읽히지 않던 문제 — 카피 구간을 베일이 더 덮게 한다. */
+  .hx-veil{background:linear-gradient(to top,rgba(11,14,19,.92) 0%,rgba(11,14,19,.82) 30%,rgba(11,14,19,.56) 52%,rgba(11,14,19,.18) 74%,rgba(11,14,19,.03) 100%)}
+  .hx-eyebrow{color:#E7CFA6}
+}
+
+/* 움직이는 단 하나 — 오른쪽 창호지 창의 등불.
+   소나무(밤하늘과 대비 없음)에서 옮겨왔다. 창은 프레임에서 가장 밝은 면이라
+   opacity 0.10→0.19 의 아주 얕은 변화도 눈에 읽힌다. 히어로 면적의 약 6%. */
+.hero .hx-sway{display:none!important;animation:none!important}
+.hx-lamp{position:absolute;z-index:1;left:66.5%;top:31%;width:17%;height:36%;pointer-events:none;
+  background:radial-gradient(ellipse 62% 58% at 50% 50%,rgba(255,214,142,.9) 0%,rgba(255,206,128,.55) 46%,rgba(255,200,120,0) 100%);
+  mix-blend-mode:screen;opacity:.1;
+  animation:hx-lamp 5.2s ease-in-out infinite alternate}
+@keyframes hx-lamp{from{opacity:.10}to{opacity:.19}}
+@media(max-width:820px){.hx-lamp{display:none}}
+@media(prefers-reduced-motion:reduce){.hx-lamp{animation:none;opacity:.14}}
 </style>
 </head>
 <body>
@@ -115,12 +210,19 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">예약 문의</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<p class="vert">고요할 정<em>靜</em><br>고요재에서 하룻밤</p>
-<figure class="rv"><img src="./assets/hero.jpg" alt="해질 무렵 한옥 마당"><figcaption class="cap">전주 교동 · 백 년 된 고택을 고쳐 지었습니다</figcaption>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">예약 문의</a><a class="btn line" href="#chae">채 살펴보기</a></div>
-</figure>
-</div></section>
+<section class="hero hx-hero">
+<img class="hx-photo" src="./assets/hero.jpg" alt="해질 무렵 불 밝힌 고요재 한옥 마당">
+<span class="hx-lamp" aria-hidden="true"></span>
+<div class="hx-veil" aria-hidden="true"></div>
+<div class="wrap hx-inner">
+<div class="hx-copy rv">
+<p class="hx-eyebrow">전주 교동 · 백 년 된 고택을 고쳐 지었습니다</p>
+<h1 class="hx-title">고요할 정<em>靜</em><br>고요재에서 하룻밤</h1>
+<p class="hx-line">해가 넘어가면 마당의 소리가 하나로 줄어듭니다.<br>방마다 등을 켜 두었습니다. 문을 닫으면 그 빛만 남습니다.</p>
+<div class="hero-cta"><a class="btn hx-a" href="tel:010-4894-4905">예약 문의</a><a class="btn line hx-b" href="#chae">채 살펴보기</a></div>
+</div>
+</div>
+</section>
 
 <section id="intro" class="intro"><div class="wrap" style="max-width:720px">
 <div class="rule rv"></div>

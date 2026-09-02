@@ -131,6 +131,51 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 .tu .note{font-size:12.5px;color:var(--soft)}
 @media(max-width:640px){.tu{grid-template-columns:1fr auto}.tu .note{display:none}}
 .tuit-foot{margin-top:14px;font-size:12.5px;line-height:1.8;color:var(--soft)}
+
+/* ── hx : 히어로 재구성 — 에디터 화면 시네마그래프 ────────────────── */
+.hx-hero{padding:0;min-height:620px;display:flex;align-items:center;position:relative;overflow:hidden;background:var(--bg)}
+.hx-hero .wrap{display:block;grid-template-columns:none;width:100%;position:relative;z-index:3;padding-top:100px;padding-bottom:100px}
+.hx-photo{position:absolute;top:0;right:0;bottom:0;left:32%;z-index:1;overflow:hidden}
+.hx-photo img{width:100%;height:100%;object-fit:cover;object-position:52% 46%;filter:saturate(.4) brightness(.66) contrast(1.08);display:block}
+.hx-photo::after{content:"";position:absolute;inset:0;background:
+ linear-gradient(90deg,var(--bg) 0%,rgba(18,16,28,.93) 19%,rgba(18,16,28,.56) 50%,rgba(18,16,28,.32) 100%),
+ linear-gradient(180deg,rgba(18,16,28,.72) 0%,rgba(18,16,28,0) 24%,rgba(18,16,28,0) 74%,var(--bg) 100%)}
+.hx-copy{max-width:540px}
+.hx-hero h1{margin-top:14px}
+.hx-hero .hero-cta{margin-top:30px}
+.hx-hero .hx-meta{margin-top:26px;font-size:12.5px;line-height:1.9;color:var(--soft);max-width:500px}
+.hx-meta b{font-family:"Orbit";font-weight:400;color:var(--lime)}
+
+.hx-screen{position:absolute;z-index:4;top:50%;right:-72px;width:620px;transform:translateY(-50%);background:var(--bg);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 46px 90px -34px #000}
+.hx-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+.hx-tab{font-size:12px;font-weight:800;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:5px 11px}
+.hx-path{font-family:"Orbit";font-size:11px;letter-spacing:.16em;color:var(--soft)}
+.hx-code{margin:0;padding:18px 22px 22px;background:var(--bg);font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:13px;line-height:1.85;color:var(--ink);white-space:pre;overflow:hidden}
+.hx-ln{display:inline-block;width:30px;color:var(--soft);opacity:.45;-webkit-user-select:none;user-select:none}
+.hx-k{color:var(--purple)}
+.hx-s{color:var(--lime)}
+.hx-type{position:relative;display:inline-block}
+.hx-cover{position:absolute;top:-3px;bottom:-3px;left:0;right:-2px;background:var(--bg);border-left:2px solid var(--purple);animation:hx-type 5.6s steps(13) infinite}
+@keyframes hx-type{0%,8%{transform:translateX(0)}50%,78%{transform:translateX(100%)}100%{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.hx-cover{transform:translateX(100%)}}
+
+@media(max-width:1180px){
+ .hx-screen{width:520px;right:-52px}
+ .hx-copy{max-width:470px}
+ .hx-hero{min-height:600px}
+ .hx-hero .wrap{padding-top:88px;padding-bottom:88px}
+}
+@media(max-width:900px){
+ .hx-hero{display:block;min-height:0;padding-bottom:46px}
+ .hx-hero .wrap{padding-top:176px;padding-bottom:0}
+ .hx-photo{left:0;right:0;top:0;bottom:auto;height:300px}
+ .hx-photo img{object-position:50% 38%}
+ .hx-photo::after{background:linear-gradient(180deg,rgba(18,16,28,.5) 0%,rgba(18,16,28,.34) 26%,rgba(18,16,28,.88) 70%,var(--bg) 100%)}
+ .hx-copy{max-width:none}
+ .hx-screen{position:relative;top:auto;right:auto;width:auto;transform:none;margin:28px 24px 0;box-shadow:none}
+ .hx-code{padding:14px 16px 18px;font-size:11.5px;line-height:1.9}
+ .hx-ln{width:24px}
+}
 </style>
 </head>
 <body>
@@ -141,24 +186,34 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">무료 체험</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="hx-photo"><img src="./assets/facility-6.jpg" alt="코드런 프로젝트 실습실"></div>
+<div class="wrap">
+<div class="hx-copy">
 <p class="kicker">CODING ACADEMY · LV.1 → LV.8</p>
-<h1 style="margin-top:14px">외우는 코딩 말고<br><b>만드는 코딩</b></h1>
+<h1>외우는 코딩 말고<br><b>만드는 코딩</b></h1>
 <p>코드런은 진도가 아니라 완성으로 진행합니다. 레벨마다 하나씩, 자기 이름으로 된 프로젝트를 만들고 넘어갑니다.</p>
 <div class="hero-cta"><a class="btn btn-p" href="tel:010-4894-4905">무료 체험 신청</a><a class="btn btn-l" href="#level">레벨 보기</a></div>
+<p class="hx-meta">LV.3 파이썬 기초 <b>100%</b> · LV.4 게임 만들기 <b>72%</b> · LV.5 웹 프로젝트 <b>20%</b><br>진도율은 보호자 앱에서 실시간으로 확인하실 수 있습니다.</p>
 </div>
-<aside class="hud rv">
-<h3>STUDENT PROGRESS — 예시</h3>
-<div class="row"><span>LV.3 파이썬 기초</span><b>100%</b></div>
-<div class="bar"><i style="width:100%"></i></div>
-<div class="row"><span>LV.4 게임 만들기</span><b>72%</b></div>
-<div class="bar"><i style="width:72%;animation-delay:.15s"></i></div>
-<div class="row"><span>LV.5 웹 프로젝트</span><b>20%</b></div>
-<div class="bar"><i style="width:20%;animation-delay:.3s"></i></div>
-<p class="note">진도율은 보호자 앱에서 실시간으로 확인하실 수 있습니다.</p>
-</aside>
-</div></section>
+</div>
+<div class="hx-screen">
+<div class="hx-bar"><span class="hx-tab">game.py</span><span class="hx-path">LV.4 · 게임 만들기</span></div>
+<pre class="hx-code" aria-hidden="true"><span class="hx-ln">1</span><span class="hx-k">import</span> pygame
+<span class="hx-ln">2</span>
+<span class="hx-ln">3</span><span class="hx-k">class</span> Player:
+<span class="hx-ln">4</span>    <span class="hx-k">def</span> __init__(self, name):
+<span class="hx-ln">5</span>        self.name = name
+<span class="hx-ln">6</span>        self.jumps = <span class="hx-k">0</span>
+<span class="hx-ln">7</span>
+<span class="hx-ln">8</span>    <span class="hx-k">def</span> jump(self):
+<span class="hx-ln">9</span>        self.jumps += <span class="hx-k">1</span>
+<span class="hx-ln">10</span>        print(self.name, <span class="hx-s">"점프!"</span>)
+<span class="hx-ln">11</span>
+<span class="hx-ln">12</span>player = Player(<span class="hx-s">"서준"</span>)
+<span class="hx-ln">13</span><span class="hx-type">player.jump()<i class="hx-cover"></i></span></pre>
+</div>
+</section>
 
 <figure class="band">
 <img src="./assets/hero.jpg" alt="코드를 작성하는 학생">

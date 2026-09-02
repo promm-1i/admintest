@@ -96,6 +96,50 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 시네마그래프 히어로 (귀 끝 한 곳만 움직인다) ===== */
+.hx-hero{position:relative;overflow:hidden;padding:0;background:var(--cream);display:flex;align-items:center;min-height:clamp(540px,72vh,648px)}
+.hx-hero .wrap{display:block;grid-template-columns:none;gap:0;width:100%;position:relative;z-index:3;padding-top:56px;padding-bottom:56px}
+.hx-stage{position:absolute;inset:0;overflow:hidden;z-index:0}
+.hx-photo{position:absolute;left:0;top:50%;width:100%;aspect-ratio:16/9;transform:translateY(-50%);background:url(./assets/hero.jpg) center/100% 100% no-repeat}
+/* 사진 속 오른쪽 귀 조각. 부모와 같은 비율이라 좌표가 정확히 맞물린다 */
+.hx-ear{position:absolute;left:56.4%;top:12.6%;width:7.2%;height:23%;
+ background-image:url(./assets/hero.jpg);background-repeat:no-repeat;
+ background-size:1388.89% 434.78%;background-position:60.78% 16.36%;
+ -webkit-mask-image:radial-gradient(116% 110% at 38% 5%,#000 52%,rgba(0,0,0,0) 100%);
+ mask-image:radial-gradient(116% 110% at 38% 5%,#000 52%,rgba(0,0,0,0) 100%);
+ transform-origin:38% 4%;transform:rotate(-.45deg);
+ animation:hx-ear-sway 5.4s ease-in-out infinite;will-change:transform}
+@keyframes hx-ear-sway{0%,100%{transform:rotate(-.45deg)}50%{transform:rotate(.5deg)}}
+.hx-veil{position:absolute;inset:0;z-index:1;pointer-events:none;background:
+ linear-gradient(96deg,var(--cream) 0 26%,rgba(251,244,231,.94) 38%,rgba(251,244,231,.58) 50%,rgba(251,244,231,0) 64%),
+ linear-gradient(270deg,var(--cream) 0 7%,rgba(251,244,231,.92) 13%,rgba(251,244,231,0) 31%),
+ linear-gradient(0deg,rgba(251,244,231,.98) 0,rgba(251,244,231,0) 15%)}
+.hx-copy{max-width:432px}
+.hx-hero h1{margin-top:16px}
+.hx-hero p{max-width:398px;color:rgba(59,52,44,.82);font-size:15.5px;line-height:1.76}
+.hx-paw{position:absolute;z-index:3;right:max(24px,calc(50% - 476px));bottom:36px;background:#fff;border-radius:99px;padding:9px 20px;font-family:"Gaegu";font-size:18px;font-weight:700;color:var(--ink);box-shadow:0 10px 24px rgba(59,52,44,.14)}
+@media(max-width:860px){
+ /* 사진을 화면 밖으로 내보내지 않고, 요소 안에서 확대·크롭한다 */
+ .hx-hero{display:block;min-height:0;
+  --hx-iw:clamp(100vw,190vw,760px);
+  --hx-ox:clamp(calc(100vw - var(--hx-iw)),calc(60vw - var(--hx-iw)*.57),0px);
+  --hx-oy:-14px}
+ .hx-stage{position:relative;inset:auto;height:min(300px,80vw)}
+ .hx-photo{position:relative;left:auto;top:auto;width:100%;height:100%;aspect-ratio:auto;transform:none;overflow:hidden;
+  background-size:var(--hx-iw) calc(var(--hx-iw)*.5625);
+  background-position:var(--hx-ox) var(--hx-oy)}
+ .hx-ear{left:calc(var(--hx-ox) + var(--hx-iw)*.564);top:calc(var(--hx-oy) + var(--hx-iw)*.070875);
+  width:calc(var(--hx-iw)*.072);height:calc(var(--hx-iw)*.129375);
+  background-size:var(--hx-iw) calc(var(--hx-iw)*.5625);
+  background-position:calc(var(--hx-iw)*-.564) calc(var(--hx-iw)*-.070875)}
+ .hx-veil{background:linear-gradient(0deg,var(--cream) 0 3%,rgba(251,244,231,0) 36%),linear-gradient(180deg,rgba(251,244,231,.42) 0,rgba(251,244,231,0) 20%)}
+ .hx-hero .wrap{padding-top:20px;padding-bottom:34px}
+ .hx-copy{max-width:none}
+ .hx-hero p{max-width:none;font-size:15px}
+ .hx-paw{position:static;display:inline-block;margin-top:20px;font-size:17px;box-shadow:none;border:1.5px solid var(--line)}
+}
+@media(prefers-reduced-motion:reduce){.hx-ear{animation:none}}
 </style>
 </head>
 <body>
@@ -106,15 +150,21 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">예약하기</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="hx-stage">
+<div class="hx-photo" role="img" aria-label="꼬리사진관 스튜디오에서 촬영한 골든 리트리버"><span class="hx-ear" aria-hidden="true"></span></div>
+<div class="hx-veil" aria-hidden="true"></div>
+</div>
+<div class="wrap">
+<div class="hx-copy">
 <span class="tag">강아지 · 고양이 · 소동물</span>
 <h1 style="margin-top:16px">우리 아이는<br><em>지금이 제일 예뻐요</em></h1>
 <p>1년 뒤엔 얼굴이 달라져 있어요. 꼬리사진관은 그 시절의 표정을 남겨드립니다. 짖어도, 도망 다녀도 괜찮아요.</p>
 <div class="hero-cta"><a class="btn btn-m" href="tel:010-4894-4905">촬영 예약</a><a class="btn btn-w" href="#pkg">상품 보기</a></div>
 </div>
-<figure class="hero-img rv"><img src="./assets/g-3.jpg" alt="보호자와 반려견 촬영"><span class="paw">오늘 12마리 촬영 완료!</span></figure>
-</div></section>
+</div>
+<span class="hx-paw">오늘 12마리 촬영 완료!</span>
+</section>
 
 <section id="pkg"><div class="wrap">
 <div class="rv" style="text-align:center"><span class="tag">촬영 상품</span><h2>어떤 사진 찍어드릴까요?</h2></div>
