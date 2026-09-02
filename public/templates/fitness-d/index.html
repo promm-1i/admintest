@@ -102,6 +102,66 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로: WOD 기록판이 화면 오른쪽 밖으로 흘러나가고 텍스트가 그 위에 올라탄다 ── */
+.hx-hero{position:relative;overflow:hidden;padding:52px 0 58px;min-height:626px;display:flex;align-items:center}
+.hx-hero .wrap{display:block;grid-template-columns:none;position:relative;z-index:2;width:100%}
+.hx-copy{max-width:600px}
+.hx-hero h1{font-family:"Black Han Sans";font-size:clamp(38px,6.6vw,66px);font-weight:400;line-height:1.12;margin-top:12px}
+.hx-hero h1 b{color:var(--yellow);font-weight:400}
+.hx-hero .hx-lead{margin-top:16px;color:#9A9A91;font-size:15px;max-width:520px}
+.hx-hero .hero-cta{margin-top:26px}
+
+.hx-board{position:absolute;top:50%;transform:translateY(-50%);left:calc(50% - 190px);width:calc(50vw + 270px);background:var(--panel);border:2px solid var(--yellow);padding:24px 120px 22px 26px;box-shadow:0 24px 60px rgba(0,0,0,.42);z-index:1;
+ -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.2) 70px,rgba(0,0,0,.75) 150px,#000 215px);
+ mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.2) 70px,rgba(0,0,0,.75) 150px,#000 215px)}
+.hx-inner{margin-left:230px}
+.hx-bh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:"IBM Plex Mono";font-size:11px;letter-spacing:.2em;color:#9A9A91;border-bottom:1px solid var(--line);padding-bottom:11px}
+.hx-bh .hx-live{color:var(--yellow);animation:blink-y 2.2s ease-in-out infinite}
+.hx-ttl{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:14px}
+.hx-ttl h3{font-family:"Black Han Sans";font-size:26px;font-weight:400;color:var(--yellow)}
+.hx-hero .hx-set{font-family:"IBM Plex Mono";font-size:12.5px;margin-top:0;max-width:none;color:#9A9A91;line-height:1.6}
+.hx-set b{color:var(--ink);font-weight:500}
+.hx-tab{margin-top:16px}
+.hx-th,.hx-r{display:grid;grid-template-columns:26px 1fr 66px 96px;gap:12px;align-items:center}
+.hx-th{font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.18em;color:#9A9A91;padding-bottom:8px;border-bottom:1px solid var(--line)}
+.hx-th span:nth-child(3),.hx-th span:nth-child(4){text-align:right}
+.hx-r{padding:9px 6px 9px 0;border-bottom:1px solid rgba(52,52,47,.6);transition:background .3s ease}
+.hx-r:hover{background:#2E2E29}
+.hx-n{font-family:"IBM Plex Mono";font-size:12px;color:#9A9A91;text-align:center}
+.hx-r-top .hx-n{color:var(--yellow)}
+.hx-m{font-size:13.5px;color:var(--ink);font-weight:500}
+.hx-m i{display:block;font-style:normal;font-size:11px;color:#9A9A91;margin-top:1px;font-family:"IBM Plex Mono";letter-spacing:.04em}
+.hx-t{font-family:"IBM Plex Mono";font-size:16px;color:var(--yellow);text-align:right}
+.hx-s{font-family:"IBM Plex Mono";font-size:11px;color:#9A9A91;text-align:right}
+.hx-hero .hx-more{display:none}
+.hx-foot{margin-top:14px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;border-top:1px dashed var(--line);padding-top:12px}
+.hx-hero .hx-note{margin-top:0;font-size:12px;color:#9A9A91;max-width:400px}
+.hx-hero .hx-demo{margin-top:0;max-width:none;font-family:"IBM Plex Mono";font-size:10.5px;letter-spacing:.14em;color:#9A9A91;white-space:nowrap}
+@keyframes hx-fill{0%{opacity:0;transform:translateY(14px)}7%{opacity:1;transform:none}95%{opacity:1;transform:none}100%{opacity:0;transform:translateY(14px)}}
+.hx-r{animation:hx-fill 8s cubic-bezier(.32,.72,0,1) infinite;animation-delay:calc(var(--i) * .24s)}
+@media(max-width:1180px){.hx-copy{max-width:500px}}
+@media(max-width:980px){
+ .hx-hero{display:block;min-height:0;padding:44px 0 54px}
+ .hx-hero .wrap{padding-bottom:0}
+ .hx-copy{max-width:100%}
+ .hx-hero .hx-lead{font-size:14.5px}
+ .hx-board{position:static;transform:none;width:calc(100% - 24px);max-width:none;margin:26px 0 0 24px;padding:20px 18px 18px;box-shadow:none;-webkit-mask-image:none;mask-image:none}
+ .hx-inner{margin-left:0}
+ .hx-bh{flex-direction:column;align-items:flex-start;gap:3px;font-size:10px;letter-spacing:.14em}
+ .hx-ttl{gap:6px 12px;margin-top:12px}
+ .hx-hero .hx-set{font-size:11.5px}
+ .hx-th,.hx-r{grid-template-columns:20px 1fr 58px;gap:9px;row-gap:1px}
+ .hx-r{padding:7px 0}
+ .hx-m{font-size:13px}
+ .hx-t{font-size:15px}
+ .hx-th span:last-child{display:none}
+ .hx-s{grid-column:2/4;text-align:left;padding-bottom:2px}
+ .hx-r:nth-child(n+6){display:none}
+ .hx-hero .hx-more{display:block;font-family:"IBM Plex Mono";font-size:11px;color:#9A9A91;padding-top:9px}
+ .hx-foot{display:block}
+ .hx-hero .hx-demo{margin-top:8px}
+}
 </style>
 </head>
 <body>
@@ -113,24 +173,36 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </div></header>
 <div class="tape" aria-hidden="true"></div>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="wrap"><div class="hx-copy">
 <p class="kicker">FUNCTIONAL FITNESS BOX</p>
-<h1 style="margin-top:12px">기록은<br><b>거짓말을 안 한다</b></h1>
-<p>혼자 하는 운동은 늘 협상하게 됩니다. 박스에서는 같은 시간에 같은 걸 하는 사람들이 옆에 있습니다.</p>
+<h1>기록은<br><b>거짓말을 안 한다</b></h1>
+<p class="hx-lead">혼자 하는 운동은 늘 협상하게 됩니다. 박스에서는 같은 시간에 같은 걸 하는 사람들이 옆에 있습니다.</p>
 <div class="hero-cta"><a class="btn btn-y" href="tel:010-4894-4905">무료 체험</a><a class="btn btn-l" href="#tt">시간표 보기</a></div>
-</div>
-<aside class="wod rv" id="wod">
-<div class="h"><span class="live">● TODAY'S WOD</span><span>2026.09.01 MON</span></div>
+</div></div>
+
+<aside class="hx-board" id="wod" aria-label="오늘의 WOD 기록판"><div class="hx-inner">
+<div class="hx-bh"><span class="hx-live">● TODAY'S WOD</span><span>2026.09.01 MON · 기록 6명</span></div>
+<div class="hx-ttl">
 <h3>"FRAN"</h3>
-<div class="set">
-21 – 15 – 9 <span>REPS FOR TIME</span><br>
-· 스러스터 <span>43kg</span><br>
-· 풀업 <span>KIPPING</span>
+<p class="hx-set">21 – 15 – 9 REPS FOR TIME · 스러스터 <b>43kg</b> · 풀업 <b>KIPPING</b></p>
 </div>
-<p class="note">스케일링 가능합니다. 처음이면 코치가 무게와 동작을 낮춰 드립니다.</p>
-</aside>
-</div></section>
+<div class="hx-tab">
+<div class="hx-th"><span>#</span><span>회원</span><span>기록</span><span>구분</span></div>
+<div class="hx-r hx-r-top" style="--i:0"><span class="hx-n">1</span><span class="hx-m">김도현<i>06:00 얼리버드</i></span><span class="hx-t">4:12</span><span class="hx-s">RX</span></div>
+<div class="hx-r hx-r-top" style="--i:1"><span class="hx-n">2</span><span class="hx-m">이서준<i>19:00 프라임</i></span><span class="hx-t">4:38</span><span class="hx-s">RX</span></div>
+<div class="hx-r hx-r-top" style="--i:2"><span class="hx-n">3</span><span class="hx-m">박지우<i>19:00 프라임</i></span><span class="hx-t">5:05</span><span class="hx-s">RX</span></div>
+<div class="hx-r" style="--i:3"><span class="hx-n">4</span><span class="hx-m">정민아<i>12:00 런치</i></span><span class="hx-t">5:21</span><span class="hx-s">스케일 35kg</span></div>
+<div class="hx-r" style="--i:4"><span class="hx-n">5</span><span class="hx-m">한겨울<i>19:00 프라임</i></span><span class="hx-t">5:47</span><span class="hx-s">스케일 30kg</span></div>
+<div class="hx-r" style="--i:5"><span class="hx-n">6</span><span class="hx-m">오세라<i>20:30 스트렝스</i></span><span class="hx-t">6:03</span><span class="hx-s">스케일 밴드</span></div>
+</div>
+<p class="hx-more">5위 한겨울 5:47 · 6위 오세라 6:03 — 스케일 기록</p>
+<div class="hx-foot">
+<p class="hx-note">스케일링 가능합니다. 처음이면 코치가 무게와 동작을 낮춰 드립니다.</p>
+<p class="hx-demo">화면 예시 · 눌리지 않습니다</p>
+</div>
+</div></aside>
+</section>
 
 <section id="tt" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">TIMETABLE</p><h2>클래스 시간표</h2><p class="sub">전 클래스 코치 상시 지도 · 정원 12명. 앱 없이 전화로 예약하셔도 됩니다.</p></div>

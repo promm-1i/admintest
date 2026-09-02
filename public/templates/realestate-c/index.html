@@ -143,6 +143,94 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ─ hero 재구성: 강동구 실거래 보드가 화면 오른쪽으로 흘러나간다 ─ */
+.hero{padding:180px 0 0}
+.hx-stage{position:relative;min-height:604px;padding-bottom:36px}
+.hx-copy{position:relative;z-index:3;max-width:530px}
+.hx-copy .lede{max-width:420px}
+.hx-under{position:relative;z-index:3;margin-top:28px;max-width:600px;font-size:12.5px;line-height:1.75;color:#9AA9C2}
+.hx-under b{color:var(--gold);font-weight:500}
+
+.hx-panel{position:absolute;top:212px;left:calc(50% - 110px);width:calc(50% + 190px);z-index:1;
+  background:var(--navy-2);border:1px solid #26375A;border-radius:8px;
+  padding:20px 150px 22px 170px;
+  box-shadow:0 0 0 8px rgba(255,255,255,.02),0 46px 90px -40px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.06);
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.22) 76px,#000 208px);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.22) 76px,#000 208px);
+  animation:hx-in 1s cubic-bezier(.32,.72,0,1) both}
+@keyframes hx-in{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.hx-head{display:flex;align-items:center;gap:12px}
+.hx-title{font-size:13px;letter-spacing:.16em;color:var(--gold);font-weight:500}
+.hx-demo{margin-left:auto;font-size:10.5px;letter-spacing:.1em;color:#9AA9C2;border:1px solid #33456B;padding:4px 9px;border-radius:3px;white-space:nowrap}
+.hx-filters{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.hx-f{font-size:12px;color:#C4CBD8;border:1px solid #33456B;background:#101E38;padding:6px 12px;border-radius:3px;white-space:nowrap}
+.hx-f b{color:#fff;font-weight:500}
+.hx-f.on{border-color:var(--gold);color:var(--gold);animation:hx-chip 8s ease-in-out infinite}
+.hx-f.on b{color:var(--gold)}
+@keyframes hx-chip{0%{opacity:0;transform:translateY(-4px)}4%{opacity:1;transform:none}96%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+
+.hx-grid{margin-top:16px}
+.hx-hrow,.hx-row{display:grid;grid-template-columns:minmax(0,1.6fr) 56px 60px 100px 62px;gap:12px;align-items:center}
+.hx-hrow{font-size:11px;letter-spacing:.1em;color:#93A6C4;padding:0 8px 9px;border-bottom:1px solid #2B3D63}
+.hx-row{padding:11px 8px;border-bottom:1px solid #223454;font-size:13.5px;color:#C4CBD8;cursor:default;
+  transition:background .25s ease;animation:hx-rowin 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-row:hover{background:rgba(201,162,39,.09)}
+@keyframes hx-rowin{0%{opacity:0;transform:translateY(12px)}5%{opacity:1;transform:none}93%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+.hx-row:nth-child(2){animation-delay:.30s}
+.hx-row:nth-child(3){animation-delay:.52s}
+.hx-row:nth-child(4){animation-delay:.74s}
+.hx-row:nth-child(5){animation-delay:.96s}
+.hx-row:nth-child(6){animation-delay:1.18s}
+.hx-nm b{display:block;font-weight:500;color:#F0EDE4;font-size:13.5px;line-height:1.5}
+.hx-nm span{display:none;font-size:11.5px;color:#93A6C4;line-height:1.6}
+.hx-mono{font-family:"IBM Plex Mono",monospace;color:#fff;font-size:13px;text-align:right}
+.hx-dim{color:#93A6C4;font-size:12.5px;text-align:right}
+.hx-up{color:#E8C15A;font-size:12.5px;text-align:right;font-family:"IBM Plex Mono",monospace}
+.hx-dn{color:#9AA9C2;font-size:12.5px;text-align:right;font-family:"IBM Plex Mono",monospace}
+
+.hx-band{margin-top:18px;padding-top:16px;border-top:1px solid #2B3D63}
+.hx-band-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px;font-size:12.5px;color:#93A6C4}
+.hx-band-top b{font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--gold);font-weight:500;
+  animation:hx-lock 8s ease-in-out infinite}
+@keyframes hx-lock{0%,9%{opacity:0;transform:translateY(6px)}20%{opacity:1;transform:none}96%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+.hx-track{margin-top:9px;height:6px;background:#101E38;border-radius:3px;overflow:hidden}
+.hx-fill{display:block;height:100%;width:100%;background:var(--gold);transform-origin:left;transform:scaleX(1);
+  animation:hx-grow 8s cubic-bezier(.32,.72,0,1) infinite}
+@keyframes hx-grow{0%,7%{transform:scaleX(0)}20%,100%{transform:scaleX(.74)}}
+
+.hx-sum{margin-top:18px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.hx-sum div{border-left:1px solid #2B3D63;padding-left:12px}
+.hx-sum span{display:block;font-size:11.5px;color:#93A6C4;line-height:1.5}
+.hx-sum b{display:block;margin-top:3px;font-family:"IBM Plex Mono",monospace;font-size:14px;color:#fff;font-weight:500}
+.hx-sum b.hx-up{text-align:left;font-size:14px}
+.hx-note{margin-top:14px;font-size:11px;color:#8E9CB4}
+
+@media(max-width:1240px){
+  .hx-hrow,.hx-row{grid-template-columns:minmax(0,1fr) 108px}
+  .hx-c3{display:none}
+  .hx-nm span{display:block}
+  .hx-stage{min-height:700px}
+  .hx-panel{left:calc(50% - 40px);width:calc(50% + 170px);padding-left:150px;padding-right:158px}
+  .hx-sum{grid-template-columns:1fr 1fr;gap:14px}
+}
+@media(max-width:880px){
+  .hero{padding-top:108px}
+  .hx-under{margin-top:22px}
+  .hx-title{font-size:12.5px;letter-spacing:.06em}
+  .hx-stage{min-height:0;padding-bottom:0}
+  .hx-copy,.hx-copy .lede,.hx-under{max-width:none}
+  .hx-panel{position:static;width:auto;margin:24px 0 0 24px;padding:18px 18px 20px;
+    border-radius:8px 0 0 8px;border-right:0;-webkit-mask-image:none;mask-image:none;
+    box-shadow:0 26px 60px -34px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.06)}
+  .hx-r5{display:none}
+  .hx-sum{grid-template-columns:1fr 1fr}
+  .hx-demo{font-size:9.5px;letter-spacing:.08em;padding:3px 7px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hx-panel,.hx-row,.hx-f.on,.hx-band-top b{animation:none;opacity:1;transform:none}
+  .hx-fill{animation:none;transform:scaleX(.74)}
+}
 </style>
 </head>
 <body>
@@ -160,8 +248,8 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div>
+  <div class="wrap hx-stage">
+    <div class="hx-copy">
       <p class="kicker" style="justify-content:flex-start">ASSET REPORT 2026</p>
       <h1>감이 아니라,<br><b>숫자로 중개</b>합니다.</h1>
       <p class="lede">더키움은 모든 매물을 수익률 · 공실률 · 시세 추이 데이터로 브리핑하는 자산 전문 중개법인입니다.</p>
@@ -169,18 +257,63 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
         <a class="btn-gold" href="tel:010-4894-4905">투자 브리핑 신청</a>
         <a class="btn-line" href="#listings">이번 주 매물 보기</a>
       </div>
+      <p class="hx-under">이 화면은 저희가 매주 갱신하는 <b>강동구 실거래 보드</b>입니다. 브리핑 때 그대로 펼쳐 놓고 한 줄씩 설명드립니다.</p>
     </div>
-    <aside class="report rv">
-      <h3>WEEKLY MARKET</h3>
-      <table>
-        <tr><td>강동구 아파트 매매지수</td><td><span class="up">▲ 0.31%</span></td></tr>
-        <tr><td>상가 평균 수익률</td><td>4.2%</td></tr>
-        <tr><td>오피스텔 공실률</td><td>6.8%</td></tr>
-        <tr><td>이번 주 신규 등록</td><td>14건</td></tr>
-      </table>
-      <p class="note">* 템플릿 데모용 예시 데이터입니다. 실제 지표 연동을 지원합니다.</p>
-    </aside>
   </div>
+
+  <div class="hx-panel">
+    <div class="hx-head">
+      <span class="hx-title">WEEKLY MARKET · 강동구 실거래</span>
+      <span class="hx-demo">DEMO 예시 데이터</span>
+    </div>
+    <div class="hx-filters">
+      <span class="hx-f">지역 <b>강동구</b></span>
+      <span class="hx-f">면적 <b>전용 59 – 84㎡</b></span>
+      <span class="hx-f on">기간 <b>최근 3개월</b></span>
+    </div>
+    <div class="hx-grid">
+      <div class="hx-hrow">
+        <span>물건</span><span class="hx-dim hx-c3">전용</span><span class="hx-dim hx-c3">거래일</span><span class="hx-dim">거래가</span><span class="hx-dim hx-c3">직전 대비</span>
+      </div>
+      <div class="hx-row">
+        <div class="hx-nm"><b>천호동 래미안강동팰리스</b><span>84㎡ · 03.14 · ▲ 1.2%</span></div>
+        <span class="hx-dim hx-c3">84㎡</span><span class="hx-dim hx-c3">03.14</span>
+        <span class="hx-mono">13억 2,000</span><span class="hx-up hx-c3">▲ 1.2%</span>
+      </div>
+      <div class="hx-row">
+        <div class="hx-nm"><b>길동 강동자이 1단지</b><span>59㎡ · 03.12 · ▲ 0.6%</span></div>
+        <span class="hx-dim hx-c3">59㎡</span><span class="hx-dim hx-c3">03.12</span>
+        <span class="hx-mono">9억 8,500</span><span class="hx-up hx-c3">▲ 0.6%</span>
+      </div>
+      <div class="hx-row">
+        <div class="hx-nm"><b>암사동 프라이어팰리스</b><span>84㎡ · 03.11 · ▼ 0.3%</span></div>
+        <span class="hx-dim hx-c3">84㎡</span><span class="hx-dim hx-c3">03.11</span>
+        <span class="hx-mono">12억 4,000</span><span class="hx-dn hx-c3">▼ 0.3%</span>
+      </div>
+      <div class="hx-row">
+        <div class="hx-nm"><b>성내동 e편한세상 강동</b><span>74㎡ · 03.09 · ▲ 0.9%</span></div>
+        <span class="hx-dim hx-c3">74㎡</span><span class="hx-dim hx-c3">03.09</span>
+        <span class="hx-mono">10억 9,000</span><span class="hx-up hx-c3">▲ 0.9%</span>
+      </div>
+      <div class="hx-row hx-r5">
+        <div class="hx-nm"><b>둔촌동 올림픽파크 포레온</b><span>84㎡ · 03.07 · ▲ 1.8%</span></div>
+        <span class="hx-dim hx-c3">84㎡</span><span class="hx-dim hx-c3">03.07</span>
+        <span class="hx-mono">22억 6,000</span><span class="hx-up hx-c3">▲ 1.8%</span>
+      </div>
+    </div>
+    <div class="hx-band">
+      <div class="hx-band-top"><span>전용 84㎡ 최근 3개월 시세 구간</span><b>11.8억 — 13.4억</b></div>
+      <div class="hx-track"><i class="hx-fill"></i></div>
+    </div>
+    <div class="hx-sum">
+      <div><span>강동구 아파트 매매지수</span><b class="hx-up">▲ 0.31%</b></div>
+      <div><span>상가 평균 수익률</span><b>4.2%</b></div>
+      <div><span>오피스텔 공실률</span><b>6.8%</b></div>
+      <div><span>이번 주 신규 등록</span><b>14건</b></div>
+    </div>
+    <p class="hx-note">* 템플릿 데모용 예시 데이터입니다. 실제 지표 연동을 지원합니다.</p>
+  </div>
+
   <div class="ribbon" aria-hidden="true">
     <div class="ribbon-track">
       <span>누적 거래액 2,400억</span><span>수익형 전문 16년</span><span>법무 · 세무 제휴 브리핑</span><span>임대관리 대행</span><span>누적 거래액 2,400억</span><span>수익형 전문 16년</span><span>법무 · 세무 제휴 브리핑</span><span>임대관리 대행</span>

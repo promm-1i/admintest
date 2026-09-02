@@ -127,6 +127,84 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 표정 미리보기 히어로 ===== */
+.hero.hx-hero{position:relative;overflow:hidden;text-align:left;padding:76px 0 92px;background:var(--cream);
+  --hx-acc:#8A5A40;--hx-mut:#6B6059;--hx-dark:#2E2723}
+.hero.hx-hero .hx-top,.hero.hx-hero .hx-bot{position:relative;z-index:2}
+.hero.hx-hero .hx-top>*{max-width:min(470px,44vw)}
+.hero.hx-hero .kicker{font-size:11px;font-weight:500;letter-spacing:.34em;color:var(--hx-acc);margin:0}
+.hero.hx-hero h1{margin-top:16px;line-height:1.5}
+.hero.hx-hero h1 em{color:var(--hx-acc)}
+.hero.hx-hero .hx-lead{margin:14px 0 0;max-width:410px;font-size:13.5px;color:var(--hx-mut)}
+
+/* 패널 — 화면 오른쪽 밖으로 흘려보내고 왼쪽 끝은 크림에 녹인다 */
+.hero.hx-hero .hx-stage{position:absolute;top:0;bottom:0;left:38%;right:-64px;z-index:1}
+.hero.hx-hero .hx-shots{position:absolute;inset:0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 14%,#000 38%);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 14%,#000 38%)}
+.hero.hx-hero .hx-shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .22s ease}
+.hero.hx-hero .hx-shot.on{opacity:1}
+
+/* 지금 보고 있는 컷 — 텍스트 열에서 시작해 사진 위를 가로지른다 */
+.hero.hx-hero .hx-cap{position:absolute;left:-300px;right:64px;bottom:0;z-index:3;
+  background:var(--hx-dark);color:#fff;display:grid;grid-template-columns:auto 1fr auto;
+  align-items:center;column-gap:24px;padding:14px 26px}
+.hero.hx-hero .hx-idx{font-family:"Nanum Myeongjo",serif;font-size:12.5px;letter-spacing:.14em;color:#E8CDB9}
+.hero.hx-hero .hx-t{display:block;font-family:"Nanum Myeongjo",serif;font-size:16px;font-weight:800;color:#fff;line-height:1.4}
+.hero.hx-hero .hx-m{display:block;margin-top:1px;font-size:12px;color:rgba(255,255,255,.82);line-height:1.5}
+.hero.hx-hero .hx-demo{font-size:11.5px;color:rgba(255,255,255,.75);line-height:1.5}
+
+/* 표정 목록 */
+.hero.hx-hero .hx-list{margin-top:26px;max-width:min(470px,44vw);border-top:1px solid var(--line)}
+.hero.hx-hero .hx-item{position:relative;display:grid;grid-template-columns:28px 1fr auto;align-items:center;
+  column-gap:12px;width:100%;padding:11px 10px 11px 2px;background:none;border:0;border-bottom:1px solid var(--line);
+  font-family:inherit;color:inherit;text-align:left;cursor:pointer;transition:background .25s}
+.hero.hx-hero .hx-item:hover{background:rgba(138,90,64,.06)}
+.hero.hx-hero .hx-item.is-on{background:rgba(138,90,64,.10)}
+.hero.hx-hero .hx-n{font-family:"Nanum Myeongjo",serif;font-size:11.5px;letter-spacing:.1em;color:var(--hx-acc)}
+.hero.hx-hero .hx-l{font-family:"Nanum Myeongjo",serif;font-size:15.5px;font-weight:800;color:var(--ink)}
+.hero.hx-hero .hx-d{font-size:11.5px;color:var(--hx-mut)}
+.hero.hx-hero .hx-p{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--hx-acc);
+  transform:scaleX(0);transform-origin:left center}
+@keyframes hx-fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero.hx-hero .hx-item.is-on .hx-p{animation:hx-fill 3.5s linear forwards}
+.hero.hx-hero.hx-lock .hx-item.is-on .hx-p{animation:none;transform:scaleX(1)}
+
+.hero.hx-hero .hx-cta{margin-top:24px;justify-content:flex-start}
+.hero.hx-hero .btn{background:var(--hx-acc)}
+.hero.hx-hero .btn:hover{background:#71462F}
+.hero.hx-hero .btn.ghost{background:transparent;border:1px solid var(--hx-acc);color:var(--hx-acc)}
+.hero.hx-hero .btn.ghost:hover{background:var(--hx-acc);color:#fff}
+
+@media(max-width:860px){
+  .hero.hx-hero{padding:26px 0 32px}
+  .hero.hx-hero .hx-top>*,.hero.hx-hero .hx-list{max-width:none}
+  .hero.hx-hero h1{margin-top:10px;line-height:1.45}
+  .hero.hx-hero .hx-lead{font-size:13px;line-height:1.75}
+  .hero.hx-hero .hx-stage{position:relative;top:auto;bottom:auto;left:auto;right:auto;margin:13px 26px 0}
+  .hero.hx-hero .hx-shots{position:relative;inset:auto;height:170px;border-radius:10px 10px 0 0;
+    -webkit-mask-image:none;mask-image:none}
+  .hero.hx-hero .hx-cap{position:static;padding:11px 15px 12px;column-gap:12px;row-gap:3px;
+    grid-template-columns:auto 1fr;border-radius:0 0 10px 10px}
+  .hero.hx-hero .hx-idx{align-self:start;margin-top:3px}
+  .hero.hx-hero .hx-t{font-size:14.5px}
+  .hero.hx-hero .hx-m{font-size:11.5px}
+  .hero.hx-hero .hx-demo{grid-column:1/-1;font-size:11px}
+  .hero.hx-hero .hx-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px;border-top:0}
+  .hero.hx-hero .hx-item{grid-template-columns:19px 1fr;row-gap:1px;padding:8px 9px;
+    border:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .hero.hx-hero .hx-n{grid-row:1;grid-column:1}
+  .hero.hx-hero .hx-l{grid-row:1;grid-column:2;font-size:13.5px}
+  .hero.hx-hero .hx-d{grid-row:2;grid-column:2;font-size:11px}
+  .hero.hx-hero .hx-p{left:-1px;right:-1px;bottom:-1px}
+  .hero.hx-hero .hx-cta{margin-top:14px;gap:10px}
+  .hero.hx-hero .btn{padding:14px 26px}
+}
+@media(max-width:400px){
+  .hero.hx-hero .hx-shots{height:150px}
+  .hero.hx-hero .hx-l{font-size:12.5px}
+}
 </style>
 </head>
 <body>
@@ -137,18 +215,38 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">예약 문의</a>
 </div></header>
 
-<div class="hero">
-<div class="wrap">
+<div class="hero hx-hero" id="hxHero">
+
+<div class="wrap hx-top">
 <p class="kicker">WEDDING SNAP STUDIO</p>
-<h1 style="margin-top:20px">포즈보다<br><em>표정을 찍습니다</em></h1>
-<p>연출 컷도 필요하지만, 정말 오래 보게 되는 건 웃다가 찍힌 사진이더라고요. 저희는 그 순간을 놓치지 않으려 합니다.</p>
-<div class="hero-cta"><a class="btn" href="tel:010-4894-4905">예약 문의</a><a class="btn ghost" href="#pkg">상품 보기</a></div>
-<div class="hero-gal rv">
-<img class="s" src="./assets/g-2.jpg" alt="스냅 컷">
-<img class="m" src="./assets/g-1.jpg" alt="본식 스냅">
-<img class="s" src="./assets/g-4.jpg" alt="스냅 컷">
+<h1>포즈보다<br><em>표정을 찍습니다</em></h1>
+<p class="hx-lead">연출 컷도 필요하지만, 정말 오래 보게 되는 건 웃다가 찍힌 사진이더라고요. 저희는 그 순간을 놓치지 않으려 합니다.</p>
+</div>
+
+<div class="hx-stage">
+<div class="hx-shots">
+<img class="hx-shot on" src="./assets/g-1.jpg" alt="신부대기실에서 웃음이 터진 신부">
+<img class="hx-shot" src="./assets/g-2.jpg" alt="입장 직전 먼저 눈물이 나신 아버지">
+<img class="hx-shot" src="./assets/g-4.jpg" alt="식장 앞에서 신부를 기다리는 신랑">
+<img class="hx-shot" src="./assets/g-5.jpg" alt="예식 후 다 같이 웃은 가족사진">
+</div>
+<div class="hx-cap">
+<span class="hx-idx" id="hxIdx">01 / 04</span>
+<span><b class="hx-t" id="hxT">웃음이 터진 신부</b><span class="hx-m" id="hxM">신부대기실 · 예식 40분 전 · 35mm 자연광</span></span>
+<span class="hx-demo">데모 화면 · 아래 목록에서 표정을 고르면 컷이 바뀝니다</span>
 </div>
 </div>
+
+<div class="wrap hx-bot">
+<div class="hx-list">
+<button class="hx-item is-on" type="button" aria-pressed="true" data-t="웃음이 터진 신부" data-m="신부대기실 · 예식 40분 전 · 35mm 자연광"><span class="hx-n">01</span><span class="hx-l">웃음이 터진 신부</span><span class="hx-d">친구들이 들어왔을 때</span><span class="hx-p"></span></button>
+<button class="hx-item" type="button" aria-pressed="false" data-t="먼저 우신 아버지" data-m="입장 직전 · 흑백 보정 · 85mm"><span class="hx-n">02</span><span class="hx-l">먼저 우신 아버지</span><span class="hx-d">손 잡고 걸어 나오기 전</span><span class="hx-p"></span></button>
+<button class="hx-item" type="button" aria-pressed="false" data-t="신부를 기다리는 신랑" data-m="예식 시작 3분 전 · 무보정 · 85mm"><span class="hx-n">03</span><span class="hx-l">기다리는 신랑</span><span class="hx-d">식장 앞 · 플래시 없이</span><span class="hx-p"></span></button>
+<button class="hx-item" type="button" aria-pressed="false" data-t="다 같이 웃은 가족" data-m="가족사진 · 예식 후 12분 · 35mm"><span class="hx-n">04</span><span class="hx-l">다 같이 웃은 가족</span><span class="hx-d">3대가 다 모였을 때</span><span class="hx-p"></span></button>
+</div>
+<div class="hero-cta hx-cta"><a class="btn" href="tel:010-4894-4905">예약 문의</a><a class="btn ghost" href="#pkg">상품 보기</a></div>
+</div>
+
 </div>
 
 <section id="pkg"><div class="wrap">
@@ -217,6 +315,39 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
 const _rvs=[...document.querySelectorAll('.rv')];
 _rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+<script>
+(function(){
+ var hero=document.getElementById('hxHero'); if(!hero) return;
+ var items=[].slice.call(hero.querySelectorAll('.hx-item'));
+ var shots=[].slice.call(hero.querySelectorAll('.hx-shot'));
+ var elT=document.getElementById('hxT'),elM=document.getElementById('hxM'),elI=document.getElementById('hxIdx');
+ if(!items.length||!shots.length) return;
+ var cur=0,timer=null;
+ var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function pad(n){return (n<10?'0':'')+n}
+ function show(n){
+  cur=n;
+  for(var k=0;k<shots.length;k++){shots[k].classList.toggle('on',k===n)}
+  for(var j=0;j<items.length;j++){items[j].classList.toggle('is-on',j===n);items[j].setAttribute('aria-pressed',j===n?'true':'false')}
+  elT.textContent=items[n].getAttribute('data-t');
+  elM.textContent=items[n].getAttribute('data-m');
+  elI.textContent=pad(n+1)+' / '+pad(items.length);
+ }
+ function stop(){if(timer){clearTimeout(timer);timer=null}}
+ function loop(){stop();if(reduce)return;timer=setTimeout(function(){show((cur+1)%items.length);loop()},3500)}
+ function pick(n){stop();hero.classList.add('hx-lock');show(n)}
+ items.forEach(function(b,k){
+  b.addEventListener('mouseenter',function(){pick(k)});
+  b.addEventListener('focus',function(){pick(k)});
+  b.addEventListener('click',function(){pick(k)});
+ });
+ hero.addEventListener('mouseleave',function(){
+  if(document.activeElement&&hero.contains(document.activeElement))return;
+  hero.classList.remove('hx-lock');loop();
+ });
+ show(0);loop();
+})();
 </script>
 </body>
 </html>

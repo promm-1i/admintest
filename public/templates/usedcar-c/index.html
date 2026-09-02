@@ -92,6 +92,82 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 히어로 — 성능점검 리포트 패널 ===== */
+.hx-hero{position:relative;overflow:hidden;padding:52px 0 60px;min-height:588px}
+.hero .hx-wrap{display:block;position:static;grid-template-columns:none;gap:0}
+.hx-copy{position:relative;z-index:3;max-width:540px}
+.hx-copy h1{margin-top:16px}
+.hero p.hx-note{position:relative;z-index:3;margin-top:18px;font-size:13px;color:#4E566E;font-weight:500;max-width:500px}
+.hero .hx-copy p{color:#4E566E}
+.hx-note b{font-family:"Jua";font-weight:400;color:var(--blue)}
+
+.hx-panel{position:absolute;top:72px;left:calc(50% - 120px);right:-90px;z-index:1;
+  background:#fff;border:2.5px solid var(--navy);border-radius:20px;
+  padding:20px 130px 20px 190px;box-shadow:0 14px 34px rgba(31,42,68,.13);
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.12) 62px,rgba(0,0,0,1) 172px);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.12) 62px,rgba(0,0,0,1) 172px)}
+.hx-bar{display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:2px solid var(--line)}
+.hx-dots{display:flex;gap:5px}
+.hx-dots i{width:9px;height:9px;border-radius:50%;background:var(--line);border:1.5px solid var(--navy)}
+.hx-bar b{font-family:"Jua";font-weight:400;font-size:15px;color:var(--navy)}
+.hx-demo{margin-left:auto;font-size:11.5px;font-weight:700;color:#4E566E;background:#fff;border:1.5px dashed #9AA1B5;border-radius:99px;padding:2px 10px;letter-spacing:.01em}
+.hx-car{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;padding:13px 0 10px}
+.hx-car b{font-family:"Jua";font-weight:400;font-size:17.5px;color:var(--navy)}
+.hx-car span{font-size:12.5px;color:#4E566E;font-weight:500}
+.hx-rows{list-style:none}
+.hx-rows li{display:grid;grid-template-columns:96px 1fr 74px;align-items:center;gap:12px;
+  padding:9px 10px;margin:0 -10px;border-radius:10px;border-bottom:1.5px dotted var(--line);
+  transition:background .18s}
+.hx-rows li:last-child{border-bottom:0}
+.hx-rows li:hover{background:var(--cream)}
+.hx-k{font-family:"Jua";font-weight:400;font-size:14px;color:var(--navy)}
+.hx-d{font-size:12.5px;color:#4E566E;font-weight:500;line-height:1.5}
+.hx-s{justify-self:end;font-size:12px;font-weight:700;border-radius:99px;padding:4px 12px;white-space:nowrap}
+.hx-ok{background:var(--navy);color:var(--yellow)}
+.hx-warn{background:#B8431F;color:#fff}
+.hx-foot{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:2px solid var(--line)}
+.hx-score{font-family:"Jua";font-weight:400;font-size:15px;color:var(--navy);display:flex;align-items:center;gap:7px}
+.hx-num{display:inline-block;height:34px;overflow:hidden;line-height:34px;font-size:30px;color:var(--red)}
+.hx-num i{display:block;height:34px;font-style:normal}
+.hx-foot p{font-size:12px;color:#4E566E;font-weight:500;margin-left:auto;text-align:right}
+.hx-mo{display:none}
+
+@keyframes hx-row{0%{opacity:0;transform:translateY(9px)}
+  5%,93%{opacity:1;transform:none}
+  98%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes hx-num{0%,3%{transform:translateY(0)}
+  8%,12%{transform:translateY(-34px)}
+  17%,21%{transform:translateY(-68px)}
+  26%,96%{transform:translateY(-102px)}
+  100%{transform:translateY(0)}}
+.hx-rows li{animation:hx-row 8s ease-in-out infinite both}
+.hx-rows li:nth-child(2){animation-delay:.34s}
+.hx-rows li:nth-child(3){animation-delay:.68s}
+.hx-rows li:nth-child(4){animation-delay:1.02s}
+.hx-rows li:nth-child(5){animation-delay:1.36s}
+.hx-num i{animation:hx-num 8s steps(1,end) infinite both}
+
+@media(max-width:1000px){
+  .hx-hero{padding:36px 0 46px;min-height:0}
+  .hx-copy{max-width:none}
+  .hx-note{margin-top:14px}
+  .hx-panel{position:static;margin:24px -24px 0 0;padding:16px 18px;border-radius:18px 0 0 18px;
+    border-right:0;box-shadow:0 10px 24px rgba(31,42,68,.11);
+    -webkit-mask-image:none;mask-image:none}
+  .hx-rows li{grid-template-columns:1fr auto;gap:3px 10px;padding:10px 8px;margin:0 -8px}
+  .hx-k{grid-column:1;grid-row:1}
+  .hx-s{grid-column:2;grid-row:1}
+  .hx-d{grid-column:1/-1;grid-row:2}
+  .hx-rows li:nth-child(5){display:none}
+  .hx-foot{gap:10px}
+  .hx-foot p{margin-left:0;text-align:left;flex:1 1 100%}
+  .hx-mo{display:block;font-size:12px;color:#4E566E;font-weight:500;margin-top:10px}
+}
+@media(prefers-reduced-motion:reduce){
+  .hx-rows li{opacity:1;transform:none}
+  .hx-num i{transform:translateY(-102px)}
+}
 </style>
 </head>
 <body>
@@ -102,14 +178,30 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905"><svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4 5.2 2 2 0 0 1 6 3Z"/></svg> 첫차 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero"><div class="wrap hx-wrap">
+<div class="hx-copy">
 <span class="badge">사회초년생 · 첫차 전문</span>
-<h1 style="margin-top:16px">인생 첫차,<br><em>호구 안 되게</em> 사는 법</h1>
+<h1>인생 첫차,<br><em>호구 안 되게</em> 사는 법</h1>
 <p>중고차 처음이라 겁나는 거, 당연해요. 첫차상회는 전문용어 대신 쉬운 말로, 월급에 맞는 차부터 권해드립니다.</p>
 <div class="hero-cta"><a class="btn btn-y" href="tel:010-4894-4905">첫차 상담하기</a><a class="btn btn-w" href="#budget">예산별로 보기</a></div>
+<p class="hx-note">매물마다 <b>5가지 확인 항목</b>을 먼저 보여드립니다 — 통과 못 한 차는 팔지 않습니다.</p>
 </div>
-<figure class="hero-img rv"><img src="./assets/car-1.jpg" alt="추천 첫차"><span class="stk">면허 1년차 환영!</span></figure>
+<aside class="hx-panel rv" aria-label="성능점검 리포트 예시 화면">
+<div class="hx-bar"><span class="hx-dots" aria-hidden="true"><i></i><i></i><i></i></span><b>성능점검 리포트</b><span class="hx-demo">데모 화면 · 예시 데이터</span></div>
+<div class="hx-car"><b>아반떼 CN7 1.6 가솔린</b><span>2021년식 · 41,280km · 매물번호 CH-2417</span></div>
+<ul class="hx-rows">
+<li><span class="hx-k">사고 이력</span><span class="hx-d">주요 골격 7개 부위 손상 없음</span><span class="hx-s hx-ok">통과</span></li>
+<li><span class="hx-k">침수 이력</span><span class="hx-d">실내 · 트렁크 부식 흔적 없음</span><span class="hx-s hx-ok">통과</span></li>
+<li><span class="hx-k">주행 조작</span><span class="hx-d">정기검사 3회 기록과 계기판 일치</span><span class="hx-s hx-ok">통과</span></li>
+<li><span class="hx-k">외판 교환</span><span class="hx-d">뒷문 1곳 단순교환 — 값 60만원 내림</span><span class="hx-s hx-warn">설명함</span></li>
+<li><span class="hx-k">압류 · 저당</span><span class="hx-d">자동차등록원부 갑 · 을부 확인 완료</span><span class="hx-s hx-ok">통과</span></li>
+</ul>
+<div class="hx-foot">
+<div class="hx-score">안심 점수 <span class="hx-num" aria-label="88점"><i>0</i><i>42</i><i>71</i><i>88</i></span>점</div>
+<p>국토교통부 성능 · 상태점검 기록부 기준</p>
+</div>
+<p class="hx-mo">압류 · 저당 — 자동차등록원부 갑 · 을부 확인 완료 (통과)</p>
+</aside>
 </div></section>
 
 <section id="budget" style="padding-top:0"><div class="wrap">

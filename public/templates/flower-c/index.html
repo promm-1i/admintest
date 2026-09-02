@@ -88,6 +88,139 @@ footer b{color:#fff}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 재구성 : 요일 구독 화면이 화면 밖으로 흘러나가고 글자가 그 위에 올라탄다 ── */
+.hero.hx-hero{position:relative;overflow:hidden;padding:74px 0 78px;background:linear-gradient(180deg,#F8EEF3 0%,#F5E7EE 100%)}
+.hero.hx-hero .wrap{display:block;position:relative;z-index:2;pointer-events:none}
+.hero.hx-hero .wrap .hx-copy>*{pointer-events:auto}
+.hx-copy{max-width:470px}
+.hero.hx-hero h1{margin-top:16px;max-width:440px}
+.hx-tail{display:block;color:var(--ink);font-family:"Single Day";font-size:20px;margin-top:20px;max-width:430px}
+.hx-tail i{font-style:normal;color:var(--lilac)}
+
+/* 패널 : 절대배치로 오른쪽 뷰포트 밖까지 흘리고 왼쪽 끝을 마스크로 배경에 녹인다 */
+.hx-panel{position:absolute;top:50%;left:14%;right:-92px;transform:translateY(-50%);z-index:1;
+ background:#fff;border-radius:26px;padding:24px 26px 24px 35vw;
+ box-shadow:0 22px 48px rgba(74,61,70,.13);
+ -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 70px,rgba(0,0,0,.72) 170px,#000 240px);
+ mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.18) 70px,rgba(0,0,0,.72) 170px,#000 240px)}
+.hx-head,.hero.hx-hero .hx-note,.hero.hx-hero .hx-foot,.hero.hx-hero .hx-more{max-width:664px}
+.hx-head{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:2px dotted var(--line);padding-bottom:11px}
+.hx-head b{font-family:"Single Day";font-size:20px;font-weight:400;color:var(--ink)}
+.hx-demo{font-size:11.5px;color:#6B5C66;border:1.5px solid var(--line);border-radius:6px;padding:2px 8px;white-space:nowrap}
+.hx-chips{display:flex;gap:7px;margin-top:14px}
+.hx-chip{position:relative;flex:0 0 auto;min-width:42px;text-align:center;
+ font-family:"Single Day";font-size:19px;font-weight:700;line-height:1;color:var(--ink);
+ background:#FBF3F8;border:1.5px solid var(--line);border-radius:99px;padding:9px 12px}
+.hx-chip span{position:relative;z-index:1}
+.hx-chip::before{content:"";position:absolute;inset:-1.5px;border-radius:99px;background:var(--butter);opacity:0}
+.hx-chip:hover::before{opacity:1}
+.hx-chip.hx-on::before{animation:hx-pick 8s linear infinite}
+.hero.hx-hero .hx-note{position:relative;height:22px;margin-top:13px;font-size:13px;color:#6B5C66;max-width:none}
+.hero.hx-hero .hx-note span{position:absolute;left:0;top:0;white-space:nowrap}
+.hero.hx-hero .hx-note .s1{animation:hx-s1 8s linear infinite}
+.hero.hx-hero .hx-note .s2{color:var(--ink);animation:hx-s2 8s linear infinite}
+.hero.hx-hero .hx-note .s2 b{font-weight:700}
+.hx-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:11px}
+.hx-card{background:#FDFAFC;border:1.5px solid var(--line);border-radius:14px;padding:8px;
+ opacity:0;animation:hx-rise 8s cubic-bezier(.32,.72,0,1) infinite;animation-delay:calc(var(--i)*.2s)}
+.hx-card img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:9px}
+.hx-card b{display:block;margin-top:8px;font-size:13.5px;font-weight:700;color:var(--ink)}
+.hx-card i{display:block;font-style:normal;font-size:11.5px;color:#6B5C66;margin-top:2px;line-height:1.5}
+.hx-card em{display:block;font-style:normal;font-family:"Single Day";font-size:17px;color:var(--ink);margin-top:5px}
+.hero.hx-hero .hx-more{display:none}
+.hx-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}
+.hero.hx-hero .hx-foot p{font-size:12.5px;color:#6B5C66;margin-top:0;max-width:none}
+.hero.hx-hero .hx-foot p b{color:var(--ink);font-weight:700}
+.hx-fake{font-family:"Single Day";font-size:17px;background:var(--peach);color:var(--ink);
+ border-radius:99px;padding:8px 20px;white-space:nowrap}
+
+@keyframes hx-rise{0%,16%{opacity:0;transform:translateY(16px)}24%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:translateY(16px)}}
+@keyframes hx-pick{0%,12%{opacity:0}16%,92%{opacity:1}98%,100%{opacity:0}}
+@keyframes hx-s1{0%,10%{opacity:1}14%,92%{opacity:0}98%,100%{opacity:1}}
+@keyframes hx-s2{0%,13%{opacity:0}19%,90%{opacity:1}97%,100%{opacity:0}}
+
+@media(max-width:1180px){
+ .hx-panel{left:12%;right:-78px;padding-left:35vw}
+ .hx-card b{font-size:12.5px}
+ .hx-head,.hero.hx-hero .hx-note,.hero.hx-hero .hx-foot{max-width:600px}
+}
+@media(max-width:980px){
+ .hx-copy{max-width:424px}
+ .hero.hx-hero h1{font-size:clamp(34px,4.8vw,44px)}
+ .hx-tail{font-size:18px;margin-top:16px}
+ .hx-panel{left:10%;padding:18px 20px 18px 32vw;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.7) 92px,#000 128px);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.7) 92px,#000 128px)}
+ .hx-cards{gap:10px}
+ .hx-card img{aspect-ratio:1/1}
+ .hx-head,.hero.hx-hero .hx-note,.hero.hx-hero .hx-foot{max-width:520px}
+}
+@media(max-width:860px){
+ .hx-head,.hero.hx-hero .hx-note,.hero.hx-hero .hx-foot,.hero.hx-hero .hx-more{max-width:none}
+ .hx-card img{aspect-ratio:4/3}
+ .hero.hx-hero{padding:22px 0 34px;display:flex;flex-direction:column}
+ .hero.hx-hero .wrap{order:1}
+ .hx-panel{order:2;align-self:stretch;margin-left:24px;margin-right:24px}
+ .hero.hx-hero h1{font-size:clamp(32px,8.6vw,40px);margin-top:12px}
+ .hero.hx-hero p{font-size:14.5px;margin-top:10px}
+ .hero.hx-hero .hero-cta{margin-top:18px;gap:9px}
+ .hero.hx-hero .btn{font-size:17px;padding:11px 22px}
+ .hx-copy{max-width:none}
+ .hx-tail{display:none}
+ .hx-panel{position:static;transform:none;left:auto;right:auto;margin-top:18px;padding:16px 16px 18px!important;border-radius:20px;
+  -webkit-mask-image:none;mask-image:none;box-shadow:0 14px 30px rgba(74,61,70,.1)}
+ .hx-head b{font-size:18px}
+ .hx-chips{gap:6px;overflow:hidden}
+ .hx-chip{min-width:0;padding:8px 10px;font-size:17px}
+ .hx-cards{grid-template-columns:1fr;gap:0}
+ .hx-card:nth-child(n+2){display:none}
+ .hx-card{display:grid;grid-template-columns:104px 1fr;grid-template-rows:auto auto auto;
+  column-gap:12px;align-content:center;padding:9px}
+ .hx-card img{grid-area:1/1/4/2;aspect-ratio:4/3;align-self:center}
+ .hx-card b{grid-area:1/2/2/3;align-self:end;margin-top:0;font-size:14px}
+ .hx-card i{grid-area:2/2/3/3}
+ .hx-card em{grid-area:3/2/4/3;align-self:start;margin-top:3px}
+ .hero.hx-hero .hx-foot{flex-direction:column;align-items:flex-start;gap:11px}
+ .hero.hx-hero .hx-more{display:block;font-size:12.5px;color:#6B5C66;margin-top:9px;max-width:none}
+ .hx-foot{margin-top:12px}
+}
+@media(prefers-reduced-motion:reduce){
+ .hx-card{opacity:1;transform:none}
+ .hx-chip.hx-on::before,.hx-note .s2{opacity:1}
+ .hx-note .s1{opacity:0}
+}
+
+/* ── 반려 수정 1 : 861~980px 에서 카피가 결과 카드 위로 겹치던 문제
+      카드가 시작하는 x 를 뷰포트 폭과 무관하게 384px 로 고정하고 카피 폭을 그 앞에서 끊는다 ── */
+@media(min-width:861px) and (max-width:980px){
+ .hx-copy{max-width:344px}
+ .hero.hx-hero h1{font-size:clamp(30px,4.2vw,38px);max-width:344px}
+ .hero.hx-hero .hx-copy p{max-width:330px}
+ .hx-tail{font-size:17px;margin-top:14px;max-width:340px}
+ .hx-panel{padding-left:calc(384px - 10vw)}
+}
+
+/* ── 반려 수정 2 : 모바일에서 카드 1장만 남아 '3가지' 와 어긋나던 문제
+      나머지 두 가지를 한 줄 텍스트로 살린다 ── */
+.hero.hx-hero .hx-rest{display:none}
+@media(max-width:860px){
+ .hero.hx-hero .hx-rest{display:block;margin-top:8px;max-width:none;
+  font-size:12.5px;line-height:1.55;color:#6B5C66}
+ .hero.hx-hero .hx-rest b{color:var(--ink);font-weight:700}
+ .hero.hx-hero .hx-more{margin-top:7px}
+ .hx-foot{margin-top:10px}
+ /* 한 줄이 늘어난 만큼 첫 화면 안에 '이 요일로 받기' 가 그대로 남도록 위쪽을 조인다 */
+ .hero.hx-hero{padding-top:14px}
+ .hero.hx-hero .hero-cta{margin-top:14px}
+ .hx-panel{margin-top:14px}
+}
+
+/* ── 반려 수정 3 : 결과가 완전히 비는 구간(약 1.3초) 을 0.4초 안팎으로 줄인다 ── */
+@keyframes hx-rise{0%,9%{opacity:0;transform:translateY(16px)}16%,95%{opacity:1;transform:none}99.5%,100%{opacity:0;transform:translateY(16px)}}
+@keyframes hx-pick{0%,5%{opacity:0}9%,96%{opacity:1}99.5%,100%{opacity:0}}
+@keyframes hx-s1{0%,4%{opacity:1}8%,96%{opacity:0}99.5%,100%{opacity:1}}
+@keyframes hx-s2{0%,7%{opacity:0}13%,95%{opacity:1}99%,100%{opacity:0}}
 </style>
 </head>
 <body>
@@ -98,14 +231,35 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905"><svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4 5.2 2 2 0 0 1 6 3Z"/></svg> 꽃 주문</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+<div class="hx-panel">
+ <div class="hx-head"><b>요일 구독 · 받을 요일 고르기</b><span class="hx-demo">데모 화면</span></div>
+ <div class="hx-chips">
+  <div class="hx-chip"><span>월</span></div>
+  <div class="hx-chip"><span>화</span></div>
+  <div class="hx-chip hx-on"><span>수</span></div>
+  <div class="hx-chip"><span>목</span></div>
+  <div class="hx-chip"><span>금</span></div>
+  <div class="hx-chip"><span>토</span></div>
+ </div>
+ <p class="hx-note"><span class="s1">받을 요일을 고르면 그날 다발을 보여드려요</span><span class="s2"><b>수요일</b> 오후에 가져가실 수 있는 다발 3가지</span></p>
+ <div class="hx-cards">
+  <figure class="hx-card" style="--i:0"><img src="./assets/2.jpg" alt="수요일 거베라 한 단"><b>거베라 한 단</b><i>수 15:00 이후 픽업</i><em>5,000원</em></figure>
+  <figure class="hx-card" style="--i:1"><img src="./assets/3.jpg" alt="수요일 살구 장미 반 다발"><b>살구 장미 반 다발</b><i>수 15:00 이후 픽업</i><em>12,000원</em></figure>
+  <figure class="hx-card" style="--i:2"><img src="./assets/7.jpg" alt="수요일 계절 믹스 한 아름"><b>계절 믹스 한 아름</b><i>수 17:00 이후 픽업</i><em>20,000원</em></figure>
+ </div>
+ <p class="hx-rest">같은 날 남은 두 가지 — 살구 장미 반 다발 <b>12,000원</b> · 계절 믹스 한 아름 <b>20,000원</b></p>
+ <p class="hx-more">목요일 · 금요일도 같은 방식으로 그날 다발이 올라와요.</p>
+ <div class="hx-foot"><p>이번 주 수요일 남은 자리 <b>3</b>다발 · 매주 같은 요일 자동 예약</p><span class="hx-fake">이 요일로 받기</span></div>
+</div>
+<div class="wrap">
+<div class="hx-copy">
 <span class="badge">퇴근길에 한 단 어때요?</span>
-<h1 style="margin-top:16px">오늘이 무슨 요일?<br><span class="a">꽃</span><span class="b">요</span><span class="c">일</span>이죠!</h1>
+<h1>오늘이 무슨 요일?<br><span class="a">꽃</span><span class="b">요</span><span class="c">일</span>이죠!</h1>
 <p>매일 아침 시장 다녀와서 문 엽니다. 한 단에 오천 원부터 — 꽃은 특별한 날에만 사는 게 아니니까요.</p>
 <div class="hero-cta"><a class="btn btn-l" href="tel:010-4894-4905">전화 주문하기</a><a class="btn btn-o" href="#price">가격표 보기</a></div>
+<span class="hx-tail">요일 하나만 고르면 <i>매주 그날</i> 맞춰 다발을 잡아둡니다.</span>
 </div>
-<figure class="hero-img rv"><img src="./assets/1.jpg" alt="오늘 들어온 꽃"><span class="tagp">오늘 입고 완료!</span></figure>
 </div></section>
 
 <section id="today" style="padding-top:0"><div class="wrap">

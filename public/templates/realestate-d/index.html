@@ -95,6 +95,99 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 히어로 조건검색 패널 ===== */
+.hx-hero{position:relative;overflow:hidden;padding:44px 0 52px;background:#F2F8F6}
+.hx-wrap{position:relative;min-height:566px}
+.hx-copy{position:relative;z-index:3;max-width:452px;padding-top:70px}
+.hx-copy .kicker{color:#07684F}
+.hx-copy p{max-width:430px;color:#5C6B68}
+.hx-copy .searchbar{max-width:none;width:calc(100% + 78px)}
+.hx-copy .searchbar span{color:#5C6B68}
+
+.hx-stage{position:absolute;top:22px;left:calc(50% - 140px);right:-72px;z-index:1;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.3) 34px,rgba(0,0,0,1) 100px);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,.3) 34px,rgba(0,0,0,1) 100px)}
+.hx-app{background:#fff;border:1px solid var(--line);border-radius:20px;padding:16px 24px 18px 180px;
+  box-shadow:0 34px 60px -40px rgba(17,28,26,.40)}
+.hx-top{display:flex;align-items:baseline;gap:10px;padding-bottom:13px;border-bottom:1px solid var(--line)}
+.hx-top b{font-size:14px;font-weight:900;letter-spacing:-.02em}
+.hx-top i{font-style:normal;font-size:11.5px;font-weight:700;color:#5C6B68}
+.hx-demo{margin-left:auto;font-size:10.5px;font-weight:900;letter-spacing:.06em;color:#08674F;background:var(--soft-mint);padding:4px 9px;border-radius:6px;white-space:nowrap}
+
+.hx-filters{margin-top:11px;display:flex;flex-direction:column;gap:7px}
+.hx-frow{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.hx-lb{font-style:normal;font-size:11.5px;font-weight:900;color:#3D4B49;width:34px;flex:none}
+.hx-c{position:relative;isolation:isolate;background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:5px 13px;font-size:12px;font-weight:700;color:#5C6B68;white-space:nowrap;transition:border-color .25s,color .25s}
+.hx-c:hover{border-color:var(--mint);color:var(--mint)}
+.hx-c::before{content:"";position:absolute;inset:-1.5px;border-radius:99px;background:var(--ink);opacity:0;z-index:1}
+.hx-c::after{content:attr(data-l);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;opacity:0;z-index:2}
+.hx-win::before,.hx-win::after{opacity:1}
+.hx-win:hover{border-color:var(--line)}
+
+.hx-bar{margin-top:13px;display:flex;align-items:center;gap:12px;background:var(--bg);border-radius:12px;padding:9px 12px 9px 16px}
+.hx-cnt{font-size:12.5px;font-weight:700;color:#3D4B49;flex:1}
+.hx-n{position:relative;display:inline-block;width:40px;height:18px;line-height:18px;vertical-align:-3px;text-align:left;font-weight:900;color:var(--ink);font-size:15px}
+.hx-n b{position:absolute;left:0;top:0;line-height:18px;font-weight:900}
+.hx-n .hx-n1,.hx-n .hx-n2,.hx-n .hx-n3{opacity:0}
+.hx-n .hx-n4{opacity:1}
+.hx-btn{background:var(--mint);color:var(--ink);font-size:12.5px;font-weight:900;padding:8px 18px;border-radius:9px;white-space:nowrap}
+
+.hx-rows{margin-top:11px;display:flex;flex-direction:column;gap:7px}
+.hx-row{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:7px 12px}
+.hx-row img{width:76px;height:57px;object-fit:cover;border-radius:8px;flex:none}
+.hx-rb{min-width:0}
+.hx-app p{max-width:none}
+.hx-app .hx-pr{font-size:16px;font-weight:900;letter-spacing:-.02em;color:var(--ink);margin-top:0}
+.hx-app .hx-pr small{font-size:11px;font-weight:700;color:#5C6B68;margin-left:5px}
+.hx-app .hx-ti{font-size:12.5px;font-weight:700;color:#2E3B39;margin-top:2px}
+.hx-mt{margin-top:5px;display:flex;gap:6px;flex-wrap:wrap}
+.hx-mt span{font-size:10.5px;font-weight:700;color:#5C6B68;background:var(--bg);border-radius:5px;padding:2px 7px}
+.hx-app .hx-more{display:none}
+.hx-app .hx-note{margin-top:10px;font-size:11px;font-weight:700;color:#5C6B68;line-height:1.5}
+
+@keyframes hx-pill{0%,5%{opacity:0}9%,96%{opacity:1}99%,100%{opacity:0}}
+@keyframes hx-row{0%,17%{opacity:0;transform:translateY(16px)}25%,95%{opacity:1;transform:none}99%,100%{opacity:0;transform:translateY(16px)}}
+@keyframes hx-n1{0%,10%{opacity:1}12%,97%{opacity:0}99%,100%{opacity:1}}
+@keyframes hx-n2{0%,10%{opacity:0}12%,14%{opacity:1}16%,100%{opacity:0}}
+@keyframes hx-n3{0%,14%{opacity:0}16%,18%{opacity:1}20%,100%{opacity:0}}
+@keyframes hx-n4{0%,18%{opacity:0}20%,96%{opacity:1}99%,100%{opacity:0}}
+.hx-win::before,.hx-win::after{animation:hx-pill 8s linear infinite both}
+.hx-w2::before,.hx-w2::after{animation-delay:.34s}
+.hx-w3::before,.hx-w3::after{animation-delay:.68s}
+.hx-row{animation:hx-row 8s cubic-bezier(.32,.72,0,1) infinite both}
+.hx-r2{animation-delay:.14s}
+.hx-r3{animation-delay:.28s}
+.hx-n1{animation:hx-n1 8s linear infinite both}
+.hx-n2{animation:hx-n2 8s linear infinite both}
+.hx-n3{animation:hx-n3 8s linear infinite both}
+.hx-n4{animation:hx-n4 8s linear infinite both}
+
+@media(max-width:1099px){
+  .hx-copy{max-width:40%;padding-top:24px}
+  .hx-copy .searchbar{width:calc(100% + 70px)}
+  .hx-stage{left:42%}
+  .hx-app{padding-left:96px}
+  .hx-row img{width:66px;height:50px}
+}
+@media(max-width:900px){
+  .hx-wrap{min-height:0}
+  .hx-copy{max-width:none;padding-top:0}
+  .hx-stage{position:relative;top:0;left:0;right:0;margin-top:24px;-webkit-mask-image:none;mask-image:none}
+  .hx-app{padding:16px 16px 18px;border-radius:16px;box-shadow:0 20px 40px -30px rgba(17,28,26,.36)}
+  .hx-lb{display:none}
+  .hx-frow{display:contents}
+  .hx-filters{flex-direction:row;flex-wrap:wrap;gap:7px}
+  .hx-c:not(.hx-win){display:none}
+  .hx-r2,.hx-r3{display:none}
+  .hx-app .hx-more{display:block;margin-top:9px;font-size:12px;font-weight:700;color:#3D4B49}
+  .hx-hero{padding:24px 0 32px}
+  .hx-copy .searchbar{margin-top:20px;width:100%}
+}
+@media(max-width:420px){
+  .hx-row img{width:72px;height:54px}
+  .hx-pr{font-size:15px}
+}
 </style>
 </head>
 <body>
@@ -105,12 +198,47 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">문의하기</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hero hx-hero"><div class="wrap hx-wrap">
+
+<div class="hx-copy">
 <span class="kicker">망원 · 합정 · 상수 전문</span>
 <h1 style="margin-top:14px">조건만 말해주세요,<br><em>발품은 저희가 팔게요</em></h1>
 <p>예산 · 층수 · 반려동물까지. 조건에 안 맞는 집은 아예 안 보여드립니다. 헛걸음할 시간 아끼세요.</p>
-<div class="searchbar rv"><span>보증금 · 월세 · 지역 조건 말씀해 주세요</span><a href="tel:010-4894-4905">조건 알려주기</a></div>
-<div class="chips rv"><span class="on">전체</span><span>원룸</span><span>투룸</span><span>오피스텔</span><span>신축</span><span>반려동물</span><span>주차 가능</span><span>즉시 입주</span></div>
+<div class="searchbar rv"><span>보증금 · 월세 · 지역 조건 말씀해 주세요</span><a class="hx-cta" href="tel:010-4894-4905">조건 알려주기</a></div>
+</div>
+
+<div class="hx-stage">
+<div class="hx-app">
+  <div class="hx-top"><b>조건 검색</b><i>망원 · 합정 · 상수</i><span class="hx-demo">데모 화면</span></div>
+
+  <div class="hx-filters">
+    <div class="hx-frow"><i class="hx-lb">종류</i>
+      <span class="hx-c hx-win hx-w1" data-l="원룸">원룸</span><span class="hx-c">투룸</span><span class="hx-c">오피스텔</span><span class="hx-c">신축</span></div>
+    <div class="hx-frow"><i class="hx-lb">예산</i>
+      <span class="hx-c">월세 60만</span><span class="hx-c hx-win hx-w2" data-l="월세 80만 이하">월세 80만 이하</span><span class="hx-c">전세</span></div>
+    <div class="hx-frow"><i class="hx-lb">층수</i>
+      <span class="hx-c">1층</span><span class="hx-c">2~4층</span><span class="hx-c hx-win hx-w3" data-l="5층 이상">5층 이상</span></div>
+  </div>
+
+  <div class="hx-bar"><span class="hx-cnt">조건에 맞는 매물 <span class="hx-n"><b class="hx-n1">48건</b><b class="hx-n2">21건</b><b class="hx-n3">9건</b><b class="hx-n4">3건</b></span></span><span class="hx-btn">검색</span></div>
+
+  <div class="hx-rows">
+    <div class="hx-row"><img src="./assets/listing-1.jpg" alt="망원동 신축 원룸 매물 사진">
+      <div class="hx-rb"><p class="hx-pr">1,000 / 65<small>관리비 7</small></p><p class="hx-ti">망원동 신축 원룸 · 5층</p>
+      <div class="hx-mt"><span>7평</span><span>즉시 입주</span><span>엘리베이터</span></div></div></div>
+    <div class="hx-row hx-r2"><img src="./assets/listing-2.jpg" alt="합정동 투룸 매물 사진">
+      <div class="hx-rb"><p class="hx-pr">2,000 / 90<small>관리비 10</small></p><p class="hx-ti">합정동 투룸 · 3층</p>
+      <div class="hx-mt"><span>14평</span><span>반려동물</span><span>남향</span></div></div></div>
+    <div class="hx-row hx-r3"><img src="./assets/listing-4.jpg" alt="망원역 인근 오피스텔 매물 사진">
+      <div class="hx-rb"><p class="hx-pr">1,500 / 78<small>관리비 8</small></p><p class="hx-ti">망원역 도보 3분 오피스텔</p>
+      <div class="hx-mt"><span>9평</span><span>주차 가능</span><span>풀옵션</span></div></div></div>
+  </div>
+
+  <p class="hx-more">합정동 투룸 2,000/90 · 망원역 오피스텔 1,500/78 등 2건 더</p>
+  <p class="hx-note">데모 화면입니다 · 실제 조건 접수는 전화 · 카톡으로 받습니다</p>
+</div>
+</div>
+
 </div></section>
 
 <section id="list" style="padding-top:44px"><div class="wrap">

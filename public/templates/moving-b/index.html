@@ -117,6 +117,87 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== 히어로 재설계 : 확정 견적서 시연 ===== */
+:root{--hx-soft:#5C553F;--hx-lh:34px}
+.hx-hero{position:relative;overflow:hidden;padding:54px 0 58px}
+.hx-hero .wrap{display:flex;align-items:center;grid-template-columns:none;min-height:566px}
+.hx-copy{position:relative;z-index:3;width:100%;max-width:490px}
+.hx-copy h1{font-family:"Do Hyeon";font-size:50px;font-weight:400;line-height:1.2;margin-top:16px;text-wrap:normal}
+.hx-copy h1 mark{background:var(--yellow);padding:0 8px}
+.hx-copy>p{margin-top:16px;color:var(--hx-soft);font-size:15.5px;max-width:436px}
+.hx-hero .hx-note{margin-top:20px;font-size:13.5px;font-weight:500;color:var(--ink);max-width:440px}
+.hx-note i{font-style:normal;font-family:"Do Hyeon";background:var(--yellow);padding:1px 7px;margin-right:7px}
+
+/* 견적서 패널 — 컨테이닝 블록은 .hx-hero(뷰포트 기준). 오른쪽으로 흘러나가 잘리고,
+   왼쪽 끝은 마스크로 배경에 녹아 카피 아래로 들어간다. 카피는 패널 흰 면 위에 인쇄된다. */
+.hx-sheet{
+ --hx-l:640px;   /* 패널 좌변 = 화면중앙 − 640px */
+ --hx-c:10px;    /* 패널 내용 시작 = 화면중앙 + 10px */
+ --hx-f0:-440px; /* 이 지점까지는 완전 투명 */
+ --hx-f1:-160px; /* 이 지점부터 완전 불투명 */
+ position:absolute;z-index:1;top:34px;
+ left:calc(50% - var(--hx-l));right:-210px;
+ background:#fff;border:2.5px solid var(--ink);box-shadow:9px 9px 0 var(--line);cursor:default;
+ -webkit-mask-image:linear-gradient(90deg,transparent 0,transparent calc(var(--hx-l) + var(--hx-f0)),#000 calc(var(--hx-l) + var(--hx-f1)),#000 100%);
+ mask-image:linear-gradient(90deg,transparent 0,transparent calc(var(--hx-l) + var(--hx-f0)),#000 calc(var(--hx-l) + var(--hx-f1)),#000 100%);
+}
+.hx-pad{padding-left:calc(var(--hx-l) + var(--hx-c));padding-right:320px}
+.hx-head{background:var(--ink);color:var(--paper);display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:9px;padding-bottom:9px;font-family:"Do Hyeon";font-size:13px;letter-spacing:.05em}
+.hx-head em{font-style:normal;color:var(--yellow)}
+.hx-demo{background:var(--yellow);color:var(--ink);font-size:11.5px;padding:2px 9px;letter-spacing:.04em;white-space:nowrap}
+.hx-route{padding-top:15px;padding-bottom:13px}
+.hx-route b{display:block;font-family:"Do Hyeon";font-size:18px;font-weight:400}
+.hx-route span{display:block;font-size:12.5px;color:var(--hx-soft);margin-top:3px}
+.hx-row{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding-top:10px;padding-bottom:10px;border-top:2px solid var(--line);transition:background .25s}
+.hx-row:hover{background:#FFF7DA}
+.hx-lb{font-size:14.5px;line-height:1.45}
+.hx-lb i{display:block;font-style:normal;font-size:12px;color:var(--hx-soft);margin-top:1px}
+.hx-am{font-family:"Do Hyeon";font-size:17px;white-space:nowrap}
+.hx-zero .hx-am{background:var(--yellow);padding:1px 8px}
+.hx-total{background:var(--yellow);border-top:2.5px solid var(--ink);display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:11px;padding-bottom:11px}
+.hx-tl{font-family:"Do Hyeon";font-size:15px}
+.hx-roll{display:block;height:var(--hx-lh);overflow:hidden}
+.hx-rollin{display:block}
+.hx-rollin b{display:block;font-family:"Do Hyeon";font-size:25px;font-weight:400;line-height:var(--hx-lh);white-space:nowrap}
+.hx-hero .hx-foot{padding-top:11px;padding-bottom:13px;font-size:12px;color:var(--hx-soft);max-width:none}
+
+@keyframes hx-r1{0%,4%{opacity:0;transform:translateY(9px)}11%,92%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-5px)}}
+@keyframes hx-r2{0%,10%{opacity:0;transform:translateY(9px)}17%,92%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-5px)}}
+@keyframes hx-r3{0%,16%{opacity:0;transform:translateY(9px)}23%,92%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-5px)}}
+@keyframes hx-r4{0%,22%{opacity:0;transform:translateY(9px)}29%,92%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-5px)}}
+@keyframes hx-r5{0%,28%{opacity:0;transform:translateY(9px)}35%,92%{opacity:1;transform:none}97%,100%{opacity:0;transform:translateY(-5px)}}
+@keyframes hx-tot{0%,8%{opacity:0;transform:translateY(8px)}14%,93%{opacity:1;transform:none}97%,100%{opacity:0;transform:none}}
+@keyframes hx-roll{0%,16%{transform:translateY(0)}19%,22%{transform:translateY(calc(var(--hx-lh) * -1))}25%,28%{transform:translateY(calc(var(--hx-lh) * -2))}31%,100%{transform:translateY(calc(var(--hx-lh) * -3))}}
+.hx-r1{animation:hx-r1 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r2{animation:hx-r2 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r3{animation:hx-r3 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r4{animation:hx-r4 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r5{animation:hx-r5 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-total{animation:hx-tot 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-rollin{animation:hx-roll 8s cubic-bezier(.32,.72,0,1) infinite}
+@media(prefers-reduced-motion:reduce){.hx-rollin{transform:translateY(calc(var(--hx-lh) * -3))}}
+
+@media(max-width:1080px){.hx-pad{padding-left:112px;padding-right:74px}.hx-copy{max-width:44vw}}
+@media(max-width:1010px){.hx-copy,.hx-copy>p,.hx-hero .hx-note{max-width:40vw}}
+@media(max-width:860px){
+ .hx-hero{padding:30px 0 44px}
+ .hx-hero .wrap{display:flex;flex-direction:column}
+ .hx-copy{order:1;max-width:none}
+ .hx-sheet{order:2}
+ .hx-copy h1{font-size:clamp(32px,8.2vw,40px)}
+ .hx-copy>p{max-width:none;font-size:14.5px}
+ .hx-hero .hx-note{margin-top:16px;font-size:13px;max-width:none}
+ .hx-hero .wrap{min-height:0}
+ .hx-sheet{position:static;margin:14px -24px 0 0;box-shadow:none}
+ .hx-pad{padding-left:16px;padding-right:20px}
+ :root{--hx-lh:30px}
+ .hx-route b{font-size:16.5px}
+ .hx-lb{font-size:13.5px}
+ .hx-lb i{font-size:11.5px}
+ .hx-am{font-size:15.5px}
+ .hx-rollin b{font-size:21px}
+}
 </style>
 </head>
 <body>
@@ -128,14 +209,28 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 </div></header>
 <div class="hazard" aria-hidden="true"></div>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero"><div class="wrap">
+
+<div class="hx-sheet">
+<div class="hx-head hx-pad"><span>확정 견적서 <em>NB-2609-0142</em></span><span class="hx-demo">데모 화면</span></div>
+<div class="hx-route hx-pad"><b>강북구 미아동 → 노원구 상계동</b><span>가정 포장이사 · 24평 · 9월 12일(토) 07:30 시작</span></div>
+<div class="hx-row hx-pad hx-r1"><span class="hx-lb">기본 이사비<i>4 – 5인 · 5톤 · 포장부터 정리까지</i></span><span class="hx-am">890,000원</span></div>
+<div class="hx-row hx-pad hx-r2"><span class="hx-lb">사다리차<i>출발지 5층 · 도착지 계단 사용</i></span><span class="hx-am">80,000원</span></div>
+<div class="hx-row hx-pad hx-r3"><span class="hx-lb">에어컨 이전 설치<i>벽걸이 1대 · 배관 3m 포함</i></span><span class="hx-am">150,000원</span></div>
+<div class="hx-row hx-pad hx-r4"><span class="hx-lb">폐기물 처리<i>냉장고 1 · 소파 1 · 스티커 대행</i></span><span class="hx-am">50,000원</span></div>
+<div class="hx-row hx-pad hx-r5 hx-zero"><span class="hx-lb">현장 추가 비용<i>대기료 · 박스비 · 수고비 — 받지 않습니다</i></span><span class="hx-am">0원</span></div>
+<div class="hx-total hx-pad"><span class="hx-tl">서명 후 확정 금액</span><span class="hx-roll"><span class="hx-rollin"><b>890,000원</b><b>970,000원</b><b>1,120,000원</b><b>1,170,000원</b></span></span></div>
+<p class="hx-foot hx-pad">부가세 포함 · 계약서에 적힌 이 금액 그대로 청구합니다.</p>
+</div>
+
+<div class="hx-copy">
 <span class="tape">숨은 비용 0원 보장</span>
-<h1 style="margin-top:16px">견적서에 없는 돈,<br><mark>1원도</mark> 안 받습니다</h1>
+<h1>견적서에 없는 돈,<br><mark>1원도</mark> 안 받습니다</h1>
 <p>사다리차비, 박스비, 수고비 — 현장에서 갑자기 붙는 돈 때문에 이사가 무서우셨다면, 네모박스의 확정 견적을 받아보세요.</p>
 <div class="hero-cta"><a class="btn btn-y" href="tel:010-4894-4905">전화 30초 견적</a><a class="btn btn-w" href="#step">절차 보기</a></div>
+<p class="hx-note"><i>지금 보시는 것</i>사진 몇 장이면 30분 안에 받으시는 견적서입니다.</p>
 </div>
-<figure class="hero-img rv"><img src="./assets/hero.jpg" alt="포장 작업"><span class="lb">오늘 작업 2건 완료</span></figure>
+
 </div></section>
 
 <section id="step" style="padding-top:0"><div class="wrap">

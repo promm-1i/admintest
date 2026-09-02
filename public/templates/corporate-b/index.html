@@ -158,6 +158,118 @@ p,li,dd,figcaption{text-wrap:pretty}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 히어로 재구성 — 라이브 콘솔 패널 ===== */
+.hx-hero{position:relative;overflow:hidden;padding:190px 0 78px;min-height:900px;text-align:left}
+.hx-hero .wrap{position:relative}
+.hx-copy{position:relative;z-index:2;max-width:560px}
+.hx-copy h1{font-size:clamp(34px,4.2vw,54px);font-weight:700;letter-spacing:-.03em;line-height:1.18;margin-top:16px}
+.hx-copy .lede{margin:20px 0 0;color:var(--mut);font-size:16px;max-width:450px;font-weight:300}
+.hx-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+.hx-note{margin-top:22px;display:flex;align-items:center;gap:9px;font-size:12px;color:var(--mut)}
+.hx-note i{width:6px;height:6px;border-radius:50%;background:var(--cyan);flex:none;animation:hx-pulse 2.6s ease-in-out infinite}
+@keyframes hx-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.hx-panel{position:absolute;z-index:1;top:300px;left:0;width:calc(100vw + 150px);
+  padding-left:calc(50vw - 80px);padding-right:0;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  background:rgba(14,19,40,.96);overflow:hidden;
+  box-shadow:0 34px 80px -30px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.05);
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.45) 10%,#000 25%);
+  mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.45) 10%,#000 25%)}
+.hx-head{display:flex;align-items:center;gap:7px;padding:13px 0;padding-left:120px;padding-right:170px;border-bottom:1px solid var(--line)}
+.hx-head i{width:9px;height:9px;border-radius:50%;background:#2A3354;flex:none}
+.hx-head .hx-t{margin-left:11px;font-family:"Chakra Petch";font-size:11px;letter-spacing:.14em;color:#A7AFC6}
+.hx-head .hx-live{margin-left:auto;display:flex;align-items:center;gap:7px;font-family:"Chakra Petch";font-size:11px;letter-spacing:.1em;color:var(--cyan)}
+.hx-head .hx-live b{width:7px;height:7px;border-radius:50%;background:var(--cyan);animation:hx-pulse 2.6s ease-in-out infinite}
+.hx-head .hx-dm{margin-left:12px;font-size:10.5px;letter-spacing:.1em;color:var(--mut);border:1px solid var(--line);border-radius:5px;padding:2px 7px}
+
+.hx-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:18px 170px 2px 0}
+.hx-k{border:1px solid var(--line);border-radius:11px;padding:14px 15px;background:var(--card);box-shadow:inset 0 1px 0 rgba(255,255,255,.05)}
+.hx-k .kl{font-size:11.5px;color:var(--mut);letter-spacing:.04em}
+.hx-k .kv{font-family:"Chakra Petch";font-size:25px;font-weight:700;margin-top:7px;line-height:1;display:flex;align-items:flex-end;gap:7px}
+.hx-k .kv em{font-style:normal;font-size:12px;color:var(--cyan);font-family:"IBM Plex Sans KR",sans-serif;font-weight:400;line-height:1.2}
+.hx-k .ks{font-size:11.5px;color:var(--mut);margin-top:9px}
+.hx-roll{display:inline-block;height:1em;line-height:1;overflow:hidden}
+.hx-roll>span{display:block;line-height:1;animation:hx-roll 8s cubic-bezier(.5,0,.2,1) infinite}
+.hx-roll>span>span{display:block;line-height:1}
+@keyframes hx-roll{0%,20%{transform:translateY(0)}25%,45%{transform:translateY(-1em)}50%,70%{transform:translateY(-2em)}75%,95%{transform:translateY(-3em)}100%{transform:translateY(-4em)}}
+.hx-spark{width:100%;height:34px;margin-top:8px;display:block}
+.hx-spark path{stroke:var(--cyan);stroke-width:2;fill:none}
+.hx-spark .f{fill:rgba(65,214,195,.14);stroke:none}
+
+.hx-tools{display:flex;align-items:center;gap:10px;padding:18px 170px 10px 0}
+.hx-seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.hx-seg span{font-size:11.5px;padding:6px 13px;color:var(--mut)}
+.hx-seg span+span{border-left:1px solid var(--line)}
+.hx-seg .on{background:rgba(91,140,255,.2);color:#DCE6FF}
+.hx-tools .hx-cnt{margin-left:auto;font-size:11.5px;color:var(--mut)}
+
+.hx-hd,.hx-row{display:grid;grid-template-columns:1.5fr .74fr .74fr .9fr .72fr 250px;gap:12px;align-items:center}
+.hx-hd{font-size:11px;letter-spacing:.06em;color:var(--mut);padding:9px 10px;border-bottom:1px solid var(--line)}
+.hx-row{padding:11px 10px;font-size:13px;border-bottom:1px dashed var(--line);border-radius:8px;
+  animation:hx-rowin 8s cubic-bezier(.32,.72,0,1) infinite;transition:background .25s}
+.hx-row:hover{background:rgba(91,140,255,.11)}
+.hx-row .rn{color:var(--ink);font-weight:500}
+.hx-row .rv2,.hx-row .rc{font-family:"Chakra Petch";color:#C9D0E6}
+.hx-row .rt{font-size:12px;color:var(--mut)}
+.hx-row .rb{display:block;width:100%;height:24px}
+.hx-row .rb path{fill:none;stroke:rgba(91,140,255,.8);stroke-width:1.8;stroke-linejoin:round;stroke-linecap:round}
+.hx-row .st-wn~.rb path{stroke:rgba(255,148,87,.85)}
+.hx-row .rs{display:flex;align-items:center;gap:7px;font-size:12.5px}
+.hx-row .rs i{width:7px;height:7px;border-radius:50%;flex:none}
+.hx-row .st-ok{color:#9FE9DC}.hx-row .st-ok i{background:var(--cyan)}
+.hx-row .st-chk{color:#C9B8FF}.hx-row .st-chk i{background:var(--violet)}
+.hx-row .st-wn{color:#FFC49E}.hx-row .st-wn i{background:#FF9457}
+@keyframes hx-rowin{0%{opacity:0;transform:translateY(9px)}6%,95%{opacity:1;transform:none}100%{opacity:0;transform:translateY(9px)}}
+.hx-foot{padding:13px 170px 13px 0;border-top:1px solid var(--line);font-size:11.5px;color:var(--mut)}
+
+@media(max-width:1250px){
+  .hx-hero{padding-top:150px;min-height:840px}
+  .hx-copy h1{font-size:40px}
+  .hx-copy .lede{max-width:330px;font-size:15px}
+  .hx-panel{top:250px;padding-left:calc(50vw - 130px)}
+  .hx-head{padding-left:90px;padding-right:120px}
+  .hx-kpis,.hx-tools,.hx-foot{padding-right:120px}
+  .hx-hd,.hx-row{grid-template-columns:1.4fr .7fr .7fr .9fr .7fr 200px}
+}
+@media(max-width:900px){
+  .hx-hero{position:relative;padding:100px 0 64px;min-height:0}
+  .hx-copy{max-width:none}
+  .hx-copy h1{font-size:clamp(30px,8vw,38px)}
+  .hx-copy .lede{max-width:none;font-size:15px}
+  .hx-cta{margin-top:24px;gap:10px}
+  .hx-cta .btn-g,.hx-cta .btn-o{padding:13px 22px;font-size:14px}
+  .hx-note{margin-top:14px;font-size:11.5px;align-items:flex-start;line-height:1.55}
+  .hx-note i{margin-top:6px}
+  .hx-panel{position:static;width:auto;padding:0 14px;margin-top:26px;border:1px solid var(--line);border-radius:14px;
+    -webkit-mask-image:none;mask-image:none}
+  .hx-head{padding:11px 0}
+  .hx-kpis,.hx-tools,.hx-foot{padding-right:0}
+  .hx-row .rb{display:none}
+  .hx-head .hx-dm{display:none}
+  .hx-kpis{grid-template-columns:1fr 1fr;gap:10px;padding:14px 0 2px}
+  .hx-k{padding:12px 13px}
+  .hx-k .kv{font-size:21px}
+  .hx-k:nth-child(3){grid-column:span 2;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:12px}
+  .hx-k:nth-child(3) .kv{grid-column:2;grid-row:1/3;margin-top:0;font-size:20px}
+  .hx-k:nth-child(3) .ks{margin-top:3px}
+  .hx-tools{padding:14px 0 8px}
+  .hx-seg span{padding:6px 10px;font-size:11px}
+  .hx-hd{display:none}
+  .hx-row{grid-template-columns:1fr auto auto;grid-template-areas:"n n s" "v c t";row-gap:4px;padding:10px 6px;font-size:13px}
+  .hx-row .rn{grid-area:n}.hx-row .rs{grid-area:s}.hx-row .rv2{grid-area:v}.hx-row .rc{grid-area:c}.hx-row .rt{grid-area:t;text-align:right}
+  .hx-row .rv2,.hx-row .rc{font-size:12px}
+  .hx-row .rv2::before{content:"가동 ";font-family:"IBM Plex Sans KR",sans-serif;color:var(--mut)}
+  .hx-row .rc::before{content:"사이클 ";font-family:"IBM Plex Sans KR",sans-serif;color:var(--mut)}
+  .hx-tbl .hx-row:last-child{display:none}
+  .hx-foot{padding:11px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  .hx-row{animation:none;opacity:1;transform:none}
+  .hx-roll>span{animation:none;transform:translateY(-2em)}
+  .hx-note i,.hx-head .hx-live b{animation:none}
+}
 </style>
 </head>
 <body>
@@ -174,44 +286,59 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
   </div>
 </header>
 
-<section class="hero">
-  <div class="orb orb1"></div><div class="orb orb2"></div>
+<section class="hx-hero">
   <div class="wrap">
-    <p class="kicker en">B2B PROCESS AUTOMATION</p>
-    <h1 style="margin-top:16px">제조 현장의 데이터를<br><span class="grad-text">실시간 이익으로</span></h1>
-    <p class="lede">넥스플로우는 공정 데이터 수집부터 불량 예측까지, 중견 제조사를 위한 스마트팩토리 솔루션을 만듭니다.</p>
-    <div class="hero-cta">
-      <a class="btn-g" href="tel:010-4894-4905">도입 상담 신청</a>
-      <a class="btn-o" href="#product">솔루션 살펴보기</a>
+    <div class="hx-copy">
+      <p class="kicker en">B2B PROCESS AUTOMATION</p>
+      <h1>제조 현장의 데이터를<br><span class="grad-text">실시간 이익으로</span></h1>
+      <p class="lede">넥스플로우는 공정 데이터 수집부터 불량 예측까지, 중견 제조사를 위한 스마트팩토리 솔루션을 만듭니다.</p>
+      <div class="hx-cta">
+        <a class="btn-g" href="tel:010-4894-4905">도입 상담 신청</a>
+        <a class="btn-o" href="#product">솔루션 살펴보기</a>
+      </div>
+      <p class="hx-note"><i></i>실제 운영 화면과 같은 구성으로 만든 데모 콘솔입니다.</p>
     </div>
-    <div class="dash rv">
-      <div class="dash-bar"><i></i><i></i><i></i><span>NEXFLOW CONSOLE — LIVE</span></div>
-      <div class="dash-body">
-        <div class="tile">
-          <p class="tl">이번 주 공정 가동률</p>
-          <p class="tv en">96.4% <em>▲ 1.2%p</em></p>
-          <div class="bars" aria-hidden="true">
-            <i style="height:46%;animation-delay:.05s"></i><i style="height:62%;animation-delay:.1s"></i><i style="height:55%;animation-delay:.15s"></i><i style="height:74%;animation-delay:.2s"></i><i style="height:68%;animation-delay:.25s"></i><i style="height:88%;animation-delay:.3s"></i><i style="height:96%;animation-delay:.35s"></i>
-          </div>
-        </div>
-        <div class="tile">
-          <p class="tl">불량률 추이</p>
-          <p class="tv en">0.31%</p>
-          <svg class="spark" viewBox="0 0 160 60" aria-hidden="true">
-            <path class="fill" d="M0,26 C24,20 40,38 62,30 S104,10 128,16 L160,10 L160,60 L0,60 Z"/>
-            <path d="M0,26 C24,20 40,38 62,30 S104,10 128,16 L160,10"/>
-          </svg> </div>
-        <div class="tile">
-          <p class="tl">라인별 상태</p>
-          <div style="margin-top:10px">
-            <div class="rowline"><span>1공장 프레스</span><b>정상</b></div>
-            <div class="rowline"><span>2공장 사출 A</span><b>정상</b></div>
-            <div class="rowline"><span>2공장 사출 B</span><b style="color:var(--cyan)">점검 예정</b></div>
-            <div class="rowline"><span>도장 라인</span><b>정상</b></div>
-          </div>
-        </div>
+  </div>
+  <div class="hx-panel" aria-label="넥스플로우 콘솔 데모 화면">
+    <div class="hx-head">
+      <i></i><i></i><i></i>
+      <span class="hx-t">NEXFLOW CONSOLE</span>
+      <span class="hx-live en"><b></b>LIVE</span>
+      <span class="hx-dm">데모 데이터</span>
+    </div>
+    <div class="hx-kpis">
+      <div class="hx-k">
+        <p class="kl">라인 가동률</p>
+        <p class="kv en"><span class="hx-roll" aria-hidden="true"><span><span>96.1</span><span>96.3</span><span>96.4</span><span>96.5</span><span>96.1</span></span></span>%<em>▲ 1.2%p</em></p>
+        <p class="ks">지난주 대비 상승</p>
+      </div>
+      <div class="hx-k">
+        <p class="kl">불량률</p>
+        <p class="kv en">0.31%</p>
+        <svg class="hx-spark" viewBox="0 0 160 40" preserveAspectRatio="none" aria-hidden="true">
+          <path class="f" d="M0,18 C24,13 40,27 62,21 S104,7 128,11 L160,6 L160,40 L0,40 Z"/>
+          <path d="M0,18 C24,13 40,27 62,21 S104,7 128,11 L160,6"/>
+        </svg>
+      </div>
+      <div class="hx-k">
+        <p class="kl">불량 예측 경고</p>
+        <p class="kv en">40<em>분 먼저</em></p>
+        <p class="ks">오늘 2건 사전 통보</p>
       </div>
     </div>
+    <div class="hx-tools">
+      <div class="hx-seg"><span class="on">오늘</span><span>이번 주</span><span>이번 달</span></div>
+      <span class="hx-cnt">설비 128대 · 3초마다 자동 갱신</span>
+    </div>
+    <div class="hx-tbl">
+      <div class="hx-hd"><span>라인</span><span>가동률</span><span>사이클</span><span>상태</span><span>갱신</span><span>지난 8시간</span></div>
+      <div class="hx-row" style="animation-delay:0s"><span class="rn">1공장 프레스</span><span class="rv2 en">98.2%</span><span class="rc en">12.4s</span><span class="rs st-ok"><i></i>정상</span><span class="rt en">3초 전</span><svg class="rb" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0,16 L17,12 L34,17 L51,9 L68,13 L85,6 L102,10 L120,4"/></svg></div>
+      <div class="hx-row" style="animation-delay:.3s"><span class="rn">2공장 사출 A</span><span class="rv2 en">96.8%</span><span class="rc en">22.1s</span><span class="rs st-ok"><i></i>정상</span><span class="rt en">3초 전</span><svg class="rb" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0,14 L17,10 L34,13 L51,17 L68,9 L85,12 L102,7 L120,10"/></svg></div>
+      <div class="hx-row" style="animation-delay:.6s"><span class="rn">2공장 사출 B</span><span class="rv2 en">91.4%</span><span class="rc en">24.7s</span><span class="rs st-chk"><i></i>점검 예정</span><span class="rt en">5초 전</span><svg class="rb" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0,8 L17,12 L34,10 L51,15 L68,18 L85,14 L102,19 L120,22"/></svg></div>
+      <div class="hx-row" style="animation-delay:.9s"><span class="rn">도장 라인</span><span class="rv2 en">97.5%</span><span class="rc en">31.0s</span><span class="rs st-ok"><i></i>정상</span><span class="rt en">4초 전</span><svg class="rb" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0,15 L17,11 L34,8 L51,12 L68,9 L85,6 L102,11 L120,5"/></svg></div>
+      <div class="hx-row" style="animation-delay:1.2s"><span class="rn">조립 2라인</span><span class="rv2 en">94.1%</span><span class="rc en">18.6s</span><span class="rs st-wn"><i></i>불량 경고</span><span class="rt en">1초 전</span><svg class="rb" viewBox="0 0 120 26" preserveAspectRatio="none" aria-hidden="true"><path vector-effect="non-scaling-stroke" d="M0,12 L17,9 L34,14 L51,10 L68,16 L85,19 L102,13 L120,20"/></svg></div>
+    </div>
+    <p class="hx-foot">화면은 데모 데이터입니다. 실제 콘솔은 설비 구성에 맞춰 항목을 구성합니다.</p>
   </div>
 </section>
 

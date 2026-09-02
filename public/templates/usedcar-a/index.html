@@ -95,6 +95,67 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ── 히어로 재설계: 실차 컷 미리보기 ─────────────────────────── */
+.hx-hero{position:relative;overflow:hidden;padding:64px 0 70px}
+.hx-hero .wrap{display:block;position:relative}
+.hx-hero .hx-copy,.hx-hero .hx-list,.hx-hero .hx-hint,.hx-hero .hero-cta,.hx-hero .trust{position:relative;z-index:2}
+.hx-hero p.hx-lead{margin-top:14px;color:var(--soft);font-size:15px;max-width:430px}
+
+.hx-stage{position:absolute;top:0;bottom:0;z-index:0;
+ left:calc(50% - 42px);right:calc((100% - 100vw)/2 - 56px);
+ -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.4) 13%,#000 36%);
+ mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.4) 13%,#000 36%)}
+.hx-shot{position:absolute;inset:0;opacity:0;transition:opacity .22s linear}
+.hx-shot.is-on{opacity:1}
+.hx-shot img{width:100%;height:100%;object-fit:cover;object-position:50% 52%}
+.hx-plate{position:absolute;right:clamp(18px,6vw,104px);bottom:38px;z-index:3;
+ background:#fff;border-radius:12px;padding:11px 17px;max-width:270px;
+ box-shadow:0 12px 30px rgba(24,36,32,.22)}
+.hx-hero .hx-plate{margin:0}
+.hx-plate b{display:block;font-size:14px;font-weight:900;color:var(--ink);line-height:1.4}
+.hx-plate span{display:block;margin-top:3px;font-size:11.5px;font-weight:700;color:#4C5F55;line-height:1.5}
+.hx-plate i{font-style:normal;color:var(--green)}
+
+.hx-list{list-style:none;margin-top:22px;display:grid;gap:8px;width:min(560px,100%)}
+.hx-row{display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;width:100%;
+ text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;
+ font-family:inherit;color:inherit;cursor:pointer;
+ transition:transform .22s cubic-bezier(.32,.72,0,1),border-color .22s,box-shadow .22s}
+.hx-nm{display:block;font-size:14.5px;font-weight:900;letter-spacing:-.01em}
+.hx-sp{display:block;font-size:11.5px;font-weight:500;color:#4C5F55;margin-top:1px}
+.hx-pz{font-size:16px;font-weight:900;color:var(--deep);white-space:nowrap}
+.hx-pz i{font-style:normal;font-size:11px;font-weight:700;color:#4C5F55;margin-left:2px}
+.hx-row.is-on{border-color:var(--green);box-shadow:0 14px 28px -18px rgba(24,36,32,.5);transform:translateX(6px)}
+.hx-row:hover{border-color:var(--green)}
+.hx-hero .hx-hint{margin-top:12px;font-size:11.5px;font-weight:700;color:#4C5F55;max-width:470px}
+.hx-hero .hero-cta{margin-top:20px}
+.hx-hero .trust{margin-top:18px}
+
+@media(max-width:900px){
+ .hx-hero{padding:22px 0 36px}
+ .hx-hero h1{font-size:27px;line-height:1.35}
+ .hx-hero p.hx-lead{margin-top:10px;font-size:13px;line-height:1.6;max-width:none}
+ .hx-stage{position:relative;inset:auto;left:auto;right:auto;height:148px;
+  margin:13px -24px 0 0;border-radius:14px 0 0 14px;overflow:hidden;
+  -webkit-mask-image:none;mask-image:none}
+ .hx-shot img{object-position:50% 44%}
+ .hx-plate{left:0;right:0;bottom:0;padding:8px 14px 9px;max-width:none;border-radius:0;
+  background:rgba(255,255,255,.96);box-shadow:none}
+ .hx-plate b{font-size:12.5px}
+ .hx-plate span{font-size:10.5px}
+ .hx-list{margin-top:11px;gap:6px;width:100%}
+ .hx-row{padding:6px 13px;border-radius:10px}
+ .hx-nm{font-size:13px}
+ .hx-sp{font-size:10.5px}
+ .hx-pz{font-size:14px}
+ .hx-row.is-on{transform:none}
+ .hx-hero .hx-hint{margin-top:8px;font-size:10.5px}
+ .hx-hero .hero-cta{margin-top:12px;gap:8px}
+ .hx-hero .hero-cta .btn{padding:12px 22px;font-size:13.5px}
+ .hx-hero .trust{margin-top:14px}
+}
+@media(prefers-reduced-motion:reduce){.hx-shot{transition:none}}
 </style>
 </head>
 <body>
@@ -105,15 +166,30 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">방문 상담</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero"><div class="wrap">
+<div class="hx-copy">
 <span class="kicker">허위매물 0% 운영 8년째</span>
 <h1 style="margin-top:16px">사진과 다르면,<br><em>차비까지 물어드립니다</em></h1>
-<p>중고차의 무서움은 차가 아니라 사람이죠. 믿을차는 모든 매물의 성능점검기록부와 실사진 40장을 그대로 공개합니다.</p>
+<p class="hx-lead">중고차의 무서움은 차가 아니라 사람이죠. 믿을차는 모든 매물의 성능점검기록부와 실사진 40장을 그대로 공개합니다.</p>
+</div>
+
+<div class="hx-stage" id="hxStage">
+<div class="hx-shot is-on"><img src="./assets/car-1.jpg" alt="아반떼 CN7 인스퍼레이션 실차 사진"></div>
+<div class="hx-shot"><img src="./assets/car-2.jpg" alt="쏘나타 DN8 하이브리드 실차 사진"></div>
+<div class="hx-shot"><img src="./assets/car-3.jpg" alt="그랜저 GN7 프리미엄 실차 사진"></div>
+<div class="hx-shot"><img src="./assets/car-4.jpg" alt="쏘렌토 MQ4 디젤 실차 사진"></div>
+<p class="hx-plate"><b id="hxName">아반떼 CN7 인스퍼레이션</b><span id="hxMeta">실차 사진 <i>40장</i> · 성능점검기록부 공개</span></p>
+</div>
+
+<ul class="hx-list" id="hxList">
+<li><button type="button" class="hx-row is-on" data-i="0" data-meta="실차 사진 <i>40장</i> · 성능점검기록부 공개"><span><span class="hx-nm">아반떼 CN7 인스퍼레이션</span><span class="hx-sp">21년식 · 3.2만km · 가솔린 · 무사고</span></span><span class="hx-pz">1,890<i>만원</i></span></button></li>
+<li><button type="button" class="hx-row" data-i="1" data-meta="실차 사진 <i>44장</i> · 보증 6개월"><span><span class="hx-nm">쏘나타 DN8 하이브리드</span><span class="hx-sp">22년식 · 4.1만km · HEV · 무사고</span></span><span class="hx-pz">2,450<i>만원</i></span></button></li>
+<li><button type="button" class="hx-row" data-i="2" data-meta="실차 사진 <i>52장</i> · 정비 완료"><span><span class="hx-nm">그랜저 GN7 프리미엄</span><span class="hx-sp">23년식 · 2.7만km · 가솔린 · 단순교환</span></span><span class="hx-pz">3,380<i>만원</i></span></button></li>
+<li><button type="button" class="hx-row" data-i="3" data-meta="실차 사진 <i>41장</i> · 하부 컷 포함"><span><span class="hx-nm">쏘렌토 MQ4 디젤</span><span class="hx-sp">21년식 · 5.8만km · 디젤 · 4WD</span></span><span class="hx-pz">2,940<i>만원</i></span></button></li>
+</ul>
+<p class="hx-hint">목록에 올리면 그 차의 실차 컷으로 바뀝니다 · 이번 주 입고 7대 · 데모 화면</p>
 <div class="hero-cta"><a class="btn btn-g" href="tel:010-4894-4905">방문 상담 예약</a><a class="btn btn-w" href="#cars">매물 보기</a></div>
 <div class="trust"><span><b>✓</b>성능점검기록부 전량 공개</span><span><b>✓</b>주행거리 보증</span><span><b>✓</b>30일 환불제</span></div>
-</div>
-<figure class="hero-img rv"><img src="./assets/hero.jpg" alt="전시장 차량"><span class="chip">이번 주 입고 <b>7대</b></span></figure>
 </div></section>
 
 <section id="cars" style="padding-top:0"><div class="wrap">
@@ -162,6 +238,33 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
 const _rvs=[...document.querySelectorAll('.rv')];
 _rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
+</script>
+
+<script>
+(function(){
+ const list=document.getElementById('hxList');if(!list)return;
+ const rows=[...list.querySelectorAll('.hx-row')];
+ const shots=[...document.querySelectorAll('.hx-shot')];
+ const nameEl=document.getElementById('hxName'), metaEl=document.getElementById('hxMeta');
+ let cur=0,timer=null;
+ const still=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function show(i){
+  if(i===cur)return;cur=i;
+  shots.forEach((s,n)=>s.classList.toggle('is-on',n===i));
+  rows.forEach((r,n)=>r.classList.toggle('is-on',n===i));
+  nameEl.textContent=rows[i].querySelector('.hx-nm').textContent;
+  metaEl.innerHTML=rows[i].dataset.meta;
+ }
+ function play(){if(still||timer)return;timer=setInterval(()=>show((cur+1)%rows.length),3500);}
+ function stop(){clearInterval(timer);timer=null;}
+ rows.forEach((r,i)=>{
+  r.addEventListener('mouseenter',()=>{stop();show(i)});
+  r.addEventListener('focus',()=>{stop();show(i)});
+  r.addEventListener('click',()=>{stop();show(i);setTimeout(play,6000)});
+ });
+ list.addEventListener('mouseleave',play);
+ play();
+})();
 </script>
 </body>
 </html>

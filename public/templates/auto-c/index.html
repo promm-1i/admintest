@@ -82,6 +82,99 @@ footer b{color:#fff}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx : 히어로 — 정찰 요금 조회 화면 ===== */
+.hero.hx-hero{background:var(--sky);padding:70px 0 66px;text-align:left;position:relative;overflow:hidden}
+.hx-inner{position:relative;min-height:492px}
+.hx-copy{position:relative;z-index:3;max-width:470px;padding-top:14px}
+.hero.hx-hero h1{font-size:clamp(28px,3.2vw,40px);line-height:1.34;margin-top:18px}
+.hero.hx-hero p.hx-lead{margin:16px 0 0;max-width:430px;font-size:15px;color:#566072}
+.hero.hx-hero .kicker{background:#fff}
+.hero.hx-hero .hx-cta{margin-top:26px;display:flex;gap:10px;justify-content:flex-start;flex-wrap:wrap}
+.hx-prom{position:relative;z-index:3;margin-top:28px;max-width:470px;display:flex;flex-wrap:wrap;gap:8px}
+.hx-prom span{background:#fff;border:1.5px solid var(--line);border-radius:99px;padding:9px 15px;font-size:12.5px;font-weight:700;color:var(--ink)}
+.hx-prom b{color:var(--ok);margin-right:5px}
+
+/* 패널 — 뷰포트 오른쪽 밖으로 흘러나가고 왼쪽 끝은 배경에 녹는다 */
+.hx-panel{--pl:78px;--pr:100px;position:absolute;top:2px;left:calc(50% - 104px);right:min(-72px,calc(448px - 50vw));z-index:1;
+  background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:0 16px 40px rgba(23,32,46,.09);
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,1) 70px,rgba(0,0,0,1) 100%);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,0) 0,rgba(0,0,0,1) 70px,rgba(0,0,0,1) 100%)}
+.hx-pbar{display:flex;align-items:center;gap:10px;padding:13px var(--pr) 13px var(--pl);border-bottom:1px solid var(--line)}
+.hx-dots{display:flex;gap:5px}
+.hx-dots i{width:8px;height:8px;border-radius:50%;background:var(--line);display:block}
+.hx-ptit{font-size:13px;font-weight:900;letter-spacing:-.01em}
+.hx-demo{margin-left:auto;font-size:11.5px;font-weight:900;color:var(--ink);background:var(--sky);border-radius:99px;padding:4px 11px}
+.hx-filters{display:flex;align-items:center;gap:7px;padding:14px var(--pr) 12px var(--pl);flex-wrap:wrap}
+.hx-flabel{font-size:12px;font-weight:700;color:var(--soft);margin-right:2px}
+.hx-chip{font-size:12.5px;font-weight:700;color:var(--ink);border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:5px 12px}
+.hx-chip-on{background:var(--blue);border-color:var(--blue);color:#fff;font-weight:900;
+  animation:hx-chip 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-head,.hx-row{display:grid;grid-template-columns:1fr 108px 104px;gap:12px;align-items:center;padding:0 var(--pr) 0 var(--pl)}
+.hx-head{height:34px;background:var(--ink);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.06em;
+  -webkit-mask-image:linear-gradient(90deg,rgba(0,0,0,0) 22px,rgba(0,0,0,1) 72px);
+  mask-image:linear-gradient(90deg,rgba(0,0,0,0) 22px,rgba(0,0,0,1) 72px)}
+.hx-head span:nth-child(2),.hx-head span:nth-child(3),.hx-row .hx-time,.hx-row .hx-won{text-align:right}
+.hx-row{height:52px;border-top:1px solid var(--line);cursor:default;transition:background .18s ease}
+.hx-row:first-child{border-top:0}
+.hx-row:hover{background:var(--sky)}
+.hx-job{font-size:14px;font-weight:900;letter-spacing:-.01em}
+.hx-job em{display:none}
+.hx-time{font-size:12.5px;color:var(--soft)}
+.hx-won{font-size:14.5px;font-weight:900;color:var(--blue);white-space:nowrap}
+.hx-foot{border-top:1.5px solid var(--line);background:#FBFCFE;padding:13px var(--pr) 14px var(--pl)}
+.hx-sum{display:flex;align-items:center;gap:10px;animation:hx-sumfade 8s linear infinite}
+.hx-sumlabel{font-size:12.5px;font-weight:700;color:var(--soft)}
+.hx-sumbox{display:block;margin-left:auto;height:26px;overflow:hidden}
+.hx-sumroll{display:block;transform:translateY(-130px);animation:hx-sum 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-sumroll b{display:block;height:26px;line-height:26px;font-size:17px;font-weight:900;color:var(--blue)}
+.hero.hx-hero .hx-panel .hx-note{margin:7px 0 0;max-width:none;font-size:11.5px;color:var(--soft)}
+.hero.hx-hero .hx-panel .hx-more{display:none;margin:5px 0 0;max-width:none;font-size:11.5px;color:var(--soft)}
+
+.hx-row{opacity:1}
+@keyframes hx-r1{0%,4%{opacity:0;transform:translateY(12px)}10%,92%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes hx-r2{0%,8%{opacity:0;transform:translateY(12px)}14%,92%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes hx-r3{0%,12%{opacity:0;transform:translateY(12px)}18%,92%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes hx-r4{0%,16%{opacity:0;transform:translateY(12px)}22%,92%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+@keyframes hx-r5{0%,20%{opacity:0;transform:translateY(12px)}26%,92%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
+.hx-r1{animation:hx-r1 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r2{animation:hx-r2 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r3{animation:hx-r3 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r4{animation:hx-r4 8s cubic-bezier(.32,.72,0,1) infinite}
+.hx-r5{animation:hx-r5 8s cubic-bezier(.32,.72,0,1) infinite}
+@keyframes hx-chip{0%,3%{opacity:.35;transform:translateY(3px)}8%,100%{opacity:1;transform:none}}
+@keyframes hx-sum{0%,9%{transform:translateY(0)}12%,13%{transform:translateY(-26px)}
+ 16%,17%{transform:translateY(-52px)}20%,21%{transform:translateY(-78px)}
+ 24%,25%{transform:translateY(-104px)}28%,95%{transform:translateY(-130px)}100%{transform:translateY(0)}}
+@keyframes hx-sumfade{0%,92%{opacity:1}94%,97%{opacity:0}100%{opacity:1}}
+
+@media(max-width:1180px){.hero.hx-hero h1{font-size:clamp(28px,3vw,40px)}}
+@media(max-width:1000px){.hx-panel{--pl:66px;--pr:84px;left:calc(50% - 70px)}.hx-copy,.hx-prom{max-width:420px}}
+@media(max-width:900px){
+ .hero.hx-hero{padding:34px 0 40px}
+ .hx-inner{min-height:0;display:flex;flex-direction:column}
+ .hx-copy{max-width:none;order:1}
+ .hero.hx-hero h1{font-size:27px;line-height:1.36;margin-top:14px}
+ .hero.hx-hero p.hx-lead{font-size:14px;margin-top:12px;max-width:none}
+ .hero.hx-hero .hx-cta{margin-top:20px}
+ .hero.hx-hero .hx-cta .btn{padding:13px 22px;font-size:14px}
+ .hx-prom{order:2;margin-top:16px;gap:6px;max-width:none}
+ .hx-prom span{border:0;background:transparent;padding:0;font-size:12.5px;color:var(--soft)}
+ .hx-panel{--pl:16px;--pr:16px;order:3;position:static;margin:20px -22px 0 0;width:calc(100% + 22px);
+  -webkit-mask-image:none;mask-image:none;border-radius:12px 0 0 12px;border-right:0}
+ .hx-pbar{padding:11px 16px}
+ .hx-filters{padding:12px 16px 10px}
+ .hx-head,.hx-row{grid-template-columns:1fr 104px;gap:8px;padding:0 16px}
+ .hx-head{-webkit-mask-image:none;mask-image:none}
+ .hx-head span:nth-child(2){display:none}
+ .hx-row .hx-time{display:none}
+ .hx-job em{display:block;font-style:normal;font-size:11.5px;font-weight:500;color:var(--soft);line-height:1.4}
+ .hx-row{height:56px}
+ .hx-r5{display:none}
+ .hx-foot{padding:12px 16px 13px}
+ .hero.hx-hero .hx-panel .hx-more{display:block}
+}
 </style>
 </head>
 <body>
@@ -92,16 +185,33 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905"><svg class="nq" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h3l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v3a2 2 0 0 1-2.2 2A16 16 0 0 1 4 5.2 2 2 0 0 1 6 3Z"/></svg> 예약하기</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
+<section class="hero hx-hero"><div class="wrap hx-inner">
+
+<div class="hx-copy">
 <span class="kicker">100% 정찰제 · 100% 예약제</span>
-<h1 style="margin-top:18px">정비 몰라도 괜찮아요,<br><em>가격표가 다 말해줍니다</em></h1>
-<p>부르는 게 값인 정비는 이제 그만. 바로카는 모든 작업이 정찰제라 전화 전에 이미 가격을 알 수 있습니다.</p>
-<div class="hero-cta"><a class="btn btn-b" href="tel:010-4894-4905">정비 예약하기</a><a class="btn btn-w" href="#price">요금표 먼저 보기</a></div>
-<div class="prom"><span><b>✓</b>과잉정비 시 전액 환불</span><span><b>✓</b>교체 부품 실물 확인</span><span><b>✓</b>여성 고객 동일 견적 보장</span></div>
-<div class="photo-band rv">
-<figure><img src="./assets/1.jpg" alt="정비 작업"><figcaption>국가공인 정비 자격 보유</figcaption></figure>
-<figure><img src="./assets/2.jpg" alt="정비사"><figcaption>대표가 직접 정비합니다</figcaption></figure>
+<h1>정비 몰라도 괜찮아요,<br><em>가격표가 다 말해줍니다</em></h1>
+<p class="hx-lead">부르는 게 값인 정비는 이제 그만. 바로카는 모든 작업이 정찰제라 전화 전에 이미 가격을 알 수 있습니다.</p>
+<div class="hx-cta"><a class="btn btn-b" href="tel:010-4894-4905">정비 예약하기</a><a class="btn btn-w" href="#price">요금표 먼저 보기</a></div>
 </div>
+
+<div class="hx-panel">
+  <div class="hx-pbar"><span class="hx-dots"><i></i><i></i><i></i></span><span class="hx-ptit">정찰 요금 조회</span><span class="hx-demo">데모 화면</span></div>
+  <div class="hx-filters"><span class="hx-flabel">내 차</span><span class="hx-chip hx-chip-on">아반떼 CN7</span><span class="hx-chip">가솔린 1.6</span><span class="hx-chip">2021년식</span><span class="hx-chip">주행 62,000km</span></div>
+  <div class="hx-head"><span>작업 항목</span><span>소요 시간</span><span>공임 포함</span></div>
+  <div class="hx-row hx-r1"><span class="hx-job">엔진오일 + 필터<em>약 20분 · 대기 가능</em></span><span class="hx-time">약 20분</span><span class="hx-won">49,000원</span></div>
+  <div class="hx-row hx-r2"><span class="hx-job">타이어 위치 교환 + 공기압<em>약 15분</em></span><span class="hx-time">약 15분</span><span class="hx-won">15,000원</span></div>
+  <div class="hx-row hx-r3"><span class="hx-job">브레이크 패드 (앞)<em>약 40분</em></span><span class="hx-time">약 40분</span><span class="hx-won">88,000원</span></div>
+  <div class="hx-row hx-r4"><span class="hx-job">에어컨 필터 + 살균<em>약 15분</em></span><span class="hx-time">약 15분</span><span class="hx-won">35,000원</span></div>
+  <div class="hx-row hx-r5"><span class="hx-job">계절 점검 패키지<em>약 30분 · 12개 항목</em></span><span class="hx-time">약 30분</span><span class="hx-won">29,000원</span></div>
+  <div class="hx-foot">
+    <div class="hx-sum"><span class="hx-sumlabel">5개 항목 모두 받으면</span><span class="hx-sumbox"><span class="hx-sumroll"><b>0원</b><b>49,000원</b><b>64,000원</b><b>152,000원</b><b>187,000원</b><b>216,000원</b></span></span></div>
+    <p class="hx-more">계절 점검 패키지 12개 항목 29,000원 포함</p>
+    <p class="hx-note">화면은 요금 안내 예시입니다 · 실제 접수는 전화로 도와드립니다</p>
+  </div>
+</div>
+
+<div class="hx-prom"><span><b>✓</b>과잉정비 시 전액 환불</span><span><b>✓</b>교체 부품 실물 확인</span><span><b>✓</b>여성 고객 동일 견적 보장</span></div>
+
 </div></section>
 
 <section id="price" style="padding-top:0"><div class="wrap">

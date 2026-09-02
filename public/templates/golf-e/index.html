@@ -89,6 +89,63 @@ footer b{color:var(--cream)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== 히어로 재구성 (hx-) : 코스 미리보기 ===== */
+.hx-hero{position:relative;overflow:hidden;text-align:left;padding:52px 0 58px;min-height:588px}
+.hx-hero .wrap{position:relative;z-index:2}
+.hx-stage{position:absolute;top:52px;bottom:52px;left:44%;right:calc(50% - 50vw - 4vw);z-index:1;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.4) 13%,#000 27%);
+  mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.4) 13%,#000 27%)}
+.hx-screen{position:relative;height:100%;border:5px solid var(--green);border-radius:20px;overflow:hidden;background:var(--green)}
+.hx-shots{position:absolute;inset:0}
+.hx-shots img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .22s linear}
+.hx-shots img.on{opacity:1}
+.hx-demo{position:absolute;top:14px;right:calc(14px + 4vw);background:var(--green);color:var(--cream);
+  font-family:"Kirang Haerang";font-size:17px;line-height:1;padding:8px 15px;border-radius:99px}
+.hx-bar{position:absolute;left:0;right:0;bottom:0;background:var(--green);padding:14px 26px 14px 26px;padding-right:calc(26px + 4vw);
+  display:flex;align-items:baseline;justify-content:flex-end;gap:16px;flex-wrap:wrap}
+.hx-bar .nm{font-family:"Kirang Haerang";font-size:27px;color:var(--mustard);line-height:1.2}
+.hx-bar .mt{font-size:13.5px;color:#C6D6CB;font-weight:500}
+.hx-bar .nm,.hx-bar .mt{transition:opacity .22s linear}
+.hx-bar.sw .nm,.hx-bar.sw .mt{opacity:0}
+
+.hx-txt{max-width:490px}
+.hx-hero h1{font-family:"Kirang Haerang";font-size:clamp(33px,3.9vw,52px);line-height:1.22;margin-top:14px;color:var(--green)}
+.hx-hero .hx-lede{margin:12px 0 0;color:#6A5F44;font-size:15px;max-width:430px}
+.hx-list{list-style:none;margin:26px 0 0;max-width:560px;display:grid;gap:7px}
+.hx-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;
+  background:#FBF6E8;border:2px solid var(--line);border-radius:12px;padding:9px 15px;
+  font-family:inherit;color:var(--ink);transition:transform .22s cubic-bezier(.32,.72,0,1)}
+.hx-item .no{font-family:"Kirang Haerang";font-size:19px;color:#6A5F44;min-width:26px}
+.hx-item .cn{font-family:"Kirang Haerang";font-size:21px;line-height:1.25;flex:1}
+.hx-item .yd{font-size:13px;font-weight:500;color:#6A5F44;white-space:nowrap}
+.hx-item:hover{transform:translateX(5px)}
+.hx-item[aria-current="true"]{background:var(--green);border-color:var(--green);color:var(--cream);transform:translateX(5px)}
+.hx-item[aria-current="true"] .no{color:var(--cream)}
+.hx-item[aria-current="true"] .yd{color:#C6D6CB}
+.hx-cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-start}
+
+@media(max-width:1100px){.hx-stage{left:47%;right:-8vw}.hx-txt{max-width:400px}.hx-list{max-width:470px}}
+@media(max-width:860px){
+  .hx-hero{padding:24px 0 34px;min-height:0}
+  .hx-stage{position:static;margin-top:16px;-webkit-mask-image:none;mask-image:none}
+  .hx-screen{aspect-ratio:3/2;border-width:4px;border-radius:16px}
+  .hx-bar{padding:8px 13px;gap:7px;justify-content:flex-start}
+  .hx-bar{padding-right:14px}
+  .hx-bar .nm{font-size:20px}
+  .hx-bar .mt{font-size:12.5px;line-height:1.5}
+  .hx-demo{font-size:15px;padding:6px 12px;top:10px;right:10px!important}
+  .hx-txt,.hx-hero .hx-lede,.hx-list{max-width:none}
+  .hx-list{margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .hx-item{flex-direction:column;align-items:flex-start;gap:0;padding:8px 12px;min-width:0}
+  .hx-item .no{font-size:15px;min-width:0}
+  .hx-item .cn{font-size:17px;width:100%}
+  .hx-item .yd{font-size:12px}
+  .hx-item:hover,.hx-item[aria-current="true"]{transform:none}
+  .hx-cta{margin-top:16px}
+  .hx-cta .btn{font-size:18px;padding:9px 22px}
+}
+@media(prefers-reduced-motion:reduce){.hx-shots img.on{opacity:1}.hx-bar.sw .nm,.hx-bar.sw .mt{opacity:1}}
 </style>
 </head>
 <body>
@@ -99,13 +156,37 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">단체 예약</a>
 </div></header>
 
-<section class="hero argyle"><div class="wrap">
+<section class="hero hx-hero argyle">
+<div class="wrap">
+<div class="hx-txt">
 <span class="tag">동호회 · 회식 · 워크숍 환영</span>
-<h1 style="margin-top:16px">골프는 원래<br><em>같이 하는 운동</em>이죠</h1>
-<p>나인홀은 혼자 연습하는 곳이 아닙니다. 여덟 명이 한 룸에서 웃고 떠들 수 있게 만든 클럽입니다.</p>
-<div class="hero-cta"><a class="btn btn-m" href="tel:010-4894-4905">단체 예약 문의</a><a class="btn btn-c" href="#pkg">패키지 보기</a></div>
-<div class="hero-img rv"><img src="./assets/2.jpg" alt="단체 룸"></div>
-</div></section>
+<h1>골프는 원래<br><em>같이 하는 운동</em>이죠</h1>
+<p class="hx-lede">나인홀은 혼자 연습하는 곳이 아닙니다. 여덟 명이 한 룸에서 웃고 떠들 수 있게 만든 클럽입니다.</p>
+</div>
+
+<div class="hx-stage">
+<div class="hx-screen">
+<div class="hx-shots">
+<img src="./assets/1.jpg" alt="파인비치 링크스 코스 화면" class="on">
+<img src="./assets/2.jpg" alt="오션힐스 오션코스 화면">
+<img src="./assets/3.jpg" alt="세인트나인 동해 코스 화면">
+<img src="./assets/4.jpg" alt="레이크사이드 남코스 화면">
+</div>
+<span class="hx-demo">데모 화면</span>
+<div class="hx-bar"><span class="nm">파인비치 링크스</span><span class="mt">파 72 · 6,842야드 · 18홀 · 바람 2.4m</span></div>
+</div>
+</div>
+
+<ul class="hx-list">
+<li><button type="button" class="hx-item" data-i="0" aria-current="true"><span class="no">01</span><span class="cn">파인비치 링크스</span><span class="yd">6,842야드 · 파 72</span></button></li>
+<li><button type="button" class="hx-item" data-i="1"><span class="no">02</span><span class="cn">오션힐스 오션코스</span><span class="yd">6,410야드 · 파 72</span></button></li>
+<li><button type="button" class="hx-item" data-i="2"><span class="no">03</span><span class="cn">세인트나인 동해</span><span class="yd">6,180야드 · 파 71</span></button></li>
+<li><button type="button" class="hx-item" data-i="3"><span class="no">04</span><span class="cn">레이크사이드 남코스</span><span class="yd">7,010야드 · 파 72</span></button></li>
+</ul>
+
+<div class="hero-cta hx-cta"><a class="btn btn-m" href="tel:010-4894-4905">단체 예약 문의</a><a class="btn btn-c" href="#pkg">패키지 보기</a></div>
+</div>
+</section>
 
 <section id="pkg"><div class="wrap">
 <div class="rv" style="text-align:center"><span class="tag">모임 패키지</span><h2>인원수대로 골라 보세요</h2></div>
@@ -151,6 +232,41 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <script>
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
 const _rvs=[...document.querySelectorAll('.rv')];
+(function(){
+  const items=[...document.querySelectorAll('.hx-item')];
+  const shots=[...document.querySelectorAll('.hx-shots img')];
+  const bar=document.querySelector('.hx-bar');
+  if(!items.length||!shots.length||!bar)return;
+  const nm=bar.querySelector('.nm'),mt=bar.querySelector('.mt');
+  const data=[
+    ['파인비치 링크스','파 72 · 6,842야드 · 18홀 · 바람 2.4m'],
+    ['오션힐스 오션코스','파 72 · 6,410야드 · 18홀 · 바람 3.1m'],
+    ['세인트나인 동해','파 71 · 6,180야드 · 18홀 · 바람 1.8m'],
+    ['레이크사이드 남코스','파 72 · 7,010야드 · 18홀 · 바람 2.0m']
+  ];
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  let cur=0,timer=null;
+  function show(i){
+    if(i===cur)return;
+    cur=i;
+    shots.forEach((s,n)=>s.classList.toggle('on',n===i));
+    items.forEach((b,n)=>b.setAttribute('aria-current',n===i?'true':'false'));
+    if(reduce){nm.textContent=data[i][0];mt.textContent=data[i][1];return}
+    bar.classList.add('sw');
+    setTimeout(()=>{nm.textContent=data[cur][0];mt.textContent=data[cur][1];bar.classList.remove('sw')},220);
+  }
+  function play(){if(reduce||timer)return;timer=setInterval(()=>show((cur+1)%items.length),3500)}
+  function stop(){clearInterval(timer);timer=null}
+  items.forEach((b,i)=>{
+    b.addEventListener('mouseenter',()=>{stop();show(i)});
+    b.addEventListener('focus',()=>{stop();show(i)});
+    b.addEventListener('click',()=>{stop();show(i)});
+  });
+  const list=document.querySelector('.hx-list');
+  list.addEventListener('mouseleave',play);
+  document.addEventListener('visibilitychange',()=>{document.hidden?stop():play()});
+  play();
+})();
 _rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='0ms'},{once:true});}io.observe(el);});
 </script>
 </body>

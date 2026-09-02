@@ -94,6 +94,78 @@ footer b{color:var(--ink)}
 footer .nvq a{text-decoration:underline;text-underline-offset:2px}
 footer .nvq b{font-weight:700}
 svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+
+/* ===== hx- : 히어로 재구성 (손익 요약 패널) — 기존 .hero 규칙을 아래에서 덮어씀 ===== */
+.hx-hero{position:relative;overflow:hidden;padding:74px 0 84px;isolation:isolate}
+.hx-hero .wrap{display:block;grid-template-columns:none;gap:0;position:relative;z-index:2;pointer-events:none}
+.hx-hero .wrap a{pointer-events:auto}
+.hx-copy{max-width:560px}
+.hx-hero h1{font-size:clamp(29px,4.4vw,44px);font-weight:700;line-height:1.36;letter-spacing:-.03em;margin-top:10px}
+.hx-hero h1 b{color:var(--green)}
+.hx-hero p.hx-lead{margin-top:16px;color:#4F6259;font-size:15px;max-width:420px}
+.hx-hero .hero-cta{margin-top:26px}
+.hx-hero p.hx-note{margin-top:18px;font-size:12px;color:#4F6259;max-width:390px;line-height:1.7}
+.hx-hero p.hx-note b{font-family:"IBM Plex Mono";font-weight:500;color:var(--green)}
+
+/* 패널: 뷰포트 오른쪽으로 흘러나가고 왼쪽 끝은 배경에 녹는다 */
+.hx-panel{position:absolute;z-index:1;top:50%;transform:translateY(-50%);left:calc(50% - 250px);right:-56px;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 62px,#000 148px);
+  mask-image:linear-gradient(90deg,transparent 0,rgba(0,0,0,.35) 62px,#000 148px)}
+.hx-board{background:#fff;border:1.5px solid var(--green);border-radius:12px;overflow:hidden;box-shadow:0 18px 40px -30px rgba(30,42,36,.4)}
+.hx-bhead{background:var(--green);color:#fff;display:flex;align-items:center;gap:14px;padding:12px 22px 12px 196px}
+.hx-bhead .t{font-family:"IBM Plex Mono";font-size:11.5px;letter-spacing:.18em}
+.hx-demo{font-size:11px;font-weight:700;letter-spacing:.04em;border:1px solid rgba(255,255,255,.6);border-radius:4px;padding:2px 8px}
+.hx-bar{display:flex;gap:22px;flex-wrap:wrap;padding:10px 22px 10px 196px;border-bottom:1px solid var(--line);font-size:12px;color:#4F6259}
+.hx-bar b{color:var(--ink);font-family:"IBM Plex Mono";font-weight:500}
+.hx-grid{padding:0 8px 8px 182px}
+.hx-hrow,.hx-row{display:grid;grid-template-columns:118px 104px 104px 112px minmax(80px,250px);gap:12px;align-items:center;padding:11px 14px}
+.hx-trend{height:9px;border-radius:2px;background:var(--ruled);overflow:hidden}
+.hx-trend i{display:block;height:100%;width:var(--w);background:var(--green);opacity:.55;border-radius:2px}
+.hx-hrow{font-size:11.5px;letter-spacing:.06em;color:#4F6259;border-bottom:1px solid var(--line)}
+.hx-row{font-size:14px;border-radius:7px;border-bottom:1px solid var(--ruled);cursor:default;transition:background .25s}
+.hx-row:hover{background:var(--mint)}
+.hx-m{font-weight:700}
+.hx-sub{display:none;font-style:normal;font-size:11.5px;font-weight:400;color:#4F6259;margin-left:8px}
+.hx-n{font-family:"IBM Plex Mono";font-size:13.5px;text-align:right;color:#3A4B43}
+.hx-pf{color:var(--green);font-weight:500}
+.hx-total{display:flex;align-items:center;justify-content:space-between;gap:16px;max-width:504px;margin:8px 6px 6px 196px;padding:13px 16px;background:var(--mint);border-radius:8px}
+.hx-total .lb{font-size:13.5px;font-weight:700}
+.hx-roll{height:30px;overflow:hidden;text-align:right}
+.hx-roll i{display:block;font-style:normal;font-family:"IBM Plex Mono";font-size:22px;line-height:30px;font-weight:500;color:var(--green);animation:hxRoll 8s cubic-bezier(.32,.72,0,1) infinite both}
+.hx-roll i span{display:block;height:30px}
+.hx-row{animation:hxRow 8s ease infinite both;animation-delay:calc(var(--i) * .22s)}
+.hx-total{animation:hxRow 8s ease infinite both;animation-delay:1.5s}
+@keyframes hxRow{0%{opacity:0;transform:translateY(12px)}7%,92%{opacity:1;transform:none}98%,100%{opacity:0;transform:translateY(-7px)}}
+@keyframes hxRoll{0%,24%{transform:translateY(-30px)}31%,35%{transform:translateY(-60px)}42%,100%{transform:translateY(-90px)}}
+@media(prefers-reduced-motion:reduce){.hx-row,.hx-total{opacity:1;transform:none}.hx-roll i{transform:none}}
+
+@media(max-width:1120px){
+  .hx-panel{left:calc(50% - 210px)}
+  .hx-copy{max-width:360px}
+  .hx-hrow,.hx-row{grid-template-columns:92px 86px 86px 98px minmax(60px,230px);gap:9px;padding:11px 10px}
+  .hx-bhead,.hx-bar{padding-left:180px}
+  .hx-grid{padding-left:168px}
+  .hx-total{margin-left:178px;max-width:392px}
+  .hx-hero p.hx-note,.hx-hero p.hx-lead{max-width:330px}
+}
+@media(max-width:900px){
+  .hx-hero{padding:34px 0 56px;display:flex;flex-direction:column}
+  .hx-hero .wrap{order:1}
+  .hx-copy{max-width:none}
+  .hx-hero p.hx-lead{font-size:14.5px;max-width:none}
+  .hx-hero p.hx-note{max-width:none}
+  .hx-panel{order:2;position:static;transform:none;margin:28px 24px 0;
+    -webkit-mask-image:none;mask-image:none}
+  .hx-bhead,.hx-bar{padding-left:20px}
+  .hx-grid{padding:0 8px 8px}
+  .hx-total{margin:8px 6px 6px;max-width:none}
+  .hx-hrow,.hx-row{grid-template-columns:1fr auto;gap:10px;padding:10px 12px}
+  .hx-rev,.hx-cost,.hx-trend,.hx-th-trend{display:none}
+  .hx-sub{display:block;margin-left:0}
+  .hx-r4,.hx-r5{display:none}
+  .hx-bar{gap:14px;font-size:11.5px}
+  .hx-roll i{font-size:19px}
+}
 </style>
 </head>
 <body>
@@ -104,21 +176,36 @@ svg.nq{width:1em;height:1em;display:inline-block;vertical-align:-.13em;fill:none
 <a class="tel" href="tel:010-4894-4905">상담 예약</a>
 </div></header>
 
-<section class="hero"><div class="wrap">
-<div>
+<section class="hero hx-hero">
+
+<div class="hx-panel">
+<div class="hx-board">
+<div class="hx-bhead"><span class="t">월별 손익 요약</span><span class="hx-demo">데모 화면</span></div>
+<div class="hx-bar"><span>기간 <b>2026.01 – 06</b></span><span>거래처 <b>바른상사</b></span><span>단위 <b>천원</b></span></div>
+<div class="hx-grid">
+<div class="hx-hrow"><span>월</span><span class="hx-n hx-rev">매출</span><span class="hx-n hx-cost">비용</span><span class="hx-n">순이익</span><span class="hx-th-trend">추이</span></div>
+<div class="hx-row" style="--i:0"><span class="hx-m">1월<em class="hx-sub">매출 42,800 · 비용 31,500</em></span><span class="hx-n hx-rev">42,800</span><span class="hx-n hx-cost">31,500</span><span class="hx-n hx-pf">11,300</span><span class="hx-trend"><i style="--w:58%"></i></span></div>
+<div class="hx-row" style="--i:1"><span class="hx-m">2월<em class="hx-sub">매출 38,600 · 비용 29,200</em></span><span class="hx-n hx-rev">38,600</span><span class="hx-n hx-cost">29,200</span><span class="hx-n hx-pf">9,400</span><span class="hx-trend"><i style="--w:48%"></i></span></div>
+<div class="hx-row" style="--i:2"><span class="hx-m">3월<em class="hx-sub">매출 51,200 · 비용 36,900</em></span><span class="hx-n hx-rev">51,200</span><span class="hx-n hx-cost">36,900</span><span class="hx-n hx-pf">14,300</span><span class="hx-trend"><i style="--w:73%"></i></span></div>
+<div class="hx-row" style="--i:3"><span class="hx-m">4월<em class="hx-sub">매출 46,500 · 비용 33,100</em></span><span class="hx-n hx-rev">46,500</span><span class="hx-n hx-cost">33,100</span><span class="hx-n hx-pf">13,400</span><span class="hx-trend"><i style="--w:68%"></i></span></div>
+<div class="hx-row hx-r4" style="--i:4"><span class="hx-m">5월<em class="hx-sub">매출 55,300 · 비용 38,700</em></span><span class="hx-n hx-rev">55,300</span><span class="hx-n hx-cost">38,700</span><span class="hx-n hx-pf">16,600</span><span class="hx-trend"><i style="--w:85%"></i></span></div>
+<div class="hx-row hx-r5" style="--i:5"><span class="hx-m">6월<em class="hx-sub">매출 61,400 · 비용 41,800</em></span><span class="hx-n hx-rev">61,400</span><span class="hx-n hx-cost">41,800</span><span class="hx-n hx-pf">19,600</span><span class="hx-trend"><i style="--w:100%"></i></span></div>
+</div>
+<div class="hx-total"><span class="lb">상반기 누계 순이익<em class="hx-sub">1 – 6월 합계</em></span>
+<span class="hx-roll"><i><span>84,600</span><span>35,000</span><span>65,000</span><span>84,600</span></i></span></div>
+</div>
+</div>
+
+<div class="wrap">
+<div class="hx-copy">
 <p class="kicker">TAX &amp; ACCOUNTING</p>
 <h1>사장님 장부는<br><b>바른 숫자</b>여야 합니다</h1>
-<p>기장료가 얼마인지, 뭘 해주는지 물어보기 어려우셨죠. 바른숫자는 수임료와 업무 범위를 홈페이지에 다 적어 둡니다.</p>
+<p class="hx-lead">기장료가 얼마인지, 뭘 해주는지 물어보기 어려우셨죠. 바른숫자는 수임료와 업무 범위를 홈페이지에 다 적어 둡니다.</p>
 <div class="hero-cta"><a class="btn btn-g" href="tel:010-4894-4905">기장 상담 예약</a><a class="btn btn-o" href="#fee">수임료 보기</a></div>
+<p class="hx-note">매월 <b>부가세 신고 42건 · 원천세 67건</b>을 처리하고, 기장 거래처 <b>128개사</b>에 위와 같은 손익 요약을 보내드립니다.</p>
 </div>
-<aside class="ledger rv">
-<div class="lg-head">LEDGER — 수임 현황 (2026년 기준)</div>
-<div class="lg-row"><b>부가세 신고</b><span class="won">42건 완료</span></div>
-<div class="lg-row"><b>원천세 신고</b><span class="won">67건 완료</span></div>
-<div class="lg-row"><b>기장 거래처</b><span class="won">128개사</span></div>
-<div class="lg-row"><b>세무조사 대응</b><span class="won">진행 2건</span></div>
-</aside>
-</div></section>
+</div>
+</section>
 
 <section id="fee" style="padding-top:0"><div class="wrap">
 <div class="rv"><p class="kicker">FEE TABLE</p><h2>수임료, 여기 다 적혀 있습니다</h2><p class="sub">매출 규모 기준 월 기장료 — 부가세 별도, 신고 대행 포함입니다.</p></div>
