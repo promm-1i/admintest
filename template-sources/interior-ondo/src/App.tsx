@@ -286,58 +286,64 @@ function Header({ active }: { active: string }) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// 히어로 — 매거진 오프닝
+// 히어로 — 완성된 거실이 화면을 가득 메우는 풀블리드
 // ══════════════════════════════════════════════════════════════════════════════
 
 function Hero() {
   const { ref, inView } = useInView(0.05)
   return (
-    <section ref={ref} className={`pt-28 md:pt-40 pb-16 md:pb-24 ${inView ? 'in-view' : ''}`}>
-      <div className="max-w-6xl mx-auto px-5 md:px-6">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-16 items-end mb-12">
-          <div>
-            <h1 className={`anim-fade-up ${inView ? 'in-view' : ''} f-thin text-[3.2rem] md:text-[4.6rem] leading-[1.1] whitespace-pre-line mb-8`}>
-              {SITE.slogan}
-            </h1>
-            <p className={`anim-fade-up d80 ${inView ? 'in-view' : ''} whitespace-pre-line text-[1rem] text-ink-55 leading-[1.9]`}>
-              {SITE.sloganSub}
-            </p>
-          </div>
-          <div className={`anim-fade-up d160 ${inView ? 'in-view' : ''} flex lg:justify-end`}>
-            <div className="flex items-center gap-5">
-              <button
-                onClick={() => document.querySelector('#consult')?.scrollIntoView({ behavior: MOTION ? 'smooth' : 'auto' })}
-                className="px-7 py-4 bg-ink text-ivory text-[0.9375rem] font-bold hover:bg-camel"
-                style={{ transition: MOTION ? 'background-color 0.25s' : 'none' }}
-              >
-                상담 신청
-              </button>
-              <button
-                onClick={() => document.querySelector('#projects')?.scrollIntoView({ behavior: MOTION ? 'smooth' : 'auto' })}
-                className="text-[0.9375rem] font-bold border-b border-ink pb-1 hover:text-camel hover:border-camel"
-                style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
-              >
-                프로젝트 보기
-              </button>
-            </div>
+    <section ref={ref} className={`hero hx-hero ${inView ? 'in-view' : ''}`}>
+      <img
+        src={SITE.heroPhoto}
+        alt={`${SITE.heroSpec.type} ${SITE.heroSpec.area} 시공 사례 거실`}
+        className="hx-hero-img img-settle"
+        fetchPriority="high"
+      />
+      <div className="hx-hero-scrim" aria-hidden="true" />
+
+      <div className="hx-hero-inner max-w-6xl mx-auto px-5 md:px-6">
+        <div className="hx-hero-copy">
+          <Dim className={`hx-hero-dim anim-fade-up ${inView ? 'in-view' : ''} max-w-[230px] mb-5 md:mb-6`}>
+            {SITE.nameEn}
+          </Dim>
+          <h1
+            className={`anim-fade-up d80 ${inView ? 'in-view' : ''} f-thin text-[2.6rem] md:text-[3.9rem] leading-[1.12] whitespace-pre-line mb-5 md:mb-7`}
+          >
+            {SITE.slogan}
+          </h1>
+          <p
+            className={`anim-fade-up d160 ${inView ? 'in-view' : ''} whitespace-pre-line text-[0.9375rem] md:text-[1.0625rem] hx-hero-sub leading-[1.7] md:leading-[1.85] mb-7 md:mb-10`}
+          >
+            {SITE.sloganSub}
+          </p>
+          <div className={`anim-fade-up d240 ${inView ? 'in-view' : ''} flex flex-wrap items-center gap-x-7 gap-y-4`}>
+            <a
+              href="#consult"
+              className="hx-hero-cta inline-block px-7 py-4 bg-ink text-ivory text-[0.9375rem] font-bold hover:bg-camel transition-colors duration-200"
+            >
+              상담 신청
+            </a>
+            <a
+              href="#projects"
+              className="text-[0.9375rem] font-bold border-b border-ink pb-1 hover:text-camel hover:border-camel transition-colors duration-200"
+            >
+              프로젝트 보기
+            </a>
           </div>
         </div>
+      </div>
 
-        {/* 히어로 사진 + 도면 타이틀 블록 */}
-        <figure className={`anim-fade-up d240 ${inView ? 'in-view' : ''}`}>
-          <div className="overflow-hidden">
-            <img src={SITE.heroPhoto} alt="시공 사례 거실" className="img-settle w-full h-[340px] md:h-[560px] object-cover" />
+      {/* 사진 하단 도면 타이틀 블록 — 이 사진이 어떤 현장인지 */}
+      <div className="hx-hero-block">
+        <div className="max-w-6xl mx-auto px-5 md:px-6 py-2.5 md:py-3 flex items-baseline justify-between gap-4">
+          <div className="flex flex-wrap items-baseline gap-x-4 md:gap-x-7 gap-y-0.5 text-[0.75rem] md:text-[0.8125rem]">
+            <span className="font-bold">최근 프로젝트</span>
+            <span className="hx-hero-meta nums">{SITE.heroSpec.area}</span>
+            <span className="hx-hero-meta nums">공기 {SITE.heroSpec.period}</span>
+            <span className="hx-hero-meta">{SITE.heroSpec.type}</span>
           </div>
-          <figcaption className="tblock mt-0 border-t-0">
-            <div className="flex flex-wrap gap-x-6 gap-y-1 items-center text-ink-55">
-              <span className="font-bold text-ink">최근 프로젝트</span>
-              <span className="nums">{SITE.heroSpec.area}</span>
-              <span className="nums">공기 {SITE.heroSpec.period}</span>
-              <span>{SITE.heroSpec.type}</span>
-            </div>
-            <div className="tb-r nums text-ink-55">2026</div>
-          </figcaption>
-        </figure>
+          <span className="hx-hero-meta nums shrink-0 text-[0.75rem] md:text-[0.8125rem]">2026</span>
+        </div>
       </div>
     </section>
   )

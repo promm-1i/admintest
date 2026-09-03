@@ -255,43 +255,56 @@ function Hero() {
   const { ref, inView } = useInView(0.05)
   const st = openStatus()
   return (
-    <section ref={ref} className="pt-28 md:pt-36 pb-16 md:pb-24">
-      <div className="max-w-5xl mx-auto px-5 md:px-6 text-center">
-        <p className={`anim-fade-up ${inView ? 'in-view' : ''} text-[0.8125rem] font-bold tracking-[0.2em] text-tomato mb-6`}>
-          {SITE.nameEn} · {SITE.tagline}
-        </p>
-        <h1 className={`anim-fade-up d80 ${inView ? 'in-view' : ''} f-serif text-[3rem] md:text-[4.6rem] leading-[1.18] whitespace-pre-line mb-7`}>
-          {SITE.slogan}
-        </h1>
-        <p className={`anim-fade-up d160 ${inView ? 'in-view' : ''} text-[1rem] text-ink-55 leading-[1.85] max-w-md mx-auto mb-9`}>
-          {SITE.sloganSub}
-        </p>
-        <div className={`anim-fade-up d240 ${inView ? 'in-view' : ''} flex flex-wrap items-center justify-center gap-4 mb-14`}>
-          <button
-            onClick={() => goTo('#reserve')}
-            className="px-8 py-4 rounded-full bg-tomato text-ivory text-[1rem] font-bold hover:bg-tomato-d"
-            style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-          >
-            자리 예약하기
-          </button>
-          <button onClick={() => goTo('#menu')} className="text-[1rem] font-bold border-b-2 border-ink pb-0.5 hover:text-tomato hover:border-tomato" style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}>
-            메뉴판 펼치기
-          </button>
-        </div>
+    <section ref={ref} className="hx-hero relative mt-16 h-[calc(100svh-4rem)] min-h-[34rem] max-h-[54rem] overflow-hidden">
+      <img
+        src={SITE.heroPhoto}
+        alt="돌솥밥과 나물 반찬, 국을 함께 차린 소반의 한 상"
+        className="hx-hero-img absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="hx-hero-scrim absolute inset-0 pointer-events-none" aria-hidden="true" />
 
-        <figure className={`anim-fade-up d320 ${inView ? 'in-view' : ''}`}>
-          <div className="ph rounded-3xl">
-            <img src={SITE.heroPhoto} alt="소반의 상차림" className="w-full aspect-[16/8] object-cover" />
+      <div className="relative h-full max-w-7xl mx-auto px-5 md:px-8 xl:px-10 flex flex-col justify-end xl:justify-center pb-20 md:pb-16 xl:pb-0">
+        <div className="hx-hero-text max-w-[32rem] md:max-w-[30rem] xl:max-w-[32rem]">
+          <p className={`anim-fade-up ${inView ? 'in-view' : ''} hx-hero-fine text-[0.75rem] md:text-[0.8125rem] font-bold tracking-[0.2em] text-ivory mb-4 md:mb-5`}>
+            {SITE.nameEn} · {SITE.tagline}
+          </p>
+          <h1 className={`anim-fade-up d80 ${inView ? 'in-view' : ''} f-serif text-ivory text-[2.5rem] md:text-[3.25rem] xl:text-[4rem] leading-[1.16] whitespace-pre-line mb-4 md:mb-5 xl:mb-6`}>
+            {SITE.slogan}
+          </h1>
+          <p className={`anim-fade-up d160 ${inView ? 'in-view' : ''} hx-hero-fine text-[0.9375rem] md:text-[1rem] xl:text-[1.0625rem] text-ivory leading-[1.8] mb-7 md:mb-8 xl:mb-9`}>
+            {SITE.sloganSub}
+          </p>
+
+          <div className={`anim-fade-up d240 ${inView ? 'in-view' : ''} flex flex-wrap items-center gap-x-7 gap-y-4`}>
+            <a
+              href="#reserve"
+              onClick={(e) => { e.preventDefault(); goTo('#reserve') }}
+              className="hx-cta inline-flex items-center px-8 py-4 rounded-full bg-tomato text-ivory text-[1rem] font-bold hover:bg-tomato-d"
+              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+            >
+              자리 예약하기
+            </a>
+            <a
+              href="#menu"
+              onClick={(e) => { e.preventDefault(); goTo('#menu') }}
+              className="hx-cta-line text-[1rem] font-bold text-ivory border-b-2 border-ivory/60 pb-0.5 hover:border-ivory"
+              style={{ transition: MOTION ? 'border-color 0.2s' : 'none' }}
+            >
+              메뉴판 펼치기
+            </a>
           </div>
-          <figcaption className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-1.5 text-[0.875rem] text-ink-55">
-            <span className={`flex items-center gap-2 font-semibold ${st.on ? 'text-tomato' : ''}`}>
-              <span className={`w-2 h-2 rounded-full ${st.on ? 'bg-tomato' : 'bg-ink/25'}`} aria-hidden="true" />
-              {st.label}
-            </span>
-            <span className="nums">점심 {SITE.openHours.lunch} · 저녁 {SITE.openHours.dinner}</span>
-            <span>{SITE.openHours.closed}</span>
-          </figcaption>
-        </figure>
+
+          <div className={`anim-fade-up d320 ${inView ? 'in-view' : ''} hx-hero-fine mt-8 md:mt-9 xl:mt-10 pt-5 border-t border-ivory/25 flex flex-col gap-1.5 text-[0.8125rem] md:text-[0.875rem] text-ivory`}>
+            <p className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span className="inline-flex items-center gap-2 font-bold text-ivory">
+                <span className={`hx-dot ${st.on ? 'hx-dot-on' : ''}`} aria-hidden="true" />
+                {st.label}
+              </span>
+              <span className="nums">점심 {SITE.openHours.lunch} · 저녁 {SITE.openHours.dinner}</span>
+            </p>
+            <p className="nums">{SITE.openHours.lastOrder} · {SITE.openHours.closed}</p>
+          </div>
+        </div>
       </div>
     </section>
   )

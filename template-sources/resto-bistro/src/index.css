@@ -113,6 +113,103 @@ html {
   background: #e7dfd2;
 }
 
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   히어로 — 풀블리드 한 상 차림
+══════════════════════════════════════════════════════════════════════════════ */
+
+/* 크롭 지점 — 좁은 화면은 솥밥과 국그릇이 함께 들어오게, 넓은 화면은 오른쪽으로 밀어 왼쪽을 비운다 */
+.hx-hero-img {
+  object-position: 72% 50%;
+}
+
+/* 글자가 앉는 쪽만 국소적으로 누른다. 최대 0.60, 솥밥이 있는 쪽은 건드리지 않는다 */
+.hx-hero-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(20, 13, 8, 0.6) 0%,
+    rgba(20, 13, 8, 0.6) 40%,
+    rgba(20, 13, 8, 0.55) 52%,
+    rgba(20, 13, 8, 0.36) 64%,
+    rgba(20, 13, 8, 0.12) 76%,
+    rgba(20, 13, 8, 0) 88%
+  );
+}
+
+.hx-hero-text {
+  text-shadow:
+    0 1px 2px rgba(16, 10, 5, 0.62),
+    0 0 10px rgba(16, 10, 5, 0.48),
+    0 2px 22px rgba(16, 10, 5, 0.4);
+}
+/* 작은 글씨는 획 바로 아래에 바닥을 깐다 — 사진의 밝은 부분을 지나도 4.5:1 을 유지 */
+.hx-hero-text .hx-hero-fine {
+  text-shadow:
+    0 0 1px rgba(16, 10, 5, 0.8),
+    0 1px 2px rgba(16, 10, 5, 0.78),
+    0 0 7px rgba(16, 10, 5, 0.58),
+    0 2px 18px rgba(16, 10, 5, 0.4);
+}
+.hx-hero-text .hx-cta {
+  text-shadow: none;
+}
+
+@media (min-width: 1280px) {
+  .hx-hero-img {
+    object-position: 28% 50%;
+  }
+  .hx-hero-scrim {
+    background: linear-gradient(
+      97deg,
+      rgba(20, 13, 8, 0.6) 0%,
+      rgba(20, 13, 8, 0.58) 30%,
+      rgba(20, 13, 8, 0.46) 42%,
+      rgba(20, 13, 8, 0.16) 52%,
+      rgba(20, 13, 8, 0) 62%
+    );
+  }
+}
+
+/* 영업 상태 점 — 켜져 있을 때만 링이 한 번씩 퍼진다 (히어로의 유일한 반복 모션) */
+.hx-dot {
+  position: relative;
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(250, 246, 239, 0.45);
+}
+.hx-dot-on {
+  background: #e04a2c;
+}
+.hx-dot-on::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 999px;
+  border: 1.5px solid #e04a2c;
+  opacity: 0;
+}
+html:not([data-motion='off']) .hx-dot-on::after {
+  animation: hx-ping 2.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes hx-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70%,
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-dot-on::after {
+    animation: none !important;
+  }
+}
+
 /* ══════════════════════════════════════════════════════════════════════════════
    ANIMATIONS
 ══════════════════════════════════════════════════════════════════════════════ */

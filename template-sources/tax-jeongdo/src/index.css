@@ -303,3 +303,78 @@ h1, h2, h3 {
 p, li, dd, figcaption {
   text-wrap: pretty;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   히어로 [typo] — 아주 옅은 장부 격자 위, 한 문장
+   기본 상태가 곧 최종 상태다. 모션은 그 위에만 얹는다.
+══════════════════════════════════════════════════════════════════════════════ */
+
+/* 장부 결 — 가로 괘선만. 글자와 경쟁하지 않게 아주 옅게 */
+.hx-ledger {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(to bottom, rgba(38, 36, 31, 0.05) 0 1px, rgba(38, 36, 31, 0) 1px 46px);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000 12%, #000 66%, rgba(0, 0, 0, 0));
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000 12%, #000 66%, rgba(0, 0, 0, 0));
+}
+
+/* 핵심 문장 — 두 줄의 실측 폭이 7.09em으로 같다. 자간을 조여 컨테이너 폭의 96%에 맞춘다 */
+.hx-title {
+  font-size: clamp(2.6rem, calc(13.531vw - 5.412px), 9.64rem);
+  line-height: 1.14;
+  letter-spacing: -0.035em;
+}
+
+/* 합계선 — 굵은 선 + 가는 선. transform 없이 처음부터 보인다 */
+.hx-rule {
+  height: 3px;
+  width: 100%;
+  background:
+    linear-gradient(#26241f, #26241f) top / 100% 1.5px no-repeat,
+    linear-gradient(rgba(38, 36, 31, 0.3), rgba(38, 36, 31, 0.3)) bottom / 100% 1px no-repeat;
+}
+html:not([data-motion='off']) .hx-rule-draw {
+  transform-origin: left;
+  animation: hxRuleDraw 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+@keyframes hxRuleDraw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* 괘선 팩트 — 행의 첫 칸에는 세로 괘선을 두지 않는다 */
+.hx-fig {
+  font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+  line-height: 1;
+}
+.hx-facts > * {
+  border-left: 1px solid rgba(38, 36, 31, 0.14);
+  padding-left: 1.25rem;
+}
+.hx-facts > *:nth-child(2n + 1) {
+  border-left: 0;
+  padding-left: 0;
+}
+@media (min-width: 768px) {
+  .hx-facts > *,
+  .hx-facts > *:nth-child(2n + 1) {
+    border-left: 1px solid rgba(38, 36, 31, 0.14);
+    padding-left: 1.75rem;
+  }
+  .hx-facts > *:first-child {
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hx-rule-draw {
+    animation: none !important;
+    transform: none !important;
+  }
+}

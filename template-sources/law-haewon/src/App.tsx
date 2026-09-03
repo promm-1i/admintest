@@ -195,52 +195,55 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 좌 세리프 선언 + 우 수직 목차 ───────────────────────────────────
+// ─── 히어로 — 불 낮춘 상담실, 문장 하나만 밝다 ────────────────────────────────
 
 function Hero() {
+  const [lead, key] = SITE.slogan.split('\n')
   return (
-    <section className="pt-[72px]">
-      <div className="mx-auto max-w-6xl px-5 py-16 md:py-24 grid md:grid-cols-[1.3fr_1fr] gap-14 items-center">
-        <div>
-          <p className={`f-latin italic text-[1rem] text-pine/70 ${MOTION ? 'hero-in' : ''}`}>Since 2009, Seocho</p>
-          <h1 className={`mt-5 text-[clamp(2.1rem,5.4vw,3.6rem)] font-extrabold tracking-[-0.03em] leading-[1.22] whitespace-pre-line ${MOTION ? 'hero-in d150' : ''}`}>
-            {SITE.slogan}
-          </h1>
-          <p className={`mt-6 max-w-lg text-[1.02rem] leading-relaxed text-inkg/60 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
-          <div className={`mt-9 flex flex-wrap items-center gap-5 ${MOTION ? 'hero-in d450' : ''}`}>
-            <button
-              onClick={() => goTo('#consult')}
-              className="px-8 py-4 bg-pine text-cream text-[0.95rem] font-bold hover:bg-inkg"
-              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-            >
-              비밀 상담 문의
-            </button>
-            <button
-              onClick={() => goTo('#fees')}
-              className="text-[0.95rem] font-bold border-b-2 border-inkg pb-0.5 hover:text-pine hover:border-pine"
-              style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
-            >
-              수임료 원칙 보기
-            </button>
-          </div>
+    <section className="hero hx-hero relative overflow-hidden pt-[72px]">
+      <span className="hx-room" aria-hidden />
+      <div className="hx-stage relative mx-auto flex max-w-[1080px] flex-col items-center px-5 text-center sm:px-8">
+        {/* 이 사무소가 하는 말 전부 — 한 문장 */}
+        <h1 className="hx-say">
+          <span className={`hx-say-lead block ${MOTION ? 'hx-rise' : ''}`}>{lead}</span>
+          <span className={`hx-say-key block ${MOTION ? 'hx-rise hx-d1' : ''}`}>{key}</span>
+        </h1>
+
+        {/* 그래서 무엇을 약속하는가 */}
+        <p className={`hx-sub ${MOTION ? 'hx-rise hx-d2' : ''}`}>{SITE.sloganSub}</p>
+
+        <div className={`hx-act ${MOTION ? 'hx-rise hx-d3' : ''}`}>
+          <a
+            href="#consult"
+            onClick={(e) => {
+              e.preventDefault()
+              goTo('#consult')
+            }}
+            className="hx-cta"
+            style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+          >
+            비밀 상담 문의
+          </a>
+          <a
+            href="#fees"
+            onClick={(e) => {
+              e.preventDefault()
+              goTo('#fees')
+            }}
+            className="hx-cta-line"
+            style={{ transition: MOTION ? 'border-color 0.2s' : 'none' }}
+          >
+            수임료 원칙 보기
+          </a>
         </div>
-        {/* 판례집 목차 — 수행 분야 수직 리스트 */}
-        <nav className={`border-l-2 border-pine/25 pl-7 ${MOTION ? 'hero-in d300' : ''}`} aria-label="수행 분야 바로가기">
-          <p className="f-latin italic text-[0.85rem] text-pine/60 mb-4">Table of Practice</p>
-          <ul className="space-y-3.5">
-            {SITE.fields.map((f) => (
-              <li key={f.no}>
-                <button onClick={() => goTo('#fields')} className="toc group flex items-baseline gap-3 text-left w-full">
-                  <span className="f-latin w-7 shrink-0 text-[0.85rem] text-pine/60">{f.no}.</span>
-                  <span className="text-[1.02rem] font-bold group-hover:text-pine" style={{ transition: MOTION ? 'color 0.2s' : 'none' }}>
-                    {f.name}
-                  </span>
-                  <span className="ml-auto shrink-0 text-[0.75rem] text-inkg/40 nums">{f.cases}</span>
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
+
+        {/* 찾아오는 길 · 늦은 시간 상담 — 상담실 문이 언제 열려 있는지 */}
+        <p className={`hx-note ${MOTION ? 'hx-rise hx-d4' : ''}`}>
+          <span>{SITE.location.walk}</span>
+          <span className="hx-note-gap">
+            {SITE.hours[1].day} {SITE.hours[1].time}
+          </span>
+        </p>
       </div>
     </section>
   )

@@ -232,56 +232,78 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 센터 세리프 + 원장 괘선 ─────────────────────────────────────────
+// ─── 히어로 — 옅은 장부 격자 위, 화면 폭까지 키운 한 문장 ─────────────────────
 
 function Hero() {
   return (
-    <section className="pt-[72px]">
-      <div className="mx-auto max-w-4xl px-5 pt-16 md:pt-24 pb-12 text-center">
-        <p className={`f-serif text-[0.8rem] tracking-[0.4em] text-gold ${MOTION ? 'hero-in' : ''}`}>SINCE 2009 — YEOKSAM</p>
-        <h1 className="f-serif mt-7 text-[clamp(2.2rem,6vw,3.9rem)] font-bold tracking-tight leading-[1.28]">
+    <section className="hero hx-hero relative overflow-hidden bg-paper pt-[72px]">
+      {/* 배경 결: 장부 괘선. 아주 옅어 글자와 경쟁하지 않는다 */}
+      <div className="hx-ledger" aria-hidden />
+
+      <div className="relative mx-auto w-full max-w-[1180px] px-5 pt-10 md:pt-11 pb-12">
+        <div className={`flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-5 ${MOTION ? 'hero-in' : ''}`}>
+          <p className="f-serif text-[0.7rem] md:text-[0.76rem] font-bold tracking-[0.36em] text-char/70">SINCE 2009 — YEOKSAM</p>
+          <p className="shrink-0 text-[0.74rem] tracking-[0.1em] text-char/65">{SITE.tagline}</p>
+        </div>
+        <div className={`mt-3.5 h-px w-full bg-char/20 ${MOTION ? 'hero-in' : ''}`} aria-hidden />
+
+        <h1 className="hx-title f-serif mt-8 md:mt-9 font-bold">
           {SITE.slogan.split('\n').map((line, i) => (
-            <span key={line} className="block overflow-hidden py-0.5">
+            <span key={line} className="block overflow-hidden py-[0.04em]">
               <span className={`block ${MOTION ? `mask-line md${i}` : ''}`}>{line}</span>
             </span>
           ))}
         </h1>
-        <p className={`mx-auto mt-7 max-w-lg text-[1.02rem] leading-relaxed text-char/60 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
-        <div className={`mt-10 flex justify-center items-center gap-5 ${MOTION ? 'hero-in d450' : ''}`}>
-          <button
-            onClick={() => goTo('#consult')}
-            className="px-8 py-4 bg-char text-paper text-[0.95rem] font-bold hover:bg-gold"
-            style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-          >
-            상담 문의하기
-          </button>
-          <button
-            onClick={() => goTo('#fees')}
-            className="text-[0.95rem] font-bold border-b-2 border-char pb-0.5 hover:text-gold hover:border-gold"
-            style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
-          >
-            기장료 보기
-          </button>
+
+        <div className={`hx-rule mt-7 md:mt-8 ${MOTION ? 'hx-rule-draw' : ''}`} aria-hidden />
+
+        <div className={`mt-7 grid gap-y-7 md:grid-cols-[minmax(0,1fr)_auto] md:items-end md:gap-x-16 ${MOTION ? 'hero-in d300' : ''}`}>
+          <p className="max-w-[38rem] text-[0.95rem] md:text-[1rem] leading-[1.85] text-char/70">{SITE.sloganSub}</p>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+            <a
+              href="#consult"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#consult')
+              }}
+              className="hx-cta w-full sm:w-auto px-9 py-4 text-center bg-char text-paper text-[0.95rem] font-bold hover:bg-gold"
+              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+            >
+              상담 문의하기
+            </a>
+            <a
+              href="#fees"
+              onClick={(e) => {
+                e.preventDefault()
+                goTo('#fees')
+              }}
+              className="self-start sm:self-center text-[0.93rem] font-bold border-b-2 border-char pb-1 hover:text-gold hover:border-gold"
+              style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
+            >
+              기장료 보기
+            </a>
+          </div>
         </div>
+
+        <Facts />
       </div>
-      <Facts />
     </section>
   )
 }
 
 function Facts() {
-  const { ref, inView } = useInView(0.4)
+  const { ref, inView } = useInView(0.3)
   return (
-    <div ref={ref as React.RefObject<HTMLDivElement>} className="mx-auto max-w-5xl px-5 pb-6">
-      <div className={`ledger-rule h-[3px] w-full ${MOTION ? 'anim-fade-up' : ''} ${inView ? 'in-view' : ''}`} aria-hidden />
-      <div className={`grid grid-cols-2 md:grid-cols-4 divide-x divide-char/12 border-b border-char/12 ${MOTION ? 'anim-fade-up d120' : ''} ${inView ? 'in-view' : ''}`}>
+    <div ref={ref as React.RefObject<HTMLDivElement>} className="mt-11 md:mt-12">
+      <div className={`h-px w-full bg-char/20 ${MOTION ? 'anim-fade-up' : ''} ${inView ? 'in-view' : ''}`} aria-hidden />
+      <dl className={`hx-facts grid grid-cols-2 md:grid-cols-4 border-b border-char/15 ${MOTION ? 'anim-fade-up d120' : ''} ${inView ? 'in-view' : ''}`}>
         {SITE.facts.map((f) => (
-          <div key={f.label} className="py-7 px-4 text-center">
-            <p className="f-serif nums text-[1.7rem] font-bold tracking-tight">{f.n}</p>
-            <p className="mt-1 text-[0.82rem] text-char/55">{f.label}</p>
+          <div key={f.label} className="py-6 md:py-7">
+            <dt className="hx-fig f-serif nums font-bold tracking-tight text-gold">{f.n}</dt>
+            <dd className="mt-2 text-[0.8rem] text-char/65">{f.label}</dd>
           </div>
         ))}
-      </div>
+      </dl>
     </div>
   )
 }

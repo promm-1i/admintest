@@ -124,16 +124,89 @@ html {
   }
 }
 
-/* 히어로 사진 — 아주 느린 줌아웃 */
-.hero-zoom {
-  animation: heroZoom 8s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* ─── 히어로 — 이름 두 글자가 만드는 여백 ─── */
+.hx-wordrow {
+  display: grid;
+  grid-template-columns: auto auto;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 1.5rem;
+  row-gap: clamp(1rem, 3.5vw, 1.75rem);
 }
-@keyframes heroZoom {
+.hx-glyph {
+  grid-row: 1;
+  font-size: min(34vw, 36vh);
+  line-height: 0.92;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #2a2e33;
+}
+.hx-g1 {
+  grid-column: 1;
+}
+.hx-g2 {
+  grid-column: 2;
+}
+.hx-slogan {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  font-size: clamp(1.15rem, 4.6vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.8;
+}
+@media (min-width: 768px) {
+  .hx-wordrow {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+  .hx-g2 {
+    grid-column: 3;
+  }
+  .hx-slogan {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: center;
+    font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  }
+}
+
+/* 두 글자가 좌우로 물러나며 그 사이가 열린다 (랜딩형에서만) */
+html:not([data-motion='off']) .hx-g1.hx-open {
+  animation: hxOpenL 1.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html:not([data-motion='off']) .hx-g2.hx-open {
+  animation: hxOpenR 1.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes hxOpenL {
   from {
-    transform: scale(1.08);
+    opacity: 0;
+    transform: translateX(3vw);
   }
   to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes hxOpenR {
+  from {
+    opacity: 0;
+    transform: translateX(-3vw);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 작은 사진 한 장만 아주 느리게 숨쉰다 */
+html:not([data-motion='off']) .hx-photo img {
+  animation: hxDrift 18s ease-in-out infinite alternate;
+}
+@keyframes hxDrift {
+  from {
     transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
   }
 }
 
@@ -150,7 +223,8 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .anim-fade-up,
   .hero-in,
-  .hero-zoom {
+  .hx-open,
+  .hx-photo img {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
@@ -171,7 +245,8 @@ html {
 }
 [data-motion='off'] .anim-fade-up,
 [data-motion='off'] .hero-in,
-[data-motion='off'] .hero-zoom {
+[data-motion='off'] .hx-open,
+[data-motion='off'] .hx-photo img {
   opacity: 1 !important;
   transform: none !important;
 }

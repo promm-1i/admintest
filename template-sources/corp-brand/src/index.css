@@ -224,3 +224,161 @@ h1, h2, h3 {
 p, li, dd, figcaption {
   text-wrap: pretty;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   히어로 — 사진 위에 도면 한 장
+═════════════════════════════════════════════════════════════════════════════ */
+
+/* 사진 위 글자 바닥 — 아래로 갈수록 진해진다. 도면과 표제란이 깔리는 자리가 가장 어둡다 */
+.hx-scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(18, 20, 25, 0.92) 0%,
+    rgba(18, 20, 25, 0.9) 30%,
+    rgba(18, 20, 25, 0.86) 50%,
+    rgba(18, 20, 25, 0.92) 74%,
+    rgba(18, 20, 25, 0.96) 100%
+  );
+}
+
+.hx-photo {
+  object-position: 40% 50%;
+}
+
+@media (min-width: 1024px) {
+  .hx-scrim {
+    background:
+      linear-gradient(
+        100deg,
+        rgba(18, 20, 25, 0.96) 0%,
+        rgba(18, 20, 25, 0.92) 36%,
+        rgba(18, 20, 25, 0.62) 62%,
+        rgba(18, 20, 25, 0.42) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(18, 20, 25, 0.4) 0%,
+        rgba(18, 20, 25, 0.1) 20%,
+        rgba(18, 20, 25, 0.34) 46%,
+        rgba(18, 20, 25, 0.82) 70%,
+        rgba(18, 20, 25, 0.95) 100%
+      );
+  }
+  .hx-photo {
+    object-position: 58% 46%;
+  }
+}
+
+/* 도면 띠 — 배경 이미지라 자식 노드가 없고, cover · 우측 정렬로
+   도면이 히어로 폭을 가로지르며 좌우로 잘려 나간다.
+   --h 는 띠 높이이자 도면 좌표계(230)의 척도다. 툴 위치도 여기서 나온다. */
+.hx-draw {
+  --h: 180px;
+  height: var(--h);
+  overflow: hidden;
+  background-position: right center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (min-width: 768px) {
+  .hx-draw {
+    --h: 210px;
+  }
+}
+@media (min-width: 1024px) {
+  .hx-draw {
+    --h: clamp(230px, 16.5vw, 330px);
+  }
+}
+
+/* 절삭 지점 — 히어로 안에서 무한 반복하는 선언은 이것 하나다.
+   폭 · 높이를 --h 로 잡아 도면 척도와 같이 움직이고, 이동거리는 % 라 반응형이 따로 필요 없다. */
+.hx-tool {
+  position: absolute;
+  top: calc(var(--h) * -58 / 230);
+  right: calc(var(--h) * 84 / 230);
+  width: calc(var(--h) * 70 / 230);
+  height: calc(var(--h) * 140 / 230);
+  display: block;
+}
+html:not([data-motion='off']) .hx-tool {
+  animation: hx-mill 8s linear infinite;
+}
+@keyframes hx-mill {
+  0%,
+  7% {
+    transform: translate(0, 0);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+  20% {
+    transform: translate(0, 8.6%);
+    animation-timing-function: linear;
+  }
+  72% {
+    transform: translate(-222.9%, 8.6%);
+    animation-timing-function: cubic-bezier(0.3, 0, 0.4, 1);
+  }
+  80% {
+    transform: translate(-222.9%, 0);
+    animation-timing-function: cubic-bezier(0.5, 0, 0.2, 1);
+  }
+  92%,
+  100% {
+    transform: translate(0, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hx-tool {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* 표제란 — 도면 아래 전 폭에 깔리는 사양 · 인증 */
+.hx-rail {
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+.hx-cell {
+  padding: 0.9rem 1rem 1rem 0;
+}
+.hx-cell:nth-child(2n) {
+  padding-left: 1.25rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+.hx-cell:nth-child(n + 3) {
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+@media (min-width: 1024px) {
+  .hx-cell:nth-child(n) {
+    padding-left: 1.5rem;
+    border-left: 1px solid rgba(255, 255, 255, 0.12);
+    border-top: 0;
+  }
+  .hx-cell:first-child {
+    padding-left: 0;
+    border-left: 0;
+  }
+}
+
+.hx-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.9rem;
+  padding: 0.85rem 0 1.05rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.hx-note-k {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: #a4a6ad;
+}
+.hx-note-v {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #dcdde1;
+}
+.hx-note-k + .hx-note-v {
+  margin-right: 0.6rem;
+}

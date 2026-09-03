@@ -92,17 +92,111 @@ html {
 .d320 { transition-delay: 320ms; }
 .d350 { transition-delay: 350ms; }
 
-/* 히어로 등장 */
-.hero-in {
-  animation: heroIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+/* ─── 히어로 — 문장 하나 ─────────────────────────────────────────────────────
+   글자는 기본 상태가 최종 상태다. 아래 등장 애니메이션은 landing 에서만 얹힌다.
+   ─────────────────────────────────────────────────────────────────────────── */
+
+/* 상담실 — 불을 낮춘 방. 배경은 결이 아니라 어둠이다 */
+.hx-hero {
+  background-color: #1f2a22;
+  color: #f9f7f1;
 }
-.hero-in.d150 { animation-delay: 150ms; }
-.hero-in.d300 { animation-delay: 300ms; }
-.hero-in.d450 { animation-delay: 450ms; }
-@keyframes heroIn {
+
+/* 위에서 떨어지는 빛 한 겹. 경계가 보이면 실패다 */
+.hx-room {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(135% 78% at 50% -6%, rgba(249, 247, 241, 0.07), rgba(249, 247, 241, 0) 74%);
+}
+
+/* 위아래로 크게 비운다 — 여백이 이 화면의 재료다 */
+.hx-stage {
+  padding-top: clamp(3.25rem, 9.5vh, 8rem);
+  padding-bottom: clamp(3.75rem, 11vh, 9.5rem);
+}
+
+/* 한 문장, 두 호흡. 앞은 낮고 넓게 · 뒤는 크고 좁게 */
+.hx-say-lead {
+  font-size: clamp(1.35rem, 4.5vw, 3.4rem);
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  line-height: 1.34;
+  color: rgba(249, 247, 241, 0.88);
+}
+.hx-say-key {
+  margin-top: clamp(0.1rem, 0.7vw, 0.55rem);
+  font-size: clamp(2.5rem, 8.6vw, 7.5rem);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 1.04;
+}
+
+.hx-sub {
+  margin-top: clamp(1.6rem, 3.6vh, 2.9rem);
+  max-width: 46ch;
+  font-size: clamp(0.94rem, 1.02vw, 1.05rem);
+  line-height: 1.82;
+  text-wrap: balance;
+  color: rgba(249, 247, 241, 0.8);
+}
+
+.hx-act {
+  margin-top: clamp(1.9rem, 4vh, 3.1rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem 2rem;
+}
+.hx-cta {
+  display: inline-flex;
+  align-items: center;
+  background: #f9f7f1;
+  color: #1f2a22;
+  padding: 1rem 2.1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+.hx-cta:hover {
+  background: #efece3;
+}
+.hx-cta-line {
+  border-bottom: 2px solid rgba(249, 247, 241, 0.45);
+  padding-bottom: 0.15rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f9f7f1;
+}
+.hx-cta-line:hover {
+  border-bottom-color: #f9f7f1;
+}
+
+.hx-note {
+  margin-top: clamp(2.4rem, 5.5vh, 4rem);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem 3.2rem;
+  font-size: 0.83rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: rgba(249, 247, 241, 0.8);
+}
+
+/* 등장 — 기본형에서는 아예 붙지 않는다 */
+html:not([data-motion='off']) .hx-rise {
+  animation: hxRise 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html:not([data-motion='off']) .hx-d1 { animation-delay: 100ms; }
+html:not([data-motion='off']) .hx-d2 { animation-delay: 200ms; }
+html:not([data-motion='off']) .hx-d3 { animation-delay: 330ms; }
+html:not([data-motion='off']) .hx-d4 { animation-delay: 420ms; }
+html:not([data-motion='off']) .hx-d5 { animation-delay: 500ms; }
+@keyframes hxRise {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -130,7 +224,7 @@ html {
 
 @media (prefers-reduced-motion: reduce) {
   .anim-fade-up,
-  .hero-in {
+  .hx-rise {
     opacity: 1 !important;
     transform: none !important;
     animation: none !important;
@@ -153,7 +247,7 @@ html {
   transition: none !important;
 }
 [data-motion='off'] .anim-fade-up,
-[data-motion='off'] .hero-in {
+[data-motion='off'] .hx-rise {
   opacity: 1 !important;
   transform: none !important;
 }

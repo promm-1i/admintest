@@ -191,8 +191,8 @@ function Header({ active }: { active: string }) {
     >
       <div className="mx-auto max-w-6xl px-5 h-[72px] flex items-center justify-between">
         <button onClick={() => window.scrollTo({ top: 0, behavior: MOTION ? 'smooth' : 'auto' })} className="flex items-baseline gap-2.5">
-          <span className={`f-myeongjo text-[1.2rem] font-bold tracking-tight ${scrolled ? 'text-ink' : 'text-paper'}`}>여백</span>
-          <span className={`text-[0.7rem] tracking-[0.25em] uppercase ${scrolled ? 'text-ink/45' : 'text-paper/70'}`}>{SITE.tagline}</span>
+          <span className="f-myeongjo text-[1.2rem] font-bold tracking-tight text-ink">여백</span>
+          <span className="text-[0.7rem] tracking-[0.25em] uppercase text-ink/70">{SITE.tagline}</span>
         </button>
         <nav className="hidden md:flex items-center gap-7">
           {SITE.nav.map((n) => (
@@ -200,11 +200,7 @@ function Header({ active }: { active: string }) {
               key={n.href}
               onClick={() => goTo(n.href)}
               className={`text-[0.88rem] ${
-                active === n.href.slice(1)
-                  ? `font-bold ${scrolled ? 'text-teal' : 'text-paper'}`
-                  : scrolled
-                    ? 'text-ink/65 hover:text-ink font-medium'
-                    : 'text-paper/75 hover:text-paper font-medium'
+                active === n.href.slice(1) ? 'font-bold text-teal' : 'text-ink/70 hover:text-ink font-medium'
               }`}
               style={{ transition: MOTION ? 'color 0.2s' : 'none' }}
             >
@@ -214,7 +210,7 @@ function Header({ active }: { active: string }) {
         </nav>
         <button
           onClick={() => goTo('#reserve')}
-          className={`px-5 py-2.5 text-[0.85rem] font-bold ${scrolled ? 'bg-teal text-paper hover:bg-ink' : 'bg-paper text-ink hover:bg-teal hover:text-paper'}`}
+          className="px-5 py-2.5 text-[0.85rem] font-bold bg-teal text-paper hover:bg-ink"
           style={{ transition: MOTION ? 'background-color 0.2s, color 0.2s' : 'none' }}
         >
           예약 문의
@@ -227,32 +223,59 @@ function Header({ active }: { active: string }) {
 // ─── 히어로 ───────────────────────────────────────────────────────────────────
 
 function Hero() {
+  const jump = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    goTo(href)
+  }
   return (
-    <section className="relative h-[92vh] min-h-[560px] overflow-hidden">
-      {/* 여기에 히어로 사진 교체 */}
-      <img src={SITE.heroPhoto} alt="스테이 여백 전경" className={`absolute inset-0 w-full h-full object-cover ${MOTION ? 'hero-zoom' : ''}`} />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/55 via-ink/15 to-ink/25" />
-      <div className="relative h-full mx-auto max-w-6xl px-5 flex flex-col justify-end pb-20 text-paper">
-        <p className={`text-[0.75rem] tracking-[0.45em] uppercase text-paper/70 mb-6 ${MOTION ? 'hero-in' : ''}`}>{SITE.nameEn} — Yangyang</p>
-        <h1 className={`f-myeongjo text-[clamp(2.1rem,5.5vw,3.8rem)] font-bold leading-[1.3] whitespace-pre-line ${MOTION ? 'hero-in d200' : ''}`}>
-          {SITE.slogan}
-        </h1>
-        <p className={`mt-6 max-w-md text-[1rem] leading-relaxed text-paper/80 ${MOTION ? 'hero-in d400' : ''}`}>{SITE.sloganSub}</p>
-        <div className={`mt-9 flex items-center gap-5 ${MOTION ? 'hero-in d600' : ''}`}>
-          <button
-            onClick={() => goTo('#rooms')}
-            className="px-7 py-3.5 bg-paper text-ink text-[0.92rem] font-bold hover:bg-teal hover:text-paper"
-            style={{ transition: MOTION ? 'all 0.2s' : 'none' }}
-          >
-            객실 보기
-          </button>
-          <button
-            onClick={() => goTo('#reserve')}
-            className="text-[0.92rem] font-bold border-b border-paper/70 pb-0.5 hover:text-paper/70"
-            style={{ transition: MOTION ? 'color 0.2s' : 'none' }}
-          >
-            빈 날짜 문의
-          </button>
+    <section className="hx-hero relative h-[92vh] min-h-[560px] overflow-hidden bg-paper">
+      <div className="relative h-full flex flex-col justify-between px-[clamp(20px,4vw,64px)] pt-[clamp(88px,11vh,116px)] pb-[clamp(28px,5vh,48px)]">
+        {/* 위 — 이름표 하나, 작은 사진 하나 */}
+        <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-6">
+          <p className={`text-[0.72rem] tracking-[0.4em] uppercase font-semibold text-teal ${MOTION ? 'hero-in' : ''}`}>
+            {SITE.nameEn} — Yangyang
+          </p>
+          <div className={`hx-photo self-end shrink-0 overflow-hidden w-[clamp(116px,13vw,188px)] ${MOTION ? 'hero-in d200' : ''}`}>
+            {/* 여기에 히어로 사진 교체 */}
+            <img src={SITE.heroPhoto} alt="스테이 여백 독채 세 동" className="w-full aspect-[3/2] object-cover" />
+          </div>
+        </div>
+
+        {/* 가운데 — 이름 두 글자를 화면 끝까지, 그 사이의 여백에 문장 하나 */}
+        <div className="hx-wordrow">
+          <span className="sr-only">{SITE.name}</span>
+          <span aria-hidden="true" className={`hx-glyph hx-g1 f-myeongjo ${MOTION ? 'hx-open' : ''}`}>
+            여
+          </span>
+          <h1 className={`hx-slogan f-myeongjo whitespace-pre-line ${MOTION ? 'hero-in d400' : ''}`}>{SITE.slogan}</h1>
+          <span aria-hidden="true" className={`hx-glyph hx-g2 f-myeongjo ${MOTION ? 'hx-open' : ''}`}>
+            백
+          </span>
+        </div>
+
+        {/* 아래 — 한 단락과 예약 */}
+        <div
+          className={`border-t border-ink/15 pt-5 md:pt-6 flex flex-col md:flex-row md:items-end md:justify-between gap-5 md:gap-12 ${MOTION ? 'hero-in d600' : ''}`}
+        >
+          <p className="max-w-[33rem] text-[0.9rem] md:text-[0.95rem] leading-relaxed text-ink/70">{SITE.sloganSub}</p>
+          <div className="flex items-center gap-6 shrink-0">
+            <a
+              href="#rooms"
+              onClick={jump('#rooms')}
+              className="hx-cta px-7 py-3.5 bg-teal text-paper text-[0.92rem] font-bold hover:bg-ink"
+              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+            >
+              객실 보기
+            </a>
+            <a
+              href="#reserve"
+              onClick={jump('#reserve')}
+              className="text-[0.92rem] font-bold border-b border-ink/40 pb-0.5 hover:text-teal hover:border-teal"
+              style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
+            >
+              빈 날짜 문의
+            </a>
+          </div>
         </div>
       </div>
     </section>

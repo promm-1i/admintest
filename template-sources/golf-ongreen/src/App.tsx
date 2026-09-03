@@ -195,40 +195,214 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 하단 센터 문구 + 트레이서 아크 드로잉 ───────────────────────────
+// ─── 히어로 — 스크린 안에서 코스가 바뀌는 시뮬레이터 화면 ──────────────────────
+
+// 능선 아래 나무 라인 (12구간 × 40 = 480)
+const TREELINE =
+  'M0 118 q20 -16 40 0 q20 -18 40 0 q20 -14 40 0 q20 -17 40 0 q20 -15 40 0 q20 -18 40 0 q20 -14 40 0 q20 -16 40 0 q20 -17 40 0 q20 -15 40 0 q20 -16 40 0 q20 -14 40 0 L480 134 L0 134 Z'
+
+// 시뮬레이터 화면 안의 코스 — 글자 없이 그래픽만. 1=파4 도그렉, 2=파3 아일랜드, 3=파5 롱홀
+function CourseScene({ n, k }: { n: 1 | 2 | 3; k: number }) {
+  const sky = `hxSky${k}`
+  const haze = `hxHaze${k}`
+  const shade = `hxShade${k}`
+  const horizon = n === 1 ? 103 : n === 2 ? 99 : 111
+  return (
+    <svg viewBox="0 0 480 270" preserveAspectRatio="xMidYMid slice" className="block w-full h-full" aria-hidden>
+      <defs>
+        <linearGradient id={sky} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#122333" />
+          <stop offset="100%" stopColor="#527d92" />
+        </linearGradient>
+        <linearGradient id={haze} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#cfe3ea" stopOpacity="0.3" />
+          <stop offset="100%" stopColor="#cfe3ea" stopOpacity="0" />
+        </linearGradient>
+        <linearGradient id={shade} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#04170a" stopOpacity="0" />
+          <stop offset="100%" stopColor="#04170a" stopOpacity="0.38" />
+        </linearGradient>
+      </defs>
+      <rect width="480" height="270" fill={`url(#${sky})`} />
+
+      {n === 1 && (
+        <>
+          <path d="M0 104 L0 88 L54 76 L110 87 L170 66 L238 85 L304 70 L368 87 L426 76 L480 88 L480 104 Z" fill="#24473c" />
+          <rect y="103" width="480" height="167" fill="#1f5226" />
+          <path d={TREELINE} transform="translate(0 -12)" fill="#1a3a22" />
+          <rect y={horizon} width="480" height="34" fill={`url(#${haze})`} />
+          <path d="M70 270 C112 214 180 166 246 128 L302 128 C330 168 356 216 402 270 Z" fill="#4a9440" />
+          <path d="M132 270 C170 218 214 172 258 132 L272 132 C246 174 214 220 196 270 Z" fill="#57a84a" opacity="0.5" />
+          <path d="M302 270 C290 218 290 172 296 132 L306 132 C318 174 338 220 358 270 Z" fill="#57a84a" opacity="0.32" />
+          <ellipse cx="150" cy="196" rx="30" ry="10" fill="#ddd0aa" />
+          <ellipse cx="346" cy="166" rx="21" ry="7" fill="#ddd0aa" />
+          <ellipse cx="277" cy="127" rx="36" ry="11" fill="#3f7f36" />
+          <ellipse cx="277" cy="126" rx="26" ry="7.5" fill="#6fc453" />
+          <ellipse cx="277" cy="125" rx="14" ry="4" fill="#85da63" />
+          <path d="M286 124 L286 101" stroke="#f2f8ec" strokeWidth="1.8" />
+          <path d="M286 101 L305 106 L286 111 Z" fill="#8cf24c" />
+          <rect y="140" width="480" height="130" fill={`url(#${shade})`} />
+          <path d="M232 266 C238 172 250 96 283 121" stroke="#8cf24c" strokeWidth="2.6" fill="none" strokeLinecap="round" className="hx-tracer" />
+          <circle cx="283" cy="121" r="4" fill="#f4ffea" className="hx-tracer" />
+        </>
+      )}
+
+      {n === 2 && (
+        <>
+          <path d="M0 100 L0 84 L60 72 L118 84 L182 62 L250 82 L318 68 L384 84 L440 74 L480 84 L480 100 Z" fill="#24473c" />
+          <rect y="99" width="480" height="171" fill="#1f5226" />
+          <path d={TREELINE} transform="translate(0 -16)" fill="#1a3a22" />
+          <rect y={horizon} width="480" height="34" fill={`url(#${haze})`} />
+          <path d="M0 152 C110 140 210 162 300 150 C382 140 440 154 480 146 L480 214 C420 224 356 208 276 216 C186 225 106 208 0 218 Z" fill="#2a6b85" />
+          <path d="M40 170 C130 160 210 178 300 166" stroke="#5b9db4" strokeWidth="2" fill="none" opacity="0.75" strokeLinecap="round" />
+          <ellipse cx="298" cy="150" rx="55" ry="17" fill="#376b32" />
+          <ellipse cx="298" cy="149" rx="40" ry="11.5" fill="#6fc453" />
+          <ellipse cx="303" cy="147" rx="20" ry="5.5" fill="#85da63" />
+          <ellipse cx="264" cy="156" rx="13" ry="4.5" fill="#ddd0aa" />
+          <path d="M308 145 L308 122" stroke="#f2f8ec" strokeWidth="1.8" />
+          <path d="M308 122 L327 127 L308 132 Z" fill="#8cf24c" />
+          <path d="M112 270 L364 270 L308 222 L180 222 Z" fill="#4a9440" />
+          <path d="M182 270 L272 270 L262 224 L214 224 Z" fill="#57a84a" opacity="0.45" />
+          <rect y="160" width="480" height="110" fill={`url(#${shade})`} />
+          <path d="M244 218 C252 150 272 110 304 143" stroke="#8cf24c" strokeWidth="2.6" fill="none" strokeLinecap="round" className="hx-tracer" />
+          <circle cx="304" cy="143" r="4" fill="#f4ffea" className="hx-tracer" />
+        </>
+      )}
+
+      {n === 3 && (
+        <>
+          <path d="M0 112 L0 94 L58 82 L112 94 L176 74 L244 92 L310 78 L376 94 L432 84 L480 94 L480 112 Z" fill="#24473c" />
+          <rect y="111" width="480" height="159" fill="#1f5226" />
+          <path d={TREELINE} transform="translate(0 -4)" fill="#1a3a22" />
+          <rect y={horizon} width="480" height="34" fill={`url(#${haze})`} />
+          <path d="M40 270 C88 206 158 156 228 124 L292 124 C334 158 396 208 442 270 Z" fill="#4a9440" />
+          <path d="M112 270 C152 214 198 168 246 130 L260 130 C226 172 190 218 172 270 Z" fill="#57a84a" opacity="0.5" />
+          <path d="M296 270 C288 216 284 168 292 130 L304 130 C320 172 350 218 378 270 Z" fill="#57a84a" opacity="0.32" />
+          <ellipse cx="418" cy="198" rx="50" ry="18" fill="#2a6b85" />
+          <path d="M386 194 C404 188 430 192 448 198" stroke="#5b9db4" strokeWidth="2" fill="none" opacity="0.7" strokeLinecap="round" />
+          <ellipse cx="256" cy="176" rx="32" ry="10" fill="#ddd0aa" />
+          <ellipse cx="152" cy="212" rx="24" ry="8" fill="#ddd0aa" />
+          <ellipse cx="258" cy="125" rx="30" ry="9" fill="#3f7f36" />
+          <ellipse cx="258" cy="124" rx="21" ry="6" fill="#6fc453" />
+          <ellipse cx="258" cy="123" rx="11" ry="3.2" fill="#85da63" />
+          <path d="M265 122 L265 100" stroke="#f2f8ec" strokeWidth="1.8" />
+          <path d="M265 100 L283 105 L265 110 Z" fill="#8cf24c" />
+          <rect y="146" width="480" height="124" fill={`url(#${shade})`} />
+          <path d="M240 266 C226 176 224 96 262 119" stroke="#8cf24c" strokeWidth="2.6" fill="none" strokeLinecap="round" className="hx-tracer" />
+          <circle cx="262" cy="119" r="4" fill="#f4ffea" className="hx-tracer" />
+        </>
+      )}
+    </svg>
+  )
+}
 
 function Hero() {
+  const jump = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    goTo(href)
+  }
   return (
-    <section className="relative h-[92vh] min-h-[560px] overflow-hidden">
+    <section className="hero hx-hero relative overflow-hidden md:h-[92vh] md:min-h-[660px]">
       {/* 여기에 히어로 사진 교체 */}
-      <img src={SITE.heroPhoto} alt="스크린골프 룸" className="absolute inset-0 w-full h-full object-cover opacity-55" />
-      <div className="absolute inset-0 bg-gradient-to-t from-turf via-turf/40 to-turf/70" />
-      {/* 트레이서 아크 — 샷 궤적 라인 드로잉 */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden>
-        <path d="M 80 720 Q 620 60 1380 300" stroke="#8CF24C" strokeWidth="3.5" strokeLinecap="round" className={MOTION ? 'tracer-path' : ''} pathLength={1} />
-        <circle cx="1380" cy="300" r="7" fill="#8CF24C" className={MOTION ? 'tracer-ball' : ''} />
-      </svg>
-      <div className="relative h-full flex flex-col items-center justify-end text-center pb-20 px-5">
-        <p className={`text-[0.8rem] tracking-[0.4em] uppercase font-extrabold text-tracer ${MOTION ? 'hero-in' : ''}`}>Screen Golf — Mokdong</p>
-        <h1 className={`mt-4 text-[clamp(2.8rem,8vw,5.6rem)] font-extrabold tracking-[-0.04em] text-white ${MOTION ? 'hero-in d150' : ''}`}>
-          {SITE.slogan}
-        </h1>
-        <p className={`mt-5 max-w-lg text-[1.02rem] leading-relaxed text-smoke/85 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
-        <div className={`mt-9 flex items-center gap-5 ${MOTION ? 'hero-in d450' : ''}`}>
-          <button
-            onClick={() => goTo('#reserve')}
-            className="px-8 py-4 rounded-full bg-tracer text-turf text-[0.95rem] font-extrabold hover:bg-white"
-            style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+      <img src={SITE.heroPhoto} alt="스크린 룸에서 티샷하는 골퍼" className="absolute inset-0 w-full h-full object-cover" />
+      {/* 모바일 — 세로로 어둡게 */}
+      <div
+        className="absolute inset-0 md:hidden"
+        style={{ backgroundImage: 'linear-gradient(180deg, rgba(23,26,23,0.94) 0%, rgba(23,26,23,0.78) 34%, rgba(23,26,23,0.86) 62%, #171a17 100%)' }}
+      />
+      {/* PC — 문구가 앉는 왼쪽만 눌러 두고, 가운데 스크린 빛은 남긴다 */}
+      <div
+        className="absolute inset-0 hidden md:block"
+        style={{
+          backgroundImage:
+            'linear-gradient(90deg, rgba(23,26,23,0.96) 0%, rgba(23,26,23,0.9) 30%, rgba(23,26,23,0.6) 50%, rgba(23,26,23,0.24) 66%, rgba(23,26,23,0.5) 100%)',
+        }}
+      />
+      <div
+        className="absolute inset-0 hidden md:block"
+        style={{ backgroundImage: 'linear-gradient(180deg, rgba(23,26,23,0.72) 0%, rgba(23,26,23,0.08) 34%, rgba(23,26,23,0.3) 68%, #171a17 100%)' }}
+      />
+
+      <div className="relative mx-auto max-w-6xl px-5 pt-[104px] pb-14 md:h-full md:pt-[70px] md:pb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-9 md:gap-12">
+        {/* 왼쪽 — 문구 */}
+        <div className="md:max-w-[540px] md:pb-1">
+          <p className={`text-[0.72rem] md:text-[0.78rem] tracking-[0.34em] uppercase font-extrabold text-tracer ${MOTION ? 'hero-in' : ''}`}>
+            Screen Golf — Mokdong
+          </p>
+          <h1
+            className={`mt-4 text-[clamp(2.6rem,5.9vw,4.9rem)] font-extrabold tracking-[-0.04em] leading-[1.06] text-white ${MOTION ? 'hero-in d150' : ''}`}
+            style={{ textShadow: '0 2px 28px rgba(0,0,0,0.6)' }}
           >
-            룸 예약하기
-          </button>
-          <button
-            onClick={() => goTo('#price')}
-            className="text-[0.95rem] font-bold text-smoke border-b-2 border-smoke/50 pb-0.5 hover:text-tracer hover:border-tracer"
-            style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
+            {SITE.slogan}
+          </h1>
+          <p
+            className={`mt-5 max-w-[28rem] text-[1rem] leading-relaxed text-smoke ${MOTION ? 'hero-in d300' : ''}`}
+            style={{ textShadow: '0 1px 14px rgba(0,0,0,0.7)' }}
           >
-            요금 보기
-          </button>
+            {SITE.sloganSub}
+          </p>
+          <div className={`mt-8 flex flex-wrap items-center gap-3 ${MOTION ? 'hero-in d450' : ''}`}>
+            <a
+              href="#reserve"
+              onClick={jump('#reserve')}
+              className="hx-cta px-7 py-3.5 rounded-full bg-tracer text-turf text-[0.95rem] font-extrabold hover:bg-white"
+              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+            >
+              룸 예약하기
+            </a>
+            <a
+              href="#price"
+              onClick={jump('#price')}
+              className="hx-cta-sub px-7 py-3.5 rounded-full border-2 border-white/35 text-[0.95rem] font-bold text-smoke hover:border-tracer hover:text-tracer"
+              style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
+            >
+              요금 보기
+            </a>
+          </div>
+          <p
+            className={`mt-6 text-[0.85rem] leading-relaxed text-smoke ${MOTION ? 'hero-in d450' : ''}`}
+            style={{ textShadow: '0 1px 12px rgba(0,0,0,0.7)' }}
+          >
+            {SITE.location.walk} · {SITE.location.parking}
+          </p>
+        </div>
+
+        {/* 오른쪽 — 시뮬레이터 화면. 화면 안 코스가 8초 루프로 바뀐다 */}
+        <div
+          className={`w-full md:w-[452px] md:shrink-0 rounded-xl border border-white/12 bg-[#131711] p-4 shadow-[0_30px_70px_rgba(0,0,0,0.65)] ${MOTION ? 'hero-in d300' : ''}`}
+        >
+          <div className="flex items-baseline justify-between gap-3 px-0.5 pb-3">
+            <span className="text-[0.66rem] font-extrabold tracking-[0.28em] uppercase text-tracer">Simulator</span>
+            <span className="nums text-[0.74rem] text-[#9aa39a]">
+              {SITE.hours[0].day} {SITE.hours[0].time}
+            </span>
+          </div>
+          <div className="hx-view aspect-[12/5] md:aspect-[16/9] rounded-md border border-white/10">
+            <div className="hx-reel">
+              <div className="hx-scene">
+                <CourseScene n={1} k={1} />
+              </div>
+              <div className="hx-scene">
+                <CourseScene n={2} k={2} />
+              </div>
+              <div className="hx-scene">
+                <CourseScene n={3} k={3} />
+              </div>
+              <div className="hx-scene">
+                <CourseScene n={1} k={4} />
+              </div>
+            </div>
+          </div>
+          <p className="mt-4 text-[0.98rem] font-extrabold text-white">
+            {SITE.rooms[0].name} · {SITE.rooms[1].name}
+          </p>
+          <p className="mt-1.5 text-[0.82rem] leading-relaxed text-[#9aa39a]">{SITE.rooms[0].desc}</p>
+          <div className="mt-4 pt-3.5 border-t border-white/10 flex items-baseline justify-between gap-3">
+            <span className="text-[0.82rem] font-bold text-white whitespace-nowrap">{SITE.price[2].time}</span>
+            <span className="nums text-[0.84rem] font-extrabold text-tracer whitespace-nowrap">
+              주중 {SITE.price[2].week} · 주말 {SITE.price[2].weekend}
+            </span>
+          </div>
         </div>
       </div>
     </section>

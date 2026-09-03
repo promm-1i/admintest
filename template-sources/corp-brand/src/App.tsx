@@ -41,6 +41,21 @@ const SITE = {
   // 여기에 히어로 사진 교체
   heroPhoto: heroImg,
 
+  // 여기에 히어로 첫 줄 교체
+  heroEyebrow: '정밀 부품 제조 · 2009년 설립 · 경기 화성',
+
+  // 여기에 히어로 사양판 교체 — 라벨과 값만 바꾸면 됩니다
+  heroPlate: {
+    title: '가공 사양',
+    caption: '제1공장 · 화성',
+    specs: [
+      { k: '가공 공차', v: '±0.005mm' },
+      { k: '월 생산', v: '12만 개' },
+      { k: '평균 납기', v: '21일' },
+      { k: '검사', v: '전수 · 성적서 발행' },
+    ],
+  },
+
   // 사업영역
   business: [
     {
@@ -230,37 +245,98 @@ function Header({ active }: { active: string }) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// 히어로 — 그라파이트 선언
+// 히어로 — 도면 한 장. 부품 단면이 화면을 가로질러 좌우로 흘러나가고,
+//          절삭 지점(엔드밀) 한 곳만 8초 루프로 움직인다.
 // ══════════════════════════════════════════════════════════════════════════════
+
+/* 부품 도면 — 배경 이미지로 깔아 히어로 폭을 가로지르고 좌우로 잘려 나간다.
+   DOM 요소가 아니라서 화면 밖으로 삐져나가는 자식 노드가 생기지 않는다.
+   좌표계 2000×230, 중심선 y=115. 우측 정렬이라 오른쪽 끝(가공면·툴)이 항상 보인다.
+   플랜지 → 몸통 → 보스 → 저널 → 모따기 → 끝면 순의 단차축 단면. */
+const HX_DRAWING = `<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="230" viewBox="0 0 2000 230">
+<defs><pattern id="hxh" width="15" height="15" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+<rect width="15" height="15" fill="#ffffff" fill-opacity="0.028"/>
+<line x1="0" y1="0" x2="0" y2="15" stroke="#ffffff" stroke-opacity="0.075" stroke-width="1"/>
+</pattern></defs>
+<path d="M0 115H2000" stroke="#ffffff" stroke-opacity="0.32" stroke-width="1.5" stroke-dasharray="42 10 8 10"/>
+<path d="M0 57H750V83H880V97H1000V83H1320V69H1670V98H1690V94H1916L1936 101V129L1916 136H1690V132H1670V161H1320V147H750V173H0Z" fill="url(#hxh)" stroke="#ffffff" stroke-opacity="0.8" stroke-width="2.2" stroke-linejoin="miter"/>
+<path d="M1690 142V190M1916 142V190M1690 181H1916" stroke="#ffffff" stroke-opacity="0.32" stroke-width="1.1"/>
+<path d="M1690 181l14-4.2v8.4zM1916 181l-14-4.2v8.4z" fill="#ffffff" fill-opacity="0.48"/>
+<text x="1803" y="172" text-anchor="middle" font-family="sans-serif" font-size="17" font-weight="600" letter-spacing="0.4" fill="#dfe0e4">±0.005mm</text>
+</svg>`
+
+const HX_DRAWING_URL = `url("data:image/svg+xml,${encodeURIComponent(HX_DRAWING)}")`
 
 function Hero() {
   const { ref, inView } = useInView(0.05)
   return (
-    <section ref={ref} className="bg-graph text-white pt-32 md:pt-44 pb-0 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-5 md:px-6">
-        <div className={`rule-draw ${inView ? 'in-view' : ''} w-12 h-1 bg-indigo mb-8 ml-auto`} style={{ transformOrigin: 'right' }} />
-        <h1 className={`anim-fade-up ${inView ? 'in-view' : ''} f-display text-right text-[3rem] md:text-[5rem] whitespace-pre-line mb-8`}>
+    <section ref={ref} className="hero hx-hero relative overflow-hidden bg-graph text-white">
+      {/* 여기에 회사 대표 사진 교체 (공장 · 설비 · 팀) */}
+      <img src={SITE.heroPhoto} alt="바움 제1공장 CNC 가공 라인" className="hx-photo absolute inset-0 w-full h-full object-cover" />
+      <div className="hx-scrim absolute inset-0" aria-hidden="true" />
+
+      {/* ── 선언 ── */}
+      <div className={`anim-fade-up ${inView ? 'in-view' : ''} relative max-w-6xl mx-auto px-5 md:px-6 pt-28 md:pt-32 pb-8 md:pb-10`}>
+        <p className="flex items-center gap-2.5 text-[0.8125rem] font-semibold text-[#b9bbc2] mb-6">
+          <span className="w-2.5 h-2.5 shrink-0" style={{ background: '#8b83f6' }} aria-hidden="true" />
+          {SITE.heroEyebrow}
+        </p>
+
+        <h1 className="f-display text-[2.4rem] md:text-[3.4rem] lg:text-[4rem] xl:text-[4.6rem] whitespace-pre-line mb-7 max-w-4xl">
           {SITE.slogan}
         </h1>
-        <div className={`anim-fade-up d80 ${inView ? 'in-view' : ''} flex flex-col md:flex-row-reverse md:items-end md:justify-between gap-8 mb-16`}>
-          <p className="whitespace-pre-line text-right text-[1rem] text-white/55 leading-[1.85] max-w-md md:ml-auto">{SITE.sloganSub}</p>
-          <div className="flex items-center gap-5 shrink-0">
-            <button
-              onClick={() => goTo('#contact')}
-              className="px-7 py-4 bg-indigo text-white text-[1rem] font-bold hover:bg-indigo-d"
-              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-            >
-              견적 문의하기
-            </button>
-            <button onClick={() => goTo('#business')} className="text-[1rem] font-bold border-b-2 border-white/60 pb-0.5 hover:border-white" style={{ transition: MOTION ? 'border-color 0.2s' : 'none' }}>
-              사업영역 보기
-            </button>
-          </div>
+
+        <p className="whitespace-pre-line text-[1rem] leading-[1.85] text-[#b9bbc2] max-w-xl mb-9">{SITE.sloganSub}</p>
+
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-4">
+          <a
+            href="#contact"
+            onClick={(e) => { e.preventDefault(); goTo('#contact') }}
+            className="hx-cta inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 bg-indigo text-white text-[1rem] font-bold hover:bg-indigo-d"
+            style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+          >
+            견적 문의하기
+          </a>
+          <a
+            href="#business"
+            onClick={(e) => { e.preventDefault(); goTo('#business') }}
+            className="text-[1rem] font-bold text-white border-b-2 border-white/50 pb-0.5 hover:border-white"
+            style={{ transition: MOTION ? 'border-color 0.2s' : 'none' }}
+          >
+            사업영역 보기
+          </a>
         </div>
       </div>
-      {/* 여기에 회사 대표 사진 교체 (공장 · 설비 · 팀) */}
-      <div className={`anim-fade-up d160 ${inView ? 'in-view' : ''} max-w-6xl mx-auto px-5 md:px-6`}>
-        <img src={SITE.heroPhoto} alt="바움 작업 현장" className="w-full aspect-[16/6] object-cover" />
+
+      {/* ── 도면 — 좌우로 흘러나가고, 절삭 지점 한 곳만 움직인다 ── */}
+      <div className="hx-draw relative" style={{ backgroundImage: HX_DRAWING_URL }} aria-hidden="true">
+        {/* 히어로 안에서 무한 반복하는 선언은 이 하나뿐이다.
+            기본 상태 = 툴이 저널 오른쪽 끝 위로 물러난 자리 → 멈추면 완성 부품 도면이 된다. */}
+        <svg className="hx-tool" viewBox="0 0 70 140" fill="none">
+          <path d="M20 0H50V54H20Z" fill="rgba(255,255,255,0.09)" stroke="rgba(255,255,255,0.6)" strokeWidth="2" />
+          <path d="M8 54H62V132L56 140H14L8 132Z" fill="rgba(139,131,246,0.16)" stroke="#8b83f6" strokeWidth="2.2" strokeLinejoin="round" />
+          <path d="M8 122L62 96M8 104L62 78M8 86L62 60" stroke="#8b83f6" strokeOpacity="0.5" strokeWidth="1.6" />
+        </svg>
+      </div>
+
+      {/* ── 표제란 — 도면 아래 전 폭에 깔리는 사양·인증 ── */}
+      <div className="hx-rail relative">
+        <div className="max-w-6xl mx-auto px-5 md:px-6">
+          <dl className="grid grid-cols-2 lg:grid-cols-4">
+            {SITE.heroPlate.specs.map((s) => (
+              <div key={s.k} className="hx-cell">
+                <dt className="text-[0.75rem] font-semibold tracking-[0.04em] text-[#a4a6ad] mb-1.5">{s.k}</dt>
+                <dd className="nums text-[0.9375rem] font-bold text-white">{s.v}</dd>
+              </div>
+            ))}
+          </dl>
+          <div className="hx-note">
+            <span className="hx-note-k">{SITE.heroPlate.title}</span>
+            <span className="hx-note-v">{SITE.heroPlate.caption}</span>
+            <span className="hx-note-k">인증</span>
+            <span className="hx-note-v">{SITE.certifications.join(' · ')}</span>
+          </div>
+        </div>
       </div>
     </section>
   )
