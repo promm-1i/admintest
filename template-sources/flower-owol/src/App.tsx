@@ -5,6 +5,7 @@ import img4 from './images/4.jpg'
 import img5 from './images/5.jpg'
 import img6 from './images/6.jpg'
 import img7 from './images/7.jpg'
+import img8 from './images/8.jpg'
 import { useState, useEffect, useRef } from 'react'
 import { MOTION } from './variant'
 
@@ -55,7 +56,7 @@ const SITE = {
   ],
 
   // 여기에 히어로 사진 교체 — 작업대 전경, 꽃 색이 화면을 채우는 세로 사진
-  heroImg: img7,
+  heroImg: img8,
   heroAlt: '작업대에 꽃을 펼쳐놓고 다듬는 모습',
 
   // 용도별 상품 — 여기에 상품 사진 교체

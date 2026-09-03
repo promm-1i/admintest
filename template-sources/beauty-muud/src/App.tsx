@@ -266,7 +266,7 @@ function Hero() {
         <img
           src={SITE.heroPhoto}
           alt="살롱 무드 내부 — 창가 미러 스테이션"
-          className={`hx-shot absolute inset-0 h-full w-full object-cover object-[28%_50%] md:object-[50%_54%] ${MOTION ? 'hx-shot-in' : ''}`}
+          className={`hx-shot absolute inset-0 h-full w-full object-cover object-[74%_58%] md:object-[62%_54%] ${MOTION ? 'hx-shot-in' : ''}`}
         />
         {/* 글자가 앉는 쪽만 눌러 준다 — 모바일은 아래, PC는 왼쪽 */}
         <div className="hx-scrim absolute inset-0" aria-hidden="true" />
