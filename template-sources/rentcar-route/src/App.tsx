@@ -574,7 +574,7 @@ function Hero() {
         </div>
 
         {/* 지도 — 모바일 · 태블릿 */}
-        <div className="hx-map-stage lg:hidden relative -mx-5 md:-mx-6 mt-6 lg:mt-7 h-[320px] md:h-[44vw] overflow-hidden bg-[#181b21]">
+        <div className="hx-map-stage lg:hidden relative -mx-5 md:-mx-6 mt-6 lg:mt-7 h-[320px] min-[600px]:h-[400px] md:h-[44vw] overflow-hidden bg-[#181b21]">
           {/* 폭에 따라 지도가 확대되므로 글자 크기를 두 단계로 맞춥니다 */}
           <div className="md:hidden">
             <RouteMap k={1.75} />
