@@ -1,4 +1,4 @@
-import { Car, CarFront, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, type LucideIcon } from "lucide-react";
+import { Car, CarFront, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, Mountain, type LucideIcon } from "lucide-react";
 import { SAMPLES } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
 
@@ -206,6 +206,12 @@ export const INDUSTRY_ITEMS: NavItem[] = [
     title: "중고차 맞춤형",
     desc: "매물 시세 · 실차 확인 · 매입 문의",
     href: "/templates?industry=usedcar",
+  },
+  {
+    icon: Mountain,
+    title: "여행 · 트레킹 맞춤형",
+    desc: "코스 난이도 · 일정 요금 · 예약 문의",
+    href: "/templates?industry=travel",
   },
 ];
 

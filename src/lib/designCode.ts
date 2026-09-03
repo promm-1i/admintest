@@ -33,6 +33,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   tax: "TAX",
   vet: "VET",
   usedcar: "USD",
+  travel: "TRV",
 };
 
 export function getDesignCode(sample: Sample): string {

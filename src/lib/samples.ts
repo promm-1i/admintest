@@ -43,6 +43,36 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "travel-a-template",
+    industry: "여행 · 트레킹 홈페이지",
+    title: "여행 · 트레킹 홈페이지 (랜딩형 템플릿 · 디자인 A)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 여행 · 트레킹",
+    purpose:
+      "세이지 그린과 딥 포레스트의 아웃도어 무드로, 코스별 난이도 · 일정 · 요금 카드와 가이드 소개가 상담으로 이어지는 트레킹 여행사 원페이지 템플릿입니다.",
+    features: ["코스별 난이도 · 요금 카드", "포함 사항 정리", "가이드 소개", "진행 절차 안내"],
+    idealFor: "소수 정예로 운영하는 트레킹 · 하이킹 가이드 여행사",
+    image: "/thumbs/travel-a.jpg",
+    liveUrl: "/templates/travel-a/",
+    industryKey: "travel",
+    designCode: "TRVL-1001",
+  },
+  {
+    slug: "travel-a-basic-template",
+    industry: "여행 · 트레킹 홈페이지",
+    title: "여행 · 트레킹 홈페이지 (기본형 템플릿 · 디자인 A)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 여행 · 트레킹",
+    purpose:
+      "세이지 그린과 딥 포레스트의 아웃도어 무드로, 코스별 난이도 · 일정 · 요금 카드와 가이드 소개가 상담으로 이어지는 트레킹 여행사 원페이지 템플릿입니다. 스크롤 등장 애니메이션을 뺀 기본형입니다.",
+    features: ["코스별 난이도 · 요금 카드", "포함 사항 정리", "가이드 소개", "진행 절차 안내"],
+    idealFor: "소수 정예로 운영하는 트레킹 · 하이킹 가이드 여행사",
+    image: "/thumbs/travel-a.jpg",
+    liveUrl: "/templates/travel-a-basic/",
+    industryKey: "travel",
+    designCode: "TRVB-1001",
+  },
+  {
     slug: "rentcar-d-template",
     industry: "렌트카 홈페이지",
     title: "렌트카 홈페이지 (랜딩형 템플릿 · 디자인 D)",
@@ -3931,6 +3961,7 @@ const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
   golf: "스크린골프",
   craft: "공방·클래스",
   usedcar: "중고차",
+  travel: "여행·트레킹",
 };
 
 /** 실제로 템플릿이 존재하는 업종만 필터로 노출한다 (준비 안 된 업종 칩을 띄우지 않는다). */
