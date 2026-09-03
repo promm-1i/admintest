@@ -1,14 +1,14 @@
 import img1 from './images/1.jpg'
 import img2 from './images/2.jpg'
+import img3 from './images/3.jpg'
+import staff1 from './images/staff-1.jpg'
+import staff2 from './images/staff-2.jpg'
 import { useState, useEffect, useRef } from 'react'
 import { MOTION } from './variant'
 
 // ══════════════════════════════════════════════════════════════════════════════
 // SITE — 모든 텍스트·이미지·데이터를 이곳에서만 교체하세요.
 // ══════════════════════════════════════════════════════════════════════════════
-
-const U = (id: string, w: number, h: number) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&h=${h}&fit=crop&auto=format`
 
 const SITE = {
   name: '둥근숲 어린이집',
@@ -33,10 +33,11 @@ const SITE = {
     { label: '입소 상담', href: '#apply' },
   ],
 
-  // 히어로 콜라주 — 여기에 사진 교체 (시간 순서로 두 장, 하루 일과 시각과 맞춰주세요)
+  // 히어로 콜라주 — 여기에 사진 교체 (시간 순서로 세 장, 하루 일과 시각과 맞춰주세요)
   heroPhotos: [
     { src: img2, time: '07:30', label: '등원 · 자유놀이', alt: '교실에서 자유놀이 중인 아이들' },
     { src: img1, time: '09:30', label: '오전 간식 · 주제 활동', alt: '크레용으로 그림을 그리는 아이들' },
+    { src: img3, time: '13:00', label: '낮잠 · 휴식', alt: '낮잠 이불이 나란히 깔린 교실' },
   ],
 
   // 반별 안내
@@ -60,8 +61,8 @@ const SITE = {
 
   // 선생님 — 여기에 사진 교체
   teachers: [
-    { img: U('1580489944761-15a19d654956', 800, 1000), name: '김둥근 원장', career: '보육 경력 18년 · 아동학 석사' },
-    { img: U('1587654780291-39c9404d746b', 800, 1000), name: '담임교사 7명', career: '전원 보육교사 자격 · 평균 경력 7년' },
+    { img: staff1, name: '김둥근 원장', career: '보육 경력 18년 · 아동학 석사' },
+    { img: staff2, name: '담임교사 7명', career: '전원 보육교사 자격 · 평균 경력 7년' },
   ],
   teacherNote: '모든 교직원은 매년 아동학대 예방 · 심폐소생술 교육을 이수하며, 전 보육실 CCTV는 보호자 요청 시 열람할 수 있습니다.',
 
@@ -202,7 +203,8 @@ function Header({ active }: { active: string }) {
 // 두 장이므로 크기 · 크롭 · 각도를 확실히 달리해야 2단 그리드로 보이지 않는다.
 const SHOTS = [
   { slot: 'lg:absolute lg:left-[30%] lg:top-[2%] lg:w-[48%] lg:z-10', tilt: 'lg:-rotate-[1.6deg]', ratio: 'aspect-[16/9] lg:aspect-[4/3]', delay: 'd150' },
-  { slot: 'lg:absolute lg:right-0 lg:bottom-[4%] lg:w-[32%] lg:z-30', tilt: 'lg:rotate-[2.6deg]', ratio: 'aspect-square lg:aspect-[4/5]', delay: 'd300' },
+  { slot: 'lg:absolute lg:left-[43%] lg:bottom-0 lg:w-[24%] lg:z-20', tilt: '', ratio: 'aspect-square lg:aspect-[3/4]', delay: 'd300' },
+  { slot: 'lg:absolute lg:right-0 lg:bottom-[4%] lg:w-[32%] lg:z-30', tilt: 'lg:rotate-[2.6deg]', ratio: 'aspect-square lg:aspect-[4/5]', delay: 'd450' },
 ]
 
 function Hero() {
@@ -248,9 +250,15 @@ function Hero() {
             <p className="nums mt-5 text-[0.9rem] font-bold text-choco/75">{SITE.tagline}</p>
           </div>
 
-          {/* 두 번째 장 — 모바일에서는 겹침을 풀고 카피 아래로 내려온다 */}
-          <div className="hx-slot1 mt-3 lg:mt-0">
-            <Shot i={1} />
+          {/* 두·세 번째 장 — 모바일에서는 겹침을 풀고 카피 아래에 나란히 놓는다.
+              세로로 쌓으면 히어로가 한 칸 더 길어지므로 한 줄에 둔다. */}
+          <div className="hx-row mt-3 flex gap-3 lg:contents">
+            <div className="hx-slot1 lg:mt-0">
+              <Shot i={1} />
+            </div>
+            <div className="hx-slot2 lg:mt-0">
+              <Shot i={2} />
+            </div>
           </div>
         </div>
       </div>
