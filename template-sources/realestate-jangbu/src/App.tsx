@@ -267,47 +267,266 @@ function Header({ active }: { active: string }) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// 히어로
+// 히어로 — 동네 지도 위 매물 핀
+// 지도 좌표는 viewBox 900×660 기준이며, 마포 망원·합정·성산 일대의 위치 관계를 따릅니다.
+// 핀·카드·요약은 모두 SITE.listings 에서 계산합니다. 지어낸 숫자가 없습니다.
 // ══════════════════════════════════════════════════════════════════════════════
+
+const MAP_SPOTS = [
+  { dong: '연남동', x: 452, y: 238 },
+  { dong: '성산동', x: 150, y: 248 },
+  { dong: '서교동', x: 644, y: 250 },
+  { dong: '망원동', x: 244, y: 352 },
+  { dong: '합정동', x: 588, y: 404 },
+  { dong: '상수동', x: 760, y: 362 },
+]
+
+/* 동네를 대표할 매물 한 건 — 급매 → 오늘 → NEW → 등록순 */
+const BADGE_ORDER = ['급매', '오늘', 'NEW']
+const badgeRank = (b: string | null) => {
+  const i = BADGE_ORDER.indexOf(b ?? '')
+  return i < 0 ? BADGE_ORDER.length : i
+}
+
+/* 큰길 · 골목 — 지도의 뼈대 */
+const ROADS_MAIN = [
+  'M -20 452 C 180 492 430 448 940 372',
+  'M -20 300 C 220 292 560 258 940 220',
+  'M 196 -20 L 182 300 L 206 470',
+  'M 604 -20 L 622 246 L 648 424',
+  'M -20 128 C 240 116 600 92 940 66',
+]
+const ROADS_SUB = [
+  'M -20 212 C 250 202 560 176 940 144',
+  'M 398 -20 L 388 296 L 404 452',
+  'M 84 -20 L 72 300 L 88 486',
+  'M 772 -20 L 790 240 L 812 400',
+  'M -20 382 C 250 372 560 342 940 306',
+  'M 300 -20 L 330 130 L 398 214',
+  'M 500 96 L 520 300 L 542 440',
+]
+const ROADS_THIN = [
+  'M 72 88 L 392 66',
+  'M 72 170 L 390 150',
+  'M 140 -20 L 130 212',
+  'M 250 -20 L 240 212',
+  'M 404 372 L 640 348',
+  'M 206 396 L 392 380',
+  'M 470 -20 L 462 96',
+  'M 700 -20 L 714 176',
+  'M 850 -20 L 868 202',
+  'M 622 296 L 790 278',
+  'M 206 470 L 404 452',
+  'M 648 424 L 812 400',
+  'M 88 486 L 206 470',
+  'M 182 250 L 388 234',
+  'M 520 176 L 700 158',
+]
+/* 아파트 단지 — x, y, 폭, 높이, 기울기 */
+const MAP_BLOCKS = [
+  [104, 224, 52, 15, -3],
+  [104, 246, 52, 15, -3],
+  [104, 268, 42, 15, -3],
+  [258, 194, 46, 14, 2],
+  [258, 214, 46, 14, 2],
+  [420, 258, 44, 14, -2],
+  [420, 278, 44, 14, -2],
+  [672, 294, 50, 15, -4],
+  [672, 316, 50, 15, -4],
+  [724, 292, 14, 46, -4],
+  [820, 120, 46, 14, -3],
+  [820, 140, 46, 14, -3],
+  [96, 58, 32, 12, -3],
+  [96, 76, 32, 12, -3],
+  [262, 78, 44, 14, 2],
+  [262, 98, 44, 14, 2],
+  [520, 60, 42, 13, -2],
+  [520, 78, 42, 13, -2],
+  [720, 96, 44, 14, -3],
+  [720, 116, 44, 14, -3],
+  [560, 186, 38, 13, -3],
+  [560, 204, 38, 13, -3],
+  [430, 396, 46, 14, -2],
+  [430, 416, 46, 14, -2],
+  [236, 424, 44, 14, 2],
+  [236, 444, 44, 14, 2],
+]
+
+function HeroMap({
+  spots,
+  active,
+  onPick,
+}: {
+  spots: { dong: string; x: number; y: number; count: number }[]
+  active: string
+  onPick: (dong: string) => void
+}) {
+  return (
+    <svg className="hx-map" viewBox="0 0 900 660" preserveAspectRatio="xMinYMid slice" aria-hidden="true" focusable="false">
+      <rect x="-20" y="-20" width="940" height="700" fill="#f1ede6" />
+
+      {/* 한강과 강변 둔치 */}
+      <path d="M -20 470 C 200 512 460 462 940 380 L 940 700 L -20 700 Z" fill="#1e4e79" fillOpacity="0.15" />
+      <path d="M -20 462 C 200 504 460 454 940 372" fill="none" stroke="#206040" strokeOpacity="0.15" strokeWidth="20" />
+      {/* 숲길 */}
+      <path d="M 476 -20 L 506 118 L 518 214" fill="none" stroke="#206040" strokeOpacity="0.16" strokeWidth="24" strokeLinecap="round" />
+
+      <g fill="#e5dfd4">
+        {MAP_BLOCKS.map(([x, y, w, h, r]) => (
+          <rect key={`${x}-${y}`} x={x} y={y} width={w} height={h} rx="2" transform={`rotate(${r} ${x + w / 2} ${y + h / 2})`} />
+        ))}
+      </g>
+
+      <g fill="none" stroke="#e3ddd2" strokeLinecap="round">
+        {ROADS_MAIN.map((d) => <path key={d} d={d} strokeWidth="19" />)}
+        {ROADS_SUB.map((d) => <path key={d} d={d} strokeWidth="11" />)}
+      </g>
+      <g fill="none" stroke="#ffffff" strokeLinecap="round">
+        {ROADS_MAIN.map((d) => <path key={d} d={d} strokeWidth="14" />)}
+        {ROADS_SUB.map((d) => <path key={d} d={d} strokeWidth="7" />)}
+        {ROADS_THIN.map((d) => <path key={d} d={d} strokeWidth="3.5" />)}
+      </g>
+
+      {/* 지하철 6호선과 망원역 */}
+      <path
+        d="M -20 366 L 180 372 L 380 356 L 600 340 L 940 288"
+        fill="none"
+        stroke="#7a2530"
+        strokeOpacity="0.4"
+        strokeWidth="4.5"
+        strokeDasharray="11 8"
+        strokeLinecap="round"
+      />
+      <circle cx="600" cy="340" r="5" fill="#ffffff" stroke="#7a2530" strokeOpacity="0.5" strokeWidth="2.5" />
+      <circle cx="300" cy="362" r="6.5" fill="#ffffff" stroke="#7a2530" strokeWidth="3" />
+      <text className="hx-m-stop" x="300" y="386">망원역</text>
+      <text className="hx-m-water" x="700" y="452" transform="rotate(-7 700 452)">한강</text>
+
+      {/* 사무소 — 등록된 주소 자리 */}
+      <clipPath id="hxOfficeClip">
+        <rect x="306" y="236" width="70" height="70" rx="8" />
+      </clipPath>
+      <g className="hx-office">
+        <rect x="302" y="232" width="78" height="78" rx="11" fill="#ffffff" />
+        <image href={SITE.heroPhoto} x="306" y="236" width="70" height="70" clipPath="url(#hxOfficeClip)" preserveAspectRatio="xMidYMid slice" />
+        <path d="M 341 310 L 341 327" stroke="#1e1b18" strokeWidth="2" />
+        <circle cx="341" cy="331" r="5.5" fill="#1e1b18" />
+        <text className="hx-m-office" x="354" y="336">{SITE.nameShort}</text>
+      </g>
+
+      {/* 매물 핀 — 고른 동네 하나만 채워집니다 */}
+      {spots.map((s, i) => {
+        const on = s.dong === active
+        return (
+          <g key={s.dong} transform={`translate(${s.x} ${s.y})`}>
+            <g
+              className={`hx-pin ${on ? 'is-on' : ''}`}
+              role="button"
+              tabIndex={0}
+              aria-pressed={on}
+              aria-label={`${s.dong} 매물 ${s.count}건 보기`}
+              onClick={() => onPick(s.dong)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  onPick(s.dong)
+                }
+              }}
+              style={MOTION ? { animationDelay: `${260 + i * 90}ms` } : undefined}
+            >
+              {on && <circle className="hx-pulse" r="17" />}
+              <circle className="hx-pin-dot" r={on ? 18 : 15} />
+              <text className="hx-pin-n" y="5">{s.count}</text>
+              <text className="hx-pin-l" y="-38">{s.dong}</text>
+            </g>
+          </g>
+        )
+      })}
+    </svg>
+  )
+}
 
 function Hero() {
   const { ref, inView } = useInView(0.05)
+  const [active, setActive] = useState('망원동')
+
+  const spots = useMemo(
+    () =>
+      MAP_SPOTS.map((s) => {
+        const rows = SITE.listings.filter((l) => l.dong === s.dong)
+        const top = rows.slice().sort((a, b) => badgeRank(a.badge) - badgeRank(b.badge))[0]
+        return { ...s, count: rows.length, top }
+      }),
+    [],
+  )
+  const cur = spots.find((s) => s.dong === active) ?? spots[0]
+  const l = cur.top
+  const todayCount = SITE.listings.filter((x) => x.badge === '오늘').length
+
   return (
-    <section ref={ref} className="pt-28 md:pt-36 pb-14 md:pb-20">
-      <div className="max-w-6xl mx-auto px-5 md:px-6">
-        <div className={`anim-fade-up ${inView ? 'in-view' : ''}`}>
-          <div className="rounded-xl overflow-hidden border border-line">
-            <img src={SITE.heroPhoto} alt="동네 아파트 전경" className="w-full aspect-[21/8] object-cover" />
-          </div>
-          <p className="text-[0.75rem] text-ink-55 mt-2 text-right">망원동 · 사무소에서 도보 5분 거리</p>
-        </div>
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-14 items-start mt-9 mb-12">
-          <h1 className={`anim-fade-up d80 ${inView ? 'in-view' : ''} text-[2.4rem] md:text-[3.3rem] font-extrabold leading-[1.18] whitespace-pre-line`}>
-            {SITE.slogan}
-          </h1>
-          <div className={`anim-fade-up d160 ${inView ? 'in-view' : ''} lg:pt-2`}>
-            <p className="whitespace-pre-line text-[1rem] text-ink-55 leading-[1.85] mb-7">{SITE.sloganSub}</p>
-            <div className="flex flex-wrap items-center gap-4">
+    <section ref={ref} className="hx-hero">
+      <div className="hx-top">
+        <div className="hx-wrap max-w-6xl mx-auto px-5 md:px-6">
+          <div className="hx-copy">
+            <p className={`hx-kicker anim-fade-up ${inView ? 'in-view' : ''}`}>
+              오늘 올라온 매물 {todayCount}건 · 이번 주 공개 {SITE.listings.length}건
+            </p>
+            <h1 className={`hx-h1 anim-fade-up d80 ${inView ? 'in-view' : ''}`}>{SITE.slogan}</h1>
+            <p className={`hx-sub anim-fade-up d160 ${inView ? 'in-view' : ''}`}>{SITE.sloganSub}</p>
+            <div className={`hx-actions anim-fade-up d240 ${inView ? 'in-view' : ''}`}>
               <button
                 onClick={() => document.querySelector('#listings')?.scrollIntoView({ behavior: MOTION ? 'smooth' : 'auto' })}
-                className="px-7 py-4 rounded-lg bg-wine text-white text-[1rem] font-bold hover:bg-wine-d"
+                className="hx-cta"
                 style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
               >
                 오늘 매물 보기 →
               </button>
-              <a href={`tel:${SITE.phone}`} className="nums text-[1.2rem] font-extrabold border-b-[3px] border-wine pb-0.5">
+              <a href={`tel:${SITE.phone}`} className="hx-cta-tel nums">
                 {SITE.phone}
               </a>
             </div>
           </div>
         </div>
 
-        {/* 장부 한 줄 */}
-        <dl className={`anim-fade-up d240 ${inView ? 'in-view' : ''} grid grid-cols-2 md:grid-cols-4 border-y-2 border-ink`}>
-          {SITE.ledger.map((l, i) => (
-            <div key={l.k} className={`py-4 px-1 md:px-5 flex items-baseline gap-2.5 ${i > 0 ? 'md:border-l border-line' : ''}`}>
-              <dt className="text-[0.8125rem] text-ink-55 font-semibold shrink-0">{l.k}</dt>
-              <dd className="nums text-[1.05rem] md:text-[1.15rem] font-extrabold">{l.v}</dd>
+        {/* 동네 지도 — 오른쪽은 화면 밖으로 잘려 나갑니다 */}
+        <div className={`hx-stage anim-fade-up d320 ${inView ? 'in-view' : ''}`}>
+          <div className="hx-mapwrap">
+            <HeroMap spots={spots} active={active} onPick={setActive} />
+          </div>
+
+          <figure className="hx-card">
+            <img className="hx-card-photo" src={l.photo} alt={`${cur.dong} ${l.name}`} />
+            <figcaption className="hx-card-body">
+              <div className="hx-card-top">
+                <span className={dealClass(l.deal)}>{l.deal}</span>
+                {l.badge && <span className={`hx-badge ${l.badge === '급매' ? 'is-hot' : ''}`}>{l.badge}</span>}
+                <span className="hx-card-date nums">{l.date} 등록</span>
+              </div>
+              <p className="hx-card-dong">
+                {cur.dong} · 공개 {cur.count}건
+              </p>
+              <p className="hx-card-name">{l.name}</p>
+              <p className="hx-card-price nums">{l.price}</p>
+              <p className="hx-card-spec">
+                <span className="nums">{l.size}</span>
+                <span className="nums">{l.floor}</span>
+                <span>{l.rooms}</span>
+              </p>
+              <p className="hx-card-note">{l.note}</p>
+            </figcaption>
+          </figure>
+
+          <p className="hx-maphint">핀을 누르면 그 동네 매물로 바뀝니다 · {SITE.location.subway}</p>
+        </div>
+      </div>
+
+      {/* 장부 한 줄 */}
+      <div className="max-w-6xl mx-auto px-5 md:px-6">
+        <dl className={`hx-ledger anim-fade-up d320 ${inView ? 'in-view' : ''} grid grid-cols-2 md:grid-cols-4 border-y-2 border-ink`}>
+          {SITE.ledger.map((l2, i) => (
+            <div key={l2.k} className={`py-4 px-1 md:px-5 flex items-baseline gap-2.5 ${i > 0 ? 'md:border-l border-line' : ''}`}>
+              <dt className="text-[0.8125rem] text-ink-55 font-semibold shrink-0">{l2.k}</dt>
+              <dd className="nums text-[1.05rem] md:text-[1.15rem] font-extrabold">{l2.v}</dd>
             </div>
           ))}
         </dl>

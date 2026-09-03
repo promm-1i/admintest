@@ -189,49 +189,79 @@ function Header({ active }: { active: string }) {
   )
 }
 
-// ─── 히어로 — 사진 콜라주가 주인공, 문구는 타일 속 ────────────────────────────
+// ─── 히어로 — 작업 중인 손 · 작업대 · 완성품 세 장이 겹치는 콜라주 ────────────
 
 function Hero() {
+  // 아래 숫자는 모두 SITE 안의 실제 데이터입니다.
+  const facts = [
+    { v: SITE.oneday[0].price, k: `${SITE.oneday[0].name} · ${SITE.oneday[0].time}` },
+    { v: '최대 6인', k: '예약제 소규모 클래스' },
+    { v: '도보 5분', k: '망원역 2번 출구' },
+  ]
   return (
-    <section className="pt-[72px]">
-      <div className="mx-auto max-w-6xl px-5 py-10 md:py-14">
-        <div className="grid md:grid-cols-4 gap-4 items-stretch">
-          {/* 문구 타일 */}
-          <div className={`md:col-span-2 rounded-3xl bg-terra text-sand2 p-8 md:p-10 flex flex-col justify-between min-h-[320px] ${MOTION ? 'hero-in' : ''}`}>
-            <p className="text-[0.78rem] tracking-[0.28em] uppercase font-extrabold text-sand2/60">{SITE.nameEn}</p>
-            <div>
-              <h1 className="text-[clamp(1.9rem,4.4vw,2.9rem)] font-extrabold tracking-[-0.02em] leading-[1.25] whitespace-pre-line">
-                {SITE.slogan}
-              </h1>
-              <p className="mt-4 max-w-md text-[0.98rem] leading-[1.8] text-sand2/75">{SITE.sloganSub}</p>
-              <div className="mt-7 flex flex-wrap items-center gap-4">
-                <button
-                  onClick={() => goTo('#apply')}
-                  className="px-7 py-3.5 rounded-full bg-sand2 text-terra text-[0.92rem] font-extrabold hover:bg-soil hover:text-sand2"
-                  style={{ transition: MOTION ? 'all 0.2s' : 'none' }}
-                >
-                  클래스 신청하기
-                </button>
-                <button
-                  onClick={() => goTo('#schedule')}
-                  className="text-[0.92rem] font-extrabold border-b-2 border-sand2/60 pb-0.5 hover:border-sand2"
-                  style={{ transition: MOTION ? 'border-color 0.2s' : 'none' }}
-                >
-                  주간 일정 보기
-                </button>
-              </div>
+    <section className="hx-hero pt-[72px]">
+      <div className="mx-auto max-w-6xl px-5 pt-8 pb-14">
+        <div className="hx-wrap relative lg:min-h-[560px]">
+          {/* ── 카피 — 사진 위가 아니라 모래빛 바탕 위에 온전히 놓입니다 ── */}
+          <div className={`hx-copy relative z-40 lg:w-[47%] lg:pb-[344px] ${MOTION ? 'hero-in' : ''}`}>
+            <p className="text-[0.78rem] tracking-[0.28em] uppercase font-extrabold text-soil/70">{SITE.nameEn}</p>
+            <h1 className="mt-6 text-[clamp(1.9rem,4.4vw,2.9rem)] font-extrabold tracking-[-0.02em] leading-[1.25] whitespace-pre-line">
+              {SITE.slogan}
+            </h1>
+            <p className="mt-5 text-[0.98rem] leading-[1.8] text-soil/75">{SITE.sloganSub}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a
+                href="#apply"
+                onClick={(e) => {
+                  e.preventDefault()
+                  goTo('#apply')
+                }}
+                className="hx-cta inline-block px-7 py-3.5 rounded-full bg-soil text-sand2 text-[0.92rem] font-extrabold hover:bg-terra"
+                style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+              >
+                클래스 신청하기
+              </a>
+              <a
+                href="#schedule"
+                onClick={(e) => {
+                  e.preventDefault()
+                  goTo('#schedule')
+                }}
+                className="hx-cta2 inline-block text-[0.92rem] font-extrabold border-b-2 border-terra pb-0.5 hover:text-terra"
+                style={{ transition: MOTION ? 'color 0.2s' : 'none' }}
+              >
+                주간 일정 보기
+              </a>
             </div>
+            <ul className="hx-facts mt-8 flex flex-wrap gap-x-9 gap-y-4">
+              {facts.map((f) => (
+                <li key={f.k}>
+                  <span className="nums block text-[1.3rem] font-extrabold text-terra leading-none">{f.v}</span>
+                  <span className="block mt-1.5 text-[0.8rem] font-bold text-soil/70">{f.k}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          {/* 사진 타일들 — 여기에 공방 사진 교체 */}
-          <div className={`rounded-3xl overflow-hidden ${MOTION ? 'hero-in d150' : ''}`}>
-            <img src={SITE.heroPhotos[0]} alt="물레 작업" className="w-full h-full min-h-[240px] object-cover" />
-          </div>
-          <div className="grid grid-rows-2 gap-4">
-            <div className={`rounded-3xl overflow-hidden ${MOTION ? 'hero-in d300' : ''}`}>
-              <img src={SITE.heroPhotos[1]} alt="완성 도자기" className="w-full h-full object-cover" />
+
+          {/* ── 사진 콜라주 — 여기에 공방 사진 교체 (손 · 작업대 · 완성품) ── */}
+          <div className="hx-coll mt-9 grid grid-cols-[1.35fr_1fr] grid-rows-[118px_118px] gap-2.5 sm:grid-rows-[150px_150px] sm:gap-3 md:grid-rows-[200px_200px] md:gap-4 lg:mt-0 lg:block lg:absolute lg:inset-0 lg:z-10">
+            {/* 작업 중인 손 — 가장 크고 가장 앞 */}
+            <div className={`hx-p1 row-span-2 h-full lg:absolute lg:left-[50%] lg:top-0 lg:w-[34%] lg:h-[78%] lg:z-30 ${MOTION ? 'hero-in d150' : ''}`}>
+              <figure className="h-full w-full overflow-hidden rounded-2xl lg:border-[6px] lg:border-sand2 shadow-[0_20px_48px_rgba(59,44,35,0.18)]">
+                <img src={SITE.heroPhotos[0]} alt="물레 위에서 그릇을 빚는 손" className="w-full h-full object-cover" />
+              </figure>
             </div>
-            <div className={`rounded-3xl overflow-hidden ${MOTION ? 'hero-in d450' : ''}`}>
-              <img src={SITE.heroPhotos[2]} alt="공방 풍경" className="w-full h-full object-cover" />
+            {/* 작업대 — 아래로 눕혀 카피 밑을 받칩니다 */}
+            <div className={`hx-p2 h-full lg:absolute lg:left-[14%] lg:bottom-0 lg:w-[44%] lg:h-[300px] lg:z-20 ${MOTION ? 'hero-in d300' : ''}`}>
+              <figure className="h-full w-full overflow-hidden rounded-2xl lg:border-[6px] lg:border-sand2 lg:rotate-[-3deg] shadow-[0_18px_44px_rgba(59,44,35,0.16)]">
+                <img src={SITE.heroPhotos[2]} alt="물레와 도구가 놓인 공방 작업대" className="w-full h-full object-cover" />
+              </figure>
+            </div>
+            {/* 완성품 — 손 사진 뒤에서 오른쪽으로 빠져나옵니다 */}
+            <div className={`hx-p3 h-full lg:absolute lg:right-0 lg:top-[44%] lg:w-[30%] lg:h-[50%] lg:z-10 ${MOTION ? 'hero-in d450' : ''}`}>
+              <figure className="h-full w-full overflow-hidden rounded-2xl lg:border-[6px] lg:border-sand2 lg:rotate-[2deg] shadow-[0_18px_44px_rgba(59,44,35,0.16)]">
+                <img src={SITE.heroPhotos[1]} alt="선반에 놓인 완성된 그릇들" className="w-full h-full object-cover" />
+              </figure>
             </div>
           </div>
         </div>

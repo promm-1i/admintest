@@ -267,7 +267,7 @@ function Header({ active }: { active: string }) {
           <span className={`f-speed text-[1.1rem] ${dark ? 'text-white' : 'text-ink'}`}>{SITE.name}</span>
         </button>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {SITE.nav.map((n) => (
             <button
               key={n.href}
@@ -284,7 +284,7 @@ function Header({ active }: { active: string }) {
           </a>
         </nav>
 
-        <button className="md:hidden p-2 -mr-2" aria-label="메뉴" onClick={() => setOpen(!open)}>
+        <button className="lg:hidden p-2 -mr-2" aria-label="메뉴" onClick={() => setOpen(!open)}>
           <div className="w-6 space-y-1.5">
             <span className={`block h-0.5 ${dark ? 'bg-white' : 'bg-ink'}`} />
             <span className={`block h-0.5 ${dark ? 'bg-white' : 'bg-ink'} ${open ? 'opacity-0' : ''}`} />
@@ -294,7 +294,7 @@ function Header({ active }: { active: string }) {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-line bg-white px-5 py-2">
+        <div className="lg:hidden border-t border-line bg-white px-5 py-2">
           {SITE.nav.map((n) => (
             <button key={n.href} onClick={() => go(n.href)} className="block w-full text-left py-3.5 text-[1rem] font-semibold border-b border-line last:border-0">
               {n.label}
@@ -310,51 +310,297 @@ function Header({ active }: { active: string }) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// 히어로 — 아스팔트
+// 히어로 — 지도 위의 지점과 픽업 포인트
 // ══════════════════════════════════════════════════════════════════════════════
+
+/* 강서 · 김포공항 일대 약도.
+   좌표는 viewBox(0 0 1200 820) 기준 고정값이고 건물은 고정 시드로 한 번만 만들기 때문에
+   빌드마다 같은 그림이 나옵니다. 지점 · 픽업 포인트 · 딜리버리 구역은 SITE 의 주소와
+   안내(강서 · 양천 · 김포공항 무료 딜리버리)를 그대로 옮긴 것입니다. */
+
+/* 도로가 나눈 가구(街區). 이 안을 건물로 채웁니다 — [x, y, 너비, 높이] */
+const MAP_ZONES: Array<[number, number, number, number]> = [
+  [60, 314, 140, 144],
+  [60, 524, 140, 104],
+  [60, 700, 140, 128],
+  [616, 312, 100, 146],
+  [736, 312, 104, 146],
+  [862, 312, 122, 146],
+  [1016, 308, 150, 150],
+  [616, 526, 100, 80],
+  [616, 634, 100, 56],
+  [736, 526, 104, 164],
+  [862, 526, 122, 80],
+  [862, 632, 122, 58],
+  [1016, 522, 150, 168],
+  [610, 730, 106, 96],
+  [736, 734, 104, 92],
+  [862, 730, 122, 96],
+  [1016, 732, 150, 94],
+]
+
+/* 건물 자국 — 세 가지 밝기로 나눠 path 세 개에 몰아 담습니다 */
+const MAP_FABRIC = (() => {
+  let s = 20260903
+  const rnd = () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296)
+  const d = ['', '', '']
+  for (const [zx, zy, zw, zh] of MAP_ZONES) {
+    let y = zy
+    while (y < zy + zh - 14) {
+      const h = Math.min(15 + Math.round(rnd() * 26), zy + zh - y)
+      let x = zx
+      while (x < zx + zw - 14) {
+        const w = Math.min(18 + Math.round(rnd() * 38), zx + zw - x)
+        if (w > 12 && h > 12) d[Math.floor(rnd() * 3)] += `M${x} ${y}h${w}v${h}h${-w}z`
+        x += w + 4 + Math.round(rnd() * 5)
+      }
+      y += h + 4 + Math.round(rnd() * 6)
+    }
+  }
+  return d
+})()
+
+/* 이면도로 */
+const MAP_STREETS = [
+  'M 616 388 H 984',
+  'M 616 600 H 840',
+  'M 1016 402 H 1166',
+  'M 690 312 V 458',
+  'M 920 526 V 690',
+  'M 780 730 V 826',
+  'M 1090 308 V 458',
+  'M 640 702 L 742 648',
+  'M 210 292 V 828',
+  'M 60 480 H 240',
+  'M 60 648 H 200',
+]
+
+/* vb — 가로로 넓고 낮은 띠에서는 세로가 잘려 나가므로, 그 구간에서만
+   보이는 창(窓)의 중심을 아래로 내린 viewBox 를 넘겨 지명이 잘리지 않게 합니다. */
+function RouteMap({ k, vb = '0 0 1200 820' }: { k: number; vb?: string }) {
+  const lbl = { stroke: '#15171c', strokeWidth: 5, style: { paintOrder: 'stroke' as const } }
+  return (
+    <svg viewBox={vb} preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full overflow-hidden" aria-hidden="true">
+      <rect x="0" y="0" width="1200" height="820" fill="#181b21" />
+
+      {/* 한강 · 한강공원 · 안양천 */}
+      <path d="M -80 158 C 140 116, 330 184, 560 166 C 790 148, 950 214, 1290 168" stroke="#1b3350" strokeWidth="176" fill="none" />
+      <path d="M -80 262 C 140 220, 330 288, 560 270 C 790 252, 950 318, 1290 272" stroke="#1e2a23" strokeWidth="30" fill="none" />
+      <path d="M 1000 210 C 988 330, 1024 434, 1006 562 C 990 690, 1016 762, 1008 862" stroke="#1b3350" strokeWidth="30" fill="none" />
+
+      {/* 건물 · 근린공원 */}
+      <path d={MAP_FABRIC[0]} fill="#242832" />
+      <path d={MAP_FABRIC[1]} fill="#2a2f3a" />
+      <path d={MAP_FABRIC[2]} fill="#1f232b" />
+      <ellipse cx="252" cy="656" rx="52" ry="42" fill="#1e2a23" />
+
+      {/* 이면도로 */}
+      <g stroke="#2d313a" strokeWidth="8" fill="none" strokeLinecap="round">
+        {MAP_STREETS.map((d) => (
+          <path key={d} d={d} />
+        ))}
+      </g>
+
+      {/* 간선도로 */}
+      <g fill="none" strokeLinecap="round">
+        <path d="M -80 296 C 140 254, 330 322, 560 304 C 790 286, 950 352, 1290 306" stroke="#454a56" strokeWidth="15" />
+        <path d="M -80 716 C 200 726, 470 700, 730 710 C 950 718, 1110 702, 1290 708" stroke="#454a56" strokeWidth="16" />
+        <path d="M 726 250 C 732 380, 716 470, 726 600 C 734 700, 722 780, 726 880" stroke="#454a56" strokeWidth="14" />
+        <path d="M 850 300 C 856 420, 842 540, 852 660 C 858 760, 848 830, 850 890" stroke="#3f444f" strokeWidth="12" />
+        <path d="M 700 618 C 850 612, 1000 624, 1290 608" stroke="#3f444f" strokeWidth="11" />
+        <path d="M 604 268 C 608 340, 600 400, 604 470" stroke="#3b404a" strokeWidth="10" />
+        <path d="M 1100 300 C 1104 400, 1096 500, 1100 700" stroke="#3b404a" strokeWidth="10" />
+        {/* 공항대로 — 이 길가에 본점이 있습니다 */}
+        <path d="M -80 512 C 180 506, 420 482, 700 474 C 900 468, 1060 456, 1290 450" stroke="#5c6371" strokeWidth="25" />
+        <path d="M -80 512 C 180 506, 420 482, 700 474 C 900 468, 1060 456, 1290 450" stroke="#949cab" strokeWidth="2" strokeDasharray="16 20" />
+      </g>
+
+      {/* 김포공항 — 활주로 · 유도로 · 청사 */}
+      <g>
+        <rect x="248" y="298" width="356" height="496" rx="18" fill="#1d2129" />
+        <path d="M 330 330 C 300 420, 316 620, 366 756" stroke="#22262e" strokeWidth="10" fill="none" />
+        <path d="M 296 336 L 438 758" stroke="#343943" strokeWidth="26" fill="none" />
+        <path d="M 378 328 L 520 750" stroke="#343943" strokeWidth="26" fill="none" />
+        <path d="M 296 336 L 438 758" stroke="#79808c" strokeWidth="2" strokeDasharray="18 22" fill="none" />
+        <path d="M 378 328 L 520 750" stroke="#79808c" strokeWidth="2" strokeDasharray="18 22" fill="none" />
+        <path d="M 342 334 L 484 756" stroke="#252932" strokeWidth="9" fill="none" />
+        <path d="M 470 470 H 560" stroke="#252932" strokeWidth="9" fill="none" />
+        <rect x="520" y="466" width="72" height="146" rx="8" fill="#333944" />
+        <g fill="#282d36">
+          <rect x="520" y="626" width="72" height="16" rx="3" />
+          <rect x="520" y="650" width="72" height="16" rx="3" />
+          <rect x="520" y="674" width="72" height="16" rx="3" />
+        </g>
+      </g>
+
+      {/* 무료 딜리버리 구역 — 강서 · 양천 · 김포공항 */}
+      <path
+        d="M 296 322 C 340 258, 470 236, 592 252 C 700 266, 806 258, 896 300 C 986 342, 1032 430, 1010 520 C 992 596, 1012 664, 962 716 C 900 780, 742 820, 596 792 C 470 768, 372 720, 322 630 C 276 548, 268 430, 296 322 Z"
+        fill="rgba(39,87,255,0.07)"
+        stroke="rgba(39,87,255,0.4)"
+        strokeWidth="2"
+        strokeDasharray="10 9"
+      />
+
+      {/* 9호선 · 공항시장역 */}
+      <path d="M 520 546 C 620 534, 700 512, 780 500 C 880 488, 980 482, 1090 476" stroke="#8f7c4a" strokeWidth="4" fill="none" />
+      <circle cx="690" cy="515" r="6.5" fill="#15171c" stroke="#8f7c4a" strokeWidth="3" />
+
+      {/* 지명 */}
+      <g transform={`translate(600 212) scale(${k})`}>
+        <text {...lbl} fill="#b6d2f6" fontSize="21" fontWeight="600">한강</text>
+      </g>
+      <g transform={`translate(700 696) scale(${k})`}>
+        <text {...lbl} fill="#acb3bf" fontSize="17" fontWeight="600">남부순환로</text>
+      </g>
+      {/* 활주로 서쪽은 좌측 카피 컬럼 스크림에 덮여 글자가 읽히지 않으므로, 청사 위 열린 자리에 둡니다 */}
+      <g transform={`translate(602 356) scale(${k})`}>
+        <text {...lbl} textAnchor="end" fill="#acb3bf" fontSize="17" fontWeight="600">김포공항</text>
+      </g>
+
+      {/* 픽업 포인트 — 김포공항 (이 핀만 점멸합니다) */}
+      <g transform={`translate(556 540) scale(${k})`}>
+        <circle className="hx-ping" r="34" fill="none" stroke="#2757ff" strokeWidth="3" />
+        <circle r="11" fill="#2757ff" stroke="#ffffff" strokeWidth="3" />
+        <text {...lbl} x="-40" y="26" textAnchor="end" fill="#ffffff" fontSize="19" fontWeight="700">김포공항 픽업</text>
+      </g>
+
+      {/* 픽업 포인트 — 양천 */}
+      <g transform={`translate(900 620) scale(${k})`}>
+        <circle r="11" fill="#2757ff" stroke="#ffffff" strokeWidth="3" />
+        <text {...lbl} x="-20" y="6" textAnchor="end" fill="#ffffff" fontSize="19" fontWeight="700">양천 픽업</text>
+      </g>
+
+      {/* 본점 */}
+      <g transform={`translate(760 472) scale(${k})`}>
+        <path d="M 0 0 C -6 -13 -18 -20 -18 -33 A 18 18 0 1 1 18 -33 C 18 -20 6 -13 0 0 Z" fill="#2757ff" stroke="#ffffff" strokeWidth="3" />
+        <circle cy="-33" r="6" fill="#ffffff" />
+        <text {...lbl} x="-30" y="-34" textAnchor="end" fill="#ffffff" fontSize="21" fontWeight="800">{SITE.name} 강서 본점</text>
+        <text {...lbl} x="-30" y="-13" textAnchor="end" fill="#b8bec9" fontSize="16" fontWeight="600">공항대로 45</text>
+      </g>
+    </svg>
+  )
+}
+
+/* 지도 위 카드 — 오늘 나갈 수 있는 차 */
+function FleetCard({ className = '' }: { className?: string }) {
+  const from = Math.min(...SITE.cars.map((c) => c.dayPrice))
+  return (
+    <div
+      className={`hx-place flex items-stretch bg-[#20232a] border border-[#333741] rounded-xl overflow-hidden ${className}`}
+      style={{ boxShadow: '0 14px 36px rgba(0,0,0,0.45)' }}
+    >
+      <img src={SITE.heroPhoto} alt="루트렌트카 보유 차량" className="w-[104px] shrink-0 object-cover" />
+      <div className="px-4 py-3 min-w-0">
+        <p className="text-[0.75rem] font-bold text-[#9ea3ab]">오늘 나갈 수 있는 차</p>
+        <p className="nums text-[1.0625rem] font-extrabold text-white mt-0.5">1일 {won(from)}부터</p>
+        <p className="text-[0.8125rem] text-[#a6abb3] mt-0.5">
+          {SITE.carTypes.filter((t) => t !== '전체').join(' · ')} {SITE.cars.length}종
+        </p>
+      </div>
+    </div>
+  )
+}
 
 function Hero() {
   const { ref, inView } = useInView(0.05)
+  const go = (e: { preventDefault(): void }, href: string) => {
+    if (!MOTION) return
+    e.preventDefault()
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+  }
   return (
-    <section ref={ref} className="bg-road text-white pt-28 md:pt-36 pb-16 md:pb-24 overflow-hidden">
-      <div className="max-w-6xl mx-auto px-5 md:px-6 grid lg:grid-cols-[1.05fr_1fr] gap-12 items-center">
-        <div className="lg:order-2">
-          <p className={`slide-in ${inView ? 'in-view' : ''} mb-5`}>
+    <section ref={ref} className="hx-hero relative bg-road text-white overflow-hidden">
+      {/* 지도 — 오른쪽 화면 밖으로 흘러나간다 */}
+      <div className="hx-map-stage hidden lg:block absolute inset-y-0 right-0 left-[38%] overflow-hidden">
+        <RouteMap k={1} />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              'linear-gradient(90deg,#16181d 0%,#16181d 10%,rgba(22,24,29,0.93) 16%,rgba(22,24,29,0.64) 24%,rgba(22,24,29,0.32) 33%,rgba(22,24,29,0.1) 42%,rgba(22,24,29,0) 54%)',
+          }}
+        />
+        <div className="absolute inset-0" style={{ backgroundImage: 'linear-gradient(180deg,rgba(22,24,29,0) 80%,rgba(22,24,29,0.5) 100%)' }} />
+        <FleetCard className="absolute top-28 right-8 w-[300px]" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-5 md:px-6 pt-20 md:pt-24 lg:pt-32 pb-14 md:pb-12 lg:pb-20 lg:min-h-[760px] flex flex-col justify-center">
+        <div className="lg:max-w-[540px]">
+          <p className={`slide-in ${inView ? 'in-view' : ''} mb-4 md:mb-5`}>
             <span className="plate text-[0.9375rem]">{SITE.plate}</span>
           </p>
-          <h1 className={`slide-in ${inView ? 'in-view' : ''} f-speed text-[3.2rem] md:text-[4.8rem] leading-[1.04] whitespace-pre-line mb-7`} style={{ transitionDelay: MOTION ? '80ms' : undefined }}>
+          <h1
+            className={`slide-in ${inView ? 'in-view' : ''} f-speed text-[2.7rem] md:text-[3.35rem] lg:text-[4.6rem] leading-[1.04] whitespace-pre-line mb-5 lg:mb-6`}
+            style={{ transitionDelay: MOTION ? '80ms' : undefined }}
+          >
             {SITE.slogan}
           </h1>
-          <p className={`slide-in ${inView ? 'in-view' : ''} text-[1.0625rem] text-white/60 leading-[1.8] max-w-md mb-9`} style={{ transitionDelay: MOTION ? '160ms' : undefined }}>
+          <p
+            className={`slide-in ${inView ? 'in-view' : ''} text-[1.0625rem] text-[#b9babc] leading-[1.7] max-w-md mb-6 lg:mb-8`}
+            style={{ transitionDelay: MOTION ? '160ms' : undefined }}
+          >
             {SITE.sloganSub}
           </p>
-          <div className={`slide-in ${inView ? 'in-view' : ''} flex flex-wrap items-center gap-4`} style={{ transitionDelay: MOTION ? '240ms' : undefined }}>
-            <button
-              onClick={() => document.querySelector('#calc')?.scrollIntoView({ behavior: MOTION ? 'smooth' : 'auto' })}
-              className="px-7 py-4 rounded-xl bg-blue text-white text-[1rem] font-extrabold hover:bg-blue-d"
+
+          <div
+            className={`slide-in ${inView ? 'in-view' : ''} flex flex-wrap items-center gap-x-6 gap-y-3`}
+            style={{ transitionDelay: MOTION ? '240ms' : undefined }}
+          >
+            <a
+              href="#calc"
+              onClick={(e) => go(e, '#calc')}
+              className="hx-cta px-7 py-4 rounded-xl bg-blue text-white text-[1rem] font-extrabold hover:bg-blue-d"
               style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
             >
               요금 계산해 보기
-            </button>
+            </a>
             <a href={`tel:${SITE.phone}`} className="nums text-[1.25rem] font-extrabold text-white border-b-[3px] border-blue pb-0.5">
               {SITE.phone}
             </a>
           </div>
+
+          {/* 지도 범례 */}
+          <div className={`anim-fade-up d240 ${inView ? 'in-view' : ''} mt-5 lg:mt-7 flex flex-wrap items-center gap-x-6 gap-y-2 text-[0.8125rem] text-[#a2a3a7]`}>
+            <span className="flex items-center gap-2.5">
+              <span className="w-7 h-0 border-t-2 border-dashed border-blue" />
+              무료 딜리버리 — 강서 · 양천 · 김포공항
+            </span>
+            <span className="flex items-center gap-2.5">
+              <span className="w-2.5 h-2.5 rounded-full border-[2.5px] border-[#8f7c4a]" />
+              9호선 공항시장역 도보 4분
+            </span>
+          </div>
         </div>
 
-        <div className={`anim-fade-up d240 ${inView ? 'in-view' : ''} lg:order-1`}>
-          <div className="rounded-2xl overflow-hidden">
-            <img src={SITE.heroPhoto} alt="렌트 차량" className="w-full h-[280px] md:h-[400px] object-cover" />
+        {/* 지도 — 모바일 · 태블릿 */}
+        <div className="hx-map-stage lg:hidden relative -mx-5 md:-mx-6 mt-6 lg:mt-7 h-[320px] md:h-[44vw] overflow-hidden bg-[#181b21]">
+          {/* 폭에 따라 지도가 확대되므로 글자 크기를 두 단계로 맞춥니다 */}
+          <div className="md:hidden">
+            <RouteMap k={1.75} />
           </div>
-          <dl className="grid grid-cols-3 mt-5 gap-4">
-            {SITE.promises.map((p) => (
-              <div key={p.k}>
-                <dt className="text-[0.9375rem] font-extrabold text-white mb-0.5">{p.k}</dt>
-                <dd className="text-[0.75rem] text-white/45 leading-snug">{p.v}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="hidden md:block">
+            <RouteMap k={1.25} vb="0 76 1200 732" />
+          </div>
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: 'linear-gradient(180deg,rgba(22,24,29,0.45) 0%,rgba(22,24,29,0) 16%,rgba(22,24,29,0) 86%,rgba(22,24,29,0.4) 100%)' }}
+          />
+          {/* 태블릿에서는 카드를 지도 오른쪽 위에 얹어 세로 길이를 줄입니다 — 지명·핀 라벨이 없는 자리 */}
+          <FleetCard className="hidden md:flex absolute top-5 right-6 w-[300px]" />
         </div>
+        <FleetCard className="md:hidden mt-4" />
+
+        <dl
+          className={`anim-fade-up d320 ${inView ? 'in-view' : ''} mt-6 lg:mt-8 pt-5 lg:pt-7 border-t border-[#31343b] grid grid-cols-3 gap-4 lg:max-w-[540px]`}
+        >
+          {SITE.promises.map((p) => (
+            <div key={p.k}>
+              <dt className="text-[0.875rem] md:text-[0.9375rem] font-extrabold text-white mb-0.5">{p.k}</dt>
+              <dd className="text-[0.75rem] text-[#a2a3a7] leading-snug">{p.v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
   )

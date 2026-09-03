@@ -42,8 +42,15 @@ const SITE = {
     { day: '월요일', time: '정기 휴무' },
   ],
 
-  // 여기에 히어로 사진 교체
+  // 여기에 히어로 사진 교체 (배경 = 촬영 현장)
   heroPhoto: heroImg,
+
+  // 히어로 콜라주 — 여기에 대표 컷 3장 교체 (왼쪽 큰 것부터 순서대로)
+  heroPrints: [
+    { img: gImg1, cap: '개인 프로필' },
+    { img: gImg2, cap: '흑백 초상' },
+    { img: gImg5, cap: '가족 사진' },
+  ],
 
   nav: [
     { label: '갤러리', href: '#gallery' },
@@ -207,7 +214,7 @@ function Header({ active }: { active: string }) {
             REC
           </span>
           <span className="text-[1.08rem] font-extrabold tracking-tight text-white">{SITE.name}</span>
-          <span className="hidden sm:inline f-mono text-[0.68rem] text-silver/50">{SITE.tagline}</span>
+          <span className="hidden lg:inline f-mono text-[0.68rem] text-silver/50">{SITE.tagline}</span>
         </button>
         <nav className="hidden md:flex items-center gap-6">
           {SITE.nav.map((n) => (
@@ -235,37 +242,83 @@ function Header({ active }: { active: string }) {
 
 // ─── 히어로 ───────────────────────────────────────────────────────────────────
 
+/* 콜라주 프린트 3장의 배치 — 모바일은 2열 그리드, lg 이상에서 겹칩니다.
+   순서: 0 = 왼쪽 큰 컷, 1 = 오른쪽 위, 2 = 오른쪽 아래(맨 앞) */
+const HERO_PRINT_LAYOUT = [
+  { grid: 'row-span-2', place: 'lg:absolute lg:left-0 lg:top-[6%] lg:w-[60%] lg:z-10', tilt: '', ratio: 'aspect-[3/4]', pos: 'object-center' },
+  { grid: '', place: 'lg:absolute lg:right-0 lg:top-0 lg:w-[48%] lg:z-30', tilt: 'lg:rotate-[3deg]', ratio: 'aspect-square', pos: 'object-[center_22%]' },
+  { grid: '', place: 'lg:absolute lg:right-[14%] lg:bottom-[6%] lg:w-[40%] lg:z-20', tilt: 'lg:rotate-[-4deg]', ratio: 'aspect-[4/5]', pos: 'object-[center_38%]' },
+]
+
 function Hero() {
+  const hot = SITE.products.find((p) => p.hot) ?? SITE.products[0]
+  const facts = [`${hot.name} ${hot.price}`, `${SITE.hours[0].day} ${SITE.hours[0].time}`, SITE.location.walk]
+  const jump = (href: string) => (e: React.MouseEvent) => {
+    e.preventDefault()
+    goTo(href)
+  }
   return (
-    <section className="relative h-[94vh] min-h-[600px] overflow-hidden">
-      {/* 여기에 히어로 사진 교체 */}
-      <img src={SITE.heroPhoto} alt="스튜디오 촬영 현장" className={`absolute inset-0 w-full h-full object-cover object-[center_30%] ${MOTION ? 'hero-photo' : ''}`} />
-      <div className="absolute inset-0 bg-gradient-to-t from-carbon via-carbon/30 to-carbon/60" />
-      <div className="relative h-full mx-auto max-w-6xl px-5 flex flex-col justify-end pb-16 pt-[70px]">
-        <p className={`f-mono text-[0.78rem] tracking-[0.3em] text-flash ${MOTION ? 'hero-in' : ''}`}>PORTRAIT — SEOCHON, SEOUL</p>
-        <h1 className={`mt-5 text-[clamp(2.4rem,6.5vw,4.6rem)] font-extrabold tracking-[-0.04em] leading-[1.08] whitespace-pre-line text-white ${MOTION ? 'hero-in d150' : ''}`}>
-          {SITE.slogan}
-        </h1>
-        <div className={`mt-7 flex flex-col md:flex-row md:items-end justify-between gap-7 ${MOTION ? 'hero-in d300' : ''}`}>
-          <p className="max-w-md text-[1rem] leading-relaxed text-silver/85">{SITE.sloganSub}</p>
-          <div className="flex items-center gap-5 shrink-0">
-            <button
-              onClick={() => goTo('#reserve')}
-              className="px-8 py-4 bg-white text-carbon text-[0.95rem] font-extrabold hover:bg-flash"
+    <section className="hero hx-hero relative overflow-hidden bg-carbon pt-[70px]">
+      {/* 여기에 히어로 배경 사진(촬영 현장) 교체 */}
+      <img src={SITE.heroPhoto} alt="" aria-hidden className={`absolute inset-0 w-full h-full object-cover object-[40%_45%] ${MOTION ? 'hero-photo' : ''}`} />
+      <div className="hx-hero-veil absolute inset-0" />
+
+      <div className="relative mx-auto max-w-6xl px-5 grid lg:grid-cols-[minmax(0,0.93fr)_minmax(0,1.07fr)] lg:items-center gap-y-8 lg:gap-x-8 pt-7 pb-14 lg:py-14 lg:min-h-[calc(90vh-70px)]">
+        {/* 카피 */}
+        <div>
+          <p className={`f-mono text-[0.78rem] tracking-[0.3em] text-flash ${MOTION ? 'hero-in' : ''}`}>PORTRAIT — SEOCHON, SEOUL</p>
+          <h1 className={`mt-5 text-[clamp(2.3rem,5.4vw,4.05rem)] font-extrabold tracking-[-0.04em] leading-[1.08] whitespace-pre-line text-white ${MOTION ? 'hero-in d150' : ''}`}>
+            {SITE.slogan}
+          </h1>
+          <p className={`mt-5 max-w-[27rem] text-[0.97rem] leading-relaxed text-silver opacity-85 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>
+          <div className={`mt-7 flex flex-wrap items-center gap-x-6 gap-y-4 ${MOTION ? 'hero-in d450' : ''}`}>
+            <a
+              href="#reserve"
+              onClick={jump('#reserve')}
+              className="hx-cta px-8 py-4 bg-white text-carbon text-[0.95rem] font-extrabold hover:bg-flash"
               style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
             >
               촬영 예약하기
-            </button>
-            <button
-              onClick={() => goTo('#products')}
-              className="f-mono text-[0.85rem] font-bold text-silver border-b border-silver/50 pb-1 hover:text-flash hover:border-flash"
+            </a>
+            <a
+              href="#products"
+              onClick={jump('#products')}
+              className="hx-cta-sub f-mono text-[0.85rem] font-bold text-silver border-b border-silver/50 pb-1 hover:text-flash hover:border-flash"
               style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
             >
               PRICE LIST →
-            </button>
+            </a>
           </div>
+          <ul className={`mt-7 f-mono text-[0.72rem] leading-relaxed text-silver opacity-80 space-y-1.5 lg:space-y-0 lg:flex lg:flex-wrap lg:items-center ${MOTION ? 'hero-in d450' : ''}`}>
+            {facts.map((f, i) => (
+              <li key={f} className={i ? 'lg:ml-4 lg:pl-4 lg:border-l lg:border-white/20' : ''}>
+                {f}
+              </li>
+            ))}
+          </ul>
         </div>
-        <p className="f-mono absolute bottom-5 right-5 text-[0.68rem] tracking-[0.2em] text-silver/45">KODAK 400 · 80mm · f/2.8</p>
+
+        {/* 대표 컷 콜라주 */}
+        <div>
+          <div className="hx-collage relative grid grid-cols-[1.8fr_1fr] items-end gap-3 max-w-[440px] lg:max-w-none lg:block lg:aspect-square">
+            {SITE.heroPrints.map((p, i) => {
+              const L = HERO_PRINT_LAYOUT[i]
+              return (
+                <div key={p.cap} className={`${L.grid} ${L.place} ${L.tilt}`}>
+                  <figure
+                    className="hx-print bg-white p-[7px] pb-1.5 shadow-[0_26px_58px_-20px_rgba(0,0,0,0.9)]"
+                    style={{ animationDelay: MOTION ? `${i * 150 + 200}ms` : undefined }}
+                  >
+                    {/* 여기에 대표 컷 교체 */}
+                    <img src={p.img} alt={`${p.cap} 촬영 예시`} className={`w-full ${L.ratio} object-cover ${L.pos}`} />
+                    <figcaption className="f-mono px-0.5 pt-2 text-[0.6rem] tracking-[0.05em] text-carbon">{p.cap}</figcaption>
+                  </figure>
+                </div>
+              )
+            })}
+          </div>
+          <p className="f-mono mt-5 text-[0.68rem] tracking-[0.2em] text-silver opacity-70 lg:text-right">KODAK 400 · 80mm · f/2.8</p>
+        </div>
       </div>
     </section>
   )

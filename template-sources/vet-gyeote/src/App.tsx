@@ -43,6 +43,7 @@ const SITE = {
 
   // 여기에 히어로 사진 교체
   heroPhoto: heroImg,
+  heroPhotoLabel: '진료실',
 
   nav: [
     { label: '진료 안내', href: '#care' },
@@ -256,51 +257,118 @@ function Header({ active }: { active: string }) {
 
 // ─── 히어로 ───────────────────────────────────────────────────────────────────
 
+/* 히어로 콜라주 — 진료실 · 고양이 대기 공간 · 호텔 룸 세 장이 서로 겹칩니다.
+   사진은 SITE.heroPhoto 와 SITE.facilities 의 이미지를 그대로 씁니다. */
+const HERO_SHOTS = [
+  {
+    img: SITE.heroPhoto,
+    label: SITE.heroPhotoLabel,
+    alt: '병원에 온 강아지',
+    box: 'col-span-2 md:absolute md:left-0 md:top-[7%] md:w-[62%]',
+    frame: 'aspect-[16/10] md:aspect-[4/5]',
+    delay: '',
+  },
+  {
+    img: SITE.facilities[0].img,
+    label: SITE.facilities[0].label,
+    alt: SITE.facilities[0].label,
+    box: 'hx-ph-b md:absolute md:right-[1%] md:top-0 md:z-20 md:w-[50%]',
+    frame: 'aspect-[4/3]',
+    delay: 'hx-d2',
+  },
+  {
+    img: SITE.facilities[1].img,
+    label: SITE.facilities[1].label,
+    alt: SITE.facilities[1].label,
+    box: 'hx-ph-c md:absolute md:right-[6%] md:bottom-[7%] md:z-10 md:w-[46%]',
+    frame: 'aspect-[4/3] md:aspect-[1/1]',
+    delay: 'hx-d3',
+  },
+]
+
 function Hero() {
   return (
-    <section className="pt-[72px]">
-      <div className="mx-auto max-w-6xl px-5 pt-8 md:pt-12">
-        <div className="relative">
-          {/* 여기에 히어로 사진 교체 */}
-          <img src={SITE.heroPhoto} alt="병원에 온 강아지" className={`w-full aspect-[16/8] md:aspect-[16/6.5] object-cover rounded-[28px] ${MOTION ? 'hero-photo' : ''}`} />
-          <div className={`absolute top-5 right-5 bg-cream/95 rounded-full px-4 py-2 shadow-[0_6px_24px_rgba(59,42,31,0.15)] ${MOTION ? 'hero-in d450' : ''}`}>
-            <p className="flex items-center gap-1.5 text-[0.78rem] font-bold text-cocoa/75"><Moon size={13} strokeWidth={2.4} className="text-amber-d" /> 야간 응급 24시 연계</p>
+    <section className="hx-hero relative overflow-hidden bg-cream pt-[72px]">
+      <div className="mx-auto max-w-6xl px-5 pt-9 pb-12 md:pt-14 md:pb-16">
+        <div className="grid gap-9 md:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] md:items-center md:gap-8">
+          {/* ── 카피 ── */}
+          <div>
+            <p className={`inline-flex items-center gap-2 rounded-full bg-amber/25 px-3.5 py-1.5 text-[0.78rem] font-bold ${MOTION ? 'hx-rise' : ''}`}>
+              <PawPrint size={14} strokeWidth={2.6} aria-hidden />
+              진료 · 미용 · 호텔을 한곳에서
+            </p>
+            <h1
+              className={`mt-5 whitespace-pre-line text-[clamp(1.85rem,4.2vw,2.85rem)] leading-[1.22] font-extrabold tracking-[-0.035em] ${MOTION ? 'hx-rise hx-d1' : ''}`}
+            >
+              {SITE.slogan}
+            </h1>
+            <p className={`mt-4 max-w-[31rem] text-[0.98rem] leading-relaxed text-cocoa/70 ${MOTION ? 'hx-rise hx-d2' : ''}`}>{SITE.sloganSub}</p>
+            <div className={`mt-7 flex flex-wrap items-center gap-4 ${MOTION ? 'hx-rise hx-d3' : ''}`}>
+              <a
+                href="#reserve"
+                onClick={(e) => {
+                  e.preventDefault()
+                  goTo('#reserve')
+                }}
+                className="hx-cta rounded-full bg-cocoa px-7 py-3.5 text-[0.92rem] font-bold text-cream hover:bg-amber-d"
+                style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
+              >
+                진료 예약하기
+              </a>
+              <a
+                href="#price"
+                onClick={(e) => {
+                  e.preventDefault()
+                  goTo('#price')
+                }}
+                className="hx-cta-line border-b-2 border-cocoa pb-0.5 text-[0.92rem] font-bold hover:border-amber-d hover:text-amber-d"
+                style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
+              >
+                요금 안내 보기
+              </a>
+            </div>
+          </div>
+
+          {/* ── 사진 세 장 — PC 는 겹치고, 모바일은 겹침을 풀어 나란히 ── */}
+          <div className="grid max-w-[27rem] grid-cols-2 gap-3 md:relative md:block md:aspect-[27/23] md:max-w-none">
+            {HERO_SHOTS.map((s) => (
+              <figure key={s.label} className={s.box}>
+                <div
+                  className={`relative overflow-hidden rounded-[20px] shadow-[0_16px_40px_rgba(59,42,31,0.16)] ring-[5px] ring-cream ${s.frame} ${MOTION ? `hx-photo ${s.delay}` : ''}`}
+                >
+                  <img src={s.img} alt={s.alt} className="h-full w-full object-cover" />
+                  <figcaption className="absolute inset-x-0 top-0 md:top-auto md:bottom-0 bg-cocoa/80 px-3 py-1.5 text-[0.72rem] font-bold text-cream md:text-[0.78rem]">{s.label}</figcaption>
+                </div>
+              </figure>
+            ))}
           </div>
         </div>
-        <div className={`relative z-10 -mt-10 md:-mt-24 md:ml-10 max-w-xl bg-cream rounded-[26px] border border-cocoa/8 shadow-[0_18px_50px_rgba(59,42,31,0.12)] p-7 md:p-10 ${MOTION ? 'hero-in d150' : ''}`}>
-          <p className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber/15 text-amber-d text-[0.78rem] font-bold">
-            진료 · 미용 · 호텔을 한곳에서
-          </p>
-          <h1 className="mt-5 text-[clamp(1.9rem,4.6vw,2.9rem)] font-extrabold tracking-[-0.035em] leading-[1.22] whitespace-pre-line">
-            {SITE.slogan}
-          </h1>
-          <p className="mt-4 text-[0.98rem] leading-relaxed text-cocoa/60">{SITE.sloganSub}</p>
-          <div className="mt-7 flex flex-wrap items-center gap-4">
-            <button
-              onClick={() => goTo('#reserve')}
-              className="px-7 py-3.5 rounded-full bg-cocoa text-cream text-[0.92rem] font-bold hover:bg-amber-d"
-              style={{ transition: MOTION ? 'background-color 0.2s' : 'none' }}
-            >
-              진료 예약하기
-            </button>
-            <button
-              onClick={() => goTo('#price')}
-              className="text-[0.92rem] font-bold border-b-2 border-cocoa pb-0.5 hover:text-amber-d hover:border-amber-d"
-              style={{ transition: MOTION ? 'color 0.2s, border-color 0.2s' : 'none' }}
-            >
-              요금 안내 보기
-            </button>
-          </div>
-          <div className="mt-7 pt-6 border-t border-cocoa/10 flex flex-wrap gap-2">
+
+        {/* ── 사진 아래를 가로지르는 실적 · 진료시간 띠 ── */}
+        <div className="mt-9 flex flex-col gap-5 border-t border-cocoa/12 pt-6 md:mt-12 md:flex-row md:items-center md:justify-between md:gap-8">
+          <div className={`flex flex-wrap items-center gap-x-7 gap-y-2.5 ${MOTION ? 'hx-rise hx-d3' : ''}`}>
             {SITE.stats.map((st) => (
-              <span key={st.label} className="inline-flex items-baseline gap-1.5 rounded-full bg-butter/70 px-3.5 py-1.5">
-                <span className="nums text-[0.95rem] font-extrabold">
+              <p key={st.label} className="flex items-baseline gap-1.5">
+                <span className="nums text-[1.18rem] font-extrabold">
                   {'decimal' in st && (st as { decimal?: boolean }).decimal ? st.n.toFixed(1) : st.n.toLocaleString()}
                   {st.suffix}
                 </span>
-                <span className="text-[0.78rem] text-cocoa/55">{st.label}</span>
-              </span>
+                <span className="text-[0.82rem] text-cocoa/70">{st.label}</span>
+              </p>
             ))}
+          </div>
+          <div className={`flex flex-col gap-2 md:items-end ${MOTION ? 'hx-rise hx-d3' : ''}`}>
+            <p className="flex items-center gap-2 text-[0.84rem] font-bold">
+              <span className="hx-pulse" aria-hidden />
+              야간 응급 24시 연계
+            </p>
+            <p className="flex flex-wrap gap-x-4 gap-y-1 text-[0.82rem] text-cocoa/70 md:justify-end">
+              {SITE.hours.map((h) => (
+                <span key={h.day} className="nums whitespace-nowrap">
+                  <b className="font-bold text-cocoa">{h.day}</b> {h.time}
+                </span>
+              ))}
+            </p>
           </div>
         </div>
       </div>

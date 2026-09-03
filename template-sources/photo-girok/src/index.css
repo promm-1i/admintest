@@ -142,9 +142,77 @@ html {
   }
 }
 
+/* 히어로 콜라주 — 어두운 카본 위에 촬영 현장을 아주 얕게 깔고, 글자 쪽은 완전히 덮는다 */
+.hx-hero-veil {
+  background:
+    linear-gradient(92deg, #101012 0%, #101012 42%, rgba(16, 16, 18, 0.93) 62%, rgba(16, 16, 18, 0.84) 100%),
+    linear-gradient(to top, #101012 0%, rgba(16, 16, 18, 0.4) 38%, rgba(16, 16, 18, 0.22) 100%);
+}
+/* 모바일은 한 단이라 글자가 화면 전체를 쓴다 — 위쪽은 완전히 덮고 사진 뒤쪽만 살짝 남긴다 */
+@media (max-width: 1023px) {
+  .hx-hero-veil {
+    background: linear-gradient(to bottom, #101012 0%, #101012 52%, rgba(16, 16, 18, 0.9) 78%, rgba(16, 16, 18, 0.84) 100%);
+  }
+}
+
+/* 태블릿(768~1023) — 콜라주가 2열 그리드로 풀려 440px 에 갇히던 구간.
+   폭을 콘텐츠 폭(최대 940px)까지 늘리고 겹침을 되살린다.
+   좌표·크기는 모두 컨테이너 폭 기준 %라 768→1023 사이에서 같이 늘어난다. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hx-collage {
+    display: block;
+    position: relative;
+    width: 100%;
+    max-width: 940px;
+    aspect-ratio: 2.13;
+  }
+  .hx-collage > div {
+    position: absolute;
+  }
+  /* 1) 세로 컷 — 왼쪽, 맨 뒤 */
+  .hx-collage > div:nth-child(1) {
+    left: 0;
+    top: 2%;
+    width: 33%;
+    z-index: 10;
+  }
+  /* 2) 가장 큰 정사각 컷 — 오른쪽 위, 살짝 기울여 맨 앞 */
+  .hx-collage > div:nth-child(2) {
+    right: 1.2%;
+    top: 0;
+    width: 44.5%;
+    z-index: 30;
+    transform: rotate(3deg);
+  }
+  /* 3) 가장 작은 컷 — 가운데 아래, 두 장에 걸쳐 놓인다 */
+  .hx-collage > div:nth-child(3) {
+    left: 28.5%;
+    bottom: 0;
+    width: 28.5%;
+    z-index: 20;
+    transform: rotate(-4deg);
+  }
+}
+
+/* 인화지가 한 장씩 놓이듯 — 회전은 바깥 래퍼가 담당하므로 여기서는 이동·확대만 */
+html:not([data-motion='off']) .hx-print {
+  animation: hxPrintIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes hxPrintIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.965);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .anim-fade-up,
   .hero-in,
+  .hx-print,
   .hero-photo {
     opacity: 1 !important;
     transform: none !important;
@@ -163,6 +231,7 @@ html {
 }
 [data-motion='off'] .anim-fade-up,
 [data-motion='off'] .hero-in,
+[data-motion='off'] .hx-print,
 [data-motion='off'] .hero-photo {
   opacity: 1 !important;
   transform: none !important;

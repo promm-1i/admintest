@@ -174,3 +174,56 @@ h1, h2, h3 {
 p, li, dd, figcaption {
   text-wrap: pretty;
 }
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   태블릿(768~1023) 히어로 콜라주 — 균등 2×2 그리드로 읽히지 않도록
+   세 장의 크기·비율을 다르게 두고 겹쳐 놓는다. 이 구간에서만 적용된다.
+══════════════════════════════════════════════════════════════════════════════ */
+@media (min-width: 768px) and (max-width: 1023.98px) {
+  .hx-coll {
+    display: block;
+    position: relative;
+    height: 430px;
+  }
+  .hx-p1,
+  .hx-p2,
+  .hx-p3 {
+    position: absolute;
+  }
+  /* 작업 중인 손 — 세로로 길고 가장 크게, 가장 앞 */
+  .hx-p1 {
+    left: 0;
+    top: 0;
+    width: 48%;
+    height: 100%;
+    z-index: 30;
+  }
+  /* 작업대 — 가로로 눕혀 손 사진 위로 물린다 */
+  .hx-p2 {
+    left: 41%;
+    top: 3%;
+    width: 45%;
+    height: 60%;
+    z-index: 20;
+  }
+  /* 완성품 — 가장 작게, 작업대 아래로 물려 오른쪽 아래에 앉힌다 */
+  .hx-p3 {
+    right: 0;
+    bottom: 0;
+    width: 34%;
+    height: 42%;
+    z-index: 10;
+  }
+  /* 겹치는 지점을 모래빛 테두리로 끊어 준다 — PC와 같은 처리 */
+  .hx-p1 > figure,
+  .hx-p2 > figure,
+  .hx-p3 > figure {
+    border: 5px solid #f7f1e8;
+  }
+  .hx-p2 > figure {
+    transform: rotate(-3deg);
+  }
+  .hx-p3 > figure {
+    transform: rotate(2deg);
+  }
+}
