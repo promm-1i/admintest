@@ -212,6 +212,7 @@ function Head({ en, title, sub, inView, dark }: { en: string; title: React.React
 
 function Header({ active }: { active: string }) {
   const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
   useEffect(() => {
     const on = () => setScrolled(window.scrollY > 20)
     on()
@@ -231,7 +232,7 @@ function Header({ active }: { active: string }) {
           <span className="text-[1.12rem] font-extrabold tracking-tight">{SITE.name}</span>
           <span className="hidden sm:inline text-[0.72rem] text-cocoa/50 ml-1">{SITE.tagline}</span>
         </button>
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden lg:flex items-center gap-6">
           {SITE.nav.map((n) => (
             <button
               key={n.href}
@@ -243,6 +244,7 @@ function Header({ active }: { active: string }) {
             </button>
           ))}
         </nav>
+        <div className="flex items-center gap-1.5">
         <a
           href={`tel:${SITE.phone}`}
           className="nums px-5 py-2.5 rounded-full bg-cocoa text-cream text-[0.875rem] font-bold hover:bg-amber-d"
@@ -250,7 +252,29 @@ function Header({ active }: { active: string }) {
         >
           {SITE.phone}
         </a>
+          {/* 1024px 미만 — 내비를 접고 햄버거로 연다. 768~1023 에서 내비가 두 줄로 눌리던 것을 막는다 */}
+          <button className="lg:hidden p-2 -mr-2 text-cocoa" aria-label="메뉴" aria-expanded={open} onClick={() => setOpen(!open)}>
+            <span className="block w-6 space-y-1.5">
+              <span className="block h-0.5 bg-current" />
+              <span className={`block h-0.5 bg-current ${open ? 'opacity-0' : ''}`} />
+              <span className="block h-0.5 bg-current" />
+            </span>
+          </button>
+        </div>
       </div>
+      {open && (
+        <div className="lg:hidden border-t border-cocoa/15 bg-cream px-5 py-2">
+          {SITE.nav.map((n) => (
+            <button
+              key={n.href}
+              onClick={() => { setOpen(false); goTo(n.href) }}
+              className="block w-full text-left py-3.5 text-[1rem] font-semibold text-cocoa border-b border-cocoa/10 last:border-0"
+            >
+              {n.label}
+            </button>
+          ))}
+        </div>
+      )}
     </header>
   )
 }

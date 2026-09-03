@@ -245,7 +245,7 @@ function Header({ active }: { active: string }) {
           <span className="block text-[0.6875rem] text-ink-55 tracking-[0.14em]">{SITE.nameEn}</span>
         </button>
 
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden lg:flex items-center gap-1">
           {SITE.nav.map((n) => (
             <button
               key={n.href}
@@ -260,7 +260,7 @@ function Header({ active }: { active: string }) {
           </a>
         </nav>
 
-        <button className="md:hidden p-2 -mr-2" aria-label="메뉴" onClick={() => setOpen(!open)}>
+        <button className="lg:hidden p-2 -mr-2" aria-label="메뉴" onClick={() => setOpen(!open)}>
           <div className="w-6 space-y-[7px]">
             <span className="block h-px bg-ink" />
             <span className={`block h-px bg-ink ${open ? 'opacity-0' : ''}`} />
@@ -270,7 +270,7 @@ function Header({ active }: { active: string }) {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-hair bg-ivory px-5 py-2">
+        <div className="lg:hidden border-t border-hair bg-ivory px-5 py-2">
           {SITE.nav.map((n) => (
             <button key={n.href} onClick={() => go(n.href)} className="block w-full text-left py-3.5 text-[1rem] font-medium border-b border-hair last:border-0">
               {n.label}
