@@ -26,26 +26,31 @@ p,li,dd,figcaption{text-wrap:pretty}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid #1A3D1F;outline-offset:3px;border-radius:6px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none;filter:none}}
 
-:root{--sage:#EEF2EC;--cream:#F7F9F4;--forest:#1A3D1F;--moss:#3C5C3F;--ink:#282828;--soft:#6B7268;--line:#DCE3D8}
 /* 타입·간격은 4px 그리드 — 12·14·16·20·24·28·36·40·48·56·64,
    자간은 표제 -.03em / 본문 0, 컨테이너 1330px.
    행간만 한글 가독성 때문에 본문 1.7 로 둔다 (라틴 기준 1.3~1.4 는 한글에 좁다). */
+:root{--sage:#EEF2EC;--cream:#F7F9F4;--forest:#1A3D1F;--moss:#3C5C3F;--ink:#282828;--soft:#6B7268;--line:#DCE3D8}
 body{background:var(--sage);color:var(--ink);font-family:"Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.7;font-size:16px}
-.disp{font-family:"IBM Plex Sans KR",sans-serif}
 .wrap{max-width:1330px;margin:0 auto;padding:0 32px}
 section{padding:120px 0}
 @media(max-width:1199px){.wrap{padding:0 24px}section{padding:96px 0}}
 @media(max-width:809px){.wrap{padding:0 16px}section{padding:72px 0}}
 .label{display:inline-flex;align-items:center;gap:8px;font-family:"IBM Plex Sans KR";font-size:12px;font-weight:500;letter-spacing:0;color:var(--moss)}
 .label::before{content:"›";font-size:14px;opacity:.7}
-h2{font-family:"IBM Plex Sans KR";font-size:clamp(28px,4.6vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1.2;margin-top:16px}
-.sub{color:var(--soft);margin-top:16px;font-size:16px;max-width:560px}
+h2{font-family:"IBM Plex Sans KR";font-size:clamp(28px,4.6vw,56px);font-weight:400;letter-spacing:-.03em;line-height:1.2;margin-top:16px}
+.sub{color:var(--soft);font-size:16px;max-width:420px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:16px 28px;border-radius:99px;font-size:16px;font-weight:600;transition:transform .45s cubic-bezier(.32,.72,0,1),background .3s,color .3s,border-color .3s}
 .btn:active{transform:scale(.97)}
 .btn-d{background:var(--forest);color:#fff}.btn-d:hover{background:#123016}
 .btn-l{background:transparent;color:var(--ink);border:1px solid var(--line)}.btn-l:hover{border-color:var(--forest);color:var(--forest)}
 .btn-g{background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.32);backdrop-filter:blur(6px)}.btn-g:hover{background:rgba(255,255,255,.24)}
 .btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.7}
+
+/* 섹션 헤더 — 제목 좌측, 설명문·버튼 우측 상단 (레퍼런스 패턴) */
+.sec-head{display:grid;grid-template-columns:1fr minmax(280px,440px);gap:32px;align-items:start}
+.sec-aside{display:flex;flex-direction:column;align-items:flex-end;gap:24px;padding-top:8px}
+.sec-aside .sub{text-align:left}
+@media(max-width:1199px){.sec-head{grid-template-columns:1fr;gap:24px}.sec-aside{align-items:flex-start}}
 
 /* header */
 header{position:sticky;top:0;z-index:60;background:rgba(238,242,236,.9);backdrop-filter:blur(10px)}
@@ -54,48 +59,54 @@ header{position:sticky;top:0;z-index:60;background:rgba(238,242,236,.9);backdrop
 .logo small{font-size:12px;font-weight:400;letter-spacing:.2em;color:var(--soft)}
 .nav ul{display:flex;gap:32px;list-style:none;font-size:16px;color:var(--soft)}
 .nav ul a:hover{color:var(--forest)}
-/* 레퍼런스는 809에서 내리지만 한글 5개 항목은 태블릿 폭(768~1023)에서 눌린다 — 1023에서 내린다 */
+/* 레퍼런스는 809에서 내리지만 한글 5개 항목은 태블릿 폭(768~1023)에서 눌린다 */
 @media(max-width:1023px){.nav ul{display:none}}
 
-/* hero */
-.hero{padding:0 0 8px}
-.hero-frame{position:relative;margin:0 16px;border-radius:20px;overflow:hidden;min-height:min(78vh,720px);display:flex;flex-direction:column;justify-content:space-between}
+/* hero — 텍스트는 전부 사진 하단에 모인다 */
+.hero{padding:0}
+.hero-frame{position:relative;margin:0 16px;border-radius:20px;overflow:hidden;min-height:min(84vh,760px);display:flex;align-items:flex-end}
 .hero-frame .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-/* 히어로 영상: assets/hero.mp4 가 있으면 사진 위에 덮이고, 없으면 사진 그대로 간다 */
+/* 히어로 영상: assets/hero.mp4 가 있으면 사진 위에 덮이고, 없으면 사진 그대로 */
 .hero-frame video.bg{opacity:0;transition:opacity 1.2s ease}
 .hero-frame video.bg.ready{opacity:1}
-.hero-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,32,20,.34) 0%,rgba(18,32,20,.06) 34%,rgba(18,32,20,.62) 100%)}
-.hero-in{position:relative;z-index:2;padding:40px clamp(16px,4vw,48px) 40px;color:#fff}
-.hero-top{position:relative;z-index:2;padding:clamp(24px,5vw,48px) clamp(16px,4vw,48px) 0;color:#fff}
+.hero-frame::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,32,20,.28) 0%,rgba(18,32,20,0) 30%,rgba(18,32,20,.72) 100%)}
+.hero-in{position:relative;z-index:2;width:100%;padding:clamp(24px,4vw,48px);color:#fff;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
+@media(max-width:1023px){.hero-in{grid-template-columns:1fr}}
 .eyebrow{font-family:"IBM Plex Sans KR";font-size:16px;font-weight:400;letter-spacing:0;color:rgba(255,255,255,.86)}
-.hero h1{font-family:"IBM Plex Sans KR";font-size:clamp(36px,6.4vw,64px);font-weight:400;letter-spacing:-.03em;line-height:1.1;margin-top:16px;text-shadow:0 2px 24px rgba(0,0,0,.24)}
-.hero-foot{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end}
-@media(max-width:809px){.hero-foot{grid-template-columns:1fr}}
-.hero-foot p{font-size:16px;color:rgba(255,255,255,.9);max-width:340px;line-height:1.6}
+.hero h1{font-family:"IBM Plex Sans KR";font-size:clamp(36px,6.4vw,64px);font-weight:400;letter-spacing:-.03em;line-height:1.1;margin:16px 0 28px;text-shadow:0 2px 24px rgba(0,0,0,.28)}
+.hero-side p{font-size:16px;color:rgba(255,255,255,.9);max-width:320px;line-height:1.6}
 .chips{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
 .chip{display:inline-flex;align-items:center;gap:8px;font-size:14px;padding:8px 16px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);color:#fff;backdrop-filter:blur(6px)}
-.chip svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.6}
+.chip svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
 
-/* 소개 */
-.about .wrap{display:grid;grid-template-columns:1fr .9fr;gap:48px;align-items:start}
-@media(max-width:1199px){.about .wrap{grid-template-columns:1fr;gap:32px}}
-.about p.body{color:var(--soft);font-size:20px;line-height:1.6}
-.about .cta-row{margin-top:32px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.stats div{background:var(--sage);padding:24px}
-.stats b{font-family:"IBM Plex Sans KR";display:block;font-size:36px;font-weight:400;letter-spacing:-.03em;color:var(--forest);line-height:1.1}
-.stats span{display:block;font-size:14px;color:var(--soft);margin-top:8px}
-
-/* 마퀴 */
-.marq{padding:0 0 120px;overflow:hidden}
-@media(max-width:1199px){.marq{padding-bottom:96px}}
-@media(max-width:809px){.marq{padding-bottom:72px}}
-.marq-in{display:flex;gap:24px;width:max-content;animation:slide 34s linear infinite}
-/* 읽고 싶은 사람은 세울 수 있게 — 커서를 올리면 멈춘다 */
-.marq:hover .marq-in{animation-play-state:paused}
-.marq span{font-family:"IBM Plex Sans KR";font-size:clamp(24px,3.6vw,40px);font-weight:400;letter-spacing:-.03em;color:var(--moss);white-space:nowrap;display:flex;align-items:center;gap:24px}
-.marq span::after{content:"";width:8px;height:8px;border-radius:99px;background:var(--line)}
-@keyframes slide{to{transform:translateX(-50%)}}
+/* 소개 — 3열: 텍스트 / 세로 사진 / 스탯 + 스토리 카드 */
+.about .wrap{display:grid;grid-template-columns:1.05fr .72fr .95fr;gap:32px;align-items:stretch}
+@media(max-width:1199px){.about .wrap{grid-template-columns:1fr 1fr;gap:24px}.about .a-photo{grid-row:span 2}}
+@media(max-width:809px){.about .wrap{grid-template-columns:1fr}.about .a-photo{grid-row:auto;height:360px}}
+.a-text{display:flex;flex-direction:column}
+.a-text p.body{color:var(--soft);font-size:16px;line-height:1.7;margin-top:16px;max-width:380px}
+.a-text .btn{margin-top:28px;align-self:flex-start}
+.social{margin-top:auto;padding-top:32px}
+.stars{color:var(--forest);letter-spacing:.1em;font-size:14px}
+.social .score{font-family:"IBM Plex Sans KR";font-size:14px;color:var(--soft);margin-left:8px}
+.social b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;letter-spacing:-.03em;margin-top:8px}
+.a-photo{border-radius:16px;overflow:hidden;min-height:420px}
+.a-photo img{width:100%;height:100%;object-fit:cover}
+.a-side{display:flex;flex-direction:column;gap:24px}
+.statlist div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+.statlist span{font-size:14px;color:var(--soft)}
+.statlist b{font-family:"IBM Plex Sans KR";font-size:20px;font-weight:400;letter-spacing:-.03em}
+.storycard{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:24px;margin-top:auto}
+.storycard b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;letter-spacing:-.03em}
+.storycard p{font-size:14px;color:var(--soft);margin-top:8px;line-height:1.6}
+.stack{display:flex;justify-content:center;margin:24px 0 20px}
+.stack img{width:76px;height:96px;object-fit:cover;border-radius:8px;border:3px solid var(--cream);box-shadow:0 6px 18px -8px rgba(0,0,0,.3)}
+.stack img:nth-child(1){transform:rotate(-8deg)}
+.stack img:nth-child(2){margin:0 -14px;position:relative;z-index:2}
+.stack img:nth-child(3){transform:rotate(8deg)}
+.sicons{display:flex;justify-content:center;gap:8px}
+.sicons span{width:32px;height:32px;border-radius:99px;background:var(--sage);display:grid;place-items:center}
+.sicons svg{width:16px;height:16px;stroke:var(--moss);fill:none;stroke-width:1.6}
 
 /* 트레일 */
 .trails{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
@@ -114,28 +125,34 @@ header{position:sticky;top:0;z-index:60;background:rgba(238,242,236,.9);backdrop
 .trail-price b em{font-style:normal;font-size:14px;color:rgba(255,255,255,.7);font-weight:400;margin-left:4px}
 .trail-price a{font-size:14px;display:inline-flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px}
 
-/* 포함 사항 */
-.incl{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
-@media(max-width:1199px){.incl{grid-template-columns:1fr 1fr}}
+/* 포함 사항 — 사진이 섞인 비대칭 벤토 */
+.incl{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+@media(max-width:1199px){.incl{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:809px){.incl{grid-template-columns:1fr}}
-.ic{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:24px;transition:border-color .4s,transform .5s cubic-bezier(.32,.72,0,1)}
+.ic{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:24px;min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;transition:border-color .4s,transform .5s cubic-bezier(.32,.72,0,1)}
 .ic:hover{border-color:var(--moss);transform:translateY(-4px)}
-.ic svg{width:24px;height:24px;stroke:var(--forest);fill:none;stroke-width:1.5}
+.ic svg{width:24px;height:24px;stroke:var(--forest);fill:none;stroke-width:1.5;margin-bottom:auto}
 .ic b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;margin-top:20px;letter-spacing:-.03em}
 .ic p{font-size:16px;color:var(--soft);margin-top:8px;line-height:1.6}
-.ic.hi{background:var(--forest);border-color:var(--forest);color:#fff;display:flex;flex-direction:column;justify-content:center}
-.ic.hi strong{font-family:"IBM Plex Sans KR";font-size:48px;font-weight:400;letter-spacing:-.03em;line-height:1}
-.ic.hi p{color:rgba(255,255,255,.78);margin-top:12px;font-size:16px}
+.ic-photo{position:relative;grid-column:span 2;border:0;padding:24px;overflow:hidden;color:#fff;isolation:isolate;min-height:180px}
+@media(max-width:809px){.ic-photo{grid-column:span 1}}
+.ic-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.ic-photo::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,32,20,.1),rgba(18,32,20,.72))}
+.ic-photo b{color:#fff}
+.ic-photo p{color:rgba(255,255,255,.8)}
+.ic-photo strong{font-family:"IBM Plex Sans KR";font-size:48px;font-weight:400;letter-spacing:-.03em;line-height:1;margin-bottom:auto}
+.ic-photo svg{stroke:#fff}
 
-/* 갤러리 */
-.gal{display:grid;grid-template-columns:1.15fr .85fr .85fr;grid-auto-rows:240px;gap:16px;margin-top:48px}
+/* 갤러리 — 비대칭 매스너리 */
+.gal{display:grid;grid-template-columns:1.1fr .95fr .95fr;grid-auto-rows:236px;gap:16px;margin-top:48px}
 @media(max-width:1199px){.gal{grid-template-columns:1fr 1fr;grid-auto-rows:200px}}
-@media(max-width:809px){.gal{grid-template-columns:1fr;grid-auto-rows:240px}}
+@media(max-width:809px){.gal{grid-template-columns:1fr;grid-auto-rows:220px}}
 .gal figure{overflow:hidden;border-radius:16px}
-.gal figure:first-child{grid-row:span 2}
-@media(max-width:809px){.gal figure:first-child{grid-row:span 1}}
 .gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.5s cubic-bezier(.19,.6,.22,1)}
 .gal figure:hover img{transform:scale(1.05)}
+.gal .g-tall{grid-row:span 2}
+.gal .g-wide{grid-column:span 2}
+@media(max-width:809px){.gal .g-tall,.gal .g-wide{grid-row:auto;grid-column:auto}}
 
 /* 가이드 */
 .guide .wrap{display:grid;grid-template-columns:1fr .78fr;gap:48px;align-items:center}
@@ -144,61 +161,86 @@ header{position:sticky;top:0;z-index:60;background:rgba(238,242,236,.9);backdrop
 .gbadge{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:32px}
 @media(max-width:809px){.gbadge{grid-template-columns:1fr}}
 .gbadge div{border-top:1px solid var(--line);padding-top:16px}
+.gbadge svg{width:20px;height:20px;stroke:var(--forest);fill:none;stroke-width:1.5;margin-bottom:12px}
 .gbadge b{font-family:"IBM Plex Sans KR";display:block;font-size:16px;font-weight:500}
 .gbadge span{display:block;font-size:14px;color:var(--soft);margin-top:4px;line-height:1.6}
-.gcard{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:2/3}
+.gcard{position:relative;border-radius:20px;overflow:hidden;aspect-ratio:4/3}
 .gcard img{width:100%;height:100%;object-fit:cover}
-.gcard figcaption{position:absolute;left:16px;right:16px;bottom:16px;background:rgba(238,242,236,.92);backdrop-filter:blur(8px);border-radius:12px;padding:16px}
+.gcard figcaption{position:absolute;left:16px;bottom:16px;background:rgba(238,242,236,.92);backdrop-filter:blur(8px);border-radius:12px;padding:16px}
 .gcard figcaption small{font-size:12px;letter-spacing:0;color:var(--moss);font-family:"IBM Plex Sans KR"}
 .gcard figcaption b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;letter-spacing:-.03em;margin-top:4px}
 
-/* 진행 방식 */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
-@media(max-width:1199px){.steps{grid-template-columns:1fr 1fr}}
-@media(max-width:809px){.steps{grid-template-columns:1fr}}
-.st{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:24px}
-.st i{font-family:"IBM Plex Sans KR";font-style:normal;font-size:14px;font-weight:400;letter-spacing:0;color:var(--moss)}
-.st b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;letter-spacing:-.03em;margin-top:24px}
-.st p{font-size:16px;color:var(--soft);margin-top:8px;line-height:1.6}
-.how-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+/* 진행 방식 — 좌 제목 / 우 세로 리스트 */
+.how .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:48px;align-items:start}
+@media(max-width:1199px){.how .wrap{grid-template-columns:1fr;gap:32px}}
+.how-left .sub{margin-top:16px}
+.how-left .btn{margin-top:28px}
+.howlist{display:flex;flex-direction:column;gap:8px}
+.howrow{display:grid;grid-template-columns:56px 1fr;gap:16px;background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:24px;transition:border-color .4s}
+.howrow:hover{border-color:var(--moss)}
+.howrow i{font-family:"IBM Plex Sans KR";font-style:normal;font-size:14px;color:var(--moss)}
+.howrow b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;letter-spacing:-.03em}
+.howrow p{font-size:16px;color:var(--soft);margin-top:8px;line-height:1.6;max-width:520px}
+@media(max-width:809px){.howrow{grid-template-columns:1fr;gap:8px}}
 
-/* 후기 */
-.quote{background:var(--forest);color:#fff;border-radius:20px;padding:clamp(32px,5vw,56px);margin-top:48px}
-.quote blockquote{font-family:"IBM Plex Sans KR";font-size:clamp(20px,2.9vw,36px);font-weight:400;letter-spacing:-.03em;line-height:1.3}
-.quote .who{display:flex;align-items:center;gap:12px;margin-top:32px;font-size:14px;color:rgba(255,255,255,.72)}
-.quote .who b{font-weight:500;color:#fff;font-size:16px}
-.quote .who i{font-style:normal;opacity:.5}
-.revs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-@media(max-width:809px){.revs{grid-template-columns:1fr}}
-.rev{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:24px}
+/* 후기 — 좌 인물 사진 + 인용 / 우 리뷰 스택 */
+.revwrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:16px;margin-top:48px}
+@media(max-width:1199px){.revwrap{grid-template-columns:1fr}}
+.quote{position:relative;border-radius:16px;overflow:hidden;min-height:420px;display:flex;align-items:flex-end;color:#fff;isolation:isolate;padding:24px}
+.quote img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.quote::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,32,20,.1) 0%,rgba(18,32,20,.82) 100%)}
+.quote blockquote{font-family:"IBM Plex Sans KR";font-size:20px;font-weight:400;letter-spacing:-.03em;line-height:1.4}
+.quote .who{margin-top:16px;font-size:14px;color:rgba(255,255,255,.72)}
+.quote .who b{font-weight:500;color:#fff}
+.revs{display:flex;flex-direction:column;gap:16px}
+.rev{background:var(--cream);border:1px solid var(--line);border-radius:16px;padding:24px;flex:1}
 .rev b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;letter-spacing:-.03em}
 .rev p{font-size:16px;color:var(--soft);margin-top:12px;line-height:1.7}
 .rev .who{margin-top:20px;padding-top:16px;border-top:1px solid var(--line);font-size:14px;color:var(--soft)}
 .rev .who b{display:inline;font-size:14px;color:var(--ink)}
 
-/* 저널 */
+/* 저널 — 사진 위에 제목이 얹히는 오버레이 카드 */
 .posts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
 @media(max-width:809px){.posts{grid-template-columns:1fr}}
-.post figure{overflow:hidden;border-radius:16px;aspect-ratio:16/9}
-.post img{width:100%;height:100%;object-fit:cover;transition:transform 1.5s cubic-bezier(.19,.6,.22,1)}
+.post{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/3;display:flex;flex-direction:column;justify-content:space-between;color:#fff;isolation:isolate;padding:20px}
+.post img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform 1.5s cubic-bezier(.19,.6,.22,1)}
+.post::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,32,20,.36) 0%,rgba(18,32,20,.06) 40%,rgba(18,32,20,.78) 100%)}
 .post:hover img{transform:scale(1.05)}
-.post .meta{display:flex;gap:8px;align-items:center;margin-top:16px;font-size:14px;color:var(--soft)}
-.post .meta i{font-style:normal;opacity:.45}
-.post b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;letter-spacing:-.03em;margin-top:8px;line-height:1.3}
+.post .meta{display:flex;gap:8px;align-items:center;font-size:12px}
+.post .meta span{padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(6px)}
+.post b{font-family:"IBM Plex Sans KR";display:block;font-size:20px;font-weight:400;letter-spacing:-.03em;line-height:1.3}
 
-/* CTA · footer */
-.cta{position:relative;margin:0 16px 16px;background:var(--forest);color:#fff;border-radius:20px;padding:clamp(48px,7vw,96px) 24px;text-align:center;overflow:hidden;isolation:isolate}
-/* CTA 배경 영상: assets/cta.mp4 가 있으면 깔리고, 없으면 딥 포레스트 단색 그대로 */
-.cta video.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transition:opacity 1.2s ease}
-.cta video.bg.ready{opacity:.34}
-.cta::after{content:"";position:absolute;inset:0;z-index:-1;background:rgba(18,32,20,.45)}
-.cta h2{margin-top:0;color:#fff}
-.cta p{color:rgba(255,255,255,.72);margin-top:16px;font-size:16px}
-.cta .btn{margin-top:32px;background:#fff;color:var(--forest)}
-.cta .btn:hover{background:var(--sage)}
-footer{padding:48px 0 56px;font-size:14px;color:var(--soft);line-height:1.8}
+/* FAQ */
+.faq .wrap{display:grid;grid-template-columns:.72fr 1.28fr;gap:48px;align-items:start}
+@media(max-width:1199px){.faq .wrap{grid-template-columns:1fr;gap:32px}}
+.faq-left .sub{margin-top:16px}
+.faq-left .btn{margin-top:28px}
+.faqlist{display:flex;flex-direction:column;gap:8px}
+.faqlist details{background:var(--cream);border:1px solid var(--line);border-radius:16px;transition:border-color .4s}
+.faqlist details[open]{border-color:var(--moss)}
+.faqlist summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-family:"IBM Plex Sans KR";font-size:20px;font-weight:400;letter-spacing:-.03em}
+.faqlist summary::-webkit-details-marker{display:none}
+.faqlist summary::after{content:"";flex:none;width:16px;height:16px;background:linear-gradient(var(--moss),var(--moss)) center/16px 1.5px no-repeat,linear-gradient(var(--moss),var(--moss)) center/1.5px 16px no-repeat;transition:transform .35s}
+.faqlist details[open] summary::after{transform:rotate(45deg);background:linear-gradient(var(--moss),var(--moss)) center/16px 1.5px no-repeat}
+.faqlist p{padding:0 24px 20px;font-size:16px;color:var(--soft);line-height:1.7;max-width:640px}
+
+/* 마무리 패널 — 사진/영상 위에 CTA·회사 정보·대형 워드마크 */
+.closing{position:relative;margin:0 16px 16px;background:var(--forest);color:#fff;border-radius:20px;overflow:hidden;isolation:isolate}
+.closing .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+/* 배경 영상: assets/cta.mp4 가 있으면 사진 위에 덮이고, 없으면 사진 그대로 */
+.closing video.bg{opacity:0;transition:opacity 1.2s ease}
+.closing video.bg.ready{opacity:1}
+.closing::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(18,32,20,.66) 0%,rgba(18,32,20,.78) 100%)}
+.closing-in{padding:clamp(56px,7vw,112px) clamp(24px,4vw,48px) 0;text-align:center}
+.closing h2{margin-top:0;color:#fff}
+.closing p{color:rgba(255,255,255,.78);margin-top:16px;font-size:16px}
+.closing .btn{margin-top:32px;background:#fff;color:var(--forest)}
+.closing .btn:hover{background:var(--sage)}
+.closing-biz{margin-top:64px;padding-top:24px;border-top:1px solid rgba(255,255,255,.18);font-size:14px;color:rgba(255,255,255,.66);line-height:1.8;text-align:left}
+.closing-biz b{color:#fff;font-weight:600}
+.wordmark{font-family:"IBM Plex Sans KR";font-weight:400;letter-spacing:-.04em;font-size:clamp(72px,17vw,240px);line-height:.82;color:rgba(255,255,255,.14);text-align:center;padding:24px 16px 0;user-select:none}
+footer{padding:32px 0 56px;font-size:14px;color:var(--soft);line-height:1.8}
 footer b{color:var(--ink);font-weight:600}
-.nvq{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);font-size:14px}
 .nvq a{border-bottom:1px solid var(--line)}
 </style>
 </head>
@@ -220,18 +262,15 @@ footer b{color:var(--ink);font-weight:600}
 
 <section class="hero" id="top">
 <div class="hero-frame">
-<img class="bg" src="./assets/hero.jpg" alt="새벽 안개가 걷히는 해안 트레일">
+<img class="bg" src="./assets/hero.jpg" alt="새벽 능선을 걷는 트레킹 일행">
 <video class="bg" data-src="./assets/hero.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
-<div class="hero-top">
+<div class="hero-in">
+<div>
 <p class="eyebrow rv">Guided Trekking · Est. 2014</p>
 <h1 class="rv">길이 끝나는 곳에서<br>걷기 시작합니다</h1>
-</div>
-<div class="hero-in">
-<div class="hero-foot">
-<div>
 <a class="btn btn-g rv" href="#trails">이번 시즌 코스 보기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </div>
-<div class="rv">
+<div class="hero-side rv">
 <p>8명 이하 소수 정예로, 지도에 없는 능선과 해안을 그 지역 가이드와 함께 걷습니다.</p>
 <div class="chips">
 <span class="chip"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 19 6-11 4 7 3-5 5 9Z"/></svg>산</span>
@@ -241,39 +280,55 @@ footer b{color:var(--ink);font-weight:600}
 </div>
 </div>
 </div>
-</div>
 </section>
 
 <section class="about" id="about"><div class="wrap">
-<div>
+<div class="a-text">
 <p class="label rv">소개</p>
-<h2 class="rv">모든 풍경에는<br>아직 안 꺼낸 이야기가 있습니다</h2>
-<p class="body sub rv">오름 트레일은 더 멀리 가고 싶은 사람들을 위한 트레킹 여행사입니다. 8명 이하 소수 정예, 그 지역에서 나고 자란 가이드, 그리고 혼자서는 좀처럼 찾기 어려운 길로만 일정을 짭니다.</p>
-<div class="cta-row rv"><a class="btn btn-l" href="#guide">우리 이야기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<h2 class="rv">모든 풍경에는<br>아직 안 꺼낸<br>이야기가 있습니다</h2>
+<p class="body rv">오름 트레일은 더 멀리 가고 싶은 사람들을 위한 트레킹 여행사입니다. 8명 이하 소수 정예, 그 지역에서 나고 자란 가이드, 그리고 혼자서는 좀처럼 찾기 어려운 길로만 일정을 짭니다.</p>
+<a class="btn btn-d rv" href="#guide">우리 이야기</a>
+<div class="social rv">
+<span class="stars">★★★★★</span><span class="score">4.8 / 5</span>
+<b>1,200명이 함께 걸었습니다</b>
 </div>
-<div class="stats rv">
-<div><b>1,200명</b><span>지금까지 함께 걸은 분</span></div>
-<div><b>12년</b><span>가이드 운영 햇수</span></div>
-<div><b>5,000km</b><span>누적 트레일 거리</span></div>
-<div><b>38개</b><span>운영 중인 코스</span></div>
+</div>
+
+<figure class="a-photo rv"><img src="./assets/about.jpg" alt="능선을 오르는 트레커"></figure>
+
+<div class="a-side">
+<div class="statlist rv">
+<div><span>가이드 운영 햇수</span><b>12년</b></div>
+<div><span>누적 트레일 거리</span><b>5,000km</b></div>
+<div><span>운영 중인 코스</span><b>38개</b></div>
+</div>
+<div class="storycard rv">
+<b>매 걸음이 하나의 이야기</b>
+<p>정상에서 골짜기까지 — 길은 늘 무언가를 말합니다.</p>
+<div class="stack">
+<img src="./assets/journal-2.jpg" alt="">
+<img src="./assets/gallery-4.jpg" alt="">
+<img src="./assets/gallery-5.jpg" alt="">
+</div>
+<div class="sicons">
+<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 19 6-11 4 7 3-5 5 9Z"/></svg></span>
+<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 19c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg></span>
+<span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 6 13h4l-3 6h10l-3-6h4Z"/></svg></span>
+</div>
+</div>
 </div>
 </div></section>
 
-<div class="marq" aria-hidden="true">
-<div class="marq-in">
-<span>매 걸음이 하나의 이야기</span><span>정상에서 골짜기까지</span><span>길은 늘 무언가를 말합니다</span>
-<span>매 걸음이 하나의 이야기</span><span>정상에서 골짜기까지</span><span>길은 늘 무언가를 말합니다</span>
-</div>
-</div>
-
 <section id="trails" style="padding-top:0"><div class="wrap">
-<div class="how-head">
+<div class="sec-head">
 <div>
 <p class="label rv">트레일</p>
 <h2 class="rv">길 너머에 무엇이 있는지<br>직접 확인하세요</h2>
-<p class="sub rv">숨어 있는 골짜기부터 이름난 능선까지, 걷는 재미를 아는 사람을 위해 짠 코스입니다.</p>
 </div>
-<a class="btn btn-l rv" href="tel:010-4894-4905">전체 코스 보기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<div class="sec-aside">
+<p class="sub rv">숨어 있는 골짜기부터 이름난 능선까지, 걷는 재미를 아는 사람을 위해 짠 코스입니다.</p>
+<a class="btn btn-d rv" href="tel:010-4894-4905">전체 코스 보기</a>
+</div>
 </div>
 
 <div class="trails">
@@ -317,35 +372,43 @@ footer b{color:var(--ink);font-weight:600}
 </div></section>
 
 <section id="incl" style="padding-top:0"><div class="wrap">
+<div class="sec-head">
+<div>
 <p class="label rv">포함 사항</p>
 <h2 class="rv">무엇이 다른지<br>먼저 말씀드립니다</h2>
+</div>
+<div class="sec-aside">
 <p class="sub rv">가이드와 들머리 차량부터 식사 · 장비 · 인원까지, 도착하기 전에 전부 정리해 둡니다.</p>
+</div>
+</div>
 
 <div class="incl">
 <div class="ic rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.2 7-10.5A7 7 0 0 0 5 10.5C5 15.8 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.4"/></svg><b>가이드</b><p>출발부터 도착까지 그 지역 가이드가 끝까지 동행합니다</p></div>
 <div class="ic rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9a6 6 0 0 1 12 0v9a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2Z"/><path d="M9.5 9V6a2.5 2.5 0 0 1 5 0v3"/><path d="M9 14h6"/></svg><b>장비</b><p>텐트 · 매트 · 취사도구는 미리 챙겨 둡니다</p></div>
-<div class="ic hi rv"><strong>100%</strong><p>전 일정 현지 가이드 동행</p></div>
-<div class="ic rv"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 10h2.5L21 13v4h-4"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><b>이동</b><p>들머리부터 날머리까지 돌아가는 길 없이 이동합니다</p></div>
+<div class="ic ic-photo rv"><img src="./assets/incl-1.jpg" alt="능선에서 길을 안내하는 가이드"><strong>100%</strong><b>전 일정 현지 가이드 동행</b></div>
+
+<div class="ic ic-photo rv"><img src="./assets/incl-2.jpg" alt="들머리까지 차량 이동"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="14" height="10" rx="2"/><path d="M17 10h2.5L21 13v4h-4"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg><b>이동</b><p>들머리부터 날머리까지 돌아가는 길 없이 이동합니다</p></div>
 <div class="ic rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v8a3 3 0 0 0 6 0V3"/><path d="M9 11v10"/><path d="M17 3c-1.5 2-2 4-2 6s.5 3 2 3v9"/></svg><b>식사</b><p>매일 따뜻한 식사와 행동식을 준비합니다</p></div>
 <div class="ic rv"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M16 5.5a3 3 0 0 1 0 5M18 20c0-2.6-1-4.2-2.5-5"/></svg><b>소수 정예</b><p>가이드 한 명당 여덟 명을 넘기지 않습니다</p></div>
 </div>
 </div></section>
 
 <section id="gallery" style="padding-top:0"><div class="wrap">
-<div class="how-head">
+<div class="sec-head">
 <div>
 <p class="label rv">기록</p>
 <h2 class="rv">걷는 동안<br>어떤 시간이 흐르는지</h2>
-<p class="sub rv">사진 한 장마다 그날의 사람과 장소, 그리고 기억이 남습니다.</p>
 </div>
-<a class="btn btn-l rv" href="tel:010-4894-4905">사진 더 보기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<div class="sec-aside">
+<p class="sub rv">사진 한 장마다 그날의 사람과 장소, 그리고 기억이 남습니다.</p>
+<a class="btn btn-d rv" href="tel:010-4894-4905">사진 더 보기</a>
+</div>
 </div>
 <div class="gal rv">
-<figure><img src="./assets/gallery-1.jpg" alt="능선을 오르는 일행"></figure>
+<figure class="g-tall"><img src="./assets/gallery-1.jpg" alt="능선을 오르는 일행"></figure>
 <figure><img src="./assets/gallery-2.jpg" alt="트레일 위의 아침"></figure>
 <figure><img src="./assets/gallery-3.jpg" alt="야영지의 저녁"></figure>
-<figure><img src="./assets/gallery-4.jpg" alt="정상에서 본 풍경"></figure>
-<figure><img src="./assets/gallery-5.jpg" alt="숲길을 걷는 뒷모습"></figure>
+<figure class="g-wide"><img src="./assets/gallery-4.jpg" alt="정상에서 본 풍경"></figure>
 </div>
 </div></section>
 
@@ -356,8 +419,8 @@ footer b{color:var(--ink);font-weight:600}
 <p class="body rv">우리 가이드들은 이 산을 일로 삼기 훨씬 전부터 걸었습니다. 어떤 길이 당신 속도에 맞는지, 능선 위에서 실제로 무엇이 필요한지 압니다. 첫 종주든 열 번째든 마찬가지입니다.</p>
 <p class="body rv">오는 사람에 맞춥니다. 처음이라면 장비 고르는 법부터 발 딛는 자리까지 전부 알려드리고, 익숙하다면 더 멀리 더 빠르게 갑니다. 어느 쪽이든 이 땅을 아는 사람과 함께 걷습니다.</p>
 <div class="gbadge">
-<div class="rv"><b>산악 응급처치 자격</b><span>전원 자격 보유, 다일정 코스 인솔 5년 이상</span></div>
-<div class="rv"><b>소수 정예</b><span>가이드 1명당 최대 8명, 길 위에서 눈이 닿습니다</span></div>
+<div class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-4.2 7-9.5V6l-7-3-7 3v5.5C5 16.8 12 21 12 21Z"/><path d="m9 11 2 2 4-4"/></svg><b>산악 응급처치 자격</b><span>전원 자격 보유, 다일정 코스 인솔 5년 이상</span></div>
+<div class="rv"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-5 6-5s6 1.7 6 5"/><path d="M16 5.5a3 3 0 0 1 0 5M18 20c0-2.6-1-4.2-2.5-5"/></svg><b>소수 정예</b><span>가이드 1명당 최대 8명, 길 위에서 눈이 닿습니다</span></div>
 </div>
 </div>
 <figure class="gcard rv">
@@ -366,32 +429,40 @@ footer b{color:var(--ink);font-weight:600}
 </figure>
 </div></section>
 
-<section id="how" style="padding-top:0"><div class="wrap">
-<div class="how-head">
-<div>
+<section class="how" id="how" style="padding-top:0"><div class="wrap">
+<div class="how-left">
 <p class="label rv">진행 방식</p>
-<h2 class="rv">계획부터 첫 걸음까지</h2>
+<h2 class="rv">계획부터<br>첫 걸음까지</h2>
 <p class="sub rv">속도에 맞는 코스를 고르고 준비는 저희에게 맡기세요. 시간은 길 위에서 쓰는 겁니다.</p>
-</div>
 <a class="btn btn-d rv" href="tel:010-4894-4905">코스 상담하기</a>
 </div>
-<div class="steps">
-<div class="st rv"><i>01</i><b>코스 고르기</b><p>난이도와 계절, 풍경으로 고릅니다. 속도에 맞는 길을 찾아 드립니다.</p></div>
-<div class="st rv"><i>02</i><b>자리 예약</b><p>원하는 날짜를 정하고 예약을 확정합니다. 인원이 차기 전에 잡아 두세요.</p></div>
-<div class="st rv"><i>03</i><b>출발 준비</b><p>일정표와 준비물, 집결 장소 안내를 출발 전에 보내드립니다.</p></div>
-<div class="st rv"><i>04</i><b>함께 걷기</b><p>들머리에서 가이드를 만나면 됩니다. 길과 날씨, 속도는 저희가 봅니다.</p></div>
+<div class="howlist">
+<div class="howrow rv"><i>01</i><div><b>코스 고르기</b><p>난이도와 계절, 풍경으로 고릅니다. 속도에 맞는 길을 찾아 드립니다.</p></div></div>
+<div class="howrow rv"><i>02</i><div><b>자리 예약</b><p>원하는 날짜를 정하고 예약을 확정합니다. 인원이 차기 전에 잡아 두세요.</p></div></div>
+<div class="howrow rv"><i>03</i><div><b>출발 준비</b><p>일정표와 준비물, 집결 장소 안내를 출발 전에 보내드립니다.</p></div></div>
+<div class="howrow rv"><i>04</i><div><b>함께 걷기</b><p>들머리에서 가이드를 만나면 됩니다. 길과 날씨, 속도는 저희가 봅니다.</p></div></div>
 </div>
 </div></section>
 
 <section id="reviews" style="padding-top:0"><div class="wrap">
+<div class="sec-head">
+<div>
 <p class="label rv">후기</p>
-<h2 class="rv">기억이 대신 말해 줍니다</h2>
-<p class="sub rv">오름 트레일과 함께 걸었던 분들이 직접 남긴 이야기입니다.</p>
-
-<div class="quote rv">
-<blockquote>“산을 보러 갔는데, 잊히지 않을 기억을 안고 돌아왔습니다. 걸었던 길도, 올려다본 풍경도, 나눈 이야기도 전부 특별했어요.”</blockquote>
-<div class="who"><b>김서연</b><i>·</i>지리산 종주</div>
+<h2 class="rv">기억이 대신<br>말해 줍니다</h2>
 </div>
+<div class="sec-aside">
+<p class="sub rv">오름 트레일과 함께 걸었던 분들이 직접 남긴 이야기입니다.</p>
+</div>
+</div>
+
+<div class="revwrap">
+<figure class="quote rv">
+<img src="./assets/review.jpg" alt="지리산 종주에 참여한 김서연 님">
+<div>
+<blockquote>“산을 보러 갔는데, 잊히지 않을 기억을 안고 돌아왔습니다. 걸었던 길도, 올려다본 풍경도, 나눈 이야기도 전부 특별했어요.”</blockquote>
+<div class="who"><b>김서연</b> · 지리산 종주</div>
+</div>
+</figure>
 <div class="revs">
 <article class="rev rv">
 <b>한 걸음마다 값어치를 했습니다</b>
@@ -404,33 +475,56 @@ footer b{color:var(--ink);font-weight:600}
 <div class="who"><b>박민아</b> · 제주 오름 &amp; 올레</div>
 </article>
 </div>
+</div>
 </div></section>
 
 <section id="journal" style="padding-top:0"><div class="wrap">
-<div class="how-head">
+<div class="sec-head">
 <div>
 <p class="label rv">저널</p>
 <h2 class="rv">길 위에서 쓴 기록</h2>
-<p class="sub rv">코스 안내와 준비물, 계절별 이야기를 가이드가 직접 씁니다.</p>
 </div>
-<a class="btn btn-l rv" href="tel:010-4894-4905">저널 보기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<div class="sec-aside">
+<p class="sub rv">코스 안내와 준비물, 계절별 이야기를 가이드가 직접 씁니다.</p>
+<a class="btn btn-d rv" href="tel:010-4894-4905">저널 보기</a>
+</div>
 </div>
 <div class="posts">
-<article class="post rv"><figure><img src="./assets/journal-1.jpg" alt="출발 전날 안내"></figure><div class="meta">가이드 노트 <i>·</i> 3분</div><b>첫날 전에 꼭 드리는 이야기</b></article>
-<article class="post rv"><figure><img src="./assets/journal-2.jpg" alt="계절이 바뀐 능선"></figure><div class="meta">가이드 노트 <i>·</i> 4분</div><b>같은 길도 계절마다 다르게 느껴지는 이유</b></article>
-<article class="post rv"><figure><img src="./assets/journal-3.jpg" alt="정비 중인 장비"></figure><div class="meta">가이드 노트 <i>·</i> 4분</div><b>해마다 새로 사는 장비 목록</b></article>
+<article class="post rv"><img src="./assets/journal-1.jpg" alt="출발 전날 안내"><div class="meta"><span>가이드 노트</span><span>3분</span></div><b>첫날 전에 꼭 드리는 이야기</b></article>
+<article class="post rv"><img src="./assets/journal-2.jpg" alt="계절이 바뀐 능선"><div class="meta"><span>가이드 노트</span><span>4분</span></div><b>같은 길도 계절마다 다르게 느껴지는 이유</b></article>
+<article class="post rv"><img src="./assets/journal-3.jpg" alt="정비 중인 장비"><div class="meta"><span>가이드 노트</span><span>4분</span></div><b>해마다 새로 사는 장비 목록</b></article>
 </div>
 </div></section>
 
-<div class="cta">
+<section class="faq" id="faq" style="padding-top:0"><div class="wrap">
+<div class="faq-left">
+<p class="label rv">자주 묻는 질문</p>
+<h2 class="rv">떠나기 전에<br>알아두면 좋은 것</h2>
+<p class="sub rv">준비물부터 난이도까지, 가장 많이 받는 질문을 모았습니다.</p>
+<a class="btn btn-d rv" href="tel:010-4894-4905">더 물어보기</a>
+</div>
+<div class="faqlist">
+<details class="rv" open><summary>체력이 어느 정도여야 하나요?</summary><p>평지를 두세 시간 쉬지 않고 걸을 수 있으면 '쉬움' 코스는 충분합니다. '보통'부터는 연속 오르막이 있어 주 1회 이상 운동하시는 편이 편합니다. 신청 전에 통화로 최근 산행 경험을 여쭤보고 맞는 코스를 권해드립니다.</p></details>
+<details class="rv"><summary>한 팀에 몇 명이 함께 걷나요?</summary><p>가이드 한 명당 최대 여덟 명입니다. 인원이 넘으면 가이드를 한 명 더 붙이지 팀을 키우지 않습니다.</p></details>
+<details class="rv"><summary>무엇을 챙겨 가야 하나요?</summary><p>텐트 · 매트 · 취사도구 · 식사는 저희가 준비합니다. 등산화와 배낭, 갈아입을 옷, 개인 상비약만 챙기시면 됩니다. 출발 일주일 전에 계절에 맞춘 준비물 목록을 문자로 보내드립니다.</p></details>
+<details class="rv"><summary>날씨가 나빠지면 어떻게 되나요?</summary><p>가이드가 현장에서 판단해 우회로로 돌리거나 일정을 줄입니다. 안전상 진행이 어려우면 전액 환불하거나 다른 날짜로 옮겨드립니다.</p></details>
+<details class="rv"><summary>예약한 날짜를 바꿀 수 있나요?</summary><p>출발 3일 전까지는 같은 시즌 안에서 자유롭게 변경하실 수 있습니다. 이후에는 취소 규정에 따릅니다.</p></details>
+</div>
+</div></section>
+
+<div class="closing">
+<img class="bg" src="./assets/gallery-5.jpg" alt="">
 <video class="bg" data-src="./assets/cta.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+<div class="closing-in">
 <h2 class="rv">다음 계절엔<br>어디를 걸으시겠어요?</h2>
 <p class="rv">상담 09:00 – 19:00 · 출발 3일 전까지 일정 조정 가능</p>
 <a class="btn rv" href="tel:010-4894-4905">010-4894-4905</a>
+<div class="closing-biz"><b>오름 트레일</b> · 대표 정수현 · 국내여행업 등록 제0000호<br>강원특별자치도 속초시 설악산로 000 · 사업자등록번호 000-00-00000</div>
+</div>
+<div class="wordmark" aria-hidden="true">OREUM</div>
 </div>
 
 <footer><div class="wrap">
-<div><b>오름 트레일</b> · 대표 정수현 · 국내여행업 등록 제0000호<br>강원특별자치도 속초시 설악산로 000 · 사업자등록번호 000-00-00000</div>
 <div class="nvq">이 페이지는 <b>NOVERIQ</b>가 제작한 홈페이지 템플릿 데모입니다. 위 상호 · 주소 · 등록번호는 예시입니다.<br>제작 문의 <a href="tel:010-4894-4905">010-4894-4905</a> · <a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a><br>민트클 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</div>
 </div></footer>
 
