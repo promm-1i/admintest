@@ -187,7 +187,7 @@ function Head({ no, en, title, sub, inView }: { no: string; en: string; title: R
       <p className="f-mono text-[0.75rem] tracking-[0.25em] uppercase text-silver/70">
         <span className="text-flash">{no}</span> / {en}
       </p>
-      <h2 className="mt-4 text-[clamp(1.7rem,4vw,2.5rem)] font-extrabold tracking-[-0.03em] leading-tight text-white">{title}</h2>
+      <h2 className="f-display mt-4 text-[clamp(1.7rem,4vw,2.5rem)] font-extrabold tracking-[-0.03em] leading-tight text-white">{title}</h2>
       {sub && <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-silver/70">{sub}</p>}
     </div>
   )
@@ -267,7 +267,7 @@ function Hero() {
         {/* 카피 */}
         <div>
           <p className={`f-mono text-[0.78rem] tracking-[0.3em] text-flash ${MOTION ? 'hero-in' : ''}`}>PORTRAIT — SEOCHON, SEOUL</p>
-          <h1 className={`mt-5 text-[clamp(2.3rem,5.4vw,4.05rem)] font-extrabold tracking-[-0.04em] leading-[1.08] whitespace-pre-line text-white ${MOTION ? 'hero-in d150' : ''}`}>
+          <h1 className={`f-display mt-5 text-[clamp(2.3rem,5.4vw,4.05rem)] font-extrabold tracking-[-0.04em] leading-[1.08] whitespace-pre-line text-white ${MOTION ? 'hero-in d150' : ''}`}>
             {SITE.slogan}
           </h1>
           <p className={`mt-5 max-w-[27rem] text-[0.97rem] leading-relaxed text-silver opacity-85 ${MOTION ? 'hero-in d300' : ''}`}>{SITE.sloganSub}</p>

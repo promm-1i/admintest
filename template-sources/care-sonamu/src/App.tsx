@@ -143,7 +143,7 @@ function goTo(href: string) {
 function Head({ title, sub, inView }: { title: React.ReactNode; sub?: string; inView: boolean }) {
   return (
     <div className={`mb-12 ${MOTION ? 'anim-fade-up' : ''} ${inView ? 'in-view' : ''}`}>
-      <h2 className="text-[clamp(1.9rem,4.4vw,2.7rem)] font-extrabold tracking-[-0.02em] leading-tight">{title}</h2>
+      <h2 className="f-display text-[clamp(1.9rem,4.4vw,2.7rem)] font-extrabold tracking-[-0.02em] leading-tight">{title}</h2>
       {sub && <p className="mt-4 max-w-2xl text-[1.08rem] leading-[1.8] text-bark/65">{sub}</p>}
       <div className={`sage-rule mt-6 h-1.5 w-16 rounded-full bg-sage ${inView ? 'in-view' : ''}`} aria-hidden />
     </div>
@@ -209,7 +209,7 @@ function Hero() {
               {SITE.designation}
             </p>
             <h1
-              className={`hx-onphoto mt-6 whitespace-pre-line text-[clamp(1.9rem,3.6vw,3rem)] font-extrabold leading-[1.3] tracking-[-0.03em] text-warm ${MOTION ? 'hero-in d150' : ''}`}
+              className={`f-display hx-onphoto mt-6 whitespace-pre-line text-[clamp(1.9rem,3.6vw,3rem)] font-extrabold leading-[1.3] tracking-[-0.03em] text-warm ${MOTION ? 'hero-in d150' : ''}`}
             >
               {SITE.slogan}
             </h1>
@@ -426,7 +426,7 @@ function Consult() {
     <section id="consult" ref={ref as React.RefObject<HTMLElement>} className="py-20 md:py-28 bg-bark text-warm">
       <div className="mx-auto max-w-3xl px-5">
         <div className={`mb-12 ${MOTION ? 'anim-fade-up' : ''} ${inView ? 'in-view' : ''}`}>
-          <h2 className="text-[clamp(1.9rem,4.4vw,2.7rem)] font-extrabold tracking-[-0.02em]">상담 문의</h2>
+          <h2 className="f-display text-[clamp(1.9rem,4.4vw,2.7rem)] font-extrabold tracking-[-0.02em]">상담 문의</h2>
           <p className="mt-4 max-w-2xl text-[1.08rem] leading-[1.8] text-warm/65 whitespace-pre-line">{SITE.consult.lead}</p>
         </div>
         <div className={`space-y-8 ${MOTION ? 'anim-fade-up d160' : ''} ${inView ? 'in-view' : ''}`}>

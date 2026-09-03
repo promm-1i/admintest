@@ -138,7 +138,7 @@ function Head({ title, sub, inView, light }: { title: React.ReactNode; sub?: str
   return (
     <div className={`mb-12 ${MOTION ? 'anim-fade-up' : ''} ${inView ? 'in-view' : ''}`}>
       <span className={`clay-dot inline-block w-3.5 h-3.5 rounded-full ${light ? 'bg-sand2' : 'bg-terra'} ${inView ? 'in-view' : ''}`} aria-hidden />
-      <h2 className="mt-4 text-[clamp(1.75rem,4.2vw,2.6rem)] font-extrabold tracking-[-0.02em] leading-tight">{title}</h2>
+      <h2 className="f-display mt-4 text-[clamp(1.75rem,4.2vw,2.6rem)] font-extrabold tracking-[-0.02em] leading-tight">{title}</h2>
       {sub && <p className={`mt-4 max-w-xl text-[0.98rem] leading-[1.8] ${light ? 'text-sand2/65' : 'text-soil/60'}`}>{sub}</p>}
     </div>
   )
@@ -229,7 +229,7 @@ function Hero() {
           {/* ── 카피 — 사진 위가 아니라 모래빛 바탕 위에 온전히 놓입니다 ── */}
           <div className={`hx-copy relative z-40 lg:w-[47%] lg:pb-[344px] ${MOTION ? 'hero-in' : ''}`}>
             <p className="text-[0.78rem] tracking-[0.28em] uppercase font-extrabold text-soil/70">{SITE.nameEn}</p>
-            <h1 className="mt-6 text-[clamp(1.9rem,4.4vw,2.9rem)] font-extrabold tracking-[-0.02em] leading-[1.25] whitespace-pre-line">
+            <h1 className="f-display mt-6 text-[clamp(1.9rem,4.4vw,2.9rem)] font-extrabold tracking-[-0.02em] leading-[1.25] whitespace-pre-line">
               {SITE.slogan}
             </h1>
             <p className="mt-5 text-[0.98rem] leading-[1.8] text-soil/75">{SITE.sloganSub}</p>

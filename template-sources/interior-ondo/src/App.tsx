@@ -215,7 +215,7 @@ function Head({ label, title, inView }: { label: string; title: string; inView: 
   return (
     <div className={`anim-fade-up ${inView ? 'in-view' : ''} mb-12 md:mb-16`}>
       <Dim className="max-w-[280px] mb-5">{label}</Dim>
-      <h2 className="f-thin text-[2.1rem] md:text-[3rem] leading-[1.15]">{title}</h2>
+      <h2 className="f-display f-thin text-[2.1rem] md:text-[3rem] leading-[1.15]">{title}</h2>
     </div>
   )
 }
@@ -307,7 +307,7 @@ function Hero() {
             {SITE.nameEn}
           </Dim>
           <h1
-            className={`anim-fade-up d80 ${inView ? 'in-view' : ''} f-thin text-[2.6rem] md:text-[3.9rem] leading-[1.12] whitespace-pre-line mb-5 md:mb-7`}
+            className={`f-display anim-fade-up d80 ${inView ? 'in-view' : ''} f-thin text-[2.6rem] md:text-[3.9rem] leading-[1.12] whitespace-pre-line mb-5 md:mb-7`}
           >
             {SITE.slogan}
           </h1>
@@ -792,7 +792,7 @@ function Consult() {
     <section id="consult" className="py-20 md:py-28 bg-ink text-ivory">
       <div ref={ref} className="max-w-6xl mx-auto px-5 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-20">
         <div className={`anim-fade-up ${inView ? 'in-view' : ''}`}>
-          <h2 className="f-thin text-[2.1rem] md:text-[3rem] leading-[1.2] mb-6">
+          <h2 className="f-display f-thin text-[2.1rem] md:text-[3rem] leading-[1.2] mb-6">
             집 이야기를
             <br />
             들려주세요

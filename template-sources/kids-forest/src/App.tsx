@@ -143,7 +143,7 @@ function Head({ title, sub, inView }: { title: React.ReactNode; sub?: string; in
         <span className={`w-3 h-3 rounded-full bg-sun ${MOTION ? 'bob b2' : ''}`} />
         <span className={`w-3 h-3 rounded-full bg-skyb ${MOTION ? 'bob b3' : ''}`} />
       </div>
-      <h2 className="mt-4 text-[clamp(1.8rem,4.2vw,2.6rem)] font-extrabold tracking-[-0.02em] leading-tight">{title}</h2>
+      <h2 className="f-display mt-4 text-[clamp(1.8rem,4.2vw,2.6rem)] font-extrabold tracking-[-0.02em] leading-tight">{title}</h2>
       {sub && <p className="mt-4 max-w-xl text-[1rem] leading-[1.8] text-choco/60">{sub}</p>}
     </div>
   )
@@ -219,7 +219,7 @@ function Hero() {
             className={`hx-copy relative z-40 mt-7 lg:mt-0 lg:absolute lg:left-0 lg:top-[12%] lg:w-[42%] lg:rounded-[28px] lg:border-2 lg:border-choco/8 lg:bg-milk lg:p-8 lg:shadow-[0_18px_50px_rgba(64,52,44,0.10)] ${MOTION ? 'hero-in' : ''}`}
           >
             <p className="inline-block rounded-full bg-sun/25 px-4 py-2 text-[0.88rem] font-extrabold text-choco">{SITE.license}</p>
-            <h1 className="mt-6 whitespace-pre-line text-[clamp(2.2rem,5.6vw,3.6rem)] font-extrabold leading-[1.2] tracking-[-0.03em] text-choco">
+            <h1 className="f-display mt-6 whitespace-pre-line text-[clamp(2.2rem,5.6vw,3.6rem)] font-extrabold leading-[1.2] tracking-[-0.03em] text-choco">
               {SITE.slogan}
             </h1>
             <p className="mt-5 text-[1.05rem] leading-[1.8] text-choco/75">{SITE.sloganSub}</p>
@@ -442,7 +442,7 @@ function Apply() {
     <section id="apply" ref={ref as React.RefObject<HTMLElement>} className="py-20 md:py-28 bg-choco text-milk">
       <div className="mx-auto max-w-3xl px-5">
         <div className={`mb-12 ${MOTION ? 'anim-fade-up' : ''} ${inView ? 'in-view' : ''}`}>
-          <h2 className="text-[clamp(1.8rem,4.2vw,2.6rem)] font-extrabold tracking-[-0.02em]">입소 상담 · 견학 신청</h2>
+          <h2 className="f-display text-[clamp(1.8rem,4.2vw,2.6rem)] font-extrabold tracking-[-0.02em]">입소 상담 · 견학 신청</h2>
           <p className="mt-4 max-w-xl text-[1rem] leading-[1.8] text-milk/60 whitespace-pre-line">{SITE.apply.lead}</p>
         </div>
         <div className={`space-y-8 ${MOTION ? 'anim-fade-up d160' : ''} ${inView ? 'in-view' : ''}`}>
