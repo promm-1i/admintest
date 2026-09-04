@@ -70,7 +70,14 @@ export function CodeVsImageSection() {
         <SectionHeader
           label="WHY CUSTOM CODE"
           title="같아 보여도, 검색엔진에게는 전혀 다릅니다."
-          description="이미지 몇 장을 붙여 만든 홈페이지는 겉보기엔 비슷하지만, 글자가 그림 속에 있어 네이버·구글이 내용을 읽지 못합니다. 두 화면을 직접 드래그해서 차이를 확인해 보세요."
+          description={
+            <>
+              이미지 몇 장을 붙여 만든 홈페이지는 겉보기엔 비슷하지만,
+              <br />
+              글자가 그림 속에 있어 네이버·구글이 내용을 읽지 못합니다. 두 화면을 직접 드래그해서
+              차이를 확인해 보세요.
+            </>
+          }
         />
 
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
@@ -99,7 +106,7 @@ export function CodeVsImageSection() {
                         </span>
                       </p>
                     </div>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1 text-[11px] font-semibold text-foreground/70">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-[11px] font-bold text-primary-foreground shadow-sm">
                       <MousePointer2 className="h-3 w-3" />
                       드래그해 보세요
                     </span>
