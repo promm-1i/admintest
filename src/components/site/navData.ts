@@ -40,6 +40,8 @@ function templateGroups(styleKey: "basic-template" | "landing-template"): NavTem
       d.label = `디자인 ${String.fromCharCode(65 + i)}`;
     });
     if (!g.image) g.image = g.designs[0]?.image;
+    // 표시는 최신 시안(코드가 큰 것)이 왼쪽 위 — 나중에 만든 시안일수록 완성도가 높다
+    g.designs.reverse();
   }
   return groups.sort((a, b) => a.label.localeCompare(b.label, "ko"));
 }
