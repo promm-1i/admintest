@@ -93,8 +93,9 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .craft h2{font-size:34px;line-height:1.35;letter-spacing:-.005em;font-weight:700;max-width:620px;margin:16px auto 0;text-transform:uppercase}
 .craft .btn{margin-top:28px}
 .panels{display:grid;grid-template-columns:repeat(4,1fr);margin-top:80px}
-@media(max-width:809px){.panels{grid-template-columns:1fr 1fr}.panel{height:420px}}
+@media(max-width:809px){.panels{grid-template-columns:1fr 1fr}}
 .panel{position:relative;height:600px;overflow:hidden;color:#fff;isolation:isolate}
+@media(max-width:809px){.panel{height:420px}}
 .panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .4s ease-in-out}
 .panel:hover img{transform:scale(1.04)}
 .panel::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 55%,rgba(30,10,8,.7))}
@@ -102,8 +103,7 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 
 /* solutions — 플립 카드 368×528: 기본은 크림 앞면(흐린 번호 + 고민), 호버 시 사진 + 해결 */
 .sols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:68px}
-@media(max-width:1199px){.sol{height:400px}}
-@media(max-width:809px){.sols{grid-template-columns:1fr}.sol{height:300px}}
+@media(max-width:809px){.sols{grid-template-columns:1fr}}
 .sol{position:relative;height:528px;overflow:hidden;background:var(--paper);isolation:isolate;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;color:var(--wine);transition:color .4s ease-in-out}
 .sol img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transform:scale(1.04);transition:opacity .4s ease-in-out,transform .6s ease-in-out}
 .sol::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,10,8,.15),rgba(30,10,8,.85));opacity:0;transition:opacity .4s ease-in-out}
@@ -121,6 +121,8 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .sol:hover .no{opacity:0}
 .sol:hover .prob p{color:rgba(255,255,255,.8)}
 .sol:hover .fixwrap,.sol:focus-within .fixwrap{grid-template-rows:1fr;opacity:1}
+@media(max-width:1199px){.sol{height:400px}}
+@media(max-width:809px){.sol{height:300px}}
 
 /* services — 아코디언. 열린 항목: 사진 563×530 + 상세, 닫힌 행: 번호 · 제목 · 칩 3개 */
 .svc{margin-top:68px;display:flex;flex-direction:column;gap:8px}
