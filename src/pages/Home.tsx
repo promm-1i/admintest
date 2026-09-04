@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/sections/HeroSection";
 import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { AdminFeatureSection } from "@/components/sections/AdminFeatureSection";
+import { CodeVsImageSection } from "@/components/sections/CodeVsImageSection";
 import { StartOptionsSection } from "@/components/sections/StartOptionsSection";
 import { ProcessPricingBand } from "@/components/sections/ProcessPricingBand";
 import { TrustBand } from "@/components/sections/TrustBand";
@@ -37,6 +38,7 @@ export default function Home() {
       <ProcessPricingBand />
 
       {/* 믿을 만한가 */}
+      <CodeVsImageSection />
       <TrustBand />
       <AfterLaunchBand />
 
