@@ -650,10 +650,10 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/tax-e-4.jpg", title: "연혁" },
   ],
   "travel-a": [
-    { img: "/thumbs/sections/travel-a-1.jpg", title: "길 너머에 무엇이 있는지" },
-    { img: "/thumbs/sections/travel-a-2.jpg", title: "무엇이 다른지 먼저 말씀드립니다" },
-    { img: "/thumbs/sections/travel-a-3.jpg", title: "길 위에 서 있는 사람들" },
-    { img: "/thumbs/sections/travel-a-4.jpg", title: "계획부터 첫 걸음까지" },
+    { img: "/thumbs/sections/travel-a-1.jpg", title: "모든 풍경에는 아직 안 꺼낸 이야기가 있습니다" },
+    { img: "/thumbs/sections/travel-a-2.jpg", title: "길 너머에 무엇이 있는지 직접 확인하세요" },
+    { img: "/thumbs/sections/travel-a-3.jpg", title: "무엇이 다른지 먼저 말씀드립니다" },
+    { img: "/thumbs/sections/travel-a-4.jpg", title: "걷는 동안 어떤 시간이 흐르는지" },
   ],
   "usedcar-a": [
     { img: "/thumbs/sections/usedcar-a-1.jpg", title: "오늘 보러 오실 수 있는 차" },
