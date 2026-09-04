@@ -33,12 +33,13 @@ body{background:var(--cream);color:var(--wine);font-family:"Pretendard",-apple-s
 .en{font-family:"Rethink Sans",sans-serif}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 /* 실측: 섹션 상단 96 · 하단 90 (라벨까지 186) */
-section{padding:96px 0 90px}
-@media(max-width:1199px){section{padding:80px 0 64px}}
+section{padding:96px 0 72px}
+@media(max-width:1199px){section{padding:80px 0 56px}}
 @media(max-width:809px){.wrap{padding:0 16px}section{padding:64px 0 40px}}
 .label{display:inline-block;font-family:"Rethink Sans";font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--red)}
-h2{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:clamp(48px,6.6vw,95px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-top:12px;text-transform:uppercase}
-.sub{font-size:14px;line-height:1.4;color:var(--muted);max-width:420px;margin-top:16px}
+/* 실측 헤더 리듬: 라벨→h2 39 · h2→설명 10 · 설명→콘텐츠 68 */
+h2{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:clamp(48px,6.6vw,95px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-top:22px;text-transform:uppercase}
+.sub{font-size:14px;line-height:1.4;color:var(--muted);max-width:420px;margin-top:10px}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;font-size:14px;font-weight:500;line-height:1.4;background:var(--red);color:#fff;transition:background .3s ease-in-out,transform .3s ease-in-out}
 .btn:hover{background:#9c1a1a}
 .btn:active{transform:scale(.98)}
@@ -92,7 +93,7 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .craft h2{font-size:34px;line-height:1.35;letter-spacing:-.005em;font-weight:700;max-width:620px;margin:16px auto 0;text-transform:uppercase}
 .craft .btn{margin-top:28px}
 .panels{display:grid;grid-template-columns:repeat(4,1fr);margin-top:80px}
-@media(max-width:809px){.panels{grid-template-columns:1fr 1fr}}
+@media(max-width:809px){.panels{grid-template-columns:1fr 1fr}.panel{height:420px}}
 .panel{position:relative;height:600px;overflow:hidden;color:#fff;isolation:isolate}
 .panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .4s ease-in-out}
 .panel:hover img{transform:scale(1.04)}
@@ -100,8 +101,9 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .panel b{position:absolute;left:0;right:0;bottom:40px;text-align:center;font-family:"Rethink Sans";font-size:30px;font-weight:700;text-transform:uppercase}
 
 /* solutions — 플립 카드 368×528: 기본은 크림 앞면(흐린 번호 + 고민), 호버 시 사진 + 해결 */
-.sols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
-@media(max-width:809px){.sols{grid-template-columns:1fr}}
+.sols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:68px}
+@media(max-width:1199px){.sol{height:400px}}
+@media(max-width:809px){.sols{grid-template-columns:1fr}.sol{height:300px}}
 .sol{position:relative;height:528px;overflow:hidden;background:var(--paper);isolation:isolate;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;color:var(--wine);transition:color .4s ease-in-out}
 .sol img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transform:scale(1.04);transition:opacity .4s ease-in-out,transform .6s ease-in-out}
 .sol::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,10,8,.15),rgba(30,10,8,.85));opacity:0;transition:opacity .4s ease-in-out}
@@ -121,7 +123,7 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .sol:hover .fixwrap,.sol:focus-within .fixwrap{grid-template-rows:1fr;opacity:1}
 
 /* services — 아코디언. 열린 항목: 사진 563×530 + 상세, 닫힌 행: 번호 · 제목 · 칩 3개 */
-.svc{margin-top:56px;display:flex;flex-direction:column;gap:8px}
+.svc{margin-top:68px;display:flex;flex-direction:column;gap:8px}
 .svc details{background:var(--paper)}
 /* 실측: 닫힌 행 108px */
 .svc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:20px;padding:36px 26px}
@@ -141,8 +143,8 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .svc details[open] summary h3{color:var(--red)}
 
 /* why — 벤토 3열: 세로사진(2행) · 제품 · 카운터 · 브랜드 사진 · 케어 · 만족도 */
-.bento{display:grid;grid-template-columns:373px 1fr 1fr;grid-template-rows:294px 294px 258px;gap:16px;margin-top:56px}
-@media(max-width:1199px){.bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}}
+.bento{display:grid;grid-template-columns:373px 1fr 1fr;grid-template-rows:294px 294px 258px;gap:16px;margin-top:68px}
+@media(max-width:1199px){.bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}.bt{min-height:258px}.bt-brand{min-height:294px}}
 @media(max-width:809px){.bento{grid-template-columns:1fr}}
 .bt{background:var(--paper);padding:26px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
 .bt h3{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:20px;font-weight:700;text-transform:uppercase}
@@ -215,9 +217,9 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 @media(max-width:809px){.proc{height:auto;min-height:560px}.steps{grid-template-columns:1fr}}
 
 /* faq — 좌 사진 373×647 + 버튼 / 우 아코디언 7행 */
-.faqgrid{display:grid;grid-template-columns:373px 1fr;gap:16px;margin-top:56px;align-items:start}
+.faqgrid{display:grid;grid-template-columns:373px 1fr;gap:16px;margin-top:68px;align-items:start}
 @media(max-width:1199px){.faqgrid{grid-template-columns:1fr}}
-.faqgrid img{width:100%;height:647px;object-fit:cover}
+.faqgrid img{width:100%;height:587px;object-fit:cover}
 @media(max-width:809px){.faqgrid img{height:360px}}
 .faqgrid .btn-w{width:100%;justify-content:center;margin-top:16px}
 .faqs{display:flex;flex-direction:column;gap:12px}
@@ -230,7 +232,7 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .faqs p{padding:0 26px 20px;font-size:14px;line-height:1.5;color:var(--muted);max-width:560px}
 
 /* gallery — 높이 엇갈린 4장 가로 스트립 (오른쪽 끝은 잘려 나감) */
-.gal{display:flex;gap:16px;margin-top:56px;align-items:flex-start;overflow:hidden}
+.gal{display:flex;gap:16px;margin-top:68px;align-items:flex-start;overflow:hidden}
 .gal img{flex:none;object-fit:cover;transition:transform .4s ease-in-out}
 .gal img:hover{transform:scale(1.03)}
 .gal img:nth-child(1){width:320px;height:420px}
@@ -240,7 +242,7 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 @media(max-width:809px){.gal{flex-wrap:wrap}.gal img{width:calc(50% - 8px)!important;height:300px!important}}
 
 /* booking — 좌 폼 카드 / 우 사진 373×634 */
-.bookgrid{display:grid;grid-template-columns:1fr 373px;gap:16px;margin-top:56px;align-items:start}
+.bookgrid{display:grid;grid-template-columns:1fr 373px;gap:16px;margin-top:68px;align-items:start}
 @media(max-width:1199px){.bookgrid{grid-template-columns:1fr}}
 .form{background:var(--paper);padding:26px;max-width:760px}
 .form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -248,7 +250,7 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .form label{display:block;font-size:12px;font-weight:700;margin-top:16px}
 .form label:first-child{margin-top:0}
 .form input,.form select,.form textarea{width:100%;margin-top:8px;padding:12px 14px;border:1px solid var(--line);background:#fff;font:inherit;font-size:14px;color:var(--wine)}
-.form textarea{min-height:160px;resize:vertical}
+.form textarea{min-height:200px;resize:vertical}
 .form .btn{width:100%;justify-content:center;margin-top:20px}
 .bookgrid img{width:100%;height:634px;object-fit:cover}
 @media(max-width:1199px){.bookgrid img{display:none}}
