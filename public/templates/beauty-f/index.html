@@ -32,9 +32,10 @@ a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,s
 body{background:var(--cream);color:var(--wine);font-family:"Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.5;letter-spacing:-.015em}
 .en{font-family:"Rethink Sans",sans-serif}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
-section{padding:120px 0 0}
-@media(max-width:1199px){section{padding-top:96px}}
-@media(max-width:809px){.wrap{padding:0 16px}section{padding-top:72px}}
+/* 실측: 섹션 상단 96 · 하단 90 (라벨까지 186) */
+section{padding:96px 0 90px}
+@media(max-width:1199px){section{padding:80px 0 64px}}
+@media(max-width:809px){.wrap{padding:0 16px}section{padding:64px 0 40px}}
 .label{display:inline-block;font-family:"Rethink Sans";font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--red)}
 h2{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:clamp(48px,6.6vw,95px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-top:12px;text-transform:uppercase}
 .sub{font-size:14px;line-height:1.4;color:var(--muted);max-width:420px;margin-top:16px}
@@ -65,11 +66,13 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .nav-r .sq span{width:14px;height:2px;background:#fff;box-shadow:0 5px 0 #fff,0 -5px 0 #fff}
 
 /* hero — 실측 1440×900 풀블리드, 사진 scale 1.15→1 · 3s · cubic-bezier(.25,1,.5,1) */
-.hero{position:relative;min-height:100vh;display:flex;align-items:center;color:#fff;overflow:hidden;isolation:isolate;padding:0}
+/* 실측: 텍스트 블록이 위쪽에 — 칩 y≈142, h1 y≈199 */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-start;color:#fff;overflow:hidden;isolation:isolate;padding:0}
 .hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(1.15);transition:transform 3s cubic-bezier(.25,1,.5,1)}
 .hero.on img.bg{transform:none}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(30,10,8,.55) 0%,rgba(30,10,8,.15) 60%,rgba(30,10,8,.05) 100%)}
-.hero .wrap{width:100%;padding-top:88px}
+.hero .wrap{width:100%;padding-top:142px}
+@media(max-width:809px){.hero .wrap{padding-top:112px}}
 .hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--wine);color:#fff;font-family:"Rethink Sans";font-size:11px;font-weight:700;letter-spacing:.05em;padding:6px 10px}
 .hero-tag b{background:#fff;color:var(--wine);padding:1px 5px}
 .hero h1{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:clamp(56px,6.6vw,95px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-top:16px}
@@ -168,15 +171,15 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 @keyframes rotate360{to{transform:rotate(360deg)}}
 
 /* video band — 실측 1440×900 풀블리드 */
-.band{position:relative;height:100vh;min-height:600px;margin-top:120px;overflow:hidden;isolation:isolate;background:var(--wine)}
+.band{position:relative;height:100vh;min-height:600px;margin-top:0;overflow:hidden;isolation:isolate;background:var(--wine)}
 .band .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .band video.bg{opacity:0;transition:opacity 1.2s ease}
 .band video.bg.ready{opacity:1}
-@media(max-width:809px){.band{margin-top:72px;height:70vh}}
+@media(max-width:809px){.band{height:70vh}}
 
 /* reviews — 중앙 인용문 주위에 흩어진 폴라로이드 5장 (실측 341→255px, 덱에서 퍼지는 등장) */
 .reviews{text-align:center}
-.reviews .field{position:relative;min-height:1000px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.reviews .field{position:relative;min-height:1200px;display:flex;flex-direction:column;justify-content:center;align-items:center}
 .reviews blockquote{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:34px;line-height:1.35;letter-spacing:-.005em;font-weight:700;max-width:620px;margin:16px auto 0;text-transform:uppercase}
 .reviews .who{margin-top:20px}
 .reviews .who b{display:block;font-size:16px;font-weight:700}
@@ -194,13 +197,14 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .reviews .card:nth-child(3){right:0;top:34%;transform:rotate(2deg);width:220px}
 .reviews .card:nth-child(4){left:14%;bottom:0;transform:rotate(1deg);width:220px}
 .reviews .card:nth-child(5){right:14%;bottom:0;transform:rotate(-1deg);width:220px}
-/* 스크립트가 있을 때만(html.js) 모인 상태로 시작한다 — 기본형은 스크립트가 없어 바로 퍼진 상태로 보인다 */
-.js .reviews .field:not(.on) .card{opacity:0;transform:translate(-50%,-50%) scale(.9)!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important}
-@media(max-width:1199px){.reviews .field{min-height:0;padding:0}.reviews .card{position:static;transform:none!important;width:auto!important;margin-top:16px}.reviews .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:48px}.js .reviews .field:not(.on) .card{opacity:1;position:static!important;transform:none!important}}
+/* .field 자체가 .rv 라 스크롤 등장(.on)과 같은 타이밍에 퍼진다. 기본형은 .rv 가 무력화돼 바로 퍼진 상태. */
+.reviews .field.rv{opacity:1;transition:none}
+.js .reviews .field.rv:not(.on) .card{opacity:0;transform:translate(-50%,-50%) scale(.9)!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important}
+@media(max-width:1199px){.reviews .field{min-height:0;padding:0}.reviews .card{position:static;transform:none!important;width:auto!important;margin-top:16px}.reviews .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:48px}.js .reviews .field.rv:not(.on) .card{opacity:1;position:static!important;transform:none!important}}
 @media(max-width:809px){.reviews .cards{grid-template-columns:1fr 1fr}}
 
 /* process — 1152×900 사진 위 유리 카드 3장 */
-.proc{position:relative;height:900px;margin-top:56px;overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;padding:0}
+.proc{position:relative;height:900px;margin-top:80px;overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;padding:0}
 .proc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%}
 /* 실측: 카드 383×148 · 제목 26 */
@@ -250,8 +254,8 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 @media(max-width:1199px){.bookgrid img{display:none}}
 
 /* footer — 와인레드 배경 + 대형 워드마크 */
-.foot{background:var(--wine);color:#fff;margin-top:120px;padding:64px 0 0;overflow:hidden}
-@media(max-width:809px){.foot{margin-top:72px}}
+/* 실측: 푸터 646 */
+.foot{background:var(--wine);color:#fff;margin-top:0;padding:120px 0 24px;overflow:hidden}
 .footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
 @media(max-width:809px){.footgrid{grid-template-columns:1fr 1fr}}
 .foot p{font-size:14px;line-height:1.5;color:rgba(255,255,255,.72);margin-top:12px;max-width:300px}
@@ -259,7 +263,7 @@ header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
 .foot h5{font-family:"Rethink Sans";font-size:14px;font-weight:700;text-transform:uppercase}
 .foot ul{list-style:none;margin-top:12px;font-size:14px;line-height:2;color:rgba(255,255,255,.72)}
 .foot ul a:hover{color:#fff}
-.wordmark{font-family:"Rethink Sans";font-weight:800;font-size:clamp(72px,17vw,250px);line-height:.85;letter-spacing:-.03em;text-align:center;margin-top:48px;padding-bottom:8px;user-select:none;display:flex;justify-content:center;align-items:center;gap:.08em}
+.wordmark{font-family:"Rethink Sans";font-weight:800;font-size:clamp(72px,17vw,250px);line-height:.85;letter-spacing:-.03em;text-align:center;margin-top:72px;padding-bottom:8px;user-select:none;display:flex;justify-content:center;align-items:center;gap:.08em}
 .wordmark svg{width:.7em;height:.7em;stroke:#fff;fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
 .wordmark small{font-size:.2em;vertical-align:top;border:3px solid #fff;border-radius:999px;width:1.2em;height:1.2em;display:grid;place-items:center;font-size:.18em}
 footer{padding:32px 0 56px;font-size:14px;color:var(--muted);line-height:1.8}
@@ -352,7 +356,7 @@ footer b{color:var(--wine);font-weight:700}
 </div>
 
 <section class="reviews" id="reviews"><div class="wrap">
-<div class="field">
+<div class="field rv">
 <div class="laurel rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c-5-2-8-7-8-14 3 0 6 2 8 5M12 22c0-4 1-8 2-11M12 22c1-3 3-6 6-8"/></svg><span><span class="stars">★★★★★</span><br>4.9/5 (986+ 리뷰)</span><svg class="r" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c-5-2-8-7-8-14 3 0 6 2 8 5M12 22c0-4 1-8 2-11M12 22c1-3 3-6 6-8"/></svg></div>
 <blockquote class="rv">블랑의 디테일은 어떤 살롱에서도 경험 못 해본 수준이었어요.</blockquote>
 <div class="who rv"><b>이서윤</b><span>크리에이티브 디렉터</span></div>
@@ -455,9 +459,6 @@ function mountBgVideo(v){
 if(matchMedia('(min-width:760px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.querySelectorAll('video.bg[data-src]').forEach(mountBgVideo)}
 
 requestAnimationFrame(()=>document.querySelector('.hero')?.classList.add('on'));
-// 후기 카드: 보이면 가운데 덱에서 제자리로 퍼진다
-const fio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');fio.unobserve(e.target)}}),{threshold:.25});
-document.querySelectorAll('.reviews .field').forEach(el=>fio.observe(el));
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
 const _rvs=[...document.querySelectorAll('.rv')];
 _rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(100+sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='100ms'},{once:true});}io.observe(el);});
