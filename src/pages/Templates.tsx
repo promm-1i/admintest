@@ -12,8 +12,16 @@ import { cn } from "@/lib/utils";
 const PAGE_SIZE = 9;
 
 const STYLES = [
-  { label: "기본형", value: "basic-template" },
-  { label: "랜딩형", value: "landing-template" },
+  {
+    label: "기본형",
+    value: "basic-template",
+    desc: "애니메이션 없이 꼭 필요한 정보만 담백하게 정리한 구성입니다. 빠르고 합리적인 비용으로 시작할 때 적합합니다.",
+  },
+  {
+    label: "랜딩형",
+    value: "landing-template",
+    desc: "스크롤을 내릴 때마다 섹션이 나타나는 리빌 연출, 히어로 등장 애니메이션, 숫자 카운트업, 버튼·카드 호버 인터랙션이 들어간 프리미엄 원페이지 구성입니다. 브랜드 인상과 상담 전환에 유리합니다.",
+  },
 ] as const;
 
 const TEMPLATES = SAMPLES.filter((s) => s.industryKey);
@@ -80,19 +88,35 @@ export default function Templates() {
         {STYLES.map((s) => {
           const isActive = style === s.value;
           return (
-            <button
-              key={s.value}
-              onClick={() => handleSelectStyle(s.value)}
-              className={cn(
-                "rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200",
-                isActive ? "bg-foreground text-background shadow-xs" : "text-muted-foreground hover:text-foreground",
-              )}
-            >
-              {s.label}
-            </button>
+            <span key={s.value} className="group relative inline-flex">
+              <button
+                onClick={() => handleSelectStyle(s.value)}
+                className={cn(
+                  "rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200",
+                  isActive ? "bg-foreground text-background shadow-xs" : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {s.label}
+              </button>
+              {/* 기본형·랜딩형이 뭔지 모르는 방문자를 위한 hover 설명 팝업 */}
+              <span
+                role="tooltip"
+                className="pointer-events-none absolute left-0 top-full z-30 mt-2.5 w-72 translate-y-1 rounded-lg bg-neutral-800 px-3.5 py-3 text-xs font-medium leading-relaxed text-white opacity-0 shadow-lg transition-all duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 motion-reduce:transition-none break-keep"
+              >
+                <span className="absolute -top-1 left-6 h-2 w-2 rotate-45 bg-neutral-800" />
+                <span className="mb-1 block font-bold">{s.label} 템플릿</span>
+                {s.desc}
+              </span>
+            </span>
           );
         })}
       </div>
+
+      {/* 터치 기기에서도 차이를 알 수 있게, 선택된 스타일 설명을 항상 보여준다 */}
+      <p className="mt-3 max-w-2xl text-xs leading-relaxed text-muted-foreground break-keep">
+        <strong className="text-foreground">{STYLES.find((s) => s.value === style)?.label}</strong> ·{" "}
+        {STYLES.find((s) => s.value === style)?.desc}
+      </p>
 
       <div className="mt-4 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none">
         {TEMPLATE_INDUSTRY_FILTERS.map((f) => {
