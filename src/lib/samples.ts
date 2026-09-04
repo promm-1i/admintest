@@ -43,6 +43,36 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "beauty-g-template",
+    industry: "뷰티샵 홈페이지",
+    title: "뷰티샵 홈페이지 (랜딩형 템플릿 · 디자인 G)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 뷰티샵",
+    purpose:
+      "블랙과 골드의 남성 바버샵 무드로, 초대형 타이틀 히어로와 고스트 티커, 시술 카드, 작업 갤러리, 바버 소개, 후기 캐러셀, 가격표가 예약 폼과 세로 영상 밴드, 샵, 오시는 길로 이어지는 원페이지 템플릿입니다.",
+    features: ["초대형 타이틀 히어로", "고스트 티커 · 마퀴", "후기 캐러셀 · 가격표", "예약 폼 · 세로 영상"],
+    idealFor: "남성 전문 바버샵 · 브랜딩을 강하게 가져가는 헤어샵",
+    image: "/thumbs/beauty-g.jpg",
+    liveUrl: "/templates/beauty-g/",
+    industryKey: "beauty",
+    designCode: "BEAL-1007",
+  },
+  {
+    slug: "beauty-g-basic-template",
+    industry: "뷰티샵 홈페이지",
+    title: "뷰티샵 홈페이지 (기본형 템플릿 · 디자인 G)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 뷰티샵",
+    purpose:
+      "블랙과 골드의 남성 바버샵 무드로, 초대형 타이틀 히어로와 고스트 티커, 시술 카드, 작업 갤러리, 바버 소개, 후기 캐러셀, 가격표가 예약 폼과 샵, 오시는 길로 이어지는 원페이지 템플릿입니다. 스크롤 등장 애니메이션을 뺀 기본형입니다.",
+    features: ["초대형 타이틀 히어로", "고스트 티커 · 마퀴", "가격표 · 샵", "예약 폼"],
+    idealFor: "남성 전문 바버샵 · 브랜딩을 강하게 가져가는 헤어샵",
+    image: "/thumbs/beauty-g.jpg",
+    liveUrl: "/templates/beauty-g-basic/",
+    industryKey: "beauty",
+    designCode: "BEAB-1007",
+  },
+  {
     slug: "beauty-f-template",
     industry: "뷰티샵 홈페이지",
     title: "뷰티샵 홈페이지 (랜딩형 템플릿 · 디자인 F)",

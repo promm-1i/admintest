@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>노블 바버 — 뷰티샵 홈페이지 템플릿 (디자인 G)</title>
+<meta name="description" content="블랙과 골드의 남성 바버샵 홈페이지 템플릿. 초대형 타이틀 히어로, 고스트 티커, 시술 카드, 작업 갤러리, 바버 소개, 후기 캐러셀, 가격표, 예약 폼, 세로 영상 밴드, 샵, 오시는 길로 구성된 원페이지입니다.">
+<meta property="og:title" content="노블 바버 — 뷰티샵 홈페이지 템플릿 (디자인 G)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Black+Han+Sans&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+/* 등장 — 레퍼런스 appear: h2 는 opacity 0→1 + y 150→0 spring(≈1s), 설명은 페이드만. 카드에는 appear 없음 */
+.rv{opacity:0;transform:translateY(150px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .1s,transform 1s cubic-bezier(.16,1,.3,1) .1s}
+.rv.f{transform:none}
+.rv.on{opacity:1;transform:none}
+::selection{background:#D9BC72;color:#000}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #D9BC72;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+/* 실측(1440): 배경 #000 · 골드 #D9BC72 · 고스트 #1F1F1C · 헤더/콘텐츠 1200(x120) · 카드열 1072(x184) · 히어로·시술·갤러리 텍스트 x200 */
+:root{--gold:#D9BC72;--ghost:#1F1F1C;--card:#111;--card2:#1A1A18;--line:#2A2A2A;--white:#fff;--mute:rgba(255,255,255,.72)}
+body{background:#000;color:#fff;font-family:"Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.4;letter-spacing:-.02em}
+.en{font-family:"Bebas Neue",sans-serif;letter-spacing:0}
+.disp{font-family:"Black Han Sans","Bebas Neue",sans-serif;font-weight:400;letter-spacing:-.03em}
+.wrap{max-width:1200px;margin:0 auto}
+.in{padding:0 64px}   /* 1072 */
+.in2{padding:0 80px}  /* 1040 */
+
+/* 헤더 실측: 1200×85 · 반투명 검정 .85 · 로고 20/700 x220 · 링크 16 gap32 · CTA 130×46 r8 #1F1F1C */
+header{position:sticky;top:0;z-index:20}
+header .wrap{height:85px;display:flex;align-items:center;justify-content:space-between;padding:0 48px 0 100px;background:rgba(0,0,0,.85);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+.logo{font-size:20px;font-weight:700;letter-spacing:-.04em}
+nav{display:flex;align-items:center;gap:32px}
+nav ul{display:flex;gap:32px;list-style:none;font-weight:500}
+nav a:hover{color:var(--gold)}
+.btn-h{height:46px;padding:0 24px;border-radius:8px;background:var(--ghost);display:inline-flex;align-items:center;font-weight:500;border:1px solid transparent}
+.btn-h:hover{border-color:var(--gold)}
+.burger{display:none}
+
+/* 히어로 실측: h1 270/243 x161 y149 · 사진 프레임 600×1011 (x720~1320) · 문단 256폭 19px y532 · CTA 211×61 r14 y643 · 신뢰 y905 · 프레임→티커 65 */
+.hero{position:relative}
+.hero .wrap{position:relative;min-height:1075px}
+.hero .frame{position:absolute;right:0;top:64px;width:600px;height:1011px;overflow:hidden;border:1px solid rgba(255,255,255,.14)}
+.hero .frame img.bg{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 2s cubic-bezier(.16,1,.3,1)}
+.hero.on .frame img.bg{transform:none}
+.hero h1{position:relative;z-index:2;padding-top:64px;margin-left:41px;font-size:270px;line-height:.9;color:var(--gold);white-space:nowrap}
+.hero .copy{position:absolute;left:80px;top:532px;width:256px;font-size:19px;line-height:1.2;color:rgba(255,255,255,.85)}
+.hero .copy b{color:#fff;font-weight:700}.hero .copy em{font-style:normal;color:var(--gold);font-weight:700}
+.btn-g{display:inline-flex;align-items:center;justify-content:center;height:61px;padding:0 22px;border-radius:14px;background:var(--gold);color:var(--ghost);font-size:18px;font-weight:500;font-style:italic;letter-spacing:-.02em;transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.btn-g:hover{transform:translateY(-2px)}
+.hero .cta{position:absolute;left:80px;top:643px}
+.trust{position:absolute;left:80px;top:905px;width:210px}
+.trust .av{display:flex}.trust .av img,.trust .av span{width:32px;height:32px;border-radius:50%;border:2px solid #000;object-fit:cover}
+.trust .av span{background:#fff;margin-left:-8px;display:block}
+.trust p{margin-top:24px;font-weight:500;line-height:1.4}
+.stars{color:#F5C842;letter-spacing:.06em;font-size:16px;line-height:1}
+.trust .stars{margin-top:14px}
+/* 글래스 카드 208×150 r16 (프레임 우 82 · 상 391) · 썸네일 147×226 우하단 걸침 */
+.hcard{position:absolute;right:82px;top:391px;width:208px;height:150px;border-radius:16px;background:rgba(20,20,20,.72);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.1);padding:16px 20px;overflow:hidden;z-index:2}
+.hcard b{font-size:14px;font-weight:500;display:block}
+.hcard .pr{display:block;margin-top:6px;font-size:24px;color:var(--gold);font-weight:400}
+.hcard small{position:absolute;left:20px;bottom:20px;font-size:14px;color:var(--gold);display:flex;align-items:center;gap:6px}
+.hcard img{position:absolute;left:118px;top:36px;width:147px;height:226px;object-fit:cover}
+/* 칩: "시술:" 18 골드 (프레임 우 288 · 상 767) · 칩 82×38 r50 gap 5 */
+.hchips{position:absolute;right:80px;top:831px;width:208px;z-index:2}
+.hchips p{font-size:18px;color:var(--gold);margin-bottom:20px}
+.hchips ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px 5px}
+.hchips li{height:38px;padding:0 16px;border:1px solid rgba(255,255,255,.35);border-radius:50px;display:inline-flex;align-items:center;font-weight:500;background:rgba(0,0,0,.25)}
+
+/* 티커 실측: 1200×200 · 아이콘 108 (x160) · 텍스트 200/180 #1F1F1C (x294) · 피치 = 아이콘108+26+텍스트+30 */
+.tk{overflow:hidden;height:200px;display:flex;align-items:center;margin-top:65px}
+.tk .track{display:flex;align-items:center;white-space:nowrap;animation:tk 32s linear infinite;will-change:transform}
+.tk .item{display:flex;align-items:center;gap:26px;padding:0 30px 0 40px;font-size:200px;line-height:180px;color:var(--ghost)}
+.tk .item svg{width:108px;height:108px;flex:none;stroke:var(--ghost);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+@keyframes tk{to{transform:translateX(-50%)}}
+.tk:hover .track{animation-play-state:paused}
+/* 실측 예외: 바버 초상 발끝에 티커가 48 겹침 · 후기는 설명→카드 128, 카드→티커 203 · 샵은 티커→h2 110 */
+#team+.tk{margin-top:-48px}
+#reviews .body{margin-top:128px}
+#reviews+.tk{margin-top:203px}
+#shop{padding-top:110px}
+
+/* 섹션 헤더 리듬(캡처): 티커→h2 70 · h2→설명 25 · 설명→버튼 30 · 버튼→콘텐츠 80 · 콘텐츠→티커 65 */
+section{padding-top:70px}
+.sh{text-align:center}
+.sh h2{font-size:100px;line-height:.9;color:var(--gold)}
+.sh p{margin-top:25px;max-width:624px;margin-left:auto;margin-right:auto;font-weight:500;color:#fff}
+.btn-o{display:inline-flex;align-items:center;justify-content:center;height:49px;padding:14px 20px 16px;border:1px solid rgba(255,255,255,.7);border-radius:12px;font-weight:500;margin-top:30px;transition:background .3s,color .3s}
+.btn-o:hover{background:#fff;color:#000}
+.body{margin-top:80px}
+
+/* 시술 카드 실측: 3×335×450 r20 gap20 (x200) · 제목 50/40 골드 + 뱃지 28 · 설명 16 · 사진 296×242 */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc .c{position:relative;height:450px;padding:24px;border-radius:20px;background:var(--card);border:1px solid var(--line);overflow:hidden}
+.svc h3{display:flex;justify-content:space-between;align-items:flex-start;font-size:50px;line-height:40px;color:var(--gold)}
+.svc h3 span{width:28px;height:28px;border-radius:50%;background:#fff;color:#000;font:600 14px/28px "Pretendard",sans-serif;letter-spacing:0;text-align:center;flex:none;margin-top:6px}
+.svc .d{margin-top:12px;color:rgba(255,255,255,.88);font-weight:500;min-height:45px}
+.svc .ph{position:absolute;left:24px;top:147px;width:296px;height:242px;object-fit:cover}
+.svc .ph2{position:absolute;left:92px;top:291px;width:287px;height:208px;object-fit:cover;border-radius:10px;transform:rotate(-6deg);box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.svc .c3 .ph{left:19px;top:181px;transform:rotate(-4deg)}
+/* 카드2: 128×134 r8 썸네일 4장 × 3줄, 줄마다 -8° 기울고 흐른다 */
+.svc .rows{position:absolute;left:0;top:150px;width:140%;margin-left:-20%}
+.svc .row{display:flex;gap:8px;transform:rotate(-8deg);margin-bottom:-6px;animation:tk 26s linear infinite}
+.svc .row:nth-child(2){animation-direction:reverse}
+.svc .row img{width:128px;height:134px;border-radius:8px;object-fit:cover;flex:none}
+
+/* 갤러리 실측: 439/289/289 · 289/439/289 ×319 r20 gap12 (x200) · 인셋 200×200 r14 (가로 중앙 · 상 59) · 골드 밴드 590×70 우측(1행 하단 걸침) */
+.gal{position:relative}
+.gal .r{display:flex;gap:12px;margin-bottom:12px}
+.gal figure{position:relative;height:319px;border-radius:20px;overflow:hidden;flex:none}
+.gal figure.w{width:439px}.gal figure.n{width:289px}
+.gal figure>img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.gal figure:hover>img{transform:scale(1.06)}
+.gal .ins{position:absolute;left:50%;top:59px;width:200px;height:200px;margin-left:-100px;border-radius:14px;object-fit:cover;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.band{position:absolute;right:-80px;top:235px;width:590px;height:70px;background:var(--gold);color:#09090B;overflow:hidden;display:flex;align-items:center;z-index:2}
+.band .track{display:flex;white-space:nowrap;animation:tk 14s linear infinite}
+.band span{font-size:28px;line-height:34px;letter-spacing:-.02em;padding:0 44px}
+
+/* 바버 실측: 420×540 흑백 컷아웃 · 피치 496(gap 76) · 첫 장 x-24 · 흰 카드 300 r16 (초상 x+104) */
+.team{overflow:hidden;margin-top:80px}
+.team .track{display:flex;gap:76px;margin-left:-144px;width:max-content;animation:tk 60s linear infinite}
+.team .m{position:relative;width:420px;height:540px;flex:none}
+.team .m img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1)}
+.team .card{position:absolute;left:211px;top:-9px;width:300px;padding:16px 20px;border-radius:16px;background:#fff;color:#222}
+.team .card b{font-size:16px;font-weight:500;display:block}
+.team .card small{display:block;font-size:14px;color:#444;margin-top:4px}
+.team .card .fl{font-size:14px;color:#444;font-weight:500;margin-top:12px}
+.team .card .so{display:flex;gap:8px;margin-top:8px}
+.team .card .so a{width:28px;height:28px;border-radius:50%;background:var(--ghost);display:block}
+
+/* 후기 실측: 265×400 gap24 · 중앙 카드(x588) 원본 · 양옆 .8 스케일 · 화살표 24 (중앙 카드 좌우 14) */
+.rev{position:relative;height:400px;overflow:hidden;--i:2}
+.rev .track{position:absolute;left:50%;top:0;display:flex;gap:24px;transform:translateX(calc(-132.5px - var(--i)*289px));transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.rev .k{position:relative;width:265px;height:400px;border-radius:16px;overflow:hidden;flex:none;transform:scale(.8);transition:transform .8s cubic-bezier(.16,1,.3,1);transform-origin:center}
+.rev .k.cur{transform:none}
+.rev .k.p{color:#fff}
+.rev .k.p img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rev .k.p::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.45),rgba(0,0,0,0) 35%,rgba(0,0,0,0) 65%,rgba(0,0,0,.6))}
+.rev .hd{position:absolute;left:24px;top:24px;right:24px;z-index:2;display:flex;justify-content:space-between;align-items:flex-start}
+.rev .hd b{font-size:16px;font-weight:500;display:block}.rev .hd small{font-size:14px;display:block;margin-top:2px}
+.rev .hd i{width:32px;height:32px;border-radius:8px;background:#fff;display:block;flex:none}
+.rev .k.t .hd i{background:#EEE}
+.rev .play{position:absolute;left:50%;top:50%;width:48px;height:48px;margin:-24px 0 0 -24px;border-radius:50%;background:#fff;z-index:2;display:flex;align-items:center;justify-content:center}
+.rev .play::after{content:"";border-left:14px solid #000;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+.rev .ft{position:absolute;left:24px;right:24px;bottom:24px;z-index:2;display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.rev .k.t{background:#fff;color:var(--ghost);padding:24px}
+.rev .k.t .hd{position:static;align-items:center;gap:12px}
+.rev .k.t .hd img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.rev .k.t .hd b{color:#000}.rev .k.t .hd small{color:#444}
+.rev .k.t .hd>div{display:flex;align-items:center;gap:12px;flex:1}
+.rev .k.t h4{margin-top:24px;font-size:18px;line-height:1.4;font-weight:500;letter-spacing:-.01em}
+.rev .k.t p{margin-top:8px;font-size:14px;line-height:1.4;font-weight:500}
+.rev .k.t .ft{color:#444}
+.rev .ar{position:absolute;top:50%;z-index:3;width:28px;height:28px;margin-top:-14px;border:0;background:none;color:#fff;cursor:pointer;font-size:22px;line-height:1}
+.rev .ar.l{left:calc(50% - 132.5px - 38px)}.rev .ar.r{right:calc(50% - 132.5px - 38px)}
+html:not(.js) .rev .ar{display:none}
+
+/* 가격 실측: 4×249×427 r20 p25 gap25 (x184) · 제목 44 골드 → 선 → 체크 5줄 14 → 가격 36 · 3번째 골드 배경 + 뱃지 36 */
+.price{display:grid;grid-template-columns:repeat(4,1fr);gap:25px}
+.price .c{position:relative;min-height:421px;padding:25px;border-radius:20px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column}
+.price h3{font-size:44px;line-height:36px;color:var(--gold);letter-spacing:-.04em;padding-bottom:18px;border-bottom:1px solid rgba(217,188,114,.5)}
+.price ul{list-style:none;margin-top:22px;display:grid;gap:12px;font-size:14px;line-height:1.4;font-weight:500}
+.price li{display:flex;gap:8px;align-items:flex-start}
+.price li::before{content:"";flex:none;width:14px;height:14px;margin-top:3px;border-radius:3px;border:1.5px solid var(--gold);background:var(--gold) center/9px no-repeat url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.2 4.2 7.4 8 3.2' fill='none' stroke='%23000' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.price .pr{margin-top:auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.15);font-size:36px;line-height:1.2}
+.price .c.hi{background:var(--gold);color:var(--ghost);border-color:var(--gold)}
+.price .c.hi h3{color:var(--ghost);border-bottom-color:rgba(31,31,28,.5)}
+.price .c.hi li::before{border-color:var(--ghost);background-color:var(--ghost);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M2 5.2 4.2 7.4 8 3.2' fill='none' stroke='%23D9BC72' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.price .c.hi .pr{border-top-color:rgba(31,31,28,.3);font-size:42px}
+.price .c.hi .bd{position:absolute;right:25px;top:25px;width:36px;height:36px;border-radius:50%;background:var(--ghost);display:flex;align-items:center;justify-content:center}
+.price .c.hi .bd svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* 예약 — 레퍼런스는 외부 예약 위젯(iframe 1072×1174). 여기는 같은 폭의 폼으로 대체 */
+.book{padding:40px;border-radius:20px;background:var(--card);border:1px solid var(--line)}
+.book form{display:grid;grid-template-columns:1fr 1fr;gap:20px 24px}
+.book label{display:block;font-size:14px;font-weight:500;color:var(--mute);margin-bottom:8px}
+.book input,.book select,.book textarea{width:100%;height:52px;padding:0 16px;border-radius:12px;background:#000;border:1px solid var(--line);color:#fff;font:500 16px "Pretendard",sans-serif;letter-spacing:-.02em;color-scheme:dark}
+.book textarea{height:140px;padding:14px 16px;resize:vertical}
+.book .full{grid-column:1/-1}
+.book .btn-g{width:100%;font-style:normal;height:56px}
+.book input::placeholder,.book textarea::placeholder{color:rgba(255,255,255,.35)}
+
+/* 인스타 실측: 세로 영상 600×1080 gap2 마퀴 (첫 장 x184 부터) · 설명→영상 40 */
+.ig{overflow:hidden;margin:40px 64px 0}  /* 실측: 영상 컨테이너 1072 (x184~1256) */
+.ig .track{display:flex;gap:2px;width:max-content;animation:tk 70s linear infinite}
+.ig .v{position:relative;width:600px;height:1080px;flex:none;background:#0a0a0a;overflow:hidden}
+.ig .v img,.ig .v video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ig .v video{opacity:0;transition:opacity .6s}.ig .v video.ready{opacity:1}
+
+/* 샵 실측: 2×526 r12 border gap20 (x184) · 사진 504×408 (p10) · 흰 원 28 우상 · 제목 32 골드 · by 16 골드 / 가격 24 흰 */
+.shop{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.shop .c{position:relative;padding:10px 10px 10px;border-radius:15px;background:#0D0D0D;border:1px solid var(--line)}
+.shop .c>img{width:100%;height:408px;object-fit:cover;border-radius:6px}
+.shop .fav{position:absolute;right:24px;top:24px;width:28px;height:28px;border-radius:50%;background:#fff}
+.shop h3{margin:22px 6px 0;font-size:32px;line-height:1.1;color:var(--gold);letter-spacing:-.04em}
+.shop .row{display:flex;justify-content:space-between;align-items:baseline;margin:10px 6px 0}
+.shop .row span{color:rgba(217,188,114,.85);font-weight:500}
+.shop .row b{font-size:24px;font-weight:400;line-height:1.2}
+
+/* 오시는 길 실측: 카드 1072×270 r20 #1A1A18 · 골드 원 48 + 라벨 28 + 값 16 · "여기 있습니다!" 44 골드 · 지도 1072×506 */
+.info{min-height:270px;padding:24px 40px;border-radius:20px;background:var(--card2);display:grid;grid-template-columns:1fr 1fr;gap:36px 40px;align-content:center}
+.info .i{display:grid;grid-template-columns:48px 1fr;gap:12px 23px;align-items:center}
+.info .i i{width:48px;height:48px;border-radius:50%;background:var(--gold);display:flex;align-items:center;justify-content:center}
+.info .i i svg{width:22px;height:22px;stroke:#1F1F1C;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.info .i b{font-size:28px;line-height:1;letter-spacing:-.03em;font-weight:400}
+.info .i p{grid-column:2;font-weight:500;line-height:1.5}
+.here{margin-top:50px;text-align:center;font-size:44px;line-height:1;color:var(--gold)}
+.map{position:relative;margin-top:40px;height:506px;overflow:hidden;border-radius:4px}
+.map img{width:100%;height:100%;object-fit:cover}
+.map a{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:49px;padding:0 20px;border-radius:12px;background:rgba(0,0,0,.75);border:1px solid rgba(255,255,255,.5);display:inline-flex;align-items:center;font-weight:500;backdrop-filter:blur(4px)}
+
+/* 푸터 실측: 상단 1200×100 border-top · 로고 20 / 링크(구분선) / 흰 원 40×3 · 하단 흰 바 92 p30 60 */
+footer{margin-top:120px}
+.ft-top{height:100px;border-top:1px solid #333;display:flex;align-items:center;justify-content:space-between;padding:0 60px}
+.ft-top .logo{font-size:20px}
+.ft-top ul{list-style:none;display:flex;font-weight:500}
+.ft-top li{padding:0 12px;border-left:1px solid rgba(255,255,255,.35)}.ft-top li:first-child{border:0}
+.ft-top .so{display:flex;gap:12px}.ft-top .so a{width:40px;height:40px;border-radius:50%;background:#fff;display:block}
+.ft-bar{background:#fff;color:#666;padding:30px 60px;display:flex;align-items:center;justify-content:space-between;font-weight:500;line-height:1.6}
+.ft-bar .by{color:var(--ghost);border-left:1px solid var(--gold);padding-left:20px}
+.ft-bar svg{width:20px;height:20px;stroke:var(--ghost);fill:none;stroke-width:1.6}
+.legal{padding:28px 60px 36px;font-size:12px;line-height:1.7;color:rgba(255,255,255,.45)}
+.legal b{color:rgba(255,255,255,.7);font-weight:600}.legal a{text-decoration:underline}
+
+/* ===== 반응형 ===== */
+@media(max-width:1199px){
+  .in,.in2{padding:0 32px}
+  header .wrap{padding:0 24px}
+  nav ul{display:none}
+  .burger{display:flex;flex-direction:column;gap:5px;width:46px;height:46px;border-radius:8px;background:var(--ghost);align-items:center;justify-content:center;border:0;cursor:pointer}
+  .burger i{display:block;width:18px;height:2px;background:#fff}
+  /* 모바일 히어로: 세로 흐름(h1 → 문단 → CTA → 사진 → 카드 → 칩 → 신뢰). 데스크톱의 top/right 는 전부 해제 */
+  .hero .wrap{min-height:0;padding:40px 32px 0;display:flex;flex-direction:column;align-items:flex-start}
+  .hero h1{order:1;padding-top:0;margin-left:0;font-size:clamp(88px,16vw,200px);white-space:normal}
+  .hero .copy{order:2}.hero .cta{order:3}.hero .frame{order:4}.hcard{order:5}.hchips{order:6}.trust{order:7}
+  .hero .frame{position:relative;top:auto;right:auto;width:100%;height:70vh;min-height:520px;margin-top:32px}
+  .hero .copy,.hero .cta,.trust,.hcard,.hchips{position:relative;top:auto;right:auto;left:auto;width:auto;margin-top:24px}
+  .hero .copy{font-size:18px;max-width:420px}
+  .hcard{width:208px;height:150px;margin-top:-100px;margin-left:16px;z-index:2}
+  .hchips{margin-top:20px;padding-left:16px}
+  .hchips p{margin-bottom:12px}
+  .trust{margin-top:32px;padding-bottom:8px}
+  .tk{height:130px}.tk .item{font-size:120px;line-height:110px;gap:16px}.tk .item svg{width:64px;height:64px}
+  .sh h2{font-size:clamp(56px,9vw,100px)}
+  .svc{grid-template-columns:1fr 1fr}
+  .gal .r{flex-wrap:wrap}.gal figure.w,.gal figure.n{width:calc(50% - 6px)}.band{right:0}
+  .price{grid-template-columns:1fr 1fr}
+  .ig{margin:32px 0 0}.ig .v{width:300px;height:540px}
+  .shop{grid-template-columns:1fr 1fr}
+}
+@media(max-width:809px){
+  .in,.in2{padding:0 16px}
+  .hero .wrap{padding:24px 16px 0}
+  .hero .frame{min-height:420px;height:60vh}
+  .hcard{margin-left:12px;width:200px}.hchips{padding-left:12px}
+  .team{padding-top:12px}.team .track{margin-left:0}
+  .tk{height:96px;margin-top:40px}.tk .item{font-size:80px;line-height:76px;padding:0 16px 0 20px}.tk .item svg{width:44px;height:44px}
+  section{padding-top:48px}
+  .sh h2{font-size:clamp(44px,12vw,72px)}.sh p{margin-top:16px}.body{margin-top:40px}
+  .svc{grid-template-columns:1fr}.svc .c{height:420px}
+  .gal figure.w,.gal figure.n{width:100%;height:260px}.band{width:70%;top:200px}
+  .team{margin-top:40px}.team .track{gap:24px;margin-left:-40px}.team .m{width:300px;height:390px}.team .card{left:60px;width:240px}
+  .rev .k{transform:scale(.9)}
+  .price{grid-template-columns:1fr}.price .c{min-height:0}
+  .book{padding:24px 16px}.book form{grid-template-columns:1fr}
+  .ig .v{width:240px;height:432px}
+  .shop{grid-template-columns:1fr}.shop .c>img{height:300px}
+  .info{grid-template-columns:1fr;padding:24px 20px;gap:24px}.info .i b{font-size:24px}
+  .map{height:320px}.here{font-size:34px}
+  footer{margin-top:64px}
+  .ft-top{flex-direction:column;height:auto;padding:24px 16px;gap:16px}
+  .ft-bar{flex-direction:column;gap:10px;padding:20px 16px;text-align:center}.ft-bar .by{border:0;padding:0}
+  .legal{padding:20px 16px 28px}
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <a href="#top" class="logo">노블 바버</a>
+  <nav>
+    <ul><li><a href="#services">시술</a></li><li><a href="#gallery">갤러리</a></li><li><a href="#team">바버</a></li><li><a href="#shop">샵</a></li><li><a href="#contact">오시는 길</a></li></ul>
+    <a href="#booking" class="btn-h">예약하기</a>
+    <button class="burger" type="button" aria-label="메뉴" onclick="document.querySelector('nav ul').style.display=(document.querySelector('nav ul').style.display==='flex'?'':'flex')"><i></i><i></i><i></i></button>
+  </nav>
+</div></header>
+
+<main id="top">
+
+<!-- 히어로: 270px 타이틀이 600×1011 사진 프레임 위로 겹친다 -->
+<section class="hero" style="padding-top:0"><div class="wrap">
+  <div class="frame"><img class="bg" src="./assets/hero.jpg" alt="어두운 바버샵에서 클리퍼로 페이드 커트를 받는 남성" width="1200" height="2022"></div>
+  <h1 class="disp">노블 바버</h1>
+  <p class="copy"><b>남성 헤어 전문</b> 바버샵. 두상과 얼굴형에 맞춘 커트로 <em>오늘의 당신을 새로</em> 만듭니다.</p>
+  <a href="#booking" class="btn-g cta">예약하기</a>
+  <div class="trust">
+    <div class="av"><img src="./assets/hero-avatar.jpg" alt="" width="96" height="96"><span></span></div>
+    <p>고객이 믿고<br>맡깁니다</p>
+    <div class="stars en">★★★★★</div>
+  </div>
+  <div class="hcard">
+    <b>커트 + 수염 정리</b>
+    <span class="pr en">25,000원</span>
+    <small><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M9 15l2 2 4-4"/></svg>100% 만족 보장</small>
+    <img src="./assets/hero-card.jpg" alt="" width="300" height="452">
+  </div>
+  <div class="hchips">
+    <p>시술 메뉴:</p>
+    <ul><li>커트</li><li>면도</li><li>염색</li><li>펌</li></ul>
+  </div>
+</div></section>
+
+<!-- 티커: 고스트 텍스트 마퀴 -->
+<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+  <div class="item disp"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></svg>바버샵</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></svg>바버샵</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></svg>바버샵</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></svg>바버샵</div>
+</div></div></div>
+
+<!-- 시술 안내 -->
+<section id="services"><div class="wrap in2">
+  <div class="sh"><h2 class="disp rv">시술 안내</h2><p class="rv f">두상·모질·라이프스타일까지 보고 결정합니다. 커트 한 번에 인상이 달라지는 이유입니다.</p><a href="#booking" class="btn-o">시술 전체 보기</a></div>
+  <div class="svc body">
+    <div class="c c1"><h3 class="disp">클래식 커트<span>01</span></h3><p class="d">가위와 클리퍼로 두상 라인을 살린 정통 커트.</p>
+      <img class="ph" src="./assets/service-1.jpg" alt="" width="592" height="484"><img class="ph2" src="./assets/service-1b.jpg" alt="" width="574" height="416"></div>
+    <div class="c c2"><h3 class="disp">면도 & 수염<span>02</span></h3><p class="d">따뜻한 타월과 스트레이트 면도기로 정리하는 클래식 셰이브.</p>
+      <div class="rows" aria-hidden="true">
+        <div class="row"><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""></div>
+        <div class="row"><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""></div>
+        <div class="row"><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""></div>
+      </div></div>
+    <div class="c c3"><h3 class="disp">라인업 & 페이드<span>03</span></h3><p class="d">선명한 라인과 부드러운 페이드로 완성하는 마무리.</p>
+      <img class="ph" src="./assets/service-3.jpg" alt="" width="592" height="484"></div>
+  </div>
+</div></section>
+
+<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+  <div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>갤러리</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>갤러리</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>갤러리</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>갤러리</div>
+</div></div></div>
+
+<!-- 작업 결과 -->
+<section id="gallery"><div class="wrap in2">
+  <div class="sh"><h2 class="disp rv">작업 결과</h2><p class="rv f">보정 없이, 시술 직후 그대로 찍었습니다.</p><a href="#booking" class="btn-o">더 보기</a></div>
+  <div class="gal body">
+    <div class="r">
+      <figure class="w"><img src="./assets/gallery-1.jpg" alt="" width="878" height="638"><img class="ins" src="./assets/gallery-1s.jpg" alt="" width="400" height="400"></figure>
+      <figure class="n"><img src="./assets/gallery-2.jpg" alt="" width="578" height="638"><img class="ins" src="./assets/gallery-2s.jpg" alt="" width="400" height="400"></figure>
+      <figure class="n"><img src="./assets/gallery-3.jpg" alt="" width="578" height="638"><img class="ins" src="./assets/gallery-3s.jpg" alt="" width="400" height="400"></figure>
+    </div>
+    <div class="r">
+      <figure class="n"><img src="./assets/gallery-4.jpg" alt="" width="578" height="638"><img class="ins" src="./assets/gallery-4s.jpg" alt="" width="400" height="400"></figure>
+      <figure class="w"><img src="./assets/gallery-5.jpg" alt="" width="878" height="638"><img class="ins" src="./assets/gallery-5s.jpg" alt="" width="400" height="400"></figure>
+      <figure class="n"><img src="./assets/gallery-6.jpg" alt="" width="578" height="638"><img class="ins" src="./assets/gallery-6s.jpg" alt="" width="400" height="400"></figure>
+    </div>
+    <div class="band" aria-hidden="true"><div class="track"><span class="disp">100% 만족</span><span class="disp">100% 만족</span><span class="disp">100% 만족</span><span class="disp">100% 만족</span><span class="disp">100% 만족</span><span class="disp">100% 만족</span><span class="disp">100% 만족</span><span class="disp">100% 만족</span></div></div>
+  </div>
+</div></section>
+
+<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+  <div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div>
+</div></div></div>
+
+<!-- 바버 소개 -->
+<section id="team"><div class="wrap">
+  <div class="sh in"><h2 class="disp rv">바버 소개</h2><p class="rv f">각자 다른 스타일, 같은 기준.<br>노블의 바버 세 사람을 소개합니다.</p></div>
+  <div class="team"><div class="track">
+    <div class="m"><img src="./assets/barber-1.jpg" alt="김도현 헤드 바버" width="840" height="1080"><div class="card"><b>김도현</b><small>헤드 바버</small><div class="fl">팔로우:</div><div class="so"><a href="#" aria-label="인스타그램"></a><a href="#" aria-label="유튜브"></a></div></div></div>
+    <div class="m"><img src="./assets/barber-2.jpg" alt="박준서 바버" width="840" height="1080"><div class="card"><b>박준서</b><small>바버</small><div class="fl">팔로우:</div><div class="so"><a href="#" aria-label="인스타그램"></a><a href="#" aria-label="유튜브"></a><a href="#" aria-label="틱톡"></a></div></div></div>
+    <div class="m"><img src="./assets/barber-3.jpg" alt="이태오 바버" width="840" height="1080"><div class="card"><b>이태오</b><small>바버</small><div class="fl">팔로우:</div><div class="so"><a href="#" aria-label="인스타그램"></a><a href="#" aria-label="유튜브"></a></div></div></div>
+    <div class="m" aria-hidden="true"><img src="./assets/barber-1.jpg" alt="" width="840" height="1080"><div class="card"><b>김도현</b><small>헤드 바버</small><div class="fl">팔로우:</div><div class="so"><a href="#"></a><a href="#"></a></div></div></div>
+    <div class="m" aria-hidden="true"><img src="./assets/barber-2.jpg" alt="" width="840" height="1080"><div class="card"><b>박준서</b><small>바버</small><div class="fl">팔로우:</div><div class="so"><a href="#"></a><a href="#"></a><a href="#"></a></div></div></div>
+    <div class="m" aria-hidden="true"><img src="./assets/barber-3.jpg" alt="" width="840" height="1080"><div class="card"><b>이태오</b><small>바버</small><div class="fl">팔로우:</div><div class="so"><a href="#"></a><a href="#"></a></div></div></div>
+  </div></div>
+</div></section>
+
+<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+  <div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div>
+</div></div></div>
+
+<!-- 고객 후기 캐러셀 -->
+<section id="reviews"><div class="wrap">
+  <div class="sh in"><h2 class="disp rv">고객 후기</h2><p class="rv f">직접 다녀간 분들의 이야기입니다.</p></div>
+  <div class="rev body">
+    <button class="ar l" type="button" aria-label="이전 후기">←</button>
+    <div class="track">
+      <div class="k p"><img class="bg" src="./assets/review-1.jpg" alt="" width="530" height="800"><div class="hd"><div><b>최우진</b><small>페이드</small></div><i></i></div><span class="play"></span><div class="ft"><span class="stars en">★★★★★</span><span>2026.02.09</span></div></div>
+      <div class="k t"><div class="hd"><div><img src="./assets/review-avatar-2.jpg" alt="" width="80" height="80"><div><b>정민재</b><small>커트 + 수염</small></div></div><i></i></div><h4>"진짜 전문가"</h4><p>"상담부터 꼼꼼하고 면도까지 깔끔했어요. 시술이 아니라 쉬다 오는 느낌이었습니다."</p><div class="ft"><span class="stars en">★★★★★</span><span>2026.01.29</span></div></div>
+      <div class="k p cur"><img class="bg" src="./assets/review-3.jpg" alt="" width="530" height="800"><div class="hd"><div><b>한지훈</b><small>블랙 댄디</small></div><i></i></div><span class="play"></span><div class="ft"><span class="stars en">★★★★★</span><span>2026.02.09</span></div></div>
+      <div class="k t"><div class="hd"><div><img src="./assets/review-avatar-4.jpg" alt="" width="80" height="80"><div><b>오세훈</b><small>클래식 커트</small></div></div><i></i></div><h4>"다시 올 수밖에"</h4><p>"두상 얘기까지 해주는 곳은 처음이에요. 결과가 말해줍니다. 다음 예약도 바로 잡았습니다."</p><div class="ft"><span class="stars en">★★★★★</span><span>2026.03.05</span></div></div>
+      <div class="k p"><img class="bg" src="./assets/review-5.jpg" alt="" width="530" height="800"><div class="hd"><div><b>강도윤</b><small>라인업</small></div><i></i></div><span class="play"></span><div class="ft"><span class="stars en">★★★★★</span><span>2026.03.12</span></div></div>
+    </div>
+    <button class="ar r" type="button" aria-label="다음 후기">→</button>
+  </div>
+</div></section>
+
+<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+  <div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div>
+</div></div></div>
+
+<!-- 가격 안내 -->
+<section id="pricing"><div class="wrap in">
+  <div class="sh"><h2 class="disp rv">가격 안내</h2><p class="rv f">추가 비용 없이, 안내된 가격 그대로입니다.</p></div>
+  <div class="price body">
+    <div class="c"><h3 class="disp">남성 커트</h3><ul><li>두상에 맞춘 정밀 커트</li><li>스타일 맞춤 상담</li><li>깔끔한 마무리</li><li>합리적인 가격</li><li>홈케어 조언</li></ul><div class="pr en">15,000원</div></div>
+    <div class="c"><h3 class="disp">커트 + 수염</h3><ul><li>두상에 맞춘 정밀 커트</li><li>수염 라인 정리</li><li>따뜻한 타월 마무리</li><li>합리적인 가격</li><li>홈케어 조언</li></ul><div class="pr en">25,000원</div></div>
+    <div class="c hi"><span class="bd"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span><h3 class="disp">스페셜</h3><ul><li>커트 + 수염 + 면도</li><li>두피 클렌징</li><li>스팀 타월 케어</li><li>스타일링 마무리</li><li>홈케어 조언</li></ul><div class="pr en">30,000원</div></div>
+    <div class="c"><h3 class="disp">블랙 댄디</h3><ul><li>정밀 커트 + 염색</li><li>새치 · 톤 다운 상담</li><li>깔끔한 마무리</li><li>스타일링 제품 사용</li><li>홈케어 조언</li></ul><div class="pr en">45,000원</div></div>
+  </div>
+</div></section>
+
+<!-- 예약 (레퍼런스는 외부 위젯 → 폼으로 대체) -->
+<section id="booking"><div class="wrap in">
+  <div class="sh"><h2 class="disp rv">예약</h2><p class="rv f">원하는 날짜와 시간을 남겨 주세요. 확인 후 연락드립니다.</p></div>
+  <div class="book body">
+    <form onsubmit="event.preventDefault();alert('예약 신청이 접수됐습니다. 확인 후 연락드리겠습니다.')">
+      <div><label for="b-name">이름 *</label><input id="b-name" type="text" placeholder="홍길동" required></div>
+      <div><label for="b-tel">연락처 *</label><input id="b-tel" type="tel" placeholder="010-0000-0000" required></div>
+      <div><label for="b-date">희망 날짜</label><input id="b-date" type="date"></div>
+      <div><label for="b-time">희망 시간</label><select id="b-time"><option>10:00</option><option>11:00</option><option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option><option>16:00</option><option>17:00</option><option>18:00</option><option>19:00</option></select></div>
+      <div class="full"><label for="b-svc">시술 선택 *</label><select id="b-svc"><option>남성 커트</option><option>커트 + 수염</option><option>스페셜</option><option>블랙 댄디</option></select></div>
+      <div class="full"><label for="b-memo">요청 사항</label><textarea id="b-memo" placeholder="원하는 스타일이나 참고할 점을 적어주세요"></textarea></div>
+      <div class="full"><button type="submit" class="btn-g">예약 신청</button></div>
+    </form>
+  </div>
+</div></section>
+
+<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+  <div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 9 5 4h14l2 5M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M10 20v-6h4v6"/></svg>인스타그램</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 9 5 4h14l2 5M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M10 20v-6h4v6"/></svg>인스타그램</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 9 5 4h14l2 5M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M10 20v-6h4v6"/></svg>인스타그램</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 9 5 4h14l2 5M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M10 20v-6h4v6"/></svg>인스타그램</div>
+</div></div></div>
+
+<!-- 팔로우: 세로 영상 마퀴 -->
+<section id="follow"><div class="wrap">
+  <div class="sh in"><h2 class="disp rv">팔로우</h2><p class="rv f">노블 바버의 인스타그램에서 매일의 작업을 봅니다.</p></div>
+  <div class="ig"><div class="track">
+    <div class="v"><img src="./assets/insta-1.jpg" alt="" width="600" height="1080"><video class="bg" data-src="./assets/insta-1.mp4" muted loop playsinline preload="none"></video></div>
+    <div class="v"><img src="./assets/insta-2.jpg" alt="" width="600" height="1080"><video class="bg" data-src="./assets/insta-2.mp4" muted loop playsinline preload="none"></video></div>
+    <div class="v"><img src="./assets/insta-3.jpg" alt="" width="600" height="1080"><video class="bg" data-src="./assets/insta-3.mp4" muted loop playsinline preload="none"></video></div>
+    <div class="v"><img src="./assets/insta-4.jpg" alt="" width="600" height="1080"><video class="bg" data-src="./assets/insta-4.mp4" muted loop playsinline preload="none"></video></div>
+    <div class="v"><img src="./assets/insta-5.jpg" alt="" width="600" height="1080"><video class="bg" data-src="./assets/insta-5.mp4" muted loop playsinline preload="none"></video></div>
+    <div class="v" aria-hidden="true"><img src="./assets/insta-1.jpg" alt="" width="600" height="1080"></div>
+    <div class="v" aria-hidden="true"><img src="./assets/insta-2.jpg" alt="" width="600" height="1080"></div>
+    <div class="v" aria-hidden="true"><img src="./assets/insta-3.jpg" alt="" width="600" height="1080"></div>
+    <div class="v" aria-hidden="true"><img src="./assets/insta-4.jpg" alt="" width="600" height="1080"></div>
+    <div class="v" aria-hidden="true"><img src="./assets/insta-5.jpg" alt="" width="600" height="1080"></div>
+  </div></div>
+</div></section>
+
+<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+  <div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div>
+</div></div></div>
+
+<!-- 샵 -->
+<section id="shop"><div class="wrap in">
+  <div class="sh"><h2 class="disp rv">노블 샵</h2><p class="rv f">샵에서 쓰는 도구를 그대로 판매합니다. 머리와 수염을 집에서도 관리하세요.</p><a href="#contact" class="btn-o">샵 바로가기</a></div>
+  <div class="shop body">
+    <div class="c"><img src="./assets/product-1.jpg" alt="아프로 콤" width="1008" height="816"><span class="fav" aria-hidden="true"></span><h3 class="disp">아프로 콤</h3><div class="row"><span>by 노블 바버</span><b class="en">12,900원</b></div></div>
+    <div class="c"><img src="./assets/product-2.jpg" alt="코드리스 트리머" width="1008" height="816"><span class="fav" aria-hidden="true"></span><h3 class="disp">코드리스 트리머</h3><div class="row"><span>by 노블 바버</span><b class="en">79,000원</b></div></div>
+  </div>
+</div></section>
+
+<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+  <div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div>
+</div></div></div>
+
+<!-- 오시는 길 -->
+<section id="contact"><div class="wrap in">
+  <div class="sh"><h2 class="disp rv">오시는 길</h2><p class="rv f">노블 바버샵에 대한 모든 정보</p></div>
+  <div class="info body">
+    <div class="i"><i><svg viewBox="0 0 24 24"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></i><b class="disp">전화</b><p><a href="tel:010-0000-0000">010-0000-0000</a></p></div>
+    <div class="i"><i><svg viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></i><b class="disp">노블 바버샵</b><p>서울 성동구 성수이로 00<br>2층 노블 바버</p></div>
+    <div class="i"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><b class="disp">영업시간</b><p>월–토 10:00–20:00 · 일요일 휴무</p></div>
+    <div class="i"><i><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></i><b class="disp">이메일</b><p><a href="mailto:hello@noble.example">hello@noble.example</a></p></div>
+  </div>
+  <div class="here disp rv">여기 있습니다!</div>
+  <div class="map"><img src="./assets/map.jpg" alt="노블 바버샵 위치 지도" width="2144" height="1012"><a href="https://map.naver.com" target="_blank" rel="noopener">네이버 지도에서 보기</a></div>
+</div></section>
+
+</main>
+
+<footer><div class="wrap">
+  <div class="ft-top">
+    <a href="#top" class="logo">노블 바버</a>
+    <ul><li><a href="#services">시술</a></li><li><a href="#gallery">갤러리</a></li><li><a href="#team">바버</a></li><li><a href="#shop">샵</a></li><li><a href="#contact">오시는 길</a></li></ul>
+    <div class="so"><a href="#" aria-label="인스타그램"></a><a href="#" aria-label="유튜브"></a><a href="#" aria-label="카카오톡"></a></div>
+  </div>
+  <div class="ft-bar">
+    <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9 4 4 0 0 1-4-4 4 4 0 0 1-5-5z"/><circle cx="8.5" cy="10.5" r="1"/><circle cx="12" cy="15" r="1"/><circle cx="7.5" cy="15.5" r="1"/></svg>
+    <span>Copyright © 2026 — 노블 바버 All rights reserved</span>
+    <span class="by">By NOVERIQ</span>
+  </div>
+  <div class="legal">
+    <div><b>노블 바버</b> · 대표 김도현 · 사업자등록번호 000-00-00000 · 서울 성동구 성수이로 00 2층</div>
+    <div style="margin-top:8px">이 페이지는 <b>NOVERIQ</b>가 제작한 홈페이지 템플릿 데모입니다. 위 상호 · 주소 · 등록번호는 예시입니다. 제작 문의 <a href="tel:010-4894-4905">010-4894-4905</a> · <a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a><br>민트클 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</div>
+  </div>
+</div></footer>
+
+<script>
+document.documentElement.classList.add('js');
+// 세로 영상 — 데스크톱 · 모션 허용일 때만. http 는 HEAD 로 존재 확인, file:// 은 바로 붙인다.
+function mountBgVideo(v){
+  const attach=()=>{v.addEventListener('playing',()=>v.classList.add('ready'),{once:true});v.addEventListener('error',()=>{},{once:true});v.src=v.dataset.src;v.play().catch(()=>{})};
+  if(location.protocol==='file:'){attach();return}
+  fetch(v.dataset.src,{method:'HEAD'}).then(r=>{if(r.ok&&(r.headers.get('content-type')||'').startsWith('video'))attach()}).catch(()=>{});
+}
+if(matchMedia('(min-width:760px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.querySelectorAll('video.bg[data-src]').forEach(mountBgVideo)}
+
+requestAnimationFrame(()=>document.querySelector('.hero')?.classList.add('on'));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// 후기 캐러셀 — 가운데 카드만 원본 크기
+const rev=document.querySelector('.rev'),ks=[...rev.querySelectorAll('.k')];let ri=2;
+const go=d=>{ri=(ri+d+ks.length)%ks.length;rev.style.setProperty('--i',ri);ks.forEach((k,i)=>k.classList.toggle('cur',i===ri))};
+rev.querySelector('.ar.l').addEventListener('click',()=>go(-1));rev.querySelector('.ar.r').addEventListener('click',()=>go(1));
+</script>
+</body>
+</html>
