@@ -70,6 +70,12 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/beauty-3.jpg", title: "손을 맡길 사람을, 먼저 보여드립니다" },
     { img: "/thumbs/sections/beauty-4.jpg", title: "처음 오시기 전에" },
   ],
+  "beauty-f": [
+    { img: "/thumbs/sections/beauty-f-1.jpg", title: "최고의 스타일리스트. 최고급 제품. 타협 없음." },
+    { img: "/thumbs/sections/beauty-f-2.jpg", title: "고민 해결" },
+    { img: "/thumbs/sections/beauty-f-3.jpg", title: "시술 안내" },
+    { img: "/thumbs/sections/beauty-f-4.jpg", title: "왜 블랑인가" },
+  ],
   "beauty-b": [
     { img: "/thumbs/sections/beauty-b-1.jpg", title: "오늘의 디자이너" },
     { img: "/thumbs/sections/beauty-b-2.jpg", title: "시술 메뉴" },

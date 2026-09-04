@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>블랑 헤어 — 뷰티샵 홈페이지 템플릿 (디자인 F)</title>
+<meta name="description" content="크림과 와인레드의 프리미엄 헤어살롱 홈페이지 템플릿. 풀스크린 히어로, 고민별 솔루션, 시술 아코디언, 벤토 강점, 후기 카드 덱, 갤러리, 예약 폼으로 구성된 원페이지 랜딩입니다.">
+<meta property="og:title" content="블랑 헤어 — 뷰티샵 홈페이지 템플릿 (디자인 F)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+body{word-break:keep-all;overflow-wrap:break-word}
+h1,h2,h3,blockquote{text-wrap:balance}
+p,li,dd,figcaption{text-wrap:pretty}
+/* 등장 효과는 레퍼런스 appear 정의 그대로 — 페이드만(opacity 0→1 · 1s · 지연 .1s), 이동 없음 */
+.rv{opacity:0;transition:opacity 1s cubic-bezier(.25,1,.5,1) .1s}
+.rv.on{opacity:1}
+::selection{background:#B82020;color:#F6EFE5}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #B82020;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1}}
+
+/* 실측(1440): 컨테이너 1200(패딩 24 → 콘텐츠 1152) · 라벨 12/700/+.6px · h2 95/1/-.02em · 본문 16/24 · 카드·버튼 라운드 0 · 칩 999 */
+:root{--cream:#F6EFE5;--paper:#FBF8F3;--wine:#48120E;--red:#B82020;--muted:rgba(69,48,48,.6);--line:rgba(72,18,14,.1);--white:#fff}
+body{background:var(--cream);color:var(--wine);font-family:"Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.5;letter-spacing:-.015em}
+.en{font-family:"Rethink Sans",sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:120px 0 0}
+@media(max-width:1199px){section{padding-top:96px}}
+@media(max-width:809px){.wrap{padding:0 16px}section{padding-top:72px}}
+.label{display:inline-block;font-family:"Rethink Sans";font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--red)}
+h2{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:clamp(48px,6.6vw,95px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-top:12px;text-transform:uppercase}
+.sub{font-size:14px;line-height:1.4;color:var(--muted);max-width:420px;margin-top:16px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;font-size:14px;font-weight:500;line-height:1.4;background:var(--red);color:#fff;transition:background .3s ease-in-out,transform .3s ease-in-out}
+.btn:hover{background:#9c1a1a}
+.btn:active{transform:scale(.98)}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.8}
+.btn-w{background:#fff;color:var(--wine)}.btn-w:hover{background:var(--cream)}
+.btn-d{background:rgba(72,18,14,.72);color:#fff}.btn-d:hover{background:var(--wine)}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px}
+@media(max-width:809px){.sec-head{flex-direction:column;align-items:flex-start}}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:9px 12px;border-radius:999px;background:var(--cream);font-size:12px;line-height:1.5;font-weight:500;color:var(--wine)}
+.chip svg{width:12px;height:12px;stroke:var(--red);fill:none;stroke-width:1.8}
+.laurel{display:inline-flex;align-items:center;gap:8px;font-family:"Rethink Sans";font-size:12px;font-weight:500;color:var(--muted)}
+.laurel svg{width:22px;height:22px;stroke:var(--muted);fill:none;stroke-width:1.4}
+.laurel svg.r{transform:scaleX(-1)}
+.laurel>span{text-align:center;line-height:1.3}
+.stars{color:var(--red);letter-spacing:.1em;font-size:11px}
+
+/* header — 히어로 위에 얹힌 투명 헤더 */
+header{position:absolute;inset:0 0 auto;z-index:20;color:#fff}
+.nav{display:flex;align-items:center;justify-content:space-between;height:88px}
+.logo{display:inline-flex;align-items:center;gap:8px;font-family:"Rethink Sans";font-size:20px;font-weight:800;letter-spacing:-.02em}
+.logo svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
+.logo small{font-size:9px;vertical-align:super;font-weight:700}
+.nav-r{display:flex;gap:6px}
+.nav-r .sq{width:44px;height:44px;background:rgba(255,255,255,.35);display:grid;place-items:center}
+.nav-r .sq span{width:14px;height:2px;background:#fff;box-shadow:0 5px 0 #fff,0 -5px 0 #fff}
+
+/* hero — 실측 1440×900 풀블리드, 사진 scale 1.15→1 · 3s · cubic-bezier(.25,1,.5,1) */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;color:#fff;overflow:hidden;isolation:isolate;padding:0}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transform:scale(1.15);transition:transform 3s cubic-bezier(.25,1,.5,1)}
+.hero.on img.bg{transform:none}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(30,10,8,.55) 0%,rgba(30,10,8,.15) 60%,rgba(30,10,8,.05) 100%)}
+.hero .wrap{width:100%;padding-top:88px}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:var(--wine);color:#fff;font-family:"Rethink Sans";font-size:11px;font-weight:700;letter-spacing:.05em;padding:6px 10px}
+.hero-tag b{background:#fff;color:var(--wine);padding:1px 5px}
+.hero h1{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:clamp(56px,6.6vw,95px);font-weight:800;letter-spacing:-.02em;line-height:1;margin-top:16px}
+.hero p{font-size:16px;line-height:1.5;color:rgba(255,255,255,.72);max-width:440px;margin-top:20px}
+.hero-btns{display:flex;gap:8px;margin-top:28px;flex-wrap:wrap}
+.hero-card{position:absolute;left:max(24px,calc((100% - 1152px)/2));bottom:64px;display:flex;gap:16px;align-items:center;background:rgba(255,255,255,.14);backdrop-filter:blur(10px);padding:8px;width:344px;color:#fff}
+.hero-card img{width:128px;height:115px;object-fit:cover}
+.hero-card b{display:block;font-family:"Rethink Sans";font-size:16px;font-weight:700}
+.hero-card span{display:block;font-size:12px;color:rgba(255,255,255,.72);margin-top:6px;line-height:1.5}
+.hero-dots{position:absolute;right:max(24px,calc((100% - 1152px)/2));bottom:80px;display:flex;gap:6px}
+.hero-dots i{width:12px;height:12px;background:rgba(255,255,255,.35)}
+.hero-dots i:first-child{background:#fff}
+@media(max-width:809px){.hero-card{display:none}.hero-dots{display:none}}
+
+/* craft — 중앙 인용 + 세로 패널 4장 (288×600, 붙여서) */
+.craft{text-align:center}
+.craft h2{font-size:34px;line-height:1.35;letter-spacing:-.005em;font-weight:700;max-width:620px;margin:16px auto 0;text-transform:uppercase}
+.craft .btn{margin-top:28px}
+.panels{display:grid;grid-template-columns:repeat(4,1fr);margin-top:80px}
+@media(max-width:809px){.panels{grid-template-columns:1fr 1fr}}
+.panel{position:relative;height:600px;overflow:hidden;color:#fff;isolation:isolate}
+.panel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:transform .4s ease-in-out}
+.panel:hover img{transform:scale(1.04)}
+.panel::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 55%,rgba(30,10,8,.7))}
+.panel b{position:absolute;left:0;right:0;bottom:40px;text-align:center;font-family:"Rethink Sans";font-size:30px;font-weight:700;text-transform:uppercase}
+
+/* solutions — 플립 카드 368×528: 기본은 크림 앞면(흐린 번호 + 고민), 호버 시 사진 + 해결 */
+.sols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px}
+@media(max-width:809px){.sols{grid-template-columns:1fr}}
+.sol{position:relative;height:528px;overflow:hidden;background:var(--paper);isolation:isolate;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;color:var(--wine);transition:color .4s ease-in-out}
+.sol img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;opacity:0;transform:scale(1.04);transition:opacity .4s ease-in-out,transform .6s ease-in-out}
+.sol::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,10,8,.15),rgba(30,10,8,.85));opacity:0;transition:opacity .4s ease-in-out}
+.sol .no{position:absolute;top:22px;left:26px;font-family:"Rethink Sans";font-size:50px;font-weight:700;color:var(--wine);opacity:.12;line-height:1;transition:opacity .4s ease-in-out}
+.sol .ic{position:absolute;top:26px;right:26px;width:40px;height:40px;stroke:var(--red);fill:none;stroke-width:1.6}
+.sol .prob b{display:block;font-family:"Rethink Sans";font-size:20px;font-weight:700;text-transform:uppercase}
+.sol .prob p{font-size:14px;line-height:1.4;margin-top:6px;color:var(--muted);transition:color .4s ease-in-out}
+.sol .fix{font-family:"Rethink Sans";font-size:22px;font-weight:700;text-transform:uppercase;max-height:0;overflow:hidden;opacity:0;transition:max-height .4s ease-in-out,opacity .4s ease-in-out,margin .4s ease-in-out,padding .4s ease-in-out}
+.sol:hover,.sol:focus-within{color:#fff}
+.sol:hover img,.sol:focus-within img{opacity:1;transform:none}
+.sol:hover::after,.sol:focus-within::after{opacity:1}
+.sol:hover .no{opacity:0}
+.sol:hover .prob p{color:rgba(255,255,255,.8)}
+.sol:hover .fix,.sol:focus-within .fix{max-height:60px;opacity:1;margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.2)}
+
+/* services — 아코디언. 열린 항목: 사진 563×530 + 상세, 닫힌 행: 번호 · 제목 · 칩 3개 */
+.svc{margin-top:56px;display:flex;flex-direction:column;gap:8px}
+.svc details{background:var(--paper)}
+/* 실측: 닫힌 행 108px */
+.svc summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:20px;padding:36px 26px}
+.svc summary::-webkit-details-marker{display:none}
+.svc .no{font-family:"Rethink Sans";font-size:12px;font-weight:700;color:var(--red);letter-spacing:.05em}
+.svc summary h3{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;flex:1;letter-spacing:-.01em}
+.svc .chips{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.svc .body{display:grid;grid-template-columns:563px 1fr;gap:40px;padding:0 26px 26px;align-items:center}
+@media(max-width:1199px){.svc .body{grid-template-columns:1fr}}
+.svc .body img{width:100%;height:530px;object-fit:cover}
+@media(max-width:809px){.svc .body img{height:320px}.svc summary{flex-wrap:wrap}.svc .chips{justify-content:flex-start;width:100%}}
+.svc .body h4{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:28px;font-weight:700;text-transform:uppercase;margin-top:12px;letter-spacing:-.005em}
+.svc .body p{font-size:14px;line-height:1.5;color:var(--muted);margin-top:12px;max-width:440px}
+.svc .price{margin-top:24px;font-size:14px;color:var(--muted)}
+.svc .price b{font-family:"Rethink Sans";font-size:20px;font-weight:700;color:var(--wine);margin-left:8px}
+.svc .body .btn{width:100%;justify-content:center;margin-top:20px}
+.svc details[open] summary h3{color:var(--red)}
+
+/* why — 벤토 3열: 세로사진(2행) · 제품 · 카운터 · 브랜드 사진 · 케어 · 만족도 */
+.bento{display:grid;grid-template-columns:373px 1fr 1fr;grid-template-rows:294px 294px 258px;gap:16px;margin-top:56px}
+@media(max-width:1199px){.bento{grid-template-columns:1fr 1fr;grid-template-rows:auto}}
+@media(max-width:809px){.bento{grid-template-columns:1fr}}
+.bt{background:var(--paper);padding:26px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.bt h3{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:20px;font-weight:700;text-transform:uppercase}
+.bt p{font-size:14px;line-height:1.5;color:var(--muted);margin-top:8px;max-width:300px}
+.bt .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:16px}
+.bt-photo{grid-row:span 2;padding:0;color:#fff;isolation:isolate}
+.bt-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.bt-photo::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,transparent 50%,rgba(30,10,8,.75))}
+.bt-photo div{padding:26px}
+.bt-photo h3{color:#fff}.bt-photo p{color:rgba(255,255,255,.8)}
+@media(max-width:1199px){.bt-photo{grid-row:span 1;min-height:420px}}
+.bt-wide{grid-column:span 2}
+@media(max-width:809px){.bt-wide{grid-column:span 1}}
+.bt-wide img.prod{position:absolute;right:26px;top:26px;height:calc(100% - 52px);width:auto;object-fit:contain}
+@media(max-width:809px){.bt-wide img.prod{display:none}}
+.bt .num{font-family:"Rethink Sans";font-size:50px;font-weight:700;letter-spacing:-.02em;line-height:1}
+.stack{position:absolute;top:26px;left:50%;transform:translateX(-50%);display:flex}
+.stack img{width:60px;height:70px;object-fit:cover;box-shadow:0 8px 20px -10px rgba(0,0,0,.4)}
+.stack img:nth-child(1){transform:rotate(-14deg) translateX(10px)}.stack img:nth-child(3){transform:rotate(14deg) translateX(-10px)}.stack img:nth-child(2){z-index:1}
+.avatars{position:absolute;top:26px;right:26px;display:flex}
+.avatars img{width:42px;height:42px;border-radius:999px;object-fit:cover;border:2px solid var(--paper);margin-left:-10px}
+.bt-brand{padding:0;color:#fff;isolation:isolate;display:grid;place-items:center}
+.bt-brand img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+.bt-brand .seal{font-family:"Rethink Sans";font-size:20px;font-weight:800;display:inline-flex;align-items:center;gap:8px;text-shadow:0 2px 12px rgba(0,0,0,.4)}
+.bt-brand .seal svg{width:28px;height:28px;animation:rotate360 14s linear infinite}
+@keyframes rotate360{to{transform:rotate(360deg)}}
+
+/* video band — 실측 1440×900 풀블리드 */
+.band{position:relative;height:100vh;min-height:600px;margin-top:120px;overflow:hidden;isolation:isolate;background:var(--wine)}
+.band .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.band video.bg{opacity:0;transition:opacity 1.2s ease}
+.band video.bg.ready{opacity:1}
+@media(max-width:809px){.band{margin-top:72px;height:70vh}}
+
+/* reviews — 중앙 인용문 주위에 흩어진 폴라로이드 5장 (실측 341→255px, 덱에서 퍼지는 등장) */
+.reviews{text-align:center}
+.reviews .field{position:relative;min-height:1000px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.reviews blockquote{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:34px;line-height:1.35;letter-spacing:-.005em;font-weight:700;max-width:620px;margin:16px auto 0;text-transform:uppercase}
+.reviews .who{margin-top:20px}
+.reviews .who b{display:block;font-size:16px;font-weight:700}
+.reviews .who span{display:block;font-size:14px;color:var(--muted);margin-top:4px}
+.reviews .card{position:absolute;width:240px;background:#fff;padding:8px 8px 14px;box-shadow:0 24px 48px -28px rgba(72,18,14,.35);text-align:left;transition:transform 1s cubic-bezier(.25,1,.5,1),opacity 1s cubic-bezier(.25,1,.5,1)}
+.reviews .card figure{position:relative;height:230px;overflow:hidden}
+.reviews .card img{width:100%;height:100%;object-fit:cover}
+.reviews .card figcaption{position:absolute;left:12px;right:12px;bottom:12px;color:#fff;font-size:12px;line-height:1.4}
+.reviews .card figcaption i{display:block;font-style:normal;color:var(--red);letter-spacing:.1em;margin-bottom:4px}
+.reviews .card b{display:block;font-size:14px;font-weight:700;margin-top:10px;color:var(--wine)}
+.reviews .card small{display:block;font-size:11px;color:var(--muted);margin-top:2px}
+/* 퍼진 위치 (위 가운데 · 좌 · 우 · 좌하 · 우하) — 등장 전엔 가운데로 모여 있다 */
+.reviews .card:nth-child(1){left:50%;top:0;transform:translateX(-50%) rotate(0)}
+.reviews .card:nth-child(2){left:0;top:34%;transform:rotate(-2deg);width:220px}
+.reviews .card:nth-child(3){right:0;top:34%;transform:rotate(2deg);width:220px}
+.reviews .card:nth-child(4){left:14%;bottom:0;transform:rotate(1deg);width:220px}
+.reviews .card:nth-child(5){right:14%;bottom:0;transform:rotate(-1deg);width:220px}
+/* 스크립트가 있을 때만(html.js) 모인 상태로 시작한다 — 기본형은 스크립트가 없어 바로 퍼진 상태로 보인다 */
+.js .reviews .field:not(.on) .card{opacity:0;transform:translate(-50%,-50%) scale(.9)!important;left:50%!important;top:50%!important;right:auto!important;bottom:auto!important}
+@media(max-width:1199px){.reviews .field{min-height:0;padding:0}.reviews .card{position:static;transform:none!important;width:auto!important;margin-top:16px}.reviews .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:48px}.js .reviews .field:not(.on) .card{opacity:1;position:static!important;transform:none!important}}
+@media(max-width:809px){.reviews .cards{grid-template-columns:1fr 1fr}}
+
+/* process — 1152×900 사진 위 유리 카드 3장 */
+.proc{position:relative;height:900px;margin-top:56px;overflow:hidden;isolation:isolate;display:flex;align-items:flex-end;padding:0}
+.proc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;width:100%}
+/* 실측: 카드 383×148 · 제목 26 */
+.step{padding:30px;min-height:148px;color:#fff;background:rgba(255,255,255,.12);backdrop-filter:blur(10px)}
+.step:first-child{background:rgba(255,255,255,.28)}
+.step h3{font-family:"Rethink Sans","Pretendard",sans-serif;font-size:26px;font-weight:700;text-transform:uppercase;line-height:1.2}
+.step p{font-size:14px;line-height:1.5;margin-top:8px;color:rgba(255,255,255,.85)}
+@media(max-width:809px){.proc{height:auto;min-height:560px}.steps{grid-template-columns:1fr}}
+
+/* faq — 좌 사진 373×647 + 버튼 / 우 아코디언 7행 */
+.faqgrid{display:grid;grid-template-columns:373px 1fr;gap:16px;margin-top:56px;align-items:start}
+@media(max-width:1199px){.faqgrid{grid-template-columns:1fr}}
+.faqgrid img{width:100%;height:647px;object-fit:cover}
+@media(max-width:809px){.faqgrid img{height:360px}}
+.faqgrid .btn-w{width:100%;justify-content:center;margin-top:16px}
+.faqs{display:flex;flex-direction:column;gap:12px}
+.faqs details{background:var(--paper)}
+/* 실측: 행 75px · 질문 20 */
+.faqs summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 26px;font-family:"Rethink Sans","Pretendard",sans-serif;font-size:20px;font-weight:700;line-height:1.4;text-transform:uppercase}
+.faqs summary::-webkit-details-marker{display:none}
+.faqs summary::after{content:"";flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);transition:transform .3s ease-in-out}
+.faqs details[open] summary::after{transform:scale(.6)}
+.faqs p{padding:0 26px 20px;font-size:14px;line-height:1.5;color:var(--muted);max-width:560px}
+
+/* gallery — 높이 엇갈린 4장 가로 스트립 (오른쪽 끝은 잘려 나감) */
+.gal{display:flex;gap:16px;margin-top:56px;align-items:flex-start;overflow:hidden}
+.gal img{flex:none;object-fit:cover;transition:transform .4s ease-in-out}
+.gal img:hover{transform:scale(1.03)}
+.gal img:nth-child(1){width:320px;height:420px}
+.gal img:nth-child(2){width:375px;height:540px}
+.gal img:nth-child(3){width:320px;height:420px}
+.gal img:nth-child(4){width:320px;height:460px}
+@media(max-width:809px){.gal{flex-wrap:wrap}.gal img{width:calc(50% - 8px)!important;height:300px!important}}
+
+/* booking — 좌 폼 카드 / 우 사진 373×634 */
+.bookgrid{display:grid;grid-template-columns:1fr 373px;gap:16px;margin-top:56px;align-items:start}
+@media(max-width:1199px){.bookgrid{grid-template-columns:1fr}}
+.form{background:var(--paper);padding:26px;max-width:760px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:809px){.form .row{grid-template-columns:1fr}}
+.form label{display:block;font-size:12px;font-weight:700;margin-top:16px}
+.form label:first-child{margin-top:0}
+.form input,.form select,.form textarea{width:100%;margin-top:8px;padding:12px 14px;border:1px solid var(--line);background:#fff;font:inherit;font-size:14px;color:var(--wine)}
+.form textarea{min-height:160px;resize:vertical}
+.form .btn{width:100%;justify-content:center;margin-top:20px}
+.bookgrid img{width:100%;height:634px;object-fit:cover}
+@media(max-width:1199px){.bookgrid img{display:none}}
+
+/* footer — 와인레드 배경 + 대형 워드마크 */
+.foot{background:var(--wine);color:#fff;margin-top:120px;padding:64px 0 0;overflow:hidden}
+@media(max-width:809px){.foot{margin-top:72px}}
+.footgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:32px}
+@media(max-width:809px){.footgrid{grid-template-columns:1fr 1fr}}
+.foot p{font-size:14px;line-height:1.5;color:rgba(255,255,255,.72);margin-top:12px;max-width:300px}
+.foot .btn-w{margin-top:20px}
+.foot h5{font-family:"Rethink Sans";font-size:14px;font-weight:700;text-transform:uppercase}
+.foot ul{list-style:none;margin-top:12px;font-size:14px;line-height:2;color:rgba(255,255,255,.72)}
+.foot ul a:hover{color:#fff}
+.wordmark{font-family:"Rethink Sans";font-weight:800;font-size:clamp(72px,17vw,250px);line-height:.85;letter-spacing:-.03em;text-align:center;margin-top:48px;padding-bottom:8px;user-select:none;display:flex;justify-content:center;align-items:center;gap:.08em}
+.wordmark svg{width:.7em;height:.7em;stroke:#fff;fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.wordmark small{font-size:.2em;vertical-align:top;border:3px solid #fff;border-radius:999px;width:1.2em;height:1.2em;display:grid;place-items:center;font-size:.18em}
+footer{padding:32px 0 56px;font-size:14px;color:var(--muted);line-height:1.8}
+footer b{color:var(--wine);font-weight:700}
+.nvq a{border-bottom:1px solid var(--line)}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+<div class="nav">
+<a class="logo" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 12 6l6 12M8.5 13h7"/></svg>블랑<small>®</small></a>
+<div class="nav-r"><a class="btn btn-w" href="#booking">예약하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="sq" href="#services" aria-label="메뉴"><span></span></a></div>
+</div>
+</div></header>
+
+<section class="hero" id="top">
+<img class="bg" src="./assets/hero.jpg" alt="조명이 켜진 블랑 헤어 살롱과 시술 의자">
+<div class="wrap">
+<div class="hero-tag rv"><b>#01</b> PREMIUM HAIR SALON</div>
+<h1 class="rv">블랑 헤어</h1>
+<p class="rv">모발 결, 얼굴형, 생활 패턴까지 보고 설계하는 프리미엄 헤어 아티스트리. 늘 원하던 그 모습, 이번엔 정확히 만들어 드립니다.</p>
+<div class="hero-btns rv"><a class="btn btn-w" href="#services">시술 보기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-d" href="#booking">상담 문의 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+</div>
+<a class="hero-card rv" href="#services"><img src="./assets/hero-thumb.jpg" alt=""><div><b>실크 블로우</b><span>가장 많이 찾는 시술<br>65,000원부터 →</span></div></a>
+<div class="hero-dots" aria-hidden="true"><i></i><i></i><i></i></div>
+</section>
+
+<section class="craft" id="craft"><div class="wrap">
+<div class="laurel rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c-5-2-8-7-8-14 3 0 6 2 8 5M12 22c0-4 1-8 2-11M12 22c1-3 3-6 6-8"/></svg><span><span class="stars">★★★★★</span><br>4.9/5 (986+ 리뷰)</span><svg class="r" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c-5-2-8-7-8-14 3 0 6 2 8 5M12 22c0-4 1-8 2-11M12 22c1-3 3-6 6-8"/></svg></div>
+<h2 class="rv">최고의 스타일리스트. 최고급 제품.<br>타협 없음. 좋은 머리는 원래 이렇습니다.</h2>
+<a class="btn rv" href="#booking">예약하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<div class="panels rv">
+<div class="panel"><img src="./assets/craft-1.jpg" alt="샴푸 후 젖은 머리를 손질하는 장면"><b>Craft</b></div>
+<div class="panel"><img src="./assets/craft-2.jpg" alt="블론드 롱헤어 모델"><b>Studio</b></div>
+<div class="panel"><img src="./assets/craft-3.jpg" alt="흰 리본 드레스를 입은 모델"><b>Artistry</b></div>
+<div class="panel"><img src="./assets/craft-4.jpg" alt="금색 헤어 클립으로 마무리한 업스타일"><b>Results</b></div>
+</div>
+</div></section>
+
+<section id="solutions"><div class="wrap">
+<div class="sec-head">
+<div><span class="label rv">[ 고민 + 해결 ]</span><h2 class="rv">고민 해결</h2><p class="sub rv">진짜 모발 고민에는 진짜 해결이 필요합니다. 임시 처방이 아니라, 기분까지 바꾸는 오래가는 결과로요.</p></div>
+<a class="btn rv" href="#booking">예약하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<div class="sols">
+<article class="sol rv" tabindex="0"><img src="./assets/solution-1.jpg" alt="곱슬거리는 모발 클로즈업"><span class="no">01</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3v18M8 3c3 0 5 2 5 5s-2 5-5 5M8 13c3 0 5 2 5 5"/></svg><div class="prob"><b>Frizzy Hair</b><p>습도만 올라가면 부풀고 뻗치는 머리. 아침마다 손질에 시간을 쓰고 계신가요.</p></div><div class="fix">프리즈 컨트롤</div></article>
+<article class="sol rv" tabindex="0"><img src="./assets/solution-2.jpg" alt="손상된 모발을 살피는 디자이너"><span class="no">02</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12c4-8 12-8 16 0-4 8-12 8-16 0Z"/><path d="M12 9v6M9 12h6"/></svg><div class="prob"><b>Damaged Hair</b><p>반복된 염색과 열로 끊어지고 푸석해진 모발. 광이 사라지고 결이 살아나지 않습니다.</p></div><div class="fix">헤어 리페어</div></article>
+<article class="sol rv" tabindex="0"><img src="./assets/solution-3.jpg" alt="샴푸대에서 시술 받는 고객"><span class="no">03</span><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 20 4M4 8h6M4 12h4M14 20v-6M18 20v-4"/></svg><div class="prob"><b>Thinning Hair</b><p>가늘고 힘없이 눌리는 머리. 볼륨이 금방 꺼져 스타일이 오래가지 않습니다.</p></div><div class="fix">볼륨 업</div></article>
+</div>
+</div></section>
+
+<section id="services"><div class="wrap">
+<div class="sec-head">
+<div><span class="label rv">[ 시술 안내 ]</span><h2 class="rv">시술 안내</h2><p class="sub rv">여섯 가지 시그니처 시술. 오래가고, 눈에 띄고, 다시 찾게 되는 결과를 위해 하나하나 설계했습니다.</p></div>
+<a class="btn rv" href="#booking">예약하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<div class="svc">
+<details class="rv" open><summary><span class="no">[ 01 ]</span><h3>프리시전 커트</h3><div class="chips"><span class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>상담</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M6 18 18 6"/></svg>커트</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/></svg>마무리</span></div></summary>
+<div class="body"><img src="./assets/service-1.jpg" alt="프리시전 커트 시술 장면"><div><span class="label">[ 컷 &amp; 스타일 ]</span><h4>프리시전 커트</h4><p>얼굴형, 타고난 모발 결, 매일의 생활 방식에 맞춰 정밀하게 설계하는 맞춤 커트입니다.</p><div class="price">가격대 <b>55,000 – 120,000원</b></div><a class="btn" href="#booking">시술 예약 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></details>
+<details class="rv"><summary><span class="no">[ 02 ]</span><h3>발레아쥬 &amp; 컬러</h3><div class="chips"><span class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>상담</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M4 20V4h16v16Z"/></svg>컬러 도포</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M4 12h16"/></svg>토닝</span></div></summary>
+<div class="body"><img src="./assets/service-2.jpg" alt="발레아쥬 컬러 시술"><div><span class="label">[ 컬러 ]</span><h4>발레아쥬 &amp; 컬러</h4><p>붓으로 그리듯 자연스럽게 밝히는 발레아쥬와, 피부 톤에 맞춘 컬러 설계.</p><div class="price">가격대 <b>150,000 – 320,000원</b></div><a class="btn" href="#booking">시술 예약 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></details>
+<details class="rv"><summary><span class="no">[ 03 ]</span><h3>케라틴 트리트먼트</h3><div class="chips"><span class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>상담</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M12 4v16M6 10l6-6 6 6"/></svg>트리트먼트</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/></svg>블로우 드라이</span></div></summary>
+<div class="body"><img src="./assets/service-3.jpg" alt="케라틴 트리트먼트 시술"><div><span class="label">[ 케어 ]</span><h4>케라틴 트리트먼트</h4><p>손상된 큐티클을 채워 결을 매끈하게. 습기에도 부풀지 않는 광택이 3개월 갑니다.</p><div class="price">가격대 <b>180,000 – 280,000원</b></div><a class="btn" href="#booking">시술 예약 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></details>
+<details class="rv"><summary><span class="no">[ 04 ]</span><h3>실크 블로우</h3><div class="chips"><span class="chip"><svg viewBox="0 0 24 24"><path d="M4 16c4-6 12-6 16 0"/></svg>샴푸 &amp; 준비</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M4 12h16M12 4v16"/></svg>블로우 드라이</span><span class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>실크 마무리</span></div></summary>
+<div class="body"><img src="./assets/service-4.jpg" alt="실크 블로우 드라이 시술"><div><span class="label">[ 스타일링 ]</span><h4>실크 블로우</h4><p>가장 많이 찾는 시술. 뿌리 볼륨부터 끝 결까지, 사진 속 그 윤기 그대로.</p><div class="price">가격대 <b>65,000 – 90,000원</b></div><a class="btn" href="#booking">시술 예약 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></details>
+<details class="rv"><summary><span class="no">[ 05 ]</span><h3>헤어 익스텐션</h3><div class="chips"><span class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/></svg>컬러 매칭</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M12 4v16"/></svg>부착</span><span class="chip"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M6 18 18 6"/></svg>블렌드 &amp; 커트</span></div></summary>
+<div class="body"><img src="./assets/service-5.jpg" alt="헤어 익스텐션 시술"><div><span class="label">[ 익스텐션 ]</span><h4>헤어 익스텐션</h4><p>내 모발 색에 맞춰 골라 붙이고, 티 나지 않게 다듬는 데까지가 시술입니다.</p><div class="price">가격대 <b>350,000원 – 상담</b></div><a class="btn" href="#booking">시술 예약 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div></div></details>
+</div>
+</div></section>
+
+<section id="why"><div class="wrap">
+<div class="sec-head">
+<div><span class="label rv">[ 강점 ]</span><h2 class="rv">왜 블랑인가</h2><p class="sub rv">맞춤 스타일링, 프리미엄 제품, 어디서도 받기 힘든 살롱 케어로 머리의 격을 올립니다.</p></div>
+<a class="btn rv" href="#booking">예약하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<div class="bento">
+<div class="bt bt-photo rv"><img src="./assets/why-photo.jpg" alt="블론드 롱헤어 모델 세로 컷"><div><h3>정성으로 만듭니다</h3><p>정밀함, 열정, 진짜 전문성. 모든 시술에 예외 없이.</p></div></div>
+<div class="bt bt-wide rv"><img class="prod" src="./assets/why-product.jpg" alt="살롱 전용 제품"><h3>프로 전용 제품</h3><p>세계 톱 스타일리스트들이 결과로 검증한 살롱 전용 브랜드만 씁니다.</p><div class="chips"><span class="chip">보습</span><span class="chip">살롱 등급</span><span class="chip">영양</span></div></div>
+<div class="bt rv"><div class="stack"><img src="./assets/why-stack-1.jpg" alt=""><img src="./assets/why-stack-2.jpg" alt=""><img src="./assets/why-stack-3.jpg" alt=""></div><div class="num en"><span data-count="427">0</span>+</div><p>매달 완성되는 시그니처 스타일</p></div>
+<div class="bt bt-brand rv"><img src="./assets/why-brand.jpg" alt="목을 감싸며 미소 짓는 모델"><span class="seal"><svg viewBox="0 0 24 24" aria-hidden="true" stroke="#fff" fill="none" stroke-width="1.6"><circle cx="12" cy="12" r="9" stroke-dasharray="2 3"/><path d="M8 15 12 8l4 7M9.5 12.5h5"/></svg>BLANC<small>®</small></span></div>
+<div class="bt bt-wide rv"><img class="prod" src="./assets/why-jar.jpg" alt="홈케어 헤어 마스크"><h3>케어는 집에서도</h3><p>시술 후 홈케어 루틴까지 전문가가 직접 짜 드립니다.</p><div class="chips"><span class="chip">유지</span><span class="chip">영양</span><span class="chip">강화</span></div></div>
+<div class="bt rv"><div class="avatars"><img src="./assets/why-avatar-1.jpg" alt=""><img src="./assets/why-avatar-2.jpg" alt=""><img src="./assets/why-avatar-3.jpg" alt=""></div><div class="num en"><span data-count="97">0</span>%</div><p>모든 시술을 통틀어 고객 만족률</p></div>
+</div>
+</div></section>
+
+<div class="band">
+<img class="bg" src="./assets/salon.jpg" alt="">
+<video class="bg" data-src="./assets/salon.mp4" muted loop playsinline preload="none" aria-hidden="true"></video>
+</div>
+
+<section class="reviews" id="reviews"><div class="wrap">
+<div class="field">
+<div class="laurel rv"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c-5-2-8-7-8-14 3 0 6 2 8 5M12 22c0-4 1-8 2-11M12 22c1-3 3-6 6-8"/></svg><span><span class="stars">★★★★★</span><br>4.9/5 (986+ 리뷰)</span><svg class="r" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22c-5-2-8-7-8-14 3 0 6 2 8 5M12 22c0-4 1-8 2-11M12 22c1-3 3-6 6-8"/></svg></div>
+<blockquote class="rv">블랑의 디테일은 어떤 살롱에서도 경험 못 해본 수준이었어요.</blockquote>
+<div class="who rv"><b>이서윤</b><span>크리에이티브 디렉터</span></div>
+<div class="cards">
+<div class="card"><figure><img src="./assets/review-1.jpg" alt=""><figcaption><i>★★★★★ 4.9/5</i>여기 다니고 나서 머리 칭찬을 처음 들었어요.</figcaption></figure><b>김하린</b><small>마케터</small></div>
+<div class="card"><figure><img src="./assets/review-2.jpg" alt=""><figcaption><i>★★★★★ 4.9/5</i>컬러가 3개월 지나도 탁해지지 않아요.</figcaption></figure><b>박지우</b><small>디자이너</small></div>
+<div class="card"><figure><img src="./assets/review-3.jpg" alt=""><figcaption><i>★★★★★ 4.8/5</i>결이 완전히 달라졌어요. 손질 시간이 반으로.</figcaption></figure><b>최민서</b><small>요가 강사</small></div>
+<div class="card"><figure><img src="./assets/review-4.jpg" alt=""><figcaption><i>★★★★★ 5/5</i>처음으로 원하던 그 사진 그대로 나왔습니다.</figcaption></figure><b>정수아</b><small>대학원생</small></div>
+<div class="card"><figure><img src="./assets/review-5.jpg" alt=""><figcaption><i>★★★★★ 4.9/5</i>상담이 길어서 좋았어요. 진짜 내 얘길 듣더라고요.</figcaption></figure><b>한예린</b><small>승무원</small></div>
+</div>
+</div>
+</div></section>
+
+<section id="process"><div class="wrap">
+<div class="sec-head">
+<div><span class="label rv">[ 진행 과정 ]</span><h2 class="rv">진행 과정</h2><p class="sub rv">블랑의 모든 예약은 오직 당신과 당신의 머리를 중심으로 짠 세 단계로 진행됩니다.</p></div>
+<a class="btn rv" href="#booking">예약하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<div class="proc rv">
+<img src="./assets/process.jpg" alt="컬이 살아 있는 고객과 시술 중인 디자이너">
+<div class="steps">
+<div class="step"><h3>예약 &amp; 상담</h3><p>온라인으로 예약하고 오시면, 담당 디자이너와 1:1 무료 상담부터 시작합니다.</p></div>
+<div class="step"><h3>맞춤 시술</h3><p>진짜 작업이 시작됩니다. 정밀하게, 정성껏, 오직 당신 머리에만 집중해서.</p></div>
+<div class="step"><h3>마무리 터치</h3><p>마무리 스타일링까지 끝내고, 기대보다 나은 모습으로 보내드립니다.</p></div>
+</div>
+</div>
+</div></section>
+
+<section id="faq"><div class="wrap">
+<div class="sec-head">
+<div><span class="label rv">[ 자주 묻는 질문 ]</span><h2 class="rv">궁금한 점</h2><p class="sub rv">예약 전에 가장 많이 물어보시는 것들을 모았습니다. 없는 질문은 바로 연락 주세요.</p></div>
+<a class="btn rv" href="#booking">예약하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<div class="faqgrid">
+<div class="rv"><img src="./assets/faq.jpg" alt="살롱 인테리어 세로 컷"><a class="btn btn-w" href="tel:010-4894-4905">문의하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<div class="faqs">
+<details class="rv" open><summary>예약은 어떻게 하나요?</summary><p>아래 예약 폼이나 전화로 시술과 원하는 시간을 알려주시면 확인 문자를 드립니다.</p></details>
+<details class="rv"><summary>상담은 정말 무료인가요?</summary><p>네. 모든 시술 전 상담은 무료이며, 상담만 받고 가셔도 됩니다.</p></details>
+<details class="rv"><summary>결과가 마음에 안 들면요?</summary><p>시술 후 7일 안에 오시면 무료로 수정해 드립니다.</p></details>
+<details class="rv"><summary>시술 시간은 얼마나 걸리나요?</summary><p>커트 1시간, 컬러 2~3시간, 케라틴 3시간 안팎입니다. 예약 시 안내드립니다.</p></details>
+<details class="rv"><summary>참고 사진을 가져가도 되나요?</summary><p>꼭 가져오세요. 사진을 보며 모발 상태에서 가능한 범위를 함께 정합니다.</p></details>
+<details class="rv"><summary>예약 없이 방문해도 되나요?</summary><p>자리가 있으면 받습니다. 다만 대기가 길 수 있어 예약을 권해드립니다.</p></details>
+<details class="rv"><summary>어떤 제품을 쓰나요?</summary><p>살롱 전용 프로 라인만 씁니다. 시술 후 홈케어 제품도 같은 라인으로 안내합니다.</p></details>
+</div>
+</div>
+</div></section>
+
+<section id="gallery"><div class="wrap">
+<div class="sec-head">
+<div><span class="label rv">[ 실제 결과 ]</span><h2 class="rv">갤러리</h2><p class="sub rv">실제 고객의 실제 결과입니다. 보정도 필터도 없이, 언제나 있는 그대로.</p></div>
+<a class="btn rv" href="#booking">예약하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<div class="gal rv">
+<img src="./assets/gallery-1.jpg" alt="윤기 나는 로우 포니테일"><img src="./assets/gallery-2.jpg" alt="구릿빛 컬 헤어 모델"><img src="./assets/gallery-3.jpg" alt="촉촉한 피부와 업스타일"><img src="./assets/gallery-4.jpg" alt="옆얼굴 클로즈업">
+</div>
+</div></section>
+
+<section id="booking"><div class="wrap">
+<div class="sec-head">
+<div><span class="label rv">[ 시작하기 ]</span><h2 class="rv">예약</h2><p class="sub rv">전문 커트, 스타일링, 프리미엄 살롱 케어. 오늘 예약하세요.</p></div>
+<a class="btn rv" href="tel:010-4894-4905">전화 문의 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</div>
+<div class="bookgrid">
+<form class="form rv" onsubmit="event.preventDefault();alert('템플릿 데모입니다. 실제 사이트에서는 예약 접수로 연결됩니다.')">
+<div class="row"><label>이름 *<input type="text" placeholder="홍길동" required></label><label>연락처 *<input type="tel" placeholder="010-0000-0000" required></label></div>
+<div class="row"><label>이메일<input type="email" placeholder="you@example.com"></label><label>희망 날짜<input type="date"></label></div>
+<label>시술 선택 *<select required><option>프리시전 커트</option><option>발레아쥬 &amp; 컬러</option><option>케라틴 트리트먼트</option><option>실크 블로우</option><option>헤어 익스텐션</option></select></label>
+<label>요청 사항<textarea placeholder="원하는 스타일이나 참고할 점을 적어주세요"></textarea></label>
+<button class="btn" type="submit">예약 신청</button>
+</form>
+<img class="rv" src="./assets/booking.jpg" alt="살롱 거울 앞 세로 컷">
+</div>
+</div></section>
+
+<div class="foot">
+<div class="wrap">
+<div class="footgrid">
+<div><a class="logo" href="#top"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 12 6l6 12M8.5 13h7"/></svg>블랑<small>®</small></a><p>기술, 신뢰, 그리고 모든 고객에게 진짜 결과를 드리는 프리미엄 헤어 살롱.</p><a class="btn btn-w" href="tel:010-4894-4905">블랑에 연락하기 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+<div><h5>바로가기</h5><ul><li><a href="#top">홈</a></li><li><a href="#craft">소개</a></li><li><a href="#solutions">고민 해결</a></li><li><a href="#why">강점</a></li><li><a href="#reviews">후기</a></li><li><a href="#booking">예약</a></li></ul></div>
+<div><h5>시술</h5><ul><li><a href="#services">프리시전 커트</a></li><li><a href="#services">발레아쥬 &amp; 컬러</a></li><li><a href="#services">케라틴</a></li><li><a href="#services">실크 블로우</a></li><li><a href="#services">익스텐션</a></li></ul></div>
+<div><h5>연락처</h5><ul><li><a href="mailto:hello@blanc.example">hello@blanc.example</a></li><li><a href="tel:010-4894-4905">010-4894-4905</a></li><li>서울 강남구 압구정로 000</li></ul></div>
+</div>
+<div class="wordmark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 18 12 6l6 12M8.5 13h7"/></svg>BLANC<small>®</small></div>
+</div>
+</div>
+
+<footer><div class="wrap">
+<div><b>블랑 헤어</b> · 대표 김하늘 · 사업자등록번호 000-00-00000<br>서울특별시 강남구 압구정로 000 2층</div>
+<div class="nvq" style="margin-top:12px">이 페이지는 <b>NOVERIQ</b>가 제작한 홈페이지 템플릿 데모입니다. 위 상호 · 주소 · 등록번호는 예시입니다.<br>제작 문의 <a href="tel:010-4894-4905">010-4894-4905</a> · <a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a><br>민트클 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</div>
+</div></footer>
+
+<script>
+document.documentElement.classList.add('js');
+// 배경 영상 — 데스크톱 · 모션 허용일 때만. http 는 HEAD 로 존재 확인(없어도 404 없음), file:// 은 바로 붙인다.
+function mountBgVideo(v){
+  const attach=()=>{v.addEventListener('playing',()=>v.classList.add('ready'),{once:true});v.addEventListener('error',()=>{},{once:true});v.src=v.dataset.src;v.play().catch(()=>{})};
+  if(location.protocol==='file:'){attach();return}
+  fetch(v.dataset.src,{method:'HEAD'}).then(r=>{if(r.ok&&(r.headers.get('content-type')||'').startsWith('video'))attach()}).catch(()=>{});
+}
+if(matchMedia('(min-width:760px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.querySelectorAll('video.bg[data-src]').forEach(mountBgVideo)}
+
+requestAnimationFrame(()=>document.querySelector('.hero')?.classList.add('on'));
+// 후기 카드: 보이면 가운데 덱에서 제자리로 퍼진다
+const fio=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');fio.unobserve(e.target)}}),{threshold:.25});
+document.querySelectorAll('.reviews .field').forEach(el=>fio.observe(el));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+const _rvs=[...document.querySelectorAll('.rv')];
+_rvs.forEach(el=>{const sibs=_rvs.filter(o=>o.parentElement===el.parentElement);if(sibs.length>1){el.style.transitionDelay=(100+sibs.indexOf(el)*90)+'ms';el.addEventListener('transitionend',()=>{el.style.transitionDelay='100ms'},{once:true});}io.observe(el);});
+
+// 카운트업 (427+ · 97%) — 보이는 순간 1.6s 동안 올라간다
+const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);const el=e.target,end=+el.dataset.count,t0=performance.now();
+  const step=t=>{const p=Math.min(1,(t-t0)/1600);el.textContent=Math.round(end*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(step)};requestAnimationFrame(step)}),{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+// 시술 아코디언은 하나만 열린다
+document.querySelectorAll('.svc details').forEach(d=>d.addEventListener('toggle',()=>{if(d.open)document.querySelectorAll('.svc details').forEach(o=>{if(o!==d)o.open=false})}));
+</script>
+</body>
+</html>

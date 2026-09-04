@@ -43,6 +43,36 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "beauty-f-template",
+    industry: "뷰티샵 홈페이지",
+    title: "뷰티샵 홈페이지 (랜딩형 템플릿 · 디자인 F)",
+    type: ["landing-template", "small-business"],
+    tag: "랜딩형 템플릿 · 뷰티샵",
+    purpose:
+      "크림과 와인레드의 프리미엄 헤어살롱 무드로, 풀스크린 히어로와 고민별 솔루션 카드, 시술 아코디언, 벤토형 강점, 후기 카드 덱이 예약 폼으로 이어지는 원페이지 템플릿입니다.",
+    features: ["고민 → 해결 카드", "시술 아코디언 · 가격대", "벤토 강점 · 카운트업", "예약 폼"],
+    idealFor: "시술 단가가 높고 브랜딩을 중시하는 헤어살롱 · 디자이너 샵",
+    image: "/thumbs/beauty-f.jpg",
+    liveUrl: "/templates/beauty-f/",
+    industryKey: "beauty",
+    designCode: "BEAL-1006",
+  },
+  {
+    slug: "beauty-f-basic-template",
+    industry: "뷰티샵 홈페이지",
+    title: "뷰티샵 홈페이지 (기본형 템플릿 · 디자인 F)",
+    type: ["basic-template", "small-business"],
+    tag: "기본형 템플릿 · 뷰티샵",
+    purpose:
+      "크림과 와인레드의 프리미엄 헤어살롱 무드로, 풀스크린 히어로와 고민별 솔루션 카드, 시술 아코디언, 벤토형 강점, 후기 카드 덱이 예약 폼으로 이어지는 원페이지 템플릿입니다. 스크롤 등장 애니메이션을 뺀 기본형입니다.",
+    features: ["고민 → 해결 카드", "시술 아코디언 · 가격대", "벤토 강점", "예약 폼"],
+    idealFor: "시술 단가가 높고 브랜딩을 중시하는 헤어살롱 · 디자이너 샵",
+    image: "/thumbs/beauty-f.jpg",
+    liveUrl: "/templates/beauty-f-basic/",
+    industryKey: "beauty",
+    designCode: "BEAB-1006",
+  },
+  {
     slug: "travel-a-template",
     industry: "여행 · 트레킹 홈페이지",
     title: "여행 · 트레킹 홈페이지 (랜딩형 템플릿 · 디자인 A)",
