@@ -20,10 +20,13 @@ a{color:inherit;text-decoration:none}
 body{word-break:keep-all;overflow-wrap:break-word}
 h1,h2,h3,blockquote{text-wrap:balance}
 p,li,dd,figcaption{text-wrap:pretty}
-/* 등장 — 레퍼런스 appear: h2 는 opacity 0→1 + y 150→0 spring(≈1s), 설명은 페이드만. 카드에는 appear 없음 */
-.rv{opacity:0;transform:translateY(150px);transition:opacity 1s cubic-bezier(.16,1,.3,1) .1s,transform 1s cubic-bezier(.16,1,.3,1) .1s}
-.rv.f{transform:none}
+/* 등장 — 라이브 실측(2026-09-04): 티커·h2 y140→0 + 페이드 spring(125/30 ≈ .9s, 과감쇠) · 시술 카드 x150→0 · 가격 y30 · 연락 y60 · 샵 y90 · 설명은 페이드만.
+   트리거는 요소 상단이 뷰포트 하단에서 ~160px 올라왔을 때 (IO rootMargin -15%) */
+.rv{opacity:0;transform:translateY(140px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+.rv.f{transform:none}.rv.x{transform:translateX(150px)}.rv.y30{transform:translateY(30px)}.rv.y60{transform:translateY(60px)}.rv.y90{transform:translateY(90px)}
 .rv.on{opacity:1;transform:none}
+/* 스크롤 연동 스케일(갤러리 1.2→1: 진입 후 650px 구간 · 바버 초상 1.2→1: 450px 구간) — 스크립트가 data-scale 요소의 transform 을 쓴다 */
+[data-scale]{transform-origin:50% 50%;will-change:transform}
 ::selection{background:#D9BC72;color:#000}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid #D9BC72;outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
@@ -52,8 +55,14 @@ nav a:hover{color:var(--gold)}
 .hero{position:relative}
 .hero .wrap{position:relative;min-height:1075px}
 .hero .frame{position:absolute;right:0;top:64px;width:600px;height:1011px;overflow:hidden;border:1px solid rgba(255,255,255,.14)}
-.hero .frame img.bg{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 2s cubic-bezier(.16,1,.3,1)}
-.hero.on .frame img.bg{transform:none}
+.hero .frame img.bg{width:100%;height:100%;object-fit:cover}
+/* 로드 시퀀스(라이브 실측): CTA y150→0 지연 1s · 가격 카드 scale 0→1 튕김 지연 1.5s · 문단·신뢰 페이드 지연 1.7s · 칩 페이드 지연 1.8s. 사진·h1 은 정적 */
+.hero .cta,.btn-h{transition:opacity .8s cubic-bezier(.22,.61,.36,1) 1s,transform .8s cubic-bezier(.22,.61,.36,1) 1s}
+.hcard{transition:opacity .6s 1.5s,transform 1.2s cubic-bezier(.34,1.56,.64,1) 1.5s}
+.hero .copy,.trust{transition:opacity 1s 1.7s}.hchips{transition:opacity .4s 1.8s}
+.js:not(.on) .hero .cta,.js:not(.on) .btn-h{opacity:0;transform:translateY(150px)}
+.js:not(.on) .hcard{opacity:0;transform:scale(0)}
+.js:not(.on) .hero .copy,.js:not(.on) .trust,.js:not(.on) .hchips{opacity:0}
 .hero h1{position:relative;z-index:2;padding-top:64px;margin-left:41px;font-size:270px;line-height:.9;color:var(--gold);white-space:nowrap}
 .hero .copy{position:absolute;left:80px;top:532px;width:256px;font-size:19px;line-height:1.2;color:rgba(255,255,255,.85)}
 .hero .copy b{color:#fff;font-weight:700}.hero .copy em{font-style:normal;color:var(--gold);font-weight:700}
@@ -80,7 +89,7 @@ nav a:hover{color:var(--gold)}
 
 /* 티커 실측: 1200×200 · 아이콘 108 (x160) · 텍스트 200/180 #1F1F1C (x294) · 피치 = 아이콘108+26+텍스트+30 */
 .tk{overflow:hidden;height:200px;display:flex;align-items:center;margin-top:65px}
-.tk .track{display:flex;align-items:center;white-space:nowrap;animation:tk 32s linear infinite;will-change:transform}
+.tk .track{display:flex;align-items:center;white-space:nowrap;animation:tk 40s linear infinite;will-change:transform}  /* 실측 77px/s */
 .tk .item{display:flex;align-items:center;gap:26px;padding:0 30px 0 40px;font-size:200px;line-height:180px;color:var(--ghost)}
 .tk .item svg{width:108px;height:108px;flex:none;stroke:var(--ghost);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 @keyframes tk{to{transform:translateX(-50%)}}
@@ -111,7 +120,7 @@ section{padding-top:70px}
 .svc .c3 .ph{left:19px;top:181px;transform:rotate(-4deg)}
 /* 카드2: 128×134 r8 썸네일 4장 × 3줄, 줄마다 -8° 기울고 흐른다 */
 .svc .rows{position:absolute;left:0;top:150px;width:140%;margin-left:-20%}
-.svc .row{display:flex;gap:8px;transform:rotate(-8deg);margin-bottom:-6px;animation:tk 26s linear infinite}
+.svc .row{display:flex;gap:8px;transform:rotate(-8deg);margin-bottom:-6px;animation:tk 22s linear infinite}  /* 실측 50px/s */
 .svc .row:nth-child(2){animation-direction:reverse}
 .svc .row img{width:128px;height:134px;border-radius:8px;object-fit:cover;flex:none}
 
@@ -124,12 +133,12 @@ section{padding-top:70px}
 .gal figure:hover>img{transform:scale(1.06)}
 .gal .ins{position:absolute;left:50%;top:59px;width:200px;height:200px;margin-left:-100px;border-radius:14px;object-fit:cover;box-shadow:0 12px 30px rgba(0,0,0,.45)}
 .band{position:absolute;right:-80px;top:235px;width:590px;height:70px;background:var(--gold);color:#09090B;overflow:hidden;display:flex;align-items:center;z-index:2}
-.band .track{display:flex;white-space:nowrap;animation:tk 14s linear infinite}
+.band .track{display:flex;white-space:nowrap;animation:tk 80s linear infinite}  /* 실측 22px/s */
 .band span{font-size:28px;line-height:34px;letter-spacing:-.02em;padding:0 44px}
 
 /* 바버 실측: 420×540 흑백 컷아웃 · 피치 496(gap 76) · 첫 장 x-24 · 흰 카드 300 r16 (초상 x+104) */
 .team{overflow:hidden;margin-top:80px}
-.team .track{display:flex;gap:76px;margin-left:-144px;width:max-content;animation:tk 60s linear infinite}
+.team .track{display:flex;gap:76px;margin-left:-144px;width:max-content}  /* 라이브 실측: 바버 행은 움직이지 않는다 */
 .team .m{position:relative;width:420px;height:540px;flex:none}
 .team .m img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1)}
 .team .card{position:absolute;left:211px;top:-9px;width:300px;padding:16px 20px;border-radius:16px;background:#fff;color:#222}
@@ -142,8 +151,8 @@ section{padding-top:70px}
 /* 후기 실측: 265×400 gap24 · 중앙 카드(x588) 원본 · 양옆 .8 스케일 · 화살표 24 (중앙 카드 좌우 14) */
 .rev{position:relative;height:400px;overflow:hidden;--i:2}
 .rev .track{position:absolute;left:50%;top:0;display:flex;gap:24px;transform:translateX(calc(-132.5px - var(--i)*289px));transition:transform .8s cubic-bezier(.16,1,.3,1)}
-.rev .k{position:relative;width:265px;height:400px;border-radius:16px;overflow:hidden;flex:none;transform:scale(.8);transition:transform .8s cubic-bezier(.16,1,.3,1);transform-origin:center}
-.rev .k.cur{transform:none}
+.rev .k{position:relative;width:265px;height:400px;border-radius:16px;overflow:hidden;flex:none;transform:scale(.85);opacity:.5;transition:transform .8s cubic-bezier(.16,1,.3,1),opacity .8s;transform-origin:center}  /* 실측: 옆 카드 scale .85 · opacity .5 */
+.rev .k.cur{transform:none;opacity:1}
 .rev .k.p{color:#fff}
 .rev .k.p img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .rev .k.p::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.45),rgba(0,0,0,0) 35%,rgba(0,0,0,0) 65%,rgba(0,0,0,.6))}
@@ -193,7 +202,7 @@ html:not(.js) .rev .ar{display:none}
 
 /* 인스타 실측: 세로 영상 600×1080 gap2 마퀴 (첫 장 x184 부터) · 설명→영상 40 */
 .ig{overflow:hidden;margin:40px 64px 0}  /* 실측: 영상 컨테이너 1072 (x184~1256) */
-.ig .track{display:flex;gap:2px;width:max-content;animation:tk 70s linear infinite}
+.ig .track{display:flex;gap:2px;width:max-content;animation:tk 28s linear infinite}  /* 실측 108px/s */
 .ig .v{position:relative;width:600px;height:1080px;flex:none;background:#0a0a0a;overflow:hidden}
 .ig .v img,.ig .v video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .ig .v video{opacity:0;transition:opacity .6s}.ig .v video.ready{opacity:1}
@@ -271,7 +280,7 @@ footer{margin-top:120px}
   .svc{grid-template-columns:1fr}.svc .c{height:420px}
   .gal figure.w,.gal figure.n{width:100%;height:260px}.band{width:70%;top:200px}
   .team{margin-top:40px}.team .track{gap:24px;margin-left:-40px}.team .m{width:300px;height:390px}.team .card{left:60px;width:240px}
-  .rev .k{transform:scale(.9)}
+  .rev .k{transform:scale(.9);opacity:.6}
   .price{grid-template-columns:1fr}.price .c{min-height:0}
   .book{padding:24px 16px}.book form{grid-template-columns:1fr}
   .ig .v{width:240px;height:432px}
@@ -322,7 +331,7 @@ footer{margin-top:120px}
 </div></section>
 
 <!-- 티커: 고스트 텍스트 마퀴 -->
-<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+<div class="tk rv"><div class="wrap"><div class="track" aria-hidden="true">
   <div class="item disp"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></svg>바버샵</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></svg>바버샵</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></svg>바버샵</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.5 15.5M20 20 8.5 8.5"/></svg>바버샵</div>
 </div></div></div>
 
@@ -330,27 +339,27 @@ footer{margin-top:120px}
 <section id="services"><div class="wrap in2">
   <div class="sh"><h2 class="disp rv">시술 안내</h2><p class="rv f">두상·모질·라이프스타일까지 보고 결정합니다. 커트 한 번에 인상이 달라지는 이유입니다.</p><a href="#booking" class="btn-o">시술 전체 보기</a></div>
   <div class="svc body">
-    <div class="c c1"><h3 class="disp">클래식 커트<span>01</span></h3><p class="d">가위와 클리퍼로 두상 라인을 살린 정통 커트.</p>
+    <div class="c c1 rv x"><h3 class="disp">클래식 커트<span>01</span></h3><p class="d">가위와 클리퍼로 두상 라인을 살린 정통 커트.</p>
       <img class="ph" src="./assets/service-1.jpg" alt="" width="592" height="484"><img class="ph2" src="./assets/service-1b.jpg" alt="" width="574" height="416"></div>
-    <div class="c c2"><h3 class="disp">면도 & 수염<span>02</span></h3><p class="d">따뜻한 타월과 스트레이트 면도기로 정리하는 클래식 셰이브.</p>
+    <div class="c c2 rv x"><h3 class="disp">면도 & 수염<span>02</span></h3><p class="d">따뜻한 타월과 스트레이트 면도기로 정리하는 클래식 셰이브.</p>
       <div class="rows" aria-hidden="true">
         <div class="row"><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""></div>
         <div class="row"><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""></div>
         <div class="row"><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""><img src="./assets/service-2-2.jpg" alt=""><img src="./assets/service-2-3.jpg" alt=""><img src="./assets/service-2-4.jpg" alt=""><img src="./assets/service-2-1.jpg" alt=""></div>
       </div></div>
-    <div class="c c3"><h3 class="disp">라인업 & 페이드<span>03</span></h3><p class="d">선명한 라인과 부드러운 페이드로 완성하는 마무리.</p>
+    <div class="c c3 rv x"><h3 class="disp">라인업 & 페이드<span>03</span></h3><p class="d">선명한 라인과 부드러운 페이드로 완성하는 마무리.</p>
       <img class="ph" src="./assets/service-3.jpg" alt="" width="592" height="484"></div>
   </div>
 </div></section>
 
-<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+<div class="tk rv"><div class="wrap"><div class="track" aria-hidden="true">
   <div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>갤러리</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>갤러리</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>갤러리</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 8a2 2 0 0 1 2-2h2l2-3h6l2 3h2a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><circle cx="12" cy="13" r="4"/></svg>갤러리</div>
 </div></div></div>
 
 <!-- 작업 결과 -->
 <section id="gallery"><div class="wrap in2">
   <div class="sh"><h2 class="disp rv">작업 결과</h2><p class="rv f">보정 없이, 시술 직후 그대로 찍었습니다.</p><a href="#booking" class="btn-o">더 보기</a></div>
-  <div class="gal body">
+  <div class="gal body" data-scale="650">
     <div class="r">
       <figure class="w"><img src="./assets/gallery-1.jpg" alt="" width="878" height="638"><img class="ins" src="./assets/gallery-1s.jpg" alt="" width="400" height="400"></figure>
       <figure class="n"><img src="./assets/gallery-2.jpg" alt="" width="578" height="638"><img class="ins" src="./assets/gallery-2s.jpg" alt="" width="400" height="400"></figure>
@@ -365,24 +374,21 @@ footer{margin-top:120px}
   </div>
 </div></section>
 
-<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+<div class="tk rv"><div class="wrap"><div class="track" aria-hidden="true">
   <div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div><div class="item disp"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4M16 19l2 2 4-4"/></svg>바버</div>
 </div></div></div>
 
 <!-- 바버 소개 -->
 <section id="team"><div class="wrap">
   <div class="sh in"><h2 class="disp rv">바버 소개</h2><p class="rv f">각자 다른 스타일, 같은 기준.<br>노블의 바버 세 사람을 소개합니다.</p></div>
-  <div class="team"><div class="track">
+  <div class="team"><div class="track" data-scale="450">
     <div class="m"><img src="./assets/barber-1.jpg" alt="김도현 헤드 바버" width="840" height="1080"><div class="card"><b>김도현</b><small>헤드 바버</small><div class="fl">팔로우:</div><div class="so"><a href="#" aria-label="인스타그램"></a><a href="#" aria-label="유튜브"></a></div></div></div>
     <div class="m"><img src="./assets/barber-2.jpg" alt="박준서 바버" width="840" height="1080"><div class="card"><b>박준서</b><small>바버</small><div class="fl">팔로우:</div><div class="so"><a href="#" aria-label="인스타그램"></a><a href="#" aria-label="유튜브"></a><a href="#" aria-label="틱톡"></a></div></div></div>
     <div class="m"><img src="./assets/barber-3.jpg" alt="이태오 바버" width="840" height="1080"><div class="card"><b>이태오</b><small>바버</small><div class="fl">팔로우:</div><div class="so"><a href="#" aria-label="인스타그램"></a><a href="#" aria-label="유튜브"></a></div></div></div>
-    <div class="m" aria-hidden="true"><img src="./assets/barber-1.jpg" alt="" width="840" height="1080"><div class="card"><b>김도현</b><small>헤드 바버</small><div class="fl">팔로우:</div><div class="so"><a href="#"></a><a href="#"></a></div></div></div>
-    <div class="m" aria-hidden="true"><img src="./assets/barber-2.jpg" alt="" width="840" height="1080"><div class="card"><b>박준서</b><small>바버</small><div class="fl">팔로우:</div><div class="so"><a href="#"></a><a href="#"></a><a href="#"></a></div></div></div>
-    <div class="m" aria-hidden="true"><img src="./assets/barber-3.jpg" alt="" width="840" height="1080"><div class="card"><b>이태오</b><small>바버</small><div class="fl">팔로우:</div><div class="so"><a href="#"></a><a href="#"></a></div></div></div>
   </div></div>
 </div></section>
 
-<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+<div class="tk rv"><div class="wrap"><div class="track" aria-hidden="true">
   <div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>고객</div>
 </div></div></div>
 
@@ -402,7 +408,7 @@ footer{margin-top:120px}
   </div>
 </div></section>
 
-<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+<div class="tk rv"><div class="wrap"><div class="track" aria-hidden="true">
   <div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></svg>가격</div>
 </div></div></div>
 
@@ -410,10 +416,10 @@ footer{margin-top:120px}
 <section id="pricing"><div class="wrap in">
   <div class="sh"><h2 class="disp rv">가격 안내</h2><p class="rv f">추가 비용 없이, 안내된 가격 그대로입니다.</p></div>
   <div class="price body">
-    <div class="c"><h3 class="disp">남성 커트</h3><ul><li>두상에 맞춘 정밀 커트</li><li>스타일 맞춤 상담</li><li>깔끔한 마무리</li><li>합리적인 가격</li><li>홈케어 조언</li></ul><div class="pr en">15,000원</div></div>
-    <div class="c"><h3 class="disp">커트 + 수염</h3><ul><li>두상에 맞춘 정밀 커트</li><li>수염 라인 정리</li><li>따뜻한 타월 마무리</li><li>합리적인 가격</li><li>홈케어 조언</li></ul><div class="pr en">25,000원</div></div>
-    <div class="c hi"><span class="bd"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span><h3 class="disp">스페셜</h3><ul><li>커트 + 수염 + 면도</li><li>두피 클렌징</li><li>스팀 타월 케어</li><li>스타일링 마무리</li><li>홈케어 조언</li></ul><div class="pr en">30,000원</div></div>
-    <div class="c"><h3 class="disp">블랙 댄디</h3><ul><li>정밀 커트 + 염색</li><li>새치 · 톤 다운 상담</li><li>깔끔한 마무리</li><li>스타일링 제품 사용</li><li>홈케어 조언</li></ul><div class="pr en">45,000원</div></div>
+    <div class="c rv y30"><h3 class="disp">남성 커트</h3><ul><li>두상에 맞춘 정밀 커트</li><li>스타일 맞춤 상담</li><li>깔끔한 마무리</li><li>합리적인 가격</li><li>홈케어 조언</li></ul><div class="pr en">15,000원</div></div>
+    <div class="c rv y30"><h3 class="disp">커트 + 수염</h3><ul><li>두상에 맞춘 정밀 커트</li><li>수염 라인 정리</li><li>따뜻한 타월 마무리</li><li>합리적인 가격</li><li>홈케어 조언</li></ul><div class="pr en">25,000원</div></div>
+    <div class="c hi rv y30"><span class="bd"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4z"/></svg></span><h3 class="disp">스페셜</h3><ul><li>커트 + 수염 + 면도</li><li>두피 클렌징</li><li>스팀 타월 케어</li><li>스타일링 마무리</li><li>홈케어 조언</li></ul><div class="pr en">30,000원</div></div>
+    <div class="c rv y30"><h3 class="disp">블랙 댄디</h3><ul><li>정밀 커트 + 염색</li><li>새치 · 톤 다운 상담</li><li>깔끔한 마무리</li><li>스타일링 제품 사용</li><li>홈케어 조언</li></ul><div class="pr en">45,000원</div></div>
   </div>
 </div></section>
 
@@ -433,7 +439,7 @@ footer{margin-top:120px}
   </div>
 </div></section>
 
-<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+<div class="tk rv"><div class="wrap"><div class="track" aria-hidden="true">
   <div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 9 5 4h14l2 5M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M10 20v-6h4v6"/></svg>인스타그램</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 9 5 4h14l2 5M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M10 20v-6h4v6"/></svg>인스타그램</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 9 5 4h14l2 5M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M10 20v-6h4v6"/></svg>인스타그램</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M3 9 5 4h14l2 5M3 9v11h18V9M3 9a3 3 0 0 0 6 0 3 3 0 0 0 6 0 3 3 0 0 0 6 0M10 20v-6h4v6"/></svg>인스타그램</div>
 </div></div></div>
 
@@ -454,27 +460,27 @@ footer{margin-top:120px}
   </div></div>
 </div></section>
 
-<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+<div class="tk rv"><div class="wrap"><div class="track" aria-hidden="true">
   <div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M2 3h3l2.4 12.2a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L22 7H6"/><circle cx="9" cy="21" r="1.2"/><circle cx="18" cy="21" r="1.2"/></svg>샵</div>
 </div></div></div>
 
 <!-- 샵 -->
 <section id="shop"><div class="wrap in">
   <div class="sh"><h2 class="disp rv">노블 샵</h2><p class="rv f">샵에서 쓰는 도구를 그대로 판매합니다. 머리와 수염을 집에서도 관리하세요.</p><a href="#contact" class="btn-o">샵 바로가기</a></div>
-  <div class="shop body">
+  <div class="shop body rv y90">
     <div class="c"><img src="./assets/product-1.jpg" alt="아프로 콤" width="1008" height="816"><span class="fav" aria-hidden="true"></span><h3 class="disp">아프로 콤</h3><div class="row"><span>by 노블 바버</span><b class="en">12,900원</b></div></div>
     <div class="c"><img src="./assets/product-2.jpg" alt="코드리스 트리머" width="1008" height="816"><span class="fav" aria-hidden="true"></span><h3 class="disp">코드리스 트리머</h3><div class="row"><span>by 노블 바버</span><b class="en">79,000원</b></div></div>
   </div>
 </div></section>
 
-<div class="tk"><div class="wrap"><div class="track" aria-hidden="true">
+<div class="tk rv"><div class="wrap"><div class="track" aria-hidden="true">
   <div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div><div class="item disp"><svg viewBox="0 0 24 24"><path d="M15 4h5v5M20 4l-6 6M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg>문의</div>
 </div></div></div>
 
 <!-- 오시는 길 -->
 <section id="contact"><div class="wrap in">
   <div class="sh"><h2 class="disp rv">오시는 길</h2><p class="rv f">노블 바버샵에 대한 모든 정보</p></div>
-  <div class="info body">
+  <div class="info body rv y60">
     <div class="i"><i><svg viewBox="0 0 24 24"><path d="M5 3h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 13l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2z"/></svg></i><b class="disp">전화</b><p><a href="tel:010-0000-0000">010-0000-0000</a></p></div>
     <div class="i"><i><svg viewBox="0 0 24 24"><path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></i><b class="disp">노블 바버샵</b><p>서울 성동구 성수이로 00<br>2층 노블 바버</p></div>
     <div class="i"><i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><b class="disp">영업시간</b><p>월–토 10:00–20:00 · 일요일 휴무</p></div>
@@ -513,9 +519,15 @@ function mountBgVideo(v){
 }
 if(matchMedia('(min-width:760px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){document.querySelectorAll('video.bg[data-src]').forEach(mountBgVideo)}
 
-requestAnimationFrame(()=>document.querySelector('.hero')?.classList.add('on'));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{threshold:.1});
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.documentElement.classList.add('on')));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}}),{rootMargin:'0px 0px -15% 0px',threshold:0});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// 스크롤 연동 스케일 — 요소 상단이 뷰포트 하단 50px 안쪽에 들어온 뒤 data-scale px 동안 1.2→1 (스프링처럼 따라간다)
+const fx=[...document.querySelectorAll('[data-scale]')].map(e=>({e,span:+e.dataset.scale,cur:1.2}));let fxRun=false;
+function fxTick(){let busy=false;const vh=innerHeight;for(const f of fx){const t=f.e.getBoundingClientRect().top;const p=Math.min(1,Math.max(0,(vh-50-t)/f.span));const target=1.2-.2*p;f.cur+=(target-f.cur)*.12;if(Math.abs(target-f.cur)>.0005)busy=true;else f.cur=target;f.e.style.transform=`scale(${f.cur.toFixed(4)})`}if(busy)requestAnimationFrame(fxTick);else fxRun=false}
+function fxKick(){if(!fxRun){fxRun=true;requestAnimationFrame(fxTick)}}
+if(matchMedia('(min-width:810px)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches&&fx.length){addEventListener('scroll',fxKick,{passive:true});addEventListener('resize',fxKick);fxKick()}
 
 // 후기 캐러셀 — 가운데 카드만 원본 크기
 const rev=document.querySelector('.rev'),ks=[...rev.querySelectorAll('.k')];let ri=2;
