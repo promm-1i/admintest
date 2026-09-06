@@ -1,7 +1,56 @@
-import { useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
+import { ChevronDown, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
 import type { NavDropdownEntry, NavTemplateGroup } from "./navData";
+
+/**
+ * 세로 스크롤 영역에 "더 있음" 신호를 붙이는 래퍼.
+ * 아래에 내용이 남아 있으면 하단 페이드 + 바운스 화살표, 위로 지나쳤으면 상단 페이드가 뜬다 —
+ * 스크롤바 없이도 목록이 잘렸다는 걸 지나치지 않게 한다.
+ */
+function ScrollableY({ className, children }: { className?: string; children: ReactNode }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [atTop, setAtTop] = useState(true);
+  const [atBottom, setAtBottom] = useState(true);
+  const update = () => {
+    const el = ref.current;
+    if (!el) return;
+    setAtTop(el.scrollTop < 4);
+    setAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 4);
+  };
+  useEffect(() => {
+    update();
+    const el = ref.current;
+    if (!el) return;
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+  return (
+    <div className={cn("relative min-h-0", className)}>
+      <div ref={ref} onScroll={update} className="max-h-[inherit] h-full overflow-y-auto overscroll-contain">
+        {children}
+      </div>
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-background to-transparent transition-opacity duration-200",
+          atTop ? "opacity-0" : "opacity-100",
+        )}
+      />
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-x-0 bottom-0 flex h-12 items-end justify-center bg-gradient-to-t from-background via-background/80 to-transparent pb-1 transition-opacity duration-200",
+          atBottom ? "opacity-0" : "opacity-100",
+        )}
+      >
+        <ChevronDown className="size-4 text-muted-foreground motion-safe:animate-bounce" />
+      </div>
+    </div>
+  );
+}
 
 type Props = {
   entry: NavDropdownEntry;
@@ -20,7 +69,8 @@ function TemplateFlyout({ groups, onNavigate }: { groups: NavTemplateGroup[]; on
 
   return (
     <div className="flex max-h-[76vh] w-[640px] max-w-[78vw] overflow-hidden rounded-2xl border border-border bg-background shadow-xl">
-      <ul className="w-[190px] shrink-0 overflow-y-auto overscroll-contain border-r border-border p-2">
+      <ScrollableY className="max-h-[76vh] w-[190px] shrink-0 border-r border-border">
+      <ul className="p-2">
         {groups.map((g) => (
           <li key={g.key}>
             {/* 올리면 오른쪽에 시안이 펼쳐지고, 누르면 그 업종만 걸러진 전체 목록으로 간다 */}
@@ -42,9 +92,11 @@ function TemplateFlyout({ groups, onNavigate }: { groups: NavTemplateGroup[]; on
           </li>
         ))}
       </ul>
+      </ScrollableY>
 
       {active && (
-        <div className="flex-1 overflow-y-auto overscroll-contain p-3">
+        <ScrollableY className="max-h-[76vh] flex-1">
+        <div className="p-3">
           <div className="flex items-baseline justify-between gap-2 px-1 pb-2">
             <p className="text-xs font-semibold text-muted-foreground">
               {active.label} · 디자인 {active.designs.length}종
@@ -84,6 +136,7 @@ function TemplateFlyout({ groups, onNavigate }: { groups: NavTemplateGroup[]; on
             ))}
           </ul>
         </div>
+        </ScrollableY>
       )}
     </div>
   );

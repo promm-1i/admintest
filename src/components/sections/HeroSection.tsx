@@ -3,98 +3,197 @@ import { HeroFluid } from "@/components/sections/HeroFluid";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
+import { SAMPLES } from "@/lib/samples";
 import { cn } from "@/lib/utils";
-import hospitalShot from "@/assets/images/hospital_solution_thumbnail.jpg";
-import academyShot from "@/assets/images/academy_solution_thumbnail.jpg";
-import rentcarShot from "@/assets/images/rentcar_solution_thumbnail.jpg";
-import interiorShot from "@/assets/images/interior_solution_thumbnail.jpg";
-import realEstateShot from "@/assets/images/real_estate_platform_thumbnail.jpg";
 
 /**
- * ClipCut 레퍼런스 방식의 히어로: 딥 다크 배경 + 중앙 정렬 타이포 + 아래에
- * 실제 구축 사이트 5장이 3D 원근(rotateY) 아치로 늘어선다.
- * 등장은 스프링 오버슈트 + 중앙→바깥 스태거, hover 시 해당 카드가 정면으로 떠오른다.
- * 커서를 따라오는 무지개 글로우(회전하는 무지개 원판 + 반짝이 입자)가 배경에 흐른다.
- * prefers-reduced-motion 사용자는 펼쳐진 정적 아치만 본다.
+ * ClipCut 레퍼런스 구도의 히어로: 딥 다크 배경 + 중앙 정렬 타이포 + 하단에
+ * 템플릿 카드가 3D 코버플로우 아치(가운데 작고 바깥으로 갈수록 큼)로 화면 좌우를 꽉 채운다.
+ * - 카드는 임의 선정이 아니라 실제 템플릿 데이터에서 최신순 · 업종 중복 없이 12개를 파생한다
+ * - 좌클릭 드래그(모바일 스와이프)로 좌우 스크롤되며 무한 순환한다
+ * - 배경에는 커서를 따라오는 WebGL 무지개 유체와 잔별 42개
+ * - prefers-reduced-motion 사용자는 정적 아치를 본다
  */
 
-const SHOWCASE = [
-  { src: rentcarShot, label: "로드인 렌트카", href: "/samples/rentcar-solution", rotY: 34, x: -430, y: 6, w: 250 },
-  { src: hospitalShot, label: "리엔 클리닉", href: "/samples/hospital-solution", rotY: 18, x: -232, y: -14, w: 205 },
-  { src: academyShot, label: "세움학원", href: "/samples/academy-solution", rotY: 0, x: 0, y: -26, w: 180 },
-  { src: interiorShot, label: "오브제바스", href: "/samples/interior-solution", rotY: -18, x: 232, y: -14, w: 205 },
-  { src: realEstateShot, label: "부동산 플랫폼", href: "/samples/commercial-real-estate-platform", rotY: -34, x: 430, y: 6, w: 250 },
-];
+/** 최신 템플릿(배열 앞이 최신)에서 업종 중복 없이 12개 — 히어로 카드의 단일 출처 */
+const HERO_ITEMS = (() => {
+  const seen = new Set<string>();
+  const items: { src: string; label: string; href: string }[] = [];
+  for (const s of SAMPLES) {
+    if (!s.industryKey || !s.type.includes("landing-template") || !s.image) continue;
+    if (seen.has(s.industryKey)) continue;
+    seen.add(s.industryKey);
+    items.push({
+      src: s.image,
+      label: s.industry.replace(" 홈페이지", ""),
+      href: `/samples/${s.slug}`,
+    });
+    if (items.length >= 12) break;
+  }
+  return items;
+})();
 
 /** 스프링 느낌의 오버슈트 곡선 — 라이브러리 없이 CSS transition으로 낸다 */
 const SPRING = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 
-/** 레퍼런스처럼 배경에 흩뿌려진 작은 별 입자 (%, 크기 px, 깜빡임 지연 s) */
-const STARS = [
-  { x: 8, y: 18, size: 3, delay: 0 },
-  { x: 16, y: 62, size: 2, delay: 1.3 },
-  { x: 26, y: 34, size: 2, delay: 2.1 },
-  { x: 38, y: 12, size: 3, delay: 0.6 },
-  { x: 55, y: 8, size: 2, delay: 1.8 },
-  { x: 66, y: 28, size: 3, delay: 0.2 },
-  { x: 78, y: 15, size: 2, delay: 2.6 },
-  { x: 88, y: 42, size: 3, delay: 1.0 },
-  { x: 93, y: 68, size: 2, delay: 0.4 },
-  { x: 72, y: 58, size: 2, delay: 1.5 },
-];
+/** 레퍼런스처럼 촘촘한 잔별 — 고정 시드로 42개를 흩뿌린다 (렌더마다 위치가 흔들리지 않게) */
+const STARS = Array.from({ length: 42 }, (_, i) => {
+  const r1 = Math.abs(Math.sin(i * 12.9898) * 43758.5453) % 1;
+  const r2 = Math.abs(Math.sin(i * 78.233) * 12543.2341) % 1;
+  const r3 = Math.abs(Math.sin(i * 39.425) * 26251.5459) % 1;
+  return {
+    x: +(r1 * 100).toFixed(2),
+    y: +(r2 * 78).toFixed(2), // 하단 카드 영역은 피한다
+    size: r3 > 0.75 ? 3 : 2,
+    delay: +(r3 * 4).toFixed(2),
+    dim: r3 < 0.4, // 일부는 더 흐릿하게 — 깊이감
+  };
+});
 
-function ShowcaseArc() {
+/**
+ * 드래그로 도는 무한 코버플로우.
+ * 카드의 크기·기울기·높이는 화면 중앙으로부터의 거리 d(-1~1)의 연속 함수라
+ * 어느 위치로 굴려도 "가운데 작고 바깥이 큰" 레퍼런스 곡선이 유지된다.
+ */
+function CoverflowShowcase() {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
-  const [opened, setOpened] = useState(false);
-  const [hovered, setHovered] = useState<number | null>(null);
-  useEffect(() => {
-    const t = window.setTimeout(() => setOpened(true), 300);
-    return () => window.clearTimeout(t);
-  }, []);
-  const open = opened || reducedMotion;
   const isDesktop = useMediaQuery("(min-width: 1024px)");
-  const k = isDesktop ? 1 : 0.42;
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const draggedRef = useRef(false);
+  const [cw, setCw] = useState(1440);
+  const [offset, setOffset] = useState(0);
+  const [opened, setOpened] = useState(false);
+  const [entranceDone, setEntranceDone] = useState(false);
+  const [hovered, setHovered] = useState<number | null>(null);
+
+  useEffect(() => {
+    const t1 = window.setTimeout(() => setOpened(true), 300);
+    const t2 = window.setTimeout(() => setEntranceDone(true), 1700);
+    return () => {
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setCw(el.clientWidth));
+    ro.observe(el);
+    setCw(el.clientWidth);
+    return () => ro.disconnect();
+  }, []);
+
+  // 좌클릭 드래그 / 터치 스와이프로 offset 이동
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let dragging = false;
+    let lastX = 0;
+    const onDown = (e: PointerEvent) => {
+      if (e.pointerType === "mouse" && e.button !== 0) return;
+      dragging = true;
+      draggedRef.current = false;
+      lastX = e.clientX;
+      el.setPointerCapture(e.pointerId);
+    };
+    const onMove = (e: PointerEvent) => {
+      if (!dragging) return;
+      const dx = e.clientX - lastX;
+      lastX = e.clientX;
+      if (Math.abs(dx) > 2) draggedRef.current = true;
+      setOffset((o) => o - dx);
+    };
+    const onUp = (e: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      el.releasePointerCapture(e.pointerId);
+    };
+    el.addEventListener("pointerdown", onDown);
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerup", onUp);
+    el.addEventListener("pointercancel", onUp);
+    return () => {
+      el.removeEventListener("pointerdown", onDown);
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerup", onUp);
+      el.removeEventListener("pointercancel", onUp);
+    };
+  }, []);
+
+  const open = opened || reducedMotion;
+  const n = HERO_ITEMS.length;
+  const spacing = cw * (isDesktop ? 0.115 : 0.3);
+  const total = n * spacing;
+  const half = cw / 2;
 
   return (
     <div
-      className={cn("relative mx-auto w-full", isDesktop ? "h-[290px]" : "h-[150px]")}
-      style={{ perspective: "1100px" }}
-      aria-label="실제 구축한 홈페이지 모음"
+      ref={containerRef}
+      onClickCapture={(e) => {
+        // 드래그 직후의 클릭은 카드 이동으로 이어지지 않게 삼킨다
+        if (draggedRef.current) {
+          e.preventDefault();
+          e.stopPropagation();
+          draggedRef.current = false;
+        }
+      }}
+      onDragStart={(e) => e.preventDefault()}
+      className={cn(
+        "relative w-full cursor-grab touch-pan-y select-none active:cursor-grabbing",
+        isDesktop ? "h-[330px]" : "h-[190px]",
+      )}
+      style={{ perspective: "1300px" }}
+      aria-label="실제 구축한 홈페이지 템플릿 — 드래그해서 더 보기"
     >
-      {SHOWCASE.map((card, i) => {
-        const centerDist = Math.abs(i - 2); // 중앙에서 먼 카드일수록 늦게 등장
+      {HERO_ITEMS.map((card, i) => {
+        // 무한 순환: 카드의 화면상 x를 [-total/2, total/2) 범위로 감는다
+        const raw = i * spacing - offset;
+        const x = ((((raw + total / 2) % total) + total) % total) - total / 2;
+        if (Math.abs(x) > half + spacing * 1.6) return null; // 화면 밖 여유분만 렌더
+
+        const d = Math.max(-1, Math.min(1, x / half)); // 중앙 거리 -1~1
+        const ad = Math.abs(d);
+        const w = (isDesktop ? 1 : 0.62) * (165 + 175 * ad);
+        const rotY = -42 * d;
+        const y = (isDesktop ? 1 : 0.6) * (14 - 44 * ad);
         const on = hovered === i;
+
         return (
           <Link
             key={card.href}
             to={card.href}
-            aria-label={`${card.label} 구축 사례 보기`}
+            aria-label={`${card.label} 템플릿 보기`}
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
             className="group absolute left-1/2 top-1/2 block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-white"
             style={{
-              width: `${card.w * k}px`,
-              zIndex: on ? 30 : 10 - centerDist,
+              width: `${w}px`,
+              zIndex: on ? 200 : 100 - Math.round(ad * 60),
               transform: open
-                ? `translate(calc(-50% + ${card.x * k}px), calc(-50% + ${card.y * k}px))`
-                : "translate(-50%, calc(-50% + 90px))",
+                ? `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`
+                : `translate(calc(-50% + ${x}px), calc(-50% + 110px))`,
               opacity: open ? 1 : 0,
-              transition: reducedMotion
-                ? "none"
-                : `transform 900ms ${SPRING} ${centerDist * 110}ms, opacity 450ms ease ${centerDist * 110}ms`,
+              transition:
+                reducedMotion || entranceDone
+                  ? "none"
+                  : `transform 900ms ${SPRING} ${Math.round(ad * 260)}ms, opacity 450ms ease ${Math.round(ad * 260)}ms`,
             }}
           >
-            {/* 안쪽 래퍼가 3D 기울기와 hover 리프트를 담당 — 등장 스태거와 충돌하지 않는다 */}
+            {/* 안쪽 래퍼가 3D 기울기와 hover 리프트 담당 — 드래그 이동과 충돌하지 않는다 */}
             <div
               className="overflow-hidden rounded-xl bg-neutral-900 shadow-[0_18px_50px_rgba(0,0,0,0.55)] ring-1 ring-white/15 transition-shadow group-hover:ring-white/40"
               style={{
-                transform: open
-                  ? `rotateY(${on ? 0 : card.rotY}deg) scale(${on ? 1.14 : 1})`
-                  : "rotateY(0deg) scale(0.82)",
-                transition: reducedMotion ? "none" : `transform 340ms ${SPRING}`,
+                transform: `rotateY(${on ? 0 : rotY}deg) scale(${on ? 1.1 : 1})`,
+                transition: reducedMotion ? "none" : `transform 300ms ${SPRING}`,
               }}
             >
-              <img src={card.src} alt="" className="aspect-[16/11] w-full object-cover object-top" />
+              <img
+                src={card.src}
+                alt=""
+                draggable={false}
+                className="pointer-events-none aspect-[16/11] w-full object-cover object-top"
+              />
               <span
                 className={cn(
                   "pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2.5 pb-1.5 pt-6 text-[10px] font-bold text-white transition-opacity duration-200",
@@ -115,10 +214,7 @@ export function HeroSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
 
   return (
-    <section
-      ref={sectionRef}
-      className="relative overflow-hidden bg-[#15100E] text-white"
-    >
+    <section ref={sectionRef} className="relative overflow-hidden bg-[#15100E] text-white">
       {/* 배경 앰비언트 — 레퍼런스처럼 따뜻한 비네트 */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute -top-32 left-1/2 h-96 w-[560px] -translate-x-1/2 rounded-full bg-[#B20D1A]/25 blur-[130px]" />
@@ -128,12 +224,15 @@ export function HeroSection() {
       {/* 커서를 따라 소용돌이치는 무지개 유체 (레퍼런스 설정값 그대로) */}
       <HeroFluid targetRef={sectionRef} />
 
-      {/* 배경 별 입자 — 레퍼런스의 잔별 */}
+      {/* 배경 잔별 */}
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {STARS.map((sp) => (
           <span
             key={`${sp.x}-${sp.y}`}
-            className="absolute rounded-full bg-white/70 motion-safe:animate-[heroTwinkle_3.2s_ease-in-out_infinite] motion-reduce:opacity-60"
+            className={cn(
+              "absolute rounded-full motion-safe:animate-[heroTwinkle_3.2s_ease-in-out_infinite] motion-reduce:opacity-60",
+              sp.dim ? "bg-white/40" : "bg-white/75",
+            )}
             style={{
               left: `${sp.x}%`,
               top: `${sp.y}%`,
@@ -176,11 +275,11 @@ export function HeroSection() {
         </p>
       </div>
 
-      {/* 실제 구축 사이트 3D 아치 */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-14 pt-8 sm:px-6 lg:pb-20">
-        <ShowcaseArc />
-        <p className="mt-5 text-center text-xs font-medium text-white/45">
-          실제로 저희가 만든 홈페이지입니다 — 카드를 눌러 그대로 확인하세요
+      {/* 최신 템플릿 코버플로우 — 좌우 끝까지 꽉 차고, 드래그로 순환 */}
+      <div className="relative z-10 w-full pb-12 pt-8 lg:pb-16">
+        <CoverflowShowcase />
+        <p className="mt-4 text-center text-xs font-medium text-white/45">
+          실제로 저희가 만든 홈페이지입니다 — 좌우로 드래그하고, 카드를 눌러 그대로 확인하세요
         </p>
       </div>
     </section>

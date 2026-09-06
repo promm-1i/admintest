@@ -1,6 +1,5 @@
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { PortfolioSection } from "@/components/sections/PortfolioSection";
 import { FeaturesSection } from "@/components/sections/FeaturesSection";
 import { AdminFeatureSection } from "@/components/sections/AdminFeatureSection";
 import { CodeVsImageSection } from "@/components/sections/CodeVsImageSection";
@@ -25,7 +24,6 @@ export default function Home() {
     <div>
       {/* 무엇을 만드는가 */}
       <HeroSection />
-      <PortfolioSection />
 
       {/* 시작하는 두 가지 방법 */}
       <StartOptionsSection />
