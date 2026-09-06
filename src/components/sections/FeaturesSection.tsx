@@ -136,6 +136,7 @@ export function FeaturesSection() {
                   <li key={g.title} className="shrink-0 lg:shrink">
                     <button
                       type="button"
+                      aria-pressed={on}
                       onMouseEnter={() => pickGroup(gi)}
                       onFocus={() => pickGroup(gi)}
                       onClick={() => pickGroup(gi)}
@@ -164,6 +165,7 @@ export function FeaturesSection() {
                   <li key={it.label} className="shrink-0 lg:shrink">
                     <button
                       type="button"
+                      aria-pressed={on}
                       onMouseEnter={() => setItemIdx(ii)}
                       onFocus={() => setItemIdx(ii)}
                       onClick={() => setItemIdx(ii)}

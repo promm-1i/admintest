@@ -90,6 +90,7 @@ export default function Templates() {
           return (
             <span key={s.value} className="group relative inline-flex">
               <button
+                aria-pressed={isActive}
                 onClick={() => handleSelectStyle(s.value)}
                 className={cn(
                   "rounded-full px-5 py-2 text-sm font-semibold transition-all duration-200",
@@ -124,6 +125,7 @@ export default function Templates() {
           return (
             <button
               key={f.value}
+              aria-pressed={isActive}
               onClick={() => handleSelectIndustry(f.value)}
               className={cn(
                 "shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200",

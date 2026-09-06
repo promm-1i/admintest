@@ -46,8 +46,10 @@ function PortfolioCarousel({ items }: { items: Sample[] }) {
 
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let raf = 0;
+    let running = false;
     let last = performance.now();
     const tick = (now: number) => {
+      if (!running) return;
       const dt = Math.min(now - last, 100);
       last = now;
       // 우→좌 흐름: 카드가 왼쪽으로 이동하도록 scrollLeft를 늘린다
@@ -55,7 +57,19 @@ function PortfolioCarousel({ items }: { items: Sample[] }) {
       wrap();
       raf = requestAnimationFrame(tick);
     };
-    if (!reduceMotion) raf = requestAnimationFrame(tick);
+    // 섹션이 화면 밖일 때는 프레임 루프를 완전히 멈춰 CPU를 쓰지 않는다
+    const io = new IntersectionObserver(([entry]) => {
+      if (reduceMotion) return;
+      if (entry?.isIntersecting && !running) {
+        running = true;
+        last = performance.now();
+        raf = requestAnimationFrame(tick);
+      } else if (!entry?.isIntersecting && running) {
+        running = false;
+        cancelAnimationFrame(raf);
+      }
+    });
+    io.observe(el);
 
     // 마우스 좌클릭 드래그로 좌우 이동 (터치는 브라우저 기본 스와이프 스크롤을 그대로 쓴다)
     let dragging = false;
@@ -89,7 +103,9 @@ function PortfolioCarousel({ items }: { items: Sample[] }) {
     el.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
+      running = false;
       cancelAnimationFrame(raf);
+      io.disconnect();
       el.removeEventListener("pointerdown", onPointerDown);
       el.removeEventListener("pointermove", onPointerMove);
       el.removeEventListener("pointerup", onPointerUp);
@@ -114,6 +130,13 @@ function PortfolioCarousel({ items }: { items: Sample[] }) {
       }}
       onTouchEnd={() => {
         pausedRef.current = false;
+      }}
+      onFocus={() => {
+        pausedRef.current = true;
+      }}
+      onBlur={(e) => {
+        // 트랙 안에서 카드 간 이동은 유지하고, 완전히 벗어날 때만 다시 흐르게 한다
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) pausedRef.current = false;
       }}
       onClickCapture={(e) => {
         // 드래그 직후 발생하는 클릭은 카드 이동으로 이어지지 않게 삼킨다
@@ -168,6 +191,7 @@ export function PortfolioSection() {
             return (
               <button
                 key={f.value}
+                aria-pressed={isActive}
                 onClick={() => setSelectedType(f.value)}
                 className={cn(
                   "shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200",

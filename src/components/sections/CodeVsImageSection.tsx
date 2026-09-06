@@ -24,7 +24,7 @@ function SamplePage({ asImage }: { asImage?: boolean }) {
       <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#B20D1A]">
         Green Home Interior
       </p>
-      <h4 className="mt-2 text-xl font-bold text-neutral-900">그린홈 인테리어</h4>
+      <h3 className="mt-2 text-xl font-bold text-neutral-900">그린홈 인테리어</h3>
       <p className="mt-0.5 text-sm font-medium text-neutral-600">주방 · 욕실 · 전체 리모델링 전문</p>
       <p className="mt-3 text-[13px] leading-relaxed text-neutral-500 break-keep">
         상담부터 실측, 자재 선정, 시공, 마감 점검까지 한 팀이 책임지고 진행합니다. 시공 후에도
