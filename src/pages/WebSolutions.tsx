@@ -45,15 +45,13 @@ const INCLUDED_IN_SETUP = [
   "도메인 1개 (첫 1년 무료)",
 ];
 
-/** 요금제 구분 없이 맞춤형에 모두 들어가는 기능 */
+/** 요금제 구분 없이 프리미엄 라인에 모두 들어가는 기능 */
 const COMMON_FEATURES = [
   "관리자 페이지 (콘텐츠 · 데이터 관리)",
   "데이터베이스 연동",
   "검색 · 필터 기능",
   "문의 · 예약 접수 관리",
   "직원별 접근 권한 설정",
-  "작업 이력(활동 로그) 관리",
-  "통계 대시보드",
   "업종 맞춤 기능",
   "기본 SEO 세팅",
   "유지보수 옵션 (월 3회, 선택)",
@@ -68,8 +66,8 @@ const PREMIUM_DESIGNS = getPremiumDesigns();
 
 export default function WebSolutions() {
   usePageTitle(
-    "업종별 맞춤 홈페이지 제작 — NOVERIQ",
-    "부동산, 렌트카, 병원 등 업종에 맞는 관리자 시스템과 기능까지 갖춘 맞춤형 홈페이지 제작 범위와 요금을 안내합니다.",
+    "프리미엄 디자인 홈페이지 제작 — NOVERIQ",
+    "프리미엄 등급 디자인을 기반으로 관리자 시스템과 업종 기능까지 갖춰 제작하는 프리미엄 라인의 범위와 요금을 안내합니다.",
   );
 
   return (
@@ -79,15 +77,15 @@ export default function WebSolutions() {
           PREMIUM LINE
         </span>
         <p className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground">
-          CUSTOM BY INDUSTRY
+          PREMIUM DESIGN
         </p>
       </div>
       <h1 className="mt-4 text-3xl font-semibold break-keep">
-        업종별 맞춤 홈페이지 제작
+        프리미엄 디자인 홈페이지 제작
       </h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        정해진 템플릿을 고르는 것이 아니라, 업종의 업무 방식에 맞춰 화면과 기능을 처음부터 설계하는
-        프리미엄 라인입니다. 반응형 제작과 관리자 시스템, 데이터베이스까지 모두 기본으로 포함되며,
+        기본 템플릿보다 한 등급 위의 프리미엄 디자인을 기반으로, 문구 · 이미지 · 구성을 브랜드에 맞춰
+        완성하는 라인입니다. 반응형 제작과 관리자 시스템, 데이터베이스까지 모두 기본으로 포함되며,
         정확한 기능 구성과 견적은 상담 후 확정됩니다.
       </p>
 
@@ -111,11 +109,11 @@ export default function WebSolutions() {
         </FadeIn>
         <FadeIn direction="right" delay={100}>
         <div className="h-full rounded-2xl border border-primary/40 bg-primary/[0.04] p-5">
-          <p className="text-xs font-bold text-primary">맞춤형 · 프리미엄</p>
-          <p className="mt-1.5 text-sm font-semibold text-foreground">업무 방식에 맞춰 처음부터</p>
+          <p className="text-xs font-bold text-primary">프리미엄 디자인</p>
+          <p className="mt-1.5 text-sm font-semibold text-foreground">한 등급 위의 디자인으로 완성도 있게</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
-            화면 구성과 기능을 직접 설계합니다. 반응형 제작과 관리자 시스템, 데이터베이스, 직원 권한
-            관리까지 모두 기본으로 포함됩니다.
+            프리미엄 등급 디자인을 기반으로 브랜드에 맞춰 완성합니다. 반응형 제작과 관리자 시스템,
+            데이터베이스, 직원 권한 관리까지 모두 기본으로 포함됩니다.
           </p>
           <p className="mt-3 text-xs font-semibold text-primary">300만 원부터</p>
         </div>
@@ -262,7 +260,7 @@ export default function WebSolutions() {
         </FadeIn>
       </div>
 
-      <h3 className="mt-10 text-base font-semibold">맞춤형에 모두 포함되는 기능</h3>
+      <h3 className="mt-10 text-base font-semibold">프리미엄 라인에 모두 포함되는 기능</h3>
       <FadeIn>
       <ul className="mt-4 grid gap-2.5 rounded-2xl border border-border bg-card p-6 sm:grid-cols-2">
         {COMMON_FEATURES.map((f) => (

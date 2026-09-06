@@ -64,83 +64,106 @@ h2.sec{font-size:clamp(38px,5vw,68px);line-height:1.1;letter-spacing:-.03em;font
 .star.x4::before{content:"✦";position:absolute;inset:0;color:#FFC98F;font-size:8px;line-height:1}
 @keyframes tw{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:.9;transform:scale(1)}}
 
-/* ── 헤더: 플로팅 알약 ── */
-header{position:fixed;top:18px;left:0;right:0;z-index:50}
-.hbar{max-width:1310px;margin:0 auto;height:64px;padding:0 10px 0 22px;display:flex;align-items:center;justify-content:space-between;border-radius:100px;background:rgba(16,10,6,.72);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.08)}
-.logo{display:inline-flex;align-items:center;gap:10px;font-size:19px;font-weight:700;letter-spacing:-.03em}
+/* ── 헤더: 플로팅 알약 — 실측: 1312×72 r100 · top 32 · bg 좌→우 그라데이션 + blur15 · 로고 inset 16 · 링크 16px/.6 gap25 중앙 · 우측 흰 알약 155×48 ── */
+header{position:fixed;top:32px;left:0;right:0;z-index:50}
+.hbar{position:relative;max-width:1312px;margin:0 auto;height:72px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;border-radius:100px;background:linear-gradient(90deg,rgba(0,0,0,.05) 0%,rgba(255,255,255,.05) 64.6%);backdrop-filter:blur(15px)}
+.logo{display:inline-flex;align-items:center;gap:12px;font-size:19px;font-weight:700;letter-spacing:-.03em}
 .logo em{font-style:normal;color:var(--orange2)}
-.logo svg{width:30px;height:30px}
-nav ul{display:flex;align-items:center;gap:6px;list-style:none}
-nav a{display:inline-block;padding:10px 14px;border-radius:100px;font-size:15px;font-weight:500;color:var(--mute8);transition:color .2s,background .2s}
-nav a:hover{color:#fff;background:rgba(255,255,255,.06)}
-nav a.cta{background:linear-gradient(180deg,#FF7A2E,#E4560F);color:#fff;padding:11px 20px}
+.logo svg{width:24px;height:24px}
+nav{position:absolute;left:50%;transform:translateX(-50%)}
+nav ul{display:flex;align-items:center;gap:25px;list-style:none}
+nav a{display:inline-block;font-size:16px;font-weight:400;letter-spacing:-.02em;color:rgba(255,255,255,.6);transition:color .2s}
+nav a:hover{color:#fff}
+.hcta{display:inline-flex;align-items:center;gap:8px;width:155px;height:48px;justify-content:center;border-radius:100px;background:#fff;color:#0B0603;font-size:16px;font-weight:500;letter-spacing:-.02em;transition:transform .25s ease}
+.hcta svg{width:15px;height:15px;stroke:#0B0603;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s ease}
+.hcta:hover svg{transform:translate(2px,-2px)}
 .burger{display:none;width:44px;height:44px;border-radius:100px;place-items:center}
 .burger span{display:block;width:18px;height:2px;background:#fff;position:relative}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:18px;height:2px;background:#fff}
 .burger span::before{top:-6px}.burger span::after{top:6px}
 
-/* ── 0 히어로 — 주황 선(sun) + 3D 터널 갤러리 ── */
-.hero{position:relative;padding:170px 0 0;overflow:clip}
-.hero .sun{position:absolute;left:50%;top:335px;transform:translateX(-50%);width:900px;height:900px;border-radius:50%;background:radial-gradient(circle at 50% 30%,#FFA45C 0%,#F1610F 42%,rgba(158,52,4,.55) 62%,rgba(9,4,1,0) 74%);filter:blur(4px);mask-image:linear-gradient(180deg,#000 46%,rgba(0,0,0,0) 72%);-webkit-mask-image:linear-gradient(180deg,#000 46%,rgba(0,0,0,0) 72%)}
-.hero .sun::before{content:"";position:absolute;inset:-120px;border-radius:50%;background:radial-gradient(circle,rgba(250,97,20,.35),rgba(9,4,1,0) 70%);filter:blur(40px)}
-.hero .halo{position:absolute;left:50%;top:290px;transform:translateX(-50%);width:1180px;height:1180px;border-radius:50%;border:1px solid rgba(255,158,92,.14);box-shadow:0 0 120px rgba(250,97,20,.12) inset}
-.hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
-.hero .chip .sp{color:var(--orange2)}
-.hero h1{margin-top:26px;font-size:clamp(42px,5.2vw,72px);line-height:1.1;letter-spacing:-.03em;font-weight:500}
-.hero .sub{margin-top:22px;max-width:520px}
-.hero-cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
-/* 터널: 좌우 대형 벽 + 중앙 2:3 카드 4장 (실측: 중앙 133~200×199~300, 벽은 뷰포트 밖까지) */
-.tunnel{position:relative;width:100%;height:400px;margin-top:48px;perspective:1100px}
-.wall{position:absolute;top:-30px;width:min(46vw,660px);height:470px;border-radius:10px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.55)}
-.wall img{width:100%;height:100%;object-fit:cover}
-.wall.l{left:max(-350px,-24vw);transform:rotateY(48deg);transform-origin:0% 50%}
-.wall.r{right:max(-350px,-24vw);transform:rotateY(-48deg);transform-origin:100% 50%}
-.trow{position:relative;display:flex;align-items:center;justify-content:center;gap:30px;padding-top:34px}
-.tcard{border-radius:20px;overflow:hidden;background:var(--panel);box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.tcard img{width:100%;height:100%;object-fit:cover}
-.tcard.big{width:200px;height:300px}
-.tcard.smol{width:172px;height:258px}
-/* 서비스 알약 스트립 */
-.svc{position:relative;margin:26px auto 0;display:flex;align-items:center;gap:26px;height:58px;padding:0 30px;border-radius:100px;background:rgba(20,12,7,.8);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px);width:max-content;max-width:100%}
-.svc span{display:inline-flex;align-items:center;gap:10px;font-size:15px;font-weight:500;color:var(--mute8)}
-.svc i{font-style:normal;color:var(--orange);font-size:11px}
-/* 바닥 플레인 */
-.floor{position:relative;height:330px;margin-top:-8px;transform-style:preserve-3d;perspective:900px;overflow:clip}
-.floor .plane{position:absolute;left:50%;top:30px;width:1400px;height:620px;transform:translateX(-50%) rotateX(58deg);transform-origin:top center;background:radial-gradient(58% 70% at 50% 12%,rgba(224,88,16,.5),rgba(58,22,6,.35) 55%,rgba(9,4,1,0) 78%);border-radius:24px}
+/* ── 0 히어로 — 실측(1440): 칩 y196 → h1 y270 (70/84 크림) → 서브 y478 (20/28 .6) → CTA y574 (48h) → 원통 y702 (1200×240 · persp 500) → 스트립 y1016 (632×51) · 섹션 h1137 ── */
+.hero{position:relative;height:1137px;overflow:clip}
+/* 배경: 중앙 상단 웜 브라운 워시 */
+.hero .wash{position:absolute;inset:0;background:radial-gradient(56% 52% at 50% 34%,#2E190D 0%,rgba(24,12,6,.6) 55%,rgba(9,4,1,0) 82%)}
+/* 좌상단 코너 글로우 — 실측 990×955 at (-367,-216): 코어 볼 + 동심 링 2겹 */
+.hero .corner{position:absolute;left:-367px;top:-216px;width:990px;height:955px;pointer-events:none}
+.hero .corner i{position:absolute;border-radius:50%}
+.hero .corner .c1{inset:27%;background:radial-gradient(circle at 44% 42%,#FFAA5E 0%,#F1610F 40%,rgba(202,72,10,.85) 60%,rgba(120,38,7,.35) 78%,rgba(9,4,1,0) 92%);filter:blur(8px)}
+.hero .corner .c2{inset:19%;border:30px solid rgba(216,82,14,.2);filter:blur(12px)}
+.hero .corner .c3{inset:10%;border:26px solid rgba(216,82,14,.09);filter:blur(14px)}
+/* 중앙 글로우 링 — 실측: 809×570 SVG 링 2겹 blur 60/100 plus-lighter at (308,204). 은은한 워밍만 */
+.hero .gring{position:absolute;left:308px;top:204px;width:809px;height:570px;pointer-events:none;mix-blend-mode:plus-lighter;background:radial-gradient(ellipse 46% 52% at 62% 58%,rgba(9,4,1,0) 0 34%,rgba(200,76,14,.3) 47% 55%,rgba(9,4,1,0) 70%)}
+.hero .gring.g1{filter:blur(60px)}
+.hero .gring.g2{filter:blur(100px);opacity:.7}
+.hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:196px}
+.hero .chip{height:34px;padding:0 20px;font-size:16px;letter-spacing:-.02em;font-weight:400;color:#fff}
+.hero .chip::before,.hero .chip::after{display:none}
+.hero .chip .sp{color:var(--orange2);font-size:13px}
+.hero h1{margin-top:40px;font-size:70px;line-height:84px;letter-spacing:-2.1px;font-weight:500;color:var(--cream)}
+.hero .sub{margin-top:40px;max-width:674px;font-size:20px;line-height:28px;letter-spacing:-.8px}
+.hero-cta{margin-top:40px;display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.hero-cta .btn{height:48px;padding:0 24px;font-size:16px}
+.hero-cta .btn-o{background:linear-gradient(rgba(255,123,61,.8),rgba(242,60,5,.8));box-shadow:inset 0 1px 0 rgba(255,255,255,.3)}
+.hero-cta .btn-d{background:rgba(255,255,255,.05);border:1px solid rgba(242,96,15,.5)}
+/* 원통 캐러셀 — 실측 구조 그대로: 컨테이너 1200×240 · perspective(500px) · Arm 7개(1400×240, rotateY 30° 간격) × 카드 2장(260×370 r20, ±90° 회전, backface 숨김) */
+.car-wrap{position:relative;width:1200px;max-width:100%;height:240px;margin:80px auto 0;transform:perspective(500px);transform-style:preserve-3d;cursor:grab}
+.car-wrap.drag{cursor:grabbing}
+.arms{position:absolute;inset:0;transform-style:preserve-3d}
+.arm{position:absolute;left:50%;top:0;width:1400px;height:240px;margin-left:-700px;transform-style:preserve-3d}
+.vb{position:absolute;top:-65px;width:260px;height:370px;border-radius:20px;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--panel)}
+.vb img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.vb.l{left:0;transform:rotateY(90deg)}
+.vb.r{right:0;transform:rotateY(-90deg)}
+/* 서비스 알약 스트립 — 실측 632×51 r48 bg #100B08 blur5, 항목 16/.8 + 주황 ◆ */
+.svc{position:relative;margin:74px auto 0;display:flex;align-items:center;gap:20px;height:51px;padding:0 28px;border-radius:48px;background:#100B08;backdrop-filter:blur(5px);width:max-content;max-width:100%}
+.svc span{display:inline-flex;align-items:center;gap:10px;font-size:16px;letter-spacing:-.02em;color:var(--mute8)}
+.svc span svg{width:17px;height:17px;stroke:var(--mute8);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.svc i{font-style:normal;color:var(--orange);font-size:10px}
 
 /* ── 섹션 공통 여백 ── */
 section{position:relative}
 .pad{padding:120px 0}
 
-/* ── 1 문제 — 모의 UI 카드 3장 (실측 430×447 r20) ── */
-.prob-grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.pcard{border-radius:20px;background:linear-gradient(180deg,var(--panel),rgba(20,12,7,.4));border:1px solid var(--line);padding:24px 30px 34px;overflow:hidden}
-.pcard .ui{height:210px;border-radius:12px;position:relative;overflow:hidden;margin-bottom:26px}
-.pcard h3{font-size:26px;font-weight:500;letter-spacing:-.02em;margin-bottom:12px}
-.pcard p{color:var(--mute);font-size:15.5px;line-height:1.5}
-/* 모의 UI ① 하락 차트 */
-.ui-chart .bars{position:absolute;left:0;right:0;bottom:0;top:44px;display:flex;align-items:flex-end;gap:14px;padding:0 8px}
-.ui-chart .bars i{flex:1;background:linear-gradient(180deg,rgba(250,97,20,.42),rgba(250,97,20,.05));border-radius:4px 4px 0 0}
-.ui-chart .k{position:absolute;left:8px;top:0;font-size:26px;font-weight:600}
-.ui-chart .kk{position:absolute;left:8px;top:34px;font-size:11px;color:var(--dim)}
-.ui-chart .badge{position:absolute;right:6px;top:74px;background:linear-gradient(180deg,#FF7A2E,#E4560F);border-radius:100px;font-size:11px;font-weight:600;padding:6px 10px;box-shadow:0 6px 18px rgba(250,97,20,.4)}
-.ui-chart svg{position:absolute;inset:0;width:100%;height:100%}
-/* 모의 UI ② 원형 재생 */
-.ui-play .ring{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:150px;height:150px;border-radius:50%;background:radial-gradient(circle,#E4560F 0%,rgba(228,86,15,.32) 46%,rgba(9,4,1,0) 72%);display:grid;place-items:center}
-.ui-play .ring::before{content:"";position:absolute;inset:26px;border-radius:50%;background:rgba(9,4,1,.72);border:1px solid rgba(255,255,255,.14)}
-.ui-play .tri{position:relative;width:0;height:0;border-left:16px solid #fff;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
-.ui-play .k{position:absolute;left:8px;top:0;font-size:26px;font-weight:600}
-.ui-play .pct{position:absolute;right:10px;bottom:8px;font-size:30px;font-weight:600}
-.ui-play .tag{position:absolute;border-radius:100px;font-size:11px;font-weight:600;padding:6px 10px;background:rgba(9,4,1,.7);border:1px solid rgba(255,255,255,.14)}
-.ui-play .tag.t1{right:8px;top:6px}.ui-play .tag.t2{left:8px;bottom:34px}
-/* 모의 UI ③ 주간 캘린더 */
-.ui-cal .t{font-size:15px;font-weight:600;padding:6px 8px 0;color:var(--mute8)}
-.ui-cal .days{display:flex;gap:12px;justify-content:space-between;padding:20px 10px 0;font-size:10px;color:var(--dim);letter-spacing:.06em}
-.ui-cal .dots{display:flex;gap:12px;justify-content:space-between;padding:12px 10px 0}
-.ui-cal .dots i{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.07);display:grid;place-items:center;font-size:13px;font-style:normal;color:rgba(255,255,255,0)}
-.ui-cal .dots i.on{background:linear-gradient(180deg,#FF7A2E,#E4560F);color:#fff}
-.ui-cal .bar{margin:26px 10px 0;height:8px;border-radius:100px;background:rgba(255,255,255,.08);overflow:hidden}
-.ui-cal .bar i{display:block;width:34%;height:100%;background:linear-gradient(90deg,#E4560F,#FF8A3C);border-radius:100px}
+/* ── 1 문제 — 실측: 상단 바닥 플레인(사다리꼴 무대) · 카드 430×447 r20 gap18 · 모의 UI 366×255 r8 ── */
+.prob{position:relative;overflow:clip;padding:204px 0 120px}
+.stage{position:absolute;left:0;right:0;top:0;height:470px;pointer-events:none}
+.stage .plane{position:absolute;left:50%;top:0;transform:translateX(-50%);width:1440px;height:470px;clip-path:polygon(27% 0,73% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(70,32,12,.9) 0%,rgba(32,16,8,.5) 40%,rgba(9,4,1,0) 90%)}
+.stage .horizon{position:absolute;left:50%;top:-2px;transform:translateX(-50%);width:680px;height:160px;background:radial-gradient(50% 100% at 50% 0%,rgba(255,132,52,.5),rgba(9,4,1,0) 75%);filter:blur(8px)}
+.prob-grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pcard{border-radius:20px;background:linear-gradient(180deg,#120C08,#0C0704);border:1px solid rgba(255,255,255,.07);padding:30px 32px 40px}
+.pcard .ui{height:255px;border-radius:8px;position:relative;overflow:hidden;margin-bottom:44px;background:linear-gradient(180deg,#2E1608 0%,#160A04 78%)}
+.pcard h3{font-size:26px;font-weight:500;letter-spacing:-.02em;margin-bottom:14px}
+.pcard p{color:var(--mute);font-size:16px;line-height:1.4;letter-spacing:-.02em}
+.pcard .k{position:absolute;left:24px;top:20px;font-size:32px;font-weight:500;letter-spacing:-.03em;color:#fff}
+/* 모의 UI ① 하락 라인 차트 + 월 축 + 이탈 뱃지 */
+.ui-chart svg{position:absolute;left:16px;right:16px;top:64px;width:calc(100% - 32px);height:130px}
+.ui-chart .months{position:absolute;left:24px;right:24px;bottom:16px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.04em;color:rgba(255,255,255,.35)}
+.ui-chart .badge{position:absolute;right:16px;top:128px;background:linear-gradient(180deg,#FF7A2E,#E4560F);border-radius:100px;font-size:12px;font-weight:600;padding:8px 12px;box-shadow:0 6px 18px rgba(250,97,20,.4)}
+/* 모의 UI ② 동심 링 + 재생 + 03% */
+.ui-play .rings{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:210px;height:210px}
+.ui-play .rings i{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.1)}
+.ui-play .rings .r1{inset:0;background:radial-gradient(circle,rgba(228,86,15,.3),rgba(9,4,1,0) 70%)}
+.ui-play .rings .r2{inset:32px;background:rgba(20,10,5,.6)}
+.ui-play .rings .r3{inset:62px;background:rgba(30,14,6,.9)}
+.ui-play .rings svg{position:absolute;inset:-6px;transform:rotate(-80deg)}
+.ui-play .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:46px;height:46px;border-radius:50%;background:linear-gradient(180deg,#FF7A2E,#E4560F);display:grid;place-items:center;box-shadow:0 8px 24px rgba(250,97,20,.5)}
+.ui-play .play span{width:0;height:0;border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
+.ui-play .pct{position:absolute;right:20px;bottom:14px;font-size:34px;font-weight:500;letter-spacing:-.03em}
+/* 모의 UI ③ 주간 업로드 활동 + 산출량 게이지 */
+.ui-cal .lab{position:absolute;left:24px;font-size:10px;letter-spacing:.08em;color:rgba(255,255,255,.35);text-transform:uppercase}
+.ui-cal .l1{top:78px}.ui-cal .l2{top:172px}
+.ui-cal .days{position:absolute;left:24px;right:24px;top:96px;display:flex;justify-content:space-between;font-size:10px;letter-spacing:.05em;color:rgba(255,255,255,.45)}
+.ui-cal .dots{position:absolute;left:24px;right:24px;top:118px;display:flex;justify-content:space-between}
+.ui-cal .dots i{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#3A3431,#1E1A17)}
+.ui-cal .dots i.on{background:radial-gradient(circle at 35% 30%,#FF9A4D,#D24A08)}
+.ui-cal .out{position:absolute;left:24px;top:186px;display:flex;align-items:baseline;gap:8px}
+.ui-cal .out b{font-size:26px;font-weight:500;letter-spacing:-.02em;color:#FF8A3C}
+.ui-cal .out span{font-size:11px;font-weight:600;color:#fff}
+.ui-cal .out em{font-style:normal;font-size:14px;color:rgba(255,255,255,.5);margin-left:18px}
+.ui-cal .bar{position:absolute;left:24px;right:24px;top:228px;height:7px;border-radius:100px;background:rgba(255,255,255,.1)}
+.ui-cal .bar i{position:absolute;left:0;top:0;bottom:0;width:20%;background:linear-gradient(90deg,#E4560F,#FF8A3C);border-radius:100px}
+.ui-cal .bar em{position:absolute;left:21%;top:0;bottom:0;width:11%;background:rgba(255,158,92,.45);border-radius:100px}
 
 /* ── 2 해결 — 좌 헤딩 / 우 CTA + 스탯 4장 (카운트업) ── */
 .fix-head{display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
@@ -157,9 +180,10 @@ section{position:relative}
 .plat{border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel) 0%,rgba(224,88,16,.12) 130%);min-height:530px;display:flex;flex-direction:column;text-align:center;padding:34px 26px 30px;overflow:hidden}
 .plat h3{font-size:30px;font-weight:600;letter-spacing:-.02em}
 .plat h3 em{font-style:normal;background:linear-gradient(180deg,#FFB182,#F1610F);-webkit-background-clip:text;background-clip:text;color:transparent}
-.plat .slot{flex:1;margin:24px -6px;border-radius:14px;overflow:hidden;position:relative}
-.plat .slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.9}
-.plat .slot::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,4,1,.1),rgba(9,4,1,.55))}
+/* 미디어 슬롯 — 레퍼런스는 어두운 바탕 중앙의 3D 플랫폼 아이콘. 이미지를 contain으로 중앙 배치해
+   아이콘 렌더(누끼 PNG)로 갈아끼우면 그대로 재현된다 */
+.plat .slot{flex:1;margin:24px -6px;border-radius:14px;overflow:hidden;position:relative;display:grid;place-items:center;background:radial-gradient(60% 45% at 50% 90%,rgba(224,88,16,.18),rgba(9,4,1,0) 75%)}
+.plat .slot img{width:62%;max-height:76%;object-fit:contain;border-radius:18px;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
 .plat p{font-size:15px;color:var(--mute8);line-height:1.5;max-width:300px;margin:0 auto}
 .mega{margin-top:96px;border-radius:24px;position:relative;overflow:hidden;background:#0D0805;border:1px solid var(--line);padding:120px 90px}
 .mega .edge{position:absolute;top:0;right:0;bottom:0;width:42%;background:linear-gradient(90deg,rgba(13,8,5,0),rgba(178,46,10,.55) 60%,rgba(224,88,16,.75));mask-image:linear-gradient(90deg,transparent,#000 40%)}
@@ -363,17 +387,22 @@ footer{position:relative;overflow:clip;margin-top:100px}
 @media(max-width:810px){
   .wrap{padding:0 20px}
   header{top:12px}
-  .hbar{height:56px;margin:0 12px}
+  .hbar{height:56px;margin:0 12px;padding:0 8px 0 16px}
   nav{display:none}
+  .hcta{display:none}
   .burger{display:grid}
-  .hero{padding-top:130px}
-  .hero .sun{width:560px;height:560px;top:300px}
-  .wall{display:none}
-  .trow{gap:14px}
-  .tcard.big{width:130px;height:196px}
-  .tcard.smol{width:112px;height:168px}
-  .svc{gap:14px;padding:0 18px;height:auto;flex-wrap:wrap;justify-content:center;border-radius:24px;padding-top:12px;padding-bottom:12px}
-  .floor{height:200px}
+  .hero{height:auto;padding-bottom:56px}
+  .hero-inner{padding-top:130px}
+  .hero .corner{left:-46vw;top:-30vw;width:120vw;height:116vw}
+  .hero .gring{left:50%;transform:translateX(-50%);width:90vw;top:160px}
+  .hero h1{font-size:42px;line-height:1.18;letter-spacing:-1.2px}
+  .hero .sub{font-size:16px;line-height:1.5;letter-spacing:-.4px;max-width:90%}
+  .car-wrap{height:200px;margin-top:48px;transform:perspective(420px)}
+  .arm{width:900px;margin-left:-450px}
+  .vb{width:180px;height:256px;top:-28px;border-radius:14px}
+  .svc{gap:12px;padding:12px 18px;height:auto;flex-wrap:wrap;justify-content:center;border-radius:24px}
+  .prob{padding-top:150px}
+  .stage .plane{width:100vw}
   .pad{padding:80px 0}
   .prob-grid,.plat-grid,.proc-grid,.stat-grid,.res-grid,.res-grid.three,.tes-grid{grid-template-columns:1fr}
   .tquote{grid-column:auto}
@@ -403,9 +432,10 @@ footer{position:relative;overflow:clip;margin-top:100px}
         <li><a href="#service">서비스</a></li>
         <li><a href="#works">작업</a></li>
         <li><a href="#pricing">가격</a></li>
-        <li><a class="cta" href="#contact">문의하기</a></li>
+        <li><a href="#contact">문의</a></li>
       </ul>
     </nav>
+    <a class="hcta" href="#contact">시작하기 <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
     <button class="burger" aria-label="메뉴 열기"><span></span></button>
   </div>
 </header>
@@ -414,44 +444,47 @@ footer{position:relative;overflow:clip;margin-top:100px}
 
 <!-- 0 히어로 -->
 <section class="hero">
+  <div class="wash" aria-hidden="true"></div>
   <div class="streaks"></div>
-  <div class="halo" aria-hidden="true"></div>
-  <div class="sun" aria-hidden="true"></div>
+  <div class="gring g1" aria-hidden="true"></div>
+  <div class="gring g2" aria-hidden="true"></div>
+  <div class="corner" aria-hidden="true"><i class="c3"></i><i class="c2"></i><i class="c1"></i></div>
   <div class="stars" data-stars="26" aria-hidden="true"></div>
-  <div class="wrap hero-inner">
-    <span class="chip rv y30 on-load"><span class="sp">✦</span> 숏폼 영상 편집 스튜디오</span>
+  <div class="hero-inner">
+    <span class="chip rv y30 on-load"><span class="sp">✦</span>&nbsp; 숏폼 영상 편집 스튜디오</span>
     <h1 class="rv bl on-load d1">조회수가 매출이 되는<br>숏폼 영상 편집</h1>
     <p class="sub rv on-load d2">촬영본만 보내세요. 시선을 붙잡는 후킹 편집과 플랫폼별 최적화로,<br>채널이 실제로 성장하는 영상을 만들어 드립니다.</p>
     <div class="hero-cta rv on-load d3">
       <a class="btn btn-o" href="#contact">프로젝트 시작하기 <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
       <a class="btn btn-d" href="#works">작업물 보기</a>
     </div>
-  </div>
-  <div class="tunnel" aria-hidden="true">
-    <div class="wall l"><img src="./assets/hero-1.jpg" alt=""></div>
-    <div class="wall r"><img src="./assets/hero-2.jpg" alt=""></div>
-    <div class="trow">
-      <div class="tcard big rv d2"><img src="./assets/hero-3.jpg" alt=""></div>
-      <div class="tcard smol rv d3"><img src="./assets/hero-4.jpg" alt=""></div>
-      <div class="tcard smol rv d4"><img src="./assets/hero-7.jpg" alt=""></div>
-      <div class="tcard big rv d5"><img src="./assets/hero-8.jpg" alt=""></div>
+    <!-- 원통 캐러셀: 좌클릭 드래그로 회전 (관성 포함) · 등장 래퍼와 분리(.rv transform이 perspective를 덮지 않게) -->
+    <div class="rv on-load d4" style="width:100%">
+    <div class="car-wrap" id="car" aria-label="작업물 갤러리 — 드래그해서 회전">
+      <div class="arms" id="arms">
+        <div class="arm" style="transform:rotateY(0deg)"><div class="vb l"><img src="./assets/hero-1.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-2.jpg" alt=""></div></div>
+        <div class="arm" style="transform:rotateY(30deg)"><div class="vb l"><img src="./assets/hero-3.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-4.jpg" alt=""></div></div>
+        <div class="arm" style="transform:rotateY(60deg)"><div class="vb l"><img src="./assets/hero-7.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-8.jpg" alt=""></div></div>
+        <div class="arm" style="transform:rotateY(90deg)"><div class="vb l"><img src="./assets/hero-12.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-14.jpg" alt=""></div></div>
+        <div class="arm" style="transform:rotateY(120deg)"><div class="vb l"><img src="./assets/hero-16.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-18.jpg" alt=""></div></div>
+        <div class="arm" style="transform:rotateY(150deg)"><div class="vb l"><img src="./assets/hero-20.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-1.jpg" alt=""></div></div>
+        <div class="arm" style="transform:rotateY(180deg)"><div class="vb l"><img src="./assets/hero-3.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-7.jpg" alt=""></div></div>
+      </div>
     </div>
-  </div>
-  <div class="wrap" style="display:flex;justify-content:center">
-    <div class="svc rv on-load d4">
-      <span>▢ 숏폼 영상 편집</span><i>◆</i>
-      <span>✎ 콘텐츠 전략</span><i>◆</i>
-      <span>↗ 성장 최적화</span>
     </div>
-  </div>
-  <div class="floor" aria-hidden="true"><div class="plane"></div>
-    <div class="stars" data-stars="14"></div>
+    <div class="svc rv on-load d5">
+      <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="M10 9.5v5l4.5-2.5z"/></svg>숏폼 영상 편집</span><i>◆</i>
+      <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 14l3-6 2.5 4L16 9"/></svg>콘텐츠 전략</span><i>◆</i>
+      <span><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="M8 15l3-3 2 2 3.5-4"/></svg>성장 최적화</span>
+    </div>
   </div>
 </section>
 
-<!-- 1 문제 -->
-<section class="pad" id="service">
-  <div class="wrap">
+<!-- 1 문제 — 상단 무대(사다리꼴 플레인) + 실측 모의 UI 카드 3장 -->
+<section class="prob" id="service">
+  <div class="stage" aria-hidden="true"><div class="plane"></div><div class="horizon"></div></div>
+  <div class="stars" data-stars="20" aria-hidden="true"></div>
+  <div class="wrap" style="position:relative">
     <div class="sec-head">
       <span class="chip rv y30">문제</span>
       <h2 class="sec rv bl">콘텐츠는 좋은데,<br>성장은 없다면?</h2>
@@ -460,31 +493,38 @@ footer{position:relative;overflow:clip;margin-top:100px}
     <div class="prob-grid">
       <article class="pcard rv y30 d1">
         <div class="ui ui-chart" aria-hidden="true">
-          <span class="k num">2.4만</span><span class="kk">지난주 조회수</span>
-          <div class="bars"><i style="height:82%"></i><i style="height:70%"></i><i style="height:56%"></i><i style="height:44%"></i><i style="height:30%"></i><i style="height:36%"></i></div>
-          <svg viewBox="0 0 370 210" preserveAspectRatio="none"><path d="M10 60 L80 78 L150 104 L220 132 L290 168 L360 152" stroke="#FA6114" stroke-width="2.5" fill="none"/><circle cx="290" cy="168" r="5" fill="#FA6114"/></svg>
+          <span class="k">12만</span>
+          <svg viewBox="0 0 366 130" preserveAspectRatio="none">
+            <path d="M6 18 L66 34 L126 30 L186 58 L246 96 L306 88 L360 108" stroke="#E4560F" stroke-width="2" fill="none"/>
+            <circle cx="246" cy="96" r="5" fill="#FF7A2E"/>
+          </svg>
           <span class="badge">시청자 50% 이탈</span>
+          <div class="months"><span>1월</span><span>2월</span><span>3월</span><span>4월</span><span>5월</span><span>6월</span></div>
         </div>
         <h3>조회수만 있고, 전환이 없다</h3>
         <p>영상은 보는데 프로필 방문도, 문의도 이어지지 않아 매출 변화가 없습니다.</p>
       </article>
       <article class="pcard rv y30 d2">
         <div class="ui ui-play" aria-hidden="true">
-          <span class="k num">1.8만</span>
-          <span class="tag t1">♡ 좋아요</span>
-          <div class="ring"><span class="tri"></span></div>
-          <span class="tag t2">↗ 성장</span>
-          <span class="pct num">0%</span>
+          <span class="k">8.8만</span>
+          <div class="rings">
+            <i class="r1"></i><i class="r2"></i><i class="r3"></i>
+            <svg viewBox="0 0 222 222"><circle cx="111" cy="111" r="104" fill="none" stroke="#F1610F" stroke-width="2" stroke-linecap="round" stroke-dasharray="300 660"/></svg>
+            <span class="play"><span></span></span>
+          </div>
+          <span class="pct">03%</span>
         </div>
         <h3>좋아요가 매출이 되진 않는다</h3>
         <p>순간의 바이럴은 기분 좋지만, 구매로 이어지는 단단한 시청자층은 만들어 주지 않습니다.</p>
       </article>
       <article class="pcard rv y30 d3">
         <div class="ui ui-cal" aria-hidden="true">
-          <p class="t">주간 업로드 일정</p>
-          <div class="days"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span></div>
-          <div class="dots"><i class="on">✓</i><i class="on">✓</i><i></i><i></i><i class="on">✓</i><i></i><i></i></div>
-          <div class="bar"><i></i></div>
+          <span class="lab l1">업로드 활동</span>
+          <div class="days"><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span><span>월</span></div>
+          <div class="dots"><i class="on"></i><i class="on"></i><i></i><i></i><i class="on"></i><i></i><i></i></div>
+          <span class="lab l2">콘텐츠 산출량</span>
+          <div class="out"><b>3 / 10</b><span>이번 주 게시물</span><em>32%</em></div>
+          <div class="bar"><i></i><em></em></div>
         </div>
         <h3>시스템 없인, 꾸준함도 없다</h3>
         <p>계획 없이 그때그때 올리는 업로드는 결과도 들쭉날쭉하고 성장도 만들지 못합니다.</p>
@@ -506,10 +546,10 @@ footer{position:relative;overflow:clip;margin-top:100px}
     </div>
     <div class="hr"></div>
     <div class="stat-grid">
-      <article class="scard rv y30 d1"><span class="lbl">평균 시청 유지율</span><span class="val num" data-cu="87" data-suf="%">0%</span><p>첫 3초를 넘기게 만드는 후킹 중심 편집으로 시청 유지율을 끌어올립니다.</p></article>
-      <article class="scard rv y30 d2"><span class="lbl">누적 납품 영상</span><span class="val num" data-cu="400" data-suf="+">0+</span><p>1인 크리에이터부터 브랜드 채널까지 — 약속한 일정에 맞춰 납품합니다.</p></article>
-      <article class="scard rv y30 d3"><span class="lbl">평균 참여 상승</span><span class="val num" data-cu="3.2" data-suf="X" data-dec="1">0X</span><p>단순 조회수가 아니라 댓글 · 공유 · 저장이 함께 늘어나는 편집을 지향합니다.</p></article>
-      <article class="scard rv y30 d4"><span class="lbl">작업 회신 시간</span><span class="val num" data-cu="24" data-suf="hr">0hr</span><p>오늘 촬영본을 보내면, 늦어도 다음 날 편집 방향과 일정을 회신드립니다.</p></article>
+      <article class="scard rv y30 d1"><span class="lbl">평균 시청 유지율</span><span class="val num" data-cu="68" data-suf="%">0%</span><p>첫 3초를 넘기게 만드는 후킹 중심 편집으로 시청 유지율을 끌어올립니다.</p></article>
+      <article class="scard rv y30 d2"><span class="lbl">누적 납품 영상</span><span class="val num" data-cu="500" data-suf="+">0+</span><p>1인 크리에이터부터 브랜드 채널까지 — 약속한 일정에 맞춰 납품합니다.</p></article>
+      <article class="scard rv y30 d3"><span class="lbl">평균 참여 상승</span><span class="val num" data-cu="3" data-suf="X">0X</span><p>단순 조회수가 아니라 댓글 · 공유 · 저장이 함께 늘어나는 편집을 지향합니다.</p></article>
+      <article class="scard rv y30 d4"><span class="lbl">작업 회신 시간</span><span class="val num" data-cu="48" data-suf="hr">0hr</span><p>오늘 촬영본을 보내면, 늦어도 다음 날 편집 방향과 일정을 회신드립니다.</p></article>
     </div>
   </div>
 </section>
@@ -925,6 +965,20 @@ const cu=new IntersectionObserver(es=>es.forEach(e=>{
   requestAnimationFrame(tick);
 }),{threshold:.4});
 document.querySelectorAll('[data-cu]').forEach(el=>cu.observe(el));
+
+// 원통 캐러셀 드래그 회전 — 실측 구조(perspective 500 · arm rotateY 30°)를 그대로 두고
+// arms 컨테이너만 rotateY. 드래그 방향을 따라가도록 부호 반전(-dx), 관성 감쇠 0.95.
+const car=document.getElementById('car'),armsBox=document.getElementById('arms');
+if(car&&armsBox){
+  let ang=0,vel=0,down=false,lastX=0,dragged=false,raf=null;
+  const apply=()=>{armsBox.style.transform=`rotateY(${ang}deg)`};
+  const loop=()=>{ if(!down&&Math.abs(vel)>0.01){ang+=vel;vel*=0.95;apply();raf=requestAnimationFrame(loop)} else raf=null };
+  car.addEventListener('pointerdown',e=>{down=true;dragged=false;lastX=e.clientX;vel=0;car.classList.add('drag');car.setPointerCapture(e.pointerId)});
+  car.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-lastX;lastX=e.clientX;if(Math.abs(dx)>2)dragged=true;const d=-dx*0.12;ang+=d;vel=d;apply()});
+  const up=()=>{if(!down)return;down=false;car.classList.remove('drag');if(!raf)raf=requestAnimationFrame(loop)};
+  car.addEventListener('pointerup',up);car.addEventListener('pointercancel',up);
+  car.addEventListener('click',e=>{if(dragged){e.preventDefault();e.stopPropagation()}},true);
+}
 
 // FAQ 아코디언
 document.querySelectorAll('.q>button').forEach(btn=>btn.addEventListener('click',()=>{
