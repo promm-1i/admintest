@@ -28,6 +28,7 @@ import {
   Flag,
   Palette,
   Mountain,
+  Bike,
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -78,6 +79,7 @@ const TEMPLATE_INDUSTRIES: TemplateIndustry[] = [
   { key: "usedcar", name: "중고차", icon: Car, img: "/thumbs/usedcar-a.jpg", href: "/templates?industry=usedcar", title: "중고차 매매 홈페이지", note: "차량별 실사진과 성능점검 기록을 함께 보여주고 시세 문의로 연결하는 구성입니다.", points: ["차량 라인업", "성능점검 · 사고이력", "매입 시세 안내", "상담 문의"] },
   { key: "craft", name: "공방 · 클래스", icon: Palette, img: "/thumbs/craft.jpg", href: "/templates?industry=craft", title: "공방 · 클래스 홈페이지", note: "원데이 가격과 주간 일정표로 수강 신청을 만드는 콜라주형 구성입니다.", points: ["원데이 가격", "주간 일정표", "작품 갤러리", "수강 신청"] },
   { key: "travel", name: "여행 · 트레킹", icon: Mountain, img: "/thumbs/travel-a.jpg", href: "/templates?industry=travel", title: "여행 · 트레킹 홈페이지", note: "풀스크린 히어로와 코스별 카드, 포함 사항과 진행 방식으로 참가 문의를 만드는 구성입니다.", points: ["코스 카드", "포함 사항", "진행 방식", "참가 문의"] },
+  { key: "moto", name: "전기 이륜차 · 바이크", icon: Bike, img: "/thumbs/moto-a.jpg", href: "/templates?industry=moto", title: "전기 이륜차 · 바이크 홈페이지", note: "제품 상세와 구매 · 리스 상담, A/S 절차와 협력점 지도로 문의를 만드는 구성입니다.", points: ["제품 상세 · 사양", "구매 · 리스 상담", "A/S 절차", "협력점 지도"] },
 ]
   // 가나다순으로 보여주고, 미리보기 사진은 그 업종에서 가장 최근에 추가된 랜딩형 시안(SAMPLES 앞쪽)으로 바꾼다
   .map((t) => ({
