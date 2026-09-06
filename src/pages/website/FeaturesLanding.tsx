@@ -28,7 +28,7 @@ import { cn } from "@/lib/utils";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
 
 const BASIC_FEATURE_GROUPS = [
-  { title: "화면", items: ["PC / 모바일 반응형", "이미지 갤러리", "파일 다운로드"] },
+  { title: "화면", items: ["PC / 모바일 반응형", "웹 접근성 배려 (키보드 · 스크린리더)", "이미지 갤러리", "파일 다운로드"] },
   { title: "고객 연결", items: ["문의 버튼", "전화 연결", "카카오톡 연결", "지도"] },
   { title: "콘텐츠", items: ["게시판", "FAQ"] },
   { title: "검색 노출", items: ["기본 SEO"] },

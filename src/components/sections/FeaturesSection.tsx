@@ -47,6 +47,10 @@ const FEATURE_GROUPS: { num: string; title: string; icon: typeof Monitor; items:
         desc: "공지 · 소식을 직접 등록하고 수정할 수 있는 게시판을 제공합니다.",
         img: "/thumbs/features/board.jpg",
       },
+      {
+        label: "웹 접근성 배려",
+        desc: "키보드만으로도 쓸 수 있는 구조, 스크린리더용 상태 안내, 애니메이션 민감 사용자를 위한 감속 처리까지 접근성 지침을 반영해 제작합니다.",
+      },
     ],
   },
   {
