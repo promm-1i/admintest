@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { HeroFluid } from "@/components/sections/HeroFluid";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
@@ -28,13 +29,18 @@ const SHOWCASE = [
 /** 스프링 느낌의 오버슈트 곡선 — 라이브러리 없이 CSS transition으로 낸다 */
 const SPRING = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 
-/** 커서 주변에서 깜빡이는 반짝이 입자 배치 (커서 기준 상대 좌표) */
-const SPARKLES = [
-  { x: -46, y: -30, size: 5, delay: 0 },
-  { x: 38, y: -52, size: 4, delay: 0.5 },
-  { x: 60, y: 18, size: 6, delay: 1.1 },
-  { x: -22, y: 48, size: 4, delay: 1.6 },
-  { x: 8, y: -12, size: 3, delay: 2.2 },
+/** 레퍼런스처럼 배경에 흩뿌려진 작은 별 입자 (%, 크기 px, 깜빡임 지연 s) */
+const STARS = [
+  { x: 8, y: 18, size: 3, delay: 0 },
+  { x: 16, y: 62, size: 2, delay: 1.3 },
+  { x: 26, y: 34, size: 2, delay: 2.1 },
+  { x: 38, y: 12, size: 3, delay: 0.6 },
+  { x: 55, y: 8, size: 2, delay: 1.8 },
+  { x: 66, y: 28, size: 3, delay: 0.2 },
+  { x: 78, y: 15, size: 2, delay: 2.6 },
+  { x: 88, y: 42, size: 3, delay: 1.0 },
+  { x: 93, y: 68, size: 2, delay: 0.4 },
+  { x: 72, y: 58, size: 2, delay: 1.5 },
 ];
 
 function ShowcaseArc() {
@@ -107,48 +113,6 @@ function ShowcaseArc() {
 
 export function HeroSection() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const glowRef = useRef<HTMLDivElement | null>(null);
-  const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
-  const [hasPointer, setHasPointer] = useState(false);
-
-  // 무지개 글로우가 커서를 부드럽게 따라온다 (지연 보간)
-  useEffect(() => {
-    if (reducedMotion) return;
-    if (!window.matchMedia("(hover: hover)").matches) return;
-    const section = sectionRef.current;
-    const glow = glowRef.current;
-    if (!section || !glow) return;
-
-    const pos = { x: 0, y: 0 };
-    let target = { x: 0, y: 0 };
-    let raf = 0;
-    let running = false;
-
-    const tick = () => {
-      pos.x += (target.x - pos.x) * 0.08;
-      pos.y += (target.y - pos.y) * 0.08;
-      glow.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
-      if (Math.abs(target.x - pos.x) + Math.abs(target.y - pos.y) < 0.8) {
-        running = false;
-        return;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    const onMove = (e: MouseEvent) => {
-      const r = section.getBoundingClientRect();
-      target = { x: e.clientX - r.left, y: e.clientY - r.top };
-      setHasPointer(true);
-      if (!running) {
-        running = true;
-        raf = requestAnimationFrame(tick);
-      }
-    };
-    section.addEventListener("mousemove", onMove);
-    return () => {
-      section.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(raf);
-    };
-  }, [reducedMotion]);
 
   return (
     <section
@@ -161,48 +125,32 @@ export function HeroSection() {
         <div className="absolute -left-24 top-0 h-64 w-64 rounded-full bg-amber-600/15 blur-[110px]" />
       </div>
 
-      {/* 무지개 커서 글로우: 은은한 무지개 원판이 돌며 따라오고, 주변에 반짝이가 깜빡인다 */}
-      <div
-        ref={glowRef}
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute left-0 top-0 z-0",
-          !hasPointer && "left-[58%] top-[38%]",
-          !hasPointer && !reducedMotion && "idle-float",
-        )}
-      >
-        <div
-          className={cn(
-            "absolute -ml-36 -mt-36 h-72 w-72 rounded-full opacity-35 blur-[64px] saturate-150 mix-blend-screen",
-            !reducedMotion && "motion-safe:animate-[spin_9s_linear_infinite]",
-          )}
-          style={{
-            background:
-              "conic-gradient(from 0deg, #ff5f6d, #ffa844, #ffe37e, #7dffa8, #6ecbff, #b48bff, #ff7ad9, #ff5f6d)",
-          }}
-        />
-        {!reducedMotion &&
-          SPARKLES.map((sp) => (
-            <span
-              key={`${sp.x}-${sp.y}`}
-              className="absolute rounded-full bg-white motion-safe:animate-[heroTwinkle_2.4s_ease-in-out_infinite]"
-              style={{
-                left: sp.x,
-                top: sp.y,
-                width: sp.size,
-                height: sp.size,
-                animationDelay: `${sp.delay}s`,
-                boxShadow: "0 0 8px 2px rgba(255,255,255,0.55)",
-              }}
-            />
-          ))}
+      {/* 커서를 따라 소용돌이치는 무지개 유체 (레퍼런스 설정값 그대로) */}
+      <HeroFluid targetRef={sectionRef} />
+
+      {/* 배경 별 입자 — 레퍼런스의 잔별 */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        {STARS.map((sp) => (
+          <span
+            key={`${sp.x}-${sp.y}`}
+            className="absolute rounded-full bg-white/70 motion-safe:animate-[heroTwinkle_3.2s_ease-in-out_infinite] motion-reduce:opacity-60"
+            style={{
+              left: `${sp.x}%`,
+              top: `${sp.y}%`,
+              width: sp.size,
+              height: sp.size,
+              animationDelay: `${sp.delay}s`,
+              boxShadow: "0 0 6px 1px rgba(255,255,255,0.35)",
+            }}
+          />
+        ))}
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 pb-6 pt-16 text-center sm:px-6 lg:pt-24">
         <span className="idle-breath inline-block rounded-full border border-white/15 bg-white/10 px-3.5 py-1 text-xs font-bold text-white/90">
           맞춤형 웹사이트 제작 전문
         </span>
-        <h1 className="mx-auto mt-6 max-w-3xl text-balance text-4xl font-extrabold leading-[1.15] tracking-tight sm:text-6xl">
+        <h1 className="mx-auto mt-6 max-w-4xl text-balance text-4xl font-extrabold leading-[1.12] tracking-tight sm:text-6xl lg:text-7xl">
           기획부터 디자인,
           <br />
           직접 만듭니다.
