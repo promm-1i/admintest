@@ -11,9 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -41,6 +39,9 @@ export default function Contact() {
   const [designCode, setDesignCode] = useState(() =>
     designOptions.some((o) => o.code === designFromLink) ? designFromLink : "",
   );
+  const [designIndustry, setDesignIndustry] = useState(
+    () => designOptions.find((o) => o.code === designFromLink)?.industry ?? "",
+  );
   const designGroups = useMemo(() => {
     const groups = new Map<string, typeof designOptions>();
     for (const o of designOptions) {
@@ -60,6 +61,7 @@ export default function Contact() {
     onSuccess: (data) => {
       setForm({ name: "", phone: "", message: "" });
       setDesignCode("");
+      setDesignIndustry("");
       setErrors({});
       setAccessToken(data.access_token);
       toast.success("문의가 접수되었습니다. 확인 후 연락드리겠습니다.");
@@ -181,24 +183,54 @@ export default function Contact() {
             onChange={(e) => set("phone")(e.target.value)}
           />
         </Field>
-        <Field label="관심 디자인 코드 (선택)">
-          <Select value={designCode} onValueChange={setDesignCode}>
-            <SelectTrigger>
-              <SelectValue placeholder="템플릿에서 마음에 든 디자인이 있다면 선택해 주세요" />
-            </SelectTrigger>
-            <SelectContent>
-              {designGroups.map(([industry, options]) => (
-                <SelectGroup key={industry}>
-                  <SelectLabel>{industry}</SelectLabel>
-                  {options.map((o) => (
+        <Field label="관심 디자인 (선택)">
+          {/* 시안이 수백 개라 한 목록으로 두면 끝없이 스크롤해야 한다 — 업종을 먼저 고르고 그 안의 디자인만 보여준다 */}
+          <div className="grid gap-2 sm:grid-cols-[1fr_1.4fr]">
+            <Select
+              value={designIndustry}
+              onValueChange={(v) => {
+                setDesignIndustry(v);
+                setDesignCode("");
+              }}
+            >
+              <SelectTrigger aria-label="업종 선택">
+                <SelectValue placeholder="업종 선택" />
+              </SelectTrigger>
+              <SelectContent>
+                {designGroups.map(([industry, options]) => (
+                  <SelectItem key={industry} value={industry}>
+                    {industry.replace(" 홈페이지", "")}
+                    <span className="ml-1.5 text-xs text-muted-foreground">{options.length}종</span>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <Select
+              key={designIndustry}
+              value={designCode}
+              onValueChange={setDesignCode}
+              disabled={!designIndustry}
+            >
+              <SelectTrigger aria-label="디자인 선택">
+                <SelectValue
+                  placeholder={designIndustry ? "마음에 든 디자인 선택" : "업종을 먼저 선택해 주세요"}
+                />
+              </SelectTrigger>
+              <SelectContent>
+                {(designGroups.find(([industry]) => industry === designIndustry)?.[1] ?? []).map(
+                  (o) => (
                     <SelectItem key={o.code} value={o.code}>
-                      {o.code} · {o.title}
+                      {o.code} ·{" "}
+                      {o.title.startsWith(o.industry)
+                        ? o.title.slice(o.industry.length).trim().replace(/^\(|\)$/g, "")
+                        : o.title}
                     </SelectItem>
-                  ))}
-                </SelectGroup>
-              ))}
-            </SelectContent>
-          </Select>
+                  ),
+                )}
+              </SelectContent>
+            </Select>
+          </div>
         </Field>
         <Field label="제작 희망 내용" error={errors["message"]}>
           <Textarea
