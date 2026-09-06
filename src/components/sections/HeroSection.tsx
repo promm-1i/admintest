@@ -46,8 +46,7 @@ const STARS = Array.from({ length: 42 }, (_, i) => {
  */
 const CARD_W = 260;
 const CARD_H = 370;
-const RADIUS = 570;
-const STEP = 360 / 12; // 30° 간격
+const STEP = 360 / 12; // 30° 간격 (팔 7개 × 카드 2장 = 위치 12곳 + 반복 2곳)
 /**
  * 정지 각은 30° 그리드 정렬(0°) — 레퍼런스(clipcut) 캡처 실측: 정지 상태에서
  * 카드 하나가 화면 정중앙(180° 위치)에 오고, ±90° 카드 두 장이 원근 전단으로
@@ -55,6 +54,19 @@ const STEP = 360 / 12; // 30° 간격
  * 한쪽 벽만 남아 비대칭으로 보이므로, 관성이 끝나면 가장 가까운 그리드 각으로 스냅한다.
  */
 const REST_OFFSET = 0;
+/**
+ * 원본 Arm 7개 — 각 팔의 [왼쪽 끝, 오른쪽 끝] 카드에 들어갈 HERO_ITEMS 인덱스.
+ * 디자인 12종 + 마지막 팔은 반대편 180° 위치라 겹쳐 보이지 않는 반복 2장.
+ */
+const ARM_PAIRS: Array<[number, number]> = [
+  [0, 1],
+  [2, 3],
+  [4, 5],
+  [6, 7],
+  [8, 9],
+  [10, 11],
+  [0, 6],
+];
 
 function CylinderShowcase() {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
@@ -188,47 +200,72 @@ function CylinderShowcase() {
         isDesktop ? "h-[440px]" : "h-[250px]",
       )}
       style={{
-        perspective: `${500 * k}px`, // 원본 실측값 500 — 원통 안에서 보는 강한 원근
-        transformStyle: "preserve-3d",
         opacity: opened ? 1 : 0,
         transform: opened ? "translateY(0)" : "translateY(50px)", // 원본과 같은 등장(페이드업)
         transition: reducedMotion ? "none" : "opacity 700ms ease, transform 700ms ease",
       }}
       aria-label="실제 구축한 홈페이지 템플릿 — 드래그해서 돌려보기"
     >
+      {/* 원본 구조 그대로: Carousel(1200×240, perspective 500) > Arms > Arm(1400×240, rotY 30°) × 카드 2장(±90°).
+          팔의 두 카드가 서로 반대를 보므로 가까운 쪽 카드가 거대하게 투영되어
+          화면 좌우 끝에 "잘린 카드"가 넓은 화면에서도 원본처럼 나타난다. */}
       <div
-        ref={spinRef}
-        className="absolute left-1/2 top-1/2 h-0 w-0"
-        style={{ transformStyle: "preserve-3d" }}
+        className="absolute left-1/2 top-1/2"
+        style={{
+          width: `${1200 * k}px`,
+          height: `${240 * k}px`,
+          marginLeft: `${-600 * k}px`,
+          marginTop: `${-120 * k}px`,
+          transform: `perspective(${500 * k}px)`,
+          transformStyle: "preserve-3d",
+        }}
       >
-        {HERO_ITEMS.map((card, i) => (
-          <Link
-            key={card.href}
-            to={card.href}
-            aria-label={`${card.label} 템플릿 보기`}
-            className="group absolute block overflow-hidden bg-neutral-900 shadow-[0_18px_50px_rgba(0,0,0,0.55)] ring-1 ring-white/15 outline-none transition-shadow hover:ring-white/50 focus-visible:ring-2 focus-visible:ring-white"
-            style={{
-              width: `${CARD_W * k}px`,
-              height: `${CARD_H * k}px`,
-              left: `${(-CARD_W * k) / 2}px`,
-              top: `${(-CARD_H * k) / 2}px`,
-              borderRadius: `${20 * k}px`, // 원본 실측 radius 20
-              backfaceVisibility: "hidden", // 앞쪽 반원 카드는 뒷면이라 사라진다 (원본 방식)
-              // 원에 배치 후 안쪽을 향하도록 뒤집는다 — 원본 Arm(rotY θ) + Video box(rotY ±90) 구조의 등가식
-              transform: `rotateY(${i * STEP}deg) translateZ(${RADIUS * k}px) rotateY(180deg)`,
-            }}
-          >
-            <img
-              src={card.src}
-              alt=""
-              draggable={false}
-              className="pointer-events-none h-full w-full object-cover object-top"
-            />
-            <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2.5 pb-2 pt-6 text-[10px] font-bold text-white">
-              {card.label}
-            </span>
-          </Link>
-        ))}
+        <div ref={spinRef} className="absolute inset-0" style={{ transformStyle: "preserve-3d" }}>
+          {ARM_PAIRS.map(([li, ri], a) => (
+            <div
+              key={a}
+              className="absolute top-0 left-1/2"
+              style={{
+                width: `${1400 * k}px`,
+                height: `${240 * k}px`,
+                marginLeft: `${-700 * k}px`,
+                transform: `rotateY(${a * STEP}deg)`,
+                transformStyle: "preserve-3d",
+              }}
+            >
+              {[
+                { card: HERO_ITEMS[li], side: "l" as const },
+                { card: HERO_ITEMS[ri], side: "r" as const },
+              ].map(({ card, side }) => (
+                <Link
+                  key={side}
+                  to={card.href}
+                  aria-label={`${card.label} 템플릿 보기`}
+                  className="group absolute block overflow-hidden bg-neutral-900 shadow-[0_18px_50px_rgba(0,0,0,0.55)] ring-1 ring-white/15 outline-none transition-shadow hover:ring-white/50 focus-visible:ring-2 focus-visible:ring-white"
+                  style={{
+                    width: `${CARD_W * k}px`,
+                    height: `${CARD_H * k}px`,
+                    top: `${((240 - CARD_H) / 2) * k}px`,
+                    ...(side === "l" ? { left: 0 } : { right: 0 }),
+                    borderRadius: `${20 * k}px`, // 원본 실측 radius 20
+                    backfaceVisibility: "hidden",
+                    transform: `rotateY(${side === "l" ? 90 : -90}deg)`,
+                  }}
+                >
+                  <img
+                    src={card.src}
+                    alt=""
+                    draggable={false}
+                    className="pointer-events-none h-full w-full object-cover object-top"
+                  />
+                  <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2.5 pb-2 pt-6 text-[10px] font-bold text-white">
+                    {card.label}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
