@@ -42,7 +42,9 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--orange2);outline-of
 /* 공통 부품 — 섹션 칩(─ 라벨 ─) · 알약 버튼 · 섹션 헤딩 */
 .chip{display:inline-flex;align-items:center;gap:10px;height:40px;padding:0 18px;border-radius:100px;background:rgba(255,255,255,.05);border:1px solid var(--line);font-size:13px;font-weight:500;color:var(--mute8)}
 .chip::before,.chip::after{content:"";width:12px;height:1px;background:var(--orange)}
-h2.sec{font-size:clamp(38px,5vw,68px);line-height:1.1;letter-spacing:-.03em;font-weight:500}
+h2.sec{font-size:clamp(38px,5vw,70px);line-height:1.2;letter-spacing:-.03em;font-weight:500}
+/* 좌정렬 섹션 헤딩은 실측상 한 단계 작다 (레퍼런스 58px) */
+h2.sec.sm{font-size:clamp(32px,4vw,58px)}
 .sub{font-size:16px;line-height:1.5;color:var(--mute)}
 .btn{display:inline-flex;align-items:center;gap:10px;height:54px;padding:0 26px;border-radius:100px;font-weight:500;font-size:16px;transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease,border-color .25s ease}
 .btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s ease}
@@ -129,7 +131,7 @@ section{position:relative}
 .prob{position:relative;overflow:clip;padding:204px 0 120px}
 .stage{position:absolute;left:0;right:0;top:0;height:470px;pointer-events:none}
 .stage .plane{position:absolute;left:50%;top:0;transform:translateX(-50%);width:1440px;height:470px;clip-path:polygon(27% 0,73% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(70,32,12,.9) 0%,rgba(32,16,8,.5) 40%,rgba(9,4,1,0) 90%)}
-.stage .horizon{position:absolute;left:50%;top:-2px;transform:translateX(-50%);width:680px;height:160px;background:radial-gradient(50% 100% at 50% 0%,rgba(255,132,52,.5),rgba(9,4,1,0) 75%);filter:blur(8px)}
+.stage .horizon{position:absolute;left:50%;top:-2px;transform:translateX(-50%);width:680px;height:160px;background:radial-gradient(50% 100% at 50% 0%,rgba(255,132,52,.38),rgba(9,4,1,0) 75%);filter:blur(8px)}
 .prob-grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .pcard{border-radius:20px;background:linear-gradient(180deg,#120C08,#0C0704);border:1px solid rgba(255,255,255,.07);padding:30px 32px 40px}
 .pcard .ui{height:255px;border-radius:8px;position:relative;overflow:hidden;margin-bottom:44px;background:linear-gradient(180deg,#2E1608 0%,#160A04 78%)}
@@ -172,26 +174,27 @@ section{position:relative}
 .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .scard{border-radius:20px;background:linear-gradient(180deg,var(--panel),rgba(224,88,16,.07));border:1px solid var(--line);padding:34px 30px 30px;min-height:300px;display:flex;flex-direction:column}
 .scard .lbl{font-size:16px;font-weight:500;color:var(--mute8)}
-.scard .val{margin-top:26px;font-size:64px;font-weight:500;background:linear-gradient(180deg,#FFC59B,#F1610F);-webkit-background-clip:text;background-clip:text;color:transparent}
+.scard .val{margin-top:26px;font-size:52px;font-weight:500;letter-spacing:.05em;background:linear-gradient(180deg,#FFC59B,#F1610F);-webkit-background-clip:text;background-clip:text;color:transparent}
 .scard p{margin-top:auto;padding-top:34px;color:var(--mute);font-size:15px;line-height:1.5}
 
 /* ── 3 하는 일 — 플랫폼 카드 3장 + 대형 패널 ── */
-.plat-grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.plat-grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:1094px;margin-left:auto;margin-right:auto}
 .plat{border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel) 0%,rgba(224,88,16,.12) 130%);min-height:530px;display:flex;flex-direction:column;text-align:center;padding:34px 26px 30px;overflow:hidden}
-.plat h3{font-size:30px;font-weight:600;letter-spacing:-.02em}
+.plat h3{font-size:26px;font-weight:600;letter-spacing:-.02em}
 .plat h3 em{font-style:normal;background:linear-gradient(180deg,#FFB182,#F1610F);-webkit-background-clip:text;background-clip:text;color:transparent}
 /* 미디어 슬롯 — 레퍼런스는 어두운 바탕 중앙의 3D 플랫폼 아이콘. 이미지를 contain으로 중앙 배치해
    아이콘 렌더(누끼 PNG)로 갈아끼우면 그대로 재현된다 */
 .plat .slot{flex:1;margin:24px -6px;border-radius:14px;overflow:hidden;position:relative;display:grid;place-items:center;background:radial-gradient(60% 45% at 50% 90%,rgba(224,88,16,.18),rgba(9,4,1,0) 75%)}
-.plat .slot img{width:62%;max-height:76%;object-fit:contain;border-radius:18px;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
+.plat .slot img{width:55%;max-height:70%;object-fit:contain;border-radius:18px;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
 .plat p{font-size:15px;color:var(--mute8);line-height:1.5;max-width:300px;margin:0 auto}
-.mega{margin-top:96px;border-radius:24px;position:relative;overflow:hidden;background:#0D0805;border:1px solid var(--line);padding:120px 90px}
+.mega{margin-top:96px;max-width:1094px;margin-left:auto;margin-right:auto;border-radius:24px;position:relative;overflow:hidden;background:#0D0805;border:1px solid var(--line);padding:120px 90px}
 .mega .edge{position:absolute;top:0;right:0;bottom:0;width:42%;background:linear-gradient(90deg,rgba(13,8,5,0),rgba(178,46,10,.55) 60%,rgba(224,88,16,.75));mask-image:linear-gradient(90deg,transparent,#000 40%)}
-.mega .edge::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.18) 0 3px,transparent 3px 60px)}
-.mega-in{position:relative;display:grid;grid-template-columns:1fr 340px;gap:80px;align-items:center}
+.mega .edge::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.1) 0 3px,transparent 3px 60px)}
+.mega-in{position:relative;display:grid;grid-template-columns:1fr 340px;gap:80px;align-items:stretch}
+.mega-in>div:first-child{display:flex;flex-direction:column;align-items:flex-start}
 .mega h2{font-size:clamp(34px,3.6vw,52px);line-height:1.12;letter-spacing:-.03em;font-weight:500}
 .mega .sub{margin-top:22px;max-width:420px}
-.mega .btn{margin-top:44px}
+.mega .btn{margin-top:auto}
 .mini{display:flex;flex-direction:column;gap:18px}
 .mcard{border-radius:16px;background:rgba(9,4,1,.62);border:1px solid rgba(255,255,255,.1);padding:22px 24px;backdrop-filter:blur(6px)}
 .mcard .ic{width:34px;height:34px;border-radius:50%;background:linear-gradient(180deg,#FF8A3C,#E4560F);display:grid;place-items:center;margin-bottom:14px}
@@ -203,7 +206,7 @@ section{position:relative}
 /* ── 4 고객 성과 — 9:16 마퀴 (실측 346×620 r16) ── */
 .works{overflow:clip}
 .works .sec-head .btn{margin-top:8px}
-.marq{margin-top:64px;display:flex;gap:24px;width:max-content;animation:marq 48s linear infinite}
+.marq{margin-top:64px;display:flex;gap:10px;width:max-content;animation:marq 48s linear infinite}
 .marq:hover{animation-play-state:paused}
 .wk{position:relative;width:346px;height:620px;border-radius:16px;overflow:hidden;background:var(--panel2);border:1px solid var(--line);flex:none}
 .wk>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -245,13 +248,13 @@ section{position:relative}
 /* ── 6 프로세스 — 모의 UI 카드 3장 (실측 421×469) ── */
 .proc-grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .pr{border-radius:20px;border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),rgba(224,88,16,.09));padding:22px 28px 32px}
-.pr .ui{height:250px;border-radius:14px;margin-bottom:24px;position:relative;overflow:hidden;background:rgba(9,4,1,.5);border:1px solid rgba(255,255,255,.06)}
+.pr .ui{height:275px;border-radius:14px;margin-bottom:24px;position:relative;overflow:hidden;background:rgba(9,4,1,.5);border:1px solid rgba(255,255,255,.06)}
 .pr h3{font-size:24px;font-weight:600;margin-bottom:10px}
 .pr h3 b{color:var(--orange2);font-weight:600;margin-right:8px}
 .pr p{font-size:15px;color:var(--mute);line-height:1.5}
 /* ① 업로드 드롭존 */
 .ui-drop .zone{position:absolute;inset:18px;border:1.5px dashed rgba(255,255,255,.22);border-radius:12px;display:grid;place-items:center}
-.ui-drop .box{width:78px;height:78px;border:1.5px dashed rgba(255,255,255,.3);border-radius:16px;display:grid;place-items:center}
+.ui-drop .box{width:78px;height:78px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(180deg,#FF7A2E,#D9480C);box-shadow:0 10px 30px rgba(250,97,20,.4)}
 .ui-drop .box svg{width:26px;height:26px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .ui-drop .thumb{position:absolute;right:34px;bottom:26px;width:64px;height:48px;border-radius:8px;background:linear-gradient(135deg,#5B3A22,#2A1810);border:1px solid rgba(255,255,255,.2);transform:rotate(-8deg)}
 .ui-drop .thumb::after{content:"";position:absolute;right:-6px;top:-6px;width:18px;height:18px;border-radius:50%;background:#3FBF6F;border:2px solid #0D0805}
@@ -281,15 +284,17 @@ section{position:relative}
 /* ── 7 후기 ── */
 .tes-head{display:grid;grid-template-columns:1fr auto;align-items:center;gap:40px}
 .tes-head .sub{margin-top:22px;max-width:440px}
-.tes-head .ava{width:84px;height:84px;border-radius:50%;overflow:hidden;border:2px solid rgba(250,97,20,.6);box-shadow:0 0 40px rgba(250,97,20,.3)}
-.tes-head .ava img{width:100%;height:100%;object-fit:cover}
+/* 아바타 3개 겹침 — 실측: 60px 원, -14px 오버랩 */
+.tes-head .avas{display:flex}
+.tes-head .avas img{width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid #090401}
+.tes-head .avas img+img{margin-left:-14px}
 .tes-grid{margin-top:64px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;align-items:stretch}
 .tstat{border-radius:20px;background:var(--panel);border:1px solid var(--line);padding:20px;display:flex;flex-direction:column;gap:0}
-.tstat .cell{flex:1;border-radius:14px;background:rgba(255,255,255,.04);padding:24px 26px;position:relative}
+.tstat .cell{flex:1;border-radius:14px;padding:24px 26px;position:relative}
 .tstat .cell+.cell{margin-top:18px}
 .tstat .cell::before{content:"";position:absolute;left:26px;right:26px;top:-10px;height:1px;background:rgba(255,255,255,.1)}
 .tstat .cell:first-child::before{display:none}
-.tstat .v{font-size:44px;font-weight:600}
+.tstat .v{font-size:40px;font-weight:600}
 .tstat .v em{font-style:normal;background:linear-gradient(180deg,#FFB182,#F1610F);-webkit-background-clip:text;background-clip:text;color:transparent}
 .tstat .l{margin-top:10px;font-size:14px;color:var(--mute)}
 .tstat .cir{position:absolute;right:22px;top:26px;width:40px;height:40px;border-radius:50%;background:rgba(9,4,1,.6);border:1px solid rgba(255,255,255,.14);display:grid;place-items:center}
@@ -309,12 +314,12 @@ section{position:relative}
 .price-grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch}
 .plan{border-radius:20px;background:linear-gradient(180deg,var(--panel),rgba(224,88,16,.08));border:1px solid var(--line);padding:40px 34px 34px;display:flex;flex-direction:column}
 .plan.hot{border-color:rgba(250,97,20,.8);box-shadow:0 0 0 1px rgba(250,97,20,.35),0 20px 70px rgba(250,97,20,.15)}
-.plan h3{font-size:30px;font-weight:500}
+.plan h3{font-size:28px;font-weight:500}
 .plan .d{margin-top:10px;font-size:14.5px;color:var(--mute)}
 .plan .pv{margin-top:30px;font-size:56px;font-weight:600;background:linear-gradient(180deg,#FFC59B,#F1610F);-webkit-background-clip:text;background-clip:text;color:transparent}
 .plan .pv small{font-size:18px;-webkit-text-fill-color:#fff;color:#fff;font-weight:500;margin-left:6px}
 .plan ul{margin-top:34px;list-style:none;display:flex;flex-direction:column;gap:16px}
-.plan li{display:flex;gap:12px;font-size:15px;color:var(--mute8)}
+.plan li{display:flex;gap:12px;font-size:14px;color:var(--mute8)}
 .plan li::before{content:"✓";flex:none;width:20px;height:20px;border-radius:50%;background:linear-gradient(180deg,#FF7A2E,#E4560F);color:#fff;font-size:11px;display:grid;place-items:center;margin-top:1px}
 .plan .btn{margin-top:auto;justify-content:center;width:100%}
 .plan .btn.ghost{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.16)}
@@ -327,7 +332,7 @@ section{position:relative}
 .acc{display:flex;flex-direction:column;gap:16px}
 .q{border-radius:16px;background:var(--panel);border:1px solid var(--line);overflow:hidden;transition:border-color .25s}
 .q.open{border-color:rgba(255,255,255,.22)}
-.q>button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:26px 28px;font-size:19px;font-weight:500;text-align:left}
+.q>button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 28px;font-size:18px;font-weight:500;text-align:left}
 .q .pm{flex:none;width:22px;height:22px;position:relative}
 .q .pm::before,.q .pm::after{content:"";position:absolute;left:50%;top:50%;background:#fff;transform:translate(-50%,-50%);transition:transform .3s}
 .q .pm::before{width:14px;height:2px}
@@ -338,15 +343,17 @@ section{position:relative}
 .q .a>div{overflow:hidden}
 .q .a p{padding:0 28px 26px;font-size:15.5px;line-height:1.6;color:var(--mute)}
 
-/* ── 10 편집 툴 ── */
-.tools{overflow:clip}
-.tools .arc{position:absolute;right:-260px;top:120px;width:760px;height:760px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(250,97,20,.4),rgba(9,4,1,0) 65%);filter:blur(30px);pointer-events:none}
-.tool-row{margin-top:80px;display:flex;justify-content:center;gap:44px;flex-wrap:wrap}
-.tool{display:flex;flex-direction:column;align-items:center;gap:14px}
-.tool .tile{width:110px;height:110px;border-radius:28px;display:grid;place-items:center;font-size:30px;font-weight:600;letter-spacing:-.02em;border:1px solid rgba(255,255,255,.14);box-shadow:0 20px 50px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .3s cubic-bezier(.34,1.56,.64,1)}
+/* ── 10 편집 툴 — 실측: 한 줄 수평 배치, 아이콘 사이 연결선, 중앙 주황 글로우 + 동심 링, 라벨 없음, 좌우 끝은 화면 밖으로 ── */
+.tools{overflow:clip;padding-bottom:220px}
+.tools .glow{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,138,60,.55),rgba(224,88,16,.25) 55%,rgba(9,4,1,0) 75%);filter:blur(24px);pointer-events:none}
+.tools .ring{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(255,158,92,.14);pointer-events:none}
+.tools .ring.r1{width:640px;height:640px}
+.tools .ring.r2{width:920px;height:920px;border-color:rgba(255,158,92,.08)}
+.tool-row{position:relative;margin-top:96px;display:flex;justify-content:center;align-items:center;gap:0}
+.tool-row::before{content:"";position:absolute;left:-30vw;right:-30vw;top:50%;height:1px;background:rgba(255,255,255,.16)}
+.tool{position:relative;flex:none;display:grid;place-items:center;width:180px}
+.tool .tile{width:118px;height:118px;border-radius:30px;display:grid;place-items:center;font-size:32px;font-weight:600;letter-spacing:-.02em;border:1px solid rgba(255,255,255,.14);box-shadow:0 20px 50px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .3s ease}
 .tool:hover .tile{transform:translateY(-8px) scale(1.05)}
-.tool span{font-size:13px;color:var(--mute)}
-.tool:nth-child(even){transform:translateY(26px)}
 .t1{background:linear-gradient(160deg,#2A1F4E,#120C26);color:#B9A7FF}
 .t2{background:linear-gradient(160deg,#3A3A3E,#161618);color:#F2F2F2}
 .t3{background:linear-gradient(160deg,#0E3B3B,#081A1A);color:#6EF2D8}
@@ -355,8 +362,8 @@ section{position:relative}
 .t6{background:linear-gradient(160deg,#241C4E,#0E0A22);color:#9F8CFF}
 
 /* ── 11 CTA + 푸터 ── */
-.cta-panel{border-radius:16px;position:relative;overflow:hidden;background:#0C0703;border:1px solid var(--line);padding:110px 60px;text-align:center}
-.cta-panel .edge{position:absolute;top:0;right:0;bottom:0;width:52%;background:linear-gradient(90deg,rgba(12,7,3,0),rgba(150,32,8,.55) 55%,rgba(224,88,16,.8));mask-image:linear-gradient(90deg,transparent,#000 45%)}
+.cta-panel{border-radius:16px;position:relative;overflow:hidden;background:linear-gradient(90deg,#150603 0%,#1D0804 45%,#2B0A04 100%);border:1px solid var(--line);padding:110px 60px;text-align:center}
+.cta-panel .edge{position:absolute;top:0;right:0;bottom:0;width:46%;background:linear-gradient(90deg,rgba(12,7,3,0),rgba(150,32,8,.55) 55%,rgba(224,88,16,.8));mask-image:linear-gradient(90deg,transparent,#000 45%)}
 .cta-panel .edge::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.2) 0 3px,transparent 3px 56px)}
 .cta-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:0}
 .cta-in h2{font-size:clamp(34px,4vw,58px);line-height:1.12;letter-spacing:-.03em;font-weight:500}
@@ -364,15 +371,17 @@ section{position:relative}
 .cta-in .btn{margin-top:38px}
 .cta-in .more{margin-top:22px;font-size:14px;color:var(--mute);text-decoration:underline;text-underline-offset:4px}
 .cta-in .more:hover{color:#fff}
-footer{position:relative;overflow:clip;margin-top:100px}
-.f-top{display:flex;justify-content:space-between;gap:60px;padding-bottom:90px}
+footer{position:relative;overflow:clip;margin-top:100px;background:radial-gradient(70% 90% at 55% 115%,rgba(190,66,12,.34),rgba(9,4,1,0) 70%)}
+footer::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;background:repeating-linear-gradient(90deg,rgba(0,0,0,.16) 0 3px,transparent 3px 56px);pointer-events:none;mask-image:linear-gradient(180deg,transparent,#000 60%)}
+.f-top{display:flex;align-items:flex-start;justify-content:space-between;gap:60px;padding-bottom:90px}
 .f-cols{display:flex;gap:100px}
 .f-cols h4{font-size:18px;font-weight:600;margin-bottom:20px}
 .f-cols ul{list-style:none;display:flex;flex-direction:column;gap:12px}
 .f-cols a{color:var(--mute);font-size:15px}
 .f-cols a:hover{color:#fff}
 .f-bot{position:relative;border-top:1px solid var(--line);padding:28px 0 60px;display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13.5px;color:var(--mute)}
-.ghostword{position:absolute;right:-30px;bottom:-150px;font-size:360px;font-weight:700;letter-spacing:-.04em;line-height:1;background:linear-gradient(180deg,rgba(224,88,16,.3),rgba(224,88,16,0));-webkit-background-clip:text;background-clip:text;color:transparent;pointer-events:none;user-select:none}
+/* 대형 고스트 워드마크 — 실측: 푸터 하단 전체 폭, 아래로 잘려나가는 거대 로고 타입 */
+.ghostword{position:absolute;left:50%;bottom:-190px;transform:translateX(-50%);font-size:400px;font-weight:700;letter-spacing:-.04em;line-height:1;white-space:nowrap;background:linear-gradient(180deg,rgba(255,122,46,.5) 0%,rgba(224,88,16,.16) 70%,rgba(224,88,16,0) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;pointer-events:none;user-select:none}
 
 /* ── 반응형 ── */
 @media(max-width:1080px){
@@ -408,15 +417,17 @@ footer{position:relative;overflow:clip;margin-top:100px}
   .prob-grid,.plat-grid,.proc-grid,.stat-grid,.res-grid,.res-grid.three,.tes-grid{grid-template-columns:1fr}
   .tquote{grid-column:auto}
   .fix-head,.res-head{flex-direction:column;align-items:flex-start}
-  .marq{gap:14px}
+  .tes-head{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
+  .marq{gap:8px}
   .wk{width:264px;height:474px}
   .mega{padding:56px 26px}
   .cta-panel{padding:70px 26px}
   .f-top{flex-direction:column;gap:44px}
   .f-cols{gap:48px;flex-wrap:wrap}
-  .ghostword{font-size:150px;bottom:-56px;right:-10px}
-  .tool-row{gap:20px}
-  .tool:nth-child(even){transform:none}
+  .ghostword{font-size:150px;bottom:-64px}
+  .tool{width:104px}
+  .tool .tile{width:72px;height:72px;border-radius:20px;font-size:20px}
+  .tools{padding-bottom:120px}
 }
 </style>
 </head>
@@ -540,7 +551,7 @@ footer{position:relative;overflow:clip;margin-top:100px}
     <div class="fix-head">
       <div>
         <span class="chip rv y30">해결 방법</span>
-        <h2 class="sec rv bl" style="margin-top:22px">결과로 이어지는 편집 시스템을<br>통째로 맡기세요</h2>
+        <h2 class="sec sm rv bl" style="margin-top:22px">결과로 이어지는 편집 시스템을<br>통째로 맡기세요</h2>
         <p class="sub rv d1">기획부터 편집, 업로드 최적화까지 하나의 시스템으로 운영합니다.<br>보내주신 촬영본이 성과를 내는 영상으로 돌아옵니다.</p>
       </div>
       <a class="btn btn-o rv xr d1" href="#works">작업물 보기 <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
@@ -645,7 +656,7 @@ footer{position:relative;overflow:clip;margin-top:100px}
     <div class="res-head">
       <div>
         <span class="chip rv y30">성과</span>
-        <h2 class="sec rv bl" style="margin-top:22px">보기 좋은 영상이 아니라,<br>일하는 영상을 만듭니다</h2>
+        <h2 class="sec sm rv bl" style="margin-top:22px">보기 좋은 영상이 아니라,<br>일하는 영상을 만듭니다</h2>
         <p class="sub rv d1">조회수 뒤에 숨은 진짜 지표 — 유지율, 저장, 전환까지 봅니다.<br>아래는 그렇게 만든 대표 성과입니다.</p>
       </div>
       <a class="btn btn-o rv xr d1" href="#contact">프로젝트 시작하기 <svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
@@ -696,7 +707,7 @@ footer{position:relative;overflow:clip;margin-top:100px}
           <div class="zone"><div class="box"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg></div></div>
           <div class="thumb"></div>
         </div>
-        <h3><b>01</b>촬영본 보내기</h3>
+        <h3>촬영본 보내기</h3>
         <p>촬영본과 아이디어를 공유해 주세요. 성과와 플랫폼 관점에서 먼저 검토합니다.</p>
       </article>
       <article class="pr rv y30 d2">
@@ -708,7 +719,7 @@ footer{position:relative;overflow:clip;margin-top:100px}
           <div class="wave"><i style="height:40%"></i><i style="height:75%"></i><i style="height:55%"></i><i style="height:95%"></i><i style="height:60%"></i><i style="height:80%"></i><i style="height:45%"></i><i style="height:70%"></i></div>
           <div class="chips"><span>이펙트</span><span>자막</span><span>후킹</span></div>
         </div>
-        <h3><b>02</b>편집 · 후킹 설계</h3>
+        <h3>편집 · 후킹 설계</h3>
         <p>스크롤을 멈추게 하는 후킹과 리듬감 있는 자막으로 끝까지 보게 만듭니다.</p>
       </article>
       <article class="pr rv y30 d3">
@@ -720,7 +731,7 @@ footer{position:relative;overflow:clip;margin-top:100px}
           <div class="row r2"><span class="pic"></span><span class="fill"></span></div>
           <span class="name n2">@fitness_demo <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg></span>
         </div>
-        <h3><b>03</b>업로드 · 성과 확인</h3>
+        <h3>업로드 · 성과 확인</h3>
         <p>플랫폼별 규격으로 납품하고, 업로드 후 지표를 함께 확인하며 다음 편을 다듬습니다.</p>
       </article>
     </div>
@@ -733,20 +744,24 @@ footer{position:relative;overflow:clip;margin-top:100px}
     <div class="tes-head">
       <div>
         <span class="chip rv y30">고객 후기</span>
-        <h2 class="sec rv bl" style="margin-top:22px">함께 일한 크리에이터들이<br>말하는 클립랩</h2>
+        <h2 class="sec sm rv bl" style="margin-top:22px">함께 일한 크리에이터들이<br>말하는 클립랩</h2>
         <p class="sub rv d1">숫자보다 정확한 건 함께 일해 본 사람의 말입니다.</p>
       </div>
-      <div class="ava rv d2"><img src="./assets/what-creators-sa-1.jpg" alt="후기 남긴 크리에이터 프로필"></div>
+      <div class="avas rv d2" aria-label="후기 남긴 크리에이터들">
+        <img src="./assets/what-creators-sa-1.jpg" alt="">
+        <img src="./assets/what-creators-sa-2.jpg" alt="">
+        <img src="./assets/what-creators-sa-3.jpg" alt="">
+      </div>
     </div>
     <div class="tes-grid">
       <div class="tstat rv y30 d1">
         <div class="cell">
-          <span class="v num"><em>3</em>x</span>
+          <span class="v num">3<em>x</em></span>
           <span class="cir"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
           <p class="l">참여 성장</p>
         </div>
         <div class="cell">
-          <span class="v num"><em>2M</em>+</span>
+          <span class="v num">2M<em>+</em></span>
           <span class="cir"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
           <p class="l">누적 조회수</p>
         </div>
@@ -825,7 +840,7 @@ footer{position:relative;overflow:clip;margin-top:100px}
   <div class="wrap faq-grid">
     <div>
       <span class="chip rv y30">FAQ</span>
-      <h2 class="sec rv bl" style="margin-top:22px">궁금한 점,<br>먼저 답해 드립니다</h2>
+      <h2 class="sec sm rv bl" style="margin-top:22px">궁금한 점,<br>먼저 답해 드립니다</h2>
       <p class="sub rv d1">계약 전에 확인하고 싶은 것들 — 자주 받는 질문을 모았습니다.</p>
     </div>
     <div class="acc rv d1">
@@ -857,23 +872,27 @@ footer{position:relative;overflow:clip;margin-top:100px}
   </div>
 </section>
 
-<!-- 10 편집 툴 -->
+<!-- 10 편집 툴 — 라벨 없는 아이콘 한 줄 + 연결선 + 중앙 글로우 (실측 구성) -->
 <section class="pad tools">
-  <div class="arc" aria-hidden="true"></div>
+  <div class="glow" aria-hidden="true"></div>
+  <div class="ring r1" aria-hidden="true"></div>
+  <div class="ring r2" aria-hidden="true"></div>
   <div class="wrap">
     <div class="sec-head">
       <span class="chip rv y30">편집 툴</span>
       <h2 class="sec rv bl">주요 편집 툴은<br>모두 능숙하게 다룹니다</h2>
       <p class="sub rv d1">쓰시던 프로젝트 파일 그대로 이어받아 작업할 수 있습니다.</p>
     </div>
-    <div class="tool-row">
-      <div class="tool rv y30 d1"><span class="tile t1">Pp</span><span>프리미어 프로</span></div>
-      <div class="tool rv y30 d2"><span class="tile t2">Fc</span><span>파이널 컷</span></div>
-      <div class="tool rv y30 d3"><span class="tile t3">Cc</span><span>캡컷</span></div>
-      <div class="tool rv y30 d4"><span class="tile t4">Fm</span><span>필모라</span></div>
-      <div class="tool rv y30 d5"><span class="tile t5">Dv</span><span>다빈치 리졸브</span></div>
-      <div class="tool rv y30 d6"><span class="tile t6">Ae</span><span>애프터 이펙트</span></div>
-    </div>
+  </div>
+  <div class="tool-row" aria-label="사용 가능한 편집 툴: 캡컷 · 다빈치 리졸브 · 애프터 이펙트 · 프리미어 프로 · 파이널 컷 · 필모라">
+    <div class="tool" aria-hidden="true"><span class="tile" style="background:#17120E;color:#3A322B">Vx</span></div>
+    <div class="tool rv y30 d1"><span class="tile t3">Cc</span></div>
+    <div class="tool rv y30 d2"><span class="tile t5">Dv</span></div>
+    <div class="tool rv y30 d3"><span class="tile t6">Ae</span></div>
+    <div class="tool rv y30 d4"><span class="tile t1">Pp</span></div>
+    <div class="tool rv y30 d5"><span class="tile t2">Fc</span></div>
+    <div class="tool rv y30 d6"><span class="tile t4">Fm</span></div>
+    <div class="tool" aria-hidden="true"><span class="tile" style="background:#17120E;color:#3A322B">Lw</span></div>
   </div>
 </section>
 
@@ -923,7 +942,7 @@ footer{position:relative;overflow:clip;margin-top:100px}
         <span>© 2026 클립랩. All rights reserved.</span>
         <span>민트클 · 사업자등록번호 266-07-03678 · 6gsmake@gmail.com · 010-4894-4905</span>
       </div>
-      <span class="ghostword" aria-hidden="true">Clip</span>
+      <span class="ghostword" aria-hidden="true">ClipLab</span>
     </div>
   </footer>
 </section>
