@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { getLatestTemplateDesigns } from "@/lib/samples";
+import { getSampleBySlug, type Sample } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
 
 type Tier = {
@@ -27,7 +27,7 @@ const TIERS: Tier[] = [
   },
   {
     name: "쇼핑몰",
-    setupFee: "300만 원~",
+    setupFee: "400만 원~",
     tagline: "상품 등록부터 결제·회원까지 직접 판매하는 구성",
   },
   {
@@ -58,6 +58,15 @@ const COMMON_FEATURES = [
   "기본 SEO 세팅",
   "유지보수 옵션 (월 3회, 선택)",
 ];
+
+/**
+ * 프리미엄 디자인 진열 목록 — 실제 홈페이지가 완성되는 대로 이 배열에서 교체·추가한다.
+ * 현재는 임시로 모토 디자인 B(MOTL-1002)와 바버샵(노블 바버)만 노출.
+ */
+const PREMIUM_DESIGN_SLUGS = ["moto-b-template", "beauty-g-template"];
+const PREMIUM_DESIGNS = PREMIUM_DESIGN_SLUGS.map((slug) => getSampleBySlug(slug))
+  .filter((s): s is Sample => Boolean(s?.image))
+  .map((s) => ({ sample: s, label: s.industry.replace(" 홈페이지", ""), href: `/samples/${s.slug}` }));
 
 export default function WebSolutions() {
   usePageTitle(
@@ -124,7 +133,9 @@ export default function WebSolutions() {
           <h2 className="mt-2 text-xl font-semibold">프리미엄 디자인</h2>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground break-keep">
             최근 제작한 프리미엄 등급 디자인입니다. 이 디자인을 기반으로 문구 · 이미지 · 구성을
-            맞춰 제작하며, <strong className="text-foreground">200만 원부터</strong> 시작합니다
+            맞춰 제작하며,
+            <br />
+            <strong className="text-foreground">300만 원부터</strong> 시작합니다
             <span className="text-xs"> (부가세 별도)</span>.
           </p>
         </FadeIn>
@@ -139,7 +150,7 @@ export default function WebSolutions() {
       </div>
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {getLatestTemplateDesigns(12).map((d, idx) => (
+        {PREMIUM_DESIGNS.map((d, idx) => (
           <FadeIn key={d.href} delay={(idx % 4) * 70}>
             <Link
               to={d.href}

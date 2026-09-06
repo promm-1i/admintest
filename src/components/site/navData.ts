@@ -262,7 +262,7 @@ export const HEADER_NAV: NavEntry[] = [
     label: "맞춤형 서비스",
     items: [
       { label: "커스텀 개발이란?", href: "/services/custom" },
-      { label: "업종별 솔루션 · 데모 체험", href: "/web-solutions" },
+      { label: "솔루션 · 데모 체험", href: "/web-solutions" },
       { label: "관리자 시스템", href: "/services/admin-system", group: "기능별 개발" },
       { label: "문의 · 예약 관리", href: "/services/inquiry-reservation", group: "기능별 개발" },
       { label: "검색 · 필터 기능", href: "/services/search-filter", group: "기능별 개발" },
