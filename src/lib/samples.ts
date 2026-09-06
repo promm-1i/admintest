@@ -108,7 +108,6 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/moto-b/",
     industryKey: "moto",
     designCode: "MOTL-1002",
-    premium: true, // 임시 진열 — 실제 홈페이지가 완성되면 교체
   },
   {
     slug: "moto-b-basic-template",
@@ -227,7 +226,6 @@ export const SAMPLES: Sample[] = [
     idealFor: "남성 전문 바버샵 · 브랜딩을 강하게 가져가는 헤어샵",
     image: "/thumbs/beauty-g.jpg",
     liveUrl: "/templates/beauty-g/",
-    premium: true, // 임시 진열 — 실제 홈페이지가 완성되면 교체
     industryKey: "beauty",
     designCode: "BEAL-1007",
   },
@@ -4113,7 +4111,7 @@ export const SAMPLES: Sample[] = [
  * 새 템플릿을 SAMPLES에 추가하면 포트폴리오·메인 슬라이더에 자동 반영된다.
  */
 export const PORTFOLIO_SAMPLES: Sample[] = SAMPLES.filter(
-  (s) => !s.industryKey || s.type?.includes("landing-template"),
+  (s) => !s.industryKey || s.type?.includes("landing-template") || s.type?.includes("premium-template"),
 );
 
 /**
@@ -4155,8 +4153,9 @@ export const MAIN_PORTFOLIO_CAROUSEL: Sample[] = [
   ),
 ].slice(0, MAIN_CAROUSEL_LIMIT);
 
-export const PORTFOLIO_FILTERS = [
+export const PORTFOLIO_FILTERS: { label: string; value: string; highlight?: boolean }[] = [
   { label: "전체", value: "all" },
+  { label: "프리미엄 디자인", value: "premium-template", highlight: true },
   { label: "플랫폼·시스템", value: "platform" },
   { label: "원페이지", value: "one-page" },
   { label: "소상공인", value: "small-business" },

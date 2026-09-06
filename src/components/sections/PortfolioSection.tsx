@@ -197,9 +197,12 @@ export function PortfolioSection() {
                   "shrink-0 rounded-full px-4 py-2 text-xs sm:text-sm font-medium transition-all duration-200",
                   isActive
                     ? "bg-foreground text-background shadow-xs"
-                    : "bg-secondary/70 text-secondary-foreground hover:bg-secondary hover:text-foreground",
+                    : f.highlight
+                      ? "bg-primary/10 text-primary ring-1 ring-primary/40 hover:bg-primary/15"
+                      : "bg-secondary/70 text-secondary-foreground hover:bg-secondary hover:text-foreground",
                 )}
               >
+                {f.highlight && <span aria-hidden="true" className="mr-1">✦</span>}
                 {f.label}
               </button>
             );
