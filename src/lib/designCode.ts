@@ -36,6 +36,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   travel: "TRV",
   moto: "MOT",
   video: "VID",
+  perfume: "PER",
 };
 
 export function getDesignCode(sample: Sample): string {

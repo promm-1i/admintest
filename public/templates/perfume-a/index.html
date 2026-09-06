@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>오드 메종 — 니치 향수 브랜드 (프리미엄 디자인 A)</title>
+<meta name="description" content="풀블리드 히어로, 블랙 특징 밴드, 3열 컬렉션 카드, 브랜드 스토리, 저널, 뉴스레터 패널로 구성한 니치 향수 브랜드 프리미엄 원페이지 랜딩입니다.">
+<meta property="og:title" content="오드 메종 — 니치 향수 브랜드 (프리미엄 디자인 A)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400&family=Noto+Serif+KR:wght@400&family=Pinyon+Script&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰: 골드 rgb(224,194,140) · 잉크 rgb(23,23,23)/rgb(23,21,18) · 크림 rgb(245,241,236) · 오프화이트 rgb(250,250,250) · 컨테이너 1200 · 라운드 10 */
+:root{--gold:#E0C28C;--ink:#171717;--ink2:#171512;--cream:#F5F1EC;--off:#FAFAFA;--paper:#F4F0E8;--hover:#D4D4D4;--ease:cubic-bezier(0,0,.2,1);--line-ease:cubic-bezier(.03,.18,.1,.94)}
+body{background:#fff;color:#000;font-family:"General Sans","Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.5;letter-spacing:-.02em}
+p,a,li,span,button,label{letter-spacing:-.02em}
+h1,h2,h3{font-family:"Cormorant Garamond","Noto Serif KR",serif;font-weight:400;line-height:1.2;letter-spacing:-.04em}
+h1{font-size:90px}
+h2{font-size:64px}
+h3{font-size:48px}
+.script{font-family:"Pinyon Script","Cormorant Garamond",cursive;font-weight:400;letter-spacing:0}
+.wrap{width:100%;max-width:1200px;margin:0 auto}
+.lb{font-size:18px;line-height:27px;color:var(--ink)}
+.t16{font-size:16px;line-height:24px}
+.t18{font-size:18px;line-height:27px}
+.t20{font-size:20px;line-height:30px}
+::selection{background:rgba(224,194,140,.5)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+/* 등장 — 실측: 요소가 50% 보이면 opacity 0→1 + 이동(y50 · x±50 · x±100 · 카드 y100) 0.5s ease-out. 카드 4장 0.1s 스태거. 히어로 카피는 로드 0.15s 뒤 y50→0 */
+.rv{opacity:0;transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.rv.y50{transform:translateY(50px)}
+.rv.y100{transform:translateY(100px)}
+.rv.xl50{transform:translateX(-50px)}
+.rv.xr50{transform:translateX(50px)}
+.rv.xl100{transform:translateX(-100px)}
+.rv.xr100{transform:translateX(100px)}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* 헤더 — 76 · 검정 · 패딩 16 40 · 컨테이너 1200 · 내비 18/27 gap30 · 로고 131×44 · 흰 버튼 r10 pad 8 20 */
+.hd{background:#000;padding:16px 40px;position:relative;z-index:10}
+.hd-in{display:flex;align-items:center;justify-content:space-between;height:44px}
+.hd-nav{display:flex;gap:30px;align-items:center}
+.hd-nav a,.hd-menu a.lnk{font-size:18px;line-height:27px;color:#fff;transition:color .15s var(--ease)}
+.hd-nav a:hover,.hd-menu a.lnk:hover{color:var(--hover)}
+.logo{width:131px;height:44.125px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:30px;line-height:44px;white-space:nowrap;flex:none}
+.btn-w{display:flex;align-items:center;justify-content:center;gap:10px;height:40px;padding:8px 20px;background:#fff;color:#000;border-radius:10px;overflow:hidden;font-size:16px;line-height:24px;flex:none}
+.btn-w .sl{position:relative;display:block;height:24px;overflow:hidden}
+.btn-w .sl span{display:block;transition:transform .45s cubic-bezier(.45,0,.55,1)}
+.btn-w .sl span+span{position:absolute;left:0;top:31px}
+.btn-w:hover .sl span{transform:translateY(-31px)}
+.mnav-chk{display:none}
+.burger{display:none;width:40px;height:40px;padding:8px;cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:7px;position:relative}
+.burger i{display:block;width:24px;height:2px;background:#888;transition:transform .25s ease,opacity .2s ease}
+.hd-menu{display:none}
+
+/* 히어로 — 800 풀블리드 사진 · 카피 500 폭 세로 중앙 · 라벨 18/27 · h1 90/108 (아래 5) · 본문 20/30 · gap 12 */
+.hero{position:relative;height:800px;padding:0 40px;display:flex;align-items:center}
+.hero .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-in{position:relative;z-index:1}
+.hero-copy{max-width:500px;display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.hero-copy .h1w{width:100%;padding-bottom:5px}
+.hero-copy h1{width:100%;color:#000}
+.hero-copy .lead{font-size:20px;line-height:30px;color:#000}
+
+/* 특징 밴드 — 검정 · 패딩 130 0 · 카드 285×212 (pad 20) gap 20 · 아이콘 70 골드 선 1.5 · 제목 20/30 · 본문 16/24 · gap 12 */
+.feat{background:#000;padding:0 40px}
+.feat-in{padding:130px 0}
+.feat-list{display:flex;gap:20px;justify-content:center;grid-auto-rows:minmax(0,1fr)}
+.fcard{width:285px;flex:none;padding:20px}
+.fc-in{border-radius:10px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.fc-in svg{width:70px;height:70px;color:var(--gold);flex:none}
+.fc-txt{width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:#fff}
+.fc-txt p{width:100%}
+
+/* 섹션 타이틀 — 라벨 18/27 · 골드 선 100×2 · h2 64/76.8 · gap 12 */
+.ttl{display:flex;flex-direction:column;align-items:center;gap:12px;overflow:hidden;width:100%}
+.ttl h2,.ttl-l h2{color:#000}
+.line{display:block;width:100px;height:2px;background:var(--gold);flex:none}
+
+/* 컬렉션 — 패딩 100 0 · gap 50 · 3열 grid 20 · 카드 r10: 사진 500 + 텍스트(pad 20 gap 20: 이름 20/30 · 설명 16/24 gap 12 · 가격 48/57.6 골드 gap 8) */
+.prod{padding:0 40px}
+.prod-in,.blog-in{padding:100px 0;display:flex;flex-direction:column;align-items:center;gap:50px}
+.prod .lb{color:var(--ink2)}
+.pgrid,.jgrid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(0,1fr);gap:20px;width:100%}
+.pcard{display:flex;flex-direction:column;align-items:center;border-radius:10px;overflow:clip}
+.pimg{width:100%;height:500px;overflow:hidden;flex:none}
+.pimg img,.jimg img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.pcard:hover .pimg img,.jcard:hover .jimg img{transform:scale(1.05)}
+.ptxt{width:100%;padding:20px;display:flex;flex-direction:column;align-items:center;gap:20px}
+.pdet{width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:#000}
+.pdet p{width:100%}
+.price{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;color:var(--gold)}
+
+/* 브랜드 스토리 — 검정 · 패딩 130 0 · 좌우 590 gap 20 세로 중앙 · 좌: 타이틀(max 500) / 선 / 본문 16/24(max 500) / 서명 270×84 + 16/24, gap 30 · 우: r10 사진 4:3 */
+.about{background:#000;padding:0 40px;color:#fff}
+.about-in{padding:130px 0}
+.about-row{display:flex;gap:20px;align-items:center}
+.a-left{flex:1 0 0;display:flex;flex-direction:column;align-items:flex-start;gap:30px;overflow:clip}
+.ttl-l{width:100%;max-width:500px;display:flex;flex-direction:column;align-items:flex-start;gap:12px;overflow:hidden}
+.ttl-l h2{width:100%}
+.about .lb{color:var(--gold)}
+.about .ttl-l h2{color:#fff}
+.a-left .desc{width:100%;max-width:500px;font-size:16px;line-height:24px}
+.founder p{width:100%}
+.founder{width:270px;display:flex;flex-direction:column;align-items:flex-start;gap:30px}
+.sig{display:flex;align-items:center;width:270px;height:84px;font-size:62px;line-height:84px;color:#fff;white-space:nowrap;overflow:hidden}
+.a-right{flex:1 0 0;border-radius:10px;overflow:clip}
+.a-right img{width:100%;aspect-ratio:1448/1086;object-fit:cover}
+
+/* 저널 — 패딩 100 0 · 3열 · 카드 r10 gap 10: 사진 1.45:1 · 텍스트 pad 30 20 gap 16 (날짜 16/24 골드 · 제목 20/30) */
+.blog{padding:0 40px}
+.jcard{display:flex;flex-direction:column;align-items:center;gap:10px;border-radius:10px;overflow:clip}
+.jimg{width:100%;aspect-ratio:1.45;overflow:hidden;flex:none}
+.jtxt{width:100%;padding:30px 20px;display:flex;flex-direction:column;align-items:flex-start;gap:16px}
+.jtxt .date{font-size:16px;line-height:24px;color:var(--gold)}
+.jtxt .jt{width:100%;font-size:20px;line-height:30px;color:#000}
+
+/* 뉴스레터 — 오프화이트 바탕 패딩 100 40 · 크림 패널 r10 row gap 20: 사진 550 (4:3) · 텍스트 pad 20 gap 50 (h3 48/57.6 · 18/27 gap 10 · 흰 입력 r10 pad 19.5 8.5 19.5 24 · 검정 버튼 118×40 r10 우측 10) */
+.news{background:var(--off);padding:100px 40px}
+.news-box{background:var(--cream);border-radius:10px;display:flex;gap:20px;align-items:center;overflow:clip}
+.n-img{flex:1 0 0;max-width:550px;overflow:hidden}
+.n-img img{width:100%;aspect-ratio:1448/1086;object-fit:cover}
+.n-txt{flex:1 0 0;padding:20px;display:flex;flex-direction:column;align-items:flex-start;gap:50px;overflow:hidden}
+.n-sd{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:10px;color:#000}
+.n-sd h3,.n-sd p{width:100%}
+.n-sd p{font-size:18px;line-height:27px}
+.n-form{width:100%}
+.n-field{position:relative;display:flex;align-items:center;background:#fff;border-radius:10px;padding:19.5px 8.5px 19.5px 24px;overflow:hidden}
+.n-field input{flex:1 1 0;min-width:0;font-weight:500;font-size:16px;line-height:19.2px;letter-spacing:0;color:var(--ink);outline:0}
+.n-field input::placeholder{color:#D4D4D4}
+.n-field button{position:absolute;right:10px;top:9px;height:40px;padding:8px 20px;background:#000;color:#fff;border-radius:10px;font-size:16px;line-height:24px}
+
+/* 푸터 — 검정 패딩 100 40 50 · 컨테이너 pad-top 24 gap 50 · 상단 row gap 100: h3 48/57.6 · 3열 170 gap 20 (제목 20/30 · 링크 18/27 gap 12 · 연락 16/24) · 하단 pad-top 24 선 1px rgba(244,240,232,.18) · © 16/24 · 소셜 40×40 아이콘 30 */
+.ft{background:#000;color:#fff;padding:100px 40px 50px}
+.ft-in{padding-top:24px;display:flex;flex-direction:column;gap:50px}
+.ft-top{display:flex;gap:100px;align-items:flex-start}
+.ft-top h3{flex:1 0 0;color:#fff}
+.fcols{flex:1 0 0;display:grid;grid-template-columns:repeat(3,170px);gap:20px;justify-content:center}
+.fcols>div{display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.fcols .ct{width:100%;font-size:20px;line-height:30px}
+.fcols ul{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.fcols ul a{display:block;font-size:18px;line-height:27px;transition:color .15s var(--ease)}
+.fcols ul a:hover,.fcols .cta a:hover{color:var(--hover)}
+.fcols .cta a{display:inline;font-size:16px;line-height:24px;transition:color .6s var(--line-ease)}
+.ft-bot{position:relative;padding-top:24px;display:flex;align-items:center;justify-content:space-between}
+.ft-bot::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:rgba(244,240,232,.18)}
+.ft-bot p{font-size:16px;line-height:24px;color:var(--paper)}
+.social{display:flex;gap:10px}
+.social a{width:40px;height:40px;padding:5px;display:flex;align-items:center;justify-content:center;color:#D4D4D4}
+.social svg{width:30px;height:30px}
+
+/* 태블릿 810~1199 (Framer 브레이크포인트 실측): h1 72 · h2 51 · h3 38 · 특징/컬렉션/저널 2열 · 스토리 세로 · 푸터 2열 */
+@media(max-width:1199px){
+  h1{font-size:72px}h2{font-size:51px}h3{font-size:38px}
+  .feat-list,.pgrid,.jgrid{display:grid;grid-template-columns:repeat(2,1fr)}
+  .fcard{width:auto}
+  .about-row{flex-direction:column;align-items:center}
+  .a-left,.a-right{width:100%;flex:none}
+  .ft-top{gap:50px}
+  .fcols{grid-template-columns:repeat(2,1fr);gap:50px 20px;grid-auto-rows:minmax(0,1fr)}
+}
+/* 폰 ≤809: 헤더 고정+햄버거 · 패딩 20 · 섹션 패딩 50 · 1열 · h1 58 · h2 40 · h3 30 · 뉴스레터 세로 · 푸터 세로/2열 165 */
+@media(max-width:809px){
+  h1{font-size:58px}h2{font-size:40px}h3{font-size:30px}
+  .hd{position:fixed;top:0;left:0;right:0;padding:16px 20px}
+  .hd-in{flex-wrap:wrap;height:auto;min-height:44px}
+  .hd-menu{flex:0 0 100%;width:100%}
+  .hd-nav,.hd-in>.btn-w{display:none}
+  .burger{display:flex}
+  .hd:has(.mnav-chk:checked){padding-bottom:30px}
+  .hd:has(.mnav-chk:checked) .burger i:nth-child(1){transform:translateY(9px) rotate(45deg)}
+  .hd:has(.mnav-chk:checked) .burger i:nth-child(2){opacity:0}
+  .hd:has(.mnav-chk:checked) .burger i:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+  .hd:has(.mnav-chk:checked) .hd-menu{display:flex}
+  .hd-menu{flex-direction:column;align-items:flex-start;gap:30px;padding-top:30px}
+  .hd-menu .links{display:flex;flex-direction:column;gap:30px}
+  .hero,.feat,.prod,.about,.blog{padding-left:20px;padding-right:20px}
+  .feat-in,.prod-in,.blog-in,.about-in{padding-top:50px;padding-bottom:50px}
+  .feat-list,.pgrid,.jgrid{grid-template-columns:1fr}
+  .news{padding:50px 20px}
+  .news-box{flex-direction:column}
+  .n-img{max-width:none;width:100%;flex:none}
+  .n-txt{width:100%;flex:none}
+  .ft{padding:50px 20px}
+  .ft-top{flex-direction:column;gap:50px}
+  .ft-top h3,.fcols{flex:none;width:100%}
+  .fcols{grid-template-columns:repeat(2,165px);gap:50px 20px;grid-auto-rows:1fr;justify-content:start}
+  .ft-bot{flex-direction:column;gap:20px;justify-content:center}
+  .ft-bot p{text-align:center}
+}
+</style>
+</head>
+<body id="top">
+<header class="hd">
+  <input type="checkbox" id="mnav" class="mnav-chk">
+  <div class="wrap hd-in">
+    <nav class="hd-nav" aria-label="주 메뉴">
+      <a href="#about">브랜드 소개</a>
+      <a href="#collection">컬렉션</a>
+      <a href="#journal">저널</a>
+    </nav>
+    <a class="logo script" href="#top" aria-label="오드 메종 홈">Ode Maison</a>
+    <a class="btn-w" href="#collection"><span class="sl"><span>컬렉션 보기</span><span aria-hidden="true">컬렉션 보기</span></span></a>
+    <label class="burger" for="mnav" aria-label="메뉴 열기"><i></i><i></i><i></i></label>
+    <div class="hd-menu">
+      <div class="links">
+        <a class="lnk" href="#about">브랜드 소개</a>
+        <a class="lnk" href="#collection">컬렉션</a>
+        <a class="lnk" href="#journal">저널</a>
+      </div>
+      <a class="btn-w" href="#collection"><span class="sl"><span>컬렉션 보기</span><span aria-hidden="true">컬렉션 보기</span></span></a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <img class="bg" src="./assets/hero.jpg" alt="" width="1440" height="800" fetchpriority="high">
+  <div class="wrap hero-in">
+    <div class="hero-copy rv y50 ld">
+      <p class="lb">우아함의 본질</p>
+      <div class="h1w"><h1>향으로 남는<br>당신의 순간</h1></div>
+      <p class="lead">오드 메종은 세계 각지에서 엄선한 원료로 향의 예술을 완성합니다. 정교하게 조향된 한 방울이 오래도록 기억되는 인상을 남깁니다.</p>
+    </div>
+  </div>
+</section>
+
+<section class="feat">
+  <div class="wrap feat-in">
+    <div class="feat-list">
+      <div class="fcard rv y100"><div class="fc-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 5.25c4.142 0 7.5 3.358 7.5 7.5v3.75c-4.142 0-7.5-3.358-7.5-7.5z"/><path d="M19.5 5.25c-4.142 0-7.5 3.358-7.5 7.5v3.75c4.142 0 7.5-3.358 7.5-7.5z"/><path d="M7.5 19.5 12 21.75l4.5-2.25"/><path d="M8.135 6.188C9.375 3.563 12 2.25 12 2.25s2.625 1.313 3.865 3.938"/><path d="M12 21.75V16.5"/></svg>
+        <div class="fc-txt"><p class="t20">엄선한 원료</p><p class="t16">세계 각지에서 찾아낸 원료를 정밀하게 조향합니다</p></div>
+      </div></div>
+      <div class="fcard rv y100 d1"><div class="fc-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.75C20.618 17.37 16.718 21 12 21c-4.971 0-9-4.029-9-9 0-4.718 3.63-8.618 8.25-9"/><path d="M12 6.75V12h5.25"/><circle cx="15" cy="3.375" r="1.125" fill="currentColor" stroke="none"/><circle cx="18.375" cy="5.625" r="1.125" fill="currentColor" stroke="none"/><circle cx="20.625" cy="9" r="1.125" fill="currentColor" stroke="none"/></svg>
+        <div class="fc-txt"><p class="t20">오래가는 지속력</p><p class="t16">프리미엄 포뮬러로 6시간 이상 향이 지속됩니다</p></div>
+      </div></div>
+      <div class="fcard rv y100 d2"><div class="fc-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 9.75-3.75-3.75L12 2.25l3.75 3.75z"/><path d="m12 21.75-3.75-3.75L12 14.25l3.75 3.75z"/><path d="m18 15.75-3.75-3.75L18 8.25l3.75 3.75z"/><path d="m6 15.75-3.75-3.75L6 8.25l3.75 3.75z"/></svg>
+        <div class="fc-txt"><p class="t20">럭셔리한 경험</p><p class="t16">가장 좋은 것을 알아보는 분들을 위해 디자인했습니다</p></div>
+      </div></div>
+      <div class="fcard rv y100 d3"><div class="fc-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.61 17.142 12.36 21.658a.75.75 0 0 1-.72 0L3.39 17.142a.75.75 0 0 1-.39-.657V7.517c.001-.273.15-.525.39-.656l8.25-4.517a.75.75 0 0 1 .72 0l8.25 4.517c.24.131.389.383.39.656v8.966a.75.75 0 0 1-.39.659Z"/><path d="m3.066 7.211 8.934 4.89 8.935-4.89"/><path d="M12 12.102v9.645"/><path d="m7.646 4.529 8.854 4.846v4.875"/></svg>
+        <div class="fc-txt"><p class="t20">정성스러운 패키징</p><p class="t16">선물과 소장 모두에 어울리는 우아한 패키징</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<section class="prod" id="collection">
+  <div class="wrap prod-in">
+    <div class="ttl rv y50">
+      <p class="lb">오드 메종 컬렉션</p>
+      <i class="line"></i>
+      <h2>당신을 위한 향</h2>
+    </div>
+    <div class="pgrid rv y50">
+      <a class="pcard" href="#collection">
+        <div class="pimg"><img src="./assets/product-1.jpg" alt="로즈 누아르 오 드 퍼퓸" decoding="async"></div>
+        <div class="ptxt">
+          <div class="pdet"><p class="t20">오드 메종 로즈 누아르 오 드 퍼퓸 50ml · 유니섹스 향수</p><p class="t16">깊이 있는 시간을 초월한 장미의 향</p></div>
+          <div class="price"><h3>₩</h3><h3>89,000</h3></div>
+        </div>
+      </a>
+      <a class="pcard" href="#collection">
+        <div class="pimg"><img src="./assets/product-2.jpg" alt="베티버 오 드 퍼퓸" decoding="async"></div>
+        <div class="ptxt">
+          <div class="pdet"><p class="t20">오드 메종 베티버 우디 오 드 퍼퓸 50ml · 유니섹스 향수</p><p class="t16">절제된 우아함 위에 내려앉은 신선한 우디</p></div>
+          <div class="price"><h3>₩</h3><h3>95,000</h3></div>
+        </div>
+      </a>
+      <a class="pcard" href="#collection">
+        <div class="pimg"><img src="./assets/product-3.jpg" alt="솔레이 오 드 퍼퓸" decoding="async"></div>
+        <div class="ptxt">
+          <div class="pdet"><p class="t20">오드 메종 솔레이 시트러스 오 드 퍼퓸 50ml · 유니섹스 향수</p><p class="t16">황금빛 온기에 감싸인 햇살 시트러스</p></div>
+          <div class="price"><h3>₩</h3><h3>95,000</h3></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-in">
+    <div class="about-row">
+      <div class="a-left rv xl50">
+        <div class="ttl-l">
+          <p class="lb">브랜드 스토리</p>
+          <h2>향의 예술</h2>
+        </div>
+        <i class="line"></i>
+        <p class="desc">오드 메종은 장인 정신과 완벽을 향한 열정에서 시작되었습니다. 모든 향은 숙련된 조향사가 세계 각지에서 찾아낸 최상급 원료로 정성껏 블렌딩합니다. 시간이 지나도 변치 않는 우아함을 한 병에 담았습니다.</p>
+        <div class="founder">
+          <span class="sig script" aria-hidden="true">Ode Maison</span>
+          <p class="t16">창립자 · 오드 메종</p>
+        </div>
+      </div>
+      <div class="a-right rv xr50"><img src="./assets/about.jpg" alt="오드 메종 향수와 패키지" decoding="async"></div>
+    </div>
+  </div>
+</section>
+
+<section class="blog" id="journal">
+  <div class="wrap blog-in">
+    <div class="ttl rv y50">
+      <p class="lb">오드 메종 저널</p>
+      <i class="line"></i>
+      <h2>향에 관한 이야기</h2>
+    </div>
+    <div class="jgrid rv y50">
+      <a class="jcard" href="#journal">
+        <div class="jimg"><img src="./assets/journal-1.jpg" alt="" decoding="async"></div>
+        <div class="jtxt"><p class="date">2026. 07. 13</p><p class="jt">향수를 더 오래 지속시키는 5가지 방법</p></div>
+      </a>
+      <a class="jcard" href="#journal">
+        <div class="jimg"><img src="./assets/journal-2.jpg" alt="" decoding="async"></div>
+        <div class="jtxt"><p class="date">2026. 07. 13</p><p class="jt">시간을 초월한 향을 만드는 원료들의 이야기</p></div>
+      </a>
+      <a class="jcard" href="#journal">
+        <div class="jimg"><img src="./assets/journal-3.jpg" alt="" decoding="async"></div>
+        <div class="jtxt"><p class="date">2026. 07. 13</p><p class="jt">나에게 꼭 맞는 시그니처 향을 고르는 기술</p></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="news" id="contact">
+  <div class="wrap news-box">
+    <div class="n-img rv xl100"><img src="./assets/newsletter.jpg" alt="" decoding="async"></div>
+    <div class="n-txt rv xr100">
+      <div class="n-sd">
+        <h3>영감을 구독하세요</h3>
+        <p>특별 혜택과 신제품 소식, 향의 세계를 가장 먼저 전해드립니다</p>
+      </div>
+      <form class="n-form" onsubmit="return false">
+        <label class="n-field">
+          <input type="email" name="email" placeholder="이메일 주소" autocomplete="email" aria-label="이메일 주소">
+          <button type="button">구독하기</button>
+        </label>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="ft">
+  <div class="wrap ft-in">
+    <div class="ft-top">
+      <h3>당신의 이야기 한 장면이<br>되는 향</h3>
+      <div class="fcols">
+        <div>
+          <p class="ct">바로가기</p>
+          <ul><li><a href="#about">브랜드 소개</a></li><li><a href="#collection">컬렉션</a></li><li><a href="#journal">저널</a></li></ul>
+        </div>
+        <div>
+          <p class="ct">안내</p>
+          <ul><li><a href="#top">개인정보처리방침</a></li><li><a href="#top">이용약관</a></li><li><a href="#contact">고객센터</a></li></ul>
+        </div>
+        <div class="cta">
+          <p class="ct">문의</p>
+          <ul><li><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></li><li><a href="tel:010-4894-4905">010-4894-4905</a></li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p>© 2026 오드 메종 · 민트클 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</p>
+      <div class="social">
+        <a href="#top" aria-label="인스타그램"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4.5"/><circle cx="12" cy="12" r="3.75"/><circle cx="16.875" cy="7.125" r="1.125" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#top" aria-label="엑스"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 3.75H9l10.5 16.5H15z"/><path d="m10.676 13.456-6.176 6.794"/><path d="M19.5 3.75l-6.176 6.794"/></svg></a>
+        <a href="mailto:6gsmake@gmail.com" aria-label="이메일"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.25" width="18" height="13.5" rx="1.5"/><path d="m3 7.5 9 6.75L21 7.5"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if(rm){els.forEach(function(e){e.classList.add('on')});return}
+  // 히어로 카피: 로드 0.15s 뒤 (레퍼런스 실측)
+  var ld=document.querySelector('.rv.ld'); if(ld){setTimeout(function(){ld.classList.add('on')},150)}
+  // 스크롤 등장: 요소가 50% 보이면 시작. 500px 넘는 큰 블록(그리드)은 살짝만 보여도 시작 (레퍼런스 실측)
+  var groups={};
+  els.filter(function(e){return !e.classList.contains('ld')}).forEach(function(e){
+    var h=e.getBoundingClientRect().height, th=h>500||h>innerHeight*0.6?0.01:0.5;
+    (groups[th]=groups[th]||[]).push(e);
+  });
+  Object.keys(groups).forEach(function(th){
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target)}})},{threshold:parseFloat(th)});
+    groups[th].forEach(function(e){io.observe(e)});
+  });
+})();
+</script>
+</body>
+</html>

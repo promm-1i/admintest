@@ -49,6 +49,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "perfume-a-template",
+    industry: "향수 · 코스메틱 브랜드 홈페이지",
+    title: "니치 향수 브랜드 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 향수 · 코스메틱",
+    purpose:
+      "풀블리드 히어로 사진 위 세리프 헤드라인, 블랙 특징 밴드, 3열 컬렉션 카드(사진 스케일 호버), 브랜드 스토리, 저널, 크림 뉴스레터 패널로 이어지는 니치 향수 브랜드 프리미엄 원페이지입니다. 사진 슬롯만 교체하면 코스메틱 · 캔들 · 주얼리 등 럭셔리 소매 업종에 그대로 적용됩니다.",
+    features: ["풀블리드 히어로 · 세리프 헤드라인", "골드 라인 아이콘 특징 4종", "컬렉션 카드 3종 (가격 · 호버 줌)", "브랜드 스토리 · 저널 · 뉴스레터"],
+    idealFor: "니치 향수 브랜드, 코스메틱 · 스킨케어 브랜드, 캔들 · 디퓨저 공방, 프리미엄 무드가 필요한 소매 브랜드",
+    image: "/thumbs/perfume-a.jpg",
+    liveUrl: "/templates/perfume-a/",
+    industryKey: "perfume",
+    designCode: "PERP-1001",
+    premium: true,
+  },
+  {
     slug: "video-a-template",
     industry: "영상 편집 · 콘텐츠 홈페이지",
     title: "숏폼 영상 편집 스튜디오 홈페이지 (프리미엄 디자인 A)",
