@@ -48,13 +48,20 @@ const CARD_W = 260;
 const CARD_H = 370;
 const RADIUS = 570;
 const STEP = 360 / 12; // 30° 간격
+/**
+ * 정지 각은 30° 그리드 정렬(0°) — 레퍼런스(clipcut) 캡처 실측: 정지 상태에서
+ * 카드 하나가 화면 정중앙(180° 위치)에 오고, ±90° 카드 두 장이 원근 전단으로
+ * 늘어나 좌우 끝의 "육각 벽"이 되어 항상 대칭이다. 드래그가 아무 각도에서 멈추면
+ * 한쪽 벽만 남아 비대칭으로 보이므로, 관성이 끝나면 가장 가까운 그리드 각으로 스냅한다.
+ */
+const REST_OFFSET = 0;
 
 function CylinderShowcase() {
   const reducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
   const isDesktop = useMediaQuery("(min-width: 1024px)");
   const containerRef = useRef<HTMLDivElement | null>(null);
   const draggedRef = useRef(false);
-  const angleRef = useRef(0);
+  const angleRef = useRef(REST_OFFSET);
   const velRef = useRef(0);
   const rafRef = useRef(0);
   const spinRef = useRef<HTMLDivElement | null>(null);
@@ -80,9 +87,31 @@ function CylinderShowcase() {
     let lastX = 0;
     let lastT = 0;
 
+    // 관성이 끝나면 가장 가까운 대칭 각(n·STEP + REST_OFFSET)으로 스르륵 정렬 —
+    // 아무 각도에서 멈추면 한쪽 가장자리 카드만 남아 좌우가 비대칭으로 보인다.
+    const settle = () => {
+      const target =
+        Math.round((angleRef.current - REST_OFFSET) / STEP) * STEP + REST_OFFSET;
+      const tick = () => {
+        const diff = target - angleRef.current;
+        if (Math.abs(diff) < 0.05) {
+          angleRef.current = target;
+          apply();
+          return;
+        }
+        angleRef.current += diff * 0.08;
+        apply();
+        rafRef.current = requestAnimationFrame(tick);
+      };
+      rafRef.current = requestAnimationFrame(tick);
+    };
+
     const momentum = () => {
       velRef.current *= 0.95;
-      if (Math.abs(velRef.current) < 0.005) return;
+      if (Math.abs(velRef.current) < 0.005) {
+        settle();
+        return;
+      }
       angleRef.current += velRef.current;
       apply();
       rafRef.current = requestAnimationFrame(momentum);
@@ -114,8 +143,17 @@ function CylinderShowcase() {
       if (!dragging) return;
       dragging = false;
       el.releasePointerCapture(e.pointerId);
-      if (!reducedMotion && Math.abs(velRef.current) > 0.02) {
+      if (reducedMotion) {
+        // 모션 최소화: 즉시 대칭 각으로
+        angleRef.current =
+          Math.round((angleRef.current - REST_OFFSET) / STEP) * STEP + REST_OFFSET;
+        apply();
+        return;
+      }
+      if (Math.abs(velRef.current) > 0.02) {
         rafRef.current = requestAnimationFrame(momentum);
+      } else {
+        settle();
       }
     };
     el.addEventListener("pointerdown", onDown);

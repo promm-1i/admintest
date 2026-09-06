@@ -85,17 +85,17 @@ nav a:hover{color:#fff}
 /* ── 0 히어로 — 실측(1440): 칩 y196 → h1 y270 (70/84 크림) → 서브 y478 (20/28 .6) → CTA y574 (48h) → 원통 y702 (1200×240 · persp 500) → 스트립 y1016 (632×51) · 섹션 h1137 ── */
 .hero{position:relative;height:1137px;overflow:clip}
 /* 배경: 중앙 상단 웜 브라운 워시 */
-.hero .wash{position:absolute;inset:0;background:radial-gradient(56% 52% at 50% 34%,#2E190D 0%,rgba(24,12,6,.6) 55%,rgba(9,4,1,0) 82%)}
-/* 좌상단 코너 글로우 — 실측 990×955 at (-367,-216): 코어 볼 + 동심 링 2겹 */
-.hero .corner{position:absolute;left:-367px;top:-216px;width:990px;height:955px;pointer-events:none}
+.hero .wash{position:absolute;inset:0;background:radial-gradient(52% 48% at 50% 34%,#241309 0%,rgba(20,10,5,.55) 55%,rgba(9,4,1,0) 82%)}
+/* 좌상단 코너 글로우 — 실측 990×955 at (-367,-216): 코어 볼 + 동심 링 2겹 (화면에는 우하단 사분면만 걸친다) */
+.hero .corner{position:absolute;left:-470px;top:-340px;width:990px;height:955px;pointer-events:none}
 .hero .corner i{position:absolute;border-radius:50%}
-.hero .corner .c1{inset:27%;background:radial-gradient(circle at 44% 42%,#FFAA5E 0%,#F1610F 40%,rgba(202,72,10,.85) 60%,rgba(120,38,7,.35) 78%,rgba(9,4,1,0) 92%);filter:blur(8px)}
-.hero .corner .c2{inset:19%;border:30px solid rgba(216,82,14,.2);filter:blur(12px)}
-.hero .corner .c3{inset:10%;border:26px solid rgba(216,82,14,.09);filter:blur(14px)}
+.hero .corner .c1{inset:30%;background:radial-gradient(circle at 44% 42%,#FFAA5E 0%,#F1610F 40%,rgba(202,72,10,.85) 60%,rgba(120,38,7,.35) 78%,rgba(9,4,1,0) 92%);filter:blur(8px)}
+.hero .corner .c2{inset:23%;border:26px solid rgba(216,82,14,.17);filter:blur(12px)}
+.hero .corner .c3{inset:15%;border:22px solid rgba(216,82,14,.07);filter:blur(14px)}
 /* 중앙 글로우 링 — 실측: 809×570 SVG 링 2겹 blur 60/100 plus-lighter at (308,204). 은은한 워밍만 */
-.hero .gring{position:absolute;left:308px;top:204px;width:809px;height:570px;pointer-events:none;mix-blend-mode:plus-lighter;background:radial-gradient(ellipse 46% 52% at 62% 58%,rgba(9,4,1,0) 0 34%,rgba(200,76,14,.3) 47% 55%,rgba(9,4,1,0) 70%)}
+.hero .gring{position:absolute;left:308px;top:204px;width:809px;height:570px;pointer-events:none;mix-blend-mode:plus-lighter;background:radial-gradient(ellipse 46% 52% at 62% 58%,rgba(9,4,1,0) 0 34%,rgba(200,76,14,.22) 47% 55%,rgba(9,4,1,0) 70%)}
 .hero .gring.g1{filter:blur(60px)}
-.hero .gring.g2{filter:blur(100px);opacity:.7}
+.hero .gring.g2{filter:blur(100px);opacity:.55}
 .hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:196px}
 .hero .chip{height:34px;padding:0 20px;font-size:16px;letter-spacing:-.02em;font-weight:400;color:#fff}
 .hero .chip::before,.hero .chip::after{display:none}
@@ -231,11 +231,12 @@ section{position:relative}
 .rcard{border-radius:20px;background:var(--panel);border:1px solid var(--line);padding:16px 16px 34px}
 .rcard .im{border-radius:8px;overflow:hidden;aspect-ratio:16/9;position:relative}
 .rcard .im img{width:100%;height:100%;object-fit:cover}
-.rcard .who{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;margin:18px 0 14px;padding:0 14px}
-.rcard .who i{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,#DCEAD3,#8FBF8A)}
+/* 핸들 칩 — 레퍼런스처럼 대형·소형 모두 이미지 위 좌하단 오버레이 */
+.rcard .im{position:relative}
+.rcard .who{position:absolute;left:14px;bottom:12px;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:6px 12px;border-radius:100px;background:rgba(9,4,1,.6);backdrop-filter:blur(6px)}
+.rcard .who i{width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#DCEAD3,#8FBF8A)}
 .rcard .who svg{width:14px;height:14px;fill:#3897F0}
-.rcard.sm .who{position:absolute;left:14px;bottom:12px;margin:0;padding:6px 12px;border-radius:100px;background:rgba(9,4,1,.6);backdrop-filter:blur(6px)}
-.rcard.sm .im{position:relative}
+.rcard>h3{margin-top:22px}
 .rcard h3{font-size:24px;font-weight:600;padding:0 14px;margin-bottom:10px}
 .rcard.sm h3{margin-top:18px}
 .rcard h3 em{font-style:normal;background:linear-gradient(180deg,#FFB182,#F1610F);-webkit-background-clip:text;background-clip:text;color:transparent}
@@ -467,7 +468,7 @@ footer{position:relative;overflow:clip;margin-top:100px}
         <div class="arm" style="transform:rotateY(60deg)"><div class="vb l"><img src="./assets/hero-7.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-8.jpg" alt=""></div></div>
         <div class="arm" style="transform:rotateY(90deg)"><div class="vb l"><img src="./assets/hero-12.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-14.jpg" alt=""></div></div>
         <div class="arm" style="transform:rotateY(120deg)"><div class="vb l"><img src="./assets/hero-16.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-18.jpg" alt=""></div></div>
-        <div class="arm" style="transform:rotateY(150deg)"><div class="vb l"><img src="./assets/hero-20.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-1.jpg" alt=""></div></div>
+        <div class="arm" style="transform:rotateY(150deg)"><div class="vb l"><img src="./assets/hero-20.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-22.jpg" alt=""></div></div>
         <div class="arm" style="transform:rotateY(180deg)"><div class="vb l"><img src="./assets/hero-3.jpg" alt=""></div><div class="vb r"><img src="./assets/hero-7.jpg" alt=""></div></div>
       </div>
     </div>
@@ -651,14 +652,12 @@ footer{position:relative;overflow:clip;margin-top:100px}
     </div>
     <div class="res-grid">
       <article class="rcard rv y30 d1">
-        <div class="im"><img src="./assets/start-a-project-1.jpg" alt="뷰티 브랜드 제품 촬영 컷"></div>
-        <span class="who"><i></i>@nova.beauty</span>
+        <div class="im"><img src="./assets/start-a-project-1.jpg" alt="뷰티 브랜드 제품 촬영 컷"><span class="who"><i></i>@nova.beauty</span></div>
         <h3>단일 릴스 조회수 <em>120만+</em></h3>
         <p>제품 중심의 짧고 강한 후킹 영상으로 브랜드 도달을 크게 넓히고 참여를 끌어올렸습니다.</p>
       </article>
       <article class="rcard rv y30 d2">
-        <div class="im"><img src="./assets/start-a-project-2.jpg" alt="피트니스 크리에이터 촬영 컷"></div>
-        <span class="who"><i></i>@fit.dohyun</span>
+        <div class="im"><img src="./assets/start-a-project-2.jpg" alt="피트니스 크리에이터 촬영 컷"><span class="who"><i></i>@fit.dohyun</span></div>
         <h3>30일 만에 팔로워 <em>+8천</em></h3>
         <p>꾸준한 콘텐츠 전략과 유지율 높은 편집을 결합해 채널이 안정적으로 성장했습니다.</p>
       </article>
@@ -970,10 +969,16 @@ document.querySelectorAll('[data-cu]').forEach(el=>cu.observe(el));
 // arms 컨테이너만 rotateY. 드래그 방향을 따라가도록 부호 반전(-dx), 관성 감쇠 0.95.
 const car=document.getElementById('car'),armsBox=document.getElementById('arms');
 if(car&&armsBox){
+  // 정지 각은 30° 그리드 정렬(레퍼런스 실측) — 카드 1장이 정중앙, ±90° 카드 2장이 좌우 육각 벽으로 대칭.
   let ang=0,vel=0,down=false,lastX=0,dragged=false,raf=null;
   const apply=()=>{armsBox.style.transform=`rotateY(${ang}deg)`};
-  const loop=()=>{ if(!down&&Math.abs(vel)>0.01){ang+=vel;vel*=0.95;apply();raf=requestAnimationFrame(loop)} else raf=null };
-  car.addEventListener('pointerdown',e=>{down=true;dragged=false;lastX=e.clientX;vel=0;car.classList.add('drag');car.setPointerCapture(e.pointerId)});
+  apply();
+  const settle=()=>{const target=Math.round(ang/30)*30;
+    const tick=()=>{const diff=target-ang;if(Math.abs(diff)<0.05){ang=target;apply();raf=null;return}
+      ang+=diff*0.08;apply();raf=requestAnimationFrame(tick)};
+    raf=requestAnimationFrame(tick)};
+  const loop=()=>{ if(!down&&Math.abs(vel)>0.01){ang+=vel;vel*=0.95;apply();raf=requestAnimationFrame(loop)} else settle() };
+  car.addEventListener('pointerdown',e=>{down=true;dragged=false;lastX=e.clientX;vel=0;if(raf)cancelAnimationFrame(raf);raf=null;car.classList.add('drag');car.setPointerCapture(e.pointerId)});
   car.addEventListener('pointermove',e=>{if(!down)return;const dx=e.clientX-lastX;lastX=e.clientX;if(Math.abs(dx)>2)dragged=true;const d=-dx*0.12;ang+=d;vel=d;apply()});
   const up=()=>{if(!down)return;down=false;car.classList.remove('drag');if(!raf)raf=requestAnimationFrame(loop)};
   car.addEventListener('pointerup',up);car.addEventListener('pointercancel',up);
