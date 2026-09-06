@@ -49,6 +49,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "shop-a-template",
+    industry: "쇼핑몰 · 라이프스타일 스토어 홈페이지",
+    title: "라이프스타일 쇼핑몰 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "shopping-mall"],
+    tag: "프리미엄 디자인 · 쇼핑몰 · 이커머스",
+    purpose:
+      "공지 바와 검색 헤더, 메가메뉴, 3장 자동 슬라이더, 카테고리 원형 아이콘, 카운트다운 특가, 상품 그리드 4·5열, 프로모션 배너 2종, 후기 티커, 홈웨어 캐러셀, 소셜 티커, 고객센터 스트립, 뉴스레터 푸터, 첫 주문 할인 팝업까지 갖춘 이커머스 프리미엄 원페이지입니다. 상품 사진과 가격만 바꾸면 의류 · 리빙 · 잡화 어떤 쇼핑몰에도 적용됩니다.",
+    features: ["메가메뉴 · 검색 · 장바구니 헤더", "자동 슬라이더 3장 · 카운트다운 특가", "상품 카드 그리드 · 프로모션 배너", "후기 티커 · 소셜 티커 · 할인 팝업"],
+    idealFor: "의류 · 리빙 · 잡화 온라인 쇼핑몰, 편집숍, 브랜드 자사몰, 상품 수가 많은 소매 브랜드",
+    image: "/thumbs/shop-a.jpg",
+    liveUrl: "/templates/shop-a/",
+    industryKey: "shop",
+    designCode: "SHPP-1001",
+    premium: true,
+  },
+  {
     slug: "perfume-a-template",
     industry: "향수 · 코스메틱 브랜드 홈페이지",
     title: "니치 향수 브랜드 홈페이지 (프리미엄 디자인 A)",

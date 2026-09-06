@@ -37,6 +37,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   moto: "MOT",
   video: "VID",
   perfume: "PER",
+  shop: "SHP",
 };
 
 export function getDesignCode(sample: Sample): string {

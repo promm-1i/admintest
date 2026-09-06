@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>로프트마트 — 라이프스타일 쇼핑몰 (프리미엄 디자인 A)</title>
+<meta name="description" content="공지 바·검색 헤더·메가메뉴, 3장 자동 슬라이더, 카테고리 원형 아이콘, 카운트다운 특가, 상품 그리드 4·5열, 프로모션 배너, 후기 티커, 홈웨어 캐러셀, 소셜 티커, 고객센터 스트립, 뉴스레터 푸터로 구성한 이커머스 프리미엄 원페이지 기본형입니다.">
+<meta property="og:title" content="로프트마트 — 라이프스타일 쇼핑몰 (프리미엄 디자인 A)">
+<meta property="og:image" content="../shop-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=Inter:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰: 블루 rgb(0,70,200) · 레드 rgb(227,6,9) · 옐로 rgb(255,176,0) · 그레이 rgb(236,236,237) · 텍스트 그레이 rgb(117,117,117) · 네이비 rgb(1,0,94) · 컨테이너 1400(max 1500) · 라운드 8/16/99 */
+:root{--blue:#0046C8;--red:#E30609;--yellow:#FFB000;--grey:#ECECED;--txt2:#757575;--navy:#01005E;--sky:#AEEAFF;--peach:#FAD7BE;--lilac:#D7AAE1;--mint:#D8FFD4;--cream:#FFF2D6;--brown:#5E2F0D;--green:#309D23;--ease:ease}
+body{background:#fff;color:#000;font-family:"Instrument Sans","Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.4;padding-top:175px}
+h1,h2,h3,h4,h5,h6,p,a,span,b,small,button,input,label{letter-spacing:-.02em}
+.wrap{width:100%;max-width:1500px;margin:0 auto}
+.t12{font-size:12px;line-height:14.4px}.t14{font-size:14px;line-height:16.8px}.t14l{font-size:14px;line-height:18.2px}.t16{font-size:16px;line-height:19.2px}.t16l{font-size:16px;line-height:22.4px}
+.w5{font-weight:500}.w6{font-weight:600}.w7{font-weight:700}
+.grey{color:var(--txt2)}
+br.mb{display:none}
+h2.s28{font-size:28px;line-height:33.6px;font-weight:700}
+h2.s32{font-size:32px;line-height:35.2px;font-weight:700}
+h2.s24{font-size:24px;line-height:28.8px;font-weight:700}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 24px;border-radius:99px;font-size:16px;line-height:19.2px;font-weight:700;position:relative;overflow:hidden}
+.btn::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s var(--ease)}
+.btn:hover::after{background:rgba(0,0,0,.08)}
+.btn.blue{background:var(--blue);color:#fff}.btn.white{background:#fff;color:#000}.btn.green{background:var(--green);color:#fff}.btn.navy{background:var(--navy);color:#fff}
+/* 밑줄 링크 — 호버 시 1px 선이 왼쪽에서 scaleX 0→1 (실측 .3s ease) */
+.ul{position:relative;display:inline-flex;flex-direction:column;gap:1px;align-items:flex-start}
+.ul i.line{display:block;width:100%;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.ul:hover i.line{transform:scaleX(1)}
+.ico{display:block;flex:none}
+.pill{display:inline-flex;align-items:center;justify-content:center;padding:6px 10px;border-radius:99px;font-size:14px;line-height:16.8px;font-weight:700}
+.pill.sale{background:var(--red);color:#fff}.pill.clear{background:var(--yellow);color:#000}.pill.best{background:var(--blue);color:#fff}.pill.new{background:var(--sky);color:#000}
+::selection{background:rgba(0,70,200,.25)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ── 상단 고정 헤더 묶음: 공지 45 · 헤더 85 · 내비 45 = 175 (전부 fixed) ── */
+.top{position:fixed;top:0;left:0;right:0;z-index:10}
+.bar{height:45px;background:var(--blue);color:#fff;padding:0 20px}
+.bar .in{height:45px;display:flex;align-items:center;justify-content:space-between}
+.bar-l{display:flex;gap:20px;align-items:center}
+.bar-l a{font-size:14px;line-height:16.8px;font-weight:600}
+.bar-msg{display:flex;align-items:center;gap:6px;font-size:14px;line-height:18.2px;font-weight:500}
+.bar-r{display:flex;align-items:center;gap:10px}
+.sel{appearance:none;-webkit-appearance:none;height:30px;width:170px;border-radius:99px;padding:8px 28px 8px 12px;font-size:12px;line-height:12px;font-weight:500;letter-spacing:0;background:#fff url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m6 9 6 6 6-6'/%3e%3c/svg%3e") no-repeat right 10px center/14px;color:#32384C;cursor:pointer}
+.bar-r .sm{width:12px;height:12px;display:block;color:#fff}
+.hd{height:85px;background:#fff;padding:20px}
+.hd .in{height:45px;display:flex;align-items:center;justify-content:space-between}
+.hd-top{display:flex;align-items:center;justify-content:space-between;width:100%;height:45px}
+.search.mob{display:none}
+.hd-l{display:flex;align-items:center;gap:20px}
+.logo{font-size:28px;line-height:33.6px;font-weight:700;letter-spacing:-.02em;color:#000;white-space:nowrap}
+.search{display:flex;align-items:center;gap:8px;width:300px;height:45px;background:var(--grey);border-radius:99px;padding:12px}
+.search input{flex:1;min-width:0;font-size:14px;line-height:16.8px;font-weight:500;letter-spacing:0;color:#000;outline:0}
+.search input::placeholder{color:#8a8a8a}
+.hd-r{display:flex;align-items:center;gap:5px}
+.icbtn{width:40px;height:40px;border-radius:99px;background:#fff;display:flex;align-items:center;justify-content:center;position:relative;color:#000}
+.icbtn.heart{display:none}
+.badge{position:absolute;top:-4px;right:-4px;width:16px;height:16px;border-radius:100px;background:#E8E8E8;display:flex;align-items:center;justify-content:center;font-family:"Inter",sans-serif;font-size:12px;line-height:12px;font-weight:400;letter-spacing:0;color:#111}
+.burger{display:none;width:30px;height:31px;flex-direction:column;justify-content:center;gap:5px}
+.burger i{display:block;width:30px;height:4px;background:#000}
+.nav{height:45px;background:#fff;padding:0 20px;position:relative}
+.nav .in{height:45px;display:flex;align-items:center;gap:30px}
+.nav-item{display:flex;align-items:center;height:45px}
+.nav-item>a{display:inline-flex;flex-direction:column;gap:1px;font-size:14px;line-height:16.8px;font-weight:600;color:#000}
+.nav-item>a .row{display:flex;align-items:center;gap:2px}
+.nav-item>a i.line{display:block;height:1px;background:#000;transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)}
+.nav-item:hover>a i.line{transform:scaleX(1)}
+.nav-item .sale-pill{display:inline-flex;padding:5px 8px;border-radius:999px;background:var(--red);color:#fff;font-size:12px;line-height:14.4px;font-weight:600}
+/* 메가메뉴 — 내비 아래 1440×392 흰 패널: 251 폭 열 3개(pad 20 gap 15) + 트렌딩 상품(pad 20, 카드 3장 gap 15) */
+.mega{position:absolute;left:0;right:0;top:45px;height:392px;background:#fff;display:none;border-top:1px solid var(--grey)}
+.nav-item.has-mega:hover .mega,.mega:hover{display:flex}
+.mega .cols{display:flex;gap:10px;width:773px}
+.mega .col{width:251px;padding:20px;display:flex;flex-direction:column;gap:15px;border-right:1px solid var(--grey)}
+.mega .col h6{font-size:16px;line-height:19.2px;font-weight:700}
+.mega .col ul{display:flex;flex-direction:column;gap:10px}
+.mega .col ul a{font-size:14px;line-height:16.8px;font-weight:600;color:var(--txt2)}
+.mega .trend{flex:1;padding:20px;display:flex;flex-direction:column;gap:10px}
+.mega .trend h6{font-size:16px;line-height:19.2px;font-weight:700}
+.mega .trend .row{display:flex;gap:15px}
+.mega .trend .pcard{width:199px}
+.mega .trend .pimg{height:240px}
+.mnav{display:none}
+
+/* ── 히어로 슬라이더: 1440×500, 슬라이드 gap 10, 5s 간격, 1.2s ease-out ── */
+.hero{position:relative;height:500px;overflow:hidden}
+.hero .track{display:flex;gap:10px;height:500px;transition:transform 1.2s cubic-bezier(.16,.84,.3,1)}
+.slide{flex:none;width:100vw;max-width:100%;height:500px;position:relative;overflow:hidden}
+.slide.s1{background:var(--sky)}
+.slide.s1 .cont{position:relative;z-index:1;height:100%;padding:50px;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.slide.s1 .copy{width:350px;display:flex;flex-direction:column;gap:30px;align-items:flex-start}
+.slide.s1 .copy .tt{display:flex;flex-direction:column;gap:10px}
+.slide.s1 h1{font-size:40px;line-height:48px;font-weight:700;color:#32384C}
+.slide.s1 .sub{font-size:24px;line-height:28.8px;font-weight:700;color:#32384C}
+.slide.s1 .shoe{position:absolute;left:647px;top:-100px;width:701px;height:602px;object-fit:cover}
+.slide.s2 .bg,.slide.s3 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slide.s2 .cont{position:absolute;inset:0;padding:50px;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end}
+.slide.s2 .promo{position:absolute;left:25px;top:25px;width:200px;padding:25px;background:var(--blue);color:#fff;display:flex;flex-direction:column;gap:15px;opacity:0;transform:translateY(-50px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.slide.s2.on .promo{opacity:1;transform:none}
+.slide.s2 .price{display:flex;gap:7px;align-items:flex-start}
+.slide.s2 .price .n{font-size:80px;line-height:80px;font-weight:700;letter-spacing:-.02em}
+.slide.s2 .price .pc{display:flex;flex-direction:column;gap:4px}
+.slide.s2 .price .pc b{font-size:48px;line-height:48px;font-weight:700}
+.slide.s2 .price .pc span{font-size:24px;line-height:28.8px;font-weight:700}
+.slide.s2 .promo p{width:150px;font-size:16px;line-height:22.4px;font-weight:500}
+.slide.s3 .ov{position:absolute;inset:0;background:rgba(0,0,0,.4);padding:15px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+.slide.s3 .copy{width:100%;display:flex;flex-direction:column;gap:30px;align-items:center;text-align:center;color:#fff;opacity:0;transform:translateY(25px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.slide.s3.on .copy{opacity:1;transform:none}
+.slide.s3 .tt{display:flex;flex-direction:column;gap:10px;align-items:center}
+.slide.s3 h2{font-size:40px;line-height:48px;font-weight:700}
+.slide.s3 .sub{font-size:24px;line-height:28.8px;font-weight:700}
+.dots{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);width:70px;height:30px;border-radius:50px;background:rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.dots button{height:30px;padding:10px 5px;display:flex;align-items:center;justify-content:center}
+.dots button:first-child{padding-left:10px}.dots button:last-child{padding-right:10px}
+.dots button i{display:block;width:10px;height:10px;border-radius:50%;background:#fff;opacity:.5;transition:opacity .3s var(--ease)}
+.dots button.on i{opacity:1}
+
+/* ── 카테고리: pad 40 20 gap 40 · 원 130 (r999) + 라벨 16/19.2 600 + 화살표 14 · 항목 gap 40 · 호버 사진 1.15배 ── */
+.cats{padding:40px 20px;display:flex;flex-direction:column;gap:40px;align-items:center}
+.cats h2{width:100%;text-align:center}
+.cat-row{display:flex;gap:40px;justify-content:center;align-items:center;width:100%;max-width:1500px;overflow:auto;scrollbar-width:none}
+.cat-row::-webkit-scrollbar{display:none}
+.cat{flex:none;width:130px;display:flex;flex-direction:column;align-items:center;gap:10px}
+.cat .circ{width:130px;height:130px;border-radius:999px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cat .circ img{width:130px;height:130px;object-fit:cover;transition:transform .3s var(--ease)}
+.cat:hover .circ img{transform:scale(1.15)}
+.cat .lb{display:flex;align-items:center;gap:2px;font-size:16px;line-height:19.2px;font-weight:600;height:21px}
+
+/* ── 상품 섹션 공통: pad 40 20 · 컨테이너 gap 25 · 헤딩 row(ai flex-end) · 그리드 gap 20 ── */
+.shop{padding:40px 20px}
+.shop .in{display:flex;flex-direction:column;gap:25px}
+.shop .head{display:flex;justify-content:space-between;align-items:flex-end}
+.cd-wrap{display:flex;align-items:center;gap:10px}
+.cd{display:flex;align-items:center;gap:3px;padding:10px;border-radius:99px;background:var(--red);color:#fff}
+.cd b{font-size:16px;line-height:16px;font-weight:700;letter-spacing:0;font-variant-numeric:tabular-nums}
+.grid4{display:grid;grid-template-columns:repeat(4,335px);gap:20px;justify-content:center}
+.grid5{display:grid;grid-template-columns:repeat(5,264px);gap:20px;justify-content:center}
+.pcard{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.pimg{position:relative;width:100%;height:240px;border-radius:8px;overflow:hidden}
+.pimg img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.pimg .tags{position:absolute;top:10px;left:10px;display:flex;gap:5px;z-index:1}
+.pimg .cart{position:absolute;right:10px;bottom:10px;width:40px;height:40px;border-radius:99px;background:#fff;display:flex;align-items:center;justify-content:center;color:#000;transition:background .3s var(--ease)}
+.pimg .cart:hover{background:var(--grey)}
+.pimg .cart.off{background:var(--txt2);opacity:.7;color:#F3F3F3;cursor:default}
+.pimg .cart.off:hover{background:var(--txt2)}
+.ptxt{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.ptxt .tt{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.ptxt .pc-cat{display:block;width:auto;font-size:12px;line-height:14.4px;font-weight:700;text-transform:uppercase;color:var(--txt2)}
+.ptxt .nm{font-size:16px;line-height:22.4px;font-weight:500}
+.ptxt .pr{font-size:16px;line-height:16px;font-weight:700;letter-spacing:0;color:#111}
+.grid5 .pimg{height:200px}
+
+/* ── 프로모션 배너 2장: pad 20 · 690×380 r16 pad 25 · 텍스트 320 가운데 · 사진 PNG 절대배치 ── */
+.bcards{padding:20px}
+.bcards .in{display:flex;gap:20px}
+.bcard{position:relative;width:690px;height:380px;border-radius:16px;padding:25px;overflow:hidden;display:flex;align-items:center}
+.bcard.lilac{background:var(--lilac)}.bcard.peach{background:var(--peach)}
+.bcard .txt{position:relative;z-index:1;width:320px;display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center;margin-left:0}
+.bcard .txt .tt{width:100%;display:flex;flex-direction:column;gap:6px;align-items:center}
+.bcard .txt h2,.bcard .txt .sub{width:100%}
+.bcard.lilac h2{font-size:48px;line-height:57.6px;font-weight:700;color:#fff}
+.bcard.lilac .sub{font-size:14px;line-height:16.8px;font-weight:700;color:#fff}
+.bcard.peach h2{font-size:32px;line-height:35.2px;font-weight:700;color:var(--brown)}
+.bcard.peach .sub{font-size:14px;line-height:16.8px;font-weight:700;color:var(--brown)}
+.bcard .png{position:absolute;object-fit:cover}
+.bcard.lilac .png{left:393px;top:-62px;width:392px;height:480px}
+.bcard.peach .png{left:405px;top:-26px;width:432px;height:432px}
+.bcard .new{position:absolute;top:15px;right:15px;z-index:1}
+
+/* ── 여성 배너: 1400×300 r16 pad 25 · 사진 배경 · 빨간 원 110 (10,10) · 텍스트 350 좌하단 ── */
+.wban{position:relative;height:300px;border-radius:16px;padding:25px;overflow:hidden;display:flex;align-items:flex-end}
+.wban .bg{position:absolute;left:0;top:-188px;width:100%;height:497px;object-fit:cover}
+.wban .circ{position:absolute;left:10px;top:10px;width:110px;height:110px;border-radius:99px;background:var(--red);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;z-index:1;text-align:center}
+.wban .circ small{font-size:14px;line-height:16.8px;font-weight:700}
+.wban .circ b{font-size:24px;line-height:28.8px;font-weight:700}
+.wban .txt{position:relative;z-index:1;width:350px;display:flex;flex-direction:column;gap:20px;align-items:flex-start;color:var(--navy)}
+.wban .txt .tt{display:flex;flex-direction:column;gap:6px}
+.wban h3{font-size:14px;line-height:16.8px;font-weight:700}
+.wban h2{font-size:32px;line-height:35.2px;font-weight:700}
+.shop.women .in{gap:20px}
+
+/* ── 후기 티커: bg grey pad 60 20 · 카드 342.5×332 흰 r16 pad 25 · 좌로 10px/s ── */
+.tm{background:var(--grey);padding:60px 20px}
+.tm .in{display:flex;flex-direction:column;gap:28px}
+.tm .head{display:flex;justify-content:space-between;align-items:center}
+.rv-pill svg{width:18px;height:18px;color:var(--yellow)}
+.rv-pill{display:flex;align-items:center;gap:5px;padding:8px 10px 8px 8px;border-radius:99px;background:#fff;font-size:14px;line-height:18.2px;font-weight:500}
+.tm .holder{border-radius:16px;overflow:hidden;width:100%}
+.tm .track{display:flex;gap:10px;width:max-content;animation:tmq 281s linear infinite}
+@keyframes tmq{to{transform:translateX(-2810px)}}
+.tcard{flex:none;width:342.5px;height:332px;background:#fff;border-radius:16px;padding:25px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}
+.tcard .tc-top{display:flex;flex-direction:column;gap:10px}
+.stars{display:flex;gap:5px}
+.stars svg{width:18px;height:18px;color:var(--yellow)}
+.tcard .tx{display:flex;flex-direction:column;gap:8px}
+.tcard h6{font-size:16px;line-height:19.2px;font-weight:700}
+.tcard p{font-size:14px;line-height:18.2px;font-weight:500;color:var(--txt2)}
+.tcard .who{display:flex;align-items:center;gap:8px;padding-top:15px}
+.tcard .who img{width:24px;height:24px;border-radius:99px;object-fit:cover}
+.tcard .who span{font-size:12px;line-height:14.4px;font-weight:500}
+
+/* ── 홈웨어 캐러셀: pad 60 20 · 카드 297×406 gap 15 · 사진 374 r8 · 호버 1.08배 + 화살표 페이드 · 파란 화살표 버튼 40 ── */
+.disc{padding:60px 20px}
+.disc .in{display:flex;flex-direction:column;gap:28px}
+.disc .head{display:flex;justify-content:space-between;align-items:flex-end}
+.disc .head h2{width:450px}
+.car{position:relative;width:100%;height:406px}
+.car .track{display:flex;gap:15px;height:406px;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:none}
+.car .track::-webkit-scrollbar{display:none}
+.dcard{flex:none;width:297px;display:flex;flex-direction:column;gap:10px}
+.dcard .im{width:297px;height:374px;border-radius:8px;overflow:hidden}
+.dcard .im img{width:100%;height:100%;object-fit:cover;transition:transform .3s var(--ease)}
+.dcard:hover .im img{transform:scale(1.08)}
+.dcard .tt{display:flex;justify-content:space-between;align-items:center;width:100%;font-size:16px;line-height:22.4px;font-weight:500;position:relative}
+.dcard .tt svg{width:16px;height:16px;color:var(--blue);opacity:0;transition:opacity .3s var(--ease)}
+.dcard:hover .tt svg{opacity:1}
+.car .arr{position:absolute;top:50%;width:40px;height:40px;margin-top:-20px;border-radius:40px;background:var(--blue);color:#fff;display:flex;align-items:center;justify-content:center;transition:opacity .3s var(--ease)}
+.car .arr.prev{left:20px;opacity:0}.car .arr.next{right:20px}
+.car.scrolled .arr.prev{opacity:1}
+
+/* ── 소셜 티커: bg blue pad 60 0 gap 40 · 300×300 r16 gap 20 · 좌로 20px/s · 필 sky ── */
+.soc{background:var(--blue);padding:60px 0;display:flex;flex-direction:column;gap:40px;align-items:center;overflow:hidden}
+.soc .head{display:flex;align-items:center;gap:10px;color:#fff}
+.soc .head .ig{width:28px;height:28px;color:var(--sky)}
+.soc .tk{width:100%;overflow:hidden}
+.soc .track{display:flex;gap:20px;width:max-content;animation:igmq 128s linear infinite}
+@keyframes igmq{to{transform:translateX(-2560px)}}
+.soc .tile{flex:none;width:300px;height:300px;border-radius:16px;overflow:hidden}
+.soc .tile img{width:100%;height:100%;object-fit:cover}
+.soc .pillh{display:flex;align-items:center;gap:6px;padding:12px 15px;border-radius:99px;background:var(--sky);color:var(--navy)}
+.soc .pillh svg{width:18px;height:18px}
+.soc .pillh a{font-size:16px;line-height:19.2px;font-weight:600}
+
+/* ── 고객센터 스트립: pad 40 20 · 블록 4 (pad 20 20 20 0, gap 9, 세로선) · 아이콘 32 ── */
+.sup{padding:40px 20px}
+.sup .in{display:flex;gap:30px;align-items:center}
+.blk{flex:1 0 0;padding:20px 20px 20px 0;display:flex;gap:9px;align-items:flex-start;border-right:1px solid var(--grey)}
+.blk:last-child{border-right:0}
+.blk svg{width:32px;height:32px;flex:none;color:var(--blue)}
+.blk .tt{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}
+.blk h6{font-size:16px;line-height:19.2px;font-weight:700}
+.blk p{font-size:14px;line-height:18.2px;font-weight:500;color:var(--txt2)}
+
+/* ── 푸터: pad 60 20 20 · 컨테이너 gap 30 · 상단 row(좌 380 뉴스레터 / 우 링크 3열 gap 80) · 하단 pad-top 30 gap 25 ── */
+.ft{padding:60px 20px 20px}
+.ft .in{display:flex;flex-direction:column;gap:30px}
+.ft .top-row{display:flex;justify-content:space-between;align-items:flex-start}
+.ft .nl{width:380px;display:flex;flex-direction:column;gap:25px}
+.ft .nl .tt{display:flex;flex-direction:column;gap:5px}
+.ft .nl h3{font-size:24px;line-height:28.8px;font-weight:700}
+.ft .nl p{font-size:14px;line-height:18.2px;font-weight:500;color:var(--txt2)}
+.nform{display:flex;gap:8px;align-items:flex-end}
+.nform label{flex:1 1 0;width:0;min-width:0;display:flex;flex-direction:column;gap:5px}
+.nform label span{font-size:12px;line-height:14.4px;font-weight:500;color:var(--txt2)}
+.nform .box{height:45px;border-radius:99px;background:var(--grey);padding:15px;display:flex;align-items:center}
+.nform input{flex:1;min-width:0;font-size:14px;line-height:16.8px;font-weight:500;letter-spacing:-.01em;color:#999;outline:0}
+.nform input::placeholder{color:#999}
+.nform button{flex:1 1 0;width:0;min-width:0;height:45px;border-radius:99px;background:var(--blue);color:#fff;opacity:.5;font-size:14px;line-height:16.8px;font-weight:600;letter-spacing:0}
+.ft .links{display:flex;gap:80px;align-items:flex-start}
+.ft .list{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.ft .list h6{font-size:16px;line-height:19.2px;font-weight:700}
+.ft .list ul{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.ft .list li{display:flex}
+.ft .list a{font-size:14px;line-height:16.8px;font-weight:600;color:var(--txt2)}
+.ft .bot{position:relative;padding-top:30px;display:flex;flex-direction:column;gap:25px}
+.ft .bot::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--grey)}
+.ft .r1{display:flex;justify-content:space-between;align-items:center}
+.ft .r1 .l{display:flex;align-items:center;gap:12px}
+.ft .r1 .sel{background-color:var(--grey)}
+.pay{display:flex;gap:8px;align-items:center}
+.pay svg{width:32px;height:20px;display:block}
+.socs{display:flex;gap:15px;align-items:center}
+.socs a{width:39px;height:39px;border-radius:87.31px;background:var(--grey);display:flex;align-items:center;justify-content:center;color:#000}
+.socs svg{width:19px;height:19px}
+.ft .r2{display:flex;justify-content:space-between;align-items:center}
+.ft .r2 .l{display:flex;align-items:center;gap:15px;flex:1 0 0}
+.ft .r2 .l b{font-size:16px;line-height:19.2px;font-weight:700}
+.ft .r2 .l p{font-size:12px;line-height:14.4px;font-weight:500;color:var(--txt2)}
+.ft .r2 .r{display:flex;gap:40px;align-items:flex-start}
+.ft .r2 .r a{font-size:12px;line-height:14.4px;font-weight:600;color:var(--txt2)}
+
+/* ── 고정 칩(좌하단) · 팝업(5.2s 뒤) ── */
+.chip{position:fixed;left:15px;bottom:15px;z-index:9;display:flex;align-items:center;gap:8px;padding:8px 16px 8px 8px;border-radius:99px;background:#fff;box-shadow:rgba(0,0,0,.15) 0 1px 25px 0;cursor:pointer}
+.chip i{width:36px;height:36px;border-radius:99px;background:var(--sky);display:flex;align-items:center;justify-content:center;color:#000}
+.chip h6{font-size:16px;line-height:19.2px;font-weight:700}
+.popwrap{position:fixed;inset:0;z-index:20;display:none}
+.popwrap.on{display:block}
+.popwrap .dim{position:absolute;inset:0;background:rgba(0,0,0,.8)}
+.pop{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:850px;height:480px;border-radius:16px;background:#fff;display:flex;overflow:hidden}
+.pop .close{position:absolute;top:15px;right:15px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;color:#000;z-index:1}
+.pop .close svg{width:32px;height:32px}
+.pop .pic{width:400px;height:480px;object-fit:cover;flex:none}
+.pop .ct{width:450px;padding:40px;display:flex;flex-direction:column;gap:25px;align-items:center;justify-content:center}
+.pop .ct .tt{display:flex;flex-direction:column;gap:10px;text-align:center}
+.pop h2{font-size:40px;line-height:48px;font-weight:700}
+.pop .ct p{font-size:16px;line-height:22.4px;font-weight:500;color:var(--txt2)}
+.pop form{width:100%;display:flex;flex-direction:column;gap:10px}
+.pop label{display:flex;flex-direction:column;gap:5px}
+.pop label span{font-size:12px;line-height:14.4px;font-weight:500;color:var(--txt2)}
+.pop .box{height:50px;border-radius:99px;background:var(--grey);padding:15px;display:flex;align-items:center}
+.pop input{flex:1;min-width:0;font-size:16px;line-height:19.2px;font-weight:500;letter-spacing:-.01em;outline:0;color:#000}
+.pop input::placeholder{color:#8a8a8a}
+.pop button.go{height:50px;border-radius:99px;background:var(--blue);color:#fff;font-size:16px;line-height:19.2px;font-weight:600;letter-spacing:0}
+
+/* ── 태블릿 810~1199: 공지 좌측 링크 숨김 · 그리드 4×231 / 5×181 · 배너 카드 pad 20 15 gap 15 · 고객센터 2열 ── */
+@media(max-width:1199px){
+  .bar-l{display:none}
+  .cat-row{justify-content:flex-start;gap:20px}
+  .grid4{grid-template-columns:repeat(4,1fr)}
+  .grid5{grid-template-columns:repeat(5,1fr)}
+  .bcards{padding:20px 15px}
+  .bcards .in{gap:15px}
+  .bcard{width:calc(50% - 7.5px)}
+  .bcard .txt{width:220px}
+  .bcard.peach .txt{width:246px}
+  .bcard.lilac .png{left:292px}
+  .bcard.peach .png{left:321px}
+  .wban .txt{width:514px}
+  .tcard{width:238.5px;height:auto;min-height:326px}
+  .tm .track{animation-duration:200s}
+  @keyframes tmq{to{transform:translateX(-1994px)}}
+  .sup .in{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+  .ft .links{gap:60px}
+  .blk:nth-child(2n){border-right:0}
+  .pop{width:calc(100% - 102px);max-width:922px}
+  .pop .pic{width:472px}
+  .mega{display:none!important}
+}
+/* ── 폰 ≤809: 헤더 135(햄버거+로고 / 아이콘 3 / 검색 풀폭) · 히어로 650 · 2열 170 · 배너 세로 385 · 후기 세로 · 푸터 세로 ── */
+@media(max-width:809px){
+  body{padding-top:175px}
+  .bar{padding:0 15px}
+  .bar .in{justify-content:center}
+  .bar-r{display:none}
+  .hd{height:135px;padding:20px 15px}
+  .hd .in{height:95px;flex-direction:column;align-items:stretch;gap:10px}
+  .hd-top{display:flex;justify-content:space-between;align-items:center;height:40px}
+  .hd-l{gap:10px}
+  .burger{display:flex}
+  .search{width:100%}
+  .search.desk{display:none}
+  .search.mob{display:flex}
+  .icbtn.heart{display:flex}
+  .nav{display:none}
+  .mnav{display:none;position:fixed;top:180px;left:0;right:0;background:#fff;padding:10px 15px 20px;border-top:1px solid var(--grey);z-index:10}
+  .mnav.on{display:block}
+  .mnav a{display:flex;align-items:center;justify-content:space-between;padding:12px 0;font-size:14px;line-height:16.8px;font-weight:600;border-bottom:1px solid var(--grey)}
+  .hero,.hero .track,.slide{height:650px}
+  .slide.s1 .cont{padding:25px;justify-content:flex-start}
+  .slide.s1 .copy{width:340px}
+  .slide.s1 .shoe{left:9px;top:289px;width:430px;height:370px}
+  .slide.s2 .cont{padding:25px;align-items:flex-start}
+  .slide.s3 .ov{align-items:flex-start}
+  .slide.s3 .copy{align-items:flex-start;text-align:left}
+  .slide.s3 .tt{align-items:flex-start}
+  .cats{padding:40px 20px}
+  .cat-row{justify-content:flex-start;gap:20px}
+  .shop{padding:40px 15px}
+  .shop .head{flex-direction:column;align-items:flex-start;gap:10px}
+  .cd-wrap{flex-direction:column;align-items:flex-start;gap:10px}
+  .grid4,.grid5{grid-template-columns:repeat(2,170px);justify-content:center}
+  .pimg,.grid5 .pimg{height:180px}
+  .bcards{padding:20px 15px}
+  .bcards .in{flex-direction:column;gap:15px}
+  .bcard{width:100%;height:385px}
+  .bcard .txt{width:155px;margin-left:0}
+  .bcard.peach .txt{width:174px}
+  .bcard.lilac .png{left:159px;top:-62px;width:396px;height:485px}
+  .bcard.peach .png{left:187px;top:-26px;width:437px;height:437px}
+  .wban{height:345px}
+  .wban .txt{width:186px}
+  .tm{padding:60px 15px}
+  .tm .in{gap:30px}
+  .tm .head{flex-direction:column;align-items:flex-start;gap:10px}
+  .tm .track{flex-direction:column;width:100%;animation:none}
+  .tcard{min-height:0}
+  br.mb{display:inline}
+  .tm .track .dup{display:none}
+  .tcard{width:100%;height:auto}
+  .disc{padding:60px 15px}
+  .disc .in{gap:30px}
+  .disc .head{flex-direction:column;align-items:flex-start;gap:10px}
+  .disc .head h2{width:100%}
+  .sup{padding:40px 15px}
+  .sup .in{display:flex;flex-direction:column;gap:0;align-items:stretch}
+  .blk{flex:none;width:100%;border-right:0;box-shadow:0 1px 0 var(--grey)}
+  .ft{padding:60px 15px 15px}
+  .ft .top-row{flex-direction:column;gap:36px}
+  .ft .nl{width:100%}
+  .nform{flex-direction:column;align-items:stretch;gap:10px}
+  .nform label,.nform button{flex:none;width:100%}
+  .ft .links{display:grid;grid-template-columns:160px 160px;grid-auto-rows:minmax(0,1fr);gap:40px;justify-content:center;width:100%}
+  .ft .r1{flex-direction:column;align-items:flex-start;gap:30px}
+  .ft .r1 .l{flex-direction:column;align-items:flex-start;gap:20px}
+  .ft .r1 .sel{width:205px;font-size:14px;line-height:14px}
+  .ft .r2{flex-direction:column;align-items:flex-start;gap:20px}
+  .ft .r2 .l{flex-direction:column;align-items:flex-start;gap:10px;flex:none;width:100%}
+  .ft .r2 .r{width:100%;justify-content:space-between;gap:0}
+  .pop{width:calc(100% - 39px);height:560px;flex-direction:column}
+  .pop .pic{width:100%;height:230px}
+  .pop .ct{width:100%;padding:25px;flex:1}
+  .pop h2{font-size:32px;line-height:35.2px}
+}
+@media(prefers-reduced-motion:reduce){.tm .track,.soc .track{animation:none}.hero .track{transition:none}}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.25"/><path d="m15.5 15.5 3.75 3.75"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.25"/><path d="M6.4 20c-1.14 0-2.02-.98-1.49-1.99C5.7 16.52 7.48 14.75 12 14.75s6.3 1.77 7.09 3.26c.53 1.01-.35 1.99-1.49 1.99Z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7.23c-1.45-1.62-3.87-2.06-5.68-.57-1.82 1.49-2.07 3.97-.65 5.73L12 18.25l6.33-5.86c1.43-1.76 1.2-4.26-.65-5.73-1.85-1.47-4.23-1.05-5.68.57Z"/></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="m2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m8.75 10.75 3.25 3.5 3.25-3.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.75 12H19"/><path d="m13.75 6.75 5.5 5.25-5.5 5.25"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="7.25"/><path d="M12 8v4l2 2"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.75 6.75c0-1.1.9-2 2-2h10.5c1.1 0 2 .9 2 2v7.5c0 1.1-.9 2-2 2h-2.63L12 19.25l-2.62-3H6.75c-1.1 0-2-.9-2-2Z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></symbol>
+    <symbol id="i-bubble" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18.25c3.5 0 7.25-1.75 7.25-6.25S15.5 5.75 12 5.75 4.75 7.5 4.75 12c0 1.03.2 1.92.54 2.67.22.47.34.99.24 1.5l-.26 1.4c-.13.69.47 1.3 1.17 1.17l3.2-.6c.26-.05.51-.05.77-.01.52.08 1.06.12 1.59.12Z"/><path d="M9 12h.01M12 12h.01M15 12h.01"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.89 4.75H6.07c-.73 0-1.32.59-1.32 1.32 0 7.28 5.9 13.18 13.18 13.18.73 0 1.32-.59 1.32-1.32v-2.82l-3.11-2.07-1.61 1.61c-.28.28-.7.37-1.05.18-.6-.31-1.56-.89-2.52-1.8-.98-.93-1.55-1.94-1.84-2.54-.16-.34-.07-.73.2-1L10.96 7.86Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4.75" y="5.75" width="14.5" height="12.5" rx="2"/><path d="m5.5 6.5 6.5 5.75L18.5 6.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18.25 11c0 4-6.25 8.25-6.25 8.25S5.75 15 5.75 11c0-3.5 2.94-6.25 6.25-6.25S18.25 7.5 18.25 11Z"/><circle cx="12" cy="11" r="2.25"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17.25 6.75 6.75 17.25M6.75 6.75l10.5 10.5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 18 18" fill="currentColor"><path d="M6.177 5.503 1.392 6.197c-.35.05-.62.29-.7.56-.07.26.01.54.2.73l3.466 3.375-.817 4.766c-.05.29.08.58.31.75.24.15.53.16.77.03l4.28-2.25 4.27 2.25c.27.14.58.1.82-.07.21-.17.31-.44.27-.71l-.82-4.77 3.47-3.38c.2-.2.26-.5.16-.75-.1-.25-.32-.43-.59-.47l-4.78-.7-2.14-4.33a.75.75 0 0 0-1.35 0Z"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="3.75"/><circle cx="16.9" cy="7.1" r=".6" fill="currentColor"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.2c0-.9.3-1.5 1.5-1.5h1.5V5.1c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V11H8v3h2.4v7Z"/></symbol>
+    <symbol id="i-tt" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 3c.3 2.4 1.7 3.9 4 4.1v3.1c-1.5 0-2.8-.5-4-1.3v6.4c0 3.4-2.6 5.7-5.6 5.7S5.3 18.7 5.3 15.3c0-3.3 2.6-5.7 5.9-5.6v3.2c-1.5-.1-2.7.9-2.7 2.4 0 1.4 1.1 2.5 2.4 2.5s2.4-1.1 2.4-2.6V3Z"/></symbol>
+    <symbol id="i-mailf" viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16a1 1 0 0 1 1 1v1.2l-9 5.6-9-5.6V6a1 1 0 0 1 1-1Zm-1 4.5 9 5.6 9-5.6V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Z"/></symbol>
+    <symbol id="i-truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7.75 7.75h9.5l-1.64 6.96a2 2 0 0 1-1.95 1.54H11.5a2 2 0 0 1-1.93-1.49Z"/><path d="M7.75 7.75 7 4.75H4.75"/><circle cx="10.5" cy="19" r=".5"/><circle cx="15.5" cy="19" r=".5"/></symbol>
+    <symbol id="i-chevr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9.5 6 6 6-6 6"/></symbol>
+    <symbol id="i-chevl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m14.5 6-6 6 6 6"/></symbol>
+  </defs>
+</svg>
+
+<div class="top">
+  <div class="bar"><div class="wrap in">
+    <div class="bar-l"><a href="#support">고객센터</a><a href="#support">매장 찾기</a><a href="#support">문의하기</a></div>
+    <div class="bar-msg"><svg class="ico" width="16" height="16"><use href="#i-truck"/></svg><span>10만원 이상 주문 시 무료배송</span></div>
+    <div class="bar-r">
+      <select class="sel" aria-label="국가 · 통화"><option>KR 대한민국 (KRW)</option><option>US United States (USD)</option><option>JP 日本 (JPY)</option></select>
+      <a class="sm" href="mailto:6gsmake@gmail.com" aria-label="이메일"><svg width="12" height="12"><use href="#i-mailf"/></svg></a>
+      <a class="sm" href="#top" aria-label="틱톡"><svg width="12" height="12"><use href="#i-tt"/></svg></a>
+      <a class="sm" href="#top" aria-label="페이스북"><svg width="12" height="12"><use href="#i-fb"/></svg></a>
+      <a class="sm" href="#top" aria-label="인스타그램"><svg width="12" height="12" fill="#fff"><use href="#i-ig" stroke="#fff"/></svg></a>
+    </div>
+  </div></div>
+  <div class="hd"><div class="wrap in">
+    <div class="hd-top">
+      <div class="hd-l">
+        <button class="burger" id="burger" aria-label="메뉴 열기" aria-expanded="false"><i></i><i></i><i></i></button>
+        <a class="logo" href="#top">LOFTMART</a>
+        <label class="search desk"><svg class="ico" width="16" height="16"><use href="#i-search"/></svg><input type="search" placeholder="검색…" aria-label="검색"></label>
+      </div>
+      <div class="hd-r">
+        <a class="icbtn" href="#top" aria-label="내 계정"><svg width="24" height="24"><use href="#i-user"/></svg></a>
+        <a class="icbtn heart" href="#top" aria-label="위시리스트"><svg width="24" height="24"><use href="#i-heart"/></svg></a>
+        <button class="icbtn" aria-label="장바구니"><svg width="16" height="16"><use href="#i-cart"/></svg><span class="badge">0</span></button>
+      </div>
+    </div>
+    <label class="search mob"><svg class="ico" width="16" height="16"><use href="#i-search"/></svg><input type="search" placeholder="검색" aria-label="검색"></label>
+  </div></div>
+  <nav class="nav"><div class="wrap in">
+    <div class="nav-item has-mega"><a href="#collection"><span class="row">전체 상품<svg width="14" height="14"><use href="#i-chev"/></svg></span><i class="line"></i></a>
+      <div class="mega">
+        <div class="cols">
+          <div class="col"><h6>남성</h6><ul><li><a href="#collection">전체 보기</a></li><li><a href="#collection">셔츠</a></li><li><a href="#collection">상의</a></li><li><a href="#collection">아우터</a></li><li><a href="#collection">바지</a></li><li><a href="#collection">반바지</a></li></ul></div>
+          <div class="col"><h6>여성</h6><ul><li><a href="#collection">전체 보기</a></li><li><a href="#collection">상의</a></li><li><a href="#collection">아우터</a></li><li><a href="#collection">바지</a></li><li><a href="#collection">원피스</a></li><li><a href="#collection">스커트</a></li></ul></div>
+          <div class="col"><h6>홈웨어</h6><ul><li><a href="#collection">전체 보기</a></li><li><a href="#collection">담요</a></li><li><a href="#collection">벽시계</a></li><li><a href="#collection">화분</a></li><li><a href="#collection">커피 테이블</a></li><li><a href="#collection">러그</a></li></ul></div>
+        </div>
+        <div class="trend"><h6>인기 상품</h6><div class="row">
+          <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/trend-1.jpg" alt=""><span class="cart" aria-hidden="true"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">커피 테이블</span><p class="nm">원목 커피 테이블</p></div><p class="pr">₩299,000</p></div></a>
+          <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/pants-4.jpg" alt=""><span class="cart" aria-hidden="true"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">바지</span><p class="nm">와이드 테일러드 팬츠</p></div><p class="pr">₩79,000</p></div></a>
+          <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/deal-3.jpg" alt=""><div class="tags"><span class="pill sale">Sale</span></div><span class="cart" aria-hidden="true"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">데스크 램프</span><p class="nm">웜 데스크 램프</p></div><p class="pr">₩49,000</p></div></a>
+        </div></div>
+      </div>
+    </div>
+    <div class="nav-item"><a href="#collection"><span class="row">남성<svg width="14" height="14"><use href="#i-chev"/></svg></span><i class="line"></i></a></div>
+    <div class="nav-item"><a href="#women"><span class="row">여성<svg width="14" height="14"><use href="#i-chev"/></svg></span><i class="line"></i></a></div>
+    <div class="nav-item"><a href="#homeware"><span class="row">홈웨어<svg width="14" height="14"><use href="#i-chev"/></svg></span><i class="line"></i></a></div>
+    <div class="nav-item"><a href="#collection"><span class="row">특가</span><i class="line"></i></a></div>
+    <div class="nav-item"><a class="sale-pill" href="#collection">세일</a></div>
+  </div></nav>
+  <div class="mnav" id="mnav">
+    <a href="#collection">전체 상품<svg width="14" height="14"><use href="#i-chev"/></svg></a><a href="#collection">남성</a><a href="#women">여성</a><a href="#homeware">홈웨어</a><a href="#collection">특가</a><a href="#collection">세일</a>
+  </div>
+</div>
+
+<section class="hero" id="top" aria-roledescription="carousel">
+  <div class="track" id="track">
+    <div class="slide s1">
+      <img class="shoe" src="../shop-a/assets/hero-shoe.png" alt="" width="701" height="602">
+      <div class="cont"><div class="copy">
+        <div class="tt"><h1>매일이 특별한<br>날이 되도록</h1><p class="sub">저녁 모임부터 조용한 밤까지, 오늘에 어울리는 것들.</p></div>
+        <a class="btn blue" href="#collection">지금 쇼핑하기</a>
+      </div></div>
+    </div>
+    <div class="slide s2">
+      <img class="bg" src="../shop-a/assets/hero-couch.jpg" alt="" width="1440" height="500">
+      <div class="promo"><div class="price"><span class="n">50</span><div class="pc"><b>%</b><span>OFF</span></div></div><p>25만원 이상 구매 시 장바구니 전체 금액 할인. 기간 한정 프로모션*</p></div>
+      <div class="cont"><a class="btn white" href="#homeware">지금 쇼핑하기</a></div>
+    </div>
+    <div class="slide s3">
+      <img class="bg" src="../shop-a/assets/hero-car.jpg" alt="" width="1440" height="500">
+      <div class="ov"><div class="copy">
+        <div class="tt"><h2>매일이 특별한 날이 되도록</h2><p class="sub">저녁 모임부터 조용한 밤까지, 오늘에 어울리는 것들.</p></div>
+        <a class="btn green" href="#collection">지금 쇼핑하기</a>
+      </div></div>
+    </div>
+  </div>
+  <div class="dots" id="dots"><button class="on" aria-label="슬라이드 1"><i></i></button><button aria-label="슬라이드 2"><i></i></button><button aria-label="슬라이드 3"><i></i></button></div>
+</section>
+
+<section class="cats">
+  <h2 class="s24">카테고리별 쇼핑</h2>
+  <div class="cat-row">
+    <a class="cat" href="#collection"><div class="circ" style="background:#AEEAFF"><img src="../shop-a/assets/cat-1.png" alt=""></div><span class="lb">상의<svg width="14" height="14" style="color:#0046C8"><use href="#i-arrow"/></svg></span></a>
+    <a class="cat" href="#collection"><div class="circ" style="background:#FAD7BE"><img src="../shop-a/assets/cat-2.png" alt=""></div><span class="lb">바지<svg width="14" height="14" style="color:#0046C8"><use href="#i-arrow"/></svg></span></a>
+    <a class="cat" href="#collection"><div class="circ" style="background:#D8FFD4"><img src="../shop-a/assets/cat-3.png" alt=""></div><span class="lb">아우터<svg width="14" height="14" style="color:#0046C8"><use href="#i-arrow"/></svg></span></a>
+    <a class="cat" href="#women"><div class="circ" style="background:#FFF2D6"><img src="../shop-a/assets/cat-4.png" alt=""></div><span class="lb">원피스<svg width="14" height="14" style="color:#0046C8"><use href="#i-arrow"/></svg></span></a>
+    <a class="cat" href="#collection"><div class="circ" style="background:#D7AAE1"><img src="../shop-a/assets/cat-5.png" alt=""></div><span class="lb">잠옷<svg width="14" height="14" style="color:#0046C8"><use href="#i-arrow"/></svg></span></a>
+    <a class="cat" href="#homeware"><div class="circ" style="background:#ECECED"><img src="../shop-a/assets/cat-6.png" alt=""></div><span class="lb">의자<svg width="14" height="14" style="color:#0046C8"><use href="#i-arrow"/></svg></span></a>
+    <a class="cat" href="#homeware"><div class="circ" style="background:#ECECED"><img src="../shop-a/assets/cat-7.png" alt=""></div><span class="lb">소품<svg width="14" height="14" style="color:#0046C8"><use href="#i-arrow"/></svg></span></a>
+  </div>
+</section>
+
+<section class="shop" id="collection"><div class="wrap in">
+  <div class="head">
+    <h2 class="s28">이번 주 특가!</h2>
+    <div class="cd-wrap"><span class="t14l w5">가장 좋은 가격으로 만나세요.</span><div class="cd"><svg width="20" height="20"><use href="#i-clock"/></svg><b id="cd">00:00:00:00</b></div></div>
+  </div>
+  <div class="grid4">
+    <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/deal-1.jpg" alt=""><div class="tags"><span class="pill sale">Sale</span><span class="pill clear">Clearance</span></div><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">스커트</span><p class="nm">플리츠 미디 스커트</p></div><p class="pr">₩59,000</p></div></a>
+    <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/deal-2.jpg" alt=""><div class="tags"><span class="pill sale">Sale</span><span class="pill clear">Clearance</span></div><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">장식 볼</span><p class="nm">세라믹 데코 볼</p></div><p class="pr">₩12,000</p></div></a>
+    <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/deal-3.jpg" alt=""><div class="tags"><span class="pill sale">Sale</span></div><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">데스크 램프</span><p class="nm">웜 데스크 램프</p></div><p class="pr">₩49,000</p></div></a>
+    <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/deal-4.jpg" alt=""><div class="tags"><span class="pill sale">Sale</span><span class="pill clear">Clearance</span></div><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">프린트</span><p class="nm">프레임 월 아트 프린트</p></div><p class="pr">₩59,000</p></div></a>
+  </div>
+</div></section>
+
+<section class="bcards"><div class="wrap in">
+  <div class="bcard lilac"><img class="png" src="../shop-a/assets/banner-pajama.png" alt="" width="392" height="480"><div class="txt"><div class="tt"><h2>50% OFF</h2><p class="sub">선택한 잠옷 세트 한정</p></div><a class="btn white" href="#collection">전체 상품 보기</a></div></div>
+  <div class="bcard peach"><span class="pill new">신상품</span><img class="png" src="../shop-a/assets/banner-couch.png" alt="" width="432" height="432"><div class="txt"><div class="tt"><h2>꿈꾸던 집을<br>완성하세요</h2><p class="sub">새 제품이 도착했습니다.</p></div><a class="btn white" href="#homeware">홈웨어 보기</a></div></div>
+</div></section>
+
+<section class="shop"><div class="wrap in">
+  <div class="head"><h2 class="s28">바지</h2><a class="ul t16 w6" href="#collection">전체 보기<i class="line"></i></a></div>
+  <div class="grid4">
+    <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/pants-1.jpg" alt=""><div class="tags"><span class="pill best">Best Seller</span></div><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">바지</span><p class="nm">슬림핏 치노</p></div><p class="pr">₩79,000</p></div></a>
+    <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/pants-2.jpg" alt=""><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">바지</span><p class="nm">애슬레틱 조거 팬츠</p></div><p class="pr">₩59,000</p></div></a>
+    <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/pants-3.jpg" alt=""><div class="tags"><span class="pill best">Best Seller</span></div><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">바지</span><p class="nm">클래식 데님 진</p></div><p class="pr">₩89,000</p></div></a>
+    <a class="pcard" href="#collection"><div class="pimg"><img src="../shop-a/assets/pants-4.jpg" alt=""><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">바지</span><p class="nm">와이드 테일러드 팬츠</p></div><p class="pr">₩79,000</p></div></a>
+  </div>
+</div></section>
+
+<section class="shop women" id="women"><div class="wrap in">
+  <div class="wban">
+    <img class="bg" src="../shop-a/assets/women-banner.jpg" alt="" width="1400" height="497">
+    <div class="circ"><small>클리어런스</small><b>특가</b></div>
+    <div class="txt"><div class="tt"><h3>여성 신상 의류</h3><h2>빛나는 당신을 위해.</h2></div><a class="btn navy" href="#women">여성 컬렉션 보기</a></div>
+  </div>
+  <div class="grid5">
+    <a class="pcard" href="#women"><div class="pimg"><img src="../shop-a/assets/women-1.jpg" alt=""><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">상의</span><p class="nm">클래식 리넨 버튼 셔츠</p></div><p class="pr">₩59,000</p></div></a>
+    <a class="pcard" href="#women"><div class="pimg"><img src="../shop-a/assets/women-2.jpg" alt=""><span class="cart off" title="품절"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">반바지</span><p class="nm">코튼 라운지 쇼츠</p></div><p class="pr">₩35,000</p></div></a>
+    <a class="pcard" href="#women"><div class="pimg"><img src="../shop-a/assets/women-3.jpg" alt=""><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">상의</span><p class="nm">코튼 탑</p></div><p class="pr">₩29,000</p></div></a>
+    <a class="pcard" href="#women"><div class="pimg"><img src="../shop-a/assets/women-4.jpg" alt=""><div class="tags"><span class="pill best">Best Seller</span></div><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">바지</span><p class="nm">크롭 데님 진</p></div><p class="pr">₩89,000</p></div></a>
+    <a class="pcard" href="#women"><div class="pimg"><img src="../shop-a/assets/women-5.jpg" alt=""><span class="cart"><svg width="16" height="16"><use href="#i-cart"/></svg></span></div><div class="ptxt"><div class="tt"><span class="pc-cat">아우터</span><p class="nm">크롭 니트 스웨터</p></div><p class="pr">₩79,000</p></div></a>
+  </div>
+</div></section>
+
+<section class="tm" id="reviews"><div class="wrap in">
+  <div class="head"><h2 class="s32">고객들이 먼저<br class="mb">말합니다</h2><div class="rv-pill"><svg><use href="#i-star"/></svg><span>1,000+ 리뷰</span></div></div>
+  <div class="holder"><div class="track" id="tmtrack">
+    <div class="tcard"><div class="tc-top"><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="tx"><h6>매일 입기 좋은 품질</h6><p>가격 대비 품질에 솔직히 놀랐어요. 원단이 튼튼하면서도 부드럽고, 하루 종일 입고 있어도 불편한 데가 없습니다. 색상별로 몇 벌 더 주문했더니 어느새 옷장의 기본템이 됐어요. 단순하고 믿을 수 있고 아무 데나 잘 어울리는 옷을 찾는다면 이만한 게 없습니다. 재구매 의사 100%예요. 선물용으로도 몇 벌 샀습니다.</p></div></div><div class="who"><img src="../shop-a/assets/avatar-1.jpg" alt=""><span>김민준</span></div></div>
+    <div class="tcard"><div class="tc-top"><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="tx"><h6>데일리로 딱이에요</h6><p>제가 찾던 바로 그 옷이에요. 핏이 편하면서 과하게 크지 않고, 여러 번 세탁해도 형태와 색이 그대로 유지됩니다. 디자인이 단순한데 깔끔하고 세련돼서 아침에 아무 생각 없이 꺼내 입어도 잘 어울려요. 매일 손이 가는 옷은 결국 이런 옷이더라고요. 다음 시즌 색상도 기다리고 있어요. 친구들한테도 알려줬어요.</p></div></div><div class="who"><img src="../shop-a/assets/avatar-2.jpg" alt=""><span>이서연</span></div></div>
+    <div class="tcard"><div class="tc-top"><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="tx"><h6>가격 대비 최고</h6><p>최근 산 것 중 가장 만족스러운 구매예요. 품질이 기대보다 훨씬 좋고 사이즈도 표기 그대로 정확합니다. 벌써 여러 번 입었는데 여전히 새 옷 같아요. 잘 만들었는데 가격까지 합리적인 기본템을 찾는다면 이 브랜드가 좋은 선택입니다. 배송도 빨라서 더 만족했어요. 포장도 깔끔하게 와서 좋았습니다.</p></div></div><div class="who"><img src="../shop-a/assets/avatar-3.jpg" alt=""><span>박지우</span></div></div>
+    <div class="tcard"><div class="tc-top"><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><div class="tx"><h6>제게 꼭 필요했던 것</h6><p>착용감이 정말 좋아요. 원단이 부드럽고 통기성이 좋아서 매일 입기에 완벽합니다. 디자인이 단순하고 활용도가 높아서 옷장에 있는 거의 모든 옷과 잘 맞아요. 편안함과 스타일을 동시에 잡은 옷은 흔치 않은데, 이건 둘 다 되는 드문 경우라 주변에도 계속 추천하고 있습니다. 세탁 후에도 그대로예요. 다른 색도 살 생각입니다.</p></div></div><div class="who"><img src="../shop-a/assets/avatar-4.jpg" alt=""><span>최도윤</span></div></div>
+  </div></div>
+</div></section>
+
+<section class="disc" id="homeware"><div class="wrap in">
+  <div class="head"><h2 class="s32">온 가족이 좋아할<br>제품을 찾아보세요.</h2><a class="ul t16 w6" href="#homeware">홈웨어 전체 보기<i class="line"></i></a></div>
+  <div class="car" id="car">
+    <div class="track">
+      <a class="dcard" href="#homeware"><div class="im"><img src="../shop-a/assets/home-1.jpg" alt=""></div><div class="tt"><span>데스크 램프</span><svg><use href="#i-arrow"/></svg></div></a>
+      <a class="dcard" href="#homeware"><div class="im"><img src="../shop-a/assets/home-2.jpg" alt=""></div><div class="tt"><span>월 아트</span><svg><use href="#i-arrow"/></svg></div></a>
+      <a class="dcard" href="#homeware"><div class="im"><img src="../shop-a/assets/home-3.jpg" alt=""></div><div class="tt"><span>의자</span><svg><use href="#i-arrow"/></svg></div></a>
+      <a class="dcard" href="#homeware"><div class="im"><img src="../shop-a/assets/home-4.jpg" alt=""></div><div class="tt"><span>소품</span><svg><use href="#i-arrow"/></svg></div></a>
+      <a class="dcard" href="#homeware"><div class="im"><img src="../shop-a/assets/home-5.jpg" alt=""></div><div class="tt"><span>소파</span><svg><use href="#i-arrow"/></svg></div></a>
+    </div>
+    <button class="arr prev" aria-label="이전"><svg width="24" height="24"><use href="#i-chevl"/></svg></button>
+    <button class="arr next" aria-label="다음"><svg width="24" height="24"><use href="#i-chevr"/></svg></button>
+  </div>
+</div></section>
+
+<section class="soc" id="socials">
+  <div class="head"><svg class="ig"><use href="#i-ig"/></svg><h2 class="s32">소셜에서 만나요</h2></div>
+  <div class="tk"><div class="track" id="igtrack">
+    <div class="tile"><img src="../shop-a/assets/insta-1.jpg" alt=""></div><div class="tile"><img src="../shop-a/assets/insta-2.jpg" alt=""></div><div class="tile"><img src="../shop-a/assets/insta-3.jpg" alt=""></div><div class="tile"><img src="../shop-a/assets/insta-4.jpg" alt=""></div>
+    <div class="tile"><img src="../shop-a/assets/insta-5.jpg" alt=""></div><div class="tile"><img src="../shop-a/assets/insta-6.jpg" alt=""></div><div class="tile"><img src="../shop-a/assets/insta-7.jpg" alt=""></div><div class="tile"><img src="../shop-a/assets/insta-8.jpg" alt=""></div>
+  </div></div>
+  <div class="pillh"><svg><use href="#i-ig"/></svg><a class="ul" href="#top">@loftmart_official<i class="line"></i></a></div>
+</section>
+
+<section class="sup" id="support"><div class="wrap in">
+  <div class="blk"><svg><use href="#i-bubble"/></svg><div class="tt"><h6>고객센터</h6><p>월–금 9:00AM – 6:00PM</p></div></div>
+  <div class="blk"><svg><use href="#i-phone"/></svg><div class="tt"><h6>전화 문의</h6><p>010-4894-4905</p></div></div>
+  <div class="blk"><svg><use href="#i-mail"/></svg><div class="tt"><h6>이메일 문의</h6><p>6gsmake@gmail.com</p></div></div>
+  <div class="blk"><svg><use href="#i-pin"/></svg><div class="tt"><h6>매장 안내</h6><p>서울특별시 강남구 · 민트클</p></div></div>
+</div></section>
+
+<footer class="ft" id="contact"><div class="wrap in">
+  <div class="top-row">
+    <div class="nl">
+      <div class="tt"><h3>뉴스레터 구독</h3><p>구독하고 10% 할인 쿠폰을 받으세요.</p></div>
+      <form class="nform" onsubmit="return false"><label><span>이메일</span><div class="box"><input type="email" placeholder="name@example.com" aria-label="이메일"></div></label><button type="button">구독하기</button></form>
+    </div>
+    <div class="links">
+      <div class="list"><h6>회사</h6><ul><li><a class="ul" href="#top">회사 소개<i class="line"></i></a></li><li><a class="ul" href="#support">매장 찾기<i class="line"></i></a></li></ul></div>
+      <div class="list"><h6>쇼핑</h6><ul><li><a class="ul" href="#collection">전체 상품<i class="line"></i></a></li><li><a class="ul" href="#collection">남성<i class="line"></i></a></li><li><a class="ul" href="#women">여성<i class="line"></i></a></li><li><a class="ul" href="#homeware">홈웨어<i class="line"></i></a></li><li><a class="ul" href="#collection">특가<i class="line"></i></a></li><li><a class="ul" href="#collection">세일<i class="line"></i></a></li><li><a class="ul" href="#top">장바구니<i class="line"></i></a></li></ul></div>
+      <div class="list"><h6>고객지원</h6><ul><li><a class="ul" href="#support">사이즈 가이드<i class="line"></i></a></li><li><a class="ul" href="#support">배송 안내<i class="line"></i></a></li><li><a class="ul" href="#support">반품 안내<i class="line"></i></a></li><li><a class="ul" href="#support">자주 묻는 질문<i class="line"></i></a></li><li><a class="ul" href="#support">문의하기<i class="line"></i></a></li></ul></div>
+    </div>
+  </div>
+  <div class="bot">
+    <div class="r1">
+      <div class="l">
+        <select class="sel" aria-label="국가 · 통화"><option>KR 대한민국 (KRW)</option><option>US United States (USD)</option></select>
+        <div class="pay" aria-label="결제 수단">
+          <svg viewBox="0 0 500 316"><rect width="500" height="316" rx="30" fill="#fff" stroke="rgba(0,0,0,.2)" stroke-width="3"/><text x="250" y="200" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-weight="700" font-style="italic" font-size="150" fill="#1434CB">VISA</text></svg>
+          <svg viewBox="0 0 500 316"><rect width="500" height="316" rx="30" fill="#000"/><circle cx="200" cy="158" r="92" fill="#EB001B"/><circle cx="300" cy="158" r="92" fill="#F79E1B" fill-opacity=".9"/></svg>
+          <svg viewBox="0 0 500 316"><rect width="500" height="316" rx="30" fill="#006FCF"/><text x="250" y="205" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-weight="700" font-size="120" fill="#fff">AMEX</text></svg>
+          <svg viewBox="0 0 500 316"><rect width="500" height="316" rx="30" fill="#fff" stroke="rgba(0,0,0,.2)" stroke-width="3"/><circle cx="330" cy="158" r="80" fill="#FF6000"/><text x="150" y="190" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-weight="700" font-size="90" fill="#000">DISC</text></svg>
+          <svg viewBox="0 0 500 316"><rect width="500" height="316" rx="30" fill="#fff" stroke="rgba(0,0,0,.2)" stroke-width="3"/><rect x="120" y="70" width="80" height="176" rx="20" fill="#0E4C96"/><rect x="210" y="70" width="80" height="176" rx="20" fill="#E41F26"/><rect x="300" y="70" width="80" height="176" rx="20" fill="#0B8B4A"/></svg>
+          <svg viewBox="0 0 500 316"><rect width="500" height="316" rx="30" fill="#fff" stroke="rgba(0,0,0,.2)" stroke-width="3"/><text x="250" y="200" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-weight="600" font-size="120" fill="#000">Pay</text></svg>
+          <svg viewBox="0 0 500 316"><rect width="500" height="316" rx="30" fill="#fff" stroke="rgba(0,0,0,.2)" stroke-width="3"/><text x="250" y="200" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-weight="600" font-size="110" fill="#5F6368">G Pay</text></svg>
+          <svg viewBox="0 0 500 316"><rect width="500" height="316" rx="30" fill="#fff" stroke="rgba(0,0,0,.2)" stroke-width="3"/><text x="250" y="205" text-anchor="middle" font-family="Instrument Sans,sans-serif" font-weight="700" font-style="italic" font-size="120" fill="#003087">PayPal</text></svg>
+        </div>
+      </div>
+      <div class="socs"><a href="#top" aria-label="틱톡"><svg><use href="#i-tt"/></svg></a><a href="#top" aria-label="페이스북"><svg><use href="#i-fb"/></svg></a><a href="#top" aria-label="인스타그램"><svg><use href="#i-ig"/></svg></a><a href="mailto:6gsmake@gmail.com" aria-label="이메일"><svg><use href="#i-mailf"/></svg></a></div>
+    </div>
+    <div class="r2">
+      <div class="l"><b>LOFTMART</b><p>Copyright © 로프트마트 · 민트클 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</p></div>
+      <div class="r"><a class="ul" href="#top">이용약관<i class="line"></i></a><a class="ul" href="#top">개인정보처리방침<i class="line"></i></a><a class="ul" href="#top">환불정책<i class="line"></i></a></div>
+    </div>
+  </div>
+</div></footer>
+
+<button class="chip" id="chip"><i><svg width="24" height="24"><use href="#i-chat"/></svg></i><h6>첫 주문 10% 할인 받기</h6></button>
+<div class="popwrap" id="pop"><div class="dim" id="dim"></div>
+  <div class="pop" role="dialog" aria-label="첫 주문 할인 안내">
+    <button class="close" id="popclose" aria-label="닫기"><svg><use href="#i-close"/></svg></button>
+    <img class="pic" src="../shop-a/assets/popup.jpg" alt="" width="400" height="480">
+    <div class="ct">
+      <div class="tt"><h2>가입하고 첫 주문<br>10% 할인 받기!</h2><p>멤버십에 가입하면 첫 구매에서 10% 할인 혜택을 드립니다.</p></div>
+      <form onsubmit="return false"><label><span>이메일</span><div class="box"><input type="email" placeholder="이메일 주소" aria-label="이메일"></div></label><button class="go" type="button">할인 쿠폰 받기</button></form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
