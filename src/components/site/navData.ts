@@ -312,7 +312,7 @@ export const HEADER_NAV: NavEntry[] = [
         children: templateGroups("landing-template"),
       },
       {
-        label: "프리미엄 디자인 템플릿",
+        label: "프리미엄 디자인",
         href: "/web-solutions",
         children: premiumGroups(),
       },
