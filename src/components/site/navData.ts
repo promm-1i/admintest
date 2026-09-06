@@ -217,7 +217,7 @@ export const INDUSTRY_ITEMS: NavItem[] = [
   },
   {
     icon: Bike,
-    title: "전기 이륜차 · 바이크 맞춤형",
+    title: "오토바이 · 스쿠터 맞춤형",
     desc: "제품 상세 · 구매 상담 · 협력점 지도",
     href: "/templates?industry=moto",
   },
