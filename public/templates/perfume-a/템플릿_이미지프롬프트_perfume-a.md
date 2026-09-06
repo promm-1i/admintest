@@ -1,7 +1,7 @@
 # perfume-a 이미지 슬롯 프롬프트 (레퍼런스 실측 크기 — 생성은 표시 크기의 2배)
 
 > 공통 접미: `photorealistic product photography, warm beige and cream palette, soft natural window light with dappled shadows, travertine stone and linen props, no text, no logo, no watermark, high detail`
-> 현재 `assets/` 안의 파일은 같은 크기의 임시 플레이스홀더(크림 톤 + 병 실루엣). 아래 파일명 그대로 덮어쓰면 끝난다. 사진 파일 외에는 교체할 것이 없다(로고·서명은 웹폰트, 아이콘은 SVG).
+> **2026-09-06 사진 9장 설치 완료** (사용자 생성본 → WebP q82, 1.49MB → 0.57MB). 아래 표는 재생성이 필요할 때 쓰는 프롬프트 기록. 파일 확장자는 `.webp` 로 바뀌었다(`hero.webp` 등). 사진 파일 외에는 교체할 것이 없다(로고·서명은 웹폰트, 아이콘은 SVG).
 
 | 슬롯 | 파일 | 표시 크기 (1440) | 생성 크기 | 프롬프트 |
 |---|---|---|---|---|
