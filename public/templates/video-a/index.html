@@ -27,6 +27,7 @@ p,li,dd,figcaption{text-wrap:pretty}
 body{background:var(--bg);color:#fff;font-family:"Bricolage Grotesque","Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.4;letter-spacing:-.02em}
 .num{font-family:"Bricolage Grotesque","Pretendard",sans-serif;letter-spacing:0}
 .wrap{max-width:1312px;margin:0 auto;padding:0}
+@media(max-width:1439px){.wrap{max-width:calc(100% - 64px)}}
 ::selection{background:rgba(250,97,20,.45)}
 a:focus-visible,button:focus-visible{outline:2px solid var(--orange2);outline-offset:3px;border-radius:4px}
 
@@ -67,7 +68,6 @@ h2.sec.sm{font-size:clamp(32px,4vw,58px)}
 .sec-head .sub{max-width:560px}
 
 /* 세로 결 텍스처 + 별 (배경 장식) */
-.streaks{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(255,214,170,.03) 0 2px,transparent 2px 56px)}
 .stars{position:absolute;inset:0;pointer-events:none;overflow:hidden}
 .star{position:absolute;background:#FFD9A8;border-radius:50%;opacity:.7}
 .star.tw{animation:tw 3.4s ease-in-out infinite}
@@ -95,18 +95,17 @@ nav a:hover{color:#fff}
 
 /* ── 0 히어로 — 실측(1440): 칩 y196 → h1 y270 (70/84 크림) → 서브 y478 (20/28 .6) → CTA y574 (48h) → 원통 y702 (1200×240 · persp 500) → 스트립 y1016 (632×51) · 섹션 h1137 ── */
 .hero{position:relative;height:1137px;overflow:clip}
-/* 배경: 중앙 상단 웜 브라운 워시 */
-.hero .wash{position:absolute;inset:0;background:radial-gradient(52% 48% at 50% 34%,#241309 0%,rgba(20,10,5,.55) 55%,rgba(9,4,1,0) 82%)}
-/* 좌상단 코너 글로우 — 실측 990×955 at (-367,-216): 코어 볼 + 동심 링 2겹 (화면에는 우하단 사분면만 걸친다) */
-.hero .corner{position:absolute;left:-367px;top:-216px;width:990px;height:955px;pointer-events:none}
-.hero .corner i{position:absolute;border-radius:50%}
-.hero .corner .c1{inset:21%;background:radial-gradient(circle at 46% 44%,#FFC084 0%,#FF8A3C 26%,#F1610F 52%,#C94F0B 72%,rgba(150,50,9,.9) 86%,rgba(110,36,7,.5) 100%);filter:blur(5px)}
-.hero .corner .c2{inset:2%;border:42px solid rgba(224,88,16,.30);filter:blur(7px)}
-.hero .corner .c3{inset:-9%;border:34px solid rgba(224,88,16,.12);filter:blur(10px)}
-/* 중앙 글로우 링 — 실측: 809×570 SVG 링 2겹 blur 60/100 plus-lighter at (308,204). 은은한 워밍만 */
-.hero .gring{position:absolute;left:50%;top:204px;transform:translateX(-50%);width:809px;height:570px;pointer-events:none;mix-blend-mode:plus-lighter;background:radial-gradient(ellipse 46% 52% at 50% 55%,rgba(9,4,1,0) 0 32%,rgba(214,84,16,.34) 46% 56%,rgba(9,4,1,0) 72%)}
-.hero .gring.g1{filter:blur(60px)}
-.hero .gring.g2{filter:blur(100px);opacity:.75}
+/* 배경 — 실측: 세로 결 텍스처(주기 63px, 밝은 띠 34px, 매우 은은) · 좌상단 코너 글로우 이미지 990×955 at (-365,-216) z2 · 중앙 글로우 SVG 링 2겹(#EE741E .5, feGaussianBlur 100, plus-lighter) 809×570 중심(720,489) blur 60/100 · 별 캔버스 1440×400 상단 */
+.hero .streaks{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(90deg,rgba(255,255,255,.012) 0 34px,transparent 34px 63px)}
+.hero .corner{position:absolute;left:-365px;top:-216px;width:990px;height:955px;pointer-events:none;z-index:2}
+.hero .corner img{display:block;width:100%;height:100%}
+.hero .cglow{position:absolute;left:50%;top:489px;width:809px;height:570px;transform:translate(-50%,-50%);pointer-events:none}
+.hero .cglow.a{filter:blur(60px)}
+.hero .cglow.a>div{filter:blur(100px)}
+.hero .cglow.b{filter:blur(100px)}
+.hero .cglow svg{display:block;width:100%;height:100%;overflow:visible}
+.hero .sky{position:absolute;left:50%;top:0;width:1440px;height:400px;transform:translateX(-50%);pointer-events:none}
+.hero .svc-shade{position:absolute;left:50%;top:1060px;width:478px;height:93px;transform:translateX(-50%);border-radius:100%;background:rgba(210,97,40,.45);filter:blur(37px);pointer-events:none;z-index:1}
 .hero-inner{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:196px}
 .hero .chip{height:34px;min-width:304px;padding:6px 16px;border-radius:100px;font-size:16px;letter-spacing:-.02em;font-weight:400;color:#fff;justify-content:center}
 .hero .chip::before,.hero .chip::after{display:none}
@@ -127,7 +126,7 @@ nav a:hover{color:#fff}
 .vb.l{left:0;transform:rotateY(90deg)}
 .vb.r{right:0;transform:rotateY(-90deg)}
 /* 서비스 알약 스트립 — 실측 632×51 r48 bg #100B08 blur5, 항목 16/.8 + 주황 ◆ */
-.svc{position:relative;margin:74px auto 0;display:flex;align-items:center;gap:20px;height:51px;padding:0 28px;border-radius:48px;background:#100B08;backdrop-filter:blur(5px);width:max-content;max-width:100%}
+.svc{position:relative;margin:24px auto 0;display:flex;align-items:center;justify-content:center;gap:20px;height:51px;padding:0 28px;border-radius:48px;background:#100B08;backdrop-filter:blur(5px);width:632px;max-width:100%}
 .svc span{display:inline-flex;align-items:center;gap:10px;font-size:16px;letter-spacing:-.02em;color:var(--mute8)}
 .svc span svg{width:17px;height:17px;stroke:var(--mute8);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .svc i{font-style:normal;color:var(--orange);font-size:10px}
@@ -214,25 +213,29 @@ section{position:relative}
 .plat h3 em{font-style:normal}
 /* 미디어 슬롯 — 레퍼런스는 어두운 바탕 중앙의 3D 플랫폼 아이콘. 이미지를 contain으로 중앙 배치해
    아이콘 렌더(누끼 PNG)로 갈아끼우면 그대로 재현된다 */
-.plat .slot{flex:1;margin:24px -6px;border-radius:14px;overflow:hidden;position:relative;display:grid;place-items:center;background:radial-gradient(60% 45% at 50% 90%,rgba(224,88,16,.18),rgba(9,4,1,0) 75%)}
-.plat .slot img{width:204px;height:204px;object-fit:contain;filter:drop-shadow(0 24px 40px rgba(0,0,0,.6))}
+.plat .slot{flex:1;margin:24px -6px;position:relative;display:grid;place-items:center}
+.plat .slot img{width:204px;height:204px;object-fit:contain}
 .plat p{font-size:15px;color:var(--mute8);line-height:1.5;max-width:300px;margin:0 auto}
-.mega{margin-top:96px;max-width:1090px;height:827px;margin-left:auto;margin-right:auto;border-radius:16px;position:relative;overflow:hidden;background:#0D0805;border:0;padding:48px}
-.mega .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.mega .edge{position:absolute;top:0;right:0;bottom:0;width:42%;background:linear-gradient(90deg,rgba(13,8,5,0),rgba(178,46,10,.55) 60%,rgba(224,88,16,.75));mask-image:linear-gradient(90deg,transparent,#000 40%)}
-.mega .edge::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(0,0,0,.1) 0 3px,transparent 3px 60px)}
-.mega-in{position:relative;display:grid;grid-template-columns:1fr 340px;gap:80px;align-items:stretch}
+.mega{margin-top:96px;max-width:1090px;height:827px;margin-left:auto;margin-right:auto;border-radius:16px;position:relative;overflow:visible;background:#0D0805;border:0;padding:48px}
+.mega .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:16px}
+.mega .sideglow{position:absolute;left:815px;top:-171px;width:799px;height:640px;pointer-events:none}
+section:has(.mega){overflow:clip}
+.mega .stars{border-radius:16px}
+.mega-in{position:relative;display:grid;grid-template-columns:1fr 318px;gap:80px;align-items:stretch}
 .mega-in>div:first-child{display:flex;flex-direction:column;align-items:flex-start}
 .mega h2{font-size:48px;line-height:62.4px;letter-spacing:-.03em;font-weight:500}
 .mega .sub{margin-top:22px;max-width:420px}
 .mega .btn{margin-top:auto;width:188px;height:48px;justify-content:center;padding:0}
 .mini{display:flex;flex-direction:column;gap:18px}
-.mcard{border-radius:16px;background:rgba(9,4,1,.62);border:1px solid rgba(255,255,255,.1);padding:22px 24px;backdrop-filter:blur(6px)}
-.mcard .ic{width:24px;height:24px;border-radius:50%;background:linear-gradient(180deg,#FF8A3C,#E4560F);display:grid;place-items:center;margin-bottom:14px}
+.mcard{position:relative;overflow:hidden;min-height:222px;border-radius:10px;background:#090401;border:0;padding:20px}
+.mcard::before{content:"";position:absolute;left:-40px;top:-121px;width:194px;height:194px;border-radius:100px;background:radial-gradient(50% 50%,#D95130 0%,#A84027 8.3%,#121212 100%);filter:blur(25px);pointer-events:none}
+.mcard>*{position:relative}
+.mcard .ic{width:27px;height:27px;border-radius:50%;background:linear-gradient(180deg,#FF8A3C,#E4560F);display:grid;place-items:center;margin-bottom:34px}
 .mcard .ic svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.mcard hr{border:0;height:1px;background:linear-gradient(90deg,rgba(255,138,60,.5),transparent);margin-bottom:14px}
-.mcard h4{font-size:17px;font-weight:600;margin-bottom:8px}
-.mcard p{font-size:13.5px;color:var(--mute);line-height:1.5}
+.mcard hr{border:0;height:1px;background:rgba(255,255,255,.28);margin:0 0 24px;box-shadow:0 6px 0 rgba(255,120,50,.35)}
+.mcard h4{font-size:24px;line-height:26.4px;font-weight:500;margin-bottom:12px}
+.mcard p{font-size:16px;line-height:22.4px;color:rgba(255,255,255,.8)}
+.mega-in>div:last-child{display:flex;flex-direction:column;gap:12px}
 
 /* ── 4 고객 성과 — 9:16 마퀴 (실측 346×620 r16) ── */
 .works{overflow:clip}
@@ -383,15 +386,21 @@ section{position:relative}
 
 /* ── 10 편집 툴 — 실측: 한 줄 수평 배치, 아이콘 사이 연결선, 중앙 주황 글로우 + 동심 링, 라벨 없음, 좌우 끝은 화면 밖으로 ── */
 .tools{overflow:clip;padding-bottom:220px}
-.tools .glow{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,138,60,.55),rgba(224,88,16,.25) 55%,rgba(9,4,1,0) 75%);filter:blur(24px);pointer-events:none}
-.tools .ring{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(255,158,92,.14);pointer-events:none}
+.tools .glow{position:absolute;left:50%;top:calc(56% + 122px);transform:translate(-50%,-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,138,60,.55),rgba(224,88,16,.25) 55%,rgba(9,4,1,0) 75%);filter:blur(24px);pointer-events:none}
+.tools .ring{position:absolute;left:50%;top:calc(56% + 122px);transform:translate(-50%,-50%);border-radius:50%;border:1px solid rgba(255,158,92,.14);pointer-events:none}
 .tools .ring.r1{width:640px;height:640px}
 .tools .ring.r2{width:920px;height:920px;border-color:rgba(255,158,92,.08)}
-.tool-row{position:relative;margin-top:96px;display:flex;justify-content:center;align-items:center;gap:0}
-.tool-row::before{content:"";position:absolute;left:-30vw;right:-30vw;top:50%;height:1px;background:rgba(255,255,255,.16)}
-.tool{position:relative;flex:none;display:grid;place-items:center;width:180px}
-.tool .tile{width:118px;height:118px;border-radius:30px;display:grid;place-items:center;font-size:32px;font-weight:600;letter-spacing:-.02em;border:1px solid rgba(255,255,255,.14);box-shadow:0 20px 50px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .3s ease}
-.tool:hover .tile{transform:translateY(-8px) scale(1.05)}
+.tool-row{position:relative;margin-top:192px;height:110px;overflow:hidden}
+.tool-row::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(255,255,255,.16)}
+/* 실측: 타일 110×110 r27 · 간격 194(gap 84) · 좌로 40px/s 무한 티커 · 좌우 413px 바탕색 페이드 */
+.tool-track{position:absolute;left:50%;top:0;display:flex;gap:84px;width:max-content;transform:translateX(-582px);animation:toolmq 29.1s linear infinite}
+.tool{flex:none;width:110px;height:110px}
+.tool img{display:block;width:110px;height:110px;border-radius:27px}
+.tool-shade{position:absolute;top:0;bottom:0;width:413px;pointer-events:none}
+.tool-shade.l{left:0;background:linear-gradient(90deg,#090401 0%,rgba(10,5,1,0) 100%)}
+.tool-shade.r{right:0;background:linear-gradient(270deg,#090401 0%,rgba(10,5,1,0) 100%)}
+@keyframes toolmq{to{transform:translateX(-1746px)}}
+@media(prefers-reduced-motion:reduce){.tool-track{animation:none}}
 .t1{background:linear-gradient(160deg,#2A1F4E,#120C26);color:#B9A7FF}
 .t2{background:linear-gradient(160deg,#3A3A3E,#161618);color:#F2F2F2}
 .t3{background:linear-gradient(160deg,#0E3B3B,#081A1A);color:#6EF2D8}
@@ -467,8 +476,22 @@ footer::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;ba
   .f-cols{gap:48px;flex-wrap:wrap}
   .ghostword{font-size:150px;bottom:-64px}
   .tool{width:104px}
-  .tool .tile{width:72px;height:72px;border-radius:20px;font-size:20px}
-  .tools{padding-bottom:120px}
+    .tools{padding-bottom:120px}
+}
+
+/* 세로 리듬 실측 보정 — 레퍼런스 섹션 라벨 y 기준 (1440): 문제 1317 · 해결 2297 · 고객성과 5436 · 성과 6697 · 과정 8172 · 후기 9294 · 가격 10207 · FAQ 11415 · 편집툴 12215 · CTA 13243 */
+@media(min-width:1024px){
+  section.prob{padding-top:180px}
+  section:nth-of-type(3){padding-top:41px}
+  section.works{padding-top:298px}
+  section:nth-of-type(6){padding-top:69px}
+  section:nth-of-type(7){padding-top:111px}
+  section:nth-of-type(8){padding-top:165px}
+  section#pricing{padding-top:99px}
+  section:nth-of-type(10){padding-top:44px;padding-bottom:0}
+  section.tools{padding-top:101px}
+  section#contact{padding-top:226px}
+  footer{margin-top:80px;padding-bottom:146px}
 }
 </style>
 </head>
@@ -497,12 +520,12 @@ footer::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;ba
 
 <!-- 0 히어로 -->
 <section class="hero">
-  <div class="wash" aria-hidden="true"></div>
-  <div class="streaks"></div>
-  <div class="gring g1" aria-hidden="true"></div>
-  <div class="gring g2" aria-hidden="true"></div>
-  <div class="corner" aria-hidden="true"><i class="c3"></i><i class="c2"></i><i class="c1"></i></div>
-  <div class="stars" data-stars="46" aria-hidden="true"></div>
+  <div class="streaks" aria-hidden="true"></div>
+  <div class="cglow a" aria-hidden="true"><div><svg viewBox="0 0 809 570" preserveAspectRatio="none"><defs><filter id="cgf" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="100"/></filter></defs><g filter="url(#cgf)" style="mix-blend-mode:plus-lighter"><path fill="#EE741E" fill-opacity=".5" fill-rule="evenodd" d="M785 334A212 212 0 1 0 361 334A212 212 0 1 0 785 334ZM679 334A106 106 0 1 1 467 334A106 106 0 1 1 679 334Z"/><path fill="#EE741E" fill-opacity=".5" fill-rule="evenodd" d="M447 235A212 212 0 1 0 23 235A212 212 0 1 0 447 235ZM341 235A106 106 0 1 1 129 235A106 106 0 1 1 341 235Z"/></g></svg></div></div>
+  <div class="cglow b" aria-hidden="true"><svg viewBox="0 0 809 570" preserveAspectRatio="none"><defs><filter id="cgf2" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="100"/></filter></defs><g filter="url(#cgf2)" style="mix-blend-mode:plus-lighter"><path fill="#EE741E" fill-opacity=".5" fill-rule="evenodd" d="M785 334A212 212 0 1 0 361 334A212 212 0 1 0 785 334ZM679 334A106 106 0 1 1 467 334A106 106 0 1 1 679 334Z"/><path fill="#EE741E" fill-opacity=".5" fill-rule="evenodd" d="M447 235A212 212 0 1 0 23 235A212 212 0 1 0 447 235ZM341 235A106 106 0 1 1 129 235A106 106 0 1 1 341 235Z"/></g></svg></div>
+  <div class="corner" aria-hidden="true"><img src="./assets/glow-corner.png" alt=""></div>
+  <canvas class="sky" id="sky" width="1440" height="400" aria-hidden="true"></canvas>
+  <i class="svc-shade" aria-hidden="true"></i>
   <div class="hero-inner">
     <span class="chip rv y30 on-load"><span class="sp">✦</span>&nbsp; 숏폼 영상 편집 스튜디오</span>
     <h1 class="rv bl on-load d1">조회수가 매출이 되는<br>숏폼 영상 편집</h1>
@@ -620,29 +643,28 @@ footer::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;ba
 <section class="pad">
   <div class="wrap">
     <div class="sec-head">
-      <span class="chip rv y30">무엇을 하나요</span>
       <h2 class="sec rv bl">촬영본에서 업로드 준비까지,<br>숏폼 편집 전 과정</h2>
       <p class="sub rv d1">플랫폼마다 통하는 문법이 다릅니다.<br>같은 촬영본도 채널 특성에 맞춰 다르게 편집합니다.</p>
     </div>
     <div class="plat-grid">
       <article class="plat rv y30 d1">
         <h3>유튜브 <em>쇼츠</em></h3>
-        <div class="slot"><img src="./assets/start-growing-to-1.jpg" alt="유튜브 쇼츠 편집 예시 화면"></div>
+        <div class="slot"><img src="./assets/icon-shorts.png" alt="유튜브 쇼츠 편집 예시 화면"></div>
         <p>쇼츠 알고리즘에 맞춘 길이와 후킹 구조로 편집합니다</p>
       </article>
       <article class="plat rv y30 d2">
         <h3>인스타그램 <em>릴스</em></h3>
-        <div class="slot"><img src="./assets/start-growing-to-2.jpg" alt="인스타그램 릴스 편집 예시 화면"></div>
+        <div class="slot"><img src="./assets/icon-reels.png" alt="인스타그램 릴스 편집 예시 화면"></div>
         <p>릴스 도달에 맞춘 트렌드 자막 · 템포 · 후킹을 설계합니다</p>
       </article>
       <article class="plat rv y30 d3">
         <h3>틱톡 <em>비디오</em></h3>
-        <div class="slot"><img src="./assets/start-growing-to-3.jpg" alt="틱톡 비디오 편집 예시 화면"></div>
+        <div class="slot"><img src="./assets/icon-tiktok.png" alt="틱톡 비디오 편집 예시 화면"></div>
         <p>유행 사운드와 포맷, 네이티브한 감성에 맞춘 빠른 컷 편집</p>
       </article>
     </div>
     <div class="mega rv">
-      <img class="bgimg" src="./assets/mega-bg.jpg" alt="" aria-hidden="true">
+      <img class="bgimg" src="./assets/mega-bg.png" alt="" aria-hidden="true"><img class="sideglow" src="./assets/side-glow.png" alt="" aria-hidden="true">
       <div class="stars" data-stars="16" aria-hidden="true"></div>
       <div class="mega-in">
         <div>
@@ -935,14 +957,8 @@ footer::after{content:"";position:absolute;left:0;right:0;bottom:0;height:55%;ba
     </div>
   </div>
   <div class="tool-row" aria-label="사용 가능한 편집 툴: 캡컷 · 다빈치 리졸브 · 애프터 이펙트 · 프리미어 프로 · 파이널 컷 · 필모라">
-    <div class="tool" aria-hidden="true"><span class="tile" style="background:#17120E;color:#3A322B">Vx</span></div>
-    <div class="tool rv y30 d1"><span class="tile t3">Cc</span></div>
-    <div class="tool rv y30 d2"><span class="tile t5">Dv</span></div>
-    <div class="tool rv y30 d3"><span class="tile t6">Ae</span></div>
-    <div class="tool rv y30 d4"><span class="tile t1">Pp</span></div>
-    <div class="tool rv y30 d5"><span class="tile t2">Fc</span></div>
-    <div class="tool rv y30 d6"><span class="tile t4">Fm</span></div>
-    <div class="tool" aria-hidden="true"><span class="tile" style="background:#17120E;color:#3A322B">Lw</span></div>
+    <div class="tool-track"><span class="tool"><img src="./assets/tool-1.png" alt=""></span><span class="tool"><img src="./assets/tool-2.png" alt=""></span><span class="tool"><img src="./assets/tool-3.png" alt=""></span><span class="tool"><img src="./assets/tool-4.png" alt=""></span><span class="tool"><img src="./assets/tool-5.png" alt=""></span><span class="tool"><img src="./assets/tool-6.png" alt=""></span><span class="tool"><img src="./assets/tool-1.png" alt=""></span><span class="tool"><img src="./assets/tool-2.png" alt=""></span><span class="tool"><img src="./assets/tool-3.png" alt=""></span><span class="tool"><img src="./assets/tool-4.png" alt=""></span><span class="tool"><img src="./assets/tool-5.png" alt=""></span><span class="tool"><img src="./assets/tool-6.png" alt=""></span></div>
+    <i class="tool-shade l" aria-hidden="true"></i><i class="tool-shade r" aria-hidden="true"></i>
   </div>
 </section>
 
@@ -1075,6 +1091,18 @@ burger.addEventListener('click',()=>{
   });
   document.body.appendChild(sheet);burger.setAttribute('aria-label','메뉴 닫기');
 });
+
+// 히어로 별 캔버스 — 실측: 1440×400, 흰 점 1~2px 약 45개, 좌하단으로 약 20px/s 드리프트, 개별 깜빡임(2~4s) + 가끔 번쩍
+(function(){const c=document.getElementById('sky');if(!c)return;const ctx=c.getContext('2d');const W=c.width,H=c.height;const N=45;
+const st=[];for(let i=0;i<N;i++)st.push({x:Math.random()*W,y:Math.random()*H,r:0.8+Math.random()*1.2,a:0.25+Math.random()*0.4,p:Math.random()*Math.PI*2,f:2+Math.random()*2,fl:0});
+let t0=performance.now(),last=t0;const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function draw(now){const dt=(now-last)/1000;last=now;const t=(now-t0)/1000;ctx.clearRect(0,0,W,H);
+ for(const s of st){if(!rm){s.x-=20*dt;s.y+=14*dt;if(s.x<-4){s.x=W+4;s.y=Math.random()*H}if(s.y>H+4){s.y=-4;s.x=Math.random()*W}}
+  if(s.fl>0)s.fl-=dt*3;else if(Math.random()<0.0008)s.fl=1;
+  const tw=0.6+0.4*Math.sin(t*Math.PI*2/s.f+s.p);const al=Math.min(1,s.a*tw+s.fl);
+  ctx.beginPath();ctx.arc(s.x,s.y,s.r*(1+s.fl*0.6),0,Math.PI*2);ctx.fillStyle='rgba(255,241,226,'+al.toFixed(3)+')';ctx.fill();}
+ if(!rm)requestAnimationFrame(draw);}
+requestAnimationFrame(draw);})();
 </script>
 </body>
 </html>
