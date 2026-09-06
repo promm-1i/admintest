@@ -1,5 +1,5 @@
 import { Car, CarFront, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, Mountain, Bike, type LucideIcon } from "lucide-react";
-import { SAMPLES } from "@/lib/samples";
+import { SAMPLES, getPremiumDesigns } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
 
 /**
@@ -44,6 +44,30 @@ function templateGroups(styleKey: "basic-template" | "landing-template"): NavTem
     g.designs.reverse();
   }
   return groups.sort((a, b) => a.label.localeCompare(b.label, "ko"));
+}
+
+/**
+ * 프리미엄 디자인 카테고리 — samples.ts의 premium 플래그가 단일 출처라
+ * /web-solutions 프리미엄 섹션과 항상 같은 목록이 뜬다.
+ * 업종 2단이 아니라 "프리미엄 디자인" 그룹 하나에 시안을 나란히 진열한다.
+ */
+function premiumGroups(): NavTemplateGroup[] {
+  const designs = getPremiumDesigns().map(({ sample, label }) => ({
+    label,
+    code: getDesignCode(sample),
+    href: `/samples/${sample.slug}`,
+    ...(sample.image ? { image: sample.image } : {}),
+  }));
+  if (designs.length === 0) return [];
+  return [
+    {
+      key: "premium",
+      label: "프리미엄 디자인",
+      href: "/web-solutions",
+      image: designs[0]?.image,
+      designs,
+    },
+  ];
 }
 
 /** 업종 하나에 딸린 개별 디자인 시안 */
@@ -286,6 +310,11 @@ export const HEADER_NAV: NavEntry[] = [
         label: "랜딩형 디자인 템플릿",
         href: "/templates?style=landing-template",
         children: templateGroups("landing-template"),
+      },
+      {
+        label: "프리미엄 디자인 템플릿",
+        href: "/web-solutions",
+        children: premiumGroups(),
       },
     ],
   },

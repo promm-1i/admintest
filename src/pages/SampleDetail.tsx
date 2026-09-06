@@ -55,7 +55,11 @@ export default function SampleDetail() {
 
   // 템플릿 항목은 포트폴리오가 아니라 /templates 목록에서 넘어오므로 되돌아가는 링크도 그쪽으로 보낸다.
   const isTemplate = Boolean(sample.industryKey);
+  // 프리미엄 디자인은 템플릿 가격표(64만~)가 아니라 /web-solutions의 프리미엄 라인(300만~)을 따른다.
+  const isPremium = sample.type.includes("premium-template");
   const templateStyle = sample.type.includes("landing-template") ? "landing-template" : "basic-template";
+  const backHref = isPremium ? "/web-solutions" : isTemplate ? `/templates?style=${templateStyle}` : "/samples";
+  const backLabel = isPremium ? "프리미엄 디자인 목록으로" : isTemplate ? "전체 템플릿 목록으로" : "전체 포트폴리오 목록으로";
 
   const renderSamplePreview = () => {
     if (sample.liveUrl) return <ExternalSitePreview url={sample.liveUrl} />;
@@ -94,11 +98,11 @@ export default function SampleDetail() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-border pb-6">
         <div>
           <Link
-            to={isTemplate ? `/templates?style=${templateStyle}` : "/samples"}
+            to={backHref}
             className="inline-flex items-center text-xs font-semibold text-primary hover:underline mb-2"
           >
             <ArrowLeft className="h-3.5 w-3.5 mr-1" />
-            {isTemplate ? "전체 템플릿 목록으로" : "전체 포트폴리오 목록으로"}
+            {backLabel}
           </Link>
           <div className="flex items-center gap-2">
             <span className="rounded bg-secondary px-2.5 py-0.5 text-xs font-medium text-secondary-foreground">
@@ -143,7 +147,7 @@ export default function SampleDetail() {
         <div
           className={cn(
             "mt-8",
-            isTemplate ? "grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start" : "space-y-6",
+            isTemplate && !isPremium ? "grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start" : "space-y-6",
           )}
         >
           {/* min-w-0: grid 자식의 기본 min-width:auto 때문에 미리보기 내부의 min-width(표 등)가
@@ -217,7 +221,7 @@ export default function SampleDetail() {
           </RevealScale>
           </div>
 
-          {isTemplate && (
+          {isTemplate && !isPremium && (
             <div className="xl:sticky xl:top-24">
               <TemplateSpecPanel sample={sample} />
             </div>
@@ -261,14 +265,29 @@ export default function SampleDetail() {
         </div>
       )}
 
-      {/* 템플릿 기능 소개 랜딩 + 요금제 비교 (템플릿 상세에서만) */}
-      {isTemplate && (
+      {/* 템플릿 기능 소개 랜딩 + 요금제 비교 (템플릿 상세에서만 — 프리미엄은 가격 체계가 달라 제외) */}
+      {isTemplate && !isPremium && (
         <>
           <TemplateFeatureLanding sample={sample} />
           <Reveal className="mt-16 rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8">
             <PricingComparison />
           </Reveal>
         </>
+      )}
+
+      {/* 프리미엄 디자인 안내 — 템플릿 가격표 대신 프리미엄 라인 가격으로 연결 */}
+      {isPremium && (
+        <Reveal className="mt-16 rounded-2xl border border-primary/40 bg-primary/[0.04] p-6 sm:p-8">
+          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">PREMIUM DESIGN</p>
+          <h2 className="mt-2 text-lg font-semibold text-foreground">이 디자인은 프리미엄 라인입니다</h2>
+          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
+            이 디자인을 기반으로 문구 · 이미지 · 구성을 맞춰 제작하며, <strong className="text-foreground">300만 원부터</strong>{" "}
+            시작합니다 (부가세 별도). 자세한 구축 범위와 비용은 프리미엄 라인 안내에서 확인하세요.
+          </p>
+          <Link to="/web-solutions" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
+            프리미엄 라인 안내 보기 →
+          </Link>
+        </Reveal>
       )}
 
       {/* Bottom CTA Box */}
@@ -302,8 +321,8 @@ export default function SampleDetail() {
           {/* Bottom row: 포트폴리오 다시보기 / 목록 */}
           <div className="mt-1 flex justify-center">
             <Button asChild variant="ghost" size="lg" className="font-semibold text-muted-foreground hover:text-foreground">
-              <Link to={isTemplate ? `/templates?style=${templateStyle}` : "/samples"}>
-                {isTemplate ? "다른 템플릿 보기" : "다른 포트폴리오 보기"}
+              <Link to={backHref}>
+                {isPremium ? "다른 프리미엄 디자인 보기" : isTemplate ? "다른 템플릿 보기" : "다른 포트폴리오 보기"}
               </Link>
             </Button>
           </div>

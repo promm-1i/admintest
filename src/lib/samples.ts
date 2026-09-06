@@ -34,6 +34,12 @@ export type Sample = {
   industryKey?: string;
   /** 추가 디자인 시안(1002, 1003…)만 직접 지정. 없으면 designCode.ts에서 1001로 계산한다 */
   designCode?: string;
+  /**
+   * 프리미엄 디자인 진열 여부 — 헤더 "프리미엄 디자인 템플릿" 카테고리와
+   * /web-solutions 프리미엄 디자인 섹션이 이 플래그 하나로 함께 갱신된다.
+   * 실제 홈페이지가 완성되면 임시 항목(moto-b · beauty-g)의 플래그를 옮기면 된다.
+   */
+  premium?: boolean;
 };
 
 /**
@@ -42,6 +48,22 @@ export type Sample = {
  * /samples 페이지 페이지네이션도 이 순서를 기준으로 6개씩 나눈다.
  */
 export const SAMPLES: Sample[] = [
+  {
+    slug: "video-a-template",
+    industry: "영상 편집 · 콘텐츠 홈페이지",
+    title: "숏폼 영상 편집 스튜디오 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 영상 편집 · 콘텐츠",
+    purpose:
+      "다크 브라운 바탕에 주황 글로우 히어로, 3D 터널 갤러리, 카운트업 스탯과 9:16 성과 마퀴, 가격표 · FAQ 아코디언까지 갖춘 숏폼 영상 편집 스튜디오 프리미엄 원페이지입니다. 사진 슬롯만 교체하면 어떤 콘텐츠 업종에도 적용됩니다.",
+    features: ["주황 글로우 · 3D 터널 히어로", "카운트업 스탯 4종", "9:16 세로 영상 성과 마퀴", "가격표 · FAQ 아코디언"],
+    idealFor: "영상 편집 스튜디오, 콘텐츠 마케팅 대행사, 숏폼 크리에이터 팀, 프리미엄 무드가 필요한 서비스업",
+    image: "/thumbs/video-a.jpg",
+    liveUrl: "/templates/video-a/",
+    industryKey: "video",
+    designCode: "VIDP-1001",
+    premium: true,
+  },
   {
     slug: "moto-a-template",
     industry: "오토바이 · 스쿠터 홈페이지",
@@ -86,6 +108,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/moto-b/",
     industryKey: "moto",
     designCode: "MOTL-1002",
+    premium: true, // 임시 진열 — 실제 홈페이지가 완성되면 교체
   },
   {
     slug: "moto-b-basic-template",
@@ -204,6 +227,7 @@ export const SAMPLES: Sample[] = [
     idealFor: "남성 전문 바버샵 · 브랜딩을 강하게 가져가는 헤어샵",
     image: "/thumbs/beauty-g.jpg",
     liveUrl: "/templates/beauty-g/",
+    premium: true, // 임시 진열 — 실제 홈페이지가 완성되면 교체
     industryKey: "beauty",
     designCode: "BEAL-1007",
   },
@@ -4198,6 +4222,19 @@ export function getLatestTemplateDesigns(n: number) {
     if (items.length >= n) break;
   }
   return items;
+}
+
+/**
+ * 프리미엄 디자인 진열 목록 (premium: true, 배열 앞이 최신).
+ * 헤더 "프리미엄 디자인 템플릿" 플라이아웃과 /web-solutions 프리미엄 섹션의 단일 출처 —
+ * SAMPLES에서 플래그만 바꾸면 두 곳이 함께 갱신된다.
+ */
+export function getPremiumDesigns() {
+  return SAMPLES.filter((s) => s.premium && s.image).map((s) => ({
+    sample: s,
+    label: s.industry.replace(" 홈페이지", ""),
+    href: `/samples/${s.slug}`,
+  }));
 }
 
 export function getSampleBySlug(slug: string): Sample | undefined {

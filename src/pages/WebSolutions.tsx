@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { getSampleBySlug, type Sample } from "@/lib/samples";
+import { getPremiumDesigns } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
 
 type Tier = {
@@ -60,13 +60,11 @@ const COMMON_FEATURES = [
 ];
 
 /**
- * 프리미엄 디자인 진열 목록 — 실제 홈페이지가 완성되는 대로 이 배열에서 교체·추가한다.
- * 현재는 임시로 모토 디자인 B(MOTL-1002)와 바버샵(노블 바버)만 노출.
+ * 프리미엄 디자인 진열 목록 — samples.ts의 premium 플래그가 단일 출처다.
+ * 헤더 "프리미엄 디자인 템플릿" 카테고리와 같은 목록이며, 실제 홈페이지가
+ * 완성되는 대로 samples.ts에서 플래그를 교체·추가하면 두 곳이 함께 갱신된다.
  */
-const PREMIUM_DESIGN_SLUGS = ["moto-b-template", "beauty-g-template"];
-const PREMIUM_DESIGNS = PREMIUM_DESIGN_SLUGS.map((slug) => getSampleBySlug(slug))
-  .filter((s): s is Sample => Boolean(s?.image))
-  .map((s) => ({ sample: s, label: s.industry.replace(" 홈페이지", ""), href: `/samples/${s.slug}` }));
+const PREMIUM_DESIGNS = getPremiumDesigns();
 
 export default function WebSolutions() {
   usePageTitle(
