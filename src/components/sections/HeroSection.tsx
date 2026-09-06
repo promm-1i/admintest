@@ -3,7 +3,7 @@ import { HeroFluid } from "@/components/sections/HeroFluid";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { SAMPLES } from "@/lib/samples";
+import { getLatestTemplateDesigns } from "@/lib/samples";
 import { cn } from "@/lib/utils";
 
 /**
@@ -15,23 +15,12 @@ import { cn } from "@/lib/utils";
  * - prefers-reduced-motion 사용자는 정적 아치를 본다
  */
 
-/** 최신 템플릿(배열 앞이 최신)에서 업종 중복 없이 12개 — 히어로 카드의 단일 출처 */
-const HERO_ITEMS = (() => {
-  const seen = new Set<string>();
-  const items: { src: string; label: string; href: string }[] = [];
-  for (const s of SAMPLES) {
-    if (!s.industryKey || !s.type.includes("landing-template") || !s.image) continue;
-    if (seen.has(s.industryKey)) continue;
-    seen.add(s.industryKey);
-    items.push({
-      src: s.image,
-      label: s.industry.replace(" 홈페이지", ""),
-      href: `/samples/${s.slug}`,
-    });
-    if (items.length >= 12) break;
-  }
-  return items;
-})();
+/** 최신 템플릿에서 업종 중복 없이 12개 — 프리미엄 디자인 목록과 같은 출처 */
+const HERO_ITEMS = getLatestTemplateDesigns(12).map((d) => ({
+  src: d.sample.image!,
+  label: d.label,
+  href: d.href,
+}));
 
 /** 레퍼런스처럼 촘촘한 잔별 — 고정 시드로 42개를 흩뿌린다 (렌더마다 위치가 흔들리지 않게) */
 const STARS = Array.from({ length: 42 }, (_, i) => {
@@ -115,7 +104,7 @@ function CylinderShowcase() {
       const now = performance.now();
       lastX = e.clientX;
       if (Math.abs(dx) > 2) draggedRef.current = true;
-      const dAngle = dx * 0.12; // px → deg 감도
+      const dAngle = -dx * 0.12; // 카드가 마우스 이동 방향을 따라가도록 (뒤쪽 벽 시점이라 부호 반전)
       angleRef.current += dAngle;
       velRef.current = (dAngle / Math.max(now - lastT, 1)) * 16; // 프레임당 속도
       lastT = now;

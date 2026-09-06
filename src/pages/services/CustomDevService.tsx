@@ -233,7 +233,7 @@ export default function CustomDevService() {
           </Reveal>
           <Reveal delay={160} className="mt-8 flex flex-col gap-3 rounded-xl border border-border bg-card px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm font-medium text-foreground break-keep">
-              업종별 맞춤 구축은 <strong className="font-bold text-primary">150만 원부터</strong> 시작하며,
+              업종별 맞춤 구축은 <strong className="font-bold text-primary">300만 원부터</strong> 시작하며,
               반응형 제작과 관리자 시스템이 기본으로 포함됩니다.
             </p>
             <Button asChild variant="outline" className="shrink-0 gap-1.5">

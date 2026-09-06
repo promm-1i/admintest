@@ -3,8 +3,9 @@ import { Check, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
-import { INDUSTRY_ITEMS } from "@/components/site/navData";
 import { FadeIn } from "@/components/ui/FadeIn";
+import { getLatestTemplateDesigns } from "@/lib/samples";
+import { getDesignCode } from "@/lib/designCode";
 
 type Tier = {
   name: string;
@@ -19,13 +20,8 @@ type Tier = {
  */
 const TIERS: Tier[] = [
   {
-    name: "기본형",
-    setupFee: "150만 원",
-    tagline: "필요한 정보를 정직하게 전달하는 구성",
-  },
-  {
     name: "랜딩형",
-    setupFee: "200만 원",
+    setupFee: "300만 원",
     tagline: "스크롤 연출과 인터랙션으로 상담까지 연결하는 구성",
     recommended: true,
   },
@@ -114,56 +110,60 @@ export default function WebSolutions() {
             화면 구성과 기능을 직접 설계합니다. 반응형 제작과 관리자 시스템, 데이터베이스, 직원 권한
             관리까지 모두 기본으로 포함됩니다.
           </p>
-          <p className="mt-3 text-xs font-semibold text-primary">150만 원부터</p>
+          <p className="mt-3 text-xs font-semibold text-primary">300만 원부터</p>
         </div>
         </FadeIn>
       </div>
 
-      <h2 className="mt-12 text-xl font-semibold">업종</h2>
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {INDUSTRY_ITEMS.map((item, idx) => {
-          const Icon = item.icon;
-          const isReal = Boolean(item.href);
-          const content = (
-            <>
-              <div
-                className={cn(
-                  "flex h-10 w-10 shrink-0 items-center justify-center rounded-lg",
-                  isReal ? "bg-primary/10 text-primary" : "bg-secondary text-muted-foreground",
-                )}
-              >
-                <Icon className="h-5 w-5" />
-              </div>
-              <p className="mt-3 flex items-center gap-1.5 text-sm font-semibold text-foreground">
-                {item.title}
-                {!isReal && (
-                  <span className="rounded bg-secondary px-1.5 py-0.5 text-[10px] font-normal text-muted-foreground">
-                    준비 중
-                  </span>
-                )}
-              </p>
-              <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">
-                {item.desc}
-              </p>
-            </>
-          );
-          return isReal ? (
-            <FadeIn key={item.title} delay={(idx % 3) * 80}>
+      {/* 프리미엄 디자인 — 최근 제작한 디자인부터, 별도 가격 정책(200만 원부터) */}
+      <div className="mt-14 flex flex-wrap items-end justify-between gap-3">
+        <FadeIn>
+          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
+            PREMIUM DESIGN
+          </p>
+          <h2 className="mt-2 text-xl font-semibold">프리미엄 디자인</h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground break-keep">
+            최근 제작한 프리미엄 등급 디자인입니다. 이 디자인을 기반으로 문구 · 이미지 · 구성을
+            맞춰 제작하며, <strong className="text-foreground">200만 원부터</strong> 시작합니다
+            <span className="text-xs"> (부가세 별도)</span>.
+          </p>
+        </FadeIn>
+        <FadeIn delay={80}>
+          <Link
+            to="/templates?style=landing-template"
+            className="text-sm font-medium text-primary hover:underline"
+          >
+            디자인 전체 보기 →
+          </Link>
+        </FadeIn>
+      </div>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {getLatestTemplateDesigns(12).map((d, idx) => (
+          <FadeIn key={d.href} delay={(idx % 4) * 70}>
             <Link
-              to={item.href!}
-              className="flex h-full flex-col items-start rounded-xl border border-primary/20 bg-primary/5 p-5 transition-colors hover:border-primary/40 hover:bg-primary/10"
+              to={d.href}
+              className="group block overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 motion-safe:hover:-translate-y-1"
             >
-              {content}
+              <div className="overflow-hidden">
+                <img
+                  src={d.sample.image}
+                  alt={`${d.label} 프리미엄 디자인`}
+                  loading="lazy"
+                  className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                />
+              </div>
+              <div className="flex items-center justify-between gap-2 px-4 py-3">
+                <span className="truncate text-sm font-semibold text-foreground group-hover:text-primary">
+                  {d.label}
+                </span>
+                <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
+                  {getDesignCode(d.sample)}
+                </span>
+              </div>
             </Link>
-            </FadeIn>
-          ) : (
-            <FadeIn key={item.title} delay={(idx % 3) * 80}>
-            <div className="flex h-full flex-col items-start rounded-xl border border-border p-5">
-              {content}
-            </div>
-            </FadeIn>
-          );
-        })}
+          </FadeIn>
+        ))}
       </div>
 
       <p className="mt-14 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
@@ -175,7 +175,7 @@ export default function WebSolutions() {
         포함됩니다. 반응형을 따로 추가하실 필요가 없습니다.
       </p>
 
-      <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-6 grid gap-5 sm:grid-cols-3">
         {TIERS.map((tier, idx) => (
           <FadeIn key={tier.name} delay={idx * 90} className="h-full">
           <div

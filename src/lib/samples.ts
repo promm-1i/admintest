@@ -4183,6 +4183,23 @@ export const TEMPLATE_INDUSTRY_FILTERS = [
     .map(([value, label]) => ({ label, value })),
 ];
 
+/**
+ * 최신 등록순(배열 앞이 최신)으로 업종 중복 없이 n개의 랜딩형 템플릿 디자인을 뽑는다.
+ * 히어로 캐러셀과 프리미엄 디자인 목록의 단일 출처.
+ */
+export function getLatestTemplateDesigns(n: number) {
+  const seen = new Set<string>();
+  const items: { sample: Sample; label: string; href: string }[] = [];
+  for (const s of SAMPLES) {
+    if (!s.industryKey || !s.type.includes("landing-template") || !s.image) continue;
+    if (seen.has(s.industryKey)) continue;
+    seen.add(s.industryKey);
+    items.push({ sample: s, label: s.industry.replace(" 홈페이지", ""), href: `/samples/${s.slug}` });
+    if (items.length >= n) break;
+  }
+  return items;
+}
+
 export function getSampleBySlug(slug: string): Sample | undefined {
   return SAMPLES.find((s) => s.slug === slug);
 }
