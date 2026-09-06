@@ -253,9 +253,10 @@ function CylinderShowcase() {
                   }}
                 >
                   <img
-                    src={card.src}
+                    src={card.src.replace("/thumbs/", "/thumbs/sm/")}
                     alt=""
                     draggable={false}
+                    decoding="async"
                     className="pointer-events-none h-full w-full object-cover object-top"
                   />
                   <span className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 to-transparent px-2.5 pb-2 pt-6 text-[10px] font-bold text-white">

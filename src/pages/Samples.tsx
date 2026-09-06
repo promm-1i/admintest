@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { PortfolioCard } from "@/components/ui/PortfolioCard";
 import { Pagination } from "@/components/ui/Pagination";
@@ -10,8 +10,16 @@ import { cn } from "@/lib/utils";
 const PAGE_SIZE = 8;
 
 export default function Samples() {
-  const [page, setPage] = useState(1);
-  const [selectedType, setSelectedType] = useState("all");
+  // 페이지·필터를 URL(?type=&page=)에 두어 상세에서 뒤로가기해도 보던 페이지로 돌아온다
+  const [params, setParams] = useSearchParams();
+  const page = Math.max(1, Number(params.get("page")) || 1);
+  const selectedType = params.get("type") || "all";
+  const setPage = (next: number) => {
+    const p = new URLSearchParams(params);
+    if (next <= 1) p.delete("page");
+    else p.set("page", String(next));
+    setParams(p);
+  };
 
   usePageTitle(
     "업종별 포트폴리오 — NOVERIQ",
@@ -33,8 +41,11 @@ export default function Samples() {
   };
 
   const handleSelectType = (value: string) => {
-    setSelectedType(value);
-    setPage(1);
+    const p = new URLSearchParams(params);
+    if (value === "all") p.delete("type");
+    else p.set("type", value);
+    p.delete("page");
+    setParams(p);
   };
 
   return (

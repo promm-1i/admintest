@@ -33,4 +33,16 @@ export default defineConfig({
   server: {
     port: Number(process.env.PORT) || 5173,
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // 자주 안 바뀌는 라이브러리를 따로 묶어 배포마다 다시 받지 않게 한다
+        manualChunks(id: string) {
+          if (/node_modules[\/](react|react-dom|react-router|react-router-dom|scheduler)[\/]/.test(id)) return "vendor-react";
+          if (id.includes("@supabase")) return "vendor-supabase";
+          return undefined;
+        },
+      },
+    },
+  },
 });
