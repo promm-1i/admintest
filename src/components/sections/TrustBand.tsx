@@ -56,7 +56,7 @@ export function TrustBand() {
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.15fr_1fr]">
           {/* 후기 — 읽히는 게 목적이라 정적으로 쌓는다 */}
-          <div className="flex flex-col gap-4">
+          <div className="flex min-w-0 flex-col gap-4">
             {FEATURED_REVIEWS.length > 0 ? (
               <>
                 {FEATURED_REVIEWS.map((r, i) => (
@@ -109,9 +109,9 @@ export function TrustBand() {
           </div>
 
           {/* 접수 현황 — 흐르는 게 목적이라 티커로 둔다 */}
-          <FadeIn delay={120}>
+          <FadeIn delay={120} className="min-w-0">
             <div className="group relative h-[420px] overflow-hidden rounded-xl border border-border bg-card shadow-xs lg:h-full lg:min-h-[420px]">
-              <p className="border-b border-border px-5 py-3 text-xs font-semibold tracking-wide text-muted-foreground">
+              <p className="relative z-10 border-b border-border bg-card px-5 py-3 text-xs font-semibold tracking-wide text-muted-foreground">
                 최근 접수 현황
               </p>
               <ul className="inquiry-ticker group-hover:[animation-play-state:paused]">

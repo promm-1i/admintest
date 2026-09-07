@@ -84,10 +84,10 @@ export function CodeVsImageSection() {
           {PANELS.map((panel, i) => {
             const good = panel.tone === "good";
             return (
-              <FadeIn key={panel.key} delay={i * 100} className="flex h-full flex-col">
+              <FadeIn key={panel.key} delay={i * 100} className="flex h-full min-w-0 flex-col">
                 <div
                   className={
-                    "flex h-full flex-col overflow-hidden rounded-2xl border bg-card shadow-xs " +
+                    "flex h-full min-w-0 flex-col overflow-hidden rounded-2xl border bg-card shadow-xs " +
                     (good ? "border-primary/40" : "border-border")
                   }
                 >
@@ -126,7 +126,7 @@ export function CodeVsImageSection() {
                       <Search className="h-3.5 w-3.5" />
                       검색엔진이 읽어가는 내용
                     </p>
-                    <div className="mt-2 flex items-start justify-between gap-3">
+                    <div className="mt-2 flex min-w-0 items-start justify-between gap-3">
                       <p
                         className={
                           "min-w-0 truncate font-mono text-xs " +
