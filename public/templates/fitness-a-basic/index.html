@@ -1,0 +1,979 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>펄스핏 — 피트니스 · 퍼스널 트레이닝 (프리미엄 디자인 A)</title>
+<meta name="description" content="풀블리드 히어로, 스크롤로 하나씩 켜지는 서비스 목록, 호버로 펼쳐지는 트레이너 카드, 월/연 전환 요금표, 카드 덱 후기, FAQ, 문의 폼, 앱 다운로드 배너까지 갖춘 피트니스 프리미엄 원페이지.">
+<meta property="og:title" content="펄스핏 — 피트니스 · 퍼스널 트레이닝 (프리미엄 디자인 A)">
+<meta property="og:image" content="../fitness-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰: 검정 배경 · 흰 글자 · white 6% 카드 · white 12% 보더 · 주황 #EC4D09 → 노랑 #FFA600 그라데이션 · Satoshi 400/500/700/900 · 한글은 Pretendard */
+:root{--o:#EC4D09;--y:#FFA600;--w8:rgba(255,255,255,.8);--w7:rgba(255,255,255,.7);--w6:rgba(255,255,255,.6);--w4:rgba(255,255,255,.4);--w2:rgba(255,255,255,.2);--w12:rgba(255,255,255,.12);--w1:rgba(255,255,255,.1);--c6:rgba(255,255,255,.06);--grad:linear-gradient(271deg,#EC4D09 -10%,#FFA600 111%);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:#000;color:#fff;font-family:"Satoshi","Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.2}
+.wrap{width:100%;max-width:1400px;margin:0 auto;padding:0 20px}
+.sec{position:relative;z-index:2;padding:80px 0}
+.sec.tint{background:var(--c6)}
+.ko{font-family:"Pretendard Variable",Pretendard,"Satoshi",sans-serif}
+.up{text-transform:uppercase}
+
+/* 공통 타이포 */
+.lab{font-size:16px;line-height:19.2px;font-weight:700;color:#fff}
+.h2{font-size:48px;line-height:48px;font-weight:900;letter-spacing:-.96px;color:#fff}
+.h2 .g{display:block;width:fit-content;font-weight:400;padding:7.2px;margin:-7.2px auto;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.h2 b{display:block;font-weight:900}
+.h2.tl .g{margin:-7.2px 0 -7.2px -7.2px}
+.p{font-size:16px;line-height:19.2px;font-weight:500;color:var(--w8)}
+.head{display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.head .p{max-width:480px}
+
+/* 버튼: 흰 알약 + 흰 원 아이콘 (실측: 텍스트 pad 12 28 · 원 43 · 앵커 pad-right 12 · 아이콘 26) */
+.btn{display:inline-flex;align-items:center;padding-right:12px;color:#000}
+.btn .t{display:flex;align-items:center;background:#fff;border-radius:999px;padding:12px 28px;font-size:16px;line-height:19.2px;font-weight:700;white-space:nowrap;transition:background .3s var(--ease)}
+.btn .c{display:flex;align-items:center;justify-content:center;width:43px;height:43px;border-radius:999px;background:#fff;flex:0 0 auto;transition:transform .3s var(--ease)}
+.btn .c svg{width:26px;height:26px;color:#000}
+.btn:hover .c{transform:rotate(45deg)}
+.btn.ghost{color:#fff;padding-right:0}
+.btn.ghost .t{background:none;box-shadow:inset 0 0 0 1px #fff}
+.btn.ghost .c{background:none;box-shadow:inset 0 0 0 1px #fff}
+.btn.ghost .c svg{width:9px;height:10px;color:#fff}
+.btn.ghost:hover .c{transform:none}
+.btn.dim{color:#fff;flex:1}
+.btn.dim .t{background:var(--w1);flex:1;justify-content:center;color:#fff}
+.btn.dim .c{background:var(--w1)}
+.btn.dim .c svg{color:#fff}
+.pill{display:inline-flex;align-items:center;justify-content:center;background:var(--w2);border-radius:999px;padding:12px 20px;font-size:16px;line-height:19.2px;font-weight:700;white-space:nowrap;transition:background .3s var(--ease)}
+.pill:hover{background:rgba(255,255,255,.32)}
+
+/* 헤더: fixed. 상단 배너 37 + 내비 91 = 128. 스크롤 30px 후 배너 접힘 · 내비 검정 · 알약 blur(6px) */
+.top{position:fixed;top:0;left:0;right:0;z-index:5}
+.banner{background:var(--o);height:37px;overflow:hidden;transition:height .5s var(--ease),opacity .4s var(--ease)}
+.banner .wrap{display:flex;justify-content:space-between;align-items:center;padding:10px 20px;height:37px}
+.banner .g{display:flex;align-items:center;gap:16px;font-size:14px;line-height:16.8px;font-weight:500;white-space:nowrap;overflow:hidden}
+.nav{background:rgba(0,0,0,0);transition:background .5s var(--ease)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;padding:24px 20px;height:91px}
+.logo{display:flex;align-items:center;gap:8px;width:134px;height:35px;color:#fff}
+.logo i{display:flex;align-items:center;justify-content:center;width:35px;height:35px;border-radius:50%;background:var(--o);flex:0 0 auto}
+.logo i svg{width:20px;height:20px;color:#000}
+.logo b{font-size:24px;line-height:1;font-weight:700;letter-spacing:-.4px}
+.menu{display:flex;align-items:center}
+.menu .pill{backdrop-filter:blur(0px)}
+.top.on .banner{height:0;opacity:0}
+.top.on .nav{background:#000}
+.top.on .menu .pill{backdrop-filter:blur(6px)}
+.burger{display:none;width:36px;height:36px;border-radius:999px;background:#fff;align-items:center;justify-content:center;color:#000}
+.burger svg{width:24px;height:24px}
+.burger .x{display:none}
+.top.open .burger .m{display:none}.top.open .burger .x{display:block}
+.mmenu{display:none}
+
+/* 히어로 900: 전면 사진 + 220deg 검정 .4 그라데이션 · 콘텐츠 673 폭 하단 정렬(pad-bottom 80) */
+.hero{position:relative;height:900px;overflow:hidden;z-index:2}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .ov{position:absolute;inset:0;background:linear-gradient(220deg,rgba(0,0,0,.4) 19%,rgba(0,0,0,0) 87%)}
+.hero .wrap{position:relative;display:flex;align-items:flex-end;padding:0 20px 80px;height:100%}
+.hero-c{display:flex;flex-direction:column;align-items:flex-start;gap:24px;width:673px;max-width:100%;flex:1 0 0}
+.hero h1{font-size:64px;line-height:64px;letter-spacing:-1.28px;font-weight:900}
+.hero h1 span{display:inline-block;padding:9.6px;margin:-9.6px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1 .l{font-weight:400}
+.hero .p{max-width:360px;color:#fff}
+.btns{display:flex;align-items:center;gap:12px}
+.feats{display:flex;justify-content:flex-end;align-items:center;gap:40px;flex:1 0 0}
+.feat{display:flex;align-items:center;gap:10px;max-width:240px;flex:1 0 0;font-size:16px;line-height:19.2px;font-weight:700}
+.feat svg{width:45px;height:45px;flex:0 0 auto;color:#fff}
+/* 로드 시퀀스 (Framer appear 실측: 내비 opacity 1.2s delay .2 · 콘텐츠 y30 1s delay .3 · 칩 delay .4) */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes up30{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+html.js .top{animation:fadeIn 1.2s var(--ease) .2s both}
+html.js .hero-c{animation:up30 1s var(--ease) .3s both}
+html.js .feats{animation:up30 1s var(--ease) .4s both}
+
+/* 신뢰 바 78: white 6% · 라벨 .6 + 로고 6 · gap 40 */
+.trust{position:relative;z-index:2;background:var(--c6)}
+.trust .wrap{display:flex;justify-content:center;align-items:center;gap:40px;padding:24px 20px;height:78px}
+.trust .lab{color:var(--w6);white-space:nowrap}
+.logos{display:flex;align-items:center;gap:40px}
+.logos svg{height:30px;width:auto;color:rgba(255,255,255,.55)}
+.logos svg.s{height:20px}
+
+/* About: 콘텐츠(gap 24) → 스탯 알약 → 사진 2장 520×300 r40 → 파트너 */
+.col60{display:flex;flex-direction:column;align-items:center;gap:60px}
+.stats{display:flex;align-items:center;gap:20px;padding:16px 32px;border-radius:9999px;box-shadow:inset 0 0 0 1px var(--w12)}
+.stat{display:flex;align-items:center;gap:16px;font-size:16px;line-height:19.2px;font-weight:700;white-space:nowrap}
+.stat svg{width:45px;height:45px;flex:0 0 auto}
+.stat span{white-space:normal}
+.stats .dv{width:20px;height:1px;background:#fff;transform:rotate(-45deg);flex:0 0 auto}
+.imgs2{display:flex;justify-content:center;gap:24px;width:1064px;max-width:100%}
+.imgs2 img{width:520px;height:300px;flex:1 0 0;object-fit:cover;border-radius:40px}
+.partners{display:flex;flex-direction:column;align-items:center;gap:24px}
+.partners .lab{color:var(--w6)}
+.partners .logos{gap:32px}
+.partners .logos svg{height:32px;color:#fff}
+.partners .logos svg.b{height:40px}
+
+/* 서비스: 좌 650 sticky top 100 · 우 650 목록 5행 280 */
+.svc-grid{display:flex;align-items:flex-start;gap:60px}
+.svc-l{position:sticky;top:100px;display:flex;flex-direction:column;align-items:flex-start;gap:24px;width:650px;flex:1 0 0}
+.svc-l .p{max-width:360px}
+.svc-list{display:flex;flex-direction:column;width:650px;flex:1 0 0}
+.svc{position:relative;display:flex;align-items:center;gap:24px;height:280px;padding:60px 0 40px;overflow:clip;box-shadow:inset 0 -1px 0 var(--w12)}
+.svc-h{display:flex;flex-direction:column;gap:12px;flex:1 0 0;max-width:341px}
+.svc h3{font-size:24px;line-height:28.8px;font-weight:900;color:var(--w4);transition:color .8s var(--ease)}
+.svc .p{max-width:340px;font-size:18px;line-height:21.6px;color:var(--w4);transition:color .8s var(--ease)}
+.svc-n{display:flex;justify-content:flex-end;align-items:center;width:285px;height:180px;flex:0 0 auto}
+.svc-i{position:relative;width:155px;height:180px;flex:0 0 auto}
+.svc-i img{position:absolute;object-fit:cover;opacity:0;transform:scale(.6) rotate(0deg);transition:opacity .35s var(--ease),transform .5s var(--ease)}
+.svc-i .a{left:94px;top:-13px;width:80px;height:76px;border-radius:12px;--r:33deg}
+.svc-i .b{left:-8px;top:27px;width:166px;height:127px;border-radius:20px;--r:11deg;transition-delay:.16s}
+.svc-i .c{left:57px;top:98px;width:96px;height:85px;border-radius:16px;--r:-21deg;transition-delay:.28s}
+.svc .num{position:relative;z-index:1;font-size:150px;line-height:180px;font-weight:700;color:var(--w4);text-align:right;flex:0 0 auto;transition:color .8s var(--ease)}
+.svc .line{position:absolute;left:0;bottom:0;width:100%;height:6px;background:linear-gradient(94deg,#FFA600 0%,#EC4D09 100%);transform:translateX(-103%);transition:transform 1.2s cubic-bezier(.16,1,.3,1)}
+.svc.on h3,.svc.on .num{color:#fff}
+.svc.on .p{color:var(--w8)}
+.svc.on .svc-i img{opacity:1;transform:scale(1) rotate(var(--r))}
+.svc.on .line{transform:none}
+
+/* 트레이너: 카드 437 · 사진 566 r12 · 호버 시 262×340 + 소형 200×211(-10°) + 소개 + 예약 버튼 */
+.trainers{display:flex;gap:24px;width:100%}
+.tr{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:40px;width:437px;flex:1 0 0}
+.tr-img{position:relative;width:100%;height:566px;transition:height .45s var(--ease)}
+.tr-img .m{width:100%;height:100%;object-fit:cover;object-position:50% 0;border-radius:12px;transition:width .45s var(--ease)}
+.tr-img .s{position:absolute;left:195px;top:46px;width:200px;height:211px;object-fit:cover;border-radius:14px;transform:rotate(-10deg) scale(.7);opacity:0;transition:opacity .35s var(--ease),transform .45s var(--ease)}
+.tr-d{display:none;font-size:18px;line-height:21.6px;font-weight:500;color:#fff}
+.tr-info{display:flex;flex-direction:column;gap:12px;width:100%}
+.tr h3{font-size:24px;line-height:28.8px;font-weight:900}
+.tr-b{display:none;align-items:center;gap:10px;padding:12px 28px;border-radius:22px;background:var(--w1);font-size:18px;line-height:21.6px;font-weight:500;margin-top:12px}
+.tr-b svg{width:20px;height:20px;color:var(--y)}
+@media (hover:hover){
+  .tr:hover{gap:40px}
+  .tr:hover .tr-img{height:340px}
+  .tr:hover .tr-img .m{width:262px}
+  .tr:hover .tr-img .s{opacity:1;transform:rotate(-10deg) scale(1)}
+  .tr:hover .tr-d{display:block}
+  .tr:hover .tr-b{display:inline-flex}
+}
+
+/* Why: 텍스트(sticky) → 사진 571×739 + 좌우 포인트 2·2, 점+선 커넥터 */
+.why-c{display:flex;flex-direction:column;align-items:center;gap:32px;width:100%}
+.why-c .p{max-width:520px}
+.points{display:flex;justify-content:center;align-items:center;gap:40px;width:100%}
+.pl,.pr{display:flex;flex-direction:column;gap:60px;width:354px;flex:1 0 0}
+.pl{align-items:flex-end;justify-content:flex-end;padding-bottom:120px;height:739px}
+.pr{align-items:flex-start;padding-top:30px;height:739px}
+.pt{position:relative;display:flex;align-items:flex-start;gap:16px;width:354px;max-width:100%}
+.pt svg{width:36px;height:36px;flex:0 0 auto}
+.pt-i{display:flex;flex-direction:column;gap:14px;flex:1 0 0}
+.pt-i b{font-size:16px;line-height:19.2px;font-weight:700}
+.pt-i .p{max-width:302px}
+.pl .pt:nth-child(2){width:319px}
+.pt .ln{position:absolute;top:3px;height:14px;display:flex;align-items:center;z-index:1}
+.pt .ln i{flex:1;height:1px;background:#fff}
+.pt .ln b{width:14px;height:14px;border-radius:100px;background:#fff;box-shadow:0 0 0 8px var(--w2);flex:0 0 auto}
+.pl .pt .ln{left:100%;margin-left:20px}
+.pl .pt:nth-child(1) .ln{width:109px}
+.pl .pt:nth-child(2) .ln{width:144px}
+.pr .pt .ln{right:100%;margin-right:20px;flex-direction:row-reverse}
+.pr .pt:nth-child(1) .ln{width:74px}
+.pr .pt:nth-child(2) .ln{width:134px}
+.why-img{width:571px;height:739px;object-fit:cover;object-position:50% 0;border-radius:12px;flex:0 0 auto}
+
+/* How: 카드 436×282 (2행째 442) white 6% r24 pad 32 */
+.steps{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
+.steps .row{display:flex;justify-content:center;gap:20px;width:100%}
+.step{display:flex;flex-direction:column;align-items:flex-start;gap:60px;width:436px;height:282px;padding:32px;background:var(--c6);border-radius:24px;overflow:clip}
+.steps .row:nth-child(2) .step{width:442px}
+.step .n{font-size:48px;line-height:48px;font-weight:700;letter-spacing:-.96px}
+.step-t{display:flex;flex-direction:column;gap:24px}
+.step h3{font-size:24px;line-height:28.8px;font-weight:700}
+.step p{font-size:16px;line-height:19.2px;font-weight:400}
+
+/* Membership: 토글 + 카드 3열 437 gap 24 */
+.member .head .p{max-width:330px}
+.member .head .p+.p{margin-top:-4px}
+.plans-w{display:flex;flex-direction:column;align-items:center;gap:60px;width:100%}
+.toggle{display:flex;align-items:center;padding:5px;border-radius:99px;background:var(--w1);box-shadow:0 0 20px rgba(0,0,0,.1)}
+.toggle button{padding:12px 24px;border-radius:99px;font-size:16px;line-height:19.2px;font-weight:700;color:#fff;transition:background .3s var(--ease),color .3s var(--ease)}
+.toggle button.on{background:#fff;color:#000}
+.plans{display:grid;grid-template-columns:437px 437px 437px;justify-content:center;align-items:start;gap:24px;width:100%}
+.plan{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:32px;padding:32px;background:var(--c6);border-radius:20px;overflow:clip}
+.plan.hi{box-shadow:inset 0 0 0 2px var(--o)}
+.plan-img{position:relative;width:100%}
+.plan-img img{position:relative;z-index:1;width:100%;aspect-ratio:1.51923;object-fit:cover;border-radius:12px}
+.plan-img i{position:absolute;left:28px;right:28px;top:0;bottom:-16px;background:rgb(25,25,25);border-radius:10px}
+.plan-d{display:flex;flex-direction:column;gap:24px;width:100%}
+.plan-d .tag{font-size:12px;line-height:14.4px;font-weight:700}
+.price{display:flex;align-items:flex-end;gap:8px}
+.price b{display:block;height:48px;font-size:48px;line-height:48px;font-weight:700;letter-spacing:-.96px;white-space:nowrap}
+.price>span{font-size:16px;line-height:19.2px;font-weight:700}
+.plan .btn{width:100%;margin-top:8px}
+.plan-f{display:flex;flex-direction:column;gap:18px;width:100%}
+.plan-f li{font-size:16px;line-height:24px;font-weight:500;color:var(--w8)}
+.plan-f li span{border-bottom:1px dashed rgba(255,255,255,.45)}
+.plans .y{display:none}
+.plans.yearly .m{display:none}.plans.yearly .y{display:inline}
+
+/* 후기 덱: 826×413 · 뒤 카드 (-25,+21)×k 스케일 .9/.8 · 화살표 44 */
+.deck-w{display:flex;flex-direction:column;align-items:center;gap:60px}
+.deck{position:relative;width:826px;height:413px}
+.tc{position:absolute;left:0;top:0;display:flex;width:826px;height:413px;border-radius:24px;overflow:clip;background:#000;transform-origin:0 0;transition:transform .55s cubic-bezier(.22,1,.36,1),z-index 0s .2s}
+.tc[data-k="0"]{z-index:3}
+.tc[data-k="1"]{z-index:2;transform:translate(-25px,21px) scale(.9)}
+.tc[data-k="2"]{z-index:1;transform:translate(-50px,42px) scale(.8)}
+.tc-c{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;width:445px;padding:32px;background:var(--c6);flex:1 0 0}
+.user{display:flex;align-items:center;gap:10px}
+.user img{width:55px;height:55px;border-radius:50%;object-fit:cover}
+.user-t{display:flex;flex-direction:column;gap:4px}
+.user h3{font-size:24px;line-height:28.8px;font-weight:700}
+.user span{font-size:16px;line-height:19.2px;font-weight:500;color:var(--w8)}
+.quote{display:flex;flex-direction:column;gap:24px}
+.quote svg{width:80px;height:35px;color:var(--w2)}
+.quote p{font-size:18px;line-height:21.6px;font-weight:500;color:var(--w8)}
+.stars{display:flex;gap:4.5px}
+.stars i{display:block;width:23px;height:23px;background:#00B67A url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23fff' d='M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1.1 5.9L12 16.9l-5.3 2.8 1.1-5.9-4.3-4.1 5.9-.8z'/%3E%3C/svg%3E") center/16px no-repeat;border-radius:2px}
+.stars i.e{background-color:#3a3a3a}
+.tc>img{width:381px;height:413px;object-fit:cover;object-position:50% 0;flex:0 0 auto}
+.arrows{display:flex;width:88px;height:44px}
+.arrows button{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:100px;background:var(--w2);color:#fff;transition:background .3s var(--ease),color .3s var(--ease)}
+.arrows button svg{width:17px;height:14px}
+.arrows .prev svg{transform:scaleX(-1)}
+.arrows .next{background:#fff;color:#000}
+.tslider,.dots{display:none}
+
+/* FAQ: 810 폭 · 항목 r20 pad 32 · 1px 12% 보더 · 열림 white 6% · 아이콘 45° */
+.faqs{display:flex;flex-direction:column;gap:20px;width:810px;max-width:100%}
+.qa{border-radius:20px;padding:32px;box-shadow:inset 0 0 0 1px var(--w12);transition:background .3s var(--ease)}
+.qa-q{display:flex;justify-content:space-between;align-items:center;gap:48px;width:100%;text-align:left}
+.qa-q p{font-size:20px;line-height:24px;font-weight:700;flex:1 0 0}
+.qa-q i{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:100px;background:#fff;flex:0 0 auto;transition:transform .3s var(--ease)}
+.qa-q i svg{width:17px;height:17px;color:#000}
+.qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s var(--ease),margin-top .3s var(--ease)}
+.qa-a>div{overflow:hidden}
+.qa-a p{font-size:20px;line-height:24px;font-weight:500;color:var(--w8)}
+.qa.open{background:var(--c6)}
+.qa.open .qa-q i{transform:rotate(45deg)}
+.qa.open .qa-a{grid-template-rows:1fr;margin-top:24px}
+
+/* 문의: 좌 612 · 우 628 · gap 120 */
+.contact{display:flex;align-items:flex-start;gap:120px}
+.ct-l{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;width:612px;height:746px;flex:0 0 auto}
+.ct-h{display:flex;flex-direction:column;align-items:flex-start;gap:24px}
+.ct-h .h2{text-align:left}
+.ct-h .p{max-width:250px}
+.ct-blk{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.addr{display:flex;flex-direction:column;gap:24px}
+.addr li{display:flex;align-items:flex-start;gap:12px;font-size:20px;line-height:24px;font-weight:500}
+.addr li:nth-child(1) span{max-width:360px}.addr li:nth-child(2) span{max-width:450px}
+.ico24{width:24px;height:24px;flex:0 0 auto}
+.phones{display:flex;gap:12px}
+.phones a{display:flex;align-items:center;gap:12px;padding:11px 24px 11px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px #fff;font-size:20px;line-height:24px;font-weight:500}
+.social{display:flex;gap:24px}
+.social a{display:flex;align-items:center;gap:12px;font-size:20px;line-height:24px;font-weight:500}
+.ct-r{display:flex;flex-direction:column;align-items:flex-start;gap:60px;width:628px;flex:1 0 0}
+.ct-r .ct-h .p{max-width:450px}
+.ct-h .p+.p{margin-top:-4px}
+.form{display:flex;flex-direction:column;align-items:flex-start;gap:60px;width:100%}
+.fields{display:flex;flex-direction:column;width:100%}
+.fld{display:flex;align-items:center;width:100%;height:64px;padding:20px;box-shadow:inset 0 -1px 0 var(--w12)}
+.fld input,.fld select,.fld textarea{width:100%;font-size:20px;line-height:24px;font-weight:500;color:#fff;outline:none}
+.fld ::placeholder{color:var(--w6)}
+.fld select{appearance:none;-webkit-appearance:none;color:#fff;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") right center/16px no-repeat;padding-right:24px}
+.fld select option{color:#000}
+.fld.two{padding:0;gap:20px;box-shadow:none}
+.fld.two>label{display:flex;align-items:center;flex:1 0 0;height:64px;padding:20px;box-shadow:inset 0 -1px 0 var(--w12)}
+.fld.ta{height:120px;align-items:flex-start;padding:0}
+.fld.ta textarea{height:120px;padding:20px;resize:vertical}
+.send{position:relative;display:inline-flex;align-items:center;background:#fff;border-radius:999px;padding:14px 28px;font-size:16px;line-height:19.2px;font-weight:700;color:#000;margin-right:43px}
+.send i{position:absolute;left:100%;top:2px;margin-left:0;display:flex;align-items:center;justify-content:center;width:43px;height:43px;border-radius:999px;background:#fff;transition:transform .3s var(--ease)}
+.send i svg{width:26px;height:26px;color:#000}
+.send:hover i{transform:rotate(45deg)}
+.note{max-width:320px}
+.note a{color:#ED4E09}
+
+/* 앱 배너: 1360×512 r20 pad 48 · 앱 목업 511×620 이 위로 108 넘침 */
+.dl{padding:140px 0 80px}
+.cta{position:relative;display:flex;align-items:center;gap:60px;width:100%;height:512px;padding:48px;border-radius:20px;overflow:visible}
+.cta>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px}
+.cta-t{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:40px;width:602px;flex:1 0 0}
+.cta-h{display:flex;flex-direction:column;gap:24px}
+.cta-h .h2{text-align:left}
+.cta-h .h2 .r{font-weight:400}
+.cta-h .p{font-size:18px;line-height:21.6px;color:rgba(255,255,255,.85)}
+.cta-h .p+.p{margin-top:-4px}
+.checks{display:flex;flex-direction:column;gap:18px}
+.checks .row{display:flex;flex-wrap:wrap;gap:18px}
+.chk{display:flex;align-items:center;gap:8px;font-size:16px;line-height:19.2px;font-weight:700}
+.chk svg{width:24px;height:24px;color:#fff}
+.stores{display:flex;gap:8px}
+.stores a{display:flex;align-items:center;gap:6px;height:45px;padding:0 12px 0 10px;border-radius:7px;background:#000;box-shadow:inset 0 0 0 1px #6b6b6b;color:#fff}
+.stores a svg{width:24px;height:24px}
+.stores a span{display:flex;flex-direction:column;line-height:1}
+.stores a small{font-size:8px;font-weight:500;letter-spacing:.2px}
+.stores a b{font-size:16px;font-weight:500;letter-spacing:-.3px}
+.stores a.gp{width:137px}.stores a.as{width:132px}
+.cta-i{position:relative;display:flex;justify-content:center;align-items:flex-end;width:602px;height:416px;flex:1 0 0}
+.cta-i img{position:absolute;bottom:0;width:511px;height:620px;object-fit:contain}
+
+/* 푸터 */
+.foot{position:relative;z-index:2}
+.ft{display:flex;justify-content:space-between;align-items:center;padding:40px 20px}
+.foot .logo{width:117px;height:28px}
+.foot .logo i{width:28px;height:28px}
+.foot .logo i svg{width:16px;height:16px}
+.foot .logo b{font-size:20px}
+.flinks{display:flex}
+.fb{display:flex;justify-content:space-between;align-items:center;padding:20px;box-shadow:inset 0 1px 0 var(--w12)}
+.credit{display:flex;align-items:center;gap:20px}
+.cr{display:flex;align-items:center;gap:12px}
+.cr i{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:8px;background:#0ed184;color:#000}
+.cr i svg{width:24px;height:24px}
+.cr span{font-size:16px;line-height:19.2px;font-weight:500;color:var(--w7)}
+.cr span b{color:#fff;font-weight:500}
+.credit .sl{font-size:16px;font-weight:700;transform:rotate(12deg)}
+.copy{font-size:16px;line-height:19.2px;font-weight:700}
+
+/* 스크롤 등장 (Framer appear 실측: opacity 0→1 · y50→0 · .5s · cubic-bezier(.44,0,.56,1)) */
+html.js .rv{opacity:0;transform:translateY(50px);transition:opacity .5s var(--ease),transform .5s var(--ease);transition-delay:var(--d,0s)}
+html.js .rv.y20{transform:translateY(20px);transition-duration:.7s}
+html.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none}html.js .top,html.js .hero-c,html.js .feats{animation:none}.svc .line,.svc-i img,.tc{transition:none}}
+
+/* ── 태블릿 810~1199 (실측 1024) ── */
+@media (max-width:1199px){
+  .sec{padding:70px 0}
+  .h2{font-size:40px;line-height:40px;letter-spacing:-.8px}
+  .h2 .g{padding:6px;margin:-6px auto}.h2.tl .g{margin:-6px 0 -6px -6px}
+  .nav .wrap{padding:20px;height:83px}
+  .menu,.top .btn{display:none}
+  .burger{display:flex}
+  .mmenu{display:none;flex-direction:column;align-items:center;gap:0;padding:20px;background:#000}
+  .top.open .mmenu{display:flex}
+  .mmenu a{padding:12px 20px;font-size:14px;line-height:16.8px;font-weight:700}
+  .top.open .nav{background:#000}
+  .hero .wrap{flex-direction:column;align-items:flex-start;gap:32px;padding-bottom:60px;justify-content:flex-end}
+  .hero-c{flex:0 0 auto}
+  .hero h1{font-size:56px;line-height:56px;letter-spacing:-1.12px}
+  .hero h1 span{padding:8.4px;margin:-8.4px}
+  .feats{flex:0 0 auto;justify-content:flex-start;width:100%}
+  .trust .wrap{flex-direction:column;gap:40px;height:auto}
+  .imgs2 img{width:480px}
+  .svc-grid{flex-direction:column;gap:60px}
+  .svc-l{position:relative;top:auto;width:100%}
+  .svc-list{width:100%}
+  .svc-h{max-width:675px}
+  .tr-img{height:404px}
+  .points{gap:30px}
+  .why-img{width:315px;height:394px}
+  .pl,.pr{height:auto;padding:0;gap:40px}
+  .pt .ln{display:none}
+  .step{width:auto;flex:1 0 0;height:313px;padding:24px}
+  .steps .row:nth-child(2) .step{width:auto;flex:0 0 calc(50% - 10px)}
+  .step p{font-size:15px;line-height:18px}
+  .plans{grid-template-columns:480px 480px}
+  .deck{width:836px;max-width:100%}
+  .tc{width:836px;max-width:100%}
+  .contact{flex-direction:column;gap:100px}
+  .ct-l{width:100%;height:auto;gap:60px;order:2}
+  .ct-r{width:100%;order:1}
+  .cta{flex-direction:column;align-items:center;height:auto;padding:48px 48px 0;gap:60px}
+  .cta-t{width:100%;flex:0 0 auto}
+  .cta-i{width:100%;height:825px;flex:0 0 auto}
+  .cta-i img{position:relative;width:680px;height:825px}
+  .dl{padding:70px 0}
+}
+/* ── 폰 ≤809 (실측 390) ── */
+@media (max-width:809px){
+  .sec{padding:50px 0}
+  .h2{font-size:30px;line-height:30px;letter-spacing:-.6px}
+  .h2 .g{padding:4.5px;margin:-4.5px auto}.h2.tl .g{margin:-4.5px 0 -4.5px -4.5px}
+  .lab{font-size:14px;line-height:16.8px}
+  .p{font-size:14px;line-height:16.8px}
+  .head{gap:20px}
+  .col60{gap:50px}
+  .banner{display:none}
+  .nav .wrap{padding:15px 20px;height:66px}
+  .logo{width:122px;height:32px}
+  .logo i{width:32px;height:32px}
+  .logo b{font-size:22px}
+  .hero .wrap{padding:0 20px 50px;gap:24px}
+  .hero-c{width:100%}
+  .hero h1{font-size:40px;line-height:40px;letter-spacing:-.8px}
+  .hero h1 span{padding:6px;margin:-6px}
+  .hero .p{max-width:100%}
+  .btns{flex-direction:column;align-items:flex-start}
+  .feats{flex-direction:column;align-items:flex-start;gap:12px}
+  .feat{max-width:100%}
+  .feat svg{width:36px;height:36px}
+  .trust .wrap{gap:32px;padding:24px 20px}
+  .logos{flex-wrap:wrap;justify-content:center;gap:24px}
+  .stats{flex-direction:column;gap:20px;padding:20px 24px;border-radius:24px;box-shadow:none}
+  .stats .dv{display:none}
+  .stat svg{width:32px;height:32px}
+  .stat span{max-width:none}
+  .imgs2{flex-direction:column;gap:16px}
+  .imgs2 img{width:100%;height:242px;border-radius:20px;flex:0 0 auto}
+  .partners{gap:32px}
+  .svc-grid{gap:50px}
+  .svc-l{gap:20px}
+  .svc-l .btns{flex-direction:column;align-items:flex-start}
+  .svc{flex-direction:column-reverse;align-items:stretch;height:270px;padding:60px 0 40px;gap:24px}
+  .svc h3{font-size:20px;line-height:24px}
+  .svc .p{font-size:14px;line-height:16.8px;max-width:100%}
+  .svc-n{width:100%;height:72px;justify-content:space-between;flex-direction:row-reverse}
+  .svc .num{font-size:60px;line-height:72px}
+  .svc-i{width:155px;height:72px;transform:scale(.5);transform-origin:right center}
+  .svc-h{max-width:100%}
+  .trainers{flex-direction:column;gap:24px}
+  .tr{width:100%;gap:24px}
+  .tr-img{height:453px}
+  .tr h3{font-size:20px;line-height:24px}
+  .tr-d{display:block;font-size:16px;line-height:19.2px}
+  .tr-b{display:inline-flex;font-size:16px;line-height:19.2px}
+  .tr-img .s{display:none}
+  .why-c{gap:32px}
+  .points{flex-direction:column;gap:40px}
+  .pl,.pr{width:100%;gap:40px;padding:0;height:auto;order:2}
+  .pl{align-items:flex-start;order:2}
+  .pr{order:3}
+  .why-img{order:1;width:100%;height:453px}
+  .pt,.pl .pt:nth-child(2){width:100%}
+  .steps .row{flex-direction:column}
+  .step,.steps .row:nth-child(2) .step{width:100%;flex:0 0 auto;height:auto;padding:24px;gap:40px;border-radius:20px}
+  .step .n{font-size:30px;line-height:30px}
+  .step-t{gap:20px}
+  .step h3{font-size:20px;line-height:24px}
+  .step p{font-size:14px;line-height:16.8px}
+  .plans{grid-template-columns:100%}
+  .plans-w{gap:60px}
+  .price b{font-size:30px;line-height:30px;letter-spacing:-.6px}
+  .plan-f li{font-size:14px;line-height:32px}
+  .deck,.arrows{display:none}
+  .deck-w{gap:40px;padding-bottom:70px;width:100%}
+  .tslider{display:flex;gap:10px;width:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .tslider::-webkit-scrollbar{display:none}
+  .tslider .tc{position:relative;flex:0 0 100%;flex-direction:column;width:100%;height:680px;transform:none!important;scroll-snap-align:start}
+  .tslider .tc-c{width:100%;height:372px;flex:0 0 auto}
+  .tslider .tc>img{width:100%;height:308px}
+  .user h3{font-size:20px;line-height:24px}
+  .quote p{font-size:16px;line-height:19.2px}
+  .dots{display:flex;justify-content:center;gap:10px}
+  .dots button{width:10px;height:10px;border-radius:50%;background:var(--w2)}
+  .dots button.on{background:#fff}
+  .qa{padding:24px;border-radius:14px}
+  .qa-q{gap:24px}
+  .qa-q p{font-size:17px;line-height:20.4px}
+  .qa-a p{font-size:16px;line-height:19.2px}
+  .contact{gap:80px}
+  .ct-l{gap:40px}
+  .ct-h{gap:20px}
+  .addr li,.phones a,.social a,.fld input,.fld select,.fld textarea{font-size:16px;line-height:19.2px}
+  .phones{flex-direction:column;gap:12px;width:100%}
+  .social{flex-wrap:wrap}
+  .ct-r{gap:40px}
+  .form{gap:40px}
+  .fld.two{flex-direction:column;gap:0}
+  .fld.two>label{width:100%;flex:0 0 auto}
+  .cta{padding:24px 24px 0;gap:40px}
+  .cta-t{gap:24px}
+  .cta-h{gap:20px}
+  .cta-h .p{font-size:16px;line-height:19.2px}
+  .checks{gap:12px}
+  .checks .row{flex-direction:column;gap:12px}
+  .cta-i{height:366px}
+  .cta-i img{width:302px;height:366px}
+  .dl{padding:50px 0}
+  .ft{flex-direction:column;gap:24px;padding:40px 20px}
+  .fb{flex-direction:column;gap:24px}
+  .credit{flex-direction:column;gap:24px}
+  .credit .sl{display:none}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8.75 6.75h8.5v8.5"/><path d="M17 7 6.75 17.25"/></symbol>
+    <symbol id="i-play" viewBox="0 0 9 10"><path fill="currentColor" d="M1.6.2C.7-.3 0 .1 0 1.2v7.6c0 1 .7 1.5 1.6 1L8.3 6c.9-.5.9-1.4 0-1.9Z"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path fill="currentColor" d="M13.5 2 5 13.5h6L9.5 22 19 10h-6z"/></symbol>
+    <symbol id="i-dollar" viewBox="0 0 45 45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="22.5" cy="22.5" r="21"/><path d="M22.5 9v27M30 16c-.5-3-3.8-5-7.5-5-4.5 0-8 2.5-8 6s3.5 5.5 8 5.5 8 2.5 8 6-3.5 6-8 6c-4 0-7-2-7.5-5"/></symbol>
+    <symbol id="i-refresh" viewBox="0 0 41 45" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 41.5c8.5 2.4 17.5-1.5 21.5-9.3 4-7.8 2-17.3-4.9-22.8"/><path d="M17.5 44.5 15 41.5l3.2-2.4"/><path d="M26 3.5C17.5 1 8.5 5 4.5 12.8c-4 7.8-2 17.3 4.9 22.8"/><path d="M22.5 6.5 26 3.5l-3.5-3"/></symbol>
+    <symbol id="i-crown" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.1 18.75h13.8l2.1-9.75-3.9 4.2L12 3.4 6.9 13.2 3 9l2.1 9.75Z"/></symbol>
+    <symbol id="i-laptop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.75 16.5V6.75a1.5 1.5 0 0 1 1.5-1.5h13.5a1.5 1.5 0 0 1 1.5 1.5v9.75"/><path d="M2.25 16.5h19.5v1.5a1.5 1.5 0 0 1-1.5 1.5H3.75a1.5 1.5 0 0 1-1.5-1.5v-1.5Z"/><path d="M10.5 8.25h3"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.25 15a3 3 0 0 0 0-6V6a.75.75 0 0 1 .75-.75h18a.75.75 0 0 1 .75.75v3a3 3 0 0 0 0 6v3a.75.75 0 0 1-.75.75H3a.75.75 0 0 1-.75-.75v-3Z"/><path d="M9 5.25v13.5"/></symbol>
+    <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="11.25" r="3.75"/><path d="M6 18.7a6.75 6.75 0 0 1 12 0"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.1 18.9c-.9-.9-.3-2.7-.7-3.7C3.9 14.1 2.25 13.2 2.25 12s1.7-2.1 2.1-3.2c.5-1 0-2.8.7-3.7.9-.9 2.7-.3 3.7-.7C9.9 3.9 10.8 2.25 12 2.25s2.1 1.7 3.2 2.1c1.1.5 2.8-.1 3.7.7.9.9.3 2.7.7 3.7.5 1.1 2.1 2 2.1 3.2s-1.7 2.1-2.1 3.2c-.5 1.1.1 2.8-.7 3.7-.9.9-2.7.3-3.7.7-1.1.5-2 2.1-3.2 2.1s-2.1-1.7-3.2-2.1c-1-.5-2.8.1-3.7-.7Z"/><path d="m8.25 12.75 2.25 2.25 5.25-5.25"/></symbol>
+    <symbol id="i-hands" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 19.5h-3a.75.75 0 0 1-.75-.75V15a.75.75 0 0 1 .75-.75h3"/><path d="M10.5 15h3l6.3-1.45a1.9 1.9 0 0 1 1.95 1.5c0 .6-.33 1.13-.86 1.4L17.25 18l-6 1.5H4.5v-5.25l2.34-2.34c.42-.42 1-.66 1.6-.66h4.68a1.875 1.875 0 0 1 0 3.75Z"/><path d="M9.07 11.25C8.16 10.1 7.5 8.87 7.5 7.5a3.7 3.7 0 0 1 3.7-3.75c1.5 0 2.85.9 3.43 2.25.57-1.35 1.93-2.25 3.42-2.25a3.7 3.7 0 0 1 3.7 3.75c0 2.74-2.64 5.16-4.7 6.69"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2.25" y="5.25" width="19.5" height="13.5" rx=".75"/><path d="M2.25 9h19.5M15.75 15.75h3M11.25 15.75h1.5"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.25 14.25c.8 1.35 2.1 2.25 3.75 2.25s2.95-.9 3.75-2.25"/><circle cx="8.6" cy="10.1" r=".9" fill="currentColor" stroke="none"/><circle cx="15.4" cy="10.1" r=".9" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-thumb" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.75h4.5v9.75H3a.75.75 0 0 1-.75-.75V10.5A.75.75 0 0 1 3 9.75Z"/><path d="m7.5 9.75 3.75-7.5a3 3 0 0 1 3 3v2.25h6a1.5 1.5 0 0 1 1.49 1.69l-1.13 9a1.5 1.5 0 0 1-1.49 1.31H7.5"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8.25.7v15.1M.7 8.25h15.1"/></symbol>
+    <symbol id="i-arr" viewBox="0 0 17 14" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M.7 7h15M10 .8l6 6.2-6 6.2"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 17 17" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x=".6" y="2.7" width="15.8" height="13.7" rx="2"/><path d="M3.5.6v2.1M13.5.6v2.1M.6 6.3h15.8M4.3 10.2h4.2M10.6 10.2h2.1M4.3 13.4h2M8.5 13.4h2M12.7 13.4h1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="m7 12.5 3.2 3.2L17 9" fill="none" stroke="#EC4D09" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#EC4D09"/><path d="M12 5.5a4.5 4.5 0 0 0-4.5 4.5c0 3.4 4.5 8.5 4.5 8.5s4.5-5.1 4.5-8.5A4.5 4.5 0 0 0 12 5.5Z" fill="#fff"/><circle cx="12" cy="10" r="1.8" fill="#EC4D09"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="6" fill="#E1306C"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="#fff" stroke-width="2"/><circle cx="17.3" cy="6.7" r="1.3" fill="#fff"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#1877F2"/><path d="M13.3 20v-6.3h2.1l.4-2.6h-2.5V9.6c0-.7.3-1.3 1.4-1.3H16V6.1s-1.1-.2-2.1-.2c-2.2 0-3.5 1.3-3.5 3.6v1.6H8.2v2.6h2.2V20Z" fill="#fff"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 24 24"><rect x="1.5" y="5" width="21" height="14" rx="4" fill="#FF0000"/><path d="m10 9 5 3-5 3z" fill="#fff"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4.75 5.75h14.5M4.75 12h14.5M4.75 18.25h14.5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/></symbol>
+    <symbol id="i-gp" viewBox="0 0 24 24"><path d="M4 3.5v17l9-8.5z" fill="#34A853"/><path d="M4 3.5 13 12l3-2.8L5.6 3.1C5 2.8 4.4 3 4 3.5Z" fill="#4285F4"/><path d="M4 20.5 13 12l3 2.8-10.4 6.1c-.6.3-1.2.1-1.6-.4Z" fill="#EA4335"/><path d="m16 9.2 3.4 2c.8.5.8 1.2 0 1.6l-3.4 2L13 12Z" fill="#FBBC04"/></symbol>
+    <symbol id="i-apple" viewBox="0 0 24 24"><path fill="#fff" d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9-.7 0-1.8-.9-3-.8-1.5 0-2.9.9-3.7 2.3-1.6 2.8-.4 6.8 1.1 9 .8 1.1 1.7 2.3 2.8 2.3 1.1 0 1.6-.7 2.9-.7 1.4 0 1.8.7 3 .7 1.2 0 2-1.1 2.8-2.2.9-1.3 1.2-2.5 1.3-2.6-.1 0-2.3-.9-2.3-3.6ZM14.1 6c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.6 1.3-.6.6-1 1.7-.9 2.6 1 .1 2-.5 2.6-1.2Z"/></symbol>
+    <symbol id="i-mint" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 18V7l5 6 5-6v11M18 7v11"/></symbol>
+  </defs>
+</svg>
+
+<!-- 헤더: 상단 배너 + 내비 (fixed) -->
+<header class="top" id="top">
+  <div class="banner">
+    <div class="wrap">
+      <div class="g"><a href="mailto:6gsmake@gmail.com" class="up">6gsmake@gmail.com</a><span>/</span><a href="tel:01048944905">010-4894-4905</a></div>
+      <div class="g"><span class="up">Open hours:</span><span class="ko">평일 [ 06:00 – 23:00 ]</span><span>/</span><span class="ko">주말 · 공휴일 [ 08:00 – 20:00 ]</span></div>
+    </div>
+  </div>
+  <nav class="nav">
+    <div class="wrap">
+      <a href="#" class="logo" aria-label="펄스핏 홈"><i><svg><use href="#i-bolt"/></svg></i><b>Pulsefit.</b></a>
+      <div class="menu">
+        <a href="#about" class="pill">ABOUT</a><a href="#services" class="pill">SERVICES</a><a href="#pricing" class="pill">PRICING</a><a href="#reviews" class="pill">TESTIMONIALS</a><a href="#faq" class="pill">FAQ</a>
+      </div>
+      <a href="/contact?design=FITP-1001" class="btn"><span class="t">CONTACT US</span><span class="c"><svg><use href="#i-arrow"/></svg></span></a>
+      <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mmenu"><svg class="m"><use href="#i-menu"/></svg><svg class="x"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="mmenu" id="mmenu">
+      <a href="#about">ABOUT</a><a href="#services">SERVICES</a><a href="#pricing">PRICING</a><a href="#reviews">TESTIMONIALS</a><a href="#faq">FAQ</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+<!-- 히어로 -->
+<section class="hero" id="hero">
+  <img src="../fitness-a/assets/hero.jpg" alt="" width="1440" height="900" fetchpriority="high">
+  <div class="ov"></div>
+  <div class="wrap">
+    <div class="hero-c">
+      <p class="lab">NO PRESSURE. NO HYPE.</p>
+      <h1><span>TRAIN LIKE</span><br><span class="l">YOU PERFORM</span></h1>
+      <p class="p ko">과장 없이 꾸준히. 목표에 맞춘 단순하고 효과적인 운동을, 사람을 먼저 보는 코치가 함께합니다.</p>
+      <div class="btns">
+        <a href="/contact?design=FITP-1001" class="btn"><span class="t">JOIN US</span><span class="c"><svg><use href="#i-arrow"/></svg></span></a>
+        <a href="#about" class="btn ghost"><span class="t">WATCH VIDEO</span><span class="c"><svg><use href="#i-play"/></svg></span></a>
+      </div>
+    </div>
+    <div class="feats">
+      <div class="feat"><svg><use href="#i-dollar"/></svg><span class="ko">합리적인 트레이닝 &amp;<br>식단 플랜</span></div>
+      <div class="feat"><svg><use href="#i-refresh"/></svg><span class="ko">등록 후 14일<br>전액 환불 보장</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 신뢰 바 -->
+<div class="trust rv">
+  <div class="wrap">
+    <p class="lab">TRUSTED BY ENTERPRISE LEADERS:</p>
+    <div class="logos" aria-label="파트너 기업 로고">
+      <svg class="s" viewBox="0 0 120 28" aria-label="Northline"><text x="0" y="22" font-family="Satoshi,sans-serif" font-weight="900" font-size="24" fill="currentColor" letter-spacing="1">NORTH</text></svg>
+      <svg class="s" viewBox="0 0 120 28" aria-label="Kineo"><rect x="0" y="4" width="20" height="20" rx="10" fill="none" stroke="currentColor" stroke-width="3"/><text x="28" y="22" font-family="Satoshi,sans-serif" font-weight="900" font-size="24" fill="currentColor">KINEO</text></svg>
+      <svg viewBox="0 0 64 40" aria-label="Orbita"><circle cx="20" cy="20" r="15" fill="none" stroke="currentColor" stroke-width="4"/><path d="M12 20h16M20 12v16" stroke="currentColor" stroke-width="3"/><text x="40" y="26" font-family="Satoshi,sans-serif" font-weight="700" font-size="16" fill="currentColor">ORB</text></svg>
+      <svg viewBox="0 0 110 40" aria-label="Vanta"><circle cx="18" cy="20" r="14" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M4 20h28M18 6c8 8 8 20 0 28M18 6c-8 8-8 20 0 28" stroke="currentColor" stroke-width="2"/><text x="40" y="17" font-family="Satoshi,sans-serif" font-weight="500" font-size="13" fill="currentColor">vanta—</text><text x="40" y="32" font-family="Satoshi,sans-serif" font-weight="500" font-size="13" fill="currentColor">studio</text></svg>
+      <svg viewBox="0 0 80 40" aria-label="Helix"><rect x="2" y="6" width="9" height="9" fill="currentColor"/><circle cx="20" cy="10.5" r="4.5" fill="currentColor"/><circle cx="32" cy="10.5" r="4.5" fill="currentColor"/><text x="2" y="34" font-family="Satoshi,sans-serif" font-weight="700" font-size="12" fill="currentColor">helixgroup</text></svg>
+      <svg viewBox="0 0 92 40" aria-label="Lumo"><text x="0" y="30" font-family="Satoshi,sans-serif" font-weight="900" font-size="30" fill="currentColor" letter-spacing="-2">LUMO</text></svg>
+    </div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="sec" id="about">
+  <div class="wrap col60">
+    <div class="head rv">
+      <h2 class="h2"><span class="g">NOT JUST A GYM.</span><b>A PLACE TO BELONG.</b></h2>
+      <p class="p ko">펄스핏은 단순한 헬스장이 아니라, 어떤 여정이든 함께 시작할 수 있는 공간입니다. 처음 운동을 시작하든 한계를 넘고 싶든, 완벽함이 아니라 당신만의 속도로 나아가는 과정이 전부입니다.</p>
+    </div>
+    <div class="stats rv" style="--d:.15s">
+      <div class="stat"><svg><use href="#i-crown"/></svg><span class="ko">10년 이상의<br>운영 경험</span></div>
+      <div class="dv"></div>
+      <div class="stat"><svg><use href="#i-laptop"/></svg><span class="ko">누적 5,000회 이상<br>트레이닝 세션</span></div>
+      <div class="dv"></div>
+      <div class="stat"><svg><use href="#i-ticket"/></svg><span class="ko">140회 이상의<br>온 · 오프라인 이벤트</span></div>
+    </div>
+    <div class="imgs2 rv">
+      <img src="../fitness-a/assets/about-1.jpg" alt="케이블 머신에서 집중해 운동하는 회원" width="520" height="300" loading="lazy" decoding="async">
+      <img src="../fitness-a/assets/about-2.jpg" alt="데드리프트를 준비하는 회원" width="520" height="300" loading="lazy" decoding="async">
+    </div>
+    <div class="partners rv">
+      <p class="lab">OUR PARTNERS</p>
+      <div class="logos">
+        <svg class="b" viewBox="0 0 78 40" aria-label="Helix"><rect x="2" y="4" width="10" height="10" fill="#EC4D09"/><circle cx="22" cy="9" r="5" fill="#EC4D09"/><circle cx="35" cy="9" r="5" fill="#EC4D09"/><text x="2" y="34" font-family="Satoshi,sans-serif" font-weight="700" font-size="12" fill="currentColor">helixgroup</text></svg>
+        <svg viewBox="0 0 102 32" aria-label="Stari"><path d="M16 2 20 12l10 4-10 4-4 10-4-10L2 16l10-4z" fill="#EC4D09"/><text x="36" y="26" font-family="Satoshi,sans-serif" font-weight="500" font-size="28" fill="currentColor">stari</text></svg>
+        <svg viewBox="0 0 113 32" aria-label="Circle"><circle cx="16" cy="16" r="12" fill="none" stroke="#EC4D09" stroke-width="5"/><text x="36" y="26" font-family="Satoshi,sans-serif" font-weight="500" font-size="28" fill="currentColor">circle</text></svg>
+        <svg viewBox="0 0 120 32" aria-label="Amara"><circle cx="16" cy="16" r="13" fill="#EC4D09"/><circle cx="16" cy="16" r="6" fill="#000"/><text x="36" y="26" font-family="Satoshi,sans-serif" font-weight="500" font-size="28" fill="currentColor">amara</text></svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 서비스 -->
+<section class="sec tint" id="services">
+  <div class="wrap svc-grid">
+    <div class="svc-l rv">
+      <p class="lab">OUR SERVICES</p>
+      <h2 class="h2 tl"><span class="g">NOT JUST WORKOUTS.</span><b>A WHOLE APPROACH.</b></h2>
+      <p class="p ko">퍼스널 트레이닝부터 식단과 회복까지. 몸에 정말 필요한 것을 하나로 봅니다.</p>
+      <div class="btns">
+        <a href="#pricing" class="btn"><span class="t">EXPLORE PRICING</span><span class="c"><svg><use href="#i-arrow"/></svg></span></a>
+        <a href="#about" class="btn ghost"><span class="t">WATCH VIDEO</span><span class="c"><svg><use href="#i-play"/></svg></span></a>
+      </div>
+    </div>
+    <div class="svc-list">
+      <div class="svc" data-svc>
+        <div class="svc-h"><h3>PERSONAL TRAINING</h3><p class="p ko">1:1 코칭. 목표와 체력 수준, 진행 상황에만 온전히 집중합니다.</p></div>
+        <div class="svc-n"><div class="svc-i"><img class="a" src="../fitness-a/assets/svc-1-1.jpg" alt="" width="80" height="76" loading="lazy"><img class="b" src="../fitness-a/assets/svc-1-2.jpg" alt="" width="166" height="127" loading="lazy"><img class="c" src="../fitness-a/assets/svc-1-3.jpg" alt="" width="96" height="85" loading="lazy"></div><div class="num">01</div></div>
+        <i class="line"></i>
+      </div>
+      <div class="svc" data-svc>
+        <div class="svc-h"><h3>NUTRITION GUIDANCE</h3><p class="p ko">현실적인 식단 조언. 극단적인 제한 대신 균형을 잡습니다.</p></div>
+        <div class="svc-n"><div class="svc-i"><img class="a" src="../fitness-a/assets/svc-2-1.jpg" alt="" width="80" height="76" loading="lazy"><img class="b" src="../fitness-a/assets/svc-2-2.jpg" alt="" width="166" height="127" loading="lazy"><img class="c" src="../fitness-a/assets/svc-2-3.jpg" alt="" width="96" height="85" loading="lazy"></div><div class="num">02</div></div>
+        <i class="line"></i>
+      </div>
+      <div class="svc" data-svc>
+        <div class="svc-h"><h3>STRENGTH &amp; CONDITIONING</h3><p class="p ko">근육을 키우고 지구력을 올리며, 부상 없이 이어가는 체계적인 프로그램.</p></div>
+        <div class="svc-n"><div class="svc-i"><img class="a" src="../fitness-a/assets/svc-3-1.jpg" alt="" width="80" height="76" loading="lazy"><img class="b" src="../fitness-a/assets/svc-3-2.jpg" alt="" width="166" height="127" loading="lazy"><img class="c" src="../fitness-a/assets/svc-3-3.jpg" alt="" width="96" height="85" loading="lazy"></div><div class="num">03</div></div>
+        <i class="line"></i>
+      </div>
+      <div class="svc" data-svc>
+        <div class="svc-h"><h3>YOGA &amp; FLEXIBILITY</h3><p class="p ko">차분한 가동성 중심 세션으로 몸과 마음의 균형을 찾습니다.</p></div>
+        <div class="svc-n"><div class="svc-i"><img class="a" src="../fitness-a/assets/svc-4-1.jpg" alt="" width="80" height="76" loading="lazy"><img class="b" src="../fitness-a/assets/svc-4-2.jpg" alt="" width="166" height="127" loading="lazy"><img class="c" src="../fitness-a/assets/svc-4-3.jpg" alt="" width="96" height="85" loading="lazy"></div><div class="num">04</div></div>
+        <i class="line"></i>
+      </div>
+      <div class="svc" data-svc>
+        <div class="svc-h"><h3>PROGRESS TRACKING</h3><p class="p ko">중요한 것만 기록합니다. 얼마나 왔고 다음은 어디로 갈지 한눈에 보이도록.</p></div>
+        <div class="svc-n"><div class="svc-i"><img class="a" src="../fitness-a/assets/svc-5-1.jpg" alt="" width="80" height="76" loading="lazy"><img class="b" src="../fitness-a/assets/svc-5-2.jpg" alt="" width="166" height="127" loading="lazy"><img class="c" src="../fitness-a/assets/svc-5-3.jpg" alt="" width="96" height="85" loading="lazy"></div><div class="num">05</div></div>
+        <i class="line"></i>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 트레이너 -->
+<section class="sec" id="trainers">
+  <div class="wrap col60">
+    <div class="head rv">
+      <h2 class="h2"><span class="g">MEET THE TRAINERS</span><b>GUIDANCE YOU CAN TRUST.</b></h2>
+      <p class="p ko">운동 전문가이기 전에, 귀 기울이고 응원하며 매 단계를 함께 걷는 사람들입니다.</p>
+    </div>
+    <div class="stats rv" style="--d:.15s">
+      <div class="stat"><svg><use href="#i-person"/></svg><span class="ko">사람을 먼저<br>보는 접근</span></div>
+      <div class="dv"></div>
+      <div class="stat"><svg><use href="#i-badge"/></svg><span class="ko">자격증과<br>풍부한 경험</span></div>
+      <div class="dv"></div>
+      <div class="stat"><svg><use href="#i-hands"/></svg><span class="ko">누구나 환영하는<br>열린 마음</span></div>
+    </div>
+    <div class="trainers rv" style="--d:.1s">
+      <div class="tr">
+        <div class="tr-img"><img class="m" src="../fitness-a/assets/trainer-1.jpg" alt="트레이너 김서연" width="437" height="566" loading="lazy" decoding="async"><img class="s" src="../fitness-a/assets/trainer-1b.jpg" alt="" width="200" height="211"></div>
+        <p class="tr-d ko">힘과 움직임으로 여성의 일상을 바꾸는 코치. 6년 이상의 지도 경력.</p>
+        <div class="tr-info"><h3>SEOYEON KIM</h3><p class="p ko">스트렝스 · 기능성 코치</p><a href="/contact?design=FITP-1001" class="tr-b ko">세션 예약하기<svg><use href="#i-cal"/></svg></a></div>
+      </div>
+      <div class="tr">
+        <div class="tr-img"><img class="m" src="../fitness-a/assets/trainer-2.jpg" alt="트레이너 박도윤" width="437" height="566" loading="lazy" decoding="async"><img class="s" src="../fitness-a/assets/trainer-2b.jpg" alt="" width="200" height="211"></div>
+        <p class="tr-d ko">천천히, 오래 가는 변화를 믿습니다. 끈기와 여유를 함께 가르치는 코치.</p>
+        <div class="tr-info"><h3>DOYUN PARK</h3><p class="p ko">퍼스널 트레이너 · 영양 어드바이저</p><a href="/contact?design=FITP-1001" class="tr-b ko">세션 예약하기<svg><use href="#i-cal"/></svg></a></div>
+      </div>
+      <div class="tr">
+        <div class="tr-img"><img class="m" src="../fitness-a/assets/trainer-3.jpg" alt="트레이너 이하린" width="437" height="566" loading="lazy" decoding="async"><img class="s" src="../fitness-a/assets/trainer-3b.jpg" alt="" width="200" height="211"></div>
+        <p class="tr-d ko">마음을 담은 움직임으로 사람들이 자기 몸과 다시 연결되도록 돕습니다.</p>
+        <div class="tr-info"><h3>HARIN LEE</h3><p class="p ko">요가 · 유연성 코치</p><a href="/contact?design=FITP-1001" class="tr-b ko">세션 예약하기<svg><use href="#i-cal"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="sec tint" id="why">
+  <div class="wrap col60">
+    <div class="why-c rv">
+      <div class="head">
+        <p class="lab">WHY CHOOSE PULSEFIT</p>
+        <h2 class="h2"><span class="g">FITNESS SHOULD</span><b>FEEL LIKE IT FITS.</b></h2>
+        <p class="p ko">펄스핏은 또 하나의 헬스장이 아닙니다. 실제 사람과 실제 여정을 위해, 편안함과 명확함과 커뮤니티를 중심으로 설계했습니다.</p>
+      </div>
+      <a href="#about" class="btn ghost"><span class="t">WATCH VIDEO</span><span class="c"><svg><use href="#i-play"/></svg></span></a>
+    </div>
+    <div class="points rv" style="--d:.1s">
+      <div class="pl">
+        <div class="pt"><svg><use href="#i-hands"/></svg><div class="pt-i"><b class="ko">집 같은 커뮤니티</b><p class="p ko">그룹 클래스와 이벤트, 서로의 응원이 동기를 지켜 주고 관계를 이어 줍니다.</p></div><span class="ln"><i></i><b></b></span></div>
+        <div class="pt"><svg><use href="#i-card"/></svg><div class="pt-i"><b class="ko">일상에 맞는 요금제</b><p class="p ko">유연한 멤버십, 투명한 가격, 강요 없는 약정.</p></div><span class="ln"><i></i><b></b></span></div>
+      </div>
+      <img class="why-img" src="../fitness-a/assets/why.jpg" alt="조명이 켜진 체육관 한가운데 선 회원" width="571" height="739" loading="lazy" decoding="async">
+      <div class="pr">
+        <div class="pt"><svg><use href="#i-smile"/></svg><div class="pt-i"><b class="ko">단순하고 사람다운 경험</b><p class="p ko">깔끔한 동선과 자연스러운 흐름. 부담스럽지 않게 시작합니다.</p></div><span class="ln"><i></i><b></b></span></div>
+        <div class="pt"><svg><use href="#i-thumb"/></svg><div class="pt-i"><b class="ko">과장 없이, 결과로</b><p class="p ko">모든 세션은 힘과 지구력, 그리고 자신감을 쌓도록 설계됩니다.</p></div><span class="ln"><i></i><b></b></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="sec" id="how">
+  <div class="wrap col60">
+    <div class="head rv">
+      <p class="lab">HOW IT WORKS</p>
+      <h2 class="h2"><span class="g">GETTING STARTED IS SIMPLE.</span><b>STAYING ON TRACK IS EASIER.</b></h2>
+      <p class="p ko">펄스핏에서는 운동 여정이 자연스럽게 흘러갑니다. 작지만 확실한 한 걸음씩.</p>
+    </div>
+    <div class="steps">
+      <div class="row">
+        <div class="step rv"><div class="n">01</div><div class="step-t"><h3 class="ko">무료 상담 예약</h3><p class="ko">먼저 이야기부터. 마주 앉아 목표를 이해하고, 궁금한 점에 부담 없이 답해 드립니다.</p></div></div>
+        <div class="step rv" style="--d:.1s"><div class="n">02</div><div class="step-t"><h3 class="ko">체력 상태 점검</h3><p class="ko">유연성 · 근력 · 지구력 등 지금의 몸 상태를 확인하고 집중할 부분을 정합니다.</p></div></div>
+        <div class="step rv" style="--d:.2s"><div class="n">03</div><div class="step-t"><h3 class="ko">나에게 맞춘 플랜</h3><p class="ko">생활 패턴과 시간, 목표를 바탕으로 삶에 끼워 넣을 수 있는 계획을 만듭니다. 그 반대가 아니라.</p></div></div>
+      </div>
+      <div class="row">
+        <div class="step rv"><div class="n">04</div><div class="step-t"><h3 class="ko">제대로 된 지원과 함께</h3><p class="ko">전문 코치가 조정하고 설명하며 동기를 붙잡아 주는 세션. 모두 당신의 속도로.</p></div></div>
+        <div class="step rv" style="--d:.1s"><div class="n">05</div><div class="step-t"><h3 class="ko">기록하고 꾸준히</h3><p class="ko">시간에 따른 변화를 보며 계획을 다듬고, 체크인과 응원으로 크고 작은 성취를 이어갑니다.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Membership -->
+<section class="sec member" id="pricing">
+  <div class="wrap col60">
+    <div class="head rv">
+      <h2 class="h2"><span class="g">JOIN THE WAY THAT</span><b>FEELS RIGHT FOR YOU.</b></h2>
+      <p class="p ko">막 시작하든 제대로 달리든, 내 속도에 맞는 플랜을 고르세요.</p>
+      <p class="p ko">숨은 비용 없음. 장기 약정 없음.</p>
+    </div>
+    <div class="plans-w">
+      <div class="toggle rv" role="tablist" aria-label="결제 주기">
+        <button type="button" class="on" data-cycle="m" role="tab" aria-selected="true">PAY MONTHLY</button>
+        <button type="button" data-cycle="y" role="tab" aria-selected="false">PAY YEARLY</button>
+      </div>
+      <div class="plans" id="plans">
+        <div class="plan rv y20">
+          <div class="plan-img"><img src="../fitness-a/assets/plan-1.jpg" alt="베이직 멤버십 카드" width="373" height="246" loading="lazy" decoding="async"><i></i></div>
+          <div class="plan-d">
+            <p class="tag">STARTER MEMBERSHIP</p>
+            <div class="price"><b><span class="m">89,000</span><span class="y">79,000</span>원</b><span class="ko">/ 월</span></div>
+            <p class="p ko">처음 시작하거나 부담 없이 유연하게 다니고 싶은 분에게 맞는 기본 플랜입니다.</p>
+            <a href="/contact?design=FITP-1001" class="btn dim"><span class="t">BUY MEMBERSHIP</span><span class="c"><svg><use href="#i-arrow"/></svg></span></a>
+          </div>
+          <ul class="plan-f ko"><li><span>헬스장 무제한 이용</span></li><li><span>그룹 피트니스 클래스</span></li><li><span>월 1회 퍼스널 트레이닝</span></li><li><span>장기 약정 없음</span></li><li><span>자유로운 방문 시간</span></li></ul>
+        </div>
+        <div class="plan hi rv y20" style="--d:.05s">
+          <div class="plan-img"><img src="../fitness-a/assets/plan-2.jpg" alt="플래티넘 멤버십 카드" width="373" height="246" loading="lazy" decoding="async"><i></i></div>
+          <div class="plan-d">
+            <p class="tag">PROGRESS MEMBERSHIP</p>
+            <div class="price"><b><span class="m">239,000</span><span class="y">209,000</span>원</b><span class="ko">/ 3개월</span></div>
+            <p class="p ko">꾸준한 습관을 만들 준비가 된 분에게.</p>
+            <a href="/contact?design=FITP-1001" class="btn dim"><span class="t">BUY MEMBERSHIP</span><span class="c"><svg><use href="#i-arrow"/></svg></span></a>
+          </div>
+          <ul class="plan-f ko"><li><span>스타터의 모든 혜택</span></li><li><span>월 2회 퍼스널 트레이닝</span></li><li><span>맞춤 운동 플랜</span></li><li><span>커뮤니티 이벤트 · 웰니스 세션</span></li><li><span>기록 관리와 월간 체크인</span></li><li><span>트레이닝 팀 우선 응대</span></li></ul>
+        </div>
+        <div class="plan rv y20" style="--d:.1s">
+          <div class="plan-img"><img src="../fitness-a/assets/plan-3.jpg" alt="골드 멤버십 카드" width="373" height="246" loading="lazy" decoding="async"><i></i></div>
+          <div class="plan-d">
+            <p class="tag">COMMIT MEMBERSHIP</p>
+            <div class="price"><b><span class="m">429,000</span><span class="y">369,000</span>원</b><span class="ko">/ 6개월</span></div>
+            <p class="p ko">장기적인 결과를 진지하게 원하는 분에게. 꾸준히, 집중해서 가장 유리한 조건으로.</p>
+            <a href="/contact?design=FITP-1001" class="btn dim"><span class="t">BUY MEMBERSHIP</span><span class="c"><svg><use href="#i-arrow"/></svg></span></a>
+          </div>
+          <ul class="plan-f ko"><li><span>프로그레스의 모든 혜택</span></li><li><span>월 4회 퍼스널 트레이닝</span></li><li><span>워크숍 · 전문가 세션 참여</span></li><li><span>프리미엄 이벤트 초대</span></li><li><span>장기 이용 시 가장 유리한 가격</span></li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 후기 -->
+<section class="sec" id="reviews">
+  <div class="wrap col60">
+    <div class="head rv">
+      <p class="lab">TESTIMONIALS</p>
+      <h2 class="h2"><span class="g">BECAUSE STAYING FIT</span><b>SHOULD FEEL GOOD</b></h2>
+      <p class="p ko">나답게 성장할 수 있는 곳.</p>
+    </div>
+    <div class="deck-w rv" style="--d:.1s">
+      <div class="deck" id="deck">
+        <article class="tc" data-k="0">
+          <div class="tc-c">
+            <div class="user"><img src="../fitness-a/assets/avatar-1.jpg" alt="" width="55" height="55"><div class="user-t"><h3 class="ko">정수민</h3><span>2026년 4월 2일</span></div></div>
+            <div class="quote"><svg viewBox="0 0 80 35"><path fill="currentColor" d="M0 35 12 0h22L22 35zM40 35 52 0h22L62 35z"/></svg><p class="ko">처음 등록할 땐 긴장했어요. 그런데 코치님들은 한 번도 제가 뒤처졌다거나 어울리지 않는다고 느끼게 하지 않았습니다. 목표를 이해해 주고, 제 속도로 성장할 여유를 줬어요.</p></div>
+            <div class="stars" aria-label="별점 4점"><i></i><i></i><i></i><i></i><i class="e"></i></div>
+          </div>
+          <img src="../fitness-a/assets/review-1.jpg" alt="" width="381" height="413">
+        </article>
+        <article class="tc" data-k="1">
+          <div class="tc-c">
+            <div class="user"><img src="../fitness-a/assets/avatar-2.jpg" alt="" width="55" height="55"><div class="user-t"><h3 class="ko">강태현</h3><span>2026년 3월 18일</span></div></div>
+            <div class="quote"><svg viewBox="0 0 80 35"><path fill="currentColor" d="M0 35 12 0h22L22 35zM40 35 52 0h22L62 35z"/></svg><p class="ko">헬스장 문화가 저랑 맞을지 확신이 없었는데, 펄스핏이 그 생각을 바꿨어요. 공간은 편안하고 사람들은 친절하고, 트레이너는 말하기 전에 먼저 들어 줍니다.</p></div>
+            <div class="stars" aria-label="별점 3점"><i></i><i></i><i></i><i class="e"></i><i class="e"></i></div>
+          </div>
+          <img src="../fitness-a/assets/review-2.jpg" alt="" width="381" height="413">
+        </article>
+        <article class="tc" data-k="2">
+          <div class="tc-c">
+            <div class="user"><img src="../fitness-a/assets/avatar-3.jpg" alt="" width="55" height="55"><div class="user-t"><h3 class="ko">윤아름</h3><span>2026년 3월 29일</span></div></div>
+            <div class="quote"><svg viewBox="0 0 80 35"><path fill="currentColor" d="M0 35 12 0h22L22 35zM40 35 52 0h22L62 35z"/></svg><p class="ko">다른 곳도 다녀 봤지만 여기만큼 오래 다닌 적이 없어요. 강요하지 않는데도 꾸준히 나오게 되는 이유는 사람들 때문입니다.</p></div>
+            <div class="stars" aria-label="별점 5점"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <img src="../fitness-a/assets/review-3.jpg" alt="" width="381" height="413">
+        </article>
+      </div>
+      <div class="arrows">
+        <button type="button" class="prev" aria-label="이전 후기"><svg><use href="#i-arr"/></svg></button>
+        <button type="button" class="next" aria-label="다음 후기"><svg><use href="#i-arr"/></svg></button>
+      </div>
+      <!-- 폰: 가로 슬라이더 + 점 -->
+      <div class="tslider" id="tslider">
+        <article class="tc">
+          <div class="tc-c">
+            <div class="user"><img src="../fitness-a/assets/avatar-1.jpg" alt="" width="55" height="55"><div class="user-t"><h3 class="ko">정수민</h3><span>2026년 4월 2일</span></div></div>
+            <div class="quote"><svg viewBox="0 0 80 35"><path fill="currentColor" d="M0 35 12 0h22L22 35zM40 35 52 0h22L62 35z"/></svg><p class="ko">처음 등록할 땐 긴장했어요. 그런데 코치님들은 한 번도 제가 뒤처졌다고 느끼게 하지 않았습니다. 목표를 이해해 주고, 제 속도로 성장할 여유를 줬어요.</p></div>
+            <div class="stars" aria-label="별점 4점"><i></i><i></i><i></i><i></i><i class="e"></i></div>
+          </div>
+          <img src="../fitness-a/assets/review-1.jpg" alt="" width="381" height="413">
+        </article>
+        <article class="tc">
+          <div class="tc-c">
+            <div class="user"><img src="../fitness-a/assets/avatar-2.jpg" alt="" width="55" height="55"><div class="user-t"><h3 class="ko">강태현</h3><span>2026년 3월 18일</span></div></div>
+            <div class="quote"><svg viewBox="0 0 80 35"><path fill="currentColor" d="M0 35 12 0h22L22 35zM40 35 52 0h22L62 35z"/></svg><p class="ko">헬스장 문화가 저랑 맞을지 확신이 없었는데, 펄스핏이 그 생각을 바꿨어요. 공간은 편안하고 사람들은 친절하고, 트레이너는 먼저 들어 줍니다.</p></div>
+            <div class="stars" aria-label="별점 3점"><i></i><i></i><i></i><i class="e"></i><i class="e"></i></div>
+          </div>
+          <img src="../fitness-a/assets/review-2.jpg" alt="" width="381" height="413">
+        </article>
+        <article class="tc">
+          <div class="tc-c">
+            <div class="user"><img src="../fitness-a/assets/avatar-3.jpg" alt="" width="55" height="55"><div class="user-t"><h3 class="ko">윤아름</h3><span>2026년 3월 29일</span></div></div>
+            <div class="quote"><svg viewBox="0 0 80 35"><path fill="currentColor" d="M0 35 12 0h22L22 35zM40 35 52 0h22L62 35z"/></svg><p class="ko">다른 곳도 다녀 봤지만 여기만큼 오래 다닌 적이 없어요. 강요하지 않는데도 꾸준히 나오게 되는 이유는 사람들 때문입니다.</p></div>
+            <div class="stars" aria-label="별점 5점"><i></i><i></i><i></i><i></i><i></i></div>
+          </div>
+          <img src="../fitness-a/assets/review-3.jpg" alt="" width="381" height="413">
+        </article>
+      </div>
+      <div class="dots" id="dots"><button type="button" class="on" aria-label="후기 1"></button><button type="button" aria-label="후기 2"></button><button type="button" aria-label="후기 3"></button></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="wrap col60">
+    <div class="head rv">
+      <h2 class="h2"><span class="g">FREQUENTLY</span><b>ASKED QUESTIONS</b></h2>
+    </div>
+    <div class="faqs">
+      <div class="qa rv" style="--d:.1s"><button class="qa-q" type="button" aria-expanded="false"><p class="ko">운동을 완전히 처음 해 보는데, 등록해도 될까요?</p><i><svg><use href="#i-plus"/></svg></i></button><div class="qa-a"><div><p class="ko">물론입니다. 모든 체력 수준을 환영합니다. 첫 상담에서 현재 상태를 함께 확인하고, 무리 없이 시작할 수 있는 플랜을 만들어 드립니다.</p></div></div></div>
+      <div class="qa rv" style="--d:.15s"><button class="qa-q" type="button" aria-expanded="false"><p class="ko">첫 세션에 준비해 올 것이 있나요?</p><i><svg><use href="#i-plus"/></svg></i></button><div class="qa-a"><div><p class="ko">편한 운동복과 물병, 작은 수건이면 충분합니다. 나머지는 저희가 준비해 둡니다.</p></div></div></div>
+      <div class="qa rv" style="--d:.2s"><button class="qa-q" type="button" aria-expanded="false"><p class="ko">퍼스널 트레이닝이 요금제에 포함되나요?</p><i><svg><use href="#i-plus"/></svg></i></button><div class="qa-a"><div><p class="ko">네. 스타터는 월 1회, 프로그레스는 월 2회, 커밋은 월 4회의 1:1 세션이 포함됩니다. 추가 세션은 회원가로 이용할 수 있습니다.</p></div></div></div>
+      <div class="qa rv" style="--d:.25s"><button class="qa-q" type="button" aria-expanded="false"><p class="ko">그룹 클래스는 어떤 종류가 있나요?</p><i><svg><use href="#i-plus"/></svg></i></button><div class="qa-a"><div><p class="ko">스트렝스, 컨디셔닝, 요가 · 모빌리티, 그리고 주말 러닝 클럽까지. 시간표는 앱과 데스크에서 확인하실 수 있습니다.</p></div></div></div>
+      <div class="qa rv" style="--d:.3s"><button class="qa-q" type="button" aria-expanded="false"><p class="ko">필요하면 멤버십을 잠시 멈출 수 있나요?</p><i><svg><use href="#i-plus"/></svg></i></button><div class="qa-a"><div><p class="ko">가능합니다. 출장이나 부상 등으로 다니기 어려울 때 최대 60일까지 일시 정지할 수 있으며, 남은 기간은 그대로 이월됩니다.</p></div></div></div>
+      <div class="qa rv" style="--d:.35s"><button class="qa-q" type="button" aria-expanded="false"><p class="ko">해지는 어떻게 하나요?</p><i><svg><use href="#i-plus"/></svg></i></button><div class="qa-a"><div><p class="ko">데스크나 앱에서 언제든 신청할 수 있습니다. 장기 약정이 없으므로 위약금 없이 다음 결제일 전에 종료됩니다.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 문의 -->
+<section class="sec" id="contact">
+  <div class="wrap contact">
+    <div class="ct-l rv">
+      <div class="ct-h">
+        <h2 class="h2">GET IN TOUCH</h2>
+        <p class="p ko">궁금한 점이 있나요? 직접 둘러보고 싶으신가요? 첫걸음을 저희가 함께 돕겠습니다.</p>
+      </div>
+      <div class="ct-blk">
+        <p class="p ko">찾아오시는 길:</p>
+        <ul class="addr ko">
+          <li><svg class="ico24"><use href="#i-pin"/></svg><span>펄스핏 강남점 · 서울 강남구 테헤란로 12길 34, 2층</span></li>
+          <li><svg class="ico24"><use href="#i-pin"/></svg><span>펄스핏 판교점 · 경기 성남시 분당구 판교역로 56, 테크타워 3층 (판교역 1번 출구)</span></li>
+        </ul>
+      </div>
+      <div class="ct-blk">
+        <p class="p ko">전화 또는 카카오톡 (매일 07:00 – 21:00):</p>
+        <div class="phones"><a href="tel:01048944905"><svg class="ico24"><use href="#i-pin"/></svg>010-4894-4905</a><a href="mailto:6gsmake@gmail.com"><svg class="ico24"><use href="#i-pin"/></svg>6gsmake@gmail.com</a></div>
+      </div>
+      <div class="ct-blk" style="gap:17px">
+        <p class="p ko">팔로우:</p>
+        <div class="social"><a href="#" aria-label="인스타그램"><svg class="ico24"><use href="#i-ig"/></svg>Instagram</a><a href="#" aria-label="페이스북"><svg class="ico24"><use href="#i-fb"/></svg>Facebook</a><a href="#" aria-label="유튜브"><svg class="ico24"><use href="#i-yt"/></svg>YouTube</a></div>
+      </div>
+    </div>
+    <div class="ct-r rv" style="--d:.1s">
+      <div class="ct-h">
+        <h2 class="h2">SEND A MESSAGE</h2>
+        <p class="p ko">운동 여정에서 생기는 질문과 고민, 무엇이든 편하게 물어보세요. 담당 코치가 직접 답해 드립니다.</p>
+        <p class="p ko">아래 양식이나 전화, 카카오톡 중 편한 방법으로 남겨 주시면 하루 안에 연락드리겠습니다.</p>
+      </div>
+      <form class="form" action="/contact" method="get" onsubmit="return false">
+        <div class="fields">
+          <label class="fld"><input type="text" name="name" placeholder="성함을 알려 주세요" autocomplete="name"></label>
+          <div class="fld two"><label><input type="email" name="email" placeholder="이메일 주소" autocomplete="email"></label><label><input type="tel" name="phone" placeholder="휴대폰 번호" autocomplete="tel"></label></div>
+          <label class="fld"><select name="service" aria-label="서비스 선택"><option value="" selected disabled>원하는 서비스를 선택하세요</option><option>퍼스널 트레이닝</option><option>그룹 클래스</option><option>영양 상담</option><option>멤버십 문의</option></select></label>
+          <label class="fld ta"><textarea name="subject" placeholder="문의 내용" rows="3"></textarea></label>
+        </div>
+        <button type="submit" class="send">SEND MESSAGE<i><svg><use href="#i-arrow"/></svg></i></button>
+      </form>
+      <p class="p note ko">메일이 편하시면 <a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a> 으로 보내 주세요.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 앱 다운로드 -->
+<section class="sec dl" id="app">
+  <div class="wrap">
+    <div class="cta rv">
+      <img class="bg" src="../fitness-a/assets/cta-bg.jpg" alt="" width="1360" height="512" decoding="async">
+      <div class="cta-t">
+        <div class="cta-h">
+          <h2 class="h2 tl">DOWNLOAD OUR<br><span class="r">PULSEFIT APP</span></h2>
+          <p class="p ko">언제 어디서나 운동 여정과 연결되세요.</p>
+          <p class="p ko">편리함과 명확함, 그리고 통제권을 손끝으로.</p>
+        </div>
+        <div class="checks">
+          <div class="row"><div class="chk"><svg><use href="#i-check"/></svg><span class="ko">클래스 시간표 바로 확인</span></div><div class="chk"><svg><use href="#i-check"/></svg><span class="ko">온라인 퍼스널 트레이닝</span></div></div>
+          <div class="row"><div class="chk"><svg><use href="#i-check"/></svg><span class="ko">멤버십 관리를 간편하게</span></div></div>
+          <div class="row"><div class="chk"><svg><use href="#i-check"/></svg><span class="ko">리마인더 · 팁 · 진행 상황 알림</span></div></div>
+        </div>
+        <div class="stores">
+          <a href="#" class="gp" aria-label="Google Play에서 받기"><svg><use href="#i-gp"/></svg><span><small>GET IT ON</small><b>Google Play</b></span></a>
+          <a href="#" class="as" aria-label="App Store에서 받기"><svg><use href="#i-apple"/></svg><span><small>Download on the</small><b>App Store</b></span></a>
+        </div>
+      </div>
+      <div class="cta-i"><img src="../fitness-a/assets/app.png" alt="펄스핏 앱 화면" width="511" height="620" decoding="async"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap ft">
+    <a href="#" class="logo" aria-label="펄스핏"><i><svg><use href="#i-bolt"/></svg></i><b>Pulsefit.</b></a>
+    <div class="flinks"><a href="#contact" class="pill">CONTACT US</a><a href="#pricing" class="pill">PRICING</a><a href="#faq" class="pill">FAQ</a></div>
+    <a href="#top" class="btn"><span class="t">BACK TO TOP</span><span class="c" style="transform:rotate(-45deg)"><svg><use href="#i-arrow"/></svg></span></a>
+  </div>
+  <div class="fb-w"><div class="wrap fb">
+    <div class="credit">
+      <div class="cr"><i><svg><use href="#i-mint"/></svg></i><span>DESIGN &amp; Developed<br>by <b>민트클</b></span></div>
+      <span class="sl">/</span>
+      <div class="cr"><span class="ko">사업자등록번호 266-07-03678<br>통신판매업신고 제2026-서울강남-00480호</span></div>
+    </div>
+    <p class="copy">© 2026. ALL RIGHTS RESERVED.</p>
+  </div></div>
+</footer>
+
+</body>
+</html>

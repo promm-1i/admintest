@@ -49,6 +49,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "fitness-a-template",
+    industry: "피트니스 · 퍼스널 트레이닝 홈페이지",
+    title: "피트니스 · PT 스튜디오 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 피트니스 · 헬스 · PT",
+    purpose:
+      "전면 사진 히어로와 스크롤 시 접히는 상단 배너, 스크롤할수록 하나씩 켜지는 서비스 목록(사진 클러스터·그라데이션 라인), 호버로 펼쳐지는 트레이너 카드, 월/연 전환 요금표 3종, 화살표로 넘기는 카드 덱 후기, FAQ 아코디언, 문의 폼, 앱 다운로드 배너까지 갖춘 피트니스 프리미엄 원페이지입니다. 사진과 요금만 바꾸면 헬스장 · PT 스튜디오 · 필라테스 · 크로스핏 어디에나 적용됩니다.",
+    features: ["스크롤 연동 서비스 목록 · 사진 클러스터", "호버 확장 트레이너 카드 · 요금 월/연 토글", "카드 덱 후기 · FAQ · 문의 폼", "접히는 상단 배너 · 앱 다운로드 배너"],
+    idealFor: "헬스장, PT 스튜디오, 필라테스 · 요가 센터, 크로스핏 박스",
+    image: "/thumbs/fitness-a.jpg",
+    liveUrl: "/templates/fitness-a/",
+    industryKey: "fitness",
+    designCode: "FITP-1001",
+    premium: true,
+  },
+  {
     slug: "estate-a-template",
     industry: "부동산 중개 · 매물 플랫폼 홈페이지",
     title: "부동산 매물 플랫폼 홈페이지 (프리미엄 디자인 A)",
