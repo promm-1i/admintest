@@ -587,7 +587,7 @@ html:not(.js) .rt ul{animation:rvm 36.86s linear infinite}
         <li class="tk-g"><h2>Explore Homes</h2><i></i><h2>Live Better</h2><i></i><h2>Modern Spaces</h2><i></i></li>
         <li class="tk-g"><h2>Explore Homes</h2><i></i><h2>Live Better</h2><i></i><h2>Modern Spaces</h2><i></i></li>
       </ul></div>
-      <div class="vid" id="vid"><video src="./assets/highlight.mp4" poster="./assets/highlight-poster.webp" muted loop playsinline autoplay preload="none" aria-label="단층 유리 주택 영상"></video></div>
+      <div class="vid" id="vid"><video data-src="./assets/highlight.mp4" poster="./assets/highlight-poster.webp" muted loop playsinline preload="none" aria-label="단층 유리 주택 영상"></video></div>
     </div>
   </div>
 </section>
@@ -747,10 +747,11 @@ document.documentElement.classList.add('js');
   Array.prototype.slice.call(rul.children).forEach(function(li){rul.appendChild(li.cloneNode(true))});
   if(!reduce){ ticker(document.getElementById('tk'),80); ticker(rt,70,49); }
 
-  /* 영상: 보일 때만 재생 */
+  /* 영상: 첫 로딩에서 2.7MB 를 안 받도록 화면 800px 앞에서 src 를 붙이고, 보일 때만 재생 */
   if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en,io){ en.forEach(function(x){ if(x.isIntersecting&&!video.src){ video.src=video.getAttribute('data-src'); video.load(); io.disconnect(); } }); },{rootMargin:'800px 0px'}).observe(vid);
     new IntersectionObserver(function(en){ en.forEach(function(x){ if(x.isIntersecting){video.play().catch(function(){})}else{video.pause()} }); },{threshold:0}).observe(vid);
-  }
+  }else{ video.src=video.getAttribute('data-src'); video.play().catch(function(){}); }
 
   /* 스탯 숫자 롤링 — 자리마다 0~9 를 쌓고 보일 때 목표 숫자까지 올린다 */
   var rolls=document.querySelectorAll('.roll');
