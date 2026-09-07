@@ -49,6 +49,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "hotel-a-template",
+    industry: "호텔 · 리조트 · 펜션 홈페이지",
+    title: "호텔 · 리조트 · 펜션 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 호텔 · 리조트 · 펜션",
+    purpose:
+      "전면 영상 위에 글자가 하나씩 뒤집히며 나타나는 히어로와 회전하는 예약 원형 문구, 세로 사진 두 장 사이에 놓인 소개, 화면 밖까지 이어지는 객실 캐러셀과 사진 위에 걸친 대형 객실 이름, 마우스를 올리면 펼쳐지는 경험 패널 4장, 번호와 진행선이 있는 후기 슬라이더, FAQ 아코디언, 체크인 · 체크아웃 날짜가 있는 예약 문의 폼, 세리프 로고 푸터까지 갖춘 호텔 프리미엄 원페이지입니다. 사진과 객실 이름만 바꾸면 호텔 · 리조트 · 풀빌라 · 펜션 어디에나 적용됩니다.",
+    features: ["영상 히어로 · 글자 뒤집힘 등장 · 회전 원형 문구", "화면 밖 객실 캐러셀 · 호버 확장 경험 패널", "번호 · 진행선 후기 슬라이더 · FAQ", "체크인 · 체크아웃 예약 문의 폼"],
+    idealFor: "부티크 호텔, 리조트, 풀빌라 · 고급 펜션, 한옥 스테이",
+    image: "/thumbs/hotel-a.jpg",
+    liveUrl: "/templates/hotel-a/",
+    industryKey: "stay",
+    designCode: "STAP-1001",
+    premium: true,
+  },
+  {
     slug: "dental-a-template",
     industry: "치과 · 병원 · 의원 홈페이지",
     title: "치과 · 병원 홈페이지 (프리미엄 디자인 A)",

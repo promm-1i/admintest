@@ -1,0 +1,613 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>세레인 호텔 앤 리조트 — 호텔 · 펜션 · 스테이 (프리미엄 디자인 A)</title>
+<meta name="description" content="전면 영상 히어로와 글자가 뒤집히며 나타나는 제목, 회전하는 원형 문구, 화면 밖으로 이어지는 객실 캐러셀, 마우스를 올리면 펼쳐지는 경험 패널, 후기 슬라이더, FAQ 아코디언, 예약 문의 폼까지 갖춘 호텔 · 펜션 프리미엄 원페이지.">
+<meta property="og:title" content="세레인 호텔 앤 리조트 — 호텔 · 펜션 · 스테이 (프리미엄 디자인 A)">
+<meta property="og:image" content="../hotel-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Sanchez&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰: 배경 #FBF9EA · 잉크 rgb(4,16,39) · 선 rgba(4,16,39,.2) · 컨테이너 1340(pad 0 50, max 1620) · 섹션 pad-top 130
+   글꼴: 제목·본문 Cormorant Garamond(300/400/500/600, 이탤릭 400) · 내비·푸터 메뉴 Sanchez 18 ls-.36 · 한글 Pretendard */
+:root{--bg:#FBF9EA;--ink:rgb(4,16,39);--line:rgba(4,16,39,.2);--ease:cubic-bezier(.4,0,.2,1);--spring:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"Cormorant Garamond","Pretendard Variable",Pretendard,serif;font-size:20px;line-height:26px}
+.ko{font-family:"Pretendard Variable",Pretendard,"Cormorant Garamond",sans-serif}
+.wrap{width:100%;max-width:1620px;margin:0 auto}
+.sec{padding:130px 50px 0}
+.sans{font-family:Sanchez,"Cormorant Garamond",serif;font-size:18px;line-height:18px;letter-spacing:-.36px;text-transform:uppercase}
+.h2{font-size:60px;line-height:72px;font-weight:500;text-align:center}
+.h2 i{font-weight:400}
+.p{font-size:20px;line-height:26px;font-weight:400}
+.lead{font-size:20px;line-height:22px;font-weight:500;max-width:630px;text-align:center}
+.lead.ko{line-height:22px}
+/* 라벨: 40×1 선 + h3 20/22 500 + 선 */
+.lab{display:flex;align-items:center;justify-content:center;gap:12px;font-size:20px;line-height:22px;font-weight:500;text-transform:uppercase}
+.lab::before,.lab::after{content:"";width:40px;height:1px;background:currentColor}
+.head{display:flex;flex-direction:column;align-items:center;gap:24px}
+.head .mt{display:flex;flex-direction:column;align-items:center;gap:8px;max-width:489px}
+.head .mt.wide{max-width:none}
+
+/* 스케일 버튼: 라벨 2겹(아래 것 t21) + 흰 원 오버레이(t70)가 호버 시 올라옴 */
+.sbtn{position:relative;display:inline-flex;align-items:center;justify-content:center;padding:17px 24px;border:1px solid #fff;color:#fff;font-size:16px;line-height:16px;font-weight:500;text-transform:uppercase;overflow:hidden;isolation:isolate;transition:color .3s var(--ease)}
+.sbtn .ls{position:relative;height:19px;line-height:19px;z-index:1;overflow:hidden}
+.sbtn .ls span{display:block;transition:transform .3s var(--ease)}
+.sbtn .ls span+span{position:absolute;top:21px;left:0;right:0}
+.sbtn .ov{position:absolute;left:-15%;right:-15%;top:70px;bottom:-75px;background:#fff;border-radius:50%;z-index:0;transition:top .3s var(--ease),bottom .3s var(--ease)}
+.sbtn:hover{color:var(--ink)}
+.sbtn:hover .ls span{transform:translateY(-21px)}
+.sbtn:hover .ov{top:-30px;bottom:-30px}
+.sbtn.sm{padding:14px 24px}
+.sbtn.dk{border-color:var(--ink);color:var(--ink)}
+.sbtn.dk .ov{background:var(--ink)}
+.sbtn.dk:hover{color:#fff}
+
+/* 내비: 고정 125 (pad 24 0 + 77), 처음엔 -139 숨김 → 2.3s 뒤 등장, 아래로 스크롤하면 숨고 위로 올리면 다시 */
+.nav{position:fixed;top:0;left:0;right:0;z-index:5;padding:0 50px;transform:translateY(-139px);opacity:0;transition:transform 1.5s var(--spring),opacity 1.5s var(--spring)}
+.nav.show{transform:none;opacity:1}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:24px 0;height:125px}
+.nav .lk{display:flex;align-items:center;gap:40px;flex:1 0 0;color:#fff}
+.nav .nr{display:flex;justify-content:flex-end;flex:1 0 0}
+.nl{position:relative;display:block;overflow:hidden;height:18px;color:#fff}
+.nl .ch{display:inline-block;position:relative;transition:transform .5s var(--spring);transition-delay:var(--d,0s)}
+.nl .ch::after{content:attr(data-c);position:absolute;left:0;top:30px;white-space:pre}
+.nl:hover .ch{transform:translateY(-30px)}
+.logo{display:block;width:113px;height:77px;color:#fff}
+.logo svg{width:100%;height:100%}
+.nav.ink .lk,.nav.ink .logo,.nav.ink .sbtn{color:var(--ink)}
+.nav.ink .sbtn{border-color:var(--ink)}.nav.ink .sbtn .ov{background:var(--ink)}.nav.ink .sbtn:hover{color:#fff}
+.burger{display:none;width:30px;height:30px;align-items:center;justify-content:center;color:#fff}
+.burger svg{width:30px;height:30px}
+.menu{display:none}
+
+/* 히어로 900: 영상 + 어둡게(.4) + 가운데 글 + 하단 문장/원형 문구 */
+.hero{position:relative;height:900px;overflow:clip;color:#fff}
+.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .shade{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+.hero .in{position:relative;height:100%;padding:0 50px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hmain{display:flex;flex-direction:column;align-items:center;gap:16px;max-width:813px}
+.htext{display:flex;flex-direction:column;align-items:center;gap:8px}
+.h1{font-size:80px;line-height:80px;font-weight:500;text-align:center;white-space:nowrap}
+.h1 i{font-weight:400}
+.h1 .wd{display:inline-block;white-space:nowrap}
+.h1 .ch{display:inline-block;transform-origin:50% 50%;transform:perspective(600px) rotateY(90deg);opacity:0;transition:transform .8s var(--spring),opacity .8s var(--spring);transition-delay:var(--d,0s)}
+.hero.go .h1 .ch{transform:none;opacity:1}
+.hero .sbtn{transform:translateY(45px);opacity:0;transition:transform 2s var(--spring) .7s,opacity 2s var(--spring) .7s,color .3s var(--ease)}
+.hero.go .sbtn{transform:none;opacity:1}
+.hbot{position:absolute;left:50px;right:50px;top:600px;height:250px;display:flex;justify-content:space-between;align-items:flex-end}
+.hbot .txt{max-width:763px;font-size:20px;line-height:26px;color:#fff}
+.hbot .txt.ko{line-height:26px}
+.ring{position:relative;width:240px;height:250px;display:flex;align-items:center;justify-content:center}
+.ring svg.tx{position:absolute;left:0;top:5px;width:240px;height:240px;animation:spin 24s linear infinite}
+.ring svg.tx text{font-family:"Cormorant Garamond",serif;font-size:26px;font-weight:600;fill:#fff;letter-spacing:1px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.round{position:relative;width:156px;height:156px;border-radius:2000px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.round .ar{position:absolute;left:38px;width:80px;height:80px;color:#fff;transition:transform .5s var(--spring)}
+.round .ar.a{top:38px}.round .ar.b{top:-40px}
+.round:hover .ar{transform:translateY(78px)}
+.hbot,.ring{opacity:0;transition:opacity 1.5s var(--spring) 1.2s}
+.hero.go .hbot,.hero.go .ring{opacity:1}
+
+/* 소개: 사진 393×704 · 가운데 393(max 596) · 사진 */
+.about .wrap{display:flex;align-items:center;justify-content:center;gap:80px}
+.about .pic{width:393px;height:704px;object-fit:cover;flex:0 0 auto}
+.about .mid .mbg{display:none}
+.about .mid{display:flex;flex-direction:column;align-items:center;gap:40px;flex:1 0 0;max-width:596px}
+.about .at{display:flex;flex-direction:column;align-items:center;gap:24px}
+.about .at .p{text-align:center}
+.about .h2{max-width:489px}
+.details{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:30px 60px}
+.det{display:flex;flex-direction:column;align-items:center;gap:8px;font-size:16px;line-height:16px}
+.det svg{width:30px;height:30px}
+
+/* 객실: 502 · [962(사진 602 가운데)] · 502, gap 100, 650 높이, 화면 밖까지 */
+.rooms{padding:130px 0 0}
+.rooms .wrap{max-width:none;display:flex;flex-direction:column;align-items:center;gap:60px}
+.rooms .head{padding:0 50px}
+.rrow{position:relative;display:flex;justify-content:center;align-items:center;gap:100px;width:100%;height:650px;overflow:hidden}
+.rrow a{display:block;flex:0 0 auto}
+.rrow .side img{width:502px;height:502px;object-fit:cover}
+.rrow .main{position:relative;width:962px;height:602px;display:flex;justify-content:center}
+.rrow .main img{width:602px;height:602px;object-fit:cover}
+.rt{position:absolute;left:-17px;width:997px;top:181px;text-align:center;font-size:115px;line-height:120px;text-transform:uppercase;pointer-events:none;color:var(--ink)}
+.rt.w{color:#fff;clip-path:inset(0 180px)}
+.rt.m{display:none}
+
+/* 경험: 4패널 227×704, 열린 것 660 (사진 497 + 글 82) */
+.experiences .head{margin-bottom:60px}
+.exps{display:flex;width:100%;height:704px;overflow:hidden}
+.exp{position:relative;display:flex;flex-direction:column;gap:55px;width:227px;height:704px;flex:0 0 auto;overflow:hidden;cursor:pointer;transition:width .3s var(--ease)}
+.exp .bg{width:100%;height:704px;object-fit:cover;flex:0 0 auto;transition:height .3s var(--ease),object-position .3s var(--ease)}
+.exp .ct{padding:0 24px;display:flex;flex-direction:column;gap:16px;width:660px;opacity:0;transition:opacity .3s var(--ease)}
+.exp .ct h3{font-size:30px;line-height:30px;font-weight:500}
+.exp .ct p{font-size:18px;line-height:18px}
+.exp .ct p.ko{line-height:20px}
+.exp.open{width:660px}
+.exp.open .bg{height:497px;object-position:70% 77%}
+.exp.open .ct{opacity:1}
+
+/* 후기: 1340 슬라이드, 간격 100, 280 높이 */
+.testi .wrap{max-width:1440px;display:flex;flex-direction:column;align-items:center;gap:60px}
+.tvp{position:relative;width:100%;height:280px;overflow:hidden}
+.ttrack{display:flex;gap:100px;transition:transform .6s var(--spring)}
+.tslide{display:flex;justify-content:space-between;align-items:flex-start;width:1340px;height:280px;flex:0 0 auto}
+.t1{display:flex;flex-direction:column;justify-content:center;gap:6px;width:130px;height:280px;flex:0 0 auto}
+.t1 img{width:130px;height:130px;object-fit:cover}
+.stars{display:flex;gap:2px;height:14px}
+.stars svg{width:15px;height:14px;color:var(--ink)}
+.trev{position:relative;display:flex;flex-direction:column;align-items:center;gap:30px;flex:1 0 0;max-width:652px}
+.trev .q{position:relative;width:100%;display:flex;justify-content:center}
+.trev .q p{max-width:580px;font-size:24px;line-height:28.8px;text-align:center}
+.trev .q p.ko{line-height:28.8px}
+.trev .q svg{position:absolute;width:24px;height:24px;color:var(--ink)}
+.trev .q svg.a{left:0;top:0}
+.trev .q svg.b{right:0;bottom:0;transform:rotate(180deg)}
+.trev .nm{font-size:20px;line-height:26px}
+.t2{display:flex;flex-direction:column;align-items:flex-end;width:207px;flex:0 0 auto}
+.t2 .num{display:flex;align-items:flex-end;width:100%;padding-bottom:13px}
+.t2 .num b{font-size:60px;line-height:60px;font-weight:400}
+.t2 .num small{font-size:18px;line-height:18px;flex:1 0 0}
+.t2 img{width:207px;height:207px;object-fit:cover}
+.tnav{position:absolute;top:37px;width:44px;height:22px;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:opacity .3s}
+.tnav.next{right:0}.tnav.prev{left:0;transform:rotate(180deg);opacity:0;pointer-events:none}
+.tnav.prev.can{opacity:1;pointer-events:auto}
+.tnav svg{width:20px;height:20px}
+.tline{position:absolute;left:50%;top:277px;width:300px;height:3px;margin-left:-150px;background:var(--line);display:flex}
+.tline i{width:75px;height:3px;background:transparent;transition:background .32s var(--ease)}
+.tline i.cur{background:var(--ink)}
+
+/* FAQ: 닫힘 pad 28 22 (86) · 열림 pad 20 22 gap 12 · 답 pad-left 30 max 1117 · 18/21.6 300 */
+.faq .wrap{max-width:1440px;display:flex;flex-direction:column;align-items:center;gap:60px}
+.faqs{width:100%;display:flex;flex-direction:column}
+.qa{border-bottom:1px solid var(--line)}
+.qa-q{display:flex;justify-content:space-between;align-items:center;width:100%;padding:28px 22px;text-align:left;transition:padding .3s var(--ease)}
+.qa-q .qt{display:flex;gap:10px;align-items:flex-start;flex:1 0 0;padding-right:10px;font-size:24px;line-height:28.8px}
+.qa-q .qt.ko{line-height:28.8px}
+.qa-q .ic{width:30px;height:30px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;color:#000}
+.qa-q .ic svg{width:30px;height:30px;transition:transform .3s var(--ease)}
+.qa .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
+.qa .ans>div{overflow:hidden;min-height:0}
+.qa .ans p{padding:0 22px 20px 52px;max-width:1139px;font-size:18px;line-height:21.6px;font-weight:300}
+.qa .ans p.ko{line-height:22px}
+.qa.open .qa-q{padding:20px 22px 12px}
+.qa.open .ic svg{transform:rotate(180deg)}
+.qa.open .ans{grid-template-rows:1fr}
+
+/* 문의: 왼쪽 665 + 폼 600 */
+.contact .wrap{max-width:1440px;display:flex;align-items:flex-start;justify-content:center;gap:10px}
+.cmain{display:flex;flex-direction:column;gap:24px;flex:1 0 0;max-width:665px;transform:translateX(-543px);opacity:0;transition:transform .5s var(--ease),opacity .5s var(--ease)}
+.cmain.on{transform:none;opacity:1}
+.chalf{display:flex;flex-direction:column;gap:40px}
+.ctext{display:flex;flex-direction:column;gap:24px}
+.ctext .mt{display:flex;flex-direction:column;gap:8px}
+.ctext .lab{justify-content:flex-start}
+.ctext .h2{text-align:left}
+.ctext .p{max-width:630px}
+.crow{display:flex;align-items:center;gap:12px;font-size:18px;line-height:21.6px;font-weight:500}
+.crow svg{width:24px;height:24px;flex:0 0 auto}
+.crow span{max-width:313px}
+.cform{display:flex;justify-content:center;flex:1 0 0;padding-top:19px}
+.cform form{display:flex;flex-direction:column;gap:24px;width:100%;max-width:600px;transform:translateX(604px);opacity:0;transition:transform .8s var(--ease),opacity .8s var(--ease)}
+.cform form.on{transform:none;opacity:1}
+.fld{position:relative;display:flex;align-items:center;width:100%;padding:18px 12px 18px 16px;border-bottom:1px solid var(--line);font-size:16px;line-height:19.2px}
+.fld input,.fld select,.fld textarea{flex:1 1 0;width:100%;min-width:0;font-size:16px;line-height:19.2px;color:var(--ink);outline:none}
+.fld input::placeholder,.fld textarea::placeholder{color:var(--ink)}
+.fld select{appearance:none;-webkit-appearance:none;cursor:pointer}
+.fld svg{position:absolute;right:16px;top:50%;width:24px;height:24px;margin-top:-12px;pointer-events:none;color:var(--ink)}
+.fld.ta{padding:0;min-height:120px;align-items:stretch}
+.fld.ta textarea{padding:18px 12px 18px 16px;min-height:120px;resize:vertical}
+.f2{display:flex;gap:16px;width:100%}
+.f2 .fld{flex:1 0 0;width:auto}
+.fld input[type=date]::-webkit-calendar-picker-indicator{opacity:0;position:absolute;right:8px;width:40px;height:40px;cursor:pointer}
+.send{width:100%;height:54px;background:var(--ink);color:#fff;font-size:16px;line-height:16px;font-weight:500;text-transform:uppercase;transition:opacity .3s}
+.send:hover{opacity:.88}
+
+/* 푸터 */
+.foot{padding:130px 50px 0}
+.foot .wrap{display:flex;flex-direction:column;align-items:center}
+.foot .flogo{display:flex;justify-content:center;padding-bottom:40px;width:100%}
+.foot .flogo svg{width:108px;height:74px;color:var(--ink)}
+.fmenu{display:flex;justify-content:center;width:100%;padding:40px 0;box-shadow:inset 0 1px 0 var(--line),inset 0 -1px 0 var(--line)}
+.fmenu ul{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:1230px;padding-top:4px}
+.fmenu .nl{color:var(--ink)}
+.fbot{display:flex;justify-content:space-between;align-items:center;width:100%;padding:40px 0}
+.fbot p{font-size:18px;line-height:18px}
+.fbot .so{display:flex;align-items:center;gap:24px}
+.fbot .so a{display:flex;align-items:center;justify-content:center;width:34px;height:34px;color:var(--ink)}
+.fbot .so svg{width:34px;height:34px}
+
+/* 등장 */
+html.js .rv{opacity:0;transform:translateY(40px);transition:opacity 1.4s var(--spring),transform 1.4s var(--spring);transition-delay:var(--d,0s)}
+html.js .rv.on{opacity:1;transform:none}
+html.js .cmain.rv{transform:translateX(-543px);transition:transform .5s var(--ease),opacity .5s var(--ease)}
+html.js .cform form.rv{transform:translateX(604px);transition:transform .8s var(--ease),opacity .8s var(--ease)}
+html.js .cmain.rv.on,html.js .cform form.rv.on{transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none}.ring svg.tx{animation:none}.h1 .ch{transition:none}}
+
+/* ── 태블릿 ≤1199 (실측 1024) ── */
+@media (max-width:1199px){
+  .nav{padding:0 25px}
+  .nav .wrap{height:100px;padding:16px 0}
+  .logo{width:100px;height:66px}
+  .sec,.foot{padding:130px 25px 0}
+  .lab{font-size:18px;line-height:21px}
+  .hero .in{padding:0 25px}
+  .hbot{left:25px;right:25px}
+  .about .wrap{flex-direction:column;gap:60px}
+  .about .pic{width:100%;height:500px}
+  .about .mid{max-width:none}
+  .about .h2{max-width:none}
+  .about .at .p{font-size:18px;line-height:19.8px;max-width:600px}
+  .rrow{height:524px;gap:80px}
+  .rrow .side img{width:402px;height:402px}
+  .rrow .main{width:524px;height:524px}
+  .rrow .main img{width:524px;height:524px}
+  .rt{display:none}
+  .rt.m{display:block;position:absolute;left:0;width:100%;bottom:24px;top:auto;font-size:26px;line-height:26px;text-transform:none;color:#fff;clip-path:none}
+  .lead{font-size:18px;line-height:21px}
+  .exps{flex-direction:column;height:auto;overflow:visible;gap:46px}
+  .exp,.exp.open{width:100%;height:auto;gap:16px;overflow:visible}
+  .exp .bg,.exp.open .bg{height:300px;object-position:50% 50%}
+  .exp .ct,.exp.open .ct{width:100%;padding:0;opacity:1}
+  .exp .ct h3{font-size:24px;line-height:24px}
+  .exp .ct p{font-size:16px;line-height:16px}
+  .exp .ct p.ko{line-height:20px}
+  .tvp{height:300px}
+  .tslide{width:974px;height:300px}
+  .ttrack{gap:50px}
+  .trev .q p{font-size:20px;line-height:24px;max-width:557px}
+  .trev .nm{font-size:18px;line-height:19.8px}
+  .t2 .num b{font-size:48px;line-height:48px}
+  .t2 .num small{font-size:16px;line-height:16px}
+  .tline{top:297px}
+  .qa-q .qt{font-size:20px;line-height:24px}
+  .qa .ans p{font-size:16px;line-height:19.2px}
+  .contact .wrap{gap:24px}
+  .ctext .h2{font-size:50px;line-height:60px}
+  .ctext .p{font-size:18px;line-height:19.8px}
+  .crow{font-size:14px;line-height:16.8px}
+  .fmenu ul{gap:24px;flex-wrap:wrap;justify-content:center}
+  .fbot p{font-size:16px;line-height:16px}
+}
+/* ── 폰 ≤809 (실측 390) ── */
+@media (max-width:809px){
+  .nav{padding:0 16px}
+  .nav .wrap{height:75px;padding:10px 0}
+  .nav .lk,.nav .nr{display:none}
+  .burger{display:flex}
+  .logo{width:77px;height:55px}
+  .menu{display:block;position:fixed;inset:0;z-index:4;background:var(--bg);padding:110px 24px 40px;transform:translateY(-100%);transition:transform .5s var(--spring);overflow:auto}
+  .menu.open{transform:none}
+  .menu ul{display:flex;flex-direction:column;gap:28px}
+  .menu .nl{color:var(--ink);font-size:24px;line-height:24px;height:24px}
+  .menu .nl .ch::after{top:36px}
+  .menu .sbtn{margin-top:40px;display:inline-flex}
+  .nav.mopen .burger{color:var(--ink)}
+  .nav.mopen .logo{color:var(--ink)}
+  .sec,.foot{padding:50px 16px 0}
+  .hero{height:810px}
+  .hmain{gap:4px}
+  .rooms .wrap,.testi .wrap,.faq .wrap{gap:30px}
+  .experiences .head{margin-bottom:30px}
+  .lead.ko{line-height:18px}
+  .ctext .h2{font-size:40px;line-height:48px}
+  .contact .wrap{gap:10px}
+  .fld{padding:15px 12px 15px 16px}
+  .fld.ta textarea{padding:15px 12px 15px 16px}
+  .cform{padding-top:0}
+  .hero .in{padding:0 16px}
+  .lab{font-size:16px;line-height:17px}
+  .lab::before,.lab::after{width:24px}
+  .h1{font-size:40px;line-height:48px;white-space:normal}
+  .hmain{gap:16px;max-width:358px}
+  .hbot{display:none}
+  .h2{font-size:40px;line-height:48px}
+  .p,.about .at .p{font-size:14px;line-height:18px}
+  .lead{font-size:16px;line-height:17px}
+  .lead.ko{line-height:20px}
+  .about .wrap{gap:20px}
+  .about .pic{height:468px}
+  .about .mid{position:relative;order:-1;width:100%;min-height:468px;justify-content:center;padding:40px 20px;color:#fff;background:var(--ink)}
+  .about .mid .mbg{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.12}
+  .about .mid>*{position:relative}
+  .about .pic.a{display:none}
+  .details{gap:24px 40px}
+  .rooms{padding:50px 0 0}
+  .rooms .head{padding:0 16px}
+  .rrow{height:400px;gap:0}
+  .rrow .side{display:none}
+  .rrow .main,.rrow .main img{width:358px;height:400px}
+  .rt.m{font-size:22px;line-height:22px;bottom:24px}
+  .exps{gap:20px}
+  .exp .ct h3{font-size:20px;line-height:20px}
+  .exp .ct p{font-size:14px;line-height:14px}
+  .exp .ct p.ko{line-height:18px}
+  .tvp{height:auto}
+  .tslide{flex-direction:column;align-items:center;width:calc(100vw - 32px);height:auto;gap:20px}
+  .ttrack{gap:32px}
+  .t1{width:130px;height:auto;align-items:center}
+  .trev{max-width:none;gap:20px}
+  .trev .q p{padding-top:20px}
+  .trev .q{padding:0 20px}
+  .trev .q p{font-size:18px;line-height:21.6px;max-width:318px}
+  .trev .q p.ko{line-height:24px}
+  .trev .nm{font-size:14px;line-height:18px}
+  .t2{align-items:flex-start}
+  .t2 .num b{font-size:38px;line-height:38px}
+  .t2 .num small{font-size:14px;line-height:14px}
+  .tnav{position:static;margin:30px 0 0 auto}
+  .tnav.prev{display:none}
+  .tline{position:static;margin:20px 0 0}
+  .qa-q{padding:20px 16px 20px 12px}
+  .qa-q .qt{font-size:18px;line-height:21.6px;gap:10px}
+  .qa-q .ic{width:24px;height:24px}
+  .qa-q .ic svg{width:24px;height:24px}
+  .qa .ans p{font-size:16px;line-height:22px;padding:0 16px 20px 39px}
+  .qa.open .qa-q{padding:20px 16px 12px 12px}
+  .contact .wrap{flex-direction:column;align-items:stretch;gap:10px}
+  .cmain{max-width:none}
+  .ctext .p{font-size:14px;line-height:18px}
+  .crow{font-size:12px;line-height:14px}
+  .f2{flex-direction:column;gap:24px}
+  .fmenu{padding:40px 0}
+  .fmenu ul{flex-direction:column;align-items:flex-start;gap:22px}
+  .fmenu .nl{font-size:16px;line-height:16px;height:16px}
+  .fbot{flex-direction:column;align-items:flex-start;gap:20px}
+  .fbot p{font-size:14px;line-height:14px}
+  .foot .flogo{justify-content:flex-start}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-logo" viewBox="0 0 113 77"><text x="56.5" y="44" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-style="italic" font-weight="600" font-size="46" fill="currentColor">Serein</text><text x="56.5" y="68" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-weight="500" font-size="10" letter-spacing="1.6" textLength="100" lengthAdjust="spacingAndGlyphs" fill="currentColor">HOTEL &amp; RESORT</text></symbol>
+    <symbol id="i-down" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M40 18v44M22 44l18 18 18-18"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h14M11 4l6 6-6 6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 14 13"><path fill="currentColor" d="M7 0l1.8 4.4 4.7.4-3.6 3.1 1.1 4.6L7 10l-4 2.5 1.1-4.6L.5 4.8l4.7-.4z"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-6.5C3 7.4 5.4 4.8 9.6 4.2l.6 1.8c-2.2.6-3.5 1.9-3.7 3.8H10V18H3zm11 0v-6.5c0-4.1 2.4-6.7 6.6-7.3l.6 1.8c-2.2.6-3.5 1.9-3.7 3.8H21V18h-7z"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 3.5h3l1.5 4-2 1.2a11 11 0 0 0 6.3 6.3l1.2-2 4 1.5v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 3.5 5.5a2 2 0 0 1 2-2Z"/><path d="M14 3.5a6.5 6.5 0 0 1 6.5 6.5M14 7a3 3 0 0 1 3 3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+    <symbol id="i-design" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 25c3-8 9-13 20-15-3 8-9 13-16 15"/><path d="M5 25c4-5 8-8 14-10"/><path d="M14 8c1-3 4-4 7-3-1 3-3 4-7 3z"/></symbol>
+    <symbol id="i-hosp" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21c2-2 4-3 7-3h8c2 0 3 1 3 2s-1 2-3 2h-7"/><path d="M15 22l7-3c2-1 4 0 5 1l-9 5c-2 1-4 1-6 0l-8-4"/><path d="M15 4c-3 0-5 2-5 5 0 4 5 7 5 7s5-3 5-7c0-3-2-5-5-5z"/></symbol>
+    <symbol id="i-crown" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 22h20M5 22L3 9l7 5 5-8 5 8 7-5-2 13"/><path d="M11 18h8"/></symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-1.6 19.9v-7H7.9V12h2.5V9.8c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.5h-1.3c-1.2 0-1.6.8-1.6 1.6V12h2.8l-.4 2.9h-2.4v7A10 10 0 0 0 12 2z"/></symbol>
+    <symbol id="i-yt" viewBox="0 0 34 24"><path fill="currentColor" d="M33.3 3.7A4.2 4.2 0 0 0 30.3.7C27.7 0 17 0 17 0S6.3 0 3.7.7A4.2 4.2 0 0 0 .7 3.7C0 6.3 0 12 0 12s0 5.7.7 8.3a4.2 4.2 0 0 0 3 3C6.3 24 17 24 17 24s10.7 0 13.3-.7a4.2 4.2 0 0 0 3-3C34 17.7 34 12 34 12s0-5.7-.7-8.3zM13.6 17.1V6.9L22.4 12l-8.8 5.1z"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 9h22M4 15h22M4 21h22"/></symbol>
+    <symbol id="i-close" viewBox="0 0 30 30" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 7l16 16M23 7L7 23"/></symbol>
+  </defs>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <nav class="lk sans" aria-label="주 메뉴">
+      <a href="#about" class="nl" data-split>About</a>
+      <a href="#rooms" class="nl" data-split>Rooms &amp; Suites</a>
+      <a href="#experiences" class="nl" data-split>Experiences</a>
+    </nav>
+    <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"><svg class="o"><use href="#i-menu"/></svg></button>
+    <a href="#" class="logo" aria-label="세레인 홈"><svg><use href="#i-logo"/></svg></a>
+    <div class="nr"><a href="#contact" class="sbtn sm"><span class="ls"><span>Book a Room</span><span>Book a Room</span></span><span class="ov"></span></a></div>
+  </div>
+</header>
+<div class="menu" id="menu" aria-hidden="true">
+  <ul class="sans">
+    <li><a href="#about" class="nl" data-split>About</a></li>
+    <li><a href="#rooms" class="nl" data-split>Rooms &amp; Suites</a></li>
+    <li><a href="#experiences" class="nl" data-split>Experiences</a></li>
+    <li><a href="#faq" class="nl" data-split>FAQ's</a></li>
+    <li><a href="#contact" class="nl" data-split>Contact</a></li>
+  </ul>
+  <a href="#contact" class="sbtn sm dk"><span class="ls"><span>Book a Room</span><span>Book a Room</span></span><span class="ov"></span></a>
+</div>
+
+<main>
+<!-- 히어로 -->
+<section class="hero" id="hero">
+  <video src="../hotel-a/assets/hero.mp4" poster="../hotel-a/assets/hero.jpg" autoplay muted loop playsinline aria-label="세레인 리조트 전경 영상"></video>
+  <div class="shade"></div>
+  <div class="in">
+    <div class="hmain">
+      <div class="htext">
+        <h3 class="lab">Welcome to Serein</h3>
+        <h1 class="h1" id="h1">Stay Somewhere <i>Beautiful.</i></h1>
+      </div>
+      <a href="#about" class="sbtn"><span class="ls"><span>Discover More</span><span>Discover More</span></span><span class="ov"></span></a>
+    </div>
+    <div class="hbot">
+      <p class="txt ko">세레인은 동시대의 우아함과 진심 어린 환대가 만나는, 정성껏 설계된 휴식처입니다. 고요한 풍경과 세심하게 다듬은 공간에 둘러싸여 머무는 모든 순간이 편안함과 평온, 그리고 서로의 연결로 이어지도록 모든 디테일을 세심하게 만들었습니다.</p>
+      <div class="ring">
+        <svg class="tx" viewBox="0 0 240 240" aria-hidden="true"><defs><path id="ringpath" d="M120 120m-104 0a104 104 0 1 1 208 0a104 104 0 1 1-208 0"/></defs><text><textPath href="#ringpath" startOffset="0">BOOK A ROOM - BOOK A ROOM - BOOK A ROOM - </textPath></text></svg>
+        <a href="#contact" class="round" aria-label="객실 예약 문의"><svg class="ar a"><use href="#i-down"/></svg><svg class="ar b"><use href="#i-down"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 소개 -->
+<section class="sec about" id="about">
+  <div class="wrap">
+    <img class="pic a rv" src="../hotel-a/assets/about-1.jpg" alt="조식 테이블" width="393" height="704">
+    <div class="mid rv" style="--d:.1s">
+      <img class="mbg" src="../hotel-a/assets/about-1.jpg" alt="" width="393" height="704" aria-hidden="true">
+      <div class="at">
+        <div class="head" style="gap:8px">
+          <h3 class="lab">About Serein</h3>
+          <h2 class="h2">A quiet escape,<br><i>beautifully<br>designed.</i></h2>
+        </div>
+        <p class="p ko">세레인은 사려 깊은 인테리어와 따뜻한 환대, 고요한 주변 풍경을 한데 모아 차분하고 사적이며 힘들이지 않아도 정돈된 머무름을 만듭니다. 문을 여는 순간부터 느긋한 리듬이 이어집니다.</p>
+      </div>
+      <div class="details">
+        <div class="det"><svg><use href="#i-design"/></svg><span>Thoughtful Design</span></div>
+        <div class="det"><svg><use href="#i-hosp"/></svg><span>Personal Hospitality</span></div>
+        <div class="det"><svg><use href="#i-crown"/></svg><span>Curated Experiences</span></div>
+      </div>
+    </div>
+    <img class="pic b rv" src="../hotel-a/assets/about-2.jpg" alt="객실 침대" width="393" height="704" style="--d:.2s">
+  </div>
+</section>
+
+<!-- 객실 -->
+<section class="sec rooms" id="rooms">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="mt"><h3 class="lab">Rooms &amp; Suites</h3><h2 class="h2">The Art of <i>Staying</i></h2></div>
+      <p class="lead ko">정제된 편안함과 자연의 질감, 조용한 디테일이 어우러져 머무는 시간이 온전히 나의 것이 되는 객실과 스위트입니다.</p>
+    </div>
+    <div class="rrow rv" style="--d:.1s">
+      <a href="#contact" class="side"><img src="../hotel-a/assets/room-2.jpg" alt="풀빌라 객실" width="502" height="502"></a>
+      <a href="#contact" class="main"><img src="../hotel-a/assets/room-1.jpg" alt="비스타 레지던스 객실" width="602" height="602"><span class="rt">The<br>Vista Residence</span><span class="rt w" aria-hidden="true">The<br>Vista Residence</span><span class="rt m">The Vista Residence</span></a>
+      <a href="#contact" class="side"><img src="../hotel-a/assets/room-3.jpg" alt="테라스 스위트" width="502" height="502"></a>
+    </div>
+  </div>
+</section>
+
+<!-- 경험 -->
+<section class="sec experiences" id="experiences">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="mt wide"><h3 class="lab">Experiences</h3><h2 class="h2">Moments Worth <i>Remembering</i></h2></div>
+      <p class="lead ko">속도를 늦추고 주변을 탐험하며, 머무는 시간 너머까지 남는 기억을 만드는 사려 깊은 경험을 만나 보세요.</p>
+    </div>
+    <div class="exps rv" id="exps" style="--d:.1s">
+      <div class="exp"><img class="bg" src="../hotel-a/assets/exp-1.jpg" alt="" width="660" height="990"><div class="ct"><h3>Taste &amp; Dine</h3><p class="ko">제철 재료와 지역의 개성을 담아 정성껏 준비한 요리, 계절의 페어링, 친밀한 다이닝의 순간을 음미하세요.</p></div></div>
+      <div class="exp open"><img class="bg" src="../hotel-a/assets/exp-2.jpg" alt="" width="660" height="990"><div class="ct"><h3>Wellness &amp; Rituals</h3><p class="ko">차분한 스파 트리트먼트와 마음을 다스리는 의식, 몸과 마음을 새롭게 하는 웰니스 프로그램으로 나 자신과 다시 만나세요.</p></div></div>
+      <div class="exp"><img class="bg" src="../hotel-a/assets/exp-3.jpg" alt="" width="660" height="990"><div class="ct"><h3>Explore &amp; Discover</h3><p class="ko">세레인 너머로 발걸음을 옮겨 지역의 문화와 숨은 명소, 자연 풍경을 만나고 오래 남을 순간을 경험하세요.</p></div></div>
+      <div class="exp"><img class="bg" src="../hotel-a/assets/exp-4.jpg" alt="" width="660" height="990"><div class="ct"><h3>Slow Moments</h3><p class="ko">느긋한 아침과 노을 산책, 아무것도 하지 않는 조용한 시간처럼 단순한 즐거움을 누리세요.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 후기 -->
+<section class="sec testi" id="reviews">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="mt wide"><h3 class="lab">Guest Stories</h3><h2 class="h2">Words From <i>Our Guests</i></h2></div>
+      <p class="lead ko">세레인에 머문 분들이 남긴 이야기입니다. 조용한 인테리어부터 따뜻한 서비스까지, 머무름의 순간을 들어 보세요.</p>
+    </div>
+    <div class="tvp rv" style="--d:.1s">
+      <div class="ttrack" id="ttrack">
+        <div class="tslide">
+          <div class="t1"><img src="../hotel-a/assets/t-1.jpg" alt="" width="130" height="130"><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div></div>
+          <div class="trev"><div class="q"><svg class="a"><use href="#i-quote"/></svg><p class="ko">처음부터 끝까지 아름답게 배려된 머무름이었습니다. 고요한 인테리어부터 따뜻하고 세심한 서비스까지 모든 디테일에 의도가 느껴졌어요. 세레인 덕분에 속도를 늦추고 순간을 온전히 즐길 수 있었습니다.</p><svg class="b"><use href="#i-quote"/></svg></div><p class="nm ko">- 이도윤</p></div>
+          <div class="t2"><div class="num"><b>01</b><small>/04</small></div><img src="../hotel-a/assets/ts-1.jpg" alt="" width="207" height="207"></div>
+        </div>
+        <div class="tslide">
+          <div class="t1"><img src="../hotel-a/assets/t-2.jpg" alt="" width="130" height="130"><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div></div>
+          <div class="trev"><div class="q"><svg class="a"><use href="#i-quote"/></svg><p class="ko">세레인은 친밀하고 정제되어 있으면서도 진심으로 따뜻한 곳입니다. 공간의 고요함과 직원분들의 배려가 어우러져 저희 부부에게 딱 맞는 여유로운 휴식이 되었어요.</p><svg class="b"><use href="#i-quote"/></svg></div><p class="nm ko">- 김서연</p></div>
+          <div class="t2"><div class="num"><b>02</b><small>/04</small></div><img src="../hotel-a/assets/ts-2.jpg" alt="" width="207" height="207"></div>
+        </div>
+        <div class="tslide">
+          <div class="t1"><img src="../hotel-a/assets/t-3.jpg" alt="" width="130" height="130"><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div></div>
+          <div class="trev"><div class="q"><svg class="a"><use href="#i-quote"/></svg><p class="ko">이곳에는 놀라울 만큼 차분한 무언가가 있습니다. 아침 햇살이 드는 객실, 정성스러운 조식, 노을 산책까지 하루하루가 자연스럽게 흘러갔어요. 다시 찾고 싶은 곳입니다.</p><svg class="b"><use href="#i-quote"/></svg></div><p class="nm ko">- 박지훈</p></div>
+          <div class="t2"><div class="num"><b>03</b><small>/04</small></div><img src="../hotel-a/assets/ts-3.jpg" alt="" width="207" height="207"></div>
+        </div>
+        <div class="tslide">
+          <div class="t1"><img src="../hotel-a/assets/t-4.jpg" alt="" width="130" height="130"><div class="stars"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div></div>
+          <div class="trev"><div class="q"><svg class="a"><use href="#i-quote"/></svg><p class="ko">정말 기억에 남는 머무름이었습니다. 객실은 넓고 조용했고 침구는 완벽했으며, 무엇보다 스태프 한 분 한 분이 우리를 손님이 아닌 가족처럼 대해 주셨어요.</p><svg class="b"><use href="#i-quote"/></svg></div><p class="nm ko">- 최민준</p></div>
+          <div class="t2"><div class="num"><b>04</b><small>/04</small></div><img src="../hotel-a/assets/ts-4.jpg" alt="" width="207" height="207"></div>
+        </div>
+      </div>
+      <button type="button" class="tnav prev" aria-label="이전 후기"><svg><use href="#i-arrow"/></svg></button>
+      <button type="button" class="tnav next" aria-label="다음 후기"><svg><use href="#i-arrow"/></svg></button>
+      <div class="tline" id="tline"><i class="cur"></i><i></i><i></i><i></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq" id="faq">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="mt wide"><h3 class="lab">FAQ's</h3><h2 class="h2">Your Stay, <i>Made Simple</i></h2></div>
+      <p class="lead ko">도착과 다이닝부터 경험, 편의 시설, 특별 요청까지 세레인에서의 머무름에 필요한 모든 것을 한곳에 모았습니다.</p>
+    </div>
+    <div class="faqs rv" style="--d:.1s">
+      <div class="qa"><button class="qa-q" type="button" aria-expanded="false"><span class="qt ko"><span>1.</span><span>체크인과 체크아웃 시간은 언제인가요?</span></span><span class="ic"><svg><use href="#i-chev"/></svg></span></button><div class="ans"><div><p class="ko">체크인은 오후 3시부터, 체크아웃은 오전 11시까지입니다. 이른 체크인과 늦은 체크아웃은 당일 객실 상황에 따라 안내해 드리며, 사전에 문의해 주시면 최대한 맞춰 드립니다.</p></div></div></div>
+      <div class="qa open"><button class="qa-q" type="button" aria-expanded="true"><span class="qt ko"><span>2.</span><span>세레인에서는 어떤 다이닝을 이용할 수 있나요?</span></span><span class="ic"><svg><use href="#i-chev"/></svg></span></button><div class="ans"><div><p class="ko">제철 재료로 준비하는 조식 레스토랑과 저녁 코스 다이닝, 라운지 바를 운영합니다. 인룸 다이닝은 오전 7시부터 밤 10시까지 가능하며, 식이 요청은 예약 시 미리 알려 주세요.</p></div></div></div>
+      <div class="qa"><button class="qa-q" type="button" aria-expanded="false"><span class="qt ko"><span>3.</span><span>머무는 동안 어떤 경험을 즐길 수 있나요?</span></span><span class="ic"><svg><use href="#i-chev"/></svg></span></button><div class="ans"><div><p class="ko">스파와 아침 요가, 지역 문화 탐방, 노을 산책 등 계절에 맞춘 프로그램을 준비해 두었습니다. 프런트에서 일정과 예약을 도와드립니다.</p></div></div></div>
+      <div class="qa"><button class="qa-q" type="button" aria-expanded="false"><span class="qt ko"><span>4.</span><span>기념일을 위한 특별한 준비를 요청할 수 있나요?</span></span><span class="ic"><svg><use href="#i-chev"/></svg></span></button><div class="ans"><div><p class="ko">네. 꽃 장식, 케이크, 프라이빗 디너 등 기념일 준비를 도와드립니다. 체크인 3일 전까지 문의 폼이나 전화로 알려 주시면 세심하게 준비하겠습니다.</p></div></div></div>
+      <div class="qa"><button class="qa-q" type="button" aria-expanded="false"><span class="qt ko"><span>5.</span><span>인룸 다이닝도 제공되나요?</span></span><span class="ic"><svg><use href="#i-chev"/></svg></span></button><div class="ans"><div><p class="ko">네, 객실에서도 조식과 정식 메뉴를 주문하실 수 있습니다. 객실 내 태블릿이나 프런트 전화로 주문하시면 30분 이내에 준비해 드립니다.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 문의 -->
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="cmain rv" data-slide>
+      <div class="chalf">
+        <div class="ctext">
+          <div class="mt"><h3 class="lab">Contact</h3><h2 class="h2">Begin Your Serein <i>Journey</i></h2></div>
+          <p class="p ko">머무름을 계획하고, 저희의 경험을 둘러보고, 세레인 팀과 함께 나만을 위한 기억에 남을 휴식을 만들어 보세요.</p>
+        </div>
+        <a href="tel:01048944905" class="crow"><svg><use href="#i-phone"/></svg><span>010-4894-4905</span></a>
+      </div>
+      <a href="mailto:6gsmake@gmail.com" class="crow"><svg><use href="#i-mail"/></svg><span>6gsmake@gmail.com</span></a>
+      <div class="crow ko"><svg><use href="#i-pin"/></svg><span>서울 강남구 테헤란로 12길 34, 세레인 호텔 앤 리조트</span></div>
+    </div>
+    <div class="cform">
+      <form action="/contact?design=STAP-1001" method="get" data-slide class="ko rv" onsubmit="location.href='/contact?design=STAP-1001';return false">
+        <label class="fld"><input type="text" name="name" placeholder="성함" autocomplete="name"></label>
+        <div class="f2">
+          <label class="fld"><input type="date" name="checkin" aria-label="체크인 날짜"><svg><use href="#i-cal"/></svg></label>
+          <label class="fld"><input type="date" name="checkout" aria-label="체크아웃 날짜"><svg><use href="#i-cal"/></svg></label>
+        </div>
+        <div class="f2">
+          <label class="fld"><input type="number" name="person" placeholder="인원" min="1"></label>
+          <label class="fld"><select name="type" aria-label="예약 유형"><option value="" selected>예약 유형</option><option>객실</option><option>스위트</option><option>풀빌라</option><option>단체 · 행사</option></select><svg><use href="#i-chev"/></svg></label>
+        </div>
+        <label class="fld ta"><textarea name="message" placeholder="메시지"></textarea></label>
+        <button type="submit" class="send">Send Enquiry</button>
+      </form>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- 푸터 -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="flogo"><a href="#" aria-label="세레인 홈"><svg><use href="#i-logo"/></svg></a></div>
+    <nav class="fmenu sans" aria-label="푸터 메뉴">
+      <ul>
+        <li><a href="#about" class="nl" data-split>About</a></li>
+        <li><a href="#rooms" class="nl" data-split>Rooms &amp; Suites</a></li>
+        <li><a href="#experiences" class="nl" data-split>Experiences</a></li>
+        <li><a href="#faq" class="nl" data-split>FAQ's</a></li>
+        <li><a href="#contact" class="nl" data-split>Contact</a></li>
+        <li><a href="#" class="nl" data-split>Privacy Policy</a></li>
+        <li><a href="#" class="nl" data-split>Terms &amp; Condition</a></li>
+      </ul>
+    </nav>
+    <div class="fbot">
+      <p class="ko">©2026 세레인. All rights Reserved · 민트클 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</p>
+      <div class="so"><a href="#" aria-label="인스타그램"><svg><use href="#i-ig"/></svg></a><a href="#" aria-label="페이스북"><svg><use href="#i-fb"/></svg></a><a href="#" aria-label="유튜브"><svg style="width:34px;height:24px"><use href="#i-yt"/></svg></a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
