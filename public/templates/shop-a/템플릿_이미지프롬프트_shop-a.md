@@ -1,7 +1,7 @@
 # shop-a 이미지 슬롯 프롬프트 (레퍼런스 실측 크기 — 생성은 표시 크기의 2배)
 
 > 공통 접미(상품 사진): `clean e-commerce product photo, soft studio light, light grey seamless background #F2F1EF, centered, no text, no logo, no watermark, high detail`
-> 현재 `assets/` 안의 파일은 같은 크기의 임시 플레이스홀더(회색 스튜디오 톤 + 도형). 아래 파일명·크기 그대로 덮어쓰면 끝난다. 컷아웃(PNG)은 **투명 배경** 필수.
+> 2026-09-07 사용자 생성 사진 45장 설치 완료 — 용량을 위해 전부 `.webp` 로 변환해 넣었다(JPG q82 · 컷아웃 PNG q88 알파 유지). 표의 파일명은 원본 기준이고 실제 파일은 같은 이름의 `.webp`. 다시 교체할 때도 같은 크기로 만들어 `.webp` 로 저장하면 된다.
 
 | 슬롯 | 파일 | 표시 크기 (1440) | 생성 크기 | 프롬프트 |
 |---|---|---|---|---|
