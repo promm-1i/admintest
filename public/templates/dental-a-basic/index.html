@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>루미덴탈 — 치과 · 의원 (프리미엄 디자인 A)</title>
+<meta name="description" content="회전 사진이 얹힌 소개 문장, 위아래로 엇갈린 진료 카드, 스크롤 슬랫으로 드러나는 사진, 비포·애프터 슬라이더, 고정 스크롤 진료 여정, 의료진 카드, 후기 캐러셀, FAQ, 오시는 길까지 갖춘 치과 프리미엄 원페이지.">
+<meta property="og:title" content="루미덴탈 — 치과 · 의원 (프리미엄 디자인 A)">
+<meta property="og:image" content="../dental-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰: 배경 #F2F5EF · 카드 #E9EBE6 · 잉크 #000 · 흐린 글자 rgba(0,0,0,.4) · 답변 #676767 · 라운드 20/12/30 · 컨테이너 1120(x160) · 섹션 pad 60 30
+   글꼴: 제목 Helvetica(윈도우는 Arial 대체) · 강조 Instrument Serif 이탤릭 · 본문 Inter 16/21.76 ls-.96 · 한글 Pretendard */
+:root{--bg:#F2F5EF;--card:#E9EBE6;--mute:rgba(0,0,0,.4);--ans:#676767;--line:rgba(0,0,0,.1);--ease:cubic-bezier(.2,.8,.2,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:#000;font-family:"Helvetica Neue",Helvetica,Arial,"Pretendard Variable",Pretendard,sans-serif;font-size:16px;line-height:1.36}
+.wrap{width:100%;max-width:1120px;margin:0 auto}
+.sec{position:relative;padding:60px 30px}
+.ko{font-family:"Pretendard Variable",Pretendard,"Helvetica Neue",Helvetica,Arial,sans-serif}
+.p{font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;font-size:16px;line-height:21.76px;letter-spacing:-.96px;color:var(--mute)}
+.p.ko{font-family:"Pretendard Variable",Pretendard,Inter,sans-serif;letter-spacing:-.3px}
+.h2{font-size:48px;line-height:56.64px;letter-spacing:-2.4px;font-weight:400}
+.h2 i,.h1 i,.h3 i{font-family:"Instrument Serif",serif;font-style:italic;color:var(--mute);letter-spacing:-2.4px}
+.h1{font-size:56px;line-height:62.72px;letter-spacing:-2.24px;font-weight:400}
+.h1 i{letter-spacing:-2.24px}
+.h3{font-size:32px;line-height:36.48px;letter-spacing:-1.6px;font-weight:400}
+.h3 i{letter-spacing:-1.6px}
+.h4{font-size:24px;line-height:28.32px;letter-spacing:-.48px;font-weight:400}
+.h5{font-size:20px;line-height:22.8px;letter-spacing:-1px;font-weight:400}
+.h6{font-size:16px;line-height:18.24px;letter-spacing:-.8px;font-weight:400}
+.h6 b{font-weight:700}
+.num{font-family:"Instrument Serif",serif;font-style:italic;font-size:24px;line-height:28.32px;letter-spacing:-.48px;color:var(--mute)}
+
+/* 버튼: 검정 그라데이션 알약(pad 12 24 · r30 · 14px) — 호버 시 글자가 위로 슬라이드(-52px · .3s), 화살표 대각선 교체 */
+.btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:30px;background:linear-gradient(#000,#676767);color:#fff;font-size:14px;line-height:19.04px;letter-spacing:-.28px;overflow:clip;white-space:nowrap}
+.btn.lt{background:linear-gradient(#fff,#BCBCBC);color:#000}
+.btn.sm{padding:8px 16px;gap:4px;font-family:Inter,sans-serif;font-size:12px;line-height:16.32px;letter-spacing:-.72px}
+.btn .tx{position:relative;display:block;overflow:visible}
+.btn .tx span{display:block;transition:transform .32s var(--ease)}
+.btn .tx span+span{position:absolute;left:0;top:100%;padding-top:33px}
+.btn:hover .tx span{transform:translateY(calc(-100% - 33px))}
+.btn .ar{position:relative;width:20px;height:20px;overflow:clip;flex:0 0 auto}
+.btn .ar svg{position:absolute;left:0;top:0;width:20px;height:20px;transition:transform .32s var(--ease)}
+.btn .ar svg+svg{transform:translate(-30px,30px)}
+.btn:hover .ar svg{transform:translate(30px,-30px)}
+.btn:hover .ar svg+svg{transform:none}
+.btn.sm .ar,.btn.sm .ar svg{width:16px;height:16px}
+
+/* 헤더: absolute 84 (pad 20 30) · 로고 148×40 · 햄버거 44 · Book 알약(흰 그라데이션) */
+.hdr{position:absolute;top:0;left:0;right:0;z-index:10;padding:20px 30px}
+.hdr .wrap{display:flex;justify-content:space-between;align-items:center;height:44px}
+.hdr .lw{display:flex;justify-content:space-between;align-items:center;width:492px;max-width:100%;flex:1 0 0}
+.logo{display:flex;align-items:center;gap:8px;height:40px;color:#000}
+.logo svg{width:44px;height:40px}
+.logo b{font-size:16px;font-weight:700;letter-spacing:-.4px;white-space:nowrap}
+.burger{position:relative;width:44px;height:44px;border-radius:28px;flex:0 0 auto}
+.burger i{position:absolute;left:14px;height:2px;border-radius:50px;background:#000;transition:transform .35s var(--ease),width .35s var(--ease),top .35s var(--ease)}
+.burger i:nth-child(1){top:17px;width:16px}
+.burger i:nth-child(2){top:21px;width:12px}
+.burger i:nth-child(3){top:25px;width:8px}
+.open .burger i{width:13px;left:16px;top:21px}
+.open .burger i:nth-child(1){transform:rotate(45deg)}
+.open .burger i:nth-child(2){transform:rotate(-45deg)}
+.open .burger i:nth-child(3){transform:rotate(-45deg)}
+.menu{display:none;position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.1);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.menu ul{position:absolute;left:0;right:0;top:128px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.menu li{display:flex;flex-direction:column;align-items:center;gap:2px}
+.menu a{display:block;font-size:32px;line-height:36.48px;letter-spacing:-1.6px;padding-bottom:3px}
+.open .menu{display:block}
+
+/* 히어로 900: 좌 콘텐츠 491(하단 정렬, 브랜드 티커까지 gap 178) · 우 사진 571×598 r20 + 폴라로이드 280×348 */
+.hero{position:relative;height:900px;padding:20px 30px 0;display:flex;align-items:center;overflow:clip}
+.hero .wrap{display:flex;align-items:flex-end;gap:58px;height:598px}
+.hero-l{display:flex;flex-direction:column;justify-content:center;gap:178px;padding-bottom:24px;height:550px;flex:1 0 0;width:491px;max-width:100%}
+.hero-t{display:flex;flex-direction:column;gap:32px;align-items:flex-start}
+.hero-t .p{max-width:304px}
+.hero-h{display:flex;flex-direction:column;gap:16px}
+.ticker{position:relative;height:24px;overflow:clip;width:100%}
+.ticker::before,.ticker::after{content:"";position:absolute;top:0;bottom:0;width:59px;z-index:3}
+.ticker::before{left:0;background:linear-gradient(270deg,rgba(242,245,239,0) -8%,#F2F5EF 81%)}
+.ticker::after{right:0;background:linear-gradient(90deg,rgba(242,245,239,0) 12%,#F2F5EF 76%)}
+.ticker ul{display:flex;align-items:center;gap:18px;width:max-content;height:24px}
+.ticker li{display:flex;align-items:center;gap:18px}
+.ticker svg{height:24px;width:auto;color:rgba(0,0,0,.55)}
+.hero-r{position:relative;width:571px;height:598px;border-radius:20px;overflow:clip;flex:0 0 auto}
+.hero-r>img{width:100%;height:100%;object-fit:cover;filter:blur(7px);transform:scale(1.04)}
+.polaroid{position:absolute;left:146px;top:125px;width:280px;height:348px;display:flex;flex-direction:column;justify-content:flex-end;overflow:clip;z-index:1}
+.polaroid .pi{position:absolute;left:-146px;top:-125px;width:571px;height:598px;max-width:none;object-fit:cover}
+.polaroid b{position:relative}
+.polaroid b{display:block;background:#fff;padding:9px 20px;font-size:16px;line-height:18.24px;letter-spacing:-.8px;font-weight:700;text-align:center;text-transform:uppercase}
+
+/* About: 3줄 문장 48px + 회전 사진 168×169 좌우 (±16°) */
+.about .wrap{display:flex;flex-direction:column;align-items:center;gap:32px}
+.about-t{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;width:100%}
+.about-t .h2{white-space:nowrap}
+.about-t .h2 br.m{display:none}
+.about-t img{position:absolute;top:1px;width:168px;height:169px;border-radius:20px;object-fit:cover;z-index:1}
+.about-t img.l{left:3px;transform:rotate(-16deg)}
+.about-t img.r{right:3px;transform:rotate(16deg)}
+
+/* 서비스: 카드 4 × 265 gap 20 · 418 tall · 홀수 사진 위/짝수 사진 아래 */
+.svc-w .wrap{display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.cards4{display:flex;gap:20px;align-items:center;width:100%}
+.svc{display:flex;flex-direction:column;gap:16px;width:265px;flex:1 0 0}
+.svc.rev{flex-direction:column-reverse}
+.svc.m5{display:none}
+.doc-d.m{display:none}
+.opt .ans .wm{display:none}
+.svc img{width:100%;height:329px;object-fit:cover;object-position:50% 0;border-radius:20px}
+.svc-t{display:flex;justify-content:space-between;align-items:flex-end;height:73px}
+.svc-t .h3{max-width:185px;flex:1 0 0}
+.det{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.det i{width:6px;height:6px;border-radius:10px;background:#000}
+.det .h6{color:var(--mute)}
+.det .h6 b{color:#000;margin-left:4px}
+
+/* Why: 헤딩 중앙 · 옵션 550 + 사진 549×524 */
+.why .wrap{display:flex;flex-direction:column;align-items:center;gap:64px}
+.head{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.head .p{max-width:436px}
+.why-g{display:flex;justify-content:space-between;align-items:flex-start;width:100%}
+.opts{display:flex;flex-direction:column;gap:24px;width:550px;max-width:100%}
+.opt{display:flex;flex-direction:column;padding-bottom:28px;box-shadow:inset 0 -1px 0 var(--line)}
+.opt.open{padding-bottom:15px}
+.opt:last-child{box-shadow:none;padding-bottom:0}
+.opt button{display:flex;align-items:center;gap:12px;width:100%;text-align:left}
+.opt .num{white-space:nowrap}
+.opt button .h3{flex:1 0 0}
+.opt .ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease),margin-top .4s var(--ease)}
+.opt .ans>div{overflow:hidden;min-height:0}
+.opt.open .ans{grid-template-rows:1fr;margin-top:12px}
+.opt .ans p{padding-left:28px;color:var(--ans)}
+.why-img{position:relative;width:549px;height:524px;flex:0 0 auto}
+.why-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:20px;opacity:0;transition:opacity .5s var(--ease)}
+.why-img img.on{opacity:1}
+
+/* 결과: 비포·애프터 1440×900 */
+.result{padding:60px 0}
+.result .wrap{max-width:none;display:flex;flex-direction:column;align-items:center;gap:64px}
+.ba{position:relative;width:100%;height:900px;overflow:hidden;background:#000;user-select:none}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ba .aft{clip-path:inset(0 0 0 50%)}
+.ba input{position:absolute;inset:0 -1px;width:calc(100% + 2px);height:100%;opacity:0;cursor:ew-resize;z-index:2;margin:0}
+.ba .hd{position:absolute;top:0;bottom:0;left:50%;width:82px;transform:translateX(-41px);display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1}
+.ba .hd i{display:flex;align-items:center;justify-content:center;width:82px;height:82px;border-radius:50%;background:#fff;color:#000;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.ba .hd svg{width:34px;height:34px}
+
+/* 응급: 930 컨테이너 · 사진 930×538 슬랫 리빌 */
+.em .wrap{max-width:930px;display:flex;flex-direction:column;align-items:center;gap:64px}
+.em .head{gap:32px}
+.em .head .p{max-width:636px}
+.em .head .hh{display:flex;flex-direction:column;gap:16px;align-items:center;max-width:636px}
+.slat{position:relative;overflow:clip;border-radius:20px}
+.slat img{width:100%;height:100%;object-fit:cover;border-radius:20px}
+.slat .sl{position:absolute;inset:0;display:flex;pointer-events:none}
+.slat .sl i{position:relative;flex:1 0 0;overflow:hidden}
+.slat .sl i::before{content:"";position:absolute;top:0;bottom:0;left:0;width:118%;background:linear-gradient(270deg,#fff 0%,rgba(255,255,255,.1) 121%);transform:translateX(0);transition:transform 1.3s cubic-bezier(.16,1,.3,1)}
+.slat.on .sl i::before{transform:translateX(120%)}
+.em .slat{width:930px;max-width:100%;height:538px}
+.em .slat img{object-position:100% 50%}
+
+/* 기술: 카드 1120×406 bg #E9EBE6 r20 pad 24 · 사진 536×358 + 텍스트 496 */
+.tech .wrap{display:flex;flex-direction:column;align-items:center;gap:64px}
+.tcards{display:flex;flex-direction:column;gap:32px;width:100%}
+.tc{display:flex;align-items:center;gap:40px;padding:24px;border-radius:20px;background:var(--card)}
+.tc.rev{flex-direction:row-reverse}
+.tc img{width:536px;height:358px;object-fit:cover;border-radius:20px;flex:1 0 0}
+.tc-t{display:flex;flex-direction:column;align-items:flex-start;gap:32px;max-width:496px;flex:1 0 0}
+.ico{display:flex;align-items:center;justify-content:center;width:48px;height:48px;border-radius:99px;background:rgba(0,0,0,.04)}
+.ico svg{width:24px;height:24px}
+.tc-t .tt{display:flex;flex-direction:column;gap:16px}
+
+/* 저니: 콘텐츠 sticky top 100 · 아래 900 스페이서 */
+.journey .wrap{display:flex;flex-direction:column}
+.jc{position:sticky;top:100px;display:flex;flex-direction:column;gap:64px}
+.jc-top{display:flex;justify-content:space-between;align-items:flex-start}
+.jc-h{display:flex;flex-direction:column;gap:16px;width:470px;flex:1 0 0}
+.jc-h .p{max-width:292px}
+.jc-h .h2{text-align:left}
+.jc .slat{width:645px;height:442px;flex:0 0 auto}
+.jsteps{display:flex;justify-content:center;align-items:center;width:100%}
+.jst{display:flex;flex-direction:column;gap:32px;width:280px}
+.js-n{display:flex;align-items:center;height:58px}
+.js-n b{display:flex;align-items:center;justify-content:center;width:56px;height:58px;padding:15px;border-radius:99px;box-shadow:inset 0 0 0 1px var(--line);font-weight:400}
+.js-n i{flex:1;height:1px;background:var(--line)}
+.js-t{display:flex;flex-direction:column;gap:16px;max-width:210px}
+.jspace{height:900px}
+
+/* 의료진: 작은 234×256 · 큰 358(사진 368 + 상세 58) */
+.exp{padding-bottom:120px}
+.exp .wrap{display:flex;flex-direction:column;gap:64px;align-items:flex-start}
+.docs{display:flex;align-items:center;gap:20px;width:100%}
+.doc{display:flex;flex-direction:column;gap:16px;width:234px;flex:0 0 auto}
+.doc img{width:234px;height:256px;object-fit:cover;border-radius:20px}
+.doc.big{width:358px}
+.doc.big img{width:358px;height:368px}
+.doc-d{display:flex;justify-content:space-between;align-items:flex-end}
+.doc-d .nm{display:flex;flex-direction:column;gap:8px;flex:1 0 0}
+.doc-d .ex{display:flex;align-items:center;gap:4px;white-space:nowrap}
+.doc-d .ex i{width:4px;height:4px;border-radius:10px;background:#000}
+.doc-d .ex b{font-weight:500;color:#000;font-family:Inter,sans-serif;letter-spacing:-.96px}
+
+/* 스토리: 사진 540×359 + 텍스트 540 */
+.stories{padding-bottom:120px}
+.stories .wrap{display:flex;align-items:center;gap:40px}
+.stories .slat{width:540px;height:359px;flex:1 0 0}
+.st-t{display:flex;flex-direction:column;align-items:flex-start;gap:64px;flex:1 0 0;width:540px}
+.st-t .hh{display:flex;flex-direction:column;gap:16px}
+
+/* 후기: bg #E9EBE6 · pad 120 30 · 1060 캐러셀 */
+.testi{background:var(--card);padding:120px 30px}
+.testi .wrap{position:relative;padding:0 30px}
+.tvp{overflow:clip;width:100%}
+.ttrack{display:flex;gap:10px;transition:transform 1.1s cubic-bezier(.16,1,.3,1)}
+.tslide{display:flex;align-items:flex-end;gap:32px;width:1060px;flex:0 0 auto}
+.t-pt{display:flex;flex-direction:column;gap:12px;width:218px;flex:0 0 auto}
+.t-pt img{width:218px;height:208px;object-fit:cover;border-radius:12px}
+.t-pt .inf{display:flex;justify-content:space-between}
+.t-det{display:flex;align-items:flex-start;gap:32px;flex:1 0 0;height:324px}
+.t-rev{display:flex;flex-direction:column;gap:32px;flex:1 0 0}
+.t-q{display:flex;flex-direction:column;max-width:650px}
+.t-q .h3 i{color:#878787;line-height:42.24px}
+.t-q svg{display:inline-block;width:49px;height:36px;vertical-align:top;margin-right:8px;color:#000}
+.t-who{display:flex;flex-direction:column;gap:8px}
+.t-dr{display:flex;flex-direction:column;align-items:flex-end;gap:12px;width:181px;flex:0 0 auto}
+.t-dr img{width:181px;height:168px;object-fit:cover;border-radius:12px}
+.t-dr .h6{text-align:right}
+.t-dr small{font-family:Inter,sans-serif;font-size:12px;line-height:16.32px;letter-spacing:-.72px;color:var(--mute);text-align:right;display:block;margin-top:6px}
+.tnav{position:absolute;right:30px;bottom:0;display:flex;gap:15px}
+.tnav button{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:40px;background:rgba(0,0,0,.2);color:#000}
+.tnav button svg{width:16px;height:16px}
+.tnav .prev svg{transform:scaleX(-1)}
+
+/* FAQ: pad 120 30 60 · 목록 835 우측 · 항목 pad-bottom 32 + 1px 라인 */
+.faq{padding:120px 30px 60px}
+.faq .wrap{display:flex;flex-direction:column;gap:64px}
+.faq-h{display:flex;justify-content:space-between;align-items:flex-start}
+.faq-h .hh{display:flex;flex-direction:column;gap:16px;flex:1 0 0}
+.faq-h .p{max-width:361px}
+.faqs{display:flex;flex-direction:column;gap:33px;width:835px;max-width:100%;align-self:flex-end}
+.qa{display:flex;flex-direction:column;padding-bottom:33px;box-shadow:inset 0 -1px 0 var(--line)}
+.qa-q{display:flex;justify-content:space-between;align-items:flex-start;width:100%;text-align:left}
+.qa-q .qn{display:flex;gap:12px;flex:1 0 0}
+.qa-q .num{min-width:16px;flex:0 0 auto;text-align:center;white-space:nowrap}
+.qa-q .h4{flex:1 0 0}
+.qa-q .ic{position:relative;width:32px;height:32px;padding:1px;flex:0 0 auto}
+.qa-q .ic i{position:absolute;inset:1px;border-radius:100px;transition:background .3s var(--ease)}
+.qa-q .ic i::before,.qa-q .ic i::after{content:"";position:absolute;left:9px;top:14px;width:12px;height:2px;background:#000;transition:transform .3s var(--ease),background .3s var(--ease)}
+.qa-q .ic i::after{transform:rotate(90deg)}
+.qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s var(--ease),margin-top .35s var(--ease);padding-left:28px}
+.qa-a>div{overflow:hidden;min-height:0}
+.qa.open .qa-a{grid-template-rows:1fr;margin-top:16px}
+.qa-a p{max-width:98%}
+.qa.open .ic i{background:#1B1B1B}
+.qa.open .ic i::before{background:#fff;transform:rotate(45deg)}
+.qa.open .ic i::after{background:#fff;transform:rotate(-45deg)}
+
+/* 인사이트: 카드 4 × 265 · 사진 178/352/178/290 */
+.ins .wrap{display:flex;flex-direction:column;gap:64px}
+.ins-h{display:flex;justify-content:space-between;align-items:center}
+.icards{display:flex;gap:20px;align-items:flex-start;width:100%}
+.ic-c{display:flex;flex-direction:column;gap:16px;width:265px;flex:1 0 0}
+.ic-c .cat{text-align:right}
+.ic-c img{width:100%;border-radius:20px;object-fit:cover}
+.ic-c.v3{gap:12px}
+.ic-c.v3 .h5{margin-top:4px}
+
+/* 오시는 길 */
+.find{padding-bottom:120px}
+.find .wrap{display:flex;flex-direction:column;gap:64px}
+.find-top{display:flex;justify-content:center;align-items:flex-start;gap:116px}
+.find-h{display:flex;flex-direction:column;gap:16px;max-width:360px;flex:1 0 0}
+.find-h .h2{display:flex;gap:6px;flex-wrap:wrap}
+.find .slat{width:644px;height:318px;margin-top:64px;flex:1 0 0}
+.find-b{display:flex;justify-content:space-between;align-items:flex-start}
+.feats{display:flex;flex-direction:column;gap:4px;width:560px;flex:1 0 0}
+.feats li{display:flex;align-items:center;gap:12px;font-size:12px;line-height:16.32px;letter-spacing:-.24px;height:24px}
+.feats svg{width:24px;height:24px}
+.find-r{display:flex;justify-content:space-between;align-items:center;max-width:645px;flex:1 0 0}
+.find-r .p{max-width:184px}
+
+/* 푸터: 검정 · pad 50 30 32 */
+.foot{background:#000;color:#fff;padding:50px 30px 32px}
+.foot .wrap{display:flex;flex-direction:column;gap:64px}
+.ft{display:flex;gap:224px;align-items:flex-start}
+.fd{display:flex;flex-direction:column;gap:64px;max-width:366px;flex:1 0 0}
+.fd .lg{display:flex;flex-direction:column;gap:24px}
+.fd .logo{color:#fff;height:34px}
+.fd .logo svg{width:40px;height:34px}
+.fd .p{color:rgba(255,255,255,.8)}
+.sub{display:flex;align-items:center;gap:4px;padding:4px 4px 4px 24px;border-radius:30px;background:#fff;height:52px;width:100%}
+.sub input{flex:1 1 0;min-width:0;padding:8px;font-size:16px;line-height:22.4px;letter-spacing:-.32px;color:#000}
+.sub input::placeholder{color:rgba(0,0,0,.4)}
+.sub .btn{padding:12px 24px 12px 34px;gap:6px}
+.fl{display:flex;gap:52px;flex:1 0 0}
+.fcol{display:flex;flex-direction:column;gap:24px}
+.fl .fcol:nth-child(1){width:104px}.fl .fcol:nth-child(2){width:127px}
+.fcol .h6{font-size:18px;line-height:20.52px;letter-spacing:-.9px;white-space:nowrap}
+.fcol ul{display:flex;flex-direction:column;gap:12px}
+.fcol ul a{display:block;padding-bottom:3px;font-family:Inter,sans-serif;font-size:16px;line-height:21.76px;letter-spacing:-.96px;color:rgba(255,255,255,.8);transition:color .4s}
+.fcol ul a:hover{color:#fff}
+.fct{display:flex;flex-direction:column;gap:12px;max-width:191px}
+.fct li{display:flex;gap:12px;align-items:flex-start}
+.fct svg{width:24px;height:24px;flex:0 0 auto;color:#fff}
+.fct .lb{display:flex;flex-direction:column;gap:8px}
+.fct small{font-size:12px;line-height:16.32px;letter-spacing:-.24px;color:rgba(255,255,255,.8)}
+.fct a{font-family:Inter,sans-serif;letter-spacing:-.96px;line-height:21.76px}
+.fb{display:flex;justify-content:space-between;align-items:center;padding-top:16px;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);font-size:14px;line-height:19.04px;letter-spacing:-.28px}
+
+/* 등장: Framer appear 실측 — y70→0 spring ≈ .8s (cubic-bezier .16,1,.3,1) · 스태거 .1s */
+html.js .rv{opacity:0;transform:translateY(70px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+html.js .rv.y50{transform:translateY(50px);transition-duration:.6s}
+html.js .rv.on{opacity:1;transform:none}
+@keyframes up70{from{opacity:0;transform:translateY(70px)}to{opacity:1;transform:none}}
+html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none}html.js .hero .btn{animation:none}.slat .sl{display:none}}
+
+/* ── 태블릿 810~1199 (실측 1024) ── */
+@media (max-width:1199px){
+  .sec{padding:40px 30px}
+  .h2{font-size:42px;line-height:49.56px;letter-spacing:-2.1px}
+  .h1{font-size:48px;line-height:53.76px;letter-spacing:-1.92px}
+  .hero{height:auto;padding:84px 30px 0}
+  .hero .wrap{flex-direction:column;align-items:flex-start;gap:40px;height:auto}
+  .hero-l{height:auto;gap:64px;padding-bottom:0;width:100%}
+  .hero-r{width:100%;height:550px}
+  .polaroid{left:50%;margin-left:-140px;top:100px}
+  .about-t .h2{white-space:normal;max-width:760px}
+  .about-t img{display:none}
+  .cards4{flex-wrap:wrap}
+  .svc{flex:0 0 calc(50% - 10px);width:auto}
+  .why-g{flex-direction:column;gap:40px;align-items:center}
+  .why-img{width:100%;max-width:549px}
+  .ba{height:600px}
+  .tc img{width:50%;height:auto;aspect-ratio:536/358}
+  .jc{position:relative;top:auto}
+  .jc-top{flex-direction:column;gap:40px}
+  .jc .slat{width:100%;height:auto;aspect-ratio:645/442}
+  .jspace{display:none}
+  .jsteps{gap:20px}
+  .jst{flex:1 0 0;width:auto}
+  .exp{padding-bottom:80px}
+  .docs{flex-wrap:wrap;justify-content:center}
+  .stories{padding-bottom:80px}
+  .stories .wrap{flex-direction:column}
+  .stories .slat{width:100%;height:auto;aspect-ratio:728/458}
+  .st-t{width:100%;padding-top:0}
+  .testi{padding:80px 30px}
+  .tslide{width:964px}
+  .faq{padding:80px 30px 40px}
+  .faqs{width:100%}
+  .icards{flex-wrap:wrap}
+  .ic-c{flex:0 0 calc(50% - 10px);width:auto}
+  .find{padding-bottom:80px}
+  .find-top{flex-direction:column;gap:40px}
+  .find .slat{width:100%;height:auto;aspect-ratio:644/318;margin-top:0}
+  .foot{padding:40px 30px 20px}
+  .ft{gap:60px;flex-direction:column}
+  .fl{width:100%}
+}
+/* ── 폰 ≤809 (실측 390) ── */
+@media (max-width:809px){
+  .sec{padding:30px 20px}
+  .h2{font-size:32px;line-height:37.76px;letter-spacing:-1.6px}
+  .h1{font-size:38px;line-height:42.56px;letter-spacing:-1.52px}
+  .h3{font-size:24px;line-height:27.36px;letter-spacing:-1.2px}
+  .h4{font-size:20px;line-height:22.8px;letter-spacing:-1px}
+  .hdr{padding:20px}
+  .hdr .lw{width:auto;flex:0 0 auto;gap:16px}
+  .hdr .btn{display:none}
+  .hdr .wrap{justify-content:space-between}
+  .hdr .burger{order:3}
+  .hero{padding:84px 20px 20px;min-height:0}
+  .hero .wrap{gap:56px}
+  .hero-l{gap:53px}
+  .hero-t{gap:16px}
+  .ticker,.ticker ul,.ticker svg{height:20px}
+  .hero-t{gap:24px;align-items:center;text-align:center}
+  .hero-h{align-items:center}
+  .hero-t .p{max-width:270px}
+  .hero .btn{font-family:Inter,sans-serif;font-size:12px;line-height:16.32px;letter-spacing:-.72px;padding:12px 16px}
+  .polaroid{width:148px;height:184px;left:50%;margin-left:-74px;top:70px}
+  .polaroid b{padding:12px 10px;font-size:12px;line-height:14px}
+  .about .wrap{gap:24px}
+  .about-t .h2{white-space:normal}
+  .cards4{flex-direction:column;gap:20px}
+  .svc,.ic-c{flex:0 0 auto;width:100%}
+  .svc-t{height:auto;align-items:center}
+  .svc-t .h3{max-width:185px}
+  .opt button .h3{font-size:24px}
+  .result{padding:30px 20px}
+  .ba .hd i{width:44px;height:44px}
+  .ba .hd svg{width:20px;height:20px}
+  .tc,.tc.rev{flex-direction:column;align-items:stretch;gap:24px;padding:16px}
+  .tc img{width:100%;flex:0 0 auto}
+  .tc-t{max-width:100%}
+  .jsteps{flex-direction:column;align-items:flex-start;gap:32px}
+  .jst{width:100%}
+  .jc-h{width:100%}
+  .jst{gap:19px}
+  .js-t .h4{font-size:20px;line-height:22.8px}
+  .js-t .p{font-size:12px;line-height:16.32px;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif}
+  .exp{padding-bottom:60px}
+  .docs{flex-direction:column;align-items:stretch}
+  .doc,.doc.big{width:100%}
+  .stories{padding-bottom:60px}
+  .testi{padding:60px 20px}
+  .testi .wrap{padding:0}
+  .t-det{flex-direction:column;height:auto;gap:24px;width:100%}
+  .t-q .h3{font-size:24px;line-height:27.36px}
+  .t-q .h3 i{line-height:31.68px}
+  .t-q svg{width:30px;height:22px}
+  .faq{padding:60px 20px 30px}
+  .ins-h{flex-direction:column;align-items:flex-start;gap:24px}
+  .icards{flex-direction:column}
+  .find{padding-bottom:60px}
+  .find-b{flex-direction:column;gap:32px}
+  .find-r{flex-direction:column;align-items:flex-start;gap:24px;width:100%}
+  .foot{padding:30px 20px 24px}
+  .ft{gap:40px}
+  .fl{flex-direction:column;gap:32px}
+  .fb{flex-direction:column;align-items:flex-start;gap:8px}
+  .svc.m5{display:flex}
+  .svc img{height:auto}
+  .ba{height:auto;border-radius:20px}
+  .em .slat{height:auto}
+  .doc img,.doc.big img{width:100%;height:auto}
+  .tslide{width:100%;flex-direction:column;align-items:flex-start}
+  .ic-c img{height:auto}
+  .hero-r{height:auto}
+  .t-dr{align-self:flex-end}
+  .svc.rev{flex-direction:column}
+  .svc img{aspect-ratio:728/689}
+  .opt .ans .wm{display:block;width:100%;max-width:550px;height:230px;object-fit:cover;border-radius:20px;margin:33px auto 0}
+  .why-g .why-img{display:none}
+  .why-img{display:none}
+  .hero-r{aspect-ratio:571/598}
+  .polaroid{top:50%;margin-top:-92px}
+  .polaroid .pi{width:calc(100vw - 40px);height:auto;left:calc((148px - (100vw - 40px))/2);top:calc((184px - (100vw - 40px)*598/571)/2)}
+  .ba{aspect-ratio:728/371}
+  .em .slat{aspect-ratio:3/2}
+  .doc .doc-d.m{display:flex}
+  .doc img,.doc.big img{aspect-ratio:728/748}
+  .stories .slat{aspect-ratio:728/458}
+  .find .slat{aspect-ratio:350/220}
+  .ic-c img{aspect-ratio:350/235}
+  .tvp{overflow:visible}
+  .ttrack{flex-direction:column;gap:24px;transform:none!important}
+  .tslide{gap:16px}
+  .t-pt{flex-direction:row;align-items:center;gap:12px;width:100%}
+  .t-pt img{width:58px;height:55px;border-radius:8px}
+  .t-pt .inf{gap:12px}
+  .t-dr{flex-direction:column}
+  .t-dr img{width:112px;height:104px}
+  .tnav{display:none}
+  .faq-h{flex-direction:row;gap:16px;align-items:flex-start}
+  .faq-h .btn{flex:0 0 auto}
+  .feats{width:100%}
+  .feats li{font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;height:auto}
+  .find-b{gap:12px}
+  .opt.open{padding-bottom:8px}
+  .ins-h{gap:16px;margin-bottom:-20px}
+  .fl{flex-direction:row;flex-wrap:wrap;gap:27px 119px}
+  .fl .fcol:nth-child(3){width:100%}
+  .about-t .h2 br.m{display:inline}
+  .svc-w .wrap{gap:41px}
+  .opt{padding-bottom:24px}
+  .result{padding:30px 20px 13px}
+  .result .wrap{gap:40px}
+  .em .wrap{gap:38px}
+  .em .head .btn{margin-top:-14px}
+  .tech .wrap{gap:40px}
+  .tc,.tc.rev{gap:8px}
+  .jsteps{gap:10px}
+  .exp .wrap{gap:40px}
+  .t-det{gap:0}
+  .ttrack{gap:20px}
+  .faq .wrap{gap:40px}
+  .faq{padding:60px 20px 58px}
+  .find-b{gap:0;margin-top:-8px}
+  .foot .wrap{gap:0}
+  .ft{gap:40px}
+  .fd{gap:24px}
+  .find-r{gap:24px}
+
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></symbol>
+    <symbol id="i-tooth" viewBox="0 0 44 40"><path fill="currentColor" d="M22 4c4-3 9-3 13 0 5 4 5 12 2 18-1 3-2 6-4 9-1 2-3 2-4 0l-3-9c-1-2-3-2-4 0l-3 9c-1 2-3 2-4 0-2-3-3-6-4-9C8 16 8 8 13 4c4-3 9-3 13 0z"/><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" d="M6 20c8-9 24-9 32 0"/></symbol>
+    <symbol id="i-handle" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 9 5 17l8 8M21 9l8 8-8 8"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15.5 5.5 3 3L8 19H5v-3z"/><path d="m13.5 7.5 3 3"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5h14a1.5 1.5 0 0 1 1.5 1.5v8A1.5 1.5 0 0 1 19 16.5h-7l-4.5 3v-3H5A1.5 1.5 0 0 1 3.5 15V7A1.5 1.5 0 0 1 5 5.5Z"/><path d="M8 9.5h8M8 12.5h5"/></symbol>
+    <symbol id="i-dcheck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3 12.5 4 4L15 8"/><path d="m11 16.5 1 1L21 8"/></symbol>
+    <symbol id="i-quote" viewBox="0 0 49 36"><path fill="currentColor" d="M0 36V19.2C0 8.6 6.4 1.6 17.6 0l2 5.2c-5.8 1.4-9.2 4.8-9.8 9.8H20V36H0Zm29 0V19.2C29 8.6 35.4 1.6 46.6 0l2 5.2c-5.8 1.4-9.2 4.8-9.8 9.8H49V36H29Z"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 3.5h3l1.5 4-2 1.2a11 11 0 0 0 6.3 6.3l1.2-2 4 1.5v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 3.5 5.5a2 2 0 0 1 2-2Z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+  </defs>
+</svg>
+
+<div class="page" id="page">
+<header class="hdr" id="hdr">
+  <div class="wrap">
+    <div class="lw">
+      <a href="#" class="logo" aria-label="루미덴탈 홈"><svg><use href="#i-tooth"/></svg><b>Lumi Dental</b></a>
+      <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+    </div>
+    <a href="/contact?design=HOSP-1001" class="btn lt"><span class="tx"><span>Book Appointment</span><span>Book Appointment</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+  </div>
+  <nav class="menu" id="menu" aria-label="전체 메뉴">
+    <ul>
+      <li><a href="#">Home</a></li><li><a href="#about">About</a></li><li><a href="#services">Services</a></li><li><a href="#tech">Technology</a></li><li><a href="#doctors">Doctors</a></li><li><a href="#services">Pricing</a></li><li><a href="#stories">Patient Stories</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<!-- 히어로 -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-l">
+      <div class="hero-t">
+        <div class="hero-h">
+          <h1 class="h1">Healthy Smiles Begin<br>With <i>Exceptional</i><br>Dental Care</h1>
+          <p class="p ko">전문의의 세심한 진료로 더 건강하고, 더 밝고, 더 자신 있는 미소를 만듭니다.</p>
+        </div>
+        <a href="#services" class="btn"><span class="tx"><span>Explore Services</span><span>Explore Services</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+      </div>
+      <div class="ticker" aria-label="협력 브랜드">
+        <ul id="ticker">
+          <li>
+            <svg viewBox="0 0 95 24"><text x="0" y="20" font-family="Arial,sans-serif" font-weight="900" font-size="22" fill="currentColor" letter-spacing="1">IPSUM</text></svg>
+            <svg viewBox="0 0 102 24"><text x="0" y="19" font-family="Georgia,serif" font-style="italic" font-size="20" fill="currentColor">Lucida</text></svg>
+            <svg viewBox="0 0 54 24"><text x="0" y="21" font-family="Arial,sans-serif" font-weight="900" font-size="24" fill="currentColor">LOGO</text></svg>
+            <svg viewBox="0 0 32 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3"/><path d="M2 12h20" stroke="currentColor" stroke-width="3"/></svg>
+            <svg viewBox="0 0 77 24"><rect x="0" y="3" width="18" height="18" rx="4" fill="currentColor"/><text x="24" y="19" font-family="Arial,sans-serif" font-weight="700" font-size="18" fill="currentColor">nova</text></svg>
+            <svg viewBox="0 0 63 24"><path d="M2 20 12 4l10 16z" fill="none" stroke="currentColor" stroke-width="3"/><text x="28" y="19" font-family="Arial,sans-serif" font-weight="700" font-size="17" fill="currentColor">ORA</text></svg>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="hero-r">
+      <img src="../dental-a/assets/hero.jpg" alt="" width="571" height="598" fetchpriority="high">
+      <div class="polaroid"><img class="pi" src="../dental-a/assets/hero.jpg" alt="" width="571" height="598"><b>Beautiful smiles start here</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="sec about" id="about">
+  <div class="wrap">
+    <div class="about-t rv">
+      <img class="l" src="../dental-a/assets/about-1.jpg" alt="" width="168" height="169">
+      <img class="r" src="../dental-a/assets/about-2.jpg" alt="" width="168" height="169">
+      <h2 class="h2"><i>Trusted dental care,</i><br class="m"> advanced<br>technology, <i>and personalized</i> treatments<br>for healthier, confident <i>smiles.</i></h2>
+    </div>
+    <a href="/contact?design=HOSP-1001" class="btn rv" style="--d:.1s"><span class="tx"><span>Book Appointment</span><span>Book Appointment</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+  </div>
+</section>
+
+<!-- 서비스 -->
+<section class="sec svc-w" id="services">
+  <div class="wrap">
+    <h2 class="h2 rv">Our Dental <i>Services</i></h2>
+    <div class="cards4">
+      <a href="/contact?design=HOSP-1001" class="svc rv"><img src="../dental-a/assets/svc-1.jpg" alt="" width="265" height="329" loading="lazy" decoding="async"><div class="svc-t"><h3 class="h3 ko">일반 진료</h3><div class="det"><i></i><span class="h6">STARTING<b>9만원</b></span></div></div></a>
+      <a href="/contact?design=HOSP-1001" class="svc rev rv" style="--d:.1s"><img src="../dental-a/assets/svc-2.jpg" alt="" width="265" height="329" loading="lazy" decoding="async"><div class="svc-t"><h3 class="h3 ko">심미 치료</h3><div class="det"><i></i><span class="h6">STARTING<b>35만원</b></span></div></div></a>
+      <a href="/contact?design=HOSP-1001" class="svc rv" style="--d:.2s"><img src="../dental-a/assets/svc-3.jpg" alt="" width="265" height="329" loading="lazy" decoding="async"><div class="svc-t"><h3 class="h3 ko">임플란트</h3><div class="det"><i></i><span class="h6">STARTING<b>180만원</b></span></div></div></a>
+      <a href="/contact?design=HOSP-1001" class="svc rev rv" style="--d:.3s"><img src="../dental-a/assets/svc-4.jpg" alt="" width="265" height="329" loading="lazy" decoding="async"><div class="svc-t"><h3 class="h3 ko">응급 진료</h3><div class="det"><i></i><span class="h6">STARTING<b>15만원</b></span></div></div></a>
+      <a href="/contact?design=HOSP-1001" class="svc m5 rv" style="--d:.4s"><img src="../dental-a/assets/svc-5.jpg" alt="" width="265" height="329" decoding="async"><div class="svc-t"><h3 class="h3 ko">치아 미백</h3><div class="det"><i></i><span class="h6">STARTING<b>30만원</b></span></div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- Why -->
+<section class="sec why" id="why">
+  <div class="wrap">
+    <div class="head rv">
+      <h2 class="h2">Why Patients Choose <i>Lumi Dental</i></h2>
+      <p class="p ko">전문 의료진이 첨단 장비와 개인 맞춤 진료로 매일 더 건강하고 밝은 미소를 만듭니다.</p>
+    </div>
+    <div class="why-g">
+      <div class="opts" id="opts">
+        <div class="opt open rv"><button type="button" aria-expanded="true"><span class="num">01</span><span class="h3 ko">디지털 정밀 진료</span></button><div class="ans"><div><p class="p ko">3D 스캐너와 디지털 진단 장비, 최신 치료 기법으로 더 빠르고 안전하며 편안한 치료를 제공합니다. 눈으로 직접 확인하는 정밀 진단이 나에게 꼭 맞는 치료 계획으로 이어지고, 불필요한 치료는 처음부터 걸러냅니다.</p><img class="wm" src="../dental-a/assets/why-1.jpg" alt="" width="549" height="524" decoding="async"></div></div></div>
+        <div class="opt rv" style="--d:.1s"><button type="button" aria-expanded="false"><span class="num">02</span><span class="h3 ko">경험 많은 전문의</span></button><div class="ans"><div><p class="p ko">보존 · 보철 · 교정 · 구강외과 전문의가 협진합니다. 각 분야 15년 이상의 임상 경험이 결과로 이어집니다.</p><img class="wm" src="../dental-a/assets/why-2.jpg" alt="" width="549" height="524" decoding="async"></div></div></div>
+        <div class="opt rv" style="--d:.2s"><button type="button" aria-expanded="false"><span class="num">03</span><span class="h3 ko">편안한 진료 환경</span></button><div class="ans"><div><p class="p ko">독립된 진료실과 조용한 대기 공간, 치료 전 충분한 설명으로 치과가 두려운 분도 마음 편히 오실 수 있습니다.</p><img class="wm" src="../dental-a/assets/why-3.jpg" alt="" width="549" height="524" decoding="async"></div></div></div>
+        <div class="opt rv" style="--d:.3s"><button type="button" aria-expanded="false"><span class="num">04</span><span class="h3 ko">1:1 맞춤 치료 계획</span></button><div class="ans"><div><p class="p ko">생활 습관과 예산, 일정까지 고려해 꼭 필요한 치료만 단계별로 제안합니다. 과잉 진료는 하지 않습니다.</p><img class="wm" src="../dental-a/assets/why-4.jpg" alt="" width="549" height="524" decoding="async"></div></div></div>
+        <div class="opt rv" style="--d:.4s"><button type="button" aria-expanded="false"><span class="num">05</span><span class="h3 ko">당일 응급 진료</span></button><div class="ans"><div><p class="p ko">갑작스러운 통증과 외상은 당일 진료합니다. 전화 한 통이면 가장 빠른 시간으로 안내해 드립니다.</p><img class="wm" src="../dental-a/assets/why-5.jpg" alt="" width="549" height="524" decoding="async"></div></div></div>
+      </div>
+      <div class="why-img rv" style="--d:.1s" id="whyimg">
+        <img class="on" src="../dental-a/assets/why-1.jpg" alt="" width="549" height="524" decoding="async"><img src="../dental-a/assets/why-2.jpg" alt="" width="549" height="524"><img src="../dental-a/assets/why-3.jpg" alt="" width="549" height="524"><img src="../dental-a/assets/why-4.jpg" alt="" width="549" height="524"><img src="../dental-a/assets/why-5.jpg" alt="" width="549" height="524">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 결과: 비포 애프터 -->
+<section class="sec result" id="results">
+  <div class="wrap">
+    <div class="head rv"><h2 class="h2">Real Results. Brighter,<br><i>Confident Smiles</i></h2></div>
+    <div class="ba" id="ba">
+      <img src="../dental-a/assets/before.jpg" alt="치료 전" width="1440" height="900">
+      <img class="aft" src="../dental-a/assets/after.jpg" alt="치료 후" width="1440" height="900">
+      <div class="hd"><i><svg><use href="#i-handle"/></svg></i></div>
+      <input type="range" min="0" max="100" value="50" aria-label="치료 전후 비교 슬라이더">
+    </div>
+  </div>
+</section>
+
+<!-- 응급 -->
+<section class="sec em" id="emergency">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="hh"><h2 class="h2">Expert Care When You <i>Need It Most.</i></h2><p class="p ko">갑작스러운 통증과 치아 외상은 예고 없이 찾아옵니다. 루미덴탈은 급한 치료가 필요할 때 빠르고 따뜻하게 대응합니다.</p></div>
+      <a href="tel:01048944905" class="btn"><span class="tx"><span>Get Emergency Care</span><span>Get Emergency Care</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+    </div>
+    <div class="slat" data-slat><img src="../dental-a/assets/emergency.jpg" alt="응급 진료 중인 의료진" width="930" height="538" loading="lazy" decoding="async"><div class="sl"><i></i><i></i><i></i><i></i><i></i></div></div>
+  </div>
+</section>
+
+<!-- 기술 -->
+<section class="sec tech" id="tech">
+  <div class="wrap">
+    <div class="head rv"><h2 class="h2">Smarter Technology.<br>More <i>Precise Care.</i></h2></div>
+    <div class="tcards">
+      <div class="tc rv"><img src="../dental-a/assets/tech-1.jpg" alt="" width="536" height="358" loading="lazy" decoding="async"><div class="tc-t"><span class="ico"><svg><use href="#i-eye"/></svg></span><div class="tt"><h4 class="h4 ko">디지털 정밀 진단</h4><p class="p ko">선명한 3D 영상이 정확한 임상 판단을 돕습니다. 치아와 잇몸 구조를 입체적으로 파악해 문제를 조기에 발견하고, 더 안전하고 예측 가능한 맞춤 치료 계획을 세웁니다. 검진 결과는 진료실 모니터로 함께 확인하며 설명해 드립니다.</p></div></div></div>
+      <div class="tc rev rv"><img src="../dental-a/assets/tech-2.jpg" alt="" width="536" height="358" loading="lazy" decoding="async"><div class="tc-t"><span class="ico"><svg><use href="#i-pen"/></svg></span><div class="tt"><h4 class="h4 ko">치료 계획 시뮬레이션</h4><p class="p ko">정확한 데이터가 예측 가능한 치료 결정을 뒷받침합니다. 상태를 명확히 평가하고 적절한 방법을 선택해, 더 정밀하고 편안하며 일관된 맞춤 진료를 제공합니다.</p></div></div></div>
+      <div class="tc rv"><img src="../dental-a/assets/tech-3.jpg" alt="" width="536" height="358" loading="lazy" decoding="async"><div class="tc-t"><span class="ico"><svg><use href="#i-chat"/></svg></span><div class="tt"><h4 class="h4 ko">눈으로 보는 환자 설명</h4><p class="p ko">영상 자료로 치료 과정과 선택지를 직접 확인합니다. 복잡한 치아 상태도 쉽게 이해할 수 있어, 맞춤 해결책과 예상 결과, 권장 치료를 더 명확하고 자신 있게 결정하실 수 있습니다.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 저니 -->
+<section class="sec journey" id="journey">
+  <div class="wrap">
+    <div class="jc">
+      <div class="jc-top rv">
+        <div class="jc-h"><h2 class="h2">Your Journey To A<br><i>Healthier Smile</i></h2><p class="p ko">가장 건강하고 자신 있는 미소까지, 전문의가 한 걸음씩 안내합니다.</p></div>
+        <div class="slat" data-slat><img src="../dental-a/assets/journey.jpg" alt="진료 중인 치과의사" width="645" height="442" loading="lazy" decoding="async"><div class="sl"><i></i><i></i><i></i><i></i><i></i></div></div>
+      </div>
+      <div class="jsteps">
+        <div class="jst rv"><div class="js-n"><b class="h4">01</b><i></i></div><div class="js-t"><h4 class="h4 ko">진료 예약</h4><p class="p ko">온라인 또는 전화로 편한 시간에 예약하세요.</p></div></div>
+        <div class="jst rv" style="--d:.1s"><div class="js-n"><b class="h4">02</b><i></i></div><div class="js-t"><h4 class="h4 ko">상담</h4><p class="p ko">전문의와 만나 원하는 미소와 고민을 이야기합니다.</p></div></div>
+        <div class="jst rv" style="--d:.2s"><div class="js-n"><b class="h4">03</b><i></i></div><div class="js-t"><h4 class="h4 ko">디지털 스캔</h4><p class="p ko">3D 정밀 스캔으로 정확한 치료 계획을 세웁니다.</p></div></div>
+        <div class="jst rv" style="--d:.3s"><div class="js-n"><b class="h4">04</b><i></i></div><div class="js-t"><h4 class="h4 ko">맞춤 치료</h4><p class="p ko">나에게 꼭 맞는 치료 계획을 받아 보세요.</p></div></div>
+      </div>
+    </div>
+    <div class="jspace" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- 의료진 -->
+<section class="sec exp" id="doctors">
+  <div class="wrap">
+    <h2 class="h2 rv">Meet Our Expert<br><i>Dental Specialists</i></h2>
+    <div class="docs">
+      <a href="#" class="doc rv"><img src="../dental-a/assets/doc-1.jpg" alt="교정과 전문의 한지민" width="234" height="256" loading="lazy" decoding="async"><div class="doc-d m"><div class="nm"><h4 class="h4 ko">한지민 원장</h4><p class="p ko">치아 교정</p></div><div class="ex"><i></i><span class="p">Exp:</span><b>20+ Years</b></div></div></a>
+      <a href="#" class="doc rv" style="--d:.1s"><img src="../dental-a/assets/doc-2.jpg" alt="임플란트 전문의 정우진" width="234" height="256" loading="lazy" decoding="async"><div class="doc-d m"><div class="nm"><h4 class="h4 ko">정우진 원장</h4><p class="p ko">임플란트</p></div><div class="ex"><i></i><span class="p">Exp:</span><b>20+ Years</b></div></div></a>
+      <a href="#" class="doc big rv" style="--d:.2s"><img src="../dental-a/assets/doc-3.jpg" alt="구강외과 전문의 박서윤" width="358" height="368" loading="lazy" decoding="async"><div class="doc-d"><div class="nm"><h4 class="h4 ko">박서윤 원장</h4><p class="p ko">구강외과</p></div><div class="ex"><i></i><span class="p">Exp:</span><b>15+ Years</b></div></div></a>
+      <a href="#" class="doc rv" style="--d:.3s"><img src="../dental-a/assets/doc-4.jpg" alt="심미치료 전문의 김소라" width="234" height="256" loading="lazy" decoding="async"><div class="doc-d m"><div class="nm"><h4 class="h4 ko">김소라 원장</h4><p class="p ko">심미 치료</p></div><div class="ex"><i></i><span class="p">Exp:</span><b>15+ Years</b></div></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- 스토리 -->
+<section class="sec stories" id="stories">
+  <div class="wrap">
+    <div class="slat" data-slat><img src="../dental-a/assets/stories.jpg" alt="웃고 있는 환자와 의사" width="540" height="359" loading="lazy" decoding="async"><div class="sl"><i></i><i></i><i></i><i></i><i></i></div></div>
+    <div class="st-t rv">
+      <div class="hh"><h1 class="h1">Real Patients. Real<br>Smiles. <i>Real Experiences</i></h1><p class="p ko">모든 미소에는 이야기가 있습니다. 맞춤 진료와 첨단 치료, 따뜻한 태도가 삶을 어떻게 바꿨는지 확인해 보세요.</p></div>
+      <a href="#reviews" class="btn"><span class="tx"><span>Read Patient Stories</span><span>Read Patient Stories</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- 후기 -->
+<section class="testi" id="reviews">
+  <div class="wrap">
+    <div class="tvp"><div class="ttrack" id="ttrack">
+      <div class="tslide">
+        <div class="t-pt"><img src="../dental-a/assets/patient-1.jpg" alt="" width="218" height="208"><div class="inf"><span class="p ko">행복한 환자</span><span class="p">2026</span></div></div>
+        <div class="t-det">
+          <div class="t-rev"><div class="t-q"><h3 class="h3 ko"><svg><use href="#i-quote"/></svg>루미덴탈에서 미소와 자신감을 되찾았어요. <i>의료진도 장비도 믿음직해서 망설임 없이 추천합니다.”</i></h3></div><div class="t-who"><h4 class="h4 ko">이지현</h4><p class="p ko">심미 치료 환자</p></div></div>
+          <div class="t-dr"><img src="../dental-a/assets/drsmall-1.jpg" alt="" width="181" height="168"><div><p class="h6 ko">김소라 원장</p><small class="ko">심미 치료</small></div></div>
+        </div>
+      </div>
+      <div class="tslide">
+        <div class="t-pt"><img src="../dental-a/assets/patient-2.jpg" alt="" width="218" height="208"><div class="inf"><span class="p ko">행복한 환자</span><span class="p">2026</span></div></div>
+        <div class="t-det">
+          <div class="t-rev"><div class="t-q"><h3 class="h3 ko"><svg><use href="#i-quote"/></svg>“처음부터 끝까지 특별한 경험이었습니다. <i>투명 교정은 완벽하게 맞았고, 직원분들 덕분에 방문할 때마다 편안하고 환영받는 기분이었어요.”</i></h3></div><div class="t-who"><h4 class="h4 ko">최민준</h4><p class="p ko">교정 환자</p></div></div>
+          <div class="t-dr"><img src="../dental-a/assets/drsmall-2.jpg" alt="" width="181" height="168"><div><p class="h6 ko">한지민 원장</p><small class="ko">치아 교정</small></div></div>
+        </div>
+      </div>
+      <div class="tslide">
+        <div class="t-pt"><img src="../dental-a/assets/patient-3.jpg" alt="" width="218" height="208"><div class="inf"><span class="p ko">행복한 환자</span><span class="p">2026</span></div></div>
+        <div class="t-det">
+          <div class="t-rev"><div class="t-q"><h3 class="h3 ko"><svg><use href="#i-quote"/></svg>몇 년을 미소를 감추고 살았는데, 정우진 원장님과 팀이 <i>자연스러운 임플란트를 만들어 주셨어요. 전 과정이 통증 없이 진행됐고 결과는 기대 이상이었습니다.”</i></h3></div><div class="t-who"><h4 class="h4 ko">강도윤</h4><p class="p ko">임플란트 환자</p></div></div>
+          <div class="t-dr"><img src="../dental-a/assets/drsmall-3.jpg" alt="" width="181" height="168"><div><p class="h6 ko">정우진 원장</p><small class="ko">임플란트</small></div></div>
+        </div>
+      </div>
+    </div></div>
+    <div class="tnav"><button type="button" class="prev" aria-label="이전 후기"><svg><use href="#i-chev"/></svg></button><button type="button" class="next" aria-label="다음 후기"><svg><use href="#i-chev"/></svg></button></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq" id="faq">
+  <div class="wrap">
+    <div class="faq-h rv">
+      <div class="hh"><h2 class="h2">Frequently Asked <i>Questions</i></h2><p class="p ko">진료와 치료에 대해 환자분들이 가장 많이 묻는 질문을 모았습니다. 더 궁금한 점은 언제든 문의해 주세요.</p></div>
+      <a href="/contact?design=HOSP-1001" class="btn sm"><span class="tx"><span>All FAQ</span><span>All FAQ</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+    </div>
+    <div class="faqs">
+      <div class="qa open rv y50"><button class="qa-q" type="button" aria-expanded="true"><span class="qn"><span class="num">01</span><span class="h4 ko">치과는 얼마나 자주 방문해야 하나요?</span></span><span class="ic"><i></i></span></button><div class="qa-a"><div><p class="p ko">정기 검진과 스케일링을 위해 6개월에 한 번 방문을 권합니다. 문제를 조기에 발견하고 구강 건강을 가장 좋은 상태로 유지할 수 있습니다.</p></div></div></div>
+      <div class="qa rv y50" style="--d:.1s"><button class="qa-q" type="button" aria-expanded="false"><span class="qn"><span class="num">02</span><span class="h4 ko">수면 치료도 가능한가요?</span></span><span class="ic"><i></i></span></button><div class="qa-a"><div><p class="p ko">네. 치료 중 불안이 큰 분을 위해 수면(진정) 치료를 제공합니다. 상태와 치료 내용에 따라 원장이 가장 적합한 방법을 안내합니다.</p></div></div></div>
+      <div class="qa rv y50" style="--d:.2s"><button class="qa-q" type="button" aria-expanded="false"><span class="qn"><span class="num">03</span><span class="h4 ko">임플란트 치료 기간은 얼마나 걸리나요?</span></span><span class="ic"><i></i></span></button><div class="qa-a"><div><p class="p ko">식립 후 뼈와 결합하는 기간을 포함해 보통 3~6개월이 걸립니다. 뼈 이식이 필요한 경우 기간이 조금 더 늘어날 수 있습니다.</p></div></div></div>
+      <div class="qa rv y50" style="--d:.3s"><button class="qa-q" type="button" aria-expanded="false"><span class="qn"><span class="num">04</span><span class="h4 ko">투명 교정도 일반 교정만큼 효과가 있나요?</span></span><span class="ic"><i></i></span></button><div class="qa-a"><div><p class="p ko">대부분의 경우 동일한 결과를 얻을 수 있습니다. 다만 치아 이동량이 큰 경우에는 브라켓 교정이 더 적합할 수 있어 진단 후 결정합니다.</p></div></div></div>
+      <div class="qa rv y50" style="--d:.4s"><button class="qa-q" type="button" aria-expanded="false"><span class="qn"><span class="num">05</span><span class="h4 ko">보험 적용이 되나요?</span></span><span class="ic"><i></i></span></button><div class="qa-a"><div><p class="p ko">스케일링, 임플란트(만 65세 이상 2개), 틀니 등 건강보험 항목은 적용됩니다. 실손 · 치아보험 서류도 발급해 드립니다.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 인사이트 -->
+<section class="sec ins" id="insights">
+  <div class="wrap">
+    <div class="ins-h rv">
+      <h2 class="h2">Dental <i>Insights</i></h2>
+      <a href="#" class="btn sm"><span class="tx"><span>View All</span><span>View All</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+    </div>
+    <div class="icards">
+      <a href="#" class="ic-c rv"><span class="h6 cat ko">치아 관리 팁</span><img src="../dental-a/assets/insight-1.jpg" alt="" width="265" height="178" decoding="async"><h5 class="h5 ko">더 건강하고 밝은 미소를 위한 하루 다섯 가지 습관</h5></a>
+      <a href="#" class="ic-c rv" style="--d:.1s"><span class="h6 cat ko">구강 건강</span><img src="../dental-a/assets/insight-2.jpg" alt="" width="265" height="352" decoding="async"><h5 class="h5 ko">아이의 첫 치과 방문은 언제가 좋을까요?</h5></a>
+      <a href="#" class="ic-c rv" style="--d:.2s"><span class="h6 cat ko">기술</span><img src="../dental-a/assets/insight-3.jpg" alt="" width="265" height="178" decoding="async"><h5 class="h5 ko">디지털 치의학이 바꾸는 요즘 치과 치료</h5></a>
+      <a href="#" class="ic-c v3 rv" style="--d:.3s"><span class="h6 cat ko">심미 치료</span><img src="../dental-a/assets/insight-4.jpg" alt="" width="265" height="290" decoding="async"><h5 class="h5 ko">치아 미백: 병원 시술과 셀프 미백의 차이</h5></a>
+    </div>
+  </div>
+</section>
+
+<!-- 오시는 길 -->
+<section class="sec find" id="visit">
+  <div class="wrap">
+    <div class="find-top rv">
+      <div class="find-h"><h2 class="h2">Visit <i>Lumi Dental</i></h2><p class="p ko">편안함과 세심함, 자신 있는 미소를 중심에 둔 진료 공간입니다.</p></div>
+      <div class="slat" data-slat><img src="../dental-a/assets/clinic.jpg" alt="루미덴탈 건물 외관" width="644" height="318" decoding="async"><div class="sl"><i></i><i></i><i></i><i></i><i></i></div></div>
+    </div>
+    <div class="find-b rv">
+      <ul class="feats ko">
+        <li><svg><use href="#i-dcheck"/></svg>건물 내 무료 주차</li>
+        <li><svg><use href="#i-dcheck"/></svg>휠체어 · 유모차 이용 가능</li>
+        <li><svg><use href="#i-dcheck"/></svg>독립 진료실 · 최신 장비</li>
+        <li><svg><use href="#i-dcheck"/></svg>조용한 대기 공간</li>
+      </ul>
+      <div class="find-r">
+        <p class="p ko">서울 강남구 테헤란로 12길 34, 루미타워 5층</p>
+        <a href="#" class="btn"><span class="tx"><span>Get Directions</span><span>Get Directions</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="ft">
+      <div class="fd">
+        <div class="lg">
+          <a href="#" class="logo" aria-label="루미덴탈"><svg><use href="#i-tooth"/></svg><b style="font-size:22px">Lumi Dental</b></a>
+          <p class="p ko">첨단 장비와 경험 많은 전문의, 개인 맞춤 치료로 건강하고 자신 있는 미소를 만드는 치과입니다. 정직한 진료를 약속합니다.</p>
+        </div>
+        <form class="sub" onsubmit="return false"><input type="email" placeholder="이메일 주소" aria-label="이메일 주소"><button type="submit" class="btn"><span class="tx"><span>Subscribe</span><span>Subscribe</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></button></form>
+      </div>
+      <div class="fl">
+        <div class="fcol"><p class="h6">QUICK LINKS</p><ul class="ko"><li><a href="#">홈</a></li><li><a href="#about">병원 소개</a></li><li><a href="#services">진료 안내</a></li><li><a href="#doctors">의료진</a></li><li><a href="#stories">치료 사례</a></li></ul></div>
+        <div class="fcol"><p class="h6">SERVICES</p><ul class="ko"><li><a href="#services">일반 진료</a></li><li><a href="#services">심미 치료</a></li><li><a href="#services">임플란트</a></li><li><a href="#services">치아 교정</a></li><li><a href="#emergency">응급 진료</a></li></ul></div>
+        <div class="fcol"><p class="h6">GET IN TOUCH</p>
+          <ul class="fct">
+            <li><svg><use href="#i-phone"/></svg><div class="lb"><small>CALL US</small><a href="tel:01048944905">010-4894-4905</a></div></li>
+            <li><svg><use href="#i-mail"/></svg><div class="lb"><small>EMAIL US</small><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></div></li>
+            <li><svg><use href="#i-pin"/></svg><div class="lb"><small>VISIT US</small><a href="#visit" class="ko">서울 강남구 테헤란로 12길 34, 루미타워 5층</a></div></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="fb ko"><p>Design by <b style="font-weight:400">민트클</b> · 사업자등록번호 266-07-03678</p><p>Copyright © 루미덴탈 All Rights Reserved</p><p>통신판매업신고 제2026-서울강남-00480호</p></div>
+  </div>
+</footer>
+</div>
+
+</body>
+</html>

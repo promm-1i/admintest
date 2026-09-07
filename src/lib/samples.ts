@@ -49,6 +49,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "dental-a-template",
+    industry: "치과 · 병원 · 의원 홈페이지",
+    title: "치과 · 병원 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 치과 · 병원 · 의원",
+    purpose:
+      "블러 사진 위 폴라로이드 창이 뚫린 히어로와 협력사 티커, 회전 사진이 얹힌 소개 문장, 사진 위/아래가 번갈아 놓이는 진료 카드, 항목을 열면 사진이 바뀌는 선택 이유 아코디언, 드래그로 비교하는 치료 전후 슬라이더, 슬랫 리빌 사진, 고정된 채 단계가 올라오는 진료 과정, 의료진 카드, 후기 슬라이더, FAQ, 인사이트, 오시는 길, 뉴스레터 푸터까지 갖춘 병원 프리미엄 원페이지입니다. 사진과 진료 항목만 바꾸면 치과 · 피부과 · 한의원 · 동물병원 어디에나 적용됩니다.",
+    features: ["폴라로이드 히어로 · 협력사 티커", "사진 교체 아코디언 · 치료 전후 비교 슬라이더", "슬랫 리빌 · 고정 진료 과정 · 의료진 카드", "후기 슬라이더 · FAQ · 인사이트 · 오시는 길"],
+    idealFor: "치과, 피부과 · 성형외과, 한의원, 정형외과 · 재활의학과, 동물병원",
+    image: "/thumbs/dental-a.jpg",
+    liveUrl: "/templates/dental-a/",
+    industryKey: "hospital",
+    designCode: "HOSP-1001",
+    premium: true,
+  },
+  {
     slug: "fitness-a-template",
     industry: "피트니스 · 퍼스널 트레이닝 홈페이지",
     title: "피트니스 · PT 스튜디오 홈페이지 (프리미엄 디자인 A)",
