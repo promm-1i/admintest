@@ -1,0 +1,673 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>하우스 — 부동산 중개 · 매물 플랫폼 (프리미엄 디자인 A)</title>
+<meta name="description" content="구름 낀 하늘 위 고정 히어로, 스크롤에 따라 단어가 드러나는 소개 문장, 풀블리드 스택 매물 3장, 클릭 전환 서비스 카드, 매물 그리드, 화면 가득 커지는 영상, 후기 티커, FAQ 아코디언, 대형 워드마크 푸터로 구성한 부동산 원페이지 기본형입니다.">
+<meta property="og:title" content="하우스 — 부동산 중개 · 매물 플랫폼 (프리미엄 디자인 A)">
+<meta property="og:image" content="../estate-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600,700,701&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Special+Gothic:wght@700&family=Inter:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰: 잉크 rgb(8,11,15) · 회색 텍스트 rgb(75,91,99) · 카드 회색 rgb(246,246,246) · 컨테이너 1320(pad 32 → 콘텐츠 1256) · 라운드 8/10/12/15/16/20/30 · 글꼴 Switzer(라틴) + Special Gothic(h1) + Pretendard(한글) */
+:root{--ink:#080B0F;--grey:#4B5B63;--g6:#F6F6F6;--g5:#F5F5F5;--ease:ease-out}
+html{scroll-behavior:smooth}
+body{background:#fff;color:var(--ink);font-family:"Switzer","Pretendard",-apple-system,BlinkMacSystemFont,sans-serif;font-size:16px;line-height:1.6}
+.wrap{width:100%;max-width:1320px;margin:0 auto;padding:0 32px}
+.page{overflow:clip}
+.sec{position:relative;z-index:1;background:#fff;padding:80px 0}
+.lab{display:flex;align-items:center;gap:7px;color:var(--grey);font-size:14px;line-height:22.4px;font-weight:400}
+.lab i{display:block;width:13px;height:13px;border-radius:10px;padding:3px;box-shadow:inset 0 0 0 1px var(--grey);flex:0 0 auto}
+.lab i::before{content:"";display:block;width:7px;height:7px;border-radius:10px;background:var(--grey)}
+.hd{display:flex;justify-content:space-between;align-items:flex-end}
+.hd-l{width:600px;max-width:100%;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.h2{font-size:48px;line-height:67.2px;font-weight:600;color:var(--ink)}
+.hd-r{width:400px;max-width:100%;flex:0 0 auto}
+.desc{font-size:18px;line-height:28.8px;font-weight:500;color:var(--grey)}
+.ic{display:block;flex:0 0 auto}
+
+/* 버튼 — 실측: 높이 44 · pad 8 8 8 16 · gap 12 · r12 · 그림자 0 5 15 rgba(0,0,0,.2) · 화살표 박스 28 r8, 호버 시 화살표 2개가 28px 오른쪽으로 슬라이드(0.5s ease-out) */
+.btn{display:inline-flex;align-items:center;gap:12px;height:44px;padding:8px 8px 8px 16px;border-radius:12px;background:var(--ink);color:#fff;box-shadow:0 5px 15px rgba(0,0,0,.2);font-size:14px;line-height:22.4px;font-weight:400;white-space:nowrap;flex:0 0 auto}
+.btn .ar{position:relative;width:28px;height:28px;border-radius:8px;background:#fff;overflow:hidden;flex:0 0 auto;color:var(--ink)}
+.btn .ar svg{position:absolute;top:0;left:0;width:28px;height:28px;transition:transform .5s var(--ease),opacity .5s var(--ease)}
+.btn .ar svg.b{left:-28px;opacity:0}
+.btn:hover .ar svg{transform:translateX(28px)}
+.btn:hover .ar svg.a{opacity:0}.btn:hover .ar svg.b{opacity:1}
+.btn.lt{background:var(--g6);color:#000}.btn.lt .ar{background:var(--ink);color:#fff}
+.btn.o{background:transparent;color:var(--ink);padding:12px 20px;box-shadow:none;position:relative;transition:background-color .4s var(--ease)}
+.btn.o::after{content:"";position:absolute;inset:0;border:1px solid var(--ink);border-radius:12px;pointer-events:none}
+.btn.o:hover{background:rgba(255,255,255,.4)}
+
+/* 헤더 — 고정, 배경 투명, 84 높이(pad 15 8) · 안쪽 1320(pad 0 32) 54 높이 · 링크 14/22.4 gap 25 · 호버 밑줄 1px 이 -55px 에서 슬라이드 인 */
+.top{position:fixed;top:0;left:0;right:0;z-index:4}
+.nav{display:flex;justify-content:center;padding:15px 8px;height:84px}
+.nav-in{width:100%;max-width:1320px;padding:0 32px;display:flex;justify-content:space-between;align-items:center;height:54px}
+.logo{display:flex;align-items:center;gap:4px;width:102px;height:30px;color:var(--ink)}
+.logo svg{width:26px;height:26px}
+.logo b{font-size:22px;line-height:26px;font-weight:700;letter-spacing:-.02em}
+.nav-r{display:flex;align-items:center;gap:25px;padding:5px 0}
+.links{display:flex;gap:25px;padding:2px 0}
+.nl{display:block;position:relative;font-size:14px;line-height:22.4px;color:var(--ink);padding-bottom:1px}
+.nl .bar{position:absolute;left:0;right:0;bottom:0;height:1px;overflow:hidden}
+.nl .bar i{position:absolute;inset:0;background:#fff;opacity:0;transform:translateX(-55px);transition:transform .5s var(--ease),opacity .5s var(--ease),background-color .5s var(--ease)}
+.nl:hover .bar i{opacity:1;transform:none;background:var(--ink)}
+.burger{display:none}
+.mmenu{display:none}
+
+/* 히어로 — sticky top 0 · 1445 · pad-top 180 · 하늘 그라데이션 · 구름 PNG 4장(투명, 회전 22°/-9°, op .6/.7) · 집 사진 1440×931 (y514) · 스크롤 시 텍스트 scale 1→.875 op 1→.75 (0~500px), y +0.1*scroll, 구름 안쪽으로 모임 */
+.hero{position:sticky;top:0;z-index:1;height:1445px;padding-top:180px;background:linear-gradient(rgb(195,229,247) 0%,rgb(49,96,115) 100%);display:flex;flex-direction:column;align-items:center;gap:50px;--p:0;--sy:0;--sc:1;--op:1;--ty:0px}
+.cl{position:absolute;pointer-events:none;will-change:transform}
+.cl img{width:100%;height:auto}
+.cl1{left:-536px;top:91px;width:889px;opacity:.6;z-index:2;transform:translateX(calc(var(--p)*78px))}
+.cl2{left:-958px;top:291px;width:1752px;opacity:.6;z-index:1;transform:translateX(calc(var(--p)*62px))}
+.cl3{right:-450px;top:231px;width:1116px;opacity:.7;z-index:1;transform:translateX(calc(var(--p)*-62px)) rotate(22deg)}
+.cl4{right:-512px;top:39px;width:881px;opacity:.6;z-index:2;transform:translateX(calc(var(--p)*-93px)) rotate(-9deg)}
+.hero-c{position:relative;z-index:1;width:100%;max-width:1320px;padding:0 32px;display:flex;flex-direction:column;align-items:center;gap:10px;transform:translateY(var(--ty)) scale(var(--sc));opacity:var(--op);will-change:transform,opacity}
+.hero-h{display:flex;flex-direction:column;align-items:center;gap:10px;width:100%}
+.chip{display:flex;align-items:center;gap:6px;height:42px;padding:8px 14px 8px 8px;border-radius:100px;background:rgba(255,255,255,.3);box-shadow:0 10px 41px rgba(0,0,0,.04),0 2px 2px rgba(0,0,0,.02);font-size:14px;line-height:22.4px;color:var(--grey);white-space:nowrap}
+.chip-av{position:relative;width:56px;height:26px;flex:0 0 auto}
+.chip-av img{position:absolute;top:0;width:26px;height:26px;border-radius:100px;box-shadow:0 0 0 1px #fff;object-fit:cover}
+.chip-av img:nth-child(1){left:0}.chip-av img:nth-child(2){left:15px}.chip-av img:nth-child(3){left:30px}
+.hero h1{font-family:"Special Gothic","Pretendard",sans-serif;font-size:100px;line-height:100px;font-weight:700;letter-spacing:-1px;text-align:center;color:var(--ink);width:100%}
+.hero-d{width:600px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:20px}
+.hero-d p{text-align:center}
+.cta{display:flex;align-items:center;justify-content:center;gap:10px;width:100%}
+.house{position:relative;z-index:2;width:100%;height:931px;transform:translateY(calc(var(--sy)*-1px));will-change:transform}
+.house img{width:100%;height:100%;object-fit:cover}
+/* 로드 등장 — Framer appear: opacity .001→1 · y 60→0 · spring(stiffness 320, damping 60) · 지연 0 / .2 / .25 / .3 */
+@keyframes up{from{opacity:.001;transform:translateY(60px)}to{opacity:1;transform:none}}
+.chip{animation:up .9s cubic-bezier(.2,.75,.25,1) both}
+.hero h1{animation:up .9s cubic-bezier(.2,.75,.25,1) .2s both}
+.hero-d p{animation:up .9s cubic-bezier(.2,.75,.25,1) .25s both}
+.cta{animation:up .9s cubic-bezier(.2,.75,.25,1) .3s both}
+
+/* Our Impact — 736 · 흰 구름 띠 1505×464 두 장이 상단(-260/-130) 에서 히어로를 덮음 · 3열: 사진 314×338 r15 / 스탯 3장(608, gap 5, r10 pad 25) / 사진 */
+.impact{overflow:visible}
+.band{position:absolute;left:-32px;width:1505px;height:464px;z-index:0;pointer-events:none}
+.band1{top:-260px}.band2{top:-130px}
+.band img{width:100%;height:100%;object-fit:cover}
+.impact .wrap{position:relative;z-index:1}
+.metrics{display:flex;flex-direction:column;gap:64px}
+.imp-grid{display:flex;gap:10px;align-items:center}
+.imp-img{width:314px;height:338px;border-radius:15px;overflow:hidden;flex:0 0 auto}
+.imp-img img{width:100%;height:100%;object-fit:cover}
+.stats{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:5px}
+.stat{background:var(--g6);border-radius:10px;padding:25px;display:flex;justify-content:space-between;align-items:center;height:110.6px}
+.stat:first-child{height:107.6px}
+.stat .n{font-size:48px;line-height:48px;font-weight:600;letter-spacing:-.96px;display:inline-flex;align-items:center;height:57.6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat .n .dg{display:inline-flex;flex-direction:column;height:1.2em;width:.6em;overflow:hidden;text-align:center;line-height:1.2em}
+.stat .n .dg b{display:block;height:1.2em;font-weight:inherit;transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.stat h6{font-size:22px;line-height:30.8px;font-weight:500;color:#191919;white-space:nowrap}
+
+/* About — bg #f6f6f6 · 1060(pad 80) · 패턴 이미지 op .17 · 54/64.8 500 자간 -2.16 문장이 sticky top 310 · 단어별 blur 10→0 · 색 rgba(209,213,219,0)→잉크 · .4s ease-out */
+.about{background:var(--g6)}
+.about-bg{position:absolute;inset:0;opacity:.17;z-index:0}
+.about-bg img{width:100%;height:100%;object-fit:cover}
+.about-in{position:relative;z-index:2;height:900px;max-width:1320px;margin:0 auto;padding:0 32px}
+.words{position:sticky;top:310px;text-align:center;font-size:54px;line-height:64.8px;font-weight:500;letter-spacing:-2.16px;color:var(--ink)}
+.words em{font-style:italic;font-weight:700;line-height:48.6px}
+.aw{display:inline-block;white-space:pre-wrap}
+html.js .aw{color:rgba(209,213,219,0);filter:blur(10px);transition:color .4s var(--ease),filter .4s var(--ease)}
+html.js .aw.on{color:var(--ink);filter:blur(0)}
+
+/* Top Properties — pad-top 80 · 헤딩 · 1440×900 패널 3장 sticky 스택 · 패널 마스크(위/아래 30%, 중앙 65%) · 글래스 카드 blur 5 rgba(11,17,23,.35) r15 pad 0 40 40 gap 15 */
+.sig{padding:80px 0 0;display:flex;flex-direction:column;gap:64px}
+.feats{position:relative;z-index:2;background:var(--ink);max-width:1920px;margin:0 auto;width:100%}
+.feat{position:sticky;top:0;height:900px;overflow:hidden;background:var(--ink);display:flex;align-items:center;justify-content:center;-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.65) 53.15%,rgba(0,0,0,.3) 100%);mask-image:linear-gradient(0deg,rgba(0,0,0,.3) 0%,rgba(0,0,0,.65) 53.15%,rgba(0,0,0,.3) 100%)}
+.feat>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.fc{position:relative;z-index:1;background:rgba(11,17,23,.35);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);border-radius:15px;padding:0 40px 40px;display:flex;flex-direction:column;align-items:center;gap:15px;box-shadow:0 3px 10px rgba(11,17,23,.5);overflow:hidden}
+.fp{background:rgba(255,255,255,.07);padding:5px 15px;font-size:18px;line-height:28.8px;font-weight:500;color:var(--g6);text-align:center}
+.ft{display:flex;flex-direction:column;align-items:center;gap:5px}
+.ft h4{font-size:34px;line-height:47.6px;font-weight:500;color:#fff;text-align:center;white-space:nowrap}
+.ft p{font-size:16px;line-height:25.6px;font-weight:500;color:var(--g6);text-align:center;white-space:nowrap}
+
+/* Services — 3열 672 + 280 + 280 gap 12 · 553 · 활성: 잉크 배경 + 대각선 패턴(64px) + 집 컷아웃 556×512 하단 + 상단 어둠 201 · 번호 120/96 500 자간 -5.12 · 클릭으로 활성 전환(.4s) */
+.svcs{display:flex;gap:12px;height:553px;width:100%}
+.svc{position:relative;flex:0 0 auto;width:280px;height:553px;border-radius:20px;overflow:hidden;background:var(--g6);cursor:pointer;transition:width .4s var(--ease),background-color .4s var(--ease)}
+.svc.on{width:672px;background:var(--ink)}
+.svc-pat{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='126' height='126'%3E%3Cg stroke='rgba(136,136,136,0.2)' stroke-width='21' fill='none'%3E%3Cpath d='M-21 126 126 -21M21 168 168 21M-63 84 84 -63'/%3E%3C/g%3E%3C/svg%3E") 0 0/64px auto repeat;opacity:0;transition:opacity .4s var(--ease)}
+.svc.on .svc-pat{opacity:1}
+.svc-img{position:absolute;left:50%;top:81px;width:556px;height:512px;transform:translateX(-50%);object-fit:contain;object-position:50% 100%;-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,0) 0%,#000 55%);mask-image:linear-gradient(0deg,rgba(0,0,0,0) 0%,#000 55%);opacity:0;transition:opacity .4s var(--ease)}
+.svc.on .svc-img{opacity:1}
+.svc-sh{position:absolute;left:0;right:0;top:-15px;height:201px;background:linear-gradient(rgb(9,11,13) 6%,rgba(8,10,12,0) 100%);opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
+.svc.on .svc-sh{opacity:1}
+.svc-num{position:absolute;top:25px;right:25px;width:161.2px;height:106px;padding:5px;font-size:120px;line-height:96px;font-weight:500;letter-spacing:-5.12px;text-align:center;color:#C7C7C7;transition:color .4s var(--ease);white-space:nowrap}
+.svc.on .svc-num{color:#fff}
+.svc-txt{position:absolute;left:25px;top:25px;width:230px;display:flex;flex-direction:column;gap:10px;color:var(--ink);transform:translateY(403.4px);transition:transform .4s var(--ease),color .4s var(--ease),width .4s var(--ease)}
+.svc.on .svc-txt{width:272px;color:#fff;transform:none}
+.svc-txt small{display:block;font-size:14px;line-height:22.4px}
+.svc-txt h5{font-size:28px;line-height:33.6px;font-weight:500}
+
+/* Listings — 2×2 그리드 620.5×420 gap 15 · 카드 r16 pad 25 · 상태 칩 r99 pad 5 12 · 하단 이름 16 / 가격 28 / 상세 16 gap 10 · 하단 225 backdrop blur 30 마스크 · 호버 화살표 45 r9 */
+.hd-r.col{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.lgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.lcard{position:relative;display:block;height:420px;border-radius:16px;overflow:hidden;background:var(--ink)}
+.lcard>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.lblur{position:absolute;left:0;right:0;bottom:0;height:225px;background:rgba(0,0,0,.2);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);-webkit-mask-image:linear-gradient(rgba(0,0,0,0) 0%,#000 66.2%);mask-image:linear-gradient(rgba(0,0,0,0) 0%,#000 66.2%)}
+.lstat{position:absolute;top:25px;right:25px;z-index:1;height:32.4px;padding:5px 12px;border-radius:99px;background:#fff;display:flex;align-items:center;gap:5px;font-size:14px;line-height:22.4px;color:var(--ink);box-shadow:0 6px 16px rgba(0,0,0,.1);white-space:nowrap}
+.lstat svg{width:12px;height:13px}
+.lbot{position:absolute;left:25px;right:25px;bottom:25px;z-index:1;display:flex;align-items:flex-end;justify-content:center;gap:10px}
+.linfo{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:10px;color:var(--g5)}
+.lname{font-size:16px;line-height:22.4px}
+.lprice{font-size:28px;line-height:33.6px;font-weight:500;color:#fff}
+.ldet{display:flex;align-items:center;gap:17px;font-size:16px;line-height:22.4px;white-space:nowrap}
+.ldet span{display:flex;align-items:center;gap:6px}
+.ldet svg{width:16px;height:16px;flex:0 0 auto}
+.ldet i{width:1px;height:22.4px;background:var(--g5);display:block}
+.larr{width:45px;height:45px;border-radius:9px;background:rgba(255,255,255,.25);opacity:0;transition:opacity .3s var(--ease);display:flex;align-items:center;justify-content:center;color:#fff;flex:0 0 auto}
+.larr svg{width:45px;height:45px}
+.lcard:hover .larr{opacity:1}
+
+/* Highlighted — 헤딩 후 gap 10 · sticky 구간 2500(wrap 900 sticky top 0 overflow hidden) · 영상 400×276 r20 → 스크롤 500px 당 +1배, 최대 6배 · 뒤 티커 56/78.4 600 회색, 80px/s */
+.hl{display:flex;flex-direction:column;gap:10px}
+.stick{position:relative;height:2500px}
+.stick-w{position:sticky;top:0;height:900px;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.tk{position:absolute;left:0;right:0;top:450px;transform:translateY(-50%);z-index:0;overflow:hidden;height:78.4px}
+.tk ul{display:flex;gap:30px;align-items:center;width:max-content;will-change:transform}
+.tk-g{display:flex;align-items:center;gap:17px;flex:0 0 auto}
+.tk h2{font-size:56px;line-height:78.4px;font-weight:600;color:var(--grey);text-align:center;white-space:nowrap}
+.tk i{display:block;width:10px;height:10px;border-radius:2px;background:var(--ink);flex:0 0 auto}
+.tk i:last-child{width:11px;height:11px}
+.vid{position:relative;z-index:2;width:400px;height:275.55px;border-radius:20px;overflow:hidden;transform:scale(var(--vs,1));will-change:transform;background:#1a1d22}
+.vid video{width:100%;height:100%;object-fit:cover}
+@keyframes tkm{to{transform:translateX(-1222px)}}
+html:not(.js) .tk ul{animation:tkm 15.275s linear infinite}
+
+/* Reviews — 티커 882 + gap 24 + 강조 350 · 카드 400×500 r15 pad 32 · 인용 24 / 문장 16/25.6 500 · 하단 사진 50 r7 / 이름 22/30.8 / 직함 14 · 70px/s, 호버 49px/s · 양끝 7.5% 페이드 */
+.rv-row{display:flex;gap:24px;height:500px}
+.rt{flex:1 1 0;min-width:0;overflow:hidden;-webkit-mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,#000 7.5%,#000 92.5%,rgba(0,0,0,0) 100%);mask-image:linear-gradient(to right,rgba(0,0,0,0) 0%,#000 7.5%,#000 92.5%,rgba(0,0,0,0) 100%)}
+.rt ul{display:flex;gap:30px;width:max-content;height:500px;will-change:transform}
+.rc{width:400px;height:500px;background:var(--g6);border-radius:15px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;flex:0 0 auto}
+.rc-t{display:flex;flex-direction:column;gap:12px}
+.rc-t svg{width:24px;height:24px;color:#C7C7C7}
+.rc-t p{font-size:16px;line-height:25.6px;font-weight:500;color:#262626}
+.rc-b{display:flex;align-items:center;gap:12px}
+.rc-b img{width:50px;height:50px;border-radius:7px;object-fit:cover;flex:0 0 auto}
+.rc-b h6{font-size:22px;line-height:30.8px;font-weight:500;color:#191919}
+.rc-b small{display:block;font-size:14px;line-height:22.4px;color:var(--grey)}
+.rhi{position:relative;width:350px;height:500px;border-radius:15px;overflow:hidden;padding:24px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;flex:0 0 auto}
+.rhi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rhi div{position:relative}
+.rhi h4{font-size:34px;line-height:47.6px;font-weight:500}
+.rhi p{font-size:20px;line-height:28px;font-weight:500}
+@keyframes rvm{to{transform:translateX(-2580px)}}
+html:not(.js) .rt ul{animation:rvm 36.86s linear infinite}
+
+/* FAQ — 좌 450 sticky top 100 (라벨/h2/문단 400 gap 10) · 우 742 아코디언 gap 10 · 항목 r16 pad 20 · 질문 18/28.8 500 · 답 14/22.4 max 90% · 아이콘 24 r99 pad 6, 바 10×2 */
+.faq .wrap{display:flex;gap:64px;align-items:flex-start}
+.faq-l{position:sticky;top:100px;width:450px;flex:0 0 auto;display:flex;flex-direction:column;gap:10px}
+.faq-l .desc{width:400px;max-width:100%}
+.faq-r{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:10px}
+.qa{background:var(--g6);border-radius:16px;padding:20px;overflow:hidden;cursor:pointer}
+.qa-q{display:flex;gap:12px;align-items:flex-start}
+.qa-q p{flex:1 1 0;font-size:18px;line-height:28.8px;font-weight:500;color:var(--ink)}
+.qa-i{position:relative;width:24px;height:24px;border-radius:99px;flex:0 0 auto}
+.qa-i i{position:absolute;left:7px;top:11px;width:10px;height:2px;background:var(--ink);transition:transform .4s var(--ease)}
+.qa-i i.v{transform:rotate(-90deg)}
+.qa.on .qa-i i.v{transform:rotate(0)}
+.qa-a{display:grid;grid-template-rows:0fr;min-height:1px;max-width:90%;opacity:0;margin-top:0;transition:grid-template-rows .4s var(--ease),opacity .4s var(--ease),margin-top .4s var(--ease)}
+.qa-a div{min-height:0;overflow:hidden}
+.qa-a p{font-size:14px;line-height:22.4px;color:var(--grey)}
+.qa.on .qa-a{grid-template-rows:1fr;opacity:1;margin-top:8px}
+
+/* 푸터 — 흰 여백 32 16 16 · 안쪽 잉크 r30 pad-bottom 40 · 콘텐츠 영역 1222(pad-top 80): CTA 600 + 하늘 1408×1222(마스크 11/34/57%) + 집 1408×844 (top 378, 마스크 4%→71%) + 워드마크 1036×247 (top 815) · 3열 · 구분선 2px 10% · 하단 3항목 */
+.foot{position:relative;z-index:1;background:#fff;padding:32px 16px 16px}
+.fin{background:var(--ink);border-radius:30px;padding-bottom:40px;overflow:hidden;max-width:1920px;margin:0 auto;color:#fff}
+.fca{position:relative;height:1222px;padding-top:80px;border-radius:30px;overflow:hidden}
+.fsky{position:absolute;left:0;right:0;top:0;height:1222px;-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,0) 11%,rgba(0,0,0,0) 34%,#000 57%);mask-image:linear-gradient(0deg,rgba(0,0,0,0) 11%,rgba(0,0,0,0) 34%,#000 57%)}
+.fhouse{position:absolute;left:0;right:0;top:378px;height:844px;-webkit-mask-image:linear-gradient(0deg,rgba(0,0,0,.043) 0%,#000 71%);mask-image:linear-gradient(0deg,rgba(0,0,0,.043) 0%,#000 71%)}
+.fsky img,.fhouse img{width:100%;height:100%;object-fit:cover}
+.fcta{position:relative;z-index:1;width:600px;max-width:100%;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:10px}
+.fcta .h2,.fcta .desc{text-align:center}
+.fmark{position:absolute;left:0;right:0;top:815px;height:341px;z-index:1;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.fmark svg{width:1036px;height:247px;max-width:100%}
+.fcs{max-width:1320px;margin:0 auto;padding:0 32px;display:flex;flex-direction:column;gap:35px}
+.fstack{display:flex;justify-content:space-between;align-items:flex-start}
+.fl{width:420px;display:flex;flex-direction:column;gap:40px}
+.fl-in{width:320px;display:flex;flex-direction:column;gap:10px}
+.fl-in .logo{color:#fff}
+.fl-in p{font-size:14px;line-height:22.4px;color:var(--g5)}
+.soc{display:flex;gap:20px}
+.soc a{display:block;width:25px;height:25px;color:#fff}
+.soc svg{width:25px;height:25px}
+.fr{display:flex;gap:40px;align-items:flex-start}
+.fcol{display:flex;flex-direction:column;gap:24px;width:160px}
+.fcol.c2{width:auto}
+.fcol h6{font-size:16px;line-height:25.6px;font-weight:500;color:#fff}
+.fcol ul{display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.fcol .nl{color:var(--g5)}
+.fcol .nl .bar i{background:var(--g5)}.fcol .nl:hover .bar i{background:var(--g5)}
+.fcol .ci{display:flex;align-items:center;gap:6px;height:28px}
+.fcol .ci b{width:28px;height:28px;border-radius:38px;background:var(--g5);display:flex;align-items:center;justify-content:center;color:#000;flex:0 0 auto}
+.fcol .ci svg{width:16px;height:16px}
+.fdiv{height:2px;background:rgba(255,255,255,.1)}
+.fbot{display:flex;justify-content:space-between;align-items:flex-end;font-size:14px;line-height:22.4px;color:var(--g5)}
+.fbot .cp{color:#C7C7C7}
+.fbot .nl{color:var(--g5)}.fbot .nl .bar i{background:var(--g5)}.fbot .nl:hover .bar i{background:var(--g5)}
+.fbot .cr{display:inline-flex;align-items:center;gap:8px;font-family:"Inter","Pretendard",sans-serif;font-size:14px;line-height:14px;font-weight:500;opacity:.9}
+.fbot .cr svg{width:18px;height:18px}
+
+/* ── 태블릿 ≤1199 (레퍼런스 810~1199 실측: pad 24, 섹션 pad 60, 헤딩 세로(gap 18), h2 40/48 ls -.5, 문단 17/25.5, 라벨·버튼 13/20.8) ── */
+@media (max-width:1199px){
+  .wrap,.nav-in,.hero-c,.about-in,.fcs{padding:0 24px}
+  .sec{padding:60px 0}
+  .lab,.btn,.nl,.chip,.svc-txt small,.lstat,.rc-b small,.qa-a p,.fl-in p,.fcol .nl,.fbot{font-size:13px;line-height:20.8px}
+  .h2{font-size:40px;line-height:48px;letter-spacing:-.5px}
+  .desc{font-size:17px;line-height:25.5px}
+  .hd{flex-direction:column;align-items:flex-start;gap:18px}
+  .hd-r{width:400px}
+  .faq-l{gap:15px}
+  .hero{height:1134px}
+  .hero-c{gap:5px}
+  .hero h1{font-size:70px;line-height:70px;letter-spacing:-.7px}
+  .house{height:662px}
+  .cl1{left:-656px}.cl4{right:-697px}
+  .imp-grid{flex-direction:column;align-items:stretch}
+  .imp-img{width:100%}
+  .imp-img img{object-position:54% 14%}
+  .imp-img.r img{object-position:51% 66%}
+  .stat .n{font-size:44px;line-height:44px;letter-spacing:-.88px;height:52.8px}
+  .stat{height:105.8px}.stat:first-child{height:102.8px}
+  .stat h6{font-size:20px;line-height:30px}
+  .about{padding:60px 0}
+  .words{font-size:48px;line-height:57.6px;letter-spacing:-1.92px}
+  .words em{line-height:43.2px}
+  .sig{padding:80px 0 0}
+  .fc{padding:0 40px 40px}
+  .ft h4{font-size:28px;line-height:33.6px}
+  .ft p{font-size:15px;line-height:24px}
+  .svcs{flex-direction:column;height:auto}
+  .svc,.svc.on{width:100%;height:553px;background:var(--ink);cursor:default}
+  .svc .svc-pat,.svc .svc-img,.svc .svc-sh{opacity:1}
+  .svc .svc-num{color:#fff;font-size:102px;line-height:81.6px;width:136px;height:92px}
+  .svc .svc-txt{width:272px;color:#fff;transform:none}
+  .svc-txt h5{font-size:26px;line-height:39px}
+  .lname,.ldet{font-size:15px;line-height:21px}
+  .ldet i{height:21px}
+  .lprice{font-size:26px;line-height:39px}
+  .stick{height:2000px}
+  .tk h2{font-size:42px;line-height:54.6px}
+  .tk{height:54.6px}
+  .rc{width:280px;padding:24px}
+  .rc-t p{font-size:15px;line-height:24px}
+  .rc-b h6{font-size:20px;line-height:30px}
+  .rhi{width:300px}
+  .rhi h4{font-size:28px;line-height:33.6px}
+  .rhi p{font-size:18px;line-height:25.2px}
+  .faq .wrap{flex-direction:column;gap:40px}
+  .faq-l{position:relative;top:auto;width:100%}
+  .faq-r{width:100%}
+  .qa-q p{font-size:17px;line-height:25.5px}
+  .fca{height:926px}
+  .fhouse{top:332px;height:595px}
+  .fsky{height:926px}
+  .fmark{top:620px;height:240px}
+  .fmark svg{width:100%;height:auto;padding:0 40px}
+  .fcol h6{font-size:15px;line-height:24px}
+  .fr{gap:40px}
+}
+/* ── 폰 ≤809 (레퍼런스 390 실측: pad 20, 섹션 pad 40, h2 28/33.6, 문단 15/22.5, 라벨·버튼 12/19.2, 햄버거 메뉴) ── */
+@media (max-width:809px){
+  .wrap,.hero-c,.about-in,.fcs{padding:0 20px}
+  .sec{padding:40px 0}
+  .lab,.btn,.nl,.chip,.svc-txt small,.lstat,.rc-b small,.qa-a p,.fl-in p,.fcol .nl,.fbot{font-size:12px;line-height:19.2px}
+  .h2{font-size:28px;line-height:33.6px;letter-spacing:0}
+  .desc{font-size:15px;line-height:22.5px}
+  .nav{padding:16px 20px 20px;height:auto;flex-direction:column;gap:24px;align-items:stretch;transition:background-color .3s var(--ease)}
+  .nav-in{padding:0;height:41px;max-width:none}
+  .links,.nav-r .btn{display:none}
+  .nav-r{padding:0}
+  .burger{display:block;position:relative;width:31px;height:41px;padding:5px 0}
+  .burger i{position:absolute;left:3px;width:27px;height:2px;background:var(--ink);transition:transform .3s var(--ease),opacity .3s var(--ease)}
+  .burger i:nth-child(1){top:11px}.burger i:nth-child(2){top:20px}.burger i:nth-child(3){top:29px}
+  .top.open .nav{background:rgba(255,255,255,.1)}
+  .top.open .burger i:nth-child(1){transform:translateY(9px) rotate(45deg)}
+  .top.open .burger i:nth-child(2){opacity:0}
+  .top.open .burger i:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+  .mmenu{display:none;flex-direction:column;gap:15px;padding-bottom:0}
+  .top.open .mmenu{display:flex}
+  .mmenu .ml{display:flex;flex-direction:column;gap:15px;padding:2px 0;align-items:flex-start}
+  .hero{height:895px;gap:50px}
+  .hero-c{gap:10px}
+  .hero h1{font-size:51px;line-height:51px;letter-spacing:-.51px}
+  .hero-d{width:100%}
+  .cta{flex-wrap:wrap}
+  .house{height:370px;width:468px;margin-left:-39px;align-self:flex-start}
+  .house img{object-position:92.4% 67.2%}
+  .cl1{left:-736px}
+  .cl2{left:-295px;top:252px;width:1016px}
+  .cl3{right:auto;left:-945px;top:97px;width:1292px}
+  .cl4{right:auto;left:281px;top:-67px}
+  .imp-img{height:300px}
+  .imp-img img,.imp-img.r img{object-position:50% 50%}
+  .stat{padding:20px}
+  .stat{height:85px}.stat:first-child{height:82px}
+  .stat .n{font-size:35px;line-height:35px;letter-spacing:-.7px;height:42px}
+  .stat h6{font-size:18px;line-height:27px}
+  .about{padding:40px 0}
+  .words{font-size:30px;line-height:36px;letter-spacing:-1.2px}
+  .words em{line-height:27px}
+  .sig{padding:40px 0 0}
+  .ft h4{font-size:26px;line-height:31.2px;white-space:normal}
+  .ft p{font-size:14px;line-height:22.4px;white-space:normal}
+  .svc,.svc.on{height:431px}
+  .svc:first-child{height:395px}
+  .svc-num{display:none}
+  .svc .svc-txt{width:300px}
+  .svc-txt h5{font-size:24px;line-height:36px}
+  .svc-img{width:100%;height:496px;top:auto;bottom:-101px}
+  .lgrid{grid-template-columns:minmax(0,1fr)}
+  .lstat{top:20px;right:20px}
+  .lbot{left:20px;right:20px;bottom:20px}
+  .lname,.ldet{font-size:14px;line-height:19.6px}
+  .ldet i{height:19.6px}
+  .ldet{gap:12px}
+  .lprice{font-size:24px;line-height:36px}
+  .hl{gap:64px}
+  .stick{height:215px}
+  .stick-w{position:relative;height:215px}
+  .tk{top:50%}
+  .tk h2{font-size:28px;line-height:36.4px}
+  .tk{height:36.4px}
+  .vid{width:312px;height:215px;transform:none!important}
+  .rv-row{flex-direction:column;height:auto;gap:24px}
+  .rhi{order:-1;width:100%;padding:16px}
+  .rhi h4{font-size:26px;line-height:31.2px}
+  .rhi p{font-size:16px;line-height:22.4px}
+  .rt{flex:0 0 auto;height:500px;width:100%}
+  .rc-t p{font-size:14px;line-height:22.4px}
+  .rc-b h6{font-size:18px;line-height:27px}
+  .qa-q p{font-size:15px;line-height:22.5px}
+  .fca{height:631px}
+  .fcta{padding:0 20px}
+  .fhouse{top:352px;height:280px;left:-20px;right:-20px}
+  .fsky{height:631px}
+  .fmark{top:518px;height:87px}
+  .fmark svg{padding:0 20px}
+  .fstack{flex-direction:column;gap:50px}
+  .fl{width:100%}
+  .fl-in{width:100%}
+  .fr{gap:50px}
+  .fcol{width:auto}
+  .fcol h6{font-size:14px;line-height:22.4px}
+  .fbot{flex-direction:column;align-items:flex-start;gap:15px}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-ar" viewBox="0 0 24 24"><path d="M8.25 12h7.5M12.75 9l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M12 3.5 3.5 10.6V20.5h6.2v-5.3h4.6v5.3h6.2v-9.9Z" fill="currentColor"/></symbol>
+  <symbol id="i-bed" viewBox="0 0 24 24"><path d="M3 18v-7.5A2.5 2.5 0 0 1 5.5 8h13A2.5 2.5 0 0 1 21 10.5V18M3 15h18M6 8V6.5A1.5 1.5 0 0 1 7.5 5h9A1.5 1.5 0 0 1 18 6.5V8M8 11h3v2H8zm5 0h3v2h-3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bath" viewBox="0 0 24 24"><path d="M4 12h16v2a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5v-2Zm2 0V6.5A2.5 2.5 0 0 1 8.5 4h.5M7 19l-1 2m11-2 1 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-area" viewBox="0 0 24 24"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4M8 8h8v8H8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M4 13.5c0-4 2.2-7 5.8-8.6l.9 1.6c-2.2 1-3.5 2.7-3.7 4.6h3.2v6.4H4v-4Zm9.8 0c0-4 2.2-7 5.8-8.6l.9 1.6c-2.2 1-3.5 2.7-3.7 4.6H20v6.4h-6.2v-4Z" fill="currentColor"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><path d="M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9a4.5 4.5 0 0 1-4.5 4.5h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm0 2A2.5 2.5 0 0 0 5 7.5v9A2.5 2.5 0 0 0 7.5 19h9a2.5 2.5 0 0 0 2.5-2.5v-9A2.5 2.5 0 0 0 16.5 5h-9ZM12 8a4 4 0 1 1 0 8 4 4 0 0 1 0-8Zm0 2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm4.8-3.2a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z" fill="currentColor"/></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.2c0-.9.3-1.5 1.5-1.5h1.5V5.1c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8V11H8v3h2.6v7h2.9Z" fill="currentColor"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M17.3 3h3l-6.6 7.6L21.5 21h-6l-4.7-6.2L5.3 21h-3l7.1-8.1L2 3h6.1l4.3 5.7L17.3 3Zm-1 16.2h1.7L7.2 4.7H5.4l10.9 14.5Z" fill="currentColor"/></symbol>
+  <symbol id="i-yt" viewBox="0 0 24 24"><path d="M21.5 7.2a2.5 2.5 0 0 0-1.8-1.8C18.1 5 12 5 12 5s-6.1 0-7.7.4A2.5 2.5 0 0 0 2.5 7.2 26 26 0 0 0 2.1 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.8 1.8C5.9 19 12 19 12 19s6.1 0 7.7-.4a2.5 2.5 0 0 0 1.8-1.8A26 26 0 0 0 21.9 12a26 26 0 0 0-.4-4.8ZM10 15V9l5.2 3L10 15Z" fill="currentColor"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3.8 6.2h16.4v11.6H3.8zM3.8 6.2 12 12.8l8.2-6.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M7.6 3.8 9.9 8.2l-2 2.4a12.5 12.5 0 0 0 5.5 5.5l2.4-2 4.4 2.3-.5 2.8a1.5 1.5 0 0 1-1.5 1.3A16.2 16.2 0 0 1 3.5 5.8a1.5 1.5 0 0 1 1.3-1.5l2.8-.5Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21.5s-7.5-5.3-7.5-12a7.5 7.5 0 0 1 15 0c0 6.7-7.5 12-7.5 12Zm0-9a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<div class="top" id="top">
+  <nav class="nav">
+    <div class="nav-in">
+      <a class="logo" href="#hero" aria-label="하우스"><svg viewBox="0 0 24 24"><use href="#i-home"/></svg><b>HAUS</b></a>
+      <div class="nav-r">
+        <div class="links">
+          <a class="nl" href="#properties">PROPERTIES<span class="bar"><i></i></span></a>
+          <a class="nl" href="#services">SERVICES<span class="bar"><i></i></span></a>
+          <a class="nl" href="#about">ABOUT<span class="bar"><i></i></span></a>
+        </div>
+        <a class="btn" href="#contact">Contact us<span class="ar"><svg class="a"><use href="#i-ar"/></svg><svg class="b"><use href="#i-ar"/></svg></span></a>
+        <button class="burger" id="burger" aria-label="메뉴"><i></i><i></i><i></i></button>
+      </div>
+    </div>
+    <div class="mmenu">
+      <div class="ml">
+        <a class="nl" href="#properties">PROPERTIES<span class="bar"><i></i></span></a>
+        <a class="nl" href="#services">SERVICES<span class="bar"><i></i></span></a>
+        <a class="nl" href="#about">ABOUT<span class="bar"><i></i></span></a>
+      </div>
+      <a class="btn" href="#contact">Contact us<span class="ar"><svg class="a"><use href="#i-ar"/></svg><svg class="b"><use href="#i-ar"/></svg></span></a>
+    </div>
+  </nav>
+</div>
+
+<div class="page">
+<main class="hero" id="hero">
+  <div class="cl cl1"><img src="../estate-a/assets/cloud.png" alt=""></div>
+  <div class="cl cl2"><img src="../estate-a/assets/cloud.png" alt=""></div>
+  <div class="cl cl3"><img src="../estate-a/assets/cloud.png" alt=""></div>
+  <div class="cl cl4"><img src="../estate-a/assets/cloud.png" alt=""></div>
+  <div class="hero-c" id="heroc">
+    <div class="hero-h">
+      <div class="chip"><span class="chip-av"><img src="../estate-a/assets/chip-1.jpg" alt=""><img src="../estate-a/assets/chip-2.jpg" alt=""><img src="../estate-a/assets/chip-3.jpg" alt=""></span>3,500+ Pro Users</div>
+      <h1>Find Your Dream Home</h1>
+    </div>
+    <div class="hero-d">
+      <p class="desc">서울과 근교에서 직접 보고 고른 집만 올립니다. 위치와 구조, 채광까지 사람이 확인한 뒤에 소개합니다.</p>
+      <div class="cta">
+        <a class="btn" href="#properties">Explore Homes<span class="ar"><svg class="a"><use href="#i-ar"/></svg><svg class="b"><use href="#i-ar"/></svg></span></a>
+        <a class="btn o" href="#contact">Book a Visit</a>
+      </div>
+    </div>
+  </div>
+  <div class="house"><img src="../estate-a/assets/hero-house.jpg" alt="테라스가 층층이 쌓인 현대식 주택"></div>
+</main>
+
+<section class="sec impact" id="impact">
+  <div class="band band1"><img src="../estate-a/assets/cloud-band.png" alt=""></div>
+  <div class="band band2"><img src="../estate-a/assets/cloud-band.png" alt=""></div>
+  <div class="wrap">
+    <div class="metrics">
+      <div class="hd">
+        <div class="hd-l"><p class="lab"><i></i>OUR IMPACT</p><h2 class="h2">Real insights behind every property decision</h2></div>
+        <div class="hd-r"><p class="desc">처음 집을 구하는 분도 헷갈리지 않게, 숫자와 사진으로 숨김없이 보여 드립니다.</p></div>
+      </div>
+      <div class="imp-grid">
+        <div class="imp-img"><img src="../estate-a/assets/impact-1.jpg" alt="3층 모던 주택"></div>
+        <div class="stats">
+          <div class="stat"><span class="n roll">$4.6M+</span><h6>TOTAL VALUE</h6></div>
+          <div class="stat"><span class="n roll">320+</span><h6>ACTIVE HOMES</h6></div>
+          <div class="stat"><span class="n roll">98%</span><h6>HAPPY CLIENTS</h6></div>
+        </div>
+        <div class="imp-img r"><img src="../estate-a/assets/impact-2.jpg" alt="언덕 위 유리 주택"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec about" id="about">
+  <div class="about-bg"><img src="../estate-a/assets/about-pattern.jpg" alt=""></div>
+  <div class="about-in">
+    <p class="words" id="words">좋은 집은 <em>발견</em>에서 시작됩니다. 보는 사람의 눈으로 매물을 고르고, 가격과 가치를 숨김없이 설명해 <em>확신</em>이 설 때까지 함께 갑니다.</p>
+  </div>
+</section>
+
+<section class="sec sig" id="signature">
+  <div class="wrap">
+    <div class="hd">
+      <div class="hd-l"><p class="lab"><i></i>TOP PROPERTIES</p><h2 class="h2">Explore our selected homes for modern living</h2></div>
+      <div class="hd-r"><p class="desc">디자인과 편의, 위치를 함께 보고 고른 집입니다. 지금 살고 있는 방식에 맞는 곳을 먼저 보여 드립니다.</p></div>
+    </div>
+  </div>
+  <div class="feats">
+    <div class="feat"><img src="../estate-a/assets/feat-1.jpg" alt="">
+      <div class="fc"><div class="fp">9억 8,000</div><div class="ft"><h4>한남 스카이 레지던스</h4><p>한남동 · 용산구</p></div><a class="btn lt" href="#contact">Explore<span class="ar"><svg class="a"><use href="#i-ar"/></svg><svg class="b"><use href="#i-ar"/></svg></span></a></div>
+    </div>
+    <div class="feat"><img src="../estate-a/assets/feat-2.jpg" alt="">
+      <div class="fc"><div class="fp">6억 2,000</div><div class="ft"><h4>성수 브릭 하우스</h4><p>성수동 2가 · 성동구</p></div><a class="btn lt" href="#contact">Explore<span class="ar"><svg class="a"><use href="#i-ar"/></svg><svg class="b"><use href="#i-ar"/></svg></span></a></div>
+    </div>
+    <div class="feat"><img src="../estate-a/assets/feat-3.jpg" alt="">
+      <div class="fc"><div class="fp">14억 5,000</div><div class="ft"><h4>판교 레이크 빌라</h4><p>운중동 · 분당구</p></div><a class="btn lt" href="#contact">Explore<span class="ar"><svg class="a"><use href="#i-ar"/></svg><svg class="b"><use href="#i-ar"/></svg></span></a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="metrics">
+      <div class="hd">
+        <div class="hd-l"><p class="lab"><i></i>Our Services</p><h2 class="h2">Everything you need for your home</h2></div>
+        <div class="hd-r"><p class="desc">보는 것부터 계약까지, 물어볼 곳이 하나면 충분합니다. 매매·임대·관리를 한 팀이 맡습니다.</p></div>
+      </div>
+      <div class="svcs" id="svcs">
+        <div class="svc on"><div class="svc-pat"></div><img class="svc-img" src="../estate-a/assets/svc-1.png" alt=""><div class="svc-sh"></div><div class="svc-num">.01</div><div class="svc-txt"><small>Buy a Home</small><h5>마음에 드는 집을 함께 찾습니다</h5></div></div>
+        <div class="svc"><div class="svc-pat"></div><img class="svc-img" src="../estate-a/assets/svc-2.png" alt=""><div class="svc-sh"></div><div class="svc-num">.02</div><div class="svc-txt"><small>Rent a Home</small><h5>전세와 월세도 편하게 계약합니다</h5></div></div>
+        <div class="svc"><div class="svc-pat"></div><img class="svc-img" src="../estate-a/assets/svc-3.png" alt=""><div class="svc-sh"></div><div class="svc-num">.03</div><div class="svc-txt"><small>Explore Listings</small><h5>동네별 매물을 한눈에 살펴봅니다</h5></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="properties">
+  <div class="wrap">
+    <div class="metrics">
+      <div class="hd">
+        <div class="hd-l"><p class="lab"><i></i>PROPERTY LISTINGS</p><h2 class="h2">Discover homes that fit your lifestyle</h2></div>
+        <div class="hd-r col"><p class="desc">출퇴근, 아이 학교, 주말 취미까지 생활에 맞춰 고른 매물입니다.</p><a class="btn" href="#contact">Explore All<span class="ar"><svg class="a"><use href="#i-ar"/></svg><svg class="b"><use href="#i-ar"/></svg></span></a></div>
+      </div>
+      <div class="lgrid">
+        <a class="lcard" href="#contact"><img src="../estate-a/assets/list-1.jpg" alt=""><div class="lblur"></div><span class="lstat"><svg><use href="#i-home"/></svg>For Rent</span>
+          <div class="lbot"><div class="linfo"><p class="lname">언덕 위 전망 주택</p><p class="lprice">9억 2,000</p><div class="ldet"><span><svg><use href="#i-bed"/></svg>4+</span><i></i><span><svg><use href="#i-bath"/></svg>3</span><i></i><span><svg><use href="#i-area"/></svg>223㎡</span></div></div><span class="larr"><svg><use href="#i-ar"/></svg></span></div></a>
+        <a class="lcard" href="#contact"><img src="../estate-a/assets/list-2.jpg" alt=""><div class="lblur"></div><span class="lstat"><svg><use href="#i-home"/></svg>For Sale</span>
+          <div class="lbot"><div class="linfo"><p class="lname">테라스 모던 하우스</p><p class="lprice">58억</p><div class="ldet"><span><svg><use href="#i-bed"/></svg>3</span><i></i><span><svg><use href="#i-bath"/></svg>2</span><i></i><span><svg><use href="#i-area"/></svg>288㎡</span></div></div><span class="larr"><svg><use href="#i-ar"/></svg></span></div></a>
+        <a class="lcard" href="#contact"><img src="../estate-a/assets/list-3.jpg" alt=""><div class="lblur"></div><span class="lstat"><svg><use href="#i-home"/></svg>For Sale</span>
+          <div class="lbot"><div class="linfo"><p class="lname">숲속 노란 코티지</p><p class="lprice">9억 8,000</p><div class="ldet"><span><svg><use href="#i-bed"/></svg>3</span><i></i><span><svg><use href="#i-bath"/></svg>2</span><i></i><span><svg><use href="#i-area"/></svg>91㎡</span></div></div><span class="larr"><svg><use href="#i-ar"/></svg></span></div></a>
+        <a class="lcard" href="#contact"><img src="../estate-a/assets/list-4.jpg" alt=""><div class="lblur"></div><span class="lstat"><svg><use href="#i-home"/></svg>For Sale</span>
+          <div class="lbot"><div class="linfo"><p class="lname">도심 어반 하우스</p><p class="lprice">34억</p><div class="ldet"><span><svg><use href="#i-bed"/></svg>4+</span><i></i><span><svg><use href="#i-bath"/></svg>3</span><i></i><span><svg><use href="#i-area"/></svg>390㎡</span></div></div><span class="larr"><svg><use href="#i-ar"/></svg></span></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec hl" id="highlight">
+  <div class="wrap">
+    <div class="hd">
+      <div class="hd-l"><p class="lab"><i></i>HIGHLIGHTED HOME</p><h2 class="h2">Modern homes, designed to live better</h2></div>
+      <div class="hd-r"><p class="desc">군더더기 없이 열린 구조가 어떻게 하루를 바꾸는지, 영상으로 먼저 보여 드립니다.</p></div>
+    </div>
+  </div>
+  <div class="stick" id="stick">
+    <div class="stick-w">
+      <div class="tk" id="tk"><ul>
+        <li class="tk-g"><h2>Explore Homes</h2><i></i><h2>Live Better</h2><i></i><h2>Modern Spaces</h2><i></i></li>
+        <li class="tk-g"><h2>Explore Homes</h2><i></i><h2>Live Better</h2><i></i><h2>Modern Spaces</h2><i></i></li>
+        <li class="tk-g"><h2>Explore Homes</h2><i></i><h2>Live Better</h2><i></i><h2>Modern Spaces</h2><i></i></li>
+        <li class="tk-g"><h2>Explore Homes</h2><i></i><h2>Live Better</h2><i></i><h2>Modern Spaces</h2><i></i></li>
+      </ul></div>
+      <div class="vid" id="vid"><video src="../estate-a/assets/highlight.mp4" muted loop playsinline autoplay preload="metadata"></video></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="reviews">
+  <div class="wrap">
+    <div class="metrics">
+      <div class="hd">
+        <div class="hd-l"><p class="lab"><i></i>CLIENT REVIEWS</p><h2 class="h2">What people say about their home search</h2></div>
+        <div class="hd-r"><p class="desc">집을 보고, 비교하고, 결정한 분들이 남긴 이야기입니다. 광고 문구는 없습니다.</p></div>
+      </div>
+      <div class="rv-row">
+        <div class="rt" id="rt"><ul>
+          <li class="rc"><div class="rc-t"><svg><use href="#i-quote"/></svg><p>조건에 맞는 집을 처음 방문한 날 바로 찾았어요. 사진과 실제가 달라서 실망한 적이 한 번도 없었습니다.</p></div><div class="rc-b"><img src="../estate-a/assets/avatar-1.jpg" alt=""><div><h6>김서연</h6><small>인테리어 디자이너</small></div></div></li>
+          <li class="rc"><div class="rc-t"><svg><use href="#i-quote"/></svg><p>가격이 왜 그런지 이유를 같이 설명해 줘서 판단이 쉬웠어요. 덕분에 두 달 걸릴 일을 3주 만에 끝냈습니다.</p></div><div class="rc-b"><img src="../estate-a/assets/avatar-2.jpg" alt=""><div><h6>이도현</h6><small>임대 투자자</small></div></div></li>
+          <li class="rc"><div class="rc-t"><svg><use href="#i-quote"/></svg><p>둘러보기부터 후보 추리기까지 흐름이 자연스러웠어요. 계약 전에 확인할 것들을 미리 알려 주는 게 좋았습니다.</p></div><div class="rc-b"><img src="../estate-a/assets/avatar-3.jpg" alt=""><div><h6>박지우</h6><small>마케팅 매니저</small></div></div></li>
+          <li class="rc"><div class="rc-t"><svg><use href="#i-quote"/></svg><p>매물마다 장단점을 그대로 적어 둔 점이 믿음이 갔어요. 좋은 말만 하는 곳이 아니라서 오히려 편했습니다.</p></div><div class="rc-b"><img src="../estate-a/assets/avatar-4.jpg" alt=""><div><h6>최민준</h6><small>소프트웨어 엔지니어</small></div></div></li>
+          <li class="rc"><div class="rc-t"><svg><use href="#i-quote"/></svg><p>처음 집을 사는 거라 걱정이 많았는데, 순서대로 안내해 줘서 놓친 게 없었어요. 잔금 날까지 연락이 빨랐습니다.</p></div><div class="rc-b"><img src="../estate-a/assets/avatar-5.jpg" alt=""><div><h6>정하은</h6><small>비즈니스 애널리스트</small></div></div></li>
+          <li class="rc"><div class="rc-t"><svg><use href="#i-quote"/></svg><p>도면과 채광 시간을 먼저 보여 주는 곳은 처음이었어요. 건축 쪽 일을 하는 제 눈에도 꼼꼼했습니다.</p></div><div class="rc-b"><img src="../estate-a/assets/avatar-6.jpg" alt=""><div><h6>한지훈</h6><small>건축가</small></div></div></li>
+        </ul></div>
+        <div class="rhi"><img src="../estate-a/assets/review-photo.jpg" alt=""><div><h4>윤서준</h4><p>매물 상담 총괄</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq" id="faq">
+  <div class="wrap">
+    <div class="faq-l"><p class="lab"><i></i>FAQ</p><h2 class="h2">Things You Should Know</h2><p class="desc">자주 묻는 질문을 먼저 정리했습니다. 여기 없는 내용은 바로 연락 주세요.</p></div>
+    <div class="faq-r" id="faqr">
+      <div class="qa on"><div class="qa-q"><p>집을 보려면 어떻게 시작하나요?</p><span class="qa-i"><i class="v"></i><i></i></span></div><div class="qa-a"><div><p>매물 목록에서 지역과 예산을 고른 뒤 마음에 드는 집을 저장해 두세요. 방문 일정은 저희가 잡아 드립니다.</p></div></div></div>
+      <div class="qa"><div class="qa-q"><p>예산과 지역으로 걸러볼 수 있나요?</p><span class="qa-i"><i class="v"></i><i></i></span></div><div class="qa-a"><div><p>네. 가격대, 동네, 방 개수, 면적으로 바로 걸러집니다. 조건을 저장해 두면 새 매물이 올라올 때 알려 드립니다.</p></div></div></div>
+      <div class="qa"><div class="qa-q"><p>매물 정보는 정확한가요?</p><span class="qa-i"><i class="v"></i><i></i></span></div><div class="qa-a"><div><p>등기와 건축물대장을 확인한 뒤에 올립니다. 현장 사진은 저희가 직접 찍고, 수정한 사진은 쓰지 않습니다.</p></div></div></div>
+      <div class="qa"><div class="qa-q"><p>담당자에게 어떻게 연락하나요?</p><span class="qa-i"><i class="v"></i><i></i></span></div><div class="qa-a"><div><p>매물마다 담당자 연락처가 있습니다. 전화나 메일로 남기시면 당일 안에 답을 드립니다.</p></div></div></div>
+      <div class="qa"><div class="qa-q"><p>임대와 매매를 함께 볼 수 있나요?</p><span class="qa-i"><i class="v"></i><i></i></span></div><div class="qa-a"><div><p>네. 한 화면에서 전세, 월세, 매매를 함께 보고 비교할 수 있습니다. 필요하면 두 가지 조건을 같이 상담해 드립니다.</p></div></div></div>
+      <div class="qa"><div class="qa-q"><p>계정을 만들어야 이용할 수 있나요?</p><span class="qa-i"><i class="v"></i><i></i></span></div><div class="qa-a"><div><p>둘러보는 건 계정 없이도 됩니다. 관심 매물 저장과 방문 예약은 간단한 가입 뒤에 이용할 수 있습니다.</p></div></div></div>
+      <div class="qa"><div class="qa-q"><p>거래 가능 여부는 어떻게 아나요?</p><span class="qa-i"><i class="v"></i><i></i></span></div><div class="qa-a"><div><p>거래가 끝난 매물은 바로 내립니다. 계약 직전 상태라면 매물 상단에 표시해 두니 방문 전에 한 번 더 확인해 주세요.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot" id="contact">
+  <div class="fin">
+    <div class="fca">
+      <div class="fsky"><img src="../estate-a/assets/footer-sky.jpg" alt=""></div>
+      <div class="fhouse"><img src="../estate-a/assets/footer-house.jpg" alt=""></div>
+      <div class="fcta">
+        <p class="lab"><i></i>Find your next home</p>
+        <h2 class="h2">Discover homes designed for your lifestyle</h2>
+        <p class="desc">보고, 비교하고, 결정하는 일까지 한곳에서 끝냅니다. 궁금한 점은 언제든 물어보세요.</p>
+        <a class="btn" href="mailto:6gsmake@gmail.com">Get in Touch<span class="ar"><svg class="a"><use href="#i-ar"/></svg><svg class="b"><use href="#i-ar"/></svg></span></a>
+      </div>
+      <div class="fmark"><svg viewBox="0 0 1036 247" aria-hidden="true"><defs><linearGradient id="fmg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".8"/><stop offset=".7" stop-color="#5E5E5E" stop-opacity=".49"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient></defs><text x="518" y="240" text-anchor="middle" font-family="Switzer, Pretendard, sans-serif" font-weight="700" font-size="330" letter-spacing="-10" fill="url(#fmg)">HAUS</text></svg></div>
+    </div>
+    <div class="fcs">
+      <div class="fstack">
+        <div class="fl">
+          <div class="fl-in">
+            <a class="logo" href="#hero" aria-label="하우스"><svg viewBox="0 0 24 24"><use href="#i-home"/></svg><b>HAUS</b></a>
+            <p>보고, 비교하고, 고르는 일을 단순하게. 서울과 근교의 집을 사람의 눈으로 확인해 소개합니다.</p>
+          </div>
+          <div class="soc">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="인스타그램"><svg><use href="#i-ig"/></svg></a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="페이스북"><svg><use href="#i-fb"/></svg></a>
+            <a href="https://x.com/" target="_blank" rel="noopener" aria-label="엑스"><svg><use href="#i-x"/></svg></a>
+            <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="유튜브"><svg><use href="#i-yt"/></svg></a>
+          </div>
+        </div>
+        <div class="fr">
+          <div class="fcol"><h6>Explore</h6><ul>
+            <li><a class="nl" href="#properties">Properties<span class="bar"><i></i></span></a></li>
+            <li><a class="nl" href="#services">Services<span class="bar"><i></i></span></a></li>
+            <li><a class="nl" href="#about">About<span class="bar"><i></i></span></a></li>
+            <li><a class="nl" href="#contact">Contact Us<span class="bar"><i></i></span></a></li>
+          </ul></div>
+          <div class="fcol c2"><h6>Contact</h6><ul>
+            <li class="ci"><b><svg><use href="#i-mail"/></svg></b><a class="nl" href="mailto:6gsmake@gmail.com">6gsmake@gmail.com<span class="bar"><i></i></span></a></li>
+            <li class="ci"><b><svg><use href="#i-phone"/></svg></b><a class="nl" href="tel:01048944905">010-4894-4905<span class="bar"><i></i></span></a></li>
+            <li class="ci"><b><svg><use href="#i-pin"/></svg></b><a class="nl" href="https://map.naver.com/" target="_blank" rel="noopener">서울 강남구<span class="bar"><i></i></span></a></li>
+          </ul></div>
+        </div>
+      </div>
+      <div class="fdiv"></div>
+      <div class="fbot">
+        <p class="cp">© 2026 민트클 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</p>
+        <a class="cr" href="https://mintcl.co.kr" target="_blank" rel="noopener">Crafted by 민트클<svg viewBox="0 0 24 24"><use href="#i-home"/></svg></a>
+        <a class="nl" href="#top">Privacy Policy<span class="bar"><i></i></span></a>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+
+</body>
+</html>

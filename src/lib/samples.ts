@@ -49,6 +49,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "estate-a-template",
+    industry: "부동산 중개 · 매물 플랫폼 홈페이지",
+    title: "부동산 매물 플랫폼 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 부동산 · 매물",
+    purpose:
+      "구름 낀 하늘 위에 고정된 히어로, 스크롤에 따라 단어가 드러나는 소개 문장, 화면을 가득 채우며 겹쳐 쌓이는 대표 매물 3장, 클릭으로 열리는 서비스 카드, 매물 그리드, 스크롤할수록 화면 가득 커지는 영상, 후기 티커, FAQ 아코디언, 대형 워드마크 푸터까지 갖춘 부동산 프리미엄 원페이지입니다. 매물 사진과 가격만 바꾸면 중개사무소 · 분양 · 임대 관리 어디에나 적용됩니다.",
+    features: ["고정 히어로 · 스크롤 패럴랙스", "풀블리드 매물 스택 3장 · 매물 그리드", "스크롤 확대 영상 · 단어 리빌 소개", "후기 티커 · FAQ · 워드마크 푸터"],
+    idealFor: "공인중개사무소, 분양 대행사, 임대 관리 회사, 프리미엄 주거 브랜드",
+    image: "/thumbs/estate-a.jpg",
+    liveUrl: "/templates/estate-a/",
+    industryKey: "estate",
+    designCode: "ESTP-1001",
+    premium: true,
+  },
+  {
     slug: "shop-a-template",
     industry: "쇼핑몰 · 라이프스타일 스토어 홈페이지",
     title: "라이프스타일 쇼핑몰 홈페이지 (프리미엄 디자인 A)",
