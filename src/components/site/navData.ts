@@ -302,6 +302,11 @@ export const HEADER_NAV: NavEntry[] = [
     label: "홈페이지 템플릿",
     items: [
       {
+        label: "프리미엄 디자인",
+        href: "/web-solutions",
+        children: premiumGroups(),
+      },
+      {
         label: "기본형 디자인 템플릿",
         href: "/templates?style=basic-template",
         children: templateGroups("basic-template"),
@@ -310,11 +315,6 @@ export const HEADER_NAV: NavEntry[] = [
         label: "랜딩형 디자인 템플릿",
         href: "/templates?style=landing-template",
         children: templateGroups("landing-template"),
-      },
-      {
-        label: "프리미엄 디자인",
-        href: "/web-solutions",
-        children: premiumGroups(),
       },
     ],
   },
