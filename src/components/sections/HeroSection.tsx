@@ -196,13 +196,10 @@ function CylinderShowcase() {
       }}
       onDragStart={(e) => e.preventDefault()}
       className={cn(
-        // 가로만 ±800(k배)에서 잘라낸다 — 좌우 벽 카드(중앙에서 770)는 그대로 두고,
-        // 1705px보다 넓은 화면에서만 걸리던 카메라 앞 카드 두 장(852~)을 어느 폭에서도 대칭으로 숨긴다
-        "relative mx-auto w-full cursor-grab touch-pan-y select-none [overflow-x:clip] active:cursor-grabbing",
+        "relative w-full cursor-grab touch-pan-y select-none active:cursor-grabbing",
         isDesktop ? "h-[440px]" : "h-[250px]",
       )}
       style={{
-        maxWidth: `${1600 * k}px`,
         opacity: opened ? 1 : 0,
         transform: opened ? "translateY(0)" : "translateY(50px)", // 원본과 같은 등장(페이드업)
         transition: reducedMotion ? "none" : "opacity 700ms ease, transform 700ms ease",
