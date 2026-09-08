@@ -49,6 +49,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "interior-a-template",
+    industry: "인테리어 · 리모델링 · 건축 스튜디오 홈페이지",
+    title: "인테리어 · 건축 스튜디오 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 인테리어 · 리모델링 · 건축",
+    purpose:
+      "사진이 천천히 줌아웃되며 대형 워드마크가 얹히는 히어로, 번호가 붙은 설계 항목 목록, 스크롤에 겹쳐 쌓이는 시공 사례 3건, 고정된 제목 옆으로 지나가는 진행 과정 카드, 사진이 행을 넘나드는 강점 목록, 후기 영상과 카드, 팀 소개, 협력사 그리드, 상담 카드까지 갖춘 인테리어 프리미엄 원페이지입니다. 사진과 사례 이름만 바꾸면 인테리어 · 리모델링 · 건축사무소 · 시공사 어디에나 적용됩니다.",
+    features: ["줌아웃 히어로 · 대형 워드마크", "겹쳐 쌓이는 시공 사례 · 번호 설계 목록", "고정 제목 진행 과정 · 강점 사진 오버랩", "후기 영상 · 팀 소개 · 상담 카드"],
+    idealFor: "인테리어 · 리모델링 업체, 건축사무소, 시공사, 가구 · 공간 디자인 스튜디오",
+    image: "/thumbs/interior-a.jpg",
+    liveUrl: "/templates/interior-a/",
+    industryKey: "interior",
+    designCode: "INTP-1001",
+    premium: true,
+  },
+  {
     slug: "artist-a-template",
     industry: "작가 · 아티스트 포트폴리오 홈페이지",
     title: "작가 · 아티스트 포트폴리오 홈페이지 (프리미엄 디자인 A)",
