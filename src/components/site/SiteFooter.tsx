@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { ExternalLink, Lock } from "lucide-react";
-import { PHONE_TEL_HREF, NAVER_BLOG_URL } from "@/lib/contact";
+import { Lock } from "lucide-react";
+import { PHONE_TEL_HREF } from "@/lib/contact";
 import { Logo } from "@/components/site/Logo";
 
 const FOOTER_GROUPS = [
@@ -14,32 +14,36 @@ const FOOTER_GROUPS = [
     ],
   },
   {
-    title: "업종별 맞춤 제작",
+    // 업종 6개를 나열하던 자리 — 업종 목록은 /homepage 에서 전체를 볼 수 있어 중복이었다.
+    // 대신 실제로 고르는 단위(프리미엄 · 기본형 · 랜딩형)를 노출한다.
+    title: "디자인 · 템플릿",
     links: [
-      { label: "부동산", to: "/web-solutions/real-estate" },
-      { label: "렌트카", to: "/web-solutions/rentcar" },
-      { label: "병원 · 의원", to: "/web-solutions/hospital" },
-      { label: "학원", to: "/web-solutions/academy" },
-      { label: "인테리어 · 리모델링", to: "/web-solutions/interior" },
-      { label: "이사 · 청소업체", to: "/web-solutions/moving" },
+      { label: "프리미엄 디자인", to: "/web-solutions" },
+      { label: "기본형 템플릿", to: "/templates?style=basic-template" },
+      { label: "랜딩형 템플릿", to: "/templates?style=landing-template" },
+      { label: "업종별 홈페이지", to: "/homepage" },
+      { label: "제작 사례", to: "/samples" },
     ],
   },
   {
-    title: "홈페이지",
+    title: "맞춤형 개발",
     links: [
-      { label: "홈페이지 템플릿", to: "/templates" },
-      { label: "업종별 홈페이지 제작", to: "/homepage" },
-      { label: "견적 계산기", to: "/estimate" },
-      { label: "포트폴리오", to: "/samples" },
-      { label: "NOVERIQ 소개", to: "/about" },
+      { label: "커스텀 개발이란?", to: "/services/custom" },
+      { label: "관리자 시스템", to: "/services/admin-system" },
+      { label: "문의 · 예약 관리", to: "/services/inquiry-reservation" },
+      { label: "검색 · 필터 기능", to: "/services/search-filter" },
+      { label: "DB · API 연동", to: "/services/database-api" },
+      { label: "솔루션 데모 체험", to: "/web-solutions/demos" },
     ],
   },
   {
     title: "고객센터",
     links: [
       { label: "문의하기", to: "/contact" },
+      { label: "견적 계산기", to: "/estimate" },
       { label: "공지사항", to: "/notices" },
       { label: "자주 묻는 질문", to: "/faq" },
+      { label: "NOVERIQ 소개", to: "/about" },
     ],
   },
 ];
@@ -89,19 +93,6 @@ export function SiteFooter() {
                   </Link>
                 </li>
               ))}
-              {group.title === "고객센터" && (
-                <li>
-                  <a
-                    href={NAVER_BLOG_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 hover:text-foreground transition-colors"
-                  >
-                    네이버 블로그
-                    <ExternalLink className="size-3" />
-                  </a>
-                </li>
-              )}
             </ul>
           </div>
         ))}
