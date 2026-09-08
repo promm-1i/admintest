@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>별하 호텔 — 호텔 · 리조트 (프리미엄 디자인 B)</title>
+<meta name="description" content="영상 히어로 위 알약형 내비와 평점 칩, 중앙 정렬 세리프 철학 문장, 사진을 가운데 둔 4카드 격자, 목록을 짚으면 사진이 바뀌는 응대 방식, 2×2 객실 카드, 얼굴이 바뀌는 후기, 원형 재생 버튼이 있는 영상, 아티클 3종, 아코디언 FAQ, 3D 인스타 카드까지 갖춘 호텔 프리미엄 원페이지.">
+<meta property="og:title" content="별하 호텔 — 호텔 · 리조트 (프리미엄 디자인 B)">
+<meta property="og:image" content="../hotel-b/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭)
+   배경 rgb(244,240,230) · 잉크 rgb(38,14,1) · 골드 rgb(140,109,63) · 보조면 rgb(250,246,242)
+   섹션 padding 100px 25px (아티클 120/30 · FAQ 71/32/72)
+   라틴 Crimson Text 600 / DM Sans 400·500·600 · 한글 Pretendard
+   h2 56/61.6 600 ls-1.68 · 철학문장 32/44.8 600 ls-0.96 · h3 28/33.6 600 · 카드제목 22/26.4 600
+   본문 18/28.8 500 ls-0.18 · 후기 16/24 400 · 칩 15/15 600 ls-0.45 · 라벨 12/14.4 500
+   라운드 16 · 18 · 20 · 24 · 32 · 37 · 50 · 100 ── */
+:root{--bg:rgb(244,240,230);--ink:rgb(38,14,1);--gold:rgb(140,109,63);--soft:rgb(250,246,242);--mute:rgb(87,80,63);--ease:cubic-bezier(.4,0,.2,1);--sp:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"DM Sans","Pretendard Variable",Pretendard,sans-serif;font-size:18px;line-height:28.8px;font-weight:500;letter-spacing:-.18px}
+.ko{text-wrap:pretty}
+.ser{font-family:"Crimson Text","Pretendard Variable",Pretendard,serif;font-weight:600}
+
+.sec{padding:100px 25px}
+.in{width:100%;max-width:1390px;margin:0 auto}
+h2.t{font-size:56px;line-height:61.6px;letter-spacing:-1.68px;text-align:center;max-width:760px;margin:0 auto}
+.sub{max-width:600px;margin:25px auto 0;font-size:18px;line-height:28.8px;font-weight:500;letter-spacing:-.18px;text-align:center}
+.h3{font-size:28px;line-height:33.6px;letter-spacing:-.84px}
+.h4{font-size:22px;line-height:26.4px;letter-spacing:-.44px}
+.p{font-size:18px;line-height:28.8px;font-weight:500;letter-spacing:-.18px}
+.p36{letter-spacing:-.36px}
+.sm{font-size:16px;line-height:24px;font-weight:400;letter-spacing:-.16px}
+.lb{font-size:12px;line-height:14.4px;font-weight:500}
+.nm{font-size:18px;line-height:25.2px;font-weight:500;letter-spacing:-.18px}
+
+/* 골드 알약 버튼 — 레퍼런스 44 높이 · r50 · pad 4 20 4 4 · 원형 36 */
+.btn{display:inline-flex;align-items:center;gap:12px;height:44px;border-radius:50px;background:var(--gold);color:#fff;padding:4px 20px 4px 4px;transition:opacity .35s var(--ease)}
+.btn:hover{opacity:.85}
+.btn .c{width:36px;height:36px;border-radius:35px;background:var(--bg);color:var(--gold);flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:15px}
+.btn .l{font-size:15px;line-height:15px;font-weight:600;letter-spacing:-.45px}
+
+/* 평점 칩 */
+.rate{height:58px;display:inline-flex;align-items:center;gap:0;border-radius:14px;background:rgba(244,240,230,.55);backdrop-filter:blur(8px);padding:0 20px 0 4px}
+.rate .fs{display:flex;padding:0 25px 0 0}
+.rate .fs span{width:52px;height:52px;border-radius:12px;background:var(--bg);flex:0 0 auto;display:block;margin-right:-9px;overflow:hidden}
+.rate .fs span img{width:50px;height:50px;border-radius:10px;object-fit:cover;margin:1px}
+.rate .n{font-size:48px;line-height:48px;letter-spacing:-1.44px;flex:0 0 auto}
+.rate .tx{margin-left:6px}
+.rate .tx b{display:block;font-size:18px;line-height:18px;font-weight:500;letter-spacing:-.18px}
+.rate .tx .st{margin-top:4px;font-size:15px;line-height:20px;color:#C9A227;letter-spacing:2px}
+
+.rv{opacity:0;transform:translateY(36px);transition:opacity 1s var(--sp),transform 1s var(--sp)}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── 내비 : 알약 823×60 · r100 · 상단 10 ── */
+.nav{position:fixed;top:10px;left:0;right:0;z-index:40;display:flex;justify-content:center;pointer-events:none}
+.nav .pill{width:823px;height:60px;border-radius:100px;background:#fff;padding:8px 8px 8px 16px;display:flex;align-items:center;justify-content:space-between;pointer-events:auto;box-shadow:0 6px 24px rgba(38,14,1,.08)}
+.nav .bd{display:flex;align-items:center;gap:8px}
+.nav .bd i{width:24px;height:24px;border-radius:6px;background:var(--gold);display:block}
+.nav .bd b{font-size:20px;line-height:24px;font-weight:500;letter-spacing:-.4px}
+.nav .lk{display:flex;align-items:center;gap:11px}
+.nav .lk a{padding:4px 12px;border-radius:10px;font-size:16px;line-height:20.8px;font-weight:600;letter-spacing:-.48px;transition:background .3s var(--ease)}
+.nav .lk a:hover{background:rgba(113,113,122,.1)}
+.burger{display:none}
+
+/* ── 히어로 : 1440×900 ── */
+.hero{position:relative;width:100%;height:900px;overflow:clip;background:var(--ink)}
+.hero video,.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(38,14,1,.34) 0%,rgba(38,14,1,.04) 40%,rgba(38,14,1,.46) 100%)}
+.hero .in{position:relative;z-index:2;max-width:1440px;height:100%;margin:0 auto;padding:24px;color:#fff;display:flex;flex-direction:column;justify-content:flex-end}
+.hero .r1{display:flex;flex-direction:column;align-items:flex-end;gap:25px;min-height:169px}
+.hero .qt{width:450px;text-align:right}
+.hero .mk{margin-top:33px}
+.hero .mk svg{width:100%;height:235px;color:#fff}
+
+/* ── 철학 : 1440×1353 · pad 100 0 ── */
+.phil{position:relative;padding:100px 0;overflow:clip}
+.phil .curve{position:absolute;left:-50px;top:-679px;width:680px;height:2000px;color:rgba(140,109,63,.45);pointer-events:none}
+.phil h2{position:relative;z-index:2}
+.phil .body{position:relative;z-index:2;margin:64px auto 0;padding:0 64px;text-align:center;font-size:32px;line-height:44.8px;letter-spacing:-.96px;max-width:748px}
+.phil .go{position:relative;z-index:2;margin-top:64px;text-align:center}
+.phil .pics{position:relative;z-index:2;margin-top:64px;height:676px;display:flex;justify-content:center;gap:64px}
+.phil .pics figure{width:450px;height:556px;border-radius:16px;overflow:clip;flex:0 0 auto}
+.phil .pics .a{margin-top:120px}
+.phil .pics .b{margin-top:50px}
+.phil .pics img{width:100%;height:100%;object-fit:cover}
+
+/* ── 머무름의 이유 : 1440×1003 ── */
+.why .sub{max-width:530px}
+.why .grid{margin-top:49px;display:grid;grid-template-columns:455px 455px 455px;gap:12px;justify-content:center;align-items:start}
+.why .col{display:flex;flex-direction:column;gap:12px}
+.wcard{height:285px;border-radius:16px;background:rgba(255,255,255,.55);padding:32px;text-align:center;display:flex;flex-direction:column}
+.wcard img{width:40px;height:40px;object-fit:contain}
+.wcard .ic{align-self:center;width:40px;height:40px;border-radius:10px;background:rgba(140,109,63,.14);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:20px}
+.wcard h4{margin-top:16px}
+.wcard p{width:300px;margin:17px auto 0}
+.why .pic{height:582px;border-radius:16px;overflow:clip}
+.why .pic img{width:100%;height:100%;object-fit:cover}
+
+/* ── 머무름의 방식 : 1440×921 ── */
+.host .in{max-width:1230px}
+.host .body{margin-top:56px;display:flex;gap:64px;align-items:flex-start}
+.host .ls{width:583px;flex:0 0 auto;padding-top:65px}
+.host .ls button{display:block;width:100%;text-align:left;padding:0 0 24px;border-bottom:1px solid rgba(38,14,1,.14);color:rgba(38,14,1,.45);transition:color .35s var(--ease)}
+.host .ls button+button{margin-top:23.75px}
+.host .ls button.on{color:var(--ink)}
+.host .ls button span{display:block}
+.host .st{position:relative;width:583px;height:521px;border-radius:32px;overflow:clip;flex:0 0 auto}
+.host .st img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease)}
+.host .st img.on{opacity:1}
+.host .st .cap{position:absolute;left:12px;right:12px;bottom:12px;background:var(--soft);border-radius:20px;padding:24px}
+
+/* ── 객실 : 1440×1477 ── */
+.rooms .in{max-width:1350px}
+.rooms .head{display:flex;justify-content:space-between;align-items:flex-start;gap:24px}
+.rooms .head .hd{width:986px;flex:0 0 auto}
+.rooms .head h2{text-align:left;max-width:986px;margin:0}
+.rooms .head .hs{margin-top:8px;font-size:18px;line-height:25.2px;font-weight:500;letter-spacing:-.18px}
+.rooms .head .rt{width:340px;flex:0 0 auto;margin-top:8px}
+.rooms .grid{margin-top:90px;display:grid;grid-template-columns:667px 667px;gap:16px;justify-content:center}
+.rcard{height:538px;position:relative;display:block}
+.rcard .tp{height:58px;padding:14px 24px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.rcard .tp h3{flex:1 0 0}
+.rcard .pr{display:flex;align-items:flex-start;gap:10px;margin-top:-6px}
+.rcard .pr .u{font-size:12px;line-height:14.4px;font-weight:500;width:36px}
+.rcard .pr .v{font-size:32px;line-height:38.4px;font-weight:600;letter-spacing:-.96px;white-space:nowrap}
+.rcard .im{height:480px;border-radius:18px;overflow:clip}
+.rcard .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--sp)}
+.rcard:hover .im img{transform:scale(1.05)}
+
+/* ── 후기 : 1440×972 ── */
+.rev .rate{height:56px;margin-top:25px;display:inline-flex}
+.rev .rw{text-align:center}
+.rev .card{width:760px;margin:48px auto 0;border-radius:24px;background:rgba(255,255,255,.5);padding:40px;text-align:center;min-height:387px;display:flex;flex-direction:column;align-items:center}
+.rev .card .av{width:100px;height:100px;border-radius:24px;overflow:clip;background:#fff;padding:0}
+.rev .card .av img{width:100%;height:100%;object-fit:cover;border-radius:24px}
+.rev .card h3{margin-top:60px;width:680px;letter-spacing:-.56px}
+.rev .card p{width:560px;margin-top:19px}
+.rev .card .who{width:680px;margin-top:20px}
+.rev .th{width:272px;margin:39px auto 0;border-radius:15px;background:rgba(255,255,255,.5);padding:8px;display:flex;gap:4px}
+.rev .th button{width:48px;height:48px;border-radius:12px;overflow:clip;opacity:.45;transition:opacity .3s var(--ease)}
+.rev .th button.on{opacity:1;outline:2px solid var(--gold);outline-offset:2px}
+.rev .th img{width:100%;height:100%;object-fit:cover}
+
+/* ── 영상 : 1440×847 ── */
+.vid .fr{position:relative;width:1150px;height:647px;margin:0 auto;border-radius:32px;overflow:clip}
+.vid video,.vid .fr>img{width:100%;height:100%;object-fit:cover}
+.vid .tint{position:absolute;inset:0;background:rgba(140,109,63,.18)}
+.vid .tx{position:absolute;left:50%;top:262px;transform:translateX(-50%);width:800px;text-align:center;color:#fff;font-size:56px;line-height:61.6px;letter-spacing:-1.68px}
+.vid .pl{position:absolute;right:56px;bottom:52px;width:40px;height:40px;border-radius:100px;background:rgba(255,255,255,.35);backdrop-filter:blur(6px);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+
+/* ── 아티클 : 1440×950 ── */
+.art{padding:120px 30px}
+.art .in{max-width:1300px}
+.art .go{margin-top:24px;text-align:center}
+.art .grid{margin-top:80px;display:grid;grid-template-columns:repeat(3,420px);gap:20px;justify-content:center}
+.acard{height:417px;border-radius:37px;background:rgba(255,255,255,.5);padding:4px;display:block;transition:background .35s var(--ease)}
+.acard:hover{background:#fff}
+.acard .im{height:294px;border-radius:33px;overflow:clip}
+.acard .im img{width:100%;height:100%;object-fit:cover}
+.acard .bd{padding:16px 0 0 12px}
+.acard .dt{font-size:15px;line-height:15px;font-weight:500;letter-spacing:-.3px;color:var(--mute)}
+.acard h5{margin-top:19px;font-size:22px;line-height:26.4px;letter-spacing:-.66px}
+
+/* ── FAQ : 1440×696 ── */
+.faq{padding:71px 32px 72px}
+.faq .in{max-width:1120px;padding:0 24px}
+.faq .sub{max-width:600px}
+.faq .list{margin-top:36px;padding-bottom:12px;display:flex;flex-direction:column;gap:8px;align-items:center}
+.qa{width:600px;background:#fff;border-radius:20px;padding:4px}
+.qa .q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;text-align:left;padding:10px 16px}
+.qa .q span{flex:1 0 0;font-size:18px;line-height:28.8px;font-weight:500;letter-spacing:-.36px}
+.qa .q .ic{width:32px;height:32px;border-radius:100px;background:var(--gold);color:#fff;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:15px;transition:transform .35s var(--sp)}
+.qa.open .q .ic{transform:rotate(180deg)}
+.qa .a{max-height:0;overflow:hidden;transition:max-height .4s var(--sp)}
+.qa.open .a{max-height:220px}
+.qa .a p{padding:0 16px 16px;font-size:18px;line-height:28.8px;font-weight:500;letter-spacing:-.36px;color:var(--mute)}
+
+/* ── 인스타 : 1440×877 ── */
+.ig{padding:100px 0}
+.ig .sub{max-width:400px}
+.ig .fan{margin-top:56px;height:448px;display:flex;align-items:flex-start;justify-content:center;gap:16px;perspective:1200px}
+.ig .fan figure{border-radius:20px;overflow:clip;flex:0 0 auto;transition:transform .6s var(--sp)}
+.ig .fan .s{width:240px;height:400px;transform:rotateY(28deg) translateZ(-24px)}
+.ig .fan .s2{transform:rotateY(-28deg) translateZ(-24px)}
+.ig .fan .m{width:285px;height:448px}
+.ig .fan img{width:100%;height:100%;object-fit:cover}
+
+/* ── 푸터 : 1440×541 ── */
+.foot{background:var(--gold);color:#fff;padding:56px 25px 25px}
+.foot .in{max-width:1390px}
+.foot .top{display:flex;gap:0;min-height:276px}
+.foot .cl{flex:0 0 auto}
+.foot .cl b{display:block;font-size:15px;line-height:15px;font-weight:500;letter-spacing:-.3px;color:rgba(255,255,255,.72);margin-bottom:16px}
+.foot .cl a{display:table;font-size:20px;line-height:18px;font-weight:500;letter-spacing:-.4px;padding:0 22px 10px 0;transition:opacity .3s}
+.foot .cl a:hover{opacity:.75}
+.foot .c1{width:200px}
+.foot .c2{width:327px}
+.foot .c3{width:463px}
+.foot .c4{width:400px}
+.foot .c4 b{margin-bottom:10px}
+.foot .c4 p{font-size:18px;line-height:28.8px;font-weight:500;letter-spacing:-.18px}
+.foot .c4 p:nth-of-type(3){margin-top:20px}
+.foot .c4 a{margin-top:3px}
+.foot .c4 a{display:table;font-size:18px;line-height:28.8px;padding:0}
+.foot .mk svg{width:100%;height:152px;color:#fff}
+.foot .biz{margin-top:18px;font-size:13px;line-height:20px;font-weight:400;color:rgba(255,255,255,.72)}
+
+/* ── 1024 ── */
+@media (max-width:1199px){
+  .sec{padding:72px 24px}
+  h2.t{font-size:40px;line-height:46px;letter-spacing:-1.2px}
+  .nav .pill{width:calc(100% - 40px);max-width:823px}
+  .nav .lk{display:none}
+  .hero{height:640px}
+  .hero .mk svg{height:150px}
+  .hero .qt{width:auto;max-width:420px}
+  .phil{padding:72px 0}
+  .phil .body{font-size:26px;line-height:38px;padding:0 32px}
+  .phil .pics{margin-top:64px;height:auto;gap:32px;padding:0 24px}
+  .phil .pics figure{width:44%;height:440px}
+  .phil .pics .a{margin-top:60px}
+  .phil .pics .b{margin-top:0}
+  .why .grid{margin-top:72px;grid-template-columns:1fr 1fr;gap:12px}
+  .why .pic{grid-row:1;grid-column:1/-1;height:360px}
+  .wcard p{width:auto}
+  .host .body{margin-top:64px;flex-direction:column;gap:32px}
+  .host .ls,.host .st{width:100%;padding-top:0}
+  .host .st{height:420px}
+  .rooms .head{flex-direction:column;gap:24px}
+  .rooms .head .hd{width:auto}
+  .rooms .head .rt{width:auto;padding-top:0}
+  .rooms .grid{margin-top:56px;grid-template-columns:1fr 1fr;gap:16px}
+  .rcard{height:auto}
+  .rcard .im{height:360px}
+  .rev .card{width:auto;max-width:760px;margin-top:64px}
+  .rev .card h3,.rev .card p,.rev .card .who{width:auto}
+  .vid .fr{width:100%;height:520px}
+  .vid .tx{width:auto;max-width:80%;top:200px;font-size:40px;line-height:46px}
+  .art{padding:72px 24px}
+  .art .grid{margin-top:64px;grid-template-columns:1fr 1fr}
+  .acard{height:auto}
+  .faq{padding:72px 24px}
+  .faq .in{padding:0}
+  .faq .list{margin-top:64px}
+  .qa{width:100%;max-width:600px}
+  .ig{padding:72px 0}
+  .ig .fan{margin-top:64px;height:auto;gap:12px}
+  .ig .fan .s{width:200px;height:330px}
+  .ig .fan .m{width:240px;height:376px}
+  .foot .top{flex-wrap:wrap;gap:32px;min-height:0}
+  .foot .c1,.foot .c2,.foot .c3{width:auto;min-width:160px}
+  .foot .c4{width:100%}
+  .foot .mk svg{height:88px}
+}
+/* ── 390 ── */
+@media (max-width:809px){
+  .sec{padding:56px 20px}
+  h2.t{font-size:30px;line-height:36px;letter-spacing:-.9px}
+  .sub{font-size:16px;line-height:25px;margin-top:16px}
+  .nav .pill{height:52px;padding:6px 6px 6px 14px}
+  .nav .bd b{font-size:17px}
+  .burger{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;background:var(--gold);color:#fff}
+  .hero{height:560px}
+  .hero .in{padding:16px}
+  .hero .r1{min-height:0;justify-content:flex-start}
+  .hero .rate{padding:4px 14px 4px 4px}
+  .hero .rate .fs{padding-right:14px}
+  .hero .rate .n{font-size:34px;line-height:34px}
+  .hero .qt{margin:16px 0 0;text-align:left;font-size:15px;line-height:23px}
+  .hero .mk{margin-top:20px}
+  .hero .mk svg{height:64px}
+  .phil{padding:56px 0}
+  .phil .body{margin-top:32px;font-size:20px;line-height:30px;padding:0 20px}
+  .phil .go{margin-top:36px}
+  .phil .pics{margin-top:40px;flex-direction:column;align-items:center;gap:16px;padding:0 20px}
+  .phil .pics figure{width:100%;height:360px;margin-top:0!important}
+  .why .grid{margin-top:40px;grid-template-columns:1fr}
+  .why .pic{height:300px}
+  .wcard{height:auto;padding:28px 20px}
+  .host .body{margin-top:36px}
+  .host .st{height:320px}
+  .rooms .grid{margin-top:36px;grid-template-columns:1fr}
+  .rcard .im{height:260px}
+  .rev .card{margin-top:36px;padding:28px 20px;min-height:0}
+  .rev .card h3{margin-top:32px;font-size:22px;line-height:28px}
+  .rev .th{margin-top:36px}
+  .vid .fr{height:380px;border-radius:20px}
+  .vid .tx{top:120px;font-size:26px;line-height:32px}
+  .vid .pl{right:20px;bottom:20px}
+  .art{padding:56px 20px}
+  .art .go{margin-top:32px}
+  .art .grid{margin-top:36px;grid-template-columns:1fr}
+  .faq{padding:56px 20px}
+  .faq .list{margin-top:36px}
+  .ig{padding:56px 0}
+  .ig .fan{margin-top:36px;perspective:none}
+  .ig .fan .s{display:none}
+  .ig .fan .m{width:calc(100% - 40px);height:400px}
+  .foot{padding:40px 20px 20px}
+  .foot .top{gap:28px}
+  .foot .c1,.foot .c2,.foot .c3,.foot .c4{width:100%}
+  .foot .mk svg{height:44px}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="pill">
+    <a class="bd" href="#top"><i aria-hidden="true"></i><b class="ko">별하</b></a>
+    <nav class="lk"><a href="#top" class="ko">홈</a><a href="#phil" class="ko">소개</a><a href="#rooms" class="ko">객실</a><a href="#art" class="ko">아티클</a></nav>
+    <a class="btn" href="#cta"><span class="c" aria-hidden="true">→</span><span class="l ko">예약하기</span></a>
+    <button class="burger" type="button" aria-label="메뉴">☰</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 히어로 900 -->
+  <section class="hero">
+    <video src="../hotel-b/assets/hero.mp4" poster="../hotel-b/assets/hero-poster.jpg" autoplay muted loop playsinline aria-label="객실 전경"></video>
+    <div class="in">
+      <div class="r1">
+        <div class="rate">
+          <span class="fs"><span><img src="../hotel-b/assets/av-1.jpg" alt="" width="50" height="50"></span><span><img src="../hotel-b/assets/av-2.jpg" alt="" width="50" height="50"></span><span><img src="../hotel-b/assets/av-3.jpg" alt="" width="50" height="50"></span></span>
+          <b class="ser n">4.9</b>
+          <span class="tx"><b class="ko">아주 좋음</b><span class="st" aria-hidden="true">★★★★★</span></span>
+        </div>
+        <p class="qt p ko">별하의 모든 머무름은 사려 깊게 짜인 설계와 앞서 헤아리는 응대, 그리고 첫 문의부터 체크아웃까지 끊기지 않고 매끄럽게 이어지는 하나의 흐름으로 완성됩니다.</p>
+      </div>
+      <div class="mk"><svg viewBox="0 0 1392 235" role="img" aria-label="별하 BYEOLHA"><text x="696" y="200" text-anchor="middle" font-family="Crimson Text, serif" font-weight="600" font-size="248" fill="currentColor">Byeolha</text></svg></div>
+    </div>
+  </section>
+
+  <!-- 철학 1353 -->
+  <section class="phil" id="phil">
+    <svg class="curve" viewBox="0 0 680 2000" fill="none" aria-hidden="true"><path d="M660 0C520 420 120 520 200 940c80 420 460 300 380 700-50 250-300 300-460 360" stroke="currentColor" stroke-width="1.2"/></svg>
+    <h2 class="t ser ko rv">우리의 철학</h2>
+    <p class="body ser ko rv">좋은 머무름은 조용하고, 사려 깊고, 온전히 당신의 것이라 믿습니다. 모든 객실과 모든 디테일, 모든 응대가 도착의 순간을 숨 고르기처럼 만들도록 배치돼 있습니다.</p>
+    <div class="go rv"><a class="btn" href="#host"><span class="c" aria-hidden="true">→</span><span class="l ko">소개 더 보기</span></a></div>
+    <div class="pics">
+      <figure class="a rv"><img src="../hotel-b/assets/phil-1.jpg" alt="침대와 조명이 있는 객실" width="450" height="556"></figure>
+      <figure class="b rv"><img src="../hotel-b/assets/phil-2.jpg" alt="창이 넓은 스위트 거실" width="450" height="556"></figure>
+    </div>
+  </section>
+
+  <!-- 머무름의 이유 1003 -->
+  <section class="sec why" id="why">
+    <div class="in">
+      <h2 class="t ser ko rv">머무름의 이유</h2>
+      <p class="sub ko rv">별하에서 보내는 하루는 차분하게 정돈된 설계와 먼저 헤아리는 사려 깊은 응대, 그리고 처음부터 끝까지 번거로울 일이 하나도 없는 예약으로 이어집니다.</p>
+      <div class="grid">
+        <div class="col">
+          <div class="wcard rv"><span class="ic" aria-hidden="true">◷</span><h4 class="h3 ser ko">간편한 예약</h4><p class="p p36 ko">남아 있는 객실과 요금을 그 자리에서 바로 확인하고 몇 분 만에 예약을 마칠 수 있습니다. 숨은 비용이나 뒤늦은 안내는 없습니다.</p></div>
+          <div class="wcard rv"><span class="ic" aria-hidden="true">☾</span><h4 class="h3 ser ko">편안한 객실</h4><p class="p p36 ko">좋은 침구와 조용한 실내, 그리고 낮게 떨어뜨린 조도로 저녁이 저녁답게 느껴지도록 도착 전에 미리 준비해 둡니다.</p></div>
+        </div>
+        <figure class="pic rv"><img src="../hotel-b/assets/why.jpg" alt="샹들리에가 있는 로비" width="455" height="582"></figure>
+        <div class="col">
+          <div class="wcard rv"><span class="ic" aria-hidden="true">✦</span><h4 class="h3 ser ko">세심한 응대</h4><p class="p p36 ko">지난번의 선호를 기억해 두었다가 말씀하신 요청을 미리 준비합니다. 하루 중 어느 시간에 찾으셔도 사람이 있습니다.</p></div>
+          <div class="wcard rv"><span class="ic" aria-hidden="true">◎</span><h4 class="h3 ser ko">도심 접근성</h4><p class="p p36 ko">식당가와 문화 시설, 업무 지구까지 모두 걸어서 닿습니다. 멀리 이동하셔야 하면 차량을 미리 준비해 드립니다.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 머무름의 방식 921 -->
+  <section class="sec host" id="host">
+    <div class="in">
+      <h2 class="t ser ko rv">머무름의 방식</h2>
+      <p class="sub ko rv">기억에 남는 하루는 세부에서 만들어집니다. 명확한 예약, 정돈된 객실, 그리고 먼저 헤아리는 사람.</p>
+      <div class="body rv">
+        <div class="ls" id="hostls">
+          <button type="button" class="hb on" data-i="0"><span class="h3 ser ko">곁에 있는 사람</span></button>
+          <button type="button" class="hb" data-i="1"><span class="h3 ser ko">준비된 객실</span></button>
+          <button type="button" class="hb" data-i="2"><span class="h3 ser ko">편안함과 안전</span></button>
+          <button type="button" class="hb" data-i="3"><span class="h3 ser ko">유연한 일정</span></button>
+          <button type="button" class="hb" data-i="4"><span class="h3 ser ko">예약부터 체크아웃까지</span></button>
+        </div>
+        <div class="st">
+          <img class="on" src="../hotel-b/assets/host-1.jpg" alt="객실을 정돈하는 직원" width="583" height="521">
+          <img src="../hotel-b/assets/host-2.jpg" alt="정돈된 침구" width="583" height="521">
+          <img src="../hotel-b/assets/host-3.jpg" alt="야간 로비" width="583" height="521">
+          <img src="../hotel-b/assets/host-4.jpg" alt="창가 좌석" width="583" height="521">
+          <img src="../hotel-b/assets/host-5.jpg" alt="프런트 데스크" width="583" height="521">
+          <div class="cap"><p class="p p36 ko" id="hostcap">묻기 전에 준비합니다. 도착 시간이 늦어져도, 늦은 저녁이 필요해도 사람이 먼저 움직입니다.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 객실 1477 -->
+  <section class="sec rooms" id="rooms">
+    <div class="in">
+      <div class="head">
+        <div class="hd rv">
+          <h2 class="t ser ko">객실</h2>
+          <p class="hs ko">모든 여정에 맞는 머무름</p>
+        </div>
+        <p class="rt p ko rv">여덟 개의 객실과 스위트를 준비했습니다. 모두 유연한 일정과 개인화된 응대로 바로 예약하실 수 있습니다.</p>
+      </div>
+      <div class="grid">
+        <a class="rcard rv" href="#cta"><div class="tp"><h3 class="h4 ser ko">베가 스위트</h3><span class="pr"><span class="u lb ko">1박<br>기준</span><span class="v">189,000</span></span></div><div class="im"><img src="../hotel-b/assets/room-1.jpg" alt="베가 스위트" width="667" height="480"></div></a>
+        <a class="rcard rv" href="#cta"><div class="tp"><h3 class="h4 ser ko">알타이르 룸</h3><span class="pr"><span class="u lb ko">1박<br>기준</span><span class="v">129,000</span></span></div><div class="im"><img src="../hotel-b/assets/room-2.jpg" alt="알타이르 룸" width="667" height="480"></div></a>
+        <a class="rcard rv" href="#cta"><div class="tp"><h3 class="h4 ser ko">안타레스 스위트</h3><span class="pr"><span class="u lb ko">1박<br>기준</span><span class="v">235,000</span></span></div><div class="im"><img src="../hotel-b/assets/room-3.jpg" alt="안타레스 스위트" width="667" height="480"></div></a>
+        <a class="rcard rv" href="#cta"><div class="tp"><h3 class="h4 ser ko">카펠라 킹</h3><span class="pr"><span class="u lb ko">1박<br>기준</span><span class="v">155,000</span></span></div><div class="im"><img src="../hotel-b/assets/room-4.jpg" alt="카펠라 킹" width="667" height="480"></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 후기 972 -->
+  <section class="sec rev" id="rev">
+    <div class="in">
+      <h2 class="t ser ko rv">이용 후기</h2>
+      <p class="sub ko rv">머물다 간 분들이 남긴 이야기입니다. 예약이 얼마나 간단했는지, 객실이 얼마나 편했는지.</p>
+      <div class="rw rv">
+        <div class="rate">
+          <span class="fs"><span><img src="../hotel-b/assets/tface-1.jpg" alt="" width="50" height="50"></span><span><img src="../hotel-b/assets/tface-2.jpg" alt="" width="50" height="50"></span><span><img src="../hotel-b/assets/tface-3.jpg" alt="" width="50" height="50"></span></span>
+          <b class="ser n">4.9</b>
+          <span class="tx"><b class="ko">아주 좋음</b><span class="st" aria-hidden="true">★★★★★</span></span>
+        </div>
+      </div>
+      <div class="card rv">
+        <span class="av"><img id="rvav" src="../hotel-b/assets/face-1.jpg" alt="" width="100" height="100"></span>
+        <h3 class="h3 ser ko" id="rvti">예약이 2분 만에 끝났습니다</h3>
+        <p class="sm ko" id="rvtx">객실을 비교하고 코너 스위트를 골라 바로 확정했습니다. 확인 메일이 곧장 도착했고 더 물어볼 게 없었습니다.</p>
+        <p class="who nm ko" id="rvnm">정유진</p>
+      </div>
+      <div class="th" id="rvth">
+        <button type="button" class="on"><img src="../hotel-b/assets/tface-1.jpg" alt="후기 1" width="48" height="48"></button>
+        <button type="button"><img src="../hotel-b/assets/tface-2.jpg" alt="후기 2" width="48" height="48"></button>
+        <button type="button"><img src="../hotel-b/assets/tface-3.jpg" alt="후기 3" width="48" height="48"></button>
+        <button type="button"><img src="../hotel-b/assets/tface-4.jpg" alt="후기 4" width="48" height="48"></button>
+        <button type="button"><img src="../hotel-b/assets/tface-5.jpg" alt="후기 5" width="48" height="48"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 영상 847 -->
+  <section class="sec vid">
+    <div class="fr">
+      <video id="ctav" src="../hotel-b/assets/cta.mp4" poster="../hotel-b/assets/cta-poster.jpg" autoplay muted loop playsinline aria-label="객실 소개 영상"></video>
+      <span class="tint"></span>
+      <p class="tx ser ko">조용한 설계와 세심한 응대가<br>만나는 별하로 들어오세요</p>
+      <button class="pl" type="button" id="plbtn" aria-label="영상 일시정지">❚❚</button>
+    </div>
+  </section>
+
+  <!-- 아티클 950 -->
+  <section class="art" id="art">
+    <div class="in">
+      <h2 class="t ser ko rv">아티클</h2>
+      <p class="sub ko rv">머물다 간 분들이 남긴 이야기와, 다음 예약을 조금 더 쉽게 만들어 줄 정보를 모아 두었습니다.</p>
+      <div class="go rv"><a class="btn" href="#cta"><span class="c" aria-hidden="true">→</span><span class="l ko">아티클 전체 보기</span></a></div>
+      <div class="grid">
+        <a class="acard rv" href="#cta"><div class="im"><img src="../hotel-b/assets/art-1.jpg" alt="아티클 1" width="412" height="294"></div><div class="bd"><p class="dt">2026. 9. 6.</p><h5 class="ser ko">여행의 성격에 맞는 객실을 고르는 가장 쉬운 방법 세 가지</h5></div></a>
+        <a class="acard rv" href="#cta"><div class="im"><img src="../hotel-b/assets/art-2.jpg" alt="아티클 2" width="412" height="294"></div><div class="bd"><p class="dt">2026. 8. 2.</p><h5 class="ser ko">직접 예약이 예약 플랫폼보다 나은 세 가지 이유</h5></div></a>
+        <a class="acard rv" href="#cta"><div class="im"><img src="../hotel-b/assets/art-3.jpg" alt="아티클 3" width="412" height="294"></div><div class="bd"><p class="dt">2026. 9. 7.</p><h5 class="ser ko">도착하고 나서의 첫 한 시간이 그날 하루를 정합니다</h5></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ 696 -->
+  <section class="faq" id="faq">
+    <div class="in">
+      <h2 class="t ser ko rv">자주 묻는 질문</h2>
+      <p class="sub ko rv">예약과 도착, 그리고 머무시는 동안 필요한 것들을 한자리에 모아 두었습니다. 여기에 없는 질문이 있으면 언제든 프런트로 알려 주세요. 담당자가 확인해서 바로 답해 드립니다.</p>
+      <div class="list rv">
+        <div class="qa"><button class="q" type="button"><span class="ko">체크인과 체크아웃은 몇 시인가요?</span><span class="ic" aria-hidden="true">⌄</span></button><div class="a"><p class="ko">체크인은 오후 3시부터, 체크아웃은 오전 11시까지입니다. 미리 말씀 주시면 조정해 드립니다.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">예약 확정 후 변경하거나 취소할 수 있나요?</span><span class="ic" aria-hidden="true">⌄</span></button><div class="a"><p class="ko">유연 요금은 도착 48시간 전까지 변경과 취소가 무료입니다. 특가 요금은 예약 시 따로 안내드립니다.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">객실은 어떻게 고르면 좋을까요?</span><span class="ic" aria-hidden="true">⌄</span></button><div class="a"><p class="ko">여덟 개의 객실은 컴팩트한 룸부터 거실이 있는 스위트까지 있습니다. 일정과 인원을 알려 주시면 골라 드립니다.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">조식이 포함되나요? 다른 시설도 쓸 수 있나요?</span><span class="ic" aria-hidden="true">⌄</span></button><div class="a"><p class="ko">스위트는 조식이 포함됩니다. 그 외 객실도 추가하실 수 있고, 라운지와 피트니스는 투숙 중 자유롭게 이용하실 수 있습니다.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">주차와 공항 픽업, 무장애 객실이 있나요?</span><span class="ic" aria-hidden="true">⌄</span></button><div class="a"><p class="ko">주차는 무료이고 공항 픽업은 유료로 준비해 드립니다. 무장애 객실은 두 개 있어 미리 요청해 주시면 배정합니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 인스타 877 -->
+  <section class="ig" id="ig">
+    <h2 class="t ser ko rv">@byeolha 팔로우</h2>
+    <p class="sub ko rv">객실과 스위트, 그리고 별하에서의 하루를 조금 더 가볍게 만들어 주는 작은 순간들을 조금 더 가까이서 보실 수 있습니다.</p>
+    <div class="fan">
+      <figure class="s rv"><img src="../hotel-b/assets/ig-1.jpg" alt="인스타그램 사진 1" width="240" height="400"></figure>
+      <figure class="m rv"><img src="../hotel-b/assets/ig-2.jpg" alt="인스타그램 사진 2" width="285" height="448"></figure>
+      <figure class="s s2 rv"><img src="../hotel-b/assets/ig-3.jpg" alt="인스타그램 사진 3" width="240" height="400"></figure>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot" id="cta">
+  <div class="in">
+    <div class="top">
+      <nav class="cl c1"><b class="ko">둘러보기</b><a href="#top" class="ko">홈</a><a href="#phil" class="ko">소개</a><a href="#rooms" class="ko">객실</a><a href="#art" class="ko">아티클</a></nav>
+      <nav class="cl c2"><b class="ko">약관</b><a href="#faq" class="ko">개인정보 처리방침</a><a href="#faq" class="ko">이용약관</a><a href="#faq" class="ko">결제 및 취소 규정</a><a href="#cta" class="ko">예약하기</a></nav>
+      <nav class="cl c3"><b class="ko">팔로우</b><a href="#top">Instagram</a><a href="#top">Facebook</a><a href="#top">LinkedIn</a><a href="#top">X</a></nav>
+      <div class="cl c4">
+        <b class="ko">프런트</b>
+        <p class="ko">연중무휴 24시간 운영</p>
+        <p class="ko">체크인 오후 3:00 · 체크아웃 오전 11:00</p>
+        <p class="ko">서울 강남구 테헤란로 14길 6</p>
+        <a href="tel:01048944905">010-4894-4905</a>
+        <a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a>
+      </div>
+    </div>
+    <div class="mk"><svg viewBox="0 0 1390 152" role="img" aria-label="별하 BYEOLHA"><text x="695" y="132" text-anchor="middle" font-family="Crimson Text, serif" font-weight="600" font-size="176" fill="currentColor" letter-spacing="6">BYEOLHA</text></svg></div>
+    <p class="biz ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 6gsmake@gmail.com · 010-4894-4905 · © 2026 별하 호텔 — 민트클 샘플 템플릿</p>
+  </div>
+</footer>
+
+</body>
+</html>

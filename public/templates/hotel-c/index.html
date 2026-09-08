@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>하람 호텔 — 부티크 호텔 (프리미엄 디자인 C)</title>
+<meta name="description" content="사진 아래 초대형 워드마크가 깔리는 히어로, 흐르는 프로모션 띠, 두 장짜리 다이닝 카드, 가로 3분할 휴식 목록, 객실 3종 카드, 특별 요금, 한 장짜리 후기, 총지배인 편지, 아코디언 FAQ까지 갖춘 부티크 호텔 프리미엄 원페이지.">
+<meta property="og:title" content="하람 호텔 — 부티크 호텔 (프리미엄 디자인 C)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Inter:wght@400;700&family=Manrope:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭)
+   본문 배경 #fff · 섹션 면 rgb(242,242,242) · 카드 #fff · 푸터 rgb(28,61,45)
+   컨테이너 1150 (섹션 padding 64px 20px → 좌측선 145)
+   라틴 Libre Baskerville / Inter / Manrope · 한글 Pretendard
+   h2 40/48 400 ls-1.6 대문자 · h4 20/28 400 · h6 16/22.4 600 ls-0.32
+   본문 16/19.2 400 · 작은글 14/16.8 400 ls-0.28 · 칩 12/19.2 500 ls-0.24
+   히어로 상단 문구 18/25.2 700 ls-0.72 · 워드마크 234/234 ── */
+:root{--face:rgb(242,242,242);--ink:#000;--mute:rgb(179,179,179);--foot:rgb(28,61,45);--ease:cubic-bezier(.6,-0.01,.3,.99);--sp:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth}
+body{background:#fff;color:var(--ink);font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;font-size:16px;line-height:19.2px;font-weight:400}
+.ko{letter-spacing:-.01em;text-wrap:pretty}
+.ser{font-family:"Libre Baskerville","Pretendard Variable",Pretendard,serif;font-weight:400}
+.mn{font-family:Manrope,"Pretendard Variable",Pretendard,sans-serif}
+
+.sec{background:var(--face);padding:64px 20px}
+.in{width:100%;max-width:1150px;margin:0 auto}
+.head{text-align:center;margin-bottom:0}
+h2.t{display:inline-block;font-size:40px;line-height:48px;letter-spacing:-1.6px;text-transform:uppercase}
+.head .sub{max-width:690px;margin:10px auto 0;font-size:16px;line-height:19.2px}
+.h4{font-size:20px;line-height:28px;font-weight:400}
+.h6{font-size:16px;line-height:22.4px;font-weight:600;letter-spacing:-.32px}
+.p{font-size:16px;line-height:19.2px}
+.s{font-size:14px;line-height:16.8px;letter-spacing:-.28px}
+.chip{font-family:Manrope,"Pretendard Variable",Pretendard,sans-serif;font-size:12px;line-height:19.2px;font-weight:500;letter-spacing:-.24px}
+.pill{display:inline-flex;align-items:center;justify-content:center;background:var(--ink);color:#fff;border-radius:30px;padding:8px 12px;transition:opacity .3s var(--sp)}
+.pill:hover{opacity:.75}
+
+.rv{opacity:0;transform:translateY(30px);transition:opacity 1.1s var(--sp),transform 1.1s var(--sp)}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── 내비 : 히어로 위에 얹힘 · 1440×67 · pad 16 20 ── */
+.nav{position:absolute;top:0;left:0;right:0;z-index:20;padding:16px 20px}
+.nav .row{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;min-height:35px}
+.nav .bd{display:flex;align-items:center;gap:8px;color:#fff}
+.nav .bd .mk{font-size:20px;line-height:24px;font-weight:700}
+.nav .rt{display:flex;align-items:center;gap:8px}
+.nav .ic{width:34px;height:34px;border-radius:30px;background:#fff;display:flex;align-items:center;justify-content:center}
+.nav .mb{height:35px;border-radius:30px;background:#fff;padding:8px 12px;color:var(--ink)}
+
+/* ── 히어로 : 1440×900 ── */
+.hero{position:relative;width:100%;height:900px;overflow:clip;background:#000}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.1);transition:transform 2s var(--ease)}
+.hero.go>img{transform:none}
+.hero .tint{position:absolute;inset:0;background:#000;opacity:0;transition:opacity 1.5s var(--sp) .3s}
+.hero.go .tint{opacity:.2}
+.hero .cap{position:absolute;left:0;right:0;top:625px;padding:0 20px;display:flex;justify-content:space-between;color:#fff;font-size:18px;line-height:25.2px;font-weight:700;letter-spacing:-.72px}
+.hero .mk{position:absolute;left:0;right:0;top:661px;height:239px}
+.hero .mk svg{width:100%;height:239px;color:#fff}
+
+/* ── 프로모션 띠 : 1440×184 · pad 64 0 ── */
+.mq{background:var(--face);padding:64px 0;overflow:clip}
+.mq .tr{display:flex;width:max-content;gap:0;animation:mq 34s linear infinite}
+@media (prefers-reduced-motion:reduce){.mq .tr{animation:none}}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq .it{display:flex;align-items:center;height:56px;padding:8px;gap:8px;flex:0 0 auto}
+.mq .it .lg{font-size:20px;line-height:30px;font-weight:700;padding:0 33px;white-space:nowrap}
+.mq .it .tx{display:flex;flex-direction:column;gap:4px;padding:0 33px}
+.mq .it .tx b{font-family:"Libre Baskerville","Pretendard Variable",Pretendard,serif;font-size:16px;line-height:19.2px;font-weight:400;text-transform:uppercase;white-space:nowrap}
+.mq .it .tx span{font-size:14px;line-height:16.8px;white-space:nowrap}
+
+/* ── 다이닝 : 1440×788 ── */
+.dine .cards{margin-top:64px;display:flex;gap:20px}
+.dcard{position:relative;width:565px;height:500px;flex:1 0 0;overflow:clip;display:block}
+.dcard img{position:absolute;left:0;top:-119px;width:100%;height:739px;object-fit:cover;transition:transform 1.4s var(--sp)}
+.dcard:hover img{transform:scale(1.05)}
+.dcard .sh{position:absolute;inset:0;background:rgba(0,0,0,.4)}
+.dcard .lb{position:absolute;left:0;right:0;bottom:0;padding:20px;color:#fff}
+.dcard .lb .h4{display:block;width:fit-content;text-transform:uppercase}
+.dcard .lb p{display:block;width:fit-content;margin-top:4px}
+
+/* ── 완전한 휴식 : 1440×1678 ── */
+.esc .rows{margin-top:65px;display:flex;flex-direction:column;gap:10px}
+.erow{background:#fff;padding:20px;min-height:340px;display:flex;align-items:flex-start}
+.erow h4{width:350px;flex:0 0 auto;text-transform:uppercase}
+.erow .im{width:300px;height:300px;flex:0 0 auto;overflow:clip}
+.erow .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--sp)}
+.erow:hover .im img{transform:scale(1.06)}
+.erow p{width:333px;margin-left:127px;flex:0 0 auto}
+
+/* ── 객실 : 1440×1388 ── */
+.rooms .grid{margin-top:64px;display:grid;grid-template-columns:repeat(2,565px);gap:20px;justify-content:center}
+.rcard{background:#fff;display:block;min-height:540px}
+.rcard .im{width:100%;height:390px;overflow:clip}
+.rcard .im img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--sp)}
+.rcard:hover .im img{transform:scale(1.06)}
+.rcard .bd{padding:32px;text-align:center;min-height:136px}
+.rcard .bd h4{text-transform:uppercase}
+.rcard .bd p{margin-top:10px}
+
+/* ── 특별 요금 : 1440×809 ── */
+.off .rows{margin-top:64px;display:flex;flex-direction:column;gap:20px}
+.orow{background:#fff;padding:20px;min-height:260px;display:flex;align-items:flex-start;justify-content:space-between}
+.orow .tx{width:447px;flex:0 0 auto;display:flex;flex-direction:column;height:220px}
+.orow .tx h4{text-transform:uppercase}
+.orow .tx p{margin-top:10px}
+.orow .tx .pill{align-self:flex-start;margin-top:auto}
+.orow .im{width:333px;height:220px;flex:0 0 auto;overflow:clip}
+.orow .im img{width:100%;height:100%;object-fit:cover}
+
+/* ── 후기 : 1440×888 ── */
+.rev .card{margin-top:65px;background:#fff;padding:64px 20px;min-height:600px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.rev .q{width:700px;padding:64px 0;text-align:center}
+.rev .q blockquote{text-transform:uppercase}
+.rev .q .who{margin-top:32px;font-size:16px;line-height:14.4px}
+.rev .dots{margin-top:25px;display:flex;gap:12px}
+.rev .dots b{width:9px;height:9px;border-radius:50%;background:var(--mute);display:block;transition:background .3s}
+.rev .dots b.on{background:var(--ink)}
+
+/* ── 편지 : 1440×1328 ── */
+.ltr .card{background:#fff;padding:64px;min-height:1200px;display:flex;flex-direction:column;align-items:center}
+.ltr .lg{font-size:22px;line-height:31px;font-weight:700;display:flex;align-items:center;gap:8px}
+.ltr .bd{width:613px;margin-top:128px}
+.ltr .bd .mn{font-weight:700;font-size:16px;line-height:24px}
+.ltr .bd p{margin-top:20px}
+.ltr .sg{width:613px;margin-top:auto;text-align:right}
+.ltr .sg img{width:110px;height:44px;object-fit:contain;margin-left:auto;opacity:.85}
+.ltr .sg .nm{margin-top:14px;font-size:14px;line-height:16.8px;letter-spacing:-.28px}
+
+/* ── FAQ : 1440×567 ── */
+.faq .list{margin-top:64px;display:flex;flex-direction:column;gap:2px}
+.qa{background:#fff;padding:12px}
+.qa .q{width:100%;display:flex;align-items:center;justify-content:space-between;gap:0;text-align:left}
+.qa .q>span:first-child{flex:1 0 0}
+.qa .q .ic{width:24px;height:24px;border-radius:30px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;font-size:18px;line-height:1;transition:transform .35s var(--sp)}
+.qa.open .q .ic{transform:rotate(45deg)}
+.qa .a{max-height:0;overflow:hidden;transition:max-height .4s var(--sp)}
+.qa.open .a{max-height:240px}
+.qa .a p{padding:12px 0 8px;color:#333}
+
+/* ── 푸터 : 1440×653 ── */
+.foot{background:var(--foot);color:#fff;padding:64px 20px 0}
+.foot .in{padding:0}
+.foot .top{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;min-height:292px}
+.foot .top h4{width:460px;flex:0 0 auto;text-transform:uppercase}
+.foot .rt{width:352px;flex:0 0 auto}
+.foot .nvs{display:flex;gap:10px}
+.foot .nv{width:171px;display:flex;flex-direction:column;gap:10px}
+.foot .nv a{align-self:flex-start;transition:opacity .3s}
+.foot .nv a:hover{opacity:.7}
+.foot .ct{margin-top:48px;display:flex;flex-direction:column;gap:11px}
+.foot .ct a{display:flex;align-items:center;gap:12px;transition:opacity .3s}
+.foot .ct a:hover{opacity:.7}
+.foot .ct .ic{width:24px;height:24px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.5);border-radius:50%;font-size:11px}
+.foot .mkw{margin-top:64px;padding:0}
+.foot .mkw svg{width:100%;max-width:1400px;margin:0 auto;height:233px;color:#fff}
+.foot .biz{max-width:1400px;margin:0 auto;padding:0 0 28px;font-size:12px;line-height:19px;color:rgba(255,255,255,.62)}
+
+/* ── 1024 ── */
+@media (max-width:1199px){
+  .in{max-width:100%}
+  h2.t{font-size:32px;line-height:40px;letter-spacing:-1.2px}
+  .hero{height:640px}
+  .hero .cap{top:auto;bottom:210px}
+  .hero .mk{top:auto;bottom:24px;height:150px}
+  .hero .mk svg{height:150px}
+  .dine .cards{margin-top:72px}
+  .dcard{height:420px}
+  .dcard img{top:-90px;height:600px}
+  .esc .rows{margin-top:72px}
+  .erow{flex-direction:column;gap:20px;min-height:0}
+  .erow h4{width:auto}
+  .erow .im{width:100%;height:300px}
+  .erow p{width:auto;margin-left:0}
+  .rooms .grid{margin-top:72px;grid-template-columns:repeat(2,1fr)}
+  .off .rows{margin-top:56px}
+  .orow{flex-direction:column;gap:20px;min-height:0}
+  .orow .tx{width:auto;height:auto}
+  .orow .tx .pill{margin-top:20px}
+  .orow .im{width:100%;height:260px}
+  .rev .card{margin-top:56px;min-height:0}
+  .rev .q{width:auto;padding:32px 0}
+  .ltr .card{padding:48px 32px;min-height:0}
+  .ltr .bd,.ltr .sg{width:auto;max-width:613px}
+  .ltr .bd{margin-top:64px}
+  .ltr .sg{margin-top:64px;width:100%;max-width:613px}
+  .faq .list{margin-top:56px}
+  .foot .top{flex-direction:column;min-height:0}
+  .foot .top h4{width:auto}
+  .foot .rt{width:100%}
+  .foot .mkw svg{height:150px}
+}
+/* ── 390 ── */
+@media (max-width:809px){
+  .sec{padding:48px 20px}
+  h2.t{font-size:26px;line-height:34px;letter-spacing:-.8px}
+  .head .sub{font-size:15px;line-height:22px}
+  .hero{height:560px}
+  .hero .cap{bottom:150px;flex-direction:column;gap:6px;font-size:14px;line-height:20px}
+  .hero .mk{bottom:20px;height:70px}
+  .hero .mk svg{height:70px}
+  .mq{padding:36px 0}
+  .mq .it .lg,.mq .it .tx{padding:0 18px}
+  .dine .cards{flex-direction:column;margin-top:44px}
+  .dcard{width:100%;height:360px}
+  .dcard img{top:-60px;height:480px}
+  .esc .rows{margin-top:44px}
+  .erow .im{height:240px}
+  .rooms .grid{margin-top:44px;grid-template-columns:1fr}
+  .rcard .im{height:260px}
+  .rcard .bd{padding:24px;min-height:0}
+  .off .rows{margin-top:36px}
+  .orow .im{height:200px}
+  .rev .card{margin-top:36px;padding:32px 20px}
+  .ltr .card{padding:32px 20px}
+  .ltr .bd{margin-top:40px}
+  .ltr .sg{margin-top:48px}
+  .faq .list{margin-top:36px}
+  .foot{padding:48px 0 0}
+  .foot .nvs{flex-direction:column;gap:24px}
+  .foot .nv{width:auto}
+  .foot .mkw{margin-top:36px}
+  .foot .mkw svg{height:52px}
+}
+</style>
+</head>
+<body>
+
+<!-- 히어로 900 -->
+<section class="hero" id="top">
+  <img src="./assets/hero.jpg" alt="바다를 향한 야외 수영장과 테라스" width="1440" height="900">
+  <div class="tint"></div>
+  <header class="nav">
+    <div class="row">
+      <a class="bd" href="#top"><span aria-hidden="true">◐</span><span class="mk">하람</span></a>
+      <div class="rt">
+        <a class="ic" href="tel:01048944905" aria-label="전화"><span aria-hidden="true">☎</span></a>
+        <button class="mb chip ko" type="button" id="mbtn">메뉴</button>
+      </div>
+    </div>
+  </header>
+  <div class="cap"><span class="ko">느린 하루를 위해 지은 부티크 호텔</span><span class="ko">서두르지 않는 하루</span></div>
+  <div class="mk"><svg viewBox="0 0 1440 239" role="img" aria-label="하람 HARAM"><text x="720" y="205" text-anchor="middle" font-family="Libre Baskerville, serif" font-size="234" fill="currentColor" letter-spacing="0">HARAM</text></svg></div>
+</section>
+
+<!-- 프로모션 띠 184 -->
+<div class="mq" aria-hidden="true">
+  <div class="tr">
+    <div class="it"><span class="lg">◐ 하람</span></div>
+    <div class="it"><span class="tx"><b>Spring Sale</b><span>최대 40% 할인</span></span></div>
+    <div class="it"><span class="lg">◐ 하람</span></div>
+    <div class="it"><span class="tx"><b>Summer Escape</b><span>최대 30% 할인</span></span></div>
+    <div class="it"><span class="lg">◐ 하람</span></div>
+    <div class="it"><span class="tx"><b>Spring Sale</b><span>최대 40% 할인</span></span></div>
+    <div class="it"><span class="lg">◐ 하람</span></div>
+    <div class="it"><span class="tx"><b>Spring Sale</b><span>최대 40% 할인</span></span></div>
+    <div class="it"><span class="lg">◐ 하람</span></div>
+    <div class="it"><span class="tx"><b>Summer Escape</b><span>최대 30% 할인</span></span></div>
+    <div class="it"><span class="lg">◐ 하람</span></div>
+    <div class="it"><span class="tx"><b>Spring Sale</b><span>최대 40% 할인</span></span></div>
+  </div>
+</div>
+
+<main>
+
+  <!-- 다이닝 788 -->
+  <section class="sec dine" id="dine">
+    <div class="in">
+      <div class="head">
+        <h2 class="t ser ko rv">다이닝</h2>
+        <p class="sub ko rv">저녁의 한 잔을 위해 앰버에 들르든, 그로브에서 온전한 한 끼를 마주하든, 모든 방문이 곱씹을 만한 자리가 됩니다.</p>
+      </div>
+      <div class="cards">
+        <a class="dcard rv" href="#cta">
+          <img src="./assets/dine-1.jpg" alt="앰버 바 내부" width="565" height="739">
+          <div class="sh"></div>
+          <div class="lb"><h4 class="h4 ser ko">바 메뉴</h4><p class="s ko">앰버</p></div>
+        </a>
+        <a class="dcard rv" href="#cta">
+          <img src="./assets/dine-2.jpg" alt="그로브 레스토랑 내부" width="565" height="739">
+          <div class="sh"></div>
+          <div class="lb"><h4 class="h4 ser ko">레스토랑 메뉴</h4><p class="s ko">그로브</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 완전한 휴식 1678 -->
+  <section class="sec esc" id="esc">
+    <div class="in">
+      <div class="head">
+        <h2 class="t ser ko rv">완전한 휴식</h2>
+        <p class="sub ko rv">촛불을 켠 저녁 식사부터 볕이 길게 드는 테라스의 아침까지, 어떤 순간에도 어울리는 하루를 미리 준비해 두었습니다. 오늘 무엇을 할지 정하지 않아도 괜찮습니다.</p>
+      </div>
+      <div class="rows">
+        <div class="erow rv"><h4 class="h4 ser ko">쉼</h4><div class="im"><img src="./assets/esc-1.jpg" alt="정원이 있는 안뜰" width="300" height="300"></div><p class="p ko">스파와 수영장, 웰니스 시설을 온전히 쓰면서 하루 동안 짊어졌던 무게를 천천히 내려놓는 시간입니다.</p></div>
+        <div class="erow rv"><h4 class="h4 ser ko">식사</h4><div class="im"><img src="./assets/esc-2.jpg" alt="바다가 보이는 야외 식당" width="300" height="300"></div><p class="p ko">제철 재료로 차린 메뉴가 아침부터 밤까지 이어지며 식탁 위의 계절을 조금씩 바꿔 놓습니다.</p></div>
+        <div class="erow rv"><h4 class="h4 ser ko">산책</h4><div class="im"><img src="./assets/esc-3.jpg" alt="골목과 건물 외관" width="300" height="300"></div><p class="p ko">가까운 골목과 언덕을 안내해 드립니다. 지도와 하루 일정은 프런트에서 함께 짜 드립니다.</p></div>
+        <div class="erow rv"><h4 class="h4 ser ko">숙면</h4><div class="im"><img src="./assets/esc-4.jpg" alt="테라스가 있는 객실 외관" width="300" height="300"></div><p class="p ko">고급 침구와 차분한 공기, 그리고 세심한 온도 조절로 하룻밤의 질을 끝까지 맞춰 둡니다. 아침이 다릅니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 객실 1388 -->
+  <section class="sec rooms" id="rooms">
+    <div class="in">
+      <div class="head">
+        <h2 class="t ser ko rv">객실</h2>
+        <p class="sub ko rv">모든 객실은 하나의 안식처입니다. 세심하게 설계하고 손끝으로 마무리해, 도착한 순간부터 내 방처럼 느껴집니다.</p>
+      </div>
+      <div class="grid">
+        <a class="rcard rv" href="#cta"><div class="im"><img src="./assets/room-1.jpg" alt="더블 디럭스" width="565" height="390"></div><div class="bd"><h4 class="h4 ser ko">더블 디럭스</h4><p class="s ko">따뜻한 빛과 고요한 정원, 그리고 긴 아침을 위한 퀸 베드. 전용 테라스가 창 너머에 바로 이어집니다.</p></div></a>
+        <a class="rcard rv" href="#cta"><div class="im"><img src="./assets/room-2.jpg" alt="주니어 스위트" width="565" height="390"></div><div class="bd"><h4 class="h4 ser ko">주니어 스위트</h4><p class="s ko">넉넉한 공간과 킹 베드, 서두르지 않는 저녁을 위한 거실. 조용한 호사라는 말이 어울리는 방입니다.</p></div></a>
+        <a class="rcard rv" href="#cta"><div class="im"><img src="./assets/room-3.jpg" alt="패밀리 스위트" width="565" height="390"></div><div class="bd"><h4 class="h4 ser ko">패밀리 스위트</h4><p class="s ko">킹 베드 두 개와 함께 쓰는 거실, 그리고 숨 돌릴 여백. 가족에게 필요한 것만 정확히 담았습니다.</p></div></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 특별 요금 809 -->
+  <section class="sec off" id="off">
+    <div class="in">
+      <div class="head">
+        <h2 class="t ser ko rv">특별 요금</h2>
+        <p class="sub ko rv">머무름을 조금 더 가치 있게. 지금 준비된 요금을 확인해 보세요.</p>
+      </div>
+      <div class="rows">
+        <div class="orow rv">
+          <div class="tx"><h4 class="h4 ser ko">주말 리트릿 — 스파와 웰니스 시설을 무료로 이용하실 수 있는 혜택</h4><p class="p ko">금요일에 도착해 일요일에 가볍게 돌아갑니다. 주말 숙박에는 스파와 웰니스 시설 이용이 포함됩니다.</p><a class="pill chip ko" href="#cta">자세히</a></div>
+          <div class="im"><img src="./assets/offer-1.jpg" alt="실내 스파" width="333" height="220"></div>
+        </div>
+        <div class="orow rv">
+          <div class="tx"><h4 class="h4 ser ko">서머 이스케이프 — 30% 할인</h4><p class="p ko">3박 이상 직접 예약하면 요금을 낮춰 드립니다. 매일 조식과 레이트 체크아웃이 포함됩니다.</p><a class="pill chip ko" href="#cta">자세히</a></div>
+          <div class="im"><img src="./assets/offer-2.jpg" alt="화분이 놓인 안뜰" width="333" height="220"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 후기 888 -->
+  <section class="sec rev" id="rev">
+    <div class="in">
+      <div class="head">
+        <h2 class="t ser ko rv">방문객 후기</h2>
+        <p class="sub ko rv">저희 말만 믿지 마세요. 직접 하루를 보내고 돌아간 분들이 남긴 이야기가 여기 있습니다. 사진보다 정확한 기록입니다.</p>
+      </div>
+      <div class="card rv">
+        <div class="q">
+          <blockquote class="h4 ser ko" id="qtx">“도착한 바로 그 순간부터 모든 것이 정돈돼 있었습니다. 객실은 사진에서 본 것보다 훨씬 아름다웠고 프런트의 응대는 처음부터 끝까지 흠잡을 데가 하나도 없었으며 창밖으로 내다보이는 풍경은 굳이 말로 설명할 필요가 없을 정도였습니다. 저희 가족은 분명 이곳에 다시 올 겁니다.”</blockquote>
+          <p class="who ko" id="qwho">김서연 · 트립어드바이저</p>
+        </div>
+        <div class="dots" id="dots"><b class="on"></b><b></b><b></b><b></b><b></b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 총지배인 편지 1328 -->
+  <section class="sec ltr" id="ltr">
+    <div class="in">
+      <div class="card rv">
+        <div class="lg"><span aria-hidden="true">◐</span><span>하람</span></div>
+        <div class="bd">
+          <span class="mn ko">고객님께,</span>
+          <p class="mn ko">하람에 오신 것을 진심으로 환영합니다. 이 호텔은 아주 단순한 하나의 생각에서 시작했습니다. 좋은 머무름이란 언제나 아주 작은 세부에서 먼저 느껴진다는 것. 침구의 실 한 올부터 창밖으로 내다보이는 풍경까지, 이곳에 놓인 모든 것은 오직 한 가지 목적만을 생각하며 골랐습니다. 그것은 온전한 편안함입니다.</p>
+          <p class="mn ko">저희 팀은 하루 종일 곁에 있습니다. 저녁 자리 예약이든 동네 추천이든, 베개 하나 더든, 그저 궁금한 것이든 언제든 말씀해 주세요. 여기 계셔서 기쁩니다.</p>
+          <p class="mn ko">이곳에서의 시간이 일상에서 잠시 벗어난 진짜 쉼이 되기를 바랍니다. 편히 주무시고, 마음껏 다니시고, 내 집처럼 지내 주세요.</p>
+        </div>
+        <div class="sg">
+          <img src="./assets/sign.jpg" alt="총지배인 서명" width="110" height="44">
+          <p class="nm ko">정하윤, 총지배인</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ 567 -->
+  <section class="sec faq" id="faq">
+    <div class="in">
+      <div class="head">
+        <h2 class="t ser ko rv">자주 묻는 질문</h2>
+        <p class="sub ko rv">도착 전에 알아 두면 좋은 것들을 모았습니다.</p>
+      </div>
+      <div class="list rv">
+        <div class="qa"><button class="q" type="button"><span class="h6 ser ko">체크인과 체크아웃은 몇 시인가요?</span><span class="ic" aria-hidden="true">＋</span></button><div class="a"><p class="s ko">체크인은 오후 3시부터, 체크아웃은 오전 11시까지입니다. 사정이 있으시면 미리 말씀해 주세요.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="h6 ser ko">공항 픽업이 되나요?</span><span class="ic" aria-hidden="true">＋</span></button><div class="a"><p class="s ko">유료로 픽업을 준비해 드립니다. 항공편과 도착 시각을 알려 주시면 차량을 배차합니다.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="h6 ser ko">조식이 요금에 포함되나요?</span><span class="ic" aria-hidden="true">＋</span></button><div class="a"><p class="s ko">스위트 객실은 조식이 포함됩니다. 그 외 객실은 1인 2만 5천원에 추가하실 수 있습니다.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="h6 ser ko">아이와 함께 묵어도 괜찮은가요?</span><span class="ic" aria-hidden="true">＋</span></button><div class="a"><p class="s ko">패밀리 스위트를 권해 드립니다. 유아용 침대와 아기 욕조는 무료로 준비해 드립니다.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="h6 ser ko">지역 투어나 컨시어지 서비스가 있나요?</span><span class="ic" aria-hidden="true">＋</span></button><div class="a"><p class="s ko">프런트에서 산책 코스와 식당 예약, 반나절 투어까지 함께 짜 드립니다.</p></div></div>
+        <div class="qa"><button class="q" type="button"><span class="h6 ser ko">취소 규정은 어떻게 되나요?</span><span class="ic" aria-hidden="true">＋</span></button><div class="a"><p class="s ko">일반 요금은 도착 3일 전까지 무료 취소됩니다. 특가 요금은 예약 시 규정을 따로 안내드립니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot" id="cta">
+  <div class="in">
+    <div class="top">
+      <h4 class="h4 ser ko">세심하게 지어 올린 공간에서<br>오래 머무르고 싶어지는 하루를,<br>그리고 돌아가서도 떠오르는<br>저녁의 온도를 준비했습니다</h4>
+      <div class="rt">
+        <div class="nvs">
+          <nav class="nv s"><a href="#top" class="ko">홈</a><a href="#rooms" class="ko">객실</a><a href="#dine" class="ko">다이닝</a><a href="#esc" class="ko">휴식</a><a href="#cta" class="ko">예약</a></nav>
+          <nav class="nv s"><a href="#faq" class="ko">자주 묻는 질문</a><a href="#off" class="ko">특별 요금</a><a href="#rev" class="ko">후기</a></nav>
+        </div>
+        <div class="ct s">
+          <a href="tel:01048944905"><span class="ic" aria-hidden="true">☎</span><span>010-4894-4905</span></a>
+          <a href="mailto:6gsmake@gmail.com"><span class="ic" aria-hidden="true">✉</span><span>6gsmake@gmail.com</span></a>
+          <a href="#top"><span class="ic" aria-hidden="true">f</span><span class="ko">페이스북에서 보기</span></a>
+          <a href="#top"><span class="ic" aria-hidden="true">◎</span><span class="ko">인스타그램</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mkw"><svg viewBox="0 0 1400 233" role="img" aria-label="하람 HARAM"><text x="700" y="200" text-anchor="middle" font-family="Libre Baskerville, serif" font-size="228" fill="currentColor">HARAM</text></svg></div>
+  <p class="biz ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 6gsmake@gmail.com · 010-4894-4905<br>© 2026 하람 호텔 — 민트클 샘플 템플릿</p>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+requestAnimationFrame(()=>document.querySelector('.hero').classList.add('go'));
+document.querySelectorAll('.qa .q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+const QS=[["“도착한 바로 그 순간부터 모든 것이 정돈돼 있었습니다. 객실은 사진에서 본 것보다 훨씬 아름다웠고 프런트의 응대는 처음부터 끝까지 흠잡을 데가 하나도 없었으며 창밖으로 내다보이는 풍경은 굳이 말로 설명할 필요가 없을 정도였습니다. 저희 가족은 분명 이곳에 다시 올 겁니다.”","김서연 · 트립어드바이저"],
+["“조용한 걸 좋아하는 사람에게 이보다 잘 맞는 곳은 없을 겁니다. 아침마다 테라스에 앉아 커피를 마시던 그 시간이 이번 여행에서 가장 좋았던 순간으로 남았습니다.”","박도현 · 네이버 예약"],
+["“프런트에서 직접 짜 준 반나절 코스가 정말 좋았습니다. 유명한 관광지를 도는 것보다 동네 골목을 천천히 걷던 시간이 훨씬 오래 기억에 남습니다.”","이수진 · 구글 리뷰"],
+["“패밀리 스위트에 네 식구가 묵었는데 아이 침구와 욕조까지 미리 준비돼 있었습니다. 묻기 전에 먼저 챙겨 주는 세심함이 다른 곳과는 확실히 달랐습니다.”","최민호 · 트립어드바이저"],
+["“지불한 금액을 생각하면 놀라운 수준입니다. 조식 하나만으로도 다시 올 이유가 되고, 저녁의 조용한 분위기는 그보다 더 큰 이유가 됩니다.”","한지우 · 야놀자"]];
+let qi=0;const qtx=document.getElementById('qtx'),qwho=document.getElementById('qwho'),dots=[...document.getElementById('dots').children];
+dots.forEach((d,i)=>d.addEventListener('click',()=>setQ(i)));
+function setQ(i){qi=i;qtx.textContent=QS[i][0];qwho.textContent=QS[i][1];dots.forEach((d,k)=>d.classList.toggle('on',k===i))}
+setInterval(()=>setQ((qi+1)%QS.length),6500);
+</script>
+</body>
+</html>
