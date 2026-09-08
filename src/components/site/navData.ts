@@ -1,5 +1,5 @@
 import { Car, CarFront, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, Mountain, Bike, type LucideIcon } from "lucide-react";
-import { SAMPLES, getPremiumDesigns } from "@/lib/samples";
+import { SAMPLES, getPremiumCategories } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
 
 /**
@@ -52,22 +52,22 @@ function templateGroups(styleKey: "basic-template" | "landing-template"): NavTem
  * 업종 2단이 아니라 "프리미엄 디자인" 그룹 하나에 시안을 나란히 진열한다.
  */
 function premiumGroups(): NavTemplateGroup[] {
-  const designs = getPremiumDesigns().map(({ sample, label }) => ({
-    label,
-    code: getDesignCode(sample),
-    href: `/samples/${sample.slug}`,
-    ...(sample.image ? { image: sample.image } : {}),
-  }));
-  if (designs.length === 0) return [];
-  return [
-    {
-      key: "premium",
-      label: "프리미엄 디자인",
-      href: "/web-solutions",
+  // 시안이 늘어 한 줄로 나열하면 읽기 어렵다 → 카테고리(커머스·예약·포트폴리오)를 1단계로 둔다.
+  return getPremiumCategories().map((c) => {
+    const designs = c.items.map(({ sample, label }) => ({
+      label,
+      code: getDesignCode(sample),
+      href: `/samples/${sample.slug}`,
+      ...(sample.image ? { image: sample.image } : {}),
+    }));
+    return {
+      key: c.key,
+      label: c.label,
+      href: `/web-solutions?cat=${c.key}`,
       image: designs[0]?.image,
       designs,
-    },
-  ];
+    };
+  });
 }
 
 /** 업종 하나에 딸린 개별 디자인 시안 */

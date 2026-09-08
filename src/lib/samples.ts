@@ -4377,6 +4377,50 @@ export function getPremiumDesigns() {
   }));
 }
 
+/**
+ * 프리미엄 디자인 카테고리 — 업종을 "무엇을 하는 사이트인가"로 묶는다.
+ * 헤더 플라이아웃(홈페이지 템플릿 → 프리미엄 디자인)과 /web-solutions 진열이 이 분류를 함께 쓴다.
+ * 새 시안을 추가할 때 industryKey를 아래 배열에 넣으면 되고, 넣지 않으면 "기타"로 모인다.
+ */
+export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; industryKeys: string[] }[] = [
+  {
+    key: "commerce",
+    label: "커머스 · 플랫폼",
+    desc: "상품을 팔거나 매물 · 데이터를 검색하게 하는 구성",
+    industryKeys: ["shop", "perfume", "estate"],
+  },
+  {
+    key: "booking",
+    label: "예약 · 상담 업종",
+    desc: "방문과 예약, 상담 문의로 이어지는 구성",
+    industryKeys: ["stay", "hospital", "fitness"],
+  },
+  {
+    key: "portfolio",
+    label: "브랜드 · 포트폴리오",
+    desc: "작업물과 브랜드를 보여주는 데 집중한 구성",
+    industryKeys: ["artist", "video"],
+  },
+];
+
+/** 프리미엄 디자인을 카테고리별로 묶어 돌려준다 (빈 카테고리는 제외) */
+export function getPremiumCategories() {
+  const items = getPremiumDesigns();
+  const assigned = new Set(PREMIUM_CATEGORIES.flatMap((c) => c.industryKeys));
+  const groups = PREMIUM_CATEGORIES.map((c) => ({
+    key: c.key,
+    label: c.label,
+    desc: c.desc,
+    items: items.filter((d) => d.sample.industryKey && c.industryKeys.includes(d.sample.industryKey)),
+  })).filter((g) => g.items.length > 0);
+
+  const rest = items.filter((d) => !d.sample.industryKey || !assigned.has(d.sample.industryKey));
+  if (rest.length > 0) {
+    groups.push({ key: "etc", label: "기타", desc: "분류 예정인 시안", items: rest });
+  }
+  return groups;
+}
+
 export function getSampleBySlug(slug: string): Sample | undefined {
   return SAMPLES.find((s) => s.slug === slug);
 }

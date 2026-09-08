@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import { Check, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { cn } from "@/lib/utils";
 import { FadeIn } from "@/components/ui/FadeIn";
-import { getPremiumDesigns } from "@/lib/samples";
+import { getPremiumCategories } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
 
 type Tier = {
@@ -58,17 +59,26 @@ const COMMON_FEATURES = [
 ];
 
 /**
- * 프리미엄 디자인 진열 목록 — samples.ts의 premium 플래그가 단일 출처다.
- * 헤더 "프리미엄 디자인 템플릿" 카테고리와 같은 목록이며, 실제 홈페이지가
- * 완성되는 대로 samples.ts에서 플래그를 교체·추가하면 두 곳이 함께 갱신된다.
+ * 프리미엄 디자인 진열 목록 — samples.ts의 premium 플래그 + 카테고리가 단일 출처다.
+ * 헤더 "프리미엄 디자인" 플라이아웃과 같은 분류를 쓰며, 새 시안을 추가하면
+ * samples.ts 한 곳만 고쳐도 헤더와 이 페이지가 함께 갱신된다.
  */
-const PREMIUM_DESIGNS = getPremiumDesigns();
+const PREMIUM_GROUPS = getPremiumCategories();
 
 export default function WebSolutions() {
   usePageTitle(
     "프리미엄 디자인 홈페이지 제작 — NOVERIQ",
     "프리미엄 등급 디자인을 기반으로 관리자 시스템과 업종 기능까지 갖춰 제작하는 프리미엄 라인의 범위와 요금을 안내합니다.",
   );
+
+  // 헤더에서 ?cat=<key> 로 들어오면 해당 카테고리로 스크롤한다.
+  const [params] = useSearchParams();
+  const cat = params.get("cat");
+  useEffect(() => {
+    if (!cat) return;
+    const el = document.getElementById(`cat-${cat}`);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [cat]);
 
   return (
     <div className="mx-auto max-w-7xl px-3 py-14 sm:px-5">
@@ -145,33 +155,45 @@ export default function WebSolutions() {
         </FadeIn>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {PREMIUM_DESIGNS.map((d, idx) => (
-          <FadeIn key={d.href} delay={(idx % 4) * 70}>
-            <Link
-              to={d.href}
-              className="group block overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 motion-safe:hover:-translate-y-1"
-            >
-              <div className="overflow-hidden">
-                <img
-                  src={d.sample.image}
-                  alt={`${d.label} 프리미엄 디자인`}
-                  loading="lazy"
-                  className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
-                />
-              </div>
-              <div className="flex items-center justify-between gap-2 px-4 py-3">
-                <span className="truncate text-sm font-semibold text-foreground group-hover:text-primary">
-                  {d.label}
-                </span>
-                <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
-                  {getDesignCode(d.sample)}
-                </span>
-              </div>
-            </Link>
-          </FadeIn>
-        ))}
-      </div>
+      {/* 카테고리별 진열 — 헤더 플라이아웃(홈페이지 템플릿 → 프리미엄 디자인)과 같은 분류를 쓴다.
+          ?cat=<key> 로 들어오면 해당 묶음으로 스크롤된다. */}
+      {PREMIUM_GROUPS.map((group, gi) => (
+        <section key={group.key} id={`cat-${group.key}`} className={gi === 0 ? "mt-6 scroll-mt-24" : "mt-10 scroll-mt-24"}>
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-2">
+            <h3 className="text-sm font-bold text-foreground">{group.label}</h3>
+            <p className="text-xs text-muted-foreground break-keep">{group.desc}</p>
+            <span className="ml-auto shrink-0 text-xs text-muted-foreground">{group.items.length}종</span>
+          </div>
+
+          <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {group.items.map((d, idx) => (
+              <FadeIn key={d.href} delay={(idx % 4) * 70}>
+                <Link
+                  to={d.href}
+                  className="group block overflow-hidden rounded-xl border border-border bg-card transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 motion-safe:hover:-translate-y-1"
+                >
+                  <div className="overflow-hidden">
+                    <img
+                      src={d.sample.image}
+                      alt={`${d.label} 프리미엄 디자인`}
+                      loading="lazy"
+                      className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="flex items-center justify-between gap-2 px-4 py-3">
+                    <span className="truncate text-sm font-semibold text-foreground group-hover:text-primary">
+                      {d.label}
+                    </span>
+                    <span className="shrink-0 font-mono text-[11px] text-muted-foreground">
+                      {getDesignCode(d.sample)}
+                    </span>
+                  </div>
+                </Link>
+              </FadeIn>
+            ))}
+          </div>
+        </section>
+      ))}
 
       <p className="mt-14 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
         PRICING
