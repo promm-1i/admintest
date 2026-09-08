@@ -34,6 +34,9 @@ body{background:var(--bg);color:#000;font-family:"Helvetica Neue",Helvetica,Aria
 .p.ko{font-family:"Wanted Sans Variable",Inter,sans-serif;letter-spacing:-.3px}
 .h2{font-size:48px;line-height:56.64px;letter-spacing:-2.4px;font-weight:400}
 .h2 i,.h1 i,.h3 i{font-family:"Instrument Serif",serif;font-style:italic;color:var(--mute);letter-spacing:-2.4px}
+.h1.ko,.h2.ko{letter-spacing:-1.6px;font-weight:600}
+.h2 i.ko,.h1 i.ko,.h3.ko i{font-family:"Wanted Sans Variable",sans-serif;font-style:normal;font-weight:500;letter-spacing:-1.6px}
+.t-q .h3.ko i{line-height:inherit;letter-spacing:-.6px}
 .h1{font-size:56px;line-height:62.72px;letter-spacing:-2.24px;font-weight:400}
 .h1 i{letter-spacing:-2.24px}
 .h3{font-size:32px;line-height:36.48px;letter-spacing:-1.6px;font-weight:400}
@@ -97,8 +100,13 @@ body{background:var(--bg);color:#000;font-family:"Helvetica Neue",Helvetica,Aria
 .ticker svg{height:24px;width:auto;color:rgba(0,0,0,.55)}
 .hero-r{position:relative;width:571px;height:598px;border-radius:20px;overflow:clip;flex:0 0 auto}
 .hero-r>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-/* 영상 위 블러 덮개 — 폴라로이드 창(146,125 280×348)만 구멍 */
-.hblur{position:absolute;inset:0;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,146px 125px,146px 473px,426px 473px,426px 125px,146px 125px)}
+/* 영상 위 블러 덮개 — 폴라로이드 창(146,125 280×348) 둘레 4조각 (구멍 좌표는 --hx/--hy/--hw/--hh) */
+.hero-r{--hx:146px;--hy:125px;--hw:280px;--hh:348px}
+.hblur i{position:absolute;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px)}
+.hblur .hl{left:0;top:0;bottom:0;width:var(--hx)}
+.hblur .hr{left:calc(var(--hx) + var(--hw));right:0;top:0;bottom:0}
+.hblur .ht{left:var(--hx);width:var(--hw);top:0;height:var(--hy)}
+.hblur .hb{left:var(--hx);width:var(--hw);top:calc(var(--hy) + var(--hh));bottom:0}
 .polaroid{position:absolute;left:146px;top:125px;width:280px;height:348px;display:flex;flex-direction:column;justify-content:flex-end;overflow:clip;z-index:1}
 .polaroid b{position:relative}
 .polaroid b{display:block;background:#fff;padding:9px 20px;font-size:16px;line-height:18.24px;letter-spacing:-.8px;font-weight:700;text-align:center;text-transform:uppercase}
@@ -339,7 +347,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
   .hero-l{height:auto;gap:64px;padding-bottom:0;width:100%}
   .hero-r{width:100%;height:550px}
   .polaroid{left:50%;margin-left:-140px;top:100px}
-  .hblur{clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,calc(50% - 140px) 100px,calc(50% - 140px) 448px,calc(50% + 140px) 448px,calc(50% + 140px) 100px,calc(50% - 140px) 100px)}
+  .hero-r{--hx:calc(50% - 140px);--hy:100px}
   .about-t .h2{white-space:normal;max-width:760px}
   .about-t img{display:none}
   .cards4{flex-wrap:wrap}
@@ -451,7 +459,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
   .why-img{display:none}
   .hero-r{aspect-ratio:571/598}
   .polaroid{top:50%;margin-top:-92px}
-  .hblur{clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,calc(50% - 74px) calc(50% - 92px),calc(50% - 74px) calc(50% + 92px),calc(50% + 74px) calc(50% + 92px),calc(50% + 74px) calc(50% - 92px),calc(50% - 74px) calc(50% - 92px))}
+  .hero-r{--hx:calc(50% - 74px);--hy:calc(50% - 92px);--hw:148px;--hh:184px}
   .ba{aspect-ratio:728/371}
   .em .slat{aspect-ratio:3/2}
   .doc .doc-d.m{display:flex}
@@ -526,7 +534,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
       <a href="#" class="logo" aria-label="루미덴탈 홈"><svg><use href="#i-tooth"/></svg><b>Lumi Dental</b></a>
       <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
     </div>
-    <a href="/contact?design=HOSP-1001" class="btn lt"><span class="tx"><span>Book Appointment</span><span>Book Appointment</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+    <a href="/contact?design=HOSP-1001" class="btn lt"><span class="tx"><span>진료 예약</span><span>진료 예약</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
   </div>
   <nav class="menu" id="menu" aria-label="전체 메뉴">
     <ul>
@@ -545,7 +553,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
           <h1 class="h1">Healthy Smiles Begin<br>With <i>Exceptional</i><br>Dental Care</h1>
           <p class="p ko">전문의의 세심한 진료로 더 건강하고, 더 밝고, 더 자신 있는 미소를 만듭니다.</p>
         </div>
-        <a href="#services" class="btn"><span class="tx"><span>Explore Services</span><span>Explore Services</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+        <a href="#services" class="btn"><span class="tx"><span>진료 안내 보기</span><span>진료 안내 보기</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
       </div>
       <div class="ticker" aria-label="협력 브랜드">
         <ul id="ticker">
@@ -562,7 +570,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
     </div>
     <div class="hero-r">
       <video src="./assets/hero.mp4" poster="./assets/hero.jpg" autoplay muted loop playsinline aria-label="미소 짓는 환자 영상"></video>
-      <div class="hblur" aria-hidden="true"></div>
+      <div class="hblur" aria-hidden="true"><i class="hl"></i><i class="hr"></i><i class="ht"></i><i class="hb"></i></div>
       <div class="polaroid"><b>Beautiful smiles start here</b></div>
     </div>
   </div>
@@ -574,9 +582,9 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
     <div class="about-t rv">
       <img class="l" src="./assets/about-1.jpg" alt="" width="168" height="169">
       <img class="r" src="./assets/about-2.jpg" alt="" width="168" height="169">
-      <h2 class="h2"><i>Trusted dental care,</i><br class="m"> advanced<br>technology, <i>and personalized</i> treatments<br>for healthier, confident <i>smiles.</i></h2>
+      <h2 class="h2 ko"><i class="ko">믿을 수 있는 진료,</i> 앞선 기술,<br>그리고 <i class="ko">나에게 맞춘</i> 치료로<br>더 건강하고 자신 있는 <i class="ko">미소를.</i></h2>
     </div>
-    <a href="/contact?design=HOSP-1001" class="btn rv" style="--d:.1s"><span class="tx"><span>Book Appointment</span><span>Book Appointment</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+    <a href="/contact?design=HOSP-1001" class="btn rv" style="--d:.1s"><span class="tx"><span>진료 예약</span><span>진료 예약</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
   </div>
 </section>
 
@@ -619,7 +627,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
 <!-- 결과: 비포 애프터 -->
 <section class="sec result" id="results">
   <div class="wrap">
-    <div class="head rv"><h2 class="h2">Real Results. Brighter,<br><i>Confident Smiles</i></h2></div>
+    <div class="head rv"><h2 class="h2 ko">치료 전과 후,<br><i class="ko">달라진 미소</i></h2></div>
     <div class="ba" id="ba">
       <img src="./assets/before.jpg" alt="치료 전" width="1440" height="900">
       <img class="aft" src="./assets/after.jpg" alt="치료 후" width="1440" height="900">
@@ -633,8 +641,8 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
 <section class="sec em" id="emergency">
   <div class="wrap">
     <div class="head rv">
-      <div class="hh"><h2 class="h2">Expert Care When You <i>Need It Most.</i></h2><p class="p ko">갑작스러운 통증과 치아 외상은 예고 없이 찾아옵니다. 루미덴탈은 급한 치료가 필요한 순간에 빠르고 따뜻하게 대응합니다.</p></div>
-      <a href="tel:01048944905" class="btn"><span class="tx"><span>Get Emergency Care</span><span>Get Emergency Care</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+      <div class="hh"><h2 class="h2 ko">가장 급할 때, <i class="ko">가장 먼저 찾는 치과</i></h2><p class="p ko">갑작스러운 통증과 치아 외상은 예고 없이 찾아옵니다. 루미덴탈은 급한 치료가 필요한 순간에 빠르고 따뜻하게 대응합니다.</p></div>
+      <a href="tel:01048944905" class="btn"><span class="tx"><span>응급 진료 문의</span><span>응급 진료 문의</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
     </div>
     <div class="slat" data-slat><img src="./assets/emergency.jpg" alt="응급 진료 중인 의료진" width="930" height="538" loading="lazy" decoding="async"><div class="sl"><i></i><i></i><i></i><i></i><i></i></div></div>
   </div>
@@ -657,7 +665,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
   <div class="wrap">
     <div class="jc">
       <div class="jc-top rv">
-        <div class="jc-h"><h2 class="h2">Your Journey To A<br><i>Healthier Smile</i></h2><p class="p ko">가장 건강하고 자신 있는 미소까지, 전문의가 한 걸음씩 안내합니다.</p></div>
+        <div class="jc-h"><h2 class="h2 ko">더 건강한 미소로<br><i class="ko">가는 네 단계</i></h2><p class="p ko">가장 건강하고 자신 있는 미소까지, 전문의가 한 걸음씩 안내합니다.</p></div>
         <div class="slat" data-slat><img src="./assets/journey.jpg" alt="진료 중인 치과의사" width="645" height="442" loading="lazy" decoding="async"><div class="sl"><i></i><i></i><i></i><i></i><i></i></div></div>
       </div>
       <div class="jsteps">
@@ -674,7 +682,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
 <!-- 의료진 -->
 <section class="sec exp" id="doctors">
   <div class="wrap">
-    <h2 class="h2 rv">Meet Our Expert<br><i>Dental Specialists</i></h2>
+    <h2 class="h2 ko rv">루미덴탈<br><i class="ko">의료진 소개</i></h2>
     <div class="docs">
       <a href="#" class="doc rv"><img src="./assets/doc-1.jpg" alt="교정과 전문의 한지민" width="234" height="256" loading="lazy" decoding="async"><div class="doc-d m"><div class="nm"><h4 class="h4 ko">한지민 원장</h4><p class="p ko">치아 교정</p></div><div class="ex"><i></i><span class="p">Exp:</span><b>20+ Years</b></div></div></a>
       <a href="#" class="doc rv" style="--d:.1s"><img src="./assets/doc-2.jpg" alt="임플란트 전문의 정우진" width="234" height="256" loading="lazy" decoding="async"><div class="doc-d m"><div class="nm"><h4 class="h4 ko">정우진 원장</h4><p class="p ko">임플란트</p></div><div class="ex"><i></i><span class="p">Exp:</span><b>20+ Years</b></div></div></a>
@@ -689,8 +697,8 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
   <div class="wrap">
     <div class="slat" data-slat><img src="./assets/stories.jpg" alt="웃고 있는 환자와 의사" width="540" height="359" loading="lazy" decoding="async"><div class="sl"><i></i><i></i><i></i><i></i><i></i></div></div>
     <div class="st-t rv">
-      <div class="hh"><h1 class="h1">Real Patients. Real<br>Smiles. <i>Real Experiences</i></h1><p class="p ko">모든 미소에는 이야기가 있습니다. 맞춤 진료와 첨단 치료, 따뜻한 태도가 삶을 어떻게 바꿨는지 확인해 보세요.</p></div>
-      <a href="#reviews" class="btn"><span class="tx"><span>Read Patient Stories</span><span>Read Patient Stories</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+      <div class="hh"><h1 class="h1 ko">환자들이 직접<br>전하는 <i class="ko">진짜 이야기</i></h1><p class="p ko">모든 미소에는 이야기가 있습니다. 맞춤 진료와 첨단 치료, 따뜻한 태도가 삶을 어떻게 바꿨는지 확인해 보세요.</p></div>
+      <a href="#reviews" class="btn"><span class="tx"><span>환자 이야기 보기</span><span>환자 이야기 보기</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
     </div>
   </div>
 </section>
@@ -730,7 +738,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
   <div class="wrap">
     <div class="faq-h rv">
       <div class="hh"><h2 class="h2">Frequently Asked <i>Questions</i></h2><p class="p ko">진료와 치료에 대해 환자분들이 가장 많이 묻는 질문을 모았습니다. 더 궁금한 점은 언제든 문의해 주세요.</p></div>
-      <a href="/contact?design=HOSP-1001" class="btn sm"><span class="tx"><span>All FAQ</span><span>All FAQ</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+      <a href="/contact?design=HOSP-1001" class="btn sm"><span class="tx"><span>전체 질문 보기</span><span>전체 질문 보기</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
     </div>
     <div class="faqs">
       <div class="qa open rv y50"><button class="qa-q" type="button" aria-expanded="true"><span class="qn"><span class="num">01</span><span class="h4 ko">치과는 얼마나 자주 방문해야 하나요?</span></span><span class="ic"><i></i></span></button><div class="qa-a"><div><p class="p ko">정기 검진과 스케일링을 위해 6개월에 한 번 방문을 권합니다. 문제를 조기에 발견하고 구강 건강을 가장 좋은 상태로 유지할 수 있습니다.</p></div></div></div>
@@ -747,7 +755,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
   <div class="wrap">
     <div class="ins-h rv">
       <h2 class="h2">Dental <i>Insights</i></h2>
-      <a href="#" class="btn sm"><span class="tx"><span>View All</span><span>View All</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+      <a href="#" class="btn sm"><span class="tx"><span>전체 보기</span><span>전체 보기</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
     </div>
     <div class="icards">
       <a href="#" class="ic-c rv"><span class="h6 cat ko">치아 관리 팁</span><img src="./assets/insight-1.jpg" alt="" width="265" height="178" decoding="async"><h5 class="h5 ko">더 건강하고 밝은 미소를 위한 하루 다섯 가지 습관</h5></a>
@@ -762,7 +770,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
 <section class="sec find" id="visit">
   <div class="wrap">
     <div class="find-top rv">
-      <div class="find-h"><h2 class="h2">Visit <i>Lumi Dental</i></h2><p class="p ko">편안함과 세심함, 그리고 자신 있는 미소를 중심에 둔 진료 공간입니다.</p></div>
+      <div class="find-h"><h2 class="h2 ko">루미덴탈 <i class="ko">오시는 길</i></h2><p class="p ko">편안함과 세심함, 그리고 자신 있는 미소를 중심에 둔 진료 공간입니다.</p></div>
       <div class="slat" data-slat><img src="./assets/clinic.jpg" alt="루미덴탈 건물 외관" width="644" height="318" decoding="async"><div class="sl"><i></i><i></i><i></i><i></i><i></i></div></div>
     </div>
     <div class="find-b rv">
@@ -774,7 +782,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
       </ul>
       <div class="find-r">
         <p class="p ko">서울 강남구 테헤란로 12길 34, 루미타워 5층</p>
-        <a href="#" class="btn"><span class="tx"><span>Get Directions</span><span>Get Directions</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
+        <a href="#" class="btn"><span class="tx"><span>길 찾기</span><span>길 찾기</span></span><span class="ar"><svg><use href="#i-arrow"/></svg><svg><use href="#i-arrow"/></svg></span></a>
       </div>
     </div>
   </div>
@@ -796,9 +804,9 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
         <div class="fcol"><p class="h6">SERVICES</p><ul class="ko"><li><a href="#services">일반 진료</a></li><li><a href="#services">심미 치료</a></li><li><a href="#services">임플란트</a></li><li><a href="#services">치아 교정</a></li><li><a href="#emergency">응급 진료</a></li></ul></div>
         <div class="fcol"><p class="h6">GET IN TOUCH</p>
           <ul class="fct">
-            <li><svg><use href="#i-phone"/></svg><div class="lb"><small>CALL US</small><a href="tel:01048944905">010-4894-4905</a></div></li>
-            <li><svg><use href="#i-mail"/></svg><div class="lb"><small>EMAIL US</small><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></div></li>
-            <li><svg><use href="#i-pin"/></svg><div class="lb"><small>VISIT US</small><a href="#visit" class="ko">서울 강남구 테헤란로 12길 34, 루미타워 5층</a></div></li>
+            <li><svg><use href="#i-phone"/></svg><div class="lb"><small class="ko">전화</small><a href="tel:01048944905">010-4894-4905</a></div></li>
+            <li><svg><use href="#i-mail"/></svg><div class="lb"><small class="ko">이메일</small><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></div></li>
+            <li><svg><use href="#i-pin"/></svg><div class="lb"><small class="ko">주소</small><a href="#visit" class="ko">서울 강남구 테헤란로 12길 34, 루미타워 5층</a></div></li>
           </ul>
         </div>
       </div>
