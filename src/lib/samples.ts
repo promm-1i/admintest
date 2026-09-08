@@ -4320,6 +4320,29 @@ export function getLatestTemplateDesigns(n: number) {
 }
 
 /**
+ * 홈 히어로 카드 n개: 프리미엄 디자인(premium: true, 배열 앞이 최신)을 먼저 전부 넣고,
+ * 남는 자리는 최신 등록순 랜딩형 템플릿으로 채운다. 업종(industryKey)은 전체에서 중복 없음.
+ * 프리미엄이 늘어나면 자동으로 히어로에 반영된다.
+ */
+export function getHeroDesigns(n: number) {
+  const seen = new Set<string>();
+  const items: { sample: Sample; label: string; href: string }[] = [];
+  // 키가 달라도 같은 업종으로 보이는 것은 하나로 묶는다 (부동산 두 종류, 치과·병원)
+  const canon = (k: string) => ({ "real-estate": "estate", dental: "hospital", clinic: "hospital" })[k] ?? k;
+  const push = (s: Sample) => {
+    if (!s.industryKey || !s.image || seen.has(canon(s.industryKey))) return;
+    seen.add(canon(s.industryKey));
+    items.push({ sample: s, label: s.industry.replace(" 홈페이지", ""), href: `/samples/${s.slug}` });
+  };
+  for (const s of SAMPLES) if (s.premium) push(s);
+  for (const s of SAMPLES) {
+    if (items.length >= n) break;
+    if (!s.premium && s.type.includes("landing-template")) push(s);
+  }
+  return items.slice(0, n);
+}
+
+/**
  * 프리미엄 디자인 진열 목록 (premium: true, 배열 앞이 최신).
  * 헤더 "프리미엄 디자인 템플릿" 플라이아웃과 /web-solutions 프리미엄 섹션의 단일 출처 —
  * SAMPLES에서 플래그만 바꾸면 두 곳이 함께 갱신된다.

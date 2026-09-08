@@ -3,7 +3,7 @@ import { HeroFluid } from "@/components/sections/HeroFluid";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
-import { getLatestTemplateDesigns } from "@/lib/samples";
+import { getHeroDesigns } from "@/lib/samples";
 import { cn } from "@/lib/utils";
 
 /**
@@ -15,8 +15,8 @@ import { cn } from "@/lib/utils";
  * - prefers-reduced-motion 사용자는 정적 아치를 본다
  */
 
-/** 최신 템플릿에서 업종 중복 없이 12개 — 프리미엄 디자인 목록과 같은 출처 */
-const HERO_ITEMS = getLatestTemplateDesigns(12).map((d) => ({
+/** 프리미엄 디자인 우선 + 최신 템플릿으로 채운 12개 (업종 중복 없음) — samples.ts 의 premium 플래그가 단일 출처 */
+const HERO_ITEMS = getHeroDesigns(12).map((d) => ({
   src: d.sample.image!,
   label: d.label,
   href: d.href,
@@ -137,7 +137,6 @@ function CylinderShowcase() {
       lastT = performance.now();
       velRef.current = 0;
       cancelAnimationFrame(rafRef.current);
-      el.setPointerCapture(e.pointerId);
     };
     const onMove = (e: PointerEvent) => {
       if (!dragging) return;
@@ -151,10 +150,9 @@ function CylinderShowcase() {
       lastT = now;
       apply();
     };
-    const onUp = (e: PointerEvent) => {
+    const onUp = () => {
       if (!dragging) return;
       dragging = false;
-      el.releasePointerCapture(e.pointerId);
       if (reducedMotion) {
         // 모션 최소화: 즉시 대칭 각으로
         angleRef.current =
@@ -168,16 +166,18 @@ function CylinderShowcase() {
         settle();
       }
     };
+    // 포인터 캡처를 쓰지 않는다 — 캡처하면 click 이 컨테이너로 가서 카드 <Link> 가 눌리지 않았다.
+    // 대신 move/up 은 window 에서 받아 카드 밖으로 나가도 드래그가 이어진다.
     el.addEventListener("pointerdown", onDown);
-    el.addEventListener("pointermove", onMove);
-    el.addEventListener("pointerup", onUp);
-    el.addEventListener("pointercancel", onUp);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+    window.addEventListener("pointercancel", onUp);
     return () => {
       cancelAnimationFrame(rafRef.current);
       el.removeEventListener("pointerdown", onDown);
-      el.removeEventListener("pointermove", onMove);
-      el.removeEventListener("pointerup", onUp);
-      el.removeEventListener("pointercancel", onUp);
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("pointercancel", onUp);
     };
   }, [reducedMotion]);
 
@@ -224,7 +224,8 @@ function CylinderShowcase() {
           {ARM_PAIRS.map(([li, ri], a) => (
             <div
               key={a}
-              className="absolute top-0 left-1/2"
+              // 팔(arm) 평면이 3D 에서 카드 앞을 가로질러 클릭을 가로채므로 포인터를 끄고 카드에만 켠다
+              className="pointer-events-none absolute top-0 left-1/2"
               style={{
                 width: `${1400 * k}px`,
                 height: `${240 * k}px`,
@@ -241,7 +242,7 @@ function CylinderShowcase() {
                   key={side}
                   to={card.href}
                   aria-label={`${card.label} 템플릿 보기`}
-                  className="group absolute block overflow-hidden bg-neutral-900 shadow-[0_18px_50px_rgba(0,0,0,0.55)] ring-1 ring-white/15 outline-none transition-shadow hover:ring-white/50 focus-visible:ring-2 focus-visible:ring-white"
+                  className="group pointer-events-auto absolute block overflow-hidden bg-neutral-900 shadow-[0_18px_50px_rgba(0,0,0,0.55)] ring-1 ring-white/15 outline-none transition-shadow hover:ring-white/50 focus-visible:ring-2 focus-visible:ring-white"
                   style={{
                     width: `${CARD_W * k}px`,
                     height: `${CARD_H * k}px`,
