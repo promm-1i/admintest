@@ -96,9 +96,10 @@ body{background:var(--bg);color:#000;font-family:"Helvetica Neue",Helvetica,Aria
 .ticker li{display:flex;align-items:center;gap:18px}
 .ticker svg{height:24px;width:auto;color:rgba(0,0,0,.55)}
 .hero-r{position:relative;width:571px;height:598px;border-radius:20px;overflow:clip;flex:0 0 auto}
-.hero-r>img{width:100%;height:100%;object-fit:cover;filter:blur(7px);transform:scale(1.04)}
+.hero-r>video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* 영상 위 블러 덮개 — 폴라로이드 창(146,125 280×348)만 구멍 */
+.hblur{position:absolute;inset:0;backdrop-filter:blur(7px);-webkit-backdrop-filter:blur(7px);clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,146px 125px,146px 473px,426px 473px,426px 125px,146px 125px)}
 .polaroid{position:absolute;left:146px;top:125px;width:280px;height:348px;display:flex;flex-direction:column;justify-content:flex-end;overflow:clip;z-index:1}
-.polaroid .pi{position:absolute;left:-146px;top:-125px;width:571px;height:598px;max-width:none;object-fit:cover}
 .polaroid b{position:relative}
 .polaroid b{display:block;background:#fff;padding:9px 20px;font-size:16px;line-height:18.24px;letter-spacing:-.8px;font-weight:700;text-align:center;text-transform:uppercase}
 
@@ -338,6 +339,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
   .hero-l{height:auto;gap:64px;padding-bottom:0;width:100%}
   .hero-r{width:100%;height:550px}
   .polaroid{left:50%;margin-left:-140px;top:100px}
+  .hblur{clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,calc(50% - 140px) 100px,calc(50% - 140px) 448px,calc(50% + 140px) 448px,calc(50% + 140px) 100px,calc(50% - 140px) 100px)}
   .about-t .h2{white-space:normal;max-width:760px}
   .about-t img{display:none}
   .cards4{flex-wrap:wrap}
@@ -449,7 +451,7 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
   .why-img{display:none}
   .hero-r{aspect-ratio:571/598}
   .polaroid{top:50%;margin-top:-92px}
-  .polaroid .pi{width:calc(100vw - 40px);height:auto;left:calc((148px - (100vw - 40px))/2);top:calc((184px - (100vw - 40px)*598/571)/2)}
+  .hblur{clip-path:polygon(evenodd,0 0,100% 0,100% 100%,0 100%,0 0,calc(50% - 74px) calc(50% - 92px),calc(50% - 74px) calc(50% + 92px),calc(50% + 74px) calc(50% + 92px),calc(50% + 74px) calc(50% - 92px),calc(50% - 74px) calc(50% - 92px))}
   .ba{aspect-ratio:728/371}
   .em .slat{aspect-ratio:3/2}
   .doc .doc-d.m{display:flex}
@@ -559,8 +561,9 @@ html.js .hero .btn{animation:up70 1s cubic-bezier(.16,1,.3,1) .6s both}
       </div>
     </div>
     <div class="hero-r">
-      <img src="./assets/hero.jpg" alt="" width="571" height="598" fetchpriority="high">
-      <div class="polaroid"><img class="pi" src="./assets/hero.jpg" alt="" width="571" height="598"><b>Beautiful smiles start here</b></div>
+      <video src="./assets/hero.mp4" poster="./assets/hero.jpg" autoplay muted loop playsinline aria-label="미소 짓는 환자 영상"></video>
+      <div class="hblur" aria-hidden="true"></div>
+      <div class="polaroid"><b>Beautiful smiles start here</b></div>
     </div>
   </div>
 </section>
