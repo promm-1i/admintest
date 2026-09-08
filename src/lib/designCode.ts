@@ -39,6 +39,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   perfume: "PER",
   shop: "SHP",
   estate: "EST",
+  artist: "ART",
 };
 
 export function getDesignCode(sample: Sample): string {

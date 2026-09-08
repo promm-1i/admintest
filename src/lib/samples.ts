@@ -49,6 +49,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "artist-a-template",
+    industry: "작가 · 아티스트 포트폴리오 홈페이지",
+    title: "작가 · 아티스트 포트폴리오 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "portfolio", "small-business"],
+    tag: "프리미엄 디자인 · 작가 · 아티스트",
+    purpose:
+      "여백을 크게 둔 세리프 워드마크 히어로에서 시작해, 크기가 서로 다른 작품 사진이 리듬을 만들며 흐르는 메인 피드, 국문·영문을 나란히 둔 작가 노트, 클릭하면 원본 크기로 열리는 라이트박스 작품 갤러리, 번호가 붙은 전시 연혁 목록, 메일로 바로 이어지는 문의 폼으로 구성한 작가용 프리미엄 포트폴리오입니다. 작품 사진과 캡션만 바꾸면 회화 · 사진 · 공예 · 디자인 어느 분야에나 적용됩니다.",
+    features: [
+      "세리프 워드마크 · 대형 여백 히어로",
+      "크기가 다른 작품 피드 · 스크롤 등장",
+      "라이트박스 작품 갤러리 · 국문/영문 작가 노트",
+      "번호형 전시 연혁 · 문의 폼",
+    ],
+    idealFor: "회화 · 조각 작가, 사진작가, 공예 · 텍스타일 작가, 일러스트레이터 · 디자이너, 갤러리",
+    image: "/thumbs/artist-a.jpg",
+    liveUrl: "/templates/artist-a/",
+    industryKey: "artist",
+    designCode: "ARTP-1001",
+    premium: true,
+  },
+  {
     slug: "hotel-a-template",
     industry: "호텔 · 리조트 · 펜션 홈페이지",
     title: "호텔 · 리조트 · 펜션 홈페이지 (프리미엄 디자인 A)",
@@ -4266,6 +4287,7 @@ export const PORTFOLIO_FILTERS: { label: string; value: string; highlight?: bool
  * industryKey를 지정하면, /templates 업종 필터에 자동으로 칩이 하나 늘어난다.
  */
 const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
+  artist: "작가·아티스트",
   "real-estate": "부동산",
   rentcar: "렌트카",
   hospital: "병원·의원",
