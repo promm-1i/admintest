@@ -74,8 +74,9 @@ export function CodeVsImageSection() {
             <>
               이미지 몇 장을 붙여 만든 홈페이지는 겉보기엔 비슷하지만,
               <br />
-              글자가 그림 속에 있어 네이버·구글이 내용을 읽지 못합니다. 두 화면을 직접 드래그해서
-              차이를 확인해 보세요.
+              글자가 그림 속에 있어 네이버·구글이 내용을 읽지 못합니다.
+              <br />
+              두 화면을 직접 드래그해서 차이를 확인해 보세요.
             </>
           }
         />
@@ -153,10 +154,13 @@ export function CodeVsImageSection() {
         </div>
 
         <FadeIn delay={150}>
-          <p className="mx-auto mt-10 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground break-keep">
+          {/* 둘째 줄은 한 줄로 유지 — max-w를 넉넉히 두고 lg에서 줄바꿈되지 않게 한다 */}
+          <p className="mx-auto mt-10 max-w-5xl text-center text-sm leading-relaxed text-muted-foreground break-keep">
             그래서 NOVERIQ는 모든 페이지를 <strong className="text-foreground">직접 코딩으로 제작</strong>
-            합니다. 글자 하나하나가 코드로 존재해야 네이버 · 구글 검색에 내용이 잡히고, 문구 수정도
-            이미지 재제작 없이 바로 할 수 있습니다.
+            합니다.
+            <br />
+            글자 하나하나가 코드로 존재해야 네이버 · 구글 검색에 내용이 잡히고, 문구 수정도 이미지
+            재제작 없이 바로 할 수 있습니다.
           </p>
         </FadeIn>
       </div>
