@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>온담 스튜디오 — 인테리어 · 리모델링 (프리미엄 디자인 B)</title>
+<meta name="description" content="사진 위에 초대형 글자가 겹치는 히어로, 흩어진 사진 콜라주, 화면을 가득 채우는 시공 사례 3건, 목록을 짚으면 사진이 바뀌는 서비스, 계단식 소식 카드, 스크롤에 사진이 모여드는 상담 문구까지 갖춘 인테리어 프리미엄 원페이지.">
+<meta property="og:title" content="온담 스튜디오 — 인테리어 · 리모델링 (프리미엄 디자인 B)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Newsreader:ital,wght@1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰: 배경 #FCF2E8 · 잉크 #000 · 푸터 rgb(110,103,95)
+   컨테이너 1380 (좌우 30) · 라틴 DM Sans 300 · 라벨 Newsreader 이탤릭 · 한글 Pretendard
+   타입: h1 96/115.2 300 · h2 64/76.8 300 · 디스플레이 145/145 300 · h4 28/33.6 300
+        본문 16/19.2 300 · 작은글 13/15.6 300 · 최소 12/15.6 300 */
+:root{--bg:#FCF2E8;--ink:#000;--mute:rgba(0,0,0,.62);--foot:rgb(110,103,95);--ease:cubic-bezier(.44,0,.56,1);--spring:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:"DM Sans","Pretendard Variable",Pretendard,sans-serif;font-size:16px;line-height:19.2px;font-weight:300}
+.ko{font-family:"Pretendard Variable",Pretendard,"DM Sans",sans-serif;font-weight:300;letter-spacing:-.2px;text-wrap:pretty}
+.wrap{width:100%;padding:0 30px}
+.in{width:100%;max-width:1380px;margin:0 auto}
+.ser{font-family:Newsreader,serif;font-style:italic;font-weight:400}
+
+/* 타입 */
+.h1{font-size:96px;line-height:115.2px;font-weight:300}
+.h1.ko{letter-spacing:-4px;font-weight:300}
+.h2{font-size:64px;line-height:76.8px;font-weight:300}
+.h2.ko{letter-spacing:-2.6px}
+.h4{font-size:28px;line-height:33.6px;font-weight:300}
+.h4.ko{letter-spacing:-1px}
+.p{font-size:16px;line-height:19.2px;font-weight:300}
+.p.ko{line-height:23px;letter-spacing:-.2px}
+.s{font-size:13px;line-height:15.6px;font-weight:300}
+.s.ko{line-height:19px}
+.disp{font-size:145px;line-height:145px;font-weight:300}
+.disp.ko{letter-spacing:-7px}
+
+/* 화살표 링크 */
+.arw{display:inline-flex;align-items:center;gap:12px}
+.arw svg{width:18px;height:12px;flex:0 0 auto;transition:transform .4s var(--spring)}
+.arw:hover svg{transform:translateX(6px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;background:var(--ink);color:#fff;border-radius:10px;padding:12px 27px;font-size:14px;line-height:14px;font-weight:500;transition:opacity .3s}
+.btn:hover{opacity:.82}
+
+/* 내비 · 메뉴 */
+.nav{position:absolute;top:0;left:0;right:0;z-index:6;padding:30px;color:#fff}
+.nav .row{display:flex;justify-content:space-between;align-items:center;max-width:1380px;margin:0 auto}
+.brand{display:flex;align-items:center;gap:10px;font-size:21px;line-height:25.2px;font-weight:300}
+.menu-btn{font-size:21px;line-height:25.2px;font-weight:300;display:flex;align-items:center;gap:10px}
+.menu{position:fixed;inset:0;z-index:7;background:var(--foot);color:#fff;padding:180px 30px 30px;display:flex;flex-direction:column;justify-content:space-between;transform:translateY(-100%);transition:transform .7s var(--spring)}
+.page.open .menu{transform:none}
+.menu .top{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;max-width:1380px;margin:0 auto;width:100%}
+.menu nav{display:flex;flex-direction:column}
+.menu nav a{font-size:64px;line-height:76.8px;font-weight:300;color:rgba(255,255,255,.65);transition:color .3s}
+.menu nav a:hover{color:#fff}
+.menu .cols{display:flex;gap:60px;padding-top:6px}
+.menu .cg{width:260px;display:flex;flex-direction:column;gap:6px}
+.menu .col b{font-size:16px;line-height:19.2px;font-weight:300;margin-bottom:14px;display:block}
+.menu .sub{width:530px;margin-top:50px}
+.menu .sub .row2{display:flex;align-items:center;gap:20px;border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:10px;margin-top:14px}
+.menu .sub input{flex:1 0 0;font-size:16px;color:#fff}
+.menu .sub input::placeholder{color:rgba(255,255,255,.6)}
+.menu .bot{display:flex;justify-content:space-between;max-width:1380px;margin:0 auto;width:100%;font-size:12px;line-height:15.6px}
+.menu .close{position:absolute;top:31px;right:30px;font-size:21px;line-height:25.2px;font-weight:300;color:#fff}
+
+/* 히어로 900 */
+.hero{position:relative;height:900px;overflow:clip;color:#fff}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.05) 40%,rgba(0,0,0,.45));z-index:1}
+.hero .big{position:absolute;inset:0;z-index:2}
+.hero .big span{position:absolute;display:block;font-size:160px;line-height:160px;font-weight:300;letter-spacing:-2px;white-space:nowrap}
+.hero .big .a{left:30px;top:150px}
+.hero .big .b{left:888px;top:399px;font-size:104px;line-height:104px}
+.hero .big .c{left:527px;top:557px}
+.hero .foot{position:absolute;left:30px;right:30px;bottom:77px;z-index:3;display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.hero .foot p{max-width:368px}
+.hero .big span,.hero .foot{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.hero.go .big .a{opacity:1;transform:none;transition-delay:.15s}
+.hero.go .big .b{opacity:1;transform:none;transition-delay:.3s}
+.hero.go .big .c{opacity:1;transform:none;transition-delay:.45s}
+.hero.go .ft{opacity:1;transform:none;transition-delay:.7s}
+
+/* 소개 721 */
+.about{padding:100px 0}
+.about .r1{display:flex;justify-content:space-between;align-items:flex-start;gap:60px}
+.about .r1 .lab{width:90px;font-size:24px;line-height:28.8px}
+.about .r1 .h2{width:560px;flex:0 0 auto}
+.about .r2{display:flex;justify-content:space-between;align-items:flex-end;gap:60px;margin-top:10px}
+.about .r2 img{width:566px;height:481px;object-fit:cover;flex:0 0 auto}
+.about .tx{width:557px;flex:0 0 auto;display:flex;flex-direction:column;gap:20px;padding-bottom:0}
+.about .tx .btm{display:flex;justify-content:space-between;align-items:center;margin-top:30px}
+
+/* 콜라주 1872 — 클래스명은 .cg (푸터 주소 열 .col 과 충돌 방지) */
+.cg{position:relative;height:1872px}
+.cg img{position:absolute;width:296px;height:198px;object-fit:cover}
+.cg .i1{left:10px;top:200px}
+.cg .i2{left:330px;top:60px}
+.cg .i3{left:660px;top:130px}
+.cg .i4{left:150px;top:380px}
+.cg .i5{left:478px;top:440px}
+.cg .i6{left:770px;top:330px}
+.cg .t{position:absolute;font-size:16px;line-height:19.2px;color:var(--mute)}
+.cg .t1{left:348px;top:290px}
+.cg .t2{left:558px;top:344px}
+
+/* 시공 사례 900 × 3 */
+.proj{position:relative;height:900px;overflow:clip;color:#fff;display:block}
+.proj>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.4s var(--spring)}
+.proj:hover>img{transform:scale(1.14)}
+.proj .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.3),rgba(0,0,0,.05) 45%,rgba(0,0,0,.35));z-index:1}
+.proj .n{position:absolute;left:30px;top:100px;z-index:2}
+.proj .b{position:absolute;left:30px;right:30px;bottom:319px;z-index:2;display:flex;justify-content:space-between;align-items:flex-end;gap:60px}
+.proj .b .d{width:250px;flex:0 0 auto}
+
+/* 서비스 1354 */
+.svc{padding:70px 0 150px}
+.svc .head{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;min-height:251px}
+.svc .head .h2{font-size:96px;line-height:115.2px}
+.svc .head .h2.ko{letter-spacing:-4px}
+.svc .head .tx{width:500px;flex:0 0 auto;display:flex;flex-direction:column;gap:16px;padding-top:130px}
+.svc .body{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;margin-top:211px}
+.svc .list{width:520px;flex:0 0 auto;display:flex;flex-direction:column;gap:20px}
+.svc .list li{display:flex;align-items:flex-start;gap:10px;cursor:pointer}
+.svc .list .no{font-size:14px;line-height:16.8px;padding-top:2px}
+.svc .list .h4{color:rgba(0,0,0,.4);transition:color .35s var(--ease)}
+.svc .list li.sel .h4{color:var(--ink)}
+.svc .pics{position:relative;width:676px;height:672px;flex:0 0 auto}
+.svc .pics img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s var(--ease)}
+.svc .pics img.sel{opacity:1}
+.svc .sm{position:relative;width:442px;height:355px;margin-top:64px;flex:0 0 auto}
+.svc .sm img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s var(--ease)}
+.svc .sm img.sel{opacity:1}
+.svc .lower{display:flex;justify-content:space-between;align-items:flex-end;gap:60px}
+
+/* 소식 611 */
+.news{padding:150px 0 100px}
+.news .head{display:flex;justify-content:space-between;align-items:center;padding-bottom:100px}
+.news .head .ser{font-size:48px;line-height:57.6px}
+.news .grid{display:grid;grid-template-columns:repeat(4,330px);justify-content:space-between}
+.news .grid img{width:330px;object-fit:cover}
+.news .grid .c1 img{height:438px}
+.news .grid .c2 img{height:495px}
+.news .grid .c3 img{height:330px}
+.news .grid .c4 img{height:226px}
+.news .meta{display:flex;gap:10px;color:var(--mute);margin-top:18px}
+.news .grid h5{font-size:18px;line-height:21.6px;font-weight:400;margin-top:6px}
+
+/* 상담: 초대형 문구 고정, 주변 사진이 스크롤로 등장 */
+.cta{position:relative;padding:0}
+.cta .in{position:relative;min-height:3692px;padding-top:416px}
+.cta .stage{position:sticky;top:180px;z-index:2;pointer-events:none}
+.cta .pics{position:absolute;inset:0;z-index:1}
+.cta .lines{display:flex;flex-direction:column}
+.cta .l1{margin-left:124px}
+.cta .l2{margin-left:84px}
+.cta .l3{margin-left:334px}
+.cta .side{position:absolute;left:700px;top:150px;width:290px;pointer-events:auto}
+.cta .go{margin-top:44px;pointer-events:auto}
+.cta img{position:absolute;z-index:1;object-fit:cover}
+.cta .p1{left:0;top:997px;width:331px;height:221px}
+.cta .p2{left:818px;top:1272px;width:562px;height:337px}
+.cta .p3{left:236px;top:1753px;width:331px;height:408px}
+.cta .p4{left:856px;top:2237px;width:331px;height:326px}
+
+/* 푸터 900 */
+.ft{background:var(--foot);color:#fff;padding:180px 30px 30px;display:flex;flex-direction:column;justify-content:space-between;min-height:900px}
+.ft .top{display:flex;justify-content:space-between;align-items:flex-start;gap:60px;max-width:1380px;margin:0 auto;width:100%}
+.ft nav{display:flex;flex-direction:column}
+.ft nav a{font-size:64px;line-height:76.8px;font-weight:300;color:rgba(255,255,255,.65);transition:color .3s}
+.ft nav a:hover{color:#fff}
+.ft .cols{display:flex;gap:60px;padding-top:6px}
+.ft .cg{width:260px;display:flex;flex-direction:column;gap:6px}
+.ft .col b{font-size:16px;line-height:19.2px;font-weight:300;margin-bottom:14px;display:block}
+.ft .sub{width:530px;margin-top:50px}
+.ft .sub .row2{display:flex;align-items:center;gap:20px;border-bottom:1px solid rgba(255,255,255,.45);padding-bottom:10px;margin-top:14px}
+.ft .sub input{flex:1 0 0;font-size:16px;color:#fff}
+.ft .sub input::placeholder{color:rgba(255,255,255,.6)}
+.ft .mark{font-size:150px;line-height:150px;font-weight:300;letter-spacing:-4px;white-space:nowrap;max-width:1380px;margin:60px auto 0;width:100%}
+.ft .bot{display:flex;justify-content:space-between;max-width:1380px;margin:0 auto;width:100%;font-size:12px;line-height:15.6px;padding-top:24px}
+
+/* 스크롤 등장 */
+html.js .rv{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+html.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  html.js .rv{opacity:1;transform:none;transition:none}
+  .hero .big span,.hero .foot{opacity:1;transform:none;transition:none}
+  .cta .stage{position:static}
+}
+
+/* ── 태블릿 ≤1199 ── */
+@media (max-width:1199px){
+  .h1{font-size:64px;line-height:76.8px}
+  .h2{font-size:44px;line-height:52.8px}
+  .disp{font-size:88px;line-height:92px}
+  .h4{font-size:24px;line-height:28.8px}
+  .nav{padding:20px}
+  .wrap{padding:0 20px}
+  .hero{height:720px}
+  .hero .big span{font-size:104px;line-height:104px}
+  .hero .big .a{left:20px;top:110px}
+  .hero .big .b{left:auto;right:180px;top:300px;font-size:68px;line-height:68px}
+  .hero .big .c{left:auto;right:20px;top:420px}
+  .hero .foot{left:20px;right:20px;bottom:50px}
+  .about{padding-top:70px}
+  .about .r1{flex-direction:column;gap:20px}
+  .about .r1 .h2{width:100%}
+  .about .r2{flex-direction:column;align-items:stretch;gap:32px}
+  .about .r2 img{width:100%;height:420px}
+  .about .tx{width:100%}
+  .cg{height:auto!important;display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:60px 0}
+  .cg img{position:static;width:100%;height:auto;aspect-ratio:296/198}
+  .cg .t{position:static;grid-column:1/-1;text-align:center}
+  .proj{height:640px}
+  .proj .n{top:70px;left:20px}
+  .proj .b{left:20px;right:20px;bottom:70px}
+  .svc{padding-top:70px}
+  .svc{padding:70px 0 80px}
+  .svc .head{flex-direction:column;gap:24px;min-height:0}
+  .svc .head .h2{font-size:44px;line-height:52.8px}
+  .svc .head .tx{width:100%;padding-top:0}
+  .news{padding:80px 0 60px}
+  .news .head{padding-bottom:40px}
+  .svc .body{flex-direction:column;align-items:stretch;gap:32px;margin-top:60px}
+  .svc .list{width:100%}
+  .svc .pics{width:100%;height:auto;aspect-ratio:1/1}
+  .svc .sm{display:none}
+  .news{padding-top:80px}
+  .news .head .ser{font-size:34px;line-height:41px}
+  .news .grid{grid-template-columns:repeat(2,1fr);gap:32px 20px}
+  .news .grid img{width:100%}
+  .news .grid .c1 img,.news .grid .c2 img,.news .grid .c3 img,.news .grid .c4 img{height:auto;aspect-ratio:330/380}
+  .cta{padding:100px 0 120px}
+  .cta .in{min-height:0;padding-top:0}
+  .cta .pics{position:static}
+  .cta .stage{position:static}
+  .cta .l1,.cta .l2,.cta .l3{margin-left:0}
+  .cta .side{position:static;width:100%;max-width:420px;margin-top:24px}
+  .cta img{position:static;width:100%!important;height:auto!important;margin-top:20px}
+  .cta .pics{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:40px}
+  .ft{padding:80px 20px 24px;min-height:0}
+  .ft .top{flex-direction:column;gap:40px}
+  .ft .cols{flex-wrap:wrap;gap:32px}
+  .ft .cg{width:220px}
+  .ft .sub{width:100%;max-width:440px;margin-top:24px}
+  .ft .mark{font-size:88px;line-height:92px;margin-top:40px}
+}
+/* ── 폰 ≤809 ── */
+@media (max-width:809px){
+  .h1{font-size:40px;line-height:48px}
+  .h2{font-size:32px;line-height:38.4px}
+  .disp{font-size:46px;line-height:52px}
+  .h4{font-size:20px;line-height:24px}
+  .wrap{padding:0 16px}
+  .nav{padding:16px}
+  .brand,.menu-btn{font-size:16px;line-height:19.2px}
+  .menu{padding:100px 16px 24px}
+  .menu nav a{font-size:34px;line-height:44px}
+  .menu .top{flex-direction:column;gap:32px}
+  .menu .cols{flex-direction:column;gap:24px}
+  .menu .col,.menu .sub{width:100%}
+  .menu .close{top:17px;right:16px;font-size:16px}
+  .hero{height:600px}
+  .hero .big span{font-size:52px;line-height:52px}
+  .hero .big .a{left:16px;top:90px}
+  .hero .big .b{right:auto;left:16px;top:170px;font-size:38px;line-height:38px}
+  .hero .big .c{left:16px;right:auto;top:238px}
+  .hero .foot{flex-direction:column;align-items:flex-start;gap:16px;bottom:30px;left:16px;right:16px}
+  .about{padding-top:50px}
+  .about .r2 img{height:280px}
+  .about .tx .btm{flex-direction:column;align-items:flex-start;gap:16px}
+  .cg{grid-template-columns:repeat(2,1fr);gap:12px;padding:40px 0}
+  .proj{height:460px}
+  .proj .n{top:50px;left:16px}
+  .proj .b{flex-direction:column;align-items:flex-start;gap:12px;left:16px;right:16px;bottom:44px}
+  .proj .b .d{width:100%}
+  .svc{padding:50px 0 50px}
+  .svc .head .h2{font-size:32px;line-height:38.4px}
+  .svc .body{margin-top:40px}
+  .svc .lower{flex-direction:column;align-items:flex-start;gap:24px}
+  .news{padding:56px 0 40px}
+  .news .head{padding-bottom:24px}
+  .news .grid{grid-template-columns:1fr;gap:28px}
+  .cta{padding:70px 0 80px}
+  .cta .pics{grid-template-columns:1fr}
+  .ft{padding:56px 16px 20px}
+  .ft .mark{font-size:44px;line-height:48px;margin-top:32px}
+  .ft .bot{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arw" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M0 6h16M11 1l5 5-5 5"/></symbol>
+  </defs>
+</svg>
+
+<div class="page" id="page">
+<div class="menu" id="menu" aria-hidden="true">
+  <button class="close" type="button" id="close">CLOSE ＋</button>
+  <div class="top">
+    <nav aria-label="주 메뉴">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div>
+      <div class="cols">
+        <div class="col"><b class="ko">서울</b><p class="s ko">서울 강남구 테헤란로 12길 34</p><p class="s ko">온담 스튜디오 3층</p><p class="s">010-4894-4905</p></div>
+        <div class="col"><b class="ko">문의</b><p class="s">6gsmake@gmail.com</p><p class="s ko">평일 09:00 – 18:00</p><p class="s ko">주말 · 공휴일 휴무</p></div>
+      </div>
+      <div class="sub">
+        <p class="p ko">새 프로젝트 소식 받기</p>
+        <div class="row2"><input type="email" placeholder="email" aria-label="이메일"><a href="/contact?design=INTP-1002" class="arw"><span class="p">Submit</span><svg><use href="#i-arw"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+  <div class="bot"><p class="ko">© 2026 온담 스튜디오 · 민트클</p><p class="ko">사업자등록번호 266-07-03678</p></div>
+</div>
+
+<header class="nav">
+  <div class="row">
+    <a href="#" class="brand" aria-label="온담 스튜디오 홈"><span>ONDAM</span><span>＋</span><span>STUDIO</span></a>
+    <button class="menu-btn" type="button" id="open" aria-expanded="false" aria-controls="menu">MENU ＋</button>
+  </div>
+</header>
+
+<main>
+<!-- 히어로 -->
+<section class="hero" id="hero">
+  <img src="./assets/hero.jpg" alt="원목 주방과 콘크리트 벽이 있는 거실" width="1440" height="900" fetchpriority="high">
+  <div class="veil"></div>
+  <div class="big" aria-hidden="true"><span class="a">LIVING</span><span class="b">＋</span><span class="c">FUNCTION</span></div>
+  <h1 class="hero-t" style="position:absolute;left:-9999px">온담 스튜디오 — 사는 일과 쓰는 일을 함께 설계합니다</h1>
+  <div class="foot">
+    <p class="p ko">고요함과 감각을 함께 담은 실내를 만듭니다. 온담은 손이 닿는 곳까지 살피는 세심함으로 생각을 공간으로 옮깁니다.</p>
+    <a href="#about" class="arw"><svg><use href="#i-arw"/></svg><span class="p ko">스튜디오 살펴보기</span></a>
+  </div>
+</section>
+
+<!-- 소개 -->
+<section class="wrap about" id="about">
+  <div class="in">
+    <div class="r1 rv">
+      <p class="lab ser">About Us</p>
+      <h2 class="h2 ko">공간이 숨 쉬고<br>디자인이 남는<br>자리를 만듭니다</h2>
+    </div>
+    <div class="r2">
+      <img class="rv" src="./assets/about.jpg" alt="호수를 마주한 거실" width="566" height="481">
+      <div class="tx rv" style="--d:.1s">
+        <p class="p ko">온담은 모든 공간이 저마다의 이야기를 가진다고 믿습니다.</p>
+        <p class="p ko">손끝의 완성도와 신중한 태도로, 아름다우면서도 실제로 쓰기 좋은 공간을 만듭니다. 그리고 그 공간이 오래 남도록 설계합니다.</p>
+        <div class="btm">
+          <a href="#team" class="arw"><svg><use href="#i-arw"/></svg><span class="p ko">팀 소개 보기</span></a>
+          <a href="/contact?design=INTP-1002" class="btn ko">상담 문의</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 콜라주 -->
+<section class="wrap">
+  <div class="in cg rv">
+    <img class="i1" src="./assets/col-1.jpg" alt="" width="296" height="198">
+    <img class="i2" src="./assets/col-2.jpg" alt="" width="296" height="198">
+    <img class="i3" src="./assets/col-3.jpg" alt="" width="296" height="198">
+    <img class="i4" src="./assets/col-4.jpg" alt="" width="296" height="198">
+    <img class="i5" src="./assets/col-5.jpg" alt="" width="296" height="198">
+    <img class="i6" src="./assets/col-6.jpg" alt="" width="296" height="198">
+    <p class="t t1 ko">쌓아 온 시공 사례를<br>모았습니다</p>
+    <p class="t t2 ko">온담의 다듬어진<br>설계 방식으로</p>
+  </div>
+</section>
+
+<!-- 시공 사례 -->
+<div id="projects">
+  <a href="/contact?design=INTP-1002" class="proj">
+    <img src="./assets/proj-1.jpg" alt="서초 하우스 주방" width="1440" height="900">
+    <div class="veil"></div>
+    <p class="h1 n">01</p>
+    <div class="b"><h2 class="h1 ko">서초 하우스</h2><p class="p ko d">도심 한가운데 지은 인더스트리얼 주택</p></div>
+  </a>
+  <a href="/contact?design=INTP-1002" class="proj">
+    <img src="./assets/proj-2.jpg" alt="가평 빌라 외관" width="1440" height="900">
+    <div class="veil"></div>
+    <p class="h1 n">02</p>
+    <div class="b"><h2 class="h1 ko">가평 빌라</h2><p class="p ko d">숲 한가운데 자리한 고요한 별장</p></div>
+  </a>
+  <a href="/contact?design=INTP-1002" class="proj">
+    <img src="./assets/proj-3.jpg" alt="청평 레이크하우스 야경" width="1440" height="900">
+    <div class="veil"></div>
+    <p class="h1 n">03</p>
+    <div class="b"><h2 class="h1 ko">청평 레이크하우스</h2><p class="p ko d">호수를 마주한 조용한 쉼터</p></div>
+  </a>
+</div>
+
+<!-- 서비스 -->
+<section class="wrap svc" id="services">
+  <div class="in">
+    <div class="head rv">
+      <h2 class="h2 ko">무엇을 하나요</h2>
+      <div class="tx">
+        <p class="p ko">첫 컨셉부터 마지막 마감까지, 온담은 프로젝트마다 필요한 범위를 골라 맡습니다.</p>
+        <p class="p ko">주거 인테리어와 상업 공간, 맞춤 가구를 주로 다루며 언제나 하나로 이어지는 공간을 목표로 합니다.</p>
+      </div>
+    </div>
+    <div class="body">
+      <div class="left">
+        <ul class="list rv" id="svclist">
+          <li class="sel" data-i="0"><span class="no ser">01</span><span class="h4 ko">실내 디자인</span></li>
+          <li data-i="1"><span class="no ser">02</span><span class="h4 ko">건축 설계</span></li>
+          <li data-i="2"><span class="no ser">03</span><span class="h4 ko">공정 관리</span></li>
+          <li data-i="3"><span class="no ser">04</span><span class="h4 ko">가구 디자인</span></li>
+        </ul>
+        <div class="sm rv" id="svcsm" style="--d:.1s">
+          <img class="sel" src="./assets/svc-sm-1.jpg" alt="" width="442" height="355">
+          <img src="./assets/svc-sm-2.jpg" alt="" width="442" height="355">
+          <img src="./assets/svc-sm-3.jpg" alt="" width="442" height="355">
+          <img src="./assets/svc-sm-4.jpg" alt="" width="442" height="355">
+        </div>
+      </div>
+      <div class="pics rv" id="svcbig" style="--d:.15s">
+        <img class="sel" src="./assets/svc-big-1.jpg" alt="실내 디자인 사례" width="676" height="672">
+        <img src="./assets/svc-big-2.jpg" alt="건축 설계 사례" width="676" height="672">
+        <img src="./assets/svc-big-3.jpg" alt="공정 관리 사례" width="676" height="672">
+        <img src="./assets/svc-big-4.jpg" alt="가구 디자인 사례" width="676" height="672">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 소식 -->
+<section class="wrap news" id="news">
+  <div class="in">
+    <div class="head rv">
+      <p class="ser">News</p>
+      <a href="#" class="arw"><svg><use href="#i-arw"/></svg><span class="p ko">전체 보기</span></a>
+    </div>
+    <div class="grid">
+      <a href="#" class="c1 rv"><img src="./assets/news-1.jpg" alt="" width="330" height="438"><div class="meta s ko"><span>스튜디오</span><span>|</span><span>2026. 4. 2.</span></div><h5 class="ko">대표 이야기: 온담을 만든 사람</h5></a>
+      <a href="#" class="c2 rv" style="--d:.08s"><img src="./assets/news-2.jpg" alt="" width="330" height="495"><div class="meta s ko"><span>수상</span><span>|</span><span>2026. 1. 5.</span></div><h5 class="ko">온담, 올해의 공간 디자인 3인에 선정</h5></a>
+      <a href="#" class="c3 rv" style="--d:.16s"><img src="./assets/news-3.jpg" alt="" width="330" height="330"><div class="meta s ko"><span>소식</span><span>|</span><span>2025. 12. 23.</span></div><h5 class="ko">최근 완공한 상업 공간 프로젝트</h5></a>
+      <a href="#" class="c4 rv" style="--d:.24s"><img src="./assets/news-4.jpg" alt="" width="330" height="226"><div class="meta s ko"><span>스튜디오</span><span>|</span><span>2025. 11. 10.</span></div><h5 class="ko">우리가 일하는 방식을 만든 과정</h5></a>
+    </div>
+  </div>
+</section>
+
+<!-- 상담 -->
+<section class="wrap cta" id="contact">
+  <div class="in" style="position:relative">
+    <div class="stage">
+      <div class="lines">
+        <p class="disp ko l1 rv">상상을</p>
+        <p class="disp ko l2 rv" style="--d:.1s">공간으로</p>
+        <p class="disp ko l3 rv" style="--d:.2s">옮깁니다</p>
+      </div>
+      <div class="side rv" style="--d:.3s">
+        <p class="p ko">공간을 바꿀 준비가 되셨나요. 생각하고 계신 그림과 실현 방법을 온담과 함께 이야기해 보세요.</p>
+        <a href="/contact?design=INTP-1002" class="arw go"><svg><use href="#i-arw"/></svg><span class="p ko">상담 신청</span></a>
+      </div>
+    </div>
+    <div class="pics">
+      <img class="p1 rv" src="./assets/cta-1.jpg" alt="" width="331" height="221">
+      <img class="p2 rv" src="./assets/cta-2.jpg" alt="" width="562" height="337">
+      <img class="p3 rv" src="./assets/cta-3.jpg" alt="" width="331" height="408">
+      <img class="p4 rv" src="./assets/cta-4.jpg" alt="" width="331" height="326">
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ft" id="team">
+  <div class="top">
+    <nav aria-label="푸터 메뉴">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#news">News</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div>
+      <div class="cols">
+        <div class="col"><b class="ko">서울</b><p class="s ko">서울 강남구 테헤란로 12길 34</p><p class="s ko">온담 스튜디오 3층</p><p class="s">010-4894-4905</p></div>
+        <div class="col"><b class="ko">문의</b><p class="s">6gsmake@gmail.com</p><p class="s ko">평일 09:00 – 18:00</p><p class="s ko">주말 · 공휴일 휴무</p></div>
+      </div>
+      <div class="sub">
+        <p class="p ko">새 프로젝트 소식 받기</p>
+        <div class="row2"><input type="email" placeholder="email" aria-label="이메일"><a href="/contact?design=INTP-1002" class="arw"><span class="p">Submit</span><svg><use href="#i-arw"/></svg></a></div>
+      </div>
+    </div>
+  </div>
+  <p class="mark">ONDAM ＋ STUDIO</p>
+  <div class="bot">
+    <p class="ko">© 2026 온담 스튜디오 · 민트클 · 사업자등록번호 266-07-03678</p>
+    <p class="ko">통신판매업신고 제2026-서울강남-00480호</p>
+  </div>
+</footer>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hero=document.getElementById('hero');
+  requestAnimationFrame(function(){setTimeout(function(){hero.classList.add('go')},reduce?0:80)});
+  // 메뉴
+  var page=document.getElementById('page'),menu=document.getElementById('menu'),
+      ob=document.getElementById('open'),cb=document.getElementById('close');
+  function set(o){page.classList.toggle('open',o);ob.setAttribute('aria-expanded',o);menu.setAttribute('aria-hidden',!o);document.body.style.overflow=o?'hidden':''}
+  ob.addEventListener('click',function(){set(true)});
+  cb.addEventListener('click',function(){set(false)});
+  menu.querySelectorAll('nav a').forEach(function(a){a.addEventListener('click',function(){set(false)})});
+  // 서비스 목록 ↔ 사진
+  var items=[].slice.call(document.querySelectorAll('#svclist li')),
+      big=[].slice.call(document.querySelectorAll('#svcbig img')),
+      sm=[].slice.call(document.querySelectorAll('#svcsm img'));
+  function pick(i){items.forEach(function(e,j){e.classList.toggle('sel',i===j)});big.forEach(function(e,j){e.classList.toggle('sel',i===j)});sm.forEach(function(e,j){e.classList.toggle('sel',i===j)})}
+  items.forEach(function(li,i){
+    li.addEventListener('mouseenter',function(){if(matchMedia('(hover:hover)').matches)pick(i)});
+    li.addEventListener('click',function(){pick(i)});
+  });
+  // 스크롤 등장
+  var rv=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)||reduce){rv.forEach(function(e){e.classList.add('on')})}
+  else{var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}})},{rootMargin:'0px 0px -100px 0px'});rv.forEach(function(e){io.observe(e)})}
+})();
+</script>
+</body>
+</html>
