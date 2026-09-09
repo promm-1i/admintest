@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>코드담 — 코딩 부트캠프 · 개발자 취업 (프리미엄 디자인 A)</title>
+<meta name="description" content="어두운 바탕에 오렌지 강조가 얹히는 초대형 제목 히어로, 실제 코드가 흐르는 에디터 목업, 연봉과 기간이 붙는 학습 경로 4종, 크기가 다른 특징 카드가 맞물리는 벤토 그리드, 번호가 붙은 3단 과정, 취업 성과 지표, 지원 폼과 FAQ까지 갖춘 코딩 부트캠프 프리미엄 원페이지.">
+<meta property="og:title" content="코드담 — 코딩 부트캠프 · 개발자 취업 (프리미엄 디자인 A)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=satoshi@700,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 7610)
+   바탕 rgb(10,13,17) · 패널 rgb(17,21,28) · 테두리 rgba(230,237,243,.1)
+   오렌지 rgb(249,115,22) · 밝은 글자 rgb(230,237,243) · 흐린 글자 rgba(230,237,243,.62)
+   컨테이너 1440 - 좌우 66 → 1308 (좌측선 66)
+   h1 Satoshi 80/96 900 ls-3.2 · h2 Satoshi 48/58 900 · 카드제목 Satoshi 22/28 700
+   라벨·코드 JetBrains Mono 12/19.2 400 · 로고 24/28.8 800
+   본문 Inter 16/25.6 ls-0.32 · 내비 Inter 16/19.2
+   섹션 : 히어로1326 · 경로704 · 플랫폼1281 · 과정872 · 성과1811 · 문의1206 · 푸터305
+   라운드 8(버튼) · 12(카드) · 16(패널) ── */
+:root{--bg:rgb(10,13,17);--panel:rgb(17,21,28);--line:rgba(230,237,243,.1);
+  --or:rgb(249,115,22);--fg:rgb(230,237,243);--dim:rgba(230,237,243,.62);
+  --ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;
+  font-size:16px;line-height:25.6px;letter-spacing:-.32px}
+.ko{letter-spacing:-.01em;text-wrap:pretty}
+.mo{font-family:"JetBrains Mono","Pretendard Variable",Pretendard,monospace}
+.sa{font-family:Satoshi,"Pretendard Variable",Pretendard,sans-serif}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 66px}
+
+/* 타입 — 레퍼런스 값 그대로 */
+.d1{font-size:80px;line-height:96px;font-weight:900;letter-spacing:-3.2px}
+.d2{font-size:48px;line-height:58px;font-weight:900;letter-spacing:-1.9px}
+.d3{font-size:22px;line-height:28px;font-weight:700;letter-spacing:-.6px}
+.lab{font-family:"JetBrains Mono",monospace;font-size:12px;line-height:19.2px;font-weight:400;
+  letter-spacing:1.4px;text-transform:uppercase;color:var(--or)}
+.p16{font-size:16px;line-height:25.6px;font-weight:400;letter-spacing:-.32px;color:var(--dim)}
+.or{color:var(--or)}
+
+/* 버튼 : 56 · r8 · pad 15/32 */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:56px;padding:15px 32px;
+  border-radius:8px;font-size:16px;line-height:25.6px;letter-spacing:-.32px;
+  transition:transform .3s var(--ease),filter .3s var(--ease)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn-o{background:var(--or);color:#fff}
+.btn-l{border:1px solid var(--line);color:var(--fg)}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* 바이너리 텍스처 — 배경에 아주 흐리게 깔리는 0/1 격자 */
+.tex{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:clip;
+  font-family:"JetBrains Mono",monospace;font-size:13px;line-height:26px;color:rgba(249,115,22,.07);
+  word-break:break-all;padding:20px}
+
+/* ── 내비 ── */
+.nav{position:relative;z-index:9;height:96px;display:flex;align-items:center}
+.nav .in{width:100%;max-width:1440px;margin:0 auto;padding:0 66px;display:flex;align-items:center;justify-content:space-between}
+.nav .lg{font-family:"JetBrains Mono",monospace;font-size:24px;line-height:28.8px;font-weight:800;color:var(--fg)}
+.nav .lks{display:flex;gap:40px}
+.nav a.lk{font-size:16px;line-height:19.2px;letter-spacing:normal;color:#fff;transition:color .3s var(--ease)}
+.nav a.lk:hover{color:var(--or)}
+.burger{display:none}
+
+/* ── 히어로 : 0~1326 ── */
+.hero{position:relative;height:1326px;overflow:clip;text-align:center;padding-top:64px}
+.hero .in{position:relative;z-index:3;max-width:1440px;margin:0 auto;padding:0 66px}
+.hero h1{margin:22px auto 0;max-width:1000px}
+.hero .sub{margin:26px auto 0;max-width:520px}
+.hero .row{margin-top:34px;display:flex;justify-content:center;gap:22px;flex-wrap:wrap}
+.hero .stats{margin-top:52px;display:flex;justify-content:center;gap:96px}
+.hero .stats b{display:block;font-family:Satoshi,sans-serif;font-size:44px;line-height:52px;font-weight:900;color:var(--or)}
+.hero .stats span{display:block;margin-top:6px;font-size:15px;line-height:24px;color:var(--dim)}
+/* 코드 에디터 목업 */
+.edit{position:relative;z-index:3;margin:56px auto 0;max-width:1308px;background:rgb(13,8,5);
+  border:1px solid var(--line);border-radius:12px;overflow:clip;text-align:left}
+.edit .bar{height:34px;display:flex;align-items:center;gap:8px;padding:0 14px;background:rgb(20,14,10);
+  border-bottom:1px solid var(--line)}
+.edit .bar i{width:10px;height:10px;border-radius:50%;display:block}
+.edit .bar i:nth-child(1){background:#ff5f57}.edit .bar i:nth-child(2){background:#febc2e}.edit .bar i:nth-child(3){background:#28c840}
+.edit .bar span{margin-left:14px;font-family:"JetBrains Mono",monospace;font-size:11px;color:rgba(230,237,243,.5)}
+.edit pre{margin:0;padding:18px 20px 22px;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:20px;
+  color:rgba(230,237,243,.82);overflow-x:auto}
+.edit .n{color:rgba(230,237,243,.28);display:inline-block;width:22px}
+.edit .c{color:rgba(230,237,243,.34)}
+.edit .k{color:var(--or)}
+.edit .s{color:#7ee787}
+.edit .ok{color:#7ee787}
+
+/* ── 학습 경로 : 1326~2030 (704) ── */
+.paths{height:704px;position:relative;padding:88px 0 0;text-align:center;overflow:clip}
+.paths .in{position:relative;z-index:3;max-width:1440px;margin:0 auto;padding:0 66px}
+.paths h2{margin:14px auto 0;max-width:900px}
+.paths .grid{margin-top:64px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:left}
+.pcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:24px;
+  transition:transform .35s var(--ease),border-color .35s var(--ease)}
+.pcard:hover{transform:translateY(-6px);border-color:rgba(249,115,22,.5)}
+.pcard .ic{width:44px;height:44px;border-radius:10px;background:var(--or);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:18px}
+.pcard h3{margin-top:24px}
+.pcard .st{margin-top:12px;font-family:"JetBrains Mono",monospace;font-size:12px;line-height:20px;color:#58a6ff}
+.pcard .wk{margin-top:14px;font-family:"JetBrains Mono",monospace;font-size:12px;line-height:20px;color:rgba(230,237,243,.4)}
+.pcard .sal{margin-top:2px;font-family:"JetBrains Mono",monospace;font-size:13px;line-height:22px;color:var(--or)}
+.pcard .tag{margin-top:16px;display:inline-block;border:1px solid var(--line);border-radius:6px;
+  padding:4px 10px;font-size:12px;line-height:18px;color:var(--dim)}
+
+/* ── 플랫폼 : 2030~3311 (1281) ── */
+.plat{height:1281px;position:relative;padding:96px 0 0;text-align:center;overflow:clip}
+.plat .in{position:relative;z-index:3;max-width:1440px;margin:0 auto;padding:0 66px}
+.plat h2{margin:14px auto 0;max-width:900px}
+.plat .bento{margin-top:70px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left}
+.bcard{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:28px;
+  transition:border-color .35s var(--ease)}
+.bcard:hover{border-color:rgba(249,115,22,.5)}
+.bcard .ic{width:36px;height:36px;border-radius:8px;border:1px solid var(--line);color:var(--or);
+  display:flex;align-items:center;justify-content:center;font-size:15px}
+.bcard h3{margin-top:26px}
+.bcard p{margin-top:10px}
+.bcard.w2{grid-column:span 2}
+.bcard .code{margin-top:18px;background:rgb(13,8,5);border:1px solid var(--line);border-radius:8px;
+  padding:14px 16px;font-family:"JetBrains Mono",monospace;font-size:12px;line-height:21px;color:rgba(230,237,243,.7)}
+
+/* ── 과정 : 3311~4184 (873) ── */
+.proc{height:873px;position:relative;padding:96px 0 0;overflow:clip}
+.proc .in{position:relative;z-index:3;max-width:1440px;margin:0 auto;padding:0 66px;text-align:center}
+.proc h2{margin:14px auto 0;max-width:820px}
+.proc .grid{margin-top:96px;display:grid;grid-template-columns:repeat(3,1fr);gap:34px;text-align:left}
+.proc .step .no{font-family:Satoshi,sans-serif;font-size:88px;line-height:88px;font-weight:900;
+  color:rgba(230,237,243,.12)}
+.proc .step h3{margin-top:10px}
+.proc .step p{margin-top:14px}
+.proc .step .ln{margin-top:26px;height:2px;background:linear-gradient(90deg,var(--or),rgba(249,115,22,0))}
+
+/* ── 성과 : 4184~5995 (1811) ── */
+.out{min-height:1811px;position:relative;padding:104px 0 0;overflow:clip}
+.out .in{position:relative;z-index:3;max-width:1440px;margin:0 auto;padding:0 66px;text-align:center}
+.out h2{margin:14px auto 0;max-width:900px}
+.out .nums{margin-top:72px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.out .nums div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:30px 20px}
+.out .nums b{display:block;font-family:Satoshi,sans-serif;font-size:40px;line-height:48px;font-weight:900;color:var(--or)}
+.out .nums span{display:block;margin-top:8px;font-size:14px;line-height:22px;color:var(--dim)}
+.out .grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left}
+.ocard{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:clip}
+.ocard figure{height:220px;overflow:clip}
+.ocard figure img{width:100%;height:100%;object-fit:cover}
+.ocard .bd{padding:24px}
+.ocard .who{margin-top:16px;display:flex;align-items:center;gap:12px}
+.ocard .who i{width:38px;height:38px;border-radius:50%;background:var(--or);color:#fff;font-style:normal;
+  display:flex;align-items:center;justify-content:center;font-size:14px;flex:0 0 auto}
+.ocard .who b{display:block;font-size:15px;line-height:22px;font-weight:600}
+.ocard .who span{display:block;font-family:"JetBrains Mono",monospace;font-size:12px;line-height:18px;color:var(--or)}
+.out .logos{margin-top:70px;display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.out .logos span{height:64px;border:1px solid var(--line);border-radius:10px;display:flex;align-items:center;
+  justify-content:center;font-family:"JetBrains Mono",monospace;font-size:13px;color:rgba(230,237,243,.5)}
+
+/* ── 지원 · FAQ : 5995~7265 (1270) ── */
+.apply{min-height:1270px;position:relative;padding:104px 0 0;overflow:clip}
+.apply .in{position:relative;z-index:3;max-width:1440px;margin:0 auto;padding:0 66px;
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.apply h2{max-width:520px}
+.apply .sub{margin-top:18px;max-width:520px}
+.apply form{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px;
+  display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.apply .fw{grid-column:1/-1}
+.apply label{display:block;font-family:"JetBrains Mono",monospace;font-size:12px;line-height:20px;color:var(--dim)}
+.apply input,.apply select,.apply textarea{margin-top:6px;width:100%;height:48px;border:1px solid var(--line);
+  border-radius:8px;background:rgb(13,17,23);padding:0 14px;font-size:15px;color:var(--fg)}
+.apply textarea{height:104px;padding:12px 14px;resize:none}
+.apply .sb{grid-column:1/-1;height:52px;border-radius:8px;background:var(--or);color:#fff;font-weight:600}
+.apply .faq{margin-top:54px}
+.qa{border-top:1px solid var(--line)}
+.qa .q{width:100%;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:24px;text-align:left}
+.qa .q i{width:22px;height:22px;flex:0 0 auto;position:relative}
+.qa .q i::before,.qa .q i::after{content:"";position:absolute;background:var(--or);transition:transform .35s var(--ease)}
+.qa .q i::before{left:0;right:0;top:10px;height:2px}
+.qa .q i::after{top:0;bottom:0;left:10px;width:2px}
+.qa.open .q i::after{transform:scaleY(0)}
+.qa .a{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .4s var(--ease)}
+.qa.open .a{grid-template-rows:1fr}
+.qa .a>div{min-height:0}
+.qa .a p{padding-bottom:22px}
+
+/* ── 푸터 : 7265~7570 (305) ── */
+.ft{height:305px;background:var(--bg);border-top:1px solid var(--line);padding:48px 0 24px}
+.ft .in{max-width:1440px;margin:0 auto;padding:0 66px;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px}
+.ft .lg{font-family:"JetBrains Mono",monospace;font-size:22px;line-height:28px;font-weight:800}
+.ft p{margin-top:12px}
+.ft h6{font-family:"JetBrains Mono",monospace;font-size:13px;line-height:20px;letter-spacing:1.2px;
+  text-transform:uppercase;color:var(--or)}
+.ft a.l{display:block;margin-top:10px;color:var(--dim);font-size:15px;line-height:23px;transition:color .3s var(--ease)}
+.ft a.l:hover{color:var(--fg)}
+.ft .cp{max-width:1440px;margin:34px auto 0;padding:18px 66px 0;border-top:1px solid var(--line);
+  display:flex;justify-content:space-between;gap:24px;color:rgba(230,237,243,.5);font-size:13px;line-height:20px}
+
+/* ── 1024 ── */
+@media (max-width:1199px){
+  .wrap,.nav .in,.hero .in,.paths .in,.plat .in,.proc .in,.out .in,.apply .in,.ft .in,.ft .cp{padding-left:32px;padding-right:32px}
+  .d1{font-size:48px;line-height:58px;letter-spacing:-1.6px}
+  .d2{font-size:32px;line-height:40px;letter-spacing:-1px}
+  .hero{height:auto;padding-bottom:70px}
+  .hero .stats{gap:44px}
+  .paths,.plat,.proc,.out,.apply{height:auto;min-height:0;padding:70px 0}
+  .paths .grid{grid-template-columns:repeat(2,1fr)}
+  .plat .bento{grid-template-columns:repeat(2,1fr)}
+  .bcard.w2{grid-column:span 2}
+  .proc .grid{grid-template-columns:1fr;gap:30px}
+  .out .nums{grid-template-columns:repeat(2,1fr)}
+  .out .grid{grid-template-columns:1fr}
+  .out .logos{grid-template-columns:repeat(3,1fr)}
+  .apply .in{grid-template-columns:1fr;gap:40px}
+  .ft{height:auto;padding:44px 0 24px}
+  .ft .in{grid-template-columns:1fr 1fr}
+}
+/* ── 390 ── */
+@media (max-width:809px){
+  .wrap,.nav .in,.hero .in,.paths .in,.plat .in,.proc .in,.out .in,.apply .in,.ft .in,.ft .cp{padding-left:20px;padding-right:20px}
+  .nav{height:72px}
+  .nav .lks,.nav .btn{display:none}
+  .burger{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 16px;border-radius:8px;
+    background:var(--or);color:#fff;font-size:13px}
+  .d1{font-size:34px;line-height:42px;letter-spacing:-.8px}
+  .d2{font-size:25px;line-height:32px;letter-spacing:-.6px}
+  .d3{font-size:19px;line-height:25px}
+  .hero .stats{flex-direction:column;gap:22px}
+  .hero .row{gap:10px}
+  .btn{height:48px;padding:12px 20px;font-size:15px}
+  .edit pre{font-size:11px;line-height:18px}
+  .paths .grid,.plat .bento{grid-template-columns:1fr}
+  .bcard.w2{grid-column:span 1}
+  .out .nums{grid-template-columns:1fr}
+  .out .logos{grid-template-columns:repeat(2,1fr)}
+  .apply form{grid-template-columns:1fr;padding:22px}
+  .ft .in{grid-template-columns:1fr;gap:26px}
+  .ft .cp{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- 히어로 0~1326 -->
+<section class="hero" id="top">
+  <div class="tex" aria-hidden="true">01001100 01100101 01100001 01110010 01101110 00100000 01110100 01101111 00100000 01100011 01101111 01100100 01100101 00100000 01100110 01100001 01110011 01110100 00100000 01100001 01101110 01100100 00100000 01110011 01101000 01101001 01110000 00100000 01110010 01100101 01100001 01101100 00100000 01110000 01110010 01101111 01101010 01100101 01100011 01110100 01110011 00100000 01100101 01110110 01100101 01110010 01111001 00100000 01110111 01100101 01100101 01101011</div>
+  <header class="nav">
+    <div class="in">
+      <a class="lg" href="#top">CODEDAM</a>
+      <nav class="lks">
+        <a class="lk ko" href="#paths">과정</a>
+        <a class="lk ko" href="#plat">배우는 방식</a>
+        <a class="lk ko" href="#proc">진행</a>
+        <a class="lk ko" href="#out">취업 성과</a>
+        <a class="lk ko" href="#apply">지원</a>
+      </nav>
+      <a class="btn btn-o ko" href="#apply">무료 상담</a>
+      <button class="burger ko" type="button">메뉴</button>
+    </div>
+  </header>
+  <div class="in">
+    <p class="lab ko">// 다음 기수 3월 12일 시작</p>
+    <h1 class="sa d1 ko">열두 주 뒤에<br><span class="or">개발자로</span> 출근합니다</h1>
+    <p class="sub p16 ko">프로젝트로 배우고, 코드 리뷰를 받고, 채용하는 회사에 바로 연결됩니다.</p>
+    <div class="row">
+      <a class="btn btn-o ko" href="#apply">지원서 쓰기</a>
+      <a class="btn btn-l ko" href="#paths">과정 보기</a>
+    </div>
+    <div class="stats">
+      <div><b>312</b><span class="ko">취업한 수료생</span></div>
+      <div><b>4,600만</b><span class="ko">첫 해 평균 연봉</span></div>
+      <div><b>91%</b><span class="ko">6개월 내 취업률</span></div>
+    </div>
+  </div>
+  <div class="edit">
+    <div class="bar"><i></i><i></i><i></i><span>career.ts — codedam</span></div>
+<pre><span class="n">1</span><span class="c">// 코드담 12주차 · 최종 프로젝트</span>
+<span class="n">2</span>
+<span class="n">3</span><span class="k">import</span> { useState, useEffect } <span class="k">from</span> <span class="s">'react'</span>
+<span class="n">4</span><span class="k">import</span> { Mentor } <span class="k">from</span> <span class="s">'@codedam/review'</span>
+<span class="n">5</span>
+<span class="n">6</span><span class="k">const</span> Career = () => {
+<span class="n">7</span>  <span class="k">const</span> [skills, setSkills] = useState([<span class="s">'React'</span>])
+<span class="n">8</span>  <span class="k">const</span> [weeks, setWeeks] = useState(<span class="s">12</span>)
+<span class="n">9</span>
+<span class="n">10</span>  useEffect(() => {
+<span class="n">11</span>    Mentor.review(skills)  <span class="c">// 멘토 코드 리뷰</span>
+<span class="n">12</span>  }, [skills])
+<span class="n">13</span>
+<span class="n">14</span>  <span class="k">return</span> &lt;Offer salary={4600} /&gt;
+<span class="n">15</span>}
+<span class="n">16</span>
+<span class="n">17</span><span class="ok">→ ✓ 빌드 성공 · 12주 완료</span>
+<span class="n">18</span><span class="ok">→ ✓ 최종 합격 · 연봉 4,600만원</span>
+</pre>
+  </div>
+</section>
+
+<main>
+
+  <!-- 학습 경로 1326~2030 -->
+  <section class="paths" id="paths">
+    <div class="tex" aria-hidden="true">1010 0110 1100 0011 1001 0101 1110 0010 1011 0100 0111 1000 1101 0001 1111 0110 1010 0011 0101 1100 1001 0110 1110 0010</div>
+    <div class="in">
+      <p class="lab ko">// 과정</p>
+      <h2 class="sa d2 ko rv">무엇을 할지 정하고<br><span class="or">거기까지만</span> 갑니다</h2>
+      <div class="grid">
+        <article class="pcard rv"><span class="ic" aria-hidden="true">◧</span>
+          <h3 class="sa d3 ko">프론트엔드</h3>
+          <p class="st">React · TypeScript</p><p class="st">Next.js · Tailwind</p>
+          <p class="wk">// 12주</p><p class="sal">3,800 – 5,200만원</p>
+          <span class="tag ko">가장 많이 선택</span></article>
+        <article class="pcard rv"><span class="ic" aria-hidden="true">◪</span>
+          <h3 class="sa d3 ko">백엔드</h3>
+          <p class="st">Node.js · Python</p><p class="st">PostgreSQL · Redis</p>
+          <p class="wk">// 12주</p><p class="sal">4,000 – 5,600만원</p>
+          <span class="tag ko">채용 수요 높음</span></article>
+        <article class="pcard rv"><span class="ic" aria-hidden="true">◫</span>
+          <h3 class="sa d3 ko">풀스택</h3>
+          <p class="st">React · Node · AWS</p><p class="st">TypeScript · Docker</p>
+          <p class="wk">// 16주</p><p class="sal">4,400 – 6,000만원</p>
+          <span class="tag ko">기간 김</span></article>
+        <article class="pcard rv"><span class="ic" aria-hidden="true">◨</span>
+          <h3 class="sa d3 ko">데이터 · AI</h3>
+          <p class="st">Python · ML · LLM</p><p class="st">PyTorch · LangChain</p>
+          <p class="wk">// 16주</p><p class="sal">4,800 – 6,800만원</p>
+          <span class="tag ko">가장 빠르게 성장</span></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 플랫폼 2030~3311 -->
+  <section class="plat" id="plat">
+    <div class="tex" aria-hidden="true">0110 1001 1100 0011 0101 1010 1111 0000 1001 0110 0011 1100 1010 0101 0110 1001 1100 0011 0101 1010</div>
+    <div class="in">
+      <p class="lab ko">// 배우는 방식</p>
+      <h2 class="sa d2 ko rv">강의만 듣고 끝나지<br><span class="or">않게</span> 만들었습니다</h2>
+      <div class="bento">
+        <article class="bcard w2 rv"><span class="ic" aria-hidden="true">✦</span>
+          <h3 class="sa d3 ko">코드 리뷰가 매주 옵니다</h3>
+          <p class="p16 ko">현업 개발자가 제출한 코드를 직접 읽고 남깁니다. 왜 그렇게 짜면 안 되는지까지 적어 드립니다.</p>
+          <div class="code">// 리뷰 중…<br><span style="color:#7ee787">✓ useCallback 잘 쓰셨습니다</span><br><span style="color:#f97316">△ 이 컴포넌트는 메모이제이션 필요</span><br>→ 수정 제안 3건</div>
+        </article>
+        <article class="bcard rv"><span class="ic" aria-hidden="true">▤</span>
+          <h3 class="sa d3 ko">프로젝트로 배웁니다</h3>
+          <p class="p16 ko">실제로 배포까지 하는 앱을 여섯 개 만듭니다. 포트폴리오가 그대로 남습니다.</p></article>
+        <article class="bcard rv"><span class="ic" aria-hidden="true">◍</span>
+          <h3 class="sa d3 ko">주 1회 멘토링</h3>
+          <p class="p16 ko">막힌 곳을 그때 물어보시면 됩니다. 혼자 며칠 헤매지 않게 합니다.</p></article>
+        <article class="bcard rv"><span class="ic" aria-hidden="true">◎</span>
+          <h3 class="sa d3 ko">동료가 있습니다</h3>
+          <p class="p16 ko">같은 기수 사람들과 매일 붙어 있습니다. 혼자 하면 대개 그만두게 됩니다.</p></article>
+        <article class="bcard w2 rv"><span class="ic" aria-hidden="true">◈</span>
+          <h3 class="sa d3 ko">채용하는 회사에 직접 연결합니다</h3>
+          <p class="p16 ko">공고 목록을 드리는 게 아니라 사람을 소개합니다. 지금 뽑고 있는 회사 200여 곳과 이어져 있습니다.</p>
+          <div class="code">200+ 채용 파트너<br>스타트업 · 중견 · 대기업 자회사<br>// 이력서가 먼저 읽힙니다</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 과정 3311~4184 -->
+  <section class="proc" id="proc">
+    <div class="tex" aria-hidden="true">1100 0011 1010 0101 0110 1001 1111 0000 0011 1100 1001 0110 1010 0101</div>
+    <div class="in">
+      <p class="lab ko">// 진행</p>
+      <h2 class="sa d2 ko rv">열두 주. 진짜 프로젝트.<br><span class="or">진짜 취업.</span></h2>
+      <div class="grid">
+        <div class="step rv"><span class="sa no">01</span>
+          <h3 class="sa d3 ko">지원하고 확인합니다</h3>
+          <p class="p16 ko">코딩 테스트는 없습니다. 왜 하려는지, 시간을 낼 수 있는지를 통화로 확인합니다.</p>
+          <div class="ln"></div></div>
+        <div class="step rv"><span class="sa no">02</span>
+          <h3 class="sa d3 ko">만들면서 배웁니다</h3>
+          <p class="p16 ko">첫 주부터 코드를 씁니다. 매주 결과물을 내고 리뷰를 받으며 열두 주를 채웁니다.</p>
+          <div class="ln"></div></div>
+        <div class="step rv"><span class="sa no">03</span>
+          <h3 class="sa d3 ko">취업까지 붙습니다</h3>
+          <p class="p16 ko">이력서와 모의 면접, 연봉 협상까지 같이 봅니다. 합격할 때까지 끝나지 않습니다.</p>
+          <div class="ln"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 성과 4184~5995 -->
+  <section class="out" id="out">
+    <div class="tex" aria-hidden="true">0101 1010 1100 0011 1001 0110 1111 0000 0110 1001 0011 1100 1010 0101 0110 1001</div>
+    <div class="in">
+      <p class="lab ko">// 취업 성과</p>
+      <h2 class="sa d2 ko rv">일자리가 아니라<br><span class="or">경력</span>을 시작합니다</h2>
+      <div class="nums">
+        <div class="rv"><b>312명</b><span class="ko">취업한 수료생</span></div>
+        <div class="rv"><b>91%</b><span class="ko">6개월 내 취업</span></div>
+        <div class="rv"><b>4,600만</b><span class="ko">첫 해 평균 연봉</span></div>
+        <div class="rv"><b>200+</b><span class="ko">채용 파트너</span></div>
+      </div>
+      <div class="grid">
+        <article class="ocard rv"><figure><img src="./assets/out-1.jpg" alt="" width="412" height="220"></figure>
+          <div class="bd"><p class="p16 ko">비전공에 서른둘이었습니다. 늦었다고 생각했는데 열두 주 만에 첫 회사에 들어갔습니다.</p>
+          <div class="who"><i aria-hidden="true">김</i><div><b class="ko">김하늘</b><span>frontend · 2026</span></div></div></div></article>
+        <article class="ocard rv"><figure><img src="./assets/out-2.jpg" alt="" width="412" height="220"></figure>
+          <div class="bd"><p class="p16 ko">독학으로 반년을 헤맸습니다. 리뷰를 받기 시작하니 두 달 만에 코드가 달라졌어요.</p>
+          <div class="who"><i aria-hidden="true">박</i><div><b class="ko">박서연</b><span>backend · 2026</span></div></div></div></article>
+        <article class="ocard rv"><figure><img src="./assets/out-3.jpg" alt="" width="412" height="220"></figure>
+          <div class="bd"><p class="p16 ko">면접에서 프로젝트 얘기만 삼십 분 했습니다. 만들어 둔 게 있으니 할 말이 있더군요.</p>
+          <div class="who"><i aria-hidden="true">이</i><div><b class="ko">이지우</b><span>fullstack · 2025</span></div></div></div></article>
+      </div>
+      <div class="logos">
+        <span class="rv">NEXTWAVE</span><span class="rv">ORBIT</span><span class="rv">MOKO</span>
+        <span class="rv">SEONO</span><span class="rv">HANBIT</span><span class="rv">DAON</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 지원 · FAQ 5995~7265 -->
+  <section class="apply" id="apply">
+    <div class="tex" aria-hidden="true">1001 0110 0011 1100 1010 0101 0110 1001 1111 0000 1100 0011</div>
+    <div class="in">
+      <div>
+        <p class="lab ko">// 지원</p>
+        <h2 class="sa d2 ko rv">아직 궁금한 게<br><span class="or">남아 있다면</span></h2>
+        <p class="sub p16 ko rv">지원서를 보내시면 이틀 안에 연락드립니다. 통화로 맞는지 먼저 확인하고 정합니다.</p>
+        <div class="faq rv">
+          <div class="qa"><button class="q" type="button"><span class="sa d3 ko">비전공자도 되나요?</span><i></i></button>
+            <div class="a"><div><p class="p16 ko">수료생 열에 일곱이 비전공입니다. 전공보다 하루에 낼 수 있는 시간을 봅니다.</p></div></div></div>
+          <div class="qa"><button class="q" type="button"><span class="sa d3 ko">일하면서 들을 수 있나요?</span><i></i></button>
+            <div class="a"><div><p class="p16 ko">주간 과정은 어렵습니다. 야간·주말 과정이 따로 있고 기간이 16주로 늘어납니다.</p></div></div></div>
+          <div class="qa"><button class="q" type="button"><span class="sa d3 ko">취업이 안 되면 어떻게 되나요?</span><i></i></button>
+            <div class="a"><div><p class="p16 ko">6개월 동안 계속 붙습니다. 이력서와 면접을 같이 다듬고, 새 자리가 나오면 다시 연결합니다.</p></div></div></div>
+          <div class="qa"><button class="q" type="button"><span class="sa d3 ko">수강료는 얼마인가요?</span><i></i></button>
+            <div class="a"><div><p class="p16 ko">과정에 따라 다릅니다. 통화 때 총액을 문서로 드리고, 중간에 추가 비용은 없습니다.</p></div></div></div>
+        </div>
+      </div>
+      <form onsubmit="return false" class="rv">
+        <div><label class="ko">이름</label><input type="text" placeholder="홍길동" class="ko"></div>
+        <div><label class="ko">연락처</label><input type="tel" placeholder="010-0000-0000"></div>
+        <div class="fw"><label class="ko">이메일</label><input type="email" placeholder="name@example.com"></div>
+        <div class="fw"><label class="ko">관심 과정</label>
+          <select class="ko"><option>프론트엔드</option><option>백엔드</option><option>풀스택</option><option>데이터 · AI</option></select></div>
+        <div class="fw"><label class="ko">지금 상황을 알려 주세요</label>
+          <textarea placeholder="전공, 지금 하는 일, 하루에 낼 수 있는 시간" class="ko"></textarea></div>
+        <button class="sb ko" type="submit">지원서 보내기</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- 푸터 7265~7570 -->
+<footer class="ft">
+  <div class="in">
+    <div>
+      <span class="lg">CODEDAM</span>
+      <p class="p16 ko">만들고, 배포하고, 취업합니다. 열두 주면 됩니다.</p>
+    </div>
+    <div><h6>과정</h6><a class="l ko" href="#paths">프론트엔드</a><a class="l ko" href="#paths">백엔드</a><a class="l ko" href="#paths">풀스택</a><a class="l ko" href="#paths">데이터 · AI</a></div>
+    <div><h6>둘러보기</h6><a class="l ko" href="#plat">배우는 방식</a><a class="l ko" href="#proc">진행</a><a class="l ko" href="#out">취업 성과</a></div>
+    <div><h6>연락</h6><a class="l" href="tel:01048944905">010-4894-4905</a><a class="l" href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a><a class="l ko" href="#apply">서울 강남구 코드로 8</a></div>
+  </div>
+  <div class="cp">
+    <span class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</span>
+    <span class="ko">© 2026 코드담</span>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.qa .q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+</script>
+</body>
+</html>

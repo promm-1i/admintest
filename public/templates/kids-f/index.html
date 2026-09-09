@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>아람 유치원 — 유치원 · 어린이집 (프리미엄 디자인 B)</title>
+<meta name="description" content="크림 바탕에 네이비 제목과 낙서 장식이 놓인 히어로, 코랄 마퀴 띠, 라운드 110의 노란 소개 패널과 프로그램 4단, 요일·시간이 붙는 활동 카드 6종과 분류 칩, 코랄 후기 슬라이더, 라운드 30 FAQ 아코디언, 노란 신청 카드가 얹힌 초록 푸터까지 갖춘 유치원 프리미엄 원페이지.">
+<meta property="og:title" content="아람 유치원 — 유치원 · 어린이집 (프리미엄 디자인 B)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=general-sans@500,600,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 5584)
+   페이지 크림 rgb(251,249,240) · 네이비 rgb(8,22,70) · 본문회색 rgb(51,51,51)
+   초록 rgb(0,186,89) · 노랑 rgb(255,207,85) · 진노랑 rgb(250,183,14) · 코랄 rgb(255,100,100)
+   FAQ 면 rgb(248,251,254)
+   컨테이너 1440 - 좌우 120 → 1200 (좌측선 120)
+   h1 Baloo 2 64/89.6 400 ls-2.5 + General Sans 64/89.6 700
+   h2 Baloo 2 36/50.4 400 + General Sans 36/50.4 600 · CTA 44/61.6
+   카드제목 General Sans 24/30 600 · 본문 General Sans 16/24 500 · 리드 Inter 20/32 400
+   라운드 110(노란 패널) · 100(마퀴·안쪽) · 40(신청 카드) · 30(카드·FAQ) · 12(버튼) · 8(SNS)
+   General Sans 는 Fontshare 무료 ── */
+:root{--cream:rgb(251,249,240);--navy:rgb(8,22,70);--ink:rgb(51,51,51);
+  --green:rgb(0,186,89);--yellow:rgb(255,207,85);--yellow2:rgb(250,183,14);--coral:rgb(255,100,100);
+  --faq:rgb(248,251,254);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);
+  font-family:"General Sans","Pretendard Variable",Pretendard,sans-serif;font-size:16px;line-height:24px;font-weight:500}
+.ko{letter-spacing:-.01em;text-wrap:pretty}
+.ba{font-family:"Baloo 2","Pretendard Variable",Pretendard,sans-serif;font-weight:400}
+.it{font-family:Inter,"Pretendard Variable",Pretendard,sans-serif}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 120px}
+
+/* 타입 — 레퍼런스 값 그대로 */
+.d1{font-size:64px;line-height:89.6px;letter-spacing:-2.5px;color:var(--navy)}
+.d1b{font-size:64px;line-height:89.6px;letter-spacing:-2.5px;font-weight:700;color:var(--navy)}
+.d2{font-size:36px;line-height:50.4px;color:var(--navy)}
+.d2b{font-size:36px;line-height:50.4px;font-weight:600;color:var(--navy)}
+.d3{font-size:44px;line-height:61.6px;color:var(--navy)}
+.d3b{font-size:44px;line-height:61.6px;font-weight:600;color:var(--navy)}
+.t24{font-size:24px;line-height:30px;font-weight:600;color:var(--navy)}
+.t20{font-size:20px;line-height:25px;font-weight:600}
+.p16{font-size:16px;line-height:24px;font-weight:500}
+.p14{font-size:14px;line-height:21px;font-weight:500;color:var(--navy)}
+.lead{font-size:20px;line-height:32px;font-weight:400;color:var(--navy)}
+
+/* 버튼 — 초록 채움 / 흰 테두리 */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:56px;padding:16px 32px;border-radius:12px;
+  font-size:16px;line-height:24px;font-weight:600;transition:transform .3s var(--ease),filter .3s var(--ease)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.btn-g{background:var(--green);color:#fff}
+.btn-w{background:#fff;color:var(--navy)}
+.btn-o{border:1.5px solid var(--navy);color:var(--navy)}
+
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── 내비 : 1440×76 · pad 14px 120px ── */
+.nav{height:76px;background:var(--cream);display:flex;align-items:center;position:relative;z-index:9}
+.nav .in{width:100%;max-width:1440px;margin:0 auto;padding:14px 120px;display:flex;align-items:center;justify-content:space-between}
+.nav .lg{font-size:24px;line-height:30px;font-weight:700;color:var(--navy)}
+.nav .lks{display:flex;gap:32px}
+.nav a.lk{font-size:16px;line-height:24px;font-weight:500;color:var(--ink);transition:color .3s var(--ease)}
+.nav a.lk:hover{color:var(--green)}
+.nav .tour{font-size:16px;line-height:24px;font-weight:600;color:rgb(51,55,91);
+  border:1.5px solid rgba(51,55,91,.35);border-radius:10px;padding:8px 18px;transition:background .3s var(--ease)}
+.nav .tour:hover{background:rgba(51,55,91,.07)}
+.burger{display:none}
+
+/* ── 히어로 : 76~860 (784) ── */
+.hero{position:relative;height:784px;overflow:clip}
+.hero .in{max-width:1440px;margin:0 auto;padding:0 120px;position:relative;height:100%}
+.hero h1{position:relative;z-index:3;padding-top:87px;max-width:595px}
+.hero .sub{position:relative;z-index:3;margin-top:20px;max-width:536px}
+.hero .row{position:relative;z-index:3;margin-top:44px;display:flex;gap:16px}
+.hero .stats{position:relative;z-index:3;margin-top:67px;display:flex;gap:178px}
+.hero .stats .ic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:#fff}
+.hero .stats>div{display:flex;align-items:flex-start;gap:20px}
+.hero .stats>div:nth-child(1) .ic{background:var(--coral)}
+.hero .stats>div:nth-child(2) .ic{background:var(--green)}
+.hero .stats b{display:block;font-size:24px;line-height:30px;font-weight:700;color:var(--navy)}
+.hero .stats span{display:block;font-family:Inter,sans-serif;font-size:20px;line-height:32px;font-weight:400;color:var(--navy)}
+.hero .ph{position:absolute;right:120px;top:70px;width:520px;height:470px;border-radius:32px;overflow:clip;
+  background:var(--yellow);z-index:2}
+.hero .ph img{width:100%;height:100%;object-fit:cover}
+.hero .dd{position:absolute;pointer-events:none;z-index:1;color:var(--coral)}
+.hero .d1p{right:60px;top:20px;width:300px;height:300px;border:14px solid var(--coral);border-radius:50%;
+  border-left-color:transparent;border-bottom-color:transparent;transform:rotate(24deg)}
+.hero .d2p{left:640px;top:150px;font-size:34px}
+.hero .d3p{left:600px;top:560px;font-size:26px;color:var(--navy)}
+.hero .d4p{right:100px;bottom:180px;font-size:26px;color:var(--navy)}
+
+/* ── 노랑 패널 : 860~1996 (1136) ── */
+.sun{position:relative;height:1136px;background:var(--yellow);border-radius:110px 110px 0 0;padding:100px 0 0;overflow:clip}
+.mq{position:relative;height:193px;background:var(--coral);border-radius:100px;display:flex;align-items:center;overflow:clip}
+.mq ul{display:flex;gap:64px;width:max-content;animation:mq 26s linear infinite;padding-left:64px}
+@media (prefers-reduced-motion:reduce){.mq ul{animation:none}}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-1498px)}}
+.mq li{display:flex;align-items:center;gap:64px;flex:0 0 auto;color:#fff;font-size:24px;line-height:30px;font-weight:600}
+.mq i{width:16px;height:16px;background:#fff;border-radius:50%;display:block;flex:0 0 auto}
+.sun .in{margin-top:-133px;height:1036px;border-radius:100px;padding:60px 120px;position:relative;z-index:2}
+.sun .row{display:flex;gap:28px;align-items:flex-start}
+.sun .card{width:317px;height:370px;border-radius:30px;overflow:clip;background:#fff;flex:0 0 auto}
+.sun .card img{width:100%;height:100%;object-fit:cover}
+.sun .tx{flex:1 0 0;background:var(--yellow2);border-radius:30px;padding:30px;min-height:301px}
+.sun .tx h2{color:#fff}
+.sun .tx p{margin-top:12px;max-width:686px}
+.sun .tx .more{margin-top:22px;display:inline-flex;align-items:center;gap:8px;font-size:16px;line-height:24px;font-weight:600;color:var(--navy)}
+.sun .prog{margin-top:105px;display:grid;grid-template-columns:repeat(4,1fr);gap:68px}
+.sun .prog h3{color:var(--navy)}
+.sun .prog p{margin-top:14px}
+.sun .vm{margin-top:70px;text-align:center}
+
+/* ── 활동 : 1996~3007 (1011) ── */
+.act{height:1011px;background:#fff;padding:60px 0 0}
+.act .hd{text-align:left}
+.act .chips{margin-top:31px;display:flex;justify-content:center;gap:30px;align-items:center}
+.act .chip{border-radius:100px;padding:8px 20px;font-size:16px;line-height:24px;font-weight:500;color:var(--ink);
+  transition:background .3s var(--ease),color .3s var(--ease)}
+.act .chip.on{background:var(--coral);color:#fff}
+.act .chip:hover{background:rgba(255,100,100,.14)}
+.act .grid{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:50px 34px}
+.acard{border-radius:30px;overflow:clip;background:#fff;box-shadow:0 8px 30px rgba(8,22,70,.08);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.acard:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(8,22,70,.13)}
+.acard figure{height:198px;overflow:clip}
+.acard figure img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.acard:hover figure img{transform:scale(1.06)}
+.acard .bd{padding:24px}
+.acard .mt{display:flex;justify-content:space-between;gap:12px}
+.acard h3{margin-top:8px}
+.acard p{margin-top:9px}
+
+/* ── 후기 : 3007~3907 (900) · 코랄 ── */
+.rev{height:900px;background:var(--coral);padding:82px 0 0}
+.rev .in{height:735px;border-radius:100px;padding:60px 120px;background:var(--coral)}
+.rev h2,.rev h2 span{color:#fff}
+.rev .grid{margin-top:30px;display:grid;grid-template-columns:repeat(2,1fr);gap:40px}
+.rcard{height:308px;background:#fff;border-radius:30px;padding:24px;display:flex;flex-direction:column}
+.rcard .who{display:flex;align-items:center;gap:20px}
+.rcard figure{width:104px;height:104px;border-radius:24px;overflow:clip;flex:0 0 auto}
+.rcard figure img{width:100%;height:100%;object-fit:cover}
+.rcard .qt{margin-top:22px;font-family:Inter,sans-serif;font-size:20px;line-height:32px;font-weight:400;color:var(--navy)}
+.rev .nav2{margin-top:36px;display:flex;justify-content:center;gap:10px}
+.rev .nav2 button{width:60px;height:60px;border-radius:50%;background:#fff;color:var(--navy);
+  display:flex;align-items:center;justify-content:center;font-size:18px;transition:transform .3s var(--ease)}
+.rev .nav2 button:hover{transform:scale(1.08)}
+.rev .vm{margin-top:26px;text-align:center;font-size:16px;line-height:24px;font-weight:600;color:#fff}
+
+/* ── FAQ : 3907~4724 (817) ── */
+.faq{height:817px;background:#fff;padding:60px 0 0}
+.faq .list{margin-top:40px;max-width:840px;margin-left:auto;margin-right:auto;display:flex;flex-direction:column;gap:30px}
+.qa{background:var(--faq);border-radius:30px;padding:32px}
+.qa .q{width:100%;display:flex;justify-content:space-between;align-items:flex-start;gap:24px;text-align:left}
+.qa .q span{flex:1 0 0}
+.qa .q i{width:28px;height:28px;flex:0 0 auto;position:relative;margin-top:2px}
+.qa .q i::before,.qa .q i::after{content:"";position:absolute;background:var(--navy);transition:transform .35s var(--ease)}
+.qa .q i::before{left:0;right:0;top:13px;height:2px}
+.qa .q i::after{top:0;bottom:0;left:13px;width:2px}
+.qa.open .q i::after{transform:scaleY(0)}
+.qa .a{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .4s var(--ease)}
+.qa.open .a{grid-template-rows:1fr}
+.qa .a>div{min-height:0}
+.qa .a p{padding-top:14px}
+
+/* ── 푸터 : 4723~5584 (861) ── */
+.ft{padding:80px 0 0;background:var(--cream)}
+.ft .grn{background:var(--green);padding:0 120px 60px;position:relative}
+.ft .cap{height:100px;background:var(--cream);position:absolute;left:0;right:0;top:0}
+.ft .cta{position:relative;z-index:2;max-width:1200px;margin:0 auto;background:var(--yellow);border-radius:40px;
+  min-height:418px;padding:77px 48px;display:flex;flex-direction:column;align-items:flex-start}
+.ft .cta h2{max-width:662px}
+.ft .cta p{margin-top:16px;max-width:662px}
+.ft .cta .row{margin-top:36px;display:flex;gap:20px}
+.ft .cols{position:relative;z-index:2;margin-top:44px;display:grid;grid-template-columns:360px 1fr 1fr 1fr;gap:40px;color:#fff}
+.ft .cols h6{font-size:20px;line-height:25px;font-weight:600;color:#fff}
+.ft .cols p{margin-top:16px;color:#fff}
+.ft .cols a{display:block;margin-top:12px;color:rgba(255,255,255,.9);transition:opacity .3s var(--ease)}
+.ft .cols a:hover{opacity:.7}
+.ft .sns{margin-top:24px;display:flex;gap:5px}
+.ft .sns a{width:41px;height:41px;border-radius:8px;background:#fff;color:var(--green);
+  display:flex;align-items:center;justify-content:center;margin-top:0}
+.ft .cp{position:relative;z-index:2;margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.28);
+  display:flex;justify-content:space-between;gap:24px;color:rgba(255,255,255,.9);font-size:14px;line-height:21px}
+
+/* ── 1024 ── */
+@media (max-width:1199px){
+  .wrap,.nav .in,.hero .in,.sun .in,.rev .in,.ft .grn{padding-left:40px;padding-right:40px}
+  .nav .in{padding:14px 40px}
+  .d1,.d1b{font-size:42px;line-height:56px;letter-spacing:-1.2px}
+  .d2,.d2b{font-size:28px;line-height:38px}
+  .d3,.d3b{font-size:32px;line-height:44px}
+  .hero{height:auto;padding-bottom:60px}
+  .hero .ph{position:static;width:100%;height:320px;margin-top:40px}
+  .hero .dd{display:none}
+  .hero .stats{gap:40px;flex-wrap:wrap}
+  .sun{height:auto;border-radius:60px 60px 0 0;padding-top:70px}
+  .sun .in{height:auto;padding:40px;border-radius:60px}
+  .sun .row{flex-direction:column}
+  .sun .card{width:100%;height:280px}
+  .sun .prog{grid-template-columns:repeat(2,1fr);gap:40px;margin-top:60px}
+  .mq{height:150px;border-radius:70px}
+  .act{height:auto;padding:60px 0}
+  .act .grid{grid-template-columns:repeat(2,1fr);margin-top:40px;gap:34px 24px}
+  .rev{height:auto;padding:60px 0}
+  .rev .in{height:auto;border-radius:60px;padding:40px}
+  .rev .grid{grid-template-columns:1fr}
+  .rcard{height:auto}
+  .faq{height:auto;padding:60px 0}
+  .ft .cta{padding:48px 32px;min-height:0}
+  .ft .cols{grid-template-columns:1fr 1fr;gap:32px}
+}
+/* ── 390 ── */
+@media (max-width:809px){
+  .wrap,.nav .in,.hero .in,.sun .in,.rev .in,.ft .grn{padding-left:20px;padding-right:20px}
+  .nav .in{padding:12px 20px}
+  .nav .lks,.nav .tour{display:none}
+  .burger{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 16px;border-radius:10px;
+    background:var(--green);color:#fff;font-size:14px;font-weight:600}
+  .d1,.d1b{font-size:32px;line-height:42px;letter-spacing:-.6px}
+  .d2,.d2b{font-size:24px;line-height:33px}
+  .d3,.d3b{font-size:26px;line-height:36px}
+  .t24{font-size:20px;line-height:26px}
+  .lead{font-size:17px;line-height:27px}
+  .hero h1{padding-top:44px}
+  .hero .row{flex-wrap:wrap;gap:10px}
+  .btn{height:48px;padding:12px 20px;font-size:15px}
+  .hero .stats{gap:24px}
+  .sun{border-radius:36px 36px 0 0;padding-top:50px}
+  .sun .in{padding:24px 20px;border-radius:36px;margin-top:-100px}
+  .mq{height:120px;border-radius:50px}
+  .mq li{font-size:18px;gap:34px}
+  .mq ul{gap:34px;padding-left:34px}
+  .sun .prog{grid-template-columns:1fr;gap:28px}
+  .act .grid{grid-template-columns:1fr}
+  .act .chips{flex-wrap:wrap;gap:10px;justify-content:flex-start}
+  .rev .in{padding:24px 20px;border-radius:36px}
+  .faq .list{gap:18px}
+  .qa{padding:22px;border-radius:22px}
+  .ft{padding-top:50px}
+  .ft .cta{border-radius:26px;padding:32px 22px}
+  .ft .cta .row{flex-wrap:wrap;gap:10px}
+  .ft .cols{grid-template-columns:1fr;gap:28px}
+  .ft .cp{flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<!-- 내비 76 -->
+<header class="nav" id="top">
+  <div class="in">
+    <a class="lg ko" href="#top">아람</a>
+    <nav class="lks">
+      <a class="lk ko" href="#about">소개</a>
+      <a class="lk ko" href="#prog">프로그램</a>
+      <a class="lk ko" href="#act">활동</a>
+      <a class="lk ko" href="#faq">자주 묻는 질문</a>
+      <a class="lk ko" href="#apply">문의</a>
+    </nav>
+    <a class="tour ko" href="#apply">원 둘러보기</a>
+    <button class="burger ko" type="button">메뉴</button>
+  </div>
+</header>
+
+<!-- 히어로 76~860 -->
+<section class="hero">
+  <div class="in">
+    <span class="dd d1p" aria-hidden="true"></span>
+    <span class="dd d2p" aria-hidden="true">✦</span>
+    <span class="dd d3p" aria-hidden="true">✧</span>
+    <span class="dd d4p" aria-hidden="true">✳</span>
+    <span class="ph"><img src="./assets/hero.jpg" alt="손에 물감을 묻힌 아이" width="520" height="470"></span>
+    <h1><span class="ba d1 ko">하루를 다 쓰는</span><br><span class="d1b ko">아이의 걸음으로</span></h1>
+    <p class="sub lead ko">서두르지 않습니다. 아이가 스스로 궁금해질 때까지 기다렸다가 그때 손을 잡습니다.</p>
+    <div class="row">
+      <a class="btn btn-g ko" href="#prog">프로그램 보기</a>
+      <a class="btn btn-o ko" href="#apply">입학 문의</a>
+    </div>
+    <div class="stats">
+      <div><span class="ic" aria-hidden="true">▤</span><div><b>248명</b><span class="ko">재원 아동</span></div></div>
+      <div><span class="ic" aria-hidden="true">◕</span><div><b>27년</b><span class="ko">함께한 해</span></div></div>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- 노랑 패널 860~1996 -->
+  <section class="sun" id="about">
+    <div class="mq" aria-hidden="true">
+      <ul>
+        <li><span class="ko">2027학년도 신입 원아 모집</span><i></i><span class="ko">정원 한정</span><i></i><span class="ko">전 원생 미술 대회</span><i></i></li>
+        <li><span class="ko">2027학년도 신입 원아 모집</span><i></i><span class="ko">정원 한정</span><i></i><span class="ko">전 원생 미술 대회</span><i></i></li>
+      </ul>
+    </div>
+    <div class="in wrap">
+      <div class="row">
+        <div class="card rv"><img src="./assets/about.jpg" alt="교실 풍경" width="317" height="370"></div>
+        <div class="tx rv">
+          <h2><span class="ba d2">아람에</span> <span class="d2b ko">오신 걸 환영합니다</span></h2>
+          <p class="lead ko">1999년에 문을 열었습니다. 그동안 바뀐 것은 많지만 하나는 그대로입니다. 잘 놀고 잘 먹고 잘 자는 하루를 지키면 나머지는 아이가 알아서 자란다는 것.</p>
+          <a class="more ko" href="#prog">더 알아보기 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="prog" id="prog">
+        <div class="rv"><h3 class="t24 ko">놀이반</h3><p class="p16 ko">세 살에서 네 살까지. 낯선 곳이 편해지는 데 시간을 충분히 씁니다. 울어도 괜찮습니다.</p></div>
+        <div class="rv"><h3 class="t24 ko">숲반</h3><p class="p16 ko">네 살에서 다섯 살까지. 매주 바깥으로 나가고, 본 것을 돌아와 그림으로 남깁니다.</p></div>
+        <div class="rv"><h3 class="t24 ko">이야기반</h3><p class="p16 ko">다섯 살에서 여섯 살까지. 말로 설명하고 남의 말을 끝까지 듣는 연습을 합니다.</p></div>
+        <div class="rv"><h3 class="t24 ko">준비반</h3><p class="p16 ko">여섯 살에서 일곱 살까지. 학교 갈 준비를 합니다. 앉아 있는 시간을 조금씩 늘립니다.</p></div>
+      </div>
+      <div class="vm"><a class="btn btn-w ko" href="#act">활동 보기</a></div>
+    </div>
+  </section>
+
+  <!-- 활동 1996~3007 -->
+  <section class="act wrap" id="act">
+    <div class="hd">
+      <h2 class="rv"><span class="ba d2 ko">아람의</span> <span class="d2b ko">활동</span></h2>
+    </div>
+    <div class="chips rv">
+      <button class="chip on ko" type="button">전체</button>
+      <button class="chip ko" type="button">몸으로</button>
+      <button class="chip ko" type="button">행사</button>
+      <button class="chip ko" type="button">만들기</button>
+      <button class="chip ko" type="button">음악</button>
+    </div>
+    <div class="grid">
+      <article class="acard rv"><figure><img src="./assets/act-1.jpg" alt="" width="410" height="198"></figure>
+        <div class="bd"><div class="mt"><span class="p14 ko">금요일</span><span class="p14">15:00 – 16:00</span></div>
+        <h3 class="t24 ko">음악 시간</h3><p class="p16 ko">악기를 직접 만져 봅니다. 소리를 내 보고 마음에 드는 것을 고릅니다.</p></div></article>
+      <article class="acard rv"><figure><img src="./assets/act-2.jpg" alt="" width="410" height="198"></figure>
+        <div class="bd"><div class="mt"><span class="p14 ko">수요일</span><span class="p14">15:00 – 16:00</span></div>
+        <h3 class="t24 ko">봄 잔치</h3><p class="p16 ko">한 학기에 한 번 마당에서 놉니다. 부모님도 같이 오셔도 됩니다.</p></div></article>
+      <article class="acard rv"><figure><img src="./assets/act-3.jpg" alt="" width="410" height="198"></figure>
+        <div class="bd"><div class="mt"><span class="p14 ko">목요일</span><span class="p14">15:00 – 16:00</span></div>
+        <h3 class="t24 ko">실내 암벽</h3><p class="p16 ko">낮은 벽부터 올라갑니다. 무서우면 안 해도 되고, 다음에 하면 됩니다.</p></div></article>
+      <article class="acard rv"><figure><img src="./assets/act-4.jpg" alt="" width="410" height="198"></figure>
+        <div class="bd"><div class="mt"><span class="p14 ko">화요일</span><span class="p14">15:00 – 16:00</span></div>
+        <h3 class="t24 ko">가을 분장</h3><p class="p16 ko">직접 만든 옷을 입고 하루를 보냅니다. 사진은 그날 저녁에 보내 드립니다.</p></div></article>
+      <article class="acard rv"><figure><img src="./assets/act-5.jpg" alt="" width="410" height="198"></figure>
+        <div class="bd"><div class="mt"><span class="p14 ko">월요일</span><span class="p14">15:00 – 16:00</span></div>
+        <h3 class="t24 ko">만들기</h3><p class="p16 ko">종이와 나무로 무엇이든 만듭니다. 부수고 다시 만들어도 괜찮습니다.</p></div></article>
+      <article class="acard rv"><figure><img src="./assets/act-6.jpg" alt="" width="410" height="198"></figure>
+        <div class="bd"><div class="mt"><span class="p14 ko">금요일</span><span class="p14">15:00 – 16:00</span></div>
+        <h3 class="t24 ko">공놀이</h3><p class="p16 ko">규칙은 아이들이 정합니다. 지는 날도 있어야 한다고 생각합니다.</p></div></article>
+    </div>
+  </section>
+
+  <!-- 후기 3007~3907 -->
+  <section class="rev">
+    <div class="in wrap">
+      <h2 class="rv"><span class="ba d2">부모님</span> <span class="d2b ko">이야기</span></h2>
+      <div class="grid">
+        <article class="rcard rv">
+          <div class="who"><figure><img src="./assets/face-1.jpg" alt="" width="104" height="104"></figure>
+            <div><h3 class="t24 ko">김하늘</h3><p class="p16 ko">놀이반 학부모</p></div></div>
+          <p class="qt ko">첫 주에 매일 울었는데 선생님이 재촉하지 않으셨습니다. 한 달 뒤에는 먼저 들어가더군요. 기다려 주신 게 컸습니다.</p>
+        </article>
+        <article class="rcard rv">
+          <div class="who"><figure><img src="./assets/face-2.jpg" alt="" width="104" height="104"></figure>
+            <div><h3 class="t24 ko">박서연</h3><p class="p16 ko">준비반 학부모</p></div></div>
+          <p class="qt ko">그날 무엇을 했는지 사진으로 보내 주십니다. 저녁에 아이랑 그 얘기를 하게 되니 대화가 늘었어요.</p>
+        </article>
+      </div>
+      <div class="nav2"><button type="button" aria-label="이전">←</button><button type="button" aria-label="다음">→</button></div>
+      <p class="vm ko">후기 더 보기</p>
+    </div>
+  </section>
+
+  <!-- FAQ 3907~4724 -->
+  <section class="faq wrap" id="faq">
+    <h2 class="rv"><span class="ba d2 ko">자주 묻는</span> <span class="d2b ko">질문</span></h2>
+    <div class="list rv">
+      <div class="qa"><button class="q" type="button"><span class="t24 ko">아이 소식은 어떻게 받아 보나요?</span><i></i></button>
+        <div class="a"><div><p class="p16 ko">그날 있었던 일을 사진과 함께 앱으로 보내 드립니다. 급한 일은 담임이 바로 전화드립니다.</p></div></div></div>
+      <div class="qa"><button class="q" type="button"><span class="t24 ko">원비는 어떻게 정해지나요?</span><i></i></button>
+        <div class="a"><div><p class="p16 ko">반과 이용 시간에 따라 다릅니다. 상담 때 총액을 문서로 드리고, 중간에 올리지 않습니다.</p></div></div></div>
+      <div class="qa"><button class="q" type="button"><span class="t24 ko">안전은 어떻게 관리하나요?</span><i></i></button>
+        <div class="a"><div><p class="p16 ko">교실마다 담임과 보조 교사가 함께 있습니다. 출입은 카드로만 되고 방문 기록이 남습니다.</p></div></div></div>
+      <div class="qa"><button class="q" type="button"><span class="t24 ko">아람이 중요하게 보는 것은 무엇인가요?</span><i></i></button>
+        <div class="a"><div><p class="p16 ko">잘 놀고 잘 먹고 잘 자는 하루입니다. 나머지는 그 위에 얹히는 것이라고 생각합니다.</p></div></div></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 푸터 4723~5584 -->
+<footer class="ft" id="apply">
+  <div class="grn">
+    <span class="cap" aria-hidden="true"></span>
+    <div class="cta">
+      <h2><span class="ba d3 ko">아이의 첫 걸음을</span><br><span class="d3b ko">아람과 함께 시작할까요?</span></h2>
+      <p class="p16 ko">지금 상담을 신청하시면 원을 직접 둘러보시고, 담임 선생님과 짧게 이야기 나누실 수 있습니다.</p>
+      <div class="row">
+        <a class="btn btn-w ko" href="tel:01048944905">입학 문의</a>
+        <a class="btn btn-o ko" href="#prog">프로그램 보기</a>
+      </div>
+    </div>
+    <div class="cols">
+      <div>
+        <h6 class="ko">아람 유치원</h6>
+        <p class="p16 ko">아이가 하루를 온전히 쓰는 곳. 1999년부터 같은 자리에서 스물일곱 해째입니다.</p>
+        <div class="sns"><a href="#top" aria-label="인스타그램">◎</a><a href="#top" aria-label="블로그">✎</a><a href="#top" aria-label="유튜브">▷</a><a href="#top" aria-label="카카오">●</a></div>
+      </div>
+      <div><h6 class="ko">둘러보기</h6><a class="ko" href="#about">소개</a><a class="ko" href="#prog">프로그램</a><a class="ko" href="#act">활동</a><a class="ko" href="#faq">자주 묻는 질문</a></div>
+      <div><h6 class="ko">입학</h6><a class="ko" href="#apply">입학 절차</a><a class="ko" href="#apply">원 둘러보기</a><a class="ko" href="#apply">상담 신청</a></div>
+      <div><h6 class="ko">연락</h6><a href="tel:01048944905">010-4894-4905</a><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a><a class="ko" href="#apply">서울 강남구 아람로 24</a></div>
+    </div>
+    <div class="cp">
+      <span class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</span>
+      <span class="ko">© 2026 아람 유치원</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.qa .q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+document.querySelectorAll('.act .chip').forEach(c=>c.addEventListener('click',()=>{
+  document.querySelectorAll('.act .chip').forEach(x=>x.classList.remove('on')); c.classList.add('on');
+}));
+</script>
+</body>
+</html>

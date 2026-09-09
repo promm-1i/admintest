@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>놀담 유치원 — 유치원 · 어린이집 (프리미엄 디자인 A)</title>
+<meta name="description" content="초록 정보 바와 알약 내비, 사진 전면 히어로, 찢어진 종이로 나뉘는 색색의 띠, 4개 아이콘 카드, 초록 소개 밴드, 정원·연령·원비가 한 줄로 붙는 반 카드 3종, 카운트업 통계 띠, 3×2 갤러리, 분홍 밴드 위 소식 카드, 협력기관 띠, 보라 연락 바와 푸터까지 갖춘 유치원 프리미엄 원페이지.">
+<meta property="og:title" content="놀담 유치원 — 유치원 · 어린이집 (프리미엄 디자인 A)">
+<meta property="og:image" content="../kids-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;600;700&family=Inter:wght@400;500&family=Roboto:wght@100;400;600;700&family=Nunito+Sans:wght@400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 6371)
+   초록 rgb(35,204,136) · 링크초록 rgb(61,190,41) · 보라 rgb(98,49,214)
+   분홍 rgb(252,78,101) · 진초록 rgb(34,160,74) · 남색 rgb(26,42,68)
+   본문회색 rgb(85,85,85) · 카드본문 rgb(110,110,110) / rgb(120,120,120)
+   컨테이너 1440 - 좌우 75 → 1290 (좌측선 75)
+   h1 Roboto 36/41.4 100 + Fredoka 80/92 700 · h2 Fredoka 45/51.75 700
+   카드제목 Fredoka 20/24 600 · 반카드 제목 Plus Jakarta Sans 20/26 700
+   통계 Fredoka 56/56 800 ls-1.12 · 본문 Roboto 16/26.4 400
+   라운드 16(아이콘카드) · 10(반카드·로고) · 20(소식카드)
+   섹션 경계는 찢어진 종이 SVG ── */
+:root{--green:rgb(35,204,136);--green2:rgb(61,190,41);--deep:rgb(34,160,74);
+  --purple:rgb(98,49,214);--pink:rgb(252,78,101);--navy:rgb(26,42,68);
+  --gray:rgb(85,85,85);--gray2:rgb(110,110,110);--gray3:rgb(120,120,120);
+  --ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:#fff;color:#141414;font-family:Roboto,"Pretendard Variable",Pretendard,sans-serif;font-size:16px;line-height:26.4px}
+.ko{letter-spacing:-.01em;text-wrap:pretty}
+.fd{font-family:Fredoka,"Pretendard Variable",Pretendard,sans-serif}
+.pj{font-family:"Plus Jakarta Sans","Pretendard Variable",Pretendard,sans-serif}
+.it{font-family:Inter,"Pretendard Variable",Pretendard,sans-serif}
+.nu{font-family:"Nunito Sans","Pretendard Variable",Pretendard,sans-serif}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 75px}
+
+/* 타입 — 레퍼런스 값 그대로 */
+.h1a{font-size:36px;line-height:41.4px;font-weight:100}
+.h1b{font-size:80px;line-height:92px;font-weight:700}
+.h2{font-size:45px;line-height:51.75px;font-weight:700}
+.h2t{letter-spacing:-.45px}
+.k3{font-size:20px;line-height:24px;font-weight:600}
+.k4{font-size:20px;line-height:26px;font-weight:700;letter-spacing:-.2px}
+.num{font-size:56px;line-height:56px;font-weight:800;letter-spacing:-1.12px}
+.p1{font-size:16px;line-height:26.4px;font-weight:400;color:var(--gray)}
+.p2{font-size:16px;line-height:28px;font-weight:400}
+.p3{font-size:14px;line-height:23.8px;font-weight:400;color:var(--gray2)}
+.lab{font-size:14px;line-height:16.8px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+
+/* 알약 버튼 — 레퍼런스 두 종(주황 그라디언트 · 초록) */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:49px;padding:0 26px;border-radius:6px;
+  color:#fff;font-family:Roboto,sans-serif;font-size:14px;line-height:16.8px;font-weight:700;letter-spacing:1px;
+  text-transform:uppercase;transition:transform .3s var(--ease),filter .3s var(--ease)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.06)}
+.btn-o{background:linear-gradient(90deg,rgb(252,78,101),rgb(255,153,0))}
+.btn-g{background:var(--green)}
+.btn-p{background:var(--purple)}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* 찢어진 종이 경계 — 색 띠의 위·아래를 종이처럼 찢어 놓는다 */
+.torn{position:absolute;left:0;right:0;width:100%;height:34px;display:block;pointer-events:none;z-index:2}
+.torn.top{top:-1px}
+.torn.bot{bottom:-1px}
+
+/* ── 상단 정보 바 : 1440×40 · 초록 ── */
+.topbar{height:40px;background:var(--green);color:#fff;display:flex;align-items:center}
+.topbar .in{width:100%;max-width:1440px;margin:0 auto;padding:0 30px;display:flex;align-items:center;gap:46px}
+.topbar .t1{font-size:12px;line-height:14.4px;font-weight:600;letter-spacing:.3px}
+.topbar .t2{font-size:16px;line-height:19.2px;font-weight:600;letter-spacing:.3px}
+.topbar .sns{margin-left:auto;display:flex;gap:14px;font-size:13px}
+
+/* ── 내비 : 흰 바 ── */
+.nav{height:99px;background:#fff;display:flex;align-items:center;position:relative;z-index:6}
+.nav .in{width:100%;max-width:1440px;margin:0 auto;padding:0 75px;display:flex;align-items:center;justify-content:space-between}
+.nav .lg{font-family:Fredoka,sans-serif;font-size:30px;line-height:30px;font-weight:700;color:var(--green2)}
+.nav .lg em{font-style:normal;color:var(--pink)}
+.nav .lks{display:flex;gap:32px}
+.nav a.lk{font-size:13px;line-height:15.6px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:rgb(51,51,51);
+  transition:color .3s var(--ease)}
+.nav a.lk.on,.nav a.lk:hover{color:var(--green2)}
+.burger{display:none}
+
+/* ── 히어로 : 1440×740 ── */
+.hero{position:relative;height:740px;overflow:clip;color:#fff}
+.hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(60,40,120,.62) 0%,rgba(60,40,120,.24) 52%,rgba(60,40,120,0) 78%)}
+.hero .in{position:relative;z-index:3;height:100%;max-width:1440px;margin:0 auto;padding:0 75px;
+  display:flex;flex-direction:column;justify-content:center}
+.hero h1{max-width:690px}
+.hero .big{margin-top:8px;display:flex;gap:19px;flex-wrap:wrap}
+.hero .row{margin-top:47px;display:flex;gap:34px}
+
+/* ── 소개 : 879~1552 ── */
+.intro{padding:80px 0 108px;text-align:center}
+.intro h2{color:#000}
+.intro .sub{margin:20px auto 0;max-width:700px}
+.intro .cards{margin-top:49px;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:left}
+.icard{background:#fff;border-radius:16px;padding:36px 28px;height:338px;
+  box-shadow:0 10px 34px rgba(20,20,40,.09);transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.icard:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(20,20,40,.14)}
+.icard .ic{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:26px}
+.icard:nth-child(1) .ic{background:linear-gradient(135deg,rgb(61,190,41),rgb(35,204,136))}
+.icard:nth-child(2) .ic{background:linear-gradient(135deg,rgb(255,153,0),rgb(252,78,101))}
+.icard:nth-child(3) .ic{background:linear-gradient(135deg,rgb(64,190,255),rgb(46,120,235))}
+.icard:nth-child(4) .ic{background:linear-gradient(135deg,rgb(255,90,170),rgb(230,40,120))}
+.icard h3{margin-top:44px;color:rgb(20,20,20)}
+.icard .bar{margin-top:14px;width:34px;height:3px;border-radius:2px;background:var(--green2)}
+.icard:nth-child(2) .bar{background:var(--pink)}
+.icard:nth-child(3) .bar{background:rgb(46,120,235)}
+.icard:nth-child(4) .bar{background:rgb(230,40,120)}
+.icard p{margin-top:16px}
+
+/* ── 소개 밴드 : 1552~2107 · 초록 그라디언트 + 찢어진 경계 ── */
+.about{position:relative;padding:115px 0 98px;color:#fff;
+  background:linear-gradient(100deg,rgb(35,204,136) 0%,rgb(120,208,52) 62%,rgb(160,214,42) 100%)}
+.about .in{max-width:1440px;margin:0 auto;padding:0 90px;position:relative;z-index:3}
+.about p{max-width:567px;margin-top:32px}
+.about .go{margin-top:45px}
+.about .blob{position:absolute;right:60px;top:70px;width:420px;height:420px;border-radius:50%;
+  background:rgba(255,255,255,.12);z-index:1}
+
+/* ── 반 소개 : 2107~3119 ── */
+.classes{padding:120px 0 0;text-align:center}
+.classes .sub{margin:20px auto 0;max-width:600px}
+.classes .grid{margin-top:128px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px;text-align:left}
+.ccard{background:#fff;border-radius:10px;overflow:clip;box-shadow:0 10px 34px rgba(20,20,40,.1);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.ccard:hover{transform:translateY(-6px);box-shadow:0 18px 44px rgba(20,20,40,.16)}
+.ccard figure{height:240px;overflow:clip}
+.ccard figure img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.ccard:hover figure img{transform:scale(1.06)}
+.ccard .bd{padding:20px 22px 22px}
+.ccard h3{color:var(--navy)}
+.ccard .tm{margin-top:16px;font-size:13px;line-height:19.5px;font-weight:600;color:rgb(60,60,60)}
+.ccard .tx{margin-top:12px;font-size:13px;line-height:20.8px;font-weight:400;color:var(--gray3)}
+.ccard .st{margin-top:18px;padding-top:14px;border-top:1px solid rgba(20,20,40,.09);display:flex}
+.ccard .st div{width:121px;flex:0 0 auto}
+.ccard .st b{display:block;font-size:12px;line-height:16.8px;font-weight:700;color:rgb(40,40,40)}
+.ccard .st span{display:block;margin-top:4px;font-size:18px;line-height:23.4px;font-weight:700;color:var(--pink)}
+.ccard .st div:nth-child(2) span{color:var(--deep)}
+.classes .more{margin-top:143px}
+
+/* ── 통계 띠 : 3119~3479 (360) · 빨강→노랑 ── */
+.stats{position:relative;height:360px;display:flex;align-items:center;color:#fff;
+  background:linear-gradient(90deg,rgb(252,78,101) 0%,rgb(255,122,60) 46%,rgb(255,190,20) 100%)}
+.stats .in{width:100%;max-width:1440px;margin:0 auto;padding:0 75px;
+  display:grid;grid-template-columns:repeat(4,1fr);text-align:center;position:relative;z-index:3}
+.stats .ic{font-size:30px;opacity:.92}
+.stats .num{margin-top:26px}
+.stats .cap{margin-top:16px;font-size:15px;line-height:19.5px;font-weight:500;letter-spacing:-.15px;color:rgba(255,255,255,.86)}
+
+/* ── 갤러리 : 3479~4466 ── */
+.gal{padding:120px 0 27px;text-align:center}
+.gal .sub{margin:20px auto 0;max-width:600px}
+.gal .grid{margin-top:12px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.gal figure{height:350px;border-radius:6px;overflow:clip}
+.gal figure img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.gal figure:hover img{transform:scale(1.06)}
+
+/* ── 소식 : 4466~5484 · 분홍 그라디언트 ── */
+.news{position:relative;padding:120px 0 157px;color:#fff;text-align:center;
+  background:linear-gradient(100deg,rgb(228,86,214) 0%,rgb(250,80,140) 55%,rgb(252,78,101) 100%)}
+.news .in{position:relative;z-index:3;max-width:1440px;margin:0 auto;padding:0 75px}
+.news h2{max-width:700px;margin:0 auto}
+.news .sub{margin:20px auto 0;max-width:600px;color:rgba(255,255,255,.92)}
+.news .grid{margin-top:113px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;text-align:left}
+.ncard{background:#fff;border-radius:20px;overflow:clip;color:#000;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.ncard:hover{transform:translateY(-6px);box-shadow:0 20px 46px rgba(20,20,30,.22)}
+.ncard figure{height:375px;overflow:clip}
+.ncard figure img{width:100%;height:100%;object-fit:cover;transition:transform 1s var(--ease)}
+.ncard:hover figure img{transform:scale(1.06)}
+.ncard .bd{padding:20px 40px 24px}
+.ncard .mt{font-size:16px;line-height:24px;color:rgb(87,87,87)}
+.ncard h3{margin-top:12px;font-size:24px;line-height:33.6px;font-weight:600}
+.ncard .rm{margin-top:14px;display:flex;align-items:center;gap:8px;font-size:16px;line-height:27.2px;font-weight:500;letter-spacing:-.3px}
+
+/* ── 협력기관 띠 : 5484~5774 (290) ── */
+.logos{height:290px;display:flex;align-items:center}
+.logos .in{width:100%;max-width:1440px;margin:0 auto;padding:0 75px;display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+.logos .lg{height:130px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-family:Fredoka,sans-serif;font-size:20px;font-weight:700;color:#fff;letter-spacing:.5px}
+.logos .lg:nth-child(1){background:rgb(86,178,232)}
+.logos .lg:nth-child(2){background:rgb(233,74,74)}
+.logos .lg:nth-child(3){background:rgb(38,46,96)}
+.logos .lg:nth-child(4){background:rgb(198,20,32)}
+.logos .lg:nth-child(5){background:rgb(24,42,66)}
+
+/* ── 연락 바 : 5774~5890 (116) · 보라 ── */
+.cbar{height:116px;background:var(--purple);color:#fff;display:flex;align-items:center}
+.cbar .in{width:100%;max-width:1440px;margin:0 auto;padding:0 30px;display:grid;grid-template-columns:repeat(3,1fr)}
+.cbar .it{display:flex;align-items:center;gap:18px;padding-left:48px}
+.cbar .ic{width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.16);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex:0 0 auto}
+.cbar b{display:block;font-size:15px;line-height:18px;font-weight:700}
+.cbar span{display:block;margin-top:4px;font-size:14px;line-height:16.8px;font-weight:400;color:rgba(255,255,255,.82)}
+
+/* ── 푸터 : 5890~6371 · 보라 ── */
+.ft{background:var(--purple);color:#fff;padding:70px 30px 60px}
+.ft .in{max-width:1440px;margin:0 auto;padding:0 45px;display:grid;grid-template-columns:397px 1fr 397px;gap:50px}
+.ft h4{font-size:24px;line-height:28.8px;font-weight:700}
+.ft p{margin-top:20px;font-size:16px;line-height:28.8px;font-weight:400;color:rgba(255,255,255,.86)}
+.ft .fl{margin-top:24px;font-size:14px;line-height:16.8px;font-weight:700;color:rgba(255,255,255,.86)}
+.ft .sns{margin-top:14px;display:flex;gap:14px}
+.ft .sns a{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.14);
+  display:flex;align-items:center;justify-content:center;font-size:13px;transition:background .3s var(--ease)}
+.ft .sns a:hover{background:rgba(255,255,255,.28)}
+.ft .post{margin-top:22px;display:flex;gap:14px;align-items:flex-start}
+.ft .post figure{width:74px;height:56px;border-radius:6px;overflow:clip;flex:0 0 auto}
+.ft .post figure img{width:100%;height:100%;object-fit:cover}
+.ft .post .d{font-size:12px;line-height:16px;color:rgba(255,255,255,.7)}
+.ft .post b{display:block;margin-top:5px;font-size:14px;line-height:20px;font-weight:700}
+.ft form{margin-top:22px;display:flex;flex-direction:column;gap:12px}
+.ft input{height:44px;border-radius:4px;background:#fff;color:#333;padding:0 14px;font-size:14px;width:100%}
+.ft .sb{height:44px;border-radius:4px;background:linear-gradient(90deg,rgb(35,204,136),rgb(160,214,42));
+  color:#fff;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.ft .cp{max-width:1440px;margin:100px auto 0;padding:24px 45px 0;border-top:1px solid rgba(255,255,255,.16);
+  display:flex;justify-content:space-between;align-items:center;gap:24px;font-size:14px;color:rgba(255,255,255,.8)}
+
+/* ── 1024 ── */
+@media (max-width:1199px){
+  .wrap,.nav .in,.hero .in,.stats .in,.logos .in,.news .in{padding-left:40px;padding-right:40px}
+  .about .in{padding:0 40px}
+  .h1b{font-size:56px;line-height:64px}
+  .h1a{font-size:26px;line-height:32px}
+  .h2{font-size:34px;line-height:40px}
+  .num{font-size:40px;line-height:40px}
+  .hero{height:600px}
+  .intro .cards{grid-template-columns:repeat(2,1fr)}
+  .icard{height:auto;min-height:280px}
+  .classes .grid,.gal .grid,.news .grid{grid-template-columns:repeat(2,1fr)}
+  .ccard figure{height:240px}
+  .ncard figure{height:280px}
+  .gal figure{height:280px}
+  .stats .in{grid-template-columns:repeat(2,1fr);gap:36px 0}
+  .stats{height:auto;padding:70px 0}
+  .logos{height:auto;padding:70px 0}
+  .logos .in{grid-template-columns:repeat(3,1fr)}
+  .cbar{height:auto;padding:28px 0}
+  .cbar .in{grid-template-columns:1fr;gap:20px}
+  .cbar .it{padding-left:0}
+  .ft .in{grid-template-columns:1fr 1fr;padding:0}
+  .ft .cp{padding:24px 0 0}
+}
+/* ── 390 ── */
+@media (max-width:809px){
+  .wrap,.nav .in,.hero .in,.stats .in,.logos .in,.news .in{padding-left:20px;padding-right:20px}
+  .about .in{padding:0 20px}
+  .topbar{height:auto;padding:10px 0}
+  .topbar .in{padding:0 20px;flex-wrap:wrap;gap:6px 18px}
+  .topbar .sns{display:none}
+  .nav{height:70px}
+  .nav .in{padding:0 20px}
+  .nav .lks,.nav .btn{display:none}
+  .burger{display:inline-flex;align-items:center;justify-content:center;height:40px;padding:0 16px;border-radius:6px;
+    background:var(--green);color:#fff;font-size:13px;font-weight:700;letter-spacing:1px}
+  .h1a{font-size:20px;line-height:26px}
+  .h1b{font-size:38px;line-height:44px}
+  .h2{font-size:28px;line-height:34px}
+  .k3,.k4{font-size:18px;line-height:24px}
+  .num{font-size:34px;line-height:34px}
+  .hero{height:520px}
+  .hero .big{gap:10px}
+  .hero .row{margin-top:30px;gap:12px;flex-wrap:wrap}
+  .btn{height:44px;padding:0 18px;font-size:12px}
+  .intro{padding-top:56px}
+  .intro .cards{grid-template-columns:1fr;gap:18px;margin-top:40px}
+  .about{margin-top:56px;padding:90px 0 70px}
+  .about .blob{display:none}
+  .classes{padding-top:70px}
+  .classes .grid{grid-template-columns:1fr;margin-top:48px}
+  .ccard .st{flex-wrap:wrap;gap:14px}
+  .ccard .st div{width:auto;flex:1 1 30%;min-width:0}
+  .classes .more{margin-top:56px}
+  .gal{padding-top:70px}
+  .gal .grid{grid-template-columns:1fr;margin-top:48px}
+  .news{margin-top:70px;padding:80px 0 70px}
+  .news .grid{grid-template-columns:1fr;margin-top:48px}
+  .logos .in{grid-template-columns:repeat(2,1fr)}
+  .ft{padding:56px 20px 40px}
+  .ft .in{grid-template-columns:1fr;gap:34px}
+  .ft .cp{flex-direction:column;align-items:flex-start;gap:10px}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+
+<!-- 상단 정보 바 40 -->
+<div class="topbar">
+  <div class="in">
+    <span class="t1 ko">평일 07:30 – 19:30 · 토요일 09:00 – 13:00</span>
+    <span class="t2">02-555-0184</span>
+    <span class="t2 ko">서울 강남구 놀담로 18</span>
+    <span class="sns"><a href="#top" aria-label="인스타그램">◎</a><a href="#top" aria-label="블로그">✎</a><a href="#top" aria-label="유튜브">▷</a></span>
+  </div>
+</div>
+
+<!-- 내비 -->
+<header class="nav" id="top">
+  <div class="in">
+    <a class="lg" href="#top">놀<em>담</em></a>
+    <nav class="lks">
+      <a class="lk on" href="#top">홈</a>
+      <a class="lk" href="#about">소개</a>
+      <a class="lk" href="#classes">반</a>
+      <a class="lk" href="#news">소식</a>
+      <a class="lk" href="#contact">문의</a>
+    </nav>
+    <a class="btn btn-g ko" href="#contact">입학 상담</a>
+    <button class="burger ko" type="button">메뉴</button>
+  </div>
+</header>
+
+<!-- 히어로 740 -->
+<section class="hero">
+  <img src="../kids-a/assets/hero.jpg" alt="교실에서 노는 아이" width="1440" height="740">
+  <div class="in">
+    <h1 class="h1a ko">아이의 속도로 자라는</h1>
+    <div class="big">
+      <span class="fd h1b ko">놀담</span>
+      <span class="fd h1b ko">유치원</span>
+    </div>
+    <div class="row">
+      <a class="btn btn-o ko" href="#contact">입학 상담</a>
+      <a class="btn btn-g ko" href="#classes">반 둘러보기</a>
+    </div>
+  </div>
+</section>
+
+<main>
+
+  <!-- 소개 879~1552 -->
+  <section class="intro wrap">
+    <h2 class="fd h2 ko rv">놀담이 하는 일</h2>
+    <p class="sub p1 ko rv">잘 노는 아이가 잘 배웁니다. 놀담은 하루를 놀이로 채우고, 그 안에서 배울 것을 심어 둡니다.</p>
+    <div class="cards">
+      <article class="icard rv">
+        <span class="ic" aria-hidden="true">✿</span>
+        <h3 class="fd k3 ko">놀이로 배웁니다</h3><span class="bar"></span>
+        <p class="it p3 ko">앉혀 놓고 가르치지 않습니다. 놀다가 궁금해지는 것을 그때 알려 줍니다.</p>
+      </article>
+      <article class="icard rv">
+        <span class="ic" aria-hidden="true">✎</span>
+        <h3 class="fd k3 ko">선생님이 오래 있습니다</h3><span class="bar"></span>
+        <p class="it p3 ko">담임이 자주 바뀌지 않습니다. 평균 근속 6년, 아이 이름을 다 압니다.</p>
+      </article>
+      <article class="icard rv">
+        <span class="ic" aria-hidden="true">◈</span>
+        <h3 class="fd k3 ko">부모님과 같이 봅니다</h3><span class="bar"></span>
+        <p class="it p3 ko">그날 무엇을 했는지 사진과 함께 보냅니다. 궁금하면 바로 전화 주세요.</p>
+      </article>
+      <article class="icard rv">
+        <span class="ic" aria-hidden="true">♪</span>
+        <h3 class="fd k3 ko">몸으로 놉니다</h3><span class="bar"></span>
+        <p class="it p3 ko">노래하고 뛰고 만듭니다. 화면 앞에 앉히는 수업은 하지 않습니다.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 소개 밴드 1552~2107 -->
+  <section class="about" id="about">
+    <svg class="torn top" viewBox="0 0 1440 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0 34V13c60-9 96 6 152 3s86-14 148-9 92 15 156 11 96-16 158-12 90 14 152 10 98-15 160-10 92 13 154 9 92-14 160-5v34z" fill="#fff"/></svg>
+    <svg class="torn bot" viewBox="0 0 1440 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0v21c62 9 94-6 156-3s88 14 150 9 94-15 156-11 98 16 160 12 88-14 150-10 96 15 158 10 94-13 156-9 94 14 154 5V0z" fill="#fff"/></svg>
+    <div class="in">
+      <div class="blob" aria-hidden="true"></div>
+      <h2 class="fd h2 h2t ko rv">여섯 살이 하루를<br>어떻게 보내야 하는가</h2>
+      <p class="p2 ko rv">놀담은 1998년에 문을 열었습니다. 그때부터 지금까지 물어 온 것은 하나입니다. 여섯 살이 하루를 어떻게 보내야 하는가. 답은 매년 조금씩 달라졌지만 방향은 같았습니다. 충분히 놀고, 충분히 먹고, 충분히 자야 한다는 것. 교실은 그 세 가지를 지키기 위해 만들었고 나머지는 거기서 따라왔습니다.</p>
+      <div class="go"><a class="btn btn-o ko" href="#contact">입학 상담</a></div>
+    </div>
+  </section>
+
+  <!-- 반 소개 2107~3119 -->
+  <section class="classes wrap" id="classes">
+    <h2 class="fd h2 ko rv">놀담의 반</h2>
+    <p class="sub p1 ko rv">연령별로 세 반을 운영합니다. 정원과 원비는 아래 그대로이고 숨은 비용은 없습니다.</p>
+    <div class="grid">
+      <article class="ccard rv">
+        <figure><img src="../kids-a/assets/class-1.jpg" alt="상상반 활동" width="513" height="300"></figure>
+        <div class="bd">
+          <h3 class="pj k4 ko">상상반</h3>
+          <p class="pj tm ko">수업 시간 : 09:00 – 13:00</p>
+          <p class="pj tx ko">그림과 만들기로 하루를 엽니다. 손으로 만지고 부수고 다시 만들면서 자기 생각을 꺼내는 연습을 합니다.</p>
+          <div class="st">
+            <div><b class="pj ko">정원</b><span class="pj">18명</span></div>
+            <div><b class="pj ko">연령</b><span class="pj">4 – 5세</span></div>
+            <div><b class="pj ko">월 원비</b><span class="pj">32만원</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="ccard rv">
+        <figure><img src="../kids-a/assets/class-2.jpg" alt="탐험반 활동" width="513" height="300"></figure>
+        <div class="bd">
+          <h3 class="pj k4 ko">탐험반</h3>
+          <p class="pj tm ko">수업 시간 : 09:00 – 14:00</p>
+          <p class="pj tx ko">바깥이 교실입니다. 텃밭과 공원을 매주 나가고, 본 것을 돌아와서 그리고 이야기합니다.</p>
+          <div class="st">
+            <div><b class="pj ko">정원</b><span class="pj">20명</span></div>
+            <div><b class="pj ko">연령</b><span class="pj">5 – 6세</span></div>
+            <div><b class="pj ko">월 원비</b><span class="pj">34만원</span></div>
+          </div>
+        </div>
+      </article>
+      <article class="ccard rv">
+        <figure><img src="../kids-a/assets/class-3.jpg" alt="한글반 활동" width="513" height="300"></figure>
+        <div class="bd">
+          <h3 class="pj k4 ko">한글반</h3>
+          <p class="pj tm ko">수업 시간 : 09:00 – 14:00</p>
+          <p class="pj tx ko">학교 갈 준비를 합니다. 글자와 숫자를 놀이로 익히고, 앉아 있는 시간을 조금씩 늘려 갑니다.</p>
+          <div class="st">
+            <div><b class="pj ko">정원</b><span class="pj">20명</span></div>
+            <div><b class="pj ko">연령</b><span class="pj">6 – 7세</span></div>
+            <div><b class="pj ko">월 원비</b><span class="pj">36만원</span></div>
+          </div>
+        </div>
+      </article>
+    </div>
+    <div class="more"><a class="btn btn-g ko" href="#contact">반 전체 보기</a></div>
+  </section>
+
+  <!-- 통계 띠 3119~3479 -->
+  <section class="stats">
+    <svg class="torn top" viewBox="0 0 1440 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0 34V11c64-8 92 8 154 5s90-13 152-8 96 14 158 10 92-15 154-11 96 16 158 12 90-14 152-10 100 15 162 6v34z" fill="#fff"/></svg>
+    <svg class="torn bot" viewBox="0 0 1440 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0v23c60 8 96-7 158-4s86 13 148 8 96-14 158-10 92 15 154 11 96-16 158-12 88 14 150 10 100-15 156-6V0z" fill="#fff"/></svg>
+    <div class="in">
+      <div class="rv"><span class="ic" aria-hidden="true">✿</span><div class="fd num" data-to="248">0</div><div class="it cap ko">재원 아동</div></div>
+      <div class="rv"><span class="ic" aria-hidden="true">♛</span><div class="fd num" data-to="27">0</div><div class="it cap ko">함께한 해</div></div>
+      <div class="rv"><span class="ic" aria-hidden="true">✎</span><div class="fd num" data-to="9">0</div><div class="it cap ko">운영 학급</div></div>
+      <div class="rv"><span class="ic" aria-hidden="true">◈</span><div class="fd num" data-to="6">0</div><div class="it cap ko">교사 평균 근속</div></div>
+    </div>
+  </section>
+
+  <!-- 갤러리 3479~4466 -->
+  <section class="gal wrap">
+    <h2 class="fd h2 ko rv">놀담의 하루</h2>
+    <p class="sub p1 ko rv">특별한 날만 찍지 않습니다. 아무 날의 오전과 오후를 그대로 올립니다.</p>
+    <div class="grid">
+      <figure class="rv"><img src="../kids-a/assets/gal-1.jpg" alt="" width="524" height="350"></figure>
+      <figure class="rv"><img src="../kids-a/assets/gal-2.jpg" alt="" width="524" height="350"></figure>
+      <figure class="rv"><img src="../kids-a/assets/gal-3.jpg" alt="" width="524" height="350"></figure>
+      <figure class="rv"><img src="../kids-a/assets/gal-4.jpg" alt="" width="524" height="350"></figure>
+      <figure class="rv"><img src="../kids-a/assets/gal-5.jpg" alt="" width="524" height="350"></figure>
+      <figure class="rv"><img src="../kids-a/assets/gal-6.jpg" alt="" width="524" height="350"></figure>
+    </div>
+  </section>
+
+  <!-- 소식 4466~5484 -->
+  <section class="news" id="news">
+    <svg class="torn top" viewBox="0 0 1440 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0 34V14c58-10 98 5 160 2s88-13 150-8 94 14 156 10 94-16 156-12 90 15 152 11 96-14 158-10 98 13 158 4v34z" fill="#fff"/></svg>
+    <svg class="torn bot" viewBox="0 0 1440 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0 0v20c62 10 94-5 156-2s90 13 152 8 96-14 158-10 90 16 152 12 96-15 158-11 88 14 150 10 100-13 164-4V0z" fill="#fff"/></svg>
+    <div class="in">
+      <h2 class="fd h2 ko rv">놀담 소식</h2>
+      <p class="sub p1 ko rv" style="color:rgba(255,255,255,.92)">원에서 있었던 일과 부모님이 자주 묻는 것을 정리해 올립니다.</p>
+      <div class="grid">
+        <article class="ncard rv">
+          <figure><img src="../kids-a/assets/news-1.jpg" alt="" width="521" height="375"></figure>
+          <div class="bd">
+            <p class="nu mt ko">김하늘 원장 · 2026. 06. 20</p>
+            <h3 class="pj ko">놀이 중심 수업이 실제로 바꾸는 것</h3>
+            <p class="it rm ko">더 읽기 <span aria-hidden="true">→</span></p>
+          </div>
+        </article>
+        <article class="ncard rv">
+          <figure><img src="../kids-a/assets/news-2.jpg" alt="" width="521" height="375"></figure>
+          <div class="bd">
+            <p class="nu mt ko">박서연 교사 · 2026. 06. 12</p>
+            <h3 class="pj ko">친구와 싸운 날, 집에서 할 말</h3>
+            <p class="it rm ko">더 읽기 <span aria-hidden="true">→</span></p>
+          </div>
+        </article>
+        <article class="ncard rv">
+          <figure><img src="../kids-a/assets/news-3.jpg" alt="" width="521" height="375"></figure>
+          <div class="bd">
+            <p class="nu mt ko">이지우 교사 · 2026. 05. 28</p>
+            <h3 class="pj ko">일곱 살, 학교 가기 전 여섯 달</h3>
+            <p class="it rm ko">더 읽기 <span aria-hidden="true">→</span></p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 협력기관 띠 5484~5774 -->
+  <section class="logos">
+    <div class="in">
+      <div class="lg rv">숲살림</div>
+      <div class="lg rv">아이보리</div>
+      <div class="lg rv">한들문고</div>
+      <div class="lg rv">모아소아과</div>
+      <div class="lg rv">밥상연구소</div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 연락 바 5774~5890 -->
+<section class="cbar" id="contact">
+  <div class="in">
+    <div class="it"><span class="ic" aria-hidden="true">☎</span><div><b class="ko">전화 주세요</b><span>010-4894-4905</span></div></div>
+    <div class="it"><span class="ic" aria-hidden="true">✉</span><div><b class="ko">메일 주세요</b><span>6gsmake@gmail.com</span></div></div>
+    <div class="it"><span class="ic" aria-hidden="true">◉</span><div><b class="ko">찾아오세요</b><span class="ko">서울 강남구 놀담로 18</span></div></div>
+  </div>
+</section>
+
+<!-- 푸터 5890~6371 -->
+<footer class="ft">
+  <div class="in">
+    <div>
+      <h4 class="ko">놀담 유치원</h4>
+      <p class="ko">1998년에 문을 열어 스물일곱 해째입니다. 잘 놀고 잘 먹고 잘 자는 하루를 지키는 것, 그 하나로 여기까지 왔습니다.</p>
+      <p class="fl ko">함께 보기</p>
+      <div class="sns"><a href="#top" aria-label="인스타그램">◎</a><a href="#top" aria-label="블로그">✎</a><a href="#top" aria-label="유튜브">▷</a><a href="#top" aria-label="카카오">●</a></div>
+    </div>
+    <div>
+      <h4 class="ko">최근 소식</h4>
+      <div class="post"><figure><img src="../kids-a/assets/news-1.jpg" alt="" width="74" height="56"></figure>
+        <div><span class="d">2026. 06. 20</span><b class="ko">놀이 중심 수업이 실제로 바꾸는 것</b></div></div>
+      <div class="post"><figure><img src="../kids-a/assets/news-2.jpg" alt="" width="74" height="56"></figure>
+        <div><span class="d">2026. 06. 12</span><b class="ko">친구와 싸운 날, 집에서 할 말</b></div></div>
+    </div>
+    <div>
+      <h4 class="ko">소식 받기</h4>
+      <p class="ko">입학 설명회와 모집 일정을 메일로 먼저 알려 드립니다.</p>
+      <form onsubmit="return false">
+        <input type="email" placeholder="이메일 주소" class="ko" aria-label="이메일 주소">
+        <button class="sb ko" type="submit">신청하기</button>
+      </form>
+    </div>
+  </div>
+  <div class="cp">
+    <span class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</span>
+    <span class="ko">© 2026 놀담 유치원</span>
+  </div>
+</footer>
+
+</body>
+</html>
