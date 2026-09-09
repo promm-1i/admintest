@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>아벨 — 미용실 · 뷰티샵 (프리미엄 디자인 A)</title>
+<meta name="description" content="라운드 사진 위로 초대형 세리프 워드마크가 흐르는 히어로, 유리 칩 6개, 세로 패럴랙스 사진 4장이 깔린 소개, 큰 사진과 가격 목록이 이어지는 시술 안내, 레드 인용 블록, 카드 슬라이더 후기, 인스타 아이콘 줄, 크림 카드가 얹힌 레드 푸터까지 갖춘 미용실 프리미엄 원페이지.">
+<meta property="og:title" content="아벨 — 미용실 · 뷰티샵 (프리미엄 디자인 A)">
+<meta property="og:image" content="../beauty-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭)
+   배경 rgb(250,243,232) · 레드 rgb(194,9,25) · 레드 호버 rgb(167,6,18)
+   보조면 rgba(235,220,209,.5) · 선 rgba(211,133,135,.3)
+   컨테이너 max-width 1440 + padding 0 55px → 좌측선 55 · 콘텐츠 1330
+   라틴 Italiana(디스플레이) / Inter(라벨·본문) · 한글 Pretendard
+   워드마크 160/192 · h2 60/66 ls-0.6 · 시술 제목 56/67.2 ls-0.56 · 카드 제목 43/51.6 ls-0.43
+   라벨 14/21 500 ls1.4 대문자 · 본문 18/28.8 · 16/25.6
+   라운드 12(사진) · 6(작은 사진·카드) · 60(칩·알약) · 100%(원) ── */
+:root{--cream:rgb(250,243,232);--red:rgb(194,9,25);--red2:rgb(167,6,18);
+  --face:rgba(235,220,209,.5);--line:rgba(211,133,135,.3);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--red);font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;font-size:16px;line-height:25.6px;font-weight:400}
+.ko{letter-spacing:-.01em;text-wrap:pretty}
+.it{font-family:Italiana,"Pretendard Variable",Pretendard,serif;font-weight:400}
+.zwrap{width:100%;max-width:1440px;margin:0 auto;padding:0 55px}
+
+/* 타입 — 레퍼런스 값 그대로 */
+.zmk{font-size:160px;line-height:192px;letter-spacing:-1.6px;white-space:nowrap}
+.zh2{font-size:60px;line-height:66px;letter-spacing:-.6px}
+.zh2b{font-size:64px;line-height:76.8px;letter-spacing:-.64px}
+.zq{font-size:70px;line-height:84px;letter-spacing:-.7px}
+.zsv{font-size:56px;line-height:67.2px;letter-spacing:-.56px}
+.zcd{font-size:43px;line-height:51.6px;letter-spacing:-.43px}
+.zlab{font-size:14px;line-height:21px;font-weight:500;letter-spacing:1.4px;text-transform:uppercase}
+.zlab6{font-weight:600}
+.zp{font-size:18px;line-height:28.8px;font-weight:400}
+.zp16{font-size:16px;line-height:25.6px;font-weight:400}
+
+.zpill{display:inline-flex;align-items:center;justify-content:center;border-radius:60px;padding:15px 20px;background:var(--red);color:#fff;
+  font-size:14px;line-height:21px;font-weight:500;letter-spacing:1.4px;text-transform:uppercase;transition:background .3s var(--ease)}
+.zpill:hover{background:var(--red2)}
+
+.rv{opacity:0;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.on{opacity:1}
+.rv-y{transform:translateY(50px)}
+.rv-y.on{transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── 고정 헤더 : 1440×80 ── */
+.zhead{position:fixed;top:0;left:0;right:0;z-index:10;background:var(--cream)}
+.zhead .row{max-width:1810px;margin:0 auto;padding:15px 20px;min-height:80px;display:flex;align-items:center;justify-content:space-between}
+.zhead .lg{display:flex;align-items:center;gap:8px;font-family:Italiana,serif;font-size:26px;line-height:20px}
+.zhead nav{display:flex;align-items:center;gap:40px}
+.zhead nav a{transition:color .3s var(--ease)}
+.zhead nav a:hover{color:var(--red2)}
+.zhead .ln{position:absolute;left:0;right:0;bottom:0;height:1px;background:rgb(211,133,135);opacity:0;transition:opacity .3s var(--ease)}
+.zhead.stuck .ln{opacity:1}
+.zburger{display:none}
+
+/* ── 히어로 : 99vh · 상단 80 비움 ── */
+.zhero{position:relative;z-index:1;height:99vh;min-height:660px;padding:80px 0 0;overflow:visible}
+.zhero .ph{position:absolute;top:80px;bottom:0;left:50%;transform:translateX(-50%);width:97%;max-width:1770px;border-radius:12px;overflow:clip}
+.zhero .ph img{width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.16);transition:transform 1.6s var(--ease)}
+.zhero.go .ph img{transform:none}
+.zhero .notch{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:400px;height:43px;background:var(--cream);
+  border-radius:43px 43px 0 0}
+.zhero .in{position:relative;z-index:2;height:100%;max-width:1810px;margin:0 auto;padding:60px 0 80px;
+  display:flex;flex-direction:column;justify-content:space-between;align-items:center;color:var(--cream)}
+.zmq{width:100%;overflow-x:clip}
+.zmq ul{display:flex;align-items:center;gap:60px;width:max-content;animation:zmq 26s linear infinite}
+@media (prefers-reduced-motion:reduce){.zmq ul{animation:none}}
+@keyframes zmq{from{transform:translateX(-60px)}to{transform:translateX(-1626px)}}
+.zmq li{display:flex;align-items:center;gap:60px;flex:0 0 auto}
+.zmq i{width:15px;height:15px;border-radius:100%;background:var(--cream);display:block;flex:0 0 auto}
+.zhero .btm{width:100%;padding:0 100px;display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.zhero .btm .l{max-width:440px;flex:1 0 0;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.zchips{max-width:455px;flex:1 0 0;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end;align-items:center}
+.zchip{border-radius:60px;padding:10px 24px;border:1px solid rgba(255,255,255,.5);backdrop-filter:blur(5px);
+  position:relative;overflow:clip;isolation:isolate}
+.zchip i{position:absolute;left:50%;top:50%;width:100%;aspect-ratio:1;border-radius:100%;background:var(--red);
+  transform:translate(-50%,-50%) scale(0);transition:transform .45s var(--ease);z-index:-1}
+.zchip:hover i{transform:translate(-50%,-50%) scale(1)}
+.zdown{position:absolute;bottom:-30px;left:50%;transform:translateX(-50%);z-index:3;
+  width:60px;height:60px;border-radius:100%;background:var(--cream);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--red)}
+
+/* ── 소개 : 957 · 사진 4장 세로 패럴랙스 ── */
+.zab{position:relative;padding:130px 0 510px;overflow:visible}
+.zab .pics{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:98%;max-width:1770px}
+.zab .pics figure{position:absolute;width:320px;height:250px;border-radius:6px;overflow:clip}
+.zab .pics img{width:100%;height:100%;object-fit:cover;object-position:center}
+.zab .p1{bottom:0;left:0}
+.zab .p2{bottom:100px;right:260px}
+.zab .p3{bottom:0;right:100px}
+.zab .p4{top:50%;right:0;transform:translateY(-50%)}
+.zab .in{position:relative;z-index:1;display:flex;flex-direction:column;gap:60px;align-items:flex-start}
+.zab .sb{max-width:460px}
+.zab h2{width:100%;max-width:1015px}
+
+/* ── 시술 안내 : 2114 ── */
+.zsvc{padding:0 55px 125px}
+.zsvc .in{max-width:1330px;margin:0 auto}
+.zsvc .hd{padding:0 0 60px;display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
+.zsvc .hd h2{max-width:560px}
+.zsvc .hd .n{align-self:flex-end}
+.zsvc .vw{display:flex;align-items:center;gap:25px}
+.zsvc .vw .ar{width:21px;text-align:right}
+.zsvc .lab-row{margin-top:60px;display:flex;justify-content:space-between;align-items:center;gap:24px}
+.zsvc .big{margin-top:60px;position:relative;border-radius:12px;overflow:visible}
+.zsvc .big .pw{border-radius:12px;overflow:clip;height:720px}
+.zsvc .big img{width:100%;height:100%;object-fit:cover}
+.zcard{position:absolute;right:30px;bottom:30px;width:404px;background:var(--cream);border-radius:6px;padding:25px;
+  display:flex;flex-direction:column;gap:16px}
+.zcard .rowx{display:flex;gap:25px}
+.zsvc .filters{margin-top:109px;padding:40px 0;display:flex;justify-content:space-between;align-items:center;gap:24px;
+  border-bottom:1px solid var(--line)}
+.zsvc .filters .fs{display:flex;gap:40px}
+.zrows{position:relative;margin-top:101px}
+.zrow{display:flex;justify-content:space-between;align-items:center;gap:40px;padding:60px 0;border-bottom:1px solid var(--line);
+  position:relative;transition:padding-left .35s var(--ease)}
+.zrow:hover{padding-left:16px}
+.zrow .meta{width:440px;display:flex;align-items:center;gap:70px}
+.zrow .price{border-radius:60px;padding:9px 12px;border:1px solid var(--line)}
+.zrow .go{margin-left:auto;width:20px;height:20px;flex:0 0 auto}
+.zhov{position:absolute;left:485px;width:300px;height:300px;border-radius:6px;overflow:clip;pointer-events:none;
+  opacity:0;transition:opacity .35s var(--ease);z-index:2}
+.zhov img{width:100%;height:100%;object-fit:cover}
+
+/* ── 레드 인용 : 701 ── */
+.zquote{background:var(--red);color:var(--cream);padding:130px 0;position:relative;overflow:clip}
+.zquote .pics{position:absolute;top:80px;bottom:80px;left:0;right:0}
+.zquote .pics figure{position:absolute;border-radius:6px;overflow:clip}
+.zquote .pics img{width:100%;height:100%;object-fit:cover}
+.zquote .q1{left:55px;bottom:0;width:200px;height:150px}
+.zquote .q2{right:55px;top:60px;width:259px;height:236px}
+.zquote .in{position:relative;z-index:1;display:flex;flex-direction:column;gap:60px;align-items:center;text-align:center}
+.zquote .qg{width:100%;display:flex;flex-direction:column;gap:40px;align-items:center}
+.zquote .mark{width:70px;height:60px;opacity:.9}
+.zquote .by{height:29px;display:flex;align-items:center}
+.zquote blockquote{max-width:1131px}
+
+/* ── 후기 : 729 ── */
+.zrev{padding:130px 0;overflow:clip}
+.zrev .in{display:flex;justify-content:space-between;align-items:flex-start;gap:40px}
+.zrev .rt{flex:1 0 0;max-width:70%;display:flex;flex-direction:column;gap:40px;align-items:flex-start}
+.zrev .rt h2{width:700px}
+.zrev .grp{width:100%;display:flex;flex-direction:column;gap:20px}
+.zrev .top{width:100%;height:56px;padding-left:16px;display:flex;justify-content:space-between;align-items:center;gap:24px}
+.zrev .nav{display:flex;gap:10px}
+.zrev .nav button{width:40px;height:40px;border-radius:100%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
+.zrev .vp{width:100%;overflow:clip}
+.zrev .track{display:flex;gap:20px;transition:transform .5s var(--ease)}
+.zrev .pg{flex:0 0 100%;display:flex;gap:20px}
+.zrcard{flex:1 0 0;min-height:221px;background:var(--cream);border-radius:6px;padding:30px 40px 30px 30px;
+  display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.zrcard .st{letter-spacing:2px}
+
+/* ── SNS : 578 ── */
+.zsns{position:relative;background:var(--face);border-top:1px solid var(--line);padding:100px 0 0;overflow:clip}
+.zsns .band{position:absolute;left:0;right:0;bottom:0;height:32%;background:var(--red)}
+.zsns .in{position:relative;z-index:1;display:flex;flex-direction:column;gap:80px;align-items:center}
+.zsns .top{width:100%;padding:0 55px;display:flex;justify-content:space-between;align-items:center;gap:40px}
+.zsns .top .ls{display:flex;gap:70px}
+.zsns .top a{transition:opacity .3s var(--ease)}
+.zsns .top a:hover{opacity:.7}
+.zsns .icons{width:100%;height:321px;padding:0 20px;display:flex;justify-content:space-between;align-items:flex-end;position:relative}
+.zsns .icons span{margin-bottom:56px;width:34px;height:34px;border-radius:100%;border:1px solid rgba(250,243,232,.55);display:flex;align-items:center;justify-content:center;color:var(--cream);flex:0 0 auto}
+.zsns .icons figure{position:absolute;left:50%;transform:translateX(-50%);bottom:-6px;width:98px;height:130px;border-radius:6px;overflow:clip;z-index:1}
+.zsns .icons img{width:100%;height:100%;object-fit:cover}
+
+/* ── 푸터 : 840 · 레드 ── */
+.zft{background:var(--red);color:var(--cream);padding:130px 0 40px}
+.zft .in{display:flex;flex-direction:column;gap:60px;align-items:center}
+.zft .tw{width:100%;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+.zft .tw h2{width:960px}
+.zft .brow{width:100%;display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.zft .brow p{max-width:520px}
+.zft .tel{display:flex;gap:24px}
+.zft .bw{width:100%;display:flex;flex-direction:column;gap:35px;align-items:center}
+.zft .card{width:100%;background:var(--cream);color:var(--red);border-radius:12px;padding:44px;display:flex;gap:81px;align-items:flex-start;overflow:clip}
+.zft .card .grp{flex:1 0 0;display:flex;gap:40px}
+.zft .card .col{flex:1 0 0;min-height:254px;display:flex;flex-direction:column;gap:24px}
+.zft .card .col h3{font-size:28px;line-height:33.6px;letter-spacing:-.04px}
+.zft .card .col a{display:flex;justify-content:space-between;align-items:center;gap:12px;border:1px solid var(--line);border-radius:60px;padding:12px 18px;transition:background .3s var(--ease)}
+.zft .card .col a:hover{background:rgba(194,9,25,.06)}
+.zft .card>.col{flex:0 0 300px}
+.zft .cp{width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px}
+
+/* ── 하단 사진 띠 : 250 ── */
+.zstrip{height:250px;overflow:clip}
+.zstrip img{width:100%;height:100%;object-fit:cover}
+
+/* ── 1024 ── */
+@media (max-width:1199px){
+  .zwrap,.zsvc{padding-left:32px;padding-right:32px}
+  .zmk{font-size:104px;line-height:125px}
+  .zh2,.zh2b{font-size:42px;line-height:50px;letter-spacing:-.42px}
+  .zq{font-size:44px;line-height:54px}
+  .zsv{font-size:38px;line-height:46px}
+  .zcd{font-size:32px;line-height:39px}
+  .zhead nav{gap:24px}
+  .zhero .btm{padding:0 32px;flex-direction:column;align-items:flex-start;gap:28px}
+  .zchips{max-width:100%;justify-content:flex-start}
+  .zab{padding:100px 0 300px}
+  .zab .p3,.zab .p4{display:none}
+  .zsvc .big .pw{height:520px}
+  .zcard{right:0;bottom:-48px;width:340px}
+  .zsvc .filters{margin-top:110px}
+  .zhov{display:none}
+  .zrev .in{flex-direction:column;gap:24px}
+  .zrev .rt{max-width:100%;width:100%}
+  .zrev .rt h2,.zft .tw h2{width:100%}
+  .zsns .top{flex-direction:column;align-items:flex-start;gap:24px}
+  .zsns .top .ls{gap:32px}
+  .zft .card{flex-wrap:wrap;gap:32px;padding:32px}
+  .zft .card>.col{flex:1 0 40%}
+  .zft .card .grp{flex:1 0 100%;gap:32px}
+  .zft .card .col{flex:1 0 40%}
+}
+/* ── 390 ── */
+@media (max-width:809px){
+  .zwrap,.zsvc{padding-left:20px;padding-right:20px}
+  .zmk{font-size:56px;line-height:68px}
+  .zh2,.zh2b{font-size:30px;line-height:36px;letter-spacing:-.3px}
+  .zq{font-size:28px;line-height:36px}
+  .zsv{font-size:26px;line-height:32px}
+  .zcd{font-size:24px;line-height:30px}
+  .zp{font-size:16px;line-height:25.6px}
+  .zhead .row{padding:12px 20px;min-height:64px}
+  .zhead nav,.zhead .zpill{display:none}
+  .zburger{display:inline-flex;align-items:center;justify-content:center;border-radius:60px;padding:8px 14px;background:var(--red);color:#fff;
+    font-size:12px;line-height:18px;font-weight:500;letter-spacing:1.2px;text-transform:uppercase}
+  .zhero{height:auto;min-height:0;padding:64px 0 0}
+  .zhero .ph{top:64px;width:calc(100% - 32px)}
+  .zhero .notch{width:260px;height:32px;border-radius:32px 32px 0 0}
+  .zhero .in{padding:40px 0 56px;min-height:560px}
+  .zmq ul{gap:28px}
+  .zmq li{gap:28px}
+  .zhero .btm{padding:0 20px;gap:20px}
+  .zhero .btm .l{max-width:100%}
+  .zab{padding:80px 0 220px}
+  .zab .in{gap:32px}
+  .zab .p2{right:20px;bottom:60px}
+  .zab .pics figure{width:200px;height:156px}
+  .zsvc .hd{flex-direction:column;gap:16px;padding-bottom:32px}
+  .zsvc .big{margin-top:40px}
+  .zsvc .big .pw{height:320px}
+  .zcard{position:static;width:100%;margin-top:16px}
+  .zsvc .filters{margin-top:56px;padding:24px 0;flex-direction:column;align-items:flex-start;gap:16px}
+  .zsvc .filters .fs{gap:20px;flex-wrap:wrap}
+  .zrow{flex-direction:column;align-items:flex-start;gap:16px;padding:32px 0}
+  .zrow .meta{width:100%;gap:16px}
+  .zquote{padding:80px 0}
+  .zquote .pics{display:none}
+  .zquote .in{gap:32px}
+  .zrev{padding:80px 0}
+  .zrev .pg{flex-direction:column}
+  .zsns{padding:64px 0 0}
+  .zsns .in{gap:40px}
+  .zsns .top{padding:0 20px}
+  .zsns .top .ls{flex-direction:column;gap:8px}
+  .zsns .icons{padding:0 12px}
+  .zsns .icons span:nth-child(n+4){display:none}
+  .zft{padding:80px 0 32px}
+  .zft .in{gap:40px}
+  .zft .brow{flex-direction:column;align-items:flex-start;gap:20px}
+  .zft .card{flex-direction:column;padding:24px}
+  .zft .card .grp{flex-direction:column;gap:24px}
+  .zft .card .col{min-height:0}
+  .zft .cp{flex-direction:column;align-items:flex-start;gap:12px}
+  .zstrip{height:160px}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+
+<header class="zhead" id="top">
+  <div class="row">
+    <a class="lg" href="#top"><span aria-hidden="true">✿</span><span>Avelle</span></a>
+    <nav class="zlab"><a href="#about" class="ko">소개</a><a href="#svc" class="ko">시술</a><a href="#price" class="ko">가격</a><a href="#rev" class="ko">후기</a><a href="#cta" class="ko">문의</a></nav>
+    <a class="zpill ko" href="#cta">상담 예약</a>
+    <button class="zburger ko" type="button">메뉴</button>
+    <span class="ln"></span>
+  </div>
+</header>
+
+<!-- 히어로 891 (99vh) -->
+<section class="zhero">
+  <span class="ph"><img src="../beauty-a/assets/hero.jpg" alt="붉은 모자를 쓴 인물" width="1397" height="811"></span>
+  <span class="notch" aria-hidden="true"></span>
+  <div class="in">
+    <div class="zmq" aria-hidden="true">
+      <ul>
+        <li><span class="it zmk">Avelle Glow</span><i></i></li>
+        <li><span class="it zmk">Avelle Glow</span><i></i></li>
+        <li><span class="it zmk">Avelle Glow</span><i></i></li>
+      </ul>
+    </div>
+    <div class="btm">
+      <div class="l">
+        <h6 class="zlab zlab6">Welcome to Avelle</h6>
+        <p class="zp16 ko">단순한 미용실이 아니라, 자기다움을 드러내고 자신감을 내보이고 싶은 분들을 위한 자리입니다.</p>
+      </div>
+      <div class="zchips zlab">
+        <a class="zchip ko" href="#svc">시술 상담<i></i></a>
+        <a class="zchip ko" href="#sns">갤러리<i></i></a>
+        <a class="zchip ko" href="#svc">제품<i></i></a>
+        <a class="zchip ko" href="#price">가격<i></i></a>
+        <a class="zchip ko" href="#svc">뷰티 서비스<i></i></a>
+        <a class="zchip ko" href="#cta">문의<i></i></a>
+      </div>
+    </div>
+  </div>
+  <a class="zdown" href="#about" aria-label="아래로"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M8 3v10M8 13l-4-4M8 13l4-4"/></svg></a>
+</section>
+
+<main>
+
+  <!-- 소개 957 -->
+  <section class="zab" id="about">
+    <div class="pics" aria-hidden="true">
+      <figure class="p1 rv"><img src="../beauty-a/assets/about-1.jpg" alt="" width="320" height="250"></figure>
+      <figure class="p2 rv rv-y"><img src="../beauty-a/assets/about-2.jpg" alt="" width="320" height="250"></figure>
+      <figure class="p3 rv rv-y"><img src="../beauty-a/assets/about-3.jpg" alt="" width="320" height="250"></figure>
+      <figure class="p4 rv"><img src="../beauty-a/assets/about-4.jpg" alt="" width="320" height="250"></figure>
+    </div>
+    <div class="zwrap in">
+      <p class="sb zp ko rv">아벨은 아름다움이 경계를 넘고, 자신감이 곧 나의 서명이 되는 곳입니다.</p>
+      <h2 class="it zh2 ko rv">우아함과 예술성에 대한 애정에서 시작한 살롱입니다. 타고난 아름다움을 더 살리고 자신만의 스타일을 지키고 싶은 분들을 위한 자리이며, 저희의 목표는 그 빛을 한 겹 더하는 일입니다.</h2>
+    </div>
+  </section>
+
+  <!-- 시술 안내 2114 -->
+  <section class="zsvc" id="svc">
+    <div class="in">
+      <div class="hd">
+        <h2 class="it zh2 ko rv">아벨의 프리미엄 시술을 만나보세요</h2>
+        <span class="it zh2 n rv">(15+)</span>
+      </div>
+      <div class="lab-row zlab rv">
+        <span class="ko">당신의 아름다움</span>
+        <a class="vw" href="#price"><span class="ko">전체 시술 보기</span><span class="ar" aria-hidden="true">↗</span></a>
+      </div>
+      <div class="big rv">
+        <div class="pw"><img src="../beauty-a/assets/svc-hero.jpg" alt="시술 장면" width="1330" height="720"></div>
+        <div class="zcard">
+          <h3 class="it zcd ko">브라이트 메이크업</h3>
+          <div class="rowx zlab"><span class="ko">전문가</span><span class="ko">135,000원부터</span></div>
+        </div>
+      </div>
+      <div class="filters zlab rv" id="price">
+        <span class="ko">인기 시술</span>
+        <div class="fs"><span class="ko">특가</span><span class="ko">인기</span><span class="ko">평점순</span></div>
+      </div>
+      <div class="zrows" id="rows">
+        <span class="zhov" id="hov"><img src="../beauty-a/assets/svc-1.jpg" alt="" width="300" height="300"></span>
+        <a class="zrow rv" href="#cta" data-im="./assets/svc-1.jpg">
+          <h3 class="it zsv ko">디자인 네일</h3>
+          <span class="meta zlab"><span class="price ko">30,000원부터</span><span class="ko">담당 김하늘</span><span class="go">↗</span></span>
+        </a>
+        <a class="zrow rv" href="#cta" data-im="./assets/svc-2.jpg">
+          <h3 class="it zsv ko">두피 스파</h3>
+          <span class="meta zlab"><span class="price ko">70,000원부터</span><span class="ko">담당 박서연</span><span class="go">↗</span></span>
+        </a>
+        <a class="zrow rv" href="#cta" data-im="./assets/svc-3.jpg">
+          <h3 class="it zsv ko">브로우 시술</h3>
+          <span class="meta zlab"><span class="price ko">45,000원부터</span><span class="ko">담당 이지우</span><span class="go">↗</span></span>
+        </a>
+        <a class="zrow rv" href="#cta" data-im="./assets/svc-4.jpg">
+          <h3 class="it zsv ko">헤어 트리트먼트</h3>
+          <span class="meta zlab"><span class="price ko">100,000원부터</span><span class="ko">담당 최유진</span><span class="go">↗</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 레드 인용 701 -->
+  <section class="zquote">
+    <div class="pics" aria-hidden="true">
+      <figure class="q1 rv"><img src="../beauty-a/assets/quote-1.jpg" alt="" width="200" height="150"></figure>
+      <figure class="q2 rv"><img src="../beauty-a/assets/quote-2.jpg" alt="" width="259" height="236"></figure>
+    </div>
+    <div class="zwrap in">
+      <div class="qg">
+      <svg class="mark rv" viewBox="0 0 60 60" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M30 8c6 8 6 14 0 20-6-6-6-12 0-20zM30 28c8 0 13 5 13 11s-5 11-13 11-13-5-13-11 5-11 13-11z"/></svg>
+      <blockquote class="it zq ko rv">“우리의 열정은 아름다움이 아니라, 사람들이 스스로를 진심으로 사랑하게 만드는 일입니다.”</blockquote>
+      </div>
+      <p class="zlab by rv"><span class="ko">서지현</span> · <span class="ko">아벨 대표</span></p>
+    </div>
+  </section>
+
+  <!-- 후기 729 -->
+  <section class="zrev" id="rev">
+    <div class="zwrap in">
+      <p class="zlab zlab6 ko rv">아벨 이야기</p>
+      <div class="rt">
+        <h2 class="it zh2 ko rv">고객이 남긴<br>아름다움의 기록</h2>
+        <div class="grp">
+        <div class="top zlab rv">
+          <span class="ko">후기</span>
+          <span class="nav"><button type="button" id="pv" aria-label="이전">←</button><button type="button" id="nx" aria-label="다음">→</button></span>
+        </div>
+        <div class="vp rv">
+          <div class="track" id="track">
+            <div class="pg">
+              <article class="zrcard"><span class="st">★★★★★</span><p class="zp16 ko">“아벨에서 정말 좋은 경험을 했어요. 응대가 친절하고 머릿결이 눈에 띄게 좋아졌습니다. 꼭 다시 올게요.”</p><p class="zlab ko">김민서 고객</p></article>
+              <article class="zrcard"><span class="st">★★★★★</span><p class="zp16 ko">“지금까지 가 본 살롱 중 최고입니다. 디테일에 신경 쓰는 게 느껴졌고, 나올 때 기분이 정말 좋았어요.”</p><p class="zlab ko">이하은 고객</p></article>
+            </div>
+            <div class="pg">
+              <article class="zrcard"><span class="st">★★★★★</span><p class="zp16 ko">“두피 스파 받고 나서 두피가 훨씬 편해졌습니다. 상담부터 마무리까지 꼼꼼하게 봐 주셨어요.”</p><p class="zlab ko">정소윤 고객</p></article>
+              <article class="zrcard"><span class="st">★★★★★</span><p class="zp16 ko">“브로우 시술을 처음 받아 봤는데 얼굴선이 정리된 느낌이에요. 다음 예약도 바로 잡았습니다.”</p><p class="zlab ko">한지민 고객</p></article>
+            </div>
+            <div class="pg">
+              <article class="zrcard"><span class="st">★★★★★</span><p class="zp16 ko">“예약이 편하고 대기 시간이 거의 없었어요. 시술 전에 원하는 걸 충분히 들어 주셔서 좋았습니다.”</p><p class="zlab ko">오세라 고객</p></article>
+              <article class="zrcard"><span class="st">★★★★★</span><p class="zp16 ko">“네일 디자인을 맡겼는데 사진으로 보여 드린 것보다 예쁘게 나왔습니다. 오래가는 것도 만족해요.”</p><p class="zlab ko">배유나 고객</p></article>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SNS 578 -->
+  <section class="zsns" id="sns">
+    <span class="band" aria-hidden="true"></span>
+    <div class="in">
+      <div class="top">
+        <p class="zlab">Follow us</p>
+        <div class="ls it zh2b"><a href="#top">Instagram</a><a href="#top">Pinterest</a><a href="#top">Facebook</a></div>
+      </div>
+      <div class="icons">
+        <span aria-hidden="true">◎</span><span aria-hidden="true">◎</span><span aria-hidden="true">◎</span>
+        <figure><img src="../beauty-a/assets/ig-1.jpg" alt="" width="98" height="130"></figure>
+        <span aria-hidden="true">◎</span><span aria-hidden="true">◎</span><span aria-hidden="true">◎</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="zft" id="cta">
+  <div class="zwrap in">
+    <div class="tw">
+      <h2 class="it zh2 ko rv">당신의 아름다움은<br>여기서 시작됩니다</h2>
+      <div class="brow rv">
+        <p class="zp16 ko">오늘 아벨의 차이를 직접 확인해 보세요. 더 밝게 빛날 수 있도록 가까이에서 돕겠습니다.</p>
+        <div class="tel zlab"><a href="tel:01048944905">010-4894-4905</a><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></div>
+      </div>
+    </div>
+    <div class="bw">
+      <div class="card rv">
+        <div class="col">
+          <h3 class="it zcd ko">찾아오시는 길</h3>
+          <p class="zp16 ko">서울 강남구 테헤란로 14길 6<br>2층 아벨 살롱</p>
+          <p class="zp16 ko">평일 10:00 – 21:00<br>주말 10:00 – 19:00</p>
+        </div>
+        <div class="grp">
+        <div class="col">
+          <h3 class="it zcd ko">필요한 것</h3>
+          <a class="zlab ko" href="#about">우리는 어떤 곳인가 <span>›</span></a>
+          <a class="zlab ko" href="#svc">디자이너 소개 <span>›</span></a>
+          <a class="zlab ko" href="#price">시술 패키지 <span>›</span></a>
+        </div>
+        <div class="col">
+          <h3 class="it zcd ko">소식 받기</h3>
+          <a class="zlab ko" href="tel:01048944905">상담 전화하기 <span>›</span></a>
+          <a class="zlab" href="mailto:6gsmake@gmail.com">6gsmake@gmail.com <span>›</span></a>
+          <a class="zlab ko" href="#sns">인스타그램 <span>›</span></a>
+        </div>
+        </div>
+      </div>
+      <div class="cp zlab">
+        <p class="ko">© 2026 아벨. All rights reserved.</p>
+        <p class="ko">민트클 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- 하단 사진 띠 250 -->
+<div class="zstrip"><img src="../beauty-a/assets/strip.jpg" alt="" width="1440" height="250"></div>
+
+</body>
+</html>

@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>법무법인 서한 — 법률사무소 (프리미엄 디자인 A)</title>
+<meta name="description" content="어두운 서재 사진 위에 세리프 대형 문장이 얹히는 고정 히어로, 사진이 위에서 사라지는 업무분야 3카드, 사진과 연동되는 진행방식 아코디언, 카운트업 통계가 있는 다크 소개, 글자 단위로 색이 차오르는 인용문, 아코디언 FAQ, 전면 사진 상담 문구까지 갖춘 법률사무소 프리미엄 원페이지.">
+<meta property="og:title" content="법무법인 서한 — 법률사무소 (프리미엄 디자인 A)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&family=Instrument+Serif&family=Geist:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭)
+   밝은 면 rgb(242,241,240) · 다크 면 rgb(26,26,26) · 저자색 rgb(79,79,79) · 아바타 링 rgb(235,235,235)
+   컨테이너 max-width 1200 + padding 0 45px → 좌측선 165 · 콘텐츠 폭 1110
+   섹션 padding 96px 0 (FAQ 만 140px 0)
+   라틴 Source Serif 4 / Instrument Serif(워드마크) / Geist(전화) · 한글 Pretendard
+   h1 61/61 400 ls-2.44 · h2 49/58.8 400 · h3 36/43.2 400 ls-0.72 · 부제 20/26.8 400
+   본문 16/25.6 400 · 16/24 400 · 라벨 13/20.8 500 · 버튼 16/20.8 500 ls-0.32
+   인용문 50/55 400 ls-2 · 통계 숫자 50/50 400
+   라운드 5px(카드·사진) · 99px(알약) · 22px(아바타)
+   트랜지션 .4s cubic-bezier(.44,0,.56,1) ── */
+:root{
+  --paper:rgb(242,241,240);--ink:rgb(26,26,26);
+  --ink70:rgba(26,26,26,.7);--ink80:rgba(26,26,26,.8);--ink90:rgba(26,26,26,.9);--ink60:rgba(26,26,26,.6);
+  --ink10:rgba(26,26,26,.1);--ink05:rgba(26,26,26,.05);
+  --pap80:rgba(242,241,240,.8);--pap60:rgba(242,241,240,.6);--pap45:rgba(242,241,240,.45);
+  --byline:rgb(79,79,79);--ring:rgb(235,235,235);
+  --ease:cubic-bezier(.44,0,.56,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Source Serif 4","Pretendard Variable",Pretendard,serif;font-size:16px;line-height:25.6px;font-weight:400}
+.ko{letter-spacing:-.01em;text-wrap:pretty}
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 45px}
+
+/* 타입 — 레퍼런스 값 그대로 */
+.d1{font-size:61px;line-height:61px;font-weight:400;letter-spacing:-2.44px}
+.d2{font-size:49px;line-height:58.8px;font-weight:400}
+.d3{font-size:36px;line-height:43.2px;font-weight:400;letter-spacing:-.72px}
+.sub{font-size:20px;line-height:26.8px;font-weight:400}
+.body{font-size:16px;line-height:25.6px;font-weight:400}
+.body15{font-size:16px;line-height:24px;font-weight:400}
+.lab{font-size:13px;line-height:20.8px;font-weight:500}
+.qt{font-size:50px;line-height:55px;font-weight:400;letter-spacing:-2px}
+.num{font-size:50px;line-height:50px;font-weight:400;text-align:center}
+.tel{font-family:Geist,"Pretendard Variable",Pretendard,sans-serif;font-size:14px;line-height:21px;font-weight:500;letter-spacing:-.28px;transition:color .4s var(--ease)}
+.tel:hover{color:rgba(242,241,240,.6)}
+.mark{font-family:"Instrument Serif","Pretendard Variable",Pretendard,serif;font-size:24px;line-height:24px;font-weight:400}
+
+/* 알약 버튼 — 209×33 · r99 · pad 6 16 · 글 16/20.8 500 ls-0.32 */
+.pill{display:inline-flex;align-items:center;justify-content:center;height:33px;border-radius:99px;padding:6px 16px;
+  font-size:16px;line-height:20.8px;font-weight:500;letter-spacing:-.32px;width:min-content;white-space:nowrap;transition:opacity .4s var(--ease)}
+.pill:hover{opacity:.82}
+.pill-light{background:var(--paper);color:var(--ink)}
+.pill-dark{background:var(--ink);color:var(--paper)}
+
+/* 스크롤 등장 — 레퍼런스는 스프링 2s / 페이드 온리 (일부는 y30) */
+.rv{opacity:0;transition:opacity 1.2s var(--ease),transform 1.2s var(--ease)}
+.rv.on{opacity:1}
+.rv-y{transform:translateY(30px)}
+.rv-y.on{transform:none}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── 내비 : 히어로 위 absolute 오버레이 · 1440×73 · 배경 없음 ── */
+.nav{position:absolute;top:0;left:0;right:0;z-index:10}
+.nav .nin{max-width:1200px;margin:0 auto;padding:20px 45px;display:flex;align-items:center;justify-content:space-between}
+.nav .lk{display:flex;align-items:center;gap:20px}
+.nav .lk a{font-size:13px;line-height:20.8px;font-weight:500;color:var(--paper);transition:color .4s var(--ease)}
+.nav .lk a:hover{color:rgba(242,241,240,.6)}
+.nav .mark{color:var(--paper)}
+.burger{display:none}
+
+/* ── 히어로 : 100vh · 다크 · sticky top:0 ── */
+.hero{position:sticky;top:0;z-index:1;height:100vh;min-height:640px;background:var(--ink);padding:96px 0;overflow:clip;
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start}
+.hero .ph{position:absolute;inset:0;z-index:0;overflow:clip;opacity:.8;
+  -webkit-mask-image:linear-gradient(#000 51.7241%,#0000 100%);mask-image:linear-gradient(#000 51.7241%,#0000 100%)}
+.hero .ph img{width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.4);transition:transform 2s var(--ease)}
+.hero.go .ph img{transform:none}
+.hero .in{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;padding:0 45px;
+  display:flex;flex-direction:column;gap:32px;align-items:flex-start;color:var(--paper)}
+.hero h1,.hero .in>p.sub{width:100%;max-width:1110px}
+.hero .hrow{display:flex;flex-direction:row;gap:20px;align-items:center;width:100%}
+.rev{display:flex;flex-direction:row;gap:12px;align-items:center}
+.faces{display:flex;width:80px;overflow:hidden;flex:0 0 auto}
+.faces span{width:32px;height:32px;border-radius:22px;background:var(--ring);padding:2px;flex:0 0 auto;margin-right:-8px;display:block}
+.faces img{width:28px;height:28px;border-radius:22px;object-fit:cover}
+.rev .tx{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.stars{display:flex;gap:2px}
+.stars svg{width:14px;height:14px;flex:0 0 auto}
+.hero .stars svg{color:var(--paper)}
+
+/* ── 업무 분야 : 914 · 밝은 면 ── */
+.pa{background:var(--paper);padding:96px 0;position:relative;z-index:1}
+.pa .in{display:flex;flex-direction:column;gap:64px}
+.pa .head{display:flex;flex-direction:row;gap:80px;align-items:flex-end}
+.pa .head .l{flex:1 0 0;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.pa .head .r{flex:1 0 0}
+.pa .head .r p{color:var(--ink70)}
+.pcards{display:flex;flex-direction:row;gap:16px;align-items:flex-end}
+.pcard{flex:1 0 0;height:500px;background:var(--ink);border-radius:5px;padding:350px 30px 32px;overflow:clip;position:relative;
+  display:flex;flex-direction:column;justify-content:flex-end}
+.pcard .im{position:absolute;top:0;left:0;width:100%;height:70%;z-index:0;
+  -webkit-mask-image:linear-gradient(#000 0%,#0000 100%);mask-image:linear-gradient(#000 0%,#0000 100%)}
+.pcard .im img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.pcard .tx{position:relative;z-index:1;display:flex;flex-direction:column;gap:8px}
+.pcard h3{color:var(--paper)}
+.pcard p{color:var(--pap80)}
+
+/* ── 진행 방식 : 999 ── */
+.pr{background:var(--paper);padding:96px 0;position:relative;z-index:1}
+.pr .in{display:flex;flex-direction:column;gap:64px}
+.pr .head{display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.pr .head p.sub{color:var(--ink70)}
+.pr .body-row{display:flex;flex-direction:row;gap:20px;align-items:center}
+.pr .ims{position:relative;flex:1 0 0;height:570px;border-radius:5px;overflow:clip}
+.pr .ims img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease)}
+.pr .ims img.on{opacity:1}
+.pr .steps{flex:1 0 0;display:flex;flex-direction:column;gap:10px}
+.step{background:var(--ink05);border-radius:5px;padding:24px;cursor:pointer;text-align:left;width:100%;
+  display:flex;flex-direction:column;gap:0;align-items:flex-start;overflow:clip}
+.step .hd{display:flex;flex-direction:row;justify-content:space-between;align-items:center;width:100%}
+.step .hd h3{flex:1 0 0}
+.step .ic{width:40px;height:40px;flex:0 0 auto;display:flex;align-items:center;justify-content:center}
+.step .ic svg{width:30px;height:30px;transition:transform .4s var(--ease)}
+.step.on .ic svg{transform:rotate(180deg)}
+.step .dt{display:grid;grid-template-rows:0fr;width:100%;overflow:hidden;transition:grid-template-rows .45s var(--ease)}
+.step.on .dt{grid-template-rows:1fr}
+.step .dt>div{min-height:0}
+.step .dt .pad{padding-top:24px;display:flex;flex-direction:column;gap:24px}
+.step .bar{margin-top:8px}
+.step .dt p{font-size:16px;line-height:24px;color:var(--ink80)}
+.step .bl{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.step .bl div{display:flex;flex-direction:row;gap:12px;align-items:center}
+.step .bl svg{width:20px;height:20px;flex:0 0 auto}
+.step .bl span{font-size:16px;line-height:24px;color:var(--ink90)}
+.step .bar{width:100%;height:6px;border-radius:100px;background:var(--pap45);overflow:hidden;position:relative;margin-top:8px}
+.step .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--ink);transition:width .1s linear}
+
+/* ── 담당 변호사 : 100vh · 다크 ── */
+.ab{background:var(--ink);color:var(--paper);height:100vh;min-height:640px;padding:96px 0;position:relative;z-index:1;overflow:clip;
+  display:flex;align-items:center}
+.ab .in{display:flex;flex-direction:row;gap:64px;align-items:center;width:100%}
+.ab .l{flex:1 0 0;display:flex;flex-direction:column;gap:80px;align-items:flex-start}
+.ab .tx{width:100%;display:flex;flex-direction:column;gap:20px;align-items:flex-start}
+.ab .tx p.sub{color:var(--pap80)}
+.ab .stats{width:100%;display:flex;flex-direction:row;gap:10px;align-items:center}
+.ab .stat{flex:1 0 0;display:flex;flex-direction:column;gap:24px;align-items:flex-start}
+.ab .stat b{display:block}
+.ab .stat span{font-size:16px;line-height:25.6px;color:var(--pap60)}
+.ab .por{flex:1 0 0;height:550px;border-radius:5px;overflow:clip}
+.ab .por img{width:100%;height:100%;object-fit:cover;object-position:50% 0%}
+
+/* ── 후기 인용 : 80vh ── */
+.ts{background:var(--paper);height:80vh;min-height:560px;padding:96px 0;position:relative;z-index:1;overflow:clip;
+  display:flex;align-items:center}
+.ts .in{display:flex;justify-content:center;width:100%}
+.ts .q{max-width:700px;width:100%;display:flex;flex-direction:column;gap:32px;align-items:center;text-align:center}
+.ts .stars svg{width:20px;height:20px;color:var(--ink)}
+.ts blockquote{width:100%}
+.ts blockquote em{font-style:normal;color:var(--ink10);transition:color .5s var(--ease)}
+.ts blockquote em.on{color:var(--ink)}
+.ts .by{display:flex;flex-direction:row;gap:10px;align-items:center;justify-content:center;width:100%}
+.ts .by figure{width:35px;height:35px;border-radius:99px;overflow:clip;flex:0 0 auto}
+.ts .by img{width:100%;height:100%;object-fit:cover;object-position:50% 0%}
+.ts .by p{font-size:16px;line-height:24px;letter-spacing:-.32px;color:var(--byline)}
+
+/* ── FAQ : 1189 · padding 140 ── */
+.fq{background:var(--paper);padding:140px 0;position:relative;z-index:1}
+.fq .in{display:flex;flex-direction:column;gap:64px;align-items:center}
+.fq .head{width:100%;display:flex;flex-direction:column;gap:20px;align-items:center;text-align:center}
+.fq .head h2,.fq .head p.sub{width:100%}
+.fq .list{width:100%;max-width:680px;display:flex;flex-direction:column;gap:12px}
+.qa{background:var(--ink10);border-radius:5px;padding:24px}
+.qa .q{width:100%;display:flex;flex-direction:row;gap:10px;align-items:center;text-align:left}
+.qa .q span{flex:1 0 0;font-size:18px;line-height:28.8px;font-weight:500}
+.qa .q svg{width:24px;height:24px;flex:0 0 auto;transition:transform .4s var(--ease)}
+.qa.open .q svg{transform:rotate(45deg)}
+.qa .a{display:grid;grid-template-rows:0fr;overflow:hidden;transition:grid-template-rows .45s var(--ease)}
+.qa.open .a{grid-template-rows:1fr}
+.qa .a>div{min-height:0}
+.qa .a p{padding-top:16px;font-size:16px;line-height:25.6px;color:var(--ink80)}
+.fq .bar{width:100%;background:var(--ink10);border-radius:5px;padding:24px;
+  display:flex;flex-direction:row;justify-content:space-between;align-items:center;gap:16px}
+.fq .bar p{font-size:18px;line-height:27px;letter-spacing:-.9px}
+
+/* ── 상담 시작 : 100vh · 다크 · 전면 사진 ── */
+.cta{position:relative;z-index:1;height:100vh;min-height:640px;background:var(--ink);overflow:clip;
+  display:flex;flex-direction:column;justify-content:center;align-items:center}
+.cta .ph{position:absolute;inset:0;z-index:0;opacity:.2;
+  -webkit-mask-image:linear-gradient(#000 51.7241%,#0000 100%);mask-image:linear-gradient(#000 51.7241%,#0000 100%)}
+.cta .ph img{width:100%;height:100%;object-fit:cover;object-position:50% 50%;transform:scale(1.5);transition:transform 2s var(--ease)}
+.cta.go .ph img{transform:none}
+.cta .in{position:relative;z-index:1;width:100%;max-width:1200px;margin:0 auto;padding:0 45px;color:var(--paper);
+  display:flex;flex-direction:column;gap:32px;align-items:center;text-align:center}
+.cta .in h2,.cta .in>p.sub{width:100%}
+.cta .row{display:flex;flex-direction:row;gap:20px;align-items:center}
+
+/* ── 푸터 : 539 ── */
+.ft{background:var(--paper);padding:96px 0;position:relative;z-index:1}
+.ft .in{display:flex;flex-direction:column;gap:80px;align-items:center}
+.ft .cols{width:100%;display:flex;flex-direction:row;gap:80px;align-items:flex-start}
+.ft .col{flex:1 0 0;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.ft .col.first{gap:20px}
+.ft .col b{font-size:16px;line-height:25.6px;font-weight:400;color:var(--ink60)}
+.ft .col a{font-size:13px;line-height:20.8px;font-weight:500;transition:color .4s var(--ease)}
+.ft .col a:hover{color:rgba(10,11,13,.6)}
+.ft .col .desc{font-size:13px;line-height:20.8px;font-weight:500;color:var(--ink80)}
+.ft .btm{width:100%;display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;gap:24px}
+.ft .btm p{font-size:13px;line-height:20.8px;font-weight:500;color:var(--ink80)}
+
+/* ── 1024 ── */
+@media (max-width:1199px){
+  .wrap,.nav .nin,.hero .in,.cta .in{max-width:100%;padding-left:32px;padding-right:32px}
+  .d1{font-size:48px;line-height:48px;letter-spacing:-1.92px}
+  .d2{font-size:38px;line-height:45.6px}
+  .d3{font-size:30px;line-height:36px;letter-spacing:-.6px}
+  .sub{font-size:19px;line-height:25.5px}
+  .qt{font-size:38px;line-height:41.8px;letter-spacing:-1.52px}
+  .pa .head{flex-direction:column;gap:20px;align-items:flex-start}
+  .pcards{flex-direction:row;gap:16px}
+  .pcard{height:440px;padding:300px 24px 28px}
+  .pr .body-row{flex-direction:column;gap:16px}
+  .pr .ims{width:100%;flex:none;height:420px}
+  .pr .steps{width:100%;flex:none}
+  .ab{height:auto;padding:96px 0}
+  .ab .in{flex-direction:column;gap:48px;align-items:flex-start}
+  .ab .l,.ab .por{width:100%;flex:none}
+  .ab .por{height:460px}
+  .ts{height:auto;padding:96px 0}
+  .fq{padding:110px 0}
+  .cta{height:auto;min-height:0;padding:120px 0}
+  .ft .cols{flex-wrap:wrap;gap:48px}
+  .ft .col{flex:1 0 40%}
+}
+/* ── 390 ── */
+@media (max-width:809px){
+  .wrap,.nav .nin,.hero .in,.cta .in{padding-left:20px;padding-right:20px}
+  .d1{font-size:39px;line-height:39px;letter-spacing:-1.56px}
+  .d2{font-size:30px;line-height:36px}
+  .d3{font-size:26px;line-height:31.2px;letter-spacing:-.52px}
+  .sub{font-size:18px;line-height:24.12px}
+  .lab{font-size:12px;line-height:19.2px}
+  .qt{font-size:32px;line-height:35.2px;letter-spacing:-1.28px}
+  .nav .nin{padding:20px}
+  .nav .lk{display:none}
+  .burger{display:inline-flex;align-items:center;justify-content:center;height:30px;border-radius:100px;background:var(--paper);color:var(--ink);
+    padding:8px 10px;font-family:Geist,"Pretendard Variable",Pretendard,sans-serif;font-size:14px;line-height:14px;font-weight:500}
+  .hero{padding:96px 0 64px}
+  .hero .ph{opacity:.6}
+  .hero .in{gap:24px}
+  .hero .hrow{flex-direction:column;gap:20px;align-items:flex-start}
+  .pa{padding:64px 0}
+  .pa .in{gap:48px}
+  .pcards{flex-direction:column;gap:16px;align-items:stretch}
+  .pcard{height:500px;padding:350px 30px 32px}
+  .pcard h3{font-size:18px;line-height:24.12px}
+  .pcard p{font-size:14px;line-height:22.4px}
+  .pr{padding:64px 0}
+  .pr .in{gap:48px}
+  .pr .ims{height:auto;aspect-ratio:1/1}
+  .step{background:var(--ink10)}
+  .ab{padding:64px 0}
+  .ab .in{gap:48px}
+  .ab .l{gap:64px}
+  .ab .tx p.sub{color:rgba(242,241,240,.7)}
+  .ab .stat{width:170px}
+  .ab .por{height:360px}
+  .ts{padding:64px 0}
+  .ts .in{justify-content:flex-start}
+  .ts .q{align-items:flex-start;text-align:left}
+  .ts .by{justify-content:flex-start}
+  .fq{padding:100px 0}
+  .fq .in{gap:48px}
+  .fq .head{align-items:flex-start;text-align:left}
+  .fq .list,.fq .bar{max-width:100%}
+  .fq .bar{flex-direction:column;align-items:flex-start;gap:16px}
+  .cta{padding:100px 0}
+  .cta .in{align-items:flex-start;text-align:left}
+  .cta .row{flex-direction:column;gap:20px;align-items:flex-start}
+  .ft{padding:64px 0}
+  .ft .in{gap:48px}
+  .ft .cols{flex-direction:column;gap:40px}
+  .ft .col{flex:none;width:100%}
+  .ft .btm{flex-direction:column;gap:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- 히어로 900 (100vh · sticky) -->
+<section class="hero" id="top">
+  <span class="ph"><img src="./assets/hero.jpg" alt="법률사무소 서재" width="1440" height="900"></span>
+  <header class="nav">
+    <div class="nin">
+      <a class="mark" href="#top">Seohan</a>
+      <nav class="lk"><a href="#practice" class="ko">업무 분야</a><a href="#process" class="ko">진행 방식</a><a href="#about" class="ko">변호사</a><a href="#cta" class="ko">상담</a></nav>
+      <a class="pill pill-light ko" href="#cta">상담 예약</a>
+      <button class="burger ko" type="button">메뉴</button>
+    </div>
+  </header>
+  <div class="in">
+    <p class="lab ko rv">기업법무 · 송무</p>
+    <h1 class="d1 ko rv">중대한 사건일수록<br>조용한 조력이 필요합니다.</h1>
+    <p class="sub ko rv">기업 법무와 송무, 규제 대응까지.<br>기다릴 여유가 없는 대표를 위한 자문입니다.</p>
+    <div class="hrow rv">
+      <a class="pill pill-light ko" href="#cta">상담 예약</a>
+      <a class="tel" href="tel:01048944905">전화 010-4894-4905</a>
+    </div>
+    <div class="rev rv">
+      <span class="faces"><span><img src="./assets/hero.jpg" alt="" width="28" height="28"></span><span><img src="./assets/counsel.jpg" alt="" width="28" height="28"></span><span><img src="./assets/work-1.jpg" alt="" width="28" height="28"></span></span>
+      <span class="tx">
+        <span class="stars" aria-label="별점 5점"><svg viewBox="0 0 256 256" fill="currentColor"><path d="M239 97.3a16 16 0 0 0-14-11l-59.3-5-23.2-55.6a16 16 0 0 0-29 0L90.3 81.3l-59.3 5a16 16 0 0 0-9.1 28.1l45 39-13.5 58.2a16 16 0 0 0 23.9 17.3L128 197.9l50.7 30.9a16 16 0 0 0 23.9-17.3l-13.5-58.2 45-39a16 16 0 0 0 4.9-17z"/></svg><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg></span>
+        <span class="lab ko">대표들이 먼저 찾는 직접 자문</span>
+      </span>
+    </div>
+  </div>
+</section>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="st" viewBox="0 0 256 256"><path d="M239 97.3a16 16 0 0 0-14-11l-59.3-5-23.2-55.6a16 16 0 0 0-29 0L90.3 81.3l-59.3 5a16 16 0 0 0-9.1 28.1l45 39-13.5 58.2a16 16 0 0 0 23.9 17.3L128 197.9l50.7 30.9a16 16 0 0 0 23.9-17.3l-13.5-58.2 45-39a16 16 0 0 0 4.9-17z"/></symbol></svg>
+
+<main>
+
+  <!-- 업무 분야 914 -->
+  <section class="pa" id="practice">
+    <div class="wrap in">
+      <div class="head">
+        <div class="l">
+          <p class="lab ko rv">업무 분야</p>
+          <h2 class="d2 ko rv">성장의 모든 단계에<br>함께 서는 법률 자문.</h2>
+        </div>
+        <div class="r rv"><p class="sub ko">성장하는 회사가 실제로 마주하는 문제에만 집중합니다. 넓게 벌이지 않습니다.</p></div>
+      </div>
+      <div class="pcards">
+        <article class="pcard rv">
+          <span class="im"><img src="./assets/area-1.jpg" alt="계약서를 검토하는 손" width="360" height="350"></span>
+          <div class="tx"><h3 class="sub ko">기업 법무</h3><p class="body ko">설립과 투자 유치, 지배구조까지 성장하는 회사에 필요한 것들.</p></div>
+        </article>
+        <article class="pcard rv">
+          <span class="im"><img src="./assets/area-2.jpg" alt="서류를 검토하는 변호사" width="360" height="350"></span>
+          <div class="tx"><h3 class="sub ko">상사 소송</h3><p class="body ko">이해관계가 큰 분쟁을 전략적이고 실무적인 조력으로 풉니다.</p></div>
+        </article>
+        <article class="pcard rv">
+          <span class="im"><img src="./assets/area-3.jpg" alt="사무실 창가" width="360" height="350"></span>
+          <div class="tx"><h3 class="sub ko">규제 대응</h3><p class="body ko">복잡한 규제 환경을 명확하고 단호한 판단으로 헤쳐 나갑니다.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 진행 방식 999 -->
+  <section class="pr" id="process">
+    <div class="wrap in">
+      <div class="head">
+        <p class="lab ko rv">진행 방식</p>
+        <h2 class="d2 ko rv">다음 단계가 늘 분명합니다.</h2>
+        <p class="sub ko rv">첫 상담부터 사건이 끝날 때까지,<br>추측할 일이 없도록 합니다.</p>
+      </div>
+      <div class="body-row rv rv-y">
+        <div class="ims">
+          <img class="on" src="./assets/work-1.jpg" alt="상담 장면" width="545" height="570">
+          <img src="./assets/work-2.jpg" alt="자료를 검토하는 장면" width="545" height="570">
+          <img src="./assets/work-3.jpg" alt="회의 장면" width="545" height="570">
+          <img src="./assets/work-4.jpg" alt="합의 장면" width="545" height="570">
+        </div>
+        <div class="steps" id="steps">
+          <div class="step on">
+            <button class="hd" type="button"><h3 class="d3 ko">상담</h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path class="v" d="M12 5v14"/></svg></span></button>
+            <div class="dt"><div><div class="pad">
+              <p class="ko">양식을 채우는 접수가 아니라, 변호사와 바로 나누는 대화입니다.</p>
+              <div class="bl">
+                <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="ko">첫 통화부터 담당 변호사가 직접 받습니다</span></div>
+                <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="ko">접수 양식도, 사건 관리자도 거치지 않습니다</span></div>
+              </div>
+              <div class="bar"><i></i></div>
+            </div></div></div>
+          </div>
+          <div class="step">
+            <button class="hd" type="button"><h3 class="d3 ko">전략</h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path class="v" d="M12 5v14"/></svg></span></button>
+            <div class="dt"><div><div class="pad">
+              <p class="ko">사건에 맞춰 짠 계획입니다. 정해진 양식이 아닙니다.</p>
+              <div class="bl">
+                <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="ko">업무 범위와 방식, 일정을 처음에 정리해 드립니다</span></div>
+                <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="ko">비용 구조를 착수 전에 명확히 설명합니다</span></div>
+              </div>
+              <div class="bar"><i></i></div>
+            </div></div></div>
+          </div>
+          <div class="step">
+            <button class="hd" type="button"><h3 class="d3 ko">해결</h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path class="v" d="M12 5v14"/></svg></span></button>
+            <div class="dt"><div><div class="pad">
+              <p class="ko">협상이든 소송이든, 의뢰인에게 남는 결과를 기준으로 판단합니다.</p>
+              <div class="bl">
+                <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="ko">진행 상황을 정해진 주기로 먼저 알려 드립니다</span></div>
+                <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="ko">합의와 판결의 실익을 숫자로 비교해 드립니다</span></div>
+              </div>
+              <div class="bar"><i></i></div>
+            </div></div></div>
+          </div>
+          <div class="step">
+            <button class="hd" type="button"><h3 class="d3 ko">지속 자문</h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14"/><path class="v" d="M12 5v14"/></svg></span></button>
+            <div class="dt"><div><div class="pad">
+              <p class="ko">사건이 끝난 뒤에도 같은 변호사가 회사를 계속 봅니다.</p>
+              <div class="bl">
+                <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="ko">계약서와 사내 규정을 정기적으로 점검합니다</span></div>
+                <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span class="ko">월 자문으로 전환하면 별도 착수금이 없습니다</span></div>
+              </div>
+              <div class="bar"><i></i></div>
+            </div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 담당 변호사 900 (100vh · 다크) -->
+  <section class="ab" id="about">
+    <div class="wrap in">
+      <div class="l">
+        <div class="tx">
+          <p class="lab ko rv">담당 변호사</p>
+          <h2 class="d2 ko rv">직접 연결됩니다.<br>인계는 없습니다.</h2>
+          <p class="sub ko rv">첫 통화부터 사건이 끝날 때까지 한 사람이 맡습니다. 담당자가 돌아가며 바뀌지 않습니다.</p>
+        </div>
+        <div class="stats">
+          <div class="stat rv rv-y"><b class="num" data-to="15" data-suffix="+">0+</b><span class="ko">변호사 경력</span></div>
+          <div class="stat rv rv-y"><b class="num" data-to="100" data-suffix="%">0%</b><span class="ko">대표변호사 직접 상담</span></div>
+        </div>
+      </div>
+      <figure class="por rv"><img src="./assets/counsel.jpg" alt="담당 변호사" width="523" height="550"></figure>
+    </div>
+  </section>
+
+  <!-- 후기 인용 720 (80vh) -->
+  <section class="ts">
+    <div class="wrap in">
+      <div class="q">
+        <span class="stars rv" aria-label="별점 5점"><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg><svg viewBox="0 0 256 256" fill="currentColor"><use href="#st"/></svg></span>
+        <blockquote class="qt ko" id="quote">“신중한 조언과 상업적인 판단, 그리고 복잡한 국경 간 거래가 마무리될 때까지 끝내 지켜 준 완벽한 비밀 유지.”</blockquote>
+        <div class="by rv">
+          <figure><img src="./assets/work-4.jpg" alt="" width="35" height="35"></figure>
+          <p class="ko">정민석 · 세아물산 대표이사</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ 1189 -->
+  <section class="fq" id="faq">
+    <div class="wrap in">
+      <div class="head">
+        <p class="lab ko rv">자주 묻는 질문</p>
+        <h2 class="d2 ko rv">전화 걸기 전에<br>먼저 확인하세요.</h2>
+        <p class="sub ko rv">연락하시기 전에 알아 두면 좋은 것들을<br>미리 모아 두었습니다.</p>
+      </div>
+      <div class="list rv">
+        <div class="qa"><button class="q" type="button"><span class="ko">사업상 문제에 변호사를 언제 넣어야 하나요?</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button><div class="a"><div><p class="ko">계약서에 서명하기 전, 분쟁 조짐이 보일 때, 그리고 투자·인수 논의가 시작될 때입니다. 세 시점 모두 늦으면 선택지가 줄어듭니다.</p></div></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">담당 변호사와 직접 연락할 수 있나요?</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button><div class="a"><div><p class="ko">네. 첫 통화부터 사건이 끝날 때까지 같은 변호사가 맡습니다. 사건 관리자를 거치지 않습니다.</p></div></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">비밀 유지는 어떻게 보장되나요?</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button><div class="a"><div><p class="ko">변호사법상 비밀유지 의무가 적용되고, 자료는 별도 암호화 저장소에서만 다룹니다. 필요하면 상담 전에 비밀유지약정을 먼저 체결합니다.</p></div></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">첫 상담 전에 무엇을 준비하면 되나요?</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button><div class="a"><div><p class="ko">관련 계약서와 주고받은 문서, 시간 순서로 정리한 경위서면 충분합니다. 없어도 상담은 진행됩니다.</p></div></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">서울 외 지역 사건도 맡으시나요?</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button><div class="a"><div><p class="ko">전국 법원 사건을 맡습니다. 원격 상담으로 진행하고 기일에만 출석하는 방식도 가능합니다.</p></div></div></div>
+        <div class="qa"><button class="q" type="button"><span class="ko">수임료는 어떻게 되나요?</span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button><div class="a"><div><p class="ko">사건 성격에 따라 착수금과 성공보수, 월 자문료 중에서 정합니다. 어느 쪽이든 착수 전에 총액 범위를 문서로 드립니다.</p></div></div></div>
+        <div class="bar">
+          <p class="ko">더 궁금한 점이 있으신가요?</p>
+          <a class="pill pill-dark ko" href="#cta">상담 문의</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 상담 시작 900 (100vh · 다크) -->
+  <section class="cta" id="cta">
+    <span class="ph"><img src="./assets/cta.jpg" alt="상담 장면" width="1440" height="900"></span>
+    <div class="in">
+      <p class="lab ko rv">상담 시작</p>
+      <h2 class="d2 ko rv">법률 자문은<br>제대로 된 대화에서 시작합니다.</h2>
+      <p class="sub ko rv">비밀이 보장되는 상담을 신청하세요.<br>부담 없이, 직접 답해 드립니다.</p>
+      <div class="row rv">
+        <a class="pill pill-light ko" href="tel:01048944905">상담 예약</a>
+        <a class="tel" href="tel:01048944905">전화 010-4894-4905</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap in">
+    <div class="cols">
+      <div class="col first">
+        <a class="mark" href="#top">Seohan</a>
+        <p class="desc ko">기업과 대표, 그리고 개인 의뢰인이 복잡한 문제를 끝까지 자신 있게 지나갈 수 있도록 가장 가까운 자리에서 돕는 법률 자문입니다.</p>
+      </div>
+      <nav class="col"><b class="ko">둘러보기</b><a href="#top" class="ko">홈</a><a href="#practice" class="ko">업무 분야</a><a href="#process" class="ko">진행 방식</a><a href="#about" class="ko">변호사</a><a href="#faq" class="ko">자주 묻는 질문</a><a href="#cta" class="ko">상담</a></nav>
+      <nav class="col"><b class="ko">연락처</b><a href="tel:01048944905">010-4894-4905</a><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a><a href="#cta" class="ko">서울 강남구</a><a href="#top">LinkedIn</a></nav>
+      <nav class="col"><b class="ko">약관</b><a href="#faq" class="ko">개인정보 처리방침</a><a href="#faq" class="ko">이용약관</a></nav>
+    </div>
+    <div class="btm">
+      <p class="ko">© 2026 법무법인 서한. All rights reserved.</p>
+      <p class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -12% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+requestAnimationFrame(()=>{document.querySelector('.hero').classList.add('go');document.querySelector('.cta').classList.add('go')});
+
+/* 진행 방식 — 카드를 열면 왼쪽 사진이 바뀐다. 열린 카드는 진행바가 차면 다음으로 넘어간다 */
+const steps=[...document.querySelectorAll('#steps .step')];
+const shots=[...document.querySelectorAll('.pr .ims img')];
+let cur=0,timer=null,t0=0;
+function open(i){
+  cur=i;
+  steps.forEach((s,k)=>s.classList.toggle('on',k===i));
+  shots.forEach((im,k)=>im.classList.toggle('on',k===i));
+  steps.forEach(s=>{const b=s.querySelector('.bar i');if(b)b.style.width='0%'});
+  t0=0; clearInterval(timer);
+  timer=setInterval(()=>{
+    t0+=100;
+    const b=steps[cur].querySelector('.bar i');
+    if(b)b.style.width=Math.min(100,t0/6000*100)+'%';
+    if(t0>=6000) open((cur+1)%steps.length);
+  },100);
+}
+steps.forEach((s,i)=>s.querySelector('.hd').addEventListener('click',()=>open(i)));
+open(0);
+
+/* 담당 변호사 — 통계 카운트업 */
+const cio=new IntersectionObserver(es=>{es.forEach(e=>{
+  if(!e.isIntersecting) return; cio.unobserve(e.target);
+  const el=e.target,to=+el.dataset.to,sfx=el.dataset.suffix;let n=0;
+  const step=()=>{n+=Math.max(1,Math.round(to/40));if(n>=to){el.textContent=to+sfx;return}el.textContent=n+sfx;requestAnimationFrame(step)};
+  step();
+})},{rootMargin:'0px 0px -20% 0px'});
+document.querySelectorAll('.num[data-to]').forEach(el=>cio.observe(el));
+
+/* 후기 — 글자 단위로 색이 차오른다 */
+const q=document.getElementById('quote');
+q.innerHTML=[...q.textContent].map(c=>c===' '?' ':'<em>'+c+'</em>').join('');
+const ems=[...q.querySelectorAll('em')];
+const qio=new IntersectionObserver(es=>{es.forEach(e=>{
+  if(!e.isIntersecting) return; qio.unobserve(e.target);
+  ems.forEach((em,i)=>setTimeout(()=>em.classList.add('on'),i*18));
+})},{rootMargin:'0px 0px -25% 0px'});
+qio.observe(q);
+
+/* FAQ */
+document.querySelectorAll('.qa .q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+</script>
+</body>
+</html>
