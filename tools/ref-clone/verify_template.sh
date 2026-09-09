@@ -22,6 +22,9 @@ s=s.replace('<meta property="og:image" content="./og.jpg">', f'<meta property="o
 assert 'src="./assets/' in s, 'assets 참조 없음'
 s=s.replace('src="./assets/', f'src="../{slug}/assets/')   # data-src 도 함께 걸린다
 s=s.replace('srcset="./assets/', f'srcset="../{slug}/assets/').replace(', ./assets/', f', ../{slug}/assets/').replace('poster="./assets/', f'poster="../{slug}/assets/')   # srcset 후보·poster 도 기본형 경로로
+s=s.replace('href="./assets/', f'href="../{slug}/assets/')   # preload 링크도
+for q in ('url(./assets/', "url('./assets/", 'url("./assets/'):     # CSS 배경 이미지도 (video-a 의 grain·glow)
+    s=s.replace(q, q.replace('./assets/', f'../{slug}/assets/'))
 s=s.replace('</style>','''
 /* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
 .rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
@@ -41,6 +44,8 @@ import re, os
 slug=os.environ['SLUG']
 css=lambda p: re.search(r'<style>(.*?)</style>', open(p,encoding='utf-8').read(), re.S).group(1)
 a=css(f'public/templates/{slug}/index.html'); b=css(f'public/templates/{slug}-basic/index.html')
+# 기본형은 assets 경로만 상위로 바꾼다 — 비교 전에 되돌려 놓는다
+b=b.replace(f'../{slug}/assets/', './assets/')
 extra="\n/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */\n.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}\n.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}\n"
 assert b == a + extra, '기본형 CSS 가 랜딩형과 다르다 — 기본형을 직접 고치지 말고 랜딩형을 고친 뒤 이 스크립트를 다시 돌릴 것'
 print('  일치 — 기본형은 랜딩형 CSS + 모션 차단뿐')
