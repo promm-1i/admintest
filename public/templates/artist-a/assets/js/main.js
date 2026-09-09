@@ -17,7 +17,7 @@
   lb.innerHTML='<div class="ct"></div><button class="x" aria-label="닫기"><svg viewBox="0 0 24 24"><path d="M5 5l14 14M19 5L5 19"/></svg></button>'+
     '<button class="pv" aria-label="이전 작품"><svg viewBox="0 0 24 24"><path d="M15 4l-8 8 8 8"/></svg></button>'+
     '<button class="nx" aria-label="다음 작품"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8"/></svg></button>'+
-    '<img alt=""><div class="cap"><div class="t"></div><div class="m"></div></div>';
+    '<img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""><div class="cap"><div class="t"></div><div class="m"></div></div>';
   document.body.appendChild(lb);
   var img=lb.querySelector('img'), ct=lb.querySelector('.ct'), tt=lb.querySelector('.cap .t'), mm=lb.querySelector('.cap .m'), cur=-1, last=null;
   function show(i){
