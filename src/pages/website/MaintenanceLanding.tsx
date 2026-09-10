@@ -24,7 +24,7 @@ function ranSuffix(word: string) {
 }
 
 const SUPPORT_POLICY = [
-  "제작 완료 후 일정 기간 기본 지원",
+  "오픈 후 1개월 무상 수정",
   "단순 문구 / 이미지 수정 등 지원",
   "레이아웃 변경 및 신규 기능은 별도 협의",
 ];

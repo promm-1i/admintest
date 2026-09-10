@@ -19,21 +19,35 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { CustomBuildPreviewSection } from "@/components/sections/CustomBuildPreviewSection";
 import { TemplatePickVisual, CustomBuildVisual } from "@/components/sections/CompareVisuals";
 
-/** 템플릿형과 커스텀 개발의 차이 */
+/**
+ * 커스텀 개발과 그 밖의 라인의 차이.
+ *
+ * 템플릿 라인과 프리미엄 라인은 값이 달라도 둘 다 "이미 있는 화면에서 출발"하므로 한 칸에 묶는다.
+ * 커스텀 개발만 출발점이 되는 시안이 없다 — 이게 프리미엄 라인과 갈리는 지점이고, 그래서
+ * 커스텀 개발은 시작가를 박지 않고 상담 후 견적으로 안내한다.
+ */
 const COMPARE = [
   {
-    name: "템플릿형",
-    desc: "이미 만들어 둔 디자인에 문구와 이미지를 적용해 빠르고 합리적으로 시작합니다.",
-    points: ["완성된 디자인에서 선택", "빠른 제작 기간", "합리적인 시작 비용"],
-    href: "/templates",
-    linkLabel: "템플릿 보기",
+    name: "템플릿 라인 · 프리미엄 라인",
+    desc: "이미 만들어 둔 화면이나 프리미엄 시안에서 출발합니다. 템플릿 라인은 문구와 사진만 바꿔 열고, 프리미엄 라인은 그 시안을 브랜드에 맞춰 다시 잡습니다.",
+    points: [
+      "완성된 화면 · 시안에서 출발",
+      "가격이 정해져 있음 (64만원~ · 300만원~)",
+      "영업일 7일 ~ 3~4주",
+    ],
+    href: "/website/price",
+    linkLabel: "요금 보기 · 64만원부터",
   },
   {
     name: "커스텀 개발",
-    desc: "업종의 업무 방식에 맞춰 화면 구성과 기능을 처음부터 설계합니다. 관리자 시스템과 데이터베이스까지 함께 구축합니다.",
-    points: ["화면 · 기능을 처음부터 설계", "관리자 · DB · 업무 흐름 포함", "운영하면서 계속 확장 가능"],
-    href: "/web-solutions",
-    linkLabel: "업종별 솔루션 보기",
+    desc: "출발점이 되는 시안 없이, 업종의 업무 방식부터 설계합니다. 예약 · 결제 · 회원 · 외부 연동처럼 필요한 기능을 새로 만듭니다.",
+    points: [
+      "업무 흐름부터 설계 (시안 없음)",
+      "예약 · 결제 · 회원 · API를 새로 구축",
+      "범위에 따라 상담 후 견적",
+    ],
+    href: "/contact",
+    linkLabel: "구축 상담하기",
     highlight: true,
   },
 ];
@@ -74,8 +88,9 @@ export default function CustomDevService() {
           커스텀 개발이란?
         </h1>
         <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground break-keep">
-          정해진 템플릿을 고르는 것이 아니라, 업종의 업무 방식에 맞춰 화면 구성과 기능을 처음부터
-          설계하는 방식입니다. 홈페이지와 관리자 시스템, 데이터베이스까지 하나로 구축합니다.
+          정해진 템플릿이나 프리미엄 시안에서 출발하는 것이 아니라, 업종의 업무 방식에 맞춰 화면
+          구성과 기능을 처음부터 설계하는 방식입니다. 홈페이지와 관리자 시스템, 데이터베이스까지
+          하나로 구축합니다.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
@@ -233,12 +248,13 @@ export default function CustomDevService() {
           </Reveal>
           <Reveal delay={160} className="mt-8 flex flex-col gap-3 rounded-xl border border-border bg-card px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm font-medium text-foreground break-keep">
-              업종별 맞춤 구축은 <strong className="font-bold text-primary">300만 원부터</strong> 시작하며,
-              반응형 제작과 관리자 시스템이 기본으로 포함됩니다.
+              커스텀 개발은 필요한 기능과 데이터 규모에 따라 크게 달라져{" "}
+              <strong className="font-bold text-primary">시작가를 정해 두지 않고</strong> 상담 후 견적을
+              드립니다. 가격이 정해진 구성을 원하시면 프리미엄 라인(300만 원부터)이 맞습니다.
             </p>
             <Button asChild variant="outline" className="shrink-0 gap-1.5">
               <Link to="/web-solutions">
-                요금 자세히 보기
+                프리미엄 라인 보기
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </Button>

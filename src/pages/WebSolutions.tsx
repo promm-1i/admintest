@@ -18,7 +18,8 @@ type Tier = {
 
 /**
  * 맞춤형 구축비. 모든 구성이 반응형으로 제작되며, 구축비에 첫 해 호스팅료와
- * 셋팅비용, 도메인 1개(1년)가 모두 포함된다. 2년차부터 연 39만원(호스팅 36 + 도메인 3).
+ * 셋팅비용, 도메인 1개(1년)가 모두 포함된다. 2년차부터 연 27만원(호스팅 24 + 도메인 3).
+ * 호스팅료는 템플릿 라인과 같은 연 24만원이다 — 라인이 달라도 서버 사양은 같다.
  */
 const TIERS: Tier[] = [
   {
@@ -131,7 +132,7 @@ export default function WebSolutions() {
         </FadeIn>
       </div>
 
-      {/* 프리미엄 디자인 — 최근 제작한 디자인부터, 별도 가격 정책(200만 원부터) */}
+      {/* 프리미엄 디자인 — 최근 제작한 디자인부터, 별도 가격 정책(300만 원부터) */}
       <div className="mt-14 flex flex-wrap items-end justify-between gap-3">
         <FadeIn>
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
@@ -263,13 +264,13 @@ export default function WebSolutions() {
         <div className="h-full rounded-2xl border border-border bg-card p-6">
           <p className="mb-3 text-sm font-bold text-foreground">2년차부터 운영 비용</p>
           <p className="flex items-baseline gap-1.5">
-            <span className="text-2xl font-extrabold tracking-tight text-primary">연 39만 원</span>
+            <span className="text-2xl font-extrabold tracking-tight text-primary">연 27만 원</span>
             <span className="text-xs text-muted-foreground">부가세 별도</span>
           </p>
           <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-              <span>호스팅료 월 3만 원 (연 36만 원)</span>
+              <span>호스팅료 연 24만 원 (템플릿 라인과 동일)</span>
             </li>
             <li className="flex items-start gap-2">
               <Check className="mt-0.5 size-4 shrink-0 text-primary" />
