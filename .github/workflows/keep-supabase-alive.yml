@@ -18,3 +18,18 @@ jobs:
           curl -sS -o /dev/null -w "auth: %{http_code}\n" --fail "$B/auth/v1/health" -H "$H1"
         env:
           SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InplZG9vd2Vha3J0ZnhncnJ1d296Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYxNjM2MzYsImV4cCI6MjEwMTczOTYzNn0.UFfj5CfXcyPnw5Oak0G75MkEKwhgDpnebhx1I8tF_tQ"
+
+      # 24go (이사가요) — separate project, added after its own pause warning.
+      # No --fail here: this project's PostgREST role lacks table grants
+      # (Prisma connects directly to Postgres, bypassing PostgREST), so
+      # REST calls legitimately 401/403. That still hits the API gateway
+      # and counts as activity — we just don't want it failing the job.
+      - name: Ping Supabase — 24go project
+        run: |
+          B="https://slodhhwxyoqsxgejoqmq.supabase.co"
+          H1="apikey: ${SUPABASE_ANON_KEY_24GO}"; H2="Authorization: Bearer ${SUPABASE_ANON_KEY_24GO}"
+          curl -sS -o /dev/null -w "24go rest(Service): %{http_code}\n" "$B/rest/v1/Service?select=id&limit=1" -H "$H1" -H "$H2"
+          curl -sS -o /dev/null -w "24go rest(Estimate): %{http_code}\n" "$B/rest/v1/Estimate?select=id&limit=1" -H "$H1" -H "$H2"
+          curl -sS -o /dev/null -w "24go auth: %{http_code}\n" --fail "$B/auth/v1/health" -H "$H1"
+        env:
+          SUPABASE_ANON_KEY_24GO: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNsb2RoaHd4eW9xc3hnZWpvcW1xIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODYzMTMxNDQsImV4cCI6MjEwMTg4OTE0NH0.TspnPtNmcpC1a4T78q5KBkccwMmML57DnQVytExMcao"
