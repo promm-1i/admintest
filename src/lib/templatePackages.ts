@@ -50,7 +50,7 @@ export const TEMPLATE_PACKAGES: TemplatePackage[] = [
     label: "랜딩형",
     designCost: 20 * MAN,
     total: BASE_TOTAL + 20 * MAN,
-    desc: "스크롤 연출과 인터랙션이 들어간 전환 중심 구성",
+    desc: "완성된 랜딩 구성에 문구·사진만 바꿔 여는 방식",
   },
   {
     key: "landing-responsive",

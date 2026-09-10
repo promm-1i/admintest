@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { getPremiumCategories } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
+import { LineComparison } from "@/components/site/LineComparison";
 
 type Tier = {
   name: string;
@@ -21,9 +22,9 @@ type Tier = {
  */
 const TIERS: Tier[] = [
   {
-    name: "랜딩형",
+    name: "브랜드 페이지",
     setupFee: "300만 원",
-    tagline: "스크롤 연출과 인터랙션으로 상담까지 연결하는 구성",
+    tagline: "디자인과 사진까지 새로 만드는 브랜드 사이트 — 서브페이지 확장 가능",
     recommended: true,
   },
   {
@@ -94,20 +95,20 @@ export default function WebSolutions() {
         프리미엄 디자인 홈페이지 제작
       </h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        기본 템플릿보다 한 등급 위의 프리미엄 디자인을 기반으로, 문구 · 이미지 · 구성을 브랜드에 맞춰
-        완성하는 라인입니다. 반응형 제작과 관리자 시스템, 데이터베이스까지 모두 기본으로 포함되며,
-        정확한 기능 구성과 견적은 상담 후 확정됩니다.
+        완성된 템플릿을 고르는 것이 아니라, 프리미엄 등급 시안을 출발점으로 섹션 구성부터 브랜드에 맞춰
+        다시 잡는 라인입니다. 사진도 브랜드에 맞춰 새로 제작하고, 관리자는 사장님 사업 데이터에 맞춰
+        설계합니다. 정확한 기능 구성과 견적은 상담 후 확정됩니다.
       </p>
 
       {/* 템플릿형과의 차이 */}
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <FadeIn direction="left">
         <div className="h-full rounded-2xl border border-border bg-secondary/30 p-5">
-          <p className="text-xs font-bold text-muted-foreground">템플릿형</p>
-          <p className="mt-1.5 text-sm font-semibold text-foreground">완성된 디자인을 골라 빠르게</p>
+          <p className="text-xs font-bold text-muted-foreground">템플릿 라인</p>
+          <p className="mt-1.5 text-sm font-semibold text-foreground">완성된 화면을 고릅니다</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
-            이미 만들어 둔 디자인에 문구·이미지를 적용해 빠르고 합리적으로 시작합니다. 반응형은
-            선택해서 추가할 수 있습니다.
+            이미 만들어 둔 화면에 문구·사진만 바꿔 빠르고 합리적으로 시작합니다. 관리자 모드와
+            데이터베이스도 여기에 기본으로 들어갑니다. 반응형은 선택해서 추가합니다.
           </p>
           <Link
             to="/templates"
@@ -119,11 +120,11 @@ export default function WebSolutions() {
         </FadeIn>
         <FadeIn direction="right" delay={100}>
         <div className="h-full rounded-2xl border border-primary/40 bg-primary/[0.04] p-5">
-          <p className="text-xs font-bold text-primary">프리미엄 디자인</p>
-          <p className="mt-1.5 text-sm font-semibold text-foreground">한 등급 위의 디자인으로 완성도 있게</p>
+          <p className="text-xs font-bold text-primary">프리미엄 라인</p>
+          <p className="mt-1.5 text-sm font-semibold text-foreground">브랜드에 맞춰 짓습니다</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
-            프리미엄 등급 디자인을 기반으로 브랜드에 맞춰 완성합니다. 반응형 제작과 관리자 시스템,
-            데이터베이스, 직원 권한 관리까지 모두 기본으로 포함됩니다.
+            같은 기능 위에서, 섹션 구성과 브랜드 색·글꼴을 다시 잡고 사진을 새로 제작합니다. 반응형
+            제작과 조건 검색·직원별 권한, 유지보수 월 3회가 값에 포함됩니다.
           </p>
           <p className="mt-3 text-xs font-semibold text-primary">300만 원부터</p>
         </div>
@@ -282,7 +283,12 @@ export default function WebSolutions() {
         </FadeIn>
       </div>
 
-      <h3 className="mt-10 text-base font-semibold">프리미엄 라인에 모두 포함되는 기능</h3>
+      {/* 300만 원을 본 직후 "템플릿 114만과 뭐가 다른가"에 스스로 답하게 하는 자리 */}
+      <div className="mt-16">
+        <LineComparison />
+      </div>
+
+      <h3 className="mt-16 text-base font-semibold">프리미엄 라인에 모두 포함되는 기능</h3>
       <FadeIn>
       <ul className="mt-4 grid gap-2.5 rounded-2xl border border-border bg-card p-6 sm:grid-cols-2">
         {COMMON_FEATURES.map((f) => (
