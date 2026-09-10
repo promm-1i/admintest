@@ -66,11 +66,6 @@ const DIFF_ROWS: DiffRow[] = [
     premium: "포함",
   },
   {
-    label: "유지보수",
-    template: "건별 처리",
-    premium: "월 3회 포함",
-  },
-  {
     label: "제작 기간",
     template: "영업일 7일부터",
     premium: "3~4주 (상담 후 확정)",
@@ -167,6 +162,13 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
         올릴 내용이 계속 늘어나거나(매물 · 객실 · 시술 · 메뉴 · 작품), 손님이 조건으로 골라야 하거나,
         브랜드 사진부터 새로 만들어야 한다면 프리미엄 라인이 맞습니다. 그렇지 않다면 템플릿 라인으로
         시작하시는 편이 낫습니다.
+      </p>
+      <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
+        유지보수는 두 라인이 같습니다. 오픈 후 1개월은 무상이고, 이후에는 월 3만원 계약(간단 수정
+        월 3회)이나 건별 협의로 진행합니다.{" "}
+        <Link to="/website/maintenance" className="font-semibold text-primary hover:underline">
+          유지보수 안내 보기
+        </Link>
       </p>
 
       <div className="mt-7 flex flex-wrap gap-3">

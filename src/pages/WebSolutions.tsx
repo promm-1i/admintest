@@ -57,7 +57,7 @@ const COMMON_FEATURES = [
   "직원별 접근 권한 설정",
   "업종 맞춤 기능",
   "기본 SEO 세팅",
-  "간단 수정 지원 (월 3회)",
+  "오픈 후 1개월 무상 수정",
 ];
 
 /**
@@ -124,8 +124,8 @@ export default function WebSolutions() {
           <p className="text-xs font-bold text-primary">프리미엄 라인</p>
           <p className="mt-1.5 text-sm font-semibold text-foreground">브랜드에 맞춰 짓습니다</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
-            같은 기능 위에서, 섹션 구성과 브랜드 색·글꼴을 다시 잡고 사진을 새로 제작합니다. 반응형
-            제작과 조건 검색·직원별 권한, 유지보수 월 3회가 값에 포함됩니다.
+            같은 기능 위에서, 섹션 구성과 브랜드 색·글꼴을 다시 잡고 사진을 새로 제작합니다. 조건
+            검색과 직원별 권한, 예약 접수 관리가 값에 포함됩니다.
           </p>
           <p className="mt-3 text-xs font-semibold text-primary">300만 원부터</p>
         </div>
@@ -278,7 +278,8 @@ export default function WebSolutions() {
             </li>
           </ul>
           <p className="mt-3 text-xs leading-relaxed text-muted-foreground/80 break-keep">
-            문구 수정 등 간단한 요청은 월 3회까지 기본으로 지원합니다.
+            오픈 후 1개월은 무상 수정입니다. 이후 유지보수는 월 3만원 계약(간단 수정 월 3회) 또는
+            건별 협의로 진행하며, 위 금액과 별개입니다.
           </p>
         </div>
         </FadeIn>
