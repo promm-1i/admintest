@@ -1,0 +1,451 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>짓다스튜디오 문의 — 브랜드 디자인 스튜디오 (프리미엄 디자인 A)</title>
+<meta name="description" content="문의 페이지 — 초대형 제목과 연락 안내, 이름·이메일·메시지 폼, 여섯 문항 아코디언 FAQ.">
+<meta property="og:title" content="짓다스튜디오 문의 — 브랜드 디자인 스튜디오 (프리미엄 디자인 A)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭)
+   문서높이 홈 8666 · 소개 8507 · 작업 3435 · 문의 3256 · 작업상세 8920
+   바탕 rgb(20,20,20) · 글자 rgb(249,249,249) · 민트 rgb(180,207,203)
+   페이지 좌우 여백 30 → 컨테이너 1380 · 히어로 섹션 765~990
+   디스플레이 Anton 216(마퀴) · 156/148.2(메뉴) · 120/120(히어로) · 64/70.4 · 56/61.6 · 36/36 · 22/22
+   본문 Inter 24/36 · 18/27 600 · 16/19.2 · 14/14 500
+   사진 슬롯 1440×900(히어로) · 1380×855(작업) · 1380×898(상세)
+   푸터 흰 카드 rgb(249,249,249) r30 · padding 40 30 · 안쪽 1320 · 섹션 900
+   커서 30×30 원 border 2px rgb(180,207,203) · 프레임당 11% 추격(시간상수 ~150ms)
+   한글은 Anton 이 없어 검은고딕으로 대체하고 행간 1.0 → 1.15 로 푼다 ── */
+:root{--bg:rgb(20,20,20);--fg:rgb(249,249,249);--mint:rgb(180,207,203);
+  --line:rgba(249,249,249,.14);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);
+  font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;
+  font-size:18px;line-height:27px;font-weight:600;padding:0 30px}
+.ko{text-wrap:pretty}
+
+/* 디스플레이 — 라틴·숫자는 Anton, 한글은 검은고딕 */
+.an{font-family:Anton,"Black Han Sans",sans-serif;font-weight:400;text-transform:uppercase}
+.an.ko{font-family:"Black Han Sans","Pretendard Variable",sans-serif;letter-spacing:-.02em;text-transform:none}
+.d1{font-size:120px;line-height:120px}
+.d1.ko{line-height:138px}
+.d2{font-size:64px;line-height:70.4px}
+.d2.ko{line-height:78px}
+.d3{font-size:56px;line-height:61.6px}
+.d3.ko{line-height:68px}
+.d4{font-size:36px;line-height:36px}
+.d4.ko{line-height:44px}
+.d5{font-size:22px;line-height:22px}
+.d5.ko{line-height:30px}
+.p24{font-size:24px;line-height:36px;font-weight:400}
+.p18{font-size:18px;line-height:27px;font-weight:600}
+.p16{font-size:16px;line-height:19.2px;font-weight:400}
+.mint{color:var(--mint)}
+.wrap{max-width:1380px;margin:0 auto}
+
+.rv{opacity:0;transform:translateY(40px);
+  transition:opacity .8s var(--ease),transform .8s var(--ease)}
+html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{transition:none}}
+
+/* ── 커서 링 — 레퍼런스는 30×30 원에 민트 2px 테두리, 프레임마다 11% 씩 따라온다 ── */
+.ring{position:fixed;left:0;top:0;width:30px;height:30px;border-radius:50%;
+  border:2px solid var(--mint);pointer-events:none;z-index:13;opacity:0;
+  transition:opacity .3s var(--ease)}
+html.js .ring.on{opacity:1}
+@media (hover:none),(prefers-reduced-motion:reduce){.ring{display:none!important}}
+
+/* ── 내비 : 상단 고정 112 · 우측 햄버거 ── */
+.nav{position:fixed;left:0;right:0;top:0;height:112px;z-index:20;
+  display:flex;align-items:center;padding:50px 50px 0}
+.nav .lg{font-family:Anton,"Black Han Sans",sans-serif;font-size:22px;line-height:22px;
+  letter-spacing:.02em;text-transform:uppercase}
+.nav .lg.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.burger{margin-left:auto;width:60px;height:62px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;border-radius:50%;background:var(--fg)}
+.burger i{display:block;width:30px;height:2px;border-radius:10px;background:rgb(0,0,0);
+  transition:transform .3s var(--ease)}
+.burger:hover i:first-child{transform:translateX(-3px)}
+.burger:hover i:last-child{transform:translateX(3px)}
+
+/* 메뉴 오버레이 */
+.menu{position:fixed;inset:0;z-index:30;background:var(--bg);
+  padding:50px;display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;transition:opacity .4s var(--ease),visibility .4s}
+.menu.open{opacity:1;visibility:visible}
+.menu .close{position:absolute;right:50px;top:50px;width:60px;height:60px;border-radius:50%;
+  background:rgba(249,249,249,.14);display:flex;align-items:center;justify-content:center;
+  font-size:26px;line-height:1;transition:background .25s var(--ease)}
+.menu .close:hover{background:rgba(249,249,249,.26)}
+.menu nav{margin:auto 0;display:flex;flex-direction:column}
+.menu nav a{font-family:Anton,"Black Han Sans",sans-serif;font-weight:400;text-transform:uppercase;
+  font-size:156px;line-height:148.2px;transition:color .25s var(--ease)}
+.menu nav a.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;
+  font-size:120px;line-height:150px;letter-spacing:-.03em}
+.menu nav a:hover{color:var(--mint)}
+.menu .bot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  font-size:16px;line-height:19.2px;font-weight:600}
+.menu .bot div{display:flex;gap:26px}
+
+/* ── 히어로 ── */
+.hero{height:765px;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center}
+.hero.photo{height:900px;position:relative;margin:0 -30px;overflow:clip;justify-content:flex-end;padding-bottom:78px}
+.hero.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero.photo::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,20,20,.45) 0%,rgba(20,20,20,0) 30%,rgba(20,20,20,.92) 88%)}
+.hero.photo>*{position:relative;z-index:2}
+.hero .sub{margin-top:26px;max-width:800px}
+.hero .scroll{margin-top:36px;display:inline-flex;gap:8px;font-size:18px;line-height:27px;font-weight:600}
+
+/* ── 마퀴 ── */
+.mq{margin:60px -30px;overflow:clip}
+.mq .tr{display:flex;width:max-content;animation:mqmv 26s linear infinite}
+.mq .tr.rev{animation-direction:reverse}
+@keyframes mqmv{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.mq .tr{animation:none}}
+.mq span{font-family:Anton,"Black Han Sans",sans-serif;font-size:120px;line-height:216px;
+  text-transform:uppercase;white-space:nowrap;padding:0 26px}
+.mq span.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.mq i{align-self:center;width:14px;height:14px;border-radius:50%;background:var(--mint);flex:0 0 auto}
+
+/* ── 소개 블록 ── */
+.about{padding:60px 0 40px;text-align:center}
+.about .lab{font-family:Anton,"Black Han Sans",sans-serif;font-size:36px;line-height:36px;text-transform:uppercase}
+.about .lab.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.about h2{margin:34px auto 0;max-width:960px}
+.about .more{margin-top:40px;display:inline-flex;gap:8px;font-size:18px;line-height:27px;font-weight:600}
+.about .more:hover{color:var(--mint)}
+
+/* ── 작업 카드 ── */
+.works{padding:34px 0 60px;display:flex;flex-direction:column;gap:60px}
+.wcard{display:block}
+.wcard .meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.wcard .tag{height:34px;padding:0 16px;border-radius:40px;border:1px solid var(--line);
+  display:inline-flex;align-items:center;font-size:16px;line-height:19.2px;font-weight:400}
+.wcard .yr{margin-left:auto;font-size:16px;line-height:19.2px;font-weight:400;color:var(--mint)}
+.wcard figure{border-radius:15px;overflow:clip;background:rgb(32,32,32)}
+.wcard figure img{width:100%;height:855px;object-fit:cover;transition:transform .8s var(--ease)}
+.wcard:hover figure img{transform:scale(1.03)}
+.wcard h3{margin-top:26px}
+.wcard:hover h3{color:var(--mint)}
+
+/* 작업 목록(2열) */
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding-bottom:60px}
+.grid2 .wcard figure img{height:520px}
+
+/* ── 작업 상세 ── */
+.ov{padding:60px 0 0;display:grid;grid-template-columns:690px 1fr;gap:60px 168px}
+.ov h2{grid-column:1;grid-row:1}
+.ov .lead{grid-column:1;grid-row:2;margin-top:-14px}
+.ov .facts{grid-column:2;grid-row:1/3;display:grid;grid-template-columns:271px 221px;
+  gap:46px 60px;align-content:start}
+.ov .facts dt{font-family:Anton,"Black Han Sans",sans-serif;font-size:36px;line-height:36px;text-transform:uppercase}
+.ov .facts dt.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;font-size:26px;line-height:30px;letter-spacing:-.02em}
+.ov .facts dd{margin-top:10px;font-family:Anton,"Black Han Sans",sans-serif;font-size:22px;
+  line-height:22px;text-transform:uppercase;color:var(--mint)}
+.ov .facts dd.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;font-size:19px;line-height:26px;letter-spacing:-.02em}
+.ov .live{grid-column:2;margin-top:6px;display:inline-flex;gap:8px;align-self:start;
+  font-family:Anton,"Black Han Sans",sans-serif;font-size:22px;line-height:22px;text-transform:uppercase}
+.ov .live:hover{color:var(--mint)}
+.shot{margin:120px 0;border-radius:15px;overflow:clip;background:rgb(32,32,32)}
+.shot img{width:100%;height:898px;object-fit:cover}
+.shot.pair{display:grid;grid-template-columns:1fr 1fr;gap:20px;background:none;border-radius:0}
+.shot.pair>span{border-radius:15px;overflow:clip;background:rgb(32,32,32)}
+.shot.pair img{height:680px}
+.blk{padding:60px 0}
+.blk h2{margin-bottom:26px}
+.blk p{max-width:1000px}
+
+/* ── 다음 프로젝트 ── */
+.next{padding:80px 0 60px;text-align:center}
+.next h2{margin-bottom:40px}
+.next .grid2{padding-bottom:0;text-align:left}
+
+/* ── 소개 페이지 ── */
+.pitch{padding:70px 0 0;text-align:center;display:flex;flex-direction:column;gap:44px;align-items:center}
+.pitch p{max-width:760px}
+.skills{padding:40px 0}
+.skills li{border-top:1px solid var(--line);padding:52px 0;text-align:center;
+  transition:color .25s var(--ease)}
+.skills li:last-child{border-bottom:1px solid var(--line)}
+.skills li:hover{color:var(--mint)}
+.team{padding:80px 0 40px;text-align:center}
+.team p{margin:18px auto 0;max-width:620px}
+.team .grid{margin-top:46px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.team figure{border-radius:15px;overflow:clip;background:rgb(32,32,32)}
+.team figure img{width:100%;height:420px;object-fit:cover}
+.team figcaption{padding:18px 4px 0;text-align:left}
+.team figcaption span{display:block;margin-top:6px;font-size:16px;line-height:19.2px;
+  font-weight:400;color:var(--mint)}
+.awards{padding:60px 0 40px;text-align:center}
+.awards ul{margin-top:44px;display:flex;flex-direction:column}
+.awards li{border-top:1px solid var(--line);padding:30px 0;display:flex;
+  justify-content:space-between;gap:24px;text-align:left;align-items:baseline}
+.awards li:last-child{border-bottom:1px solid var(--line)}
+.awards .yr{color:var(--mint);font-size:18px;line-height:27px;font-weight:600;flex:0 0 auto}
+
+/* ── 문의 페이지 ── */
+.form{padding:70px 0 40px;max-width:1130px;margin:0 auto}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form input,.form textarea{width:100%;background:rgb(31,31,31);border-radius:7px;
+  padding:20px 22px;font-size:18px;line-height:27px;font-weight:400}
+.form input::placeholder,.form textarea::placeholder{color:rgba(249,249,249,.45)}
+.form input:focus,.form textarea:focus{outline:2px solid var(--mint);outline-offset:-2px}
+.form textarea{margin-top:12px;height:216px;resize:vertical}
+.form button{margin-top:12px;width:100%;background:rgb(31,31,31);border-radius:7px;
+  padding:18px;font-size:18px;line-height:27px;font-weight:600;
+  transition:background .25s var(--ease),color .25s var(--ease)}
+.form button:hover{background:var(--mint);color:rgb(20,20,20)}
+.faq{padding:80px 0 60px;text-align:center}
+.faq p{margin:14px auto 0;max-width:620px;color:var(--mint)}
+.faq .list{margin-top:44px;display:flex;flex-direction:column;gap:12px;text-align:left}
+.qa{background:rgb(31,31,31);border-radius:10px;overflow:clip}
+.qa .q{width:100%;min-height:44px;padding:24px 26px;display:flex;align-items:center;
+  justify-content:space-between;gap:20px;text-align:left;font-size:18px;line-height:27px;font-weight:600}
+.qa .q i{font-style:normal;font-size:24px;line-height:1;color:var(--mint);
+  transition:transform .35s var(--ease)}
+.qa.open .q i{transform:rotate(45deg)}
+.qa .a{display:grid;grid-template-rows:0fr;overflow:hidden;
+  transition:grid-template-rows .4s var(--ease)}
+.qa.open .a{grid-template-rows:1fr}
+.qa .a>div{min-height:0}
+.qa .a p{padding:0 26px 24px;margin:0;max-width:none;text-align:left;
+  font-size:18px;line-height:29px;font-weight:400;color:rgba(249,249,249,.7)}
+
+/* ── 푸터 ── */
+.ft{margin:0 -30px;padding:30px}
+.ft .card{background:var(--fg);color:rgb(0,0,0);border-radius:30px;padding:40px 30px;
+  min-height:840px;display:flex;flex-direction:column}
+.ft .top{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  font-size:18px;line-height:27px;font-weight:600}
+.ft .top .lg{font-family:Anton,"Black Han Sans",sans-serif;font-size:22px;line-height:27px;
+  text-transform:uppercase;letter-spacing:.02em}
+.ft .top .lg.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.ft .mid{margin:auto 0;text-align:center}
+.ft .mid .q{font-size:18px;line-height:27px;font-weight:600}
+.ft .mid h2{margin-top:18px;color:rgb(0,0,0)}
+.ft .mid .go{margin-top:40px;display:inline-flex;align-items:center;height:56px;padding:0 32px;
+  border-radius:150px;border:1px solid rgba(0,0,0,.35);font-size:18px;line-height:27px;font-weight:600;
+  transition:background .25s var(--ease),color .25s var(--ease)}
+.ft .mid .go:hover{background:rgb(20,20,20);color:var(--fg)}
+.ft .bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  font-size:18px;line-height:27px;font-weight:600}
+.ft .bot .sns{display:flex;gap:26px}
+.ft .legal{margin-top:22px;font-size:14px;line-height:22px;font-weight:400;color:rgba(0,0,0,.6)}
+
+/* ── 태블릿 ── */
+@media (max-width:1200px){
+  body{padding:0 20px}
+  .nav{padding:26px 26px 0;height:88px}
+  .menu{padding:26px}
+  .menu .close{right:26px;top:26px}
+  .menu nav a{font-size:84px;line-height:82px}
+  .menu nav a.ko{font-size:64px;line-height:80px}
+  .d1{font-size:64px;line-height:64px}
+  .d1.ko{line-height:76px}
+  .d2{font-size:44px;line-height:50px}
+  .d2.ko{line-height:56px}
+  .d3{font-size:38px;line-height:44px}
+  .d3.ko{line-height:50px}
+  .d4{font-size:28px;line-height:30px}
+  .d4.ko{line-height:38px}
+  .p24{font-size:19px;line-height:30px}
+  .hero{height:auto;padding:180px 0 80px}
+  .hero.photo{height:auto;min-height:560px;margin:0 -20px;padding:220px 0 56px}
+  .mq{margin:40px -20px}
+  .mq span{font-size:64px;line-height:120px}
+  .wcard figure img,.grid2 .wcard figure img{height:auto;aspect-ratio:1380/855}
+  .ov{grid-template-columns:1fr;gap:34px}
+  .ov h2,.ov .lead,.ov .facts,.ov .live{grid-column:1;grid-row:auto}
+  .ov .lead{margin-top:0}
+  .ov .facts{grid-template-columns:1fr 1fr;gap:30px}
+  .shot{margin:60px 0}
+  .shot img{height:auto;aspect-ratio:1380/898}
+  .shot.pair img{height:auto;aspect-ratio:4/3}
+  .team .grid{grid-template-columns:repeat(2,1fr)}
+  .team figure img{height:340px}
+  .ft{margin:0 -20px;padding:20px}
+  .ft .card{min-height:0;padding:32px 24px;gap:80px}
+}
+
+/* ── 모바일 ── */
+@media (max-width:809px){
+  body{padding:0 14px;font-size:16px;line-height:25px}
+  .nav{padding:18px 18px 0;height:72px}
+  .burger{width:48px;height:48px;gap:8px}
+  .burger i{width:22px}
+  .menu nav a{font-size:48px;line-height:50px}
+  .menu nav a.ko{font-size:38px;line-height:50px}
+  .menu .bot{flex-direction:column;gap:10px}
+  .menu .bot div{gap:16px;flex-wrap:wrap}
+  .d1{font-size:38px;line-height:40px}
+  .d1.ko{line-height:48px}
+  .d2{font-size:29px;line-height:34px}
+  .d2.ko{line-height:40px}
+  .d3{font-size:26px;line-height:31px}
+  .d3.ko{line-height:36px}
+  .d4{font-size:21px;line-height:24px}
+  .d4.ko{line-height:30px}
+  .d5{font-size:17px;line-height:20px}
+  .p24{font-size:16px;line-height:26px}
+  .hero{padding:130px 0 56px}
+  .hero.photo{margin:0 -14px;min-height:460px;padding:170px 0 40px}
+  .mq{margin:30px -14px}
+  .mq span{font-size:36px;line-height:70px;padding:0 14px}
+  .works{gap:40px}
+  .grid2{grid-template-columns:1fr;gap:28px}
+  .wcard figure img,.grid2 .wcard figure img{height:auto;aspect-ratio:1380/855}
+  .ov{padding-top:40px}
+  .ov .facts{grid-template-columns:1fr;gap:24px}
+  .shot{margin:40px 0}
+  .shot.pair{grid-template-columns:1fr}
+  .blk{padding:36px 0}
+  .skills li{padding:30px 0}
+  .team .grid{grid-template-columns:1fr}
+  .team figure img{height:300px}
+  .awards li{flex-direction:column;gap:6px}
+  .form .row{grid-template-columns:1fr}
+  .qa .q{padding:18px;font-size:16px;line-height:25px}
+  .qa .a p{padding:0 18px 18px;font-size:16px;line-height:26px}
+  .ft{margin:0 -14px;padding:14px}
+  .ft .card{padding:26px 20px;border-radius:20px;gap:56px}
+  .ft .top,.ft .bot{flex-direction:column;gap:10px}
+  .ft .bot .sns{gap:18px;flex-wrap:wrap}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="ring" aria-hidden="true"></div>
+
+<header class="nav">
+  <a class="lg ko" href="index.html">짓다스튜디오</a>
+  <button class="burger" type="button" aria-label="메뉴 열기" aria-expanded="false"><i></i><i></i></button>
+</header>
+
+<div class="menu" role="dialog" aria-modal="true" aria-label="메뉴">
+  <button class="close" type="button" aria-label="메뉴 닫기">✕</button>
+  <nav>
+    <a class="ko" href="index.html">홈</a>
+    <a class="ko" href="about.html">소개</a>
+    <a class="ko" href="works.html">작업</a>
+    <a class="ko" href="contact.html">문의</a>
+  </nav>
+  <div class="bot">
+    <span>6gsmake@gmail.com</span>
+    <div><span>인스타그램</span><span>비핸스</span><span>노트폴리오</span></div>
+  </div>
+</div>
+
+<section class="hero">
+  <h1 class="an ko d1">같이<br>만들어 봅시다</h1>
+  <p class="p24 ko sub">아래 폼으로 보내 주시면 하루 안에 답을 드립니다.<br>메일이 편하시면 <strong>6gsmake@gmail.com</strong> 으로 보내 주세요.</p>
+</section>
+
+<main class="wrap">
+  <section class="form" id="form">
+    <form>
+      <div class="row">
+        <input class="ko" type="text" name="name" placeholder="성함" autocomplete="name">
+        <input type="email" name="email" placeholder="name@gmail.com" autocomplete="email">
+      </div>
+      <textarea class="ko" name="message" placeholder="어떤 프로젝트인지 편하게 적어 주세요"></textarea>
+      <button class="ko" type="button">보내기</button>
+    </form>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2 class="an ko d2">자주 묻는 질문</h2>
+    <p class="p18 ko">문의 전에 가장 많이 물어보시는 것들입니다.</p>
+    <div class="list">
+      <div class="qa">
+        <button class="q ko" type="button">프로젝트는 어떻게 시작하나요?<i>+</i></button>
+        <div class="a"><div><p class="ko">아래 폼이나 전화로 연락 주시면 됩니다. 먼저 삼십 분 정도 통화하면서 무엇을 만들고 싶으신지 듣고, 범위와 일정을 정리해 제안서를 보내 드립니다.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q ko" type="button">비용은 얼마나 드나요?<i>+</i></button>
+        <div class="a"><div><p class="ko">범위에 따라 다릅니다. 로고와 기본 가이드만 하는 브랜딩은 삼백만 원부터, 홈페이지까지 함께 하면 육백만 원부터 봅니다. 상담 때 정확한 금액을 드립니다.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q ko" type="button">기간은 보통 얼마나 걸리나요?<i>+</i></button>
+        <div class="a"><div><p class="ko">브랜딩만 사 주, 웹까지 포함하면 팔 주에서 십이 주 정도입니다. 자료 전달과 검수 속도에 따라 달라집니다.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q ko" type="button">다른 곳과 뭐가 다른가요?<i>+</i></button>
+        <div class="a"><div><p class="ko">디자인을 넘기고 끝내지 않습니다. 개발까지 같은 팀이 해서, 화면에서 무너지는 디자인을 만들지 않습니다.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q ko" type="button">작은 규모도 맡아 주시나요?<i>+</i></button>
+        <div class="a"><div><p class="ko">네. 동네 가게 로고 하나도 합니다. 다만 일정이 밀려 있을 수 있어서 먼저 문의 주시면 언제 시작할 수 있는지 알려 드립니다.</p></div></div>
+      </div>
+      <div class="qa">
+        <button class="q ko" type="button">상담은 무료인가요?<i>+</i></button>
+        <div class="a"><div><p class="ko">네. 첫 상담과 제안서까지는 비용이 없습니다. 진행하지 않으셔도 괜찮습니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="card">
+    <div class="top">
+      <span class="ko">브랜드 디자인 스튜디오</span>
+      <span class="lg ko">짓다스튜디오</span>
+      <span class="ko">서울에서 일합니다</span>
+    </div>
+    <div class="mid">
+      <p class="q ko">함께할 프로젝트가 있으신가요?</p>
+      <h2 class="an ko d2">같이 만들어 봅시다</h2>
+      <a class="go ko" href="contact.html">문의하기</a>
+    </div>
+    <div>
+      <div class="bot">
+        <a href="tel:01048944905">010-4894-4905</a>
+        <div class="sns"><span>인스타그램</span><span>비핸스</span><span>노트폴리오</span><span>브런치</span></div>
+        <span>© 2026 짓다스튜디오</span>
+      </div>
+      <p class="legal ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 6gsmake@gmail.com</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+const menu=document.querySelector('.menu'),burger=document.querySelector('.burger');
+const setMenu=v=>{menu.classList.toggle('open',v);burger.setAttribute('aria-expanded',v);
+  document.body.style.overflow=v?'hidden':''};
+burger.addEventListener('click',()=>setMenu(true));
+document.querySelector('.menu .close').addEventListener('click',()=>setMenu(false));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')setMenu(false)});
+document.querySelectorAll('.qa .q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+// 커서 링 — 레퍼런스는 프레임마다 11% 씩 좁혀 따라온다 (시간상수 ~150ms)
+const ring=document.querySelector('.ring');
+if(ring&&matchMedia('(hover:hover)').matches&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  let tx=0,ty=0,x=0,y=0,seen=false;
+  addEventListener('pointermove',e=>{tx=e.clientX-15;ty=e.clientY-15;
+    if(!seen){seen=true;x=tx;y=ty;ring.classList.add('on')}},{passive:true});
+  (function tick(){x+=(tx-x)*.11;y+=(ty-y)*.11;
+    ring.style.transform='translate('+x.toFixed(1)+'px,'+y.toFixed(1)+'px)';
+    requestAnimationFrame(tick)})();
+}
+</script>
+</body>
+</html>

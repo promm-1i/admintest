@@ -60,6 +60,23 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "restaurant-g-template",
+    industry: "카페 · 로스터리 홈페이지",
+    title: "카페 · 로스터리 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 카페 · 메뉴판 · 소식",
+    purpose:
+      "크림 바탕에 평점 알약과 58px 대형 제목이 놓이는 히어로에서 시작해, 다섯 장이 겹쳐 돌아가는 사진 캐러셀, 메뉴 목록과 사진이 좌우로 번갈아 놓이는 네 블록, 커피 이야기 카드 3종, 매장 소개와 크림 푸터까지 갖춘 카페 프리미엄 템플릿입니다. 홈 · 소식 목록 · 소식 상세 세 페이지로 구성했습니다.",
+    features: ["평점 알약 · 58px 대형 제목 히어로", "다섯 장 겹치는 사진 캐러셀", "메뉴 목록 ↔ 사진 교차 네 블록", "소식 목록과 상세 페이지 포함"],
+    idealFor: "카페, 로스터리, 디저트 카페, 브런치 가게, 베이커리 카페",
+    image: "/thumbs/restaurant-g.jpg",
+    liveUrl: "/templates/restaurant-g/",
+    industryKey: "restaurant",
+    premiumLabel: "카페 (크림 메뉴판)",
+    designCode: "RESP-1003",
+    premium: true,
+  },
+  {
     slug: "agency-a-template",
     industry: "디자인 에이전시 · 브랜딩 스튜디오 홈페이지",
     title: "디자인 에이전시 · 브랜딩 스튜디오 홈페이지 (프리미엄 디자인 A)",
@@ -89,6 +106,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/restaurant-a/",
     industryKey: "restaurant",
     designCode: "RESP-1001",
+    premiumLabel: "카페 (컬러 팝)",
     premium: true,
   },
   {
@@ -153,6 +171,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/restaurant-f/",
     industryKey: "restaurant",
     designCode: "RESP-1002",
+    premiumLabel: "한식 코스 · 파인다이닝",
     premium: true,
   },
   {
