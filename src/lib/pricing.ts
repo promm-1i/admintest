@@ -69,14 +69,6 @@ export const PRODUCT_TYPES: ProductType[] = [
   },
 ];
 
-export const BENEFITS = [
-  "모바일 반응형",
-  "카카오톡 / 전화 / 지도 연결",
-  "Netlify 배포",
-  "기본 SEO 세팅",
-  "유지보수 가능",
-];
-
 export const PROBLEM_POINTS = [
   {
     title: "첫인상",

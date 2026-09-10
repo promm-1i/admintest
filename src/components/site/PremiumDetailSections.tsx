@@ -104,7 +104,8 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
           </p>
           <h2 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">이 디자인에 담긴 화면들</h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-            실제 배포된 화면을 그대로 잘라왔습니다. 문구 · 사진 · 가격만 바꾸면 이 구성이 그대로 사장님 홈페이지가 됩니다.
+            실제 배포된 화면을 그대로 잘라왔습니다. 이 화면이 출발점이고, 여기서 섹션 순서와 브랜드
+            색 · 글꼴을 사장님 사업에 맞춰 다시 잡은 뒤 사진을 새로 만들어 채웁니다.
           </p>
           <div className="mt-6 grid gap-5 sm:grid-cols-2">
             {shots.map((shot, i) => (
