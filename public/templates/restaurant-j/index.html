@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>말차랩 — 말차 바 (프리미엄 디자인 H)</title>
+<meta name="description" content="사진 히어로 위에 핑크 초대형 로고가 얹히고, 초록·핑크·크림 밴드가 번갈아 이어지는 말차 바 프리미엄 템플릿. 초대형 글자 뒤로 음료가 겹치는 스페셜 섹션, 곡선을 따라 흐르는 문장, 굿즈 블록과 커뮤니티 카드까지 세 페이지 구성.">
+<meta property="og:title" content="말차랩 — 말차 바 (프리미엄 디자인 H)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 16733)
+   진초록 rgb(3,86,62) · 핑크 rgb(255,186,216) · 크림 rgb(254,250,231) · 흰 rgb(255,255,255)
+   디스플레이 Anton 320/384(초대형) · 80/80 · 72/76 · 50/54(Anton SC) · 32/32 · 24/28 · 18/20
+   한글은 Anton 이 없어 검은고딕으로 대체하고 행간을 1.0 → 1.2 로 푼다
+   섹션: 사진 히어로 → 핑크 문단 밴드 → 초록 스페셜(초대형 글자 뒤 음료) →
+        크림 메뉴 → 초록 곡선 텍스트 → 초록 굿즈 → 크림 커뮤니티 → 푸터 ── */
+:root{--green:rgb(3,86,62);--pink:rgb(255,186,216);--cream:rgb(254,250,231);
+  --w:rgb(255,255,255);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--green);
+  font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;
+  font-size:16px;line-height:24px;font-weight:600}
+.ko{text-wrap:pretty}
+.an{font-family:Anton,"Black Han Sans",sans-serif;font-weight:400;text-transform:uppercase}
+.an.ko{font-family:"Black Han Sans","Pretendard Variable",sans-serif;
+  text-transform:none;letter-spacing:-.02em}
+.dxl{font-size:200px;line-height:200px}
+.dxl.ko{line-height:232px}
+.d1{font-size:80px;line-height:80px}
+.d1.ko{line-height:96px}
+.d2{font-size:50px;line-height:54px}
+.d2.ko{line-height:66px}
+.d3{font-size:32px;line-height:32px}
+.d3.ko{line-height:44px}
+.d4{font-size:24px;line-height:28px}
+.d4.ko{line-height:36px}
+.lab{font-size:18px;line-height:20px}
+.p16{font-size:16px;line-height:26px;font-weight:600}
+.wrap{max-width:1360px;margin:0 auto;padding:0 40px}
+
+.rv{opacity:0;transform:translateY(30px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{transition:none}}
+
+.pill{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 22px;
+  border-radius:100px;background:var(--green);color:var(--pink);
+  font-size:15px;font-weight:700;transition:opacity .25s var(--ease)}
+.pill:hover{opacity:.86}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--pink)}
+.pill-o{background:transparent;color:var(--pink);box-shadow:inset 0 0 0 2px var(--pink)}
+.pill-o:hover{background:var(--pink);color:var(--green);opacity:1}
+
+/* ── 히어로 ── */
+.hero{position:relative;height:880px;overflow:clip;background:var(--green);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.hero>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:rgba(3,86,62,.18)}
+.hero .tx{position:relative;z-index:3}
+.hero h1{color:var(--pink);text-shadow:0 4px 26px rgba(0,0,0,.24)}
+.hero .say{margin-top:8px;color:var(--w);font-family:Anton,"Black Han Sans",sans-serif;
+  font-size:34px;line-height:42px;text-transform:uppercase;text-shadow:0 2px 16px rgba(0,0,0,.34)}
+.hero .say.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.hero .order{position:absolute;left:50%;top:26px;transform:translateX(-50%);z-index:4}
+.hero .strip{position:absolute;left:0;right:0;bottom:36px;z-index:4;
+  display:flex;justify-content:center;gap:10px;padding:0 20px;overflow:hidden}
+.hero .strip figure{width:74px;height:74px;border-radius:10px;overflow:clip;
+  background:var(--cream);flex:0 0 auto}
+.hero .strip img{width:100%;height:100%;object-fit:cover}
+.hero .clock{position:absolute;left:26px;bottom:14px;z-index:4;color:var(--w);
+  font-size:12px;font-weight:700;letter-spacing:.6px}
+
+/* ── 핑크 문단 밴드 ── */
+.shout{background:var(--pink);padding:96px 0}
+.shout p{max-width:1080px;margin:0 auto;text-align:center;
+  font-family:Anton,"Black Han Sans",sans-serif;font-size:44px;line-height:56px;
+  text-transform:uppercase;color:var(--green)}
+.shout p.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;
+  letter-spacing:-.02em;line-height:66px}
+
+/* ── 스페셜 ── */
+.spec{background:var(--green);padding:90px 0 70px;overflow:clip}
+.spec .stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:420px}
+.spec .word{color:var(--pink);white-space:nowrap;position:relative;z-index:1}
+.spec figure{position:absolute;z-index:2}
+.spec figure img{width:100%;height:auto}
+.spec .f1{left:0;top:22%;width:200px}
+.spec .f2{left:50%;top:-8%;transform:translateX(-50%);width:290px;z-index:3}
+.spec .f3{right:0;top:22%;width:200px}
+.spec .cap{position:absolute;z-index:4;color:var(--w);font-family:Anton,"Black Han Sans",sans-serif;
+  font-size:16px;line-height:20px;text-transform:uppercase;text-align:center}
+.spec .cap.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.spec .p1{left:2%;bottom:6%;transform:rotate(-12deg)}
+.spec .p2{left:50%;bottom:-4%;transform:translateX(-50%)}
+.spec .p3{right:2%;bottom:6%;transform:rotate(12deg)}
+
+/* ── 메뉴 ── */
+.menu{background:var(--cream);padding:80px 0}
+.menu .in{display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center}
+.menu li{display:flex;justify-content:space-between;gap:24px;align-items:baseline;padding:10px 0}
+.menu .nm{font-family:Anton,"Black Han Sans",sans-serif;font-size:32px;line-height:40px;
+  text-transform:uppercase;color:var(--pink)}
+.menu .nm.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.menu .pr{font-size:14px;font-weight:700;color:var(--pink);flex:0 0 auto}
+.menu figure{border-radius:16px;overflow:clip;background:var(--pink)}
+.menu figure img{width:100%;height:470px;object-fit:cover}
+
+/* ── 곡선 텍스트 ── */
+.curve{background:var(--green);position:relative;overflow:clip;padding:0}
+.curve svg{width:100%;height:420px;display:block}
+.curve text{font-family:Anton,"Black Han Sans",sans-serif;font-size:30px;
+  text-transform:uppercase;fill:var(--pink)}
+.curve text.ko{font-family:"Black Han Sans",sans-serif;text-transform:none}
+.curve figure{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:230px;z-index:2;border-radius:14px;overflow:clip}
+.curve figure img{width:100%;height:auto}
+
+/* ── 굿즈 ── */
+.goods{background:var(--green);padding:20px 0 90px;text-align:center}
+.goods figure{width:340px;margin:0 auto}
+.goods figure img{width:100%;height:auto}
+.goods h2{margin-top:22px;color:var(--pink)}
+.goods p{margin:12px auto 0;max-width:620px;color:var(--w)}
+.goods .go{margin-top:22px}
+
+/* ── 커뮤니티 ── */
+.comm{background:var(--cream);padding:80px 0}
+.comm .lab{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:22px}
+.comm .lab i{width:10px;height:10px;border-radius:50%;background:var(--pink)}
+.comm h2{text-align:center;max-width:1000px;margin:0 auto}
+.comm .grid{margin-top:50px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.ccard{border-radius:16px;overflow:clip;background:var(--pink)}
+.ccard .tag{padding:10px 16px;font-size:13px;font-weight:700;color:var(--green)}
+.ccard figure{background:var(--green)}
+.ccard figure img{width:100%;height:300px;object-fit:cover}
+.ccard .bd{padding:18px 18px 22px;background:var(--cream)}
+.ccard h3{font-family:"Black Han Sans",sans-serif;font-size:22px;line-height:30px;letter-spacing:-.02em}
+.ccard p{margin-top:8px;font-size:15px;line-height:24px}
+
+/* ── 기사 목록·상세 ── */
+.phead{padding:70px 0 34px;text-align:center}
+.phead p{margin-top:14px;max-width:620px;margin-left:auto;margin-right:auto}
+.plist{padding:0 0 70px}
+.plist .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.article{padding:20px 0 70px;max-width:820px;margin:0 auto}
+.article figure{border-radius:16px;overflow:clip;background:var(--pink);margin-bottom:32px}
+.article figure img{width:100%;height:440px;object-fit:cover}
+.article .dt{margin-bottom:26px;font-size:14px;font-weight:700}
+.article h2{margin:32px 0 10px}
+.article p{margin-top:12px;font-size:16px;line-height:28px;font-weight:400}
+.article .back{margin-top:40px;display:inline-flex}
+
+/* ── 푸터 ── */
+.ft{background:var(--green);color:var(--pink);padding:60px 0 24px}
+.ft .in{max-width:1360px;margin:0 auto;padding:0 40px;display:grid;
+  grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
+.ft .lg{font-family:"Black Han Sans",sans-serif;font-size:38px;line-height:46px;letter-spacing:-.02em}
+.ft .in>div>p{margin-top:10px;max-width:300px;color:var(--w);font-weight:400}
+.ft h6{font-size:14px;font-weight:700;margin-bottom:8px}
+.ft a,.ft .l{display:block;font-size:14px;line-height:24px;min-height:32px;
+  color:var(--w);font-weight:400}
+.ft a:hover{color:var(--pink)}
+.ft .cp{max-width:1360px;margin:40px auto 0;padding:18px 40px 0;
+  border-top:1px solid rgba(255,186,216,.35);display:flex;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;font-size:12px;line-height:20px;font-weight:400;color:var(--w)}
+
+/* ── 태블릿 ── */
+@media (max-width:1100px){
+  .wrap,.ft .in,.ft .cp{padding-left:24px;padding-right:24px}
+  .dxl{font-size:110px;line-height:112px}
+  .dxl.ko{line-height:128px}
+  .d1{font-size:50px;line-height:54px}
+  .d1.ko{line-height:64px}
+  .d2{font-size:34px;line-height:40px}
+  .d2.ko{line-height:48px}
+  .hero{height:620px}
+  .hero .say{font-size:22px;line-height:30px}
+  .shout{padding:64px 0}
+  .shout p{font-size:28px;line-height:38px}
+  .shout p.ko{line-height:44px}
+  .spec .stage{min-height:300px}
+  .spec .f1,.spec .f3{width:130px}
+  .spec .f2{width:190px}
+  .menu .in{grid-template-columns:1fr;gap:30px}
+  .menu figure img{height:320px}
+  .curve svg{height:300px}
+  .curve figure{width:150px}
+  .comm .grid{grid-template-columns:repeat(2,1fr)}
+  .plist .grid{grid-template-columns:repeat(2,1fr)}
+  .ft .in{grid-template-columns:1fr 1fr}
+}
+
+/* ── 모바일 ── */
+@media (max-width:809px){
+  .wrap,.ft .in,.ft .cp{padding-left:16px;padding-right:16px}
+  .dxl{font-size:58px;line-height:60px}
+  .dxl.ko{line-height:70px}
+  .d1{font-size:34px;line-height:38px}
+  .d1.ko{line-height:46px}
+  .d2{font-size:26px;line-height:32px}
+  .d2.ko{line-height:38px}
+  .d3,.d3.ko{font-size:22px;line-height:30px}
+  .hero{height:520px}
+  .hero .say{font-size:17px;line-height:24px}
+  .hero .strip figure{width:52px;height:52px}
+  .shout{padding:44px 0}
+  .shout p{font-size:21px;line-height:30px}
+  .shout p.ko{line-height:34px}
+  .spec{padding:56px 0 44px}
+  .spec .stage{min-height:210px}
+  .spec .f1,.spec .f3{width:80px}
+  .spec .f2{width:120px}
+  .spec .cap{font-size:11px;line-height:15px}
+  .menu figure img{height:230px}
+  .menu .nm{font-size:22px;line-height:30px}
+  .curve svg{height:190px}
+  .curve text{font-size:18px}
+  .curve figure{width:96px}
+  .goods figure{width:200px}
+  .comm .grid,.plist .grid{grid-template-columns:1fr}
+  .article figure img{height:230px}
+  .ft .in{grid-template-columns:1fr}
+  .ft .cp{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body id="top">
+
+<main>
+<section class="hero">
+  <img class="bg" src="./assets/hero.jpg" alt="" width="1440" height="880">
+  <a class="pill order ko" href="#menu"><i></i>지금 주문 가능</a>
+  <div class="tx">
+    <h1 class="an ko dxl">말차랩</h1>
+    <p class="say ko">평범한 하루를 조금 특별하게,<br>말차 한 잔으로.</p>
+  </div>
+  <div class="strip" aria-hidden="true">
+      <figure><img src="./assets/t-1.jpg" alt="" width="74" height="74" loading="lazy"></figure>
+      <figure><img src="./assets/t-2.jpg" alt="" width="74" height="74" loading="lazy"></figure>
+      <figure><img src="./assets/t-3.jpg" alt="" width="74" height="74" loading="lazy"></figure>
+      <figure><img src="./assets/t-4.jpg" alt="" width="74" height="74" loading="lazy"></figure>
+      <figure><img src="./assets/t-5.jpg" alt="" width="74" height="74" loading="lazy"></figure>
+      <figure><img src="./assets/t-6.jpg" alt="" width="74" height="74" loading="lazy"></figure>
+      <figure><img src="./assets/t-7.jpg" alt="" width="74" height="74" loading="lazy"></figure>
+      <figure><img src="./assets/t-8.jpg" alt="" width="74" height="74" loading="lazy"></figure>
+
+  </div>
+  <span class="clock ko">서울 · 11:00 – 21:00</span>
+</section>
+
+<section class="shout">
+  <p class="ko rv">말차를 만듭니다. 그다음에 생기는 친구, 딴짓, 즉흥적인 계획, 엉뚱한 아이디어는 전부 각자 책임입니다.</p>
+</section>
+
+<section class="spec">
+  <div class="wrap">
+    <div class="stage">
+      <h2 class="an ko word dxl">스페셜</h2>
+    <figure class="f1"><img src="./assets/s-1.png" alt="" width="290" height="380" loading="lazy"></figure>
+    <figure class="f2"><img src="./assets/s-2.png" alt="" width="290" height="380" loading="lazy"></figure>
+    <figure class="f3"><img src="./assets/s-3.png" alt="" width="290" height="380" loading="lazy"></figure>
+    <span class="cap ko p1">쫀득 모찌 말차</span>
+    <span class="cap ko p2">말차 선데이</span>
+    <span class="cap ko p3">코코넛 말차</span>
+    </div>
+  </div>
+</section>
+
+<section class="menu" id="menu">
+  <div class="wrap in">
+    <ul>
+      <li><span class="nm ko">의식용 말차 라떼</span><span class="pr">6,000원</span></li>
+      <li><span class="nm ko">아이스 말차 라떼</span><span class="pr">6,500원</span></li>
+      <li><span class="nm ko">더티 말차</span><span class="pr">7,000원</span></li>
+      <li><span class="nm ko">바닐라 말차 라떼</span><span class="pr">7,000원</span></li>
+      <li><span class="nm ko">호지차 크림 라떼</span><span class="pr">7,500원</span></li>
+      <li><span class="nm ko">딸기 말차 라떼</span><span class="pr">8,000원</span></li>
+      <li><span class="nm ko">흑임자 말차 로얄</span><span class="pr">7,500원</span></li>
+    </ul>
+    <figure class="rv"><img src="./assets/menu.jpg" alt="" width="380" height="470" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="curve" aria-hidden="true">
+  <svg viewBox="0 0 1440 420" role="presentation">
+    <defs>
+      <path id="cv1" d="M-40,120 C240,-20 480,260 720,120 C960,-20 1200,260 1480,120"/>
+      <path id="cv2" d="M-40,300 C240,160 480,440 720,300 C960,160 1200,440 1480,300"/>
+    </defs>
+    <text class="ko"><textPath href="#cv1">좋은 계획은 말차 한 잔에서 시작합니다 · 좋은 계획은 말차 한 잔에서 시작합니다</textPath></text>
+    <text class="ko"><textPath href="#cv2">좋은 계획은 말차 한 잔에서 시작합니다 · 좋은 계획은 말차 한 잔에서 시작합니다</textPath></text>
+  </svg>
+  <figure><img src="./assets/curve.jpg" alt="" width="230" height="290" loading="lazy"></figure>
+</section>
+
+<section class="goods">
+  <div class="wrap">
+    <figure class="rv"><img src="./assets/goods.png" alt="" width="340" height="330" loading="lazy"></figure>
+    <h2 class="an ko d2">매일 입는 그 티셔츠</h2>
+    <p class="p16 ko">두툼한 면에 넉넉한 핏. 그림은 저희가 직접 그렸습니다. 아무 옷에나 걸쳐도 어울립니다.</p>
+    <div class="go"><a class="pill pill-o ko" href="#comm">32,000원 · 사러 가기</a></div>
+  </div>
+</section>
+
+<section class="comm" id="comm">
+  <div class="wrap">
+    <p class="lab ko"><i></i>모임</p>
+    <h2 class="an ko d1">에너지 넘치는 말차 바입니다.<br>마실 것과 딴짓거리를 같이 팝니다.</h2>
+    <div class="grid">
+    <article class="ccard rv"><p class="tag ko">예정된 행사</p>
+      <figure><img src="./assets/c-1.jpg" alt="" width="420" height="300" loading="lazy"></figure>
+      <div class="bd"><h3 class="ko">말차 시음의 밤</h3><p class="ko">그 주에 들어온 말차 넷을 나란히 놓고 맛봅니다.</p></div>
+    </article>
+    <article class="ccard rv"><p class="tag ko">클래스</p>
+      <figure><img src="./assets/c-2.jpg" alt="" width="420" height="300" loading="lazy"></figure>
+      <div class="bd"><h3 class="ko">거품 내는 법 배우기</h3><p class="ko">차선 잡는 법부터 한 시간 반. 여덟 자리뿐입니다.</p></div>
+    </article>
+    <article class="ccard rv"><p class="tag ko">모임</p>
+      <figure><img src="./assets/c-3.jpg" alt="" width="420" height="300" loading="lazy"></figure>
+      <div class="bd"><h3 class="ko">일요일 아침 러닝</h3><p class="ko">오 킬로미터 뛰고 돌아와 말차 한 잔.</p></div>
+    </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ft">
+  <div class="in">
+    <div>
+      <span class="lg ko">말차랩</span>
+      <p class="ko">돌로 간 말차만 씁니다. 하루에 낼 수 있는 만큼만 냅니다.</p>
+    </div>
+    <div><h6 class="ko">둘러보기</h6>
+      <a class="ko" href="index.html#menu">메뉴</a><a class="ko" href="articles.html">이야기</a>
+      <a class="ko" href="index.html#comm">모임</a></div>
+    <div><h6 class="ko">연락</h6>
+      <a href="tel:01048944905">010-4894-4905</a><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></div>
+    <div><h6 class="ko">오시는 길</h6>
+      <span class="l ko">서울 강남구 말차로 12</span><span class="l ko">매일 11:00 – 21:00</span></div>
+  </div>
+  <div class="cp">
+    <span class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</span>
+    <span class="ko">© 2026 말차랩</span>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>자리 예약 — 온결커피 (프리미엄 디자인 F)</title>
+<meta name="description" content="온결커피 자리 예약 페이지 — 날짜·시간·인원 폼과 안내.">
+<meta property="og:title" content="자리 예약 — 온결커피 (프리미엄 디자인 F)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 14635)
+   페이지 rgb(255,249,242) · 밝은 면 rgb(248,247,245) · 크림 면 rgb(250,242,233)
+   히어로 제목 rgb(51,22,0) · 섹션 제목 rgb(10,92,53) · 본문 rgb(56,56,56) · 잉크 rgb(21,13,7)
+   실선 rgba(163,136,96,.4)
+   h1 Alan Sans 68/81.6 600 ls-2.72 · h2 48/57.6 600 ls-.96 · 사진 제목 32/41.6 400
+   부제 24/31.2 400 ls-.48 · 20/26 400 ls-.4 · 본문 16/22.4 400 · 굵은본문 16/22.4 600
+   히어로 1191 · 하이라이트 사진 카드 720 씩 4장 ── */
+:root{--bg:rgb(255,249,242);--face:rgb(248,247,245);--cream:rgb(250,242,233);
+  --brown:rgb(51,22,0);--green:rgb(10,92,53);--gray:rgb(56,56,56);--ink:rgb(21,13,7);
+  --line:rgba(163,136,96,.4);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--gray);
+  font-family:"Alan Sans","Pretendard Variable",Pretendard,sans-serif;
+  font-size:16px;line-height:22.4px;font-weight:400}
+.ko{text-wrap:pretty}
+.d1{font-size:68px;line-height:81.6px;font-weight:600;letter-spacing:-2.72px;color:var(--brown)}
+.d1.ko{letter-spacing:-.03em;line-height:92px}
+.d2{font-size:48px;line-height:57.6px;font-weight:600;letter-spacing:-.96px;color:var(--green)}
+.d2.ko{letter-spacing:-.03em;line-height:68px}
+.d3{font-size:32px;line-height:41.6px;font-weight:400;letter-spacing:-.64px;color:var(--brown)}
+.d3.ko{letter-spacing:-.02em;line-height:46px}
+.d4{font-size:24px;line-height:31.2px;font-weight:400;letter-spacing:-.48px;color:var(--brown)}
+.d4.ko{line-height:36px}
+.lab{font-size:16px;line-height:22.4px;font-weight:400;color:var(--gray)}
+.p20{font-size:20px;line-height:26px;letter-spacing:-.4px}
+.p16{font-size:16px;line-height:22.4px}
+.p16b{font-size:16px;line-height:22.4px;font-weight:600;color:var(--ink)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{transition:none}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;
+  padding:0 22px;border-radius:100px;background:var(--ink);color:#fff;
+  font-size:15px;line-height:15px;font-weight:600;transition:opacity .25s var(--ease)}
+.btn:hover{opacity:.86}
+.btn-o{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn-o:hover{background:var(--cream);opacity:1}
+
+/* ── 상단 ── */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);padding:14px 0}
+.top .in{max-width:1360px;margin:0 auto;padding:0 26px;display:flex;align-items:center;
+  justify-content:space-between;gap:18px}
+.top .lg{height:34px;padding:0 16px;border-radius:100px;background:var(--cream);
+  display:inline-flex;align-items:center;font-size:16px;font-weight:600;color:var(--brown)}
+.top nav{display:flex;gap:6px}
+.top nav a{min-height:44px;padding:0 14px;display:inline-flex;align-items:center;
+  border-radius:100px;font-size:15px;font-weight:600;color:var(--ink);
+  transition:background .25s var(--ease)}
+.top nav a:hover{background:var(--cream)}
+
+/* ── 히어로 ── */
+.hero{position:relative;padding:74px 0 0;text-align:center;overflow:clip;
+  background:linear-gradient(180deg,rgb(244,233,218) 0%,var(--bg) 62%)}
+.hero .bean{position:absolute;width:34px;height:22px;border-radius:50%;
+  background:rgb(120,72,32);opacity:.85}
+.hero h1{position:relative;z-index:2}
+.hero .sub{position:relative;z-index:2;margin-top:16px}
+.hero .go{position:relative;z-index:2;margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero figure{margin-top:56px;border-radius:20px;overflow:clip;background:var(--cream)}
+.hero figure img{width:100%;height:660px;object-fit:cover}
+
+/* ── 섹션 머리 ── */
+.sh{text-align:center;padding:90px 0 40px}
+.sh .lab{padding-bottom:14px;border-bottom:1px solid var(--line);display:inline-block;
+  width:100%;max-width:none}
+.sh h2{margin-top:26px}
+
+/* ── 하이라이트 사진 카드 ── */
+.hl{display:flex;flex-direction:column;gap:64px}
+.hl figure{position:relative;border-radius:16px;overflow:clip;background:var(--cream)}
+.hl figure img{width:100%;height:688px;object-fit:cover}
+.hl figcaption{position:absolute;left:0;right:0;top:26px;text-align:center;z-index:2;
+  color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.4)}
+
+/* ── 이야기 ── */
+.story{padding:40px 0}
+.story .box{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
+.story figure{border-radius:16px;overflow:clip;background:var(--cream)}
+.story figure img{width:100%;height:470px;object-fit:cover}
+.story p{margin-top:16px}
+.story .go{margin-top:24px}
+
+/* ── 메뉴 ── */
+.menu{padding:20px 0 60px}
+.menu .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.mcard{background:var(--face);border-radius:16px;overflow:clip;
+  transition:transform .35s var(--ease)}
+.mcard:hover{transform:translateY(-5px)}
+.mcard figure{height:260px;background:var(--cream)}
+.mcard figure img{width:100%;height:260px;object-fit:cover}
+.mcard .bd{padding:20px 22px 24px}
+.mcard .row{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
+.mcard h3{font-size:20px;line-height:26px;font-weight:600;color:var(--brown)}
+.mcard .pr{font-size:16px;font-weight:600;color:var(--green);flex:0 0 auto}
+.mcard p{margin-top:8px}
+
+/* ── 표 메뉴 ── */
+.mtable{margin-top:8px}
+.mtable li{display:flex;justify-content:space-between;gap:20px;align-items:baseline;
+  padding:16px 0;border-bottom:1px solid var(--line)}
+.mtable .nm{font-size:18px;line-height:24px;font-weight:600;color:var(--brown)}
+.mtable .ds{margin-top:5px}
+.mtable .pr{font-size:16px;font-weight:600;color:var(--green);flex:0 0 auto}
+.mgroup+.mgroup{margin-top:44px}
+.mgroup h2{margin-bottom:10px}
+
+/* ── 후기 ── */
+.rev{padding:40px 0 70px}
+.rev .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.rcard{background:var(--face);border-radius:16px;padding:26px;display:flex;flex-direction:column}
+.rcard .st{color:var(--green);font-weight:600}
+.rcard blockquote{margin-top:14px;font-size:16px;line-height:26px}
+.rcard cite{margin-top:auto;padding-top:18px;font-style:normal;font-size:14px;color:var(--ink);font-weight:600}
+
+/* ── 블로그 ── */
+.blog{padding:20px 0 60px}
+.blog .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.bcard figure{border-radius:16px;overflow:clip;background:var(--cream)}
+.bcard figure img{width:100%;height:250px;object-fit:cover;transition:transform .6s var(--ease)}
+.bcard:hover figure img{transform:scale(1.04)}
+.bcard .dt{margin-top:14px;font-size:14px;color:var(--gray)}
+.bcard h3{margin-top:6px;font-size:20px;line-height:28px;font-weight:600;color:var(--brown)}
+
+/* ── 예약 폼 ── */
+.form{padding:20px 0 60px;max-width:760px;margin:0 auto}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form label{display:block;font-size:14px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.form input,.form select,.form textarea{width:100%;height:50px;padding:0 16px;
+  background:var(--face);border-radius:10px;font-size:15px;
+  box-shadow:inset 0 0 0 1px var(--line)}
+.form textarea{height:130px;padding:14px 16px;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{outline:2px solid var(--green);outline-offset:-2px}
+.form .full{grid-column:1/-1}
+.form .go{margin-top:18px}
+.form .go .btn{width:100%}
+.form .note{margin-top:14px;text-align:center;font-size:14px}
+
+/* ── 예약 안내 ── */
+.info{padding:20px 0 70px}
+.info .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.info .c{background:var(--cream);border-radius:16px;padding:26px}
+.info h3{font-size:18px;font-weight:600;color:var(--brown);margin-bottom:8px}
+
+/* ── CTA ── */
+.cta{padding:20px 0 70px;text-align:center}
+.cta .box{background:var(--cream);border-radius:20px;padding:60px 40px}
+.cta p{margin-top:14px}
+.cta .go{margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+/* ── 푸터 ── */
+.ft{background:var(--ink);color:#fff;padding:56px 0 22px}
+.ft .in{max-width:1200px;margin:0 auto;padding:0 40px;display:grid;
+  grid-template-columns:1.6fr 1fr 1fr 1fr;gap:34px}
+.ft .lg{font-size:22px;font-weight:600}
+.ft .in>div>p{margin-top:12px;color:rgba(255,255,255,.68);max-width:280px}
+.ft h6{font-size:14px;font-weight:600;margin-bottom:8px}
+.ft a,.ft .l{display:block;font-size:14px;line-height:24px;color:rgba(255,255,255,.68);min-height:32px}
+.ft a:hover{color:#fff}
+.ft .cp{max-width:1200px;margin:38px auto 0;padding:18px 40px 0;
+  border-top:1px solid rgba(255,255,255,.16);display:flex;justify-content:space-between;
+  gap:16px;flex-wrap:wrap;font-size:12px;line-height:20px;color:rgba(255,255,255,.55)}
+
+/* ── 페이지 머리 ── */
+.phead{text-align:center;padding:60px 0 34px}
+.phead p{margin-top:14px}
+
+/* ── 태블릿 ── */
+@media (max-width:1100px){
+  .wrap,.top .in,.ft .in,.ft .cp{padding-left:24px;padding-right:24px}
+  .d1{font-size:42px;line-height:54px;letter-spacing:-1.2px}
+  .d1.ko{line-height:60px}
+  .d2{font-size:32px;line-height:42px;letter-spacing:-.6px}
+  .d2.ko{line-height:48px}
+  .d3{font-size:24px;line-height:32px}
+  .hero figure img{height:420px}
+  .hl figure img{height:420px}
+  .story .box{grid-template-columns:1fr;gap:26px}
+  .story figure img{height:320px}
+  .menu .grid,.rev .grid,.blog .grid,.info .grid{grid-template-columns:repeat(2,1fr)}
+  .ft .in{grid-template-columns:1fr 1fr;gap:26px}
+}
+
+/* ── 모바일 ── */
+@media (max-width:809px){
+  .wrap,.top .in,.ft .in,.ft .cp{padding-left:16px;padding-right:16px}
+  .top nav{display:none}
+  .d1{font-size:30px;line-height:40px;letter-spacing:-.6px}
+  .d1.ko{line-height:44px}
+  .d2{font-size:24px;line-height:33px;letter-spacing:-.4px}
+  .d2.ko{line-height:36px}
+  .d3,.d3.ko{font-size:20px;line-height:28px}
+  .p20{font-size:17px;line-height:26px}
+  .hero{padding-top:40px}
+  .hero figure img{height:260px}
+  .hero .bean{display:none}
+  .sh{padding-top:56px}
+  .hl{gap:34px}
+  .hl figure img{height:260px}
+  .menu .grid,.rev .grid,.blog .grid,.info .grid{grid-template-columns:1fr}
+  .form .row{grid-template-columns:1fr}
+  .cta .box{padding:36px 20px}
+  .ft .in{grid-template-columns:1fr}
+  .ft .cp{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="top">
+  <div class="in">
+    <a class="lg ko" href="index.html">온결커피</a>
+    <nav>
+      <a class="ko" href="about.html">소개</a>
+      <a class="ko" href="menu.html">메뉴</a>
+      <a class="ko" href="blog.html">이야기</a>
+    </nav>
+    <a class="btn ko" href="reservation.html">자리 예약</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="phead">
+    <p class="lab ko">예약</p>
+    <h1 class="d1 ko">자리 잡아<br>드리겠습니다</h1>
+    <p class="p20 ko">보내 주시면 하루 안에 전화로 확인해 드립니다.</p>
+  </div>
+  <section class="form">
+    <form>
+      <div class="row">
+        <div><label class="ko" for="f-nm">성함</label><input id="f-nm" name="name" type="text" autocomplete="name"></div>
+        <div><label class="ko" for="f-tel">연락처</label><input id="f-tel" name="tel" type="tel" autocomplete="tel"></div>
+        <div><label class="ko" for="f-dt">날짜</label><input id="f-dt" name="date" type="date"></div>
+        <div><label class="ko" for="f-tm">시간</label>
+          <select id="f-tm" name="time"><option>10:00</option><option>13:00</option><option>15:00</option><option>18:00</option></select></div>
+        <div class="full"><label class="ko" for="f-pp">인원</label>
+          <select id="f-pp" name="people"><option>1명</option><option>2명</option><option>3–4명</option><option>5명 이상</option></select></div>
+        <div class="full"><label class="ko" for="f-ms">남기실 말</label>
+          <textarea class="ko" id="f-ms" name="message" placeholder="창가 자리 · 유아용 의자 등 필요하신 것을 적어 주세요"></textarea></div>
+      </div>
+      <div class="go"><button class="btn ko" type="button">예약 요청 보내기</button></div>
+      <p class="note ko">전화 예약도 됩니다 — <a href="tel:01048944905" style="border-bottom:1px solid currentColor">010-4894-4905</a></p>
+    </form>
+  </section>
+  <section class="info">
+    <div class="grid">
+      <div class="c"><h3 class="ko">예약 안내</h3><p class="p16 ko">두 시간까지 잡아 드립니다. 열 분 이상이면 미리 전화 주세요.</p></div>
+      <div class="c"><h3 class="ko">영업시간</h3><p class="p16 ko">매일 09:00 – 21:00<br>마지막 주문 20:30</p></div>
+      <div class="c"><h3 class="ko">주차</h3><p class="p16 ko">건물 지하에 한 시간 무료. 접수 때 차량 번호를 알려 주세요.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="in">
+    <div>
+      <span class="lg ko">온결커피</span>
+      <p class="p16 ko">오래 앉아 있어도 좋은 동네 카페입니다. 직접 볶은 원두로 한 잔씩 내립니다.</p>
+    </div>
+    <div><h6 class="ko">둘러보기</h6>
+      <a class="ko" href="about.html">소개</a><a class="ko" href="menu.html">메뉴</a>
+      <a class="ko" href="blog.html">이야기</a></div>
+    <div><h6 class="ko">예약</h6>
+      <a class="ko" href="reservation.html">자리 예약</a>
+      <a href="tel:01048944905">010-4894-4905</a></div>
+    <div><h6 class="ko">오시는 길</h6>
+      <span class="l ko">서울 강남구 온결로 12</span>
+      <span class="l ko">매일 09:00 – 21:00</span></div>
+  </div>
+  <div class="cp">
+    <span class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 6gsmake@gmail.com</span>
+    <span class="ko">© 2026 온결커피</span>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
