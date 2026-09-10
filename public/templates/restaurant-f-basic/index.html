@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>소반 — 한식 코스 · 파인다이닝 (프리미엄 디자인 B)</title>
+<meta name="description" content="검은 바탕에 라운드 48 틀을 두고, 왼쪽 대형 사진은 고정된 채 오른쪽 열만 흐르는 분할 구조의 한식 코스 프리미엄 원페이지. 사진 아래에 얹히는 112px 대형 제목, 분류별 코스 목록과 가격, 예약 폼, 오시는 길까지 한 화면 안에서 이어집니다.">
+<meta property="og:title" content="소반 — 한식 코스 · 파인다이닝 (프리미엄 디자인 B)">
+<meta property="og:image" content="../restaurant-f/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Forum&family=Gowun+Batang:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 홈 900 고정 · 메뉴 페이지 2698)
+   바탕 rgb(10,11,10) · 크림 글자 rgb(239,231,210) · 흐린 글자 rgba(245,242,234,.7)
+   히어로 Forum 112/89.6 · 섹션 제목 96/86.4 · 분류 32/35.2 · 항목 20/24
+   본문 Satoshi 14/22.4 300 · 안내 18/28.8 300 · 내비 16/16 ls1 · 폼 라벨 14/16.8
+   틀 x16 폭 1408 라운드 48 · 좌 1032 (사진 1032×868 r16) · 우 360 · 간격 16
+   내비 카드 443×57 r12 padding 8 gap 12 · 링크 카드 360×279 r16
+   대체 : Satoshi→Inter · Forum 한글 없음→고운바탕 ── */
+:root{--bg:rgb(10,11,10);--cream:rgb(239,231,210);--dim:rgba(245,242,234,.7);
+  --line:rgba(239,231,210,.16);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);
+  font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;
+  font-size:14px;line-height:22.4px;font-weight:300;padding:0 16px}
+.ko{text-wrap:pretty}
+.fo{font-family:Forum,"Gowun Batang",serif;font-weight:400}
+.fo.ko{font-family:"Gowun Batang","Pretendard Variable",serif;letter-spacing:-.02em}
+.d1{font-size:112px;line-height:89.6px}
+.d2{font-size:96px;line-height:86.4px}
+/* 한글은 글자 상자가 꽉 차서 레퍼런스 행간(0.8배)에 겹친다 — 1.02 배로 푼다 */
+.d1.ko{line-height:114px}
+.d2.ko{line-height:98px}
+.d3{font-size:32px;line-height:35.2px}
+.d4{font-size:20px;line-height:24px}
+.p14{font-size:14px;line-height:22.4px;font-weight:300;color:var(--dim)}
+.p18{font-size:18px;line-height:28.8px;font-weight:300;color:var(--dim)}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{transition:none}}
+
+.shell{max-width:1408px;margin:0 auto;border-radius:48px;overflow:clip;
+  display:grid;grid-template-columns:1032px 360px;gap:16px;align-items:start}
+
+/* ── 좌열 : 고정 사진 ── */
+.stage{position:sticky;top:16px;height:868px;margin:16px 0;border-radius:16px;overflow:clip;
+  background:rgb(18,19,18)}
+.stage figure{position:absolute;inset:0;opacity:0;transition:opacity .8s var(--ease)}
+.stage figure.on{opacity:1}
+html:not(.js) .stage figure{opacity:1}
+.stage img{width:100%;height:100%;object-fit:cover}
+.stage::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(10,11,10,.55) 0%,rgba(10,11,10,0) 34%,rgba(10,11,10,.72) 100%)}
+.stage .bar{position:absolute;top:56px;left:56px;z-index:4;
+  display:flex;align-items:center;gap:12px;height:57px;padding:8px;
+  border-radius:12px;background:rgba(10,11,10,.72);backdrop-filter:blur(8px)}
+.stage .bar .lg{display:inline-flex;align-items:center;min-height:41px;padding:0 14px;
+  font-family:Forum,"Gowun Batang",serif;font-size:20px;line-height:24px;letter-spacing:2px}
+.stage .bar nav{display:flex;gap:2px}
+.stage .bar nav a{min-height:41px;display:inline-flex;align-items:center;padding:0 12px;
+  border-radius:8px;font-family:Forum,"Gowun Batang",serif;font-size:16px;line-height:16px;
+  letter-spacing:1px;color:var(--dim);transition:background .25s var(--ease),color .25s var(--ease)}
+.stage .bar nav a:hover{background:rgba(239,231,210,.12);color:var(--cream)}
+.stage .bar .book{min-height:41px;display:inline-flex;align-items:center;padding:0 16px;
+  border-radius:8px;background:var(--cream);color:var(--bg);
+  font-family:Forum,"Gowun Batang",serif;font-size:16px;line-height:16px;letter-spacing:1px}
+.stage .ttl{position:absolute;left:56px;bottom:38px;z-index:4}
+.stage .ttl span{display:block;opacity:0;transform:translateY(14px);
+  transition:opacity .6s var(--ease),transform .6s var(--ease);position:absolute;bottom:0;left:0;white-space:nowrap}
+.stage .ttl span.on{opacity:1;transform:none;position:relative}
+html:not(.js) .stage .ttl span{opacity:1;transform:none;position:relative}
+.stage .sub{position:absolute;right:56px;bottom:56px;z-index:4;text-align:right;
+  font-family:Forum,"Gowun Batang",serif;font-size:16px;line-height:16px;letter-spacing:1px;color:var(--dim)}
+
+/* ── 우열 ── */
+.feed{padding:16px 0;display:flex;flex-direction:column;gap:16px}
+.sec{scroll-margin-top:20px}
+.sec+.sec{margin-top:24px}
+.kicker{font-family:Forum,"Gowun Batang",serif;font-size:16px;line-height:16px;
+  letter-spacing:1px;color:var(--dim)}
+
+/* 링크 카드 360×279 */
+.cards{display:flex;flex-direction:column;gap:16px}
+.qcard{position:relative;height:279px;border-radius:16px;overflow:clip;display:block}
+.qcard img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.qcard:hover img{transform:scale(1.05)}
+.qcard span{position:absolute;right:0;bottom:0;height:40px;min-width:100px;padding:0 20px;
+  border-radius:24px 0 0 0;background:var(--bg);display:flex;align-items:center;justify-content:center;
+  font-family:Forum,"Gowun Batang",serif;font-size:16px;line-height:16px;letter-spacing:1px}
+
+/* 소개 */
+.intro h2{margin-top:14px;font-size:32px;line-height:35.2px}
+.intro p{margin-top:16px}
+.intro dl{margin-top:26px;border-top:1px solid var(--line)}
+.intro div{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.intro dt{font-family:Forum,"Gowun Batang",serif;font-size:14px;line-height:22.4px;color:var(--dim)}
+.intro dd{font-size:14px;line-height:22.4px;text-align:right}
+
+/* 메뉴 */
+.menu .grp+.grp{margin-top:52px}
+.menu h3{font-size:32px;line-height:35.2px}
+.menu ul{margin-top:24px}
+.menu li{padding:14px 0;border-bottom:1px solid var(--line)}
+.menu .hd{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.menu .nm{font-family:Forum,"Gowun Batang",serif;font-size:20px;line-height:24px}
+.menu .pr{font-family:Forum,serif;font-size:20px;line-height:24px;flex:0 0 auto}
+.menu li p{margin-top:6px}
+
+/* 예약 */
+.book form{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.book label{display:block;font-family:Forum,"Gowun Batang",serif;font-size:14px;line-height:17px;color:var(--dim)}
+.book input,.book select{margin-top:8px;width:100%;height:44px;padding:0 12px;
+  border-bottom:1px solid var(--line);font-size:14px;line-height:22.4px;color:var(--cream)}
+.book input:focus,.book select:focus{outline:none;border-color:var(--cream)}
+.book select option{background:var(--bg)}
+.book .full{grid-column:1/-1}
+.book button{grid-column:1/-1;height:52px;border-radius:8px;background:var(--cream);color:var(--bg);
+  font-family:Forum,"Gowun Batang",serif;font-size:16px;letter-spacing:1px;
+  transition:opacity .25s var(--ease)}
+.book button:hover{opacity:.86}
+.book .note{grid-column:1/-1;color:var(--dim)}
+
+/* 오시는 길 · 푸터 */
+.find dl{margin-top:22px;border-top:1px solid var(--line)}
+.find div{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.find dt{font-family:Forum,"Gowun Batang",serif;font-size:14px;line-height:22.4px;color:var(--dim)}
+.find dd{font-size:14px;line-height:22.4px;text-align:right}
+.find .go{margin-top:24px;display:flex;gap:10px;flex-wrap:wrap}
+.find .go a{height:44px;padding:0 18px;border-radius:8px;display:inline-flex;align-items:center;
+  background:rgba(239,231,210,.1);transition:background .25s var(--ease)}
+.find .go a:hover{background:rgba(239,231,210,.2)}
+.find .go a.solid{background:var(--cream);color:var(--bg)}
+.cp{margin-top:34px;padding-top:20px;border-top:1px solid var(--line);color:var(--dim);
+  font-size:12px;line-height:20px}
+
+/* ── 태블릿 ── */
+@media (max-width:1120px){
+  .shell{grid-template-columns:1fr;border-radius:32px;gap:0}
+  .stage{position:static;height:auto;aspect-ratio:1032/868;margin:16px 16px 0}
+  .stage .ttl span{position:relative;opacity:1;transform:none}
+  .stage .ttl span:not(.on){display:none}
+  .feed{padding:24px 16px}
+  .cards{flex-direction:row;flex-wrap:wrap}
+  .qcard{flex:1 1 45%;height:240px}
+  .d1,.d1.ko{font-size:64px;line-height:66px}
+  .d2,.d2.ko{font-size:52px;line-height:56px}
+}
+
+/* ── 모바일 ── */
+@media (max-width:809px){
+  body{padding:0 8px}
+  .shell{border-radius:24px}
+  .stage{margin:8px 8px 0;border-radius:12px}
+  .stage .bar{top:16px;left:16px;gap:6px;padding:6px;flex-wrap:wrap;height:auto}
+  .stage .bar .lg{font-size:16px;padding:0 8px}
+  .stage .bar nav a,.stage .bar .book{font-size:14px;padding:0 10px}
+  .stage .ttl{left:16px;bottom:20px}
+  .stage .sub{right:16px;bottom:20px;font-size:13px}
+  .d1,.d1.ko{font-size:38px;line-height:42px}
+  .d2,.d2.ko{font-size:32px;line-height:36px}
+  .d3,.intro h2,.menu h3{font-size:24px;line-height:29px}
+  .feed{padding:20px 12px}
+  .qcard{flex:1 1 100%;height:200px}
+  .book form{grid-template-columns:1fr}
+  .intro div,.find div{flex-direction:column;gap:2px}
+  .intro dd,.find dd{text-align:left}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body id="top">
+
+<div class="shell">
+
+  <div class="stage" id="stage">
+    <figure class="on" data-k="intro"><img src="../restaurant-f/assets/stage-1.jpg" alt="" width="1032" height="868"></figure>
+    <figure data-k="menu"><img src="../restaurant-f/assets/stage-2.jpg" alt="" width="1032" height="868" loading="lazy"></figure>
+    <figure data-k="book"><img src="../restaurant-f/assets/stage-3.jpg" alt="" width="1032" height="868" loading="lazy"></figure>
+    <figure data-k="find"><img src="../restaurant-f/assets/stage-4.jpg" alt="" width="1032" height="868" loading="lazy"></figure>
+    <div class="bar">
+      <span class="lg">소반</span>
+      <nav>
+        <a class="ko" href="#menu">코스</a>
+        <a class="ko" href="#intro">소개</a>
+        <a class="ko" href="#find">오시는 길</a>
+      </nav>
+      <a class="book ko" href="#book">예약하기</a>
+    </div>
+    <div class="ttl">
+      <span class="fo ko d1 on" data-k="intro">소반의<br>한 상</span>
+      <span class="fo ko d1" data-k="menu">코스</span>
+      <span class="fo ko d1" data-k="book">예약</span>
+      <span class="fo ko d1" data-k="find">오시는 길</span>
+    </div>
+    <div class="sub"><span class="ko">제철 재료로<br>그날의 코스를 냅니다</span></div>
+  </div>
+
+  <div class="feed">
+
+    <div class="cards">
+      <a class="qcard" href="#menu"><img src="../restaurant-f/assets/card-1.jpg" alt="" width="360" height="279"><span class="ko">코스</span></a>
+      <a class="qcard" href="#book"><img src="../restaurant-f/assets/card-2.jpg" alt="" width="360" height="279" loading="lazy"><span class="ko">예약</span></a>
+      <a class="qcard" href="#intro"><img src="../restaurant-f/assets/card-3.jpg" alt="" width="360" height="279" loading="lazy"><span class="ko">소개</span></a>
+      <a class="qcard" href="#find"><img src="../restaurant-f/assets/card-4.jpg" alt="" width="360" height="279" loading="lazy"><span class="ko">오시는 길</span></a>
+    </div>
+
+    <section class="sec intro" id="intro">
+      <p class="kicker ko">소개</p>
+      <h2 class="fo ko rv">조용한 데 앉아<br>천천히 드시라고</h2>
+      <p class="p14 ko rv">열두 자리뿐입니다. 그날 들어온 재료를 보고 코스를 정하기 때문에 메뉴는 매일 조금씩 다릅니다. 서두르지 않으셔도 되도록 두 시간을 비워 두었습니다.</p>
+      <dl>
+        <div><dt class="ko">자리</dt><dd class="ko">카운터 8석 · 룸 4석</dd></div>
+        <div><dt class="ko">코스</dt><dd class="ko">점심 7품 · 저녁 11품</dd></div>
+        <div><dt class="ko">소요</dt><dd class="ko">약 2시간</dd></div>
+      </dl>
+    </section>
+
+    <section class="sec menu" id="menu">
+      <p class="kicker ko">코스</p>
+      <div class="grp rv">
+        <h3 class="fo ko">점심</h3>
+        <ul>
+          <li><div class="hd"><span class="nm ko">계절 죽</span><span class="pr">9,000</span></div>
+            <p class="p14 ko">그날 나온 나물과 곡물을 오래 끓여 냅니다.</p></li>
+          <li><div class="hd"><span class="nm ko">삼색 전채</span><span class="pr">12,000</span></div>
+            <p class="p14 ko">절임 셋을 한 접시에. 입을 열어 주는 자리입니다.</p></li>
+          <li><div class="hd"><span class="nm ko">숯불 생선</span><span class="pr">21,000</span></div>
+            <p class="p14 ko">아침에 들어온 생선을 숯에 올려 껍질만 바삭하게.</p></li>
+          <li><div class="hd"><span class="nm ko">솥밥과 국</span><span class="pr">15,000</span></div>
+            <p class="p14 ko">주문 뒤에 안칩니다. 눌은밥까지 함께 드립니다.</p></li>
+        </ul>
+      </div>
+      <div class="grp rv">
+        <h3 class="fo ko">저녁</h3>
+        <ul>
+          <li><div class="hd"><span class="nm ko">제철 회</span><span class="pr">32,000</span></div>
+            <p class="p14 ko">그날 좋은 것만 두세 종. 간장은 직접 담급니다.</p></li>
+          <li><div class="hd"><span class="nm ko">한우 구이</span><span class="pr">45,000</span></div>
+            <p class="p14 ko">숙성한 등심을 두껍게 썰어 숯에 올립니다.</p></li>
+          <li><div class="hd"><span class="nm ko">맑은 전골</span><span class="pr">28,000</span></div>
+            <p class="p14 ko">사흘 고아 낸 육수에 버섯과 채소를 넣습니다.</p></li>
+          <li><div class="hd"><span class="nm ko">후식 한 접시</span><span class="pr">11,000</span></div>
+            <p class="p14 ko">계절 과일과 직접 만든 한과를 곁들입니다.</p></li>
+        </ul>
+      </div>
+      <div class="grp rv">
+        <h3 class="fo ko">곁들임</h3>
+        <ul>
+          <li><div class="hd"><span class="nm ko">전통주 한 잔</span><span class="pr">8,000</span></div>
+            <p class="p14 ko">지역 양조장에서 소량으로 받는 술입니다.</p></li>
+          <li><div class="hd"><span class="nm ko">차 한 주전자</span><span class="pr">6,000</span></div>
+            <p class="p14 ko">덖은 잎을 그 자리에서 우려 드립니다.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sec book" id="book">
+      <p class="kicker ko">예약</p>
+      <h2 class="fo d3 ko rv" style="margin-top:14px">자리를 잡아 두겠습니다</h2>
+      <p class="p14 ko rv" style="margin-top:14px">보내 주시면 하루 안에 전화로 확인해 드립니다.</p>
+      <form>
+        <div><label class="ko" for="f-nm">이름</label><input id="f-nm" name="name" type="text" autocomplete="name"></div>
+        <div><label class="ko" for="f-tel">연락처</label><input id="f-tel" name="tel" type="tel" autocomplete="tel"></div>
+        <div><label class="ko" for="f-date">날짜</label><input id="f-date" name="date" type="date"></div>
+        <div><label class="ko" for="f-time">시간</label>
+          <select id="f-time" name="time"><option>점심 12:00</option><option>점심 13:30</option><option>저녁 18:00</option><option>저녁 20:00</option></select></div>
+        <div class="full"><label class="ko" for="f-ppl">인원</label>
+          <select id="f-ppl" name="people"><option>2명</option><option>3명</option><option>4명</option><option>5명 이상</option></select></div>
+        <button class="ko" type="button">예약 요청 보내기</button>
+        <p class="note p14 ko">전화 예약도 됩니다 — <a href="tel:01048944905" style="border-bottom:1px solid currentColor">010-4894-4905</a></p>
+      </form>
+    </section>
+
+    <section class="sec find" id="find">
+      <p class="kicker ko">오시는 길</p>
+      <dl>
+        <div><dt class="ko">주소</dt><dd class="ko">서울 강남구 소반길 12</dd></div>
+        <div><dt class="ko">영업</dt><dd class="ko">화–일 12:00 – 22:00<br>월요일 휴무</dd></div>
+        <div><dt class="ko">주차</dt><dd class="ko">건물 지하 2시간</dd></div>
+        <div><dt class="ko">연락</dt><dd>010-4894-4905</dd></div>
+      </dl>
+      <div class="go">
+        <a class="solid" href="tel:01048944905">전화 걸기</a>
+        <a href="mailto:6gsmake@gmail.com">메일 문의</a>
+      </div>
+      <p class="cp ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호<br>© 2026 소반</p>
+    </section>
+
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>바른결의원 — 재활 · 도수치료 · 한의원 (프리미엄 디자인 A)</title>
+<meta name="description" content="베이지 바탕에 흰 카드와 사진이 맞물리는 히어로에서 시작해, 숫자 통계 3칸, 아이콘이 붙는 전문 진료 소개, 태그가 달린 진료 항목 6종, 사진 위에 이름이 얹히는 의료진 카드, 좌우로 갈라지는 번호 타임라인 4단계, 환자 후기와 건강 정보 카드, 아코디언 FAQ, 사진이 받치는 상담 신청 화면까지 갖춘 병원 프리미엄 원페이지.">
+<meta property="og:title" content="바른결의원 — 재활 · 도수치료 · 한의원 (프리미엄 디자인 A)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 10854)
+   배경 베이지 rgb(251,249,247) · 면 rgb(248,244,241) · 잉크 rgb(18,10,11)
+   본문 회색 rgb(69,65,64) · 브라운 rgb(150,83,15) · 골드 rgb(211,161,74) · 흰 rgb(255,255,255)
+   h1 Inter 60/72 ls-3 · h2 44/52.8 ls-1.936 · 카드제목 24/31.2 500 ls-.984
+   통계 32/41.6 500 · 본문 16/24 ls-.48 · 작은글 14/21 · 라벨 14/23.8 500 ls1.4 대문자
+   컨테이너 1440 - 좌우 150 → 1140 · 카드 3열 pitch 387 (카드 363 · gap 24)
+   라운드 24(카드) · 100(알약·버튼) · 16(작은 태그) ── */
+:root{--bg:rgb(251,249,247);--face:rgb(248,244,241);--ink:rgb(18,10,11);
+  --gray:rgb(69,65,64);--brand:rgb(150,83,15);--gold:rgb(211,161,74);--w:rgb(255,255,255);
+  --ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;
+  font-size:16px;line-height:24px;letter-spacing:-.48px}
+.ko{text-wrap:pretty}
+
+.d1{font-size:60px;line-height:72px;letter-spacing:-3px;font-weight:400}
+.d2{font-size:44px;line-height:52.8px;letter-spacing:-1.94px;font-weight:400}
+.d3{font-size:24px;line-height:31.2px;letter-spacing:-.98px;font-weight:500}
+.num{font-size:32px;line-height:41.6px;letter-spacing:-.99px;font-weight:500}
+.p16{font-size:16px;line-height:24px;letter-spacing:-.48px;color:var(--gray)}
+.p14{font-size:14px;line-height:21px;letter-spacing:normal;color:var(--gray)}
+.lab{display:inline-flex;align-items:center;height:38px;padding:0 18px;border-radius:100px;
+  background:var(--w);font-size:14px;line-height:23.8px;letter-spacing:1.4px;font-weight:500;
+  text-transform:uppercase;color:var(--brand)}
+.lab.ko{letter-spacing:.6px}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 150px}
+
+.rv{opacity:0;transform:translateY(34px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{transition:none}}
+
+.btn{display:inline-flex;align-items:center;gap:10px;height:56px;padding:0 12px 0 26px;
+  border-radius:100px;background:var(--brand);color:var(--w);font-size:16px;line-height:24px;
+  font-weight:500;transition:background .3s var(--ease)}
+.btn:hover{background:rgb(122,66,10)}
+.btn i{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.22);
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.btn i svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.btn-o{background:var(--w);color:var(--ink)}
+.btn-o:hover{background:var(--face)}
+.btn-o i{background:rgba(18,10,11,.08)}
+
+/* ── 내비 ── */
+.nav{position:sticky;top:0;z-index:40;height:88px;background:var(--bg)}
+.nav .in{max-width:1440px;margin:0 auto;padding:0 150px;height:88px;
+  display:flex;align-items:center;justify-content:space-between}
+.nav .lg{display:inline-flex;align-items:center;gap:9px;min-height:44px;
+  font-size:22px;line-height:28px;font-weight:600;letter-spacing:-.7px}
+.nav .lg svg{width:28px;height:28px;flex:0 0 auto}
+.nav .mn{display:flex;gap:26px}
+.nav .mn a{min-height:44px;display:inline-flex;align-items:center;
+  font-size:16px;line-height:24px;color:var(--gray);transition:color .25s var(--ease)}
+.nav .mn a:hover{color:var(--brand)}
+.nav .rt{display:flex;align-items:center;gap:10px}
+.burger{display:none;width:44px;height:44px;align-items:center;justify-content:center}
+.burger span{display:block;width:20px;height:2px;background:var(--ink);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:var(--ink)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+
+/* ── 히어로 836 ── */
+.hero{height:836px;padding-top:30px}
+.hero .in{position:relative;max-width:1440px;margin:0 auto;height:745px}
+.hero .card{position:absolute;left:150px;top:0;width:512px;height:745px;
+  background:var(--w);border-radius:24px;padding:150px 32px 0;text-align:center}
+.hero .deco{display:flex;align-items:center;justify-content:center;gap:12px}
+.hero .deco i{width:120px;height:7px;background:
+  repeating-linear-gradient(90deg,var(--gold) 0 7px,transparent 7px 14px)}
+.hero .card h1{margin-top:16px;text-align:left}
+.hero .card p{margin-top:26px;text-align:left;width:509px;max-width:100%}
+.hero .card .go{margin-top:46px;display:flex;justify-content:flex-start}
+.hero figure{position:absolute;right:150px;top:0;width:564px;height:745px;
+  border-radius:24px;overflow:clip}
+.hero figure img{width:564px;height:745px;object-fit:cover}
+.hero .pill{position:absolute;display:inline-flex;align-items:center;gap:10px;
+  height:44px;padding:0 18px 0 8px;border-radius:100px;background:rgba(18,10,11,.42);
+  backdrop-filter:blur(6px);color:var(--w);font-size:16px;line-height:24px}
+.hero .pill b{width:28px;height:28px;border-radius:50%;background:var(--w);color:var(--brand);
+  display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.hero .pill b svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.hero .q1{top:404px;right:158px}
+.hero .q2{top:495px;right:195px}
+.hero .q3{top:576px;right:158px}
+.hero .stat{position:absolute;left:50%;transform:translateX(-50%);top:668px;
+  background:var(--w);border-radius:100px;padding:14px 26px;text-align:center;white-space:nowrap}
+.hero .stat b{display:block;font-size:16px;line-height:24px;font-weight:500}
+.hero .stat span{font-size:14px;line-height:21px;color:var(--gray)}
+
+main{display:block}
+.sec{padding:100px 0}
+.sec .hd{text-align:center}
+.sec .hd h2{margin-top:24px}
+.sec .hd p{margin:18px auto 0;max-width:640px}
+
+/* ── 소개 740 ── */
+.about{height:740px;padding-top:60px;text-align:center}
+.about h2{margin:24px auto 0;width:797px;max-width:100%}
+.about .stats{margin-top:112px;display:grid;grid-template-columns:repeat(3,363px);
+  justify-content:space-between;max-width:1140px;margin-left:auto;margin-right:auto}
+.about .st{position:relative;height:206px;background:var(--w);border-radius:24px;
+  padding:24px;text-align:left;display:flex;flex-direction:column;justify-content:flex-end}
+.about .st::after{content:"";position:absolute;top:24px;right:24px;width:16px;height:16px;
+  border-radius:50%;background:var(--gold)}
+.about .st:nth-child(2)::after{background:var(--brand)}
+.about .st:nth-child(3)::after{background:rgb(93,50,8)}
+.about .st p{margin-top:12px}
+
+/* ── 전문 진료 645 ── */
+.expert{height:645px}
+.expert .in{max-width:1440px;margin:0 auto;padding:0 150px;display:flex;gap:50px}
+.expert figure{position:relative;width:464px;height:465px;border-radius:24px;overflow:clip;flex:0 0 auto}
+.expert figure img{width:464px;height:465px;object-fit:cover}
+.expert .tag{position:absolute;display:inline-flex;align-items:center;gap:8px;
+  height:38px;padding:0 16px 0 6px;border-radius:100px;background:rgba(18,10,11,.42);
+  backdrop-filter:blur(6px);color:var(--w);font-size:14px;line-height:21px;letter-spacing:normal}
+.expert .tag i{width:26px;height:26px;border-radius:50%;background:var(--w)}
+.expert .g1{left:20px;bottom:82px}
+.expert .g2{right:20px;bottom:24px}
+.expert .tx{flex:1;padding-top:16px}
+.expert h2{width:475px;max-width:100%}
+.expert .tx>p{margin-top:22px;width:440px;max-width:100%}
+.expert .go{margin-top:34px}
+.expert .icons{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.expert .ic{background:var(--w);border-radius:24px;padding:20px}
+.expert .ic .b{width:36px;height:36px;border-radius:50%;background:var(--brand);
+  display:flex;align-items:center;justify-content:center}
+.expert .ic .b svg{width:18px;height:18px;stroke:var(--w);fill:none;stroke-width:2}
+.expert .ic h4{margin-top:16px;font-size:16px;line-height:24px;font-weight:500}
+.expert .ic p{margin-top:6px;font-size:14px;line-height:21px;letter-spacing:normal;color:var(--gray)}
+
+/* ── 진료 항목 958 ── */
+.svc{height:958px;padding-top:100px}
+.svc .in{max-width:1440px;margin:0 auto;padding:0 150px}
+.svc .hd{text-align:center}
+.svc .hd h2{margin-top:24px}
+.svc .grid{margin-top:80px;display:grid;grid-template-columns:repeat(3,363px);
+  justify-content:space-between;row-gap:24px}
+.scard{position:relative;height:294px;background:var(--w);border-radius:24px;padding:24px;
+  display:flex;flex-direction:column;transition:transform .35s var(--ease)}
+.scard:hover{transform:translateY(-5px)}
+.scard .no{position:absolute;top:24px;right:24px;font-size:14px;line-height:21px;
+  letter-spacing:normal;color:var(--gold)}
+.scard h3{width:280px}
+.scard p{margin-top:10px}
+.scard .tags{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
+.scard .tags span{height:30px;padding:0 12px;border-radius:16px;background:var(--face);
+  display:inline-flex;align-items:center;font-size:13px;line-height:20px;letter-spacing:normal;color:var(--gray)}
+
+/* ── 의료진 776 ── */
+.docs{height:776px;padding-top:100px}
+.docs .in{max-width:1440px;margin:0 auto;padding:0 150px}
+.docs .hd{text-align:center}
+.docs .hd h2{margin-top:24px}
+.docs .grid{margin-top:80px;display:grid;grid-template-columns:repeat(3,363px);justify-content:space-between}
+.dcard{position:relative;height:360px;border-radius:24px;overflow:clip}
+.dcard img{width:100%;height:100%;object-fit:cover}
+.dcard .ov{position:absolute;left:0;right:0;bottom:0;padding:24px;
+  background:linear-gradient(180deg,rgba(18,10,11,0) 0%,rgba(18,10,11,.78) 62%);color:var(--w)}
+.dcard .ov p{margin-top:4px;font-size:14px;line-height:21px;letter-spacing:normal;color:rgba(255,255,255,.78)}
+
+/* ── 장점 521 ── */
+.why{height:521px;padding-top:100px;text-align:center}
+.why .in{max-width:1440px;margin:0 auto;padding:0 150px}
+.why h2{margin-top:24px}
+.why .grid{margin-top:70px;display:grid;grid-template-columns:repeat(3,363px);justify-content:space-between}
+.why .w{background:var(--w);border-radius:24px;padding:24px;text-align:left}
+.why .w .b{width:40px;height:40px;border-radius:50%;background:var(--face);
+  display:flex;align-items:center;justify-content:center}
+.why .w .b svg{width:20px;height:20px;stroke:var(--brand);fill:none;stroke-width:2}
+.why .w h3{margin-top:18px}
+.why .w p{margin-top:8px}
+
+/* ── 진행 과정 1679 ── */
+.proc{height:1679px;padding-top:100px}
+.proc .in{position:relative;max-width:1440px;margin:0 auto;padding:0 80px}
+.proc .hd{text-align:center}
+.proc .hd h2{margin-top:24px}
+.proc .line{position:absolute;left:50%;top:280px;bottom:60px;width:2px;
+  transform:translateX(-1px);background:repeating-linear-gradient(180deg,var(--gold) 0 8px,transparent 8px 16px)}
+.proc .steps{position:relative;margin-top:120px;display:flex;flex-direction:column;gap:78px}
+.pstep{display:flex;align-items:flex-start;gap:0}
+.pstep .box{width:530px;background:var(--w);border-radius:24px;padding:28px}
+.pstep .box p{margin-top:10px}
+.pstep .dot{width:60px;height:60px;flex:0 0 auto;margin:0 60px;border-radius:50%;
+  background:var(--brand);color:var(--w);display:flex;align-items:center;justify-content:center;
+  font-size:24px;line-height:24px;font-weight:500}
+.pstep .sp{width:530px;flex:0 0 auto}
+.pstep:nth-child(even){flex-direction:row-reverse}
+
+/* ── 후기 694 ── */
+.rev{height:694px;padding-top:100px}
+.rev .in{max-width:1440px;margin:0 auto;padding:0 150px}
+.rev .hd{text-align:center}
+.rev .hd h2{margin-top:24px}
+.rev .grid{margin-top:70px;display:grid;grid-template-columns:repeat(3,363px);justify-content:space-between}
+.rcard{height:288px;background:var(--w);border-radius:24px;padding:26px;display:flex;flex-direction:column}
+.rcard .st{display:flex;gap:3px}
+.rcard .st svg{width:16px;height:16px;fill:var(--gold)}
+.rcard blockquote{margin-top:18px;font-size:16px;line-height:26px;letter-spacing:-.48px}
+.rcard .who{margin-top:auto;display:flex;align-items:center;gap:10px}
+.rcard .who i{width:38px;height:38px;border-radius:50%;background:var(--face);flex:0 0 auto}
+.rcard .who b{display:block;font-size:15px;line-height:22px;font-weight:500}
+.rcard .who span{font-size:13px;line-height:20px;letter-spacing:normal;color:var(--gray)}
+
+/* ── 건강 정보 1239 ── */
+.blog{height:1239px;padding-top:100px}
+.blog .in{max-width:1440px;margin:0 auto;padding:0 150px}
+.blog .hd{text-align:center}
+.blog .hd h2{margin-top:24px}
+.blog .grid{margin-top:80px;display:grid;grid-template-columns:repeat(3,363px);justify-content:space-between}
+.bcard{background:var(--w);border-radius:24px;overflow:clip;transition:transform .35s var(--ease)}
+.bcard:hover{transform:translateY(-5px)}
+.bcard figure{height:240px}
+.bcard figure img{width:100%;height:240px;object-fit:cover}
+.bcard .bd{padding:24px}
+.bcard .cat{display:inline-flex;height:28px;padding:0 12px;border-radius:16px;background:var(--face);
+  align-items:center;font-size:13px;line-height:20px;letter-spacing:normal;color:var(--brand)}
+.bcard h3{margin-top:14px}
+.bcard p{margin-top:10px}
+.blog .more{margin-top:60px;display:flex;justify-content:center}
+
+/* ── FAQ 814 ── */
+.faq{height:814px;padding-top:100px}
+.faq .in{max-width:1440px;margin:0 auto;padding:0 150px}
+.faq .hd{text-align:center}
+.faq .hd h2{margin-top:24px}
+.faq .list{margin-top:70px;display:flex;flex-direction:column;gap:14px}
+.qa{background:var(--w);border-radius:24px;overflow:clip}
+.qa .q{width:100%;min-height:44px;padding:24px 28px;display:flex;align-items:center;gap:18px;
+  justify-content:space-between;text-align:left;font-size:18px;line-height:27px;
+  letter-spacing:-.5px;font-weight:500}
+.qa .q svg{width:22px;height:22px;flex:0 0 auto;stroke:var(--brand);fill:none;stroke-width:2;
+  transition:transform .35s var(--ease)}
+.qa.open .q svg{transform:rotate(45deg)}
+.qa .a{max-height:0;overflow:hidden;transition:max-height .4s var(--ease)}
+.qa.open .a{max-height:220px}
+.qa .a p{padding:0 28px 24px}
+
+/* ── 상담 신청 1291 ── */
+.cta{height:1291px;padding:100px 0}
+.cta .in{max-width:1440px;margin:0 auto;padding:0 150px}
+.cta .box{position:relative;height:1091px;border-radius:24px;overflow:clip;background:var(--ink)}
+.cta .box>img{width:100%;height:100%;object-fit:cover;opacity:.5}
+.cta .ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;text-align:center;padding:0 40px;color:var(--w)}
+.cta .ov h2{margin-top:24px;width:760px;max-width:100%}
+.cta .ov p{margin-top:20px;width:560px;max-width:100%;color:rgba(255,255,255,.82)}
+.cta .ov .go{margin-top:40px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.cta .ov .lab{background:rgba(255,255,255,.16);color:var(--w)}
+
+/* ── 푸터 661 ── */
+.ft{background:var(--ink);color:var(--w);padding:80px 0 0}
+.ft .in{max-width:1440px;margin:0 auto;padding:0 150px}
+.ft .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+.ft .lg{display:inline-flex;align-items:center;gap:9px;font-size:22px;line-height:28px;font-weight:600}
+.ft .lg svg{width:28px;height:28px}
+.ft .cols>div:first-child p{margin-top:18px;width:290px;max-width:100%;color:rgba(255,255,255,.7)}
+.ft h6{font-size:15px;line-height:22px;font-weight:600}
+.ft .l{display:flex;align-items:center;min-height:44px;font-size:15px;line-height:22px;
+  color:rgba(255,255,255,.7);transition:color .25s var(--ease)}
+.ft .l:hover{color:var(--gold)}
+.ft .cp{margin-top:60px;border-top:1px solid rgba(255,255,255,.14);
+  max-width:1440px;margin-left:auto;margin-right:auto;padding:26px 150px;
+  display:flex;justify-content:space-between;gap:20px;
+  font-size:13px;line-height:20px;letter-spacing:normal;color:rgba(255,255,255,.6)}
+
+/* ── 태블릿 ── */
+@media (max-width:1200px){
+  .nav .in,.wrap,.expert .in,.svc .in,.docs .in,.why .in,.rev .in,.blog .in,.faq .in,.cta .in,.ft .in,.proc .in{padding-left:40px;padding-right:40px}
+  .ft .cp{padding-left:40px;padding-right:40px}
+  .nav .mn{display:none}
+  .burger{display:flex}
+  .hero{height:auto;padding-bottom:60px}
+  .hero .in{height:auto;display:flex;flex-direction:column;gap:20px}
+  .hero .card,.hero figure{position:static;width:100%;height:auto}
+  .hero .card{padding:48px 32px}
+  .hero .card h1,.hero .card p{width:auto}
+  .hero figure img{width:100%;height:460px}
+  .hero .pill,.hero .stat{position:static;transform:none;display:inline-flex;margin:8px 8px 0 0}
+  .hero .stat{display:block}
+  .about{height:auto;padding:60px 0}
+  .about h2{width:auto}
+  .about .stats{margin-top:60px;grid-template-columns:repeat(3,1fr);gap:16px}
+  .expert{height:auto;padding:60px 0}
+  .expert .in{flex-direction:column}
+  .expert figure,.expert figure img{width:100%;height:auto;aspect-ratio:464/465}
+  .expert h2,.expert .tx>p{width:auto}
+  .svc,.docs,.why,.rev,.blog,.faq{height:auto;padding:60px 0}
+  .svc .grid,.docs .grid,.why .grid,.rev .grid,.blog .grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .scard,.rcard,.dcard{height:auto;min-height:260px}
+  .scard h3{width:auto}
+  .proc{height:auto;padding:60px 0}
+  .proc .line{display:none}
+  .proc .steps{margin-top:60px;gap:20px}
+  .pstep,.pstep:nth-child(even){flex-direction:row;align-items:center}
+  .pstep .box{width:auto;flex:1}
+  .pstep .sp{display:none}
+  .pstep .dot{margin:0 20px 0 0}
+  .cta{height:auto;padding:60px 0}
+  .cta .box{height:auto;min-height:620px}
+  .cta .ov{position:absolute}
+  .cta .ov h2,.cta .ov p{width:auto}
+}
+
+/* ── 모바일 ── */
+@media (max-width:809px){
+  .nav .in,.wrap,.expert .in,.svc .in,.docs .in,.why .in,.rev .in,.blog .in,.faq .in,.cta .in,.ft .in,.proc .in{padding-left:20px;padding-right:20px}
+  .ft .cp{padding-left:20px;padding-right:20px}
+  .d1{font-size:34px;line-height:44px;letter-spacing:-1.2px}
+  .d2{font-size:27px;line-height:37px;letter-spacing:-.9px}
+  .d3{font-size:20px;line-height:28px;letter-spacing:-.6px}
+  .num{font-size:26px;line-height:34px}
+  .hero .card{padding:36px 22px}
+  .hero .deco i{width:70px}
+  .hero figure img{height:340px}
+  .svc .grid,.docs .grid,.why .grid,.rev .grid,.blog .grid,.about .stats{grid-template-columns:1fr}
+  .pstep{flex-direction:column!important;align-items:flex-start;gap:14px}
+  .pstep .dot{margin:0}
+  .qa .q{padding:20px;font-size:16px;line-height:25px}
+  .qa .a p{padding:0 20px 20px}
+  .ft{padding-top:52px}
+  .ft .cols{grid-template-columns:1fr;gap:26px}
+  .ft .cp{margin-top:36px;flex-direction:column;gap:8px}
+  .cta .box{min-height:560px}
+}
+</style>
+</head>
+<body id="top">
+
+<nav class="nav">
+  <div class="in">
+    <a class="lg" href="#top" aria-label="바른결의원 홈">
+      <svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="13" fill="#96530f"/><path d="M14 7v14M7 14h14" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>
+      바른결의원
+    </a>
+    <div class="mn">
+      <a class="ko" href="#about">병원 소개</a>
+      <a class="ko" href="#svc">진료 항목</a>
+      <a class="ko" href="#docs">의료진</a>
+      <a class="ko" href="#proc">진료 과정</a>
+      <a class="ko" href="#blog">건강 정보</a>
+    </div>
+    <div class="rt">
+      <a class="btn ko" href="#cta">상담 예약<i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a>
+      <button class="burger" type="button" aria-label="메뉴 열기"><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="in">
+    <div class="card">
+      <div class="deco"><i></i><span class="p14 ko">재활 · 도수치료</span><i></i></div>
+      <h1 class="d1 ko">몸이 다시 편해지는<br>가장 짧은 길</h1>
+      <p class="p16 ko">통증을 줄이고 움직임을 되찾도록, 한 분 한 분에게 맞춘 계획으로 치료합니다.</p>
+      <div class="go"><a class="btn ko" href="#cta">상담 예약하기<i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a></div>
+    </div>
+    <figure><img src="./assets/hero.jpg" alt="" width="564" height="745"></figure>
+    <span class="pill q1 ko"><b><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg></b>통증 치료</span>
+    <span class="pill q2 ko"><b><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg></b>도수 재활</span>
+    <span class="pill q3 ko"><b><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10"/></svg></b>맞춤 운동</span>
+    <div class="stat"><b class="ko">누적 4천여 분</b><span class="ko">다시 걷고 계십니다</span></div>
+  </div>
+</section>
+
+<main>
+
+  <!-- 소개 836~1576 -->
+  <section class="about" id="about">
+    <div class="wrap">
+      <span class="lab ko">병원 소개</span>
+      <h2 class="d2 ko">통증의 원인부터 찾아<br>움직임을 되돌리는 데까지<br>함께 가는 의료진입니다</h2>
+    </div>
+    <div class="stats">
+      <div class="st rv"><p class="num ko">1,200분+</p><p class="p16 ko">통증 치료를 받고 일상으로 돌아가신 분들입니다.</p></div>
+      <div class="st rv"><p class="num ko">40개 과정</p><p class="p16 ko">부위와 상태에 맞춰 짜 둔 치료 프로그램입니다.</p></div>
+      <div class="st rv"><p class="num ko">90% 호전</p><p class="p16 ko">계획대로 마치신 분들의 통증 감소 비율입니다.</p></div>
+    </div>
+  </section>
+
+  <!-- 전문 진료 1576~2221 -->
+  <section class="expert">
+    <div class="in">
+      <figure class="rv">
+        <img src="./assets/expert.jpg" alt="" width="464" height="465" loading="lazy">
+        <span class="tag g1 ko"><i></i>전담 치료사</span>
+        <span class="tag g2 ko"><i></i>회복 관리</span>
+      </figure>
+      <div class="tx">
+        <h2 class="d2 ko">몸을 다시 세우는<br>전문 치료</h2>
+        <p class="p16 ko">통증을 덜어 내고 관절이 움직이는 범위를 넓혀, 스스로 버틸 힘이 돌아오도록 돕습니다.</p>
+        <div class="go"><a class="btn ko" href="#cta">상담 예약하기<i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a></div>
+        <div class="icons">
+          <div class="ic rv"><div class="b"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M10 4v12"/></svg></div>
+            <h4 class="ko">통증 완화</h4><p class="ko">아픈 자리를 먼저 가라앉힙니다</p></div>
+          <div class="ic rv"><div class="b"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 14l5-6 4 4 5-6"/></svg></div>
+            <h4 class="ko">가동 회복</h4><p class="ko">굳은 관절을 천천히 풉니다</p></div>
+          <div class="ic rv"><div class="b"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6"/></svg></div>
+            <h4 class="ko">재발 관리</h4><p class="ko">돌아오지 않게 붙잡습니다</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 진료 항목 2221~3179 -->
+  <section class="svc" id="svc">
+    <div class="in">
+      <div class="hd">
+        <span class="lab ko">진료 항목</span>
+        <h2 class="d2 ko">회복을 위한 전문 치료</h2>
+      </div>
+      <div class="grid">
+        <article class="scard rv"><span class="no">01</span>
+          <h3 class="d3 ko">통증 치료</h3>
+          <p class="p16 ko">만성 통증을 줄이고 하루가 편해지도록 합니다.</p>
+          <div class="tags"><span class="ko">통증 관리</span><span class="ko">관절 완화</span><span class="ko">치료 계획</span></div></article>
+        <article class="scard rv"><span class="no">02</span>
+          <h3 class="d3 ko">가동 치료</h3>
+          <p class="p16 ko">움직이는 범위를 넓히고 몸이 부드러워지게 합니다.</p>
+          <div class="tags"><span class="ko">움직임</span><span class="ko">유연성</span></div></article>
+        <article class="scard rv"><span class="no">03</span>
+          <h3 class="d3 ko">부상 회복</h3>
+          <p class="p16 ko">다친 뒤 안전하게 원래대로 돌아가도록 돕습니다.</p>
+          <div class="tags"><span class="ko">부상 관리</span><span class="ko">회복 계획</span></div></article>
+        <article class="scard rv"><span class="no">04</span>
+          <h3 class="d3 ko">근력 치료</h3>
+          <p class="p16 ko">버티는 힘을 길러 몸의 균형을 잡습니다.</p>
+          <div class="tags"><span class="ko">근력 강화</span><span class="ko">균형</span></div></article>
+        <article class="scard rv"><span class="no">05</span>
+          <h3 class="d3 ko">재활 관리</h3>
+          <p class="p16 ko">오래 걸리는 회복을 끝까지 함께 봅니다.</p>
+          <div class="tags"><span class="ko">재활</span><span class="ko">지속 관리</span></div></article>
+        <article class="scard rv"><span class="no">06</span>
+          <h3 class="d3 ko">자세 교정</h3>
+          <p class="p16 ko">틀어진 자세를 바로잡아 부담을 덜어 냅니다.</p>
+          <div class="tags"><span class="ko">자세 관리</span><span class="ko">척추 건강</span></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 의료진 3179~3955 -->
+  <section class="docs" id="docs">
+    <div class="in">
+      <div class="hd">
+        <span class="lab ko">의료진</span>
+        <h2 class="d2 ko">치료를 맡는 사람들</h2>
+      </div>
+      <div class="grid">
+        <article class="dcard rv"><img src="./assets/doc-1.jpg" alt="" width="363" height="360" loading="lazy">
+          <div class="ov"><h3 class="d3 ko">한지우 원장</h3><p class="ko">재활의학과 · 도수치료 14년</p></div></article>
+        <article class="dcard rv"><img src="./assets/doc-2.jpg" alt="" width="363" height="360" loading="lazy">
+          <div class="ov"><h3 class="d3 ko">서준호 원장</h3><p class="ko">정형외과 · 스포츠 손상</p></div></article>
+        <article class="dcard rv"><img src="./assets/doc-3.jpg" alt="" width="363" height="360" loading="lazy">
+          <div class="ov"><h3 class="d3 ko">민가온 실장</h3><p class="ko">운동처방 · 자세 교정</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 장점 3955~4476 -->
+  <section class="why">
+    <div class="in">
+      <span class="lab ko">이곳을 찾는 이유</span>
+      <h2 class="d2 ko">치료가 끝난 뒤가 다릅니다</h2>
+      <div class="grid">
+        <div class="w rv"><div class="b"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10l4 4 8-8"/></svg></div>
+          <h3 class="d3 ko">전담 치료사</h3><p class="p16 ko">처음부터 끝까지 같은 사람이 봅니다. 매번 설명을 다시 하지 않으셔도 됩니다.</p></div>
+        <div class="w rv"><div class="b"><svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M10 7v3l2 2"/></svg></div>
+          <h3 class="d3 ko">맞춤 계획</h3><p class="p16 ko">같은 부위라도 원인이 다릅니다. 검사 결과에 맞춰 계획을 새로 짭니다.</p></div>
+        <div class="w rv"><div class="b"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 14l4-5 3 3 5-6"/></svg></div>
+          <h3 class="d3 ko">기록으로 확인</h3><p class="p16 ko">회차마다 가동 범위와 통증을 적어 두고 함께 보면서 조정합니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 진행 과정 4476~6155 -->
+  <section class="proc" id="proc">
+    <div class="in">
+      <div class="hd">
+        <span class="lab ko">진료 과정</span>
+        <h2 class="d2 ko">처음 오신 날부터 네 단계</h2>
+      </div>
+      <div class="line" aria-hidden="true"></div>
+      <div class="steps">
+        <div class="pstep rv"><div class="sp"></div><div class="dot">1</div>
+          <div class="box"><h3 class="d3 ko">첫 상담</h3><p class="p16 ko">언제부터 어디가 아팠는지, 어떤 자세에서 심해지는지 먼저 듣습니다. 이십 분 정도 걸립니다.</p></div></div>
+        <div class="pstep rv"><div class="sp"></div><div class="dot">2</div>
+          <div class="box"><h3 class="d3 ko">상태 검사</h3><p class="p16 ko">가동 범위와 근력, 자세를 재서 지금 상태를 숫자로 남깁니다. 나중에 비교할 기준이 됩니다.</p></div></div>
+        <div class="pstep rv"><div class="sp"></div><div class="dot">3</div>
+          <div class="box"><h3 class="d3 ko">맞춤 치료</h3><p class="p16 ko">검사에 맞춰 치료 계획을 짜고, 회차마다 반응을 보면서 강도를 조정합니다.</p></div></div>
+        <div class="pstep rv"><div class="sp"></div><div class="dot">4</div>
+          <div class="box"><h3 class="d3 ko">회복 관리</h3><p class="p16 ko">끝난 뒤에도 집에서 할 운동을 정해 드리고, 한 달 뒤에 한 번 더 확인합니다.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 후기 6155~6849 -->
+  <section class="rev">
+    <div class="in">
+      <div class="hd">
+        <span class="lab ko">환자 후기</span>
+        <h2 class="d2 ko">치료를 마치신 분들의 말</h2>
+      </div>
+      <div class="grid">
+        <article class="rcard rv">
+          <div class="st"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg></div>
+          <blockquote class="ko">삼 년 된 허리 통증이었습니다. 여덟 번 만에 앉아 있는 게 편해졌고, 지금은 일하는 데 지장이 없습니다.</blockquote>
+          <div class="who"><i></i><div><b class="ko">김OO 님</b><span class="ko">40대 · 사무직</span></div></div>
+        </article>
+        <article class="rcard rv">
+          <div class="st"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg></div>
+          <blockquote class="ko">매번 같은 선생님이 봐 주셔서 설명을 다시 할 일이 없었습니다. 기록을 같이 보며 조정하는 게 믿음이 갔습니다.</blockquote>
+          <div class="who"><i></i><div><b class="ko">박OO 님</b><span class="ko">30대 · 운동 손상</span></div></div>
+        </article>
+        <article class="rcard rv">
+          <div class="st"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg></div>
+          <blockquote class="ko">끝나고 나서 집에서 할 운동을 정해 주신 게 좋았습니다. 한 달 뒤 확인까지 해 주셔서 마음이 놓였습니다.</blockquote>
+          <div class="who"><i></i><div><b class="ko">이OO 님</b><span class="ko">50대 · 어깨 통증</span></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 건강 정보 6849~8088 -->
+  <section class="blog" id="blog">
+    <div class="in">
+      <div class="hd">
+        <span class="lab ko">건강 정보</span>
+        <h2 class="d2 ko">회복에 도움이 되는 이야기</h2>
+      </div>
+      <div class="grid">
+        <article class="bcard rv"><figure><img src="./assets/post-1.jpg" alt="" width="363" height="240" loading="lazy"></figure>
+          <div class="bd"><span class="cat ko">통증</span><h3 class="d3 ko">허리가 아플 때 눕는 자세</h3>
+            <p class="p16 ko">잘못 누우면 밤새 더 굳습니다. 상태별로 편한 자세를 정리했습니다.</p></div></article>
+        <article class="bcard rv"><figure><img src="./assets/post-2.jpg" alt="" width="363" height="240" loading="lazy"></figure>
+          <div class="bd"><span class="cat ko">운동</span><h3 class="d3 ko">집에서 하는 목 스트레칭</h3>
+            <p class="p16 ko">하루 오 분이면 됩니다. 순서와 횟수를 그대로 따라 하시면 됩니다.</p></div></article>
+        <article class="bcard rv"><figure><img src="./assets/post-3.jpg" alt="" width="363" height="240" loading="lazy"></figure>
+          <div class="bd"><span class="cat ko">생활</span><h3 class="d3 ko">앉아서 일하는 분들께</h3>
+            <p class="p16 ko">의자 높이와 모니터 위치만 바꿔도 부담이 줄어듭니다.</p></div></article>
+      </div>
+      <div class="more"><a class="btn btn-o ko" href="#top">더 보기<i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a></div>
+    </div>
+  </section>
+
+  <!-- FAQ 8088~8902 -->
+  <section class="faq" id="faq">
+    <div class="in">
+      <div class="hd">
+        <span class="lab ko">자주 묻는 질문</span>
+        <h2 class="d2 ko">오시기 전에 궁금하신 것</h2>
+      </div>
+      <div class="list">
+        <div class="qa open">
+          <button class="q ko" type="button">예약 없이 가도 되나요?<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 4v14M4 11h14"/></svg></button>
+          <div class="a"><p class="p16 ko">가능하지만 대기가 길어질 수 있습니다. 전화나 네이버 예약으로 시간을 잡아 두시면 바로 진료합니다.</p></div>
+        </div>
+        <div class="qa">
+          <button class="q ko" type="button">첫 진료는 얼마나 걸리나요?<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 4v14M4 11h14"/></svg></button>
+          <div class="a"><p class="p16 ko">상담과 검사를 합쳐 사십 분에서 한 시간 정도 봅니다. 이후 치료는 회차당 삼십 분 안팎입니다.</p></div>
+        </div>
+        <div class="qa">
+          <button class="q ko" type="button">보험 적용이 되나요?<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 4v14M4 11h14"/></svg></button>
+          <div class="a"><p class="p16 ko">항목에 따라 다릅니다. 상담 때 적용 여부와 금액을 먼저 안내해 드립니다.</p></div>
+        </div>
+        <div class="qa">
+          <button class="q ko" type="button">몇 회 정도 받아야 하나요?<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 4v14M4 11h14"/></svg></button>
+          <div class="a"><p class="p16 ko">상태에 따라 다르지만 보통 팔에서 열두 회입니다. 검사 결과를 보고 첫날 말씀드립니다.</p></div>
+        </div>
+        <div class="qa">
+          <button class="q ko" type="button">주차할 곳이 있나요?<svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 4v14M4 11h14"/></svg></button>
+          <div class="a"><p class="p16 ko">건물 지하에 두 시간 무료 주차가 됩니다. 접수처에 차량 번호를 알려 주시면 됩니다.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 상담 신청 8902~10193 -->
+  <section class="cta" id="cta">
+    <div class="in">
+      <div class="box">
+        <img src="./assets/cta.jpg" alt="" width="1140" height="1091" loading="lazy">
+        <div class="ov">
+          <span class="lab ko">상담 예약</span>
+          <h2 class="d2 ko">아픈 채로 버티지 마시고<br>한 번 보러 오세요</h2>
+          <p class="p16 ko">전화 한 통이면 시간을 잡아 드립니다. 검사만 받고 가셔도 됩니다.</p>
+          <div class="go">
+            <a class="btn ko" href="tel:01048944905">010-4894-4905<i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a>
+            <a class="btn btn-o ko" href="mailto:6gsmake@gmail.com">메일로 문의<i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 푸터 10193~10854 -->
+<footer class="ft">
+  <div class="in">
+    <div class="cols">
+      <div>
+        <span class="lg">
+          <svg viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="13" fill="#d3a14a"/><path d="M14 7v14M7 14h14" stroke="#120a0b" stroke-width="2.6" stroke-linecap="round"/></svg>
+          바른결의원
+        </span>
+        <p class="p16 ko">통증의 원인부터 찾아 움직임을 되돌리는 재활 · 도수치료 의원입니다.</p>
+      </div>
+      <div>
+        <h6 class="ko">진료</h6>
+        <a class="l ko" href="#svc">진료 항목</a>
+        <a class="l ko" href="#docs">의료진</a>
+        <a class="l ko" href="#proc">진료 과정</a>
+      </div>
+      <div>
+        <h6 class="ko">안내</h6>
+        <a class="l ko" href="#faq">자주 묻는 질문</a>
+        <a class="l ko" href="#blog">건강 정보</a>
+        <a class="l ko" href="#top">오시는 길</a>
+      </div>
+      <div>
+        <h6 class="ko">연락</h6>
+        <a class="l" href="tel:01048944905">010-4894-4905</a>
+        <a class="l" href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a>
+        <a class="l ko" href="#top">서울 강남구 바른길 12</a>
+      </div>
+    </div>
+  </div>
+  <div class="cp">
+    <span class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</span>
+    <span class="ko">© 2026 바른결의원</span>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+document.querySelectorAll('.qa .q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
+</script>
+</body>
+</html>

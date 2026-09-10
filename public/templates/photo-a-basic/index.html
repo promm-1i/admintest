@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>윤슬스튜디오 — 사진 스튜디오 · 스냅 (프리미엄 디자인 A)</title>
+<meta name="description" content="왼쪽에 고정된 대형 슬라이드쇼, 오른쪽에 프로필 카드와 소셜 스택, 이름표가 붙는 작업 타일 열 칸, 문의 카드와 예약 안내가 이어지는 이단 분할 구조의 사진 스튜디오 프리미엄 원페이지. 라운드 48 안쪽에 12px 간격으로 짜인 벤토 배치.">
+<meta property="og:title" content="윤슬스튜디오 — 사진 스튜디오 · 스냅 (프리미엄 디자인 A)">
+<meta property="og:image" content="../photo-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 3564)
+   바탕 rgb(240,240,238) · 면 rgb(255,255,255) · 잉크 rgb(17,17,17) · 흐린글 rgb(122,122,120)
+   본문 DM Sans 14/16.8 · 작은글 14/15.4 · 이름 24/28.8 · 부제 18/21.6
+   틀 x12 폭 1416 라운드 48 · 두 열 702 + 702 · 열 안 간격 12 · 페이지 padding 12
+   좌열 고정 902 (슬라이드 702×876 r12) · 우열 프로필 702×332 · 작업 2열 345×460 gap12 (5행)
+   내비 395×36 r0 0 20 20 padding 4 16 12 gap 8 ── */
+:root{--page:rgb(240,240,238);--w:rgb(255,255,255);--ink:rgb(17,17,17);
+  --dim:rgb(122,122,120);--line:rgb(232,232,229);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--page);color:var(--ink);
+  font-family:"DM Sans","Pretendard Variable",Pretendard,sans-serif;
+  font-size:14px;line-height:16.8px;font-weight:400;padding:0 12px}
+.ko{text-wrap:pretty;line-height:22.4px}
+.t24{font-size:24px;line-height:28.8px}
+.t18{font-size:18px;line-height:21.6px}
+.t15{font-size:15px;line-height:24px}
+.dim{color:var(--dim)}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{transition:none}}
+
+.shell{max-width:1416px;margin:0 auto;background:var(--w);border-radius:48px;
+  display:grid;grid-template-columns:702px 702px;gap:12px;overflow:clip}
+
+/* ── 좌열 : 고정 슬라이드쇼 ── */
+.left{padding:12px 0}
+.stage{position:sticky;top:12px;height:876px;border-radius:12px;overflow:clip;background:var(--page)}
+.stage .slides{position:absolute;inset:0}
+.stage .slides figure{position:absolute;inset:0;opacity:0;transition:opacity .9s var(--ease)}
+.stage .slides figure.on{opacity:1}
+html:not(.js) .stage .slides figure{opacity:1}
+.stage .slides img{width:100%;height:100%;object-fit:cover}
+.stage .nav{position:absolute;top:0;left:0;z-index:3;
+  display:flex;align-items:center;gap:8px;padding:4px 16px 12px;
+  background:var(--w);border-radius:0 0 20px 20px}
+.stage .nav .lg{font-size:15px;line-height:15px;font-weight:500;
+  display:inline-flex;align-items:center;min-height:44px;padding-right:8px}
+.stage .nav a{min-height:44px;display:inline-flex;align-items:center;padding:0 6px;
+  color:var(--dim);transition:color .25s var(--ease)}
+.stage .nav a:hover{color:var(--ink)}
+.stage .arrows{position:absolute;top:50%;left:0;right:0;z-index:3;transform:translateY(-50%);
+  display:flex;justify-content:space-between;padding:0 16px}
+.stage .arrows button{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.86);
+  display:flex;align-items:center;justify-content:center;transition:background .25s var(--ease)}
+.stage .arrows button:hover{background:var(--w)}
+.stage .arrows svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.8}
+.stage .foot{position:absolute;left:0;bottom:0;z-index:3;
+  background:var(--w);border-radius:0 20px 0 0;padding:12px 16px 4px}
+.stage .foot a{display:inline-flex;align-items:center;gap:6px;min-height:32px}
+.stage .foot svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8}
+.stage .cap{position:absolute;right:0;bottom:0;z-index:3;
+  background:var(--w);border-radius:20px 0 0 0;padding:12px 16px 4px;color:var(--dim)}
+.stage .dots{position:absolute;left:50%;bottom:16px;z-index:3;transform:translateX(-50%);display:flex;gap:6px}
+.stage .dots i{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.5)}
+.stage .dots i.on{background:var(--w)}
+
+/* ── 우열 ── */
+.right{padding:12px 0;display:flex;flex-direction:column;gap:12px}
+
+/* 프로필 702×332 */
+.me{display:grid;grid-template-columns:390px 300px;gap:12px;height:332px}
+.me .card{background:var(--page);border-radius:12px;padding:20px}
+.me .who{display:flex;align-items:center;gap:10px}
+.me .who img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+.me .who b{display:block;font-size:18px;line-height:21.6px;font-weight:500}
+.me .who span{font-size:14px;line-height:15.4px;color:var(--dim)}
+.me .card p{margin-top:22px}
+.me .links{display:flex;flex-direction:column;gap:12px}
+.me .links a{flex:1;background:var(--page);border-radius:12px;padding:0 16px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .25s var(--ease)}
+.me .links a:hover{background:var(--line)}
+.me .links a.dark{background:var(--ink);color:var(--w)}
+.me .links a.dark:hover{background:rgb(38,38,38)}
+.me .links svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
+
+/* 작업 그리드 */
+.bar{display:flex;align-items:center;justify-content:space-between;padding:0 4px}
+.bar a{display:inline-flex;align-items:center;min-height:32px;text-decoration:underline;text-underline-offset:3px}
+.works{display:grid;grid-template-columns:repeat(2,345px);gap:12px}
+.tile{position:relative;height:460px;border-radius:12px;overflow:clip;background:var(--page)}
+.tile img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
+.tile:hover img{transform:scale(1.04)}
+.tile figcaption{position:absolute;left:10px;top:10px;background:var(--w);
+  border-radius:8px;padding:5px 10px;font-size:14px;line-height:15.4px}
+
+/* 하단 */
+.end{display:flex;flex-direction:column;gap:12px}
+.end .row{display:grid;grid-template-columns:repeat(2,345px);gap:12px}
+.end .row a{background:var(--page);border-radius:12px;padding:0 16px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;transition:background .25s var(--ease)}
+.end .row a:hover{background:var(--line)}
+.end .row svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
+.end .call{background:var(--ink);color:var(--w);border-radius:12px;padding:28px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px}
+.end .call b{display:block;font-size:18px;line-height:21.6px;font-weight:500}
+.end .call span{font-size:14px;line-height:22.4px;color:rgba(255,255,255,.66)}
+.end .call .go{flex:0 0 auto;background:var(--w);color:var(--ink);border-radius:100px;
+  height:44px;padding:0 20px;display:inline-flex;align-items:center;
+  transition:opacity .25s var(--ease)}
+.end .call .go:hover{opacity:.85}
+.end .info{background:var(--page);border-radius:12px;padding:28px 24px;display:grid;
+  grid-template-columns:1fr 1fr;gap:16px}
+.end .info h6{font-size:14px;line-height:15.4px;font-weight:600}
+.end .info p{margin-top:8px;color:var(--dim)}
+.end .cp{padding:6px 4px 0;color:var(--dim);font-size:13px;line-height:20px}
+
+/* ── 태블릿 ── */
+@media (max-width:1100px){
+  .shell{grid-template-columns:1fr;border-radius:32px}
+  .left{padding:12px 12px 0}
+  .stage{position:static;height:auto;aspect-ratio:702/876}
+  .right{padding:12px}
+  .me{grid-template-columns:1fr;height:auto}
+  .me .links{flex-direction:row;flex-wrap:wrap}
+  .me .links a{flex:1 1 45%;height:48px}
+  .works,.end .row{grid-template-columns:repeat(2,1fr)}
+  .tile{height:auto;aspect-ratio:345/460}
+}
+
+/* ── 모바일 ── */
+@media (max-width:809px){
+  body{padding:0 8px}
+  .shell{border-radius:24px}
+  .stage .nav{position:static;border-radius:0;padding:8px 12px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line)}
+  .stage{border-radius:12px}
+  .end .row{grid-template-columns:1fr}
+  .end .call{flex-direction:column;align-items:flex-start}
+  .end .info{grid-template-columns:1fr}
+  .t24{font-size:20px;line-height:26px}
+  .me .card p{margin-top:14px}
+}
+
+/* ── 좁은 화면 : 타일 한 열 ── */
+@media (max-width:560px){
+  .works{grid-template-columns:1fr}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body id="top">
+
+<div class="shell">
+
+  <div class="left">
+    <div class="stage">
+      <div class="slides">
+        <figure class="on"><img src="../photo-a/assets/slide-1.jpg" alt="" width="702" height="876"></figure>
+        <figure><img src="../photo-a/assets/slide-2.jpg" alt="" width="702" height="876"></figure>
+        <figure><img src="../photo-a/assets/slide-3.jpg" alt="" width="702" height="876"></figure>
+      </div>
+      <nav class="nav">
+        <span class="lg">윤슬스튜디오</span>
+        <a class="ko" href="#works">작업</a>
+        <a class="ko" href="#me">소개</a>
+        <a class="ko" href="#end">예약</a>
+      </nav>
+      <div class="arrows">
+        <button type="button" aria-label="이전 사진"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg></button>
+        <button type="button" aria-label="다음 사진"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
+      </div>
+      <div class="foot"><a class="ko" href="#works">작업 보기<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 9L9 3M4 3h5v5"/></svg></a></div>
+      <div class="cap"><span class="ko">선택 작업</span></div>
+      <div class="dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+    </div>
+  </div>
+
+  <div class="right">
+
+    <section class="me" id="me">
+      <div class="card">
+        <div class="who">
+          <img src="../photo-a/assets/me.jpg" alt="" width="38" height="38">
+          <div><b class="ko">한서윤</b><span class="ko">사진가 · 윤슬스튜디오</span></div>
+        </div>
+        <p class="ko dim">서울에서 인물과 브랜드 사진을 찍습니다. 꾸며 낸 표정보다 그날 그 사람에게 있던 공기를 남기려고 합니다. 스냅과 프로필, 룩북 촬영을 주로 맡습니다.</p>
+      </div>
+      <div class="links">
+        <a class="ko" href="#top">인스타그램<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"/></svg></a>
+        <a class="ko" href="#top">네이버 예약<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"/></svg></a>
+        <a class="ko" href="#top">포트폴리오<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"/></svg></a>
+        <a class="dark ko" href="#end">촬영 문의<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"/></svg></a>
+      </div>
+    </section>
+
+    <div class="bar">
+      <span class="ko">최근 작업 ↓</span>
+      <a class="ko" href="#top">전체 보기</a>
+    </div>
+
+    <section class="works" id="works">
+      <figure class="tile rv"><img src="../photo-a/assets/work-1.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">베이지</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-2.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">어둠</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-3.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">신사</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-4.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">도시</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-5.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">자연</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-6.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">브랜드</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-7.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">스튜디오</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-8.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">색</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-9.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">둘</figcaption></figure>
+      <figure class="tile rv"><img src="../photo-a/assets/work-10.jpg" alt="" width="345" height="460" loading="lazy"><figcaption class="ko">우아</figcaption></figure>
+    </section>
+
+    <section class="end" id="end">
+      <div class="row">
+        <a class="ko" href="#top">인스타그램<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"/></svg></a>
+        <a class="ko" href="#top">네이버 예약<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"/></svg></a>
+        <a class="ko" href="#top">촬영 안내<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"/></svg></a>
+        <a class="ko" href="#top">가격표<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M3 11L11 3M4 3h7v7"/></svg></a>
+      </div>
+      <div class="call">
+        <div><b class="ko">촬영 문의</b><span class="ko">일정과 콘셉트만 알려 주시면 견적을 보내 드립니다.</span></div>
+        <a class="go" href="tel:01048944905">010-4894-4905</a>
+      </div>
+      <div class="info">
+        <div><h6 class="ko">스튜디오</h6><p class="ko">서울 강남구 윤슬로 12<br>평일 10:00 – 19:00 · 주말 예약제</p></div>
+        <div><h6 class="ko">연락</h6><p class="ko">010-4894-4905<br>6gsmake@gmail.com</p></div>
+      </div>
+      <p class="cp ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · © 2026 윤슬스튜디오</p>
+    </section>
+
+  </div>
+</div>
+
+</body>
+</html>

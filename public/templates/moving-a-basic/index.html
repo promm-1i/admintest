@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>바로손 — 이사 · 집수리 · 설비 (프리미엄 디자인 A)</title>
+<meta name="description" content="사진 위에 전화번호가 박히는 대형 히어로에서 시작해, 신뢰 3칸과 체크리스트 소개, 숫자로 보여 주는 실적, 회전 사진이 겹치는 짙은 밴드, 작업 항목 6종, 번호 3단계 진행, 후기와 생활 정보 카드, 전화 유도 신청 화면까지 갖춘 이사 · 집수리 프리미엄 원페이지. 전화 문의로 움직이는 업종 구조 그대로.">
+<meta property="og:title" content="바로손 — 이사 · 집수리 · 설비 (프리미엄 디자인 A)">
+<meta property="og:image" content="../moving-a/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 7462)
+   잉크 rgb(13,1,0) · 본문 rgb(82,78,78) · 흐린글 rgb(111,111,111) · 연회색 rgb(144,140,140)
+   빨강 rgb(219,28,10) · 면 rgb(246,245,245) · 흰 rgb(255,255,255)
+   h1 Outfit 72/82.8 600 · h2 48/62.4 600 · h3 40/48 500 · 카드제목 24/33.6 500
+   본문 18/30.6 300 · 작은글 16/27.2 300
+   컨테이너 1440 - 좌우 80 → 1280 · 카드 3열 411 space-between (안쪽 padding 40)
+   히어로 사진 1420×850 (x10 y24) · 어두운 겹 opacity .6 ── */
+:root{--ink:rgb(13,1,0);--tx:rgb(82,78,78);--dim:rgb(111,111,111);--soft:rgb(144,140,140);
+  --red:rgb(219,28,10);--face:rgb(246,245,245);--w:rgb(255,255,255);
+  --ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--w);color:var(--ink);
+  font-family:Outfit,"Pretendard Variable",Pretendard,sans-serif;
+  font-size:16px;line-height:27.2px;font-weight:300}
+.ko{text-wrap:pretty}
+
+.d1{font-size:72px;line-height:82.8px;font-weight:600;letter-spacing:-1.4px}
+.d2{font-size:48px;line-height:62.4px;font-weight:600;letter-spacing:-1px}
+.d3{font-size:40px;line-height:48px;font-weight:500;letter-spacing:-.8px}
+.d4{font-size:24px;line-height:33.6px;font-weight:500;letter-spacing:-.5px}
+.p18{font-size:18px;line-height:30.6px;font-weight:300}
+.p16{font-size:16px;line-height:27.2px;font-weight:300;color:var(--dim)}
+.lab{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 14px;
+  border-radius:100px;background:var(--face);font-size:14px;line-height:22px;
+  font-weight:500;color:var(--red)}
+.lab i{width:6px;height:6px;border-radius:50%;background:var(--red)}
+.wrap{width:100%;max-width:1440px;margin:0 auto;padding:0 80px}
+
+.rv{opacity:0;transform:translateY(34px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{transition:none}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;height:52px;padding:0 26px;
+  border-radius:100px;background:var(--red);color:var(--w);font-size:16px;line-height:24px;
+  font-weight:500;transition:background .3s var(--ease)}
+.btn:hover{background:rgb(185,22,7)}
+.btn-w{background:var(--w);color:var(--ink)}
+.btn-w:hover{background:var(--face)}
+.btn-o{background:transparent;color:var(--w);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+.btn-o:hover{background:rgba(255,255,255,.12)}
+
+/* ── 내비 ── */
+.nav{position:absolute;top:24px;left:0;right:0;z-index:30;height:76px}
+.nav .in{max-width:1440px;margin:0 auto;padding:0 93px;height:76px;
+  display:flex;align-items:center;justify-content:space-between}
+.nav .lg{display:inline-flex;align-items:center;gap:9px;min-height:44px;color:var(--w);
+  font-size:22px;line-height:28px;font-weight:600}
+.nav .lg svg{width:26px;height:26px;flex:0 0 auto}
+.nav .mn{display:flex;gap:26px}
+.nav .mn a{min-height:44px;display:inline-flex;align-items:center;color:rgba(255,255,255,.86);
+  font-size:16px;line-height:24px;font-weight:400;transition:color .25s var(--ease)}
+.nav .mn a:hover{color:var(--w)}
+.burger{display:none;width:44px;height:44px;align-items:center;justify-content:center}
+.burger span{display:block;width:20px;height:2px;background:var(--w);position:relative}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:20px;height:2px;background:var(--w)}
+.burger span::before{top:-6px}.burger span::after{top:6px}
+
+/* ── 히어로 874 ── */
+.hero{position:relative;height:874px;padding-top:24px}
+.hero .ph{position:relative;height:850px;margin:0 10px;border-radius:20px;overflow:clip}
+.hero .ph img{width:100%;height:850px;object-fit:cover}
+.hero .ph::after{content:"";position:absolute;inset:0;background:rgba(13,1,0,.6)}
+.hero .in{position:absolute;left:0;right:0;top:184px;z-index:5;max-width:1440px;margin:0 auto;padding:0 93px}
+.hero h1{width:630px;max-width:100%;color:var(--w)}
+.hero p{margin-top:16px;width:473px;max-width:100%;color:var(--face)}
+.hero .go{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
+.hero .trust{position:absolute;left:0;right:0;bottom:76px;z-index:5;max-width:1440px;margin:0 auto;
+  padding:0 93px;display:flex;align-items:center;gap:14px;color:var(--w)}
+.hero .faces{display:flex}
+.hero .faces i{width:38px;height:38px;border-radius:50%;background:var(--soft);
+  box-shadow:0 0 0 2px var(--w);margin-left:-10px}
+.hero .faces i:first-child{margin-left:0}
+.hero .trust p{margin:0;width:auto;font-size:14px;line-height:20px;color:var(--w)}
+.hero .trust b{font-weight:500}
+
+/* ── 신뢰 3칸 256 ── */
+.trio{height:256px;padding-top:80px}
+.trio .grid{display:grid;grid-template-columns:repeat(3,411px);justify-content:space-between}
+.trio .c{background:var(--face);border-radius:16px;padding:40px}
+.trio .c p{margin-top:7px}
+
+/* ── 소개 702 ── */
+.about{height:702px;padding-top:60px}
+.about .in{max-width:1440px;margin:0 auto;padding:0 80px;display:flex;gap:56px;align-items:flex-start}
+.about figure{width:640px;height:497px;border-radius:20px;overflow:clip;flex:0 0 auto}
+.about figure img{width:640px;height:497px;object-fit:cover}
+.about .tx{flex:1;padding-top:78px}
+.about h2{width:490px;max-width:100%}
+.about>.in>.tx>p{margin-top:16px}
+.about ul{margin-top:34px;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.about li{display:flex;align-items:center;gap:9px;font-size:16px;line-height:27.2px;font-weight:300}
+.about li b{width:20px;height:20px;border-radius:50%;background:var(--red);flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center}
+.about li b svg{width:11px;height:11px;stroke:var(--w);fill:none;stroke-width:2.4}
+
+/* ── 실적 380 ── */
+.rec{height:380px;padding-top:115px}
+.rec .in{max-width:1440px;margin:0 auto;padding:0 80px;display:flex;gap:48px;align-items:flex-start}
+.rec h2{width:390px;flex:0 0 auto}
+.rec .stats{flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.rec .st{background:var(--face);border-radius:16px;padding:24px 28px}
+.rec .st b{display:block;font-size:48px;line-height:62.4px;font-weight:600}
+.rec .st span{font-size:15px;line-height:24px;font-weight:300;color:var(--dim)}
+
+/* ── 짙은 밴드 732 ── */
+.band{height:732px;padding:0 80px}
+.band .box{position:relative;height:660px;border-radius:24px;background:rgb(30,41,54);overflow:clip;
+  padding:166px 0 0 105px}
+.band h2{width:490px;max-width:100%;color:var(--w)}
+.band>.box>p{margin-top:14px;width:420px;max-width:100%;color:rgba(255,255,255,.72)}
+.band ul{margin-top:26px;display:flex;gap:32px;flex-wrap:wrap}
+.band li{display:flex;align-items:center;gap:9px;color:var(--w);font-size:15px;line-height:24px;font-weight:300}
+.band li b{width:20px;height:20px;border-radius:50%;background:var(--red);flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center}
+.band li b svg{width:11px;height:11px;stroke:var(--w);fill:none;stroke-width:2.4}
+.band .go{margin-top:34px}
+.band .pics{position:absolute;right:60px;top:120px;width:560px;height:420px}
+.band .pics figure{position:absolute;border-radius:16px;overflow:clip;
+  box-shadow:0 22px 44px rgba(0,0,0,.32)}
+.band .pics img{width:100%;height:100%;object-fit:cover}
+.band .pics .a{left:14px;top:0;width:260px;height:196px;transform:rotate(-6deg)}
+.band .pics .b{right:0;top:52px;width:250px;height:190px;transform:rotate(5deg)}
+.band .pics .c{left:96px;bottom:0;width:270px;height:200px;transform:rotate(3deg)}
+
+/* ── 작업 항목 1036 ── */
+.svc{height:1036px;padding-top:97px}
+.svc .in{max-width:1440px;margin:0 auto;padding:0 80px}
+.svc .hd{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.svc .hd h2{width:640px;max-width:100%}
+.svc .hd p{width:420px;max-width:100%}
+.svc .grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,411px);
+  justify-content:space-between;row-gap:34px}
+.scard{border-radius:16px;overflow:clip;background:var(--face);transition:transform .35s var(--ease)}
+.scard:hover{transform:translateY(-6px)}
+.scard figure{height:250px}
+.scard figure img{width:100%;height:250px;object-fit:cover}
+.scard .bd{padding:26px 36px 32px}
+.scard p{margin-top:7px}
+
+/* ── 진행 575 ── */
+.how{height:575px;padding-top:97px;background:var(--face)}
+.how .in{max-width:1440px;margin:0 auto;padding:0 80px}
+.how h2{text-align:center}
+.how .grid{margin-top:70px;display:grid;grid-template-columns:repeat(3,411px);justify-content:space-between}
+.how .s{background:var(--w);border-radius:16px;padding:32px}
+.how .no{width:46px;height:46px;border-radius:50%;background:var(--red);color:var(--w);
+  display:flex;align-items:center;justify-content:center;font-size:18px;line-height:18px;font-weight:600}
+.how .s h3{margin-top:20px}
+.how .s p{margin-top:7px}
+
+/* ── 후기 702 ── */
+.rev{height:702px;padding-top:97px}
+.rev .in{max-width:1440px;margin:0 auto;padding:0 80px}
+.rev .hd{text-align:center}
+.rev .hd p{margin:14px auto 0;max-width:560px}
+.rev .grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,411px);justify-content:space-between}
+.rcard{height:300px;background:var(--face);border-radius:16px;padding:32px;display:flex;flex-direction:column}
+.rcard .st{display:flex;gap:3px}
+.rcard .st svg{width:17px;height:17px;fill:var(--red)}
+.rcard blockquote{margin-top:20px;font-size:16px;line-height:27.2px;font-weight:300;color:var(--tx)}
+.rcard .who{margin-top:auto;display:flex;align-items:center;gap:11px}
+.rcard .who i{width:40px;height:40px;border-radius:50%;background:var(--soft);flex:0 0 auto}
+.rcard .who b{display:block;font-size:16px;line-height:24px;font-weight:500}
+.rcard .who span{font-size:14px;line-height:20px;color:var(--dim)}
+
+/* ── 생활 정보 1017 ── */
+.blog{height:1017px;padding-top:97px;background:var(--face)}
+.blog .in{max-width:1440px;margin:0 auto;padding:0 80px}
+.blog .hd{display:flex;justify-content:space-between;align-items:flex-end;gap:40px}
+.blog .grid{margin-top:64px;display:grid;grid-template-columns:repeat(3,411px);justify-content:space-between}
+.bcard{background:var(--w);border-radius:16px;overflow:clip;transition:transform .35s var(--ease)}
+.bcard:hover{transform:translateY(-6px)}
+.bcard figure{height:280px}
+.bcard figure img{width:100%;height:280px;object-fit:cover}
+.bcard .bd{padding:26px 32px 32px}
+.bcard .dt{font-size:14px;line-height:22px;color:var(--soft)}
+.bcard h3{margin-top:10px}
+.bcard p{margin-top:8px}
+
+/* ── 신청 596 ── */
+.cta{height:596px;padding:60px 80px}
+.cta .box{position:relative;height:476px;border-radius:24px;overflow:clip}
+.cta .box>img{width:100%;height:100%;object-fit:cover}
+.cta .box::after{content:"";position:absolute;inset:0;background:rgba(13,1,0,.66)}
+.cta .ov{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;padding:0 40px;color:var(--w)}
+.cta .ov h2{width:760px;max-width:100%}
+.cta .ov p{margin-top:14px;width:520px;max-width:100%;color:rgba(255,255,255,.78)}
+.cta .ov .go{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+/* ── 푸터 591 ── */
+.ft{background:var(--ink);color:var(--w);padding:74px 0 0}
+.ft .in{max-width:1440px;margin:0 auto;padding:0 80px}
+.ft .cols{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.1fr;gap:40px}
+.ft .lg{display:inline-flex;align-items:center;gap:9px;font-size:22px;line-height:28px;font-weight:600}
+.ft .lg svg{width:26px;height:26px}
+.ft .cols>div:first-child p{margin-top:18px;width:300px;max-width:100%;
+  font-size:16px;line-height:27.2px;color:rgba(255,255,255,.66)}
+.ft h6{font-size:16px;line-height:24px;font-weight:500}
+.ft .l{display:flex;align-items:center;min-height:44px;font-size:16px;line-height:24px;
+  font-weight:300;color:rgba(255,255,255,.66);transition:color .25s var(--ease)}
+.ft .l:hover{color:var(--red)}
+.ft .cp{margin-top:56px;border-top:1px solid rgba(255,255,255,.14);
+  max-width:1440px;margin-left:auto;margin-right:auto;padding:26px 80px;
+  display:flex;justify-content:space-between;gap:20px;
+  font-size:14px;line-height:22px;color:rgba(255,255,255,.55)}
+
+/* ── 태블릿 ── */
+@media (max-width:1200px){
+  .nav .in,.hero .in,.hero .trust{padding-left:40px;padding-right:40px}
+  .wrap,.about .in,.rec .in,.svc .in,.how .in,.rev .in,.blog .in,.ft .in,.ft .cp{padding-left:40px;padding-right:40px}
+  .nav .mn{display:none}
+  .burger{display:flex}
+  .hero{height:auto;padding-bottom:0}
+  .hero .ph,.hero .ph img{height:720px}
+  .hero .in{top:150px}
+  .trio{height:auto;padding:60px 0}
+  .trio .grid,.svc .grid,.how .grid,.rev .grid,.blog .grid{grid-template-columns:repeat(2,1fr);gap:20px}
+  .about{height:auto;padding:60px 0}
+  .about .in{flex-direction:column;gap:32px}
+  .about figure,.about figure img{width:100%;height:auto;aspect-ratio:640/497}
+  .about .tx{padding-top:0}
+  .about h2{width:auto}
+  .rec{height:auto;padding:60px 0}
+  .rec .in{flex-direction:column;gap:28px}
+  .rec h2{width:auto}
+  .band{height:auto;padding:0 40px}
+  .band .box{height:auto;padding:48px 32px}
+  .band h2,.band>.box>p{width:auto}
+  .band .pics{position:static;width:auto;height:auto;margin-top:36px;display:flex;gap:12px}
+  .band .pics figure{position:static;transform:none;width:auto;flex:1;height:180px}
+  .svc,.how,.rev,.blog{height:auto;padding:60px 0}
+  .svc .hd,.blog .hd{flex-direction:column;align-items:flex-start;gap:14px}
+  .svc .hd h2,.svc .hd p{width:auto}
+  .rcard{height:auto;min-height:260px}
+  .cta{height:auto;padding:60px 40px}
+  .cta .box{height:auto;min-height:420px}
+  .cta .ov{position:absolute}
+  .cta .ov h2,.cta .ov p{width:auto}
+}
+
+/* ── 모바일 ── */
+@media (max-width:809px){
+  .nav .in,.hero .in,.hero .trust{padding-left:20px;padding-right:20px}
+  .wrap,.about .in,.rec .in,.svc .in,.how .in,.rev .in,.blog .in,.ft .in,.ft .cp{padding-left:20px;padding-right:20px}
+  .d1{font-size:36px;line-height:46px;letter-spacing:-.7px}
+  .d2{font-size:28px;line-height:38px;letter-spacing:-.6px}
+  .d3{font-size:25px;line-height:33px}
+  .d4{font-size:20px;line-height:29px}
+  .p18{font-size:16px;line-height:27px}
+  .hero .ph,.hero .ph img{height:600px}
+  .hero .ph{margin:0 6px}
+  .hero .in{top:120px}
+  .hero .trust{bottom:36px;flex-wrap:wrap}
+  .trio .grid,.svc .grid,.how .grid,.rev .grid,.blog .grid{grid-template-columns:1fr}
+  .trio .c{padding:28px}
+  .about ul{grid-template-columns:1fr}
+  .rec .stats{grid-template-columns:1fr;gap:14px}
+  .rec .st b{font-size:34px;line-height:46px}
+  .band{padding:0 20px}
+  .band .box{padding:40px 22px}
+  .band .pics{flex-direction:column}
+  .band .pics figure{height:200px}
+  .band ul{gap:12px 24px}
+  .cta{padding:40px 20px}
+  .ft{padding-top:48px}
+  .ft .cols{grid-template-columns:1fr;gap:26px}
+  .ft .cp{margin-top:36px;flex-direction:column;gap:8px;padding:24px 20px}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body id="top">
+
+<nav class="nav">
+  <div class="in">
+    <a class="lg" href="#top" aria-label="바로손 홈">
+      <svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#db1c0a"/><path d="M7 16l4-6 3 4 2-3 3 5z" fill="#fff"/></svg>
+      바로손
+    </a>
+    <div class="mn">
+      <a class="ko" href="#svc">작업 항목</a>
+      <a class="ko" href="#how">진행 방식</a>
+      <a class="ko" href="#rev">후기</a>
+      <a class="ko" href="#blog">생활 정보</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a class="btn" href="tel:01048944905">010-4894-4905</a>
+      <button class="burger" type="button" aria-label="메뉴 열기"><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="ph"><img src="../moving-a/assets/hero.jpg" alt="" width="1420" height="850"></div>
+  <div class="in">
+    <h1 class="d1 ko">부르면 그날<br>바로 오는 손</h1>
+    <p class="p18 ko">수도꼭지 하나부터 이사 정리까지, 집에서 생기는 일은 다 맡습니다.</p>
+    <div class="go">
+      <a class="btn" href="tel:01048944905">전화 010-4894-4905</a>
+      <a class="btn btn-o ko" href="#svc">작업 항목 보기</a>
+    </div>
+  </div>
+  <div class="trust">
+    <div class="faces" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <p class="ko"><b>4,600여 가구</b>가 다시 부르셨습니다</p>
+  </div>
+</section>
+
+<main>
+
+  <!-- 신뢰 3칸 874~1130 -->
+  <section class="trio">
+    <div class="wrap">
+      <div class="grid">
+        <div class="c rv"><h4 class="d4 ko">약속한 시간에</h4><p class="p16 ko">잡은 시간에 도착합니다. 늦어지면 미리 전화드립니다.</p></div>
+        <div class="c rv"><h4 class="d4 ko">기술자가 직접</h4><p class="p16 ko">현장 경력 십 년 이상인 사람이 직접 나갑니다.</p></div>
+        <div class="c rv"><h4 class="d4 ko">금액을 먼저</h4><p class="p16 ko">보고 나서 금액을 말씀드립니다. 추가는 없습니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 소개 1130~1832 -->
+  <section class="about">
+    <div class="in">
+      <figure class="rv"><img src="../moving-a/assets/about.jpg" alt="" width="640" height="497" loading="lazy"></figure>
+      <div class="tx">
+        <h2 class="d2 ko">집에서 생기는 일은<br>한 번에 끝냅니다</h2>
+        <p class="p18 ko">새는 수도부터 이사 뒤 정리까지, 업체를 여러 곳 부르지 않으셔도 됩니다. 한 팀이 와서 다 봅니다.</p>
+        <ul>
+          <li class="ko"><b><svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 6l2.4 2.4L9 3"/></svg></b>현장 십 년 이상 기술자</li>
+          <li class="ko"><b><svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 6l2.4 2.4L9 3"/></svg></b>작업 후 하자 보증</li>
+          <li class="ko"><b><svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 6l2.4 2.4L9 3"/></svg></b>사진으로 남기는 견적</li>
+          <li class="ko"><b><svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 6l2.4 2.4L9 3"/></svg></b>주말 · 공휴일도 출동</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 실적 1832~2212 -->
+  <section class="rec">
+    <div class="in">
+      <h2 class="d3 ko">숫자가 대신<br>말해 드립니다</h2>
+      <div class="stats">
+        <div class="st rv"><b>20+</b><span class="ko">해 온 햇수</span></div>
+        <div class="st rv"><b>1,000+</b><span class="ko">마친 작업</span></div>
+        <div class="st rv"><b>98%</b><span class="ko">재의뢰율</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 짙은 밴드 2212~2944 -->
+  <section class="band">
+    <div class="box">
+      <h2 class="d2 ko">부르시면 끝까지<br>책임집니다</h2>
+      <p class="p18 ko">한 번 오고 마는 일이 아닙니다. 마친 뒤에도 문제가 생기면 다시 나갑니다.</p>
+      <ul>
+        <li class="ko"><b><svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 6l2.4 2.4L9 3"/></svg></b>작업 후 6개월 보증</li>
+        <li class="ko"><b><svg viewBox="0 0 11 11" aria-hidden="true"><path d="M2 6l2.4 2.4L9 3"/></svg></b>연락되는 담당자 지정</li>
+      </ul>
+      <div class="go"><a class="btn ko" href="#cta">견적 받아 보기</a></div>
+      <div class="pics">
+        <figure class="a"><img src="../moving-a/assets/band-1.jpg" alt="" width="260" height="196" loading="lazy"></figure>
+        <figure class="b"><img src="../moving-a/assets/band-2.jpg" alt="" width="250" height="190" loading="lazy"></figure>
+        <figure class="c"><img src="../moving-a/assets/band-3.jpg" alt="" width="270" height="200" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 작업 항목 2944~3980 -->
+  <section class="svc" id="svc">
+    <div class="in">
+      <div class="hd">
+        <h2 class="d2 ko">이런 일을 합니다</h2>
+        <p class="p16 ko">아래 없는 일도 전화 주시면 가능한지 먼저 알려 드립니다.</p>
+      </div>
+      <div class="grid">
+        <article class="scard rv"><figure><img src="../moving-a/assets/svc-1.jpg" alt="" width="411" height="250" loading="lazy"></figure>
+          <div class="bd"><h3 class="d4 ko">창호 교체</h3><p class="p16 ko">외풍 들어오는 창을 재고 새로 답니다.</p></div></article>
+        <article class="scard rv"><figure><img src="../moving-a/assets/svc-2.jpg" alt="" width="411" height="250" loading="lazy"></figure>
+          <div class="bd"><h3 class="d4 ko">실내 도장</h3><p class="p16 ko">곰팡이와 얼룩을 잡고 다시 칠합니다.</p></div></article>
+        <article class="scard rv"><figure><img src="../moving-a/assets/svc-3.jpg" alt="" width="411" height="250" loading="lazy"></figure>
+          <div class="bd"><h3 class="d4 ko">바닥 시공</h3><p class="p16 ko">장판과 마루를 걷어 내고 새로 깝니다.</p></div></article>
+        <article class="scard rv"><figure><img src="../moving-a/assets/svc-4.jpg" alt="" width="411" height="250" loading="lazy"></figure>
+          <div class="bd"><h3 class="d4 ko">수도 · 배관</h3><p class="p16 ko">새는 곳을 찾아 잡고 막힌 곳을 뚫습니다.</p></div></article>
+        <article class="scard rv"><figure><img src="../moving-a/assets/svc-5.jpg" alt="" width="411" height="250" loading="lazy"></figure>
+          <div class="bd"><h3 class="d4 ko">이사 정리</h3><p class="p16 ko">짐을 옮기고 자리를 잡아 드립니다.</p></div></article>
+        <article class="scard rv"><figure><img src="../moving-a/assets/svc-6.jpg" alt="" width="411" height="250" loading="lazy"></figure>
+          <div class="bd"><h3 class="d4 ko">입주 청소</h3><p class="p16 ko">들어가시기 전에 구석까지 닦아 둡니다.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 진행 3980~4555 -->
+  <section class="how" id="how">
+    <div class="in">
+      <h2 class="d2 ko">이렇게 진행합니다</h2>
+      <div class="grid">
+        <div class="s rv"><div class="no">1</div><h3 class="d4 ko">전화로 상담</h3>
+          <p class="p16 ko">어디가 어떤지 말씀해 주시면 가능한지, 얼마나 걸릴지 먼저 알려 드립니다.</p></div>
+        <div class="s rv"><div class="no">2</div><h3 class="d4 ko">방문 견적</h3>
+          <p class="p16 ko">직접 보고 금액을 냅니다. 사진으로 남겨 드리고 그 금액에서 늘어나지 않습니다.</p></div>
+        <div class="s rv"><div class="no">3</div><h3 class="d4 ko">작업과 보증</h3>
+          <p class="p16 ko">약속한 날에 끝냅니다. 마친 뒤 여섯 달 안에 문제가 생기면 다시 나갑니다.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 후기 4555~5257 -->
+  <section class="rev" id="rev">
+    <div class="in">
+      <div class="hd">
+        <h2 class="d2 ko">맡겨 보신 분들의 말</h2>
+        <p class="p16 ko">작업을 마치고 남겨 주신 이야기 그대로입니다.</p>
+      </div>
+      <div class="grid">
+        <article class="rcard rv">
+          <div class="st"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg></div>
+          <blockquote class="ko">아침에 전화했는데 오후에 오셨습니다. 새는 데를 바로 찾아 잡아 주시고 금액도 말씀하신 그대로였습니다.</blockquote>
+          <div class="who"><i></i><div><b class="ko">김OO 님</b><span class="ko">강남구 · 수도 수리</span></div></div>
+        </article>
+        <article class="rcard rv">
+          <div class="st"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg></div>
+          <blockquote class="ko">이사 다음 날 정리를 부탁드렸는데 하루 만에 다 끝내 주셨습니다. 어디에 뭘 두면 좋을지도 같이 봐 주셨습니다.</blockquote>
+          <div class="who"><i></i><div><b class="ko">박OO 님</b><span class="ko">송파구 · 이사 정리</span></div></div>
+        </article>
+        <article class="rcard rv">
+          <div class="st"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg><svg viewBox="0 0 24 24"><path d="M12 2l3 6.6 7 .9-5 4.9 1.2 7L12 18l-6.2 3.4L7 14.4 2 9.5l7-.9z"/></svg></div>
+          <blockquote class="ko">창을 바꾸고 나서 외풍이 확 줄었습니다. 견적을 사진으로 남겨 주셔서 나중에 볼 때도 편했습니다.</blockquote>
+          <div class="who"><i></i><div><b class="ko">이OO 님</b><span class="ko">마포구 · 창호 교체</span></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 생활 정보 5257~6275 -->
+  <section class="blog" id="blog">
+    <div class="in">
+      <div class="hd">
+        <h2 class="d2 ko">알아 두면 덜 부르십니다</h2>
+        <p class="p16 ko">직접 해 보실 수 있는 것들을 정리해 두었습니다.</p>
+      </div>
+      <div class="grid">
+        <article class="bcard rv"><figure><img src="../moving-a/assets/post-1.jpg" alt="" width="411" height="280" loading="lazy"></figure>
+          <div class="bd"><p class="dt">2026.09.02</p><h3 class="d4 ko">집에 두면 좋은 공구 열두 가지</h3>
+            <p class="p16 ko">이것만 있으면 웬만한 건 직접 하실 수 있습니다.</p></div></article>
+        <article class="bcard rv"><figure><img src="../moving-a/assets/post-2.jpg" alt="" width="411" height="280" loading="lazy"></figure>
+          <div class="bd"><p class="dt">2026.08.21</p><h3 class="d4 ko">겨울 오기 전 점검할 곳</h3>
+            <p class="p16 ko">창틀과 배관만 미리 봐 두셔도 겨울이 편합니다.</p></div></article>
+        <article class="bcard rv"><figure><img src="../moving-a/assets/post-3.jpg" alt="" width="411" height="280" loading="lazy"></figure>
+          <div class="bd"><p class="dt">2026.08.07</p><h3 class="d4 ko">이사 전날 챙길 것</h3>
+            <p class="p16 ko">전날에 이것만 해 두시면 당일이 훨씬 수월합니다.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 신청 6275~6871 -->
+  <section class="cta" id="cta">
+    <div class="box">
+      <img src="../moving-a/assets/cta.jpg" alt="" width="1280" height="476" loading="lazy">
+      <div class="ov">
+        <h2 class="d2 ko">부르실 곳 하나면 됩니다</h2>
+        <p class="p18 ko">지금 전화 주시면 오늘 안에 가능한지 바로 알려 드립니다.</p>
+        <div class="go">
+          <a class="btn" href="tel:01048944905">010-4894-4905</a>
+          <a class="btn btn-w ko" href="mailto:6gsmake@gmail.com">메일로 견적 문의</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- 푸터 6871~7462 -->
+<footer class="ft">
+  <div class="in">
+    <div class="cols">
+      <div>
+        <span class="lg">
+          <svg viewBox="0 0 26 26" aria-hidden="true"><rect width="26" height="26" rx="7" fill="#db1c0a"/><path d="M7 16l4-6 3 4 2-3 3 5z" fill="#fff"/></svg>
+          바로손
+        </span>
+        <p class="ko">이사부터 집수리, 설비까지 한 팀이 맡는 생활 시공 업체입니다.</p>
+      </div>
+      <div>
+        <h6 class="ko">작업</h6>
+        <a class="l ko" href="#svc">작업 항목</a>
+        <a class="l ko" href="#how">진행 방식</a>
+        <a class="l ko" href="#rev">후기</a>
+      </div>
+      <div>
+        <h6 class="ko">안내</h6>
+        <a class="l ko" href="#blog">생활 정보</a>
+        <a class="l ko" href="#cta">견적 문의</a>
+        <a class="l ko" href="#top">서비스 지역</a>
+      </div>
+      <div>
+        <h6 class="ko">연락</h6>
+        <a class="l" href="tel:01048944905">010-4894-4905</a>
+        <a class="l" href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a>
+        <a class="l ko" href="#top">서울 강남구 바로길 12</a>
+      </div>
+    </div>
+  </div>
+  <div class="cp">
+    <span class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</span>
+    <span class="ko">© 2026 바로손</span>
+  </div>
+</footer>
+
+</body>
+</html>
