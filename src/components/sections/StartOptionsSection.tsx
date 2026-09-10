@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/sections/SectionHeader";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SAMPLES, getPremiumCategories } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
-import { cn } from "@/lib/utils";
+import { PremiumCategoryPicker } from "@/components/site/PremiumCategoryPicker";
 
 /**
  * 시작하는 방법은 두 가지뿐이라 한 섹션에서 대비시킨다.
@@ -115,53 +115,12 @@ export function StartOptionsSection() {
             </div>
 
             <div className="mt-5 grid gap-5 lg:grid-cols-[250px_1fr]">
-              {/* 디자인 선택 — 카테고리로 묶어 8종만 두므로 스크롤이 없다 */}
-              <div className="flex gap-4 overflow-x-auto pb-1 scrollbar-none lg:flex-col lg:gap-4 lg:overflow-visible lg:pb-0">
-                {PREMIUM_GROUPS.map((group) => (
-                  <div key={group.key} className="shrink-0 lg:shrink">
-                    <p className="mb-1.5 px-1 text-[11px] font-semibold text-muted-foreground">
-                      {group.label}
-                    </p>
-                    <ul className="flex gap-2 lg:flex-col lg:gap-1">
-                      {group.items.map((d) => {
-                        const isActive = d.sample.slug === activeSlug;
-                        return (
-                          <li key={d.sample.slug} className="shrink-0 lg:shrink">
-                            <button
-                              type="button"
-                              // 클릭·포커스로만 바꾼다 — 호버로 바꾸면 목록을 지나가는 동안 큰 화면이 계속 깜빡였다
-                              onClick={() => setActiveSlug(d.sample.slug)}
-                              onFocus={() => setActiveSlug(d.sample.slug)}
-                              aria-pressed={isActive}
-                              className={cn(
-                                "flex w-full items-center gap-2 rounded-xl border px-3.5 py-2.5 text-left transition-colors",
-                                isActive
-                                  ? "border-primary/40 bg-card shadow-xs"
-                                  : "border-transparent hover:bg-card/70",
-                              )}
-                            >
-                              <span
-                                className={cn(
-                                  "whitespace-nowrap text-sm font-semibold",
-                                  isActive ? "text-foreground" : "text-muted-foreground",
-                                )}
-                              >
-                                {d.label}
-                              </span>
-                              <ArrowRight
-                                className={cn(
-                                  "ml-auto hidden h-3.5 w-3.5 lg:block",
-                                  isActive ? "text-primary opacity-100" : "opacity-0",
-                                )}
-                              />
-                            </button>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+              {/* 디자인 선택 — 26종이라 카테고리를 접어 두고 누른 것만 펼친다 */}
+              <PremiumCategoryPicker
+                groups={PREMIUM_GROUPS}
+                activeSlug={activeSlug}
+                onSelect={setActiveSlug}
+              />
 
               {/* 선택한 디자인의 실제 구축 화면 */}
               <div className="overflow-hidden rounded-2xl border border-border bg-card">
