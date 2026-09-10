@@ -12,10 +12,13 @@ with sync_playwright() as p:
         while y<H: pg.evaluate(f'window.scrollTo(0,{y})'); pg.wait_for_timeout(110); y+=700
         pg.evaluate('window.scrollTo(0,0)'); pg.wait_for_timeout(1200)
         rows=pg.evaluate("""() => [...document.images].map(i=>{
+          // transform 이 걸린 요소는 bounding rect 가 실제 래스터 크기와 다르다.
+          // 레이아웃 크기(offsetWidth/Height)로 비교해야 진짜 확대만 잡힌다.
           const r=i.getBoundingClientRect();
           return {src:(i.getAttribute('src')||'').split('/').pop(),
                   nw:i.naturalWidth, nh:i.naturalHeight,
-                  rw:Math.round(r.width), rh:Math.round(r.height)};
+                  rw:i.offsetWidth||Math.round(r.width), rh:i.offsetHeight||Math.round(r.height),
+                  bw:Math.round(r.width), bh:Math.round(r.height)};
         }).filter(o=>o.rw>2&&o.rh>2)""")
         seen=set(); bad=[]
         for o in rows:
