@@ -6,6 +6,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { Reveal } from "@/pages/services/previewKit";
 import { PricingComparison } from "@/components/site/PricingComparison";
+import { LineComparison } from "@/components/site/LineComparison";
 
 const EXTRA_FEATURES = [
   { name: "예약 기능", price: "별도 협의" },
@@ -173,9 +174,19 @@ export default function PriceLanding() {
           </ul>
         </Reveal>
 
+        {/* 템플릿 라인 ↔ 프리미엄 라인 — "기능이 다 기본이면 프리미엄은 왜?"에 바로 답하는 자리 */}
+        <Reveal className="mt-20">
+          {/* 바로 위 "기본으로 제공되는 것"과 같은 목록이 되므로 공통 항목 블록은 끈다 */}
+          <LineComparison showSameBlock={false} />
+        </Reveal>
+
         {/* 필요하면 추가할 수 있는 기능 */}
         <Reveal className="mt-20">
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">필요하면 추가할 수 있는 기능</h2>
+          <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted-foreground break-keep">
+            템플릿 라인에 더하실 경우의 기준입니다. 예약 접수 · 관리는 프리미엄 라인에는 기본으로
+            포함되어 있습니다.
+          </p>
         </Reveal>
         <Reveal delay={100}>
           <ul className="mt-7 grid gap-3.5 sm:grid-cols-2">

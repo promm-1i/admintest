@@ -70,7 +70,7 @@ const PREMIUM_STEPS = [
 const PREMIUM_FAQ = [
   {
     q: "기본형 · 랜딩형과 무엇이 다른가요?",
-    a: "기본형과 랜딩형은 완성된 틀에 내용을 넣는 방식입니다. 프리미엄은 이 화면 자체를 사장님 브랜드에 맞춰 다시 짭니다. 사진도 새로 만들고, 화면 폭마다 배치를 따로 잡습니다.",
+    a: "기능은 같습니다. 관리자 모드 · 회원 · 데이터베이스 · 문자 알림은 64만 원 기본형에도 그대로 들어갑니다. 다른 것은 완성된 화면을 고르시는지, 브랜드에 맞춰 짓는지입니다. 기본형과 랜딩형은 만들어 둔 화면에 문구 · 사진만 바꿔 엽니다. 프리미엄은 섹션 순서와 개수를 사장님 사업에 맞춰 다시 잡고, 브랜드 색 · 글꼴을 바꾸고, 사진을 새로 만듭니다. 관리자도 다루실 데이터에 맞춰 설계해 조건 검색과 직원별 권한까지 넣습니다. 반응형 제작은 템플릿 라인에서는 추가 항목이지만 프리미엄에는 포함입니다.",
   },
   {
     q: "이 디자인에서 색이나 구성을 바꿀 수 있나요?",
@@ -167,7 +167,8 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
         <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">How We Build</p>
         <h2 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">프리미엄 라인은 이렇게 만듭니다</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-          완성된 틀에 내용만 채우는 방식이 아니라, 화면 자체를 브랜드에 맞춰 다시 짭니다.
+          만들어 둔 화면에 내용만 채우는 방식이 아니라, 섹션 구성과 색 · 글꼴 · 사진을 브랜드에 맞춰
+          다시 잡습니다.
         </p>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PREMIUM_SPECS.map((f, i) => {
