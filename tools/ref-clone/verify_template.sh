@@ -65,7 +65,9 @@ with sync_playwright() as p:
             pg.on('pageerror', lambda e: errs.append('PAGEERROR '+str(e)))
             pg.goto(f'file:///C:/web-project/mintcl-netlify-spa/public/templates/{folder}/index.html'); pg.wait_for_timeout(2000)
             pg.evaluate("document.querySelectorAll('.rv').forEach(e=>e.classList.add('on'))"); pg.wait_for_timeout(1000)
-            # loading=lazy 사진은 화면에 들어와야 불러오므로 끝까지 훑은 뒤에 깨진 이미지를 센다
+            # loading=lazy 사진은 화면에 들어와야 불러오므로 끝까지 훑은 뒤에 깨진 이미지를 센다.
+            # scroll-behavior:smooth 면 scrollTo 가 애니메이션이라 긴 페이지 바닥까지 못 닿는다 → 잠시 끈다
+            pg.add_style_tag(content='html{scroll-behavior:auto!important}')
             H=pg.evaluate('document.documentElement.scrollHeight')
             for y in range(0, H, 600): pg.evaluate(f'window.scrollTo(0,{y})'); pg.wait_for_timeout(120)
             pg.evaluate('window.scrollTo(0,0)'); pg.wait_for_timeout(1800)
