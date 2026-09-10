@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>메뉴 — 밀담 (프리미엄 디자인 D)</title>
+<meta name="description" content="밀담 전체 메뉴 페이지 — 빵과 브런치, 커피, 그 밖의 메뉴를 표로 정리했습니다.">
+<meta property="og:title" content="메뉴 — 밀담 (프리미엄 디자인 D)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Gaegu:wght@700&family=Londrina+Solid&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 7448)
+   페이지 rgb(245,240,234) · 흰 rgb(255,255,255) · 잉크 rgb(21,17,13) · 주황 rgb(244,89,9)
+   제목 Be Vietnam Pro 26/31.2 700 ls.5 · 라벨 14/14 700 ls.5 · 본문 18/27 500 · 15/22.5 400 · 작은글 13/18.85 400
+   손글씨 강조 Londrina Solid 22/22 · 20/24  (한글은 없어 감자꽃체로 대체)
+   마퀴 주황 띠 · 메뉴 카드 3열 · 팀 카드 회전 배치 ── */
+:root{--bg:rgb(245,240,234);--w:rgb(255,255,255);--ink:rgb(21,17,13);--or:rgb(244,89,9);
+  --gray:rgb(110,104,98);--line:rgba(21,17,13,.14);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Be Vietnam Pro","Pretendard Variable",Pretendard,sans-serif;
+  font-size:15px;line-height:22.5px;font-weight:400}
+.ko{text-wrap:pretty}
+.hand{font-family:"Londrina Solid","Gaegu",cursive;font-weight:400;color:var(--or)}
+.hand.ko{font-family:"Gaegu",cursive;font-weight:700}
+.d1{font-size:44px;line-height:52px;font-weight:700;letter-spacing:.5px}
+.d1.ko{letter-spacing:-.02em;line-height:58px}
+.d2{font-size:38px;line-height:45.6px;font-weight:700;letter-spacing:.5px}
+.d2.ko{letter-spacing:-.02em;line-height:52px}
+.d3{font-size:26px;line-height:31.2px;font-weight:700;letter-spacing:.5px}
+.d3.ko{letter-spacing:-.02em;line-height:38px}
+.lab{font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.lab.ko{letter-spacing:0;text-transform:none}
+.p18{font-size:18px;line-height:27px;font-weight:500}
+.p15{font-size:15px;line-height:22.5px;font-weight:400}
+.p13{font-size:13px;line-height:18.85px;font-weight:400;color:var(--gray)}
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.rv{transition:none}}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 24px;
+  border-radius:100px;border:1px solid var(--or);color:var(--or);
+  font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px;
+  transition:background .25s var(--ease),color .25s var(--ease)}
+.btn:hover{background:var(--or);color:var(--w)}
+.btn.fill{background:var(--or);color:var(--w)}
+.btn.fill:hover{opacity:.88}
+
+/* ── 상단 바 ── */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .in{max-width:1440px;margin:0 auto;padding:0 24px;height:52px;
+  display:flex;align-items:center;justify-content:space-between}
+.top a,.top .lg{font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px;
+  min-height:44px;display:inline-flex;align-items:center;text-transform:uppercase}
+.top .lg{font-family:"Londrina Solid","Gaegu",cursive;font-size:22px;color:var(--or);text-transform:none}
+.top .lg.ko{font-family:"Gaegu",cursive;font-weight:700;font-size:26px}
+.top a.ko{text-transform:none;letter-spacing:0}
+
+/* ── 히어로 ── */
+.hero{position:relative;height:660px;margin:0 24px;border-radius:0;overflow:clip;
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:44px;text-align:center}
+.hero img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(21,17,13,.15) 0%,rgba(21,17,13,0) 40%,rgba(21,17,13,.72) 100%)}
+.hero>*{position:relative;z-index:2;color:var(--w)}
+.hero p{margin-top:10px;max-width:520px}
+.hero .lgm{position:absolute;left:50%;top:26px;transform:translateX(-50%);z-index:3;
+  font-family:"Londrina Solid","Gaegu",cursive;font-size:30px;color:var(--w)}
+.hero .lgm.ko{font-family:"Gaegu",cursive;font-weight:700;font-size:34px}
+.hero .open{position:absolute;right:34px;top:56px;z-index:3;width:112px;height:96px;
+  border-radius:12px;background:var(--w);color:var(--ink);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;transform:rotate(4deg);
+  box-shadow:0 10px 24px rgba(0,0,0,.22)}
+.hero .open b{font-family:"Londrina Solid","Gaegu",cursive;font-size:30px;color:var(--or)}
+.hero .open b.ko{font-family:"Gaegu",cursive;font-weight:700}
+.hero .open span{font-size:10px;line-height:14px;font-weight:700;letter-spacing:.5px}
+
+/* ── 마퀴 ── */
+.mq{background:var(--or);color:var(--w);overflow:clip;padding:14px 0}
+.mq .tr{display:flex;align-items:center;width:max-content;animation:mqmv 24s linear infinite}
+@keyframes mqmv{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.mq .tr{animation:none}}
+.mq span{font-size:22px;line-height:26px;font-weight:700;letter-spacing:.5px;
+  white-space:nowrap;padding:0 22px}
+.mq i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.7);flex:0 0 auto}
+
+/* ── 섹션 머리 ── */
+.sh{text-align:center;padding:70px 0 34px}
+.sh .lab{color:var(--or)}
+.sh h2{margin-top:12px}
+.sh .hand{display:block;margin-top:4px;font-size:38px;line-height:44px}
+
+/* ── 메뉴 카드 ── */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.mcard{position:relative;background:var(--w);border-radius:6px;overflow:clip;
+  box-shadow:0 2px 10px rgba(21,17,13,.08);transition:transform .35s var(--ease)}
+.mcard:hover{transform:translateY(-5px)}
+.mcard figure{height:300px;background:var(--bg)}
+.mcard figure img{width:100%;height:300px;object-fit:cover}
+.mcard .bd{padding:14px 16px 18px;display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
+.mcard h3{font-size:16px;line-height:22px;font-weight:600}
+.mcard p{margin-top:4px}
+.mcard .pr{font-size:15px;line-height:22px;font-weight:700;color:var(--or);flex:0 0 auto}
+.mcard .badge{position:absolute;right:0;top:14px;z-index:2;height:24px;padding:0 12px;
+  border-radius:100px 0 0 100px;background:var(--or);color:var(--w);
+  display:inline-flex;align-items:center;font-size:11px;line-height:11px;font-weight:700;letter-spacing:.5px}
+.mcard .badge.g{background:rgb(28,120,56)}
+.mcard .badge.d{background:var(--ink)}
+.more{margin-top:34px;display:flex;justify-content:center}
+
+/* ── 무료 커피 배너 ── */
+.freebie{margin:70px 0 0;text-align:center}
+.freebie .box{margin-top:16px;border:1px solid var(--line);border-radius:8px;
+  padding:34px 30px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.freebie .big{font-family:"Londrina Solid","Gaegu",cursive;font-size:56px;line-height:60px;color:var(--or)}
+.freebie .big.ko{font-family:"Gaegu",cursive;font-weight:700;font-size:52px}
+.freebie .sub{font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px}
+.freebie .sub em{font-style:normal;color:var(--or)}
+
+/* ── 갤러리 ── */
+.gal{margin-top:22px;display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gal figure{flex:0 0 auto;width:300px;height:220px;border-radius:6px;overflow:clip;background:var(--w)}
+.gal figure:first-child{border:1px solid var(--or);background:var(--bg)}
+.gal img{width:100%;height:100%;object-fit:cover}
+
+/* ── 소개 사진 밴드 ── */
+.story{padding:10px 0 20px}
+.story figure{border-radius:8px;overflow:clip;background:var(--w)}
+.story figure img{width:100%;height:620px;object-fit:cover}
+.story p{margin:22px auto 0;max-width:640px;text-align:center}
+
+/* ── 팀 ── */
+.team{padding:20px 0 60px}
+.team .board{position:relative;min-height:420px;margin-top:30px}
+.team .note{position:absolute;width:180px;height:150px;background:var(--w);border:1px solid var(--line);
+  border-radius:6px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end}
+.team .note::before{content:"";position:absolute;top:-6px;left:34px;width:11px;height:11px;
+  border-radius:50%;background:var(--or)}
+.team .note b{font-family:"Londrina Solid","Gaegu",cursive;font-size:20px;color:var(--ink)}
+.team .note b.ko{font-family:"Gaegu",cursive;font-weight:700;font-size:22px}
+.team .note span{font-size:12px;line-height:17px;color:var(--gray)}
+.team .n1{left:8%;top:0;transform:rotate(-6deg)}
+.team .n2{left:26%;top:34px;transform:rotate(3deg)}
+.team .n3{left:44%;top:6px;transform:rotate(-3deg)}
+.team .n4{left:62%;top:36px;transform:rotate(5deg)}
+.team .n5{left:24%;top:200px;transform:rotate(4deg)}
+.team .n6{left:44%;top:214px;transform:rotate(-4deg)}
+.team .cap{position:absolute;left:0;top:236px;width:210px}
+
+/* ── 방문 안내 ── */
+.visit{border:1px solid var(--line);border-radius:8px;padding:34px 30px;margin-bottom:24px}
+.visit .lab{color:var(--or)}
+.visit h2{margin-top:10px}
+.visit .hand{display:block;font-size:38px;line-height:44px}
+.visit .ad{margin-top:16px;font-size:16px;line-height:24px;font-weight:600}
+.visit .hr{margin-top:6px}
+
+/* ── 마무리 ── */
+.end{border:1px solid var(--line);border-radius:8px;padding:48px 30px;text-align:center}
+.end .lg{font-family:"Londrina Solid","Gaegu",cursive;font-size:30px;color:var(--or)}
+.end .lg.ko{font-family:"Gaegu",cursive;font-weight:700;font-size:34px}
+.end h2{margin-top:12px}
+.end .hand{display:block;font-size:44px;line-height:52px}
+.end .go{margin-top:26px}
+
+/* ── 푸터 ── */
+.ft{margin-top:24px}
+.ft .bar{max-width:1280px;margin:0 auto;padding:22px 40px;display:flex;
+  justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;
+  font-size:13px;line-height:18.85px;font-weight:600}
+.ft .bar nav{display:flex;gap:20px}
+.ft .bar .sns{display:flex;gap:8px}
+.ft .bar .sns span{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
+.ft .strip{background:var(--or);color:var(--w);padding:22px 0 14px}
+.ft .strip .in{max-width:1280px;margin:0 auto;padding:0 40px;
+  display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
+  font-size:12px;line-height:18px;font-weight:700;letter-spacing:.5px}
+.ft .legal{max-width:1280px;margin:10px auto 0;padding:0 40px;
+  font-size:12px;line-height:19px;color:rgba(255,255,255,.85);font-weight:400}
+
+/* ── 메뉴 페이지 ── */
+.mhead{text-align:center;padding:56px 0 30px}
+.mhead .hand{display:block;font-size:40px;line-height:46px}
+.mgroup{padding:26px 0}
+.mgroup h2{margin-bottom:18px}
+.mtable li{display:flex;justify-content:space-between;gap:20px;padding:14px 0;
+  border-bottom:1px solid var(--line);align-items:baseline}
+.mtable .nm{font-size:16px;line-height:22px;font-weight:600}
+.mtable .ds{margin-top:4px}
+.mtable .pr{font-size:15px;line-height:22px;font-weight:700;color:var(--or);flex:0 0 auto}
+
+/* ── 태블릿 ── */
+@media (max-width:1100px){
+  .wrap,.ft .bar,.ft .strip .in,.ft .legal{padding-left:24px;padding-right:24px}
+  .d1{font-size:33px;line-height:42px}
+  .d2{font-size:28px;line-height:36px}
+  .sh .hand,.visit .hand{font-size:30px;line-height:36px}
+  .hero{height:440px;margin:0 16px}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .story figure img{height:400px}
+  .team .board{min-height:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .team .note{position:static;transform:none;width:auto;height:auto;min-height:120px}
+  .team .cap{position:static;width:auto;margin-top:14px}
+  .freebie .big{font-size:42px;line-height:48px}
+}
+
+/* ── 모바일 ── */
+@media (max-width:809px){
+  .wrap,.ft .bar,.ft .strip .in,.ft .legal{padding-left:16px;padding-right:16px}
+  .d1{font-size:26px;line-height:34px}
+  .d1.ko{line-height:38px}
+  .d2{font-size:23px;line-height:31px}
+  .d2.ko{line-height:34px}
+  .d3{font-size:20px;line-height:27px}
+  .sh{padding-top:44px}
+  .sh .hand,.visit .hand,.end .hand{font-size:26px;line-height:32px}
+  .hero{height:380px;margin:0 10px}
+  .hero .open{right:14px;top:44px;width:88px;height:78px}
+  .mq span{font-size:17px;padding:0 14px}
+  .cards{grid-template-columns:1fr}
+  .story figure img{height:260px}
+  .team .board{grid-template-columns:1fr}
+  .freebie .big{font-size:32px;line-height:38px}
+  .ft .bar{flex-direction:column;align-items:flex-start}
+  .ft .strip .in{flex-direction:column;gap:6px}
+}
+</style>
+</head>
+<body id="top">
+
+<div class="top">
+  <div class="in">
+    <a class="ko" href="menu.html">메뉴</a>
+    <a class="lg ko" href="index.html">밀담</a>
+    <a class="ko" href="#visit">예약</a>
+  </div>
+</div>
+
+<main class="wrap">
+  <div class="mhead">
+    <p class="lab ko">메뉴</p>
+    <h1 class="d1 ko">오늘 나온 것들</h1>
+    <span class="hand ko">천천히 고르세요.</span>
+  </div>
+  <section class="mgroup rv">
+    <h2 class="d3 ko">빵과 브런치</h2>
+    <ul class="mtable">
+      <li><div><span class="nm ko">버터 크루아상</span><p class="ds p13 ko">스물네 시간 접어 구운 반죽.</p></div><span class="pr">4,500원</span></li>
+      <li><div><span class="nm ko">수란 토스트</span><p class="ds p13 ko">수란·마늘 요거트·칠리 버터.</p></div><span class="pr">12,000원</span></li>
+      <li><div><span class="nm ko">리코타 토스트</span><p class="ds p13 ko">리코타·꿀·타임.</p></div><span class="pr">9,000원</span></li>
+      <li><div><span class="nm ko">아침 브리오슈</span><p class="ds p13 ko">달걀·체다·베이컨.</p></div><span class="pr">8,500원</span></li>
+      <li><div><span class="nm ko">치킨 포카치아</span><p class="ds p13 ko">구운 닭고기·아이올리·채소.</p></div><span class="pr">11,000원</span></li>
+      <li><div><span class="nm ko">티라미수 프렌치토스트</span><p class="ds p13 ko">마스카포네·에스프레소·카카오.</p></div><span class="pr">10,500원</span></li>
+    </ul>
+  </section>
+  <section class="mgroup rv">
+    <h2 class="d3 ko">커피</h2>
+    <ul class="mtable">
+      <li><div><span class="nm ko">에스프레소</span><p class="ds p13 ko">진하게 뽑은 한 잔.</p></div><span class="pr">3,000원</span></li>
+      <li><div><span class="nm ko">플랫화이트</span><p class="ds p13 ko">더블 샷에 얇은 우유 거품.</p></div><span class="pr">4,500원</span></li>
+      <li><div><span class="nm ko">콜드브루</span><p class="ds p13 ko">열두 시간 우려 냅니다.</p></div><span class="pr">5,000원</span></li>
+      <li><div><span class="nm ko">오늘의 원두 드립</span><p class="ds p13 ko">그날 열린 원두로 내립니다.</p></div><span class="pr">5,500원</span></li>
+    </ul>
+  </section>
+  <section class="mgroup rv">
+    <h2 class="d3 ko">그 밖에</h2>
+    <ul class="mtable">
+      <li><div><span class="nm ko">제철 주스</span><p class="ds p13 ko">그날 들어온 과일로.</p></div><span class="pr">6,000원</span></li>
+      <li><div><span class="nm ko">시나몬번</span><p class="ds p13 ko">오후 두 시에 나옵니다.</p></div><span class="pr">5,000원</span></li>
+      <li><div><span class="nm ko">사워도우 한 덩이</span><p class="ds p13 ko">포장만 가능합니다.</p></div><span class="pr">7,000원</span></li>
+    </ul>
+  </section>
+  <section class="end rv" style="margin:40px 0 24px">
+    <span class="lg ko">밀담</span>
+    <h2 class="d2 ko">자리 잡아 드릴까요?</h2>
+    <span class="hand ko">전화 한 통이면 됩니다.</span>
+    <div class="go"><a class="btn fill" href="tel:01048944905">전화 010-4894-4905</a></div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="bar">
+    <nav><a class="ko" href="menu.html">메뉴</a><a class="ko" href="#gal">공간</a><a class="ko" href="#team">소개</a></nav>
+    <span class="ko">서울 강남구 밀담길 12 · 매일 07:00 – 18:00</span>
+    <span class="sns"><span>IG</span><span>FB</span><span>KT</span></span>
+  </div>
+  <div class="strip">
+    <div class="in">
+      <span class="ko">밀담 © 2026</span>
+      <a class="ko" href="#top">맨 위로</a>
+      <span class="ko">개인정보처리방침 · 이용약관</span>
+    </div>
+    <p class="legal ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 010-4894-4905 · 6gsmake@gmail.com</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

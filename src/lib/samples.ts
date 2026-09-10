@@ -60,6 +60,40 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "restaurant-h-template",
+    industry: "말차 · 음료 전문 카페 홈페이지",
+    title: "말차 · 음료 전문 카페 홈페이지 (프리미엄 디자인 E)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 말차 카페 · 메뉴 · 후기",
+    purpose:
+      "하늘 사진 히어로에 손글씨 제목이 얹히고, 아이콘이 붙는 마퀴와 큰 문단, 구름 위에 놓인 음료 사진 세 장, 별점이 붙는 메뉴 6종, 아바타 후기 목록, 매장 안내와 어두운 푸터까지 갖춘 말차 전문 카페 프리미엄 원페이지입니다. 음료명과 가격만 바꾸면 말차 · 음료 · 디저트 가게 어디에나 적용됩니다.",
+    features: ["하늘 사진 히어로 · 손글씨 제목", "아이콘 마퀴 · 구름 위 음료 사진", "별점 붙는 메뉴 6종", "아바타 후기 목록"],
+    idealFor: "말차 전문점, 음료 전문 카페, 디저트 가게, 테이크아웃 카페, 신메뉴 중심 매장",
+    image: "/thumbs/restaurant-h.jpg",
+    liveUrl: "/templates/restaurant-h/",
+    industryKey: "restaurant",
+    premiumLabel: "말차 카페 (하늘 톤)",
+    designCode: "RESP-1004",
+    premium: true,
+  },
+  {
+    slug: "restaurant-i-template",
+    industry: "베이커리 · 브런치 카페 홈페이지",
+    title: "베이커리 · 브런치 카페 홈페이지 (프리미엄 디자인 D)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 베이커리 · 브런치 · 메뉴",
+    purpose:
+      "사진 히어로에 손글씨 간판과 영업 배지가 얹히고, 주황 마퀴 띠가 흐르며, 인기·신메뉴 배지가 붙는 메뉴 카드 여섯 장과 무료 커피 배너, 가로로 넘기는 공간 갤러리, 종이처럼 흩뿌린 팀 카드, 주황 띠 푸터까지 갖춘 베이커리 · 브런치 카페 프리미엄 템플릿입니다. 홈과 전체 메뉴 두 페이지로 구성했습니다.",
+    features: ["손글씨 간판 · 영업 배지 히어로", "주황 마퀴 띠 · 배지 붙는 메뉴 카드", "가로 넘김 공간 갤러리", "흩뿌린 팀 카드 · 전체 메뉴 페이지"],
+    idealFor: "베이커리, 브런치 카페, 샌드위치 가게, 아침 여는 카페, 디저트 공방",
+    image: "/thumbs/restaurant-i.jpg",
+    liveUrl: "/templates/restaurant-i/",
+    industryKey: "restaurant",
+    premiumLabel: "베이커리 · 브런치",
+    designCode: "RESP-1005",
+    premium: true,
+  },
+  {
     slug: "restaurant-g-template",
     industry: "카페 · 로스터리 홈페이지",
     title: "카페 · 로스터리 홈페이지 (프리미엄 디자인 C)",
