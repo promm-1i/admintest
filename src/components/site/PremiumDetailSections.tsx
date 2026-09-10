@@ -107,7 +107,8 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
             실제 배포된 화면을 그대로 잘라왔습니다. 이 화면이 출발점이고, 여기서 섹션 순서와 브랜드
             색 · 글꼴을 사장님 사업에 맞춰 다시 잡은 뒤 사진을 새로 만들어 채웁니다.
           </p>
-          <div className="mt-6 grid gap-5 sm:grid-cols-2">
+          {/* grid-cols-1: 없으면 모바일 암시적 열이 캡션의 min-content(376px)로 잡혀 컨테이너를 넘친다 */}
+          <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {shots.map((shot, i) => (
               <Reveal key={shot.img} delay={i * 70}>
                 <figure className="overflow-hidden rounded-2xl border border-border bg-card shadow-xs">

@@ -77,7 +77,7 @@ export default function MaintenanceLanding() {
       {/* 02 홈페이지 운영에 필요한 3가지 */}
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
         <Reveal>
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">홈페이지 운영에 필요한 3가지</h2>
+          <h2 className="text-3xl font-bold text-foreground break-keep sm:text-4xl">홈페이지 운영에 필요한 3가지</h2>
         </Reveal>
         <div className="mt-8 divide-y divide-border border-t border-border">
           {GLOSSARY.map((g, i) => (
@@ -87,7 +87,7 @@ export default function MaintenanceLanding() {
                 <p className="mt-1.5 text-sm font-semibold uppercase tracking-widest text-muted-foreground/70">
                   {g.eyebrow}
                 </p>
-                <h3 className="mt-1.5 text-2xl font-bold text-foreground">{g.term}{ranSuffix(g.term)}?</h3>
+                <h3 className="mt-1.5 text-2xl font-bold text-foreground break-keep">{g.term}{ranSuffix(g.term)}?</h3>
               </div>
               <p className="text-lg leading-relaxed text-muted-foreground break-keep sm:col-span-9 sm:pt-1">
                 {g.desc}
@@ -105,7 +105,7 @@ export default function MaintenanceLanding() {
       <div className="border-y border-border bg-secondary/30 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
           <Reveal>
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 후 지원 정책</h2>
+            <h2 className="text-3xl font-bold text-foreground break-keep sm:text-4xl">제작 후 지원 정책</h2>
           </Reveal>
           <Reveal delay={100}>
             <ul className="mt-8 flex flex-col gap-3.5">
@@ -123,7 +123,7 @@ export default function MaintenanceLanding() {
       {/* 04 어떤 작업이 간단 수정인가요 */}
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
         <Reveal>
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">어떤 작업이 간단 수정인가요?</h2>
+          <h2 className="text-3xl font-bold text-foreground break-keep sm:text-4xl">어떤 작업이 간단 수정인가요?</h2>
         </Reveal>
         <div className="mt-9 grid gap-10 lg:grid-cols-2 lg:gap-16">
           <Reveal delay={90}>
@@ -137,7 +137,7 @@ export default function MaintenanceLanding() {
             </ul>
           </Reveal>
           <Reveal delay={180} className="lg:border-l lg:border-border lg:pl-16">
-            <h3 className="text-xl font-bold text-foreground">별도 작업 (견적 후 진행)</h3>
+            <h3 className="text-xl font-bold text-foreground break-keep">별도 작업 (견적 후 진행)</h3>
             <ul className="mt-5 space-y-2.5">
               {SEPARATE_SCOPE.map((item) => (
                 <li key={item} className="text-lg text-muted-foreground break-keep">
@@ -153,12 +153,12 @@ export default function MaintenanceLanding() {
       <div className="border-y border-border bg-secondary/30 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-10">
           <Reveal>
-            <h2 className="text-3xl font-bold text-foreground sm:text-4xl">유지보수 비용</h2>
+            <h2 className="text-3xl font-bold text-foreground break-keep sm:text-4xl">유지보수 비용</h2>
           </Reveal>
           <div className="mt-9 grid gap-7 sm:grid-cols-2 lg:grid-cols-4">
             {COST_TIERS.map((tier, i) => (
               <Reveal key={tier.title} delay={i * 80} className="border-t-2 border-foreground pt-5">
-                <h3 className="text-lg font-bold text-foreground">{tier.title}</h3>
+                <h3 className="text-lg font-bold text-foreground break-keep">{tier.title}</h3>
                 <p className="mt-2 text-base text-muted-foreground break-keep">{tier.desc}</p>
               </Reveal>
             ))}
@@ -168,7 +168,7 @@ export default function MaintenanceLanding() {
 
       {/* 06 관리자로 직접 관리 */}
       <Reveal className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:px-10">
-        <h2 className="text-3xl font-bold text-foreground sm:text-4xl">홈페이지를 직접 관리할 수도 있습니다</h2>
+        <h2 className="text-3xl font-bold text-foreground break-keep sm:text-4xl">홈페이지를 직접 관리할 수도 있습니다</h2>
         <p className="mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
           자주 수정해야 하는 내용이라면 매번 유지보수를 요청하기보다, 관리자 기능을 구축해 직접 관리할
           수 있습니다.

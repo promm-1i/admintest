@@ -118,22 +118,24 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
 
       {/* 실제로 갈리는 항목 */}
       <div className="mt-6 overflow-x-auto rounded-2xl border border-border">
-        <table className="w-full min-w-[42rem] border-collapse text-sm">
+        <table className="w-full border-collapse text-xs sm:min-w-[42rem] sm:text-sm">
           <caption className="sr-only">
             템플릿 라인과 프리미엄 라인에서 실제로 달라지는 항목 비교
           </caption>
           <thead>
             <tr className="bg-card">
-              <th scope="col" className="w-[9.5rem] px-4 py-4 text-left align-bottom">
-                <span className="text-xs font-semibold text-muted-foreground">여기가 갈립니다</span>
+              <th scope="col" className="w-[5rem] px-2 py-3 text-left align-bottom sm:w-[9.5rem] sm:px-4 sm:py-4">
+                <span className="text-[11px] font-semibold text-muted-foreground break-keep sm:text-xs">
+                  여기가 갈립니다
+                </span>
               </th>
-              <th scope="col" className="px-4 py-4 text-left align-bottom">
-                <span className="block text-base font-bold text-foreground">템플릿 라인</span>
-                <span className="mt-0.5 block text-sm font-bold text-muted-foreground">64만원 ~ 114만원</span>
+              <th scope="col" className="px-2 py-3 text-left align-bottom sm:px-4 sm:py-4">
+                <span className="block text-sm font-bold text-foreground sm:text-base">템플릿 라인</span>
+                <span className="mt-0.5 block text-[11px] font-bold text-muted-foreground sm:text-sm">64만원 ~ 114만원</span>
               </th>
-              <th scope="col" className="bg-primary/[0.06] px-4 py-4 text-left align-bottom">
-                <span className="block text-base font-bold text-primary">프리미엄 라인</span>
-                <span className="mt-0.5 block text-sm font-bold text-primary/80">300만원 ~</span>
+              <th scope="col" className="bg-primary/[0.06] px-2 py-3 text-left align-bottom sm:px-4 sm:py-4">
+                <span className="block text-sm font-bold text-primary sm:text-base">프리미엄 라인</span>
+                <span className="mt-0.5 block text-[11px] font-bold text-primary/80 sm:text-sm">300만원 ~</span>
               </th>
             </tr>
           </thead>
@@ -142,14 +144,14 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
               <tr key={row.label} className={i % 2 ? "bg-secondary/25" : ""}>
                 <th
                   scope="row"
-                  className="border-t border-border px-4 py-3.5 text-left align-top font-semibold text-foreground break-keep"
+                  className="border-t border-border px-2 py-3 text-left align-top font-semibold text-foreground break-keep sm:px-4 sm:py-3.5"
                 >
                   {row.label}
                 </th>
-                <td className="border-t border-border px-4 py-3.5 align-top text-muted-foreground break-keep">
+                <td className="border-t border-border px-2 py-3 align-top text-muted-foreground break-keep sm:px-4 sm:py-3.5">
                   {row.template}
                 </td>
-                <td className="border-t border-border bg-primary/[0.04] px-4 py-3.5 align-top font-medium text-foreground break-keep">
+                <td className="border-t border-border bg-primary/[0.04] px-2 py-3 align-top font-medium text-foreground break-keep sm:px-4 sm:py-3.5">
                   {row.premium}
                 </td>
               </tr>

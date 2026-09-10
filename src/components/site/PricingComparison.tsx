@@ -14,6 +14,10 @@ import {
 /**
  * ⓘ 아이콘 툴팁. 아이콘 기준 왼쪽 정렬로 열려 표 왼쪽 밖으로 잘리지 않고,
  * 아래쪽 행은 side="top"으로 위로 열어 스크롤 컨테이너에 잘리지 않게 한다.
+ *
+ * 모바일에서는 줄바꿈을 허용하고 폭을 14rem 으로 묶는다. whitespace-nowrap 만 두면 375px 화면에서
+ * 툴팁이 543px까지 벌어졌다. 아이콘이 첫 열 안쪽(~124px)에 있어 폭을 20rem 으로만 제한해도
+ * 화면을 넘으므로, 모바일에서는 아이콘 위치를 더해도 375 안에 들어오는 값이어야 한다.
  */
 function InfoTip({ lines, side = "bottom" }: { lines: string[]; side?: "top" | "bottom" }) {
   return (
@@ -28,7 +32,7 @@ function InfoTip({ lines, side = "bottom" }: { lines: string[]; side?: "top" | "
       <span
         role="tooltip"
         className={cn(
-          "pointer-events-none absolute left-0 z-30 w-max rounded-lg bg-neutral-800 px-3.5 py-2.5 text-left text-[11px] font-medium leading-relaxed text-white opacity-0 shadow-lg transition-all duration-200 group-hover:opacity-100 group-focus-within:opacity-100 motion-reduce:transition-none",
+          "pointer-events-none absolute left-0 z-30 w-max max-w-[14rem] sm:max-w-[min(20rem,calc(100vw-3rem))] rounded-lg bg-neutral-800 px-3.5 py-2.5 text-left text-[11px] font-medium leading-relaxed text-white opacity-0 shadow-lg transition-all duration-200 group-hover:opacity-100 group-focus-within:opacity-100 motion-reduce:transition-none",
           side === "bottom"
             ? "top-full mt-2 translate-y-1 group-hover:translate-y-0 group-focus-within:translate-y-0"
             : "bottom-full mb-2 -translate-y-1 group-hover:translate-y-0 group-focus-within:translate-y-0",
@@ -41,7 +45,7 @@ function InfoTip({ lines, side = "bottom" }: { lines: string[]; side?: "top" | "
           )}
         />
         {lines.map((l) => (
-          <span key={l} className="block whitespace-nowrap">
+          <span key={l} className="block sm:whitespace-nowrap">
             {l}
           </span>
         ))}
@@ -80,11 +84,11 @@ export function PricingComparison() {
   return (
     <div>
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-        <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+        <h2 className="text-2xl font-bold text-foreground break-keep sm:text-3xl">
           홈페이지 제작 비용 안내
           <span className="ml-2 align-middle text-sm font-medium text-muted-foreground">(VAT 별도)</span>
         </h2>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-sm text-muted-foreground break-keep">
           호스팅 · 셋팅 · 업종 전용 기능이 모두 포함된 금액입니다.
         </p>
       </div>

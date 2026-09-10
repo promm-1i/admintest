@@ -290,7 +290,8 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
             </Reveal>
           )}
 
-          <div className="mt-7 grid gap-5 sm:grid-cols-2">
+          {/* grid-cols-1: 없으면 모바일 암시적 열이 캡션 min-content 로 잡혀 컨테이너를 넘친다 */}
+          <div className="mt-7 grid grid-cols-1 gap-5 sm:grid-cols-2">
             {sectionShots.map((shot, i) => (
               <FadeIn key={shot.img} direction="up" delay={(i % 2) * 90}>
                 <figure className="group overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
