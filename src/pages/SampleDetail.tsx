@@ -32,6 +32,7 @@ import { Reveal, RevealScale } from "@/pages/services/previewKit";
 import { TemplateSpecPanel } from "@/components/site/TemplateSpecPanel";
 import { PricingComparison } from "@/components/site/PricingComparison";
 import { TemplateFeatureLanding } from "@/components/site/TemplateFeatureLanding";
+import { PremiumDetailSections } from "@/components/site/PremiumDetailSections";
 import { cn } from "@/lib/utils";
 
 export default function SampleDetail() {
@@ -219,6 +220,45 @@ export default function SampleDetail() {
               {renderSamplePreview()}
             </div>
           </RevealScale>
+
+          {/* 실제 구축 사례 — 이 디자인으로 납품한 고객 사이트 (동의받은 건만) */}
+          {sample.caseStudy && (
+            <Reveal className="overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-6 py-4">
+                <div className="min-w-0">
+                  <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">
+                    Live Case
+                  </p>
+                  <h2 className="mt-1 text-base font-bold text-foreground">실제 구축 사례</h2>
+                </div>
+                <a
+                  href={sample.caseStudy.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex shrink-0 items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground shadow-xs transition-colors hover:bg-primary/90"
+                >
+                  <ExternalLink className="h-3.5 w-3.5" />
+                  사이트 방문하기
+                </a>
+              </div>
+              <a href={sample.caseStudy.url} target="_blank" rel="noopener noreferrer" className="group block">
+                <img
+                  src={sample.caseStudy.image}
+                  alt={`${sample.caseStudy.name} 실제 구축 화면`}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.01]"
+                />
+              </a>
+              <div className="border-t border-border px-6 py-4">
+                <p className="text-sm font-semibold text-foreground">{sample.caseStudy.name}</p>
+                {sample.caseStudy.note && (
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">
+                    {sample.caseStudy.note}
+                  </p>
+                )}
+              </div>
+            </Reveal>
+          )}
           </div>
 
           {isTemplate && !isPremium && (
@@ -275,20 +315,8 @@ export default function SampleDetail() {
         </>
       )}
 
-      {/* 프리미엄 디자인 안내 — 템플릿 가격표 대신 프리미엄 라인 가격으로 연결 */}
-      {isPremium && (
-        <Reveal className="mt-16 rounded-2xl border border-primary/40 bg-primary/[0.04] p-6 sm:p-8">
-          <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">PREMIUM DESIGN</p>
-          <h2 className="mt-2 text-lg font-semibold text-foreground">이 디자인은 프리미엄 라인입니다</h2>
-          <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-            이 디자인을 기반으로 문구 · 이미지 · 구성을 맞춰 제작하며, <strong className="text-foreground">300만 원부터</strong>{" "}
-            시작합니다 (부가세 별도). 자세한 구축 범위와 비용은 프리미엄 라인 안내에서 확인하세요.
-          </p>
-          <Link to="/web-solutions" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline">
-            프리미엄 라인 안내 보기 →
-          </Link>
-        </Reveal>
-      )}
+      {/* 프리미엄 디자인 상세 — 구성 안내 · 담긴 화면 · 제작 사양 · 제작 방식 · FAQ · 가격 */}
+      {isPremium && <PremiumDetailSections sample={sample} />}
 
       {/* Bottom CTA Box */}
       <div className="mt-14 rounded-2xl border border-border bg-card p-8 text-center shadow-xs space-y-4">

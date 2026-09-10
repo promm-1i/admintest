@@ -40,6 +40,17 @@ export type Sample = {
    * 실제 홈페이지가 완성되면 임시 항목(moto-b · beauty-g)의 플래그를 옮기면 된다.
    */
   premium?: boolean;
+  /**
+   * 프리미엄 목록에 쓸 짧은 이름. 없으면 industry 에서 " 홈페이지"만 떼어 쓴다.
+   * 같은 업종에 시안이 둘 이상이면 industry 가 똑같아 목록에 같은 줄이 여러 번 뜬다 —
+   * 그때만 여기에 서로 구분되는 이름을 적는다 (호텔 4종 · 유치원 2종 · 인테리어 2종).
+   */
+  premiumLabel?: string;
+  /**
+   * 이 디자인으로 실제 납품한 고객 사이트. 미리보기 바로 아래에 썸네일로 노출된다.
+   * 고객 동의를 받은 건만 넣는다.
+   */
+  caseStudy?: { name: string; url: string; image: string; note?: string };
 };
 
 /**
@@ -190,6 +201,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/kids-f/",
     industryKey: "kids",
     designCode: "KIDP-1002",
+    premiumLabel: "유치원 (크림 파스텔)",
     premium: true,
   },
   {
@@ -206,6 +218,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/kids-a/",
     industryKey: "kids",
     designCode: "KIDP-1001",
+    premiumLabel: "유치원 (컬러 팝)",
     premium: true,
   },
   {
@@ -270,6 +283,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/hotel-b/",
     industryKey: "stay",
     designCode: "STAP-1002",
+    premiumLabel: "호텔 · 리조트 (클래식)",
     premium: true,
   },
   {
@@ -286,6 +300,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/hotel-c/",
     industryKey: "stay",
     designCode: "STAP-1003",
+    premiumLabel: "부티크 호텔 · 다이닝",
     premium: true,
   },
   {
@@ -302,6 +317,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/hotel-d/",
     industryKey: "stay",
     designCode: "STAP-1004",
+    premiumLabel: "산장 · 독채 리조트",
     premium: true,
   },
   {
@@ -318,6 +334,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/interior-f/",
     industryKey: "interior",
     designCode: "INTP-1002",
+    premiumLabel: "리모델링 · 시공",
     premium: true,
   },
   {
@@ -334,6 +351,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/interior-a/",
     industryKey: "interior",
     designCode: "INTP-1001",
+    premiumLabel: "건축 · 인테리어 스튜디오",
     premium: true,
   },
   {
@@ -355,6 +373,12 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/artist-a/",
     industryKey: "artist",
     designCode: "ARTP-1001",
+    caseStudy: {
+      name: "JINA JEON 전지나",
+      url: "https://jinajeon.netlify.app/",
+      image: "/thumbs/cases/artist-a.jpg",
+      note: "이 디자인을 기반으로 작가님 작품과 전시 이력에 맞춰 제작한 실제 사이트입니다.",
+    },
     premium: true,
   },
   {
@@ -371,6 +395,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/hotel-a/",
     industryKey: "stay",
     designCode: "STAP-1001",
+    premiumLabel: "호텔 · 리조트 (모던)",
     premium: true,
   },
   {
@@ -4660,7 +4685,7 @@ export function getHeroDesigns(n: number) {
 export function getPremiumDesigns() {
   return SAMPLES.filter((s) => s.premium && s.image).map((s) => ({
     sample: s,
-    label: s.industry.replace(" 홈페이지", ""),
+    label: s.premiumLabel ?? s.industry.replace(" 홈페이지", ""),
     href: `/samples/${s.slug}`,
   }));
 }
@@ -4678,16 +4703,34 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     industryKeys: ["shop", "perfume", "estate"],
   },
   {
-    key: "booking",
-    label: "예약 · 상담 업종",
-    desc: "방문과 예약, 상담 문의로 이어지는 구성",
-    industryKeys: ["stay", "hospital", "fitness"],
+    key: "stay-food",
+    label: "숙박 · 외식",
+    desc: "객실과 메뉴를 보여주고 예약 · 주문으로 잇는 구성",
+    industryKeys: ["stay", "restaurant"],
+  },
+  {
+    key: "care",
+    label: "병원 · 뷰티 · 피트니스",
+    desc: "진료 · 시술 항목을 안내하고 상담 예약을 받는 구성",
+    industryKeys: ["hospital", "beauty", "fitness"],
+  },
+  {
+    key: "edu",
+    label: "교육 · 학원",
+    desc: "과정과 수강료를 보여주고 등록 문의를 받는 구성",
+    industryKeys: ["academy", "kids", "study", "craft"],
+  },
+  {
+    key: "service",
+    label: "시공 · 전문 서비스",
+    desc: "작업 범위와 사례를 보여주고 견적 문의를 받는 구성",
+    industryKeys: ["interior", "moving", "law"],
   },
   {
     key: "portfolio",
     label: "브랜드 · 포트폴리오",
     desc: "작업물과 브랜드를 보여주는 데 집중한 구성",
-    industryKeys: ["artist", "video"],
+    industryKeys: ["artist", "video", "photo"],
   },
 ];
 
