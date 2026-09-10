@@ -16,6 +16,7 @@
 | `secdump.py <slug> <ylo> <yhi>` | 라이브 덤프에서 y 구간의 요소를 좌표·글꼴·배경까지 한 줄씩 출력 |
 | `cap_any.py <url> <out.png> <폭>` | 결과물 전체 페이지를 뷰포트 단위로 이어붙여 캡처 (고정/스티키 반복 제거) |
 | `overflow.py <slug> <폭>` | 그 폭에서 가로로 넘치는 요소를 찾아낸다 (가로 스크롤 원인) |
+| `outline.py <ref.tsv> <mine.tsv> <ref최소> <내최소>` | geo.py TSV 두 개의 **섹션 흐름을 나란히** 출력 — 통째로 빠진 섹션을 잡는다 |
 | `verify_template.sh <slug>` | 기본형 재생성 · CSS 일치 · 3 뷰포트 · 썸네일 · tsc |
 
 `measure2.py` 설정 파일 형태:
@@ -197,6 +198,26 @@ video-a 처럼 글로우 모양·아이콘·글꼴 차이가 전부 묻힌다. �
 - 썸네일 캡처 전에 `video.bg` 를 제거한다 (재생 타이밍에 따라 결과가 흔들린다).
 - 사진이 많은 템플릿은 폰용 축소본(`*-m.webp`, 표시 폭 2배) + `srcset` + 첫 화면 밖 `loading="lazy"` 로 줄인다(estate-a: 첫 로딩 2.4MB→~0.9MB). 단 **티커·마퀴 안의 사진과 `mask-image` 컨테이너 안의 사진에는 lazy 를 걸지 않는다** — 헤드리스에서 안 불러와지고 `verify_template.sh` 가 깨진 이미지로 센다. verify 는 srcset/poster 경로 치환과 끝까지 스크롤(1.8s 대기)을 넣어 두었다.
 - Framer `spring(stiffness, damping)` 은 과감쇠(ζ>1)면 튕김이 없으니 해석해(두 지수 항)를 1s 로 샘플링해 CSS `linear()` 이징으로 그대로 옮길 수 있다(`@supports (animation-timing-function:linear(0,1))`, 폴백 베지어). estate-a 히어로 등장에 적용.
+
+## 완료 보고 전 필수 — 섹션 누락 검사 (카페7 에서 나온 것)
+
+`verify_template.sh` 는 **가로스크롤·깨진이미지·CSS일치·tsc 만 본다. 섹션이 통째로 빠져도 PASS 한다.**
+2026-09-11 카페7 은 42회 전부 PASS 였는데 실제로는 리뷰·팀·이벤트·저널·FAQ 등 16개 섹션이 없었다.
+
+```bash
+python geo.py <레퍼런스URL> ref.tsv          # 레퍼런스
+python geo.py file:///.../index.html my.tsv  # 구현본
+python outline.py ref.tsv my.tsv 40 30       # 섹션 흐름 나란히
+```
+
+- **문서높이가 레퍼런스보다 30% 이상 짧으면 "한글이 짧아서" 가 아니다. 섹션이 빠진 것이다.**
+  한글 치환으로 줄어드는 폭은 10% 안쪽이다(하루커피 -21% 도 실은 컨테이너 폭 차이였다).
+- 대형 제목은 `awk -F'	' '{split($13,a,"/"); if(a[1]+0>=60) print}'` 로 ref 와 최대치를 맞춰 본다.
+  한글이 넓어 줄여야 하는 건 맞지만 **글자수 × 크기 × 0.85 로 계산해 실제 필요한 만큼만** 줄인다.
+  (말차랩 히어로 3글자는 300px 이어도 741px 라 1440 안에 들어갔는데 200px 로 줄여 버렸다.)
+- 글꼴은 **개수까지** 맞춘다. ref 가 제목·본문 두 벌이면 두 벌 쓴다(온결커피에서 본문 Inter Display 를
+  빠뜨리고 제목용 Alan Sans 로 본문까지 조판했다). 손글씨 악센트체의 **사용 횟수**도 본다
+  (초록담 ref Sacramento 103군데 ↔ 내 나눔손글씨펜 4군데).
 
 ## 클래스·검증 함정 (fitness-a · dental-a · hotel-a 에서 나온 것)
 
