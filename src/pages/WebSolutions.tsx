@@ -108,7 +108,7 @@ export default function WebSolutions() {
           <p className="mt-1.5 text-sm font-semibold text-foreground">완성된 화면을 고릅니다</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
             이미 만들어 둔 화면에 문구·사진만 바꿔 빠르고 합리적으로 시작합니다. 관리자 모드와
-            데이터베이스도 여기에 기본으로 들어갑니다. 반응형은 선택해서 추가합니다.
+            데이터베이스, 반응형 제작도 여기에 기본으로 들어갑니다.
           </p>
           <Link
             to="/templates"
@@ -201,8 +201,8 @@ export default function WebSolutions() {
       </p>
       <h2 className="mt-2 text-xl font-semibold">프리미엄 라인 구축 비용</h2>
       <p className="mt-2 text-sm text-muted-foreground break-keep">
-        모든 구성이 반응형으로 제작되며, 구축비에 첫 해 호스팅료와 셋팅비용, 도메인 1개(1년)가 모두
-        포함됩니다. 반응형을 따로 추가하실 필요가 없습니다.
+        구축비에 첫 해 호스팅료와 셋팅비용, 도메인 1개(1년)가 모두 포함됩니다. 아래 금액 외에 오픈까지
+        더 드는 비용은 없습니다.
       </p>
 
       <div className="mt-6 grid gap-5 sm:grid-cols-3">

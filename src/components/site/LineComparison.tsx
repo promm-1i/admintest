@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 /**
  * 템플릿 라인 ↔ 프리미엄 라인 비교.
  *
- * 관리자 모드 · 회원 · DB · 문자는 두 라인 모두 기본 제공이므로(PriceLanding의
+ * 관리자 모드 · 반응형 · DB · 문자는 두 라인 모두 기본 제공이므로(PriceLanding의
  * "기본으로 제공되는 것", templatePackages의 PRICING_ROWS와 같은 사실) 기능을
  * 차별점으로 쓰지 않는다. 같은 것을 먼저 인정하고, 실제로 갈리는 항목만 표로 보여준다.
  */
