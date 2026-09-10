@@ -10,6 +10,7 @@ import { SAMPLES, type Sample } from "./samples";
  */
 const INDUSTRY_PREFIX: Record<string, string> = {
   academy: "ACA",
+  agency: "AGE",
   auto: "AUT",
   beauty: "BEA",
   care: "CAR",

@@ -9,6 +9,7 @@ import { PricingComparison } from "@/components/site/PricingComparison";
 import { LineComparison } from "@/components/site/LineComparison";
 
 const EXTRA_FEATURES = [
+  { name: "회원 기능 (가입 · 로그인 · 마이페이지)", price: "별도 협의" },
   { name: "예약 기능", price: "별도 협의" },
   { name: "결제 연동", price: "별도 협의" },
   { name: "다국어 지원", price: "별도 협의" },
@@ -30,10 +31,10 @@ const QUOTE_FACTORS = [
   { label: "자료 정리 정도", desc: "문구·사진 같은 원고가 정리되어 있을수록 제작 기간과 비용이 줄어듭니다." },
 ];
 
+/** 전 등급 기본 제공 — LineComparison의 SAME_IN_BOTH와 같은 목록이라 함께 고친다 */
 const INCLUDED_BY_DEFAULT = [
   "관리자 모드 (공지 · 문의 · 콘텐츠 관리)",
-  "회원 기능",
-  "모바일 웹 기본타입",
+  "반응형 제작 (PC · 태블릿 · 모바일)",
   "도메인 1개 (첫 1년 무료)",
   "DB · 파일 무제한",
   "실시간 문자 기능 (무료 설치)",

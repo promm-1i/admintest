@@ -60,6 +60,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "agency-a-template",
+    industry: "디자인 에이전시 · 브랜딩 스튜디오 홈페이지",
+    title: "디자인 에이전시 · 브랜딩 스튜디오 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "portfolio", "small-business"],
+    tag: "프리미엄 디자인 · 에이전시 · 작업 사례 · 5페이지",
+    purpose:
+      "검은 바탕에 120px 초대형 제목이 얹히는 사진 히어로에서 시작해, 좌우로 흐르는 두 줄 마퀴, 스튜디오 소개, 855px 대형 작업 카드, 전면 메뉴 오버레이, 흰 카드 푸터까지 갖춘 브랜드 디자인 스튜디오 프리미엄 템플릿입니다. 홈 · 소개 · 작업 · 문의에 더해 과제 → 해결 → 결과로 이어지는 작업 상세 페이지까지 다섯 화면으로 구성했습니다. 마우스를 따라오는 민트 커서 링이 함께 들어갑니다.",
+    features: ["120px 초대형 제목 사진 히어로", "좌우로 흐르는 두 줄 마퀴", "과제·해결·결과 작업 상세 페이지", "전면 메뉴 오버레이 · 커서 링"],
+    idealFor: "디자인 에이전시, 브랜딩 스튜디오, 건축사무소, 영상 프로덕션, 광고 대행사",
+    image: "/thumbs/agency-a.jpg",
+    liveUrl: "/templates/agency-a/",
+    industryKey: "agency",
+    designCode: "AGEP-1001",
+    premium: true,
+  },
+  {
     slug: "restaurant-a-template",
     industry: "카페 · 로스터리 홈페이지",
     title: "카페 · 로스터리 홈페이지 (프리미엄 디자인 A)",
@@ -4730,7 +4746,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "portfolio",
     label: "브랜드 · 포트폴리오",
     desc: "작업물과 브랜드를 보여주는 데 집중한 구성",
-    industryKeys: ["artist", "video", "photo"],
+    industryKeys: ["artist", "video", "photo", "agency"],
   },
 ];
 

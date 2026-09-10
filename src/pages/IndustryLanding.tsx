@@ -15,11 +15,12 @@ function landingSampleOf(key: string) {
   );
 }
 
+/** 가격 오름차순. 반응형은 전 등급 기본 제공이라 구분 축이 아니다 — templatePackages.ts 참고 */
 const PACKAGES = [
   { name: "기본형", price: "64만원~", note: "가성비 패키지" },
-  { name: "기본형 + 반응형", price: "94만원~", note: "" },
   { name: "랜딩형", price: "84만원~", note: "추천" },
-  { name: "랜딩형 + 반응형", price: "114만원~", note: "" },
+  { name: "기본형 + 서브페이지", price: "94만원~", note: "" },
+  { name: "랜딩형 + 서브페이지", price: "114만원~", note: "" },
 ];
 
 /**
@@ -32,7 +33,7 @@ export default function IndustryLanding() {
   const sample = landingSampleOf(key);
 
   usePageTitle(
-    copy ? `${copy.keyword} — 64만원부터, 7일 완성 | NOVERIQ` : "업종별 홈페이지 제작 | NOVERIQ",
+    copy ? `${copy.keyword} — 64만원부터, 영업일 7일 | NOVERIQ` : "업종별 홈페이지 제작 | NOVERIQ",
     copy
       ? `${copy.intro} 호스팅 · 도메인 · 관리자까지 포함, 영업일 7일 제작. 실제 화면을 보고 시작하세요.`
       : undefined,

@@ -2,7 +2,13 @@
  * 홈페이지 템플릿 요금제 구조.
  *
  * 모든 패키지에 공통으로 들어가는 필수 비용(호스팅 1년 24만 + 셋팅 10만 + 업종 전용 기능 30만 = 64만)에
- * 패키지별 디자인 비용만 더해 최종 시작가가 결정된다. 모든 금액은 VAT 별도.
+ * 패키지별 디자인 비용과 서브페이지 제작비를 더해 최종 시작가가 결정된다. 모든 금액은 VAT 별도.
+ *
+ * 2026-09-10, 구분 축을 "반응형 유무"에서 "페이지 수"로 바꿨다. 템플릿 154종을 실측한 결과
+ * 기본형 템플릿도 미디어쿼리와 viewport가 이미 다 들어 있어(moto-a-basic은 랜딩형과 @media 수가
+ * 동일) 반응형을 별도로 받을 근거가 없었다. 반응형은 전 등급 기본 제공으로 올리고, 30만원은
+ * 서브페이지 분리 제작에 붙인다. 배열 순서는 가격 오름차순이다 — 예전에는 "기본+반응형 94만"이
+ * "랜딩형 84만"보다 비싸 어느 쪽이 상위인지 읽히지 않았다.
  */
 
 const MAN = 10_000;
@@ -16,12 +22,19 @@ export const BASE_COST = {
 
 const BASE_TOTAL = BASE_COST.hosting + BASE_COST.setup + BASE_COST.industryFeature; // 64만
 
+/** 랜딩형 연출(스크롤 등장 · 인터랙션) 추가 비용 */
+const LANDING_COST = 20 * MAN;
+/** 소개 · 서비스 · 사례 · 문의 등을 별도 페이지로 분리 제작하는 비용 */
+const SUBPAGE_COST = 30 * MAN;
+
 export type TemplatePackage = {
   key: string;
   label: string;
-  /** 패키지별 디자인 비용 (기본형은 무료) */
+  /** 랜딩형 연출 비용 (기본형은 무료) */
   designCost: number;
-  /** 공통 필수 비용 + 디자인 비용 */
+  /** 서브페이지 분리 제작 비용 (원페이지는 0) */
+  subpageCost: number;
+  /** 공통 필수 비용 + 연출 비용 + 서브페이지 비용 */
   total: number;
   badge?: string;
   badgeTone?: "value" | "recommended";
@@ -33,33 +46,37 @@ export const TEMPLATE_PACKAGES: TemplatePackage[] = [
     key: "basic",
     label: "기본형",
     designCost: 0,
+    subpageCost: 0,
     total: BASE_TOTAL,
-    desc: "필요한 정보를 정직하게 전달하는 정적 구성",
-  },
-  {
-    key: "basic-responsive",
-    label: "기본+반응형",
-    designCost: 30 * MAN,
-    total: BASE_TOTAL + 30 * MAN,
     badge: "가성비 패키지",
     badgeTone: "value",
-    desc: "기본형에 PC·태블릿·모바일 반응형까지",
+    desc: "필요한 정보를 한 페이지에 정직하게 담는 구성",
   },
   {
     key: "landing",
     label: "랜딩형",
-    designCost: 20 * MAN,
-    total: BASE_TOTAL + 20 * MAN,
-    desc: "완성된 랜딩 구성에 문구·사진만 바꿔 여는 방식",
-  },
-  {
-    key: "landing-responsive",
-    label: "랜딩+반응형",
-    designCost: 50 * MAN,
-    total: BASE_TOTAL + 50 * MAN,
+    designCost: LANDING_COST,
+    subpageCost: 0,
+    total: BASE_TOTAL + LANDING_COST,
     badge: "추천 패키지",
     badgeTone: "recommended",
-    desc: "랜딩형 연출에 전 디바이스 반응형까지",
+    desc: "스크롤 연출과 인터랙션을 더한 한 페이지 구성",
+  },
+  {
+    key: "basic-sub",
+    label: "기본형 + 서브페이지",
+    designCost: 0,
+    subpageCost: SUBPAGE_COST,
+    total: BASE_TOTAL + SUBPAGE_COST,
+    desc: "메뉴별로 페이지를 나눠 내용을 넉넉하게",
+  },
+  {
+    key: "landing-sub",
+    label: "랜딩형 + 서브페이지",
+    designCost: LANDING_COST,
+    subpageCost: SUBPAGE_COST,
+    total: BASE_TOTAL + LANDING_COST + SUBPAGE_COST,
+    desc: "랜딩형 연출에 메뉴별 서브페이지까지",
   },
 ];
 
@@ -106,9 +123,19 @@ export const PRICING_ROWS: PricingRow[] = [
     values: ["1년 무료", "1년 무료", "1년 무료", "1년 무료"],
   },
   {
-    label: "디자인 비용",
-    required: true,
-    values: ["무료", "30만원", "20만원", "50만원"],
+    label: "랜딩형 연출",
+    note: "스크롤 등장 · 인터랙션",
+    values: ["무료", "20만원", "무료", "20만원"],
+  },
+  {
+    label: "서브페이지 제작",
+    note: "소개 · 서비스 · 사례 · 문의 등을 별도 페이지로",
+    info: [
+      "한 페이지에 다 넣는 대신 메뉴별로 페이지를 나눕니다.",
+      "올릴 내용이 많거나 메뉴 구성을 갖추고 싶을 때 고르십니다.",
+      "서브페이지를 넣어도 제작 기간은 영업일 7일 그대로입니다.",
+    ],
+    values: ["원페이지", "원페이지", "30만원", "30만원"],
   },
   {
     label: "업종 전용 기능",
@@ -120,7 +147,11 @@ export const PRICING_ROWS: PricingRow[] = [
     note: "공지·문의·콘텐츠를 직접 등록·수정",
     values: ["무료", "무료", "무료", "무료"],
   },
-  { label: "모바일 웹", values: ["무료", "무료", "무료", "무료"] },
+  {
+    label: "반응형 제작",
+    note: "PC · 태블릿 · 모바일",
+    values: ["무료", "무료", "무료", "무료"],
+  },
   { label: "DB · 파일", values: ["무료", "무료", "무료", "무료"] },
   {
     label: "실시간 문자 기능",

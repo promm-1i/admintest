@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/button";
 /** 두 라인 모두 기본 제공 — 여기서 빼거나 더할 때는 PriceLanding의 INCLUDED_BY_DEFAULT와 함께 고친다 */
 const SAME_IN_BOTH = [
   "관리자 모드 (공지 · 문의 · 콘텐츠 관리)",
-  "회원 기능",
+  "반응형 제작 (PC · 태블릿 · 모바일)",
   "DB · 파일 무제한",
   "실시간 문자 기능",
   "기본 SEO 설정",
@@ -54,11 +54,6 @@ const DIFF_ROWS: DiffRow[] = [
     label: "관리 항목",
     template: "공지 · 문의 · 콘텐츠 (정해진 항목)",
     premium: "사업 데이터에 맞춰 설계 · 조건 검색 · 직원별 권한",
-  },
-  {
-    label: "반응형 제작",
-    template: "30만원 추가",
-    premium: "포함",
   },
   {
     label: "첫해 호스팅 · 셋팅",
@@ -112,7 +107,8 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
         <div className="mt-7 rounded-2xl border border-border bg-secondary/30 p-6 sm:p-7">
           <p className="text-base font-bold text-foreground">두 라인 모두 기본으로 들어가는 것</p>
           <p className="mt-1.5 text-sm text-muted-foreground break-keep">
-            관리자 기능이 프리미엄에만 있는 것이 아닙니다. 아래는 64만원 기본형에도 그대로 들어갑니다.
+            관리자 기능과 반응형이 프리미엄에만 있는 것이 아닙니다. 아래는 64만원 기본형에도 그대로
+            들어갑니다.
           </p>
           <ul className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
             {SAME_IN_BOTH.map((item) => (
