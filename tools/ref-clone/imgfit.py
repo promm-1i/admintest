@@ -11,15 +11,27 @@ with sync_playwright() as p:
         H=pg.evaluate('document.documentElement.scrollHeight'); y=0
         while y<H: pg.evaluate(f'window.scrollTo(0,{y})'); pg.wait_for_timeout(110); y+=700
         pg.evaluate('window.scrollTo(0,0)'); pg.wait_for_timeout(1200)
-        rows=pg.evaluate("""() => [...document.images].map(i=>{
-          // transform 이 걸린 요소는 bounding rect 가 실제 래스터 크기와 다르다.
-          // 레이아웃 크기(offsetWidth/Height)로 비교해야 진짜 확대만 잡힌다.
-          const r=i.getBoundingClientRect();
-          return {src:(i.getAttribute('src')||'').split('/').pop(),
-                  nw:i.naturalWidth, nh:i.naturalHeight,
-                  rw:i.offsetWidth||Math.round(r.width), rh:i.offsetHeight||Math.round(r.height),
-                  bw:Math.round(r.width), bh:Math.round(r.height)};
-        }).filter(o=>o.rw>2&&o.rh>2)""")
+        rows=pg.evaluate("""async () => {
+          // srcset 사진은 naturalWidth 가 밀도 보정된 값이라 원본이 작아 보인다.
+          // currentSrc 를 srcset 없이 다시 물려 실제 래스터 픽셀을 읽는다.
+          const raw = async (src) => {
+            if (!src) return null;
+            try { const im=new Image(); im.src=src; await im.decode();
+                  return [im.naturalWidth, im.naturalHeight]; } catch(e){ return null; }
+          };
+          const out=[];
+          for (const i of document.images) {
+            // transform 이 걸린 요소는 bounding rect 가 실제 래스터 크기와 다르다.
+            // 레이아웃 크기(offsetWidth/Height)로 비교해야 진짜 확대만 잡힌다.
+            const r=i.getBoundingClientRect();
+            const rw=i.offsetWidth||Math.round(r.width), rh=i.offsetHeight||Math.round(r.height);
+            if (rw<3||rh<3) continue;
+            const px = await raw(i.currentSrc || i.src);
+            out.push({src:(i.currentSrc||i.getAttribute('src')||'').split('/').pop(),
+                      nw:px?px[0]:i.naturalWidth, nh:px?px[1]:i.naturalHeight, rw, rh});
+          }
+          return out;
+        }""")
         seen=set(); bad=[]
         for o in rows:
             k=(o['src'],o['rw'],o['rh'])
