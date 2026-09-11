@@ -212,8 +212,78 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   border-top:1px solid rgba(173,0,0,.25);display:flex;justify-content:space-between;
   gap:16px;flex-wrap:wrap;font-size:12px;line-height:20px;color:var(--red7)}
 
+/* ── 후기 (ref y6984 · 라벨 18/21.6 · 제목 40/48 · 세로카드 가운데 270x480 · 양옆 202x384 흐림) ── */
+.bz{padding:20px 0 70px;overflow:clip}
+.bz .phead{text-align:center}
+.bz .stage{position:relative;margin-top:26px}
+.bz .strip{display:flex;align-items:center;gap:64px;padding:0 40px 8px;
+  overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.bz .strip::-webkit-scrollbar{display:none}
+.bzcard{flex:0 0 auto;width:202px;scroll-snap-align:center;text-align:center;
+  transition:width .45s var(--ease),opacity .45s var(--ease)}
+.bzcard figure{width:100%;height:384px;border-radius:16px;overflow:clip;background:var(--yellow);
+  transition:height .45s var(--ease)}
+.bzcard figure img{width:100%;height:100%;object-fit:cover}
+.bzcard .cap{margin-top:14px;font-size:14px;line-height:22.4px;color:var(--red)}
+.bzcard[data-on="1"]{width:270px;opacity:1}
+.bzcard[data-on="1"] figure{height:480px}
+.bzcard[data-on="0"]{opacity:.45}
+.bz .arw{position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:40px;height:40px;border-radius:50%;background:var(--bg);
+  box-shadow:inset 0 0 0 1px rgba(173,0,0,.35);
+  display:flex;align-items:center;justify-content:center;transition:background .25s var(--ease)}
+.bz .arw:hover{background:var(--yellow)}
+.bz .arw svg{width:16px;height:16px;fill:none;stroke:var(--red);stroke-width:2}
+.bz .arw.pv{left:0}
+.bz .arw.nx{right:0}
+.bz .dots{margin-top:18px;display:flex;justify-content:center;gap:10px}
+.bz .dots button{width:9px;height:9px;border-radius:50%;background:rgba(173,0,0,.28)}
+.bz .dots button[aria-current="true"]{background:var(--red)}
+
+/* ── 마무리 CTA (ref y8295 · 사진 밴드 위 크림 카드 · 제목 52/62.4 · 버튼 253x54 r80) ── */
+.cta{position:relative;min-height:560px;display:flex;align-items:center;justify-content:center;
+  padding:60px 20px;overflow:clip}
+.cta>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.ctabox{position:relative;z-index:2;width:100%;max-width:960px;background:var(--bg);
+  padding:56px 40px 60px;text-align:center}
+.ctabox h2{font-size:52px;line-height:62.4px;letter-spacing:-1px}
+.ctabox h2.ko{line-height:72px;letter-spacing:-.03em}
+.ctabox p{margin:14px auto 0;max-width:420px;font-size:16px;line-height:22.4px;color:var(--red7)}
+.ctabox .go{margin-top:26px}
+.ctabox .go .btn{height:54px;padding:0 26px;border-radius:80px;
+  font-family:"Geist Mono",monospace;font-size:22px;line-height:26.4px;letter-spacing:.5px}
+.ctabox .go .btn.ko{font-family:Manrope,"Pretendard Variable",sans-serif;letter-spacing:-.01em}
+.cta .stamp{position:absolute;right:-34px;bottom:-26px;z-index:3;width:108px;height:auto;
+  transform:rotate(-12deg)}
+.cta .stamp span{display:block;background:var(--yellow);color:var(--red);
+  padding:6px 12px;border-radius:6px;font-size:15px;line-height:20px;font-weight:700;
+  text-align:center}
+
+/* ── 초대형 워드마크 마퀴 (ref y8622 · 180/162 · 원형 스탬프 · pad 60/0/20 · gap64) ── */
+.mark{background:var(--bg);padding:60px 0 20px;overflow:clip}
+.mark .track{display:flex;align-items:center;gap:64px;width:max-content;
+  animation:markroll 34s linear infinite}
+.mark:hover .track{animation-play-state:paused}
+@keyframes markroll{to{transform:translateX(-50%)}}
+.mark .track>span{flex:0 0 auto;font-size:180px;line-height:162px;color:var(--red);
+  letter-spacing:-3px;white-space:nowrap}
+.mark .track>span.ko{letter-spacing:-.04em;line-height:200px}
+.mark .badge{flex:0 0 auto;width:140px;height:140px}
+.mark .badge circle{fill:var(--yellow)}
+.mark .badge text{font-size:11.5px;letter-spacing:1.6px;fill:var(--red);font-weight:700}
+.mark .badge path.b{fill:var(--red)}
+@media (prefers-reduced-motion:reduce){.mark .track{animation:none}}
+
 /* ── 태블릿 ── */
 @media (max-width:1100px){
+  .bz .strip{gap:34px}
+  .ctabox{padding:40px 28px 44px}
+  .ctabox h2{font-size:38px;line-height:46px}
+  .ctabox h2.ko{line-height:54px}
+  .mark .track{gap:40px}
+  .mark .track>span{font-size:110px;line-height:104px}
+  .mark .track>span.ko{line-height:124px}
+  .mark .badge{width:100px;height:100px}
   .wrap,.top .in,.ft .in,.ft .cp{padding-left:24px;padding-right:24px}
   .d1{font-size:50px;line-height:58px}
   .d1.ko{line-height:66px}
@@ -232,6 +302,23 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 모바일 ── */
 @media (max-width:809px){
+  .bz{padding:10px 0 52px}
+  .bz .strip{gap:18px;padding:0 16px 8px}
+  .bzcard,.bzcard[data-on="1"]{width:214px}
+  .bzcard figure,.bzcard[data-on="1"] figure{height:330px}
+  .bzcard[data-on="0"]{opacity:1}
+  .bz .arw{display:none}
+  .cta{min-height:auto;padding:40px 16px}
+  .ctabox{padding:30px 20px 34px}
+  .ctabox h2{font-size:28px;line-height:36px}
+  .ctabox h2.ko{line-height:40px}
+  .ctabox .go .btn{height:46px;font-size:16px;line-height:20px}
+  .cta .stamp{right:-8px;bottom:-18px;width:84px}
+  .mark{padding:36px 0 12px}
+  .mark .track{gap:24px}
+  .mark .track>span{font-size:56px;line-height:56px}
+  .mark .track>span.ko{line-height:66px}
+  .mark .badge{width:64px;height:64px}
   .wrap,.top .in,.ft .in,.ft .cp{padding-left:16px;padding-right:16px}
   .top nav{display:none}
   .d1{font-size:34px;line-height:42px}
@@ -381,6 +468,52 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   <div style="display:flex;justify-content:center;padding-bottom:60px">
     <a class="btn btn-o ko" href="menu.html">전체 메뉴 보기</a></div>
 </section>
+<section class="bz wrap" id="buzz">
+  <div class="phead">
+    <span class="lab mn ko">/ 사람들 이야기</span>
+    <h2 class="sr d2 ko">다녀가신 분들은 이렇게 말합니다</h2>
+  </div>
+  <div class="stage">
+    <button class="arw pv" type="button" aria-label="이전"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+    <div class="strip">
+      <article class="bzcard" data-on="0"><figure><img src="../restaurant-k/assets/bz-1.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">클라라 님이 아침을 여는 방식</p></article>
+      <article class="bzcard" data-on="0"><figure><img src="../restaurant-k/assets/bz-2.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">안나 님이 찾아낸 자리</p></article>
+      <article class="bzcard" data-on="1"><figure><img src="../restaurant-k/assets/bz-3.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">이사벨라 님은 계속 오십니다</p></article>
+      <article class="bzcard" data-on="0"><figure><img src="../restaurant-k/assets/bz-4.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">엠마 님은 아이스만 드십니다</p></article>
+      <article class="bzcard" data-on="0"><figure><img src="../restaurant-k/assets/bz-5.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">미아와 로이 님의 주말</p></article>
+    </div>
+    <button class="arw nx" type="button" aria-label="다음"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  </div>
+  <div class="dots">
+      <button type="button" aria-current="false" aria-label="후기 1번"></button>
+      <button type="button" aria-current="false" aria-label="후기 2번"></button>
+      <button type="button" aria-current="true" aria-label="후기 3번"></button>
+      <button type="button" aria-current="false" aria-label="후기 4번"></button>
+      <button type="button" aria-current="false" aria-label="후기 5번"></button>
+  </div>
+</section>
+
+<section class="cta">
+  <img class="bg" src="../restaurant-k/assets/cta-room.jpg" alt="" width="1440" height="560">
+  <div class="ctabox">
+    <h2 class="sr ko">오셔서 드시고 가세요</h2>
+    <p class="ko">문을 열고 들어오시면 그날 제일 맛있는 것부터 내어 드립니다.</p>
+    <div class="go"><a class="btn btn-o ko" href="reserve.html">자리 예약하기</a></div>
+    <div class="stamp" aria-hidden="true"><span>좋은 음식<br>좋은 기분</span></div>
+  </div>
+</section>
+
+<section class="mark" aria-hidden="true">
+  <div class="track">
+    <span class="sr ko">구운담</span><svg class="badge" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="68"/><defs><path id="bcv" d="M70,14 a56,56 0 1,1 -.1,0"/></defs><text><textPath href="#bcv">한 입 하세요 · 한 입 하세요 · 한 입 하세요 ·</textPath></text><path class="b" d="M44 78c0-4 3-7 7-7h38c4 0 7 3 7 7v4H44v-4Zm2 9h48v5H46v-5Zm4-25c0-6 9-11 20-11s20 5 20 11v5H50v-5Z"/></svg>
+    <span class="sr ko">구운담</span><svg class="badge" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="68"/><defs><path id="bcv" d="M70,14 a56,56 0 1,1 -.1,0"/></defs><text><textPath href="#bcv">한 입 하세요 · 한 입 하세요 · 한 입 하세요 ·</textPath></text><path class="b" d="M44 78c0-4 3-7 7-7h38c4 0 7 3 7 7v4H44v-4Zm2 9h48v5H46v-5Zm4-25c0-6 9-11 20-11s20 5 20 11v5H50v-5Z"/></svg>
+    <span class="sr ko">구운담</span><svg class="badge" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="68"/><defs><path id="bcv" d="M70,14 a56,56 0 1,1 -.1,0"/></defs><text><textPath href="#bcv">한 입 하세요 · 한 입 하세요 · 한 입 하세요 ·</textPath></text><path class="b" d="M44 78c0-4 3-7 7-7h38c4 0 7 3 7 7v4H44v-4Zm2 9h48v5H46v-5Zm4-25c0-6 9-11 20-11s20 5 20 11v5H50v-5Z"/></svg>
+    <span class="sr ko">구운담</span><svg class="badge" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="68"/><defs><path id="bcv" d="M70,14 a56,56 0 1,1 -.1,0"/></defs><text><textPath href="#bcv">한 입 하세요 · 한 입 하세요 · 한 입 하세요 ·</textPath></text><path class="b" d="M44 78c0-4 3-7 7-7h38c4 0 7 3 7 7v4H44v-4Zm2 9h48v5H46v-5Zm4-25c0-6 9-11 20-11s20 5 20 11v5H50v-5Z"/></svg>
+    <span class="sr ko">구운담</span><svg class="badge" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="68"/><defs><path id="bcv" d="M70,14 a56,56 0 1,1 -.1,0"/></defs><text><textPath href="#bcv">한 입 하세요 · 한 입 하세요 · 한 입 하세요 ·</textPath></text><path class="b" d="M44 78c0-4 3-7 7-7h38c4 0 7 3 7 7v4H44v-4Zm2 9h48v5H46v-5Zm4-25c0-6 9-11 20-11s20 5 20 11v5H50v-5Z"/></svg>
+    <span class="sr ko">구운담</span><svg class="badge" viewBox="0 0 140 140" aria-hidden="true"><circle cx="70" cy="70" r="68"/><defs><path id="bcv" d="M70,14 a56,56 0 1,1 -.1,0"/></defs><text><textPath href="#bcv">한 입 하세요 · 한 입 하세요 · 한 입 하세요 ·</textPath></text><path class="b" d="M44 78c0-4 3-7 7-7h38c4 0 7 3 7 7v4H44v-4Zm2 9h48v5H46v-5Zm4-25c0-6 9-11 20-11s20 5 20 11v5H50v-5Z"/></svg>
+  </div>
+</section>
+
 </main>
 
 <footer class="ft">

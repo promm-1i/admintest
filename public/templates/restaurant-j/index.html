@@ -176,8 +176,134 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   border-top:1px solid rgba(255,186,216,.35);display:flex;justify-content:space-between;
   gap:16px;flex-wrap:wrap;font-size:12px;line-height:20px;font-weight:400;color:var(--w)}
 
+/* ── 리뷰 (ref y4690 초록밴드 · 제목 320/384 · 카드 363x354 r40 크림 · 이름 50/54 초록 · 인용 24/28 핑크) ── */
+.rev{background:var(--green);padding:90px 0 150px;overflow:clip}
+.rev .stage{position:relative}
+.rev .word{color:var(--pink);text-align:center;position:absolute;left:0;right:0;top:150px;
+  z-index:1;white-space:nowrap}
+.rev .rgrid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(2,1fr);
+  gap:46px 40px;max-width:1312px;margin:0 auto;align-items:start}
+.rcard{width:363px;border-radius:40px;background:var(--cream);padding:20px 20px 24px}
+.rev .rgrid>*:nth-child(odd){justify-self:start;transform:rotate(-2deg)}
+.rev .rgrid>*:nth-child(even){justify-self:end;margin-top:106px;transform:rotate(2deg)}
+.rcard .av{width:115px;height:115px;margin-left:auto;position:relative}
+.rcard .av::before{content:"";position:absolute;inset:0;background:var(--pink);
+  clip-path:polygon(50% 0,60% 12%,72% 5%,76% 19%,90% 17%,88% 31%,100% 36%,92% 47%,100% 60%,87% 65%,90% 79%,76% 78%,72% 92%,60% 85%,50% 100%,40% 85%,28% 92%,24% 78%,10% 79%,13% 65%,0 60%,8% 47%,0 36%,12% 31%,10% 17%,24% 19%,28% 5%,40% 12%)}
+.rcard .av img{position:absolute;inset:11px;width:calc(100% - 22px);height:calc(100% - 22px);
+  object-fit:cover;clip-path:polygon(50% 0,60% 12%,72% 5%,76% 19%,90% 17%,88% 31%,100% 36%,92% 47%,100% 60%,87% 65%,90% 79%,76% 78%,72% 92%,60% 85%,50% 100%,40% 85%,28% 92%,24% 78%,10% 79%,13% 65%,0 60%,8% 47%,0 36%,12% 31%,10% 17%,24% 19%,28% 5%,40% 12%)}
+.rcard h3{margin-top:16px;color:var(--green)}
+.rcard .q{margin-top:10px;font-size:24px;line-height:28px;color:var(--pink)}
+.rcard .q.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em;line-height:34px}
+
+/* ── 팀 (ref y7406 핑크밴드 982 · 라벨 32/36 크림 · 제목 72/76 초록 · 카드 517x628 pad60 · 사진 397x508 r16) ── */
+.team{background:var(--pink);padding:70px 0 0;overflow:clip}
+.team .lab{display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:32px;line-height:36px;color:var(--cream)}
+.team .lab i{width:14px;height:14px;border-radius:50%;background:var(--green);flex:0 0 auto}
+.team h2{margin:20px auto 0;max-width:1200px;text-align:center;color:var(--green)}
+.team .track{margin-top:54px;display:flex;gap:7px;width:max-content;
+  animation:teamroll 46s linear infinite;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.team:hover .track{animation-play-state:paused}
+@keyframes teamroll{to{transform:translateX(-50%)}}
+.tcard{flex:0 0 auto;width:517px;padding:60px;border-radius:20px}
+.tcard figure{position:relative;width:397px;height:508px;border-radius:16px;overflow:clip;
+  background:var(--green)}
+.tcard figure img{width:100%;height:100%;object-fit:cover}
+.tcard .nm{position:absolute;left:20px;bottom:52px;color:var(--cream);z-index:2}
+.tcard .ro{position:absolute;left:20px;bottom:18px;color:var(--cream);
+  font-size:26px;line-height:30px;z-index:2}
+.tcard .ro.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+@media (prefers-reduced-motion:reduce){.team .track{animation:none}}
+
+/* ── 클럽 (ref y12574 크림밴드 · 카드 479x226 r16 핑크 pad10 gap6 · 제목 80/80 초록) ── */
+.club{background:var(--cream);padding:80px 0 90px;overflow:clip}
+.club .track{display:flex;gap:6px;width:max-content;animation:clubroll 40s linear infinite;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);
+  mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.club:hover .track{animation-play-state:paused}
+@keyframes clubroll{to{transform:translateX(-50%)}}
+.clcard{flex:0 0 auto;width:479px;min-height:226px;padding:10px;border-radius:16px;
+  background:var(--pink);display:flex;flex-direction:column;gap:6px;justify-content:flex-end}
+.clcard h3{color:var(--green)}
+.clcard p{font-size:18px;line-height:24px;color:var(--green)}
+@media (prefers-reduced-motion:reduce){.club .track{animation:none}}
+
+/* ── 지역 문장 밴드 (ref y13137 초록밴드 · 72/76 크림) ── */
+.band{background:var(--green);padding:96px 0;text-align:center}
+.band h2{max-width:1240px;margin:0 auto;color:var(--cream)}
+.band .adr{margin-top:26px;font-size:26px;line-height:34px;color:var(--pink)}
+.band .adr.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+
+/* ── 저널 (ref y14069 크림밴드 · 카드 333폭 초록테두리 r16 · 제목 60/60 · 태그 24/28) ── */
+.jr{background:var(--cream);padding:90px 0 100px}
+.jr .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:140px;align-items:end}
+.jrcard{display:block;border-radius:16px;padding:26px 24px 22px;
+  box-shadow:inset 0 0 0 1px var(--green);transition:background .25s var(--ease)}
+.jrcard:hover{background:rgba(3,86,62,.06)}
+.jrcard h3{font-size:60px;line-height:60px;color:var(--green)}
+.jrcard h3.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.03em;line-height:66px}
+.jrcard .tag{margin-top:22px;font-size:24px;line-height:28px;color:var(--green)}
+.jrcard .tag.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+
+/* ── FAQ (ref y14584 초록밴드 · 라벨 32/36 핑크 · 제목 72/76 핑크 · 항목 800x80 r16 핑크선) ── */
+.faq{background:var(--green);padding:160px 0}
+.faq .lab{display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:32px;line-height:36px;color:var(--pink)}
+.faq .lab i{width:14px;height:14px;border-radius:50%;background:var(--cream);flex:0 0 auto}
+.faq h2{margin:20px auto 0;max-width:1200px;text-align:center;color:var(--pink)}
+.faq .list{max-width:800px;margin:54px auto 0;display:flex;flex-direction:column;gap:16px}
+.faq details{border-radius:16px;box-shadow:inset 0 0 0 1px var(--pink);overflow:hidden}
+.faq summary{list-style:none;cursor:pointer;min-height:80px;padding:20px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  font-size:24px;line-height:28px;color:var(--pink)}
+.faq summary.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:0 0 auto;width:22px;height:22px;
+  background:linear-gradient(var(--pink),var(--pink)) center/100% 2px no-repeat,
+             linear-gradient(var(--pink),var(--pink)) center/2px 100% no-repeat;
+  transition:transform .3s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .ans{padding:0 24px 22px;font-size:16px;line-height:28px;font-weight:400;color:var(--cream)}
+
+/* ── 대형 연락처 (ref y15776 핑크밴드 · 이메일 100/100 초록 · 내비 24/26 초록) ── */
+.hail{background:var(--pink);padding:60px 0 70px}
+.hail .in{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.hail .ml{font-size:100px;line-height:100px;color:var(--green);
+  font-family:Anton,"Black Han Sans",sans-serif;word-break:break-all}
+.hail .ml:hover{color:var(--cream)}
+.hail .so{margin-top:18px;display:flex;gap:10px}
+.hail .so a{width:34px;height:34px;border-radius:9px;background:var(--green);
+  display:flex;align-items:center;justify-content:center;transition:opacity .25s var(--ease)}
+.hail .so a:hover{opacity:.75}
+.hail .so svg{width:18px;height:18px;fill:var(--pink)}
+.hail .nav{display:flex;gap:28px;padding-top:22px}
+.hail .nav a{font-size:24px;line-height:26px;color:var(--green);
+  font-family:Anton,"Black Han Sans",sans-serif}
+.hail .nav a.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+.hail .nav a:hover{color:var(--cream)}
+
 /* ── 태블릿 ── */
 @media (max-width:1100px){
+  .rev{padding:70px 0 110px}
+  .rev .word{top:110px}
+  .rev .rgrid{gap:34px 24px}
+  .rcard{width:100%;max-width:363px}
+  .team .lab,.faq .lab{font-size:24px;line-height:28px}
+  .tcard{width:380px;padding:36px}
+  .tcard figure{width:308px;height:394px}
+  .tcard .ro{font-size:20px;line-height:24px}
+  .clcard{width:380px;min-height:190px}
+  .band{padding:70px 0}
+  .band .adr{font-size:20px;line-height:28px}
+  .jr .grid{gap:60px}
+  .jrcard h3{font-size:38px;line-height:40px}
+  .jrcard h3.ko{line-height:46px}
+  .jrcard .tag{font-size:20px;line-height:24px}
+  .faq{padding:100px 0}
+  .faq summary{font-size:20px;line-height:26px}
+  .hail .ml{font-size:58px;line-height:62px}
   .wrap,.ft .in,.ft .cp{padding-left:24px;padding-right:24px}
   .dxl{font-size:110px;line-height:112px}
   .dxl.ko{line-height:128px}
@@ -204,6 +330,37 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 모바일 ── */
 @media (max-width:809px){
+  .rev{padding:52px 0 70px}
+  .rev .word{position:static;margin-bottom:26px}
+  .rev .rgrid{grid-template-columns:1fr;gap:22px}
+  .rev .rgrid>*:nth-child(odd),.rev .rgrid>*:nth-child(even){justify-self:stretch;
+    margin-top:0;transform:none}
+  .rcard{width:100%;max-width:none;border-radius:26px}
+  .rcard .q{font-size:18px;line-height:26px}
+  .rcard .q.ko{line-height:28px}
+  .team{padding:46px 0 0}
+  .team .lab,.faq .lab{font-size:18px;line-height:22px}
+  .tcard{width:250px;padding:20px}
+  .tcard figure{width:210px;height:270px}
+  .tcard .nm{left:12px;bottom:38px}
+  .tcard .ro{left:12px;bottom:14px;font-size:14px;line-height:18px}
+  .club{padding:52px 0 56px}
+  .clcard{width:280px;min-height:150px}
+  .clcard p{font-size:15px;line-height:22px}
+  .band{padding:48px 0}
+  .band .adr{font-size:16px;line-height:24px}
+  .jr{padding:52px 0 60px}
+  .jr .grid{grid-template-columns:1fr;gap:16px}
+  .jrcard h3{font-size:28px;line-height:32px}
+  .jrcard h3.ko{line-height:36px}
+  .jrcard .tag{margin-top:14px;font-size:16px;line-height:20px}
+  .faq{padding:56px 0}
+  .faq summary{min-height:64px;padding:16px;font-size:17px;line-height:24px}
+  .faq .ans{padding:0 16px 18px;font-size:15px;line-height:25px}
+  .hail{padding:40px 0 44px}
+  .hail .ml{font-size:30px;line-height:36px}
+  .hail .nav{gap:16px;padding-top:0}
+  .hail .nav a{font-size:16px;line-height:20px}
   .wrap,.ft .in,.ft .cp{padding-left:16px;padding-right:16px}
   .dxl{font-size:58px;line-height:60px}
   .dxl.ko{line-height:70px}
@@ -305,6 +462,65 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   <figure><img src="./assets/curve.jpg" alt="" width="230" height="290" loading="lazy"></figure>
 </section>
 
+<section class="rev" id="rev">
+  <div class="wrap stage">
+    <h2 class="an ko word dxl">다녀가신 분들</h2>
+    <div class="rgrid">
+    <article class="rcard rv">
+      <div class="av"><img src="./assets/r-1.jpg" alt="" width="115" height="115" loading="lazy"></div>
+      <h3 class="an ko d2">서연</h3>
+      <p class="an ko q">&ldquo;말차도 좋지만 앉아 있으면 마음이 풀립니다. 그게 더 좋아요.&rdquo;</p>
+    </article>
+    <article class="rcard rv">
+      <div class="av"><img src="./assets/r-2.jpg" alt="" width="115" height="115" loading="lazy"></div>
+      <h3 class="an ko d2">도윤</h3>
+      <p class="an ko q">&ldquo;잠깐 들렀다가 세 시간을 앉아 있었습니다. 한두 번이 아닙니다.&rdquo;</p>
+    </article>
+    <article class="rcard rv">
+      <div class="av"><img src="./assets/r-3.jpg" alt="" width="115" height="115" loading="lazy"></div>
+      <h3 class="an ko d2">하윤</h3>
+      <p class="an ko q">&ldquo;쓰지 않고 부드럽습니다. 말차 싫어하던 친구가 두 잔 마셨어요.&rdquo;</p>
+    </article>
+    <article class="rcard rv">
+      <div class="av"><img src="./assets/r-4.jpg" alt="" width="115" height="115" loading="lazy"></div>
+      <h3 class="an ko d2">지호</h3>
+      <p class="an ko q">&ldquo;혼자 와도 어색하지 않은 자리가 있습니다. 그래서 자주 옵니다.&rdquo;</p>
+    </article>
+    <article class="rcard rv">
+      <div class="av"><img src="./assets/r-5.jpg" alt="" width="115" height="115" loading="lazy"></div>
+      <h3 class="an ko d2">서진</h3>
+      <p class="an ko q">&ldquo;주말 아침마다 여기서 시작합니다. 하루가 조금 순해집니다.&rdquo;</p>
+    </article>
+    <article class="rcard rv">
+      <div class="av"><img src="./assets/r-6.jpg" alt="" width="115" height="115" loading="lazy"></div>
+      <h3 class="an ko d2">민재</h3>
+      <p class="an ko q">&ldquo;음악이 좋아서 물어봤더니 목록을 적어 주셨습니다.&rdquo;</p>
+    </article>
+    </div>
+  </div>
+</section>
+
+<section class="team">
+  <div class="wrap">
+    <p class="lab an ko"><i></i>말차랩 사람들</p>
+    <h2 class="an ko d1">좋아하시는 말차와 이상한 선곡과<br>자꾸 다시 오게 되는 기운을 만드는 사람들입니다.</h2>
+  </div>
+  <div class="track">
+    <div class="tcard"><figure><img src="./assets/tm-1.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">예린</span><span class="ro ko">헤드 바리스타</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-2.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">수아</span><span class="ro ko">바리스타</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-3.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">건우</span><span class="ro ko">물류 담당</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-4.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">다인</span><span class="ro ko">주방장</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-5.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">현서</span><span class="ro ko">바리스타</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-6.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">유나</span><span class="ro ko">커뮤니티 담당</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-1.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">예린</span><span class="ro ko">헤드 바리스타</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-2.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">수아</span><span class="ro ko">바리스타</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-3.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">건우</span><span class="ro ko">물류 담당</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-4.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">다인</span><span class="ro ko">주방장</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-5.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">현서</span><span class="ro ko">바리스타</span></figure></div>
+    <div class="tcard"><figure><img src="./assets/tm-6.jpg" alt="" width="397" height="508"><span class="an ko d1 nm">유나</span><span class="ro ko">커뮤니티 담당</span></figure></div>
+  </div>
+</section>
+
 <section class="goods">
   <div class="wrap">
     <figure class="rv"><img src="./assets/goods.png" alt="" width="340" height="330" loading="lazy"></figure>
@@ -334,6 +550,71 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     </div>
   </div>
 </section>
+<section class="club" id="club">
+  <div class="track">
+    <article class="clcard"><h3 class="an ko d1">말차 시음의 밤</h3><p class="ko">그 주에 들어온 말차 넷을 나란히 놓고 천천히 맛봅니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">토요일 오전반</h3><p class="ko">주말 오전 두 시간, 차 내리는 법만 붙잡고 있습니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">달리고 마시기</h3><p class="ko">오 킬로미터 뛰고 돌아와 찬 말차 한 잔 마십니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">말차 바 클래스</h3><p class="ko">흔들고 거품 내고 담는 것까지 한 번에 배웁니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">저녁 다과회</h3><p class="ko">조금 차려입고 오세요. 과자와 함께 냅니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">맛 이야기 모임</h3><p class="ko">왜 이 맛이 나는지 궁금해진 분들을 위한 자리입니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">말차 시음의 밤</h3><p class="ko">그 주에 들어온 말차 넷을 나란히 놓고 천천히 맛봅니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">토요일 오전반</h3><p class="ko">주말 오전 두 시간, 차 내리는 법만 붙잡고 있습니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">달리고 마시기</h3><p class="ko">오 킬로미터 뛰고 돌아와 찬 말차 한 잔 마십니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">말차 바 클래스</h3><p class="ko">흔들고 거품 내고 담는 것까지 한 번에 배웁니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">저녁 다과회</h3><p class="ko">조금 차려입고 오세요. 과자와 함께 냅니다.</p></article>
+    <article class="clcard"><h3 class="an ko d1">맛 이야기 모임</h3><p class="ko">왜 이 맛이 나는지 궁금해진 분들을 위한 자리입니다.</p></article>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2 class="an ko d1">서울의 볕과 교토의 방식,<br>지금 우리가 마시는 말차.</h2>
+    <p class="adr ko">서울 강남구 말차로 12 · 매일 11:00 – 21:00</p>
+  </div>
+</section>
+
+<section class="jr">
+  <div class="wrap">
+    <div class="grid">
+    <a class="jrcard rv" href="articles.html"><h3 class="an ko">여름 말차의 밤이 다가옵니다</h3><p class="tag an ko">행사</p></a>
+    <a class="jrcard rv" href="articles.html"><h3 class="an ko">말차가 차분하게 깨우는 이유</h3><p class="tag an ko">건강</p></a>
+    <a class="jrcard rv" href="articles.html"><h3 class="an ko">집에서 곱게 거품 내는 법</h3><p class="tag an ko">기본기</p></a>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="wrap">
+    <p class="lab an ko"><i></i>자주 묻는 것</p>
+    <h2 class="an ko d1">첫 잔을 드시기 전에<br>궁금하실 만한 것들입니다.</h2>
+    <div class="list">
+    <details><summary class="an ko">말차가 정말 맛있나요?</summary><div class="ans ko">돌로 간 말차만 씁니다. 쓴맛이 적고 뒤가 깨끗해서 말차를 싫어하셨던 분도 대부분 다시 찾으십니다.</div></details>
+    <details><summary class="an ko">혼자 가도 괜찮을까요?</summary><div class="ans ko">창가 자리와 바 자리는 혼자 오신 분들을 위해 비워 둡니다. 말 걸지 않으니 편히 계셔도 됩니다.</div></details>
+    <details><summary class="an ko">모임에 처음이어도 되나요?</summary><div class="ans ko">대부분 처음 오십니다. 차선 잡는 법부터 알려 드리니 준비해 오실 것은 없습니다.</div></details>
+    <details><summary class="an ko">강아지와 같이 가도 되나요?</summary><div class="ans ko">야외 자리에서는 함께 계실 수 있습니다. 물그릇은 저희가 내어 드립니다.</div></details>
+    <details><summary class="an ko">우유를 못 마시는데요</summary><div class="ans ko">귀리·아몬드·두유로 바꿔 드립니다. 추가 요금은 받지 않습니다.</div></details>
+    <details><summary class="an ko">자리는 얼마나 있어도 되나요?</summary><div class="ans ko">정해 둔 시간은 없습니다. 오래 계셔도 눈치 주지 않습니다.</div></details>
+    </div>
+  </div>
+</section>
+
+<section class="hail">
+  <div class="wrap in">
+    <div>
+      <a class="ml" href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a>
+      <div class="so">
+        <a href="#top" aria-label="인스타그램"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.17.4.37 1 .42 2.2.07 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.17-1 .37-2.2.42-1.3.07-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2Zm0 3.2a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2Zm0 2.3a4.3 4.3 0 1 1 0 8.6 4.3 4.3 0 0 1 0-8.6Zm6.9-2.6a1.55 1.55 0 1 1-3.1 0 1.55 1.55 0 0 1 3.1 0Z"/></svg></a>
+        <a href="#top" aria-label="유튜브"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.5 7.2a2.8 2.8 0 0 0-2-2C18.8 4.8 12 4.8 12 4.8s-6.8 0-8.5.4a2.8 2.8 0 0 0-2 2C1.2 8.9 1.2 12 1.2 12s0 3.1.3 4.8a2.8 2.8 0 0 0 2 2c1.7.4 8.5.4 8.5.4s6.8 0 8.5-.4a2.8 2.8 0 0 0 2-2c.3-1.7.3-4.8.3-4.8s0-3.1-.3-4.8ZM9.9 15.3V8.7l5.7 3.3-5.7 3.3Z"/></svg></a>
+        <a href="#top" aria-label="네이버"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h5.3l5.1 7.5V4H20v16h-5.3L9.6 12.5V20H4V4Z"/></svg></a>
+      </div>
+    </div>
+    <nav class="nav">
+      <a class="ko" href="index.html">홈</a><a class="ko" href="index.html#menu">메뉴</a><a class="ko" href="articles.html">이야기</a><a class="ko" href="index.html#club">모임</a>
+    </nav>
+  </div>
+</section>
+
 </main>
 
 <footer class="ft">
