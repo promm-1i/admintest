@@ -170,24 +170,32 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 팀 ── */
 .team{padding:20px 0 60px}
-.team .board{position:relative;min-height:420px;margin-top:30px}
-.team .note{position:absolute;width:180px;height:150px;background:var(--w);border:1px solid var(--line);
-  border-radius:6px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end}
+.team .board{position:relative;min-height:780px;margin-top:40px}
+/* ref 는 사진이 든 폴라로이드 247x336, 안쪽 사진 218x250 (y5149~) */
+.team .note{position:absolute;width:247px;background:var(--w);border:1px solid var(--line);
+  border-radius:6px;padding:14px 14px 12px;display:flex;flex-direction:column}
+.team .note figure{border-radius:3px;overflow:clip;background:var(--bg);margin-bottom:10px}
+.team .note figure img{width:100%;height:250px;object-fit:cover;display:block}
 .team .note::before{content:"";position:absolute;top:-6px;left:34px;width:11px;height:11px;
-  border-radius:50%;background:var(--or)}
+  border-radius:50%;background:var(--or);z-index:2}
 .team .note b{font-family:"Londrina Solid","SBAggro",sans-serif;font-size:20px;color:var(--ink)}
 .team .note b.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;font-weight:400;font-size:22px}
 .team .note span{font-size:12px;line-height:17px;color:var(--gray)}
-.team .n1{left:8%;top:0;transform:rotate(-6deg)}
-.team .n2{left:26%;top:34px;transform:rotate(3deg)}
-.team .n3{left:44%;top:6px;transform:rotate(-3deg)}
-.team .n4{left:62%;top:36px;transform:rotate(5deg)}
-.team .n5{left:24%;top:200px;transform:rotate(4deg)}
-.team .n6{left:44%;top:214px;transform:rotate(-4deg)}
-.team .cap{position:absolute;left:0;top:236px;width:210px}
+.team .n1{left:2%;top:0;transform:rotate(-6deg)}
+.team .n2{left:24%;top:24px;transform:rotate(3deg)}
+.team .n3{left:46%;top:0;transform:rotate(-3deg)}
+.team .n4{left:68%;top:30px;transform:rotate(5deg)}
+.team .n5{left:20%;top:404px;transform:rotate(4deg)}
+.team .n6{left:44%;top:420px;transform:rotate(-4deg)}
+.team .cap{position:absolute;left:1%;top:470px;width:230px}
 
 /* ── 방문 안내 ── */
-.visit{border:1px solid var(--line);border-radius:8px;padding:34px 30px;margin-bottom:24px}
+/* ref 는 1392x400 상자에 좌 261 정보 + 우 1111 지도 (y5985) */
+.visit{border:1px solid var(--line);border-radius:6px;margin-bottom:24px;overflow:hidden;
+  display:grid;grid-template-columns:261px 1fr;min-height:400px}
+.visit .info{padding:20px;display:flex;flex-direction:column;justify-content:center}
+.visit .map{background:var(--bg)}
+.visit .map iframe{width:100%;height:100%;min-height:400px;border:0;display:block;filter:saturate(.92)}
 .visit .lab{color:var(--or)}
 .visit h2{margin-top:10px}
 .visit .hand{display:block;font-size:38px;line-height:44px}
@@ -252,6 +260,10 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 모바일 ── */
 @media (max-width:809px){
+  .team .note{width:150px}
+  .team .note figure img{height:150px}
+  .visit{grid-template-columns:1fr}
+  .visit .map iframe{min-height:280px}
   .wrap,.ft .bar,.ft .strip .in,.ft .legal{padding-left:16px;padding-right:16px}
   .d1{font-size:36px;line-height:44px}
   .d1.ko{line-height:50px}
@@ -389,22 +401,28 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
       <span class="hand ko">한 칸의 주방.</span>
     </div>
     <div class="board">
-      <div class="note n1"><b class="ko">민아</b><span class="ko">창업자 · 크리에이티브</span></div>
-      <div class="note n2"><b class="ko">도윤</b><span class="ko">헤드 바리스타</span></div>
-      <div class="note n3"><b class="ko">세라</b><span class="ko">주방 총괄</span></div>
-      <div class="note n4"><b class="ko">태민</b><span class="ko">조식 셰프</span></div>
-      <div class="note n5"><b class="ko">이솔</b><span class="ko">카페 매니저</span></div>
-      <div class="note n6"><b class="ko">하윤</b><span class="ko">고객 응대 리드</span></div>
+      <div class="note n1"><figure><img src="../restaurant-i/assets/tm-1.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">민아</b><span class="ko">창업자 · 크리에이티브</span></div>
+      <div class="note n2"><figure><img src="../restaurant-i/assets/tm-2.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">도윤</b><span class="ko">헤드 바리스타</span></div>
+      <div class="note n3"><figure><img src="../restaurant-i/assets/tm-3.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">세라</b><span class="ko">주방 총괄</span></div>
+      <div class="note n4"><figure><img src="../restaurant-i/assets/tm-4.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">태민</b><span class="ko">조식 셰프</span></div>
+      <div class="note n5"><figure><img src="../restaurant-i/assets/tm-5.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">이솔</b><span class="ko">카페 매니저</span></div>
+      <div class="note n6"><figure><img src="../restaurant-i/assets/tm-6.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">하윤</b><span class="ko">고객 응대 리드</span></div>
       <p class="cap p15 ko">새벽에 일어나는 걸 즐기고, 반죽과 커피와 좋은 아침을 좋아하는 작은 팀입니다.</p>
     </div>
   </section>
 
   <section class="visit rv" id="visit">
-    <p class="lab ko">오시는 길</p>
-    <h2 class="dp d2 ko">여기서 뵙겠습니다</h2>
-    <span class="hand ko">강남에서.</span>
-    <p class="ad ko">서울 강남구 밀담길 12<br>1층 밀담</p>
-    <p class="hr p13 ko">매일 07:00 – 18:00</p>
+    <div class="info">
+      <p class="lab ko">오시는 길</p>
+      <h2 class="dp d2 ko">여기서 뵙겠습니다</h2>
+      <span class="hand ko">강남에서.</span>
+      <p class="ad ko">서울 강남구 밀담길 12<br>1층 밀담</p>
+      <p class="hr p13 ko">매일 07:00 – 18:00</p>
+    </div>
+    <div class="map">
+      <iframe title="밀담 위치" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=37.4979,127.0276&amp;z=16&amp;hl=ko&amp;output=embed"></iframe>
+    </div>
   </section>
 
   <section class="end rv">

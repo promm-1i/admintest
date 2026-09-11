@@ -10,8 +10,14 @@
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bayon&family=Black+Han+Sans&family=Boldonse&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bayon&family=Boldonse&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 한글 디스플레이 — ref Boldonse(기하학적 청키) 자리. 검은고딕은 프리미엄 라인에 안 맞는다.
+   라틴·숫자는 레퍼런스 글꼴 그대로, 한글만 대체한다.
+   상용 2,350자로 서브셋해 넣었으므로 문구를 바꿔도 글자가 깨지지 않는다 */
+@font-face{font-family:'GmarketSans';font-style:normal;font-weight:400;font-display:swap;src:url('./assets/fonts/GmarketSansBold.woff2') format('woff2')}
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 img,svg,video{display:block;max-width:100%}
@@ -24,7 +30,7 @@ body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-s
 /* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 11901 · 섹션 간격 160)
    크림 rgb(249,238,220) · 진갈 rgb(125,44,15) · 카드크림 rgb(252,247,238)
    주황 rgb(255,131,66) · 중갈(본문) rgb(175,79,40) · 연크림 rgb(255,239,213) · 칩비활성 rgb(102,66,55)
-   디스플레이 Boldonse 70/105 · 48/72 · 64/96 · 72/108   (한글은 Black Han Sans 로 대체)
+   디스플레이 Boldonse 70/105 · 48/72 · 64/96 · 72/108   (한글은 지마켓 산스 Bold 로 대체)
    컨덴스드 Bayon 26/31.2 · 32/35.2 · 24/20              (한글은 Pretendard 700)
    본문 Manrope 18/27 500 · 18/23.4 600 · 16/24 700 · 16/27.2 500
    라운드 24(메뉴카드) · 60(영상·사진) · 64(버튼) · 40(갈색패널) · 30(버튼 아래 바)
@@ -39,9 +45,9 @@ body{background:var(--cream);color:var(--ink);
 .ko{text-wrap:pretty}
 .en{font-family:Manrope,sans-serif}
 
-/* 디스플레이 — 라틴·숫자는 Boldonse, 한글은 Black Han Sans */
-.dp{font-family:Boldonse,"Black Han Sans","Pretendard Variable",sans-serif;font-weight:400}
-.dp.ko{font-family:"Black Han Sans","Pretendard Variable",sans-serif;letter-spacing:-.02em}
+/* 디스플레이 — 라틴·숫자는 Boldonse, 한글은 지마켓 산스 Bold */
+.dp{font-family:Boldonse,"GmarketSans","Pretendard Variable",sans-serif;font-weight:400}
+.dp.ko{font-family:"GmarketSans","Pretendard Variable",sans-serif;letter-spacing:-.02em}
 /* 컨덴스드 — 라틴은 Bayon, 한글은 Pretendard 700 */
 .cd{font-family:Bayon,"Pretendard Variable",Pretendard,sans-serif;font-weight:400}
 .cd.ko{font-family:"Pretendard Variable",Pretendard,sans-serif;font-weight:700;letter-spacing:-.03em}
@@ -97,9 +103,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .nav .mn a.ko{font-family:"Pretendard Variable",Pretendard,sans-serif;font-weight:700;font-size:17px;letter-spacing:-.03em}
 .nav .mn a:hover{color:var(--or)}
 .nav .lg{display:inline-flex;align-items:center;gap:10px;min-height:44px;
-  font-family:Boldonse,"Black Han Sans",sans-serif;font-size:24px;line-height:32px}
+  font-family:Boldonse,"GmarketSans",sans-serif;font-size:24px;line-height:32px}
 .nav .lg svg{width:32px;height:32px;flex:0 0 auto}
-.nav .lg span{font-family:"Black Han Sans",sans-serif;font-size:26px;letter-spacing:-.03em}
+.nav .lg span{font-family:"GmarketSans",sans-serif;font-size:26px;letter-spacing:-.03em}
 
 /* ── 히어로 898 ── */
 .hero{height:898px;padding-top:230px;text-align:center;overflow:clip}
@@ -269,7 +275,7 @@ main{display:flex;flex-direction:column;gap:160px;padding-bottom:0}
 .ft .in{max-width:1440px;margin:0 auto;padding:0 40px}
 .ft .top{display:flex;justify-content:space-between;align-items:flex-start}
 .ft .lg{display:inline-flex;align-items:center;gap:10px;
-  font-family:"Black Han Sans",sans-serif;font-size:26px;line-height:32px}
+  font-family:"GmarketSans",sans-serif;font-size:26px;line-height:32px}
 .ft .lg svg{width:28px;height:28px}
 .ft .top p{width:300px;text-align:right;font-family:Bayon,"Pretendard Variable",sans-serif;
   font-size:24px;line-height:28px}
@@ -341,7 +347,8 @@ main{display:flex;flex-direction:column;gap:160px;padding-bottom:0}
   .nav .in{padding:12px 20px}
   .nav .mn{gap:14px}
   .nav .mn a.ko{font-size:15px}
-  .nav .lg span{font-size:21px}
+  .nav .lg span{font-size:19px}
+  .nav .in{padding-left:16px;padding-right:16px}
   .note{height:auto;padding:10px 20px;flex-direction:column;gap:2px;text-align:center}
   .note p,.note a{font-size:14px;line-height:21px}
   .wrap,.wrap-w,.menu .in,.rev .hd,.about .in,.faq .in,.three .in,.ft .in,.ft .cp{padding-left:20px;padding-right:20px}

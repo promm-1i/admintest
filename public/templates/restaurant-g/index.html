@@ -89,13 +89,14 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .carou .next{left:calc(50% + 214px)}
 
 /* ── 메뉴 ── */
-.menu{padding-top:110px;padding-bottom:40px}
-.menu h2{margin-bottom:44px}
-.menu .pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:60px;align-items:stretch}
+.menu{padding-top:120px;padding-bottom:40px}
+.menu h2{margin-bottom:62px}
+.menu .pair{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:80px;
+  align-items:stretch;min-height:720px}
 .menu .pair.rt .list{order:2}
-.mlist{background:var(--card);border-radius:32px;padding:40px}
+.mlist{background:var(--card);border-radius:32px;padding:56px 48px}
 .mlist h3{margin-bottom:26px}
-.mlist li{padding:13px 0}
+.mlist li{padding:17px 0}
 .mlist li+li{border-top:1px solid rgba(0,0,0,.07)}
 .mlist .row{display:flex;justify-content:space-between;gap:18px;align-items:baseline}
 .mlist .nm{font-size:16px;line-height:20.8px;font-weight:600}
@@ -133,7 +134,11 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 /* ── 푸터 ── */
 .ft{background:var(--card);border-radius:40px 40px 0 0;margin-top:40px;padding:56px 0 26px}
 .ft .in{max-width:1440px;margin:0 auto;padding:0 72px;
-  display:grid;grid-template-columns:1fr 1px 1fr;gap:48px}
+  display:grid;grid-template-columns:1fr 1px 600px;gap:40px;align-items:start}
+/* ref 푸터는 왼쪽 정보 + 오른쪽 지도 iframe 600x682 r24 다 (y6410) */
+.ft .map{width:100%;height:682px;border-radius:24px;overflow:hidden;background:var(--card2,#eee)}
+.ft .map iframe{width:100%;height:100%;border:0;display:block;filter:saturate(.9)}
+.ft .way{margin-top:14px;display:flex;gap:8px;flex-wrap:wrap}
 .ft .rule{background:rgba(0,0,0,.16)}
 .ft .lg{font-size:22px;line-height:28px;font-weight:600;letter-spacing:-.03em}
 .ft h2{margin-top:10px;margin-bottom:34px}
@@ -358,15 +363,21 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     <div>
       <span class="lg ko">하루커피</span>
       <h2 class="d2 ko">한 잔에 하루를 담습니다</h2>
-    </div>
-    <div class="rule" aria-hidden="true"></div>
-    <div>
       <div class="blk"><h6 class="ko">영업시간</h6>
         <p class="ko">월–목 11:00 – 21:00</p><p class="ko">금–토 11:00 – 22:00</p><p class="ko">일 12:00 – 20:00</p></div>
       <div class="blk"><h6 class="ko">전화</h6><a href="tel:01048944905">010-4894-4905</a>
         <a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></div>
       <div class="blk"><h6 class="ko">오시는 길</h6>
         <p class="ko">서울 강남구 하루로 12<br>1층 하루커피</p></div>
+      <div class="way">
+        <a class="btn btn-o ko" href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EC%97%AD" target="_blank" rel="noopener">네이버 지도</a>
+        <a class="btn btn-o ko" href="https://map.kakao.com/?q=%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EC%97%AD" target="_blank" rel="noopener">카카오맵</a>
+      </div>
+    </div>
+    <div class="rule" aria-hidden="true"></div>
+    <div class="map">
+      <iframe title="하루커피 위치" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=37.4979,127.0276&amp;z=16&amp;hl=ko&amp;output=embed"></iframe>
     </div>
   </div>
   <div class="cp">
