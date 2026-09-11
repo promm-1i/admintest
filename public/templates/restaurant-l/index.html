@@ -95,9 +95,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .sh h2{margin-top:26px}
 
 /* ── 하이라이트 사진 카드 ── */
-.hl{display:flex;flex-direction:column;gap:130px}
+.hl{display:flex;flex-direction:column;gap:120px}
 .hl figure{position:relative;border-radius:12px;overflow:clip;background:var(--cream)}
-.hl figure img{width:100%;height:760px;object-fit:cover}
+.hl figure img{width:100%;height:720px;object-fit:cover}
 .hl figcaption{position:absolute;left:0;right:0;top:26px;text-align:center;z-index:2;
   color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.4)}
 
@@ -121,8 +121,8 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .mcard{background:var(--face);border-radius:12px;overflow:clip;
   transition:transform .35s var(--ease)}
 .mcard:hover{transform:translateY(-5px)}
-.mcard figure{height:420px;background:var(--cream)}
-.mcard figure img{width:100%;height:420px;object-fit:cover}
+.mcard figure{height:360px;background:var(--cream)}
+.mcard figure img{width:100%;height:360px;object-fit:cover}
 .mcard .bd{padding:26px 26px 30px}
 .mcard .row{display:flex;justify-content:space-between;gap:14px;align-items:baseline}
 .mcard h3{font-size:20px;line-height:26px;font-weight:600;color:var(--brown)}
@@ -141,8 +141,27 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 후기 ── */
 .rev{padding-top:40px;padding-bottom:100px;padding-bottom:70px}
-.rev .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;min-height:560px}
-.rcard{background:var(--face);border-radius:12px;padding:40px 34px;display:flex;flex-direction:column}
+/* ref 는 왼쪽 사진 + 오른쪽 카드 718x461 한 장 (y9463) */
+.rev .grid{display:grid;grid-template-columns:1fr 718px;gap:20px;align-items:stretch}
+.rev figure{border-radius:12px;overflow:clip;background:var(--cream)}
+.rev figure img{width:100%;height:461px;object-fit:cover}
+.rev .nav{margin-top:18px;display:flex;gap:10px;justify-content:flex-end}
+.rev .nav button{width:42px;height:42px;border-radius:50%;background:var(--face);
+  box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;justify-content:center;
+  transition:background .25s var(--ease)}
+.rev .nav button:hover{background:var(--cream)}
+.rev .nav svg{width:16px;height:16px;fill:none;stroke:var(--ink);stroke-width:2}
+/* 그리드·플렉스 자식의 기본 min-width:auto 가 칸을 넓혀 버린다 — 반드시 0 으로 */
+.rev .grid>*{min-width:0}
+.rev .strip{display:flex;overflow:hidden;min-width:0}
+.rev .strip>*{flex:0 0 100%}
+.rcard{border-radius:12px;padding:24px;display:flex;flex-direction:column;min-height:461px;
+  box-shadow:inset 0 0 0 1px var(--line)}
+.rcard blockquote{font-size:24px;line-height:31.2px;font-weight:600;color:var(--ink)}
+.rcard .who{margin-top:auto;padding-top:22px;display:flex;align-items:center;gap:12px}
+.rcard .who i{width:44px;height:44px;border-radius:50%;background:var(--cream);flex:0 0 auto}
+.rcard .who b{display:block;font-size:18px;line-height:25.2px;font-weight:600;color:var(--gray)}
+.rcard .who span{display:block;font-size:14px;line-height:19.6px;color:var(--gray)}
 .rcard .st{color:var(--green);font-weight:600}
 .rcard blockquote{margin-top:14px;font-size:16px;line-height:26px}
 .rcard cite{margin-top:auto;padding-top:18px;font-style:normal;font-size:14px;color:var(--ink);font-weight:600}
@@ -177,10 +196,26 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .info h3{font-size:18px;font-weight:600;color:var(--brown);margin-bottom:8px}
 
 /* ── CTA ── */
-.cta{padding-top:20px;padding-bottom:100px;padding-bottom:70px;text-align:center}
-.cta .box{background:var(--cream);border-radius:12px;padding:60px 40px}
-.cta p{margin-top:14px}
-.cta .go{margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+/* ref 는 풀블리드 사진 밴드에 왼쪽 흰 제목 + 오른쪽 떠 있는 예약 카드 (y10709) */
+.cta{position:relative;min-height:900px;margin:40px 0 100px;border-radius:12px;overflow:clip;
+  display:flex;align-items:flex-end}
+.cta>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cta::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(21,13,7,.74) 0,rgba(21,13,7,.4) 52%,rgba(21,13,7,.24) 100%)}
+.cta .in{position:relative;z-index:2;width:100%;padding:60px 40px;display:grid;
+  grid-template-columns:1fr 540px;gap:32px;align-items:end}
+.cta h2{color:#fff;max-width:582px}
+.cta .card{background:rgba(255,249,242,.94);border-radius:12px;padding:20px}
+.cta .card .inr{border-radius:6px;padding:24px 16px;display:flex;flex-direction:column;gap:14px}
+.cta .card h4{font-size:24px;line-height:31.2px;font-weight:600;color:var(--ink)}
+.cta .card p.d{font-size:16px;line-height:22.4px;color:var(--gray)}
+.cta .meta{display:flex;gap:26px;flex-wrap:wrap;font-size:16px;line-height:22.4px;color:var(--gray)}
+.cta .go{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* 푸터 대형 워드마크 (ref 1400x332) */
+.ft .mark{margin:56px auto 0;text-align:center;font-family:"Alan Sans","Pretendard Variable",sans-serif;
+  font-size:250px;line-height:300px;font-weight:600;letter-spacing:-.04em;
+  color:rgba(255,249,242,.14);white-space:nowrap;overflow:hidden}
 
 /* ── 푸터 ── */
 .ft{background:var(--ink);color:#fff;padding:56px 0 22px}
@@ -210,7 +245,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   border:1px solid rgba(255,255,255,.45);pointer-events:none}
 
 /* ── 저널 (ref y12633 · 카드 451x426 r12 pad12 gap20 · 날짜 14/19.6 · 제목 20/26 · 알약버튼 220x48) ── */
-.jr{padding-top:50px;padding-bottom:130px}
+.jr{padding-top:50px;padding-bottom:120px}
 .jr .sh h2{max-width:560px;margin:6px auto 0}
 .jr .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
 .jrcard{display:block;border-radius:12px;padding:12px;
@@ -224,7 +259,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .jr .go{margin-top:36px;text-align:center}
 
 /* ── FAQ (ref y13581 · 좌 제목 520 · 우 아코디언 695 · 항목 r16 · 질문 20/26) ── */
-.fq{padding-top:20px;padding-bottom:110px}
+.fq{padding-top:50px;padding-bottom:150px}
 .fq .in{display:grid;grid-template-columns:520px 1fr;gap:80px;align-items:start}
 .fq .list{display:flex;flex-direction:column;gap:26px}
 .fq details{background:var(--face);border-radius:12px;overflow:hidden;
@@ -256,6 +291,10 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 태블릿 ── */
 @media (max-width:1100px){
+  .rev .grid{grid-template-columns:1fr 1fr}
+  .cta .in{grid-template-columns:1fr;gap:20px}
+  .cta{min-height:420px}
+  .ft .mark{font-size:150px;line-height:190px}
   .work .grid{grid-template-columns:1fr 1fr;gap:20px}
   .work figure{grid-column:1/-1;order:3}
   .gal figure img{height:330px}
@@ -277,6 +316,15 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 모바일 ── */
 @media (max-width:809px){
+  .rev .grid{grid-template-columns:1fr;gap:14px}
+  .rev figure img{height:230px}
+  .rcard{min-height:0}
+  .rcard blockquote{font-size:18px;line-height:26px}
+  .cta{min-height:0;margin:20px 0 56px}
+  .cta .in{padding:20px;grid-template-columns:1fr;gap:14px}
+  .cta .card{padding:18px}
+  .cta .meta{gap:10px;font-size:14px}
+  .ft .mark{font-size:62px;line-height:84px;margin-top:30px}
   .work{padding-bottom:56px}
   .work .grid{grid-template-columns:1fr;gap:14px}
   .wcard{min-height:0}
@@ -454,22 +502,35 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     <h2 class="d2 ko">남겨 주신 이야기</h2>
   </div>
   <div class="grid">
-    <article class="rcard rv"><span class="st">★★★★★</span>
-      <blockquote class="ko">오래 앉아 있어도 눈치가 안 보입니다. 커피도 매번 같은 맛이라 믿고 마십니다.</blockquote><cite class="ko">김OO 님</cite></article>
-    <article class="rcard rv"><span class="st">★★★★★</span>
-      <blockquote class="ko">핸드드립을 시키면 원두를 먼저 보여 주십니다. 그게 좋아서 계속 옵니다.</blockquote><cite class="ko">박OO 님</cite></article>
-    <article class="rcard rv"><span class="st">★★★★★</span>
-      <blockquote class="ko">디저트가 매일 바뀌는데 다 괜찮았습니다. 스콘이 특히 좋습니다.</blockquote><cite class="ko">이OO 님</cite></article>
+    <figure class="rv"><img src="./assets/rev.jpg" alt="" width="662" height="461" loading="lazy"></figure>
+    <div>
+      <div class="strip">
+        <article class="rcard"><span class="st">★★★★★</span><blockquote class="ko">오래 앉아 있어도 눈치가 안 보입니다. 커피도 매번 같은 맛이라 믿고 마십니다.</blockquote><div class="who"><i></i><div><b class="ko">김OO 님</b><span class="ko">근처 회사원</span></div></div></article>
+        <article class="rcard"><span class="st">★★★★★</span><blockquote class="ko">핸드드립을 시키면 원두를 먼저 보여 주십니다. 그게 좋아서 계속 옵니다.</blockquote><div class="who"><i></i><div><b class="ko">박OO 님</b><span class="ko">단골</span></div></div></article>
+        <article class="rcard"><span class="st">★★★★★</span><blockquote class="ko">디저트가 매일 바뀌는데 다 괜찮았습니다. 스콘이 특히 좋습니다.</blockquote><div class="who"><i></i><div><b class="ko">이OO 님</b><span class="ko">주말 손님</span></div></div></article>
+      </div>
+      <div class="nav">
+        <button type="button" aria-label="이전 후기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+        <button type="button" aria-label="다음 후기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="cta wrap">
-  <div class="box">
+  <img class="bg" src="./assets/cta.jpg" alt="" width="1400" height="470">
+  <div class="in">
     <h2 class="d2 ko">자리 잡아 드릴까요?</h2>
-    <p class="p20 ko">주말 오후에는 자리가 빨리 찹니다. 미리 알려 주시면 비워 두겠습니다.</p>
-    <div class="go">
-      <a class="btn ko" href="reservation.html">예약하기</a>
-      <a class="btn btn-o" href="tel:01048944905">010-4894-4905</a>
+    <div class="card">
+      <div class="inr">
+        <p class="meta"><span class="ko">★ 4.9 · 후기 1,200건</span><span class="ko">매일 09:00 – 21:00</span></p>
+        <h4 class="ko">자리 하나 비워 두겠습니다</h4>
+        <p class="d ko">오래 앉아 있어도 좋은 자리로 안내해 드립니다. 주말 오후는 미리 알려 주세요.</p>
+        <div class="go">
+          <a class="btn ko" href="reservation.html">예약하기</a>
+          <a class="btn btn-o ko" href="menu.html">메뉴 보기</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -532,6 +593,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
       <span class="l ko">서울 강남구 온결로 12</span>
       <span class="l ko">매일 09:00 – 21:00</span></div>
   </div>
+  <p class="mark ko" aria-hidden="true">온결커피</p>
   <div class="cp">
     <span class="ko">민트클 · 대표 진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 6gsmake@gmail.com</span>
     <span class="ko">© 2026 온결커피</span>
@@ -542,6 +604,15 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 document.documentElement.classList.add('js');
 const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+(function(){
+  const rev=document.querySelector('.rev .strip'); if(!rev) return;
+  const n=rev.children.length; let i=0;
+  const go=d=>{i=(i+d+n)%n; rev.style.transform='translateX('+(-i*100)+'%)';};
+  rev.style.transition='transform .45s cubic-bezier(.44,0,.56,1)';
+  const b=document.querySelectorAll('.rev .nav button');
+  if(b[0]) b[0].addEventListener('click',()=>go(-1));
+  if(b[1]) b[1].addEventListener('click',()=>go(1));
+})();
 </script>
 </body>
 </html>
