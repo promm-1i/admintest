@@ -161,7 +161,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 /* 밴드가 4000px 넘게 길어 사진 한 장으로 덮으면 요구 해상도가 비현실적이다.
    위 2000px 만 사진으로 덮고 아래는 같은 하늘색으로 흘려보낸다 */
 .cloudband{position:relative;isolation:isolate;
-  background:linear-gradient(180deg,rgb(183,214,240) 1600px,rgb(206,228,245) 2400px,rgb(219,236,248) 100%)}
+  background:linear-gradient(180deg,rgb(103,172,241) 1480px,rgb(124,183,243) 2800px,rgb(142,195,246) 100%)}
 .cloudband>img.bg{position:absolute;left:0;top:0;width:100%;height:2000px;object-fit:cover;z-index:-2;
   -webkit-mask-image:linear-gradient(#000 74%,transparent);mask-image:linear-gradient(#000 74%,transparent)}
 .cloudband::before{content:"";position:absolute;inset:0;z-index:-1;
@@ -185,11 +185,19 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 팀 (ref y4595 · 제목 30/45 흰색 · 카드 198x81 r12 pad16 흰색 · 이름 24/24 · 역할 16/16 손글씨 · 설명 14/19.6) ── */
 .team{position:relative;padding-top:70px;padding-bottom:90px}
+.team h2,.ev h2,.fq h2{text-shadow:0 2px 10px rgba(18,52,92,.45)}
+.team .hi,.team .say{text-shadow:0 2px 8px rgba(18,52,92,.4)}
 .team h2{text-align:center;color:#fff;font-size:30px;line-height:45px}
 .team .hi{display:block;text-align:center;color:#fff;font-size:33px;line-height:39.6px;
   margin-bottom:4px}
 .team .row{position:relative;z-index:2;margin-top:56px;display:flex;align-items:flex-start;gap:40px}
 .team .row+.row{margin-top:74px}
+.team .row{position:relative}
+.team .arw{position:absolute;z-index:1;width:190px;height:150px;bottom:-96px;
+  fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  opacity:.85;pointer-events:none}
+.team .row:not(.r) .arw{left:250px}
+.team .row.r .arw{right:250px;transform:scaleX(-1)}
 .team .row.r{flex-direction:row-reverse}
 .tcard{position:relative;flex:0 0 auto;width:210px;padding-bottom:64px}
 .tcard figure{width:210px;height:280px;border-radius:12px;overflow:clip;background:var(--sky)}
@@ -199,7 +207,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 /* 오른쪽에 놓인 카드는 정보 상자가 화면 밖으로 나가므로 왼쪽으로 뺀다 */
 .team .row.r .tcard .bx{left:-52px;right:8px}
 .tcard .nm{font-size:24px;line-height:24px}
-.tcard .ro{font-size:16px;line-height:16px;margin-top:2px}
+.tcard .ro{font-size:18px;line-height:20px;margin-top:2px}
 .tcard .de{font-size:14px;line-height:19.6px;color:rgb(79,79,79);margin-top:6px}
 .team .say{padding-top:34px;color:#fff;font-size:33px;line-height:39.6px}
 .team .say span{display:block}
@@ -255,6 +263,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 @media (max-width:1100px){
   .rev .ghost span{font-size:150px;line-height:152px}
   .team .row{gap:26px}
+  .team .arw{width:140px;height:110px;bottom:-72px}
+  .team .row:not(.r) .arw{left:180px}
+  .team .row.r .arw{right:180px}
   .team .say{font-size:26px;line-height:32px}
   .tcard{width:180px}
   .tcard figure{width:180px;height:240px}
@@ -285,6 +296,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   .team{padding-top:46px;padding-bottom:60px}
   .team h2,.ev h2,.fq h2{font-size:22px;line-height:32px}
   .team .hi{font-size:24px;line-height:30px}
+  .team .arw{display:none}
   .team .row,.team .row.r{flex-direction:column;gap:14px}
   .team .row+.row{margin-top:44px}
   .tcard{width:100%;padding-bottom:0}
@@ -466,14 +478,17 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     <div class="row">
       <article class="tcard rv"><figure><img src="../restaurant-h/assets/tm-1.jpg" alt="" width="210" height="280" loading="lazy"></figure><div class="bx"><p class="dp ko nm">이아라</p><p class="scr ko ro">물류 담당</p><p class="ko de">말차와 우유, 컵과 토핑까지 떨어지지 않게 챙깁니다.</p></div></article>
       <div class="say"><span class="scr ko">꿈꾸고</span><span class="scr ko">고민하고</span><span class="scr ko">말차를 좋아하는</span></div>
+      <svg class="arw" viewBox="0 0 190 150" aria-hidden="true"><path d="M10 8C78 14 150 52 166 118"/><path d="M148 102l20 26 18-28"/></svg>
     </div>
     <div class="row r">
       <article class="tcard rv"><figure><img src="../restaurant-h/assets/tm-2.jpg" alt="" width="210" height="280" loading="lazy"></figure><div class="bx"><p class="dp ko nm">문세라</p><p class="scr ko ro">헤드 바리스타</p><p class="ko de">한 스쿱을 매번 같은 맛으로 만들어 냅니다.</p></div></article>
       <div class="say"><span class="scr ko">정성껏</span><span class="scr ko">내립니다</span></div>
+      <svg class="arw" viewBox="0 0 190 150" aria-hidden="true"><path d="M10 8C78 14 150 52 166 118"/><path d="M148 102l20 26 18-28"/></svg>
     </div>
     <div class="row">
       <article class="tcard rv"><figure><img src="../restaurant-h/assets/tm-3.jpg" alt="" width="210" height="280" loading="lazy"></figure><div class="bx"><p class="dp ko nm">한도경</p><p class="scr ko ro">베이커</p><p class="ko de">매일 아침 굽는 것만 열두 가지입니다.</p></div></article>
       <div class="say"><span class="scr ko">같이 있으면</span><span class="scr ko">더 좋습니다</span></div>
+      <svg class="arw" viewBox="0 0 190 150" aria-hidden="true"><path d="M10 8C78 14 150 52 166 118"/><path d="M148 102l20 26 18-28"/></svg>
     </div>
     <div class="row r">
       <article class="tcard rv"><figure><img src="../restaurant-h/assets/tm-4.jpg" alt="" width="210" height="280" loading="lazy"></figure><div class="bx"><p class="dp ko nm">오유진</p><p class="scr ko ro">가게 지기</p><p class="ko de">자리 안내부터 마감까지 전부 맡고 있습니다.</p></div></article>
