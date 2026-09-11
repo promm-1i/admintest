@@ -10,8 +10,15 @@
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Gasoek+One&family=Londrina+Solid&family=Nanum+Pen+Script&family=Yellowtail&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Londrina+Solid&family=Yellowtail&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 한글 디스플레이 — ref Londrina Solid(둥글고 친근) → 어그로체 B, Yellowtail(스크립트) → 교보손글씨 2023
+   라틴·숫자는 레퍼런스 글꼴 그대로, 한글만 대체한다.
+   상용 2,350자로 서브셋해 넣었으므로 문구를 바꿔도 글자가 깨지지 않는다 */
+@font-face{font-family:'SBAggro';font-style:normal;font-weight:400;font-display:swap;src:url('./assets/fonts/SBAggroB.woff2') format('woff2')}
+@font-face{font-family:'KyoboHand';font-style:normal;font-weight:400;font-display:swap;src:url('./assets/fonts/Kyobo2023.woff2') format('woff2')}
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 img,svg,video{display:block;max-width:100%}
@@ -35,10 +42,10 @@ body{background:var(--bg);color:var(--ink);
 .ko{text-wrap:pretty}
 /* ref 제목 첫줄은 Londrina Solid, 둘째줄은 Yellowtail 주황.
    한글은 각각 가석원 · 나눔손글씨 펜으로 대체한다 */
-.dp{font-family:"Londrina Solid","Gasoek One",sans-serif;font-weight:400}
-.dp.ko{font-family:"Gasoek One","Pretendard Variable",sans-serif;letter-spacing:-.02em}
-.hand{font-family:Yellowtail,"Nanum Pen Script",cursive;font-weight:400;color:var(--or)}
-.hand.ko{font-family:"Nanum Pen Script",cursive;font-weight:400}
+.dp{font-family:"Londrina Solid","SBAggro",sans-serif;font-weight:400}
+.dp.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;letter-spacing:-.02em}
+.hand{font-family:Yellowtail,"KyoboHand",cursive;font-weight:400;color:var(--or)}
+.hand.ko{font-family:"KyoboHand",cursive;font-weight:400}
 .d1{font-size:44px;line-height:52px;font-weight:700;letter-spacing:.5px}
 .d1.ko{letter-spacing:-.02em;line-height:58px}
 .d2{font-size:38px;line-height:45.6px;font-weight:700;letter-spacing:.5px}
@@ -70,8 +77,8 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   display:flex;align-items:center;justify-content:space-between}
 .top a,.top .lg{font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px;
   min-height:44px;display:inline-flex;align-items:center;text-transform:uppercase}
-.top .lg{font-family:"Londrina Solid","Gasoek One",sans-serif;font-size:22px;color:var(--or);text-transform:none}
-.top .lg.ko{font-family:"Gasoek One","Pretendard Variable",sans-serif;font-weight:400;font-size:26px}
+.top .lg{font-family:"Londrina Solid","SBAggro",sans-serif;font-size:22px;color:var(--or);text-transform:none}
+.top .lg.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;font-weight:400;font-size:26px}
 .top a.ko{text-transform:none;letter-spacing:0}
 
 /* ── 히어로 ── */
@@ -83,14 +90,14 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .hero>*{position:relative;z-index:2;color:var(--w)}
 .hero p{margin-top:10px;max-width:520px}
 .hero .lgm{position:absolute;left:50%;top:26px;transform:translateX(-50%);z-index:3;
-  font-family:"Londrina Solid","Gasoek One",sans-serif;font-size:30px;color:var(--w)}
-.hero .lgm.ko{font-family:"Gasoek One","Pretendard Variable",sans-serif;font-weight:400;font-size:34px}
+  font-family:"Londrina Solid","SBAggro",sans-serif;font-size:30px;color:var(--w)}
+.hero .lgm.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;font-weight:400;font-size:34px}
 .hero .open{position:absolute;right:34px;top:56px;z-index:3;width:112px;height:96px;
   border-radius:12px;background:var(--w);color:var(--ink);display:flex;flex-direction:column;
   align-items:center;justify-content:center;transform:rotate(4deg);
   box-shadow:0 10px 24px rgba(0,0,0,.22)}
-.hero .open b{font-family:"Londrina Solid","Gasoek One",sans-serif;font-size:30px;color:var(--or)}
-.hero .open b.ko{font-family:"Gasoek One","Pretendard Variable",sans-serif;font-weight:400}
+.hero .open b{font-family:"Londrina Solid","SBAggro",sans-serif;font-size:30px;color:var(--or)}
+.hero .open b.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;font-weight:400}
 .hero .open span{font-size:10px;line-height:14px;font-weight:700;letter-spacing:.5px}
 
 /* ── 마퀴 ── */
@@ -130,8 +137,8 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .freebie{margin:70px 0 0;text-align:center}
 .freebie .box{margin-top:16px;border:1px solid var(--line);border-radius:8px;
   padding:34px 30px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.freebie .big{font-family:"Londrina Solid","Gasoek One",sans-serif;font-size:56px;line-height:60px;color:var(--or)}
-.freebie .big.ko{font-family:"Gasoek One","Pretendard Variable",sans-serif;font-weight:400;font-size:52px}
+.freebie .big{font-family:"Londrina Solid","SBAggro",sans-serif;font-size:56px;line-height:60px;color:var(--or)}
+.freebie .big.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;font-weight:400;font-size:52px}
 .freebie .sub{font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px}
 .freebie .sub em{font-style:normal;color:var(--or)}
 
@@ -155,8 +162,8 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   border-radius:6px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end}
 .team .note::before{content:"";position:absolute;top:-6px;left:34px;width:11px;height:11px;
   border-radius:50%;background:var(--or)}
-.team .note b{font-family:"Londrina Solid","Gasoek One",sans-serif;font-size:20px;color:var(--ink)}
-.team .note b.ko{font-family:"Gasoek One","Pretendard Variable",sans-serif;font-weight:400;font-size:22px}
+.team .note b{font-family:"Londrina Solid","SBAggro",sans-serif;font-size:20px;color:var(--ink)}
+.team .note b.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;font-weight:400;font-size:22px}
 .team .note span{font-size:12px;line-height:17px;color:var(--gray)}
 .team .n1{left:8%;top:0;transform:rotate(-6deg)}
 .team .n2{left:26%;top:34px;transform:rotate(3deg)}
@@ -176,8 +183,8 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 마무리 ── */
 .end{border:1px solid var(--line);border-radius:8px;padding:48px 30px;text-align:center}
-.end .lg{font-family:"Londrina Solid","Gasoek One",sans-serif;font-size:30px;color:var(--or)}
-.end .lg.ko{font-family:"Gasoek One","Pretendard Variable",sans-serif;font-weight:400;font-size:34px}
+.end .lg{font-family:"Londrina Solid","SBAggro",sans-serif;font-size:30px;color:var(--or)}
+.end .lg.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;font-weight:400;font-size:34px}
 .end h2{margin-top:12px}
 .end .hand{display:block;font-size:44px;line-height:52px}
 .end .go{margin-top:26px}

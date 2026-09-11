@@ -10,8 +10,18 @@
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Black+Han+Sans&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 한글 디스플레이 — ref Anton / Anton SC — 위와 같은 자리
+   라틴·숫자는 레퍼런스 글꼴 그대로, 한글만 대체한다.
+   상용 2,350자로 서브셋해 넣었으므로 문구를 바꿔도 글자가 깨지지 않는다 */
+@font-face{font-family:'Freesentation';font-style:normal;font-weight:400;font-display:swap;src:url('../restaurant-j/assets/fonts/Freesentation-9Black.woff2') format('woff2')}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 img,svg,video{display:block;max-width:100%}
@@ -34,8 +44,8 @@ body{background:var(--cream);color:var(--green);
   font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;
   font-size:16px;line-height:24px;font-weight:600}
 .ko{text-wrap:pretty}
-.an{font-family:Anton,"Black Han Sans",sans-serif;font-weight:400;text-transform:uppercase}
-.an.ko{font-family:"Black Han Sans","Pretendard Variable",sans-serif;
+.an{font-family:Anton,"Freesentation",sans-serif;font-weight:400;text-transform:uppercase}
+.an.ko{font-family:"Freesentation","Pretendard Variable",sans-serif;
   text-transform:none;letter-spacing:-.02em}
 .dxl{font-size:300px;line-height:300px}
 .dxl.ko{line-height:348px}
@@ -73,9 +83,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .hero::after{content:"";position:absolute;inset:0;background:rgba(3,86,62,.18)}
 .hero .tx{position:relative;z-index:3}
 .hero h1{color:var(--pink);text-shadow:0 4px 26px rgba(0,0,0,.24)}
-.hero .say{margin-top:8px;color:var(--w);font-family:Anton,"Black Han Sans",sans-serif;
+.hero .say{margin-top:8px;color:var(--w);font-family:Anton,"Freesentation",sans-serif;
   font-size:34px;line-height:42px;text-transform:uppercase;text-shadow:0 2px 16px rgba(0,0,0,.34)}
-.hero .say.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.hero .say.ko{font-family:"Freesentation",sans-serif;text-transform:none;letter-spacing:-.02em}
 .hero .order{position:absolute;left:50%;top:26px;transform:translateX(-50%);z-index:4}
 .hero .strip{position:absolute;left:0;right:0;bottom:36px;z-index:4;
   display:flex;justify-content:center;gap:10px;padding:0 20px;overflow:hidden}
@@ -88,9 +98,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 /* ── 핑크 문단 밴드 ── */
 .shout{background:var(--pink);padding:96px 0}
 .shout p{max-width:1080px;margin:0 auto;text-align:center;
-  font-family:Anton,"Black Han Sans",sans-serif;font-size:44px;line-height:56px;
+  font-family:Anton,"Freesentation",sans-serif;font-size:44px;line-height:56px;
   text-transform:uppercase;color:var(--green)}
-.shout p.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;
+.shout p.ko{font-family:"Freesentation",sans-serif;text-transform:none;
   letter-spacing:-.02em;line-height:66px}
 
 /* ── 스페셜 ── */
@@ -103,9 +113,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .spec .f1{left:-160px;top:14%;width:230px}
 .spec .f2{left:50%;top:-6%;transform:translateX(-50%);width:290px;z-index:3}
 .spec .f3{right:-160px;top:14%;width:230px}
-.spec .cap{position:absolute;z-index:4;color:var(--w);font-family:Anton,"Black Han Sans",sans-serif;
+.spec .cap{position:absolute;z-index:4;color:var(--w);font-family:Anton,"Freesentation",sans-serif;
   font-size:16px;line-height:20px;text-transform:uppercase;text-align:center}
-.spec .cap.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.spec .cap.ko{font-family:"Freesentation",sans-serif;text-transform:none;letter-spacing:-.02em}
 .spec .p1{left:2%;bottom:6%;transform:rotate(-12deg)}
 .spec .p2{left:50%;bottom:-4%;transform:translateX(-50%)}
 .spec .p3{right:2%;bottom:6%;transform:rotate(12deg)}
@@ -114,9 +124,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .menu{background:var(--cream);padding:80px 0}
 .menu .in{display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:center}
 .menu li{display:flex;justify-content:space-between;gap:24px;align-items:baseline;padding:10px 0}
-.menu .nm{font-family:Anton,"Black Han Sans",sans-serif;font-size:32px;line-height:40px;
+.menu .nm{font-family:Anton,"Freesentation",sans-serif;font-size:32px;line-height:40px;
   text-transform:uppercase;color:var(--pink)}
-.menu .nm.ko{font-family:"Black Han Sans",sans-serif;text-transform:none;letter-spacing:-.02em}
+.menu .nm.ko{font-family:"Freesentation",sans-serif;text-transform:none;letter-spacing:-.02em}
 .menu .pr{font-size:14px;font-weight:700;color:var(--pink);flex:0 0 auto}
 .menu figure{border-radius:16px;overflow:clip;background:var(--pink)}
 .menu figure img{width:100%;height:470px;object-fit:cover}
@@ -124,9 +134,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 /* ── 곡선 텍스트 ── */
 .curve{background:var(--green);position:relative;overflow:clip;padding:0}
 .curve svg{width:100%;height:420px;display:block}
-.curve text{font-family:Anton,"Black Han Sans",sans-serif;font-size:30px;
+.curve text{font-family:Anton,"Freesentation",sans-serif;font-size:30px;
   text-transform:uppercase;fill:var(--pink)}
-.curve text.ko{font-family:"Black Han Sans",sans-serif;text-transform:none}
+.curve text.ko{font-family:"Freesentation",sans-serif;text-transform:none}
 .curve figure{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
   width:230px;z-index:2;border-radius:14px;overflow:clip}
 .curve figure img{width:100%;height:auto}
@@ -150,7 +160,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .ccard figure{background:var(--green)}
 .ccard figure img{width:100%;height:300px;object-fit:cover}
 .ccard .bd{padding:18px 18px 22px;background:var(--cream)}
-.ccard h3{font-family:"Black Han Sans",sans-serif;font-size:22px;line-height:30px;letter-spacing:-.02em}
+.ccard h3{font-family:"Freesentation",sans-serif;font-size:22px;line-height:30px;letter-spacing:-.02em}
 .ccard p{margin-top:8px;font-size:15px;line-height:24px}
 
 /* ── 기사 목록·상세 ── */
@@ -170,7 +180,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .ft{background:var(--green);color:var(--pink);padding:60px 0 24px}
 .ft .in{max-width:1360px;margin:0 auto;padding:0 40px;display:grid;
   grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px}
-.ft .lg{font-family:"Black Han Sans",sans-serif;font-size:38px;line-height:46px;letter-spacing:-.02em}
+.ft .lg{font-family:"Freesentation",sans-serif;font-size:38px;line-height:46px;letter-spacing:-.02em}
 .ft .in>div>p{margin-top:10px;max-width:300px;color:var(--w);font-weight:400}
 .ft h6{font-size:14px;font-weight:700;margin-bottom:8px}
 .ft a,.ft .l{display:block;font-size:14px;line-height:24px;min-height:32px;
@@ -197,7 +207,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   object-fit:cover;clip-path:polygon(50% 0,60% 12%,72% 5%,76% 19%,90% 17%,88% 31%,100% 36%,92% 47%,100% 60%,87% 65%,90% 79%,76% 78%,72% 92%,60% 85%,50% 100%,40% 85%,28% 92%,24% 78%,10% 79%,13% 65%,0 60%,8% 47%,0 36%,12% 31%,10% 17%,24% 19%,28% 5%,40% 12%)}
 .rcard h3{margin-top:16px;color:var(--green)}
 .rcard .q{margin-top:10px;font-size:24px;line-height:28px;color:var(--pink)}
-.rcard .q.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em;line-height:34px}
+.rcard .q.ko{font-family:"Freesentation",sans-serif;letter-spacing:-.02em;line-height:34px}
 
 /* ── 팀 (ref y7406 핑크밴드 982 · 라벨 32/36 크림 · 제목 72/76 초록 · 카드 517x628 pad60 · 사진 397x508 r16) ── */
 .team{background:var(--pink);padding:70px 0 0;overflow:clip}
@@ -221,7 +231,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .tcard .nm{position:absolute;left:20px;bottom:52px;color:var(--cream);z-index:2}
 .tcard .ro{position:absolute;left:20px;bottom:18px;color:var(--cream);
   font-size:26px;line-height:30px;z-index:2}
-.tcard .ro.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+.tcard .ro.ko{font-family:"Freesentation",sans-serif;letter-spacing:-.02em}
 @media (prefers-reduced-motion:reduce){.team .track{animation:none}}
 
 /* ── 클럽 (ref y12574 크림밴드 · 카드 479x226 r16 핑크 pad10 gap6 · 제목 80/80 초록) ── */
@@ -241,7 +251,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .band{background:var(--green);padding:96px 0;text-align:center}
 .band h2{max-width:1240px;margin:0 auto;color:var(--cream)}
 .band .adr{margin-top:26px;font-size:26px;line-height:34px;color:var(--pink)}
-.band .adr.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+.band .adr.ko{font-family:"Freesentation",sans-serif;letter-spacing:-.02em}
 
 /* ── 저널 (ref y14069 크림밴드 · 카드 333폭 초록테두리 r16 · 제목 60/60 · 태그 24/28) ── */
 .jr{background:var(--cream);padding:90px 0 100px}
@@ -250,9 +260,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   box-shadow:inset 0 0 0 1px var(--green);transition:background .25s var(--ease)}
 .jrcard:hover{background:rgba(3,86,62,.06)}
 .jrcard h3{font-size:60px;line-height:60px;color:var(--green)}
-.jrcard h3.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.03em;line-height:66px}
+.jrcard h3.ko{font-family:"Freesentation",sans-serif;letter-spacing:-.03em;line-height:66px}
 .jrcard .tag{margin-top:22px;font-size:24px;line-height:28px;color:var(--green)}
-.jrcard .tag.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+.jrcard .tag.ko{font-family:"Freesentation",sans-serif;letter-spacing:-.02em}
 
 /* ── FAQ (ref y14584 초록밴드 · 라벨 32/36 핑크 · 제목 72/76 핑크 · 항목 800x80 r16 핑크선) ── */
 .faq{background:var(--green);padding:160px 0}
@@ -265,7 +275,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .faq summary{list-style:none;cursor:pointer;min-height:80px;padding:20px 24px;
   display:flex;align-items:center;justify-content:space-between;gap:20px;
   font-size:24px;line-height:28px;color:var(--pink)}
-.faq summary.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+.faq summary.ko{font-family:"Freesentation",sans-serif;letter-spacing:-.02em}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"";flex:0 0 auto;width:22px;height:22px;
   background:linear-gradient(var(--pink),var(--pink)) center/100% 2px no-repeat,
@@ -278,7 +288,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .hail{background:var(--pink);padding:60px 0 70px}
 .hail .in{display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap}
 .hail .ml{font-size:100px;line-height:100px;color:var(--green);
-  font-family:Anton,"Black Han Sans",sans-serif;word-break:break-all}
+  font-family:Anton,"Freesentation",sans-serif;word-break:break-all}
 .hail .ml:hover{color:var(--cream)}
 .hail .so{margin-top:18px;display:flex;gap:10px}
 .hail .so a{width:34px;height:34px;border-radius:9px;background:var(--green);
@@ -287,8 +297,8 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .hail .so svg{width:18px;height:18px;fill:var(--pink)}
 .hail .nav{display:flex;gap:28px;padding-top:22px}
 .hail .nav a{font-size:24px;line-height:26px;color:var(--green);
-  font-family:Anton,"Black Han Sans",sans-serif}
-.hail .nav a.ko{font-family:"Black Han Sans",sans-serif;letter-spacing:-.02em}
+  font-family:Anton,"Freesentation",sans-serif}
+.hail .nav a.ko{font-family:"Freesentation",sans-serif;letter-spacing:-.02em}
 .hail .nav a:hover{color:var(--cream)}
 
 /* ── 태블릿 ── */
@@ -406,10 +416,6 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   .ft .in{grid-template-columns:1fr}
   .ft .cp{flex-direction:column;gap:6px}
 }
-
-/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
-.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
-.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
 </style>
 </head>
 <body id="top">

@@ -10,8 +10,15 @@
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Gasoek+One&family=Inter:wght@400;600;700;900&family=Nanum+Pen+Script&family=Sacramento&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&family=Inter:wght@400;600;700;900&family=Sacramento&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+/* 한글 디스플레이 — ref Boldonse(기하학적 청키) → 지마켓 산스 Bold, Sacramento(스크립트) → 교보손글씨 2023
+   라틴·숫자는 레퍼런스 글꼴 그대로, 한글만 대체한다.
+   상용 2,350자로 서브셋해 넣었으므로 문구를 바꿔도 글자가 깨지지 않는다 */
+@font-face{font-family:'GmarketSans';font-style:normal;font-weight:400;font-display:swap;src:url('./assets/fonts/GmarketSansBold.woff2') format('woff2')}
+@font-face{font-family:'KyoboHand';font-style:normal;font-weight:400;font-display:swap;src:url('./assets/fonts/Kyobo2023.woff2') format('woff2')}
+</style>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 img,svg,video{display:block;max-width:100%}
@@ -34,10 +41,10 @@ body{background:#fff;color:var(--ink);
   font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;
   font-size:16px;line-height:24.8px;font-weight:400}
 .ko{text-wrap:pretty}
-.scr{font-family:Sacramento,"Nanum Pen Script",cursive;font-weight:400}
-.scr.ko{font-family:"Nanum Pen Script",cursive}
-.dp{font-family:Boldonse,"Gasoek One",sans-serif;font-weight:400}
-.dp.ko{font-family:"Gasoek One","Pretendard Variable",sans-serif;letter-spacing:-.02em}
+.scr{font-family:Sacramento,"KyoboHand",cursive;font-weight:400}
+.scr.ko{font-family:"KyoboHand",cursive}
+.dp{font-family:Boldonse,"GmarketSans",sans-serif;font-weight:400}
+.dp.ko{font-family:"GmarketSans","Pretendard Variable",sans-serif;letter-spacing:-.02em}
 .d1{font-size:56px;line-height:67.2px}
 .d1.ko{font-size:62px;line-height:80px}
 .d2{font-size:48px;line-height:57.6px}
@@ -62,7 +69,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .top{position:absolute;left:0;right:0;top:0;z-index:20;padding:22px 40px;
   display:flex;align-items:center;justify-content:space-between;gap:20px}
 /* ref 는 로고만 흰색이고 내비·히어로 글자는 검정 잉크다 (하늘 위에서 그게 읽힌다) */
-.top .lg{font-family:"Gasoek One",sans-serif;font-size:24px;line-height:30px;color:#fff;
+.top .lg{font-family:"GmarketSans",sans-serif;font-size:24px;line-height:30px;color:#fff;
   min-height:44px;display:inline-flex;align-items:center;
   text-shadow:0 1px 0 rgba(20,40,70,.55),0 -1px 0 rgba(20,40,70,.35),
     1px 0 0 rgba(20,40,70,.35),-1px 0 0 rgba(20,40,70,.35),0 3px 14px rgba(20,40,70,.45)}
@@ -91,9 +98,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .mq .tr{display:flex;align-items:center;gap:26px;width:max-content;animation:mqmv 22s linear infinite}
 @keyframes mqmv{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.mq .tr{animation:none}}
-.mq span{font-family:Boldonse,"Gasoek One",sans-serif;font-size:18px;line-height:22px;
+.mq span{font-family:Boldonse,"GmarketSans",sans-serif;font-size:18px;line-height:22px;
   letter-spacing:1px;text-transform:uppercase;white-space:nowrap}
-.mq span.ko{font-family:"Gasoek One",sans-serif;text-transform:none;letter-spacing:0}
+.mq span.ko{font-family:"GmarketSans",sans-serif;text-transform:none;letter-spacing:0}
 .mq i{width:22px;height:22px;border-radius:50%;background:var(--soft);flex:0 0 auto;
   display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--green)}
 
@@ -116,7 +123,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .mcard{text-align:center}
 .mcard figure{height:280px;display:flex;align-items:flex-end;justify-content:center}
 .mcard figure img{max-height:280px;width:auto}
-.mcard h3{margin-top:14px;font-family:"Gasoek One",sans-serif;font-size:20px;line-height:26px}
+.mcard h3{margin-top:14px;font-family:"GmarketSans",sans-serif;font-size:20px;line-height:26px}
 .mcard .row{margin-top:6px;display:flex;justify-content:center;gap:22px;align-items:center}
 .mcard .pr{color:var(--green);font-weight:700}
 .mcard .st{color:var(--gray);font-size:14px}
@@ -148,7 +155,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .ft{background:var(--ink);color:#fff;padding:48px 0 24px}
 .ft .in{max-width:1240px;margin:0 auto;padding:0 40px;
   display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap}
-.ft .lg{font-family:"Gasoek One",sans-serif;font-size:24px;line-height:30px}
+.ft .lg{font-family:"GmarketSans",sans-serif;font-size:24px;line-height:30px}
 .ft .col h6{font-size:14px;font-weight:700;margin-bottom:8px}
 .ft .col a,.ft .col p{display:block;font-size:14px;line-height:24px;color:rgba(255,255,255,.7)}
 .ft .col a{min-height:34px}
@@ -256,7 +263,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .fq .ans{padding:0 24px 22px;font-size:16px;line-height:26px;color:rgb(79,79,79)}
 
 /* ── 푸터 대형 워드마크 (ref y8505 73/80.3 Gasoek One rgb(20,11,11)) ── */
-.ft .mark{margin:38px auto 0;text-align:center;font-family:"Gasoek One",sans-serif;
+.ft .mark{margin:38px auto 0;text-align:center;font-family:"GmarketSans",sans-serif;
   font-size:73px;line-height:80.3px;color:rgb(20,11,11);letter-spacing:-.02em}
 
 /* ── 태블릿 ── */
