@@ -47,7 +47,7 @@ body{background:#fff;color:var(--ink);
 .lab{font-size:16px;line-height:19.2px}
 .p16{font-size:16px;line-height:24.8px;font-weight:400}
 .gr{color:var(--green)}
-.wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+.wrap{max-width:1440px;margin:0 auto;padding:0 45px}
 
 .rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
@@ -80,11 +80,11 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   font-size:11px;line-height:15px;font-weight:700;letter-spacing:.4px;padding:10px}
 
 /* ── 소개 ── */
-.lead{padding:80px 0 40px;text-align:center}
+.lead{padding-top:80px;padding-bottom:40px;text-align:center}
 .lead p{max-width:820px;margin:0 auto;font-size:26px;line-height:40px}
 
 /* ── 마퀴 ── */
-.mq{padding:24px 0 40px;overflow:clip}
+.mq{padding-top:24px;padding-bottom:40px;overflow:clip}
 .mq .tr{display:flex;align-items:center;gap:26px;width:max-content;animation:mqmv 22s linear infinite}
 @keyframes mqmv{to{transform:translateX(-50%)}}
 @media (prefers-reduced-motion:reduce){.mq .tr{animation:none}}
@@ -95,7 +95,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--green)}
 
 /* ── 효능 ── */
-.benefit{padding:40px 0 60px;position:relative}
+.benefit{padding-top:40px;padding-bottom:60px;position:relative}
 .benefit .stack{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
 .benefit .stack .scr{font-size:56px;line-height:74px;color:var(--ink)}
 .benefit .cups{margin-top:44px;display:flex;align-items:flex-end;justify-content:center;gap:40px}
@@ -105,10 +105,10 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .benefit .note{margin-top:16px;text-align:center;color:var(--gray)}
 
 /* ── 메뉴 ── */
-.sig{padding:60px 0 20px;text-align:center}
+.sig{padding-top:60px;padding-bottom:20px;text-align:center}
 .sig h2{margin-bottom:10px}
 .sig p{color:var(--gray)}
-.menu{padding:20px 0 60px}
+.menu{padding-top:20px;padding-bottom:60px}
 .menu .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px 30px}
 .mcard{text-align:center}
 .mcard figure{height:280px;display:flex;align-items:flex-end;justify-content:center}
@@ -120,7 +120,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .menu .more{margin-top:44px;display:flex;justify-content:center}
 
 /* ── 후기 ── */
-.rev{padding:40px 0 70px}
+.rev{padding-top:40px;padding-bottom:70px}
 .rev h2{text-align:center;margin-bottom:10px}
 .rev .sub{text-align:center;color:var(--gray);margin-bottom:34px}
 .rev ul{display:flex;flex-direction:column;gap:12px}
@@ -132,7 +132,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .rev .sc{margin-left:auto;flex:0 0 auto;font-size:14px;font-weight:700}
 
 /* ── 매장 ── */
-.visit{padding:20px 0 70px}
+.visit{padding-top:20px;padding-bottom:70px}
 .visit .box{background:var(--soft);border-radius:26px;padding:40px;
   display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center}
 .visit figure{border-radius:18px;overflow:clip;background:#fff}
@@ -177,7 +177,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .rev li{background:#fff;border-color:transparent}
 
 /* ── 팀 (ref y4595 · 제목 30/45 흰색 · 카드 198x81 r12 pad16 흰색 · 이름 24/24 · 역할 16/16 손글씨 · 설명 14/19.6) ── */
-.team{position:relative;padding:70px 0 90px}
+.team{position:relative;padding-top:70px;padding-bottom:90px}
 .team h2{text-align:center;color:#fff;font-size:30px;line-height:45px}
 .team .hi{display:block;text-align:center;color:#fff;font-size:33px;line-height:39.6px;
   margin-bottom:4px}
@@ -189,6 +189,8 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .tcard figure img{width:100%;height:100%;object-fit:cover}
 .tcard .bx{position:absolute;left:8px;right:-52px;bottom:0;background:#fff;
   border-radius:12px;padding:16px}
+/* 오른쪽에 놓인 카드는 정보 상자가 화면 밖으로 나가므로 왼쪽으로 뺀다 */
+.team .row.r .tcard .bx{left:-52px;right:8px}
 .tcard .nm{font-size:24px;line-height:24px}
 .tcard .ro{font-size:16px;line-height:16px;margin-top:2px}
 .tcard .de{font-size:14px;line-height:19.6px;color:rgb(79,79,79);margin-top:6px}
@@ -250,6 +252,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   .tcard{width:180px}
   .tcard figure{width:180px;height:240px}
   .tcard .bx{right:-30px}
+  .team .row.r .tcard .bx{left:-30px;right:8px}
   .ft .mark{font-size:48px;line-height:56px}
   .wrap,.top,.ft .in,.ft .cp{padding-left:24px;padding-right:24px}
   .d1{font-size:40px;line-height:50px}
@@ -272,14 +275,15 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 @media (max-width:809px){
   .rev .ghost{top:70px;gap:2px}
   .rev .ghost span{font-size:62px;line-height:64px}
-  .team{padding:46px 0 60px}
+  .team{padding-top:46px;padding-bottom:60px}
   .team h2,.ev h2,.fq h2{font-size:22px;line-height:32px}
   .team .hi{font-size:24px;line-height:30px}
   .team .row,.team .row.r{flex-direction:column;gap:14px}
   .team .row+.row{margin-top:44px}
   .tcard{width:100%;padding-bottom:0}
   .tcard figure{width:100%;height:240px}
-  .tcard .bx{position:static;margin-top:-28px;margin-left:12px;margin-right:12px}
+  .tcard .bx,.team .row.r .tcard .bx{position:static;margin-top:-28px;
+    margin-left:12px;margin-right:12px;left:auto;right:auto}
   .team .say{padding-top:0;font-size:22px;line-height:28px}
   .team .say span:nth-child(2),.team .say span:nth-child(3){padding-left:0}
   .ev{padding:0 0 52px}

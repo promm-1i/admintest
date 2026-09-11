@@ -10,7 +10,7 @@
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Alan+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -33,8 +33,12 @@ body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-s
   --line:rgba(163,136,96,.4);--ease:cubic-bezier(.44,0,.56,1)}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--gray);
-  font-family:"Alan Sans","Pretendard Variable",Pretendard,sans-serif;
+  font-family:Inter,"Pretendard Variable",Pretendard,sans-serif;
   font-size:16px;line-height:22.4px;font-weight:400}
+/* ref 는 제목·라벨만 Alan Sans 이고 본문·날짜·버튼·내비는 Inter Display 다.
+   Inter Display 는 구글 폰트에 없어 Inter 로 받는다 */
+h1,h2,h3,h4,h5,h6,.d1,.d2,.d3,.d4,.lab,.p20{
+  font-family:"Alan Sans","Pretendard Variable",Pretendard,sans-serif}
 .ko{text-wrap:pretty}
 .d1{font-size:68px;line-height:81.6px;font-weight:600;letter-spacing:-2.72px;color:var(--brown)}
 .d1.ko{letter-spacing:-.03em;line-height:92px}
@@ -48,7 +52,7 @@ body{background:var(--bg);color:var(--gray);
 .p20{font-size:20px;line-height:26px;letter-spacing:-.4px}
 .p16{font-size:16px;line-height:22.4px}
 .p16b{font-size:16px;line-height:22.4px;font-weight:600;color:var(--ink)}
-.wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+.wrap{max-width:1440px;margin:0 auto;padding:0 20px}
 
 .rv{opacity:0;transform:translateY(28px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
@@ -81,7 +85,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .hero h1{position:relative;z-index:2}
 .hero .sub{position:relative;z-index:2;margin-top:16px}
 .hero .go{position:relative;z-index:2;margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.hero figure{margin-top:56px;border-radius:20px;overflow:clip;background:var(--cream)}
+.hero figure{margin-top:56px;border-radius:12px;overflow:clip;background:var(--cream)}
 .hero figure img{width:100%;height:660px;object-fit:cover}
 
 /* ── 섹션 머리 ── */
@@ -92,23 +96,23 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 하이라이트 사진 카드 ── */
 .hl{display:flex;flex-direction:column;gap:64px}
-.hl figure{position:relative;border-radius:16px;overflow:clip;background:var(--cream)}
+.hl figure{position:relative;border-radius:12px;overflow:clip;background:var(--cream)}
 .hl figure img{width:100%;height:688px;object-fit:cover}
 .hl figcaption{position:absolute;left:0;right:0;top:26px;text-align:center;z-index:2;
   color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.4)}
 
 /* ── 이야기 ── */
-.story{padding:40px 0}
+.story{padding-top:40px;padding-bottom:40px}
 .story .box{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center}
-.story figure{border-radius:16px;overflow:clip;background:var(--cream)}
+.story figure{border-radius:12px;overflow:clip;background:var(--cream)}
 .story figure img{width:100%;height:470px;object-fit:cover}
 .story p{margin-top:16px}
 .story .go{margin-top:24px}
 
 /* ── 메뉴 ── */
-.menu{padding:20px 0 60px}
+.menu{padding-top:20px;padding-bottom:60px}
 .menu .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.mcard{background:var(--face);border-radius:16px;overflow:clip;
+.mcard{background:var(--face);border-radius:12px;overflow:clip;
   transition:transform .35s var(--ease)}
 .mcard:hover{transform:translateY(-5px)}
 .mcard figure{height:260px;background:var(--cream)}
@@ -130,9 +134,9 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .mgroup h2{margin-bottom:10px}
 
 /* ── 후기 ── */
-.rev{padding:40px 0 70px}
+.rev{padding-top:40px;padding-bottom:70px}
 .rev .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.rcard{background:var(--face);border-radius:16px;padding:26px;display:flex;flex-direction:column}
+.rcard{background:var(--face);border-radius:12px;padding:26px;display:flex;flex-direction:column}
 .rcard .st{color:var(--green);font-weight:600}
 .rcard blockquote{margin-top:14px;font-size:16px;line-height:26px}
 .rcard cite{margin-top:auto;padding-top:18px;font-style:normal;font-size:14px;color:var(--ink);font-weight:600}
@@ -140,7 +144,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 /* ── 블로그 ── */
 .blog{padding:20px 0 60px}
 .blog .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
-.bcard figure{border-radius:16px;overflow:clip;background:var(--cream)}
+.bcard figure{border-radius:12px;overflow:clip;background:var(--cream)}
 .bcard figure img{width:100%;height:250px;object-fit:cover;transition:transform .6s var(--ease)}
 .bcard:hover figure img{transform:scale(1.04)}
 .bcard .dt{margin-top:14px;font-size:14px;color:var(--gray)}
@@ -163,12 +167,12 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 /* ── 예약 안내 ── */
 .info{padding:20px 0 70px}
 .info .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.info .c{background:var(--cream);border-radius:16px;padding:26px}
+.info .c{background:var(--cream);border-radius:12px;padding:26px}
 .info h3{font-size:18px;font-weight:600;color:var(--brown);margin-bottom:8px}
 
 /* ── CTA ── */
-.cta{padding:20px 0 70px;text-align:center}
-.cta .box{background:var(--cream);border-radius:20px;padding:60px 40px}
+.cta{padding-top:20px;padding-bottom:70px;text-align:center}
+.cta .box{background:var(--cream);border-radius:12px;padding:60px 40px}
 .cta p{margin-top:14px}
 .cta .go{margin-top:26px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 
