@@ -1,5 +1,6 @@
 [build]
-  command = "npm run build"
+  # 프리렌더용 크로미움. 실패해도 빌드를 막지 않는다(prerender.mjs 가 브라우저 없으면 건너뛴다).
+  command = "(npx playwright install chromium || true) && npm run build"
   publish = "dist"
 
 [build.environment]
@@ -17,7 +18,10 @@
   to = "/templates/:splat"
   status = 200
 
+# 프리렌더되지 않은 라우트(/samples/:slug 등)의 SPA 폴백.
+# index.html 은 홈 프리렌더 결과라 여기에 쓰면 홈 내용이 한 번 스친다. app.html 은
+# scripts/prerender.mjs 가 빌드마다 떠 두는 빈 껍데기다.
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "/app.html"
   status = 200

@@ -45,6 +45,9 @@ export function LiveComponentPreview({ scale, children }: { scale: number; child
 /**
  * 뷰포트 근처에 올 때까지 true를 반환하지 않는 훅. iframe처럼 무거운 것을 실제로 스크롤해서
  * 볼 때만 마운트하기 위한 공용 IntersectionObserver 로직이다.
+ *
+ * Reveal이 이 값으로 opacity를 걸기 때문에 관찰에 실패하면 본문이 영구히 투명해진다.
+ * useInView와 같은 안전장치를 둔다 — 관찰자가 없으면 즉시, 첫 콜백조차 오지 않으면 1.2초 뒤에 노출.
  */
 export function useLazyMount<T extends HTMLElement>() {
   const ref = useRef<T>(null);
@@ -53,8 +56,16 @@ export function useLazyMount<T extends HTMLElement>() {
   useEffect(() => {
     const el = ref.current;
     if (!el || shouldLoad) return;
+
+    if (typeof IntersectionObserver === "undefined") {
+      setShouldLoad(true);
+      return;
+    }
+
+    let answered = false;
     const observer = new IntersectionObserver(
       ([entry]) => {
+        answered = true;
         if (entry.isIntersecting) {
           setShouldLoad(true);
           observer.disconnect();
@@ -63,7 +74,14 @@ export function useLazyMount<T extends HTMLElement>() {
       { rootMargin: "200px" },
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    const failsafe = setTimeout(() => {
+      if (!answered) setShouldLoad(true);
+    }, 1200);
+
+    return () => {
+      clearTimeout(failsafe);
+      observer.disconnect();
+    };
   }, [shouldLoad]);
 
   return { ref, shouldLoad };

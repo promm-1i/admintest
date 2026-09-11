@@ -45,6 +45,13 @@ const CORE_ROUTES = [
   "/web-solutions/moving",
 ];
 
+// 업종별 SEO 랜딩(/homepage/:key). "{업종} 홈페이지 제작" 검색 유입을 받으려고 만든
+// 페이지라 색인이 목적인데 예전 sitemap 에는 한 건도 들어있지 않았다.
+const industrySrc = readFileSync(join(root, "src/lib/industryLanding.ts"), "utf8");
+const body = industrySrc.slice(industrySrc.indexOf("INDUSTRY_LANDING"));
+const industryRoutes = [...body.matchAll(/^ {2}"?([a-z-]+)"?: \{$/gm)].map((m) => `/homepage/${m[1]}`);
+if (industryRoutes.length === 0) throw new Error("업종 랜딩 키를 하나도 못 찾았다 — 정규식 확인");
+
 // samples.ts에서 detailHref 없는 항목만 — 그 항목들만 /samples/:slug 상세 페이지를 가진다
 const samplesSrc = readFileSync(join(root, "src/lib/samples.ts"), "utf8");
 const sampleRoutes = [];
@@ -53,7 +60,7 @@ for (const entry of samplesSrc.split(/\n  \{/).slice(1)) {
   if (slug && !entry.includes("detailHref:")) sampleRoutes.push(`/samples/${slug}`);
 }
 
-const urls = [...CORE_ROUTES, ...sampleRoutes];
+const urls = [...CORE_ROUTES, ...industryRoutes, ...sampleRoutes];
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
@@ -63,4 +70,7 @@ const xml = [
 ].join("\n");
 
 writeFileSync(join(root, "public/sitemap.xml"), xml);
-console.log(`sitemap.xml 생성 완료 — URL ${urls.length}개 (고정 ${CORE_ROUTES.length} + 샘플 ${sampleRoutes.length})`);
+console.log(
+  `sitemap.xml 생성 완료 — URL ${urls.length}개 ` +
+    `(고정 ${CORE_ROUTES.length} + 업종 ${industryRoutes.length} + 샘플 ${sampleRoutes.length})`,
+);

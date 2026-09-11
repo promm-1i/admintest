@@ -13,7 +13,18 @@ const SMS_PHONE = "01048944905";
 
 const STYLES = [
   { key: "basic", name: "기본형", design: 0, desc: "핵심 정보만 담백하게, 애니메이션 없음" },
-  { key: "landing", name: "랜딩형", design: 200_000, desc: "스크롤 연출이 더해진 프리미엄 원페이지", hot: true },
+  { key: "landing", name: "랜딩형", design: 200_000, desc: "스크롤 연출과 인터랙션이 더해진 구성", hot: true },
+] as const;
+
+/** 페이지 수 축 — templatePackages.ts 의 subpageCost 와 같은 값이어야 한다 */
+const SCOPES = [
+  { key: "one", name: "원페이지", cost: 0, desc: "소개부터 문의까지 한 화면에서 이어집니다" },
+  {
+    key: "sub",
+    name: "서브페이지 분리",
+    cost: 300_000,
+    desc: "소개 · 서비스 · 사례 · 문의를 메뉴별 페이지로 나눕니다",
+  },
 ] as const;
 
 const HOSTING = [
@@ -54,16 +65,19 @@ export default function Estimate() {
 
   const [industry, setIndustry] = useState(industries[0]?.key ?? "");
   const [style, setStyle] = useState<(typeof STYLES)[number]["key"]>("landing");
+  const [scope, setScope] = useState<(typeof SCOPES)[number]["key"]>("one");
   const [domain, setDomain] = useState<(typeof DOMAINS)[number]["key"]>("free");
   const [hostingYears, setHostingYears] = useState<1 | 2 | 3>(1);
 
   const styleInfo = STYLES.find((s) => s.key === style)!;
+  const scopeInfo = SCOPES.find((s) => s.key === scope)!;
   const hosting = HOSTING.find((h) => h.years === hostingYears)!;
   const industryLabel = industries.find((i) => i.key === industry)?.label ?? "";
 
   const domainInfo = DOMAINS.find((d) => d.key === domain)!;
   const rows = [
-    { name: `디자인 (${styleInfo.name})`, cost: styleInfo.design, note: styleInfo.design === 0 ? "무료" : "" },
+    { name: `랜딩형 연출 (${styleInfo.name})`, cost: styleInfo.design, note: styleInfo.design === 0 ? "연출 없음" : "" },
+    { name: `페이지 구성 (${scopeInfo.name})`, cost: scopeInfo.cost, note: scopeInfo.cost === 0 ? "한 화면" : "메뉴별 분리" },
     { name: domain === "free" ? "도메인 (신규)" : "보유 도메인 연동", cost: 0, note: domain === "free" ? "첫 1년 무료" : "연동 무료" },
     { name: "업종 전용 기능", cost: FIXED.feature, note: `${industryLabel} 맞춤` },
     { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 초기 등록" },
@@ -71,7 +85,7 @@ export default function Estimate() {
   ];
   const total = rows.reduce((a, r) => a + r.cost, 0);
 
-  const summary = `${industryLabel} · ${styleInfo.name} · ${domainInfo.name} · 호스팅 ${hosting.label}`;
+  const summary = `${industryLabel} · ${styleInfo.name} · ${scopeInfo.name} · ${domainInfo.name} · 호스팅 ${hosting.label}`;
   const smsBody = `[견적상담] ${summary} / 예상 ${won(total)}원(VAT별도) — 이 구성으로 상담받고 싶습니다.`;
 
   return (
@@ -140,7 +154,32 @@ export default function Estimate() {
           </div>
 
           <div>
-            <p className="text-sm font-bold text-foreground">03 · 도메인</p>
+            <p className="text-sm font-bold text-foreground">03 · 페이지 구성</p>
+            <div className="mt-3 grid gap-3 sm:grid-cols-2">
+              {SCOPES.map((sc) => (
+                <button
+                  key={sc.key}
+                  type="button"
+                  onClick={() => setScope(sc.key)}
+                  className={cn(
+                    "rounded-xl border p-4 text-left transition-colors",
+                    scope === sc.key
+                      ? "border-primary bg-primary/5 ring-1 ring-primary/30"
+                      : "border-border hover:border-primary/40",
+                  )}
+                >
+                  <p className="text-sm font-bold text-foreground">{sc.name}</p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">{sc.desc}</p>
+                  <p className="mt-2 text-xs font-bold text-primary">
+                    {sc.cost === 0 ? "추가 없음" : `+${won(sc.cost)}원`}
+                  </p>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <p className="text-sm font-bold text-foreground">04 · 도메인</p>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
               {DOMAINS.map((d) => (
                 <button
@@ -160,7 +199,7 @@ export default function Estimate() {
           </div>
 
           <div>
-            <p className="text-sm font-bold text-foreground">04 · 호스팅 기간</p>
+            <p className="text-sm font-bold text-foreground">05 · 호스팅 기간</p>
             <div className="mt-3 grid grid-cols-3 gap-3">
               {HOSTING.map((h) => (
                 <button
