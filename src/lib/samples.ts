@@ -581,6 +581,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "rentcar-f-template",
+    industry: "렌터카 · 카셰어링 홈페이지",
+    title: "카셰어링 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 렌터카 · 카셰어링 · 예약",
+    purpose:
+      "시간 단위로 빌리는 카셰어링 구성입니다. 날짜·장소를 고르는 검색 바로 시작해 지역 차고지 카드, 회원 혜택, 공항·기차역 근처 차고지, 여행 정보와 활용 팁, 자주 묻는 질문까지 한 화면에 담았습니다. 차 빌리기 화면은 왼쪽 차량 목록과 오른쪽 지도가 나란히 붙고, 차종·연료로 거르는 기능이 실제로 동작합니다.",
+    features: ["날짜·장소 검색 바 · 지역 차고지 카드", "차량 목록 + 지도 · 차종/연료 거르기 동작", "차량 상세 (사양 8줄 · 요금표 5단)", "블로그 목록·본문 · FAQ 아코디언"],
+    idealFor: "카셰어링 업체, 렌터카 지점, 차량 공유 플랫폼, 관광지 렌터카",
+    image: "/thumbs/rentcar-f.jpg",
+    liveUrl: "/templates/rentcar-f/",
+    industryKey: "rentcar",
+    premiumLabel: "렌터카 A",
+    designCode: "RENP-1001",
+    premium: true,
+  },
+  {
     slug: "estate-f-template",
     industry: "부동산 매물 플랫폼 · 중개 홈페이지",
     title: "부동산 매물 플랫폼 홈페이지 (프리미엄 디자인 B)",
@@ -4873,6 +4890,12 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     label: "부동산",
     desc: "매물을 지도·목록으로 보여주고 상담으로 잇는 구성",
     industryKeys: ["estate"],
+  },
+  {
+    key: "rentcar",
+    label: "렌터카 · 카셰어링",
+    desc: "차량을 보여주고 날짜·장소로 예약까지 잇는 구성",
+    industryKeys: ["rentcar"],
   },
   {
     key: "food",

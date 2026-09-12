@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>두루카 — 카셰어링 (프리미엄 디자인 A)</title>
+<meta name="description" content="시간 단위로 빌리는 카셰어링 홈페이지. 날짜·시간을 고르는 검색 바, 지역 카드, 회원 혜택, 공항·기차역 근처 차고지, 여행 정보와 활용 팁, 자주 묻는 질문까지 갖춘 프리미엄 템플릿.">
+<meta property="og:title" content="두루카 — 카셰어링 (프리미엄 디자인 A)">
+<meta property="og:image" content="../rentcar-f/og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preload" as="image" href="../rentcar-f/assets/why-1.jpg" fetchpriority="high">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 4063)
+   본문폭 1280 (안쪽 1248, 좌우 x80) · 헤더 1440x60
+   검색 섹션 1280x176 pad40/16 · h1 26/36 · 검색 버튼 h48 r14
+   섹션 제목 블록 1248x92 pad16 · h2 22/30 · 부제 16/24
+   카드 300x264 gap16 (4열 pitch 316) · 혜택 카드 r12 h154 (518 + 353 + 353)
+   지역 칩 300x90 r14 pad20 · 글 카드 290x124 pad24 (제목 18/26 · 설명 13/20)
+   잉크 rgb(53,65,83) · 흐림 rgb(105,115,131) · 면 rgb(249,249,251)
+   강조색만 일부러 다르게 잡았다 — 원본 파랑은 그 회사 상표색이다 ── */
+:root{--bg:rgb(255,255,255);--face:rgb(249,249,251);--tint:rgb(219,240,237);
+  --ink:rgb(53,65,83);--dim:rgb(96,106,122);--line:rgb(230,232,236);
+  --brand:rgb(13,110,104);--brand-d:rgb(9,84,79);
+  --ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;
+  font-size:16px;line-height:24px;letter-spacing:-.01em}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+.in{padding:0 16px}
+
+.rv{opacity:1}
+html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+html.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{transition:none}}
+
+/* ── 헤더 (ref 1440x60) ── */
+.top{height:60px;background:var(--bg);border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:20}
+.top .row{max-width:1280px;margin:0 auto;padding:0 16px;height:60px;
+  display:flex;align-items:center;gap:32px}
+.lg{display:inline-flex;align-items:center;gap:7px;min-height:44px;
+  font-size:20px;line-height:26px;font-weight:800;letter-spacing:-.03em;color:var(--brand)}
+.lg i{width:18px;height:18px;border-radius:5px;background:var(--brand);flex:0 0 auto}
+.top nav{display:flex;gap:23px}
+.top nav a{min-height:44px;display:inline-flex;align-items:center;font-size:16px;line-height:24px;
+  transition:color .2s var(--ease)}
+.top nav a:hover,.top nav a[aria-current="page"]{color:var(--brand)}
+.top .end{margin-left:auto;display:flex;align-items:center;gap:8px}
+.top .end a{min-height:44px;display:inline-flex;align-items:center;padding:0 8px;
+  border-radius:4px;font-size:14px;line-height:22px;transition:background .2s var(--ease)}
+.top .end a:hover{background:var(--face)}
+
+/* ── 검색 바 (ref y60 1280x176 pad40/16 · h1 26/36 · 버튼 h48 r14) ── */
+.find{padding:40px 16px}
+.find h1{font-size:26px;line-height:36px;font-weight:700;letter-spacing:-.03em}
+.find form{margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}
+.find .fld{flex:1;min-width:220px;height:48px;border-radius:14px;background:var(--bg);
+  box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;gap:10px;padding:0 16px;
+  transition:box-shadow .2s var(--ease)}
+.find .fld:focus-within{box-shadow:inset 0 0 0 2px var(--brand)}
+.find .fld svg{width:18px;height:18px;fill:none;stroke:var(--dim);stroke-width:1.8;flex:0 0 auto}
+.find .fld select,.find .fld input{flex:1;min-width:0;height:46px;font-size:16px;cursor:pointer}
+.find .go{height:48px;padding:0 34px;border-radius:14px;background:var(--brand);color:#fff;
+  font-size:16px;font-weight:700;transition:background .2s var(--ease)}
+.find .go:hover{background:var(--brand-d)}
+
+/* ── 섹션 공통 (ref 제목 블록 1248x92 pad16 · h2 22/30 · 부제 16/24) ── */
+.sec{padding:0 16px 32px}
+.sec .hd{padding:16px 0;display:flex;flex-direction:column;gap:6px}
+.sec h2{font-size:22px;line-height:30px;font-weight:700;letter-spacing:-.03em}
+.sec .hd p{font-size:16px;line-height:24px;color:var(--dim)}
+.sec .hd.rowline{flex-direction:row;align-items:center;justify-content:space-between;gap:16px}
+.more{display:inline-flex;align-items:center;gap:4px;min-height:44px;
+  font-size:14px;line-height:22px;color:var(--dim)}
+.more:hover{color:var(--brand)}
+.more svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* 이유 카드 (ref 300x264 gap16 4열) */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.why a{display:block;border-radius:14px;overflow:clip;background:var(--face);
+  transition:transform .3s var(--ease)}
+.why a:hover{transform:translateY(-3px)}
+.why figure{height:168px;overflow:clip;background:var(--line)}
+.why img{width:100%;height:100%;object-fit:cover}
+.why .tx{padding:14px 16px 18px}
+.why b{display:block;font-size:16px;line-height:24px;font-weight:700}
+.why p{margin-top:4px;font-size:13px;line-height:20px;color:var(--dim)}
+
+/* 혜택 카드 (ref r12 h154 · 큰 칸 518 + 353 + 353) */
+.perk{display:grid;grid-template-columns:518fr 353fr 353fr;gap:16px}
+.perk a{min-height:154px;border-radius:12px;background:var(--face);padding:24px 20px;
+  display:flex;flex-direction:column;gap:6px;transition:transform .3s var(--ease)}
+.perk a:first-child{background:var(--tint)}
+.perk a:hover{transform:translateY(-3px)}
+.perk b{font-size:20px;line-height:28px;font-weight:700;letter-spacing:-.02em}
+.perk span{font-size:14px;line-height:22px;color:var(--dim)}
+.perk em{margin-top:auto;font-style:normal;font-size:14px;line-height:22px;font-weight:700;color:var(--brand)}
+
+/* 지역 칩 (ref 300x90 r14 pad20 4열) */
+.spots{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.spots a{min-height:90px;border-radius:14px;padding:20px;background:var(--bg);
+  box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .2s var(--ease),background .2s var(--ease)}
+.spots a:hover{background:var(--face);box-shadow:inset 0 0 0 1px var(--brand)}
+.spots b{display:block;font-size:16px;line-height:24px;font-weight:700}
+.spots b i{margin-left:6px;font-style:normal;font-size:12px;line-height:18px;font-weight:700;
+  color:var(--brand);vertical-align:2px}
+.spots span{display:block;margin-top:2px;font-size:14px;line-height:22px;color:var(--dim)}
+/* ref 는 공항·기차역도 같은 300 폭 격자다. 한 줄짜리라 높이만 66 (지역은 두 줄 90) */
+.spots.one a{min-height:66px;display:flex;align-items:center}
+
+/* 아이콘 줄 */
+/* ref y1440 — 300x98 r12 pad24/16 카드 4장 (면 rgb(249,249,251)) */
+.pts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.pts>div{min-height:98px;border-radius:12px;background:var(--face);padding:24px 16px;
+  display:flex;align-items:center;gap:14px;font-size:14px;line-height:22px}
+.pts b{display:block;font-size:18px;line-height:26px;font-weight:700;letter-spacing:-.02em}
+.pts span{display:block;color:var(--dim);font-size:16px;line-height:24px}
+.pts i{width:34px;height:34px;border-radius:50%;background:var(--tint);flex:0 0 auto;
+  display:grid;place-items:center}
+.pts svg{width:17px;height:17px;fill:none;stroke:var(--brand);stroke-width:1.8}
+
+/* 글 카드 (ref 290x124 pad24 · 제목 18/26 · 설명 13/20) */
+.posts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.posts a{display:block;border-radius:14px;overflow:clip;background:var(--face);
+  transition:transform .3s var(--ease)}
+.posts a:hover{transform:translateY(-3px)}
+.posts figure{height:216px;overflow:clip;background:var(--line)}
+.posts img{width:100%;height:100%;object-fit:cover}
+.posts .tx{padding:24px}
+.posts b{display:block;font-size:18px;line-height:26px;font-weight:700;letter-spacing:-.02em}
+.posts p{margin-top:4px;font-size:13px;line-height:20px;color:var(--dim)}
+
+/* FAQ */
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;min-height:64px;padding:18px 40px 18px 0;
+  position:relative;font-size:16px;line-height:26px;font-weight:600}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:8px;top:28px;width:9px;height:9px;
+  border-right:2px solid var(--dim);border-bottom:2px solid var(--dim);
+  transform:rotate(45deg);transition:transform .25s var(--ease)}
+.faq details[open] summary::after{transform:rotate(-135deg)}
+.faq summary:hover{color:var(--brand)}
+.faq .a{padding:0 40px 22px 0;font-size:15px;line-height:25px;color:var(--dim)}
+
+/* 푸터 */
+.ft{margin-top:40px;padding:44px 0 56px;background:var(--face)}
+.ft .row{max-width:1280px;margin:0 auto;padding:0 16px}
+.ft .lg{color:var(--ink)}
+.ft nav{margin-top:16px;display:flex;flex-wrap:wrap;gap:0 14px;font-size:14px;line-height:22px}
+.ft nav a{min-height:44px;display:inline-flex;align-items:center}
+.ft nav a:hover{color:var(--brand)}
+.ft .legal{margin-top:10px;font-size:13px;line-height:21px;color:var(--dim)}
+.ft .cp{margin-top:18px;font-size:13px;line-height:20px;color:var(--dim)}
+
+@media (max-width:1100px){
+  .why,.spots,.posts,.pts{grid-template-columns:repeat(2,1fr)}
+  .perk{grid-template-columns:1fr 1fr}
+  .perk a:first-child{grid-column:span 2}
+}
+@media (max-width:809px){
+  .top .row{gap:14px}
+  .top nav{gap:14px;overflow-x:auto}
+  .top nav a{white-space:nowrap;font-size:15px}
+  .find{padding-top:24px}
+  .find h1{font-size:21px;line-height:30px}
+  .find .fld{min-width:0;flex-basis:100%}
+  .find .go{width:100%}
+  .why,.spots,.posts,.pts{grid-template-columns:1fr}
+  .perk{grid-template-columns:1fr}
+  .perk a:first-child{grid-column:auto}
+  .why figure,.posts figure{height:190px}
+  .sec h2{font-size:19px;line-height:27px}
+}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="row">
+    <a class="lg ko" href="index.html"><i></i>두루카</a>
+    <nav aria-label="주요 메뉴">
+      <a class="ko" href="places.html">차 빌리기</a>
+      <a class="ko" href="car.html">차량 안내</a>
+      <a class="ko" href="blog.html">블로그</a>
+    </nav>
+    <div class="end"><a class="ko" href="places.html">로그인</a></div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="find">
+    <h1 class="ko">차가 필요할 땐, 두루카</h1>
+    <form onsubmit="location.href='places.html';return false">
+      <label class="fld">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        <span class="ko" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">빌릴 곳</span>
+        <select class="ko" aria-label="빌릴 곳">
+          <option>서울 · 강남</option><option>서울 · 홍대</option><option>인천공항</option>
+          <option>부산 · 해운대</option><option>제주공항</option><option>대전역</option>
+        </select>
+      </label>
+      <label class="fld">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>
+        <span class="ko" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">빌리는 때</span>
+        <select class="ko" aria-label="빌리는 때">
+          <option>오늘 17:00 ~ 21:00</option><option>내일 09:00 ~ 18:00</option>
+          <option>이번 주말 1박 2일</option><option>날짜 직접 고르기</option>
+        </select>
+      </label>
+      <button class="go ko" type="submit">검색</button>
+    </form>
+  </section>
+
+  <section class="sec">
+    <div class="hd"><h2 class="ko">제주에서도 두루카인 이유</h2>
+      <p class="ko">카셰어링의 편한 점은 그대로 두고, 제주에서만 되는 것을 더했습니다.</p></div>
+    <ul class="why">
+      <li><a class="rv" href="places.html">
+        <figure><img src="../rentcar-f/assets/why-1.jpg" alt="" width="300" height="168" fetchpriority="high"></figure>
+        <div class="tx"><b class="ko">비행기가 늦어도 그대로</b>
+          <p class="ko">결항·지연이면 전액 돌려드리고, 기다리는 시간은 받지 않습니다.</p></div></a></li>
+      <li><a class="rv" href="places.html">
+        <figure><img src="../rentcar-f/assets/why-2.jpg" alt="" width="300" height="168" loading="lazy"></figure>
+        <div class="tx"><b class="ko">전기차는 충전비 0원</b>
+          <p class="ko">주행요금 없이 대여료만 내시면 됩니다. 충전은 저희가 부담합니다.</p></div></a></li>
+      <li><a class="rv" href="places.html">
+        <figure><img src="../rentcar-f/assets/why-3.jpg" alt="" width="300" height="168" loading="lazy"></figure>
+        <div class="tx"><b class="ko">공항에서 5분, 전용 차고지</b>
+          <p class="ko">무료 셔틀로 5분. 앉아서 기다리실 라운지가 있습니다.</p></div></a></li>
+      <li><a class="rv" href="places.html">
+        <figure><img src="../rentcar-f/assets/why-4.jpg" alt="" width="300" height="168" loading="lazy"></figure>
+        <div class="tx"><b class="ko">정비사가 매일 봅니다</b>
+          <p class="ko">상시 점검하고 세차해 둡니다. 타실 때 바로 출발하시면 됩니다.</p></div></a></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="hd"><h2 class="ko">회원께 드리는 것</h2>
+      <p class="ko">자주 타실수록 값이 내려갑니다.</p></div>
+    <div class="perk">
+      <a class="rv" href="places.html"><b class="ko">첫 이용 1일 29,900원</b>
+        <span class="ko">요일 상관없이 됩니다.</span><em class="ko">첫 이용 혜택 받기 →</em></a>
+      <a class="rv" href="places.html"><b class="ko">미리 잡으면 더 쌉니다</b>
+        <span class="ko">2일 59,000원부터</span><em class="ko">미리 예약하기 →</em></a>
+      <a class="rv" href="places.html"><b class="ko">1시간 1,000원대</b>
+        <span class="ko">오늘 잠깐 쓰실 때</span><em class="ko">당일 최저가 보기 →</em></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="hd"><h2 class="ko">어디로 가시나요?</h2>
+      <p class="ko">여행도 일상도 두루카와 함께하세요.</p></div>
+    <ul class="spots">
+      <li><a class="rv" href="places.html"><b class="ko">제주<i class="ko">인기</i></b><span class="ko">공항 전용 차고지</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">서울<i class="ko">인기</i></b><span class="ko">강남 · 홍대 · 성수 등</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">인천</b><span class="ko">인천공항 · 송도 · 부평 등</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">부산</b><span class="ko">해운대 · 서면 · 부산역</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">대구</b><span class="ko">동대구역 · 수성구 등</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">강릉</b><span class="ko">강릉역 · 터미널 등</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">대전</b><span class="ko">대전역 · 둔산동 등</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">광주</b><span class="ko">상무 · 광주송정역 등</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">울산</b><span class="ko">울산역 인근</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">경주</b><span class="ko">경주역 인근</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">여수</b><span class="ko">엑스포역 · 공항</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">목포</b><span class="ko">목포역 인근</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">천안·아산</b><span class="ko">천안아산역 · 성정동</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">전주</b><span class="ko">전주역 · 한옥마을</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">청주</b><span class="ko">청주공항 · 성안길</span></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">포항</b><span class="ko">포항역 · 영일대</span></a></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="pts">
+      <div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></i>
+        <div><b class="ko">편도로 두고 오기</b><span class="ko">빌린 곳으로 안 오셔도 됩니다</span></div></div>
+      <div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></i>
+        <div><b class="ko">전국 어디서나</b><span class="ko">차고지 3,200곳</span></div></div>
+      <div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18V9l8-5 8 5v9M9 18v-5h6v5"/></svg></i>
+        <div><b class="ko">오래 빌리면 할인</b><span class="ko">3일부터 최대 42%</span></div></div>
+      <div><i><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.4 2"/></svg></i>
+        <div><b class="ko">쌓이는 적립금</b><span class="ko">탈 때마다 2%</span></div></div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="hd"><h2 class="ko">공항 근처 차고지</h2><p class="ko">내리시면 가까운 차고지에서 바로 출발하세요.</p></div>
+    <div class="hd rowline" style="padding-top:0"><span></span>
+      <a class="more ko" href="places.html">전체 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
+    <ul class="spots one">
+      <li><a class="rv" href="places.html"><b class="ko">제주공항<i class="ko">인기</i></b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">김포공항<i class="ko">인기</i></b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">김해공항<i class="ko">인기</i></b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">인천공항 1터미널</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">인천공항 2터미널</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">대구공항</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">청주공항<i class="ko">인기</i></b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">광주공항</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">여수공항</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">울산공항</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">포항경주공항</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">양양공항</b></a></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="hd"><h2 class="ko">기차역 근처 차고지</h2><p class="ko">기차에서 내려 걸어갈 수 있는 곳만 모았습니다.</p></div>
+    <div class="hd rowline" style="padding-top:0"><span></span>
+      <a class="more ko" href="places.html">전체 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
+    <ul class="spots one">
+      <li><a class="rv" href="places.html"><b class="ko">서울역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">용산역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">청량리역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">광명역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">수원역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">천안아산역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">대전역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">오송역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">김천구미역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">동대구역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">신경주역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">울산역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">부산역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">전주역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">강릉역</b></a></li>
+      <li><a class="rv" href="places.html"><b class="ko">여수엑스포역</b></a></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="hd rowline"><h2 class="ko">이번 주말 어디 가실래요</h2>
+      <a class="more ko" href="blog.html">더 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
+    <ul class="posts">
+      <li><a class="rv" href="blog-1.html">
+        <figure><img src="../rentcar-f/assets/trip-1.jpg" alt="" width="290" height="216" loading="lazy"></figure>
+        <div class="tx"><b class="ko">남해 한 바퀴, 하루로 되는 길</b>
+          <p class="ko">독일마을에서 다랭이마을까지 88km</p></div></a></li>
+      <li><a class="rv" href="blog-1.html">
+        <figure><img src="../rentcar-f/assets/trip-2.jpg" alt="" width="290" height="216" loading="lazy"></figure>
+        <div class="tx"><b class="ko">밤에 걷기 좋은 경주</b>
+          <p class="ko">동궁과 월지, 주차하기 편한 곳까지</p></div></a></li>
+      <li><a class="rv" href="blog-1.html">
+        <figure><img src="../rentcar-f/assets/trip-3.jpg" alt="" width="290" height="216" loading="lazy"></figure>
+        <div class="tx"><b class="ko">대전 빵집 다섯 곳</b>
+          <p class="ko">차 세우기 편한 순서로 적었습니다</p></div></a></li>
+      <li><a class="rv" href="blog-1.html">
+        <figure><img src="../rentcar-f/assets/trip-4.jpg" alt="" width="290" height="216" loading="lazy"></figure>
+        <div class="tx"><b class="ko">강릉 바다, 아침에 도착하려면</b>
+          <p class="ko">새벽 출발 기준 소요 시간 정리</p></div></a></li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="hd rowline"><h2 class="ko">두루카 잘 쓰는 법</h2>
+      <a class="more ko" href="blog.html">더 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
+    <ul class="posts">
+      <li><a class="rv" href="blog-1.html">
+        <figure><img src="../rentcar-f/assets/tip-1.jpg" alt="" width="290" height="216" loading="lazy"></figure>
+        <div class="tx"><b class="ko">전기차, 충전 걱정 없이 타는 법</b>
+          <p class="ko">충전소 찾는 순서와 남은 거리 보는 법</p></div></a></li>
+      <li><a class="rv" href="blog-1.html">
+        <figure><img src="../rentcar-f/assets/tip-2.jpg" alt="" width="290" height="216" loading="lazy"></figure>
+        <div class="tx"><b class="ko">SUV 6일 타 본 이야기</b>
+          <p class="ko">짐 얼마나 들어가는지 재봤습니다</p></div></a></li>
+      <li><a class="rv" href="blog-1.html">
+        <figure><img src="../rentcar-f/assets/tip-3.jpg" alt="" width="290" height="216" loading="lazy"></figure>
+        <div class="tx"><b class="ko">시간제와 하루 대여, 뭐가 쌀까</b>
+          <p class="ko">몇 시간부터 하루가 이득인지 계산</p></div></a></li>
+      <li><a class="rv" href="blog-1.html">
+        <figure><img src="../rentcar-f/assets/tip-4.jpg" alt="" width="290" height="216" loading="lazy"></figure>
+        <div class="tx"><b class="ko">반납 전 5분에 할 일</b>
+          <p class="ko">이것만 하면 추가 요금이 안 붙습니다</p></div></a></li>
+    </ul>
+  </section>
+
+  <section class="sec faq">
+    <div class="hd"><h2 class="ko">자주 묻는 것</h2></div>
+    <details><summary class="ko">운전한 지 얼마 안 됐는데 빌릴 수 있나요?</summary>
+      <p class="a ko">면허 취득 후 1년이 지나고 만 21세 이상이면 되십니다. 초보 운전이시면 경차와 준중형부터 권해 드립니다.</p></details>
+    <details><summary class="ko">사고가 나면 어떻게 하나요?</summary>
+      <p class="a ko">차 안 안내문의 번호로 전화 주시면 됩니다. 24시간 받습니다. 보험은 모든 차에 기본으로 들어 있고, 자기부담금은 예약할 때 고르실 수 있습니다.</p></details>
+    <details><summary class="ko">기름은 제가 넣어야 하나요?</summary>
+      <p class="a ko">아닙니다. 주유비는 요금에 들어 있습니다. 차 안의 주유 카드로 넣으시면 되고, 전기차는 충전비도 저희가 냅니다.</p></details>
+    <details><summary class="ko">예약한 시간보다 늦게 반납하면요?</summary>
+      <p class="a ko">앱에서 미리 연장하시면 그대로 이어집니다. 연장 없이 늦으시면 10분 단위로 추가 요금이 붙고, 다음 예약이 있으면 연장이 안 될 수 있습니다.</p></details>
+    <details><summary class="ko">편도로 두고 와도 되나요?</summary>
+      <p class="a ko">편도 표시가 붙은 차고지끼리는 됩니다. 검색할 때 편도만 걸러 보실 수 있습니다.</p></details>
+  </section>
+
+</main>
+
+<footer class="ft">
+  <div class="row">
+    <span class="lg ko"><i></i>두루카</span>
+    <nav aria-label="회사 정보">
+      <a class="ko" href="places.html">회사 소개</a><a class="ko" href="places.html">이용약관</a>
+      <a class="ko" href="places.html">개인정보 처리방침</a><a class="ko" href="places.html">위치기반 서비스 약관</a>
+      <a class="ko" href="places.html">고객센터</a><a class="ko" href="blog.html">블로그</a>
+    </nav>
+    <p class="legal ko">상호 : 두루카 (민트클) &nbsp;|&nbsp; 대표 : 진수<br>
+      사업자등록번호 : 266-07-03678 &nbsp;|&nbsp; 통신판매업신고 : 제2026-서울강남-00480호<br>
+      주소 : 서울특별시 강남구 두루로 12, 4층 (06072)<br>
+      고객센터 : 010-4894-4905 (24시간) &nbsp;|&nbsp; 이메일 : 6gsmake@gmail.com</p>
+    <p class="cp ko">© 2026 두루카. 이 페이지는 디자인 예시입니다.</p>
+  </div>
+</footer>
+
+</body>
+</html>

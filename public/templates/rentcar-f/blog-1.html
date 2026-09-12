@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>남해 한 바퀴, 하루로 되는 길 — 두루카</title>
+<meta name="description" content="독일마을에서 다랭이마을까지 88km. 주차 가능한 곳만 골라 하루 코스로 이었습니다.">
+<meta property="og:title" content="남해 한 바퀴, 하루로 되는 길 — 두루카">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video,iframe{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰 — 헤더 1440x60 · 본문폭 1280(안쪽 1248)
+   지역 화면: 좌측 목록 375 + 우측 지도 841x724 r16 · 차량 카드 359x134 pad12/16
+   섹션 제목 h2 22/30 · 부제 16/24 · 잉크 rgb(53,65,83) · 흐림 rgb(105,115,131)
+   강조색만 일부러 다르게 잡았다 (원본 파랑은 그 회사 상표색) */
+:root{--bg:rgb(255,255,255);--face:rgb(249,249,251);--tint:rgb(219,240,237);
+  --ink:rgb(53,65,83);--dim:rgb(96,106,122);--line:rgb(230,232,236);
+  --brand:rgb(13,110,104);--brand-d:rgb(9,84,79);--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;
+  font-size:16px;line-height:24px;letter-spacing:-.01em}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+.rv{opacity:1}
+html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+html.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{transition:none}}
+
+.top{height:60px;background:var(--bg);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20}
+.top .row{max-width:1280px;margin:0 auto;padding:0 16px;height:60px;display:flex;align-items:center;gap:32px}
+.lg{display:inline-flex;align-items:center;gap:7px;min-height:44px;
+  font-size:20px;line-height:26px;font-weight:800;letter-spacing:-.03em;color:var(--brand)}
+.lg i{width:18px;height:18px;border-radius:5px;background:var(--brand);flex:0 0 auto}
+.top nav{display:flex;gap:23px}
+.top nav a{min-height:44px;display:inline-flex;align-items:center;font-size:16px;line-height:24px;
+  transition:color .2s var(--ease)}
+.top nav a:hover,.top nav a[aria-current="page"]{color:var(--brand)}
+.top .end{margin-left:auto;display:flex;align-items:center;gap:8px}
+.top .end a{min-height:44px;display:inline-flex;align-items:center;padding:0 8px;border-radius:4px;
+  font-size:14px;line-height:22px;transition:background .2s var(--ease)}
+.top .end a:hover{background:var(--face)}
+
+.ph{padding:40px 0 24px}
+.ph h1{font-size:26px;line-height:36px;font-weight:700;letter-spacing:-.03em}
+.ph p{margin-top:6px;color:var(--dim)}
+.crumb{font-size:14px;line-height:22px;color:var(--dim);margin-bottom:10px}
+.crumb a:hover{color:var(--brand)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;
+  border-radius:14px;background:var(--brand);color:#fff;font-size:16px;font-weight:700;
+  transition:background .2s var(--ease)}
+.btn:hover{background:var(--brand-d)}
+.btn.o{background:none;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.o:hover{background:var(--face)}
+
+.ft{margin-top:56px;padding:44px 0 56px;background:var(--face)}
+.ft .row{max-width:1280px;margin:0 auto;padding:0 16px}
+.ft .lg{color:var(--ink)}
+.ft nav{margin-top:16px;display:flex;flex-wrap:wrap;gap:0 14px;font-size:14px;line-height:22px}
+.ft nav a{min-height:44px;display:inline-flex;align-items:center}
+.ft nav a:hover{color:var(--brand)}
+.ft .legal{margin-top:10px;font-size:13px;line-height:21px;color:var(--dim)}
+.ft .cp{margin-top:18px;font-size:13px;line-height:20px;color:var(--dim)}
+
+@media (max-width:809px){
+  .top .row{gap:14px}
+  .top nav{gap:14px;overflow-x:auto}
+  .top nav a{white-space:nowrap;font-size:15px}
+  .ph{padding:26px 0 18px}
+  .ph h1{font-size:21px;line-height:30px}
+  .ft{margin-top:40px;padding:40px 0}
+}
+.po{max-width:760px;padding-top:8px}
+.po h1{font-size:32px;line-height:44px;font-weight:700;letter-spacing:-.03em}
+.po .m{margin-top:14px;padding-bottom:20px;border-bottom:1px solid var(--line);
+  display:flex;gap:12px;font-size:14px;line-height:22px;color:var(--dim)}
+.po figure{margin:26px 0;border-radius:14px;overflow:clip;background:var(--face)}
+.po figure img{width:100%;height:400px;object-fit:cover}
+.po figcaption{padding:10px 2px 0;font-size:13px;line-height:20px;color:var(--dim)}
+.po h2{margin-top:36px;font-size:21px;line-height:30px;font-weight:700;letter-spacing:-.03em}
+.po p{margin-top:14px;font-size:17px;line-height:30px}
+.po ul.step{margin-top:14px;display:flex;flex-direction:column;gap:10px}
+.po ul.step li{padding-left:30px;position:relative;font-size:17px;line-height:29px}
+.po ul.step li::before{content:"";position:absolute;left:6px;top:12px;width:7px;height:7px;
+  border-radius:50%;background:var(--brand)}
+.po blockquote{margin:26px 0;padding:20px 22px;border-radius:14px;background:var(--tint);
+  font-size:17px;line-height:29px;font-weight:600}
+.po .back{margin-top:42px;display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;
+  border-radius:12px;font-weight:700;box-shadow:inset 0 0 0 1px var(--line)}
+.po .back:hover{background:var(--face)}
+@media (max-width:809px){
+  .po h1{font-size:23px;line-height:34px}
+  .po p,.po ul.step li{font-size:16px;line-height:28px}
+  .po figure img{height:230px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="row">
+    <a class="lg ko" href="index.html"><i></i>두루카</a>
+    <nav aria-label="주요 메뉴">
+      <a class="ko" href="places.html">차 빌리기</a>
+      <a class="ko" href="car.html">차량 안내</a>
+      <a class="ko" href="blog.html" aria-current="page">블로그</a>
+    </nav>
+    <div class="end"><a class="ko" href="places.html">로그인</a></div>
+  </div>
+</header>
+
+<main class="wrap po">
+  <div class="ph">
+    <p class="crumb ko"><a href="index.html">홈</a> › <a href="blog.html">블로그</a> › 여행</p>
+    <h1 class="ko">남해 한 바퀴, 하루로 되는 길</h1>
+    <p class="m"><span>2026.09.10</span><span class="ko">두루카 편집팀</span><span class="ko">읽는 데 6분</span></p>
+  </div>
+  <figure><img src="./assets/trip-1.jpg" alt="" width="760" height="400"><figcaption class="ko">남해 바닷가 도로. 사진은 글 내용과 직접 관련이 없습니다.</figcaption></figure>
+  <p class="ko">남해는 크지 않습니다. 부지런히 도시면 하루에 한 바퀴가 됩니다. 다만 길이 좁고 굽어 있어서 생각보다 시간이 걸립니다. 88km인데 쉬는 시간까지 넣으면 여덟 시간쯤 잡으셔야 합니다.</p>
+  <h2 class="ko">순서를 이렇게 잡았습니다</h2>
+  <ul class="step">
+    <li class="ko">09:00 창선·삼천포대교 — 다리 건너자마자 전망대에 차를 세울 수 있습니다.</li>
+    <li class="ko">10:30 독일마을 — 주차장이 두 곳인데 위쪽이 덜 붐빕니다.</li>
+    <li class="ko">12:00 물건리 방조어부림 — 그늘이 있어 점심 먹기 좋습니다.</li>
+    <li class="ko">14:00 다랭이마을 — 마을 입구 주차 후 걸어 내려가셔야 합니다. 경사가 가파릅니다.</li>
+    <li class="ko">16:00 상주은모래비치 — 늦은 오후 빛이 제일 좋습니다.</li>
+    <li class="ko">17:30 미조항 — 저녁 먹고 출발하시면 딱 맞습니다.</li>
+  </ul>
+  <blockquote class="ko">주말 낮에는 독일마을과 다랭이마을 주차장이 찹니다. 오전에 독일마을을 먼저 보시고 다랭이마을을 오후로 미루시면 훨씬 수월합니다.</blockquote>
+  <h2 class="ko">차는 어떤 게 좋을까요</h2>
+  <p class="ko">길이 좁습니다. 마을 안쪽 길은 마주 오는 차와 비켜 가기 어려운 구간이 있어서 큰 차는 신경이 쓰입니다. 두 분이시면 준중형이 편하고, 짐이 많으시면 소형 SUV 정도가 알맞습니다.</p>
+  <p class="ko">전기차로 가셔도 됩니다. 남해읍과 창선면에 충전기가 있고, 한 바퀴 도는 데 150km 안쪽이라 완충으로 출발하시면 중간에 충전하지 않으셔도 됩니다.</p>
+  <a class="back ko" href="blog.html">← 목록으로</a>
+</main>
+
+<footer class="ft">
+  <div class="row">
+    <span class="lg ko"><i></i>두루카</span>
+    <nav aria-label="회사 정보">
+      <a class="ko" href="places.html">회사 소개</a><a class="ko" href="places.html">이용약관</a>
+      <a class="ko" href="places.html">개인정보 처리방침</a><a class="ko" href="places.html">위치기반 서비스 약관</a>
+      <a class="ko" href="places.html">고객센터</a><a class="ko" href="blog.html">블로그</a>
+    </nav>
+    <p class="legal ko">상호 : 두루카 (민트클) &nbsp;|&nbsp; 대표 : 진수<br>
+      사업자등록번호 : 266-07-03678 &nbsp;|&nbsp; 통신판매업신고 : 제2026-서울강남-00480호<br>
+      주소 : 서울특별시 강남구 두루로 12, 4층 (06072)<br>
+      고객센터 : 010-4894-4905 (24시간) &nbsp;|&nbsp; 이메일 : 6gsmake@gmail.com</p>
+    <p class="cp ko">© 2026 두루카. 이 페이지는 디자인 예시입니다.</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
