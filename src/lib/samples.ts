@@ -567,6 +567,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "estate-f-template",
+    industry: "부동산 매물 플랫폼 · 중개 홈페이지",
+    title: "부동산 매물 플랫폼 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 부동산 · 매물 · 플랫폼",
+    purpose:
+      "사진 밴드 히어로 아래로 매물 종류 여섯 칸이 흰 카드로 걸치고, 부동산 소식 카드 세 장과 공지 목록, 기능을 한 장씩 넘겨 보여 주는 슬라이드 일곱 장, 앱 배지와 사업자정보 푸터까지 갖춘 매물 플랫폼형 프리미엄 템플릿입니다. 포털 앱처럼 보이면서 실제로는 정적 한 페이지라 가볍습니다.",
+    features: ["사진 밴드 히어로 · 매물 종류 6칸 카드", "부동산 소식 카드 3장 · 공지 목록", "기능 슬라이드 7장 (넘김 · 점 이동)", "우측 고정 광고 문의 · 앱 배지 푸터"],
+    idealFor: "공인중개사무소, 부동산 정보 서비스, 분양 대행사, 임대 관리 회사, 매물 포털",
+    image: "/thumbs/estate-f.jpg",
+    liveUrl: "/templates/estate-f/",
+    industryKey: "estate",
+    premiumLabel: "매물 플랫폼 (사진 밴드 · 벽돌)",
+    designCode: "ESTP-1002",
+    premium: true,
+  },
+  {
     slug: "shop-a-template",
     industry: "쇼핑몰 · 라이프스타일 스토어 홈페이지",
     title: "라이프스타일 쇼핑몰 홈페이지 (프리미엄 디자인 A)",

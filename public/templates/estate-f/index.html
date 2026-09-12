@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>집담 — 부동산 매물 플랫폼 (프리미엄 디자인 B)</title>
+<meta name="description" content="사진 밴드 히어로 위로 매물 종류 여섯 칸이 흰 카드로 걸치고, 부동산 동향 카드 세 장과 공지 목록, 기능 소개 슬라이드 일곱 장, 앱 배지 푸터까지 갖춘 부동산 매물 플랫폼 프리미엄 템플릿.">
+<meta property="og:title" content="집담 — 부동산 매물 플랫폼 (프리미엄 디자인 B)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preload" as="image" href="./assets/hero.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 토큰 (1440 폭 · 문서높이 2590)
+   면 rgb(255,255,255) · 카드 rgb(243,237,233) · 밴드 rgb(248,248,248)
+   잉크 rgb(26,26,26) · 본문 rgb(76,76,76) · 흐림 rgb(128,128,128) · 아주흐림 rgb(153,153,153)
+   네이비 rgb(9,44,89)
+   히어로 제목 36/43 700 · 섹션 제목 32/40 700 · 종류 라벨 22/28 700
+   본문 16/24 400 · 작은글 14/20 400 · 배지 12/16 500
+   라운드 12 / 6 / 40 · 본문폭 1080 · 푸터폭 1240
+   강조색만 일부러 다르게 잡았다 — 원본 주황은 그 회사 상표색이다 ── */
+:root{--bg:rgb(255,255,255);--card:rgb(243,237,233);--band:rgb(248,248,248);
+  --ink:rgb(26,26,26);--body:rgb(76,76,76);--dim:rgb(128,128,128);--faint:rgb(153,153,153);
+  --navy:rgb(9,44,89);--brick:rgb(178,68,45);--line:rgb(230,226,222);
+  --ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;
+  font-size:16px;line-height:24px;letter-spacing:-.01em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+.rv{opacity:1}
+html.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{transition:none}}
+
+/* ── 히어로 사진 밴드 (ref y0 1440x360) ── */
+.hero{position:relative;height:360px;overflow:clip;background:var(--ink)}
+.hero>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(12,14,18,.62) 0,rgba(12,14,18,.34) 46%,rgba(12,14,18,.5) 100%)}
+
+/* 상단 바 (ref y0 h92, 알약 120x28 · 187x28 r6 12px) */
+.top{position:relative;z-index:3;height:92px}
+.top .in{max-width:1400px;margin:0 auto;padding:0 20px;height:92px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px}
+.lg{display:inline-flex;align-items:center;gap:8px;min-height:44px;
+  font-size:22px;line-height:26px;font-weight:800;letter-spacing:-.03em;color:#fff}
+.lg i{width:20px;height:20px;border-radius:5px;background:var(--brick);flex:0 0 auto}
+.top .go{display:flex;align-items:center;gap:12px}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:4px;
+  min-height:28px;padding:4px 12px;border-radius:6px;
+  font-size:12px;line-height:16px;font-weight:500;color:#fff;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.42);transition:background .25s var(--ease)}
+.pill:hover{background:rgba(255,255,255,.18)}
+.pill.on{background:var(--brick);box-shadow:none}
+.pill.on:hover{opacity:.88;background:var(--brick)}
+
+/* 히어로 문구 (ref 제목 y116 36px · 부제 y167 16/24) */
+.hero .tx{position:relative;z-index:3;text-align:center;padding-top:24px}
+.hero h1{font-size:36px;line-height:43px;font-weight:700;letter-spacing:-.03em;color:#fff}
+.hero p{margin-top:8px;font-size:16px;line-height:24px;color:rgba(255,255,255,.9)}
+
+/* ── 매물 종류 카드 — 사진 아래를 걸친다 (ref y270 1080x140 r12, 6칸 180x120) ── */
+.kinds{position:relative;z-index:4;margin:-90px auto 0;max-width:1080px;
+  background:var(--bg);border-radius:12px;padding:10px 0;
+  box-shadow:0 10px 34px rgba(12,14,18,.13);display:grid;grid-template-columns:repeat(6,1fr)}
+.kinds a{height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  font-size:22px;line-height:28px;font-weight:700;letter-spacing:-.03em;color:var(--ink);
+  border-radius:10px;transition:background .25s var(--ease)}
+.kinds a:hover{background:var(--card)}
+.kinds svg{width:40px;height:40px;fill:none;stroke:var(--brick);stroke-width:1.5}
+.kinds svg .fr{stroke:var(--ink)}
+
+/* ── 부동산 동향 (ref y410 h377 · pad-top 105 · 제목 32px · 카드 255x136 r12 pad20) ── */
+.trend{padding:105px 0 0}
+.trend .sh{text-align:center}
+.trend h2{font-size:32px;line-height:40px;font-weight:700;letter-spacing:-.03em}
+.trend .sh p{margin-top:8px;color:var(--body)}
+.trend .grid{margin-top:46px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tcard{min-height:136px;border-radius:12px;padding:20px;background:var(--card);
+  display:flex;flex-direction:column;gap:8px;transition:transform .3s var(--ease)}
+.tcard:hover{transform:translateY(-3px)}
+.tcard b{font-size:16px;line-height:24px;font-weight:700;letter-spacing:-.02em}
+.tcard .meta{margin-top:auto;display:flex;gap:10px;font-size:14px;line-height:20px;color:var(--dim)}
+.more{min-height:136px;border-radius:12px;padding:20px;display:flex;
+  align-items:center;justify-content:space-between;gap:12px;box-shadow:inset 0 0 0 1px var(--line)}
+.more span{display:block;font-size:18px;line-height:28px;font-weight:700;letter-spacing:-.03em}
+.more i{width:34px;height:34px;border-radius:50%;background:var(--navy);
+  display:grid;place-items:center}
+.more i svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2}
+.more:hover i{background:var(--brick)}
+
+/* ── 공지 (ref y847 h161) ── */
+.notice{padding:60px 0 0}
+.notice .hd{display:flex;align-items:center;justify-content:space-between;
+  padding:12px 0;border-bottom:1px solid var(--line)}
+.notice .hd b{font-size:16px;line-height:24px;font-weight:700}
+.notice .hd a{font-size:16px;line-height:24px;color:var(--dim);min-height:44px;display:inline-flex;align-items:center}
+.notice ul{padding:12px 0}
+.notice li{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.notice li a{flex:1;min-width:0;min-height:32px;display:flex;align-items:center;
+  font-size:16px;line-height:24px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.notice li a:hover{color:var(--brick)}
+.notice li time{font-size:14px;line-height:20px;color:var(--dim);flex:0 0 auto}
+
+/* ── 기능 슬라이드 (ref y1156 h1000, 1440x1000 일곱 장, 화살표 28x100) ── */
+.slides{margin-top:148px;position:relative;background:var(--band);overflow:clip}
+.slides .strip{display:flex;transition:transform .55s var(--ease)}
+@media (prefers-reduced-motion:reduce){.slides .strip{transition:none}}
+.slides .strip>*{flex:0 0 100%;min-width:0}
+.sl{height:1000px;padding:88px 20px 0;text-align:center;display:flex;flex-direction:column;align-items:center}
+.sl .lab{font-size:14px;line-height:20px;font-weight:700;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--brick)}
+.sl h3{margin-top:14px;font-size:36px;line-height:46px;font-weight:700;letter-spacing:-.03em}
+.sl p{margin-top:10px;max-width:520px;color:var(--body)}
+.sl figure{margin-top:38px;width:100%;max-width:1080px;flex:1;border-radius:16px;overflow:clip;
+  background:var(--card)}
+.sl figure img{width:100%;height:100%;object-fit:cover}
+.slides .arw{position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+  width:28px;height:100px;display:grid;place-items:center;background:rgba(255,255,255,.9);
+  border-radius:6px;box-shadow:0 2px 10px rgba(12,14,18,.14);transition:background .25s var(--ease)}
+.slides .arw:hover{background:#fff}
+.slides .arw svg{width:14px;height:14px;fill:none;stroke:var(--ink);stroke-width:2}
+.slides .pv{left:80px}
+.slides .nx{right:80px}
+.slides .dots{position:absolute;left:0;right:0;bottom:34px;z-index:3;display:flex;justify-content:center;gap:0}
+.slides .dots button{width:24px;height:44px;display:grid;place-items:center;background:none}
+.slides .dots button::before{content:"";width:8px;height:8px;border-radius:50%;
+  background:rgba(26,26,26,.24);transition:background .25s var(--ease)}
+.slides .dots button[aria-current="true"]::before{background:var(--brick)}
+
+/* ── 우측 고정 문의 버튼 (ref x1320 y680·y780, 80x80 r40) ── */
+.float{position:fixed;right:40px;bottom:40px;z-index:20;display:flex;flex-direction:column;gap:20px}
+.float a{width:80px;height:80px;border-radius:40px;display:grid;place-items:center;text-align:center;
+  font-size:12px;line-height:16px;font-weight:500;color:#fff;background:var(--navy);
+  transition:transform .25s var(--ease)}
+.float a+a{background:var(--ink)}
+.float a:hover{transform:translateY(-3px)}
+
+/* ── 푸터 (ref y2156 h434 pad100, 폭 1240) ── */
+.ft{padding:100px 0 56px;border-top:1px solid var(--line)}
+.ft .in{max-width:1240px;margin:0 auto;padding:0 20px}
+.ft nav{display:flex;flex-wrap:wrap;gap:0 12px;font-size:14px;line-height:20px;color:var(--body)}
+.ft nav a{min-height:44px;display:inline-flex;align-items:center}
+.ft nav a:hover{color:var(--brick)}
+.ft nav i{align-self:center;color:var(--line)}
+.ft .legal{margin-top:14px;font-size:14px;line-height:22px;color:var(--dim)}
+.ft .btm{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ft .badges{display:flex;gap:10px}
+.ft .badges a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;
+  border-radius:8px;font-size:14px;font-weight:600;box-shadow:inset 0 0 0 1px var(--line)}
+.ft .badges a:hover{background:var(--card)}
+.ft .badges svg{width:16px;height:16px;fill:currentColor}
+.ft .cp{font-size:14px;line-height:20px;color:var(--faint)}
+
+/* ── 반응형 ── */
+@media (max-width:1100px){
+  .hero{height:320px}
+  .kinds{margin:-70px 20px 0;grid-template-columns:repeat(3,1fr);padding:16px 0}
+  .kinds a{height:104px}
+  .trend .grid{grid-template-columns:repeat(2,1fr)}
+  .sl{height:820px;padding-top:64px}
+  .sl h3{font-size:30px;line-height:40px}
+  .slides .pv{left:20px}
+  .slides .nx{right:20px}
+  .float{right:20px;bottom:20px}
+}
+@media (max-width:809px){
+  .hero{height:300px}
+  .hero h1{font-size:26px;line-height:34px}
+  .hero p{font-size:14px;line-height:22px}
+  .top .in{padding:0 16px}
+  .lg{font-size:19px}
+  .pill{padding:4px 10px}
+  .kinds{margin:-56px 16px 0;grid-template-columns:repeat(3,1fr);padding:10px 0}
+  .kinds a{height:92px;gap:8px;font-size:15px;line-height:20px}
+  .kinds svg{width:30px;height:30px}
+  .trend{padding-top:60px}
+  .trend h2{font-size:24px;line-height:32px}
+  .trend .grid{margin-top:30px;grid-template-columns:1fr;gap:12px}
+  .tcard,.more{min-height:0}
+  .slides{margin-top:70px}
+  .sl{height:640px;padding:44px 16px 0}
+  .sl h3{font-size:22px;line-height:30px}
+  .sl p{font-size:14px;line-height:22px}
+  .sl figure{margin-top:22px;border-radius:12px}
+  .slides .arw{width:24px;height:72px}
+  .slides .pv{left:8px}
+  .slides .nx{right:8px}
+  .float a{width:64px;height:64px;border-radius:32px;font-size:11px;line-height:14px}
+  .ft{padding:56px 0 40px}
+}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <img class="bg" src="./assets/hero.jpg" alt="" width="1440" height="360" fetchpriority="high">
+  <header class="top">
+    <div class="in">
+      <a class="lg ko" href="#top"><i></i>집담</a>
+      <div class="go">
+        <a class="pill ko" href="#notice">로그인 및 회원가입</a>
+        <a class="pill on ko" href="#notice">중개사무소 가입 문의</a>
+      </div>
+    </div>
+  </header>
+  <div class="tx">
+    <h1 class="ko">집 구할 땐 집담으로</h1>
+    <p class="ko">원룸에서 빌라, 투룸부터 오피스텔, 아파트 그리고 상가, 사무실까지</p>
+  </div>
+</section>
+
+<nav class="kinds" aria-label="매물 종류">
+  <a class="ko" href="#notice">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><path class="fr" d="M5 37V4.8c0-.4.3-.8.8-.8h28.4c.5 0 .8.4.8.8V37"/><rect x="13" y="11" width="6" height="6" rx="1.6"/><rect x="13" y="20" width="6" height="6" rx="1.6"/><rect x="22" y="11" width="6" height="6" rx="1.6"/><rect x="22" y="20" width="6" height="6" rx="1.6"/></svg>
+    아파트</a>
+  <a class="ko" href="#notice">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><path class="fr" d="M4 15.1 20 4l16 11.1V36H4z"/><rect x="12.5" y="19" width="6" height="7" rx="1.6"/><rect x="21.5" y="19" width="6" height="7" rx="1.6"/></svg>
+    빌라, 투룸</a>
+  <a class="ko" href="#notice">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><path class="fr" d="M4 15.1 20 4l16 11.1V36H4z"/><rect x="16" y="19" width="8" height="8" rx="1.6"/></svg>
+    원룸</a>
+  <a class="ko" href="#notice">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><path class="fr" d="M6 37V6.6l28-3V37"/><rect x="10.5" y="12.5" width="19" height="4" rx="1.6"/><rect x="10.5" y="20" width="19" height="4" rx="1.6"/></svg>
+    오피스텔</a>
+  <a class="ko" href="#notice">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><path class="fr" d="M3 5.8c0-.4.3-.8.8-.8h23.4c.4 0 .8.4.8.8V35H3z"/><rect x="31.5" y="6" width="6" height="18" rx="1"/></svg>
+    상가, 사무실</a>
+  <a class="ko" href="#notice">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><path class="fr" d="M2 15.5 16 6.3l14 9.2V35H2z"/><circle cx="28" cy="29" r="10"/><path d="M28 22v7h6"/></svg>
+    단기임대</a>
+</nav>
+
+<section class="trend wrap">
+  <div class="sh">
+    <h2 class="ko">발빠르게 전하는 <span style="color:var(--brick)">부동산 소식</span></h2>
+    <p class="ko">복잡한 이야기를 요점만 추려 알려 드립니다.</p>
+  </div>
+  <div class="grid">
+    <a class="tcard rv ko" href="#notice">
+      <b class="ko">전세 대신 월세, 작년보다 얼마나 늘었나</b>
+      <span class="meta"><span>26.09.11</span><span>조회 2,140</span></span>
+    </a>
+    <a class="tcard rv ko" href="#notice">
+      <b class="ko">신혼부부 특별공급, 올해 바뀐 것 세 가지</b>
+      <span class="meta"><span>26.09.08</span><span>조회 1,872</span></span>
+    </a>
+    <a class="tcard rv ko" href="#notice">
+      <b class="ko">역세권 원룸 시세, 노선별로 갈렸습니다</b>
+      <span class="meta"><span>26.09.04</span><span>조회 3,015</span></span>
+    </a>
+    <a class="more rv" href="#notice">
+      <span class="ko">더 많은<br>부동산 소식<br>보러 가기</span>
+      <i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></i>
+    </a>
+  </div>
+</section>
+
+<section class="notice wrap" id="notice">
+  <div class="hd">
+    <b class="ko">공지사항</b>
+    <a class="ko" href="#notice">더보기</a>
+  </div>
+  <ul>
+    <li><a class="ko" href="#notice">[공지] 개인정보 처리방침 개정 안내 (2026/09/18)</a><time datetime="2026-09-11">2026.09.11</time></li>
+    <li><a class="ko" href="#notice">[공지] 단기임대 서비스 이용약관 개정 안내 (2026/08/14)</a><time datetime="2026-08-07">2026.08.07</time></li>
+    <li><a class="ko" href="#notice">[안내] 추석 연휴 고객센터 운영 시간 안내</a><time datetime="2026-07-29">2026.07.29</time></li>
+  </ul>
+</section>
+
+<section class="slides" aria-label="집담이 하는 일">
+  <div class="strip">
+    <article class="sl">
+      <p class="lab">What&rsquo;s New?</p>
+      <h3 class="ko">궁금한 건 바로 물어보는 <br>채팅 상담</h3>
+      <p class="ko">전화가 부담스러우면 채팅으로 물어보세요. 중개사무소가 바로 답합니다.</p>
+      <figure><img src="./assets/sl-1.jpg" alt="" width="1080" height="704"></figure>
+    </article>
+    <article class="sl">
+      <p class="lab">Photo</p>
+      <h3 class="ko">보정 없는 <br>실제 방 사진</h3>
+      <p class="ko">넓어 보이게 찍은 사진은 걸러 냅니다. 가 보면 사진 그대로입니다.</p>
+      <figure><img src="./assets/sl-2.jpg" alt="" width="1080" height="704"></figure>
+    </article>
+    <article class="sl">
+      <p class="lab">Price</p>
+      <h3 class="ko">단지별 실거래가를 <br>한눈에</h3>
+      <p class="ko">같은 단지, 같은 평형이 얼마에 오갔는지 그래프로 보여 드립니다.</p>
+      <figure><img src="./assets/sl-3.jpg" alt="" width="1080" height="704"></figure>
+    </article>
+    <article class="sl">
+      <p class="lab">Street</p>
+      <h3 class="ko">가 보기 전에 <br>골목까지 미리</h3>
+      <p class="ko">역까지 걷는 길, 밤에 어두운 구간까지 화면에서 먼저 확인하세요.</p>
+      <figure><img src="./assets/sl-4.jpg" alt="" width="1080" height="704"></figure>
+    </article>
+    <article class="sl">
+      <p class="lab">Safe</p>
+      <h3 class="ko">확인한 매물만 <br>올립니다</h3>
+      <p class="ko">등기와 중개사 자격을 확인한 매물에만 표시가 붙습니다.</p>
+      <figure><img src="./assets/sl-5.jpg" alt="" width="1080" height="704"></figure>
+    </article>
+    <article class="sl">
+      <p class="lab">Compare</p>
+      <h3 class="ko">담아 두고 <br>나란히 비교</h3>
+      <p class="ko">보증금, 관리비, 층수, 방향을 표로 세워 놓고 고르세요.</p>
+      <figure><img src="./assets/sl-6.jpg" alt="" width="1080" height="704"></figure>
+    </article>
+    <article class="sl">
+      <p class="lab">Alert</p>
+      <h3 class="ko">조건에 맞는 방이 나오면 <br>바로 알려 드립니다</h3>
+      <p class="ko">동네와 예산을 저장해 두시면 새 매물이 올라올 때 알림이 갑니다.</p>
+      <figure><img src="./assets/sl-7.jpg" alt="" width="1080" height="704"></figure>
+    </article>
+  </div>
+  <button class="arw pv" type="button" aria-label="이전 슬라이드"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
+  <button class="arw nx" type="button" aria-label="다음 슬라이드"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+  <div class="dots" role="tablist" aria-label="슬라이드 선택"></div>
+</section>
+
+<div class="float">
+  <a class="ko" href="#notice">일반광고<br>문의</a>
+  <a class="ko" href="#notice">분양광고<br>문의</a>
+</div>
+
+<footer class="ft">
+  <div class="in">
+    <nav aria-label="회사 정보">
+      <a class="ko" href="#notice">회사소개</a><i>|</i>
+      <a class="ko" href="#notice">채용정보</a><i>|</i>
+      <a class="ko" href="#notice">이용약관</a><i>|</i>
+      <a class="ko" href="#notice">개인정보 처리방침</a><i>|</i>
+      <a class="ko" href="#notice">위치기반 서비스 이용약관</a><i>|</i>
+      <a class="ko" href="#notice">고객센터</a>
+    </nav>
+    <p class="legal ko">상호 : 집담 (민트클) &nbsp;|&nbsp; 대표 : 진수<br>
+      사업자등록번호 : 266-07-03678<br>
+      통신판매업신고 : 제2026-서울강남-00480호<br>
+      주소 : 서울특별시 강남구 집담로 12, 3층 (06072)<br>
+      고객센터 : 010-4894-4905 (평일 10:00 – 18:00, 점심 12:00 – 13:00)<br>
+      이메일 : 6gsmake@gmail.com<br>
+      집담은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 매물 정보와 거래에 대한 책임은 각 중개사무소에 있습니다.</p>
+    <div class="btm">
+      <div class="badges">
+        <a href="#notice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 2H7a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V5a3 3 0 0 0-3-3zm-5 18a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg><span class="ko">앱스토어</span></a>
+        <a href="#notice"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3l12 9-12 9z"/></svg><span class="ko">구글 플레이</span></a>
+      </div>
+      <span class="cp ko">© 2026 집담. 이 페이지는 디자인 예시입니다.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+(function(){
+  const strip=document.querySelector('.slides .strip'); if(!strip) return;
+  const n=strip.children.length, dots=document.querySelector('.slides .dots');
+  let i=0;
+  for(let k=0;k<n;k++){
+    const b=document.createElement('button');
+    b.type='button'; b.setAttribute('role','tab');
+    b.setAttribute('aria-label',(k+1)+'번 슬라이드');
+    b.addEventListener('click',()=>go(k-i));
+    dots.appendChild(b);
+  }
+  function go(d){
+    i=(i+d+n)%n;
+    strip.style.transform='translateX('+(-i*100)+'%)';
+    [...dots.children].forEach((b,k)=>b.setAttribute('aria-current',k===i?'true':'false'));
+  }
+  document.querySelector('.slides .pv').addEventListener('click',()=>go(-1));
+  document.querySelector('.slides .nx').addEventListener('click',()=>go(1));
+  go(0);
+})();
+</script>
+</body>
+</html>

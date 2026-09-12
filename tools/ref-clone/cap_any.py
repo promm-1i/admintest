@@ -40,6 +40,12 @@ with sync_playwright() as p:
     pg.wait_for_timeout(1200)
     h = pg.evaluate('()=> window.__sc ? window.__sc.scrollHeight : document.documentElement.scrollHeight')
     pg.evaluate(HIDE)
+    # 등장 애니메이션이 타일 사이에서 레이아웃을 밀어 같은 줄이 두 번 찍힌다.
+    # 전부 최종 상태로 굳히고 찍는다.
+    pg.add_style_tag(content='html{scroll-behavior:auto!important}'  # 부드러운 스크롤이면 찍는 순간과 좌표가 어긋난다
+                             '*,*::before,*::after{transition:none!important;animation:none!important}'
+                             '.rv{opacity:1!important;transform:none!important}')
+    pg.wait_for_timeout(400)
 
     canvas = Image.new('RGB', (W, h), (255, 255, 255))
     y = 0
