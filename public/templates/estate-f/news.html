@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>부동산 소식 — 집담</title>
+<meta name="description" content="전월세 시세, 청약 제도, 계약 전 확인할 것들 — 요점만 추려 전합니다.">
+<meta property="og:title" content="부동산 소식 — 집담">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video,iframe{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰 — 상단바 1440x129 (1단 80 + 탭 48) · 카테고리 18/28 700
+   알약 120x28·187x28 r6 12/12 · 탭 h48 15/18 · 본문폭 1080 · 푸터폭 1240 pad100
+   강조색만 일부러 다르게 잡았다 (원본 주황은 그 회사 상표색) */
+:root{--bg:rgb(255,255,255);--card:rgb(243,237,233);--band:rgb(248,248,248);
+  --ink:rgb(26,26,26);--body:rgb(76,76,76);--dim:rgb(108,108,108);--faint:rgb(118,118,118);
+  --navy:rgb(9,44,89);--brick:rgb(178,68,45);--line:rgb(230,226,222);
+  --good:rgb(10,124,60)  /* 배지 11~12px 라 4.5:1 넘도록 */;--ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;
+  font-size:16px;line-height:24px;letter-spacing:-.01em}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.rv{opacity:1}
+html.js .rv{opacity:0;transform:translateY(18px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+html.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{transition:none}}
+
+.top{border-bottom:1px solid var(--line);background:var(--bg)}
+.top .r1{height:80px;display:flex;align-items:center;padding:0 20px}
+.lg{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-right:34px;
+  font-size:22px;line-height:26px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.lg i{width:20px;height:20px;border-radius:5px;background:var(--brick);flex:0 0 auto}
+.cats{display:flex;gap:32px}
+.cats a{min-height:44px;display:inline-flex;align-items:center;
+  font-size:18px;line-height:28px;font-weight:700;letter-spacing:-.03em;transition:color .2s var(--ease)}
+.cats a:hover,.cats a[aria-current="page"]{color:var(--brick)}
+.top .go{margin-left:auto;display:flex;align-items:center;gap:12px}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:6px 12px;
+  border-radius:6px;font-size:12px;line-height:16px;box-shadow:inset 0 0 0 1px var(--line);
+  transition:background .2s var(--ease)}
+.pill:hover{background:var(--card)}
+.pill.on{background:var(--brick);color:#fff;box-shadow:none}
+.pill.on:hover{background:var(--brick);opacity:.9}
+.top .r2{height:48px;display:flex;gap:26px;padding:0 20px}
+.top .r2 a{display:inline-flex;align-items:center;font-size:15px;line-height:18px;color:var(--faint);
+  border-bottom:2px solid transparent;transition:color .2s var(--ease)}
+.top .r2 a:hover{color:var(--ink)}
+.top .r2 a[aria-current="true"]{font-weight:700;color:var(--body);border-bottom-color:var(--brick)}
+
+.ph{padding:56px 0 30px;border-bottom:1px solid var(--line)}
+.ph h1{font-size:32px;line-height:40px;font-weight:700;letter-spacing:-.03em}
+.ph p{margin-top:8px;color:var(--body)}
+.crumb{font-size:14px;line-height:20px;color:var(--dim);margin-bottom:12px}
+.crumb a:hover{color:var(--brick)}
+
+.ft{margin-top:100px;padding:100px 0 56px;border-top:1px solid var(--line)}
+.ft .in{max-width:1240px;margin:0 auto;padding:0 20px}
+.ft nav{display:flex;flex-wrap:wrap;gap:0 12px;font-size:14px;line-height:20px;color:var(--body)}
+.ft nav a{min-height:44px;display:inline-flex;align-items:center}
+.ft nav a:hover{color:var(--brick)}
+.ft nav i{align-self:center;color:var(--line)}
+.ft .legal{margin-top:14px;font-size:14px;line-height:22px;color:var(--dim)}
+.ft .btm{margin-top:30px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.ft .cp{font-size:14px;line-height:20px;color:var(--faint)}
+
+@media (max-width:900px){
+  .top .r1{height:auto;flex-wrap:wrap;gap:10px;padding:12px 16px}
+  .lg{margin-right:12px}
+  .cats{order:3;width:100%;gap:16px;overflow-x:auto;padding-bottom:4px}
+  .cats a{white-space:nowrap;font-size:15px}
+  .top .r2{padding:0 16px;gap:18px;overflow-x:auto}
+  .top .r2 a{white-space:nowrap}
+  .ph{padding:34px 0 22px}
+  .ph h1{font-size:24px;line-height:32px}
+  .ft{margin-top:56px;padding:56px 0 40px}
+}
+.nw{padding-top:34px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 20px}
+.ncard{display:block;transition:transform .3s var(--ease)}
+.ncard:hover{transform:translateY(-3px)}
+.ncard figure{border-radius:12px;overflow:clip;background:var(--card)}
+.ncard img{width:100%;height:220px;object-fit:cover}
+.ncard b{display:block;margin-top:14px;font-size:18px;line-height:26px;font-weight:700;letter-spacing:-.02em}
+.ncard p{margin-top:6px;color:var(--body);font-size:15px;line-height:23px}
+.ncard .meta{margin-top:10px;display:flex;gap:10px;font-size:14px;line-height:20px;color:var(--dim)}
+@media (max-width:1100px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:900px){.grid{grid-template-columns:1fr;gap:22px}.ncard img{height:190px}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="r1">
+    <a class="lg ko" href="index.html"><i></i>집담</a>
+    <nav class="cats" aria-label="매물 종류">
+      <a class="ko" href="listings.html?type=apt">아파트</a>
+      <a class="ko" href="listings.html?type=villa">빌라, 투룸</a>
+      <a class="ko" href="listings.html?type=oneroom">원룸</a>
+      <a class="ko" href="listings.html?type=officetel">오피스텔</a>
+      <a class="ko" href="listings.html?type=store">상가, 사무실</a>
+      <a class="ko" href="listings.html?type=short">단기임대</a>
+    </nav>
+    <div class="go">
+      <a class="pill ko" href="notice.html">로그인 및 회원가입</a>
+      <a class="pill on ko" href="notice.html">중개사무소 가입 및 상품문의</a>
+    </div>
+  </div>
+  <nav class="r2" aria-label="매물 보기 방식">
+    <a class="ko" href="listings.html">방 찾기</a>
+    <a class="ko" href="notice.html">찜한 매물</a>
+    <a class="ko" href="notice.html">방 내놓기</a>
+    <a class="ko" href="news.html" aria-current="true">부동산 소식</a>
+  </nav>
+</header>
+
+<div class="ph"><div class="wrap"><h1 class="ko">부동산 소식</h1>
+<p class="ko">복잡한 이야기를 요점만 추려 알려 드립니다.</p></div></div>
+
+<main class="wrap nw">
+  <div class="grid">
+    <a class="ncard rv" href="news-1.html">
+      <figure><img src="./assets/nw-1.jpg" alt="" width="340" height="220" loading="lazy"></figure>
+      <b class="ko">전세 대신 월세, 작년보다 얼마나 늘었나</b>
+      <p class="ko">전월세 거래에서 월세가 차지하는 비중이 다시 올랐습니다. 지역별로 갈린 이유를 정리했습니다.</p>
+      <span class="meta"><span>2026.09.11</span><span class="ko">조회 2,140</span></span>
+    </a>
+    <a class="ncard rv" href="news-1.html">
+      <figure><img src="./assets/nw-2.jpg" alt="" width="340" height="220" loading="lazy"></figure>
+      <b class="ko">신혼부부 특별공급, 올해 바뀐 것 세 가지</b>
+      <p class="ko">소득 기준과 자산 기준이 함께 손질됐습니다. 신청 전에 확인해야 할 것만 추렸습니다.</p>
+      <span class="meta"><span>2026.09.08</span><span class="ko">조회 1,872</span></span>
+    </a>
+    <a class="ncard rv" href="news-1.html">
+      <figure><img src="./assets/nw-3.jpg" alt="" width="340" height="220" loading="lazy"></figure>
+      <b class="ko">역세권 원룸 시세, 노선별로 갈렸습니다</b>
+      <p class="ko">같은 도보 10분이라도 노선에 따라 보증금 차이가 큽니다. 여덟 개 노선을 비교했습니다.</p>
+      <span class="meta"><span>2026.09.04</span><span class="ko">조회 3,015</span></span>
+    </a>
+    <a class="ncard rv" href="news-1.html">
+      <figure><img src="./assets/nw-1.jpg" alt="" width="340" height="220" loading="lazy"></figure>
+      <b class="ko">관리비에 뭐가 들어가는지 따져 봤습니다</b>
+      <p class="ko">같은 평수인데 관리비가 두 배 차이 나는 집이 있습니다. 항목별로 뜯어봤습니다.</p>
+      <span class="meta"><span>2026.08.28</span><span class="ko">조회 1,406</span></span>
+    </a>
+    <a class="ncard rv" href="news-1.html">
+      <figure><img src="./assets/nw-2.jpg" alt="" width="340" height="220" loading="lazy"></figure>
+      <b class="ko">보증보험, 가입이 거절되는 경우들</b>
+      <p class="ko">집을 계약하기 전에 확인할 수 있습니다. 거절 사유로 가장 많았던 다섯 가지입니다.</p>
+      <span class="meta"><span>2026.08.19</span><span class="ko">조회 2,733</span></span>
+    </a>
+    <a class="ncard rv" href="news-1.html">
+      <figure><img src="./assets/nw-3.jpg" alt="" width="340" height="220" loading="lazy"></figure>
+      <b class="ko">집 보러 갈 때 챙기면 좋은 것</b>
+      <p class="ko">줄자와 휴대폰 나침반이면 충분합니다. 현장에서 놓치기 쉬운 것들을 적었습니다.</p>
+      <span class="meta"><span>2026.08.05</span><span class="ko">조회 1,988</span></span>
+    </a>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="in">
+    <nav aria-label="회사 정보">
+      <a class="ko" href="notice.html">회사소개</a><i>|</i>
+      <a class="ko" href="notice.html">채용정보</a><i>|</i>
+      <a class="ko" href="notice.html">이용약관</a><i>|</i>
+      <a class="ko" href="notice.html">개인정보 처리방침</a><i>|</i>
+      <a class="ko" href="notice.html">위치기반 서비스 이용약관</a><i>|</i>
+      <a class="ko" href="notice.html">고객센터</a>
+    </nav>
+    <p class="legal ko">상호 : 집담 (민트클) &nbsp;|&nbsp; 대표 : 진수<br>
+      사업자등록번호 : 266-07-03678<br>
+      통신판매업신고 : 제2026-서울강남-00480호<br>
+      주소 : 서울특별시 강남구 집담로 12, 3층 (06072)<br>
+      고객센터 : 010-4894-4905 (평일 10:00 – 18:00, 점심 12:00 – 13:00)<br>
+      이메일 : 6gsmake@gmail.com<br>
+      집담은 통신판매중개자이며 통신판매의 당사자가 아닙니다. 매물 정보와 거래에 대한 책임은 각 중개사무소에 있습니다.</p>
+    <div class="btm"><span class="cp ko">© 2026 집담. 이 페이지는 디자인 예시입니다.</span></div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

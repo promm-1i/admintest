@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>매물 찾기 — 집담</title>
+<meta name="description" content="지도에서 원룸·빌라·아파트·오피스텔·상가 매물을 찾습니다. 거래 유형, 가격, 구조, 면적으로 걸러 보고 카드에서 조건을 바로 확인하세요.">
+<meta property="og:title" content="매물 찾기 — 집담">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video,iframe{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+
+/* ── 레퍼런스 실측 (1440x900 고정 · 문서 스크롤 없음)
+   상단바 1440x129 · 지도 1040x771 · 매물 패널 400x771
+   패널 헤더 400x52 (14/20 700) · 매물 카드 400x167 · 썸네일 104x104
+   카테고리 18/28 700 (활성 주황) · 알약 120x28·187x28 r6 12/12
+   탭 h48 15/18 · 검색창 358x50 (안쪽 338x30 r4)
+   지도 마커 44x44 r21 · 숫자 16/24 700
+   카드 안: 가격 18/28 700 · 관리비 14/20 700 · 조건 14/20 · 지역·설명 14/20 흐림
+   강조색만 일부러 다르게 잡았다 ── */
+:root{--bg:rgb(255,255,255);--card:rgb(243,237,233);--map:rgb(241,241,241);
+  --ink:rgb(26,26,26);--body:rgb(76,76,76);--dim:rgb(108,108,108);--faint:rgb(118,118,118);
+  --navy:rgb(9,44,89);--brick:rgb(178,68,45);--line:rgb(230,226,222);
+  --good:rgb(10,124,60)  /* 배지 11~12px 라 4.5:1 넘도록 */;--ease:cubic-bezier(.44,0,.56,1)}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;
+  font-size:16px;line-height:24px;letter-spacing:-.01em}
+
+/* ── 상단 바 (ref 1440x129) ── */
+.top{height:129px;border-bottom:1px solid var(--line);position:relative;z-index:5;background:var(--bg)}
+.top .r1{height:80px;display:flex;align-items:center;gap:0;padding:0 20px}
+.lg{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-right:34px;
+  font-size:22px;line-height:26px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.lg i{width:20px;height:20px;border-radius:5px;background:var(--brick);flex:0 0 auto}
+.cats{display:flex;gap:32px}
+.cats a{min-height:44px;display:inline-flex;align-items:center;
+  font-size:18px;line-height:28px;font-weight:700;letter-spacing:-.03em;color:var(--ink);
+  transition:color .2s var(--ease)}
+.cats a:hover{color:var(--brick)}
+.cats a[aria-current="page"]{color:var(--brick)}
+.top .go{margin-left:auto;display:flex;align-items:center;gap:12px}
+.pill{display:inline-flex;align-items:center;justify-content:center;min-height:28px;padding:6px 12px;
+  border-radius:6px;font-size:12px;line-height:16px;color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line);transition:background .2s var(--ease)}
+.pill:hover{background:var(--card)}
+.pill.on{background:var(--brick);color:#fff;box-shadow:none}
+.pill.on:hover{background:var(--brick);opacity:.9}
+
+/* 2단 탭 (ref h48 15/18) */
+.top .r2{height:48px;display:flex;align-items:stretch;gap:26px;padding:0 20px}
+.top .r2 a{display:inline-flex;align-items:center;font-size:15px;line-height:18px;
+  color:var(--faint);border-bottom:2px solid transparent;transition:color .2s var(--ease)}
+.top .r2 a:hover{color:var(--ink)}
+.top .r2 a[aria-current="true"]{font-weight:700;color:var(--body);border-bottom-color:var(--brick)}
+
+/* ── 본문 두 칸 (ref 지도 1040 + 패널 400, 높이 771) ── */
+.stage{display:grid;grid-template-columns:1040px 400px;height:771px}
+
+/* 지도 */
+.map{position:relative;background:var(--map);overflow:clip}
+.map iframe{width:100%;height:100%;border:0;filter:grayscale(.28) contrast(1.02)}
+.mk{position:absolute;width:44px;height:44px;border-radius:22px;
+  background:rgba(178,68,45,.92);color:#fff;display:grid;place-items:center;
+  font-size:16px;line-height:24px;font-weight:700;
+  box-shadow:0 2px 10px rgba(12,14,18,.28);transition:transform .2s var(--ease)}
+.mk:hover{transform:scale(1.08)}
+.mk.sm{width:34px;height:34px;border-radius:17px;font-size:14px}
+
+/* 검색·필터 (지도 위에 얹힌다, ref 검색창 358x50) */
+.tools{position:absolute;left:21px;top:21px;z-index:3;width:358px}
+.search{height:50px;background:var(--bg);border-radius:8px;padding:10px;
+  box-shadow:0 2px 12px rgba(12,14,18,.16);display:flex;align-items:center;gap:8px}
+.search input{flex:1;min-width:0;height:30px;font-size:13px;line-height:30px;padding:0 4px}
+.search input::placeholder{color:var(--faint)}
+.search button{width:30px;height:30px;border-radius:4px;background:var(--brick);
+  display:grid;place-items:center;flex:0 0 auto}
+.search svg{width:15px;height:15px;fill:none;stroke:#fff;stroke-width:2}
+.filters{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px}
+.filters button{min-height:34px;padding:0 14px;border-radius:17px;background:var(--bg);
+  font-size:13px;line-height:18px;font-weight:600;
+  box-shadow:0 1px 8px rgba(12,14,18,.14);transition:background .2s var(--ease),color .2s var(--ease)}
+.filters button:hover{background:var(--card)}
+.filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
+
+/* ── 매물 패널 (ref 400x771, 헤더 52, 카드 167) ── */
+.panel{border-left:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
+.panel .hd{height:52px;flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;border-bottom:1px solid var(--line)}
+.panel .hd b{font-size:14px;line-height:20px;font-weight:700}
+.panel .hd .sort{font-size:13px;line-height:18px;color:var(--dim);min-height:44px;
+  display:inline-flex;align-items:center;gap:4px}
+.list{flex:1;overflow-y:auto;min-height:0}
+.list:focus-visible{outline:2px solid var(--brick);outline-offset:-2px}
+.it{display:block;min-height:167px;padding:0 20px 16px;border-bottom:1px solid var(--line);
+  transition:background .2s var(--ease)}
+.it:hover{background:var(--card)}
+.it .tag{height:38px;display:flex;align-items:center;gap:6px}
+.it .tag span{padding:2px 6px;border-radius:4px;background:rgba(11,140,68,.1);
+  font-size:11px;line-height:14px;font-weight:500;color:var(--good)}
+.it .tag span.b{background:rgba(178,68,45,.1);color:var(--brick)}
+.it .row{display:flex;gap:16px;align-items:flex-start}
+.it .tx{flex:1;min-width:0}
+.it .pr{font-size:18px;line-height:28px;font-weight:700}
+.it .fee{font-size:14px;line-height:20px;font-weight:700}
+.it .sp{font-size:14px;line-height:20px}
+.it .lo,.it .ds{font-size:14px;line-height:20px;color:var(--dim);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.it figure{width:104px;height:104px;flex:0 0 auto;border-radius:8px;overflow:clip;background:var(--card)}
+.it figure img{width:100%;height:100%;object-fit:cover}
+.empty{padding:60px 20px;text-align:center;color:var(--dim)}
+
+/* ── 반응형 — 폰에서는 지도 위 · 목록 아래로 흐른다 ── */
+@media (max-width:1100px){
+  .stage{grid-template-columns:1fr 360px}
+  .cats{gap:20px}
+  .cats a{font-size:16px}
+}
+@media (max-width:900px){
+  .top{height:auto}
+  .top .r1{height:auto;flex-wrap:wrap;gap:10px;padding:12px 16px}
+  .lg{margin-right:12px}
+  .cats{order:3;width:100%;gap:16px;overflow-x:auto;padding-bottom:4px}
+  .cats a{white-space:nowrap;font-size:15px}
+  .top .r2{padding:0 16px;gap:18px;overflow-x:auto}
+  .top .r2 a{white-space:nowrap}
+  .stage{display:block;height:auto}
+  .map{height:360px}
+  .tools{left:12px;top:12px;right:12px;width:auto}
+  .panel{border-left:0;border-top:1px solid var(--line)}
+  .list{overflow:visible}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="r1">
+    <a class="lg ko" href="index.html"><i></i>집담</a>
+    <nav class="cats" aria-label="매물 종류">
+      <a class="ko" href="listings.html?type=apt" data-type="apt">아파트</a>
+      <a class="ko" href="listings.html?type=villa" data-type="villa">빌라, 투룸</a>
+      <a class="ko" href="listings.html?type=oneroom" data-type="oneroom" aria-current="page">원룸</a>
+      <a class="ko" href="listings.html?type=officetel" data-type="officetel">오피스텔</a>
+      <a class="ko" href="listings.html?type=store" data-type="store">상가, 사무실</a>
+      <a class="ko" href="listings.html?type=short" data-type="short">단기임대</a>
+    </nav>
+    <div class="go">
+      <a class="pill ko" href="notice.html">로그인 및 회원가입</a>
+      <a class="pill on ko" href="notice.html">중개사무소 가입 및 상품문의</a>
+    </div>
+  </div>
+  <nav class="r2" aria-label="매물 보기 방식">
+    <a class="ko" href="listings.html" aria-current="true">방 찾기</a>
+    <a class="ko" href="notice.html">찜한 매물</a>
+    <a class="ko" href="notice.html">방 내놓기</a>
+    <a class="ko" href="news.html">부동산 소식</a>
+  </nav>
+</header>
+
+<main class="stage">
+  <section class="map" aria-label="매물 지도">
+    <iframe src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EA%B0%95%EB%82%A8%EA%B5%AC%20%EC%97%AD%EC%82%BC%EB%8F%99&amp;z=15&amp;output=embed"
+      title="매물 위치 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="tools">
+      <form class="search" role="search" onsubmit="return false">
+        <label class="ko" for="q" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">지역·지하철역·학교 검색</label>
+        <input id="q" type="search" class="ko" placeholder="지역, 지하철역, 학교로 찾기">
+        <button type="submit" aria-label="검색"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg></button>
+      </form>
+      <div class="filters" role="group" aria-label="조건 걸러 보기">
+        <button type="button" class="ko" data-f="all" aria-pressed="true">전체</button>
+        <button type="button" class="ko" data-f="wolse" aria-pressed="false">월세</button>
+        <button type="button" class="ko" data-f="jeonse" aria-pressed="false">전세</button>
+        <button type="button" class="ko" data-f="maemae" aria-pressed="false">매매</button>
+        <button type="button" class="ko" data-f="parking" aria-pressed="false">주차 가능</button>
+      </div>
+    </div>
+    <a class="mk" href="#list" style="left:180px;top:170px">12</a>
+    <a class="mk sm" href="#list" style="left:330px;top:300px">7</a>
+    <a class="mk" href="#list" style="left:470px;top:210px">31</a>
+    <a class="mk sm" href="#list" style="left:600px;top:400px">5</a>
+    <a class="mk" href="#list" style="left:700px;top:250px">18</a>
+    <a class="mk sm" href="#list" style="left:850px;top:340px">9</a>
+    <a class="mk sm" href="#list" style="left:260px;top:470px">4</a>
+    <a class="mk" href="#list" style="left:520px;top:560px">23</a>
+  </section>
+
+  <section class="panel" aria-label="매물 목록">
+    <div class="hd">
+      <b class="ko"><span id="cnt">12</span>개 매물</b>
+      <span class="sort ko">추천순</span>
+    </div>
+    <div class="list" id="list" tabindex="0" role="group" aria-label="매물 목록, 위아래로 넘길 수 있습니다">
+      <a class="it" href="listing-1.html" data-deal="wolse" data-parking="1">
+        <div class="tag"><span class="ko">추천</span><span class="b ko">주차</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">월세 1,000/65</p>
+            <p class="fee ko">관리비 7만원</p>
+            <p class="sp ko">분리형 원룸 · 26.4㎡ · 3층</p>
+            <p class="lo ko">강남구 역삼동</p>
+            <p class="ds ko">역까지 걸어서 6분, 리모델링 끝난 집</p>
+          </div>
+          <figure><img src="./assets/rm-1.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="wolse" data-parking="0">
+        <div class="tag"><span class="ko">추천</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">월세 500/55</p>
+            <p class="fee ko">관리비 5만원</p>
+            <p class="sp ko">오픈형 원룸 · 19.8㎡ · 2층</p>
+            <p class="lo ko">관악구 봉천동</p>
+            <p class="ds ko">채광 좋은 남향, 풀옵션</p>
+          </div>
+          <figure><img src="./assets/rm-2.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="jeonse" data-parking="1">
+        <div class="tag"><span class="ko">추천</span><span class="b ko">주차</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">전세 1억 8,000</p>
+            <p class="fee ko">관리비 6만원</p>
+            <p class="sp ko">분리형 원룸 · 28.1㎡ · 5층</p>
+            <p class="lo ko">마포구 망원동</p>
+            <p class="ds ko">엘리베이터 있는 신축, 주차 1대</p>
+          </div>
+          <figure><img src="./assets/rm-3.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="wolse" data-parking="0">
+        <div class="tag"><span class="ko">추천</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">월세 300/48</p>
+            <p class="fee ko">관리비 4만원</p>
+            <p class="sp ko">오픈형 원룸 · 17.2㎡ · 3층</p>
+            <p class="lo ko">동작구 상도동</p>
+            <p class="ds ko">조용한 골목, 세탁기·냉장고 있음</p>
+          </div>
+          <figure><img src="./assets/rm-4.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="maemae" data-parking="1">
+        <div class="tag"><span class="b ko">주차</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">매매 2억 4,500</p>
+            <p class="fee ko">관리비 8만원</p>
+            <p class="sp ko">복층 원룸 · 33.6㎡ · 6층</p>
+            <p class="lo ko">성동구 성수동</p>
+            <p class="ds ko">복층 구조, 창이 커서 밝습니다</p>
+          </div>
+          <figure><img src="./assets/rm-5.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="wolse" data-parking="1">
+        <div class="tag"><span class="ko">추천</span><span class="b ko">주차</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">월세 2,000/90</p>
+            <p class="fee ko">관리비 10만원</p>
+            <p class="sp ko">분리형 원룸 · 34.2㎡ · 8층</p>
+            <p class="lo ko">송파구 방이동</p>
+            <p class="ds ko">고층이라 뷰가 트여 있습니다</p>
+          </div>
+          <figure><img src="./assets/rm-6.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="jeonse" data-parking="0">
+        <div class="tag"><span class="ko">추천</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">전세 1억 2,000</p>
+            <p class="fee ko">관리비 5만원</p>
+            <p class="sp ko">오픈형 원룸 · 21.5㎡ · 4층</p>
+            <p class="lo ko">서대문구 연희동</p>
+            <p class="ds ko">언덕 없는 평지, 버스 정류장 앞</p>
+          </div>
+          <figure><img src="./assets/rm-7.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="wolse" data-parking="0">
+        <div class="tag"><span class="ko">추천</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">월세 1,000/58</p>
+            <p class="fee ko">관리비 6만원</p>
+            <p class="sp ko">분리형 원룸 · 25.0㎡ · 2층</p>
+            <p class="lo ko">광진구 자양동</p>
+            <p class="ds ko">주방이 분리돼 있어 냄새가 안 뱁니다</p>
+          </div>
+          <figure><img src="./assets/rm-8.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="maemae" data-parking="1">
+        <div class="tag"><span class="b ko">주차</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">매매 1억 9,800</p>
+            <p class="fee ko">관리비 7만원</p>
+            <p class="sp ko">분리형 원룸 · 29.7㎡ · 3층</p>
+            <p class="lo ko">은평구 응암동</p>
+            <p class="ds ko">건물 전체 리모델링 마쳤습니다</p>
+          </div>
+          <figure><img src="./assets/rm-9.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="wolse" data-parking="1">
+        <div class="tag"><span class="ko">추천</span><span class="b ko">주차</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">월세 800/62</p>
+            <p class="fee ko">관리비 6만원</p>
+            <p class="sp ko">분리형 원룸 · 27.3㎡ · 5층</p>
+            <p class="lo ko">중랑구 면목동</p>
+            <p class="ds ko">붙박이장 있고 짐 넣을 데가 넉넉합니다</p>
+          </div>
+          <figure><img src="./assets/rm-10.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="jeonse" data-parking="1">
+        <div class="tag"><span class="b ko">주차</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">전세 2억 1,000</p>
+            <p class="fee ko">관리비 9만원</p>
+            <p class="sp ko">복층 원룸 · 36.0㎡ · 7층</p>
+            <p class="lo ko">영등포구 문래동</p>
+            <p class="ds ko">천장 높은 복층, 작업실로도 씁니다</p>
+          </div>
+          <figure><img src="./assets/rm-11.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <a class="it" href="listing-1.html" data-deal="wolse" data-parking="0">
+        <div class="tag"><span class="ko">추천</span></div>
+        <div class="row">
+          <div class="tx">
+            <p class="pr ko">월세 500/45</p>
+            <p class="fee ko">관리비 4만원</p>
+            <p class="sp ko">오픈형 원룸 · 18.6㎡ · 1층</p>
+            <p class="lo ko">노원구 공릉동</p>
+            <p class="ds ko">앞이 트여 있어 1층인데도 밝습니다</p>
+          </div>
+          <figure><img src="./assets/rm-12.jpg" alt="" width="104" height="104" loading="lazy"></figure>
+        </div>
+      </a>
+      <p class="empty ko" id="empty" hidden>조건에 맞는 매물이 없습니다. 다른 조건으로 찾아보세요.</p>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  const btns=[...document.querySelectorAll('.filters button')];
+  const items=[...document.querySelectorAll('.it')];
+  const cnt=document.getElementById('cnt'), empty=document.getElementById('empty');
+  function apply(f){
+    let n=0;
+    items.forEach(el=>{
+      const ok = f==='all' ? true
+               : f==='parking' ? el.dataset.parking==='1'
+               : el.dataset.deal===f;
+      el.hidden=!ok; if(ok) n++;
+    });
+    cnt.textContent=n; empty.hidden=n>0;
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    btns.forEach(o=>o.setAttribute('aria-pressed', o===b ? 'true':'false'));
+    apply(b.dataset.f);
+  }));
+  // 주소의 ?type= 에 맞춰 상단 카테고리 표시를 옮긴다
+  const t=new URLSearchParams(location.search).get('type');
+  if(t){
+    document.querySelectorAll('.cats a').forEach(a=>{
+      if(a.dataset.type===t) a.setAttribute('aria-current','page');
+      else a.removeAttribute('aria-current');
+    });
+  }
+})();
+</script>
+</body>
+</html>
