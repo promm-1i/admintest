@@ -39,6 +39,8 @@ body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-s
    손글씨 강조 Londrina Solid 22/22 · 20/24  (한글은 없어 감자꽃체로 대체)
    마퀴 주황 띠 · 메뉴 카드 3열 · 팀 카드 회전 배치 ── */
 :root{--bg:rgb(245,240,234);--w:rgb(255,255,255);--ink:rgb(21,17,13);--or:rgb(244,89,9);
+  /* 작은 글씨용 진한 주황 — 크림 위 4.53:1 (--or 은 2.95 라 18px 미만에는 못 쓴다) */
+  --or-sm:rgb(191,70,7);
   --gray:rgb(110,104,98);--line:rgba(21,17,13,.14);--ease:cubic-bezier(.44,0,.56,1)}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);
@@ -69,11 +71,11 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{transition:none}}
 
 .btn{display:inline-flex;align-items:center;justify-content:center;height:44px;padding:0 24px;
-  border-radius:100px;border:1px solid var(--or);color:var(--or);
+  border-radius:100px;border:1px solid var(--or);color:var(--or-sm);
   font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px;
   transition:background .25s var(--ease),color .25s var(--ease)}
-.btn:hover{background:var(--or);color:var(--w)}
-.btn.fill{background:var(--or);color:var(--w)}
+.btn:hover{background:var(--or);color:var(--ink)}
+.btn.fill{background:var(--or);color:var(--ink)}
 .btn.fill:hover{opacity:.88}
 
 /* ── 상단 바 ── */
@@ -126,7 +128,8 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 섹션 머리 ── */
 .sh{text-align:center;padding:70px 0 34px}
-.sh .lab{color:var(--or)}
+/* 작은 글씨만 AA 4.5:1 로. 대형 제목은 레퍼런스 색 그대로 */
+.sh .lab{color:var(--or-sm)}
 .sh h2{margin-top:12px}
 .sh .hand{display:block;margin-top:4px;font-size:38px;line-height:44px}
 
@@ -140,11 +143,11 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .mcard .bd{padding:14px 16px 18px;display:flex;justify-content:space-between;gap:14px;align-items:flex-start}
 .mcard h3{font-size:16px;line-height:22px;font-weight:600}
 .mcard p{margin-top:4px}
-.mcard .pr{font-size:15px;line-height:22px;font-weight:700;color:var(--or);flex:0 0 auto}
+.mcard .pr{font-size:15px;line-height:22px;font-weight:700;color:var(--or-sm);flex:0 0 auto}
 .mcard .badge{position:absolute;right:0;top:14px;z-index:2;height:24px;padding:0 12px;
-  border-radius:100px 0 0 100px;background:var(--or);color:var(--w);
+  border-radius:100px 0 0 100px;background:var(--or);color:var(--ink);
   display:inline-flex;align-items:center;font-size:11px;line-height:11px;font-weight:700;letter-spacing:.5px}
-.mcard .badge.g{background:rgb(28,120,56)}
+.mcard .badge.g{background:rgb(28,120,56);color:var(--w)}
 .mcard .badge.d{background:var(--ink)}
 .more{margin-top:34px;display:flex;justify-content:center}
 
@@ -155,7 +158,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .freebie .big{font-family:"Londrina Solid","SBAggro",sans-serif;font-size:56px;line-height:60px;color:var(--or)}
 .freebie .big.ko{font-family:"SBAggro","Pretendard Variable",sans-serif;font-weight:400;font-size:52px}
 .freebie .sub{font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px}
-.freebie .sub em{font-style:normal;color:var(--or)}
+.freebie .sub em{font-style:normal;color:var(--or-sm)}
 
 /* ── 갤러리 ── */
 .gal{margin-top:22px;display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
@@ -199,7 +202,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .visit .info{padding:20px;display:flex;flex-direction:column;justify-content:center}
 .visit .map{background:var(--bg)}
 .visit .map iframe{width:100%;height:100%;min-height:400px;border:0;display:block;filter:saturate(.92)}
-.visit .lab{color:var(--or)}
+.visit .lab{color:var(--or-sm)}
 .visit h2{margin-top:10px}
 .visit .hand{display:block;font-size:38px;line-height:44px}
 .visit .ad{margin-top:16px;font-size:16px;line-height:24px;font-weight:600}
@@ -225,13 +228,13 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .ft .bar .sns{display:flex;gap:8px}
 .ft .bar .sns span{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
-.ft .strip{background:var(--or);color:var(--w);padding:22px 0 14px}
+.ft .strip{background:var(--or);color:var(--ink);padding:22px 0 14px}
 .ft .strip .in a{display:inline-flex;align-items:center;min-height:26px}
 .ft .strip .in{max-width:1280px;margin:0 auto;padding:0 40px;
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   font-size:12px;line-height:18px;font-weight:700;letter-spacing:.5px}
 .ft .legal{max-width:1280px;margin:10px auto 0;padding:0 40px;
-  font-size:12px;line-height:19px;color:rgba(255,255,255,.85);font-weight:400}
+  font-size:12px;line-height:19px;color:rgba(21,17,13,.88);font-weight:400}
 
 /* ── 메뉴 페이지 ── */
 .mhead{text-align:center;padding:56px 0 30px}
