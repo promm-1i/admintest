@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>매물 찾기 — 온채 회원제 부동산 중개법인 (프리미엄 디자인 C)</title>
+<meta name="description" content="지역·매물 형태·거래 형태·평형·방·주차·정렬 일곱 가지 조건으로 매물을 걸러 보는 목록 페이지입니다. 비공개 매물은 금액을 가린 채 함께 노출됩니다.">
+<meta property="og:title" content="매물 찾기 — 온채 회원제 부동산 중개법인 (프리미엄 디자인 C)">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+ul,ol{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 브랜드 톤: 딥그린 #294546 은 레퍼런스(withmane) 실측 rgb(41,69,70) 에서 가져온 값 —
+   중개법인 특유의 신뢰 톤이라 이것만 이식하고 타이포·여백·모션은 새로 짰다. */
+:root{
+  --ink:#0F1A19; --brand:#294546; --brand-d:#1B3031; --brand-l:#3E6461;
+  --paper:#FBFAF8; --sand:#F2EFE9; --line:#E3E0D9; --grey:#6E7A78; --grey-l:#9AA4A2;
+  --r-s:3px; --r-m:6px; --r-l:14px;
+  --pad:40px; --wrap:1320px;
+  --ease:cubic-bezier(.16,.7,.3,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:16px;line-height:1.65;letter-spacing:-.01em}
+.en{font-family:"Instrument Serif",Georgia,serif;font-weight:400;letter-spacing:0}
+
+.wrap{width:100%;max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+.rv{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.on{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}
+
+/* ── 섹션 머리 ── */
+.sec{padding:104px 0}
+.sec-head{margin-bottom:44px}
+.eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.14em;color:var(--brand-l);text-transform:uppercase;margin-bottom:14px}
+.sec-head h2{font-size:clamp(30px,3.1vw,44px);line-height:1.28;font-weight:700;letter-spacing:-.03em}
+.sec-head p{margin-top:14px;max-width:56ch;color:var(--grey);font-size:16.5px;line-height:1.8}
+.sec-head.row{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;flex-wrap:wrap}
+
+/* ── 버튼 ── */
+.btn{display:inline-flex;align-items:center;gap:9px;height:52px;padding:0 26px;border-radius:var(--r-m);font-size:15px;font-weight:600;transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.btn-fill{background:var(--brand);color:#fff}
+.btn-fill:hover{background:var(--brand-d)}
+.btn-line{border:1px solid var(--line);color:var(--ink);background:#fff}
+.btn-line:hover{border-color:var(--brand);color:var(--brand)}
+.btn-ghost{color:var(--brand);font-weight:600;font-size:15px;display:inline-flex;align-items:center;gap:7px}
+.btn-ghost svg{transition:transform .35s var(--ease)}
+.btn-ghost:hover svg{transform:translateX(4px)}
+
+/* ── 헤더 ── */
+.hdr{position:fixed;inset:0 0 auto;z-index:60;height:84px;display:flex;align-items:center;transition:background .4s var(--ease),border-color .4s var(--ease)}
+.hdr::after{content:"";position:absolute;inset:auto 0 0;height:1px;background:transparent;transition:background .4s var(--ease)}
+.hdr.solid{background:rgba(251,250,248,.93);backdrop-filter:blur(14px)}
+.hdr.solid::after{background:var(--line)}
+.hdr .wrap{display:flex;align-items:center;justify-content:space-between;gap:28px}
+.mark{display:flex;align-items:baseline;gap:9px;font-size:25px;font-weight:700;letter-spacing:-.04em;color:#fff;transition:color .4s var(--ease)}
+.mark small{font-size:11.5px;font-weight:500;letter-spacing:.04em;opacity:.72}
+.hdr.solid .mark{color:var(--ink)}
+.gnb{display:flex;align-items:center;gap:34px}
+.gnb a{font-size:15px;font-weight:500;color:rgba(255,255,255,.84);transition:color .3s var(--ease)}
+.gnb a:hover{color:#fff}
+.hdr.solid .gnb a{color:var(--grey)}
+.hdr.solid .gnb a:hover{color:var(--brand)}
+.hdr-cta{display:flex;align-items:center;gap:14px}
+.hdr-cta .login{font-size:14px;font-weight:600;color:rgba(255,255,255,.84)}
+.hdr.solid .hdr-cta .login{color:var(--grey)}
+.hdr-cta .btn{height:44px;padding:0 20px;font-size:14px}
+.hdr:not(.solid) .btn-fill{background:#fff;color:var(--brand)}
+.burger{display:none;width:44px;height:44px;align-items:center;justify-content:center}
+.burger span{display:block;width:22px;height:1.5px;background:#fff;position:relative;transition:background .3s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:22px;height:1.5px;background:inherit;transition:transform .3s var(--ease)}
+.burger span::before{top:-7px}.burger span::after{top:7px}
+.hdr.solid .burger span,.hdr.solid .burger span::before,.hdr.solid .burger span::after{background:var(--ink)}
+
+/* ── 히어로 ── */
+.hero{position:relative;height:100svh;min-height:620px;color:#fff;overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 1.4s var(--ease)}
+.hero-slide.live{opacity:1}
+.hero-slide img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 7s linear}
+.hero-slide.live img{transform:scale(1)}
+.hero-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,26,25,.62) 0%,rgba(15,26,25,.30) 38%,rgba(15,26,25,.78) 100%)}
+.hero-in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:56px}
+.hero-copy{max-width:760px}
+.hero-copy .en{display:block;font-size:clamp(15px,1.5vw,19px);font-style:italic;opacity:.88;margin-bottom:18px}
+.hero-copy h1{font-size:clamp(38px,5.4vw,74px);line-height:1.16;font-weight:700;letter-spacing:-.042em}
+.hero-copy p{margin-top:20px;max-width:50ch;font-size:17px;line-height:1.8;color:rgba(255,255,255,.82)}
+.hero-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:32px;margin-top:44px;flex-wrap:wrap}
+.hero-stats{display:flex;gap:44px}
+.hero-stats div b{display:block;font-size:30px;font-weight:700;letter-spacing:-.03em}
+.hero-stats div span{font-size:13px;color:rgba(255,255,255,.7)}
+.hero-dots{display:flex;gap:8px}
+.hero-dots button{width:26px;height:3px;background:rgba(255,255,255,.34);border-radius:2px;transition:background .35s var(--ease),width .35s var(--ease)}
+.hero-dots button.live{background:#fff;width:44px}
+
+/* ── 조건 검색 ── */
+.finder{position:relative;z-index:5;margin-top:-46px}
+.finder-box{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);box-shadow:0 22px 60px -30px rgba(15,26,25,.4);padding:12px;display:grid;grid-template-columns:repeat(4,1fr) auto;gap:10px}
+.fld{position:relative;padding:12px 14px;border-radius:var(--r-m);transition:background .3s var(--ease)}
+.fld:hover{background:var(--sand)}
+.fld+.fld::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:1px;background:var(--line)}
+.fld label{display:block;font-size:11.5px;font-weight:600;letter-spacing:.08em;color:var(--grey-l);text-transform:uppercase;margin-bottom:5px}
+.fld select{width:100%;border:0;background:none;font-size:15.5px;font-weight:600;letter-spacing:-.02em;cursor:pointer;appearance:none;padding-right:18px}
+.fld::after{content:"";position:absolute;right:14px;bottom:20px;width:7px;height:7px;border-right:1.5px solid var(--grey-l);border-bottom:1.5px solid var(--grey-l);transform:rotate(45deg);pointer-events:none}
+.finder-box .btn{height:auto;align-self:stretch;padding:0 34px}
+
+/* ── 매물 카드 ── */
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:30px 26px}
+.card{display:block;position:relative}
+.card-img{position:relative;aspect-ratio:295/205;overflow:hidden;border-radius:var(--r-m);background:var(--sand)}
+.card-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.card:hover .card-img img{transform:scale(1.05)}
+.badge{position:absolute;top:12px;left:12px;display:inline-flex;align-items:center;gap:5px;height:27px;padding:0 11px;border-radius:var(--r-s);background:rgba(15,26,25,.76);backdrop-filter:blur(6px);color:#fff;font-size:11.5px;font-weight:600;letter-spacing:.02em}
+.badge.hot{background:var(--brand)}
+.card-body{padding-top:15px}
+.card-meta{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--grey-l);letter-spacing:.02em}
+.card-meta i{width:2px;height:2px;border-radius:50%;background:currentColor;font-style:normal}
+.card-body h3{margin-top:7px;font-size:17px;font-weight:600;letter-spacing:-.025em;line-height:1.45}
+.card-price{margin-top:11px;padding-top:11px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.card-price b{font-size:18px;font-weight:700;letter-spacing:-.03em;color:var(--brand)}
+.card-price .locked{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--grey-l)}
+.card-price .locked svg{opacity:.75}
+.card-price span{font-size:12.5px;color:var(--grey-l)}
+
+/* ── 회원 안내 3단계 ── */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);padding:34px 30px 32px;transition:border-color .4s var(--ease),transform .5s var(--ease)}
+.step:hover{border-color:var(--brand-l);transform:translateY(-4px)}
+.step .num{font-size:13px;font-weight:600;letter-spacing:.12em;color:var(--brand-l)}
+.step h3{margin:16px 0 10px;font-size:21px;font-weight:700;letter-spacing:-.03em}
+.step p{color:var(--grey);font-size:15px;line-height:1.8}
+.step ul{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.step li{position:relative;padding-left:17px;font-size:14px;color:var(--grey)}
+.step li::before{content:"";position:absolute;left:2px;top:9px;width:5px;height:5px;border-radius:50%;background:var(--brand-l)}
+
+/* ── 분양 ── */
+.band{background:var(--sand)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px 26px}
+.pcard{position:relative;border-radius:var(--r-l);overflow:hidden;background:#fff;border:1px solid var(--line)}
+.pcard-img{aspect-ratio:16/11;overflow:hidden;background:var(--line)}
+.pcard-img img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease)}
+.pcard:hover .pcard-img img{transform:scale(1.05)}
+.pcard-body{padding:22px 24px 24px}
+.pcard-body h3{font-size:19px;font-weight:700;letter-spacing:-.03em}
+.pcard-body .where{margin-top:6px;font-size:13.5px;color:var(--grey-l)}
+.pcard-body dl{margin-top:16px;padding-top:16px;border-top:1px solid var(--line);display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:14px}
+.pcard-body dt{color:var(--grey-l)}
+.pcard-body dd{text-align:right;font-weight:600;letter-spacing:-.02em}
+
+/* ── 담당 중개사 ── */
+.agents{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+.agent{background:#fff;border:1px solid var(--line);border-radius:var(--r-l);overflow:hidden}
+.agent-img{aspect-ratio:4/5;overflow:hidden;background:var(--sand)}
+.agent-img img{width:100%;height:100%;object-fit:cover;filter:grayscale(.18);transition:filter .6s var(--ease),transform 1.1s var(--ease)}
+.agent:hover .agent-img img{filter:none;transform:scale(1.04)}
+.agent-body{padding:24px 26px 26px}
+.agent-body h3{font-size:20px;font-weight:700;letter-spacing:-.03em}
+.agent-body h3 span{margin-left:8px;font-size:13px;font-weight:500;color:var(--grey-l);letter-spacing:0}
+.agent-body .zone{margin-top:9px;display:flex;flex-wrap:wrap;gap:6px}
+.agent-body .zone em{font-style:normal;font-size:12.5px;padding:4px 10px;border-radius:var(--r-s);background:var(--sand);color:var(--brand)}
+.agent-body dl{margin-top:18px;padding-top:16px;border-top:1px solid var(--line);display:flex;gap:26px}
+.agent-body dt{font-size:12px;color:var(--grey-l)}
+.agent-body dd{font-size:16px;font-weight:700;letter-spacing:-.02em;margin-top:3px}
+
+/* ── 의뢰 3종 ── */
+.dark{background:var(--brand);color:#fff}
+.dark .eyebrow{color:rgba(255,255,255,.62)}
+.dark .sec-head p{color:rgba(255,255,255,.74)}
+.asks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.ask{position:relative;display:flex;flex-direction:column;gap:12px;padding:32px 30px 30px;border:1px solid rgba(255,255,255,.18);border-radius:var(--r-l);transition:background .4s var(--ease),border-color .4s var(--ease)}
+.ask:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.36)}
+.ask .en{font-size:13px;letter-spacing:.1em;opacity:.6;text-transform:uppercase}
+.ask h3{font-size:22px;font-weight:700;letter-spacing:-.03em}
+.ask p{font-size:15px;line-height:1.8;color:rgba(255,255,255,.76);flex:1}
+.ask .go{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-size:14.5px;font-weight:600}
+.ask .go svg{transition:transform .35s var(--ease)}
+.ask:hover .go svg{transform:translateX(5px)}
+
+/* ── FAQ ── */
+.faq{max-width:880px;margin:0 auto;border-top:1px solid var(--line)}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 4px;text-align:left;font-size:17.5px;font-weight:600;letter-spacing:-.025em}
+.qa .ic{flex:0 0 auto;position:relative;width:18px;height:18px}
+.qa .ic::before,.qa .ic::after{content:"";position:absolute;background:var(--brand);transition:transform .4s var(--ease),opacity .4s var(--ease)}
+.qa .ic::before{left:0;top:8.25px;width:18px;height:1.5px}
+.qa .ic::after{left:8.25px;top:0;width:1.5px;height:18px}
+.qa.open .ic::after{transform:scaleY(0);opacity:0}
+.qa-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.qa.open .qa-a{grid-template-rows:1fr}
+.qa-a>div{overflow:hidden}
+.qa-a p{padding:0 4px 26px;max-width:68ch;color:var(--grey);font-size:15.5px;line-height:1.85}
+
+/* ── 푸터 ── */
+.ft{background:var(--ink);color:rgba(255,255,255,.62);padding:80px 0 0}
+.ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,.12)}
+.ft .mark{color:#fff;margin-bottom:18px}
+.ft-top p{font-size:14px;line-height:1.9}
+.ft h4{color:#fff;font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px}
+.ft ul{display:flex;flex-direction:column;gap:10px;font-size:14.5px}
+.ft ul a:hover{color:#fff}
+.ft-tel{margin-top:6px;font-size:29px;font-weight:700;color:#fff;letter-spacing:-.03em}
+.ft-bot{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:26px 0 30px;font-size:13px;flex-wrap:wrap}
+.ft-bot ul{flex-direction:row;gap:18px;font-size:13px}
+.ft-word{padding-bottom:34px;line-height:.82;font-size:clamp(60px,13.4vw,192px);color:rgba(255,255,255,.07);letter-spacing:-.04em;white-space:nowrap;overflow:hidden}
+
+/* ── 반응형 (기본 규칙 뒤에 둔다) ── */
+@media (max-width:1100px){
+  :root{--pad:28px}
+  .grid4{grid-template-columns:repeat(3,1fr)}
+  .finder-box{grid-template-columns:repeat(2,1fr)}
+  .finder-box .btn{grid-column:1/-1;height:52px}
+  .fld+.fld::before{display:none}
+}
+@media (max-width:900px){
+  .gnb,.hdr-cta .login{display:none}
+  .burger{display:flex}
+  .sec{padding:74px 0}
+  .grid3,.steps,.agents,.asks{grid-template-columns:repeat(2,1fr)}
+  .ft-top{grid-template-columns:1fr 1fr}
+  .hero-stats{gap:30px}
+}
+@media (max-width:640px){
+  :root{--pad:20px}
+  .hdr-cta .btn{height:40px;padding:0 15px}
+  .grid4,.grid3,.steps,.agents,.asks{grid-template-columns:1fr;gap:22px}
+  .finder-box{grid-template-columns:1fr}
+  .hero-in{padding-bottom:38px}
+  .hero-foot{gap:22px}
+  .hero-stats{width:100%;justify-content:space-between;gap:12px}
+  .hero-stats div b{font-size:23px}
+  .ft-top{grid-template-columns:1fr;gap:34px}
+  .qa button{font-size:16px;padding:22px 2px}
+  .sec-head.row{align-items:flex-start}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none}
+}
+
+/* ── 모바일 내비 ── */
+.mnav{position:fixed;inset:0;z-index:80;background:var(--brand);display:flex;align-items:center;justify-content:center}
+.mnav[hidden]{display:none}
+.mnav nav{display:flex;flex-direction:column;gap:24px;text-align:center}
+.mnav a{color:#fff;font-size:27px;font-weight:700;letter-spacing:-.035em}
+.mnav-close{position:absolute;top:20px;right:16px;width:44px;height:44px}
+.mnav-close::before,.mnav-close::after{content:"";position:absolute;left:11px;top:21px;width:22px;height:1.5px;background:#fff}
+.mnav-close::before{transform:rotate(45deg)}
+.mnav-close::after{transform:rotate(-45deg)}
+
+/* ── 서브페이지 공통 ── */
+.subpage{padding-top:84px}
+.page-head{padding:52px 0 34px;border-bottom:1px solid var(--line)}
+.page-head h1{font-size:clamp(27px,3vw,38px);font-weight:700;letter-spacing:-.035em}
+.page-head .crumb{font-size:13px;color:var(--grey-l);margin-bottom:12px}
+.page-head .crumb a:hover{color:var(--brand)}
+
+/* ── 조건 필터바 ── */
+.filterbar{position:sticky;top:84px;z-index:40;background:var(--sand);border-bottom:1px solid var(--line)}
+.filterbar .wrap{display:flex;align-items:center;gap:10px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+.fsel{position:relative;flex:1 1 132px;min-width:118px}
+.fsel select{width:100%;height:44px;padding:0 30px 0 13px;background:#fff;border:1px solid var(--line);border-radius:var(--r-m);font-size:14.5px;font-weight:500;appearance:none;cursor:pointer;transition:border-color .3s var(--ease)}
+.fsel select:hover,.fsel select:focus{border-color:var(--brand-l);outline:none}
+.fsel::after{content:"";position:absolute;right:13px;top:18px;width:6px;height:6px;border-right:1.5px solid var(--grey-l);border-bottom:1.5px solid var(--grey-l);transform:rotate(45deg);pointer-events:none}
+.fbtn{height:44px;padding:0 18px;border-radius:var(--r-m);font-size:14.5px;font-weight:600;white-space:nowrap}
+.fbtn.reset{border:1px solid var(--line);background:#fff}
+.fbtn.reset:hover{border-color:var(--brand);color:var(--brand)}
+
+/* ── 결과 ── */
+.result{padding:34px 0 96px}
+.result-head{display:flex;align-items:baseline;justify-content:space-between;gap:20px;margin-bottom:26px;flex-wrap:wrap}
+.result-head .count{font-size:15px;color:var(--grey)}
+.result-head .count b{color:var(--brand);font-weight:700;font-size:19px;letter-spacing:-.02em}
+.result-head .note{font-size:13.5px;color:var(--grey-l)}
+.empty{padding:80px 0;text-align:center;color:var(--grey)}
+.empty b{display:block;font-size:19px;font-weight:700;color:var(--ink);margin-bottom:8px;letter-spacing:-.03em}
+.more-wrap{margin-top:52px;text-align:center}
+.more-wrap .page-n{margin-top:16px;font-size:13.5px;color:var(--grey-l)}
+@media (max-width:900px){
+  .filterbar{position:static}
+  .fsel{flex:1 1 46%}
+  .fbtn{flex:1 1 46%}
+}
+</style>
+</head>
+<body>
+<header class="hdr solid" id="hdr">
+  <div class="wrap">
+    <a href="./index.html" class="mark">온채<small>ONCHAE ESTATE</small></a>
+    <nav class="gnb">
+      <a href="./listings.html">매물 찾기</a>
+      <a href="./index.html#membership">회원 안내</a>
+      <a href="./index.html#presale">분양</a>
+      <a href="./index.html#agents">중개사</a>
+      <a href="./inquiry.html">의뢰</a>
+    </nav>
+    <div class="hdr-cta">
+      <a href="./index.html#membership" class="login">로그인</a>
+      <a href="./inquiry.html" class="btn btn-fill">매물 의뢰</a>
+      <button class="burger" type="button" aria-label="메뉴 열기"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="subpage">
+  <div class="page-head">
+    <div class="wrap">
+      <div class="crumb"><a href="./index.html">홈</a> · 매물 찾기</div>
+      <h1>매물 찾기</h1>
+    </div>
+  </div>
+
+  <form class="filterbar" id="fbar">
+    <div class="wrap">
+      <div class="fsel"><select data-k="area" aria-label="지역"><option value="">지역 전체</option><option>한남동</option><option>청담동</option><option>성북동</option><option>평창동</option><option>이태원동</option></select></div>
+      <div class="fsel"><select data-k="type" aria-label="매물 형태"><option value="">형태 전체</option><option>단독주택</option><option>고급빌라</option><option>아파트</option><option>오피스텔</option><option>빌딩·건물</option></select></div>
+      <div class="fsel"><select data-k="deal" aria-label="거래 형태"><option value="">거래 전체</option><option>매매</option><option>전세</option><option>월세</option></select></div>
+      <div class="fsel"><select data-k="size" aria-label="평형"><option value="">평형 전체</option><option>40평 미만</option><option>40-60평</option><option>60-90평</option><option>90평 이상</option></select></div>
+      <div class="fsel"><select data-k="room" aria-label="방 수"><option value="">방 전체</option><option>3룸</option><option>4룸</option><option>5룸 이상</option></select></div>
+      <div class="fsel"><select data-k="park" aria-label="주차"><option value="">주차 전체</option><option>1대</option><option>2대</option><option>3대 이상</option></select></div>
+      <div class="fsel"><select id="sort" aria-label="정렬"><option value="new">최신순</option><option value="area">면적순</option></select></div>
+      <button class="fbtn reset" type="reset">초기화</button>
+      <button class="fbtn btn-fill" type="submit">검색</button>
+    </div>
+  </form>
+
+  <div class="result">
+    <div class="wrap">
+      <div class="result-head">
+        <div class="count"><b id="cnt">12</b>건의 매물</div>
+        <div class="note">잠긴 금액은 회원 승인 후 열립니다</div>
+      </div>
+      <div class="grid4" id="list">
+        <a class="card" href="./listing.html" data-area="한남동" data-type="단독주택" data-deal="매매" data-size="60-90평" data-room="5룸 이상" data-park="3대 이상" data-py="68"><div class="card-img"><img src="./assets/prop-01.jpg" alt="한남동 단독주택 정원" width="640" height="446"><span class="badge hot">독점</span></div><div class="card-body"><div class="card-meta"><span>한남동</span><i></i><span>단독주택</span><i></i><span>68평</span></div><h3>정원과 주차 3면을 갖춘 남향 단독</h3><div class="card-price"><b>매매 48억</b><span>즉시 입주</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="청담동" data-type="고급빌라" data-deal="매매" data-size="40-60평" data-room="4룸" data-park="2대" data-py="52"><div class="card-img"><img src="./assets/prop-02.jpg" alt="청담동 고급빌라 거실" width="640" height="446"><span class="badge">추천</span></div><div class="card-body"><div class="card-meta"><span>청담동</span><i></i><span>고급빌라</span><i></i><span>52평</span></div><h3>한 층 한 세대, 엘리베이터 직결 구조</h3><div class="card-price"><span class="locked">회원 공개</span><span>협의</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="성북동" data-type="단독주택" data-deal="매매" data-size="60-90평" data-room="5룸 이상" data-park="3대 이상" data-py="84"><div class="card-img"><img src="./assets/prop-03.jpg" alt="성북동 주택 서재 창" width="640" height="446"></div><div class="card-body"><div class="card-meta"><span>성북동</span><i></i><span>단독주택</span><i></i><span>84평</span></div><h3>대사관로 안쪽, 오래된 정원이 남은 집</h3><div class="card-price"><b>매매 62억</b><span>협의 입주</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="평창동" data-type="고급빌라" data-deal="전세" data-size="40-60평" data-room="4룸" data-park="2대" data-py="47"><div class="card-img"><img src="./assets/prop-04.jpg" alt="평창동 빌라 테라스" width="640" height="446"></div><div class="card-body"><div class="card-meta"><span>평창동</span><i></i><span>고급빌라</span><i></i><span>47평</span></div><h3>북한산이 정면으로 들어오는 테라스</h3><div class="card-price"><span class="locked">회원 공개</span><span>전세</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="이태원동" data-type="단독주택" data-deal="매매" data-size="40-60평" data-room="4룸" data-park="2대" data-py="59"><div class="card-img"><img src="./assets/prop-05.jpg" alt="이태원동 주택 주방" width="640" height="446"></div><div class="card-body"><div class="card-meta"><span>이태원동</span><i></i><span>단독주택</span><i></i><span>59평</span></div><h3>세대 분리가 되는 2층 구조</h3><div class="card-price"><b>매매 39억</b><span>즉시 입주</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="한남동" data-type="오피스텔" data-deal="월세" data-size="40평 미만" data-room="3룸" data-park="1대" data-py="31"><div class="card-img"><img src="./assets/prop-06.jpg" alt="한남동 오피스텔 침실" width="640" height="446"></div><div class="card-body"><div class="card-meta"><span>한남동</span><i></i><span>오피스텔</span><i></i><span>31평</span></div><h3>남산 조망, 풀옵션 즉시 입주</h3><div class="card-price"><b>월세 500/420</b><span>단기 협의</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="청담동" data-type="빌딩·건물" data-deal="매매" data-size="90평 이상" data-room="5룸 이상" data-park="3대 이상" data-py="312"><div class="card-img"><img src="./assets/prop-07.jpg" alt="청담동 빌딩 외관" width="640" height="446"><span class="badge">신규</span></div><div class="card-body"><div class="card-meta"><span>청담동</span><i></i><span>빌딩·건물</span><i></i><span>연 312평</span></div><h3>대로변 코너, 1층 전면 8m</h3><div class="card-price"><span class="locked">회원 공개</span><span>매매</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="성북동" data-type="아파트" data-deal="전세" data-size="40-60평" data-room="4룸" data-park="2대" data-py="43"><div class="card-img"><img src="./assets/prop-08.jpg" alt="성북동 아파트 거실" width="640" height="446"></div><div class="card-body"><div class="card-meta"><span>성북동</span><i></i><span>아파트</span><i></i><span>43평</span></div><h3>단지 안쪽 동, 남서향 4베이</h3><div class="card-price"><b>전세 21억</b><span>9월 입주</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="한남동" data-type="고급빌라" data-deal="매매" data-size="40-60평" data-room="4룸" data-park="2대" data-py="55"><div class="card-img"><img src="./assets/prop-09.jpg" alt="한남동 빌라 현관" width="640" height="446"><span class="badge">신규</span></div><div class="card-body"><div class="card-meta"><span>한남동</span><i></i><span>고급빌라</span><i></i><span>55평</span></div><h3>단지 가장 안쪽, 사생활이 지켜지는 동</h3><div class="card-price"><span class="locked">회원 공개</span><span>매매</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="청담동" data-type="아파트" data-deal="전세" data-size="40평 미만" data-room="3룸" data-park="1대" data-py="38"><div class="card-img"><img src="./assets/prop-10.jpg" alt="청담동 아파트 주방" width="640" height="446"></div><div class="card-body"><div class="card-meta"><span>청담동</span><i></i><span>아파트</span><i></i><span>38평</span></div><h3>리모델링 마친 남향 중층</h3><div class="card-price"><b>전세 18억</b><span>10월 입주</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="성북동" data-type="단독주택" data-deal="매매" data-size="60-90평" data-room="5룸 이상" data-park="3대 이상" data-py="72"><div class="card-img"><img src="./assets/prop-11.jpg" alt="성북동 단독주택 마당" width="640" height="446"></div><div class="card-body"><div class="card-meta"><span>성북동</span><i></i><span>단독주택</span><i></i><span>72평</span></div><h3>담장 높은 마당, 차 3대 주차</h3><div class="card-price"><b>매매 44억</b><span>협의 입주</span></div></div></a>
+        <a class="card" href="./listing.html" data-area="평창동" data-type="단독주택" data-deal="매매" data-size="90평 이상" data-room="5룸 이상" data-park="3대 이상" data-py="91"><div class="card-img"><img src="./assets/prop-12.jpg" alt="평창동 주택 계단실" width="640" height="446"></div><div class="card-body"><div class="card-meta"><span>평창동</span><i></i><span>단독주택</span><i></i><span>91평</span></div><h3>설계사무소가 지은 2015년 신축</h3><div class="card-price"><span class="locked">회원 공개</span><span>매매</span></div></div></a>
+      </div>
+      <div class="empty" id="empty" hidden>
+        <b>조건에 맞는 매물이 없습니다</b>
+        조건을 하나만 풀어 보시거나, 의뢰를 남겨 주시면 조건에 맞는 물건이 들어올 때 먼저 연락드립니다.
+      </div>
+      <div class="more-wrap" id="morewrap">
+        <a href="./inquiry.html" class="btn btn-line">원하는 조건으로 의뢰 남기기</a>
+        <div class="page-n">12 / 5 페이지</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <div class="mark">온채<small>ONCHAE ESTATE</small></div>
+        <p>부동산중개법인 온채 주식회사<br>서울특별시 용산구 한남대로 00길 00, 3층<br>대표 정하람 · 사업자등록번호 000-00-00000<br>중개등록번호 00000-0000-00000</p>
+      </div>
+      <div>
+        <h4>바로가기</h4>
+        <ul>
+          <li><a href="./listings.html">매물 찾기</a></li>
+          <li><a href="./index.html#membership">회원 안내</a></li>
+          <li><a href="./index.html#presale">분양 라인업</a></li>
+          <li><a href="./index.html#agents">담당 중개사</a></li>
+          <li><a href="./inquiry.html">의뢰하기</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>상담</h4>
+        <div class="ft-tel">02-0000-0000</div>
+        <ul style="margin-top:14px">
+          <li>평일 09:30 – 18:30</li>
+          <li>토요일 10:00 – 15:00 (예약제)</li>
+          <li>일요일 · 공휴일 휴무</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2026 ONCHAE ESTATE. All rights reserved.</span>
+      <ul>
+        <li><a href="./index.html#faq">개인정보처리방침</a></li>
+        <li><a href="./index.html#faq">이용약관</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ft-word en" aria-hidden="true">ONCHAE ESTATE</div>
+</footer>
+
+<div class="mnav" id="mnav" hidden>
+  <button class="mnav-close" type="button" aria-label="메뉴 닫기"></button>
+  <nav>
+    <a href="./listings.html">매물 찾기</a>
+    <a href="./index.html#membership">회원 안내</a>
+    <a href="./index.html#presale">분양</a>
+    <a href="./index.html#agents">중개사</a>
+    <a href="./inquiry.html">의뢰</a>
+  </nav>
+</div>
+
+<script>
+(function () {
+  var bar = document.getElementById('fbar');
+  var list = document.getElementById('list');
+  var cards = [].slice.call(list.querySelectorAll('.card'));
+  var cnt = document.getElementById('cnt');
+  var empty = document.getElementById('empty');
+  var morewrap = document.getElementById('morewrap');
+  var sort = document.getElementById('sort');
+
+  var apply = function () {
+    var want = {};
+    bar.querySelectorAll('select[data-k]').forEach(function (s) {
+      if (s.value) { want[s.getAttribute('data-k')] = s.value; }
+    });
+    var shown = 0;
+    cards.forEach(function (c) {
+      var ok = Object.keys(want).every(function (k) { return c.getAttribute('data-' + k) === want[k]; });
+      c.hidden = !ok;
+      if (ok) { shown++; }
+    });
+    cnt.textContent = shown;
+    empty.hidden = shown !== 0;
+    morewrap.hidden = shown === 0;
+  };
+
+  var order = function () {
+    var by = sort.value;
+    var live = cards.slice().sort(function (a, b) {
+      if (by === 'area') { return (+b.getAttribute('data-py')) - (+a.getAttribute('data-py')); }
+      return cards.indexOf(a) - cards.indexOf(b);
+    });
+    live.forEach(function (c) { list.appendChild(c); });
+  };
+
+  bar.addEventListener('submit', function (e) { e.preventDefault(); apply(); });
+  bar.addEventListener('change', function (e) {
+    if (e.target === sort) { order(); } else { apply(); }
+  });
+  bar.addEventListener('reset', function () { setTimeout(function () { order(); apply(); }, 0); });
+
+  // 모바일 메뉴
+  var mnav = document.getElementById('mnav');
+  var burger = document.querySelector('.burger');
+  var close = function () { mnav.hidden = true; document.body.style.overflow = ''; };
+  if (burger) { burger.addEventListener('click', function () { mnav.hidden = false; document.body.style.overflow = 'hidden'; }); }
+  mnav.querySelector('.mnav-close').addEventListener('click', close);
+  mnav.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+})();
+</script>
+</body>
+</html>
