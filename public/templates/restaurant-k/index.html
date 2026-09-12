@@ -251,9 +251,12 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .bz .arw svg{width:16px;height:16px;fill:none;stroke:var(--red);stroke-width:2}
 .bz .arw.pv{left:0}
 .bz .arw.nx{right:0}
-.bz .dots{margin-top:18px;display:flex;justify-content:center;gap:10px}
-.bz .dots button{width:9px;height:9px;border-radius:50%;background:rgba(173,0,0,.28)}
-.bz .dots button[aria-current="true"]{background:var(--red)}
+.bz .dots{margin-top:9px;display:flex;justify-content:center;gap:0}
+/* 보이는 점은 9px 그대로 두고 누르는 칸만 24x44 로 넓힌다 (폰에서 9x9 는 못 누른다) */
+.bz .dots button{width:24px;height:44px;display:grid;place-items:center;background:none}
+.bz .dots button::before{content:"";width:9px;height:9px;border-radius:50%;
+  background:rgba(173,0,0,.28);transition:background .2s var(--ease)}
+.bz .dots button[aria-current="true"]::before{background:var(--red)}
 
 /* ── 마무리 CTA (ref y8295 · 사진 밴드 위 크림 카드 · 제목 52/62.4 · 버튼 253x54 r80) ── */
 .cta{position:relative;min-height:800px;display:flex;align-items:center;justify-content:center;
@@ -379,7 +382,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 </div>
 
 <div class="shot">
-  <img src="./assets/hero.jpg" alt="" width="1392" height="520">
+  <img src="./assets/hero.jpg" alt="" width="1392" height="520" srcset="./assets/hero-sm.jpg 732w, ./assets/hero.jpg 1672w" sizes="(max-width:809px) 366px, 1440px">
   <span class="sticker ko" style="left:6%;top:64%;transform:rotate(-8deg)">뜨거울 때 드세요</span>
   <span class="sticker ko" style="right:8%;top:16%;transform:rotate(7deg)">매일 굽습니다</span>
   <div class="cr"><span class="ko">2018년부터</span><span class="ko">아래로 ↓</span></div>
@@ -418,7 +421,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   <span class="lab ko">저희가 하는 일</span>
   <h2 class="sr d2 ko">늘 뭔가 벌어지는 자리</h2>
   <section class="sblock rv">
-    <figure><img src="./assets/s-1.jpg" alt="" width="640" height="430" loading="lazy"></figure>
+    <figure><img src="./assets/s-1.jpg" alt="" width="640" height="430" loading="lazy" srcset="./assets/s-1-sm.jpg 716w, ./assets/s-1.jpg 1024w" sizes="(max-width:809px) 358px, 1024px"></figure>
     <div class="bd">
       <span class="no">01</span>
       <h3 class="sr d3 ko">다이닝</h3>
@@ -428,7 +431,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     </div>
   </section>
   <section class="sblock rv">
-    <figure><img src="./assets/s-2.jpg" alt="" width="640" height="430" loading="lazy"></figure>
+    <figure><img src="./assets/s-2.jpg" alt="" width="640" height="430" loading="lazy" srcset="./assets/s-2-sm.jpg 716w, ./assets/s-2.jpg 1024w" sizes="(max-width:809px) 358px, 1024px"></figure>
     <div class="bd">
       <span class="no">02</span>
       <h3 class="sr d3 ko">이벤트</h3>
@@ -438,7 +441,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     </div>
   </section>
   <section class="sblock rv">
-    <figure><img src="./assets/s-3.jpg" alt="" width="640" height="430" loading="lazy"></figure>
+    <figure><img src="./assets/s-3.jpg" alt="" width="640" height="430" loading="lazy" srcset="./assets/s-3-sm.jpg 716w, ./assets/s-3.jpg 1024w" sizes="(max-width:809px) 358px, 1024px"></figure>
     <div class="bd">
       <span class="no">03</span>
       <h3 class="sr d3 ko">클래스</h3>
@@ -496,10 +499,10 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
   </div>
   <div class="stage">
     <button class="arw pv" type="button" aria-label="이전"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7"/></svg></button>
-    <div class="strip">
+    <div class="strip" tabindex="0" role="group" aria-label="후기 목록, 좌우로 넘길 수 있습니다">
       <article class="bzcard" data-on="0"><figure><img src="./assets/bz-1.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">지현 님의 아침 여는 법</p></article>
       <article class="bzcard" data-on="0"><figure><img src="./assets/bz-2.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">수빈 님이 찾아낸 자리</p></article>
-      <article class="bzcard" data-on="1"><figure><img src="./assets/bz-3.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">민서 님은 매주 오십니다</p></article>
+      <article class="bzcard" data-on="1"><figure><img src="./assets/bz-3.jpg" alt="" width="270" height="480" srcset="./assets/bz-3-sm.jpg 428w, ./assets/bz-3.jpg 540w" sizes="(max-width:809px) 214px, 540px"></figure><p class="cap mn ko">민서 님은 매주 오십니다</p></article>
       <article class="bzcard" data-on="0"><figure><img src="./assets/bz-4.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">예린 님은 아이스만 드십니다</p></article>
       <article class="bzcard" data-on="0"><figure><img src="./assets/bz-5.jpg" alt="" width="270" height="480"></figure><p class="cap mn ko">주원·다은 님의 주말</p></article>
     </div>
@@ -515,7 +518,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 </section>
 
 <section class="cta">
-  <img class="bg" src="./assets/cta-room.jpg" alt="" width="1440" height="560">
+  <img class="bg" src="./assets/cta-room.jpg" alt="" width="1440" height="560" srcset="./assets/cta-room-sm.jpg 780w, ./assets/cta-room.jpg 1728w" sizes="(max-width:809px) 390px, 1440px">
   <div class="ctabox">
     <h2 class="sr ko">오셔서 드시고 가세요</h2>
     <p class="ko">문을 열고 들어오시면 그날 제일 맛있는 것부터 내어 드립니다.</p>

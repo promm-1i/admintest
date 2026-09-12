@@ -8,6 +8,7 @@
 <meta property="og:title" content="밀담 — 베이커리 · 브런치 카페 (프리미엄 디자인 D)">
 <meta property="og:image" content="../restaurant-i/og.jpg">
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="preload" as="image" href="../restaurant-i/assets/hero.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Londrina+Solid&family=Yellowtail&display=swap" rel="stylesheet">
@@ -77,6 +78,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 상단 바 ── */
 .top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .in a{display:inline-flex;align-items:center;min-height:26px;min-width:26px;justify-content:center}
 .top .in{max-width:1440px;margin:0 auto;padding:0 24px;height:52px;
   display:flex;align-items:center;justify-content:space-between}
 .top a,.top .lg{font-size:14px;line-height:14px;font-weight:700;letter-spacing:.5px;
@@ -157,6 +159,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 
 /* ── 갤러리 ── */
 .gal{margin-top:22px;display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scrollbar-width:none}
+.gal:focus-visible{outline:2px solid var(--orange);outline-offset:4px;border-radius:8px}
 .gal::-webkit-scrollbar{display:none}
 .gal figure{flex:0 0 auto;width:300px;height:220px;border-radius:6px;overflow:clip;background:var(--w)}
 .gal figure:first-child{border:1px solid var(--or);background:var(--bg)}
@@ -215,11 +218,15 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
 .ft .bar{max-width:1280px;margin:0 auto;padding:22px 40px;display:flex;
   justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;
   font-size:13px;line-height:18.85px;font-weight:600}
+/* 폰 터치 최소 24x24 (WCAG 2.5.8) — 보이는 글자는 그대로 두고 누르는 칸만 넓힌다 */
 .ft .bar nav{display:flex;gap:20px}
+.ft .bar nav a{display:inline-flex;align-items:center;min-height:24px;min-width:24px;
+  justify-content:center}
 .ft .bar .sns{display:flex;gap:8px}
 .ft .bar .sns span{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);
   display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700}
 .ft .strip{background:var(--or);color:var(--w);padding:22px 0 14px}
+.ft .strip .in a{display:inline-flex;align-items:center;min-height:26px}
 .ft .strip .in{max-width:1280px;margin:0 auto;padding:0 40px;
   display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
   font-size:12px;line-height:18px;font-weight:700;letter-spacing:.5px}
@@ -308,7 +315,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     <p class="hand ko sub">하루 내내!</p>
   </div>
   <div class="shot">
-    <img class="bg" src="../restaurant-i/assets/hero.jpg" alt="" width="1392" height="580">
+    <img fetchpriority="high" class="bg" src="../restaurant-i/assets/hero.jpg" alt="" width="1392" height="580" srcset="../restaurant-i/assets/hero-sm.jpg 740w, ../restaurant-i/assets/hero.jpg 1672w" sizes="(max-width:809px) 370px, 1440px">
     <span class="lgm ko">밀담</span>
     <div class="open"><b class="ko">영업중</b><span class="ko">연중무휴</span></div>
     <div class="cap">
@@ -373,7 +380,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     <h2 class="dp d2 ko">이런 자리에서</h2>
     <span class="hand ko">드시게 됩니다.</span>
   </div>
-  <div class="gal">
+  <div class="gal" tabindex="0" role="group" aria-label="가게 사진, 좌우로 넘길 수 있습니다">
     <figure><img src="../restaurant-i/assets/gal-1.jpg" alt="" width="230" height="170" loading="lazy"></figure>
     <figure><img src="../restaurant-i/assets/gal-2.jpg" alt="" width="230" height="170" loading="lazy"></figure>
     <figure><img src="../restaurant-i/assets/gal-3.jpg" alt="" width="230" height="170" loading="lazy"></figure>
@@ -388,7 +395,7 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
     <span class="hand ko">여기 있습니다.</span>
   </div>
   <section class="story">
-    <figure class="rv"><img src="../restaurant-i/assets/story.jpg" alt="" width="1200" height="620" loading="lazy"></figure>
+    <figure class="rv"><img src="../restaurant-i/assets/story.jpg" alt="" width="1200" height="620" loading="lazy" srcset="../restaurant-i/assets/story-sm.jpg 716w, ../restaurant-i/assets/story.jpg 1440w" sizes="(max-width:809px) 358px, 1440px"></figure>
     <p class="p18 ko rv">새벽 네 시에 반죽을 시작합니다. 그날 팔 만큼만 굽고, 남으면 다음 날로 넘기지 않습니다.</p>
   </section>
 
@@ -401,12 +408,12 @@ html.js .rv.on,html:not(.js) .rv{opacity:1;transform:none}
       <span class="hand ko">한 칸의 주방.</span>
     </div>
     <div class="board">
-      <div class="note n1"><figure><img src="../restaurant-i/assets/tm-1.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">민아</b><span class="ko">창업자 · 크리에이티브</span></div>
-      <div class="note n2"><figure><img src="../restaurant-i/assets/tm-2.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">도윤</b><span class="ko">헤드 바리스타</span></div>
-      <div class="note n3"><figure><img src="../restaurant-i/assets/tm-3.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">세라</b><span class="ko">주방 총괄</span></div>
-      <div class="note n4"><figure><img src="../restaurant-i/assets/tm-4.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">태민</b><span class="ko">조식 셰프</span></div>
-      <div class="note n5"><figure><img src="../restaurant-i/assets/tm-5.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">이솔</b><span class="ko">카페 매니저</span></div>
-      <div class="note n6"><figure><img src="../restaurant-i/assets/tm-6.jpg" alt="" width="218" height="250" loading="lazy"></figure><b class="ko">하윤</b><span class="ko">고객 응대 리드</span></div>
+      <div class="note n1"><figure><img src="../restaurant-i/assets/tm-1.jpg" alt="" width="218" height="250" loading="lazy" srcset="../restaurant-i/assets/tm-1-sm.jpg 240w, ../restaurant-i/assets/tm-1.jpg 433w" sizes="(max-width:809px) 120px, 433px"></figure><b class="ko">민아</b><span class="ko">창업자 · 크리에이티브</span></div>
+      <div class="note n2"><figure><img src="../restaurant-i/assets/tm-2.jpg" alt="" width="218" height="250" loading="lazy" srcset="../restaurant-i/assets/tm-2-sm.jpg 240w, ../restaurant-i/assets/tm-2.jpg 433w" sizes="(max-width:809px) 120px, 433px"></figure><b class="ko">도윤</b><span class="ko">헤드 바리스타</span></div>
+      <div class="note n3"><figure><img src="../restaurant-i/assets/tm-3.jpg" alt="" width="218" height="250" loading="lazy" srcset="../restaurant-i/assets/tm-3-sm.jpg 240w, ../restaurant-i/assets/tm-3.jpg 433w" sizes="(max-width:809px) 120px, 433px"></figure><b class="ko">세라</b><span class="ko">주방 총괄</span></div>
+      <div class="note n4"><figure><img src="../restaurant-i/assets/tm-4.jpg" alt="" width="218" height="250" loading="lazy" srcset="../restaurant-i/assets/tm-4-sm.jpg 240w, ../restaurant-i/assets/tm-4.jpg 433w" sizes="(max-width:809px) 120px, 433px"></figure><b class="ko">태민</b><span class="ko">조식 셰프</span></div>
+      <div class="note n5"><figure><img src="../restaurant-i/assets/tm-5.jpg" alt="" width="218" height="250" loading="lazy" srcset="../restaurant-i/assets/tm-5-sm.jpg 240w, ../restaurant-i/assets/tm-5.jpg 433w" sizes="(max-width:809px) 120px, 433px"></figure><b class="ko">이솔</b><span class="ko">카페 매니저</span></div>
+      <div class="note n6"><figure><img src="../restaurant-i/assets/tm-6.jpg" alt="" width="218" height="250" loading="lazy" srcset="../restaurant-i/assets/tm-6-sm.jpg 240w, ../restaurant-i/assets/tm-6.jpg 433w" sizes="(max-width:809px) 120px, 433px"></figure><b class="ko">하윤</b><span class="ko">고객 응대 리드</span></div>
       <p class="cap p15 ko">새벽에 일어나는 걸 즐기고, 반죽과 커피와 좋은 아침을 좋아하는 작은 팀입니다.</p>
     </div>
   </section>
