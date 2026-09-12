@@ -4922,14 +4922,16 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
 export function getPremiumCategories() {
   const items = getPremiumDesigns();
   const assigned = new Set(PREMIUM_CATEGORIES.flatMap((c) => c.industryKeys));
+  // 묶음 안에서 최근 것이 앞에 온다. SAMPLES 배열 순서는 중간에 끼워 넣은 항목 때문에
+  // 최신순이 아니어서 못 쓰고, 같은 업종 안에서는 designCode 번호가 곧 만든 순서다
+  // (ESTP-1003 이 1001 보다 나중). 그래서 코드 내림차순 = 최신순이 된다.
   const groups = PREMIUM_CATEGORIES.map((c) => ({
     key: c.key,
     label: c.label,
     desc: c.desc,
-    // 카드 이름이 "업종 A·B·C" 라 designCode 순으로 세워야 A→B→C 로 읽힌다
     items: items
       .filter((d) => d.sample.industryKey && c.industryKeys.includes(d.sample.industryKey))
-      .sort((x, y) => (x.sample.designCode ?? "").localeCompare(y.sample.designCode ?? "")),
+      .sort((x, y) => (y.sample.designCode ?? "").localeCompare(x.sample.designCode ?? "")),
   })).filter((g) => g.items.length > 0);
 
   const rest = items.filter((d) => !d.sample.industryKey || !assigned.has(d.sample.industryKey));
