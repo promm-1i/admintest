@@ -122,8 +122,16 @@ async function main() {
         });
         await page.waitForTimeout(900);
 
-        const html = await page.content();
+        // page.content() 는 Vite 가 넣어 준 <link rel=modulepreload> 까지 그대로 담는데,
+        // 그 href 가 프리렌더 서버 주소로 절대경로화돼 있다(http://localhost:4183/assets/...).
+        // 그대로 배포하면 방문자 브라우저가 공개 https 페이지에서 이 기기의 로컬 주소를
+        // 부르게 되고, 크롬이 "이 기기의 다른 앱 및 서비스에 액세스" 권한 창을 띄운다.
+        // 원점을 지워 상대경로로 되돌린다.
+        const html = (await page.content())
+          .replaceAll(`http://localhost:${PORT}/`, "/")
+          .replaceAll(`http://localhost:${PORT}`, "/");
         if (!/<title>.+<\/title>/.test(html)) throw new Error("제목이 비어 있다");
+        if (html.includes(`localhost:${PORT}`)) throw new Error("프리렌더 서버 주소가 남았다");
 
         const outDir = route === "/" ? dist : join(dist, route);
         mkdirSync(outDir, { recursive: true });
