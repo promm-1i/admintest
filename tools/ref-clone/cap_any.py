@@ -12,7 +12,9 @@ HIDE = """() => {
   const out = [];
   document.querySelectorAll('body *').forEach(e => {
     const p = getComputedStyle(e).position;
-    if (p === 'fixed' || p === 'sticky') { out.push(e); e.dataset._h = '1'; }
+    if (p !== 'fixed' && p !== 'sticky') return;
+    if (window.__sc && (e === window.__sc || e.contains(window.__sc))) return;  // 본문 통째로 사라진다
+    out.push(e); e.dataset._h = '1';
   });
   return out.length;
 }"""
@@ -24,12 +26,19 @@ with sync_playwright() as p:
     b = p.chromium.launch(channel='chrome')
     pg = b.new_page(viewport={'width': W, 'height': VH}, device_scale_factor=1)
     pg.goto(URL, wait_until='load'); pg.wait_for_timeout(3500)
-    h = pg.evaluate('document.documentElement.scrollHeight')
+    pg.evaluate("""()=>{let best=null,h=document.documentElement.scrollHeight;
+      for(const e of document.querySelectorAll('div,main,section,article')){
+        const c=getComputedStyle(e);
+        if((c.overflowY==='auto'||c.overflowY==='scroll')&&e.scrollHeight>h){best=e;h=e.scrollHeight;}}
+      window.__sc=best;}""")
+    h = pg.evaluate('()=> window.__sc ? window.__sc.scrollHeight : document.documentElement.scrollHeight')
     y = 0
     while y < h:
-        pg.evaluate(f'window.scrollTo(0,{y})'); pg.wait_for_timeout(220); y += VH
-    pg.evaluate('window.scrollTo(0,0)'); pg.wait_for_timeout(1200)
-    h = pg.evaluate('document.documentElement.scrollHeight')
+        pg.evaluate('(y)=>{ if(window.__sc) window.__sc.scrollTop=y; else window.scrollTo(0,y); }', y)
+        pg.wait_for_timeout(220); y += VH
+    pg.evaluate('()=>{ if(window.__sc) window.__sc.scrollTop=0; else window.scrollTo(0,0); }')
+    pg.wait_for_timeout(1200)
+    h = pg.evaluate('()=> window.__sc ? window.__sc.scrollHeight : document.documentElement.scrollHeight')
     pg.evaluate(HIDE)
 
     canvas = Image.new('RGB', (W, h), (255, 255, 255))
@@ -37,9 +46,10 @@ with sync_playwright() as p:
     first = True
     while y < h:
         pg.evaluate(TOGGLE, first)
-        pg.evaluate(f'window.scrollTo(0,{y})'); pg.wait_for_timeout(260)
+        pg.evaluate('(y)=>{ if(window.__sc) window.__sc.scrollTop=y; else window.scrollTo(0,y); }', y)
+        pg.wait_for_timeout(260)
         shot = Image.open(io.BytesIO(pg.screenshot()))
-        top = pg.evaluate('window.scrollY')
+        top = pg.evaluate('()=> window.__sc ? window.__sc.scrollTop : window.scrollY')
         canvas.paste(shot.crop((0, 0, W, min(VH, h - top))), (0, int(top)))
         y += VH
         first = False
