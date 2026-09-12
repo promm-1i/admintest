@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>차량 예약 — 한길렌터카</title>
+<meta name="description" content="단기 렌터카 차량을 지점·기간·차종으로 골라 보세요. 요금은 보험료를 포함한 하루 기준입니다.">
+<meta property="og:title" content="차량 예약 — 한길렌터카">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" type="image/svg+xml" href="./favicon.svg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+img,svg,video{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit;background:none;border:0}
+button{cursor:pointer}
+ul{list-style:none}
+body{word-break:keep-all;overflow-wrap:break-word;overflow-x:clip;-webkit-font-smoothing:antialiased}
+
+/* 레퍼런스 실측 토큰 — 상단바 1440x121 · 콘텐츠 1420 · 안쪽 1280
+   본문 16/22.4 · 메뉴 18/25.2 · Pretendard
+   강조색만 일부러 다르게 잡았다 (원본 빨강은 그 회사 상표색) */
+:root{--bg:rgb(255,255,255);--face:rgb(246,247,249);--dark:rgb(28,32,40);
+  --ink:rgb(21,21,21);--dim:rgb(100,106,116);--line:rgb(226,229,234);
+  --navy:rgb(23,48,92);--navy-d:rgb(15,33,66);--accent:rgb(185,90,28);  /* 흰 바탕 15~18px 라 4.5:1 넘도록 */
+  --accent-dk:rgb(232,150,86);  /* 어두운 푸터 위에서 쓰는 밝은 쪽 */
+  --ease:cubic-bezier(.44,0,.56,1)}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;
+  font-size:16px;line-height:22.4px;letter-spacing:-.01em}
+.wrap{max-width:1420px;margin:0 auto;padding:0 20px}
+.narrow{max-width:1080px;margin:0 auto;padding:0 20px}
+.rv{opacity:1}
+html.js .rv{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+html.js .rv.on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{transition:none}}
+
+.top{height:121px;border-bottom:1px solid var(--line);background:var(--bg);position:relative;z-index:20}
+.top .r1{height:44px;border-bottom:1px solid var(--line)}
+.top .r1 .in{max-width:1420px;margin:0 auto;padding:0 20px;height:44px;display:flex;align-items:center;
+  justify-content:flex-end;gap:16px;font-size:13px;line-height:20px;color:var(--dim)}
+.top .r1 a{min-height:44px;display:inline-flex;align-items:center}
+.top .r1 a:hover{color:var(--navy)}
+.top .r2{height:76px}
+.top .r2 .in{max-width:1420px;margin:0 auto;padding:0 20px;height:76px;display:flex;align-items:center;gap:36px}
+.lg{display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-right:8px;
+  font-size:22px;line-height:28px;font-weight:800;letter-spacing:-.03em;color:var(--navy)}
+.lg i{width:20px;height:20px;border-radius:4px;background:var(--accent);flex:0 0 auto}
+.top nav{display:flex;gap:28px}
+.top nav a{min-height:44px;display:inline-flex;align-items:center;font-size:18px;line-height:25.2px;
+  font-weight:700;letter-spacing:-.02em;transition:color .2s var(--ease)}
+.top nav a:hover,.top nav a[aria-current="page"]{color:var(--accent)}
+.top .ic{margin-left:auto;display:flex;gap:6px}
+.top .ic a{width:44px;height:44px;display:grid;place-items:center;border-radius:8px;
+  transition:background .2s var(--ease)}
+.top .ic a:hover{background:var(--face)}
+.top .ic svg{width:19px;height:19px;fill:none;stroke:var(--ink);stroke-width:1.7}
+
+.ph{padding:48px 0 30px;border-bottom:1px solid var(--line)}
+.ph h1{font-size:34px;line-height:44px;font-weight:800;letter-spacing:-.03em}
+.ph p{margin-top:8px;font-size:17px;line-height:26px;color:var(--dim)}
+.crumb{font-size:14px;line-height:22px;color:var(--dim);margin-bottom:12px}
+.crumb a:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 28px;
+  border-radius:8px;background:var(--navy);color:#fff;font-size:17px;font-weight:700;
+  transition:background .2s var(--ease)}
+.btn:hover{background:var(--navy-d)}
+.btn.o{background:none;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+.btn.o:hover{background:var(--face)}
+
+.ft{margin-top:100px;background:var(--dark);color:rgba(255,255,255,.72)}
+.ft .in{max-width:1420px;margin:0 auto;padding:44px 20px 48px}
+.ft .links{display:flex;flex-wrap:wrap;gap:0 20px;padding-bottom:22px;
+  border-bottom:1px solid rgba(255,255,255,.16)}
+.ft .links a{min-height:44px;display:inline-flex;align-items:center;font-size:14px;color:#fff}
+.ft .links a:hover{color:var(--accent-dk)}
+.ft .grid{margin-top:26px;display:grid;grid-template-columns:1fr 300px;gap:40px}
+.ft .lg{color:#fff}
+.ft .legal{margin-top:14px;font-size:13px;line-height:22px}
+.ft .cs b{display:block;font-size:14px;line-height:22px;color:#fff}
+.ft .cs .no{margin-top:4px;font-size:30px;line-height:40px;font-weight:800;color:var(--accent-dk);letter-spacing:-.02em}
+.ft .cs p{margin-top:4px;font-size:13px;line-height:21px}
+.ft .cp{margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.16);font-size:13px}
+
+@media (max-width:1200px){.ft .grid{grid-template-columns:1fr}}
+@media (max-width:809px){
+  .top{height:auto}.top .r2{height:auto}
+  .top .r2 .in{height:auto;flex-wrap:wrap;gap:12px;padding:12px 16px}
+  .top nav{order:3;width:100%;gap:16px;overflow-x:auto}
+  .top nav a{white-space:nowrap;font-size:16px}
+  .ph{padding:30px 0 20px}.ph h1{font-size:24px;line-height:34px}
+  .ft{margin-top:56px}
+}
+.bar{margin-top:26px;padding:20px;border-radius:12px;background:var(--face);
+  display:grid;grid-template-columns:repeat(4,1fr) auto;gap:12px;align-items:end}
+.bar label{display:block}
+.bar label>span{display:block;font-size:13px;line-height:20px;font-weight:700;color:var(--dim)}
+.bar .fld{margin-top:6px;height:50px;border-radius:8px;background:var(--bg);
+  box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;padding:0 14px}
+.bar .fld:focus-within{box-shadow:inset 0 0 0 2px var(--navy)}
+.bar select{flex:1;min-width:0;height:48px;cursor:pointer}
+.bar .go{min-height:50px;padding:0 28px;border-radius:8px;background:var(--navy);color:#fff;font-weight:700}
+.bar .go:hover{background:var(--navy-d)}
+.filt{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.filt button{min-height:40px;padding:0 16px;border-radius:20px;font-size:14px;font-weight:600;
+  box-shadow:inset 0 0 0 1px var(--line);transition:background .2s var(--ease),color .2s var(--ease)}
+.filt button:hover{background:var(--face)}
+.filt button[aria-pressed="true"]{background:var(--navy);color:#fff;box-shadow:none}
+.cnt{margin-top:18px;font-size:15px;color:var(--dim)}
+.cars{margin-top:14px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cc{display:block;border-radius:12px;overflow:clip;box-shadow:inset 0 0 0 1px var(--line);
+  transition:transform .3s var(--ease),box-shadow .2s var(--ease)}
+.cc:hover{transform:translateY(-3px);box-shadow:inset 0 0 0 1px var(--navy)}
+.cc figure{height:190px;background:var(--face);overflow:clip}
+.cc img{width:100%;height:100%;object-fit:cover}
+.cc .tx{padding:18px 20px 22px}
+.cc b{display:block;font-size:19px;line-height:27px;font-weight:700;letter-spacing:-.02em}
+.cc .tag{margin-top:6px;display:flex;flex-wrap:wrap;gap:6px}
+.cc .tag span{padding:2px 8px;border-radius:4px;background:var(--face);
+  font-size:12px;line-height:18px;color:var(--dim)}
+.cc .pr{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);
+  display:flex;align-items:baseline;justify-content:space-between}
+.cc .pr b{font-size:22px;line-height:30px}
+.cc .pr small{font-size:13px;color:var(--dim);font-weight:400}
+.none{grid-column:1/-1;padding:56px 0;text-align:center;color:var(--dim)}
+@media (max-width:1100px){.bar{grid-template-columns:repeat(2,1fr)}.bar .go{grid-column:1/-1}
+  .cars{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:809px){.bar{grid-template-columns:1fr}.cars{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="r1"><div class="in">
+    <a class="ko" href="reserve.html">예약 확인</a><a class="ko" href="guide.html">고객센터</a>
+    <a class="ko" href="reserve.html">로그인</a><a class="ko" href="reserve.html">회원가입</a>
+  </div></div>
+  <div class="r2"><div class="in">
+    <a class="lg ko" href="index.html"><i></i>한길렌터카</a>
+    <nav aria-label="주요 메뉴">
+      <a class="ko" href="products.html">단기 렌터카</a>
+      <a class="ko" href="products.html">장기 렌터카</a>
+      <a class="ko" href="products.html">법인 렌터카</a>
+      <a class="ko" href="estimate.html">견적 내기</a>
+      <a class="ko" href="guide.html">이용 안내</a>
+    </nav>
+    <div class="ic">
+      <a href="guide.html" aria-label="지점 찾기"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 1 0-14 0c0 4.9 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></a>
+      <a href="reserve.html" aria-label="내 예약"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c.6-4 3.8-6 7.5-6s6.9 2 7.5 6"/></svg></a>
+    </div>
+  </div></div>
+</header>
+
+<main class="wrap">
+  <div class="ph">
+    <p class="crumb ko"><a href="index.html">홈</a> › 차량 예약</p>
+    <h1 class="ko">차량 예약</h1>
+    <p class="ko">보험료가 포함된 하루 기준 요금입니다. 주말·성수기는 달라집니다.</p>
+  </div>
+  <form class="bar" onsubmit="return false">
+    <label><span class="ko">빌리는 곳</span><div class="fld"><select class="ko" aria-label="빌리는 곳"><option>서울역 지점</option><option>김포공항 지점</option><option>인천공항 1터미널</option><option>강남 지점</option><option>부산역 지점</option><option>제주공항 지점</option></select></div></label>
+    <label><span class="ko">받는 날</span><div class="fld"><select class="ko" aria-label="받는 날"><option>9월 13일 (토)</option><option>9월 14일 (일)</option><option>9월 15일 (월)</option></select></div></label>
+    <label><span class="ko">반납일</span><div class="fld"><select class="ko" aria-label="반납일"><option>9월 15일 (월)</option><option>9월 16일 (화)</option><option>9월 20일 (토)</option></select></div></label>
+    <label><span class="ko">받는 시각</span><div class="fld"><select class="ko" aria-label="받는 시각"><option>09:00</option><option>10:00</option><option>13:00</option><option>17:00</option></select></div></label>
+    <button class="go ko" type="submit">다시 검색</button>
+  </form>
+  <div class="filt" role="group" aria-label="차종 걸러 보기">
+    <button type="button" class="ko" data-f="all" aria-pressed="true">전체</button>
+    <button type="button" class="ko" data-f="small" aria-pressed="false">경차·준중형</button>
+    <button type="button" class="ko" data-f="mid" aria-pressed="false">중형</button>
+    <button type="button" class="ko" data-f="big" aria-pressed="false">준대형 이상</button>
+    <button type="button" class="ko" data-f="suv" aria-pressed="false">SUV</button>
+    <button type="button" class="ko" data-f="van" aria-pressed="false">승합</button>
+    <button type="button" class="ko" data-f="ev" aria-pressed="false">전기차</button>
+  </div>
+  <p class="cnt ko">모두 <b id="cn">12</b>대</p>
+  <div class="cars" id="cars">
+    <a class="cc rv" href="products.html" data-kind="small" data-ev="0">
+      <figure><img src="./assets/fl-1.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">아반떼</b>
+        <span class="tag"><span class="ko">준중형</span><span class="ko">5인승</span><span class="ko">가솔린</span></span>
+        <span class="pr"><b class="ko">62,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="mid" data-ev="0">
+      <figure><img src="./assets/fl-2.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">K5</b>
+        <span class="tag"><span class="ko">중형</span><span class="ko">5인승</span><span class="ko">가솔린</span></span>
+        <span class="pr"><b class="ko">78,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="mid" data-ev="0">
+      <figure><img src="./assets/fl-3.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">쏘나타</b>
+        <span class="tag"><span class="ko">중형</span><span class="ko">5인승</span><span class="ko">LPG</span></span>
+        <span class="pr"><b class="ko">74,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="big" data-ev="0">
+      <figure><img src="./assets/fl-4.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">그랜저</b>
+        <span class="tag"><span class="ko">준대형</span><span class="ko">5인승</span><span class="ko">가솔린</span></span>
+        <span class="pr"><b class="ko">118,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="suv" data-ev="0">
+      <figure><img src="./assets/fl-5.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">스포티지</b>
+        <span class="tag"><span class="ko">중형 SUV</span><span class="ko">5인승</span><span class="ko">디젤</span></span>
+        <span class="pr"><b class="ko">96,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="suv" data-ev="0">
+      <figure><img src="./assets/fl-6.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">쏘렌토</b>
+        <span class="tag"><span class="ko">대형 SUV</span><span class="ko">7인승</span><span class="ko">디젤</span></span>
+        <span class="pr"><b class="ko">124,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="van" data-ev="0">
+      <figure><img src="./assets/fl-7.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">카니발</b>
+        <span class="tag"><span class="ko">승합</span><span class="ko">9인승</span><span class="ko">디젤</span></span>
+        <span class="pr"><b class="ko">138,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="van" data-ev="0">
+      <figure><img src="./assets/fl-8.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">스타리아</b>
+        <span class="tag"><span class="ko">승합</span><span class="ko">11인승</span><span class="ko">디젤</span></span>
+        <span class="pr"><b class="ko">146,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="suv" data-ev="1">
+      <figure><img src="./assets/fl-9.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">아이오닉 5</b>
+        <span class="tag"><span class="ko">준중형 SUV</span><span class="ko">5인승</span><span class="ko">전기</span></span>
+        <span class="pr"><b class="ko">104,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="suv" data-ev="1">
+      <figure><img src="./assets/fl-10.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">EV6</b>
+        <span class="tag"><span class="ko">중형 SUV</span><span class="ko">5인승</span><span class="ko">전기</span></span>
+        <span class="pr"><b class="ko">112,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="small" data-ev="0">
+      <figure><img src="./assets/fl-11.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">레이</b>
+        <span class="tag"><span class="ko">경차</span><span class="ko">4인승</span><span class="ko">가솔린</span></span>
+        <span class="pr"><b class="ko">44,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <a class="cc rv" href="products.html" data-kind="big" data-ev="0">
+      <figure><img src="./assets/fl-12.jpg" alt="" width="400" height="190" loading="lazy"></figure>
+      <div class="tx"><b class="ko">G80</b>
+        <span class="tag"><span class="ko">대형</span><span class="ko">5인승</span><span class="ko">가솔린</span></span>
+        <span class="pr"><b class="ko">186,000원</b><small class="ko">/ 1일</small></span>
+      </div>
+    </a>
+    <p class="none ko" id="none" hidden>조건에 맞는 차가 없습니다. 다른 차종으로 찾아보세요.</p>
+  </div>
+</main>
+
+<script>
+(function(){
+  const btns=[...document.querySelectorAll('.filt button')];
+  const cars=[...document.querySelectorAll('.cc')];
+  const cn=document.getElementById('cn'), none=document.getElementById('none');
+  function apply(f){
+    let n=0;
+    cars.forEach(el=>{
+      const ok = f==='all' ? true : f==='ev' ? el.dataset.ev==='1' : el.dataset.kind===f;
+      el.hidden=!ok; if(ok) n++;
+    });
+    cn.textContent=n; none.hidden=n>0;
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>{
+    btns.forEach(o=>o.setAttribute('aria-pressed', o===b?'true':'false'));
+    apply(b.dataset.f);
+  }));
+})();
+</script>
+<footer class="ft">
+  <div class="in">
+    <nav class="links" aria-label="회사 정보">
+      <a class="ko" href="guide.html">회사 소개</a><a class="ko" href="guide.html">채용</a>
+      <a class="ko" href="guide.html">이용약관</a><a class="ko" href="guide.html">개인정보 처리방침</a>
+      <a class="ko" href="guide.html">위치기반 서비스 약관</a><a class="ko" href="notice.html">공지사항</a>
+      <a class="ko" href="guide.html">고객센터</a>
+    </nav>
+    <div class="grid">
+      <div>
+        <span class="lg ko"><i></i>한길렌터카</span>
+        <p class="legal ko">상호 : 한길렌터카 (민트클) &nbsp;|&nbsp; 대표 : 진수<br>
+          사업자등록번호 : 266-07-03678 &nbsp;|&nbsp; 통신판매업신고 : 제2026-서울강남-00480호<br>
+          주소 : 서울특별시 강남구 한길로 12, 5층 (06072) &nbsp;|&nbsp; 이메일 : 6gsmake@gmail.com</p>
+      </div>
+      <div class="cs">
+        <b class="ko">고객센터</b>
+        <p class="no">010-4894-4905</p>
+        <p class="ko">평일 09:00 – 18:00 (점심 12:00 – 13:00)<br>주말·공휴일 휴무 · 사고 접수는 24시간</p>
+      </div>
+    </div>
+    <p class="cp ko">© 2026 한길렌터카. 이 페이지는 디자인 예시입니다.</p>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

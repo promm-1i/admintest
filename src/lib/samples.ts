@@ -581,6 +581,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "rentcar-g-template",
+    industry: "렌터카 · 장기 · 법인 홈페이지",
+    title: "종합 렌터카 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 렌터카 · 장기 · 법인 · 견적",
+    purpose:
+      "단기·장기·법인 렌터카를 한 사이트에서 다루는 구성입니다. 배너 슬라이드 옆에 예약 위젯이 붙는 히어로로 시작해 서비스 바로가기 여덟 칸, 매거진 네 편, 공지사항까지 담았습니다. 차량 예약 화면은 차종으로 거르는 기능이 실제로 동작하고, 견적 화면은 고르는 대로 월 납입금이 바로 바뀝니다.",
+    features: ["배너 슬라이드 + 예약 위젯 히어로", "차량 예약 12대 · 차종/전기차 거르기 동작", "월 납입금이 즉시 바뀌는 견적 계산", "상품 비교표 · 이용 안내 6장 · 공지"],
+    idealFor: "렌터카 회사, 장기렌터카 대리점, 법인 차량 관리, 리스·중고차 업체",
+    image: "/thumbs/rentcar-g.jpg",
+    liveUrl: "/templates/rentcar-g/",
+    industryKey: "rentcar",
+    premiumLabel: "렌터카 B",
+    designCode: "RENP-1002",
+    premium: true,
+  },
+  {
     slug: "rentcar-f-template",
     industry: "렌터카 · 카셰어링 홈페이지",
     title: "카셰어링 홈페이지 (프리미엄 디자인 A)",
