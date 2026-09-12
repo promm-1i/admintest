@@ -61,8 +61,11 @@ body{background:var(--bg);color:var(--ink);
 .top .r2 a:hover{color:var(--ink)}
 .top .r2 a[aria-current="true"]{font-weight:700;color:var(--body);border-bottom-color:var(--brick)}
 
-/* ── 본문 두 칸 (ref 지도 1040 + 패널 400, 높이 771) ── */
-.stage{display:grid;grid-template-columns:1040px 400px;height:771px}
+/* ── 본문 두 칸 — ref 는 지도가 늘어나고 패널만 400 고정
+   (1440 → 지도 1040 / 1920 → 지도 1520). 높이는 뷰포트에서 상단바 129 를 뺀 값 ── */
+.stage{display:grid;grid-template-columns:1fr 400px;height:calc(100vh - 129px);min-height:560px}
+/* 그리드 자식의 기본 min-height:auto 가 목록 내용만큼 칸을 늘려 버린다 — 반드시 0 으로 */
+.stage>*{min-height:0}
 
 /* 지도 */
 .map{position:relative;background:var(--map);overflow:clip}

@@ -72,7 +72,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/restaurant-j.jpg",
     liveUrl: "/templates/restaurant-j/",
     industryKey: "restaurant",
-    premiumLabel: "말차 바 (초록·핑크)",
+    premiumLabel: "말차 바",
     designCode: "RESP-1006",
     premium: true,
   },
@@ -89,7 +89,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/restaurant-k.jpg",
     liveUrl: "/templates/restaurant-k/",
     industryKey: "restaurant",
-    premiumLabel: "브런치 · 다이닝",
+    premiumLabel: "브런치 다이닝",
     designCode: "RESP-1007",
     premium: true,
   },
@@ -106,7 +106,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/restaurant-l.jpg",
     liveUrl: "/templates/restaurant-l/",
     industryKey: "restaurant",
-    premiumLabel: "카페 (원두 · 그린)",
+    premiumLabel: "카페 원두",
     designCode: "RESP-1008",
     premium: true,
   },
@@ -123,7 +123,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/restaurant-h.jpg",
     liveUrl: "/templates/restaurant-h/",
     industryKey: "restaurant",
-    premiumLabel: "말차 카페 (하늘 톤)",
+    premiumLabel: "말차 카페",
     designCode: "RESP-1004",
     premium: true,
   },
@@ -140,7 +140,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/restaurant-i.jpg",
     liveUrl: "/templates/restaurant-i/",
     industryKey: "restaurant",
-    premiumLabel: "베이커리 · 브런치",
+    premiumLabel: "베이커리",
     designCode: "RESP-1005",
     premium: true,
   },
@@ -157,7 +157,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/restaurant-g.jpg",
     liveUrl: "/templates/restaurant-g/",
     industryKey: "restaurant",
-    premiumLabel: "카페 (크림 메뉴판)",
+    premiumLabel: "카페 크림",
     designCode: "RESP-1003",
     premium: true,
   },
@@ -174,6 +174,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/agency-a.jpg",
     liveUrl: "/templates/agency-a/",
     industryKey: "agency",
+    premiumLabel: "에이전시",
     designCode: "AGEP-1001",
     premium: true,
   },
@@ -190,8 +191,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/restaurant-a.jpg",
     liveUrl: "/templates/restaurant-a/",
     industryKey: "restaurant",
+    premiumLabel: "카페 컬러 팝",
     designCode: "RESP-1001",
-    premiumLabel: "카페 (컬러 팝)",
     premium: true,
   },
   {
@@ -207,6 +208,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/clinic-a.jpg",
     liveUrl: "/templates/clinic-a/",
     industryKey: "hospital",
+    premiumLabel: "재활 · 한의원",
     designCode: "HOSP-1002",
     premium: true,
   },
@@ -223,6 +225,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/photo-a.jpg",
     liveUrl: "/templates/photo-a/",
     industryKey: "photo",
+    premiumLabel: "사진 스튜디오",
     designCode: "PHOP-1001",
     premium: true,
   },
@@ -239,6 +242,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/moving-a.jpg",
     liveUrl: "/templates/moving-a/",
     industryKey: "moving",
+    premiumLabel: "이사 · 설비",
     designCode: "MOVP-1001",
     premium: true,
   },
@@ -255,8 +259,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/restaurant-f.jpg",
     liveUrl: "/templates/restaurant-f/",
     industryKey: "restaurant",
+    premiumLabel: "한식 파인다이닝",
     designCode: "RESP-1002",
-    premiumLabel: "한식 코스 · 파인다이닝",
     premium: true,
   },
   {
@@ -272,6 +276,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/study-a.jpg",
     liveUrl: "/templates/study-a/",
     industryKey: "study",
+    premiumLabel: "코딩 부트캠프",
     designCode: "STUP-1001",
     premium: true,
   },
@@ -288,6 +293,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/academy-f.jpg",
     liveUrl: "/templates/academy-f/",
     industryKey: "academy",
+    premiumLabel: "입시 · 보습학원",
     designCode: "ACAP-1002",
     premium: true,
   },
@@ -304,6 +310,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/academy-a.jpg",
     liveUrl: "/templates/academy-a/",
     industryKey: "academy",
+    premiumLabel: "온라인 강의",
     designCode: "ACAP-1001",
     premium: true,
   },
@@ -320,8 +327,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/kids-f.jpg",
     liveUrl: "/templates/kids-f/",
     industryKey: "kids",
+    premiumLabel: "유치원 파스텔",
     designCode: "KIDP-1002",
-    premiumLabel: "유치원 (크림 파스텔)",
     premium: true,
   },
   {
@@ -337,8 +344,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/kids-a.jpg",
     liveUrl: "/templates/kids-a/",
     industryKey: "kids",
+    premiumLabel: "유치원 컬러",
     designCode: "KIDP-1001",
-    premiumLabel: "유치원 (컬러 팝)",
     premium: true,
   },
   {
@@ -354,6 +361,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/craft-a.jpg",
     liveUrl: "/templates/craft-a/",
     industryKey: "craft",
+    premiumLabel: "공방 클래스",
     designCode: "CRAP-1001",
     premium: true,
   },
@@ -370,6 +378,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/beauty-a.jpg",
     liveUrl: "/templates/beauty-a/",
     industryKey: "beauty",
+    premiumLabel: "미용실",
     designCode: "BEAP-1001",
     premium: true,
   },
@@ -386,6 +395,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/law-a.jpg",
     liveUrl: "/templates/law-a/",
     industryKey: "law",
+    premiumLabel: "법무법인",
     designCode: "LAWP-1001",
     premium: true,
   },
@@ -402,8 +412,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/hotel-b.jpg",
     liveUrl: "/templates/hotel-b/",
     industryKey: "stay",
+    premiumLabel: "호텔 클래식",
     designCode: "STAP-1002",
-    premiumLabel: "호텔 · 리조트 (클래식)",
     premium: true,
   },
   {
@@ -419,8 +429,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/hotel-c.jpg",
     liveUrl: "/templates/hotel-c/",
     industryKey: "stay",
+    premiumLabel: "부티크 호텔",
     designCode: "STAP-1003",
-    premiumLabel: "부티크 호텔 · 다이닝",
     premium: true,
   },
   {
@@ -436,8 +446,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/hotel-d.jpg",
     liveUrl: "/templates/hotel-d/",
     industryKey: "stay",
+    premiumLabel: "산장 독채",
     designCode: "STAP-1004",
-    premiumLabel: "산장 · 독채 리조트",
     premium: true,
   },
   {
@@ -453,8 +463,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/interior-f.jpg",
     liveUrl: "/templates/interior-f/",
     industryKey: "interior",
+    premiumLabel: "리모델링 시공",
     designCode: "INTP-1002",
-    premiumLabel: "리모델링 · 시공",
     premium: true,
   },
   {
@@ -470,8 +480,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/interior-a.jpg",
     liveUrl: "/templates/interior-a/",
     industryKey: "interior",
+    premiumLabel: "건축 인테리어",
     designCode: "INTP-1001",
-    premiumLabel: "건축 · 인테리어 스튜디오",
     premium: true,
   },
   {
@@ -492,6 +502,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/artist-a.jpg",
     liveUrl: "/templates/artist-a/",
     industryKey: "artist",
+    premiumLabel: "작가 개인전",
     designCode: "ARTP-1001",
     caseStudy: {
       name: "JINA JEON 전지나",
@@ -514,8 +525,8 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/hotel-a.jpg",
     liveUrl: "/templates/hotel-a/",
     industryKey: "stay",
+    premiumLabel: "호텔 모던",
     designCode: "STAP-1001",
-    premiumLabel: "호텔 · 리조트 (모던)",
     premium: true,
   },
   {
@@ -531,6 +542,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/dental-a.jpg",
     liveUrl: "/templates/dental-a/",
     industryKey: "hospital",
+    premiumLabel: "치과",
     designCode: "HOSP-1001",
     premium: true,
   },
@@ -547,6 +559,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/fitness-a.jpg",
     liveUrl: "/templates/fitness-a/",
     industryKey: "fitness",
+    premiumLabel: "헬스장 · PT",
     designCode: "FITP-1001",
     premium: true,
   },
@@ -563,6 +576,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/estate-a.jpg",
     liveUrl: "/templates/estate-a/",
     industryKey: "estate",
+    premiumLabel: "부동산 중개",
     designCode: "ESTP-1001",
     premium: true,
   },
@@ -579,8 +593,25 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/estate-f.jpg",
     liveUrl: "/templates/estate-f/",
     industryKey: "estate",
-    premiumLabel: "매물 플랫폼 (지도 · 벽돌)",
+    premiumLabel: "부동산 매물 지도",
     designCode: "ESTP-1002",
+    premium: true,
+  },
+  {
+    slug: "estate-g-template",
+    industry: "부동산 중개법인 · 회원제 매물 홈페이지",
+    title: "회원제 부동산 중개법인 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 부동산 · 회원제 · 매물",
+    purpose:
+      "영상이 넘어가는 히어로와 네 칸 조건 검색, 금액을 회원에게만 여는 매물 카드, 가입부터 담당 배정까지 3단계 회원 안내, 분양 라인업 6개, 지역 전담 중개사 프로필, 매수·임차·촬영 의뢰 3종, FAQ 아코디언, 대형 워드마크 푸터로 구성한 부동산 프리미엄 원페이지입니다. 공개 매물과 비공개 매물을 한 화면에서 나눠 보여 주는 구조라, 금액을 함부로 노출하지 않는 중개법인에 맞습니다.",
+    features: ["영상 히어로 슬라이드 · 4칸 조건 검색", "금액 비공개 매물 카드 (회원 공개 배지)", "회원 안내 3단계 · 지역 전담 중개사 프로필", "의뢰 3종 · FAQ 아코디언 · 워드마크 푸터"],
+    idealFor: "부동산 중개법인, 고급 주택 · 빌딩 전문 중개사무소, 비공개 매물을 다루는 자산관리 회사, 분양 대행사",
+    image: "/thumbs/estate-g.jpg",
+    liveUrl: "/templates/estate-g/",
+    industryKey: "estate",
+    premiumLabel: "부동산 회원제",
+    designCode: "ESTP-1003",
     premium: true,
   },
   {
@@ -596,6 +627,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/shop-a.jpg",
     liveUrl: "/templates/shop-a/",
     industryKey: "shop",
+    premiumLabel: "쇼핑몰",
     designCode: "SHPP-1001",
     premium: true,
   },
@@ -612,6 +644,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/perfume-a.jpg",
     liveUrl: "/templates/perfume-a/",
     industryKey: "perfume",
+    premiumLabel: "향수 브랜드",
     designCode: "PERP-1001",
     premium: true,
   },
@@ -628,6 +661,7 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/video-a.jpg",
     liveUrl: "/templates/video-a/",
     industryKey: "video",
+    premiumLabel: "영상 편집",
     designCode: "VIDP-1001",
     premium: true,
   },
@@ -4828,6 +4862,14 @@ export function getPremiumDesigns() {
 }
 
 /**
+ * 프리미엄 카드 이름은 "카테고리 (구분)" 한 가지 꼴로만 쓴다.
+ * premiumLabel 에는 구분만 적고 카테고리 이름은 여기서 붙인다 —
+ * 형식을 바꾸려면 이 한 줄만 고치면 전부 따라온다.
+ */
+const premiumCardLabel = (categoryLabel: string, itemLabel: string) =>
+  `${categoryLabel} (${itemLabel})`;
+
+/**
  * 프리미엄 디자인 카테고리 — 업종을 "무엇을 하는 사이트인가"로 묶는다.
  * 헤더 플라이아웃(홈페이지 템플릿 → 프리미엄 디자인)과 /web-solutions 진열이 이 분류를 함께 쓴다.
  * 새 시안을 추가할 때 industryKey를 아래 배열에 넣으면 되고, 넣지 않으면 "기타"로 모인다.
@@ -4879,7 +4921,9 @@ export function getPremiumCategories() {
     key: c.key,
     label: c.label,
     desc: c.desc,
-    items: items.filter((d) => d.sample.industryKey && c.industryKeys.includes(d.sample.industryKey)),
+    items: items
+      .filter((d) => d.sample.industryKey && c.industryKeys.includes(d.sample.industryKey))
+      .map((d) => ({ ...d, label: premiumCardLabel(c.label, d.label) })),
   })).filter((g) => g.items.length > 0);
 
   const rest = items.filter((d) => !d.sample.industryKey || !assigned.has(d.sample.industryKey));
