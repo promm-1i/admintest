@@ -9,6 +9,7 @@
 |---|---|
 | `extract_spec.py <소스.html> <outdir>` | 저장한 소스에서 캡처·섹션 구성표·슬롯·토큰·애니메이션·플레이스홀더를 한 번에 뽑는다 |
 | `capture_ref.py <url> <out.png>` | 라이브 전체 페이지 캡처 (소스 없이 URL 만 있을 때) |
+| `crawl_ref.py <url> <outdir> [--mobile] [--login --prefix /admin]` | 사이트를 페이지 틀별로 통째로 받는다 — 원본·렌더 HTML · 캡처 · geo TSV · CSS/JS (아래 "통째로 받아야 할 때") |
 | `audit.py <anchors.json>` | 레이아웃 박스(컨테이너·히어로·h2·버튼·카드 외곽·섹션 간격) 실측 |
 | `probe.py <ref-url> <impl> targets.json` | 컴포넌트 안쪽 — 배경·보더·라운드·패딩·그림자·backdrop·텍스트별 글꼴/색·SVG/IMG·블롭·애니메이션 |
 | `measure2.py <config.json>` | 앵커별 레퍼런스↔결과물 대조표 (`Δy·Δx·Δw·Δh·글꼴·글자색`), `sel:<CSS선택자>` 앵커 지원 |
@@ -83,6 +84,19 @@ Framer 덤프는 CSS 가 인라인이라 그대로 렌더된다. Webflow/Wix 는
 - **섹션 간격은 섹션마다 다르다.** 티커→h2 가 64/64/80/80/100/100/164/100 처럼 제각각이니 "전역 70" 같은 값을 쓰지 말고 섹션별로 실측해 박는다. 히어로 안 요소는 `.wrap` 기준 top 이므로 페이지 y 에서 헤더 높이(85)를 뺀다 — 이걸 안 빼서 문단·CTA·카드가 전부 85px 아래로 갔었다.
 - 사용자가 "좌우폭·위아래가 미세하게 안 맞는다"고 하면 그 말이 맞다. 정적 렌더 기준 ±4px 을 "100% 일치"라고 보고하지 않는다. 라이브 재측정 표를 만들고 나서야 일치를 말한다.
 - bash 에서 Windows 경로의 `\` 는 먹힌다 → 스크립트 인자는 `C:/...` 슬래시로. 안 그러면 `C:_tmpclaude...` 폴더가 프로젝트 루트에 생긴다.
+
+### 사이트를 통째로 받아야 할 때 — `crawl_ref.py` (nice5540 · 부기맨에서 나온 것)
+
+```bash
+python crawl_ref.py https://site/ C:/web-project/ref-sites/<이름> --per 2 --mobile
+MSYS_NO_PATHCONV=1 python crawl_ref.py https://site/admin/login C:/web-project/ref-sites/<이름>-admin --login --prefix /admin --per 1 --max 150
+```
+
+- 서버렌더(PHP·SSR) 사이트는 페이지마다 원본 HTML · 렌더 DOM · 1440 전체 캡처 · geo TSV 가 한 번에 나오고, 같은 도메인 CSS/JS 는 `assets/` 에 경로째 쌓인다. 매물 상세처럼 숫자만 다른 주소는 `--per` 개만 받는다.
+- 로그인·회원가입·약관이 **주소 없이 모달**로 붙은 사이트가 많다(부기사 솔루션). 받은 HTML 안에 이미 들어 있으니 따로 찾지 않는다.
+- 관리자 페이지는 `--login` — 창을 띄우고 **사람이 직접 로그인**할 때까지 기다린다. 비밀번호는 스크립트에 넣지 않는다. 주소를 열기만 하고, 삭제·로그아웃·엑셀·상태변경 조각이 든 주소는 열지 않고 `_skipped.json` 에 남긴다.
+- **Git Bash 는 `--prefix /admin` 을 `C:/Program Files/Git/admin` 으로 바꿔 넘긴다.** 부기맨 1차에서 로그인해도 알아채지 못하고 계속 기다렸다. `MSYS_NO_PATHCONV=1` 을 붙인다 (이제는 스크립트가 바로 멈춘다).
+- 받은 파일은 **git 저장소 밖 `C:\web-project\ref-sites\`** 에 둔다. 남의 소스라 커밋하지 않는다.
 
 ## 1. 전체 캡처 먼저 — 이거 없이 디자인 시작 금지 (소스 없이 URL 만 있을 때)
 
