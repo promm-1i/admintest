@@ -68,7 +68,7 @@ const DIFF_ROWS: DiffRow[] = [
   {
     label: "제작 기간",
     template: "영업일 7일부터",
-    premium: "3~4주 (상담 후 확정)",
+    premium: "영업일 10일 이내",
   },
 ];
 
