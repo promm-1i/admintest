@@ -33,6 +33,8 @@ import { TemplateSpecPanel } from "@/components/site/TemplateSpecPanel";
 import { PricingComparison } from "@/components/site/PricingComparison";
 import { TemplateFeatureLanding } from "@/components/site/TemplateFeatureLanding";
 import { PremiumDetailSections } from "@/components/site/PremiumDetailSections";
+import { PremiumCaseStudy } from "@/components/site/PremiumCaseStudy";
+import { CASE_STUDIES } from "@/lib/caseStudies";
 import { cn } from "@/lib/utils";
 
 export default function SampleDetail() {
@@ -53,6 +55,9 @@ export default function SampleDetail() {
 
   if (!sample) return <NotFound />;
   if (sample.detailHref) return <Navigate to={sample.detailHref} replace />;
+  // 사례 소개 내용이 준비된 프리미엄 디자인은 설명서형 대신 사례형으로 그린다.
+  const caseStudy = CASE_STUDIES[sample.slug];
+  if (caseStudy) return <PremiumCaseStudy sample={sample} study={caseStudy} />;
 
   // 템플릿 항목은 포트폴리오가 아니라 /templates 목록에서 넘어오므로 되돌아가는 링크도 그쪽으로 보낸다.
   const isTemplate = Boolean(sample.industryKey);
