@@ -38,9 +38,14 @@ function BrowserFrame({ src, alt, url }: { src: string; alt: string; url: string
           {url}
         </span>
       </div>
-      <img src={src} alt={alt} className="block w-full" />
+      <img src={src} srcSet={shotSrcSet(src, 1440)} sizes="(min-width: 1100px) 1040px, 92vw" alt={alt} className="block w-full" />
     </div>
   );
+}
+
+// 캡처마다 가로 800px 짜리 `-sm.webp` 가 옆에 있다 — 휴대폰은 작은 쪽을 받는다
+function shotSrcSet(src: string, fullWidth: number) {
+  return `${src.replace(/\.webp$/, "-sm.webp")} 800w, ${src} ${fullWidth}w`;
 }
 
 function PhoneFrame({ src, alt }: { src: string; alt: string }) {
@@ -192,6 +197,8 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
                 >
                   <img
                     src={pg.img}
+                    srcSet={shotSrcSet(pg.img, 960)}
+                    sizes="(min-width: 1024px) 400px, (min-width: 640px) 46vw, 92vw"
                     alt=""
                     loading="lazy"
                     className="aspect-[16/10] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
@@ -265,7 +272,14 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
             <RevealScale className={cn(i % 2 === 1 && "lg:order-1")}>
               <figure>
                 <div className="overflow-hidden rounded-xl bg-white shadow-[0_20px_50px_-24px_rgba(0,0,0,0.3)] ring-1 ring-black/5">
-                  <img src={pt.img} alt={pt.caption} loading="lazy" className="block w-full" />
+                  <img
+                    src={pt.img}
+                    srcSet={shotSrcSet(pt.img, 1280)}
+                    sizes="(min-width: 1024px) 700px, 92vw"
+                    alt={pt.caption}
+                    loading="lazy"
+                    className="block w-full"
+                  />
                 </div>
                 <figcaption className="mt-3 text-xs font-medium text-muted-foreground">{pt.caption}</figcaption>
               </figure>
