@@ -11,11 +11,15 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getDesignCodeOptions } from "@/lib/designCode";
+import { getDesignCodeOptions, type DesignLine } from "@/lib/designCode";
+
+const DESIGN_LINES: DesignLine[] = ["프리미엄", "랜딩형", "기본형"];
 import { createReservation, reservationSchema, type ReservationInput } from "@/lib/api/reservations";
 import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -199,8 +203,11 @@ export default function Contact() {
               <SelectContent>
                 {designGroups.map(([industry, options]) => (
                   <SelectItem key={industry} value={industry}>
-                    {industry.replace(" 홈페이지", "")}
+                    {industry}
                     <span className="ml-1.5 text-xs text-muted-foreground">{options.length}종</span>
+                    {options.some((o) => o.line === "프리미엄") && (
+                      <span className="ml-1.5 text-[10px] font-bold text-primary">프리미엄</span>
+                    )}
                   </SelectItem>
                 ))}
               </SelectContent>
@@ -218,16 +225,24 @@ export default function Contact() {
                 />
               </SelectTrigger>
               <SelectContent>
-                {(designGroups.find(([industry]) => industry === designIndustry)?.[1] ?? []).map(
-                  (o) => (
-                    <SelectItem key={o.code} value={o.code}>
-                      {o.code} ·{" "}
-                      {o.title.startsWith(o.industry)
-                        ? o.title.slice(o.industry.length).trim().replace(/^\(|\)$/g, "")
-                        : o.title}
-                    </SelectItem>
-                  ),
-                )}
+                {/* 업종 안에서 프리미엄 · 랜딩형 · 기본형으로 나눠 제목을 달아 둔다 (옵션은 이미 그 순서로 정렬돼 있다) */}
+                {DESIGN_LINES.map((line) => {
+                  const items = (designGroups.find(([industry]) => industry === designIndustry)?.[1] ?? []).filter(
+                    (o) => o.line === line,
+                  );
+                  if (items.length === 0) return null;
+                  return (
+                    <SelectGroup key={line}>
+                      <SelectLabel className="text-[11px] font-bold text-primary">{line}</SelectLabel>
+                      {items.map((o) => (
+                        <SelectItem key={o.code} value={o.code}>
+                          {o.label}
+                          <span className="ml-1.5 font-mono text-[11px] text-muted-foreground">{o.code}</span>
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
+                  );
+                })}
               </SelectContent>
             </Select>
           </div>

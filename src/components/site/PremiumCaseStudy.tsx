@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, MessageCircle, Send } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, MessageCircle, Send } from "lucide-react";
+import { QuickConsultDialog } from "@/components/site/QuickConsultDialog";
 import { Button } from "@/components/ui/button";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { SAMPLES, type Sample } from "@/lib/samples";
@@ -52,6 +54,7 @@ function PhoneFrame({ src, alt }: { src: string; alt: string }) {
 export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: CaseStudy }) {
   const code = getDesignCode(sample);
   const liveUrl = sample.liveUrl ?? "";
+  const [consultOpen, setConsultOpen] = useState(false);
   const related = SAMPLES.filter(
     (s) => s.premium && s.industryKey === sample.industryKey && s.slug !== sample.slug,
   );
@@ -87,10 +90,8 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
                 <ArrowUpRight className="h-4 w-4" />
               </a>
             </Button>
-            <Button asChild size="lg" className="gap-2 font-bold">
-              <Link to="/contact">
-                <Send className="h-4 w-4" />이 디자인으로 상담
-              </Link>
+            <Button size="lg" className="gap-2 font-bold" onClick={() => setConsultOpen(true)}>
+              <Send className="h-4 w-4" />이 디자인으로 상담
             </Button>
           </div>
         </div>
@@ -112,7 +113,13 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
       <section className="mx-auto mt-16 grid max-w-[1280px] gap-12 px-4 sm:px-6 lg:mt-24 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:px-8">
         <Reveal>
           <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Overview</h2>
-          <p className="mt-6 text-base leading-[1.9] text-muted-foreground break-keep">{study.overview}</p>
+          <div className="mt-6 space-y-5">
+            {study.overview.split("\n\n").map((para) => (
+              <p key={para.slice(0, 24)} className="text-base leading-[1.9] text-muted-foreground break-keep">
+                {para}
+              </p>
+            ))}
+          </div>
         </Reveal>
         <div className="space-y-7">
           {study.meta.map((m, i) => (
@@ -129,6 +136,67 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
                   <p className="mt-1 text-sm leading-relaxed text-muted-foreground break-keep">{m.value}</p>
                 </div>
               </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* ③-2 페이지별 안내 — 몇 쪽이고 쪽마다 무엇이 들어 있는지 */}
+      <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
+        <Reveal>
+          <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: study.brandColor }}>
+            PAGES
+          </p>
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-[2rem]">
+            {study.pages.length}개 페이지에 담긴 것
+          </h2>
+        </Reveal>
+        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {study.pages.map((pg, i) => (
+            <Reveal key={pg.file} delay={i * 60}>
+              <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card">
+                <a
+                  href={`${liveUrl}${pg.file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block overflow-hidden border-b border-border"
+                  aria-label={`${pg.name} 실제 화면 새 창으로 보기`}
+                >
+                  <img
+                    src={pg.img}
+                    alt=""
+                    loading="lazy"
+                    className="aspect-[16/10] w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
+                </a>
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="text-lg font-bold text-foreground">
+                      <span className="mr-2 font-mono text-sm" style={{ color: study.brandColor }}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      {pg.name}
+                    </h3>
+                    <a
+                      href={`${liveUrl}${pg.file}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="shrink-0 text-xs font-semibold text-muted-foreground hover:text-foreground"
+                    >
+                      화면 보기 ↗
+                    </a>
+                  </div>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">{pg.desc}</p>
+                  <ul className="mt-4 space-y-1.5 border-t border-border pt-4">
+                    {pg.items.map((it) => (
+                      <li key={it} className="flex items-start gap-2 text-[13px] text-foreground">
+                        <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0" style={{ color: study.brandColor }} />
+                        <span className="break-keep">{it}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
             </Reveal>
           ))}
         </div>
@@ -153,6 +221,16 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
                 <Lines text={pt.title} />
               </h2>
               <p className="mt-5 text-base leading-[1.9] text-muted-foreground break-keep">{pt.body}</p>
+              {pt.items && (
+                <ul className="mt-6 space-y-2 border-t border-border pt-6">
+                  {pt.items.map((it) => (
+                    <li key={it} className="flex items-start gap-2.5 text-sm text-foreground">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color: study.brandColor }} />
+                      <span className="break-keep">{it}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </Reveal>
             <RevealScale className={cn(i % 2 === 1 && "lg:order-1")}>
               <figure>
@@ -166,7 +244,30 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
         ))}
       </div>
 
-      {/* ⑤ 모바일 — 연한 대표색 판 위 폰 세 대 */}
+      {/* ④-2 눈에 잘 안 띄는 디테일 */}
+      <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
+        <Reveal>
+          <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: study.brandColor }}>
+            DETAILS
+          </p>
+          <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-[2rem] break-keep">
+            화면에 잘 안 보이지만 들어 있는 것
+          </h2>
+        </Reveal>
+        <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+          {study.details.map((d, i) => (
+            <div key={d.title} className="bg-card p-6 sm:p-7">
+              <span className="font-mono text-xs font-bold" style={{ color: study.brandColor }}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-2 text-base font-bold text-foreground break-keep">{d.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">{d.body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ⑤ 모바일 — 연한 대표색 판 위 폰 */}
       <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
         <div className="rounded-3xl px-5 py-14 sm:px-10 lg:py-20" style={{ background: study.tintColor }}>
           <Reveal className="mx-auto max-w-2xl text-center">
@@ -175,9 +276,14 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
             </h2>
             <p className="mt-4 text-base leading-[1.9] text-neutral-600 break-keep">{study.mobile.body}</p>
           </Reveal>
-          <div className="mx-auto mt-12 grid max-w-[880px] grid-cols-3 items-start gap-3 sm:gap-8">
+          <div
+            className={cn(
+              "mx-auto mt-12 grid items-start gap-4 sm:gap-8",
+              study.mobile.shots.length > 3 ? "max-w-[1080px] grid-cols-2 sm:grid-cols-4" : "max-w-[880px] grid-cols-3",
+            )}
+          >
             {study.mobile.shots.map((s, i) => (
-              <div key={s.img} className={cn(i === 1 && "sm:-translate-y-8")}>
+              <div key={s.img} className={cn(i % 2 === 1 && "sm:-translate-y-8")}>
                 <RevealScale delay={i * 100}>
                   <PhoneFrame src={s.img} alt={`${study.brand} 모바일 ${s.caption}`} />
                   <p className="mt-3 text-center text-xs font-semibold text-neutral-700">{s.caption}</p>
@@ -218,11 +324,9 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
             잡고 사진을 새로 만들어 채웁니다.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg" className="gap-2 font-bold shadow-sm">
-              <Link to="/contact">
-                <Send className="h-4 w-4" />
-                제작 상담하기
-              </Link>
+            <Button size="lg" className="gap-2 font-bold shadow-sm" onClick={() => setConsultOpen(true)}>
+              <Send className="h-4 w-4" />
+              제작 상담하기
             </Button>
             <Button
               asChild
@@ -271,6 +375,13 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
           </div>
         </section>
       )}
+
+      <QuickConsultDialog
+        open={consultOpen}
+        onClose={() => setConsultOpen(false)}
+        designName={`${study.brand} (${study.headline})`}
+        designCode={code}
+      />
     </div>
   );
 }

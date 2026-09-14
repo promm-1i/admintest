@@ -4804,7 +4804,7 @@ export const PORTFOLIO_FILTERS: { label: string; value: string; highlight?: bool
  * 업종 key → 표시 라벨. 새 업종 템플릿을 추가할 때 여기에 라벨을 넣고 SAMPLES 항목에
  * industryKey를 지정하면, /templates 업종 필터에 자동으로 칩이 하나 늘어난다.
  */
-const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
+export const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
   artist: "작가·아티스트",
   "real-estate": "부동산",
   rentcar: "렌트카",
