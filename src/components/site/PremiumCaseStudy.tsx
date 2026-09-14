@@ -141,7 +141,35 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
         </div>
       </section>
 
-      {/* ③-2 페이지별 안내 — 몇 쪽이고 쪽마다 무엇이 들어 있는지 */}
+      {/* ③-2 한 페이지 디자인 — 위에서부터 섹션이 어떻게 이어지는지 */}
+      {study.flow && study.flow.length > 0 && (
+        <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
+          <Reveal>
+            <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: study.brandColor }}>
+              FLOW
+            </p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-[2rem] break-keep">
+              한 페이지 안에 위에서부터 이렇게 이어집니다
+            </h2>
+          </Reveal>
+          <ol className="mt-10 grid gap-x-10 gap-y-0 md:grid-cols-2">
+            {study.flow.map((f, i) => (
+              <li key={f.name} className="flex gap-5 border-t border-border py-5">
+                <span className="w-7 shrink-0 pt-0.5 font-mono text-sm font-bold" style={{ color: study.brandColor }}>
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="min-w-0">
+                  <h3 className="text-base font-bold text-foreground break-keep">{f.name}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground break-keep">{f.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </section>
+      )}
+
+      {/* ③-3 여러 페이지 디자인 — 몇 쪽이고 쪽마다 무엇이 들어 있는지 */}
+      {study.pages && study.pages.length > 0 && (
       <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
         <Reveal>
           <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: study.brandColor }}>
@@ -201,6 +229,8 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
           ))}
         </div>
       </section>
+
+      )}
 
       {/* ④ 디자인 포인트 — 글과 화면이 좌우로 번갈아 */}
       <div className="mx-auto mt-24 max-w-[1280px] space-y-24 px-4 sm:px-6 lg:mt-32 lg:space-y-32 lg:px-8">
@@ -269,12 +299,27 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
 
       {/* ⑤ 모바일 — 연한 대표색 판 위 폰 */}
       <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
-        <div className="rounded-3xl px-5 py-14 sm:px-10 lg:py-20" style={{ background: study.tintColor }}>
+        <div
+          className="rounded-3xl px-5 py-14 sm:px-10 lg:py-20"
+          style={{ background: study.tintColor }}
+        >
           <Reveal className="mx-auto max-w-2xl text-center">
-            <h2 className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-[2rem] break-keep">
+            <h2
+              className={cn(
+                "text-2xl font-bold tracking-tight sm:text-[2rem] break-keep",
+                study.mobileDark ? "text-white" : "text-neutral-900",
+              )}
+            >
               {study.mobile.title}
             </h2>
-            <p className="mt-4 text-base leading-[1.9] text-neutral-600 break-keep">{study.mobile.body}</p>
+            <p
+              className={cn(
+                "mt-4 text-base leading-[1.9] break-keep",
+                study.mobileDark ? "text-white/70" : "text-neutral-600",
+              )}
+            >
+              {study.mobile.body}
+            </p>
           </Reveal>
           <div
             className={cn(
@@ -286,7 +331,14 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
               <div key={s.img} className={cn(i % 2 === 1 && "sm:-translate-y-8")}>
                 <RevealScale delay={i * 100}>
                   <PhoneFrame src={s.img} alt={`${study.brand} 모바일 ${s.caption}`} />
-                  <p className="mt-3 text-center text-xs font-semibold text-neutral-700">{s.caption}</p>
+                  <p
+                    className={cn(
+                      "mt-3 text-center text-xs font-semibold",
+                      study.mobileDark ? "text-white/80" : "text-neutral-700",
+                    )}
+                  >
+                    {s.caption}
+                  </p>
                 </RevealScale>
               </div>
             ))}

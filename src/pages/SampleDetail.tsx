@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
@@ -34,7 +34,7 @@ import { PricingComparison } from "@/components/site/PricingComparison";
 import { TemplateFeatureLanding } from "@/components/site/TemplateFeatureLanding";
 import { PremiumDetailSections } from "@/components/site/PremiumDetailSections";
 import { PremiumCaseStudy } from "@/components/site/PremiumCaseStudy";
-import { CASE_STUDIES } from "@/lib/caseStudies";
+import { hasCaseStudy, loadCaseStudy, type CaseStudy } from "@/lib/caseStudies";
 import { cn } from "@/lib/utils";
 
 export default function SampleDetail() {
@@ -43,6 +43,20 @@ export default function SampleDetail() {
 
   const [viewTab, setViewTab] = useState<"preview" | "overview">("preview");
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
+
+  // 사례 소개 본문이 있는 프리미엄 디자인은 그 파일만 따로 불러와 사례형으로 그린다.
+  const caseSlug = slug && hasCaseStudy(slug) ? slug : null;
+  const [loadedCase, setLoadedCase] = useState<{ slug: string; study: CaseStudy } | null>(null);
+  useEffect(() => {
+    if (!caseSlug) return;
+    let alive = true;
+    loadCaseStudy(caseSlug).then((study) => {
+      if (alive && study) setLoadedCase({ slug: caseSlug, study });
+    });
+    return () => {
+      alive = false;
+    };
+  }, [caseSlug]);
 
   usePageTitle(
     sample
@@ -55,9 +69,14 @@ export default function SampleDetail() {
 
   if (!sample) return <NotFound />;
   if (sample.detailHref) return <Navigate to={sample.detailHref} replace />;
-  // 사례 소개 내용이 준비된 프리미엄 디자인은 설명서형 대신 사례형으로 그린다.
-  const caseStudy = CASE_STUDIES[sample.slug];
-  if (caseStudy) return <PremiumCaseStudy sample={sample} study={caseStudy} />;
+  if (caseSlug) {
+    // 불러오는 동안 기존 설명서형이 잠깐 비치지 않게 자리만 잡아 둔다
+    return loadedCase?.slug === caseSlug ? (
+      <PremiumCaseStudy sample={sample} study={loadedCase.study} />
+    ) : (
+      <div className="min-h-[80vh]" aria-busy="true" />
+    );
+  }
 
   // 템플릿 항목은 포트폴리오가 아니라 /templates 목록에서 넘어오므로 되돌아가는 링크도 그쪽으로 보낸다.
   const isTemplate = Boolean(sample.industryKey);
