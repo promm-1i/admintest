@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>한벡스금속 — 특수강 주조 제조기업 홈페이지 (프리미엄 디자인 B)</title>
+<meta name="description" content="쇳물 사진 위로 큰 영문 제목이 한 글자씩 올라오는 첫 화면, 스크롤하면 제목이 흰색으로 차오르고 기술 사진 다섯 장이 아래에서 올라오는 고정 장면, 숫자가 올라가는 회사 소개, 사진이 바뀌는 제품 카드, 엇갈린 비전 카드, 뉴스 슬라이드로 구성한 제조기업 홈페이지 프리미엄 템플릿.">
+<meta property="og:title" content="한벡스금속 — 특수강 주조 제조기업 홈페이지">
+<meta property="og:image" content="./og.jpg">
+<link rel="preload" as="image" href="./assets/hero-1.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* ══ 메인 — 레퍼런스 실측 (ref-sites/wonkang p1 · p2-pc · p2-m · s_main.css · s_script.js) ══ */
+.sec{width:100%;padding:150px 50px;background:var(--bg)}
+.ttl>.eb{display:block;margin-bottom:40px;font-size:20px;font-weight:500}
+.ttl h2{font-size:64px;font-weight:700}
+.ph{background:rgb(52,52,52);overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover}
+
+/* ── 첫 화면 (100vh · 3장 페이드 .8s · 10초마다 · 글 72px 800 대문자 행간 1 · 왼쪽 10% 아래 35vh
+   글자 .5s ease 한 자씩 .05s 아래 20px · 부제 24px 700 행간 1.5 아래 10 · 1s 로 떠오름 · 좌우 PREV/NEXT 흐림 .4) ── */
+.hero{position:relative;height:100vh;overflow:hidden}
+.hero .sl{position:absolute;inset:0;display:flex;align-items:flex-end;opacity:0;transition:opacity .8s ease;background:#111}
+.hero .sl.on{opacity:1;z-index:1}
+.hero .sl>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero .tx{position:relative;width:100%;padding:0 0 35vh 10%;font-size:72px;font-weight:800;line-height:1;text-transform:uppercase}
+.hero .tx>div{display:flex;align-items:flex-end}
+.hero .tx .l1{height:72px}
+.hero .tx .l2{line-height:108px}
+.hero .ch{display:inline-block;opacity:0;transform:translateY(20px)}
+.hero .sl.play .ch{animation:up .5s ease forwards;animation-delay:calc(var(--i) * .05s)}
+@keyframes up{to{opacity:1;transform:none}}
+.hero .sub{padding-bottom:10px;font-size:24px;font-weight:700;opacity:0;transform:translateY(14px)}
+.hero .sub i{display:block;font-style:normal;line-height:1.5}
+.hero .sl.play .sub{animation:up 1s ease forwards}
+.hero .nav{position:absolute;top:calc(50% - 22px);z-index:10;width:27px;height:44px;display:flex;align-items:center;justify-content:center;gap:20px;font-weight:500;opacity:.4;transform:translateY(-50%);transition:.3s opacity}
+.hero .nav:hover,.hero .nav:focus-visible{opacity:1}
+.hero .nav svg{width:12px;height:20px}
+.hero .prev{left:50px}
+.hero .next{right:50px}
+
+/* ── 사업 (배경 사진 고정 · 아래 150)
+   제목: 화면 가운데 멈춤 0.9 화면 · 세 줄이 차례로 흰색으로 차오름 (한 줄씩 1/3 구간 · power2.out) · 64px 700 행간 1.2 · 바탕 글자 흰 .38/.34
+   기술: 화면 22% 에 멈춤 · 사진 수+0.01 화면 동안 · 사진 1092×600 r24 오른쪽 50 · 다음 사진이 아래에서 올라오고 35% 지나면 글 교체(1s 아래 12px)
+   작은 제목 24px 700 · 큰 제목 120px 800 그림자 2 5 10 .6 · 아래 80 · 본문 16/28.8 그림자 0 0 4 .8 · 번호판 80 (48px/24px 가 위 · 24px 흐림 .4 가 아래)
+   scroll 알약 50×130 오른쪽 80 아래 30 · 떠오름 1.5s ── */
+.biz{position:relative;padding:0 50px 150px;background:#222 url("./assets/biz-bg.jpg") center/cover no-repeat fixed}
+.bt{--th:100vh;height:calc(var(--th) + 90vh)}
+.bt .in{position:sticky;top:calc(50vh - var(--th) / 2);height:var(--th);display:flex;align-items:center;justify-content:center;text-align:center}
+.mask{font-size:64px;font-weight:700;line-height:1.2}
+.mask .row{display:block}
+.mask .ln{position:relative;display:inline-block;white-space:nowrap}
+.mask .base{color:rgba(255,255,255,.34)}
+.mask .row:first-child .base{color:rgba(255,255,255,.38)}
+.mask .rev{position:absolute;inset:0 auto 0 0;width:0;overflow:hidden}
+.mask .rev span{display:inline-block;white-space:pre;color:#fff}
+.bs{position:relative;height:calc(600px + 501vh)}
+.bs .in{position:sticky;top:22vh;height:600px;overflow:hidden}
+.bs .tx{position:absolute;inset:0 auto auto 0;z-index:2;width:100%;max-width:1560px;padding-top:80px}
+.bs .tx .a{display:block;font-size:24px;font-weight:700}
+.bs .tx h3{margin-bottom:80px;font-size:120px;font-weight:800;text-shadow:2px 5px 10px rgba(0,0,0,.6)}
+.bs .tx p{font-size:16px;line-height:1.8;text-shadow:0 0 4px rgba(0,0,0,.8)}
+.bs .tx .sw{will-change:opacity,transform}
+.bs .pg{position:absolute;left:0;top:506px;z-index:3;width:80px;height:80px}
+.bs .pg svg{position:absolute;inset:0;width:80px;height:80px}
+.bs .pg .cur{position:absolute;top:0;font-size:48px;font-weight:700;line-height:.5}
+.bs .pg .tot{position:absolute;right:0;bottom:0;font-size:24px;font-weight:700;opacity:.4}
+.bs .wrap{position:absolute;right:50px;top:0;width:1092px;height:100%;pointer-events:none}
+.bs .img{position:absolute;inset:0;border-radius:24px;overflow:hidden;transform:translateY(100%)}
+.bs .img:first-child{transform:none}
+.bs .img img{width:100%;height:100%;object-fit:cover}
+.pill{position:absolute;right:80px;bottom:30px;z-index:4;width:50px;height:130px;border-radius:50px;background:var(--primary);writing-mode:vertical-lr;
+  display:flex;align-items:center;justify-content:center;gap:10px;animation:floatY 1.5s ease-in-out infinite}
+.pill svg{width:15px;height:17px}
+.bm{display:none}
+
+/* ── 회사 (1520 이하 세로 · 작은 제목 20px 500 아래 40 · 제목 64px 아래 60 · 본문 20/30 · 숫자판 60 아래 2칸 간격 90
+   숫자 Pretendard 120px/1 600 자간 -.04em 패딩 20 10 아래 20 선 1px #ccc · 단위 48px · 이름 24px 700 좌우 20 아래 10 · 설명 16/24 #999
+   세기: 화면 80% 에서 1.2s(1000 이상 1.6s) power1.out · 링 버튼 오른쪽 100 아래 20) ── */
+.co .in{max-width:1820px;margin:0 auto}
+.co .ttl h2{margin-bottom:60px}
+.co .ttl p{font-size:20px;line-height:1.5em}
+.stats{margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:90px}
+.stats li{position:relative}
+.stats strong{display:block;margin-bottom:20px;padding:20px 10px;border-bottom:1px solid var(--soft);font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:120px;font-weight:600;line-height:1;letter-spacing:-.04em}
+.stats strong .n{padding-left:5px}
+.stats strong .u{padding-left:5px;font-size:48px}
+.stats h3{margin-bottom:10px;padding:0 20px;font-size:24px}
+.stats .d{padding:0 20px;color:var(--gray);font-family:"Pretendard Variable",Pretendard,sans-serif;line-height:1.5em}
+.stats .ring{position:absolute;right:100px;bottom:20px}
+
+/* ── 제품 (제목 줄 양 끝 · 카드 100 아래 4칸 간격 20 · 320×480 r20 패딩 40 · 사진 바탕 · 올리면 다른 사진 .5s · 28px 700 검정 · 18/27 500 위 30) ── */
+.so .in{max-width:1820px;margin:0 auto}
+.so .ttl{display:flex;justify-content:space-between;align-items:flex-end}
+.parts{margin-top:100px;display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.parts li{position:relative;height:480px;border-radius:20px;overflow:hidden;color:#000;isolation:isolate}
+.parts a{display:block;height:100%;padding:40px}
+.parts img{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;background:rgb(243,243,243);transition:opacity .5s ease}
+.parts img+img{opacity:0}
+.parts li:hover img+img,.parts a:focus-visible img+img{opacity:1}
+.parts li:hover,.parts li:focus-within{color:#fff}
+.parts h3{font-size:28px;font-weight:700}
+.parts p{margin-top:30px;font-size:18px;font-weight:500;line-height:1.5em}
+
+/* ── 비전 (위아래 150 · 워드마크 끈적 top0 아래 200 · 제목 칸 끈적 top 머리+16 · 카드 2칸 간격 55 · 640 r20 패딩 40 · 36px 700 · 16/24 · 2번 +250 · 3번 -250)
+   일부러 다르게: 레퍼런스는 제목 칸이 화면 왼쪽 끝에 붙어 있어 50 띄움 (카드 폭 545 → 520) ── */
+.vi{position:relative;padding:150px 0}
+.vi .mark{position:sticky;top:0;width:100%;height:212px;margin-bottom:200px;color:rgba(255,255,255,.08);pointer-events:none}
+.vi .mark svg{width:100%;height:100%}
+.vi .in{max-width:1820px;margin:0 auto;padding-left:50px;display:flex;justify-content:space-between}
+.vi .ttl{position:sticky;top:var(--sticky-top);align-self:start}
+.vi .ttl h2{margin-bottom:100px}
+.vi ul{width:100%;max-width:1095px;display:grid;grid-template-columns:1fr 1fr;gap:55px}
+.vi li{height:640px;padding:40px;border-radius:20px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;isolation:isolate}
+.vi li>img{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover}
+.vi li:nth-child(2){margin-top:250px}
+.vi li:nth-child(3){margin-top:-250px}
+.vi h3{font-size:36px;font-weight:700}
+.vi li p{line-height:1.5em}
+.vm{display:none}
+
+/* ── 파트너 (양 끝 · 제목 64px 아래 60 · 로고판 605×550) ── */
+.cu .in{max-width:1820px;margin:0 auto;display:flex;justify-content:space-between}
+.cu h2{margin-bottom:60px}
+.cu .board{width:605px;height:550px}
+.cu .board img{width:100%;height:100%}
+
+/* ── 뉴스 + 문의 (사진 바탕 · 제목 줄 좌우 20 아래 100 · 화살표 56 간격 10 · 3.5장 간격 28 · 4초마다 .6s
+   카드 #f1f1f1 r20 아래 20 · 사진 비율 386:231 r20 · 분류 알약 5 10 r50 바깥 30 · 제목 20px 700 좌우 30 아래 50 · 날짜 #999
+   문의 1340 × 800 · CONTACT US 120px 800 아래 80 · 본문 20/30 · 링 버튼) ── */
+.ga{position:relative;padding:0;background:#222 url("./assets/contact-bg.jpg") 33% center/cover no-repeat}
+.ga .in{max-width:1820px;margin:0 auto;padding:0 20px}
+.ga .ttl{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:100px}
+.ga .ttl .eb{display:block;margin-bottom:40px;font-size:20px;font-weight:400}
+.ga .arrows{display:flex;gap:10px}
+.ga .arrows button{width:56px;height:56px}
+.ga .arrows button svg{width:100%;height:100%}
+.ga .arrows .swiper-button-disabled{opacity:.35;cursor:default}
+.gwrap{display:flex;justify-content:flex-end;width:100%;padding-left:20px}
+.news{width:100%;max-width:1870px;margin:0}
+.news a{display:block;padding-bottom:20px;border-radius:20px;background:rgb(241,241,241);color:#000}
+.news .ph{aspect-ratio:386/231;border-radius:20px}
+.news .cat{display:inline-block;margin:30px;padding:5px 10px;border-radius:50px;background:var(--primary);color:#fff}
+.news h3{margin:0 30px 50px;font-size:20px;font-weight:700;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.news time{display:inline-block;margin-left:30px;color:var(--gray)}
+.contact{max-width:1340px;width:100%;height:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.contact .ct{height:100%;display:flex;flex-direction:column;justify-content:center}
+.contact h2{margin-bottom:80px;font-size:120px;font-weight:800;text-transform:uppercase}
+.contact p{font-size:20px;line-height:1.5em}
+
+@media (min-width:1921px){.gwrap{justify-content:center;padding:0}.news{max-width:1820px}}
+@media (max-width:1600px){.cu .board{width:605px}}
+@media (max-width:1520px){.co .in{display:block}}
+@media (max-width:1200px){
+  .contact{height:auto;padding:150px 0;text-align:center;display:block}
+  .contact h2{margin-bottom:60px;font-size:96px}
+  .contact .ring{margin:50px auto 0}
+}
+@media (max-width:1024px){
+  .sec{padding:75px 20px}
+  .ttl>.eb{margin-bottom:20px}
+  .hero .tx .row{flex-direction:column-reverse;align-items:flex-start}
+  .hero .sub{padding:0 0 30px}
+  .biz{padding:0 20px 150px}
+  .bt{--th:500px}
+  .mask{font-size:36px;line-height:1.2em}
+  .mask .row{display:block}
+  .stats{gap:20px}
+  .stats strong .n{font-size:70px}
+  .parts{grid-template-columns:1fr 1fr;gap:10px}
+  .vi{display:none}
+  .vm{display:block;padding:75px 0 75px 20px;background:#222 url("./assets/vision-m-bg.svg") 125px center/cover no-repeat}
+  .vm .ttl{margin-bottom:30px}
+  .vm .ttl h2{margin-bottom:30px}
+  .vm li{height:340px;padding:30px;border-radius:20px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden;isolation:isolate}
+  .vm li>img{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover}
+  .vm h3{font-size:24px}
+  .vm li p{font-size:12px;line-height:1.5em}
+  .vm .arrows{margin-top:30px;display:flex;gap:10px}
+  .vm .arrows button{width:56px;height:56px}
+  .vm .arrows svg{width:100%;height:100%}
+  .cu .in{display:block}
+  .cu .ttl{margin-bottom:60px}
+  .cu .board{width:100%;height:auto;aspect-ratio:605/550}
+  .ga{padding-right:0}
+}
+@media (max-width:1023px){
+  .bs{display:none}
+  .bm{display:block;position:relative}
+  .bm .img{margin-bottom:40px;border-radius:20px;overflow:hidden}
+  .bm .img img{display:block;width:100%;aspect-ratio:1092/600;object-fit:cover}
+  .bm .a{display:block;margin-bottom:15px;font-size:15px;font-weight:700}
+  .bm h3{margin-bottom:30px;font-size:42px;font-weight:800}
+  .bm p{font-size:16px;line-height:1.8}
+  .bm .pg{position:absolute;right:10px;top:10px;z-index:3;width:34px;height:34px}
+  .bm .pg svg{position:absolute;inset:0;width:100%;height:100%}
+  .bm .pg .cur{position:absolute;top:0;font-size:24px;font-weight:700;line-height:.5}
+  .bm .pg .tot{position:absolute;right:0;bottom:0;font-size:15px;font-weight:700;opacity:.4}
+  .bm .arrows{margin-top:50px;display:flex;gap:8px}
+  .bm .arrows button{width:37px;height:37px}
+  .bm .arrows svg{width:100%;height:100%}
+}
+@media (max-width:860px){
+  .stats{grid-template-columns:1fr;gap:50px}
+  .stats .ring{position:relative;right:auto;bottom:auto}
+}
+@media (max-width:768px){
+  .parts{grid-template-columns:1fr}
+  .so .ttl{display:block}
+  .so .ttl h2{margin-bottom:30px}
+  .ttl h2{margin-bottom:50px}
+  .ga .ttl{display:block;margin-bottom:30px}
+  .ga .ttl .eb{margin-bottom:25px}
+  .ga .ttl>div{margin-bottom:50px}
+  .ga .arrows button{width:36px;height:36px}
+  .news .cat{margin:20px;font-size:12px}
+  .news h3{margin-bottom:25px;font-size:12px}
+  .news time{font-size:0}
+}
+@media (max-width:512px){
+  .ttl>.eb{font-size:15px}
+  .ttl h2{font-size:36px}
+  .ga .ttl .eb{font-size:15px}
+  .mask{margin-bottom:50px}
+  .ttl p{font-size:12px}
+  .hero{height:600px}
+  .hero .tx{font-size:42px}
+  .hero .tx .l1{height:42px}
+  .hero .tx .l2{line-height:63px}
+  .hero .sub{font-size:16px}
+  .hero .nav{display:none}
+  .bm p{font-size:12px}
+  .co .ttl h2{margin-bottom:40px}
+  .co .ttl p{font-size:12px}
+  .stats{margin-top:75px}
+  .stats strong{font-size:0;padding:0 0 20px;margin-bottom:20px}
+  .stats strong .n,.stats strong .u,.stats .d,.stats h3{padding:0}
+  .stats h3{font-size:16px}
+  .stats .d{font-size:12px}
+  .parts{margin-top:50px}
+  .parts li{height:360px}
+  .parts a{padding:30px}
+  .parts img{object-position:center bottom}
+  .parts h3{font-size:16px}
+  .contact{padding-bottom:75px}
+  .contact h2{margin-bottom:25px;font-size:42px}
+  .contact p{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  .hero .ch,.hero .sub{opacity:1;transform:none;animation:none!important}
+  .hero .sl{transition:none}
+  .pill{animation:none}
+}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+<a class="sr" href="#main">본문 바로가기</a>
+
+<header class="hd" id="hd">
+  <a class="logo" href="./" aria-label="한벡스금속 홈">
+    <svg viewBox="0 0 251 33" aria-hidden="true"><path d="M2 4h7v10h11V4h7v25h-7V19H9v10H2z" fill="currentColor"/><path d="M31 4h5l-9 25h-5z" fill="currentColor" opacity=".55"/><text x="46" y="27.5" fill="currentColor" font-family="Raleway,Arial,sans-serif" font-size="27" font-weight="800" letter-spacing="2.2">HANVEX</text><text x="178" y="27" fill="currentColor" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="15" font-weight="600" opacity=".8">한벡스금속</text></svg>
+  </a>
+  <nav class="gnb" aria-label="주 메뉴">
+    <ul>
+      <li><a href="history.html">COMPANY</a><ul><li><a href="history.html">회사개요</a></li><li><a href="ci.html">CI 소개</a></li><li><a href="partner.html">비즈니스 파트너</a></li><li><a href="location.html">찾아오시는 길</a></li><li><a href="news.html">회사소식</a></li></ul></li>
+      <li><a href="process.html">FACTORY</a><ul><li><a href="process.html">생산공정</a></li><li><a href="equipment.html">생산설비</a></li><li><a href="technology.html">핵심기술</a></li><li><a href="certificate.html">인증서 현황</a></li></ul></li>
+      <li><a href="product-pump.html">PRODUCT</a><ul><li><a href="product-pump.html">일반 펌프부품</a></li><li><a href="product-hp.html">고압 펌프부품</a></li><li><a href="product-valve.html">밸브부품</a></li><li><a href="product-machine.html">산업기계부품</a></li></ul></li>
+      <li><a href="inquiry.html">CUSTOMER</a><ul><li><a href="inquiry.html">견적문의</a></li><li><a href="contact.html">컨택트</a></li></ul></li>
+    </ul>
+  </nav>
+  <div class="utils">
+    <a class="cta" href="contact.html"><span>CONTACT</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+    <div class="lang">
+      <button type="button" aria-label="언어 선택" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.6 2.5 3.8 5.5 3.8 9s-1.2 6.5-3.8 9c-2.6-2.5-3.8-5.5-3.8-9S9.4 5.5 12 3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      <ul><li><a href="./" aria-current="true">KO</a></li><li><a href="./">EN</a></li><li><a href="./">JP</a></li></ul>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><span></span><span></span></button>
+  </div>
+  <div class="side" id="side">
+    <nav aria-label="전체 메뉴">
+      <ul>
+        <li><button type="button" aria-expanded="false">COMPANY<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li><a href="history.html">회사개요</a></li><li><a href="ci.html">CI 소개</a></li><li><a href="partner.html">비즈니스 파트너</a></li><li><a href="location.html">찾아오시는 길</a></li><li><a href="news.html">회사소식</a></li></ul></li>
+        <li><button type="button" aria-expanded="false">FACTORY<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li><a href="process.html">생산공정</a></li><li><a href="equipment.html">생산설비</a></li><li><a href="technology.html">핵심기술</a></li><li><a href="certificate.html">인증서 현황</a></li></ul></li>
+        <li><button type="button" aria-expanded="false">PRODUCT<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li><a href="product-pump.html">일반 펌프부품</a></li><li><a href="product-hp.html">고압 펌프부품</a></li><li><a href="product-valve.html">밸브부품</a></li><li><a href="product-machine.html">산업기계부품</a></li></ul></li>
+        <li><button type="button" aria-expanded="false">CUSTOMER<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li><a href="inquiry.html">견적문의</a></li><li><a href="contact.html">컨택트</a></li></ul></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<!-- 첫 화면 -->
+<section class="hero" id="hero" aria-roledescription="carousel" aria-label="대표 이미지">
+  <div class="sl on" data-cap="0"><img src="./assets/hero-1.jpg" alt="" fetchpriority="high">
+    <div class="tx"><div class="l1 hs">Forged by fire,</div><div class="row"><p class="l2 hs">Built for trust</p></div><div class="sub"><i>쇳물에서 시작해 신뢰로 완성합니다</i></div></div></div>
+  <div class="sl"><img src="./assets/hero-2.jpg" alt="" loading="lazy">
+    <div class="tx"><div class="l1 hs">Precision in</div><div class="row"><p class="l2 hs">Every pour</p></div><div class="sub"><i>한 번 붓는 쇳물까지 정밀하게</i></div></div></div>
+  <div class="sl"><img src="./assets/hero-3.jpg" alt="" loading="lazy">
+    <div class="tx"><div class="l1 hs">Steel that</div><div class="row"><p class="l2 hs">Lasts longer</p></div><div class="sub"><i>오래 버티는 부품을 만듭니다</i></div></div></div>
+  <button class="nav prev" type="button" id="heroPrev" aria-label="이전 이미지"><svg viewBox="0 0 12 20" aria-hidden="true"><path d="M10 2 2 10l8 8" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>PREV</span></button>
+  <button class="nav next" type="button" id="heroNext" aria-label="다음 이미지"><span>NEXT</span><svg viewBox="0 0 12 20" aria-hidden="true"><path d="M2 2l8 8-8 8" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+</section>
+
+<!-- 사업 -->
+<section class="biz" id="biz">
+  <div class="bt" id="bt"><div class="in">
+    <h2 class="mask" id="mask" aria-label="Precision in Special Steel Casting">
+      <span class="row" aria-hidden="true"><span class="ln"><span class="base">Precision in</span><span class="rev"><span>Precision in</span></span></span></span>
+      <span class="row" aria-hidden="true"><span class="ln"><span class="base">Special Steel</span><span class="rev"><span>Special Steel</span></span></span> <span class="ln"><span class="base">Casting</span><span class="rev"><span>Casting</span></span></span></span>
+    </h2>
+  </div></div>
+  <div class="bs" id="bs"><div class="in">
+    <div class="tx"><div class="sw" id="bsText"><span class="a">주조 해석 시뮬레이션</span><h3 class="lat">SIMULATION</h3><p>쇳물이 흐르고 굳는 과정을 먼저 계산해 보고 주형을 설계합니다.<br>수축과 기공이 생길 자리를 미리 찾아내 불량을 줄이고,<br>시험 주조 횟수를 줄여 납기를 앞당깁니다.</p></div>
+      <div class="pg" aria-live="polite"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M8 76 72 4" stroke="currentColor" stroke-opacity=".5" stroke-width="1.5"/></svg><span class="cur" id="bsCur">1</span><span class="tot">5</span></div></div>
+    <div class="pill" aria-hidden="true">scroll<svg viewBox="0 0 15 17"><path d="M7.5 1v14M2 10l5.5 5.5L13 10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></div>
+    <div class="wrap">
+      <div class="img"><img src="./assets/tech-1.jpg" alt="" loading="lazy"></div>
+      <div class="img"><img src="./assets/tech-2.jpg" alt="" loading="lazy"></div>
+      <div class="img"><img src="./assets/tech-3.jpg" alt="" loading="lazy"></div>
+      <div class="img"><img src="./assets/tech-4.jpg" alt="" loading="lazy"></div>
+      <div class="img"><img src="./assets/tech-5.jpg" alt="" loading="lazy"></div>
+    </div>
+  </div></div>
+  <div class="bm"><div class="swiper" id="bmSwiper">
+    <div class="pg"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M8 76 72 4" stroke="currentColor" stroke-opacity=".5" stroke-width="3"/></svg><span class="cur" id="bmCur">1</span><span class="tot">5</span></div>
+    <div class="swiper-wrapper" id="bmWrap"></div>
+    <div class="arrows"><button type="button" class="bmPrev" aria-label="이전 기술"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".6"/><path d="M23 13l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><button type="button" class="bmNext" aria-label="다음 기술"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="none" stroke="currentColor" stroke-opacity=".6"/><path d="M17 13l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button></div>
+  </div></div>
+</section>
+
+<!-- 회사 -->
+<section class="sec co" id="company">
+  <div class="in">
+    <div class="ttl">
+      <span class="eb" data-aos="fade-up" data-delay="50">특수강 주조 기술을 이어 가는 기업</span>
+      <div data-aos="fade"><h2 class="split">쇳물에 담는<br>기술의 무게</h2></div>
+      <p data-aos="fade-up" data-delay="150">한벡스금속은 1994년부터 특수강 주조에 집중해 왔습니다.<br>용해부터 열처리, 정밀 측정까지 한 공장에서 해내며<br>도면이 요구하는 성분과 치수를 끝까지 책임지고<br>국내외 펌프·밸브 제조사에 핵심 부품을 공급합니다.</p>
+    </div>
+    <ul class="stats">
+      <li data-aos="fade-up"><strong><span class="n" data-to="1994">0</span></strong><h3>한벡스금속 창립</h3><p class="d">작은 주물 공장에서 시작해 설계 해석부터 가공까지<br>한곳에서 해내는 특수강 주조 기업으로 자랐습니다.</p></li>
+      <li data-aos="fade-up"><strong><span class="n" data-to="850">0</span><span class="u">t</span></strong><h3>연간 수출 중량</h3><p class="d">해마다 850톤 넘는 주조품을 해외 펌프·밸브 제조사에 보내며<br>2030년까지 두 배로 늘리는 것을 목표로 합니다.</p></li>
+      <li data-aos="fade-up"><strong><span class="n" data-to="42">0</span><span class="u">%</span></strong><h3>고합금강 비중</h3><p class="d">내식성과 강도가 필요한 듀플렉스·슈퍼 듀플렉스 강종이<br>전체 생산량의 42%를 차지합니다.</p></li>
+      <li data-aos="fade-up"><div class="ring"><a href="history.html" aria-label="회사개요 보기"><svg viewBox="0 0 63 37" aria-hidden="true"><path d="M2 18.5h57M42 2l17 16.5L42 35" fill="none" stroke="#fff" stroke-width="2.4"/></svg></a></div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 제품 -->
+<section class="sec so" id="solution">
+  <div class="in">
+    <div class="ttl"><div><div data-aos="fade"><h2 class="split">Casting solution</h2></div></div><a class="more" href="product-pump.html" data-label="VIEW MORE">VIEW MORE</a></div>
+    <ul class="parts">
+      <li data-aos="fade-up" data-delay="50"><a href="product-pump.html"><img src="./assets/part-1.jpg" alt="" loading="lazy"><img src="./assets/part-1-on.jpg" alt="" loading="lazy"><h3>일반 펌프부품</h3><p class="lat">Casing / Impeller</p></a></li>
+      <li data-aos="fade-up" data-delay="150"><a href="product-hp.html"><img src="./assets/part-2.jpg" alt="" loading="lazy"><img src="./assets/part-2-on.jpg" alt="" loading="lazy"><h3>고압 펌프부품</h3><p class="lat">Casing / Diffuser</p></a></li>
+      <li data-aos="fade-up" data-delay="250"><a href="product-valve.html"><img src="./assets/part-3.jpg" alt="" loading="lazy"><img src="./assets/part-3-on.jpg" alt="" loading="lazy"><h3>밸브부품</h3><p class="lat">Body / Bonnet / Disc</p></a></li>
+      <li data-aos="fade-up" data-delay="350"><a href="product-machine.html"><img src="./assets/part-4.jpg" alt="" loading="lazy"><img src="./assets/part-4-on.jpg" alt="" loading="lazy"><h3>산업기계부품</h3><p class="lat">Housing / Frame</p></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 비전 -->
+<section class="sec vi" id="vision">
+  <div class="mark" aria-hidden="true"><svg viewBox="0 0 1440 212" preserveAspectRatio="xMidYMid meet"><text x="720" y="186" text-anchor="middle" fill="currentColor" font-family="Raleway,Arial,sans-serif" font-size="242" font-weight="800" letter-spacing="14">HANVEX</text></svg></div>
+  <div class="in">
+    <div class="ttl">
+      <span class="eb" data-aos="fade-up">고객과 함께 지켜 갈 약속</span>
+      <div data-aos="fade"><h2 class="split">Built<br>on<br>trust</h2></div>
+      <a class="more" href="history.html" data-label="VIEW MORE" data-aos="fade-up">VIEW MORE</a>
+    </div>
+    <ul>
+      <li data-aos="fade-up"><img src="./assets/vision-1.jpg" alt="" loading="lazy"><h3>Precision</h3><p>설계 해석과 3차원 측정으로 도면의 치수를 끝까지 지킵니다.</p></li>
+      <li data-aos="fade-up"><img src="./assets/vision-2.jpg" alt="" loading="lazy"><h3>Partnership</h3><p>협력사와 원자재 공급망을 함께 관리해<br>생산 일정이 흔들리지 않게 합니다.</p></li>
+      <li data-aos="fade-up"><img src="./assets/vision-3.jpg" alt="" loading="lazy"><h3>Safety</h3><p>고온 작업장의 안전 기준을 매일 점검하고 기록합니다.</p></li>
+      <li data-aos="fade-up"><img src="./assets/vision-4.jpg" alt="" loading="lazy"><h3>Challenge</h3><p>새 강종과 공법을 먼저 시험해 다음 수요를 준비합니다.</p></li>
+    </ul>
+  </div>
+</section>
+<section class="vm" aria-label="비전">
+  <div class="ttl" style="padding-right:20px">
+    <span class="eb" data-aos="fade-up">고객과 함께 지켜 갈 약속</span>
+    <div data-aos="fade"><h2 class="split">Built on<br>trust</h2></div>
+    <a class="more" href="history.html" data-label="VIEW MORE" data-aos="fade-up">VIEW MORE</a>
+  </div>
+  <div class="swiper" id="vmSwiper"><ul class="swiper-wrapper">
+    <li class="swiper-slide"><img src="./assets/vision-1.jpg" alt="" loading="lazy"><h3>Precision</h3><p>설계 해석과 3차원 측정으로 도면의 치수를 끝까지 지킵니다.</p></li>
+    <li class="swiper-slide"><img src="./assets/vision-2.jpg" alt="" loading="lazy"><h3>Partnership</h3><p>협력사와 원자재 공급망을 함께 관리해 생산 일정이 흔들리지 않게 합니다.</p></li>
+    <li class="swiper-slide"><img src="./assets/vision-3.jpg" alt="" loading="lazy"><h3>Safety</h3><p>고온 작업장의 안전 기준을 매일 점검하고 기록합니다.</p></li>
+    <li class="swiper-slide"><img src="./assets/vision-4.jpg" alt="" loading="lazy"><h3>Challenge</h3><p>새 강종과 공법을 먼저 시험해 다음 수요를 준비합니다.</p></li>
+  </ul>
+  <div class="arrows"><button type="button" class="vmPrev" aria-label="이전 비전"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="none" stroke="#fff" stroke-opacity=".6"/><path d="M31 20l-8 8 8 8" fill="none" stroke="#fff" stroke-width="1.8"/></svg></button><button type="button" class="vmNext" aria-label="다음 비전"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="none" stroke="#fff" stroke-opacity=".6"/><path d="M25 20l8 8-8 8" fill="none" stroke="#fff" stroke-width="1.8"/></svg></button></div></div>
+</section>
+
+<!-- 파트너 -->
+<section class="sec cu" id="partners">
+  <div class="in">
+    <div class="ttl">
+      <div data-aos="fade"><h2 class="split">GLOBAL PARTNERS,<br>PROVEN QUALITY</h2></div>
+      <a class="more" href="partner.html" data-label="VIEW MORE" data-aos="fade-up">VIEW MORE</a>
+    </div>
+    <div class="board" data-aos="fade-up"><img src="./assets/partners.svg" alt="협력사 로고 12곳 (가상 브랜드)" loading="lazy"></div>
+  </div>
+</section>
+
+<!-- 뉴스 + 문의 -->
+<section class="ga" id="news">
+  <div class="in">
+    <div class="ttl">
+      <div><span class="eb" data-aos="fade-up">현장에서 전하는 소식</span><div data-aos="fade"><h2 class="split">hanvex news</h2></div></div>
+      <div class="arrows" data-aos="fade-up"><button type="button" class="newsPrev" aria-label="이전 소식"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="none" stroke="#fff" stroke-opacity=".6"/><path d="M31 20l-8 8 8 8" fill="none" stroke="#fff" stroke-width="1.8"/></svg></button><button type="button" class="newsNext" aria-label="다음 소식"><svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="28" r="27" fill="none" stroke="#fff" stroke-opacity=".6"/><path d="M25 20l8 8-8 8" fill="none" stroke="#fff" stroke-width="1.8"/></svg></button></div>
+    </div>
+  </div>
+  <div class="gwrap">
+    <div class="swiper news" id="newsSwiper" data-aos="fade-up"><div class="swiper-wrapper">
+      <div class="swiper-slide"><a href="news.html"><figure class="ph"><img src="./assets/news-1.jpg" alt="" loading="lazy"></figure><span class="cat lat">NEWS</span><h3>한벡스금속, 지역 강소기업 육성 사업 대상 기업으로 선정</h3><time datetime="2026-09-08">2026-09-08</time></a></div>
+      <div class="swiper-slide"><a href="news.html"><figure class="ph"><img src="./assets/news-2.jpg" alt="" loading="lazy"></figure><span class="cat lat">NEWS</span><h3>슈퍼 듀플렉스 임펠러 첫 해외 정기 공급 시작</h3><time datetime="2026-08-27">2026-08-27</time></a></div>
+      <div class="swiper-slide"><a href="news.html"><figure class="ph"><img src="./assets/news-3.jpg" alt="" loading="lazy"></figure><span class="cat lat">NOTICE</span><h3>하반기 생산직·품질관리직 채용 안내</h3><time datetime="2026-08-18">2026-08-18</time></a></div>
+      <div class="swiper-slide"><a href="news.html"><figure class="ph"><img src="./assets/news-4.jpg" alt="" loading="lazy"></figure><span class="cat lat">NEWS</span><h3>열처리로 증설 완료, 대형 주조품 생산 능력 30% 늘려</h3><time datetime="2026-07-30">2026-07-30</time></a></div>
+      <div class="swiper-slide"><a href="news.html"><figure class="ph"><img src="./assets/news-5.jpg" alt="" loading="lazy"></figure><span class="cat lat">NEWS</span><h3>인근 학교 학생들에게 장학금 전달</h3><time datetime="2026-07-11">2026-07-11</time></a></div>
+      <div class="swiper-slide"><a href="news.html"><figure class="ph"><img src="./assets/news-6.jpg" alt="" loading="lazy"></figure><span class="cat lat">NOTICE</span><h3>여름 휴가 기간 출하 일정 안내</h3><time datetime="2026-07-02">2026-07-02</time></a></div>
+    </div></div>
+  </div>
+  <div class="contact">
+    <div class="ct">
+      <div data-aos="fade"><h2 class="split">contact us</h2></div>
+      <p data-aos="fade-up">단순히 부품을 납품하는 데서 그치지 않고, 쌓아 온 주조 기술과<br>약속을 지키는 태도로 고객의 다음 설비까지 함께 준비하겠습니다.</p>
+    </div>
+    <div><div class="ring"><a href="inquiry.html" aria-label="견적문의 하기"><svg viewBox="0 0 63 37" aria-hidden="true"><path d="M2 18.5h57M42 2l17 16.5L42 35" fill="none" stroke="#fff" stroke-width="2.4"/></svg></a></div></div>
+  </div>
+</section>
+</main>
+
+<footer class="ft" id="ft">
+  <button class="top" type="button" aria-label="맨 위로">TOP<svg viewBox="0 0 15 17" aria-hidden="true"><path d="M7.5 16V2M2 7.5 7.5 2 13 7.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+  <div><a class="flogo" href="./" aria-label="한벡스금속 홈"><svg viewBox="0 0 251 33" aria-hidden="true"><path d="M2 4h7v10h11V4h7v25h-7V19H9v10H2z" fill="#fff"/><path d="M31 4h5l-9 25h-5z" fill="#fff" opacity=".55"/><text x="46" y="27.5" fill="#fff" font-family="Raleway,Arial,sans-serif" font-size="27" font-weight="800" letter-spacing="2.2">HANVEX</text><text x="178" y="27" fill="#fff" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="15" font-weight="600" opacity=".8">한벡스금속</text></svg></a></div>
+  <div class="fc">
+    <ul class="info">
+      <li><h3>본사</h3><span>상호 : 한벡스금속 (민트클)</span><span>대표전화 : 010-4894-4905</span><span>이메일 : 6gsmake@gmail.com</span></li>
+      <li><h3>사업자 정보</h3><span>사업자등록번호 : 266-07-03678</span><span>통신판매업신고 : 제2026-서울강남-00480호</span></li>
+      <li><h3>메일</h3><span>6gsmake@gmail.com</span></li>
+    </ul>
+    <nav aria-label="사이트 메뉴">
+      <ul>
+        <li><a href="history.html">COMPANY</a><ul><li><a href="history.html">회사개요</a></li><li><a href="ci.html">CI 소개</a></li><li><a href="partner.html">비즈니스 파트너</a></li><li><a href="location.html">찾아오시는 길</a></li><li><a href="news.html">회사소식</a></li></ul></li>
+        <li><a href="process.html">FACTORY</a><ul><li><a href="process.html">생산공정</a></li><li><a href="equipment.html">생산설비</a></li><li><a href="technology.html">핵심기술</a></li><li><a href="certificate.html">인증서 현황</a></li></ul></li>
+        <li><a href="product-pump.html">PRODUCT</a><ul><li><a href="product-pump.html">일반 펌프부품</a></li><li><a href="product-hp.html">고압 펌프부품</a></li><li><a href="product-valve.html">밸브부품</a></li><li><a href="product-machine.html">산업기계부품</a></li></ul></li>
+        <li><a href="inquiry.html">CUSTOMER</a><ul><li><a href="inquiry.html">견적문의</a></li><li><a href="contact.html">컨택트</a></li></ul></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="fu">
+    <ul><li><a href="privacy.html">개인정보처리방침</a></li><li><a href="privacy.html#email">이메일무단수집거부</a></li></ul>
+    <p class="lat">Copyright(c) 2026 by HANVEX METAL. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const HV = window.HV;
+
+  // 첫 화면: 페이드 .8s · 10초 · 전환 끝나면 글자 올라옴 · 부제는 글자 끝나기 .25s 전에 (0.5 + 0.05×(글자수-1) + 0.05 - 0.25)
+  const slides = $$('#hero .sl');
+  slides.forEach(sl => $$('.hs', sl).forEach(el => {
+    let i = 0; const t = el.textContent, w = document.createElement('span'); el.setAttribute('aria-label', t); el.textContent = ''; el.append(w);   // 줄이 flex 라서 글자를 한 번 감싸야 띄어쓰기가 남는다
+    t.split(' ').forEach((word, k) => {   // 단어는 한 덩어리로 (글자 사이에서 줄이 안 끊기게)
+      if (k) w.append(' ');
+      const wd = document.createElement('span'); wd.style.whiteSpace = 'nowrap'; w.append(wd);
+      [...word].forEach(c => { const s = document.createElement('span'); s.className = 'ch'; s.setAttribute('aria-hidden', 'true'); s.style.setProperty('--i', i++); s.textContent = c; wd.append(s); });
+    });
+  }));
+  let cur = 0, timer, busy = false;
+  const play = sl => {
+    const n = Math.max(...$$('.hs', sl).map(el => $$('.ch', el).length));
+    $('.sub', sl).style.animationDelay = Math.max(0, .5 + .05 * (n - 1) + .05 - .25).toFixed(2) + 's';
+    sl.classList.add('play');
+  };
+  const show = k => {
+    if (busy) return; busy = true;
+    const from = slides[cur]; cur = (k + slides.length) % slides.length; const to = slides[cur];
+    $$('img[loading=lazy]', to).forEach(im => im.loading = 'eager');
+    slides.forEach(s => s.classList.remove('play'));
+    from.classList.remove('on'); to.classList.add('on');
+    setTimeout(() => { play(to); busy = false; }, reduce ? 0 : 800);
+    restart();
+  };
+  const restart = () => { clearInterval(timer); timer = setInterval(() => show(cur + 1), 10000 + 800); };
+  $('#heroPrev').addEventListener('click', () => show(cur - 1));
+  $('#heroNext').addEventListener('click', () => show(cur + 1));
+  play(slides[0]); restart();
+
+  // 사업 기술 5개
+  const TECH = [
+    ['주조 해석 시뮬레이션', 'SIMULATION', '쇳물이 흐르고 굳는 과정을 먼저 계산해 보고 주형을 설계합니다.<br>수축과 기공이 생길 자리를 미리 찾아내 불량을 줄이고,<br>시험 주조 횟수를 줄여 납기를 앞당깁니다.'],
+    ['고순도 용해 정련', 'MELTING', '유도로에서 녹인 쇳물의 불순물을 걸러 내<br>성분이 고르고 깨끗한 용탕을 만듭니다.'],
+    ['주형 모래 관리', 'SAND CONTROL', '모래와 금속의 비율, 재생 모래의 수분과 강열 감량을<br>매일 측정해 기준 안에서 관리하고<br>표면이 매끈한 주조품을 만듭니다.'],
+    ['3차원 정밀 측정', '3D INSPECTION', '광학 스캐너로 주조품 전체를 측정해 도면과 비교합니다.<br>0.02mm 단위로 치수를 확인하고<br>검사 시간을 기존의 3분의 1로 줄였습니다.'],
+    ['합금강 전용 열처리', 'HEAT TREATMENT', '듀플렉스 강종에 맞춘 열처리로를 직접 운영해<br>조직을 고르게 만들고, 설비를 내재화해<br>가격 경쟁력까지 갖췄습니다.'],
+  ];
+
+  // 제목: 멈춘 0.9 화면 동안 세 줄이 차례로 흰색으로 (power2.out = 1-(1-t)^3)
+  const bt = $('#bt'), lines = $$('#mask .ln');
+  const titleScene = () => {
+    const vh = innerHeight, r = bt.getBoundingClientRect(), th = $('.in', bt).offsetHeight;
+    const p = clamp(-(r.top - (vh / 2 - th / 2)) / (vh * .9), 0, 1);
+    lines.forEach((ln, i) => {
+      const t = clamp(p * lines.length - i, 0, 1), e = 1 - Math.pow(1 - t, 3);
+      $('.rev', ln).style.width = ($('.base', ln).offsetWidth * e).toFixed(1) + 'px';
+    });
+  };
+
+  // 기술: 화면 22% 에 멈춘 (사진 수 + 0.01) 화면 동안, 사진 n-1 장이 구간마다 아래(100%)에서 제자리로 · 구간 35% 넘으면 글 교체
+  const bs = $('#bs'), imgs = $$('.img', bs), txt = $('#bsText'), curEl = $('#bsCur');
+  let shown = 0;
+  const swap = i => {
+    shown = i; const [a, h, p] = TECH[i];
+    txt.innerHTML = `<span class="a">${a}</span><h3>${h}</h3><p>${p}</p>`; curEl.textContent = i + 1;
+    if (reduce) return;
+    txt.animate([{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'none' }], { duration: 1000, easing: 'cubic-bezier(.33,1,.68,1)' });
+  };
+  const techScene = () => {
+    if (getComputedStyle(bs).display === 'none') return;
+    const vh = innerHeight, r = bs.getBoundingClientRect();
+    const p = clamp(-(r.top - vh * .22) / (vh * (imgs.length + .01)), 0, 1);
+    const seg = p * (imgs.length - 1);
+    imgs.forEach((im, i) => { if (!i) return; const t = clamp(seg - (i - 1), 0, 1); im.style.transform = 'translateY(' + ((1 - t) * 100).toFixed(2) + '%)'; });
+    const want = clamp(seg - Math.floor(seg) > .35 ? Math.floor(seg) + 1 : Math.floor(seg), 0, imgs.length - 1);
+    if (want !== shown) swap(want);
+  };
+  HV.ticks.push(titleScene, techScene);
+
+  // 사업 모바일 (1023 이하): 한 장씩 · 간격 16 · .6s
+  $('#bmWrap').innerHTML = TECH.map(([a, h, p], i) => `<div class="swiper-slide"><div class="img"><img src="./assets/tech-${i + 1}.jpg" alt="" loading="lazy"></div><div class="txt"><span class="a">${a}</span><h3>${h}</h3><p>${p}</p></div></div>`).join('');
+  if (window.Swiper) {
+    new Swiper('#bmSwiper', { slidesPerView: 1, spaceBetween: 16, speed: 600, autoHeight: true, grabCursor: true,
+      navigation: { prevEl: '.bmPrev', nextEl: '.bmNext' }, on: { slideChange: s => { $('#bmCur').textContent = s.activeIndex + 1; } } });
+    new Swiper('#newsSwiper', { slidesPerView: 3.5, spaceBetween: 28, speed: 600, grabCursor: true, watchOverflow: true,
+      navigation: { nextEl: '.newsNext', prevEl: '.newsPrev' }, autoplay: reduce ? false : { delay: 4000, disableOnInteraction: false },
+      breakpoints: { 0: { slidesPerView: 1.2, spaceBetween: 16 }, 480: { slidesPerView: 1.6, spaceBetween: 16 }, 640: { slidesPerView: 2.2, spaceBetween: 20 }, 1024: { slidesPerView: 3, spaceBetween: 24 }, 1280: { slidesPerView: 3.5, spaceBetween: 28 } } });
+    new Swiper('#vmSwiper', { loop: true, speed: 800, navigation: { nextEl: '.vmNext', prevEl: '.vmPrev' }, autoplay: reduce ? false : { delay: 4000, disableOnInteraction: false },
+      breakpoints: { 0: { slidesPerView: 1.2, spaceBetween: 20 }, 768: { slidesPerView: 2.5, spaceBetween: 30 }, 1024: { slidesPerView: 2.5, spaceBetween: 40 } } });
+  }
+
+  // 숫자: 화면 80% 에 들어오면 한 번 · 1000 이상 1.6s 아니면 1.2s · power1.out = 1-(1-t)^2
+  $$('.stats .n').forEach(el => {
+    const to = +el.dataset.to, li = el.closest('li'); let done = false;
+    HV.ticks.push(() => {
+      if (done || li.getBoundingClientRect().top > innerHeight * .8) return;
+      done = true; const dur = (to >= 1000 ? 1.6 : 1.2) * 1000, t0 = performance.now();
+      if (reduce) { el.textContent = to.toLocaleString(); return; }
+      const step = now => { const t = clamp((now - t0) / dur, 0, 1), e = 1 - Math.pow(1 - t, 2); el.textContent = Math.floor(to * e).toLocaleString(); if (t < 1) requestAnimationFrame(step); };
+      requestAnimationFrame(step);
+    });
+  });
+  addEventListener('load', () => HV.tick());
+  document.fonts?.ready.then(() => HV.tick());
+})();
+</script>
+</body>
+</html>
