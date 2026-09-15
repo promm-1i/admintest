@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>문의하기 — 하이온셀</title>
+<meta name="description" content="하이온셀 제품·서비스 문의.">
+<meta property="og:title" content="문의하기 — 하이온셀">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/sub.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 고객지원 공통 — 비주얼 없음 · 머리(100) 아래에서 바로 시작 */
+.cs-wrap{max-width:1440px;margin:0 auto}
+.srch600{display:flex;justify-content:center;padding:80px 0 80px}
+.srch600 form{display:flex;align-items:center;width:600px;height:48px;padding:0 16px 0 32px;border-radius:999px}
+.srch600 button{flex:none;width:48px;height:48px;background:url(./assets/ic/search.svg) no-repeat center/36px}
+.srch600 input{flex:1;min-width:0;height:48px;margin-left:40px;padding:0 8px 0 0;border-bottom:1px solid var(--l3);font-size:20px}
+.srch600 input::placeholder{color:var(--dis)}
+.pills3{display:flex;gap:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.pills3::-webkit-scrollbar{display:none}
+.pills3 button{flex:none;height:50px;padding:11.2px 40px;border:1px solid var(--ink);border-radius:100px;font-size:18px;line-height:25.2px;font-weight:500;white-space:nowrap}
+.pills3 .on button{background:var(--ink);color:#fff}
+.total{font-size:20px;line-height:32px;font-weight:600}
+.total span{color:var(--pri)}
+.cs-pager{display:flex;justify-content:center;align-items:center;gap:8px}
+.cs-pager a{display:flex;align-items:center;justify-content:center;width:36px;height:36px;font-size:24px;line-height:36px;font-weight:500;color:#B4B8B9}
+.cs-pager a.on{color:#171818}
+.cs-pager .ar{width:32px;height:36px;background:no-repeat center/32px}
+.cs-pager .ar.first{background-image:url(./assets/ic/pg-first.svg)}.cs-pager .ar.prev{background-image:url(./assets/ic/pg-prev.svg);margin-right:50px}
+.cs-pager .ar.next{background-image:url(./assets/ic/pg-next.svg);margin-left:50px}.cs-pager .ar.last{background-image:url(./assets/ic/pg-last.svg)}
+.cs-pager .ar.dis{opacity:.3;pointer-events:none}
+@media (max-width:1279px){
+  .cs-wrap{padding:0 20px}
+  .srch600{padding:26px 0}
+  .srch600 form{width:100%;height:48px;padding:0;border-radius:0}
+  .srch600 button{width:32px;height:32px;margin:0;background-size:28px}
+  .srch600 input{margin-left:20px;padding:0 48px 0 0;font-size:18px}
+  .pills3{gap:10px;margin-right:-20px;padding-right:20px}
+  .pills3 button{height:40px;padding:6px 24px;font-size:16px;line-height:22.4px}
+  .total{font-size:16px;line-height:25.6px}
+  .cs-pager a{width:30px;height:30px;font-size:16px;line-height:25.6px;font-weight:600}
+  .cs-pager .ar{width:24px;height:28px;background-size:24px}
+  .cs-pager .ar.prev{margin-right:16px}.cs-pager .ar.next{margin-left:16px}
+}
+/* 문의하기 — ref cs-inquiry (PC 2107 · 모바일 1343)
+   머리 220/60 · 제목 44 · 설명 20/36 #555758 · 회색 판 80/240 · 단계 칸 1350 (왼쪽 90 번호) · 열린 칸 흰 r8 30/60 · 제목 24/36 600
+   분류 버튼 300×72 #F3F5F7 r8 20 600 #858889 · 다음 127×56 r100 · 닫힌 칸 96 */
+.iq-head{padding:220px 0 60px}
+.iq-head .cs-wrap>p{margin-top:20px;font-size:20px;line-height:36px;color:var(--ink2)}
+.iq{padding:80px 0 240px;background:var(--f4)}
+.iq ol{counter-reset:st}
+.iq-step{position:relative;margin-left:90px;border:2px solid #fff;border-radius:8px;background:#fff}
+.iq-step+.iq-step{margin-top:20px}
+.iq-step::before{counter-increment:st;content:counter(st);position:absolute;left:-90px;top:22px;display:flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:#fff;border:1px solid var(--l3);font-size:22px;font-weight:600;color:var(--t3)}
+.iq-step.on::before,.iq-step.done::before{background:var(--pri);border-color:var(--pri);color:#fff}
+.iq-step::after{content:"";position:absolute;left:-65px;top:74px;bottom:-22px;width:2px;background:var(--l3)}
+.iq-step:last-child::after{display:none}
+.iq-step>.iq-h{display:flex;align-items:center;width:100%;padding:30.08px 60px;text-align:left;font-size:24px;line-height:32px;font-weight:600}
+.iq-step.on>.iq-h{padding:30.08px 60px 0;line-height:36px}
+.iq-step>.bd{display:none;padding:40px 60px}
+.iq-step.on>.bd{display:block}
+.iq-grid{display:grid;grid-template-columns:repeat(4,300px);gap:10px}
+.iq-grid button{height:72px;padding:21.92px 24px;border-radius:8px;background:var(--f4);font-size:20px;line-height:20px;font-weight:600;color:var(--t3)}
+.iq-grid button.sel{background:var(--pri);color:#fff}
+.iq-btns{display:flex;justify-content:flex-end;gap:10px;margin-top:30px}
+.iq-btns button{display:inline-flex;align-items:center;gap:10px;height:56px;padding:13.92px 32px;border-radius:100px;font-size:20px;line-height:28px;font-weight:500}
+.iq-btns .next{background:var(--pri);color:#fff}
+.iq-btns .next::after{content:"";width:24px;height:24px;background:url(./assets/ic/arrow-w.svg) no-repeat center/20px}
+.iq-btns .next:disabled{background:#C9CED0;cursor:not-allowed}
+.iq-btns .prev{border:1px solid var(--ink)}
+.iq-btns .prev::before{content:"";width:24px;height:24px;background:url(./assets/ic/arrow-k.svg) no-repeat center/20px;transform:rotate(180deg)}
+.iq-req{display:block;margin-bottom:24px;font-size:16px;color:var(--t3)}
+.iq-row{display:grid;grid-template-columns:200px 1fr;align-items:center;gap:20px;padding:16px 0;border-bottom:1px solid var(--l4)}
+.iq-row label{font-size:18px;line-height:28.8px;font-weight:600}
+.iq-row label em{font-style:normal;color:var(--pri);margin-left:4px}
+.iq-row input,.iq-row textarea,.iq-row select{width:100%;height:56px;padding:0 20px;border:1px solid var(--l3);border-radius:8px;background:#fff;font-size:18px}
+.iq-row textarea{height:200px;padding:16px 20px;resize:vertical}
+.iq-row input:focus,.iq-row textarea:focus,.iq-row select:focus{border-color:var(--pri)}
+.iq-agree li{display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--l4);font-size:18px}
+.iq-agree input{width:22px;height:22px;accent-color:var(--pri)}
+.iq-agree a{margin-left:auto;font-size:15px;color:var(--t3);text-decoration:underline}
+.iq-msg{margin-top:20px;font-size:16px;color:var(--pri);text-align:right}
+@media (max-width:1279px){
+  .iq-head{padding:32px 20px 24px}
+  .iq-head .cs-wrap{padding:0}
+  .iq-head .h1{font-size:24px;line-height:33px}
+  .iq-head .cs-wrap>p{margin-top:16px;font-size:16px;line-height:25.6px;color:var(--ink)}
+  .iq{padding:0 0 40px;background:#fff}
+  .iq .cs-wrap{padding:0}
+  .iq-bar{display:flex;gap:8px;padding:32px 20px 24px;background:var(--f4)}
+  .iq-bar span{display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--l3);font-size:15px;font-weight:600;color:var(--t3)}
+  .iq-bar span.on{background:var(--pri);border-color:var(--pri);color:#fff}
+  .iq-step{margin:0;border:0;border-radius:0}
+  .iq-step:not(.on){display:none}
+  .iq-step::before,.iq-step::after{display:none}
+  .iq-step.on>.iq-h{padding:24px 20px 0;font-size:20px;line-height:30px;white-space:normal}
+  .iq-step>.bd{padding:16px 20px 0}
+  .iq-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .iq-grid button{height:60px;padding:12px;border:1px solid var(--l4);border-radius:4px;background:#fff;font-size:16px;line-height:16px}
+  .iq-grid button.sel{border-color:var(--pri)}
+  .iq-btns button{height:48px;padding:10px 24px;font-size:16px}
+  .iq-row{grid-template-columns:1fr;gap:8px}
+  .iq-row label{font-size:16px}
+  .iq-row input,.iq-row select{height:48px;font-size:16px}
+  .iq-agree li{font-size:15px;flex-wrap:wrap}
+}
+@media (min-width:1280px){.iq-bar{display:none}}
+
+</style>
+</head>
+<body class="sub inquiry">
+<header class="hd">
+  <div class="hd-in">
+    <div class="hd-cont">
+      <h1 class="ci"><a href="./index.html"><img src="./assets/ic/ci.svg" alt="하이온셀"></a></h1>
+      <nav class="gnb pc"><ul><li class="d1"><button type="button">제품</button><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><button type="button">회사정보</button><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><button type="button">인재채용</button><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+      <div class="navp mo">
+        <nav><ul><li class="d1"><a href="solution.html">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><a href="about.html">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="talent.html">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+        <ul class="navp-util">
+          <li><a href="./download.html"><img src="./assets/ic/nav-down.svg" alt=""><p>다운로드</p></a></li>
+          <li><a href="./inquiry.html"><img src="./assets/ic/nav-inq.svg" alt=""><p>문의하기</p></a></li>
+          <li><a href="./faq.html"><img src="./assets/ic/nav-faq.svg" alt=""><p><strong>FAQ</strong></p></a></li>
+        </ul>
+      </div>
+      <div class="util">
+        <div class="cs pc">
+          <button type="button">고객지원</button>
+          <div class="cs-pop"><div class="pw"><a href="./download.html">다운로드</a><a href="./inquiry.html">문의하기</a><a href="./faq.html">FAQ</a><button type="button" class="x" aria-label="닫기"></button></div></div>
+        </div>
+        <div class="lang" data-sel>
+          <button type="button" aria-haspopup="listbox"><img src="./assets/ic/globe.svg" alt="언어 선택"><i></i></button>
+          <ul role="listbox"><li><a href="#" class="active">KR</a></li><li><a href="#">EN</a></li><li><a href="#">CN</a></li><li><a href="#">JP</a></li></ul>
+        </div>
+        <button type="button" class="srch-btn" aria-label="검색"></button>
+        <button type="button" class="nav-btn" aria-label="메뉴 열기"><i class="x"><span class="xl"></span><span class="xl"></span></i><span class="ln"></span><span class="ln"></span><span class="ln"></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="srch"><form action="./faq.html" onsubmit="return false"><button type="button" class="go" aria-label="검색"></button><input type="text" placeholder="검색어를 입력해 주세요."></form></div>
+<div class="smap pc">
+  <div class="pw">
+    <div class="smap-hd"><a href="./index.html"><img src="./assets/ic/ci-w.svg" alt="하이온셀"></a></div>
+    <ul class="smap-area"><li class="d1"><a href="#" onclick="return false">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a><ul><li class="d3"><a href="solution.html">전기차</a></li><li class="d3"><a href="solution.html">ESS</a></li><li class="d3"><a href="solution.html">전동공구</a></li><li class="d3"><a href="solution.html">모빌리티</a></li></ul></li><li class="d2"><a href="cylindrical.html">폼팩터</a><ul><li class="d3"><a href="cylindrical.html">원통형</a></li><li class="d3"><a href="cylindrical.html">파우치형</a></li></ul></li><li class="d2"><a href="material.html">소재</a><ul><li class="d3"><a href="material.html">NCM</a></li><li class="d3"><a href="material.html">LFP</a></li></ul></li></ul></li><li class="d1"><a href="#" onclick="return false">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a><ul><li class="d3"><a href="about.html">회사개요</a></li><li class="d3"><a href="vision.html">비전</a></li><li class="d3"><a href="history.html">연혁</a></li><li class="d3"><a href="ci.html">CI</a></li></ul></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="#" onclick="return false">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li><li class="d1"><a href="#" onclick="return false">고객지원</a><ul><li class="d2"><a href="download.html">다운로드</a></li><li class="d2"><a href="inquiry.html">문의하기</a></li><li class="d2"><a href="faq.html">FAQ</a></li></ul></li></ul>
+    <button type="button" class="close" aria-label="닫기"></button>
+  </div>
+</div>
+<main id="container" class="sub">
+<section class="iq-head"><div class="cs-wrap"><h2 class="h1">문의하기</h2><p>문의사항을 남겨 주시면 빠른 시일 내에 답변드리겠습니다.</p></div></section>
+<section class="iq"><div class="cs-wrap"><div class="iq-bar" aria-hidden="true"><span class="on">1</span><span>2</span><span>3</span><span>4</span><span>5</span></div><form id="iqForm" novalidate><ol>
+  <li class="iq-step on" data-s="1"><button type="button" class="iq-h">문의하시고 싶은 카테고리를 선택해주세요.</button>
+    <div class="bd"><div class="iq-grid" data-g="cat"><button type="button">제품</button><button type="button">서비스</button><button type="button">구매·견적</button><button type="button">미디어</button><button type="button">기술</button><button type="button">채용</button><button type="button">안전·환경</button><button type="button">협력사 등록</button><button type="button">기타</button></div><div class="iq-btns"><button type="button" class="next" disabled>다음</button></div></div></li>
+  <li class="iq-step" data-s="2"><button type="button" class="iq-h">세부 카테고리를 선택해주세요.</button>
+    <div class="bd"><div class="iq-grid" data-g="sub"></div><div class="iq-btns"><button type="button" class="prev">이전</button><button type="button" class="next" disabled>다음</button></div></div></li>
+  <li class="iq-step" data-s="3"><button type="button" class="iq-h">문의자의 정보를 입력해주세요.</button>
+    <div class="bd"><span class="iq-req">* 표시는 필수 입력 항목입니다.</span>
+      <div class="iq-row"><label for="iqName">이름<em>*</em></label><input id="iqName" required></div>
+      <div class="iq-row"><label for="iqCo">회사명<em>*</em></label><input id="iqCo" required></div>
+      <div class="iq-row"><label for="iqMail">이메일<em>*</em></label><input id="iqMail" type="email" required></div>
+      <div class="iq-row"><label for="iqTel">연락처<em>*</em></label><input id="iqTel" type="tel" required></div>
+      <div class="iq-row"><label for="iqCountry">국가</label><select id="iqCountry"><option>대한민국</option><option>베트남</option><option>폴란드</option><option>기타</option></select></div>
+      <div class="iq-btns"><button type="button" class="prev">이전</button><button type="button" class="next">다음</button></div></div></li>
+  <li class="iq-step" data-s="4"><button type="button" class="iq-h">문의내용을 작성해주세요.</button>
+    <div class="bd">
+      <div class="iq-row"><label for="iqTitle">제목<em>*</em></label><input id="iqTitle" required></div>
+      <div class="iq-row"><label for="iqBody">내용<em>*</em></label><textarea id="iqBody" required></textarea></div>
+      <div class="iq-row"><label for="iqFile">첨부파일</label><input id="iqFile" type="file"></div>
+      <div class="iq-btns"><button type="button" class="prev">이전</button><button type="button" class="next">다음</button></div></div></li>
+  <li class="iq-step" data-s="5"><button type="button" class="iq-h">개인정보 수집, 이용, 제공 등의 동의</button>
+    <div class="bd"><ul class="iq-agree">
+      <li><input type="checkbox" id="ag1" required><label for="ag1">[필수] 개인정보 수집 및 이용 동의</label><a href="./privacy.html">자세히</a></li>
+      <li><input type="checkbox" id="ag2"><label for="ag2">[선택] 마케팅 정보 수신 동의</label><a href="./privacy.html">자세히</a></li>
+    </ul><div class="iq-btns"><button type="button" class="prev">이전</button><button type="submit" class="next">문의 보내기</button></div><p class="iq-msg" role="status"></p></div></li>
+</ol></form></div></section>
+</main>
+<footer class="ft">
+  <div class="ft-area">
+    <div>
+      <ul class="ft-map">
+        <li><a href="./privacy.html">개인정보처리방침</a></li>
+        <li><a href="./privacy.html#video">영상정보처리기기 운영·관리 방침</a></li>
+        <li><a href="#" class="n" data-modal="#mailBlock">이메일무단수집거부</a></li>
+        <li><a href="./inquiry.html" class="n">윤리경영 제보</a></li>
+        <li><a href="./inquiry.html" class="n">협력사 문의</a></li>
+        <li><a href="./faq.html" class="n">안전가이드</a></li>
+      </ul>
+    </div>
+    <div class="ft-r">
+      <div class="fsel" data-sel>
+        <button type="button" aria-haspopup="listbox">관련사이트</button>
+        <ul role="listbox">
+          <li><p class="cat">패밀리사이트</p></li>
+          <li><a href="./newsroom.html">하이온셀 기술 블로그</a></li>
+          <li><a href="./solution.html">ESS 사업 안내</a></li>
+          <li><p class="cat">비즈니스</p></li>
+          <li><a href="./download.html">협력사 자료실</a></li>
+          <li><a href="./inquiry.html">구매 문의 창구</a></li>
+        </ul>
+      </div>
+      <div class="ft-info">
+        <p>대표 민트클 · <a href="tel:01048944905">010-4894-4905</a></p>
+        <address>사업자등록번호 266-07-03678</address>
+        <p><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <div class="l">
+      <div class="flogo-w">
+        <a class="flogo" href="./index.html">©HIONCELL Corporation</a>
+        <div class="badge"><img src="./assets/ic/badge.svg" alt="안전 우선 생산 원칙"></div>
+      </div>
+      <ul class="sns">
+        <li><a href="#" aria-label="facebook"><img src="./assets/ic/sns-facebook.svg" alt=""></a></li>
+        <li><a href="#" aria-label="linkedin"><img src="./assets/ic/sns-linkedin.svg" alt=""></a></li>
+        <li><a href="#" aria-label="instagram"><img src="./assets/ic/sns-instagram.svg" alt=""></a></li>
+        <li><a href="#" aria-label="youtube"><img src="./assets/ic/sns-youtube.svg" alt=""></a></li>
+        <li><a href="#" aria-label="blog"><img src="./assets/ic/sns-blog.svg" alt=""></a></li>
+      </ul>
+    </div>
+    <div class="r"><a href="./inquiry.html"><img src="./assets/ic/newsletter.svg" alt="뉴스레터 구독하기"></a></div>
+  </div>
+</footer>
+<button type="button" class="top-fab" aria-label="맨 위로"><img src="./assets/ic/top.svg" alt=""></button>
+<div class="modal" id="mailBlock" role="dialog" aria-modal="true" aria-labelledby="mailBlockT">
+  <div class="pw">
+    <h3 id="mailBlockT">이메일 무단 수집 거부</h3>
+    <div class="mail-ic"></div>
+    <p class="desc">본 홈페이지에 게시된 이메일 주소가 자동 수집되는 것을<br>거부하며, 이를 위반하면 정보통신망법에 따라 처벌받을 수<br>있음을 알려 드립니다.</p>
+    <div class="lk"><strong>불법 스팸 대응 센터</strong>국번 없이 118</div>
+    <button type="button" class="ok">확인</button>
+    <button type="button" class="x" aria-label="닫기"></button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script src="./assets/sub.js"></script>
+<script>
+(() => {
+  const SUBS = {"제품": ["원통형 셀", "파우치형 셀", "ESS 모듈", "배터리팩 설계"], "서비스": ["수명 진단", "ESS 점검", "교체·회수"], "구매·견적": ["견적 요청", "샘플 요청", "납기 문의"], "미디어": ["취재 요청", "보도자료"], "기술": ["기술 자료", "공동 개발"], "채용": ["채용 절차", "인재 등록"], "안전·환경": ["안전 사용", "환경 인증"], "협력사 등록": ["부품 공급", "설비·공사"], "기타": ["기타 문의"]}, steps = [...document.querySelectorAll('.iq-step')], form = document.getElementById('iqForm');
+  const dots = [...document.querySelectorAll('.iq-bar span')];
+  const go = n => { steps.forEach((s, i) => { s.classList.toggle('on', i === n); s.classList.toggle('done', i < n); }); dots.forEach((d, i) => d.classList.toggle('on', i <= n)); };
+  const pick = (grid, onPick) => grid.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+    grid.querySelectorAll('button').forEach(x => x.classList.toggle('sel', x === b)); onPick(b.textContent); });
+  const subGrid = steps[1].querySelector('.iq-grid');
+  pick(steps[0].querySelector('.iq-grid'), c => { steps[0].querySelector('.next').disabled = false;
+    subGrid.innerHTML = SUBS[c].map(s => '<button type="button">' + s + '</button>').join(''); steps[1].querySelector('.next').disabled = true; });
+  pick(subGrid, () => steps[1].querySelector('.next').disabled = false);
+  steps.forEach((s, i) => {
+    s.querySelector('.iq-h').addEventListener('click', () => { if (i === 0 || s.classList.contains('done')) go(i); });
+    const p = s.querySelector('.prev'); if (p) p.addEventListener('click', () => go(i - 1));
+    const n = s.querySelector('button.next[type=button]');
+    if (n) n.addEventListener('click', () => { const bad = [...s.querySelectorAll('[required]')].find(x => !x.checkValidity()); if (bad) { bad.reportValidity(); return; } go(i + 1); });
+  });
+  form.addEventListener('submit', e => { e.preventDefault(); const ag = document.getElementById('ag1'); const msg = form.querySelector('.iq-msg');
+    if (!ag.checked) { ag.reportValidity(); return; } msg.textContent = '문의가 접수되었습니다. (샘플 템플릿 — 실제 전송은 제작 시 연결됩니다)'; });
+})();
+</script>
+</body>
+</html>

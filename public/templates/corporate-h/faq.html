@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>FAQ — 하이온셀</title>
+<meta name="description" content="하이온셀 자주 묻는 질문.">
+<meta property="og:title" content="FAQ — 하이온셀">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/sub.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 고객지원 공통 — 비주얼 없음 · 머리(100) 아래에서 바로 시작 */
+.cs-wrap{max-width:1440px;margin:0 auto}
+.srch600{display:flex;justify-content:center;padding:80px 0 80px}
+.srch600 form{display:flex;align-items:center;width:600px;height:48px;padding:0 16px 0 32px;border-radius:999px}
+.srch600 button{flex:none;width:48px;height:48px;background:url(./assets/ic/search.svg) no-repeat center/36px}
+.srch600 input{flex:1;min-width:0;height:48px;margin-left:40px;padding:0 8px 0 0;border-bottom:1px solid var(--l3);font-size:20px}
+.srch600 input::placeholder{color:var(--dis)}
+.pills3{display:flex;gap:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.pills3::-webkit-scrollbar{display:none}
+.pills3 button{flex:none;height:50px;padding:11.2px 40px;border:1px solid var(--ink);border-radius:100px;font-size:18px;line-height:25.2px;font-weight:500;white-space:nowrap}
+.pills3 .on button{background:var(--ink);color:#fff}
+.total{font-size:20px;line-height:32px;font-weight:600}
+.total span{color:var(--pri)}
+.cs-pager{display:flex;justify-content:center;align-items:center;gap:8px}
+.cs-pager a{display:flex;align-items:center;justify-content:center;width:36px;height:36px;font-size:24px;line-height:36px;font-weight:500;color:#B4B8B9}
+.cs-pager a.on{color:#171818}
+.cs-pager .ar{width:32px;height:36px;background:no-repeat center/32px}
+.cs-pager .ar.first{background-image:url(./assets/ic/pg-first.svg)}.cs-pager .ar.prev{background-image:url(./assets/ic/pg-prev.svg);margin-right:50px}
+.cs-pager .ar.next{background-image:url(./assets/ic/pg-next.svg);margin-left:50px}.cs-pager .ar.last{background-image:url(./assets/ic/pg-last.svg)}
+.cs-pager .ar.dis{opacity:.3;pointer-events:none}
+@media (max-width:1279px){
+  .cs-wrap{padding:0 20px}
+  .srch600{padding:26px 0}
+  .srch600 form{width:100%;height:48px;padding:0;border-radius:0}
+  .srch600 button{width:32px;height:32px;margin:0;background-size:28px}
+  .srch600 input{margin-left:20px;padding:0 48px 0 0;font-size:18px}
+  .pills3{gap:10px;margin-right:-20px;padding-right:20px}
+  .pills3 button{height:40px;padding:6px 24px;font-size:16px;line-height:22.4px}
+  .total{font-size:16px;line-height:25.6px}
+  .cs-pager a{width:30px;height:30px;font-size:16px;line-height:25.6px;font-weight:600}
+  .cs-pager .ar{width:24px;height:28px;background-size:24px}
+  .cs-pager .ar.prev{margin-right:16px}.cs-pager .ar.next{margin-left:16px}
+}
+/* FAQ — ref cs-faq (PC 2988 · 모바일 2442)
+   위 200 · 제목 44 · 검색 · 밑줄 탭 · 회색 판 60 · 총 건수 · 흰 칸 132 r8 테두리 2 · Q 32/48 500 강조 · 분류 18/32 500 #858889 · 질문 20/32 600 · 쪽번호 · 아래 240 */
+.fq{padding-top:200px}
+.fq .h1{line-height:53px}
+.fq-box{padding:60px 0;background:var(--f4)}
+.fq-box .total{margin-top:60px}
+.fq-list{margin-top:30px}
+.fq-list .acc{border:2px solid #fff;border-radius:8px;background:#fff}
+.fq-list .acc+.acc{margin-top:20px}
+.fq-list .acc.on{border-color:var(--pri)}
+.fq-list .acc>button{padding:30.08px 48px 30.08px 40px;white-space:normal}
+.fq-list .acc>button::after{background-image:url(./assets/ic/acc-down.svg);width:32px;height:32px}
+.fq-list .acc.on>button::after{background-image:url(./assets/ic/acc-up.svg);top:40px}
+.fq-list .grp{display:flex;align-items:center;gap:40px}
+.fq-list .q{font-size:32px;line-height:48px;font-weight:500;color:var(--pri)}
+.fq-list .sub{display:block;font-size:18px;line-height:32px;font-weight:500;color:var(--t3)}
+.fq-list .tt{display:block;margin-top:4px;font-size:20px;line-height:32px;font-weight:600}
+.fq-list .acc.on .tt{font-size:20px}
+.fq-list .pnl{margin:30px 40px 0 104px;padding:30px;background:var(--f4)}
+.fq-pg{padding:0 0 240px;background:var(--f4)}
+@media (max-width:1279px){
+  .fq{padding-top:32px}
+  .fq .cs-wrap:first-child{padding:0 20px}
+  .fq .h1{font-size:30px;line-height:36.4px}
+  .fq .h1{line-height:36px}
+  .fq .srch600{padding:34.56px 0}
+  .fq .srch600 form{height:32px}
+  .fq .utabs{gap:8px;padding:0;margin-top:0}
+  .fq-box .total{margin-top:8px}
+  .fq .utabs button{padding:8.48px 24px}
+  .fq-box{padding:32px 0}
+  .fq-list{margin-top:16px}
+  .fq-list .acc+.acc{margin-top:12px}
+  .fq-list .acc>button{padding:20px 48px 20px 20px}
+  .fq-list .acc>button::after{width:24px;height:24px;right:20px}
+  .fq-list .grp{gap:12px;align-items:flex-start}
+  .fq-list .q{font-size:24px;line-height:33px}
+  .fq-list .sub{font-size:14px;line-height:21px}
+  .fq-list .tt{font-size:16px;line-height:25.6px}
+  .fq-list .pnl{margin:16px 20px 0;padding:20px}
+  .fq-pg{padding:0 0 100px}
+}
+
+</style>
+</head>
+<body class="sub faq">
+<header class="hd">
+  <div class="hd-in">
+    <div class="hd-cont">
+      <h1 class="ci"><a href="./index.html"><img src="./assets/ic/ci.svg" alt="하이온셀"></a></h1>
+      <nav class="gnb pc"><ul><li class="d1"><button type="button">제품</button><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><button type="button">회사정보</button><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><button type="button">인재채용</button><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+      <div class="navp mo">
+        <nav><ul><li class="d1"><a href="solution.html">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><a href="about.html">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="talent.html">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+        <ul class="navp-util">
+          <li><a href="./download.html"><img src="./assets/ic/nav-down.svg" alt=""><p>다운로드</p></a></li>
+          <li><a href="./inquiry.html"><img src="./assets/ic/nav-inq.svg" alt=""><p>문의하기</p></a></li>
+          <li><a href="./faq.html"><img src="./assets/ic/nav-faq.svg" alt=""><p><strong>FAQ</strong></p></a></li>
+        </ul>
+      </div>
+      <div class="util">
+        <div class="cs pc">
+          <button type="button">고객지원</button>
+          <div class="cs-pop"><div class="pw"><a href="./download.html">다운로드</a><a href="./inquiry.html">문의하기</a><a href="./faq.html">FAQ</a><button type="button" class="x" aria-label="닫기"></button></div></div>
+        </div>
+        <div class="lang" data-sel>
+          <button type="button" aria-haspopup="listbox"><img src="./assets/ic/globe.svg" alt="언어 선택"><i></i></button>
+          <ul role="listbox"><li><a href="#" class="active">KR</a></li><li><a href="#">EN</a></li><li><a href="#">CN</a></li><li><a href="#">JP</a></li></ul>
+        </div>
+        <button type="button" class="srch-btn" aria-label="검색"></button>
+        <button type="button" class="nav-btn" aria-label="메뉴 열기"><i class="x"><span class="xl"></span><span class="xl"></span></i><span class="ln"></span><span class="ln"></span><span class="ln"></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="srch"><form action="./faq.html" onsubmit="return false"><button type="button" class="go" aria-label="검색"></button><input type="text" placeholder="검색어를 입력해 주세요."></form></div>
+<div class="smap pc">
+  <div class="pw">
+    <div class="smap-hd"><a href="./index.html"><img src="./assets/ic/ci-w.svg" alt="하이온셀"></a></div>
+    <ul class="smap-area"><li class="d1"><a href="#" onclick="return false">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a><ul><li class="d3"><a href="solution.html">전기차</a></li><li class="d3"><a href="solution.html">ESS</a></li><li class="d3"><a href="solution.html">전동공구</a></li><li class="d3"><a href="solution.html">모빌리티</a></li></ul></li><li class="d2"><a href="cylindrical.html">폼팩터</a><ul><li class="d3"><a href="cylindrical.html">원통형</a></li><li class="d3"><a href="cylindrical.html">파우치형</a></li></ul></li><li class="d2"><a href="material.html">소재</a><ul><li class="d3"><a href="material.html">NCM</a></li><li class="d3"><a href="material.html">LFP</a></li></ul></li></ul></li><li class="d1"><a href="#" onclick="return false">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a><ul><li class="d3"><a href="about.html">회사개요</a></li><li class="d3"><a href="vision.html">비전</a></li><li class="d3"><a href="history.html">연혁</a></li><li class="d3"><a href="ci.html">CI</a></li></ul></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="#" onclick="return false">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li><li class="d1"><a href="#" onclick="return false">고객지원</a><ul><li class="d2"><a href="download.html">다운로드</a></li><li class="d2"><a href="inquiry.html">문의하기</a></li><li class="d2"><a href="faq.html">FAQ</a></li></ul></li></ul>
+    <button type="button" class="close" aria-label="닫기"></button>
+  </div>
+</div>
+<main id="container" class="sub">
+<section class="fq" data-filter>
+  <div class="cs-wrap"><h2 class="h1">FAQ</h2>
+    <div class="srch600"><form role="search"><button type="submit" aria-label="검색"></button><input type="text" placeholder="궁금한 내용을 검색해 주세요." aria-label="FAQ 검색"></form></div>
+  </div>
+  <div class="cs-wrap"><ul class="utabs"><li class="on"><button type="button" data-tab="전체">전체</button></li><li><button type="button" data-tab="제품">제품</button></li><li><button type="button" data-tab="서비스">서비스</button></li><li><button type="button" data-tab="회사정보">회사정보</button></li><li><button type="button" data-tab="인재채용">인재채용</button></li><li><button type="button" data-tab="기타">기타</button></li></ul></div>
+  <div class="fq-box"><div class="cs-wrap"><p class="total">총 <span>10</span>건</p><div class="fq-list"><div class="acc" data-cat="제품"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">제품 &gt; 제품 자료</span><span class="tt">시험 성적서, 인증서 등 제품 관련 자료를 받고 싶습니다.</span></span></span></button><div class="pnl"><p>다운로드 쪽에서 공개 자료를 받으실 수 있으며, 공개하지 않는 자료는 문의하기에 요청해 주시면 담당자가 확인 후 보내 드립니다.</p></div></div><div class="acc" data-cat="제품"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">제품 &gt; 제품 카탈로그</span><span class="tt">셀과 모듈의 상세 사양을 받아보고 싶습니다.</span></span></span></button><div class="pnl"><p>카탈로그에 기본 사양이 정리되어 있습니다. 더 자세한 사양은 사용 목적과 수량을 함께 적어 문의해 주세요.</p></div></div><div class="acc" data-cat="제품"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">제품 &gt; 구매 문의</span><span class="tt">소량 구매도 가능한가요?</span></span></span></button><div class="pnl"><p>시제품 개발용 소량 공급이 가능합니다. 수량과 일정에 따라 공급 방식이 달라지니 문의하기로 연락해 주세요.</p></div></div><div class="acc" data-cat="서비스"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">서비스 &gt; 수명 진단</span><span class="tt">사용 중인 배터리 수명 진단은 어떻게 신청하나요?</span></span></span></button><div class="pnl"><p>문의하기에서 서비스 카테고리를 고른 뒤 배터리 종류와 수량을 적어 주시면 방문 또는 입고 일정을 안내해 드립니다.</p></div></div><div class="acc" data-cat="서비스"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">서비스 &gt; ESS 점검</span><span class="tt">ESS 정기 점검 주기는 어떻게 되나요?</span></span></span></button><div class="pnl"><p>설치 후 첫해에는 분기마다, 그 뒤로는 반기마다 점검하며 원격 모니터링은 상시 운영합니다.</p></div></div><div class="acc" data-cat="회사정보"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">회사정보 &gt; 방문</span><span class="tt">공장 견학이 가능한가요?</span></span></span></button><div class="pnl"><p>고객사와 협력사를 대상으로 사전 신청을 받아 견학을 진행합니다. 원하는 날짜보다 2주 전에 신청해 주세요.</p></div></div><div class="acc" data-cat="회사정보"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">회사정보 &gt; 협력사</span><span class="tt">협력사로 등록하려면 어떻게 해야 하나요?</span></span></span></button><div class="pnl"><p>문의하기에서 협력사 등록을 선택하고 회사 소개서와 주요 품목을 보내 주시면 구매팀에서 검토합니다.</p></div></div><div class="acc" data-cat="인재채용"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">인재채용 &gt; 지원</span><span class="tt">채용 공고가 없을 때도 지원할 수 있나요?</span></span></span></button><div class="pnl"><p>인재 등록을 해 두시면 맞는 직무가 열릴 때 먼저 연락드립니다.</p></div></div><div class="acc" data-cat="인재채용"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">인재채용 &gt; 면접</span><span class="tt">면접 결과는 언제 알 수 있나요?</span></span></span></button><div class="pnl"><p>면접 후 2주 안에 이메일과 문자로 결과를 알려 드립니다.</p></div></div><div class="acc" data-cat="기타"><button type="button" aria-expanded="false"><span class="grp"><span class="q">Q</span><span><span class="sub">기타 &gt; 안전</span><span class="tt">배터리가 부풀었을 때는 어떻게 해야 하나요?</span></span></span></button><div class="pnl"><p>즉시 사용을 멈추고 충전기를 분리한 뒤 불에 타지 않는 곳에 두세요. 직접 분해하지 말고 고객지원으로 연락해 주세요.</p></div></div></div></div></div>
+  <div class="fq-pg"><div class="cs-pager"><a href="#" class="ar first dis" aria-label="처음"></a><a href="#" class="ar prev dis" aria-label="이전"></a><a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a><a href="#" class="ar next" aria-label="다음"></a><a href="#" class="ar last" aria-label="끝"></a></div></div>
+</section>
+</main>
+<footer class="ft">
+  <div class="ft-area">
+    <div>
+      <ul class="ft-map">
+        <li><a href="./privacy.html">개인정보처리방침</a></li>
+        <li><a href="./privacy.html#video">영상정보처리기기 운영·관리 방침</a></li>
+        <li><a href="#" class="n" data-modal="#mailBlock">이메일무단수집거부</a></li>
+        <li><a href="./inquiry.html" class="n">윤리경영 제보</a></li>
+        <li><a href="./inquiry.html" class="n">협력사 문의</a></li>
+        <li><a href="./faq.html" class="n">안전가이드</a></li>
+      </ul>
+    </div>
+    <div class="ft-r">
+      <div class="fsel" data-sel>
+        <button type="button" aria-haspopup="listbox">관련사이트</button>
+        <ul role="listbox">
+          <li><p class="cat">패밀리사이트</p></li>
+          <li><a href="./newsroom.html">하이온셀 기술 블로그</a></li>
+          <li><a href="./solution.html">ESS 사업 안내</a></li>
+          <li><p class="cat">비즈니스</p></li>
+          <li><a href="./download.html">협력사 자료실</a></li>
+          <li><a href="./inquiry.html">구매 문의 창구</a></li>
+        </ul>
+      </div>
+      <div class="ft-info">
+        <p>대표 민트클 · <a href="tel:01048944905">010-4894-4905</a></p>
+        <address>사업자등록번호 266-07-03678</address>
+        <p><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <div class="l">
+      <div class="flogo-w">
+        <a class="flogo" href="./index.html">©HIONCELL Corporation</a>
+        <div class="badge"><img src="./assets/ic/badge.svg" alt="안전 우선 생산 원칙"></div>
+      </div>
+      <ul class="sns">
+        <li><a href="#" aria-label="facebook"><img src="./assets/ic/sns-facebook.svg" alt=""></a></li>
+        <li><a href="#" aria-label="linkedin"><img src="./assets/ic/sns-linkedin.svg" alt=""></a></li>
+        <li><a href="#" aria-label="instagram"><img src="./assets/ic/sns-instagram.svg" alt=""></a></li>
+        <li><a href="#" aria-label="youtube"><img src="./assets/ic/sns-youtube.svg" alt=""></a></li>
+        <li><a href="#" aria-label="blog"><img src="./assets/ic/sns-blog.svg" alt=""></a></li>
+      </ul>
+    </div>
+    <div class="r"><a href="./inquiry.html"><img src="./assets/ic/newsletter.svg" alt="뉴스레터 구독하기"></a></div>
+  </div>
+</footer>
+<button type="button" class="top-fab" aria-label="맨 위로"><img src="./assets/ic/top.svg" alt=""></button>
+<div class="modal" id="mailBlock" role="dialog" aria-modal="true" aria-labelledby="mailBlockT">
+  <div class="pw">
+    <h3 id="mailBlockT">이메일 무단 수집 거부</h3>
+    <div class="mail-ic"></div>
+    <p class="desc">본 홈페이지에 게시된 이메일 주소가 자동 수집되는 것을<br>거부하며, 이를 위반하면 정보통신망법에 따라 처벌받을 수<br>있음을 알려 드립니다.</p>
+    <div class="lk"><strong>불법 스팸 대응 센터</strong>국번 없이 118</div>
+    <button type="button" class="ok">확인</button>
+    <button type="button" class="x" aria-label="닫기"></button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script src="./assets/sub.js"></script>
+<script>
+(() => {
+  const root = document.querySelector('[data-filter]');
+  const items = [...root.querySelectorAll('[data-cat]')], cnt = root.querySelector('.total span'), q = root.querySelector('.srch600 input');
+  let cat = '전체';
+  const apply = () => { const k = q ? q.value.trim() : ''; let n = 0;
+    items.forEach(it => { const ok = (cat === '전체' || it.dataset.cat === cat) && (!k || it.textContent.includes(k)); it.hidden = !ok; if (ok) n++; });
+    cnt.textContent = n; };
+  root.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => {
+    root.querySelectorAll('[data-tab]').forEach(x => x.parentElement.classList.toggle('on', x === b)); cat = b.dataset.tab; apply(); }));
+  if (q) q.form.addEventListener('submit', e => { e.preventDefault(); apply(); });
+  apply();
+})();
+</script>
+</body>
+</html>

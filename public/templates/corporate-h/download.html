@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>다운로드 — 하이온셀</title>
+<meta name="description" content="하이온셀 제품 카탈로그와 자료 내려받기.">
+<meta property="og:title" content="다운로드 — 하이온셀">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/sub.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 고객지원 공통 — 비주얼 없음 · 머리(100) 아래에서 바로 시작 */
+.cs-wrap{max-width:1440px;margin:0 auto}
+.srch600{display:flex;justify-content:center;padding:80px 0 80px}
+.srch600 form{display:flex;align-items:center;width:600px;height:48px;padding:0 16px 0 32px;border-radius:999px}
+.srch600 button{flex:none;width:48px;height:48px;background:url(./assets/ic/search.svg) no-repeat center/36px}
+.srch600 input{flex:1;min-width:0;height:48px;margin-left:40px;padding:0 8px 0 0;border-bottom:1px solid var(--l3);font-size:20px}
+.srch600 input::placeholder{color:var(--dis)}
+.pills3{display:flex;gap:10px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none}
+.pills3::-webkit-scrollbar{display:none}
+.pills3 button{flex:none;height:50px;padding:11.2px 40px;border:1px solid var(--ink);border-radius:100px;font-size:18px;line-height:25.2px;font-weight:500;white-space:nowrap}
+.pills3 .on button{background:var(--ink);color:#fff}
+.total{font-size:20px;line-height:32px;font-weight:600}
+.total span{color:var(--pri)}
+.cs-pager{display:flex;justify-content:center;align-items:center;gap:8px}
+.cs-pager a{display:flex;align-items:center;justify-content:center;width:36px;height:36px;font-size:24px;line-height:36px;font-weight:500;color:#B4B8B9}
+.cs-pager a.on{color:#171818}
+.cs-pager .ar{width:32px;height:36px;background:no-repeat center/32px}
+.cs-pager .ar.first{background-image:url(./assets/ic/pg-first.svg)}.cs-pager .ar.prev{background-image:url(./assets/ic/pg-prev.svg);margin-right:50px}
+.cs-pager .ar.next{background-image:url(./assets/ic/pg-next.svg);margin-left:50px}.cs-pager .ar.last{background-image:url(./assets/ic/pg-last.svg)}
+.cs-pager .ar.dis{opacity:.3;pointer-events:none}
+@media (max-width:1279px){
+  .cs-wrap{padding:0 20px}
+  .srch600{padding:26px 0}
+  .srch600 form{width:100%;height:48px;padding:0;border-radius:0}
+  .srch600 button{width:32px;height:32px;margin:0;background-size:28px}
+  .srch600 input{margin-left:20px;padding:0 48px 0 0;font-size:18px}
+  .pills3{gap:10px;margin-right:-20px;padding-right:20px}
+  .pills3 button{height:40px;padding:6px 24px;font-size:16px;line-height:22.4px}
+  .total{font-size:16px;line-height:25.6px}
+  .cs-pager a{width:30px;height:30px;font-size:16px;line-height:25.6px;font-weight:600}
+  .cs-pager .ar{width:24px;height:28px;background-size:24px}
+  .cs-pager .ar.prev{margin-right:16px}.cs-pager .ar.next{margin-left:16px}
+}
+/* 다운로드 — ref cs-filedown (PC 2717 · 모바일 2115)
+   위 200 · 제목 44 · 검색 600×48 · 알약 113×50 · 총 건수 20 600 위 60 · 칸 105 (체크 24 · 분류 16 · 제목 20 600 · PDF 100×44 #F3F5F7 r8) · 쪽번호 위 60 · 선택 다운로드 420×88 */
+.dl{padding:200px 0 240px}
+.dl .total{margin-top:60px}
+.dl-list{padding:30px 0 100px}
+.dl-list li{display:flex;align-items:center;border-bottom:1px solid #C9CED0}
+.dl-chk{flex:none;width:64px;padding-left:40px}
+.dl-chk input{position:absolute;opacity:0;width:1px;height:1px}
+.dl-chk span{display:block;width:24px;height:24px;border:2px solid #C9CED0;border-radius:4px;cursor:pointer}
+.dl-chk input:checked+span{border-color:var(--pri);background:var(--pri) url(./assets/ic/check-w.svg) no-repeat center/16px}
+.dl-chk input:focus-visible+span{outline:2px solid var(--pri);outline-offset:2px}
+.dl-desc{display:flex;justify-content:space-between;align-items:center;flex:1;margin-left:40px;padding:30.08px 40px}
+.dl-desc .tw{display:flex;align-items:center;gap:40px}
+.dl-desc .c{width:83px;font-size:16px;line-height:25px;color:var(--ink2)}
+.dl-desc .t{font-size:20px;line-height:32px;font-weight:600}
+.dl-btn{display:flex;align-items:center;gap:10px;height:44px;padding:10px 20px;border-radius:8px;background:var(--f4);font-size:14px;line-height:36px;font-weight:600;color:var(--ink2)}
+.dl-btn::after{content:"";width:24px;height:24px;background:url(./assets/ic/download-k.svg) no-repeat center/18px}
+.dl-btn:hover{background:#E6EAFE}
+.dl-list .cs-pager{margin-top:60px}
+.dl-sel{display:flex;justify-content:center;margin-top:60px}
+.dl-sel button{display:inline-flex;align-items:center;justify-content:space-between;width:420px;height:88px;padding:20px 40px;border:1px solid #C9CED1;border-radius:8px;background:#fff;font-size:22px;line-height:32px;font-weight:600;color:#B4B8B9;cursor:not-allowed}
+.dl-sel button i{width:48px;height:48px;border-radius:100%;background:#C9CED1 url(./assets/ic/download-w.svg) no-repeat center/18px}
+.dl-sel button.ok{border-color:#171818;color:#171818;cursor:pointer}
+.dl-sel button.ok i{background-color:#171818}
+@media (max-width:1279px){
+  .dl{padding:32px 0 48px}
+  .dl .h1.pc{display:none}
+  .dl .mt{display:block;font-size:30px;line-height:36.4px;font-weight:700;padding-bottom:0}
+  .dl .total{margin-top:24px}
+  .dl-list{padding:16px 0 100px}
+  .dl-list li{align-items:flex-start}
+  .dl-chk{width:20px;padding:36px 0 0}
+  .dl-chk span{width:20px;height:20px;border-radius:2px}
+  .dl-desc{margin-left:16px;padding:20px 0}
+  .dl-desc .tw{flex-direction:column;align-items:flex-start;gap:4px}
+  .dl-desc .c{width:auto;font-size:14px;line-height:21px}
+  .dl-desc .t{font-size:16px;line-height:25.6px}
+  .dl-btn{flex-direction:column;gap:0;min-width:54px;height:52px;padding:8px 12px;font-size:13px;line-height:18.2px}
+  .dl-list{display:flex;flex-direction:column}
+  .dl-list .dl-sel{order:2}
+  .dl-list .cs-pager{order:3;margin-top:40px!important}
+  .dl-btn::after{width:18px;height:18px;background-size:16px}
+  .dl-list .cs-pager{margin-top:32px}
+  .dl-sel{margin-top:32px}
+  .dl-sel button{width:100%;height:66px;padding:14px 24px;font-size:18px}
+  .dl-sel button i{width:36px;height:36px}
+}
+@media (min-width:1280px){.dl .mt{display:none}}
+
+</style>
+</head>
+<body class="sub download">
+<header class="hd">
+  <div class="hd-in">
+    <div class="hd-cont">
+      <h1 class="ci"><a href="./index.html"><img src="./assets/ic/ci.svg" alt="하이온셀"></a></h1>
+      <nav class="gnb pc"><ul><li class="d1"><button type="button">제품</button><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><button type="button">회사정보</button><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><button type="button">인재채용</button><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+      <div class="navp mo">
+        <nav><ul><li class="d1"><a href="solution.html">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><a href="about.html">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="talent.html">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+        <ul class="navp-util">
+          <li><a href="./download.html"><img src="./assets/ic/nav-down.svg" alt=""><p>다운로드</p></a></li>
+          <li><a href="./inquiry.html"><img src="./assets/ic/nav-inq.svg" alt=""><p>문의하기</p></a></li>
+          <li><a href="./faq.html"><img src="./assets/ic/nav-faq.svg" alt=""><p><strong>FAQ</strong></p></a></li>
+        </ul>
+      </div>
+      <div class="util">
+        <div class="cs pc">
+          <button type="button">고객지원</button>
+          <div class="cs-pop"><div class="pw"><a href="./download.html">다운로드</a><a href="./inquiry.html">문의하기</a><a href="./faq.html">FAQ</a><button type="button" class="x" aria-label="닫기"></button></div></div>
+        </div>
+        <div class="lang" data-sel>
+          <button type="button" aria-haspopup="listbox"><img src="./assets/ic/globe.svg" alt="언어 선택"><i></i></button>
+          <ul role="listbox"><li><a href="#" class="active">KR</a></li><li><a href="#">EN</a></li><li><a href="#">CN</a></li><li><a href="#">JP</a></li></ul>
+        </div>
+        <button type="button" class="srch-btn" aria-label="검색"></button>
+        <button type="button" class="nav-btn" aria-label="메뉴 열기"><i class="x"><span class="xl"></span><span class="xl"></span></i><span class="ln"></span><span class="ln"></span><span class="ln"></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="srch"><form action="./faq.html" onsubmit="return false"><button type="button" class="go" aria-label="검색"></button><input type="text" placeholder="검색어를 입력해 주세요."></form></div>
+<div class="smap pc">
+  <div class="pw">
+    <div class="smap-hd"><a href="./index.html"><img src="./assets/ic/ci-w.svg" alt="하이온셀"></a></div>
+    <ul class="smap-area"><li class="d1"><a href="#" onclick="return false">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a><ul><li class="d3"><a href="solution.html">전기차</a></li><li class="d3"><a href="solution.html">ESS</a></li><li class="d3"><a href="solution.html">전동공구</a></li><li class="d3"><a href="solution.html">모빌리티</a></li></ul></li><li class="d2"><a href="cylindrical.html">폼팩터</a><ul><li class="d3"><a href="cylindrical.html">원통형</a></li><li class="d3"><a href="cylindrical.html">파우치형</a></li></ul></li><li class="d2"><a href="material.html">소재</a><ul><li class="d3"><a href="material.html">NCM</a></li><li class="d3"><a href="material.html">LFP</a></li></ul></li></ul></li><li class="d1"><a href="#" onclick="return false">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a><ul><li class="d3"><a href="about.html">회사개요</a></li><li class="d3"><a href="vision.html">비전</a></li><li class="d3"><a href="history.html">연혁</a></li><li class="d3"><a href="ci.html">CI</a></li></ul></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="#" onclick="return false">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li><li class="d1"><a href="#" onclick="return false">고객지원</a><ul><li class="d2"><a href="download.html">다운로드</a></li><li class="d2"><a href="inquiry.html">문의하기</a></li><li class="d2"><a href="faq.html">FAQ</a></li></ul></li></ul>
+    <button type="button" class="close" aria-label="닫기"></button>
+  </div>
+</div>
+<main id="container" class="sub">
+<section class="dl" data-filter><div class="cs-wrap">
+  <h2 class="h1 pc">다운로드</h2><h2 class="mt">다운로드</h2>
+  <div class="srch600"><form role="search"><button type="submit" aria-label="검색"></button><input type="text" placeholder="검색어를 입력해 주세요." aria-label="자료 검색"></form></div>
+  <ul class="pills3"><li class="on"><button type="button" data-tab="전체">전체</button></li><li><button type="button" data-tab="제품">제품</button></li><li><button type="button" data-tab="회사정보">회사정보</button></li><li><button type="button" data-tab="인재채용">인재채용</button></li></ul>
+  <p class="total">총 <span>10</span>건</p>
+  <div class="dl-list"><ul><li data-cat="제품"><label class="dl-chk"><input type="checkbox" aria-label="원통형 셀 제품 카탈로그 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">제품</p><span class="t">원통형 셀 제품 카탈로그</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="제품"><label class="dl-chk"><input type="checkbox" aria-label="파우치형 셀 제품 카탈로그 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">제품</p><span class="t">파우치형 셀 제품 카탈로그</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="제품"><label class="dl-chk"><input type="checkbox" aria-label="ESS 모듈 사양서 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">제품</p><span class="t">ESS 모듈 사양서</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="제품"><label class="dl-chk"><input type="checkbox" aria-label="배터리팩 안전 사용 안내서 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">제품</p><span class="t">배터리팩 안전 사용 안내서</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="제품"><label class="dl-chk"><input type="checkbox" aria-label="BMS 통신 규격서 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">제품</p><span class="t">BMS 통신 규격서</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="회사정보"><label class="dl-chk"><input type="checkbox" aria-label="하이온셀 회사 소개서 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">회사정보</p><span class="t">하이온셀 회사 소개서</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="회사정보"><label class="dl-chk"><input type="checkbox" aria-label="CI 사용 가이드 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">회사정보</p><span class="t">CI 사용 가이드</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="회사정보"><label class="dl-chk"><input type="checkbox" aria-label="안전·환경 보고서 2025 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">회사정보</p><span class="t">안전·환경 보고서 2025</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="회사정보"><label class="dl-chk"><input type="checkbox" aria-label="협력사 품질 관리 가이드 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">회사정보</p><span class="t">협력사 품질 관리 가이드</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li><li data-cat="인재채용"><label class="dl-chk"><input type="checkbox" aria-label="2026 채용 안내 책자 선택"><span></span></label><div class="dl-desc"><div class="tw"><p class="c">인재채용</p><span class="t">2026 채용 안내 책자</span></div><a class="dl-btn" href="#" data-dl>PDF</a></div></li></ul><div class="cs-pager"><a href="#" class="ar first dis" aria-label="처음"></a><a href="#" class="ar prev dis" aria-label="이전"></a><a href="#" class="on">1</a><a href="#">2</a><a href="#">3</a><a href="#" class="ar next" aria-label="다음"></a><a href="#" class="ar last" aria-label="끝"></a></div>
+    <div class="dl-sel"><button type="button" disabled><span>선택항목 다운로드</span><i></i></button></div>
+  </div>
+</div></section>
+</main>
+<footer class="ft">
+  <div class="ft-area">
+    <div>
+      <ul class="ft-map">
+        <li><a href="./privacy.html">개인정보처리방침</a></li>
+        <li><a href="./privacy.html#video">영상정보처리기기 운영·관리 방침</a></li>
+        <li><a href="#" class="n" data-modal="#mailBlock">이메일무단수집거부</a></li>
+        <li><a href="./inquiry.html" class="n">윤리경영 제보</a></li>
+        <li><a href="./inquiry.html" class="n">협력사 문의</a></li>
+        <li><a href="./faq.html" class="n">안전가이드</a></li>
+      </ul>
+    </div>
+    <div class="ft-r">
+      <div class="fsel" data-sel>
+        <button type="button" aria-haspopup="listbox">관련사이트</button>
+        <ul role="listbox">
+          <li><p class="cat">패밀리사이트</p></li>
+          <li><a href="./newsroom.html">하이온셀 기술 블로그</a></li>
+          <li><a href="./solution.html">ESS 사업 안내</a></li>
+          <li><p class="cat">비즈니스</p></li>
+          <li><a href="./download.html">협력사 자료실</a></li>
+          <li><a href="./inquiry.html">구매 문의 창구</a></li>
+        </ul>
+      </div>
+      <div class="ft-info">
+        <p>대표 민트클 · <a href="tel:01048944905">010-4894-4905</a></p>
+        <address>사업자등록번호 266-07-03678</address>
+        <p><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <div class="l">
+      <div class="flogo-w">
+        <a class="flogo" href="./index.html">©HIONCELL Corporation</a>
+        <div class="badge"><img src="./assets/ic/badge.svg" alt="안전 우선 생산 원칙"></div>
+      </div>
+      <ul class="sns">
+        <li><a href="#" aria-label="facebook"><img src="./assets/ic/sns-facebook.svg" alt=""></a></li>
+        <li><a href="#" aria-label="linkedin"><img src="./assets/ic/sns-linkedin.svg" alt=""></a></li>
+        <li><a href="#" aria-label="instagram"><img src="./assets/ic/sns-instagram.svg" alt=""></a></li>
+        <li><a href="#" aria-label="youtube"><img src="./assets/ic/sns-youtube.svg" alt=""></a></li>
+        <li><a href="#" aria-label="blog"><img src="./assets/ic/sns-blog.svg" alt=""></a></li>
+      </ul>
+    </div>
+    <div class="r"><a href="./inquiry.html"><img src="./assets/ic/newsletter.svg" alt="뉴스레터 구독하기"></a></div>
+  </div>
+</footer>
+<button type="button" class="top-fab" aria-label="맨 위로"><img src="./assets/ic/top.svg" alt=""></button>
+<div class="modal" id="mailBlock" role="dialog" aria-modal="true" aria-labelledby="mailBlockT">
+  <div class="pw">
+    <h3 id="mailBlockT">이메일 무단 수집 거부</h3>
+    <div class="mail-ic"></div>
+    <p class="desc">본 홈페이지에 게시된 이메일 주소가 자동 수집되는 것을<br>거부하며, 이를 위반하면 정보통신망법에 따라 처벌받을 수<br>있음을 알려 드립니다.</p>
+    <div class="lk"><strong>불법 스팸 대응 센터</strong>국번 없이 118</div>
+    <button type="button" class="ok">확인</button>
+    <button type="button" class="x" aria-label="닫기"></button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script src="./assets/sub.js"></script>
+<script>
+(() => {
+  const root = document.querySelector('[data-filter]');
+  const items = [...root.querySelectorAll('[data-cat]')], cnt = root.querySelector('.total span'), q = root.querySelector('.srch600 input');
+  let cat = '전체';
+  const apply = () => { const k = q ? q.value.trim() : ''; let n = 0;
+    items.forEach(it => { const ok = (cat === '전체' || it.dataset.cat === cat) && (!k || it.textContent.includes(k)); it.hidden = !ok; if (ok) n++; });
+    cnt.textContent = n; };
+  root.querySelectorAll('[data-tab]').forEach(b => b.addEventListener('click', () => {
+    root.querySelectorAll('[data-tab]').forEach(x => x.parentElement.classList.toggle('on', x === b)); cat = b.dataset.tab; apply(); }));
+  if (q) q.form.addEventListener('submit', e => { e.preventDefault(); apply(); });
+  apply();
+})();
+</script>
+<script>
+(() => {
+  const sel = document.querySelector('.dl-sel button');
+  const upd = () => { const n = document.querySelectorAll('.dl-chk input:checked').length; sel.disabled = !n; sel.classList.toggle('ok', !!n); };
+  document.querySelectorAll('.dl-chk input').forEach(c => c.addEventListener('change', upd));
+  document.querySelectorAll('[data-dl]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); alert('샘플 템플릿입니다. 실제 자료 파일을 연결하면 내려받을 수 있습니다.'); }));
+  sel.addEventListener('click', () => alert('샘플 템플릿입니다. 실제 자료 파일을 연결하면 선택한 자료를 한 번에 내려받을 수 있습니다.'));
+})();
+</script>
+</body>
+</html>

@@ -649,6 +649,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "corporate-h-template",
+    industry: "제조 · 배터리 기업 홈페이지",
+    title: "배터리·에너지 제조기업 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 기업 · 제조 · 에너지",
+    purpose:
+      "공장 영상 위 큰 영문 제목으로 시작해, 스크롤하면 사진판이 오른쪽으로 줄어들며 링크 판이 떠오르는 고정 장면, 두 색 폼팩터 판, 검정 소재 판, 커지는 영상 상자 두 개, 뉴스룸 카드로 이어지는 메인에 회사개요·비전·연혁·CI·사업장·뉴스룸·산업별 솔루션·원통형·소재·인재상·채용정보·다운로드·문의하기·FAQ·개인정보처리방침 서브페이지를 갖춘 제조기업 홈페이지입니다.",
+    features: ["사진판이 줄어드는 고정 장면 · 커지는 영상 상자", "휠로 한 해씩 넘기는 연혁 · 지도와 상세 판이 열리는 사업장", "옆 목차가 따라오는 제품 쪽 · 뉴스룸 목록·상세", "단계형 문의하기 · 자료 다운로드 · FAQ · 서브 17쪽"],
+    idealFor: "배터리·전기부품 제조사, 에너지·설비 기업, 여러 사업장과 제품군을 소개해야 하는 중소 제조기업",
+    image: "/thumbs/corporate-h.jpg",
+    liveUrl: "/templates/corporate-h/",
+    industryKey: "corporate",
+    premiumLabel: "기업 C",
+    designCode: "CORP-1003",
+    premium: true,
+  },
+  {
     slug: "corporate-g-template",
     industry: "제조 · 금속 주조 기업 홈페이지",
     title: "특수강 주조 제조기업 홈페이지 (프리미엄 디자인 B)",
