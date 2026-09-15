@@ -7,6 +7,7 @@
   python tools/promo-cards/make_shot_cards.py corporate-f --capture   # 프레임 찍기 (개발 서버 5173 필요)
   python tools/promo-cards/make_shot_cards.py corporate-f             # 카드 만들기
 """
+import os
 import sys
 from pathlib import Path
 
@@ -18,7 +19,7 @@ from make_cards import (  # noqa: E402
     KMONG_MAIN_CSS, LIGHT_BG, OUT_ROOT, W, H, esc, foot, kmong_main_square, lines, page, process_card, render,
 )
 
-SERVER = "http://localhost:5173/templates/"
+SERVER = os.environ.get("PROMO_SERVER", "http://localhost:5173") + "/templates/"
 
 # ── 템플릿별 설명서. 문구는 템플릿 코드에서 동작을 확인한 것만 ──
 SPECS: dict[str, dict] = {
