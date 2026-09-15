@@ -45,7 +45,8 @@ def build(name: str) -> None:
     extra_head = "".join(re.findall(r"<!--HEAD(.*?)-->", rest, re.S))
     body = re.sub(r"<style>.*?</style>|<script>.*?</script>|<!--HEAD.*?-->", "", rest, flags=re.S).strip()
     loc = "".join(f"<li>{x}</li>" for x in meta["loc"].split("|"))
-    lead = f"<p>{meta['lead']}</p>" if meta.get("lead") else ""
+    # 원본은 설명이 없는 쪽도 빈 <p></p> 를 둔다(인재상·인사제도·상시채용) — "lead:" 만 적으면 빈 칸을 낸다
+    lead = f"<p>{meta['lead']}</p>" if "lead" in meta else ""
     sub = f"<p>{meta['sub']}</p>" if meta.get("sub") else ""
     html = f"""<!doctype html>
 <html lang="ko">
