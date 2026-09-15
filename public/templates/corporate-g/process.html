@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>생산공정 — 한벡스금속 (프리미엄 디자인 B)</title>
+<meta name="description" content="한벡스금속 생산공정 — 도면 검토부터 제품 검사까지 8단계.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<link rel="stylesheet" href="./assets/sub.css">
+<style>
+/* 생산공정 (소개 #f1f1f1 패딩 150 0 가운데 · 제목 56px 700 아래 50 · 굵은 줄 24px 800 아래 30 · 20/30 · 아래 150
+   단계 4칸(1820 이하) 간격 40 · 위 150 아래 40 · 칸 190 테두리 1px #ccc r10 · 패딩 30 · 번호 16px 700 강조색 아래 15 · 이름 20px 700 · 아이콘 65 오른쪽 아래 30
+   칸 사이 화살표 · 현재 강조색 흰 글자 그림자 0 3 8 .2 · 장면 60% 사진 640 r20 + 40% 글판 #f1f1f1 r20 패딩 80 · em 20px 700 아래 100 · 56px 700 자간 -.02em 아래 15 · 20/30 500 #333 · 화살표 72 왼쪽 80/160 아래 80) */
+.pr{padding-bottom:150px}
+.pr .pin{padding:150px 0;background:rgb(241,241,241);text-align:center}
+.pr .pin h2{margin-bottom:50px;font-size:56px;font-weight:700;line-height:66px}
+.pr .pin strong{display:block;margin-bottom:30px;font-size:24px;font-weight:800}
+.pr .pin p{font-size:20px;line-height:30px}
+.ptabs{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;padding:150px 0 40px}
+.ptabs li{position:relative;height:190px;border:1px solid var(--soft);border-radius:10px}
+.ptabs li:not(:last-child)::after{content:"";position:absolute;top:50%;right:-27px;width:14px;height:14px;transform:translateY(-50%);border-top:2px solid var(--soft);border-right:2px solid var(--soft);transform:translateY(-50%) rotate(45deg)}
+.ptabs li:nth-child(4n)::after{display:none}
+.ptabs button{position:relative;width:100%;height:100%;padding:30px;display:flex;flex-direction:column;align-items:flex-start;font-size:20px;font-weight:700}
+.ptabs .n{margin-bottom:15px;font-size:16px;color:var(--primary)}
+.ptabs svg{position:absolute;right:30px;bottom:30px;width:65px;height:65px;color:rgb(120,120,120)}
+.ptabs li.on{background:var(--primary);color:#fff;box-shadow:0 3px 8px rgba(0,0,0,.2)}
+.ptabs li.on .n,.ptabs li.on svg{color:#fff}
+.pstage{display:flex;gap:40px}
+.pswiper{width:60%;margin:0;border-radius:20px}
+.pswiper .ph{height:640px;border-radius:20px}
+.pcopy{position:relative;width:40%;padding:80px;border-radius:20px;background:rgb(241,241,241)}
+.pcopy em{display:block;margin-bottom:100px;font-family:"Pretendard Variable",Pretendard,sans-serif;font-size:20px;font-weight:700;font-style:normal;color:var(--primary)}
+.pcopy h3{margin-bottom:15px;font-size:56px;font-weight:700;letter-spacing:-.02em}
+.pcopy p{font-size:20px;font-weight:500;line-height:1.5em;letter-spacing:-.02em;color:rgb(51,51,51)}
+.pnav button{position:absolute;bottom:80px;left:80px;width:72px;height:72px}
+.pnav .pnext{left:160px}
+.pnav .swiper-button-disabled{opacity:.4}
+.pnav svg{width:100%;height:100%}
+@media (max-width:1024px){.pstage{flex-direction:column}.pswiper,.pcopy{width:100%}.pnav{display:flex;gap:5px;margin-top:30px}.pnav button{position:static;width:36px;height:36px}}
+@media (max-width:768px){.ptabs{grid-template-columns:repeat(2,1fr)}.ptabs li:nth-child(2n)::after{display:none}.pr .pin h2{font-size:60px;line-height:1.2;margin-bottom:35px}.pr .pin strong{font-size:20px;margin-bottom:15px}.pr .pin p{font-size:15px}}
+@media (max-width:512px){
+  .pr{padding-bottom:75px}.pr .pin{padding:75px 0}.pr .pin h2{font-size:36px}.pr .pin strong{font-size:16px}.pr .pin p{font-size:12px}.pr .pin p br{display:none}
+  .ptabs{gap:25px;padding:75px 0 25px}.ptabs li{height:100px}.ptabs button{padding:15px;font-size:15px}.ptabs svg{width:30%;height:auto;right:15px;bottom:15px}.ptabs li::after{right:-20px;width:10px;height:10px}
+  .pstage{gap:10px}.pswiper .ph{height:250px;border-radius:10px}.pcopy{padding:30px}.pcopy em{margin-bottom:30px;font-size:12px}.pcopy h3{font-size:36px}.pcopy p{font-size:12px}
+}
+</style>
+<script>document.documentElement.classList.add('js')</script>
+</head>
+<body class="sub">
+<a class="sr" href="#main">본문 바로가기</a>
+
+<header class="hd" id="hd">
+  <a class="logo" href="./" aria-label="한벡스금속 홈">
+    <svg viewBox="0 0 251 33" aria-hidden="true"><path d="M2 4h7v10h11V4h7v25h-7V19H9v10H2z" fill="currentColor"/><path d="M31 4h5l-9 25h-5z" fill="currentColor" opacity=".55"/><text x="46" y="27.5" fill="currentColor" font-family="Raleway,Arial,sans-serif" font-size="27" font-weight="800" letter-spacing="2.2">HANVEX</text><text x="178" y="27" fill="currentColor" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="15" font-weight="600" opacity=".8">한벡스금속</text></svg>
+  </a>
+  <nav class="gnb" aria-label="주 메뉴">
+    <ul>
+      <li><a href="history.html">COMPANY</a><ul><li><a href="history.html">회사개요</a></li><li><a href="ci.html">CI 소개</a></li><li><a href="partner.html">비즈니스 파트너</a></li><li><a href="location.html">찾아오시는 길</a></li><li><a href="news.html">회사소식</a></li></ul></li>
+      <li><a href="process.html">FACTORY</a><ul><li><a href="process.html">생산공정</a></li><li><a href="equipment.html">생산설비</a></li><li><a href="technology.html">핵심기술</a></li><li><a href="certificate.html">인증서 현황</a></li></ul></li>
+      <li><a href="product-pump.html">PRODUCT</a><ul><li><a href="product-pump.html">일반 펌프부품</a></li><li><a href="product-hp.html">고압 펌프부품</a></li><li><a href="product-valve.html">밸브부품</a></li><li><a href="product-machine.html">산업기계부품</a></li></ul></li>
+      <li><a href="inquiry.html">CUSTOMER</a><ul><li><a href="inquiry.html">견적문의</a></li><li><a href="contact.html">컨택트</a></li></ul></li>
+    </ul>
+  </nav>
+  <div class="utils">
+    <a class="cta" href="contact.html"><span>CONTACT</span><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></a>
+    <div class="lang">
+      <button type="button" aria-label="언어 선택" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.6 2.5 3.8 5.5 3.8 9s-1.2 6.5-3.8 9c-2.6-2.5-3.8-5.5-3.8-9S9.4 5.5 12 3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+      <ul><li><a href="./" aria-current="true">KO</a></li><li><a href="./">EN</a></li><li><a href="./">JP</a></li></ul>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="side"><span></span><span></span></button>
+  </div>
+  <div class="side" id="side">
+    <nav aria-label="전체 메뉴">
+      <ul>
+        <li><button type="button" aria-expanded="false">COMPANY<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li><a href="history.html">회사개요</a></li><li><a href="ci.html">CI 소개</a></li><li><a href="partner.html">비즈니스 파트너</a></li><li><a href="location.html">찾아오시는 길</a></li><li><a href="news.html">회사소식</a></li></ul></li>
+        <li><button type="button" aria-expanded="false">FACTORY<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li><a href="process.html">생산공정</a></li><li><a href="equipment.html">생산설비</a></li><li><a href="technology.html">핵심기술</a></li><li><a href="certificate.html">인증서 현황</a></li></ul></li>
+        <li><button type="button" aria-expanded="false">PRODUCT<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li><a href="product-pump.html">일반 펌프부품</a></li><li><a href="product-hp.html">고압 펌프부품</a></li><li><a href="product-valve.html">밸브부품</a></li><li><a href="product-machine.html">산업기계부품</a></li></ul></li>
+        <li><button type="button" aria-expanded="false">CUSTOMER<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li><a href="inquiry.html">견적문의</a></li><li><a href="contact.html">컨택트</a></li></ul></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<section class="sv" style="background-image:url('./assets/sub-factory.jpg')"><div class="si"><ol class="crumb" aria-label="현재 위치"><li><a href="./" aria-label="홈"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 7.2 8 2l6 5.2V14H9.8v-4H6.2v4H2z" fill="currentColor"/></svg></a></li><li>생산설비</li><li>생산공정</li></ol><h1 class="lat">FACTORY</h1><p data-aos="fade-up">용해부터 검사까지, 한 공장 안에서 끝까지 책임집니다.</p></div></section>
+<nav class="snav" aria-label="생산설비 하위 메뉴"><div class="si"><button class="cur" type="button" aria-expanded="false">생산공정<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 8l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></button><ul><li aria-current="page"><a href="process.html">생산공정</a></li><li><a href="equipment.html">생산설비</a></li><li><a href="technology.html">핵심기술</a></li><li><a href="certificate.html">인증서 현황</a></li></ul></div></nav>
+<section class="pr">
+  <div class="pin"><div class="si">
+    <h2 class="lat split" data-aos="fade">Optimized<br>Production Process</h2>
+    <strong data-aos="fade-up">30년 넘게 다듬어 온 주조 공정과 품질 관리</strong>
+    <p data-aos="fade-up">한벡스금속은 도면 검토부터 최종 검사까지 공정마다 기준을 정해 기록하고,<br>문제가 생기면 바로 앞 공정으로 되돌아가 원인을 찾습니다.</p>
+  </div></div>
+  <section class="proc" aria-label="공정 8단계"><div class="si">
+    <ul class="ptabs"><li data-em="Process 01" data-title="도면 검토" data-desc="고객 도면과 규격서를 받아 성분·치수·검사 조건을 정리하고, 주조 해석으로 불량이 생길 자리를 먼저 찾습니다." class="on"><button type="button" aria-pressed="true"><span class="n">01</span>도면 검토<svg viewBox="0 0 65 65" aria-hidden="true"><path d="M18 12h22l9 9v32H18z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M40 12v9h9M25 32h17M25 40h17M25 24h9" stroke="currentColor" stroke-width="2.4"/></svg></button></li><li data-em="Process 02" data-title="목형 제작" data-desc="공장 안 목형실에서 목형을 바로 만들고 고쳐, 설계가 바뀌어도 납기를 크게 늦추지 않습니다."><button type="button" aria-pressed="false"><span class="n">02</span>목형 제작<svg viewBox="0 0 65 65" aria-hidden="true"><path d="M14 44 44 14l7 7-30 30H14z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M38 20l7 7" stroke="currentColor" stroke-width="2.4"/></svg></button></li><li data-em="Process 03" data-title="조형" data-desc="모래와 결합제 비율을 매일 측정해 관리한 주형으로, 표면이 매끈하고 치수가 고른 주조품을 만듭니다."><button type="button" aria-pressed="false"><span class="n">03</span>조형<svg viewBox="0 0 65 65" aria-hidden="true"><rect x="12" y="22" width="41" height="26" rx="2" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 35h41M24 22v-8h17v8" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button></li><li data-em="Process 04" data-title="용해·주입" data-desc="유도로에서 녹인 쇳물의 성분을 분석해 맞춘 뒤 정해진 온도와 속도로 주형에 붓습니다."><button type="button" aria-pressed="false"><span class="n">04</span>용해·주입<svg viewBox="0 0 65 65" aria-hidden="true"><path d="M16 16h26l-4 26H20z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M42 22c8 2 10 10 6 20" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M47 46c0 3-2 5-4 5s-4-2-4-5 4-8 4-8 4 5 4 8z" fill="currentColor"/></svg></button></li><li data-em="Process 05" data-title="열처리" data-desc="강종에 맞춘 온도 곡선으로 열처리해 조직을 고르게 만들고, 기록을 제품마다 남깁니다."><button type="button" aria-pressed="false"><span class="n">05</span>열처리<svg viewBox="0 0 65 65" aria-hidden="true"><rect x="14" y="20" width="37" height="30" rx="3" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M24 40c0-5 5-6 5-11 3 3 6 6 6 11a5.5 5.5 0 0 1-11 0z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M20 14v6M32.5 12v8M45 14v6" stroke="currentColor" stroke-width="2.4"/></svg></button></li><li data-em="Process 06" data-title="사상" data-desc="탕구와 덧쇠를 잘라 내고 표면을 다듬어 가공과 검사를 할 수 있는 상태로 만듭니다."><button type="button" aria-pressed="false"><span class="n">06</span>사상<svg viewBox="0 0 65 65" aria-hidden="true"><circle cx="24" cy="38" r="11" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M31 31 50 12M44 12h6v6" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button></li><li data-em="Process 07" data-title="기계 가공" data-desc="대형 수직 선반과 머시닝 센터로 도면 치수에 맞춰 가공하고, 공차를 공정 중에 확인합니다."><button type="button" aria-pressed="false"><span class="n">07</span>기계 가공<svg viewBox="0 0 65 65" aria-hidden="true"><circle cx="32.5" cy="32.5" r="8" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M32.5 12v7M32.5 46v7M12 32.5h7M46 32.5h7M18 18l5 5M42 42l5 5M47 18l-5 5M23 42l-5 5" stroke="currentColor" stroke-width="2.4"/></svg></button></li><li data-em="Process 08" data-title="제품 검사" data-desc="성분 분석, 기계적 성질 시험, 비파괴 검사와 3차원 측정을 거친 제품만 출하합니다."><button type="button" aria-pressed="false"><span class="n">08</span>제품 검사<svg viewBox="0 0 65 65" aria-hidden="true"><circle cx="28" cy="28" r="13" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M38 38l13 13M22 28l4 4 8-8" fill="none" stroke="currentColor" stroke-width="2.4"/></svg></button></li></ul>
+    <div class="pstage">
+      <div class="swiper pswiper"><div class="swiper-wrapper"><div class="swiper-slide"><figure class="ph"><img src="./assets/process-1.jpg" alt="도면 검토 공정" loading="lazy"></figure></div><div class="swiper-slide"><figure class="ph"><img src="./assets/process-2.jpg" alt="목형 제작 공정" loading="lazy"></figure></div><div class="swiper-slide"><figure class="ph"><img src="./assets/process-3.jpg" alt="조형 공정" loading="lazy"></figure></div><div class="swiper-slide"><figure class="ph"><img src="./assets/process-4.jpg" alt="용해·주입 공정" loading="lazy"></figure></div><div class="swiper-slide"><figure class="ph"><img src="./assets/process-5.jpg" alt="열처리 공정" loading="lazy"></figure></div><div class="swiper-slide"><figure class="ph"><img src="./assets/process-6.jpg" alt="사상 공정" loading="lazy"></figure></div><div class="swiper-slide"><figure class="ph"><img src="./assets/process-7.jpg" alt="기계 가공 공정" loading="lazy"></figure></div><div class="swiper-slide"><figure class="ph"><img src="./assets/process-8.jpg" alt="제품 검사 공정" loading="lazy"></figure></div></div></div>
+      <div class="pcopy"><div class="pb" aria-live="polite"></div>
+        <div class="pnav"><button type="button" class="pprev" aria-label="이전 공정"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="35" fill="#fff"/><path d="M40 27l-9 9 9 9" fill="none" stroke="#000" stroke-width="2"/></svg></button><button type="button" class="pnext" aria-label="다음 공정"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="35" fill="#fff"/><path d="M32 27l9 9-9 9" fill="none" stroke="#000" stroke-width="2"/></svg></button></div>
+      </div>
+    </div>
+  </div></section>
+</section>
+</main>
+
+<footer class="ft light" id="ft">
+  <button class="top" type="button" aria-label="맨 위로">TOP<svg viewBox="0 0 15 17" aria-hidden="true"><path d="M7.5 16V2M2 7.5 7.5 2 13 7.5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+  <div><a class="flogo" href="./" aria-label="한벡스금속 홈"><svg viewBox="0 0 251 33" aria-hidden="true" style="color:#000"><path d="M2 4h7v10h11V4h7v25h-7V19H9v10H2z" fill="currentColor"/><path d="M31 4h5l-9 25h-5z" fill="currentColor" opacity=".55"/><text x="46" y="27.5" fill="currentColor" font-family="Raleway,Arial,sans-serif" font-size="27" font-weight="800" letter-spacing="2.2">HANVEX</text><text x="178" y="27" fill="currentColor" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="15" font-weight="600" opacity=".8">한벡스금속</text></svg></a></div>
+  <div class="fc">
+    <ul class="info">
+      <li><h3>본사</h3><span>상호 : 한벡스금속 (민트클)</span><span>대표전화 : 010-4894-4905</span><span>이메일 : 6gsmake@gmail.com</span></li>
+      <li><h3>사업자 정보</h3><span>사업자등록번호 : 266-07-03678</span><span>통신판매업신고 : 제2026-서울강남-00480호</span></li>
+      <li><h3>메일</h3><span>6gsmake@gmail.com</span></li>
+    </ul>
+    <nav aria-label="사이트 메뉴">
+      <ul>
+        <li><a href="history.html">COMPANY</a><ul><li><a href="history.html">회사개요</a></li><li><a href="ci.html">CI 소개</a></li><li><a href="partner.html">비즈니스 파트너</a></li><li><a href="location.html">찾아오시는 길</a></li><li><a href="news.html">회사소식</a></li></ul></li>
+        <li><a href="process.html">FACTORY</a><ul><li><a href="process.html">생산공정</a></li><li><a href="equipment.html">생산설비</a></li><li><a href="technology.html">핵심기술</a></li><li><a href="certificate.html">인증서 현황</a></li></ul></li>
+        <li><a href="product-pump.html">PRODUCT</a><ul><li><a href="product-pump.html">일반 펌프부품</a></li><li><a href="product-hp.html">고압 펌프부품</a></li><li><a href="product-valve.html">밸브부품</a></li><li><a href="product-machine.html">산업기계부품</a></li></ul></li>
+        <li><a href="inquiry.html">CUSTOMER</a><ul><li><a href="inquiry.html">견적문의</a></li><li><a href="contact.html">컨택트</a></li></ul></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="fu">
+    <ul><li><a href="privacy.html">개인정보처리방침</a></li><li><a href="privacy.html#email">이메일무단수집거부</a></li></ul>
+    <p class="lat">Copyright(c) 2026 by HANVEX METAL. All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script src="./assets/sub.js"></script>
+</body>
+</html>

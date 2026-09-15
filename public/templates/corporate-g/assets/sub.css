@@ -1,0 +1,85 @@
+/* 한벡스금속 서브 공용 — 레퍼런스 실측 (ref-sites/wonkang/sub: *-dump.txt · common-dump.txt · assets/css/s_sub.css)
+   바탕 흰색 · 본문 검정 · 꼬리 #f1f1f1 (보조 글자 #999 · 선 #ccc · 로고 309×40) */
+body.sub{background:#fff;color:#000}
+.ft.light{background:rgb(241,241,241);color:#000}
+.ft.light .info span,.ft.light nav>ul>li ul a{color:var(--gray)}
+.ft.light .fu{border-top-color:var(--soft)}
+.ft.light .flogo{width:309px;height:40px}
+.si{width:100%;max-width:1820px;margin:0 auto}
+@media (max-width:1820px){.si{padding:0 20px}}
+
+/* ── 사진 머리 (640 · 아래 90 · 경로 16px #ccc 간격 20 아래 60 · 제목 120px(1440 이하 80px) 800 아래 10 · 위에서 20px 내려오며 1s 글자마다 .05s · 부제 24/36) ── */
+.sv{height:640px;padding-bottom:90px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;background:#222 center/cover no-repeat}
+.sv ol{display:flex;gap:20px;margin-bottom:60px;color:var(--soft)}
+.sv ol li{display:flex;align-items:center;gap:20px}
+.sv ol li:not(:last-child)::after{content:"";width:6px;height:10px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 10'%3E%3Cpath d='M1 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 10'%3E%3Cpath d='M1 1l4 4-4 4' fill='none' stroke='%23000' stroke-width='1.4'/%3E%3C/svg%3E") center/contain no-repeat}
+.sv ol svg{width:16px;height:16px}
+.sv h1{margin-bottom:10px;font-size:120px;font-weight:800;line-height:normal}
+.sv h1 .ch{display:inline-block;opacity:0;transform:translateY(-20px);animation:svDown 1s cubic-bezier(.33,1,.68,1) forwards;animation-delay:calc(.05s * var(--i))}
+@keyframes svDown{to{opacity:1;transform:none}}
+.sv p{font-size:24px;line-height:1.5}
+/* 하위 탭 (80 #222 · 칸 최소 240 · 18px 흐림 .3 · 현재 #111 밑줄 3 떨어짐 8) */
+.snav{position:relative;background:var(--bg);color:#fff}
+.snav ul{display:flex}
+.snav a{display:block;min-width:240px;height:80px;line-height:80px;text-align:center;font-size:18px;opacity:.3}
+.snav [aria-current] a{background:rgb(17,17,17);opacity:1;text-decoration:underline;text-underline-offset:8px;text-decoration-thickness:3px}
+.snav .cur{display:none}
+
+/* ── 본문 틀 ── */
+.sc{padding:150px 20px}
+.sc>.in{max-width:1860px;margin:0 auto}
+.stt h2{margin-bottom:60px;font-size:64px;font-weight:700;text-align:center}
+.stt.tight h2{margin-bottom:20px}
+.lead{font-size:18px;font-weight:500;line-height:27px;text-align:center}
+.intro{padding:150px 0}
+.ttl.dk>.eb{display:block;margin-bottom:40px;font-size:20px;font-weight:500}
+.ttl.dk h2{font-size:64px;font-weight:700}
+.ph{background:rgb(236,236,236);overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover}
+.more.dl .ar svg{width:15px;height:17px}
+
+/* 분류 알약 (가운데 간격 10 아래 60 · 패딩 10 20 r50 #f1f1f1 · 현재 강조색 흰 글자) */
+.cats{display:flex;justify-content:center;gap:10px;margin-bottom:60px}
+.cats button{padding:10px 20px;border-radius:50px;background:rgb(241,241,241);line-height:19px}
+.cats button[aria-pressed=true]{background:var(--primary);color:#fff}
+.cats.bold button{font-weight:700;letter-spacing:-.5px;color:var(--gray)}
+.cats.bold button[aria-pressed=true]{color:#fff}
+.cats.bold{gap:25px}
+[data-cat][hidden]{display:none!important}
+
+/* 쪽 번호 */
+.pages{display:flex;justify-content:center;gap:8px;margin-top:50px}
+.pages a,.pages span{min-width:40px;height:40px;padding:0 6px;display:grid;place-items:center;border-radius:50px;font-weight:600;color:var(--gray)}
+.pages [aria-current]{background:var(--primary);color:#fff}
+
+@media (max-width:1440px){.sv h1{font-size:80px}}
+@media (max-width:1280px){.snav ul{overflow-x:auto;scrollbar-width:none}.snav ul::-webkit-scrollbar{display:none}.snav a{min-width:160px}}
+@media (max-width:1080px){.sc{padding:75px 20px}.intro{padding:75px 0}.stt h2{font-size:36px}.ttl.dk h2{font-size:36px}.lead{font-size:12px;line-height:1.5}}
+@media (max-width:1024px){.ttl.dk>.eb{margin-bottom:20px}}
+@media (max-width:768px){
+  .snav .cur{display:block;width:100%;padding:20px;font-size:20px;text-align:left;position:relative}
+  .snav .cur svg{position:absolute;right:20px;top:50%;width:20px;height:20px;transform:translateY(-50%);transition:transform .2s}
+  .snav.open .cur svg{transform:translateY(-50%) rotate(180deg)}
+  .snav ul{position:absolute;left:50%;top:70px;z-index:10;width:calc(100% - 40px);max-height:0;flex-direction:column;overflow:hidden;border-radius:10px;background:#fff;color:#000;
+    box-shadow:0 0 10px rgba(0,0,0,.1);transform:translateX(-50%);transition:.3s all}
+  .snav.open ul{max-height:600px}
+  .snav a{min-width:0;height:auto;padding:12px 20px;line-height:normal;text-align:left;font-size:12px;opacity:1}
+  .snav li:first-child a{padding-top:20px}
+  .snav li:last-child a{padding-bottom:20px}
+  .snav [aria-current] a{background:#fff;text-decoration:none}
+  .ttl.dk h2{margin-bottom:50px}
+}
+@media (max-width:512px){
+  .sv{height:350px;padding-bottom:50px}
+  .sv ol{margin-bottom:40px;font-size:11px}
+  .sv h1{font-size:42px}
+  .sv p{font-size:15px}
+  .sv p br{display:none}
+  .snav .cur{font-size:12px}
+  .ft.light .flogo{width:155px;height:20px}
+  .ttl.dk>.eb{font-size:15px}
+  .ttl.dk h2{margin-bottom:40px}
+}
+@media (prefers-reduced-motion:reduce){.sv h1 .ch{opacity:1;transform:none;animation:none}}
