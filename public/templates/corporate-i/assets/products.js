@@ -91,10 +91,43 @@ function renderProductList(root) {
   });
 }
 
+
+/* 제품 상세 — 원본 m31_view.php?cate=&cate2=&idx= . body 는 원본의 웹에디터 칸(자유 서식) 자리 */
+var PRODUCT_VIEWS = {
+  226: { thumb: [291, 260], timg: 'prdv-226-t', p: '무편심 조립 기술',
+    body: '<p>&nbsp;</p><p>무편심 조립 기술은 렌즈마다 광학 중심축(Optical Axis)을 경통의 기계 중심축(Mechanical Axis)과 한 축 위에 맞춰 정렬하고 고정하는 기술입니다.</p><p>렌즈 중심 편차(Decenter)와 기울어짐(Tilt)을 거의 없애는 것이 목표입니다. 미세 패턴을 검사하고 측정하는 광학계는 수 µm 만 어긋나도 MTF 가 떨어지고 왜곡과 비대칭 수차가 커지기 때문에, 편심을 재 가며 조립하는 과정이 꼭 필요합니다.<br><img src="./assets/p/prdv-226-1.jpg" alt="" width="1100" height="565"></p>' },
+  227: { thumb: [227, 193], p: '측정 및 평가 기술',
+    body: '<p>&nbsp;</p><p>대물 렌즈 성능은 렌즈를 지난 파면이 얼마나 일그러졌는지 수치로 재는 Wavefront 측정으로 평가합니다. 간섭계와 Wavefront 센서로 이상적인 파면과 실제 파면의 차이를 RMS, PV, Zernike 계수로 나눠 보고, 해상도와 수차 분포, 조립 편심, 응력으로 생긴 성능 저하까지 확인합니다.</p><p><img src="./assets/p/prdv-227-1.jpg" alt="" width="1100" height="757"><img src="./assets/p/prdv-227-2.jpg" alt="" width="1100" height="1424"><img src="./assets/p/prdv-227-3.jpg" alt="" width="1095" height="936"></p>' },
+  232: { thumb: [266, 200], p: 'IF 는 양면을 연마한 무코팅(Uncoated) 윈도우 기판으로, wedge 각도는 30 ±5 각분입니다. 이 덕분에 W1, W2 윈도우, 빔 분할기(Beam Splitter), 출력 커플러, 고조파 분리기, Dichroic 미러, 부분 반사기처럼 여러 코팅 제품의 바탕 기판으로 두루 쓰입니다.',
+    body: '<p>30 분 wedge 가 두 면 사이의 간섭을 줄여 줍니다.</p><p>양쪽 면에서 반사된 빔을 따로 쓸 수 있습니다.</p><p>출력 커플러, 빔 분할기, 빔 샘플링 기판으로 쓰기 좋습니다.</p><p>λ/10 투과 파면, 10-5 표면 품질<br><br><b>Specifications</b></p><p><b>Optical Material</b></p><p>UV-grade fused silica 또는 N-BK7</p><p><b>Transmitted Wavefront Error</b></p><p>λ/10 @ 633 nm</p><p><b>Clear Aperture</b></p><p>중심 지름의 85% 이상<br><br><img src="./assets/p/prdv-232-1.jpg" alt="" width="760" height="584"></p>' },
+  233: { thumb: [266, 203], p: 'Large wedge 윈도우는 wedge 를 1° 또는 3° 로 만든 레이저 품질 윈도우입니다. 이 wedge 가 되돌아오는 반사광으로 생기는 간섭을 막아 주어 여러 빔 조정 분야에서 쓰입니다.',
+    body: '<p>누빛광학의 저손실 고에너지 AR 코팅을 모두 적용할 수 있습니다.</p><p>OEM 용도에 맞춰 치수, wedge, 소재를 따로 정할 수 있습니다.<br><br><b>Specifications</b></p><p><b>Optical Material</b></p><p>UV-grade fused silica 또는 N-BK7</p><p><b>Surface Quality</b></p><p>10-5 scratch and dig</p><p><b>Clear Aperture</b></p><p>중심 지름의 85% 이상<br><img src="./assets/p/prdv-233-1.jpg" alt="" width="724" height="582"></p>' },
+  220: { thumb: [456, 330], p: '16K 라인 스캔 카메라와 경사 조명을 쓰는 디스플레이 검사용 광학 시스템으로, 전면(front)과 측면(lateral) 표면을 보도록 카메라를 배치했습니다',
+    body: '<p>&nbsp;</p><div>- 주요 SPEC&nbsp;</div><br><p>&nbsp;</p>' },
+  225: { thumb: [482, 410], p: '기술 개요 : 태블릿 PC와 노트북에 쓰는 디스플레이 패널 검사 모듈', body: '' }
+};
+
+function renderProductView(root) {
+  var r = productQuery();
+  setPageTitle(r.cat.name);
+  var item = r.sub.items.filter(function (it) { return String(it[0]) === r.idx; })[0] || r.sub.items[0];
+  if (!item) { location.replace('./products.html?cate=' + r.cate + '&cate2=' + r.sub.code); return; }
+  var v = PRODUCT_VIEWS[item[0]] || { thumb: [item[2], item[3]], p: item[1], body: '' };
+  var tabs = r.cat.subs.map(function (s) {
+    return '<li class="' + (s === r.sub ? 'on' : '') + '"><a href="./products.html?cate=' + r.cate + '&amp;cate2=' + s.code + '">' + s.name + '</a></li>';
+  }).join('');
+  root.innerHTML = '<div class="tabs"><ul>' + tabs + '</ul></div>' +
+    '<div class="prdExp2"><div class="innerwrap">' +
+    '<div class="imgarea"> <img src="./assets/p/' + (v.timg || 'prd-' + item[0]) + '.jpg" alt="" width="' + v.thumb[0] + '" height="' + v.thumb[1] + '"> </div>' +
+    '<div class="txtarea"><h4>' + r.sub.name + '</h4><h5>' + item[1] + '</h5><p>' + v.p + '</p></div>' +
+    '</div></div>' +
+    '<div class="conwrap"><div class="exp"><div class="innerwrap">' + v.body + '</div></div><div class="standard"><div class="innerwrap"></div></div></div>';
+}
+
 // <script src="./assets/products.js" data-render="list|view"> 를 .page 안 끝에 두면 그 자리에서 바로 그린다 (site.js 가 .rv 를 모으기 전에)
 (function (me) {
   if (!me || !me.dataset.render) return;
   var root = me.parentNode;
   if (me.dataset.render === 'list') renderProductList(root);
-  if (me.dataset.render === 'view' && window.renderProductView) renderProductView(root);
+  if (me.dataset.render === 'view') renderProductView(root);
 })(document.currentScript);
