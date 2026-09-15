@@ -51,8 +51,8 @@ html.js .rv.on .eb span{transform:none}
 .gnb>ul{display:flex;gap:calc(18 * var(--u));height:100%}
 .gnb>ul>li>a{width:calc(105 * var(--u));height:100%;display:flex;align-items:center;justify-content:center;font-size:calc(13.5 * var(--u));line-height:calc(20.25 * var(--u));font-weight:600;letter-spacing:-.5px}
 .panel-d{position:absolute;left:0;right:0;top:var(--hdr);background:#fff;color:var(--ink);padding:calc(24 * var(--u)) var(--pad) calc(36 * var(--u));
-  max-height:0;overflow:hidden;opacity:0;visibility:hidden;transition:max-height .3s,opacity .3s,visibility 0s linear .3s}
-.hd.open .panel-d{max-height:calc(420 * var(--u));opacity:1;visibility:visible;transition:max-height .3s,opacity .3s,visibility 0s}
+  clip-path:inset(0 0 100% 0);opacity:0;visibility:hidden;transition:clip-path .3s,opacity .3s,visibility 0s linear .3s}
+.hd.open .panel-d{clip-path:inset(0);opacity:1;visibility:visible;transition:clip-path .3s,opacity .3s,visibility 0s}
 .panel-d .cols{display:flex;justify-content:center;gap:calc(18 * var(--u))}
 .panel-d ul{width:calc(105 * var(--u));display:flex;flex-direction:column;gap:calc(18 * var(--u));text-align:center}
 .panel-d a{display:block;font-size:calc(12 * var(--u));line-height:calc(19.2 * var(--u));font-weight:500;transition:font-weight .2s}
@@ -279,9 +279,8 @@ html.js .rise.on{opacity:1;transform:none}
 .feat{position:relative;height:100vh;overflow:hidden;text-align:center}
 .feat .hdg{padding-top:calc(165 * var(--u))}
 .feat .h27{margin-top:calc(16 * var(--u));color:#000}
-.feat .media{position:absolute;z-index:2;left:calc(89 * var(--u));top:calc(363 * var(--u));width:calc(1247 * var(--u));height:calc(788 * var(--u));
-  transition:left .5s var(--out),top .5s var(--out),width .5s var(--out),height .5s var(--out)}
-.feat.on .media{left:0;top:0;width:100%;height:100%}
+.feat .media{position:absolute;z-index:2;inset:0;clip-path:inset(calc(363 * var(--u)) calc(89 * var(--u)) 0);transition:clip-path .5s var(--out)}
+.feat.on .media{clip-path:inset(0)}
 .feat .media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.45))}
 .feat .media .ph{width:100%;height:100%;background:rgb(90,96,92)}
 .feat .ovl{position:absolute;z-index:5;left:50%;top:calc(666 * var(--u));transform:translateX(-50%);width:calc(1260 * var(--u));height:calc(145 * var(--u));
@@ -419,8 +418,8 @@ html.js .rise.on{opacity:1;transform:none}
   .phil ol .ds{margin-top:8px;gap:8px;font-size:14px;line-height:19.6px}
   /* 대표 사업 (라벨 y80 · 제목 24/36 · 사진 24,318 · 폭·높이 .875 배) */
   .feat .hdg{padding:80px 35px 0}
-  .feat .media{left:24px;top:318px;width:calc(100% - 48px);height:87.5%}
-  .feat .ovl{left:20px;right:20px;top:auto;bottom:60px;transform:none;width:auto;height:auto;flex-direction:column;gap:16px}
+  .feat .media{clip-path:inset(318px 24px 0)}
+  .feat .ovl{left:44px;right:44px;top:auto;bottom:60px;transform:none;width:auto;height:auto;flex-direction:column;gap:16px}
   .feat .ovl .l{gap:16px;padding-top:0}
   .feat .ovl .no{font-size:14px}
   .feat .ovl .nm{padding-top:0;font-size:16px;line-height:22.4px}
