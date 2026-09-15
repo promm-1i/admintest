@@ -5,7 +5,7 @@
 
   python tools/promo-cards/make_cards.py estate-f-template [rentcar-f-template ...]
   python tools/promo-cards/make_cards.py --all
-  python tools/promo-cards/make_cards.py --kmong estate-f-template   (크몽용: 메인 652x488 + 상세 9장, 가격·주소 없음)
+  python tools/promo-cards/make_cards.py --kmong estate-f-template   (크몽용: 대표 1080x1080 + 상세 9장, 가격·주소 없음)
 """
 import html
 import json
@@ -210,7 +210,8 @@ def build_cards(slug: str, s: dict) -> list[tuple[str, str]]:
 KMONG_POINT_PICK: dict[str, list[int]] = {
     "estate-f-template": [0, 2, 3, 4],
 }
-KMONG_MAIN = (652, 488)
+KMONG_MAIN = (1080, 1080)  # 크몽 대표 이미지: 1:1, 가로 600px 이상 (2026-09 등록 화면 기준)
+KMONG_MAIN_CSS = 540  # 540 으로 짜고 2배로 찍는다
 LIGHT_BG = "#f7f5f2"  # 포인트 카드와 같은 미색 — 브랜드 색 통바탕은 촌스러워 보인다는 피드백
 # 메인 이미지 큰 문구 (윗줄은 브랜드 색) — 템플릿에서 실제로 되는 기능으로만
 KMONG_HOOK: dict[str, tuple[str, str]] = {
@@ -242,6 +243,56 @@ def capture_fullpage(pg, slug: str, path: Path) -> None:
     pg.screenshot(path=str(path), full_page=True, clip={"x": 0, "y": 0, "width": 1440, "height": cut})
 
 
+def kmong_main_square(code: str, accent: str, hook: tuple[str, str], subline: str, chips: list[str],
+                      main_uri: str, main_ratio: float, phone_uri: str) -> str:
+    """크몽 대표 이미지 (정사각형). 목록 썸네일에서 읽히게 기능 문구를 크게, 사방 40px(CSS) 여백 안쪽."""
+    m = KMONG_MAIN_CSS
+    bw = 380
+    chip = "".join(
+        f'<span style="font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:99px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.08)">{esc(t)}</span>'
+        for t in chips
+    )
+    return page(f"""
+<div style="position:relative;width:{m}px;height:{m}px;overflow:hidden;background:{LIGHT_BG};color:#1a1714">
+  <div style="position:absolute;left:40px;top:40px;right:40px">
+    <p class="mono" style="font-size:11px;color:{accent}">PREMIUM DESIGN · {esc(code)}</p>
+    <h1 style="margin-top:12px;font-size:38px;font-weight:800;letter-spacing:-.045em;line-height:1.18"><span style="color:{accent}">{esc(hook[0])}</span><br>{esc(hook[1])}</h1>
+    <p style="margin-top:10px;font-size:13px;font-weight:600;color:#6b645d">{esc(subline)}</p>
+    <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap">{chip}</div>
+  </div>
+  <div style="position:absolute;left:40px;top:236px;width:{bw}px" class="browser">
+    <div class="bar"><i></i><i></i><i></i></div>
+    <div style="height:{round(bw * main_ratio)}px;overflow:hidden"><img src="{main_uri}"></div>
+  </div>
+  <div style="position:absolute;right:40px;top:292px;width:90px" class="phone"><img src="{phone_uri}"></div>
+</div>""", f"html,body{{width:{m}px!important;height:{m}px!important}}.phone{{border-width:5px!important;border-radius:19px!important;box-shadow:0 18px 30px -14px rgba(0,0,0,.45)!important}}.phone img{{border-radius:14px!important}}.browser{{box-shadow:0 26px 44px -22px rgba(0,0,0,.35)!important;border-radius:10px!important}}.browser .bar{{height:18px!important;padding:0 8px!important;gap:4px!important}}.browser .bar i{{width:6px;height:6px}}")
+
+
+def process_card(code: str, brand_c: str, n: int, total: int) -> str:
+    """크몽 마지막 장 — 진행 과정. 가격 · 연락처 없이."""
+    steps = [
+        ("상담", "업종과 꼭 필요한 기능, 참고하실 디자인을 여쭙니다."),
+        ("자료 전달", "로고 · 문구 · 원하시는 사진 분위기를 받습니다."),
+        ("제작", "브랜드 색 · 메뉴 · 섹션 구성을 사업에 맞춰 다시 잡고, 사진을 새로 만들어 채웁니다."),
+        ("검수 · 수정", "PC와 휴대폰에서 함께 보며 고칩니다."),
+        ("오픈", "도메인을 연결하고 관리자 모드 사용법을 안내합니다."),
+    ]
+    rows = "".join(
+        f"""<li style="display:grid;grid-template-columns:90px 1fr;gap:10px;padding:26px 0;border-top:1px solid rgba(0,0,0,.1)">
+<span class="mono" style="font-size:22px;padding-top:8px;color:{brand_c}">{i + 1:02d}</span>
+<div><p style="font-size:36px;font-weight:800;letter-spacing:-.03em">{t}</p><p style="margin-top:8px;font-size:23px;line-height:1.55;color:#5e5750">{d}</p></div></li>"""
+        for i, (t, d) in enumerate(steps)
+    )
+    return page(f"""
+<div class="card" style="background:{LIGHT_BG};color:#1a1714">
+  <p class="mono" style="color:{brand_c}">PROCESS</p>
+  <h2 style="margin-top:22px;font-size:66px;font-weight:800;letter-spacing:-.035em;line-height:1.2">자료를 받은 뒤<br>영업일 10일 이내 완성</h2>
+  <ol style="margin-top:44px;list-style:none">{rows}</ol>
+  <p style="position:absolute;left:80px;bottom:118px;font-size:19px;color:#8a837b">화면 속 브랜드명 · 사진 · 내용은 디자인 예시입니다.</p>
+  {foot(code, n, total, '#1a1714')}
+</div>""")
+
+
 def build_kmong(slug: str, s: dict, full_png: Path) -> list[tuple[str, str, int, int]]:
     code = design_code(slug)
     brand_c, tint = s["brandColor"], s["tintColor"]
@@ -252,25 +303,16 @@ def build_kmong(slug: str, s: dict, full_png: Path) -> list[tuple[str, str, int,
     def kfoot(n: int, color: str, accent: str = "#b3261e") -> str:
         return foot(code, n, total, color, accent)
 
-    # 메인 — 목록에서 제일 먼저 보이는 장이라 브랜드 이름보다 "무엇을 해 주는지"를 크게.
-    # 바탕은 포인트 카드와 같은 따뜻한 미색, 글자 · 목업 모두 50px 여백 안쪽. 2배로 그려서 줄인다
-    mw, mh = KMONG_MAIN
-    cover_phone = s["mobile"]["shots"][0]["img"]
-    hook1, hook2 = KMONG_HOOK.get(slug, (s["headline"], ""))
+    # 메인 — 정사각형. 목록에서 제일 먼저 보이는 장이라 브랜드 이름보다 "무엇을 해 주는지"를 크게
+    from PIL import Image
+
+    with Image.open(PUBLIC / s["mainShot"].lstrip("/")) as _im:
+        main_ratio = _im.size[1] / _im.size[0]
     chips = [f"{len(s['pages'])}쪽 구성" if s.get("pages") else "원페이지", "PC · 휴대폰", "관리자 모드", "영업일 10일 완성"]
-    out.append(("01-메인", page(f"""
-<div style="position:relative;width:{mw}px;height:{mh}px;overflow:hidden;background:{LIGHT_BG};color:#1a1714">
-  <div style="position:absolute;left:50px;top:50px;width:300px">
-    <p class="mono" style="font-size:11px;color:{brand_c}">PREMIUM DESIGN · {esc(code)}</p>
-    <h1 style="margin-top:14px;font-size:37px;font-weight:800;letter-spacing:-.045em;line-height:1.18"><span style="color:{brand_c}">{esc(hook1)}</span><br>{esc(hook2)}</h1>
-    <p style="margin-top:12px;font-size:13px;font-weight:600;color:#6b645d">{esc(s['brand'])} · {esc(industry)}</p>
-  </div>
-  <div style="position:absolute;left:50px;bottom:50px;display:flex;gap:6px;flex-wrap:wrap;width:230px">
-    {''.join(f'<span style="font-size:12px;font-weight:700;padding:6px 11px;border-radius:99px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.08)">{t}</span>' for t in chips)}
-  </div>
-  <div style="position:absolute;left:286px;top:158px;width:292px">{browser(s["mainShot"], "", 184).replace('<span></span>', '')}</div>
-  <div style="position:absolute;left:508px;top:228px;width:94px" class="phone"><img src="{img(cover_phone)}"></div>
-</div>""", ".phone{border-width:5px!important;border-radius:19px!important;box-shadow:0 18px 30px -14px rgba(0,0,0,.45)!important}.phone img{border-radius:14px!important}.browser{box-shadow:0 22px 40px -20px rgba(0,0,0,.35)!important}.browser .bar{height:18px!important;padding:0 8px!important;gap:4px!important}.browser .bar i{width:6px;height:6px}"), mw, mh))
+    out.append(("01-메인", kmong_main_square(
+        code, brand_c, KMONG_HOOK.get(slug, (s["headline"], "")), f"{s['brand']} · {industry}", chips,
+        img(s["mainShot"]), main_ratio, img(s["mobile"]["shots"][0]["img"]),
+    ), KMONG_MAIN_CSS, KMONG_MAIN_CSS))
 
     # 02 구성
     blog = dict(build_cards(slug, s))
@@ -332,28 +374,7 @@ def build_kmong(slug: str, s: dict, full_png: Path) -> list[tuple[str, str, int,
   {kfoot(9, '#1a1714')}
 </div>"""), W, H))
 
-    # 10 진행 과정 — 가격 · 연락처 없이
-    steps = [
-        ("상담", "업종과 꼭 필요한 기능, 참고하실 디자인을 여쭙니다."),
-        ("자료 전달", "로고 · 문구 · 원하시는 사진 분위기를 받습니다."),
-        ("제작", "브랜드 색 · 메뉴 · 섹션 구성을 사업에 맞춰 다시 잡고, 사진을 새로 만들어 채웁니다."),
-        ("검수 · 수정", "PC와 휴대폰에서 함께 보며 고칩니다."),
-        ("오픈", "도메인을 연결하고 관리자 모드 사용법을 안내합니다."),
-    ]
-    rows = "".join(
-        f"""<li style="display:grid;grid-template-columns:90px 1fr;gap:10px;padding:26px 0;border-top:1px solid rgba(0,0,0,.1)">
-<span class="mono" style="font-size:22px;padding-top:8px;color:{brand_c}">{i + 1:02d}</span>
-<div><p style="font-size:36px;font-weight:800;letter-spacing:-.03em">{t}</p><p style="margin-top:8px;font-size:23px;line-height:1.55;color:#5e5750">{d}</p></div></li>"""
-        for i, (t, d) in enumerate(steps)
-    )
-    out.append(("10-진행과정", page(f"""
-<div class="card" style="background:{LIGHT_BG};color:#1a1714">
-  <p class="mono" style="color:{brand_c}">PROCESS</p>
-  <h2 style="margin-top:22px;font-size:66px;font-weight:800;letter-spacing:-.035em;line-height:1.2">자료를 받은 뒤<br>영업일 10일 이내 완성</h2>
-  <ol style="margin-top:44px;list-style:none">{rows}</ol>
-  <p style="position:absolute;left:80px;bottom:118px;font-size:19px;opacity:.6">화면 속 브랜드명 · 사진 · 내용은 디자인 예시입니다.</p>
-  {kfoot(10, '#1a1714')}
-</div>"""), W, H))
+    out.append(("10-진행과정", process_card(code, brand_c, 10, total), W, H))
     return out
 
 
@@ -393,7 +414,7 @@ def main() -> None:
                 capture_fullpage(pg, slug, full)
                 for name, doc, w, h in build_kmong(slug, study, full):
                     if name == "01-메인":
-                        render(hi, doc, out / f"{name}.png", w, h, scale_to=KMONG_MAIN)
+                        render(hi, doc, out / f"{name}.png", w, h)  # 540 × 2배 = 1080
                     else:
                         render(pg, doc, out / f"{name}.png", w, h)
                 full.unlink()
