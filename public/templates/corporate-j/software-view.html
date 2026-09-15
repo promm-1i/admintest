@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>S-LINK — 세온기계</title>
+<meta name="description" content="S-LINK — 세온기계">
+<meta property="og:title" content="S-LINK — 세온기계">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 서브 맨 위 */
+.sub-top{position:relative;overflow:hidden}
+.sub-top:has(.sub-media){z-index:1;height:100vh}
+.sub-top:has(.sub-media) .sub-head{padding-top:clamp(160px,13.542vw,260px)}
+.sub-top .sub-head{width:100%;padding-top:clamp(80px,8.333vw,160px);padding-bottom:clamp(60px,7.292vw,140px);text-align:center;position:relative;display:flex;flex-direction:column;gap:clamp(14px,1.042vw,20px)}
+.sub-top .crumb{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(8px,.833vw,16px) clamp(4px,.833vw,16px);font-weight:500;line-height:1}
+.sub-top .crumb a{display:flex;align-items:center;gap:clamp(4px,.833vw,16px)}
+.sub-top .crumb a+a::before{content:'';width:clamp(10px,.885vw,17px);height:17px;display:inline-block;background:url(./assets/ic/next.svg) no-repeat center/contain}
+.sub-top .home{width:16px;aspect-ratio:1;background:url(./assets/ic/home.svg) no-repeat center/contain}
+.sub-top .sub-title{font-size:clamp(36px,4.167vw,80px);font-weight:500}
+.sub-top .sub-media{position:absolute;left:50%;top:clamp(300px,28.646vw,550px);width:90%;height:68vh;border-radius:30px;overflow:hidden;background:#eee;transform:translateX(-50%)}
+.sub-top .sub-media video,.sub-top .sub-media img{width:100%;height:100%;object-fit:cover}
+.sub-top .sub-dim{position:absolute;inset:0;background:#000;opacity:0}
+.sub-top .sub-copy{position:absolute;left:0;top:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:#fff;text-align:center;z-index:10}
+.sub-top .sub-copy h2{font-size:clamp(24px,3.542vw,68px);font-weight:500;line-height:1.4}
+.sub-visual{height:clamp(300px,33.333vw,640px)}
+.sub-visual video,.sub-visual img{width:100%;height:100%;object-fit:cover}
+.sub-top:has(.title-desc) .sub-head{height:90vh;color:#fff;display:flex;flex-direction:column;text-align:left;padding-top:clamp(200px,13.54vw,260px);padding-bottom:clamp(100px,8.85vw,170px)}
+.sub-top:has(.title-desc) .crumb{justify-content:flex-start}
+.sub-top:has(.title-desc) .crumb a+a::before,.sub-top:has(.title-desc) .home{filter:invert(1)}
+.sub-top:has(.title-desc) .sub-visual{position:absolute;left:0;top:0;z-index:-1;width:100%;height:100%}
+.sub-top .title-desc{margin-top:auto;font-size:clamp(18px,1.25vw,24px);font-weight:500}
+.sub-top.plain{border-bottom:1px solid var(--line)}
+.sub-top.plain .sub-title{font-size:clamp(30px,2.396vw,46px)}
+.sub-top.plain .crumb{justify-content:flex-start}
+.sub-top.plain .sub-head{text-align:left;flex-direction:column-reverse;gap:clamp(20px,2.083vw,40px)}
+.sub-top.plain .inner{max-width:1600px}
+.container:has(.sub-media){padding-top:0}
+.container:has(.sub-media) .sub-contents{margin-top:-100vh;min-height:100vh}
+.sub-contents{position:relative;z-index:2;background:#fff;padding-bottom:clamp(120px,12.5vw,240px)}
+.sub-contents .inner{max-width:1600px}
+#page-content{scroll-margin-top:99px}
+#page-content .section{padding-top:clamp(70px,9.375vw,180px)}
+#page-content .section.bg{background:var(--gray);padding-bottom:clamp(70px,9.375vw,180px);margin-top:clamp(70px,9.375vw,180px)}
+#page-content .section:has(.board-head){padding-top:40px}
+.content-head{position:relative;z-index:1;margin-bottom:clamp(24px,2.5vw,48px)}
+.content-head.center{text-align:center}
+.content-head:has(.content-desc){margin-bottom:clamp(60px,6.25vw,120px)}
+.content-head:has(.req){display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:clamp(20px,2.083vw,40px);border-bottom:1px solid var(--line)}
+.content-head:has(.title-btn){display:flex;align-items:center;justify-content:space-between}
+.content-title{font-size:clamp(28px,2.083vw,40px);font-weight:600;line-height:1.4}
+.content-title strong{font-weight:600;color:var(--primary)}
+.content-title+.content-desc{margin-top:clamp(15px,1.563vw,30px)}
+.content-head.big{margin-bottom:clamp(50px,5.208vw,100px)}
+.content-head.big .content-title{font-size:clamp(34px,2.708vw,52px)}
+.content-head.big .content-desc{font-size:clamp(18px,1.146vw,22px);margin-top:clamp(20px,2.083vw,40px)}
+.content-desc{color:#444;font-size:clamp(16px,.938vw,18px)}
+/* 바닥 탭 */
+.depth-tab{position:sticky;left:0;right:0;padding:0 5%;max-width:100%;bottom:clamp(20px,2.083vw,40px);margin:clamp(60px,6.25vw,120px) auto clamp(-60px,-6.25vw,-120px);transform:translateY(clamp(60px,6.25vw,120px));opacity:0;pointer-events:none;z-index:100;transition:.5s;display:flex;justify-content:center}
+.depth-tab.show{transform:translateY(0);opacity:1}
+.depth-tab-list{display:flex;padding:12px;background:rgba(255,255,255,.2);border-radius:12px;box-shadow:0 0 24px rgba(0,0,0,.08);backdrop-filter:blur(40px);flex-wrap:nowrap;overflow-x:auto;pointer-events:auto}
+.depth-tab-list li a{display:flex;align-items:center;justify-content:center;height:42px;padding:0 20px;border-radius:8px;font-weight:500;transition:.35s;white-space:nowrap}
+.depth-tab-list li.active a{background:var(--primary);color:#fff}
+/* 공통 버튼·폼 */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:clamp(48px,3.125vw,60px);padding:0 clamp(24px,2.083vw,40px);border-radius:8px;background:var(--primary);color:#fff;font-weight:600;font-size:clamp(15px,.938vw,18px);transition:.35s}
+.btn:hover{background:var(--primary-d)}
+.btn.line{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.line:hover{border-color:var(--ink)}
+@media(max-width:1500px){.content-title br{display:none}}
+@media(max-width:768px){.sub-top .sub-copy h2 br{display:none}.content-head:has(.title-btn){flex-direction:column;align-items:flex-start;gap:20px}}
+</style>
+<style>
+.prd-intro{background:var(--ink);color:rgba(255,255,255,.5);font-weight:500;padding:clamp(70px,9.375vw,180px) 0;text-align:center;font-size:clamp(17px,1.042vw,20px);line-height:1.65}
+.prd-intro .inner{max-width:1000px}
+.prd-intro strong{color:#fff;font-weight:500}
+.prd-acc-sec .inner{max-width:1240px}
+.prd-acc-sec .content-head{text-align:center;margin-bottom:clamp(40px,4.167vw,80px)}
+.prd-summary{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,1.25vw,24px);margin-bottom:clamp(30px,3.125vw,60px)}
+.prd-summary-thumb{overflow:hidden;border-radius:16px}
+.prd-summary-thumb img{display:block;width:100%;height:100%;object-fit:cover}
+.prd-summary-content{padding:clamp(30px,2.083vw,40px);display:flex;flex-direction:column;overflow:hidden;border-radius:16px;background:var(--gray);min-height:clamp(300px,22.917vw,440px)}
+.prd-summary-content h3{font-size:clamp(20px,1.458vw,28px);font-weight:600}
+.prd-summary-content p{margin-top:auto;font-size:clamp(16px,.938vw,18px);color:#444;font-weight:500}
+.prd-acc{border-top:1px solid #010101}
+.prd-acc+.prd-summary{margin-top:clamp(60px,6.25vw,120px)}
+.acc-item{border-bottom:1px solid var(--line)}
+.acc-head{display:flex;align-items:center;justify-content:space-between;width:100%;padding:clamp(20px,1.25vw,24px) clamp(20px,2.083vw,40px);font-size:clamp(17px,1.042vw,20px);font-weight:550;text-align:left}
+.acc-head::after{content:'';width:8px;height:8px;border-right:2px solid #111;border-bottom:2px solid #111;transform:rotate(45deg);transition:.35s}
+.acc-item.active .acc-head::after{transform:rotate(-135deg)}
+.acc-body{display:none;padding:clamp(24px,2.083vw,40px);background:var(--gray)}
+.acc-item.active .acc-body{display:block}
+.acc-body .img-cont{display:flex;gap:clamp(16px,1.25vw,24px);align-items:center}
+.acc-body .img-cont img{min-width:0;flex:1;border-radius:8px}
+.acc-body p{margin-bottom:clamp(24px,2.083vw,40px);line-height:1.6;color:#444}
+@media(max-width:1024px){.prd-summary{grid-template-columns:1fr;gap:16px}.prd-summary-content{min-height:auto;gap:50px}.prd-intro br{display:none}}
+@media(max-width:768px){.acc-body .img-cont{flex-direction:column}}
+</style>
+</head>
+<body class="sub">
+<div id="wrap" class="wrap">
+<header class="hd show">
+  <div class="hd-in">
+    <h1 class="logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h1>
+    <nav class="gnb"><ul><li class="gnb-item active"><a href="lineup.html">제품</a>
+      <div class="mega"><div class="mega-tit"><h2>제품</h2></div><div class="mega-d1"><ul><li class="on" data-p="p00"><a href="lineup.html">라인업</a></li><li data-p="p01"><a href="list.html">머시닝센터</a></li><li data-p="p02"><a href="list.html">터닝센터</a></li><li data-p="p03"><a href="list.html">범용</a></li><li data-p="p04"><a href="software.html">세온 소프트웨어</a></li><li data-p="p05"><a href="automation.html">자동화 솔루션</a></li></ul></div><div class="mega-d2"><ul class="mega-panel" id="p01"><li><a href="list.html">수직 머시닝센터</a></li><li><a href="list.html">수평 머시닝센터</a></li><li><a href="list.html">5축 가공 머시닝센터</a></li></ul><ul class="mega-panel" id="p02"><li><a href="list.html">수직 터닝센터</a></li><li><a href="list.html">수평 터닝센터</a></li><li><a href="list.html">복합기 터닝센터</a></li></ul><ul class="mega-panel" id="p03"><li><a href="list.html">선반</a></li><li><a href="list.html">밀링</a></li></ul><ul class="mega-panel" id="p04"><li><a href="software-view.html">S-LINK</a></li><li><a href="software-view.html">S-DRAW</a></li><li><a href="software-view.html">S-SIMUL</a></li></ul><ul class="mega-panel" id="p05"><li><a href="automation.html">솔루션</a></li></ul></div><div class="mega-img"><img src="./assets/mega-1.jpg" alt=""></div></div></li><li class="gnb-item"><a href="as.html">고객지원</a>
+      <div class="mega"><div class="mega-tit"><h2>고객지원</h2></div><div class="mega-d1"><ul><li class="on" data-p="p10"><a href="as.html">기술지원</a></li><li data-p="p11"><a href="estimate.html">견적문의</a></li><li data-p="p12"><a href="catalog.html">데이터 센터</a></li></ul></div><div class="mega-d2"><ul class="mega-panel on" id="p10"><li><a href="as.html">A/S 접수</a></li><li><a href="training.html">교육(신청/안내)</a></li></ul><ul class="mega-panel" id="p11"><li><a href="estimate.html">견적요청</a></li><li><a href="contact.html">1:1 문의</a></li></ul><ul class="mega-panel" id="p12"><li><a href="catalog.html">카탈로그</a></li></ul></div><div class="mega-img"><img src="./assets/mega-2.jpg" alt=""></div></div></li><li class="gnb-item"><a href="news.html">미디어</a>
+      <div class="mega"><div class="mega-tit"><h2>미디어</h2></div><div class="mega-d1"><ul><li class="on" data-p="p20"><a href="news.html">소식</a></li><li data-p="p21"><a href="video.html">비디오 갤러리</a></li></ul></div><div class="mega-d2"></div><div class="mega-img"><img src="./assets/mega-3.jpg" alt=""></div></div></li><li class="gnb-item"><a href="overview.html">회사소개</a>
+      <div class="mega"><div class="mega-tit"><h2>회사소개</h2></div><div class="mega-d1"><ul><li class="on" data-p="p30"><a href="overview.html">기업정보</a></li><li data-p="p31"><a href="network.html">네트워크</a></li><li data-p="p32"><a href="business.html">사업영역</a></li></ul></div><div class="mega-d2"><ul class="mega-panel on" id="p30"><li><a href="overview.html">개요</a></li><li><a href="history.html">연혁</a></li><li><a href="ci.html">CI</a></li><li><a href="location.html">오시는 길</a></li><li><a href="recruit.html">인재채용</a></li></ul><ul class="mega-panel" id="p31"><li><a href="network.html">국내 대리점/서비스센터</a></li></ul><ul class="mega-panel" id="p32"><li><a href="business.html">공작기계사업</a></li></ul></div><div class="mega-img"><img src="./assets/mega-4.jpg" alt=""></div></div></li></ul></nav>
+    <div class="util">
+      <div class="util-srch"><a href="./list.html" aria-label="제품 검색"></a></div>
+      <div class="lang"><button type="button" class="lang-btn">KR</button><ul class="lang-list"><li><a href="#">KR</a></li><li><a href="#">EN</a></li></ul></div>
+      <button type="button" class="menu-btn" aria-label="전체 메뉴"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="hd-dim"></div>
+<div class="allm">
+  <div class="allm-head"><h1 class="logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h1><button type="button" class="allm-close" aria-label="닫기"></button></div>
+  <nav class="allm-gnb"><ul><li class="allm-item has"><a>제품</a><div class="allm-depth"><ul><li><a href="lineup.html">라인업</a></li><li class="has"><a>머시닝센터</a><div class="allm-panel"><a href="list.html">수직 머시닝센터</a><a href="list.html">수평 머시닝센터</a><a href="list.html">5축 가공 머시닝센터</a></div></li><li class="has"><a>터닝센터</a><div class="allm-panel"><a href="list.html">수직 터닝센터</a><a href="list.html">수평 터닝센터</a><a href="list.html">복합기 터닝센터</a></div></li><li class="has"><a>범용</a><div class="allm-panel"><a href="list.html">선반</a><a href="list.html">밀링</a></div></li><li class="has"><a>세온 소프트웨어</a><div class="allm-panel"><a href="software-view.html">S-LINK</a><a href="software-view.html">S-DRAW</a><a href="software-view.html">S-SIMUL</a></div></li><li class="has"><a>자동화 솔루션</a><div class="allm-panel"><a href="automation.html">솔루션</a></div></li></ul></div></li><li class="allm-item has"><a>고객지원</a><div class="allm-depth"><ul><li class="has"><a>기술지원</a><div class="allm-panel"><a href="as.html">A/S 접수</a><a href="training.html">교육(신청/안내)</a></div></li><li class="has"><a>견적문의</a><div class="allm-panel"><a href="estimate.html">견적요청</a><a href="contact.html">1:1 문의</a></div></li><li class="has"><a>데이터 센터</a><div class="allm-panel"><a href="catalog.html">카탈로그</a></div></li></ul></div></li><li class="allm-item has"><a>미디어</a><div class="allm-depth"><ul><li><a href="news.html">소식</a></li><li><a href="video.html">비디오 갤러리</a></li></ul></div></li><li class="allm-item has"><a>회사소개</a><div class="allm-depth"><ul><li class="has"><a>기업정보</a><div class="allm-panel"><a href="overview.html">개요</a><a href="history.html">연혁</a><a href="ci.html">CI</a><a href="location.html">오시는 길</a><a href="recruit.html">인재채용</a></div></li><li class="has"><a>네트워크</a><div class="allm-panel"><a href="network.html">국내 대리점/서비스센터</a></div></li><li class="has"><a>사업영역</a><div class="allm-panel"><a href="business.html">공작기계사업</a></div></li></ul></div></li></ul></nav>
+</div>
+<div class="quick">
+  <a href="./estimate.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-inquiry.svg)"></i><span>견적문의</span></a>
+  <a href="./network.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-branch.svg)"></i><span>가까운 사업장 찾기</span></a>
+  <a href="./as.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-service.svg)"></i><span>A/S 신청</span></a>
+</div>
+<div class="container"><main>
+<section class="sub-top"><div class="inner"><div class="sub-head"><div class="crumb" data-motion><a href="./index.html" class="home" aria-label="홈"></a><a><span>제품</span></a><a><span>세온 소프트웨어</span></a><a><span>소프트웨어</span></a><a><span>S-LINK</span></a></div><h2 class="sub-title" data-motion>S-LINK</h2><p class="title-desc" data-motion>세온의 기술을 하나로 묶은 지능형 HMI<br>"Smart Human Machine Interface with an All-in-one Solution"</p></div></div><div class="sub-visual"><img src="./assets/sub-software-view.jpg" alt=""></div></section>
+<div class="sub-contents " id="page-content">
+<section class="prd-intro"><div class="inner" data-motion><p>S-LINK는 세온의 최신 소프트웨어 기술을 모은 <strong>통합 스마트 인터페이스 시스템</strong>입니다.<br>Windows 기반 PC 시스템으로 공작기계 조작의 편의성을 끌어올렸으며<br>단순한 제어판을 넘어 가공 프로그램 준비부터 시뮬레이션, 유지보수까지 모든 과정을 하나로 잇는 올인원 솔루션입니다.<br>19인치 &amp; 24인치 대형 멀티 터치스크린으로 스마트폰을 쓰듯 직관적으로 조작할 수 있으며,<br>사용자 중심 GUI로 숙련도와 관계없이 누구나 쉽고 안전하게 장비를 다룰 수 있습니다.</p></div></section>
+<section class="prd-acc-sec section"><div class="inner"><div class="content-head big" data-motion><h2 class="content-title">S-LINK</h2></div><div class="prd-summary"><div class="prd-summary-thumb" data-motion><img src="./assets/sw-1.jpg" alt=""></div><div class="prd-summary-content" data-motion><h3>가공 준비부터 검증까지<br>스마트한 공정 관리</h3><p>"전문 가공 지식 없이도 최적의 결과물을 만들어 냅니다." S-LINK는 작업자의 노하우에 기대던 방식에서 벗어나, 데이터와 그래픽 기반의 스마트한 기능을 제공합니다.</p></div></div><div class="prd-acc" data-motion><div class="acc-item"><button type="button" class="acc-head">S-DRAW (대화형 CAM)</button><div class="acc-body"><p>별도의 상용 CAM 없이도 선반(TC), 밀링(MC) 공정의 NC 데이터를 현장에서 쉽고 빠르게 만들 수 있습니다.<br>DXF 도면을 바로 읽어 오거나 형상을 정의해 직관적으로 프로그래밍합니다.</p><div class="img-cont"><img src="./assets/sw-acc-1.jpg" alt=""><img src="./assets/sw-acc-2.jpg" alt=""><img src="./assets/sw-acc-3.jpg" alt=""></div></div></div><div class="acc-item"><button type="button" class="acc-head">워크 스케줄러 (Work Scheduler)</button><div class="acc-body"><p>복잡한 메인 프로그램 없이 가공 목록 선택만으로 이어서 운전합니다.<br>작업별 예상 가공 시간과 남은 시간을 함께 보여 주고, 가공 중에도 CAM 작업이 끝난 파일을 추가할 수 있습니다.</p><div class="img-cont"><img src="./assets/sw-acc-4.jpg" alt=""></div></div></div><div class="acc-item"><button type="button" class="acc-head">세온 고유 가공 SW 탑재</button><div class="acc-body"><p>고능률 윤곽 제어, 공구 과부하 검출, 열변위 제어 같은 세온만의 정밀 가공 최적화 기능을 통합 제어합니다.</p><div class="img-cont"><img src="./assets/sw-acc-5.jpg" alt=""><img src="./assets/sw-acc-6.jpg" alt=""><img src="./assets/sw-acc-7.jpg" alt=""><img src="./assets/sw-acc-8.jpg" alt=""></div></div></div></div><div class="prd-summary"><div class="prd-summary-thumb" data-motion><img src="./assets/sw-2.jpg" alt=""></div><div class="prd-summary-content" data-motion><h3>생산성 향상과<br>장비 자산 보호의 최적화</h3><p>"24시간 멈추지 않는 안전한 생산 현장, S-LINK가 완성합니다." S-LINK 도입으로 고객은 제조 현장의 디지털 전환과 함께 실질적인 경제적 이익을 얻습니다.</p></div></div><div class="prd-acc" data-motion><div class="acc-item"><button type="button" class="acc-head">AI Tool Vision</button><div class="acc-body"><p>비전 카메라와 AI 기술을 묶어 매거진에 장착된 공구의 형상을 자동으로 판별합니다.<br>공구 DB와 실시간으로 견줘 공구 오장착 사고를 미리 막고 파손 여부를 확인합니다.</p><div class="img-cont"><img src="./assets/sw-acc-9.jpg" alt=""><img src="./assets/sw-acc-10.jpg" alt=""></div></div></div><div class="acc-item"><button type="button" class="acc-head">AI Work Vision</button><div class="acc-body"><p>기계 안에 3D 카메라를 두어 공작물의 형상을 판별하고 크기와 위치를 확인합니다.<br>자동 측정 프로그램을 만들어 작업자가 직접 프로브를 다루지 않아도 측정할 수 있습니다.</p><div class="img-cont"><img src="./assets/sw-acc-11.jpg" alt=""><img src="./assets/sw-acc-12.jpg" alt=""><img src="./assets/sw-acc-13.jpg" alt=""></div></div></div><div class="acc-item"><button type="button" class="acc-head">지능형 ACS (실시간 충돌 방지)</button><div class="acc-body"><p>수동 조작뿐 아니라 자동 가공 운전 중에도 실시간으로 기계 안 간섭을 감지해 장비를 멈춥니다.<br>센서 없이 가상 모델로 스핀들과 기계 파손을 막습니다.</p><div class="img-cont"><img src="./assets/sw-acc-14.jpg" alt=""><img src="./assets/sw-acc-15.jpg" alt=""></div></div></div><div class="acc-item"><button type="button" class="acc-head">S-SIMUL (고정밀 시뮬레이션)</button><div class="acc-body"><p>3축/5축과 복합가공기에 맞춘 사전 간섭 확인 기능을 제공합니다.<br>실제 기계 정보와 동기화된 가상 모델로 가공 전 위험 요소를 검증합니다.</p><div class="img-cont"><img src="./assets/sw-acc-16.jpg" alt=""><img src="./assets/sw-acc-17.jpg" alt=""><img src="./assets/sw-acc-18.jpg" alt=""></div></div></div></div><div class="prd-summary"><div class="prd-summary-thumb" data-motion><img src="./assets/sw-3.jpg" alt=""></div><div class="prd-summary-content" data-motion><h3>스마트 운영과<br>유지보수 경제성</h3><p>"장비 운영의 모든 단계에서 낭비를 줄이고 관리 효율을 끌어올립니다."</p></div></div><div class="prd-acc" data-motion><div class="acc-item"><button type="button" class="acc-head">원격 진단 (Remote Care)</button><div class="acc-body"><p>장비 상태를 원격으로 진단하고 알람 이력을 분석해 정지 시간을 줄입니다.</p><div class="img-cont"><img src="./assets/sw-acc-19.jpg" alt=""><img src="./assets/sw-acc-20.jpg" alt=""></div></div></div><div class="acc-item"><button type="button" class="acc-head">예방 정비 알림</button><div class="acc-body"><p>주축·베어링·윤활 상태를 학습해 정비 시점을 미리 알려 줍니다.</p><div class="img-cont"><img src="./assets/sw-acc-21.jpg" alt=""></div></div></div></div></div></section>
+<nav class="depth-tab"><ul class="depth-tab-list"><li><a href="./list.html">머시닝센터</a></li><li><a href="./list.html">터닝센터</a></li><li><a href="./list.html">범용</a></li><li class="active"><a href="./software.html">세온 소프트웨어</a></li><li><a href="./automation.html">자동화 솔루션</a></li></ul></nav></div>
+</main></div>
+<footer class="ft"><div class="ft-bg"></div><div class="inner">
+  <div class="ft-top"><h2 class="ft-logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h2><a href="./privacy.html" class="ft-policy">개인정보처리방침</a></div>
+  <div class="ft-mid">
+    <div class="ft-co">
+      <div class="ft-addr"><p>세온기계 <span>|</span> 서울특별시 강남구 테헤란로 123, 민트클빌딩 5층</p></div>
+      <div class="ft-info"><p>사업자등록번호. 266-07-03678</p><p>Tel. 010-4894-4905</p><p>통신판매업신고. 제2026-서울강남-00480호</p></div>
+      <div class="ft-addr"><p>창원공장 <span>|</span> 경상남도 창원시 성산구 공단로 456</p></div>
+      <div class="ft-info"><p>대표. 민트클</p><p>Tel. 010-4894-4905</p></div>
+      <div class="ft-info"><p>E-Mail. 6gsmake@gmail.com</p></div>
+    </div>
+    <div class="ft-sns"><a href="#" aria-label="유튜브"><img src="./assets/ic/youtube.svg" alt=""></a></div>
+  </div>
+  <div class="ft-bottom">2026 © SEON MACHINE TOOL ALL RIGHTS RESERVED</div>
+</div></footer>
+<button type="button" class="top-btn" aria-label="맨 위로 이동"></button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+<script src="./assets/site.js"></script>
+<script>
+(function(){
+  /* 서브 맨 위 — 원본 common.js: 핀 +3500, 판이 100%·100vh 로, dim .45, 문구 0.6 에서 등장 */
+  var media = document.querySelector('.sub-media');
+  if (media) {
+    var tl = gsap.timeline({scrollTrigger: {trigger: '.sub-top', start: 'top top', end: '+=3500', scrub: 1, pin: true, anticipatePin: 1}});
+    tl.to('.sub-media', {width: '100%', height: '100vh', top: 0, borderRadius: 0});
+    tl.to('.sub-dim', {opacity: .45}, 0);
+    if (document.querySelector('.sub-copy')) tl.from('.sub-copy', {opacity: 0, y: 40}, 0.6);
+    tl.to({}, {duration: 1});
+  }
+  var dt = document.querySelector('.depth-tab');
+  if (dt) ScrollTrigger.create({trigger: '.sub-contents', start: 'top center', onEnter: function(){ dt.classList.add('show'); }, onLeaveBack: function(){ dt.classList.remove('show'); }});
+  /* 탭·아코디언 공통 */
+  document.querySelectorAll('[data-tabs]').forEach(function(w){
+    var btns = w.querySelectorAll('[data-tab]'), panes = document.querySelectorAll('[data-pane]');
+    btns.forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); btns.forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active');
+      panes.forEach(function(p){ p.classList.toggle('active', p.dataset.pane === b.dataset.tab); }); ScrollTrigger.refresh(); }); });
+  });
+  document.querySelectorAll('.acc-item .acc-head').forEach(function(h){ h.addEventListener('click', function(){ var it = h.parentElement, on = it.classList.contains('active');
+    it.parentElement.querySelectorAll('.acc-item').forEach(function(x){ x.classList.remove('active'); }); if (!on) it.classList.add('active'); ScrollTrigger.refresh(); }); });
+})();
+</script>
+</body>
+</html>

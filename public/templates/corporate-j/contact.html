@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>1:1 문의 — 세온기계</title>
+<meta name="description" content="1:1 문의 — 세온기계">
+<meta property="og:title" content="1:1 문의 — 세온기계">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 서브 맨 위 */
+.sub-top{position:relative;overflow:hidden}
+.sub-top:has(.sub-media){z-index:1;height:100vh}
+.sub-top:has(.sub-media) .sub-head{padding-top:clamp(160px,13.542vw,260px)}
+.sub-top .sub-head{width:100%;padding-top:clamp(80px,8.333vw,160px);padding-bottom:clamp(60px,7.292vw,140px);text-align:center;position:relative;display:flex;flex-direction:column;gap:clamp(14px,1.042vw,20px)}
+.sub-top .crumb{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(8px,.833vw,16px) clamp(4px,.833vw,16px);font-weight:500;line-height:1}
+.sub-top .crumb a{display:flex;align-items:center;gap:clamp(4px,.833vw,16px)}
+.sub-top .crumb a+a::before{content:'';width:clamp(10px,.885vw,17px);height:17px;display:inline-block;background:url(./assets/ic/next.svg) no-repeat center/contain}
+.sub-top .home{width:16px;aspect-ratio:1;background:url(./assets/ic/home.svg) no-repeat center/contain}
+.sub-top .sub-title{font-size:clamp(36px,4.167vw,80px);font-weight:500}
+.sub-top .sub-media{position:absolute;left:50%;top:clamp(300px,28.646vw,550px);width:90%;height:68vh;border-radius:30px;overflow:hidden;background:#eee;transform:translateX(-50%)}
+.sub-top .sub-media video,.sub-top .sub-media img{width:100%;height:100%;object-fit:cover}
+.sub-top .sub-dim{position:absolute;inset:0;background:#000;opacity:0}
+.sub-top .sub-copy{position:absolute;left:0;top:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:#fff;text-align:center;z-index:10}
+.sub-top .sub-copy h2{font-size:clamp(24px,3.542vw,68px);font-weight:500;line-height:1.4}
+.sub-visual{height:clamp(300px,33.333vw,640px)}
+.sub-visual video,.sub-visual img{width:100%;height:100%;object-fit:cover}
+.sub-top:has(.title-desc) .sub-head{height:90vh;color:#fff;display:flex;flex-direction:column;text-align:left;padding-top:clamp(200px,13.54vw,260px);padding-bottom:clamp(100px,8.85vw,170px)}
+.sub-top:has(.title-desc) .crumb{justify-content:flex-start}
+.sub-top:has(.title-desc) .crumb a+a::before,.sub-top:has(.title-desc) .home{filter:invert(1)}
+.sub-top:has(.title-desc) .sub-visual{position:absolute;left:0;top:0;z-index:-1;width:100%;height:100%}
+.sub-top .title-desc{margin-top:auto;font-size:clamp(18px,1.25vw,24px);font-weight:500}
+.sub-top.plain{border-bottom:1px solid var(--line)}
+.sub-top.plain .sub-title{font-size:clamp(30px,2.396vw,46px)}
+.sub-top.plain .crumb{justify-content:flex-start}
+.sub-top.plain .sub-head{text-align:left;flex-direction:column-reverse;gap:clamp(20px,2.083vw,40px)}
+.sub-top.plain .inner{max-width:1600px}
+.container:has(.sub-media){padding-top:0}
+.container:has(.sub-media) .sub-contents{margin-top:-100vh;min-height:100vh}
+.sub-contents{position:relative;z-index:2;background:#fff;padding-bottom:clamp(120px,12.5vw,240px)}
+.sub-contents .inner{max-width:1600px}
+#page-content{scroll-margin-top:99px}
+#page-content .section{padding-top:clamp(70px,9.375vw,180px)}
+#page-content .section.bg{background:var(--gray);padding-bottom:clamp(70px,9.375vw,180px);margin-top:clamp(70px,9.375vw,180px)}
+#page-content .section:has(.board-head){padding-top:40px}
+.content-head{position:relative;z-index:1;margin-bottom:clamp(24px,2.5vw,48px)}
+.content-head.center{text-align:center}
+.content-head:has(.content-desc){margin-bottom:clamp(60px,6.25vw,120px)}
+.content-head:has(.req){display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:clamp(20px,2.083vw,40px);border-bottom:1px solid var(--line)}
+.content-head:has(.title-btn){display:flex;align-items:center;justify-content:space-between}
+.content-title{font-size:clamp(28px,2.083vw,40px);font-weight:600;line-height:1.4}
+.content-title strong{font-weight:600;color:var(--primary)}
+.content-title+.content-desc{margin-top:clamp(15px,1.563vw,30px)}
+.content-head.big{margin-bottom:clamp(50px,5.208vw,100px)}
+.content-head.big .content-title{font-size:clamp(34px,2.708vw,52px)}
+.content-head.big .content-desc{font-size:clamp(18px,1.146vw,22px);margin-top:clamp(20px,2.083vw,40px)}
+.content-desc{color:#444;font-size:clamp(16px,.938vw,18px)}
+/* 바닥 탭 */
+.depth-tab{position:sticky;left:0;right:0;padding:0 5%;max-width:100%;bottom:clamp(20px,2.083vw,40px);margin:clamp(60px,6.25vw,120px) auto clamp(-60px,-6.25vw,-120px);transform:translateY(clamp(60px,6.25vw,120px));opacity:0;pointer-events:none;z-index:100;transition:.5s;display:flex;justify-content:center}
+.depth-tab.show{transform:translateY(0);opacity:1}
+.depth-tab-list{display:flex;padding:12px;background:rgba(255,255,255,.2);border-radius:12px;box-shadow:0 0 24px rgba(0,0,0,.08);backdrop-filter:blur(40px);flex-wrap:nowrap;overflow-x:auto;pointer-events:auto}
+.depth-tab-list li a{display:flex;align-items:center;justify-content:center;height:42px;padding:0 20px;border-radius:8px;font-weight:500;transition:.35s;white-space:nowrap}
+.depth-tab-list li.active a{background:var(--primary);color:#fff}
+/* 공통 버튼·폼 */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:clamp(48px,3.125vw,60px);padding:0 clamp(24px,2.083vw,40px);border-radius:8px;background:var(--primary);color:#fff;font-weight:600;font-size:clamp(15px,.938vw,18px);transition:.35s}
+.btn:hover{background:var(--primary-d)}
+.btn.line{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.line:hover{border-color:var(--ink)}
+@media(max-width:1500px){.content-title br{display:none}}
+@media(max-width:768px){.sub-top .sub-copy h2 br{display:none}.content-head:has(.title-btn){flex-direction:column;align-items:flex-start;gap:20px}}
+</style>
+<style>
+.inquiry-wrap{background:var(--gray);padding:clamp(30px,4.167vw,80px) clamp(20px,4.167vw,80px);border-radius:16px}
+.inquiry-info{display:flex;gap:clamp(10px,1.563vw,30px);padding:clamp(18px,1.563vw,30px) clamp(18px,1.25vw,24px);margin-bottom:clamp(20px,2.083vw,40px);background:#F7F8F9;border-radius:8px;color:#444}
+.inquiry-info span{position:relative;padding-left:11px}
+.inquiry-info span::before{content:'';width:3px;aspect-ratio:1;background:#aaa;border-radius:50%;position:absolute;left:0;top:10px}
+.req{font-size:clamp(14px,.833vw,16px);font-weight:400;color:#303030;text-align:right}
+.req span{color:var(--primary)}
+.form-title{font-size:clamp(18px,1.25vw,24px);font-weight:600;margin-bottom:clamp(15px,1.563vw,30px)}
+.form-title:has(.req){display:flex;align-items:flex-end;justify-content:space-between}
+.form-grid+.form-title,.agree-box+.form-title{border-top:1px solid var(--line);margin-top:clamp(30px,3.125vw,60px);padding-top:clamp(30px,3.125vw,60px)}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px 20px}
+.form-item.full{grid-column:1/-1}
+.form-item>label:not(.agree-check){display:block;margin-bottom:14px;font-size:clamp(15px,.938vw,18px);font-weight:500}
+.form-item em{color:var(--primary);font-style:normal}
+.form-item input,.form-item select,.form-item textarea{width:100%;height:clamp(54px,3.333vw,64px);padding:0 clamp(16px,1.042vw,20px);border:1px solid var(--line);border-radius:8px;background-color:#fff}
+.form-item textarea{height:clamp(160px,12.5vw,240px);padding:20px clamp(16px,1.042vw,20px)}
+.file-wrap{display:flex;gap:12px}
+.file-wrap .file-btn{display:flex;align-items:center;justify-content:center;width:120px;height:clamp(54px,3.333vw,64px);background:#444;border-radius:8px;color:#fff;cursor:pointer;flex:none}
+.file-info{font-size:14px;color:#888;margin-top:12px}
+.input-flex{display:flex;gap:clamp(6px,.625vw,12px);width:100%}
+.input-flex input{flex:1}
+.input-flex button{background:#fff;border:1px solid var(--line);border-radius:8px;flex-shrink:0;width:clamp(100px,7.292vw,140px);color:#787878}
+.input-address{width:100%;display:flex;flex-direction:column;gap:12px}
+.agree-check{display:flex;align-items:flex-start;gap:4px 12px;cursor:pointer}
+.agree-check+.agree-check{margin-top:15px}
+.agree-check input{display:none}
+.agree-check .checkbox{display:inline-block;width:clamp(20px,1.25vw,24px);aspect-ratio:1;border:1px solid #ddd;background-color:#fff;border-radius:4px;position:relative;transition:.3s;flex:none}
+.agree-check .checkbox::after{content:'';position:absolute;left:clamp(5px,.365vw,7px);top:clamp(1px,.156vw,3px);width:6px;height:10px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);opacity:0}
+.agree-check input:checked+.checkbox{background:var(--primary);border-color:var(--primary)}
+.agree-check input:checked+.checkbox::after{opacity:1}
+.btn-policy{line-height:1.5;font-size:1em}
+.btn-policy:hover{text-decoration:underline}
+.btn-wrap{margin-top:clamp(40px,3.125vw,60px);display:flex;gap:16px;justify-content:center}
+.btn-wrap button{width:clamp(160px,10.417vw,200px);height:clamp(60px,3.542vw,68px);background:#fff;border:1px solid #C6C6C6;border-radius:8px;font-size:clamp(16px,.938vw,18px);font-weight:500;text-align:center}
+.btn-wrap button.submit-btn{background:var(--primary);border-color:var(--primary);color:#fff}
+.agree-box{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:clamp(15px,1.563vw,30px)}
+.agree-box .agree-check .txt{border-bottom:1px solid #111}
+.privacy-content{font-size:1.05em;line-height:1.6;color:#444}
+.privacy-content h4{margin-top:20px;margin-bottom:5px;font-size:1.1em;font-weight:600;color:var(--ink)}
+.policy-box{border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;padding:clamp(20px,2.083vw,40px) clamp(20px,2.083vw,40px) 0;background:#fff}
+.policy-preview{padding-bottom:clamp(24px,2.083vw,40px);max-height:clamp(120px,10.417vw,200px);overflow:hidden;transition:.35s}
+.policy-box.active .policy-preview{max-height:2000px;overflow-y:auto}
+.policy-toggle{position:relative;width:100%;height:clamp(54px,3.333vw,64px);border-top:1px solid #C6C6C6;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;font-size:clamp(14px,.938vw,18px)}
+.policy-toggle::after{content:'';width:6px;height:6px;border-right:1.5px solid #111;border-bottom:1.5px solid #111;transform:rotate(45deg);transition:.3s;margin-top:-3px}
+.policy-toggle::before{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;margin-top:-1px;background-image:linear-gradient(0deg,#fff 30%,transparent);pointer-events:none}
+.policy-box.active .policy-toggle::after{transform:rotate(-135deg);margin-top:3px}
+.policy-box.active .policy-toggle::before{display:none}
+@media(max-width:768px){.form-grid{grid-template-columns:1fr;gap:20px}.input-flex:has(.detail-address){flex-direction:column}.input-flex input{flex:auto}.inquiry-info,.agree-box{flex-direction:column;align-items:flex-start}.agree-check{flex-wrap:wrap}}
+@media(max-width:480px){.inquiry-wrap{background:none;padding:0}}
+
+.content-head.center .content-desc{color:#444;font-weight:400}
+.content-head.center{margin-bottom:clamp(50px,6.25vw,120px)}
+</style></head>
+<body class="sub">
+<div id="wrap" class="wrap">
+<header class="hd show">
+  <div class="hd-in">
+    <h1 class="logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h1>
+    <nav class="gnb"><ul><li class="gnb-item"><a href="lineup.html">제품</a>
+      <div class="mega"><div class="mega-tit"><h2>제품</h2></div><div class="mega-d1"><ul><li class="on" data-p="p00"><a href="lineup.html">라인업</a></li><li data-p="p01"><a href="list.html">머시닝센터</a></li><li data-p="p02"><a href="list.html">터닝센터</a></li><li data-p="p03"><a href="list.html">범용</a></li><li data-p="p04"><a href="software.html">세온 소프트웨어</a></li><li data-p="p05"><a href="automation.html">자동화 솔루션</a></li></ul></div><div class="mega-d2"><ul class="mega-panel" id="p01"><li><a href="list.html">수직 머시닝센터</a></li><li><a href="list.html">수평 머시닝센터</a></li><li><a href="list.html">5축 가공 머시닝센터</a></li></ul><ul class="mega-panel" id="p02"><li><a href="list.html">수직 터닝센터</a></li><li><a href="list.html">수평 터닝센터</a></li><li><a href="list.html">복합기 터닝센터</a></li></ul><ul class="mega-panel" id="p03"><li><a href="list.html">선반</a></li><li><a href="list.html">밀링</a></li></ul><ul class="mega-panel" id="p04"><li><a href="software-view.html">S-LINK</a></li><li><a href="software-view.html">S-DRAW</a></li><li><a href="software-view.html">S-SIMUL</a></li></ul><ul class="mega-panel" id="p05"><li><a href="automation.html">솔루션</a></li></ul></div><div class="mega-img"><img src="./assets/mega-1.jpg" alt=""></div></div></li><li class="gnb-item active"><a href="as.html">고객지원</a>
+      <div class="mega"><div class="mega-tit"><h2>고객지원</h2></div><div class="mega-d1"><ul><li class="on" data-p="p10"><a href="as.html">기술지원</a></li><li data-p="p11"><a href="estimate.html">견적문의</a></li><li data-p="p12"><a href="catalog.html">데이터 센터</a></li></ul></div><div class="mega-d2"><ul class="mega-panel on" id="p10"><li><a href="as.html">A/S 접수</a></li><li><a href="training.html">교육(신청/안내)</a></li></ul><ul class="mega-panel" id="p11"><li><a href="estimate.html">견적요청</a></li><li><a href="contact.html">1:1 문의</a></li></ul><ul class="mega-panel" id="p12"><li><a href="catalog.html">카탈로그</a></li></ul></div><div class="mega-img"><img src="./assets/mega-2.jpg" alt=""></div></div></li><li class="gnb-item"><a href="news.html">미디어</a>
+      <div class="mega"><div class="mega-tit"><h2>미디어</h2></div><div class="mega-d1"><ul><li class="on" data-p="p20"><a href="news.html">소식</a></li><li data-p="p21"><a href="video.html">비디오 갤러리</a></li></ul></div><div class="mega-d2"></div><div class="mega-img"><img src="./assets/mega-3.jpg" alt=""></div></div></li><li class="gnb-item"><a href="overview.html">회사소개</a>
+      <div class="mega"><div class="mega-tit"><h2>회사소개</h2></div><div class="mega-d1"><ul><li class="on" data-p="p30"><a href="overview.html">기업정보</a></li><li data-p="p31"><a href="network.html">네트워크</a></li><li data-p="p32"><a href="business.html">사업영역</a></li></ul></div><div class="mega-d2"><ul class="mega-panel on" id="p30"><li><a href="overview.html">개요</a></li><li><a href="history.html">연혁</a></li><li><a href="ci.html">CI</a></li><li><a href="location.html">오시는 길</a></li><li><a href="recruit.html">인재채용</a></li></ul><ul class="mega-panel" id="p31"><li><a href="network.html">국내 대리점/서비스센터</a></li></ul><ul class="mega-panel" id="p32"><li><a href="business.html">공작기계사업</a></li></ul></div><div class="mega-img"><img src="./assets/mega-4.jpg" alt=""></div></div></li></ul></nav>
+    <div class="util">
+      <div class="util-srch"><a href="./list.html" aria-label="제품 검색"></a></div>
+      <div class="lang"><button type="button" class="lang-btn">KR</button><ul class="lang-list"><li><a href="#">KR</a></li><li><a href="#">EN</a></li></ul></div>
+      <button type="button" class="menu-btn" aria-label="전체 메뉴"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="hd-dim"></div>
+<div class="allm">
+  <div class="allm-head"><h1 class="logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h1><button type="button" class="allm-close" aria-label="닫기"></button></div>
+  <nav class="allm-gnb"><ul><li class="allm-item has"><a>제품</a><div class="allm-depth"><ul><li><a href="lineup.html">라인업</a></li><li class="has"><a>머시닝센터</a><div class="allm-panel"><a href="list.html">수직 머시닝센터</a><a href="list.html">수평 머시닝센터</a><a href="list.html">5축 가공 머시닝센터</a></div></li><li class="has"><a>터닝센터</a><div class="allm-panel"><a href="list.html">수직 터닝센터</a><a href="list.html">수평 터닝센터</a><a href="list.html">복합기 터닝센터</a></div></li><li class="has"><a>범용</a><div class="allm-panel"><a href="list.html">선반</a><a href="list.html">밀링</a></div></li><li class="has"><a>세온 소프트웨어</a><div class="allm-panel"><a href="software-view.html">S-LINK</a><a href="software-view.html">S-DRAW</a><a href="software-view.html">S-SIMUL</a></div></li><li class="has"><a>자동화 솔루션</a><div class="allm-panel"><a href="automation.html">솔루션</a></div></li></ul></div></li><li class="allm-item has"><a>고객지원</a><div class="allm-depth"><ul><li class="has"><a>기술지원</a><div class="allm-panel"><a href="as.html">A/S 접수</a><a href="training.html">교육(신청/안내)</a></div></li><li class="has"><a>견적문의</a><div class="allm-panel"><a href="estimate.html">견적요청</a><a href="contact.html">1:1 문의</a></div></li><li class="has"><a>데이터 센터</a><div class="allm-panel"><a href="catalog.html">카탈로그</a></div></li></ul></div></li><li class="allm-item has"><a>미디어</a><div class="allm-depth"><ul><li><a href="news.html">소식</a></li><li><a href="video.html">비디오 갤러리</a></li></ul></div></li><li class="allm-item has"><a>회사소개</a><div class="allm-depth"><ul><li class="has"><a>기업정보</a><div class="allm-panel"><a href="overview.html">개요</a><a href="history.html">연혁</a><a href="ci.html">CI</a><a href="location.html">오시는 길</a><a href="recruit.html">인재채용</a></div></li><li class="has"><a>네트워크</a><div class="allm-panel"><a href="network.html">국내 대리점/서비스센터</a></div></li><li class="has"><a>사업영역</a><div class="allm-panel"><a href="business.html">공작기계사업</a></div></li></ul></div></li></ul></nav>
+</div>
+<div class="quick">
+  <a href="./estimate.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-inquiry.svg)"></i><span>견적문의</span></a>
+  <a href="./network.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-branch.svg)"></i><span>가까운 사업장 찾기</span></a>
+  <a href="./as.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-service.svg)"></i><span>A/S 신청</span></a>
+</div>
+<div class="container"><main>
+<div class="pin-wrap"><section class="sub-top"><div class="inner"><div class="sub-head"><div class="crumb" data-motion><a href="./index.html" class="home" aria-label="홈"></a><a><span>고객지원</span></a><a><span>견적문의</span></a><a><span>1:1 문의</span></a></div><h2 class="sub-title" data-motion>1:1 문의</h2></div></div><div class="sub-media"><img src="./assets/sub-inquiry.jpg" alt=""><div class="sub-dim"></div><div class="sub-copy"><div class="inner"><h2>제품 사용 중 궁금한 점을 물어보시면<br>빠르고 정확하게 답변 드리겠습니다.</h2></div></div></div></section></div>
+<div class="sub-contents " id="page-content">
+<section class="inquiry-sec inner section"><div class="content-head center" data-motion><h3 class="content-title">제품 사용 중 궁금한 사항을 문의해 주시면 유선전화 또는 이메일로<br>제품 담당자가 빠르고 정확하게 답변 드리겠습니다.</h3><p class="content-desc">단 주말, 휴일과 1:1 문의가 몰릴 경우 답변이 다소 늦어질 수 있습니다.</p></div>
+<div class="inquiry-wrap" data-motion><form class="inquiry-form"><h4 class="form-title">기본정보 입력 <p class="req"><span>*</span> 필수 입력항목</p></h4>
+<div class="form-grid"><div class="form-item"><label>상담분야 <em>*</em></label><select><option value="" selected disabled hidden>상담분야를 선택해 주세요.</option><option>채용문의</option><option>제품문의</option><option>품질문의</option><option>회사문의</option><option>교육문의</option></select></div><div class="form-item"><label>이름 <em>*</em></label><input type="text" placeholder="이름을 입력해 주세요."></div><div class="form-item"><label>전화번호 <em>*</em></label><input type="text" placeholder="전화번호를 입력해 주세요. (숫자만 입력 가능)"></div><div class="form-item"><label>이메일 <em>*</em></label><input type="email" placeholder="이메일을 입력해 주세요."></div><div class="form-item"><label>주소 <em>*</em></label><div class="input-address"><div class="input-flex"><input type="text" placeholder="주소를 입력해 주세요." readonly><button type="button">우편번호 찾기</button></div><div class="input-flex"><input type="text" readonly><input type="text" class="detail-address" placeholder="상세주소를 입력해 주세요."></div></div></div><div class="form-item full"><label>제목 <em>*</em></label><input type="text" placeholder="제목을 입력해 주세요."></div><div class="form-item full"><label>문의사항 <em>*</em></label><textarea placeholder="문의사항을 입력해 주세요."></textarea></div><div class="form-item full"><label>파일첨부</label><div><div class="file-wrap"><input readonly placeholder="등록된 파일이 없습니다."><label class="file-btn">파일첨부<input type="file" hidden></label></div><p class="file-info">* 첨부파일은 jpg, png, gif, hwp, pdf, ppt, pptx, xls, xlsx, zip 파일만 등록 가능합니다.</p></div></div></div>
+<h4 class="form-title">개인정보 수집 및 이용 동의</h4><div class="policy-box"><div class="policy-preview"><div class="privacy-content">세온기계 주식회사(이하 '회사')는 고객 문의와 서비스 제공을 위해 아래와 같이 개인정보를 수집·이용합니다.<h4>수집·이용 목적</h4>기술지원 및 제품 관련 문의 접수·처리<br>견적문의 접수 및 담당자 배정<br>견학 및 교육 신청 접수·관리<br>카탈로그, 기술자료 및 기타 자료 제공<br>고객 문의에 대한 회신 및 상담 이력 관리<h4>수집·이용 항목</h4>필수항목: 이름, 이메일, 전화번호, 회사명<br>기타항목: 문의 내용, 관심 제품, 신청 내용 및 이용자가 직접 입력하거나 첨부한 정보<h4>보유·이용 기간</h4>수집일로부터 <strong>1년간</strong> 보유·이용합니다.<br><br>다만, 수집·이용 목적이 달성되거나 보유기간이 지난 경우에는 지체 없이 파기합니다. 관계 법령에 따라 보존할 필요가 있는 경우에는 해당 법령에서 정한 기간 동안 보관합니다.<h4>동의 거부 권리 및 불이익</h4>귀하는 개인정보 수집 및 이용에 대한 동의를 거부할 권리가 있습니다. 다만, 필수 개인정보 수집 및 이용에 동의하지 않는 경우 기술지원, 견적문의, 견학 및 교육 신청, 자료 다운로드 등 해당 서비스 이용이 제한될 수 있습니다.</div></div><button type="button" class="policy-toggle">개인정보 수집 및 이용 동의 더 보기</button></div>
+<div class="agree-box"><div class="agree-txt">[필수] 개인정보 수집 및 이용에 동의합니다.</div><label class="agree-check"><input type="checkbox"><span class="checkbox"></span><span class="txt">동의함</span></label></div>
+<h4 class="form-title">마케팅 정보 수집 및 활용 동의</h4><div class="policy-box"><div class="policy-preview"><div class="privacy-content">세온기계 주식회사(이하 '회사')는 동의한 고객의 개인정보를 아래와 같이 마케팅 목적으로 이용하고, 이메일로 영리 목적의 광고성 정보를 보낼 수 있습니다.<h4>수집·이용 목적</h4>뉴스레터 및 홍보 콘텐츠 제공<br>신제품 및 제품 관련 정보 제공<br>제품 카탈로그, 기술자료 및 가공 솔루션 제공<br>전시회, 세미나, 교육 및 고객 초청행사 안내<br>이벤트, 프로모션 및 설문조사 안내<h4>수집·이용 항목</h4>이름, 이메일, 회사명, 관심 제품 및 문의·자료 다운로드 이력<h4>광고성 정보 수신 방법 및 발송 빈도</h4>수신 방법: <strong>이메일</strong> / 발송 빈도: <strong>월 최대 4회</strong><h4>보유·이용 기간</h4>동의일로부터 <strong>1년간</strong> 보유·이용합니다.<br>고객이 동의를 철회하거나 광고성 정보 수신을 거부한 경우에는 보유기간이 남아 있더라도 더 이상 이용하지 않습니다.<h4>동의 거부 권리 및 불이익</h4>귀하는 마케팅 목적의 개인정보 수집·이용 및 광고성 정보 이메일 수신에 대한 동의를 거부할 권리가 있으며, 거부하더라도 회사가 제공하는 기본 서비스 이용에는 제한이 없습니다.</div></div><button type="button" class="policy-toggle">마케팅 정보 수집 및 활용 동의 더 보기</button></div>
+<div class="agree-box"><div class="agree-txt">[선택] 마케팅 정보 수집 및 활용에 동의합니다.</div><label class="agree-check"><input type="checkbox"><span class="checkbox"></span><span class="txt">동의함</span></label></div><div class="btn-wrap"><button type="submit" class="submit-btn">문의하기</button></div></form></div></section>
+<nav class="depth-tab"><ul class="depth-tab-list"><li><a href="./as.html">기술지원</a></li><li class="active"><a href="./estimate.html">견적문의</a></li><li><a href="./catalog.html">데이터 센터</a></li></ul></nav></div>
+</main></div>
+<footer class="ft"><div class="ft-bg"></div><div class="inner">
+  <div class="ft-top"><h2 class="ft-logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h2><a href="./privacy.html" class="ft-policy">개인정보처리방침</a></div>
+  <div class="ft-mid">
+    <div class="ft-co">
+      <div class="ft-addr"><p>세온기계 <span>|</span> 서울특별시 강남구 테헤란로 123, 민트클빌딩 5층</p></div>
+      <div class="ft-info"><p>사업자등록번호. 266-07-03678</p><p>Tel. 010-4894-4905</p><p>통신판매업신고. 제2026-서울강남-00480호</p></div>
+      <div class="ft-addr"><p>창원공장 <span>|</span> 경상남도 창원시 성산구 공단로 456</p></div>
+      <div class="ft-info"><p>대표. 민트클</p><p>Tel. 010-4894-4905</p></div>
+      <div class="ft-info"><p>E-Mail. 6gsmake@gmail.com</p></div>
+    </div>
+    <div class="ft-sns"><a href="#" aria-label="유튜브"><img src="./assets/ic/youtube.svg" alt=""></a></div>
+  </div>
+  <div class="ft-bottom">2026 © SEON MACHINE TOOL ALL RIGHTS RESERVED</div>
+</div></footer>
+<button type="button" class="top-btn" aria-label="맨 위로 이동"></button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+<script src="./assets/site.js"></script>
+<script>
+(function(){
+  /* 서브 맨 위 — 원본 common.js: 핀 +3500, 판이 100%·100vh 로, dim .45, 문구 0.6 에서 등장 */
+  var media = document.querySelector('.sub-media');
+  if (media) {
+    var tl = gsap.timeline({scrollTrigger: {trigger: '.sub-top', start: 'top top', end: '+=3500', scrub: 1, pin: true, anticipatePin: 1}});
+    tl.to('.sub-media', {width: '100%', height: '100vh', top: 0, borderRadius: 0});
+    tl.to('.sub-dim', {opacity: .45}, 0);
+    if (document.querySelector('.sub-copy')) tl.from('.sub-copy', {opacity: 0, y: 40}, 0.6);
+    tl.to({}, {duration: 1});
+  }
+  var dt = document.querySelector('.depth-tab');
+  if (dt) ScrollTrigger.create({trigger: '.sub-contents', start: 'top center', onEnter: function(){ dt.classList.add('show'); }, onLeaveBack: function(){ dt.classList.remove('show'); }});
+  /* 탭·아코디언 공통 */
+  document.querySelectorAll('[data-tabs]').forEach(function(w){
+    var btns = w.querySelectorAll('[data-tab]'), panes = document.querySelectorAll('[data-pane]');
+    btns.forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); btns.forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active');
+      panes.forEach(function(p){ p.classList.toggle('active', p.dataset.pane === b.dataset.tab); }); ScrollTrigger.refresh(); }); });
+  });
+  document.querySelectorAll('.acc-item .acc-head').forEach(function(h){ h.addEventListener('click', function(){ var it = h.parentElement, on = it.classList.contains('active');
+    it.parentElement.querySelectorAll('.acc-item').forEach(function(x){ x.classList.remove('active'); }); if (!on) it.classList.add('active'); ScrollTrigger.refresh(); }); });
+})();
+</script>
+<script>
+document.querySelectorAll('.policy-toggle').forEach(function(b){ b.addEventListener('click', function(){ b.parentElement.classList.toggle('active'); ScrollTrigger.refresh(); }); });
+document.querySelectorAll('form').forEach(function(f){ f.addEventListener('submit', function(e){ e.preventDefault(); alert('접수됐습니다. 담당자가 확인 후 연락드리겠습니다.'); }); });
+var all = document.getElementById('agreeAll'); if (all) all.addEventListener('change', function(){ document.querySelectorAll('.agree-item').forEach(function(c){ c.checked = all.checked; }); });
+</script></body>
+</html>

@@ -1026,23 +1026,6 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
-    slug: "wedding-a-template",
-    industry: "웨딩 · 컨시어지 홈페이지",
-    title: "웨딩 촬영 컨시어지 홈페이지 (프리미엄 디자인 A)",
-    type: ["premium-template", "small-business"],
-    tag: "프리미엄 디자인 · 웨딩 · 촬영 · 여행",
-    purpose:
-      "글자가 하나씩 떠오르는 인트로, 필기체 제목이 얹힌 사진 슬라이드, 6개 서비스 사진판, 흘러가는 큰 글자 띠, 스크롤에 따라 카드가 바뀌는 고정 4단계, 뒤 글자가 바뀌는 후기, FAQ, 상담 배너로 이어지는 메인에 회사소개·서비스 목록(6개 분야·태그 필터)·서비스 상세(포트폴리오 63장·패키지 창)·블로그·블로그 상세·로그인·회원가입·비밀번호 찾기와 2단계 문의 창을 갖춘 웨딩 컨시어지 홈페이지입니다.",
-    features: ["필기체 제목 사진 슬라이드 · 흘러가는 큰 글자 띠", "스크롤로 넘어가는 고정 4단계 · 뒤 글자가 바뀌는 후기", "태그로 거르는 서비스 목록 · 포트폴리오와 패키지 창이 있는 상세", "2단계 문의 창 · 블로그·후기 · 로그인 · 서브 8쪽"],
-    idealFor: "웨딩 촬영 컨시어지, 스튜디오·드레스·메이크업 패키지 업체, 외국인 고객을 받는 웨딩·여행 서비스",
-    image: "/thumbs/wedding-a.jpg",
-    liveUrl: "/templates/wedding-a/",
-    industryKey: "wedding",
-    premiumLabel: "웨딩 A",
-    designCode: "WEDP-1001",
-    premium: true,
-  },
-  {
     slug: "corporate-j-template",
     industry: "제조 · 공작기계 기업 홈페이지",
     title: "공작기계 제조기업 홈페이지 (프리미엄 디자인 D)",

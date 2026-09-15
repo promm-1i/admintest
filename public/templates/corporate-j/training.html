@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>교육 (신청/안내) — 세온기계</title>
+<meta name="description" content="교육 (신청/안내) — 세온기계">
+<meta property="og:title" content="교육 (신청/안내) — 세온기계">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 서브 맨 위 */
+.sub-top{position:relative;overflow:hidden}
+.sub-top:has(.sub-media){z-index:1;height:100vh}
+.sub-top:has(.sub-media) .sub-head{padding-top:clamp(160px,13.542vw,260px)}
+.sub-top .sub-head{width:100%;padding-top:clamp(80px,8.333vw,160px);padding-bottom:clamp(60px,7.292vw,140px);text-align:center;position:relative;display:flex;flex-direction:column;gap:clamp(14px,1.042vw,20px)}
+.sub-top .crumb{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:clamp(8px,.833vw,16px) clamp(4px,.833vw,16px);font-weight:500;line-height:1}
+.sub-top .crumb a{display:flex;align-items:center;gap:clamp(4px,.833vw,16px)}
+.sub-top .crumb a+a::before{content:'';width:clamp(10px,.885vw,17px);height:17px;display:inline-block;background:url(./assets/ic/next.svg) no-repeat center/contain}
+.sub-top .home{width:16px;aspect-ratio:1;background:url(./assets/ic/home.svg) no-repeat center/contain}
+.sub-top .sub-title{font-size:clamp(36px,4.167vw,80px);font-weight:500}
+.sub-top .sub-media{position:absolute;left:50%;top:clamp(300px,28.646vw,550px);width:90%;height:68vh;border-radius:30px;overflow:hidden;background:#eee;transform:translateX(-50%)}
+.sub-top .sub-media video,.sub-top .sub-media img{width:100%;height:100%;object-fit:cover}
+.sub-top .sub-dim{position:absolute;inset:0;background:#000;opacity:0}
+.sub-top .sub-copy{position:absolute;left:0;top:0;width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:#fff;text-align:center;z-index:10}
+.sub-top .sub-copy h2{font-size:clamp(24px,3.542vw,68px);font-weight:500;line-height:1.4}
+.sub-visual{height:clamp(300px,33.333vw,640px)}
+.sub-visual video,.sub-visual img{width:100%;height:100%;object-fit:cover}
+.sub-top:has(.title-desc) .sub-head{height:90vh;color:#fff;display:flex;flex-direction:column;text-align:left;padding-top:clamp(200px,13.54vw,260px);padding-bottom:clamp(100px,8.85vw,170px)}
+.sub-top:has(.title-desc) .crumb{justify-content:flex-start}
+.sub-top:has(.title-desc) .crumb a+a::before,.sub-top:has(.title-desc) .home{filter:invert(1)}
+.sub-top:has(.title-desc) .sub-visual{position:absolute;left:0;top:0;z-index:-1;width:100%;height:100%}
+.sub-top .title-desc{margin-top:auto;font-size:clamp(18px,1.25vw,24px);font-weight:500}
+.sub-top.plain{border-bottom:1px solid var(--line)}
+.sub-top.plain .sub-title{font-size:clamp(30px,2.396vw,46px)}
+.sub-top.plain .crumb{justify-content:flex-start}
+.sub-top.plain .sub-head{text-align:left;flex-direction:column-reverse;gap:clamp(20px,2.083vw,40px)}
+.sub-top.plain .inner{max-width:1600px}
+.container:has(.sub-media){padding-top:0}
+.container:has(.sub-media) .sub-contents{margin-top:-100vh;min-height:100vh}
+.sub-contents{position:relative;z-index:2;background:#fff;padding-bottom:clamp(120px,12.5vw,240px)}
+.sub-contents .inner{max-width:1600px}
+#page-content{scroll-margin-top:99px}
+#page-content .section{padding-top:clamp(70px,9.375vw,180px)}
+#page-content .section.bg{background:var(--gray);padding-bottom:clamp(70px,9.375vw,180px);margin-top:clamp(70px,9.375vw,180px)}
+#page-content .section:has(.board-head){padding-top:40px}
+.content-head{position:relative;z-index:1;margin-bottom:clamp(24px,2.5vw,48px)}
+.content-head.center{text-align:center}
+.content-head:has(.content-desc){margin-bottom:clamp(60px,6.25vw,120px)}
+.content-head:has(.req){display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:clamp(20px,2.083vw,40px);border-bottom:1px solid var(--line)}
+.content-head:has(.title-btn){display:flex;align-items:center;justify-content:space-between}
+.content-title{font-size:clamp(28px,2.083vw,40px);font-weight:600;line-height:1.4}
+.content-title strong{font-weight:600;color:var(--primary)}
+.content-title+.content-desc{margin-top:clamp(15px,1.563vw,30px)}
+.content-head.big{margin-bottom:clamp(50px,5.208vw,100px)}
+.content-head.big .content-title{font-size:clamp(34px,2.708vw,52px)}
+.content-head.big .content-desc{font-size:clamp(18px,1.146vw,22px);margin-top:clamp(20px,2.083vw,40px)}
+.content-desc{color:#444;font-size:clamp(16px,.938vw,18px)}
+/* 바닥 탭 */
+.depth-tab{position:sticky;left:0;right:0;padding:0 5%;max-width:100%;bottom:clamp(20px,2.083vw,40px);margin:clamp(60px,6.25vw,120px) auto clamp(-60px,-6.25vw,-120px);transform:translateY(clamp(60px,6.25vw,120px));opacity:0;pointer-events:none;z-index:100;transition:.5s;display:flex;justify-content:center}
+.depth-tab.show{transform:translateY(0);opacity:1}
+.depth-tab-list{display:flex;padding:12px;background:rgba(255,255,255,.2);border-radius:12px;box-shadow:0 0 24px rgba(0,0,0,.08);backdrop-filter:blur(40px);flex-wrap:nowrap;overflow-x:auto;pointer-events:auto}
+.depth-tab-list li a{display:flex;align-items:center;justify-content:center;height:42px;padding:0 20px;border-radius:8px;font-weight:500;transition:.35s;white-space:nowrap}
+.depth-tab-list li.active a{background:var(--primary);color:#fff}
+/* 공통 버튼·폼 */
+.btn{display:inline-flex;align-items:center;justify-content:center;height:clamp(48px,3.125vw,60px);padding:0 clamp(24px,2.083vw,40px);border-radius:8px;background:var(--primary);color:#fff;font-weight:600;font-size:clamp(15px,.938vw,18px);transition:.35s}
+.btn:hover{background:var(--primary-d)}
+.btn.line{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.btn.line:hover{border-color:var(--ink)}
+@media(max-width:1500px){.content-title br{display:none}}
+@media(max-width:768px){.sub-top .sub-copy h2 br{display:none}.content-head:has(.title-btn){flex-direction:column;align-items:flex-start;gap:20px}}
+</style>
+<style>
+.inquiry-wrap{background:var(--gray);padding:clamp(30px,4.167vw,80px) clamp(20px,4.167vw,80px);border-radius:16px}
+.inquiry-info{display:flex;gap:clamp(10px,1.563vw,30px);padding:clamp(18px,1.563vw,30px) clamp(18px,1.25vw,24px);margin-bottom:clamp(20px,2.083vw,40px);background:#F7F8F9;border-radius:8px;color:#444}
+.inquiry-info span{position:relative;padding-left:11px}
+.inquiry-info span::before{content:'';width:3px;aspect-ratio:1;background:#aaa;border-radius:50%;position:absolute;left:0;top:10px}
+.req{font-size:clamp(14px,.833vw,16px);font-weight:400;color:#303030;text-align:right}
+.req span{color:var(--primary)}
+.form-title{font-size:clamp(18px,1.25vw,24px);font-weight:600;margin-bottom:clamp(15px,1.563vw,30px)}
+.form-title:has(.req){display:flex;align-items:flex-end;justify-content:space-between}
+.form-grid+.form-title,.agree-box+.form-title{border-top:1px solid var(--line);margin-top:clamp(30px,3.125vw,60px);padding-top:clamp(30px,3.125vw,60px)}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:32px 20px}
+.form-item.full{grid-column:1/-1}
+.form-item>label:not(.agree-check){display:block;margin-bottom:14px;font-size:clamp(15px,.938vw,18px);font-weight:500}
+.form-item em{color:var(--primary);font-style:normal}
+.form-item input,.form-item select,.form-item textarea{width:100%;height:clamp(54px,3.333vw,64px);padding:0 clamp(16px,1.042vw,20px);border:1px solid var(--line);border-radius:8px;background-color:#fff}
+.form-item textarea{height:clamp(160px,12.5vw,240px);padding:20px clamp(16px,1.042vw,20px)}
+.file-wrap{display:flex;gap:12px}
+.file-wrap .file-btn{display:flex;align-items:center;justify-content:center;width:120px;height:clamp(54px,3.333vw,64px);background:#444;border-radius:8px;color:#fff;cursor:pointer;flex:none}
+.file-info{font-size:14px;color:#888;margin-top:12px}
+.input-flex{display:flex;gap:clamp(6px,.625vw,12px);width:100%}
+.input-flex input{flex:1}
+.input-flex button{background:#fff;border:1px solid var(--line);border-radius:8px;flex-shrink:0;width:clamp(100px,7.292vw,140px);color:#787878}
+.input-address{width:100%;display:flex;flex-direction:column;gap:12px}
+.agree-check{display:flex;align-items:flex-start;gap:4px 12px;cursor:pointer}
+.agree-check+.agree-check{margin-top:15px}
+.agree-check input{display:none}
+.agree-check .checkbox{display:inline-block;width:clamp(20px,1.25vw,24px);aspect-ratio:1;border:1px solid #ddd;background-color:#fff;border-radius:4px;position:relative;transition:.3s;flex:none}
+.agree-check .checkbox::after{content:'';position:absolute;left:clamp(5px,.365vw,7px);top:clamp(1px,.156vw,3px);width:6px;height:10px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);opacity:0}
+.agree-check input:checked+.checkbox{background:var(--primary);border-color:var(--primary)}
+.agree-check input:checked+.checkbox::after{opacity:1}
+.btn-policy{line-height:1.5;font-size:1em}
+.btn-policy:hover{text-decoration:underline}
+.btn-wrap{margin-top:clamp(40px,3.125vw,60px);display:flex;gap:16px;justify-content:center}
+.btn-wrap button{width:clamp(160px,10.417vw,200px);height:clamp(60px,3.542vw,68px);background:#fff;border:1px solid #C6C6C6;border-radius:8px;font-size:clamp(16px,.938vw,18px);font-weight:500;text-align:center}
+.btn-wrap button.submit-btn{background:var(--primary);border-color:var(--primary);color:#fff}
+.agree-box{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:clamp(15px,1.563vw,30px)}
+.agree-box .agree-check .txt{border-bottom:1px solid #111}
+.privacy-content{font-size:1.05em;line-height:1.6;color:#444}
+.privacy-content h4{margin-top:20px;margin-bottom:5px;font-size:1.1em;font-weight:600;color:var(--ink)}
+.policy-box{border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;padding:clamp(20px,2.083vw,40px) clamp(20px,2.083vw,40px) 0;background:#fff}
+.policy-preview{padding-bottom:clamp(24px,2.083vw,40px);max-height:clamp(120px,10.417vw,200px);overflow:hidden;transition:.35s}
+.policy-box.active .policy-preview{max-height:2000px;overflow-y:auto}
+.policy-toggle{position:relative;width:100%;height:clamp(54px,3.333vw,64px);border-top:1px solid #C6C6C6;background:#fff;display:flex;align-items:center;justify-content:center;gap:12px;font-size:clamp(14px,.938vw,18px)}
+.policy-toggle::after{content:'';width:6px;height:6px;border-right:1.5px solid #111;border-bottom:1.5px solid #111;transform:rotate(45deg);transition:.3s;margin-top:-3px}
+.policy-toggle::before{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;margin-top:-1px;background-image:linear-gradient(0deg,#fff 30%,transparent);pointer-events:none}
+.policy-box.active .policy-toggle::after{transform:rotate(-135deg);margin-top:3px}
+.policy-box.active .policy-toggle::before{display:none}
+@media(max-width:768px){.form-grid{grid-template-columns:1fr;gap:20px}.input-flex:has(.detail-address){flex-direction:column}.input-flex input{flex:auto}.inquiry-info,.agree-box{flex-direction:column;align-items:flex-start}.agree-check{flex-wrap:wrap}}
+@media(max-width:480px){.inquiry-wrap{background:none;padding:0}}
+
+.info-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,1.25vw,24px)}
+.info-card{padding:clamp(20px,2.083vw,40px);border-radius:16px;background:var(--gray);border:1px solid transparent;transition:background-color .35s ease,border-color .35s ease}
+.info-card:hover{border-color:var(--primary);background:#fff}
+.info-card:hover .info-tel{border-color:var(--primary);color:var(--primary)}
+.info-card-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:clamp(15px,1.563vw,30px);margin-bottom:clamp(15px,1.563vw,30px);border-bottom:1px solid var(--line)}
+.info-card-head h4{font-size:clamp(20px,1.458vw,28px);font-weight:600}
+.info-tel{display:flex;align-items:center;gap:6px;justify-content:center;padding:0 clamp(12px,.833vw,16px);height:clamp(36px,2.5vw,48px);border-radius:999px;border:1px solid transparent;font-size:clamp(15px,1.042vw,20px);background:#fff;transition:all ease .35s}
+.info-tel::before{content:'';width:18px;aspect-ratio:1;background:url(./assets/ic/tel.svg) no-repeat center/contain}
+.info-card-body{display:flex;flex-direction:column;gap:16px}
+.info-card-row{display:flex;gap:clamp(5px,1.563vw,30px);font-size:clamp(16px,1.042vw,20px)}
+.info-card-row strong{width:110px;flex-shrink:0;font-weight:500}
+.info-card-row p{flex:1;color:#444}
+.card-flex{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,1.25vw,24px)}
+.card-thumb{border-radius:16px;overflow:hidden}
+.card-thumb img{width:100%;height:100%;object-fit:cover}
+.card-group{display:flex;flex-direction:column;gap:clamp(16px,1.25vw,24px)}
+.card-box{padding:clamp(20px,2.083vw,40px);border-radius:16px;background:var(--gray);height:100%;transition:all ease .35s;border:1px solid transparent}
+.card-box h4{padding-bottom:clamp(16px,1.25vw,24px);margin-bottom:clamp(16px,1.25vw,24px);border-bottom:1px solid var(--line);font-size:clamp(20px,1.458vw,28px);font-weight:600}
+.card-box p{margin-bottom:12px;color:#333;font-size:clamp(16px,.938vw,18px)}
+.card-box span{display:block;color:#333}
+.card-box:hover{border-color:var(--primary);background:#fff}
+.card-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:clamp(20px,1.563vw,30px)}
+.card-tag{display:flex;align-items:center;justify-content:center;padding:12px 16px;line-height:1;border-radius:999px;background:#fff;font-weight:500;border:1px solid var(--line);transition:all ease .35s}
+.card-box:hover .card-tag{background:var(--primary);border-color:var(--primary);color:#fff}
+.inquiry-wrap .content-head{margin-bottom:0}
+.input-date{cursor:pointer;position:relative}
+.input-date::after{content:'';position:absolute;right:12px;top:50%;transform:translateY(-50%);width:24px;aspect-ratio:1;background:url(./assets/ic/calendar.svg) no-repeat center/contain;pointer-events:none}
+.page-tab{position:sticky;top:0;display:flex;justify-content:center;align-items:center;padding:0 5%;background:rgba(255,255,255,.8);border-bottom:1px solid var(--line);gap:clamp(20px,2.083vw,40px);backdrop-filter:blur(48px);z-index:2;transition:all .35s ease}
+body:has(.hd.show) .page-tab{top:var(--hd)}
+.page-tab .tab-item{position:relative;display:flex;align-items:center;font-size:clamp(15px,.938vw,18px);font-weight:600;color:#aaa;height:clamp(59px,3.594vw,69px);white-space:nowrap}
+.page-tab .tab-item.active{border-bottom:1px solid var(--ink);color:var(--ink)}
+.center-list{display:flex;gap:clamp(16px,1.25vw,24px)}
+.center-item{flex:1;background:#f5f5f5;border-radius:16px;overflow:hidden;display:block;transition:.3s}
+.center-thumb{aspect-ratio:517/350;overflow:hidden}
+.center-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:.4s}
+.center-info{padding:clamp(20px,1.563vw,30px);display:flex;align-items:center;justify-content:space-between;gap:20px}
+.center-info strong{font-size:clamp(18px,1.25vw,24px);font-weight:600}
+.center-info .arr{width:20px;height:20px;position:relative;flex-shrink:0}
+.center-info .arr::before{content:'';position:absolute;background:#111;width:14px;height:2px;top:50%;left:3px;transform:translateY(-50%)}
+.center-info .arr::after{content:'';position:absolute;width:8px;height:8px;top:50%;right:2px;border-top:2px solid #111;border-right:2px solid #111;transform:translateY(-50%) rotate(45deg)}
+.edu-box{display:flex;justify-content:space-between;gap:clamp(40px,4.167vw,80px);padding:clamp(30px,3.333vw,64px);border-radius:16px;background:#000 radial-gradient(circle at 20% 30%,rgba(255,255,255,.12),transparent 40%);overflow:hidden}
+.edu-content{width:50%;color:#fff}
+.edu-title{margin:0 0 clamp(20px,2.083vw,40px);font-size:clamp(26px,2.083vw,40px);font-weight:600;line-height:1.2}
+.edu-desc{margin:0 0 20px;font-size:clamp(18px,1.146vw,22px);font-weight:500}
+.edu-text{margin:0 0 clamp(20px,2.083vw,40px);font-size:clamp(16px,.938vw,18px);color:rgba(255,255,255,.8)}
+.btn-edu{display:inline-flex;align-items:center;justify-content:center;min-width:clamp(140px,9.375vw,180px);height:clamp(48px,2.917vw,56px);border-radius:8px;background:#fff;color:var(--ink);font-size:clamp(16px,.938vw,18px);transition:.3s}
+.btn-edu:hover{background:var(--primary);color:#fff}
+.edu-thumb{width:50%;overflow:hidden;border-radius:16px}
+.edu-thumb img{width:100%;height:100%;object-fit:cover}
+@media(max-width:1500px){.info-grid{grid-template-columns:1fr}.info-card-row{flex-direction:column}.edu-content br{display:none}}
+@media(max-width:1024px){.card-flex{grid-template-columns:1fr}.page-tab{justify-content:flex-start;overflow-x:auto}.page-tab .tab-item{flex:0 0 auto}}
+@media(max-width:768px){.center-list,.edu-box{flex-direction:column}.edu-content,.edu-thumb{width:100%}}
+</style></head>
+<body class="sub">
+<div id="wrap" class="wrap">
+<header class="hd show">
+  <div class="hd-in">
+    <h1 class="logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h1>
+    <nav class="gnb"><ul><li class="gnb-item"><a href="lineup.html">제품</a>
+      <div class="mega"><div class="mega-tit"><h2>제품</h2></div><div class="mega-d1"><ul><li class="on" data-p="p00"><a href="lineup.html">라인업</a></li><li data-p="p01"><a href="list.html">머시닝센터</a></li><li data-p="p02"><a href="list.html">터닝센터</a></li><li data-p="p03"><a href="list.html">범용</a></li><li data-p="p04"><a href="software.html">세온 소프트웨어</a></li><li data-p="p05"><a href="automation.html">자동화 솔루션</a></li></ul></div><div class="mega-d2"><ul class="mega-panel" id="p01"><li><a href="list.html">수직 머시닝센터</a></li><li><a href="list.html">수평 머시닝센터</a></li><li><a href="list.html">5축 가공 머시닝센터</a></li></ul><ul class="mega-panel" id="p02"><li><a href="list.html">수직 터닝센터</a></li><li><a href="list.html">수평 터닝센터</a></li><li><a href="list.html">복합기 터닝센터</a></li></ul><ul class="mega-panel" id="p03"><li><a href="list.html">선반</a></li><li><a href="list.html">밀링</a></li></ul><ul class="mega-panel" id="p04"><li><a href="software-view.html">S-LINK</a></li><li><a href="software-view.html">S-DRAW</a></li><li><a href="software-view.html">S-SIMUL</a></li></ul><ul class="mega-panel" id="p05"><li><a href="automation.html">솔루션</a></li></ul></div><div class="mega-img"><img src="./assets/mega-1.jpg" alt=""></div></div></li><li class="gnb-item active"><a href="as.html">고객지원</a>
+      <div class="mega"><div class="mega-tit"><h2>고객지원</h2></div><div class="mega-d1"><ul><li class="on" data-p="p10"><a href="as.html">기술지원</a></li><li data-p="p11"><a href="estimate.html">견적문의</a></li><li data-p="p12"><a href="catalog.html">데이터 센터</a></li></ul></div><div class="mega-d2"><ul class="mega-panel on" id="p10"><li><a href="as.html">A/S 접수</a></li><li><a href="training.html">교육(신청/안내)</a></li></ul><ul class="mega-panel" id="p11"><li><a href="estimate.html">견적요청</a></li><li><a href="contact.html">1:1 문의</a></li></ul><ul class="mega-panel" id="p12"><li><a href="catalog.html">카탈로그</a></li></ul></div><div class="mega-img"><img src="./assets/mega-2.jpg" alt=""></div></div></li><li class="gnb-item"><a href="news.html">미디어</a>
+      <div class="mega"><div class="mega-tit"><h2>미디어</h2></div><div class="mega-d1"><ul><li class="on" data-p="p20"><a href="news.html">소식</a></li><li data-p="p21"><a href="video.html">비디오 갤러리</a></li></ul></div><div class="mega-d2"></div><div class="mega-img"><img src="./assets/mega-3.jpg" alt=""></div></div></li><li class="gnb-item"><a href="overview.html">회사소개</a>
+      <div class="mega"><div class="mega-tit"><h2>회사소개</h2></div><div class="mega-d1"><ul><li class="on" data-p="p30"><a href="overview.html">기업정보</a></li><li data-p="p31"><a href="network.html">네트워크</a></li><li data-p="p32"><a href="business.html">사업영역</a></li></ul></div><div class="mega-d2"><ul class="mega-panel on" id="p30"><li><a href="overview.html">개요</a></li><li><a href="history.html">연혁</a></li><li><a href="ci.html">CI</a></li><li><a href="location.html">오시는 길</a></li><li><a href="recruit.html">인재채용</a></li></ul><ul class="mega-panel" id="p31"><li><a href="network.html">국내 대리점/서비스센터</a></li></ul><ul class="mega-panel" id="p32"><li><a href="business.html">공작기계사업</a></li></ul></div><div class="mega-img"><img src="./assets/mega-4.jpg" alt=""></div></div></li></ul></nav>
+    <div class="util">
+      <div class="util-srch"><a href="./list.html" aria-label="제품 검색"></a></div>
+      <div class="lang"><button type="button" class="lang-btn">KR</button><ul class="lang-list"><li><a href="#">KR</a></li><li><a href="#">EN</a></li></ul></div>
+      <button type="button" class="menu-btn" aria-label="전체 메뉴"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="hd-dim"></div>
+<div class="allm">
+  <div class="allm-head"><h1 class="logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h1><button type="button" class="allm-close" aria-label="닫기"></button></div>
+  <nav class="allm-gnb"><ul><li class="allm-item has"><a>제품</a><div class="allm-depth"><ul><li><a href="lineup.html">라인업</a></li><li class="has"><a>머시닝센터</a><div class="allm-panel"><a href="list.html">수직 머시닝센터</a><a href="list.html">수평 머시닝센터</a><a href="list.html">5축 가공 머시닝센터</a></div></li><li class="has"><a>터닝센터</a><div class="allm-panel"><a href="list.html">수직 터닝센터</a><a href="list.html">수평 터닝센터</a><a href="list.html">복합기 터닝센터</a></div></li><li class="has"><a>범용</a><div class="allm-panel"><a href="list.html">선반</a><a href="list.html">밀링</a></div></li><li class="has"><a>세온 소프트웨어</a><div class="allm-panel"><a href="software-view.html">S-LINK</a><a href="software-view.html">S-DRAW</a><a href="software-view.html">S-SIMUL</a></div></li><li class="has"><a>자동화 솔루션</a><div class="allm-panel"><a href="automation.html">솔루션</a></div></li></ul></div></li><li class="allm-item has"><a>고객지원</a><div class="allm-depth"><ul><li class="has"><a>기술지원</a><div class="allm-panel"><a href="as.html">A/S 접수</a><a href="training.html">교육(신청/안내)</a></div></li><li class="has"><a>견적문의</a><div class="allm-panel"><a href="estimate.html">견적요청</a><a href="contact.html">1:1 문의</a></div></li><li class="has"><a>데이터 센터</a><div class="allm-panel"><a href="catalog.html">카탈로그</a></div></li></ul></div></li><li class="allm-item has"><a>미디어</a><div class="allm-depth"><ul><li><a href="news.html">소식</a></li><li><a href="video.html">비디오 갤러리</a></li></ul></div></li><li class="allm-item has"><a>회사소개</a><div class="allm-depth"><ul><li class="has"><a>기업정보</a><div class="allm-panel"><a href="overview.html">개요</a><a href="history.html">연혁</a><a href="ci.html">CI</a><a href="location.html">오시는 길</a><a href="recruit.html">인재채용</a></div></li><li class="has"><a>네트워크</a><div class="allm-panel"><a href="network.html">국내 대리점/서비스센터</a></div></li><li class="has"><a>사업영역</a><div class="allm-panel"><a href="business.html">공작기계사업</a></div></li></ul></div></li></ul></nav>
+</div>
+<div class="quick">
+  <a href="./estimate.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-inquiry.svg)"></i><span>견적문의</span></a>
+  <a href="./network.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-branch.svg)"></i><span>가까운 사업장 찾기</span></a>
+  <a href="./as.html" class="quick-item"><i class="icon" style="background-image:url(./assets/ic/qk-service.svg)"></i><span>A/S 신청</span></a>
+</div>
+<div class="container"><main>
+<div class="pin-wrap"><section class="sub-top"><div class="inner"><div class="sub-head"><div class="crumb" data-motion><a href="./index.html" class="home" aria-label="홈"></a><a><span>고객지원</span></a><a><span>기술지원</span></a><a><span>교육 (신청/안내)</span></a></div><h2 class="sub-title" data-motion>교육 (신청/안내)</h2></div></div><div class="sub-media"><img src="./assets/sub-training.jpg" alt=""><div class="sub-dim"></div><div class="sub-copy"><div class="inner"><h2>직무 능력 향상을 위한 프로그램 이론과<br>실습 교육을 진행합니다.</h2></div></div></div></section></div>
+<div class="sub-contents " id="page-content">
+<div class="page-tab"><a href="#page-content" class="tab-item active">교육안내</a><a href="#page-content" class="tab-item">교육신청</a></div>
+<section class="center-sec inner section"><div class="content-head" data-motion><h3 class="content-title">센터 안내</h3></div><div class="center-list"><a href="./location.html" class="center-item" data-motion><div class="center-thumb"><img src="./assets/training-center-1.jpg" alt="창원 기술교육센터"></div><div class="center-info"><strong>창원 기술교육센터</strong><i class="arr"></i></div></a><a class="center-item" data-motion><div class="center-thumb"><img src="./assets/training-center-2.jpg" alt="서울 테크센터"></div><div class="center-info"><strong>서울 테크센터</strong></div></a></div></section>
+<section class="inner section"><div class="content-head" data-motion><h3 class="content-title">교육과정</h3></div><div class="card-flex"><div class="card-box" data-motion><h4>CNC 선반 PG 교육</h4><p>효율적인 기계 운용과 생산성 향상을 위한 프로그램 이론과 실습 교육을 진행하며,<br>세온의 전문 강사진이 현장 중심의 가공 노하우(실가공 Cutting)를 전합니다.</p><div class="card-tags"><span class="card-tag">터닝센터</span><span class="card-tag">공정집약형 복합가공기</span></div></div><div class="card-box" data-motion><h4>CNC 밀링 PG 교육</h4><p>고정밀 금형과 부품 가공 기술, 응용을 위한 체계적인 교육과정을 제공합니다.<br>가공 제어 소프트웨어의 이해와 활용으로 품질과 생산성을 높입니다.</p><div class="card-tags"><span class="card-tag">머시닝센터</span><span class="card-tag">5축 가공기</span></div></div><div class="card-box" data-motion><h4>선반 대화형 프로그램 교육</h4><p>모든 조작을 한 화면에서 할 수 있는 대화형 프로그래밍 교육과정으로<br>이론과 실습을 거쳐 기계를 손쉽게 다룰 수 있습니다.</p><div class="card-tags"><span class="card-tag">기계 상태 확인</span><span class="card-tag">3차원 시뮬레이션</span><span class="card-tag">간단한 조작</span><span class="card-tag">CAD/CAM 호환</span></div></div><div class="card-box" data-motion><h4>제어장치 &amp; 제품 교육</h4><p>기종별 특장점 설명, 프로그램 이론과 실습, CNC 제어 장치 조작 실습 등<br>직무 능력 향상을 위한 현장 맞춤형 교육을 실시합니다.</p><span>※ 본 교육과정은 세온기계 창원공장에서 실시합니다.</span></div></div></section>
+<section class="edu-sec inner section"><div class="edu-box" data-motion><div class="edu-content"><h3 class="edu-title">교육신청</h3><p class="edu-desc">세온 기술교육센터에서는 당사 공작기계를 쓰시거나<br>처음 쓰시는 고객을 위한 교육 프로그램을 운영합니다.</p><p class="edu-text">전문 강사진의 체계적인 이론과 가공 실습으로 전문 지식을 익혀<br>귀사의 전문 인력 양성과 생산성 향상에 힘이 되겠습니다.<br>세온은 고객 만족을 위해 늘 최선을 다하겠습니다.</p><a href="./contact.html" class="btn-edu">교육 신청</a></div><div class="edu-thumb"><img src="./assets/training-edu.jpg" alt=""></div></div></section>
+<nav class="depth-tab"><ul class="depth-tab-list"><li class="active"><a href="./as.html">기술지원</a></li><li><a href="./estimate.html">견적문의</a></li><li><a href="./catalog.html">데이터 센터</a></li></ul></nav></div>
+</main></div>
+<footer class="ft"><div class="ft-bg"></div><div class="inner">
+  <div class="ft-top"><h2 class="ft-logo"><a href="./index.html"><img src="./assets/ic/logo.svg" alt="세온기계"></a></h2><a href="./privacy.html" class="ft-policy">개인정보처리방침</a></div>
+  <div class="ft-mid">
+    <div class="ft-co">
+      <div class="ft-addr"><p>세온기계 <span>|</span> 서울특별시 강남구 테헤란로 123, 민트클빌딩 5층</p></div>
+      <div class="ft-info"><p>사업자등록번호. 266-07-03678</p><p>Tel. 010-4894-4905</p><p>통신판매업신고. 제2026-서울강남-00480호</p></div>
+      <div class="ft-addr"><p>창원공장 <span>|</span> 경상남도 창원시 성산구 공단로 456</p></div>
+      <div class="ft-info"><p>대표. 민트클</p><p>Tel. 010-4894-4905</p></div>
+      <div class="ft-info"><p>E-Mail. 6gsmake@gmail.com</p></div>
+    </div>
+    <div class="ft-sns"><a href="#" aria-label="유튜브"><img src="./assets/ic/youtube.svg" alt=""></a></div>
+  </div>
+  <div class="ft-bottom">2026 © SEON MACHINE TOOL ALL RIGHTS RESERVED</div>
+</div></footer>
+<button type="button" class="top-btn" aria-label="맨 위로 이동"></button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.2.3/dist/lenis.min.js"></script>
+<script src="./assets/site.js"></script>
+<script>
+(function(){
+  /* 서브 맨 위 — 원본 common.js: 핀 +3500, 판이 100%·100vh 로, dim .45, 문구 0.6 에서 등장 */
+  var media = document.querySelector('.sub-media');
+  if (media) {
+    var tl = gsap.timeline({scrollTrigger: {trigger: '.sub-top', start: 'top top', end: '+=3500', scrub: 1, pin: true, anticipatePin: 1}});
+    tl.to('.sub-media', {width: '100%', height: '100vh', top: 0, borderRadius: 0});
+    tl.to('.sub-dim', {opacity: .45}, 0);
+    if (document.querySelector('.sub-copy')) tl.from('.sub-copy', {opacity: 0, y: 40}, 0.6);
+    tl.to({}, {duration: 1});
+  }
+  var dt = document.querySelector('.depth-tab');
+  if (dt) ScrollTrigger.create({trigger: '.sub-contents', start: 'top center', onEnter: function(){ dt.classList.add('show'); }, onLeaveBack: function(){ dt.classList.remove('show'); }});
+  /* 탭·아코디언 공통 */
+  document.querySelectorAll('[data-tabs]').forEach(function(w){
+    var btns = w.querySelectorAll('[data-tab]'), panes = document.querySelectorAll('[data-pane]');
+    btns.forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); btns.forEach(function(x){ x.classList.remove('active'); }); b.classList.add('active');
+      panes.forEach(function(p){ p.classList.toggle('active', p.dataset.pane === b.dataset.tab); }); ScrollTrigger.refresh(); }); });
+  });
+  document.querySelectorAll('.acc-item .acc-head').forEach(function(h){ h.addEventListener('click', function(){ var it = h.parentElement, on = it.classList.contains('active');
+    it.parentElement.querySelectorAll('.acc-item').forEach(function(x){ x.classList.remove('active'); }); if (!on) it.classList.add('active'); ScrollTrigger.refresh(); }); });
+})();
+</script>
+</body>
+</html>
