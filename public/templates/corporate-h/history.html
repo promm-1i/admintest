@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>연혁 — 하이온셀</title>
+<meta name="description" content="하이온셀이 걸어온 길.">
+<meta property="og:title" content="연혁 — 하이온셀">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/sub.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 연혁 — ref info-history (PC 2534 · 모바일 3703)
+   제목 칸 120/40 · 판 900 #F3F5F7 · 판이 쪽 지도 아래(83)에 닿으면 휠 한 번에 한 해씩 (처음·끝에서는 풀림)
+   왼쪽 500 · 위 245 · 연도 140/100.8 700 (앞 두 자리 #C9CED1) · 설명 32/48 · 구간 목록 20/30 800 강조 · 나머지 18/28.8 #B4B8BA
+   원 1616 · 선 #C9CED1 · 왼쪽 −1080 · 위 −358 · 사진 800×340 r200 x608 y255 · 사진 제목 20/30 500
+   한눈에 보기 167×44 · 흰 .8 · 테두리 #555758 (아래 없음) */
+.hs-tit{padding:120px 0 40px}
+.hs-tit .cw{max-width:1440px;margin:0 auto}
+.hs-panel{position:relative;height:900px;overflow:hidden;background:var(--f4)}
+.hs-panel .in{position:relative;max-width:1440px;height:100%;margin:0 auto}
+.hs-left{position:absolute;left:0;top:245px;z-index:2;width:500px}
+.hs-year{height:101px;font-size:140px;line-height:100.8px;font-weight:700;letter-spacing:-2px;white-space:nowrap}
+.hs-year .a{color:var(--l3)}
+.hs-year span{display:inline-block;transition:opacity .4s,transform .4s}
+.hs-year.chg .b{opacity:0;transform:translateY(20px)}
+.hs-desc{padding-top:32.96px;font-size:32px;line-height:48px;font-weight:400;transition:opacity .4s}
+.hs-desc strong{font-weight:700}
+.hs-desc.chg{opacity:0}
+.hs-terms{padding-top:40px}
+.hs-terms li{padding-bottom:8px}
+.hs-terms li:last-child{padding-bottom:0}
+.hs-terms a{position:relative;display:inline-block;font-size:18px;line-height:28.8px;font-weight:400;color:var(--dis)}
+.hs-terms li.on a{padding-right:13.92px;font-size:20px;line-height:30px;font-weight:800;color:var(--pri)}
+.hs-terms li.on a::after{content:"";position:absolute;right:0;top:50%;width:5px;height:5px;margin-top:-2px;border-radius:50%;background:var(--pri)}
+.hs-circle{position:absolute;left:-1080px;top:-358px;width:1616px;height:1616px;border:1px solid var(--l3);border-radius:50%;pointer-events:none}
+.hs-circle::before{content:"";position:absolute;left:1352px;top:260px;width:8px;height:8px;border-radius:50%;background:var(--pri)}
+.hs-circle::after{content:"";position:absolute;right:-9px;top:799px;width:18px;height:18px;border-radius:50%;background:var(--pri)}
+.hs-pics li{position:absolute;left:608px;top:255px;width:800px;opacity:0;transform:translateY(60px) scale(.96);transform-origin:left center;transition:opacity .6s,transform .6s}
+.hs-pics li.on{opacity:1;transform:none}
+.hs-pics li.prev{transform:translateY(-60px) scale(.96)}
+.hs-pics img{width:800px;height:340px;border-radius:200px;object-fit:cover}
+.hs-pics p{margin-top:20px;text-align:center;font-size:20px;line-height:30px;font-weight:500}
+.hs-all-btn{position:absolute;left:50%;bottom:0;z-index:3;display:flex;align-items:center;height:44px;padding:9.92px 62.08px 9.92px 29.92px;transform:translateX(-50%);background:rgba(255,255,255,.8);border:1px solid var(--ink2);border-bottom:0;font-size:16px;line-height:22.4px;font-weight:500;opacity:0;transition:opacity .4s}
+.hs-all-btn::after{content:"";position:absolute;right:30px;top:50%;width:20px;height:20px;transform:translateY(-50%) rotate(-90deg);background:url(./assets/ic/arrow-k.svg) no-repeat center/contain}
+.hs-panel.pin .hs-all-btn{position:fixed;bottom:-20px;opacity:1}
+.hs-all{position:fixed;inset:0;z-index:1200;display:none;overflow-y:auto;background:var(--f4)}
+.hs-all.open{display:block}
+.hs-all .x{position:fixed;right:40px;top:32px;z-index:2;width:48px;height:48px;border-radius:50%;background:#fff url(./assets/ic/close-k.svg) no-repeat center/24px}
+.hs-list{max-width:1440px;margin:0 auto;padding:124px 0 240px}
+.hs-grp{display:flex;justify-content:space-between;gap:40px}
+.hs-grp+.hs-grp{margin-top:100px}
+.hs-grp .info{padding-left:80px}
+.hs-grp .yt{font-size:64px;line-height:89.6px;font-weight:800;white-space:nowrap}
+.hs-grp .sub{margin-top:52px}
+.hs-grp .sub li{display:flex;gap:20px;padding-bottom:32px}
+.hs-grp .sub li:last-child{padding-bottom:0}
+.hs-grp .sub .y{width:64px;flex:none;font-size:24px;line-height:36px;font-weight:500;color:var(--pri)}
+.hs-grp .sub .d{padding-top:3px;font-size:18px;line-height:28.8px;color:var(--ink2)}
+.hs-grp .pic{width:466px;flex:none}
+.hs-grp .pic img{width:466px;height:280px;object-fit:cover}
+.hs-grp .pic p{margin-top:20px;text-align:center;font-size:20px;line-height:32px}
+.hs-grp .pic p strong{font-weight:600}
+@media (max-width:1279px){
+  .hs-tit,.hs-panel{display:none}
+  .hs-m{padding:48px 0 100px}
+  .hs-m .cw{padding:0 0 0 20px}
+  .hs-all{position:static;display:block;overflow:visible;background:#fff;padding-top:8px}
+  .hs-all .x{display:none}
+  .hs-list{padding:0}
+  .hs-grp{display:block;padding-bottom:48px}
+  .hs-grp+.hs-grp{margin-top:0}
+  .hs-grp .info{display:contents;padding:0}
+  .hs-grp .yt{padding-bottom:16px;font-size:44px;line-height:61.6px}
+  .hs-grp .pic{width:auto;padding-bottom:24px}
+  .hs-grp .pic p{margin:0;padding:0 20px 24px 0;text-align:left;font-size:20px;line-height:32px}
+  .hs-grp .pic img{width:370px;height:226px}
+  .hs-grp .sub{margin:0;padding:0 20px 0 28px}
+  .hs-grp .sub li{gap:4px;padding-bottom:8px}
+  .hs-grp .sub .y{font-size:18px;line-height:28px;font-weight:600}
+  .hs-grp .sub .d{padding-top:1px;font-size:16px;line-height:25.6px;font-weight:500}
+  .hs-flex{display:flex;flex-direction:column}
+}
+@media (min-width:1280px){.hs-m{padding:0}.hs-m .sect{padding:0}}
+
+.hs-grp .mo-order{display:none}
+@media (max-width:1279px){.hs-grp .mo-order{display:block}.hs-grp .pc-pic{display:none}.hs-all .sect{padding:0}}
+
+</style>
+</head>
+<body class="sub history">
+<header class="hd">
+  <div class="hd-in">
+    <div class="hd-cont">
+      <h1 class="ci"><a href="./index.html"><img src="./assets/ic/ci.svg" alt="하이온셀"></a></h1>
+      <nav class="gnb pc"><ul><li class="d1"><button type="button">제품</button><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><button type="button">회사정보</button><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><button type="button">인재채용</button><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+      <div class="navp mo">
+        <nav><ul><li class="d1"><a href="solution.html">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><a href="about.html">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="talent.html">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+        <ul class="navp-util">
+          <li><a href="./download.html"><img src="./assets/ic/nav-down.svg" alt=""><p>다운로드</p></a></li>
+          <li><a href="./inquiry.html"><img src="./assets/ic/nav-inq.svg" alt=""><p>문의하기</p></a></li>
+          <li><a href="./faq.html"><img src="./assets/ic/nav-faq.svg" alt=""><p><strong>FAQ</strong></p></a></li>
+        </ul>
+      </div>
+      <div class="util">
+        <div class="cs pc">
+          <button type="button">고객지원</button>
+          <div class="cs-pop"><div class="pw"><a href="./download.html">다운로드</a><a href="./inquiry.html">문의하기</a><a href="./faq.html">FAQ</a><button type="button" class="x" aria-label="닫기"></button></div></div>
+        </div>
+        <div class="lang" data-sel>
+          <button type="button" aria-haspopup="listbox"><img src="./assets/ic/globe.svg" alt="언어 선택"><i></i></button>
+          <ul role="listbox"><li><a href="#" class="active">KR</a></li><li><a href="#">EN</a></li><li><a href="#">CN</a></li><li><a href="#">JP</a></li></ul>
+        </div>
+        <button type="button" class="srch-btn" aria-label="검색"></button>
+        <button type="button" class="nav-btn" aria-label="메뉴 열기"><i class="x"><span class="xl"></span><span class="xl"></span></i><span class="ln"></span><span class="ln"></span><span class="ln"></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="srch"><form action="./faq.html" onsubmit="return false"><button type="button" class="go" aria-label="검색"></button><input type="text" placeholder="검색어를 입력해 주세요."></form></div>
+<div class="smap pc">
+  <div class="pw">
+    <div class="smap-hd"><a href="./index.html"><img src="./assets/ic/ci-w.svg" alt="하이온셀"></a></div>
+    <ul class="smap-area"><li class="d1"><a href="#" onclick="return false">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a><ul><li class="d3"><a href="solution.html">전기차</a></li><li class="d3"><a href="solution.html">ESS</a></li><li class="d3"><a href="solution.html">전동공구</a></li><li class="d3"><a href="solution.html">모빌리티</a></li></ul></li><li class="d2"><a href="cylindrical.html">폼팩터</a><ul><li class="d3"><a href="cylindrical.html">원통형</a></li><li class="d3"><a href="cylindrical.html">파우치형</a></li></ul></li><li class="d2"><a href="material.html">소재</a><ul><li class="d3"><a href="material.html">NCM</a></li><li class="d3"><a href="material.html">LFP</a></li></ul></li></ul></li><li class="d1"><a href="#" onclick="return false">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a><ul><li class="d3"><a href="about.html">회사개요</a></li><li class="d3"><a href="vision.html">비전</a></li><li class="d3"><a href="history.html">연혁</a></li><li class="d3"><a href="ci.html">CI</a></li></ul></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="#" onclick="return false">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li><li class="d1"><a href="#" onclick="return false">고객지원</a><ul><li class="d2"><a href="download.html">다운로드</a></li><li class="d2"><a href="inquiry.html">문의하기</a></li><li class="d2"><a href="faq.html">FAQ</a></li></ul></li></ul>
+    <button type="button" class="close" aria-label="닫기"></button>
+  </div>
+</div>
+<main id="container" class="sub">
+<div class="sv"><div class="vis"><img src="./assets/sv-company.jpg" alt=""></div><div class="sv-txt"><p><strong>하이온셀은 셀 설계부터 팩 조립까지 직접 해내는 기술로<br>고객의 제품에 꼭 맞는 에너지를 만드는 배터리 전문 기업입니다.</strong></p></div></div>
+<div class="pmap"><div class="sw"><div class="sc" data-sel><button type="button" aria-haspopup="listbox">회사정보</button><ul role="listbox"><li><a href="solution.html">제품</a></li><li><a href="about.html" class="active">회사정보</a></li><li><a href="talent.html">인재채용</a></li><li><a href="download.html">고객지원</a></li></ul></div><div class="sc" data-sel><button type="button" aria-haspopup="listbox">회사소개</button><ul role="listbox"><li><a href="about.html" class="active">회사소개</a></li><li><a href="network.html">사업장</a></li><li><a href="newsroom.html">뉴스룸</a></li></ul></div><div class="sc" data-sel><button type="button" aria-haspopup="listbox">연혁</button><ul role="listbox"><li><a href="about.html">회사개요</a></li><li><a href="vision.html">비전</a></li><li><a href="history.html" class="active">연혁</a></li><li><a href="ci.html">CI</a></li></ul></div></div></div>
+<div class="mhead"><h2>소개</h2></div>
+<div class="mtabs"><ul><li><a href="about.html">회사개요</a></li><li><a href="vision.html">비전</a></li><li class="on"><a href="history.html">연혁</a></li><li><a href="ci.html">CI</a></li></ul></div>
+<section class="hs-tit"><div class="cw"><h2 class="h1">연혁</h2></div></section>
+<section class="hs-panel" id="hsPanel">
+  <div class="in">
+    <div class="hs-circle"></div>
+    <div class="hs-left">
+      <div class="hs-year"><span class="a">20</span><span class="b">07</span></div>
+      <div class="hs-desc"><strong>배터리 팩 전문 기업</strong>으로<br>첫발을 떼다</div>
+      <ul class="hs-terms"><li class="on"><a href="#" data-g="0">2007~2013</a></li><li><a href="#" data-g="1">2014~2020</a></li><li><a href="#" data-g="2">2021~2023</a></li><li><a href="#" data-g="3">2024~2026</a></li></ul>
+    </div>
+    <ul class="hs-pics"><li class="on"><img src="./assets/history-1.jpg" alt="" loading="lazy"><p>하이온셀 설립 (경기 화성)</p></li><li><img src="./assets/history-2.jpg" alt="" loading="lazy"><p>전동공구용 배터리팩 첫 양산</p></li><li><img src="./assets/history-3.jpg" alt="" loading="lazy"><p>기업부설연구소 설립</p></li><li><img src="./assets/history-4.jpg" alt="" loading="lazy"><p>품질경영시스템 인증 획득</p></li><li><img src="./assets/history-5.jpg" alt="" loading="lazy"><p>셀 선별 자동화 설비 도입</p></li><li><img src="./assets/history-6.jpg" alt="" loading="lazy"><p>BMS 자체 개발 완료</p></li><li><img src="./assets/history-7.jpg" alt="" loading="lazy"><p>충북 제1공장 준공</p></li><li><img src="./assets/history-8.jpg" alt="" loading="lazy"><p>전기 운반차용 팩 공급 시작</p></li><li><img src="./assets/history-9.jpg" alt="" loading="lazy"><p>베트남 조립 법인 설립</p></li><li><img src="./assets/history-10.jpg" alt="" loading="lazy"><p>연구소 확장 이전 (충북 오송)</p></li><li><img src="./assets/history-11.jpg" alt="" loading="lazy"><p>ESS 모듈 사업 시작</p></li><li><img src="./assets/history-12.jpg" alt="" loading="lazy"><p>연 매출 500억 원 돌파</p></li><li><img src="./assets/history-13.jpg" alt="" loading="lazy"><p>배터리 수명 진단 서비스 시작</p></li><li><img src="./assets/history-14.jpg" alt="" loading="lazy"><p>충북 제2공장 착공</p></li><li><img src="./assets/history-15.jpg" alt="" loading="lazy"><p>사용 후 배터리 재사용 라인 구축</p></li><li><img src="./assets/history-16.jpg" alt="" loading="lazy"><p>폴란드 기술지원 사무소 개소</p></li><li><img src="./assets/history-17.jpg" alt="" loading="lazy"><p>충북 제2공장 준공</p></li></ul>
+  </div>
+  <button type="button" class="hs-all-btn">한눈에 보기</button>
+</section>
+<section class="hs-m"><div class="cw"><h2 class="h2 mo">연혁</h2><div class="sect">
+<div class="hs-all" role="dialog" aria-label="연혁 한눈에 보기"><button type="button" class="x" aria-label="닫기"></button><div class="hs-list"><div class="hs-grp"><div class="info"><div class="yt">2007 - 2013</div><div class="pic mo-order"><p><strong>배터리 팩 전문 기업</strong>으로 첫발을 떼다</p><img src="./assets/history-1.jpg" alt="" loading="lazy"></div><ul class="sub"><li><p class="y">2007</p><p class="d">하이온셀 설립 (경기 화성)</p></li><li><p class="y">2009</p><p class="d">전동공구용 배터리팩 첫 양산</p></li><li><p class="y">2011</p><p class="d">기업부설연구소 설립</p></li><li><p class="y">2013</p><p class="d">품질경영시스템 인증 획득</p></li></ul></div><div class="pic pc-pic"><img src="./assets/history-1.jpg" alt="" loading="lazy"><p><strong>배터리 팩 전문 기업</strong>으로 첫발을 떼다</p></div></div><div class="hs-grp"><div class="info"><div class="yt">2014 - 2020</div><div class="pic mo-order"><p><strong>셀 선별과 BMS</strong>까지 기술을 넓히다</p><img src="./assets/history-5.jpg" alt="" loading="lazy"></div><ul class="sub"><li><p class="y">2014</p><p class="d">셀 선별 자동화 설비 도입</p></li><li><p class="y">2015</p><p class="d">BMS 자체 개발 완료</p></li><li><p class="y">2016</p><p class="d">충북 제1공장 준공</p></li><li><p class="y">2017</p><p class="d">전기 운반차용 팩 공급 시작</p></li><li><p class="y">2018</p><p class="d">베트남 조립 법인 설립</p></li><li><p class="y">2019</p><p class="d">연구소 확장 이전 (충북 오송)</p></li><li><p class="y">2020</p><p class="d">ESS 모듈 사업 시작</p></li></ul></div><div class="pic pc-pic"><img src="./assets/history-5.jpg" alt="" loading="lazy"><p><strong>셀 선별과 BMS</strong>까지 기술을 넓히다</p></div></div><div class="hs-grp"><div class="info"><div class="yt">2021 - 2023</div><div class="pic mo-order"><p><strong>ESS와 모빌리티</strong>로 사업을 키우다</p><img src="./assets/history-12.jpg" alt="" loading="lazy"></div><ul class="sub"><li><p class="y">2021</p><p class="d">연 매출 500억 원 돌파</p></li><li><p class="y">2022</p><p class="d">배터리 수명 진단 서비스 시작</p></li><li><p class="y">2023</p><p class="d">충북 제2공장 착공</p></li></ul></div><div class="pic pc-pic"><img src="./assets/history-12.jpg" alt="" loading="lazy"><p><strong>ESS와 모빌리티</strong>로 사업을 키우다</p></div></div><div class="hs-grp"><div class="info"><div class="yt">2024 - 2026</div><div class="pic mo-order"><p><strong>안전과 순환</strong>을 함께 생각하는 배터리</p><img src="./assets/history-15.jpg" alt="" loading="lazy"></div><ul class="sub"><li><p class="y">2024</p><p class="d">사용 후 배터리 재사용 라인 구축</p></li><li><p class="y">2025</p><p class="d">폴란드 기술지원 사무소 개소</p></li><li><p class="y">2026</p><p class="d">충북 제2공장 준공</p></li></ul></div><div class="pic pc-pic"><img src="./assets/history-15.jpg" alt="" loading="lazy"><p><strong>안전과 순환</strong>을 함께 생각하는 배터리</p></div></div></div></div>
+</div></div></section>
+</main>
+<footer class="ft">
+  <div class="ft-area">
+    <div>
+      <ul class="ft-map">
+        <li><a href="./privacy.html">개인정보처리방침</a></li>
+        <li><a href="./privacy.html#video">영상정보처리기기 운영·관리 방침</a></li>
+        <li><a href="#" class="n" data-modal="#mailBlock">이메일무단수집거부</a></li>
+        <li><a href="./inquiry.html" class="n">윤리경영 제보</a></li>
+        <li><a href="./inquiry.html" class="n">협력사 문의</a></li>
+        <li><a href="./faq.html" class="n">안전가이드</a></li>
+      </ul>
+    </div>
+    <div class="ft-r">
+      <div class="fsel" data-sel>
+        <button type="button" aria-haspopup="listbox">관련사이트</button>
+        <ul role="listbox">
+          <li><p class="cat">패밀리사이트</p></li>
+          <li><a href="./newsroom.html">하이온셀 기술 블로그</a></li>
+          <li><a href="./solution.html">ESS 사업 안내</a></li>
+          <li><p class="cat">비즈니스</p></li>
+          <li><a href="./download.html">협력사 자료실</a></li>
+          <li><a href="./inquiry.html">구매 문의 창구</a></li>
+        </ul>
+      </div>
+      <div class="ft-info">
+        <p>대표 민트클 · <a href="tel:01048944905">010-4894-4905</a></p>
+        <address>사업자등록번호 266-07-03678</address>
+        <p><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <div class="l">
+      <div class="flogo-w">
+        <a class="flogo" href="./index.html">©HIONCELL Corporation</a>
+        <div class="badge"><img src="./assets/ic/badge.svg" alt="안전 우선 생산 원칙"></div>
+      </div>
+      <ul class="sns">
+        <li><a href="#" aria-label="facebook"><img src="./assets/ic/sns-facebook.svg" alt=""></a></li>
+        <li><a href="#" aria-label="linkedin"><img src="./assets/ic/sns-linkedin.svg" alt=""></a></li>
+        <li><a href="#" aria-label="instagram"><img src="./assets/ic/sns-instagram.svg" alt=""></a></li>
+        <li><a href="#" aria-label="youtube"><img src="./assets/ic/sns-youtube.svg" alt=""></a></li>
+        <li><a href="#" aria-label="blog"><img src="./assets/ic/sns-blog.svg" alt=""></a></li>
+      </ul>
+    </div>
+    <div class="r"><a href="./inquiry.html"><img src="./assets/ic/newsletter.svg" alt="뉴스레터 구독하기"></a></div>
+  </div>
+</footer>
+<button type="button" class="top-fab" aria-label="맨 위로"><img src="./assets/ic/top.svg" alt=""></button>
+<div class="modal" id="mailBlock" role="dialog" aria-modal="true" aria-labelledby="mailBlockT">
+  <div class="pw">
+    <h3 id="mailBlockT">이메일 무단 수집 거부</h3>
+    <div class="mail-ic"></div>
+    <p class="desc">본 홈페이지에 게시된 이메일 주소가 자동 수집되는 것을<br>거부하며, 이를 위반하면 정보통신망법에 따라 처벌받을 수<br>있음을 알려 드립니다.</p>
+    <div class="lk"><strong>불법 스팸 대응 센터</strong>국번 없이 118</div>
+    <button type="button" class="ok">확인</button>
+    <button type="button" class="x" aria-label="닫기"></button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script src="./assets/sub.js"></script>
+<script>
+/* 휠 관문: 판 위가 쪽 지도 아래(83)에 오면 스크롤을 멈추고 휠 한 번에 한 해씩. 처음에서 위로·끝에서 아래로는 풀어 줌 */
+(() => {
+  const S = [[0, "2007", "<strong>배터리 팩 전문 기업</strong>으로<br>첫발을 떼다"], [0, "2009", "<strong>배터리 팩 전문 기업</strong>으로<br>첫발을 떼다"], [0, "2011", "<strong>배터리 팩 전문 기업</strong>으로<br>첫발을 떼다"], [0, "2013", "<strong>배터리 팩 전문 기업</strong>으로<br>첫발을 떼다"], [1, "2014", "<strong>셀 선별과 BMS</strong>까지<br>기술을 넓히다"], [1, "2015", "<strong>셀 선별과 BMS</strong>까지<br>기술을 넓히다"], [1, "2016", "<strong>셀 선별과 BMS</strong>까지<br>기술을 넓히다"], [1, "2017", "<strong>셀 선별과 BMS</strong>까지<br>기술을 넓히다"], [1, "2018", "<strong>셀 선별과 BMS</strong>까지<br>기술을 넓히다"], [1, "2019", "<strong>셀 선별과 BMS</strong>까지<br>기술을 넓히다"], [1, "2020", "<strong>셀 선별과 BMS</strong>까지<br>기술을 넓히다"], [2, "2021", "<strong>ESS와 모빌리티</strong>로<br>사업을 키우다"], [2, "2022", "<strong>ESS와 모빌리티</strong>로<br>사업을 키우다"], [2, "2023", "<strong>ESS와 모빌리티</strong>로<br>사업을 키우다"], [3, "2024", "<strong>안전과 순환</strong>을 함께<br>생각하는 배터리"], [3, "2025", "<strong>안전과 순환</strong>을 함께<br>생각하는 배터리"], [3, "2026", "<strong>안전과 순환</strong>을 함께<br>생각하는 배터리"]], panel = document.getElementById('hsPanel'), pics = [...panel.querySelectorAll('.hs-pics li')],
+    ya = panel.querySelector('.hs-year .a'), yb = panel.querySelector('.hs-year .b'), yr = panel.querySelector('.hs-year'),
+    desc = panel.querySelector('.hs-desc'), terms = [...panel.querySelectorAll('.hs-terms li')];
+  let idx = 0, busy = false;
+  const set = (n) => {
+    if (n === idx) return;
+    pics.forEach((li, i) => { li.classList.toggle('on', i === n); li.classList.toggle('prev', i < n); });
+    yr.classList.add('chg'); if (S[n][2] !== S[idx][2]) desc.classList.add('chg');
+    setTimeout(() => { ya.textContent = S[n][1].slice(0, 2); yb.textContent = S[n][1].slice(2); desc.innerHTML = S[n][2]; yr.classList.remove('chg'); desc.classList.remove('chg'); }, 400);
+    terms.forEach((t, i) => t.classList.toggle('on', i === S[n][0]));
+    idx = n;
+  };
+  const OFF = 83, top = () => panel.getBoundingClientRect().top + scrollY - OFF;
+  addEventListener('wheel', e => {
+    if (matchMedia('(max-width:1279px)').matches || document.querySelector('.hs-all.open')) return;
+    const T = top(), y = scrollY, d = e.deltaY;
+    if (Math.abs(y - T) <= 2) {
+      if ((d > 0 && idx < S.length - 1) || (d < 0 && idx > 0)) {
+        e.preventDefault();
+        if (!busy) { busy = true; set(idx + (d > 0 ? 1 : -1)); setTimeout(() => busy = false, 700); }
+      }
+    } else if ((d > 0 && y < T && y + d > T) || (d < 0 && y > T && y + d < T)) {
+      e.preventDefault(); scrollTo(0, T);
+    }
+  }, { passive: false });
+  addEventListener('scroll', () => panel.classList.toggle('pin', Math.abs(scrollY - top()) <= 2), { passive: true });
+  terms.forEach((t, gi) => t.querySelector('a').addEventListener('click', ev => { ev.preventDefault(); set(S.findIndex(s => s[0] === gi)); }));
+  const all = document.querySelector('.hs-all');
+  panel.querySelector('.hs-all-btn').addEventListener('click', () => { all.classList.add('open'); document.documentElement.style.overflow = 'hidden'; });
+  all.querySelector('.x').addEventListener('click', () => { all.classList.remove('open'); document.documentElement.style.overflow = ''; });
+})();
+</script>
+</body>
+</html>

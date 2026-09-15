@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>사업장 — 하이온셀</title>
+<meta name="description" content="하이온셀 국내외 사업장과 연락처.">
+<meta property="og:title" content="사업장 — 하이온셀">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/sub.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 사업장 — ref network-all (PC 3217 · 모바일 11937) pages.css .netw .map-*
+   머리 120/32 · 설명 24/36 위 40 · 탭 칸 sticky(쪽 지도 아래 83.2) 위 48 · 지도 sticky top 193.2 높이 100vh−193.2
+   목록 528 · 선택 448×64 · 칸 18/28.8 600 · 16/40 · 선 #E1E7EA · 켜짐 강조색 · 상세 420 (40 · 안쪽 그림자) */
+.nw .cw{max-width:1440px;margin:0 auto}
+.nw-tabs{position:sticky;top:83.2px;z-index:11;padding-top:48px;background:#fff}
+.nw-tabs .utabs{max-width:1440px;margin:0 auto}
+.nw-tabs .cnt{margin-left:6px}
+.nw-area{position:relative;display:flex;justify-content:flex-end;width:100%;border-bottom:1px solid var(--l4)}
+.nw-map{position:sticky;top:193.2px;flex:1;height:calc(100vh - 193.2px);min-height:520px;background:#E5E3DF}
+.nw-map iframe{display:block;width:100%;height:100%;border:0}
+.nw-filter{position:absolute;left:32px;top:64px;z-index:10;display:flex;gap:10px}
+.nw-filter button{position:relative;min-width:120px;height:40px;padding:8.48px 40px 8.48px 16px;border-radius:90px;background:#fff;box-shadow:0 4px 8px 0 rgba(0,0,0,.1);text-align:left;font-size:14px;line-height:22.4px;font-weight:600}
+.nw-filter button::after{content:"";position:absolute;right:12px;top:50%;width:16px;height:16px;transform:translateY(-50%);border-radius:100px;background:var(--c)}
+.nw-filter button.off{opacity:.45}
+.t1{--c:#555758}.t2{--c:#4F6DF5}.t3{--c:#8B5CF6}.t4{--c:#E0A21B}
+.nw-info{position:relative;display:flex;justify-content:flex-end;width:528px;transition:width .5s}
+.nw-info.on{width:948px}
+.nw-list{position:relative;right:0;width:528px;padding:40px 0 0;background:#fff;border-right:1px solid var(--l3);z-index:10;transition:.2s linear}
+.nw-info.on .nw-list{right:420px}
+.nw-list .sel2{margin:0 40px}
+.nw-list .sel2>button{width:448px}
+.nw-items{margin-top:16px}
+.nw-items li:not(:last-child){border-bottom:1px solid var(--l4)}
+.nw-items a{display:block;padding:16px 40px;font-size:18px;line-height:28.8px;font-weight:600}
+.nw-items li:last-child a{margin-bottom:16px}
+.nw-items a:hover,.nw-items a.active{background:var(--pri);color:#fff}
+.nw-items li.hide,.nw-card.hide{display:none}
+.nw-detail{position:absolute;top:0;right:0;width:420px;height:100%;padding:40px;background:#fff;box-shadow:inset 2px 0 5px 0 rgba(0,0,0,.1);opacity:0;pointer-events:none;transition:opacity .5s linear}
+.nw-info.on .nw-detail{opacity:1;pointer-events:auto}
+.nw-detail .in{position:sticky;top:225px;padding-top:28px}
+.nw-detail .x{position:absolute;right:0;top:0;width:28px;height:28px;background:url(./assets/ic/close-lg.svg) no-repeat center/contain}
+.nw-sort{display:flex;align-items:center;gap:16px}
+.nw-sort li{position:relative;font-size:16px;line-height:25.6px;color:var(--ink2)}
+.nw-sort li.country{color:var(--ink);font-weight:600}
+.nw-sort li.country::after{content:"";position:absolute;right:-8px;top:50%;width:1px;height:14px;transform:translateY(-50%);background:var(--l4)}
+.nw-sort li.tp{padding:4px 16px;border-radius:100px;background:var(--c);color:#fff;font-size:14px;line-height:22.4px;font-weight:600}
+.nw-detail h3,.nw-card h3{margin-top:8px;font-size:24px;line-height:36px;font-weight:700}
+.nw-body::before{content:"";display:block;width:100%;height:1px;margin:24px 0;background:var(--l3)}
+.nw-body ul{display:flex;flex-direction:column;gap:16px}
+.nw-body li{display:flex;gap:8px}
+.nw-body li img{width:20px;height:20px;margin:4px 0;flex:none}
+.nw-body li p{font-size:16px;line-height:25.6px}
+.nw-body .im{display:flex;margin:24px 0}
+.nw-body .im img{width:340px;height:200px;object-fit:cover;flex-grow:1}
+.nw-m{display:none}
+@media (max-width:1279px){
+  .nw-tabs{top:0;padding-top:0}
+  .nw-area{display:block;padding:24px 20px 100px;background:var(--f4);border:0}
+  .nw-map,.nw-info.pc{display:none}
+  .nw-m{display:block}
+  .nw-m .sel2{margin-bottom:16px}
+  .nw-card{padding:24px;border:1px solid #E0E6EA;border-radius:8px;background:#fff}
+  .nw-card+.nw-card{margin-top:16px}
+  .nw-card .nw-sort li,.nw-card .nw-sort li.tp{font-size:14px;line-height:22.4px}
+  .nw-card h3{font-size:20px;line-height:28px}
+  .nw-card .nw-body li p{font-size:14px;line-height:22.4px;color:#545657}
+  .nw-card .nw-body li img{width:16px;height:20px;margin:2px 0}
+}
+
+</style>
+</head>
+<body class="sub network">
+<header class="hd">
+  <div class="hd-in">
+    <div class="hd-cont">
+      <h1 class="ci"><a href="./index.html"><img src="./assets/ic/ci.svg" alt="하이온셀"></a></h1>
+      <nav class="gnb pc"><ul><li class="d1"><button type="button">제품</button><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><button type="button">회사정보</button><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><button type="button">인재채용</button><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+      <div class="navp mo">
+        <nav><ul><li class="d1"><a href="solution.html">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><a href="about.html">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="talent.html">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+        <ul class="navp-util">
+          <li><a href="./download.html"><img src="./assets/ic/nav-down.svg" alt=""><p>다운로드</p></a></li>
+          <li><a href="./inquiry.html"><img src="./assets/ic/nav-inq.svg" alt=""><p>문의하기</p></a></li>
+          <li><a href="./faq.html"><img src="./assets/ic/nav-faq.svg" alt=""><p><strong>FAQ</strong></p></a></li>
+        </ul>
+      </div>
+      <div class="util">
+        <div class="cs pc">
+          <button type="button">고객지원</button>
+          <div class="cs-pop"><div class="pw"><a href="./download.html">다운로드</a><a href="./inquiry.html">문의하기</a><a href="./faq.html">FAQ</a><button type="button" class="x" aria-label="닫기"></button></div></div>
+        </div>
+        <div class="lang" data-sel>
+          <button type="button" aria-haspopup="listbox"><img src="./assets/ic/globe.svg" alt="언어 선택"><i></i></button>
+          <ul role="listbox"><li><a href="#" class="active">KR</a></li><li><a href="#">EN</a></li><li><a href="#">CN</a></li><li><a href="#">JP</a></li></ul>
+        </div>
+        <button type="button" class="srch-btn" aria-label="검색"></button>
+        <button type="button" class="nav-btn" aria-label="메뉴 열기"><i class="x"><span class="xl"></span><span class="xl"></span></i><span class="ln"></span><span class="ln"></span><span class="ln"></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="srch"><form action="./faq.html" onsubmit="return false"><button type="button" class="go" aria-label="검색"></button><input type="text" placeholder="검색어를 입력해 주세요."></form></div>
+<div class="smap pc">
+  <div class="pw">
+    <div class="smap-hd"><a href="./index.html"><img src="./assets/ic/ci-w.svg" alt="하이온셀"></a></div>
+    <ul class="smap-area"><li class="d1"><a href="#" onclick="return false">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a><ul><li class="d3"><a href="solution.html">전기차</a></li><li class="d3"><a href="solution.html">ESS</a></li><li class="d3"><a href="solution.html">전동공구</a></li><li class="d3"><a href="solution.html">모빌리티</a></li></ul></li><li class="d2"><a href="cylindrical.html">폼팩터</a><ul><li class="d3"><a href="cylindrical.html">원통형</a></li><li class="d3"><a href="cylindrical.html">파우치형</a></li></ul></li><li class="d2"><a href="material.html">소재</a><ul><li class="d3"><a href="material.html">NCM</a></li><li class="d3"><a href="material.html">LFP</a></li></ul></li></ul></li><li class="d1"><a href="#" onclick="return false">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a><ul><li class="d3"><a href="about.html">회사개요</a></li><li class="d3"><a href="vision.html">비전</a></li><li class="d3"><a href="history.html">연혁</a></li><li class="d3"><a href="ci.html">CI</a></li></ul></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="#" onclick="return false">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li><li class="d1"><a href="#" onclick="return false">고객지원</a><ul><li class="d2"><a href="download.html">다운로드</a></li><li class="d2"><a href="inquiry.html">문의하기</a></li><li class="d2"><a href="faq.html">FAQ</a></li></ul></li></ul>
+    <button type="button" class="close" aria-label="닫기"></button>
+  </div>
+</div>
+<main id="container" class="sub">
+<div class="sv"><div class="vis"><img src="./assets/sv-company.jpg" alt=""></div><div class="sv-txt"><p><strong>하이온셀은 셀 설계부터 팩 조립까지 직접 해내는 기술로<br>고객의 제품에 꼭 맞는 에너지를 만드는 배터리 전문 기업입니다.</strong></p></div></div>
+<div class="pmap"><div class="sw"><div class="sc" data-sel><button type="button" aria-haspopup="listbox">회사정보</button><ul role="listbox"><li><a href="solution.html">제품</a></li><li><a href="about.html" class="active">회사정보</a></li><li><a href="talent.html">인재채용</a></li><li><a href="download.html">고객지원</a></li></ul></div><div class="sc" data-sel><button type="button" aria-haspopup="listbox">사업장</button><ul role="listbox"><li><a href="about.html">회사소개</a></li><li><a href="network.html" class="active">사업장</a></li><li><a href="newsroom.html">뉴스룸</a></li></ul></div></div></div>
+<section class="chead2 nw"><div class="cw"><h2 class="h1">사업장</h2><p class="lead"><strong>한국, 베트남, 폴란드</strong> 등 주요 거점을 바탕으로<br><strong>고객 가까이에서 생산과 기술지원을 이어가고</strong> 있습니다.</p></div></section>
+<div class="nw-tabs"><ul class="utabs"><li class="on"><button type="button" data-r="전체">전체<span class="cnt">(6)</span></button></li><li><button type="button" data-r="한국">한국<span class="cnt">(4)</span></button></li><li><button type="button" data-r="아시아">아시아<span class="cnt">(1)</span></button></li><li><button type="button" data-r="유럽">유럽<span class="cnt">(1)</span></button></li></ul></div>
+<section class="nw-area">
+  <div class="nw-map"><ul class="nw-filter"><li><button type="button" class="t1" data-t="1">본사</button></li><li><button type="button" class="t2" data-t="2">R&D</button></li><li><button type="button" class="t3" data-t="3">생산</button></li><li><button type="button" class="t4" data-t="4">판매</button></li></ul><iframe title="사업장 지도" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%EA%B0%95%EB%82%A8%EC%97%AD&z=15&output=embed"></iframe></div>
+  <div class="nw-info pc"><div class="nw-list"><div class="sel2" data-sel><button type="button" aria-haspopup="listbox">전체</button><ul role="listbox"><li><a href="#" class="active" data-t="0">전체</a></li><li><a href="#" data-t="1">본사</a></li><li><a href="#" data-t="2">R&D</a></li><li><a href="#" data-t="3">생산</a></li><li><a href="#" data-t="4">판매</a></li></ul></div><ul class="nw-items"><li data-r="한국" data-t="1"><a href="#" data-i="0">본사</a></li><li data-r="한국" data-t="2"><a href="#" data-i="1">하이온셀 기술연구소</a></li><li data-r="한국" data-t="3"><a href="#" data-i="2">충북 제1공장</a></li><li data-r="한국" data-t="3"><a href="#" data-i="3">충북 제2공장</a></li><li data-r="아시아" data-t="3"><a href="#" data-i="4">HIONCELL Vietnam Co., Ltd.</a></li><li data-r="유럽" data-t="4"><a href="#" data-i="5">HIONCELL Europe sp. z o.o.</a></li></ul></div><div class="nw-detail"><div class="in"><button type="button" class="x" aria-label="닫기"></button><div class="bd"></div></div></div></div>
+  <div class="nw-m"><div class="sel2" data-sel><button type="button" aria-haspopup="listbox">전체</button><ul role="listbox"><li><a href="#" class="active" data-t="0">전체</a></li><li><a href="#" data-t="1">본사</a></li><li><a href="#" data-t="2">R&D</a></li><li><a href="#" data-t="3">생산</a></li><li><a href="#" data-t="4">판매</a></li></ul></div><div class="nw-card" data-r="한국" data-t="1"><ul class="nw-sort"><li class="tp t1">본사</li><li class="country">Korea</li><li class="year">2007</li></ul><h3>본사</h3><div class="nw-body"><ul><li><img src="./assets/ic/pin.svg" alt="주소"><p>서울특별시 강남구 테헤란로 000, 하이온셀타워</p></li><li><img src="./assets/ic/phone.svg" alt="전화"><p>010-4894-4905</p></li><li><img src="./assets/ic/box.svg" alt="사업분야"><p>경영지원·영업</p></li></ul></div></div><div class="nw-card" data-r="한국" data-t="2"><ul class="nw-sort"><li class="tp t2">R&D</li><li class="country">Korea</li><li class="year">2019</li></ul><h3>하이온셀 기술연구소</h3><div class="nw-body"><ul><li><img src="./assets/ic/pin.svg" alt="주소"><p>충청북도 청주시 흥덕구 오송읍 오송생명로 000</p></li><li><img src="./assets/ic/phone.svg" alt="전화"><p>010-4894-4905</p></li><li><img src="./assets/ic/box.svg" alt="사업분야"><p>셀·BMS 연구개발</p></li></ul></div></div><div class="nw-card" data-r="한국" data-t="3"><ul class="nw-sort"><li class="tp t3">생산</li><li class="country">Korea</li><li class="year">2016</li></ul><h3>충북 제1공장</h3><div class="nw-body"><ul><li><img src="./assets/ic/pin.svg" alt="주소"><p>충청북도 청주시 청원구 오창읍 과학산업로 000</p></li><li><img src="./assets/ic/phone.svg" alt="전화"><p>010-4894-4905</p></li><li><img src="./assets/ic/box.svg" alt="사업분야"><p>배터리팩·모듈 생산</p></li></ul></div></div><div class="nw-card" data-r="한국" data-t="3"><ul class="nw-sort"><li class="tp t3">생산</li><li class="country">Korea</li><li class="year">2026</li></ul><h3>충북 제2공장</h3><div class="nw-body"><ul><li><img src="./assets/ic/pin.svg" alt="주소"><p>충청북도 청주시 청원구 오창읍 양청송대길 000</p></li><li><img src="./assets/ic/phone.svg" alt="전화"><p>010-4894-4905</p></li><li><img src="./assets/ic/box.svg" alt="사업분야"><p>ESS 모듈·재사용 팩 생산</p></li></ul></div></div><div class="nw-card" data-r="아시아" data-t="3"><ul class="nw-sort"><li class="tp t3">생산</li><li class="country">Vietnam</li><li class="year">2018</li></ul><h3>HIONCELL Vietnam Co., Ltd.</h3><div class="nw-body"><ul><li><img src="./assets/ic/pin.svg" alt="주소"><p>Lot 00, Que Vo Industrial Park, Bac Ninh, Vietnam</p></li><li><img src="./assets/ic/phone.svg" alt="전화"><p>+84-222-000-0000</p></li><li><img src="./assets/ic/box.svg" alt="사업분야"><p>소형 팩 조립</p></li></ul></div></div><div class="nw-card" data-r="유럽" data-t="4"><ul class="nw-sort"><li class="tp t4">판매</li><li class="country">Poland</li><li class="year">2025</li></ul><h3>HIONCELL Europe sp. z o.o.</h3><div class="nw-body"><ul><li><img src="./assets/ic/pin.svg" alt="주소"><p>ul. Przykladowa 00, 50-000 Wroclaw, Poland</p></li><li><img src="./assets/ic/phone.svg" alt="전화"><p>+48-71-000-0000</p></li><li><img src="./assets/ic/box.svg" alt="사업분야"><p>기술지원·판매</p></li></ul></div></div></div>
+</section>
+</main>
+<footer class="ft">
+  <div class="ft-area">
+    <div>
+      <ul class="ft-map">
+        <li><a href="./privacy.html">개인정보처리방침</a></li>
+        <li><a href="./privacy.html#video">영상정보처리기기 운영·관리 방침</a></li>
+        <li><a href="#" class="n" data-modal="#mailBlock">이메일무단수집거부</a></li>
+        <li><a href="./inquiry.html" class="n">윤리경영 제보</a></li>
+        <li><a href="./inquiry.html" class="n">협력사 문의</a></li>
+        <li><a href="./faq.html" class="n">안전가이드</a></li>
+      </ul>
+    </div>
+    <div class="ft-r">
+      <div class="fsel" data-sel>
+        <button type="button" aria-haspopup="listbox">관련사이트</button>
+        <ul role="listbox">
+          <li><p class="cat">패밀리사이트</p></li>
+          <li><a href="./newsroom.html">하이온셀 기술 블로그</a></li>
+          <li><a href="./solution.html">ESS 사업 안내</a></li>
+          <li><p class="cat">비즈니스</p></li>
+          <li><a href="./download.html">협력사 자료실</a></li>
+          <li><a href="./inquiry.html">구매 문의 창구</a></li>
+        </ul>
+      </div>
+      <div class="ft-info">
+        <p>대표 민트클 · <a href="tel:01048944905">010-4894-4905</a></p>
+        <address>사업자등록번호 266-07-03678</address>
+        <p><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <div class="l">
+      <div class="flogo-w">
+        <a class="flogo" href="./index.html">©HIONCELL Corporation</a>
+        <div class="badge"><img src="./assets/ic/badge.svg" alt="안전 우선 생산 원칙"></div>
+      </div>
+      <ul class="sns">
+        <li><a href="#" aria-label="facebook"><img src="./assets/ic/sns-facebook.svg" alt=""></a></li>
+        <li><a href="#" aria-label="linkedin"><img src="./assets/ic/sns-linkedin.svg" alt=""></a></li>
+        <li><a href="#" aria-label="instagram"><img src="./assets/ic/sns-instagram.svg" alt=""></a></li>
+        <li><a href="#" aria-label="youtube"><img src="./assets/ic/sns-youtube.svg" alt=""></a></li>
+        <li><a href="#" aria-label="blog"><img src="./assets/ic/sns-blog.svg" alt=""></a></li>
+      </ul>
+    </div>
+    <div class="r"><a href="./inquiry.html"><img src="./assets/ic/newsletter.svg" alt="뉴스레터 구독하기"></a></div>
+  </div>
+</footer>
+<button type="button" class="top-fab" aria-label="맨 위로"><img src="./assets/ic/top.svg" alt=""></button>
+<div class="modal" id="mailBlock" role="dialog" aria-modal="true" aria-labelledby="mailBlockT">
+  <div class="pw">
+    <h3 id="mailBlockT">이메일 무단 수집 거부</h3>
+    <div class="mail-ic"></div>
+    <p class="desc">본 홈페이지에 게시된 이메일 주소가 자동 수집되는 것을<br>거부하며, 이를 위반하면 정보통신망법에 따라 처벌받을 수<br>있음을 알려 드립니다.</p>
+    <div class="lk"><strong>불법 스팸 대응 센터</strong>국번 없이 118</div>
+    <button type="button" class="ok">확인</button>
+    <button type="button" class="x" aria-label="닫기"></button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script src="./assets/sub.js"></script>
+<script>
+(() => {
+  const D = [["<ul class=\"nw-sort\"><li class=\"tp t1\">본사</li><li class=\"country\">Korea</li><li class=\"year\">2007</li></ul><h3>본사</h3><div class=\"nw-body\"><ul><li><img src=\"./assets/ic/pin.svg\" alt=\"주소\"><p>서울특별시 강남구 테헤란로 000, 하이온셀타워</p></li><li><img src=\"./assets/ic/phone.svg\" alt=\"전화\"><p>010-4894-4905</p></li><li><img src=\"./assets/ic/box.svg\" alt=\"사업분야\"><p>경영지원·영업</p></li></ul><div class=\"im\"><img src=\"./assets/network-1.jpg\" alt=\"본사 전경\"></div></div>", "강남역"], ["<ul class=\"nw-sort\"><li class=\"tp t2\">R&D</li><li class=\"country\">Korea</li><li class=\"year\">2019</li></ul><h3>하이온셀 기술연구소</h3><div class=\"nw-body\"><ul><li><img src=\"./assets/ic/pin.svg\" alt=\"주소\"><p>충청북도 청주시 흥덕구 오송읍 오송생명로 000</p></li><li><img src=\"./assets/ic/phone.svg\" alt=\"전화\"><p>010-4894-4905</p></li><li><img src=\"./assets/ic/box.svg\" alt=\"사업분야\"><p>셀·BMS 연구개발</p></li></ul><div class=\"im\"><img src=\"./assets/network-2.jpg\" alt=\"하이온셀 기술연구소 전경\"></div></div>", "오송역"], ["<ul class=\"nw-sort\"><li class=\"tp t3\">생산</li><li class=\"country\">Korea</li><li class=\"year\">2016</li></ul><h3>충북 제1공장</h3><div class=\"nw-body\"><ul><li><img src=\"./assets/ic/pin.svg\" alt=\"주소\"><p>충청북도 청주시 청원구 오창읍 과학산업로 000</p></li><li><img src=\"./assets/ic/phone.svg\" alt=\"전화\"><p>010-4894-4905</p></li><li><img src=\"./assets/ic/box.svg\" alt=\"사업분야\"><p>배터리팩·모듈 생산</p></li></ul><div class=\"im\"><img src=\"./assets/network-3.jpg\" alt=\"충북 제1공장 전경\"></div></div>", "오창읍행정복지센터"], ["<ul class=\"nw-sort\"><li class=\"tp t3\">생산</li><li class=\"country\">Korea</li><li class=\"year\">2026</li></ul><h3>충북 제2공장</h3><div class=\"nw-body\"><ul><li><img src=\"./assets/ic/pin.svg\" alt=\"주소\"><p>충청북도 청주시 청원구 오창읍 양청송대길 000</p></li><li><img src=\"./assets/ic/phone.svg\" alt=\"전화\"><p>010-4894-4905</p></li><li><img src=\"./assets/ic/box.svg\" alt=\"사업분야\"><p>ESS 모듈·재사용 팩 생산</p></li></ul><div class=\"im\"><img src=\"./assets/network-4.jpg\" alt=\"충북 제2공장 전경\"></div></div>", "오창과학산업단지"], ["<ul class=\"nw-sort\"><li class=\"tp t3\">생산</li><li class=\"country\">Vietnam</li><li class=\"year\">2018</li></ul><h3>HIONCELL Vietnam Co., Ltd.</h3><div class=\"nw-body\"><ul><li><img src=\"./assets/ic/pin.svg\" alt=\"주소\"><p>Lot 00, Que Vo Industrial Park, Bac Ninh, Vietnam</p></li><li><img src=\"./assets/ic/phone.svg\" alt=\"전화\"><p>+84-222-000-0000</p></li><li><img src=\"./assets/ic/box.svg\" alt=\"사업분야\"><p>소형 팩 조립</p></li></ul><div class=\"im\"><img src=\"./assets/network-5.jpg\" alt=\"HIONCELL Vietnam Co., Ltd. 전경\"></div></div>", "Bac Ninh"], ["<ul class=\"nw-sort\"><li class=\"tp t4\">판매</li><li class=\"country\">Poland</li><li class=\"year\">2025</li></ul><h3>HIONCELL Europe sp. z o.o.</h3><div class=\"nw-body\"><ul><li><img src=\"./assets/ic/pin.svg\" alt=\"주소\"><p>ul. Przykladowa 00, 50-000 Wroclaw, Poland</p></li><li><img src=\"./assets/ic/phone.svg\" alt=\"전화\"><p>+48-71-000-0000</p></li><li><img src=\"./assets/ic/box.svg\" alt=\"사업분야\"><p>기술지원·판매</p></li></ul><div class=\"im\"><img src=\"./assets/network-6.jpg\" alt=\"HIONCELL Europe sp. z o.o. 전경\"></div></div>", "Wroclaw"]], info = document.querySelector('.nw-info'), bd = info.querySelector('.bd'), map = document.querySelector('.nw-map iframe');
+  let region = '전체', type = '0';
+  const off = new Set();
+  const apply = () => document.querySelectorAll('.nw-items li, .nw-card').forEach(el => {
+    const ok = (region === '전체' || el.dataset.r === region) && (type === '0' || el.dataset.t === type) && !off.has(el.dataset.t);
+    el.classList.toggle('hide', !ok);
+  });
+  document.querySelectorAll('.nw-tabs button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.nw-tabs li').forEach(li => li.classList.toggle('on', li.contains(b))); region = b.dataset.r; apply();
+  }));
+  document.querySelectorAll('.sel2 ul a').forEach(a => a.addEventListener('click', () => {
+    type = a.dataset.t; document.querySelectorAll('.sel2>button').forEach(btn => btn.textContent = a.textContent); apply();
+  }));
+  document.querySelectorAll('.nw-filter button').forEach(b => b.addEventListener('click', () => {
+    b.classList.toggle('off'); off.has(b.dataset.t) ? off.delete(b.dataset.t) : off.add(b.dataset.t); apply();
+  }));
+  document.querySelectorAll('.nw-items a').forEach(a => a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelectorAll('.nw-items a').forEach(x => x.classList.toggle('active', x === a));
+    const d = D[a.dataset.i]; bd.innerHTML = d[0]; info.classList.add('on');
+    map.src = 'https://maps.google.com/maps?q=' + encodeURIComponent(d[1]) + '&z=14&output=embed';
+  }));
+  info.querySelector('.x').addEventListener('click', () => { info.classList.remove('on'); document.querySelectorAll('.nw-items a.active').forEach(x => x.classList.remove('active')); });
+})();
+</script>
+</body>
+</html>

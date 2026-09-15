@@ -107,3 +107,31 @@ article+article{margin-top:120px}
   .acc.on>button::after{top:27px}
   .acc .pnl{margin:24px 20px 0;padding:24px}
 }
+
+/* 밑줄 탭 (component.css 441~447 · 20/30 500 #707273 · 켜짐 600 잉크 · 밑줄 4 #121212 · 간격 60) */
+.utabs{display:flex;align-items:center;gap:60px;height:62px;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+.utabs::-webkit-scrollbar{display:none}
+.utabs button,.utabs a{position:relative;display:block;padding:16px 9.92px;font-size:20px;line-height:30px;font-weight:500;color:#707273;white-space:nowrap}
+.utabs .on button,.utabs .on a{color:var(--ink);font-weight:600}
+.utabs .on button::after,.utabs .on a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:4px;background:#121212}
+/* 테두리 선택 (type2 · 64 · r8 · #C9CED0) */
+.sel2{position:relative}
+.sel2>button{position:relative;display:block;width:100%;padding:16px 24px;border:1px solid #C9CED0;border-radius:8px;background:#fff;text-align:left;font-size:20px;line-height:32px;font-weight:400;color:var(--ink2)}
+.sel2>button::before{content:"";position:absolute;right:24px;top:50%;width:24px;height:24px;transform:translateY(-50%);background:url(ic/chev-down.svg) no-repeat center/contain;transition:transform .2s}
+.sel2>button.active::before{transform:translateY(-50%) rotate(180deg)}
+.sel2>ul{position:absolute;top:68px;left:0;z-index:30;display:none;width:100%;overflow:hidden;border:1px solid #C9CED1;border-radius:8px;background:#fff}
+.sel2>ul.on{display:block}
+.sel2>ul a{display:block;padding:14px 24px;font-size:18px;line-height:28.8px;color:var(--ink2)}
+.sel2>ul a:hover,.sel2>ul a.active{background:var(--f4);color:var(--ink);font-weight:600}
+.chead2{padding:120px 0 32px}
+.chead2 .cw{max-width:1440px;margin:0 auto}
+.chead2 .lead{margin-top:40px;font-size:24px;line-height:36px}
+.chead2 .lead strong{font-weight:600}
+@media (max-width:1279px){
+  .utabs{gap:24px;height:auto;padding:0 20px}
+  .utabs button,.utabs a{padding:12px 0;font-size:18px;line-height:27px}
+  .sel2>button{padding:8px 24px;height:56px;font-size:16px;line-height:25.6px;font-weight:500}
+  .sel2>ul{top:60px}
+  .chead2{padding:32px 20px}
+  .chead2 .lead{margin-top:24px;font-size:18px;line-height:28px}
+}
