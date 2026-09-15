@@ -1,0 +1,109 @@
+/* ══ 하이온셀 서브 공통 — 레퍼런스 layout.css 122~169 · component.css 578~610 · media/layout.css 45
+   PC: 비주얼 580(위 100 · 1920×480) · 글 24/36 흰 가운데 · 쪽 지도 sticky 83.2 · 선택 298 · 20/30 500 · 밑줄 2 #1f1f3c
+   모바일: 머리 아래 58 · 제목 30/36.4 700 (32/20/24) · 탭 알약 110 · 16/25.6 500 · r2 ══ */
+main.sub{padding-top:0}
+.sv{position:relative;height:580px;padding-top:100px;color:#fff;text-align:center}
+.sv .vis{position:relative;left:50%;width:1920px;height:480px;transform:translateX(-50%);background:#2a3140}
+.sv .vis img{width:100%;height:100%;object-fit:cover}
+.sv-txt{position:absolute;top:calc(50% + 50px);left:50%;width:100%;transform:translate(-50%,-50%)}
+.sv-txt p{font-size:24px;line-height:36px;font-weight:500}
+.sv-txt strong{font-weight:700}
+.pmap{position:sticky;top:0;z-index:50;width:100%;background:#fff}
+.pmap .sw{display:flex;justify-content:center;align-items:flex-end;gap:30.08px;height:83.2px;padding-top:14.08px}
+.pmap .sc{position:relative}
+.pmap .sc::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:2px;background:#1f1f3c}
+.pmap .sc>button{position:relative;display:block;width:298px;padding:16px 0;text-align:left;font-size:20px;line-height:30px;font-weight:500}
+.pmap .sc>button::before{content:"";position:absolute;right:0;top:50%;width:9.5px;height:7.1px;transform:translateY(-50%);background:url(ic/tri.svg) no-repeat center/contain;transition:transform .2s}
+.pmap .sc>button.active::before{transform:translateY(-50%) rotate(180deg)}
+.pmap .sc>ul{position:absolute;top:62px;left:0;z-index:50;display:none;width:100%}
+.pmap .sc>ul.on{display:block}
+.pmap .sc>ul a{display:block;padding:14px 20px;background:#171819;color:#fff;font-size:18px;line-height:28.8px;font-weight:500}
+.pmap .sc>ul a:hover{background:#3B3D3E}
+.pmap .sc>ul a.active{font-weight:700}
+
+/* 본문 칸 (위아래 120 · 마지막 아래 240 · 1440) */
+.item{width:100%;padding:120px 0}
+.item:last-child{padding-bottom:240px}
+.item .cw{max-width:1440px;margin:0 auto}
+.item.sky{background:#EEF1FE}
+.h1{font-size:44px;line-height:56px;font-weight:700}
+.h2{font-size:32px;line-height:48px;font-weight:700}
+.h3{font-size:24px;line-height:42px;font-weight:700}
+.subt{font-size:24px;line-height:36px;font-weight:400}
+.subt strong{font-weight:600}
+.sect{padding-top:40px}
+.sect.s30{padding-top:30px}
+.sect.s20{padding-top:20px}
+article+article{margin-top:120px}
+.chead{padding:220px 0 60px}
+.chead .h1+p{margin-top:24px;font-size:20px;line-height:36px;color:var(--ink2)}
+
+/* 버튼 (테두리 · 아이콘 원) */
+.btn-dl{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;min-width:420px;height:88px;padding:20px 40px;border:1px solid #171818;border-radius:8px;background:#fff;font-size:22px;line-height:32px;font-weight:600;color:#171818;transition:all .2s}
+.btn-dl i{flex:none;width:48px;height:48px;border-radius:100%;background:#171818 url(ic/download-w.svg) no-repeat center/18px}
+.btn-dl:hover{background:#171818;color:#fff}
+.btn-dl:hover i{background-color:#fff;background-image:url(ic/download-k.svg)}
+
+/* 스와이퍼 공통 (점 10 · 테두리 잉크) */
+.dots{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px}
+.dots .swiper-pagination-bullet{width:10px;height:10px;margin:0!important;border:1px solid var(--ink);background:transparent;opacity:1}
+.dots .swiper-pagination-bullet-active{background:var(--ink)}
+.sbtn{display:block;width:40px;height:40px;padding:8px;border-radius:50%;background:#fff url(ic/arrow-k.svg) no-repeat center/24px}
+.sbtn.prev{transform:rotate(180deg)}
+.sbtn.swiper-button-disabled{display:none}
+
+.mhead,.mtabs{display:none}
+
+@media (max-width:1279px){
+  main.sub{padding-top:58px}
+  .sv,.pmap{display:none}
+  .mhead{display:block;padding:32px 20px 24px}
+  .mhead h2{font-size:30px;line-height:36.4px;font-weight:700}
+  .mtabs{display:block;position:sticky;top:0;z-index:40;background:#fff;overflow-x:auto;scrollbar-width:none}
+  .mtabs::-webkit-scrollbar{display:none}
+  .mtabs ul{display:flex;gap:4px;width:max-content;min-width:100%;padding:0 20px}
+  .mtabs a{display:block;min-width:110px;padding:10px 16px;border-radius:2px;background:var(--f4);font-size:16px;line-height:25.6px;font-weight:500;color:var(--ink2);text-align:center;white-space:nowrap}
+  .mtabs .on a{background:var(--ink);color:#fff}
+  .mtabs.two ul{width:100%;gap:8px}
+  .mtabs.two li{width:50%}
+  .item{padding:48px 0}
+  .item:last-child{padding-bottom:100px}
+  .item .cw{padding:0 20px}
+  .h1{font-size:30px;line-height:36.4px}
+  .h2{font-size:24px;line-height:33px}
+  .h3{font-size:20px;line-height:30px}
+  .subt{font-size:18px;line-height:28px}
+  .sect,.sect.s30{padding-top:16px}
+  article+article{margin-top:64px}
+  .chead{padding:32px 20px 24px}
+  .chead .h1+p{margin-top:16px;font-size:16px;line-height:25.6px;color:var(--ink)}
+  .btn-dl{min-width:0;width:100%;height:58px;padding:12px 24px;font-size:16px;line-height:22.4px}
+  .btn-dl i{width:32px;height:32px;background-size:14px}
+}
+
+/* 아코디언 (component.css 490~514 · 판 #F3F5F7 r8 · 버튼 30/48/30/40 · 제목 20/32 600 → 열림 24/36 · 더하기 36 오른쪽 44.8) */
+.acc{border-radius:8px;background:var(--f4)}
+.acc+.acc{margin-top:20px}
+.acc.on{padding-bottom:40px}
+.acc>button{position:relative;display:block;width:100%;padding:30.08px 48px 30.08px 40px;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acc.on>button{padding:40px 48px 0 40px}
+.acc>button span{font-size:20px;line-height:32px;font-weight:600}
+.acc.on>button span{font-size:24px;line-height:36px}
+.acc>button::after{content:"";position:absolute;right:44.8px;top:50%;width:36px;height:36px;transform:translateY(-50%);background:url(ic/acc-plus.svg) no-repeat center/contain}
+.acc.on>button::after{background-image:url(ic/acc-minus.svg);transform:none;top:40px}
+.acc.arrow>button::after{background-image:url(ic/acc-down.svg)}
+.acc.arrow.on>button::after{background-image:url(ic/acc-up.svg)}
+.acc .pnl{display:none;margin:40px 40px 0;padding:40px;border-radius:8px;background:#fff;font-size:18px;line-height:28.8px;font-weight:500}
+.acc.on .pnl{display:block}
+.acc .pnl p{font-size:16px;line-height:25.6px;font-weight:400;color:var(--ink2)}
+.acc .pnl p+p{margin-top:8px}
+@media (max-width:1279px){
+  .acc{border-radius:0}
+  .acc>button{padding:24px 48px 24px 20px}
+  .acc.on>button{padding:24px 20px 0}
+  .acc>button span{font-size:18px;line-height:28px}
+  .acc.on>button span{font-size:20px;line-height:30px;padding-right:27px}
+  .acc>button::after{width:24px;height:24px;right:20px}
+  .acc.on>button::after{top:27px}
+  .acc .pnl{margin:24px 20px 0;padding:24px}
+}
