@@ -53,7 +53,7 @@ function productQuery() {
 function setPageTitle(name) {
   document.querySelector('.pageTitle h3').textContent = name;
   document.querySelector('.pageTitle .pageLocation li:last-child').textContent = name;
-  document.title = name + ' — 누빛광학 (프리미엄 디자인 D)';
+  document.title = name + ' — 누빛광학 (프리미엄 디자인 E)';
 }
 
 function paging(r) {
