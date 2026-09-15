@@ -21,12 +21,21 @@ SERVER = os.environ.get("PROMO_SERVER", "http://localhost:5173") + "/templates/"
 OUT_W = 800          # 크몽 가로 600 이상 — 휴대폰에서도 또렷하게 800
 MAX_H = 3000         # 크몽 세로 상한
 SPECS: dict[str, dict] = {
+    "corporate-h": {
+        "code": "CORP-1003", "brand": "하이온셀", "slug": "corporate-h-template", "accent": (0, 80, 180),
+        "pages": ["index", "about", "vision", "history", "ci", "network", "solution", "cylindrical", "material",
+                  "newsroom", "download", "faq", "inquiry", "recruit", "talent"],
+        "kmong": ["index", "about", "solution", "cylindrical", "material", "network", "newsroom", "recruit"],
+        "blog": ["index", "about", "solution", "cylindrical", "material", "network", "history", "newsroom", "recruit", "inquiry"],
+        "hide": ".top-fab",
+        "index_frames": ["pc-index-00", "pc-index-03", "pc-index-05", "pc-index-10", "pc-index-14", "pc-index-19", "pc-index-23", "pc-index-26"],
+    },
     "corporate-g": {
         "code": "CORP-1002", "brand": "한벡스금속", "slug": "corporate-g-template", "accent": (168, 58, 30),
         "pages": ["index", "history", "ci", "partner", "location", "news", "process", "equipment", "technology",
                   "certificate", "product-pump", "product-hp", "product-valve", "product-machine", "inquiry", "contact"],
         "kmong": ["index", "history", "technology", "process", "certificate", "product-pump", "news", "inquiry"],
-        "hide": ".top",
+        "hide": ".top", "per_page": 4,
         # 메인은 스크롤 고정 장면이라 통짜 캡처에 빈 공간이 생긴다 → make_shot_cards --capture 로 찍은 휠 프레임을 이어 붙인다
         "index_frames": ["pc-index-00", "pc-index-09", "pc-index-12", "pc-index-16", "pc-index-20", "pc-index-24", "pc-index-30",
                          "pc-index-37", "pc-index-42", "pc-index-50", "pc-index-56", "pc-index-60"],
@@ -153,7 +162,7 @@ def main() -> None:
 
     full = []
     for name in sp.get("blog", sp["pages"]):
-        for k, im in enumerate(page_images(fdir, name, 1080, 1350, 1350)):
+        for k, im in enumerate(page_images(fdir, name, 1080, 1350, 1350)[:sp.get("per_page", 3)]):  # 한 페이지가 너무 많이 차지하지 않게
             full.append((f"{name}{'-' + str(k + 1) if k else ''}", im))
     # 안내(가격) 장은 빼기로 함 — 대표 + 조각 19 = 20 (2026-09-15)
     save("블로그", [("대표", cover(fdir))] + full[:19])

@@ -73,6 +73,10 @@ SPECS: dict[str, dict] = {
             ("주거 개발", "대표 단지는 크게,\n전체 실적은 사진 목록으로 보여줘요", ["pc-residential-06@0,0,1440,780", "pc-residential-08@50,40,1200,460"]),
         ],
     },
+    "corporate-h": {  # 메인 휠 프레임만 찍는다 (make_page_shots 의 index_frames 용)
+        "code": "CORP-1003", "brand": "하이온셀", "industry": "배터리 제조기업", "accent": "rgb(0,80,180)", "slug": "corporate-h-template",
+        "pages": ["index"], "mobile_pages": [], "extras": [],
+    },
     "corporate-g": {
         "code": "CORP-1002",
         "brand": "한벡스금속",
