@@ -4,14 +4,14 @@
 
 출력: <홍보카드>/<코드>_<브랜드>/{크몽,블로그,당근_카페,당근_비즈니스소식}/
 - 크몽: 01-대표.jpg(1080×1080) + 상세 ≤10장 (가로 800 · 세로 ≤3000, 긴 페이지는 나눔)
-- 블로그 · 당근: 페이지 캡처를 1080×1350(4:5) 조각으로 — 세로가 길면 휴대폰에서 확대해 봐야 해서 불편하다는 피드백 + 마지막 안내 1장(블로그=가격·주소, 당근=가격·문의)
+- 블로그 · 당근: 페이지 캡처를 1080×1350(4:5) 조각으로 — 세로가 길면 휴대폰에서 확대해 봐야 해서 불편하다는 피드백. 문구 · 가격 장 없음
 템플릿 푸터에는 실제 연락처가 있어 푸터 위에서 자른다.
 """
 import os
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image
 from playwright.sync_api import sync_playwright
 
 sys.path.insert(0, str(Path(__file__).parent))
@@ -120,20 +120,6 @@ def cover(fdir: Path) -> Image.Image:
     return im.crop((x0, 0, x0 + s, s)).resize((1080, 1080), Image.LANCZOS)
 
 
-def info_card(sp: dict, with_url: bool) -> Image.Image:
-    """블로그 · 당근 마지막 장 — 가격 한 줄만. 설명문 없이."""
-    im = Image.new("RGB", (1080, 1350), "#ffffff")
-    d = ImageDraw.Draw(im)
-    fp = "C:/Windows/Fonts/malgunbd.ttf"
-    big, mid, sm = ImageFont.truetype(fp, 84), ImageFont.truetype(fp, 40), ImageFont.truetype(fp, 30)
-    d.text((80, 420), "프리미엄 홈페이지 제작", font=mid, fill="#666")
-    d.text((80, 490), "300만 원부터", font=big, fill=sp["accent"])
-    d.text((80, 660), "PC · 모바일 반응형 · 관리자 페이지 · 영업일 10일", font=sm, fill="#444")
-    d.text((80, 780), f"noveriq.co.kr/samples/{sp['slug']}" if with_url else "궁금한 점은 댓글이나 채팅으로 문의해 주세요", font=sm, fill="#222")
-    d.text((80, 1230), "화면 속 회사명 · 사진 · 내용은 예시입니다.", font=sm, fill="#999")
-    return im
-
-
 def main() -> None:
     key = sys.argv[1]
     sp = SPECS[key]
@@ -169,10 +155,10 @@ def main() -> None:
     for name in sp.get("blog", sp["pages"]):
         for k, im in enumerate(page_images(fdir, name, 1080, 1350, 1350)):
             full.append((f"{name}{'-' + str(k + 1) if k else ''}", im))
-    full = full[:18]  # 대표 + 18 + 안내 = 20
-    save("블로그", [("대표", cover(fdir))] + full + [("안내", info_card(sp, True))])
-    save("당근_카페", [("대표", cover(fdir))] + full + [("안내", info_card(sp, False))])
-    save("당근_비즈니스소식", [("대표", cover(fdir))] + [x for x in full if x[0].split("-")[0] in sp["kmong"]][:8] + [("안내", info_card(sp, False))])
+    # 안내(가격) 장은 빼기로 함 — 대표 + 조각 19 = 20 (2026-09-15)
+    save("블로그", [("대표", cover(fdir))] + full[:19])
+    save("당근_카페", [("대표", cover(fdir))] + full[:19])
+    save("당근_비즈니스소식", [("대표", cover(fdir))] + full[:9])
 
 
 if __name__ == "__main__":
