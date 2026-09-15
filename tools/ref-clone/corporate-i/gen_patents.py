@@ -1,0 +1,91 @@
+"""R&D 특허·인증(m43) 소스 생성 — 원본은 15건 중 8건을 먼저 보이고 '더보기'로 이어 붙인다."""
+from pathlib import Path
+HERE = Path(__file__).parent / "pages"
+ITEMS = [  # (번호, 이름, 이미지) — 이미지가 있는 칸은 눌러서 크게 본다(원본 li.imgLi)
+    ("제30-1045827호", "물품 제 16류, 광학 렌즈 경통", None), ("제30-1039164호", "물품 제 10류, 레이저 빔 정렬기", None),
+    ("제30-1052719호", "물품 제 15류, 휴대용 살균기", ("m43-cert1.jpg", 600, 835)), ("제10-2285031호", "특허, 비구면 렌즈 연마 장치", None),
+    ("제10-2301846호", "특허, 광학 코팅 두께 측정법", None), ("제10-2197402호", "특허, 라인빔 균일화 광학계", None),
+    ("제10-2164590호", "특허, 편심 측정용 지그 구조", None), ("제30-1011583호", "물품 제 16류, 대물렌즈 모듈", ("m43-cert2.jpg", 246, 340)),
+    ("제10-2098715호", "특허, 적외선 광학창 코팅 방법", None), ("제10-2043368호", "특허, 빔 결합 모듈 냉각 구조", None),
+    ("제10-1987254호", "특허, 텔레센트릭 렌즈 조립체", None), ("제10-1954106호", "특허, 광파면 측정 보정 방법", None),
+    ("제10-1902437호", "특허, 레이저 미러 세정 장치", None), ("제10-1876520호", "특허, 흑체 온도 제어 장치", None),
+    ("제10-1830691호", "특허, 광학 부품 검사 시스템", None),
+]
+li = []
+for i, (num, tit, img) in enumerate(ITEMS):
+    src, w, h = img if img else ("m43-noimg.jpg", 246, 340)
+    cls = ' class="imgLi"' if img else ""
+    hide = ' hidden' if i >= 8 else ""
+    li.append(f'<li{cls}{hide}><a><div class="img"><img src="./assets/p/{src}" alt="" width="{w}" height="{h}"></div><div class="info"><div class="num">{num}</div><div class="tit">{tit}</div></div></a></li>')
+src = f"""<!--
+title: 인증 및 특허
+pn: 4
+h2: R&amp;D
+sub: 정밀 광학 기술로 앞서가는 광학 전문기업
+h3: 인증 및 특허
+lead: 고성능 정밀 광학 제품을 앞서 만드는 세계적인 광학 전문 기업
+loc: HOME|R&amp;D|인증 및 특허
+cls: m43
+-->
+<style>
+.m43 .conwrap{{padding:140px 0 200px}}
+.m43 .conwrap .slg{{font-size:48px;color:#000;font-weight:600;line-height:1.3em}}
+.m43 .conwrap ul{{display:flex;flex-wrap:wrap;column-gap:30px;row-gap:70px;margin:90px 0 0}}
+.m43 .conwrap ul li{{width:calc((100% - 90px) / 4);text-align:center;cursor:default}}
+.m43 .conwrap ul li.imgLi{{cursor:pointer}}
+.m43 .conwrap ul li .img{{position:relative;width:100%;padding:24px;border:1px solid #ddd;border-radius:30px}}
+.m43 .conwrap ul li .img:after{{display:block;content:"";width:100%;height:100%;border:2px solid var(--accent);border-radius:30px;position:absolute;left:0;top:0;opacity:0;transition:all .6s}}
+.m43 .conwrap ul li:hover .img:after{{opacity:1}}
+.m43 .conwrap ul li .info{{padding:25px 0 0}}
+.m43 .conwrap ul li .info .num{{font-size:18px;color:#777}}
+.m43 .conwrap ul li .info .tit{{font-size:19px;color:#000;font-weight:600}}
+.m43 .paging .btnMore{{background:none;cursor:pointer}}
+.lpop.st3{{max-width:600px;width:unset;height:62vh}}
+.lpop.st3 .x{{position:absolute;left:calc(100% + 10px);top:0;width:36px}}
+.lpop.st3 .img{{height:100%}}
+.lpop.st3 .img img{{height:100%;width:auto;max-width:none}}
+@media(min-width:1400px){{.m43 .conwrap ul li .img img{{vertical-align:middle}}}}
+@media(max-width:1399px){{
+  .m43 .conwrap ul li{{width:calc((100% - 60px) / 3)}}
+  .m43 .conwrap ul li .img img{{width:100%}}
+}}
+@media(max-width:812px){{
+  .m43 .conwrap{{padding:140px 0}}
+  .m43 .conwrap .slg{{font-size:37px}}
+  .m43 .conwrap ul{{column-gap:0;row-gap:50px}}
+  .m43 .conwrap ul li{{width:100%}}
+  .lpop.st3{{width:92%;height:auto;text-align:center}}
+  .lpop.st3 .x{{left:auto;right:0;top:auto;bottom:calc(100% + 10px);width:25px}}
+  .lpop.st3 .img{{width:100%;height:auto}}
+  .lpop.st3 .img img{{height:auto;max-width:100%;max-height:80vh}}
+}}
+</style>
+<div class="innerwrap">
+  <div class="conwrap">
+    <div class="slg">누빛광학㈜은 혁신과 신뢰를 <span class="pcbr"></span>바탕으로 쉬지 않고 도약합니다.</div>
+    <div class="con">
+      <ul>{"".join(li)}</ul>
+      <div class="paging"><div class="pageNum"><span class="this">8</span><span class="bar"></span><span class="total">{len(ITEMS)}</span></div><a class="btnMore" role="button" aria-label="더보기"><img src="./assets/more-arr.svg" alt="" width="94" height="31"></a></div>
+    </div>
+  </div>
+</div>
+<div class="lpop st3" role="dialog" aria-label="인증서 크게 보기"><a class="x" role="button" aria-label="닫기"><img src="./assets/x-w.svg" alt="" width="36" height="36"></a><div class="img"><img src="./assets/p/m43-cert1.jpg" alt=""></div></div>
+<script>
+$(function () {{
+  // 원본: 더보기를 누르면 다음 묶음을 이어 붙이고 개수를 갱신, 끝이면 알림
+  $('.m43 .btnMore').on('click', function () {{
+    var $hid = $('.m43 .conwrap ul li[hidden]');
+    if (!$hid.length) {{ alert('마지막 페이지입니다.'); return; }}
+    $hid.slice(0, 8).removeAttr('hidden');
+    $('.m43 .pageNum .this').text($('.m43 .conwrap ul li:not([hidden])').length);
+  }});
+  $('.m43 ul').on('click', 'li.imgLi', function () {{
+    $('.lpop.st3 .img img').attr('src', $(this).find('img').attr('src'));
+    $('#dim').show(); $('.lpop.st3').show();
+  }});
+  $('.lpop.st3 .x, #dim').on('click', function () {{ $('#dim').hide(); $('.lpop.st3').hide(); }});
+}});
+</script>
+"""
+(HERE / "patents.html").write_text(src, encoding="utf-8")
+print("wrote patents")
