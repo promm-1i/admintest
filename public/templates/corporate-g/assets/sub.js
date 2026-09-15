@@ -48,13 +48,26 @@
     proc.addEventListener('mouseleave', () => !reduce && sw.autoplay?.start());
   }
 
-  // 견적 문의: 필수 칸 확인 후 접수 문구 (실제 전송은 제작 시 연결)
+  // 견적 문의: 자동등록방지 숫자 (그림은 매번 새로 그림) · 필수 칸 확인 후 접수 문구 (실제 전송은 제작 시 연결)
   const form = $('#inquiryForm');
-  if (form) form.addEventListener('submit', e => {
-    e.preventDefault();
-    const bad = $$('[required]', form).find(el => el.type === 'checkbox' ? !el.checked : !el.value.trim());
-    const msg = $('#formMsg');
-    if (bad) { msg.textContent = (bad.dataset.name || '필수 항목') + '을(를) 확인해 주세요.'; bad.focus(); return; }
-    msg.textContent = '문의가 접수되었습니다. 담당자가 영업일 기준 하루 안에 연락드리겠습니다.'; form.reset();
-  });
+  if (form) {
+    const img = $('#capImg'), key = $('#capKey'); let code = '';
+    const draw = () => {
+      code = String(Math.floor(100000 + Math.random() * 900000));
+      const ch = [...code].map((c, i) => `<text x="${10 + i * 14.5}" y="${27 + (i % 2 ? -3 : 3)}" transform="rotate(${(i % 3 - 1) * 8} ${16 + i * 14.5} 20)" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#333">${c}</text>`).join('');
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103 40"><rect width="103" height="40" fill="#f4f4f4"/><path d="M0 30 C20 10 50 38 103 12" stroke="#bbb" fill="none"/>${ch}</svg>`;
+      img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg); key.value = '';
+    };
+    draw();
+    $('#capNew').addEventListener('click', draw);
+    $('#capSay').addEventListener('click', () => { if (window.speechSynthesis) { const u = new SpeechSynthesisUtterance([...code].join(' ')); u.lang = 'ko-KR'; speechSynthesis.speak(u); } });
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const bad = $$('[required]', form).find(el => !el.value.trim());
+      const msg = $('#formMsg');
+      if (bad) { msg.textContent = (bad.dataset.name || '필수 항목') + '을(를) 확인해 주세요.'; bad.focus(); return; }
+      if (key.value.trim() !== code) { msg.textContent = '자동등록방지 숫자가 틀렸습니다. 다시 입력해 주세요.'; draw(); key.focus(); return; }
+      msg.textContent = '문의가 접수되었습니다. 담당자가 영업일 기준 하루 안에 연락드리겠습니다.'; form.reset(); draw();
+    });
+  }
 })();

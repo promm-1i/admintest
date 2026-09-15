@@ -37,6 +37,7 @@
   $$('.more').forEach(a => {
     const label = a.dataset.label || a.textContent.trim();
     const mk = cls => `<span class="t ${cls}" aria-hidden="true">` + [...label].map((c, i) => c === ' ' ? '<span class="sp"></span>' : `<span style="--i:${i}">${c}</span>`).join('') + '</span>';
+    if (a.classList.contains('dl')) { a.innerHTML = mk('a') + mk('b') + '<span class="ar" aria-hidden="true"><svg viewBox="0 0 15 17"><path d="M7.5 1v14M2 10l5.5 5.5L13 10" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span><span class="sr">' + label + '</span>'; return; }   // 내려받기 버튼은 아래 화살표 하나
     a.innerHTML = mk('a') + mk('b') + '<span class="ar" aria-hidden="true"><svg viewBox="0 0 9 15"><path d="M1.5 1.5 7.5 7.5 1.5 13.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg><svg viewBox="0 0 9 15" style="opacity:.5"><path d="M1.5 1.5 7.5 7.5 1.5 13.5" fill="none" stroke="currentColor" stroke-width="1.8"/></svg></span><span class="sr">' + label + '</span>';
   });
 
