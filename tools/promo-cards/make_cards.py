@@ -210,6 +210,11 @@ KMONG_POINT_PICK: dict[str, list[int]] = {
     "estate-f-template": [0, 2, 3, 4],
 }
 KMONG_MAIN = (652, 488)
+LIGHT_BG = "#f7f5f2"  # 포인트 카드와 같은 미색 — 브랜드 색 통바탕은 촌스러워 보인다는 피드백
+# 메인 이미지 큰 문구 (윗줄은 브랜드 색) — 템플릿에서 실제로 되는 기능으로만
+KMONG_HOOK: dict[str, tuple[str, str]] = {
+    "estate-f-template": ("지도로 매물 찾는", "부동산 플랫폼"),
+}
 LONG_MAX_H = 3000  # 크몽 상세 이미지 세로 한도
 
 
@@ -246,24 +251,25 @@ def build_kmong(slug: str, s: dict, full_png: Path) -> list[tuple[str, str, int,
     def kfoot(n: int, color: str, accent: str = "#b3261e") -> str:
         return foot(code, n, total, color, accent)
 
-    # 메인 — 4:3 유색 바탕, 글자는 50px 여백 안쪽. 2배로 그려서 줄인다
+    # 메인 — 목록에서 제일 먼저 보이는 장이라 브랜드 이름보다 "무엇을 해 주는지"를 크게.
+    # 바탕은 포인트 카드와 같은 따뜻한 미색, 글자 · 목업 모두 50px 여백 안쪽. 2배로 그려서 줄인다
     mw, mh = KMONG_MAIN
     cover_phone = s["mobile"]["shots"][0]["img"]
+    hook1, hook2 = KMONG_HOOK.get(slug, (s["headline"], ""))
+    chips = [f"{len(s['pages'])}쪽 구성" if s.get("pages") else "원페이지", "PC · 휴대폰", "관리자 모드", "영업일 10일 완성"]
     out.append(("01-메인", page(f"""
-<div style="position:relative;width:{mw}px;height:{mh}px;overflow:hidden;background:{brand_c};color:#fff">
-  <div style="position:absolute;left:50px;top:50px;width:230px">
-    <p class="mono" style="font-size:11px;opacity:.8">PREMIUM DESIGN</p>
-    <h1 style="margin-top:14px;font-size:58px;font-weight:800;letter-spacing:-.04em;line-height:1">{esc(s['brand'])}</h1>
-    <p style="margin-top:14px;font-size:20px;font-weight:700;letter-spacing:-.02em;line-height:1.35">{esc(s['headline'])}</p>
-    <p style="margin-top:10px;font-size:13px;opacity:.75;line-height:1.5">{esc(industry)}</p>
+<div style="position:relative;width:{mw}px;height:{mh}px;overflow:hidden;background:{LIGHT_BG};color:#1a1714">
+  <div style="position:absolute;left:50px;top:50px;width:300px">
+    <p class="mono" style="font-size:11px;color:{brand_c}">PREMIUM DESIGN · {esc(code)}</p>
+    <h1 style="margin-top:14px;font-size:37px;font-weight:800;letter-spacing:-.045em;line-height:1.18"><span style="color:{brand_c}">{esc(hook1)}</span><br>{esc(hook2)}</h1>
+    <p style="margin-top:12px;font-size:13px;font-weight:600;color:#6b645d">{esc(s['brand'])} · {esc(industry)}</p>
   </div>
-  <div style="position:absolute;left:50px;bottom:50px;display:flex;gap:6px;flex-wrap:wrap;width:240px">
-    {''.join(f'<span style="font-size:12px;font-weight:600;padding:6px 10px;border-radius:99px;background:rgba(255,255,255,.16)">{t}</span>' for t in ['PC · 휴대폰', '관리자 모드', (f"{len(s['pages'])}쪽 구성" if s.get('pages') else '원페이지')])}
+  <div style="position:absolute;left:50px;bottom:50px;display:flex;gap:6px;flex-wrap:wrap;width:230px">
+    {''.join(f'<span style="font-size:12px;font-weight:700;padding:6px 11px;border-radius:99px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.08)">{t}</span>' for t in chips)}
   </div>
-  <!-- 목업도 좌우 50px 여백 안에 둔다 (오른쪽 끝 = 602) -->
-  <div style="position:absolute;left:300px;top:138px;width:264px">{browser(s['mainShot'], '', 170).replace('<span></span>', '')}</div>
-  <div style="position:absolute;left:512px;top:222px;width:90px" class="phone"><img src="{img(cover_phone)}"></div>
-</div>""", ".phone{border-width:5px!important;border-radius:20px!important}.phone img{border-radius:15px!important}.browser .bar{height:18px!important;padding:0 8px!important;gap:4px!important}.browser .bar i{width:6px;height:6px}"), mw, mh))
+  <div style="position:absolute;left:286px;top:158px;width:292px">{browser(s["mainShot"], "", 184).replace('<span></span>', '')}</div>
+  <div style="position:absolute;left:508px;top:228px;width:94px" class="phone"><img src="{img(cover_phone)}"></div>
+</div>""", ".phone{border-width:5px!important;border-radius:19px!important;box-shadow:0 18px 30px -14px rgba(0,0,0,.45)!important}.phone img{border-radius:14px!important}.browser{box-shadow:0 22px 40px -20px rgba(0,0,0,.35)!important}.browser .bar{height:18px!important;padding:0 8px!important;gap:4px!important}.browser .bar i{width:6px;height:6px}"), mw, mh))
 
     # 02 구성
     blog = dict(build_cards(slug, s))
@@ -334,18 +340,18 @@ def build_kmong(slug: str, s: dict, full_png: Path) -> list[tuple[str, str, int,
         ("오픈", "도메인을 연결하고 관리자 모드 사용법을 안내합니다."),
     ]
     rows = "".join(
-        f"""<li style="display:grid;grid-template-columns:90px 1fr;gap:10px;padding:26px 0;border-top:1px solid rgba(255,255,255,.22)">
-<span class="mono" style="font-size:22px;padding-top:8px;opacity:.8">{i + 1:02d}</span>
-<div><p style="font-size:36px;font-weight:800;letter-spacing:-.03em">{t}</p><p style="margin-top:8px;font-size:23px;line-height:1.55;opacity:.85">{d}</p></div></li>"""
+        f"""<li style="display:grid;grid-template-columns:90px 1fr;gap:10px;padding:26px 0;border-top:1px solid rgba(0,0,0,.1)">
+<span class="mono" style="font-size:22px;padding-top:8px;color:{brand_c}">{i + 1:02d}</span>
+<div><p style="font-size:36px;font-weight:800;letter-spacing:-.03em">{t}</p><p style="margin-top:8px;font-size:23px;line-height:1.55;color:#5e5750">{d}</p></div></li>"""
         for i, (t, d) in enumerate(steps)
     )
     out.append(("10-진행과정", page(f"""
-<div class="card" style="background:{brand_c};color:#fff">
-  <p class="mono" style="opacity:.8">PROCESS</p>
+<div class="card" style="background:{LIGHT_BG};color:#1a1714">
+  <p class="mono" style="color:{brand_c}">PROCESS</p>
   <h2 style="margin-top:22px;font-size:66px;font-weight:800;letter-spacing:-.035em;line-height:1.2">자료를 받은 뒤<br>영업일 10일 이내 완성</h2>
   <ol style="margin-top:44px;list-style:none">{rows}</ol>
   <p style="position:absolute;left:80px;bottom:118px;font-size:19px;opacity:.6">화면 속 브랜드명 · 사진 · 내용은 디자인 예시입니다.</p>
-  {kfoot(10, '#fff', tint)}
+  {kfoot(10, '#1a1714')}
 </div>"""), W, H))
     return out
 
