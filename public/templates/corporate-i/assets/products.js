@@ -124,10 +124,34 @@ function renderProductView(root) {
     '<div class="conwrap"><div class="exp"><div class="innerwrap">' + v.body + '</div></div><div class="standard"><div class="innerwrap"></div></div></div>';
 }
 
+
+/* 통합검색 — 원본 _research.php?keyword= : 제품명·분류명으로 찾아 목록과 같은 카드로 보여 준다 */
+function renderProductSearch(root) {
+  var kw = (new URLSearchParams(location.search).get('keyword') || '').trim();
+  var input = document.querySelector('.prdSearch input[name=keyword]');
+  if (input) input.value = kw;
+  if (!kw) return;
+  var q = kw.toLowerCase(), found = [];
+  Object.keys(PRODUCTS).forEach(function (c) {
+    PRODUCTS[c].subs.forEach(function (s) {
+      s.items.forEach(function (it) {
+        if ((it[1] + ' ' + s.name + ' ' + PRODUCTS[c].name).toLowerCase().indexOf(q) > -1) found.push([c, s.code, it]);
+      });
+    });
+  });
+  var esc = kw.replace(/[&<>"]/g, function (ch) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]; });
+  root.innerHTML = '<div class="result">찾으신 <span class="keyword">' + esc + '</span>에 대한 결과는 총 <span class="total">' + found.length + '</span>개 있습니다.</div>' +
+    '<div class="prdList"><ul>' + found.map(function (f) {
+      var it = f[2];
+      return '<li class="fadeUp rv"><a href="./product-view.html?cate=' + f[0] + '&amp;cate2=' + f[1] + '&amp;idx=' + it[0] + '"><div class="img"><img src="./assets/p/prd-' + it[0] + '.jpg" alt="" width="' + it[2] + '" height="' + it[3] + '"></div><div class="tit">' + it[1] + '</div></a></li>';
+    }).join('') + '</ul><div class="paging"><strong>1</strong></div></div>';
+}
+
 // <script src="./assets/products.js" data-render="list|view"> 를 .page 안 끝에 두면 그 자리에서 바로 그린다 (site.js 가 .rv 를 모으기 전에)
 (function (me) {
   if (!me || !me.dataset.render) return;
   var root = me.parentNode;
   if (me.dataset.render === 'list') renderProductList(root);
   if (me.dataset.render === 'view') renderProductView(root);
+  if (me.dataset.render === 'search') renderProductSearch(root);
 })(document.currentScript);
