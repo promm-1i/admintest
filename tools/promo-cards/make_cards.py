@@ -19,7 +19,15 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[2]
 DATA = ROOT / "src/lib/caseStudies/data"
 PUBLIC = ROOT / "public"
-OUT_ROOT = Path.home() / "Desktop" / "개발" / "홍보카드"
+def _out_root() -> Path:
+    # 사용자가 폴더 앞에 번호를 붙여 정리한다("2. 홍보카드") — 이름 끝이 '홍보카드'인 폴더를 찾는다. 폴더명이 NFD 일 수 있어 정규화해서 비교
+    import unicodedata
+    dev = next((p for p in (Path.home() / "Desktop").iterdir() if unicodedata.normalize("NFC", p.name) == "개발"), Path.home() / "Desktop" / "개발")
+    found = [p for p in dev.iterdir() if p.is_dir() and unicodedata.normalize("NFC", p.name).endswith("홍보카드")] if dev.exists() else []
+    return found[0] if found else dev / "홍보카드"
+
+
+OUT_ROOT = _out_root()
 
 # 포인트 3장으로 뭘 보여줄지 — 기본은 앞에서 3개, 더 눈에 띄는 게 뒤에 있으면 여기서 고른다
 POINT_PICK: dict[str, list[int]] = {
@@ -244,7 +252,7 @@ def capture_fullpage(pg, slug: str, path: Path) -> None:
 
 
 def kmong_main_square(code: str, accent: str, hook: tuple[str, str], subline: str, chips: list[str],
-                      main_uri: str, main_ratio: float, phone_uri: str) -> str:
+                      main_uri: str, main_ratio: float, phone_uri: str, bg: str = LIGHT_BG) -> str:
     """크몽 대표 이미지 (정사각형). 목록 썸네일에서 읽히게 기능 문구를 크게, 사방 40px(CSS) 여백 안쪽."""
     m = KMONG_MAIN_CSS
     bw = 380
@@ -253,7 +261,7 @@ def kmong_main_square(code: str, accent: str, hook: tuple[str, str], subline: st
         for t in chips
     )
     return page(f"""
-<div style="position:relative;width:{m}px;height:{m}px;overflow:hidden;background:{LIGHT_BG};color:#1a1714">
+<div style="position:relative;width:{m}px;height:{m}px;overflow:hidden;background:{bg};color:#1a1714">
   <div style="position:absolute;left:40px;top:40px;right:40px">
     <p style="font-size:13px;font-weight:700;color:{accent}">프리미엄 디자인 {esc(code)}</p>
     <h1 style="margin-top:12px;font-size:38px;font-weight:800;letter-spacing:-.045em;line-height:1.18"><span style="color:{accent}">{esc(hook[0])}</span><br>{esc(hook[1])}</h1>
@@ -268,7 +276,7 @@ def kmong_main_square(code: str, accent: str, hook: tuple[str, str], subline: st
 </div>""", f"html,body{{width:{m}px!important;height:{m}px!important}}.phone{{border-width:5px!important;border-radius:19px!important;box-shadow:0 18px 30px -14px rgba(0,0,0,.45)!important}}.phone img{{border-radius:14px!important}}.browser{{box-shadow:0 26px 44px -22px rgba(0,0,0,.35)!important;border-radius:10px!important}}.browser .bar{{height:18px!important;padding:0 8px!important;gap:4px!important}}.browser .bar i{{width:6px;height:6px}}")
 
 
-def process_card(code: str, brand_c: str, n: int, total: int) -> str:
+def process_card(code: str, brand_c: str, n: int, total: int, bg: str = LIGHT_BG) -> str:
     """크몽 마지막 장 — 진행 과정. 가격 · 연락처 없이."""
     steps = [
         ("상담", "어떤 일을 하시는지, 꼭 필요한 기능이 뭔지 여쭤봐요."),
@@ -284,7 +292,7 @@ def process_card(code: str, brand_c: str, n: int, total: int) -> str:
         for i, (t, d) in enumerate(steps)
     )
     return page(f"""
-<div class="card" style="background:{LIGHT_BG};color:#1a1714">
+<div class="card" style="background:{bg};color:#1a1714">
   <p style="font-size:28px;font-weight:700;color:{brand_c}">진행 순서</p>
   <h2 style="margin-top:22px;font-size:66px;font-weight:800;letter-spacing:-.035em;line-height:1.25">자료를 받고<br>영업일 10일 안에 완성해요</h2>
   <ol style="margin-top:44px;list-style:none">{rows}</ol>

@@ -73,6 +73,61 @@ SPECS: dict[str, dict] = {
             ("주거 개발", "대표 단지는 크게,\n전체 실적은 사진 목록으로 보여줘요", ["pc-residential-06@0,0,1440,780", "pc-residential-08@50,40,1200,460"]),
         ],
     },
+    "corporate-g": {
+        "code": "CORP-1002",
+        "brand": "한벡스금속",
+        "industry": "특수강 주조 제조기업",
+        "accent": "rgb(168,58,30)",
+        "slug": "corporate-g-template",
+        "pages": ["index", "history", "technology", "process", "certificate", "product-pump", "equipment", "news", "inquiry"],
+        "mobile_pages": ["index"],
+        "extras": [
+            {"name": "menu", "page": "index", "hover": ".gnb > ul > li:nth-child(2) > a"},
+            {"name": "mmenu", "page": "index", "mode": "m", "clicks": [".burger"]},
+        ],
+        # 템플릿이 어두운 공장 사진 + 녹슨 주황이라 미색 대신 따뜻한 돌색 · 숯색을 번갈아 쓴다
+        "bg": "#ece6df",
+        "bg_dark": "#1d1a17",
+        "cover": "pc-index-00",
+        "hook": ("스크롤하면 공정이 한 장씩 넘어가는", "제조기업 홈페이지"),
+        "kmong_hook": ("공정이 한 장씩 넘어가는", "제조기업 홈페이지"),
+        "chip_pages": "메뉴 페이지 15개",
+        "grid_title": "메인과 메뉴 페이지 15개 중\n자주 보는 9개를 모았어요",
+        "mobile_title": "휴대폰에서도\n공정 장면이 그대로 넘어가요",
+        "cta_line": "우리 공장 홈페이지로",
+        "grid": [
+            ("메인", "pc-index-00"), ("공정 소개", "pc-index-15"), ("제품 소개", "pc-index-42"),
+            ("회사개요", "pc-history-00"), ("핵심기술", "pc-technology-08"), ("생산공정", "pc-process-06"),
+            ("인증서 현황", "pc-certificate-04"), ("일반 펌프부품", "pc-product-pump-04"), ("회사소식", "pc-news-04"),
+        ],
+        "phones": [("공정 소개", "m-index-04"), ("회사 숫자", "m-index-06"), ("제품", "m-index-11")],
+        "blog": [
+            ("메인", "쇳물 붓는 사진이\n첫 화면을 꽉 채워요", ["pc-index-00@790,120,640,800"], "overlay"),
+            ("", "메뉴에 마우스를 올리면\n하위 메뉴 15개가 한 번에 펼쳐져요", ["x-menu@400,20,600,380"], "center:dark"),
+            ("메인", "스크롤을 내리면 가운데 문구가\n한 줄씩 밝아져요", ["pc-index-05@160,220,1120,380", "pc-index-07@160,220,1120,380"], "bottom"),
+            ("공정 소개", "해석 · 용해 · 모래 관리 · 측정 · 열처리\n다섯 공정이 스크롤에 맞춰 넘어가요", ["pc-index-12@0,120,1440,700", "pc-index-30@0,120,1440,700"], "top:dark"),
+            ("용해 공정 장면", "", ["pc-index-15"], "photo:dark"),
+            ("", "창립 연도 · 연간 수출 중량 · 고합금강 비중이\n화면에 들어오면 숫자가 올라가요", ["pc-index-37@0,180,1440,560"], "right:dark"),
+            ("제품 소개", "펌프 · 밸브 · 기계 부품\n4가지를 사진 카드로 보여줘요", ["pc-index-42@30,110,1380,560"], "top"),
+            ("", "정밀 · 파트너십 · 안전 · 도전\n회사가 지키는 가치를 사진으로 넘겨 봐요", ["pc-index-50"], "bottom:dark"),
+            ("거래처", "거래처 로고 12개를\n한 판에 모았어요", ["pc-index-56@0,60,1440,560"], "bottom:dark"),
+            ("회사개요", "1994년부터 2026년까지\n연혁이 연도별로 이어져요", ["pc-history-09@100,0,1000,900"], "right"),
+            ("핵심기술", "핵심기술 5가지는\n사진과 설명을 엇갈려 놓았어요", ["pc-technology-08"], "center"),
+            ("생산공정", "도면 검토부터 제품 검사까지 8단계,\n누르면 사진과 설명이 바뀌어요", ["pc-process-06"], "top"),
+            ("인증서 현황", "", ["pc-certificate-03@0,170,1440,700"], "photo"),
+            ("일반 펌프부품", "Casing · Impeller 탭으로\n제품을 골라 볼 수 있어요", ["pc-product-pump-05"], "bottom"),
+            ("회사소식", "회사 소식은 NEWS · NOTICE로\n나눠서 사진 카드로 올려요", ["pc-news-05"], "right"),
+            ("견적문의", "담당자 · 회사 · 연락처 · 문의 내용에\n파일까지 한 번에 받아요", ["pc-inquiry-05"], "center"),
+        ],
+        "kmong": [
+            ("", "해석 · 용해 · 모래 관리 · 측정 · 열처리\n다섯 공정이 스크롤에 맞춰 넘어가요", ["pc-index-12@0,120,1440,700", "pc-index-30@0,120,1440,700"], "top:dark"),
+            ("제품 소개", "펌프 · 밸브 · 기계 부품\n4가지를 사진 카드로 보여줘요", ["pc-index-42@30,110,1380,560"], "bottom"),
+            ("", "정밀 · 파트너십 · 안전 · 도전\n회사가 지키는 가치를 사진으로 넘겨 봐요", ["pc-index-50"], "bottom:dark"),
+            ("회사개요", "1994년부터 2026년까지\n연혁이 연도별로 이어져요", ["pc-history-09@100,0,1000,900"], "right"),
+            ("생산공정", "도면 검토부터 제품 검사까지 8단계,\n누르면 사진과 설명이 바뀌어요", ["pc-process-06"], "center:dark"),
+            ("일반 펌프부품", "Casing · Impeller 탭으로\n제품을 골라 볼 수 있어요", ["pc-product-pump-05"], "top"),
+        ],
+    },
     "estate-g": {
         "code": "ESTP-1003",
         "brand": "온채",
@@ -255,29 +310,60 @@ def pictures(fdir: Path, refs: list[str], avail_h: int) -> str:
     return f'<div style="display:flex;flex-direction:column;align-items:center;gap:{gap}px">{imgs}</div>'
 
 
-def head(sp: dict, label: str, title: str, dark: bool = False) -> tuple[str, int]:
-    """작은 제목 + 큰 제목. (html, 차지하는 높이)"""
+def head(sp: dict, label: str, title: str, dark: bool = False, align: str = "left") -> tuple[str, int]:
+    """작은 제목(없어도 됨) + 큰 제목. (html, 차지하는 높이)"""
     n = title.count("\n") + 1
     lab_c = "rgba(255,255,255,.7)" if dark else sp["accent"]
-    html = f"""<p style="font-size:28px;font-weight:700;color:{lab_c}">{esc(label)}</p>
-  <h2 style="margin-top:12px;font-size:50px;font-weight:800;letter-spacing:-.035em;line-height:1.28">{lines(title)}</h2>"""
-    return html, 60 + 34 + 12 + round(50 * 1.28 * n)
+    lab = f'<p style="font-size:28px;font-weight:700;color:{lab_c};margin-bottom:12px">{esc(label)}</p>' if label else ""
+    html = f"""<div style="text-align:{align}">{lab}
+  <h2 style="font-size:50px;font-weight:800;letter-spacing:-.035em;line-height:1.28">{lines(title)}</h2></div>"""
+    return html, (46 if label else 0) + round(50 * 1.28 * n)
 
 
-def shell(sp: dict, inner: str, n: int, total: int, dark: bool = False) -> str:
-    bg, fg = ("#171513", "#fff") if dark else (LIGHT_BG, "#1a1714")
+def colors(sp: dict, dark: bool) -> tuple[str, str]:
+    return (sp.get("bg_dark", "#171513"), "#fff") if dark else (sp.get("bg", LIGHT_BG), "#1a1714")
+
+
+def shell(sp: dict, inner: str, n: int, total: int, dark: bool = False, pad_top: int = 60) -> str:
+    bg, fg = colors(sp, dark)
     return page(f"""
-<div class="card" style="background:{bg};color:{fg};padding:60px {PAD}px 0">
+<div class="card" style="background:{bg};color:{fg};padding:{pad_top}px {PAD}px 0">
   {inner}
   <div class="foot" style="left:{PAD}px;right:{PAD}px;bottom:34px;color:{fg}">{foot(sp['code'], n, total, fg)[len('<div class="foot" style="color:' + fg + '">'):-len('</div>')]}</div>
 </div>""")
 
 
-def shot_card(sp: dict, fdir: Path, label: str, title: str, refs: list[str], n: int, total: int) -> str:
-    h, used = head(sp, label, title)
-    avail = H - used - 44 - FOOT_H
-    return shell(sp, f"""{h}
-  <div style="margin-top:44px;height:{avail}px;display:flex;align-items:center;justify-content:center">{pictures(fdir, refs, avail)}</div>""", n, total)
+LAYOUT_CYCLE = ["top", "bottom:dark", "right", "center:dark", "bottom", "top:dark"]
+
+
+def shot_card(sp: dict, fdir: Path, label: str, title: str, refs: list[str], n: int, total: int, layout: str = "") -> str:
+    """장마다 배치를 바꾼다 — 제목이 늘 왼쪽 위에 있으면 AI 가 찍어 낸 티가 난다는 피드백.
+    top · bottom · right(사진 위, 제목 오른쪽 아래) · center(가운데 제목) · overlay(사진이 장 전체, 제목을 사진 위에) · photo(제목 없이 사진만)"""
+    layout = layout or LAYOUT_CYCLE[n % len(LAYOUT_CYCLE)]
+    kind, _, tone = layout.partition(":")
+    dark = tone == "dark"
+    if kind == "overlay":
+        u, _r = frame(fdir, refs[0])
+        h, _used = head(sp, label, title, dark=True)
+        return page(f"""
+<div class="card" style="background:#000;color:#fff;padding:0">
+  <img src="{u}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.82) 88%)"></div>
+  <div style="position:absolute;left:{PAD}px;right:{PAD}px;bottom:{FOOT_H + 20}px">{h}</div>
+  <div class="foot" style="left:{PAD}px;right:{PAD}px;bottom:34px;color:#fff">{foot(sp['code'], n, total, '#fff')[len('<div class="foot" style="color:#fff">'):-len('</div>')]}</div>
+</div>""")
+    if kind == "photo":
+        avail = H - 70 - FOOT_H - 70
+        cap = f'<p style="margin-top:26px;text-align:right;font-size:26px;font-weight:600;opacity:.6">{esc(label)}</p>' if label else ""
+        return shell(sp, f"""<div style="height:{avail}px;display:flex;flex-direction:column;justify-content:center">{pictures(fdir, refs, avail - 70)}{cap}</div>""",
+                     n, total, dark, pad_top=70)
+    align = {"right": "right", "center": "center"}.get(kind, "left")
+    h, used = head(sp, label, title, dark, align)
+    avail = H - 60 - used - 50 - FOOT_H - 20
+    pics = f'<div style="height:{avail}px;display:flex;align-items:center;justify-content:center">{pictures(fdir, refs, avail)}</div>'
+    if kind in ("bottom", "right"):
+        return shell(sp, f"""{pics}<div style="margin-top:50px">{h}</div>""", n, total, dark, pad_top=50)
+    return shell(sp, f"""{h}<div style="margin-top:50px">{pics}</div>""", n, total, dark)
 
 
 def grid_card(sp: dict, fdir: Path, n: int, total: int) -> str:
@@ -337,9 +423,9 @@ def cta_card(sp: dict, n: int, total: int, with_url: bool = True) -> str:
 
 def kmong_main(sp: dict, fdir: Path) -> str:
     u, r = frame(fdir, sp["cover"])
-    chips = [f"{len(sp['grid'])}개 페이지", "PC · 휴대폰", "관리자 모드", "영업일 10일 완성"]
+    chips = [sp.get("chip_pages", f"{len(sp['grid'])}개 페이지"), "PC · 휴대폰", "관리자 모드", "영업일 10일 완성"]
     return kmong_main_square(sp["code"], sp["accent"], sp["kmong_hook"], f"{sp['brand']} · {sp['industry']}", chips,
-                             u, min(r, .625), frame(fdir, sp["phones"][0][1])[0])
+                             u, min(r, .625), frame(fdir, sp["phones"][0][1])[0], sp.get("bg", LIGHT_BG))
 
 
 def main() -> None:
@@ -355,20 +441,20 @@ def main() -> None:
         """표지 · 구성 · 장면 16 · 휴대폰 · 상담 = 20장"""
         t = 2 + len(sp["blog"]) + 2
         cards = [("01-표지", cover_card(sp, fdir, t)), ("02-구성", grid_card(sp, fdir, 2, t))]
-        for i, (lab, title, refs) in enumerate(sp["blog"], start=3):
-            cards.append((f"{i:02d}", shot_card(sp, fdir, lab, title, refs, i, t)))
+        for i, (lab, title, refs, *lay) in enumerate(sp["blog"], start=3):
+            cards.append((f"{i:02d}", shot_card(sp, fdir, lab, title, refs, i, t, *lay)))
         n = len(cards) + 1
         return cards + [(f"{n:02d}-휴대폰", phones_card(sp, fdir, n, t)), (f"{n + 1:02d}-상담", cta_card(sp, n + 1, t, with_url))]
 
     t = 2 + len(sp["kmong"]) + 2  # 10
-    shots = [(f"{i:02d}", shot_card(sp, fdir, lab, title, refs, i, t)) for i, (lab, title, refs) in enumerate(sp["kmong"], start=3)]
+    shots = [(f"{i:02d}", shot_card(sp, fdir, lab, title, refs, i, t, *lay)) for i, (lab, title, refs, *lay) in enumerate(sp["kmong"], start=3)]
     sets = {
         "블로그": long_set(True),
         "당근_카페": long_set(False),
         "당근_비즈니스소식": [("01-표지", cover_card(sp, fdir, t)), ("02-구성", grid_card(sp, fdir, 2, t))] + shots
         + [(f"{t - 1:02d}-휴대폰", phones_card(sp, fdir, t - 1, t)), (f"{t:02d}-상담", cta_card(sp, t, t, False))],
         "크몽": [("02-구성", grid_card(sp, fdir, 2, t))] + shots
-        + [(f"{t - 1:02d}-휴대폰", phones_card(sp, fdir, t - 1, t)), (f"{t:02d}-진행과정", process_card(sp["code"], sp["accent"], t, t))],
+        + [(f"{t - 1:02d}-휴대폰", phones_card(sp, fdir, t - 1, t)), (f"{t:02d}-진행과정", process_card(sp["code"], sp["accent"], t, t, sp.get("bg", LIGHT_BG)))],
     }
 
     with sync_playwright() as p:
