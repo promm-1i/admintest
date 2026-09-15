@@ -251,18 +251,19 @@ def build_kmong(slug: str, s: dict, full_png: Path) -> list[tuple[str, str, int,
     cover_phone = s["mobile"]["shots"][0]["img"]
     out.append(("01-메인", page(f"""
 <div style="position:relative;width:{mw}px;height:{mh}px;overflow:hidden;background:{brand_c};color:#fff">
-  <div style="position:absolute;left:50px;top:50px;width:250px">
+  <div style="position:absolute;left:50px;top:50px;width:230px">
     <p class="mono" style="font-size:11px;opacity:.8">PREMIUM DESIGN</p>
     <h1 style="margin-top:14px;font-size:58px;font-weight:800;letter-spacing:-.04em;line-height:1">{esc(s['brand'])}</h1>
-    <p style="margin-top:14px;font-size:21px;font-weight:700;letter-spacing:-.02em;line-height:1.35">{esc(s['headline'])}</p>
+    <p style="margin-top:14px;font-size:20px;font-weight:700;letter-spacing:-.02em;line-height:1.35">{esc(s['headline'])}</p>
     <p style="margin-top:10px;font-size:13px;opacity:.75;line-height:1.5">{esc(industry)}</p>
   </div>
   <div style="position:absolute;left:50px;bottom:50px;display:flex;gap:6px;flex-wrap:wrap;width:240px">
     {''.join(f'<span style="font-size:12px;font-weight:600;padding:6px 10px;border-radius:99px;background:rgba(255,255,255,.16)">{t}</span>' for t in ['PC · 휴대폰', '관리자 모드', (f"{len(s['pages'])}쪽 구성" if s.get('pages') else '원페이지')])}
   </div>
-  <div style="position:absolute;left:318px;top:92px;width:400px">{browser(s['mainShot'], '', 250).replace('height:40px', 'height:20px').replace('<span></span>', '')}</div>
-  <div style="position:absolute;left:520px;top:190px;width:110px" class="phone"><img src="{img(cover_phone)}"></div>
-</div>""", ".phone{border-width:5px!important;border-radius:20px!important}.phone img{border-radius:15px!important}.browser .bar i{width:6px;height:6px}"), mw, mh))
+  <!-- 목업도 좌우 50px 여백 안에 둔다 (오른쪽 끝 = 602) -->
+  <div style="position:absolute;left:300px;top:138px;width:264px">{browser(s['mainShot'], '', 170).replace('<span></span>', '')}</div>
+  <div style="position:absolute;left:512px;top:222px;width:90px" class="phone"><img src="{img(cover_phone)}"></div>
+</div>""", ".phone{border-width:5px!important;border-radius:20px!important}.phone img{border-radius:15px!important}.browser .bar{height:18px!important;padding:0 8px!important;gap:4px!important}.browser .bar i{width:6px;height:6px}"), mw, mh))
 
     # 02 구성
     blog = dict(build_cards(slug, s))
