@@ -649,6 +649,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "corporate-g-template",
+    industry: "제조 · 금속 주조 기업 홈페이지",
+    title: "특수강 주조 제조기업 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 기업 · 제조 · 공장",
+    purpose:
+      "쇳물 사진 위로 큰 영문 제목이 한 글자씩 올라오는 첫 화면, 스크롤하면 제목이 흰색으로 차오르고 기술 사진 다섯 장이 차례로 올라오는 고정 장면, 숫자가 올라가는 회사 소개, 사진이 바뀌는 제품 카드, 엇갈린 비전 카드, 뉴스 슬라이드로 이어지는 메인에 회사개요·CI·파트너·오시는 길·소식·생산공정·설비·핵심기술·인증서·제품 4종·견적문의·컨택트 서브페이지를 갖춘 제조기업 홈페이지입니다.",
+    features: ["한 글자씩 올라오는 첫 화면 · 흰색으로 차오르는 고정 제목", "기술 사진 5장이 올라오는 스크롤 장면 · 올라가는 숫자", "공정 8단계 탭 슬라이드 · 연혁 · 인증서·제품 분류", "견적문의 폼 · 국내외 연락처 카드 · 서브 17쪽"],
+    idealFor: "주조·단조·금속가공 공장, 부품 제조사, 설비·기계 제조기업, 수출 비중이 높은 중소 제조기업",
+    image: "/thumbs/corporate-g.jpg",
+    liveUrl: "/templates/corporate-g/",
+    industryKey: "corporate",
+    premiumLabel: "기업 B",
+    designCode: "CORP-1002",
+    premium: true,
+  },
+  {
     slug: "corporate-f-template",
     industry: "건설 · 개발 기업 홈페이지",
     title: "종합 건설·개발 기업 홈페이지 (프리미엄 디자인 A)",
