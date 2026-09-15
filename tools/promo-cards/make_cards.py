@@ -106,15 +106,16 @@ def build_cards(slug: str, s: dict) -> list[tuple[str, str]]:
 
     # 01 표지 — 브랜드 색 바탕, PC 화면 위에 휴대폰을 겹친다
     cover_phone = s["mobile"]["shots"][0]["img"]
+    # 첫 장은 크몽 메인과 같은 문구 — 브랜드 이름보다 무엇을 해 주는지를 크게
+    hook1, hook2 = KMONG_HOOK.get(slug, (s["headline"], ""))
     cards.append(("01-표지", page(f"""
-<div class="card" style="background:{brand_c};color:#fff">
-  <p class="mono" style="opacity:.8">PREMIUM DESIGN · {esc(code)}</p>
-  <h1 style="margin-top:34px;font-size:128px;font-weight:800;letter-spacing:-.04em;line-height:1">{esc(s['brand'])}</h1>
-  <p style="margin-top:26px;font-size:46px;font-weight:600;letter-spacing:-.02em;opacity:.92">{esc(s['headline'])}</p>
-  <p style="margin-top:14px;font-size:26px;opacity:.72">{esc(industry)}</p>
+<div class="card" style="background:{LIGHT_BG};color:#1a1714">
+  <p class="mono" style="color:{brand_c}">PREMIUM DESIGN · {esc(code)}</p>
+  <h1 style="margin-top:30px;font-size:84px;font-weight:800;letter-spacing:-.045em;line-height:1.16"><span style="color:{brand_c}">{esc(hook1)}</span><br>{esc(hook2)}</h1>
+  <p style="margin-top:22px;font-size:28px;font-weight:600;color:#6b645d">{esc(s['brand'])} · {esc(industry)}</p>
   <div style="position:absolute;left:80px;top:560px;width:800px">{browser(s['mainShot'], url, 600)}</div>
   <div style="position:absolute;right:70px;top:700px;width:250px" class="phone"><img src="{img(cover_phone)}"></div>
-  {foot(code, 1, total, '#fff', tint)}
+  {foot(code, 1, total, '#1a1714')}
 </div>""")))
 
     # 02 구성 — 여러 쪽이면 페이지 썸네일 격자, 원페이지면 메인 화면과 섹션 흐름
@@ -184,22 +185,22 @@ def build_cards(slug: str, s: dict) -> list[tuple[str, str]]:
 
     # 07 마무리 — 가격 · 포함 항목 · 보러 가는 길
     cards.append(("07-상담", page(f"""
-<div class="card" style="background:{brand_c};color:#fff">
-  <p class="mono" style="opacity:.8">{esc(code)} · {esc(s['brand'])}</p>
+<div class="card" style="background:{LIGHT_BG};color:#1a1714">
+  <p class="mono" style="color:{brand_c}">{esc(code)} · {esc(s['brand'])}</p>
   <h2 style="margin-top:34px;font-size:72px;font-weight:800;letter-spacing:-.035em;line-height:1.2">이 디자인으로<br>우리 브랜드 홈페이지를</h2>
-  <p style="margin-top:64px;font-size:30px;opacity:.85">프리미엄 제작</p>
-  <p style="margin-top:6px;font-size:132px;font-weight:800;letter-spacing:-.04em;line-height:1">300<span style="font-size:64px;margin-left:8px">만 원부터</span></p>
-  <ul style="margin-top:48px;list-style:none;font-size:30px;line-height:1.9;opacity:.95">
+  <p style="margin-top:64px;font-size:30px;color:#6b645d">프리미엄 제작</p>
+  <p style="margin-top:6px;font-size:132px;font-weight:800;letter-spacing:-.04em;line-height:1;color:{brand_c}">300<span style="font-size:64px;margin-left:8px">만 원부터</span></p>
+  <ul style="margin-top:48px;list-style:none;font-size:30px;line-height:1.9;color:#3d3833">
     <li>· 브랜드 색 · 메뉴 · 섹션 구성을 사업에 맞춰 다시</li>
     <li>· 사진 새로 제작 · 휴대폰 화면까지</li>
     <li>· 호스팅 1년 · 도메인 1개 포함 (부가세 별도)</li>
   </ul>
-  <div style="margin-top:56px;padding:30px 36px;border-radius:20px;background:rgba(255,255,255,.14)">
-    <p style="font-size:24px;opacity:.8">실제 화면 · 상세 설명 보기</p>
+  <div style="margin-top:56px;padding:30px 36px;border-radius:20px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.07)">
+    <p style="font-size:24px;color:#6b645d">실제 화면 · 상세 설명 보기</p>
     <p style="margin-top:8px;font-size:32px;font-weight:700">noveriq.co.kr/samples/{esc(slug)}</p>
   </div>
-  <p style="position:absolute;left:80px;bottom:118px;font-size:19px;opacity:.6">화면 속 브랜드명 · 사진 · 내용은 디자인 예시입니다.</p>
-  {foot(code, 7, total, '#fff', tint)}
+  <p style="position:absolute;left:80px;bottom:118px;font-size:19px;color:#8a837b">화면 속 브랜드명 · 사진 · 내용은 디자인 예시입니다.</p>
+  {foot(code, 7, total, '#1a1714')}
 </div>""")))
     return cards
 
