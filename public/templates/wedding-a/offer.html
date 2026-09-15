@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>서비스 — 서울바우</title>
+<meta name="description" content="프리웨딩 · 서울·제주 촬영 · 드레스 투어 · 한복·주얼리·정장 · K-뷰티 · K-Pop 여섯 분야의 제휴 스튜디오와 업체 목록. 태그로 골라 보세요.">
+<meta property="og:title" content="서비스 — 서울바우">
+<meta property="og:image" content="./og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aboreto&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+
+/* ══ 서브 공통 — 원본 style.css (색만 교체) ══ */
+main{--gap-50:50px}
+@media screen and (max-width:1260px){main{--gap-50:40px}}
+@media screen and (max-width:1024px){main{--gap-50:36px}}
+@media screen and (max-width:480px){main{--gap-50:24px}}
+.page-top{overflow:hidden}
+
+#offer .page-top{padding-top:80px;margin-bottom:60px}
+#offer .page-top .inner{max-width:1800px;width:90%;margin:auto}
+#offer .page-top h2{font-size:80px;font-family:var(--ff-disp);text-transform:uppercase}
+#offer .page-top p{font-size:var(--font-20);margin-top:1.5em}
+@media screen and (max-width:1600px){#offer .page-top h2{font-size:56px}}
+@media screen and (max-width:768px){#offer .page-top h2{font-size:42px}}
+@media screen and (max-width:480px){#offer .page-top h2{font-size:32px}}
+#offer.list{padding-bottom:calc(var(--gap-50)*5)}
+#offer.list .page-top{margin-bottom:calc(var(--gap-50)*3)}
+#offer.list .page-top h2{display:flex;justify-content:space-between}
+#offer.list .page-top p{text-align:right}
+#offer.list .offer-content .inner{display:flex;gap:60px;align-items:stretch;justify-content:space-between;max-width:1800px;width:90%;margin:auto}
+#offer.list .offer-content .side-menu{width:400px;position:relative}
+#offer.list .offer-content .side-menu .sticky-box{position:sticky;left:0;top:var(--headerH)}
+#offer.list .offer-content .side-menu li{opacity:0;transform:translateY(50%);transition-property:opacity,transform;transition-duration:.3s,.3s}
+#offer.list .offer-content .side-menu li + li{margin-top:20px}
+#offer.list .offer-content .side-menu li a{display:inline-flex;min-width:120px;padding:8px 15px;justify-content:center;align-items:center;text-align:center;opacity:.4;font-size:var(--font-20);border-radius:24px}
+#offer.list .offer-content .side-menu li a.active{background:#fff;opacity:1}
+#offer.list .offer-content .side-menu.ani-started li{opacity:1;transform:translateY(0)}
+#offer.list .offer-content .list{width:calc(100% - 460px);flex:1 1 0;text-align:right;overflow:hidden}
+#offer.list .offer-content .list ul{display:flex;gap:80px 60px;flex-wrap:wrap}
+#offer.list .offer-content .list ul li{width:calc(50% - 30px)}
+#offer.list .offer-content .list ul li.hide{display:none}
+#offer.list .offer-content .list .item{display:block}
+#offer.list .offer-content .list .item .img-box{font-size:0;width:100%;overflow:hidden}
+#offer.list .offer-content .list .item .img-box img{width:100%;height:100%;object-fit:cover}
+#offer.list .offer-content .list li:nth-child(2n) .item .img-box img{transition-delay:.3s}
+#offer.list .offer-content .list .item .parallax-item{aspect-ratio:3/4}
+#offer.list .offer-content .list .item .parallax-item .parallax-cont{aspect-ratio:3/4.2}
+#offer.list .offer-content .list .item .parallax-item .parallax-cont span{display:block;transition:transform .3s;width:100%;height:100%}
+#offer.list .offer-content .list .item:hover .parallax-item .parallax-cont span{transform:scale(1.03)}
+#offer.list .offer-content .list .item .text-box{margin-top:20px}
+#offer.list .offer-content .list .item .text-box .tit{font-size:var(--font-24)}
+#offer.list .offer-content .list .item .text-box .keyword{margin-top:5px;font-size:var(--font-16);text-align:right;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:5px 10px;max-height:3.2em;overflow:hidden}
+#offer.list .offer-content .list .item .text-box .keyword span::before{content:"#"}
+#offer.list .offer-content .empty{width:100%;padding:80px 0;text-align:center;font-size:var(--font-18);opacity:.6}
+@media screen and (max-width:1280px){#offer.list .offer-content .side-menu{width:160px}#offer.list .offer-content .list{width:calc(100% - 200px)}#offer.list .offer-content .list ul{gap:60px 40px}#offer.list .offer-content .list ul li{width:calc(50% - 20px)}}
+@media screen and (min-width:1025px){#offer.list .offer-content .side-menu li:nth-child(2){transition-delay:.1s}#offer.list .offer-content .side-menu li:nth-child(3){transition-delay:.2s}#offer.list .offer-content .side-menu li:nth-child(4){transition-delay:.3s}#offer.list .offer-content .side-menu li:nth-child(5){transition-delay:.4s}#offer.list .offer-content .side-menu li:nth-child(n+6){transition-delay:.6s}}
+@media screen and (max-width:1024px){#offer.list .page-top h2{flex-direction:column}#offer.list .offer-content{overflow:hidden}#offer.list .offer-content .inner{flex-wrap:wrap}#offer.list .offer-content .side-menu{width:100%;overflow-x:auto;scrollbar-width:none}#offer.list .offer-content .side-menu::-webkit-scrollbar{display:none}#offer.list .offer-content .side-menu .sticky-box{position:relative;left:0;top:0;width:max-content}#offer.list .offer-content .side-menu ul{display:flex;gap:12px;justify-content:center;align-items:center;width:max-content}#offer.list .offer-content .side-menu li{flex-shrink:0}#offer.list .offer-content .side-menu li + li{margin:0}#offer.list .offer-content .side-menu li a{min-width:80px}#offer.list .offer-content .list{width:100%}}
+@media screen and (max-width:768px){#offer.list .offer-content .list ul{gap:40px 12px}#offer.list .offer-content .list ul li{width:calc(50% - 6px)}}
+@media screen and (max-width:480px){#offer.list .offer-content .list .item .text-box .keyword{font-size:12px}}
+
+</style>
+</head>
+<body>
+<div id="wrap">
+<header>
+<div class="inner">
+  <div class="logo"><a href="index.html">서울바우</a></div>
+  <div class="right">
+    <div class="contact"><a href="#" class="btn-ty1 btn-hover" data-modal="inquiryModal"><span>contact</span></a></div>
+    <div class="menu"><button type="button" aria-label="메뉴"><span></span><span></span><span></span></button></div>
+  </div>
+</div>
+<aside>
+  <div class="backdrop"></div>
+  <div class="side-menu"><div class="inner"><ul class="gnb"><li><div class="dep1"><a href="about.html"><span>ABOUT US</span><span>about us</span></a></div><div class="img-box active"><img src="./assets/menu-1.jpg" alt=""></div></li><li><div class="dep1"><a href="offer.html"><span>OFFER</span><span>offer</span></a></div><div class="dep2-menu"><ul><li><a href="offer.html?id=3">Pre-Wedding</a></li><li><a href="offer.html?id=4">Seoul &amp; Jeju Photography</a></li><li><a href="offer.html?id=14">Dress Tour</a></li><li><a href="offer.html?id=2">Hanbok, Jewelry and Tailoring</a></li><li><a href="offer.html?id=5">K-Beauty</a></li><li><a href="offer.html?id=15">K-Pop</a></li></ul></div><div class="img-box"><img src="./assets/menu-2.jpg" alt=""></div></li><li><div class="dep1"><a href="blog.html"><span>BLOG</span><span>blog</span></a></div><div class="img-box"><img src="./assets/menu-3.jpg" alt=""></div></li><li><div class="dep1"><a href="#" data-modal="inquiryModal"><span>CONTACT US</span><span>contact us</span></a></div><div class="img-box"><img src="./assets/menu-4.jpg" alt=""></div></li><li><div class="dep1"><a href="login.html"><span>LOGIN</span><span>login</span></a></div><div class="img-box"><img src="./assets/menu-5.jpg" alt=""></div></li></ul></div>
+    <div class="mo-contact"><div class="sns-box"><a class="app" href="#" aria-label="채팅 상담"></a><a class="mail" href="mailto:6gsmake@gmail.com" aria-label="이메일"></a></div><a href="#" class="btn-ty1 btn-hover" data-modal="inquiryModal"><span>contact</span></a></div>
+  </div>
+</aside>
+</header>
+<main id="offer" class="list">
+<div class="page-top" data-ani><div class="inner"><h2 class="fade-up"><span id="cat-title">Pre-Wedding</span></h2><p class="fade-up" id="cat-sub">스튜디오 · 드레스 · 메이크업</p></div></div>
+<div class="offer-content"><div class="inner">
+  <div class="side-menu" data-ani><div class="sticky-box"><ul id="tag-list"><li><a href="#" data-tag="ALL" class="active">ALL</a></li><li><a href="#" data-tag="Portrait-Focused">Portrait-Focused</a></li><li><a href="#" data-tag="Scenery-Focused">Scenery-Focused</a></li><li><a href="#" data-tag="Hanok">Hanok</a></li><li><a href="#" data-tag="Outdoor">Outdoor</a></li><li><a href="#" data-tag="Floral">Floral</a></li><li><a href="#" data-tag="Evening">Evening</a></li><li><a href="#" data-tag="Candid">Candid</a></li></ul></div></div>
+  <div class="list"><ul id="item-list"><li data-ani><a class="item" href="offer-view.html?id=1"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-1.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">블룸 스튜디오</div><div class="keyword"><span>Natural</span><span>White</span><span>Hanok</span><span>Classic</span><span>Portrait-Focused</span><span>Street</span><span>ColoredDress</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=2"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-2.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">로렌 하우스</div><div class="keyword"><span>Home</span><span>Scenery-Focused</span><span>Natural</span><span>Street</span><span>Evening</span><span>Warm</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=3"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-3.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">더 청담</div><div class="keyword"><span>White</span><span>Classic</span><span>Sunset</span><span>Candid</span><span>Evening</span><span>Street</span><span>Scenery-Focused</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=4"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-4.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">구호 스튜디오</div><div class="keyword"><span>Portrait-Focused</span><span>Lightbulbs</span><span>Natural</span><span>Street</span><span>Garden</span><span>Outdoor</span><span>Evening</span><span>Casual</span><span>Classic</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=5"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-5.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">스튜디오 사이</div><div class="keyword"><span>Portrait-Focused</span><span>Garden</span><span>Floral</span><span>Outdoor</span><span>Street</span><span>Home</span><span>Candid</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=6"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-6.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">로맨틱 애비뉴</div><div class="keyword"><span>Portrait-Focused</span><span>Garden</span><span>White</span><span>Home</span><span>Outdoor</span><span>Candid</span><span>Street</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=7"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-7.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">아워 스튜디오</div><div class="keyword"><span>Classic</span><span>White</span><span>ColoredDress</span><span>Home</span><span>Garden</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=8"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-8.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">지니어스 스튜디오</div><div class="keyword"><span>Storytelling</span><span>Outdoor</span><span>Garden</span><span>White</span><span>Home</span><span>Candid</span><span>Warm</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=9"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-9.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">가을 스튜디오</div><div class="keyword"><span>Vintage</span><span>City</span><span>Hanok</span><span>Outdoor</span><span>Classic</span><span>Garden</span><span>Portrait-Focused</span><span>Evening</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=10"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-10.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">메리미 용마랜드</div><div class="keyword"><span>themepark</span><span>outdoor</span><span>candid</span><span>white</span><span>evening</span><span>portrait-focused</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=11"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-11.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">테레시아 스튜디오</div><div class="keyword"><span>Pool</span><span>Floral</span><span>White</span><span>Rooftop</span><span>Scenery-Focused</span><span>Sunset</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=12"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-12.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">로이 스튜디오</div><div class="keyword"><span>Portrait-Focused</span><span>White</span><span>Candid</span><span>Outdoor</span><span>Evening</span></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=13"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-13.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">라망 스튜디오</div><div class="keyword"></div></div></a></li><li data-ani><a class="item" href="offer-view.html?id=14"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/studio-14.jpg" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">세인트 무드</div><div class="keyword"></div></div></a></li></ul></div>
+</div></div>
+</main>
+<footer data-ani>
+<div class="inner">
+  <div class="f-top fade-up">
+    <nav class="fnb"><ul><li><a href="about.html">ABOUT US</a></li><li><a href="offer.html">OFFER</a></li><li><a href="blog.html">BLOG</a></li><li><a href="#" data-modal="inquiryModal">CONTACT US</a></li></ul></nav>
+    <div class="right"><ul class="sns"><li><a class="insta" href="#" aria-label="인스타그램"></a></li><li><a class="blog" href="#" aria-label="블로그"></a></li><li><a class="youtube" href="#" aria-label="유튜브"></a></li><li><a class="chat" href="#" aria-label="채팅 상담"></a></li><li><a class="email" href="mailto:6gsmake@gmail.com" aria-label="이메일"></a></li></ul></div>
+  </div>
+  <div class="f-mid">
+    <div class="top fade-up"><ul class="terms"><li><a href="#" data-modal="terms">이용약관</a></li><li><a href="#" data-modal="privacy">개인정보처리방침</a></li></ul><p class="copyright">© 2026 서울바우 웨딩 컨시어지. All Rights Reserved.</p></div>
+    <p class="f-info fade-up">웨딩 촬영 / 로컬 촬영 / 한복 / 주얼리 / 스파 /<br class="br-pc"> 헤어·메이크업 / K-POP / 맞춤 정장 /<br class="br-mo"> 숙소와 그 밖의 모든 것.<br><br>여행과 웨딩 30년, 하루짜리 촬영부터<br class="br-mo"> 한 주 일정까지 한 사람이 끝까지 챙깁니다.</p>
+    <p class="f-biz fade-up">민트클 · 대표 이진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 010-4894-4905 · 6gsmake@gmail.com</p>
+  </div>
+  <div class="f-btm"><span class="fade-up">S</span><span class="fade-up">E</span><span class="fade-up">O</span><span class="fade-up">U</span><span class="fade-up">L</span><span class="fade-up dot">·</span><span class="fade-up">V</span><span class="fade-up">O</span><span class="fade-up">W</span></div>
+</div>
+</footer>
+</div>
+<div id="cursor"></div>
+<div class="float-btn"><a href="#" data-modal="inquiryModal">채팅 상담</a></div>
+<div class="layer-modal" id="inquiryModal">
+<div class="modal-wrap"><a class="close-btn" href="#">닫기</a>
+<div class="modal-cont"><div class="inquiryForm"><form action="#" onsubmit="return false" data-touched="0"><div class="step-layout">
+  <div class="step-box on"><div class="inwrap">
+    <div class="step-com"><div class="index-menu">
+      <div class="top"><div class="state"><span>DIRECT INQUIRY</span></div><div class="tit">Begin your Seoul journey with 서울바우</div><p>남겨 주신 내용을 보고 담당자가 직접 연락드립니다.</p></div>
+      <div class="indi"><span class="dot active"></span><span class="dot"></span></div>
+    </div></div>
+    <div class="step-cont">
+      <div class="item-box"><div class="grid-box grid2">
+        <div class="form-box required"><div class="tit no-dot"><em>이름</em></div><div class="input-box"><input type="text" name="name" placeholder="이름"></div><p class="error">이름을 입력해 주세요.</p></div>
+        <div class="form-box required"><div class="tit no-dot"><em>국가 / 도시</em></div><div class="input-box"><input type="text" name="country" placeholder="예: 대한민국 서울"></div><p class="error">국가를 입력해 주세요.</p></div>
+      </div></div>
+      <div class="item-box"><div class="grid-box grid2">
+        <div class="form-box required"><div class="tit no-dot"><em>이메일</em></div><div class="input-box"><input type="email" name="email" placeholder="your@email.com"></div><p class="error">이메일을 입력해 주세요.</p></div>
+        <div class="form-box required"><div class="tit no-dot"><em>연락처 (카카오톡 ID 가능)</em></div><div class="input-box"><input type="text" name="phone" placeholder="카카오톡 ID 또는 010-0000-0000"></div><p class="error">연락처를 입력해 주세요.</p></div>
+      </div></div>
+      <div class="item-box"><div class="tit req no-dot"><em>관심 있는 서비스</em></div><div class="form-box required grid-box grid3"><label class="label-box"><input type="checkbox" name="cat" value="Pre-Wedding">Pre-Wedding</label><label class="label-box"><input type="checkbox" name="cat" value="Seoul & Jeju Photography">Seoul &amp; Jeju Photography</label><label class="label-box"><input type="checkbox" name="cat" value="Dress Tour">Dress Tour</label><label class="label-box"><input type="checkbox" name="cat" value="Hanbok, Jewelry and Tailoring">Hanbok, Jewelry and Tailoring</label><label class="label-box"><input type="checkbox" name="cat" value="K-Beauty">K-Beauty</label><label class="label-box"><input type="checkbox" name="cat" value="K-Pop">K-Pop</label></div></div>
+      <div class="item-box"><div class="tit no-dot">추가 요청 사항</div><div class="form-box"><textarea name="notes" placeholder="원하시는 일정, 예산, 인원, 그 밖의 요청을 적어 주세요."></textarea></div></div>
+      <div class="item-box"><div class="form-box required"><label class="agree"><input type="checkbox" name="agree" value="1">개인정보 수집·이용에 동의합니다.</label><p class="error">개인정보 수집·이용에 동의해 주셔야 접수됩니다.</p></div>
+        <div class="form-box"><p class="info">바로 이야기하고 싶으시면 채팅 상담을 눌러 주세요. 보통 한 시간 안에 답합니다.</p></div></div>
+      <div class="item-box"><div class="btm"><div class="util"><button type="button" class="prev hide">이전</button><button type="button" class="next disabled">보내기</button></div><div class="sns-box"><a class="app" href="#" aria-label="채팅 상담"></a><a class="mail" href="mailto:6gsmake@gmail.com" aria-label="이메일"></a></div></div></div>
+    </div>
+  </div></div>
+  <div class="step-box"><div class="step-complete"><div class="inbox"><div class="img-box"><img src="./assets/ic/check-big.svg" alt=""></div><div class="tit">상담 신청이 접수되었습니다</div><p>24시간 안에 연락드리겠습니다.</p></div></div></div>
+</div></form></div></div></div></div>
+<div class="layer-modal ty3" id="terms"><div class="modal-wrap"><div class="modal-cont"><div class="modal-head"><div class="tit">이용약관</div><a class="close-btn" href="#">닫기</a></div><div class="scroll-box"><div class="text-item"><div class="sub-tit">1. 회사 정보</div><div class="table-box"><table><tr><th>상호</th><td>민트클 (서울바우 웨딩 컨시어지)</td></tr><tr><th>사업자등록번호</th><td>266-07-03678</td></tr><tr><th>통신판매업신고</th><td>제2026-서울강남-00480호</td></tr><tr><th>대표</th><td>이진수</td></tr><tr><th>연락처</th><td>010-4894-4905 · 6gsmake@gmail.com</td></tr></table></div></div><div class="text-item"><div class="sub-tit">2. 서비스의 성격과 책임 범위</div><p>서울바우는 스튜디오·드레스·헤어메이크업·한복·주얼리·스파·숙소 등 국내 제휴 업체의 서비스를 고객의 일정에 맞게 묶어 예약하고 현장을 안내하는 컨시어지 서비스입니다. 각 서비스의 제공 주체는 해당 제휴 업체이며, 서울바우는 예약·통역·일정 관리·현장 동행을 책임집니다.</p></div><div class="text-item"><div class="sub-tit">3. 예약과 상담 절차</div><p>상담 신청 → 일정·예산 확인 → 최종 견적 안내 → 결제 → 예약 확정(바우처 발송) → 촬영·체험 진행의 순서로 진행됩니다. 견적서에 적힌 내용이 계약 내용이 됩니다.</p></div><div class="text-item"><div class="sub-tit">4. 요금과 결제</div><p>요금은 견적서 기준이며 원화로 안내합니다. 결제는 계좌이체 또는 카드 결제로 하실 수 있고, 예약 확정은 결제 확인 뒤에 이루어집니다. 옵션 추가는 현장에서 별도로 정산될 수 있습니다.</p></div><div class="text-item"><div class="sub-tit">5. 취소와 환불</div><div class="table-box"><table><tr><th>촬영일 30일 전까지</th><td>전액 환불</td></tr><tr><th>촬영일 15일 전까지</th><td>50% 환불</td></tr><tr><th>촬영일 7일 전까지</th><td>30% 환불</td></tr><tr><th>7일 이내</th><td>환불 불가</td></tr></table></div><p>제휴 업체의 취소 규정이 더 엄격한 경우 그 규정을 따릅니다. 자세한 조건은 견적서에 함께 안내합니다.</p></div><div class="text-item"><div class="sub-tit">6. 일정 변경</div><p>촬영일 15일 전까지는 1회 무료로 일정을 바꿀 수 있습니다. 그 뒤의 변경은 제휴 업체의 가능 여부와 추가 비용에 따라 진행됩니다.</p></div><div class="text-item"><div class="sub-tit">7. 날씨와 야외 촬영</div><p>야외 촬영은 우천·폭염·태풍 등 기상 상황에 따라 실내 촬영으로 대체하거나 일정을 옮길 수 있습니다. 이 경우 추가 비용은 받지 않습니다.</p></div><div class="text-item"><div class="sub-tit">8. 사진 결과물과 전달 일정</div><p>원본은 촬영 뒤 약 2주, 보정본과 앨범은 셀렉 확정 뒤 약 3개월 안에 전달됩니다. 앨범·액자의 해외 배송은 고객이 직접 준비하며 서울바우가 규격과 방법을 안내합니다.</p></div><div class="text-item"><div class="sub-tit">9. 초상권과 홍보 활용</div><p>촬영 결과물을 서울바우의 홍보에 쓰려면 고객의 별도 서면 동의를 받습니다. 동의하지 않아도 서비스 이용에는 아무 불이익이 없습니다.</p></div><div class="text-item"><div class="sub-tit">10. 고객의 책임</div><p>예약 시간 준수, 정확한 정보 제공, 제휴 업체 규정 준수는 고객의 책임입니다. 고객 사정으로 지각·불참한 경우 발생하는 비용은 환불되지 않습니다.</p></div><div class="text-item"><div class="sub-tit">11. 책임의 제한</div><p>서울바우의 책임은 고객이 지불한 서비스 요금을 한도로 합니다. 천재지변·전염병·파업 등 불가항력으로 서비스가 이루어지지 못한 경우 일정 변경 또는 환불로 처리합니다.</p></div><div class="text-item"><div class="sub-tit">12. 분쟁 해결과 준거법</div><p>이 약관은 대한민국 법을 따르며, 분쟁은 먼저 상호 협의로 해결하고 협의가 되지 않으면 서울중앙지방법원을 관할 법원으로 합니다.</p></div><div class="text-item"><div class="sub-tit">13. 문의</div><p>약관에 관한 문의는 6gsmake@gmail.com 또는 010-4894-4905 로 연락해 주세요.</p></div></div></div></div></div>
+<div class="layer-modal ty3" id="privacy"><div class="modal-wrap"><div class="modal-cont"><div class="modal-head"><div class="tit">개인정보처리방침</div><a class="close-btn" href="#">닫기</a></div><div class="scroll-box"><div class="text-item"><div class="sub-tit">1. 개인정보 처리자</div><p>민트클(서울바우 웨딩 컨시어지, 대표 이진수)은 개인정보보호법에 따라 고객의 개인정보를 보호하고 아래와 같이 처리합니다.</p></div><div class="text-item"><div class="sub-tit">2. 수집하는 개인정보</div><div class="table-box"><table><tr><th>상담 신청</th><td>이름, 국가/도시, 이메일, 연락처(카카오톡 ID), 관심 서비스, 요청 사항</td></tr><tr><th>예약·결제</th><td>여권 성명(해외 고객), 결제 정보, 일정, 인원</td></tr><tr><th>자동 수집</th><td>접속 기록, 쿠키, 기기 정보</td></tr></table></div></div><div class="text-item"><div class="sub-tit">3. 수집 방법</div><p>홈페이지 상담 폼, 이메일, 채팅 상담, 전화, 예약 과정에서 고객이 직접 입력한 정보를 수집합니다.</p></div><div class="text-item"><div class="sub-tit">4. 이용 목적</div><p>상담 답변, 견적 안내, 예약과 결제 처리, 제휴 업체 예약 전달, 촬영 결과물 전달, 고객 문의 응대, 서비스 개선을 위해 씁니다.</p></div><div class="text-item"><div class="sub-tit">5. 제3자 제공</div><p>예약 이행에 필요한 범위에서 스튜디오·드레스숍·헤어메이크업·한복·주얼리·스파·숙소 등 제휴 업체에 이름·연락처·일정을 전달합니다. 그 밖의 제공은 고객의 동의를 받습니다.</p></div><div class="text-item"><div class="sub-tit">6. 처리 위탁</div><div class="table-box"><table><tr><th>수탁자</th><td>위탁 업무</td></tr><tr><td>결제대행사</td><td>카드·계좌 결제 처리</td></tr><tr><td>이메일·메시지 발송 서비스</td><td>안내 메일·메시지 발송</td></tr><tr><td>홈페이지 호스팅</td><td>서버 운영·보관</td></tr></table></div></div><div class="text-item"><div class="sub-tit">7. 국외 이전</div><p>해외 고객의 경우 이메일·채팅 서비스의 서버가 국외에 있을 수 있습니다. 이전되는 항목은 이름·이메일·연락처·상담 내용이며, 서비스 제공 목적으로만 씁니다.</p></div><div class="text-item"><div class="sub-tit">8. 쿠키</div><p>홈페이지 이용 상태를 기억하고 방문 통계를 내기 위해 쿠키를 씁니다. 브라우저 설정에서 쿠키를 거부할 수 있으며, 그 경우 일부 기능이 제한될 수 있습니다.</p></div><div class="text-item"><div class="sub-tit">9. 보유 기간</div><p>상담 정보는 상담 종료 뒤 1년, 계약·결제 기록은 전자상거래법에 따라 5년 보관한 뒤 지체 없이 파기합니다.</p></div><div class="text-item"><div class="sub-tit">10. 고객의 권리</div><p>고객은 언제든 자신의 개인정보를 열람·정정·삭제·처리정지 요구할 수 있습니다. 6gsmake@gmail.com 으로 요청하시면 10일 안에 처리합니다.</p></div><div class="text-item"><div class="sub-tit">11. 아동</div><p>만 14세 미만 아동의 개인정보는 법정대리인의 동의를 받아 처리합니다.</p></div><div class="text-item"><div class="sub-tit">12. 방침의 변경</div><p>이 방침이 바뀌면 홈페이지에 7일 전에 알립니다. 시행일 2026년 9월 15일.</p></div><div class="text-item"><div class="sub-tit">13. 개인정보 보호책임자</div><p>이진수 · 010-4894-4905 · 6gsmake@gmail.com</p></div></div></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script>
+var OFFERS = {"3": {"title": "Pre-Wedding", "sub": "스튜디오 · 드레스 · 메이크업", "tags": ["Portrait-Focused", "Scenery-Focused", "Hanok", "Outdoor", "Floral", "Evening", "Candid"], "items": [{"n": "블룸 스튜디오", "img": "studio-1.jpg", "tags": ["Natural", "White", "Hanok", "Classic", "Portrait-Focused", "Street", "ColoredDress"]}, {"n": "로렌 하우스", "img": "studio-2.jpg", "tags": ["Home", "Scenery-Focused", "Natural", "Street", "Evening", "Warm"]}, {"n": "더 청담", "img": "studio-3.jpg", "tags": ["White", "Classic", "Sunset", "Candid", "Evening", "Street", "Scenery-Focused"]}, {"n": "구호 스튜디오", "img": "studio-4.jpg", "tags": ["Portrait-Focused", "Lightbulbs", "Natural", "Street", "Garden", "Outdoor", "Evening", "Casual", "Classic"]}, {"n": "스튜디오 사이", "img": "studio-5.jpg", "tags": ["Portrait-Focused", "Garden", "Floral", "Outdoor", "Street", "Home", "Candid"]}, {"n": "로맨틱 애비뉴", "img": "studio-6.jpg", "tags": ["Portrait-Focused", "Garden", "White", "Home", "Outdoor", "Candid", "Street"]}, {"n": "아워 스튜디오", "img": "studio-7.jpg", "tags": ["Classic", "White", "ColoredDress", "Home", "Garden"]}, {"n": "지니어스 스튜디오", "img": "studio-8.jpg", "tags": ["Storytelling", "Outdoor", "Garden", "White", "Home", "Candid", "Warm"]}, {"n": "가을 스튜디오", "img": "studio-9.jpg", "tags": ["Vintage", "City", "Hanok", "Outdoor", "Classic", "Garden", "Portrait-Focused", "Evening"]}, {"n": "메리미 용마랜드", "img": "studio-10.jpg", "tags": ["themepark", "outdoor", "candid", "white", "evening", "portrait-focused"]}, {"n": "테레시아 스튜디오", "img": "studio-11.jpg", "tags": ["Pool", "Floral", "White", "Rooftop", "Scenery-Focused", "Sunset"]}, {"n": "로이 스튜디오", "img": "studio-12.jpg", "tags": ["Portrait-Focused", "White", "Candid", "Outdoor", "Evening"]}, {"n": "라망 스튜디오", "img": "studio-13.jpg", "tags": []}, {"n": "세인트 무드", "img": "studio-14.jpg", "tags": []}]}, "4": {"title": "Seoul &amp; Jeju Photography", "sub": "야외 · 로컬 촬영", "tags": ["Seoul", "Jeju"], "items": [{"n": "경복궁 · 북촌 한옥길", "img": "local-1.jpg", "tags": ["Seoul", "Hanok", "Street"]}, {"n": "한강 노을 산책", "img": "local-2.jpg", "tags": ["Seoul", "Sunset", "Outdoor"]}, {"n": "제주 애월 해안", "img": "local-3.jpg", "tags": ["Jeju", "Sea", "Scenery-Focused"]}, {"n": "제주 오름 억새", "img": "local-4.jpg", "tags": ["Jeju", "Field", "Golden Hour"]}]}, "14": {"title": "Dress Tour", "sub": "여러 벌 피팅 체험", "tags": ["Studio Gown", "Designer", "Rental"], "items": [{"n": "메종 드 블랑", "img": "dress-1.jpg", "tags": ["Studio Gown", "Classic", "Lace"]}, {"n": "아틀리에 로제", "img": "dress-2.jpg", "tags": ["Designer", "Modern", "Minimal"]}, {"n": "화이트 가든", "img": "dress-3.jpg", "tags": ["Rental", "Romantic", "Floral"]}, {"n": "베르디 브라이덜", "img": "dress-4.jpg", "tags": ["Designer", "Couture", "Silk"]}]}, "2": {"title": "Hanbok, Jewelry and Tailoring", "sub": "한복 · 주얼리 · 맞춤 정장", "tags": ["Hanbok", "Jewelry", "Tailoring"], "items": [{"n": "주드 주얼리", "img": "hanbok-1.jpg", "tags": ["Jewelry", "Ring", "Custom"]}, {"n": "황희 한복", "img": "hanbok-2.jpg", "tags": ["Hanbok", "Traditional", "Silk"]}, {"n": "모 베터 시크", "img": "hanbok-3.jpg", "tags": ["Hanbok", "Modern", "Rental"]}, {"n": "크리스토프 최", "img": "hanbok-4.jpg", "tags": ["Tailoring", "HauteCouture", "Designer", "Modern"]}, {"n": "브리튼 청담", "img": "hanbok-5.jpg", "tags": ["Tailoring", "Tailor", "Classic"]}]}, "5": {"title": "K-Beauty", "sub": "메이크업 · 헤어 · 스파 · 뷰티 케어", "tags": ["Makeup", "Hair", "Spa"], "items": [{"n": "제니하우스 청담", "img": "beauty-1.jpg", "tags": ["Makeup", "Hair", "Bridal"]}, {"n": "오브제 살롱", "img": "beauty-2.jpg", "tags": ["Hair", "Styling", "Natural"]}, {"n": "설화 스파", "img": "beauty-3.jpg", "tags": ["Spa", "Facial", "Body"]}, {"n": "루미 클리닉", "img": "beauty-4.jpg", "tags": ["Spa", "Skin", "Glow"]}]}, "15": {"title": "K-Pop", "sub": "아티스트와 함께하는 K-Pop 체험", "tags": ["Dance", "Vocal", "Studio"], "items": [{"n": "K-Pop 댄스 클래스", "img": "kpop-1.jpg", "tags": ["Dance", "Group", "Choreography"]}, {"n": "보컬 레코딩 세션", "img": "kpop-2.jpg", "tags": ["Vocal", "Recording", "Studio"]}, {"n": "뮤직비디오 촬영", "img": "kpop-3.jpg", "tags": ["Studio", "Video", "Concept"]}, {"n": "아이돌 스타일링", "img": "kpop-4.jpg", "tags": ["Studio", "Makeup", "Outfit"]}]}};
+(function(){
+  var id = new URLSearchParams(location.search).get('id') || '3', d = OFFERS[id] || OFFERS['3'];
+  var tagUl = document.getElementById('tag-list'), list = document.getElementById('item-list');
+  document.getElementById('cat-title').innerHTML = d.title; document.getElementById('cat-sub').textContent = d.sub;
+  document.querySelectorAll('aside .dep2-menu a').forEach(function(a){ if (a.getAttribute('href').indexOf('id=' + id) > 0) a.style.fontWeight = '700'; });
+  if (id !== '3') {
+    tagUl.innerHTML = ['ALL'].concat(d.tags).map(function(t, i){ return '<li><a href="#" data-tag="' + t + '"' + (i ? '' : ' class="active"') + '>' + t + '</a></li>'; }).join('');
+    list.innerHTML = d.items.length ? d.items.map(function(it, i){ return '<li data-ani class="ani-started"><a class="item" href="offer-view.html?id=' + (i + 1) + '"><div class="img-box parallax-item"><span class="parallax-cont"><span><img class="fade-zoom-in" src="./assets/' + it.img + '" alt="" loading="lazy"></span></span></div><div class="text-box"><div class="tit">' + it.n + '</div><div class="keyword">' + it.tags.map(function(t){ return '<span>' + t + '</span>'; }).join('') + '</div></div></a></li>'; }).join('') : '<li class="empty">준비 중입니다.</li>';
+  }
+  tagUl.addEventListener('click', function(e){
+    var a = e.target.closest('a'); if (!a) return; e.preventDefault();
+    tagUl.querySelectorAll('a').forEach(function(x){ x.classList.toggle('active', x === a); });
+    var tag = a.dataset.tag.toLowerCase();
+    list.querySelectorAll('li').forEach(function(li){ var tags = [].map.call(li.querySelectorAll('.keyword span'), function(s){ return s.textContent.toLowerCase(); }); li.classList.toggle('hide', tag !== 'all' && tags.indexOf(tag) < 0); });
+  });
+})();
+</script>
+</body>
+</html>

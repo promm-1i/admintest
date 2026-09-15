@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>로그인 — 서울바우</title>
+<meta name="description" content="서울바우 회원 로그인. 이메일 또는 Google 계정으로 로그인하고 견적과 예약을 마이페이지에서 확인하세요.">
+<meta property="og:title" content="로그인 — 서울바우">
+<meta property="og:image" content="./og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aboreto&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+
+/* ══ 서브 공통 — 원본 style.css (색만 교체) ══ */
+main{--gap-50:50px}
+@media screen and (max-width:1260px){main{--gap-50:40px}}
+@media screen and (max-width:1024px){main{--gap-50:36px}}
+@media screen and (max-width:480px){main{--gap-50:24px}}
+.page-top{overflow:hidden}
+
+#member{padding:calc(var(--gap-50)*2) 0 calc(var(--gap-50)*5)}
+#member section .inner{max-width:600px;margin:auto;width:90%}
+#member .page-top{margin-bottom:60px;overflow:visible}
+#member .page-top h2{font-size:60px;font-family:var(--ff-disp);text-transform:uppercase}
+#member .page-top p{font-size:16px;margin-top:10px}
+#member .button{display:inline-flex;justify-content:center;align-items:center;height:46px;border-radius:23px;padding:0 40px;font-size:var(--font-20)}
+#member .login-area .forget-ps{margin-top:5px;text-align:right;opacity:.8}
+#member .login-area .sns-login .top{text-align:center;margin:60px 0;position:relative}
+#member .login-area .sns-login .top::before{content:"";width:100%;height:1px;background:var(--primary);opacity:.3;position:absolute;left:0;top:50%}
+#member .login-area .sns-login .top span{display:inline-block;background:var(--bg);font-size:var(--font-16);padding:0 40px;position:relative;z-index:1}
+#member .login-area .sns-login .btn-box .button{height:72px;border-radius:36px;border:1px solid rgba(75,46,60,.3);gap:10px;font-size:var(--font-20);width:100%}
+#member .login-area .sns-login .btn-box .button .icon{width:28px;height:28px;background:url(./assets/ic/google.svg) center/cover no-repeat}
+#member .signUp-area .chker li + li{margin-top:5px}
+#member .signUp-area .chker li label{display:inline-flex;vertical-align:middle;margin-right:5px;gap:8px;align-items:center}
+#member .signUp-area .chker li a{display:inline-block;font-size:14px;color:rgba(75,46,60,.6);vertical-align:middle;text-decoration:underline}
+#member .reset-ps .list{font-size:15px;margin-top:40px}
+#member .reset-ps .list li{position:relative;padding-left:11px}
+#member .reset-ps .list li + li{margin-top:5px}
+#member .reset-ps .list li::before{content:"";width:6px;height:6px;border-radius:50%;border:1px solid var(--primary);position:absolute;left:0;top:.8em;transform:translateY(-50%)}
+.form-box.form-write{--formH:60px}
+.form-box.form-write input::placeholder{color:#999}
+.form-box.form-write input[type="text"],.form-box.form-write input[type="password"],.form-box.form-write input[type="email"]{appearance:none;width:100%;height:var(--formH);border:none;border-bottom:1px solid var(--primary);padding:0 5px;font-size:var(--font-18);background:none;border-radius:0}
+.form-box.form-write select{appearance:none;width:100%;height:var(--formH);border:none;border-bottom:1px solid var(--primary);padding:5px;padding-right:45px;background:url(./assets/ic/select.svg) right 12px center/20px no-repeat;font-size:var(--font-18);color:var(--primary)}
+.form-box.form-write .line + .line{margin-top:30px}
+.form-box.form-write .item-box .error{font-size:15px;margin-top:5px;display:none;color:#C61717}
+.form-box.form-write .item-box label{display:flex;align-items:center;gap:8px}
+.form-box.form-write .grid-box{display:flex;gap:30px;align-items:flex-start}
+.form-box.form-write .grid-box .half{width:calc(50% - 15px)}
+.form-box.form-write .input-box{position:relative}
+.form-box.form-write .input-box .btn-view{position:absolute;width:20px;height:20px;right:12px;top:50%;transform:translateY(-50%);background:url(./assets/ic/eye.svg) center/cover no-repeat;opacity:.6;font-size:1px;color:transparent}
+.form-box.form-write .unverified input{border-color:#C61717}
+.form-box.form-write .unverified .error{display:block}
+.form-box.form-write .btm-btn-box{display:flex;justify-content:flex-end;align-items:center;gap:20px;margin-top:60px}
+.form-box.form-write .btm-btn-box .txt-btn{font-size:var(--font-16)}
+.form-box.form-write .button{display:inline-flex;justify-content:center;align-items:center;height:46px;border-radius:23px;padding:0 40px;font-size:var(--font-20)}
+@media screen and (max-width:768px){#member .page-top h2{font-size:48px}#member .button{height:42px}#member .login-area .sns-login .btn-box .button{height:60px}#member .login-area .sns-login .btn-box .button .icon{width:20px;height:20px}.form-box.form-write{--formH:46px}.form-box.form-write .item-box .error{font-size:14px}.form-box.form-write .grid-box{flex-wrap:wrap}.form-box.form-write .grid-box .half{width:100%}.form-box.form-write .button{height:42px}}
+@media screen and (max-width:480px){#member .page-top h2{font-size:32px}#member .page-top p{font-size:14px}}
+
+</style>
+</head>
+<body>
+<div id="wrap">
+<header>
+<div class="inner">
+  <div class="logo"><a href="index.html">서울바우</a></div>
+  <div class="right">
+    <div class="contact"><a href="#" class="btn-ty1 btn-hover" data-modal="inquiryModal"><span>contact</span></a></div>
+    <div class="menu"><button type="button" aria-label="메뉴"><span></span><span></span><span></span></button></div>
+  </div>
+</div>
+<aside>
+  <div class="backdrop"></div>
+  <div class="side-menu"><div class="inner"><ul class="gnb"><li><div class="dep1"><a href="about.html"><span>ABOUT US</span><span>about us</span></a></div><div class="img-box active"><img src="./assets/menu-1.jpg" alt=""></div></li><li><div class="dep1"><a href="offer.html"><span>OFFER</span><span>offer</span></a></div><div class="dep2-menu"><ul><li><a href="offer.html?id=3">Pre-Wedding</a></li><li><a href="offer.html?id=4">Seoul &amp; Jeju Photography</a></li><li><a href="offer.html?id=14">Dress Tour</a></li><li><a href="offer.html?id=2">Hanbok, Jewelry and Tailoring</a></li><li><a href="offer.html?id=5">K-Beauty</a></li><li><a href="offer.html?id=15">K-Pop</a></li></ul></div><div class="img-box"><img src="./assets/menu-2.jpg" alt=""></div></li><li><div class="dep1"><a href="blog.html"><span>BLOG</span><span>blog</span></a></div><div class="img-box"><img src="./assets/menu-3.jpg" alt=""></div></li><li><div class="dep1"><a href="#" data-modal="inquiryModal"><span>CONTACT US</span><span>contact us</span></a></div><div class="img-box"><img src="./assets/menu-4.jpg" alt=""></div></li><li><div class="dep1"><a href="login.html"><span>LOGIN</span><span>login</span></a></div><div class="img-box"><img src="./assets/menu-5.jpg" alt=""></div></li></ul></div>
+    <div class="mo-contact"><div class="sns-box"><a class="app" href="#" aria-label="채팅 상담"></a><a class="mail" href="mailto:6gsmake@gmail.com" aria-label="이메일"></a></div><a href="#" class="btn-ty1 btn-hover" data-modal="inquiryModal"><span>contact</span></a></div>
+  </div>
+</aside>
+</header>
+<main id="member"><form id="loginForm" action="#" onsubmit="return false"><section class="login-area"><div class="inner">
+  <div class="page-top"><h2>sign in</h2></div>
+  <div class="form-box form-write">
+    <div class="item-box line"><div class="input-box"><input type="text" placeholder="E-Mail" autocomplete="off"></div><p class="error">이메일을 입력해 주세요.</p></div>
+    <div class="item-box line"><div class="input-box"><input type="password" placeholder="Password" autocomplete="off"></div><p class="error">비밀번호를 입력해 주세요.</p></div>
+    <div class="forget-ps"><a href="find-password.html">비밀번호를 잊으셨나요?</a></div>
+    <div class="item-box line"><label><input type="checkbox" id="saveEmail"><span>이메일 저장</span></label></div>
+    <div class="btm-btn-box"><a class="txt-btn" href="sign-up.html">회원가입</a><button type="button" class="button btn-hover btn-ty1"><span>sign in</span></button></div>
+  </div>
+  <div class="sns-login"><div class="top"><span>Or</span></div><div class="btn-box"><a class="button" href="#"><i class="icon"></i><span>Google 계정으로 계속하기</span></a></div></div>
+</div></section></form></main>
+<footer data-ani>
+<div class="inner">
+  <div class="f-top fade-up">
+    <nav class="fnb"><ul><li><a href="about.html">ABOUT US</a></li><li><a href="offer.html">OFFER</a></li><li><a href="blog.html">BLOG</a></li><li><a href="#" data-modal="inquiryModal">CONTACT US</a></li></ul></nav>
+    <div class="right"><ul class="sns"><li><a class="insta" href="#" aria-label="인스타그램"></a></li><li><a class="blog" href="#" aria-label="블로그"></a></li><li><a class="youtube" href="#" aria-label="유튜브"></a></li><li><a class="chat" href="#" aria-label="채팅 상담"></a></li><li><a class="email" href="mailto:6gsmake@gmail.com" aria-label="이메일"></a></li></ul></div>
+  </div>
+  <div class="f-mid">
+    <div class="top fade-up"><ul class="terms"><li><a href="#" data-modal="terms">이용약관</a></li><li><a href="#" data-modal="privacy">개인정보처리방침</a></li></ul><p class="copyright">© 2026 서울바우 웨딩 컨시어지. All Rights Reserved.</p></div>
+    <p class="f-info fade-up">웨딩 촬영 / 로컬 촬영 / 한복 / 주얼리 / 스파 /<br class="br-pc"> 헤어·메이크업 / K-POP / 맞춤 정장 /<br class="br-mo"> 숙소와 그 밖의 모든 것.<br><br>여행과 웨딩 30년, 하루짜리 촬영부터<br class="br-mo"> 한 주 일정까지 한 사람이 끝까지 챙깁니다.</p>
+    <p class="f-biz fade-up">민트클 · 대표 이진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 010-4894-4905 · 6gsmake@gmail.com</p>
+  </div>
+  <div class="f-btm"><span class="fade-up">S</span><span class="fade-up">E</span><span class="fade-up">O</span><span class="fade-up">U</span><span class="fade-up">L</span><span class="fade-up dot">·</span><span class="fade-up">V</span><span class="fade-up">O</span><span class="fade-up">W</span></div>
+</div>
+</footer>
+</div>
+<div id="cursor"></div>
+<div class="float-btn"><a href="#" data-modal="inquiryModal">채팅 상담</a></div>
+<div class="layer-modal" id="inquiryModal">
+<div class="modal-wrap"><a class="close-btn" href="#">닫기</a>
+<div class="modal-cont"><div class="inquiryForm"><form action="#" onsubmit="return false" data-touched="0"><div class="step-layout">
+  <div class="step-box on"><div class="inwrap">
+    <div class="step-com"><div class="index-menu">
+      <div class="top"><div class="state"><span>DIRECT INQUIRY</span></div><div class="tit">Begin your Seoul journey with 서울바우</div><p>남겨 주신 내용을 보고 담당자가 직접 연락드립니다.</p></div>
+      <div class="indi"><span class="dot active"></span><span class="dot"></span></div>
+    </div></div>
+    <div class="step-cont">
+      <div class="item-box"><div class="grid-box grid2">
+        <div class="form-box required"><div class="tit no-dot"><em>이름</em></div><div class="input-box"><input type="text" name="name" placeholder="이름"></div><p class="error">이름을 입력해 주세요.</p></div>
+        <div class="form-box required"><div class="tit no-dot"><em>국가 / 도시</em></div><div class="input-box"><input type="text" name="country" placeholder="예: 대한민국 서울"></div><p class="error">국가를 입력해 주세요.</p></div>
+      </div></div>
+      <div class="item-box"><div class="grid-box grid2">
+        <div class="form-box required"><div class="tit no-dot"><em>이메일</em></div><div class="input-box"><input type="email" name="email" placeholder="your@email.com"></div><p class="error">이메일을 입력해 주세요.</p></div>
+        <div class="form-box required"><div class="tit no-dot"><em>연락처 (카카오톡 ID 가능)</em></div><div class="input-box"><input type="text" name="phone" placeholder="카카오톡 ID 또는 010-0000-0000"></div><p class="error">연락처를 입력해 주세요.</p></div>
+      </div></div>
+      <div class="item-box"><div class="tit req no-dot"><em>관심 있는 서비스</em></div><div class="form-box required grid-box grid3"><label class="label-box"><input type="checkbox" name="cat" value="Pre-Wedding">Pre-Wedding</label><label class="label-box"><input type="checkbox" name="cat" value="Seoul & Jeju Photography">Seoul &amp; Jeju Photography</label><label class="label-box"><input type="checkbox" name="cat" value="Dress Tour">Dress Tour</label><label class="label-box"><input type="checkbox" name="cat" value="Hanbok, Jewelry and Tailoring">Hanbok, Jewelry and Tailoring</label><label class="label-box"><input type="checkbox" name="cat" value="K-Beauty">K-Beauty</label><label class="label-box"><input type="checkbox" name="cat" value="K-Pop">K-Pop</label></div></div>
+      <div class="item-box"><div class="tit no-dot">추가 요청 사항</div><div class="form-box"><textarea name="notes" placeholder="원하시는 일정, 예산, 인원, 그 밖의 요청을 적어 주세요."></textarea></div></div>
+      <div class="item-box"><div class="form-box required"><label class="agree"><input type="checkbox" name="agree" value="1">개인정보 수집·이용에 동의합니다.</label><p class="error">개인정보 수집·이용에 동의해 주셔야 접수됩니다.</p></div>
+        <div class="form-box"><p class="info">바로 이야기하고 싶으시면 채팅 상담을 눌러 주세요. 보통 한 시간 안에 답합니다.</p></div></div>
+      <div class="item-box"><div class="btm"><div class="util"><button type="button" class="prev hide">이전</button><button type="button" class="next disabled">보내기</button></div><div class="sns-box"><a class="app" href="#" aria-label="채팅 상담"></a><a class="mail" href="mailto:6gsmake@gmail.com" aria-label="이메일"></a></div></div></div>
+    </div>
+  </div></div>
+  <div class="step-box"><div class="step-complete"><div class="inbox"><div class="img-box"><img src="./assets/ic/check-big.svg" alt=""></div><div class="tit">상담 신청이 접수되었습니다</div><p>24시간 안에 연락드리겠습니다.</p></div></div></div>
+</div></form></div></div></div></div>
+<div class="layer-modal ty3" id="terms"><div class="modal-wrap"><div class="modal-cont"><div class="modal-head"><div class="tit">이용약관</div><a class="close-btn" href="#">닫기</a></div><div class="scroll-box"><div class="text-item"><div class="sub-tit">1. 회사 정보</div><div class="table-box"><table><tr><th>상호</th><td>민트클 (서울바우 웨딩 컨시어지)</td></tr><tr><th>사업자등록번호</th><td>266-07-03678</td></tr><tr><th>통신판매업신고</th><td>제2026-서울강남-00480호</td></tr><tr><th>대표</th><td>이진수</td></tr><tr><th>연락처</th><td>010-4894-4905 · 6gsmake@gmail.com</td></tr></table></div></div><div class="text-item"><div class="sub-tit">2. 서비스의 성격과 책임 범위</div><p>서울바우는 스튜디오·드레스·헤어메이크업·한복·주얼리·스파·숙소 등 국내 제휴 업체의 서비스를 고객의 일정에 맞게 묶어 예약하고 현장을 안내하는 컨시어지 서비스입니다. 각 서비스의 제공 주체는 해당 제휴 업체이며, 서울바우는 예약·통역·일정 관리·현장 동행을 책임집니다.</p></div><div class="text-item"><div class="sub-tit">3. 예약과 상담 절차</div><p>상담 신청 → 일정·예산 확인 → 최종 견적 안내 → 결제 → 예약 확정(바우처 발송) → 촬영·체험 진행의 순서로 진행됩니다. 견적서에 적힌 내용이 계약 내용이 됩니다.</p></div><div class="text-item"><div class="sub-tit">4. 요금과 결제</div><p>요금은 견적서 기준이며 원화로 안내합니다. 결제는 계좌이체 또는 카드 결제로 하실 수 있고, 예약 확정은 결제 확인 뒤에 이루어집니다. 옵션 추가는 현장에서 별도로 정산될 수 있습니다.</p></div><div class="text-item"><div class="sub-tit">5. 취소와 환불</div><div class="table-box"><table><tr><th>촬영일 30일 전까지</th><td>전액 환불</td></tr><tr><th>촬영일 15일 전까지</th><td>50% 환불</td></tr><tr><th>촬영일 7일 전까지</th><td>30% 환불</td></tr><tr><th>7일 이내</th><td>환불 불가</td></tr></table></div><p>제휴 업체의 취소 규정이 더 엄격한 경우 그 규정을 따릅니다. 자세한 조건은 견적서에 함께 안내합니다.</p></div><div class="text-item"><div class="sub-tit">6. 일정 변경</div><p>촬영일 15일 전까지는 1회 무료로 일정을 바꿀 수 있습니다. 그 뒤의 변경은 제휴 업체의 가능 여부와 추가 비용에 따라 진행됩니다.</p></div><div class="text-item"><div class="sub-tit">7. 날씨와 야외 촬영</div><p>야외 촬영은 우천·폭염·태풍 등 기상 상황에 따라 실내 촬영으로 대체하거나 일정을 옮길 수 있습니다. 이 경우 추가 비용은 받지 않습니다.</p></div><div class="text-item"><div class="sub-tit">8. 사진 결과물과 전달 일정</div><p>원본은 촬영 뒤 약 2주, 보정본과 앨범은 셀렉 확정 뒤 약 3개월 안에 전달됩니다. 앨범·액자의 해외 배송은 고객이 직접 준비하며 서울바우가 규격과 방법을 안내합니다.</p></div><div class="text-item"><div class="sub-tit">9. 초상권과 홍보 활용</div><p>촬영 결과물을 서울바우의 홍보에 쓰려면 고객의 별도 서면 동의를 받습니다. 동의하지 않아도 서비스 이용에는 아무 불이익이 없습니다.</p></div><div class="text-item"><div class="sub-tit">10. 고객의 책임</div><p>예약 시간 준수, 정확한 정보 제공, 제휴 업체 규정 준수는 고객의 책임입니다. 고객 사정으로 지각·불참한 경우 발생하는 비용은 환불되지 않습니다.</p></div><div class="text-item"><div class="sub-tit">11. 책임의 제한</div><p>서울바우의 책임은 고객이 지불한 서비스 요금을 한도로 합니다. 천재지변·전염병·파업 등 불가항력으로 서비스가 이루어지지 못한 경우 일정 변경 또는 환불로 처리합니다.</p></div><div class="text-item"><div class="sub-tit">12. 분쟁 해결과 준거법</div><p>이 약관은 대한민국 법을 따르며, 분쟁은 먼저 상호 협의로 해결하고 협의가 되지 않으면 서울중앙지방법원을 관할 법원으로 합니다.</p></div><div class="text-item"><div class="sub-tit">13. 문의</div><p>약관에 관한 문의는 6gsmake@gmail.com 또는 010-4894-4905 로 연락해 주세요.</p></div></div></div></div></div>
+<div class="layer-modal ty3" id="privacy"><div class="modal-wrap"><div class="modal-cont"><div class="modal-head"><div class="tit">개인정보처리방침</div><a class="close-btn" href="#">닫기</a></div><div class="scroll-box"><div class="text-item"><div class="sub-tit">1. 개인정보 처리자</div><p>민트클(서울바우 웨딩 컨시어지, 대표 이진수)은 개인정보보호법에 따라 고객의 개인정보를 보호하고 아래와 같이 처리합니다.</p></div><div class="text-item"><div class="sub-tit">2. 수집하는 개인정보</div><div class="table-box"><table><tr><th>상담 신청</th><td>이름, 국가/도시, 이메일, 연락처(카카오톡 ID), 관심 서비스, 요청 사항</td></tr><tr><th>예약·결제</th><td>여권 성명(해외 고객), 결제 정보, 일정, 인원</td></tr><tr><th>자동 수집</th><td>접속 기록, 쿠키, 기기 정보</td></tr></table></div></div><div class="text-item"><div class="sub-tit">3. 수집 방법</div><p>홈페이지 상담 폼, 이메일, 채팅 상담, 전화, 예약 과정에서 고객이 직접 입력한 정보를 수집합니다.</p></div><div class="text-item"><div class="sub-tit">4. 이용 목적</div><p>상담 답변, 견적 안내, 예약과 결제 처리, 제휴 업체 예약 전달, 촬영 결과물 전달, 고객 문의 응대, 서비스 개선을 위해 씁니다.</p></div><div class="text-item"><div class="sub-tit">5. 제3자 제공</div><p>예약 이행에 필요한 범위에서 스튜디오·드레스숍·헤어메이크업·한복·주얼리·스파·숙소 등 제휴 업체에 이름·연락처·일정을 전달합니다. 그 밖의 제공은 고객의 동의를 받습니다.</p></div><div class="text-item"><div class="sub-tit">6. 처리 위탁</div><div class="table-box"><table><tr><th>수탁자</th><td>위탁 업무</td></tr><tr><td>결제대행사</td><td>카드·계좌 결제 처리</td></tr><tr><td>이메일·메시지 발송 서비스</td><td>안내 메일·메시지 발송</td></tr><tr><td>홈페이지 호스팅</td><td>서버 운영·보관</td></tr></table></div></div><div class="text-item"><div class="sub-tit">7. 국외 이전</div><p>해외 고객의 경우 이메일·채팅 서비스의 서버가 국외에 있을 수 있습니다. 이전되는 항목은 이름·이메일·연락처·상담 내용이며, 서비스 제공 목적으로만 씁니다.</p></div><div class="text-item"><div class="sub-tit">8. 쿠키</div><p>홈페이지 이용 상태를 기억하고 방문 통계를 내기 위해 쿠키를 씁니다. 브라우저 설정에서 쿠키를 거부할 수 있으며, 그 경우 일부 기능이 제한될 수 있습니다.</p></div><div class="text-item"><div class="sub-tit">9. 보유 기간</div><p>상담 정보는 상담 종료 뒤 1년, 계약·결제 기록은 전자상거래법에 따라 5년 보관한 뒤 지체 없이 파기합니다.</p></div><div class="text-item"><div class="sub-tit">10. 고객의 권리</div><p>고객은 언제든 자신의 개인정보를 열람·정정·삭제·처리정지 요구할 수 있습니다. 6gsmake@gmail.com 으로 요청하시면 10일 안에 처리합니다.</p></div><div class="text-item"><div class="sub-tit">11. 아동</div><p>만 14세 미만 아동의 개인정보는 법정대리인의 동의를 받아 처리합니다.</p></div><div class="text-item"><div class="sub-tit">12. 방침의 변경</div><p>이 방침이 바뀌면 홈페이지에 7일 전에 알립니다. 시행일 2026년 9월 15일.</p></div><div class="text-item"><div class="sub-tit">13. 개인정보 보호책임자</div><p>이진수 · 010-4894-4905 · 6gsmake@gmail.com</p></div></div></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+</body>
+</html>
