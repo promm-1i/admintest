@@ -1,0 +1,137 @@
+"""ESG 경영(m51) 소스 생성 — PC 는 원형 도식, 1399 이하는 도식 이미지 + 목록(원본 m_conwrap)."""
+from pathlib import Path
+HERE = Path(__file__).parent / "pages"
+PB = '<span class="pcbr"></span>'
+ITEMS = [
+    ("01", "능동적인<br>환경경영", "능동적인 환경경영", "환경을 기업이 성공하기 위한 핵심 요소로 보고, 사람과 환경, 사회가 어우러지도록 환경을 지키며 사람의 가치를 존중하고 사회적·경제적 이해관계자로서 기업의 책임을 다합니다. 능동적인 환경경영으로 기업 가치를 만들어 갑니다."),
+    ("02", "지속 가능한<br>에너지", "지속 가능한 에너지", "제품의 개발부터 생산, 판매, 사용, 폐기에 이르는 모든 과정에서 자원과 에너지를 지속 가능하게 쓰고 오염 물질을 줄이려 노력합니다."),
+    ("03", "환경경영 활동<br>적극 지원", "환경경영 활동 적극 지원", "모든 직원에게 환경 교육을 하고 협력사의 환경경영을 적극 지원하며 사회 공헌 활동에도 최선을 다합니다."),
+    ("04", "법규와<br>협약을 준수", "법규와 협약을 준수", "국내외 환경 법규와 협약을 지키고 환경경영을 꾸준히 개선하며, 그 성과를 회사 안팎에 투명하게 공개합니다."),
+]
+SLG = f"누빛광학㈜은 {PB}ESG 영역 3대 지향점을 먼저 세우고 {PB}차근차근 실천해 나가겠습니다."
+LEAD = f"누빛광학㈜은 환경에 주는 영향을 줄이고 사회적 책임을 다하며, 협력사와 함께 성장하는 길을 찾고 {PB}이 모든 과정을 투명한 경영으로 공개하는 회사를 만들기 위해 {PB}ESG 세 가지 방향을 정하고 단계적으로 실천해 나가겠습니다."
+POLICY = f"사람과 환경, 사회가 어우러지도록 환경을 지키고 {PB}사람의 가치를 존중하며, 사회적·경제적 이해관계자로서 {PB}기업의 사회적 책임을 다합니다."
+
+li = "".join(f'<li><div class="tit"><div><div>{n}</div><div>{t}</div></div></div><div class="txt">{x}</div></li>' for n, t, _, x in ITEMS)
+mt = "".join(f'<div class="txt"><div class="num">{n}</div><div class="tit">{t2}</div><p>{x}</p></div>' for n, _, t2, x in ITEMS)
+
+CSS = """
+.m51 .sec1{padding:0 0 200px;background:url(./assets/p/m51-bg-l.jpg) no-repeat center;background-size:100% auto}
+.m51 .sec1 .slg{position:relative;width:92%;height:620px;margin:100px auto 120px;border-radius:30px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:0 20px}
+.m51 .sec1 .slg .bg{position:absolute;left:0;top:0;width:100%;height:100%;background:url(./assets/p/m51-slg.jpg) no-repeat center bottom/cover}
+.m51 .sec1 .slg .bg+div{position:relative;z-index:10;font-size:48px;color:#fff;text-align:center;font-weight:600;line-height:1.4em}
+.m51 .sec1 h4{font-size:39px;color:#000;font-weight:600}
+.m51 .sec1 .innerwrap>p{margin-bottom:180px;font-size:17px;color:#555;line-height:1.7em}
+.m51 .sec1 .conwrap{display:flex;align-items:center;margin:70px 0 0}
+.m51 .sec1 .conwrap .imgarea{overflow:hidden;width:50%;border-radius:30px}
+.m51 .sec1 .conwrap .imgarea img{display:block;width:100%}
+.m51 .sec1 .conwrap .txtarea{width:50%;padding:0 90px;font-size:17px;color:#555;line-height:1.7em}
+.m51 .sec2{padding:190px 0 200px}
+.m51 .sec2 h4{font-size:39px;color:#000;font-weight:600}
+.m51 .sec2 .conwrap{position:relative;margin:100px 0 0;padding:180px 0}
+.m51 .sec2 .conwrap .circle{position:relative}
+.m51 .sec2 .conwrap .circle h5{position:relative;display:flex;align-items:center;justify-content:center;width:366px;height:366px;margin:0 auto;background:#f5f5f5;border-radius:50%;font-size:35px;color:#000;font-weight:600;text-align:center}
+.m51 .sec2 .conwrap .circle .line1,.m51 .sec2 .conwrap .circle .line2{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:50%}
+.m51 .sec2 .conwrap .circle .line1{width:496px;height:496px;border:1px solid #ddd}
+.m51 .sec2 .conwrap .circle .line2{width:650px;height:650px;border:1px dashed #ccc}
+.m51 .sec2 .conwrap ul li{display:flex;align-items:center;justify-content:space-between;position:absolute;width:500px;height:250px}
+.m51 .sec2 .conwrap ul li:nth-child(1){top:-30px;left:10px;flex-direction:row-reverse}
+.m51 .sec2 .conwrap ul li:nth-child(2){top:-30px;right:10px}
+.m51 .sec2 .conwrap ul li:nth-child(3){bottom:-30px;left:10px;flex-direction:row-reverse}
+.m51 .sec2 .conwrap ul li:nth-child(4){bottom:-30px;right:10px}
+.m51 .sec2 .conwrap ul li .tit{display:flex;align-items:center;justify-content:center;position:relative;width:210px;height:210px;border-radius:50%;text-align:center}
+.m51 .sec2 .conwrap ul li:nth-child(1) .tit{background:#6a4cf0}
+.m51 .sec2 .conwrap ul li:nth-child(2) .tit{background:#8b73f4}
+.m51 .sec2 .conwrap ul li:nth-child(3) .tit{background:#4b33c9}
+.m51 .sec2 .conwrap ul li:nth-child(4) .tit{background:#1d1450}
+.m51 .sec2 .conwrap ul li:after{display:block;content:"";width:7px;height:7px;border:3px solid #fff;border-radius:50%;position:absolute;box-sizing:content-box}
+.m51 .sec2 .conwrap ul li:nth-child(1):after{right:32px;bottom:32px;background:#4b33c9}
+.m51 .sec2 .conwrap ul li:nth-child(2):after{left:32px;bottom:32px;background:#a594f7}
+.m51 .sec2 .conwrap ul li:nth-child(3):after{right:32px;top:32px;background:#6a4cf0}
+.m51 .sec2 .conwrap ul li:nth-child(4):after{left:32px;top:32px;background:#8b73f4}
+.m51 .sec2 .conwrap ul li .tit>div>div:nth-child(1){font-size:16px;color:rgba(255,255,255,.5);font-weight:500}
+.m51 .sec2 .conwrap ul li .tit>div>div:nth-child(2){font-size:23px;color:#fff;font-weight:600}
+.m51 .sec2 .conwrap ul li .txt{width:calc(100% - 210px);font-size:19px;color:#555;line-height:1.5em}
+.m51 .sec2 .conwrap ul li:nth-child(1) .txt,.m51 .sec2 .conwrap ul li:nth-child(3) .txt{padding-right:20px;text-align:right}
+.m51 .sec2 .conwrap ul li:nth-child(2) .txt,.m51 .sec2 .conwrap ul li:nth-child(4) .txt{padding-left:20px}
+.m51 .sec2 .m_conwrap{display:none}
+.m51 .sec3{padding:190px 0;background:#f6f6f6}
+.m51 .sec3 h4{font-size:39px;color:#000;font-weight:600}
+.m51 .sec3 ul{display:flex;flex-wrap:wrap;justify-content:space-between;margin:80px 0 0}
+.btnMore .viewMore{display:flex;justify-content:center;align-items:center;width:190px;height:66px;margin:40px auto 0;padding:0 25px;border:1px solid #d1d1d1;border-radius:10px;font-size:15px;color:#2c2c2c;font-weight:500;cursor:pointer}
+.btnMore .viewMore i{width:9px;height:6px;margin-left:10px;background:url(./assets/icon-arr1.svg) no-repeat}
+@media(max-width:1399px){
+  .m51 .sec1{background-size:cover}
+  .m51 .sec2 h4{font-size:37px}
+  .m51 .sec2 .m_conwrap{display:block;margin-top:50px}
+  .m51 .sec2 .m_conwrap .img img{display:inline-block}
+  .m51 .sec2 .m_conwrap .txt_con{margin-top:50px}
+  .m51 .sec2 .m_conwrap .txt_con .txt+.txt{margin-top:30px}
+  .m51 .sec2 .m_conwrap .txt_con .txt .num{font-family:Poppins,sans-serif;font-size:22px;font-weight:600;color:#999}
+  .m51 .sec2 .m_conwrap .txt_con .txt .tit{font-size:25px;font-weight:700;color:#000;margin:10px 0 15px}
+  .m51 .sec2 .m_conwrap .txt_con .txt p{font-size:17px;line-height:1.7em;color:#555}
+}
+@media(max-width:812px){
+  .m51 .sec1{padding:0 0 120px}
+  .m51 .sec1 .slg{height:450px}
+  .m51 .sec1 .slg .bg+div{font-size:37px}
+  .m51 .sec1 h4,.m51 .sec2 h4,.m51 .sec3 h4{font-size:28px}
+  .m51 .sec1 .conwrap{display:block}
+  .m51 .sec1 .conwrap .imgarea{width:100%;border-radius:0}
+  .m51 .sec1 .conwrap .imgarea img{border-radius:30px}
+  .m51 .sec1 .conwrap .txtarea{width:100%;margin-top:30px;padding:0;font-size:16px}
+  .m51 .sec2{padding:120px 0}
+  .m51 .sec2 .m_conwrap .txt_con .txt .num{font-size:17px}
+  .m51 .sec2 .m_conwrap .txt_con .txt .tit{font-size:22px}
+  .m51 .sec2 .m_conwrap .txt_con .txt p{font-size:16px}
+  .m51 .sec3{padding:120px 0}
+}
+"""
+
+src = f"""<!--
+title: ESG경영정책
+pn: 5
+h2: ESG
+sub: 사람과 환경을 생각하는 지속가능경영
+h3: ESG경영정책
+lead: 사람과 환경, 사회가 어우러지도록 환경을 지키며 사람의 가치를 존중하고,<br> 사회적·경제적 이해관계자로서 기업의 사회적 책임을 다합니다.
+loc: HOME|ESG|ESG경영정책
+cls: m51
+-->
+<style>{CSS}</style>
+<div class="sec1">
+  <div class="slg"><div class="bg"></div><div class="fadeUp rv">{SLG}</div></div>
+  <div class="innerwrap">
+    <p class="fadeUp rv">{LEAD}</p>
+    <h4>ESG 경영정책</h4>
+    <div class="conwrap">
+      <div class="imgarea fadeLeft rv"><img src="./assets/p/m51-1.jpg" alt="" width="640" height="407"></div>
+      <div class="txtarea fadeRight rv">{POLICY}</div>
+    </div>
+  </div>
+</div>
+<div class="sec2">
+  <div class="innerwrap">
+    <h4>ESG 경영방침</h4>
+    <div class="conwrap fadeUp rv pcbr">
+      <div class="circle"><h5>ESG 경영방침</h5><div class="line1"></div><div class="line2"></div></div>
+      <ul>{li}</ul>
+    </div>
+    <div class="m_conwrap">
+      <div class="img" style="text-align:center;"><img src="./assets/p/m51-dia-m.svg" alt="ESG 경영방침 네 가지" width="642" height="779"></div>
+      <div class="txt_con">{mt}</div>
+    </div>
+  </div>
+</div>
+<div class="sec3">
+  <div class="innerwrap">
+    <h4>정책 및 가이드라인</h4>
+    <div class="conwrap">
+      <ul></ul>
+      <div class="btnMore"><a class="viewMore"><span>더보기(<span class="view">0</span>/<span class="total">0</span>)</span> <i></i></a></div>
+    </div>
+  </div>
+</div>
+"""
+(HERE / "esg.html").write_text(src, encoding="utf-8")
+print("wrote esg")
