@@ -649,6 +649,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "corporate-f-template",
+    industry: "건설 · 개발 기업 홈페이지",
+    title: "종합 건설·개발 기업 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 기업 · 건설 · 개발",
+    purpose:
+      "사진이 아래에서 위로 걷히며 열리는 첫 화면, 스크롤에 따라 사진과 문장이 넘어가는 회사 소개, 카드가 차례로 열리는 사업 분야 장면, 실적 슬라이드 위로 품질·안전 장면이 덮이는 메인에 CEO 인사말 · 연혁 · 사업 개요 · 주거 개발 · 회사 소식 · 채용 안내 여섯 쪽을 더한 7쪽 기업 홈페이지입니다. 휠을 내리면 표지가 화면을 덮거나 원칙 판이 한 장씩 올라오는 장면으로 회사의 무게감을 보여 줍니다.",
+    features: ["사진이 걷히며 열리는 첫 화면 · 스크롤 장면 3개", "CEO 표지 · 원칙 4장이 올라오는 사업 개요", "연혁 시대 탭 · 따라오는 시대 머리 · 진행 점", "회사 소식 검색 · 채용 절차 · FAQ"],
+    idealFor: "건설사, 시행 · 개발사, 엔지니어링 · 시설관리 회사, 사업 분야와 실적을 보여줘야 하는 중견 · 중소기업",
+    image: "/thumbs/corporate-f.jpg",
+    liveUrl: "/templates/corporate-f/",
+    industryKey: "corporate",
+    premiumLabel: "기업 A",
+    designCode: "CORP-1001",
+    premium: true,
+  },
+  {
     slug: "shop-a-template",
     industry: "쇼핑몰 · 라이프스타일 스토어 홈페이지",
     title: "라이프스타일 쇼핑몰 홈페이지 (프리미엄 디자인 A)",
@@ -4949,6 +4966,12 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     label: "쇼핑몰 · 브랜드",
     desc: "상품을 진열하고 장바구니 · 구매로 잇는 구성",
     industryKeys: ["shop", "perfume"],
+  },
+  {
+    key: "corporate",
+    label: "기업 · 중소기업",
+    desc: "회사 소개와 사업 분야 · 실적을 보여주고 문의 · 채용으로 잇는 구성",
+    industryKeys: ["corporate"],
   },
   {
     key: "portfolio",

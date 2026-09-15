@@ -72,7 +72,7 @@ with sync_playwright() as p:
             for y in range(0, H, 600): pg.evaluate(f'window.scrollTo(0,{y})'); pg.wait_for_timeout(120)
             pg.evaluate('window.scrollTo(0,0)'); pg.wait_for_timeout(1800)
             ov=pg.evaluate("document.documentElement.scrollWidth>document.documentElement.clientWidth")
-            broken=pg.evaluate("[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.getAttribute('src'))")
+            broken=pg.evaluate("[...document.images].filter(i=>i.complete?i.naturalWidth===0:i.loading!=='lazy').map(i=>i.getAttribute('src'))")   # 가로 슬라이더 끝의 lazy 사진은 아직 안 불렀을 뿐이라 깨짐으로 안 센다
             docH=pg.evaluate("document.documentElement.scrollHeight")
             print(f'  {folder} @{w}: 가로스크롤={ov} 깨진이미지={len(broken)} 높이={docH} 콘솔에러={len(errs)}')
             if errs: print('    ', errs[:3])
