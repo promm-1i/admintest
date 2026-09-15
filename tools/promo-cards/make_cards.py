@@ -255,7 +255,7 @@ def kmong_main_square(code: str, accent: str, hook: tuple[str, str], subline: st
     return page(f"""
 <div style="position:relative;width:{m}px;height:{m}px;overflow:hidden;background:{LIGHT_BG};color:#1a1714">
   <div style="position:absolute;left:40px;top:40px;right:40px">
-    <p class="mono" style="font-size:11px;color:{accent}">PREMIUM DESIGN · {esc(code)}</p>
+    <p style="font-size:13px;font-weight:700;color:{accent}">프리미엄 디자인 {esc(code)}</p>
     <h1 style="margin-top:12px;font-size:38px;font-weight:800;letter-spacing:-.045em;line-height:1.18"><span style="color:{accent}">{esc(hook[0])}</span><br>{esc(hook[1])}</h1>
     <p style="margin-top:10px;font-size:13px;font-weight:600;color:#6b645d">{esc(subline)}</p>
     <div style="margin-top:14px;display:flex;gap:6px;flex-wrap:wrap">{chip}</div>
@@ -271,24 +271,24 @@ def kmong_main_square(code: str, accent: str, hook: tuple[str, str], subline: st
 def process_card(code: str, brand_c: str, n: int, total: int) -> str:
     """크몽 마지막 장 — 진행 과정. 가격 · 연락처 없이."""
     steps = [
-        ("상담", "업종과 꼭 필요한 기능, 참고하실 디자인을 여쭙니다."),
-        ("자료 전달", "로고 · 문구 · 원하시는 사진 분위기를 받습니다."),
-        ("제작", "브랜드 색 · 메뉴 · 섹션 구성을 사업에 맞춰 다시 잡고, 사진을 새로 만들어 채웁니다."),
-        ("검수 · 수정", "PC와 휴대폰에서 함께 보며 고칩니다."),
-        ("오픈", "도메인을 연결하고 관리자 모드 사용법을 안내합니다."),
+        ("상담", "어떤 일을 하시는지, 꼭 필요한 기능이 뭔지 여쭤봐요."),
+        ("자료 받기", "로고와 소개 문구, 원하는 사진 느낌을 받아요."),
+        ("제작", "색과 메뉴를 회사에 맞게 바꾸고 사진을 새로 만들어 넣어요."),
+        ("확인 · 수정", "PC와 휴대폰으로 같이 보면서 고쳐요."),
+        ("오픈", "주소를 연결하고 관리자 화면 쓰는 법을 알려드려요."),
     ]
     rows = "".join(
         f"""<li style="display:grid;grid-template-columns:90px 1fr;gap:10px;padding:26px 0;border-top:1px solid rgba(0,0,0,.1)">
 <span class="mono" style="font-size:22px;padding-top:8px;color:{brand_c}">{i + 1:02d}</span>
-<div><p style="font-size:36px;font-weight:800;letter-spacing:-.03em">{t}</p><p style="margin-top:8px;font-size:23px;line-height:1.55;color:#5e5750">{d}</p></div></li>"""
+<div><p style="font-size:40px;font-weight:800;letter-spacing:-.03em">{t}</p><p style="margin-top:8px;font-size:30px;line-height:1.5;color:#5e5750">{d}</p></div></li>"""
         for i, (t, d) in enumerate(steps)
     )
     return page(f"""
 <div class="card" style="background:{LIGHT_BG};color:#1a1714">
-  <p class="mono" style="color:{brand_c}">PROCESS</p>
-  <h2 style="margin-top:22px;font-size:66px;font-weight:800;letter-spacing:-.035em;line-height:1.2">자료를 받은 뒤<br>영업일 10일 이내 완성</h2>
+  <p style="font-size:28px;font-weight:700;color:{brand_c}">진행 순서</p>
+  <h2 style="margin-top:22px;font-size:66px;font-weight:800;letter-spacing:-.035em;line-height:1.25">자료를 받고<br>영업일 10일 안에 완성해요</h2>
   <ol style="margin-top:44px;list-style:none">{rows}</ol>
-  <p style="position:absolute;left:80px;bottom:118px;font-size:19px;color:#8a837b">화면 속 브랜드명 · 사진 · 내용은 디자인 예시입니다.</p>
+  <p style="position:absolute;left:80px;bottom:118px;font-size:19px;color:#8a837b">화면 속 회사 이름 · 사진 · 내용은 예시예요.</p>
   {foot(code, n, total, '#1a1714')}
 </div>""")
 
