@@ -45,7 +45,8 @@ export default function SampleDetail() {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   // 사례 소개 본문이 있는 프리미엄 디자인은 그 파일만 따로 불러와 사례형으로 그린다.
-  const caseSlug = slug && hasCaseStudy(slug) ? slug : null;
+  // 사례 소개형 상세는 프리미엄 디자인만 — 기본형·랜딩형으로 옮긴 디자인은 사례 파일이 남아 있어도 템플릿 상세로 연다
+  const caseSlug = slug && sample?.premium && hasCaseStudy(slug) ? slug : null;
   const [loadedCase, setLoadedCase] = useState<{ slug: string; study: CaseStudy } | null>(null);
   useEffect(() => {
     if (!caseSlug) return;

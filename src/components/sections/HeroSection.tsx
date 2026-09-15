@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
  * - prefers-reduced-motion 사용자는 정적 아치를 본다
  */
 
-/** 프리미엄 디자인 우선 + 최신 템플릿으로 채운 12개 (업종 중복 없음) — samples.ts 의 premium 플래그가 단일 출처 */
+/** 프리미엄 디자인만으로 채운 12자리 (모자라면 반복) — samples.ts 의 premium 플래그가 단일 출처 */
 const HERO_ITEMS = getHeroDesigns(12).map((d) => ({
   src: d.sample.image!,
   label: d.label,
