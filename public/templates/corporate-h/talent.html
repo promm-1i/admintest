@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>인재상 — 하이온셀</title>
+<meta name="description" content="하이온셀이 찾는 인재.">
+<meta property="og:title" content="인재상 — 하이온셀">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/sub.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 인재상 — ref career-talent (PC 2631 · 모바일 2345)
+   소개 24/36 위 40 · 카드 넷 704×248 테두리 4 #E1E7EA r16 48/64 · 제목 24/38 600 + 영문 20/32 강조 · 설명 18/28.8 #555758 · 그림 130
+   띠 140 r16 49/120/49/60 · 28 흰 · 버튼 둘 420×88 */
+.tl-intro{padding-top:40px;font-size:24px;line-height:36px}
+.tl-intro strong{font-weight:600}
+.tl-cards{display:grid;grid-template-columns:704px 704px;justify-content:space-between;row-gap:33px;padding-bottom:120px}
+.tl-cards>div{display:flex;justify-content:space-between;align-items:center;height:248px;padding:48px 64px;border:4px solid var(--l4);border-radius:16px;background:#fff}
+.tl-cards .tx{width:398px}
+.tl-cards .tt{font-size:24px;line-height:38px;font-weight:600}
+.tl-cards .tt span{margin-left:10px;font-size:20px;line-height:32px;color:var(--pri)}
+.tl-cards .ds{margin-top:20px;font-size:18px;line-height:28.8px;color:var(--ink2)}
+.tl-cards img{width:130px;height:130px}
+.tl-band{display:flex;justify-content:space-between;align-items:center;height:140px;padding:49px 120px 49px 60px;border-radius:16px;background:linear-gradient(100deg,#2B3A8F 0%,#4F6DF5 55%,#8B5CF6 100%);color:#fff}
+.tl-band p{font-size:28px;font-weight:400}
+.tl-band p strong{font-weight:600}
+.tl-band a{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:600}
+.tl-band a::after{content:"";width:36px;height:36px;border-radius:100%;background:#fff url(./assets/ic/arrow-k.svg) no-repeat center/18px}
+.tl-btns{margin-top:80px}
+@media (max-width:1279px){
+  .tl-1{padding:32px 0 100px}
+  .tl-1 .h1{font-size:30px}
+  .tl-intro{padding-top:16px;font-size:18px;line-height:28px}
+  .tl-cards{grid-template-columns:1fr;row-gap:16px;padding-bottom:32px}
+  .tl-cards>div{position:relative;display:block;height:auto;min-height:250px;padding:24px;border-width:1px;border-color:var(--l3);border-radius:8px}
+  .tl-cards .tx{width:211px}
+  .tl-cards .tt{font-size:20px;line-height:30px;font-weight:700}
+  .tl-cards .tt span{margin-left:4px;font-size:16px;line-height:25.6px;font-weight:600}
+  .tl-cards .ds{margin-top:8px;font-size:14px;line-height:21px}
+  .tl-cards img{position:absolute;right:24px;bottom:24px;width:112px;height:112px}
+  .tl-band{display:block;height:184px;padding:24px}
+  .tl-band p{font-size:18px;line-height:28px}
+  .tl-band p strong{display:block;font-size:20px}
+  .tl-band a{margin-top:40px;font-size:16px}
+  .tl-btns{margin-top:32px}
+}
+
+.btn-go{display:inline-flex;align-items:center;justify-content:space-between;gap:24px;width:420px;height:88px;padding:20px 40px;border:1px solid #171818;border-radius:8px;background:#fff;font-size:22px;line-height:32px;font-weight:600;transition:all .2s}
+.btn-go i{flex:none;width:48px;height:48px;border-radius:100%;background:#171818 url(./assets/ic/arrow-w.svg) no-repeat center/22px}
+.btn-go:hover{background:#171818;color:#fff}
+.btn-go:hover i{background-color:#fff;background-image:url(./assets/ic/arrow-k.svg)}
+.btn-row{display:flex;justify-content:center;gap:20px}
+@media (max-width:1279px){
+  .btn-row{flex-direction:column;gap:8px}
+  .btn-go{width:100%;height:66px;padding:14px 24px;font-size:18px;line-height:25.2px}
+  .btn-go i{width:36px;height:36px;background-size:18px}
+}
+
+</style>
+</head>
+<body class="sub talent">
+<header class="hd">
+  <div class="hd-in">
+    <div class="hd-cont">
+      <h1 class="ci"><a href="./index.html"><img src="./assets/ic/ci.svg" alt="하이온셀"></a></h1>
+      <nav class="gnb pc"><ul><li class="d1"><button type="button">제품</button><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><button type="button">회사정보</button><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><button type="button">인재채용</button><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+      <div class="navp mo">
+        <nav><ul><li class="d1"><a href="solution.html">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a></li><li class="d2"><a href="cylindrical.html">폼팩터</a></li><li class="d2"><a href="material.html">소재</a></li></ul></li><li class="d1"><a href="about.html">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="talent.html">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li></ul></nav>
+        <ul class="navp-util">
+          <li><a href="./download.html"><img src="./assets/ic/nav-down.svg" alt=""><p>다운로드</p></a></li>
+          <li><a href="./inquiry.html"><img src="./assets/ic/nav-inq.svg" alt=""><p>문의하기</p></a></li>
+          <li><a href="./faq.html"><img src="./assets/ic/nav-faq.svg" alt=""><p><strong>FAQ</strong></p></a></li>
+        </ul>
+      </div>
+      <div class="util">
+        <div class="cs pc">
+          <button type="button">고객지원</button>
+          <div class="cs-pop"><div class="pw"><a href="./download.html">다운로드</a><a href="./inquiry.html">문의하기</a><a href="./faq.html">FAQ</a><button type="button" class="x" aria-label="닫기"></button></div></div>
+        </div>
+        <div class="lang" data-sel>
+          <button type="button" aria-haspopup="listbox"><img src="./assets/ic/globe.svg" alt="언어 선택"><i></i></button>
+          <ul role="listbox"><li><a href="#" class="active">KR</a></li><li><a href="#">EN</a></li><li><a href="#">CN</a></li><li><a href="#">JP</a></li></ul>
+        </div>
+        <button type="button" class="srch-btn" aria-label="검색"></button>
+        <button type="button" class="nav-btn" aria-label="메뉴 열기"><i class="x"><span class="xl"></span><span class="xl"></span></i><span class="ln"></span><span class="ln"></span><span class="ln"></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="srch"><form action="./faq.html" onsubmit="return false"><button type="button" class="go" aria-label="검색"></button><input type="text" placeholder="검색어를 입력해 주세요."></form></div>
+<div class="smap pc">
+  <div class="pw">
+    <div class="smap-hd"><a href="./index.html"><img src="./assets/ic/ci-w.svg" alt="하이온셀"></a></div>
+    <ul class="smap-area"><li class="d1"><a href="#" onclick="return false">제품</a><ul><li class="d2"><a href="solution.html">산업별 솔루션</a><ul><li class="d3"><a href="solution.html">전기차</a></li><li class="d3"><a href="solution.html">ESS</a></li><li class="d3"><a href="solution.html">전동공구</a></li><li class="d3"><a href="solution.html">모빌리티</a></li></ul></li><li class="d2"><a href="cylindrical.html">폼팩터</a><ul><li class="d3"><a href="cylindrical.html">원통형</a></li><li class="d3"><a href="cylindrical.html">파우치형</a></li></ul></li><li class="d2"><a href="material.html">소재</a><ul><li class="d3"><a href="material.html">NCM</a></li><li class="d3"><a href="material.html">LFP</a></li></ul></li></ul></li><li class="d1"><a href="#" onclick="return false">회사정보</a><ul><li class="d2"><a href="about.html">회사소개</a><ul><li class="d3"><a href="about.html">회사개요</a></li><li class="d3"><a href="vision.html">비전</a></li><li class="d3"><a href="history.html">연혁</a></li><li class="d3"><a href="ci.html">CI</a></li></ul></li><li class="d2"><a href="network.html">사업장</a></li><li class="d2"><a href="newsroom.html">뉴스룸</a></li></ul></li><li class="d1"><a href="#" onclick="return false">인재채용</a><ul><li class="d2"><a href="talent.html">인재상</a></li><li class="d2"><a href="recruit.html">채용정보</a></li></ul></li><li class="d1"><a href="#" onclick="return false">고객지원</a><ul><li class="d2"><a href="download.html">다운로드</a></li><li class="d2"><a href="inquiry.html">문의하기</a></li><li class="d2"><a href="faq.html">FAQ</a></li></ul></li></ul>
+    <button type="button" class="close" aria-label="닫기"></button>
+  </div>
+</div>
+<main id="container" class="sub">
+<div class="sv"><div class="vis"><img src="./assets/sv-career.jpg" alt=""></div><div class="sv-txt"><p>하이온셀의 기술로 일상 곳곳에 필요한 에너지를 채울 수 있도록<br><strong>성장, 도전, 실행, 협업의 힘을 갖춘 성취 지향적</strong>인 인재를 기다립니다.</p></div></div>
+<div class="pmap"><div class="sw"><div class="sc" data-sel><button type="button" aria-haspopup="listbox">인재채용</button><ul role="listbox"><li><a href="solution.html">제품</a></li><li><a href="about.html">회사정보</a></li><li><a href="talent.html" class="active">인재채용</a></li><li><a href="download.html">고객지원</a></li></ul></div><div class="sc" data-sel><button type="button" aria-haspopup="listbox">인재상</button><ul role="listbox"><li><a href="talent.html" class="active">인재상</a></li><li><a href="recruit.html">채용정보</a></li></ul></div></div></div>
+<section class="item tl-1"><div class="cw">
+  <h2 class="h1">인재상</h2>
+  <p class="tl-intro">하이온셀의 기술로 일상 곳곳에 필요한 에너지를 채울 수 있도록 인재들이 함께 만들어 가는<br class="p"><strong>성장, 도전, 실행, 협업의 힘을 갖춘 성취 지향적인 인재</strong></p>
+  <div class="sect">
+    <div class="tl-cards"><div><div class="tx"><p class="tt">성장<span>Growth</span></p><p class="ds">성장할 수 있는 기회를 스스로 찾고<br>해야 할 일을 먼저 챙기는 사람</p></div><img src="./assets/ic/talent-1.svg" alt=""></div><div><div class="tx"><p class="tt">도전<span>Challenge</span></p><p class="ds">높은 목표를 세우고, 익숙한 방식에 머물기보다 새로운 방법으로 끝까지 해내는 사람</p></div><img src="./assets/ic/talent-2.svg" alt=""></div><div><div class="tx"><p class="tt">실행<span>Action</span></p><p class="ds">하기로 한 일은 빠르게 실행하고, 시작한 일은 끝까지 마무리하는 사람</p></div><img src="./assets/ic/talent-3.svg" alt=""></div><div><div class="tx"><p class="tt">협업<span>Collaboration</span></p><p class="ds">공동의 목표를 먼저 생각하고 경험과 배경이 다른 동료의 의견을 존중하는 사람</p></div><img src="./assets/ic/talent-4.svg" alt=""></div></div>
+    <div class="tl-band"><p>하이온셀의 일하는 방식을 <strong>실천하는 사람</strong></p><a href="./vision.html">일하는 방식 알아보기</a></div>
+    <div class="btn-row tl-btns"><a class="btn-go" href="./recruit.html"><span>채용절차 바로가기</span><i></i></a><a class="btn-go" href="./recruit.html#faq"><span>채용 FAQ 바로가기</span><i></i></a></div>
+  </div>
+</div></section>
+</main>
+<footer class="ft">
+  <div class="ft-area">
+    <div>
+      <ul class="ft-map">
+        <li><a href="./privacy.html">개인정보처리방침</a></li>
+        <li><a href="./privacy.html#video">영상정보처리기기 운영·관리 방침</a></li>
+        <li><a href="#" class="n" data-modal="#mailBlock">이메일무단수집거부</a></li>
+        <li><a href="./inquiry.html" class="n">윤리경영 제보</a></li>
+        <li><a href="./inquiry.html" class="n">협력사 문의</a></li>
+        <li><a href="./faq.html" class="n">안전가이드</a></li>
+      </ul>
+    </div>
+    <div class="ft-r">
+      <div class="fsel" data-sel>
+        <button type="button" aria-haspopup="listbox">관련사이트</button>
+        <ul role="listbox">
+          <li><p class="cat">패밀리사이트</p></li>
+          <li><a href="./newsroom.html">하이온셀 기술 블로그</a></li>
+          <li><a href="./solution.html">ESS 사업 안내</a></li>
+          <li><p class="cat">비즈니스</p></li>
+          <li><a href="./download.html">협력사 자료실</a></li>
+          <li><a href="./inquiry.html">구매 문의 창구</a></li>
+        </ul>
+      </div>
+      <div class="ft-info">
+        <p>대표 민트클 · <a href="tel:01048944905">010-4894-4905</a></p>
+        <address>사업자등록번호 266-07-03678</address>
+        <p><a href="mailto:6gsmake@gmail.com">6gsmake@gmail.com</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="ft-bot">
+    <div class="l">
+      <div class="flogo-w">
+        <a class="flogo" href="./index.html">©HIONCELL Corporation</a>
+        <div class="badge"><img src="./assets/ic/badge.svg" alt="안전 우선 생산 원칙"></div>
+      </div>
+      <ul class="sns">
+        <li><a href="#" aria-label="facebook"><img src="./assets/ic/sns-facebook.svg" alt=""></a></li>
+        <li><a href="#" aria-label="linkedin"><img src="./assets/ic/sns-linkedin.svg" alt=""></a></li>
+        <li><a href="#" aria-label="instagram"><img src="./assets/ic/sns-instagram.svg" alt=""></a></li>
+        <li><a href="#" aria-label="youtube"><img src="./assets/ic/sns-youtube.svg" alt=""></a></li>
+        <li><a href="#" aria-label="blog"><img src="./assets/ic/sns-blog.svg" alt=""></a></li>
+      </ul>
+    </div>
+    <div class="r"><a href="./inquiry.html"><img src="./assets/ic/newsletter.svg" alt="뉴스레터 구독하기"></a></div>
+  </div>
+</footer>
+<button type="button" class="top-fab" aria-label="맨 위로"><img src="./assets/ic/top.svg" alt=""></button>
+<div class="modal" id="mailBlock" role="dialog" aria-modal="true" aria-labelledby="mailBlockT">
+  <div class="pw">
+    <h3 id="mailBlockT">이메일 무단 수집 거부</h3>
+    <div class="mail-ic"></div>
+    <p class="desc">본 홈페이지에 게시된 이메일 주소가 자동 수집되는 것을<br>거부하며, 이를 위반하면 정보통신망법에 따라 처벌받을 수<br>있음을 알려 드립니다.</p>
+    <div class="lk"><strong>불법 스팸 대응 센터</strong>국번 없이 118</div>
+    <button type="button" class="ok">확인</button>
+    <button type="button" class="x" aria-label="닫기"></button>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script src="./assets/sub.js"></script>
+</body>
+</html>
