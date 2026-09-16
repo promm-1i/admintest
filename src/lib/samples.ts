@@ -5478,9 +5478,15 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
   },
   {
     key: "corporate",
-    label: "기업 · 중소기업",
+    label: "기업",
     desc: "회사 소개와 사업 분야 · 실적을 보여주고 문의 · 채용으로 잇는 구성",
     industryKeys: ["corporate"],
+  },
+  {
+    key: "wedding",
+    label: "예식 · 웨딩",
+    desc: "예식장과 연회 공간을 보여주고 상담 예약을 받는 구성",
+    industryKeys: ["wedding"],
   },
   {
     key: "portfolio",
