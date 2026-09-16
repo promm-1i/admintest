@@ -3,8 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>누리웰 — 건강기능식품 기업 홈페이지 (프리미엄 디자인 F) — 누리웰</title>
+<title>누리웰 — 건강기능식품 기업 홈페이지 (프리미엄 디자인 F)</title>
 <meta name="description" content="생애주기와 라이프스타일에 맞춘 뉴트리션 솔루션을 제공하는 헬스케어 컴퍼니 누리웰">
+<meta property="og:title" content="누리웰 — 건강기능식품 기업 홈페이지 (프리미엄 디자인 F)">
+<meta property="og:image" content="./og.jpg">
 <link rel="icon" href="./favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -357,7 +359,7 @@ s7.querySelectorAll('.inner_card').forEach(function(c){c.addEventListener('click
 function closePop(){NW.start();pop.classList.remove('show');rl.classList.remove('stop')}
 pop.querySelector('.dim').addEventListener('click',closePop);pop.querySelector('.close').addEventListener('click',closePop);
 /* 영상: 파일이 있으면 붙임 */
-[['.sec01 video','./assets/hero.mp4'],['.sec07 video','./assets/support.mp4']].forEach(function(p){var v=document.querySelector(p[0]);fetch(p[1],{method:'HEAD'}).then(function(r){if(r.ok){v.src=p[1];v.play().catch(function(){})}}).catch(function(){})});
+[['.sec01 video','./assets/hero.mp4'],['.sec07 video','./assets/support.mp4']].forEach(function(p){var v=document.querySelector(p[0]);if(location.protocol.indexOf('http'))return;fetch(p[1],{method:'HEAD'}).then(function(r){if(r.ok){v.src=p[1];v.play().catch(function(){})}}).catch(function(){})});
 })();
 </script></body>
 </html>

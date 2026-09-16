@@ -1060,6 +1060,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "corporate-k-template",
+    industry: "식품 · 헬스케어 기업 홈페이지",
+    title: "건강식품·헬스케어 기업 홈페이지 (프리미엄 디자인 F)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 기업 · 식품 · 헬스케어",
+    purpose:
+      "영상 위 물결 마스크가 걷히며 슬로건이 드러나는 첫 장면, 스크롤하면 원형 사진이 줄어들며 브랜드 슬라이더와 제품 사진 기둥이 흐르는 긴 고정 장면, 호버로 배경이 바뀌는 R&D 2칸, 사회공헌 슬라이더, 뉴스 3칸, SNS 4칸, 굴러가는 FAQ 카드로 이어지는 메인에 회사소개·연혁·CI·가치체계·사회공헌·사업장 위치·브랜드 소개·밸런스케어 4종·건강기능식품·R&D센터·R&D 성과·뉴스(목록·상세)·공지사항(목록·상세)·FAQ·맞춤 제품 추천·개인정보처리방침 서브페이지를 갖춘 건강식품 기업 홈페이지입니다.",
+    features: ["물결 마스크가 걷히는 첫 장면 · 원형 사진이 줄어드는 긴 고정 장면 · 굴러가는 FAQ 카드", "맨 위 사진판이 화면 가득 커지는 서브 공통 장면 · 숫자가 굴러가는 브랜드 소개 · 배경색이 바뀌는 아코디언", "브랜드별 원형 클립 장면 4종 · 특허 슬라이더 · 인증 현황 · 지도 사업장 위치", "단계별 맞춤 제품 추천 · 카드형 뉴스 · 날짜형 공지 · FAQ 탭 · 서브 21쪽"],
+    idealFor: "건강기능식품·환자식·영양식 제조사, 식품 R&D 기업, 여러 브랜드를 한 사이트에 소개해야 하는 중소 식품기업",
+    image: "/thumbs/corporate-k.jpg",
+    liveUrl: "/templates/corporate-k/",
+    industryKey: "corporate",
+    premiumLabel: "기업 F",
+    designCode: "CORP-1006",
+    premium: true,
+  },
+  {
     slug: "corporate-j-template",
     industry: "제조 · 공작기계 기업 홈페이지",
     title: "공작기계 제조기업 홈페이지 (프리미엄 디자인 D)",
