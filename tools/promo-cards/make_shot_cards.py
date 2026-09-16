@@ -73,6 +73,10 @@ SPECS: dict[str, dict] = {
             ("주거 개발", "대표 단지는 크게,\n전체 실적은 사진 목록으로 보여줘요", ["pc-residential-06@0,0,1440,780", "pc-residential-08@50,40,1200,460"]),
         ],
     },
+    "corporate-i": {"code": "CORP-1004", "brand": "누빛광학", "industry": "정밀 광학기업", "accent": "rgb(106,76,240)", "slug": "corporate-i-template", "pages": ["index"], "mobile_pages": [], "extras": []},
+    "corporate-j": {"code": "CORP-1005", "brand": "세온기계", "industry": "공작기계 제조기업", "accent": "rgb(0,60,120)", "slug": "corporate-j-template", "pages": ["index", "overview", "history", "business", "lineup", "list", "detail", "software", "automation", "as", "network", "news", "recruit"], "mobile_pages": [], "extras": []},
+    "corporate-k": {"code": "CORP-1006", "brand": "누리웰", "industry": "건강기능식품 기업", "accent": "rgb(0,120,80)", "slug": "corporate-k-template", "pages": ["index"], "mobile_pages": [], "extras": []},
+    "wedding-a": {"code": "WEDP-1001", "brand": "서울바우", "industry": "웨딩 컨시어지", "accent": "rgb(120,90,60)", "slug": "wedding-a-template", "pages": ["index"], "mobile_pages": [], "extras": []},
     "corporate-h": {  # 메인 휠 프레임만 찍는다 (make_page_shots 의 index_frames 용)
         "code": "CORP-1003", "brand": "하이온셀", "industry": "배터리 제조기업", "accent": "rgb(0,80,180)", "slug": "corporate-h-template",
         "pages": ["index"], "mobile_pages": [], "extras": [],
