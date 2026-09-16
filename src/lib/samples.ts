@@ -5280,9 +5280,35 @@ export const SAMPLES: Sample[] = [
  * 포함한다(기본형은 디자인이 같아 카드가 중복돼 보이므로 /templates에서만 노출).
  * 새 템플릿을 SAMPLES에 추가하면 포트폴리오·메인 슬라이더에 자동 반영된다.
  */
+/**
+ * 실사이트 모델링(프리미엄) 최신순. 제작 사례 목록과 위쪽 슬라이드가 이 순서로 시작하므로
+ * 새 프리미엄을 등록하면 슬러그를 맨 앞에 넣는다. 여기 없는 프리미엄은 그 뒤, 나머지는 SAMPLES 순서.
+ */
+const PREMIUM_RECENT_ORDER = [
+  "corporate-k-template",
+  "corporate-j-template",
+  "corporate-i-template",
+  "wedding-a-template",
+  "corporate-h-template",
+  "corporate-g-template",
+  "corporate-f-template",
+  "estate-g-template",
+  "estate-f-template",
+  "rentcar-g-template",
+  "rentcar-f-template",
+  "artist-a-template",
+];
+
 export const PORTFOLIO_SAMPLES: Sample[] = SAMPLES.filter(
   (s) => !s.industryKey || s.type?.includes("landing-template") || s.type?.includes("premium-template"),
-);
+).sort((a, b) => {
+  const rank = (s: Sample) => {
+    const i = PREMIUM_RECENT_ORDER.indexOf(s.slug);
+    if (i >= 0) return i;
+    return s.premium ? PREMIUM_RECENT_ORDER.length : PREMIUM_RECENT_ORDER.length + 1;
+  };
+  return rank(a) - rank(b); // 같은 순위끼리는 원래 순서 유지(안정 정렬)
+});
 
 /**
  * 메인페이지 PORTFOLIO 섹션에 고정 노출하는 업종별 대표 사례 6건.
