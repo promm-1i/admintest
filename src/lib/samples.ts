@@ -5500,14 +5500,15 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
 export function getPremiumCategories() {
   const items = getPremiumDesigns();
   const assigned = new Set(PREMIUM_CATEGORIES.flatMap((c) => c.industryKeys));
-  // 카테고리와 그 안의 시안 모두 가나다순 (기업 → 렌터카 → 부동산 → 작가, 부동산 A → B)
+  // 카테고리는 가나다순 (기업 → 렌터카 → 부동산 → 작가), 안의 시안은 최신 것(디자인 코드 번호가 큰 것)이 앞
+  const codeNo = (d: { sample: Sample }) => Number(d.sample.designCode?.match(/\d+$/)?.[0] ?? 0);
   const groups = PREMIUM_CATEGORIES.map((c) => ({
     key: c.key,
     label: c.label,
     desc: c.desc,
     items: items
       .filter((d) => d.sample.industryKey && c.industryKeys.includes(d.sample.industryKey))
-      .sort((x, y) => x.label.localeCompare(y.label, "ko")),
+      .sort((x, y) => codeNo(y) - codeNo(x)),
   }))
     .filter((g) => g.items.length > 0)
     .sort((x, y) => x.label.localeCompare(y.label, "ko"));
