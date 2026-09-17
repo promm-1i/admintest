@@ -810,6 +810,23 @@ export const SAMPLES: Sample[] = [
     designCode: "INTB-1006",
   },
   {
+    slug: "clinic-f-template",
+    industry: "피부미용 · 바디 컨투어링 의원 홈페이지",
+    title: "바디 컨투어링 의원 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 병원 · 의원 · 바디 컨투어링",
+    purpose:
+      "전면 사진 히어로와 세 칸 진료 철학으로 시작해, 크기가 다른 사진으로 이어지는 브랜드 스토리, 네 가지 진료 기준 카드, 화면에 고정된 채 전환되는 WAVE 30과 컨투어 주사 장면, 대표원장·시설·예약 안내로 이어지는 메인에 대표원장·시설·오시는 길·프로그램 2종·예약 안내·개인정보처리방침·이용약관·비급여 비용까지 서브 9쪽을 갖춘 프리미엄 의원 홈페이지입니다.",
+    features: ["화면 고정형 프로그램 2장면 · 사진 히어로 슬라이드", "브랜드 스토리 콜라주 · 진료 기준 카드", "프로그램별 프로토콜 · 시술 부위 · 추천 대상 · FAQ", "대표원장 · 시설 슬라이드 · 지도 · 예약 · 정책 포함 서브 9쪽"],
+    idealFor: "피부과·성형외과·비만클리닉, 체형관리와 바디 컨투어링에 집중하는 예약제 의원",
+    image: "/thumbs/clinic-f.jpg",
+    liveUrl: "/templates/clinic-f/",
+    industryKey: "hospital",
+    premiumLabel: "병원 A",
+    designCode: "HOSP-1001",
+    premium: true,
+  },
+  {
     slug: "artist-a-template",
     industry: "작가 · 아티스트 포트폴리오 홈페이지",
     title: "작가 · 아티스트 포트폴리오 홈페이지 (프리미엄 디자인 A)",
@@ -5302,6 +5319,7 @@ export const SAMPLES: Sample[] = [
  * 새 프리미엄을 등록하면 슬러그를 맨 앞에 넣는다. 여기 없는 프리미엄은 그 뒤, 나머지는 SAMPLES 순서.
  */
 const PREMIUM_RECENT_ORDER = [
+  "clinic-f-template",
   "corporate-k-template",
   "corporate-j-template",
   "corporate-i-template",
