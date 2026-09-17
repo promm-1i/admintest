@@ -1077,6 +1077,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "corporate-m-template",
+    industry: "산업설비 · 스마트 플로우 기업 홈페이지",
+    title: "스마트 산업설비 기업 홈페이지 (프리미엄 디자인 H)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 기업 · 산업설비 · 반도체 · 데이터센터",
+    purpose:
+      "큰 영문 선언문과 산업 영상으로 시작해 6개 솔루션 가로 슬라이더, 스크롤에 따라 추상 영상·문구가 다섯 단계로 교체되는 고정 비전 장면, 글로벌 네트워크와 실적 수치, 고객 후기·미디어·고객사 로고·채용 배너로 이어지며 회사소개·사업·홍보·고객지원·채용·약관까지 25개 서브페이지를 갖춘 스마트 산업설비 기업 홈페이지입니다.",
+    features: ["스크롤로 교체되는 500vh 비전·미션 5단계", "반도체·이차전지·데이터센터 등 사업영역 6개 상세 페이지", "회사소개 7쪽 · 미디어 · 고객지원 폼 · 채용 · 약관 포함", "글로벌 네트워크 · 고객 후기 · 반응형 모바일 메뉴"],
+    idealFor: "반도체·이차전지 유틸리티 기업, 클린룸·드라이룸 설비사, 데이터센터 냉각·산업 배관 엔지니어링 기업",
+    image: "/thumbs/corporate-m.jpg",
+    liveUrl: "/templates/corporate-m/",
+    industryKey: "corporate",
+    premiumLabel: "기업 H",
+    designCode: "CORP-1008",
+    premium: true,
+  },
+  {
     slug: "corporate-l-template",
     industry: "지주 · 생활기업 홈페이지",
     title: "글로벌 생활기업 홈페이지 (프리미엄 디자인 G)",
@@ -5320,6 +5337,7 @@ export const SAMPLES: Sample[] = [
  */
 const PREMIUM_RECENT_ORDER = [
   "clinic-f-template",
+  "corporate-m-template",
   "corporate-k-template",
   "corporate-j-template",
   "corporate-i-template",
