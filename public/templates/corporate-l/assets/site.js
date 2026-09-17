@@ -1,6 +1,7 @@
 
 (function(){
 var d=document,W=window,$=function(s,r){return (r||d).querySelector(s)},$$=function(s,r){return Array.prototype.slice.call((r||d).querySelectorAll(s))};
+function announce(message){var n=$('.demo-notice');if(!n){n=d.createElement('div');n.className='demo-notice';n.setAttribute('role','status');d.body.appendChild(n)}n.textContent=message;clearTimeout(announce.timer);announce.timer=setTimeout(function(){n.remove()},3200)}
 var header=$('.header'),dimmed=$('.header__dimmed'),two=$('.header__two-depth'),lastY=0,dark=header.classList.contains('header--dark-kv');
 function onScroll(){var y=W.scrollY;if(y>60){header.classList.add('is-white')}else if(!header.classList.contains('is-open')){header.classList.remove('is-white')}
  if(y>lastY&&y>200){header.classList.add('is-hidden')}else{header.classList.remove('is-hidden')}lastY=y;var b=$('.scroll-top-button');}
@@ -26,7 +27,12 @@ var kv=$('.sub-kv');if(kv)setTimeout(function(){kv.classList.add('is-in')},150);
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -12% 0px'});
 $$('[data-motion]').forEach(function(el){io.observe(el)});
 /* 탭 */
-$$('[data-tabs]').forEach(function(box){var items=$$('.tab-item',box),panes=$$('[data-pane]',box.parentNode);items.forEach(function(it,i){it.addEventListener('click',function(e){e.preventDefault();items.forEach(function(o){o.classList.remove('is-active')});it.classList.add('is-active');panes.forEach(function(p,j){p.style.display=(j===i)?'':'none'})})})});
+$$('[data-tabs]').forEach(function(box){var items=$$('.tab-item',box),panes=$$('[data-pane]',box.parentNode);items.forEach(function(it,i){it.addEventListener('click',function(e){e.preventDefault();items.forEach(function(o){o.classList.remove('is-active');o.setAttribute('aria-selected','false')});it.classList.add('is-active');it.setAttribute('aria-selected','true');panes.forEach(function(p,j){p.style.display=(j===i)?'':'none'})})})});
+$$('.search-bar').forEach(function(form){form.addEventListener('submit',function(e){e.preventDefault();var q=$('.search-bar__input',form).value.trim().toLowerCase(),scope=form.closest('.sub-content')||d,rows=$$('.board-row,.news-card',scope),count=0;rows.forEach(function(row){var show=!q||row.textContent.toLowerCase().indexOf(q)>-1;row.hidden=!show;if(show)count++});announce(q?'검색 결과 '+count+'건입니다.':'전체 목록을 표시합니다.')})});
+$$('[data-page]').forEach(function(btn){btn.addEventListener('click',function(){var wrap=btn.closest('.pagination');$$('.pagination__page-button',wrap).forEach(function(x){x.classList.remove('selected')});btn.parentNode.classList.add('selected');announce(btn.dataset.page+'페이지는 포트폴리오 데모 화면입니다.')})});
+$$('[data-demo-download]').forEach(function(btn){btn.addEventListener('click',function(){announce('포트폴리오 데모에서는 실제 파일을 제공하지 않습니다.')})});
+$$('[data-network-filter]').forEach(function(btn){btn.addEventListener('click',function(){var value=btn.dataset.networkFilter;$$('[data-network-filter]').forEach(function(x){x.classList.remove('button--active')});btn.classList.add('button--active');$$('.branch-card').forEach(function(card){card.hidden=value!=='전체'&&card.dataset.kind!==value})})});
+$$('[data-demo-message]').forEach(function(btn){btn.addEventListener('click',function(){var row=btn.closest('.filter-row');if(row)$$('[data-demo-message]',row).forEach(function(x){x.classList.remove('button--active')});btn.classList.add('button--active');announce(btn.dataset.demoMessage)})});
 /* 숫자 카운트 */
 $$('[data-count]').forEach(function(el){var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io2.disconnect();var to=parseFloat(el.dataset.count),dec=(el.dataset.count.split('.')[1]||'').length,t0=performance.now(),dur=1400;(function f(t){var p=Math.min(1,(t-t0)/dur),v=to*(1-Math.pow(1-p,3));el.textContent=v.toLocaleString('en-US',{minimumFractionDigits:dec,maximumFractionDigits:dec});if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.4});io2.observe(el)});
 W.L={io:io};
