@@ -1060,6 +1060,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "corporate-l-template",
+    industry: "지주 · 생활기업 홈페이지",
+    title: "글로벌 생활기업 홈페이지 (프리미엄 디자인 G)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 기업 · 지주 · 생활 · 헬스케어",
+    purpose:
+      "대형 브랜드 영상과 영문 슬로건으로 시작해, 스크롤하면 지구 사진이 화면을 채우고 글로벌 수치 카드가 지나가는 고정 장면, 숲 사진 위 지속가능경영 지표, 뉴스·투자정보·사업·채용으로 이어지는 메인에 회사소개·연혁·주요사업·글로벌 네트워크·IR·재무정보·공시(목록·상세)·ESG·윤리경영·뉴스(목록·상세)·인사제도·직무소개·채용가이드·고객문의·개인정보처리방침·사이트맵 서브페이지를 갖춘 글로벌 생활기업 홈페이지입니다.",
+    features: ["원형 지구가 화면을 채우며 글로벌 수치 카드가 지나가는 500vh 고정 장면", "숲 사진과 지속가능경영 문구가 전환되는 400vh 고정 장면 · 카운트 수치", "사업별 전체 사진과 유리 정보 카드 · 지도형 글로벌 네트워크 · 재무 차트와 표", "연혁 타임라인 · ESG 성과 · 뉴스와 공시 목록·상세 · 채용 · 서브 18쪽"],
+    idealFor: "여러 사업부를 운영하는 지주회사·생활기업, 글로벌 거점과 ESG·IR 정보를 함께 보여줘야 하는 중견기업",
+    image: "/thumbs/corporate-l.jpg",
+    liveUrl: "/templates/corporate-l/",
+    industryKey: "corporate",
+    premiumLabel: "기업 G",
+    designCode: "CORP-1007",
+    premium: true,
+  },
+  {
     slug: "corporate-k-template",
     industry: "식품 · 헬스케어 기업 홈페이지",
     title: "건강식품·헬스케어 기업 홈페이지 (프리미엄 디자인 F)",
