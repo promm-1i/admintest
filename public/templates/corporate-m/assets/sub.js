@@ -1,6 +1,11 @@
 const drawer=document.querySelector('.mobile-drawer');
-document.querySelector('.menu-button')?.addEventListener('click',()=>drawer?.classList.add('open'));
-document.querySelector('.drawer-close')?.addEventListener('click',()=>drawer?.classList.remove('open'));
+const menuButton=document.querySelector('.menu-button');
+const drawerClose=document.querySelector('.drawer-close');
+function setDrawer(open){drawer?.classList.toggle('open',open);drawer?.setAttribute('aria-hidden',String(!open));menuButton?.setAttribute('aria-expanded',String(open));document.body.style.overflow=open?'hidden':'';(open?drawerClose:menuButton)?.focus()}
+menuButton?.addEventListener('click',()=>setDrawer(true));
+drawerClose?.addEventListener('click',()=>setDrawer(false));
+drawer?.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>setDrawer(false)));
+addEventListener('keydown',event=>{if(event.key==='Escape'&&drawer?.classList.contains('open'))setDrawer(false)});
 function announce(message){
   let notice=document.querySelector('.demo-notice');
   if(!notice){notice=document.createElement('div');notice.className='demo-notice';notice.setAttribute('role','status');document.body.appendChild(notice)}
@@ -25,3 +30,9 @@ document.querySelectorAll('[data-media-search]').forEach(form=>form.addEventList
   const more=form.parentElement.querySelector('.load-more'); if(more)more.hidden=true;
   announce(query?`검색 결과 ${count}건입니다.`:'전체 목록을 표시합니다.');
 }));
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.documentElement.classList.add('motion-ready');
+  const reveal=[...document.querySelectorAll('.content>*,.statement>*,.business-copy,.business-section,.media-card,.job-row,.value,.benefit,.person,.plant')];
+  const revealObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');revealObserver.unobserve(entry.target)}}),{rootMargin:'0px 0px -10% 0px',threshold:.08});
+  reveal.forEach(element=>{element.classList.add('reveal-item');revealObserver.observe(element)});
+}

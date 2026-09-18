@@ -134,3 +134,110 @@ AI 데이터센터용 차세대 액체냉각 플랫폼을 뉴스 기사 대표 �
 3. 문자·로고·워터마크가 없는지 원본 크기로 확인한다.
 4. PC와 모바일에서 `object-fit: cover` 크롭 시 핵심 피사체가 유지되는지 확인한다.
 5. 파일명은 위 표기와 정확히 동일하게 저장한다.
+
+---
+
+# 사업 상세페이지 추가 이미지 12장
+
+## 추가 이미지 공통 조건
+
+- 출력 크기: 모두 `1600×1000px` (`16:10` 가로형)
+- 용도: `corporate-m` 데이터센터, 클린룸·드라이룸, 불소수지 코팅 상세페이지의 반복 이미지를 고유 이미지로 교체
+- 기존 `service-01.jpg`부터 `service-06.jpg`까지와 구도, 피사체, 카메라 거리를 중복하지 않는다.
+- 실제 한국 첨단 산업시설에서 촬영한 듯한 포토리얼리즘, 자연스러운 산업 조명, 기술적으로 설득력 있는 설비 연결 구조를 유지한다.
+- 중앙 70%에 핵심 설비를 배치해 데스크톱과 모바일 `object-fit: cover` 크롭에서 피사체가 잘리지 않게 한다.
+- 한 장 안에 여러 장면을 합치지 않는 단일 사진으로 제작한다.
+- 사진 안에 읽을 수 있는 문자, 숫자, 계기판 라벨, 간판, 브랜드, 로고, 워터마크를 넣지 않는다.
+- 제외: 일러스트, 3D 렌더, 비현실적 배관, 사이버펑크 네온, 과도한 HDR, 플라스틱 같은 금속, 불꽃, 누액, 과도한 서리, 왜곡된 손과 공구.
+
+## d01 · detail-datacenter-01.jpg · 액체냉각 분배 매니폴드
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 데이터센터 · 확장 가능한 액체냉각 인프라
+
+AI 데이터센터 서버 랙 한 줄의 후면에서 액체냉각 분배 매니폴드를 가로 구도로 촬영한 현실적인 산업 사진. 전면에는 스테인리스 공급·환수 헤더, 파란색 보온 배관, 규칙적으로 정렬된 퀵 디스커넥트 커플링과 차단 밸브가 선명하게 보이고, 배경에는 어두운 서버 랙이 깊은 원근감을 만든다. 실제 유지보수가 가능한 간격과 배관 지지구조, 누수 없는 깨끗한 바닥, 차가운 백색 조명과 절제된 딥블루 포인트. 사람은 넣지 않는다. photorealistic mission-critical data center cooling manifold, technically plausible plumbing, editorial industrial photography, no readable labels, no text, no logo, no watermark.
+
+## d02 · detail-datacenter-02.jpg · CDU 펌프 스키드
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 데이터센터 · 설계·시공·시운전 통합 관리
+
+현대적인 데이터센터 기계실의 CDU 냉각수 분배 장치와 이중 펌프 스키드를 약간 낮은 3분의 2 시점에서 촬영한 사진. 프레임 안에는 판형 열교환기, 병렬 펌프, 스테인리스 배관, 유량계와 압력계, 격리 밸브가 논리적인 순서로 연결되어 있다. 전면 장치는 또렷하고 뒤쪽 배관은 자연스럽게 흐려지며, 장비 사이의 점검 통로와 배수 구조가 실제 시설처럼 설득력 있다. 실버와 차콜, 옅은 블루그레이 중심의 정돈된 분위기. photorealistic coolant distribution unit, realistic mechanical room, no screen graphics, no readable numbers, no text, no logo, no watermark.
+
+## d03 · detail-dryroom-01.jpg · 로터 제습 공조 설비
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 클린룸·드라이룸 · 정밀한 온·습도 제어
+
+이차전지 드라이룸을 위한 대형 로터 제습 공조기와 덕트 시스템을 가로형으로 촬영한 현실적인 설비 사진. 중앙에는 제습 로터 하우징과 필터 섹션, 양쪽에는 단열 덕트와 스테인리스 유틸리티 배관이 정돈되어 연결되고, 전면 점검 공간과 안전 난간이 확보되어 있다. 밝은 기계실 조명, 회백색 패널과 실버 금속, 약한 청색 포인트, 실제 유지보수 현장에서 볼 수 있는 자연스러운 사용감. 사람은 넣지 않는다. photorealistic industrial desiccant dehumidification system, technically accurate HVAC installation, no labels, no text, no logo, no watermark.
+
+## d04 · detail-dryroom-02.jpg · 에어록과 차압 제어 구역
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 클린룸·드라이룸 · 오염원을 줄이는 공간 계획
+
+첨단 제조 드라이룸의 에어록과 자재 반입 구역을 정면 대칭 구도로 촬영한 사진. 서로 연결된 두 개의 밀폐 자동문, 패스박스, 천장의 HEPA 필터와 선형 조명, 벽면의 작은 차압 센서, 이음새가 최소화된 바닥이 보인다. 문과 통로의 배치는 사람과 자재 동선을 분리할 수 있도록 현실적이며, 공간은 밝지만 과도하게 하얗게 날리지 않는다. 인물과 운반물은 넣지 않고 청정한 공기감과 정밀한 시공 품질을 강조한다. photorealistic clean dry-room airlock, realistic pressure-control zone, no signage, no readable display, no text, no logo, no watermark.
+
+## d05 · detail-fluoro-01.jpg · 금속 표면 전처리
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 불소수지 코팅 · 설비 조건에 맞춘 전처리와 코팅
+
+불소수지 코팅 전 금속 플랜지와 짧은 배관 스풀의 표면을 정밀 전처리하는 장면. 밀폐된 산업용 블라스팅 부스 안에서 무지 보호장갑을 낀 작업자의 손과 노즐 일부만 보이고, 중앙 부품 표면에는 균일한 무광 질감이 형성되어 있다. 마스킹된 나사산과 체결면, 먼지를 회수하는 설비가 실제 공정처럼 표현되며 불꽃이나 과도한 분진은 없다. 차콜과 실버 중심의 산업 다큐멘터리 사진, close technical view, no distorted hands, no text, no logo, no watermark.
+
+## d06 · detail-fluoro-02.jpg · 정전 분체 도포
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 불소수지 코팅 · 일관된 전처리·도포·경화 공정
+
+환기되는 전문 코팅 부스에서 대형 배관 엘보의 내부와 가장자리에 불소수지 분체를 균일하게 도포하는 순간을 촬영한 사진. 작업자는 화면 가장자리에 일부만 보이고 무지 보호복과 장갑을 착용한다. 정전 스프레이건과 접지된 금속 치구, 얇고 균일하게 쌓이는 짙은 청회색 코팅층이 기술적으로 설득력 있게 표현된다. 분말이 구름처럼 과도하게 날리지 않고 부스 바닥과 환기구는 깨끗하다. photorealistic electrostatic fluoropolymer powder coating process, no readable controls, no text, no logo, no watermark.
+
+## d07 · detail-fluoro-03.jpg · 산업용 경화 오븐
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 불소수지 코팅 · 일관된 전처리·도포·경화 공정
+
+불소수지 코팅 부품을 경화하는 대형 산업용 열처리 오븐의 내부를 문이 열린 상태에서 촬영한 가로 사진. 내열 랙 위에 크기가 다른 배관 스풀과 플랜지가 서로 닿지 않게 정렬되어 있고, 표면에는 균일한 짙은 청회색 도막이 보인다. 오븐 내부 조명은 따뜻하지만 붉은 불꽃이나 과장된 열기는 없으며, 외부 작업장은 차갑고 깨끗한 금속 톤이다. realistic industrial curing oven and coated pipe parts, natural material texture, no gauges with readable numbers, no text, no logo, no watermark.
+
+## d08 · detail-fluoro-04.jpg · PFA 라이닝 배관 단면
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 불소수지 코팅 · 사용환경에 맞는 수지 선정
+
+화학 공정용 대구경 스테인리스 배관과 엘보의 절단 단면을 작업대 위에서 촬영한 프리미엄 제품 사진. 외부 금속과 내부의 매끄러운 밝은 회백색 PFA 라이닝 경계가 선명하고, 플랜지 안쪽까지 라이닝이 연속적으로 이어진 구조가 현실적으로 보인다. 서로 다른 각도의 부품 두 개만 배치하고 배경은 실제 코팅 작업장을 얕은 심도로 흐린다. 부식이나 오염 없이 정밀한 재질과 두께 차이를 강조한다. photorealistic PFA-lined chemical pipe cross section, technically plausible flange detail, no text, no logo, no watermark.
+
+## d09 · detail-fluoro-05.jpg · 도막 두께 검사
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 불소수지 코팅 · 품질검사로 확인하는 내구성
+
+검사 작업대에서 휴대용 도막 두께 측정기의 프로브를 코팅된 금속 플랜지 표면에 수직으로 대는 장면을 가까이 촬영한다. 무지 니트릴 장갑을 낀 손, 매끄러운 짙은 청회색 도막, 정밀 가공된 플랜지 가장자리와 검사 치구가 선명하다. 측정기 화면은 카메라 반대 방향이거나 흐려서 글자와 숫자를 읽을 수 없게 하고, 배경에는 검사 대기 부품이 자연스럽게 흐린다. photorealistic coating thickness inspection, accurate hand and tool geometry, no readable display, no text, no logo, no watermark.
+
+## d10 · detail-fluoro-06.jpg · 핀홀 전기 검사
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 불소수지 코팅 · 품질검사로 확인하는 내구성
+
+불소수지 라이닝 탱크의 내부 곡면을 저전압 핀홀 검사 프로브로 점검하는 산업 품질검사 장면. 화면 중앙에는 균일하게 코팅된 매끄러운 회청색 표면과 가느다란 검사 브러시가 보이고, 보호장갑을 낀 손은 한쪽 가장자리에 자연스럽게 배치한다. 검사 장치는 실제 휴대형 장비처럼 보이지만 화면이나 라벨은 읽히지 않으며, 스파크와 손상 표현은 넣지 않는다. realistic holiday detection inspection for fluoropolymer lining, controlled industrial lighting, no readable numbers, no text, no logo, no watermark.
+
+## d11 · detail-fluoro-07.jpg · 코팅 펌프 임펠러와 밸브 부품
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 불소수지 코팅 · 설비 수명과 유지관리 효율 향상
+
+화학 공정용 펌프 임펠러, 밸브 디스크, 작은 매니폴드 부품에 불소수지 코팅을 완료한 제품군을 스테인리스 검사대 위에 정갈하게 배치한 사진. 각 부품은 서로 다른 형상이지만 동일한 짙은 청회색 코팅 마감과 균일한 표면을 가지며, 체결면과 축 연결부는 정확히 마스킹되어 금속이 드러난다. 부품 수는 네 개 이하로 제한하고 상업 카탈로그보다 실제 출하 검사 현장 같은 분위기를 만든다. photorealistic coated industrial components, no packaging label, no text, no logo, no watermark.
+
+## d12 · detail-fluoro-08.jpg · 완성 배관 스풀 출하 검사
+
+- 출력 크기: `1600×1000px`
+- 적용 섹션: 불소수지 코팅 · 설비 수명과 유지관리 효율 향상
+
+코팅과 검사를 마친 대형 배관 스풀과 엘보 여러 개가 출하 전 검사 구역의 전용 받침대에 정렬된 모습을 넓은 가로 구도로 촬영한다. 외부는 깨끗한 스테인리스, 플랜지 안쪽과 배관 내부에는 균일한 불소수지 라이닝이 보이고, 보호 캡은 무지 단색으로 표현한다. 부품 사이에 충분한 간격이 있고 천장 크레인과 작업 통로가 배경에 자연스럽게 보이지만 사람은 없다. premium photorealistic industrial finishing inspection, technically realistic pipe spool geometry, no tags, no text, no logo, no watermark.
+
+## 추가 12장 생성·검수 체크
+
+1. `d01`부터 `d12`까지 각각 독립된 한 장으로 생성한다.
+2. 파일명과 출력 크기 `1600×1000px`를 정확히 유지한다.
+3. 기존 18장과 장면·카메라 각도·핵심 피사체가 중복되지 않는지 확인한다.
+4. 문자, 숫자, 상표, 로고, 워터마크, 비현실적인 설비 연결이 없는지 원본 크기로 확인한다.
+5. 생성 완료 후 상세페이지 HTML의 반복 이미지 12개 위치만 위 파일로 교체한다. 기존 `photo-map-corporate-m.txt`는 기존 18장 자동화 대응표이므로 수정하지 않는다.

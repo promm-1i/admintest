@@ -14,7 +14,7 @@ function updateVision(){
   if(next !== active){
     active = next;
     pages.forEach((page,i)=>page.classList.toggle('active',i===active));
-    bars.forEach((bar,i)=>bar.classList.toggle('on',i===active));
+    bars.forEach((bar,i)=>bar.classList.toggle('on',i<=active));
     pages.forEach((page,i)=>{ const video=$('video',page); if(!video)return; i===active?video.play().catch(()=>{}):video.pause(); });
   }
   header.classList.toggle('hide', scrollY > 40);
@@ -37,8 +37,10 @@ const toggle=$('.menu-toggle'), mobileMenu=$('.mobile-menu');
 toggle?.addEventListener('click',()=>{
   const open=mobileMenu.classList.toggle('open');
   toggle.setAttribute('aria-expanded',String(open));
+  document.body.style.overflow=open?'hidden':'';
 });
-$$('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.remove('open')));
+$$('.mobile-menu a').forEach(a=>a.addEventListener('click',()=>{mobileMenu.classList.remove('open');document.body.style.overflow=''}));
+addEventListener('keydown',event=>{if(event.key==='Escape'&&mobileMenu.classList.contains('open')){mobileMenu.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.body.style.overflow='';toggle.focus()}});
 
 const observer = new IntersectionObserver(entries=>entries.forEach(entry=>{
   if(entry.isIntersecting){entry.target.classList.add('on');observer.unobserve(entry.target)}
