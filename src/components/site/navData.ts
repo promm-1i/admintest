@@ -272,7 +272,7 @@ export const HEADER_NAV: NavEntry[] = [
   {
     type: "dropdown",
     key: "build",
-    label: "홈페이지 제작",
+    label: "브랜드 스토리",
     items: [
       { label: "제작 방법", href: "/website/process" },
       { label: "제작 비용", href: "/website/price" },
@@ -283,7 +283,7 @@ export const HEADER_NAV: NavEntry[] = [
   {
     type: "dropdown",
     key: "custom-service",
-    label: "맞춤형 서비스",
+    label: "기술력",
     items: [
       { label: "커스텀 개발이란?", href: "/services/custom" },
       { label: "솔루션 · 데모 체험", href: "/web-solutions" },
@@ -299,7 +299,20 @@ export const HEADER_NAV: NavEntry[] = [
   {
     type: "dropdown",
     key: "templates",
-    label: "홈페이지 템플릿",
+    label: "업종별 제작",
+    items: [
+      { label: "렌트카 맞춤형", href: "/web-solutions/rentcar" },
+      { label: "부동산 맞춤형", href: "/web-solutions/real-estate" },
+      { label: "병원 · 의원 맞춤형", href: "/web-solutions/hospital" },
+      { label: "학원 맞춤형", href: "/web-solutions/academy" },
+      { label: "인테리어 맞춤형", href: "/web-solutions/interior" },
+      { label: "이사 · 청소 맞춤형", href: "/web-solutions/moving" },
+    ],
+  },
+  {
+    type: "dropdown",
+    key: "template-designs",
+    label: "템플릿",
     items: [
       {
         label: "프리미엄 디자인",

@@ -1,0 +1,18 @@
+
+(()=>{
+  const btn=document.querySelector('.menu'),mob=document.querySelector('.mobile');
+  if(btn&&mob){btn.addEventListener('click',()=>{const o=mob.classList.toggle('open');btn.setAttribute('aria-expanded',String(o));document.body.style.overflow=o?'hidden':''});document.addEventListener('keydown',e=>{if(e.key==='Escape'){mob.classList.remove('open');btn.setAttribute('aria-expanded','false');document.body.style.overflow=''}})}
+  const s=[...document.querySelectorAll('.hero-slide')],d=[...document.querySelectorAll('.hero-dot')];let n=0,t;
+  function show(i){if(!s.length)return;n=(i+s.length)%s.length;s.forEach((x,j)=>x.classList.toggle('on',j===n));d.forEach((x,j)=>x.classList.toggle('on',j===n))}
+  d.forEach((x,i)=>x.onclick=()=>{show(i);clearInterval(t);t=setInterval(()=>show(n+1),5000)});if(s.length>1)t=setInterval(()=>show(n+1),5000);
+  const els=[...document.querySelectorAll('.reveal,.story-row,.tech-cards>a,.product-card,.exhibition-grid>a,.o-company-sisters article,.o-history-line article,.o-product-cards>a')];els.forEach(x=>x.classList.add('reveal'));
+  if('IntersectionObserver'in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});els.forEach(x=>io.observe(x))}else els.forEach(x=>x.classList.add('in'));
+  document.querySelectorAll('.filter').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.filter').forEach(x=>x.classList.remove('on'));b.classList.add('on');const key=b.dataset.filter;document.querySelectorAll('.catalog-card').forEach(c=>c.hidden=key!=='all'&&c.dataset.type!==key)}));
+  document.querySelectorAll('.product-filters button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.product-filters button').forEach(x=>x.classList.remove('on'));b.classList.add('on')}));
+  document.querySelectorAll('.o-tech-tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.o-tech-tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on')}));
+  const search=document.querySelector('.o-search-top input'),searchButton=document.querySelector('.o-search-top button:not(.reset)'),reset=document.querySelector('.o-search-top .reset');
+  const applySearch=()=>{const q=(search?.value||'').trim().toLowerCase();document.querySelectorAll('.o-product-cards>a').forEach(x=>x.hidden=!!q&&!x.textContent.toLowerCase().includes(q))};if(searchButton)searchButton.addEventListener('click',applySearch);if(search)search.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();applySearch()}});if(reset)reset.addEventListener('click',()=>{if(search)search.value='';document.querySelectorAll('.o-product-cards>a').forEach(x=>x.hidden=false)});
+  const play=document.querySelector('.o-company-video button');if(play)play.addEventListener('click',()=>{const on=play.parentElement.classList.toggle('playing');play.textContent=on?'Ⅱ':'▶';play.setAttribute('aria-label',on?'소개 영상 일시정지':'소개 영상 재생')});
+  const newsInput=document.querySelector('.o-news-search input'),newsButton=document.querySelector('.o-news-search button');if(newsButton)newsButton.addEventListener('click',()=>{const q=(newsInput?.value||'').trim().toLowerCase();document.querySelectorAll('.o-news-table>a').forEach(x=>x.hidden=!!q&&!x.textContent.toLowerCase().includes(q))});
+  document.querySelectorAll('form[data-demo]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();if(!f.reportValidity())return;const st=f.querySelector('.status');if(st)st.textContent='내용이 확인되었습니다. 데모 페이지에서는 실제 전송되지 않습니다.'}));
+})();

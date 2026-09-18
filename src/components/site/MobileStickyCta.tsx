@@ -3,7 +3,7 @@ import { Send } from "lucide-react";
 
 export function MobileStickyCta() {
   const { pathname } = useLocation();
-  if (pathname.startsWith("/contact")) return null;
+  if (pathname === "/" || pathname === "/search" || pathname.startsWith("/contact")) return null;
 
   return (
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/95 backdrop-blur px-4 pb-[max(env(safe-area-inset-bottom),0.75rem)] pt-3 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] md:hidden">

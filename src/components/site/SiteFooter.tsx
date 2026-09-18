@@ -1,113 +1,69 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock } from "lucide-react";
+import { ChevronDown, MessageCircle } from "lucide-react";
 import { PHONE_TEL_HREF } from "@/lib/contact";
 import { Logo } from "@/components/site/Logo";
 
-const FOOTER_GROUPS = [
-  {
-    title: "홈페이지 제작",
-    links: [
-      { label: "제작 방법", to: "/website/process" },
-      { label: "제작 비용", to: "/website/price" },
-      { label: "기능 소개", to: "/website/features" },
-      { label: "유지보수", to: "/website/maintenance" },
-    ],
-  },
-  {
-    // 업종 6개를 나열하던 자리 — 업종 목록은 /homepage 에서 전체를 볼 수 있어 중복이었다.
-    // 대신 실제로 고르는 단위(프리미엄 · 기본형 · 랜딩형)를 노출한다.
-    title: "디자인 · 템플릿",
-    links: [
-      { label: "프리미엄 디자인", to: "/web-solutions" },
-      { label: "기본형 템플릿", to: "/templates?style=basic-template" },
-      { label: "랜딩형 템플릿", to: "/templates?style=landing-template" },
-      { label: "업종별 홈페이지", to: "/homepage" },
-      { label: "제작 사례", to: "/samples" },
-    ],
-  },
-  {
-    title: "맞춤형 개발",
-    links: [
-      { label: "커스텀 개발이란?", to: "/services/custom" },
-      { label: "관리자 시스템", to: "/services/admin-system" },
-      { label: "문의 · 예약 관리", to: "/services/inquiry-reservation" },
-      { label: "검색 · 필터 기능", to: "/services/search-filter" },
-      { label: "DB · API 연동", to: "/services/database-api" },
-      { label: "솔루션 데모 체험", to: "/web-solutions/demos" },
-    ],
-  },
-  {
-    title: "고객센터",
-    links: [
-      { label: "문의하기", to: "/contact" },
-      { label: "견적 계산기", to: "/estimate" },
-      { label: "공지사항", to: "/notices" },
-      { label: "자주 묻는 질문", to: "/faq" },
-      { label: "NOVERIQ 소개", to: "/about" },
-    ],
-  },
-];
-
 export function SiteFooter() {
-  return (
-    <footer className="mt-20 border-t border-border bg-secondary/40">
-      <div className="mx-auto grid max-w-6xl gap-8 px-4 py-12 sm:grid-cols-2 lg:grid-cols-6">
-        <div className="lg:col-span-2">
-          <Logo wordmarkClassName="text-lg" />
-          <p className="mt-1 text-xs text-muted-foreground">노베릭</p>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
-            소상공인과 기업을 위한 맞춤형 홈페이지 제작 스튜디오입니다.
-          </p>
+  const [familyOpen, setFamilyOpen] = useState(false);
 
-          <div className="mt-6 space-y-1.5 text-xs leading-relaxed text-muted-foreground">
-            <p className="flex flex-wrap gap-x-4 gap-y-1">
-              <span><strong>상호명:</strong> 민트클</span>
-              <span><strong>사업자등록번호:</strong> 266-07-03678</span>
-            </p>
-            <p className="flex flex-wrap gap-x-4 gap-y-1">
-              <span><strong>통신판매업신고번호:</strong> 제2026-서울강남-00480호</span>
-            </p>
-            <p className="flex flex-wrap items-center gap-x-4 gap-y-1">
-              <span>
-                <strong>전화:</strong>{" "}
-                <a href={PHONE_TEL_HREF} className="hover:text-foreground transition-colors">
-                  010-4894-4905
-                </a>
-              </span>
-              <span><strong>이메일:</strong> 6gsmake@gmail.com</span>
-            </p>
-            <p className="flex flex-wrap gap-x-4 gap-y-1">
-              <span><strong>문의 접수:</strong> 24시간 언제든 가능 (1일 이내 회신)</span>
-            </p>
+  return (
+    <footer className="border-t border-border bg-background">
+      <div className="mx-auto max-w-[1400px] px-5 py-12 sm:px-10">
+        <div className="text-center">
+          <Logo className="justify-center" wordmarkClassName="text-3xl sm:text-4xl" />
+          <div className="mx-auto mt-7 flex max-w-4xl flex-col justify-center gap-x-8 gap-y-2 text-sm leading-6 text-muted-foreground lg:flex-row">
+            <p><strong className="mr-2 text-foreground">사업장</strong>서울특별시 강남구 테헤란로 일대 원격 제작 스튜디오</p>
+            <p><strong className="mr-2 text-foreground">상담 운영</strong>온라인 · 전화 · 카카오톡 상담</p>
+          </div>
+          <div className="mt-3 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+            <p><strong className="mr-2 text-foreground">대표</strong>김진수</p>
+            <p><strong className="mr-2 text-foreground">Tel</strong><a href={PHONE_TEL_HREF}>010-4894-4905</a></p>
+            <p><strong className="mr-2 text-foreground">E-mail</strong>6gsmake@gmail.com</p>
+            <p><strong className="mr-2 text-foreground">사업자등록번호</strong>266-07-03678</p>
           </div>
         </div>
 
-        {FOOTER_GROUPS.map((group) => (
-          <div key={group.title} className="text-sm text-muted-foreground">
-            <p className="mb-3 font-bold text-foreground">{group.title}</p>
-            <ul className="space-y-2">
-              {group.links.map((link) => (
-                <li key={link.label}>
-                  <Link to={link.to} className="hover:text-foreground transition-colors">
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+        <div className="mt-10 grid items-end gap-8 border-t border-border pt-8 lg:grid-cols-3">
+          <div>
+            <form onSubmit={(event) => event.preventDefault()}>
+              <label htmlFor="footer-newsletter" className="text-sm font-black">뉴스레터</label>
+              <div className="mt-3 flex max-w-sm">
+                <input id="footer-newsletter" type="email" placeholder="E-mail 입력" className="h-11 min-w-0 flex-1 border border-border bg-transparent px-4 text-sm outline-none focus-visible:ring-2 focus-visible:ring-primary" />
+                <button type="submit" className="h-11 border border-l-0 border-border px-5 text-sm font-bold focus-visible:outline-2 focus-visible:outline-primary">신청</button>
+              </div>
+            </form>
+            <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-xs text-muted-foreground">
+              <Link to="/auth">이용약관</Link>
+              <Link to="/auth" className="font-bold text-foreground">개인정보처리방침</Link>
+              <Link to="/admin">관리자 로그인</Link>
+            </div>
           </div>
-        ))}
-      </div>
 
-      <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
-        © {new Date().getFullYear()} NOVERIQ (노베릭). All rights reserved.
-        {" · "}
-        <Link
-          to="/auth"
-          className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1 hover:text-foreground hover:border-foreground/30 transition-colors"
-        >
-          <Lock className="size-3" />
-          관리자 로그인
-        </Link>
+          <div className="text-center">
+            <div className="flex justify-center gap-3">
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" aria-label="인스타그램" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-xs font-black">IG</a>
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" aria-label="유튜브" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-xs font-black">YT</a>
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" aria-label="페이스북" className="flex h-11 w-11 items-center justify-center rounded-full border border-border text-xs font-black">FB</a>
+              <Link to="/contact" aria-label="블로그" className="flex h-11 w-11 items-center justify-center rounded-full border border-border"><MessageCircle className="size-4" /></Link>
+            </div>
+            <p className="mt-5 text-xs text-muted-foreground">© {new Date().getFullYear()} NOVERIQ. ALL RIGHTS RESERVED.</p>
+          </div>
+
+          <div className="relative justify-self-start lg:justify-self-end">
+            <button type="button" aria-expanded={familyOpen} onClick={() => setFamilyOpen((open) => !open)} className="flex h-11 min-w-[170px] items-center justify-between border border-border px-5 text-sm font-bold focus-visible:outline-2 focus-visible:outline-primary">
+              Family Site
+              <ChevronDown className={`size-4 transition-transform ${familyOpen ? "rotate-180" : ""}`} />
+            </button>
+            {familyOpen && (
+              <ul className="absolute bottom-full left-0 right-0 mb-1 border border-border bg-background py-2 text-sm shadow-lg">
+                <li><Link to="/web-solutions" className="block px-4 py-2 hover:bg-secondary">웹 솔루션</Link></li>
+                <li><Link to="/templates" className="block px-4 py-2 hover:bg-secondary">템플릿</Link></li>
+                <li><Link to="/samples" className="block px-4 py-2 hover:bg-secondary">포트폴리오</Link></li>
+              </ul>
+            )}
+          </div>
+        </div>
       </div>
     </footer>
   );

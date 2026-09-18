@@ -67,6 +67,7 @@ const Auth = lazy(() => import("@/pages/Auth"));
 const Admin = lazy(() => import("@/pages/Admin"));
 const FAQ = lazy(() => import("@/pages/FAQ"));
 const Blog = lazy(() => import("@/pages/Blog"));
+const Search = lazy(() => import("@/pages/Search"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
 
 function RouteLoadingFallback() {
@@ -78,8 +79,11 @@ function RouteLoadingFallback() {
 }
 
 function SiteLayout() {
+  const { pathname } = useLocation();
+  const hasMobileCta = pathname !== "/" && pathname !== "/search" && !pathname.startsWith("/contact");
+
   return (
-    <div className="flex min-h-screen flex-col pb-[76px] md:pb-0">
+    <div className={`flex min-h-screen flex-col ${hasMobileCta ? "pb-[76px] md:pb-0" : ""}`}>
       <SiteHeader />
       <main className="flex-1">
         <Outlet />
@@ -169,6 +173,7 @@ export default function App() {
             <Route path="/contact/status/:token" element={<ContactStatus />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/auth" element={<Auth />} />
             <Route
               path="/admin"
