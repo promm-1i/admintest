@@ -1,29 +1,94 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { ArrowRight, ExternalLink, Menu, Search, X } from "lucide-react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Link } from "react-router-dom";
+import { Menu, X, Send, ArrowRight, ChevronDown, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+import { MegaMenuPanel } from "@/components/site/MegaMenuPanel";
 import { Logo } from "@/components/site/Logo";
 import { HEADER_NAV, type NavDropdownEntry } from "@/components/site/navData";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 
-const MEGA_CLOSE_DELAY = 140;
+const MEGA_CLOSE_DELAY = 150;
 
 function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavigate: () => void }) {
   return (
     <Accordion type="single" collapsible>
-      <AccordionItem value={entry.key} className="border-b border-border">
-        <AccordionTrigger className="py-4 text-base font-bold hover:no-underline">{entry.label}</AccordionTrigger>
+      <AccordionItem value={entry.key} className="border-b-0">
+        <AccordionTrigger className="py-3 text-sm text-muted-foreground hover:no-underline data-[state=open]:text-foreground">
+          {entry.label}
+        </AccordionTrigger>
         <AccordionContent>
-          <ul className="space-y-3 pb-5">
-            {entry.items.map((item) => (
-              <li key={item.label}>
-                <Link to={item.href} onClick={onNavigate} className="flex items-center justify-between py-1 text-sm text-muted-foreground">
-                  {item.label}
-                  <ArrowRight className="size-3.5" />
-                </Link>
-              </li>
-            ))}
+          <ul className="space-y-3 pb-2 pl-1">
+            {entry.items.map((item, i) => {
+              // 데스크톱 드롭다운과 동일하게, group이 바뀌는 지점에 구분선 + 소제목
+              const groupStart = item.group && item.group !== entry.items[i - 1]?.group;
+              return (
+                <li key={item.label}>
+                  {groupStart && (
+                    <p className="mb-3 border-t border-border pt-3 text-xs font-semibold tracking-wide text-muted-foreground">
+                      {item.group}
+                    </p>
+                  )}
+                  <Link
+                    to={item.href}
+                    onClick={onNavigate}
+                    className="flex items-center gap-1.5 text-sm font-medium text-foreground"
+                  >
+                    {item.label}
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+                  {item.children && (
+                    // 업종을 먼저 펼치고 그 안에서 디자인을 고른다 — 평면 목록이면
+                    // 같은 업종명이 시안 수만큼 반복돼 읽기 어렵다.
+                    <Accordion type="single" collapsible className="mt-2 border-l border-border pl-3">
+                      {item.children.map((group) => (
+                        <AccordionItem key={group.key} value={group.key} className="border-b-0">
+                          <AccordionTrigger className="py-2 text-sm text-muted-foreground hover:no-underline data-[state=open]:text-foreground">
+                            {group.label}
+                            <span className="ml-auto mr-2 text-xs text-muted-foreground/70">
+                              {group.designs.length}종
+                            </span>
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <Link
+                              to={group.href}
+                              onClick={onNavigate}
+                              className="mb-2 block text-xs font-medium text-primary"
+                            >
+                              이 업종만 모아 보기
+                            </Link>
+                            <ul className="grid grid-cols-2 gap-2 pb-2">
+                              {group.designs.map((d) => (
+                                <li key={d.href}>
+                                  <Link
+                                    to={d.href}
+                                    onClick={onNavigate}
+                                    className="block overflow-hidden rounded-lg border border-border"
+                                  >
+                                    {d.image && (
+                                      <img
+                                        src={d.image}
+                                        alt=""
+                                        loading="lazy"
+                                        className="aspect-[4/3] w-full object-cover object-top"
+                                      />
+                                    )}
+                                    <span className="block px-2 py-1.5 text-xs font-semibold text-foreground/90">
+                                      {d.label}
+                                    </span>
+                                  </Link>
+                                </li>
+                              ))}
+                            </ul>
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </AccordionContent>
       </AccordionItem>
@@ -32,136 +97,177 @@ function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavi
 }
 
 export function SiteHeader() {
-  const { pathname } = useLocation();
-  const isHome = pathname === "/";
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const closeTimer = useRef<number | undefined>(undefined);
   const { isAdmin } = useAuth();
 
   useEffect(() => {
-    setMobileOpen(false);
-    setMegaOpen(false);
-    setActiveKey(null);
-  }, [pathname]);
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => () => window.clearTimeout(closeTimer.current), []);
 
-  const showMega = (key: string) => {
+  const openMega = (key: string) => {
     window.clearTimeout(closeTimer.current);
     setActiveKey(key);
-    setMegaOpen(true);
   };
-  const keepMegaOpen = () => window.clearTimeout(closeTimer.current);
-  const scheduleClose = () => {
+  const scheduleCloseMega = () => {
     window.clearTimeout(closeTimer.current);
-    closeTimer.current = window.setTimeout(() => {
-      setMegaOpen(false);
-      setActiveKey(null);
-    }, MEGA_CLOSE_DELAY);
+    closeTimer.current = window.setTimeout(() => setActiveKey(null), MEGA_CLOSE_DELAY);
+  };
+  const closeMegaNow = () => {
+    window.clearTimeout(closeTimer.current);
+    setActiveKey(null);
+  };
+  const keepMegaOpen = () => {
+    window.clearTimeout(closeTimer.current);
   };
 
   return (
     <header
       className={cn(
-        "left-0 right-0 top-0 z-50 border-b border-border/55 bg-background/88 backdrop-blur-md",
-        isHome ? "fixed" : "sticky",
+        "sticky top-0 z-40 border-b bg-background transition-colors motion-safe:duration-300",
+        scrolled ? "border-border shadow-[0_1px_0_rgba(0,0,0,0.02)]" : "border-transparent",
       )}
-      onMouseLeave={scheduleClose}
     >
-      <div className="relative mx-auto flex h-[76px] max-w-[1440px] items-center justify-between px-5 sm:px-8 lg:px-10">
-        <Link to="/" className="flex min-w-[180px] items-center" aria-label="NOVERIQ 홈">
+      <div className="relative flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
+        <Link to="/" className="flex items-center">
           <Logo wordmarkClassName="text-xl sm:text-2xl" />
         </Link>
 
-        <nav className="absolute left-1/2 hidden h-full -translate-x-1/2 items-center xl:flex" aria-label="주요 메뉴">
-          {HEADER_NAV.map((entry) => {
-            if (entry.type === "dropdown") {
-              const href = entry.items[0]?.href ?? "/";
-              return (
-                <Link
-                  key={entry.key}
-                  to={href}
-                  onMouseEnter={() => showMega(entry.key)}
-                  onFocus={() => showMega(entry.key)}
+        <nav
+          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 xl:flex"
+          onMouseLeave={scheduleCloseMega}
+        >
+          {HEADER_NAV.map((entry) =>
+            entry.type === "dropdown" ? (
+              <div key={entry.key} className="relative">
+                <button
+                  type="button"
+                  aria-expanded={activeKey === entry.key}
                   className={cn(
-                    "flex h-full min-w-[126px] items-center justify-center whitespace-nowrap px-4 text-base font-bold transition-colors",
-                    activeKey === entry.key ? "text-primary" : "text-foreground hover:text-primary",
+                    "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2.5 text-lg font-semibold transition-colors duration-150",
+                    activeKey === entry.key
+                      ? "bg-neutral-950 text-white"
+                      : "text-muted-foreground hover:bg-neutral-950 hover:text-white",
                   )}
+                  onMouseEnter={() => openMega(entry.key)}
+                  onClick={() => (activeKey === entry.key ? scheduleCloseMega() : openMega(entry.key))}
                 >
                   {entry.label}
-                </Link>
-              );
-            }
-            return entry.external ? (
-              <a key={entry.key} href={entry.href} target="_blank" rel="noopener noreferrer" className="flex h-full min-w-[126px] items-center justify-center gap-1 px-4 text-base font-bold">
-                {entry.label}<ExternalLink className="size-3.5" />
+                  <ChevronDown
+                    className={cn("size-4 transition-transform duration-200", activeKey === entry.key && "rotate-180")}
+                  />
+                </button>
+                {activeKey === entry.key && (
+                  <MegaMenuPanel
+                    entry={entry}
+                    onNavigate={closeMegaNow}
+                    onMouseEnter={keepMegaOpen}
+                    onMouseLeave={scheduleCloseMega}
+                  />
+                )}
+              </div>
+            ) : entry.external ? (
+              <a
+                key={entry.key}
+                href={entry.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1 text-lg font-semibold text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {entry.label}
+                <ExternalLink className="size-3.5" />
               </a>
             ) : (
-              <Link key={entry.key} to={entry.href} className="flex h-full min-w-[126px] items-center justify-center px-4 text-base font-bold">{entry.label}</Link>
-            );
-          })}
+              <Link
+                key={entry.key}
+                to={entry.href}
+                className="text-lg font-semibold text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {entry.label}
+              </Link>
+            ),
+          )}
         </nav>
 
-        <div className="hidden min-w-[180px] items-center justify-end gap-4 xl:flex">
-          {isAdmin && <Link to="/admin" className="text-sm font-bold text-primary">관리자</Link>}
-          <Link to="/search" aria-label="검색" className="flex h-11 w-11 items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-            <Search className="size-5" />
-          </Link>
+        <div className="hidden items-center gap-4 xl:flex">
+          {isAdmin && (
+            <Link to="/admin" className="text-sm text-primary">
+              관리자
+            </Link>
+          )}
+          <Button asChild size="sm" className="font-bold gap-1.5 shadow-xs">
+            <Link to="/contact">
+              <Send className="h-3.5 w-3.5" />
+              상담 문의
+            </Link>
+          </Button>
         </div>
 
-        <div className="flex items-center gap-1 xl:hidden">
-          <Link to="/search" aria-label="검색" className="flex h-11 w-11 items-center justify-center"><Search className="size-5" /></Link>
-          <button type="button" aria-label={mobileOpen ? "메뉴 닫기" : "메뉴 열기"} aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)} className="flex h-11 w-11 items-center justify-center">
-            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+        <div className="flex items-center gap-2 xl:hidden">
+          <Button asChild size="sm" className="font-bold gap-1">
+            <Link to="/contact">
+              <Send className="h-3.5 w-3.5" />
+              문의
+            </Link>
+          </Button>
+          <button
+            type="button"
+            aria-label="메뉴 열기"
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
       </div>
 
-      {megaOpen && (
-        <div className="absolute inset-x-0 top-full hidden border-t border-border bg-background shadow-[0_18px_36px_rgba(0,0,0,0.12)] xl:block" onMouseEnter={keepMegaOpen} onMouseLeave={scheduleClose}>
-          <div className="mx-auto grid max-w-[1440px] grid-cols-[180px_repeat(6,minmax(0,1fr))_180px] px-10 py-8">
-            <div />
+      {open && (
+        <nav className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-border bg-background xl:hidden">
+          <ul className="mx-auto max-w-6xl px-4 py-2">
             {HEADER_NAV.map((entry) => (
-              <div key={entry.key} className={cn("border-l border-border px-5", activeKey === entry.key && "bg-secondary/45")}>
-                <p className="mb-4 text-sm font-black">{entry.label}</p>
-                {entry.type === "dropdown" && (
-                  <ul className="space-y-2.5">
-                    {entry.items.slice(0, 8).map((item) => (
-                      <li key={item.label}>
-                        <Link to={item.href} onClick={() => setMegaOpen(false)} className="text-sm leading-6 text-muted-foreground transition-colors hover:text-foreground">{item.label}</Link>
-                      </li>
-                    ))}
-                  </ul>
+              <li key={entry.key}>
+                {entry.type === "dropdown" ? (
+                  <MobileNavGroup entry={entry} onNavigate={() => setOpen(false)} />
+                ) : entry.external ? (
+                  <a
+                    href={entry.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 py-3 text-sm text-muted-foreground"
+                  >
+                    {entry.label}
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                ) : (
+                  <Link
+                    to={entry.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-3 text-sm text-muted-foreground"
+                  >
+                    {entry.label}
+                  </Link>
                 )}
-              </div>
+              </li>
             ))}
-            <div className="border-l border-border pl-6">
-              <p className="text-sm font-black">바로가기</p>
-              <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-                <li><Link to="/web-solutions/demos" onClick={() => setMegaOpen(false)}>업종별 데모</Link></li>
-                <li><Link to="/templates" onClick={() => setMegaOpen(false)}>전체 템플릿</Link></li>
-                <li><Link to="/faq" onClick={() => setMegaOpen(false)}>자주 묻는 질문</Link></li>
-                <li><Link to="/contact" onClick={() => setMegaOpen(false)}>상담 문의</Link></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {mobileOpen && (
-        <nav className="max-h-[calc(100vh-76px)] overflow-y-auto border-t border-border bg-background xl:hidden" aria-label="모바일 메뉴">
-          <div className="px-5 pb-8 pt-2 sm:px-8">
-            {HEADER_NAV.map((entry) => entry.type === "dropdown" ? (
-              <MobileNavGroup key={entry.key} entry={entry} onNavigate={() => setMobileOpen(false)} />
-            ) : entry.external ? (
-              <a key={entry.key} href={entry.href} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 border-b border-border py-4 text-base font-bold">{entry.label}<ExternalLink className="size-4" /></a>
-            ) : (
-              <Link key={entry.key} to={entry.href} onClick={() => setMobileOpen(false)} className="block border-b border-border py-4 text-base font-bold">{entry.label}</Link>
-            ))}
-            <Link to="/contact" onClick={() => setMobileOpen(false)} className="mt-6 flex h-12 items-center justify-center bg-primary text-sm font-bold text-primary-foreground">상담 문의</Link>
-          </div>
+            {isAdmin && (
+              <li>
+                <Link
+                  to="/admin"
+                  onClick={() => setOpen(false)}
+                  className="block py-3 text-sm text-primary"
+                >
+                  관리자
+                </Link>
+              </li>
+            )}
+          </ul>
         </nav>
       )}
     </header>
