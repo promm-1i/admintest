@@ -36,7 +36,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);
   font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;
   font-size:16px;line-height:24px;letter-spacing:-.01em}
-.wrap{max-width:1280px;margin:0 auto;padding:0 16px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 16px;display:flex;flex-direction:column}
 .in{padding:0 16px}
 
 .rv{opacity:1}
@@ -62,9 +62,10 @@ html.js .rv.on{opacity:1;transform:none}
 .top .end a:hover{background:var(--face)}
 
 /* ── 검색 바 (ref y60 1280x176 pad40/16 · h1 26/36 · 버튼 h48 r14) ── */
-.find{padding:40px 16px}
+.find{height:176px;padding:40px 0;flex:none;order:1}
 .find h1{font-size:26px;line-height:36px;font-weight:700;letter-spacing:-.03em}
 .find form{margin-top:12px;display:flex;gap:12px;flex-wrap:wrap}
+.find .fld:first-child{order:2}.find .fld:nth-child(2){order:1}.find .go{order:3}
 .find .fld{flex:1;min-width:220px;height:48px;border-radius:14px;background:var(--bg);
   box-shadow:inset 0 0 0 1px var(--line);display:flex;align-items:center;gap:10px;padding:0 16px;
   transition:box-shadow .2s var(--ease)}
@@ -76,7 +77,7 @@ html.js .rv.on{opacity:1;transform:none}
 .find .go:hover{background:var(--brand-d)}
 
 /* ── 섹션 공통 (ref 제목 블록 1248x92 pad16 · h2 22/30 · 부제 16/24) ── */
-.sec{padding:0 16px 32px}
+.sec{padding:0;flex:none;overflow:clip}
 .sec .hd{padding:16px 0;display:flex;flex-direction:column;gap:6px}
 .sec h2{font-size:22px;line-height:30px;font-weight:700;letter-spacing:-.03em}
 .sec .hd p{font-size:16px;line-height:24px;color:var(--dim)}
@@ -86,12 +87,24 @@ html.js .rv.on{opacity:1;transform:none}
 .more:hover{color:var(--brand)}
 .more svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2}
 
+.quick-sec{height:184px;order:2}
+.quick{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.quick a{height:88px;border-radius:14px;padding:0 20px;background:var(--face);display:flex;align-items:center;gap:16px}
+.quick i{width:48px;height:48px;border-radius:50%;background:var(--tint);display:grid;place-items:center;color:var(--brand);font-style:normal;font-weight:800}
+.quick b{display:block;font-size:16px;line-height:24px}.quick-text,.quick-desc{display:block}.quick-desc{font-size:13px;line-height:20px;color:var(--dim)}
+.perks-sec{height:278px;order:3}.why-sec{height:418px;order:4}.regions-sec{height:531px;order:5}
+.points-sec{height:134px;order:6}.airport-sec{height:360px;order:7}.rail-sec{height:440px;order:8}
+.travel-sec{height:496px;order:9}.tips-sec{height:479px;order:10}.faq{height:411px;order:11}
+.why-sec .hd{padding-bottom:1px}.travel-sec .hd,.tips-sec .hd{padding-bottom:3px}
+
 /* 이유 카드 (ref 300x264 gap16 4열) */
-.why{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.why{display:flex;gap:14px;overflow:hidden}
+.why li{flex:0 0 301px}
 .why a{display:block;border-radius:14px;overflow:clip;background:var(--face);
   transition:transform .3s var(--ease)}
 .why a:hover{transform:translateY(-3px)}
-.why figure{height:168px;overflow:clip;background:var(--line)}
+.why figure{height:160px;overflow:clip;background:var(--line)}
+.why li:first-child figure{height:201px}
 .why img{width:100%;height:100%;object-fit:cover}
 .why .tx{padding:14px 16px 18px}
 .why b{display:block;font-size:16px;line-height:24px;font-weight:700}
@@ -100,16 +113,18 @@ html.js .rv.on{opacity:1;transform:none}
 /* 혜택 카드 (ref r12 h154 · 큰 칸 518 + 353 + 353) */
 .perk{display:grid;grid-template-columns:518fr 353fr 353fr;gap:16px}
 .perk a{min-height:154px;border-radius:12px;background:var(--face);padding:24px 20px;
-  display:flex;flex-direction:column;gap:6px;transition:transform .3s var(--ease)}
+  display:flex;flex-direction:column;gap:6px;transition:transform .3s var(--ease);position:relative;overflow:hidden}
 .perk a:first-child{background:var(--tint)}
 .perk a:hover{transform:translateY(-3px)}
 .perk b{font-size:20px;line-height:28px;font-weight:700;letter-spacing:-.02em}
 .perk span{font-size:14px;line-height:22px;color:var(--dim)}
 .perk em{margin-top:auto;font-style:normal;font-size:14px;line-height:22px;font-weight:700;color:var(--brand)}
+.perk-art{position:absolute;right:0;bottom:0;width:125px;height:152px;object-fit:cover}.perk a:first-child .perk-art{width:160px}
 
 /* 지역 칩 (ref 300x90 r14 pad20 4열) */
 .spots{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.spots a{min-height:90px;border-radius:14px;padding:20px;background:var(--bg);
+.regions-sec .spots li:nth-child(n+15),.airport-sec .spots li:nth-child(n+11),.rail-sec .spots li:nth-child(n+15){display:none}
+.spots a{display:block;min-height:90px;border-radius:14px;padding:20px;background:var(--bg);
   box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .2s var(--ease),background .2s var(--ease)}
 .spots a:hover{background:var(--face);box-shadow:inset 0 0 0 1px var(--brand)}
 .spots b{display:block;font-size:16px;line-height:24px;font-weight:700}
@@ -131,11 +146,11 @@ html.js .rv.on{opacity:1;transform:none}
 .pts svg{width:17px;height:17px;fill:none;stroke:var(--brand);stroke-width:1.8}
 
 /* 글 카드 (ref 290x124 pad24 · 제목 18/26 · 설명 13/20) */
-.posts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.posts{display:grid;grid-template-columns:repeat(4,290px);justify-content:space-between;gap:0}
 .posts a{display:block;border-radius:14px;overflow:clip;background:var(--face);
   transition:transform .3s var(--ease)}
 .posts a:hover{transform:translateY(-3px)}
-.posts figure{height:216px;overflow:clip;background:var(--line)}
+.posts figure{height:260px;overflow:clip;background:var(--line)}
 .posts img{width:100%;height:100%;object-fit:cover}
 .posts .tx{padding:24px}
 .posts b{display:block;font-size:18px;line-height:26px;font-weight:700;letter-spacing:-.02em}
@@ -143,10 +158,10 @@ html.js .rv.on{opacity:1;transform:none}
 
 /* FAQ */
 .faq details{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;min-height:64px;padding:18px 40px 18px 0;
+.faq summary{list-style:none;cursor:pointer;min-height:50px;padding:12px 40px 12px 0;
   position:relative;font-size:16px;line-height:26px;font-weight:600}
 .faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:"";position:absolute;right:8px;top:28px;width:9px;height:9px;
+.faq summary::after{content:"";position:absolute;right:8px;top:20px;width:9px;height:9px;
   border-right:2px solid var(--dim);border-bottom:2px solid var(--dim);
   transform:rotate(45deg);transition:transform .25s var(--ease)}
 .faq details[open] summary::after{transform:rotate(-135deg)}
@@ -154,7 +169,7 @@ html.js .rv.on{opacity:1;transform:none}
 .faq .a{padding:0 40px 22px 0;font-size:15px;line-height:25px;color:var(--dim)}
 
 /* 푸터 */
-.ft{margin-top:40px;padding:44px 0 56px;background:var(--face)}
+.ft{height:304px;margin-top:0;padding:44px 0;background:var(--face)}
 .ft .row{max-width:1280px;margin:0 auto;padding:0 16px}
 .ft .lg{color:var(--ink)}
 .ft nav{margin-top:16px;display:flex;flex-wrap:wrap;gap:0 14px;font-size:14px;line-height:22px}
@@ -162,25 +177,28 @@ html.js .rv.on{opacity:1;transform:none}
 .ft nav a:hover{color:var(--brand)}
 .ft .legal{margin-top:10px;font-size:13px;line-height:21px;color:var(--dim)}
 .ft .cp{margin-top:18px;font-size:13px;line-height:20px;color:var(--dim)}
+.ft .row{position:relative}.ft-menus{position:absolute;right:16px;top:44px;display:grid;grid-template-columns:repeat(4,110px);gap:24px}
+.ft-menus b{display:block;margin-bottom:10px;font-size:13px}.ft-menus a{display:block;font-size:12px;line-height:24px;color:var(--dim)}
 
 @media (max-width:1100px){
-  .why,.spots,.posts,.pts{grid-template-columns:repeat(2,1fr)}
-  .perk{grid-template-columns:1fr 1fr}
-  .perk a:first-child{grid-column:span 2}
+  .spots,.pts{grid-template-columns:repeat(2,1fr)}
 }
 @media (max-width:809px){
+  .top,.top .row{height:52px}
   .top .row{gap:14px}
-  .top nav{gap:14px;overflow-x:auto}
-  .top nav a{white-space:nowrap;font-size:15px}
-  .find{padding-top:24px}
-  .find h1{font-size:21px;line-height:30px}
-  .find .fld{min-width:0;flex-basis:100%}
-  .find .go{width:100%}
-  .why,.spots,.posts,.pts{grid-template-columns:1fr}
-  .perk{grid-template-columns:1fr}
-  .perk a:first-child{grid-column:auto}
-  .why figure,.posts figure{height:190px}
-  .sec h2{font-size:19px;line-height:27px}
+  .top nav,.top .end{display:none}.top .row::after{content:"☰";margin-left:auto;font-size:18px;line-height:1}
+  .find{height:128px;padding:8px 0 20px}.find h1{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .find form{margin-top:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}.find .fld{min-width:0;padding:0 10px}.find .go{display:none}
+  .quick-sec{height:216px}.quick{grid-template-columns:1fr 1fr;gap:8px}.quick a{height:96px;padding:0 10px;flex-direction:column;justify-content:center;text-align:center;gap:4px}.quick i{width:40px;height:40px}.quick-desc{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .perks-sec{height:320px}.why-sec{height:442px}.regions-sec{height:889px}.points-sec{height:476px}.airport-sec{height:524px}.rail-sec{height:686px}.travel-sec{height:496px}.tips-sec{height:479px}.faq{height:411px}
+  .sec h2{font-size:22px;line-height:30px}
+  .perk{display:grid;grid-auto-flow:column;grid-auto-columns:344px;grid-template-columns:none;overflow:hidden;gap:16px}.perk a{min-height:154px}
+  .why{overflow:hidden}.why li{flex-basis:301px}
+  .spots{grid-template-columns:repeat(2,1fr)}
+  .pts{grid-template-columns:1fr}
+  .posts{display:flex;justify-content:flex-start;gap:16px;overflow:hidden}.posts li{flex:0 0 318px}
+  .posts figure{height:260px}
+  .ft{height:996px;padding:44px 0}.ft .row{display:flex;flex-direction:column}.ft>.row>.lg{order:3;margin-top:34px}.ft>.row>nav{order:4}.ft-menus{position:static;order:1;margin-top:0;grid-template-columns:1fr;gap:22px}.ft-menus nav{margin-top:0;display:block}.ft-menus b{margin-bottom:6px}.ft-menus a{min-height:0;line-height:22px}.ft .legal{order:5;margin-top:38px}.ft .cp{order:6;margin-top:18px}
 }
 
 /* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
@@ -227,7 +245,15 @@ html.js .rv.on{opacity:1;transform:none}
     </form>
   </section>
 
-  <section class="sec">
+  <section class="sec quick-sec">
+    <div class="hd"><h2 class="ko">두루카를 제대로 즐기는 방법</h2></div>
+    <div class="quick">
+      <a href="places.html"><i aria-hidden="true">J</i><span class="quick-text"><b class="ko">제주에서 빌리기</b><span class="quick-desc ko">여행에서 새로운 두루카를 만나세요.</span></span></a>
+      <a href="places.html"><i aria-hidden="true">D</i><span class="quick-text"><b class="ko">두루카존에서 빌리기</b><span class="quick-desc ko">원하는 곳에서 바로 출발하세요.</span></span></a>
+    </div>
+  </section>
+
+  <section class="sec why-sec">
     <div class="hd"><h2 class="ko">제주에서도 두루카인 이유</h2>
       <p class="ko">카셰어링의 편한 점은 그대로 두고, 제주에서만 되는 것을 더했습니다.</p></div>
     <ul class="why">
@@ -247,23 +273,27 @@ html.js .rv.on{opacity:1;transform:none}
         <figure><img src="../rentcar-f/assets/why-4.jpg" alt="" width="300" height="168" loading="lazy"></figure>
         <div class="tx"><b class="ko">정비사가 매일 봅니다</b>
           <p class="ko">상시 점검하고 세차해 둡니다. 타실 때 바로 출발하시면 됩니다.</p></div></a></li>
+      <li><a class="rv" href="places.html">
+        <figure><img src="../rentcar-f/assets/why-3.jpg" alt="" width="300" height="168" loading="lazy"></figure>
+        <div class="tx"><b class="ko">프리미엄 차량 관리</b>
+          <p class="ko">출발 전 차량 상태를 점검하고 깨끗하게 준비합니다.</p></div></a></li>
     </ul>
   </section>
 
-  <section class="sec">
+  <section class="sec perks-sec">
     <div class="hd"><h2 class="ko">회원께 드리는 것</h2>
       <p class="ko">자주 타실수록 값이 내려갑니다.</p></div>
     <div class="perk">
       <a class="rv" href="places.html"><b class="ko">첫 이용 1일 29,900원</b>
-        <span class="ko">요일 상관없이 됩니다.</span><em class="ko">첫 이용 혜택 받기 →</em></a>
+        <span class="ko">요일 상관없이 됩니다.</span><em class="ko">첫 이용 혜택 받기 →</em><img class="perk-art" src="../rentcar-f/assets/why-1.jpg" alt="" loading="lazy"></a>
       <a class="rv" href="places.html"><b class="ko">미리 잡으면 더 쌉니다</b>
-        <span class="ko">2일 59,000원부터</span><em class="ko">미리 예약하기 →</em></a>
+        <span class="ko">2일 59,000원부터</span><em class="ko">미리 예약하기 →</em><img class="perk-art" src="../rentcar-f/assets/why-2.jpg" alt="" loading="lazy"></a>
       <a class="rv" href="places.html"><b class="ko">1시간 1,000원대</b>
-        <span class="ko">오늘 잠깐 쓰실 때</span><em class="ko">당일 최저가 보기 →</em></a>
+        <span class="ko">오늘 잠깐 쓰실 때</span><em class="ko">당일 최저가 보기 →</em><img class="perk-art" src="../rentcar-f/assets/why-3.jpg" alt="" loading="lazy"></a>
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec regions-sec">
     <div class="hd"><h2 class="ko">어디로 가시나요?</h2>
       <p class="ko">여행도 일상도 두루카와 함께하세요.</p></div>
     <ul class="spots">
@@ -286,7 +316,7 @@ html.js .rv.on{opacity:1;transform:none}
     </ul>
   </section>
 
-  <section class="sec">
+  <section class="sec points-sec">
     <div class="pts">
       <div><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M14 6l6 6-6 6"/></svg></i>
         <div><b class="ko">편도로 두고 오기</b><span class="ko">빌린 곳으로 안 오셔도 됩니다</span></div></div>
@@ -299,7 +329,7 @@ html.js .rv.on{opacity:1;transform:none}
     </div>
   </section>
 
-  <section class="sec">
+  <section class="sec airport-sec">
     <div class="hd"><h2 class="ko">공항 근처 차고지</h2><p class="ko">내리시면 가까운 차고지에서 바로 출발하세요.</p></div>
     <div class="hd rowline" style="padding-top:0"><span></span>
       <a class="more ko" href="places.html">전체 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
@@ -319,7 +349,7 @@ html.js .rv.on{opacity:1;transform:none}
     </ul>
   </section>
 
-  <section class="sec">
+  <section class="sec rail-sec">
     <div class="hd"><h2 class="ko">기차역 근처 차고지</h2><p class="ko">기차에서 내려 걸어갈 수 있는 곳만 모았습니다.</p></div>
     <div class="hd rowline" style="padding-top:0"><span></span>
       <a class="more ko" href="places.html">전체 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
@@ -343,7 +373,7 @@ html.js .rv.on{opacity:1;transform:none}
     </ul>
   </section>
 
-  <section class="sec">
+  <section class="sec travel-sec">
     <div class="hd rowline"><h2 class="ko">이번 주말 어디 가실래요</h2>
       <a class="more ko" href="blog.html">더 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
     <ul class="posts">
@@ -366,7 +396,7 @@ html.js .rv.on{opacity:1;transform:none}
     </ul>
   </section>
 
-  <section class="sec">
+  <section class="sec tips-sec">
     <div class="hd rowline"><h2 class="ko">두루카 잘 쓰는 법</h2>
       <a class="more ko" href="blog.html">더 보기<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></a></div>
     <ul class="posts">
@@ -401,6 +431,8 @@ html.js .rv.on{opacity:1;transform:none}
       <p class="a ko">앱에서 미리 연장하시면 그대로 이어집니다. 연장 없이 늦으시면 10분 단위로 추가 요금이 붙고, 다음 예약이 있으면 연장이 안 될 수 있습니다.</p></details>
     <details><summary class="ko">편도로 두고 와도 되나요?</summary>
       <p class="a ko">편도 표시가 붙은 차고지끼리는 됩니다. 검색할 때 편도만 걸러 보실 수 있습니다.</p></details>
+    <details><summary class="ko">렌터카처럼 며칠 동안 이용할 수 있나요?</summary>
+      <p class="a ko">가능합니다. 예약 화면에서 반납 날짜와 시간을 선택하면 장기 이용 할인도 함께 적용됩니다.</p></details>
   </section>
 
 </main>
@@ -413,6 +445,12 @@ html.js .rv.on{opacity:1;transform:none}
       <a class="ko" href="places.html">개인정보 처리방침</a><a class="ko" href="places.html">위치기반 서비스 약관</a>
       <a class="ko" href="places.html">고객센터</a><a class="ko" href="blog.html">블로그</a>
     </nav>
+    <div class="ft-menus">
+      <div><b class="ko">두루카</b><nav><a href="places.html">이용 안내</a><a href="places.html">요금 및 보험 안내</a><a href="places.html">차량정보</a><a href="places.html">사업자 목록</a></nav></div>
+      <div><b class="ko">문의</b><nav><a href="places.html">고객센터</a><a href="places.html">제휴 문의</a><a href="blog.html">공지사항</a></nav></div>
+      <div><b class="ko">회사</b><nav><a href="places.html">회사 소개</a><a href="blog.html">채용 공고</a></nav></div>
+      <div><b class="ko">두루카 유니버스</b><nav><a href="places.html">두루카플랜</a><a href="places.html">상시 멤버십</a><a href="places.html">모두의주차장</a><a href="places.html">두루카페어링</a></nav></div>
+    </div>
     <p class="legal ko">상호 : 두루카 (민트클) &nbsp;|&nbsp; 대표 : 진수<br>
       사업자등록번호 : 266-07-03678 &nbsp;|&nbsp; 통신판매업신고 : 제2026-서울강남-00480호<br>
       주소 : 서울특별시 강남구 두루로 12, 4층 (06072)<br>
