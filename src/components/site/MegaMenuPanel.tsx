@@ -32,7 +32,7 @@ export function MegaMenuPanel({
       aria-label="전체 메뉴"
       aria-hidden={!open}
       className={cn(
-        "pointer-events-none absolute inset-x-0 top-full z-50 hidden h-[360px] overflow-hidden xl:block",
+        "pointer-events-none absolute inset-x-0 top-full z-50 hidden h-[430px] overflow-hidden xl:block",
         open && "pointer-events-auto",
       )}
       onMouseEnter={onMouseEnter}
@@ -40,7 +40,7 @@ export function MegaMenuPanel({
     >
       <div
         className={cn(
-          "min-h-[360px] border-t border-border/70 bg-background shadow-xl",
+          "min-h-[430px] border-t border-border/70 bg-background shadow-xl",
           "transition-[translate,opacity] [transition-duration:400ms,400ms] [transition-timing-function:ease,ease] motion-reduce:translate-y-0 motion-reduce:transition-none",
           open
             ? "translate-y-0 opacity-100 [transition-delay:0ms,300ms]"
@@ -48,7 +48,7 @@ export function MegaMenuPanel({
         )}
       >
         <div
-          className="mx-auto grid min-h-[360px] w-[900px]"
+          className="mx-auto grid min-h-[430px] w-[900px]"
           style={{ gridTemplateColumns: `repeat(${entries.length}, minmax(0, 1fr))` }}
         >
           {entries.map((entry) => {
@@ -56,28 +56,22 @@ export function MegaMenuPanel({
             return (
               <section
                 key={entry.key}
-                aria-labelledby={`mega-heading-${entry.key}`}
+                aria-label={`${entry.label} 하위 메뉴`}
                 className={cn(
-                  "flex min-h-[360px] justify-center border-r border-border/70 px-4 py-7 transition-colors first:border-l last:border-r",
+                  "flex min-h-[430px] justify-center border-r border-border/70 px-4 pb-12 pt-8 transition-colors first:border-l last:border-r",
                   active ? "bg-secondary/55" : "bg-background",
                 )}
                 onMouseEnter={() => onActiveChange(entry.key)}
               >
                 <div className="w-fit max-w-full">
-                  <h2
-                    id={`mega-heading-${entry.key}`}
-                    className={cn("text-sm font-bold", active ? "text-primary" : "text-foreground")}
-                  >
-                    {entry.label}
-                  </h2>
-                  <ul className="mt-5 space-y-3.5">
+                  <ul className="space-y-4">
                     {entry.items.map((item) => (
                       <li key={item.label}>
                         <Link
                           to={item.href}
                           onClick={onNavigate}
                           tabIndex={open ? undefined : -1}
-                          className="block text-sm leading-5 text-muted-foreground transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          className="block text-[17px] leading-6 text-muted-foreground transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                         >
                           {item.label}
                         </Link>

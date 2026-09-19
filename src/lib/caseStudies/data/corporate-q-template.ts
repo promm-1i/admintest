@@ -1,0 +1,65 @@
+import type { CaseStudy } from "../types";
+
+const study: CaseStudy = {
+  customerCopyReady: true,
+  brand: "NEIA",
+  headline: "에너지기술 혁신기관 홈페이지",
+  summary:
+    "사업공고, 정보공개, ESG와 국민참여 콘텐츠를 많은 서브페이지 안에서도 빠르게 찾도록 구성한 공공기관·R&D 전담기관용 프리미엄 홈페이지입니다.",
+  brandColor: "rgb(19, 112, 196)",
+  tintColor: "rgb(228, 241, 250)",
+  overview:
+    "NEIA 디자인은 에너지기술 R&D 사업을 지원하는 공공기관을 가정해 구성했습니다. 첫 화면에서 공지·사업공고·채용을 바로 확인하고, R&D 접수와 수요조사, 성과관리 같은 핵심 서비스로 이동할 수 있습니다. 유튜브와 ESG 콘텐츠, 자주 찾는 바로가기와 기관 이슈도 메인에서 함께 제공합니다.\n\n기관소개, 사업안내, 사업공고, 정보공개, 윤리·인권·ESG, 국민참여, 알림·채용과 검색까지 88개 화면을 같은 정보 구조로 정리했습니다. 목록, 상세, 검색, 탭, 설문과 신고 화면까지 실제 이동 경로가 연결됩니다.\n\n기관명, 사업명, 공고, 임직원, 예산과 화면 이미지는 디자인 예시이며 실제 기관의 공개 자료와 운영 절차에 맞춰 변경합니다.",
+  meta: [
+    { label: "적합 업종", value: "공공기관 · 연구개발 전담기관 · 협회 · 재단 · 산업지원기관" },
+    { label: "주요 구성", value: "기관소개 · 사업안내·공고 · 정보공개 · ESG·윤리·인권 · 국민참여 · 채용·검색" },
+    { label: "맞춤 적용", value: "사업 분류 · 공고 게시판 · 정보공개 체계 · 조직·직원 · 신고·참여 절차 변경 가능" },
+  ],
+  mainShot: "/cases/corporate-q/main.webp",
+  pagesLabel: "PREVIEW",
+  pagesTitle: "주요 화면 미리보기",
+  pages: [
+    { name: "홈", file: "index.html", img: "/cases/corporate-q/page-index.webp", desc: "공지와 핵심 R&D 서비스, 소셜·ESG 콘텐츠, 바로가기와 기관 이슈를 한 화면에서 제공합니다.", items: ["공지·사업·채용 탭", "R&D 핵심 서비스", "소셜·ESG 콘텐츠", "자주 찾는 바로가기"] },
+    { name: "기관소개", file: "about.html", img: "/cases/corporate-q/page-about.webp", desc: "기관의 설립 목적과 역할, 주요 기능을 공공기관형 정보 구조로 안내합니다.", items: ["기관 소개와 핵심 역할", "비전·조직·연혁 연결", "CI·오시는 길 제공"] },
+    { name: "사업공고", file: "business-announcement.html", img: "/cases/corporate-q/page-business-announcement.webp", desc: "사업 유형과 기간을 확인하고 원하는 공고를 검색해 상세로 이동합니다.", items: ["공고 검색과 분류", "접수 기간·상태 표시", "사업공고 상세 연결"] },
+    { name: "정보공개", file: "information-list.html", img: "/cases/corporate-q/page-information-list.webp", desc: "사전정보와 공개자료를 분야별로 찾아볼 수 있는 목록 화면입니다.", items: ["공개 분야 분류", "자료 검색과 목록", "공개 청구 절차 연결"] },
+    { name: "ESG 전략", file: "esg-strategy.html", img: "/cases/corporate-q/page-esg-strategy.webp", desc: "ESG 추진체계와 분야별 목표, 활동과 보고서를 구조적으로 보여 줍니다.", items: ["ESG 전략과 체계", "환경·사회·지배구조", "활동·공시·보고서 연결"] },
+    { name: "소셜 허브", file: "social-hub.html", img: "/cases/corporate-q/page-social-hub.webp", desc: "기관의 영상, 카드뉴스와 SNS 콘텐츠를 한곳에 모아 제공합니다.", items: ["콘텐츠 유형 필터", "영상·이미지 카드", "외부 채널 연결"] },
+    { name: "채용", file: "recruit.html", img: "/cases/corporate-q/page-recruit.webp", desc: "채용 공고와 인재상, 직무·복리후생 정보를 지원자 관점에서 안내합니다.", items: ["채용 공고 목록·상세", "인재상과 직무 정보", "근무제도와 조직문화"] },
+    { name: "통합검색", file: "search.html", img: "/cases/corporate-q/page-search.webp", desc: "많은 메뉴와 게시물을 하나의 검색 결과에서 유형별로 확인하게 합니다.", items: ["통합 검색어 입력", "콘텐츠 유형별 결과", "원문 화면 바로가기"] },
+  ],
+  points: [
+    { title: "핵심 R&D 서비스를\n첫 화면에서 바로 이용합니다", body: "자주 찾는 사업접수, 기술수요조사, 성과관리와 평가 서비스를 번호형 카드로 정리해 복잡한 메뉴를 거치지 않고 이동하게 합니다.", items: ["핵심 서비스 4개", "서비스별 설명과 바로가기", "업무 시스템 연결 가능"], img: "/cases/corporate-q/point-services.webp", caption: "홈 · R&D 서비스" },
+    { title: "기관 콘텐츠와 ESG 활동을\n한 구간에 모읍니다", body: "유튜브, 카드뉴스와 ESG 활동을 같은 높이의 카드로 구성해 기관 소식과 사회적 가치를 함께 전달합니다.", items: ["영상·SNS 콘텐츠", "ESG 활동 소개", "외부 채널과 상세 화면 연결"], img: "/cases/corporate-q/point-social.webp", caption: "홈 · 소셜과 ESG" },
+    { title: "자주 찾는 메뉴는\n아이콘 바로가기로 제공합니다", body: "기관소개, 경영공시, 직원검색, 오시는 길, 입찰과 고객의 소리처럼 반복 방문하는 화면을 한 줄에 정리합니다.", items: ["주요 바로가기 7개", "명확한 아이콘과 이름", "모바일 가로 이동 대응"], img: "/cases/corporate-q/point-quick.webp", caption: "홈 · 바로가기" },
+    { title: "기관 이슈와 참여 정보를\n큰 배너로 강조합니다", body: "정책 이슈, 설문과 국민참여처럼 기간과 주목도가 중요한 콘텐츠는 메인 하단의 큰 배너로 분리해 놓치지 않게 합니다.", items: ["기관 이슈 배너", "국민참여·설문 안내", "기간성 콘텐츠 교체 가능"], img: "/cases/corporate-q/point-promo.webp", caption: "홈 · 기관 이슈" },
+  ],
+  details: [
+    { title: "대규모 메뉴·사이트맵", body: "기관 업무와 공개 항목을 분류해 많은 페이지도 일관된 메뉴와 경로로 찾게 합니다." },
+    { title: "목록·상세·검색 게시판", body: "사업공고, 보도자료, 채용과 공지에 필요한 검색, 분류와 상세 화면을 제공합니다." },
+    { title: "정보공개·ESG 체계", body: "사전정보, 경영공시, 윤리·인권·ESG 자료를 기관 기준에 맞춰 구조화합니다." },
+    { title: "국민참여·신고 동선", body: "고객의 소리, 설문과 각종 신고 절차를 안내하고 접수 시스템으로 연결할 수 있습니다." },
+    { title: "접근성·반응형 고려", body: "키보드와 작은 화면에서도 메뉴, 표, 탭과 게시판을 편리하게 이용하도록 제작합니다." },
+    { title: "운영자 관리 기능", body: "담당자가 공고, 자료, 팝업과 주요 콘텐츠를 직접 등록하는 관리자 기능을 추가할 수 있습니다." },
+  ],
+  mobile: {
+    title: "모바일에서도 공고와 공개자료를 빠르게 찾습니다",
+    body: "큰 메뉴는 접어서 제공하고 공고 목록과 검색, 바로가기와 참여 기능을 손가락으로 이용하기 편한 크기로 다시 배치합니다.",
+    shots: [
+      { img: "/cases/corporate-q/m-index.webp", caption: "메인" },
+      { img: "/cases/corporate-q/m-business-announcement.webp", caption: "사업공고" },
+      { img: "/cases/corporate-q/m-information-list.webp", caption: "정보공개" },
+      { img: "/cases/corporate-q/m-social-hub.webp", caption: "소셜 허브" },
+    ],
+  },
+  faq: [
+    { q: "현재 기관의 메뉴와 정보공개 분류를 그대로 옮길 수 있나요?", a: "기존 사이트와 운영 지침을 확인해 메뉴, 정보공개 항목과 담당 부서 구조를 새 디자인에 맞춰 이전합니다." },
+    { q: "사업공고와 채용 공고를 관리자가 올릴 수 있나요?", a: "관리자 기능을 추가하면 공고, 보도자료, 채용과 팝업을 직접 등록하고 게시 기간을 관리할 수 있습니다." },
+    { q: "통합검색과 직원검색도 연결할 수 있나요?", a: "콘텐츠 데이터와 직원 정보를 제공하는 방식에 맞춰 사이트 검색과 직원검색을 연결할 수 있습니다." },
+    { q: "웹 접근성 기준도 반영하나요?", a: "프로젝트 범위에 맞춰 키보드 이용, 대체텍스트, 명도, 표 구조와 접근성 점검 항목을 적용합니다." },
+    { q: "제작 기간과 비용은 어떻게 정해지나요?", a: "프리미엄 디자인은 부가세 별도 300만 원부터이며 페이지 수, 데이터 이전과 외부 시스템 연동 범위를 확인한 뒤 안내합니다." },
+    { q: "도메인·호스팅·유지보수도 지원하나요?", a: "기존 도메인 이전과 호스팅을 지원하고 공개 후 공고·자료 업데이트와 유지보수 방식도 함께 안내합니다." },
+  ],
+};
+
+export default study;

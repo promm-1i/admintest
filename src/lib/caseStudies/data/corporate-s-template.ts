@@ -1,0 +1,65 @@
+import type { CaseStudy } from "../types";
+
+const study: CaseStudy = {
+  customerCopyReady: true,
+  brand: "온결산업기록관",
+  headline: "산업 역사관·기업 기록관 홈페이지",
+  summary:
+    "산업의 역사와 사람의 기록을 큰 이미지와 전시 공간 중심으로 보여 주고, 시설·관람·전시·스토리·공지와 FAQ까지 제공하는 프리미엄 기록관 홈페이지입니다.",
+  brandColor: "rgb(126, 67, 42)",
+  tintColor: "rgb(238, 229, 219)",
+  overview:
+    "온결산업기록관 디자인은 한 제조기업의 기술과 사람, 산업 유산을 보존하는 기업 기록관을 가정해 구성했습니다. 전체 화면 히어로와 아치형 기록관 전경으로 공간의 분위기를 먼저 보여 주고, 세 개 전시동과 관람 정보를 이어 방문 목적을 분명하게 만듭니다.\n\n설립배경, 시설·관람 안내, 전시동 탭, 태동과 성장, 현재와 미래, 공지·FAQ와 상세 화면을 포함합니다. 시설은 슬라이더, 전시는 호버와 탭, 긴 역사 이야기는 큰 사진과 문장을 교차해 기록의 시간성을 살렸습니다.\n\n기록관명, 전시 내용, 역사 자료, 운영시간, 주소와 화면 이미지는 디자인 예시이며 실제 기관의 소장 자료와 관람 정책에 맞춰 변경합니다.",
+  meta: [
+    { label: "적합 업종", value: "기업 역사관 · 산업 박물관 · 홍보관 · 지역 기록관 · 아카이브" },
+    { label: "주요 구성", value: "설립배경 · 시설·관람 · 전시동 · 역사 스토리 · 공지·FAQ · 상세" },
+    { label: "맞춤 적용", value: "전시 구성 · 소장 자료 · 연혁 · 관람시간 · 예약·공지 기능 변경 가능" },
+  ],
+  mainShot: "/cases/corporate-s/main.webp",
+  pagesLabel: "PREVIEW",
+  pagesTitle: "주요 화면 미리보기",
+  pages: [
+    { name: "홈", file: "index.html", img: "/cases/corporate-s/page-index.webp", desc: "기록관의 분위기, 소개, 전시동과 관람 정보를 큰 이미지 흐름으로 전달합니다.", items: ["전체 화면 히어로", "기록관 소개와 전경", "전시동 3개", "관람시간·오시는 길"] },
+    { name: "설립배경", file: "background.html", img: "/cases/corporate-s/page-background.webp", desc: "기록관이 만들어진 이유와 보존 철학을 사진과 연혁 자료로 설명합니다.", items: ["설립 취지와 기록 철학", "기업·산업 연혁", "주요 기록 이미지"] },
+    { name: "시설 안내", file: "facility.html", img: "/cases/corporate-s/page-facility.webp", desc: "주요 공간과 편의시설을 사진 슬라이더와 설명으로 안내합니다.", items: ["공간별 시설 슬라이더", "층별·구역별 설명", "관람 안내 연결"] },
+    { name: "전시동", file: "exhibitions.html", img: "/cases/corporate-s/page-exhibitions.webp", desc: "세 개 전시동을 탭으로 바꾸어 전시 주제와 대표 기록을 확인하게 합니다.", items: ["전시동 3개 탭", "전시 이미지 갤러리", "전시 주제와 대표 자료"] },
+    { name: "태동과 성장", file: "story-origin.html", img: "/cases/corporate-s/page-story-origin.webp", desc: "기업과 산업이 시작된 배경을 긴 사진과 기록 문장으로 따라갑니다.", items: ["시대별 대형 이미지", "연도·사건·인물 기록", "스크롤 스토리 구성"] },
+    { name: "현재와 미래", file: "story-future.html", img: "/cases/corporate-s/page-story-future.webp", desc: "현재의 기술과 미래 산업 전환을 기록 자료와 함께 보여 줍니다.", items: ["현재 기술과 생산 현장", "전환 과정과 미래 비전", "산업 유산의 의미"] },
+    { name: "공지사항", file: "news.html", img: "/cases/corporate-s/page-news.webp", desc: "휴관, 전시와 프로그램 소식을 검색 가능한 목록으로 제공합니다.", items: ["공지 검색과 목록", "공지 상세 2종", "이전·다음 글 연결"] },
+    { name: "관람 안내", file: "visit.html", img: "/cases/corporate-s/page-visit.webp", desc: "운영시간, 휴관일, 위치와 관람 유의사항을 방문 전에 확인하게 합니다.", items: ["운영시간과 휴관일", "지도·교통·주차", "관람 유의사항"] },
+  ],
+  points: [
+    { title: "기록관의 의미를\n전경과 함께 소개합니다", body: "아치형 건축 전경과 기록관의 역할을 넓은 여백 안에 배치해 공간의 분위기와 설립 목적을 동시에 전달합니다.", items: ["기록관 소개 문장", "대형 건축 이미지", "설립배경 화면 연결"], img: "/cases/corporate-s/point-about.webp", caption: "홈 · 기록관 소개" },
+    { title: "세 개 전시 공간을\n한눈에 비교합니다", body: "기록의 전당, 복원 공방과 기억의 채플을 나란히 보여 주고 호버나 클릭한 전시동을 넓혀 대표 이미지와 주제를 확인하게 합니다.", items: ["전시동 3개", "호버·클릭 확장", "전시 상세 연결"], img: "/cases/corporate-s/point-exhibition.webp", caption: "홈 · 전시동" },
+    { title: "관람에 필요한 정보를\n마지막에 모아 둡니다", body: "운영시간, 휴관일과 위치를 홈 하단에 제공해 전시 내용을 본 방문자가 곧바로 방문 계획을 세울 수 있습니다.", items: ["운영시간·휴관일", "오시는 길", "관람 안내 연결"], img: "/cases/corporate-s/point-news.webp", caption: "홈 · 관람 안내" },
+    { title: "긴 역사 이야기는\n자료의 높이를 그대로 살립니다", body: "시대별 사진과 기록 문장을 같은 높이로 잘라 맞추지 않고 내용 길이에 따라 이어 붙여, 산업이 변화한 시간을 천천히 따라가게 합니다.", items: ["시대별 대형 이미지", "연도와 사건 기록", "가변 높이 스토리 캡처"], img: "/cases/corporate-s/point-story.webp", caption: "태동과 성장 · 역사 스토리" },
+  ],
+  details: [
+    { title: "전시·소장자료 구조", body: "실제 전시동과 소장자료 분류에 맞춰 메뉴, 갤러리와 캡션 항목을 변경합니다." },
+    { title: "역사 스토리 편집", body: "연혁, 인물과 기술 자료를 시대별 긴 스토리 화면으로 구성합니다." },
+    { title: "시설·관람 정보 제공", body: "시설, 운영시간, 휴관일, 지도와 관람 유의사항을 방문자 관점에서 정리합니다." },
+    { title: "공지·FAQ 관리 기능", body: "관리자가 휴관과 프로그램 공지, FAQ를 직접 수정하는 기능을 추가할 수 있습니다." },
+    { title: "PC·태블릿·모바일 반응형", body: "전시 패널과 긴 역사 이미지도 기기 크기에 맞춰 순서와 비율이 자연스럽게 바뀝니다." },
+    { title: "검색·공유 기본 설정", body: "전시와 기록 화면별 제목, 설명과 대표 이미지를 설정해 검색과 공유에 대비합니다." },
+  ],
+  mobile: {
+    title: "휴대폰에서도 전시와 관람 정보를 차분히 이어 봅니다",
+    body: "전시 패널과 역사 이미지는 한 줄씩 크게 보여 주고, 운영시간과 오시는 길은 방문 전에 빠르게 확인할 수 있게 배치합니다.",
+    shots: [
+      { img: "/cases/corporate-s/m-index.webp", caption: "메인" },
+      { img: "/cases/corporate-s/m-exhibitions.webp", caption: "전시동" },
+      { img: "/cases/corporate-s/m-story-origin.webp", caption: "태동과 성장" },
+      { img: "/cases/corporate-s/m-visit.webp", caption: "관람 안내" },
+    ],
+  },
+  faq: [
+    { q: "현재 전시동과 소장자료 분류에 맞춰 바꿀 수 있나요?", a: "네. 실제 전시 공간, 소장자료와 관람 동선을 확인해 메뉴, 탭과 갤러리 구성을 다시 정리합니다." },
+    { q: "전시와 공지 내용을 직접 수정할 수 있나요?", a: "관리자 기능을 추가하면 전시 소개, 운영시간, 공지와 FAQ를 직접 등록하고 수정할 수 있습니다." },
+    { q: "사진과 오래된 기록 자료가 많아도 괜찮나요?", a: "자료의 종류와 수량을 확인해 시대, 주제와 전시동별로 나누고 화면 크기에 맞는 이미지 파일로 정리합니다." },
+    { q: "관람 예약 기능도 넣을 수 있나요?", a: "운영 방식에 따라 날짜·인원 예약 신청, 단체 관람 문의 또는 외부 예약 시스템 연결을 추가할 수 있습니다." },
+    { q: "제작 기간과 비용은 어떻게 정해지나요?", a: "프리미엄 디자인은 부가세 별도 300만 원부터이며 자료 정리, 페이지 수와 예약·관리 기능 범위를 확인한 뒤 안내합니다." },
+    { q: "도메인·호스팅·유지보수도 지원하나요?", a: "도메인과 호스팅 연결을 지원하고 공개 후 전시·공지 업데이트와 유지보수 방식도 함께 안내합니다." },
+  ],
+};
+
+export default study;

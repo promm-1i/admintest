@@ -367,6 +367,7 @@ export function HeroFluid({ targetRef }: { targetRef: React.RefObject<HTMLElemen
     let divergence: FBO;
     let curlFBO: FBO;
     let pressure: DoubleFBO;
+    let framebuffersReady = false;
 
     const initFramebuffers = () => {
       const simRes = getResolution(CONF.SIM_RESOLUTION);
@@ -376,17 +377,20 @@ export function HeroFluid({ targetRef }: { targetRef: React.RefObject<HTMLElemen
       divergence = createFBO(simRes.width, simRes.height, gl.R16F, gl.RED, gl.NEAREST);
       curlFBO = createFBO(simRes.width, simRes.height, gl.R16F, gl.RED, gl.NEAREST);
       pressure = createDoubleFBO(simRes.width, simRes.height, gl.R16F, gl.RED, gl.NEAREST);
+      framebuffersReady = true;
     };
 
     const resizeCanvas = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       const w = Math.floor(canvas.clientWidth * dpr);
       const h = Math.floor(canvas.clientHeight * dpr);
-      if (canvas.width !== w || canvas.height !== h) {
+      if (w < 1 || h < 1) return false;
+      if (!framebuffersReady || canvas.width !== w || canvas.height !== h) {
         canvas.width = w;
         canvas.height = h;
         initFramebuffers();
       }
+      return true;
     };
     resizeCanvas();
     // rAF 첫 프레임 전에 버퍼가 미정의(흰색)로 비치지 않게 즉시 한 번 투명으로 비운다
@@ -431,6 +435,7 @@ export function HeroFluid({ targetRef }: { targetRef: React.RefObject<HTMLElemen
     };
 
     const splat = (x: number, y: number, dx: number, dy: number, color: [number, number, number]) => {
+      if (!framebuffersReady) return;
       gl.useProgram(splatProg.p);
       gl.uniform1i(splatProg.u["uTarget"]!, velocity.read.attach(0));
       gl.uniform1f(splatProg.u["aspectRatio"]!, canvas.width / canvas.height);
@@ -551,7 +556,10 @@ export function HeroFluid({ targetRef }: { targetRef: React.RefObject<HTMLElemen
     const frame = (now: number) => {
       const dt = Math.min((now - last) / 1000, 0.016666);
       last = now;
-      resizeCanvas();
+      if (!resizeCanvas()) {
+        raf = requestAnimationFrame(frame);
+        return;
+      }
 
       // 색상환 순환 (COLOR_UPDATE_SPEED)
       colorTimer += dt * CONF.COLOR_UPDATE_SPEED * 0.1;
