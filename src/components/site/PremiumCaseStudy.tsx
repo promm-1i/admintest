@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { SAMPLES, type Sample } from "@/lib/samples";
 import type { CaseStudy } from "@/lib/caseStudies";
+import { toCustomerFacingCaseStudy } from "@/lib/caseStudies/customerCopy";
 import { getDesignCode } from "@/lib/designCode";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
 import { cn } from "@/lib/utils";
@@ -56,7 +57,8 @@ function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: CaseStudy }) {
+export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sample; study: CaseStudy }) {
+  const study = toCustomerFacingCaseStudy(sourceStudy);
   const code = getDesignCode(sample);
   const liveUrl = sample.liveUrl ?? "";
   const [consultOpen, setConsultOpen] = useState(false);
@@ -151,10 +153,10 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
         <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
           <Reveal>
             <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: study.brandColor }}>
-              FLOW
+              {study.flowLabel ?? "FLOW"}
             </p>
             <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-[2rem] break-keep">
-              한 페이지 안에 위에서부터 이렇게 이어집니다
+              {study.flowTitle ?? "한 페이지 안에 위에서부터 이렇게 이어집니다"}
             </h2>
           </Reveal>
           <ol className="mt-10 grid gap-x-10 gap-y-0 md:grid-cols-2">

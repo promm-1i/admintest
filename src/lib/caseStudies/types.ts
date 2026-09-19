@@ -4,6 +4,8 @@
  * 본문에 적는 기능은 템플릿에 실제로 있는 것만 적는다 (동작하지 않는 버튼은 동작한다고 쓰지 않는다).
  */
 export type CaseStudy = {
+  /** 고객 관점 문구 개편을 마친 데이터는 공통 변환을 건너뛴다 */
+  customerCopyReady?: boolean;
   /** 템플릿 속 브랜드 이름 (가상 브랜드) */
   brand: string;
   headline: string;
@@ -22,6 +24,8 @@ export type CaseStudy = {
   pagesTitle?: string;
   pages?: { name: string; file: string; img: string; desc: string; items: string[] }[];
   /** 한 페이지 디자인 — 위에서부터 이어지는 섹션 흐름 */
+  flowLabel?: string;
+  flowTitle?: string;
   flow?: { name: string; desc: string }[];
   points: { title: string; body: string; items?: string[]; img: string; caption: string }[];
   detailsLabel?: string;

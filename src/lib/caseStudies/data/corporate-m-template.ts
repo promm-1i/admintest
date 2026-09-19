@@ -1,6 +1,7 @@
 import type { CaseStudy } from "../types";
 
 const study: CaseStudy = {
+  customerCopyReady: true,
   brand: "FLOVEX",
   headline: "산업설비 · 스마트 플로우 기업 홈페이지",
   summary:
