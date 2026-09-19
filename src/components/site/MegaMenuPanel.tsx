@@ -4,7 +4,7 @@ import type { NavDropdownEntry } from "./navData";
 
 type Props = {
   entries: NavDropdownEntry[];
-  activeKey: string;
+  activeKey: string | null;
   onActiveChange: (key: string) => void;
   onNavigate: () => void;
   onMouseEnter: () => void;
@@ -23,17 +23,29 @@ export function MegaMenuPanel({
   onMouseEnter,
   onMouseLeave,
 }: Props) {
+  const open = activeKey !== null;
+
   return (
     <div
       id="site-mega-menu"
       role="navigation"
       aria-label="전체 메뉴"
-      className="absolute inset-x-0 top-full z-50 hidden border-t border-border bg-background shadow-xl xl:block"
+      aria-hidden={!open}
+      className={cn(
+        "pointer-events-none absolute inset-x-0 top-full z-50 hidden h-[360px] overflow-hidden xl:block",
+        open && "pointer-events-auto",
+      )}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
       <div
-        className="mx-auto grid max-w-7xl border-x border-border/70"
+        className={cn(
+          "mx-auto grid min-h-[360px] max-w-7xl border-x border-t border-border/70 bg-background shadow-xl",
+          "transition-[translate,opacity] [transition-duration:400ms,400ms] [transition-timing-function:ease,ease] motion-reduce:translate-y-0 motion-reduce:transition-none",
+          open
+            ? "translate-y-0 opacity-100 [transition-delay:0ms,300ms]"
+            : "-translate-y-[500px] opacity-0 [transition-delay:0ms,0ms]",
+        )}
         style={{ gridTemplateColumns: `repeat(${entries.length}, minmax(0, 1fr))` }}
       >
         {entries.map((entry) => {
@@ -60,6 +72,7 @@ export function MegaMenuPanel({
                     <Link
                       to={item.href}
                       onClick={onNavigate}
+                      tabIndex={open ? undefined : -1}
                       className="block text-sm leading-5 text-muted-foreground transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     >
                       {item.label}

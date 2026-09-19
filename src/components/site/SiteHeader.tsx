@@ -227,16 +227,14 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {activeKey && (
-        <MegaMenuPanel
-          entries={DESKTOP_NAV}
-          activeKey={activeKey}
-          onActiveChange={openMega}
-          onNavigate={closeMegaNow}
-          onMouseEnter={keepMegaOpen}
-          onMouseLeave={scheduleCloseMega}
-        />
-      )}
+      <MegaMenuPanel
+        entries={DESKTOP_NAV}
+        activeKey={activeKey}
+        onActiveChange={openMega}
+        onNavigate={closeMegaNow}
+        onMouseEnter={keepMegaOpen}
+        onMouseLeave={scheduleCloseMega}
+      />
 
       {open && (
         <nav className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-border bg-background xl:hidden">
