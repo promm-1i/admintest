@@ -146,12 +146,12 @@ export function SiteHeader() {
         </Link>
 
         <nav
-          className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 xl:flex"
+          className="absolute left-1/2 hidden w-[900px] -translate-x-1/2 grid-cols-5 items-center xl:grid"
           aria-label="주요 메뉴"
         >
           {HEADER_NAV.map((entry) =>
             entry.type === "dropdown" ? (
-              <div key={entry.key} className="relative">
+              <div key={entry.key} className="relative flex justify-center">
                 <button
                   type="button"
                   aria-expanded={activeKey === entry.key}
@@ -178,7 +178,7 @@ export function SiteHeader() {
                 href={entry.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1 text-lg font-semibold text-muted-foreground transition-colors hover:text-foreground"
+                className="flex items-center justify-self-center gap-1 text-lg font-semibold text-muted-foreground transition-colors hover:text-foreground"
               >
                 {entry.label}
                 <ExternalLink className="size-3.5" />
@@ -187,7 +187,7 @@ export function SiteHeader() {
               <Link
                 key={entry.key}
                 to={entry.href}
-                className="text-lg font-semibold text-muted-foreground transition-colors hover:text-foreground"
+                className="justify-self-center text-lg font-semibold text-muted-foreground transition-colors hover:text-foreground"
               >
                 {entry.label}
               </Link>
