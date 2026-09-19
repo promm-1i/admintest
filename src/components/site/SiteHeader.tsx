@@ -10,6 +10,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
 
 const MEGA_CLOSE_DELAY = 150;
+const DESKTOP_NAV = HEADER_NAV.filter((entry): entry is NavDropdownEntry => entry.type === "dropdown");
 
 function MobileNavGroup({ entry, onNavigate }: { entry: NavDropdownEntry; onNavigate: () => void }) {
   return (
@@ -134,6 +135,10 @@ export function SiteHeader() {
         "sticky top-0 z-40 border-b bg-background transition-colors motion-safe:duration-300",
         scrolled ? "border-border shadow-[0_1px_0_rgba(0,0,0,0.02)]" : "border-transparent",
       )}
+      onMouseLeave={scheduleCloseMega}
+      onKeyDown={(event) => {
+        if (event.key === "Escape") closeMegaNow();
+      }}
     >
       <div className="relative flex h-16 items-center justify-between px-4 sm:px-6 lg:px-10">
         <Link to="/" className="flex items-center">
@@ -142,7 +147,7 @@ export function SiteHeader() {
 
         <nav
           className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 xl:flex"
-          onMouseLeave={scheduleCloseMega}
+          aria-label="주요 메뉴"
         >
           {HEADER_NAV.map((entry) =>
             entry.type === "dropdown" ? (
@@ -150,6 +155,7 @@ export function SiteHeader() {
                 <button
                   type="button"
                   aria-expanded={activeKey === entry.key}
+                  aria-controls="site-mega-menu"
                   className={cn(
                     "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2.5 text-lg font-semibold transition-colors duration-150",
                     activeKey === entry.key
@@ -157,21 +163,14 @@ export function SiteHeader() {
                       : "text-muted-foreground hover:bg-neutral-950 hover:text-white",
                   )}
                   onMouseEnter={() => openMega(entry.key)}
-                  onClick={() => (activeKey === entry.key ? scheduleCloseMega() : openMega(entry.key))}
+                  onFocus={() => openMega(entry.key)}
+                  onClick={() => (activeKey === entry.key ? closeMegaNow() : openMega(entry.key))}
                 >
                   {entry.label}
                   <ChevronDown
                     className={cn("size-4 transition-transform duration-200", activeKey === entry.key && "rotate-180")}
                   />
                 </button>
-                {activeKey === entry.key && (
-                  <MegaMenuPanel
-                    entry={entry}
-                    onNavigate={closeMegaNow}
-                    onMouseEnter={keepMegaOpen}
-                    onMouseLeave={scheduleCloseMega}
-                  />
-                )}
               </div>
             ) : entry.external ? (
               <a
@@ -227,6 +226,17 @@ export function SiteHeader() {
           </button>
         </div>
       </div>
+
+      {activeKey && (
+        <MegaMenuPanel
+          entries={DESKTOP_NAV}
+          activeKey={activeKey}
+          onActiveChange={openMega}
+          onNavigate={closeMegaNow}
+          onMouseEnter={keepMegaOpen}
+          onMouseLeave={scheduleCloseMega}
+        />
+      )}
 
       {open && (
         <nav className="max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-border bg-background xl:hidden">

@@ -283,7 +283,7 @@ export const HEADER_NAV: NavEntry[] = [
   {
     type: "dropdown",
     key: "custom-service",
-    label: "맞춤형 서비스",
+    label: "기술력",
     items: [
       { label: "커스텀 개발이란?", href: "/services/custom" },
       { label: "솔루션 · 데모 체험", href: "/web-solutions" },

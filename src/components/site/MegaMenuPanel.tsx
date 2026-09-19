@@ -1,195 +1,76 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { NavDropdownEntry, NavTemplateGroup } from "./navData";
-
-/**
- * 세로 스크롤 영역에 "더 있음" 신호를 붙이는 래퍼.
- * 아래에 내용이 남아 있으면 하단 페이드 + 바운스 화살표, 위로 지나쳤으면 상단 페이드가 뜬다 —
- * 스크롤바 없이도 목록이 잘렸다는 걸 지나치지 않게 한다.
- */
-function ScrollableY({ className, children }: { className?: string; children: ReactNode }) {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [atTop, setAtTop] = useState(true);
-  const [atBottom, setAtBottom] = useState(true);
-  const update = () => {
-    const el = ref.current;
-    if (!el) return;
-    setAtTop(el.scrollTop < 4);
-    setAtBottom(el.scrollTop + el.clientHeight >= el.scrollHeight - 4);
-  };
-  useEffect(() => {
-    update();
-    const el = ref.current;
-    if (!el) return;
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
-  return (
-    <div className={cn("relative min-h-0", className)}>
-      <div ref={ref} onScroll={update} className="max-h-[inherit] h-full overflow-y-auto overscroll-contain">
-        {children}
-      </div>
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-background to-transparent transition-opacity duration-200",
-          atTop ? "opacity-0" : "opacity-100",
-        )}
-      />
-      <div
-        aria-hidden
-        className={cn(
-          "pointer-events-none absolute inset-x-0 bottom-0 flex h-12 items-end justify-center bg-gradient-to-t from-background via-background/80 to-transparent pb-1 transition-opacity duration-200",
-          atBottom ? "opacity-0" : "opacity-100",
-        )}
-      >
-        <ChevronDown className="size-4 text-muted-foreground motion-safe:animate-bounce" />
-      </div>
-    </div>
-  );
-}
+import type { NavDropdownEntry } from "./navData";
 
 type Props = {
-  entry: NavDropdownEntry;
+  entries: NavDropdownEntry[];
+  activeKey: string;
+  onActiveChange: (key: string) => void;
   onNavigate: () => void;
   onMouseEnter: () => void;
   onMouseLeave: () => void;
 };
 
 /**
- * 업종을 먼저 고르고(왼쪽), 그 업종의 디자인 시안을 고르는(오른쪽) 2단 패널.
- * 업종당 시안이 여러 개라 한 번에 다 펼치면 같은 업종명이 반복돼 읽기 어렵다.
+ * 모든 대메뉴를 한 번에 보여 주는 데스크톱 전용 메가메뉴.
+ * 상단에서 가리킨 항목의 열만 강조하고, 다른 열도 그대로 노출해 전체 구성을 빠르게 훑게 한다.
  */
-function TemplateFlyout({ groups, onNavigate }: { groups: NavTemplateGroup[]; onNavigate: () => void }) {
-  const [activeKey, setActiveKey] = useState(groups[0]?.key ?? "");
-  const active = groups.find((g) => g.key === activeKey) ?? groups[0];
-
-  return (
-    <div className="flex max-h-[76vh] w-[640px] max-w-[78vw] overflow-hidden rounded-2xl border border-border bg-background shadow-xl">
-      <ScrollableY className="max-h-[76vh] w-[190px] shrink-0 border-r border-border">
-      <ul className="p-2">
-        {groups.map((g) => (
-          <li key={g.key}>
-            {/* 올리면 오른쪽에 시안이 펼쳐지고, 누르면 그 업종만 걸러진 전체 목록으로 간다 */}
-            <Link
-              to={g.href}
-              onClick={onNavigate}
-              onMouseEnter={() => setActiveKey(g.key)}
-              onFocus={() => setActiveKey(g.key)}
-              aria-current={g.key === active?.key}
-              className={`flex w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm transition-colors ${
-                g.key === active?.key
-                  ? "bg-primary/8 font-semibold text-primary"
-                  : "text-foreground/80 hover:bg-secondary"
-              }`}
-            >
-              {g.label}
-              <ChevronRight className="size-3.5 shrink-0 opacity-50" />
-            </Link>
-          </li>
-        ))}
-      </ul>
-      </ScrollableY>
-
-      {active && (
-        <ScrollableY className="max-h-[76vh] flex-1">
-        <div className="p-3">
-          <div className="flex items-baseline justify-between gap-2 px-1 pb-2">
-            <p className="text-xs font-semibold text-muted-foreground">
-              {active.label} · 디자인 {active.designs.length}종
-            </p>
-            <Link
-              to={active.href}
-              onClick={onNavigate}
-              className="text-xs font-medium text-primary hover:underline"
-            >
-              이 업종만 모아 보기
-            </Link>
-          </div>
-          <ul className="grid grid-cols-2 gap-2">
-            {active.designs.map((d) => (
-              <li key={d.href}>
-                <Link
-                  to={d.href}
-                  onClick={onNavigate}
-                  className="group/item block overflow-hidden rounded-lg border border-border transition-colors hover:border-primary/60 hover:bg-primary/5"
-                >
-                  {d.image && (
-                    <img
-                      src={d.image}
-                      alt=""
-                      loading="lazy"
-                      className="aspect-[4/3] w-full object-cover object-top"
-                    />
-                  )}
-                  <span className="flex items-baseline justify-between gap-1 px-2 py-1.5">
-                    <span className="text-xs font-semibold text-foreground/90 group-hover/item:text-primary">
-                      {d.label}
-                    </span>
-                    <span className="font-mono text-[10px] text-muted-foreground">{d.code}</span>
-                  </span>
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        </ScrollableY>
-      )}
-    </div>
-  );
-}
-
-/**
- * 대메뉴 트리거 바로 아래, 정확히 같은 중심축에 뜨는 드롭다운 패널.
- * 트리거를 감싸는 relative wrapper 기준 left-1/2 + -translate-x-1/2로
- * 위치를 고정하므로 centerX 오차가 항상 0px다.
- */
-export function MegaMenuPanel({ entry, onNavigate, onMouseEnter, onMouseLeave }: Props) {
+export function MegaMenuPanel({
+  entries,
+  activeKey,
+  onActiveChange,
+  onNavigate,
+  onMouseEnter,
+  onMouseLeave,
+}: Props) {
   return (
     <div
-      role="region"
-      aria-label={entry.label}
-      className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3"
+      id="site-mega-menu"
+      role="navigation"
+      aria-label="전체 메뉴"
+      className="absolute inset-x-0 top-full z-50 hidden border-t border-border bg-background shadow-xl xl:block"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      <ul className="min-w-[220px] rounded-2xl border border-border bg-background py-2.5 shadow-xl motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-top-2 motion-safe:duration-200 motion-safe:ease-out">
-        {entry.items.map((item, i) => {
-          // 앞 항목과 group이 달라지는 지점에 얇은 구분선 + 소제목을 넣는다
-          const groupStart = item.group && item.group !== entry.items[i - 1]?.group;
+      <div
+        className="mx-auto grid max-w-7xl border-x border-border/70"
+        style={{ gridTemplateColumns: `repeat(${entries.length}, minmax(0, 1fr))` }}
+      >
+        {entries.map((entry) => {
+          const active = entry.key === activeKey;
           return (
-            <li key={item.label} className={item.children ? "group/fly relative" : undefined}>
-              {groupStart && (
-                <div className="mx-5 mb-1 mt-2 border-t border-border pt-2">
-                  <p className="text-center text-xs font-semibold tracking-wide text-muted-foreground">
-                    {item.group}
-                  </p>
-                </div>
+            <section
+              key={entry.key}
+              aria-labelledby={`mega-heading-${entry.key}`}
+              className={cn(
+                "min-h-[360px] border-r border-border/70 px-5 py-7 transition-colors first:border-l-0 last:border-r-0",
+                active ? "bg-secondary/55" : "bg-background",
               )}
-              <Link
-                to={item.href}
-                onClick={onNavigate}
-                className="relative flex items-center justify-center whitespace-nowrap rounded-lg px-9 py-2.5 text-center text-base text-foreground/80 transition-colors hover:bg-secondary hover:font-semibold hover:text-foreground"
+              onMouseEnter={() => onActiveChange(entry.key)}
+            >
+              <h2
+                id={`mega-heading-${entry.key}`}
+                className={cn("text-sm font-bold", active ? "text-primary" : "text-foreground")}
               >
-                {item.label}
-                {item.children && (
-                  <ChevronRight className="absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                )}
-              </Link>
-
-              {/* hover 시 우측으로 펼쳐지는 업종 → 디자인 2단계 플라이아웃 */}
-              {item.children && (
-                <div className="invisible absolute left-full top-0 z-10 pl-2 opacity-0 transition-all duration-200 group-hover/fly:visible group-hover/fly:opacity-100 group-focus-within/fly:visible group-focus-within/fly:opacity-100 motion-reduce:transition-none">
-                  <TemplateFlyout groups={item.children} onNavigate={onNavigate} />
-                </div>
-              )}
-            </li>
+                {entry.label}
+              </h2>
+              <ul className="mt-5 space-y-3.5">
+                {entry.items.map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      to={item.href}
+                      onClick={onNavigate}
+                      className="block text-sm leading-5 text-muted-foreground transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 }
