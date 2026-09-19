@@ -18,10 +18,14 @@ export type CaseStudy = {
   meta: { label: string; value: string }[];
   mainShot: string;
   /** 여러 페이지 디자인 — 페이지별 안내 카드 */
+  pagesLabel?: string;
+  pagesTitle?: string;
   pages?: { name: string; file: string; img: string; desc: string; items: string[] }[];
   /** 한 페이지 디자인 — 위에서부터 이어지는 섹션 흐름 */
   flow?: { name: string; desc: string }[];
   points: { title: string; body: string; items?: string[]; img: string; caption: string }[];
+  detailsLabel?: string;
+  detailsTitle?: string;
   details: { title: string; body: string }[];
   mobile: { title: string; body: string; shots: { img: string; caption: string }[] };
   faq: { q: string; a: string }[];

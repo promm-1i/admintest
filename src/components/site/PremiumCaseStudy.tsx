@@ -178,10 +178,10 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
       <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
         <Reveal>
           <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: study.brandColor }}>
-            PAGES
+            {study.pagesLabel ?? "PAGES"}
           </p>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-[2rem]">
-            {study.pages.length}개 페이지에 담긴 것
+            {study.pagesTitle ?? `${study.pages.length}개 페이지에 담긴 것`}
           </h2>
         </Reveal>
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -292,10 +292,10 @@ export function PremiumCaseStudy({ sample, study }: { sample: Sample; study: Cas
       <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
         <Reveal>
           <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: study.brandColor }}>
-            DETAILS
+            {study.detailsLabel ?? "DETAILS"}
           </p>
           <h2 className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:text-[2rem] break-keep">
-            화면에 잘 안 보이지만 들어 있는 것
+            {study.detailsTitle ?? "화면에 잘 안 보이지만 들어 있는 것"}
           </h2>
         </Reveal>
         <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
