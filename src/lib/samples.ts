@@ -1126,8 +1126,30 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/hotel-e.jpg",
     liveUrl: "/templates/hotel-e/",
     industryKey: "stay",
-    premiumLabel: "호텔 A",
+    premiumLabel: "호텔 · 리조트업",
     designCode: "STAP-1001",
+    premium: true,
+  },
+  {
+    slug: "brew-a-template",
+    industry: "주류 · 양조 브랜드 홈페이지",
+    title: "주류·양조 브랜드 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 주류 · 양조 · 브랜드",
+    purpose:
+      "만 19세 확인 창으로 시작해 전면 사진 3장, 스크롤에 맞춰 금빛으로 차오르는 슬로건, 위로 밀려 올라가는 배경 영상, 화면에 붙은 채 넘어가는 세 장면, 파트너십 배너와 제품 초대 띠로 이어지는 메인에, 브랜드 이야기·맛의 비결·90년 연표·지도 매장 찾기·파트너십 프로그램·브루어리·캠페인 목록 2쪽과 상세 4쪽·약관 2쪽까지 서브 14쪽을 갖춘 주류 브랜드 홈페이지입니다. 매장 찾기는 지도 핀과 목록이 서로 연결되고, 참여형 캠페인에서는 사진을 올리는 응모 창이 열립니다.",
+    features: [
+      "성인 인증 창 · 사진 밝기에 따라 바뀌는 메뉴 색",
+      "스크롤에 차오르는 금빛 문장 · 화면에 붙는 세 장면",
+      "지도 핀 ↔ 매장 목록 연동 · 매장명 검색",
+      "좌우로 엇갈리는 90년 연표 26항목 · 서브 14쪽",
+    ],
+    idealFor: "수제맥주·전통주 양조장, 주류 수입사, 브루어리 탭룸, 브랜드 이야기를 길게 보여줘야 하는 식음료 회사",
+    image: "/thumbs/brew-a.jpg",
+    liveUrl: "/templates/brew-a/",
+    industryKey: "brew",
+    premiumLabel: "주류 · 양조업",
+    designCode: "BREP-1001",
     premium: true,
   },
   {
@@ -5611,6 +5633,7 @@ export const TEMPLATE_INDUSTRY_LABELS: Record<string, string> = {
   shop: "쇼핑몰",
   perfume: "향수·코스메틱",
   video: "영상 편집",
+  brew: "주류·양조 브랜드",
 };
 
 /** 실제로 템플릿이 존재하는 업종만 필터로 노출한다 (준비 안 된 업종 칩을 띄우지 않는다). */
@@ -5714,7 +5737,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "shop",
     label: "쇼핑몰 · 브랜드",
     desc: "상품을 진열하고 장바구니 · 구매로 잇는 구성",
-    industryKeys: ["shop", "perfume"],
+    industryKeys: ["shop", "perfume", "brew"],
   },
   {
     key: "corporate",

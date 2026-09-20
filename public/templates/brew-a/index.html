@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>해담 맥주 | 시간이 빚은 한 잔의 프리미엄</title>
+<meta name="description" content="해담양조 주식회사 공식 홈페이지 — 1936년 양평에서 시작한 프리미엄 라거 해담의 맛과 이야기, 마실 수 있는 곳을 소개합니다.">
+<meta property="og:title" content="해담 맥주 | 시간이 빚은 한 잔의 프리미엄">
+<meta property="og:description" content="해담양조 주식회사 공식 홈페이지 — 1936년 양평에서 시작한 프리미엄 라거 해담의 맛과 이야기, 마실 수 있는 곳을 소개합니다.">
+<meta property="og:image" content="./og.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+
+/* ══ 메인 ══ 레퍼런스: --inner 1760 */
+.main-home{--inner:1760px}
+
+/* 히어로 — 100vh 전면 슬라이드 3장, 5초 자동, 우하단 썸네일 110×72 radius 8 */
+.mv{position:relative;overflow:hidden;height:100vh;height:100dvh}
+.mv__track{position:relative;height:100%}
+.mv__item{position:absolute;inset:0;opacity:0;visibility:hidden;backface-visibility:hidden;
+  transition:opacity 1s ease,visibility 1s ease}
+.mv__item.on{opacity:1;visibility:visible}
+.mv__link{display:block;height:100%}
+.mv__img{display:block;width:100%;height:100%;object-fit:cover;user-select:none}
+.mv__img--mo{display:none}
+.mv__item.on .mv__img{animation:mvZoom 1.5s cubic-bezier(.16,1,.3,1) both}
+@keyframes mvZoom{from{transform:scale(1.1)}to{transform:none}}
+.mv__scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.34) 38%,rgba(0,0,0,0) 68%)}
+.mv__cap{position:absolute;z-index:2;left:120px;top:26%;max-width:720px;color:#fff;
+  text-shadow:0 2px 24px rgba(0,0,0,.45)}
+.mv__cap-k{display:block;font-size:1.8rem;font-weight:500}
+.mv__cap-h{display:block;margin-top:16px;font-family:var(--kserif);font-size:6.2rem;font-weight:500;line-height:1.3;color:var(--gold)}
+.mv__cap-t{display:block;margin-top:26px;font-size:1.9rem;line-height:2.1}
+.mv__nav{position:absolute;z-index:3;right:60px;bottom:60px;display:flex;gap:12px}
+.mv__dot{position:relative;overflow:hidden;padding:1px;width:110px;aspect-ratio:1.5277;
+  background:transparent;border-radius:8px;transition:background .35s ease}
+.mv__dot::after{content:'';position:absolute;inset:0;margin:1px;background:rgba(0,0,0,.5);
+  opacity:0;transform:scaleX(0);transform-origin:left}
+.mv__dot img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit;opacity:.8}
+.mv__dot.on{background:#fff}
+.mv__dot.on img{opacity:1}
+.mv__dot.on::after{opacity:1;animation:mvBar 5s linear forwards}
+@keyframes mvBar{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* 슬로건 — padding 160/120 · 제목 display clamp(2.2,4vw,5.8)rem 400 line-height 1.4
+   · 본문 우측 정렬 margin-top 196 · 스크롤에 글자가 금빛으로 차오름 */
+.creed{position:relative;overflow:hidden}
+.creed__wrap{position:relative;padding:160px 120px;min-height:100vh;min-height:100dvh}
+.creed__bg{position:absolute;inset:0;background-image:linear-gradient(180deg,var(--pri) 0%,#0B1A13 60%,var(--pri) 100%);
+  background-size:100% 200%;background-position:0 0}
+.creed__h{position:relative;font-family:var(--serif);font-size:clamp(2.2rem,4vw,5.8rem);
+  font-weight:400;line-height:1.4;color:#fff}
+.creed__line{display:block}
+.creed__line:last-child{margin-top:.65em}
+.creed__p{position:relative;display:flex;justify-content:flex-end;margin-top:196px;
+  font-size:clamp(1.46rem,4.26vw,2.4rem);color:#fff}
+.creed__p-line{display:block;margin-bottom:20px}
+.creed__p-line:last-child{margin-bottom:0}
+.fill{background-image:linear-gradient(90deg,var(--gold) 0%,var(--gold) 50%,rgba(201,154,59,.2) 70%,rgba(201,154,59,.2) 100%);
+  background-size:400% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.creed__p .fill{background-image:linear-gradient(90deg,#fff 0%,#fff 50%,rgba(255,255,255,.22) 70%,rgba(255,255,255,.22) 100%)}
+
+/* 이야기 — 100vh 배경 영상 + 아래로 검게 깔리는 층 · 내용 하단 정렬 padding 0 80 120 */
+.tale{position:relative;height:100vh;height:100dvh}
+.tale__wrap{position:relative;width:100%;height:100%;will-change:transform}
+.tale__media{position:absolute;inset:0;overflow:hidden}
+.tale__media video,.tale__media img{display:block;width:100%;height:100%;object-fit:cover}
+.tale__veil{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,0) 45%,rgba(0,0,0,.02) 54%,rgba(0,0,0,.08) 61%,rgba(0,0,0,.18) 69%,rgba(0,0,0,.32) 78%,rgba(0,0,0,.5) 87%,rgba(0,0,0,.72) 95%,rgba(0,0,0,.9) 101%,#000 105%)}
+.tale__main{position:relative;display:flex;flex-direction:column;justify-content:flex-end;
+  margin:0 auto;padding:0 80px 120px;width:100%;height:100%;color:#fff}
+.tale__in{width:90%}
+.tale__h{font-size:3.6rem;font-weight:600}
+.tale__t{margin:20px 0 48px;font-size:2rem}
+
+/* 비밀 — 500dvh 핀 구간. 위쪽 50vh 그라데이션 → sticky 100vh 검정 무대 */
+.secret{position:relative;height:500vh;height:500dvh;pointer-events:none}
+.secret__edge{width:100%;height:50vh;height:50dvh;
+  background:linear-gradient(to bottom,rgba(0,0,0,0) 0%,rgba(0,0,0,.05) 15%,rgba(0,0,0,.15) 30%,rgba(0,0,0,.3) 45%,rgba(0,0,0,.5) 60%,rgba(0,0,0,.75) 80%,#000 100%)}
+.secret__stage{position:sticky;top:0;left:0;overflow:hidden;width:100%;height:100vh;height:100dvh;
+  background:#000;pointer-events:auto}
+.secret__h{position:absolute;z-index:2;top:12%;left:0;width:100%;text-align:center;line-height:1.26;
+  font-family:var(--serif);font-size:clamp(4.2rem,7.2vw,12rem);font-weight:400;color:#fff;
+  mix-blend-mode:exclusion;will-change:transform,opacity}
+.secret__h-row{overflow:hidden}
+.secret__h-row:first-child{font-size:.56em}
+.secret__panel{position:relative;top:28%;left:50%;overflow:hidden;height:calc(620 / 1920 * 100vw);
+  aspect-ratio:.8051;transform:translate(-50%,0);will-change:transform,width,height,top}
+.secret__list{position:relative;height:100%;will-change:transform}
+.secret__item{position:relative;height:100%}
+.secret__bg{position:absolute;inset:0;padding:var(--gap)}
+.secret__bg-in{overflow:hidden;height:100%}
+.secret__bg video,.secret__bg img{display:block;width:100%;height:100%;object-fit:cover;opacity:.8;
+  filter:saturate(1.1)}
+.secret__note{display:none;padding:0 var(--gap) var(--gap);color:#fff}
+.secret__note-h{display:flex;font-size:2rem}
+.secret__note-n{padding-right:.45em;font-size:1.4rem}
+.secret__note-t{margin-top:6px}
+.secret__ind{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;
+  color:#fff;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility .35s ease}
+.secret__stage[data-ind="1"] .secret__ind{opacity:1;visibility:visible}
+.secret__ind-in{display:flex;align-items:center;justify-content:space-between;
+  padding:0 calc(var(--gap) + 120px) 0 calc(var(--gap) + 50px);width:100%}
+.secret__ind-h{overflow:hidden;height:1.5em;font-size:3.6rem;font-weight:700}
+.secret__ind-row{display:flex;transition:transform .8s cubic-bezier(.77,0,.18,1)}
+.secret__ind-n{padding-right:.35em;font-size:2rem;font-weight:700}
+.secret__ind-t{overflow:hidden;height:3em;font-size:2rem;text-align:right}
+.secret__ind-p{transition:transform .8s cubic-bezier(.77,0,.18,1)}
+
+/* 마스터 — padding 200 0 · 배경 사진 · 워드마크 clamp(180,30vw+5rem,517) · 제목 9.4rem */
+.craft{position:relative;padding:200px 0;text-align:center;color:#fff;background:#000}
+.craft__wrap{position:relative;z-index:2;margin:0 auto;width:90%;max-width:var(--inner)}
+.craft__bg{position:absolute;inset:0}
+.craft__bg img{display:block;width:100%;height:100%;object-fit:cover}
+.craft__h{position:relative;width:100%;line-height:1.2;font-family:var(--serif);font-size:9.4rem;font-weight:400}
+.craft__mark{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto;width:clamp(180px,30vw + 5rem,517px);aspect-ratio:482 / 307}
+.craft__mark .wordmark{display:block;width:100%;font-size:clamp(26px,6.9vw,100px);line-height:1;white-space:nowrap}
+.craft__sub{display:block;margin-top:.1em;font-family:var(--serif);font-weight:500;
+  font-size:clamp(13px,3.3vw,48px);letter-spacing:.06em;line-height:1.1;white-space:nowrap}
+.craft__t{margin:140px 0 40px;font-size:2.4rem;font-weight:500}
+
+/* 초대 — margin 30 · 높이 720 · 제품 PNG 우 7.1% 아래 -5% · 제목 3.6rem 700 */
+.invite{position:relative;margin:var(--gap);height:720px}
+.invite__bg{position:absolute;inset:0;overflow:hidden}
+.invite__bg img{display:block;width:100%;height:100%;object-fit:cover;opacity:.94}
+.invite__pack{position:absolute;right:7.1%;bottom:-5%;width:clamp(170px,34vw,768px);height:auto;
+  object-fit:contain;transform:scale(1.3);transition:transform 1.8s cubic-bezier(.16,1,.3,1)}
+.invite.on .invite__pack{transform:none}
+.invite__in{position:relative;z-index:2;display:flex;flex-direction:column;align-items:flex-start;
+  justify-content:center;padding:0 80px;height:100%;color:#fff}
+.invite__h{margin-bottom:48px;line-height:1.5;font-size:3.6rem;font-weight:700}
+
+@media screen and (max-width:1024px){
+  .mv__cap{left:5%;right:5%;top:22%;max-width:none}
+  .mv__cap-h{font-size:3.4rem}
+  .mv__cap-t{font-size:1.6rem}
+  .mv__nav{right:40px;bottom:40px}
+  .mv__dot{width:100px;border-radius:6px}
+  .creed__wrap{padding:120px 5%;min-height:auto}
+  .creed__p{display:block;margin-top:60px}
+  .tale{display:grid;width:100%;height:auto;min-height:500px;aspect-ratio:16/9}
+  .tale__main{padding:0 5% 80px}
+  .tale__h{font-size:2.4rem}
+  .tale__t{margin:10px 0 30px;font-size:1.8rem}
+  .secret{padding:120px 0;height:auto;background:#000}
+  .secret__edge{display:none}
+  .secret__h{position:static;mix-blend-mode:normal}
+  .secret__stage{position:static;height:auto}
+  .secret__panel{position:static;height:auto;aspect-ratio:auto;transform:none}
+  .secret__list{height:auto}
+  .secret__item{height:auto}
+  .secret__bg{position:static}
+  .secret__bg-in{height:auto}
+  .secret__bg video,.secret__bg img{height:auto}
+  .secret__note{display:block}
+  .secret__ind{display:none}
+  .craft{padding:120px 0}
+  .craft__h{margin-bottom:24px;font-size:6.4rem}
+  .craft__mark{aspect-ratio:auto}
+  .craft__t{margin:60px 0 30px;font-size:1.8rem}
+  .invite{height:540px}
+  .invite__in{padding:0 36px}
+  .invite__h{margin-bottom:32px;font-size:3rem}
+  .invite__pack{bottom:-4%}
+}
+@media screen and (max-width:768px){
+  .mv{padding:calc(var(--header-h) + 5px) 20px 20px;height:auto}
+  .mv__track{overflow:hidden;height:auto;aspect-ratio:.68359375}
+  .mv__item{position:absolute;inset:0;height:100%}
+  .mv__img--pc{display:none}
+  .mv__img--mo{display:block}
+  .mv__cap{left:34px;right:34px;top:18%}
+  .mv__cap-h{font-size:2.4rem}
+  .mv__cap-t{display:none}
+  .mv__nav{right:auto;left:50%;bottom:40px;padding:10px;background:rgba(0,0,0,.2);
+    border-radius:24px;transform:translateX(-50%)}
+  .mv__dot{width:10px;height:10px;aspect-ratio:auto;background:rgba(255,255,255,.3);border-radius:50%}
+  .mv__dot::after{content:none}
+  .mv__dot img{display:none}
+  .mv__dot.on{background:#fff}
+  .creed__wrap{padding:60px 5% 80px}
+  .creed__p{margin-top:40px}
+  .tale__main{padding-bottom:60px}
+  .tale__h{font-size:2rem}
+  .tale__t{font-size:1.6rem}
+  .secret{padding:80px 0}
+  .craft{padding:80px 0}
+  .craft__h{margin-bottom:16px;font-size:4.2rem}
+  .craft__t{margin:30px 0 24px;font-size:1.6rem}
+  .invite{height:420px}
+  .invite__in{padding:0 24px 80px}
+  .invite__h{margin-bottom:20px;font-size:2rem}
+  .invite__pack{bottom:-2.3%}
+}
+
+</style>
+</head>
+<body>
+<a class="skipnav" href="#content">본문 바로가기</a>
+<header class="site-head" data-theme="dark" data-top-theme="dark">
+<div class="site-head__bar">
+<div class="site-head__wrap">
+<a class="site-logo" href="./index.html"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span><span class="blind">해담 홈으로</span></a>
+<nav class="site-nav" aria-label="주 메뉴">
+<div class="gnb"><ul class="gnb__list"><li class="gnb__item"><a class="gnb__link" href="./index.html" aria-current="page">HOME</a></li><li class="gnb__item"><a class="gnb__link" href="./brand.html">BRAND</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./brand.html">해담 맥주</a></li><li><a class="gnb__sub-link" href="./taste.html">맛의 비결</a></li><li><a class="gnb__sub-link" href="./history.html">브랜드 히스토리</a></li></ul></div></li><li class="gnb__item"><a class="gnb__link" href="./discover.html">DISCOVER</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./discover.html">여기, 해담이 있습니다</a></li><li><a class="gnb__sub-link" href="./master.html">HAEDAM MASTER 프로그램</a></li><li><a class="gnb__sub-link" href="./brewery.html">해담 브루어리 양평</a></li></ul></div></li><li class="gnb__item"><a class="gnb__link" href="./campaign.html">CAMPAIGN</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./campaign.html">진행 중 캠페인</a></li><li><a class="gnb__sub-link" href="./campaign-done.html">이전 캠페인</a></li></ul></div></li></ul></div>
+</nav>
+<button class="site-head__burger" type="button" aria-label="전체 메뉴 열기" aria-expanded="false">
+<svg viewBox="0 0 24 24"><path d="M22 12.5H2"/><path d="M12.9 5.2H2"/><path d="M22 19.8H11.1"/></svg>
+</button>
+</div>
+</div>
+<div class="site-head__drop" aria-hidden="true"></div>
+</header>
+<div class="site-nav__dim" hidden></div>
+<main id="content" class="main-home">
+<h1 class="blind">해담 맥주 — 시간이 빚은 한 잔의 프리미엄</h1>
+
+<section class="mv" data-head-theme="dark" aria-label="주요 소식">
+<div class="mv__track"><div class="mv__item on" data-idx="0">
+<a class="mv__link" href="./campaign-first.html">
+<img class="mv__img mv__img--pc" src="./assets/hero-1.jpg" alt="" >
+<img class="mv__img mv__img--mo" src="./assets/hero-1-m.jpg" alt="" >
+<span class="mv__scrim"></span>
+<span class="mv__cap">
+<span class="mv__cap-k">홈 리추얼 캠페인</span>
+<span class="mv__cap-h">첫 잔은 해담</span>
+<span class="mv__cap-t">해담 맥주를 잔에 따르고<br>거품이 차오르기까지 1분의 여유<br>기다림으로 더욱 깊어진 풍미</span>
+</span>
+</a>
+</div><div class="mv__item" data-idx="1">
+<a class="mv__link" href="./campaign-pouring.html">
+<img class="mv__img mv__img--pc" src="./assets/hero-2.jpg" alt="" loading="lazy">
+<img class="mv__img mv__img--mo" src="./assets/hero-2-m.jpg" alt="" loading="lazy">
+<span class="mv__scrim"></span>
+<span class="mv__cap">
+<span class="mv__cap-k">따르는 시간</span>
+<span class="mv__cap-h">해담을 따르는 시간</span>
+<span class="mv__cap-t">잔을 기울이는 각도부터 거품의 두께까지<br>90년 동안 지켜 온 한 잔의 공식</span>
+</span>
+</a>
+</div><div class="mv__item" data-idx="2">
+<a class="mv__link" href="./brand.html">
+<img class="mv__img mv__img--pc" src="./assets/hero-3.jpg" alt="" loading="lazy">
+<img class="mv__img mv__img--mo" src="./assets/hero-3-m.jpg" alt="" loading="lazy">
+<span class="mv__scrim"></span>
+<span class="mv__cap">
+<span class="mv__cap-k">90년의 전통</span>
+<span class="mv__cap-h">시간이 빚은 한 잔</span>
+<span class="mv__cap-t">1936년 양평 강하에서 시작한 첫 담금<br>해담은 오늘도 같은 물과 같은 시간을 씁니다</span>
+</span>
+</a>
+</div></div>
+<div class="mv__nav"><button class="mv__dot on" type="button" data-go="0" aria-label="1번 슬라이드 보기"><img src="./assets/hero-1-thumb.jpg" alt=""></button><button class="mv__dot" type="button" data-go="1" aria-label="2번 슬라이드 보기"><img src="./assets/hero-2-thumb.jpg" alt=""></button><button class="mv__dot" type="button" data-go="2" aria-label="3번 슬라이드 보기"><img src="./assets/hero-3-thumb.jpg" alt=""></button></div>
+</section>
+
+<section class="creed" data-head-theme="dark">
+<div class="creed__wrap">
+<div class="creed__bg"></div>
+<h2 class="creed__h">
+<span class="creed__line fill">시간이 빚은</span>
+<span class="creed__line fill">한 잔의 프리미엄</span>
+<span class="creed__line fill">해담을 넘어서, 해담</span>
+</h2>
+<div class="creed__p">
+<div>
+<span class="creed__p-line fill">가장 맛있는 맥주를 우리 물과 우리 보리로 만들다.</span>
+<span class="creed__p-line fill">1936년, 양평 강하에서 시작한 해담 맥주.<br>
+해담은 이내 잔을 든 사람들의 하루를 채우고,<br>
+웃게 만드는 단 하나의 프리미엄 맥주가 되었습니다.</span>
+<span class="creed__p-line fill">90년이 넘는 시간이 흐른 지금도<br>
+우리는 누구보다 맥주가 지닌 가능성을 믿고 있습니다.</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="tale" data-head-theme="dark">
+<div class="tale__wrap">
+<div class="tale__media">
+<video class="tale__v" muted playsinline loop preload="none" poster="./assets/tale.jpg">
+<source src="./assets/tale.mp4" type="video/mp4"></video>
+<div class="tale__veil"></div>
+</div>
+<div class="tale__main"><div class="tale__in">
+<h2 class="tale__h rv">해담은 더욱 맛있어졌습니다.</h2>
+<p class="tale__t rv">1936년 첫 담금 이래 프리미엄 맥주의 기준을 지켜 온 해담.<br>
+새로운 홉의 가장 알맞은 쓰임을 찾아내 맥아의 맛을 한층 끌어올려 더욱 단정한 맛을 완성했습니다.</p>
+<a class="btn btn--light rv" href="./brand.html"><span class="btn__t">HAEDAM STORY</span></a>
+</div></div>
+</div>
+</section>
+
+<section class="secret" data-head-theme="dark">
+<div class="secret__edge"></div>
+<div class="secret__stage">
+<h2 class="secret__h">
+<div class="secret__h-row"><div>THE SECRET OF</div></div>
+<div class="secret__h-row"><div>HAEDAM BEER</div></div>
+</h2>
+<div class="secret__panel">
+<div class="secret__list"><div class="secret__item">
+<div class="secret__bg"><div class="secret__bg-in">
+<video class="secret__v" muted playsinline loop preload="none" poster="./assets/secret-1.jpg">
+<source src="./assets/secret-1.mp4" type="video/mp4"></video>
+</div></div>
+<div class="secret__note"><h3 class="secret__note-h"><span class="secret__note-n">1</span> 눈으로 먼저 마시는 한 잔</h3>
+<p class="secret__note-t">해담의 매력은 눈으로도 확인할 수 있습니다.<br>맑은 황금빛을 한층 돋보이게 하는 촘촘하고 흰 거품.</p></div>
+</div><div class="secret__item">
+<div class="secret__bg"><div class="secret__bg-in">
+<video class="secret__v" muted playsinline loop preload="none" poster="./assets/secret-2.jpg">
+<source src="./assets/secret-2.mp4" type="video/mp4"></video>
+</div></div>
+<div class="secret__note"><h3 class="secret__note-h"><span class="secret__note-n">2</span> 깊고 진한 해담만의 감칠맛</h3>
+<p class="secret__note-t">엄선한 원료와 손에 익은 담금 공정으로 완성한 해담의 풍미는<br>오직 해담에서만 만날 수 있는 맛의 기준입니다.</p></div>
+</div><div class="secret__item">
+<div class="secret__bg"><div class="secret__bg-in">
+<video class="secret__v" muted playsinline loop preload="none" poster="./assets/secret-3.jpg">
+<source src="./assets/secret-3.mp4" type="video/mp4"></video>
+</div></div>
+<div class="secret__note"><h3 class="secret__note-h"><span class="secret__note-n">3</span> 해담의 시그니처, 들꽃 같은 향</h3>
+<p class="secret__note-t">홉의 서늘한 향, 맥아의 깊은 단맛, 그리고 숙성 과정에서<br>무르익은 섬세한 여운이 어우러진 품격 있는 조화.</p></div>
+</div></div>
+<div class="secret__ind"><div class="secret__ind-in">
+<h3 class="secret__ind-h"><div class="secret__ind-row"><span class="secret__ind-n">1</span> 눈으로 먼저 마시는 한 잔</div><div class="secret__ind-row"><span class="secret__ind-n">2</span> 깊고 진한 해담만의 감칠맛</div><div class="secret__ind-row"><span class="secret__ind-n">3</span> 해담의 시그니처, 들꽃 같은 향</div></h3>
+<div class="secret__ind-t"><p class="secret__ind-p">해담의 매력은 눈으로도 확인할 수 있습니다.<br>맑은 황금빛을 한층 돋보이게 하는 촘촘하고 흰 거품.</p><p class="secret__ind-p">엄선한 원료와 손에 익은 담금 공정으로 완성한 해담의 풍미는<br>오직 해담에서만 만날 수 있는 맛의 기준입니다.</p><p class="secret__ind-p">홉의 서늘한 향, 맥아의 깊은 단맛, 그리고 숙성 과정에서<br>무르익은 섬세한 여운이 어우러진 품격 있는 조화.</p></div>
+</div></div>
+</div>
+</div>
+</section>
+
+<section class="craft" data-head-theme="dark">
+<div class="craft__bg"><img src="./assets/craft-bg.jpg" alt="" loading="lazy"></div>
+<div class="craft__wrap">
+<h2 class="craft__h"><span class="craft__mark rv"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span><span class="craft__sub">Master</span></span></h2>
+<div class="craft__main">
+<p class="craft__t rv">해담 마스터 프로그램은<br>
+해담이 프리미엄 생맥주 시장에서 운영하는<br>
+공식 파트너십 프로그램입니다.<br>
+90년의 장인 정신과 품격을 바탕으로<br>
+차별화된 한 잔의 경험을 완성해 나갑니다.</p>
+<a class="btn btn--light rv" href="./master.html"><span class="btn__t">HAEDAM MASTER</span></a>
+</div>
+</div>
+</section>
+
+<section class="invite" data-head-theme="dark">
+<div class="invite__bg">
+<img src="./assets/invite-bg.jpg" alt="" loading="lazy">
+<img class="invite__pack" src="./assets/invite-pack.png" alt="해담 프리미엄 라거 캔과 잔" loading="lazy">
+</div>
+<div class="invite__in">
+<h2 class="invite__h rv">해담의 이야기는,<br>지금도 완성되고 있습니다.</h2>
+<a class="btn btn--light rv" href="./discover.html"><span class="btn__t">DISCOVER HAEDAM</span></a>
+</div>
+</section>
+
+</main>
+<footer class="site-foot">
+<div class="site-foot__panel">
+<div class="site-foot__row"><div class="site-foot__col">
+<div class="site-foot__ci"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span></div>
+</div></div>
+<div class="site-foot__row">
+<div class="site-foot__col">
+<h2 class="site-foot__name">해담양조 주식회사</h2>
+<dl class="site-foot__data">
+<div class="site-foot__item"><dt class="site-foot__dt">주소 :</dt><dd>경기 양평군 강하면 강남로 118, 해담브루어리</dd></div>
+<div class="site-foot__item"><dt class="site-foot__dt">사업자등록번호 :</dt><dd>214-88-03917</dd></div>
+<div class="site-foot__item"><dt class="site-foot__dt">TEL :</dt><dd>031-770-1936</dd></div>
+</dl>
+</div>
+<div class="site-foot__col">
+<ul class="site-foot__links">
+<li><a href="./privacy.html">개인정보취급방침</a></li>
+<li><a href="./terms.html">이메일무단수집거부</a></li>
+</ul>
+<ul class="site-foot__sns">
+<li><a href="./index.html" aria-label="인스타그램"><i class="ico ico--ig"></i></a></li>
+<li><a href="./index.html" aria-label="유튜브"><i class="ico ico--yt"></i></a></li>
+</ul>
+</div>
+</div>
+<div class="site-foot__row"><div class="site-foot__col">
+<small class="site-foot__copy">COPYRIGHT ⓒ 2026 해담양조 주식회사. ALL RIGHTS RESERVED.</small>
+</div></div>
+</div>
+</footer>
+<button class="gotop" type="button" aria-label="맨 위로 이동"></button><div class="modal agegate" id="agegate" role="dialog" aria-modal="true" aria-labelledby="agegate-q">
+<div class="modal__box">
+<div class="agegate__in">
+<div class="agegate__logo"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span></div>
+<h2 class="agegate__q" id="agegate-q">만 19세 이상<br>음주 가능한 연령입니까?</h2>
+<div class="agegate__btns">
+<button class="btn btn--pri" type="button" data-age="yes">YES</button>
+<button class="btn btn--pri" type="button" data-age="no">NO</button>
+</div>
+<small class="agegate__warn"><span>※ 경고 :</span>
+<span>지나친 음주는 뇌졸중, 기억력 손상인 치매를 유발합니다.<br>임신 중 음주는 기형아 출생 위험을 높입니다.</span></small>
+</div>
+</div>
+</div>
+<script>
+
+/* 성인인증 — 레퍼런스와 같은 흐름: 쿠키 1일, 300ms 뒤 열림, 확인 전 스크롤 잠금 */
+(function(){
+  var g=document.getElementById('agegate'); if(!g) return;
+  function get(n){var m=('; '+document.cookie).split('; '+n+'='); return m.length===2?m.pop().split(';').shift():''}
+  function set(n,v,d){var e=new Date(); e.setTime(e.getTime()+d*864e5);
+    document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/'}
+  if(get('hdAge')==='1'){ g.remove(); return; }
+  document.documentElement.style.overflow='hidden';
+  setTimeout(function(){ g.classList.add('on'); var b=g.querySelector('[data-age="yes"]'); if(b) b.focus(); },300);
+  g.addEventListener('click',function(e){
+    var t=e.target.closest('[data-age]'); if(!t) return;
+    if(t.dataset.age==='no'){ alert('만 19세 미만은 이용하실 수 없습니다.'); return; }
+    set('hdAge','1',1); g.classList.remove('on');
+    document.documentElement.style.overflow='';
+    setTimeout(function(){ g.remove(); },320);
+  });
+})();
+
+/* 등장 모션 */
+(function(){
+  var els=document.querySelectorAll('.rv'); if(!els.length) return;
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('on')}); return; }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('on'); io.unobserve(en.target);} });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.01});
+  els.forEach(function(e){ io.observe(e) });
+})();
+
+/* 헤더 — 스크롤 방향 숨김 + 섹션별 테마 + 드롭다운 + 모바일 패널 */
+(function(){
+  var head=document.querySelector('.site-head'); if(!head) return;
+  var nav=head.querySelector('.site-nav'), burger=head.querySelector('.site-head__burger');
+  var dim=document.querySelector('.site-nav__dim'), drop=head.querySelector('.site-head__drop');
+  var last=0, top=head.dataset.topTheme||'dark';
+  function desktop(){ return window.innerWidth>1024 }
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY||0;
+    head.dataset.hide=(y>200&&y>last&&!head.classList.contains('is-open'))?'1':'0';
+    last=y;
+    var t=top;
+    document.querySelectorAll('[data-head-theme]').forEach(function(s){
+      var r=s.getBoundingClientRect();
+      if(r.top<=50&&r.bottom>50) t=s.dataset.headTheme;
+    });
+    head.dataset.theme=t;
+    var g=document.querySelector('.gotop'); if(g) g.classList.toggle('on',y>600);
+  },{passive:true});
+  var gt=document.querySelector('.gotop');
+  if(gt) gt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}) });
+  /* 데스크톱 드롭다운: 메뉴 영역에 들어오면 헤더가 흰색으로 펼쳐진다 */
+  if(drop){
+    var subs=[].slice.call(head.querySelectorAll('.gnb__sub'));
+    nav.addEventListener('mouseenter',function(){
+      if(!desktop()) return;
+      var h=0; subs.forEach(function(s){ h=Math.max(h,s.scrollHeight) });
+      head.style.setProperty('--drop-h',(h+20)+'px'); head.classList.add('is-open');
+    });
+    head.addEventListener('mouseleave',function(){ head.classList.remove('is-open') });
+  }
+  function close(){ nav.classList.remove('on'); if(dim){dim.classList.remove('on'); dim.hidden=true;}
+    burger.setAttribute('aria-expanded','false'); document.documentElement.style.overflow=''; }
+  burger.addEventListener('click',function(){
+    var on=nav.classList.toggle('on');
+    burger.setAttribute('aria-expanded',on?'true':'false');
+    if(dim){ dim.hidden=!on; requestAnimationFrame(function(){ dim.classList.toggle('on',on) }); }
+    document.documentElement.style.overflow=on?'hidden':'';
+  });
+  if(dim) dim.addEventListener('click',close);
+  window.addEventListener('resize',function(){ if(desktop()) close() });
+})();
+
+/* 모달 공통 열고 닫기 */
+(function(){
+  document.addEventListener('click',function(e){
+    var open=e.target.closest('[data-modal-open]');
+    if(open){ var m=document.getElementById(open.dataset.modalOpen);
+      if(m){ m.classList.add('on'); document.documentElement.style.overflow='hidden'; } return; }
+    var cl=e.target.closest('[data-modal-close]');
+    if(cl||(e.target.classList&&e.target.classList.contains('modal')&&!e.target.classList.contains('agegate'))){
+      var t=cl?cl.closest('.modal'):e.target;
+      if(t){ t.classList.remove('on'); document.documentElement.style.overflow=''; }
+    }
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape') return;
+    document.querySelectorAll('.modal.on:not(.agegate)').forEach(function(m){
+      m.classList.remove('on'); document.documentElement.style.overflow='';
+    });
+  });
+})();
+
+/* 히어로 슬라이드 — 5초 자동, 진행 막대 */
+(function(){
+  var root=document.querySelector('.mv'); if(!root) return;
+  var items=[].slice.call(root.querySelectorAll('.mv__item'));
+  var dots=[].slice.call(root.querySelectorAll('.mv__dot'));
+  var i=0,t=null;
+  function go(n){
+    if(n===i) return;
+    items[i].classList.remove('on'); dots[i].classList.remove('on');
+    i=(n+items.length)%items.length;
+    items[i].classList.add('on');
+    dots[i].classList.remove('on'); void dots[i].offsetWidth; dots[i].classList.add('on');
+    theme(i);
+  }
+  function theme(n){
+    var head=document.querySelector('.site-head'); if(!head) return;
+    var img=items[n].querySelector('.mv__img--pc');
+    if(!img||!img.naturalWidth) return;
+    try{
+      var c=document.createElement('canvas'); c.width=100; c.height=50;
+      var x=c.getContext('2d',{willReadFrequently:true});
+      x.drawImage(img,(img.naturalWidth/2)-50,20,100,50,0,0,100,50);
+      var d=x.getImageData(0,0,100,50).data, sum=0;
+      for(var k=0;k<d.length;k+=4) sum+=d[k]*0.299+d[k+1]*0.587+d[k+2]*0.114;
+      var lit=(sum/(d.length/4))>125;
+      head.dataset.topTheme=lit?'light':'dark';
+      if((scrollY||0)<50) head.dataset.theme=lit?'light':'dark';
+    }catch(e){ /* 다른 출처 사진이면 그대로 둔다 */ }
+  }
+  function play(){ stop(); t=setInterval(function(){ go(i+1) },5000) }
+  function stop(){ if(t) clearInterval(t) }
+  dots.forEach(function(d){ d.addEventListener('click',function(){ go(+d.dataset.go); play() }) });
+  play();
+  var f=items[0].querySelector('.mv__img--pc');
+  if(f){ f.complete?theme(0):f.addEventListener('load',function(){theme(0)}); }
+  document.addEventListener('visibilitychange',function(){ document.hidden?stop():play() });
+})();
+
+/* 슬로건 — 스크롤에 맞춰 글자가 금빛으로 차오른다(레퍼런스: stagger 1.5, scrub) */
+(function(){
+  var sec=document.querySelector('.creed'); if(!sec) return;
+  var fills=[].slice.call(sec.querySelectorAll('.fill'));
+  function tick(){
+    var r=sec.getBoundingClientRect(), vh=innerHeight;
+    var p=(vh*0.8-r.top)/(r.height+vh*0.15);
+    p=Math.max(0,Math.min(1,p));
+    fills.forEach(function(el,n){
+      var s=n/(fills.length+1.2);
+      var q=Math.max(0,Math.min(1,(p-s)/(1-s)*1.6));
+      el.style.backgroundPosition=(100-q*100)+'% 0';
+    });
+  }
+  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick();
+})();
+
+/* 이야기 — 위로 밀려 올라가며 어두워진다 (레퍼런스: yPercent 100, opacity 1→0) */
+(function(){
+  var sec=document.querySelector('.tale'); if(!sec) return;
+  var wrap=sec.querySelector('.tale__wrap'), v=sec.querySelector('.tale__v');
+  if(v){ var io=new IntersectionObserver(function(e){
+      e.forEach(function(en){ en.isIntersecting?v.play().catch(function(){}):v.pause() });
+    },{threshold:.15}); io.observe(sec); }
+  function tick(){
+    if(innerWidth<=1024){ wrap.style.transform=''; wrap.style.opacity=''; return; }
+    var r=sec.getBoundingClientRect();
+    var p=Math.max(0,Math.min(1,-r.top/r.height));
+    wrap.style.transform='translateY('+(p*100)+'%)';
+    wrap.style.opacity=String(1-Math.max(0,Math.min(1,(p-0.25)/0.75)));
+  }
+  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick();
+})();
+
+/* 비밀 — 500vh 핀 구간: 제목이 걷히고 세로 패널이 화면을 채운 뒤 3장이 차례로 올라온다 */
+(function(){
+  var sec=document.querySelector('.secret'); if(!sec) return;
+  var stage=sec.querySelector('.secret__stage'), h=sec.querySelector('.secret__h');
+  var panel=sec.querySelector('.secret__panel'), list=sec.querySelector('.secret__list');
+  var rows=[].slice.call(sec.querySelectorAll('.secret__ind-row'));
+  var paras=[].slice.call(sec.querySelectorAll('.secret__ind-p'));
+  var vids=[].slice.call(sec.querySelectorAll('.secret__v'));
+  var n=vids.length, base={}, cur=-1;
+  function measure(){
+    var vw=innerWidth, vh=innerHeight;
+    base.h=620/1920*vw; base.w=base.h*0.8051; base.top=vh*0.28;
+    base.vh=vh; base.vw=vw;
+  }
+  function tick(){
+    if(innerWidth<=1024){ h.style.cssText=''; panel.style.cssText=''; list.style.transform=''; return; }
+    measure();
+    var edge=sec.querySelector('.secret__edge').offsetHeight;
+    var start=sec.offsetTop+edge, len=sec.offsetHeight-edge-base.vh;
+    var p=Math.max(0,Math.min(1,(scrollY-start)/len));
+    /* 0 → 0.18 : 제목이 위로 걷히고 패널이 화면을 채운다 */
+    var a=Math.min(1,p/0.18), e=1-Math.pow(1-a,3);
+    h.style.transform='translateY('+(-100*e)+'%) scale('+(1-e)+')';
+    h.style.opacity=String(1-Math.min(1,a/0.6));
+    panel.style.top=(base.top*(1-e))+'px';
+    panel.style.width=(base.w+(base.vw-base.w)*e)+'px';
+    panel.style.height=(base.h+(base.vh-base.h)*e)+'px';
+    /* 0.18 → 1 : 3장이 한 장씩 올라온다 */
+    var b=Math.max(0,(p-0.18)/0.82)*(n-1);
+    list.style.transform='translateY('+(-b*100)+'%)';
+    stage.dataset.ind=a>=0.98?'1':'0';
+    var idx=Math.min(n-1,Math.round(b));
+    if(idx!==cur){
+      cur=idx;
+      rows.forEach(function(r){ r.style.transform='translateY('+(-idx*100)+'%)' });
+      paras.forEach(function(r){ r.style.transform='translateY('+(-idx*100)+'%)' });
+      vids.forEach(function(v,k){ if(k===idx){ v.play().catch(function(){}) } else { v.pause() } });
+    }
+  }
+  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick);
+  var io=new IntersectionObserver(function(es){ es.forEach(function(en){
+    if(en.isIntersecting) vids.forEach(function(v){ if(v.preload==='none') v.preload='auto' });
+  })},{rootMargin:'200px'});
+  io.observe(sec);
+  tick();
+})();
+
+/* 초대 — 제품 사진 scale 1.3 → 1 */
+(function(){
+  var sec=document.querySelector('.invite'); if(!sec) return;
+  var io=new IntersectionObserver(function(es){ es.forEach(function(en){
+    if(en.isIntersecting){ sec.classList.add('on'); io.unobserve(sec); } })},{threshold:.05});
+  io.observe(sec);
+})();
+
+</script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>브랜드 히스토리 | 해담 맥주</title>
+<meta name="description" content="1936년 양평 강하에서 시작한 해담 맥주의 90년 — 탄생부터 오늘까지의 기록.">
+<meta property="og:title" content="브랜드 히스토리 | 해담 맥주">
+<meta property="og:description" content="1936년 양평 강하에서 시작한 해담 맥주의 90년 — 탄생부터 오늘까지의 기록.">
+<meta property="og:image" content="./og.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+
+/* ══ 히스토리 ══ */
+.jtop{position:relative;overflow:hidden;height:980px;color:#fff}
+.jtop__bg{position:absolute;inset:0}
+.jtop__bg img{display:block;width:100%;height:100%;object-fit:cover}
+.jtop__bg::after{content:'';position:absolute;inset:0;background:rgba(6,6,6,.45)}
+.jtop__in{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;height:100%;text-align:center}
+.jtop__mark{display:flex;align-items:center;justify-content:center;width:395px;height:168px}
+.jtop__mark .wordmark{font-size:72px;line-height:1;white-space:nowrap}
+.jtop__h{margin-top:60px;font-family:var(--serif);font-size:3.6rem;font-weight:600;letter-spacing:.02em}
+.jtop__t{margin-top:12px;font-size:2rem;line-height:1.7}
+
+/* 시대 내비 — sticky, 3칸 × 480 */
+.jnav{position:sticky;top:0;z-index:5;background:var(--cream);box-shadow:0 1px 0 rgba(27,58,43,.12)}
+.jnav__list{display:flex}
+.jnav__item{flex:1}
+.jnav__btn{display:flex;align-items:center;justify-content:center;width:100%;height:100px;
+  font-size:2rem;font-weight:600;line-height:1.2;color:rgba(23,22,26,.45);transition:color .25s ease}
+.jnav__item.on .jnav__btn{color:var(--pri)}
+.jnav__bar{position:relative;height:2px;background:rgba(27,58,43,.12)}
+.jnav__bar i{position:absolute;left:0;top:0;width:33.3333%;height:100%;background:var(--pri);
+  transition:transform .35s ease}
+
+/* 타임라인 */
+.jmain{position:relative;padding-bottom:160px;background:var(--cream)}
+.jera{position:relative;margin:0 var(--gap)}
+.jera__head{padding:200px 0 0;width:1242px;max-width:90%;margin:0 auto;text-align:center}
+.jera__h{font-size:3.6rem;font-weight:600}
+.jera__t{margin-top:24px;font-size:2rem;line-height:1.7}
+.jera__body{position:relative;margin:0 auto;padding:200px 0 0;width:1280px;max-width:100%}
+.jera__body::before{content:'';position:absolute;top:0;bottom:0;left:50%;width:2px;
+  background:rgba(27,58,43,.25);transform:translateX(-1px)}
+.jgroup{position:relative;width:50%;padding-bottom:80px}
+.jgroup--r{margin-left:50%;padding-left:2px}
+.jgroup--l{padding-right:2px;text-align:right}
+.jgroup__year{font-family:var(--serif);font-size:90px;font-weight:600;line-height:.68;
+  font-style:italic;color:var(--pri)}
+.jgroup--r .jgroup__year{padding-left:0}
+.jgroup__dot{position:absolute;top:34px;width:11px;height:11px;background:var(--pri);border-radius:50%}
+.jgroup--r .jgroup__dot{left:-6px}
+.jgroup--l .jgroup__dot{right:-5px}
+.jgroup__dot::after{content:'';position:absolute;top:5px;width:120px;height:1px;
+  border-top:1px dotted rgba(27,58,43,.45)}
+.jgroup--r .jgroup__dot::after{left:11px}
+.jgroup--l .jgroup__dot::after{right:11px}
+.jgroup__list{margin-top:30px}
+.jitem{width:479px}
+.jgroup--r .jitem{margin-left:160px}
+.jgroup--l .jitem{margin-left:auto;margin-right:160px;text-align:left}
+.jitem+.jitem{margin-top:97px}
+.jitem img{display:block;width:479px;height:285px;object-fit:cover}
+.jitem__h{margin-top:30px;font-size:2.4rem;font-weight:700;line-height:1.65}
+.jitem__t{margin-top:8px;font-size:2rem;line-height:1.7}
+
+@media screen and (max-width:1024px){
+  .jtop{height:auto;padding:110px 0}
+  .jtop__mark{width:min(66vw,280px);height:auto;aspect-ratio:395 / 168}
+  .jtop__mark .wordmark{font-size:min(11vw,48px)}
+  .jtop__h{margin-top:28px;font-size:2.2rem}
+  .jtop__t{font-size:1.6rem}
+  .jnav__btn{height:64px;font-size:1.5rem}
+  .jmain{padding-bottom:90px}
+  .jera{margin:0}
+  .jera__head{padding-top:80px}
+  .jera__h{font-size:2.2rem}
+  .jera__t{margin-top:14px;font-size:1.6rem}
+  .jera__body{padding:60px 5% 0;width:100%}
+  .jera__body::before{left:8px;transform:none}
+  .jgroup{width:100%;padding:0 0 50px 34px;text-align:left!important}
+  .jgroup--r{margin-left:0;padding-left:34px}
+  .jgroup--l{padding-right:0}
+  .jgroup__year{font-size:48px}
+  .jgroup__dot{top:16px;left:-6px!important;right:auto!important}
+  .jgroup__dot::after{content:none}
+  .jgroup__list{margin-top:18px}
+  .jitem,.jgroup--r .jitem,.jgroup--l .jitem{width:100%;margin:0;text-align:left}
+  .jitem+.jitem{margin-top:40px}
+  .jitem img{width:100%;height:56vw}
+  .jitem__h{margin-top:16px;font-size:1.8rem}
+  .jitem__t{margin-top:6px;font-size:1.5rem}
+}
+
+</style>
+</head>
+<body>
+<a class="skipnav" href="#content">본문 바로가기</a>
+<header class="site-head" data-theme="dark" data-top-theme="dark">
+<div class="site-head__bar">
+<div class="site-head__wrap">
+<a class="site-logo" href="./index.html"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span><span class="blind">해담 홈으로</span></a>
+<nav class="site-nav" aria-label="주 메뉴">
+<div class="gnb"><ul class="gnb__list"><li class="gnb__item"><a class="gnb__link" href="./index.html">HOME</a></li><li class="gnb__item"><a class="gnb__link" href="./brand.html" aria-current="page">BRAND</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./brand.html">해담 맥주</a></li><li><a class="gnb__sub-link" href="./taste.html">맛의 비결</a></li><li><a class="gnb__sub-link" href="./history.html">브랜드 히스토리</a></li></ul></div></li><li class="gnb__item"><a class="gnb__link" href="./discover.html">DISCOVER</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./discover.html">여기, 해담이 있습니다</a></li><li><a class="gnb__sub-link" href="./master.html">HAEDAM MASTER 프로그램</a></li><li><a class="gnb__sub-link" href="./brewery.html">해담 브루어리 양평</a></li></ul></div></li><li class="gnb__item"><a class="gnb__link" href="./campaign.html">CAMPAIGN</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./campaign.html">진행 중 캠페인</a></li><li><a class="gnb__sub-link" href="./campaign-done.html">이전 캠페인</a></li></ul></div></li></ul></div>
+</nav>
+<button class="site-head__burger" type="button" aria-label="전체 메뉴 열기" aria-expanded="false">
+<svg viewBox="0 0 24 24"><path d="M22 12.5H2"/><path d="M12.9 5.2H2"/><path d="M22 19.8H11.1"/></svg>
+</button>
+</div>
+</div>
+<div class="site-head__drop" aria-hidden="true"></div>
+</header>
+<div class="site-nav__dim" hidden></div>
+<main id="content" class="main-sub">
+
+<div class="lead lead--dark" data-head-theme="dark">
+<div class="lead__wrap">
+<span class="lead__badge">BRAND</span>
+<h1 class="lead__h">브랜드 히스토리</h1>
+</div>
+</div>
+
+<section class="jtop" data-head-theme="dark">
+<div class="jtop__bg"><img src="./assets/history-top.jpg" alt="" loading="lazy"></div>
+<div class="jtop__in">
+<span class="jtop__mark"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span></span>
+<h2 class="jtop__h">THE HISTORY OF HAEDAM</h2>
+<p class="jtop__t">1936년. 경기 양평 강하에서 태어난 해담 맥주.<br>
+첫 병이 나온 날부터 맥주 본연의 맛을 좇으며 맥주를 즐기는 방법의<br>
+진화와 다양성을 계속해서 만들어 가고 있습니다.</p>
+</div>
+</section>
+
+<nav class="jnav" aria-label="시대 바로가기" data-head-theme="light">
+<ul class="jnav__list"><li class="jnav__item on"><button class="jnav__btn" type="button" data-go="0">해담의 도약 (1990~)</button></li><li class="jnav__item"><button class="jnav__btn" type="button" data-go="1">해담의 성장 (1940~1989)</button></li><li class="jnav__item"><button class="jnav__btn" type="button" data-go="2">해담의 탄생 (1928~1939)</button></li></ul>
+<div class="jnav__bar"><i></i></div>
+</nav>
+
+<div class="jmain" data-head-theme="light"><section class="jera" data-era="0">
+<div class="jera__body"><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">2024</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-1.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 브루어리 양평 그랜드 오픈</h3><p class="jitem__t">해담이 시작된 그 자리에서 다시 한 번 맥주 양조를 시작합니다.</p></li><li class="jitem rv"><img src="./assets/history-2.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 8년 만의 리뉴얼</h3><p class="jitem__t">해담 맥주의 ‘감칠맛 넘치는 깊고 풍부한 맛’을 한층 더 강화해<br>역대 가장 단정한 해담 맥주가 나왔습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">2020</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-3.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 탄생 90주년 한정판</h3><p class="jitem__t">90주년을 기념해 1936년 첫 라벨을 복각한 한정판을 선보였습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">2017</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-4.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담, 전국 편의점 입점</h3><p class="jitem__t">양평과 서울에 머물던 해담이 전국 어디서나 만날 수 있는 맥주가 되었습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">2010</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-5.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 맥주 기념관 개관</h3><p class="jitem__t">양평 강하 옛 담금실을 고쳐 90년의 기록을 모은 기념관을 열었습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">2009</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-6.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">HAEDAM BAR 1호점 개점</h3><p class="jitem__t">서울 을지로에 해담 생맥주만을 다루는 첫 직영 바를 열었습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">2005</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-7.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">광고 캠페인 테마곡</h3><p class="jitem__t">‘기다리는 시간’이 라디오 광고 테마곡으로 쓰이며 널리 알려졌습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1994</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-8.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">‘여기, 해담이 있습니다’</h3><p class="jitem__t">생맥주 취급점을 알리는 캠페인이 시작됐습니다.</p></li><li class="jitem rv"><img src="./assets/history-9.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담의 약진</h3><p class="jitem__t">연간 출고량이 처음으로 백만 상자를 넘어섰습니다.</p></li><li class="jitem rv"><img src="./assets/history-10.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 가든 개장</h3><p class="jitem__t">옛 공장 부지에 정원과 매장을 갖춘 복합 공간이 문을 열었습니다.</p></li></ul>
+</div></div>
+</section><section class="jera" data-era="1"><div class="jera__head"><h2 class="jera__h">한국을 대표하는 프리미엄 맥주</h2><p class="jera__t">한 잔의 맥주는 마을의 이름이 되었고, 해담은 한국을 대표하는 맥주로 성장했습니다.</p></div>
+<div class="jera__body"><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1987</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-11.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">공장 이전 계획 발표</h3><p class="jitem__t">늘어난 수요에 맞춰 강하 본공장 옆에 새 담금실을 짓기로 했습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1985</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-12.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">‘비어 스테이션 해담’ 탄생</h3><p class="jitem__t">양평역 앞에 생맥주를 바로 따라 주는 작은 가게가 생겼습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1971</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-13.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">28년 만에 부활한 해담 맥주</h3><p class="jitem__t">전쟁으로 멈췄던 해담이라는 이름이 다시 상표로 돌아왔습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1966</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-14.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 마을 탄생</h3><p class="jitem__t">양조장 주변 마을이 ‘해담말’이라는 이름으로 불리기 시작했습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1958</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-15.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">지명으로 쓰이기 시작한 ‘해담’</h3><p class="jitem__t">버스 정류장 이름이 해담으로 바뀌었습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1954</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-16.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">전국 주류 품평회 금상</h3><p class="jitem__t">전후 첫 품평회에서 라거 부문 금상을 받았습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1951</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-17.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 정거장 개설</h3><p class="jitem__t">원료와 제품을 나르기 위한 간이역이 놓였습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1949</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-18.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">한국 최초의 비어홀</h3><p class="jitem__t">서울 명동에 해담 생맥주를 파는 비어홀이 문을 열었습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1947</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-19.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 흑맥주 출시</h3><p class="jitem__t">검게 볶은 맥아로 만든 두 번째 제품이 나왔습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1943</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-20.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">‘해담양조 주식회사’로 사명 변경</h3><p class="jitem__t">창업 당시의 조합 이름을 오늘의 사명으로 바꾸었습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1940</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-21.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">양평을 대표하는 맥주가 되다</h3><p class="jitem__t">지역 출고량의 절반 이상을 해담이 차지했습니다.</p></li></ul>
+</div></div>
+</section><section class="jera" data-era="2"><div class="jera__head"><h2 class="jera__h">1936년, 해담 맥주의 탄생</h2><p class="jera__t">“가장 맛있는 맥주를 우리 물과 우리 보리로 만들자.” 해담은 그렇게 세상에 나왔습니다.</p></div>
+<div class="jera__body"><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1936</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-22.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담 맥주 탄생</h3><p class="jitem__t">3월 18일, ‘해담 맥주’라는 이름으로 첫 병이 나왔습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1934</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-23.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">양조장 건립</h3><p class="jitem__t">양평 강하의 연수를 쓰기 위해 강가에 담금솥을 걸었습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1932</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-24.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">해담양조조합의 전신</h3><p class="jitem__t">보리 농가 열두 곳이 모여 작은 양조조합을 만들었습니다.</p></li></ul>
+</div><div class="jgroup jgroup--l">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1930</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-25.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">첫 시험 담금</h3><p class="jitem__t">농가 창고에서 스무 말 규모의 시험 담금을 시작했습니다.</p></li></ul>
+</div><div class="jgroup jgroup--r">
+<span class="jgroup__dot"></span>
+<div class="jgroup__year">1928</div>
+<ul class="jgroup__list"><li class="jitem rv"><img src="./assets/history-26.jpg" alt="" loading="lazy">
+<h3 class="jitem__h">물을 먼저 찾다</h3><p class="jitem__t">강하 일대의 연수가 라거에 알맞다는 것을 확인했습니다.</p></li></ul>
+</div></div>
+</section></div>
+
+</main>
+<footer class="site-foot">
+<div class="site-foot__panel">
+<div class="site-foot__row"><div class="site-foot__col">
+<div class="site-foot__ci"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span></div>
+</div></div>
+<div class="site-foot__row">
+<div class="site-foot__col">
+<h2 class="site-foot__name">해담양조 주식회사</h2>
+<dl class="site-foot__data">
+<div class="site-foot__item"><dt class="site-foot__dt">주소 :</dt><dd>경기 양평군 강하면 강남로 118, 해담브루어리</dd></div>
+<div class="site-foot__item"><dt class="site-foot__dt">사업자등록번호 :</dt><dd>214-88-03917</dd></div>
+<div class="site-foot__item"><dt class="site-foot__dt">TEL :</dt><dd>031-770-1936</dd></div>
+</dl>
+</div>
+<div class="site-foot__col">
+<ul class="site-foot__links">
+<li><a href="./privacy.html">개인정보취급방침</a></li>
+<li><a href="./terms.html">이메일무단수집거부</a></li>
+</ul>
+<ul class="site-foot__sns">
+<li><a href="./index.html" aria-label="인스타그램"><i class="ico ico--ig"></i></a></li>
+<li><a href="./index.html" aria-label="유튜브"><i class="ico ico--yt"></i></a></li>
+</ul>
+</div>
+</div>
+<div class="site-foot__row"><div class="site-foot__col">
+<small class="site-foot__copy">COPYRIGHT ⓒ 2026 해담양조 주식회사. ALL RIGHTS RESERVED.</small>
+</div></div>
+</div>
+</footer>
+<button class="gotop" type="button" aria-label="맨 위로 이동"></button><div class="modal agegate" id="agegate" role="dialog" aria-modal="true" aria-labelledby="agegate-q">
+<div class="modal__box">
+<div class="agegate__in">
+<div class="agegate__logo"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span></div>
+<h2 class="agegate__q" id="agegate-q">만 19세 이상<br>음주 가능한 연령입니까?</h2>
+<div class="agegate__btns">
+<button class="btn btn--pri" type="button" data-age="yes">YES</button>
+<button class="btn btn--pri" type="button" data-age="no">NO</button>
+</div>
+<small class="agegate__warn"><span>※ 경고 :</span>
+<span>지나친 음주는 뇌졸중, 기억력 손상인 치매를 유발합니다.<br>임신 중 음주는 기형아 출생 위험을 높입니다.</span></small>
+</div>
+</div>
+</div>
+<script>
+
+/* 성인인증 — 레퍼런스와 같은 흐름: 쿠키 1일, 300ms 뒤 열림, 확인 전 스크롤 잠금 */
+(function(){
+  var g=document.getElementById('agegate'); if(!g) return;
+  function get(n){var m=('; '+document.cookie).split('; '+n+'='); return m.length===2?m.pop().split(';').shift():''}
+  function set(n,v,d){var e=new Date(); e.setTime(e.getTime()+d*864e5);
+    document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/'}
+  if(get('hdAge')==='1'){ g.remove(); return; }
+  document.documentElement.style.overflow='hidden';
+  setTimeout(function(){ g.classList.add('on'); var b=g.querySelector('[data-age="yes"]'); if(b) b.focus(); },300);
+  g.addEventListener('click',function(e){
+    var t=e.target.closest('[data-age]'); if(!t) return;
+    if(t.dataset.age==='no'){ alert('만 19세 미만은 이용하실 수 없습니다.'); return; }
+    set('hdAge','1',1); g.classList.remove('on');
+    document.documentElement.style.overflow='';
+    setTimeout(function(){ g.remove(); },320);
+  });
+})();
+
+/* 등장 모션 */
+(function(){
+  var els=document.querySelectorAll('.rv'); if(!els.length) return;
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('on')}); return; }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('on'); io.unobserve(en.target);} });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.01});
+  els.forEach(function(e){ io.observe(e) });
+})();
+
+/* 헤더 — 스크롤 방향 숨김 + 섹션별 테마 + 드롭다운 + 모바일 패널 */
+(function(){
+  var head=document.querySelector('.site-head'); if(!head) return;
+  var nav=head.querySelector('.site-nav'), burger=head.querySelector('.site-head__burger');
+  var dim=document.querySelector('.site-nav__dim'), drop=head.querySelector('.site-head__drop');
+  var last=0, top=head.dataset.topTheme||'dark';
+  function desktop(){ return window.innerWidth>1024 }
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY||0;
+    head.dataset.hide=(y>200&&y>last&&!head.classList.contains('is-open'))?'1':'0';
+    last=y;
+    var t=top;
+    document.querySelectorAll('[data-head-theme]').forEach(function(s){
+      var r=s.getBoundingClientRect();
+      if(r.top<=50&&r.bottom>50) t=s.dataset.headTheme;
+    });
+    head.dataset.theme=t;
+    var g=document.querySelector('.gotop'); if(g) g.classList.toggle('on',y>600);
+  },{passive:true});
+  var gt=document.querySelector('.gotop');
+  if(gt) gt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}) });
+  /* 데스크톱 드롭다운: 메뉴 영역에 들어오면 헤더가 흰색으로 펼쳐진다 */
+  if(drop){
+    var subs=[].slice.call(head.querySelectorAll('.gnb__sub'));
+    nav.addEventListener('mouseenter',function(){
+      if(!desktop()) return;
+      var h=0; subs.forEach(function(s){ h=Math.max(h,s.scrollHeight) });
+      head.style.setProperty('--drop-h',(h+20)+'px'); head.classList.add('is-open');
+    });
+    head.addEventListener('mouseleave',function(){ head.classList.remove('is-open') });
+  }
+  function close(){ nav.classList.remove('on'); if(dim){dim.classList.remove('on'); dim.hidden=true;}
+    burger.setAttribute('aria-expanded','false'); document.documentElement.style.overflow=''; }
+  burger.addEventListener('click',function(){
+    var on=nav.classList.toggle('on');
+    burger.setAttribute('aria-expanded',on?'true':'false');
+    if(dim){ dim.hidden=!on; requestAnimationFrame(function(){ dim.classList.toggle('on',on) }); }
+    document.documentElement.style.overflow=on?'hidden':'';
+  });
+  if(dim) dim.addEventListener('click',close);
+  window.addEventListener('resize',function(){ if(desktop()) close() });
+})();
+
+/* 모달 공통 열고 닫기 */
+(function(){
+  document.addEventListener('click',function(e){
+    var open=e.target.closest('[data-modal-open]');
+    if(open){ var m=document.getElementById(open.dataset.modalOpen);
+      if(m){ m.classList.add('on'); document.documentElement.style.overflow='hidden'; } return; }
+    var cl=e.target.closest('[data-modal-close]');
+    if(cl||(e.target.classList&&e.target.classList.contains('modal')&&!e.target.classList.contains('agegate'))){
+      var t=cl?cl.closest('.modal'):e.target;
+      if(t){ t.classList.remove('on'); document.documentElement.style.overflow=''; }
+    }
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape') return;
+    document.querySelectorAll('.modal.on:not(.agegate)').forEach(function(m){
+      m.classList.remove('on'); document.documentElement.style.overflow='';
+    });
+  });
+})();
+
+/* 시대 내비 — 현재 보고 있는 시대에 표시가 따라간다 */
+(function(){
+  var nav=document.querySelector('.jnav'); if(!nav) return;
+  var items=[].slice.call(nav.querySelectorAll('.jnav__item'));
+  var bar=nav.querySelector('.jnav__bar i');
+  var eras=[].slice.call(document.querySelectorAll('.jera'));
+  items.forEach(function(it,i){
+    it.querySelector('.jnav__btn').addEventListener('click',function(){
+      var y=eras[i].getBoundingClientRect().top+scrollY-nav.offsetHeight-20;
+      window.scrollTo({top:y,behavior:'smooth'});
+    });
+  });
+  function tick(){
+    var cut=nav.getBoundingClientRect().bottom+120, cur=0;
+    eras.forEach(function(e,i){ if(e.getBoundingClientRect().top<=cut) cur=i; });
+    items.forEach(function(it,i){ it.classList.toggle('on',i===cur) });
+    bar.style.transform='translateX('+(cur*100)+'%)';
+  }
+  addEventListener('scroll',tick,{passive:true}); tick();
+})();
+
+</script>
+</body>
+</html>

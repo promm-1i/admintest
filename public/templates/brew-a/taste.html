@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>맛의 비결 | 해담 맥주</title>
+<meta name="description" content="맥아 100%·해담 전용 효모·할러타우 아로마 홉·1.5배 장기 숙성 — 해담이 맛있는 다섯 가지 이유와 전용 맥주잔의 비밀.">
+<meta property="og:title" content="맛의 비결 | 해담 맥주">
+<meta property="og:description" content="맥아 100%·해담 전용 효모·할러타우 아로마 홉·1.5배 장기 숙성 — 해담이 맛있는 다섯 가지 이유와 전용 맥주잔의 비밀.">
+<meta property="og:image" content="./og.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+
+/* ══ 맛의 비결 ══ */
+/* 들머리 — 3600 핀 구간, 문장이 한 줄씩 떠오른다 */
+.tintro{position:relative;margin-top:29px;height:3600px;background:var(--dark-bg)}
+.tintro__stage{position:sticky;top:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;overflow:hidden;height:100vh;color:#fff;text-align:center}
+.tintro__bg{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
+.tintro__bg img{display:block;width:100%;height:100%;object-fit:cover}
+.tintro__bg::after{content:'';position:absolute;inset:0;background:rgba(6,6,6,.55)}
+.tintro.lit .tintro__bg{opacity:1}
+.tintro__in{position:relative;z-index:2;width:90%;max-width:var(--inner)}
+.tintro__t{font-size:2.2rem;font-weight:500;line-height:1.7}
+.tintro__h{margin-top:120px;font-family:var(--kserif);font-size:4rem;font-weight:500;line-height:1.5}
+.tintro__list{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 40px;
+  margin-top:80px;font-size:1.8rem}
+.tintro__list li{position:relative;padding-left:16px}
+.tintro__list li::before{content:'';position:absolute;left:0;top:.85em;width:5px;height:5px;
+  background:var(--gold);border-radius:50%}
+.tintro__note{margin-top:24px;font-size:1.4rem;color:rgba(255,255,255,.55)}
+.sup{display:block;opacity:0;transform:translateY(40px);
+  transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+.sup.on{opacity:1;transform:none}
+
+/* 5가지 이유 — 머리 900 + 사진이 줄며 오른쪽에 항목이 지나간다 */
+.tfeat{position:relative;background:linear-gradient(#060606 45%,#0B1A13 115%)}
+.tfeat__head{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:900px;color:#fff;text-align:center}
+.tfeat__mark{display:flex;align-items:center;justify-content:center;width:524px;height:223px}
+.tfeat__mark .wordmark{font-size:96px;line-height:1;white-space:nowrap}
+.tfeat__h{margin-top:80px;font-size:3.6rem;font-weight:600}
+.tfeat__body{position:relative;margin:0 auto;width:90%;max-width:var(--inner);color:#fff}
+.tfeat__media{position:sticky;top:90px;z-index:1;margin:0 auto;width:100%;height:820px;overflow:hidden;
+  will-change:width}
+.tfeat__medbox{height:900px;padding-top:40px}
+.tfeat__media img{display:block;width:100%;height:100%;object-fit:cover}
+.tfeat__list{position:relative;z-index:2;margin-left:auto;margin-top:-900px;padding-top:2700px;
+  padding-bottom:40px;width:473px}
+.tfeat__item+.tfeat__item{margin-top:160px}
+.tfeat__item:nth-child(1){min-height:525px}
+.tfeat__item:nth-child(2){min-height:589px}
+.tfeat__item:nth-child(3){min-height:583px}
+.tfeat__item:nth-child(4){min-height:586px}
+.tfeat__item:nth-child(5){min-height:552px;padding-bottom:83px}
+.tfeat__fig{position:relative;overflow:hidden;height:295px}
+.tfeat__fig img{display:block;width:100%;height:100%;object-fit:cover}
+.tfeat__tag{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-size:3.6rem;font-weight:600;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.tfeat__t{margin-top:31px;font-size:2.4rem;font-weight:600;line-height:1.7}
+.tfeat__d{margin-top:15px;font-size:2rem;line-height:1.7}
+.tfeat__n{margin-top:10px;font-size:1.3rem;opacity:.6}
+
+/* 잔의 비밀 — 8100 핀 구간, 잔 사진 위 다섯 지점이 차례로 열린다 */
+.tsec{position:relative;padding-top:200px;background:var(--cream)}
+.tsec__head{margin:0 auto;width:90%;max-width:var(--inner);text-align:center}
+.tsec__h{font-size:3.6rem;font-weight:600;line-height:1.5}
+.tsec__t{margin-top:24px;font-size:2rem;line-height:1.7}
+.tsec__scroll{position:relative;height:8100px}
+.tsec__stage{position:sticky;top:0;display:flex;align-items:center;justify-content:center;
+  overflow:hidden;height:100vh}
+.tsec__glass{position:relative;width:1280px;max-width:88%;height:612px;overflow:hidden}
+.tsec__glass img{display:block;width:100%;height:100%;object-fit:cover;
+  transform:scale(1);transition:transform .6s ease}
+.tsec__mask{position:absolute;inset:0;background:rgba(252,248,239,.72);
+  -webkit-mask-image:radial-gradient(circle var(--r,13.22%) at var(--cx,36.65%) var(--cy,34.24%),transparent 98%,#000 100%);
+  mask-image:radial-gradient(circle var(--r,13.22%) at var(--cx,36.65%) var(--cy,34.24%),transparent 98%,#000 100%);
+  transition:-webkit-mask-image .5s ease,mask-image .5s ease}
+.tsec__ring{position:absolute;width:26.44%;aspect-ratio:1;border:1px solid rgba(27,58,43,.5);
+  border-radius:50%;transform:translate(-50%,-50%);transition:left .5s ease,top .5s ease}
+.tsec__pin{position:absolute;z-index:3;display:flex;align-items:center;justify-content:center;
+  width:28px;height:28px;font-size:1.4rem;font-weight:700;color:#fff;background:var(--gold);
+  border-radius:50%;transform:translate(-50%,-50%);opacity:0;transition:opacity .4s ease}
+.tsec__pin.on{opacity:1}
+.tsec__card{position:absolute;z-index:4;right:2%;bottom:6%;width:340px;padding:24px 28px;
+  background:#fff;box-shadow:0 18px 50px rgba(0,0,0,.14);opacity:0;transform:translateY(24px);
+  transition:opacity .45s ease,transform .45s ease}
+.tsec__card.on{opacity:1;transform:none}
+.tsec__card-h{display:flex;align-items:center;gap:10px;font-size:2rem;font-weight:600}
+.tsec__card-n{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;
+  font-size:1.3rem;color:var(--pri);background:rgba(27,58,43,.1);border-radius:6px}
+.tsec__card-t{margin-top:10px;font-size:1.6rem;line-height:1.7;color:#4a4a4a}
+
+/* 밸런스 — 제품 3칸 + 맛 차트 */
+.tbal{padding:200px 0 124px;background:var(--cream)}
+.tbal__wrap{margin:0 auto;width:90%;max-width:var(--inner)}
+.tbal__h{font-size:3.6rem;font-weight:600;line-height:1.5}
+.tbal__t{margin-top:60px;font-size:2rem;line-height:1.7}
+.tbal__row{display:flex;gap:40px;margin-top:100px}
+.tbal__packs{display:flex;gap:32px;width:707px}
+.tbal__pack{flex:1;text-align:center}
+.tbal__pack img{display:block;width:100%;height:416px;object-fit:contain;background:rgba(27,58,43,.04)}
+.tbal__pack figcaption{margin-top:20px;font-size:1.8rem;font-weight:600}
+.tbal__chart{display:flex;flex-direction:column;width:405px;min-height:522px;padding:32px;
+  background:#fff;border:1px solid rgba(27,58,43,.15)}
+.tbal__chart-h{font-size:2.8rem;font-weight:600;font-family:var(--serif)}
+.tbal__bar{display:flex;align-items:center;gap:14px;margin-top:auto;font-size:1.6rem}
+.tbal__chart-h{margin-bottom:6px}
+.tbal__bar span{flex-shrink:0;width:62px}
+.tbal__bar i{position:relative;flex:1;height:6px;background:rgba(27,58,43,.12);border-radius:6px}
+.tbal__bar i::after{content:'';position:absolute;left:0;top:0;height:100%;width:var(--v);
+  background:var(--gold);border-radius:6px}
+
+@media screen and (max-width:1024px){
+  .tintro{height:auto}
+  .tintro__stage{position:static;height:auto;padding:110px 0}
+  .tintro__h{margin-top:50px;font-size:2.4rem}
+  .tintro__t{font-size:1.7rem}
+  .tintro__list{gap:10px 24px;margin-top:40px;font-size:1.6rem}
+  .sup{opacity:1;transform:none}
+  .tfeat__head{height:auto;padding:110px 0}
+  .tfeat__mark{width:min(78vw,360px);height:auto;aspect-ratio:524 / 223}
+  .tfeat__mark .wordmark{font-size:min(13vw,60px)}
+  .tfeat__h{margin-top:28px;font-size:2.2rem}
+  .tfeat__medbox{height:auto;padding-top:0}
+  .tfeat__media{position:static;width:100%;height:56vw}
+  .tfeat__list{margin:40px 0 0;padding:0;width:100%}
+  .tfeat__item+.tfeat__item{margin-top:70px}
+  .tfeat__fig{height:52vw}
+  .tfeat__tag{font-size:2.4rem}
+  .tfeat__t{margin-top:20px;font-size:1.8rem}
+  .tfeat__d{margin-top:10px;font-size:1.6rem}
+  .tfeat__body{padding-bottom:90px}
+  .tsec{padding-top:90px}
+  .tsec__h{font-size:2.2rem}
+  .tsec__t{margin-top:14px;font-size:1.6rem}
+  .tsec__scroll{height:auto;margin-top:40px}
+  .tsec__stage{position:static;display:block;height:auto}
+  .tsec__glass{width:100%;max-width:none;height:62vw}
+  .tsec__mask{display:none}
+  .tsec__ring{display:none}
+  .tsec__pin{opacity:1}
+  .tsec__card{position:static;width:auto;margin-top:16px;opacity:1;transform:none;box-shadow:none;
+    border:1px solid rgba(27,58,43,.15)}
+  .tsec__card+.tsec__card{margin-top:10px}
+  .tbal{padding:90px 0}
+  .tbal__h{font-size:2.2rem}
+  .tbal__t{margin-top:24px;font-size:1.6rem}
+  .tbal__row{flex-direction:column;gap:32px;margin-top:40px}
+  .tbal__packs{width:100%;gap:14px}
+  .tbal__pack img{height:40vw}
+  .tbal__chart{min-height:0}
+  .tbal__bar{margin-top:18px}
+  .tbal__pack figcaption{margin-top:12px;font-size:1.5rem}
+  .tbal__chart{width:100%}
+}
+
+</style>
+</head>
+<body>
+<a class="skipnav" href="#content">본문 바로가기</a>
+<header class="site-head" data-theme="dark" data-top-theme="dark">
+<div class="site-head__bar">
+<div class="site-head__wrap">
+<a class="site-logo" href="./index.html"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span><span class="blind">해담 홈으로</span></a>
+<nav class="site-nav" aria-label="주 메뉴">
+<div class="gnb"><ul class="gnb__list"><li class="gnb__item"><a class="gnb__link" href="./index.html">HOME</a></li><li class="gnb__item"><a class="gnb__link" href="./brand.html" aria-current="page">BRAND</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./brand.html">해담 맥주</a></li><li><a class="gnb__sub-link" href="./taste.html">맛의 비결</a></li><li><a class="gnb__sub-link" href="./history.html">브랜드 히스토리</a></li></ul></div></li><li class="gnb__item"><a class="gnb__link" href="./discover.html">DISCOVER</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./discover.html">여기, 해담이 있습니다</a></li><li><a class="gnb__sub-link" href="./master.html">HAEDAM MASTER 프로그램</a></li><li><a class="gnb__sub-link" href="./brewery.html">해담 브루어리 양평</a></li></ul></div></li><li class="gnb__item"><a class="gnb__link" href="./campaign.html">CAMPAIGN</a><div class="gnb__sub"><ul><li><a class="gnb__sub-link" href="./campaign.html">진행 중 캠페인</a></li><li><a class="gnb__sub-link" href="./campaign-done.html">이전 캠페인</a></li></ul></div></li></ul></div>
+</nav>
+<button class="site-head__burger" type="button" aria-label="전체 메뉴 열기" aria-expanded="false">
+<svg viewBox="0 0 24 24"><path d="M22 12.5H2"/><path d="M12.9 5.2H2"/><path d="M22 19.8H11.1"/></svg>
+</button>
+</div>
+</div>
+<div class="site-head__drop" aria-hidden="true"></div>
+</header>
+<div class="site-nav__dim" hidden></div>
+<main id="content" class="main-sub">
+
+<div class="lead lead--dark" data-head-theme="dark">
+<div class="lead__wrap">
+<span class="lead__badge">BRAND</span>
+<h1 class="lead__h">해담만의 독보적인 맛의 비결</h1>
+</div>
+</div>
+
+<section class="tintro" data-head-theme="dark">
+<div class="tintro__stage">
+<div class="tintro__bg"><img src="./assets/taste-intro.jpg" alt="" loading="lazy"></div>
+<div class="tintro__in">
+<p class="tintro__t sup" data-sup="0">해담은 맥주 순수령을 기준으로 정통 방식을 고집하는 프리미엄 맥주 브랜드입니다.<br>
+1936년 브랜드 탄생 이래 맥주 본연의 맛을 추구하며 그 맛을 발전시켜 왔습니다.</p>
+<h2 class="tintro__h sup" data-sup="1">해담의 맛과 품질은 결코 타협할 수 없는<br>‘진짜 맥주’에 대한 고집으로부터 완성됩니다.</h2>
+<ul class="tintro__list sup" data-sup="2">
+<li>맥아 100%로 만든 진한 맥주 맛</li>
+<li>직접 배양한 해담 전용 효모</li>
+<li>아낌없이 넣은 할러타우 아로마 홉</li>
+<li>일반 맥주 대비 1.5배* 이상 긴 장기 숙성</li>
+</ul>
+<p class="tintro__note sup" data-sup="2">* 자사 제품 대비</p>
+</div>
+</div>
+</section>
+
+<section class="tfeat" data-head-theme="dark">
+<div class="tfeat__head">
+<span class="tfeat__mark"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span></span>
+<h2 class="tfeat__h">해담이 맛있는 5가지 이유</h2>
+</div>
+<div class="tfeat__body">
+<div class="tfeat__medbox"><div class="tfeat__media"><img src="./assets/taste-media.jpg" alt="잔에 따르는 해담 생맥주"></div></div>
+<ul class="tfeat__list"><li class="tfeat__item rv">
+<figure class="tfeat__fig"><img src="./assets/taste-1.jpg" alt="" loading="lazy">
+<figcaption class="tfeat__tag">향</figcaption></figure>
+<h3 class="tfeat__t">해담만의 향으로 한층 더 넓게 퍼지는 깊고 풍부한 맛</h3>
+<p class="tfeat__d">엄선한 국내산·유럽산 맥아와 할러타우 아로마 홉의 향, 그리고<br>해담 효모의 화사한 향이 절묘하게 어우러져 한층 더 넓게<br>퍼지는 깊고 풍부한 맛을 경험할 수 있습니다.</p>
+
+</li><li class="tfeat__item rv">
+<figure class="tfeat__fig"><img src="./assets/taste-2.jpg" alt="" loading="lazy">
+<figcaption class="tfeat__tag">거품</figcaption></figure>
+<h3 class="tfeat__t">세밀한 담금 공정 관리로 완성한 맥주 거품의 높은 품질과 유지력</h3>
+<p class="tfeat__d">해담 맥주의 깊고 풍부한 맛을 한층 더 맛있게 즐길 수 있도록<br>일반 맥주 대비 1.5배* 더 오래 숙성할 뿐 아니라 담금 공정<br>관리에 심혈을 기울여, 잡미 없이 균형이 좋은 풍부한 맛을<br>느낄 수 있습니다.</p>
+<p class="tfeat__n">* 자사 제품 대비</p>
+</li><li class="tfeat__item rv">
+<figure class="tfeat__fig"><img src="./assets/taste-3.jpg" alt="" loading="lazy">
+<figcaption class="tfeat__tag">빛깔</figcaption></figure>
+<h3 class="tfeat__t">해질녘 하늘과 같은 투명한 황금빛</h3>
+<p class="tfeat__d">잔을 들어 담긴 해담 맥주를 들여다보세요. 유리잔 너머의<br>황금빛 풍경은 해담만의 특별한 빛깔입니다. 일반 맥주 대비<br>1.5배* 더 오래 숙성시켜 완성한 색입니다.</p>
+<p class="tfeat__n">* 자사 제품 대비</p>
+</li><li class="tfeat__item rv">
+<figure class="tfeat__fig"><img src="./assets/taste-4.jpg" alt="" loading="lazy">
+<figcaption class="tfeat__tag">풍미</figcaption></figure>
+<h3 class="tfeat__t">강약이 조화로운 매력적인 맥주 맛</h3>
+<p class="tfeat__d">부원료를 전혀 쓰지 않고 맥아 100%와 홉으로 만든 해담 맥주는<br>맥아와 홉의 사용량이 많아, 재료가 가진 감칠맛을 살리려면<br>일반 맥주보다 더 오랜 시간이 필요합니다. 그 시간이<br>강약의 균형을 만듭니다.</p>
+
+</li><li class="tfeat__item rv">
+<figure class="tfeat__fig"><img src="./assets/taste-5.jpg" alt="" loading="lazy">
+<figcaption class="tfeat__tag">목넘김</figcaption></figure>
+<h3 class="tfeat__t">감칠맛을 위한 기다림의 미학</h3>
+<p class="tfeat__d">맥주의 감칠맛은 맥아의 양과 비례합니다. 해담은 장기 숙성을<br>통해 맥아 100%에서만 가능한 감칠맛은 살리고 잡미를 제거해<br>깔끔한 맛을 완성했습니다.</p>
+
+</li></ul>
+</div>
+</section>
+
+<section class="tsec" data-head-theme="light">
+<div class="tsec__head">
+<h2 class="tsec__h">해담 맥주잔에 담긴 5가지 비밀</h2>
+<p class="tsec__t">마시기 전은 물론 마시는 동안, 그리고 마시고 난 후에도 계속 맛있다고 느낄 수 있도록<br>
+시각·청각·촉각·미각·후각으로 이어지는 오감의 우선순위를 고려해 설계했습니다.<br>
+해담 맥주 맛을 극대화할 해담 전용 맥주잔을 만나보세요.</p>
+</div>
+<div class="tsec__scroll">
+<div class="tsec__stage">
+<div class="tsec__glass">
+<img src="./assets/taste-glass.jpg" alt="해담 전용 맥주잔">
+<div class="tsec__mask"></div>
+<div class="tsec__ring" style="left:36.65%;top:34.24%"></div>
+<span class="tsec__pin" data-pin="0" style="left:36.65%;top:34.24%">1</span><span class="tsec__pin" data-pin="1" style="left:50.0%;top:50.0%">2</span><span class="tsec__pin" data-pin="2" style="left:50.0%;top:51.5%">3</span><span class="tsec__pin" data-pin="3" style="left:36.0%;top:60.5%">4</span><span class="tsec__pin" data-pin="4" style="left:40.0%;top:70.1%">5</span>
+<div class="tsec__card" data-card="0">
+<h3 class="tsec__card-h"><span class="tsec__card-n">1</span>맥주잔 입구</h3>
+<p class="tsec__card-t">맥주의 온도와 향이 흩어지지 않도록 입구를 3mm 좁혔습니다. 코끝에 향이 먼저 닿습니다.</p></div><div class="tsec__card" data-card="1">
+<h3 class="tsec__card-h"><span class="tsec__card-n">2</span>거품이 서는 자리</h3>
+<p class="tsec__card-t">잔 안쪽 곡선이 꺾이는 지점에서 거품이 촘촘하게 다시 섭니다. 7:3 비율이 오래 유지됩니다.</p></div><div class="tsec__card" data-card="2">
+<h3 class="tsec__card-h"><span class="tsec__card-n">3</span>해담 로고</h3>
+<p class="tsec__card-t">로고는 짙은 녹색과 금박 두 가지로 인쇄해, 맥주 너머로 보일 때 색이 가장 선명합니다.</p></div><div class="tsec__card" data-card="3">
+<h3 class="tsec__card-h"><span class="tsec__card-n">4</span>잔의 두께</h3>
+<p class="tsec__card-t">입에 닿는 부분은 2.2mm로 얇게, 아래로 갈수록 두껍게. 온도를 손에 덜 빼앗깁니다.</p></div><div class="tsec__card" data-card="4">
+<h3 class="tsec__card-h"><span class="tsec__card-n">5</span>바닥의 각인</h3>
+<p class="tsec__card-t">바닥에 새긴 미세한 홈에서 탄산이 일정하게 올라와 마지막 한 모금까지 거품이 남습니다.</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="tbal" data-head-theme="light">
+<div class="tbal__wrap">
+<h2 class="tbal__h rv">해담은 한 모금 한 모금 음미하면서 마실 때<br>더 맛있는 최적의 균형을 추구합니다.</h2>
+<p class="tbal__t rv">맥주의 중간 맛을 다시 잡아 보리의 감칠맛이 한층 더 잘 느껴지며<br>부드러운 여운이 오래 이어집니다.</p>
+<div class="tbal__row">
+<div class="tbal__packs"><figure class="tbal__pack rv"><img src="./assets/haedam-350.png" alt="350ml 해담" loading="lazy">
+<figcaption>350ml</figcaption></figure><figure class="tbal__pack rv"><img src="./assets/haedam-500.png" alt="500ml 해담" loading="lazy">
+<figcaption>500ml</figcaption></figure><figure class="tbal__pack rv"><img src="./assets/haedam-draft.png" alt="생맥주 10L / 20L 해담" loading="lazy">
+<figcaption>생맥주 10L / 20L</figcaption></figure></div>
+<div class="tbal__chart rv">
+<h3 class="tbal__chart-h">TASTE CHART</h3>
+<div class="tbal__bar"><span>맥아향</span><i style="--v:78%"></i></div><div class="tbal__bar"><span>목넘김</span><i style="--v:86%"></i></div><div class="tbal__bar"><span>홉향</span><i style="--v:64%"></i></div><div class="tbal__bar"><span>쓴맛</span><i style="--v:48%"></i></div><div class="tbal__bar"><span>감칠맛</span><i style="--v:92%"></i></div>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+<footer class="site-foot">
+<div class="site-foot__panel">
+<div class="site-foot__row"><div class="site-foot__col">
+<div class="site-foot__ci"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span></div>
+</div></div>
+<div class="site-foot__row">
+<div class="site-foot__col">
+<h2 class="site-foot__name">해담양조 주식회사</h2>
+<dl class="site-foot__data">
+<div class="site-foot__item"><dt class="site-foot__dt">주소 :</dt><dd>경기 양평군 강하면 강남로 118, 해담브루어리</dd></div>
+<div class="site-foot__item"><dt class="site-foot__dt">사업자등록번호 :</dt><dd>214-88-03917</dd></div>
+<div class="site-foot__item"><dt class="site-foot__dt">TEL :</dt><dd>031-770-1936</dd></div>
+</dl>
+</div>
+<div class="site-foot__col">
+<ul class="site-foot__links">
+<li><a href="./privacy.html">개인정보취급방침</a></li>
+<li><a href="./terms.html">이메일무단수집거부</a></li>
+</ul>
+<ul class="site-foot__sns">
+<li><a href="./index.html" aria-label="인스타그램"><i class="ico ico--ig"></i></a></li>
+<li><a href="./index.html" aria-label="유튜브"><i class="ico ico--yt"></i></a></li>
+</ul>
+</div>
+</div>
+<div class="site-foot__row"><div class="site-foot__col">
+<small class="site-foot__copy">COPYRIGHT ⓒ 2026 해담양조 주식회사. ALL RIGHTS RESERVED.</small>
+</div></div>
+</div>
+</footer>
+<button class="gotop" type="button" aria-label="맨 위로 이동"></button><div class="modal agegate" id="agegate" role="dialog" aria-modal="true" aria-labelledby="agegate-q">
+<div class="modal__box">
+<div class="agegate__in">
+<div class="agegate__logo"><span class="wordmark"><span class="wordmark__sup">Premium</span><span class="wordmark__main">HAEDAM</span></span></div>
+<h2 class="agegate__q" id="agegate-q">만 19세 이상<br>음주 가능한 연령입니까?</h2>
+<div class="agegate__btns">
+<button class="btn btn--pri" type="button" data-age="yes">YES</button>
+<button class="btn btn--pri" type="button" data-age="no">NO</button>
+</div>
+<small class="agegate__warn"><span>※ 경고 :</span>
+<span>지나친 음주는 뇌졸중, 기억력 손상인 치매를 유발합니다.<br>임신 중 음주는 기형아 출생 위험을 높입니다.</span></small>
+</div>
+</div>
+</div>
+<script>
+
+/* 성인인증 — 레퍼런스와 같은 흐름: 쿠키 1일, 300ms 뒤 열림, 확인 전 스크롤 잠금 */
+(function(){
+  var g=document.getElementById('agegate'); if(!g) return;
+  function get(n){var m=('; '+document.cookie).split('; '+n+'='); return m.length===2?m.pop().split(';').shift():''}
+  function set(n,v,d){var e=new Date(); e.setTime(e.getTime()+d*864e5);
+    document.cookie=n+'='+v+';expires='+e.toUTCString()+';path=/'}
+  if(get('hdAge')==='1'){ g.remove(); return; }
+  document.documentElement.style.overflow='hidden';
+  setTimeout(function(){ g.classList.add('on'); var b=g.querySelector('[data-age="yes"]'); if(b) b.focus(); },300);
+  g.addEventListener('click',function(e){
+    var t=e.target.closest('[data-age]'); if(!t) return;
+    if(t.dataset.age==='no'){ alert('만 19세 미만은 이용하실 수 없습니다.'); return; }
+    set('hdAge','1',1); g.classList.remove('on');
+    document.documentElement.style.overflow='';
+    setTimeout(function(){ g.remove(); },320);
+  });
+})();
+
+/* 등장 모션 */
+(function(){
+  var els=document.querySelectorAll('.rv'); if(!els.length) return;
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('on')}); return; }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('on'); io.unobserve(en.target);} });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.01});
+  els.forEach(function(e){ io.observe(e) });
+})();
+
+/* 헤더 — 스크롤 방향 숨김 + 섹션별 테마 + 드롭다운 + 모바일 패널 */
+(function(){
+  var head=document.querySelector('.site-head'); if(!head) return;
+  var nav=head.querySelector('.site-nav'), burger=head.querySelector('.site-head__burger');
+  var dim=document.querySelector('.site-nav__dim'), drop=head.querySelector('.site-head__drop');
+  var last=0, top=head.dataset.topTheme||'dark';
+  function desktop(){ return window.innerWidth>1024 }
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY||0;
+    head.dataset.hide=(y>200&&y>last&&!head.classList.contains('is-open'))?'1':'0';
+    last=y;
+    var t=top;
+    document.querySelectorAll('[data-head-theme]').forEach(function(s){
+      var r=s.getBoundingClientRect();
+      if(r.top<=50&&r.bottom>50) t=s.dataset.headTheme;
+    });
+    head.dataset.theme=t;
+    var g=document.querySelector('.gotop'); if(g) g.classList.toggle('on',y>600);
+  },{passive:true});
+  var gt=document.querySelector('.gotop');
+  if(gt) gt.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}) });
+  /* 데스크톱 드롭다운: 메뉴 영역에 들어오면 헤더가 흰색으로 펼쳐진다 */
+  if(drop){
+    var subs=[].slice.call(head.querySelectorAll('.gnb__sub'));
+    nav.addEventListener('mouseenter',function(){
+      if(!desktop()) return;
+      var h=0; subs.forEach(function(s){ h=Math.max(h,s.scrollHeight) });
+      head.style.setProperty('--drop-h',(h+20)+'px'); head.classList.add('is-open');
+    });
+    head.addEventListener('mouseleave',function(){ head.classList.remove('is-open') });
+  }
+  function close(){ nav.classList.remove('on'); if(dim){dim.classList.remove('on'); dim.hidden=true;}
+    burger.setAttribute('aria-expanded','false'); document.documentElement.style.overflow=''; }
+  burger.addEventListener('click',function(){
+    var on=nav.classList.toggle('on');
+    burger.setAttribute('aria-expanded',on?'true':'false');
+    if(dim){ dim.hidden=!on; requestAnimationFrame(function(){ dim.classList.toggle('on',on) }); }
+    document.documentElement.style.overflow=on?'hidden':'';
+  });
+  if(dim) dim.addEventListener('click',close);
+  window.addEventListener('resize',function(){ if(desktop()) close() });
+})();
+
+/* 모달 공통 열고 닫기 */
+(function(){
+  document.addEventListener('click',function(e){
+    var open=e.target.closest('[data-modal-open]');
+    if(open){ var m=document.getElementById(open.dataset.modalOpen);
+      if(m){ m.classList.add('on'); document.documentElement.style.overflow='hidden'; } return; }
+    var cl=e.target.closest('[data-modal-close]');
+    if(cl||(e.target.classList&&e.target.classList.contains('modal')&&!e.target.classList.contains('agegate'))){
+      var t=cl?cl.closest('.modal'):e.target;
+      if(t){ t.classList.remove('on'); document.documentElement.style.overflow=''; }
+    }
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key!=='Escape') return;
+    document.querySelectorAll('.modal.on:not(.agegate)').forEach(function(m){
+      m.classList.remove('on'); document.documentElement.style.overflow='';
+    });
+  });
+})();
+
+/* 들머리 — 3600 핀 구간에서 문장이 한 줄씩 떠오르고 배경 사진이 밝아진다 */
+(function(){
+  var sec=document.querySelector('.tintro'); if(!sec) return;
+  var sups=[].slice.call(sec.querySelectorAll('.sup'));
+  function tick(){
+    if(innerWidth<=1024){ sups.forEach(function(e){e.classList.add('on')}); return; }
+    var r=sec.getBoundingClientRect();
+    var p=Math.max(0,Math.min(1,-r.top/(r.height-innerHeight)));
+    sups.forEach(function(e){
+      var i=+e.dataset.sup;
+      e.classList.toggle('on', p>=0.08+i*0.2);
+    });
+    sec.classList.toggle('lit', p>=0.5);
+  }
+  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick();
+})();
+
+/* 5가지 이유 — 사진이 컨테이너 폭에서 780 까지 줄어든다 */
+(function(){
+  var sec=document.querySelector('.tfeat'); if(!sec) return;
+  var body=sec.querySelector('.tfeat__body'), media=sec.querySelector('.tfeat__media');
+  function tick(){
+    if(innerWidth<=1024){ media.style.width=''; return; }
+    var r=body.getBoundingClientRect();
+    var p=Math.max(0,Math.min(1,(innerHeight*0.5-r.top)/1400));
+    var e=1-Math.pow(1-p,3);
+    media.style.width=(100-(100-60.7)*e)+'%';
+  }
+  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick();
+})();
+
+/* 잔의 비밀 — 8100 핀 구간에서 원형 창이 다섯 지점을 차례로 비춘다 */
+(function(){
+  var sec=document.querySelector('.tsec__scroll'); if(!sec) return;
+  var glass=sec.querySelector('.tsec__glass'), mask=sec.querySelector('.tsec__mask');
+  var ring=sec.querySelector('.tsec__ring'), img=sec.querySelector('.tsec__glass img');
+  var pins=[].slice.call(sec.querySelectorAll('.tsec__pin'));
+  var cards=[].slice.call(sec.querySelectorAll('.tsec__card'));
+  var pos=JSON.parse(glass.dataset.pos||'[]'), cur=-1;
+  function tick(){
+    if(innerWidth<=1024){ pins.forEach(function(p){p.classList.add('on')});
+      cards.forEach(function(c){c.classList.add('on')}); return; }
+    var r=sec.getBoundingClientRect();
+    var p=Math.max(0,Math.min(0.999,-r.top/(r.height-innerHeight)));
+    var i=Math.floor(p*pins.length);
+    if(i===cur) return;
+    cur=i;
+    pins.forEach(function(el,k){ el.classList.toggle('on',k===i) });
+    cards.forEach(function(el,k){ el.classList.toggle('on',k===i) });
+    var el=pins[i];
+    var cx=parseFloat(el.style.left), cy=parseFloat(el.style.top);
+    mask.style.setProperty('--cx',cx+'%'); mask.style.setProperty('--cy',cy+'%');
+    ring.style.left=cx+'%'; ring.style.top=cy+'%';
+    img.style.transform='scale('+(i>=1&&i<=2?1.3:1)+')';
+  }
+  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick();
+})();
+
+</script>
+</body>
+</html>

@@ -41,6 +41,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   shop: "SHP",
   estate: "EST",
   artist: "ART",
+  brew: "BRE",
 };
 
 export function getDesignCode(sample: Sample): string {

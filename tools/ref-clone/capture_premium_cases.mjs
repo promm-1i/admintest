@@ -21,6 +21,21 @@ const configs = [
     mobile: ["index", "wave", "contour-shot", "location"],
   },
   {
+    folder: "brew-a",
+    pages: ["index", "brand", "taste", "history", "discover", "master", "brewery", "campaign", "campaign-first", "privacy"],
+    points: [
+      ["creed", "index", ".creed"],
+      ["tale", "index", ".tale"],
+      ["craft", "index", ".craft"],
+      ["invite", "index", ".invite"],
+      ["cards", "brand", ".cdsec__cards"],
+      ["finder", "discover", ".finder"],
+      ["grades", "master", ".grades"],
+      ["timeline", "history", ".jera__body"],
+    ],
+    mobile: ["index", "brand", "discover", "campaign"],
+  },
+  {
     folder: "corporate-n",
     pages: ["index", "about", "history", "business", "network", "esg", "finance", "news"],
     points: [
@@ -99,6 +114,10 @@ const browser = await chromium.launch({ headless: true });
 
 async function open(folder, file, viewport, deviceScaleFactor = 1) {
   const context = await browser.newContext({ viewport, deviceScaleFactor, reducedMotion: "reduce" });
+  // 주류 브랜드 템플릿은 성인 인증 창이 먼저 뜬다 — 쿠키를 미리 심어 건너뛴다
+  if (folder === "brew-a") {
+    await context.addInitScript(() => { try { document.cookie = "hdAge=1;path=/"; } catch (e) { /* noop */ } });
+  }
   const page = await context.newPage();
   const url = `${BASE}/${folder}/${file === "index" ? "" : `${file}.html`}`;
   await page.goto(url, { waitUntil: "networkidle", timeout: 30_000 });
