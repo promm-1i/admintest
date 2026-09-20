@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>브랜드 상세 | 서라호텔앤리조트</title>
+<meta name="description" content="서라호텔앤리조트 브랜드 상세 소개">
+<meta property="og:title" content="브랜드 상세 | 서라호텔앤리조트">
+<meta property="og:image" content="./og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+.layout-body{padding-bottom:105px}
+.sec-tit{font-size:24px;line-height:34px;font-weight:600}
+.sec-tit-en{font-family:"Playfair Display",serif;font-size:28px;line-height:38px}
+.sec-desc{margin-top:10px;font-size:13.5px;line-height:22.5px;color:var(--g1)}
+.filter-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;height:39px}
+.filter-left{display:flex;align-items:center;gap:8px;width:780px}
+.filter-btn{display:inline-flex;align-items:center;gap:6px;height:39px;padding:0 16px;border:1px solid var(--g3);border-radius:19.5px;font-size:13px;color:var(--g1);background:#fff;white-space:nowrap}
+.filter-btn::after{content:"";width:12px;height:12px;background:url(./assets/ic/chev-down.svg) center/contain no-repeat}
+.filter-btn.on{border-color:var(--bk);color:var(--bk);font-weight:600}
+.filter-search{position:relative;width:270px}
+.filter-search input{width:100%;height:39px;padding:0 40px 0 16px;border:1px solid var(--g3);border-radius:19.5px;font-size:13px}
+.filter-search button{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:18px;height:18px;background:url(./assets/ic/search.svg) center/contain no-repeat}
+
+.bv-kv{position:relative;height:560px;overflow:hidden}
+.bv-kv img{width:100%;height:100%;object-fit:cover}
+.bv-kv::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.2)}
+.bv-kv .bv-kv-logo{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:2;text-align:center;font-family:"Playfair Display",serif;font-size:44px;letter-spacing:.14em;color:#fff}
+.bv-intro{display:flex;align-items:center;gap:80px;padding:120px 0}
+.bv-intro .tx{flex:1}
+.bv-intro .en{font-family:"Playfair Display",serif;font-size:30px;line-height:42px;letter-spacing:.1em}
+.bv-intro p{margin-top:24px;font-size:13.5px;line-height:24px;color:var(--g1)}
+.bv-intro .im{width:450px;height:580px;overflow:hidden}
+.bv-intro .im img{width:100%;height:100%;object-fit:cover}
+.bv-quote{position:relative;display:flex;background:var(--dark)}
+.bv-quote .qi{width:50%;padding:88px 0 88px 120px}
+.bv-quote .qi img{width:380px;height:380px;object-fit:cover}
+.bv-quote .qt{width:50%;padding:120px 120px 120px 60px;background:#F4F3EF}
+.bv-quote .qt .en{font-family:"Playfair Display",serif;font-size:26px;line-height:38px}
+.bv-quote .qt p{margin-top:22px;font-size:13px;line-height:24px;color:var(--g1)}
+.bv-features{display:flex;gap:30px;padding:110px 0 0}
+.bv-feature{flex:1}
+.bv-feature .im{height:310px;overflow:hidden}
+.bv-feature .im img{width:100%;height:100%;object-fit:cover}
+.bv-feature .ft-en{margin-top:22px;font-family:"Playfair Display",serif;font-size:20px;line-height:30px}
+.bv-feature p{margin-top:10px;font-size:13px;line-height:22px;color:var(--g1)}
+.bv-wide{position:relative;margin-top:60px;height:420px;overflow:hidden}
+.bv-wide img{width:100%;height:100%;object-fit:cover}
+.bv-wide .wl{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);text-align:center;font-family:"Playfair Display",serif;font-size:30px;letter-spacing:.2em;color:#fff}
+.bv-wide-tit{margin-top:26px;font-size:20px;line-height:30px;font-weight:600}
+.bv-wide-desc{margin-top:8px;font-size:13px;line-height:22px;color:var(--g1)}
+.bv-exp{padding:110px 0 0}
+.bv-exp .swiper-slide{width:350px}
+.bv-exp .card-img{height:235px}
+.bv-exp .badge{margin-top:14px}
+.bv-exp .ex-tit{margin-top:10px;font-size:15px;line-height:24px;font-weight:600}
+.bv-exp p{margin-top:6px;font-size:12px;line-height:20px;color:var(--g1)}
+.bv-branch{padding:110px 0 0}
+.bv-branch .chips{justify-content:center;margin-top:30px}
+.bv-branch-box{display:flex;gap:40px;margin-top:40px;padding:30px;background:var(--bg)}
+.bv-branch-box .im{width:450px;height:280px;overflow:hidden}
+.bv-branch-box .im img{width:100%;height:100%;object-fit:cover}
+.bv-branch-box .in{flex:1;padding-top:8px}
+.bv-branch-box .bn{font-size:20px;line-height:30px;font-weight:600}
+.bv-branch-box dl{display:flex;gap:12px;margin-top:14px;font-size:13px;line-height:22px}
+.bv-branch-box dt{width:70px;color:var(--g2)}
+.bv-branch-box dd{flex:1;color:var(--g1)}
+.bv-dept{margin-top:40px;border-top:1px solid var(--bk)}
+.bv-dept-row{display:flex;gap:20px;padding:24px 0;border-bottom:1px solid var(--g3)}
+.bv-dept-row .lb{width:150px;font-size:13.5px;font-weight:600}
+.bv-dept-row .li{flex:1;display:flex;flex-wrap:wrap;gap:16px 30px}
+.bv-dept-row .li div{width:calc(25% - 23px);font-size:12px;line-height:20px;color:var(--g1)}
+.bv-dept-row .li strong{display:block;font-size:13px;color:var(--bk)}
+@media(max-width:1100px){.bv-quote .qi{padding:60px 0 60px 24px}.bv-quote .qt{padding:60px 24px}}
+@media(max-width:767px){
+.bv-kv{height:320px}.bv-kv .bv-kv-logo{font-size:28px}
+.bv-intro{flex-direction:column;gap:30px;padding:56px 0}
+.bv-intro .im{width:100%;height:360px}
+.bv-intro .en{font-size:22px;line-height:32px}
+.bv-quote{flex-direction:column}
+.bv-quote .qi,.bv-quote .qt{width:100%;padding:36px 24px}
+.bv-quote .qi img{width:100%;height:260px}
+.bv-features{flex-direction:column;gap:30px;padding-top:56px}
+.bv-feature .im{height:220px}
+.bv-wide{height:240px}.bv-wide .wl{font-size:20px}
+.bv-exp,.bv-branch{padding-top:56px}
+.bv-exp .swiper-slide{width:252px}.bv-exp .card-img{height:168px}
+.bv-branch-box{flex-direction:column;gap:20px;padding:20px}
+.bv-branch-box .im{width:100%;height:200px}
+.bv-dept-row{flex-direction:column;gap:10px}
+.bv-dept-row .lb{width:auto}
+.bv-dept-row .li div{width:calc(50% - 15px)}
+}
+</style></head>
+<body>
+<div class="wrap ">
+<a href="#content" class="skipnav">본문 바로가기</a>
+<header class="hd" id="header">
+  <div class="hd-in">
+    <div class="hd-row hd-util-row">
+      <h1 class="logo"><a href="./index.html"><span class="blind">SEORA HOTELS &amp; RESORTS</span></a></h1>
+      <div class="hd-util">
+        <button type="button" class="btn-alarm" aria-label="알림"><span class="dot"></span></button>
+        <a href="./login.html" class="util-link">로그인</a><a href="./signup.html" class="util-link">회원가입</a><a href="./reservation-check.html" class="util-link">예약조회</a><a href="./hotel-search.html" class="util-link">호텔찾기</a><a href="./rewards.html" class="util-link">리워즈</a>
+        <div class="hd-sel"><button type="button" class="sel-btn" aria-label="언어 선택">한국어</button><div class="sel-list"><ul><li><button type="button" class="on">한국어</button></li><li><button type="button">English</button></li><li><button type="button">日本語</button></li><li><button type="button">中文</button></li></ul></div></div>
+        <div class="hd-sel"><button type="button" class="sel-btn" aria-label="통화 선택">KRW</button><div class="sel-list"><ul><li><button type="button" class="on">KRW</button></li><li><button type="button">USD</button></li><li><button type="button">JPY</button></li></ul></div></div>
+        <button type="button" class="btn-allmenu" id="allmenuBtn" aria-label="전체 메뉴"><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="hd-row hd-gnb-row"><nav class="gnb"><ul><li class="gnb-item on"><a href="./brands.html" class="gnb-tit">브랜드</a><div class="gnb-sub"><div class="gnb-sub-in"><ul><li><a href="./brands.html">브랜드 포트폴리오</a></li><li><a href="./hotel-search.html">호텔 찾기</a></li><li><a href="./brand-view.html?id=signara">브랜드 소개</a></li></ul></div></div></li><li class="gnb-item"><a href="./offers.html" class="gnb-tit">스페셜 오퍼</a><div class="gnb-sub"><div class="gnb-sub-in"><ul><li><a href="./offers.html">객실 프로모션</a></li><li><a href="./offers.html?tab=dining">다이닝 프로모션</a></li><li><a href="./wedding-list.html">웨딩 프로모션</a></li></ul></div></div></li><li class="gnb-item"><a href="./dining.html" class="gnb-tit">다이닝</a><div class="gnb-sub"><div class="gnb-sub-in"><ul><li><a href="./dining.html">다이닝 찾기</a></li><li><a href="./offers.html?tab=dining">다이닝 프로모션</a></li></ul></div></div></li><li class="gnb-item"><a href="./wedding.html" class="gnb-tit">웨딩&amp;컨벤션</a><div class="gnb-sub"><div class="gnb-sub-in"><ul><li><a href="./wedding.html">호텔 웨딩</a></li><li><a href="./wedding-list.html">웨딩홀 찾기</a></li><li><a href="./wedding.html#convention">컨벤션·미팅</a></li></ul></div></div></li><li class="gnb-item"><a href="./lifestyle.html" class="gnb-tit">라이프스타일</a><div class="gnb-sub"><div class="gnb-sub-in"><ul><li><a href="./lifestyle.html?id=scent">시그니처 향</a></li><li><a href="./lifestyle.html?id=bedding">침구 시스템</a></li><li><a href="./lifestyle.html?id=amenity">어메니티</a></li></ul></div></div></li><li class="gnb-item"><a href="./membership.html" class="gnb-tit">멤버십</a><div class="gnb-sub"><div class="gnb-sub-in"><ul><li><a href="./membership.html">멤버십 안내</a></li><li><a href="./rewards.html">리워즈</a></li><li><a href="./rewards-benefits.html">등급별 혜택</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></div></div></li><li class="gnb-item"><a href="./offers.html" class="gnb-tit">e-SHOP</a></li></ul></nav></div>
+  </div>
+  <div class="hd-bg"></div>
+  <div class="allmenu" id="allmenu">
+    <div class="am-head"><span class="am-logo">SEORA HOTELS &amp; RESORTS</span><button type="button" class="am-close" id="allmenuClose" aria-label="닫기"></button></div>
+    <div class="am-body"><div class="am-col"><a href="./brands.html" class="am-tit">브랜드</a><ul><li><a href="./brands.html">브랜드 포트폴리오</a></li><li><a href="./hotel-search.html">호텔 찾기</a></li><li><a href="./brand-view.html?id=signara">브랜드 소개</a></li></ul></div><div class="am-col"><a href="./offers.html" class="am-tit">스페셜 오퍼</a><ul><li><a href="./offers.html">객실 프로모션</a></li><li><a href="./offers.html?tab=dining">다이닝 프로모션</a></li><li><a href="./wedding-list.html">웨딩 프로모션</a></li></ul></div><div class="am-col"><a href="./dining.html" class="am-tit">다이닝</a><ul><li><a href="./dining.html">다이닝 찾기</a></li><li><a href="./offers.html?tab=dining">다이닝 프로모션</a></li></ul></div><div class="am-col"><a href="./wedding.html" class="am-tit">웨딩&amp;컨벤션</a><ul><li><a href="./wedding.html">호텔 웨딩</a></li><li><a href="./wedding-list.html">웨딩홀 찾기</a></li><li><a href="./wedding.html#convention">컨벤션·미팅</a></li></ul></div><div class="am-col"><a href="./lifestyle.html" class="am-tit">라이프스타일</a><ul><li><a href="./lifestyle.html?id=scent">시그니처 향</a></li><li><a href="./lifestyle.html?id=bedding">침구 시스템</a></li><li><a href="./lifestyle.html?id=amenity">어메니티</a></li></ul></div><div class="am-col"><a href="./membership.html" class="am-tit">멤버십</a><ul><li><a href="./membership.html">멤버십 안내</a></li><li><a href="./rewards.html">리워즈</a></li><li><a href="./rewards-benefits.html">등급별 혜택</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></div><div class="am-col"><a href="./offers.html" class="am-tit">e-SHOP</a><ul><li><a href="./offers.html">e-SHOP</a></li></ul></div></div>
+  </div>
+  <div class="hd-dim" id="hdDim"></div>
+</header>
+<div id="container"><main id="content">
+<div class="sub-head">
+  <div class="inner"><nav class="crumbs"><a href="./index.html" class="cr-home"><span class="blind">홈</span></a><span class="cr-item">브랜드</span><span class="cr-item">브랜드 소개</span><span class="cr-item">시그나라</span></nav>
+    <div class="sub-tit-wrap"><h2 class="sub-tit">브랜드 소개</h2></div>
+  </div>
+</div>
+<div class="layout-body">
+  <div class="bv-kv"><img src="./assets/brand-bg-signara.jpg" alt="시그나라" fetchpriority="high"><span class="bv-kv-logo">SIGNARA</span></div>
+  <div class="inner">
+    <div class="bv-intro" data-motion>
+      <div class="tx"><div class="en">SIGNARA</div>
+        <p>최상의 경험을 제안하는 서비스와 품격으로 머무는 시간 그 자체가 여행이 되도록 합니다.<br>시그나라만이 선보일 수 있는 특별한 환대를 경험해 보세요.</p></div>
+      <div class="im"><img src="./assets/bv-intro.jpg" alt="" loading="lazy"></div>
+    </div>
+  </div>
+  <div class="bv-quote" data-motion>
+    <div class="qi"><img src="./assets/bv-quote.jpg" alt="" loading="lazy"></div>
+    <div class="qt"><div class="en">Stay Beyond the Ordinary</div>
+      <p>시그나라가 만든 가장 높은 곳, 그곳에서 만나는 가장 깊은 환대.<br><br>도심의 야경이 발끝에 펼쳐지는 순간, 하루의 소란은 조용히 가라앉습니다. 세심하게 설계된 공간과 흐트러짐 없는 서비스가 머무는 내내 이어집니다.<br><br>완벽한 휴식을 원하시는 분께, 최고의 하루를 약속드립니다. 그리고 그 하루가 여행의 이유가 되기를 바랍니다.</p></div>
+  </div>
+  <div class="inner">
+    <div class="bv-features" data-motion>
+      <div class="bv-feature"><div class="im"><img src="./assets/bv-feature-1.jpg" alt="" loading="lazy"></div>
+        <div class="ft-en">Premium Landmark Hotel</div><p>지역을 대표하는 랜드마크에 자리 잡은 시그나라는 도시의 스카이라인을 완성하며, 머무는 순간마다 도시를 새롭게 바라보게 합니다.</p></div>
+      <div class="bv-feature"><div class="im"><img src="./assets/bv-feature-2.jpg" alt="" loading="lazy"></div>
+        <div class="ft-en">Higher Level of Service Paradigm</div><p>절제된 환대와 정교한 디테일, 그리고 고객 한 분 한 분의 취향을 기억하는 서비스가 머무는 시간을 완성합니다.</p></div>
+    </div>
+    <div class="bv-wide" data-motion><img src="./assets/bv-wide.jpg" alt="" loading="lazy"><span class="wl">SIGNARA</span></div>
+    <div class="bv-wide-tit">Brand Features</div>
+    <p class="bv-wide-desc">차별화된 시설과 서비스로 완성되는 시그나라만의 경험, 그리고 도시를 내려다보는 전망까지 하나의 흐름으로 이어집니다.</p>
+    <div class="bv-exp" data-motion>
+      <div class="sec-tit-en">Unique Experience</div>
+      <div class="swiper bv-exp-swiper" style="margin-top:30px"><div class="swiper-wrapper"><div class="swiper-slide"><div class="card"><div class="card-img"><img src="./assets/bv-exp-1.jpg" alt="" loading="lazy"></div>
+      <span class="badge line">시그나라 라운지</span><div class="ex-tit">럭셔리 스파 컬렉션</div><p>전 객실 투숙객에게 제공되는 시그니처 스파 프로그램으로 하루의 피로를 씻어냅니다.</p></div></div><div class="swiper-slide"><div class="card"><div class="card-img"><img src="./assets/bv-exp-2.jpg" alt="" loading="lazy"></div>
+      <span class="badge line">시그나라 다이닝</span><div class="ex-tit">층마다 다른 미식의 결</div><p>한식·프렌치·바까지, 한 건물 안에서 여덟 가지 미식을 경험합니다.</p></div></div><div class="swiper-slide"><div class="card"><div class="card-img"><img src="./assets/bv-exp-3.jpg" alt="" loading="lazy"></div>
+      <span class="badge line">시그나라 클럽</span><div class="ex-tit">세계적 수준의 미식 경험</div><p>클럽 라운지에서 제공되는 프라이빗 조식과 이브닝 칵테일.</p></div></div><div class="swiper-slide"><div class="card"><div class="card-img"><img src="./assets/bv-exp-4.jpg" alt="" loading="lazy"></div>
+      <span class="badge line">시그나라 웨딩</span><div class="ex-tit">가장 높은 곳의 예식</div><p>도심 전경을 배경으로 한 프라이빗 웨딩홀을 소개합니다.</p></div></div></div></div>
+      <div class="brand-ctrl2"><button type="button" class="prev" aria-label="이전"></button><span class="frac"><span class="cur">1</span> / 4</span><button type="button" class="next" aria-label="다음"></button></div>
+    </div>
+    <div class="bv-branch" data-motion>
+      <div class="sec-tit">지점별 연락처</div>
+      <div class="chips" data-chips="#none"><button type="button" class="chip on">지점별 연락처</button><button type="button" class="chip">부서별 연락처</button></div>
+      <div class="chips sm" style="margin-top:20px"><button type="button" class="chip on">시그나라 서울</button><button type="button" class="chip">시그나라 부산</button></div>
+      <div class="bv-branch-box">
+        <div class="im"><img src="./assets/bv-branch.jpg" alt="" loading="lazy"></div>
+        <div class="in"><div class="bn">시그나라 서울 <span aria-hidden="true">›</span></div>
+          <dl><dt>주소</dt><dd>서울특별시 강남구 테헤란로 123 서라타워 76~101층</dd></dl>
+          <dl><dt>전화</dt><dd>010-4894-4905</dd></dl>
+          <dl><dt>이메일</dt><dd>6gsmake@gmail.com</dd></dl>
+        </div>
+      </div>
+      <div class="bv-dept"><div class="bv-dept-row"><div class="lb">다이닝</div><div class="li"><div><strong>그릴 & 바 레브</strong>전화 02-0000-1100</div><div><strong>세종</strong>전화 02-0000-1200</div><div><strong>더 라운지</strong>전화 02-0000-1300</div><div><strong>바</strong>전화 02-0000-1400</div><div><strong>페이스트리 살롱</strong>전화 02-0000-1500</div><div><strong>인룸다이닝</strong>전화 02-0000-1600</div><div><strong>시그나라 클럽</strong>전화 02-0000-1700</div></div></div><div class="bv-dept-row"><div class="lb">웨딩·컨벤션</div><div class="li"><div><strong>시그나라 웨딩</strong>전화 02-0000-2100</div><div><strong>그랜드볼룸</strong>전화 02-0000-2200</div><div><strong>컨벤션</strong>전화 02-0000-2300</div><div><strong>스몰웨딩</strong>전화 02-0000-2400</div></div></div><div class="bv-dept-row"><div class="lb">편의시설</div><div class="li"><div><strong>피트니스 & 스파</strong>전화 02-0000-3100</div><div><strong>수영장</strong>전화 02-0000-3200</div><div><strong>비즈니스 센터</strong>전화 02-0000-3300</div><div><strong>발렛 데스크</strong>전화 02-0000-3400</div></div></div></div>
+    </div>
+  </div>
+</div></main></div>
+<div class="floating">
+  <nav class="floating-util"><ul>
+    <li><a href="./offers.html" class="fu-item fu-coupon"><span class="blind">나의 쿠폰</span></a></li>
+    <li><a href="./offers.html" class="fu-item fu-wish"><span class="blind">관심상품</span></a></li>
+    <li><a href="./offers.html" class="fu-item fu-recent"><span class="blind">최근 본 상품</span></a></li>
+  </ul></nav>
+</div>
+<button type="button" class="btn-reserve" id="btnReserve"><i class="ico-reserve" aria-hidden="true"></i><span class="btn-txt">예약하기</span></button>
+<div class="modal modal-right" id="reserveModal">
+  <div class="modal-dimm"></div>
+  <div class="modal-box">
+    <div class="modal-head"><strong class="modal-tit">예약하기</strong><button type="button" class="modal-close" aria-label="닫기"></button></div>
+    <div class="modal-body">
+      <div class="rsv-notice"><span>리워즈 회원가입하고 회원 전용 특별 요금으로 예약하세요.</span><a href="./signup.html">회원가입</a></div>
+      <div class="rsv-field"><span class="rsv-label">호텔·리조트</span><button type="button" class="rsv-input">호텔 또는 지역을 선택하세요</button></div>
+      <div class="rsv-field rsv-row2">
+        <div><span class="rsv-label">체크인</span><button type="button" class="rsv-input">날짜 선택</button></div>
+        <div><span class="rsv-label">체크아웃</span><button type="button" class="rsv-input">날짜 선택</button></div>
+      </div>
+      <div class="rsv-field"><span class="rsv-label">객실/인원</span><button type="button" class="rsv-input">객실 1 · 성인 2 · 어린이 0</button></div>
+      <div class="rsv-field"><span class="rsv-label">프로모션 코드 <em>(선택)</em></span><input type="text" placeholder="코드를 입력하세요"></div>
+      <div class="rsv-chk"><label><input type="checkbox"><span>회원 전용 특별 요금 보기</span></label></div>
+    </div>
+    <div class="modal-foot"><button type="button" class="btn btn-fill btn-lg">객실 검색</button></div>
+  </div>
+</div>
+<footer class="ft" id="footer">
+  <div class="ft-acc"><div class="ft-acc-item"><button type="button" class="ft-acc-btn">DESTINATION</button><div class="ft-acc-body"><ul class="ft-list"><li><a href="./brands.html">서라호텔앤리조트 소개</a></li><li><a href="./brand-view.html?id=signara">브랜드 소개</a></li><li><a href="./brands.html">(주)서라호텔 기업소개</a></li><li><a href="./brands.html">(주)서라호텔 HM</a></li><li><a href="./hotel-search.html">지점별 연락처</a></li><li><a href="./faq.html">고객의 소리</a></li></ul></div></div><div class="ft-acc-item"><button type="button" class="ft-acc-btn">COMPANY</button><div class="ft-acc-body"><ul class="ft-list"><li><a href="./brands.html">채용</a></li><li><a href="./brands.html">신규 개발</a></li><li><a href="./brands.html">서비스아카데미</a></li><li><a href="./brands.html">지속가능경영</a></li><li><a href="./brands.html">리조트 제휴 제안</a></li></ul></div></div><div class="ft-acc-item"><button type="button" class="ft-acc-btn">HOTLINE</button><div class="ft-acc-body"><ul class="ft-list"><li><a href="./faq.html">신문고</a></li><li><a href="./faq.html">컴플라이언스</a></li></ul></div></div><div class="ft-acc-item"><button type="button" class="ft-acc-btn">TERMS &amp; POLICY</button><div class="ft-acc-body"><ul class="ft-list"><li><a href="./privacy.html">약관 및 정책</a></li></ul></div></div><div class="ft-acc-item"><button type="button" class="ft-acc-btn">OTHER INFORMATION</button><div class="ft-acc-body"><ul class="ft-list"><li><a href="./offers.html">상품권 종합안내</a></li><li><a href="./offers.html">통합숙박권 예약</a></li><li><a href="./login.html">임직원</a></li><li><a href="./membership.html">리조트 분양회원</a></li><li><a href="./faq.html">FAQ</a></li><li><a href="./privacy.html">쿠키설정</a></li><li><a href="./brands.html">사이트맵</a></li></ul></div></div></div>
+  <div class="ft-in">
+    <div class="ft-top">
+      <div class="ft-logo">SEORA HOTELS &amp; RESORTS</div>
+      <div class="ft-store"><a href="#" class="st-ios"><span class="blind">App Store</span></a><a href="#" class="st-aos"><span class="blind">Google Play</span></a></div>
+    </div>
+    <div class="ft-mid">
+      <div class="ft-cols"><div class="ft-col"><div class="ft-col-tit">DESTINATION</div><ul class="ft-list"><li><a href="./brands.html">서라호텔앤리조트 소개</a></li><li><a href="./brand-view.html?id=signara">브랜드 소개</a></li><li><a href="./brands.html">(주)서라호텔 기업소개</a></li><li><a href="./brands.html">(주)서라호텔 HM</a></li><li><a href="./hotel-search.html">지점별 연락처</a></li><li><a href="./faq.html">고객의 소리</a></li></ul></div><div class="ft-col"><div class="ft-col-tit">COMPANY</div><ul class="ft-list"><li><a href="./brands.html">채용</a></li><li><a href="./brands.html">신규 개발</a></li><li><a href="./brands.html">서비스아카데미</a></li><li><a href="./brands.html">지속가능경영</a></li><li><a href="./brands.html">리조트 제휴 제안</a></li></ul></div><div class="ft-col"><div class="ft-col-tit">HOTLINE</div><ul class="ft-list"><li><a href="./faq.html">신문고</a></li><li><a href="./faq.html">컴플라이언스</a></li></ul></div><div class="ft-col"><div class="ft-col-tit">TERMS &amp; POLICY</div><ul class="ft-list"><li><a href="./privacy.html">약관 및 정책</a></li></ul></div><div class="ft-col etc"><ul class="ft-list"><li><a href="./offers.html">상품권 종합안내</a></li><li><a href="./offers.html">통합숙박권 예약</a></li><li><a href="./login.html">임직원</a></li><li><a href="./membership.html">리조트 분양회원</a></li><li><a href="./faq.html">FAQ</a></li><li><a href="./privacy.html">쿠키설정</a></li><li><a href="./brands.html">사이트맵</a></li></ul></div></div>
+      <div class="ft-contact">
+        <div class="ft-col-tit">CONTACT</div>
+        <div class="ft-contact-cont">
+          <p>04533, 서울특별시 강남구 테헤란로 123</p>
+          <p>호텔 안내 010-4894-4905</p>
+          <p>웨딩·컨벤션 문의 010-4894-4905</p>
+          <p>대표이사 이진수</p>
+          <p>사업자등록번호 266-07-03678</p>
+          <p>통신판매업신고 제2026-서울강남-00480호</p>
+          <p>6gsmake@gmail.com</p>
+        </div>
+        <div class="ft-family"><button type="button" class="family-btn">Family Site</button><div class="family-list"><ul><li><a href="#">서라면세점</a></li><li><a href="#">서라월드</a></li><li><a href="#">서라리테일</a></li><li><a href="#">서라컬처웍스</a></li></ul></div></div>
+        <div class="ft-sns"><a href="#" class="sns-review"><span class="blind">리뷰</span></a><a href="#" class="sns-yt"><span class="blind">유튜브</span></a><a href="#" class="sns-ig"><span class="blind">인스타그램</span></a><a href="#" class="sns-fb"><span class="blind">페이스북</span></a><a href="#" class="sns-blog"><span class="blind">블로그</span></a><a href="#" class="sns-in"><span class="blind">링크드인</span></a></div>
+      </div>
+    </div>
+    <div class="ft-btm">
+      <div class="ft-policy"><a href="./privacy.html">상품권 종합안내</a><a href="./privacy.html">통합숙박권 예약</a><a href="./login.html">임직원</a><a href="./membership.html">리조트 분양회원</a><a href="./privacy.html" class="strong">개인정보 처리방침</a><a href="./faq.html">FAQ</a><a href="./privacy.html">쿠키설정</a><a href="./brands.html">사이트맵</a></div>
+      <p class="ft-copy">ⓒ SEORA HOTELS &amp; RESORTS. All rights reserved.</p>
+    </div>
+  </div>
+  
+</footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script src="./assets/site.js"></script>
+<script>
+new Swiper('.bv-exp-swiper',{slidesPerView:'auto',spaceBetween:20,navigation:{nextEl:'.bv-exp .next',prevEl:'.bv-exp .prev'},on:{slideChange:function(){document.querySelector('.bv-exp .cur').textContent=this.activeIndex+1}}});
+(function(){var m={signara:['SIGNARA','시그나라'],'the-grand':['THE GRAND SEORA','더그랜드서라'],'seora-hotels':['SEORA HOTELS','서라호텔'],s7:['S7 by SEORA HOTELS','S7 바이 서라호텔'],breez:['BREEZ by SEORA HOTELS','브리즈 바이 서라호텔'],city:['SEORA CITY HOTELS','서라시티호텔'],'arte-villas':['ARTE VILLAS JEJU','아르테빌라스 제주'],resort:['SEORA RESORT','서라리조트'],vela:['VELA','벨라'],affiliated:['AFFILIATED by SEORA HOTELS','어필리에이티드 바이 서라호텔'],skyhill:['SEORA SKYHILL CC','서라스카이힐 CC']};
+var id=new URLSearchParams(location.search).get('id')||'signara'; var b=m[id]||m.signara;
+document.querySelectorAll('.bv-kv-logo,.bv-intro .en,.bv-wide .wl').forEach(function(e){e.textContent=b[0]});
+document.querySelector('.bv-kv img').src='./assets/brand-bg-'+id+'.jpg';
+document.querySelectorAll('.crumbs .cr-item')[2].textContent=b[1];
+document.querySelectorAll('.bv-branch .chips.sm .chip')[0].textContent=b[1]+' 서울';
+document.querySelectorAll('.bv-branch .chips.sm .chip')[1].textContent=b[1]+' 부산';
+document.querySelector('.bv-branch-box .bn').innerHTML=b[1]+' 서울 <span aria-hidden="true">›</span>';
+document.title=b[1]+' | 서라호텔앤리조트';})();
+</script></body>
+</html>
