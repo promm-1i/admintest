@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<title>강서구 치과 | 365서울예담치과 임플란트·교정·라미네이트 | 365서울예담치과의원</title>
+<meta name="description" content="365서울예담치과의원는 보건복지부 인증 전문의 분과별 공동진료로 임플란트·치아교정·라미네이트·보철치료를 제공합니다. 화곡역 8번 출구 도보 1분, 서울시 강서구 강서로 179, 예담M빌딩 3F, 4F.">
+<meta property="og:title" content="강서구 치과 | 365서울예담치과 임플란트·교정·라미네이트 | 365서울예담치과의원">
+<meta property="og:image" content="./og.jpg">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* ===== 1. 메인 비주얼 ===== */
+.dental-visual{background:#000;position:relative;width:100%;height:100vh}
+.dental-visual .slides{height:100%;position:relative}
+.dental-visual .slide{position:absolute;inset:0;width:100%;height:100%;opacity:0;transition:opacity .8s ease-in-out}
+.dental-visual .slide.on{opacity:1}
+.dental-visual .img-bx{width:100%;height:100%;position:relative;overflow:hidden;pointer-events:none}
+.dental-visual .img-bx:before{position:absolute;content:"";inset:0;background:rgba(0,0,0,.3);z-index:1}
+.dental-visual img{width:100%;height:100%;object-fit:cover;display:block}
+.dental-visual .visual-txt-bx{position:absolute;top:27%;right:calc((100% - 1700px)/2);color:#fff;z-index:2}
+.dental-visual .visual-txt-bx .mask{overflow:hidden}
+.dental-visual .visual-txt-bx .title{text-align:right;font-size:4.5rem;line-height:1.2;font-weight:400;letter-spacing:-.02em;transform:translateY(-100%);transition:transform .6s}
+.dental-visual .visual-txt-bx .title.title2{transition-delay:.3s;font-weight:700}
+.dental-visual .slide.on .visual-txt-bx .title{transform:translateY(0)}
+.dental-visual .visual-txt-bx p{display:none}
+.dental-visual .costom-pageNav{position:absolute;color:#fff;left:20px;top:50%;transform:translateY(-50%);padding-left:calc((100% - 1760px)/2);z-index:3}
+.dental-visual .costom-pageNav ul{display:flex;flex-direction:column;gap:3.75rem}
+.dental-visual .costom-pageNav li{display:flex;align-items:center;gap:1.125rem;opacity:.5;transition:opacity .3s ease;cursor:pointer}
+.dental-visual .costom-pageNav li.active{opacity:1}
+.dental-visual .costom-pageNav li.active p{font-weight:600}
+.dental-visual .costom-pageNav .cir{position:relative;width:24px;height:24px;flex:0 0 auto}
+.dental-visual .costom-pageNav .cir svg{position:absolute;top:0;left:0;transform:rotate(-90deg)}
+.dental-visual .costom-pageNav .cir circle{fill:none;stroke-width:1.4}
+.dental-visual .costom-pageNav .cir .bg-circle{stroke:rgba(255,255,255,.3)}
+.dental-visual .costom-pageNav .cir .progress-circle{stroke:#fff;stroke-dasharray:62.83;stroke-dashoffset:62.83}
+.dental-visual .costom-pageNav li.active .progress-circle{animation:fillCircle 6s linear forwards}
+@keyframes fillCircle{to{stroke-dashoffset:0}}
+.dental-visual .costom-pageNav .dot{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:6px;height:6px;border-radius:50%;background:#fff}
+.dental-visual .costom-pageNav p{font-size:1.125rem;font-weight:400;letter-spacing:.04em;line-height:1.2}
+@media(max-width:1900px){.dental-visual .visual-txt-bx{right:100px}}
+@media(max-width:1400px){.dental-visual .visual-txt-bx .title{font-size:3.75rem}}
+@media(max-width:1200px){.dental-visual .visual-txt-bx{top:50%;right:50%;transform:translate(50%,-50%);width:90%}
+ .dental-visual .visual-txt-bx .title{text-align:center;font-size:3.125rem}
+ .dental-visual .visual-txt-bx p{display:block;font-size:1.25rem;text-align:center;margin-top:18px;letter-spacing:0}
+ .dental-visual .costom-pageNav{left:50%;top:70%;transform:translateX(-50%);padding-left:0}
+ .dental-visual .costom-pageNav ul{flex-direction:row;gap:10px}.dental-visual .costom-pageNav p{display:none}}
+@media(max-width:1024px){.dental-visual{height:600px}}
+@media(max-width:768px){.dental-visual{height:auto;aspect-ratio:1/1}
+ .dental-visual .visual-txt-bx{top:initial;right:initial;bottom:30px;left:0;width:100%;padding-inline:10px;transform:none}
+ .dental-visual .visual-txt-bx .title{font-size:24px;text-align:left}
+ .dental-visual .visual-txt-bx p{margin-top:4px;font-size:13px;text-align:left}
+ .dental-visual .costom-pageNav{top:initial;bottom:155px;left:30px;transform:none}}
+/* ===== 2. 특화진료 탭 ===== */
+.dental-tab{background:#fff;width:100%;padding:100px 0}
+.dental-tab .section-tit{padding-inline:20px}
+.dental-tab .tabs-four{display:flex;align-items:center;justify-content:center;gap:20px}
+.dental-tab .tabs-four li{padding:.7rem 3rem;display:flex;align-items:center;justify-content:center;background:#f6f6f6;color:#222;font-size:1.4rem;font-weight:400;border-radius:50px;border:1px solid #eee;cursor:pointer;transition:background .3s,color .3s,border .3s;white-space:nowrap}
+.dental-tab .tabs-four li.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.dental-tab .tab-views{position:relative;margin-top:40px;width:1240px;max-width:100%;padding-inline:20px;margin-inline:auto}
+.dental-tab .tabviews{width:100%;display:none;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.dental-tab .tabviews.on{display:flex}
+.dental-tab .tabviews .imgBox{width:50%;border-radius:14px;overflow:hidden;aspect-ratio:600/430}
+.dental-tab .tabviews .imgBox img{width:100%;height:100%;object-fit:cover}
+.dental-tab .tabviews .txtBox{width:50%;padding-left:6.25rem;display:flex;flex-direction:column;justify-content:start;align-items:start;gap:1.25rem}
+.dental-tab .tabviews .txtBox h4{font-size:1.75rem;color:var(--pri);font-weight:700;line-height:1.3;letter-spacing:-.02em}
+.dental-tab .tabviews .txtBox h3{font-size:2.5rem;font-weight:700;line-height:1.3;letter-spacing:-.03em;color:var(--ink)}
+.dental-tab .tabviews .txtBox p{font-size:1.25rem;line-height:1.6;font-weight:400;letter-spacing:-.03em;color:#606060}
+.dental-tab .tabviews .txtBox .viewMore{margin:10px 0 0}
+@media(max-width:1600px){.dental-tab .tabviews .txtBox{padding-left:3.75rem}}
+@media(max-width:1400px){.dental-tab .tab-views{margin-top:80px}.dental-tab .tabviews .imgBox{width:45%}
+ .dental-tab .tabviews .txtBox{padding-left:0;gap:1.125rem}.dental-tab .tabviews .txtBox h4{font-size:1.5rem}
+ .dental-tab .tabviews .txtBox h3{font-size:2.125rem}.dental-tab .tabviews .txtBox p{font-size:1.125rem}}
+@media(max-width:1200px){.dental-tab{padding:80px 0}.dental-tab .tab-views{margin-top:60px}.dental-tab .tabs-four{gap:14px}.dental-tab .tabs-four li{font-size:17px}}
+@media(max-width:1024px){.dental-tab .section-tit{margin-bottom:20px}.dental-tab .tab-views{margin-top:40px}
+ .dental-tab .mobile-drag-tab{position:relative;overflow-x:auto;overflow-y:hidden;scrollbar-width:none}
+ .dental-tab .mobile-drag-tab::-webkit-scrollbar{display:none}
+ .dental-tab .tabviews{flex-direction:column;justify-content:start;gap:40px}
+ .dental-tab .tabviews .imgBox{max-width:100%;width:90%}
+ .dental-tab .tabviews .txtBox{width:100%;max-width:100%;align-items:stretch}
+ .dental-tab .tabviews .txtBox h3{font-size:2.25rem;line-height:1.1}.dental-tab .tabviews .txtBox h3 br{display:none}}
+@media(max-width:920px){.dental-tab .tabs-four{width:max-content;gap:8px;justify-content:start;padding-inline:20px}
+ .dental-tab .tabs-four li{font-size:18px;padding:8px 30px}}
+@media(max-width:768px){.dental-tab{padding:60px 0}.dental-tab .tab-views{margin-top:30px}.dental-tab .tabviews .imgBox{width:100%}}
+@media(max-width:576px){.dental-tab .tabviews .txtBox h4{font-size:20px}}
+/* ===== 3. 시니어 임플란트 ===== */
+.dental-senior{background:#eee}
+.dental-senior .background{background:#262630;padding:6.25rem 0}
+.dental-senior .container{max-width:1600px}
+.dental-senior .section-tit *{color:#fff}
+.dental-senior .section-tit{align-items:flex-start}
+.dental-senior .section-tit h2{text-align:left}
+.dental-senior .section-tit h2 span{color:#5ec6cc}
+.dental-senior .section-tit p{font-weight:400;text-align:left}
+.dental-senior .case{margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between}
+.dental-senior .case-img{width:calc(100% - 534px)}
+.dental-senior .case-img .img-bx{display:flex;align-items:center;justify-content:space-between;position:relative}
+.dental-senior .case-img .img-arrow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--pri);border-radius:50px;width:4.875rem;height:4.375rem;z-index:3;display:flex;align-items:center;justify-content:center;color:#fff}
+.dental-senior .case-img .before,.dental-senior .case-img .after{border-radius:.875rem;overflow:hidden;position:relative;border:4px solid #262630;font-size:0;width:49%}
+.dental-senior .case-img .after{border-color:var(--pri)}
+.dental-senior .case-img .img{width:100%;aspect-ratio:500/700;overflow:hidden}
+.dental-senior .case-img .img img{object-fit:cover;width:100%;height:100%}
+.dental-senior .case-img .txt{position:absolute;bottom:0;left:0;width:100%;text-align:center;font-size:1.75rem;font-weight:600;line-height:1.3;letter-spacing:-.02em;color:#fff;background:#555;padding:18px 0}
+.dental-senior .case-img .after .txt{background:var(--pri)}
+.dental-senior .case-img .txt span{position:absolute;top:10px;right:20px;font-size:.875rem;font-weight:300}
+.dental-senior .case-list{width:500px;position:relative}
+.dental-senior .case-list .scroller{position:relative;overflow-y:auto;height:38.5rem;padding-right:20px;scrollbar-width:thin;scrollbar-color:var(--pri) #adadad}
+.dental-senior .case-list .scroller::-webkit-scrollbar{width:4px}
+.dental-senior .case-list .scroller::-webkit-scrollbar-track{background:#adadad;border-radius:8px}
+.dental-senior .case-list .scroller::-webkit-scrollbar-thumb{background:var(--pri);border-radius:8px}
+.dental-senior .case-list .item{width:100%;min-height:7.5rem;display:flex;align-items:center;cursor:pointer}
+.dental-senior .case-list .item>div{padding:20px;display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%}
+.dental-senior .case-list .item .img-bx{width:100px;height:100px;border-radius:50%;overflow:hidden;flex:0 0 auto}
+.dental-senior .case-list .item .img-bx img{width:100%;height:100%;object-fit:cover}
+.dental-senior .case-list .item .txt-bx{width:calc(100% - 120px)}
+.dental-senior .case-list .item .tit{font-size:1.75rem;font-weight:600;line-height:1.1;letter-spacing:-.02em;color:#fff}
+.dental-senior .case-list .item .tit span{color:#5ec6cc}
+.dental-senior .case-list .item .name{font-size:1.125rem;line-height:1.3;letter-spacing:-.01em;color:#fff;margin-top:6px;opacity:.7}
+.dental-senior .slider-btns{display:flex;align-items:center;gap:20px;justify-content:flex-end;margin-top:18px}
+.dental-senior .slider-btns .pager{color:#fff;font-size:1rem;letter-spacing:.05em}
+.dental-senior .slider-btns .pager b{font-weight:700;color:#5ec6cc}
+.dental-senior .slider-btns .swiper-play-pause{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.5);display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px}
+.dental-senior .caution{margin-top:30px}
+.dental-senior .caution li{color:rgba(255,255,255,.45)}
+@media(max-width:1400px){.dental-senior .case-img{width:calc(100% - 480px)}.dental-senior .case-list{width:450px}
+ .dental-senior .case-list .item .tit{font-size:24px}}
+@media(max-width:1200px){.dental-senior .background{padding:60px 0}.dental-senior .case{flex-direction:column;gap:0}
+ .dental-senior .case-img{width:100%}.dental-senior .case-list{width:100%;margin-top:30px}
+ .dental-senior .case-list .scroller{height:auto;max-height:none;overflow:visible;padding-right:0}
+ .dental-senior .section-tit{align-items:center}.dental-senior .section-tit h2,.dental-senior .section-tit p{text-align:center}
+ .dental-senior .section-tit h2 span{display:block}}
+@media(max-width:1024px){.dental-senior .case-img .txt{font-size:1.25rem;padding:.625rem 0}
+ .dental-senior .case-list .item .img-bx{width:80px;height:80px}.dental-senior .case-list .item .txt-bx{width:calc(100% - 100px)}
+ .dental-senior .case-list .item .tit{font-size:20px;line-height:26px}.dental-senior .case-list .item .name{font-size:12px}}
+@media(max-width:768px){.dental-senior .case-img .before,.dental-senior .case-img .after{border-width:2px;border-radius:8px}
+ .dental-senior .case-img .img{aspect-ratio:171/234}
+ .dental-senior .case-img .txt{position:static;display:flex;align-items:center;justify-content:center;flex-direction:column;font-size:16px}
+ .dental-senior .case-img .txt span{font-size:10px;position:static}
+ .dental-senior .case-img .img-arrow{width:31px;height:20px}}
+/* ===== 4. 실제 치료 사례 ===== */
+.dental-case{background:#e9e9ef;padding:8.125rem 0}
+.dental-case .container{max-width:1600px}
+.dental-case .case-top{display:flex;align-items:end;justify-content:space-between}
+.dental-case .section-tit{text-align:left;justify-content:start;align-items:start}
+.dental-case .tab-menu ul{display:flex;gap:1.25rem}
+.dental-case .tab-menu li{font-size:1.25rem;line-height:1.3;letter-spacing:-.01em;text-align:center;border-radius:999px;color:#666;background:#f6f6f6;border:1px solid #eee;cursor:pointer}
+.dental-case .tab-menu li span{padding:.75rem 2.1875rem;display:block}
+.dental-case .tab-menu li.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+.dental-case .slider{margin:2.5rem auto 0;display:none;position:relative}
+.dental-case .slider.on{display:block}
+.dental-case .slides{position:relative}
+.dental-case .pair{display:none;grid-template-columns:1fr 1fr;gap:20px}
+.dental-case .pair.on{display:grid}
+.dental-case .swiper-navigation{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:22px}
+.dental-case .swiper-navigation .pagination{font-size:16px;color:#111}
+.dental-case .swiper-navigation button{width:34px;height:34px;border-radius:50%;border:1px solid #ccc;display:flex;align-items:center;justify-content:center;color:#444}
+.dental-case .swiper-navigation.lock{visibility:hidden}
+.dental-case .ba{position:relative;width:100%;height:480px;border-radius:1.25rem;overflow:hidden}
+.dental-case .ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.dental-case .ba .ba-after{position:absolute;inset:0;clip-path:inset(0 0 0 50%)}
+.dental-case .ba .date{background:#ddd;border-radius:50px;font-size:16px;color:#666;position:absolute;bottom:16px;z-index:2;padding:2px 10px}
+.dental-case .ba .before-bx .date{left:20px}
+.dental-case .ba .after-bx .date{right:20px;background:var(--pri);color:#fff}
+.dental-case .ba .ba-handle{position:absolute;top:0;left:50%;transform:translateX(-50%);width:1px;height:100%;background:#fff;z-index:4;pointer-events:none}
+.dental-case .ba .ba-handle:after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.9);box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.dental-case .ba .ba-handle:before{content:"◀ ▶";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:5;font-size:10px;color:#101010;letter-spacing:-2px}
+.dental-case .ba .ba-range{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;z-index:6;margin:0}
+.dental-case .slider .viewMore{margin-top:2.5rem}
+.dental-case .caution{text-align:center;font-size:1rem;color:rgba(35,35,35,.3);align-items:center}
+.dental-case .caution li{color:rgba(35,35,35,.4)}
+@media(max-width:1600px){.dental-case .case-top{flex-direction:column;justify-content:center;align-items:center;gap:26px}}
+@media(max-width:1400px){.dental-case .section-tit{text-align:center;justify-content:center;align-items:center}
+ .dental-case .section-tit h2 span{display:block}}
+@media(max-width:1200px){.dental-case .ba{height:400px}.dental-case .tab-menu li{font-size:17px}}
+@media(max-width:1024px){.dental-case{padding:60px 0}.dental-case .tab-menu ul{gap:.625rem}
+ .dental-case .tab-menu li span{padding:0 .625rem;height:40px;line-height:40px;width:10rem}
+ .dental-case .caution{font-size:14px}}
+@media(max-width:768px){.dental-case .slides{grid-template-columns:1fr}.dental-case .ba{height:220px}
+ .dental-case .ba .date{font-size:10px;bottom:10px}.dental-case .ba .before-bx .date{left:10px}.dental-case .ba .after-bx .date{right:10px}
+ .dental-case .tab-menu{width:100%}.dental-case .tab-menu li{font-size:16px;flex:1}.dental-case .tab-menu li span{width:100%}}
+@media(max-width:576px){.dental-case .caution{font-size:10px;text-align:left;align-items:flex-start}}
+/* ===== 5. 진료과목 ===== */
+.dental-service2{width:100%;position:relative;background:#fff;padding-top:100px}
+.dental-service2 .container{max-width:1760px}
+.dental-service2 .service-list{display:flex;width:100%;height:700px}
+.dental-service2 .item{width:25%;height:100%;position:relative;overflow:hidden}
+.dental-service2 .item>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.dental-service2 .item:hover>img{transform:scale(1.06)}
+.dental-service2 .item a{display:flex;align-items:center;justify-content:center;width:100%;height:100%;background:rgba(0,0,0,.2);position:relative;z-index:1;transition:background .3s}
+.dental-service2 .item:hover a{background:rgba(0,0,0,.55)}
+.dental-service2 .item .txt{color:#fff;text-align:center;display:flex;flex-direction:column;justify-content:center;align-items:center;width:80%;gap:14px}
+.dental-service2 .item .txt .kor{font-size:3rem;font-weight:600}
+.dental-service2 .item .txt .hovertxt{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;max-height:0;overflow:hidden;transform:translateY(20%);transition:max-height .5s,transform .5s}
+.dental-service2 .item:hover .txt .hovertxt{max-height:400px;transform:translateY(0)}
+.dental-service2 .item .txt .desc{font-size:1.25rem;line-height:1.5;text-align:center;font-weight:300;letter-spacing:-.04em}
+.dental-service2 .item .txt .tags{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.dental-service2 .item .txt .tags li{font-size:1rem;border:1px solid #fff;border-radius:50px;padding:.125rem .75rem}
+.dental-service2 .item .txt .circle-btn{width:60px;height:60px;background:var(--pri);border-radius:100px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:300;line-height:1}
+@media(max-width:1800px){.dental-service2 .item .txt .tags{flex-direction:column}}
+@media(max-width:1200px){.dental-service2{padding-top:80px}.dental-service2 .service-list{height:auto;flex-wrap:wrap}
+ .dental-service2 .item{width:50%;height:430px}.dental-service2 .item a{background:rgba(0,0,0,.5);align-items:start;padding-top:50px}
+ .dental-service2 .item .txt .kor{font-size:1.875rem}
+ .dental-service2 .item .txt .hovertxt{max-height:500px;transform:none}
+ .dental-service2 .item .txt .desc{font-size:1.125rem}.dental-service2 .item .txt .tags li{font-size:.9375rem}
+ .dental-service2 .item .txt .circle-btn{display:none}}
+@media(max-width:576px){.dental-service2 .item{height:340px}.dental-service2 .item .txt{width:100%;padding:20px}
+ .dental-service2 .item .txt .kor{font-size:28px}.dental-service2 .item .txt .desc{font-size:14px}.dental-service2 .item .txt .tags{display:none}}
+/* ===== 6·8. 배너 ===== */
+.dental-banner1,.dental-banner2{background:#fff}
+.dental-banner2{display:none}
+.dental-banner1 .inner,.dental-banner2 .inner{position:relative;width:100%;height:600px;display:flex;align-items:center}
+.dental-banner2 .inner{justify-content:end}
+.dental-banner1 .bannerBox,.dental-banner2 .bannerBox{position:absolute;z-index:0;top:50%;left:50%;transform:translate(-50%,-50%);width:1600px;max-width:100%;height:500px;border-radius:40px;overflow:hidden}
+.dental-banner1 .bannerBox:before,.dental-banner2 .bannerBox:before{position:absolute;content:"";background:rgba(0,0,0,.5);inset:0;z-index:1}
+.dental-banner1 .bannerBox img,.dental-banner2 .bannerBox img{width:100%;height:100%;object-fit:cover}
+.dental-banner1 .txt,.dental-banner2 .txt{font-size:0;position:relative;z-index:1;display:inline-block;padding-left:8%}
+.dental-banner2 .txt{display:flex;flex-direction:column;align-items:end;text-align:right;padding-left:0;padding-right:8%}
+.dental-banner1 .txt .mask,.dental-banner2 .txt .mask{font-size:0;overflow:hidden}
+.dental-banner1 .txt p,.dental-banner2 .txt p{line-height:1.3;font-weight:600;letter-spacing:-.02em;color:#fff;font-size:4rem;display:inline-block;transform:translateY(-100%);transition:transform .8s cubic-bezier(.4,0,.2,1)}
+.dental-banner1 .txt .mask:nth-child(2) p{transition-delay:.15s}
+.dental-banner1 .txt.aos-animate p,.dental-banner2 .txt.aos-animate p{transform:translateY(0)}
+@media(max-width:1200px){.dental-banner1 .txt p,.dental-banner2 .txt p{font-size:3.25rem}}
+@media(max-width:1024px){.dental-banner1 .inner,.dental-banner2 .inner{height:300px}
+ .dental-banner1 .bannerBox,.dental-banner2 .bannerBox{width:100%;height:100%;border-radius:0}
+ .dental-banner1 .txt p,.dental-banner2 .txt p{font-size:30px}}
+@media(max-width:576px){.dental-banner1 .txt p,.dental-banner2 .txt p{font-weight:500;font-size:24px}}
+/* ===== 7. 대표원장 ===== */
+.dental-doctorstab{background:#fff;position:relative}
+.dental-doctorstab .container{max-width:1760px}
+.dental-doctorstab .container .section-tit{display:none}
+.dental-doctorstab .wrap{position:relative;overflow:hidden}
+.dental-doctorstab .doctorBtn{position:absolute;z-index:10;width:120px;height:120px;top:50%;transform:translateY(-50%);background:rgba(16,16,16,.3);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px}
+.dental-doctorstab .doctorBtn.doctors-prev{left:0}.dental-doctorstab .doctorBtn.doctors-next{right:0}
+.dental-doctorstab .tab-area{height:800px;align-items:center;display:none}
+.dental-doctorstab .tab-area.on{display:flex}
+.dental-doctorstab .tab-area .left-bx{width:51%;position:relative;height:100%}
+.dental-doctorstab .tab-area .left-bx>img{width:100%;height:100%;object-fit:cover}
+.dental-doctorstab .tab-area .right-bx{width:49%;position:relative;display:flex;flex-direction:column;justify-content:center;padding-inline:5%}
+.dental-doctorstab .tab-area .right-bx .inner{max-width:540px}
+.dental-doctorstab .tab-area .topname h4{letter-spacing:-.02em;font-size:3rem;font-weight:700;line-height:1.2}
+.dental-doctorstab .tab-area .topname>div{display:flex;align-items:center;gap:10px;margin-top:4px}
+.dental-doctorstab .tab-area .topname .name{letter-spacing:-.02em;font-size:3rem;font-weight:700;line-height:1.2;color:var(--pri)}
+.dental-doctorstab .tab-area .topname .doc{font-size:2rem;font-weight:500;line-height:1.2}
+.dental-doctorstab .tab-area .personal-list{display:flex;flex-direction:column;gap:40px;margin-top:44px}
+.dental-doctorstab .tab-area .personal-list>li>h5{font-size:1.75rem;font-weight:700;letter-spacing:-.01em;margin-bottom:12px}
+.dental-doctorstab .tab-area .personal-list p{letter-spacing:-.01em;font-size:1.125rem;font-weight:400;line-height:1.6;color:#808080}
+.dental-doctorstab .tab-area .personal-list ul li{letter-spacing:-.01em;font-size:1.125rem;font-weight:400;line-height:1.6;color:#808080;display:flex;align-items:center;gap:6px}
+.dental-doctorstab .tab-area .personal-list ul li:before{content:"";display:inline-block;width:3px;height:3px;border-radius:3px;background:#808080;flex:0 0 auto}
+.dental-doctorstab .tab-area .tab-menu{display:flex;gap:10px;margin-top:40px}
+.dental-doctorstab .tab-area .tab-menu li{display:flex;padding:10px 35px;border-radius:30px;border:1px solid #eee;background:#f6f6f6;color:#666;text-align:center;font-size:1.25rem;font-weight:400;line-height:30px;cursor:pointer}
+.dental-doctorstab .tab-area .tab-menu li.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+@media(max-width:1400px){.dental-doctorstab .doctorBtn{width:80px;height:80px}.dental-doctorstab .tab-area{height:700px}
+ .dental-doctorstab .tab-area .left-bx{width:47%}.dental-doctorstab .tab-area .right-bx{width:53%}
+ .dental-doctorstab .tab-area .right-bx .inner{max-width:460px}
+ .dental-doctorstab .tab-area .topname h4,.dental-doctorstab .tab-area .topname .name{font-size:2.5rem}
+ .dental-doctorstab .tab-area .personal-list p,.dental-doctorstab .tab-area .personal-list ul li{font-size:1.0625rem}
+ .dental-doctorstab .tab-area .tab-menu li{font-size:17px;padding:10px 28px;line-height:26px}}
+@media(max-width:1200px){.dental-doctorstab{padding-top:60px}
+ .dental-doctorstab .container .section-tit{display:flex;gap:10px}
+ .dental-doctorstab .container .section-tit span{display:block}
+ .dental-doctorstab .tab-area{height:auto;flex-direction:column}
+ .dental-doctorstab .tab-area .left-bx{width:100%;height:545px}
+ .dental-doctorstab .tab-area .right-bx{width:100%;padding:40px 20px}
+ .dental-doctorstab .tab-area .right-bx .inner{max-width:100%}
+ .dental-doctorstab .doctorBtn{top:272.5px}}
+@media(max-width:768px){.dental-doctorstab .doctorBtn{width:40px;height:40px;top:135px;transform:none;font-size:14px}
+ .dental-doctorstab .tab-area .left-bx{height:auto}.dental-doctorstab .tab-area .left-bx>img{height:300px}
+ .dental-doctorstab .tab-area .tab-menu{width:100%;gap:8px;justify-content:center}
+ .dental-doctorstab .tab-area .tab-menu li{font-size:16px;padding:0 20px;height:40px;align-items:center}}
+@media(max-width:576px){.dental-doctorstab .tab-area .topname h4,.dental-doctorstab .tab-area .topname .name{font-size:28px}
+ .dental-doctorstab .tab-area .topname .doc{font-size:20px}
+ .dental-doctorstab .tab-area .personal-list{gap:10px}
+ .dental-doctorstab .tab-area .personal-list>li>h5{font-size:18px}
+ .dental-doctorstab .tab-area .personal-list p,.dental-doctorstab .tab-area .personal-list ul li{font-size:14px}}
+/* ===== 9. 인증 전문의 + 카드 롤링 ===== */
+.dental-certification{background:#fff;padding:170px 0}
+.dental-certification .inner{display:flex}
+.dental-certification .text-area{width:48%;position:relative;display:flex;align-items:center;justify-content:center;padding:40px 40px 40px 6%}
+.dental-certification .text-area .bg{position:absolute;top:43%;left:45%;transform:translate(-50%,-50%);width:70%;opacity:.5}
+.dental-certification .text-area .txt-wrap{position:relative;z-index:1;display:flex;flex-direction:column;align-items:start}
+.dental-certification .text-area .txt{display:flex;flex-direction:column;gap:20px}
+.dental-certification .text-area .logos{display:flex;align-items:center;gap:10px}
+.dental-certification .text-area .logos span{border:1px solid #ddd;border-radius:6px;padding:5px 12px;font-size:.9375rem;font-weight:600;color:#555}
+.dental-certification .text-area h4{font-size:4rem;font-weight:500;letter-spacing:-.02em;line-height:1.2;color:var(--ink)}
+.dental-certification .text-area h4 span{font-weight:700}
+.dental-certification .text-area p{font-size:1.5rem;font-weight:500;line-height:1.6;letter-spacing:-.01em;color:var(--ink2)}
+.dental-certification .text-area .viewMore{margin:30px 0 0}
+.dental-certification .doctor-rolling{width:52%;position:relative;overflow:hidden}
+.dental-certification .doctor-rolling:before,.dental-certification .doctor-rolling:after{content:"";display:block;position:absolute;width:230px;height:100%;top:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,#fff 0%,rgba(255,255,255,0) 100%)}
+.dental-certification .doctor-rolling:before{left:0}
+.dental-certification .doctor-rolling:after{right:0;transform:rotate(180deg)}
+.dental-certification .doctor-profiles{display:flex;flex-direction:column;gap:20px;width:max-content;animation:rolling 30s linear infinite}
+@keyframes rolling{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.dental-certification .groups{display:flex;gap:20px;width:max-content;align-items:start}
+.dental-certification .groups.group2{transform:translateY(-60px)}
+.dental-certification .card{display:inline-block;position:relative;width:300px;aspect-ratio:3.2/4;border-radius:20px;border:1px solid #eee;overflow:hidden;background:#f6f6f6}
+.dental-certification .card .img{display:flex;justify-content:center;align-items:flex-end;height:100%}
+.dental-certification .card .img img{width:100%;height:100%;object-fit:cover}
+.dental-certification .card .back{position:absolute;inset:0;padding:30px;background:rgba(0,0,0,.9);color:#fff;opacity:0;transition:opacity .4s}
+.dental-certification .card:hover .back{opacity:1}
+.dental-certification .card .back .in{position:relative;height:100%;width:100%;display:flex;align-items:center;justify-content:center;flex-direction:column}
+.dental-certification .card .back .txt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.dental-certification .card .back .box{background:#fff;color:rgba(35,35,35,.8);padding:2px 20px;border-radius:50px;line-height:1.4;font-weight:700;font-size:1rem;letter-spacing:-.01em}
+.dental-certification .card .back .name{font-size:1.875rem;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.dental-certification .card .back .title{font-size:1.25rem;font-weight:500}
+.dental-certification .card .back .view-more{position:absolute;width:100%;bottom:0;display:flex;justify-content:space-between;align-items:center;font-size:1rem;font-weight:300;color:#f9f9f9}
+@media(max-width:1600px){.dental-certification .text-area h4{font-size:3.4375rem}}
+@media(max-width:1400px){.dental-certification .text-area h4{font-size:2.8125rem}.dental-certification .text-area p{font-size:1.1875rem}
+ .dental-certification .card{width:260px}.dental-certification .doctor-rolling:before,.dental-certification .doctor-rolling:after{width:160px}}
+@media(max-width:1024px){.dental-certification{padding:80px 0}.dental-certification .inner{flex-direction:column}
+ .dental-certification .text-area{width:100%}.dental-certification .text-area .txt-wrap{align-items:center;text-align:center}
+ .dental-certification .text-area .logos{justify-content:center}
+ .dental-certification .doctor-rolling{width:100%;margin-top:40px}}
+@media(max-width:768px){.dental-certification .card{width:200px;aspect-ratio:3/3.1}
+ .dental-certification .groups,.dental-certification .doctor-profiles{gap:10px}
+ .dental-certification .groups.group2{transform:translateY(-40px)}
+ .dental-certification .doctor-rolling:before,.dental-certification .doctor-rolling:after{width:100px}}
+@media(max-width:576px){.dental-certification .text-area h4{font-size:33px}.dental-certification .text-area p{font-size:14px}}
+/* ===== 10. 신뢰 수치 ===== */
+.hy-section1{position:relative;margin-top:100px}
+.hy-section1 .video-bx{position:absolute;inset:0}
+.hy-section1 .video-bx:before{content:"";display:block;position:absolute;inset:0;background:rgba(8,40,44,.66);z-index:1}
+.hy-section1 .video-bx img{width:100%;height:100%;object-fit:cover}
+.hy-section1 .container{max-width:1640px;position:relative;z-index:10;padding:140px 20px;display:flex;align-items:center;justify-content:space-between;gap:150px;overflow:hidden}
+.hy-section1 .left{transform:translateX(-100%);transition:transform 1s cubic-bezier(.4,0,.2,1)}
+.hy-section1 .right{width:100%;max-width:840px;transform:translateX(100%);transition:transform 1s cubic-bezier(.4,0,.2,1)}
+.hy-section1.on .left,.hy-section1.on .right{transform:translateX(0)}
+.hy-section1 .left h2{color:#fff;font-size:4rem;font-weight:700;line-height:1.25;letter-spacing:-.03em}
+.hy-section1 .left p{color:#eee;font-size:1.5rem;font-weight:400;line-height:34px;letter-spacing:-.03em;margin-top:26px}
+.hy-section1 .right ul{width:100%;display:flex;gap:40px;flex-wrap:wrap}
+.hy-section1 .right ul li{width:calc(50% - 20px);display:flex;flex-direction:column;gap:20px;padding:25px 0 60px;border-bottom:1px solid rgba(255,255,255,.2)}
+.hy-section1 .right .img-bx{width:80px;height:80px;color:#fff}
+.hy-section1 .right .count{color:#eee;text-align:left;font-size:3.625rem;font-weight:700;line-height:70px;letter-spacing:-.04em}
+.hy-section1 .right p{color:#eee;font-size:1.125rem;font-weight:400;line-height:30px;letter-spacing:-.03em}
+@media(max-width:1400px){.hy-section1 .left h2{font-size:45px}}
+@media(max-width:1024px){.hy-section1{margin-top:80px}.hy-section1 .container{flex-direction:column;gap:50px}
+ .hy-section1 .left{width:100%}.hy-section1 .right ul{gap:20px}
+ .hy-section1 .right ul li{width:calc(50% - 10px);padding:23px 0;align-items:center;gap:0;text-align:center}
+ .hy-section1 .right .img-bx{width:50px;height:50px}
+ .hy-section1 .right .count{font-size:28px;line-height:30px;color:#fff}.hy-section1 .right p{font-size:14px;line-height:1.2}}
+@media(max-width:768px){.hy-section1 .container{padding:60px 24px;gap:40px}
+ .hy-section1 .left h2{font-size:32px;line-height:1.2}.hy-section1 .left p{font-size:14px;line-height:24px;margin-top:16px}}
+/* ===== 11. 파트너 롤링 ===== */
+.infinite-scroll{width:100%;overflow:hidden;background:#fff;padding:48px 0}
+.infinite-scroll .marquee-track{display:flex;width:max-content;gap:80px;animation:marquee 40s linear infinite;align-items:center}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.infinite-scroll .marquee-track .logo{height:60px;display:flex;align-items:center;font-size:1.75rem;font-weight:800;color:#c9c9d1;letter-spacing:-.02em;white-space:nowrap}
+@media(max-width:1024px){.infinite-scroll{padding:25px 0}}
+@media(max-width:768px){.infinite-scroll .marquee-track{gap:44px}.infinite-scroll .marquee-track .logo{height:50px;font-size:1.25rem}}
+/* ===== 12. 약속 3장 ===== */
+.hy-section4{background:#fff;display:flex;align-items:center}
+.hy-section4 .left{width:50%;display:flex;align-items:center;justify-content:center;padding:250px 20px}
+.hy-section4 .left .txt-bx h2{color:var(--ink);font-size:4rem;font-weight:700;line-height:1.25;letter-spacing:-.03em;text-align:center}
+.hy-section4 .left .txt-bx h2 span{color:var(--pri)}
+.hy-section4 .left .txt-bx p{color:#606060;text-align:center;font-size:1.5rem;font-weight:500;line-height:34px;letter-spacing:-.03em;margin-top:24px}
+.hy-section4 .right{width:50%;height:440px;overflow:hidden}
+.hy-section4 .right .slides{height:100%;position:relative}
+.hy-section4 .right .slide{height:100%;display:none}
+.hy-section4 .right .slide.on{display:block}
+.hy-section4 .right .inner{height:100%;display:flex;align-items:center;gap:60px}
+.hy-section4 .right .img-bx{width:100%;aspect-ratio:400/440;max-width:400px;flex:0 0 auto}
+.hy-section4 .right .img-bx img{width:100%;height:100%;object-fit:cover}
+.hy-section4 .right .txt-bx{position:relative;padding-right:30px}
+.hy-section4 .right .txt-bx .num{position:absolute;top:0;left:0;transform:translateY(-40px) translateX(-20px);font-size:5rem;font-weight:800;color:#eef4f4;line-height:1}
+.hy-section4 .right .txt-bx .subject{color:var(--ink2);font-size:1.875rem;font-weight:700;line-height:40px;letter-spacing:-.9px;position:relative}
+.hy-section4 .right .txt-bx .text{color:var(--ink2);font-size:1.125rem;font-weight:500;line-height:30px;letter-spacing:-.03em;margin-top:14px;position:relative}
+.hy-section4 .right .dots{display:flex;gap:8px;margin-top:22px}
+.hy-section4 .right .dots button{width:8px;height:8px;border-radius:50%;background:#ddd}
+.hy-section4 .right .dots button.on{background:var(--pri);width:24px;border-radius:50px}
+@media(max-width:1600px){.hy-section4 .left{width:30%}.hy-section4 .right{width:70%}
+ .hy-section4 .left .txt-bx h2{font-size:2rem}.hy-section4 .left .txt-bx p{font-size:1.25rem;line-height:1.4}
+ .hy-section4 .right .inner{gap:50px}.hy-section4 .right .img-bx{max-width:300px}}
+@media(max-width:1024px){.hy-section4{flex-direction:column;background:#e9e9ef73}
+ .hy-section4 .left{width:100%;padding:100px 20px}.hy-section4 .right{width:100%;height:auto;padding-bottom:50px}
+ .hy-section4 .right .inner{flex-direction:column;gap:40px}}
+@media(max-width:768px){.hy-section4 .left{padding:80px 35px}
+ .hy-section4 .left .txt-bx h2{font-size:32px;line-height:40px}
+ .hy-section4 .left .txt-bx p{font-size:14px;line-height:24px;color:var(--ink2)}
+ .hy-section4 .right .img-bx{max-width:100%}
+ .hy-section4 .right .txt-bx{width:100%;padding:0 30px 20px}
+ .hy-section4 .right .txt-bx .num{transform:translateY(-40px) translateX(30px)}
+ .hy-section4 .right .txt-bx .subject{font-size:22px;line-height:1.2;letter-spacing:normal}
+ .hy-section4 .right .txt-bx .text{font-weight:300;font-size:14px;line-height:20px}
+ .hy-section4 .right .txt-bx .text br{display:none}}
+/* ===== 13. 소식 ===== */
+.hy-section2{background:#fff;padding:120px 0}
+.hy-section2 .container{max-width:1640px;position:relative}
+.hy-section2 .top h2{color:var(--ink);font-size:4rem;font-weight:700;line-height:1.3;text-align:left;letter-spacing:-.02em}
+.hy-section2 .top h2 span{color:var(--pri)}
+.hy-section2 .top .control{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+.hy-section2 .top .control .text{color:var(--ink2);font-size:1.5rem;font-weight:500;line-height:1.5;letter-spacing:-.02em}
+.hy-section2 .top .control .tab-header ul{display:flex;gap:10px}
+.hy-section2 .top .control .tab-header li{display:flex;padding:10px 35px;border-radius:30px;border:1px solid #eee;background:#f6f6f6;color:#565656;text-align:center;font-size:1.25rem;font-weight:400;line-height:30px;cursor:pointer}
+.hy-section2 .top .control .tab-header li.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.hy-section2 .bottom{margin-top:50px}
+.hy-section2 .tab{display:none}.hy-section2 .tab.on{display:block}
+.hy-section2 .tab2 .content{display:flex;align-items:flex-start;justify-content:space-between;gap:50px}
+.hy-section2 .tab2 .content .left{width:calc(52% - 25px)}
+.hy-section2 .tab2 .video-bx{width:100%;aspect-ratio:560/315;border-radius:20px;overflow:hidden;background:#000}
+.hy-section2 .tab2 .video-bx img{width:100%;height:100%;object-fit:cover}
+.hy-section2 .tab2 .content .left .info{margin-top:20px}
+.hy-section2 .tab2 .content .left .info .tag{color:var(--pri);font-weight:600;font-size:20px;line-height:1}
+.hy-section2 .tab2 .content .left .info .text{color:var(--ink);font-size:1.5rem;font-weight:600;line-height:1.3;letter-spacing:-.02em;margin-top:10px}
+.hy-section2 .tab2 .content .left .info .date{color:#808080;font-size:1.25rem;font-weight:400;line-height:1;margin-top:12px}
+.hy-section2 .tab2 .content .right{width:calc(48% - 25px)}
+.hy-section2 .tab2 .content .right ul{display:flex;flex-direction:column;gap:20px;max-height:540px;overflow-y:auto}
+.hy-section2 .tab2 .content .right ul::-webkit-scrollbar{width:4px}
+.hy-section2 .tab2 .content .right ul::-webkit-scrollbar-track{background:#f0f0f0}
+.hy-section2 .tab2 .content .right ul::-webkit-scrollbar-thumb{background:var(--pri)}
+.hy-section2 .tab2 .content .right li{display:flex;gap:10px;align-items:center}
+.hy-section2 .tab2 .content .right .img-bx{width:100%;max-width:260px;aspect-ratio:560/315;border-radius:10px;overflow:hidden;flex:0 0 auto}
+.hy-section2 .tab2 .content .right .img-bx img{width:100%;height:100%;object-fit:cover}
+.hy-section2 .tab2 .content .right .info .tag{color:var(--pri);font-weight:600;font-size:14px;line-height:1}
+.hy-section2 .tab2 .content .right .info .text{color:var(--ink2);font-size:1.125rem;font-weight:600;line-height:1.35;letter-spacing:-.03em;margin-top:6px}
+.hy-section2 .tab2 .content .right .info .date{color:#808080;font-size:1rem;font-weight:400;line-height:20px;margin-top:6px}
+.hy-section2 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.hy-section2 .tab3 .cards .img-bx{width:100%;aspect-ratio:460/585;border-radius:14px;overflow:hidden}
+.hy-section2 .tab4 .cards .img-bx{width:100%;aspect-ratio:500/300;border-radius:14px;overflow:hidden}
+.hy-section2 .cards .img-bx img{width:100%;height:100%;object-fit:cover}
+.hy-section2 .cards .info{margin-top:16px}
+.hy-section2 .cards .info .tag{color:var(--pri);font-weight:600;font-size:20px;line-height:1}
+.hy-section2 .cards .info .text{color:var(--ink);font-size:1.5rem;font-weight:600;line-height:1.35;letter-spacing:-.02em;margin-top:10px}
+.hy-section2 .cards .info .date{color:#808080;font-size:1.25rem;font-weight:400;line-height:1;margin-top:10px}
+.hy-section2 .tab .viewMore{margin:55px auto 0}
+@media(max-width:1400px){.hy-section2 .top h2{font-size:3.4375rem}.hy-section2 .top .control .text{font-size:1.25rem}}
+@media(max-width:1200px){.hy-section2 .top h2{font-size:3rem}.hy-section2 .top .control .text{font-size:1.125rem}}
+@media(max-width:1024px){.hy-section2{padding:80px 0}.hy-section2 .top h2{text-align:center}
+ .hy-section2 .top .control{flex-direction:column;align-items:center;gap:25px}
+ .hy-section2 .top .control .text{text-align:center}
+ .hy-section2 .tab2 .content{flex-direction:column}
+ .hy-section2 .tab2 .content .left,.hy-section2 .tab2 .content .right{width:100%}
+ .hy-section2 .tab2 .content .right ul{flex-direction:row;overflow-x:auto;max-height:none;gap:10px}
+ .hy-section2 .tab2 .content .right li{width:calc(50% - 5px);flex:0 0 auto}
+ .hy-section2 .cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.hy-section2{padding:60px 0}.hy-section2 .top h2{font-size:34px}
+ .hy-section2 .top .control .text{font-size:16px}.hy-section2 .top .control .text br{display:none}
+ .hy-section2 .top .control .tab-header{width:100%}
+ .hy-section2 .top .control .tab-header ul{width:100%;gap:8px;justify-content:center}
+ .hy-section2 .top .control .tab-header li{font-size:16px;padding:0 20px;height:40px;align-items:center}
+ .hy-section2 .tab2 .content .right li{flex-direction:column;gap:8px}
+ .hy-section2 .tab2 .content .left .info .tag{font-size:13px}
+ .hy-section2 .tab2 .content .left .info .text{font-size:16px;line-height:1.2}
+ .hy-section2 .tab2 .content .left .info .date{font-size:13px}
+ .hy-section2 .tab2 .content .right .info .text{font-size:14px;line-height:1.2}
+ .hy-section2 .tab2 .content .right .info .date{font-size:12px}
+ .hy-section2 .cards{grid-template-columns:1fr}
+ .hy-section2 .cards .info .text{font-size:18px;line-height:1.2}.hy-section2 .cards .info .tag,.hy-section2 .cards .info .date{font-size:13px}
+ .hy-section2 .tab .viewMore{margin:35px auto 0;width:100%}}
+/* ===== 14. SNS 띠 ===== */
+.tail{background:#fff}
+.tail-bx{width:100%;border-radius:0 0 50px 50px;background:#e9e9ef;display:flex;align-items:center;justify-content:center;gap:90px;padding:36px 0}
+.tail-bx p{color:var(--ink2);font-size:1.75rem;font-weight:500;line-height:30px;letter-spacing:-.02em}
+.tail-bx p span{font-weight:700}
+.tail-bx ul{display:flex;align-items:center;gap:10px}
+.tail-bx ul li a{display:flex;align-items:center;justify-content:center;position:relative;width:48px;height:48px;overflow:hidden;border-radius:50%;background:var(--ink);color:#fff}
+@media(max-width:1024px){.tail-bx{flex-direction:column;gap:8px;border-radius:0 0 20px 20px;background:#f0f0f0;padding:20px 0}
+ .tail-bx p{font-size:18px;line-height:1.2}.tail-bx ul{gap:20px}}
+@media(max-width:768px){.tail{background:#000}.tail-bx ul li a{width:40px;height:40px}}
+/* ===== 15. 글로벌 ===== */
+.hy-section3{position:relative}
+.hy-section3 .content-area{width:100%;height:100vh}
+.hy-section3 .bg-area{width:100%;height:100vh;position:sticky;top:0;left:0;display:flex;align-items:center;justify-content:center;margin-top:-100vh}
+.hy-section3 .bg-bx{position:absolute;inset:0}
+.hy-section3 .bg-bx:before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.45);z-index:1}
+.hy-section3 .bg-bx img{width:100%;height:100%;object-fit:cover}
+.hy-section3 .txt-bx{width:100%;position:relative;z-index:10;text-align:center}
+.hy-section3 .txt-bx h2{color:#fff;text-align:center;font-size:4rem;font-weight:700;line-height:1.25;letter-spacing:-.03em}
+.hy-section3 .txt-bx p{width:fit-content;color:#fff;font-size:1.5rem;font-weight:600;line-height:40px;letter-spacing:-.01em;border-radius:50px;background:rgba(255,255,255,.3);padding:2px 20px;margin:24px auto 50px}
+.hy-section3 .marquee{width:100%;max-width:800px;position:relative;display:flex;overflow:hidden;margin:0 auto}
+.hy-section3 .marquee ul{display:flex;align-items:center;gap:40px;width:max-content;animation:marquee 26s linear infinite}
+.hy-section3 .marquee li{display:flex;align-items:center;gap:8px;color:#fff;font-size:1.125rem;font-weight:500;white-space:nowrap}
+.hy-section3 .marquee li i{width:26px;height:18px;border-radius:3px;background:rgba(255,255,255,.35);display:block}
+@media(max-width:1400px){.hy-section3 .txt-bx h2{font-size:3.4375rem}}
+@media(max-width:1200px){.hy-section3 .txt-bx h2{font-size:3rem}}
+@media(max-width:768px){.hy-section3 .content-area{height:auto}
+ .hy-section3 .bg-area{position:relative;height:600px;margin-top:0}
+ .hy-section3 .txt-bx h2{font-size:34px;line-height:1.2;padding:0 20px}
+ .hy-section3 .txt-bx p{font-size:14px;font-weight:300;line-height:20px;background:none;padding:0 20px;margin:14px auto 30px}}
+/* ===== 16. 오시는 길 ===== */
+.hy-section5{background:#fff}
+.hy-section5 .container{padding:100px 20px 40px}
+.hy-section5 .txt-bx h2{color:var(--ink);font-size:3.875rem;font-weight:700;line-height:1.25;letter-spacing:-.04em;text-align:center}
+.hy-section5 .txt-bx h2 span{color:var(--pri)}
+.hy-section5 .txt-bx p{color:#606060;text-align:center;font-size:1.5rem;font-weight:500;line-height:1.3;letter-spacing:-.02em;margin-top:16px}
+.hy-section5 .map-bx{position:relative;width:100%;aspect-ratio:1920/480}
+.hy-section5 .map-bx .map{width:100%;height:100%}
+.hy-section5 .map-bx .map img{width:100%;height:100%;object-fit:cover}
+.hy-section5 .map-bx .info-bx{position:absolute;top:4rem;left:18rem;background:#fff;border-radius:1.3125rem;padding:2.625rem;z-index:10;border:1px solid #eee}
+.hy-section5 .map-bx .info-bx>div{display:flex;align-items:center;gap:1.3125rem}
+.hy-section5 .map-bx .info-bx .tel,.hy-section5 .map-bx .info-bx .contact{font-size:1.2rem;font-weight:600;line-height:1.3;letter-spacing:-.01em}
+.hy-section5 .map-bx .info-bx .tel{margin-bottom:14px}
+.hy-section5 .map-bx .info-bx .icon{width:38px;height:38px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.hy-section5 .map-bx .info-bx .open-map{padding:20px 0 0;display:flex;align-items:center;justify-content:center;gap:10px}
+.hy-section5 .map-bx .info-bx .open-map a{flex:1;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9375rem;font-weight:600;border:1px solid #ddd;gap:6px}
+@media(max-width:1400px){.hy-section5 .txt-bx h2{font-size:3.4375rem}.hy-section5 .txt-bx p{font-size:1.25rem}}
+@media(max-width:1200px){.hy-section5 .txt-bx h2{font-size:3rem}.hy-section5 .txt-bx p{font-size:1.125rem}
+ .hy-section5 .map-bx .info-bx{left:4rem}}
+@media(max-width:768px){.hy-section5 .container{padding:50px 20px 40px}
+ .hy-section5 .txt-bx h2{font-size:34px;line-height:1.2}.hy-section5 .txt-bx p{font-size:16px}.hy-section5 .txt-bx p br{display:none}
+ .hy-section5 .map-bx{aspect-ratio:375/300}
+ .hy-section5 .map-bx .info-bx{position:static;padding:0 0 2rem;background:none;border:none}
+ .hy-section5 .map-bx .info-bx .tel,.hy-section5 .map-bx .info-bx .contact{display:none}
+ .hy-section5 .map-bx .info-bx .open-map{padding:0}}
+@media(max-width:576px){.hy-section5 .txt-bx p{font-size:14px}}
+/* ===== 첫 진입 인트로 ===== */
+.intro2-bx{position:fixed;inset:0;z-index:9000;background:#101010;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;transition:opacity .8s,visibility .8s}
+.intro2-bx.hide{opacity:0;visibility:hidden}
+.intro2-bx .bg-bx{position:absolute;inset:0;opacity:.35}
+.intro2-bx .bg-bx img{width:100%;height:100%;object-fit:cover}
+.intro2-bx .title{position:relative;color:#fff;font-size:3.5rem;font-weight:700;letter-spacing:-.03em;opacity:0;transform:translateY(24px);animation:introUp .9s forwards}
+.intro2-bx .line2{animation-delay:.25s;color:#5ec6cc}
+.intro2-bx .line3{animation-delay:.5s}
+@keyframes introUp{to{opacity:1;transform:none}}
+@media(max-width:768px){.intro2-bx .title{font-size:28px}}
+/* ===== 메인 팝업 ===== */
+.main-popup{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
+.main-popup.on{display:flex}
+.main-popup .inner{width:min(1100px,92vw)}
+.main-popup .slides{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.main-popup .slide{background:#fff;border-radius:12px;overflow:hidden}
+.main-popup .slide img{width:100%;aspect-ratio:420/560;object-fit:cover}
+.main-popup .ctrl{display:flex;justify-content:space-between;align-items:center;margin-top:14px;color:#fff;font-size:.9375rem}
+.main-popup .ctrl label{display:flex;align-items:center;gap:6px;cursor:pointer}
+.main-popup .ctrl button{color:#fff;font-size:.9375rem}
+@media(max-width:768px){.main-popup .slides{grid-template-columns:1fr}.main-popup .slide:nth-child(n+2){display:none}}
+</style>
+</head>
+<body class="main-page">
+<ul class="skip"><li><a class="link" href="#contents">본문내용 바로가기</a></li><li><a class="link" href="#header">헤더 바로가기</a></li><li><a class="link" href="#footer">푸터 바로가기</a></li></ul>
+<header id="header" class="header topwhite" data-topwhite="1">
+ <div class="container header-wrap">
+  <a class="logo" href="index.html"><svg viewBox="0 0 508 91" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="365서울예담치과의원"><path d="M36 12c11 0 18 7 18 17 0 6-3 11-7 15 7 5 11 12 11 21 0 13-10 22-24 22S10 78 10 65c0-9 4-16 11-21-4-4-7-9-7-15 0-10 7-17 18-17z" fill="#0E7C86"/><text x="72" y="44" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="34" font-weight="800" fill="#101010" letter-spacing="-1">365서울예담</text><text x="72" y="76" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="30" font-weight="600" fill="#101010" letter-spacing="-1">치과의원</text></svg><svg viewBox="0 0 508 91" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="365서울예담치과의원"><path d="M36 12c11 0 18 7 18 17 0 6-3 11-7 15 7 5 11 12 11 21 0 13-10 22-24 22S10 78 10 65c0-9 4-16 11-21-4-4-7-9-7-15 0-10 7-17 18-17z" fill="#fff"/><text x="72" y="44" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="34" font-weight="800" fill="#fff" letter-spacing="-1">365서울예담</text><text x="72" y="76" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="30" font-weight="600" fill="#fff" letter-spacing="-1">치과의원</text></svg></a>
+  <div class="nav__bg"></div>
+  <nav class="nav"><ul class="nav-list nav-list--depth1"><li class="nav-list__item depth-1"><a class="link" href="introduction.html">365서울예담치과</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="introduction.html">병원소개</a></li><li class="nav-list__item depth-2"><a class="link" href="doctors.html">분과별 의료진</a></li><li class="nav-list__item depth-2"><a class="link" href="prosthetics.html">자체 디지털 기공소</a></li><li class="nav-list__item depth-2"><a class="link" href="tour.html">치과 둘러보기</a></li><li class="nav-list__item depth-2"><a class="link" href="location.html">진료안내/오시는 길</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="implant-total.html">예담 임플란트</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="implant-total.html">전체 임플란트</a></li><li class="nav-list__item depth-2"><a class="link" href="implant-sleep.html">의식하진정법 치료</a></li><li class="nav-list__item depth-2"><a class="link" href="implant-prosthodontics.html">보철치료</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="laminate.html">예담 라미네이트</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="laminate.html">예담 라미네이트</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="orthodontics.html">치아교정</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="orthodontics.html">치아교정</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="notice.html">커뮤니티</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="notice.html">병원소식</a></li><li class="nav-list__item depth-2"><a class="link" href="media.html">미디어</a></li><li class="nav-list__item depth-2"><a class="link" href="case.html">치료사례</a></li><li class="nav-list__item depth-2"><a class="link" href="qna.html">FAQ</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="inquiry.html">진료예약/상담</a></li></ul></nav>
+  <div class="right-menu">
+   <a class="btn-login" href="login.html">Login</a>
+   <div class="btn-langs"><svg class="ic" viewBox="0 0 20 20" fill="none" stroke="#101010" stroke-width="1.4"><circle cx="10" cy="10" r="8"/><path d="M2 10h16M10 2c3 2.5 3 13.5 0 16M10 2c-3 2.5-3 13.5 0 16"/></svg><span>KR</span>
+    <ul class="langs_drop"><li><a href="#" onclick="return false" data-lang="KR">KR</a></li><li><a href="#" onclick="return false" data-lang="EN">EN</a></li><li><a href="#" onclick="return false" data-lang="JP">JP</a></li><li><a href="#" onclick="return false" data-lang="CN">CN</a></li></ul></div>
+   <a class="btn-mypage" href="login.html"><svg viewBox="0 0 24 24" fill="none" stroke="#101010" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></a>
+   <button type="button" class="sitemap"><span></span>전체 메뉴</button>
+  </div>
+ </div>
+</header>
+<div class="nav-mobile__bg"></div>
+<aside class="nav-mobile">
+ <div class="nav-mobile__head"><div class="logo-bx"><a href="index.html"><svg viewBox="0 0 508 91" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="365서울예담치과의원"><path d="M36 12c11 0 18 7 18 17 0 6-3 11-7 15 7 5 11 12 11 21 0 13-10 22-24 22S10 78 10 65c0-9 4-16 11-21-4-4-7-9-7-15 0-10 7-17 18-17z" fill="#0E7C86"/><text x="72" y="44" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="34" font-weight="800" fill="#101010" letter-spacing="-1">365서울예담</text><text x="72" y="76" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="30" font-weight="600" fill="#101010" letter-spacing="-1">치과의원</text></svg></a></div><button type="button" class="close" aria-label="닫기"></button></div>
+ <div class="nav-mobile__body"><ul class="nav-list nav-list--depth1"><li class="nav-list__item depth-1"><a class="link" href="introduction.html">365서울예담치과</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="introduction.html">병원소개</a></li><li class="nav-list__item depth-2"><a class="link" href="doctors.html">분과별 의료진</a></li><li class="nav-list__item depth-2"><a class="link" href="prosthetics.html">자체 디지털 기공소</a></li><li class="nav-list__item depth-2"><a class="link" href="tour.html">치과 둘러보기</a></li><li class="nav-list__item depth-2"><a class="link" href="location.html">진료안내/오시는 길</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="implant-total.html">예담 임플란트</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="implant-total.html">전체 임플란트</a></li><li class="nav-list__item depth-2"><a class="link" href="implant-sleep.html">의식하진정법 치료</a></li><li class="nav-list__item depth-2"><a class="link" href="implant-prosthodontics.html">보철치료</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="laminate.html">예담 라미네이트</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="laminate.html">예담 라미네이트</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="orthodontics.html">치아교정</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="orthodontics.html">치아교정</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="notice.html">커뮤니티</a><ul class="nav-list nav-list--depth2"><li class="nav-list__item depth-2"><a class="link" href="notice.html">병원소식</a></li><li class="nav-list__item depth-2"><a class="link" href="media.html">미디어</a></li><li class="nav-list__item depth-2"><a class="link" href="case.html">치료사례</a></li><li class="nav-list__item depth-2"><a class="link" href="qna.html">FAQ</a></li></ul></li><li class="nav-list__item depth-1"><a class="link" href="inquiry.html">진료예약/상담</a></li></ul></div>
+ <div class="nav-mobile__foot"><a href="tel:010-4894-4905">전화상담</a><a class="pri-btn" href="inquiry.html">진료예약</a></div>
+</aside>
+<div class="intro2-bx"><div class="bg-bx"><img src="./assets/intro-bg.jpg" alt=""></div>
+ <p class="title line1">치료를 넘어,</p><p class="title line2">신뢰를 심는</p><p class="title line3">365서울예담치과</p></div><div class="main-popup"><div class="inner">
+ <div class="slides">
+  <div class="slide"><img src="./assets/popup-1.jpg" alt="추석 연휴 진료 안내"></div>
+  <div class="slide"><img src="./assets/popup-2.jpg" alt="임플란트 상담 이벤트"></div>
+  <div class="slide"><img src="./assets/popup-3.jpg" alt="예담치과 2호점 오픈 안내"></div>
+ </div>
+ <div class="ctrl"><label><input type="checkbox" class="today">오늘 하루 그만 보기</label><button type="button" class="close">닫기 ✕</button></div>
+</div></div><main id="contents" class="main"><section class="dental-visual" id="visual"><div class="slides"><div class="slide on"><div class="img-bx"><img src="./assets/visual-1.jpg" alt=""></div>
+  <div class="visual-txt-bx"><div class="mask"><p class="title">한 분의 진료가 아닌</p></div><div class="mask"><p class="title title2">분과 전문의 공동진료</p></div><p>분과별 협진 · 보건복지부 인증 전문의</p></div></div><div class="slide"><div class="img-bx"><img src="./assets/visual-2.jpg" alt=""></div>
+  <div class="visual-txt-bx"><div class="mask"><p class="title">통증의 두려움을 덜어내는</p></div><div class="mask"><p class="title title2">편안한 임플란트</p></div><p>의식하진정법 · 전체 임플란트 · 뼈이식</p></div></div><div class="slide"><div class="img-bx"><img src="./assets/visual-3.jpg" alt=""></div>
+  <div class="visual-txt-bx"><div class="mask"><p class="title">시작부터 마지막까지</p></div><div class="mask"><p class="title title2">당신을 위한 맞춤 교정</p></div><p>교정과 전문의 · 1:1 맞춤 교정 · 투명교정</p></div></div><div class="slide"><div class="img-bx"><img src="./assets/visual-4.jpg" alt=""></div>
+  <div class="visual-txt-bx"><div class="mask"><p class="title">자체 기공실에서 완성하는</p></div><div class="mask"><p class="title title2">정밀한 맞춤 보철</p></div><p>자체 기공실 · 당일 보철 · 맞춤 보철</p></div></div></div><div class="costom-pageNav"><ul><li class="active"><div class="cir"><svg width="24" height="24"><circle class="bg-circle" cx="12" cy="12" r="10"/><circle class="progress-circle" cx="12" cy="12" r="10"/></svg><span class="dot"></span></div><p>분과별 협진 · 보건복지부 인증 전문의</p></li><li><div class="cir"><svg width="24" height="24"><circle class="bg-circle" cx="12" cy="12" r="10"/><circle class="progress-circle" cx="12" cy="12" r="10"/></svg><span class="dot"></span></div><p>의식하진정법 · 전체 임플란트 · 뼈이식</p></li><li><div class="cir"><svg width="24" height="24"><circle class="bg-circle" cx="12" cy="12" r="10"/><circle class="progress-circle" cx="12" cy="12" r="10"/></svg><span class="dot"></span></div><p>교정과 전문의 · 1:1 맞춤 교정 · 투명교정</p></li><li><div class="cir"><svg width="24" height="24"><circle class="bg-circle" cx="12" cy="12" r="10"/><circle class="progress-circle" cx="12" cy="12" r="10"/></svg><span class="dot"></span></div><p>자체 기공실 · 당일 보철 · 맞춤 보철</p></li></ul></div></section><section class="dental-tab" id="special" data-tabgroup>
+ <div class="section-tit"><h2><span>365서울예담치과</span>의 특화진료</h2></div>
+ <div class="mobile-drag-tab"><ul class="tabs-four"><li class="on" data-tab="t0">예담 전체 임플란트</li><li class="" data-tab="t1">의식하진정법 치과치료</li><li class="" data-tab="t2">원스톱 치과치료</li><li class="" data-tab="t3">Global Dental Care</li></ul></div>
+ <div class="tab-views"><div class="tabviews on" data-pane="t0">
+   <div class="imgBox"><img src="./assets/tab-1.jpg" alt=""></div>
+   <div class="txtBox"><h4>임플란트 특화 진료</h4><h3>잃어버린 치아,<br>다시 씹는 즐거움으로</h3><p>치아를 많이 상실한 경우에도 남은 뼈 상태를 정밀하게 분석해 전체 임플란트 계획을 세웁니다. 분과 전문의가 함께 진단하고, 수술부터 보철까지 한 곳에서 마무리합니다.</p><a class="viewMore" href="implant-total.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div></div><div class="tabviews" data-pane="t1">
+   <div class="imgBox"><img src="./assets/tab-2.jpg" alt=""></div>
+   <div class="txtBox"><h4>편안한 진료 환경</h4><h3>긴장과 부담을<br>덜어주는 의식하진정법</h3><p>치과가 두려워 치료를 미루셨다면, 진정 상태에서 편안하게 진료받으실 수 있습니다. 마취통증의학과 협진으로 활력징후를 확인하며 안전하게 진행합니다.</p><a class="viewMore" href="implant-sleep.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div></div><div class="tabviews" data-pane="t2">
+   <div class="imgBox"><img src="./assets/tab-3.jpg" alt=""></div>
+   <div class="txtBox"><h4>한 곳에서 끝내는 진료</h4><h3>검사부터 보철까지<br>한 곳에서 끝냅니다</h3><p>3D CT와 구강스캐너로 당일 검사하고, 자체 기공실에서 보철물을 제작합니다. 여러 병원을 오가지 않아도 되도록 진료 동선을 줄였습니다.</p><a class="viewMore" href="implant-prosthodontics.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div></div><div class="tabviews" data-pane="t3">
+   <div class="imgBox"><img src="./assets/tab-4.jpg" alt=""></div>
+   <div class="txtBox"><h4>외국인 환자 진료</h4><h3>언어 걱정 없이<br>받는 치과 진료</h3><p>영어·중국어·일본어 상담이 가능한 코디네이터가 진료 전 과정을 함께합니다. 해외 거주 일정에 맞춘 치료 계획을 세워드립니다.</p><a class="viewMore" href="introduction.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div></div></div>
+</section><section class="dental-senior" id="senior"><div class="background"><div class="container">
+ <div class="section-tit" data-aos><h2>편안한 일상을 되찾는 <span>시니어 임플란트</span></h2>
+  <p>365서울예담치과의원는 치아 상실로 불편함이 있으신 시니어 환자분들을 위해,<br>구강 상태를 정밀 분석해 오랫동안 편안한 맞춤 임플란트를 계획합니다.</p></div>
+ <div class="case">
+  <div class="case-img" data-aos><div class="img-bx">
+   <div class="before"><div class="img"><img src="./assets/senior-b-1.jpg" alt="치료 전"></div><p class="txt">BEFORE<span>치료 전 2025.03.14</span></p></div>
+   <div class="img-arrow">›</div>
+   <div class="after"><div class="img"><img src="./assets/senior-a-1.jpg" alt="치료 후"></div><p class="txt">AFTER<span>치료 후 2025.09.02</span></p></div>
+  </div></div>
+  <div class="case-list" data-aos><div class="scroller"><ul><li class="item" data-before="senior-b-1.jpg" data-after="senior-a-1.jpg" data-dbefore="2025.03.14" data-dafter="2025.09.02">
+    <div><div class="img-bx"><img src="./assets/senior-p-1.jpg" alt=""></div>
+     <div class="txt-bx"><p class="tit">오래된 보철물로 통증이 반복<br>되었던 <span>김oo님</span></p><p class="name">68세 · 상악 전체 임플란트</p></div></div></li><li class="item" data-before="senior-b-2.jpg" data-after="senior-a-2.jpg" data-dbefore="2025.02.10" data-dafter="2025.08.21">
+    <div><div class="img-bx"><img src="./assets/senior-p-2.jpg" alt=""></div>
+     <div class="txt-bx"><p class="tit">치아 흔들림으로 웃는 것이<br>어려우셨던 <span>이oo님</span></p><p class="name">72세 · 하악 부분 임플란트</p></div></div></li><li class="item" data-before="senior-b-3.jpg" data-after="senior-a-3.jpg" data-dbefore="2024.11.05" data-dafter="2025.07.18">
+    <div><div class="img-bx"><img src="./assets/senior-p-3.jpg" alt=""></div>
+     <div class="txt-bx"><p class="tit">전체 틀니가 잘 맞지 않아<br>불편하셨던 <span>박oo님</span></p><p class="name">75세 · 상하악 전체 임플란트</p></div></div></li><li class="item" data-before="senior-b-4.jpg" data-after="senior-a-4.jpg" data-dbefore="2025.01.22" data-dafter="2025.08.06">
+    <div><div class="img-bx"><img src="./assets/senior-p-4.jpg" alt=""></div>
+     <div class="txt-bx"><p class="tit">잇몸 염증이 반복되어<br>식사가 어려웠던 <span>최oo님</span></p><p class="name">70세 · 상악 뼈이식 임플란트</p></div></div></li><li class="item" data-before="senior-b-5.jpg" data-after="senior-a-5.jpg" data-dbefore="2025.04.03" data-dafter="2025.09.15">
+    <div><div class="img-bx"><img src="./assets/senior-p-5.jpg" alt=""></div>
+     <div class="txt-bx"><p class="tit">앞니 상실로 발음이<br>불편하셨던 <span>정oo님</span></p><p class="name">66세 · 전치부 임플란트</p></div></div></li></ul></div>
+   <div class="slider-btns"><p class="pager"><b class="cur">1</b> / 5</p><button type="button" class="swiper-play-pause">❚❚</button></div>
+  </div>
+ </div>
+ <ul class="caution senior-caution"><li>위 임상사진은 365서울예담치과의원에서 진료를 시작하고 치료를 마무리한 환자분의 실제 사진입니다.</li><li>위 임상사진은 동일한 장소에서 동일한 조건으로 촬영하였으며, 시간에 대한 별도의 보정은 하지 않았습니다.</li><li>수술 및 치료 과정에서 부작용이 발생할 수 있으므로 의료진과 충분한 상담 후 진행하시기 바랍니다.</li><li>임플란트 치료 후 개인에 따라 통증·부종·출혈 등이 발생할 수 있으므로 의료진과 충분한 상담이 필요합니다.</li></ul>
+</div></div></section><section class="dental-case" id="case" data-tabgroup><div class="container">
+ <div class="case-top">
+  <div class="section-tit mb-0" data-aos><h2><span>365서울예담치과</span> 실제 치료 사례</h2><p>환자분들이 경험한 치료 전후의 변화를 실제 사례로 확인해보세요.</p></div>
+  <div class="tab-menu" data-aos><ul><li class="active" data-tab="c0"><span>임플란트</span></li><li class="" data-tab="c1"><span>라미네이트</span></li><li class="" data-tab="c2"><span>치아교정</span></li></ul></div>
+ </div>
+ <div class="slider on" data-pane="c0"><div class="slides"><div class="pair on"><div class="ba"><div class="before-bx"><img src="./assets/case-1-b.jpg" alt="치료 전"><span class="date">2025.01.05</span></div>
+      <div class="ba-after after-bx"><img src="./assets/case-1-a.jpg" alt="치료 후"><span class="date">2025.09.07</span></div>
+      <span class="ba-handle"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="치료 전후 비교"></div><div class="ba"><div class="before-bx"><img src="./assets/case-2-b.jpg" alt="치료 전"><span class="date">2024.11.20</span></div>
+      <div class="ba-after after-bx"><img src="./assets/case-2-a.jpg" alt="치료 후"><span class="date">2025.08.14</span></div>
+      <span class="ba-handle"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="치료 전후 비교"></div></div><div class="pair"><div class="ba"><div class="before-bx"><img src="./assets/case-3-b.jpg" alt="치료 전"><span class="date">2025.02.18</span></div>
+      <div class="ba-after after-bx"><img src="./assets/case-3-a.jpg" alt="치료 후"><span class="date">2025.09.01</span></div>
+      <span class="ba-handle"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="치료 전후 비교"></div><div class="ba"><div class="before-bx"><img src="./assets/case-4-b.jpg" alt="치료 전"><span class="date">2024.10.08</span></div>
+      <div class="ba-after after-bx"><img src="./assets/case-4-a.jpg" alt="치료 후"><span class="date">2025.07.22</span></div>
+      <span class="ba-handle"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="치료 전후 비교"></div></div></div><div class="swiper-navigation"><button type="button" class="c-prev">‹</button><span class="pagination"><b>1</b> / 2</span><button type="button" class="c-next">›</button></div><a class="viewMore" href="case.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div><div class="slider" data-pane="c1"><div class="slides"><div class="pair on"><div class="ba"><div class="before-bx"><img src="./assets/case-5-b.jpg" alt="치료 전"><span class="date">2025.03.22</span></div>
+      <div class="ba-after after-bx"><img src="./assets/case-5-a.jpg" alt="치료 후"><span class="date">2025.06.10</span></div>
+      <span class="ba-handle"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="치료 전후 비교"></div><div class="ba"><div class="before-bx"><img src="./assets/case-6-b.jpg" alt="치료 전"><span class="date">2025.01.09</span></div>
+      <div class="ba-after after-bx"><img src="./assets/case-6-a.jpg" alt="치료 후"><span class="date">2025.05.28</span></div>
+      <span class="ba-handle"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="치료 전후 비교"></div></div></div><div class="swiper-navigation lock"><button type="button" class="c-prev">‹</button><span class="pagination"><b>1</b> / 1</span><button type="button" class="c-next">›</button></div><a class="viewMore" href="case.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div><div class="slider" data-pane="c2"><div class="slides"><div class="pair on"><div class="ba"><div class="before-bx"><img src="./assets/case-7-b.jpg" alt="치료 전"><span class="date">2024.06.11</span></div>
+      <div class="ba-after after-bx"><img src="./assets/case-7-a.jpg" alt="치료 후"><span class="date">2025.08.29</span></div>
+      <span class="ba-handle"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="치료 전후 비교"></div><div class="ba"><div class="before-bx"><img src="./assets/case-8-b.jpg" alt="치료 전"><span class="date">2024.03.27</span></div>
+      <div class="ba-after after-bx"><img src="./assets/case-8-a.jpg" alt="치료 후"><span class="date">2025.07.05</span></div>
+      <span class="ba-handle"></span><input class="ba-range" type="range" min="0" max="100" value="50" aria-label="치료 전후 비교"></div></div></div><div class="swiper-navigation lock"><button type="button" class="c-prev">‹</button><span class="pagination"><b>1</b> / 1</span><button type="button" class="c-next">›</button></div><a class="viewMore" href="case.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div>
+ <ul class="caution"><li>위 임상사진은 365서울예담치과의원에서 진료를 시작하고 치료를 마무리한 환자분의 실제 사진입니다.</li><li>위 임상사진은 동일한 장소에서 동일한 조건으로 촬영하였으며, 별도의 보정은 하지 않았습니다.</li><li>수술 및 치료 과정에서 부작용이 발생할 수 있으므로 의료진과 충분한 상담 후 진행하시기 바랍니다.</li><li>임플란트 치료 후 개인에 따라 통증·부종·출혈 등이 발생할 수 있습니다.</li><li>라미네이트 치료 후 개인에 따라 치아 시림·민감도 증가 등이 발생할 수 있습니다.</li><li>치아교정은 통증, 잇몸 염증, 치아 표면의 탈회, 치근 흡수 등이 발생할 수 있습니다.</li></ul>
+</div></section><section class="dental-service2" id="service"><div class="container">
+ <div class="section-tit"><h2><span>365서울예담치과</span> 진료과목</h2><p>각 분야 전문의가 상담부터 치료까지 전 과정에 함께하며,<br>환자분의 구강 상태에 맞춘 세밀한 치료를 제공합니다.</p></div>
+</div><ul class="service-list" data-aos><li class="item"><img src="./assets/service-1.jpg" alt=""><a href="implant-total.html"><span class="txt">
+   <span class="kor">임플란트</span>
+   <span class="hovertxt"><span class="desc">임플란트 특화 전문의의 진료와<br>통증을 줄이는 수술 계획</span><ul class="tags"><li>전체 임플란트</li><li>뼈이식</li><li>상악동 거상술</li></ul></span>
+   <span class="circle-btn">+</span></span></a></li><li class="item"><img src="./assets/service-2.jpg" alt=""><a href="laminate.html"><span class="txt">
+   <span class="kor">심미치료</span>
+   <span class="hovertxt"><span class="desc">오랜 노하우를 담은 심미치료로<br>자연스러운 미소를 설계합니다</span><ul class="tags"><li>라미네이트</li><li>올세라믹</li><li>치아 미백</li></ul></span>
+   <span class="circle-btn">+</span></span></a></li><li class="item"><img src="./assets/service-3.jpg" alt=""><a href="orthodontics.html"><span class="txt">
+   <span class="kor">치아교정</span>
+   <span class="hovertxt"><span class="desc">교정과 전문의의 정밀한 진단과<br>1:1 맞춤 교정 계획</span><ul class="tags"><li>투명교정</li><li>설측교정</li><li>부분교정</li></ul></span>
+   <span class="circle-btn">+</span></span></a></li><li class="item"><img src="./assets/service-4.jpg" alt=""><a href="implant-prosthodontics.html"><span class="txt">
+   <span class="kor">보철치료</span>
+   <span class="hovertxt"><span class="desc">자연 치아 보존을 우선으로,<br>정밀한 진단과 맞춤 보철</span><ul class="tags"><li>지르코니아</li><li>인레이</li><li>틀니</li></ul></span>
+   <span class="circle-btn">+</span></span></a></li></ul></section><section class="dental-banner1"><div class="inner">
+ <div class="bannerBox"><div class="video-bg"><img src="./assets/banner-1.jpg" alt=""></div></div>
+ <div class="txt" data-aos="fade"><div class="mask"><p>환자분의 상황을 이해하고,</p></div><div class="mask"><p>올바른 진단과 상담을 약속드립니다.</p></div></div>
+</div></section><section class="dental-doctorstab" id="doctors"><div class="container">
+ <div class="section-tit"><h2><span>365서울예담치과</span> 대표원장님 소개</h2><p>환자를 가족처럼 생각하는 마음으로,<br>평생 신뢰를 드리는 진료를 약속합니다.</p><ul class="mobile-tabs"><li class="on"><img src="./assets/doctor-p-1.jpg" alt=""></li><li class=""><img src="./assets/doctor-p-2.jpg" alt=""></li><li class=""><img src="./assets/doctor-p-3.jpg" alt=""></li></ul></div>
+</div>
+<div class="wrap"><div class="tab-area on"><div class="left-bx"><img src="./assets/doctor-1.jpg" alt=""></div>
+   <div class="right-bx"><div class="inner">
+    <div class="topname"><h4>대표원장</h4><div><span class="name">김도윤</span><span class="doc">통합치의학과 전문의</span></div></div>
+    <ul class="personal-list"><li><h5>진료철학</h5><p>과잉진료 없이, 환자분께 꼭 필요한 치료만 권해드립니다.</p></li><li><h5>약력 및 경력</h5><ul><li>서울대학교 치의학과 졸업</li><li>서울대학교 치의학대학원 석사</li><li>보건복지부 인증 통합치의학과 전문의</li><li>대한구강악안면임플란트학회 정회원</li></ul></li></ul>
+    <ul class="tab-menu"><li class="on">원장님 소개</li><li>미디어</li></ul>
+   </div></div></div><div class="tab-area"><div class="left-bx"><img src="./assets/doctor-2.jpg" alt=""></div>
+   <div class="right-bx"><div class="inner">
+    <div class="topname"><h4>교정과 대표원장</h4><div><span class="name">한서진</span><span class="doc">치과교정과 전문의</span></div></div>
+    <ul class="personal-list"><li><h5>진료철학</h5><p>빠르고 정확하게 하지만 통증과 부작용 없이 최고의 아름다움을 선사합니다.</p></li><li><h5>약력 및 경력</h5><ul><li>서울대학교 치의학과 졸업</li><li>서울대학교 치의학대학원 석사</li><li>보건복지부 인증 치과교정과 전문의</li><li>대한치과교정학회 인정의</li></ul></li></ul>
+    <ul class="tab-menu"><li class="on">원장님 소개</li><li>미디어</li></ul>
+   </div></div></div><div class="tab-area"><div class="left-bx"><img src="./assets/doctor-3.jpg" alt=""></div>
+   <div class="right-bx"><div class="inner">
+    <div class="topname"><h4>임플란트 원장</h4><div><span class="name">정하람</span><span class="doc">구강악안면외과 전문의</span></div></div>
+    <ul class="personal-list"><li><h5>진료철학</h5><p>수술의 완성도는 준비에서 결정된다고 믿습니다.</p></li><li><h5>약력 및 경력</h5><ul><li>서울대학교 치의학과 졸업</li><li>대학병원 구강악안면외과 수련</li><li>보건복지부 인증 구강악안면외과 전문의</li><li>대한구강악안면외과학회 정회원</li></ul></li></ul>
+    <ul class="tab-menu"><li class="on">원장님 소개</li><li>미디어</li></ul>
+   </div></div></div>
+ <button type="button" class="doctorBtn doctors-prev">‹</button><button type="button" class="doctorBtn doctors-next">›</button>
+</div></section><section class="dental-banner2"><div class="inner">
+ <div class="bannerBox"><div class="video-bg"><img src="./assets/banner-2.jpg" alt=""></div></div>
+ <div class="txt" data-aos="fade"><div class="mask"><p>어떤 치료가 환자분께 더 나은 선택일지,</p></div><div class="mask"><p>그 질문을 하루도 놓지 않습니다.</p></div></div>
+</div></section><section class="dental-certification" id="cert"><div class="inner">
+ <div class="text-area"><img class="bg" src="./assets/cert-bg.png" alt=""><div class="txt-wrap"><div class="txt">
+  <div class="logos"><span>보건복지부</span><span>KDA 대한치과의사협회</span></div>
+  <h4>보건복지부 인증 전문의로<br><span>구성된 365서울예담치과</span></h4>
+  <p>서울대 출신 대표원장과 보건복지부 인증 전문의들의<br>분과별 공동진료 시스템으로 완성도 높은 결과를 제공합니다.</p>
+ </div><a class="viewMore" href="doctors.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div></div>
+ <div class="doctor-rolling"><div class="doctor-profiles">
+  <div class="groups group1"><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-1.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">통합치의학과 전문의</span><p class="name">김도윤</p><p class="title">대표원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-2.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">치과교정과 전문의</span><p class="name">한서진</p><p class="title">교정과 대표원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-3.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">구강악안면외과 전문의</span><p class="name">정하람</p><p class="title">임플란트 원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-4.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">통합치의학과 전문의</span><p class="name">오세린</p><p class="title">수석원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-1.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">통합치의학과 전문의</span><p class="name">김도윤</p><p class="title">대표원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-2.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">치과교정과 전문의</span><p class="name">한서진</p><p class="title">교정과 대표원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-3.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">구강악안면외과 전문의</span><p class="name">정하람</p><p class="title">임플란트 원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-4.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">통합치의학과 전문의</span><p class="name">오세린</p><p class="title">수석원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a></div><div class="groups group2"><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-5.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">구강악안면외과 전문의</span><p class="name">배윤호</p><p class="title">임플란트 원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-6.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">통합치의학과 전문의</span><p class="name">문지오</p><p class="title">보철 원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-7.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">치과보철과 전문의</span><p class="name">류하경</p><p class="title">보철 원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-8.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">통합치의학과 전문의</span><p class="name">신재이</p><p class="title">원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-5.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">구강악안면외과 전문의</span><p class="name">배윤호</p><p class="title">임플란트 원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-6.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">통합치의학과 전문의</span><p class="name">문지오</p><p class="title">보철 원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-7.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">치과보철과 전문의</span><p class="name">류하경</p><p class="title">보철 원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a><a class="card" href="doctors.html"><div class="img"><img src="./assets/cert-8.jpg" alt=""></div>
+      <div class="back"><div class="in"><div class="txt"><span class="box">통합치의학과 전문의</span><p class="name">신재이</p><p class="title">원장</p></div>
+       <div class="view-more"><p>자세히 보기</p><div>›</div></div></div></div></a></div>
+ </div></div>
+</div></section><section class="hy-section1" id="trust">
+ <div class="video-bx"><img src="./assets/hy1-bg.jpg" alt=""></div>
+ <div class="container"><div class="left"><h2>매일의 진료가 신뢰를<br>만드는 365서울예담치과</h2>
+  <p>수많은 임상 경험과 원칙을 지키는 진료가<br>365서울예담치과의 신뢰를 완성합니다.</p></div>
+ <div class="right"><ul><li><div class="img-bx"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10"/></svg></div>
+   <p class="count"><span data-count="2016">0</span>~</p><p>Since</p></li><li><div class="img-bx"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></div>
+   <p class="count"><span data-count="19">0</span>+</p><p>임상경력</p></li><li><div class="img-bx"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v3M17 3v3M4 9h16M5 5h14v15H5z"/></svg></div>
+   <p class="count"><span data-count="364">0</span>일</p><p>매일의 진료</p></li><li><div class="img-bx"><svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+   <p class="count"><span data-count="8">0</span></p><p>전문의료진</p></li></ul></div></div>
+</section><div class="infinite-scroll"><div class="marquee-track"><span class="logo">OSSTEM</span><span class="logo">straumann</span><span class="logo">DIO IMPLANT</span><span class="logo">Dentsply Sirona</span><span class="logo">3M Unitek</span><span class="logo">invisalign</span><span class="logo">NEOBIOTECH</span><span class="logo">MEGAGEN</span><span class="logo">OSSTEM</span><span class="logo">straumann</span><span class="logo">DIO IMPLANT</span><span class="logo">Dentsply Sirona</span><span class="logo">3M Unitek</span><span class="logo">invisalign</span><span class="logo">NEOBIOTECH</span><span class="logo">MEGAGEN</span></div></div><section class="hy-section4" id="promise">
+ <div class="left"><div class="txt-bx" data-aos><h2><span>365서울예담치과</span>는 환자와의<br>약속과 신뢰를 지키는<br>정직한 병원입니다.</h2></div></div>
+ <div class="right"><div class="slides"><div class="slide on"><div class="inner"><div class="img-bx"><img src="./assets/promise-1.jpg" alt=""></div>
+   <div class="txt-bx"><p class="num">01</p><p class="subject">처음 상담부터 치료 이후까지,<br>전 과정을 전담 주치의가 함께합니다.</p><p class="text">365서울예담치과는 대표원장이 모든 환자를 직접 진단하고,<br>상담·치료·수술·사후 관리까지 전 과정을 전담 주치의가<br>책임지는 진료 체계를 지향합니다.</p></div></div></div><div class="slide"><div class="inner"><div class="img-bx"><img src="./assets/promise-2.jpg" alt=""></div>
+   <div class="txt-bx"><p class="num">02</p><p class="subject">필요한 치료만 권하고,<br>비용을 먼저 안내합니다.</p><p class="text">진단 결과와 치료 계획, 예상 비용을 치료 전에 모두 설명드립니다.<br>당장 필요하지 않은 치료는 권하지 않고,<br>우선순위를 함께 정합니다.</p></div></div></div><div class="slide"><div class="inner"><div class="img-bx"><img src="./assets/promise-3.jpg" alt=""></div>
+   <div class="txt-bx"><p class="num">03</p><p class="subject">기록을 남기고,<br>다음 진료에서 이어갑니다.</p><p class="text">모든 진료 기록과 사진을 체계적으로 보관해<br>담당 의료진이 바뀌어도 같은 기준으로 진료가 이어지도록<br>공동진료 시스템을 운영합니다.</p></div></div></div></div><div class="dots"><button type="button" class="on" aria-label="1번째"></button><button type="button" class="" aria-label="2번째"></button><button type="button" class="" aria-label="3번째"></button></div></div>
+</section><section class="hy-section2" id="news" data-tabgroup><div class="container">
+ <div class="top"><h2><span>365서울예담치과</span> 소식</h2>
+  <div class="control"><p class="text">진료 현장 이야기부터 유익한 치과상식까지<br>공지 및 소식을 전해드립니다.</p>
+   <div class="tab-header"><ul><li class="on" data-tab="n1">유튜브</li><li data-tab="n2">공지사항</li><li data-tab="n3">언론보도</li></ul></div></div></div>
+ <div class="bottom"><div class="tab-content">
+  <div class="tab tab2 on" data-pane="n1"><div class="content">
+   <div class="left"><div class="video-bx"><img src="./assets/news-yt-1.jpg" alt=""></div>
+    <div class="info"><p class="tag">유튜브</p><p class="text">치과 치료를 받으러 한국까지 날아온 외국인 | 치글 브이로그</p><p class="date">2026.08.28</p></div></div>
+   <div class="right"><ul><li><div class="img-bx"><img src="./assets/news-yt-2.jpg" alt=""></div>
+    <div class="info"><p class="tag">유튜브</p><p class="text">치과 직원이 내 돈 주고 직접 받은 라미네이트 후기</p><p class="date">2026.08.20</p></div></li><li><div class="img-bx"><img src="./assets/news-yt-3.jpg" alt=""></div>
+    <div class="info"><p class="tag">유튜브</p><p class="text">치아에 레몬을 문지르면 치아미백된다? 치과의사가 알려주는 SNS 치아관리 팩트체크</p><p class="date">2026.07.10</p></div></li><li><div class="img-bx"><img src="./assets/news-yt-4.jpg" alt=""></div>
+    <div class="info"><p class="tag">유튜브</p><p class="text">임플란트 수술 당일, 진짜 아플까? 수술실 안에서 생긴 일</p><p class="date">2026.06.24</p></div></li><li><div class="img-bx"><img src="./assets/news-yt-5.jpg" alt=""></div>
+    <div class="info"><p class="tag">유튜브</p><p class="text">교정 중 음식 뭐 먹어요? 교정 전문의가 알려주는 식사 가이드</p><p class="date">2026.06.02</p></div></li></ul></div>
+  </div><a class="viewMore" href="media.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div>
+  <div class="tab tab3" data-pane="n2"><div class="cards"><a class="card" href="notice.html"><div class="img-bx"><img src="./assets/notice-1.jpg" alt=""></div>
+    <div class="info"><p class="tag">공지사항</p><p class="text">추석 연휴 진료 안내드립니다</p><p class="date">2026.09.08</p></div></a><a class="card" href="notice.html"><div class="img-bx"><img src="./assets/notice-2.jpg" alt=""></div>
+    <div class="info"><p class="tag">공지사항</p><p class="text">9월 임플란트 상담 이벤트 안내</p><p class="date">2026.09.01</p></div></a><a class="card" href="notice.html"><div class="img-bx"><img src="./assets/notice-3.jpg" alt=""></div>
+    <div class="info"><p class="tag">공지사항</p><p class="text">주차 안내 변경 공지</p><p class="date">2026.08.12</p></div></a></div><a class="viewMore" href="notice.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div>
+  <div class="tab tab4" data-pane="n3"><div class="cards"><a class="card" href="media.html"><div class="img-bx"><img src="./assets/press-1.jpg" alt=""></div>
+    <div class="info"><p class="tag">언론보도</p><p class="text">365서울예담치과, 대한변호사사무직원협회와 업무협약 체결</p><p class="date">2026.07.30</p></div></a><a class="card" href="media.html"><div class="img-bx"><img src="./assets/press-2.jpg" alt=""></div>
+    <div class="info"><p class="tag">언론보도</p><p class="text">365서울예담치과, 서울시 생활체육 심판위원회와 의료 지원 협약</p><p class="date">2026.06.18</p></div></a><a class="card" href="media.html"><div class="img-bx"><img src="./assets/press-3.jpg" alt=""></div>
+    <div class="info"><p class="tag">언론보도</p><p class="text">365서울예담치과, 지역 어르신 대상 구강검진 봉사 진행</p><p class="date">2026.05.22</p></div></a></div><a class="viewMore" href="media.html">View More <svg viewBox="0 0 22 10" fill="none"><rect class="line" x="0" y="4.5" width="18" height="1" fill="#101010"/><path class="angle" d="M16 1l4 4-4 4" stroke="#101010" stroke-width="1.2" fill="none"/></svg></a></div>
+ </div></div>
+</div></section><section class="tail"><div class="tail-bx"><p><span>365서울예담치과</span>를 다양하게 만나보세요!</p><ul class="icon-bx"><li><a href="#" onclick="return false" aria-label="인스타그램"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M7 3h10a4 4 0 014 4v10a4 4 0 01-4 4H7a4 4 0 01-4-4V7a4 4 0 014-4z M12 8.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7z"/></svg></a></li><li><a href="#" onclick="return false" aria-label="유튜브"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M3 8a3 3 0 013-3h12a3 3 0 013 3v8a3 3 0 01-3 3H6a3 3 0 01-3-3z M10 9l5 3-5 3z"/></svg></a></li><li><a href="#" onclick="return false" aria-label="블로그"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 6h16v10H9l-4 4V6z"/></svg></a></li><li><a href="#" onclick="return false" aria-label="카카오톡"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 4C7 4 3 7.2 3 11.1c0 2.4 1.6 4.6 4 5.8l-.8 3 3.4-1.9c.8.2 1.6.3 2.4.3 5 0 9-3.2 9-7.2S17 4 12 4z"/></svg></a></li></ul></div></section><section class="hy-section3" id="global"><div class="content-area"></div>
+ <div class="bg-area"><div class="bg-bx"><img src="./assets/hy3-bg.jpg" alt=""></div>
+  <div class="txt-bx"><h2>멀어도 선택받는 의료 수준,<br>365서울예담치과 국내를 넘어 해외까지</h2>
+   <p>국내 환자는 물론 해외 환자들에게도 신뢰할 수 있는 고품질의 의료 서비스를 제공합니다.</p>
+   <div class="marquee"><ul><li><i></i>대한민국</li><li><i></i>미국</li><li><i></i>일본</li><li><i></i>중국</li><li><i></i>베트남</li><li><i></i>몽골</li><li><i></i>카자흐스탄</li><li><i></i>태국</li><li><i></i>대한민국</li><li><i></i>미국</li><li><i></i>일본</li><li><i></i>중국</li><li><i></i>베트남</li><li><i></i>몽골</li><li><i></i>카자흐스탄</li><li><i></i>태국</li></ul></div>
+  </div></div>
+</section><section class="hy-section5" id="location"><div class="container"><div class="txt-bx" data-aos>
+ <h2><span>365서울예담치과</span> 진료안내 & 오시는 길</h2><p>서울시 강서구 강서로 179, 예담M빌딩 3F, 4F</p></div></div>
+ <div class="map-bx"><div class="info-bx">
+  <div class="tel"><span class="icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h4l2 5-2.5 1.5a12 12 0 005 5L16 12l5 2v4a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1z"/></svg></span><p class="txt">010-4894-4905</p></div>
+  <div class="contact"><span class="icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.2"/></svg></span><p class="txt">화곡역 8번 출구 도보 1분</p></div>
+  <div class="open-map"><a href="#" onclick="return false">네이버 지도</a><a href="#" onclick="return false">카카오 지도</a></div>
+ </div><div class="map"><img src="./assets/map.jpg" alt="365서울예담치과의원 약도"></div></div>
+</section></main>
+<div class="fixed-menu">
+ <div class="top-menu"><ul class="list"><li class="item"><a href="inquiry.html"><div><svg viewBox="0 0 24 24" fill="none" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v3M17 3v3M4 9h16M5 5h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg></div><span>예약</span></a></li><li class="item"><a href="tel:010-4894-4905"><div><svg viewBox="0 0 24 24" fill="none" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h4l2 5-2.5 1.5a12 12 0 005 5L16 12l5 2v4a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1z"/></svg></div><span>전화</span></a></li><li class="item"><a href="#"><div><svg viewBox="0 0 24 24" fill="none" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4C7 4 3 7.2 3 11.1c0 2.4 1.6 4.6 4 5.8l-.8 3 3.4-1.9c.8.2 1.6.3 2.4.3 5 0 9-3.2 9-7.2S17 4 12 4z"/></svg></div><span>카톡</span></a></li><li class="item"><a href="location.html"><div><svg viewBox="0 0 24 24" fill="none" stroke="#606060" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z M12 10a2 2 0 100-4 2 2 0 000 4z"/></svg></div><span>오시는길</span></a></li></ul>
+  <button type="button" class="btn-top"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#606060" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>TOP</button></div>
+ <button type="button" class="btn"><span></span></button>
+ <button type="button" class="btn-top2"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#606060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>TOP</button>
+</div>
+<div class="quick-inquiry">
+ <button type="button" class="open-btn">빠른상담신청 <span class="up">▲</span><span class="down">▼</span></button>
+ <div class="open-bx"><div class="container"><div class="form-bx">
+  <div class="icon"><svg viewBox="0 0 40 40" width="40" height="40" fill="none" stroke="#fff" stroke-width="1.4"><path d="M10 6h6l3 8-4 2.4a19 19 0 008.6 8.6L26 21l8 3v6a2 2 0 01-2 2A28 28 0 018 8a2 2 0 012-2z"/></svg></div>
+  <form onsubmit="alert('데모 템플릿입니다. 실제 상담 신청은 전송되지 않습니다.');return false;">
+   <p class="legend">빠른상담신청</p>
+   <div class="form-input">
+    <input type="text" placeholder="이름" aria-label="이름">
+    <input type="tel" placeholder="연락처" aria-label="연락처">
+    <select aria-label="상담과목"><option>상담 과목</option><option>임플란트</option><option>라미네이트</option><option>치아교정</option><option>보철치료</option></select>
+   </div>
+   <div class="chk-bx"><input type="checkbox" id="qagree"><label for="qagree">개인정보 수집·이용 동의</label></div>
+   <button type="submit">상담신청</button>
+  </form>
+ </div></div></div>
+</div>
+<footer id="footer" class="footer"><div class="container"><div class="footer-wrap">
+ <div class="left"><div class="wrap">
+  <p class="txt">치료를 넘어, 신뢰를 심는</p>
+  <span class="logo"><svg viewBox="0 0 508 91" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="365서울예담치과의원"><path d="M36 12c11 0 18 7 18 17 0 6-3 11-7 15 7 5 11 12 11 21 0 13-10 22-24 22S10 78 10 65c0-9 4-16 11-21-4-4-7-9-7-15 0-10 7-17 18-17z" fill="#fff"/><text x="72" y="44" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="34" font-weight="800" fill="#fff" letter-spacing="-1">365서울예담</text><text x="72" y="76" font-family="Pretendard Variable,Pretendard,sans-serif" font-size="30" font-weight="600" fill="#fff" letter-spacing="-1">치과의원</text></svg></span>
+  <p class="location">화곡역 8번 출구 도보 1분 <span>예담M빌딩 4층</span></p>
+ </div></div>
+ <div class="center"><div class="wrap">
+  <ul class="info">
+   <li><span>365서울예담치과의원</span><p>서울시 강서구 강서로 179, 예담M빌딩 3F, 4F</p></li>
+   <li><div>대표자 이진수</div><div>사업자등록번호 266-07-03678</div></li>
+   <li><div>통신판매업신고 제2026-서울강남-00480호</div></li>
+   <li><span>TEL</span><p>010-4894-4905</p></li>
+  </ul>
+  <ul class="policy"><li><a href="privacy.html">개인정보처리방침</a></li><li><a href="terms.html">이용약관</a></li><li><a href="non-covered.html">비급여안내</a></li></ul>
+  <p class="copy">Copyright © 365서울예담치과의원 All Rights Reserved.</p>
+ </div></div>
+ <div class="right"><div class="wrap">
+  <ul class="time-table">
+   <li><p class="date">평일 <span class="badge">야간진료</span></p><p class="time">오전 09:30 ~ 오후 20:00</p></li>
+   <li><p class="date">주말·공휴일</p><p class="time">오전 09:30 ~ 오후 17:00</p></li>
+   <li><p class="date">휴게시간</p><p class="time">오후 12:30 ~ 오후 14:00</p></li>
+  </ul>
+ </div></div>
+</div></div></footer>
+<script src="./assets/site.js"></script>
+<script>
+/* 메인 비주얼 자동 재생 */
+(function(){
+var slides=[].slice.call(document.querySelectorAll('.dental-visual .slide')),
+    navs=[].slice.call(document.querySelectorAll('.dental-visual .costom-pageNav li')),i=0,t;
+function go(n){i=(n+slides.length)%slides.length;slides.forEach(function(s,k){s.classList.toggle('on',k===i)});
+ navs.forEach(function(s,k){s.classList.remove('active')});
+ void navs[i].offsetWidth;navs[i].classList.add('active');
+ clearTimeout(t);t=setTimeout(function(){go(i+1)},6000)}
+navs.forEach(function(b,k){b.addEventListener('click',function(){go(k)})});
+if(slides.length)go(0);
+/* 인트로 */
+var intro=document.querySelector('.intro2-bx');
+if(intro){try{if(sessionStorage.getItem('f_intro')==='1'){intro.remove()}else{sessionStorage.setItem('f_intro','1');setTimeout(function(){intro.classList.add('hide')},2200);setTimeout(function(){intro.remove()},3200)}}catch(e){setTimeout(function(){intro.classList.add('hide')},2200)}}
+/* 팝업 */
+var pop=document.querySelector('.main-popup');
+if(pop){try{if(localStorage.getItem('f_pop')!==new Date().toDateString())pop.classList.add('on')}catch(e){pop.classList.add('on')}
+ pop.querySelector('.today').addEventListener('click',function(){try{localStorage.setItem('f_pop',new Date().toDateString())}catch(e){}pop.classList.remove('on')});
+ pop.querySelector('.close').addEventListener('click',function(){pop.classList.remove('on')});}
+/* 신뢰 수치 등장 */
+var s1=document.querySelector('.hy-section1');
+if(s1){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)s1.classList.add('on')})},{threshold:.25}).observe(s1)}
+/* 시니어 목록 ↔ 사진 */
+(function(){var items=[].slice.call(document.querySelectorAll('.dental-senior .case-list .item')),
+ bf=document.querySelector('.dental-senior .case-img .before img'),af=document.querySelector('.dental-senior .case-img .after img'),
+ bd=document.querySelector('.dental-senior .case-img .before .txt span'),ad=document.querySelector('.dental-senior .case-img .after .txt span'),
+ cur=document.querySelector('.dental-senior .pager .cur'),idx=0,timer;
+ function show(n){idx=(n+items.length)%items.length;var it=items[idx];
+  bf.src='./assets/'+it.dataset.before;af.src='./assets/'+it.dataset.after;
+  bd.textContent='치료 전 '+it.dataset.dbefore;ad.textContent='치료 후 '+it.dataset.dafter;
+  cur.textContent=idx+1;items.forEach(function(o,k){o.style.opacity=k===idx?'1':'.6'})}
+ function play(){timer=setInterval(function(){show(idx+1)},4000)}
+ items.forEach(function(it,k){it.addEventListener('click',function(){show(k)})});
+ if(items.length){show(0);play();
+  var pp=document.querySelector('.dental-senior .swiper-play-pause');
+  pp.addEventListener('click',function(){if(timer){clearInterval(timer);timer=null;pp.textContent='▶'}else{play();pp.textContent='❚❚'}})}
+})();
+/* 치료사례 페어 슬라이더 */
+[].slice.call(document.querySelectorAll('.dental-case .slider')).forEach(function(sl){
+ var pairs=[].slice.call(sl.querySelectorAll('.pair')),i=0,pg=sl.querySelector('.pagination b');
+ function go(n){i=(n+pairs.length)%pairs.length;pairs.forEach(function(p,k){p.classList.toggle('on',k===i)});if(pg)pg.textContent=i+1;}
+ var p=sl.querySelector('.c-prev'),nx=sl.querySelector('.c-next');
+ if(p)p.addEventListener('click',function(){go(i-1)});if(nx)nx.addEventListener('click',function(){go(i+1)});});
+/* 대표원장 슬라이드 */
+(function(){var areas=[].slice.call(document.querySelectorAll('.dental-doctorstab .tab-area')),
+ tabs=[].slice.call(document.querySelectorAll('.dental-doctorstab .mobile-tabs li')),i=0;
+ function go(n){i=(n+areas.length)%areas.length;areas.forEach(function(a,k){a.classList.toggle('on',k===i)});
+  tabs.forEach(function(t,k){t.classList.toggle('on',k===i)})}
+ var p=document.querySelector('.doctors-prev'),nx=document.querySelector('.doctors-next');
+ if(p)p.addEventListener('click',function(){go(i-1)});if(nx)nx.addEventListener('click',function(){go(i+1)});
+ tabs.forEach(function(t,k){t.addEventListener('click',function(){go(k)})});
+ if(areas.length)go(0);})();
+/* 약속 3장 */
+(function(){var sl=[].slice.call(document.querySelectorAll('.hy-section4 .slide')),
+ dots=[].slice.call(document.querySelectorAll('.hy-section4 .dots button')),i=0,t;
+ function go(n){i=(n+sl.length)%sl.length;sl.forEach(function(s,k){s.classList.toggle('on',k===i)});
+  dots.forEach(function(d,k){d.classList.toggle('on',k===i)});clearTimeout(t);t=setTimeout(function(){go(i+1)},5000)}
+ dots.forEach(function(d,k){d.addEventListener('click',function(){go(k)})});
+ if(sl.length)go(0);})();
+})();
+</script>
+</body>
+</html>
