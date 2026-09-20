@@ -37,7 +37,7 @@ var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isInter
 $$('[data-aos]').forEach(function(el){io.observe(el)});
 /* 숫자 카운트 */
 $$('[data-count]').forEach(function(el){var o=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;o.disconnect();
- var to=parseFloat(el.dataset.count),dec=(el.dataset.count.split('.')[1]||'').length,t0=performance.now(),dur=1600;
+ var to=parseFloat(el.dataset.count),dec=(el.dataset.count.split('.')[1]||'').length,t0=performance.now(),dur=1600;el.textContent='0';
  (function f(t){var p=Math.min(1,(t-t0)/dur),v=to*(1-Math.pow(1-p,3));el.textContent=v.toLocaleString('ko-KR',{minimumFractionDigits:dec,maximumFractionDigits:dec});if(p<1)requestAnimationFrame(f)})(t0)})},{threshold:.4});o.observe(el)});
 /* 탭 (data-tab 그룹) */
 $$('[data-tabgroup]').forEach(function(g){var btns=$$('[data-tab]',g),panes=$$('[data-pane]',g);
