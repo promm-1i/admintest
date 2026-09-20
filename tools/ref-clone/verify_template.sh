@@ -94,6 +94,7 @@ with sync_playwright() as p:
     b=p.chromium.launch(); pg=b.new_page(viewport={'width':1280,'height':960})
     pg.goto(f'file:///C:/web-project/mintcl-netlify-spa/public/templates/{slug}/index.html'); pg.wait_for_timeout(2500)
     pg.evaluate("document.querySelectorAll('video.bg').forEach(v=>v.remove())")
+    pg.evaluate("document.querySelectorAll('.main-popup,.intro-splash,.layer-popup').forEach(v=>v.remove())")  # 첫 방문 팝업은 썸네일에서 뺀다
     pg.evaluate("document.querySelectorAll('.rv').forEach(e=>e.classList.add('on'))"); pg.wait_for_timeout(1200)
     pg.screenshot(path=f'public/thumbs/{slug}.jpg', type='jpeg', quality=74)
     from PIL import Image; im=Image.open(f'public/thumbs/{slug}.jpg'); os.makedirs('public/thumbs/sm', exist_ok=True); im.resize((640, round(im.height*640/im.width)), Image.LANCZOS).save(f'public/thumbs/sm/{slug}.jpg', 'JPEG', quality=72, optimize=True, progressive=True)  # 히어로 캐러셀용 축소본
