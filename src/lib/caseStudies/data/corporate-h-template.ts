@@ -15,6 +15,25 @@ const study: CaseStudy = {
     { label: "이런 곳에 맞습니다", value: "배터리 · 전자부품 · 소재 제조기업, 생산 거점이 여러 곳인 회사, 산업별로 제품을 나눠 보여줄 회사" },
   ],
   mainShot: "/cases/corporate-h/main.webp",
+  capabilities: {
+    label: "17-PAGE BATTERY BUSINESS SYSTEM",
+    title: "산업별 솔루션·제품·생산거점·문의까지 17개 화면으로 설계했습니다",
+    body: "배터리 이미지를 보여 주는 데서 끝나지 않고 산업별 적용, 셀·소재 상세, 글로벌 생산망과 자료·FAQ·문의까지 구매 검토 흐름을 제공합니다.",
+    stats: [
+      { value: "17", label: "실제 구축 화면", note: "회사·제품·인재·지원·뉴스" },
+      { value: "5", label: "산업 솔루션", note: "산업 탭과 폼팩터 연결" },
+      { value: "6", label: "사업장", note: "본사·연구소·공장·해외법인" },
+      { value: "10", label: "문의 입력 항목", note: "첨부파일 포함 사업 문의" },
+    ],
+    groups: [
+      { label: "산업별 솔루션", title: "적용 산업을 고르면 적합한 셀·모듈·팩 구성이 바뀝니다", body: "전기차와 산업 장비, ESS 등 사용 환경에 따라 필요한 폼팩터와 주요 수주 이력을 탭으로 확인합니다.", items: ["산업 솔루션 탭 5개", "셀·모듈·팩 폼팩터", "산업별 주요 수주 이력"], img: "/cases/corporate-h/page-solution.webp", caption: "제품 · 산업별 솔루션", file: "solution.html" },
+      { label: "원통형 상세", title: "핵심 경쟁력부터 생산지역까지 다섯 구역을 따라 읽습니다", body: "긴 제품 화면에서 왼쪽 항목 메뉴가 따라오며 경쟁력, 규격, 산업 적용과 생산거점을 빠르게 이동합니다.", items: ["고정 항목 메뉴 5개", "21~46mm 셀 규격", "산업 적용·생산지역·수주"], img: "/cases/corporate-h/page-cylindrical.webp", caption: "제품 · 원통형 셀", file: "cylindrical.html" },
+      { label: "배터리 소재", title: "NCM 소재의 구성과 장점, 적용 산업을 독립 화면으로 설명합니다", body: "니켈·코발트·망간의 역할과 소재 경쟁력을 제품 셀 화면과 구분해 기술 구매자가 필요한 정보를 제공합니다.", items: ["NCM 구성 원소 3개", "소재별 특장점", "산업 적용과 생산지역"], img: "/cases/corporate-h/page-material.webp", caption: "기술 · 배터리 소재", file: "material.html" },
+      { label: "글로벌 생산망", title: "국가 탭과 지도에서 여섯 사업장의 역할과 연락처를 확인합니다", body: "본사·연구소·공장과 해외 법인을 지역별로 걸러 보고 각 거점의 주소와 전화, 위치를 찾습니다.", items: ["사업장 6곳", "전체·한국·아시아·유럽 탭", "거점 목록과 지도"], img: "/cases/corporate-h/page-network.webp", caption: "기업 · 글로벌 사업장", file: "network.html" },
+      { label: "자료·FAQ·문의", title: "자료 검색과 FAQ, 첨부파일 문의를 고객지원 흐름으로 묶었습니다", body: "카탈로그와 자료를 분류·검색하고 자주 묻는 내용을 확인한 뒤 해결되지 않은 내용은 열 칸 문의 폼으로 접수합니다.", items: ["자료 분류와 검색", "FAQ 분류 탭·펼침", "10개 항목 문의·첨부파일"], img: "/cases/corporate-h/page-inquiry.webp", caption: "고객지원 · 문의하기", file: "inquiry.html" },
+      { label: "뉴스·채용", title: "뉴스룸과 채용정보를 목록·상세·FAQ 구조로 운영합니다", body: "기업 소식은 검색 가능한 아카이브로 쌓고 지원자는 인재상과 채용 절차, 자주 묻는 질문을 확인합니다.", items: ["뉴스 목록·상세와 검색", "인재상·채용 절차 4단계", "채용 FAQ 펼침"], img: "/cases/corporate-h/page-newsroom.webp", caption: "미디어 · 뉴스룸", file: "newsroom.html" },
+    ],
+  },
   pages: [
     {
       name: "홈",

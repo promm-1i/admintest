@@ -15,6 +15,25 @@ const study: CaseStudy = {
     { label: "이런 곳에 맞습니다", value: "주조 · 단조 · 금속가공 · 기계부품 제조기업, 재질과 인증을 보여줘야 하는 회사, 해외 거래처가 있는 회사" },
   ],
   mainShot: "/cases/corporate-g/main.webp",
+  capabilities: {
+    label: "21-PAGE FOUNDRY BUSINESS SYSTEM",
+    title: "기술·공정·설비·제품·견적을 21개 제조영업 화면으로 구현했습니다",
+    body: "쇳물과 공장 이미지를 강조한 메인 뒤에 기술 검증, 생산 공정과 설비, 재질별 제품, 인증과 파일 첨부 견적까지 실제 거래에 필요한 정보를 제공합니다.",
+    stats: [
+      { value: "21", label: "실제 구축 화면", note: "회사·공장·제품·고객지원" },
+      { value: "5", label: "핵심 기술", note: "용해부터 열처리까지" },
+      { value: "8", label: "생산 공정", note: "단계 카드와 사진 전환" },
+      { value: "4", label: "제품군", note: "펌프·밸브·산업기계 부품" },
+    ],
+    groups: [
+      { label: "생산공정 8단계", title: "도면 검토부터 제품 검사까지 공정 카드를 눌러 확인합니다", body: "여덟 공정의 번호와 아이콘을 선택하면 아래 사진과 설명이 즉시 바뀌어 생산 흐름과 품질관리 지점을 이해하게 합니다.", items: ["공정 카드 8개", "사진·설명 동적 전환", "이전·다음 단계 이동"], img: "/cases/corporate-g/page-process.webp", caption: "생산 · 공정 8단계", file: "process.html" },
+      { label: "핵심기술 5종", title: "용해·측정·해석·주형·열처리 기술을 독립 장면으로 설명합니다", body: "주조 품질을 결정하는 다섯 기술을 사진과 기술 문장으로 번갈아 배치해 제조 경쟁력의 근거를 보여 줍니다.", items: ["핵심 기술 5개", "기술별 현장 이미지", "품질·생산설비 화면 연결"], img: "/cases/corporate-g/page-technology.webp", caption: "기술 · 핵심기술", file: "technology.html" },
+      { label: "설비·인증", title: "생산·검사 설비의 규격과 인증서 11장을 검증 자료로 제공합니다", body: "설비는 용도별 표로 수량과 규격을 비교하고 인증서는 분류 가능한 격자로 제공해 거래 전 확인을 돕습니다.", items: ["생산·검사 설비 분류", "설비명·규격·수량 표", "인증서 11장과 분류 탭"], img: "/cases/corporate-g/page-equipment.webp", caption: "생산 · 설비 현황", file: "equipment.html" },
+      { label: "제품 4분류", title: "재질 코드와 용도에 따라 네 제품군을 상세 목록으로 제공합니다", body: "일반·고압 펌프, 밸브와 산업기계 부품을 사진, ASTM·JIS 코드와 제품명으로 정리합니다.", items: ["제품군 탭 4개", "제품 사진과 재질 코드", "제품별 이름과 적용 분야"], img: "/cases/corporate-g/page-product-pump.webp", caption: "제품 · 펌프 부품", file: "product-pump.html" },
+      { label: "파트너·뉴스", title: "국내외 거래처와 기업 소식을 신뢰 콘텐츠로 운영합니다", body: "파트너 로고와 최신 뉴스 목록·상세를 분리해 납품 관계와 회사 활동을 지속적으로 축적합니다.", items: ["파트너 로고 12개", "뉴스 카드 목록", "기사 상세와 관련 소식"], img: "/cases/corporate-g/page-news.webp", caption: "미디어 · 회사소식", file: "news.html" },
+      { label: "견적·연락", title: "도면과 참고자료까지 받는 13개 항목 견적 폼을 제공합니다", body: "제품 분류와 재질, 수량, 요구사항에 파일과 링크를 함께 받아 담당자가 실제 견적 검토에 활용하도록 구성했습니다.", items: ["견적 입력 13개 항목", "파일 첨부 2개·참고 링크 2개", "본사·영업소 연락처와 지도"], img: "/cases/corporate-g/page-inquiry.webp", caption: "고객지원 · 견적문의", file: "inquiry.html" },
+    ],
+  },
   pages: [
     {
       name: "홈",

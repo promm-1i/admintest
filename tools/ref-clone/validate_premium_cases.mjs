@@ -3,11 +3,25 @@ import { chromium } from "playwright";
 const base = "http://127.0.0.1:4173";
 const slugs = [
   "clinic-f-template",
-  "corporate-n-template",
-  "corporate-o-template",
+  "artist-a-template",
+  "rentcar-g-template",
+  "rentcar-f-template",
+  "estate-f-template",
+  "estate-g-template",
+  "wedding-a-template",
+  "corporate-i-template",
+  "corporate-s-template",
   "corporate-q-template",
   "corporate-r-template",
-  "corporate-s-template",
+  "corporate-o-template",
+  "corporate-n-template",
+  "corporate-m-template",
+  "corporate-l-template",
+  "corporate-k-template",
+  "corporate-j-template",
+  "corporate-h-template",
+  "corporate-g-template",
+  "corporate-f-template",
 ];
 const viewports = [
   { width: 1440, height: 900 },

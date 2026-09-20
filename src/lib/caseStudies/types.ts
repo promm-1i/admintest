@@ -23,6 +23,22 @@ export type CaseStudy = {
   pagesLabel?: string;
   pagesTitle?: string;
   pages?: { name: string; file: string; img: string; desc: string; items: string[] }[];
+  /** 화면 수와 기능 범위가 큰 디자인 — 대표 기능군을 직접 바꿔 보며 확인한다 */
+  capabilities?: {
+    label?: string;
+    title: string;
+    body: string;
+    stats: { value: string; label: string; note: string }[];
+    groups: {
+      label: string;
+      title: string;
+      body: string;
+      items: string[];
+      img: string;
+      caption: string;
+      file: string;
+    }[];
+  };
   /** 한 페이지 디자인 — 위에서부터 이어지는 섹션 흐름 */
   flowLabel?: string;
   flowTitle?: string;

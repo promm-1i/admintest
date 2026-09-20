@@ -16,6 +16,25 @@ const study: CaseStudy = {
     { label: "맞춤 적용", value: "사업부 · 해외 거점 · 성과 수치 · 투자정보 · 브랜드 체계 변경 가능" },
   ],
   mainShot: "/cases/corporate-n/main.webp",
+  capabilities: {
+    label: "22-PAGE GLOBAL GROUP SYSTEM",
+    title: "사업·글로벌 거점·ESG·IR을 22개 화면의 그룹 포털로 구성했습니다",
+    body: "기업 이미지만 강조하는 소개 페이지가 아니라 사업부, 해외 고객, 투자자와 이해관계자가 각자 필요한 정보를 바로 찾는 구조입니다.",
+    stats: [
+      { value: "22", label: "실제 구축 화면", note: "그룹·사업·ESG·IR·뉴스" },
+      { value: "5", label: "사업 분야", note: "소재·인프라·디지털 사업" },
+      { value: "10", label: "글로벌 권역", note: "국가·사업장·R&D 거점" },
+      { value: "3", label: "ESG 세부 화면", note: "ESG·환경·윤리" },
+    ],
+    groups: [
+      { label: "사업 5분야", title: "다섯 사업의 역할과 연결 관계를 한 구조에서 비교합니다", body: "그룹 전체 사업 지도를 먼저 이해하고 소재·산업·디지털 등 각 사업 상세로 이동하도록 구성했습니다.", items: ["사업 분야 5개", "사업별 이미지와 핵심 역량", "개별 사업 상세 연결"], img: "/cases/corporate-n/page-business.webp", caption: "사업 · 그룹 사업영역", file: "business.html" },
+      { label: "글로벌 10권역", title: "국가·사업장·연구 거점을 지도와 수치로 탐색합니다", body: "해외 네트워크를 단순 지도 이미지로 끝내지 않고 권역별 거점과 사업 성격을 구분해 확인하게 합니다.", items: ["글로벌 10개 권역", "30개국·126개 거점 수치", "권역별 법인과 사업 정보"], img: "/cases/corporate-n/page-network.webp", caption: "그룹 · 글로벌 네트워크", file: "network.html" },
+      { label: "성과·연혁", title: "주요 성과와 성장 과정을 가로 트랙과 시대별 기록으로 보여 줍니다", body: "대표 성과는 스크롤 진행에 맞춰 옆으로 이동하고 연혁은 여섯 시대로 나눠 그룹의 성장 맥락을 전달합니다.", items: ["스크롤 연동 성과 트랙", "연혁 6개 시대", "핵심 이정표와 수치"], img: "/cases/corporate-n/point-milestones.webp", caption: "홈 · 주요 성과", file: "milestones.html" },
+      { label: "ESG 경영", title: "ESG 전략과 환경·윤리 활동을 세부 화면으로 분리했습니다", body: "목표 선언, 환경 과제와 윤리 원칙을 각각 읽을 수 있어 지속가능경영 자료를 분야별로 운영할 수 있습니다.", items: ["ESG 전략과 목표", "환경경영 세부 활동", "윤리경영 원칙"], img: "/cases/corporate-n/page-esg.webp", caption: "ESG · 전략과 활동", file: "esg.html" },
+      { label: "IR·재무·공시", title: "투자자가 필요한 재무지표와 공시 자료를 별도 체계로 제공합니다", body: "IR 개요에서 재무상태와 손익을 비교하고 공시 목록으로 이동하는 투자정보 흐름을 갖췄습니다.", items: ["IR 정보 구조", "연도별 재무 비교", "공시 목록과 자료 연결"], img: "/cases/corporate-n/page-finance.webp", caption: "IR · 재무정보", file: "finance.html" },
+      { label: "뉴스 아카이브", title: "그룹 소식은 목록과 상세 화면으로 지속 운영합니다", body: "대표 뉴스와 전체 목록, 개별 기사 화면을 분리해 사업·ESG·IR 업데이트를 축적할 수 있습니다.", items: ["뉴스 카드 목록", "기사 상세 화면", "사업·ESG 관련 콘텐츠 연결"], img: "/cases/corporate-n/page-news.webp", caption: "미디어 · 뉴스 목록", file: "news.html" },
+    ],
+  },
   pagesLabel: "PREVIEW",
   pagesTitle: "주요 화면 미리보기",
   pages: [

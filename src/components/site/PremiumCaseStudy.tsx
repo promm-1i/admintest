@@ -57,6 +57,130 @@ function PhoneFrame({ src, alt }: { src: string; alt: string }) {
   );
 }
 
+function CapabilityShowcase({
+  capabilities,
+  brandColor,
+  liveUrl,
+}: {
+  capabilities: NonNullable<CaseStudy["capabilities"]>;
+  brandColor: string;
+  liveUrl: string;
+}) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const active = capabilities.groups[activeIndex] ?? capabilities.groups[0];
+  if (!active) return null;
+
+  return (
+    <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
+      <div className="overflow-hidden rounded-3xl bg-neutral-950 text-white">
+        <div className="grid gap-10 border-b border-white/10 px-6 py-10 sm:px-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:px-14 lg:py-14">
+          <Reveal>
+            <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: brandColor }}>
+              {capabilities.label ?? "FUNCTION SYSTEM"}
+            </p>
+            <h2 className="mt-4 max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl break-keep">
+              {capabilities.title}
+            </h2>
+            <p className="mt-5 max-w-2xl text-base leading-[1.9] text-white/60 break-keep">{capabilities.body}</p>
+          </Reveal>
+          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10">
+            {capabilities.stats.map((stat) => (
+              <div key={stat.label} className="bg-neutral-950 p-5 sm:p-6">
+                <strong className="block text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: brandColor }}>
+                  {stat.value}
+                </strong>
+                <span className="mt-2 block text-sm font-bold text-white">{stat.label}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-white/45 break-keep">{stat.note}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="grid min-w-0 lg:grid-cols-[340px_minmax(0,1fr)]">
+          <div className="min-w-0 border-b border-white/10 lg:border-b-0 lg:border-r">
+            <div className="flex gap-2 overflow-x-auto p-4 sm:p-6 lg:block lg:space-y-1 lg:overflow-visible lg:p-8">
+              {capabilities.groups.map((group, i) => {
+                const selected = i === activeIndex;
+                return (
+                  <button
+                    key={group.label}
+                    type="button"
+                    aria-pressed={selected}
+                    onClick={() => setActiveIndex(i)}
+                    className={cn(
+                      "group min-w-[190px] rounded-xl border px-4 py-4 text-left transition-colors lg:block lg:w-full lg:min-w-0 lg:border-0 lg:border-b lg:border-white/10 lg:px-3 lg:py-5",
+                      selected
+                        ? "border-white/20 bg-white/10 text-white"
+                        : "border-white/10 text-white/45 hover:bg-white/5 hover:text-white",
+                    )}
+                  >
+                    <span className="font-mono text-[11px] font-bold" style={{ color: selected ? brandColor : undefined }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className="ml-3 text-sm font-bold sm:text-base">{group.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="min-w-0 p-5 sm:p-8 lg:p-12">
+            <div className="grid items-start gap-8 xl:grid-cols-[minmax(0,4fr)_minmax(280px,3fr)]">
+              <RevealScale key={active.img}>
+                <a
+                  href={`${liveUrl}${active.file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block overflow-hidden rounded-2xl bg-white ring-1 ring-white/10"
+                  aria-label={`${active.label} 실제 화면 새 창으로 보기`}
+                >
+                  <img
+                    src={active.img}
+                    srcSet={shotSrcSet(active.img, 960)}
+                    sizes="(min-width: 1280px) 520px, (min-width: 1024px) 55vw, 92vw"
+                    alt={active.caption}
+                    loading="lazy"
+                    className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.015]"
+                  />
+                </a>
+                <p className="mt-3 text-xs text-white/40">{active.caption}</p>
+              </RevealScale>
+              <div>
+                <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: brandColor }}>
+                  SELECTED FUNCTION
+                </p>
+                <h3 className="mt-3 break-words text-2xl font-bold leading-snug tracking-tight sm:text-3xl sm:break-keep">
+                  {active.title}
+                </h3>
+                <p className="mt-4 break-words text-sm leading-[1.9] text-white/60 sm:text-base sm:break-keep">
+                  {active.body}
+                </p>
+                <ul className="mt-6 space-y-3 border-t border-white/10 pt-6">
+                  {active.items.map((item) => (
+                    <li key={item} className="flex items-start gap-2.5 text-sm text-white/85">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color: brandColor }} />
+                      <span className="break-words sm:break-keep">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href={`${liveUrl}${active.file}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-7 inline-flex items-center gap-1.5 text-sm font-bold text-white hover:underline"
+                >
+                  이 기능 실제 화면 보기
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sample; study: CaseStudy }) {
   const study = toCustomerFacingCaseStudy(sourceStudy);
   const code = getDesignCode(sample);
@@ -147,6 +271,10 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
           ))}
         </div>
       </section>
+
+      {study.capabilities && (
+        <CapabilityShowcase capabilities={study.capabilities} brandColor={study.brandColor} liveUrl={liveUrl} />
+      )}
 
       {/* ③-2 한 페이지 디자인 — 위에서부터 섹션이 어떻게 이어지는지 */}
       {study.flow && study.flow.length > 0 && (

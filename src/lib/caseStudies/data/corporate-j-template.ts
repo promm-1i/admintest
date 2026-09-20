@@ -15,6 +15,25 @@ const study: CaseStudy = {
     { label: "이런 곳에 맞습니다", value: "기계 · 설비 · 장비 제조기업, 기종이 많아 필터 검색이 필요한 회사, 대리점 · 서비스센터가 여러 곳인 회사" },
   ],
   mainShot: "/cases/corporate-j/main.webp",
+  capabilities: {
+    label: "23-PAGE MACHINE BUSINESS SYSTEM",
+    title: "제품 필터·사양·대리점·A/S까지 23개 제조영업 화면으로 연결했습니다",
+    body: "공장 영상과 스크롤 장면 뒤에 기종 탐색, 상세 사양과 견적, 자동화·소프트웨어, 서비스망과 교육까지 실제 구매·지원 흐름을 갖췄습니다.",
+    stats: [
+      { value: "23", label: "실제 구축 화면", note: "회사·제품·미디어·고객지원" },
+      { value: "6", label: "제품·솔루션 화면", note: "라인업부터 상세·자동화까지" },
+      { value: "7", label: "사업소·대리점", note: "지역 검색과 지도" },
+      { value: "5", label: "고객지원 화면", note: "A/S·문의·견적·교육·카탈로그" },
+    ],
+    groups: [
+      { label: "제품 필터", title: "기종·시리즈·이송거리 조건으로 필요한 공작기계를 좁혀 찾습니다", body: "수직·수평·5축 기종과 시리즈, X·Y·Z 이송거리 조건을 조합해 제품 카드를 실시간으로 정리합니다.", items: ["기종 탭 3개", "시리즈와 이송거리 필터", "제품 카드 핵심 사양"], img: "/cases/corporate-j/page-list.webp", caption: "제품 · 필터형 목록", file: "list.html" },
+      { label: "제품 상세", title: "특징·영상·사양·관련 제품과 문의를 고정 탭으로 확인합니다", body: "구매 검토에 필요한 이미지와 사양표, 가공 영상, 관련 기종을 한 화면에 모으고 제품 정보가 포함된 문의 폼으로 연결합니다.", items: ["고정 탭과 제품 갤러리", "상세 사양·가공 영상", "제품 문의와 카탈로그"], img: "/cases/corporate-j/page-detail.webp", caption: "제품 · 상세와 사양", file: "detail.html" },
+      { label: "자동화·SW", title: "자동화 설비와 제조 소프트웨어를 별도 솔루션으로 설명합니다", body: "AWC·SMP·GR Series와 생산관리 소프트웨어를 제품 판매와 분리해 시스템 구축 역량으로 보여 줍니다.", items: ["자동화 설비 3종", "소프트웨어 목록·상세", "설비별 적용 구조"], img: "/cases/corporate-j/page-automation.webp", caption: "솔루션 · 자동화 설비", file: "automation.html" },
+      { label: "사업소 7곳", title: "국내·해외 영업망을 지역 선택과 검색, 지도로 탐색합니다", body: "가까운 사업소와 대리점의 주소·전화·길찾기 정보를 확인해 제품 상담과 서비스 접점으로 연결합니다.", items: ["국내·해외 영업 탭", "지역 선택과 검색", "사업소 7곳·지도·길찾기"], img: "/cases/corporate-j/page-network.webp", caption: "영업망 · 사업소와 대리점", file: "network.html" },
+      { label: "견적·A/S", title: "견적·1:1 문의·A/S 접수를 목적별 양식으로 분리했습니다", body: "제품 도입 전 견적과 일반 문의, 설치 후 서비스 요청이 섞이지 않도록 각각 필요한 항목과 첨부 자료를 받습니다.", items: ["제품 견적 요청", "1:1 기술 문의", "A/S 접수와 방문 예약"], img: "/cases/corporate-j/point-inquiry.webp", caption: "고객지원 · 문의와 접수", file: "estimate.html" },
+      { label: "미디어·인재", title: "뉴스·영상·교육·채용 정보를 운영형 콘텐츠로 제공합니다", body: "기업 소식과 제품 영상을 지속적으로 축적하고 고객 교육과 인재채용까지 방문 목적별 화면으로 연결합니다.", items: ["뉴스 목록·상세", "비디오 갤러리", "교육 안내·인재채용"], img: "/cases/corporate-j/page-video.webp", caption: "미디어 · 비디오 갤러리", file: "video.html" },
+    ],
+  },
   pages: [
     {
       name: "홈",

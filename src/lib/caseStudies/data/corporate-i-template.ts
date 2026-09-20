@@ -16,6 +16,25 @@ const study: CaseStudy = {
     { label: "이런 곳에 맞습니다", value: "광학 · 정밀기계 · 방산 협력사, 제품 종류가 많은 부품 제조기업, 연구소 · 인증을 함께 보여줄 회사" },
   ],
   mainShot: "/cases/corporate-i/main.webp",
+  capabilities: {
+    label: "39-PAGE OPTICS PLATFORM",
+    title: "사업·제품·연구·ESG를 39개 실제 화면으로 연결했습니다",
+    body: "메인 장면만 보여 주는 제조기업 사이트가 아니라 제품 탐색과 문의, 연구 성과, 지속가능경영, 홍보와 채용까지 방문 목적별 흐름을 완성했습니다.",
+    stats: [
+      { value: "39", label: "실제 구축 화면", note: "메인과 목록·상세·검색 포함" },
+      { value: "7", label: "사업 분야", note: "우주·방산·산업·과학 광학" },
+      { value: "17", label: "제품 세부 분류", note: "4개 대분류 안에서 탐색" },
+      { value: "6", label: "ESG 화면", note: "안전·사회·윤리·인권·공정거래" },
+    ],
+    groups: [
+      { label: "사업 7분야", title: "우주부터 방산·산업·과학까지 사업별 적용 장면을 분리했습니다", body: "각 사업이 필요한 광학 기술과 적용 제품을 독립 페이지로 설명하고 관련 제품 탐색으로 이어집니다.", items: ["사업 분야 7개 독립 화면", "적용 제품과 산업 이미지", "사업에서 제품 목록으로 연결"], img: "/cases/corporate-i/page-space.webp", caption: "사업 분야 · 우주 광학", file: "space.html" },
+      { label: "제품 탐색", title: "4개 제품군과 17개 세부 분류를 탭으로 빠르게 찾습니다", body: "제품 수가 늘어나도 대분류와 세부 탭, 페이지 번호로 구조를 유지하며 원하는 사양의 제품을 탐색합니다.", items: ["대분류 4개·세부 분류 17개", "제품 카드와 핵심 사양", "검색·상세·문의 동선"], img: "/cases/corporate-i/page-products.webp", caption: "제품 · 분류형 목록", file: "products.html?cate=1" },
+      { label: "제품 상세", title: "제품 사진과 사양표, 설명과 문의를 한 화면에서 확인합니다", body: "세부 제품은 사양을 표로 비교하고 기술 설명을 읽은 뒤 같은 제품명이 포함된 문의 화면으로 이동할 수 있습니다.", items: ["제품 이미지와 핵심 소개", "상세 사양 표", "목록 복귀와 제품 문의"], img: "/cases/corporate-i/page-product-view.webp", caption: "제품 · 상세와 사양", file: "product-view.html?cate=1&cate2=001&idx=226" },
+      { label: "R&D·인증", title: "연구조직과 특허·인증 자료를 기술 신뢰의 근거로 제공합니다", body: "연구소, 연구개발 성과와 인증·특허를 별도 화면으로 나눠 기술기업이 필요한 검증 자료를 체계적으로 보여 줍니다.", items: ["연구소·R&D 성과 화면", "인증·특허 15장 더보기", "인증서 확대 보기"], img: "/cases/corporate-i/page-patents.webp", caption: "R&D · 인증 및 특허", file: "patents.html" },
+      { label: "ESG 6화면", title: "ESG 전략에서 윤리규범과 인권·안전 활동까지 확장됩니다", body: "정책 선언에 그치지 않고 분야별 가이드라인, 사회공헌과 규범 조항을 실제 읽고 탐색할 수 있게 구성했습니다.", items: ["ESG 전략과 정책 자료", "사회공헌·안전보건·인권", "윤리규범 펼침 목록"], img: "/cases/corporate-i/page-esg.webp", caption: "ESG · 정책과 활동", file: "esg.html" },
+      { label: "홍보·채용", title: "보도자료·미디어·IR과 채용 정보를 운영형 콘텐츠로 제공합니다", body: "게시물 목록과 상세, 영상 팝업, 브로슈어와 채용 직무 창을 분리해 회사 소식과 인재 정보를 지속적으로 갱신할 수 있습니다.", items: ["보도자료 목록·상세", "영상 팝업과 브로슈어", "직무 카드·지원 안내"], img: "/cases/corporate-i/page-press.webp", caption: "홍보 · 보도자료 아카이브", file: "press.html" },
+    ],
+  },
   pages: [
     {
       name: "홈",

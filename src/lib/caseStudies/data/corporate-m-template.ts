@@ -25,6 +25,25 @@ const study: CaseStudy = {
     },
   ],
   mainShot: "/cases/corporate-m/main.webp",
+  capabilities: {
+    label: "26-PAGE ENGINEERING SYSTEM",
+    title: "여섯 사업의 기술·인증·자료·문의 흐름을 26개 화면으로 구축했습니다",
+    body: "긴 메인 장면뿐 아니라 사업별 기술 설명, 검증 자료, 미디어와 채용, 카탈로그와 문의까지 산업설비 기업의 실제 영업·운영 범위를 보여 줍니다.",
+    stats: [
+      { value: "26", label: "실제 구축 화면", note: "회사·사업·홍보·지원·채용" },
+      { value: "6", label: "사업 상세", note: "반도체부터 데이터센터까지" },
+      { value: "4", label: "검증·자료 영역", note: "자격·카탈로그·리포트·미디어" },
+      { value: "4", label: "인재 화면", note: "인재상·채용·복지·스토리" },
+    ],
+    groups: [
+      { label: "사업 6분야", title: "산업별 설비와 공정 역량을 여섯 개 상세 화면으로 분리했습니다", body: "반도체·이차전지·극저온·불소수지·드라이룸·데이터센터 사업을 각 산업의 요구와 공정 이미지에 맞춰 설명합니다.", items: ["사업 분야 6개 독립 상세", "산업별 기술·공정 설명", "메인 솔루션에서 상세 연결"], img: "/cases/corporate-m/page-semiconductor.webp", caption: "사업 · 반도체 유틸리티", file: "business-semiconductor.html" },
+      { label: "데이터센터", title: "데이터센터 냉각과 유틸리티 역량을 별도 사업 화면으로 제공합니다", body: "설비 구조와 운영 안정성, 적용 영역을 전용 이미지와 문장으로 구성해 신규 산업 역량을 명확히 보여 줍니다.", items: ["데이터센터 설비 개요", "냉각·배관 적용 영역", "관련 기술과 상담 연결"], img: "/cases/corporate-m/page-datacenter.webp", caption: "사업 · 데이터센터", file: "business-datacenter.html" },
+      { label: "자격·인증", title: "보유 자격과 검증 자료를 프로젝트 신뢰의 근거로 제시합니다", body: "산업설비 발주자가 확인해야 하는 등록·인증·수행 자격을 목록과 상세 정보로 정리했습니다.", items: ["자격·인증 분류", "증빙 이미지와 설명", "회사 기술정보 연결"], img: "/cases/corporate-m/page-qualification.webp", caption: "기술 · 자격 및 인증", file: "qualification.html" },
+      { label: "미디어·실적", title: "뉴스와 프로젝트 미디어를 운영형 아카이브로 제공합니다", body: "현장 수행 사례와 기업 소식을 카드 목록으로 축적하고 개별 콘텐츠에서 사업 역량을 확인할 수 있습니다.", items: ["프로젝트 미디어 카드", "뉴스 목록·상세", "사업·채용 콘텐츠 연결"], img: "/cases/corporate-m/page-media.webp", caption: "홍보 · 미디어 아카이브", file: "media.html" },
+      { label: "인재·복지", title: "인재상·채용·복지와 구성원 이야기를 네 화면으로 연결합니다", body: "채용 공고만 두지 않고 조직문화와 복지, 실제 구성원 스토리를 함께 제공해 지원자가 회사를 이해하게 합니다.", items: ["인재상과 채용 정보", "복리후생 항목", "구성원 인터뷰·스토리"], img: "/cases/corporate-m/page-benefits.webp", caption: "채용 · 복리후생", file: "benefits.html" },
+      { label: "자료·상담", title: "카탈로그와 고객지원, 문의·제보 접수를 목적별로 분리했습니다", body: "제품·기술 자료를 내려받고 필요한 사업을 선택해 문의하거나 별도 지원·제보 화면을 이용할 수 있습니다.", items: ["카탈로그 자료실", "사업 분야 선택 문의 폼", "고객지원·제보 접수"], img: "/cases/corporate-m/page-inquiry.webp", caption: "고객지원 · 사업 문의", file: "inquiry.html" },
+    ],
+  },
   pagesLabel: "PREVIEW",
   pagesTitle: "주요 화면 미리보기",
   pages: [

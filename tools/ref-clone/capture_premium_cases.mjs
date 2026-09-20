@@ -56,7 +56,22 @@ const configs = [
   },
   {
     folder: "corporate-r",
-    pages: ["index", "company", "history", "business-grain", "business-container", "museum", "ethics", "news", "careers"],
+    pages: [
+      "index",
+      "company",
+      "history",
+      "business-grain",
+      "business-container",
+      "museum",
+      "ethics",
+      "news",
+      "careers",
+      "group-logistics",
+      "financial-position",
+      "gallery",
+      "bids",
+      "en",
+    ],
     points: [
       ["hero", "index", { y: 0, height: 900 }],
       ["group", "index", { y: 2400, height: 1080 }],

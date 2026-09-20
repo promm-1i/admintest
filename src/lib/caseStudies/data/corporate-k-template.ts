@@ -15,6 +15,25 @@ const study: CaseStudy = {
     { label: "이런 곳에 맞습니다", value: "식품 · 건강기능식품 · 제약 · 뷰티 제조기업, 브랜드가 여러 개인 회사, 연구 성과와 사회공헌을 함께 보여줄 회사" },
   ],
   mainShot: "/cases/corporate-k/main.webp",
+  capabilities: {
+    label: "22-PAGE HEALTHCARE BRAND SYSTEM",
+    title: "여섯 브랜드와 R&D·사회공헌·고객지원까지 22개 화면에 담았습니다",
+    body: "제품 이미지만 보여 주는 식품 사이트가 아니라 브랜드별 제품 탐색, 연구 성과, 맞춤 추천과 FAQ, 뉴스·공지까지 실제 운영 범위를 제공합니다.",
+    stats: [
+      { value: "22", label: "실제 구축 화면", note: "회사·브랜드·R&D·미디어·지원" },
+      { value: "6", label: "브랜드·제품 화면", note: "영양식 4종과 건강기능식품" },
+      { value: "10", label: "보유 소재 항목", note: "R&D 성과 아코디언" },
+      { value: "4", label: "사회공헌 탭", note: "재단별 사업과 활동" },
+    ],
+    groups: [
+      { label: "브랜드 6화면", title: "제품 성격이 다른 여섯 브랜드를 독립된 이야기로 소개합니다", body: "균형영양식·당케어·키즈·프로틴과 건강기능식품을 같은 틀에 가두지 않고 브랜드별 메시지와 제품 구성으로 분리했습니다.", items: ["브랜드 허브와 개별 상세", "원형 클립 전환 장면", "제품 특징과 섭취 정보"], img: "/cases/corporate-k/page-brand.webp", caption: "브랜드 · 전체 브랜드", file: "brand.html" },
+      { label: "제품 상세", title: "브랜드별 제품 특징과 영양 정보를 긴 상세 화면으로 제공합니다", body: "대표 제품은 용도와 핵심 성분, 섭취 대상을 읽고 관련 브랜드와 고객지원으로 이동하게 합니다.", items: ["제품 핵심 메시지", "영양·성분 정보", "관련 제품과 문의 연결"], img: "/cases/corporate-k/page-brand-balance.webp", caption: "브랜드 · 균형영양식", file: "brand-balance.html" },
+      { label: "R&D·특허", title: "연구센터·특허·보유 소재와 인증을 실제 탐색 기능으로 구성했습니다", body: "연구 인프라를 소개하고 특허 슬라이더, 소재 열 개 아코디언과 공장별 인증을 한 흐름에서 확인합니다.", items: ["R&D센터와 연구 분야", "특허 카드 슬라이더", "보유 소재 10개·공장 인증"], img: "/cases/corporate-k/page-rnd-result.webp", caption: "R&D · 연구 성과", file: "rnd-result.html" },
+      { label: "맞춤 제품 추천", title: "사용자의 답변에 따라 적합한 제품군을 단계별로 추천합니다", body: "방문 목적과 건강 관심사를 고르는 간단한 문답으로 브랜드 탐색을 돕고 결과 제품으로 연결합니다.", items: ["단계형 선택 질문", "응답에 따른 추천 결과", "추천 제품 상세 연결"], img: "/cases/corporate-k/point-recommend.webp", caption: "고객지원 · 맞춤 제품 추천", file: "solution.html" },
+      { label: "사회공헌 4탭", title: "네 개 재단의 사업과 활동을 고정 탭으로 비교합니다", body: "사회공헌을 한 문단으로 축약하지 않고 재단별 목적, 대표 사업과 활동 이미지를 나눠 운영합니다.", items: ["재단 탭 4개", "사업 소개와 로고", "활동 사진과 성과"], img: "/cases/corporate-k/page-csr.webp", caption: "지속가능경영 · 사회공헌", file: "csr.html" },
+      { label: "미디어·FAQ", title: "뉴스·공지의 목록·상세와 분류형 FAQ를 고객지원으로 묶었습니다", body: "기업 소식과 중요 공지를 각각 축적하고 고객은 분류 탭과 검색으로 자주 묻는 내용을 바로 찾습니다.", items: ["뉴스·공지 목록과 상세", "FAQ 분류 탭", "사업장 위치와 고객지원"], img: "/cases/corporate-k/page-news.webp", caption: "미디어 · 뉴스 목록", file: "news.html" },
+    ],
+  },
   pages: [
     {
       name: "홈",

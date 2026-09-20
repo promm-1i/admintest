@@ -15,6 +15,25 @@ const study: CaseStudy = {
     { label: "검증 범위", value: "19쪽 × 3개 화면 폭(1440 · 768 · 390px) = 57개 조합 · 가로 넘침, 이미지, 콘솔, H1, 내부 링크 검사" },
   ],
   mainShot: "/cases/corporate-l/main.webp",
+  capabilities: {
+    label: "19-PAGE HOLDING COMPANY SYSTEM",
+    title: "사업·글로벌·투자·ESG·채용을 19개 실제 화면으로 운영합니다",
+    body: "대형 스크롤 장면 뒤에 지주회사가 필요한 사업 정보와 투자자료, 지속가능경영, 공시·뉴스와 인재 정보를 독립된 운영 화면으로 연결했습니다.",
+    stats: [
+      { value: "19", label: "실제 구축 화면", note: "6개 정보 영역·서브 18쪽" },
+      { value: "6", label: "운영 정보군", note: "회사·IR·ESG·미디어·채용·고객" },
+      { value: "5", label: "글로벌 지표", note: "500vh 고정 장면에서 전환" },
+      { value: "4", label: "ESG 지표", note: "환경·사회 성과 수치" },
+    ],
+    groups: [
+      { label: "그룹·사업", title: "지주회사의 핵심 사업과 관계를 한 화면에서 이해합니다", body: "생활소비재·헬스케어·바이오·부동산 사업을 큰 이미지와 정보 카드로 분리해 그룹 포트폴리오를 보여 줍니다.", items: ["그룹 사업 포트폴리오", "사업별 전체 이미지", "핵심 내용 정보 카드"], img: "/cases/corporate-l/page-business.webp", caption: "그룹 · 주요사업", file: "business.html" },
+      { label: "글로벌 네트워크", title: "해외 거점과 주요 수치가 긴 고정 장면 안에서 순서대로 전환됩니다", body: "지구 이미지가 화면을 채우는 동안 다섯 지표가 지나가고 상세 화면에서 국가별 네트워크를 확인합니다.", items: ["500vh 스크롤 고정 장면", "글로벌 지표 카드 5개", "국가별 거점 상세"], img: "/cases/corporate-l/page-network.webp", caption: "그룹 · 글로벌 네트워크", file: "network.html" },
+      { label: "IR·재무·공시", title: "투자정보와 재무·공시를 목록과 상세 화면으로 운영합니다", body: "IR 개요와 주요 일정, 재무표와 공시 자료를 분리해 투자자가 필요한 정보를 단계적으로 찾게 합니다.", items: ["IR 개요와 일정 5개", "재무상태·손익 표와 차트", "공시 목록·상세"], img: "/cases/corporate-l/page-ir.webp", caption: "투자정보 · IR 개요", file: "ir.html" },
+      { label: "ESG·윤리", title: "지속가능경영 성과와 윤리 원칙을 별도 화면으로 제공합니다", body: "숲 이미지 고정 장면의 성과 지표에서 ESG 상세와 윤리경영 원칙으로 연결됩니다.", items: ["400vh 지속가능경영 장면", "ESG 지표 4개", "윤리경영 정책과 실천"], img: "/cases/corporate-l/page-esg.webp", caption: "지속가능경영 · ESG", file: "esg.html" },
+      { label: "뉴스·공지", title: "기업 뉴스와 공시성 공지를 각각 목록·상세로 축적합니다", body: "대표 뉴스와 전체 아카이브, 공지 목록과 본문을 독립 구조로 제공해 콘텐츠 성격에 맞춰 관리합니다.", items: ["뉴스 목록·상세", "공지 목록·상세", "검색과 최신 콘텐츠 강조"], img: "/cases/corporate-l/page-news.webp", caption: "미디어 · 뉴스 목록", file: "news.html" },
+      { label: "인재·고객", title: "인사제도·직무·채용가이드와 고객 문의까지 행동 동선을 완성했습니다", body: "지원자는 회사의 제도와 직무를 이해하고 채용 절차로 이동하며, 고객은 별도 문의 화면에서 목적에 맞는 내용을 접수합니다.", items: ["인사제도와 직무소개", "채용가이드·지원 절차", "고객 문의와 정책·사이트맵"], img: "/cases/corporate-l/page-recruit.webp", caption: "인재채용 · 채용가이드", file: "recruit.html" },
+    ],
+  },
   pages: [
     {
       name: "홈",
