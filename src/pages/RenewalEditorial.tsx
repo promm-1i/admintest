@@ -1,6 +1,6 @@
-import { Fragment, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
+import { Fragment, Suspense, lazy, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Check, ChevronDown, Menu, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { HEADER_NAV } from "@/components/site/navData";
@@ -104,9 +104,9 @@ const PAGE_DATA: Record<PageKey, ContentPage> = {
 
 const FEATURED_SLUGS = ["corporate-q-template", "corporate-r-template", "corporate-s-template", "corporate-i-template", "artist-a-template", "rentcar-f-template"];
 const SCOPE_SCENES = [
-  { no: "01", title: "화면 구성", keyword: "메뉴부터 정합니다", text: "메뉴와 페이지를 나누고\n읽는 순서를 정합니다", image: MEDIA_SLOTS.stories[0], href: "/website/process" },
-  { no: "02", title: "관리자 기능", keyword: "직접 고칩니다", text: "공지와 사례를 직접 올리고\n접수된 문의를 확인합니다", image: MEDIA_SLOTS.stories[1], href: "/services/admin-system" },
-  { no: "03", title: "기기별 검수", keyword: "셋 다 확인합니다", text: "PC·태블릿·모바일에서\n글자와 이미지를 봅니다", image: MEDIA_SLOTS.stories[2], href: "/services/responsive" },
+  { title: "화면 구성", keyword: "메뉴부터 정합니다", text: "메뉴와 페이지를 나누고\n읽는 순서를 정합니다", image: MEDIA_SLOTS.stories[0], href: "/website/process" },
+  { title: "관리자 기능", keyword: "직접 고칩니다", text: "공지와 사례를 직접 올리고\n접수된 문의를 확인합니다", image: MEDIA_SLOTS.stories[1], href: "/services/admin-system" },
+  { title: "기기별 검수", keyword: "셋 다 확인합니다", text: "PC·태블릿·모바일에서\n글자와 이미지를 봅니다", image: MEDIA_SLOTS.stories[2], href: "/services/responsive" },
 ];
 const HOME_LATEST = [
   ["상담 전에 준비할 자료와 홈페이지 제작 순서를 안내합니다", "( 2026.09.20 )"],
@@ -288,7 +288,7 @@ function EditorialHome() {
         <figure className="first-docs"><img src={MEDIA_SLOTS.intro} alt="추후 교체할 이미지 영역" /></figure>
         <div className="first-lights re-first-lights" aria-hidden="true"><div className="first-light re-first-light"><i className="light-trail blue re-light-trail"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div><div className="first-light-small re-first-light re-first-light--small"><i className="light-trail blue small reverse re-light-trail re-light-trail--small"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div></div>
       </div>
-      <div className="first-stories re-first-stories">{storyItems.map((scene, index) => <article className={`first-story type-${index + 1} re-first-story re-first-story--${index + 1} init re-init`} key={`${scene.no}-${scene.title}`}><div className="first-before re-first-story__before"><span className="first-year">{scene.no}</span><h3 className="first-title">{scene.title}<br /><span className="first-keyword">{scene.keyword}</span></h3></div><div className="first-after re-first-story__after"><p className="first-desc">{scene.text.split("\n").map((line, lineIndex) => <Fragment key={line}>{lineIndex > 0 && <br />}{line}</Fragment>)}</p></div><figure className="first-fixer"><img src={scene.image} alt={`${scene.title} 화면`} /></figure></article>)}</div>
+      <div className="first-stories re-first-stories">{storyItems.map((scene, index) => <article className={`first-story type-${index + 1} re-first-story re-first-story--${index + 1} init re-init`} key={scene.title}><div className="first-before re-first-story__before"><h3 className="first-title">{scene.title}<br /><span className="first-keyword">{scene.keyword}</span></h3></div><div className="first-after re-first-story__after"><p className="first-desc">{scene.text.split("\n").map((line, lineIndex) => <Fragment key={line}>{lineIndex > 0 && <br />}{line}</Fragment>)}</p></div><figure className="first-fixer"><img src={scene.image} alt={`${scene.title} 화면`} /></figure></article>)}</div>
     </section>
     <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">지금 우리는</p><h2 className="now-title">오늘의 화면과<br />내일의 운영을<br className="mobile" /> 함께 만듭니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
     <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{projects.slice(0, 3).map((project, index) => <li className="now-value-item" key={project.slug}><Link className={`now-value-card type-${index + 1}`} to={`${ROOT}/samples/${project.slug}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
@@ -413,45 +413,60 @@ function AboutPage() {
   </Contents></main>;
 }
 
-// 값은 /estimate 와 같게 유지한다. 한쪽만 고치면 견적이 어긋난다.
-const EST_STYLES = [{ key: "basic", name: "기본형", cost: 0, desc: "핵심 정보만 담백하게, 스크롤 연출 없음" }, { key: "landing", name: "랜딩형", cost: 200_000, desc: "스크롤 연출과 움직임이 더해진 구성" }] as const;
-const EST_SCOPES = [{ key: "one", name: "원페이지", cost: 0, desc: "소개부터 문의까지 한 화면에서 이어집니다" }, { key: "sub", name: "서브페이지 분리", cost: 300_000, desc: "소개·서비스·사례·문의를 메뉴별로 나눕니다" }] as const;
-const EST_HOSTING = [{ years: 1, name: "1년", cost: 240_000, note: "" }, { years: 2, name: "2년", cost: 432_000, note: "10% 할인" }, { years: 3, name: "3년", cost: 576_000, note: "20% 할인" }] as const;
+// 호스팅은 따로 받지 않는다. 첫 해 호스팅료 240,000원을 네 항목에 60,000원씩 균등하게 녹여
+// 총액은 기존 /estimate 와 같게 유지한다. 기본형·원페이지 640,000 / 랜딩형·서브 1,140,000.
+const EST_STYLES = [{ key: "basic", name: "기본형", cost: 60_000, desc: "핵심 정보만 담백하게, 스크롤 연출 없음" }, { key: "landing", name: "랜딩형", cost: 260_000, desc: "스크롤 연출과 움직임이 더해진 구성" }] as const;
+const EST_SCOPES = [{ key: "one", name: "원페이지", cost: 60_000, desc: "소개부터 문의까지 한 화면에서 이어집니다" }, { key: "sub", name: "서브페이지 분리", cost: 360_000, desc: "소개·서비스·사례·문의를 메뉴별로 나눕니다" }] as const;
 const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com·co.kr·kr 중 원하시는 것으로, 첫 1년 무료" }, { key: "own", name: "보유 도메인 연동", desc: "이미 쓰시는 도메인을 그대로 연결합니다" }] as const;
-const EST_FIXED = { feature: 300_000, setup: 100_000 };
+const EST_FIXED = { feature: 360_000, setup: 160_000 };
 const won = (value: number) => value.toLocaleString("ko-KR");
 
 function EstimatePage() {
   const [style, setStyle] = useState<string>("basic");
   const [scope, setScope] = useState<string>("one");
-  const [hosting, setHosting] = useState<number>(1);
   const [domain, setDomain] = useState<string>("free");
   const rows = [
     { label: "업종 전용 기능", cost: EST_FIXED.feature },
-    { label: "셋팅 비용", cost: EST_FIXED.setup },
+    { label: "셋팅과 첫 해 호스팅", cost: EST_FIXED.setup },
     { label: `화면 형태 · ${EST_STYLES.find((x) => x.key === style)?.name}`, cost: EST_STYLES.find((x) => x.key === style)?.cost ?? 0 },
     { label: `페이지 구성 · ${EST_SCOPES.find((x) => x.key === scope)?.name}`, cost: EST_SCOPES.find((x) => x.key === scope)?.cost ?? 0 },
-    { label: `호스팅 · ${EST_HOSTING.find((x) => x.years === hosting)?.name}`, cost: EST_HOSTING.find((x) => x.years === hosting)?.cost ?? 0 },
   ];
   const total = rows.reduce((sum, row) => sum + row.cost, 0);
-  const pick = (options: readonly { key?: string; years?: number; name: string; desc?: string; note?: string }[], current: string | number, onPick: (value: never) => void) =>
-    <div className="re-estimate__options">{options.map((option) => { const value = (option.key ?? option.years) as never; const on = (option.key ?? option.years) === current;
-      return <button type="button" key={String(value)} className="re-estimate__option" aria-pressed={on} onClick={() => onPick(value)}><strong>{option.name}{option.note && <small>{option.note}</small>}</strong>{option.desc && <span>{option.desc}</span>}</button>; })}</div>;
+  const pick = (options: readonly { key: string; name: string; desc?: string }[], current: string, onPick: (value: string) => void) =>
+    <div className="re-estimate__options">{options.map((option) => <button type="button" key={option.key} className="re-estimate__option" aria-pressed={option.key === current} onClick={() => onPick(option.key)}><strong>{option.name}</strong>{option.desc && <span>{option.desc}</span>}</button>)}</div>;
   return <main className="re-sub-page"><PageInfo category="홈페이지 제작" title="견적 계산기" /><Contents>
     <LocalNav group="홈페이지 제작" path="/website/price" />
-    <Section split title="01 화면 형태">{pick(EST_STYLES, style, setStyle as never)}</Section>
-    <Section split title="02 페이지 구성">{pick(EST_SCOPES, scope, setScope as never)}</Section>
-    <Section split title="03 호스팅 기간">{pick(EST_HOSTING, hosting, setHosting as never)}</Section>
-    <Section split title="04 도메인">{pick(EST_DOMAINS, domain, setDomain as never)}</Section>
+    <Section split title="01 화면 형태">{pick(EST_STYLES, style, setStyle)}</Section>
+    <Section split title="02 페이지 구성">{pick(EST_SCOPES, scope, setScope)}</Section>
+    <Section split title="03 도메인">{pick(EST_DOMAINS, domain, setDomain)}</Section>
     <Section split title="예상 비용">
       <div className="re-estimate__result">
-        <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{row.cost === 0 ? "포함" : `${won(row.cost)}원`}</dd></div>)}</dl>
+        <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{won(row.cost)}원</dd></div>)}</dl>
         <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
-        <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 2년차부터 도메인 갱신 연 30,000원이 호스팅료에 더해집니다. 실제 견적은 상담에서 확정합니다.</p>
+        <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 첫 해 호스팅료와 도메인 1개가 위 금액에 들어 있어 따로 받지 않습니다. 2년차부터 호스팅 연 240,000원과 도메인 갱신 연 30,000원이 듭니다. 실제 견적은 상담에서 확정합니다.</p>
         <div className="re-estimate__actions"><Link to={`${ROOT}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
       </div>
     </Section>
   </Contents></main>;
+}
+
+// 업종 솔루션과 업종 랜딩은 본 사이트 컴포넌트를 그대로 쓰고 리뉴얼 헤더·푸터 안에서 그린다.
+// 안쪽 화면까지 다시 짜지 않고 껍데기만 리뉴얼로 맞추는 방식이다.
+const SKINNED_SOLUTIONS: Record<string, ReturnType<typeof lazy>> = {
+  "real-estate": lazy(() => import("@/pages/solutions/RealEstateSolution")),
+  rentcar: lazy(() => import("@/pages/solutions/RentcarSolution")),
+  hospital: lazy(() => import("@/pages/solutions/HospitalSolution")),
+  academy: lazy(() => import("@/pages/solutions/AcademySolution")),
+  interior: lazy(() => import("@/pages/solutions/InteriorSolution")),
+  moving: lazy(() => import("@/pages/solutions/MovingSolution")),
+  reservations: lazy(() => import("@/pages/solutions/ReservationSolution")),
+  platform: lazy(() => import("@/pages/solutions/PlatformSolution")),
+  "product-quotes": lazy(() => import("@/pages/solutions/ProductQuoteSolution")),
+};
+const SkinnedIndustry = lazy(() => import("@/pages/IndustryLanding"));
+
+function SkinnedPage({ category, title, children }: { category: string; title: string; children: ReactNode }) {
+  return <main className="re-sub-page re-sub-page--skinned"><PageInfo category={category} title={title} /><div className="re-skinned"><Suspense fallback={<p className="re-board__state">불러오는 중입니다</p>}>{children}</Suspense></div></main>;
 }
 
 function SolutionsPage() {
@@ -461,7 +476,7 @@ function SolutionsPage() {
     <Section wide title="데모 체험">
       <ul className="re-solutions">{INDUSTRY_SHOWCASES.map((item) => <li key={item.key}>
         <div className="re-solutions__body"><small>{item.name}</small><strong>{item.cardTitle}</strong><span>{item.cardTagline}</span></div>
-        <div className="re-solutions__links"><a href={item.adminHref}>관리자 데모</a><a href={item.siteHref}>고객 화면</a><a href={item.solutionHref}>자세히</a></div>
+        <div className="re-solutions__links"><Link to={previewHref(item.solutionHref)}>자세히</Link><a href={item.adminHref}>관리자 데모</a><a href={item.siteHref}>고객 화면</a></div>
       </li>)}</ul>
       <p className="re-estimate__note">데모 화면은 기능을 보여 주기 위한 예시입니다. 실제 제작에서는 색과 글꼴, 화면 구성을 업체에 맞춰 새로 잡습니다. 데모는 리뉴얼 시안이 아닌 현재 사이트 화면으로 열립니다.</p>
     </Section>
@@ -475,7 +490,7 @@ function IndustryPage() {
     <LocalNav group="홈페이지 제작" path="/homepage" />
     <Section split title="업종에 맞춰 다르게"><div className="re-step-body"><p className="re-step-text">같은 홈페이지라도 업종마다 손님이 찾는 것이 다릅니다. 렌터카는 요금, 병원은 진료 시간, 학원은 시간표입니다. 업종별로 필요한 화면과 기능을 정리해 두었습니다.</p><ul className="re-step-list"><li><Check />{`${items.length}개 업종`}</li><li><Check />업종별 자주 겪는 문제와 해결 화면</li><li><Check />해당 업종 시안 바로 보기</li></ul></div></Section>
     <Section wide title="업종 목록">
-      <ul className="re-industry">{items.map((item) => <li key={item.key}><a href={`/homepage/${item.key}`}><strong>{item.keyword}</strong><span>{item.intro}</span></a></li>)}</ul>
+      <ul className="re-industry">{items.map((item) => <li key={item.key}><Link to={`${ROOT}/homepage/${item.key}`}><strong>{item.keyword}</strong><span>{item.intro}</span></Link></li>)}</ul>
       <p className="re-estimate__note">업종 쪽은 리뉴얼 시안이 아닌 현재 사이트 화면으로 열립니다.</p>
     </Section>
     <ContactBand />
@@ -577,6 +592,11 @@ function RouteContent({ path }: { path: string }) {
   if (path === "/estimate") return <EstimatePage />;
   if (path === "/web-solutions/demos" || path === "/solutions") return <SolutionsPage />;
   if (path === "/homepage") return <IndustryPage />;
+  if (path.startsWith("/web-solutions/")) {
+    const Solution = SKINNED_SOLUTIONS[path.split("/")[2]];
+    if (Solution) return <SkinnedPage category="기술력" title="업종 솔루션"><Solution /></SkinnedPage>;
+  }
+  if (path.startsWith("/homepage/")) return <SkinnedPage category="홈페이지 제작" title="업종별 홈페이지"><Routes><Route path="homepage/:key" element={<SkinnedIndustry />} /></Routes></SkinnedPage>;
   if (path === "/blog") return <BlogPage />;
   const key = Object.entries({ "/website/process": "process", "/website/price": "price", "/website/features": "features", "/website/maintenance": "maintenance", "/services/custom": "custom", "/services/admin-system": "admin-system", "/services/inquiry-reservation": "inquiry-reservation", "/services/search-filter": "search-filter", "/services/content-management": "content-management", "/services/database-api": "database-api", "/services/responsive": "responsive", "/services/seo": "seo" }).find(([route]) => route === path)?.[1] as PageKey | undefined;
   return key ? <StandardPage page={PAGE_DATA[key]} path={path} /> : <NotFound />;

@@ -30,7 +30,7 @@ const pairs = {
   firstStory: [".first-story", ".re-first-story"],
   firstBefore: [".first-before", ".re-first-story__before"],
   firstAfter: [".first-after", ".re-first-story__after"],
-  firstYear: [".first-year", ".re-first-story__before > span"],
+  // firstYear 는 원본의 연혁 연도 자리. NOVERIQ 는 쓸 연혁이 없어 의도적으로 뺐다.
   firstTitle: [".first-title", ".re-first-story__before h3"],
   firstKeyword: [".first-keyword", ".first-keyword"],
   firstDesc: [".first-desc", ".re-first-story__after p"],
