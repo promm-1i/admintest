@@ -12,73 +12,87 @@ import { PRICING_ROWS, PRODUCTION_PERIOD, TEMPLATE_PACKAGES, formatMan } from "@
 import "./RenewalEditorial.css";
 
 const ROOT = "/renewal-editorial";
-const MEDIA_PLACEHOLDER = "/renewal-editorial/image-placeholder.svg";
+const MEDIA = "/renewal-editorial/media";
+// 서브페이지는 쪽마다 다른 사진을 쓴다. 새 사진이 오면 해당 줄의 파일명만 바꾸면 된다.
+const SUBPAGE_MEDIA: Record<PageKey, string> = {
+  process: `${MEDIA}/subpage.webp`,
+  price: `${MEDIA}/subpage.webp`,
+  features: `${MEDIA}/subpage.webp`,
+  maintenance: `${MEDIA}/subpage.webp`,
+  custom: `${MEDIA}/subpage.webp`,
+  "admin-system": `${MEDIA}/subpage.webp`,
+  "inquiry-reservation": `${MEDIA}/subpage.webp`,
+  "search-filter": `${MEDIA}/subpage.webp`,
+  "content-management": `${MEDIA}/subpage.webp`,
+  "database-api": `${MEDIA}/subpage.webp`,
+  responsive: `${MEDIA}/subpage.webp`,
+  seo: `${MEDIA}/subpage.webp`,
+};
 const MEDIA_SLOTS = {
-  hero: MEDIA_PLACEHOLDER,
-  intro: MEDIA_PLACEHOLDER,
-  stories: [MEDIA_PLACEHOLDER, MEDIA_PLACEHOLDER, MEDIA_PLACEHOLDER],
-  now: MEDIA_PLACEHOLDER,
-  values: [MEDIA_PLACEHOLDER, MEDIA_PLACEHOLDER, MEDIA_PLACEHOLDER],
-  tomorrow: [MEDIA_PLACEHOLDER, MEDIA_PLACEHOLDER, MEDIA_PLACEHOLDER],
-  subpage: MEDIA_PLACEHOLDER,
+  hero: `${MEDIA}/hero.webp`,
+  intro: `${MEDIA}/intro.webp`,
+  stories: [`${MEDIA}/story-01.webp`, `${MEDIA}/story-02.webp`, `${MEDIA}/story-03.webp`],
+  now: `${MEDIA}/now.webp`,
+  values: [`${MEDIA}/value-01.webp`, `${MEDIA}/value-02.webp`, `${MEDIA}/value-03.webp`],
+  tomorrow: [`${MEDIA}/tomorrow-01.webp`, `${MEDIA}/tomorrow-02.webp`, `${MEDIA}/tomorrow-03.webp`],
 } as const;
 type PageKey = "process" | "price" | "features" | "maintenance" | "custom" | "admin-system" | "inquiry-reservation" | "search-filter" | "content-management" | "database-api" | "responsive" | "seo";
 type ContentPage = { eyebrow: string; title: string; intro: string; group: "홈페이지 제작" | "기술력"; image: string; sections: { title: string; text: string; points: string[] }[] };
 
 const PAGE_DATA: Record<PageKey, ContentPage> = {
-  process: { eyebrow: "WORK PROCESS", title: "제작 방법", intro: "상담에서 오픈까지 필요한 일을 순서대로 확인합니다", group: "홈페이지 제작", image: MEDIA_SLOTS.subpage, sections: [
+  process: { eyebrow: "WORK PROCESS", title: "제작 방법", intro: "상담에서 오픈까지 필요한 일을 순서대로 확인합니다", group: "홈페이지 제작", image: SUBPAGE_MEDIA["process"], sections: [
     { title: "상담", text: "업종, 필요한 메뉴, 참고 사이트와 준비된 자료를 확인합니다", points: ["참고 사이트", "필요한 기능", "도메인 보유 여부"] },
     { title: "구성", text: "메뉴와 페이지 수를 정하고 화면마다 들어갈 내용을 나눕니다", points: ["사이트맵", "화면 순서", "PC·모바일 기준"] },
     { title: "제작", text: "확정한 구성으로 디자인과 기능을 만들고 실제 화면에서 검수합니다", points: ["디자인", "관리자 기능", "반응형 화면"] },
     { title: "오픈", text: "도메인, 문의 알림과 검색 노출 설정을 확인한 뒤 공개합니다", points: ["도메인 연결", "알림 테스트", "검색 기본 설정"] },
   ] },
-  price: { eyebrow: "PRICE GUIDE", title: "제작 비용", intro: "페이지 수와 화면 연출, 필요한 기능을 기준으로 비용을 정합니다", group: "홈페이지 제작", image: MEDIA_SLOTS.subpage, sections: [] },
-  features: { eyebrow: "WEBSITE FEATURES", title: "기능 소개", intro: "홈페이지에 필요한 화면과 운영 기능을 항목별로 확인합니다", group: "홈페이지 제작", image: MEDIA_SLOTS.subpage, sections: [
+  price: { eyebrow: "PRICE GUIDE", title: "제작 비용", intro: "페이지 수와 화면 연출, 필요한 기능을 기준으로 비용을 정합니다", group: "홈페이지 제작", image: SUBPAGE_MEDIA["price"], sections: [] },
+  features: { eyebrow: "WEBSITE FEATURES", title: "기능 소개", intro: "홈페이지에 필요한 화면과 운영 기능을 항목별로 확인합니다", group: "홈페이지 제작", image: SUBPAGE_MEDIA["features"], sections: [
     { title: "콘텐츠 화면", text: "회사 소개, 서비스, 사례, 소식과 문의 화면을 메뉴에 맞춰 구성합니다", points: ["소개·서비스", "목록·상세", "문의 화면"] },
     { title: "운영 화면", text: "담당자가 공지, 이미지와 게시물을 직접 등록하고 수정합니다", points: ["관리자 로그인", "등록·수정·삭제", "문의 내역 확인"] },
     { title: "방문자 기능", text: "검색, 필터, 예약과 신청처럼 방문자가 실제로 쓰는 기능을 연결합니다", points: ["검색·분류", "예약·신청", "문자 알림"] },
   ] },
-  maintenance: { eyebrow: "MAINTENANCE", title: "유지보수", intro: "오픈 뒤 문구와 이미지 수정, 메뉴 추가와 기능 변경을 이어서 맡길 수 있습니다", group: "홈페이지 제작", image: MEDIA_SLOTS.subpage, sections: [
+  maintenance: { eyebrow: "MAINTENANCE", title: "유지보수", intro: "오픈 뒤 문구와 이미지 수정, 메뉴 추가와 기능 변경을 이어서 맡길 수 있습니다", group: "홈페이지 제작", image: SUBPAGE_MEDIA["maintenance"], sections: [
     { title: "오픈 후 1개월", text: "제작 범위 안의 문구와 이미지 수정을 무상으로 진행합니다", points: ["문구 교체", "이미지 교체", "오류 확인"] },
     { title: "월 유지보수", text: "간단한 수정이 꾸준히 필요한 경우 월 단위로 진행합니다", points: ["월 3회 간단 수정", "월 3만원", "작업 내역 확인"] },
     { title: "별도 개발", text: "페이지 추가나 기능 변경은 범위를 확인한 뒤 견적을 안내합니다", points: ["메뉴 추가", "기능 변경", "외부 서비스 연동"] },
   ] },
-  custom: { eyebrow: "CUSTOM DEVELOPMENT", title: "커스텀 개발", intro: "정해진 화면에 내용을 넣는 작업부터 업무에 맞춘 관리 기능 개발까지 진행합니다", group: "기술력", image: MEDIA_SLOTS.subpage, sections: [
+  custom: { eyebrow: "CUSTOM DEVELOPMENT", title: "커스텀 개발", intro: "정해진 화면에 내용을 넣는 작업부터 업무에 맞춘 관리 기능 개발까지 진행합니다", group: "기술력", image: SUBPAGE_MEDIA["custom"], sections: [
     { title: "화면 설계", text: "메뉴와 정보량, 방문 경로를 기준으로 페이지 구조를 정합니다", points: ["사이트맵", "화면 흐름", "반응형 기준"] },
     { title: "관리 기능", text: "운영자가 직접 다뤄야 하는 항목을 관리자 화면으로 만듭니다", points: ["권한", "데이터 관리", "파일 등록"] },
     { title: "서비스 연결", text: "지도, 문자, 결제와 외부 데이터가 필요하면 API로 연결합니다", points: ["외부 API", "DB", "알림·결제"] },
   ] },
-  "admin-system": { eyebrow: "ADMIN SYSTEM", title: "관리자 시스템", intro: "공지, 문의와 홈페이지 내용을 담당자가 직접 관리할 수 있습니다", group: "기술력", image: MEDIA_SLOTS.subpage, sections: [
+  "admin-system": { eyebrow: "ADMIN SYSTEM", title: "관리자 시스템", intro: "공지, 문의와 홈페이지 내용을 담당자가 직접 관리할 수 있습니다", group: "기술력", image: SUBPAGE_MEDIA["admin-system"], sections: [
     { title: "콘텐츠 관리", text: "제목, 본문, 이미지와 노출 상태를 관리자 화면에서 바꿉니다", points: ["게시물 등록", "공개·비공개", "이미지 관리"] },
     { title: "문의 관리", text: "홈페이지에서 접수된 내용을 한곳에서 확인하고 처리 상태를 남깁니다", points: ["접수 내역", "처리 상태", "담당자 확인"] },
     { title: "권한 관리", text: "업무에 따라 관리자 계정과 접근 범위를 나눌 수 있습니다", points: ["계정 관리", "메뉴 권한", "작업 기록"] },
   ] },
-  "inquiry-reservation": { eyebrow: "INQUIRY & RESERVATION", title: "문의 · 예약 관리", intro: "접수 화면과 관리자 확인, 알림까지 실제 상담 순서에 맞춰 연결합니다", group: "기술력", image: MEDIA_SLOTS.subpage, sections: [
+  "inquiry-reservation": { eyebrow: "INQUIRY & RESERVATION", title: "문의 · 예약 관리", intro: "접수 화면과 관리자 확인, 알림까지 실제 상담 순서에 맞춰 연결합니다", group: "기술력", image: SUBPAGE_MEDIA["inquiry-reservation"], sections: [
     { title: "접수 항목", text: "상담에 필요한 날짜, 서비스와 연락처를 업종에 맞춰 받습니다", points: ["필수 항목", "동의 체크", "파일 첨부"] },
     { title: "예약 상태", text: "접수, 확인, 확정과 취소 상태를 관리자 화면에서 관리합니다", points: ["상태 변경", "일정 확인", "메모"] },
     { title: "알림", text: "새 문의가 들어오면 담당자가 바로 확인할 수 있도록 연결합니다", points: ["문자 알림", "이메일", "접수 안내"] },
   ] },
-  "search-filter": { eyebrow: "SEARCH & FILTER", title: "검색 · 필터 기능", intro: "매물, 제품과 게시물이 많을 때 방문자가 원하는 항목을 빠르게 찾습니다", group: "기술력", image: MEDIA_SLOTS.subpage, sections: [
+  "search-filter": { eyebrow: "SEARCH & FILTER", title: "검색 · 필터 기능", intro: "매물, 제품과 게시물이 많을 때 방문자가 원하는 항목을 빠르게 찾습니다", group: "기술력", image: SUBPAGE_MEDIA["search-filter"], sections: [
     { title: "조건 검색", text: "가격, 지역, 분류처럼 실제 선택에 필요한 조건을 정합니다", points: ["다중 조건", "범위 선택", "검색 초기화"] },
     { title: "목록 정렬", text: "최신순, 가격순과 추천순처럼 목록을 보는 기준을 제공합니다", points: ["정렬", "페이지 이동", "결과 수"] },
     { title: "상세 연결", text: "검색 결과에서 상세 정보와 문의 화면으로 이동합니다", points: ["상세 페이지", "관심 항목", "문의 연결"] },
   ] },
-  "content-management": { eyebrow: "CONTENT MANAGEMENT", title: "콘텐츠 관리", intro: "새 소식과 사례, 갤러리를 운영자가 계속 올릴 수 있게 만듭니다", group: "기술력", image: MEDIA_SLOTS.subpage, sections: [
+  "content-management": { eyebrow: "CONTENT MANAGEMENT", title: "콘텐츠 관리", intro: "새 소식과 사례, 갤러리를 운영자가 계속 올릴 수 있게 만듭니다", group: "기술력", image: SUBPAGE_MEDIA["content-management"], sections: [
     { title: "목록과 상세", text: "콘텐츠 성격에 맞춰 목록, 상세와 관련 글 구조를 만듭니다", points: ["카테고리", "목록·상세", "관련 콘텐츠"] },
     { title: "에디터", text: "글과 이미지를 직접 배치하고 수정할 수 있는 입력 화면을 제공합니다", points: ["본문 편집", "대표 이미지", "임시 저장"] },
     { title: "노출 관리", text: "게시 시점과 순서를 정하고 필요한 콘텐츠만 화면에 노출합니다", points: ["예약 공개", "순서 변경", "숨김 처리"] },
   ] },
-  "database-api": { eyebrow: "DATABASE & API", title: "DB · API 연동", intro: "홈페이지의 데이터와 외부 서비스를 주고받도록 연결합니다", group: "기술력", image: MEDIA_SLOTS.subpage, sections: [
+  "database-api": { eyebrow: "DATABASE & API", title: "DB · API 연동", intro: "홈페이지의 데이터와 외부 서비스를 주고받도록 연결합니다", group: "기술력", image: SUBPAGE_MEDIA["database-api"], sections: [
     { title: "데이터 구조", text: "등록하고 검색할 항목을 정리해 데이터베이스 구조를 설계합니다", points: ["필드 설계", "관계 설정", "검색 기준"] },
     { title: "외부 연동", text: "지도, 문자와 업무 시스템에서 제공하는 API를 연결합니다", points: ["지도", "문자", "외부 업무 데이터"] },
     { title: "보안과 백업", text: "접근 권한을 나누고 운영 중 필요한 백업 기준을 정합니다", points: ["접근 제어", "환경 변수", "백업"] },
   ] },
-  responsive: { eyebrow: "RESPONSIVE WEB", title: "반응형 웹 제작", intro: "PC 화면을 줄여 놓지 않고 태블릿과 모바일의 읽기 순서를 다시 맞춥니다", group: "기술력", image: MEDIA_SLOTS.subpage, sections: [
+  responsive: { eyebrow: "RESPONSIVE WEB", title: "반응형 웹 제작", intro: "PC 화면을 줄여 놓지 않고 태블릿과 모바일의 읽기 순서를 다시 맞춥니다", group: "기술력", image: SUBPAGE_MEDIA["responsive"], sections: [
     { title: "화면 너비", text: "콘텐츠 폭과 여백을 기기별로 조정해 가로 스크롤을 막습니다", points: ["PC", "태블릿", "모바일"] },
     { title: "메뉴와 터치", text: "모바일 메뉴, 버튼 크기와 손가락으로 누르는 영역을 확인합니다", points: ["모바일 메뉴", "터치 영역", "고정 버튼"] },
     { title: "이미지와 글", text: "사진 잘림과 글자 크기를 화면 비율에 맞춰 따로 설정합니다", points: ["이미지 크롭", "줄바꿈", "읽기 순서"] },
   ] },
-  seo: { eyebrow: "SEARCH ENGINE", title: "검색엔진 최적화", intro: "검색 결과에 필요한 제목, 설명과 페이지 구조를 기본 설정합니다", group: "기술력", image: MEDIA_SLOTS.subpage, sections: [
+  seo: { eyebrow: "SEARCH ENGINE", title: "검색엔진 최적화", intro: "검색 결과에 필요한 제목, 설명과 페이지 구조를 기본 설정합니다", group: "기술력", image: SUBPAGE_MEDIA["seo"], sections: [
     { title: "페이지 정보", text: "페이지마다 검색 결과에 표시할 제목과 설명을 작성합니다", points: ["페이지 제목", "설명", "공유 이미지"] },
     { title: "문서 구조", text: "제목 단계, 링크와 이미지 설명을 검색 로봇이 읽기 좋게 정리합니다", points: ["제목 단계", "대체 텍스트", "내부 링크"] },
     { title: "검색 등록", text: "사이트맵과 검색 도구 연결에 필요한 기본 파일을 준비합니다", points: ["사이트맵", "robots.txt", "검색 도구 연결"] },
@@ -90,7 +104,6 @@ const SCOPE_SCENES = [
   { no: "2026", title: "화면 구성", text: "메뉴와 페이지를 나누고\n내용의 순서를 정합니다", image: MEDIA_SLOTS.stories[0], href: "/website/process" },
   { no: "2026", title: "관리자 기능", text: "공지와 사례를 직접 올리고\n접수된 문의를 확인합니다", image: MEDIA_SLOTS.stories[1], href: "/services/admin-system" },
   { no: "2026", title: "검색과 예약", text: "PC와 모바일의 화면을 나눠\n이미지와 글을 확인합니다", image: MEDIA_SLOTS.stories[2], href: "/services/search-filter" },
-  { no: "04", title: "반응형 화면", text: "PC, 태블릿과 모바일에서 메뉴와 콘텐츠 순서를 따로 맞춥니다", image: MEDIA_PLACEHOLDER, href: "/services/responsive" },
 ];
 const HOME_LATEST = [
   ["상담 전에 준비할 자료와 홈페이지 제작 순서를 안내합니다", "( 2026.09.20 )"],
