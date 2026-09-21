@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Check, ChevronDown, Menu, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
-import { HEADER_NAV } from "@/components/site/navData";
+import { MAIN_NAV, type MainNavEntry } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
 import { FAQ } from "@/lib/faq";
 import { KAKAO_CHANNEL_URL, NAVER_BLOG_URL, PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
@@ -186,31 +186,6 @@ function useEditorialMotion(pathname: string) {
   }, [pathname]);
 }
 
-// navData 는 본 사이트와 공용이라 건드리지 않고, 리뉴얼에만 있는 쪽을 여기서 덧붙인다
-const EXTRA_NAV: Record<string, { label: string; href: string }[]> = {
-  build: [{ label: "견적 계산기", href: "/estimate" }, { label: "업종별 홈페이지", href: "/homepage" }],
-  support: [{ label: "회사 소개", href: "/about" }, { label: "블로그", href: "/blog" }, { label: "개인정보처리방침", href: "/privacy" }],
-};
-// 메뉴에 이름만 있고 목적지가 없던 항목을 실제 쪽으로 보낸다
-const NAV_HREF_FIX: Record<string, string> = { "솔루션 · 데모 체험": "/web-solutions/demos" };
-function navItems(entry: Extract<(typeof HEADER_NAV)[number], { type: "dropdown" }>) {
-  return [...entry.items.map((item) => ({ label: menuLabel(item.label), href: NAV_HREF_FIX[item.label] ?? item.href })), ...(EXTRA_NAV[entry.key] ?? [])];
-}
-
-function menuLabel(label: string) { return label.replace(/\s*디자인\s*템플릿$/, " 디자인").replace(/\s*템플릿$/, ""); }
-
-function firstHref(entry: (typeof HEADER_NAV)[number]) {
-  if (entry.type === "link") return entry.href;
-  const walk = (items: readonly { href?: string; children?: readonly unknown[] }[]): string | undefined => {
-    for (const item of items) {
-      if (item.href) return item.href;
-      if (item.children) { const found = walk(item.children as never); if (found) return found; }
-    }
-    return undefined;
-  };
-  return walk(entry.items as never) ?? "/";
-}
-
 function SiteSearch() {
   const root = useRoot();
   const [open, setOpen] = useState(false);
@@ -328,28 +303,53 @@ function Header() {
   const root = useRoot();
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [openKey, setOpenKey] = useState<string | null>(null);
+  const [groupKey, setGroupKey] = useState<string | null>(null);
   // Escape 로 닫은 뒤 트리거로 초점을 되돌리면 focus 가 다시 열어 버린다. 그 한 번만 막는다.
   const justClosed = useRef(false);
-  const openMenu = () => { if (!justClosed.current) setMenuOpen(true); };
-  const closeMenu = (trigger?: HTMLElement | null) => { justClosed.current = true; setMenuOpen(false); trigger?.focus(); setTimeout(() => { justClosed.current = false; }, 80); };
-  useEffect(() => { setMobileOpen(false); setMenuOpen(false); }, [pathname]);
-  return <header className={`header re-header${mobileOpen ? " active" : ""}`} onPointerLeave={() => setMenuOpen(false)}
-    onKeyDown={(event) => { if (event.key === "Escape" && menuOpen) closeMenu(event.currentTarget.querySelector(".re-nav-group > a") as HTMLElement | null); }}
-    onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setMenuOpen(false); }}>
+  const openEntry = (item: MainNavEntry) => { if (justClosed.current) return; setOpenKey(item.key); setGroupKey(item.groups[0]?.key ?? null); };
+  const closeMenu = (trigger?: HTMLElement | null) => { justClosed.current = true; setOpenKey(null); trigger?.focus(); setTimeout(() => { justClosed.current = false; }, 80); };
+  useEffect(() => { setMobileOpen(false); setOpenKey(null); }, [pathname]);
+  const entry = MAIN_NAV.find((item) => item.key === openKey) ?? null;
+  const group = entry ? (entry.groups.find((item) => item.key === groupKey) ?? entry.groups[0]) : null;
+  return <header className={`header re-header${mobileOpen ? " active" : ""}`} onPointerLeave={() => setOpenKey(null)}
+    onKeyDown={(event) => { if (event.key === "Escape" && openKey) closeMenu(event.currentTarget.querySelector(".gnb-1d-link") as HTMLElement | null); }}
+    onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpenKey(null); }}>
     <a className="re-skip" href="#re-main">본문 바로가기</a>
     <div className="header-frame">
-      <div className="header-logo"><Link className="header-logo-link re-header__logo" to={root} aria-label="NOVERIQ 리뉴얼 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
-      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={openMenu}><Link className="gnb-1d-link" to={hrefIn(root, firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") closeMenu(event.currentTarget); }}>{entry.label}</Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
+      <div className="header-logo"><Link className="header-logo-link re-header__logo" to={root} aria-label="NOVERIQ 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
+      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={!!openKey} aria-label="주요 메뉴">
+        {MAIN_NAV.map((item) => <Link key={item.key} className="gnb-1d-link" to={hrefIn(root, item.href)} data-active={openKey === item.key}
+          aria-haspopup="true" aria-expanded={openKey === item.key}
+          onPointerEnter={() => openEntry(item)} onFocus={() => openEntry(item)}
+          onKeyDown={(event) => { if (event.key === "Escape") closeMenu(event.currentTarget); }}>{item.label}</Link>)}
+      </nav></div></div>
       <div className="header-feature"><SiteSearch /><Link className="header-bank-shortcut re-header__contact" to={`${root}/contact`}>제작 문의<ArrowRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
     </div>
-    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{navItems(entry).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></details>)}</div>
+    {/* 펼침판 — 왼쪽 중메뉴 · 오른쪽 소메뉴. 여는 값은 기존 그대로(opacity .2s / max-height .3s) */}
+    <div className="re-mega2" data-open={!!entry} aria-hidden={!entry}>
+      {entry && group && <div className="re-mega2__frame">
+        <div className="re-mega2__aside">
+          <ul className="re-mega2__groups">{entry.groups.map((item) => <li key={item.key}>
+            <Link to={hrefIn(root, item.href)} data-active={item.key === group.key}
+              onPointerEnter={() => setGroupKey(item.key)} onFocus={() => setGroupKey(item.key)}>{item.label}</Link>
+          </li>)}</ul>
+          <Link className="re-mega2__all" to={hrefIn(root, entry.href)}>전체 목록 보기</Link>
+        </div>
+        <div className={`re-mega2__items${group.items.length > 8 ? " re-mega2__items--dense" : ""}`}>
+          <ul>{group.items.map((item) => <li key={item.href + item.label}>
+            <Link to={hrefIn(root, item.href)}><strong>{item.label}</strong>{item.desc && <span>{item.desc}</span>}</Link>
+          </li>)}</ul>
+        </div>
+      </div>}
+    </div>
+    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{MAIN_NAV.map((item) => <details key={item.key}><summary>{item.label}<ChevronDown /></summary><div>{item.groups.flatMap((entry2) => entry2.items).map((link) => <Link key={link.href + link.label} to={hrefIn(root, link.href)}>{link.label}</Link>)}</div></details>)}</div>
   </header>;
 }
 
 function Footer() {
   const root = useRoot();
-  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{HEADER_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.type === "dropdown" && navItems(entry).slice(0, 6).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
+  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{MAIN_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.groups.flatMap((group) => group.items).slice(0, 6).map((item) => <Link key={item.href + item.label} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);

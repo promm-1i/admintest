@@ -335,3 +335,124 @@ export const HEADER_NAV: NavEntry[] = [
     ],
   },
 ];
+
+
+/* ------------------------------------------------------------------
+   메인 내비게이션 (2026-09-21 재구성)
+
+   NHN Cloud 처럼 대메뉴를 목적별로 나누고, 펼치면 왼쪽에 중메뉴·오른쪽에
+   소메뉴가 오는 2단 구조다. HEADER_NAV 는 레거시 헤더가 아직 쓰고 있어
+   그대로 두고 여기에 새로 정의한다.
+
+   원본 1depth 실측: 높이 72px, 글자 16px·500, 좌우 여백 12px.
+   ------------------------------------------------------------------ */
+export type NavMenuItem = { label: string; href: string; desc?: string };
+export type NavMenuGroup = { key: string; label: string; href: string; items: NavMenuItem[] };
+export type MainNavEntry = { key: string; label: string; href: string; groups: NavMenuGroup[] };
+
+/** 업종 26종을 소메뉴로 쓴다. "맞춤형" 꼬리표는 메뉴에서 뺀다. */
+const industryMenuItems = (): NavMenuItem[] =>
+  INDUSTRY_ITEMS.filter((item) => item.href).map((item) => ({
+    label: item.title.replace(/ ?맞춤형$/, ""),
+    href: item.href as string,
+    desc: item.desc,
+  }));
+
+export const MAIN_NAV: MainNavEntry[] = [
+  {
+    key: "about",
+    label: "소개",
+    href: "/about",
+    groups: [
+      { key: "who", label: "노베릭", href: "/about", items: [
+        { label: "회사 소개", href: "/about", desc: "어떤 사람이 어떻게 만드는지" },
+        { label: "블로그", href: "/blog", desc: "제작 기록과 업종별 이야기" },
+      ] },
+      { key: "how", label: "만드는 방법", href: "/website/process", items: [
+        { label: "제작 방법", href: "/website/process", desc: "상담에서 오픈까지 네 단계" },
+        { label: "기능 소개", href: "/website/features", desc: "화면과 운영에 들어가는 기능" },
+      ] },
+      { key: "result", label: "결과물", href: "/samples", items: [
+        { label: "제작 사례", href: "/samples", desc: "실제로 만든 홈페이지 모음" },
+      ] },
+    ],
+  },
+  {
+    key: "solution",
+    label: "솔루션",
+    href: "/web-solutions",
+    groups: [
+      { key: "industry", label: "업종별 홈페이지", href: "/homepage", items: industryMenuItems() },
+      { key: "demo", label: "체험", href: "/web-solutions/demos", items: [
+        { label: "솔루션 · 데모 체험", href: "/web-solutions/demos", desc: "관리자 화면을 직접 눌러 보기" },
+      ] },
+    ],
+  },
+  {
+    key: "service",
+    label: "서비스",
+    href: "/services/custom",
+    groups: [
+      { key: "custom", label: "커스텀 개발", href: "/services/custom", items: [
+        { label: "커스텀 개발이란?", href: "/services/custom", desc: "정해진 틀이 아니라 설계부터" },
+      ] },
+      { key: "feature", label: "기능별 개발", href: "/website/features", items: [
+        { label: "관리자 시스템", href: "/services/admin-system", desc: "공지 · 문의 · 콘텐츠를 직접 관리" },
+        { label: "문의 · 예약 관리", href: "/services/inquiry-reservation", desc: "접수부터 확인과 알림까지" },
+        { label: "검색 · 필터 기능", href: "/services/search-filter", desc: "조건으로 걸러 보는 목록" },
+        { label: "콘텐츠 관리", href: "/services/content-management", desc: "소식 · 사례 · 갤러리 등록" },
+        { label: "DB · API 연동", href: "/services/database-api", desc: "외부 서비스와 자료 주고받기" },
+      ] },
+      { key: "screen", label: "화면과 노출", href: "/services/responsive", items: [
+        { label: "반응형 웹 제작", href: "/services/responsive", desc: "PC · 태블릿 · 모바일" },
+        { label: "검색엔진 최적화", href: "/services/seo", desc: "검색 결과에 맞춘 제목과 구조" },
+      ] },
+      { key: "run", label: "운영", href: "/website/maintenance", items: [
+        { label: "유지보수", href: "/website/maintenance", desc: "오픈 뒤 수정과 운영" },
+      ] },
+    ],
+  },
+  {
+    key: "price",
+    label: "요금",
+    href: "/website/price",
+    groups: [
+      { key: "cost", label: "비용", href: "/website/price", items: [
+        { label: "제작 비용", href: "/website/price", desc: "형태와 구성별 정해진 금액" },
+        { label: "견적 계산기", href: "/estimate", desc: "기능을 골라 예상 금액 확인" },
+      ] },
+      { key: "included", label: "포함 항목", href: "/website/features", items: [
+        { label: "기능 소개", href: "/website/features", desc: "금액 안에 무엇이 들어가는지" },
+      ] },
+    ],
+  },
+  {
+    key: "design",
+    label: "디자인",
+    href: "/web-solutions",
+    groups: [
+      { key: "premium", label: "프리미엄", href: "/web-solutions", items: [
+        { label: "프리미엄 디자인", href: "/web-solutions", desc: "실제 사이트를 그대로 모델링한 구성" },
+      ] },
+      { key: "template", label: "템플릿", href: "/templates", items: [
+        { label: "기본형 디자인", href: "/templates?style=basic-template", desc: "핵심 정보만 담백하게" },
+        { label: "랜딩형 디자인", href: "/templates?style=landing-template", desc: "스크롤 연출과 인터랙션" },
+      ] },
+    ],
+  },
+  {
+    key: "support",
+    label: "고객지원",
+    href: "/contact",
+    groups: [
+      { key: "ask", label: "문의", href: "/contact", items: [
+        { label: "문의하기", href: "/contact", desc: "제작 상담 접수" },
+        { label: "자주 묻는 질문", href: "/faq", desc: "비용 · 기간 · 관리자 기능" },
+      ] },
+      { key: "news", label: "소식", href: "/notices", items: [
+        { label: "공지사항", href: "/notices", desc: "제작 안내와 소식" },
+        { label: "개인정보처리방침", href: "/privacy", desc: "수집 항목과 보관 기간" },
+      ] },
+    ],
+  },
+];

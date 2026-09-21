@@ -310,7 +310,7 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-footer__panel{min-height:500px;padding:34px 50px 28px;border-radius:20px;background:#edf0f3}
 .re-footer__explorer{height:247px;display:flex;justify-content:space-between;padding-bottom:28px;border-bottom:1px solid #d3d9e0}
 .re-footer__explorer>p{margin:0;font-size:40px;font-weight:500;line-height:1.3;letter-spacing:-.02em}
-.re-footer__nav{display:grid;grid-template-columns:repeat(5,1fr);gap:25px;flex:1;max-width:1040px;padding:4px 20px 0 0}
+.re-footer__nav{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;flex:1;max-width:1040px;padding:4px 20px 0 0}
 .re-footer__nav>div{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
 .re-footer__nav strong{margin-bottom:8px;font-size:20px;font-weight:600;line-height:1.3}
 .re-footer__nav a{color:var(--re-muted);font-size:16px;font-weight:500;line-height:1.2}
@@ -997,3 +997,45 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
   .re-help,.re-help a{min-height:0}
   .re-help a{padding:24px}
 }
+
+/* ------------------------------------------------------------------
+   2단 메가메뉴 — 왼쪽 중메뉴 / 오른쪽 소메뉴 (NHN Cloud 구조)
+   여는 값은 기존 그대로: opacity .2s · visibility .2s · max-height .3s
+   ------------------------------------------------------------------ */
+.re-mega2{position:fixed;z-index:19;left:0;top:110px;width:100%;overflow:hidden;max-height:0;opacity:0;visibility:hidden;background:#fff;border-bottom:1px solid var(--re-line,#e5e7eb);transition:opacity .2s,visibility .2s,max-height .3s}
+.re-mega2[data-open="true"]{max-height:520px;opacity:1;visibility:visible}
+.re-mega2__frame{max-width:1280px;margin:0 auto;padding:28px 0 36px;display:grid;grid-template-columns:288px minmax(0,1fr)}
+.re-mega2__aside{display:flex;flex-direction:column;min-height:300px;padding-right:40px;border-right:1px solid var(--re-line,#e5e7eb)}
+.re-mega2__groups{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px}
+.re-mega2__groups a{height:48px;padding:0 16px;display:flex;align-items:center;border-radius:8px;font-size:17px;font-weight:600;color:#1f2428;transition:color .2s,background .2s}
+.re-mega2__groups a[data-active="true"]{color:var(--re-blue,#1572ed);background:#f1f6ff}
+.re-mega2__groups a:hover{color:var(--re-blue,#1572ed)}
+.re-mega2 .re-mega2__all{height:48px;margin-top:auto;display:grid;place-items:center;border-radius:30px;background:#111;color:#fff;font-size:15px;font-weight:600}
+.re-mega2 .re-mega2__all:hover{color:#fff;background:#000}
+.re-mega2__items{padding-left:40px;overflow-y:auto}
+.re-mega2__items ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px 20px}
+.re-mega2__items a{display:block;padding:10px 14px;border-radius:8px;transition:background .2s}
+.re-mega2__items a:hover{background:#f5f7fa}
+.re-mega2__items strong{display:block;font-size:17px;font-weight:700;line-height:1.4;color:#1f2428;word-break:keep-all}
+.re-mega2__items a:hover strong{color:var(--re-blue,#1572ed)}
+.re-mega2__items span{display:block;margin-top:2px;font-size:14px;font-weight:400;line-height:1.5;color:var(--re-muted,#656d77);word-break:keep-all}
+/* 업종 26종처럼 많을 때는 설명을 빼고 칸을 늘린다 */
+.re-mega2__items--dense ul{grid-template-columns:repeat(4,minmax(0,1fr));gap:0 16px}
+.re-mega2__items--dense span{display:none}
+.re-mega2__items--dense strong{font-size:15px;font-weight:500}
+.re-mega2__items--dense a{padding:8px 12px}
+
+/* 1depth 6칸 — 라벨이 짧아 칸을 글자 폭에 맞추고 묶음만 가운데 둔다 */
+.renewal-editorial .header-nav{width:auto}
+.renewal-editorial .header-gnb{width:auto;max-width:none}
+.renewal-editorial .header-gnb .re-header__desktop{gap:0}
+.renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link{position:relative;flex:none;width:auto;min-width:0;height:110px;padding:0 22px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#1f2428;white-space:nowrap}
+.renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link[data-active="true"]{color:var(--re-blue,#1572ed)}
+.renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:3px;background:var(--re-blue,#1572ed);transform:scaleX(0);transform-origin:50% 50%;transition:transform .2s}
+.renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link[data-active="true"]::after{transform:scaleX(1)}
+
+@media (max-width:1180px){
+  .renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link{padding:0 14px;font-size:18px}
+  .re-mega2__frame{padding-left:20px;padding-right:20px;grid-template-columns:240px minmax(0,1fr)}
+}
+@media (max-width:1023px){ .re-mega2{display:none} }
