@@ -751,6 +751,11 @@ function RenewalEditorialInner() {
   return <div className="renewal-editorial"><Header /><div id="re-main" tabIndex={-1}><RouteContent path={path} /></div><Footer /></div>;
 }
 
+/** 본 사이트 루트에서 쓰는 리뉴얼 본문들. 껍데기는 SiteLayout 이 이미 씌운다. */
+export function RenewalHomeBody() { return <EditorialHome />; }
+export function RenewalPriceBody() { return <PriceDetail page={PAGE_DATA.price} path="/website/price" />; }
+export function RenewalSamplesBody() { return <PortfolioPage />; }
+
 export default function RenewalEditorial() {
   return <RootContext.Provider value={PREVIEW_ROOT}><RenewalEditorialInner /></RootContext.Provider>;
 }

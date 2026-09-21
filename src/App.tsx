@@ -3,7 +3,7 @@ import { trackPageView } from "@/lib/analytics";
 import { Route, Routes, Outlet, useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { RenewalShell } from "@/pages/RenewalEditorial";
+import { RenewalShell, RenewalHomeBody, RenewalPriceBody, RenewalSamplesBody } from "@/pages/RenewalEditorial";
 import { organizationSchema } from "@/hooks/useStructuredData";
 import "@/pages/RenewalEditorial.css";
 import { MobileStickyCta } from "@/components/site/MobileStickyCta";
@@ -162,7 +162,7 @@ export default function App() {
             <Route path="site" element={<MovingCustomerSitePage />} />
           </Route>
           <Route element={<SiteLayout />}>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={LEGACY_SHELL ? <Home /> : <RenewalHomeBody />} />
             <Route path="/about" element={<About />} />
             <Route path="/services/custom" element={<CustomDevService />} />
             <Route path="/services/admin-system" element={<AdminSystemService />} />
@@ -180,7 +180,7 @@ export default function App() {
             <Route path="/homepage/:key" element={<IndustryLanding />} />
             <Route path="/estimate" element={<Estimate />} />
             <Route path="/website/process" element={<ProcessLanding />} />
-            <Route path="/website/price" element={<PriceLanding />} />
+            <Route path="/website/price" element={LEGACY_SHELL ? <PriceLanding /> : <RenewalPriceBody />} />
             <Route path="/website/features" element={<FeaturesLanding />} />
             <Route path="/website/maintenance" element={<MaintenanceLanding />} />
             <Route path="/web-solutions/product-quotes" element={<ProductQuoteSolution />} />
@@ -192,7 +192,7 @@ export default function App() {
             <Route path="/web-solutions/moving" element={<MovingSolution />} />
             <Route path="/web-solutions/reservations" element={<ReservationSolution />} />
             <Route path="/web-solutions/platform" element={<PlatformSolution />} />
-            <Route path="/samples" element={<Samples />} />
+            <Route path="/samples" element={LEGACY_SHELL ? <Samples /> : <RenewalSamplesBody />} />
             <Route path="/samples/:slug" element={<SampleDetail />} />
             <Route path="/notices" element={<Notices />} />
             <Route path="/notices/:noticeId" element={<NoticeDetail />} />
