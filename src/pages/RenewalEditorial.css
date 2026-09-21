@@ -940,3 +940,60 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-search__list strong{display:block;margin-top:2px;font-size:16px;font-weight:600}
 .re-search__list em{display:block;margin-top:2px;font-style:normal;font-size:14px;color:var(--re-muted,#767676);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 @media (max-width:1023px){.re-search{padding:60px 12px}.re-search__field input{font-size:16px}}
+
+/* ------------------------------------------------------------------
+   홈 "제작 사례" · "도움 되는 정보" — NHN Cloud 메인 실측값 (2026-09-21)
+   컨테이너 1280 / 제목 40·700·lh56 / 설명 18·400·lh28 #51565f
+   ------------------------------------------------------------------ */
+.re-nhn{padding:0 60px}
+.re-nhn__frame{max-width:1280px;margin:0 auto}
+.re-nhn__heading{margin:0;font-size:40px;font-weight:700;line-height:56px;color:#000;word-break:keep-all}
+.re-nhn__lead{margin:4px 0 0;font-size:18px;font-weight:400;line-height:28px;color:#51565f;word-break:keep-all}
+.re-nhn--cases{margin-top:160px}
+.re-nhn--help{margin-top:120px}
+
+/* 사례 카드 320x411 · 간격 20 · 원본처럼 4장째가 오른쪽에서 잘린다 */
+.re-case-list{margin:40px 0 0;padding:0 0 4px;list-style:none;display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
+.re-case-list::-webkit-scrollbar{display:none}
+.re-case{flex:0 0 320px;width:320px}
+.re-case a{display:block;color:inherit}
+.re-case__shot{width:320px;height:220px;margin:0;display:grid;place-items:center;overflow:hidden;border:1px solid #e2e5eb;border-radius:12px;background:#fff}
+.re-case__shot img{width:318px;height:145px;object-fit:cover;object-position:50% 0}
+.re-case h3{margin:16px 0 0;font-size:20px;font-weight:700;line-height:30px;color:#000;word-break:keep-all}
+.re-case p{margin:8px 0 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;font-size:17px;font-weight:400;line-height:26px;color:#51565f;word-break:keep-all}
+.re-case__more{margin-top:12px;display:inline-flex;align-items:center;gap:6px;font-size:15px;color:#51565f}
+.re-case__more svg{width:15px;height:15px}
+.re-case a:hover h3{color:var(--re-blue,#1572ed)}
+.re-case a:hover .re-case__more{color:var(--re-blue,#1572ed)}
+
+/* 알약 버튼 186x48 라운드 30 #125de6 · 17px·500 */
+.re-nhn__actions{margin-top:40px;display:flex;justify-content:center}
+.re-pill{height:48px;padding:0 27px;display:inline-flex;align-items:center;border-radius:30px;background:#125de6;color:#fff;font-size:17px;font-weight:500;line-height:26px}
+.re-pill:hover{background:#0f4fc4}
+
+/* 정보 카드 308x308 · 간격 16 · 안쪽 여백 32 */
+.re-help-list{margin:40px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.re-help{min-height:308px;border-radius:12px}
+.re-help a{position:relative;height:100%;min-height:308px;padding:32px;display:flex;flex-direction:column;color:inherit}
+.re-help h3{margin:0;font-size:24px;font-weight:700;line-height:34px;color:#000;word-break:keep-all}
+.re-help p{margin:8px 0 0;font-size:17px;font-weight:500;line-height:26px;color:#51565f;white-space:pre-line;word-break:keep-all}
+.re-help__go{width:24px;height:24px;margin-top:auto;color:#c8ccd4;transition:color .2s,transform .2s}
+.re-help a:hover .re-help__go{color:var(--re-blue,#1572ed);transform:translateX(4px)}
+.re-help--a{background:#f6f4ff}
+.re-help--b{background:#f4f8ff}
+.re-help--c{background:#f2f9f2}
+.re-help--d{background:#f3f4f6}
+
+@media (max-width:1023px){
+  .re-nhn{padding:0 20px}
+  .re-nhn--cases{margin-top:120px}
+  .re-nhn--help{margin-top:96px}
+  .re-nhn__heading{font-size:30px;line-height:42px}
+  .re-nhn__lead{font-size:16px;line-height:24px}
+  .re-help-list{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .re-help-list{grid-template-columns:1fr}
+  .re-help,.re-help a{min-height:0}
+  .re-help a{padding:24px}
+}

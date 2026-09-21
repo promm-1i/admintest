@@ -270,6 +270,60 @@ function KakaoMark() {
   </svg>;
 }
 
+/**
+ * 홈 "제작 사례" · "도움 되는 정보" 두 칸.
+ * NHN Cloud 메인에서 실측한 값을 그대로 쓴다 (2026-09-21 측정).
+ *   컨테이너 1280 / 제목 40px·700·lh56 / 설명 18px·400·lh28 #51565f
+ *   사례 카드 320x411, 간격 20, 로고 상자 320x220 라운드 12 테두리 1px #e2e5eb, 사진 318x145
+ *   사례 제목 20px·700·lh30 / 설명 17px·400·lh26 #51565f
+ *   알약 버튼 186x48 라운드 30 #125de6, 17px·500 흰 글자
+ *   정보 카드 308x308 라운드 12, 간격 16, 안쪽 여백 32, 제목 24px·700·lh34, 설명 17px·500·lh26
+ *   정보 카드 배경 #f6f4ff · #f4f8ff · #f2f9f2 · #f3f4f6
+ */
+const HELP_CARDS = [
+  { title: "제작 방법", desc: "상담에서 오픈까지\n무엇을 언제 하는지", href: "/website/process", tone: "a" },
+  { title: "제작 비용", desc: "형태와 구성별로\n정해진 금액 보기", href: "/website/price", tone: "b" },
+  { title: "견적 계산기", desc: "필요한 기능을 골라\n예상 금액 확인", href: "/estimate", tone: "c" },
+  { title: "자주 묻는 질문", desc: "비용 · 기간 · 관리자 기능에\n대한 답", href: "/faq", tone: "d" },
+] as const;
+
+function HomeCases() {
+  const root = useRoot();
+  const cases = getPremiumDesigns().map((item) => item.sample).filter((sample) => sample.image).slice(0, 6);
+  return <section className="re-nhn re-nhn--cases">
+    <div className="re-nhn__frame">
+      <h2 className="re-nhn__heading">제작 사례</h2>
+      <p className="re-nhn__lead">어떤 업종이 어떤 화면으로 만들어졌는지 보시고 고르세요.</p>
+      <ul className="re-case-list">{cases.map((sample) => <li className="re-case" key={sample.slug}>
+        <Link to={`${root}/samples/${sample.slug}`}>
+          <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" /></figure>
+          <h3>{sample.premiumLabel ?? sample.industry}</h3>
+          <p>{sample.tag ?? sample.type.join(" · ")}</p>
+          <span className="re-case__more">자세히 보기<ArrowRight /></span>
+        </Link>
+      </li>)}</ul>
+      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/samples`}>전체 제작 사례 보기</Link></div>
+    </div>
+  </section>;
+}
+
+function HomeHelp() {
+  const root = useRoot();
+  return <section className="re-nhn re-nhn--help">
+    <div className="re-nhn__frame">
+      <h2 className="re-nhn__heading">도움 되는 정보 한눈에 보기</h2>
+      <p className="re-nhn__lead">지금 가장 필요한 정보부터 살펴보세요.</p>
+      <ul className="re-help-list">{HELP_CARDS.map((card) => <li className={`re-help re-help--${card.tone}`} key={card.title}>
+        <Link to={`${root}${card.href}`}>
+          <h3>{card.title}</h3>
+          <p>{card.desc}</p>
+          <ArrowRight className="re-help__go" />
+        </Link>
+      </li>)}</ul>
+    </div>
+  </section>;
+}
+
 function Header() {
   const root = useRoot();
   const { pathname } = useLocation();
@@ -367,6 +421,8 @@ function EditorialHome() {
     </section>
     <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">지금 우리는</p><h2 className="now-title">오늘의 화면과<br />내일의 운영을<br className="mobile" /> 함께 만듭니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
     <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{projects.slice(0, 3).map((project, index) => <li className="now-value-item" key={project.slug}><Link className={`now-value-card type-${index + 1}`} to={`${root}/samples/${project.slug}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
+    <HomeCases />
+    <HomeHelp />
     <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">오늘을 함께하는<br />제작 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${root}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
     <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈 뒤에도<br className="mobile" /> 내용을 바꾸고<br />운영하는 하루까지<br className="mobile" /> 함께합니다</p><ul className="tomorrow-list">{projects.slice(3, 6).map((project, index) => <li className="tomorrow-item" key={project.slug}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}/samples/${project.slug}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">필요한 페이지와 기능을<br />상담에서 확인합니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/samples`}>제작 사례</Link></div></section></div>
   </main>;
