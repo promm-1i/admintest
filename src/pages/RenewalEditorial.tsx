@@ -15,18 +15,18 @@ const ROOT = "/renewal-editorial";
 const MEDIA = "/renewal-editorial/media";
 // 서브페이지는 쪽마다 다른 사진을 쓴다. 새 사진이 오면 해당 줄의 파일명만 바꾸면 된다.
 const SUBPAGE_MEDIA: Record<PageKey, string> = {
-  process: `${MEDIA}/subpage.webp`,
-  price: `${MEDIA}/subpage.webp`,
-  features: `${MEDIA}/subpage.webp`,
-  maintenance: `${MEDIA}/subpage.webp`,
-  custom: `${MEDIA}/subpage.webp`,
-  "admin-system": `${MEDIA}/subpage.webp`,
-  "inquiry-reservation": `${MEDIA}/subpage.webp`,
-  "search-filter": `${MEDIA}/subpage.webp`,
-  "content-management": `${MEDIA}/subpage.webp`,
-  "database-api": `${MEDIA}/subpage.webp`,
-  responsive: `${MEDIA}/subpage.webp`,
-  seo: `${MEDIA}/subpage.webp`,
+  process: `${MEDIA}/sub-process.webp`,
+  price: `${MEDIA}/sub-process.webp`,  // 제작 비용 쪽은 상단 사진 판이 없어 실제로 쓰이지 않는다
+  features: `${MEDIA}/sub-features.webp`,
+  maintenance: `${MEDIA}/sub-maintenance.webp`,
+  custom: `${MEDIA}/sub-custom.webp`,
+  "admin-system": `${MEDIA}/sub-admin.webp`,
+  "inquiry-reservation": `${MEDIA}/sub-inquiry.webp`,
+  "search-filter": `${MEDIA}/sub-search.webp`,
+  "content-management": `${MEDIA}/sub-content.webp`,
+  "database-api": `${MEDIA}/sub-database.webp`,
+  responsive: `${MEDIA}/sub-responsive.webp`,
+  seo: `${MEDIA}/sub-seo.webp`,
 };
 const MEDIA_SLOTS = {
   hero: `${MEDIA}/hero.webp`,
