@@ -299,6 +299,42 @@ function HomeHelp() {
   </section>;
 }
 
+/**
+ * 만든 홈페이지를 원근으로 눕혀 깐 칸.
+ * 지학사 초등(textbook.jihak.co.kr) 히어로의 표지 레인에서 읽은 값을 그대로 쓴다 (2026-09-21 측정).
+ *   무대  perspective:18.6cqw · perspective-origin:50% 100%
+ *        mask-image: to bottom, transparent 0%, .12 9%, .3 15%, .9 24%, #000 34%
+ *   바닥  transform:rotateX(32deg) · origin 50% 100% · 좌우로 182px 씩 넓다
+ *   등장  opacity 0→1, .7s ease-out, 0.9초 뒤, backwards
+ *   카드  hover 시 translateY(-10px) scale(1.02), 그림자 0 32px 46px rgba(30,34,40,.22)
+ *        덮는 막 rgba(16,17,22,.42) · 전환 .25s
+ * 줄 단위 지연 0.08초는 같은 사이트의 등장 계단값이다.
+ * 책 표지 비율(241.9:336)과 책등 라운드(2 9 9 2)는 우리 것이 가로 화면이라 쓰지 않는다.
+ */
+function HomeLane() {
+  const root = useRoot();
+  const premium = getPremiumDesigns().map((item) => item.sample);
+  const rest = SAMPLES.filter((sample) => sample.image && !premium.some((p) => p.slug === sample.slug));
+  const picked = [...premium, ...rest].filter((sample) => sample.image).slice(0, 28);
+  const rows = [picked.slice(0, 7), picked.slice(7, 14), picked.slice(14, 21), picked.slice(21, 28)];
+  return <section className="re-lane" aria-label="만든 홈페이지">
+    <p className="re-lane__eyebrow">MADE BY NOVERIQ</p>
+    <h2 className="re-lane__heading">지금까지 만든 화면입니다</h2>
+    {/* 바닥은 장식이다. 28장을 전부 링크로 두면 키보드로 하나씩 훑어야 해서 aria 로 감추고
+        실제 이동은 아래 버튼 하나로 모은다. */}
+    <div className="re-lane__stage" aria-hidden="true">
+      <div className="re-lane__floor">
+        {rows.map((row, index) => <div className="re-lane__row" key={index} style={{ "--row-delay": `${index * 0.08}s` } as CSSProperties}>
+          {row.map((sample) => <div className="re-lane__card" key={sample.slug}>
+            <img src={sample.image} alt="" loading="lazy" decoding="async" width={1280} height={960} />
+          </div>)}
+        </div>)}
+      </div>
+    </div>
+    <div className="re-lane__actions"><Link className="re-pill" to={`${root}/samples`}>만든 화면 전부 보기</Link></div>
+  </section>;
+}
+
 function Header() {
   const root = useRoot();
   const { pathname } = useLocation();
@@ -410,6 +446,7 @@ function EditorialHome() {
   const storyItems = SCOPE_SCENES.slice(0, 3);
   return <main id="top" className="re-home">
     <section className="greeting re-greeting"><div className="greeting-frame re-greeting__frame"><HeroVideo /></div></section>
+    <HomeLane />
     <section id="scope" className="first re-first">
       <div className="first-intro re-first-intro init re-init">
         <h2 className="first-heading">첫번째<br />화면</h2>
