@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { getSampleBySlug } from "@/lib/samples";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { useStructuredData, designProductSchema, breadcrumbSchema } from "@/hooks/useStructuredData";
 import NotFound from "@/pages/NotFound";
 import {
   Monitor,
@@ -66,6 +67,30 @@ export default function SampleDetail() {
         : `${sample.industry} 실시간 미리보기 — NOVERIQ`
       : "포트폴리오를 찾을 수 없습니다 — NOVERIQ",
     sample?.purpose,
+  );
+
+  // 검색 결과에 값과 이미지가 함께 뜨도록 알린다
+  useStructuredData(
+    sample
+      ? {
+          "@context": "https://schema.org",
+          "@graph": [
+            designProductSchema({
+              name: sample.premiumLabel ? `${sample.premiumLabel} 홈페이지 디자인` : sample.industry,
+              description: sample.purpose,
+              image: sample.image,
+              path: `/samples/${sample.slug}`,
+              designCode: sample.designCode,
+              priceFrom: sample.premium ? 3_000_000 : 640_000,
+            }),
+            breadcrumbSchema([
+              { name: "홈", path: "/" },
+              { name: sample.premium ? "프리미엄 디자인" : "제작 사례", path: sample.premium ? "/web-solutions" : "/samples" },
+              { name: sample.premiumLabel ?? sample.industry, path: `/samples/${sample.slug}` },
+            ]),
+          ],
+        }
+      : null,
   );
 
   if (!sample) return <NotFound />;

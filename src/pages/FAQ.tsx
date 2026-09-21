@@ -5,6 +5,7 @@ import { Search, ArrowRight, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { useStructuredData, faqSchema } from "@/hooks/useStructuredData";
 import { listPublishedNotices } from "@/lib/api/notices";
 
 type FaqItem = { q: string; a: string; category: string; link?: { label: string; to: string } };
@@ -89,6 +90,9 @@ export default function FAQ() {
     "고객센터 — NOVERIQ",
     "제작 문의, 비용, 유지보수, 관리자 기능, 도메인까지 NOVERIQ 홈페이지 제작에 대해 자주 묻는 질문을 안내합니다.",
   );
+
+  // 검색 결과에 문답이 펼쳐지도록 알린다
+  useStructuredData(faqSchema(FAQS.map((item) => ({ question: item.q, answer: item.a }))));
 
   const [category, setCategory] = useState("전체");
   const [query, setQuery] = useState("");

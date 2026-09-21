@@ -4,6 +4,7 @@ import { Route, Routes, Outlet, useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { RenewalShell } from "@/pages/RenewalEditorial";
+import { organizationSchema } from "@/hooks/useStructuredData";
 import "@/pages/RenewalEditorial.css";
 import { MobileStickyCta } from "@/components/site/MobileStickyCta";
 import { FloatingQuickActions } from "@/components/site/FloatingQuickActions";
@@ -88,6 +89,16 @@ function RouteLoadingFallback() {
 const LEGACY_SHELL = import.meta.env.VITE_LEGACY_SHELL === "1";
 
 function SiteLayout() {
+  // 사업자 정보는 어느 쪽에서 들어와도 같으니 index.html 에 한 번만 심는다
+  useEffect(() => {
+    if (document.getElementById("noveriq-org-schema")) return;
+    const node = document.createElement("script");
+    node.type = "application/ld+json";
+    node.id = "noveriq-org-schema";
+    node.textContent = JSON.stringify(organizationSchema());
+    document.head.appendChild(node);
+  }, []);
+
   if (!LEGACY_SHELL) {
     return (
       <RenewalShell>
