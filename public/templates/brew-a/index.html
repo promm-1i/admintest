@@ -26,8 +26,8 @@
   transition:opacity 1s ease,visibility 1s ease}
 .mv__item.on{opacity:1;visibility:visible}
 .mv__link{display:block;height:100%}
+.mv__pic{display:block;height:100%}
 .mv__img{display:block;width:100%;height:100%;object-fit:cover;user-select:none}
-.mv__img--mo{display:none}
 .mv__item.on .mv__img{animation:mvZoom 1.5s cubic-bezier(.16,1,.3,1) both}
 @keyframes mvZoom{from{transform:scale(1.1)}to{transform:none}}
 .mv__scrim{position:absolute;inset:0;pointer-events:none;
@@ -175,8 +175,6 @@
   .mv{padding:calc(var(--header-h) + 5px) 20px 20px;height:auto}
   .mv__track{overflow:hidden;height:auto;aspect-ratio:.68359375}
   .mv__item{position:absolute;inset:0;height:100%}
-  .mv__img--pc{display:none}
-  .mv__img--mo{display:block}
   .mv__cap{left:34px;right:34px;top:18%}
   .mv__cap-h{font-size:2.4rem}
   .mv__cap-t{display:none}
@@ -226,8 +224,10 @@
 <section class="mv" data-head-theme="dark" aria-label="주요 소식">
 <div class="mv__track"><div class="mv__item on" data-idx="0">
 <a class="mv__link" href="./campaign-first.html">
-<img class="mv__img mv__img--pc" src="./assets/hero-1.jpg" alt="" >
-<img class="mv__img mv__img--mo" src="./assets/hero-1-m.jpg" alt="" >
+<picture class="mv__pic">
+<source media="(max-width:768px)" srcset="./assets/hero-1-m.jpg">
+<img class="mv__img" src="./assets/hero-1.jpg" alt="">
+</picture>
 <span class="mv__scrim"></span>
 <span class="mv__cap">
 <span class="mv__cap-k">홈 리추얼 캠페인</span>
@@ -237,8 +237,10 @@
 </a>
 </div><div class="mv__item" data-idx="1">
 <a class="mv__link" href="./campaign-pouring.html">
-<img class="mv__img mv__img--pc" src="./assets/hero-2.jpg" alt="" loading="lazy">
-<img class="mv__img mv__img--mo" src="./assets/hero-2-m.jpg" alt="" loading="lazy">
+<picture class="mv__pic">
+<source media="(max-width:768px)" data-srcset="./assets/hero-2-m.jpg">
+<img class="mv__img" data-src="./assets/hero-2.jpg" alt="">
+</picture>
 <span class="mv__scrim"></span>
 <span class="mv__cap">
 <span class="mv__cap-k">따르는 시간</span>
@@ -248,8 +250,10 @@
 </a>
 </div><div class="mv__item" data-idx="2">
 <a class="mv__link" href="./brand.html">
-<img class="mv__img mv__img--pc" src="./assets/hero-3.jpg" alt="" loading="lazy">
-<img class="mv__img mv__img--mo" src="./assets/hero-3-m.jpg" alt="" loading="lazy">
+<picture class="mv__pic">
+<source media="(max-width:768px)" data-srcset="./assets/hero-3-m.jpg">
+<img class="mv__img" data-src="./assets/hero-3.jpg" alt="">
+</picture>
 <span class="mv__scrim"></span>
 <span class="mv__cap">
 <span class="mv__cap-k">90년의 전통</span>
@@ -285,8 +289,8 @@
 <section class="tale" data-head-theme="dark">
 <div class="tale__wrap">
 <div class="tale__media">
-<video class="tale__v" muted playsinline loop preload="none" poster="./assets/tale.jpg">
-<source src="./assets/tale.mp4" type="video/mp4"></video>
+<video class="tale__v" muted playsinline loop preload="none"
+ data-poster="./assets/tale.jpg" data-src="./assets/tale.mp4"></video>
 <div class="tale__veil"></div>
 </div>
 <div class="tale__main"><div class="tale__in">
@@ -308,22 +312,22 @@
 <div class="secret__panel">
 <div class="secret__list"><div class="secret__item">
 <div class="secret__bg"><div class="secret__bg-in">
-<video class="secret__v" muted playsinline loop preload="none" poster="./assets/secret-1.jpg">
-<source src="./assets/secret-1.mp4" type="video/mp4"></video>
+<video class="secret__v" muted playsinline loop preload="none"
+ data-poster="./assets/secret-1.jpg" data-src="./assets/secret-1.mp4"></video>
 </div></div>
 <div class="secret__note"><h3 class="secret__note-h"><span class="secret__note-n">1</span> 눈으로 먼저 마시는 한 잔</h3>
 <p class="secret__note-t">해담의 매력은 눈으로도 확인할 수 있습니다.<br>맑은 황금빛을 한층 돋보이게 하는 촘촘하고 흰 거품.</p></div>
 </div><div class="secret__item">
 <div class="secret__bg"><div class="secret__bg-in">
-<video class="secret__v" muted playsinline loop preload="none" poster="./assets/secret-2.jpg">
-<source src="./assets/secret-2.mp4" type="video/mp4"></video>
+<video class="secret__v" muted playsinline loop preload="none"
+ data-poster="./assets/secret-2.jpg" data-src="./assets/secret-2.mp4"></video>
 </div></div>
 <div class="secret__note"><h3 class="secret__note-h"><span class="secret__note-n">2</span> 깊고 진한 해담만의 감칠맛</h3>
 <p class="secret__note-t">엄선한 원료와 손에 익은 담금 공정으로 완성한 해담의 풍미는<br>오직 해담에서만 만날 수 있는 맛의 기준입니다.</p></div>
 </div><div class="secret__item">
 <div class="secret__bg"><div class="secret__bg-in">
-<video class="secret__v" muted playsinline loop preload="none" poster="./assets/secret-3.jpg">
-<source src="./assets/secret-3.mp4" type="video/mp4"></video>
+<video class="secret__v" muted playsinline loop preload="none"
+ data-poster="./assets/secret-3.jpg" data-src="./assets/secret-3.mp4"></video>
 </div></div>
 <div class="secret__note"><h3 class="secret__note-h"><span class="secret__note-n">3</span> 해담의 시그니처, 들꽃 같은 향</h3>
 <p class="secret__note-t">홉의 서늘한 향, 맥아의 깊은 단맛, 그리고 숙성 과정에서<br>무르익은 섬세한 여운이 어우러진 품격 있는 조화.</p></div>
@@ -500,6 +504,38 @@
   });
 })();
 
+/* 첫 화면 밖 자원은 그린 뒤에 받는다 — 첫 로딩에서 히어로 2·3장과 영상을 빼기 위한 것 */
+function hdLazy(el){
+  if(!el || el.dataset.hdOn) return;
+  el.dataset.hdOn='1';
+  el.querySelectorAll('[data-srcset]').forEach(function(s){ s.srcset=s.dataset.srcset; s.removeAttribute('data-srcset'); });
+  el.querySelectorAll('[data-src]').forEach(function(n){
+    if(n.tagName==='VIDEO'){
+      if(n.dataset.poster){ n.poster=n.dataset.poster; n.removeAttribute('data-poster'); }
+      var s=document.createElement('source'); s.src=n.dataset.src; s.type='video/mp4';
+      n.appendChild(s); n.preload='auto'; n.load();
+    } else { n.src=n.dataset.src; }
+    n.removeAttribute('data-src');
+  });
+}
+function hdPlay(v){
+  if(!v) return;
+  v.dataset.hdWant='1';
+  var go=function(){ if(v.dataset.hdWant==='1') v.play().catch(function(){}) };
+  go();
+  v.addEventListener('canplay',go,{once:true});
+  v.addEventListener('loadeddata',go,{once:true});
+}
+function hdStop(v){ if(v){ v.dataset.hdWant='0'; v.pause(); } }
+function hdNear(target, load, margin){
+  if(!target) return;
+  if(!('IntersectionObserver' in window)){ load(); return; }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(en){ if(en.isIntersecting){ load(); io.disconnect(); } });
+  },{rootMargin:(margin||600)+'px 0px'});
+  io.observe(target);
+}
+
 /* 히어로 슬라이드 — 5초 자동, 진행 막대 */
 (function(){
   var root=document.querySelector('.mv'); if(!root) return;
@@ -516,7 +552,7 @@
   }
   function theme(n){
     var head=document.querySelector('.site-head'); if(!head) return;
-    var img=items[n].querySelector('.mv__img--pc');
+    var img=items[n].querySelector('.mv__img');
     if(!img||!img.naturalWidth) return;
     try{
       var c=document.createElement('canvas'); c.width=100; c.height=50;
@@ -532,8 +568,12 @@
   function play(){ stop(); t=setInterval(function(){ go(i+1) },5000) }
   function stop(){ if(t) clearInterval(t) }
   dots.forEach(function(d){ d.addEventListener('click',function(){ go(+d.dataset.go); play() }) });
+  /* 2·3번째 장은 첫 그림이 끝난 뒤에 받는다 */
+  function rest(){ items.slice(1).forEach(hdLazy) }
+  if(document.readyState==='complete') setTimeout(rest,400);
+  else addEventListener('load',function(){ setTimeout(rest,400) });
   play();
-  var f=items[0].querySelector('.mv__img--pc');
+  var f=items[0].querySelector('.mv__img');
   if(f){ f.complete?theme(0):f.addEventListener('load',function(){theme(0)}); }
   document.addEventListener('visibilitychange',function(){ document.hidden?stop():play() });
 })();
@@ -559,8 +599,9 @@
 (function(){
   var sec=document.querySelector('.tale'); if(!sec) return;
   var wrap=sec.querySelector('.tale__wrap'), v=sec.querySelector('.tale__v');
+  hdNear(sec,function(){ hdLazy(sec) },700);
   if(v){ var io=new IntersectionObserver(function(e){
-      e.forEach(function(en){ en.isIntersecting?v.play().catch(function(){}):v.pause() });
+      e.forEach(function(en){ en.isIntersecting?hdPlay(v):hdStop(v) });
     },{threshold:.15}); io.observe(sec); }
   function tick(){
     if(innerWidth<=1024){ wrap.style.transform=''; wrap.style.opacity=''; return; }
@@ -580,7 +621,7 @@
   var rows=[].slice.call(sec.querySelectorAll('.secret__ind-row'));
   var paras=[].slice.call(sec.querySelectorAll('.secret__ind-p'));
   var vids=[].slice.call(sec.querySelectorAll('.secret__v'));
-  var n=vids.length, base={}, cur=-1;
+  var n=vids.length, base={}, cur=-1, playing=-1;
   function measure(){
     var vw=innerWidth, vh=innerHeight;
     base.h=620/1920*vw; base.w=base.h*0.8051; base.top=vh*0.28;
@@ -608,14 +649,15 @@
       cur=idx;
       rows.forEach(function(r){ r.style.transform='translateY('+(-idx*100)+'%)' });
       paras.forEach(function(r){ r.style.transform='translateY('+(-idx*100)+'%)' });
-      vids.forEach(function(v,k){ if(k===idx){ v.play().catch(function(){}) } else { v.pause() } });
+    }
+    var want=(a>=0.98)?idx:-1;
+    if(want!==playing){
+      playing=want;
+      vids.forEach(function(v,k){ k===want?hdPlay(v):hdStop(v) });
     }
   }
   addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick);
-  var io=new IntersectionObserver(function(es){ es.forEach(function(en){
-    if(en.isIntersecting) vids.forEach(function(v){ if(v.preload==='none') v.preload='auto' });
-  })},{rootMargin:'200px'});
-  io.observe(sec);
+  hdNear(sec,function(){ hdLazy(sec) },700);
   tick();
 })();
 
