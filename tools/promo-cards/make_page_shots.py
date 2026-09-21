@@ -218,12 +218,19 @@ SPECS: dict[str, dict] = {
 }
 
 
+# 자를 수 있는 자리 = 실제 섹션·카드 줄의 윗변. 한 장(1900px)보다 긴 블록 안에서는 폭 기준을 낮춰
+# 격자 한 줄의 윗변까지 찾되, 옆 카드 한복판에 걸리는 y(엇갈린 배치)는 버린다.
 SECTION_JS = """()=>{const root=document.querySelector('main,#contents,.page,#container')||document.body;
- const out=[];const walk=(el,d)=>{for(const c of el.children){const b=c.getBoundingClientRect();
-  if(b.width<600||b.height<80)continue;
-  out.push(Math.round(b.top+scrollY));
-  if(d<4&&b.height>600)walk(c,d+1)}};
- walk(root,0);out.push(document.documentElement.scrollHeight);
+ const out=[];
+ const walk=(el,d,minw)=>{
+  const ks=[...el.children].map(c=>({c,b:c.getBoundingClientRect()})).filter(o=>o.b.width>=minw&&o.b.height>=80);
+  for(let i=0;i<ks.length;i++){const b=ks[i].b, y=Math.round(b.top+scrollY);
+   let inside=false;
+   if(minw<600){for(let j=0;j<ks.length;j++){if(j===i)continue;const o=ks[j].b;
+    if(y>Math.round(o.top+scrollY)+8&&y<Math.round(o.bottom+scrollY)-8){inside=true;break}}}
+   if(!inside)out.push(y);
+   if(d<5&&b.height>600)walk(ks[i].c,d+1,b.height>2600?340:600)}};
+ walk(root,0,600);out.push(document.documentElement.scrollHeight);
  return [...new Set(out)].sort((a,b)=>a-b)}"""
 SEC_TARGET, SEC_MIN, SEC_MAX = 1350, 1150, 1900   # 4:5 를 기준 삼되 섹션이 끊기지 않게 폭을 준다
 
@@ -771,10 +778,12 @@ def main() -> None:
         for name, im in items:
             head, _, tail = name.rpartition("-")
             stem = head if tail.isdigit() and head else name
-            # 검색 결과 · 탭 전환 같은 기능 화면은 원래 쪽과 닮아도 남긴다 (보여 줄 게 그거라서)
-            if stem not in shot_names and any(diff(prev, im) < 8 for _, prev in out):
-                continue
-            out.append((name, im))
+            hit = next((i for i, (_, prev) in enumerate(out) if diff(prev, im) < 8), None)
+            if hit is None:
+                out.append((name, im))
+            elif stem in shot_names:
+                # 검색 결과 · 탭 전환 같은 기능 화면은, 닮은 원래 쪽을 대신 빼고 이쪽을 남긴다
+                out[hit] = (name, im)
         return out
 
     def save(folder: str, items: list[tuple[str, Image.Image]]) -> None:
@@ -786,10 +795,14 @@ def main() -> None:
             im.save(out / f"{n:02d}-{label}.jpg", quality=90)
         print(folder, len(items))
 
+    # 상세 10장은 쪽을 골고루 보여 준다 — 한 쪽이 조각을 여러 개 내도 먼저 쪽마다 한 장씩 돌린다
+    # (안 그러면 앞 쪽 조각이 열 칸을 다 먹어 뒤 쪽은 한 장도 못 들어간다)
+    kper = {n: page_images(fdir, n) for n in sp["kmong"]}
     kmong = [("대표", cover(fdir))]
-    for name in sp["kmong"]:
-        for k, im in enumerate(page_images(fdir, name)):
-            kmong.append((f"{name}{'-' + str(k + 1) if k else ''}", im))
+    for r in range(max((len(v) for v in kper.values()), default=0)):
+        for name in sp["kmong"]:
+            if r < len(kper[name]):
+                kmong.append((f"{name}{'-' + str(r + 1) if r else ''}", kper[name][r]))
     kmong = prune(kmong)
     save("크몽", kmong[:11])  # 대표 1 + 상세 10
 
