@@ -1072,6 +1072,22 @@ function RenewalEditorialInner() {
 export function RenewalHomeBody() { return <EditorialHome />; }
 export function RenewalPriceBody() { return <PriceDetail page={PAGE_DATA.price} path="/website/price" />; }
 export function RenewalSamplesBody() { return <PortfolioPage />; }
+export function RenewalPrivacyBody() { return <PrivacyPage />; }
+
+/** 제작 안내·기술력 12쪽을 본 사이트에서도 리뉴얼 본문으로 그린다. 경로로 어느 쪽인지 고른다. */
+const CONTENT_ROUTES: Record<string, PageKey> = {
+  "/website/process": "process", "/website/price": "price", "/website/features": "features", "/website/maintenance": "maintenance",
+  "/services/custom": "custom", "/services/admin-system": "admin-system", "/services/inquiry-reservation": "inquiry-reservation",
+  "/services/search-filter": "search-filter", "/services/content-management": "content-management",
+  "/services/database-api": "database-api", "/services/responsive": "responsive", "/services/seo": "seo",
+};
+export function RenewalContentBody() {
+  const { pathname } = useLocation();
+  const path = pathname.replace(/\/+$/, "") || "/";
+  const key = CONTENT_ROUTES[path];
+  if (!key) return <NotFound />;
+  return <StandardPage page={PAGE_DATA[key]} path={path} />;
+}
 
 export default function RenewalEditorial() {
   return <RootContext.Provider value={PREVIEW_ROOT}><RenewalEditorialInner /></RootContext.Provider>;

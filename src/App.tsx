@@ -3,7 +3,7 @@ import { trackPageView } from "@/lib/analytics";
 import { Route, Routes, Outlet, useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { RenewalShell, RenewalHomeBody, RenewalPriceBody, RenewalSamplesBody } from "@/pages/RenewalEditorial";
+import { RenewalShell, RenewalHomeBody, RenewalPriceBody, RenewalSamplesBody, RenewalContentBody, RenewalPrivacyBody } from "@/pages/RenewalEditorial";
 import { organizationSchema } from "@/hooks/useStructuredData";
 import "@/pages/RenewalEditorial.css";
 import { MobileStickyCta } from "@/components/site/MobileStickyCta";
@@ -164,14 +164,14 @@ export default function App() {
           <Route element={<SiteLayout />}>
             <Route path="/" element={LEGACY_SHELL ? <Home /> : <RenewalHomeBody />} />
             <Route path="/about" element={<About />} />
-            <Route path="/services/custom" element={<CustomDevService />} />
-            <Route path="/services/admin-system" element={<AdminSystemService />} />
-            <Route path="/services/inquiry-reservation" element={<InquiryReservationService />} />
-            <Route path="/services/search-filter" element={<SearchFilterService />} />
-            <Route path="/services/content-management" element={<ContentManagementService />} />
-            <Route path="/services/database-api" element={<DatabaseApiService />} />
-            <Route path="/services/responsive" element={<ResponsiveService />} />
-            <Route path="/services/seo" element={<SeoService />} />
+            <Route path="/services/custom" element={LEGACY_SHELL ? <CustomDevService /> : <RenewalContentBody />} />
+            <Route path="/services/admin-system" element={LEGACY_SHELL ? <AdminSystemService /> : <RenewalContentBody />} />
+            <Route path="/services/inquiry-reservation" element={LEGACY_SHELL ? <InquiryReservationService /> : <RenewalContentBody />} />
+            <Route path="/services/search-filter" element={LEGACY_SHELL ? <SearchFilterService /> : <RenewalContentBody />} />
+            <Route path="/services/content-management" element={LEGACY_SHELL ? <ContentManagementService /> : <RenewalContentBody />} />
+            <Route path="/services/database-api" element={LEGACY_SHELL ? <DatabaseApiService /> : <RenewalContentBody />} />
+            <Route path="/services/responsive" element={LEGACY_SHELL ? <ResponsiveService /> : <RenewalContentBody />} />
+            <Route path="/services/seo" element={LEGACY_SHELL ? <SeoService /> : <RenewalContentBody />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/web-solutions" element={<WebSolutions />} />
             <Route path="/web-solutions/demos" element={<DemoHub />} />
@@ -179,10 +179,10 @@ export default function App() {
             <Route path="/homepage" element={<IndustryIndex />} />
             <Route path="/homepage/:key" element={<IndustryLanding />} />
             <Route path="/estimate" element={<Estimate />} />
-            <Route path="/website/process" element={<ProcessLanding />} />
+            <Route path="/website/process" element={LEGACY_SHELL ? <ProcessLanding /> : <RenewalContentBody />} />
             <Route path="/website/price" element={LEGACY_SHELL ? <PriceLanding /> : <RenewalPriceBody />} />
-            <Route path="/website/features" element={<FeaturesLanding />} />
-            <Route path="/website/maintenance" element={<MaintenanceLanding />} />
+            <Route path="/website/features" element={LEGACY_SHELL ? <FeaturesLanding /> : <RenewalContentBody />} />
+            <Route path="/website/maintenance" element={LEGACY_SHELL ? <MaintenanceLanding /> : <RenewalContentBody />} />
             <Route path="/web-solutions/product-quotes" element={<ProductQuoteSolution />} />
             <Route path="/web-solutions/real-estate" element={<RealEstateSolution />} />
             <Route path="/web-solutions/rentcar" element={<RentcarSolution />} />
@@ -193,6 +193,7 @@ export default function App() {
             <Route path="/web-solutions/reservations" element={<ReservationSolution />} />
             <Route path="/web-solutions/platform" element={<PlatformSolution />} />
             <Route path="/samples" element={LEGACY_SHELL ? <Samples /> : <RenewalSamplesBody />} />
+            <Route path="/privacy" element={<RenewalPrivacyBody />} />
             <Route path="/samples/:slug" element={<SampleDetail />} />
             <Route path="/notices" element={<Notices />} />
             <Route path="/notices/:noticeId" element={<NoticeDetail />} />
