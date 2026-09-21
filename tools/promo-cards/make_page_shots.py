@@ -232,7 +232,9 @@ SECTION_JS = """()=>{const root=document.querySelector('main,#contents,.page,#co
    if(d<5&&b.height>600)walk(ks[i].c,d+1,b.height>2600?340:600)}};
  walk(root,0,600);out.push(document.documentElement.scrollHeight);
  return [...new Set(out)].sort((a,b)=>a-b)}"""
-SEC_TARGET, SEC_MIN, SEC_MAX = 1350, 1150, 1900   # 4:5 를 기준 삼되 섹션이 끊기지 않게 폭을 준다
+TAIL_MIN = 480       # 마지막 조각이 이보다 짧으면 앞 장에 붙인다
+SEC_TARGET, SEC_MIN, SEC_MAX = 810, 700, 1300   # 4:3(1080x810) 을 목표로 삼되 섹션이 끊기지 않게 폭을 준다
+# 최대를 정확한 4:3(1140)으로 조이면 보통 크기 섹션이 죄다 한 장을 넘어 다시 한복판을 자르게 된다
 
 
 def save_sections(pg, fdir: Path, name: str) -> None:
@@ -587,24 +589,45 @@ def chunks_sections(im: Image.Image, secs: list[int], target: int, lo: int, hi: 
     """섹션 경계에서만 자른다. 짧은 섹션은 묶고, 한 섹션이 한 장보다 길면 겹쳐 자른다."""
     w, h = im.size
     bounds = [y for y in secs if 0 < y < h] + [h]
-    out, start, i = [], 0, 0
+    cuts, start, i = [0], 0, 0
     while start < h - 60:
         if h - start <= hi:                       # 남은 게 한 장 안에 들어가면 통째로
-            out.append(im.crop((0, start, w, h)))
+            cuts.append(h)
             break
         cand = [y for y in bounds if start + lo < y <= start + hi]
         if cand:                                  # 한 장 크기 안에 드는 경계 중 목표에 가장 먼저 닿는 것
             nxt = next((y for y in cand if y - start >= target), cand[-1])
-            out.append(im.crop((0, start, w, nxt)))
-            start = nxt
         else:                                     # 섹션 하나가 한 장보다 길다 → 안에서 자르되 15% 겹친다
             cut = quiet_row(im, start + int(target * 0.85), start + target)
-            out.append(im.crop((0, start, w, cut)))
+            cuts.append(cut)
             start = max(start + 1, cut - int(target * 0.15))
+            cuts.append(start)                    # 겹치는 구간은 시작점을 따로 적는다
+            i += 1
+            if i > 40:
+                break
+            continue
+        cuts.append(nxt)
+        start = nxt
         i += 1
         if i > 40:
             break
-    return out
+
+    # (시작, 끝) 쌍으로 되돌린다 — 겹쳐 자른 자리는 시작점이 따로 적혀 있다
+    spans, k = [], 0
+    while k + 1 < len(cuts):
+        spans.append((cuts[k], cuts[k + 1]))
+        k += 2 if k + 2 < len(cuts) and cuts[k + 2] < cuts[k + 1] else 1
+    spans = [(a, b) for a, b in spans if b > a]
+
+    # 꼬리가 너무 짧으면 앞 장에 붙인다 (1080x157 같은 띠가 나오던 것)
+    if len(spans) > 1 and spans[-1][1] - spans[-1][0] < TAIL_MIN:
+        a0, _ = spans[-2]
+        end = spans[-1][1]
+        if end - a0 <= hi + 500:
+            spans[-2:] = [(a0, end)]
+        else:
+            spans[-1] = (max(0, end - max(target, TAIL_MIN)), end)
+    return [im.crop((0, a, w, b)) for a, b in spans]
 
 
 def chunks_45(im: Image.Image, pad_to: int) -> list[Image.Image]:
@@ -729,12 +752,12 @@ def diff(a: Image.Image, b: Image.Image) -> float:
 
 
 def cover(fdir: Path, wide: bool = False) -> Image.Image:
-    """크몽 대표는 1:1, 블로그·당근 표지는 그 세트의 다른 장과 같은 4:5."""
+    """크몽 대표는 1:1, 블로그·당근 표지는 그 세트의 다른 장과 같은 4:3."""
     im = Image.open(fdir / "hero.png").convert("RGB")
     if wide:
-        need = im.width * 1350 / 1080
+        need = im.width * 810 / 1080
         box = im.crop((0, 0, im.width, min(im.height, round(need))))
-        return box.resize((1080, 1350), Image.LANCZOS)
+        return box.resize((1080, 810), Image.LANCZOS)
     s = im.height
     x0 = (im.width - s) // 2
     return im.crop((x0, 0, x0 + s, s)).resize((1080, 1080), Image.LANCZOS)
@@ -808,13 +831,13 @@ def main() -> None:
 
     # 섹션 경계로 자르면서 쪽마다 조각 수가 달라졌다 → 몫을 늘려 가며 대표+19 장을 채운다
     order = list(sp.get("blog", sp["pages"]))
-    per = {n: page_images(fdir, name=n, w=1080, max_h=1350, pad_to=1350) for n in order}
+    per = {n: page_images(fdir, name=n, w=1080, max_h=810, pad_to=810) for n in order}
     for n in sp["pages"]:                       # 그래도 모자라면 나머지 쪽에서 더 가져온다
         if sum(len(v) for v in per.values()) >= 22:
             break
         if n not in per:
             order.append(n)
-            per[n] = page_images(fdir, name=n, w=1080, max_h=1350, pad_to=1350)
+            per[n] = page_images(fdir, name=n, w=1080, max_h=810, pad_to=810)
     cap = sp.get("per_page", 3)                 # 한 페이지가 너무 많이 차지하지 않게
     while sum(min(len(v), cap) for v in per.values()) < 22 and cap < max((len(v) for v in per.values()), default=0):
         cap += 1
