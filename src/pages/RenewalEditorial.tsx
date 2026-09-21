@@ -165,6 +165,18 @@ function useEditorialMotion(pathname: string) {
   }, [pathname]);
 }
 
+function firstHref(entry: (typeof HEADER_NAV)[number]) {
+  if (entry.type === "link") return entry.href;
+  const walk = (items: readonly { href?: string; children?: readonly unknown[] }[]): string | undefined => {
+    for (const item of items) {
+      if (item.href) return item.href;
+      if (item.children) { const found = walk(item.children as never); if (found) return found; }
+    }
+    return undefined;
+  };
+  return walk(entry.items as never) ?? "/";
+}
+
 function Header() {
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -173,7 +185,7 @@ function Header() {
   return <header className={`header re-header${mobileOpen ? " active" : ""}`} onPointerLeave={() => setDesktopMenu(null)}>
     <div className="header-frame">
       <div className="header-logo"><Link className="header-logo-link re-header__logo" to={ROOT} aria-label="NOVERIQ 리뉴얼 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
-      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" aria-label="주요 메뉴">{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={desktopMenu === entry.key} onPointerEnter={() => setDesktopMenu(entry.key)} onFocusCapture={() => setDesktopMenu(entry.key)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setDesktopMenu(null); }}><button className="gnb-1d-link" type="button" aria-haspopup="true" aria-expanded={desktopMenu === entry.key} onKeyDown={(event) => { if (event.key === "Escape") { setDesktopMenu(null); event.currentTarget.blur(); } }}>{entry.label}<ChevronDown /></button><div className="re-mega"><div className="re-mega__links">{entry.items.map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}<ArrowUpRight /></Link>)}</div></div></div>)}</nav></div></div>
+      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" aria-label="주요 메뉴">{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={desktopMenu === entry.key} onPointerEnter={() => setDesktopMenu(entry.key)} onFocusCapture={() => setDesktopMenu(entry.key)} onBlurCapture={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setDesktopMenu(null); }}><Link className="gnb-1d-link" to={previewHref(firstHref(entry))} aria-haspopup="true" aria-expanded={desktopMenu === entry.key} onKeyDown={(event) => { if (event.key === "Escape") { setDesktopMenu(null); event.currentTarget.blur(); } }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{entry.items.map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}<ArrowUpRight /></Link>)}</div></div></div>)}</nav></div></div>
       <div className="header-feature"><Link className="header-bank-shortcut re-header__contact" to={`${ROOT}/contact`}>제작 문의<ArrowUpRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
     </div>
     <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{entry.items.map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div></details>)}</div>
