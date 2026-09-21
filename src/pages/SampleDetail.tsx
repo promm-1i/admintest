@@ -183,8 +183,8 @@ export default function SampleDetail() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 rounded-xl border border-border bg-secondary/30 px-5 py-3.5">
             {sample.liveUrl ? (
               <p className="text-xs text-muted-foreground break-keep">
-                💡 실제로 배포된 사이트입니다. 화면 안 미리보기는 좁게 잘려 보일 수 있으니,{" "}
-                <strong>새 탭에서 직접 방문</strong>하시면 원래 화면 그대로 보실 수 있습니다.
+                실제로 배포된 사이트입니다. 아래 <strong>이 디자인에 담긴 화면</strong>에서 각 쪽을 자르지
+                않은 상태로 볼 수 있고, <strong>새 탭에서 방문</strong>하면 직접 눌러 볼 수 있습니다.
               </p>
             ) : (
               <p className="text-xs text-muted-foreground break-keep">

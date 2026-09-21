@@ -1,4 +1,4 @@
-import { Fragment, Suspense, lazy, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
+import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Check, ChevronDown, Menu, Search, X } from "lucide-react";
@@ -14,7 +14,10 @@ import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 import { PRICING_ROWS, PRODUCTION_PERIOD, TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import "./RenewalEditorial.css";
 
-const ROOT = "/renewal-editorial";
+const PREVIEW_ROOT = "/renewal-editorial";
+// 같은 껍데기를 시안 경로(/renewal-editorial)와 본 사이트 루트("") 양쪽에서 쓴다
+const RootContext = createContext(PREVIEW_ROOT);
+const useRoot = () => useContext(RootContext);
 const MEDIA = "/renewal-editorial/media";
 // 서브페이지는 쪽마다 다른 사진을 쓴다. 새 사진이 오면 해당 줄의 파일명만 바꾸면 된다.
 const SUBPAGE_MEDIA: Record<PageKey, string> = {
@@ -120,8 +123,8 @@ const LOCAL_GROUPS = {
   고객센터: [["문의하기", "/contact"], ["공지사항", "/notices"], ["자주 묻는 질문", "/faq"]],
 } as const;
 
-function previewHref(href: string) { return /^(https?:|tel:|mailto:|#)/.test(href) ? href : `${ROOT}${href}`; }
-function pathFromLocation(pathname: string) { const value = pathname.slice(ROOT.length) || "/"; return value.startsWith("/") ? value : `/${value}`; }
+function hrefIn(root: string, href: string) { return /^(https?:|tel:|mailto:|#)/.test(href) ? href : `${root}${href}`; }
+function pathFromLocation(pathname: string, root: string) { const value = pathname.slice(root.length) || "/"; return value.startsWith("/") ? value : `/${value}`; }
 
 function useEditorialMotion(pathname: string) {
   useEffect(() => {
@@ -207,21 +210,24 @@ function firstHref(entry: (typeof HEADER_NAV)[number]) {
 }
 
 function Header() {
+  const root = useRoot();
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => { setMobileOpen(false); setMenuOpen(false); }, [pathname]);
   return <header className={`header re-header${mobileOpen ? " active" : ""}`} onPointerLeave={() => setMenuOpen(false)}>
     <div className="header-frame">
-      <div className="header-logo"><Link className="header-logo-link re-header__logo" to={ROOT} aria-label="NOVERIQ 리뉴얼 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
-      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={() => setMenuOpen(true)}><Link className="gnb-1d-link" to={previewHref(firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") { setMenuOpen(false); event.currentTarget.blur(); } }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
-      <div className="header-feature"><Link className="header-bank-shortcut re-header__contact" to={`${ROOT}/contact`}>제작 문의<ArrowUpRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
+      <div className="header-logo"><Link className="header-logo-link re-header__logo" to={root} aria-label="NOVERIQ 리뉴얼 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
+      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={() => setMenuOpen(true)}><Link className="gnb-1d-link" to={hrefIn(root, firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") { setMenuOpen(false); event.currentTarget.blur(); } }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
+      <div className="header-feature"><Link className="header-bank-shortcut re-header__contact" to={`${root}/contact`}>제작 문의<ArrowUpRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
     </div>
-    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{navItems(entry).map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div></details>)}</div>
+    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{navItems(entry).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></details>)}</div>
   </header>;
 }
 
-function Footer() { return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{HEADER_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.type === "dropdown" && navItems(entry).slice(0, 6).map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${ROOT}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${ROOT}/contact`}>제작 문의</Link><Link to={`${ROOT}/faq`}>자주 묻는 질문</Link><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">네이버 블로그</a></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그">N</a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오 채널">K</a></div></div></div></footer></>; }
+function Footer() {
+  const root = useRoot();
+  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{HEADER_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.type === "dropdown" && navItems(entry).slice(0, 6).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">네이버 블로그</a></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그">N</a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오 채널">K</a></div></div></div></footer></>; }
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -277,6 +283,7 @@ function HeroVideo() {
 }
 
 function EditorialHome() {
+  const root = useRoot();
   const projects = useMemo(() => FEATURED_SLUGS.map((slug) => SAMPLES.find((sample) => sample.slug === slug)).filter((sample): sample is NonNullable<typeof sample> => Boolean(sample?.image)), []);
   const storyItems = SCOPE_SCENES.slice(0, 3);
   return <main id="top" className="re-home">
@@ -284,16 +291,16 @@ function EditorialHome() {
     <section id="scope" className="first re-first">
       <div className="first-intro re-first-intro init re-init">
         <h2 className="first-heading">첫번째<br />화면</h2>
-        <div className="first-action re-first-intro__actions"><Link className="first-button" to={`${ROOT}/website/process`}>제작 방법</Link><Link className="first-button" to={`${ROOT}/website/features`}>기능 소개</Link><Link className="first-button" to={`${ROOT}/samples`}>제작 사례</Link></div>
+        <div className="first-action re-first-intro__actions"><Link className="first-button" to={`${root}/website/process`}>제작 방법</Link><Link className="first-button" to={`${root}/website/features`}>기능 소개</Link><Link className="first-button" to={`${root}/samples`}>제작 사례</Link></div>
         <figure className="first-docs"><img src={MEDIA_SLOTS.intro} alt="추후 교체할 이미지 영역" /></figure>
         <div className="first-lights re-first-lights" aria-hidden="true"><div className="first-light re-first-light"><i className="light-trail blue re-light-trail"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div><div className="first-light-small re-first-light re-first-light--small"><i className="light-trail blue small reverse re-light-trail re-light-trail--small"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div></div>
       </div>
       <div className="first-stories re-first-stories">{storyItems.map((scene, index) => <article className={`first-story type-${index + 1} re-first-story re-first-story--${index + 1} init re-init`} key={scene.title}><div className="first-before re-first-story__before"><h3 className="first-title">{scene.title}<br /><span className="first-keyword">{scene.keyword}</span></h3></div><div className="first-after re-first-story__after"><p className="first-desc">{scene.text.split("\n").map((line, lineIndex) => <Fragment key={line}>{lineIndex > 0 && <br />}{line}</Fragment>)}</p></div><figure className="first-fixer"><img src={scene.image} alt={`${scene.title} 화면`} /></figure></article>)}</div>
     </section>
     <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">지금 우리는</p><h2 className="now-title">오늘의 화면과<br />내일의 운영을<br className="mobile" /> 함께 만듭니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
-    <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{projects.slice(0, 3).map((project, index) => <li className="now-value-item" key={project.slug}><Link className={`now-value-card type-${index + 1}`} to={`${ROOT}/samples/${project.slug}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
-    <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">오늘을 함께하는<br />제작 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${ROOT}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
-    <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈 뒤에도<br className="mobile" /> 내용을 바꾸고<br />운영하는 하루까지<br className="mobile" /> 함께합니다</p><ul className="tomorrow-list">{projects.slice(3, 6).map((project, index) => <li className="tomorrow-item" key={project.slug}><Link className={`tomorrow-link type-${index + 1}`} to={`${ROOT}/samples/${project.slug}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">필요한 페이지와 기능을<br />상담에서 확인합니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${ROOT}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${ROOT}/samples`}>제작 사례</Link></div></section></div>
+    <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{projects.slice(0, 3).map((project, index) => <li className="now-value-item" key={project.slug}><Link className={`now-value-card type-${index + 1}`} to={`${root}/samples/${project.slug}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
+    <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">오늘을 함께하는<br />제작 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${root}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
+    <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈 뒤에도<br className="mobile" /> 내용을 바꾸고<br />운영하는 하루까지<br className="mobile" /> 함께합니다</p><ul className="tomorrow-list">{projects.slice(3, 6).map((project, index) => <li className="tomorrow-item" key={project.slug}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}/samples/${project.slug}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">필요한 페이지와 기능을<br />상담에서 확인합니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/samples`}>제작 사례</Link></div></section></div>
   </main>;
 }
 
@@ -301,7 +308,8 @@ function PageInfo({ category, title }: { category: string; title: string }) { re
 function SubHero({ step, title, image }: { step: string; title: ReactNode; image: string }) { return <div className="re-hero re-hero--single"><div className="re-hero__sticky"><div className="re-hero__frame"><img src={image} alt="" /><div className="re-hero__dim" /><i className="re-hero__edge" /><div className="re-hero__single"><h2 className="re-hero__step">{step}</h2><p className="re-hero__title">{title}</p></div></div></div></div>; }
 function Section({ title, children, wide, split }: { title?: string; children: ReactNode; wide?: boolean; split?: boolean }) { return <section className={["re-section", wide ? "re-section--wide" : "", split ? "re-section--split" : ""].filter(Boolean).join(" ")} data-reveal>{title && <h2 className="re-section__h2">{title}</h2>}{split ? <div className="re-section__body">{children}</div> : children}</section>; }
 function Contents({ children }: { children: ReactNode }) { return <div className="re-contents">{children}</div>; }
-function LocalNav({ group, path }: { group: keyof typeof LOCAL_GROUPS; path: string }) { return <nav className="re-local-nav" aria-label={`${group} 하위 메뉴`}>{LOCAL_GROUPS[group].map(([label, href]) => <Link key={href} to={previewHref(href)} aria-current={path === href ? "page" : undefined}>{label}</Link>)}</nav>; }
+function LocalNav({ group, path }: { group: keyof typeof LOCAL_GROUPS; path: string }) {
+  const root = useRoot(); return <nav className="re-local-nav" aria-label={`${group} 하위 메뉴`}>{LOCAL_GROUPS[group].map(([label, href]) => <Link key={href} to={hrefIn(root, href)} aria-current={path === href ? "page" : undefined}>{label}</Link>)}</nav>; }
 function Pagination({ total, current, onSelect }: { total: number; current: number; onSelect: (page: number) => void }) {
   const start = Math.max(0, Math.min(current - 3, total - 5));
   const pages = Array.from({ length: total }, (_, index) => index + 1).slice(start, start + 5);
@@ -311,7 +319,8 @@ function BoardSearch({ value, onChange, label }: { value: string; onChange: (val
 function DetailArticle({ category, title, date, children, listHref, prev, next }: { category: string; title: string; date?: string; children: ReactNode; listHref: string; prev?: { label: string; href: string }; next?: { label: string; href: string } }) {
   return <article className="re-detail"><header className="re-detail__meta"><p>{category}</p><h2>{title}</h2>{date && <time>{date}</time>}</header><div className="re-detail__post">{children}</div><nav className="re-detail__nav">{prev ? <Link to={prev.href}><span>이전</span><b>{prev.label}</b></Link> : <p><span>이전</span><b>이전 글이 없습니다</b></p>}{next ? <Link to={next.href}><span>다음</span><b>{next.label}</b></Link> : <p><span>다음</span><b>다음 글이 없습니다</b></p>}</nav><div className="re-detail__action"><Link to={listHref}>목록</Link></div></article>;
 }
-function ContactBand() { return <Section wide><div className="re-contact-band"><p>제작할 페이지와 기능을 알려주세요</p><h3>견적과 진행 순서를 안내해 드립니다</h3><div><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer">카카오톡 문의<ArrowUpRight /></a><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div></div></Section>; }
+function ContactBand() {
+  return <Section wide><div className="re-contact-band"><p>제작할 페이지와 기능을 알려주세요</p><h3>견적과 진행 순서를 안내해 드립니다</h3><div><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer">카카오톡 문의<ArrowUpRight /></a><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div></div></Section>; }
 function PageSections({ page }: { page: ContentPage }) { return <>{page.sections.map((section) => <Section key={section.title} split title={section.title}><div className="re-step-body"><p className="re-step-text">{section.text}</p><ul className="re-step-list">{section.points.map((point) => <li key={point}><Check />{point}</li>)}</ul></div></Section>)}</>; }
 
 function StandardPage({ page, path }: { page: ContentPage; path: string }) {
@@ -321,7 +330,8 @@ function StandardPage({ page, path }: { page: ContentPage; path: string }) {
 }
 
 function PriceDetail({ page, path }: { page: ContentPage; path: string }) {
-  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section split title="포함 항목 비교"><div className="re-price-table"><div><strong>포함 항목</strong>{TEMPLATE_PACKAGES.map((item) => <span key={item.key}>{item.label}</span>)}</div>{PRICING_ROWS.map((row) => <div key={row.label}><strong>{row.label}<small>{row.note}</small></strong>{row.values.map((value, index) => <span key={`${row.label}-${TEMPLATE_PACKAGES[index].key}`}>{value}</span>)}</div>)}<div><strong>제작 기간</strong>{TEMPLATE_PACKAGES.map((item) => <span key={item.key}>{PRODUCTION_PERIOD}</span>)}</div></div></Section><Section split title="프리미엄 디자인"><div className="re-premium-price"><h3>300만원부터</h3><span>메뉴 구성, 화면 디자인, 스크롤 연출과 관리자 기능을 새로 설계합니다</span><Link to={`${ROOT}/web-solutions`}>프리미엄 사례 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
+  const root = useRoot();
+  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section split title="포함 항목 비교"><div className="re-price-table"><div><strong>포함 항목</strong>{TEMPLATE_PACKAGES.map((item) => <span key={item.key}>{item.label}</span>)}</div>{PRICING_ROWS.map((row) => <div key={row.label}><strong>{row.label}<small>{row.note}</small></strong>{row.values.map((value, index) => <span key={`${row.label}-${TEMPLATE_PACKAGES[index].key}`}>{value}</span>)}</div>)}<div><strong>제작 기간</strong>{TEMPLATE_PACKAGES.map((item) => <span key={item.key}>{PRODUCTION_PERIOD}</span>)}</div></div></Section><Section split title="프리미엄 디자인"><div className="re-premium-price"><h3>300만원부터</h3><span>메뉴 구성, 화면 디자인, 스크롤 연출과 관리자 기능을 새로 설계합니다</span><Link to={`${root}/web-solutions`}>프리미엄 사례 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
 }
 
 const BOARD_PAGE_SIZE = 10;
@@ -333,6 +343,7 @@ function useBoardPage<T>(items: T[]) {
 }
 
 function CatalogPage({ mode }: { mode: "templates" | "premium" }) {
+  const root = useRoot();
   const { search } = useLocation(); const query = new URLSearchParams(search); const style = query.get("style"); const industry = query.get("industry"); const cat = query.get("cat");
   const [keyword, setKeyword] = useState("");
   const categories = getPremiumCategories();
@@ -342,29 +353,31 @@ function CatalogPage({ mode }: { mode: "templates" | "premium" }) {
   const board = useBoardPage(items);
   const title = mode === "premium" ? "프리미엄 디자인" : "디자인 템플릿";
   const groupTitle = active ? active.label : mode === "premium" ? "전체 디자인" : style === "basic-template" ? "기본형 템플릿" : style === "landing-template" ? "랜딩형 템플릿" : "전체 템플릿";
-  return <main className="re-sub-page"><PageInfo category="디자인" title={title} /><Contents><Section wide title={groupTitle}><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label={`${title} 검색`} />{mode === "premium" && <nav className="re-board-filter" aria-label="업종"><Link to={`${ROOT}/web-solutions`} aria-current={!cat ? "page" : undefined}>전체</Link>{categories.filter((group) => group.items.length > 0).map((group) => <Link key={group.key} to={`${ROOT}/web-solutions?cat=${group.key}`} aria-current={cat === group.key ? "page" : undefined}>{group.label}</Link>)}</nav>}{mode === "templates" && <nav className="re-board-filter" aria-label="제작 방식"><Link to={`${ROOT}/templates`} aria-current={!style ? "page" : undefined}>전체</Link><Link to={`${ROOT}/templates?style=basic-template`} aria-current={style === "basic-template" ? "page" : undefined}>기본형</Link><Link to={`${ROOT}/templates?style=landing-template`} aria-current={style === "landing-template" ? "page" : undefined}>랜딩형</Link></nav>}<ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${ROOT}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">해당 조건의 디자인이 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category="디자인" title={title} /><Contents><Section wide title={groupTitle}><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label={`${title} 검색`} />{mode === "premium" && <nav className="re-board-filter" aria-label="업종"><Link to={`${root}/web-solutions`} aria-current={!cat ? "page" : undefined}>전체</Link>{categories.filter((group) => group.items.length > 0).map((group) => <Link key={group.key} to={`${root}/web-solutions?cat=${group.key}`} aria-current={cat === group.key ? "page" : undefined}>{group.label}</Link>)}</nav>}{mode === "templates" && <nav className="re-board-filter" aria-label="제작 방식"><Link to={`${root}/templates`} aria-current={!style ? "page" : undefined}>전체</Link><Link to={`${root}/templates?style=basic-template`} aria-current={style === "basic-template" ? "page" : undefined}>기본형</Link><Link to={`${root}/templates?style=landing-template`} aria-current={style === "landing-template" ? "page" : undefined}>랜딩형</Link></nav>}<ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${root}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">해당 조건의 디자인이 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
 }
 
 function PortfolioPage() {
+  const root = useRoot();
   const [keyword, setKeyword] = useState("");
   const items = SAMPLES.filter((sample) => sample.image && (sample.industry + (sample.tag ?? "")).toLowerCase().includes(keyword.trim().toLowerCase()));
   const board = useBoardPage(items);
-  return <main className="re-sub-page"><PageInfo category="포트폴리오" title="제작 사례" /><Contents><Section wide title="전체 사례"><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label="제작 사례 검색" /><ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${ROOT}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">검색 결과가 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category="포트폴리오" title="제작 사례" /><Contents><Section wide title="전체 사례"><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label="제작 사례 검색" /><ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${root}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">검색 결과가 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
 }
 
 function SampleDetail({ slug }: { slug: string }) {
+  const root = useRoot();
   const list = SAMPLES.filter((item) => item.image);
   const index = list.findIndex((item) => item.slug === slug);
   const sample = list[index]; if (!sample) return <NotFound />;
   const prev = list[index - 1]; const next = list[index + 1];
   const related = list.filter((item) => item.slug !== sample.slug && item.industryKey === sample.industryKey).slice(0, 3);
-  return <main className="re-sub-page"><PageInfo category="제작 사례" title={sample.premiumLabel ?? sample.industry} /><Contents><Section wide><DetailArticle category={sample.designCode ?? "NOVERIQ"} title={sample.title} listHref={`${ROOT}/samples`} prev={prev && { label: prev.premiumLabel ?? prev.industry, href: `${ROOT}/samples/${prev.slug}` }} next={next && { label: next.premiumLabel ?? next.industry, href: `${ROOT}/samples/${next.slug}` }}>
+  return <main className="re-sub-page"><PageInfo category="제작 사례" title={sample.premiumLabel ?? sample.industry} /><Contents><Section wide><DetailArticle category={sample.designCode ?? "NOVERIQ"} title={sample.title} listHref={`${root}/samples`} prev={prev && { label: prev.premiumLabel ?? prev.industry, href: `${root}/samples/${prev.slug}` }} next={next && { label: next.premiumLabel ?? next.industry, href: `${root}/samples/${next.slug}` }}>
     <figure className="re-detail__figure"><img src={sample.image} alt={`${sample.industry} 홈페이지 미리보기`} /></figure>
     <p>{sample.purpose}</p>
     <dl className="re-detail__spec"><div><dt>제작 유형</dt><dd>{sample.type.join(" · ")}</dd></div><div><dt>추천 업종</dt><dd>{sample.idealFor}</dd></div>{sample.designCode && <div><dt>디자인 코드</dt><dd>{sample.designCode}</dd></div>}</dl>
     <h3>포함된 화면과 기능</h3><ol className="re-detail__features">{sample.features.map((feature) => <li key={feature}>{feature}</li>)}</ol>
     {sample.liveUrl && <p className="re-detail__live"><a href={sample.liveUrl} target="_blank" rel="noreferrer">실제 화면 보기<ArrowUpRight /></a></p>}
-    {related.length > 0 && <><h3>같은 업종의 다른 화면</h3><ul className="re-detail__related">{related.map((item) => <li key={item.slug}><Link to={`${ROOT}/samples/${item.slug}`}><img src={item.image} alt="" loading="lazy" /><span>{item.premiumLabel ?? item.industry}</span></Link></li>)}</ul></>}
+    {related.length > 0 && <><h3>같은 업종의 다른 화면</h3><ul className="re-detail__related">{related.map((item) => <li key={item.slug}><Link to={`${root}/samples/${item.slug}`}><img src={item.image} alt="" loading="lazy" /><span>{item.premiumLabel ?? item.industry}</span></Link></li>)}</ul></>}
   </DetailArticle></Section><ContactBand /></Contents></main>;
 }
 
@@ -374,16 +387,18 @@ function ContactPage() {
 }
 
 function NoticesPage() {
+  const root = useRoot();
   const [keyword, setKeyword] = useState("");
   const { data, isLoading, error } = useQuery({ queryKey: ["notices", "published"], queryFn: listPublishedNotices });
   const notices = (data ?? []).filter((notice) => notice.title.toLowerCase().includes(keyword.trim().toLowerCase()));
   const board = useBoardPage(notices);
-  return <main className="re-sub-page"><PageInfo category="고객센터" title="공지사항" /><Contents><LocalNav group="고객센터" path="/notices" /><Section wide><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label="공지사항 검색" /><div className="re-board"><ul className="re-board__list">{board.slice.map((notice) => <li className="re-board__item" key={notice.id}><Link to={`${ROOT}/notices/${notice.id}`}><span className="re-board__body"><small>{notice.is_pinned ? "공지" : notice.category || "안내"}</small><strong>{notice.title}</strong></span><time>{new Date(notice.created_at).toLocaleDateString("ko-KR")}</time></Link></li>)}</ul></div>{isLoading && <p className="re-board__state">공지사항을 불러오는 중입니다</p>}{error && <p className="re-board__state">공지사항을 불러오지 못했습니다</p>}{!isLoading && !error && notices.length === 0 && <p className="re-board__state">등록된 공지사항이 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category="고객센터" title="공지사항" /><Contents><LocalNav group="고객센터" path="/notices" /><Section wide><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label="공지사항 검색" /><div className="re-board"><ul className="re-board__list">{board.slice.map((notice) => <li className="re-board__item" key={notice.id}><Link to={`${root}/notices/${notice.id}`}><span className="re-board__body"><small>{notice.is_pinned ? "공지" : notice.category || "안내"}</small><strong>{notice.title}</strong></span><time>{new Date(notice.created_at).toLocaleDateString("ko-KR")}</time></Link></li>)}</ul></div>{isLoading && <p className="re-board__state">공지사항을 불러오는 중입니다</p>}{error && <p className="re-board__state">공지사항을 불러오지 못했습니다</p>}{!isLoading && !error && notices.length === 0 && <p className="re-board__state">등록된 공지사항이 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
 }
 
 function NoticeDetailPage({ id }: { id: string }) {
+  const root = useRoot();
   const { data, isLoading, error } = useQuery({ queryKey: ["notice", id], queryFn: () => getNotice(id), enabled: Boolean(id) });
-  return <main className="re-sub-page"><PageInfo category="고객센터" title="공지사항" /><Contents><LocalNav group="고객센터" path="/notices" /><Section wide>{isLoading && <p className="re-board__state">공지사항을 불러오는 중입니다</p>}{(error || (!isLoading && !data)) && <p className="re-board__state">공지사항을 찾을 수 없습니다</p>}{data && <DetailArticle category={data.category || "공지"} title={data.title} date={new Date(data.created_at).toLocaleDateString("ko-KR")} listHref={`${ROOT}/notices`}>{data.content}</DetailArticle>}</Section></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category="고객센터" title="공지사항" /><Contents><LocalNav group="고객센터" path="/notices" /><Section wide>{isLoading && <p className="re-board__state">공지사항을 불러오는 중입니다</p>}{(error || (!isLoading && !data)) && <p className="re-board__state">공지사항을 찾을 수 없습니다</p>}{data && <DetailArticle category={data.category || "공지"} title={data.title} date={new Date(data.created_at).toLocaleDateString("ko-KR")} listHref={`${root}/notices`}>{data.content}</DetailArticle>}</Section></Contents></main>;
 }
 
 function FaqPage() {
@@ -447,6 +462,7 @@ const EST_FEATURES = [
 const EST_INCLUDED = ["관리자 모드", "반응형 제작", "DB · 파일 무제한", "첫 해 호스팅", "도메인 1개", "기본 SEO 설정"];
 
 function EstimatePage() {
+  const root = useRoot();
   const [mode, setMode] = useState<"package" | "custom">("package");
   const [style, setStyle] = useState<string>("basic");
   const [scope, setScope] = useState<string>("one");
@@ -493,7 +509,7 @@ function EstimatePage() {
           <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{won(row.cost)}원</dd></div>)}</dl>
           <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
           <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 첫 해 호스팅료와 도메인 1개가 위 금액에 들어 있어 따로 받지 않습니다. 2년차부터 호스팅 연 240,000원과 도메인 갱신 연 30,000원이 듭니다.</p>
-          <div className="re-estimate__actions"><Link to={`${ROOT}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
+          <div className="re-estimate__actions"><Link to={`${root}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
         </div>
       </Section>
     </> : <>
@@ -507,7 +523,7 @@ function EstimatePage() {
           <p className="re-estimate__total"><span>예상</span><strong>{won(low)}~{won(high)}원</strong></p>
           <p className="re-estimate__picked">{summary ? `고른 구성 — ${summary}` : "쪽 수와 기능을 고르면 구간이 좁혀집니다"}</p>
           <p className="re-estimate__note">부가세 별도입니다. 커스텀은 같은 기능이라도 다루는 자료의 양과 화면 수에 따라 비용이 달라집니다. 위 구간은 시작점이고, 고른 내용을 보고 상담에서 확정합니다. 기능이 많을수록 구간이 넓어지는 것은 그만큼 확인할 것이 많다는 뜻입니다.</p>
-          <div className="re-estimate__actions"><Link to={`${ROOT}/contact`}>고른 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
+          <div className="re-estimate__actions"><Link to={`${root}/contact`}>고른 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
         </div>
       </Section>
     </>}
@@ -534,13 +550,14 @@ function SkinnedPage({ category, title, children }: { category: string; title: s
 }
 
 function SolutionsPage() {
+  const root = useRoot();
   return <main className="re-sub-page"><PageInfo category="기술력" title="솔루션 · 데모 체험" /><Contents>
     <LocalNav group="기술력" path="/web-solutions" />
     <Section split title="업종별 통합관리"><div className="re-step-body"><p className="re-step-text">업종마다 관리해야 할 항목이 다릅니다. 매물, 차량, 예약, 수강생, 견적처럼 실제 업무에 쓰는 화면을 관리자에 맞춰 만듭니다. 아래 여섯 업종은 관리자와 고객 화면을 직접 눌러 볼 수 있습니다.</p><ul className="re-step-list"><li><Check />관리자에서 올린 내용이 고객 화면에 바로 반영</li><li><Check />직원별 권한과 활동 기록</li><li><Check />업종에 없는 기능은 빼고 필요한 기능은 추가</li></ul></div></Section>
     <Section wide title="데모 체험">
       <ul className="re-solutions">{INDUSTRY_SHOWCASES.map((item) => <li key={item.key}>
         <div className="re-solutions__body"><small>{item.name}</small><strong>{item.cardTitle}</strong><span>{item.cardTagline}</span></div>
-        <div className="re-solutions__links"><Link to={previewHref(item.solutionHref)}>자세히</Link><a href={item.adminHref}>관리자 데모</a><a href={item.siteHref}>고객 화면</a></div>
+        <div className="re-solutions__links"><Link to={hrefIn(root, item.solutionHref)}>자세히</Link><a href={item.adminHref}>관리자 데모</a><a href={item.siteHref}>고객 화면</a></div>
       </li>)}</ul>
       <p className="re-estimate__note">데모 화면은 기능을 보여 주기 위한 예시입니다. 실제 제작에서는 색과 글꼴, 화면 구성을 업체에 맞춰 새로 잡습니다. 데모는 리뉴얼 시안이 아닌 현재 사이트 화면으로 열립니다.</p>
     </Section>
@@ -549,12 +566,13 @@ function SolutionsPage() {
 }
 
 function IndustryPage() {
+  const root = useRoot();
   const items = Object.entries(INDUSTRY_LANDING).map(([key, value]) => ({ key, ...value }));
   return <main className="re-sub-page"><PageInfo category="홈페이지 제작" title="업종별 홈페이지" /><Contents>
     <LocalNav group="홈페이지 제작" path="/homepage" />
     <Section split title="업종에 맞춰 다르게"><div className="re-step-body"><p className="re-step-text">같은 홈페이지라도 업종마다 손님이 찾는 것이 다릅니다. 렌터카는 요금, 병원은 진료 시간, 학원은 시간표입니다. 업종별로 필요한 화면과 기능을 정리해 두었습니다.</p><ul className="re-step-list"><li><Check />{`${items.length}개 업종`}</li><li><Check />업종별 자주 겪는 문제와 해결 화면</li><li><Check />해당 업종 시안 바로 보기</li></ul></div></Section>
     <Section wide title="업종 목록">
-      <ul className="re-industry">{items.map((item) => <li key={item.key}><Link to={`${ROOT}/homepage/${item.key}`}><strong>{item.keyword}</strong><span>{item.intro}</span></Link></li>)}</ul>
+      <ul className="re-industry">{items.map((item) => <li key={item.key}><Link to={`${root}/homepage/${item.key}`}><strong>{item.keyword}</strong><span>{item.intro}</span></Link></li>)}</ul>
       <p className="re-estimate__note">업종 쪽은 리뉴얼 시안이 아닌 현재 사이트 화면으로 열립니다.</p>
     </Section>
     <ContactBand />
@@ -639,7 +657,9 @@ function PrivacyPage() {
   </Contents></main>;
 }
 
-function NotFound() { return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="페이지를 찾을 수 없습니다" /><Contents><Section><p className="re-step-text">주소가 바뀌었거나 삭제된 페이지입니다</p><p className="re-detail__live"><Link to={ROOT}>메인으로 돌아가기<ArrowRight /></Link></p></Section></Contents></main>; }
+function NotFound() {
+  const root = useRoot();
+  return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="페이지를 찾을 수 없습니다" /><Contents><Section><p className="re-step-text">주소가 바뀌었거나 삭제된 페이지입니다</p><p className="re-detail__live"><Link to={root}>메인으로 돌아가기<ArrowRight /></Link></p></Section></Contents></main>; }
 
 function RouteContent({ path }: { path: string }) {
   if (path === "/") return <EditorialHome />;
@@ -666,8 +686,19 @@ function RouteContent({ path }: { path: string }) {
   return key ? <StandardPage page={PAGE_DATA[key]} path={path} /> : <NotFound />;
 }
 
-export default function RenewalEditorial() {
-  const { pathname } = useLocation(); const path = pathFromLocation(pathname); useEditorialMotion(pathname);
+/** 본 사이트 루트에 리뉴얼 헤더·푸터만 씌울 때 쓴다. 안쪽 화면은 각 페이지가 그린다. */
+export function RenewalShell({ children }: { children: ReactNode }) {
+  const { pathname } = useLocation();
+  useEditorialMotion(pathname);
+  return <RootContext.Provider value=""><div className="renewal-editorial"><Header />{children}<Footer /></div></RootContext.Provider>;
+}
+
+function RenewalEditorialInner() {
+  const { pathname } = useLocation(); const path = pathFromLocation(pathname, PREVIEW_ROOT); useEditorialMotion(pathname);
   useEffect(() => { const label = path === "/" ? "홈페이지 제작" : path.split("/").filter(Boolean).at(-1)?.replaceAll("-", " ") ?? "홈페이지 제작"; document.title = `NOVERIQ · ${label}`; }, [path]);
   return <div className="renewal-editorial"><Header /><RouteContent path={path} /><Footer /></div>;
+}
+
+export default function RenewalEditorial() {
+  return <RootContext.Provider value={PREVIEW_ROOT}><RenewalEditorialInner /></RootContext.Provider>;
 }

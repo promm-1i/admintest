@@ -3,6 +3,8 @@ import { trackPageView } from "@/lib/analytics";
 import { Route, Routes, Outlet, useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { RenewalShell } from "@/pages/RenewalEditorial";
+import "@/pages/RenewalEditorial.css";
 import { MobileStickyCta } from "@/components/site/MobileStickyCta";
 import { FloatingQuickActions } from "@/components/site/FloatingQuickActions";
 import { Toaster } from "@/components/ui/sonner";
@@ -78,7 +80,23 @@ function RouteLoadingFallback() {
   );
 }
 
+/**
+ * 리뉴얼 디자인을 본 사이트 전체에 씌운다. 헤더·푸터는 리뉴얼 것을 쓰고
+ * 안쪽 화면은 각 페이지가 그대로 그린다. 예전 껍데기로 되돌리려면
+ * VITE_LEGACY_SHELL=1 로 빌드한다.
+ */
+const LEGACY_SHELL = import.meta.env.VITE_LEGACY_SHELL === "1";
+
 function SiteLayout() {
+  if (!LEGACY_SHELL) {
+    return (
+      <RenewalShell>
+        <main className="flex-1">
+          <Outlet />
+        </main>
+      </RenewalShell>
+    );
+  }
   return (
     <div className="flex min-h-screen flex-col pb-[76px] md:pb-0">
       <SiteHeader />

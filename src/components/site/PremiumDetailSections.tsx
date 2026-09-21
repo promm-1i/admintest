@@ -160,9 +160,12 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
             <h3 className="mt-8 text-sm font-bold uppercase tracking-wider text-muted-foreground/70">
               페이지 구성
             </h3>
+            {/* 서브페이지가 22쪽인 디자인에도 "한 페이지 구성"이라 적혀 있었다.
+                실제 구성에 맞춰 문구를 나눈다. */}
             <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep">
-              이 화면은 한 페이지 안에서 소개부터 문의까지 이어지는 구성입니다. 회사소개 · 서비스 안내 ·
-              공지사항 같은 서브페이지가 필요하시면 상담 때 함께 정합니다.
+              {shots.length >= 5
+                ? "메뉴별로 페이지를 나눈 구성입니다. 위 화면들이 실제 쪽이고, 필요 없는 쪽은 빼고 필요한 쪽은 더해 상담 때 정합니다."
+                : "소개부터 문의까지 한 화면에서 이어지는 구성입니다. 회사소개 · 서비스 안내 · 공지사항 같은 서브페이지가 필요하시면 상담 때 함께 정합니다."}
             </p>
           </div>
         </div>
