@@ -265,30 +265,30 @@ const HELP_CARDS = [
 function HomeCases() {
   const root = useRoot();
   const cases = getPremiumDesigns().map((item) => item.sample).filter((sample) => sample.image).slice(0, 12);
-  // ìë³¸ Swiper ì¤ì  ê·¸ëë¡ â slidesPerView 4 Â· spaceBetween 10 Â· speed 300 Â· slidesPerGroup 4 Â· loop ìì
+  // 원본 Swiper 설정 그대로 — slidesPerView 4 · spaceBetween 10 · speed 300 · slidesPerGroup 4 · loop 없음
   const PER_VIEW = 4;
   const [index, setIndex] = useState(0);
   const maxIndex = Math.max(0, cases.length - PER_VIEW);
   const go = (delta: number) => setIndex((current) => Math.min(maxIndex, Math.max(0, current + delta * PER_VIEW)));
   return <section className="re-nhn re-nhn--cases">
     <div className="re-nhn__frame">
-      <h2 className="re-nhn__heading">ì ì ì¬ë¡</h2>
-      <p className="re-nhn__lead">ì´ë¤ ìì¢ì´ ì´ë¤ íë©´ì¼ë¡ ë§ë¤ì´ì¡ëì§ ë³´ìê³  ê³ ë¥´ì¸ì.</p>
+      <h2 className="re-nhn__heading">제작 사례</h2>
+      <p className="re-nhn__lead">어떤 업종이 어떤 화면으로 만들어졌는지 보시고 고르세요.</p>
       <div className="re-case-nav">
-        <button type="button" onClick={() => go(-1)} disabled={index === 0} aria-label="ì´ì  ì¬ë¡"><ChevronLeft /></button>
-        <button type="button" onClick={() => go(1)} disabled={index >= maxIndex} aria-label="ë¤ì ì¬ë¡"><ArrowRight /></button>
+        <button type="button" onClick={() => go(-1)} disabled={index === 0} aria-label="이전 사례"><ChevronLeft /></button>
+        <button type="button" onClick={() => go(1)} disabled={index >= maxIndex} aria-label="다음 사례"><ArrowRight /></button>
       </div>
       <div className="re-case-viewport">
         <ul className="re-case-list" style={{ transform: `translate3d(-${index * 330}px,0,0)` }}>{cases.map((sample) => <li className="re-case" key={sample.slug}>
           <Link to={`${root}/samples/${sample.slug}`}>
             <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" /></figure>
             <h3>{sample.premiumLabel ?? sample.industry}</h3>
-            <p>{sample.tag ?? sample.type.join(" Â· ")}</p>
-            <span className="re-case__more">ìì¸í ë³´ê¸°<ArrowRight /></span>
+            <p>{sample.tag ?? sample.type.join(" · ")}</p>
+            <span className="re-case__more">자세히 보기<ArrowRight /></span>
           </Link>
         </li>)}</ul>
       </div>
-      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/samples`}>ì ì²´ ì ì ì¬ë¡ ë³´ê¸°</Link></div>
+      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/samples`}>전체 제작 사례 보기</Link></div>
     </div>
   </section>;
 }
