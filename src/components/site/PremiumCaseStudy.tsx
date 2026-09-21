@@ -513,8 +513,11 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
                 <figure className="mb-5 break-inside-avoid overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
                   <img
                     src={shot.img}
+                    srcSet={`${shot.img.replace(".webp", "-640.webp")} 640w, ${shot.img} 1280w`}
+                    sizes="(min-width: 640px) 50vw, 100vw"
                     alt={shot.title}
                     loading="lazy"
+                    decoding="async"
                     width={shot.width ?? 1280}
                     height={shot.height ?? 960}
                     className="h-auto w-full"

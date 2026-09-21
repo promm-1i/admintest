@@ -214,11 +214,18 @@ function Header() {
   const { pathname } = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  // Escape 로 닫은 뒤 트리거로 초점을 되돌리면 focus 가 다시 열어 버린다. 그 한 번만 막는다.
+  const justClosed = useRef(false);
+  const openMenu = () => { if (!justClosed.current) setMenuOpen(true); };
+  const closeMenu = (trigger?: HTMLElement | null) => { justClosed.current = true; setMenuOpen(false); trigger?.focus(); setTimeout(() => { justClosed.current = false; }, 80); };
   useEffect(() => { setMobileOpen(false); setMenuOpen(false); }, [pathname]);
-  return <header className={`header re-header${mobileOpen ? " active" : ""}`} onPointerLeave={() => setMenuOpen(false)}>
+  return <header className={`header re-header${mobileOpen ? " active" : ""}`} onPointerLeave={() => setMenuOpen(false)}
+    onKeyDown={(event) => { if (event.key === "Escape" && menuOpen) closeMenu(event.currentTarget.querySelector(".re-nav-group > a") as HTMLElement | null); }}
+    onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setMenuOpen(false); }}>
+    <a className="re-skip" href="#re-main">본문 바로가기</a>
     <div className="header-frame">
       <div className="header-logo"><Link className="header-logo-link re-header__logo" to={root} aria-label="NOVERIQ 리뉴얼 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
-      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={() => setMenuOpen(true)}><Link className="gnb-1d-link" to={hrefIn(root, firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") { setMenuOpen(false); event.currentTarget.blur(); } }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
+      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={openMenu}><Link className="gnb-1d-link" to={hrefIn(root, firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") closeMenu(event.currentTarget); }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
       <div className="header-feature"><Link className="header-bank-shortcut re-header__contact" to={`${root}/contact`}>제작 문의<ArrowUpRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
     </div>
     <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{navItems(entry).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></details>)}</div>
@@ -690,13 +697,13 @@ function RouteContent({ path }: { path: string }) {
 export function RenewalShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   useEditorialMotion(pathname);
-  return <RootContext.Provider value=""><div className="renewal-editorial"><Header />{children}<Footer /></div></RootContext.Provider>;
+  return <RootContext.Provider value=""><div className="renewal-editorial"><Header /><div id="re-main" tabIndex={-1}>{children}</div><Footer /></div></RootContext.Provider>;
 }
 
 function RenewalEditorialInner() {
   const { pathname } = useLocation(); const path = pathFromLocation(pathname, PREVIEW_ROOT); useEditorialMotion(pathname);
   useEffect(() => { const label = path === "/" ? "홈페이지 제작" : path.split("/").filter(Boolean).at(-1)?.replaceAll("-", " ") ?? "홈페이지 제작"; document.title = `NOVERIQ · ${label}`; }, [path]);
-  return <div className="renewal-editorial"><Header /><RouteContent path={path} /><Footer /></div>;
+  return <div className="renewal-editorial"><Header /><div id="re-main" tabIndex={-1}><RouteContent path={path} /></div><Footer /></div>;
 }
 
 export default function RenewalEditorial() {

@@ -159,3 +159,4 @@ for (const [slug, body] of Object.entries(keep)) {
 lines.push("};", "");
 await fs.writeFile(DATA, lines.join("\n"), "utf8");
 console.log("갱신", Object.keys(captured).length, "종 / 유지", Object.keys(keep).length, "종");
+console.log("다음으로 python tools/ref-clone/sections_to_webp.py 를 돌려 WebP 로 바꾸세요.");
