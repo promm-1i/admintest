@@ -18,7 +18,9 @@
 
 /* ══ 맛의 비결 ══ */
 /* 들머리 — 3600 핀 구간, 문장이 한 줄씩 떠오른다 */
-.tintro{position:relative;margin-top:29px;height:3600px;background:var(--dark-bg)}
+/* 레퍼런스는 page-lead 와 들머리 사이 29px 이 같은 검은 바탕 — 여백이 아니라 lead 아래쪽 패딩으로 준다 */
+.lead--taste{padding-bottom:149px}
+.tintro{position:relative;height:3600px;background:var(--dark-bg)}
 .tintro__stage{position:sticky;top:0;display:flex;flex-direction:column;align-items:center;
   justify-content:center;overflow:hidden;height:100vh;color:#fff;text-align:center}
 .tintro__bg{position:absolute;inset:0;opacity:0;transition:opacity 1.2s ease}
@@ -77,11 +79,11 @@
 .tsec__glass{position:relative;width:1280px;max-width:88%;height:612px;overflow:hidden}
 .tsec__glass img{display:block;width:100%;height:100%;object-fit:cover;
   transform:scale(1);transition:transform .6s ease}
-.tsec__mask{position:absolute;inset:0;background:rgba(252,248,239,.72);
-  -webkit-mask-image:radial-gradient(circle var(--r,13.22%) at var(--cx,36.65%) var(--cy,34.24%),transparent 98%,#000 100%);
-  mask-image:radial-gradient(circle var(--r,13.22%) at var(--cx,36.65%) var(--cy,34.24%),transparent 98%,#000 100%);
+.tsec__mask{position:absolute;inset:0;background:rgba(23,32,26,.42);
+  -webkit-mask-image:radial-gradient(circle var(--r,9%) at var(--cx,50%) var(--cy,17%),transparent 96%,#000 100%);
+  mask-image:radial-gradient(circle var(--r,9%) at var(--cx,50%) var(--cy,17%),transparent 96%,#000 100%);
   transition:-webkit-mask-image .5s ease,mask-image .5s ease}
-.tsec__ring{position:absolute;width:26.44%;aspect-ratio:1;border:1px solid rgba(27,58,43,.5);
+.tsec__ring{position:absolute;width:18%;aspect-ratio:1;border:1px solid rgba(255,255,255,.55);
   border-radius:50%;transform:translate(-50%,-50%);transition:left .5s ease,top .5s ease}
 .tsec__pin{position:absolute;z-index:3;display:flex;align-items:center;justify-content:center;
   width:28px;height:28px;font-size:1.4rem;font-weight:700;color:#fff;background:var(--gold);
@@ -117,6 +119,7 @@
   background:var(--gold);border-radius:6px}
 
 @media screen and (max-width:1024px){
+  .lead--taste{padding-bottom:70px}
   .tintro{height:auto}
   .tintro__stage{position:static;height:auto;padding:110px 0}
   .tintro__h{margin-top:50px;font-size:2.4rem}
@@ -181,7 +184,7 @@
 <div class="site-nav__dim" hidden></div>
 <main id="content" class="main-sub">
 
-<div class="lead lead--dark" data-head-theme="dark">
+<div class="lead lead--dark lead--taste" data-head-theme="dark">
 <div class="lead__wrap">
 <span class="lead__badge">BRAND</span>
 <h1 class="lead__h">해담만의 독보적인 맛의 비결</h1>
@@ -259,8 +262,8 @@
 <div class="tsec__glass">
 <img src="./assets/taste-glass.jpg" alt="해담 전용 맥주잔">
 <div class="tsec__mask"></div>
-<div class="tsec__ring" style="left:36.65%;top:34.24%"></div>
-<span class="tsec__pin" data-pin="0" style="left:36.65%;top:34.24%">1</span><span class="tsec__pin" data-pin="1" style="left:50.0%;top:50.0%">2</span><span class="tsec__pin" data-pin="2" style="left:50.0%;top:51.5%">3</span><span class="tsec__pin" data-pin="3" style="left:36.0%;top:60.5%">4</span><span class="tsec__pin" data-pin="4" style="left:40.0%;top:70.1%">5</span>
+<div class="tsec__ring" style="left:50%;top:17%"></div>
+<span class="tsec__pin" data-pin="0" style="left:50.0%;top:17.0%">1</span><span class="tsec__pin" data-pin="1" style="left:50.0%;top:28.0%">2</span><span class="tsec__pin" data-pin="2" style="left:50.0%;top:36.0%">3</span><span class="tsec__pin" data-pin="3" style="left:56.5%;top:56.0%">4</span><span class="tsec__pin" data-pin="4" style="left:50.0%;top:80.0%">5</span>
 <div class="tsec__card" data-card="0">
 <h3 class="tsec__card-h"><span class="tsec__card-n">1</span>맥주잔 입구</h3>
 <p class="tsec__card-t">맥주의 온도와 향이 흩어지지 않도록 입구를 3mm 좁혔습니다. 코끝에 향이 먼저 닿습니다.</p></div><div class="tsec__card" data-card="1">
@@ -485,7 +488,7 @@
     var cx=parseFloat(el.style.left), cy=parseFloat(el.style.top);
     mask.style.setProperty('--cx',cx+'%'); mask.style.setProperty('--cy',cy+'%');
     ring.style.left=cx+'%'; ring.style.top=cy+'%';
-    img.style.transform='scale('+(i>=1&&i<=2?1.3:1)+')';
+    img.style.transform='scale('+(i>=1&&i<=2?1.15:1)+')';
   }
   addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick();
 })();
