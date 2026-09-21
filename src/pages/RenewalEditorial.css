@@ -1041,48 +1041,39 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 @media (max-width:1023px){ .re-mega2{display:none} }
 
 /* ------------------------------------------------------------------
-   원근으로 눕힌 템플릿 레인 — 지학사 초등 히어로 실측값 (2026-09-21)
+   원근으로 눕혀 앞으로 흘리는 템플릿 레인 — 지학사 초등 소스 그대로
+   .ly-covers / .cover-lane / .cover-row 규칙을 옮겼다 (2026-09-21)
    ------------------------------------------------------------------ */
 @keyframes re-lane-in{0%{opacity:0}100%{opacity:1}}
-@keyframes re-lane-row{0%{opacity:0;transform:translateY(46px)}100%{opacity:1;transform:translateY(0)}}
 
 .re-lane{margin-top:140px;padding:0 60px;text-align:center}
 .re-lane__eyebrow{margin:0;font-size:13px;font-weight:800;letter-spacing:.14em;color:var(--re-blue,#1572ed)}
 .re-lane__heading{margin:10px 0 0;font-size:56px;font-weight:500;line-height:1.3;letter-spacing:-.02em;color:#0a0c0e;word-break:keep-all}
+.re-lane__filters{position:absolute;width:0;height:0}
 
-/* 무대 — 원근 기준점을 아래 가운데에 두고 위쪽을 안개로 지운다 */
-.re-lane__stage{position:relative;height:330px;margin-top:8px;overflow:hidden;container-type:inline-size;perspective:18.6cqw;perspective-origin:50% 100%;
+/* .ly-covers */
+.re-lane__stage{position:relative;height:330px;margin-top:8px;overflow:hidden;container-type:inline-size;
+  perspective:18.6cqw;perspective-origin:50% 100%;
   -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.12) 9%,rgba(0,0,0,.3) 15%,rgba(0,0,0,.9) 24%,#000 34%);
   mask-image:linear-gradient(to bottom,transparent 0%,rgba(0,0,0,.12) 9%,rgba(0,0,0,.3) 15%,rgba(0,0,0,.9) 24%,#000 34%)}
 
-/* 바닥 — 32도로 눕히고 화면보다 좌우로 182px 씩 넓게 뺀다 */
-.re-lane__floor{position:absolute;left:-182px;bottom:0;width:calc(100% + 364px);display:flex;flex-direction:column;gap:14px;
+/* .cover-lane — 폭은 100% 다. 아래 줄이 커 보이는 것은 원근이 만든다 */
+.re-lane__floor{position:absolute;left:0;bottom:0;width:100%;display:flow-root;
   transform:rotateX(32deg);transform-origin:50% 100%;will-change:transform;
-  animation:re-lane-in .7s ease-out .9s 1 backwards}
-.re-lane__row{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px;
-  animation:re-lane-row .75s cubic-bezier(.22,.61,.36,1) var(--row-delay,0s) 1 backwards}
+  animation:.7s ease-out .9s 1 normal backwards re-lane-in}
 
-.re-lane__card{position:relative;display:block;aspect-ratio:4/3;overflow:hidden;border-radius:9px;background:#f2f4f7;
-  box-shadow:rgba(30,34,40,.14) 0 23px 37px}
-.re-lane__card img{width:100%;height:100%;object-fit:cover;object-position:50% 0}
-/* 비스듬히 떨어지는 光 — 원본 카드의 표면 처리 */
-.re-lane__card::after{content:"";position:absolute;inset:0;background:linear-gradient(118deg,rgba(255,255,255,.27) 0%,rgba(255,255,255,0) 32%)}
+/* .cover-row — 5칸이 18.328% + 간격 2.09% 로 정확히 100% */
+.re-lane__row{display:flex;gap:2.09%;margin-bottom:2.09%}
+.re-lane__row img{width:18.328%;aspect-ratio:4/3;object-fit:cover;object-position:50% 0;border-radius:4px;background:#eef1f5}
+
 .re-lane__actions{margin-top:36px;display:flex;justify-content:center}
 
-@media (max-width:1023px){
+/* 1280 미만에서는 레인을 깔지 않는다 (원본과 같다) */
+@media (max-width:1279px){
   .re-lane{margin-top:110px;padding:0 20px}
   .re-lane__heading{font-size:36px}
-  .re-lane__stage{height:230px;margin-top:8px}
-  .re-lane__floor{left:-60px;width:calc(100% + 120px);gap:10px}
-  .re-lane__row{gap:10px}
+  .re-lane__stage{display:none}
+  .re-lane__actions{margin-top:28px}
 }
-@media (max-width:600px){
-  .re-lane__heading{font-size:28px}
-  .re-lane__stage{height:150px}
-  .re-lane__row{gap:6px}
-}
-/* 움직임을 줄여 달라는 설정이면 눕히지도 움직이지도 않는다 */
-@media (prefers-reduced-motion:reduce){
-  .re-lane__floor,.re-lane__row{animation:none}
-  .re-lane__card{transition:none}
-}
+@media (max-width:600px){ .re-lane__heading{font-size:28px} }
+@media (prefers-reduced-motion:reduce){ .re-lane__floor{animation:none} }

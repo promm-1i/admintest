@@ -300,37 +300,148 @@ function HomeHelp() {
 }
 
 /**
- * 만든 홈페이지를 원근으로 눕혀 깐 칸.
- * 지학사 초등(textbook.jihak.co.kr) 히어로의 표지 레인에서 읽은 값을 그대로 쓴다 (2026-09-21 측정).
- *   무대  perspective:18.6cqw · perspective-origin:50% 100%
- *        mask-image: to bottom, transparent 0%, .12 9%, .3 15%, .9 24%, #000 34%
- *   바닥  transform:rotateX(32deg) · origin 50% 100% · 좌우로 182px 씩 넓다
- *   등장  opacity 0→1, .7s ease-out, 0.9초 뒤, backwards
- *   카드  hover 시 translateY(-10px) scale(1.02), 그림자 0 32px 46px rgba(30,34,40,.22)
- *        덮는 막 rgba(16,17,22,.42) · 전환 .25s
- * 줄 단위 지연 0.08초는 같은 사이트의 등장 계단값이다.
- * 책 표지 비율(241.9:336)과 책등 라운드(2 9 9 2)는 우리 것이 가로 화면이라 쓰지 않는다.
+ * 만든 홈페이지를 원근으로 눕혀 앞으로 흘려보내는 칸.
+ *
+ * 지학사 초등(textbook.jihak.co.kr) 히어로의 표지 레인을 소스 그대로 옮겼다 (2026-09-21).
+ *   ROWS 8 · PER_ROW 5 · ROW_SECONDS 9 · TILT rotateX(32deg)
+ *   SOFTEN ["far","far","far","far","far","mid","near",""]
+ *   뒤쪽 줄은 세로로 크게 눌려 우글거린다. 눌리기 전에 세로 성분만 흐리게 걸러 둔다
+ *   (feGaussianBlur stdDeviation="0 6" / "0 2" / "0 1.2").
+ *   한 줄만큼 흐르면 맨 앞줄을 맨 뒤로 보내고 다음 사진을 채운다. 그래서 이음매가 없다.
+ *   1280 미만에서는 깔지 않는다. prefers-reduced-motion 이면 흐르지 않는다.
+ *
+ * 우리 것과 다른 한 가지: 표지 비율 520/700 대신 4:3 을 쓴다.
+ * 교과서는 세로 표지지만 우리 것은 가로 화면이라, 세로로 자르면 화면이 잘린다.
  */
+const LANE_ROWS = 8;
+const LANE_PER_ROW = 5;
+const LANE_ROW_SECONDS = 9;
+const LANE_SOFTEN = ["far", "far", "far", "far", "far", "mid", "near", ""];
+
 function HomeLane() {
   const root = useRoot();
-  const premium = getPremiumDesigns().map((item) => item.sample);
-  const rest = SAMPLES.filter((sample) => sample.image && !premium.some((p) => p.slug === sample.slug));
-  const picked = [...premium, ...rest].filter((sample) => sample.image).slice(0, 28);
-  const rows = [picked.slice(0, 7), picked.slice(7, 14), picked.slice(14, 21), picked.slice(21, 28)];
+  const stageRef = useRef<HTMLDivElement>(null);
+  // 같은 사진을 쓰는 기본형·랜딩형이 나란히 놓이면 중복으로 보인다. 사진 기준으로 한 번만 쓴다.
+  const covers = useMemo(() => {
+    const seen = new Set<string>();
+    const list: string[] = [];
+    for (const sample of [...getPremiumDesigns().map((item) => item.sample), ...SAMPLES]) {
+      if (!sample.image || seen.has(sample.image)) continue;
+      seen.add(sample.image);
+      list.push(sample.image);
+    }
+    return list;
+  }, []);
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage || covers.length === 0) return;
+    const wide = matchMedia("(min-width: 1280px)");
+    const still = matchMedia("(prefers-reduced-motion: reduce)");
+    let lane: HTMLDivElement | null = null;
+    let next = 0;
+    let offset = 0;
+    let pitch = 0;
+    let last: number | null = null;
+    let raf = 0;
+    let seen = true;
+
+    const fillRow = (row: Element) => {
+      [...row.children].forEach((img, c) => { (img as HTMLImageElement).src = covers[(next + c) % covers.length]; });
+      next = (next + LANE_PER_ROW) % covers.length;
+    };
+    /* 줄이 앞으로 오면 덜 눌리므로 걸러내는 세기도 줄인다 */
+    const soften = () => {
+      if (!lane) return;
+      [...lane.children].forEach((row, i) => {
+        const key = LANE_SOFTEN[i] || "";
+        (row as HTMLElement).style.filter = key ? `url(#re-lane-${key})` : "none";
+      });
+    };
+    /* 줄 간격은 소수점까지 재야 한다. offsetTop 은 정수로 반올림되어 반 픽셀씩 어긋난다 */
+    const measure = () => {
+      if (!lane?.firstElementChild) return;
+      const row = getComputedStyle(lane.firstElementChild);
+      const now = parseFloat(row.height) + parseFloat(row.marginBottom);
+      if (!now) return;
+      offset = pitch ? (offset / pitch) * now : 0;
+      pitch = now;
+    };
+    /* 맨 앞줄을 맨 뒤로 돌려보내고 다음 사진을 채운다 */
+    const recycle = () => {
+      if (!lane?.lastElementChild) return;
+      const row = lane.lastElementChild;
+      lane.prepend(row);
+      fillRow(row);
+      soften();
+    };
+    const tick = (now: number) => {
+      if (last !== null && pitch && lane) {
+        offset += ((now - last) / 1000) * (pitch / LANE_ROW_SECONDS);
+        while (offset >= pitch) { offset -= pitch; recycle(); }
+        lane.style.transform = `rotateX(32deg) translateY(${offset}px)`;
+      }
+      last = now;
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; last = null; };
+    const start = () => { if (!lane || still.matches || raf || !seen || document.hidden) return; last = null; raf = requestAnimationFrame(tick); };
+
+    const build = () => {
+      if (!wide.matches || lane) return;
+      lane = document.createElement("div");
+      lane.className = "re-lane__floor";
+      /* 먼 줄부터 쌓는다. 가까운 줄이 먼저 지나가므로 사진도 그 순서로 채운다 */
+      const rows: HTMLDivElement[] = [];
+      for (let r = 0; r < LANE_ROWS; r += 1) {
+        const row = document.createElement("div");
+        row.className = "re-lane__row";
+        for (let c = 0; c < LANE_PER_ROW; c += 1) {
+          const img = document.createElement("img");
+          img.alt = ""; img.decoding = "async"; img.loading = "lazy";
+          row.appendChild(img);
+        }
+        rows.push(row);
+        lane.appendChild(row);
+      }
+      rows.reverse().forEach(fillRow);
+      stage.appendChild(lane);
+      stage.classList.add("is-live");
+      soften();
+      measure();
+      start();
+    };
+    const teardown = () => { stop(); lane?.remove(); lane = null; stage.classList.remove("is-live"); pitch = 0; offset = 0; };
+
+    build();
+    const onWide = () => { if (wide.matches) build(); else teardown(); };
+    const onResize = () => measure();
+    const onVisible = () => { if (document.hidden) stop(); else start(); };
+    const io = new IntersectionObserver(([entry]) => { seen = entry.isIntersecting; if (seen) start(); else stop(); }, { threshold: 0 });
+    io.observe(stage);
+    wide.addEventListener("change", onWide);
+    still.addEventListener("change", () => { if (still.matches) stop(); else start(); });
+    window.addEventListener("resize", onResize);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      io.disconnect();
+      wide.removeEventListener("change", onWide);
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisible);
+      teardown();
+    };
+  }, [covers]);
+
   return <section className="re-lane" aria-label="만든 홈페이지">
     <p className="re-lane__eyebrow">MADE BY NOVERIQ</p>
     <h2 className="re-lane__heading">지금까지 만든 화면입니다</h2>
-    {/* 바닥은 장식이다. 28장을 전부 링크로 두면 키보드로 하나씩 훑어야 해서 aria 로 감추고
-        실제 이동은 아래 버튼 하나로 모은다. */}
-    <div className="re-lane__stage" aria-hidden="true">
-      <div className="re-lane__floor">
-        {rows.map((row, index) => <div className="re-lane__row" key={index} style={{ "--row-delay": `${index * 0.08}s` } as CSSProperties}>
-          {row.map((sample) => <div className="re-lane__card" key={sample.slug}>
-            <img src={sample.image} alt="" loading="lazy" decoding="async" width={1280} height={960} />
-          </div>)}
-        </div>)}
-      </div>
-    </div>
+    {/* 뒤쪽 줄은 세로로 눌려 우글거린다. 눌리기 전에 세로 성분만 걸러 둔다 */}
+    <svg className="re-lane__filters" aria-hidden="true" focusable="false">
+      <filter id="re-lane-far" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 6" /></filter>
+      <filter id="re-lane-mid" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 2" /></filter>
+      <filter id="re-lane-near" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 1.2" /></filter>
+    </svg>
+    <div className="re-lane__stage" ref={stageRef} aria-hidden="true" />
     <div className="re-lane__actions"><Link className="re-pill" to={`${root}/samples`}>만든 화면 전부 보기</Link></div>
   </section>;
 }
