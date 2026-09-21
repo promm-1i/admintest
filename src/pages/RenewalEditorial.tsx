@@ -425,7 +425,7 @@ function HeroVideo() {
   }, [paused, inView]);
   return <>
     <div className="greeting-player">
-      <video ref={videoRef} className="greeting-video" poster={MEDIA_SLOTS.hero} muted playsInline aria-hidden="true" />
+      <video ref={videoRef} className="greeting-video" src={`${MEDIA}/hero.mp4`} poster={MEDIA_SLOTS.hero} muted loop playsInline preload="metadata" aria-hidden="true" />
       <div className="greeting-dim re-greeting__dim" />
       <div className="greeting-swiper re-greeting__slides" aria-live="polite">
         <div className="swiper">
