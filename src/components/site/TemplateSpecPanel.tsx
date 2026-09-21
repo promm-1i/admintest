@@ -83,8 +83,8 @@ export function TemplateSpecPanel({ sample }: { sample: Sample }) {
           <span className="pb-1 text-sm font-semibold text-muted-foreground">부터</span>
         </p>
         <p className="mt-1.5 text-[11px] leading-relaxed text-muted-foreground">
-          호스팅 1년 24만원 + 셋팅 10만원 + 업종 전용 기능 30만원
-          {pkg.designCost > 0 && ` + 랜딩형 연출 ${formatMan(pkg.designCost)}`} 포함 · 반응형 제작 무료
+          셋팅 22만원 + 업종 전용 기능 42만원
+          {pkg.designCost > 0 && ` + 랜딩형 연출 ${formatMan(pkg.designCost)}`} 포함 · 반응형 제작과 첫 해 호스팅 무료
         </p>
         <p className="mt-2 rounded-md bg-secondary/60 px-3 py-2 text-[11px] text-muted-foreground">
           제작 기간 {PRODUCTION_PERIOD}

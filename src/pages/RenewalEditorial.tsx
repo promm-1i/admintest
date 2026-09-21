@@ -254,6 +254,21 @@ function SiteSearch() {
   </>;
 }
 
+/* 푸터 채널 아이콘. 글자 한 자로는 무엇인지 알 수 없어 실제 마크를 그린다. */
+function NaverBlogMark() {
+  return <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+    <rect width="24" height="24" rx="7" fill="#03C75A" />
+    <path fill="#fff" d="M7.6 7.4h2.05l2.62 4.02V7.4h2.02v9.2h-2.04l-2.63-4.02v4.02H7.6z" />
+  </svg>;
+}
+
+function KakaoMark() {
+  return <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+    <rect width="24" height="24" rx="7" fill="#FEE500" />
+    <path fill="#191600" d="M12 5.4c-3.75 0-6.8 2.4-6.8 5.36 0 1.9 1.26 3.57 3.16 4.5l-.8 2.95c-.07.25.21.45.43.3l3.5-2.32c.17.01.34.02.51.02 3.76 0 6.8-2.4 6.8-5.45 0-2.96-3.04-5.36-6.8-5.36z" />
+  </svg>;
+}
+
 function Header() {
   const root = useRoot();
   const { pathname } = useLocation();
@@ -270,8 +285,8 @@ function Header() {
     <a className="re-skip" href="#re-main">본문 바로가기</a>
     <div className="header-frame">
       <div className="header-logo"><Link className="header-logo-link re-header__logo" to={root} aria-label="NOVERIQ 리뉴얼 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
-      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={openMenu}><Link className="gnb-1d-link" to={hrefIn(root, firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") closeMenu(event.currentTarget); }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
-      <div className="header-feature"><SiteSearch /><Link className="header-bank-shortcut re-header__contact" to={`${root}/contact`}>제작 문의<ArrowUpRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
+      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={openMenu}><Link className="gnb-1d-link" to={hrefIn(root, firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") closeMenu(event.currentTarget); }}>{entry.label}</Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
+      <div className="header-feature"><SiteSearch /><Link className="header-bank-shortcut re-header__contact" to={`${root}/contact`}>제작 문의<ArrowRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
     </div>
     <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{navItems(entry).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></details>)}</div>
   </header>;
@@ -279,7 +294,7 @@ function Header() {
 
 function Footer() {
   const root = useRoot();
-  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{HEADER_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.type === "dropdown" && navItems(entry).slice(0, 6).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">네이버 블로그</a></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그">N</a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오 채널">K</a></div></div></div></footer></>; }
+  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{HEADER_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.type === "dropdown" && navItems(entry).slice(0, 6).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);

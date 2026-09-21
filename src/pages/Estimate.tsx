@@ -27,18 +27,13 @@ const SCOPES = [
   },
 ] as const;
 
-const HOSTING = [
-  { years: 1, label: "1년", cost: 240_000, saveLabel: "" },
-  { years: 2, label: "2년", cost: 432_000, saveLabel: "10% 할인" },
-  { years: 3, label: "3년", cost: 576_000, saveLabel: "20% 할인" },
-] as const;
-
 const DOMAINS = [
   { key: "free", name: "무료 도메인 제공", desc: "com · co.kr · kr 등 여러 도메인 중 원하시는 것으로 — 첫 1년 무료" },
   { key: "own", name: "보유 도메인 연동", desc: "이미 쓰고 계신 도메인이 있다면 그대로 연결해 드립니다" },
 ] as const;
 
-const FIXED = { feature: 300_000, setup: 100_000 };
+/** 호스팅은 따로 받지 않는다. 기존 호스팅 1년 24만원은 아래 두 항목에 12만원씩 녹였다. */
+const FIXED = { feature: 420_000, setup: 220_000 };
 
 const won = (n: number) => n.toLocaleString("ko-KR");
 
@@ -46,7 +41,7 @@ const won = (n: number) => n.toLocaleString("ko-KR");
 export default function Estimate() {
   usePageTitle(
     "홈페이지 제작 견적 계산기 — 1분이면 나옵니다 | NOVERIQ",
-    "업종과 형태만 고르면 홈페이지 제작 예상 비용이 바로 계산됩니다. 호스팅 · 셋팅 · 업종 전용 기능 포함가.",
+    "업종과 형태만 고르면 홈페이지 제작 예상 비용이 바로 계산됩니다. 셋팅 · 업종 전용 기능 · 첫 해 호스팅 포함가.",
   );
 
   const industries = useMemo(
@@ -67,11 +62,9 @@ export default function Estimate() {
   const [style, setStyle] = useState<(typeof STYLES)[number]["key"]>("landing");
   const [scope, setScope] = useState<(typeof SCOPES)[number]["key"]>("one");
   const [domain, setDomain] = useState<(typeof DOMAINS)[number]["key"]>("free");
-  const [hostingYears, setHostingYears] = useState<1 | 2 | 3>(1);
 
   const styleInfo = STYLES.find((s) => s.key === style)!;
   const scopeInfo = SCOPES.find((s) => s.key === scope)!;
-  const hosting = HOSTING.find((h) => h.years === hostingYears)!;
   const industryLabel = industries.find((i) => i.key === industry)?.label ?? "";
 
   const domainInfo = DOMAINS.find((d) => d.key === domain)!;
@@ -80,12 +73,11 @@ export default function Estimate() {
     { name: `페이지 구성 (${scopeInfo.name})`, cost: scopeInfo.cost, note: scopeInfo.cost === 0 ? "한 화면" : "메뉴별 분리" },
     { name: domain === "free" ? "도메인 (신규)" : "보유 도메인 연동", cost: 0, note: domain === "free" ? "첫 1년 무료" : "연동 무료" },
     { name: "업종 전용 기능", cost: FIXED.feature, note: `${industryLabel} 맞춤` },
-    { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 초기 등록" },
-    { name: `호스팅 ${hosting.label}`, cost: hosting.cost, note: hosting.saveLabel },
+    { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 초기 등록 · 첫 해 호스팅" },
   ];
   const total = rows.reduce((a, r) => a + r.cost, 0);
 
-  const summary = `${industryLabel} · ${styleInfo.name} · ${scopeInfo.name} · ${domainInfo.name} · 호스팅 ${hosting.label}`;
+  const summary = `${industryLabel} · ${styleInfo.name} · ${scopeInfo.name} · ${domainInfo.name}`;
   const smsBody = `[견적상담] ${summary} / 예상 ${won(total)}원(VAT별도) — 이 구성으로 상담받고 싶습니다.`;
 
   return (
@@ -96,7 +88,7 @@ export default function Estimate() {
         </p>
         <h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">1분 견적 계산기</h1>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep sm:text-base">
-          업종과 형태만 고르면 예상 비용이 바로 나옵니다. 호스팅 · 셋팅 · 업종 전용 기능이 전부
+          업종과 형태만 고르면 예상 비용이 바로 나옵니다. 셋팅 · 업종 전용 기능 · 첫 해 호스팅이 전부
           포함된 금액이라, 여기서 본 숫자가 곧 시작 비용입니다. (VAT 별도)
         </p>
       </Reveal>
@@ -197,26 +189,6 @@ export default function Estimate() {
               ))}
             </div>
           </div>
-
-          <div>
-            <p className="text-sm font-bold text-foreground">05 · 호스팅 기간</p>
-            <div className="mt-3 grid grid-cols-3 gap-3">
-              {HOSTING.map((h) => (
-                <button
-                  key={h.years}
-                  type="button"
-                  onClick={() => setHostingYears(h.years)}
-                  className={cn(
-                    "rounded-xl border p-3 text-center transition-colors",
-                    hostingYears === h.years ? "border-primary bg-primary/5 ring-1 ring-primary/30" : "border-border hover:border-primary/40",
-                  )}
-                >
-                  <p className="text-sm font-bold text-foreground">{h.label}</p>
-                  <p className="mt-0.5 text-[11px] font-semibold text-primary">{h.saveLabel || "기본"}</p>
-                </button>
-              ))}
-            </div>
-          </div>
         </FadeIn>
 
         {/* 결과 */}
@@ -265,7 +237,7 @@ export default function Estimate() {
           </div>
 
           <p className="mt-4 text-center text-xs text-muted-foreground">
-            2년차부터 도메인 연 30,000원이 호스팅료에 추가됩니다
+            첫 해 호스팅과 도메인은 위 금액에 포함됩니다. 2년차부터 도메인 갱신 연 30,000원이 듭니다
           </p>
         </FadeIn>
       </div>

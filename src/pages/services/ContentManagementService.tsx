@@ -165,12 +165,11 @@ export default function ContentManagementService() {
           CUSTOM SERVICE — 콘텐츠 관리
         </p>
         <h1 className="mx-auto mt-4 max-w-xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          공지 하나를 올리는 데 제작자가 필요하지 않습니다
+          바뀌는 내용은 직접 올리고 고치시면 됩니다
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
-          공지사항, 상품, 매물처럼 자주 바뀌는 콘텐츠를 관리자가 직접 작성·수정하고 공개 여부까지
-          결정합니다. 아래는 실제 NOVERIQ 관리자 화면의 공지 작성 구조와, 그 결과가 반영되는 실제
-          공지사항 페이지입니다.
+          공지, 상품, 매물처럼 자주 바뀌는 내용은 관리자 화면에서 쓰고 고칩니다. 공개할지 내릴지도
+          여기서 정합니다. 아래는 실제 관리자 화면과, 거기서 쓴 글이 올라간 공지사항 쪽입니다.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">

@@ -1,7 +1,7 @@
 /**
  * 홈페이지 템플릿 요금제 구조.
  *
- * 모든 패키지에 공통으로 들어가는 필수 비용(호스팅 1년 24만 + 셋팅 10만 + 업종 전용 기능 30만 = 64만)에
+ * 모든 패키지에 공통으로 들어가는 필수 비용(셋팅 22만 + 업종 전용 기능 42만 = 64만)에
  * 패키지별 디자인 비용과 서브페이지 제작비를 더해 최종 시작가가 결정된다. 모든 금액은 VAT 별도.
  *
  * 2026-09-10, 구분 축을 "반응형 유무"에서 "페이지 수"로 바꿨다. 템플릿 154종을 실측한 결과
@@ -13,14 +13,19 @@
 
 const MAN = 10_000;
 
-/** 패키지와 무관하게 공통으로 들어가는 필수 항목 */
+/**
+ * 패키지와 무관하게 공통으로 들어가는 필수 항목.
+ *
+ * 2026-09-21, 호스팅을 청구 항목에서 뺐다. 고객이 직접 하면 들지 않는 비용이라
+ * 따로 받을 근거가 없다. 대신 기존 호스팅 1년 24만원을 남은 두 항목에 12만원씩
+ * 균등하게 녹여 총액(64만)은 그대로 둔다. 첫 해 호스팅은 금액 안에 포함된다.
+ */
 export const BASE_COST = {
-  hosting: 24 * MAN,
-  setup: 10 * MAN,
-  industryFeature: 30 * MAN,
+  setup: 22 * MAN,
+  industryFeature: 42 * MAN,
 };
 
-const BASE_TOTAL = BASE_COST.hosting + BASE_COST.setup + BASE_COST.industryFeature; // 64만
+const BASE_TOTAL = BASE_COST.setup + BASE_COST.industryFeature; // 64만
 
 /** 랜딩형 연출(스크롤 등장 · 인터랙션) 추가 비용 */
 const LANDING_COST = 20 * MAN;
@@ -85,20 +90,6 @@ export function formatMan(won: number): string {
   return `${(won / MAN).toLocaleString("ko-KR")}만원`;
 }
 
-/**
- * 호스팅 장기 계약 할인. 연 24만원을 기준으로 계약 연수만큼 곱한 뒤 할인율을 적용한 총액이다.
- * (사용자가 정한 구간은 1~3년까지라 그 이상은 표기하지 않는다.)
- */
-export const HOSTING_DISCOUNTS = [
-  { years: 1, rate: 0 },
-  { years: 2, rate: 0.1 },
-  { years: 3, rate: 0.2 },
-].map(({ years, rate }) => ({
-  years,
-  rate,
-  total: Math.round(BASE_COST.hosting * years * (1 - rate)),
-}));
-
 export type PricingRow = {
   label: string;
   /** 필수 항목이면 라벨 옆에 "필수" 뱃지 */
@@ -117,7 +108,7 @@ export const PRICING_ROWS: PricingRow[] = [
     label: "도메인 1개",
     info: [
       "첫 1년은 무료로 제공됩니다.",
-      "이후 연 30,000원이 호스팅료에 추가됩니다.",
+      "이후 갱신은 연 30,000원입니다.",
       "한글·영문 모두 가능하며 com · co.kr · kr 등 여러 도메인 중 원하시는 것으로 선택하실 수 있습니다.",
     ],
     values: ["1년 무료", "1년 무료", "1년 무료", "1년 무료"],
@@ -140,7 +131,7 @@ export const PRICING_ROWS: PricingRow[] = [
   {
     label: "업종 전용 기능",
     note: "매물·차량 관리 등 업종별 전용 기능",
-    values: ["30만원", "30만원", "30만원", "30만원"],
+    values: ["42만원", "42만원", "42만원", "42만원"],
   },
   {
     label: "관리자 모드 제공",
@@ -165,19 +156,9 @@ export const PRICING_ROWS: PricingRow[] = [
   {
     label: "셋팅비용",
     required: true,
-    info: ["도메인 연결, 서버 셋팅, 초기 데이터 등록에 필요한 1회성 비용입니다."],
-    values: ["10만원", "10만원", "10만원", "10만원"],
-  },
-  {
-    label: "호스팅 1년",
-    required: true,
     infoSide: "top",
-    info: [
-      ...HOSTING_DISCOUNTS.map(
-        (h) => `${h.years}년 ${Math.round(h.rate * 100)}%할인 ${h.total.toLocaleString("ko-KR")}원`,
-      ),
-    ],
-    values: ["24만원", "24만원", "24만원", "24만원"],
+    info: ["도메인 연결, 서버 셋팅, 초기 데이터 등록에 필요한 1회성 비용입니다.", "첫 해 호스팅도 이 금액에 들어 있어 따로 받지 않습니다."],
+    values: ["22만원", "22만원", "22만원", "22만원"],
   },
 ];
 

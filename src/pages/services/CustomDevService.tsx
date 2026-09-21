@@ -248,9 +248,9 @@ export default function CustomDevService() {
           </Reveal>
           <Reveal delay={160} className="mt-8 flex flex-col gap-3 rounded-xl border border-border bg-card px-6 py-5 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm font-medium text-foreground break-keep">
-              커스텀 개발은 필요한 기능과 데이터 규모에 따라 크게 달라져{" "}
-              <strong className="font-bold text-primary">시작가를 정해 두지 않고</strong> 상담 후 견적을
-              드립니다. 가격이 정해진 구성을 원하시면 프리미엄 라인(300만 원부터)이 맞습니다.
+              커스텀 개발은 기능 범위와 다루는 자료의 양에 따라 달라져{" "}
+              <strong className="font-bold text-primary">상담에서 견적을 냅니다</strong>. 금액을 먼저 보고
+              시작하고 싶으시면 프리미엄 라인(300만 원부터)을 보세요.
             </p>
             <Button asChild variant="outline" className="shrink-0 gap-1.5">
               <Link to="/web-solutions">

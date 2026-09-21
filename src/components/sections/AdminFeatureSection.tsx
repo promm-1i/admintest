@@ -22,7 +22,7 @@ const Badge = ({ tone, children }: { tone: "green" | "amber" | "red" | "gray"; c
       "rounded-full px-2 py-0.5 text-[10px] font-bold",
       tone === "green" && "bg-emerald-500/15 text-emerald-400",
       tone === "amber" && "bg-amber-500/15 text-amber-400",
-      tone === "red" && "bg-primary/20 text-red-400",
+      tone === "red" && "bg-primary/20 text-blue-500",
       tone === "gray" && "bg-white/10 text-neutral-400",
     )}
   >
@@ -35,7 +35,7 @@ const Panel = ({ title, action, children }: { title: string; action?: string; ch
     <div className="mb-3 flex items-center justify-between">
       <p className="text-xs font-semibold text-neutral-300">{title}</p>
       {action && (
-        <span className="flex items-center gap-1 text-[11px] font-bold text-red-400">
+        <span className="flex items-center gap-1 text-[11px] font-bold text-blue-500">
           <PlusCircle className="h-3 w-3" /> {action}
         </span>
       )}
@@ -164,7 +164,7 @@ function ScheduleView() {
         {days.map((d, i) => (
           <div key={d} className="rounded-md bg-black/30 p-2 text-center">
             <p className="text-[10px] font-bold text-neutral-400">{d}</p>
-            <p className={cn("mt-1 text-sm font-extrabold", slots[i] >= 6 ? "text-red-400" : "text-white")}>{slots[i]}</p>
+            <p className={cn("mt-1 text-sm font-extrabold", slots[i] >= 6 ? "text-blue-500" : "text-white")}>{slots[i]}</p>
             <p className="text-[9px] text-neutral-500">건</p>
           </div>
         ))}
@@ -216,13 +216,13 @@ function StatsView() {
       <Panel title="📊 이번 주 방문자">
         <div className="flex items-end gap-1.5" style={{ height: 64 }}>
           {bars.map((b, i) => (
-            <div key={i} className={cn("flex-1 rounded-t", i === 5 ? "bg-red-400" : "bg-white/25")} style={{ height: `${b}%` }} />
+            <div key={i} className={cn("flex-1 rounded-t", i === 5 ? "bg-blue-500" : "bg-white/25")} style={{ height: `${b}%` }} />
           ))}
         </div>
         <div className="mt-2 flex items-baseline justify-between">
           <p className="text-[10px] text-neutral-500">월 – 일</p>
           <p className="text-xs font-bold text-white">
-            총 <span className="text-red-400">1,284명</span> · 전주 대비 +18%
+            총 <span className="text-blue-500">1,284명</span> · 전주 대비 +18%
           </p>
         </div>
       </Panel>
@@ -232,7 +232,7 @@ function StatsView() {
             <div key={s.k} className="flex items-center gap-3">
               <span className="w-20 shrink-0 text-[11px] text-neutral-400">{s.k}</span>
               <div className="h-2 flex-1 overflow-hidden rounded-full bg-white/10">
-                <div className="h-full rounded-full bg-red-400/80" style={{ width: `${s.v}%` }} />
+                <div className="h-full rounded-full bg-blue-500/80" style={{ width: `${s.v}%` }} />
               </div>
               <span className="w-8 shrink-0 text-right text-[11px] font-bold text-white">{s.v}%</span>
             </div>
@@ -288,7 +288,7 @@ export function AdminFeatureSection() {
                       : "border-white/10 bg-white/5 text-neutral-300 hover:border-white/30 hover:text-white",
                   )}
                 >
-                  <Check className={cn("h-4 w-4 shrink-0", active === item ? "text-red-400" : "text-primary")} />
+                  <Check className={cn("h-4 w-4 shrink-0", active === item ? "text-blue-500" : "text-primary")} />
                   {item}
                 </button>
               </li>
