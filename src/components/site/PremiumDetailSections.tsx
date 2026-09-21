@@ -104,19 +104,23 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
           </p>
           <h2 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">이 디자인에 담긴 화면들</h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-            실제 배포된 화면을 그대로 잘라왔습니다. 이 화면이 출발점이고, 여기서 섹션 순서와 브랜드
+            실제 배포된 화면을 구간째로 담았습니다. 자르지 않아 각 화면이 끝까지 보입니다. 이 화면이 출발점이고, 여기서 섹션 순서와 브랜드
             색 · 글꼴을 사장님 사업에 맞춰 다시 잡은 뒤 사진을 새로 만들어 채웁니다.
           </p>
           {/* grid-cols-1: 없으면 모바일 암시적 열이 캡션의 min-content(376px)로 잡혀 컨테이너를 넘친다 */}
-          <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
+          {/* 구간 캡처는 높이가 제각각이다. 격자에 넣어 4:3 으로 자르면 내용이 중간에서 끊겨
+              한 줄짜리 컬럼 배치로 원래 비율 그대로 보여준다. */}
+          <div className="mt-6 gap-5 sm:columns-2 sm:[column-gap:1.25rem]">
             {shots.map((shot, i) => (
               <Reveal key={shot.img} delay={i * 70}>
-                <figure className="overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
+                <figure className="mb-5 break-inside-avoid overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
                   <img
                     src={shot.img}
                     alt={shot.title}
                     loading="lazy"
-                    className="aspect-[4/3] w-full object-cover object-top"
+                    width={shot.width ?? 1280}
+                    height={shot.height ?? 960}
+                    className="h-auto w-full"
                   />
                   <figcaption className="flex items-center justify-between gap-3 border-t border-border px-5 py-3.5">
                     <span className="min-w-0 truncate text-sm font-semibold text-foreground">{shot.title}</span>

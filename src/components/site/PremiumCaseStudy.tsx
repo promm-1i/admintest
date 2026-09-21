@@ -10,6 +10,7 @@ import { toCustomerFacingCaseStudy } from "@/lib/caseStudies/customerCopy";
 import { getDesignCode } from "@/lib/designCode";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
 import { cn } from "@/lib/utils";
+import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
 
 /** 줄바꿈(\n)을 살려 제목을 끊는다 — 한글 제목은 끊는 자리를 문구에서 정한다 */
 function Lines({ text }: { text: string }) {
@@ -72,49 +73,52 @@ function CapabilityShowcase({
 
   return (
     <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
-      <div className="overflow-hidden rounded-3xl bg-neutral-950 text-white">
-        <div className="grid gap-10 border-b border-white/10 px-6 py-10 sm:px-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:px-14 lg:py-14">
+      <div className="border-y border-neutral-200 py-12 text-neutral-950 sm:py-16 lg:py-20">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-16">
           <Reveal>
-            <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: brandColor }}>
-              {capabilities.label ?? "FUNCTION SYSTEM"}
+            <p className="text-sm font-bold" style={{ color: brandColor }}>
+              사이트 구성
             </p>
-            <h2 className="mt-4 max-w-3xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl break-keep">
+            <h2 className="mt-4 max-w-3xl text-3xl font-bold leading-[1.25] tracking-tight sm:text-4xl break-keep">
               {capabilities.title}
             </h2>
-            <p className="mt-5 max-w-2xl text-base leading-[1.9] text-white/60 break-keep">{capabilities.body}</p>
+            <p className="mt-5 max-w-2xl text-base leading-[1.85] text-neutral-600 break-keep">{capabilities.body}</p>
           </Reveal>
-          <div className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10">
+          <dl className="grid grid-cols-2 border-l border-t border-neutral-200">
             {capabilities.stats.map((stat) => (
-              <div key={stat.label} className="bg-neutral-950 p-5 sm:p-6">
-                <strong className="block text-3xl font-bold tracking-tight sm:text-4xl" style={{ color: brandColor }}>
+              <div key={stat.label} className="border-b border-r border-neutral-200 px-4 py-5 sm:px-6 sm:py-6">
+                <strong className="block text-3xl font-semibold tracking-tight text-neutral-950 sm:text-4xl">
                   {stat.value}
                 </strong>
-                <span className="mt-2 block text-sm font-bold text-white">{stat.label}</span>
-                <span className="mt-1 block text-xs leading-relaxed text-white/45 break-keep">{stat.note}</span>
+                <span className="mt-2 block text-sm font-bold text-neutral-900">{stat.label}</span>
+                <span className="mt-1 block text-xs leading-relaxed text-neutral-500 break-keep">{stat.note}</span>
               </div>
             ))}
-          </div>
+          </dl>
         </div>
 
-        <div className="grid min-w-0 lg:grid-cols-[340px_minmax(0,1fr)]">
-          <div className="min-w-0 border-b border-white/10 lg:border-b-0 lg:border-r">
-            <div className="flex gap-2 overflow-x-auto p-4 sm:p-6 lg:block lg:space-y-1 lg:overflow-visible lg:p-8">
+        <div className="mt-12 grid min-w-0 border-t border-neutral-200 lg:mt-16 lg:grid-cols-[270px_minmax(0,1fr)]">
+          <div className="min-w-0 border-b border-neutral-200 lg:border-b-0 lg:border-r">
+            <div className="flex overflow-x-auto lg:block lg:overflow-visible" role="tablist" aria-label="사이트 화면 선택">
               {capabilities.groups.map((group, i) => {
                 const selected = i === activeIndex;
                 return (
                   <button
                     key={group.label}
                     type="button"
+                    role="tab"
                     aria-pressed={selected}
+                    aria-selected={selected}
                     onClick={() => setActiveIndex(i)}
                     className={cn(
-                      "group min-w-[190px] rounded-xl border px-4 py-4 text-left transition-colors lg:block lg:w-full lg:min-w-0 lg:border-0 lg:border-b lg:border-white/10 lg:px-3 lg:py-5",
+                      "group min-w-[168px] border-b-2 px-4 py-5 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2 lg:block lg:w-full lg:min-w-0 lg:border-b lg:border-neutral-200 lg:border-l-2 lg:px-5 lg:py-5",
                       selected
-                        ? "border-white/20 bg-white/10 text-white"
-                        : "border-white/10 text-white/45 hover:bg-white/5 hover:text-white",
+                        ? "border-neutral-950 text-neutral-950 lg:border-b-neutral-200"
+                        : "border-neutral-200 text-neutral-400 hover:text-neutral-900 lg:border-l-transparent",
                     )}
+                    style={selected ? { borderLeftColor: brandColor } : undefined}
                   >
-                    <span className="font-mono text-[11px] font-bold" style={{ color: selected ? brandColor : undefined }}>
+                    <span className="text-xs font-semibold tabular-nums" style={{ color: selected ? brandColor : undefined }}>
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="ml-3 text-sm font-bold sm:text-base">{group.label}</span>
@@ -124,14 +128,14 @@ function CapabilityShowcase({
             </div>
           </div>
 
-          <div className="min-w-0 p-5 sm:p-8 lg:p-12">
-            <div className="grid items-start gap-8 xl:grid-cols-[minmax(0,4fr)_minmax(280px,3fr)]">
+          <div className="min-w-0 pt-8 sm:pt-10 lg:pl-12 lg:pt-12">
+            <div className="grid items-start gap-8 xl:grid-cols-[minmax(0,5fr)_minmax(280px,3fr)] xl:gap-12">
               <RevealScale key={active.img}>
                 <a
                   href={`${liveUrl}${active.file}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group block overflow-hidden rounded-2xl bg-white ring-1 ring-white/10"
+                  className="group block overflow-hidden rounded-xl bg-neutral-100 ring-1 ring-neutral-200"
                   aria-label={`${active.label} 실제 화면 새 창으로 보기`}
                 >
                   <img
@@ -143,23 +147,25 @@ function CapabilityShowcase({
                     className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.015]"
                   />
                 </a>
-                <p className="mt-3 text-xs text-white/40">{active.caption}</p>
+                <p className="mt-3 text-xs text-neutral-500">{active.caption}</p>
               </RevealScale>
               <div>
-                <p className="font-mono text-xs font-semibold tracking-widest" style={{ color: brandColor }}>
-                  SELECTED FUNCTION
+                <p className="text-sm font-bold" style={{ color: brandColor }}>
+                  {active.label}
                 </p>
                 <h3 className="mt-3 break-words text-2xl font-bold leading-snug tracking-tight sm:text-3xl sm:break-keep">
                   {active.title}
                 </h3>
-                <p className="mt-4 break-words text-sm leading-[1.9] text-white/60 sm:text-base sm:break-keep">
+                <p className="mt-4 break-words text-sm leading-[1.85] text-neutral-600 sm:text-base sm:break-keep">
                   {active.body}
                 </p>
-                <ul className="mt-6 space-y-3 border-t border-white/10 pt-6">
-                  {active.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2.5 text-sm text-white/85">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0" style={{ color: brandColor }} />
-                      <span className="break-words sm:break-keep">{item}</span>
+                <ul className="mt-6 divide-y divide-neutral-200 border-y border-neutral-200">
+                  {active.items.map((item, i) => (
+                    <li key={item} className="flex items-start gap-3 py-3 text-sm text-neutral-700">
+                      <span className="mt-px shrink-0 text-xs font-semibold tabular-nums text-neutral-400">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="break-words font-medium sm:break-keep">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -167,9 +173,9 @@ function CapabilityShowcase({
                   href={`${liveUrl}${active.file}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-7 inline-flex items-center gap-1.5 text-sm font-bold text-white hover:underline"
+                  className="mt-7 inline-flex items-center gap-1.5 border-b border-neutral-950 pb-1 text-sm font-bold text-neutral-950 transition-opacity hover:opacity-60"
                 >
-                  이 기능 실제 화면 보기
+                  이 화면 열어보기
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
@@ -182,6 +188,7 @@ function CapabilityShowcase({
 }
 
 export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sample; study: CaseStudy }) {
+  const sectionShots = TEMPLATE_SECTIONS[sample.liveUrl?.match(/\/templates\/([a-z0-9-]+)\//)?.[1] ?? ""] ?? [];
   const study = toCustomerFacingCaseStudy(sourceStudy);
   const code = getDesignCode(sample);
   const liveUrl = sample.liveUrl ?? "";
@@ -489,6 +496,39 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
           </div>
         </div>
       </section>
+
+      {/* ⑤-2 실물 구간 캡처 — 템플릿이 가진 만큼 전부, 자르지 않고 */}
+      {sectionShots.length > 0 && (
+        <section className="mx-auto mt-24 max-w-[1280px] px-4 sm:px-6 lg:mt-32 lg:px-8">
+          <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">Inside This Design</p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">이 디자인에 담긴 화면 {sectionShots.length}개</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
+            실제 배포된 화면을 구간째로 담았습니다. 중간에서 자르지 않아 각 화면이 끝까지 보입니다.
+            여기서 섹션 순서와 브랜드 색 · 글꼴을 사업에 맞춰 다시 잡고 사진을 새로 만들어 채웁니다.
+          </p>
+          {/* 구간마다 높이가 다르다. 격자에 맞춰 자르면 내용이 끊겨 컬럼 배치로 원래 비율 그대로 둔다. */}
+          <div className="mt-8 gap-5 sm:columns-2 sm:[column-gap:1.25rem]">
+            {sectionShots.map((shot, i) => (
+              <Reveal key={shot.img} delay={i * 60}>
+                <figure className="mb-5 break-inside-avoid overflow-hidden rounded-2xl border border-border bg-card shadow-xs">
+                  <img
+                    src={shot.img}
+                    alt={shot.title}
+                    loading="lazy"
+                    width={shot.width ?? 1280}
+                    height={shot.height ?? 960}
+                    className="h-auto w-full"
+                  />
+                  <figcaption className="flex items-center justify-between gap-3 border-t border-border px-5 py-3.5">
+                    <span className="min-w-0 truncate text-sm font-semibold text-foreground">{shot.title}</span>
+                    <span className="shrink-0 rounded-full bg-secondary px-2.5 py-0.5 text-[11px] font-semibold text-secondary-foreground">실물 캡처</span>
+                  </figcaption>
+                </figure>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ⑥ 이 디자인 FAQ */}
       <section className="mx-auto mt-24 max-w-[1040px] px-4 sm:px-6 lg:mt-32 lg:px-8">
