@@ -1,7 +1,7 @@
 import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Check, ChevronDown, Menu, Search, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, type MainNavEntry } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
@@ -256,28 +256,39 @@ function KakaoMark() {
  *   정보 카드 배경 #f6f4ff · #f4f8ff · #f2f9f2 · #f3f4f6
  */
 const HELP_CARDS = [
-  { title: "제작 방법", desc: "상담에서 오픈까지\n무엇을 언제 하는지", href: "/website/process", tone: "a" },
-  { title: "제작 비용", desc: "형태와 구성별로\n정해진 금액 보기", href: "/website/price", tone: "b" },
-  { title: "견적 계산기", desc: "필요한 기능을 골라\n예상 금액 확인", href: "/estimate", tone: "c" },
-  { title: "자주 묻는 질문", desc: "비용 · 기간 · 관리자 기능에\n대한 답", href: "/faq", tone: "d" },
+  { title: "제작 방법", desc: "상담에서 오픈까지\n무엇을 언제 하는지", href: "/website/process", tone: "a", Icon: RouteIcon },
+  { title: "제작 비용", desc: "형태와 구성별로\n정해진 금액 보기", href: "/website/price", tone: "b", Icon: Receipt },
+  { title: "견적 계산기", desc: "필요한 기능을 골라\n예상 금액 확인", href: "/estimate", tone: "c", Icon: Calculator },
+  { title: "자주 묻는 질문", desc: "비용 · 기간 · 관리자 기능에\n대한 답", href: "/faq", tone: "d", Icon: HelpCircle },
 ] as const;
 
 function HomeCases() {
   const root = useRoot();
-  const cases = getPremiumDesigns().map((item) => item.sample).filter((sample) => sample.image).slice(0, 6);
+  const cases = getPremiumDesigns().map((item) => item.sample).filter((sample) => sample.image).slice(0, 12);
+  // ìë³¸ Swiper ì¤ì  ê·¸ëë¡ â slidesPerView 4 Â· spaceBetween 10 Â· speed 300 Â· slidesPerGroup 4 Â· loop ìì
+  const PER_VIEW = 4;
+  const [index, setIndex] = useState(0);
+  const maxIndex = Math.max(0, cases.length - PER_VIEW);
+  const go = (delta: number) => setIndex((current) => Math.min(maxIndex, Math.max(0, current + delta * PER_VIEW)));
   return <section className="re-nhn re-nhn--cases">
     <div className="re-nhn__frame">
-      <h2 className="re-nhn__heading">제작 사례</h2>
-      <p className="re-nhn__lead">어떤 업종이 어떤 화면으로 만들어졌는지 보시고 고르세요.</p>
-      <ul className="re-case-list">{cases.map((sample) => <li className="re-case" key={sample.slug}>
-        <Link to={`${root}/samples/${sample.slug}`}>
-          <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" /></figure>
-          <h3>{sample.premiumLabel ?? sample.industry}</h3>
-          <p>{sample.tag ?? sample.type.join(" · ")}</p>
-          <span className="re-case__more">자세히 보기<ArrowRight /></span>
-        </Link>
-      </li>)}</ul>
-      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/samples`}>전체 제작 사례 보기</Link></div>
+      <h2 className="re-nhn__heading">ì ì ì¬ë¡</h2>
+      <p className="re-nhn__lead">ì´ë¤ ìì¢ì´ ì´ë¤ íë©´ì¼ë¡ ë§ë¤ì´ì¡ëì§ ë³´ìê³  ê³ ë¥´ì¸ì.</p>
+      <div className="re-case-nav">
+        <button type="button" onClick={() => go(-1)} disabled={index === 0} aria-label="ì´ì  ì¬ë¡"><ChevronLeft /></button>
+        <button type="button" onClick={() => go(1)} disabled={index >= maxIndex} aria-label="ë¤ì ì¬ë¡"><ArrowRight /></button>
+      </div>
+      <div className="re-case-viewport">
+        <ul className="re-case-list" style={{ transform: `translate3d(-${index * 330}px,0,0)` }}>{cases.map((sample) => <li className="re-case" key={sample.slug}>
+          <Link to={`${root}/samples/${sample.slug}`}>
+            <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" /></figure>
+            <h3>{sample.premiumLabel ?? sample.industry}</h3>
+            <p>{sample.tag ?? sample.type.join(" Â· ")}</p>
+            <span className="re-case__more">ìì¸í ë³´ê¸°<ArrowRight /></span>
+          </Link>
+        </li>)}</ul>
+      </div>
+      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/samples`}>ì ì²´ ì ì ì¬ë¡ ë³´ê¸°</Link></div>
     </div>
   </section>;
 }
@@ -292,7 +303,8 @@ function HomeHelp() {
         <Link to={`${root}${card.href}`}>
           <h3>{card.title}</h3>
           <p>{card.desc}</p>
-          <ArrowRight className="re-help__go" />
+          <ArrowRight className="re-help__go" aria-hidden="true" />
+          <card.Icon className="re-help__mark" aria-hidden="true" />
         </Link>
       </li>)}</ul>
     </div>

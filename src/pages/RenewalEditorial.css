@@ -953,9 +953,14 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-nhn--help{margin-top:120px}
 
 /* 사례 카드 320x411 · 간격 20 · 원본처럼 4장째가 오른쪽에서 잘린다 */
-.re-case-list{margin:40px 0 0;padding:0 0 4px;list-style:none;display:flex;gap:20px;overflow-x:auto;scrollbar-width:none}
-.re-case-list::-webkit-scrollbar{display:none}
+.re-case-nav{margin-top:-34px;display:flex;justify-content:flex-end;gap:6px}
+.re-case-nav button{width:27px;height:44px;display:grid;place-items:center;border:0;background:none;color:#1f2428;cursor:pointer;transition:opacity .2s}
+.re-case-nav button svg{width:22px;height:22px}
+.re-case-nav button:disabled{opacity:.25;cursor:default}
+.re-case-viewport{margin-top:16px;overflow:hidden}
+.re-case-list{margin:0;padding:0 0 4px;list-style:none;display:flex;gap:10px;transition:transform .3s ease-out;will-change:transform}
 .re-case{flex:0 0 320px;width:320px}
+@media (prefers-reduced-motion:reduce){.re-case-list{transition:none}}
 .re-case a{display:block;color:inherit}
 .re-case__shot{width:320px;height:220px;margin:0;display:grid;place-items:center;overflow:hidden;border:1px solid #e2e5eb;border-radius:12px;background:#fff}
 .re-case__shot img{width:318px;height:145px;object-fit:cover;object-position:50% 0}
@@ -977,7 +982,10 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-help a{position:relative;height:100%;min-height:308px;padding:32px;display:flex;flex-direction:column;color:inherit}
 .re-help h3{margin:0;font-size:24px;font-weight:700;line-height:34px;color:#000;word-break:keep-all}
 .re-help p{margin:8px 0 0;font-size:17px;font-weight:500;line-height:26px;color:#51565f;white-space:pre-line;word-break:keep-all}
-.re-help__go{width:24px;height:24px;margin-top:auto;color:#c8ccd4;transition:color .2s,transform .2s}
+.re-help a{position:relative;overflow:hidden}
+.re-help__go{position:relative;z-index:1;width:24px;height:24px;margin-top:auto;color:#c8ccd4;transition:color .2s,transform .2s}
+.re-help__mark{position:absolute;right:24px;bottom:2px;width:96px;height:96px;color:#c8ccd4;opacity:.55;pointer-events:none;transition:opacity .2s,transform .2s}
+.re-help a:hover .re-help__mark{opacity:.8;transform:translateY(-4px)}
 .re-help a:hover .re-help__go{color:var(--re-blue,#1572ed);transform:translateX(4px)}
 .re-help--a{background:#f6f4ff}
 .re-help--b{background:#f4f8ff}
