@@ -17,9 +17,12 @@ type Tier = {
 };
 
 /**
- * 맞춤형 구축비. 모든 구성이 반응형으로 제작되며, 구축비에 첫 해 호스팅료와
- * 셋팅비용, 도메인 1개(1년)가 모두 포함된다. 2년차부터 연 27만원(호스팅 24 + 도메인 3).
- * 호스팅료는 템플릿 라인과 같은 연 24만원이다 — 라인이 달라도 서버 사양은 같다.
+ * 맞춤형 구축비. 모든 구성이 반응형으로 제작되며, 구축비에 호스팅과
+ * 셋팅비용, 도메인 1개(1년)가 모두 포함된다.
+ *
+ * 2026-09-21, 호스팅을 청구 항목에서 뺐다. 고객이 직접 하면 들지 않는 비용이라
+ * 따로 받을 근거가 없다. 템플릿 라인과 같은 기준이다. 2년차부터 드는 것은
+ * 도메인 갱신 연 3만원뿐이다.
  */
 const TIERS: Tier[] = [
   {
@@ -264,17 +267,17 @@ export default function WebSolutions() {
         <div className="h-full rounded-2xl border border-border bg-card p-6">
           <p className="mb-3 text-sm font-bold text-foreground">2년차부터 운영 비용</p>
           <p className="flex items-baseline gap-1.5">
-            <span className="text-2xl font-extrabold tracking-tight text-primary">연 27만 원</span>
+            <span className="text-2xl font-extrabold tracking-tight text-primary">연 3만 원</span>
             <span className="text-xs text-muted-foreground">부가세 별도</span>
           </p>
           <ul className="mt-3 space-y-1.5 text-sm text-muted-foreground">
             <li className="flex items-start gap-2">
               <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-              <span>호스팅료 연 24만 원 (템플릿 라인과 동일)</span>
+              <span>도메인 갱신 연 3만 원</span>
             </li>
             <li className="flex items-start gap-2">
               <Check className="mt-0.5 size-4 shrink-0 text-primary" />
-              <span>도메인 갱신 연 3만 원</span>
+              <span>호스팅료는 따로 받지 않습니다</span>
             </li>
           </ul>
           <p className="mt-3 text-xs leading-relaxed text-muted-foreground/80 break-keep">

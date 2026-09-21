@@ -12,7 +12,8 @@ import { SAMPLES, getPremiumDesigns, getPremiumCategories } from "@/lib/samples"
 import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 import { searchSite, type SearchHit } from "@/lib/siteSearch";
-import { PRICING_ROWS, PRODUCTION_PERIOD, TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
+import { TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
+import { PricingComparison } from "@/components/site/PricingComparison";
 import "./RenewalEditorial.css";
 
 const PREVIEW_ROOT = "/renewal-editorial";
@@ -398,7 +399,7 @@ function StandardPage({ page, path }: { page: ContentPage; path: string }) {
 
 function PriceDetail({ page, path }: { page: ContentPage; path: string }) {
   const root = useRoot();
-  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section split title="포함 항목 비교"><div className="re-price-table"><div><strong>포함 항목</strong>{TEMPLATE_PACKAGES.map((item) => <span key={item.key}>{item.label}</span>)}</div>{PRICING_ROWS.map((row) => <div key={row.label}><strong>{row.label}<small>{row.note}</small></strong>{row.values.map((value, index) => <span key={`${row.label}-${TEMPLATE_PACKAGES[index].key}`}>{value}</span>)}</div>)}<div><strong>제작 기간</strong>{TEMPLATE_PACKAGES.map((item) => <span key={item.key}>{PRODUCTION_PERIOD}</span>)}</div></div></Section><Section split title="프리미엄 디자인"><div className="re-premium-price"><h3>300만원부터</h3><span>메뉴 구성, 화면 디자인, 스크롤 연출과 관리자 기능을 새로 설계합니다</span><Link to={`${root}/web-solutions`}>프리미엄 사례 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="프리미엄 디자인"><div className="re-premium-price"><h3>300만원부터</h3><span>메뉴 구성, 화면 디자인, 스크롤 연출과 관리자 기능을 새로 설계합니다</span><Link to={`${root}/web-solutions`}>프리미엄 사례 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
 }
 
 const BOARD_PAGE_SIZE = 10;
@@ -575,7 +576,7 @@ function EstimatePage() {
         <div className="re-estimate__result">
           <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{won(row.cost)}원</dd></div>)}</dl>
           <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
-          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 첫 해 호스팅료와 도메인 1개가 위 금액에 들어 있어 따로 받지 않습니다. 2년차부터 호스팅 연 240,000원과 도메인 갱신 연 30,000원이 듭니다.</p>
+          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 호스팅료와 도메인 1개가 위 금액에 들어 있어 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다.</p>
           <div className="re-estimate__actions"><Link to={`${root}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
         </div>
       </Section>

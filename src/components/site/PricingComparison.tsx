@@ -61,7 +61,7 @@ type Frame = { left: number; top: number; width: number; height: number };
  * 열 강조는 셀 테두리 대신 절대배치 프레임 하나가 열 사이를 미끄러져 이동하는 방식이라
  * hover 시 레이아웃이 전혀 흔들리지 않는다.
  */
-export function PricingComparison() {
+export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
   const [active, setActive] = useState<number | null>(null);
   const tableRef = useRef<HTMLTableElement | null>(null);
   const headRefs = useRef<(HTMLTableCellElement | null)[]>([]);
@@ -83,17 +83,19 @@ export function PricingComparison() {
 
   return (
     <div>
-      <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-        <h2 className="text-2xl font-bold text-foreground break-keep sm:text-3xl">
-          홈페이지 제작 비용 안내
-          <span className="ml-2 align-middle text-sm font-medium text-muted-foreground">(VAT 별도)</span>
-        </h2>
-        <p className="text-sm text-muted-foreground break-keep">
-          셋팅 · 업종 전용 기능 · 첫 해 호스팅이 모두 포함된 금액입니다.
-        </p>
-      </div>
+      {!bare && (
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="text-2xl font-bold text-foreground break-keep sm:text-3xl">
+            홈페이지 제작 비용 안내
+            <span className="ml-2 align-middle text-sm font-medium text-muted-foreground">(VAT 별도)</span>
+          </h2>
+          <p className="text-sm text-muted-foreground break-keep">
+            셋팅 · 업종 전용 기능 · 호스팅이 모두 포함된 금액입니다.
+          </p>
+        </div>
+      )}
 
-      <div className="mt-8 overflow-x-auto pb-2">
+      <div className={bare ? "overflow-x-auto pb-2" : "mt-8 overflow-x-auto pb-2"}>
         <div className="relative">
           <table
             ref={tableRef}
@@ -251,6 +253,7 @@ export function PricingComparison() {
         </div>
       </div>
 
+      {!bare && (
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
         <Button asChild size="lg" variant="outline" className="gap-1.5 font-semibold">
           <Link to="/templates?style=basic-template">
@@ -271,6 +274,7 @@ export function PricingComparison() {
           </Link>
         </Button>
       </div>
+      )}
     </div>
   );
 }
