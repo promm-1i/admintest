@@ -1,7 +1,7 @@
 import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Bell, Calculator, Check, ChevronDown, ChevronLeft, Database, FileText, Globe, HelpCircle, Image as ImageIcon, LayoutGrid, Menu, Monitor, Receipt, Route as RouteIcon, Search, Settings, Shield, Smartphone, Wrench, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, type MainNavEntry } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
@@ -262,6 +262,41 @@ const HELP_CARDS = [
   { title: "자주 묻는 질문", desc: "비용 · 기간 · 관리자 기능에\n대한 답", href: "/faq", tone: "d", Icon: HelpCircle },
 ] as const;
 
+/**
+ * 업종 가로 아코디언. NHN Cloud "주요 솔루션" 실측값 그대로 (2026-09-21).
+ *   컨테이너 1280 · 높이 520 · 간격 12
+ *   접힌 칸 79px (flex 1 1 0%) · 펼친 칸 865px (flex 0 1 auto)
+ *   전환 flex .5s cubic-bezier(.4,0,.2,1) · 안쪽 글자 opacity .5s ease-out
+ *   접힌 칸은 글자를 세로로 세운다.
+ */
+function HomeIndustries() {
+  const root = useRoot();
+  const items = INDUSTRY_SHOWCASES.slice(0, 6);
+  const [open, setOpen] = useState(0);
+  return <section className="re-nhn re-nhn--industry">
+    <div className="re-nhn__frame">
+      <h2 className="re-nhn__heading">업종별 홈페이지</h2>
+      <p className="re-nhn__lead">업종마다 손님이 찾는 것이 다릅니다. 그 업종에 맞춘 화면과 기능을 넣습니다.</p>
+      <ul className="re-acc">{items.map((item, index) => {
+        const active = index === open;
+        return <li key={item.key} className="re-acc__panel" data-open={active}
+          onPointerEnter={() => setOpen(index)} onFocusCapture={() => setOpen(index)}>
+          <Link to={hrefIn(root, item.solutionHref)} aria-expanded={active}>
+            <span className="re-acc__eng" aria-hidden="true">{item.key.replace(/-/g, " ").toUpperCase()}</span>
+            <span className="re-acc__name">{item.name}</span>
+            <span className="re-acc__body">
+              <strong>{item.cardTitle}</strong>
+              <em>{item.cardTagline}</em>
+              <span className="re-acc__points">{item.manageables.slice(0, 3).map((point) => <span key={point}>{point}</span>)}</span>
+              <ArrowRight className="re-acc__go" aria-hidden="true" />
+            </span>
+          </Link>
+        </li>;
+      })}</ul>
+    </div>
+  </section>;
+}
+
 function HomeCases() {
   const root = useRoot();
   const cases = getPremiumDesigns().map((item) => item.sample).filter((sample) => sample.image).slice(0, 12);
@@ -464,6 +499,8 @@ function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openKey, setOpenKey] = useState<string | null>(null);
   const [groupKey, setGroupKey] = useState<string | null>(null);
+  // 좁은 폭(768~1023)에서는 손가락으로 고르는 2단 드로어를 쓴다
+  const [drawerKey, setDrawerKey] = useState<string>(MAIN_NAV[0].key);
   // Escape 로 닫은 뒤 트리거로 초점을 되돌리면 focus 가 다시 열어 버린다. 그 한 번만 막는다.
   const justClosed = useRef(false);
   const openEntry = (item: MainNavEntry) => { if (justClosed.current) return; setOpenKey(item.key); setGroupKey(item.groups[0]?.key ?? null); };
@@ -502,7 +539,22 @@ function Header() {
         </div>
       </div>}
     </div>
-    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{MAIN_NAV.map((item) => <details key={item.key}><summary>{item.label}<ChevronDown /></summary><div>{item.groups.flatMap((entry2) => entry2.items).map((link) => <Link key={link.href + link.label} to={hrefIn(root, link.href)}>{link.label}</Link>)}</div></details>)}</div>
+    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>
+      {/* 좁은 폭 — 왼쪽 대메뉴 / 오른쪽 그 메뉴의 항목 */}
+      <div className="re-drawer">
+        <ul className="re-drawer__side">{MAIN_NAV.map((item) => <li key={item.key}>
+          <button type="button" data-active={item.key === drawerKey} onClick={() => setDrawerKey(item.key)}>{item.label}</button>
+        </li>)}</ul>
+        <div className="re-drawer__body">
+          {(MAIN_NAV.find((item) => item.key === drawerKey) ?? MAIN_NAV[0]).groups.map((group) => <div key={group.key}>
+            <p className="re-drawer__group">{group.label}</p>
+            {group.items.map((link) => <Link key={link.href + link.label} to={hrefIn(root, link.href)}>{link.label}</Link>)}
+          </div>)}
+        </div>
+      </div>
+      {/* 손바닥 폭 — 접었다 펴는 목록 */}
+      <div className="re-stack">{MAIN_NAV.map((item) => <details key={item.key}><summary>{item.label}<ChevronDown /></summary><div>{item.groups.flatMap((entry2) => entry2.items).map((link) => <Link key={link.href + link.label} to={hrefIn(root, link.href)}>{link.label}</Link>)}</div></details>)}</div>
+    </div>
   </header>;
 }
 
@@ -581,6 +633,7 @@ function EditorialHome() {
     </section>
     <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">지금 우리는</p><h2 className="now-title">오늘의 화면과<br />내일의 운영을<br className="mobile" /> 함께 만듭니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
     <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{projects.slice(0, 3).map((project, index) => <li className="now-value-item" key={project.slug}><Link className={`now-value-card type-${index + 1}`} to={`${root}/samples/${project.slug}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
+    <HomeIndustries />
     <HomeCases />
     <HomeHelp />
     <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">오늘을 함께하는<br />제작 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${root}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
@@ -605,7 +658,39 @@ function DetailArticle({ category, title, date, children, listHref, prev, next }
 }
 function ContactBand() {
   return <Section wide><div className="re-contact-band"><p>제작할 페이지와 기능을 알려주세요</p><h3>견적과 진행 순서를 안내해 드립니다</h3><div><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer">카카오톡 문의<ArrowUpRight /></a><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div></div></Section>; }
-function PageSections({ page }: { page: ContentPage }) { return <>{page.sections.map((section) => <Section key={section.title} split title={section.title}><div className="re-step-body"><p className="re-step-text">{section.text}</p><ul className="re-step-list">{section.points.map((point) => <li key={point}><Check />{point}</li>)}</ul></div></Section>)}</>; }
+/**
+ * 서브페이지 항목 목록. NHN Cloud "주요 서비스"의 2열 아이콘 목록 구조를 쓴다.
+ * 아이콘 타일 88x88 · 2열 · 행 사이 얇은 선.
+ * points 는 문자열뿐이라 설명이나 링크를 지어내지 않고 아이콘과 제목만 둔다.
+ */
+const POINT_ICONS: [RegExp, typeof Check][] = [
+  [/관리자|설정|운영/, Settings],
+  [/문의|예약|알림|접수/, Bell],
+  [/검색|필터|조회/, Search],
+  [/콘텐츠|게시|공지|소식/, FileText],
+  [/DB|데이터|API|연동/, Database],
+  [/모바일|반응형|휴대|폰/, Smartphone],
+  [/화면|디자인|레이아웃|구성/, LayoutGrid],
+  [/사진|갤러리|이미지/, ImageIcon],
+  [/검색엔진|SEO|노출/, Globe],
+  [/보안|백업|안전/, Shield],
+  [/수정|유지|보수|점검/, Wrench],
+  [/비용|금액|견적/, Receipt],
+  [/모니터|데스크톱/, Monitor],
+];
+function pointIcon(text: string) {
+  for (const [pattern, Icon] of POINT_ICONS) if (pattern.test(text)) return Icon;
+  return Check;
+}
+
+function PointList({ points }: { points: string[] }) {
+  return <ul className="re-points">{points.map((point) => {
+    const Icon = pointIcon(point);
+    return <li key={point}><i aria-hidden="true"><Icon /></i><strong>{point}</strong></li>;
+  })}</ul>;
+}
+
+function PageSections({ page }: { page: ContentPage }) { return <>{page.sections.map((section) => <Section key={section.title} split title={section.title}><div className="re-step-body"><p className="re-step-text">{section.text}</p><PointList points={[...section.points]} /></div></Section>)}</>; }
 
 function StandardPage({ page, path }: { page: ContentPage; path: string }) {
   if (path === "/website/price") return <PriceDetail page={page} path={path} />;

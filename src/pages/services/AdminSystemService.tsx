@@ -238,12 +238,12 @@ export default function AdminSystemService() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
+          <div className="mt-10 grid gap-10 [&>*]:min-w-0 lg:grid-cols-[0.75fr_1.25fr] lg:items-start">
             <Reveal>
               <ul className="divide-y divide-border border-t border-border">
                 {menuGroups.map((item) => (
                   <li key={item.key} className="flex items-center justify-between gap-4 py-3">
-                    <span className="text-base font-medium text-foreground">{item.label}</span>
+                    <span className="min-w-0 break-keep text-base font-medium text-foreground">{item.label}</span>
                     {item.children && (
                       <span className="shrink-0 font-mono text-xs text-muted-foreground/70">
                         {item.children.length}개 세부 메뉴

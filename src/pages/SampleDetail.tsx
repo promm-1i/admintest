@@ -379,9 +379,9 @@ export default function SampleDetail() {
         <div className="pt-2 flex flex-col items-center gap-3">
           {/* Top row: 제작상담 & 카카오톡 */}
           <div className="flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg" className="font-bold gap-2 shadow-sm">
+            <Button asChild size="lg" className="h-auto max-w-full whitespace-normal break-keep py-3 text-center font-bold gap-2 shadow-sm">
               <Link to="/contact">
-                <Send className="h-4 w-4" />
+                <Send className="h-4 w-4 shrink-0" />
                 {sample.industry} 제작 상담하기
               </Link>
             </Button>

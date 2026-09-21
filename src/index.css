@@ -2,6 +2,37 @@
 @source "./";
 @import "tw-animate-css";
 
+/*
+ * 글자 계단을 한 단계씩 올린다 (2026-09-22).
+ *
+ * 우리은행 구조로 새로 짠 쪽(홈·제작 비용·서브페이지 골격)은 본문 17~19px 인데
+ * 기존 쪽들은 14~16px 이라, 스크롤하면 글씨가 컸다 작았다 한다. 큰 쪽에 맞춰
+ * 완전히 키우면 줄바꿈이 무너지므로 7~9% 씩만 올려 두 계열을 붙인다.
+ * Tailwind v4 theme 값이라 sm: lg: 같은 반응형 변형에도 그대로 적용된다.
+ */
+@theme {
+  --text-xs: 0.8125rem;        /* 12 → 13 */
+  --text-xs--line-height: 1.15rem;
+  --text-sm: 0.9375rem;        /* 14 → 15 */
+  --text-sm--line-height: 1.35rem;
+  --text-base: 1.0625rem;      /* 16 → 17 */
+  --text-base--line-height: 1.6rem;
+  --text-lg: 1.1875rem;        /* 18 → 19 */
+  --text-lg--line-height: 1.8rem;
+  --text-xl: 1.375rem;         /* 20 → 22 */
+  --text-xl--line-height: 1.9rem;
+  --text-2xl: 1.625rem;        /* 24 → 26 */
+  --text-2xl--line-height: 2.1rem;
+  --text-3xl: 2.0625rem;       /* 30 → 33 */
+  --text-3xl--line-height: 2.4rem;
+  --text-4xl: 2.5rem;          /* 36 → 40 */
+  --text-4xl--line-height: 2.7rem;
+  --text-5xl: 3.25rem;         /* 48 → 52 */
+  --text-5xl--line-height: 1.05;
+  --text-6xl: 4rem;            /* 60 → 64 */
+  --text-6xl--line-height: 1.05;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*
