@@ -10,7 +10,7 @@ const routes = process.env.QA_MAIN_ONLY ? ["/"] : [
   "/", "/website/process", "/website/price", "/website/features", "/website/maintenance",
   "/services/custom", "/services/admin-system", "/services/inquiry-reservation", "/services/search-filter",
   "/services/content-management", "/services/database-api", "/services/responsive", "/services/seo",
-  "/web-solutions", "/templates", "/samples", "/samples/corporate-q-template", "/samples/corporate-r-template", "/samples/corporate-s-template", "/contact", "/notices", "/faq",
+  "/web-solutions", "/web-solutions/demos", "/templates", "/samples", "/about", "/estimate", "/privacy", "/homepage", "/blog", "/samples/corporate-q-template", "/samples/corporate-r-template", "/samples/corporate-s-template", "/contact", "/notices", "/faq",
 ];
 const viewports = [
   { name: "1440", width: 1440, height: 900 },

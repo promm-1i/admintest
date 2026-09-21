@@ -7,7 +7,10 @@ import { HEADER_NAV } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
 import { FAQ } from "@/lib/faq";
 import { KAKAO_CHANNEL_URL, NAVER_BLOG_URL, PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
+const CONTACT_EMAIL = "6gsmake@gmail.com";
 import { SAMPLES, getPremiumDesigns, getPremiumCategories } from "@/lib/samples";
+import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
+import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 import { PRICING_ROWS, PRODUCTION_PERIOD, TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import "./RenewalEditorial.css";
 
@@ -178,6 +181,17 @@ function useEditorialMotion(pathname: string) {
   }, [pathname]);
 }
 
+// navData 는 본 사이트와 공용이라 건드리지 않고, 리뉴얼에만 있는 쪽을 여기서 덧붙인다
+const EXTRA_NAV: Record<string, { label: string; href: string }[]> = {
+  build: [{ label: "견적 계산기", href: "/estimate" }, { label: "업종별 홈페이지", href: "/homepage" }],
+  support: [{ label: "회사 소개", href: "/about" }, { label: "블로그", href: "/blog" }, { label: "개인정보처리방침", href: "/privacy" }],
+};
+// 메뉴에 이름만 있고 목적지가 없던 항목을 실제 쪽으로 보낸다
+const NAV_HREF_FIX: Record<string, string> = { "솔루션 · 데모 체험": "/web-solutions/demos" };
+function navItems(entry: Extract<(typeof HEADER_NAV)[number], { type: "dropdown" }>) {
+  return [...entry.items.map((item) => ({ label: menuLabel(item.label), href: NAV_HREF_FIX[item.label] ?? item.href })), ...(EXTRA_NAV[entry.key] ?? [])];
+}
+
 function menuLabel(label: string) { return label.replace(/\s*디자인\s*템플릿$/, " 디자인").replace(/\s*템플릿$/, ""); }
 
 function firstHref(entry: (typeof HEADER_NAV)[number]) {
@@ -200,14 +214,14 @@ function Header() {
   return <header className={`header re-header${mobileOpen ? " active" : ""}`} onPointerLeave={() => setMenuOpen(false)}>
     <div className="header-frame">
       <div className="header-logo"><Link className="header-logo-link re-header__logo" to={ROOT} aria-label="NOVERIQ 리뉴얼 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
-      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={() => setMenuOpen(true)}><Link className="gnb-1d-link" to={previewHref(firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") { setMenuOpen(false); event.currentTarget.blur(); } }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{entry.items.map((item) => <Link className="re-mega__lead" key={item.href} to={previewHref(item.href)}>{menuLabel(item.label)}</Link>)}</div></div></div>)}</nav></div></div>
+      <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={() => setMenuOpen(true)}><Link className="gnb-1d-link" to={previewHref(firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") { setMenuOpen(false); event.currentTarget.blur(); } }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
       <div className="header-feature"><Link className="header-bank-shortcut re-header__contact" to={`${ROOT}/contact`}>제작 문의<ArrowUpRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
     </div>
-    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{entry.items.map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div></details>)}</div>
+    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={previewHref(entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{navItems(entry).map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div></details>)}</div>
   </header>;
 }
 
-function Footer() { return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{HEADER_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.type === "dropdown" && entry.items.slice(0, 5).map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${ROOT}/contact`}>제작 문의</Link><Link to={`${ROOT}/faq`}>자주 묻는 질문</Link><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">네이버 블로그</a></div><p className="re-footer__contactline"><a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a><small>© 2026 NOVERIQ</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그">N</a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오 채널">K</a></div></div></div></footer></>; }
+function Footer() { return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{HEADER_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.type === "dropdown" && navItems(entry).slice(0, 6).map((item) => <Link key={item.href} to={previewHref(item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${ROOT}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${ROOT}/contact`}>제작 문의</Link><Link to={`${ROOT}/faq`}>자주 묻는 질문</Link><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">네이버 블로그</a></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그">N</a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오 채널">K</a></div></div></div></footer></>; }
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -378,6 +392,174 @@ function FaqPage() {
   return <main className="re-sub-page"><PageInfo category="고객센터" title="자주 묻는 질문" /><Contents><LocalNav group="고객센터" path="/faq" /><Section split title="질문 찾기"><BoardSearch value={keyword} onChange={setKeyword} label="자주 묻는 질문 검색" /><div className="re-faq">{items.map((item) => <details key={item.question}><summary><span>Q</span><strong>{item.question}</strong><i /></summary><div><span>A</span><p>{item.answer}</p></div></details>)}</div>{items.length === 0 && <p className="re-board__state">검색 결과가 없습니다</p>}</Section><ContactBand /></Contents></main>;
 }
 
+const ABOUT_VALUES = [
+  { num: "01", title: "담당자와 직접 소통", desc: "기획 대행을 거치지 않고 제작 담당자와 바로 주고받습니다. 고칠 곳을 말하면 그날 반영합니다.", points: ["중간 전달 단계 없음", "요청한 수정은 진행 중에도 반영", "어려운 용어 대신 화면으로 설명"] },
+  { num: "02", title: "문의로 이어지는 구조", desc: "화면을 화려하게 만드는 대신, 방문자가 서비스와 위치, 가격을 한눈에 보고 바로 연락하도록 동선을 짭니다.", points: ["대표 서비스와 가격을 위쪽에 배치", "전화·지도·카카오톡 버튼 상시 노출", "모바일에서 누르기 쉬운 크기"] },
+  { num: "03", title: "오픈 뒤에도 이어지는 관리", desc: "배포하고 끝내지 않습니다. 문구 수정, 사진 교체, 공지 등록을 오픈 이후에도 도와드립니다.", points: ["오픈 후 1개월 무상 수정", "운영 중 문구·사진 교체 지원", "관리자 화면에서 직접 관리"] },
+];
+
+function AboutPage() {
+  return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="회사 소개" /><SubHero step="ABOUT NOVERIQ" title={<>소상공인과 기업의<br />첫 화면을 만듭니다</>} image={SUBPAGE_MEDIA.custom} /><Contents>
+    <Section split title="하는 일"><div className="re-step-body"><p className="re-step-text">업종에 맞는 화면을 설계하고, 운영자가 직접 다룰 수 있는 관리자 기능까지 함께 만듭니다. 상담부터 오픈, 오픈 이후 수정까지 한 사람이 맡습니다.</p><ul className="re-step-list"><li><Check />홈페이지 제작</li><li><Check />관리자 기능 개발</li><li><Check />오픈 후 운영 지원</li></ul></div></Section>
+    {ABOUT_VALUES.map((value) => <Section key={value.num} split title={`${value.num} ${value.title}`}><div className="re-step-body"><p className="re-step-text">{value.desc}</p><ul className="re-step-list">{value.points.map((point) => <li key={point}><Check />{point}</li>)}</ul></div></Section>)}
+    <Section split title="사업자 정보"><dl className="re-detail__spec">
+      <div><dt>상호명</dt><dd>민트클</dd></div>
+      <div><dt>사업자등록번호</dt><dd>266-07-03678</dd></div>
+      <div><dt>통신판매업신고번호</dt><dd>제2026-서울강남-00480호</dd></div>
+      <div><dt>전화</dt><dd><a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></dd></div>
+      <div><dt>이메일</dt><dd><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></dd></div>
+    </dl></Section>
+    <ContactBand />
+  </Contents></main>;
+}
+
+// 값은 /estimate 와 같게 유지한다. 한쪽만 고치면 견적이 어긋난다.
+const EST_STYLES = [{ key: "basic", name: "기본형", cost: 0, desc: "핵심 정보만 담백하게, 스크롤 연출 없음" }, { key: "landing", name: "랜딩형", cost: 200_000, desc: "스크롤 연출과 움직임이 더해진 구성" }] as const;
+const EST_SCOPES = [{ key: "one", name: "원페이지", cost: 0, desc: "소개부터 문의까지 한 화면에서 이어집니다" }, { key: "sub", name: "서브페이지 분리", cost: 300_000, desc: "소개·서비스·사례·문의를 메뉴별로 나눕니다" }] as const;
+const EST_HOSTING = [{ years: 1, name: "1년", cost: 240_000, note: "" }, { years: 2, name: "2년", cost: 432_000, note: "10% 할인" }, { years: 3, name: "3년", cost: 576_000, note: "20% 할인" }] as const;
+const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com·co.kr·kr 중 원하시는 것으로, 첫 1년 무료" }, { key: "own", name: "보유 도메인 연동", desc: "이미 쓰시는 도메인을 그대로 연결합니다" }] as const;
+const EST_FIXED = { feature: 300_000, setup: 100_000 };
+const won = (value: number) => value.toLocaleString("ko-KR");
+
+function EstimatePage() {
+  const [style, setStyle] = useState<string>("basic");
+  const [scope, setScope] = useState<string>("one");
+  const [hosting, setHosting] = useState<number>(1);
+  const [domain, setDomain] = useState<string>("free");
+  const rows = [
+    { label: "업종 전용 기능", cost: EST_FIXED.feature },
+    { label: "셋팅 비용", cost: EST_FIXED.setup },
+    { label: `화면 형태 · ${EST_STYLES.find((x) => x.key === style)?.name}`, cost: EST_STYLES.find((x) => x.key === style)?.cost ?? 0 },
+    { label: `페이지 구성 · ${EST_SCOPES.find((x) => x.key === scope)?.name}`, cost: EST_SCOPES.find((x) => x.key === scope)?.cost ?? 0 },
+    { label: `호스팅 · ${EST_HOSTING.find((x) => x.years === hosting)?.name}`, cost: EST_HOSTING.find((x) => x.years === hosting)?.cost ?? 0 },
+  ];
+  const total = rows.reduce((sum, row) => sum + row.cost, 0);
+  const pick = (options: readonly { key?: string; years?: number; name: string; desc?: string; note?: string }[], current: string | number, onPick: (value: never) => void) =>
+    <div className="re-estimate__options">{options.map((option) => { const value = (option.key ?? option.years) as never; const on = (option.key ?? option.years) === current;
+      return <button type="button" key={String(value)} className="re-estimate__option" aria-pressed={on} onClick={() => onPick(value)}><strong>{option.name}{option.note && <small>{option.note}</small>}</strong>{option.desc && <span>{option.desc}</span>}</button>; })}</div>;
+  return <main className="re-sub-page"><PageInfo category="홈페이지 제작" title="견적 계산기" /><Contents>
+    <LocalNav group="홈페이지 제작" path="/website/price" />
+    <Section split title="01 화면 형태">{pick(EST_STYLES, style, setStyle as never)}</Section>
+    <Section split title="02 페이지 구성">{pick(EST_SCOPES, scope, setScope as never)}</Section>
+    <Section split title="03 호스팅 기간">{pick(EST_HOSTING, hosting, setHosting as never)}</Section>
+    <Section split title="04 도메인">{pick(EST_DOMAINS, domain, setDomain as never)}</Section>
+    <Section split title="예상 비용">
+      <div className="re-estimate__result">
+        <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{row.cost === 0 ? "포함" : `${won(row.cost)}원`}</dd></div>)}</dl>
+        <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
+        <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 2년차부터 도메인 갱신 연 30,000원이 호스팅료에 더해집니다. 실제 견적은 상담에서 확정합니다.</p>
+        <div className="re-estimate__actions"><Link to={`${ROOT}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
+      </div>
+    </Section>
+  </Contents></main>;
+}
+
+function SolutionsPage() {
+  return <main className="re-sub-page"><PageInfo category="기술력" title="솔루션 · 데모 체험" /><Contents>
+    <LocalNav group="기술력" path="/web-solutions" />
+    <Section split title="업종별 통합관리"><div className="re-step-body"><p className="re-step-text">업종마다 관리해야 할 항목이 다릅니다. 매물, 차량, 예약, 수강생, 견적처럼 실제 업무에 쓰는 화면을 관리자에 맞춰 만듭니다. 아래 여섯 업종은 관리자와 고객 화면을 직접 눌러 볼 수 있습니다.</p><ul className="re-step-list"><li><Check />관리자에서 올린 내용이 고객 화면에 바로 반영</li><li><Check />직원별 권한과 활동 기록</li><li><Check />업종에 없는 기능은 빼고 필요한 기능은 추가</li></ul></div></Section>
+    <Section wide title="데모 체험">
+      <ul className="re-solutions">{INDUSTRY_SHOWCASES.map((item) => <li key={item.key}>
+        <div className="re-solutions__body"><small>{item.name}</small><strong>{item.cardTitle}</strong><span>{item.cardTagline}</span></div>
+        <div className="re-solutions__links"><a href={item.adminHref}>관리자 데모</a><a href={item.siteHref}>고객 화면</a><a href={item.solutionHref}>자세히</a></div>
+      </li>)}</ul>
+      <p className="re-estimate__note">데모 화면은 기능을 보여 주기 위한 예시입니다. 실제 제작에서는 색과 글꼴, 화면 구성을 업체에 맞춰 새로 잡습니다. 데모는 리뉴얼 시안이 아닌 현재 사이트 화면으로 열립니다.</p>
+    </Section>
+    <ContactBand />
+  </Contents></main>;
+}
+
+function IndustryPage() {
+  const items = Object.entries(INDUSTRY_LANDING).map(([key, value]) => ({ key, ...value }));
+  return <main className="re-sub-page"><PageInfo category="홈페이지 제작" title="업종별 홈페이지" /><Contents>
+    <LocalNav group="홈페이지 제작" path="/homepage" />
+    <Section split title="업종에 맞춰 다르게"><div className="re-step-body"><p className="re-step-text">같은 홈페이지라도 업종마다 손님이 찾는 것이 다릅니다. 렌터카는 요금, 병원은 진료 시간, 학원은 시간표입니다. 업종별로 필요한 화면과 기능을 정리해 두었습니다.</p><ul className="re-step-list"><li><Check />{`${items.length}개 업종`}</li><li><Check />업종별 자주 겪는 문제와 해결 화면</li><li><Check />해당 업종 시안 바로 보기</li></ul></div></Section>
+    <Section wide title="업종 목록">
+      <ul className="re-industry">{items.map((item) => <li key={item.key}><a href={`/homepage/${item.key}`}><strong>{item.keyword}</strong><span>{item.intro}</span></a></li>)}</ul>
+      <p className="re-estimate__note">업종 쪽은 리뉴얼 시안이 아닌 현재 사이트 화면으로 열립니다.</p>
+    </Section>
+    <ContactBand />
+  </Contents></main>;
+}
+
+function BlogPage() {
+  return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="블로그" /><Contents>
+    <Section split title="제작 기록"><div className="re-step-body"><p className="re-step-text">제작 후기와 운영하면서 알게 된 것들을 네이버 블로그에 올립니다. 업종별 화면 구성, 관리자 사용법, 오픈 뒤 관리 방법을 다룹니다.</p><p className="re-detail__live"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">네이버 블로그 열기<ArrowUpRight /></a></p></div></Section>
+    <ContactBand />
+  </Contents></main>;
+}
+
+const PRIVACY_UPDATED = "2026년 9월 21일";
+const PRIVACY_SECTIONS: { title: string; body: string[]; list?: string[] }[] = [
+  {
+    title: "01 수집하는 항목과 이용 목적",
+    body: ["제작 상담과 문의 응대에만 씁니다. 그 밖의 용도로 쓰지 않습니다."],
+    list: [
+      "상담 신청 시 받는 항목 — 이름 또는 상호, 연락처, 참고 사이트, 문의 내용",
+      "이용 목적 — 제작 범위와 견적 안내, 진행 일정 조율, 문의 회신",
+      "홈페이지 이용 과정에서 자동으로 남는 항목 — 접속 기록, 브라우저 종류",
+    ],
+  },
+  {
+    title: "02 보관 기간",
+    body: ["목적을 다한 뒤에는 지체 없이 지웁니다. 법에서 따로 정한 기간이 있으면 그 기간 동안만 보관합니다."],
+    list: [
+      "상담 기록 — 상담 종료 후 1년",
+      "계약과 대금 결제 기록 — 전자상거래법에 따라 5년",
+      "소비자 불만 또는 분쟁 처리 기록 — 전자상거래법에 따라 3년",
+    ],
+  },
+  {
+    title: "03 제3자 제공",
+    body: ["제공하지 않습니다. 다만 법령에 따라 수사기관이 적법한 절차로 요구하면 그에 따릅니다."],
+  },
+  {
+    title: "04 처리 위탁",
+    body: ["홈페이지 운영에 필요한 범위에서 아래 업체에 처리를 맡깁니다. 위탁 내용이 바뀌면 이 문서에서 알립니다."],
+    list: [
+      "Supabase — 문의와 공지 데이터 보관",
+      "Netlify — 홈페이지 호스팅",
+    ],
+  },
+  {
+    title: "05 이용자의 권리",
+    body: ["언제든 본인 정보의 열람, 정정, 삭제, 처리 정지를 요청할 수 있습니다. 아래 연락처로 알려주시면 확인 후 처리합니다."],
+  },
+  {
+    title: "06 쿠키",
+    body: ["접속 기록을 남기기 위해 쿠키를 씁니다. 브라우저 설정에서 저장을 거부할 수 있습니다. 거부해도 홈페이지 이용에는 지장이 없습니다."],
+  },
+  {
+    title: "07 안전성 확보 조치",
+    body: ["접근 권한을 담당자로 제한하고, 전송 구간을 암호화하며, 보관 기간이 지난 자료는 지웁니다."],
+  },
+  {
+    title: "08 책임자와 문의처",
+    body: ["개인정보와 관련한 문의, 불만, 피해 구제는 아래로 연락해 주세요. 확인 후 회신드립니다."],
+  },
+  {
+    title: "09 변경 안내",
+    body: ["내용이 바뀌면 시행일과 바뀐 내용을 이 페이지에 올립니다."],
+  },
+];
+
+function PrivacyPage() {
+  return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="개인정보처리방침" /><Contents>
+    <Section split title="처리 원칙"><div className="re-step-body"><p className="re-step-text">민트클은 홈페이지 제작 상담에 필요한 최소한의 정보만 받습니다. 받은 정보는 상담과 제작 진행에만 쓰고, 목적을 다하면 지웁니다.</p><ul className="re-step-list"><li><Check />최소 수집</li><li><Check />목적 외 사용 없음</li><li><Check />제3자 제공 없음</li></ul></div></Section>
+    {PRIVACY_SECTIONS.map((section) => <Section key={section.title} split title={section.title}>
+      <div className="re-step-body">{section.body.map((line) => <p className="re-step-text" key={line}>{line}</p>)}{section.list && <ul className="re-step-list">{section.list.map((item) => <li key={item}><Check />{item}</li>)}</ul>}</div>
+    </Section>)}
+    <Section split title="사업자 정보"><dl className="re-detail__spec">
+      <div><dt>상호명</dt><dd>민트클</dd></div>
+      <div><dt>사업자등록번호</dt><dd>266-07-03678</dd></div>
+      <div><dt>통신판매업신고번호</dt><dd>제2026-서울강남-00480호</dd></div>
+      <div><dt>전화</dt><dd><a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></dd></div>
+      <div><dt>이메일</dt><dd><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></dd></div>
+      <div><dt>시행일</dt><dd>{PRIVACY_UPDATED}</dd></div>
+    </dl></Section>
+  </Contents></main>;
+}
+
 function NotFound() { return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="페이지를 찾을 수 없습니다" /><Contents><Section><p className="re-step-text">주소가 바뀌었거나 삭제된 페이지입니다</p><p className="re-detail__live"><Link to={ROOT}>메인으로 돌아가기<ArrowRight /></Link></p></Section></Contents></main>; }
 
 function RouteContent({ path }: { path: string }) {
@@ -390,6 +572,12 @@ function RouteContent({ path }: { path: string }) {
   if (path === "/notices") return <NoticesPage />;
   if (path.startsWith("/notices/")) return <NoticeDetailPage id={path.split("/")[2]} />;
   if (path === "/faq") return <FaqPage />;
+  if (path === "/privacy") return <PrivacyPage />;
+  if (path === "/about") return <AboutPage />;
+  if (path === "/estimate") return <EstimatePage />;
+  if (path === "/web-solutions/demos" || path === "/solutions") return <SolutionsPage />;
+  if (path === "/homepage") return <IndustryPage />;
+  if (path === "/blog") return <BlogPage />;
   const key = Object.entries({ "/website/process": "process", "/website/price": "price", "/website/features": "features", "/website/maintenance": "maintenance", "/services/custom": "custom", "/services/admin-system": "admin-system", "/services/inquiry-reservation": "inquiry-reservation", "/services/search-filter": "search-filter", "/services/content-management": "content-management", "/services/database-api": "database-api", "/services/responsive": "responsive", "/services/seo": "seo" }).find(([route]) => route === path)?.[1] as PageKey | undefined;
   return key ? <StandardPage page={PAGE_DATA[key]} path={path} /> : <NotFound />;
 }
