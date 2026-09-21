@@ -421,10 +421,39 @@ const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com�
 const EST_FIXED = { feature: 360_000, setup: 160_000 };
 const won = (value: number) => value.toLocaleString("ko-KR");
 
+// 커스텀 탭은 항목별 단가를 보여주지 않는다. 낱개로 쪼개면 흥정이 붙고,
+// 커스텀 비용은 기능 개수가 아니라 복잡도에서 나와 정확한 숫자를 미리 못 박으면
+// 나중에 올려야 한다. 그래서 구간으로만 내고 상담으로 넘긴다.
+const EST_PAGES = [
+  { key: "one", name: "한 페이지", cost: 0, desc: "소개부터 문의까지 한 화면" },
+  { key: "small", name: "2~4쪽", cost: 300_000, desc: "소개 · 서비스 · 문의를 나눔" },
+  { key: "mid", name: "5~8쪽", cost: 600_000, desc: "메뉴를 갖춘 일반적인 기업 홈페이지" },
+  { key: "large", name: "9쪽 이상", cost: 1_000_000, desc: "업종별 분류와 자료실까지" },
+] as const;
+
+const EST_FEATURES = [
+  { key: "landing", name: "스크롤 연출", weight: 200_000, desc: "화면이 움직이며 나타나는 구성" },
+  { key: "industry", name: "업종 전용 기능", weight: 300_000, desc: "매물 · 차량 · 시술처럼 업종에 맞춘 화면" },
+  { key: "inquiry", name: "문의 · 예약 접수", weight: 300_000, desc: "접수부터 관리자 확인, 알림까지" },
+  { key: "search", name: "검색 · 필터", weight: 300_000, desc: "조건으로 걸러 보는 목록" },
+  { key: "content", name: "콘텐츠 관리", weight: 200_000, desc: "공지 · 사례 · 갤러리를 직접 등록" },
+  { key: "member", name: "회원 · 권한", weight: 600_000, desc: "로그인과 직원별 접근 권한" },
+  { key: "api", name: "DB · 외부 연동", weight: 600_000, desc: "외부 서비스와 자료를 주고받음" },
+  { key: "shop", name: "결제 · 주문", weight: 900_000, desc: "장바구니와 결제까지 직접 판매" },
+  { key: "seo", name: "검색엔진 최적화", weight: 150_000, desc: "검색 결과에 맞춘 제목과 구조" },
+  { key: "multi", name: "다국어", weight: 400_000, desc: "한 벌을 여러 언어로" },
+] as const;
+
+const EST_INCLUDED = ["관리자 모드", "반응형 제작", "DB · 파일 무제한", "첫 해 호스팅", "도메인 1개", "기본 SEO 설정"];
+
 function EstimatePage() {
+  const [mode, setMode] = useState<"package" | "custom">("package");
   const [style, setStyle] = useState<string>("basic");
   const [scope, setScope] = useState<string>("one");
   const [domain, setDomain] = useState<string>("free");
+  const [pages, setPages] = useState<string>("one");
+  const [picked, setPicked] = useState<string[]>([]);
+
   const rows = [
     { label: "업종 전용 기능", cost: EST_FIXED.feature },
     { label: "셋팅과 첫 해 호스팅", cost: EST_FIXED.setup },
@@ -432,21 +461,56 @@ function EstimatePage() {
     { label: `페이지 구성 · ${EST_SCOPES.find((x) => x.key === scope)?.name}`, cost: EST_SCOPES.find((x) => x.key === scope)?.cost ?? 0 },
   ];
   const total = rows.reduce((sum, row) => sum + row.cost, 0);
+
+  // 고른 기능이 많을수록 복잡도가 붙으니 구간을 넓게 잡는다
+  const base = 640_000 + (EST_PAGES.find((x) => x.key === pages)?.cost ?? 0) + picked.reduce((sum, key) => sum + (EST_FEATURES.find((f) => f.key === key)?.weight ?? 0), 0);
+  const round = (value: number) => Math.round(value / 100_000) * 100_000;
+  const low = round(base);
+  const high = round(base * (1.25 + picked.length * 0.03));
+
+  const toggle = (key: string) => setPicked((list) => (list.includes(key) ? list.filter((x) => x !== key) : [...list, key]));
   const pick = (options: readonly { key: string; name: string; desc?: string }[], current: string, onPick: (value: string) => void) =>
     <div className="re-estimate__options">{options.map((option) => <button type="button" key={option.key} className="re-estimate__option" aria-pressed={option.key === current} onClick={() => onPick(option.key)}><strong>{option.name}</strong>{option.desc && <span>{option.desc}</span>}</button>)}</div>;
+
+  const summary = [EST_PAGES.find((x) => x.key === pages)?.name, ...picked.map((key) => EST_FEATURES.find((f) => f.key === key)?.name)].filter(Boolean).join(", ");
+
   return <main className="re-sub-page"><PageInfo category="홈페이지 제작" title="견적 계산기" /><Contents>
     <LocalNav group="홈페이지 제작" path="/website/price" />
-    <Section split title="01 화면 형태">{pick(EST_STYLES, style, setStyle)}</Section>
-    <Section split title="02 페이지 구성">{pick(EST_SCOPES, scope, setScope)}</Section>
-    <Section split title="03 도메인">{pick(EST_DOMAINS, domain, setDomain)}</Section>
-    <Section split title="예상 비용">
-      <div className="re-estimate__result">
-        <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{won(row.cost)}원</dd></div>)}</dl>
-        <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
-        <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 첫 해 호스팅료와 도메인 1개가 위 금액에 들어 있어 따로 받지 않습니다. 2년차부터 호스팅 연 240,000원과 도메인 갱신 연 30,000원이 듭니다. 실제 견적은 상담에서 확정합니다.</p>
-        <div className="re-estimate__actions"><Link to={`${ROOT}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
+    <Section wide>
+      <div className="re-estimate__tabs" role="tablist">
+        <button type="button" role="tab" aria-selected={mode === "package"} onClick={() => setMode("package")}>패키지로 고르기</button>
+        <button type="button" role="tab" aria-selected={mode === "custom"} onClick={() => setMode("custom")}>기능 골라 담기</button>
       </div>
+      <p className="re-estimate__lead">{mode === "package" ? "형태와 구성만 고르면 총액이 바로 나옵니다." : "쪽 수와 필요한 기능을 고르면 예상 구간이 나옵니다. 커스텀은 같은 기능이라도 범위에 따라 비용이 달라져 정확한 금액은 상담에서 확정합니다."}</p>
     </Section>
+
+    {mode === "package" ? <>
+      <Section split title="01 화면 형태">{pick(EST_STYLES, style, setStyle)}</Section>
+      <Section split title="02 페이지 구성">{pick(EST_SCOPES, scope, setScope)}</Section>
+      <Section split title="03 도메인">{pick(EST_DOMAINS, domain, setDomain)}</Section>
+      <Section split title="예상 비용">
+        <div className="re-estimate__result">
+          <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{won(row.cost)}원</dd></div>)}</dl>
+          <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
+          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 첫 해 호스팅료와 도메인 1개가 위 금액에 들어 있어 따로 받지 않습니다. 2년차부터 호스팅 연 240,000원과 도메인 갱신 연 30,000원이 듭니다.</p>
+          <div className="re-estimate__actions"><Link to={`${ROOT}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
+        </div>
+      </Section>
+    </> : <>
+      <Section split title="01 페이지 수">{pick(EST_PAGES, pages, setPages)}</Section>
+      <Section split title="02 필요한 기능">
+        <div className="re-estimate__checks">{EST_FEATURES.map((feature) => <button type="button" key={feature.key} className="re-estimate__check" aria-pressed={picked.includes(feature.key)} onClick={() => toggle(feature.key)}><i aria-hidden="true" /><span><strong>{feature.name}</strong><em>{feature.desc}</em></span></button>)}</div>
+        <p className="re-estimate__note">아래는 고르지 않아도 모든 제작에 들어갑니다. {EST_INCLUDED.join(" · ")}</p>
+      </Section>
+      <Section split title="예상 구간">
+        <div className="re-estimate__result">
+          <p className="re-estimate__total"><span>예상</span><strong>{won(low)}~{won(high)}원</strong></p>
+          <p className="re-estimate__picked">{summary ? `고른 구성 — ${summary}` : "쪽 수와 기능을 고르면 구간이 좁혀집니다"}</p>
+          <p className="re-estimate__note">부가세 별도입니다. 커스텀은 같은 기능이라도 다루는 자료의 양과 화면 수에 따라 비용이 달라집니다. 위 구간은 시작점이고, 고른 내용을 보고 상담에서 확정합니다. 기능이 많을수록 구간이 넓어지는 것은 그만큼 확인할 것이 많다는 뜻입니다.</p>
+          <div className="re-estimate__actions"><Link to={`${ROOT}/contact`}>고른 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
+        </div>
+      </Section>
+    </>}
   </Contents></main>;
 }
 
