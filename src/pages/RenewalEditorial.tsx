@@ -11,6 +11,7 @@ const CONTACT_EMAIL = "6gsmake@gmail.com";
 import { SAMPLES, getPremiumDesigns, getPremiumCategories } from "@/lib/samples";
 import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
+import { searchSite, type SearchHit } from "@/lib/siteSearch";
 import { PRICING_ROWS, PRODUCTION_PERIOD, TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import "./RenewalEditorial.css";
 
@@ -209,6 +210,50 @@ function firstHref(entry: (typeof HEADER_NAV)[number]) {
   return walk(entry.items as never) ?? "/";
 }
 
+function SiteSearch() {
+  const root = useRoot();
+  const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+  const hits: SearchHit[] = query.trim() ? searchSite(query) : [];
+  useEffect(() => { if (open) inputRef.current?.focus(); }, [open]);
+  useEffect(() => {
+    // 어디서든 / 를 누르면 검색이 열린다
+    const onKey = (event: KeyboardEvent) => {
+      const tag = (event.target as HTMLElement | null)?.tagName;
+      if (event.key === "/" && tag !== "INPUT" && tag !== "TEXTAREA") { event.preventDefault(); setOpen(true); }
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+  return <>
+    <button type="button" className="re-search__open" aria-label="사이트 검색 열기" onClick={() => setOpen(true)}><Search /></button>
+    {open && <div className="re-search" role="dialog" aria-modal="true" aria-label="사이트 검색">
+      <button type="button" className="re-search__dim" aria-label="검색 닫기" onClick={() => setOpen(false)} />
+      <div className="re-search__panel">
+        <div className="re-search__field">
+          <Search />
+          <input ref={inputRef} value={query} onChange={(event) => setQuery(event.target.value)} placeholder="업종, 기능, 디자인 이름으로 찾기" aria-label="검색어" />
+          <button type="button" onClick={() => setOpen(false)} aria-label="닫기"><X /></button>
+        </div>
+        {query.trim() === "" ? (
+          <p className="re-search__hint">예를 들어 카페, 예약, 관리자, 부동산처럼 넣어 보세요. 디자인 150여 종과 안내 쪽을 함께 찾습니다.</p>
+        ) : hits.length === 0 ? (
+          <p className="re-search__hint">찾는 것이 없습니다. 다른 낱말로 해 보시거나 <Link to={`${root}/contact`} onClick={() => setOpen(false)}>문의</Link>해 주세요.</p>
+        ) : (
+          <ul className="re-search__list">{hits.map((hit) => <li key={hit.href + hit.title}>
+            <Link to={hrefIn(root, hit.href)} onClick={() => setOpen(false)}>
+              {hit.image && <img src={hit.image} alt="" loading="lazy" />}
+              <span><small>{hit.kind}{hit.code ? ` · ${hit.code}` : ""}</small><strong>{hit.title}</strong><em>{hit.desc}</em></span>
+            </Link>
+          </li>)}</ul>
+        )}
+      </div>
+    </div>}
+  </>;
+}
+
 function Header() {
   const root = useRoot();
   const { pathname } = useLocation();
@@ -226,7 +271,7 @@ function Header() {
     <div className="header-frame">
       <div className="header-logo"><Link className="header-logo-link re-header__logo" to={root} aria-label="NOVERIQ 리뉴얼 홈"><Logo showMark={false} wordmarkClassName="re-wordmark" /></Link></div>
       <div className="header-nav"><div className="header-gnb"><nav className="gnb re-header__desktop" data-open={menuOpen} aria-label="주요 메뉴"><span className="re-mega__backdrop" aria-hidden="true" />{HEADER_NAV.map((entry) => entry.type === "link" ? <Link className="gnb-1d-link" key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <div className="gnb-1d-item re-nav-group" key={entry.key} data-open={menuOpen} onPointerEnter={() => setMenuOpen(true)} onFocusCapture={openMenu}><Link className="gnb-1d-link" to={hrefIn(root, firstHref(entry))} aria-haspopup="true" aria-expanded={menuOpen} onKeyDown={(event) => { if (event.key === "Escape") closeMenu(event.currentTarget); }}>{entry.label}<ChevronDown /></Link><div className="re-mega"><div className="re-mega__links">{navItems(entry).map((item) => <Link className="re-mega__lead" key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></div></div>)}</nav></div></div>
-      <div className="header-feature"><Link className="header-bank-shortcut re-header__contact" to={`${root}/contact`}>제작 문의<ArrowUpRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
+      <div className="header-feature"><SiteSearch /><Link className="header-bank-shortcut re-header__contact" to={`${root}/contact`}>제작 문의<ArrowUpRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
     </div>
     <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>{HEADER_NAV.map((entry) => entry.type === "link" ? <Link key={entry.key} to={hrefIn(root, entry.href)}>{entry.label}</Link> : <details key={entry.key}><summary>{entry.label}<ChevronDown /></summary><div>{navItems(entry).map((item) => <Link key={item.href} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div></details>)}</div>
   </header>;
