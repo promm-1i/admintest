@@ -62,9 +62,9 @@ export const SAMPLES: Sample[] = [
   {
     slug: "travel-b-template",
     industry: "지질공원 · 관광안내 홈페이지",
-    title: "지질공원 · 관광안내 홈페이지 (랜딩형 템플릿 · 디자인 B)",
-    type: ["landing-template", "business"],
-    tag: "랜딩형 템플릿 · 지질공원 · 관광 · 다국어",
+    title: "지질공원 · 관광안내 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 지질공원 · 관광 · 다국어",
     purpose:
       "고정형 2단 내비게이션과 930px 비주얼 슬라이더, 지질명소 지도·목록·상세, 교육·소식·파트너·회원·약관 화면을 국문과 영문 47페이지로 구성한 관광안내형 템플릿입니다.",
     features: ["국문·영문 47개 화면", "지질명소 지도·목록·상세", "메가메뉴·모바일 아코디언", "3초 히어로 슬라이더·스크롤 모션"],
@@ -72,7 +72,9 @@ export const SAMPLES: Sample[] = [
     image: "/thumbs/travel-b.jpg",
     liveUrl: "/templates/travel-b/",
     industryKey: "travel",
+    premiumLabel: "지질공원 · 관광안내",
     designCode: "TRVL-1002",
+    premium: true,
   },
   {
     slug: "restaurant-j-template",
