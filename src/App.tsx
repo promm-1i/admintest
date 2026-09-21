@@ -68,6 +68,7 @@ const Admin = lazy(() => import("@/pages/Admin"));
 const FAQ = lazy(() => import("@/pages/FAQ"));
 const Blog = lazy(() => import("@/pages/Blog"));
 const NotFound = lazy(() => import("@/pages/NotFound"));
+const RenewalEditorial = lazy(() => import("@/pages/RenewalEditorial"));
 
 function RouteLoadingFallback() {
   return (
@@ -106,6 +107,7 @@ export default function App() {
       <Suspense fallback={<RouteLoadingFallback />}>
         <AnalyticsPageView />
       <Routes>
+          <Route path="/renewal-editorial/*" element={<RenewalEditorial />} />
           <Route path="/web-solutions/real-estate/demo" element={<RealEstateDemoLayout />}>
             <Route index element={<RealEstateAdminDemoPage />} />
             <Route path="site" element={<RealEstateCustomerSitePage />} />
