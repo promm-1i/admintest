@@ -592,15 +592,10 @@ function Header() {
           </li>)}</ul>
           <Link className="re-mega2__all" to={hrefIn(root, entry.href)}>전체 목록 보기</Link>
         </div>
-        {/* 우리은행 .gnb-2d-list 처럼 중메뉴마다 한 칸을 주고 소메뉴를 그 아래 늘어놓는다.
-            한 칸만 보여 주면 항목이 하나인 분류에서 오른쪽이 통째로 비었다. */}
-        <div className="re-mega2__items">
-          {entry.groups.map((col) => <section key={col.key} className={col.items.length > 8 ? "re-mega2__col re-mega2__col--dense" : "re-mega2__col"}>
-            <Link className="re-mega2__coltitle" to={hrefIn(root, col.href)} data-active={col.key === group.key}>{col.label}</Link>
-            <ul>{col.items.map((item) => <li key={item.href + item.label}>
-              <Link to={hrefIn(root, item.href)}><strong>{item.label}</strong>{col.items.length <= 8 && item.desc && <span>{item.desc}</span>}</Link>
-            </li>)}</ul>
-          </section>)}
+        <div className={`re-mega2__items${group.items.length > 8 ? " re-mega2__items--dense" : ""}`}>
+          <ul>{group.items.map((item) => <li key={item.href + item.label}>
+            <Link to={hrefIn(root, item.href)}><strong>{item.label}</strong>{item.desc && <span>{item.desc}</span>}</Link>
+          </li>)}</ul>
         </div>
       </div>}
     </div>
