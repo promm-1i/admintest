@@ -15,7 +15,7 @@ export default function Notices() {
   });
 
   return (
-    <div className="mx-auto max-w-4xl px-4 py-14">
+    <div className="mx-auto max-w-7xl px-4 py-14">
       <h1 className="text-3xl font-semibold">공지사항</h1>
 
       {isLoading && <p className="mt-8 text-sm text-muted-foreground">불러오는 중…</p>}

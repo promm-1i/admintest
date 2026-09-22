@@ -41,7 +41,7 @@ export default function About() {
 
   return (
     <div>
-      <Reveal className="mx-auto max-w-4xl px-4 pb-12 pt-16 sm:pt-24">
+      <Reveal className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:pt-24">
         <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">NOVERIQ PHILOSOPHY</p>
         <h1 className="mt-5 text-4xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-5xl break-keep">
           소상공인과 기업의
@@ -57,7 +57,7 @@ export default function About() {
       </Reveal>
 
       <div className="border-y border-border bg-secondary/20 py-12">
-        <div className="mx-auto grid max-w-4xl grid-cols-2 gap-x-6 gap-y-8 px-4 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 px-4 lg:grid-cols-4">
           {STAT_ITEMS.map((stat, i) => (
             <FadeIn key={stat.label} direction="up" delay={i * 90}>
               <p className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">{stat.value}</p>
@@ -67,7 +67,7 @@ export default function About() {
         </div>
       </div>
 
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:py-24">
         <Reveal>
           <h2 className="text-2xl font-bold text-foreground sm:text-3xl">NOVERIQ이 약속하는 3가지</h2>
         </Reveal>

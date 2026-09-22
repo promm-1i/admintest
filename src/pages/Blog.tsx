@@ -10,7 +10,7 @@ export default function Blog() {
   );
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-14">
+    <div className="mx-auto max-w-7xl px-4 py-14">
       <h1 className="text-3xl font-semibold">블로그</h1>
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep">
         제작 후기와 홈페이지 운영 팁을 전합니다.

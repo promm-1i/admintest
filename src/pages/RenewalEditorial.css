@@ -382,15 +382,18 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 
 /* Woori main source parity: declarations below mirror the live source hierarchy. */
 .renewal-editorial .header{position:relative;inset:auto;z-index:300;width:auto;height:110px;padding:0;display:block;gap:normal;color:#1f2428;border:0;background:transparent;font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif;transition:none}
-.renewal-editorial .header-frame{position:fixed;top:0;left:0;z-index:20;width:100%;height:110px;padding:0 40px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;overflow:visible;background:#fff;transition:padding .6s,box-shadow 1s,transform .2s}
+.renewal-editorial .header-frame{position:fixed;top:0;left:0;z-index:20;width:100%;height:110px;padding:0 20px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;overflow:visible;background:#fff;transition:padding .6s ease,box-shadow .2s ease,transform .6s ease}
 .renewal-editorial .header-logo{height:110px;display:flex;align-items:center;flex-shrink:0;width:160px}
 .renewal-editorial .header-logo-link{position:static;display:inline-flex;outline-offset:5px}
 .renewal-editorial .header-logo .re-wordmark{font-size:24px}
 /* 대메뉴 5칸을 화면 정중앙에 맞춘다. 로고(왼쪽)와 우측 묶음의 폭이 달라
    흐름에 맡기면 가운데 칸이 32px 왼쪽으로 치우친다. 헤더 높이는 110px 고정이라
    내비를 절대 배치해도 메가메뉴가 눌리지 않는다. */
-.renewal-editorial .header-nav{position:absolute;left:50%;top:0;height:100%;display:flex;justify-content:center;align-items:flex-start;flex:none;width:910px;transform:translateX(-50%)}
-.renewal-editorial .header-gnb{width:100%;max-width:none}
+/* 실측(우리은행 .header-frame): padding 0 20 · 로고 160 flex:0 0 auto · nav flex:1 1 0 · 오른쪽 264 flex:0 0 auto.
+   nav 은 절대배치가 아니라 가운데 칸을 차지하고, 그 안에서 .header-gnb 가 최대 1080 으로 가운데 정렬된다.
+   1440→nav 944 / 1600→nav 1104·gnb 1080. */
+.renewal-editorial .header-nav{position:static;height:100%;display:flex;justify-content:center;align-items:flex-start;flex:1 1 0%;min-width:0;width:auto;transform:none}
+.renewal-editorial .header-gnb{width:100%;max-width:1080px;margin:0 auto}
 .renewal-editorial .header-gnb .gnb{height:100%;padding-top:0}
 .renewal-editorial .header-gnb .re-header__desktop{height:auto;display:flex;align-items:stretch;justify-content:stretch;gap:0;font-size:20px;font-weight:700}
 .renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link{position:relative;flex:1;min-width:0;height:auto;padding:12px 16px 32px;display:flex;align-items:flex-start;justify-content:flex-start}
@@ -622,8 +625,8 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-blind{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .re-sub-page{background:#fff;color:var(--re-ink,#1a1a1a)}
 
-.re-page-info{padding:0 24px}
-.re-page-align{max-width:1392px;margin:0 auto;padding-top:210px;text-align:center}
+.re-page-info{padding:0 60px}
+.re-page-align{width:100%;max-width:1700px;margin:0 auto;padding-top:210px;text-align:center}
 .re-page-category{margin:0;font:600 18px/1.4 Pretendard,"Pretendard Variable",sans-serif;color:var(--re-blue,#1572ed)}
 .re-page-heading{margin:12px 0 0;font:500 68px/1.35 Pretendard,"Pretendard Variable",sans-serif;letter-spacing:-.02em;color:inherit}
 
@@ -631,21 +634,23 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-hero__sticky{position:sticky;top:0;height:100vh;padding:180px 160px;box-sizing:border-box}
 .re-hero__frame{position:relative;height:100%;padding:24px 140px;box-sizing:border-box;border-radius:40px;overflow:hidden;color:#fff}
 .re-hero__frame>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.re-hero__dim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,18,28,.32),rgba(12,18,28,.62))}
+/* 제목이 사진 밝은 쪽을 가로질러 흰 글자가 안 보였다(최악 2.9:1).
+   NHN 아코디언이 사진 위에 글을 올리는 방식 그대로 가로 그라데이션을 겁쳐 둔다. */
+.re-hero__dim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(9,13,20,.74) 0%,rgba(9,13,20,.6) 48%,rgba(9,13,20,.44) 100%),linear-gradient(180deg,rgba(12,18,28,.32),rgba(12,18,28,.62))}
 .re-hero__edge{position:absolute;left:50%;top:0;width:40px;height:20px;transform:translateX(-50%);background:url(/renewal-editorial/hero-edge.svg) center/cover no-repeat}
 .re-hero__single{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center}
 .re-hero__step{width:100%;margin:0 0 80px 100px;font:600 24px/1.4 Pretendard,"Pretendard Variable",sans-serif;letter-spacing:-.02em}
 .re-hero__title{width:100%;margin:0 0 0 100px;font:500 72px/1.3 Pretendard,"Pretendard Variable",sans-serif;letter-spacing:-.02em;word-break:keep-all}
 
 .re-contents{padding:140px 60px}
-.re-section{max-width:1320px;margin:0 auto}
+.re-section{width:100%;max-width:1700px;margin:0 auto}
 .re-section+.re-section{margin-top:140px}
 .re-section--split{display:grid;grid-template-columns:400px minmax(0,1fr);gap:60px;align-items:start}
 .re-section__h2{margin:0;font:500 44px/1.3 Pretendard,"Pretendard Variable",sans-serif;letter-spacing:-.02em;color:inherit;word-break:keep-all}
 .re-section:not(.re-section--split)>.re-section__h2{margin-bottom:120px}
 .re-section--wide:not(.re-section--split)>.re-section__h2{margin-bottom:40px}
 
-.re-local-nav{display:flex;flex-wrap:wrap;gap:8px;max-width:1320px;margin:0 auto 120px}
+.re-local-nav{display:flex;flex-wrap:wrap;gap:8px;width:100%;max-width:1700px;margin:0 auto 120px}
 .re-local-nav a{height:48px;padding:0 24px;display:inline-flex;align-items:center;border:1px solid #e1e1e1;border-radius:999px;font-size:16px;color:var(--re-muted,#767676);transition:color .2s,border-color .2s,background .2s}
 .re-local-nav a:hover{color:var(--re-ink,#1a1a1a);border-color:#1a1a1a}
 .re-local-nav a[aria-current=page]{color:#fff;background:var(--re-blue,#0d6efd);border-color:transparent}
@@ -943,10 +948,11 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 
 /* ------------------------------------------------------------------
    홈 "제작 사례" · "도움 되는 정보" — NHN Cloud 메인 실측값 (2026-09-21)
-   컨테이너 1280 / 제목 40·700·lh56 / 설명 18·400·lh28 #51565f
+   컨테이너: 원본은 좌우 60 고정(1600 화면에서 1480). 1280 고정이 아니다.
+   제목 40·700·lh56 / 설명 18·400·lh28 #51565f
    ------------------------------------------------------------------ */
 .re-nhn{padding:0 60px}
-.re-nhn__frame{max-width:1280px;margin:0 auto}
+.re-nhn__frame{width:100%;max-width:1700px;margin:0 auto}
 .re-nhn__heading{margin:0;font-size:40px;font-weight:700;line-height:56px;color:#000;word-break:keep-all}
 .re-nhn__lead{margin:4px 0 0;font-size:18px;font-weight:400;line-height:28px;color:#51565f;word-break:keep-all}
 .re-nhn--cases{margin-top:160px}
@@ -1010,11 +1016,16 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 
 /* ------------------------------------------------------------------
    2단 메가메뉴 — 왼쪽 중메뉴 / 오른쪽 소메뉴 (NHN Cloud 구조)
-   여는 값은 기존 그대로: opacity .2s · visibility .2s · max-height .3s
+   여는 방식은 우리은행 실측값을 따른다.
+     .header-frame  110 → 485 · transition: padding .6s ease, box-shadow .2s ease, transform .6s ease
+     .gnb-2d-list   display:none → flex  (페이드 없음)
+   그래서 여기도 페이드를 쓰지 않고, 판 높이를 실제 내용 높이만큼만 열린다.
+   (max-height 520 고정이면 실제 365 만 자라고 끝나 0.6s 보다 일찍 멈춰 더 빨라 보였다.)
    ------------------------------------------------------------------ */
-.re-mega2{position:fixed;z-index:19;left:0;top:110px;width:100%;overflow:hidden;max-height:0;opacity:0;visibility:hidden;background:#fff;border-bottom:1px solid var(--re-line,#e5e7eb);box-shadow:0 0 0 rgba(0,0,0,0);transition:max-height .6s ease,opacity .6s ease,visibility .6s ease,box-shadow .2s ease}
-.re-mega2[data-open="true"]{max-height:520px;opacity:1;visibility:visible;box-shadow:0 18px 30px rgba(0,0,0,.06)}
-.re-mega2__frame{max-width:1280px;margin:0 auto;padding:28px 0 36px;display:grid;grid-template-columns:288px minmax(0,1fr)}
+.re-mega2{position:fixed;z-index:19;left:0;top:110px;width:100%;display:grid;grid-template-rows:0fr;visibility:hidden;background:#fff;border-bottom:1px solid rgba(229,231,235,0);box-shadow:0 0 0 rgba(0,0,0,0);transition:grid-template-rows .6s ease,box-shadow .2s ease,border-color .2s ease,visibility 0s linear .6s}
+.re-mega2>*{min-height:0;overflow:hidden}
+.re-mega2[data-open="true"]{grid-template-rows:1fr;visibility:visible;border-bottom-color:var(--re-line,#e5e7eb);box-shadow:0 18px 30px rgba(0,0,0,.06);transition:grid-template-rows .6s ease,box-shadow .2s ease,border-color .2s ease,visibility 0s}
+.re-mega2__frame{width:calc(100% - 120px);max-width:1700px;margin:0 auto;padding:28px 0 36px;display:grid;grid-template-columns:288px minmax(0,1fr)}
 .re-mega2__aside{display:flex;flex-direction:column;min-height:300px;padding-right:40px;border-right:1px solid var(--re-line,#e5e7eb)}
 .re-mega2__groups{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px}
 .re-mega2__groups a{height:48px;padding:0 16px;display:flex;align-items:center;border-radius:8px;font-size:17px;font-weight:600;color:#1f2428;transition:color .2s,background .2s}
@@ -1035,17 +1046,16 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-mega2__items--dense strong{font-size:15px;font-weight:500}
 .re-mega2__items--dense a{padding:8px 12px}
 
-/* 1depth 6칸 — 라벨이 짧아 칸을 글자 폭에 맞추고 묶음만 가운데 둔다 */
-.renewal-editorial .header-nav{width:auto}
-.renewal-editorial .header-gnb{width:auto;max-width:none}
+/* 1depth 6칸 — 원본(.gnb-1d-item)은 칸을 글자 폭이 아니라 등분으로 둔다.
+   실측: ul 폭 944 안에서 li{flex:1 1 0;padding:12px 16px} → 여섯 칸 모두 157px. */
 .renewal-editorial .header-gnb .re-header__desktop{gap:0}
-.renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link{position:relative;flex:none;width:auto;min-width:0;height:110px;padding:0 22px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#1f2428;white-space:nowrap}
+.renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link{position:relative;flex:1 1 0;width:auto;min-width:0;height:110px;padding:0 16px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#1f2428;white-space:nowrap}
 .renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link[data-active="true"]{color:var(--re-blue,#1572ed)}
-.renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link::after{content:"";position:absolute;left:22px;right:22px;bottom:0;height:3px;background:var(--re-blue,#1572ed);transform:scaleX(0);transform-origin:50% 50%;transition:transform .2s}
+.renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link::after{content:"";position:absolute;left:16px;right:16px;bottom:0;height:3px;background:var(--re-blue,#1572ed);transform:scaleX(0);transform-origin:50% 50%;transition:transform .2s}
 .renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link[data-active="true"]::after{transform:scaleX(1)}
 
 @media (max-width:1180px){
-  .renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link{padding:0 14px;font-size:18px}
+  .renewal-editorial .header-gnb .re-header__desktop>.gnb-1d-link{padding:0 10px;font-size:18px}
   .re-mega2__frame{padding-left:20px;padding-right:20px;grid-template-columns:240px minmax(0,1fr)}
 }
 @media (max-width:1023px){ .re-mega2{display:none} }
@@ -1115,17 +1125,18 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
    펼친 칸 여백 60 · 본문 칸 440 · 항목 사이 border-top rgba(255,255,255,.3)
    ------------------------------------------------------------------ */
 .re-nhn--industry{margin-top:120px}
-.re-nhn--industry .re-nhn__frame{max-width:1320px}
+
 .re-acc{margin:40px 0 0;padding:0;list-style:none;display:flex;gap:12px;height:520px}
 .re-acc__panel{position:relative;flex:1 1 0%;min-width:0;overflow:hidden;border-radius:12px;background:#0f1722 no-repeat;
   background-size:auto 520px;background-position:25% 0%;transition:flex .5s cubic-bezier(.4,0,.2,1)}
-.re-acc__panel[data-open="true"]{flex:0 1 865px}
+.re-acc__panel[data-open="true"]{flex:14 1 0%}
 .re-acc__panel>a{position:relative;z-index:1;height:100%;display:flex;color:#fff}
 .re-acc__dim{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(9,13,20,.86) 0%,rgba(9,13,20,.72) 48%,rgba(9,13,20,.5) 100%)}
 
-/* 접힌 칸 — 글자를 세로로 세운다 */
-.re-acc__side{position:relative;z-index:1;width:79px;flex:none;display:flex;align-items:center;justify-content:center;
-  writing-mode:vertical-rl;font-size:22px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
+/* 접힌 칸 — 글자를 세로로 세운다. 실측: 원본은 writing-mode:vertical-lr · 24px/700,
+   칸 폭은 고정값이 아니라 flex 비율(펼침 14 : 접힘 1)이 정한다. */
+.re-acc__side{position:relative;z-index:1;width:100%;flex:none;display:flex;align-items:center;justify-content:center;
+  writing-mode:vertical-lr;font-size:24px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
 .re-acc__panel[data-open="true"] .re-acc__side{display:none}
 
 /* 펼친 칸 본문 */
@@ -1189,7 +1200,7 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 /* 비교용 가로 아코디언 — 두 칸이라 접힘 칸을 조금 넓게 둔다 */
 .re-acc--compare{height:340px}
 .re-acc--compare .re-acc__body{margin-top:22px}
-.re-acc--compare .re-acc__panel[data-open="true"]{flex:0 1 940px}
+.re-acc--compare .re-acc__panel[data-open="true"]{flex:14 1 0%}
 .re-acc--compare .re-acc__name{margin-top:0;font-size:26px}
 .re-acc--compare .re-acc__body{gap:14px}
 .re-acc__link{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-size:16px;font-weight:600}
@@ -1218,7 +1229,7 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
    폼·문답처럼 일부러 좁게 둔 쪽(contact · faq)은 그대로 둔다.
    ------------------------------------------------------------------ */
 .renewal-editorial #re-main :is(.max-w-7xl,.max-w-6xl,.max-w-\[1536px\],.max-w-\[1280px\]).mx-auto{
-  max-width:1320px;padding-left:0;padding-right:0;
+  width:calc(100% - 120px);max-width:1700px;padding-left:0;padding-right:0;
 }
 @media (max-width:1439px){
   .renewal-editorial #re-main :is(.max-w-7xl,.max-w-6xl,.max-w-\[1536px\],.max-w-\[1280px\]).mx-auto{
