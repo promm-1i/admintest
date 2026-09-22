@@ -1211,6 +1211,25 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-help-list--steps .re-help>div>p:last-child{margin:10px 0 0;font-size:17px;font-weight:500;line-height:1.6;color:#51565f;word-break:keep-all}
 
 /* ------------------------------------------------------------------
+   사진 타일 5열 격자 — everybot 상세쪽 "수상내역" 실측 2026-09-22
+   ul 폭 1400 · gap 40px 20px · 칸 264x330
+   .img_box 264x264 · border-radius 10 · border 1px solid #e4e4e4
+   img 262x262 object-fit:cover · 캐션 padding-top 15 · 가운데 · 18/400 #5d5d5d
+   (264×5 + 20×4 = 1400. 우리 컨테이너는 1320 이라 비율로 놓는다)
+   ------------------------------------------------------------------ */
+.re-tilegrid{margin:40px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:40px 20px}
+.re-tile__link{display:block}
+.re-tile__box{display:block;aspect-ratio:1/1;overflow:hidden;border:1px solid #e4e4e4;border-radius:10px;background:#f7f8fa}
+.re-tile__box img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 0;transition:transform .5s ease}
+.re-tile__link:hover .re-tile__box img{transform:scale(1.04)}
+.re-tile__name{display:block;padding-top:15px;text-align:center;font-size:18px;font-weight:400;line-height:1;color:#5d5d5d;word-break:keep-all}
+.re-tile__link:hover .re-tile__name{color:var(--re-blue,#1572ed)}
+
+@media (max-width:1279px){ .re-tilegrid{grid-template-columns:repeat(4,minmax(0,1fr))} }
+@media (max-width:1023px){ .re-tilegrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:28px 16px} .re-tile__name{font-size:16px} }
+@media (max-width:600px){ .re-tilegrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 12px} .re-tile__name{font-size:15px} }
+
+/* ------------------------------------------------------------------
    번호 붙는 단계 목록 — 우리은행 "실천 프로그램"(.program-list) 실측 2026-09-22
    grid 650px 650px · gap 20 (1320 폭) · 칸 여백 80
    구분선은 1px solid rgba(20,23,26,.5) — 박스도 배경도 없다

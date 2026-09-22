@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Reveal } from "@/pages/services/previewKit";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -36,29 +35,24 @@ export default function IndustryIndex() {
         </p>
       </Reveal>
 
-      <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+      {/* everybot 상세쪽 수상내역 격자 실측(2026-09-22):
+          ul 폭 1400 · gap 40px 20px · 칸 264x330
+          .img_box 264x264 라운드 10 테두리 1px #e4e4e4 · img 262x262 cover
+          캡션 padding-top 15 · 가운데 · 18px/400 #5d5d5d */}
+      <ul className="re-tilegrid">
         {items.map((it, i) => (
-          <FadeIn key={it.key} direction="up" delay={(i % 4) * 60}>
-            <Link
-              to={`/homepage/${it.key}`}
-              className="group block overflow-hidden rounded-2xl border border-border bg-card shadow-xs transition-shadow hover:shadow-md"
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  src={it.sample.image}
-                  alt={`${it.label} 홈페이지`}
-                  loading="lazy"
-                  className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <div className="flex items-center justify-between gap-2 px-4 py-3">
-                <p className="truncate text-sm font-bold text-foreground">{it.label}</p>
-                <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-              </div>
-            </Link>
-          </FadeIn>
+          <li className="re-tile" key={it.key}>
+            <FadeIn direction="up" delay={(i % 5) * 60}>
+              <Link to={`/homepage/${it.key}`} className="re-tile__link">
+                <span className="re-tile__box">
+                  <img src={it.sample.image} alt={`${it.label} 홈페이지`} loading="lazy" />
+                </span>
+                <span className="re-tile__name">{it.label}</span>
+              </Link>
+            </FadeIn>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }
