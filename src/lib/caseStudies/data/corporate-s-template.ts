@@ -17,8 +17,8 @@ const study: CaseStudy = {
   ],
   mainShot: "/cases/corporate-s/main.webp",
   capabilities: {
-    label: "INTERACTIVE MUSEUM JOURNEY",
-    title: "기록을 읽는 페이지가 아니라 전시를 탐색하는 경험으로 구성했습니다",
+    label: "PAGES",
+    title: "화면 11개가 각각 다른 방식으로 움직입니다",
     body: "11개 화면마다 역할이 다릅니다. 전시동은 클릭과 탭으로 바뀌고, 시설은 슬라이더로 둘러보며, 긴 산업사는 스크롤 장면으로 따라갑니다. 공지 검색·FAQ·관람 정보까지 실제 방문 전 과정도 함께 제공합니다.",
     stats: [
       { value: "11", label: "실제 구축 화면", note: "전시·스토리·공지 상세 포함" },
@@ -84,7 +84,7 @@ const study: CaseStudy = {
     ],
   },
   pagesLabel: "PREVIEW",
-  pagesTitle: "전시 여정을 구성하는 전체 화면",
+  pagesTitle: "전체 화면",
   pages: [
     { name: "홈", file: "index.html", img: "/cases/corporate-s/page-index.webp", desc: "기록관의 분위기, 소개, 전시동과 관람 정보를 큰 이미지 흐름으로 전달합니다.", items: ["전체 화면 히어로", "기록관 소개와 전경", "전시동 3개", "관람시간·오시는 길"] },
     { name: "설립배경", file: "background.html", img: "/cases/corporate-s/page-background.webp", desc: "기록관이 만들어진 이유와 보존 철학을 사진과 연혁 자료로 설명합니다.", items: ["설립 취지와 기록 철학", "기업·산업 연혁", "주요 기록 이미지"] },

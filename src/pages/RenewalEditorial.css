@@ -958,7 +958,9 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-case-nav button svg{width:22px;height:22px}
 .re-case-nav button:disabled{opacity:.25;cursor:default}
 .re-case-viewport{margin-top:16px;overflow:hidden}
-.re-case-list{margin:0;padding:0 0 4px;list-style:none;display:flex;gap:10px;transition:transform .3s ease-out;will-change:transform}
+.re-case-list{margin:0;padding:0 0 4px;list-style:none;display:flex;gap:10px;transition:transform .3s ease-out;will-change:transform;cursor:grab;touch-action:pan-y}
+.re-case-list[data-dragging="true"]{transition:none;cursor:grabbing}
+.re-case-list img,.re-case-list a{user-select:none;-webkit-user-drag:none}
 .re-case{flex:0 0 320px;width:320px}
 @media (prefers-reduced-motion:reduce){.re-case-list{transition:none}}
 .re-case a{display:block;color:inherit}
@@ -1093,55 +1095,58 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-points{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
 .re-points li{display:flex;align-items:center;gap:20px;padding:20px 0;border-top:1px solid var(--re-line,#e8eaee)}
 .re-points li:nth-child(-n+2){border-top:0}
-.re-points i{flex:none;width:88px;height:88px;display:grid;place-items:center;border-radius:16px;background:#f1f6ff}
-.re-points i svg{width:34px;height:34px;color:var(--re-blue,#1572ed)}
+.re-points i{flex:none;width:88px;height:88px;display:grid;place-items:center;border-radius:16px;background:#f1f6ff;
+  font-style:normal;font-size:22px;font-weight:800;letter-spacing:.02em;color:var(--re-blue,#1572ed)}
 .re-points strong{font-size:18px;font-weight:600;line-height:1.5;color:var(--re-text,#1f2428);word-break:keep-all}
 
 @media (max-width:1023px){
   .re-points{grid-template-columns:1fr;gap:0}
   .re-points li:nth-child(2){border-top:1px solid var(--re-line,#e8eaee)}
-  .re-points i{width:64px;height:64px;border-radius:12px}
-  .re-points i svg{width:26px;height:26px}
+  .re-points i{width:64px;height:64px;border-radius:12px;font-size:18px}
   .re-points strong{font-size:17px}
 }
 
 /* ------------------------------------------------------------------
    업종 가로 아코디언 — NHN Cloud "주요 솔루션" 실측값
-   접힘 79 / 펼침 865 / 높이 520 / 간격 12 / flex .5s cubic-bezier(.4,0,.2,1)
+   패널 class: bg-cover · rounded-12 · overflow-hidden, 배경은 사진
+   background-size: auto 520px · background-position: 25% 0%
+   접힘 79 / 펼침 865 / 높이 520 / 간격 12 / 행 폭 1320
+   flex .5s cubic-bezier(.4,0,.2,1) · 본문 opacity .5s ease-out
+   펼친 칸 여백 60 · 본문 칸 440 · 항목 사이 border-top rgba(255,255,255,.3)
    ------------------------------------------------------------------ */
 .re-nhn--industry{margin-top:120px}
 .re-nhn--industry .re-nhn__frame{max-width:1320px}
 .re-acc{margin:40px 0 0;padding:0;list-style:none;display:flex;gap:12px;height:520px}
-.re-acc__panel{flex:1 1 0%;min-width:0;overflow:hidden;border-radius:12px;background:#0f1722;
-  transition:flex .5s cubic-bezier(.4,0,.2,1)}
+.re-acc__panel{position:relative;flex:1 1 0%;min-width:0;overflow:hidden;border-radius:12px;background:#0f1722 no-repeat;
+  background-size:auto 520px;background-position:25% 0%;transition:flex .5s cubic-bezier(.4,0,.2,1)}
 .re-acc__panel[data-open="true"]{flex:0 1 865px}
-.re-acc__panel>a{position:relative;height:100%;padding:40px 28px;display:flex;flex-direction:column;color:#fff}
-.re-acc__panel::after{content:"";position:absolute;inset:0;pointer-events:none}
-.re-acc__eng{font-size:14px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.65);white-space:nowrap}
-.re-acc__name{margin-top:8px;font-size:30px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
-/* 접힌 칸은 글자를 세로로 세운다 */
-.re-acc__panel[data-open="false"]>a{padding:40px 22px;align-items:center}
-.re-acc__panel[data-open="false"] .re-acc__eng,
-.re-acc__panel[data-open="false"] .re-acc__name{writing-mode:vertical-rl;margin:0}
-.re-acc__panel[data-open="false"] .re-acc__name{margin-top:14px;font-size:22px}
-.re-acc__body{margin-top:auto;display:flex;flex-direction:column;gap:10px;opacity:0;transition:opacity .5s ease-out}
-.re-acc__panel[data-open="true"] .re-acc__body{opacity:1}
-.re-acc__panel[data-open="false"] .re-acc__body{display:none}
-.re-acc__body strong{font-size:22px;font-weight:700;letter-spacing:-.02em}
-.re-acc__body em{font-style:normal;font-size:17px;line-height:1.6;color:rgba(255,255,255,.72);word-break:keep-all}
-.re-acc__points{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.re-acc__points span{padding:6px 14px;border:1px solid rgba(255,255,255,.28);border-radius:999px;font-size:14px;color:rgba(255,255,255,.88)}
-.re-acc__go{width:26px;height:26px;margin-top:12px}
+.re-acc__panel>a{position:relative;z-index:1;height:100%;display:flex;color:#fff}
+.re-acc__dim{position:absolute;inset:0;z-index:0;background:linear-gradient(90deg,rgba(9,13,20,.86) 0%,rgba(9,13,20,.72) 48%,rgba(9,13,20,.5) 100%)}
+
+/* 접힌 칸 — 글자를 세로로 세운다 */
+.re-acc__side{position:relative;z-index:1;width:79px;flex:none;display:flex;align-items:center;justify-content:center;
+  writing-mode:vertical-rl;font-size:22px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
+.re-acc__panel[data-open="true"] .re-acc__side{display:none}
+
+/* 펼친 칸 본문 */
+.re-acc__body{position:relative;z-index:1;width:0;padding:60px;display:flex;flex-direction:column;opacity:0;overflow:hidden;
+  transition:opacity .5s ease-out}
+.re-acc__panel[data-open="true"] .re-acc__body{width:100%;opacity:1}
+.re-acc__eng{font-size:14px;font-weight:700;letter-spacing:.12em;color:rgba(255,255,255,.7);white-space:nowrap}
+.re-acc__body>strong{margin-top:8px;font-size:34px;font-weight:700;letter-spacing:-.02em;white-space:nowrap}
+.re-acc__rows{width:440px;max-width:100%;margin-top:auto;display:flex;flex-direction:column}
+.re-acc__rows span{padding:16px 0;border-top:1px solid rgba(255,255,255,.3);font-size:17px;line-height:1.5;color:rgba(255,255,255,.9);word-break:keep-all}
+.re-acc__link{margin-top:22px;display:inline-flex;align-items:center;gap:8px;font-size:16px;font-weight:600}
+.re-acc__link svg{width:18px;height:18px}
 
 @media (max-width:1023px){
   .re-nhn--industry{margin-top:96px}
   .re-acc{height:auto;flex-direction:column;gap:10px}
-  .re-acc__panel,.re-acc__panel[data-open="true"]{flex:none}
-  .re-acc__panel>a,.re-acc__panel[data-open="false"]>a{padding:24px;align-items:stretch}
-  .re-acc__panel[data-open="false"] .re-acc__eng,.re-acc__panel[data-open="false"] .re-acc__name{writing-mode:horizontal-tb}
-  .re-acc__panel[data-open="false"] .re-acc__name{margin-top:8px;font-size:24px}
-  .re-acc__panel[data-open="false"] .re-acc__body{display:flex;opacity:1}
-  .re-acc__name{font-size:24px}
+  .re-acc__panel,.re-acc__panel[data-open="true"]{flex:none;background-size:cover;background-position:center}
+  .re-acc__side{display:none}
+  .re-acc__body,.re-acc__panel[data-open="true"] .re-acc__body{width:100%;padding:24px;opacity:1}
+  .re-acc__body>strong{font-size:24px;white-space:normal}
+  .re-acc__rows{width:100%;margin-top:18px}
 }
 @media (prefers-reduced-motion:reduce){ .re-acc__panel,.re-acc__body{transition:none} }
 
@@ -1205,3 +1210,22 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-slot-video{margin:0;overflow:hidden;border-radius:20px;background:#eef1f5;aspect-ratio:16/9}
 .re-slot-video video{display:block;width:100%;height:100%;object-fit:cover}
 @media (max-width:1023px){ .re-slot-video{border-radius:14px} }
+
+/* ------------------------------------------------------------------
+   쪽마다 컨테이너가 달라 본문 왼쪽 시작점이 16 · 60 · 100 · 160px 로 갈렸다.
+   (web-solutions 1240 / templates 1408 / homepage 1120 / 리뉴얼 1320 …)
+   넓은 쪽은 전부 모델링 사이트 기준 1320 / 좌우 60 으로 맞춘다.
+   폼·문답처럼 일부러 좁게 둔 쪽(contact · faq)은 그대로 둔다.
+   ------------------------------------------------------------------ */
+.renewal-editorial #re-main :is(.max-w-7xl,.max-w-6xl,.max-w-\[1536px\],.max-w-\[1280px\]).mx-auto{
+  max-width:1320px;padding-left:0;padding-right:0;
+}
+@media (max-width:1439px){
+  .renewal-editorial #re-main :is(.max-w-7xl,.max-w-6xl,.max-w-\[1536px\],.max-w-\[1280px\]).mx-auto{
+    padding-left:20px;padding-right:20px;
+  }
+}
+
+/* 좁게 두는 쪽(문답 · 폼 · 글)도 폭이 640 · 768 · 896 · 992 로 갈려 있었다.
+   읽기 좋은 폭 하나(896)로 모은다. */
+.renewal-editorial #re-main :is(.max-w-2xl,.max-w-3xl,.max-w-5xl).mx-auto{max-width:896px}

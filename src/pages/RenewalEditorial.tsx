@@ -1,7 +1,8 @@
+import type React from "react";
 import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Route, Routes, useLocation } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Bell, Calculator, Check, ChevronDown, ChevronLeft, Database, FileText, Globe, HelpCircle, Image as ImageIcon, LayoutGrid, Menu, Monitor, Receipt, Route as RouteIcon, Search, Settings, Shield, Smartphone, Wrench, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, type MainNavEntry } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
@@ -272,9 +273,28 @@ const HELP_CARDS = [
  *   전환 flex .5s cubic-bezier(.4,0,.2,1) · 안쪽 글자 opacity .5s ease-out
  *   접힌 칸은 글자를 세로로 세운다.
  */
+/**
+ * 업종 가로 아코디언. NHN Cloud "주요 솔루션" 실측값 그대로 (2026-09-22 재측정).
+ *   패널 class 에 bg-cover · rounded-12, 배경은 사진
+ *   background-size: auto 520px · background-position: 25% 0%
+ *   접힘 79 / 펼침 865 / 높이 520 / 간격 12 / 행 폭 1320
+ *   전환 flex .5s cubic-bezier(.4,0,.2,1)
+ *   펼친 칸 본문: 여백 60 · 본문 칸 440 · 항목 사이 border-top rgba(255,255,255,.3)
+ *   접힌 칸은 글자를 세로로 (c-writing-lr)
+ *   본문은 접혀 있을 때 opacity 0, 펼치면 1 (.5s ease-out)
+ * 사진은 그 업종 템플릿 썸네일을 쓴다.
+ */
 function HomeIndustries() {
   const root = useRoot();
   const items = INDUSTRY_SHOWCASES.slice(0, 6);
+  const shots = useMemo(() => {
+    const byIndustry = new Map<string, string>();
+    for (const sample of SAMPLES) {
+      if (!sample.image || !sample.industryKey || byIndustry.has(sample.industryKey)) continue;
+      byIndustry.set(sample.industryKey, sample.image);
+    }
+    return byIndustry;
+  }, []);
   const [open, setOpen] = useState(0);
   return <section className="re-nhn re-nhn--industry">
     <div className="re-nhn__frame">
@@ -282,16 +302,18 @@ function HomeIndustries() {
       <p className="re-nhn__lead">업종마다 손님이 찾는 것이 다릅니다. 그 업종에 맞춘 화면과 기능을 넣습니다.</p>
       <ul className="re-acc">{items.map((item, index) => {
         const active = index === open;
+        const shot = shots.get(item.key) ?? shots.get(item.key.replace("-", "")) ?? "";
         return <li key={item.key} className="re-acc__panel" data-open={active}
+          style={shot ? { backgroundImage: `url(${shot})` } as CSSProperties : undefined}
           onPointerEnter={() => setOpen(index)} onFocusCapture={() => setOpen(index)}>
           <Link to={hrefIn(root, item.solutionHref)} aria-expanded={active}>
-            <span className="re-acc__eng" aria-hidden="true">{item.key.replace(/-/g, " ").toUpperCase()}</span>
-            <span className="re-acc__name">{item.name}</span>
+            <i className="re-acc__dim" aria-hidden="true" />
+            <span className="re-acc__side" aria-hidden={active}>{item.name}</span>
             <span className="re-acc__body">
-              <strong>{item.cardTitle}</strong>
-              <em>{item.cardTagline}</em>
-              <span className="re-acc__points">{item.manageables.slice(0, 3).map((point) => <span key={point}>{point}</span>)}</span>
-              <ArrowRight className="re-acc__go" aria-hidden="true" />
+              <span className="re-acc__eng">{item.key.replace(/-/g, " ").toUpperCase()}</span>
+              <strong>{item.name}</strong>
+              <span className="re-acc__rows">{item.manageables.slice(0, 3).map((point) => <span key={point}>{point}</span>)}</span>
+              <span className="re-acc__link">자세히 보기<ArrowRight aria-hidden="true" /></span>
             </span>
           </Link>
         </li>;
@@ -302,31 +324,66 @@ function HomeIndustries() {
 
 function HomeCases() {
   const root = useRoot();
+  // 프리미엄 디자인만 카드로 낸다
   const cases = getPremiumDesigns().map((item) => item.sample).filter((sample) => sample.image).slice(0, 12);
-  // 원본 Swiper 설정 그대로 — slidesPerView 4 · spaceBetween 10 · speed 300 · slidesPerGroup 4 · loop 없음
+  /* 원본 Swiper 설정 그대로 — slidesPerView 4 · spaceBetween 10 · speed 300 · slidesPerGroup 4 · loop 없음.
+     Swiper 는 allowTouchMove 가 기본 켜져 있어 좌우로 끌어서도 넘어간다. 화살표만 있으면 반쪽이다.
+     슬라이드 320 + 간격 10 = 한 칸 330. */
   const PER_VIEW = 4;
+  const STEP = 330;
   const [index, setIndex] = useState(0);
+  const [drag, setDrag] = useState(0);
+  const dragging = useRef<{ id: number; x: number; moved: boolean } | null>(null);
   const maxIndex = Math.max(0, cases.length - PER_VIEW);
-  const go = (delta: number) => setIndex((current) => Math.min(maxIndex, Math.max(0, current + delta * PER_VIEW)));
+  const clamp = (value: number) => Math.min(maxIndex, Math.max(0, value));
+  const go = (delta: number) => setIndex((current) => clamp(current + delta * PER_VIEW));
+
+  const onDown = (event: React.PointerEvent<HTMLUListElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    dragging.current = { id: event.pointerId, x: event.clientX, moved: false };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const onMove = (event: React.PointerEvent<HTMLUListElement>) => {
+    const grab = dragging.current;
+    if (!grab || grab.id !== event.pointerId) return;
+    const dx = event.clientX - grab.x;
+    if (Math.abs(dx) > 4) grab.moved = true;
+    setDrag(dx);
+  };
+  const onUp = (event: React.PointerEvent<HTMLUListElement>) => {
+    const grab = dragging.current;
+    if (!grab || grab.id !== event.pointerId) return;
+    dragging.current = null;
+    // 한 칸의 1/4 을 넘게 끌면 넘긴다
+    const moved = Math.round(-drag / STEP + (Math.abs(drag) > STEP / 4 ? (drag < 0 ? 0.5 : -0.5) : 0));
+    setIndex((current) => clamp(current + moved));
+    setDrag(0);
+  };
+  const offset = index * STEP - drag;
+
   return <section className="re-nhn re-nhn--cases">
     <div className="re-nhn__frame">
-      <h2 className="re-nhn__heading">제작 사례</h2>
-      <p className="re-nhn__lead">어떤 업종이 어떤 화면으로 만들어졌는지 보시고 고르세요.</p>
+      <h2 className="re-nhn__heading">프리미엄 디자인</h2>
+      <p className="re-nhn__lead">실제 사이트를 그대로 모델링한 구성입니다. 좌우로 끌어 보세요.</p>
       <div className="re-case-nav">
         <button type="button" onClick={() => go(-1)} disabled={index === 0} aria-label="이전 사례"><ChevronLeft /></button>
         <button type="button" onClick={() => go(1)} disabled={index >= maxIndex} aria-label="다음 사례"><ArrowRight /></button>
       </div>
       <div className="re-case-viewport">
-        <ul className="re-case-list" style={{ transform: `translate3d(-${index * 330}px,0,0)` }}>{cases.map((sample) => <li className="re-case" key={sample.slug}>
-          <Link to={`${root}/samples/${sample.slug}`}>
-            <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" /></figure>
-            <h3>{sample.premiumLabel ?? sample.industry}</h3>
-            <p>{sample.tag ?? sample.type.join(" · ")}</p>
-            <span className="re-case__more">자세히 보기<ArrowRight /></span>
-          </Link>
-        </li>)}</ul>
+        <ul className="re-case-list" data-dragging={dragging.current ? "true" : "false"}
+          style={{ transform: `translate3d(${-offset}px,0,0)` }}
+          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
+          {cases.map((sample) => <li className="re-case" key={sample.slug}>
+            <Link to={`${root}/samples/${sample.slug}`} draggable={false}
+              onClick={(event) => { if (dragging.current?.moved) event.preventDefault(); }}>
+              <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" draggable={false} /></figure>
+              <h3>{sample.premiumLabel ?? sample.industry}</h3>
+              <span className="re-case__more">자세히 보기<ArrowRight /></span>
+            </Link>
+          </li>)}
+        </ul>
       </div>
-      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/samples`}>전체 제작 사례 보기</Link></div>
+      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/web-solutions`}>프리미엄 디자인 전체 보기</Link></div>
     </div>
   </section>;
 }
@@ -634,13 +691,13 @@ function EditorialHome() {
       </div>
       <div className="first-stories re-first-stories">{storyItems.map((scene, index) => <article className={`first-story type-${index + 1} re-first-story re-first-story--${index + 1} init re-init`} key={scene.title}><div className="first-before re-first-story__before"><h3 className="first-title">{scene.title}<br /><span className="first-keyword">{scene.keyword}</span></h3></div><div className="first-after re-first-story__after"><p className="first-desc">{scene.text.split("\n").map((line, lineIndex) => <Fragment key={line}>{lineIndex > 0 && <br />}{line}</Fragment>)}</p></div><figure className="first-fixer"><img src={scene.image} alt={`${scene.title} 화면`} /></figure></article>)}</div>
     </section>
-    <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">지금 우리는</p><h2 className="now-title">오늘의 화면과<br />내일의 운영을<br className="mobile" /> 함께 만듭니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
+    <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">하는 일</p><h2 className="now-title">만들어 드리고,<br />사장님이 직접 고칠 수 있게<br className="mobile" /> 넘긝니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
     <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{projects.slice(0, 3).map((project, index) => <li className="now-value-item" key={project.slug}><Link className={`now-value-card type-${index + 1}`} to={`${root}/samples/${project.slug}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
     <HomeIndustries />
     <HomeCases />
     <HomeHelp />
     <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">오늘을 함께하는<br />제작 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${root}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
-    <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈 뒤에도<br className="mobile" /> 내용을 바꾸고<br />운영하는 하루까지<br className="mobile" /> 함께합니다</p><ul className="tomorrow-list">{projects.slice(3, 6).map((project, index) => <li className="tomorrow-item" key={project.slug}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}/samples/${project.slug}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">필요한 페이지와 기능을<br />상담에서 확인합니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/samples`}>제작 사례</Link></div></section></div>
+    <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈 뒤에도<br className="mobile" /> 내용을 바꾸고<br />운영하는 하루까지<br className="mobile" /> 함께합니다</p><ul className="tomorrow-list">{projects.slice(3, 6).map((project, index) => <li className="tomorrow-item" key={project.slug}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}/samples/${project.slug}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">어떤 홈페이지가 필요하세요?<br />연락 주시면 같이 정해 드립니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/samples`}>제작 사례</Link></div></section></div>
   </main>;
 }
 
@@ -662,35 +719,17 @@ function DetailArticle({ category, title, date, children, listHref, prev, next }
 function ContactBand() {
   return <Section wide><div className="re-contact-band"><p>제작할 페이지와 기능을 알려주세요</p><h3>견적과 진행 순서를 안내해 드립니다</h3><div><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer">카카오톡 문의<ArrowUpRight /></a><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div></div></Section>; }
 /**
- * 서브페이지 항목 목록. NHN Cloud "주요 서비스"의 2열 아이콘 목록 구조를 쓴다.
+ * 서브페이지 항목 목록. NHN Cloud "주요 서비스" 2열 목록 구조를 쓴다.
  * 아이콘 타일 88x88 · 2열 · 행 사이 얇은 선.
- * points 는 문자열뿐이라 설명이나 링크를 지어내지 않고 아이콘과 제목만 둔다.
+ *
+ * 타일 안에는 번호를 넣는다. 원본은 항목마다 전용 아이콘이 있지만 그건 NHN 제품
+ * 아이콘이라 가져올 수 없고, 낱말로 아이콘을 추측하게 했더니 못 맞춘 항목이 전부
+ * 같은 체크 표시로 떨어져 중복이 생겼다. 번호는 겹치지 않고 지어내는 것도 없다.
  */
-const POINT_ICONS: [RegExp, typeof Check][] = [
-  [/관리자|설정|운영/, Settings],
-  [/문의|예약|알림|접수/, Bell],
-  [/검색|필터|조회/, Search],
-  [/콘텐츠|게시|공지|소식/, FileText],
-  [/DB|데이터|API|연동/, Database],
-  [/모바일|반응형|휴대|폰/, Smartphone],
-  [/화면|디자인|레이아웃|구성/, LayoutGrid],
-  [/사진|갤러리|이미지/, ImageIcon],
-  [/검색엔진|SEO|노출/, Globe],
-  [/보안|백업|안전/, Shield],
-  [/수정|유지|보수|점검/, Wrench],
-  [/비용|금액|견적/, Receipt],
-  [/모니터|데스크톱/, Monitor],
-];
-function pointIcon(text: string) {
-  for (const [pattern, Icon] of POINT_ICONS) if (pattern.test(text)) return Icon;
-  return Check;
-}
-
 function PointList({ points }: { points: string[] }) {
-  return <ul className="re-points">{points.map((point) => {
-    const Icon = pointIcon(point);
-    return <li key={point}><i aria-hidden="true"><Icon /></i><strong>{point}</strong></li>;
-  })}</ul>;
+  return <ul className="re-points">{points.map((point, index) => <li key={point}>
+    <i aria-hidden="true">{String(index + 1).padStart(2, "0")}</i><strong>{point}</strong>
+  </li>)}</ul>;
 }
 
 /**
@@ -741,10 +780,10 @@ function SlotVideo({ name }: { name: string }) {
 }
 
 function ExtraItemList({ rows }: { rows: { title: string; desc: string }[] }) {
-  return <ul className="re-points re-points--desc">{rows.map((row) => {
-    const Icon = pointIcon(row.title + " " + row.desc);
-    return <li key={row.title}><i aria-hidden="true"><Icon /></i><span><strong>{row.title}</strong><em>{row.desc}</em></span></li>;
-  })}</ul>;
+  return <ul className="re-points re-points--desc">{rows.map((row, index) => <li key={row.title}>
+    <i aria-hidden="true">{String(index + 1).padStart(2, "0")}</i>
+    <span><strong>{row.title}</strong><em>{row.desc}</em></span>
+  </li>)}</ul>;
 }
 
 /* NHN "도움 되는 정보" 파스텔 카드 — 308x308 · 라운드 12 · 간격 16 · 여백 32 */

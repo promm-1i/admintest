@@ -94,7 +94,7 @@ export function InteriorPreview() {
             디테일로 완성하는 아틀리에
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed font-sans break-keep">
-            라이프스타일을 고려한 동선 설계부터 3D 정밀 도면, 최고급 자재 셀렉션까지. 오직 한 사람을 위한 스파이셜 솔루션을 제시합니다.
+            동선 설계부터 3D 도면, 자재 선토까지 한 회사에서 맞습니다.
           </p>
 
           <div className="pt-4 flex flex-wrap justify-center gap-4">

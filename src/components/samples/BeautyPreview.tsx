@@ -137,7 +137,7 @@ export function BeautyPreview() {
           <span className="text-xs font-serif text-rose-700 tracking-widest uppercase">CARE PROGRAM</span>
           <h2 className="text-3xl font-serif font-bold text-stone-900">프리미엄 뷰티 프로그램</h2>
           <p className="text-xs text-stone-600 max-w-md mx-auto font-serif">
-            피부 타입과 니즈에 맞추어 전문 피부관리사가 진행하는 차별화된 케어를 만나보세요.
+            피부 타입에 맞춰 관리사가 직접 진행합니다.
           </p>
         </div>
 

@@ -88,8 +88,8 @@ const COMMON_FEATURES: { icon: LucideIcon; title: string; points: [string, strin
     icon: MessagesSquare,
     title: "상담·문의 시스템",
     points: [
-      "언제 어디서나 간편한 상담 신청, 장소의 제약 없음",
-      "기록된 상담 데이터로 고객의 니즈 분석 가능",
+      "휴대폰에서도 상담 신청이 됩니다",
+      "들어온 문의는 관리자 화면에 쌓여 나중에 다시 볼 수 있습니다",
     ],
   },
   {
