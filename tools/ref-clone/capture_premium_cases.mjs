@@ -89,11 +89,11 @@ const configs = [
     ],
     points: [
       ["hero", "index", { y: 0, height: 900 }],
-      ["group", "index", { y: 2400, height: 1080 }],
-      ["business", "index", { y: 8500, height: 1200 }],
-      ["news", "index", { y: 16080, height: 760 }],
-      ["with", "index", { y: 16820, height: 760 }],
-      ["recruit", "index", { y: 17560, height: 670 }],
+      ["group", "index", { y: 2980, height: 1080 }],
+      ["business", "index", { y: 9301, height: 1200 }],
+      ["news", "index", { y: 17401, height: 740 }],
+      ["with", "index", { y: 18141, height: 740 }],
+      ["recruit", "index", { y: 18881, height: 646 }],
     ],
     mobile: ["index", "company", "business-grain", "careers"],
   },
@@ -148,7 +148,12 @@ async function pointShot(folder, file, target, path) {
       await page.waitForTimeout(250);
       await locator.screenshot({ path: path.replace(/\.webp$/, ".png"), type: "png" });
     } else {
-      await page.evaluate((top) => window.scrollTo(0, top), target.y);
+      await page.evaluate((top) => {
+        const smoother = window.ScrollSmoother?.get?.();
+        if (smoother?.scrollTop) smoother.scrollTop(top);
+        else window.scrollTo(0, top);
+        window.ScrollTrigger?.update?.();
+      }, target.y);
       await page.waitForTimeout(250);
       await page.screenshot({ path: path.replace(/\.webp$/, ".png"), type: "png" });
     }
