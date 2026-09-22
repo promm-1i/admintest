@@ -631,7 +631,11 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-page-heading{margin:12px 0 0;font:500 68px/1.35 Pretendard,"Pretendard Variable",sans-serif;letter-spacing:-.02em;color:inherit}
 
 .re-hero{position:relative;height:200vh}
-.re-hero__sticky{position:sticky;top:0;height:100vh;padding:180px 160px;box-sizing:border-box}
+/* 우리은행 서브 히어로 실측(2026-09-22): 스키키로 고정되는 순간
+   .hero-sticky 여백이 180/160 → 20 으로 줄어 카드가 화면을 채운다.
+   1440x900 기준 프레임 160,673 1120x540 → 20,20 1400x860 · padding .6s ease */
+.re-hero__sticky{position:sticky;top:0;height:100vh;padding:180px 160px;box-sizing:border-box;transition:padding .6s ease}
+.re-hero[data-locked="true"] .re-hero__sticky{padding:20px}
 .re-hero__frame{position:relative;height:100%;padding:24px 140px;box-sizing:border-box;border-radius:40px;overflow:hidden;color:#fff}
 .re-hero__frame>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 /* 제목이 사진 밝은 쪽을 가로질러 흰 글자가 안 보였다(최악 2.9:1).

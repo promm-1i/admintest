@@ -702,7 +702,34 @@ function EditorialHome() {
 }
 
 function PageInfo({ category, title }: { category: string; title: string }) { return <div className="re-page-info"><div className="re-page-align"><p className="re-page-category">{category}</p><h1 className="re-page-heading">{title}</h1></div></div>; }
-function SubHero({ step, title, image }: { step: string; title: ReactNode; image: string }) { return <div className="re-hero re-hero--single"><div className="re-hero__sticky"><div className="re-hero__frame"><img src={image} alt="" /><div className="re-hero__dim" /><i className="re-hero__edge" /><div className="re-hero__single"><h2 className="re-hero__step">{step}</h2><p className="re-hero__title">{title}</p></div></div></div></div>; }
+/**
+ * 서브 히어로. 우리은행 서브페이지 실측(2026-09-22):
+ *   .hero{height:1800px} · .hero-sticky{position:sticky;top:0;height:100vh;padding:180px 160px}
+ *   스크롤이 히어로 꼭대기에 닿으면 .hero-sticky 의 padding 을 20px 로 바꾼다 → 카드가 화면을 채운다.
+ *   1440x900 기준 프레임 160,673 1120x540 → 20,20 1400x860, transition padding .6s ease.
+ */
+function SubHero({ step, title, image }: { step: string; title: ReactNode; image: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [locked, setLocked] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (window.matchMedia("(max-width: 1023px)").matches) return;
+    let frame = 0;
+    const read = () => {
+      frame = 0;
+      const box = node.getBoundingClientRect();
+      setLocked(box.top <= 0 && box.bottom > window.innerHeight * 0.5);
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(read); };
+    read();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => { if (frame) cancelAnimationFrame(frame); window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onScroll); };
+  }, []);
+  return <div className="re-hero re-hero--single" ref={ref} data-locked={locked ? "true" : "false"}><div className="re-hero__sticky"><div className="re-hero__frame"><img src={image} alt="" /><div className="re-hero__dim" /><i className="re-hero__edge" /><div className="re-hero__single"><h2 className="re-hero__step">{step}</h2><p className="re-hero__title">{title}</p></div></div></div></div>;
+}
 function Section({ title, children, wide, split }: { title?: string; children: ReactNode; wide?: boolean; split?: boolean }) { return <section className={["re-section", wide ? "re-section--wide" : "", split ? "re-section--split" : ""].filter(Boolean).join(" ")} data-reveal>{title && <h2 className="re-section__h2">{title}</h2>}{split ? <div className="re-section__body">{children}</div> : children}</section>; }
 function Contents({ children }: { children: ReactNode }) { return <div className="re-contents">{children}</div>; }
 function LocalNav({ group, path }: { group: keyof typeof LOCAL_GROUPS; path: string }) {
