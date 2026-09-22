@@ -814,15 +814,22 @@ function ExtraItemList({ rows }: { rows: { title: string; desc: string }[] }) {
 }
 
 /* NHN "도움 되는 정보" 파스텔 카드 — 308x308 · 라운드 12 · 간격 16 · 여백 32 */
+/**
+ * 번호 붙는 단계 목록. 우리은행 "실천 프로그램"(.program-list) 실측값 그대로.
+ *   .program-list  grid 650px 650px · gap 20
+ *   .program-item  padding 80 · 홀수 칸에 border-right, 마지막 줄 빼고 border-bottom
+ *                  (1px solid rgba(20,23,26,.5)) — 박스도 배경도 없다
+ *   번호 68/600 lh91.8 · 제목 28/700 lh42 · 설명 18/400 lh28.8 #535a63
+ */
 function ExtraSteps({ rows }: { rows: { no: string; title: string; desc: string }[] }) {
-  const tones = ["a", "b", "c", "d"];
-  return <ul className="re-help-list re-help-list--steps">{rows.map((row, index) => <li className={`re-help re-help--${tones[index % 4]}`} key={row.no + row.title}>
-    <div>
-      <p className="re-help__no">{row.no}</p>
-      <h3>{row.title}</h3>
-      <p>{row.desc}</p>
-    </div>
-  </li>)}</ul>;
+  const lastRowStart = Math.floor((rows.length - 1) / 2) * 2;
+  return <ol className="re-program">{rows.map((row, index) => <li className="re-program__item" key={row.no + row.title}
+    data-divider-right={index % 2 === 0 ? "true" : "false"}
+    data-divider-bottom={index < lastRowStart ? "true" : "false"}>
+    <span className="re-program__no">{row.no} .</span>
+    <span className="re-program__title">{row.title}</span>
+    <span className="re-program__desc">{row.desc}</span>
+  </li>)}</ol>;
 }
 
 /* NHN "주요 솔루션" 가로 아코디언 — 접힘 79 / 펼침 865 / 높이 520 */
