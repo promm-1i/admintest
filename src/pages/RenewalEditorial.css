@@ -34,8 +34,17 @@
 .renewal-editorial img,.renewal-editorial video{display:block;max-width:100%}
 .renewal-editorial :focus-visible{outline:2px solid var(--re-red);outline-offset:4px}
 .re-visually-hidden{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-[data-reveal]{opacity:0;transform:translateY(42px);transition:opacity .8s ease,transform .8s ease-in-out}
+/* 등장 연출 — everybot 상세쪽 실측(2026-09-22)
+   .slideFadeUp{transition:1s ease-in-out;transform:translateY(50px);opacity:0}
+   .aniStart{transform:none;opacity:1} · 지연은 0 / .2s / .4s 계단식 */
+[data-reveal]{opacity:0;transform:translateY(50px);transition:opacity 1s ease-in-out,transform 1s ease-in-out}
 [data-reveal].is-visible{opacity:1;transform:none}
+/* 절은 통째로 올리지 않고 제목 → 본문 → 내용 순서로 올린다 */
+.re-section[data-reveal]{opacity:1;transform:none;transition:none}
+.re-section[data-reveal]>*{opacity:0;transform:translateY(50px);transition:opacity 1s ease-in-out,transform 1s ease-in-out}
+.re-section[data-reveal]>*:nth-child(2){transition-delay:.2s}
+.re-section[data-reveal]>*:nth-child(n+3){transition-delay:.4s}
+.re-section[data-reveal].is-visible>*{opacity:1;transform:none}
 
 /* Woori source family: 110px fixed header and full-width menu */
 .re-header{position:fixed;z-index:100;inset:0 0 auto;height:110px;padding:0 42px;display:grid;grid-template-columns:220px 1fr 220px;align-items:center;color:#fff;border-bottom:1px solid rgba(255,255,255,.2);transition:color .25s,background .25s,border-color .25s}
@@ -112,7 +121,7 @@
 
 @media (prefers-reduced-motion:reduce){
   .renewal-editorial *,.renewal-editorial *::before,.renewal-editorial *::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
-  [data-reveal]{opacity:1;transform:none}
+  [data-reveal],.re-section[data-reveal]>*{opacity:1;transform:none;transition:none}
 }
 
 /* Woori Bank source-family rebuild: measured from the live 2026-09-20 source */
