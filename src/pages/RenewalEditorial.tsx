@@ -754,6 +754,46 @@ function ContactBand() {
  * 같은 체크 표시로 떨어져 중복이 생겼다. 번호는 겹치지 않고 지어내는 것도 없다.
  */
 /**
+ * 쪽마다 실제 제작 화면 두 장. remo finefit .manage_sect .cont 실측(2026-09-22):
+ *   grid 580px 580px 580px · gap 40px 30px
+ *   .img01 은 두 칸(1190) · .img02 는 한 칸(580) · 둘 다 radius 30
+ * 사진은 public/cases 의 실제 캡처에서 쪽 내용에 맞는 것으로 직접 골랐다.
+ */
+const PAGE_PHOTOS: Record<string, { wide: string; side: string; wideAlt: string; sideAlt: string }> = {
+  process: { wide: "interior-a/point-process", side: "law-a/point-process",
+    wideAlt: "인테리어 사이트의 진행 단계 화면", sideAlt: "법률사무소 사이트의 상담 절차 화면" },
+  features: { wide: "clinic-a/point-services", side: "estate-a/point-services",
+    wideAlt: "의원 사이트의 진료 안내 화면", sideAlt: "부동산 사이트의 서비스 안내 화면" },
+  maintenance: { wide: "corporate-f/point-news", side: "estate-f/point-news",
+    wideAlt: "기업 사이트의 소식 목록 화면", sideAlt: "부동산 사이트의 공지 목록 화면" },
+  custom: { wide: "corporate-i/point-products", side: "shop-a/point-products",
+    wideAlt: "광학기업 사이트의 제품 목록 화면", sideAlt: "쇼핑몰 사이트의 상품 진열 화면" },
+  "admin-system": { wide: "estate-f/page-index", side: "corporate-g/point-news",
+    wideAlt: "부동산 사이트의 매물 목록 화면", sideAlt: "금속기업 사이트의 공지 등록 화면" },
+  "inquiry-reservation": { wide: "interior-f/point-contact", side: "clinic-a/point-faq",
+    wideAlt: "인테리어 사이트의 상담 문의 화면", sideAlt: "의원 사이트의 자주 묻는 질문 화면" },
+  "search-filter": { wide: "estate-f/page-index", side: "rentcar-g/point-products",
+    wideAlt: "부동산 사이트의 조건 검색 목록", sideAlt: "렌터카 사이트의 차량 목록 화면" },
+  "content-management": { wide: "wedding-a/point-gallery", side: "corporate-f/point-news",
+    wideAlt: "웨딩 사이트의 갤러리 화면", sideAlt: "기업 사이트의 소식 목록 화면" },
+  "database-api": { wide: "estate-f/main", side: "rentcar-g/point-products",
+    wideAlt: "부동산 사이트의 매물 데이터 화면", sideAlt: "렌터카 사이트의 차량 데이터 화면" },
+  responsive: { wide: "academy-a/main", side: "academy-a/m-index",
+    wideAlt: "학원 사이트의 PC 화면", sideAlt: "같은 사이트의 모바일 화면" },
+  seo: { wide: "corporate-f/page-index", side: "brew-a/page-index",
+    wideAlt: "기업 사이트의 서브페이지", sideAlt: "양조장 사이트의 서브페이지" },
+};
+
+function PhotoBand({ page }: { page: string }) {
+  const photo = PAGE_PHOTOS[page];
+  if (!photo) return null;
+  return <div className="re-photoband">
+    <figure className="re-photoband__wide"><img src={`/cases/${photo.wide}.webp`} alt={photo.wideAlt} loading="lazy" /></figure>
+    <figure className="re-photoband__side"><img src={`/cases/${photo.side}.webp`} alt={photo.sideAlt} loading="lazy" /></figure>
+  </div>;
+}
+
+/**
  * 제목만 있는 목록. remo finefit .ana_box 실측(2026-09-22):
  *   왼쪽 2px 세로선(오른쪽 여백 80) + 항목마다 "• " 라벨 18/500 #0a1225
  * 순서가 없는 목록에 01 02 03 을 붙이던 것을 걷어냈다.
@@ -873,6 +913,7 @@ function ExtraSections({ pageKey }: { pageKey: string }) {
       <Suspense fallback={null}><CustomBuildPreviewSection /></Suspense>
     </Section>}
     {SLOT_VIDEOS[pageKey as PageKey] && <Section wide><SlotVideo name={SLOT_VIDEOS[pageKey as PageKey] as string} /></Section>}
+    {PAGE_PHOTOS[pageKey] && <Section wide title="실제로 만든 화면"><PhotoBand page={pageKey} /></Section>}
     {blocks.map((block) => <Section key={block.title} wide title={block.title}>
     {block.kind === "items" && <ExtraItemList rows={block.rows} />}
     {block.kind === "points" && <PointList points={block.rows} />}
