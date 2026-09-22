@@ -13,6 +13,8 @@ import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 import { searchSite, type SearchHit } from "@/lib/siteSearch";
 import { PAGE_EXTRAS, type ExtraBlock } from "@/lib/renewalExtras";
+// 커스텀 개발의 호버 영상 카드 4개. 라우트를 리뉴얼 본문으로 돌리면서 화면에서 사라졌던 것을 되살린다.
+const CustomBuildPreviewSection = lazy(() => import("@/components/sections/CustomBuildPreviewSection").then((m) => ({ default: m.CustomBuildPreviewSection })));
 import { TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import { PricingComparison } from "@/components/site/PricingComparison";
 import "./RenewalEditorial.css";
@@ -737,12 +739,17 @@ function ExtraCompare({ rows }: { rows: { name: string; desc: string; points: re
 function ExtraSections({ pageKey }: { pageKey: string }) {
   const blocks: ExtraBlock[] | undefined = PAGE_EXTRAS[pageKey];
   if (!blocks) return null;
-  return <>{blocks.map((block) => <Section key={block.title} wide title={block.title}>
+  return <>
+    {pageKey === "custom" && <Section wide>
+      <Suspense fallback={null}><CustomBuildPreviewSection /></Suspense>
+    </Section>}
+    {blocks.map((block) => <Section key={block.title} wide title={block.title}>
     {block.kind === "items" && <ExtraItemList rows={block.rows} />}
     {block.kind === "points" && <PointList points={block.rows} />}
     {block.kind === "steps" && <ExtraSteps rows={block.rows} />}
     {block.kind === "compare" && <ExtraCompare rows={block.rows} />}
-  </Section>)}</>;
+  </Section>)}
+  </>;
 }
 
 function pageKeyOf(path: string) { return path.replace(/^\/(website|services)\//, ""); }
