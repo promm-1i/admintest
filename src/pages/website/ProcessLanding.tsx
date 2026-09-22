@@ -30,7 +30,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
 import { Reveal } from "@/pages/services/previewKit";
 
-const STEPS = [
+export const STEPS = [
   {
     num: "01",
     title: "제작 상담",
@@ -71,7 +71,7 @@ const STEPS = [
   },
 ];
 
-const REQUIRED_MATERIALS = [
+export const REQUIRED_MATERIALS = [
   {
     title: "회사 로고",
     desc: "사용하고 있는 로고 파일을 보내주세요. PNG, SVG, AI 등 원본 파일이 있으면 가장 좋습니다.",

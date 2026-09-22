@@ -26,7 +26,7 @@ import { TemplatePickVisual, CustomBuildVisual } from "@/components/sections/Com
  * 커스텀 개발만 출발점이 되는 시안이 없다 — 이게 프리미엄 라인과 갈리는 지점이고, 그래서
  * 커스텀 개발은 시작가를 박지 않고 상담 후 견적으로 안내한다.
  */
-const COMPARE = [
+export const COMPARE = [
   {
     name: "템플릿 라인 · 프리미엄 라인",
     desc: "이미 만들어 둔 화면이나 프리미엄 시안에서 출발합니다. 템플릿 라인은 문구와 사진만 바꿔 열고, 프리미엄 라인은 그 시안을 브랜드에 맞춰 다시 잡습니다.",
@@ -53,7 +53,7 @@ const COMPARE = [
 ];
 
 /** 진행 절차 — 실제 상담 → 오픈 흐름 그대로 */
-const STEPS = [
+export const STEPS = [
   { no: "01", icon: MessagesSquare, title: "상담 · 요구 정리", desc: "업종과 업무 방식, 필요한 기능을 함께 정리합니다." },
   { no: "02", icon: DraftingCompass, title: "구조 설계", desc: "화면 구성과 데이터 구조, 관리자 범위를 설계해 확인받습니다." },
   { no: "03", icon: Code2, title: "개발 · 검수", desc: "실제 화면으로 만들며 중간중간 함께 확인하고 다듬습니다." },
@@ -61,7 +61,7 @@ const STEPS = [
 ];
 
 /** 비용이 정해지는 기준 — 견적 요인 (금액을 단정하지 않는다) */
-const COST_FACTORS = [
+export const COST_FACTORS = [
   "만들어야 하는 화면(페이지)의 수",
   "관리자에서 다뤄야 하는 업무 범위",
   "저장 · 검색해야 하는 데이터의 종류와 양",

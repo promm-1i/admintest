@@ -11,14 +11,14 @@ import { BrowserFrame, LoopingBeforeAfter, Reveal, RevealScale, NextStepsSection
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "content-management");
 
-const BUILDABLE_CONTENT = [
+export const BUILDABLE_CONTENT = [
   { label: "상품 · 매물 · 차량", example: "가격, 옵션, 이미지, 공개 여부를 관리자가 직접 등록" },
   { label: "후기 · 시공사례", example: "완료된 사례를 사진과 함께 등록해 포트폴리오처럼 노출" },
   { label: "배너 · 팝업", example: "홈페이지 상단 배너나 이벤트 팝업을 기간 지정해 관리" },
   { label: "강의 · 의료진 소개", example: "강사 · 의료진 정보를 개별 페이지로 등록하고 노출 순서 조정" },
 ];
 
-const INDUSTRY_USES = [
+export const INDUSTRY_USES = [
   { label: "부동산", content: "매물 카드, 단지 정보, 상담 후기" },
   { label: "병원 · 의원", content: "의료진 소개, 비급여 안내, 공지사항" },
   { label: "학원", content: "강의 소개, 합격 후기, 시간표 공지" },

@@ -29,7 +29,7 @@ import {
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "admin-system");
 const ADMIN_SERVICE = getCustomService("admin-system")!;
 
-const INDUSTRY_DEMOS = [
+export const INDUSTRY_DEMOS = [
   { label: "부동산", flow: "매물 등록 → 노출 → 상담 접수", href: "/web-solutions/real-estate/demo" },
   { label: "렌트카", flow: "차량 등록 → 예약 → 고객 관리", href: "/web-solutions/rentcar/demo" },
   { label: "병원 · 의원", flow: "진료과목 관리 → 예약 문의", href: "/web-solutions/hospital/demo" },
@@ -38,7 +38,7 @@ const INDUSTRY_DEMOS = [
   { label: "이사 · 청소업체", flow: "서비스 지역 관리 → 견적 문의", href: "/web-solutions/moving/demo" },
 ];
 
-const FEATURED_ITEMS = [
+export const FEATURED_ITEMS = [
   {
     title: "고객 문의 관리",
     scenario: "전화, 문자, 카카오톡으로 흩어져 들어오던 문의를",

@@ -26,7 +26,7 @@ import {
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "inquiry-reservation");
 
-const INDUSTRY_USES = [
+export const INDUSTRY_USES = [
   { label: "부동산", flow: "매물 문의 → 상담 배정 → 임장 일정" },
   { label: "렌트카", flow: "예약 문의 → 차량 배정 → 픽업 일정" },
   { label: "병원 · 의원", flow: "진료 문의 → 예약 확정 → 방문 확인" },

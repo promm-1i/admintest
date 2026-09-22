@@ -27,7 +27,7 @@ import { SAMPLES } from "@/lib/samples";
 import { cn } from "@/lib/utils";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
 
-const BASIC_FEATURE_GROUPS = [
+export const BASIC_FEATURE_GROUPS = [
   { title: "화면", items: ["PC / 모바일 반응형", "웹 접근성 배려 (키보드 · 스크린리더)", "이미지 갤러리", "파일 다운로드"] },
   { title: "고객 연결", items: ["문의 버튼", "전화 연결", "카카오톡 연결", "지도"] },
   { title: "콘텐츠", items: ["게시판", "FAQ"] },
@@ -44,7 +44,7 @@ const BUILD_LEVELS = [
 const CUSTOMER_FLOW = ["검색", "조건 선택", "상세 확인", "예약 / 견적 요청", "결제"];
 const CUSTOMER_FEATURES = ["검색", "조건별 필터", "예약", "견적 요청", "문의폼", "회원가입", "로그인", "마이페이지", "결제", "파일 업로드"];
 
-const ADMIN_FEATURES = [
+export const ADMIN_FEATURES = [
   "공지 등록",
   "콘텐츠 수정",
   "상품 / 매물 / 차량 관리",

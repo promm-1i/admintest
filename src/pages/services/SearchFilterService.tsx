@@ -10,7 +10,7 @@ import { BrowserFrame, LazyIframePreview, Reveal, RevealScale, NextStepsSection 
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "search-filter");
 
-const INDUSTRY_USES = [
+export const INDUSTRY_USES = [
   { label: "부동산", desc: "거래유형 · 가격대 · 지역을 조합해 매물을 찾습니다." },
   { label: "렌트카", desc: "차종 · 기간 · 지점을 조합해 차량을 찾습니다." },
   { label: "이커머스", desc: "가격대 · 브랜드 · 옵션을 조합해 상품을 찾습니다." },

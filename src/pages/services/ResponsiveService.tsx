@@ -9,13 +9,13 @@ import { useLazyMount, useInViewport, Reveal, RevealScale, NextStepsSection } fr
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "responsive");
 
-const DEVICES = [
+export const DEVICES = [
   { label: "Desktop", width: 1440, height: 900, displayWidth: 520, displayHeight: 325, note: "가장 넓은 여백, 통계 3열 배치" },
   { label: "Tablet", width: 768, height: 1024, displayWidth: 320, displayHeight: 427, note: "데스크톱과 같은 그리드, 여백만 축소" },
   { label: "Mobile", width: 390, height: 844, displayWidth: 220, displayHeight: 476, note: "통계 3열 → 1열, 좌우 분할 → 세로 통합" },
 ];
 
-const PROBLEMS_WITHOUT = [
+export const PROBLEMS_WITHOUT = [
   "글자와 버튼이 작아져 손가락으로 누르기 어려워집니다.",
   "가로 스크롤이 생겨 내용을 온전히 보기 어려워집니다.",
   "방문자 대부분이 모바일인데, 정작 모바일 경험이 가장 불편해집니다.",

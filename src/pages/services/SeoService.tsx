@@ -8,7 +8,7 @@ import { useLazyMount, Reveal, RevealScale, NextStepsSection } from "@/pages/ser
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "seo");
 
-const APPLIED_ITEMS = [
+export const APPLIED_ITEMS = [
   { name: "<title>", desc: "페이지마다 다른 제목을 실시간으로 설정합니다." },
   { name: "<meta name=\"description\">", desc: "페이지마다 다른 요약 설명을 설정합니다." },
   { name: "og:title / og:description / og:image", desc: "카카오톡, 페이스북 등에 링크를 공유할 때 보이는 정보입니다." },
@@ -22,13 +22,13 @@ const TITLE_EXAMPLES = [
   { title: "공지사항 — NOVERIQ", desc: "NOVERIQ의 서비스 안내, 일정 변경 등 소식을 확인하세요." },
 ];
 
-const DOES = [
+export const DOES = [
   "페이지마다 다른 title · description 설정",
   "robots.txt · sitemap.xml로 수집 경로 안내",
   "이미지 대체 텍스트, 시맨틱 마크업 정리",
   "공유 시 보이는 정보(og 태그) 설정",
 ];
-const DOES_NOT = [
+export const DOES_NOT = [
   "검색 순위를 인위적으로 조작",
   "허위 백링크나 트래픽 구매",
   "키워드를 부자연스럽게 반복 삽입",

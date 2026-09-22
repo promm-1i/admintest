@@ -5,7 +5,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { Reveal } from "@/pages/services/previewKit";
 
-const GLOSSARY = [
+export const GLOSSARY = [
   { num: "01", term: "도메인", eyebrow: "DOMAIN", desc: "홈페이지 주소입니다. 예: company.co.kr" },
   { num: "02", term: "호스팅", eyebrow: "HOSTING", desc: "홈페이지가 인터넷에서 24시간 운영되는 서버 공간입니다." },
   {
@@ -34,7 +34,7 @@ const SUPPORT_POLICY = [
 const SIMPLE_SCOPE = ["오타", "연락처", "주소", "텍스트 일부", "이미지 교체", "링크 변경"];
 const SEPARATE_SCOPE = ["신규 페이지", "페이지 구조 변경", "전체 레이아웃 변경", "관리자 기능", "DB 수정", "API", "결제", "회원", "전체 리뉴얼"];
 
-const COST_TIERS = [
+export const COST_TIERS = [
   { title: "오픈 후 1개월", desc: "간단 수정 무상" },
   { title: "유지보수 계약", desc: "월 3만원 · 간단 수정 월 3회" },
   { title: "건별 처리", desc: "계약 없이 요청 시 비용 별도 협의" },

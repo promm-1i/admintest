@@ -12,6 +12,7 @@ import { SAMPLES, getPremiumDesigns, getPremiumCategories } from "@/lib/samples"
 import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 import { searchSite, type SearchHit } from "@/lib/siteSearch";
+import { PAGE_EXTRAS, type ExtraBlock } from "@/lib/renewalExtras";
 import { TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import { PricingComparison } from "@/components/site/PricingComparison";
 import "./RenewalEditorial.css";
@@ -690,12 +691,68 @@ function PointList({ points }: { points: string[] }) {
   })}</ul>;
 }
 
+/**
+ * 되살린 알맹이를 모델링 사이트 배치에 담는다. 배치는 NHN Cloud 실측값,
+ * 문구는 기존 쪽들이 갖고 있던 것을 그대로 읽는다 (src/lib/renewalExtras.ts).
+ */
+function ExtraItemList({ rows }: { rows: { title: string; desc: string }[] }) {
+  return <ul className="re-points re-points--desc">{rows.map((row) => {
+    const Icon = pointIcon(row.title + " " + row.desc);
+    return <li key={row.title}><i aria-hidden="true"><Icon /></i><span><strong>{row.title}</strong><em>{row.desc}</em></span></li>;
+  })}</ul>;
+}
+
+/* NHN "도움 되는 정보" 파스텔 카드 — 308x308 · 라운드 12 · 간격 16 · 여백 32 */
+function ExtraSteps({ rows }: { rows: { no: string; title: string; desc: string }[] }) {
+  const tones = ["a", "b", "c", "d"];
+  return <ul className="re-help-list re-help-list--steps">{rows.map((row, index) => <li className={`re-help re-help--${tones[index % 4]}`} key={row.no + row.title}>
+    <div>
+      <p className="re-help__no">{row.no}</p>
+      <h3>{row.title}</h3>
+      <p>{row.desc}</p>
+    </div>
+  </li>)}</ul>;
+}
+
+/* NHN "주요 솔루션" 가로 아코디언 — 접힘 79 / 펼침 865 / 높이 520 */
+function ExtraCompare({ rows }: { rows: { name: string; desc: string; points: readonly string[]; href?: string; linkLabel?: string }[] }) {
+  const root = useRoot();
+  const [open, setOpen] = useState(0);
+  return <ul className="re-acc re-acc--compare">{rows.map((row, index) => {
+    const active = index === open;
+    return <li key={row.name} className="re-acc__panel" data-open={active}
+      onPointerEnter={() => setOpen(index)} onFocusCapture={() => setOpen(index)}>
+      <Link to={hrefIn(root, row.href ?? "/contact")} aria-expanded={active}>
+        <span className="re-acc__name">{row.name}</span>
+        <span className="re-acc__body">
+          <em>{row.desc}</em>
+          <span className="re-acc__points">{row.points.map((point) => <span key={point}>{point}</span>)}</span>
+          <span className="re-acc__link">{row.linkLabel ?? "자세히 보기"}<ArrowRight aria-hidden="true" /></span>
+        </span>
+      </Link>
+    </li>;
+  })}</ul>;
+}
+
+function ExtraSections({ pageKey }: { pageKey: string }) {
+  const blocks: ExtraBlock[] | undefined = PAGE_EXTRAS[pageKey];
+  if (!blocks) return null;
+  return <>{blocks.map((block) => <Section key={block.title} wide title={block.title}>
+    {block.kind === "items" && <ExtraItemList rows={block.rows} />}
+    {block.kind === "points" && <PointList points={block.rows} />}
+    {block.kind === "steps" && <ExtraSteps rows={block.rows} />}
+    {block.kind === "compare" && <ExtraCompare rows={block.rows} />}
+  </Section>)}</>;
+}
+
+function pageKeyOf(path: string) { return path.replace(/^\/(website|services)\//, ""); }
+
 function PageSections({ page }: { page: ContentPage }) { return <>{page.sections.map((section) => <Section key={section.title} split title={section.title}><div className="re-step-body"><p className="re-step-text">{section.text}</p><PointList points={[...section.points]} /></div></Section>)}</>; }
 
 function StandardPage({ page, path }: { page: ContentPage; path: string }) {
   if (path === "/website/price") return <PriceDetail page={page} path={path} />;
   const group = page.group as keyof typeof LOCAL_GROUPS;
-  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><SubHero step={page.eyebrow} title={page.intro} image={page.image} /><Contents><LocalNav group={group} path={path} /><PageSections page={page} /><ContactBand /></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><SubHero step={page.eyebrow} title={page.intro} image={page.image} /><Contents><LocalNav group={group} path={path} /><PageSections page={page} /><ExtraSections pageKey={pageKeyOf(path)} /><ContactBand /></Contents></main>;
 }
 
 function PriceDetail({ page, path }: { page: ContentPage; path: string }) {

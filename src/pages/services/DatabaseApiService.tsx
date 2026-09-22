@@ -7,20 +7,20 @@ import { Reveal, NextStepsSection } from "@/pages/services/previewKit";
 
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "database-api");
 
-const IN_USE = [
+export const IN_USE = [
   { name: "notices 테이블", desc: "공지사항 제목·내용·카테고리·상단고정·공개여부를 저장합니다. 지금 이 사이트의 /notices가 여기서 읽어옵니다." },
   { name: "reservations 테이블", desc: "실제 /contact 문의 폼에서 접수되는 이름·연락처·이메일·문의내용·처리상태를 저장합니다." },
   { name: "user_roles 테이블", desc: "관리자 권한을 구분해, 로그인한 계정만 관리자 화면에 접근하도록 제한합니다." },
 ];
 
-const AVAILABLE = [
+export const AVAILABLE = [
   { name: "공공데이터포털 · 국토교통부 API", desc: "실거래가, 건축물대장 등. 업종에 필요할 때 서버 환경변수로 API Key를 관리해 연동합니다." },
   { name: "SMS · 알림톡 발송", desc: "문의 접수, 예약 확정 시 담당자 · 고객에게 자동 알림을 보내는 구조로 구축 가능합니다." },
   { name: "결제 시스템", desc: "예약금, 상품 결제가 필요한 경우 PG사 연동을 추가로 구축합니다." },
   { name: "지도 API", desc: "매장 위치, 매물 지도 검색이 필요한 경우 네이버 · 카카오 지도 API를 연동합니다." },
 ];
 
-const NEED_CASES = [
+export const NEED_CASES = [
   "문의 · 예약이 접수되는 즉시 데이터로 남아야 하는 경우",
   "고객이 입력한 정보를 관리자가 나중에도 다시 확인해야 하는 경우",
   "실거래가, 지도, 결제처럼 외부 정보와 연결해야 하는 경우",

@@ -1164,3 +1164,39 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
   .re-drawer__body a{min-height:44px;display:flex;align-items:center;font-size:16px;color:var(--re-text,#1f2428)}
   .re-drawer__body a:hover{color:var(--re-blue,#1572ed)}
 }
+
+/* ------------------------------------------------------------------
+   되살린 알맹이 — 배치는 모델링 사이트(NHN Cloud) 실측값
+   ------------------------------------------------------------------ */
+/* 설명이 붙는 2열 목록 = NHN "주요 서비스" 원형 (타일 88x88 · 제목 20/700 · 설명 17/400 #51565f) */
+.re-points--desc li{align-items:flex-start;gap:20px;padding:24px 0}
+.re-points--desc span{min-width:0}
+.re-points--desc strong{display:block;font-size:20px;font-weight:700;line-height:1.5}
+.re-points--desc em{display:block;margin-top:6px;font-style:normal;font-size:17px;font-weight:400;line-height:1.6;color:#51565f;word-break:keep-all}
+
+/* 파스텔 카드로 담은 단계 */
+.re-help-list--steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+.re-help-list--steps .re-help>div{height:100%;min-height:308px;padding:32px;display:flex;flex-direction:column}
+.re-help__no{margin:0 0 10px;font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--re-blue,#1572ed)}
+.re-help-list--steps h3{margin:0;font-size:24px;font-weight:700;line-height:1.4;color:#000;word-break:keep-all}
+.re-help-list--steps .re-help>div>p:last-child{margin:10px 0 0;font-size:17px;font-weight:500;line-height:1.6;color:#51565f;word-break:keep-all}
+
+/* 비교용 가로 아코디언 — 두 칸이라 접힘 칸을 조금 넓게 둔다 */
+.re-acc--compare{height:340px}
+.re-acc--compare .re-acc__body{margin-top:22px}
+.re-acc--compare .re-acc__panel[data-open="true"]{flex:0 1 940px}
+.re-acc--compare .re-acc__name{margin-top:0;font-size:26px}
+.re-acc--compare .re-acc__body{gap:14px}
+.re-acc__link{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-size:16px;font-weight:600}
+.re-acc__link svg{width:18px;height:18px}
+
+@media (max-width:1023px){
+  .re-points--desc strong{font-size:18px}
+  .re-points--desc em{font-size:16px}
+  .re-help-list--steps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .re-help-list--steps .re-help>div{min-height:0;padding:24px}
+  .re-acc--compare{height:auto}
+  .re-acc--compare .re-acc__panel[data-open="true"]{flex:none}
+  .re-acc--compare .re-acc__name{font-size:22px}
+}
+@media (max-width:600px){ .re-help-list--steps{grid-template-columns:1fr} }
