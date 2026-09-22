@@ -697,6 +697,49 @@ function PointList({ points }: { points: string[] }) {
  * 되살린 알맹이를 모델링 사이트 배치에 담는다. 배치는 NHN Cloud 실측값,
  * 문구는 기존 쪽들이 갖고 있던 것을 그대로 읽는다 (src/lib/renewalExtras.ts).
  */
+/**
+ * 서브페이지 영상 자리. 파일이 없으면 아무것도 그리지 않는다.
+ *
+ * 히어로에서 한 번 당한 적이 있다 — video 에 src 를 안 달아 두면 포스터만 보이고
+ * 아무도 모른다. 그래서 여기서는 HEAD 로 파일이 있는지 먼저 확인하고,
+ * 있을 때만 붙인다. 파일을 넣는 순간 자동으로 재생된다.
+ *
+ * 표시 1320x743 (16:9) · 무음 · 반복 · 화면 밖이면 멈춘다.
+ */
+const SLOT_VIDEOS: Partial<Record<PageKey, string>> = {
+  "admin-system": "support",
+  responsive: "responsive",
+  "inquiry-reservation": "inquiry",
+  "search-filter": "search",
+};
+
+function SlotVideo({ name }: { name: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  const [ready, setReady] = useState(false);
+  const src = `${MEDIA}/${name}.mp4`;
+  useEffect(() => {
+    if (location.protocol.startsWith("file")) return;
+    let alive = true;
+    fetch(src, { method: "HEAD" })
+      .then((r) => { if (alive && r.ok && (r.headers.get("content-type") || "").startsWith("video/")) setReady(true); })
+      .catch(() => undefined);
+    return () => { alive = false; };
+  }, [src]);
+  useEffect(() => {
+    const video = ref.current;
+    if (!video) return;
+    const io = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) void video.play().catch(() => undefined); else video.pause();
+    }, { threshold: 0 });
+    io.observe(video);
+    return () => io.disconnect();
+  }, [ready]);
+  if (!ready) return null;
+  return <figure className="re-slot-video">
+    <video ref={ref} src={src} poster={`${MEDIA}/${name}.webp`} muted loop playsInline preload="metadata" aria-hidden="true" />
+  </figure>;
+}
+
 function ExtraItemList({ rows }: { rows: { title: string; desc: string }[] }) {
   return <ul className="re-points re-points--desc">{rows.map((row) => {
     const Icon = pointIcon(row.title + " " + row.desc);
@@ -743,6 +786,7 @@ function ExtraSections({ pageKey }: { pageKey: string }) {
     {pageKey === "custom" && <Section wide>
       <Suspense fallback={null}><CustomBuildPreviewSection /></Suspense>
     </Section>}
+    {SLOT_VIDEOS[pageKey as PageKey] && <Section wide><SlotVideo name={SLOT_VIDEOS[pageKey as PageKey] as string} /></Section>}
     {blocks.map((block) => <Section key={block.title} wide title={block.title}>
     {block.kind === "items" && <ExtraItemList rows={block.rows} />}
     {block.kind === "points" && <PointList points={block.rows} />}
