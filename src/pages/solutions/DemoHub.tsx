@@ -18,7 +18,9 @@ const OTHER_INDUSTRIES = TEMPLATE_INDUSTRY_FILTERS.filter(
       (s) => s.slug,
     ),
   ).size,
-}));
+}))
+  // 0종은 눌러도 빈 목록이 나온다. 목록에서 뺀다.
+  .filter((f) => f.count > 0);
 
 /** 데모는 기능 시연용이고, 실제 납품물은 업체별 맞춤 제작이라는 점을 앞세운다 */
 const CUSTOM_POINTS = [
