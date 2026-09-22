@@ -556,7 +556,7 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
         <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-xs sm:p-12">
           <p className="font-mono text-xs font-semibold tracking-widest text-primary">PREMIUM DESIGN</p>
           <h2 className="mt-3 text-2xl font-bold text-foreground break-keep">
-            이 디자인으로 제작하면 300만 원부터입니다
+            이 디자인으로 제작하면 300만원부터입니다
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
             부가세 별도, 도메인 1개 포함입니다. 브랜드 색 · 메뉴 · 섹션 구성을 사업에 맞춰 다시

@@ -250,7 +250,7 @@ export default function CustomDevService() {
             <p className="text-sm font-medium text-foreground break-keep">
               커스텀 개발은 기능 범위와 다루는 자료의 양에 따라 달라져{" "}
               <strong className="font-bold text-primary">상담에서 견적을 냅니다</strong>. 금액을 먼저 보고
-              시작하고 싶으시면 프리미엄 라인(300만 원부터)을 보세요.
+              시작하고 싶으시면 프리미엄 라인(300만원부터)을 보세요.
             </p>
             <Button asChild variant="outline" className="shrink-0 gap-1.5">
               <Link to="/web-solutions">

@@ -70,7 +70,7 @@ const PREMIUM_STEPS = [
 const PREMIUM_FAQ = [
   {
     q: "기본형 · 랜딩형과 무엇이 다른가요?",
-    a: "기능은 같습니다. 관리자 모드 · 반응형 제작 · 데이터베이스 · 문자 알림은 64만 원 기본형에도 그대로 들어갑니다. 다른 것은 완성된 화면을 고르시는지, 브랜드에 맞춰 짓는지입니다. 기본형과 랜딩형은 만들어 둔 화면에 문구 · 사진만 바꿔 엽니다. 프리미엄은 섹션 순서와 개수를 사장님 사업에 맞춰 다시 잡고, 브랜드 색 · 글꼴을 바꾸고, 사진을 새로 만듭니다. 관리자도 다루실 데이터에 맞춰 설계해 조건 검색과 직원별 권한까지 넣습니다. 예약 접수 관리도 프리미엄에만 들어갑니다.",
+    a: "기능은 같습니다. 관리자 모드 · 반응형 제작 · 데이터베이스 · 문자 알림은 64만원 기본형에도 그대로 들어갑니다. 다른 것은 완성된 화면을 고르시는지, 브랜드에 맞춰 짓는지입니다. 기본형과 랜딩형은 만들어 둔 화면에 문구 · 사진만 바꿔 엽니다. 프리미엄은 섹션 순서와 개수를 사장님 사업에 맞춰 다시 잡고, 브랜드 색 · 글꼴을 바꾸고, 사진을 새로 만듭니다. 관리자도 다루실 데이터에 맞춰 설계해 조건 검색과 직원별 권한까지 넣습니다. 예약 접수 관리도 프리미엄에만 들어갑니다.",
   },
   {
     q: "이 디자인에서 색이나 구성을 바꿀 수 있나요?",
@@ -265,7 +265,7 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
         <h2 className="mt-3 text-lg font-bold text-foreground">제작 비용</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
           이 디자인을 기반으로 문구 · 이미지 · 구성을 맞춰 제작하며,{" "}
-          <strong className="font-mono text-base text-foreground">300만 원</strong>부터 시작합니다 (부가세 별도).
+          <strong className="font-mono text-base text-foreground">300만원</strong>부터 시작합니다 (부가세 별도).
           도메인 1개가 포함된 금액이고, 사진 수량과 서브페이지 수에 따라 달라집니다.
         </p>
         <Link
