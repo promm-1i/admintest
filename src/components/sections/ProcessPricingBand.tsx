@@ -23,7 +23,7 @@ export function ProcessPricingBand() {
         <SectionHeader
           label="PROCESS & PRICING"
           title="어떻게 만들고, 얼마인가"
-          description="상담부터 오픈까지 네 단계로 진행합니다. 아래 금액에는 셋팅 · 업종 전용 기능 · 첫 해 호스팅이 모두 포함돼 있습니다."
+          description="상담부터 오픈까지 네 단계로 진행합니다. 아래 금액에는 셋팅과 업종 전용 기능이 모두 포함돼 있습니다."
         />
 
         {/* 절차 — 선으로 이어진 타임라인. 순서가 실제 정보라서 번호를 쓴다 */}

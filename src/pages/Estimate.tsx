@@ -41,7 +41,7 @@ const won = (n: number) => n.toLocaleString("ko-KR");
 export default function Estimate() {
   usePageTitle(
     "홈페이지 제작 견적 계산기 — 1분이면 나옵니다 | NOVERIQ",
-    "업종과 형태만 고르면 홈페이지 제작 예상 비용이 바로 계산됩니다. 셋팅 · 업종 전용 기능 · 첫 해 호스팅 포함가.",
+    "업종과 형태만 고르면 홈페이지 제작 예상 비용이 바로 계산됩니다. 셋팅과 업종 전용 기능이 포함된 금액입니다.",
   );
 
   const industries = useMemo(
@@ -73,7 +73,7 @@ export default function Estimate() {
     { name: `페이지 구성 (${scopeInfo.name})`, cost: scopeInfo.cost, note: scopeInfo.cost === 0 ? "한 화면" : "메뉴별 분리" },
     { name: domain === "free" ? "도메인 (신규)" : "보유 도메인 연동", cost: 0, note: domain === "free" ? "첫 1년 무료" : "연동 무료" },
     { name: "업종 전용 기능", cost: FIXED.feature, note: `${industryLabel} 맞춤` },
-    { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 초기 등록 · 첫 해 호스팅" },
+    { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 서버 설정 · 초기 등록" },
   ];
   const total = rows.reduce((a, r) => a + r.cost, 0);
 
@@ -88,7 +88,7 @@ export default function Estimate() {
         </p>
         <h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">1분 견적 계산기</h1>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep sm:text-base">
-          업종과 형태만 고르면 예상 비용이 바로 나옵니다. 셋팅 · 업종 전용 기능 · 첫 해 호스팅이 전부
+          업종과 형태만 고르면 예상 비용이 바로 나옵니다. 셋팅과 업종 전용 기능이 전부
           포함된 금액이라, 여기서 본 숫자가 곧 시작 비용입니다. (VAT 별도)
         </p>
       </Reveal>
@@ -237,7 +237,7 @@ export default function Estimate() {
           </div>
 
           <p className="mt-4 text-center text-xs text-muted-foreground">
-            첫 해 호스팅과 도메인은 위 금액에 포함됩니다. 2년차부터 도메인 갱신 연 30,000원이 듭니다
+            도메인 1개가 위 금액에 포함되고 호스팅료는 따로 받지 않습니다. 2년차부터 도메인 갱신 연 30,000원이 듭니다
           </p>
         </FadeIn>
       </div>

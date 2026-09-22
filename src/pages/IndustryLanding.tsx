@@ -35,7 +35,7 @@ export default function IndustryLanding() {
   usePageTitle(
     copy ? `${copy.keyword} — 64만원부터, 영업일 7일 | NOVERIQ` : "업종별 홈페이지 제작 | NOVERIQ",
     copy
-      ? `${copy.intro} 호스팅 · 도메인 · 관리자까지 포함, 영업일 7일 제작. 실제 화면을 보고 시작하세요.`
+      ? `${copy.intro} 도메인 · 관리자까지 포함, 영업일 7일 제작. 실제 화면을 보고 시작하세요.`
       : undefined,
   );
 
@@ -155,7 +155,7 @@ export default function IndustryLanding() {
         </FadeIn>
         <FadeIn direction="up" delay={90} className="rounded-2xl border border-border bg-card p-7">
           <h2 className="text-lg font-bold">제작 비용 (VAT 별도)</h2>
-          <p className="mt-1 text-xs text-muted-foreground">호스팅 1년 · 셋팅 · 업종 전용 기능이 모두 포함된 금액입니다.</p>
+          <p className="mt-1 text-xs text-muted-foreground">셋팅과 업종 전용 기능이 모두 포함된 금액입니다.</p>
           <ul className="mt-4 divide-y divide-border/70">
             {PACKAGES.map((p) => (
               <li key={p.name} className="flex items-baseline justify-between gap-3 py-2.5">

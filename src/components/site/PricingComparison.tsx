@@ -90,7 +90,7 @@ export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
             <span className="ml-2 align-middle text-sm font-medium text-muted-foreground">(VAT 별도)</span>
           </h2>
           <p className="text-sm text-muted-foreground break-keep">
-            셋팅 · 업종 전용 기능 · 호스팅이 모두 포함된 금액입니다.
+            셋팅과 업종 전용 기능이 모두 포함된 금액입니다.
           </p>
         </div>
       )}

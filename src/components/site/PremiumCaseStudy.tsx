@@ -559,7 +559,7 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
             이 디자인으로 제작하면 300만 원부터입니다
           </h2>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
-            부가세 별도, 호스팅 1년과 도메인 1개 포함입니다. 브랜드 색 · 메뉴 · 섹션 구성을 사업에 맞춰 다시
+            부가세 별도, 도메인 1개 포함입니다. 브랜드 색 · 메뉴 · 섹션 구성을 사업에 맞춰 다시
             잡고 사진을 새로 만들어 채웁니다.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-3">

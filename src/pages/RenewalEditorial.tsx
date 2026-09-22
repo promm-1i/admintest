@@ -684,20 +684,20 @@ function EditorialHome() {
     <HomeLane />
     <section id="scope" className="first re-first">
       <div className="first-intro re-first-intro init re-init">
-        <h2 className="first-heading">첫번째<br />화면</h2>
+        <h2 className="first-heading">처음에<br />정하는 것</h2>
         <div className="first-action re-first-intro__actions"><Link className="first-button" to={`${root}/website/process`}>제작 방법</Link><Link className="first-button" to={`${root}/website/features`}>기능 소개</Link><Link className="first-button" to={`${root}/samples`}>제작 사례</Link></div>
-        <figure className="first-docs"><img src={MEDIA_SLOTS.intro} alt="추후 교체할 이미지 영역" /></figure>
+        <figure className="first-docs"><img src={MEDIA_SLOTS.intro} alt="제작한 홈페이지 화면 구성안" /></figure>
         <div className="first-lights re-first-lights" aria-hidden="true"><div className="first-light re-first-light"><i className="light-trail blue re-light-trail"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div><div className="first-light-small re-first-light re-first-light--small"><i className="light-trail blue small reverse re-light-trail re-light-trail--small"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div></div>
       </div>
       <div className="first-stories re-first-stories">{storyItems.map((scene, index) => <article className={`first-story type-${index + 1} re-first-story re-first-story--${index + 1} init re-init`} key={scene.title}><div className="first-before re-first-story__before"><h3 className="first-title">{scene.title}<br /><span className="first-keyword">{scene.keyword}</span></h3></div><div className="first-after re-first-story__after"><p className="first-desc">{scene.text.split("\n").map((line, lineIndex) => <Fragment key={line}>{lineIndex > 0 && <br />}{line}</Fragment>)}</p></div><figure className="first-fixer"><img src={scene.image} alt={`${scene.title} 화면`} /></figure></article>)}</div>
     </section>
-    <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">하는 일</p><h2 className="now-title">만들어 드리고,<br />사장님이 직접 고칠 수 있게<br className="mobile" /> 넘긝니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
+    <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">하는 일</p><h2 className="now-title">만들어 드리고,<br />사장님이 직접 고칠 수 있게<br className="mobile" /> 넘깁니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
     <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{projects.slice(0, 3).map((project, index) => <li className="now-value-item" key={project.slug}><Link className={`now-value-card type-${index + 1}`} to={`${root}/samples/${project.slug}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
     <HomeIndustries />
     <HomeCases />
     <HomeHelp />
-    <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">오늘을 함께하는<br />제작 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${root}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
-    <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈 뒤에도<br className="mobile" /> 내용을 바꾸고<br />운영하는 하루까지<br className="mobile" /> 함께합니다</p><ul className="tomorrow-list">{projects.slice(3, 6).map((project, index) => <li className="tomorrow-item" key={project.slug}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}/samples/${project.slug}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">어떤 홈페이지가 필요하세요?<br />연락 주시면 같이 정해 드립니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/samples`}>제작 사례</Link></div></section></div>
+    <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">알아두면<br />좋은 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${root}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
+    <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈한 뒤에도<br className="mobile" /> 내용을 직접 바꾸고<br />계속 쓰실 수 있게<br className="mobile" /> 만듭니다</p><ul className="tomorrow-list">{projects.slice(3, 6).map((project, index) => <li className="tomorrow-item" key={project.slug}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}/samples/${project.slug}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">어떤 홈페이지가 필요하세요?<br />연락 주시면 같이 정해 드립니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/samples`}>제작 사례</Link></div></section></div>
   </main>;
 }
 
@@ -975,7 +975,7 @@ const EST_FEATURES = [
   { key: "multi", name: "다국어", weight: 400_000, desc: "한 벌을 여러 언어로" },
 ] as const;
 
-const EST_INCLUDED = ["관리자 모드", "반응형 제작", "DB · 파일 무제한", "첫 해 호스팅", "도메인 1개", "기본 SEO 설정"];
+const EST_INCLUDED = ["관리자 모드", "반응형 제작", "DB · 파일 무제한", "도메인 1개", "기본 SEO 설정"];
 
 function EstimatePage() {
   const root = useRoot();
@@ -988,7 +988,7 @@ function EstimatePage() {
 
   const rows = [
     { label: "업종 전용 기능", cost: EST_FIXED.feature },
-    { label: "셋팅과 첫 해 호스팅", cost: EST_FIXED.setup },
+    { label: "셋팅 비용", cost: EST_FIXED.setup },
     { label: `화면 형태 · ${EST_STYLES.find((x) => x.key === style)?.name}`, cost: EST_STYLES.find((x) => x.key === style)?.cost ?? 0 },
     { label: `페이지 구성 · ${EST_SCOPES.find((x) => x.key === scope)?.name}`, cost: EST_SCOPES.find((x) => x.key === scope)?.cost ?? 0 },
   ];
@@ -1024,7 +1024,7 @@ function EstimatePage() {
         <div className="re-estimate__result">
           <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{won(row.cost)}원</dd></div>)}</dl>
           <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
-          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 호스팅료와 도메인 1개가 위 금액에 들어 있어 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다.</p>
+          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다.</p>
           <div className="re-estimate__actions"><Link to={`${root}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
         </div>
       </Section>

@@ -46,7 +46,6 @@ const TIERS: Tier[] = [
 /** 구축비에 기본으로 포함되는 항목 */
 const INCLUDED_IN_SETUP = [
   "반응형 제작 (PC · 태블릿 · 모바일)",
-  "첫 해 호스팅료",
   "셋팅비용",
   "도메인 1개 (첫 1년 무료)",
 ];
@@ -205,7 +204,7 @@ export default function WebSolutions() {
       </p>
       <h2 className="mt-2 text-xl font-semibold">프리미엄 라인 구축 비용</h2>
       <p className="mt-2 text-sm text-muted-foreground break-keep">
-        구축비에 첫 해 호스팅료와 셋팅비용, 도메인 1개(1년)가 모두 포함됩니다. 아래 금액 외에 오픈까지
+        구축비에 셋팅비용과 도메인 1개(1년)가 모두 포함됩니다. 아래 금액 외에 오픈까지
         더 드는 비용은 없습니다.
       </p>
 

@@ -55,7 +55,7 @@ const PREMIUM_INCLUDED = [
   "PC · 태블릿 · 모바일 세 폭 각각 배치",
   "문의 · 상담 폼과 접수 알림 문자",
   "관리자 화면 (공지 · 문의 · 팝업 직접 관리)",
-  "도메인 1개 · 호스팅 1년",
+  "도메인 1개 (첫 1년)",
   "검색엔진 최적화와 검색 등록 대행",
   "오픈 후 1개월 무상 수정",
 ];
@@ -266,7 +266,7 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
           이 디자인을 기반으로 문구 · 이미지 · 구성을 맞춰 제작하며,{" "}
           <strong className="font-mono text-base text-foreground">300만 원</strong>부터 시작합니다 (부가세 별도).
-          호스팅 1년과 도메인 1개가 포함된 금액이고, 사진 수량과 서브페이지 수에 따라 달라집니다.
+          도메인 1개가 포함된 금액이고, 사진 수량과 서브페이지 수에 따라 달라집니다.
         </p>
         <Link
           to="/web-solutions"
