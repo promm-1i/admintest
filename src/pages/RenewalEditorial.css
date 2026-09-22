@@ -1112,24 +1112,6 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){ .re-lane__floor{animation:none} }
 
 /* ------------------------------------------------------------------
-   항목 목록 — NHN Cloud "주요 서비스" 2열 아이콘 목록 구조
-   아이콘 타일 88x88 · 2열 · 행 사이 얇은 선
-   ------------------------------------------------------------------ */
-.re-points{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
-.re-points li{display:flex;align-items:center;gap:20px;padding:20px 0;border-top:1px solid var(--re-line,#e8eaee)}
-.re-points li:nth-child(-n+2){border-top:0}
-.re-points i{flex:none;width:88px;height:88px;display:grid;place-items:center;border-radius:16px;background:#f1f6ff;
-  font-style:normal;font-size:22px;font-weight:800;letter-spacing:.02em;color:var(--re-blue,#1572ed)}
-.re-points strong{font-size:18px;font-weight:600;line-height:1.5;color:var(--re-text,#1f2428);word-break:keep-all}
-
-@media (max-width:1023px){
-  .re-points{grid-template-columns:1fr;gap:0}
-  .re-points li:nth-child(2){border-top:1px solid var(--re-line,#e8eaee)}
-  .re-points i{width:64px;height:64px;border-radius:12px;font-size:18px}
-  .re-points strong{font-size:17px}
-}
-
-/* ------------------------------------------------------------------
    업종 가로 아코디언 — NHN Cloud "주요 솔루션" 실측값
    패널 class: bg-cover · rounded-12 · overflow-hidden, 배경은 사진
    background-size: auto 520px · background-position: 25% 0%
@@ -1197,18 +1179,51 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 /* ------------------------------------------------------------------
    되살린 알맹이 — 배치는 모델링 사이트(NHN Cloud) 실측값
    ------------------------------------------------------------------ */
-/* 설명이 붙는 2열 목록 = NHN "주요 서비스" 원형 (타일 88x88 · 제목 20/700 · 설명 17/400 #51565f) */
-.re-points--desc li{align-items:flex-start;gap:20px;padding:24px 0}
-.re-points--desc span{min-width:0}
-.re-points--desc strong{display:block;font-size:20px;font-weight:700;line-height:1.5}
-.re-points--desc em{display:block;margin-top:6px;font-style:normal;font-size:17px;font-weight:400;line-height:1.6;color:#51565f;word-break:keep-all}
-
 /* 파스텔 카드로 담은 단계 */
 .re-help-list--steps{grid-template-columns:repeat(4,minmax(0,1fr))}
 .re-help-list--steps .re-help>div{height:100%;min-height:308px;padding:32px;display:flex;flex-direction:column}
 .re-help__no{margin:0 0 10px;font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--re-blue,#1572ed)}
 .re-help-list--steps h3{margin:0;font-size:24px;font-weight:700;line-height:1.4;color:#000;word-break:keep-all}
 .re-help-list--steps .re-help>div>p:last-child{margin:10px 0 0;font-size:17px;font-weight:500;line-height:1.6;color:#51565f;word-break:keep-all}
+
+/* ------------------------------------------------------------------
+   항목 목록 — remo finefit 실측 2026-09-22 (설계폭 1920)
+   순서가 없는 목록에 01 02 03 을 붙이던 것을 걷어냈다.
+
+   ① 제목만 있는 목록 = .ana_box
+      2px 세로선 + 오른쪽 여백 80 · 항목 "• " 18/500 #0a1225 · 사이 10
+   ② 제목+설명 = .box_wrap > .pre_box
+      grid 2열 · gap 30px 40px
+      카드 padding 40 40 45 · radius 30 · #fff
+      border 1px #d6e1f4 · shadow 0 4px 20px rgba(79,109,134,.08)
+      제목 25/600 lh32.5 #0a1225 · 설명 18/400 lh23.4 #63656c
+   원본 카드 왼쪽 70x70 타일은 카드마다 다른 SVG 이다. 우리 항목이
+   174개라 아이콘을 지어내지 않고 타일 칸은 두지 않았다.
+   ------------------------------------------------------------------ */
+.re-fflist{display:flex;align-items:stretch}
+.re-fflist__line{flex:none;width:2px;margin-right:80px;background:var(--re-line,#e4e9f2)}
+.re-fflist ul{flex:1;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.re-fflist li{display:flex}
+.re-fflist li strong{font-size:18px;font-weight:500;line-height:1.3;color:#0a1225;word-break:keep-all}
+.re-fflist li strong::before{content:"•";margin-right:8px;color:var(--re-blue,#1572ed)}
+
+.re-ffcards{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 40px}
+.re-ffcard{padding:40px 40px 45px;border-radius:30px;background:#fff;border:1px solid #d6e1f4;
+  box-shadow:0 4px 20px rgba(79,109,134,.08)}
+.re-ffcard strong{display:block;font-size:25px;font-weight:600;line-height:1.3;letter-spacing:-.02em;color:#0a1225;word-break:keep-all}
+.re-ffcard em{display:block;margin-top:12px;font-style:normal;font-size:18px;font-weight:400;line-height:1.3;color:#63656c;word-break:keep-all}
+
+@media (max-width:1023px){
+  .re-fflist__line{margin-right:32px}
+  .re-ffcards{grid-template-columns:minmax(0,1fr);gap:20px}
+  .re-ffcard{padding:28px 28px 32px;border-radius:20px}
+  .re-ffcard strong{font-size:21px}
+  .re-ffcard em{font-size:17px;line-height:1.55}
+}
+@media (max-width:600px){
+  .re-fflist__line{margin-right:20px}
+  .re-fflist li strong{font-size:17px}
+}
 
 /* ------------------------------------------------------------------
    사진 타일 5열 격자 — everybot 상세쪽 "수상내역" 실측 2026-09-22
@@ -1271,8 +1286,6 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-acc__link svg{width:18px;height:18px}
 
 @media (max-width:1023px){
-  .re-points--desc strong{font-size:18px}
-  .re-points--desc em{font-size:16px}
   .re-help-list--steps{grid-template-columns:repeat(2,minmax(0,1fr))}
   .re-help-list--steps .re-help>div{min-height:0;padding:24px}
   .re-acc--compare{height:auto}

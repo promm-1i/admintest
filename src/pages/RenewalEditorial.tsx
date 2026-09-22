@@ -753,10 +753,15 @@ function ContactBand() {
  * 아이콘이라 가져올 수 없고, 낱말로 아이콘을 추측하게 했더니 못 맞춘 항목이 전부
  * 같은 체크 표시로 떨어져 중복이 생겼다. 번호는 겹치지 않고 지어내는 것도 없다.
  */
+/**
+ * 제목만 있는 목록. remo finefit .ana_box 실측(2026-09-22):
+ *   왼쪽 2px 세로선(오른쪽 여백 80) + 항목마다 "• " 라벨 18/500 #0a1225
+ * 순서가 없는 목록에 01 02 03 을 붙이던 것을 걷어냈다.
+ */
 function PointList({ points }: { points: string[] }) {
-  return <ul className="re-points">{points.map((point, index) => <li key={point}>
-    <i aria-hidden="true">{String(index + 1).padStart(2, "0")}</i><strong>{point}</strong>
-  </li>)}</ul>;
+  return <div className="re-fflist"><span className="re-fflist__line" aria-hidden="true" />
+    <ul>{points.map((point) => <li key={point}><strong>{point}</strong></li>)}</ul>
+  </div>;
 }
 
 /**
@@ -806,10 +811,18 @@ function SlotVideo({ name }: { name: string }) {
   </figure>;
 }
 
+/**
+ * 제목 + 설명 목록. remo finefit .pre_box 실측(2026-09-22, 설계폭 1920):
+ *   .box_wrap  grid 2열 · gap 30px 40px
+ *   .pre_box   padding 40px 40px 45px · radius 30 · #fff
+ *              border 1px #d6e1f4 · shadow 0 4px 20px rgba(79,109,134,.08)
+ *   제목 25/600 lh32.5 #0a1225 · 설명 18/400 lh23.4 #63656c
+ * 원본은 카드마다 손으로 그린 SVG 를 왼쪽 70x70 타일에 넣는다. 우리 항목이
+ * 174개라 아이콘을 지어내지 않고 타일 칸은 두지 않았다.
+ */
 function ExtraItemList({ rows }: { rows: { title: string; desc: string }[] }) {
-  return <ul className="re-points re-points--desc">{rows.map((row, index) => <li key={row.title}>
-    <i aria-hidden="true">{String(index + 1).padStart(2, "0")}</i>
-    <span><strong>{row.title}</strong><em>{row.desc}</em></span>
+  return <ul className="re-ffcards">{rows.map((row) => <li className="re-ffcard" key={row.title}>
+    <strong>{row.title}</strong><em>{row.desc}</em>
   </li>)}</ul>;
 }
 
