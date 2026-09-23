@@ -21,6 +21,22 @@ const configs = [
     mobile: ["index", "wave", "contour-shot", "location"],
   },
   {
+    folder: "clinic-g",
+    pages: ["index", "brand-story", "medical-team", "clinic-locations", "deviated-septum",
+            "rhinoplasty-intro", "sleep-study", "before-after", "care-system", "reservation"],
+    points: [
+      ["since", "index", ".since"],
+      ["perf", "index", ".perf"],
+      ["field", "index", ".field"],
+      ["net", "index", ".net"],
+      ["kv", "deviated-septum", ".kv"],
+      ["graph", "deviated-septum", ".split--g"],
+      ["vs", "deviated-septum", ".vs"],
+      ["onestep", "deviated-septum", ".onestep"],
+    ],
+    mobile: ["index", "deviated-septum", "medical-team", "reservation"],
+  },
+  {
     folder: "brew-a",
     pages: ["index", "brand", "taste", "history", "discover", "master", "brewery", "campaign", "campaign-first", "privacy"],
     points: [
