@@ -30,7 +30,7 @@
 .vs{min-height:804px}
 .onestep{min-height:1637px}
 .psteps{min-height:1456px}
-.sba{min-height:875px}
+/* .sba 는 내용이 높이를 정한다 — 4쌍이면 875, 2쌍이면 581 로 원본과 같아진다 */
 .media{min-height:662px}
 .ytb{min-height:526px}
 .faq{min-height:686px}
@@ -221,15 +221,18 @@
    항목 588x269 radius8 배경 #F6F6F6 · 안쪽 568x245(패딩 10/14) · 사진 284x245
    라벨 100x26 radius5 13/600, 왼쪽은 회색·오른쪽은 포인트색 */
 .sba{justify-content:flex-start;padding:160px 0 0;background:#fff}
-.sba__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px 24px;margin-top:41px}
-.sba__pair{display:flex;padding:14px 10px;background:var(--grayBg2);border-radius:8px}
-.sba__pair figure{position:relative;flex:1;min-width:0;overflow:hidden}
-.sba__pair img{width:100%;aspect-ratio:284/245;object-fit:cover;background:#111}
-.sba__pair span{position:absolute;top:0;display:inline-flex;align-items:center;justify-content:center;
-  width:100px;height:26px;font-size:var(--p6);font-weight:600;color:#fff;
-  background:var(--gray60);border-radius:5px}
-.sba__pair figure:first-child span{left:0}
-.sba__pair figure:last-child span{right:0;background:var(--point01)}
+.sba__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem;margin-top:var(--contMt3)}
+.sba__pair{padding:10px;background:var(--grayBg1);border-radius:1rem}
+.sba__cmp{display:flex;margin-top:.5rem}
+.sba__c{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start}
+.sba__c span{display:inline-flex;align-items:center;justify-content:center;height:2em;padding:0 .7em;
+  margin-bottom:1.5rem;font-size:var(--p6);font-weight:600;line-height:1;white-space:nowrap;
+  color:#fff;background:var(--gray70);border-radius:5px}
+.sba__c--a span{margin-left:auto;background:var(--point01)}
+.sba__img{position:relative;width:100%;padding-top:73%;overflow:hidden;
+  border-radius:1.5rem 0 0 1.5rem;background:#111}
+.sba__c--a .sba__img{border-radius:0 1.5rem 1.5rem 0;border-left:1px solid #fff}
+.sba__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
 .sba .stit__h{font-size:var(--h4);margin-top:0}
 .sba__d{margin-top:12px;font-size:var(--p3);line-height:1.7;color:var(--gray60)}
 
@@ -484,20 +487,18 @@
 <p class="pstep__n">STEP 02</p><p class="pstep__t">염증 제거</p><p class="pstep__d">고인 분비물과 염증 조직을 조심스럽게 비웁니다.</p></div><div class="pstep rv rv--lg"><img src="./assets/ps-sinus-3.jpg" alt="" loading="lazy">
 <p class="pstep__n">STEP 03</p><p class="pstep__t">통로 확장</p><p class="pstep__d">자연 배출 통로를 넓혀 다시 고이지 않게 만듭니다.</p></div></div>
 </div></section><section class="sba sec-h"><div class="in2">
-<div class="stit rv"><h2 class="stit__h">CT로 보는 축농증 수술 전후사진</h2><p class="sba__d">수술 전후 3D-CT와 내시경 자료를 통해<br>구조의 변화를 객관적으로 확인합니다.</p></div>
-<div class="sba__grid"><div class="sba__pair rv rv--lg">
-<figure><img src="./assets/ba-sinus-1-b.jpg" alt="수술 전 CT (위)" loading="lazy"><span>수술 전 CT (위)</span></figure>
-<figure><img src="./assets/ba-sinus-1-a.jpg" alt="수술 후 CT (위)" loading="lazy"><span>수술 후 CT (위)</span></figure>
-</div><div class="sba__pair rv rv--lg">
-<figure><img src="./assets/ba-sinus-2-b.jpg" alt="수술 전 CT (45도)" loading="lazy"><span>수술 전 CT (45도)</span></figure>
-<figure><img src="./assets/ba-sinus-2-a.jpg" alt="수술 후 CT (45도)" loading="lazy"><span>수술 후 CT (45도)</span></figure>
-</div><div class="sba__pair rv rv--lg">
-<figure><img src="./assets/ba-sinus-3-b.jpg" alt="수술 전 CT (정면)" loading="lazy"><span>수술 전 CT (정면)</span></figure>
-<figure><img src="./assets/ba-sinus-3-a.jpg" alt="수술 후 CT (정면)" loading="lazy"><span>수술 후 CT (정면)</span></figure>
-</div><div class="sba__pair rv rv--lg">
-<figure><img src="./assets/ba-sinus-4-b.jpg" alt="수술 전 내시경" loading="lazy"><span>수술 전 내시경</span></figure>
-<figure><img src="./assets/ba-sinus-4-a.jpg" alt="수술 후 내시경" loading="lazy"><span>수술 후 내시경</span></figure>
-</div></div>
+<div class="stit rv"><h2 class="stit__h">코 안의 문제와 코의 형태까지</h2><p class="sba__d">축농증, 비염, 비중격만곡증 수술과 코성형을 함께 진행하여<br>수술 시간, 회복 기간, 부담을 줄여보세요.</p></div>
+<div class="sba__grid"><div class="sba__pair rv rv--lg"><div class="sba__cmp">
+<div class="sba__c"><span>수술 전 CT (위)</span>
+<div class="sba__img"><img src="./assets/ba-sinus-1-b.jpg" alt="수술 전 CT (위)" loading="lazy"></div></div>
+<div class="sba__c sba__c--a"><span>수술 후 CT (위)</span>
+<div class="sba__img"><img src="./assets/ba-sinus-1-a.jpg" alt="수술 후 CT (위)" loading="lazy"></div></div>
+</div></div><div class="sba__pair rv rv--lg"><div class="sba__cmp">
+<div class="sba__c"><span>Before</span>
+<div class="sba__img"><img src="./assets/ba-sinus-2-b.jpg" alt="Before" loading="lazy"></div></div>
+<div class="sba__c sba__c--a"><span>After</span>
+<div class="sba__img"><img src="./assets/ba-sinus-2-a.jpg" alt="After" loading="lazy"></div></div>
+</div></div></div>
 </div></section><section class="media sec-h"><div class="in2">
 <div class="stit stit--center rv"><h2 class="stit__h">숨길이비인후과가 소개된 곳</h2></div>
 <ul class="media__row rv"><li class="media__i">KBS 생로병사</li><li class="media__i">MBC 기분좋은날</li><li class="media__i">SBS 모닝와이드</li><li class="media__i">조선일보 헬스</li><li class="media__i">중앙일보 건강</li><li class="media__i">연합뉴스</li></ul>
