@@ -1228,6 +1228,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "corporate-t-template",
+    industry: "대학 부설 센터 · 공공기관 홈페이지",
+    title: "대학 부설 국제교육센터 홈페이지 (프리미엄 디자인 O)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 공공기관 · 대학 · 사업단 · 인증제도",
+    purpose:
+      "배경 영상 히어로와 참여국 흐름 띠, 스크롤에 따라 좌우로 열리는 성과 숫자 장면, 사진에 맞춰 바뀌는 미션 구역으로 이어지는 메인에 총장 인사말·대학소개·연혁·사업내용·성과·국가별 현황·인증제도 6쪽·참여학과·교육과정 아카이브·문의까지 18개 페이지를 갖춘 대학 부설 센터 홈페이지입니다.",
+    features: ["좌우로 열리는 스크롤 고정 장면 2개 · 숫자 세기", "가운데 사진 흐름에 맞춰 바뀌는 미션 구역 · 3분할 콘텐츠 패널", "인증제도 6쪽 · 위원회 명단표 · 일정표 · 온라인 신청 폼", "좌우 교차 연혁 · 목차 따라가는 사업 로드맵 · 게시판 목록·상세"],
+    idealFor: "대학 부설 센터와 사업단, 인증·평가 제도를 운영하는 공공기관, 표와 서식이 많은 협회·재단",
+    image: "/thumbs/corporate-t.jpg",
+    liveUrl: "/templates/corporate-t/",
+    industryKey: "corporate",
+    premiumLabel: "공공 · 대학부설",
+    designCode: "CORP-1015",
+    premium: true,
+  },
+  {
     slug: "corporate-s-template",
     industry: "산업 역사관 · 기업 기록관 홈페이지",
     title: "산업 역사관·기업 기록관 홈페이지 (프리미엄 디자인 N)",
@@ -5572,6 +5589,7 @@ export const SAMPLES: Sample[] = [
  * 새 프리미엄을 등록하면 슬러그를 맨 앞에 넣는다. 여기 없는 프리미엄은 그 뒤, 나머지는 SAMPLES 순서.
  */
 const PREMIUM_RECENT_ORDER = [
+  "corporate-t-template",
   "clinic-f-template",
   "corporate-r-template",
   "corporate-q-template",

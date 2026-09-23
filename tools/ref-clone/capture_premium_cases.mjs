@@ -114,6 +114,23 @@ const configs = [
     mobile: ["index", "company", "business-grain", "careers"],
   },
   {
+    folder: "corporate-t",
+    pages: ["index", "greeting", "university", "history", "business", "center",
+            "organization", "role", "performance", "progress", "cert", "process",
+            "criteria", "committee", "schedule", "apply", "archive", "contact"],
+    points: [
+      ["mission", "index", ".mis"],
+      ["edu", "index", ".edu"],
+      ["impact", "index", ".impact"],
+      ["accred", "index", ".accred"],
+      ["news", "index", ".news"],
+      ["roadmap", "business", ".rmap"],
+      ["timeline", "history", ".tl"],
+      ["org", "organization", ".org"],
+    ],
+    mobile: ["index", "business", "committee", "contact"],
+  },
+  {
     folder: "corporate-s",
     pages: ["index", "background", "facility", "exhibitions", "story-origin", "story-future", "news", "visit"],
     points: [
