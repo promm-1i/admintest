@@ -5,7 +5,7 @@ const study: CaseStudy = {
   brand: "NEXORA",
   headline: "글로벌 첨단소재 그룹 홈페이지",
   summary:
-    "여러 사업부와 해외 거점, 기술 성과와 ESG·IR 정보를 한 사이트에 체계적으로 담아 중견 산업그룹의 규모와 신뢰를 전달하는 프리미엄 기업 홈페이지입니다.",
+    "여러 사업부와 해외 거점, 기술 성과와 ESG·IR 정보를 한 사이트에 나눠 담은 중견 산업그룹용 프리미엄 기업 홈페이지입니다.",
   brandColor: "rgb(98, 61, 185)",
   tintColor: "rgb(237, 232, 248)",
   overview:

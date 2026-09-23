@@ -5,7 +5,7 @@ const study: CaseStudy = {
   brand: "NATURIVE LAB",
   headline: "천연물 화장품 원료기업 홈페이지",
   summary:
-    "자연 원료의 감성과 연구 데이터, 제품 검색과 샘플 문의를 한 흐름에 담아 B2B 화장품 원료기업의 브랜드와 기술력을 함께 전달하는 프리미엄 기업 홈페이지입니다.",
+    "원료 사진과 연구 데이터, 제품 검색과 샘플 문의를 한 곳에 모은 B2B 화장품 원료기업용 프리미엄 기업 홈페이지입니다.",
   brandColor: "rgb(205, 73, 33)",
   tintColor: "rgb(246, 235, 228)",
   overview:
@@ -48,8 +48,8 @@ const study: CaseStudy = {
     { name: "채용", file: "jobs.html", img: "/cases/corporate-o/page-jobs.webp", desc: "인재상과 직무, 지원 절차와 채용 공고를 한 화면에서 확인하게 합니다.", items: ["인재상과 조직문화", "직무·복리후생", "채용 공고와 지원 연결"] },
   ],
   points: [
-    { title: "원료의 이야기를\n브랜드 스토리로 전합니다", body: "식물 산지와 원료 발굴 과정을 큰 사진과 짧은 문장으로 구성해 기업의 차별점을 제품 목록보다 먼저 이해하게 합니다.", items: ["글로벌 원료 스토리", "원료 산지 이미지", "회사소개 · 네트워크 연결"], img: "/cases/corporate-o/point-story.webp", caption: "홈 · 원료 스토리" },
-    { title: "연구개발 역량을\n감성과 분리해 강조합니다", body: "자연 이미지 뒤에 어두운 기술 장면을 배치해 연구와 평가 능력을 선명하게 전환하고, 상세 연구 화면으로 이어지게 합니다.", items: ["R&D 핵심 메시지", "기술 이미지와 영상", "연구·효능·특허 연결"], img: "/cases/corporate-o/point-technology.webp", caption: "홈 · 연구기술" },
+    { title: "산지와 발굴 과정은\n큰 사진과 짧은 문장으로", body: "식물 산지와 원료 발굴 과정을 큰 사진과 짧은 문장으로 놓아, 제품 목록보다 먼저 읽히게 했습니다.", items: ["글로벌 원료 스토리", "원료 산지 이미지", "회사소개 · 네트워크 연결"], img: "/cases/corporate-o/point-story.webp", caption: "홈 · 원료 스토리" },
+    { title: "자연 사진 다음에\n어두운 연구 장면이 옵니다", body: "자연 사진 뒤에 어두운 기술 장면을 붙여 화면 성격을 바꾸고, 상세 연구 화면으로 이어지게 했습니다.", items: ["R&D 핵심 메시지", "기술 이미지와 영상", "연구·효능·특허 연결"], img: "/cases/corporate-o/point-technology.webp", caption: "홈 · 연구기술" },
     { title: "제품을 효능별로\n빠르게 탐색합니다", body: "대표 원료는 효능 카테고리를 눌러 바로 바뀌고, 제품명과 핵심 특징을 확인한 뒤 전체 원료 검색이나 상세 화면으로 이동합니다.", items: ["효능 카테고리", "가로 제품 카드", "검색·상세·샘플 문의 연결"], img: "/cases/corporate-o/point-products.webp", caption: "홈 · 대표 원료" },
     { title: "기술 콘텐츠를\n영상형 카드로 소개합니다", body: "뷰티필름과 인사이트 콘텐츠를 제품 정보와 다른 큰 영상형 카드로 구성해 연구기업의 전문 콘텐츠를 꾸준히 전달할 수 있습니다.", items: ["뷰티필름 대표 콘텐츠", "영상·인사이트 연결", "콘텐츠랩 확장 가능"], img: "/cases/corporate-o/point-film.webp", caption: "홈 · 뷰티필름" },
     { title: "거점 정보와 원료 문의를\n한 구간에서 연결합니다", body: "국내외 회사 위치와 연락처를 확인한 뒤 필요한 원료와 수량을 문의할 수 있도록 마지막 행동 동선을 단순하게 정리합니다.", items: ["국내외 거점 정보", "연락처와 지도", "원료·샘플 문의 연결"], img: "/cases/corporate-o/point-contact.webp", caption: "홈 · 위치와 문의" },
