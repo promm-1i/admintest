@@ -311,22 +311,25 @@
 .net{position:relative;margin-top:20rem;padding:20rem 0;background:#C9E4EF;overflow:hidden}
 .net__map{position:absolute;inset:0}
 .net__map img{width:100%;height:100%;object-fit:cover;opacity:.9}
-.net__in{position:relative;z-index:2;display:flex;justify-content:space-between;gap:4rem;
-  margin:0 auto;width:var(--in);max-width:100%;padding:0 var(--inPd)}
-.net__l{width:416px;flex-shrink:0;min-height:525px}
-.net__chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:6rem;width:375px}
+/* 실측: txt_wrap 1440x525 at +160 · 제목 블록 416x158 at (20,160) · 버튼 묶음 375x120 at (20,382)
+   핀 32x60 · 라벨 131x64 radius 130 13/500, 핀 위 82px·왼쪽 50px.
+   원본엔 오른쪽 정보 카드가 없다 — 핀과 라벨만 지도 위에 떠 있다. */
+.net__in{position:relative;z-index:2;margin:0 auto;width:var(--in);max-width:100%;
+  padding:0 var(--inPd);min-height:525px}
+.net__l{width:416px}
+.net__chips{display:flex;flex-wrap:wrap;gap:12px;margin-top:64px;width:375px}
 .net__chip{width:117px;height:54px;display:inline-flex;align-items:center;justify-content:center;
   font-size:var(--p2);font-weight:500;color:var(--gray70);background:#fff;border-radius:8px;
   box-shadow:0 4px 14px rgba(0,0,0,.06)}
 .net__chip.on,.net__chip:hover{color:#fff;background:var(--point01)}
-.net__card{width:464px;flex-shrink:0;padding:3.2rem;background:#fff;border-radius:20px;
-  box-shadow:0 18px 50px rgba(0,0,0,.1)}
-.net__nm{font-size:var(--h8);font-weight:700}
-.net__dl{margin-top:2rem}
-.net__dl div{display:flex;gap:1.4rem;padding:1rem 0;font-size:var(--p5);border-top:1px solid var(--gray10)}
-.net__dl dt{flex-shrink:0;width:64px;font-weight:600;color:var(--gray50)}
-.net__btns{display:flex;gap:8px;margin-top:2.4rem}
-.net__btns .btn{flex:1;height:4.8rem;padding:0 1rem}
+.net__pins{position:absolute;inset:0;z-index:2;pointer-events:none}
+.net__pin{position:absolute;width:32px;height:60px;color:var(--point01)}
+.net__pin svg{width:32px;height:39px;fill:currentColor}
+.net__lb{position:absolute;display:flex;align-items:center;justify-content:center;
+  width:131px;height:64px;font-size:var(--p6);font-weight:500;color:var(--gray80);
+  background:#fff;border-radius:130px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.net__pin.on,.net__lb.on{color:#fff}
+.net__lb.on{background:var(--point01)}
 
 /* 커뮤니티 */
 .comm{margin-bottom:20rem;padding:20rem 0 0;background:#fff}
@@ -350,7 +353,8 @@
   .tvbox--short{flex:0 0 380px}
   .team__track{padding:0 var(--inPd)}
   .net__in{flex-direction:column}
-  .net__l,.net__card,.net__chips{width:100%}
+  .net__l,.net__chips{width:100%}
+  .net__pins{display:none}
 }
 @media screen and (max-width:1024px){
   .mv{height:76vh;min-height:520px}
@@ -669,73 +673,13 @@
 
 <section class="net">
 <div class="net__map"><img src="./assets/net-map.jpg" alt="지점 위치 지도" loading="lazy"></div>
+<div class="net__pins" aria-hidden="true"><span class="net__lb on" style="left:1072px;top:285px">강남점</span><span class="net__pin on" style="left:1122px;top:367px"><svg viewBox="0 0 32 39"><path d="M16 0C7.2 0 0 7 0 15.7 0 27 16 39 16 39s16-12 16-23.3C32 7 24.8 0 16 0Zm0 21.2a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Z"/></svg></span><span class="net__lb" style="left:1004px;top:192px">서초점</span><span class="net__pin" style="left:1054px;top:274px"><svg viewBox="0 0 32 39"><path d="M16 0C7.2 0 0 7 0 15.7 0 27 16 39 16 39s16-12 16-23.3C32 7 24.8 0 16 0Zm0 21.2a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Z"/></svg></span><span class="net__lb" style="left:1097px;top:43px">노원점</span><span class="net__pin" style="left:1147px;top:125px"><svg viewBox="0 0 32 39"><path d="M16 0C7.2 0 0 7 0 15.7 0 27 16 39 16 39s16-12 16-23.3C32 7 24.8 0 16 0Zm0 21.2a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Z"/></svg></span><span class="net__lb" style="left:1040px;top:236px">종로점</span><span class="net__pin" style="left:1090px;top:318px"><svg viewBox="0 0 32 39"><path d="M16 0C7.2 0 0 7 0 15.7 0 27 16 39 16 39s16-12 16-23.3C32 7 24.8 0 16 0Zm0 21.2a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Z"/></svg></span><span class="net__lb" style="left:750px;top:46px">일산점</span><span class="net__pin" style="left:800px;top:128px"><svg viewBox="0 0 32 39"><path d="M16 0C7.2 0 0 7 0 15.7 0 27 16 39 16 39s16-12 16-23.3C32 7 24.8 0 16 0Zm0 21.2a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Z"/></svg></span><span class="net__lb" style="left:1094px;top:271px">송도점</span><span class="net__pin" style="left:1144px;top:353px"><svg viewBox="0 0 32 39"><path d="M16 0C7.2 0 0 7 0 15.7 0 27 16 39 16 39s16-12 16-23.3C32 7 24.8 0 16 0Zm0 21.2a5.5 5.5 0 1 1 0-11 5.5 5.5 0 0 1 0 11Z"/></svg></span></div>
 <div class="net__in">
 <div class="net__l">
 <div class="stit"><p class="stit__label">숨길이비인후과 네트워크</p>
 <h2 class="stit__h">수도권 6개 지점에서<br>같은 기준으로 진료합니다</h2></div>
 <div class="net__chips" data-branches><button class="net__chip on" type="button" data-branch="0">강남점</button><button class="net__chip" type="button" data-branch="1">서초점</button><button class="net__chip" type="button" data-branch="2">노원점</button><button class="net__chip" type="button" data-branch="3">종로점</button><button class="net__chip" type="button" data-branch="4">일산점</button><button class="net__chip" type="button" data-branch="5">송도점</button></div>
 </div>
-<div class="net__card"><div class="net__panel" data-netpanel="0">
-<p class="net__nm">숨길이비인후과 강남점</p>
-<dl class="net__dl">
-<div><dt>주소</dt><dd>서울 강남구 강남대로 452, 6층</dd></div>
-<div><dt>전화</dt><dd>02-539-7528</dd></div>
-<div><dt>오시는 길</dt><dd>강남역 11번 출구 도보 2분</dd></div>
-<div><dt>진료시간</dt><dd>평일 10:00~19:00 · 토 10:00~15:00</dd></div>
-</dl>
-<div class="net__btns"><a class="btn btn--pri" href="./reservation.html">예약하기</a>
-<a class="btn btn--line" href="./clinic-locations.html">지점 상세</a></div>
-</div><div class="net__panel" data-netpanel="1" hidden>
-<p class="net__nm">숨길이비인후과 서초점</p>
-<dl class="net__dl">
-<div><dt>주소</dt><dd>서울 서초구 서초대로 77길 54, 3층</dd></div>
-<div><dt>전화</dt><dd>02-521-7528</dd></div>
-<div><dt>오시는 길</dt><dd>교대역 8번 출구 도보 3분</dd></div>
-<div><dt>진료시간</dt><dd>평일 10:00~19:00 · 토 10:00~15:00</dd></div>
-</dl>
-<div class="net__btns"><a class="btn btn--pri" href="./reservation.html">예약하기</a>
-<a class="btn btn--line" href="./clinic-locations.html">지점 상세</a></div>
-</div><div class="net__panel" data-netpanel="2" hidden>
-<p class="net__nm">숨길이비인후과 노원점</p>
-<dl class="net__dl">
-<div><dt>주소</dt><dd>서울 노원구 동일로 1414, 5층</dd></div>
-<div><dt>전화</dt><dd>02-931-7528</dd></div>
-<div><dt>오시는 길</dt><dd>노원역 9번 출구 도보 1분</dd></div>
-<div><dt>진료시간</dt><dd>평일 10:00~19:00 · 토 10:00~15:00</dd></div>
-</dl>
-<div class="net__btns"><a class="btn btn--pri" href="./reservation.html">예약하기</a>
-<a class="btn btn--line" href="./clinic-locations.html">지점 상세</a></div>
-</div><div class="net__panel" data-netpanel="3" hidden>
-<p class="net__nm">숨길이비인후과 종로점</p>
-<dl class="net__dl">
-<div><dt>주소</dt><dd>서울 종로구 종로 51, 4층</dd></div>
-<div><dt>전화</dt><dd>02-733-7528</dd></div>
-<div><dt>오시는 길</dt><dd>종각역 4번 출구 도보 2분</dd></div>
-<div><dt>진료시간</dt><dd>평일 10:00~19:00 · 토 10:00~15:00</dd></div>
-</dl>
-<div class="net__btns"><a class="btn btn--pri" href="./reservation.html">예약하기</a>
-<a class="btn btn--line" href="./clinic-locations.html">지점 상세</a></div>
-</div><div class="net__panel" data-netpanel="4" hidden>
-<p class="net__nm">숨길이비인후과 일산점</p>
-<dl class="net__dl">
-<div><dt>주소</dt><dd>경기 고양시 일산동구 중앙로 1275, 7층</dd></div>
-<div><dt>전화</dt><dd>031-901-7528</dd></div>
-<div><dt>오시는 길</dt><dd>정발산역 3번 출구 도보 5분</dd></div>
-<div><dt>진료시간</dt><dd>평일 10:00~19:00 · 토 10:00~15:00</dd></div>
-</dl>
-<div class="net__btns"><a class="btn btn--pri" href="./reservation.html">예약하기</a>
-<a class="btn btn--line" href="./clinic-locations.html">지점 상세</a></div>
-</div><div class="net__panel" data-netpanel="5" hidden>
-<p class="net__nm">숨길이비인후과 송도점</p>
-<dl class="net__dl">
-<div><dt>주소</dt><dd>인천 연수구 컨벤시아대로 165, 2층</dd></div>
-<div><dt>전화</dt><dd>032-851-7528</dd></div>
-<div><dt>오시는 길</dt><dd>센트럴파크역 3번 출구 도보 4분</dd></div>
-<div><dt>진료시간</dt><dd>평일 10:00~19:00 · 토 10:00~15:00</dd></div>
-</dl>
-<div class="net__btns"><a class="btn btn--pri" href="./reservation.html">예약하기</a>
-<a class="btn btn--line" href="./clinic-locations.html">지점 상세</a></div>
-</div></div>
 </div>
 </section>
 

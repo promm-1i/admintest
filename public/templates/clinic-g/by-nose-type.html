@@ -58,7 +58,8 @@
 .kv__pad{height:60px}
 
 /* 센터 머리 + 워터마크 띠 */
-.chead{position:relative;padding:14rem 0 0;text-align:center;overflow:hidden;background:#fff}
+/* 실측: 라벨 22/700 · 본문 블록 섹션+160 · 말풍선 덱 +393 */
+.chead{position:relative;justify-content:flex-start;padding:160px 0 0;text-align:center;overflow:hidden;background:#fff}
 /* 레퍼런스 .gradient_cir — 893x1181 타원 두 개, 섹션이 보이면 1s ease-in-out 로 떠오른다.
    위치·크기는 그대로, 색만 우리 CI 로 */
 .chead__blob{position:absolute;width:62%;height:135%;border-radius:50%;opacity:0;pointer-events:none;
@@ -69,9 +70,10 @@
   background:radial-gradient(50% 50%,rgba(14,110,143,.3) 0%,rgba(234,243,247,0) 100%)}
 .chead__blob.rv{transform:none}
 .chead__blob.rv.on{opacity:1;transform:none}
-.chead__k{font-size:var(--p3);font-weight:600;color:var(--point01)}
+.chead__k{font-size:var(--h8);font-weight:700;color:var(--point01)}
 .chead__h{margin-top:1.8rem;font-size:var(--h3);font-weight:700;line-height:1.5;letter-spacing:-.03em}
-.chead__mark{margin-top:9rem;font-family:var(--numFont);font-size:17rem;font-weight:700;
+/* 레퍼런스 워터마크는 흐름 밖 — 섹션+723 에 절대배치, 높이를 먹지 않는다 */
+.chead__mark{position:absolute;left:0;top:723px;width:100%;margin:0;font-family:var(--numFont);font-size:17rem;font-weight:700;
   line-height:1;white-space:nowrap;color:var(--pointBg);user-select:none}
 
 /* 좌 제목 / 우 본문 2단 */
@@ -142,8 +144,9 @@
 .vblock__ico::after{content:'';border-left:11px solid #fff;border-top:7px solid transparent;
   border-bottom:7px solid transparent;margin-left:3px}
 .vblock__h{margin-top:2rem;font-size:var(--h4);font-weight:700}
-.vblock__d{margin-top:1.4rem;font-size:var(--p5);line-height:1.8;color:var(--gray60)}
-.vblock__f{margin:4.6rem auto 0;width:var(--in3);max-width:100%;padding:0 var(--inPd)}
+.vblock__d{margin-top:12px;font-size:var(--p3);line-height:1.7;color:var(--gray60)}
+/* 실측: 영상칸 800x450 at (320,373) */
+.vblock__f{margin:41px auto 0;width:800px;max-width:100%}
 .vblock__f img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;background:var(--gray90)}
 
 /* 번호 카드 2×2 */
@@ -185,16 +188,18 @@
   background:var(--gray90);border-radius:50%;transform:translate(-50%,-50%)}
 
 /* ONE-STEP */
-.onestep{padding:12rem 0 10rem;color:#fff;text-align:center;
+/* 실측(정착): 대형글자 섹션+240 · 제목 +520(30.4/700) · 설명 +578(16/400)
+   · 스탯 줄 +673 h141 · 아이콘 64x64 · 항목 폭은 내용폭(고정 아님) */
+.onestep{justify-content:flex-start;padding:240px 0 10rem;color:#fff;text-align:center;
   background:linear-gradient(140deg,#0B5670 0%,#0E6E8F 42%,#1FA39B 100%)}
 .onestep__big{font-family:var(--numFont);font-size:20rem;font-weight:700;letter-spacing:.06em;line-height:1}
-.onestep__h{margin-top:5rem;font-size:var(--h4);font-weight:700}
-.onestep__d{margin-top:1.4rem;font-size:var(--p5);line-height:1.8;color:rgba(255,255,255,.8)}
-.onestep__stats{display:flex;justify-content:center;gap:5rem;margin-top:4.6rem}
-.onestep__s{width:110px}
-.onestep__s svg{width:34px;height:34px;margin:0 auto;fill:none;stroke:#fff;stroke-width:1.6}
-.onestep__s b{display:block;margin-top:1.4rem;font-size:var(--p8);font-weight:600;color:rgba(255,255,255,.7)}
-.onestep__s span{display:block;margin-top:.4rem;font-size:var(--p4);font-weight:700}
+.onestep__h{margin-top:120px;font-size:var(--h4);font-weight:700;line-height:1.5}
+.onestep__d{margin-top:12px;font-size:var(--p3);line-height:1.7;color:rgba(255,255,255,.8)}
+.onestep__stats{display:flex;justify-content:center;gap:64px;margin-top:41px}
+.onestep__s{min-width:64px}
+.onestep__s svg{width:64px;height:64px;margin:0 auto;fill:none;stroke:#fff;stroke-width:1.2}
+.onestep__s b{display:block;margin-top:16px;font-size:var(--p8);font-weight:600;color:rgba(255,255,255,.7)}
+.onestep__s span{display:block;margin-top:.4rem;font-size:var(--p4);font-weight:700;white-space:nowrap}
 .onestep__steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;
   margin:6rem auto 0;width:var(--in);max-width:100%;padding:0 var(--inPd)}
 .ostep{padding:2.6rem;text-align:left;background:rgba(0,0,0,.18);border-radius:14px}
@@ -234,17 +239,19 @@
 .ytb p{margin-top:1.4rem;font-size:var(--p5);font-weight:600;line-height:1.5}
 
 /* FAQ */
-.faq{padding:14rem 0;background:var(--grayBg2)}
-.faq__list{margin-top:5rem}
-.faq__i{background:#fff;border-radius:12px}
-.faq__i+.faq__i{margin-top:12px}
+.faq{justify-content:flex-start;padding:160px 0 0;background:var(--grayBg2)}
+.faq .stit__h{font-size:var(--h4);margin-top:0}
+.faq__list{margin-top:24px}
+/* 실측: 항목 1200x92 · 라운드 없음 · 질문 18/700 좌패딩 32 */
+.faq__i{background:#fff}
+.faq__i+.faq__i{margin-top:0}
 .faq__q{display:flex;align-items:center;justify-content:space-between;gap:2rem;width:100%;
-  padding:2.4rem 3rem;font-size:var(--p2);font-weight:600;text-align:left}
+  min-height:92px;padding:0 32px;font-size:var(--p2);font-weight:700;text-align:left}
 .faq__q::after{content:'';flex-shrink:0;width:12px;height:12px;border-right:2px solid var(--gray40);
   border-bottom:2px solid var(--gray40);transform:translateY(-3px) rotate(45deg);transition:transform .25s}
 .faq__i.open .faq__q::after{transform:translateY(2px) rotate(-135deg)}
 .faq__i.open .faq__q{color:var(--point01)}
-.faq__a{display:none;padding:0 3rem 2.8rem;font-size:var(--p5);line-height:1.9;color:var(--gray60)}
+.faq__a{display:none;padding:0 32px 28px;font-size:var(--p5);line-height:1.9;color:var(--gray60)}
 .faq__i.open .faq__a{display:block}
 
 /* 주의사항 */
@@ -492,7 +499,7 @@
 <p>들창코 교정 방법</p></a></div>
 </div></section><section class="faq sec-h"><div class="in2">
 <div class="stit stit--center rv"><h2 class="stit__h">숨길이비인후과 유형별 코성형 FAQ</h2></div>
-<ul class="faq__list" data-acc-single><li class="faq__i open">
+<ul class="faq__list" data-acc-single><li class="faq__i">
 <button class="faq__q" type="button" data-acc>두 가지 유형이 섞여 있으면요?</button>
 <div class="faq__a">대부분 그렇습니다. 인상에 가장 큰 영향을 주는 곳부터 순서를 정해 진행합니다.</div></li><li class="faq__i">
 <button class="faq__q" type="button" data-acc>한 번에 다 교정되나요?</button>
