@@ -1146,7 +1146,7 @@ export const SAMPLES: Sample[] = [
     liveUrl: "/templates/agency-f/",
     industryKey: "agency",
     premiumLabel: "종합광고대행업",
-    designCode: "AGEP-1001",
+    designCode: "AGEP-1002",
     premium: true,
   },
   {
