@@ -43,19 +43,24 @@ const RootContext = createContext(PREVIEW_ROOT);
 const useRoot = () => useContext(RootContext);
 const MEDIA = "/renewal-editorial/media";
 // 서브페이지는 쪽마다 다른 사진을 쓴다. 새 사진이 오면 해당 줄의 파일명만 바꾸면 된다.
+/**
+ * 서브 히어로 사진. 2026-09-23 부터 쪽 내용에 맞춰 새로 만든 사진(photos/<이름>-wide.webp)을 쓴다.
+ * 기존 sub-*.webp 는 범용 이미지였다. 제작 비용 쪽은 사진 판이 없어 값만 채워 둔다.
+ */
+const PHOTOS = "/renewal-editorial/photos";
 const SUBPAGE_MEDIA: Record<PageKey, string> = {
-  process: `${MEDIA}/sub-process.webp`,
-  price: `${MEDIA}/sub-process.webp`,  // 제작 비용 쪽은 상단 사진 판이 없어 실제로 쓰이지 않는다
-  features: `${MEDIA}/sub-features.webp`,
-  maintenance: `${MEDIA}/sub-maintenance.webp`,
-  custom: `${MEDIA}/sub-custom.webp`,
-  "admin-system": `${MEDIA}/sub-admin.webp`,
-  "inquiry-reservation": `${MEDIA}/sub-inquiry.webp`,
-  "search-filter": `${MEDIA}/sub-search.webp`,
-  "content-management": `${MEDIA}/sub-content.webp`,
-  "database-api": `${MEDIA}/sub-database.webp`,
-  responsive: `${MEDIA}/sub-responsive.webp`,
-  seo: `${MEDIA}/sub-seo.webp`,
+  process: `${PHOTOS}/process-wide.webp`,
+  price: `${PHOTOS}/process-wide.webp`,
+  features: `${PHOTOS}/features-wide.webp`,
+  maintenance: `${PHOTOS}/maintenance-wide.webp`,
+  custom: `${PHOTOS}/custom-wide.webp`,
+  "admin-system": `${PHOTOS}/admin-wide.webp`,
+  "inquiry-reservation": `${PHOTOS}/inquiry-wide.webp`,
+  "search-filter": `${PHOTOS}/search-wide.webp`,
+  "content-management": `${PHOTOS}/content-wide.webp`,
+  "database-api": `${PHOTOS}/database-wide.webp`,
+  responsive: `${PHOTOS}/responsive-wide.webp`,
+  seo: `${PHOTOS}/seo-wide.webp`,
 };
 const MEDIA_SLOTS = {
   hero: `${MEDIA}/hero.webp`,
