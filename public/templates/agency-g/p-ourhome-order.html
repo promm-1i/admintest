@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>우리집 급식 주문 — 오빗랩</title>
+<meta name="description" content="단체 주문을 쉽게 · 수량과 일정을 달력에서 바로 고치도록 했습니다.">
+<meta property="og:title" content="우리집 급식 주문 — 오빗랩">
+<meta property="og:description" content="단체 주문을 쉽게 · 수량과 일정을 달력에서 바로 고치도록 했습니다.">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;background:#fff;font-family:Pretendard,-apple-system,BlinkMacSystemFont,'Malgun Gothic',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+body{overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+li{list-style:none}
+:root{
+  --ink:#3e3f44; --ink-2:#6f7076; --line:#e6e6e9; --bg:#fff;
+  --g1:#2FD6C9; --g2:#5B4BFF; --g3:#B36BFF; --dot:#c9402c;
+  --panel:#3e3f44; --dark:#0b0b10;
+  --gut:clamp(48px,18.75vw - 144px,216px); --gut-s:clamp(48px,1.7857vw + 29.71px,64px);
+  --v:clamp(0px,calc((100vw - 1024px)/896),1px); --g:clamp(0px,calc((100vw - 1920px)/640),1px);
+}
+.serif{font-family:'Cormorant Garamond',serif}
+
+/* 배경 큰 원 두 개 — 원본과 같은 160.8vw, 1px 테두리, 불투명도 .06 */
+#bg-line{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#bg-line .circ{position:absolute;width:160.8vw;height:160.8vw;border:1px solid #000;border-radius:50%;opacity:.06;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1);will-change:transform}
+#bg-line .circ-1{top:-.8vw;left:35.2vw}
+#bg-line .circ-2{top:13.87vw;left:.53vw}
+
+/* 고정 헤더 요소 */
+#ci-logo{position:fixed;z-index:60;top:48px;left:var(--gut-s);width:clamp(105px,3.9063vw + 65px,140.12px);height:clamp(18px,.6696vw + 11.14px,24.04px);color:var(--ink);transition:color .35s}
+#ci-logo svg{width:100%;height:100%}
+#ci-logo.on-dark{color:#fff}
+#lets-talk{position:fixed;z-index:60;top:45px;right:clamp(130px,2.6786vw + 102.57px,154px);display:flex;align-items:center;gap:10px;padding:4px 0;border-bottom:1px solid var(--ink);transition:border-color .35s}
+#lets-talk span{font-size:clamp(13px,.1116vw + 11.86px,14px);font-weight:700;line-height:1.5;color:var(--ink);transition:color .35s}
+#lets-talk.on-dark{border-bottom-color:#fff}
+#lets-talk.on-dark span{color:#fff}
+#full-menu{position:fixed;z-index:60;top:clamp(32px,40.57px - .4464vw,36px);right:var(--gut-s);display:flex;align-items:center;justify-content:center;
+  width:clamp(48px,.8929vw + 38.86px,56px);height:clamp(48px,.8929vw + 38.86px,56px);background:none}
+#full-menu i{display:block;position:relative;width:clamp(20.57px,.3828vw + 16.65px,24px);height:clamp(12px,.2232vw + 9.71px,14px)}
+#full-menu i:before,#full-menu i:after{content:"";position:absolute;left:0;width:100%;height:1.6px;background:var(--ink);transition:background .35s}
+#full-menu i:before{top:0}
+#full-menu i:after{bottom:0}
+#full-menu.on-dark i:before,#full-menu.on-dark i:after{background:#fff}
+
+#scroll-hint{position:fixed;z-index:60;bottom:64px;right:var(--gut-s);display:flex;flex-direction:column;align-items:center;gap:16px;width:21px;
+  pointer-events:none;user-select:none;transition:opacity .4s}
+#scroll-hint.is-hidden{opacity:0}
+#scroll-hint .bar{position:relative;width:1px;height:64px;background:rgba(62,63,68,.15);overflow:hidden}
+#scroll-hint .bar:after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:var(--ink);transform:translateY(-100%);transform-origin:top;animation:scroll-draw 2.2s cubic-bezier(.65,0,.35,1) infinite}
+@keyframes scroll-draw{0%{transform:translateY(-100%)}45%{transform:translateY(0)}100%{transform:translateY(100%)}}
+#scroll-hint .label{writing-mode:vertical-rl;letter-spacing:1px;font-size:clamp(11px,.3348vw + 7.57px,14px);font-weight:700;line-height:1.5;color:var(--ink);transition:color .35s}
+#scroll-hint.on-dark .bar{background:rgba(255,255,255,.2)}
+#scroll-hint.on-dark .bar:after{background:#fff}
+#scroll-hint.on-dark .label{color:#fff}
+
+/* 전체 메뉴 */
+#menu-overlay{position:fixed;inset:0;z-index:100;visibility:hidden;pointer-events:none;transition:visibility 0s linear .9s}
+#menu-overlay.open{visibility:visible;pointer-events:auto;transition-delay:0s}
+#menu-panel{position:absolute;inset:0;background:var(--panel);clip-path:circle(0 at calc(100% - 76px) 60px);transition:clip-path .9s cubic-bezier(.76,0,.24,1)}
+#menu-overlay.open #menu-panel{clip-path:circle(150% at calc(100% - 76px) 60px)}
+#menu-logo{position:absolute;top:48px;left:var(--gut-s);width:clamp(105px,3.9063vw + 65px,140.12px);height:clamp(18px,.6696vw + 11.14px,24.04px);color:#fff;opacity:0;transition:opacity .4s}
+#menu-logo svg{width:100%;height:100%}
+#menu-close{position:absolute;top:clamp(32px,40.57px - .4464vw,36px);right:var(--gut-s);display:flex;align-items:center;justify-content:center;
+  width:clamp(48px,.8929vw + 38.86px,56px);height:clamp(48px,.8929vw + 38.86px,56px);border-radius:999px;background:#fff;opacity:0;transition:opacity .4s}
+#menu-close:before,#menu-close:after{content:"";position:absolute;width:18px;height:1.5px;background:var(--ink)}
+#menu-close:before{transform:rotate(45deg)}
+#menu-close:after{transform:rotate(-45deg)}
+#menu-overlay.open #menu-logo,#menu-overlay.open #menu-close{opacity:1;transition-delay:.26s}
+.menu-scroll{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.menu-inner{display:flex;gap:clamp(48px,2.5vw,64px);width:clamp(1184px,2.5vw + 1136px,1200px);max-width:calc(100% - 96px);height:clamp(600px,31.25vw,800px);align-items:center}
+.menu-col{width:clamp(424px,.9375vw + 406px,430px)}
+.menu-col-right{flex:1}
+.menu-nav .menu-item{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(80px,3.125vw + 20px,100px);font-weight:600;line-height:1.18;color:#fff;opacity:.55;transition:opacity .3s}
+.menu-nav .menu-item:hover,.menu-nav .menu-item.is-on{opacity:1}
+.menu-copy{margin-bottom:40px;font-size:clamp(14px,.3125vw + 8px,16px);line-height:1.9;color:rgba(255,255,255,.7)}
+.menu-contact{font-size:clamp(14px,.3125vw + 8px,16px);line-height:2;color:rgba(255,255,255,.7)}
+.menu-contact b{display:block;margin-bottom:6px;color:#fff;font-weight:700}
+.contact-tf{display:flex;gap:clamp(32px,96px - 2.5vw,48px);margin-top:18px}
+
+/* 푸터 */
+.footer{position:relative;z-index:2;height:100vh;min-height:760px;background:#fff}
+.footer-logo{position:absolute;top:38%;left:var(--gut);width:clamp(448px,14.286vw + 301.71px,576px);line-height:0}
+.footer-logo svg{width:100%;height:auto}
+.footer-bottom{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(48px,1.7857vw + 29.71px,64px);display:flex;justify-content:space-between;align-items:flex-end;gap:48px}
+.footer-left{display:flex;flex-direction:column;gap:clamp(50px,1.0045vw + 39.71px,59px)}
+.footer-links{display:flex;gap:80px;font-size:clamp(14px,.3125vw + 8px,16px);font-weight:600}
+.footer-links a{border-bottom:1px solid transparent;transition:border-color .3s}
+.footer-links a:hover{border-bottom-color:var(--ink)}
+.footer-copy{margin:0;font-size:clamp(12px,.4464vw + 7.43px,16px);font-weight:600;line-height:1.5;text-transform:uppercase;color:var(--ink-2)}
+.footer-contact{text-align:right}
+.footer-contact p{margin:0;font-size:clamp(12px,.1116vw + 10.86px,13.86px);font-weight:600;line-height:1.5;color:var(--ink-2)}
+.footer-tf{display:flex;gap:18px;justify-content:flex-end}
+
+/* 등장 */
+[data-rv]{opacity:0;filter:blur(8px);transform:translateY(10px);transition:opacity .9s,filter .9s,transform .9s cubic-bezier(.22,1,.36,1)}
+[data-rv].in{opacity:1;filter:blur(0);transform:none}
+[data-rv][data-d="1"]{transition-delay:.18s}
+[data-rv][data-d="2"]{transition-delay:.36s}
+[data-rv][data-d="3"]{transition-delay:.54s}
+
+/* 서브 페이지 공통 */
+.sub-kv{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:100vh;padding:120px var(--gut) 5.91vh}
+.sub-kv h1{font-family:'Cormorant Garamond',serif;font-size:clamp(120px,5.8036vw + 60.57px,172px);font-weight:600;line-height:1.211;color:var(--ink)}
+.sub-kv .kv-sub{margin-top:24px;max-width:660px;font-size:clamp(14px,.4464vw + 9.43px,18px);line-height:1.75;color:var(--ink-2)}
+.sub-kv .kv-dot{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--dot);margin-left:10px;vertical-align:middle}
+.wrap{position:relative;z-index:2;width:calc(100% - var(--gut) * 2);margin:0 auto;max-width:1486px}
+
+@media (max-width:1023px){
+  #ci-logo{width:104.9px;height:18px;top:31px;left:20px}
+  #lets-talk{top:27px;right:73px}
+  #lets-talk span{font-size:12px}
+  #full-menu{width:48px;height:48px;top:16px;right:12px}
+  #menu-logo{width:104.9px;height:18px;top:31px;left:20px}
+  #menu-close{width:48px;height:48px;top:16px;right:12px}
+  #scroll-hint{display:none}
+  #bg-line .circ{opacity:.05}
+  .menu-inner{flex-direction:column;align-items:flex-start;gap:36px;width:100%;max-width:none;height:auto;padding:0 20px}
+  .menu-col{width:100%}
+  .footer{height:auto;min-height:0;padding:120px 20px 40px}
+  .footer-logo{position:static;width:100%;max-width:420px;margin-bottom:72px}
+  .footer-bottom{position:static;flex-direction:column;align-items:flex-start;gap:36px}
+  .footer-contact{text-align:left}
+  .footer-tf{justify-content:flex-start}
+  .footer-links{gap:36px}
+  .sub-kv{padding:120px 20px 48px;min-height:80vh}
+}
+@media (prefers-reduced-motion:reduce){
+  [data-rv]{opacity:1;filter:none;transform:none;transition:none}
+  #scroll-hint .bar:after{display:none}
+  #bg-line .circ{transition:none}
+}
+
+
+.pd-inner{position:relative;margin:0 max(calc(48px + 168 * var(--v) + 2 * var(--g)),calc((100vw - 2124px)/2))}
+.pd-hero{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;height:100vh;min-height:720px;
+  padding-bottom:clamp(56px,1.8055vw + 45.33px,80px)}
+.pd-hero-title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:calc(64px + 40 * var(--v) + 20 * var(--g));line-height:1.15;color:var(--ink)}
+.pd-hero-sub{margin-top:18px;font-size:calc(16px + 4 * var(--v));font-weight:700;color:var(--ink)}
+.pd-hero-info{display:grid;grid-template-columns:repeat(4,auto);justify-content:start;gap:8px calc(48px + 32 * var(--v));margin-top:calc(48px + 32 * var(--v))}
+.pd-hero-info dt{font-size:calc(12px + 2 * var(--v));font-weight:700;color:var(--ink-2)}
+.pd-hero-info dd{font-size:calc(14px + 2 * var(--v));font-weight:600;color:var(--ink)}
+.pd-visual{position:absolute;right:0;top:0;width:min(46vw,760px);height:100%%;overflow:hidden}
+.pd-visual .mock{width:100%%;height:100%%}
+.pd-secs{position:relative;z-index:1}
+.pd-summary{padding:calc(120px + 80 * var(--v)) 0 calc(64px + 32 * var(--v))}
+.pd-eyebrow{font-family:'Cormorant Garamond',serif;font-size:calc(32px + 16 * var(--v));font-weight:700;color:var(--ink)}
+.pd-head{margin-top:calc(32px + 16 * var(--v));font-size:calc(28px + 20 * var(--v));font-weight:700;line-height:1.5;letter-spacing:-.01em;color:var(--ink)}
+.pd-body{margin-top:24px;max-width:860px;font-size:calc(14px + 4 * var(--v));line-height:1.8;color:var(--ink-2)}
+.pd-works{display:flex;flex-direction:column;gap:calc(48px + 32 * var(--v));padding-bottom:calc(120px + 80 * var(--v))}
+.pd-work{border-radius:32px;overflow:hidden;background:#eef0f4;aspect-ratio:16/9}
+.pd-work .mock{width:100%%;height:100%%}
+.pd-back{display:inline-flex;align-items:center;gap:10px;margin-top:calc(48px + 16 * var(--v));padding:14px 24px;
+  border:1px solid var(--line);border-radius:999px;font-size:calc(13px + 2 * var(--v));font-weight:600;transition:border-color .3s}
+.pd-back:hover{border-color:var(--ink)}
+@media (max-width:1023px){
+  .pd-inner{margin:0 20px}
+  .pd-hero{height:auto;min-height:0;padding-top:150px;padding-bottom:56px}
+  .pd-hero-title{font-size:clamp(40px,9vw,64px)}
+  .pd-hero-info{grid-template-columns:repeat(2,auto);gap:8px 32px}
+  .pd-visual{position:relative;width:100%%;height:56vw;margin-top:40px;border-radius:24px}
+  .pd-work{aspect-ratio:4/3}
+}
+</style>
+</head>
+<body>
+<div id="bg-line" aria-hidden="true"><span class="circ circ-1"></span><span class="circ circ-2"></span></div>
+<a id="ci-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 96" xmlns="http://www.w3.org/2000/svg"><text x="0" y="74" font-family="Cormorant Garamond, serif" font-size="96" font-weight="600" letter-spacing="-2" fill="currentColor">orbit</text><text x="250" y="74" font-family="Cormorant Garamond, serif" font-size="96" font-weight="600" letter-spacing="-2" fill="currentColor">lab</text><circle cx="232" cy="30" r="11" fill="#2FD6C9"/></svg></a><a id="lets-talk" href="/templates/agency-g/contact.html"><span>Let’s Talk</span></a>
+<button id="full-menu" type="button" aria-label="전체 메뉴 열기"><i></i></button>
+<div id="scroll-hint"><span class="bar"></span><span class="label">SCROLL</span></div>
+
+<section class="pd-hero">
+  <div class="pd-visual" aria-hidden="true"><svg class="mock" viewBox="0 0 760 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="g22chart" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(22,72%,58%)"/><stop offset="1" stop-color="hsl(56,68%,44%)"/></linearGradient></defs><rect width="760" height="900" fill="url(#g22chart)"/><rect x="76" y="135" width="608" height="630" rx="14" fill="#fff" opacity=".95"/><circle cx="380" cy="360" r="129" fill="none" stroke="hsl(22,72%,58%)" stroke-width="42"/><circle cx="380" cy="360" r="129" fill="none" stroke="hsl(56,68%,44%)" stroke-width="42" stroke-dasharray="418 912"/><rect x="152" y="567" width="456" height="36" rx="4" fill="#e9ecf2"/><rect x="152" y="630" width="357" height="36" rx="4" fill="#e9ecf2"/><rect x="152" y="693" width="258" height="36" rx="4" fill="#e9ecf2"/></svg></div>
+  <div class="pd-inner">
+    <h1 class="pd-hero-title serif" data-rv>우리집 급식 주문</h1>
+    <p class="pd-hero-sub" data-rv data-d="1">단체 주문을 쉽게</p>
+    <dl class="pd-hero-info" data-rv data-d="2">
+      <dt>고객사</dt><dt>분류</dt><dt>오픈</dt><dt>수행기간</dt>
+      <dd>해담유통</dd><dd>Web, Mobile</dd><dd>May, 2025</dd><dd>2024.11.01 ~ 2025.04.30</dd>
+    </dl>
+  </div>
+</section>
+<div class="pd-secs">
+  <section class="pd-summary"><div class="pd-inner">
+    <p class="pd-eyebrow serif">Overview</p>
+    <h2 class="pd-head">단체 주문을 쉽게</h2>
+    <p class="pd-body">수량과 일정을 달력에서 바로 고치도록 했습니다.</p>
+  </div></section>
+  <section><div class="pd-inner pd-works"><div class="pd-work"><svg class="mock" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="g22dash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(22,72%,58%)"/><stop offset="1" stop-color="hsl(56,68%,44%)"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g22dash)"/><rect x="102" y="115" width="1075" height="490" rx="14" fill="#fff" opacity=".95"/><rect x="166" y="158" width="435" height="32" rx="5" fill="hsl(56,68%,44%)" opacity=".85"/><rect x="166" y="230" width="269" height="115" rx="8" fill="#eef1f6"/><rect x="486" y="230" width="269" height="115" rx="8" fill="#eef1f6"/><rect x="806" y="230" width="269" height="115" rx="8" fill="#eef1f6"/><rect x="166" y="482" width="102" height="36" rx="3" fill="hsl(22,72%,58%)" opacity="0.50"/><rect x="332" y="446" width="102" height="72" rx="3" fill="hsl(22,72%,58%)" opacity="0.57"/><rect x="498" y="410" width="102" height="108" rx="3" fill="hsl(22,72%,58%)" opacity="0.64"/><rect x="664" y="482" width="102" height="36" rx="3" fill="hsl(22,72%,58%)" opacity="0.71"/><rect x="830" y="446" width="102" height="72" rx="3" fill="hsl(22,72%,58%)" opacity="0.78"/><rect x="996" y="410" width="102" height="108" rx="3" fill="hsl(22,72%,58%)" opacity="0.85"/></svg></div><div class="pd-work"><svg class="mock" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="g40list" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(40,72%,58%)"/><stop offset="1" stop-color="hsl(74,68%,44%)"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g40list)"/><rect x="128" y="94" width="1024" height="533" rx="14" fill="#fff" opacity=".95"/><rect x="205" y="144" width="384" height="29" rx="5" fill="hsl(74,68%,44%)"/><circle cx="243" cy="230" r="45" fill="hsl(40,72%,58%)" opacity="0.35"/><rect x="333" y="216" width="717" height="32" rx="4" fill="#e9ecf2"/><circle cx="243" cy="309" r="45" fill="hsl(40,72%,58%)" opacity="0.48"/><rect x="333" y="295" width="602" height="32" rx="4" fill="#e9ecf2"/><circle cx="243" cy="388" r="45" fill="hsl(40,72%,58%)" opacity="0.61"/><rect x="333" y="374" width="487" height="32" rx="4" fill="#e9ecf2"/><circle cx="243" cy="467" r="45" fill="hsl(40,72%,58%)" opacity="0.74"/><rect x="333" y="453" width="717" height="32" rx="4" fill="#e9ecf2"/><circle cx="243" cy="546" r="45" fill="hsl(40,72%,58%)" opacity="0.87"/><rect x="333" y="532" width="602" height="32" rx="4" fill="#e9ecf2"/></svg></div><div class="pd-work"><svg class="mock" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="g58chart" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(58,72%,58%)"/><stop offset="1" stop-color="hsl(92,68%,44%)"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g58chart)"/><rect x="128" y="108" width="1024" height="504" rx="14" fill="#fff" opacity=".95"/><circle cx="640" cy="288" r="218" fill="none" stroke="hsl(58,72%,58%)" stroke-width="70"/><circle cx="640" cy="288" r="218" fill="none" stroke="hsl(92,68%,44%)" stroke-width="70" stroke-dasharray="704 1536"/><rect x="256" y="454" width="768" height="29" rx="4" fill="#e9ecf2"/><rect x="256" y="504" width="602" height="29" rx="4" fill="#e9ecf2"/><rect x="256" y="554" width="436" height="29" rx="4" fill="#e9ecf2"/></svg></div><div class="pd-work"><svg class="mock" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="g76map" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(76,72%,58%)"/><stop offset="1" stop-color="hsl(110,68%,44%)"/></linearGradient></defs><rect width="1280" height="720" fill="url(#g76map)"/><rect x="128" y="94" width="1024" height="533" rx="14" fill="#fff" opacity=".95"/><path d="M230 518 L461 324 L742 432 L1050 202" fill="none" stroke="hsl(110,68%,44%)" stroke-width="3" opacity=".75"/><circle cx="230" cy="518" r="36" fill="hsl(76,72%,58%)"/><circle cx="461" cy="324" r="36" fill="hsl(76,72%,58%)"/><circle cx="742" cy="432" r="36" fill="hsl(76,72%,58%)"/><circle cx="1050" cy="202" r="36" fill="hsl(76,72%,58%)"/><rect x="230" y="130" width="512" height="43" rx="6" fill="#eef1f6"/></svg></div>
+    <a class="pd-back" href="./projects.html">오빗랩 프로젝트 목록으로 <b>↗</b></a>
+  </div></section>
+</div>
+<footer class="footer" data-rv>
+  <div class="footer-logo"><svg class="footer-wordmark" viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="0" y="138" font-family="Cormorant Garamond, serif" font-size="150" font-weight="600" letter-spacing="-4" fill="#3e3f44">orbit</text><text x="322" y="138" font-family="Cormorant Garamond, serif" font-size="150" font-weight="600" letter-spacing="-4" fill="#3e3f44">lab</text><circle cx="300" cy="52" r="17" fill="url(#wmg)"/><defs><linearGradient id="wmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2FD6C9"/><stop offset="1" stop-color="#5B4BFF"/></linearGradient></defs></svg></div>
+  <div class="footer-bottom">
+    <div class="footer-left">
+      <nav class="footer-links"><a href="./projects.html">Projects</a><a href="./about.html">About</a><a href="./contact.html">Contact</a></nav>
+      <p class="footer-copy">Ⓒ 2026 ORBITLAB. ALL RIGHTS RESERVED.</p>
+    </div>
+    <div class="footer-contact">
+      <p>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)</p>
+      <p>E 6gsmake@gmail.com</p>
+      <div class="footer-tf"><p>T 010-4894-4905</p><p>F 02.6455.5185</p></div>
+      <p>사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 대표 김진수</p>
+    </div>
+  </div>
+</footer>
+<div id="menu-overlay" aria-hidden="true">
+<div id="menu-panel"></div>
+<a id="menu-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 96" xmlns="http://www.w3.org/2000/svg"><text x="0" y="74" font-family="Cormorant Garamond, serif" font-size="96" font-weight="600" letter-spacing="-2" fill="currentColor">orbit</text><text x="250" y="74" font-family="Cormorant Garamond, serif" font-size="96" font-weight="600" letter-spacing="-2" fill="currentColor">lab</text><circle cx="232" cy="30" r="11" fill="#2FD6C9"/></svg></a><button id="menu-close" type="button" aria-label="메뉴 닫기"></button>
+<div class="menu-scroll"><div class="menu-inner">
+  <div class="menu-col menu-col-left"><nav class="menu-nav"><a class="menu-item" href="/templates/agency-g/">Home</a><a class="menu-item" href="/templates/agency-g/about.html">About</a><a class="menu-item is-on" href="/templates/agency-g/projects.html">Projects</a><a class="menu-item" href="/templates/agency-g/contact.html">Contact</a></nav></div>
+  <div class="menu-col menu-col-right">
+    <p class="menu-copy">금융과 공공의 까다로운 기준 위에서 화면을 설계하고, 열고 난 뒤에도 같이 굴립니다.<br>궁금한 것이 생기면 언제든 편하게 연락 주세요.</p>
+    <div class="menu-contact"><b>오빗랩</b>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)<div class="contact-tf"><span>T 010-4894-4905</span><span>F 02.6455.5185</span></div><div style="margin-top:14px">E 6gsmake@gmail.com</div></div>
+  </div>
+</div></div></div>
+
+<script>
+(function(){
+var $=function(s,r){return (r||document).querySelector(s)},
+    $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+
+/* 등장 */
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -8% 0px'});
+$$('[data-rv]').forEach(function(el){io.observe(el)});
+
+/* 배경 원 — 스크롤에 따라 아주 천천히 움직인다 */
+var c1=$('#bg-line .circ-1'),c2=$('#bg-line .circ-2');
+if(c1){var raf=0;addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;
+  var y=scrollY*.02;c1.style.transform='translate3d(0,'+(-y)+'px,0)';c2.style.transform='translate3d(0,'+(y*.6)+'px,0)'})},{passive:true})}
+
+/* 어두운 구간에서 고정 요소 반전 */
+var darks=$$('[data-dark]'),fixed=['#ci-logo','#lets-talk','#full-menu','#scroll-hint'].map(function(s){return $(s)}).filter(Boolean);
+function tone(){var y=innerHeight*.06,on=darks.some(function(d){var r=d.getBoundingClientRect();return r.top<=y&&r.bottom>y});
+  fixed.forEach(function(el){el.classList.toggle('on-dark',on)})}
+if(darks.length){addEventListener('scroll',tone,{passive:true});addEventListener('resize',tone);tone()}
+
+/* 스크롤 힌트는 조금만 내려도 감춘다 */
+var hint=$('#scroll-hint');
+if(hint)addEventListener('scroll',function(){hint.classList.toggle('is-hidden',scrollY>innerHeight*.6)},{passive:true});
+
+/* 전체 메뉴 */
+var ov=$('#menu-overlay');
+if(ov){var open=function(){ov.classList.add('open');document.body.style.overflow='hidden'},
+        close=function(){ov.classList.remove('open');document.body.style.overflow=''};
+  $('#full-menu').addEventListener('click',open);
+  $('#menu-close').addEventListener('click',close);
+  addEventListener('keydown',function(e){if(e.key==='Escape')close()})}
+})();
+
+</script>
+</body>
+</html>

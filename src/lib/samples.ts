@@ -257,6 +257,23 @@ export const SAMPLES: Sample[] = [
     designCode: "RESB-1008",
   },
   {
+    slug: "agency-g-template",
+    industry: "디지털 에이전시 홈페이지",
+    title: "디지털 에이전시 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 에이전시 · 디지털 프로덕트 · UI/UX",
+    purpose:
+      "세리프 대제목과 번지는 그라데이션으로 시작해, 화면이 고정된 채 문장이 바뀌는 선언 구간, 작은 카드가 전체로 펼쳐지며 3단계로 넘어가는 인사이트 장면, 제목이 줄어들며 옆으로 붙는 서비스 카드 4장, 파트너 로고 25칸, 왼쪽 정보와 오른쪽 전면 사진이 함께 바뀌는 프로젝트 쇼케이스, 우주 지평선 CTA, 거대한 워드마크 푸터까지 8개 장면을 스크롤에 맞춰 담은 메인에 회사소개·프로젝트 목록·문의·정책과 프로젝트 상세 38쪽을 더한 에이전시 홈페이지입니다.",
+    features: ["스크롤에 고정되는 장면 8개 · 카드가 펼쳐지는 인사이트 구간", "제목이 줄어들며 붙는 서비스 카드 4장 · 파트너 로고 25칸", "분류·상태로 거르는 프로젝트 목록 38건과 상세 38쪽", "업무 범위·성격·예산·기간을 고르는 문의 폼"],
+    idealFor: "디지털 프로덕트 에이전시, UI/UX 스튜디오, SI 협력사, 브랜딩 스튜디오",
+    image: "/thumbs/agency-g.jpg",
+    liveUrl: "/templates/agency-g/",
+    industryKey: "agency",
+    premiumLabel: "에이전시",
+    designCode: "AGEP-1001",
+    premium: true,
+  },
+  {
     slug: "agency-a-template",
     industry: "디자인 에이전시 · 브랜딩 스튜디오 홈페이지",
     title: "디자인 에이전시 · 브랜딩 스튜디오 홈페이지 (랜딩형 템플릿)",
