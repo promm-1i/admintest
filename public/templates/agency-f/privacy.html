@@ -82,7 +82,11 @@ lines.forEach(function(l,i){gsap.to(l,{opacity:1,scrollTrigger:{trigger:wrap,
 /* VALUE POINTS */
 var vs=document.querySelector('.pz-val'), vb=document.querySelector('.pz-val-body'), vi=document.querySelectorAll('.pz-val-it');
 if(!vs||!vb)return;
-var vh=vb.scrollHeight; vs.style.height=(vh+innerHeight)+'px';
+/* 원본과 같게: 이 높이를 그림이 아직 자리를 차지하지 않은 상태에서 잰다 */
+var saved=[];
+vi.forEach(function(it){var im=it.querySelector('img'); if(!im)return; saved.push(im); im.style.cssText='display:inline;height:0'});
+var vh=vb.scrollHeight;
+saved.forEach(function(im){im.style.cssText=''}); vs.style.height=(vh+innerHeight)+'px';
 var done=[];
 function count(el,to){var s=null;function step(t){if(!s)s=t;var p=Math.min((t-s)/1000,1);
   el.textContent=Math.floor(p*to);if(p<1)requestAnimationFrame(step);else el.textContent=to}requestAnimationFrame(step)}
