@@ -52,9 +52,10 @@ setTimeout(function(){document.querySelectorAll('.pz-hero-txt .ln').forEach(func
   setTimeout(function(){el.classList.add('up')},i*140)})},300);
 
 /* 대괄호 제목 */
-var tio=new IntersectionObserver(function(es){es.forEach(function(e){
-  if(e.isIntersecting){e.target.classList.add('on');tio.unobserve(e.target)}})},{threshold:0,rootMargin:'0px 0px -47% 0px'});
-document.querySelectorAll('.pz-tt').forEach(function(el){tio.observe(el)});
+var tts=[].slice.call(document.querySelectorAll('.pz-tt'));
+function ttCheck(){tts=tts.filter(function(el){
+  if(el.getBoundingClientRect().top<innerHeight*0.53){el.classList.add('on');return false} return true})}
+addEventListener('scroll',ttCheck,{passive:true}); addEventListener('load',ttCheck); ttCheck();
 
 /* 위로 */
 var top=document.querySelector('.pz-top');
