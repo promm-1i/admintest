@@ -758,32 +758,33 @@ function ContactBand() {
  *   grid 580px 580px 580px · gap 40px 30px
  *   .img01 은 두 칸(1190) · .img02 는 한 칸(580) · 둘 다 radius 30
  * 사진은 public/cases 의 실제 캡처에서 쪽 내용에 맞는 것으로 직접 골랐다.
+ * 22장 모두 서로 다른 화면이다. 반응형 쪽만 같은 사이트의 PC/모바일을
+ * 일부러 짝지었다 — 그게 그 쪽이 말하는 내용이라서다.
  */
 const PAGE_PHOTOS: Record<string, { wide: string; side: string; wideAlt: string; sideAlt: string }> = {
   process: { wide: "interior-a/point-process", side: "law-a/point-process",
-    wideAlt: "인테리어 사이트의 진행 단계 화면", sideAlt: "법률사무소 사이트의 상담 절차 화면" },
-  features: { wide: "clinic-a/point-services", side: "estate-a/point-services",
-    wideAlt: "의원 사이트의 진료 안내 화면", sideAlt: "부동산 사이트의 서비스 안내 화면" },
-  maintenance: { wide: "corporate-f/point-news", side: "estate-f/point-news",
-    wideAlt: "기업 사이트의 소식 목록 화면", sideAlt: "부동산 사이트의 공지 목록 화면" },
-  custom: { wide: "corporate-i/point-products", side: "shop-a/point-products",
-    wideAlt: "광학기업 사이트의 제품 목록 화면", sideAlt: "쇼핑몰 사이트의 상품 진열 화면" },
-  "admin-system": { wide: "estate-f/page-index", side: "corporate-g/point-news",
-    wideAlt: "부동산 사이트의 매물 목록 화면", sideAlt: "금속기업 사이트의 공지 등록 화면" },
-  "inquiry-reservation": { wide: "interior-f/point-contact", side: "clinic-a/point-faq",
-    wideAlt: "인테리어 사이트의 상담 문의 화면", sideAlt: "의원 사이트의 자주 묻는 질문 화면" },
-  "search-filter": { wide: "estate-f/page-index", side: "rentcar-g/point-products",
-    wideAlt: "부동산 사이트의 조건 검색 목록", sideAlt: "렌터카 사이트의 차량 목록 화면" },
-  "content-management": { wide: "wedding-a/point-gallery", side: "corporate-f/point-news",
-    wideAlt: "웨딩 사이트의 갤러리 화면", sideAlt: "기업 사이트의 소식 목록 화면" },
-  "database-api": { wide: "estate-f/main", side: "rentcar-g/point-products",
-    wideAlt: "부동산 사이트의 매물 데이터 화면", sideAlt: "렌터카 사이트의 차량 데이터 화면" },
+    wideAlt: "인테리어 사이트의 시공 진행 단계 화면", sideAlt: "법률사무소 사이트의 상담 절차 화면" },
+  features: { wide: "clinic-a/point-services", side: "fitness-a/point-services",
+    wideAlt: "의원 사이트의 진료 항목 화면", sideAlt: "피트니스 사이트의 프로그램 항목 화면" },
+  maintenance: { wide: "corporate-g/point-news", side: "estate-f/page-notice",
+    wideAlt: "금속기업 사이트의 공지 목록 화면", sideAlt: "부동산 사이트의 공지 상세 화면" },
+  custom: { wide: "corporate-j/point-automation", side: "corporate-g/point-solution",
+    wideAlt: "기계기업 사이트의 자동화 소개 화면", sideAlt: "금속기업 사이트의 솔루션 구성 화면" },
+  "admin-system": { wide: "estate-f/page-listings", side: "estate-g/point-membership",
+    wideAlt: "부동산 사이트에 등록된 매물 목록", sideAlt: "회원제 부동산 사이트의 등급·권한 화면" },
+  "inquiry-reservation": { wide: "rentcar-g/point-reserve", side: "interior-f/point-contact",
+    wideAlt: "렌터카 사이트의 예약 접수 화면", sideAlt: "인테리어 사이트의 상담 문의 화면" },
+  "search-filter": { wide: "rentcar-f/point-search", side: "estate-g/point-listings",
+    wideAlt: "렌터카 사이트의 조건 검색 화면", sideAlt: "부동산 사이트의 매물 목록 화면" },
+  "content-management": { wide: "wedding-a/point-gallery", side: "restaurant-g/point-newslist",
+    wideAlt: "웨딩 사이트의 갤러리 화면", sideAlt: "다이닝 사이트의 소식 목록 화면" },
+  "database-api": { wide: "estate-f/point-map", side: "rentcar-g/point-estimate",
+    wideAlt: "부동산 사이트의 지도 연동 화면", sideAlt: "렌터카 사이트의 요금 계산 화면" },
   responsive: { wide: "academy-a/main", side: "academy-a/m-index",
     wideAlt: "학원 사이트의 PC 화면", sideAlt: "같은 사이트의 모바일 화면" },
-  seo: { wide: "corporate-f/page-index", side: "brew-a/page-index",
-    wideAlt: "기업 사이트의 서브페이지", sideAlt: "양조장 사이트의 서브페이지" },
+  seo: { wide: "corporate-l/page-index", side: "brew-a/page-index",
+    wideAlt: "기업 사이트의 서브페이지 구조", sideAlt: "양조장 사이트의 서브페이지 구조" },
 };
-
 function PhotoBand({ page }: { page: string }) {
   const photo = PAGE_PHOTOS[page];
   if (!photo) return null;
