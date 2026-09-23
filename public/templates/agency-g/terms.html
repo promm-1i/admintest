@@ -78,15 +78,27 @@ li{list-style:none}
 #menu-close:after{transform:rotate(-45deg)}
 #menu-overlay.open #menu-logo,#menu-overlay.open #menu-close{opacity:1;transition-delay:.26s}
 .menu-scroll{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.menu-inner{display:flex;gap:clamp(48px,2.5vw,64px);width:clamp(1184px,2.5vw + 1136px,1200px);max-width:calc(100% - 96px);height:clamp(600px,31.25vw,800px);align-items:center}
-.menu-col{width:clamp(424px,.9375vw + 406px,430px)}
-.menu-col-right{flex:1}
-.menu-nav .menu-item{display:block;font-family:'Cormorant Garamond',serif;font-size:clamp(80px,3.125vw + 20px,100px);font-weight:600;line-height:1.18;color:#fff;opacity:.55;transition:opacity .3s}
-.menu-nav .menu-item:hover,.menu-nav .menu-item.is-on{opacity:1}
-.menu-copy{margin-bottom:40px;font-size:clamp(14px,.3125vw + 8px,16px);line-height:1.9;color:rgba(255,255,255,.7)}
-.menu-contact{font-size:clamp(14px,.3125vw + 8px,16px);line-height:2;color:rgba(255,255,255,.7)}
-.menu-contact b{display:block;margin-bottom:6px;color:#fff;font-weight:700}
-.contact-tf{display:flex;gap:clamp(32px,96px - 2.5vw,48px);margin-top:18px}
+.menu-inner{display:flex;justify-content:space-between;align-items:stretch;
+  width:clamp(880px,28.575vw + 635.36px,1184px);max-width:calc(100% - 96px);
+  height:clamp(460px,13.394vw + 342.84px,600px)}
+.menu-col{display:flex;flex-direction:column;justify-content:space-between;min-width:0;
+  width:clamp(424px,475.43px - 2.6786vw,448px)}
+.menu-nav{display:flex;flex-direction:column;gap:16px}
+.menu-nav .menu-item{display:flex;align-items:center;gap:16px;font-family:'Cormorant Garamond',serif;
+  font-size:clamp(64px,45.71px + 1.7857vw,80px);font-weight:600;line-height:1;color:#fff;transition:opacity .25s}
+.menu-nav .menu-item:hover{opacity:.6}
+.menu-nav .menu-item.is-current{color:#a1a1a1}
+.menu-nav .menu-item.is-current .menu-label{text-decoration:line-through .05em}
+.menu-count{font-family:Pretendard,sans-serif;font-size:calc(14px + 4 * var(--v));font-weight:600;color:rgba(255,255,255,.6);align-self:flex-start;margin-top:.5em}
+.menu-copy{font-size:clamp(12px,.4464vw + 7.43px,16px);font-weight:600;line-height:1.5;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.tool-list{display:flex;flex-direction:column;gap:calc(24px + 12 * var(--v))}
+.tool-list li{display:flex;flex-direction:column;gap:6px}
+.tool-list b{font-family:'Cormorant Garamond',serif;font-size:calc(24px + 8 * var(--v));font-weight:700;color:#fff}
+.tool-list span{font-size:clamp(14px,.3125vw + 8px,16px);line-height:1.5;color:rgba(255,255,255,.6)}
+.brief-btn{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:12px 20px;
+  border:1px solid rgba(255,255,255,.5);border-radius:8px;font-size:clamp(14px,.2232vw + 10.79px,16px);font-weight:600;color:#fff;transition:background .25s,color .25s}
+.brief-btn:hover{background:#fff;color:var(--ink)}
+.menu-contact p{font-size:clamp(13px,.1116vw + 11.86px,14px);font-weight:600;line-height:1.6;color:rgba(255,255,255,.6)}
 
 /* 푸터 */
 .footer{position:relative;z-index:2;height:100vh;min-height:760px;background:#fff}
@@ -94,12 +106,13 @@ li{list-style:none}
 .footer-logo svg{width:100%;height:auto}
 .footer-bottom{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(48px,1.7857vw + 29.71px,64px);display:flex;justify-content:space-between;align-items:flex-end;gap:48px}
 .footer-left{display:flex;flex-direction:column;gap:clamp(50px,1.0045vw + 39.71px,59px)}
-.footer-links{display:flex;gap:80px;font-size:clamp(14px,.3125vw + 8px,16px);font-weight:600}
+.footer-links{display:flex;gap:80px;font-size:16px;font-weight:600;line-height:1.5}
 .footer-links a{border-bottom:1px solid transparent;transition:border-color .3s}
 .footer-links a:hover{border-bottom-color:var(--ink)}
 .footer-copy{margin:0;font-size:clamp(12px,.4464vw + 7.43px,16px);font-weight:600;line-height:1.5;text-transform:uppercase;color:var(--ink-2)}
-.footer-contact{text-align:right}
-.footer-contact p{margin:0;font-size:clamp(12px,.1116vw + 10.86px,13.86px);font-weight:600;line-height:1.5;color:var(--ink-2)}
+.footer-biz{margin-top:6px;font-size:clamp(12px,.1116vw + 10.4px,13px);font-weight:600;line-height:1.5;color:var(--ink-2)}
+.footer-contact{width:351px;max-width:100%;text-align:right}
+.footer-contact p{margin:0;font-size:clamp(13px,.1116vw + 12.25px,14px);font-weight:600;line-height:1.5;color:var(--ink-2)}
 .footer-tf{display:flex;gap:18px;justify-content:flex-end}
 
 /* 등장 */
@@ -186,25 +199,30 @@ li{list-style:none}
   <div class="footer-logo"><svg class="footer-wordmark" viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="#3e3f44">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="#3e3f44">lab</text><circle cx="306" cy="62" r="18" fill="url(#wmg)"/><defs><linearGradient id="wmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2FD6C9"/><stop offset="1" stop-color="#5B4BFF"/></linearGradient></defs></svg></div>
   <div class="footer-bottom">
     <div class="footer-left">
-      <nav class="footer-links"><a href="./projects.html">Projects</a><a href="./about.html">About</a><a href="./contact.html">Contact</a></nav>
+      <nav class="footer-links"><a href="./contact.html">Orbo</a><a href="./contact.html">Pickr</a><a href="./contact.html">Weaver</a></nav>
       <p class="footer-copy">Ⓒ 2026 ORBITLAB. ALL RIGHTS RESERVED.</p>
     </div>
     <div class="footer-contact">
       <p>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)</p>
       <p>E 6gsmake@gmail.com</p>
       <div class="footer-tf"><p>T 010-4894-4905</p><p>F 02.6455.5185</p></div>
-      <p>사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 대표 김진수</p>
+      <p class="footer-biz">사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 대표 김진수</p>
     </div>
   </div>
 </footer>
 </div><div id="menu-overlay" aria-hidden="true">
 <div id="menu-panel"></div>
-<a id="menu-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">lab</text><circle cx="306" cy="62" r="18" fill="#2FD6C9"/></svg></a><button id="menu-close" type="button" aria-label="메뉴 닫기"></button>
+<a id="menu-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">lab</text><circle cx="306" cy="62" r="18" fill="#2FD6C9"/></svg></a>
+<button id="menu-close" type="button" aria-label="메뉴 닫기"></button>
 <div class="menu-scroll"><div class="menu-inner">
-  <div class="menu-col menu-col-left"><nav class="menu-nav"><a class="menu-item" href="/templates/agency-g/">Home</a><a class="menu-item" href="/templates/agency-g/about.html">About</a><a class="menu-item" href="/templates/agency-g/projects.html">Projects</a><a class="menu-item" href="/templates/agency-g/contact.html">Contact</a></nav></div>
+  <div class="menu-col menu-col-left">
+    <nav class="menu-nav"><a class="menu-item" href="/templates/agency-g/projects.html"><span class="menu-label">Projects</span><sup class="menu-count">42</sup></a><a class="menu-item" href="/templates/agency-g/about.html"><span class="menu-label">About</span></a><a class="menu-item" href="/templates/agency-g/contact.html"><span class="menu-label">Contact</span></a></nav>
+    <p class="menu-copy">Ⓒ 2026 ORBITLAB. ALL RIGHTS RESERVED.</p>
+  </div>
   <div class="menu-col menu-col-right">
-    <p class="menu-copy">금융과 공공의 까다로운 기준 위에서 화면을 설계하고, 열고 난 뒤에도 같이 굴립니다.<br>궁금한 것이 생기면 언제든 편하게 연락 주세요.</p>
-    <div class="menu-contact"><b>오빗랩</b>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)<div class="contact-tf"><span>T 010-4894-4905</span><span>F 02.6455.5185</span></div><div style="margin-top:14px">E 6gsmake@gmail.com</div></div>
+    <ul class="tool-list"><li><b>Orbo</b><span>상품 데이터를 읽어 콘텐츠로 잇는 커머스 AI</span></li><li><b>Pickr</b><span>맥락을 짚어 하나를 고르는 AI 에이전트</span></li><li><b>Weaver</b><span>기획·디자인·코드를 한 언어로 맞추는 엔진</span></li></ul>
+    <a class="brief-btn" href="/templates/agency-g/contact.html">Company Brief Download <b>↗</b></a>
+    <div class="menu-contact"><p>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)</p><p>E 6gsmake@gmail.com</p><p>T 010-4894-4905 &nbsp; F 02.6455.5185</p></div>
   </div>
 </div></div></div>
 
