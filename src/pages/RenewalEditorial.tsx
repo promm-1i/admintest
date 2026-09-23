@@ -620,7 +620,7 @@ function Header() {
 
 function Footer() {
   const root = useRoot();
-  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{MAIN_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.groups.flatMap((group) => group.items).slice(0, 6).map((item) => <Link key={item.href + item.label} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
+  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{MAIN_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.groups.flatMap((group) => group.items).slice(0, 6).map((item) => <Link key={item.href + item.label} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>대표자 <b>김진수</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -761,28 +761,28 @@ function ContactBand() {
  * 22장 모두 서로 다른 화면이다. 반응형 쪽만 같은 사이트의 PC/모바일을
  * 일부러 짝지었다 — 그게 그 쪽이 말하는 내용이라서다.
  */
-const PAGE_PHOTOS: Record<string, { wide: string; side: string; wideAlt: string; sideAlt: string }> = {
-  process: { wide: "interior-a/point-process", side: "law-a/point-process",
+const PAGE_PHOTOS: Record<string, { file: string; wide: string; side: string; wideAlt: string; sideAlt: string }> = {
+  process: { file: "process", wide: "interior-a/point-process", side: "law-a/point-process",
     wideAlt: "인테리어 사이트의 시공 진행 단계 화면", sideAlt: "법률사무소 사이트의 상담 절차 화면" },
-  features: { wide: "clinic-a/point-services", side: "fitness-a/point-services",
+  features: { file: "features", wide: "clinic-a/point-services", side: "fitness-a/point-services",
     wideAlt: "의원 사이트의 진료 항목 화면", sideAlt: "피트니스 사이트의 프로그램 항목 화면" },
-  maintenance: { wide: "corporate-g/point-news", side: "estate-f/page-notice",
+  maintenance: { file: "maintenance", wide: "corporate-g/point-news", side: "estate-f/page-notice",
     wideAlt: "금속기업 사이트의 공지 목록 화면", sideAlt: "부동산 사이트의 공지 상세 화면" },
-  custom: { wide: "corporate-j/point-automation", side: "corporate-g/point-solution",
+  custom: { file: "custom", wide: "corporate-j/point-automation", side: "corporate-g/point-solution",
     wideAlt: "기계기업 사이트의 자동화 소개 화면", sideAlt: "금속기업 사이트의 솔루션 구성 화면" },
-  "admin-system": { wide: "estate-f/page-listings", side: "estate-g/point-membership",
+  "admin-system": { file: "admin", wide: "estate-f/page-listings", side: "estate-g/point-membership",
     wideAlt: "부동산 사이트에 등록된 매물 목록", sideAlt: "회원제 부동산 사이트의 등급·권한 화면" },
-  "inquiry-reservation": { wide: "rentcar-g/point-reserve", side: "interior-f/point-contact",
+  "inquiry-reservation": { file: "inquiry", wide: "rentcar-g/point-reserve", side: "interior-f/point-contact",
     wideAlt: "렌터카 사이트의 예약 접수 화면", sideAlt: "인테리어 사이트의 상담 문의 화면" },
-  "search-filter": { wide: "rentcar-f/point-search", side: "estate-g/point-listings",
+  "search-filter": { file: "search", wide: "rentcar-f/point-search", side: "estate-g/point-listings",
     wideAlt: "렌터카 사이트의 조건 검색 화면", sideAlt: "부동산 사이트의 매물 목록 화면" },
-  "content-management": { wide: "wedding-a/point-gallery", side: "restaurant-g/point-newslist",
+  "content-management": { file: "content", wide: "wedding-a/point-gallery", side: "restaurant-g/point-newslist",
     wideAlt: "웨딩 사이트의 갤러리 화면", sideAlt: "다이닝 사이트의 소식 목록 화면" },
-  "database-api": { wide: "estate-f/point-map", side: "rentcar-g/point-estimate",
+  "database-api": { file: "database", wide: "estate-f/point-map", side: "rentcar-g/point-estimate",
     wideAlt: "부동산 사이트의 지도 연동 화면", sideAlt: "렌터카 사이트의 요금 계산 화면" },
-  responsive: { wide: "academy-a/main", side: "academy-a/m-index",
+  responsive: { file: "responsive", wide: "academy-a/main", side: "academy-a/m-index",
     wideAlt: "학원 사이트의 PC 화면", sideAlt: "같은 사이트의 모바일 화면" },
-  seo: { wide: "corporate-l/page-index", side: "brew-a/page-index",
+  seo: { file: "seo", wide: "corporate-l/page-index", side: "brew-a/page-index",
     wideAlt: "기업 사이트의 서브페이지 구조", sideAlt: "양조장 사이트의 서브페이지 구조" },
 };
 /**
@@ -791,8 +791,8 @@ const PAGE_PHOTOS: Record<string, { wide: string; side: string; wideAlt: string;
  * 그 쪽만 새 사진으로 바뀐다. 한 장씩 넣어도 된다.
  * 규격은 Desktop\개발\리뉴얼_서비스사진22장_요청.md 에 적어 뒀다.
  */
-function BandImage({ page, slot, fallback, alt }: { page: string; slot: "wide" | "side"; fallback: string; alt: string }) {
-  const [src, setSrc] = useState(`/renewal-editorial/photos/${page}-${slot}.webp`);
+function BandImage({ file, slot, fallback, alt }: { file: string; slot: "wide" | "side"; fallback: string; alt: string }) {
+  const [src, setSrc] = useState(`/renewal-editorial/photos/${file}-${slot}.webp`);
   return <img src={src} alt={alt} loading="lazy"
     onError={() => { if (!src.startsWith("/cases/")) setSrc(`/cases/${fallback}.webp`); }} />;
 }
@@ -801,8 +801,8 @@ function PhotoBand({ page }: { page: string }) {
   const photo = PAGE_PHOTOS[page];
   if (!photo) return null;
   return <div className="re-photoband">
-    <figure className="re-photoband__wide"><BandImage page={page} slot="wide" fallback={photo.wide} alt={photo.wideAlt} /></figure>
-    <figure className="re-photoband__side"><BandImage page={page} slot="side" fallback={photo.side} alt={photo.sideAlt} /></figure>
+    <figure className="re-photoband__wide"><BandImage file={photo.file} slot="wide" fallback={photo.wide} alt={photo.wideAlt} /></figure>
+    <figure className="re-photoband__side"><BandImage file={photo.file} slot="side" fallback={photo.side} alt={photo.sideAlt} /></figure>
   </div>;
 }
 
@@ -1036,6 +1036,7 @@ function AboutPage() {
     {ABOUT_VALUES.map((value) => <Section key={value.num} split title={`${value.num} ${value.title}`}><div className="re-step-body"><p className="re-step-text">{value.desc}</p><ul className="re-step-list">{value.points.map((point) => <li key={point}><Check />{point}</li>)}</ul></div></Section>)}
     <Section split title="사업자 정보"><dl className="re-detail__spec">
       <div><dt>상호명</dt><dd>민트클</dd></div>
+      <div><dt>대표자</dt><dd>김진수</dd></div>
       <div><dt>사업자등록번호</dt><dd>266-07-03678</dd></div>
       <div><dt>통신판매업신고번호</dt><dd>제2026-서울강남-00480호</dd></div>
       <div><dt>전화</dt><dd><a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></dd></div>
@@ -1251,6 +1252,7 @@ const PRIVACY_SECTIONS: { title: string; body: string[]; list?: string[] }[] = [
     title: "08 책임자와 문의처",
     body: [
       "개인정보와 관련한 문의, 불만, 피해 구제는 아래로 연락해 주세요. 확인 후 회신드립니다.",
+      `개인정보 보호책임자 김진수 (대표)`,
       `상호명 민트클 · 사업자등록번호 266-07-03678`,
       `전화 ${PHONE_NUMBER} · 이메일 ${CONTACT_EMAIL}`,
       "접수는 24시간 가능하며 영업일 1일 이내에 회신드립니다.",
@@ -1271,6 +1273,7 @@ function PrivacyPage() {
     </Section>)}
     <Section split title="사업자 정보"><dl className="re-detail__spec">
       <div><dt>상호명</dt><dd>민트클</dd></div>
+      <div><dt>대표자</dt><dd>김진수</dd></div>
       <div><dt>사업자등록번호</dt><dd>266-07-03678</dd></div>
       <div><dt>통신판매업신고번호</dt><dd>제2026-서울강남-00480호</dd></div>
       <div><dt>전화</dt><dd><a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></dd></div>
