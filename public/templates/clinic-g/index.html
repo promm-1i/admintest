@@ -25,7 +25,8 @@
 .mv__slide img{width:100%;height:100%;object-fit:cover}
 .mv__slide::after{content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,.05) 26%,rgba(0,0,0,.05) 46%,rgba(0,0,0,.62) 100%)}
-.mv__cap{position:absolute;z-index:3;left:0;right:0;bottom:158px;color:#fff}
+/* 실측: .tit_box 는 bottom 176 · 타이틀 48/700 · 설명 22/400, 사이 13px */
+.mv__cap{position:absolute;z-index:3;left:0;right:0;bottom:176px;color:#fff}
 .mv__cap-in{margin:0 auto;width:var(--in);max-width:100%;padding:0 var(--inPd)}
 .mv__t{font-size:var(--h1);font-weight:700;line-height:1.3;letter-spacing:-.03em}
 .mv__reel{display:inline-block;overflow:hidden;height:1.21em;vertical-align:bottom}
@@ -35,7 +36,7 @@
   0%,11.111%{transform:translateY(0)} 20%,31.111%{transform:translateY(-1.21em)}
   40%,51.111%{transform:translateY(-2.42em)} 60%,71.111%{transform:translateY(-3.63em)}
   80%,91.111%{transform:translateY(-4.84em)} 100%{transform:translateY(-6.05em)}}
-.mv__d{margin-top:1.8rem;font-size:var(--p2);color:rgba(255,255,255,.88)}
+.mv__d{margin-top:13px;font-size:var(--h8);color:rgba(255,255,255,.88)}
 .mv__nav{position:absolute;z-index:3;left:0;right:0;bottom:118px}
 .mv__nav-in{display:flex;align-items:center;gap:1.2rem;margin:0 auto;width:var(--in);max-width:100%;padding:0 var(--inPd)}
 .mv__dot{position:relative;width:8px;height:8px;background:rgba(255,255,255,.45);border-radius:50%;transition:all .3s}
@@ -58,6 +59,31 @@
   line-height:1;letter-spacing:.005em;color:var(--point01)}
 .since__num{opacity:0}
 .since--done .since__num{opacity:1;transition:opacity .21s linear}
+
+/* 전후 비교 손잡이 — 원본과 같이 두 장을 겹쳐 놓고 가름선을 드래그한다 */
+(function(){
+  [].forEach.call(document.querySelectorAll('[data-ba]'), function(box){
+    var h=box.querySelector('.ba__handle'); if(!h) return;
+    function set(x){
+      var r=box.getBoundingClientRect();
+      var p=Math.max(0,Math.min(100,(x-r.left)/r.width*100));
+      box.style.setProperty('--p', p.toFixed(2)+'%');
+    }
+    function down(e){
+      e.preventDefault();
+      var move=function(ev){ set((ev.touches?ev.touches[0]:ev).clientX) };
+      var up=function(){ removeEventListener('pointermove',move); removeEventListener('pointerup',up) };
+      addEventListener('pointermove',move); addEventListener('pointerup',up);
+    }
+    h.addEventListener('pointerdown',down);
+    box.addEventListener('pointerdown',function(e){ if(e.target!==h) set(e.clientX) });
+    h.addEventListener('keydown',function(e){
+      var cur=parseFloat(getComputedStyle(box).getPropertyValue('--p'))||70;
+      if(e.key==='ArrowLeft'){ box.style.setProperty('--p',Math.max(0,cur-4)+'%'); e.preventDefault(); }
+      if(e.key==='ArrowRight'){ box.style.setProperty('--p',Math.min(100,cur+4)+'%'); e.preventDefault(); }
+    });
+  });
+})();
 
 /* SINCE 관문 장면 — 레퍼런스 GSAP 타임라인(timeScale 1.45) 실측값.
    라이브 실측: front 245px→158.4px · num_txt top 450→360 · left 720→307.3
@@ -180,55 +206,72 @@
 /* TV — 유튜브 720 / 쇼츠 456 */
 .tv{padding:20rem 0 0;background:#fff}
 .tv__row{display:flex;gap:24px;margin-top:5rem}
-.tvbox{flex:1;min-height:499px;padding:24px 32px 32px;border:1px solid var(--gray10);border-radius:20px;background:#fff}
-.tvbox--short{flex:0 0 456px}
+/* 실측: 박스 radius 16 · 유튜브 배경 pointBg · 쇼츠 배경 grayBg2 · 제목 28/700 h48 at +24
+   더보기 88x35 radius 6.4 흰 배경 13/600(아이콘 14) · 본문 y+96
+   대표영상 446x379(사진 446x251) · 옆 목록 173 폭, 항목 173x97 · 쇼츠 항목 182x327 */
+.tvbox{flex:1;min-height:499px;padding:24px 32px 32px;border-radius:16px;background:var(--pointBg)}
+.tvbox--short{flex:0 0 456px;background:var(--grayBg2)}
 .tvbox__top{display:flex;align-items:center;justify-content:space-between;height:48px}
-.tvbox__t{font-size:2.8rem;font-weight:700}
-.more{display:inline-flex;align-items:center;gap:.5em;padding:0 1.6rem;height:35px;
-  font-size:var(--p7);font-weight:600;color:var(--gray70);border:1px solid var(--gray20);border-radius:100px}
-.more:hover{color:var(--point01);border-color:var(--point01)}
-.more .ar{width:12px;height:12px}
-.tv__main{display:flex;gap:16px;margin-top:2.4rem}
-.tv__feat{flex:1;min-width:0}
+.tvbox__t{font-size:var(--h5);font-weight:700;line-height:1.7}
+.more{display:inline-flex;align-items:center;justify-content:center;gap:.6em;width:88px;height:35px;
+  font-size:var(--p6);font-weight:600;color:var(--gray70);background:#fff;border-radius:6.4px}
+.more:hover{color:var(--point01)}
+.more .ar{width:14px;height:14px}
+.tv__main{display:flex;gap:37px;margin-top:24px}
+.tv__feat{flex:0 0 446px;min-width:0}
 .tv__feat img{width:100%;aspect-ratio:446/251;object-fit:cover;border-radius:12px}
 .tv__feat p{margin-top:1.4rem;font-size:var(--p4);font-weight:600;line-height:1.5}
-.tv__side{display:flex;flex-direction:column;gap:12px;width:194px;flex-shrink:0}
+.tv__side{display:flex;flex-direction:column;gap:12px;width:173px;flex-shrink:0}
 .tv__side a{display:block}
-.tv__side img{width:100%;aspect-ratio:194/110;object-fit:cover;border-radius:10px}
-.tv__shorts{display:flex;gap:12px;margin-top:2.4rem}
-.tv__shorts img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:12px}
+.tv__side img{width:100%;aspect-ratio:173/97;object-fit:cover;border-radius:10px}
+.tv__shorts{display:flex;gap:12px;margin-top:24px}
+.tv__shorts a{flex:0 0 182px}
+.tv__shorts img{width:100%;aspect-ratio:182/327;object-fit:cover;border-radius:12px}
 
 /* 전후 — 풀폭 슬라이더, 카드 584×383 */
 .ba{padding:20rem 0 0;background:var(--grayBg2)}
 .ba__head{margin:0 auto;width:var(--in);max-width:100%;padding:0 var(--inPd);text-align:center}
-.ba__track{display:flex;gap:24px;margin-top:9rem;padding:0 var(--inPd) 16rem;overflow-x:auto;
+/* 실측: 카드 584x383 padding 20 radius 16 흰 배경 · 라벨 줄 544x27(14/700) ·
+   비교 영역 544x305 radius 12 · 손잡이 36 원 · 기본 가름 70% · 카드 사이 간격 0 */
+.ba__track{display:flex;margin-top:16px;padding:24px 20px 117px;overflow-x:auto;
   scroll-snap-type:x mandatory;scrollbar-width:none}
 .ba__track::-webkit-scrollbar{display:none}
 .ba__item{flex:0 0 584px;scroll-snap-align:center}
-.ba__pair{display:flex;gap:8px}
-.ba__fig{position:relative;flex:1;border-radius:14px;overflow:hidden}
-.ba__fig img{width:100%;aspect-ratio:288/330;object-fit:cover}
-.ba__fig span{position:absolute;left:12px;top:12px;padding:0 1.2rem;height:2.8rem;display:inline-flex;
-  align-items:center;font-size:var(--p7);font-weight:600;color:#fff;background:rgba(0,0,0,.55);border-radius:100px}
-.ba__cap{margin-top:1.4rem;font-size:var(--p5);color:var(--gray60)}
+.ba__card{padding:20px;border-radius:16px;background:#fff}
+.ba__labels{display:flex;align-items:center;justify-content:space-between;height:27px;
+  font-size:var(--p4);font-weight:700}
+.ba__labels .b{color:var(--gray60)}
+.ba__labels .a{color:var(--point01)}
+.ba__cmp{position:relative;margin-top:12px;height:305px;border-radius:12px;overflow:hidden;
+  touch-action:pan-y;--p:70%}
+.ba__cmp img{position:absolute;left:0;top:0;width:544px;height:305px;object-fit:cover;max-width:none}
+.ba__before{position:absolute;left:0;top:0;width:var(--p);height:100%;overflow:hidden}
+.ba__before::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.2)}
+.ba__handle{position:absolute;left:var(--p);top:50%;width:36px;height:36px;margin:-18px 0 0 -18px;
+  border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.18);cursor:ew-resize}
+.ba__handle::before,.ba__handle::after{content:'';position:absolute;top:50%;width:0;height:0;
+  border:5px solid transparent;margin-top:-5px}
+.ba__handle::before{left:6px;border-right-color:var(--gray70)}
+.ba__handle::after{right:6px;border-left-color:var(--gray70)}
 
 /* 후기 — 패널 1240 안, 좌 720 / 우 456 */
 .rev{padding:20rem 0 0;background:#fff}
-.rev__panel{margin:0 auto;width:var(--in2);max-width:100%;padding:5rem 20px;
-  background:var(--pointBg);border-radius:28px}
-.rev__row{display:flex;gap:24px;margin-top:5rem}
-.rev__box{padding:2.4rem 3.2rem 3.2rem;background:#fff;border-radius:20px}
-.rev__box--l{flex:1;min-width:0}
-.rev__box--r{flex:0 0 456px}
-.rev__t{display:flex;align-items:center;justify-content:space-between;height:44px;font-size:var(--p1);font-weight:700}
-.rev__cards{display:flex;gap:16px;margin-top:2.4rem;overflow-x:auto;scrollbar-width:none}
+/* 실측: 패널 배경 없음 · 좌 720x596 pointBg / 우 456x596 grayBg2, radius 16
+   제목 26/700 h44 at +40 · 셀카 카드 280x386 radius16 흰배경 · 자필 카드 392x152 radius12 */
+.rev__row{display:flex;gap:24px;margin-top:40px}
+.rev__box{height:596px;padding:40px 32px;border-radius:16px;overflow:hidden}
+.rev__box--l{flex:0 0 720px;min-width:0;background:var(--pointBg)}
+.rev__box--r{position:relative;flex:0 0 456px;background:var(--grayBg2)}
+.rev__t{display:flex;align-items:center;justify-content:space-between;height:44px;
+  font-size:3.25rem;font-weight:700}
+.rev__cards{display:flex;gap:19px;margin-top:34px;overflow-x:auto;scrollbar-width:none}
 .rev__cards::-webkit-scrollbar{display:none}
-.rev__card{flex:0 0 216px}
-.rev__card img{width:100%;aspect-ratio:216/240;object-fit:cover;border-radius:12px}
+.rev__card{flex:0 0 280px;padding:16px;background:#fff;border-radius:16px}
+.rev__card img{width:100%;aspect-ratio:248/248;object-fit:cover;border-radius:12px}
 .rev__meta{margin-top:1.2rem;font-size:var(--p7);color:var(--gray50)}
 .rev__card p{margin-top:.6rem;font-size:var(--p5);line-height:1.6}
-.rev__list{margin-top:1.6rem}
-.rev__li{padding:1.8rem 0;border-bottom:1px solid var(--gray10)}
+.rev__list{display:flex;flex-direction:column;gap:14px;margin-top:24px;max-height:400px;overflow:hidden}
+.rev__li{min-height:152px;padding:14px 20px;background:#fff;border-radius:12px}
 .rev__li-top{display:flex;align-items:center;gap:.8rem;font-size:var(--p7);color:var(--gray50)}
 .rev__best{padding:0 .8rem;height:2.2rem;display:inline-flex;align-items:center;font-size:var(--p8);
   font-weight:700;color:#fff;background:var(--point01);border-radius:100px}
@@ -237,14 +280,18 @@
 .rev__tags{display:flex;gap:6px;margin-top:.8rem}
 .rev__tags span{padding:0 .8rem;height:2.4rem;display:inline-flex;align-items:center;
   font-size:var(--p8);color:var(--gray60);background:var(--grayBg2);border-radius:4px}
-.rev__sum{display:flex;align-items:baseline;justify-content:space-between;margin-top:2rem}
+/* 합계 줄은 박스 하단 고정(목록은 그 위에서 잘린다) */
+.rev__sum{position:absolute;left:32px;right:32px;bottom:40px;display:flex;align-items:baseline;justify-content:space-between;padding-top:16px;background:var(--grayBg2)}
 .rev__sum b{font-family:var(--numFont);font-size:3.2rem;font-weight:700;color:var(--point01)}
 
 /* 의료진 — 카드 360×601 */
 .team{padding:20rem 0 0;background:#fff}
 .team__head{display:flex;align-items:flex-end;justify-content:space-between;
   margin:0 auto;width:var(--in2);max-width:100%;padding:0 var(--inPd)}
-.team__ctrl{display:flex;align-items:center;gap:1.2rem}
+/* 실측: 제목 블록 368 폭·라벨 +184 · 우측 컨트롤 y+323 · 버튼 155x45 radius 999 */
+.team__head .stit{padding-top:24px;width:368px}
+.team__ctrl{display:flex;align-items:center;gap:8px;margin-bottom:-26px}
+.team__ctrl .btn{margin-left:32px;width:155px;height:45px;border-radius:999px}
 .team__arw{display:flex;align-items:center;justify-content:center;width:44px;height:44px;
   border:1px solid var(--gray20);border-radius:50%}
 .team__arw:hover{color:#fff;background:var(--point01);border-color:var(--point01)}
@@ -282,12 +329,13 @@
 .net__btns .btn{flex:1;height:4.8rem;padding:0 1rem}
 
 /* 커뮤니티 */
-.comm{margin-bottom:20rem;padding:20rem 0;background:#fff}
-.comm__tabs{display:flex;justify-content:center;gap:0;margin-top:5.4rem}
-.comm__tab{width:198px;height:41px;font-size:2.2rem;font-weight:700;color:var(--gray30)}
+.comm{margin-bottom:20rem;padding:20rem 0 0;background:#fff}
+/* 실측: 탭 198x41 22/700 at +180 · 카드 278x278 radius16 · 간격 30 · 카드 줄 y+302 */
+.comm__tabs{display:flex;justify-content:center;gap:0;margin-top:81px}
+.comm__tab{width:198px;height:41px;font-size:2.75rem;font-weight:700;color:var(--gray30)}
 .comm__tab.on{color:var(--gray90)}
-.comm__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:6rem}
-.comm__card img{width:100%;aspect-ratio:278/188;object-fit:cover;border-radius:14px;background:var(--grayBg2)}
+.comm__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:81px}
+.comm__card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:16px;background:var(--grayBg2)}
 .comm__card p{margin-top:1.6rem;font-size:var(--p4);font-weight:600;line-height:1.5;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .comm__card span{display:block;margin-top:.8rem;font-size:var(--p7);color:var(--gray50)}
@@ -309,6 +357,9 @@
   .mv__cap{bottom:200px}
   .mv__nav{bottom:160px}
   .mv__form-in{padding:0 16px}
+  /* 모바일에서는 의료진 컨트롤 고정폭을 푼다(390 에서 넘침) */
+  .team__ctrl{gap:8px;margin-bottom:0;flex-wrap:wrap;justify-content:flex-end}
+  .team__ctrl .btn{margin-left:12px;width:auto;min-width:0;padding:0 16px}
   .since{height:auto;padding:9rem 0}
   .since__in{flex-direction:column;gap:3rem}
   .since__num{font-size:9rem}
@@ -528,26 +579,40 @@
 <section class="ba">
 <div class="ba__head"><div class="stit stit--center"><p class="stit__label">달라진 모습, 분명해진 숨</p>
 <h2 class="stit__h">BEFORE &amp; AFTER</h2></div></div>
-<div class="ba__track"><div class="ba__item"><div class="ba__pair">
-<figure class="ba__fig"><img src="./assets/ba-1-before.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
-<figure class="ba__fig"><img src="./assets/ba-1-after.jpg" alt="수술 후 3개월" loading="lazy"><span>수술 후 3개월</span></figure>
-</div><p class="ba__cap">비중격만곡증 + 기능 코성형 · 20대 남성</p></div><div class="ba__item"><div class="ba__pair">
-<figure class="ba__fig"><img src="./assets/ba-2-before.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
-<figure class="ba__fig"><img src="./assets/ba-2-after.jpg" alt="수술 후 3개월" loading="lazy"><span>수술 후 3개월</span></figure>
-</div><p class="ba__cap">휜코 교정 · 30대 여성</p></div><div class="ba__item"><div class="ba__pair">
-<figure class="ba__fig"><img src="./assets/ba-3-before.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
-<figure class="ba__fig"><img src="./assets/ba-3-after.jpg" alt="수술 후 3개월" loading="lazy"><span>수술 후 3개월</span></figure>
-</div><p class="ba__cap">매부리코 + 비밸브재건 · 20대 여성</p></div><div class="ba__item"><div class="ba__pair">
-<figure class="ba__fig"><img src="./assets/ba-4-before.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
-<figure class="ba__fig"><img src="./assets/ba-4-after.jpg" alt="수술 후 3개월" loading="lazy"><span>수술 후 3개월</span></figure>
-</div><p class="ba__cap">코 재수술 · 30대 남성</p></div><div class="ba__item"><div class="ba__pair">
-<figure class="ba__fig"><img src="./assets/ba-5-before.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
-<figure class="ba__fig"><img src="./assets/ba-5-after.jpg" alt="수술 후 3개월" loading="lazy"><span>수술 후 3개월</span></figure>
-</div><p class="ba__cap">무보형 코성형 · 20대 여성</p></div></div>
+<div class="ba__track"><div class="ba__item"><div class="ba__card">
+<div class="ba__labels"><span class="b">Before</span><span class="a">수술 후 3개월</span></div>
+<div class="ba__cmp" data-ba>
+<img src="./assets/ba-1-after.jpg" alt="수술 후 3개월" loading="lazy">
+<div class="ba__before"><img src="./assets/ba-1-before.jpg" alt="수술 전" loading="lazy"></div>
+<button class="ba__handle" type="button" aria-label="전후 사진 비교 손잡이"></button>
+</div></div></div><div class="ba__item"><div class="ba__card">
+<div class="ba__labels"><span class="b">Before</span><span class="a">수술 후 3개월</span></div>
+<div class="ba__cmp" data-ba>
+<img src="./assets/ba-2-after.jpg" alt="수술 후 3개월" loading="lazy">
+<div class="ba__before"><img src="./assets/ba-2-before.jpg" alt="수술 전" loading="lazy"></div>
+<button class="ba__handle" type="button" aria-label="전후 사진 비교 손잡이"></button>
+</div></div></div><div class="ba__item"><div class="ba__card">
+<div class="ba__labels"><span class="b">Before</span><span class="a">수술 후 3개월</span></div>
+<div class="ba__cmp" data-ba>
+<img src="./assets/ba-3-after.jpg" alt="수술 후 3개월" loading="lazy">
+<div class="ba__before"><img src="./assets/ba-3-before.jpg" alt="수술 전" loading="lazy"></div>
+<button class="ba__handle" type="button" aria-label="전후 사진 비교 손잡이"></button>
+</div></div></div><div class="ba__item"><div class="ba__card">
+<div class="ba__labels"><span class="b">Before</span><span class="a">수술 후 3개월</span></div>
+<div class="ba__cmp" data-ba>
+<img src="./assets/ba-4-after.jpg" alt="수술 후 3개월" loading="lazy">
+<div class="ba__before"><img src="./assets/ba-4-before.jpg" alt="수술 전" loading="lazy"></div>
+<button class="ba__handle" type="button" aria-label="전후 사진 비교 손잡이"></button>
+</div></div></div><div class="ba__item"><div class="ba__card">
+<div class="ba__labels"><span class="b">Before</span><span class="a">수술 후 3개월</span></div>
+<div class="ba__cmp" data-ba>
+<img src="./assets/ba-5-after.jpg" alt="수술 후 3개월" loading="lazy">
+<div class="ba__before"><img src="./assets/ba-5-before.jpg" alt="수술 전" loading="lazy"></div>
+<button class="ba__handle" type="button" aria-label="전후 사진 비교 손잡이"></button>
+</div></div></div></div>
 </section>
 
 <section class="rev">
-<div class="rev__panel">
 <div class="in2">
 <div class="stit"><p class="stit__label">수술후기</p>
 <h2 class="stit__h">숨길을 경험한<br>환자분들의 진솔한 후기</h2></div>
@@ -574,7 +639,6 @@
 </p>
 <p>저의 새 코, 새 인생의 출발점이 되어주셔서 감사드리고 앞으로도 잘 부탁드립니다.</p><div class="rev__tags"><span>기능 코성형</span></div></li></ul>
 <p class="rev__sum">누적 자필 후기<b>4,756<span style="font-size:.5em">건</span></b></p>
-</div>
 </div>
 </div>
 </div>
