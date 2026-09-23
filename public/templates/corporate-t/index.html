@@ -183,11 +183,23 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 @keyframes wmroll{to{transform:translateX(-50%)}}
 @media(max-width:992px){.wordmark span{font-size:6rem;line-height:9rem}}
 
-/* 등장 */
-.rv{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.on{opacity:1;transform:none}
-.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* 등장 — 원본 실측: 머리말 자식 y30, 목록·카드 y24, 0.55s, 140ms 차례로.
+   원본은 화면 밖으로 나가면 처음 상태로 되돌아가 다시 재생된다. 서브 페이지에는 등장 효과가 없다. */
+.ent>*{opacity:0;transform:translateY(30px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.ent.on>*{opacity:1;transform:none}
+.ent.on>*:nth-child(2){transition-delay:.14s}
+.ent.on>*:nth-child(3){transition-delay:.28s}
+.ent.on>*:nth-child(4){transition-delay:.42s}
+.entl{opacity:0;transition:opacity .55s cubic-bezier(0,0,.35,1)}
+.entl.on{opacity:1}
+.entl>*{opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.entl.on>*{opacity:1;transform:none}
+.entl.on>*:nth-child(2){transition-delay:.14s}
+.entl.on>*:nth-child(3){transition-delay:.28s}
+.entl.on>*:nth-child(4){transition-delay:.42s}
+.entl.on>*:nth-child(5){transition-delay:.56s}
+@media(prefers-reduced-motion:reduce){
+ .ent>*,.entl,.entl>*{opacity:1!important;transform:none!important;transition:none!important}}
 
 /* 푸터 — 원본 krail-N2: padding 40, 배경 검정 */
 .ft{padding:4rem 0;background:#000;color:#fff}
@@ -218,12 +230,13 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 /* ===== N3 히어로 ===== */
 .hero{position:relative;overflow:hidden;min-height:100dvh}
 .hero-media{position:absolute;inset:0}
-.hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.18);transition:transform 2s cubic-bezier(.16,1,.3,1)}
+/* 원본 실측: 영상이 scale(1.18) 로 2.55초 머물다 1.5초에 걸쳐 1.0 으로 */
+.hero-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.18);transition:transform 1.5s cubic-bezier(.65,0,.35,1) 2.55s}
 .hero.ready .hero-media img{transform:none}
 .hero-media::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.1) 30%,rgba(0,0,0,.1) 70%,rgba(0,0,0,1) 100%)}
 .hero-in{position:relative;display:flex;align-items:flex-end;height:100dvh}
-.hero-txt{position:relative;z-index:1;width:100%;padding-bottom:16rem;opacity:0;transform:translateY(26px);transition:opacity 1s .35s,transform 1s .35s cubic-bezier(.16,1,.3,1)}
-.hero.ready .hero-txt{opacity:1;transform:none}
+/* 원본은 히어로 글에 등장 효과가 없다 (내내 opacity 1) */
+.hero-txt{position:relative;z-index:1;width:100%;padding-bottom:16rem}
 .hero-txt h2{color:#fff;font-size:7rem;line-height:8.5rem;font-weight:700}
 .hero-txt p{margin:2.4rem 0 4rem;color:#fff;font-size:var(--fs-h5);line-height:var(--lh-h5);font-weight:400}
 .hero-down{position:absolute;right:9.6rem;bottom:11.5rem;z-index:2;display:flex;align-items:center;justify-content:center;width:4rem;height:4rem;border-radius:50%;background:var(--primary);color:#fff}
@@ -235,21 +248,23 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
  .hero-media img{transform:none}}
 /* 인트로 가림막 — 원본 loading */
 .intro{position:fixed;inset:0;z-index:150;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.intro i{position:absolute;background:#fff;transition:transform .9s cubic-bezier(.76,0,.24,1) .45s}
-.intro .t,.intro .b{left:0;width:100%;height:calc(50% - 4.6rem)}
+/* 원본 실측: 패널이 1.05초 뒤 1.13초 동안 바깥으로 밀려난다 */
+.intro i{position:absolute;background:#fff;transition:transform 1.13s cubic-bezier(.25,.46,.45,.94) 1.05s}
+.intro .t,.intro .b{left:0;width:100%;height:calc(50% - 5.95rem)}
 .intro .t{top:0}.intro .b{bottom:0}
-.intro .l,.intro .r{top:0;height:100%;width:calc(50% - 11.2rem)}
+.intro .l,.intro .r{top:0;height:100%;width:calc(50% - 16.8rem)}
 .intro .l{left:0}.intro .r{right:0}
-.intro-box{position:relative;display:flex;align-items:center;justify-content:center;width:25.6rem;height:9.2rem;background:var(--primary);color:#fff;font-size:1.8rem;font-weight:700;letter-spacing:.02em;transition:opacity .4s}
+.intro-box{position:relative;display:flex;align-items:center;justify-content:center;width:33.6rem;height:11.9rem;background:var(--primary);color:#fff;font-size:1.8rem;font-weight:700;letter-spacing:.02em;transition:opacity .4s}
 .intro.out .t{transform:translateY(-100%)}.intro.out .b{transform:translateY(100%)}
 .intro.out .l{transform:translateX(-100%)}.intro.out .r{transform:translateX(100%)}
-.intro.out .intro-box{opacity:0;transition:opacity .35s}
+.intro.out .intro-box{opacity:0;transition:opacity .35s 2.55s}
 @media(prefers-reduced-motion:reduce){.intro{display:none}}
 
 /* ===== N4 국가 마퀴 ===== */
 .loop{position:relative;z-index:1;overflow:hidden;margin-top:-4.8rem;background:var(--primary)}
 .loop-in{display:flex;align-items:center;height:4.8rem;overflow:hidden}
 .loop-track{display:flex;white-space:nowrap;animation:looproll 38s linear infinite}
+/* 길이는 스크립트가 폭 ÷ 99.5px/s 로 다시 정한다 (원본 실측 속도) */
 .loop-track span{padding-right:10rem;color:#fff;font-size:var(--fs-p1);line-height:var(--lh-p1);font-weight:500}
 .loop-track strong{font-weight:700}
 @keyframes looproll{to{transform:translateX(-50%)}}
@@ -463,9 +478,9 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <div class="scene-stick">
 <div class="scene-bg"><img src="assets/impact.jpg" alt="" loading="lazy"></div>
 <div class="scene-in">
-<div class="scene-head"><span class="lead">Impact</span><h2>숫자로 보는 K-모빌리티 교육</h2>
+<div class="scene-head ent"><span class="lead">Impact</span><h2>숫자로 보는 K-모빌리티 교육</h2>
 <p>한국형 모빌리티 교육 모델은 국경을 넘어 퍼지고 있습니다.</p></div>
-<ul class="cnt-list"><li><span class="cnt-wrap"><span class="cnt" data-to="68">0</span><span class="cnt-unit">건</span></span><p>해외대학 MOU</p></li><li><span class="cnt-wrap"><span class="cnt" data-to="7">0</span><span class="cnt-unit">개국</span></span><p>K-모빌리티 참여국가</p></li><li><span class="cnt-wrap"><span class="cnt" data-to="12">0</span><span class="cnt-unit">개</span></span><p>인증교육과정 개발</p></li><li><span class="cnt-wrap"><span class="cnt" data-to="2.5">0</span><span class="cnt-unit">년</span></span><p>센터 운영</p></li></ul>
+<ul class="cnt-list entl"><li><span class="cnt-wrap"><span class="cnt" data-to="68">0</span><span class="cnt-unit">건</span></span><p>해외대학 MOU</p></li><li><span class="cnt-wrap"><span class="cnt" data-to="7">0</span><span class="cnt-unit">개국</span></span><p>K-모빌리티 참여국가</p></li><li><span class="cnt-wrap"><span class="cnt" data-to="12">0</span><span class="cnt-unit">개</span></span><p>인증교육과정 개발</p></li><li><span class="cnt-wrap"><span class="cnt" data-to="2.5">0</span><span class="cnt-unit">년</span></span><p>센터 운영</p></li></ul>
 </div></div>
 </section>
 
@@ -473,8 +488,8 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <div class="scene-stick">
 <div class="scene-bg"><img src="assets/accred.jpg" alt="" loading="lazy"></div>
 <div class="scene-in">
-<div class="scene-head"><span class="lead">Accreditation</span><h2>모빌리티 교육과정 인증제도</h2></div>
-<div class="acc-cards"><a class="acc-card" href="cert.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h16v2H4zm0 6h16v2H4zm0 6h10v2H4z"/></svg><strong>인증제도 소개</strong><p>비전·목표와 주요 기능을 안내</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a><a class="acc-card" href="process.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 3 7v10l9 5 9-5V7zm0 2.3 6.5 3.6L12 11.5 5.5 7.9zM5 9.7l6 3.3v6.6l-6-3.3zm14 0v6.6l-6 3.3V13z"/></svg><strong>인증절차</strong><p>신청부터 판정까지의 전 과정</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a><a class="acc-card" href="criteria.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m9.6 16.2-4.2-4.2-1.4 1.4 5.6 5.6L21 7.6 19.6 6.2z"/></svg><strong>평가기준</strong><p>교육과정 품질의 평가 지표</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a><a class="acc-card" href="committee.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0 10c4.4 0 8 1.8 8 4v2H4v-2c0-2.2 3.6-4 8-4"/></svg><strong>위원회 구성</strong><p>전문 위원회의 심의·운영</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a><a class="acc-card" href="schedule.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 6H6v12h12z"/></svg><strong>인증일정</strong><p>연간 인증사업 일정 안내</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a></div>
+<div class="scene-head ent"><span class="lead">Accreditation</span><h2>모빌리티 교육과정 인증제도</h2></div>
+<div class="acc-cards entl"><a class="acc-card" href="cert.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 5h16v2H4zm0 6h16v2H4zm0 6h10v2H4z"/></svg><strong>인증제도 소개</strong><p>비전·목표와 주요 기능을 안내</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a><a class="acc-card" href="process.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2 3 7v10l9 5 9-5V7zm0 2.3 6.5 3.6L12 11.5 5.5 7.9zM5 9.7l6 3.3v6.6l-6-3.3zm14 0v6.6l-6 3.3V13z"/></svg><strong>인증절차</strong><p>신청부터 판정까지의 전 과정</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a><a class="acc-card" href="criteria.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="m9.6 16.2-4.2-4.2-1.4 1.4 5.6 5.6L21 7.6 19.6 6.2z"/></svg><strong>평가기준</strong><p>교육과정 품질의 평가 지표</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a><a class="acc-card" href="committee.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8m0 10c4.4 0 8 1.8 8 4v2H4v-2c0-2.2 3.6-4 8-4"/></svg><strong>위원회 구성</strong><p>전문 위원회의 심의·운영</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a><a class="acc-card" href="schedule.html"><span class="bd"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 2h2v2h6V2h2v2h3v18H4V4h3zm11 6H6v12h12z"/></svg><strong>인증일정</strong><p>연간 인증사업 일정 안내</p></span><span class="acc-arw"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.2 4.8 11.8 6.2l4.8 4.8H3.6v2h13l-4.8 4.8 1.4 1.4 7.2-7.2z"/></svg></span></a></div>
 </div></div>
 </section>
 
@@ -485,13 +500,13 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <a class="btn btn-ink" href="archive.html">전체보기<span class="ico-arw"></span></a></div>
 <div class="news-r">
 <div class="news-pv"><img src="assets/news-1.jpg" alt=""></div>
-<ul class="news-list"><li><a href="archive.html" data-img="assets/news-1.jpg"><h3>2026학년도 K-모빌리티 단기연수 과정 수료식</h3><time>2026.09.18</time></a></li><li><a href="archive.html" data-img="assets/news-2.jpg"><h3>베트남 교통공과대학과 교육과정 공동개발 협약</h3><time>2026.09.04</time></a></li><li><a href="archive.html" data-img="assets/news-3.jpg"><h3>제3차 K-모빌리티교육인증위원회 심의 결과 안내</h3><time>2026.08.27</time></a></li><li><a href="archive.html" data-img="assets/news-4.jpg"><h3>국제교육센터 개소 2주년 기념 성과보고회</h3><time>2026.08.11</time></a></li><li><a href="archive.html" data-img="assets/news-5.jpg"><h3>우즈베키스탄 현지 교원 컨설팅 3주차 운영</h3><time>2026.07.30</time></a></li></ul>
+<ul class="news-list entl"><li><a href="archive.html" data-img="assets/news-1.jpg"><h3>2026학년도 K-모빌리티 단기연수 과정 수료식</h3><time>2026.09.18</time></a></li><li><a href="archive.html" data-img="assets/news-2.jpg"><h3>베트남 교통공과대학과 교육과정 공동개발 협약</h3><time>2026.09.04</time></a></li><li><a href="archive.html" data-img="assets/news-3.jpg"><h3>제3차 K-모빌리티교육인증위원회 심의 결과 안내</h3><time>2026.08.27</time></a></li><li><a href="archive.html" data-img="assets/news-4.jpg"><h3>국제교육센터 개소 2주년 기념 성과보고회</h3><time>2026.08.11</time></a></li><li><a href="archive.html" data-img="assets/news-5.jpg"><h3>우즈베키스탄 현지 교원 컨설팅 3주차 운영</h3><time>2026.07.30</time></a></li></ul>
 </div></div></div>
 </section>
 
 <section class="cta">
 <div class="cta-bg"><img src="assets/cta.jpg" alt="" loading="lazy"></div>
-<div class="cc cta-in"><div>
+<div class="cc cta-in"><div class="ent">
 <h2>모빌리티 교육의 세계화, 함께 만들어갑니다.</h2>
 <p>참여·협력 문의는 K-모빌리티 국제교육센터로 연락해 주세요.</p>
 <a class="btn btn-line btn-lg" href="contact.html">참여문의<span class="ico-arw"></span></a>
@@ -525,27 +540,36 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
  if(bg&&mo){bg.addEventListener('click',function(){mo.classList.add('on');document.body.style.overflow='hidden';});
   mo.querySelector('.mo-close').addEventListener('click',function(){mo.classList.remove('on');document.body.style.overflow='';});}
 
- var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
- document.querySelectorAll('.rv').forEach(function(e){io.observe(e);});
-
  document.querySelectorAll('.cnt').forEach(function(el){
   var o=new IntersectionObserver(function(es){es.forEach(function(e){ if(!e.isIntersecting)return; o.unobserve(el);
+   // 원본 실측: 0.7s 뒤에 시작해 3.0s 동안 선형으로 올라간다
    var to=parseFloat(el.dataset.to||'0'),dec=(el.dataset.to||'').indexOf('.')>-1?1:0,s=null;
-   function step(t){ if(!s)s=t; var p=Math.min((t-s)/1600,1); p=1-Math.pow(1-p,3);
+   function step(t){ if(!s)s=t; var p=Math.min((t-s)/3000,1);
     el.textContent=(to*p).toFixed(dec); if(p<1)requestAnimationFrame(step); }
-   requestAnimationFrame(step); });},{rootMargin:'0px 0px -8% 0px'});
+   setTimeout(function(){requestAnimationFrame(step);},700); });},{rootMargin:'0px 0px -8% 0px'});
   o.observe(el);
  });
 })();
 
 (function(){
+ var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
  var hero=document.querySelector('.hero'),intro=document.querySelector('.intro');
- function go(){ if(hero)hero.classList.add('ready');
-  if(intro){intro.classList.add('out');setTimeout(function(){intro.remove();},1600);} }
- if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){ if(intro)intro.remove(); if(hero)hero.classList.add('ready'); }
- else { setTimeout(go,420); }
 
- // N5 — 가운데 사진이 화면 중앙을 지날 때 오른쪽 항목을 바꾼다
+ // 인트로 — 원본 실측: 패널 1.05s 뒤 열림, 영상 2.55s 뒤 축소, 가림막 3.95s 에 제거
+ if(reduce){ if(intro)intro.remove(); if(hero)hero.classList.add('ready'); }
+ else { requestAnimationFrame(function(){
+   if(hero)hero.classList.add('ready');
+   if(intro){intro.classList.add('out');setTimeout(function(){intro.remove();},3950);} }); }
+
+ // 국가 마퀴 — 원본 실측 99.5 px/s
+ var tr=document.querySelector('.loop-track');
+ if(tr){ var set=function(){ var half=tr.scrollWidth/2;
+   if(half>0)tr.style.animationDuration=(half/99.5).toFixed(2)+'s'; };
+  set(); window.addEventListener('resize',set);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(set);
+  window.addEventListener('load',set); }
+
+ // N5 — 가운데 사진이 화면 한가운데를 지날 때 오른쪽 항목이 바뀐다
  var figs=[].slice.call(document.querySelectorAll('.mis-c figure')),
      items=[].slice.call(document.querySelectorAll('.mis-r li'));
  function misSync(){
@@ -555,23 +579,23 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
   figs.forEach(function(f,i){f.classList.toggle('on',i===best);});
   items.forEach(function(li,i){li.classList.toggle('on',i===best);});
  }
- // N6 — 패널 순환
+
+ // N6 — 원본은 저절로 돌지 않는다. 첫 칸이 켜져 있고 올린 칸만 바뀐다
  var cards=[].slice.call(document.querySelectorAll('.edu-card')),
-     bgs=[].slice.call(document.querySelectorAll('.edu-bg figure')),ei=0,timer=null;
- function setEdu(i){ei=i;cards.forEach(function(c,k){c.classList.toggle('on',k===i);});
+     bgs=[].slice.call(document.querySelectorAll('.edu-bg figure'));
+ function setEdu(i){cards.forEach(function(c,k){c.classList.toggle('on',k===i);});
   bgs.forEach(function(b,k){b.classList.toggle('on',k===i);});}
  if(cards.length){ setEdu(0);
-  cards.forEach(function(c,i){c.addEventListener('mouseenter',function(){setEdu(i);restart();});
-   c.addEventListener('focusin',function(){setEdu(i);});});
-  function restart(){clearInterval(timer);timer=setInterval(function(){setEdu((ei+1)%cards.length);},4200);}
-  restart();
+  cards.forEach(function(c,i){
+   c.addEventListener('mouseenter',function(){setEdu(i);});
+   c.addEventListener('focusin',function(){setEdu(i);}); });
  }
- // N7·N8 — 스크롤에 따라 clip 25%→0%
+
+ // N7·N8 — 원본 실측: 섹션 top 이 뷰포트 63.8% → 18.9% 를 지나는 동안 clip 25% → 0%
  var scenes=[].slice.call(document.querySelectorAll('.scene'));
  function sceneSync(){
   scenes.forEach(function(s){
    var r=s.getBoundingClientRect(),vh=window.innerHeight;
-   // 원본 실측: 섹션 top 이 뷰포트의 63.8% → 18.9% 를 지나는 동안 25% → 0%
    var k=(r.top/vh-0.189)/(0.638-0.189);
    s.style.setProperty('--clip',(25*Math.min(Math.max(k,0),1)).toFixed(2)+'%');
   });
@@ -582,11 +606,16 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
  if(window.innerWidth>992){window.addEventListener('scroll',tick,{passive:true});
   window.addEventListener('resize',tick);tick();}
 
+ // 등장 — 원본은 화면 밖으로 나가면 처음 상태로 되돌아간다
+ var eo=new IntersectionObserver(function(es){es.forEach(function(e){
+   e.target.classList.toggle('on',e.isIntersecting); });},{rootMargin:'0px 0px -12% 0px'});
+ document.querySelectorAll('.ent,.entl').forEach(function(e){eo.observe(e);});
+
  // N9 — 목록 호버 미리보기
  var pv=document.querySelector('.news-pv'),pvi=pv&&pv.querySelector('img');
  document.querySelectorAll('.news-list a').forEach(function(a){
   a.addEventListener('mouseenter',function(){ if(!pv)return;
-   pvi.src=a.dataset.img; pv.style.top=(a.offsetTop)+'px'; pv.classList.add('on'); });
+   pvi.src=a.dataset.img; pv.style.top=(a.parentNode.offsetTop)+'px'; pv.classList.add('on'); });
   a.addEventListener('mouseleave',function(){ if(pv)pv.classList.remove('on'); });
  });
 })();

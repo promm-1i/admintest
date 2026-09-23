@@ -183,11 +183,23 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 @keyframes wmroll{to{transform:translateX(-50%)}}
 @media(max-width:992px){.wordmark span{font-size:6rem;line-height:9rem}}
 
-/* 등장 */
-.rv{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.on{opacity:1;transform:none}
-.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* 등장 — 원본 실측: 머리말 자식 y30, 목록·카드 y24, 0.55s, 140ms 차례로.
+   원본은 화면 밖으로 나가면 처음 상태로 되돌아가 다시 재생된다. 서브 페이지에는 등장 효과가 없다. */
+.ent>*{opacity:0;transform:translateY(30px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.ent.on>*{opacity:1;transform:none}
+.ent.on>*:nth-child(2){transition-delay:.14s}
+.ent.on>*:nth-child(3){transition-delay:.28s}
+.ent.on>*:nth-child(4){transition-delay:.42s}
+.entl{opacity:0;transition:opacity .55s cubic-bezier(0,0,.35,1)}
+.entl.on{opacity:1}
+.entl>*{opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.entl.on>*{opacity:1;transform:none}
+.entl.on>*:nth-child(2){transition-delay:.14s}
+.entl.on>*:nth-child(3){transition-delay:.28s}
+.entl.on>*:nth-child(4){transition-delay:.42s}
+.entl.on>*:nth-child(5){transition-delay:.56s}
+@media(prefers-reduced-motion:reduce){
+ .ent>*,.entl,.entl>*{opacity:1!important;transform:none!important;transition:none!important}}
 
 /* 푸터 — 원본 krail-N2: padding 40, 배경 검정 */
 .ft{padding:4rem 0;background:#000;color:#fff}
@@ -311,14 +323,14 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <p class="crumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5"/></svg><span>/ 인증제도</span><strong>/ 평가기준</strong></p></div>
 </section>
 <section class="sec"><div class="cc">
-<h2 class="tit-h2 rv">평가 영역</h2>
-<ul class="area6 mt40 rv"><li><span class="n">01</span><strong>교육목표 및 학습성과</strong><p>교육목표가 산업 수요와 이어지는지, 학습성과가 측정 가능한 문장으로 쓰였는지 봅니다.</p></li><li><span class="n">02</span><strong>교육과정</strong><p>과목 구성과 이수 체계가 학습성과를 채우는지 봅니다.</p></li><li><span class="n">03</span><strong>학생</strong><p>선발·지도·상담과 학습 지원 체계를 봅니다.</p></li><li><span class="n">04</span><strong>교수</strong><p>전공 적합성, 교원 수, 연수 이력을 봅니다.</p></li><li><span class="n">05</span><strong>교육환경</strong><p>실습장과 장비, 안전 관리 상태를 봅니다.</p></li><li><span class="n">06</span><strong>교육성과 및 개선</strong><p>졸업생 진로와 개선 이력을 봅니다.</p></li></ul>
+<h2 class="tit-h2">평가 영역</h2>
+<ul class="area6 mt40"><li><span class="n">01</span><strong>교육목표 및 학습성과</strong><p>교육목표가 산업 수요와 이어지는지, 학습성과가 측정 가능한 문장으로 쓰였는지 봅니다.</p></li><li><span class="n">02</span><strong>교육과정</strong><p>과목 구성과 이수 체계가 학습성과를 채우는지 봅니다.</p></li><li><span class="n">03</span><strong>학생</strong><p>선발·지도·상담과 학습 지원 체계를 봅니다.</p></li><li><span class="n">04</span><strong>교수</strong><p>전공 적합성, 교원 수, 연수 이력을 봅니다.</p></li><li><span class="n">05</span><strong>교육환경</strong><p>실습장과 장비, 안전 관리 상태를 봅니다.</p></li><li><span class="n">06</span><strong>교육성과 및 개선</strong><p>졸업생 진로와 개선 이력을 봅니다.</p></li></ul>
 </div></section>
 
 <section class="sec sec-soft"><div class="cc">
-<h2 class="tit-h3 rv">모빌리티교육 인증 판정 기준</h2>
-<div class="sub-h rv" style="margin-top:4rem"><h3>전문위원회 평가척도</h3></div>
-<div class="tbl-wrap mt24 rv"><table class="tbl">
+<h2 class="tit-h3">모빌리티교육 인증 판정 기준</h2>
+<div class="sub-h" style="margin-top:4rem"><h3>전문위원회 평가척도</h3></div>
+<div class="tbl-wrap mt24"><table class="tbl">
 <caption class="blind">전문위원회 평가척도</caption>
 <thead><tr><th scope="col">구분</th><th scope="col">판정 기준</th></tr></thead>
 <tbody>
@@ -327,8 +339,8 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <tr><th scope="row">미충족</th><td class="l">필수 항목이 빠졌거나 근거 자료를 확인할 수 없는 경우</td></tr>
 </tbody></table></div>
 
-<div class="sub-h rv"><h3>인증위원회 평가척도</h3></div>
-<div class="tbl-wrap mt24 rv"><table class="tbl">
+<div class="sub-h"><h3>인증위원회 평가척도</h3></div>
+<div class="tbl-wrap mt24"><table class="tbl">
 <caption class="blind">인증위원회 평가척도</caption>
 <thead><tr><th scope="col">구분</th><th scope="col">인증</th><th scope="col">인증보류</th><th scope="col">불인증</th></tr></thead>
 <tbody>
@@ -339,8 +351,8 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 </div></section>
 
 <section class="sec"><div class="cc">
-<h2 class="tit-h2 rv">종합판정 종류</h2>
-<ul class="verdict mt40 rv">
+<h2 class="tit-h2">종합판정 종류</h2>
+<ul class="verdict mt40">
 <li><strong>인증</strong><p>모든 평가 영역을 충족한 경우입니다. 인증 기간은 4년이며 2년째에 중간 점검을 받습니다.</p></li>
 <li><strong>인증보류</strong><p>일부 영역에 보완이 필요한 경우입니다. 6개월 안에 보완 자료를 내면 재심의합니다.</p></li>
 <li><strong>불인증</strong><p>필수 항목이 여럿 빠진 경우입니다. 다음 회차에 다시 신청할 수 있습니다.</p></li>
@@ -374,15 +386,13 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
  if(bg&&mo){bg.addEventListener('click',function(){mo.classList.add('on');document.body.style.overflow='hidden';});
   mo.querySelector('.mo-close').addEventListener('click',function(){mo.classList.remove('on');document.body.style.overflow='';});}
 
- var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
- document.querySelectorAll('.rv').forEach(function(e){io.observe(e);});
-
  document.querySelectorAll('.cnt').forEach(function(el){
   var o=new IntersectionObserver(function(es){es.forEach(function(e){ if(!e.isIntersecting)return; o.unobserve(el);
+   // 원본 실측: 0.7s 뒤에 시작해 3.0s 동안 선형으로 올라간다
    var to=parseFloat(el.dataset.to||'0'),dec=(el.dataset.to||'').indexOf('.')>-1?1:0,s=null;
-   function step(t){ if(!s)s=t; var p=Math.min((t-s)/1600,1); p=1-Math.pow(1-p,3);
+   function step(t){ if(!s)s=t; var p=Math.min((t-s)/3000,1);
     el.textContent=(to*p).toFixed(dec); if(p<1)requestAnimationFrame(step); }
-   requestAnimationFrame(step); });},{rootMargin:'0px 0px -8% 0px'});
+   setTimeout(function(){requestAnimationFrame(step);},700); });},{rootMargin:'0px 0px -8% 0px'});
   o.observe(el);
  });
 })();

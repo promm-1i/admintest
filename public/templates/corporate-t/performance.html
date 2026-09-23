@@ -183,11 +183,23 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 @keyframes wmroll{to{transform:translateX(-50%)}}
 @media(max-width:992px){.wordmark span{font-size:6rem;line-height:9rem}}
 
-/* 등장 */
-.rv{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.on{opacity:1;transform:none}
-.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* 등장 — 원본 실측: 머리말 자식 y30, 목록·카드 y24, 0.55s, 140ms 차례로.
+   원본은 화면 밖으로 나가면 처음 상태로 되돌아가 다시 재생된다. 서브 페이지에는 등장 효과가 없다. */
+.ent>*{opacity:0;transform:translateY(30px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.ent.on>*{opacity:1;transform:none}
+.ent.on>*:nth-child(2){transition-delay:.14s}
+.ent.on>*:nth-child(3){transition-delay:.28s}
+.ent.on>*:nth-child(4){transition-delay:.42s}
+.entl{opacity:0;transition:opacity .55s cubic-bezier(0,0,.35,1)}
+.entl.on{opacity:1}
+.entl>*{opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.entl.on>*{opacity:1;transform:none}
+.entl.on>*:nth-child(2){transition-delay:.14s}
+.entl.on>*:nth-child(3){transition-delay:.28s}
+.entl.on>*:nth-child(4){transition-delay:.42s}
+.entl.on>*:nth-child(5){transition-delay:.56s}
+@media(prefers-reduced-motion:reduce){
+ .ent>*,.entl,.entl>*{opacity:1!important;transform:none!important;transition:none!important}}
 
 /* 푸터 — 원본 krail-N2: padding 40, 배경 검정 */
 .ft{padding:4rem 0;background:#000;color:#fff}
@@ -316,21 +328,21 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <p class="crumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5"/></svg><span>/ 사업소개</span><strong>/ 사업 성과</strong></p></div>
 </section>
 <section class="sec"><div class="cc">
-<h2 class="tit-h2 rv">사업 성과 개요</h2>
-<p class="desc rv">2024년 사업 착수 이후 일곱 나라에 교육모델을 전파하고, 열두 개 교육과정에 인증을 부여했습니다.
+<h2 class="tit-h2">사업 성과 개요</h2>
+<p class="desc">2024년 사업 착수 이후 일곱 나라에 교육모델을 전파하고, 열두 개 교육과정에 인증을 부여했습니다.
 아래는 무엇을 · 어디서 · 어떻게 · 언제 했는지를 나눠 정리한 것입니다.</p>
-<div class="wide mt60 rv"><img src="assets/performance-1.jpg" alt="" loading="lazy"></div>
+<div class="wide mt60"><img src="assets/performance-1.jpg" alt="" loading="lazy"></div>
 </div></section>
 
 <section class="sec sec-soft"><div class="cc">
-<div class="wblock rv"><span class="lead">WHAT</span><h3>K-모빌리티 교육 모델 전파·확산</h3>
+<div class="wblock"><span class="lead">WHAT</span><h3>K-모빌리티 교육 모델 전파·확산</h3>
 <div class="wbody"><ul class="flow">
 <li><strong>교육 수출 컨트롤타워</strong><p>센터가 교육과정·장비·교원 연수를 한 묶음으로 설계합니다.</p></li>
 <li><strong>참여학과</strong><p>여섯 개 학과가 과목 단위로 교육과정 개발에 참여합니다.</p></li>
 <li><strong>현지 파트너</strong><p>현지 대학이 학사 운영과 학생 모집을 맡습니다.</p></li>
 </ul></div></div>
 
-<div class="wblock rv"><span class="lead">WHERE</span><h3>교육 모델 전파를 위한 연계 협력</h3>
+<div class="wblock"><span class="lead">WHERE</span><h3>교육 모델 전파를 위한 연계 협력</h3>
 <div class="wbody tbl-wrap"><table class="tbl">
 <caption class="blind">협력 기관과 협력 업무</caption>
 <thead><tr><th scope="col">구분</th><th scope="col">기관</th><th scope="col">협력업무</th></tr></thead>
@@ -345,7 +357,7 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <tr><th scope="row">지자체</th><td>하람시 · 평택시</td><td class="l">연수생 체류 지원, 실습장 부지 협조</td></tr>
 </tbody></table></div></div>
 
-<div class="wblock rv"><span class="lead">HOW</span><h3>모빌리티 교육과정 인증체계 구축</h3>
+<div class="wblock"><span class="lead">HOW</span><h3>모빌리티 교육과정 인증체계 구축</h3>
 <div class="wbody"><ul class="ol6">
 <li>산업 수요 조사와 직무 분석</li>
 <li>교육목표와 학습성과 설정</li>
@@ -357,7 +369,7 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <li>2년째 중간 점검과 개선 이행 확인</li>
 </ul></div></div>
 
-<div class="wblock rv"><span class="lead">WHEN</span><h3>단계별 로드맵</h3>
+<div class="wblock"><span class="lead">WHEN</span><h3>단계별 로드맵</h3>
 <div class="wbody"><ul class="stepbar">
 <li><span>1단계</span><strong>기반 구축</strong><p>센터 설립, 제도 정비, 협약 체결</p></li>
 <li><span>2단계</span><strong>모델 적용</strong><p>현지 교육과정 개발, 첫 인증 부여</p></li>
@@ -366,23 +378,23 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 </div></section>
 
 <section class="sec"><div class="cc">
-<div class="res rv"><h3 class="tit-h3">해외 교육 확산 성과</h3><ul class="ol6 mt24">
+<div class="res"><h3 class="tit-h3">해외 교육 확산 성과</h3><ul class="ol6 mt24">
 <li>글로벌 모빌리티 교육모델 개발 및 수출</li>
 <li>현지 맞춤형 정비·운영 교육과정 개발 및 적용</li>
 <li>통역 기반 현지 교육 운영 및 교원 컨설팅 수행</li>
 <li>현지 실습장 설계 참여 및 장비 12종 이전</li>
 <li>연수 수료자 214명 배출 · 수료율 92%</li>
 </ul></div>
-<div class="res rv"><h3 class="tit-h3">국제협력 및 네트워크 확대</h3><ul class="ol6 mt24">
+<div class="res"><h3 class="tit-h3">국제협력 및 네트워크 확대</h3><ul class="ol6 mt24">
 <li>국제기구·공적개발원조 기관과 협력 기반 구축</li>
 <li>해외 21개 대학과 협력 네트워크 확보</li>
 <li>정부 간 교육 협의 3개국 착수</li>
 <li>협약 68건 체결 · 공동 학위 과정 2건 논의</li>
 </ul></div>
-<div class="res rv"><h3 class="tit-h3">산업 연계 성과</h3><ul class="ol6 mt24">
+<div class="res"><h3 class="tit-h3">산업 연계 성과</h3><ul class="ol6 mt24">
 <li>교육 → 인재양성 → 현장 운영으로 이어지는 해외 진출 경로 창출</li>
 </ul></div>
-<div class="res rv"><h3 class="tit-h3">확산 기반 확보</h3><ul class="ol6 mt24">
+<div class="res"><h3 class="tit-h3">확산 기반 확보</h3><ul class="ol6 mt24">
 <li>베트남 모빌리티 교육센터 설립 협력 참여 및 교육모델 적용 확대</li>
 <li>인증 기반 품질관리 체계 구축으로 국제 신뢰성 확보</li>
 </ul></div>
@@ -415,15 +427,13 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
  if(bg&&mo){bg.addEventListener('click',function(){mo.classList.add('on');document.body.style.overflow='hidden';});
   mo.querySelector('.mo-close').addEventListener('click',function(){mo.classList.remove('on');document.body.style.overflow='';});}
 
- var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
- document.querySelectorAll('.rv').forEach(function(e){io.observe(e);});
-
  document.querySelectorAll('.cnt').forEach(function(el){
   var o=new IntersectionObserver(function(es){es.forEach(function(e){ if(!e.isIntersecting)return; o.unobserve(el);
+   // 원본 실측: 0.7s 뒤에 시작해 3.0s 동안 선형으로 올라간다
    var to=parseFloat(el.dataset.to||'0'),dec=(el.dataset.to||'').indexOf('.')>-1?1:0,s=null;
-   function step(t){ if(!s)s=t; var p=Math.min((t-s)/1600,1); p=1-Math.pow(1-p,3);
+   function step(t){ if(!s)s=t; var p=Math.min((t-s)/3000,1);
     el.textContent=(to*p).toFixed(dec); if(p<1)requestAnimationFrame(step); }
-   requestAnimationFrame(step); });},{rootMargin:'0px 0px -8% 0px'});
+   setTimeout(function(){requestAnimationFrame(step);},700); });},{rootMargin:'0px 0px -8% 0px'});
   o.observe(el);
  });
 })();

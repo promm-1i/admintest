@@ -183,11 +183,23 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 @keyframes wmroll{to{transform:translateX(-50%)}}
 @media(max-width:992px){.wordmark span{font-size:6rem;line-height:9rem}}
 
-/* 등장 */
-.rv{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.on{opacity:1;transform:none}
-.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* 등장 — 원본 실측: 머리말 자식 y30, 목록·카드 y24, 0.55s, 140ms 차례로.
+   원본은 화면 밖으로 나가면 처음 상태로 되돌아가 다시 재생된다. 서브 페이지에는 등장 효과가 없다. */
+.ent>*{opacity:0;transform:translateY(30px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.ent.on>*{opacity:1;transform:none}
+.ent.on>*:nth-child(2){transition-delay:.14s}
+.ent.on>*:nth-child(3){transition-delay:.28s}
+.ent.on>*:nth-child(4){transition-delay:.42s}
+.entl{opacity:0;transition:opacity .55s cubic-bezier(0,0,.35,1)}
+.entl.on{opacity:1}
+.entl>*{opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.entl.on>*{opacity:1;transform:none}
+.entl.on>*:nth-child(2){transition-delay:.14s}
+.entl.on>*:nth-child(3){transition-delay:.28s}
+.entl.on>*:nth-child(4){transition-delay:.42s}
+.entl.on>*:nth-child(5){transition-delay:.56s}
+@media(prefers-reduced-motion:reduce){
+ .ent>*,.entl,.entl>*{opacity:1!important;transform:none!important;transition:none!important}}
 
 /* 푸터 — 원본 krail-N2: padding 40, 배경 검정 */
 .ft{padding:4rem 0;background:#000;color:#fff}
@@ -353,9 +365,9 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <p class="crumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5"/></svg><span>/ K-모빌리티 소개</span><strong>/ 히스토리</strong></p></div>
 </section><div class="cc mt24"><nav class="tabs" aria-label="대학 소개 메뉴"><a href="history.html" class="on">히스토리</a><a href="university.html">대학 소개</a><a href="university.html#college">모빌리티대학</a></nav></div>
 <section class="sec"><div class="cc">
-<div class="rv"><span class="lead">HISTORY OF HARAM</span>
+<div><span class="lead">HISTORY OF HARAM</span>
 <h2 class="tit-h2">국립하람대학교의 역사는<br>대한민국 실용교육의 저력입니다.</h2></div>
-<div class="tl"><div class="tl-item rv"><div class="txt"><span class="yr">2026</span><ul><li>K-모빌리티 국제교육센터 개소 2주년 · 참여국 7개국</li><li>모빌리티 교육과정 인증제도 1기 인증 12건 완료</li><li>베트남 교통공과대학 공동 교육과정 운영 시작</li><li>해외 협력대학 21개교 · 협약 68건</li><li>현지 교원 국내 연수 3기 수료 · 누적 214명</li><li>전동화 정비 실습장 2호관 준공</li></ul></div><figure class="pic"><img src="assets/history-1.jpg" alt="" loading="lazy"></figure></div><div class="tl-item rv"><div class="txt"><span class="yr">2024~2025</span><ul><li>글로컬대학 사업 선정</li><li>K-모빌리티 국제교육센터 설립 · 전담 인력 배치</li><li>인증제도 규정 제정 및 평가기준 확정</li><li>인증위원회 · 운영위원회 · 전문위원회 구성</li><li>우즈베키스탄·몽골 정부 간 교육 협의 착수</li><li>현지 교원 국내 연수 1기 운영</li><li>국제개발협력 사업 교육 부문 참여 기관 선정</li><li>해외 협력대학 12개교 협약 체결</li></ul></div><figure class="pic"><img src="assets/univ-2.jpg" alt="" loading="lazy"></figure></div><div class="tl-item rv"><div class="txt"><span class="yr">2018~2023</span><ul><li>모빌리티대학 개편 · 6개 학과 체제</li><li>산업체 위탁 교육 과정 개설</li><li>전동화 정비 실습동 준공</li><li>AI·데이터공학부 신설</li><li>국제교류처 확대 개편</li><li>외국인 유학생 전용 한국어 과정 개설</li><li>산학협력 중점 대학 선정</li><li>차량 진단 장비 실습실 구축</li></ul></div><figure class="pic"><img src="assets/univ-3.jpg" alt="" loading="lazy"></figure></div><div class="tl-item rv"><div class="txt"><span class="yr">2004~2017</span><ul><li>종합대학 전환</li><li>여주캠퍼스 개설</li><li>평택캠퍼스 개설</li><li>산학협력단 설립</li><li>외국인 유학생 전형 도입</li><li>대학원 과정 개설</li><li>자동차공학부 승격</li></ul></div><figure class="pic"><img src="assets/univ-1.jpg" alt="" loading="lazy"></figure></div><div class="tl-item rv"><div class="txt"><span class="yr">1978~2003</span><ul><li>공업전문대학 승격</li><li>자동차공학과 신설</li><li>기계과 신설</li><li>야간 과정 개설</li><li>산업체 재직자 과정 운영 시작</li><li>정비 기능사 양성 과정 지정</li></ul></div><figure class="pic"><img src="assets/center-1.jpg" alt="" loading="lazy"></figure></div><div class="tl-item rv"><div class="txt"><span class="yr">1952~1977</span><ul><li>국립 하람공업고등학교 개교</li><li>정비 기술 인력 양성 시작</li><li>자동차정비과 신설</li><li>첫 졸업생 배출</li><li>실습 공장 준공</li></ul></div><figure class="pic"><img src="assets/history-1.jpg" alt="" loading="lazy"></figure></div></div>
+<div class="tl"><div class="tl-item"><div class="txt"><span class="yr">2026</span><ul><li>K-모빌리티 국제교육센터 개소 2주년 · 참여국 7개국</li><li>모빌리티 교육과정 인증제도 1기 인증 12건 완료</li><li>베트남 교통공과대학 공동 교육과정 운영 시작</li><li>해외 협력대학 21개교 · 협약 68건</li><li>현지 교원 국내 연수 3기 수료 · 누적 214명</li><li>전동화 정비 실습장 2호관 준공</li></ul></div><figure class="pic"><img src="assets/history-1.jpg" alt="" loading="lazy"></figure></div><div class="tl-item"><div class="txt"><span class="yr">2024~2025</span><ul><li>글로컬대학 사업 선정</li><li>K-모빌리티 국제교육센터 설립 · 전담 인력 배치</li><li>인증제도 규정 제정 및 평가기준 확정</li><li>인증위원회 · 운영위원회 · 전문위원회 구성</li><li>우즈베키스탄·몽골 정부 간 교육 협의 착수</li><li>현지 교원 국내 연수 1기 운영</li><li>국제개발협력 사업 교육 부문 참여 기관 선정</li><li>해외 협력대학 12개교 협약 체결</li></ul></div><figure class="pic"><img src="assets/univ-2.jpg" alt="" loading="lazy"></figure></div><div class="tl-item"><div class="txt"><span class="yr">2018~2023</span><ul><li>모빌리티대학 개편 · 6개 학과 체제</li><li>산업체 위탁 교육 과정 개설</li><li>전동화 정비 실습동 준공</li><li>AI·데이터공학부 신설</li><li>국제교류처 확대 개편</li><li>외국인 유학생 전용 한국어 과정 개설</li><li>산학협력 중점 대학 선정</li><li>차량 진단 장비 실습실 구축</li></ul></div><figure class="pic"><img src="assets/univ-3.jpg" alt="" loading="lazy"></figure></div><div class="tl-item"><div class="txt"><span class="yr">2004~2017</span><ul><li>종합대학 전환</li><li>여주캠퍼스 개설</li><li>평택캠퍼스 개설</li><li>산학협력단 설립</li><li>외국인 유학생 전형 도입</li><li>대학원 과정 개설</li><li>자동차공학부 승격</li></ul></div><figure class="pic"><img src="assets/univ-1.jpg" alt="" loading="lazy"></figure></div><div class="tl-item"><div class="txt"><span class="yr">1978~2003</span><ul><li>공업전문대학 승격</li><li>자동차공학과 신설</li><li>기계과 신설</li><li>야간 과정 개설</li><li>산업체 재직자 과정 운영 시작</li><li>정비 기능사 양성 과정 지정</li></ul></div><figure class="pic"><img src="assets/center-1.jpg" alt="" loading="lazy"></figure></div><div class="tl-item"><div class="txt"><span class="yr">1952~1977</span><ul><li>국립 하람공업고등학교 개교</li><li>정비 기술 인력 양성 시작</li><li>자동차정비과 신설</li><li>첫 졸업생 배출</li><li>실습 공장 준공</li></ul></div><figure class="pic"><img src="assets/history-1.jpg" alt="" loading="lazy"></figure></div></div>
 </div></section>
 
 </main>
@@ -385,15 +397,13 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
  if(bg&&mo){bg.addEventListener('click',function(){mo.classList.add('on');document.body.style.overflow='hidden';});
   mo.querySelector('.mo-close').addEventListener('click',function(){mo.classList.remove('on');document.body.style.overflow='';});}
 
- var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
- document.querySelectorAll('.rv').forEach(function(e){io.observe(e);});
-
  document.querySelectorAll('.cnt').forEach(function(el){
   var o=new IntersectionObserver(function(es){es.forEach(function(e){ if(!e.isIntersecting)return; o.unobserve(el);
+   // 원본 실측: 0.7s 뒤에 시작해 3.0s 동안 선형으로 올라간다
    var to=parseFloat(el.dataset.to||'0'),dec=(el.dataset.to||'').indexOf('.')>-1?1:0,s=null;
-   function step(t){ if(!s)s=t; var p=Math.min((t-s)/1600,1); p=1-Math.pow(1-p,3);
+   function step(t){ if(!s)s=t; var p=Math.min((t-s)/3000,1);
     el.textContent=(to*p).toFixed(dec); if(p<1)requestAnimationFrame(step); }
-   requestAnimationFrame(step); });},{rootMargin:'0px 0px -8% 0px'});
+   setTimeout(function(){requestAnimationFrame(step);},700); });},{rootMargin:'0px 0px -8% 0px'});
   o.observe(el);
  });
 })();

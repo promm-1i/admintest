@@ -183,11 +183,23 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 @keyframes wmroll{to{transform:translateX(-50%)}}
 @media(max-width:992px){.wordmark span{font-size:6rem;line-height:9rem}}
 
-/* 등장 */
-.rv{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
-.rv.on{opacity:1;transform:none}
-.rv-d1{transition-delay:.12s}.rv-d2{transition-delay:.24s}.rv-d3{transition-delay:.36s}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+/* 등장 — 원본 실측: 머리말 자식 y30, 목록·카드 y24, 0.55s, 140ms 차례로.
+   원본은 화면 밖으로 나가면 처음 상태로 되돌아가 다시 재생된다. 서브 페이지에는 등장 효과가 없다. */
+.ent>*{opacity:0;transform:translateY(30px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.ent.on>*{opacity:1;transform:none}
+.ent.on>*:nth-child(2){transition-delay:.14s}
+.ent.on>*:nth-child(3){transition-delay:.28s}
+.ent.on>*:nth-child(4){transition-delay:.42s}
+.entl{opacity:0;transition:opacity .55s cubic-bezier(0,0,.35,1)}
+.entl.on{opacity:1}
+.entl>*{opacity:0;transform:translateY(24px);transition:opacity .55s cubic-bezier(0,0,.35,1),transform .55s cubic-bezier(0,0,.35,1)}
+.entl.on>*{opacity:1;transform:none}
+.entl.on>*:nth-child(2){transition-delay:.14s}
+.entl.on>*:nth-child(3){transition-delay:.28s}
+.entl.on>*:nth-child(4){transition-delay:.42s}
+.entl.on>*:nth-child(5){transition-delay:.56s}
+@media(prefers-reduced-motion:reduce){
+ .ent>*,.entl,.entl>*{opacity:1!important;transform:none!important;transition:none!important}}
 
 /* 푸터 — 원본 krail-N2: padding 40, 배경 검정 */
 .ft{padding:4rem 0;background:#000;color:#fff}
@@ -353,28 +365,28 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
 <p class="crumb"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7m0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5"/></svg><span>/ K-모빌리티 소개</span><strong>/ 사업내용</strong></p></div>
 </section>
 <section class="sec"><div class="cc">
-<h2 class="big-lead rv">학생 이동이 아닌 시스템 수출로,<br>K-모빌리티 교육의 국제 기준을 만듭니다</h2>
-<p class="desc rv">교육과정과 실습 장비, 교원 연수를 한 묶음으로 설계해 내보냅니다.
+<h2 class="big-lead">학생 이동이 아닌 시스템 수출로,<br>K-모빌리티 교육의 국제 기준을 만듭니다</h2>
+<p class="desc">교육과정과 실습 장비, 교원 연수를 한 묶음으로 설계해 내보냅니다.
 현지 대학이 학사 운영을 맡고 우리가 과정과 평가를 맡는 구조라, 사업이 끝난 뒤에도 교육이 이어집니다.</p>
-<div class="wide mt60 rv"><img src="assets/business-1.jpg" alt="" loading="lazy"></div>
+<div class="wide mt60"><img src="assets/business-1.jpg" alt="" loading="lazy"></div>
 </div></section>
 
 <section class="sec sec-soft"><div class="cc"><div class="road">
 <ul class="road-idx"><li class="on"><a href="#rs0">추진과정</a><span class="en">01</span></li><li><a href="#rs1">주요 성과</a><span class="en">02</span></li><li><a href="#rs2">국제적 위상 제고</a><span class="en">03</span></li><li><a href="#rs3">차별성과 경쟁력</a><span class="en">04</span></li></ul>
 <div>
-<div class="road-sec rv" id="rs0"><span class="lead">ROADMAP</span><h3>추진과정</h3>
+<div class="road-sec" id="rs0"><span class="lead">ROADMAP</span><h3>추진과정</h3>
 <p class="desc">기반 구축에서 국제 표준화까지 네 단계로 나눠 추진하고 있습니다.</p>
 <div class="rmap"><ul><li><span class="st">STEP 04 · 국제 도약</span><span class="yr">'27</span><strong>국제적 표준화 완성</strong><ol><li>참여국 인증 결과 상호인정 체계 발효</li><li>해외 운영 교육과정 20개 돌파</li><li>현지 자립 운영 이관 1호 사례 확보</li></ol></li><li><span class="st">STEP 03 · 모델 전파</span><span class="yr">'26</span><strong>첫 해외 교육수출 사례</strong><ol><li>베트남 교통공과대학 공동 교육과정 개설</li><li>현지 교원 18명 국내 연수 수료</li><li>실습 장비 12종 이전 및 실습장 설계 참여</li></ol></li><li><span class="st">STEP 02 · 제도 고도화</span><span class="yr">'25</span><strong>제도 정비 + 국가급 협력</strong><ol><li>인증제도 규정 제정 · 평가기준 확정</li><li>세 나라와 정부 간 교육 협의 착수</li><li>인증 1기 접수 및 심의 운영</li></ol></li><li><span class="st">STEP 01 · 기반 구축</span><span class="yr">'23~'25</span><strong>전담조직 · 거버넌스 확립</strong><ol><li>국제교육센터 설립 · 전담 인력 배치</li><li>운영위원회 · 인증위원회 구성</li><li>참여학과 6개 확정 및 역할 분담</li></ol></li></ul></div></div>
 
-<div class="road-sec rv" id="rs1"><span class="lead lead-g">KEY RESULTS</span><h3>주요 성과</h3>
+<div class="road-sec" id="rs1"><span class="lead lead-g">KEY RESULTS</span><h3>주요 성과</h3>
 <p class="desc">국내 대학 최초로 모빌리티 교육수출 인증체계를 갖췄습니다.</p>
 <ul class="keys"><li><span class="n">01</span><strong>운영 체계</strong><dl><div><dt>설립</dt><dd>국제교육센터 설립 · 전담 인력 6명</dd></div><div><dt>의결</dt><dd>운영위원회 · 인증위원회 · 전문위원회 3단</dd></div><div><dt>예산</dt><dd>사업비 집행 및 정산 체계 정비</dd></div></dl></li><li><span class="n">02</span><strong>글로벌 네트워크</strong><dl><div><dt>협약</dt><dd>7개국 21개 대학 · 협약 68건</dd></div><div><dt>연계</dt><dd>국제개발협력 사업 교육 부문 참여</dd></div><div><dt>유치</dt><dd>학위 과정 재학 유학생 140명</dd></div></dl></li><li><span class="n">03</span><strong>교육 모델</strong><dl><div><dt>인증</dt><dd>국내 첫 모빌리티 교육수출 인증체계</dd></div><div><dt>개발</dt><dd>현지 맞춤 교육과정 12개 개발</dd></div><div><dt>운영</dt><dd>첫 해외 교육과정 운영 1기 개시</dd></div></dl></li></ul></div>
 
-<div class="road-sec rv" id="rs2"><span class="lead lead-g">GLOBAL STANDING</span><h3>국제적 위상 제고</h3>
+<div class="road-sec" id="rs2"><span class="lead lead-g">GLOBAL STANDING</span><h3>국제적 위상 제고</h3>
 <p class="desc">국가 사업과 국제기구 협력, 해외 거점 설립으로 이어지는 위상 강화입니다.</p>
 <ul class="stand"><li><span class="n">01</span><span class="badge">NATIONAL ASSET</span><p>정부 모빌리티 교육수출 사업의 수행 기관으로 지정되었습니다.</p></li><li><span class="n">02</span><span class="badge">GLOBAL PARTNER</span><p>국제개발협력 사업의 교육 부문 협력 기관으로 참여합니다.</p></li><li><span class="n">03</span><span class="badge">HARAM GATEWAY</span><p>참여국 학생이 본교 학위 과정으로 들어오는 통로를 열었습니다.</p></li></ul></div>
 
-<div class="road-sec rv" id="rs3"><span class="lead lead-g">WHY K-MOBILITY</span><h3>차별성과 경쟁력</h3>
+<div class="road-sec" id="rs3"><span class="lead lead-g">WHY K-MOBILITY</span><h3>차별성과 경쟁력</h3>
 <p class="desc">하드웨어와 소프트웨어를 함께 보내는 융합형 수출모델, 그리고 자립형 플랫폼이 두 축입니다.</p>
 <ul class="duo"><li><span class="tagl">PARADIGM</span><strong>학생 이동에서 시스템 수출로,<br>HW+SW 융합형 수출모델</strong><p>학생만 데려오는 유학 모델로는 현지에 남는 것이 없습니다. 실습 장비와 교육과정, 교원 연수를 묶어 보냅니다.</p><p>현지 대학이 학사 운영을 맡고 우리는 과정과 평가를 맡는 구조라, 사업이 끝나도 교육이 이어집니다.</p></li><li><span class="tagl">PLATFORM</span><strong>자체 인증체계 · 원조 연계 · 7개국 네트워크,<br>자립형 글로벌 수출 플랫폼</strong><p>인증을 우리가 직접 운영하기 때문에 과정 품질을 우리 손으로 보장할 수 있습니다.</p><p>공적개발원조 사업과 묶어 현지 예산 부담을 줄이고, 참여국끼리 인증 결과를 서로 인정하게 합니다.</p></li></ul></div>
 </div>
@@ -407,15 +419,13 @@ h1,h2,h3,h4,h5,h6,strong,em,address{font-weight:inherit;font-size:inherit;font-s
  if(bg&&mo){bg.addEventListener('click',function(){mo.classList.add('on');document.body.style.overflow='hidden';});
   mo.querySelector('.mo-close').addEventListener('click',function(){mo.classList.remove('on');document.body.style.overflow='';});}
 
- var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}});},{rootMargin:'0px 0px -12% 0px'});
- document.querySelectorAll('.rv').forEach(function(e){io.observe(e);});
-
  document.querySelectorAll('.cnt').forEach(function(el){
   var o=new IntersectionObserver(function(es){es.forEach(function(e){ if(!e.isIntersecting)return; o.unobserve(el);
+   // 원본 실측: 0.7s 뒤에 시작해 3.0s 동안 선형으로 올라간다
    var to=parseFloat(el.dataset.to||'0'),dec=(el.dataset.to||'').indexOf('.')>-1?1:0,s=null;
-   function step(t){ if(!s)s=t; var p=Math.min((t-s)/1600,1); p=1-Math.pow(1-p,3);
+   function step(t){ if(!s)s=t; var p=Math.min((t-s)/3000,1);
     el.textContent=(to*p).toFixed(dec); if(p<1)requestAnimationFrame(step); }
-   requestAnimationFrame(step); });},{rootMargin:'0px 0px -8% 0px'});
+   setTimeout(function(){requestAnimationFrame(step);},700); });},{rootMargin:'0px 0px -8% 0px'});
   o.observe(el);
  });
 })();
