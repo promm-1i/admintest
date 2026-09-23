@@ -1187,10 +1187,28 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-help-list--steps .re-help>div>p:last-child{margin:10px 0 0;font-size:17px;font-weight:500;line-height:1.6;color:#51565f;word-break:keep-all}
 
 /* ------------------------------------------------------------------
+   서비스 상세 8쪽 — 예전 본문을 리뉴얼 골격 안에 다시 넣었다.
+   위쪽 제목블록·스크롤 히어로·하위메뉴는 리뉴얼 것을 쓰므로
+   레거시가 들고 있는 큰 제목과 그 위 라벨은 감춘다.
+   여백은 지금 기준(x60 / 폭 1320) 그대로 고정한다.
+   ------------------------------------------------------------------ */
+.re-legacy-service h1{display:none}
+.renewal-editorial #re-main .re-legacy-service :is(.max-w-\[1400px\],.max-w-7xl,.max-w-6xl,.max-w-5xl,.max-w-4xl).mx-auto{
+  width:100%;max-width:1700px;padding-left:0;padding-right:0}
+.re-legacy-service :is(.max-w-3xl,.max-w-2xl).mx-auto{max-width:896px}
+/* 안에 또 감싼 칸은 바깥이 이미 여백을 주므로 꽉 채운다 (120/1200 되던 곳) */
+.re-legacy-service .mx-auto [class*="max-w-"].mx-auto{width:100%;max-width:none;padding-left:0;padding-right:0}
+@media (max-width:1439px){
+  .renewal-editorial #re-main .re-legacy-service :is(.max-w-\[1400px\],.max-w-7xl,.max-w-6xl,.max-w-5xl,.max-w-4xl).mx-auto{
+    padding-left:20px;padding-right:20px}
+}
+
+/* ------------------------------------------------------------------
    사진 구성 — remo finefit .manage_sect .cont 실측 2026-09-22 (설계폭 1920)
    grid 580px 580px 580px · gap 40px 30px
    .img01 은 두 칸(1190) · .img02 는 한 칸(580) · 둘 다 radius 30
    ------------------------------------------------------------------ */
+.re-photoband__lead{margin:0 0 24px;font-size:18px;font-weight:400;line-height:1.6;color:#63656c;word-break:keep-all}
 .re-photoband{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 30px}
 .re-photoband figure{margin:0;overflow:hidden;border-radius:30px;background:#eef1f5;border:1px solid #d6e1f4}
 .re-photoband__wide{grid-column:span 2}

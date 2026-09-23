@@ -15,6 +15,23 @@ import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 import { searchSite, type SearchHit } from "@/lib/siteSearch";
 import { PAGE_EXTRAS, type ExtraBlock } from "@/lib/renewalExtras";
 // 커스텀 개발의 호버 영상 카드 4개. 라우트를 리뉴얼 본문으로 돌리면서 화면에서 사라졌던 것을 되살린다.
+/**
+ * 서비스 상세 8쪽의 알맹이. 리뉴얼로 갈아엎으면서 데모 절들이 통째로 빠져
+ * 관리자 시스템만 4,579자 → 1,184자가 됐다. 그 본문을 그대로 다시 쓴다.
+ * 리뉴얼 쪽에서는 제목블록·스크롤 히어로·하위메뉴를 이미 그리므로
+ * 레거시 쪽이 들고 있는 큰 제목(h1)만 CSS 로 감춘다.
+ */
+const LEGACY_SERVICE_BODY: Record<string, ReturnType<typeof lazy>> = {
+  custom: lazy(() => import("@/pages/services/CustomDevService")),
+  "admin-system": lazy(() => import("@/pages/services/AdminSystemService")),
+  "inquiry-reservation": lazy(() => import("@/pages/services/InquiryReservationService")),
+  "search-filter": lazy(() => import("@/pages/services/SearchFilterService")),
+  "content-management": lazy(() => import("@/pages/services/ContentManagementService")),
+  "database-api": lazy(() => import("@/pages/services/DatabaseApiService")),
+  responsive: lazy(() => import("@/pages/services/ResponsiveService")),
+  seo: lazy(() => import("@/pages/services/SeoService")),
+};
+
 const CustomBuildPreviewSection = lazy(() => import("@/components/sections/CustomBuildPreviewSection").then((m) => ({ default: m.CustomBuildPreviewSection })));
 import { TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import { PricingComparison } from "@/components/site/PricingComparison";
@@ -785,24 +802,12 @@ const PAGE_PHOTOS: Record<string, { file: string; wide: string; side: string; wi
   seo: { file: "seo", wide: "corporate-l/page-index", side: "brew-a/page-index",
     wideAlt: "기업 사이트의 서브페이지 구조", sideAlt: "양조장 사이트의 서브페이지 구조" },
 };
-/**
- * 새로 만든 사진이 있으면 그것을, 없으면 실제 제작 캡처를 쓴다.
- * public/renewal-editorial/photos/<쪽>-wide.webp · <쪽>-side.webp 를 넣으면
- * 그 쪽만 새 사진으로 바뀐다. 한 장씩 넣어도 된다.
- * 규격은 Desktop\개발\리뉴얼_서비스사진22장_요청.md 에 적어 뒀다.
- */
-function BandImage({ file, slot, fallback, alt }: { file: string; slot: "wide" | "side"; fallback: string; alt: string }) {
-  const [src, setSrc] = useState(`/renewal-editorial/photos/${file}-${slot}.webp`);
-  return <img src={src} alt={alt} loading="lazy"
-    onError={() => { if (!src.startsWith("/cases/")) setSrc(`/cases/${fallback}.webp`); }} />;
-}
-
 function PhotoBand({ page }: { page: string }) {
   const photo = PAGE_PHOTOS[page];
   if (!photo) return null;
   return <div className="re-photoband">
-    <figure className="re-photoband__wide"><BandImage file={photo.file} slot="wide" fallback={photo.wide} alt={photo.wideAlt} /></figure>
-    <figure className="re-photoband__side"><BandImage file={photo.file} slot="side" fallback={photo.side} alt={photo.sideAlt} /></figure>
+    <figure className="re-photoband__wide"><img src={`/cases/${photo.wide}.webp`} alt={photo.wideAlt} loading="lazy" /></figure>
+    <figure className="re-photoband__side"><img src={`/cases/${photo.side}.webp`} alt={photo.sideAlt} loading="lazy" /></figure>
   </div>;
 }
 
@@ -926,7 +931,6 @@ function ExtraSections({ pageKey }: { pageKey: string }) {
       <Suspense fallback={null}><CustomBuildPreviewSection /></Suspense>
     </Section>}
     {SLOT_VIDEOS[pageKey as PageKey] && <Section wide><SlotVideo name={SLOT_VIDEOS[pageKey as PageKey] as string} /></Section>}
-    {PAGE_PHOTOS[pageKey] && <Section wide title="실제로 만든 화면"><PhotoBand page={pageKey} /></Section>}
     {blocks.map((block) => <Section key={block.title} wide title={block.title}>
     {block.kind === "items" && <ExtraItemList rows={block.rows} />}
     {block.kind === "points" && <PointList points={block.rows} />}
@@ -943,7 +947,20 @@ function PageSections({ page }: { page: ContentPage }) { return <>{page.sections
 function StandardPage({ page, path }: { page: ContentPage; path: string }) {
   if (path === "/website/price") return <PriceDetail page={page} path={path} />;
   const group = page.group as keyof typeof LOCAL_GROUPS;
-  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><SubHero step={page.eyebrow} title={page.intro} image={page.image} /><Contents><LocalNav group={group} path={path} /><PageSections page={page} /><ExtraSections pageKey={pageKeyOf(path)} /><ContactBand /></Contents></main>;
+  const key = pageKeyOf(path);
+  const Legacy = LEGACY_SERVICE_BODY[key];
+  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><SubHero step={page.eyebrow} title={page.intro} image={page.image} /><Contents>
+    <LocalNav group={group} path={path} />
+    <PageSections page={page} />
+    {PAGE_PHOTOS[key] && <Section wide title="실제로 만든 화면">
+      <p className="re-photoband__lead">노베릭이 제작해 운영 중인 사이트의 화면입니다.</p>
+      <PhotoBand page={key} />
+    </Section>}
+    {Legacy
+      ? <div className="re-legacy-service"><Suspense fallback={null}><Legacy /></Suspense></div>
+      : <ExtraSections pageKey={key} />}
+    <ContactBand />
+  </Contents></main>;
 }
 
 function PriceDetail({ page, path }: { page: ContentPage; path: string }) {
