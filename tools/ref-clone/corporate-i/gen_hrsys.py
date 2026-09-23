@@ -1,7 +1,7 @@
 """Career 인사제도(m72) 소스 + 아이콘 SVG 생성 — 평가제도(목록) · 보상제도(카드 4 + 빈 칸 2) · 교육제도(목록)."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-IC = Path(__file__).parents[3] / "public/templates/corporate-i/assets/ic"
+IC = Path(__file__).parents[3] / "public/nubit/assets/ic"
 PB = '<br class="pcbr"><br class="tbbr">'
 
 ICONS = {  # 원본 칸 크기 그대로

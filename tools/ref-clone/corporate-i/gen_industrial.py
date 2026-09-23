@@ -1,7 +1,7 @@
 """Industrial 2쪽(레이저 가공용·비전 검사용) 소스 + 거래처 로고 SVG 생성 — 원본 m231/m232 틀."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-P = Path(__file__).parents[3] / "public/templates/corporate-i/assets/p"
+P = Path(__file__).parents[3] / "public/nubit/assets/p"
 
 # 원본은 실존 기업 이름이라 가상 이름으로 바꾼다 (글자 수는 비슷하게)
 DOMESTIC = [("한누리전자", "HANNURI"), ("한누리디스플레이", "HANNURI DP"), ("한누리전기", "HANNURI EM"), ("다온전자", "DAON"),

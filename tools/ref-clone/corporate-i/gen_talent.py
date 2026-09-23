@@ -1,7 +1,7 @@
 """Career 인재상(m71) 소스 + 도식 배경·아이콘 SVG 생성."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-A = Path(__file__).parents[3] / "public/templates/corporate-i/assets"
+A = Path(__file__).parents[3] / "public/nubit/assets"
 
 (A / "p/m71-rings.svg").write_text(
     '<svg xmlns="http://www.w3.org/2000/svg" width="841" height="841" viewBox="0 0 841 841">'

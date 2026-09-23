@@ -4,16 +4,16 @@
 
 - 프롬프트 수: 88개
 - 생성 이미지: 88장
-- 적용 위치: `public/templates/corporate-q/assets/`
+- 적용 위치: `public/neia/assets/`
 - 검증 결과: 파일명·규격·CSS 연결 88/88 통과, 중복 이미지 0, 저대비 임시 이미지 의심 0
-- 검증 리포트: `public/templates/corporate-q/assets/_work/image-validation-report.json`
-- 검수 시트: `public/templates/corporate-q/assets/_검수/contact_corporate_q_88.jpg`
+- 검증 리포트: `public/neia/assets/_work/image-validation-report.json`
+- 검수 시트: `public/neia/assets/_검수/contact_corporate_q_88.jpg`
 
 ## 납품 기준
 
 - 브랜드: `NEIA / 국가에너지혁신원` 포트폴리오 가상 브랜드
 - 총 생성 수량: **88장**
-- 저장 위치: `public/templates/corporate-q/assets/`
+- 저장 위치: `public/neia/assets/`
 - 아래에 지정한 **동일한 파일명**으로 JPG 저장
 - 색공간: sRGB, 고품질 JPG, 과도한 샤픈과 HDR 금지
 - 공통 스타일: 한국 공공기관·에너지 R&D 전문기관의 실제 연차보고서와 보도자료에 사용할 수 있는 포토리얼 기업 사진. 신뢰감 있는 딥 네이비, 청록, 뉴트럴 화이트, 절제된 코랄 포인트. 자연스러운 한국인 인물과 현실적인 연구·산업·사무 환경.

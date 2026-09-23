@@ -1,7 +1,7 @@
 """ESG 윤리규범(m54) 소스 + 아이콘 생성 — 윤리헌장 도식 + 펼침 목록 6묶음(항목 수 5·3·3·3·5·3)."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-IC = Path(__file__).parents[3] / "public/templates/corporate-i/assets/ic"
+IC = Path(__file__).parents[3] / "public/nubit/assets/ic"
 PB = '<span class="pcbr"></span>'
 
 ICONS = [  # 원본 칸 크기 55x60 · 56x59 · 42x53

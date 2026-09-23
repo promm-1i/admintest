@@ -1,7 +1,7 @@
 """ESG 안전보건(m52) 소스 + 아이콘 SVG 생성."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-IC = Path(__file__).parents[3] / "public/templates/corporate-i/assets/ic"
+IC = Path(__file__).parents[3] / "public/nubit/assets/ic"
 PB = '<span class="pcbr"></span>'
 
 # 원본 아이콘 칸 크기(42x50 · 59x43 · 45x40 · 36x52)에 맞춘 선 아이콘

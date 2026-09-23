@@ -23,7 +23,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).parent
-OUT = HERE.parents[2] / "public/templates/corporate-i"
+OUT = HERE.parents[2] / "public/nubit"
 index = (OUT / "index.html").read_text(encoding="utf-8")
 HEADER = index[index.index("<!--HEADER-->"): index.index("<!--/HEADER-->") + len("<!--/HEADER-->")]
 FOOTER = index[index.index("<!--FOOTER-->"): index.index("<!--/FOOTER-->") + len("<!--/FOOTER-->")]

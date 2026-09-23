@@ -1,7 +1,7 @@
 """Press/IR 5쪽 소스 — 보도자료 목록(list1)·보기(bbsView), 미디어(list3 + 영상 팝업), IR 공고(list2), 브로슈어(m64)."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-A = Path(__file__).parents[3] / "public/templates/corporate-i/assets"
+A = Path(__file__).parents[3] / "public/nubit/assets"
 PB = '<span class="pcbr"></span>'
 
 (A / "btn-play.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg" width="103" height="103" viewBox="0 0 103 103"><path d="M43 36l24 15.5L43 67z" fill="#fff"/></svg>', encoding="utf-8")

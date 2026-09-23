@@ -1,7 +1,7 @@
 """Scientific(m24) 소스 + 연구소 로고·어플리케이션 아이콘 SVG 생성."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-A = Path(__file__).parents[3] / "public/templates/corporate-i/assets"
+A = Path(__file__).parents[3] / "public/nubit/assets"
 # 원본은 실존 국책 연구소라 가상 기관으로 바꾼다 (글자 수 비슷하게)
 LABS = ["한빛과학기술원<br>첨단광기술연구소", "미래통신연구원", "누리전기연구원", "새빛원자력연구원", "측정표준연구원", "한결기계연구원", "기초물리연구원",
         "기초과학분석연구원", "가온화학연구원", "핵융합에너지센터", "누리공대 방사광가속기연구소", "미래과학기술원", "미래과학기술연구원"]

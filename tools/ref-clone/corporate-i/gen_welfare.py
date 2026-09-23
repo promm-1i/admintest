@@ -1,7 +1,7 @@
 """Career 복리후생(m73) 소스 + 80x80 아이콘 SVG 생성 (묶음 4개, 항목 4·4·3·2 — 원본처럼 생활안정 첫 항목이 여가 첫 항목과 같다)."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-IC = Path(__file__).parents[3] / "public/templates/corporate-i/assets/ic"
+IC = Path(__file__).parents[3] / "public/nubit/assets/ic"
 PATHS = ["M22 30h36v28H22z M30 30v-6h20v6", "M40 20v40 M20 40h40", "M26 50a14 14 0 1128 0 M20 58h40", "M20 56l12-16 10 10 8-8 10 14z",
          "M24 24h32v32H24z M32 36h16 M32 44h10", "M40 22a18 18 0 110 36 18 18 0 010-36z M40 30v10l7 5", "M24 34h32v22H24z M40 34v22 M22 28h36v6H22z", "M30 24a10 10 0 1120 0v6H30z M26 30h28v24H26z",
          "M22 48c6-10 30-10 36 0 M30 34a4 4 0 118 0 4 4 0 01-8 0z M44 34a4 4 0 118 0 4 4 0 01-8 0z", "M28 36h24v18H28z M40 36v18 M34 30c0-6 12-6 12 0", "M26 30h28 M30 30v24 M50 30v24 M24 54h32", "M40 58l-14-13a8 8 0 0111-11l3 3 3-3a8 8 0 0111 11z", "M22 40h8l4-10 6 20 5-14 3 4h10"]

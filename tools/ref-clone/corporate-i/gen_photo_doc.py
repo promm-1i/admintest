@@ -8,7 +8,7 @@ import math
 from pathlib import Path
 from PIL import Image
 
-ROOT = Path(__file__).parents[3] / "public/templates/corporate-i/assets"
+ROOT = Path(__file__).parents[3] / "public/nubit/assets"
 SIZES = json.load(open(r"C:\_tmp\claude\keoc\imgsizes.json", encoding="utf-8"))
 OUT_MD = Path(r"C:\Users\진수\Desktop\개발")
 TAIL = "No logos, brand names, readable text, labels, numbers or real landmarks."

@@ -1,7 +1,7 @@
 """ESG 인권경영(m55) 소스 + 신고 창구 이미지(SVG) 생성."""
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-A = Path(__file__).parents[3] / "public/templates/corporate-i/assets"
+A = Path(__file__).parents[3] / "public/nubit/assets"
 PB = '<span class="pcbr"></span>'
 
 # 원본은 담당자 메일·전화를 이미지로 넣어 두었다 — 같은 칸 크기에 자리 표시 연락처

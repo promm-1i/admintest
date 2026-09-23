@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 HERE = Path(__file__).parent / "pages"
-A = Path(__file__).parents[3] / "public/templates/corporate-i/assets"
+A = Path(__file__).parents[3] / "public/nubit/assets"
 
 (A / "ic/rc-tit.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg" width="48" height="38" viewBox="0 0 48 38"><path d="M4 12h40v22H4z M16 12V6h16v6 M4 20h40" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>', encoding="utf-8")
 (A / "ic/rc-mail.svg").write_text('<svg xmlns="http://www.w3.org/2000/svg" width="21" height="17" viewBox="0 0 21 17"><path d="M1.5 1.5h18v14h-18z M1.5 2l9 7 9-7" fill="none" stroke="#666" stroke-width="1.4" stroke-linejoin="round"/></svg>', encoding="utf-8")
