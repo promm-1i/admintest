@@ -146,10 +146,12 @@ li{list-style:none}
 .hero{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:100vh;padding:120px var(--gut) clamp(56px,1.8055vw + 45.33px,80px)}
 .hero-blob{position:absolute;top:49.7%;left:48.1%;transform:translate(-50%,-50%);
   width:min(510px,35.4vw);height:min(540px,37.5vw);
-  background:radial-gradient(58% 58% at 30% 28%,var(--g1) 0%,rgba(47,214,201,.55) 34%,rgba(47,214,201,0) 72%),
-             radial-gradient(62% 62% at 64% 42%,var(--g2) 0%,rgba(91,75,255,.6) 36%,rgba(91,75,255,0) 74%),
-             radial-gradient(60% 60% at 44% 74%,var(--g3) 0%,rgba(179,107,255,.55) 34%,rgba(179,107,255,0) 72%);
-  filter:blur(34px);border-radius:48% 52% 44% 56%/52% 44% 56% 48%;opacity:.95;
+  background:radial-gradient(58% 58% at 30% 26%,rgba(47,214,201,.95),rgba(47,214,201,0) 66%),
+             radial-gradient(62% 62% at 72% 40%,rgba(91,75,255,.9),rgba(91,75,255,0) 68%),
+             radial-gradient(58% 58% at 50% 80%,rgba(179,107,255,.85),rgba(179,107,255,0) 66%),
+             radial-gradient(40% 40% at 42% 40%,rgba(255,255,255,.8),rgba(255,255,255,0) 72%),
+             linear-gradient(150deg,rgba(120,205,255,.55),rgba(150,120,255,.45));
+  filter:blur(16px);border-radius:48% 52% 44% 56%/52% 44% 56% 48%;opacity:.95;
   animation:blob 16s ease-in-out infinite}
 @keyframes blob{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(calc(-50% - 2.4vw),calc(-50% + 2vh)) scale(1.06)}}
 .hero .content{position:relative;z-index:3;width:100%}
@@ -166,6 +168,7 @@ li{list-style:none}
 .head-dot{opacity:0;transform:scale(.4);transition:transform .42s cubic-bezier(.34,1.56,.64,1) 1.34s,opacity .18s 1.32s}
 .hero.in .head-dot{opacity:1;transform:scale(1)}
 
+.sdot{display:inline-block;width:calc(13px + 10 * var(--v));height:calc(13px + 10 * var(--v));margin-left:.18em;border-radius:50%;background:var(--ink);vertical-align:.34em}
 /* ── Beyond 선언 (260vh 고정) ── */
 .pin-beyond{position:relative;z-index:1;height:260vh}
 .pin-beyond-stage{position:sticky;top:0;height:100vh;overflow:hidden}
@@ -229,7 +232,8 @@ li{list-style:none}
 
 /* ── 파트너 (250vh 고정) ── */
 .partners{position:relative;z-index:1;height:250vh}
-.partners-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center}
+.partners-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:flex-start;padding-top:calc(240px + 78 * var(--v))}
+.partners-inner{transform:translate3d(0,var(--pmove,0px),0);will-change:transform}
 .partners-inner{position:relative;width:clamp(928px,62.277vw + 290.3px,1486px);max-width:calc(100% - 96px);margin:0 auto}
 .partners-title{font-size:clamp(96px,7.1424vw + 22.87px,160px);font-weight:700;line-height:1.211;color:var(--ink);opacity:0;filter:blur(16px);transition:opacity .7s,filter .7s}
 .partners-desc{margin-top:clamp(24px,2.5vw - 24px,40px);font-size:clamp(14px,.6696vw + 7.14px,20px);line-height:1.5;color:var(--ink);opacity:0;filter:blur(8px);transition:opacity .7s .12s,filter .7s .12s}
@@ -237,13 +241,15 @@ li{list-style:none}
 .partner-grid{display:grid;grid-template-columns:repeat(5,1fr);grid-auto-rows:clamp(56px,2.6786vw + 28.57px,80px);
   place-items:center;gap:clamp(32px,5.357vw - 22.86px,80px) 24px;margin-top:clamp(64px,6.25vw,160px)}
 .p-logo{width:100%;max-width:200px;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
-.partners.in .p-logo{opacity:.85;transform:none}
+.partners.grid-in .p-logo{opacity:.85;transform:none}
 .p-logo svg{width:100%;height:auto}
 
 /* ── 프로젝트 (120vh 고정) ── */
 .projects{position:relative;z-index:1;height:120vh}
 .projects-pin{position:sticky;top:0;height:100vh;overflow:hidden}
-.projects-title{position:absolute;top:50%;left:var(--gut);font-size:clamp(96px,7.1424vw + 22.87px,160px);font-weight:700;line-height:1.211;color:var(--ink)}
+.projects-title{position:absolute;top:50%;left:var(--gut);transform-origin:0 0;
+  transform:translateY(calc(-50% + var(--pty,0px))) scale(var(--ptsc,1));
+  font-size:clamp(96px,7.1424vw + 22.87px,160px);font-weight:700;line-height:1.211;color:var(--ink)}
 .proj-visual{position:absolute;top:0;right:0;width:clamp(420px,48.4vw - 0px,760px);height:100%;overflow:hidden;background:#f2f2f4}
 .proj-vis{position:absolute;inset:0;opacity:0;transition:opacity .7s}
 .proj-vis.is-on{opacity:1}
@@ -257,9 +263,8 @@ li{list-style:none}
   padding-bottom:clamp(80px,6.25vw - 40px,120px)}
 .proj-slide{grid-row:2;grid-column:1;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
 .proj-slide.is-on{opacity:1;transform:none}
-.proj-over{font-size:clamp(14px,.3125vw + 8px,16px);font-weight:600;color:var(--ink-2)}
-.proj-name{margin-top:8px;font-size:clamp(28px,1.3393vw + 14.29px,40px);font-weight:700;line-height:1.3}
-.proj-meta{display:grid;grid-template-columns:72px 1fr;gap:10px 16px;margin-top:28px;font-size:clamp(14px,.3125vw + 8px,16px)}
+.proj-name{font-size:calc(32px + 16 * var(--v));font-weight:700;line-height:1.4;color:var(--ink)}
+.proj-meta{display:grid;grid-template-columns:72px 1fr;gap:10px 16px;margin-top:calc(48px + 32 * var(--v));font-size:calc(14px + 6 * var(--v));line-height:1.5}
 .proj-meta dt{color:var(--ink-2);font-weight:600}
 .proj-more{grid-row:4;grid-column:1;justify-self:start;display:inline-flex;align-items:center;gap:12px;
   padding:11px 10px 11px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;
@@ -269,14 +274,16 @@ li{list-style:none}
 /* ── CTA ── */
 .contact-cta{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;height:100vh;background:#141414;color:#fff;overflow:hidden}
 .cta-glow{position:absolute;inset:0;z-index:0;background:
-  radial-gradient(60% 40% at 50% 108%,rgba(120,150,255,.55),transparent 62%),
-  radial-gradient(40% 26% at 50% 104%,rgba(210,180,255,.6),transparent 66%),#141414}
-.cta-glow:after{content:"";position:absolute;left:50%;bottom:-46vw;width:120vw;height:96vw;transform:translateX(-50%);
-  border-radius:50%;background:#141414;box-shadow:0 -1px 90px 10px rgba(150,170,255,.45)}
+  radial-gradient(60% 34% at 50% 74%,rgba(150,170,255,.5),transparent 72%),
+  radial-gradient(26% 13% at 50% 66%,rgba(225,210,255,.55),transparent 74%),#141414}
+.cta-glow:after{content:"";position:absolute;left:50%;bottom:-62.5vw;width:200vw;height:86.25vw;transform:translateX(-50%);
+  border-radius:50%;background:#141414;
+  box-shadow:0 -1px 6px 0 rgba(240,244,255,1),0 -5px 46px 4px rgba(170,190,255,.85),0 -18px 130px 26px rgba(140,120,255,.6),0 -40px 260px 60px rgba(110,140,255,.4)}
 .cta-inner{position:relative;z-index:1;display:inline-flex;flex-direction:column;align-items:stretch;gap:clamp(24px,2.7902vw - 4.57px,49px)}
 .cta-title{margin:0;text-align:center;font-size:clamp(110.16px,11.813vw - 10.81px,216px);font-weight:700;line-height:1;color:#fff}
 .cta-row{display:flex;justify-content:space-between;align-items:center;gap:clamp(24px,2.5vw - 1.6px,40px)}
 .cta-sub{margin-left:clamp(8px,.4464vw + 3.43px,12px);font-size:clamp(20px,1.3393vw + 6.29px,32px);line-height:1.5;color:#fff}
+.cta-dot{display:block;width:12px;height:12px;margin:26px auto 0;border-radius:50%;background:#fff;opacity:.9}
 .cta-arrow{display:flex;align-items:center;justify-content:center;flex:none;width:clamp(40px,2.6786vw + 12.57px,64px);height:clamp(40px,2.6786vw + 12.57px,64px);
   border-radius:999px;background:#fff;color:var(--ink);font-size:20px;font-weight:600}
 
@@ -320,7 +327,7 @@ li{list-style:none}
 </head>
 <body>
 <div id="bg-line" aria-hidden="true"><span class="circ circ-1"></span><span class="circ circ-2"></span></div>
-<a id="ci-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 96" xmlns="http://www.w3.org/2000/svg"><text x="0" y="74" font-family="Cormorant Garamond, serif" font-size="96" font-weight="600" letter-spacing="-2" fill="currentColor">orbit</text><text x="250" y="74" font-family="Cormorant Garamond, serif" font-size="96" font-weight="600" letter-spacing="-2" fill="currentColor">lab</text><circle cx="232" cy="30" r="11" fill="#2FD6C9"/></svg></a><a id="lets-talk" href="/templates/agency-g/contact.html"><span>Let’s Talk</span></a>
+<a id="ci-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">lab</text><circle cx="306" cy="62" r="18" fill="#2FD6C9"/></svg></a><a id="lets-talk" href="/templates/agency-g/contact.html"><span>Let’s Talk</span></a>
 <button id="full-menu" type="button" aria-label="전체 메뉴 열기"><i></i></button>
 <div id="scroll-hint"><span class="bar"></span><span class="label">SCROLL</span></div>
 
@@ -341,7 +348,7 @@ li{list-style:none}
 
 <section class="pin-beyond" id="beyond">
   <div class="pin-beyond-stage">
-    <h2 class="beyond-title serif"><span class="line-1">Beyond UX</span><span class="line-2">The AX Creator</span></h2>
+    <h2 class="beyond-title serif"><span class="line-1">Beyond UX<i class="sdot"></i></span><span class="line-2">The AX Creator</span></h2>
     <p class="beyond-statement"><span>기술에 가치를 더해,</span><span>내일의 설렘을 완성합니다.</span></p>
   </div>
 </section>
@@ -357,20 +364,20 @@ li{list-style:none}
 </section>
 
 <section class="services" id="services">
-  <div class="services-title-wrap"><div class="services-inner"><h2 class="services-title serif">Our Services</h2></div></div>
+  <div class="services-title-wrap"><div class="services-inner"><h2 class="services-title serif">Our Services<i class="sdot"></i></h2></div></div>
   <div class="services-cards-wrap"><div class="services-inner"><div class="services-cards"><article class="svc-card"><h3 class="svc-title">Finance-Grade Standard</h3><ul class="svc-tags"><li>UI/UX Design</li><li>Platform Operation</li><li>Service Renewal</li><li>QA & Publishing</li></ul><p class="svc-desc">한결은행 통합앱을 6년째 전담 운영하며 세움은행·온카드 등 금융 플랫폼의 개편을 맡아 왔습니다. 가장 까다로운 금융의 기준 위에서 쌓아 온 방식이, 어떤 일을 맡아도 흔들리지 않는 근거가 됩니다. 규정과 보안 검토를 감안해 설계하니 운영 부담이 먼저 줄어듭니다.</p><div class="svc-media"><img src="./assets/svc-1.jpg" alt="" loading="lazy"></div></article><article class="svc-card"><h3 class="svc-title">Industry Crossover</h3><ul class="svc-tags"><li>UX Consulting</li><li>Service Strategy</li><li>UX Research</li><li>Information Architecture</li></ul><p class="svc-desc">금융의 정밀함, 공공의 신뢰, 항공과 유통의 속도까지 — 산업마다 다른 문법을 익혔습니다. 한쪽에서 통한 해법을 다른 쪽에 옮겨 붙일 때 전에 없던 답이 나옵니다. 업종이 달라도 사람이 헤매는 지점은 닮아 있다는 것을 여러 프로젝트에서 확인했습니다.</p><div class="svc-media"><img src="./assets/svc-2.jpg" alt="" loading="lazy"></div></article><article class="svc-card"><h3 class="svc-title">SI Partnership</h3><ul class="svc-tags"><li>SI Collaboration</li><li>Agile Delivery</li><li>System Integration</li><li>Project Management</li></ul><p class="svc-desc">대원정보기술·세움DS의 공식 협력사로 대형 구축 사업의 복잡한 협업 구조를 오래 다뤄 왔습니다. 여러 팀이 얽힌 일정 속에서도 마감과 품질을 같이 지킵니다. 협의 기록을 남기고 변경 사항을 매주 정리해 서로 다른 속도를 맞춰 갑니다.</p><div class="svc-media"><img src="./assets/svc-3.jpg" alt="" loading="lazy"></div></article><article class="svc-card"><h3 class="svc-title">Design System & AX</h3><ul class="svc-tags"><li>Design System</li><li>AX Solution</li><li>Front-end Dev</li><li>R&D</li></ul><p class="svc-desc">자체 디자인 시스템으로 화면의 결을 맞추고, 직접 만든 자동화 도구로 반복 작업을 덜어냅니다. 같은 기간에 더 많이 검토하고 더 자주 고칠 수 있는 이유입니다. 쌓아 둔 부품을 다시 꺼내 쓰니 새 화면일수록 만드는 속도가 빨라집니다.</p><div class="svc-media"><img src="./assets/svc-4.jpg" alt="" loading="lazy"></div></article></div></div></div>
 </section>
 
 <section class="partners" id="partners">
   <div class="partners-pin"><div class="partners-inner">
-    <h2 class="partners-title serif">Our Partners</h2>
+    <h2 class="partners-title serif">Our Partners<i class="sdot"></i></h2>
     <p class="partners-desc">고객이 바라보는 방향을 먼저 읽고, 그 자리에서 가장 나은 결과를 만듭니다.<br>
     브랜드가 사용자에게 가장 잘 전해지도록 오래 쓰는 화면을 함께 만들어 왔습니다.</p>
     <div class="partner-grid"><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="한결은행"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(188,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(188,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">한결은행</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="세움은행"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(232,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(232,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">세움은행</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="온카드"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(262,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(262,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">온카드</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="한별항공"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(205,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(205,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">한별항공</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="대원정보기술"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(170,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(170,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">대원정보기술</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="온마켓"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(188,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(188,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">온마켓</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="국민문화진흥원"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(232,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(232,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">국민문화진흥원</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="세움DS"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(262,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(262,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">세움DS</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="하람생명"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(205,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(205,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">하람생명</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="누리카드"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(170,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(170,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">누리카드</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="가온에너지"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(188,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(188,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">가온에너지</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="드림저축은행"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(232,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(232,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">드림저축은행</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="한별화물"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(262,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(262,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">한별화물</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="바로페이"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(205,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(205,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">바로페이</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="도담제약"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(170,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(170,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">도담제약</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="푸른통신"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(188,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(188,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">푸른통신</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="서연물산"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(232,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(232,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">서연물산</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="맑은물산업"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(262,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(262,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">맑은물산업</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="한빛증권"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(205,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(205,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">한빛증권</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="이음보험"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(170,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(170,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">이음보험</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="밝은교육재단"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(188,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(188,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">밝은교육재단</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="해담유통"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(232,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(232,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">해담유통</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="너울건설"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(262,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(262,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">너울건설</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="솔빛모빌리티"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(205,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(205,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">솔빛모빌리티</text></svg></div><div class="p-logo"><svg viewBox="0 0 200 48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="초록농협"><circle cx="14" cy="24" r="9" fill="none" stroke="hsl(170,62%,52%)" stroke-width="2.2"/><circle cx="21" cy="17" r="3.2" fill="hsl(170,62%,52%)"/><text x="34" y="30" font-family="Pretendard,sans-serif" font-size="17" font-weight="700" letter-spacing="-.4" fill="#3e3f44">초록농협</text></svg></div></div>
   </div></div>
 </section>
 
-<section class="projects" id="projects"><div class="projects-pin"><h2 class="projects-title serif">Our Projects</h2><div class="proj-visual"><div class="proj-vis is-on"><img class="proj-img" src="./assets/proj-1.jpg" alt="" loading="lazy"></div><div class="proj-vis"><img class="proj-img" src="./assets/proj-2.jpg" alt="" loading="lazy"></div><div class="proj-vis"><img class="proj-img" src="./assets/proj-3.jpg" alt="" loading="lazy"></div><a class="proj-vis-link" href="./projects.html" aria-label="프로젝트 보기"></a><div class="proj-indicator"><span class="proj-dot is-on"></span><span class="proj-dot"></span><span class="proj-dot"></span></div></div><div class="proj-info"><article class="proj-slide is-on"><p class="proj-over">차세대 간편결제 플랫폼</p><h3 class="proj-name">온누리 생활상품권</h3><dl class="proj-meta"><dt>Client</dt><dd>한국생활안전공단</dd><dt>Launch</dt><dd>Mar, 2025</dd></dl></article><article class="proj-slide"><p class="proj-over">한결은행</p><h3 class="proj-name">영 캠퍼스 앱</h3><dl class="proj-meta"><dt>Client</dt><dd>한결은행</dd><dt>Launch</dt><dd>Oct, 2022</dd></dl></article><article class="proj-slide"><p class="proj-over">대원정보기술</p><h3 class="proj-name">DAP 생성형 AI</h3><dl class="proj-meta"><dt>Client</dt><dd>대원정보기술</dd><dt>Launch</dt><dd>Apr, 2024</dd></dl></article><a class="proj-more" href="./projects.html">See More Projects <b>↗</b></a></div></div></section>
+<section class="projects" id="projects"><div class="projects-pin"><h2 class="projects-title serif">Our Projects<i class="sdot"></i></h2><div class="proj-visual"><div class="proj-vis is-on"><img class="proj-img" src="./assets/proj-1.jpg" alt="" loading="lazy"></div><div class="proj-vis"><img class="proj-img" src="./assets/proj-2.jpg" alt="" loading="lazy"></div><div class="proj-vis"><img class="proj-img" src="./assets/proj-3.jpg" alt="" loading="lazy"></div><a class="proj-vis-link" href="./projects.html" aria-label="프로젝트 보기"></a><div class="proj-indicator"><span class="proj-dot is-on"></span><span class="proj-dot"></span><span class="proj-dot"></span></div></div><div class="proj-info"><article class="proj-slide is-on"><h3 class="proj-name">차세대 간편결제<br>온누리 생활상품권</h3><dl class="proj-meta"><dt>Client</dt><dd>한국생활안전공단</dd><dt>Launch</dt><dd>Mar, 2025</dd></dl></article><article class="proj-slide"><h3 class="proj-name">한결은행<br>영 캠퍼스 앱</h3><dl class="proj-meta"><dt>Client</dt><dd>한결은행</dd><dt>Launch</dt><dd>Oct, 2022</dd></dl></article><article class="proj-slide"><h3 class="proj-name">대원정보기술<br>DAP 생성형 AI</h3><dl class="proj-meta"><dt>Client</dt><dd>대원정보기술</dd><dt>Launch</dt><dd>Apr, 2024</dd></dl></article><a class="proj-more" href="./projects.html">See More Projects <b>↗</b></a></div></div></section>
 
 <section class="contact-cta" id="say-hello" data-dark>
   <div class="cta-glow" aria-hidden="true"></div>
@@ -380,10 +387,11 @@ li{list-style:none}
       <p class="cta-sub">우리와 어떤 프로젝트를 함께 하고 싶으세요?</p>
       <a class="cta-arrow" href="./contact.html" aria-label="문의하기">↗</a>
     </div>
+    <span class="cta-dot" aria-hidden="true"></span>
   </div>
 </section>
 <footer class="footer" data-rv>
-  <div class="footer-logo"><svg class="footer-wordmark" viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="0" y="138" font-family="Cormorant Garamond, serif" font-size="150" font-weight="600" letter-spacing="-4" fill="#3e3f44">orbit</text><text x="322" y="138" font-family="Cormorant Garamond, serif" font-size="150" font-weight="600" letter-spacing="-4" fill="#3e3f44">lab</text><circle cx="300" cy="52" r="17" fill="url(#wmg)"/><defs><linearGradient id="wmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2FD6C9"/><stop offset="1" stop-color="#5B4BFF"/></linearGradient></defs></svg></div>
+  <div class="footer-logo"><svg class="footer-wordmark" viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="#3e3f44">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="#3e3f44">lab</text><circle cx="306" cy="62" r="18" fill="url(#wmg)"/><defs><linearGradient id="wmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2FD6C9"/><stop offset="1" stop-color="#5B4BFF"/></linearGradient></defs></svg></div>
   <div class="footer-bottom">
     <div class="footer-left">
       <nav class="footer-links"><a href="./projects.html">Projects</a><a href="./about.html">About</a><a href="./contact.html">Contact</a></nav>
@@ -399,7 +407,7 @@ li{list-style:none}
 </footer>
 <div id="menu-overlay" aria-hidden="true">
 <div id="menu-panel"></div>
-<a id="menu-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 96" xmlns="http://www.w3.org/2000/svg"><text x="0" y="74" font-family="Cormorant Garamond, serif" font-size="96" font-weight="600" letter-spacing="-2" fill="currentColor">orbit</text><text x="250" y="74" font-family="Cormorant Garamond, serif" font-size="96" font-weight="600" letter-spacing="-2" fill="currentColor">lab</text><circle cx="232" cy="30" r="11" fill="#2FD6C9"/></svg></a><button id="menu-close" type="button" aria-label="메뉴 닫기"></button>
+<a id="menu-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">lab</text><circle cx="306" cy="62" r="18" fill="#2FD6C9"/></svg></a><button id="menu-close" type="button" aria-label="메뉴 닫기"></button>
 <div class="menu-scroll"><div class="menu-inner">
   <div class="menu-col menu-col-left"><nav class="menu-nav"><a class="menu-item is-on" href="/templates/agency-g/">Home</a><a class="menu-item" href="/templates/agency-g/about.html">About</a><a class="menu-item" href="/templates/agency-g/projects.html">Projects</a><a class="menu-item" href="/templates/agency-g/contact.html">Contact</a></nav></div>
   <div class="menu-col menu-col-right">
@@ -478,10 +486,14 @@ function frame(){
     var q=clamp(((-r.top)-innerHeight*.6)/(innerHeight*.5),0,1);
     t.style.setProperty('--sc',(1-.65*q).toFixed(3));
     t.style.setProperty('--ty',(-184.4*q).toFixed(1)+'px')}
-  if(partners){var r=partners.getBoundingClientRect();
-    partners.classList.toggle('in',r.top<innerHeight*.6&&r.bottom>0)}
-  if(projects){var p=prog(projects),i=p<.34?0:p<.67?1:2;
-    setOn(pvis,i); setOn(pslide,i); setOn(pdot,i)}
+  if(partners){var r=partners.getBoundingClientRect(),q=prog(partners),inr=$('.partners-inner');
+    partners.classList.toggle('in',r.top<innerHeight*.6&&r.bottom>0);
+    partners.classList.toggle('grid-in',q>.5);
+    if(inr)inr.style.setProperty('--pmove',(-276*clamp((q-.42)/.58,0,1)).toFixed(1)+'px')}
+  if(projects){var p=prog(projects),i=p<.34?0:p<.67?1:2,pt=$('.projects-title');
+    setOn(pvis,i); setOn(pslide,i); setOn(pdot,i);
+    var r2=projects.getBoundingClientRect(),q2=clamp(((-r2.top)+innerHeight*.35)/(innerHeight*.55),0,1);
+    if(pt){pt.style.setProperty('--ptsc',(1-.686*q2).toFixed(3));pt.style.setProperty('--pty',(-176.9*q2).toFixed(1)+'px')}}
 }
 function onScroll(){if(!tick)tick=requestAnimationFrame(frame)}
 addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);frame();
