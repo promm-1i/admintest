@@ -217,14 +217,21 @@
 .pstep__d{margin-top:1rem;font-size:var(--p5);line-height:1.8;color:var(--gray60)}
 
 /* 전후 */
-.sba{padding:14rem 0;background:var(--grayBg2)}
-.sba__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:6rem}
-.sba__pair{display:flex;gap:8px}
-.sba__pair figure{position:relative;flex:1;border-radius:12px;overflow:hidden}
-.sba__pair img{width:100%;aspect-ratio:186/210;object-fit:cover}
-.sba__pair span{position:absolute;left:10px;top:10px;padding:0 1rem;height:2.6rem;display:inline-flex;
-  align-items:center;font-size:var(--p8);font-weight:600;color:#fff;background:rgba(0,0,0,.55);border-radius:100px}
-.sba__cap{margin-top:1.4rem;font-size:var(--p6);color:var(--gray60)}
+/* 실측: 제목 +160(30.4/700) · 설명 +218(16/400) · 목록 +313 1200x563
+   항목 588x269 radius8 배경 #F6F6F6 · 안쪽 568x245(패딩 10/14) · 사진 284x245
+   라벨 100x26 radius5 13/600, 왼쪽은 회색·오른쪽은 포인트색 */
+.sba{justify-content:flex-start;padding:160px 0 0;background:#fff}
+.sba__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:25px 24px;margin-top:41px}
+.sba__pair{display:flex;padding:14px 10px;background:var(--grayBg2);border-radius:8px}
+.sba__pair figure{position:relative;flex:1;min-width:0;overflow:hidden}
+.sba__pair img{width:100%;aspect-ratio:284/245;object-fit:cover;background:#111}
+.sba__pair span{position:absolute;top:0;display:inline-flex;align-items:center;justify-content:center;
+  width:100px;height:26px;font-size:var(--p6);font-weight:600;color:#fff;
+  background:var(--gray60);border-radius:5px}
+.sba__pair figure:first-child span{left:0}
+.sba__pair figure:last-child span{right:0;background:var(--point01)}
+.sba .stit__h{font-size:var(--h4);margin-top:0}
+.sba__d{margin-top:12px;font-size:var(--p3);line-height:1.7;color:var(--gray60)}
 
 /* 미디어 로고 띠 */
 .media{padding:12rem 0;text-align:center;background:#fff}
@@ -477,17 +484,20 @@
 <p class="pstep__n">STEP 02</p><p class="pstep__t">정복</p><p class="pstep__d">기구로 코뼈를 제자리로 밀어 맞춥니다.</p></div><div class="pstep rv rv--lg"><img src="./assets/ps-frac-3.jpg" alt="" loading="lazy">
 <p class="pstep__n">STEP 03</p><p class="pstep__t">고정</p><p class="pstep__d">안팎으로 고정해 자리를 잡을 때까지 유지합니다.</p></div></div>
 </div></section><section class="sba sec-h"><div class="in2">
-<div class="stit rv"><p class="stit__label">CT로 보는 변화</p><h2 class="stit__h">코뼈골절 정복 전후</h2></div>
-<div class="sba__grid"><div class="rv"><div class="sba__pair">
-<figure><img src="./assets/ba-frac-1-b.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
-<figure><img src="./assets/ba-frac-1-a.jpg" alt="수술 후" loading="lazy"><span>After</span></figure>
-</div><p class="sba__cap">20대 남성 · 운동 중 좌측 전위</p></div><div class="rv"><div class="sba__pair">
-<figure><img src="./assets/ba-frac-2-b.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
-<figure><img src="./assets/ba-frac-2-a.jpg" alt="수술 후" loading="lazy"><span>After</span></figure>
-</div><p class="sba__cap">30대 여성 · 낙상 후 우측 전위</p></div><div class="rv"><div class="sba__pair">
-<figure><img src="./assets/ba-frac-3-b.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
-<figure><img src="./assets/ba-frac-3-a.jpg" alt="수술 후" loading="lazy"><span>After</span></figure>
-</div><p class="sba__cap">10대 남성 · 비중격 동반 골절</p></div></div>
+<div class="stit rv"><h2 class="stit__h">CT로 보는 코뼈골절 정복 수술 전후사진</h2><p class="sba__d">수술 전후 3D-CT와 내시경 자료를 통해<br>구조의 변화를 객관적으로 확인합니다.</p></div>
+<div class="sba__grid"><div class="sba__pair rv rv--lg">
+<figure><img src="./assets/ba-frac-1-b.jpg" alt="수술 전 CT (위)" loading="lazy"><span>수술 전 CT (위)</span></figure>
+<figure><img src="./assets/ba-frac-1-a.jpg" alt="수술 후 CT (위)" loading="lazy"><span>수술 후 CT (위)</span></figure>
+</div><div class="sba__pair rv rv--lg">
+<figure><img src="./assets/ba-frac-2-b.jpg" alt="수술 전 CT (45도)" loading="lazy"><span>수술 전 CT (45도)</span></figure>
+<figure><img src="./assets/ba-frac-2-a.jpg" alt="수술 후 CT (45도)" loading="lazy"><span>수술 후 CT (45도)</span></figure>
+</div><div class="sba__pair rv rv--lg">
+<figure><img src="./assets/ba-frac-3-b.jpg" alt="수술 전 CT (정면)" loading="lazy"><span>수술 전 CT (정면)</span></figure>
+<figure><img src="./assets/ba-frac-3-a.jpg" alt="수술 후 CT (정면)" loading="lazy"><span>수술 후 CT (정면)</span></figure>
+</div><div class="sba__pair rv rv--lg">
+<figure><img src="./assets/ba-frac-4-b.jpg" alt="수술 전 내시경" loading="lazy"><span>수술 전 내시경</span></figure>
+<figure><img src="./assets/ba-frac-4-a.jpg" alt="수술 후 내시경" loading="lazy"><span>수술 후 내시경</span></figure>
+</div></div>
 </div></section><section class="media sec-h"><div class="in2">
 <div class="stit stit--center rv"><h2 class="stit__h">숨길이비인후과가 소개된 곳</h2></div>
 <ul class="media__row rv"><li class="media__i">KBS 생로병사</li><li class="media__i">MBC 기분좋은날</li><li class="media__i">SBS 모닝와이드</li><li class="media__i">조선일보 헬스</li><li class="media__i">중앙일보 건강</li><li class="media__i">연합뉴스</li></ul>
