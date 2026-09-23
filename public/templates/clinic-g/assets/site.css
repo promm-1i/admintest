@@ -25,9 +25,16 @@
   --point01:#0E6E8F; --point02:#0B5670; --point03:#003E57;
   --black:var(--gray90); --line:var(--gray20);
 }
-/* 레퍼런스와 같은 루트 글꼴 곡선 — 1440에서 8px, 2561 이상 10px */
+/* 루트 글꼴 사다리 — 레퍼런스 common.css 그대로.
+   1440 은 8px, 1024 는 7px, 768 이하는 6px. rem 치수가 전부 여기에 매달려 있다. */
+@media screen and (min-width:3201px){ html{font-size:13px} }
+@media screen and (min-width:2561px) and (max-width:3200px){ html{font-size:clamp(0.625rem,0.125rem + 0.3125vw,0.75rem)} }
 @media screen and (min-width:2561px){ html{font-size:10px} }
 @media screen and (max-width:2560px){ html{font-size:clamp(0.53125rem,0.1964rem + 0.2679vw,0.625rem)} }
+@media screen and (max-width:2000px){ html{font-size:8.5px} }
+@media screen and (max-width:1640px){ html{font-size:8px} }
+@media screen and (max-width:1240px){ html{font-size:7px} }
+@media screen and (max-width:768px){ html{font-size:6px} }
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 *::before,*::after{box-sizing:border-box}
@@ -59,8 +66,20 @@ table{width:100%;border-collapse:collapse}
 .in4{position:relative;width:var(--in4);max-width:100%;padding:0 var(--inPd);margin:0 auto}
 .in5{position:relative;width:var(--in5);max-width:100%;padding:0 var(--inPd);margin:0 auto}
 
-/* 등장 모션 */
-.rv{opacity:0;transform:translateY(40px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+/* 등장 모션 — 레퍼런스 실측
+   트리거: IntersectionObserver threshold 0.5 (≤768 은 0.1), active 는 유지(되돌리지 않음)
+   기본: translateY 5rem(40) · 0.6s ease-in-out
+   역할별: 소제목 3rem/0.4s · 본문 50px/0.6s · 카드 100px/0.6s · 대형제목 100px/1s
+   지연 단계: 0.2 / 0.4 / 0.6s */
+.rv{opacity:0;transform:translateY(5rem);
+  transition:opacity .6s ease-in-out,transform .6s ease-in-out}
+.rv--sm{transform:translateY(var(--contMt4));transition-duration:.4s}
+.rv--md{transform:translateY(50px)}
+.rv--lg{transform:translateY(100px)}
+.rv--xl{transform:translateY(100px);transition-duration:1s}
+.rv.d2{transition-delay:.2s}
+.rv.d4{transition-delay:.4s}
+.rv.d6{transition-delay:.6s}
 .rv.on{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){
   .rv{opacity:1!important;transform:none!important;transition:none!important}
@@ -88,8 +107,8 @@ table{width:100%;border-collapse:collapse}
 
 /* 섹션 제목 묶음 — 레퍼런스 .sect_tit_box */
 .stit{position:relative}
-.stit__label{font-size:var(--p4);font-weight:600;color:var(--point01)}
-.stit__h{margin-top:1.4rem;font-size:var(--h4);font-weight:700;line-height:1.4;letter-spacing:-.02em}
+.stit__label{font-size:var(--p2);font-weight:500;color:var(--point01)}
+.stit__h{margin-top:1.4rem;font-size:var(--h3);font-weight:700;line-height:1.5;letter-spacing:-.02em}
 .stit__t{margin-top:2rem;font-size:var(--p3);line-height:1.8;color:var(--gray60)}
 .stit--center{text-align:center}
 
@@ -155,7 +174,7 @@ table{width:100%;border-collapse:collapse}
   padding-top:16rem;background:rgba(255,255,255,.97);opacity:0;visibility:hidden;transition:all .3s}
 .search-layer.on{opacity:1;visibility:visible}
 .search-layer__in{width:var(--in3);max-width:92%;text-align:center}
-.search-layer__t{font-size:var(--h5);font-weight:700}
+.search-layer__t{font-size:var(--h3);font-weight:700}
 .search-layer__d{margin-top:1.2rem;font-size:var(--p3);color:var(--gray60)}
 .search-layer__f{display:flex;align-items:center;gap:1rem;margin-top:3.4rem;padding:0 2rem;
   height:6.4rem;border-bottom:2px solid var(--gray90)}
@@ -221,7 +240,8 @@ table{width:100%;border-collapse:collapse}
 .quickside__top{width:100%;height:46px;color:#fff;background:rgba(255,255,255,.08)}
 
 /* ── 푸터 ── 1440×350 */
-.site-foot{padding:6rem 0 7rem;color:#fff;background:#141A1E}
+/* 레퍼런스 푸터 실측: 위 36px · 아래 108px */
+.site-foot{padding:4.5rem 0 13.5rem;color:#fff;background:#141A1E}
 .site-foot__in{margin:0 auto;width:var(--in2);max-width:100%;padding:0 var(--inPd)}
 .site-foot__top{display:flex;align-items:center;justify-content:space-between;
   padding-bottom:2.6rem;border-bottom:1px solid rgba(255,255,255,.12)}

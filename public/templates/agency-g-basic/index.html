@@ -144,14 +144,10 @@ li{list-style:none}
 
 /* ── 히어로 ── */
 .hero{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:100vh;padding:120px var(--gut) clamp(56px,1.8055vw + 45.33px,80px)}
+.fx-blob,.fx-frac,.fx-glow{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fx-blob{filter:blur(6px)}
 .hero-blob{position:absolute;top:49.7%;left:48.1%;transform:translate(-50%,-50%);
-  width:min(510px,35.4vw);height:min(540px,37.5vw);
-  background:radial-gradient(58% 58% at 30% 26%,rgba(47,214,201,.95),rgba(47,214,201,0) 66%),
-             radial-gradient(62% 62% at 72% 40%,rgba(91,75,255,.9),rgba(91,75,255,0) 68%),
-             radial-gradient(58% 58% at 50% 80%,rgba(179,107,255,.85),rgba(179,107,255,0) 66%),
-             radial-gradient(40% 40% at 42% 40%,rgba(255,255,255,.8),rgba(255,255,255,0) 72%),
-             linear-gradient(150deg,rgba(120,205,255,.55),rgba(150,120,255,.45));
-  filter:blur(16px);border-radius:48% 52% 44% 56%/52% 44% 56% 48%;opacity:.95;
+  width:min(689px,47.8vw);height:min(729px,50.6vw);opacity:.95;
   animation:blob 16s ease-in-out infinite}
 @keyframes blob{0%,100%{transform:translate(-50%,calc(-50% + var(--plx,0px))) scale(1)}50%{transform:translate(calc(-50% - 2.4vw),calc(-50% + 2vh + var(--plx,0px))) scale(1.06)}}
 .hero .content{position:relative;z-index:3;width:100%}
@@ -193,7 +189,8 @@ li{list-style:none}
 .insight-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
   width:min(480px,80%);height:min(480px,80%);border-radius:clamp(32px,3.5714vw - 4.57px,64px);overflow:hidden;
   background:#0f0e0e;transition:width .9s cubic-bezier(.22,1,.36,1),height .9s cubic-bezier(.22,1,.36,1)}
-.insight-card:before{content:"";position:absolute;inset:0;
+/* 카드 배경은 캔버스가 그린다 */
+.insight-card:before{content:"";position:absolute;inset:0;z-index:-1;
   background:repeating-linear-gradient(115deg,#2a1d4d 0 26px,#432a6e 26px 52px,#1d1733 52px 82px),
              radial-gradient(60% 80% at 78% 62%,rgba(196,74,140,.75),transparent 70%);
   background-blend-mode:screen;opacity:.95}
@@ -337,7 +334,7 @@ li{list-style:none}
 <div id="scroll-hint"><span class="bar"></span><span class="label">SCROLL</span></div>
 
 <div class="hero" id="hero">
-  <div class="hero-blob" aria-hidden="true"></div>
+  <div class="hero-blob" aria-hidden="true"><canvas class="fx-blob"></canvas></div>
   <div class="content">
     <div class="head-wrap">
       <h1 id="head-title" class="serif"><span class="line-1">We Are</span><span class="line-2">Orbitlab</span></h1>
@@ -363,7 +360,7 @@ li{list-style:none}
     <div class="insight-board">
       <span class="insight-tagline insight-tagline-1">새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.&nbsp;&nbsp;새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.&nbsp;&nbsp;</span>
       <span class="insight-tagline insight-tagline-2">새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.&nbsp;&nbsp;새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.&nbsp;&nbsp;</span>
-      <div class="insight-frame"><div class="insight-card"><div class="insight-steps"><div class="insight-step is-on" data-step="0"><p class="insight-eyebrow">INSIGHT</p><h3 class="insight-title"><span>고객의 자리에서</span><span>문제를 다시 정의합니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">01</text></svg></div><div class="insight-step" data-step="1"><p class="insight-eyebrow">IDEA</p><h3 class="insight-title"><span>가장 단순한 구조로</span><span>가장 빠른 길을 찾습니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">02</text></svg></div><div class="insight-step" data-step="2"><p class="insight-eyebrow">INNOVATION</p><h3 class="insight-title"><span>열고 난 뒤에도</span><span>같이 굴리며 다듬습니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">03</text></svg></div><div class="insight-indicator"><span class="insight-dot is-on"></span><span class="insight-dot"></span><span class="insight-dot"></span></div></div></div></div>
+      <div class="insight-frame"><div class="insight-card"><canvas class="fx-frac"></canvas><div class="insight-steps"><div class="insight-step is-on" data-step="0"><p class="insight-eyebrow">INSIGHT</p><h3 class="insight-title"><span>고객의 자리에서</span><span>문제를 다시 정의합니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">01</text></svg></div><div class="insight-step" data-step="1"><p class="insight-eyebrow">IDEA</p><h3 class="insight-title"><span>가장 단순한 구조로</span><span>가장 빠른 길을 찾습니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">02</text></svg></div><div class="insight-step" data-step="2"><p class="insight-eyebrow">INNOVATION</p><h3 class="insight-title"><span>열고 난 뒤에도</span><span>같이 굴리며 다듬습니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">03</text></svg></div><div class="insight-indicator"><span class="insight-dot is-on"></span><span class="insight-dot"></span><span class="insight-dot"></span></div></div></div></div>
     </div>
   </div>
 </section>
@@ -385,7 +382,7 @@ li{list-style:none}
 <section class="projects" id="projects"><div class="projects-pin"><h2 class="projects-title serif">Our Projects<i class="sdot"></i></h2><div class="proj-visual"><div class="proj-vis is-on"><img class="proj-img" src="../agency-g/assets/proj-1.jpg" alt="" loading="lazy"></div><div class="proj-vis"><img class="proj-img" src="../agency-g/assets/proj-2.jpg" alt="" loading="lazy"></div><div class="proj-vis"><img class="proj-img" src="../agency-g/assets/proj-3.jpg" alt="" loading="lazy"></div><a class="proj-vis-link" href="./projects.html" aria-label="프로젝트 보기"></a><div class="proj-indicator"><span class="proj-dot is-on"></span><span class="proj-dot"></span><span class="proj-dot"></span></div></div><div class="proj-info"><article class="proj-slide is-on"><h3 class="proj-name">차세대 간편결제<br>온누리 생활상품권</h3><dl class="proj-meta"><dt>Client</dt><dd>한국생활안전공단</dd><dt>Launch</dt><dd>Mar, 2025</dd></dl></article><article class="proj-slide"><h3 class="proj-name">한결은행<br>영 캠퍼스 앱</h3><dl class="proj-meta"><dt>Client</dt><dd>한결은행</dd><dt>Launch</dt><dd>Oct, 2022</dd></dl></article><article class="proj-slide"><h3 class="proj-name">대원정보기술<br>DAP 생성형 AI</h3><dl class="proj-meta"><dt>Client</dt><dd>대원정보기술</dd><dt>Launch</dt><dd>Apr, 2024</dd></dl></article><a class="proj-more" href="./projects.html">See More Projects <b>↗</b></a></div></div></section>
 
 <section class="contact-cta" id="say-hello" data-dark>
-  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="cta-glow" aria-hidden="true"><canvas class="fx-glow"></canvas></div>
   <div class="cta-inner">
     <h2 class="cta-title serif">Say Hello!</h2>
     <div class="cta-row">

@@ -144,14 +144,10 @@ li{list-style:none}
 
 /* ── 히어로 ── */
 .hero{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:100vh;padding:120px var(--gut) clamp(56px,1.8055vw + 45.33px,80px)}
+.fx-blob,.fx-frac,.fx-glow{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fx-blob{filter:blur(6px)}
 .hero-blob{position:absolute;top:49.7%;left:48.1%;transform:translate(-50%,-50%);
-  width:min(510px,35.4vw);height:min(540px,37.5vw);
-  background:radial-gradient(58% 58% at 30% 26%,rgba(47,214,201,.95),rgba(47,214,201,0) 66%),
-             radial-gradient(62% 62% at 72% 40%,rgba(91,75,255,.9),rgba(91,75,255,0) 68%),
-             radial-gradient(58% 58% at 50% 80%,rgba(179,107,255,.85),rgba(179,107,255,0) 66%),
-             radial-gradient(40% 40% at 42% 40%,rgba(255,255,255,.8),rgba(255,255,255,0) 72%),
-             linear-gradient(150deg,rgba(120,205,255,.55),rgba(150,120,255,.45));
-  filter:blur(16px);border-radius:48% 52% 44% 56%/52% 44% 56% 48%;opacity:.95;
+  width:min(689px,47.8vw);height:min(729px,50.6vw);opacity:.95;
   animation:blob 16s ease-in-out infinite}
 @keyframes blob{0%,100%{transform:translate(-50%,calc(-50% + var(--plx,0px))) scale(1)}50%{transform:translate(calc(-50% - 2.4vw),calc(-50% + 2vh + var(--plx,0px))) scale(1.06)}}
 .hero .content{position:relative;z-index:3;width:100%}
@@ -193,7 +189,8 @@ li{list-style:none}
 .insight-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;
   width:min(480px,80%);height:min(480px,80%);border-radius:clamp(32px,3.5714vw - 4.57px,64px);overflow:hidden;
   background:#0f0e0e;transition:width .9s cubic-bezier(.22,1,.36,1),height .9s cubic-bezier(.22,1,.36,1)}
-.insight-card:before{content:"";position:absolute;inset:0;
+/* 카드 배경은 캔버스가 그린다 */
+.insight-card:before{content:"";position:absolute;inset:0;z-index:-1;
   background:repeating-linear-gradient(115deg,#2a1d4d 0 26px,#432a6e 26px 52px,#1d1733 52px 82px),
              radial-gradient(60% 80% at 78% 62%,rgba(196,74,140,.75),transparent 70%);
   background-blend-mode:screen;opacity:.95}
@@ -333,7 +330,7 @@ li{list-style:none}
 <div id="scroll-hint"><span class="bar"></span><span class="label">SCROLL</span></div>
 
 <div class="hero" id="hero">
-  <div class="hero-blob" aria-hidden="true"></div>
+  <div class="hero-blob" aria-hidden="true"><canvas class="fx-blob"></canvas></div>
   <div class="content">
     <div class="head-wrap">
       <h1 id="head-title" class="serif"><span class="line-1">We Are</span><span class="line-2">Orbitlab</span></h1>
@@ -359,7 +356,7 @@ li{list-style:none}
     <div class="insight-board">
       <span class="insight-tagline insight-tagline-1">새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.&nbsp;&nbsp;새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.&nbsp;&nbsp;</span>
       <span class="insight-tagline insight-tagline-2">새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.&nbsp;&nbsp;새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.&nbsp;&nbsp;</span>
-      <div class="insight-frame"><div class="insight-card"><div class="insight-steps"><div class="insight-step is-on" data-step="0"><p class="insight-eyebrow">INSIGHT</p><h3 class="insight-title"><span>고객의 자리에서</span><span>문제를 다시 정의합니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">01</text></svg></div><div class="insight-step" data-step="1"><p class="insight-eyebrow">IDEA</p><h3 class="insight-title"><span>가장 단순한 구조로</span><span>가장 빠른 길을 찾습니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">02</text></svg></div><div class="insight-step" data-step="2"><p class="insight-eyebrow">INNOVATION</p><h3 class="insight-title"><span>열고 난 뒤에도</span><span>같이 굴리며 다듬습니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">03</text></svg></div><div class="insight-indicator"><span class="insight-dot is-on"></span><span class="insight-dot"></span><span class="insight-dot"></span></div></div></div></div>
+      <div class="insight-frame"><div class="insight-card"><canvas class="fx-frac"></canvas><div class="insight-steps"><div class="insight-step is-on" data-step="0"><p class="insight-eyebrow">INSIGHT</p><h3 class="insight-title"><span>고객의 자리에서</span><span>문제를 다시 정의합니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">01</text></svg></div><div class="insight-step" data-step="1"><p class="insight-eyebrow">IDEA</p><h3 class="insight-title"><span>가장 단순한 구조로</span><span>가장 빠른 길을 찾습니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">02</text></svg></div><div class="insight-step" data-step="2"><p class="insight-eyebrow">INNOVATION</p><h3 class="insight-title"><span>열고 난 뒤에도</span><span>같이 굴리며 다듬습니다.</span></h3><svg class="insight-num" viewBox="0 0 188 119" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="94" y="117" text-anchor="middle" font-family="Cormorant Garamond, serif" font-size="166" font-weight="600" letter-spacing="2" fill="rgba(255,255,255,.5)">03</text></svg></div><div class="insight-indicator"><span class="insight-dot is-on"></span><span class="insight-dot"></span><span class="insight-dot"></span></div></div></div></div>
     </div>
   </div>
 </section>
@@ -381,7 +378,7 @@ li{list-style:none}
 <section class="projects" id="projects"><div class="projects-pin"><h2 class="projects-title serif">Our Projects<i class="sdot"></i></h2><div class="proj-visual"><div class="proj-vis is-on"><img class="proj-img" src="./assets/proj-1.jpg" alt="" loading="lazy"></div><div class="proj-vis"><img class="proj-img" src="./assets/proj-2.jpg" alt="" loading="lazy"></div><div class="proj-vis"><img class="proj-img" src="./assets/proj-3.jpg" alt="" loading="lazy"></div><a class="proj-vis-link" href="./projects.html" aria-label="프로젝트 보기"></a><div class="proj-indicator"><span class="proj-dot is-on"></span><span class="proj-dot"></span><span class="proj-dot"></span></div></div><div class="proj-info"><article class="proj-slide is-on"><h3 class="proj-name">차세대 간편결제<br>온누리 생활상품권</h3><dl class="proj-meta"><dt>Client</dt><dd>한국생활안전공단</dd><dt>Launch</dt><dd>Mar, 2025</dd></dl></article><article class="proj-slide"><h3 class="proj-name">한결은행<br>영 캠퍼스 앱</h3><dl class="proj-meta"><dt>Client</dt><dd>한결은행</dd><dt>Launch</dt><dd>Oct, 2022</dd></dl></article><article class="proj-slide"><h3 class="proj-name">대원정보기술<br>DAP 생성형 AI</h3><dl class="proj-meta"><dt>Client</dt><dd>대원정보기술</dd><dt>Launch</dt><dd>Apr, 2024</dd></dl></article><a class="proj-more" href="./projects.html">See More Projects <b>↗</b></a></div></div></section>
 
 <section class="contact-cta" id="say-hello" data-dark>
-  <div class="cta-glow" aria-hidden="true"></div>
+  <div class="cta-glow" aria-hidden="true"><canvas class="fx-glow"></canvas></div>
   <div class="cta-inner">
     <h2 class="cta-title serif">Say Hello!</h2>
     <div class="cta-row">
@@ -469,6 +466,143 @@ if(darks.length){addEventListener('scroll',tone,{passive:true});addEventListener
 /* 스크롤 힌트 */
 var hint=$('#scroll-hint');
 if(hint)addEventListener('scroll',function(){hint.classList.toggle('is-hidden',scrollY>innerHeight*.6)},{passive:true});
+
+
+
+
+
+
+/* ── 살아 움직이는 배경 넷 — 원본은 WebGL 셰이더, 여기서는 캔버스로 같은 크기·속도로 그린다 ── */
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var G1=[47,214,201], G2=[91,75,255], G3=[179,107,255];
+function rgba(c,a){return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')'}
+
+function fit(cv){
+  var r=cv.getBoundingClientRect(), d=Math.min(2,devicePixelRatio||1);
+  var w=Math.max(1,Math.round(r.width*d)), h=Math.max(1,Math.round(r.height*d));
+  if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}
+  return d;
+}
+function runner(cv,draw){
+  var vis=false, raf=0;
+  new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting; if(vis&&!raf)loop(performance.now())})},{threshold:0}).observe(cv);
+  function loop(t){ raf=0; if(!vis)return; var d=fit(cv); draw(cv.getContext('2d'),cv.width,cv.height,t/1000,d); raf=requestAnimationFrame(loop) }
+  addEventListener('resize',function(){fit(cv)});
+  if(reduce){var d=fit(cv);draw(cv.getContext('2d'),cv.width,cv.height,0,d);return}
+  loop(performance.now());
+}
+
+/* 1. 히어로 덩어리 — 8개 점이 일렁이는 한 덩어리 (원본 sWarp 20 / lPoints 8) */
+var blob=document.querySelector('canvas.fx-blob');
+if(blob)runner(blob,function(c,w,h,t){
+  c.clearRect(0,0,w,h);
+  var cx=w*.5, cy=h*.5, R=Math.min(w,h)*.40, N=8, pts=[];
+  for(var i=0;i<N;i++){
+    var a2=i/N*Math.PI*2, rr=R*(1+0.10*Math.sin(t*0.5+i*1.7)+0.05*Math.cos(t*0.31+i*2.3));
+    pts.push([cx+Math.cos(a2)*rr, cy+Math.sin(a2)*rr*1.03]);
+  }
+  c.save();
+  c.filter='blur('+(R*0.07)+'px)';
+  c.beginPath();
+  var mx=(pts[N-1][0]+pts[0][0])/2, my=(pts[N-1][1]+pts[0][1])/2;
+  c.moveTo(mx,my);
+  for(var i=0;i<N;i++){
+    var p1=pts[i], p2=pts[(i+1)%N];
+    c.quadraticCurveTo(p1[0],p1[1],(p1[0]+p2[0])/2,(p1[1]+p2[1])/2);
+  }
+  c.closePath(); c.clip();
+  var lg=c.createLinearGradient(cx-R,cy-R,cx+R,cy+R);
+  lg.addColorStop(0,rgba(G1,.95)); lg.addColorStop(.5,rgba(G2,.95)); lg.addColorStop(1,rgba(G3,.95));
+  c.fillStyle=lg; c.fillRect(0,0,w,h);
+  for(var i=0;i<3;i++){
+    var ang=t*0.22+i*2.1, col=i===0?G1:i===1?G2:G3;
+    var x=cx+Math.cos(ang)*R*0.34, y=cy+Math.sin(ang)*R*0.3;
+    var g=c.createRadialGradient(x,y,0,x,y,R*0.85);
+    g.addColorStop(0,rgba(col,.85)); g.addColorStop(1,rgba(col,0));
+    c.fillStyle=g; c.fillRect(0,0,w,h);
+  }
+  var hx=cx-R*.22, hy=cy-R*.26;
+  var hg=c.createRadialGradient(hx,hy,0,hx,hy,R*.62);
+  hg.addColorStop(0,'rgba(255,255,255,.5)'); hg.addColorStop(1,'rgba(255,255,255,0)');
+  c.fillStyle=hg; c.fillRect(0,0,w,h);
+  c.restore();
+});
+
+/* 2. Say Hello 지평선 — 아래에서 떠오르는 빛 띠 */
+var glow=document.querySelector('canvas.fx-glow');
+if(glow)runner(glow,function(c,w,h,t){
+  c.fillStyle='#141414'; c.fillRect(0,0,w,h);
+  var horizon=h*0.60, rx=w*1.42, ry=h*0.66;
+  var cx=w*0.5, cy=horizon+ry;
+  c.save();
+  c.globalCompositeOperation='lighter';
+  for(var k=0;k<3;k++){
+    var sp=1+k*1.8, a=(.38-k*.1)*(0.86+0.14*Math.sin(t*0.5+k));
+    var g=c.createRadialGradient(cx,cy,ry*0.985,cx,cy,ry*(1+0.035*sp));
+    g.addColorStop(0,'rgba(210,225,255,'+a+')');
+    g.addColorStop(.45,'rgba(140,160,255,'+(a*.5)+')');
+    g.addColorStop(1,'rgba(120,140,255,0)');
+    c.fillStyle=g; c.beginPath(); c.ellipse(cx,cy,rx*(1+0.035*sp),ry*(1+0.035*sp),0,Math.PI,0); c.fill();
+  }
+  for(var i=0;i<3;i++){
+    var x=cx+Math.sin(t*0.22+i*2.2)*w*0.22, y=horizon-h*(0.06+0.05*i);
+    var gg=c.createRadialGradient(x,y,0,x,y,w*(0.16+0.06*i));
+    gg.addColorStop(0,'rgba(180,170,255,'+(0.16-0.04*i)+')'); gg.addColorStop(1,'rgba(180,170,255,0)');
+    c.fillStyle=gg; c.beginPath(); c.arc(x,y,w*(0.16+0.06*i),0,6.2832); c.fill();
+  }
+  c.restore();
+  c.globalCompositeOperation='source-over';
+  c.fillStyle='#141414'; c.beginPath(); c.ellipse(cx,cy,rx,ry,0,0,6.2832); c.fill();
+  var rim=c.createLinearGradient(w*0.1,0,w*0.9,0);
+  rim.addColorStop(0,'rgba(200,215,255,0)'); rim.addColorStop(.32,'rgba(226,234,255,.75)');
+  rim.addColorStop(.5,'rgba(255,255,255,1)'); rim.addColorStop(.68,'rgba(226,234,255,.75)');
+  rim.addColorStop(1,'rgba(200,215,255,0)');
+  c.strokeStyle=rim; c.lineWidth=Math.max(1.4,h*0.0022); c.shadowColor='rgba(190,205,255,.9)'; c.shadowBlur=h*0.05;
+  c.beginPath(); c.ellipse(cx,cy,rx,ry,0,Math.PI,0); c.stroke(); c.shadowBlur=0;
+});
+
+/* 3. 인사이트 카드 — 비스듬한 빛 띠가 천천히 흐른다 */
+var frac=document.querySelector('canvas.fx-frac');
+if(frac)runner(frac,function(c,w,h,t){
+  c.fillStyle='#0f0e0e'; c.fillRect(0,0,w,h);
+  c.save(); c.translate(w/2,h/2); c.rotate(-0.42); c.translate(-w,-h);
+  var span=w*2, step=Math.max(18,w*0.021);
+  for(var x=-span;x<span*2;x+=step){
+    var ph=(x*0.004+t*0.28), v=0.5+0.5*Math.sin(ph);
+    var g=c.createLinearGradient(x,0,x+step,0);
+    g.addColorStop(0,'rgba('+Math.round(40+80*v)+','+Math.round(26+30*v)+','+Math.round(72+70*v)+',1)');
+    g.addColorStop(1,'rgba('+Math.round(24+40*v)+','+Math.round(18+18*v)+','+Math.round(48+46*v)+',1)');
+    c.fillStyle=g; c.fillRect(x,0,step,h*3);
+  }
+  c.restore();
+  var px=w*(0.72+0.05*Math.sin(t*0.21)), py=h*(0.62+0.06*Math.cos(t*0.17));
+  var pg=c.createRadialGradient(px,py,0,px,py,w*0.55);
+  pg.addColorStop(0,'rgba(214,92,158,.55)'); pg.addColorStop(.5,'rgba(150,70,190,.22)'); pg.addColorStop(1,'rgba(90,60,170,0)');
+  c.globalCompositeOperation='lighter'; c.fillStyle=pg; c.fillRect(0,0,w,h);
+  c.globalCompositeOperation='source-over';
+});
+
+/* 4. 회사소개 배너 — 가운데가 빨려드는 고리 */
+var bh=document.querySelector('canvas.fx-hole');
+if(bh)runner(bh,function(c,w,h,t){
+  c.fillStyle='#0d0d12'; c.fillRect(0,0,w,h);
+  var cx=w*0.5, cy=h*0.52, R=Math.min(w,h)*0.46;
+  c.save(); c.globalCompositeOperation='lighter';
+  for(var i=0;i<5;i++){
+    var a=t*(0.18+i*0.05)+i*1.1, rr=R*(0.55+i*0.11), th=R*(0.1-i*0.012);
+    var col=i%3===0?G1:i%3===1?G2:G3;
+    var g=c.createRadialGradient(cx,cy,rr-th,cx,cy,rr+th);
+    g.addColorStop(0,rgba(col,0)); g.addColorStop(.5,rgba(col,.34-i*.04)); g.addColorStop(1,rgba(col,0));
+    c.save(); c.translate(cx,cy); c.rotate(a); c.scale(1,0.42+0.05*Math.sin(t*0.3+i)); c.translate(-cx,-cy);
+    c.fillStyle=g; c.beginPath(); c.arc(cx,cy,rr+th,0,6.2832); c.fill(); c.restore();
+  }
+  c.restore();
+  var core=c.createRadialGradient(cx,cy,0,cx,cy,R*0.5);
+  core.addColorStop(0,'rgba(8,8,14,1)'); core.addColorStop(.72,'rgba(10,10,18,.9)'); core.addColorStop(1,'rgba(10,10,18,0)');
+  c.fillStyle=core; c.beginPath(); c.arc(cx,cy,R*0.5,0,6.2832); c.fill();
+});
+})();
 
 /* 전체 메뉴 */
 var ov=$('#menu-overlay');

@@ -25,7 +25,14 @@
   background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,.05) 26%,rgba(0,0,0,.05) 46%,rgba(0,0,0,.62) 100%)}
 .mv__cap{position:absolute;z-index:3;left:0;right:0;bottom:158px;color:#fff}
 .mv__cap-in{margin:0 auto;width:var(--in);max-width:100%;padding:0 var(--inPd)}
-.mv__t{font-size:var(--h2);font-weight:700;line-height:1.3;letter-spacing:-.03em}
+.mv__t{font-size:var(--h1);font-weight:700;line-height:1.3;letter-spacing:-.03em}
+.mv__reel{display:inline-block;overflow:hidden;height:1.21em;vertical-align:bottom}
+.mv__reel-t{display:block;animation:mvreel 9s ease infinite}
+.mv__reel i{display:block;height:1.21em;font-style:normal}
+@keyframes mvreel{
+  0%,11.111%{transform:translateY(0)} 20%,31.111%{transform:translateY(-1.21em)}
+  40%,51.111%{transform:translateY(-2.42em)} 60%,71.111%{transform:translateY(-3.63em)}
+  80%,91.111%{transform:translateY(-4.84em)} 100%{transform:translateY(-6.05em)}}
 .mv__d{margin-top:1.8rem;font-size:var(--p2);color:rgba(255,255,255,.88)}
 .mv__nav{position:absolute;z-index:3;left:0;right:0;bottom:118px}
 .mv__nav-in{display:flex;align-items:center;gap:1.2rem;margin:0 auto;width:var(--in);max-width:100%;padding:0 var(--inPd)}
@@ -33,25 +40,32 @@
 .mv__dot.on{width:26px;border-radius:8px;background:#fff}
 .mv__play{margin-left:.6rem;width:22px;height:22px;color:#fff}
 .mv__play svg{width:100%;height:100%;fill:currentColor}
-.mv__form{position:absolute;z-index:4;left:0;right:0;bottom:0}
+/* 레퍼런스 .fixed_form — 화면 하단 고정(bottom 24px · 폭 1240) */
+.mv__form{position:fixed;z-index:10;left:0;right:0;bottom:24px}
 .mv__form-in{margin:0 auto;width:var(--in);max-width:100%;padding:0 var(--inPd)}
 
 /* SINCE — 대형 숫자 카운터 158/158 700 */
 .since{position:relative;display:flex;align-items:center;height:900px;background:#fff;overflow:hidden}
-.since__in{display:flex;align-items:flex-start;justify-content:space-between;gap:6rem;
+/* 레퍼런스 .in 은 -6rem 선언이지만 라이브 실측 위치는 -70px 이다(y1137) */
+.since__in{transform:translateY(-8.75rem);display:flex;align-items:flex-start;justify-content:space-between;gap:6rem;
   margin:0 auto;width:var(--in2);max-width:100%;padding:0 var(--inPd)}
-.since__l{flex:0 0 auto}
-.since__since{font-family:var(--numFont);font-size:max(2.6rem,22px);font-weight:600;
-  letter-spacing:.12em;color:var(--point01)}
-.since__num{display:flex;font-family:var(--numFont);font-size:15.8rem;font-weight:700;
-  line-height:1;letter-spacing:-.04em;color:var(--point01)}
+.since__l{position:relative;flex:0 0 auto}
+.since__since{font-family:var(--numFont);font-size:clamp(var(--h6),1.7vw,56px);font-weight:500;
+  letter-spacing:.15em;color:var(--point01)}
+.since__num{display:flex;font-family:var(--numFont);font-size:clamp(12rem,11vw,240px);font-weight:700;
+  line-height:1;letter-spacing:.005em;color:var(--point01)}
 .since__d{overflow:hidden;height:1em}
 .since__roll{display:block}
 .since__roll span{display:block;height:1em}
-.since__h{margin-top:3.6rem;font-size:var(--h7);font-weight:700;color:var(--point01)}
-.since__t{margin-top:1.6rem;font-size:var(--p4);line-height:1.9;color:var(--gray60)}
-.since__r{flex:0 0 auto;padding-top:9rem;text-align:right;font-size:var(--h4);font-weight:700;
-  line-height:1.6;letter-spacing:-.03em;color:var(--point01)}
+.since__h{margin-top:4rem;font-size:var(--h4);font-weight:700;color:var(--point01)}
+/* 레퍼런스 .txt 는 흐름에서 빠져 desc 아래에 절대배치된다 */
+.since__t{position:absolute;left:0;bottom:-83px;width:100%;font-size:var(--h8);font-weight:500;
+  line-height:1.7;color:#888}
+/* .since__in 이 transform 을 갖고 있어 이 요소의 기준 상자는 .since__in 이다.
+   레퍼런스는 좌측 블록 바로 아래(y1423)·오른끝 1320 에 놓인다. */
+.since__r{position:absolute;right:var(--inPd);top:100%;
+  text-align:right;font-size:clamp(6.5rem,2.6vw,85px);font-weight:500;
+  line-height:1.4;letter-spacing:-.03em;color:var(--point01)}
 
 /* 성과 — 벤토 1200×644 */
 .perf{padding:20rem 0 0;background:#fff}
@@ -65,8 +79,8 @@
 .card--blue{color:#fff;background:var(--point01)}
 .card--soft{background:var(--pointBg)}
 .card--wide{grid-column:2 / span 2;background:var(--grayBg2)}
-.card__num{display:flex;align-items:baseline;font-size:2.8rem;font-weight:600}
-.card__num b{font-family:var(--numFont);font-size:4.8rem;font-weight:700;line-height:1.3;letter-spacing:-.02em}
+.card__num{display:flex;align-items:baseline;font-size:var(--h5);font-weight:600}
+.card__num b{font-family:var(--numFont);font-size:var(--h1);font-weight:700;line-height:1.3;letter-spacing:-.02em}
 .card__t{font-size:var(--p3);font-weight:600}
 .card__d{margin-top:.8rem;font-size:var(--p5);line-height:1.7;opacity:.72}
 .card__go{position:absolute;right:28px;bottom:28px;display:flex;align-items:center;justify-content:center;
@@ -187,7 +201,8 @@
 .team__ds{margin-top:1rem;font-size:var(--p5);line-height:1.7;color:var(--gray60)}
 
 /* 네트워크 — 지도 배경 */
-.net{position:relative;padding:20rem 0;background:#C9E4EF;overflow:hidden}
+/* 레퍼런스는 의료진 아래 · 푸터 위에 각각 160px 흰 여백이 있다 */
+.net{position:relative;margin-top:20rem;padding:20rem 0;background:#C9E4EF;overflow:hidden}
 .net__map{position:absolute;inset:0}
 .net__map img{width:100%;height:100%;object-fit:cover;opacity:.9}
 .net__in{position:relative;z-index:2;display:flex;justify-content:space-between;gap:4rem;
@@ -208,7 +223,7 @@
 .net__btns .btn{flex:1;height:4.8rem;padding:0 1rem}
 
 /* 커뮤니티 */
-.comm{padding:20rem 0;background:#fff}
+.comm{margin-bottom:20rem;padding:20rem 0;background:#fff}
 .comm__tabs{display:flex;justify-content:center;gap:0;margin-top:5.4rem}
 .comm__tab{width:198px;height:41px;font-size:2.2rem;font-weight:700;color:var(--gray30)}
 .comm__tab.on{color:var(--gray90)}
@@ -266,7 +281,7 @@
 <a class="skipnav" href="#content">본문 바로가기</a>
 <header class="site-head site-head--over" data-solid="0">
 <div class="site-head__in">
-<a href="./index.html" aria-label="숨길이비인후과 홈으로"><span class="site-logo "><svg class="site-logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c5 3.6 8 8 8 12.6 0 5-3.6 8.6-8 8.6S8 20.6 8 15.6C8 11 11 6.6 16 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11.4 26.4c1.6 1.4 3 2.1 4.6 2.1s3-.7 4.6-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="15.4" r="3.1" fill="currentColor"/></svg><span class="site-logo__txt"><span class="site-logo__ko">숨길이비인후과</span><span class="site-logo__en">SUMGIL ENT</span></span></span></a>
+<a href="./index.html" aria-label="숨길이비인후과 홈으로"><span class="site-logo"><svg class="site-logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c5 3.6 8 8 8 12.6 0 5-3.6 8.6-8 8.6S8 20.6 8 15.6C8 11 11 6.6 16 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11.4 26.4c1.6 1.4 3 2.1 4.6 2.1s3-.7 4.6-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="15.4" r="3.1" fill="currentColor"/></svg><span class="site-logo__txt"><span class="site-logo__ko">숨길이비인후과</span><span class="site-logo__en">SUMGIL ENT</span></span></span></a>
 <nav class="site-nav" aria-label="주 메뉴"><ul style="display:flex"><li class="site-nav__item"><a class="site-nav__link" href="./brand-story.html">About 숨길</a></li><li class="site-nav__item"><a class="site-nav__link" href="./deviated-septum.html">코질환 수술</a></li><li class="site-nav__item"><a class="site-nav__link" href="./rhinoplasty-intro.html">기능 코성형</a></li><li class="site-nav__item"><a class="site-nav__link" href="./sleep-study.html">수면무호흡</a></li><li class="site-nav__item"><a class="site-nav__link" href="./real-stories.html">수술 후기</a></li><li class="site-nav__item"><a class="site-nav__link" href="./pre-post-care.html">안심 케어 시스템</a></li><li class="site-nav__item"><a class="site-nav__link" href="./notice.html">커뮤니티</a></li><li class="site-nav__item"><a class="site-nav__link" href="./reservation.html">예약/상담</a></li></ul></nav>
 <div class="site-head__util">
 <button class="txtbtn" type="button">회원가입</button>
@@ -280,7 +295,7 @@
 </header>
 <div class="mega" aria-hidden="true"><div class="mega__in"><div class="mega__col"><p class="mega__t">About 숨길</p><ul class="mega__list"><li><a href="./brand-story.html">브랜드 스토리</a></li><li><a href="./medical-team.html">코 중점 의료진</a></li><li><a href="./clinic-locations.html">지점소개</a></li><li><a href="./nose-research-center.html">코 하나만, 연구소</a></li></ul></div><div class="mega__col"><p class="mega__t">코질환 수술</p><ul class="mega__list"><li><a href="./deviated-septum.html">비중격만곡증</a></li><li><a href="./rhinitis.html">코막힘/비염</a></li><li><a href="./sinusitis.html">축농증</a></li><li><a href="./nasal-valve.html">비밸브재건술</a></li><li><a href="./nasal-fracture.html">코뼈골절</a></li><li><a href="./self-check.html">내 코 자가진단</a></li></ul></div><div class="mega__col"><p class="mega__t">기능 코성형</p><ul class="mega__list"><li><a href="./rhinoplasty-intro.html">기능 코성형이란?</a></li><li><a href="./deviated-nose.html">휜코</a></li><li><a href="./hump-nose.html">매부리코</a></li><li><a href="./male-rhinoplasty.html">남자 코성형</a></li><li><a href="./implant-3d.html">3D 보형물 코성형</a></li><li><a href="./implant-free.html">무보형 코성형</a></li><li><a href="./by-nose-type.html">유형별 코성형</a></li><li><a href="./revision-rhinoplasty.html">코 재수술</a></li></ul></div><div class="mega__col"><p class="mega__t">수면무호흡</p><ul class="mega__list"><li><a href="./sleep-study.html">수면다원검사</a></li><li><a href="./snoring-apnea.html">코골이/수면무호흡증</a></li></ul></div><div class="mega__col"><p class="mega__t">수술 후기</p><ul class="mega__list"><li><a href="./real-stories.html">리얼 셀카후기</a></li><li><a href="./before-after.html">코성형 전후사진</a></li><li><a href="./case-reviews.html">수술 자필 후기</a></li><li><a href="./success-reports.html">성공 사례 보고서</a></li></ul></div><div class="mega__col"><p class="mega__t">안심 케어 시스템</p><ul class="mega__list"><li><a href="./pre-post-care.html">수술 전후 관리</a></li><li><a href="./care-system.html">수술 후 케어시스템</a></li><li><a href="./safety-process.html">수술 안전 프로세스</a></li><li><a href="./pathologist.html">임상병리사</a></li></ul></div><div class="mega__col"><p class="mega__t">커뮤니티</p><ul class="mega__list"><li><a href="./notice.html">공지사항</a></li><li><a href="./real-model.html">리얼모델 신청</a></li><li><a href="./sumgil-tv.html">숨길 TV</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></div><div class="mega__col"><p class="mega__t">예약/상담</p><ul class="mega__list"><li><a href="./reservation.html">예약 안내</a></li><li><a href="./online-consultation.html">온라인상담</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></div></div></div>
 <nav class="sitemap" aria-label="전체 메뉴">
-<div class="sitemap__top"><span class="site-logo "><svg class="site-logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c5 3.6 8 8 8 12.6 0 5-3.6 8.6-8 8.6S8 20.6 8 15.6C8 11 11 6.6 16 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11.4 26.4c1.6 1.4 3 2.1 4.6 2.1s3-.7 4.6-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="15.4" r="3.1" fill="currentColor"/></svg><span class="site-logo__txt"><span class="site-logo__ko">숨길이비인후과</span><span class="site-logo__en">SUMGIL ENT</span></span></span>
+<div class="sitemap__top"><span class="site-logo"><svg class="site-logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c5 3.6 8 8 8 12.6 0 5-3.6 8.6-8 8.6S8 20.6 8 15.6C8 11 11 6.6 16 3Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11.4 26.4c1.6 1.4 3 2.1 4.6 2.1s3-.7 4.6-2.1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="15.4" r="3.1" fill="currentColor"/></svg><span class="site-logo__txt"><span class="site-logo__ko">숨길이비인후과</span><span class="site-logo__en">SUMGIL ENT</span></span></span>
 <button class="icobtn" type="button" data-sitemap-close aria-label="메뉴 닫기">
 <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
 <ul><li class="sitemap__item"><button class="sitemap__t" type="button">About 숨길</button><ul class="sitemap__sub"><li><a href="./brand-story.html">브랜드 스토리</a></li><li><a href="./medical-team.html">코 중점 의료진</a></li><li><a href="./clinic-locations.html">지점소개</a></li><li><a href="./nose-research-center.html">코 하나만, 연구소</a></li></ul></li><li class="sitemap__item"><button class="sitemap__t" type="button">코질환 수술</button><ul class="sitemap__sub"><li><a href="./deviated-septum.html">비중격만곡증</a></li><li><a href="./rhinitis.html">코막힘/비염</a></li><li><a href="./sinusitis.html">축농증</a></li><li><a href="./nasal-valve.html">비밸브재건술</a></li><li><a href="./nasal-fracture.html">코뼈골절</a></li><li><a href="./self-check.html">내 코 자가진단</a></li></ul></li><li class="sitemap__item"><button class="sitemap__t" type="button">기능 코성형</button><ul class="sitemap__sub"><li><a href="./rhinoplasty-intro.html">기능 코성형이란?</a></li><li><a href="./deviated-nose.html">휜코</a></li><li><a href="./hump-nose.html">매부리코</a></li><li><a href="./male-rhinoplasty.html">남자 코성형</a></li><li><a href="./implant-3d.html">3D 보형물 코성형</a></li><li><a href="./implant-free.html">무보형 코성형</a></li><li><a href="./by-nose-type.html">유형별 코성형</a></li><li><a href="./revision-rhinoplasty.html">코 재수술</a></li></ul></li><li class="sitemap__item"><button class="sitemap__t" type="button">수면무호흡</button><ul class="sitemap__sub"><li><a href="./sleep-study.html">수면다원검사</a></li><li><a href="./snoring-apnea.html">코골이/수면무호흡증</a></li></ul></li><li class="sitemap__item"><button class="sitemap__t" type="button">수술 후기</button><ul class="sitemap__sub"><li><a href="./real-stories.html">리얼 셀카후기</a></li><li><a href="./before-after.html">코성형 전후사진</a></li><li><a href="./case-reviews.html">수술 자필 후기</a></li><li><a href="./success-reports.html">성공 사례 보고서</a></li></ul></li><li class="sitemap__item"><button class="sitemap__t" type="button">안심 케어 시스템</button><ul class="sitemap__sub"><li><a href="./pre-post-care.html">수술 전후 관리</a></li><li><a href="./care-system.html">수술 후 케어시스템</a></li><li><a href="./safety-process.html">수술 안전 프로세스</a></li><li><a href="./pathologist.html">임상병리사</a></li></ul></li><li class="sitemap__item"><button class="sitemap__t" type="button">커뮤니티</button><ul class="sitemap__sub"><li><a href="./notice.html">공지사항</a></li><li><a href="./real-model.html">리얼모델 신청</a></li><li><a href="./sumgil-tv.html">숨길 TV</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></li><li class="sitemap__item"><button class="sitemap__t" type="button">예약/상담</button><ul class="sitemap__sub"><li><a href="./reservation.html">예약 안내</a></li><li><a href="./online-consultation.html">온라인상담</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></li></ul>
@@ -313,7 +328,7 @@
 <img src="./assets/hero-4.jpg" alt="" loading="lazy"></div><div class="mv__slide" data-i="4">
 <img src="./assets/hero-5.jpg" alt="" loading="lazy"></div></div>
 <div class="mv__cap"><div class="mv__cap-in"><div class="mv__capitem on" data-i="0">
-<p class="mv__t">숨길 하나만 보아온 시간</p><p class="mv__d">코 하나만 보는 디테일의 차이, 숨길이비인후과</p></div><div class="mv__capitem" data-i="1" hidden>
+<p class="mv__t">코 하나만 <span class="mv__reel"><span class="mv__reel-t"><i>집중</i><i>고민</i><i>연구</i><i>이해</i><i>수술</i><i>집중</i></span></span>해온 시간</p><p class="mv__d">코 하나만 보는 디테일의 차이, 숨길이비인후과</p></div><div class="mv__capitem" data-i="1" hidden>
 <p class="mv__t">내 코 건강, 괜찮을까?</p><p class="mv__d">1분이면 끝나는 자가진단으로 먼저 확인해 보세요</p></div><div class="mv__capitem" data-i="2" hidden>
 <p class="mv__t">코수술 17만례, 숨길의 기준</p><p class="mv__d">17년 동안 코 하나만 쌓아 온 기록입니다</p></div><div class="mv__capitem" data-i="3" hidden>
 <p class="mv__t">숨 쉬는 기능부터 살립니다</p><p class="mv__d">보기 좋은 코보다 오래 편한 코를 먼저 생각합니다</p></div><div class="mv__capitem" data-i="4" hidden>
@@ -322,7 +337,7 @@
 <button class="mv__play" type="button" data-play aria-label="자동 넘김 멈춤">
 <svg viewBox="0 0 24 24"><rect x="7" y="5" width="3.4" height="14" rx="1"/><rect x="13.6" y="5" width="3.4" height="14" rx="1"/></svg>
 </button></div></div>
-<div class="mv__form"><div class="mv__form-in"><form class="quickform " onsubmit="return false">
+<div class="mv__form"><div class="mv__form-in"><form class="quickform" onsubmit="return false">
 <p class="quickform__label">간편 상담 신청</p>
 <div class="quickform__body">
 <div class="quickform__f"><select aria-label="지점 선택"><option>지점 선택 *</option><option>강남점</option><option>서초점</option><option>노원점</option><option>종로점</option><option>일산점</option><option>송도점</option></select></div>
@@ -338,41 +353,41 @@
 <section class="since">
 <div class="since__in">
 <div class="since__l">
-<p class="since__since rv">SINCE 2009</p>
+<p class="since__since">SINCE 2009</p>
 <p class="since__num" data-count>
 <span class="since__d"><span>2</span></span><span class="since__d"><span>0</span></span>
 <span class="since__d"><span>2</span></span><span class="since__d"><span>6</span></span>
 </p>
-<p class="since__h rv">숨길이비인후과는 코 하나에 17년 동안 집중해왔습니다.</p>
-<p class="since__t rv">코는 숨 쉬는 기능과 얼굴 인상을 좌우하는 중요한 부위이기에<br>
+<p class="since__h">숨길이비인후과는 코 하나에 17년 동안 집중해왔습니다.</p>
+<p class="since__t">코는 숨 쉬는 기능과 얼굴 인상을 좌우하는 중요한 부위이기에<br>
 더 깊이 이해하고 더 오래 고민해야 한다고 믿습니다.</p>
 </div>
-<p class="since__r rv">숨길이비인후과는<br>오직 코 하나만 보기에,<br>기준이 다릅니다.</p>
+<p class="since__r">숨길이비인후과는<br>오직 코 하나만 보기에,<br>기준이 다릅니다.</p>
 </div>
 </section>
 
 <section class="perf">
 <div class="in2">
-<div class="stit rv"><p class="stit__label">숨길이비인후과 성과</p>
+<div class="stit"><p class="stit__label">숨길이비인후과 성과</p>
 <h2 class="stit__h">숫자로 증명하는 숨길의 코 전문성</h2></div>
 <div class="perf__grid">
-<a class="card card--tall rv" href="./brand-story.html">
+<a class="card card--tall" href="./brand-story.html">
 <img src="./assets/perf-1.jpg" alt="" loading="lazy">
 <p class="card__num"><b>170,000</b>례</p>
 <p class="card__note">2009년부터 수술의 발자취 숨길이비인후과가 기록합니다.<br>
 * 2009.07~2026.07 숨길이비인후과 수술 기록 기준 누적 수술 건수</p>
 </a>
-<a class="card card--blue rv" href="./before-after.html">
+<a class="card card--blue" href="./before-after.html">
 <p class="card__num"><b>7,100</b>건</p>
 <p class="card__d">환자의 변화를 담아온 전후사진 기록입니다.</p>
 <span class="card__go"><i class="ar"></i></span>
 </a>
-<a class="card card--soft rv" href="./nose-research-center.html">
+<a class="card card--soft" href="./nose-research-center.html">
 <p class="card__num"><b>40</b>건</p>
 <p class="card__d">의료진이 직접 작성한 학술 발표와 연구 기록입니다.</p>
 <span class="card__go"><i class="ar"></i></span>
 </a>
-<a class="card card--wide rv" href="./case-reviews.html">
+<a class="card card--wide" href="./case-reviews.html">
 <p class="card__num"><b>4,756</b>건</p>
 <p class="card__d">코에 대한 고민부터 수술 후 일상까지, 숨길과 함께한 변화입니다.</p>
 <span class="card__go"><i class="ar"></i></span>
@@ -385,14 +400,14 @@
 <div class="in2">
 <div class="field__row">
 <div class="field__l">
-<div class="stit rv"><p class="stit__label">진료 분야</p>
+<div class="stit"><p class="stit__label">진료 분야</p>
 <h2 class="stit__h">질환부터 성형까지,<br>코 중점 의료기관</h2></div>
 <div class="field__acc" data-fields><div class="field__item on" data-field="0">
 <p class="field__t">코질환 수술</p><p class="field__d">코막힘의 원인부터 치료 이후 관리까지 환자에게 맞는 진료 방향을 함께 고민합니다.</p></div><div class="field__item" data-field="1">
 <p class="field__t">기능 코성형</p><p class="field__d">기능 회복과 아름다움의 조화를 함께 고민한 코성형입니다.</p></div><div class="field__item" data-field="2">
 <p class="field__t">수면무호흡</p><p class="field__d">더 편안한 잠과 숨을 위한 검사와 치료 방법을 안내합니다.</p></div></div>
 </div>
-<div class="field__r rv"><div class="field__panel on" data-fieldpanel="0">
+<div class="field__r"><div class="field__panel on" data-fieldpanel="0">
 <div class="field__head">
 <div class="field__fig"><img src="./assets/field-1.jpg" alt="" loading="lazy"></div>
 <div class="field__txt"><p class="field__pt">코질환 수술</p><p class="field__pd">환자에게 맞는 진료 방향을 함께 고민합니다.</p></div>
@@ -417,10 +432,10 @@
 
 <section class="tv">
 <div class="in2">
-<div class="stit rv"><p class="stit__label">숨길이비인후과 TV</p>
+<div class="stit"><p class="stit__label">숨길이비인후과 TV</p>
 <h2 class="stit__h">쉽고 재밌게 알아보는 코 건강 이야기</h2></div>
 <div class="tv__row">
-<div class="tvbox rv">
+<div class="tvbox">
 <div class="tvbox__top"><p class="tvbox__t">유튜브</p>
 <a class="more" href="./sumgil-tv.html">더보기<i class="ar"></i></a></div>
 <div class="tv__main">
@@ -434,7 +449,7 @@
 </div>
 </div>
 </div>
-<div class="tvbox tvbox--short rv">
+<div class="tvbox tvbox--short">
 <div class="tvbox__top"><p class="tvbox__t">쇼츠</p>
 <a class="more" href="./sumgil-tv.html">더보기<i class="ar"></i></a></div>
 <div class="tv__shorts">
@@ -447,7 +462,7 @@
 </section>
 
 <section class="ba">
-<div class="ba__head rv"><div class="stit stit--center"><p class="stit__label">달라진 모습, 분명해진 숨</p>
+<div class="ba__head"><div class="stit stit--center"><p class="stit__label">달라진 모습, 분명해진 숨</p>
 <h2 class="stit__h">BEFORE &amp; AFTER</h2></div></div>
 <div class="ba__track"><div class="ba__item"><div class="ba__pair">
 <figure class="ba__fig"><img src="./assets/ba-1-before.jpg" alt="수술 전" loading="lazy"><span>Before</span></figure>
@@ -470,10 +485,10 @@
 <section class="rev">
 <div class="rev__panel">
 <div class="in2">
-<div class="stit rv"><p class="stit__label">수술후기</p>
+<div class="stit"><p class="stit__label">수술후기</p>
 <h2 class="stit__h">숨길을 경험한<br>환자분들의 진솔한 후기</h2></div>
 <div class="rev__row">
-<div class="rev__box rev__box--l rv">
+<div class="rev__box rev__box--l">
 <p class="rev__t">숨길 리얼 셀카후기<a class="more" href="./real-stories.html">더보기<i class="ar"></i></a></p>
 <div class="rev__cards"><a class="rev__card" href="./real-stories.html">
 <img src="./assets/rev-1.jpg" alt="" loading="lazy">
@@ -485,7 +500,7 @@
 <img src="./assets/rev-4.jpg" alt="" loading="lazy">
 <p class="rev__meta">일산점 · 2026-05-21</p><p>숨 쉬는 게 달라졌다는 말을 실감했습니다</p></a></div>
 </div>
-<div class="rev__box rev__box--r rv">
+<div class="rev__box rev__box--r">
 <p class="rev__t">환자들이 직접 쓴 자필후기<a class="more" href="./case-reviews.html">더보기<i class="ar"></i></a></p>
 <ul class="rev__list"><li class="rev__li"><p class="rev__li-top">노원점 · 김ㅇ지 · 2026.08.18
 <span class="rev__best">BEST</span></p>
@@ -502,7 +517,7 @@
 </section>
 
 <section class="team">
-<div class="team__head rv">
+<div class="team__head">
 <div class="stit"><p class="stit__label">의료진 소개</p>
 <h2 class="stit__h">17만례가 증명하는 실력,<br>코 전문의 숨길 팀</h2></div>
 <div class="team__ctrl">
@@ -528,11 +543,11 @@
 <div class="net__map"><img src="./assets/net-map.jpg" alt="지점 위치 지도" loading="lazy"></div>
 <div class="net__in">
 <div class="net__l">
-<div class="stit rv"><p class="stit__label">숨길이비인후과 네트워크</p>
+<div class="stit"><p class="stit__label">숨길이비인후과 네트워크</p>
 <h2 class="stit__h">수도권 6개 지점에서<br>같은 기준으로 진료합니다</h2></div>
 <div class="net__chips" data-branches><button class="net__chip on" type="button" data-branch="0">강남점</button><button class="net__chip" type="button" data-branch="1">서초점</button><button class="net__chip" type="button" data-branch="2">노원점</button><button class="net__chip" type="button" data-branch="3">종로점</button><button class="net__chip" type="button" data-branch="4">일산점</button><button class="net__chip" type="button" data-branch="5">송도점</button></div>
 </div>
-<div class="net__card rv"><div class="net__panel" data-netpanel="0">
+<div class="net__card"><div class="net__panel" data-netpanel="0">
 <p class="net__nm">숨길이비인후과 강남점</p>
 <dl class="net__dl">
 <div><dt>주소</dt><dd>서울 강남구 강남대로 452, 6층</dd></div>
@@ -598,7 +613,7 @@
 
 <section class="comm">
 <div class="in2">
-<div class="stit stit--center rv"><p class="stit__label">커뮤니티</p>
+<div class="stit stit--center"><p class="stit__label">커뮤니티</p>
 <h2 class="stit__h">한 눈에 보는 숨길 소식</h2></div>
 <div data-tabs>
 <div class="comm__tabs">
@@ -654,14 +669,38 @@
 </div>
 <script>
 
-/* 등장 모션 */
+/* 등장 모션 — 레퍼런스 landing-common.js 의 landingObserverAutoScan 과 같은 방식.
+   관찰 대상은 개별 요소가 아니라 [data-landing-observe] 가 붙어 있던 자리, 즉 섹션 컨테이너다.
+   섹션이 임계값만큼 보이면 그 안의 요소를 한꺼번에 켜고, CSS 지연(.d2/.d4/.d6)이 계단을 만든다.
+   임계값은 레퍼런스 실측: 기본 0.5 · 긴 목록/스텝 0.2 · 배너 0.3, ≤768 은 data-observe-mo 0.1.
+   한 번 켜면 되돌리지 않는다. */
 (function(){
-  var els=document.querySelectorAll('.rv'); if(!els.length) return;
+  var els=[].slice.call(document.querySelectorAll('.rv')); if(!els.length) return;
   if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('on')}); return; }
-  var io=new IntersectionObserver(function(es){ es.forEach(function(en){
-    if(en.isIntersecting){ en.target.classList.add('on'); io.unobserve(en.target); } }); },
-    {rootMargin:'0px 0px -8% 0px',threshold:.01});
-  els.forEach(function(e){ io.observe(e) });
+  var mo=innerWidth<768, roots=[];
+  els.forEach(function(e){
+    var r=e.closest('section')||e;
+    if(roots.indexOf(r)<0) roots.push(r);
+  });
+  function th(r){
+    if(mo) return 0.1;
+    var c=r.className||'';
+    if(/\bcta\b/.test(c)) return 0.3;                 /* ref cont_banner15·16 */
+    if(/onestep|psteps|srev|split--g/.test(c)) return 0.2; /* ref main_cont_sorting23·cont_wrap·info_cont */
+    return 0.5;
+  }
+  var ios={};
+  function obs(t){
+    if(!ios[t]) ios[t]=new IntersectionObserver(function(es){ es.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var r=en.target;
+      if(r.classList.contains('rv')) r.classList.add('on');
+      [].forEach.call(r.querySelectorAll('.rv'),function(e){e.classList.add('on')});
+      ios[t].unobserve(r);
+    }); },{threshold:+t});
+    return ios[t];
+  }
+  roots.forEach(function(r){ obs(String(th(r))).observe(r) });
 })();
 
 /* 헤더 — 스크롤 방향 숨김 · 배경 전환 · 메가메뉴 · 전체메뉴 · 검색 */

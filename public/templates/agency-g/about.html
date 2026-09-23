@@ -155,6 +155,7 @@ li{list-style:none}
 .about-banner{position:absolute;z-index:1;top:calc(699px + 234 * var(--v) + 237 * var(--g));
   left:calc(48px + 168 * var(--v) + 2 * var(--g));right:calc(50px + 166 * var(--v) - 3 * var(--g));
   height:calc(480px + 160 * var(--v));border-radius:46.9px;overflow:hidden;background:#0d0d12}
+.fx-hole{position:absolute;inset:0;width:100%;height:100%;display:block}
 .about-banner .ab-glow{position:absolute;inset:0;background:
   radial-gradient(44% 70% at 24% 36%,rgba(47,214,201,.85),transparent 68%),
   radial-gradient(48% 72% at 62% 52%,rgba(91,75,255,.9),transparent 70%),
@@ -251,7 +252,7 @@ li{list-style:none}
         <p class="about-hero-head">새롭고 독창적인 탐색, 오빗랩은 경험을 만들어 갑니다.</p>
         <p class="about-hero-body">오빗랩은 고객이 바라는 방향을 먼저 읽고, 기술이 일상에 스며드는 자리를 설계합니다.</p>
       </div>
-      <div class="about-banner" aria-hidden="true"><span class="ab-glow"></span></div>
+      <div class="about-banner" aria-hidden="true"><canvas class="fx-hole"></canvas></div>
     </div>
   </div>
 </section>
@@ -373,6 +374,143 @@ if(darks.length){addEventListener('scroll',tone,{passive:true});addEventListener
 /* 스크롤 힌트 */
 var hint=$('#scroll-hint');
 if(hint)addEventListener('scroll',function(){hint.classList.toggle('is-hidden',scrollY>innerHeight*.6)},{passive:true});
+
+
+
+
+
+
+/* ── 살아 움직이는 배경 넷 — 원본은 WebGL 셰이더, 여기서는 캔버스로 같은 크기·속도로 그린다 ── */
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var G1=[47,214,201], G2=[91,75,255], G3=[179,107,255];
+function rgba(c,a){return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')'}
+
+function fit(cv){
+  var r=cv.getBoundingClientRect(), d=Math.min(2,devicePixelRatio||1);
+  var w=Math.max(1,Math.round(r.width*d)), h=Math.max(1,Math.round(r.height*d));
+  if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}
+  return d;
+}
+function runner(cv,draw){
+  var vis=false, raf=0;
+  new IntersectionObserver(function(es){es.forEach(function(e){vis=e.isIntersecting; if(vis&&!raf)loop(performance.now())})},{threshold:0}).observe(cv);
+  function loop(t){ raf=0; if(!vis)return; var d=fit(cv); draw(cv.getContext('2d'),cv.width,cv.height,t/1000,d); raf=requestAnimationFrame(loop) }
+  addEventListener('resize',function(){fit(cv)});
+  if(reduce){var d=fit(cv);draw(cv.getContext('2d'),cv.width,cv.height,0,d);return}
+  loop(performance.now());
+}
+
+/* 1. 히어로 덩어리 — 8개 점이 일렁이는 한 덩어리 (원본 sWarp 20 / lPoints 8) */
+var blob=document.querySelector('canvas.fx-blob');
+if(blob)runner(blob,function(c,w,h,t){
+  c.clearRect(0,0,w,h);
+  var cx=w*.5, cy=h*.5, R=Math.min(w,h)*.40, N=8, pts=[];
+  for(var i=0;i<N;i++){
+    var a2=i/N*Math.PI*2, rr=R*(1+0.10*Math.sin(t*0.5+i*1.7)+0.05*Math.cos(t*0.31+i*2.3));
+    pts.push([cx+Math.cos(a2)*rr, cy+Math.sin(a2)*rr*1.03]);
+  }
+  c.save();
+  c.filter='blur('+(R*0.07)+'px)';
+  c.beginPath();
+  var mx=(pts[N-1][0]+pts[0][0])/2, my=(pts[N-1][1]+pts[0][1])/2;
+  c.moveTo(mx,my);
+  for(var i=0;i<N;i++){
+    var p1=pts[i], p2=pts[(i+1)%N];
+    c.quadraticCurveTo(p1[0],p1[1],(p1[0]+p2[0])/2,(p1[1]+p2[1])/2);
+  }
+  c.closePath(); c.clip();
+  var lg=c.createLinearGradient(cx-R,cy-R,cx+R,cy+R);
+  lg.addColorStop(0,rgba(G1,.95)); lg.addColorStop(.5,rgba(G2,.95)); lg.addColorStop(1,rgba(G3,.95));
+  c.fillStyle=lg; c.fillRect(0,0,w,h);
+  for(var i=0;i<3;i++){
+    var ang=t*0.22+i*2.1, col=i===0?G1:i===1?G2:G3;
+    var x=cx+Math.cos(ang)*R*0.34, y=cy+Math.sin(ang)*R*0.3;
+    var g=c.createRadialGradient(x,y,0,x,y,R*0.85);
+    g.addColorStop(0,rgba(col,.85)); g.addColorStop(1,rgba(col,0));
+    c.fillStyle=g; c.fillRect(0,0,w,h);
+  }
+  var hx=cx-R*.22, hy=cy-R*.26;
+  var hg=c.createRadialGradient(hx,hy,0,hx,hy,R*.62);
+  hg.addColorStop(0,'rgba(255,255,255,.5)'); hg.addColorStop(1,'rgba(255,255,255,0)');
+  c.fillStyle=hg; c.fillRect(0,0,w,h);
+  c.restore();
+});
+
+/* 2. Say Hello 지평선 — 아래에서 떠오르는 빛 띠 */
+var glow=document.querySelector('canvas.fx-glow');
+if(glow)runner(glow,function(c,w,h,t){
+  c.fillStyle='#141414'; c.fillRect(0,0,w,h);
+  var horizon=h*0.60, rx=w*1.42, ry=h*0.66;
+  var cx=w*0.5, cy=horizon+ry;
+  c.save();
+  c.globalCompositeOperation='lighter';
+  for(var k=0;k<3;k++){
+    var sp=1+k*1.8, a=(.38-k*.1)*(0.86+0.14*Math.sin(t*0.5+k));
+    var g=c.createRadialGradient(cx,cy,ry*0.985,cx,cy,ry*(1+0.035*sp));
+    g.addColorStop(0,'rgba(210,225,255,'+a+')');
+    g.addColorStop(.45,'rgba(140,160,255,'+(a*.5)+')');
+    g.addColorStop(1,'rgba(120,140,255,0)');
+    c.fillStyle=g; c.beginPath(); c.ellipse(cx,cy,rx*(1+0.035*sp),ry*(1+0.035*sp),0,Math.PI,0); c.fill();
+  }
+  for(var i=0;i<3;i++){
+    var x=cx+Math.sin(t*0.22+i*2.2)*w*0.22, y=horizon-h*(0.06+0.05*i);
+    var gg=c.createRadialGradient(x,y,0,x,y,w*(0.16+0.06*i));
+    gg.addColorStop(0,'rgba(180,170,255,'+(0.16-0.04*i)+')'); gg.addColorStop(1,'rgba(180,170,255,0)');
+    c.fillStyle=gg; c.beginPath(); c.arc(x,y,w*(0.16+0.06*i),0,6.2832); c.fill();
+  }
+  c.restore();
+  c.globalCompositeOperation='source-over';
+  c.fillStyle='#141414'; c.beginPath(); c.ellipse(cx,cy,rx,ry,0,0,6.2832); c.fill();
+  var rim=c.createLinearGradient(w*0.1,0,w*0.9,0);
+  rim.addColorStop(0,'rgba(200,215,255,0)'); rim.addColorStop(.32,'rgba(226,234,255,.75)');
+  rim.addColorStop(.5,'rgba(255,255,255,1)'); rim.addColorStop(.68,'rgba(226,234,255,.75)');
+  rim.addColorStop(1,'rgba(200,215,255,0)');
+  c.strokeStyle=rim; c.lineWidth=Math.max(1.4,h*0.0022); c.shadowColor='rgba(190,205,255,.9)'; c.shadowBlur=h*0.05;
+  c.beginPath(); c.ellipse(cx,cy,rx,ry,0,Math.PI,0); c.stroke(); c.shadowBlur=0;
+});
+
+/* 3. 인사이트 카드 — 비스듬한 빛 띠가 천천히 흐른다 */
+var frac=document.querySelector('canvas.fx-frac');
+if(frac)runner(frac,function(c,w,h,t){
+  c.fillStyle='#0f0e0e'; c.fillRect(0,0,w,h);
+  c.save(); c.translate(w/2,h/2); c.rotate(-0.42); c.translate(-w,-h);
+  var span=w*2, step=Math.max(18,w*0.021);
+  for(var x=-span;x<span*2;x+=step){
+    var ph=(x*0.004+t*0.28), v=0.5+0.5*Math.sin(ph);
+    var g=c.createLinearGradient(x,0,x+step,0);
+    g.addColorStop(0,'rgba('+Math.round(40+80*v)+','+Math.round(26+30*v)+','+Math.round(72+70*v)+',1)');
+    g.addColorStop(1,'rgba('+Math.round(24+40*v)+','+Math.round(18+18*v)+','+Math.round(48+46*v)+',1)');
+    c.fillStyle=g; c.fillRect(x,0,step,h*3);
+  }
+  c.restore();
+  var px=w*(0.72+0.05*Math.sin(t*0.21)), py=h*(0.62+0.06*Math.cos(t*0.17));
+  var pg=c.createRadialGradient(px,py,0,px,py,w*0.55);
+  pg.addColorStop(0,'rgba(214,92,158,.55)'); pg.addColorStop(.5,'rgba(150,70,190,.22)'); pg.addColorStop(1,'rgba(90,60,170,0)');
+  c.globalCompositeOperation='lighter'; c.fillStyle=pg; c.fillRect(0,0,w,h);
+  c.globalCompositeOperation='source-over';
+});
+
+/* 4. 회사소개 배너 — 가운데가 빨려드는 고리 */
+var bh=document.querySelector('canvas.fx-hole');
+if(bh)runner(bh,function(c,w,h,t){
+  c.fillStyle='#0d0d12'; c.fillRect(0,0,w,h);
+  var cx=w*0.5, cy=h*0.52, R=Math.min(w,h)*0.46;
+  c.save(); c.globalCompositeOperation='lighter';
+  for(var i=0;i<5;i++){
+    var a=t*(0.18+i*0.05)+i*1.1, rr=R*(0.55+i*0.11), th=R*(0.1-i*0.012);
+    var col=i%3===0?G1:i%3===1?G2:G3;
+    var g=c.createRadialGradient(cx,cy,rr-th,cx,cy,rr+th);
+    g.addColorStop(0,rgba(col,0)); g.addColorStop(.5,rgba(col,.34-i*.04)); g.addColorStop(1,rgba(col,0));
+    c.save(); c.translate(cx,cy); c.rotate(a); c.scale(1,0.42+0.05*Math.sin(t*0.3+i)); c.translate(-cx,-cy);
+    c.fillStyle=g; c.beginPath(); c.arc(cx,cy,rr+th,0,6.2832); c.fill(); c.restore();
+  }
+  c.restore();
+  var core=c.createRadialGradient(cx,cy,0,cx,cy,R*0.5);
+  core.addColorStop(0,'rgba(8,8,14,1)'); core.addColorStop(.72,'rgba(10,10,18,.9)'); core.addColorStop(1,'rgba(10,10,18,0)');
+  c.fillStyle=core; c.beginPath(); c.arc(cx,cy,R*0.5,0,6.2832); c.fill();
+});
+})();
 
 /* 전체 메뉴 */
 var ov=$('#menu-overlay');
