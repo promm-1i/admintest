@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
 # 정적 템플릿 마무리 검증 — 기본형 재생성 · CSS 일치 · 3 뷰포트 · 썸네일 · tsc 를 한 번에.
 #   bash verify_template.sh <slug>      예) bash verify_template.sh travel-a
-# 전제: public/templates/<slug>/index.html (랜딩형) 이 완성돼 있고, 기본형은 <slug>-basic 폴더.
+# 전제: <slug>/index.html (랜딩형) 이 완성돼 있고, 기본형은 <slug>-basic 폴더.
+# 폴더 위치는 프리미엄 디자인이면 public/<브랜드>/, 나머지는 public/templates/<slug>/ 다.
 set -euo pipefail
 SLUG="${1:?slug 필요}"
 cd /c/web-project/mintcl-netlify-spa
 OUT="C:/_tmp/claude/ref-clone-out"; mkdir -p "$OUT"
-export PYTHONIOENCODING=utf-8 SLUG OUT
+TPLDIR="public/templates/${SLUG}"; [ -d "public/${SLUG}" ] && TPLDIR="public/${SLUG}"
+export PYTHONIOENCODING=utf-8 SLUG OUT TPLDIR
 
 echo "=== A. 기본형 재생성 (${SLUG}-basic) ==="
 python - <<'PY'
 import re, os
-slug=os.environ['SLUG']
-s=open(f'public/templates/{slug}/index.html',encoding='utf-8').read()
+slug=os.environ['SLUG']; tdir=os.environ['TPLDIR']
+s=open(f'{tdir}/index.html',encoding='utf-8').read()
 n=0
 s,k=re.subn(r'\(디자인 ([A-Z])\)</title>', r'(기본형 · 디자인 \1)</title>', s); n+=k
 s,k=re.subn(r'content="([^"]*)\(디자인 ([A-Z])\)"', r'content="\1(기본형 · 디자인 \2)"', s); n+=k
@@ -32,18 +34,18 @@ s=s.replace('</style>','''
 </style>''',1)
 s=re.sub(r'\n<script>.*?</script>\n','\n',s,flags=re.S)
 assert 'IntersectionObserver' not in s, '스크립트 제거 실패'
-os.makedirs(f'public/templates/{slug}-basic', exist_ok=True)
-open(f'public/templates/{slug}-basic/index.html','w',encoding='utf-8').write(s)
+os.makedirs(f'{tdir}-basic', exist_ok=True)
+open(f'{tdir}-basic/index.html','w',encoding='utf-8').write(s)
 print(f'  재생성 완료 (제목 치환 {n}건)')
 PY
-[ -f "public/templates/${SLUG}-basic/favicon.svg" ] || cp "public/templates/${SLUG}/favicon.svg" "public/templates/${SLUG}-basic/favicon.svg"
+[ -f "${TPLDIR}-basic/favicon.svg" ] || cp "${TPLDIR}/favicon.svg" "${TPLDIR}-basic/favicon.svg"
 
 echo "=== B. 랜딩형 ↔ 기본형 CSS 일치 ==="
 python - <<'PY'
 import re, os
-slug=os.environ['SLUG']
+slug=os.environ['SLUG']; tdir=os.environ['TPLDIR']
 css=lambda p: re.search(r'<style>(.*?)</style>', open(p,encoding='utf-8').read(), re.S).group(1)
-a=css(f'public/templates/{slug}/index.html'); b=css(f'public/templates/{slug}-basic/index.html')
+a=css(f'{tdir}/index.html'); b=css(f'{tdir}-basic/index.html')
 # 기본형은 assets 경로만 상위로 바꾼다 — 비교 전에 되돌려 놓는다
 b=b.replace(f'../{slug}/assets/', './assets/')
 extra="\n/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */\n.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}\n.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}\n"
@@ -55,15 +57,15 @@ echo "=== C. 검증: 랜딩형·기본형 × 1440 / 768 / 390 ==="
 python - <<'PY'
 import os
 from playwright.sync_api import sync_playwright
-slug=os.environ['SLUG']; out=os.environ['OUT']; ok=True
+slug=os.environ['SLUG']; out=os.environ['OUT']; tdir=os.environ['TPLDIR']; ok=True
 with sync_playwright() as p:
     b=p.chromium.launch()
-    for folder in [slug, slug+'-basic']:
+    for folder in [tdir, tdir+'-basic']:
         for w,h in [(1440,900),(768,1024),(390,844)]:
             pg=b.new_page(viewport={'width':w,'height':h}); errs=[]
             pg.on('console', lambda m: errs.append(m.text) if m.type=='error' else None)
             pg.on('pageerror', lambda e: errs.append('PAGEERROR '+str(e)))
-            pg.goto(f'file:///C:/web-project/mintcl-netlify-spa/public/templates/{folder}/index.html'); pg.wait_for_timeout(2000)
+            pg.goto('file:///C:/web-project/mintcl-netlify-spa/'+folder+'/index.html'); pg.wait_for_timeout(2000)
             pg.evaluate("document.querySelectorAll('.rv').forEach(e=>e.classList.add('on'))"); pg.wait_for_timeout(1000)
             # loading=lazy 사진은 화면에 들어와야 불러오므로 끝까지 훑은 뒤에 깨진 이미지를 센다.
             # scroll-behavior:smooth 면 scrollTo 가 애니메이션이라 긴 페이지 바닥까지 못 닿는다 → 잠시 끈다
@@ -87,12 +89,12 @@ echo "=== D. 썸네일 재캡처 (video.bg 제거 후 사진 기준) ==="
 python - <<'PY'
 import os, re
 from playwright.sync_api import sync_playwright
-slug=os.environ['SLUG']
-html=open(f'public/templates/{slug}/index.html',encoding='utf-8').read()
+slug=os.environ['SLUG']; tdir=os.environ['TPLDIR']
+html=open(f'{tdir}/index.html',encoding='utf-8').read()
 ids=[i for i in re.findall(r'<section[^>]*id="([^"]+)"', html) if i not in ('top',)][:4]
 with sync_playwright() as p:
     b=p.chromium.launch(); pg=b.new_page(viewport={'width':1280,'height':960})
-    pg.goto(f'file:///C:/web-project/mintcl-netlify-spa/public/templates/{slug}/index.html'); pg.wait_for_timeout(2500)
+    pg.goto(f'file:///C:/web-project/mintcl-netlify-spa/{tdir}/index.html'); pg.wait_for_timeout(2500)
     pg.evaluate("document.querySelectorAll('video.bg').forEach(v=>v.remove())")
     pg.evaluate("document.querySelectorAll('.main-popup,.intro-splash,.layer-popup').forEach(v=>v.remove())")  # 첫 방문 팝업은 썸네일에서 뺀다
     pg.evaluate("document.querySelectorAll('.rv').forEach(e=>e.classList.add('on'))"); pg.wait_for_timeout(1200)
