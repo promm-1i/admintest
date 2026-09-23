@@ -17,6 +17,8 @@
 <style>
 
 /* ══ 메인 ══ */
+/* 메인 섹션 라벨은 레퍼런스에서 검정이다(서브는 포인트색) */
+.stit__label{color:var(--gray90)}
 .mv{position:relative;height:900px;overflow:hidden;background:var(--gray90)}
 .mv__slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .9s ease,visibility .9s ease}
 .mv__slide.on{opacity:1;visibility:visible}
@@ -113,50 +115,65 @@
 .perf{padding:20rem 0 0;background:#fff}
 .perf__grid{display:grid;grid-template-columns:384px 427px 349px;grid-template-rows:312px 312px;
   gap:20px;margin-top:10rem}
+/* 카드 실측: radius 24 · padding 24/28/32 · 숫자줄 top+24 · 화살표 흰 원 52 at (우28,위29)
+   · 설명 블록은 바닥에서 20px 위(긴 카드는 하단 정렬) · 제목 20/700 + 본문 13/500 */
 .card{position:relative;display:flex;flex-direction:column;justify-content:space-between;
-  padding:24px 28px;border-radius:20px;overflow:hidden}
+  padding:24px 28px 32px;border-radius:24px;overflow:hidden}
 .card--tall{grid-row:span 2;color:#fff;background:var(--gray90)}
-.card--tall img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+/* 레퍼런스는 사진을 그대로 깐다(어두운 사진이라 흰 글자가 읽힌다). 오버레이 없음 */
+.card--tall img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .card--tall>*{position:relative;z-index:2}
 .card--blue{color:#fff;background:var(--point01)}
-.card--soft{background:var(--pointBg)}
-.card--wide{grid-column:2 / span 2;background:var(--grayBg2)}
-.card__num{display:flex;align-items:baseline;font-size:var(--h5);font-weight:600}
+.card--soft{background:var(--pointBg);color:var(--gray60)}
+.card--wide{grid-column:2 / span 2;background:var(--grayBg2);color:var(--gray60)}
+.card__num{display:flex;align-items:baseline;font-size:var(--h5);font-weight:600;line-height:1.3}
+.card--soft .card__num,.card--wide .card__num{color:var(--gray90)}
 .card__num b{font-family:var(--numFont);font-size:var(--h1);font-weight:700;line-height:1.3;letter-spacing:-.02em}
-.card__t{font-size:var(--p3);font-weight:600}
-.card__d{margin-top:.8rem;font-size:var(--p5);line-height:1.7;opacity:.72}
-.card__go{position:absolute;right:28px;bottom:28px;display:flex;align-items:center;justify-content:center;
-  width:52px;height:52px;border:1px solid currentColor;border-radius:50%;opacity:.5;transition:opacity .2s}
-.card:hover .card__go{opacity:1}
-.card__go .ar{width:18px;height:18px}
-.card__note{font-size:var(--p8);line-height:1.7;opacity:.6}
+.card__box{margin-top:auto}
+/* 긴 카드 글 블록은 카드 위에서 487px(정착 상태 실측) */
+.card--tall .card__box{position:absolute;left:28px;right:28px;top:487px;margin:0}
+.card__t{font-size:var(--p1);font-weight:700;line-height:1.5}
+.card__d{margin-top:14px;font-size:var(--p5);font-weight:500;line-height:1.7}
+.card--blue .card__t,.card--blue .card__d{color:rgba(255,255,255,.8)}
+.card__go{position:absolute;right:28px;top:29px;display:flex;align-items:center;justify-content:center;
+  width:52px;height:52px;background:#fff;border-radius:50%;transition:transform .25s}
+.card:hover .card__go{transform:translate(3px,-3px)}
+.card__go .ar{width:16px;height:16px;color:var(--gray90)}
+.card__note{margin-top:4px;font-size:var(--p8);line-height:1.5;opacity:.6}
 
 /* 진료 분야 — 좌 아코디언 504 / 우 패널 636 */
-.field{padding:20rem 0 0;background:#fff}
-.field__row{display:flex;justify-content:space-between;gap:4rem}
+/* 레퍼런스: 섹션 798 = 위 여백 200 + 본문 598. 아코디언은 598 을 넘어 아래로 흘러넘친다 */
+.field{padding:200px 0 0;background:#fff}
+.field__row{display:flex;align-items:flex-start;justify-content:space-between;gap:4rem;height:598px}
 .field__l{width:504px;flex-shrink:0}
-.field__acc{margin-top:26.4rem}
-.field__item{padding:2.4rem 0;border-top:1px solid var(--gray10);cursor:pointer}
-.field__item:last-child{border-bottom:1px solid var(--gray10)}
-.field__t{font-size:2.6rem;font-weight:700;line-height:1.5;color:var(--gray30);transition:color .25s}
-.field__item.on .field__t{color:var(--gray90)}
-.field__d{margin-top:.8rem;font-size:var(--p5);color:var(--gray40);transition:color .25s}
-.field__item.on .field__d{color:var(--gray60)}
-.field__r{position:relative;display:flex;width:636px;min-height:598px;flex-shrink:0;padding:4.4rem;color:#fff;border-radius:24px;
-  background:linear-gradient(150deg,var(--point01) 0%,var(--point03) 100%);overflow:hidden}
+/* 아코디언 실측: 항목 504x101(패딩 아래 32 + 2px 밑줄) · 간격 133 · 제목 26/700 · 본문 14/500
+   비활성은 글자·밑줄 모두 rgba(28,28,28,.2) */
+.field__acc{margin-top:73px}
+.field__item{padding:0 0 32px;margin-bottom:32px;border-bottom:2px solid currentColor;cursor:pointer;
+  color:rgba(28,28,28,.2);transition:color .25s}
+.field__item:last-child{margin-bottom:0}
+.field__item.on{color:var(--gray90)}
+.field__t{font-size:3.25rem;font-weight:700;line-height:1.5;color:inherit}
+.field__d{margin-top:4px;font-size:var(--p4);font-weight:500;line-height:1.7;color:inherit}
+/* 패널 실측(정착 상태): 636x598 at x684 · radius 24
+   썸네일 136x105 r16 bg rgba(255,255,255,.25) at 패널+60,+60 · 제목 38.4/700 · 본문 16/400
+   알약 238x60 radius 220 글자 20/600, 2열 gap 40/12 · 목록은 패널+60,+260 */
+.field__r{position:relative;display:flex;width:636px;min-height:598px;flex-shrink:0;
+  padding:60px;color:#fff;border-radius:24px;
+  background:linear-gradient(154deg,var(--point01) 16%,var(--point03) 100%);overflow:hidden}
 .field__panel{display:none}
-.field__panel.on{display:flex;flex-direction:column;min-height:100%}
-.field__head{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem}
-.field__pt{font-size:var(--h6);font-weight:700}
-.field__pd{margin-top:1.4rem;font-size:var(--p4);line-height:1.8;color:rgba(255,255,255,.82)}
-.field__txt{text-align:right}
-.field__fig{flex-shrink:0;width:145px;border-radius:12px;overflow:hidden;aspect-ratio:145/98}
+.field__panel.on{display:flex;flex-direction:column;width:100%;min-height:100%}
+.field__head{display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;height:120px}
+.field__pt{font-size:var(--h3);font-weight:700;line-height:1.4}
+.field__pd{margin-top:12px;font-size:var(--p3);line-height:1.7;color:#fff}
+.field__txt{width:269px;text-align:right}
+.field__fig{flex-shrink:0;width:136px;height:105px;border-radius:16px;overflow:hidden;
+  background:rgba(255,255,255,.25)}
 .field__fig img{width:100%;height:100%;object-fit:cover}
-.field__chips{margin-top:auto}
-.field__chips{display:flex;flex-wrap:wrap;gap:12px}
+.field__chips{display:flex;flex-wrap:wrap;gap:12px 40px;margin-top:80px}
 .field__chip{display:inline-flex;align-items:center;justify-content:space-between;gap:1.2rem;
-  width:calc(50% - 6px);padding:0 2rem;height:5.2rem;font-size:var(--p4);font-weight:600;
-  color:var(--point02);background:#fff;border-radius:100px}
+  width:238px;padding:0 26px;height:60px;font-size:var(--p1);font-weight:600;
+  color:var(--gray90);background:#fff;border-radius:220px;transition:color .2s,background-color .2s}
 .field__chip .ar{width:14px;height:14px}
 .field__chip:hover{color:#fff;background:var(--point03)}
 
@@ -416,23 +433,28 @@
 <a class="card card--tall" href="./brand-story.html">
 <img src="./assets/perf-1.jpg" alt="" loading="lazy">
 <p class="card__num"><b>170,000</b>례</p>
-<p class="card__note">2009년부터 수술의 발자취 숨길이비인후과가 기록합니다.<br>
-* 2009.07~2026.07 숨길이비인후과 수술 기록 기준 누적 수술 건수</p>
+<div class="card__box"><p class="card__t">코수술 누적 건수</p>
+<p class="card__d">오직 코만 보는 진료를 이어오며 17년 동안 쌓인 기록입니다.<br>
+집도 의사가 직접 상담하고 수술하며 남긴 숫자입니다.</p>
+<p class="card__note">* 2009.07~2026.07 숨길이비인후과 수술 기록 기준<br>누적 수술 건수</p></div>
 </a>
 <a class="card card--blue" href="./before-after.html">
 <p class="card__num"><b>7,100</b>건</p>
-<p class="card__d">환자의 변화를 담아온 전후사진 기록입니다.</p>
 <span class="card__go"><i class="ar"></i></span>
+<div class="card__box"><p class="card__t">환자의 변화를 담아온 수술 전·후 사진</p>
+<p class="card__d">숨길이비인후과가 쌓아 온 전후 사진을<br>수술 부위별로 나눠 보여드립니다.</p></div>
 </a>
 <a class="card card--soft" href="./nose-research-center.html">
 <p class="card__num"><b>40</b>건</p>
-<p class="card__d">의료진이 직접 작성한 학술 발표와 연구 기록입니다.</p>
 <span class="card__go"><i class="ar"></i></span>
+<div class="card__box"><p class="card__t">의료진이 직접 작성한 연구 기록</p>
+<p class="card__d">진단 기준과 수술 계획, 경과를<br>학회와 연구 자료로 정리했습니다.</p></div>
 </a>
 <a class="card card--wide" href="./case-reviews.html">
 <p class="card__num"><b>4,756</b>건</p>
-<p class="card__d">코에 대한 고민부터 수술 후 일상까지, 숨길과 함께한 변화입니다.</p>
 <span class="card__go"><i class="ar"></i></span>
+<div class="card__box"><p class="card__t">환자분들이 직접 남겨주신 자필 후기</p>
+<p class="card__d">코에 대한 고민부터 수술 후 일상까지,<br>숨길이비인후과와 함께한 변화입니다.</p></div>
 </a>
 </div>
 </div>
@@ -454,19 +476,19 @@
 <div class="field__fig"><img src="./assets/field-1.jpg" alt="" loading="lazy"></div>
 <div class="field__txt"><p class="field__pt">코질환 수술</p><p class="field__pd">환자에게 맞는 진료 방향을 함께 고민합니다.</p></div>
 </div>
-<div class="field__chips" style="margin-top:16rem"><a class="field__chip" href="./deviated-septum.html">비중격만곡증<i class="ar"></i></a><a class="field__chip" href="./rhinitis.html">코막힘/비염<i class="ar"></i></a><a class="field__chip" href="./sinusitis.html">축농증<i class="ar"></i></a><a class="field__chip" href="./nasal-valve.html">비밸브재건술<i class="ar"></i></a><a class="field__chip" href="./nasal-fracture.html">코뼈골절<i class="ar"></i></a></div>
+<div class="field__chips"><a class="field__chip" href="./deviated-septum.html">비중격만곡증<i class="ar ar--ne"></i></a><a class="field__chip" href="./rhinitis.html">코막힘/비염<i class="ar ar--ne"></i></a><a class="field__chip" href="./sinusitis.html">축농증<i class="ar ar--ne"></i></a><a class="field__chip" href="./nasal-valve.html">비밸브재건술<i class="ar ar--ne"></i></a><a class="field__chip" href="./nasal-fracture.html">코뼈골절<i class="ar ar--ne"></i></a></div>
 </div><div class="field__panel" data-fieldpanel="1">
 <div class="field__head">
 <div class="field__fig"><img src="./assets/field-2.jpg" alt="" loading="lazy"></div>
 <div class="field__txt"><p class="field__pt">기능 코성형</p><p class="field__pd">숨 쉬는 기능을 지키면서 인상을 정리합니다.</p></div>
 </div>
-<div class="field__chips" style="margin-top:16rem"><a class="field__chip" href="./rhinoplasty-intro.html">기능 코성형이란?<i class="ar"></i></a><a class="field__chip" href="./deviated-nose.html">휜코<i class="ar"></i></a><a class="field__chip" href="./hump-nose.html">매부리코<i class="ar"></i></a><a class="field__chip" href="./male-rhinoplasty.html">남자 코성형<i class="ar"></i></a><a class="field__chip" href="./revision-rhinoplasty.html">코 재수술<i class="ar"></i></a></div>
+<div class="field__chips"><a class="field__chip" href="./rhinoplasty-intro.html">기능 코성형이란?<i class="ar ar--ne"></i></a><a class="field__chip" href="./deviated-nose.html">휜코<i class="ar ar--ne"></i></a><a class="field__chip" href="./hump-nose.html">매부리코<i class="ar ar--ne"></i></a><a class="field__chip" href="./male-rhinoplasty.html">남자 코성형<i class="ar ar--ne"></i></a><a class="field__chip" href="./revision-rhinoplasty.html">코 재수술<i class="ar ar--ne"></i></a></div>
 </div><div class="field__panel" data-fieldpanel="2">
 <div class="field__head">
 <div class="field__fig"><img src="./assets/field-3.jpg" alt="" loading="lazy"></div>
 <div class="field__txt"><p class="field__pt">수면무호흡</p><p class="field__pd">자는 동안의 호흡을 먼저 재고 시작합니다.</p></div>
 </div>
-<div class="field__chips" style="margin-top:16rem"><a class="field__chip" href="./sleep-study.html">수면다원검사<i class="ar"></i></a><a class="field__chip" href="./snoring-apnea.html">코골이/수면무호흡증<i class="ar"></i></a></div>
+<div class="field__chips"><a class="field__chip" href="./sleep-study.html">수면다원검사<i class="ar ar--ne"></i></a><a class="field__chip" href="./snoring-apnea.html">코골이/수면무호흡증<i class="ar ar--ne"></i></a></div>
 </div></div>
 </div>
 </div>
