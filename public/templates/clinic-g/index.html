@@ -42,7 +42,7 @@
 .mv__play svg{width:100%;height:100%;fill:currentColor}
 /* 레퍼런스 .fixed_form — 화면 하단 고정(bottom 24px · 폭 1240) */
 .mv__form{position:fixed;z-index:10;left:0;right:0;bottom:24px}
-.mv__form-in{margin:0 auto;width:var(--in);max-width:100%;padding:0 var(--inPd)}
+.mv__form-in{margin:0 auto;width:var(--in2);max-width:100%;padding:0 var(--inPd)}
 
 /* SINCE — 대형 숫자 카운터 158/158 700 */
 .since{position:relative;display:flex;align-items:center;height:900px;background:#fff;overflow:hidden}
@@ -52,11 +52,53 @@
 .since__l{position:relative;flex:0 0 auto}
 .since__since{font-family:var(--numFont);font-size:clamp(var(--h6),1.7vw,56px);font-weight:500;
   letter-spacing:.15em;color:var(--point01)}
-.since__num{display:flex;font-family:var(--numFont);font-size:clamp(12rem,11vw,240px);font-weight:700;
+.since__num{display:inline-flex;font-family:var(--numFont);font-size:clamp(12rem,11vw,240px);font-weight:700;
   line-height:1;letter-spacing:.005em;color:var(--point01)}
-.since__d{overflow:hidden;height:1em}
-.since__roll{display:block}
-.since__roll span{display:block;height:1em}
+.since__num{opacity:0}
+.since--done .since__num{opacity:1;transition:opacity .21s linear}
+
+/* SINCE 관문 장면 — 레퍼런스 GSAP 타임라인(timeScale 1.45) 실측값.
+   라이브 실측: front 245px→158.4px · num_txt top 450→360 · left 720→307.3
+   · tens -2em(3칸 중 index2) · ones -17em(18칸 중 index17)
+   단계(초): 0 윤곽선 → .50 채움 → .71 릴 .31s → 1.02 축소·상승 .38s
+   → 1.54 제자리 이동 .48s → 1.78 문장 계단 → 2.10 인계
+   원본은 숫자 윤곽선을 SVG stroke 로 그린다. 우리는 같은 시간·이징으로
+   글자 획(-webkit-text-stroke)에서 채움으로 바꾼다 — 의도한 차이. */
+.since__front{position:absolute;inset:0;z-index:5;overflow:hidden;pointer-events:none}
+.since__fnum{position:absolute;left:50%;top:50%;display:flex;align-items:center;
+  transform:translate(-50%,-50%);font-family:var(--numFont);font-size:245px;font-weight:700;
+  line-height:1;letter-spacing:.005em;white-space:nowrap;
+  color:transparent;-webkit-text-stroke:2px var(--point01);
+  opacity:0;transition:opacity .5s ease-out,color .12s linear,-webkit-text-stroke-width .12s linear}
+.since__reel{display:inline-block;width:.62em;height:1em;overflow:hidden;vertical-align:top}
+.since__rt{display:flex;flex-direction:column;will-change:transform}
+.since__rt i{display:block;flex:0 0 1em;width:.62em;height:1em;font-style:normal;text-align:center}
+.since--s1 .since__fnum{opacity:1}
+.since--s2 .since__fnum{color:var(--point01);-webkit-text-stroke-width:0}
+.since--done .since__front{opacity:0;transition:opacity .21s linear}
+
+/* 글 등장 — 레퍼런스 .cont_box.active 전환값 그대로 */
+.since__since,.since__h,.since__t,.since__r{opacity:0}
+.since__since{transform:translateY(100%)}
+.since__h{transform:translateY(10px)}
+.since__t{transform:translateY(150%)}
+.since__r p{overflow:hidden}
+.since__r span{display:inline-block;transform:translateY(100px)}
+.since--act .since__since{opacity:1;transform:none;
+  transition:opacity .6s ease-in-out .2s,transform .6s ease-in-out .2s}
+.since--act .since__h{opacity:1;transform:none;
+  transition:opacity 1s ease-in-out .2s,transform 1s ease-in-out .2s}
+.since--act .since__t{opacity:1;transform:none;
+  transition:opacity 1s ease-in-out .4s,transform 1s ease-in-out .4s}
+.since--act .since__r{opacity:1;transition:opacity .6s ease-in-out .6s}
+.since--act .since__r span{transform:none;transition:transform .55s cubic-bezier(.22,.61,.36,1)}
+.since--act .since__r p:nth-child(2) span{transition-delay:.12s}
+.since--act .since__r p:nth-child(3) span{transition-delay:.25s}
+@media (prefers-reduced-motion:reduce){
+  .since__since,.since__h,.since__t,.since__r,.since__num{opacity:1!important;transform:none!important}
+  .since__r span{transform:none!important}
+  .since__front{display:none}
+}
 .since__h{margin-top:4rem;font-size:var(--h4);font-weight:700;color:var(--point01)}
 /* 레퍼런스 .txt 는 흐름에서 빠져 desc 아래에 절대배치된다 */
 .since__t{position:absolute;left:0;bottom:-83px;width:100%;font-size:var(--h8);font-weight:500;
@@ -350,20 +392,20 @@
 </form></div></div>
 </section>
 
-<section class="since">
+<section class="since" data-since>
 <div class="since__in">
 <div class="since__l">
 <p class="since__since">SINCE 2009</p>
-<p class="since__num" data-count>
-<span class="since__d"><span>2</span></span><span class="since__d"><span>0</span></span>
-<span class="since__d"><span>2</span></span><span class="since__d"><span>6</span></span>
-</p>
+<p class="since__num">2026</p>
 <p class="since__h">숨길이비인후과는 코 하나에 17년 동안 집중해왔습니다.</p>
 <p class="since__t">코는 숨 쉬는 기능과 얼굴 인상을 좌우하는 중요한 부위이기에<br>
 더 깊이 이해하고 더 오래 고민해야 한다고 믿습니다.</p>
 </div>
-<p class="since__r">숨길이비인후과는<br>오직 코 하나만 보기에,<br>기준이 다릅니다.</p>
+<div class="since__r"><p><span>숨길이비인후과는</span></p>
+<p><span>오직 코 하나만 보기에,</span></p>
+<p><span>기준이 다릅니다.</span></p></div>
 </div>
+<div class="since__front" aria-hidden="true"><span class="since__fnum"><span class="since__fp">20</span><span class="since__reel"><span class="since__rt" data-stop="2"><i>0</i><i>1</i><i>2</i></span></span><span class="since__reel"><span class="since__rt" data-stop="17"><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>0</i><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i></span></span></span></div>
 </section>
 
 <section class="perf">
@@ -804,31 +846,74 @@
   document.addEventListener('visibilitychange',function(){ document.hidden?stop():play() });
 })();
 
-/* SINCE 숫자 — 화면에 들어오면 릴이 굴러 올라간다 */
+/* SINCE 관문 — 레퍼런스는 섹션을 pin 하고 스크롤을 잠근 뒤 자동재생한다
+   (ScrollTrigger start "top top" / end "+=110%" / scrub:false / 완료 후 pin 해제).
+   여기서는 같은 구간·같은 시간으로 스크롤만 잠갔다 푼다. */
 (function(){
-  var n=document.querySelector('[data-count]'); if(!n) return;
-  var reels=[].slice.call(n.querySelectorAll('.since__d'));
-  reels.forEach(function(r){
-    var v=r.textContent.trim(), h='';
-    for(var k=0;k<=9;k++) h+='<span>'+k+'</span>';
-    r.innerHTML='<span class="since__roll">'+h+'</span>';
-    r.dataset.v=v;
-    r.firstElementChild.style.transform='translateY(-'+(+v*10)+'%)';   /* 평소엔 제 숫자 */
-  });
-  var io=new IntersectionObserver(function(es){ es.forEach(function(en){
-    if(!en.isIntersecting) return;
-    reels.forEach(function(r,k){
-      var el=r.firstElementChild;
-      el.style.transition='none'; el.style.transform='translateY(0)';
-      void el.offsetWidth;
-      setTimeout(function(){
-        el.style.transition='transform 1.4s cubic-bezier(.16,1,.3,1)';
-        el.style.transform='translateY(-'+(+r.dataset.v*10)+'%)';
-      },k*120);
+  var sect=document.querySelector('[data-since]'); if(!sect) return;
+  var front=sect.querySelector('.since__front'), fnum=sect.querySelector('.since__fnum'),
+      stat=sect.querySelector('.since__num');
+  function finish(){ sect.classList.add('since--act','since--done'); }
+  if(!front||!fnum||!stat||!window.matchMedia){ finish(); return; }
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches){ finish(); return; }
+
+  var tracks=[].slice.call(sect.querySelectorAll('.since__rt')), started=false;
+
+  function lock(){
+    var y=pageYOffset, html=document.documentElement, sb=html.style.scrollBehavior;
+    html.style.scrollBehavior='auto';
+    function keep(){ if(pageYOffset!==y) scrollTo(0,y) }
+    function block(e){ e.preventDefault() }
+    addEventListener('scroll',keep);
+    addEventListener('wheel',block,{passive:false});
+    addEventListener('touchmove',block,{passive:false});
+    return function(){
+      removeEventListener('scroll',keep);
+      removeEventListener('wheel',block); removeEventListener('touchmove',block);
+      html.style.scrollBehavior=sb;
+    };
+  }
+
+  function run(){
+    if(started) return; started=true;
+    var unlock=lock(), guard=setTimeout(function(){ unlock(); finish() },4000);
+    function at(ms,fn){ setTimeout(fn,ms) }
+
+    var sr=sect.getBoundingClientRect(), tr=stat.getBoundingClientRect();
+    var fs=getComputedStyle(stat).fontSize;
+    var tx=tr.left-sr.left+tr.width/2, ty=tr.top-sr.top+tr.height/2;
+
+    sect.classList.add('since--s1');                        /* 0     윤곽선 등장 */
+    at(500,function(){ sect.classList.add('since--s2') });  /* .50   채움 */
+    at(710,function(){                                      /* .71   릴 .31s */
+      tracks.forEach(function(t){
+        t.style.transition='transform .31s linear';
+        t.style.transform='translateY(-'+t.getAttribute('data-stop')+'em)';
+      });
     });
-    io.disconnect();
-  })},{threshold:.4});
-  io.observe(n);
+    at(1020,function(){                                     /* 1.02  축소·상승 .38s */
+      tracks.forEach(function(t){ t.style.transition='none' });
+      fnum.style.transition='font-size .38s cubic-bezier(.45,0,.55,1),'
+                           +'top .38s cubic-bezier(.45,0,.55,1)';
+      fnum.style.fontSize=fs; fnum.style.top=ty+'px';
+    });
+    at(1540,function(){                                     /* 1.54  제자리 이동 .48s */
+      fnum.style.transition='left .48s cubic-bezier(.45,0,.55,1)';
+      fnum.style.left=tx+'px';
+    });
+    at(1780,function(){ sect.classList.add('since--act') });/* 1.78  문장 계단 */
+    at(2100,function(){                                     /* 2.10  인계·잠금 해제 */
+      clearTimeout(guard); unlock(); sect.classList.add('since--done');
+    });
+  }
+
+  function check(){
+    var r=sect.getBoundingClientRect();
+    if(r.bottom<=200){ removeEventListener('scroll',check); finish(); return; }  /* 이미 지나쳤다 */
+    if(r.top<=1){ removeEventListener('scroll',check); run(); }
+  }
+  addEventListener('scroll',check,{passive:true});
+  check();
 })();
 
 /* 진료 분야 아코디언 ↔ 우측 패널 */
