@@ -153,7 +153,7 @@ li{list-style:none}
              linear-gradient(150deg,rgba(120,205,255,.55),rgba(150,120,255,.45));
   filter:blur(16px);border-radius:48% 52% 44% 56%/52% 44% 56% 48%;opacity:.95;
   animation:blob 16s ease-in-out infinite}
-@keyframes blob{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(calc(-50% - 2.4vw),calc(-50% + 2vh)) scale(1.06)}}
+@keyframes blob{0%,100%{transform:translate(-50%,calc(-50% + var(--plx,0px))) scale(1)}50%{transform:translate(calc(-50% - 2.4vw),calc(-50% + 2vh + var(--plx,0px))) scale(1.06)}}
 .hero .content{position:relative;z-index:3;width:100%}
 .hero .head-wrap{position:relative}
 #head-title{display:flex;flex-direction:column;width:734px;max-width:100%;margin-top:20px;font-size:clamp(120px,5.8036vw + 60.57px,172px);font-weight:600;line-height:1.211;color:var(--ink)}
@@ -163,8 +163,9 @@ li{list-style:none}
 .subtitle-body{font-size:clamp(14px,.4464vw + 9.43px,18px);line-height:1.5;color:var(--ink-2)}
 .head-dot{position:absolute;top:53.1%;left:50%;width:12px;height:12px;border-radius:50%;background:var(--dot)}
 #head-title,.head-sub{opacity:0;filter:blur(8px);transform:translateY(10px);transition:opacity .9s,filter .9s,transform .9s cubic-bezier(.22,1,.36,1)}
+.hero.in #head-title,.hero.in .head-sub{transform:translateY(var(--plx,0px))}
 .head-sub{transition-delay:.62s}
-.hero.in #head-title,.hero.in .head-sub{opacity:1;filter:blur(0);transform:none}
+.hero.in #head-title,.hero.in .head-sub{opacity:1;filter:blur(0)}
 .head-dot{opacity:0;transform:scale(.4);transition:transform .42s cubic-bezier(.34,1.56,.64,1) 1.34s,opacity .18s 1.32s}
 .hero.in .head-dot{opacity:1;transform:scale(1)}
 
@@ -196,16 +197,17 @@ li{list-style:none}
   background:repeating-linear-gradient(115deg,#2a1d4d 0 26px,#432a6e 26px 52px,#1d1733 52px 82px),
              radial-gradient(60% 80% at 78% 62%,rgba(196,74,140,.75),transparent 70%);
   background-blend-mode:screen;opacity:.95}
-.pin-insight.is-open .insight-card{width:100%;height:100%}
+.insight-board.is-grown .insight-card{width:100%;height:100%}
+.insight-board.no-anim .insight-card{transition:none}
 .insight-steps{position:absolute;inset:0;z-index:3;opacity:0;transition:opacity .5s .55s}
-.pin-insight.is-open .insight-steps{opacity:1}
-.insight-step{position:absolute;inset:0;opacity:0;transition:opacity .5s}
-.insight-step.is-on{opacity:1}
+.insight-board.is-grown .insight-steps{opacity:1}
+.insight-step{position:absolute;inset:0;opacity:0}
+
 .insight-eyebrow{position:absolute;top:18%;left:8%;font-size:clamp(16px,.26vw + 13.33px,20px);font-weight:600;line-height:1.2;letter-spacing:.04em;text-transform:uppercase;color:#fff}
 .insight-title{position:absolute;top:26%;left:8%;display:flex;flex-direction:column;font-size:clamp(48px,2.6786vw + 20.57px,72px);font-weight:700;line-height:1.2;color:#fff;white-space:nowrap}
 .insight-num{position:absolute;top:86.5%;left:74.5%;width:clamp(126px,14.844vw - 26px,259px);height:auto}
 .insight-indicator{position:absolute;top:50%;right:64px;z-index:3;display:flex;flex-direction:column;gap:12px;transform:translateY(-50%);opacity:0;transition:opacity .5s .55s}
-.pin-insight.is-open .insight-indicator{opacity:1}
+.insight-board.is-grown .insight-indicator{opacity:1}
 .insight-dot{box-sizing:border-box;width:12px;height:12px;border:2px solid #fff;border-radius:50%;background:transparent;transition:background .35s}
 .insight-dot.is-on{background:#fff}
 
@@ -214,10 +216,10 @@ li{list-style:none}
 .services-inner{position:relative;width:clamp(928px,62.277vw + 290.3px,1486px);max-width:calc(100% - 96px);margin:0 auto}
 .services-title-wrap{position:sticky;top:0;z-index:2;height:100vh;margin-bottom:-100vh;pointer-events:none}
 .services-title-wrap .services-inner{height:100%}
-.services-title{position:absolute;top:50%;transform:translateY(calc(-50% + var(--ty,0px))) scale(var(--sc,1));transform-origin:0 0;
+.services-title{position:absolute;top:50%;transform-origin:0 0;
   font-size:clamp(96px,4.0179vw + 54.86px,132px);font-weight:700;line-height:1.211;color:var(--ink);opacity:0;filter:blur(16px);
-  transition:transform .9s cubic-bezier(.22,1,.36,1),opacity .6s,filter .6s;will-change:transform}
-.services.title-in .services-title{opacity:1;filter:blur(0)}
+  will-change:transform}
+
 .services-cards-wrap{position:relative;z-index:1}
 .services-cards{display:flex;flex-direction:column;gap:clamp(120px,4.4643vw + 74.29px,160px);
   width:clamp(448px,31.25vw + 128px,728px);margin-left:auto;padding-top:160vh}
@@ -232,27 +234,26 @@ li{list-style:none}
 
 /* ── 파트너 (250vh 고정) ── */
 .partners{position:relative;z-index:1;height:250vh}
-.partners-pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:flex-start;padding-top:calc(240px + 78 * var(--v))}
-.partners-inner{transform:translate3d(0,var(--pmove,0px),0);will-change:transform}
+.partners-pin{position:sticky;top:0;height:100vh;overflow:hidden}
+.partners-inner{will-change:transform}
 .partners-inner{position:relative;width:clamp(928px,62.277vw + 290.3px,1486px);max-width:calc(100% - 96px);margin:0 auto}
-.partners-title{font-size:clamp(96px,7.1424vw + 22.87px,160px);font-weight:700;line-height:1.211;color:var(--ink);opacity:0;filter:blur(16px);transition:opacity .7s,filter .7s}
-.partners-desc{margin-top:clamp(24px,2.5vw - 24px,40px);font-size:clamp(14px,.6696vw + 7.14px,20px);line-height:1.5;color:var(--ink);opacity:0;filter:blur(8px);transition:opacity .7s .12s,filter .7s .12s}
-.partners.in .partners-title,.partners.in .partners-desc{opacity:1;filter:blur(0)}
+.partners-title{font-size:clamp(96px,7.1424vw + 22.87px,160px);font-weight:700;line-height:1.211;color:var(--ink);opacity:0;filter:blur(16px)}
+.partners-desc{margin-top:clamp(24px,2.5vw - 24px,40px);font-size:clamp(14px,.6696vw + 7.14px,20px);line-height:1.5;color:var(--ink);opacity:0;filter:blur(8px)}
+
 .partner-grid{display:grid;grid-template-columns:repeat(5,1fr);grid-auto-rows:clamp(56px,2.6786vw + 28.57px,80px);
   place-items:center;gap:clamp(32px,5.357vw - 22.86px,80px) 24px;margin-top:clamp(64px,6.25vw,160px)}
-.p-logo{width:100%;max-width:200px;opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
-.partners.grid-in .p-logo{opacity:.85;transform:none}
+.p-logo{width:100%;max-width:200px;opacity:0}
+
 .p-logo svg{width:100%;height:auto}
 
 /* ── 프로젝트 (120vh 고정) ── */
 .projects{position:relative;z-index:1;height:120vh}
 .projects-pin{position:sticky;top:0;height:100vh;overflow:hidden}
-.projects-title{position:absolute;top:50%;left:var(--gut);transform-origin:0 0;
-  transform:translateY(calc(-50% + var(--pty,0px))) scale(var(--ptsc,1));
+.projects-title{position:absolute;top:50%;left:var(--gut);transform-origin:0 0;opacity:0;filter:blur(16px);will-change:transform,opacity,filter;
   font-size:clamp(96px,7.1424vw + 22.87px,160px);font-weight:700;line-height:1.211;color:var(--ink)}
 .proj-visual{position:absolute;top:0;right:0;width:clamp(420px,48.4vw - 0px,760px);height:100%;overflow:hidden;background:#f2f2f4}
-.proj-vis{position:absolute;inset:0;opacity:0;transition:opacity .7s}
-.proj-vis.is-on{opacity:1}
+.proj-vis{position:absolute;inset:0;opacity:0}
+
 .proj-img{width:100%;height:100%;object-fit:cover}
 .proj-vis-link{position:absolute;inset:0;z-index:5}
 .proj-indicator{position:absolute;top:50%;right:var(--gut-s);z-index:10;display:flex;flex-direction:column;gap:12px;transform:translateY(-50%);pointer-events:none}
@@ -261,8 +262,8 @@ li{list-style:none}
 .proj-info{position:absolute;left:var(--gut);bottom:0;width:352px;height:100%;
   display:grid;grid-template-rows:minmax(16px,clamp(458px,12.5vw + 218px,538px)) auto minmax(40px,1fr) auto;
   padding-bottom:clamp(80px,6.25vw - 40px,120px)}
-.proj-slide{grid-row:2;grid-column:1;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
-.proj-slide.is-on{opacity:1;transform:none}
+.proj-slide{grid-row:2;grid-column:1;opacity:0}
+
 .proj-name{font-size:calc(32px + 16 * var(--v));font-weight:700;line-height:1.4;color:var(--ink)}
 .proj-meta{display:grid;grid-template-columns:72px 1fr;gap:10px 16px;margin-top:calc(48px + 32 * var(--v));font-size:calc(14px + 6 * var(--v));line-height:1.5}
 .proj-meta dt{color:var(--ink-2);font-weight:600}
@@ -418,16 +419,45 @@ li{list-style:none}
 
 <script>
 (function(){
-var $=function(s,r){return (r||document).querySelector(s)},
-    $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ── 부드러운 스크롤 — 원본 Lenis({lerp:0.09, smoothWheel:true}) 와 같은 값 ── */
+var SS={target:scrollY,current:scrollY,on:false,lock:null};
+window.__ss=SS;
+if(!reduce && matchMedia('(pointer:fine)').matches){
+  SS.on=true;
+  var max=function(){return Math.max(0,document.documentElement.scrollHeight-innerHeight)};
+  addEventListener('wheel',function(e){
+    if(document.body.style.overflow==='hidden'){e.preventDefault();return}   /* 메뉴 열려 있을 때 */
+    if(SS.lock && SS.lock(e))  {e.preventDefault();return}
+    e.preventDefault();
+    SS.target=Math.min(max(),Math.max(0,SS.target+e.deltaY));
+  },{passive:false});
+  addEventListener('keydown',function(e){
+    var k=e.key,d=0;
+    if(k==='PageDown'||k===' ')d=innerHeight*.9; else if(k==='PageUp')d=-innerHeight*.9;
+    else if(k==='ArrowDown')d=120; else if(k==='ArrowUp')d=-120;
+    else if(k==='Home')d=-SS.target; else if(k==='End')d=max()-SS.target; else return;
+    SS.target=Math.min(max(),Math.max(0,SS.target+d));
+  });
+  addEventListener('resize',function(){SS.target=Math.min(max(),SS.target)});
+  (function raf(){
+    if(Math.abs(SS.target-SS.current)>.08){
+      SS.current+=(SS.target-SS.current)*0.09;
+      scrollTo(0,SS.current);
+    } else if(Math.abs(scrollY-SS.current)>2){ SS.current=SS.target=scrollY }
+    requestAnimationFrame(raf);
+  })();
+}
 
 /* 등장 */
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -8% 0px'});
 $$('[data-rv]').forEach(function(el){io.observe(el)});
 
-/* 배경 원 — 스크롤에 따라 아주 천천히 움직인다 */
+/* 배경 원 — 스크롤에 따라 아주 천천히 */
 var c1=$('#bg-line .circ-1'),c2=$('#bg-line .circ-2');
-if(c1){var raf=0;addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;
+if(c1){var raf1=0;addEventListener('scroll',function(){if(raf1)return;raf1=requestAnimationFrame(function(){raf1=0;
   var y=scrollY*.02;c1.style.transform='translate3d(0,'+(-y)+'px,0)';c2.style.transform='translate3d(0,'+(y*.6)+'px,0)'})},{passive:true})}
 
 /* 어두운 구간에서 고정 요소 반전 */
@@ -436,7 +466,7 @@ function tone(){var y=innerHeight*.06,on=darks.some(function(d){var r=d.getBound
   fixed.forEach(function(el){el.classList.toggle('on-dark',on)})}
 if(darks.length){addEventListener('scroll',tone,{passive:true});addEventListener('resize',tone);tone()}
 
-/* 스크롤 힌트는 조금만 내려도 감춘다 */
+/* 스크롤 힌트 */
 var hint=$('#scroll-hint');
 if(hint)addEventListener('scroll',function(){hint.classList.toggle('is-hidden',scrollY>innerHeight*.6)},{passive:true});
 
@@ -452,55 +482,188 @@ if(ov){var open=function(){ov.classList.add('open');document.body.style.overflow
 
 (function(){
 var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
-var clamp=function(v,a,b){return v<a?a:v>b?b:v};
+var clamp=function(v,a,b){a=a===undefined?0:a;b=b===undefined?1:b;return v<a?a:v>b?b:v};
+var lerp=function(a,b,t){return a+(b-a)*t};
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-/* 히어로 등장 */
-requestAnimationFrame(function(){$('#hero').classList.add('in')});
+/* 히어로 등장 — 원본은 글꼴이 준비된 뒤 켠다 */
+var hero=$('#hero'),go=function(){requestAnimationFrame(function(){hero.classList.add('in')})};
+if(document.fonts&&document.fonts.ready){document.fonts.ready.then(go);setTimeout(go,800)}else go();
 
-/* 구간 진행률 */
-function prog(sec){var r=sec.getBoundingClientRect(),t=r.height-innerHeight;
-  return t<=0?0:clamp(-r.top/t,0,1)}
+/* 히어로 시차 — 원본 rate: 블롭 +120, 소제목 -130, 대제목 -250 */
+var pl=[[$('.hero-blob'),120],[$('.head-sub'),-130],[$('#head-title'),-250]].filter(function(l){return l[0]});
+if(!reduce&&pl.length){var pt=0;var pup=function(){pt=0;var p=Math.min(1,(scrollY||0)/innerHeight);
+  pl.forEach(function(l){l[0].style.setProperty('--plx',(p*l[1]).toFixed(1)+'px')})};
+  addEventListener('scroll',function(){if(!pt){pt=1;requestAnimationFrame(pup)}},{passive:true});pup()}
 
-var beyond=$('.pin-beyond'),insight=$('.pin-insight'),services=$('.services'),
-    partners=$('.partners'),projects=$('.projects');
-var steps=$$('.insight-step'),dots=$$('.insight-dot'),
-    tl1=$('.insight-tagline-1'),tl2=$('.insight-tagline-2'),
-    pvis=$$('.proj-vis'),pslide=$$('.proj-slide'),pdot=$$('.proj-dot');
+/* Beyond 선언 — 원본 수식 그대로 */
+(function(){
+  var ch=$('.pin-beyond'); if(!ch)return;
+  var bl=$$('.beyond-title .line-1,.beyond-title .line-2',ch), fl=$$('.beyond-statement span',ch);
+  var set=function(l,s){l.style.opacity=s.toFixed(3);l.style.filter='blur('+(16*(1-s)).toFixed(2)+'px)'};
+  if(reduce){bl.forEach(function(l){set(l,0)});fl.forEach(function(l){set(l,1)});return}
+  var tick=0;
+  function update(){tick=0;
+    var scrub=ch.offsetHeight-innerHeight, p=scrub>0?clamp(-ch.getBoundingClientRect().top/scrub):0;
+    bl.forEach(function(l,i){var o=i*0.06; set(l, clamp(p<0.33 ? (p-o)/0.20 : 1-(p-0.45-o)/0.15))});
+    fl.forEach(function(l,i){set(l, clamp((p-0.62-i*0.06)/0.18))});
+  }
+  addEventListener('scroll',function(){if(!tick){tick=1;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',update); update();
+})();
 
-function setOn(list,i){list.forEach(function(el,k){el.classList.toggle('is-on',k===i)})}
+/* 인사이트 카드 — 화면에 절반 들어오면 한 번 펼친다 */
+(function(){
+  var board=$('.insight-board'), stage=$('.pin-insight-stage'); if(!board||!stage)return;
+  if(reduce||!('IntersectionObserver'in window)){board.classList.add('is-grown');return}
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting&&e.intersectionRatio>=0.5){board.classList.add('is-grown')}
+    else if(!e.isIntersecting){var r=stage.getBoundingClientRect();
+      board.classList.add('no-anim');
+      if(r.top>=innerHeight)board.classList.remove('is-grown'); else if(r.bottom<=0)board.classList.add('is-grown');
+      void board.offsetWidth; board.classList.remove('no-anim')}
+  })},{threshold:[0,0.5]}).observe(stage);
+})();
 
-var tick=0;
-function frame(){
-  tick=0;
-  if(beyond){var p=prog(beyond);
-    beyond.classList.toggle('show-title',p>.03&&p<.55);
-    beyond.classList.toggle('show-state',p>=.5)}
-  if(insight){var p=prog(insight);
-    insight.classList.toggle('is-open',p>.14);
-    var i=p<.34?0:p<.64?1:2; setOn(steps,i); setOn(dots,i);
-    var x=(p*-1100);
-    if(tl1)tl1.style.transform='translate3d('+(x)+'px,0,0)';
-    if(tl2)tl2.style.transform='translate3d('+(-x-600)+'px,0,0)'}
-  if(services){var r=services.getBoundingClientRect(),t=$('.services-title');
-    services.classList.toggle('title-in',r.top<innerHeight*.5&&r.bottom>innerHeight*.5);
-    var q=clamp(((-r.top)-innerHeight*.6)/(innerHeight*.5),0,1);
-    t.style.setProperty('--sc',(1-.65*q).toFixed(3));
-    t.style.setProperty('--ty',(-184.4*q).toFixed(1)+'px')}
-  if(partners){var r=partners.getBoundingClientRect(),q=prog(partners),inr=$('.partners-inner');
-    partners.classList.toggle('in',r.top<innerHeight*.6&&r.bottom>0);
-    partners.classList.toggle('grid-in',q>.5);
-    if(inr)inr.style.setProperty('--pmove',(-276*clamp((q-.42)/.58,0,1)).toFixed(1)+'px')}
-  if(projects){var p=prog(projects),i=p<.34?0:p<.67?1:2,pt=$('.projects-title');
-    setOn(pvis,i); setOn(pslide,i); setOn(pdot,i);
-    var r2=projects.getBoundingClientRect(),q2=clamp(((-r2.top)+innerHeight*.35)/(innerHeight*.55),0,1);
-    if(pt){pt.style.setProperty('--ptsc',(1-.686*q2).toFixed(3));pt.style.setProperty('--pty',(-176.9*q2).toFixed(1)+'px')}}
+/* 인사이트 3단계 — 원본 수식(0.75/0.5 창, blur 16, 빠질 때 48px, 스태거 .10) */
+(function(){
+  var sec=$('.pin-insight'), steps=$$('.insight-step'); if(!sec||!steps.length)return;
+  var N=steps.length, EXIT_Y=48, STAGGER=0.10, easeIn=function(x){return x*x};
+  var parts=steps.map(function(el){return {step:el,eyebrow:$('.insight-eyebrow',el),title:$('.insight-title',el)}});
+  var dots=$$('.insight-dot');
+  var exitText=function(el,e,delay){if(!el)return;var sh=clamp((e-delay)/(1-delay));
+    el.style.filter='none';el.style.transform='translateY('+(easeIn(sh)*EXIT_Y).toFixed(2)+'px)'};
+  var enterText=function(el,s){if(!el)return;el.style.filter='blur('+(16*(1-s)).toFixed(2)+'px)';el.style.transform='none'};
+  var setStep=function(part,s,leaving){part.step.style.opacity=s.toFixed(3);
+    if(leaving){var e=1-s;exitText(part.title,e,0);exitText(part.eyebrow,e,STAGGER)}
+    else{enterText(part.eyebrow,s);enterText(part.title,s)}};
+  var tl1=$('.insight-tagline-1'), tl2=$('.insight-tagline-2');
+  if(reduce){parts.forEach(function(p,i){setStep(p,i===0?1:0,false)});return}
+  var tick=0;
+  function update(){tick=0;
+    var track=sec.offsetHeight-innerHeight, p=track>0?clamp(-sec.getBoundingClientRect().top/track):0;
+    var sp=p*(N>1?N-1:1);
+    parts.forEach(function(part,i){setStep(part, N>1?clamp((0.75-Math.abs(sp-i))/0.5):1, sp>i)});
+    var a=Math.max(0,Math.min(N-1,Math.round(sp)));
+    dots.forEach(function(d,k){d.classList.toggle('is-on',k===a)});
+    var x=p*-1100;
+    if(tl1)tl1.style.transform='translate3d('+x.toFixed(1)+'px,0,0)';
+    if(tl2)tl2.style.transform='translate3d('+(-x-600).toFixed(1)+'px,0,0)';
+  }
+  addEventListener('scroll',function(){if(!tick){tick=1;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',update); update();
+})();
+
+/* 제목이 작은 라벨로 줄어드는 스크럽 — 서비스·프로젝트 공통 (원본 labelSize/restTop) */
+var labelSize=function(w){return w<=1024?32:w<=1920?lerp(32,48,(w-1024)/896):w<=2560?lerp(48,56,(w-1920)/640):56};
+var restTop=function(w){return w<=1024?160:w<=1920?lerp(160,240,(w-1024)/896):240};
+function titleScrub(title,q){
+  var bigPx=parseFloat(getComputedStyle(title).fontSize)||160;
+  var s=1+(labelSize(innerWidth)/bigPx-1)*q, bigH=title.offsetHeight;
+  var ty=(-bigH/2)*(1-q)+(restTop(innerWidth)-innerHeight/2)*q;
+  title.style.transform='translateY('+ty.toFixed(1)+'px) scale('+s.toFixed(3)+')';
 }
-function onScroll(){if(!tick)tick=requestAnimationFrame(frame)}
-addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);frame();
+
+(function(){
+  var sec=$('.services'), title=$('.services-title'); if(!sec||!title)return;
+  if(reduce){title.style.opacity='1';title.style.filter='none';return}
+  var tick=0;
+  function update(){tick=0;
+    var vh=innerHeight, scrolled=-sec.getBoundingClientRect().top;
+    var bi=clamp(scrolled/(0.25*vh)), q=clamp((scrolled-0.65*vh)/(0.45*vh));
+    title.style.opacity=bi.toFixed(3);
+    title.style.filter='blur('+(16*(1-bi)).toFixed(2)+'px)';
+    titleScrub(title,q);
+  }
+  addEventListener('scroll',function(){if(!tick){tick=1;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',update); update();
+})();
 
 /* 서비스 카드 등장 */
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.2});
-$$('.svc-card').forEach(function(c){io.observe(c)});
+(function(){var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}})},{threshold:.2});
+ $$('.svc-card').forEach(function(c){io2.observe(c)})})();
+
+/* 파트너 — 원본 임계값 그대로 */
+(function(){
+  var sec=$('.partners'), inner=$('.partners-inner'), title=$('.partners-title'), desc=$('.partners-desc'), grid=$('.partner-grid');
+  if(!sec||!inner||!grid)return;
+  var logos=$$('.p-logo',grid), COLS=5;
+  var TH0=0.08,TH1=0.28,DH0=0.18,DH1=0.38,LOGO0=0.50,ROLLSTART=0.66,STAG=0.06,RDUR=0.14,LRISE=60;
+  var ease=function(x){return 1-Math.pow(1-x,3)};
+  if(reduce){title.style.opacity=1;desc.style.opacity=1;logos.forEach(function(l){l.style.opacity=.85});return}
+  var tick=0;
+  function update(){tick=0;
+    var vh=innerHeight, p=clamp(-sec.getBoundingClientRect().top/((sec.offsetHeight-vh)||1));
+    var ht=clamp((p-TH0)/(TH1-TH0));
+    title.style.opacity=ht.toFixed(3); title.style.filter='blur('+(16*(1-ht)).toFixed(2)+'px)';
+    var hd=clamp((p-DH0)/(DH1-DH0));
+    desc.style.opacity=hd.toFixed(3); desc.style.filter='blur('+(8*(1-hd)).toFixed(2)+'px)';
+    var headerH=grid.offsetTop, contentH=inner.offsetHeight;
+    var y0=(vh-headerH)/2, y1=(vh-contentH)/2, roll=clamp((p-ROLLSTART)/(1-ROLLSTART));
+    inner.style.transform='translateY('+lerp(y0,y1,roll).toFixed(1)+'px)';
+    logos.forEach(function(l,i){
+      var row=Math.floor(i/COLS), t=clamp((p-(LOGO0+row*STAG))/RDUR), e=ease(t);
+      l.style.opacity=(0.85*e).toFixed(3);
+      l.style.transform='translateY('+(LRISE*(1-e)).toFixed(1)+'px)';
+    });
+  }
+  addEventListener('scroll',function(){if(!tick){tick=1;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',update); update();
+})();
+
+/* 프로젝트 — 제목이 줄고 화면이 드러난 뒤, 고정된 채 3건을 넘긴다 */
+(function(){
+  var sec=$('.projects'), title=$('.projects-title'), visual=$('.proj-visual'), info=$('.proj-info');
+  if(!sec||!title)return;
+  var vises=$$('.proj-vis',sec), slides=$$('.proj-slide',sec), dots=$$('.proj-dot',sec);
+  var COUNT=Math.max(1,vises.length), LAST=COUNT-1, DUR=760;
+  var pos=0,from=0,to=0,t0=0,animating=false,cool=0;
+  var smooth=function(k){return k<.5?4*k*k*k:1-Math.pow(-2*k+2,3)/2};
+  function renderPos(v){
+    var q=clamp(v), rev=clamp((q-0.35)/0.5);
+    titleScrub(title,q);
+    var bi=clamp((-sec.getBoundingClientRect().top+innerHeight*0.25)/(innerHeight*0.35));
+    title.style.opacity=bi.toFixed(3);
+    title.style.filter='blur('+(16*(1-bi)).toFixed(2)+'px)';
+    if(visual)visual.style.opacity=rev.toFixed(3);
+    if(info){info.style.opacity=rev.toFixed(3);info.style.transform='translateY('+(24*(1-rev)).toFixed(1)+'px)'}
+    var af=clamp(v-1,0,LAST);
+    vises.forEach(function(el,i){el.style.opacity=clamp(1-Math.abs(af-i)).toFixed(3)});
+    slides.forEach(function(el,i){var s=clamp(1-Math.abs(af-i));
+      el.style.opacity=s.toFixed(3); el.style.transform='translateY('+(28*(1-s)*(af>i?-1:1)).toFixed(1)+'px)'});
+    var a=Math.round(af); dots.forEach(function(d,k){d.classList.toggle('is-on',k===a)});
+  }
+  function loop(now){var k=clamp((now-t0)/DUR); pos=from+(to-from)*smooth(k); renderPos(pos);
+    if(k<1)requestAnimationFrame(loop); else {pos=to;renderPos(pos);animating=false}}
+  function goTo(t){from=pos;to=t;t0=performance.now();if(!animating){animating=true;requestAnimationFrame(loop)}}
+  var pinned=function(){var r=sec.getBoundingClientRect();return r.top<=1&&r.bottom>=innerHeight-1};
+  if(!reduce&&window.__ss&&window.__ss.on){
+    window.__ss.lock=function(e){
+      if(!pinned())return false;
+      var d=e.deltaY;
+      if(d>0&&pos>=COUNT)return false;
+      if(d<0&&pos<=0)return false;
+      var now=performance.now(); if(animating||now-cool<160)return true;
+      cool=now; goTo(Math.max(0,Math.min(COUNT,Math.round(pos)+(d>0?1:-1))));
+      return true;
+    };
+  }
+  var tick=0;
+  function update(){tick=0;
+    if(animating)return;
+    var r=sec.getBoundingClientRect();
+    if(r.top>0){pos=0;renderPos(0)}
+    else if(r.bottom<innerHeight){pos=COUNT;renderPos(COUNT)}
+    else if(!window.__ss||!window.__ss.on){
+      var track=sec.offsetHeight-innerHeight;
+      pos=track>0?clamp(-r.top/track,0,1)*COUNT:0; renderPos(pos);
+    }
+    else renderPos(pos);          /* 고정 중에는 휠이 단계를 옮기고, 제목 흐림만 따라간다 */
+  }
+  addEventListener('scroll',function(){if(!tick){tick=1;requestAnimationFrame(update)}},{passive:true});
+  addEventListener('resize',update);
+  renderPos(0); update();
+})();
 })();
 </script>
 </body>

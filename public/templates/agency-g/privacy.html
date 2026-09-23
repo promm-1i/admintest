@@ -186,16 +186,45 @@ li{list-style:none}
 
 <script>
 (function(){
-var $=function(s,r){return (r||document).querySelector(s)},
-    $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ── 부드러운 스크롤 — 원본 Lenis({lerp:0.09, smoothWheel:true}) 와 같은 값 ── */
+var SS={target:scrollY,current:scrollY,on:false,lock:null};
+window.__ss=SS;
+if(!reduce && matchMedia('(pointer:fine)').matches){
+  SS.on=true;
+  var max=function(){return Math.max(0,document.documentElement.scrollHeight-innerHeight)};
+  addEventListener('wheel',function(e){
+    if(document.body.style.overflow==='hidden'){e.preventDefault();return}   /* 메뉴 열려 있을 때 */
+    if(SS.lock && SS.lock(e))  {e.preventDefault();return}
+    e.preventDefault();
+    SS.target=Math.min(max(),Math.max(0,SS.target+e.deltaY));
+  },{passive:false});
+  addEventListener('keydown',function(e){
+    var k=e.key,d=0;
+    if(k==='PageDown'||k===' ')d=innerHeight*.9; else if(k==='PageUp')d=-innerHeight*.9;
+    else if(k==='ArrowDown')d=120; else if(k==='ArrowUp')d=-120;
+    else if(k==='Home')d=-SS.target; else if(k==='End')d=max()-SS.target; else return;
+    SS.target=Math.min(max(),Math.max(0,SS.target+d));
+  });
+  addEventListener('resize',function(){SS.target=Math.min(max(),SS.target)});
+  (function raf(){
+    if(Math.abs(SS.target-SS.current)>.08){
+      SS.current+=(SS.target-SS.current)*0.09;
+      scrollTo(0,SS.current);
+    } else if(Math.abs(scrollY-SS.current)>2){ SS.current=SS.target=scrollY }
+    requestAnimationFrame(raf);
+  })();
+}
 
 /* 등장 */
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -8% 0px'});
 $$('[data-rv]').forEach(function(el){io.observe(el)});
 
-/* 배경 원 — 스크롤에 따라 아주 천천히 움직인다 */
+/* 배경 원 — 스크롤에 따라 아주 천천히 */
 var c1=$('#bg-line .circ-1'),c2=$('#bg-line .circ-2');
-if(c1){var raf=0;addEventListener('scroll',function(){if(raf)return;raf=requestAnimationFrame(function(){raf=0;
+if(c1){var raf1=0;addEventListener('scroll',function(){if(raf1)return;raf1=requestAnimationFrame(function(){raf1=0;
   var y=scrollY*.02;c1.style.transform='translate3d(0,'+(-y)+'px,0)';c2.style.transform='translate3d(0,'+(y*.6)+'px,0)'})},{passive:true})}
 
 /* 어두운 구간에서 고정 요소 반전 */
@@ -204,7 +233,7 @@ function tone(){var y=innerHeight*.06,on=darks.some(function(d){var r=d.getBound
   fixed.forEach(function(el){el.classList.toggle('on-dark',on)})}
 if(darks.length){addEventListener('scroll',tone,{passive:true});addEventListener('resize',tone);tone()}
 
-/* 스크롤 힌트는 조금만 내려도 감춘다 */
+/* 스크롤 힌트 */
 var hint=$('#scroll-hint');
 if(hint)addEventListener('scroll',function(){hint.classList.toggle('is-hidden',scrollY>innerHeight*.6)},{passive:true});
 
