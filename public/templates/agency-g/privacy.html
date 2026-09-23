@@ -109,6 +109,30 @@ li{list-style:none}
 [data-rv][data-d="2"]{transition-delay:.36s}
 [data-rv][data-d="3"]{transition-delay:.54s}
 
+
+/* 페이지 전환 — 원본은 흰 시트가 아래에서 올라오고 위에 진행 막대가 뜬다 */
+.ps-body{opacity:0;min-height:100%;transition:opacity .35s}
+.ps-body.is-loaded{opacity:1}
+.ps-bar{position:fixed;top:0;left:0;z-index:200;width:100%;height:6px;opacity:0;pointer-events:none;
+  transform:scaleX(0);transform-origin:0;transition:opacity .3s,transform .6s cubic-bezier(.3,1,.3,1);
+  background:linear-gradient(90deg,var(--g1) 0%,var(--g2) 45%,var(--g3) 78%,#ff6bd2 100%)}
+.ps-bar.on{opacity:1}
+.ps-sheet{position:fixed;inset:0;z-index:150;background:#fff;visibility:hidden;transform:translateY(100%);
+  transition:transform 1.2s cubic-bezier(.2,1.1,.3,1);will-change:transform;backface-visibility:hidden}
+.ps-sheet.on{visibility:visible;transform:translateY(0)}
+
+/* 커서 라벨 — 원본 13px/700, 흰 글자, .2s 등장 */
+.cursor-label{position:fixed;top:0;left:0;z-index:120;display:flex;align-items:center;justify-content:center;
+  width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:rgba(62,63,68,.82);backdrop-filter:blur(2px);
+  color:#fff;font-size:13px;font-weight:700;line-height:1.15;text-align:center;letter-spacing:.01em;
+  opacity:0;pointer-events:none;transform:scale(.6);transition:opacity .2s,transform .2s}
+.cursor-label.on{opacity:1;transform:scale(1);transition-delay:80ms}
+@media (hover:none),(max-width:1023px){.cursor-label{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .ps-body,.ps-sheet,.ps-bar{transition:none}
+  .ps-body{opacity:1}
+}
+
 /* 서브 페이지 공통 */
 .sub-kv{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:100vh;padding:120px var(--gut) 5.91vh}
 .sub-kv h1{font-family:'Cormorant Garamond',serif;font-size:clamp(120px,5.8036vw + 60.57px,172px);font-weight:600;line-height:1.211;color:var(--ink)}
@@ -158,7 +182,7 @@ li{list-style:none}
 <a id="ci-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">lab</text><circle cx="306" cy="62" r="18" fill="#2FD6C9"/></svg></a><a id="lets-talk" href="/templates/agency-g/contact.html"><span>Let’s Talk</span></a>
 <button id="full-menu" type="button" aria-label="전체 메뉴 열기"><i></i></button>
 <div id="scroll-hint"><span class="bar"></span><span class="label">SCROLL</span></div>
-<main class="pol"><h1 class="serif">Privacy</h1><p class="pol-date">시행일 2026년 1월 1일</p><section><h2>1. 수집하는 개인정보 항목</h2><p>회사는 문의 접수를 위해 기업명, 성함, 연락처, 이메일, 문의 내용, 첨부 파일을 수집합니다. 서비스 이용 과정에서 접속 기록과 쿠키가 자동으로 생성될 수 있습니다.</p></section><section><h2>2. 수집 및 이용 목적</h2><p>문의에 대한 답변, 견적 안내, 계약 협의와 그에 따른 연락을 위해 이용합니다. 그 밖의 목적으로는 쓰지 않습니다.</p><p>통계 분석을 위해 이용하는 경우에는 개인을 알아볼 수 없도록 처리한 뒤에 사용합니다. 마케팅 목적의 광고 발송에는 쓰지 않습니다.</p></section><section><h2>3. 보유 및 이용 기간</h2><p>문의 처리가 끝난 날부터 3년간 보관한 뒤 지체 없이 파기합니다. 다만 관계 법령에서 따로 정한 기간이 있으면 그 기간을 따릅니다.</p></section><section><h2>4. 제3자 제공</h2><p>회사는 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 법령에 따라 수사기관이 적법한 절차로 요구한 경우에만 제공하며, 이 경우에도 요청 근거와 범위를 확인한 뒤 최소한으로 제공합니다.</p></section><section><h2>5. 처리 위탁</h2><p>원활한 서비스 제공을 위해 웹사이트 운영과 메일 발송 업무를 외부에 위탁할 수 있으며, 위탁 시 수탁자와 처리 범위를 이 방침에 공개합니다.</p><p>위탁 계약을 맺을 때에는 개인정보 보호 관련 지시 준수, 재위탁 제한, 관리 실태 점검 항목을 계약서에 담습니다.</p></section><section><h2>6. 이용자의 권리</h2><p>이용자는 언제든 자신의 개인정보를 열람·정정·삭제·처리정지 요청할 수 있습니다. 요청은 아래 연락처로 접수하면 지체 없이 처리합니다.</p><p>대리인을 통해 요청할 때에는 위임 사실을 확인할 수 있는 서류를 함께 보내 주셔야 합니다. 회사는 요청을 받은 날부터 10일 안에 처리 결과를 알립니다.</p></section><section><h2>7. 파기 절차와 방법</h2><p>전자 파일은 복구할 수 없는 방법으로 삭제하고, 종이에 출력된 자료는 분쇄하거나 소각합니다.</p></section><section><h2>8. 안전성 확보 조치</h2><p>개인정보는 접근 권한을 최소한으로 두고 관리하며, 전송 구간은 암호화합니다. 관리자 계정은 주기적으로 점검합니다.</p><p>개인정보를 다루는 직원을 최소한으로 지정하고 정기적으로 교육합니다. 접속 기록은 위·변조를 막을 수 있도록 별도로 보관합니다.</p></section><section><h2>9. 쿠키의 운영</h2><p>회사는 이용 편의를 위해 쿠키를 사용할 수 있습니다. 이용자는 브라우저 설정에서 쿠키 저장을 거부할 수 있으며, 거부하더라도 웹사이트 이용에 큰 지장은 없습니다.</p></section><section><h2>10. 만 14세 미만 아동의 개인정보</h2><p>회사는 만 14세 미만 아동의 개인정보를 수집하지 않습니다. 수집된 사실이 확인되면 지체 없이 파기합니다.</p></section><section><h2>11. 개인정보의 국외 이전</h2><p>회사는 개인정보를 국외로 이전하지 않습니다. 이전이 필요한 경우 사전에 이용자에게 알리고 동의를 받습니다.</p></section><section><h2>12. 권익침해 구제 방법</h2><p>개인정보 침해로 도움이 필요하면 개인정보분쟁조정위원회, 개인정보침해신고센터, 대검찰청 사이버수사과, 경찰청 사이버수사국에 신고하거나 상담을 요청할 수 있습니다.</p></section><section><h2>13. 개인정보 보호책임자</h2><p>성명 김진수 / 이메일 6gsmake@gmail.com / 전화 010-4894-4905</p><p>사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</p><p>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)</p><p>이 방침은 시행일부터 적용되며, 내용을 더하거나 고칠 때에는 적용일 7일 전부터 웹사이트에 알립니다.</p></section></main><footer class="footer" data-rv>
+<div class="ps-body"><main class="pol"><h1 class="serif">Privacy</h1><p class="pol-date">시행일 2026년 1월 1일</p><section><h2>1. 수집하는 개인정보 항목</h2><p>회사는 문의 접수를 위해 기업명, 성함, 연락처, 이메일, 문의 내용, 첨부 파일을 수집합니다. 서비스 이용 과정에서 접속 기록과 쿠키가 자동으로 생성될 수 있습니다.</p></section><section><h2>2. 수집 및 이용 목적</h2><p>문의에 대한 답변, 견적 안내, 계약 협의와 그에 따른 연락을 위해 이용합니다. 그 밖의 목적으로는 쓰지 않습니다.</p><p>통계 분석을 위해 이용하는 경우에는 개인을 알아볼 수 없도록 처리한 뒤에 사용합니다. 마케팅 목적의 광고 발송에는 쓰지 않습니다.</p></section><section><h2>3. 보유 및 이용 기간</h2><p>문의 처리가 끝난 날부터 3년간 보관한 뒤 지체 없이 파기합니다. 다만 관계 법령에서 따로 정한 기간이 있으면 그 기간을 따릅니다.</p></section><section><h2>4. 제3자 제공</h2><p>회사는 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 법령에 따라 수사기관이 적법한 절차로 요구한 경우에만 제공하며, 이 경우에도 요청 근거와 범위를 확인한 뒤 최소한으로 제공합니다.</p></section><section><h2>5. 처리 위탁</h2><p>원활한 서비스 제공을 위해 웹사이트 운영과 메일 발송 업무를 외부에 위탁할 수 있으며, 위탁 시 수탁자와 처리 범위를 이 방침에 공개합니다.</p><p>위탁 계약을 맺을 때에는 개인정보 보호 관련 지시 준수, 재위탁 제한, 관리 실태 점검 항목을 계약서에 담습니다.</p></section><section><h2>6. 이용자의 권리</h2><p>이용자는 언제든 자신의 개인정보를 열람·정정·삭제·처리정지 요청할 수 있습니다. 요청은 아래 연락처로 접수하면 지체 없이 처리합니다.</p><p>대리인을 통해 요청할 때에는 위임 사실을 확인할 수 있는 서류를 함께 보내 주셔야 합니다. 회사는 요청을 받은 날부터 10일 안에 처리 결과를 알립니다.</p></section><section><h2>7. 파기 절차와 방법</h2><p>전자 파일은 복구할 수 없는 방법으로 삭제하고, 종이에 출력된 자료는 분쇄하거나 소각합니다.</p></section><section><h2>8. 안전성 확보 조치</h2><p>개인정보는 접근 권한을 최소한으로 두고 관리하며, 전송 구간은 암호화합니다. 관리자 계정은 주기적으로 점검합니다.</p><p>개인정보를 다루는 직원을 최소한으로 지정하고 정기적으로 교육합니다. 접속 기록은 위·변조를 막을 수 있도록 별도로 보관합니다.</p></section><section><h2>9. 쿠키의 운영</h2><p>회사는 이용 편의를 위해 쿠키를 사용할 수 있습니다. 이용자는 브라우저 설정에서 쿠키 저장을 거부할 수 있으며, 거부하더라도 웹사이트 이용에 큰 지장은 없습니다.</p></section><section><h2>10. 만 14세 미만 아동의 개인정보</h2><p>회사는 만 14세 미만 아동의 개인정보를 수집하지 않습니다. 수집된 사실이 확인되면 지체 없이 파기합니다.</p></section><section><h2>11. 개인정보의 국외 이전</h2><p>회사는 개인정보를 국외로 이전하지 않습니다. 이전이 필요한 경우 사전에 이용자에게 알리고 동의를 받습니다.</p></section><section><h2>12. 권익침해 구제 방법</h2><p>개인정보 침해로 도움이 필요하면 개인정보분쟁조정위원회, 개인정보침해신고센터, 대검찰청 사이버수사과, 경찰청 사이버수사국에 신고하거나 상담을 요청할 수 있습니다.</p></section><section><h2>13. 개인정보 보호책임자</h2><p>성명 김진수 / 이메일 6gsmake@gmail.com / 전화 010-4894-4905</p><p>사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호</p><p>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)</p><p>이 방침은 시행일부터 적용되며, 내용을 더하거나 고칠 때에는 적용일 7일 전부터 웹사이트에 알립니다.</p></section></main><footer class="footer" data-rv>
   <div class="footer-logo"><svg class="footer-wordmark" viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="#3e3f44">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="#3e3f44">lab</text><circle cx="306" cy="62" r="18" fill="url(#wmg)"/><defs><linearGradient id="wmg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2FD6C9"/><stop offset="1" stop-color="#5B4BFF"/></linearGradient></defs></svg></div>
   <div class="footer-bottom">
     <div class="footer-left">
@@ -173,7 +197,7 @@ li{list-style:none}
     </div>
   </div>
 </footer>
-<div id="menu-overlay" aria-hidden="true">
+</div><div id="menu-overlay" aria-hidden="true">
 <div id="menu-panel"></div>
 <a id="menu-logo" href="/templates/agency-g/" aria-label="오빗랩 홈"><svg viewBox="0 0 520 162" xmlns="http://www.w3.org/2000/svg"><text x="0" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">orbit</text><text x="330" y="128" font-family="Pretendard,sans-serif" font-size="126" font-weight="800" letter-spacing="-7" fill="currentColor">lab</text><circle cx="306" cy="62" r="18" fill="#2FD6C9"/></svg></a><button id="menu-close" type="button" aria-label="메뉴 닫기"></button>
 <div class="menu-scroll"><div class="menu-inner">
@@ -184,6 +208,8 @@ li{list-style:none}
   </div>
 </div></div></div>
 
+<div class="ps-bar" aria-hidden="true"></div><div class="ps-sheet" aria-hidden="true"></div>
+<span class="cursor-label" aria-hidden="true">View Project</span>
 <script>
 (function(){
 var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
@@ -372,6 +398,39 @@ if(bh)runner(bh,function(c,w,h,t){
   core.addColorStop(0,'rgba(8,8,14,1)'); core.addColorStop(.72,'rgba(10,10,18,.9)'); core.addColorStop(1,'rgba(10,10,18,0)');
   c.fillStyle=core; c.beginPath(); c.arc(cx,cy,R*0.5,0,6.2832); c.fill();
 });
+})();
+
+
+/* 페이지 전환 + 커서 라벨 */
+(function(){
+  var body=$('.ps-body'); if(body)requestAnimationFrame(function(){body.classList.add('is-loaded')});
+  var bar=$('.ps-bar'), sheet=$('.ps-sheet');
+  var same=function(a){try{var u=new URL(a.href,location.href);
+    return u.origin===location.origin&&u.pathname!==location.pathname&&/\.html$|\/$/.test(u.pathname)}catch(e){return false}};
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]'); if(!a||a.target==='_blank'||e.metaKey||e.ctrlKey)return;
+    if(!same(a))return;
+    if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+    e.preventDefault();
+    if(bar){bar.classList.add('on');bar.style.transform='scaleX(.75)'}
+    if(sheet)sheet.classList.add('on');
+    setTimeout(function(){location.href=a.href},680);
+  });
+  /* 커서 라벨 */
+  var lab=$('.cursor-label'); if(!lab)return;
+  var x=0,y=0,raf=0;
+  addEventListener('pointermove',function(e){x=e.clientX;y=e.clientY;
+    if(!raf)raf=requestAnimationFrame(function(){raf=0;lab.style.transform=(lab.classList.contains('on')?'scale(1)':'scale(.6)');
+      lab.style.left=x+'px';lab.style.top=y+'px'})},{passive:true});
+  var zones='.proj-vis-link,.pj-card,.proj-visual,.pd-visual';
+  document.addEventListener('pointerover',function(e){
+    var z=e.target.closest&&e.target.closest(zones);
+    if(z){lab.textContent=z.dataset.cursor||'View Project';lab.classList.add('on')}
+  });
+  document.addEventListener('pointerout',function(e){
+    var z=e.target.closest&&e.target.closest(zones);
+    if(z&&!(e.relatedTarget&&e.relatedTarget.closest&&e.relatedTarget.closest(zones)))lab.classList.remove('on');
+  });
 })();
 
 /* 전체 메뉴 */
