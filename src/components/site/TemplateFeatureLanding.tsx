@@ -231,7 +231,7 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
               </p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
                 {isLanding
-                  ? "스크롤에 따라 콘텐츠가 순차적으로 나타나며, 방문자가 자연스럽게 상담까지 이어지도록 동선을 설계했습니다."
+                  ? "스크롤에 따라 내용이 한 덩이씩 나타나고, 읽다 보면 상담 버튼이 나오게 순서를 짰습니다."
                   : "필요한 정보를 한 화면에 정직하게 정리해, 방문자가 원하는 내용을 빠르게 찾을 수 있게 구성했습니다."}
               </p>
             </div>

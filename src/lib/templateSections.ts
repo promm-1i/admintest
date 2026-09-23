@@ -390,7 +390,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/beauty-g-4.webp", title: "고객 후기" },
   ],
   "beauty-f": [
-    { img: "/thumbs/sections/beauty-f-1.webp", title: "최고의 스타일리스트. 최고급 제품. 타협 없음." },
+    { img: "/thumbs/sections/beauty-f-1.webp", title: "경력 10년 이상 · 살롱 전용 제품만" },
     { img: "/thumbs/sections/beauty-f-2.webp", title: "고민 해결" },
     { img: "/thumbs/sections/beauty-f-3.webp", title: "시술 안내" },
     { img: "/thumbs/sections/beauty-f-4.webp", title: "왜 블랑인가" },

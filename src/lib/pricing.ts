@@ -55,7 +55,7 @@ export const PRODUCT_TYPES: ProductType[] = [
     num: "05",
     name: "포트폴리오 홈페이지",
     filterValue: "portfolio",
-    desc: "작업물과 전문성을 효과적으로 보여주는 포트폴리오 중심 홈페이지",
+    desc: "작업물을 크게 보여 주는 포트폴리오 중심 홈페이지",
     bullets: ["작가 / 강사", "디자인 스튜디오", "인테리어", "개인 브랜드"],
     image: servicePortfolioImg,
   },

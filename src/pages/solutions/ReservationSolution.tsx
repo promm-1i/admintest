@@ -17,7 +17,7 @@ const FEATURES = [
   {
     icon: Users,
     title: "고객관리",
-    desc: "예약 이력과 고객 정보를 체계적으로 관리합니다.",
+    desc: "예약 이력과 고객 정보를 한곳에서 관리합니다.",
   },
   {
     icon: Settings,

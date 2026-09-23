@@ -122,7 +122,7 @@ function BreathingPreview() {
 export default function ResponsiveService() {
   usePageTitle(
     "반응형 웹 제작 — NOVERIQ",
-    "하나의 홈페이지가 데스크톱, 태블릿, 모바일에서 어떻게 자연스럽게 재배치되는지 실제 화면으로 확인하세요.",
+    "하나의 홈페이지가 데스크톱, 태블릿, 모바일에서 어떻게 다시 배치되는지 실제 화면으로 확인하세요.",
   );
 
   return (

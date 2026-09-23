@@ -99,7 +99,7 @@ const CONSIDERATION_POINTS = [
     num: "01",
     icon: Smartphone,
     title: "PC · 모바일 반응형",
-    desc: "PC, 태블릿, 모바일 화면에 맞게 콘텐츠가 자연스럽게 재배치되도록 제작합니다.",
+    desc: "PC, 태블릿, 모바일 화면에 맞게 콘텐츠가 다시 배치되도록 제작합니다.",
   },
   {
     num: "02",

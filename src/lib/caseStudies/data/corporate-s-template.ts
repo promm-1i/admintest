@@ -49,7 +49,7 @@ const study: CaseStudy = {
         label: "역사 스크롤",
         title: "산업의 시작과 성장을 긴 이미지 흐름으로 따라갑니다",
         body: "시대별 기록 사진과 사건·인물 문장을 같은 높이로 자르지 않고 내용 길이에 맞춰 이어, 자료가 쌓인 시간 자체를 스크롤 경험으로 전달합니다.",
-        items: ["시대별 대형 기록 이미지", "연도·사건·인물 중심 서사", "자료 높이를 살린 장문 스크롤"],
+        items: ["시대별 대형 기록 이미지", "연도 · 사건 · 인물 순서로 정리", "자료 높이를 살린 장문 스크롤"],
         img: "/cases/corporate-s/page-story-origin.webp",
         caption: "태동과 성장 · 기록 스토리",
         file: "story-origin.html",

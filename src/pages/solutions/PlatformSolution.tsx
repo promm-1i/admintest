@@ -17,7 +17,7 @@ const FEATURES = [
   {
     icon: Database,
     title: "데이터베이스",
-    desc: "필요한 데이터를 체계적으로 저장하고 관리합니다.",
+    desc: "필요한 데이터를 항목별로 저장하고 관리합니다.",
   },
   {
     icon: Briefcase,

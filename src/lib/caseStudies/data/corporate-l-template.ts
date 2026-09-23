@@ -31,7 +31,7 @@ const study: CaseStudy = {
       { label: "IR·재무·공시", title: "투자정보와 재무·공시를 목록과 상세 화면으로 운영합니다", body: "IR 개요와 주요 일정, 재무표와 공시 자료를 분리해 투자자가 필요한 정보를 단계적으로 찾게 합니다.", items: ["IR 개요와 일정 5개", "재무상태·손익 표와 차트", "공시 목록·상세"], img: "/cases/corporate-l/page-ir.webp", caption: "투자정보 · IR 개요", file: "ir.html" },
       { label: "ESG·윤리", title: "지속가능경영 성과와 윤리 원칙을 별도 화면으로 제공합니다", body: "숲 이미지 고정 장면의 성과 지표에서 ESG 상세와 윤리경영 원칙으로 연결됩니다.", items: ["400vh 지속가능경영 장면", "ESG 지표 4개", "윤리경영 정책과 실천"], img: "/cases/corporate-l/page-esg.webp", caption: "지속가능경영 · ESG", file: "esg.html" },
       { label: "뉴스·공지", title: "기업 뉴스와 공시성 공지를 각각 목록·상세로 축적합니다", body: "대표 뉴스와 전체 아카이브, 공지 목록과 본문을 독립 구조로 제공해 콘텐츠 성격에 맞춰 관리합니다.", items: ["뉴스 목록·상세", "공지 목록·상세", "검색과 최신 콘텐츠 강조"], img: "/cases/corporate-l/page-news.webp", caption: "미디어 · 뉴스 목록", file: "news.html" },
-      { label: "인재·고객", title: "인사제도·직무·채용가이드와 고객 문의까지 행동 동선을 완성했습니다", body: "지원자는 회사의 제도와 직무를 이해하고 채용 절차로 이동하며, 고객은 별도 문의 화면에서 목적에 맞는 내용을 접수합니다.", items: ["인사제도와 직무소개", "채용가이드·지원 절차", "고객 문의와 정책·사이트맵"], img: "/cases/corporate-l/page-recruit.webp", caption: "인재채용 · 채용가이드", file: "recruit.html" },
+      { label: "인재·고객", title: "인사제도·직무·채용가이드와 고객 문의까지 한 줄로 이어 놓았습니다", body: "지원자는 회사의 제도와 직무를 이해하고 채용 절차로 이동하며, 고객은 별도 문의 화면에서 목적에 맞는 내용을 접수합니다.", items: ["인사제도와 직무소개", "채용가이드·지원 절차", "고객 문의와 정책·사이트맵"], img: "/cases/corporate-l/page-recruit.webp", caption: "인재채용 · 채용가이드", file: "recruit.html" },
     ],
   },
   pages: [
