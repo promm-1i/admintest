@@ -785,12 +785,24 @@ const PAGE_PHOTOS: Record<string, { wide: string; side: string; wideAlt: string;
   seo: { wide: "corporate-l/page-index", side: "brew-a/page-index",
     wideAlt: "기업 사이트의 서브페이지 구조", sideAlt: "양조장 사이트의 서브페이지 구조" },
 };
+/**
+ * 새로 만든 사진이 있으면 그것을, 없으면 실제 제작 캡처를 쓴다.
+ * public/renewal-editorial/photos/<쪽>-wide.webp · <쪽>-side.webp 를 넣으면
+ * 그 쪽만 새 사진으로 바뀐다. 한 장씩 넣어도 된다.
+ * 규격은 Desktop\개발\리뉴얼_서비스사진22장_요청.md 에 적어 뒀다.
+ */
+function BandImage({ page, slot, fallback, alt }: { page: string; slot: "wide" | "side"; fallback: string; alt: string }) {
+  const [src, setSrc] = useState(`/renewal-editorial/photos/${page}-${slot}.webp`);
+  return <img src={src} alt={alt} loading="lazy"
+    onError={() => { if (!src.startsWith("/cases/")) setSrc(`/cases/${fallback}.webp`); }} />;
+}
+
 function PhotoBand({ page }: { page: string }) {
   const photo = PAGE_PHOTOS[page];
   if (!photo) return null;
   return <div className="re-photoband">
-    <figure className="re-photoband__wide"><img src={`/cases/${photo.wide}.webp`} alt={photo.wideAlt} loading="lazy" /></figure>
-    <figure className="re-photoband__side"><img src={`/cases/${photo.side}.webp`} alt={photo.sideAlt} loading="lazy" /></figure>
+    <figure className="re-photoband__wide"><BandImage page={page} slot="wide" fallback={photo.wide} alt={photo.wideAlt} /></figure>
+    <figure className="re-photoband__side"><BandImage page={page} slot="side" fallback={photo.side} alt={photo.sideAlt} /></figure>
   </div>;
 }
 
