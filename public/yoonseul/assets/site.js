@@ -98,6 +98,8 @@
     try { until = parseInt(localStorage.getItem(key) || '0', 10); } catch (e) {}
     if (until > Date.now()) return;
     pop.hidden = false;
+    var fit = function () { pop.style.left = ''; var r = pop.getBoundingClientRect(), W = document.documentElement.clientWidth; if (r.right > W - 10) pop.style.left = Math.max(10, W - r.width - 10) + 'px'; };
+    fit(); window.addEventListener('resize', fit);
     $('.pop-close', pop).addEventListener('click', function () { pop.hidden = true; });
     $('.pop-day', pop).addEventListener('click', function () { try { localStorage.setItem(key, String(Date.now() + 864e5)); } catch (e) {} pop.hidden = true; });
     var handle = $('.pop-body', pop), sx, sy, ox, oy, drag = false;

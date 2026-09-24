@@ -30,7 +30,7 @@
 .mv-tit .txt strong{font-weight:700}
 .mv-ctrl{position:absolute;left:50%;top:524px;z-index:10;display:flex;align-items:center;gap:14px;width:1520px;transform:translateX(-50%)}
 .mv-pg{display:flex;align-items:center;gap:14px}
-.mv-pg button{width:6px;height:6px;border-radius:6px;background:rgba(255,255,255,.6);transition:width .3s ease-in-out,background-color .3s}
+.mv-pg button{width:6px;height:6px;border-radius:6px;background:rgba(255,255,255,.6)}
 .mv-pg button.is-on{width:72px;background:#fff}
 .mv-stop{width:16px;height:16px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M2.5 2H5v12H2.5zM11 2h2.5v12H11z' fill='%23fff'/%3E%3C/svg%3E") center/100% no-repeat}
 .mv-stop.paused{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M5 2l8.5 6L5 14z' fill='%23fff'/%3E%3C/svg%3E")}
@@ -38,7 +38,7 @@
 /* 예약 바 (히어로 하단에 겹쳐 있다가 머리 아래 고정) */
 .bk-st{position:sticky;top:100px;z-index:40;height:92px;margin:-130px 0 0}
 .bk{max-width:1520px;margin:0 auto;background:rgba(255,255,255,.9);transition:background-color .3s,max-width .3s}
-.bk-st.stuck .bk{max-width:100%;background:#fff;box-shadow:0 1px 0 #e4e4e4}
+.bk-st.stuck .bk{max-width:100%}
 .bk-in{display:flex;align-items:center;justify-content:space-between;max-width:1520px;margin:0 auto;padding:18px 20px}
 .bk-name{display:flex;flex-direction:column;gap:10px;width:25%}
 .bk .lbl{font-size:16px;line-height:16px;color:rgba(33,33,33,.8)}
@@ -54,7 +54,7 @@
 .bk-info div{display:flex;flex-direction:column;align-items:center;gap:10px}
 .bk-info .num{font-size:20px;line-height:20px;font-weight:500;color:#212121}
 .bk-go{min-width:9%;padding:18px 0;border:1px solid #ccc;background:var(--brown);font-size:18px;line-height:18px;color:#fff;text-align:center}
-.bk-go:hover{background:#2c2926}
+.bk-go:hover{border-color:#222}
 
 /* 섹션 머리 */
 .sh{text-align:center;color:#212121}
@@ -87,17 +87,17 @@
 .acc .inner .txt{margin-top:4px;font-size:18px;line-height:27px}
 .btn-glass{display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,.6);color:#212121}
 .acc .inner .more{margin-top:30px;padding:10px 43px;font-size:14px;line-height:14px}
-.btn-glass:hover{background:rgba(255,255,255,.85)}
 
+/* 공간 (모바일 전용 스와이퍼: 폭 90% + 오른쪽 10% 여백, 슬라이드 간격 1, speed 1200) */
+.sp-m{display:none}
 /* 스테이 프로모션 */
 .pr-sec .sh{margin-top:90px}
 .pr{position:relative;width:100%;padding-bottom:77px;overflow:hidden}
 .pr .swiper{max-width:1540px;padding-left:20px;overflow:visible;margin:0}
-.pr .swiper-slide{width:440px}
+.pr .swiper-slide{width:440px;height:auto}
 .pr-card{display:block;text-align:left}
 .pr-card .pic{height:330px;overflow:hidden}
-.pr-card .pic img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.pr-card:hover .pic img{transform:scale(1.04)}
+.pr-card .pic img{width:100%;height:100%;object-fit:cover}
 .pr-card .cont{display:flex;flex-direction:column;align-items:flex-start;margin-top:24px}
 .badge{padding:2px 6px;font-size:15px;line-height:18px;font-weight:500;color:#fff;background:rgb(104,104,105)}
 .badge.k2{background:rgb(107,184,178)}.badge.k3{background:rgb(183,115,59)}
@@ -105,7 +105,7 @@
 .pr-card .txt{margin-top:4px;font-size:18px;line-height:27px;font-weight:300;letter-spacing:-.18px;color:#212121}
 .pr-ctrl{position:absolute;left:50%;bottom:0;z-index:2;display:flex;align-items:center;gap:30px;width:100%;max-width:1520px;transform:translateX(-50%)}
 .pr-bar{position:relative;flex:1 1 0;height:2px;border-radius:2px;background:rgb(236,236,236)}
-.pr-bar i{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:2px;background:#222;transform-origin:0 0;transform:scaleX(.2);transition:transform .8s ease-in-out}
+.pr-bar .swiper-pagination-progressbar-fill{position:absolute;left:0;top:0;width:100%;height:100%;border-radius:2px;background:#222;transform-origin:0 0}
 .pr-btns{display:flex;align-items:center;gap:10px}
 .pr-btns button{width:16px;height:16px;background:center/100% no-repeat}
 .pr-prev{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none'%3E%3Cpath d='M10.5 2.5L5 8l5.5 5.5' stroke='%23212121' stroke-width='1.5'/%3E%3C/svg%3E")}
@@ -122,8 +122,10 @@
 .dn-tabs [role=tablist]{display:flex;align-items:center;justify-content:center}
 .dn-tabs button{padding:0 20.5px 15px;font-size:18px;line-height:25.2px;color:rgba(33,33,33,.6);border-bottom:2px solid rgba(33,33,33,.6);white-space:nowrap}
 .dn-tabs button.is-on{padding-bottom:13px;font-weight:600;color:#212121;border-bottom:4px solid #212121}
-.dn-cont{position:relative;min-height:640px}
-.dn-cont[hidden]{display:none}
+.dn-wrap{overflow:hidden}
+.dn-track{display:flex;flex-wrap:nowrap}
+.dn-cont{position:relative;flex:0 0 100%;min-height:640px;display:none}
+.dn-cont.is-on{display:block}
 .dn-cont .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .dn-pn{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:440px;min-height:640px;margin-left:calc(100% - 440px);padding:40px;color:#fff;background:var(--pn)}
 .dn-pn .wm{align-items:flex-start;height:55px}
@@ -169,6 +171,7 @@
 .cl{max-width:1520px;margin:0 auto 100px}
 .cl ul{display:flex;align-items:center;justify-content:center;gap:32px}
 .cl li{position:relative;flex:1;width:100%;height:356px;overflow:hidden}
+.cl .swiper{overflow:visible}
 .cl .def{width:100%;height:100%;overflow:hidden}
 .cl .def img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease,filter .4s ease}
 .cl li:hover .def img,.cl li:focus-within .def img{filter:blur(8px) brightness(.7);transform:scale(1.1)}
@@ -196,18 +199,15 @@
   .sh h2{font-size:24px;line-height:31.2px}
   .sh p{margin:8px 0 30px;font-size:17px;line-height:25.5px}
   .sp-sec .sh,.pr-sec .sh,.dn-sec .sh,.cl-sec .sh{margin-top:64px}
-  .acc{height:auto}
-  .acc ul{justify-content:flex-start;gap:1px;height:400px;padding-right:39px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
-  .acc ul::-webkit-scrollbar{display:none}
-  .acc li,.acc li.on{flex:none;width:351px;height:400px;scroll-snap-align:start;transition:none}
-  .acc li:first-child{margin-left:1px}
-  .acc dt{display:none}
-  .acc dl{height:400px}
-  .acc dd,.acc li.on dd{flex:0 0 100%}
-  .acc .inner{inset:0;display:flex;flex-direction:column;justify-content:space-between;padding:20px}
-  .acc .inner .tit,.acc .inner .txt{display:none}
-  .acc .inner .wm{height:51px}
-  .acc .inner .more{align-self:flex-start;margin:0;padding:10px 38px;font-size:13px;line-height:13px;font-weight:500}
+  .acc{display:none}
+  .sp-m{display:block;height:400px;overflow:hidden}
+  .sp-m .swiper{width:90%;height:400px;margin:0;overflow:visible}
+  .sp-m .swiper-slide{position:relative;height:400px;overflow:hidden}
+  .sp-m .swiper-slide>img{width:100%;height:100%;object-fit:cover}
+  .sp-m .swiper-slide::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.4),rgba(0,0,0,0) 60%)}
+  .sp-m .inner{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;padding:20px}
+  .sp-m .wm{align-items:flex-start;height:51px}
+  .sp-m .more{padding:10px 38px;font-size:13px;line-height:13px;font-weight:500}
   .pr{padding-bottom:56px}
   .pr .swiper{padding:0 35px 0 20px}
   .pr .swiper-slide{width:335px}
@@ -223,7 +223,9 @@
   .dn-tabs [role=tablist]{justify-content:flex-start}
   .dn-tabs button{padding-bottom:9px;border-bottom-width:1px}
   .dn-tabs button.is-on{padding-bottom:8px;border-bottom-width:2px}
-  .dn-cont{min-height:660px;padding-top:220px}
+  .dn-track{will-change:transform;transform:translateX(calc(var(--di,0) * -100%));transition:transform .35s ease;touch-action:pan-y}
+  .dn-wrap.dragging .dn-track{transition:none}
+  .dn-cont,.dn-cont.is-on{display:block;min-height:660px;padding-top:220px}
   .dn-pn{width:100%;min-height:440px;margin:0;padding:20px}
   .dn-pn .wm{height:69px}
   .dn-pn .tit{margin-top:18px;font-size:20px;line-height:30px}
@@ -235,9 +237,9 @@
   .dn-pn .go{display:flex;width:100%;padding:9px 0;font-size:14px;line-height:25.6px;font-weight:500}
   .lf-sec{padding-top:64px}
   .cl{margin-bottom:64px;padding:0 35px 0 20px;overflow:hidden}
-  .cl ul{justify-content:flex-start;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:-35px;padding-right:35px}
-  .cl ul::-webkit-scrollbar{display:none}
-  .cl li{flex:none;width:335px;height:320px;scroll-snap-align:start}
+  .cl .swiper{overflow:visible}
+  .cl ul{justify-content:flex-start;gap:0;align-items:stretch}
+  .cl li{flex:none;width:335px;height:320px}
   .cl .top{font-size:20px;line-height:30px}
   .cl .cov{top:0;opacity:1;background:linear-gradient(0deg,rgba(0,0,0,.45),rgba(0,0,0,0) 60%)}
   .cl .cov .tit{font-size:20px;line-height:30px}
@@ -267,7 +269,7 @@
   <div class="hd-in">
     <div class="hd-l">
       <h1><a class="logo" href="./index.html" aria-label="아우렐 호텔 서울 홈"><span class="lg-m">AURELLE</span><span class="lg-s">HOTEL SEOUL</span></a></h1>
-      <nav aria-label="주 메뉴"><ul class="gnb"><li class="gnb-it"><a class="gnb-t" href="./offer.html">예약하기</a><div class="gnb-sub"><ul><li><a href="./offer.html">객실 예약</a></li><li><a href="./login.html">예약 조회</a></li></ul></div></li><li class="gnb-it"><a class="gnb-t" href="./index.html#spaces">아우렐 호텔</a><div class="gnb-sub"><ul><li><a href="./index.html#spaces">호텔 공간</a></li><li><a href="./index.html#dining">다이닝</a></li><li><a href="./index.html#collection">아우렐 컬렉션</a></li></ul></div></li><li class="gnb-it"><a class="gnb-t" href="./rewards.html">멤버십</a><div class="gnb-sub"><ul><li><a href="./rewards.html">아우렐 클럽</a></li><li><a href="./faq.html">자주 묻는 질문</a></li><li><a href="./login.html">로그인</a></li></ul></div></li><li class="gnb-it"><a class="gnb-t" href="./offer.html">스페셜 오퍼</a><div class="gnb-sub"><ul><li><a href="./offer.html">객실 프로모션</a></li><li><a href="./index.html#offers">추천 프로모션</a></li></ul></div></li><li class="gnb-it"><a class="gnb-t" href="./index.html#collection">E-Shop</a></li></ul></nav>
+      <nav aria-label="주 메뉴"><ul class="gnb"><li class="gnb-it"><a class="gnb-t" href="./offer.html">예약하기</a><div class="gnb-sub"><ul><li><a href="./offer.html"><span>객실 예약</span></a></li><li><a href="./login.html"><span>예약 조회</span></a></li></ul></div></li><li class="gnb-it"><a class="gnb-t" href="./index.html#spaces">아우렐 호텔</a><div class="gnb-sub"><ul><li><a href="./index.html#spaces"><span>호텔 공간</span></a></li><li><a href="./index.html#dining"><span>다이닝</span></a></li><li><a href="./index.html#collection"><span>아우렐 컬렉션</span></a></li></ul></div></li><li class="gnb-it"><a class="gnb-t" href="./rewards.html">멤버십</a><div class="gnb-sub"><ul><li><a href="./rewards.html"><span>아우렐 클럽</span></a></li><li><a href="./faq.html"><span>자주 묻는 질문</span></a></li><li><a href="./login.html"><span>로그인</span></a></li></ul></div></li><li class="gnb-it"><a class="gnb-t" href="./offer.html">스페셜 오퍼</a><div class="gnb-sub"><ul><li><a href="./offer.html"><span>객실 프로모션</span></a></li><li><a href="./index.html#offers"><span>추천 프로모션</span></a></li></ul></div></li><li class="gnb-it"><a class="gnb-t" href="./index.html#collection">E-Shop</a></li></ul></nav>
     </div>
     <div class="hd-r">
       <a href="./login.html">회원가입</a><a href="./login.html">로그인</a><a href="./login.html">예약 조회</a><span aria-hidden="true">|</span>
@@ -281,13 +283,11 @@
   <button type="button" class="btn-am" data-am-open aria-label="전체 메뉴 열기"></button>
 </header>
 <div class="am" id="allmenu" aria-hidden="true">
-  <div class="am-dim" data-am-close></div>
   <div class="am-pn" role="dialog" aria-modal="true" aria-label="전체 메뉴">
-    <div class="am-top"><a class="logo" href="./index.html"><span class="lg-m">AURELLE</span><span class="lg-s">HOTEL SEOUL</span></a><button type="button" class="am-x" data-am-close aria-label="전체 메뉴 닫기"></button></div>
-    <div class="am-grp"><h2>예약하기</h2><ul><li><a href="./offer.html">객실 예약</a></li><li><a href="./login.html">예약 조회</a></li></ul></div><div class="am-grp"><h2>아우렐 호텔</h2><ul><li><a href="./index.html#spaces">호텔 공간</a></li><li><a href="./index.html#dining">다이닝</a></li><li><a href="./index.html#collection">아우렐 컬렉션</a></li></ul></div><div class="am-grp"><h2>멤버십</h2><ul><li><a href="./rewards.html">아우렐 클럽</a></li><li><a href="./faq.html">자주 묻는 질문</a></li><li><a href="./login.html">로그인</a></li></ul></div><div class="am-grp"><h2>스페셜 오퍼</h2><ul><li><a href="./offer.html">객실 프로모션</a></li><li><a href="./index.html#offers">추천 프로모션</a></li></ul></div><div class="am-grp"><h2>E-Shop</h2><ul><li><a href="./index.html#collection">아우렐 컬렉션</a></li></ul></div>
-    <div class="am-util"><a href="./login.html">회원가입</a><a href="./login.html">로그인</a><a href="./login.html">예약 조회</a></div>
+    <div class="am-top"><a class="logo w" href="./index.html" aria-label="아우렐 호텔 서울 홈"><span class="lg-m">AURELLE</span><span class="lg-s">HOTEL SEOUL</span></a><div class="am-util"><a href="./login.html">회원가입</a><a href="./login.html">로그인</a><a href="./login.html">예약 조회</a><span class="sep" aria-hidden="true">|</span><span class="lang">KOR</span><button type="button" class="am-x" data-am-close aria-label="전체 메뉴 닫기"></button></div></div>
+    <div class="am-body"><div class="am-cols"><div class="am-grp"><h2>예약하기</h2><ul><li><a href="./offer.html">객실</a></li><li><a href="./index.html#dining">다이닝</a></li></ul></div><div class="am-grp"><h2>아우렐 호텔</h2><ul><li><a href="./index.html#spaces">호텔 공간</a></li><li><a href="./index.html#dining">다이닝</a></li><li><a href="./index.html#collection">아우렐 컬렉션</a></li></ul></div><div class="am-grp"><h2>멤버십</h2><ul><li><a href="./rewards.html">아우렐 클럽</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></div><div class="am-grp"><h2>스페셜 오퍼</h2><ul><li><a href="./offer.html">객실 프로모션</a></li><li><a href="./index.html#offers">추천 프로모션</a></li></ul></div><div class="am-grp"><h2><a href="./index.html#collection" style="font:inherit">E-Shop</a></h2></div><div class="am-grp"><h2>예약 조회</h2><ul><li><a href="./login.html">객실/패키지 예약조회</a></li><li><a href="./login.html">다이닝 예약조회</a></li></ul></div></div>
+    <div class="am-foot"><div class="am-ext"><a href="./index.html#dining">라 테라스</a><a href="./index.html#dining">온담</a><a href="./index.html#dining">스카이 라운지</a><a href="./index.html#collection">아우렐 컬렉션</a></div><img class="am-img" src="./assets/allmenu.jpg" alt="맑은 날의 아우렐 호텔 서울 외관" width="474" height="342"></div></div>
   </div>
-</div>
 <main id="main">
 <section class="mv" aria-label="메인 비주얼">
 <div class="swiper mv-sw" id="mvSw"><div class="swiper-wrapper"><div class="swiper-slide"><a href="./offer.html"><img class="mv-img" src="./assets/hero-1.jpg" alt="가을 햇살이 드는 로비 라운지" width="1440" height="700" fetchpriority="high"><div class="mv-tit"><div><h2>Autumn Retreat</h2><div class="txt"><div><strong>아우렐 호텔 서울</strong></div><div><span>가을 한정 객실 최대 30% · 조식 2인 포함</span></div></div></div></div></a></div><div class="swiper-slide"><a href="./offer.html"><img class="mv-img" src="./assets/hero-2.jpg" alt="도심 야경이 보이는 스위트 객실" width="1440" height="700"><div class="mv-tit"><div><h2>Suite Signature</h2><div class="txt"><div><strong>스위트 시그니처 패키지</strong></div><div><span>스위트 1박 · 클럽 라운지 · 웰컴 와인</span></div></div></div></div></a></div><div class="swiper-slide"><a href="./offer.html"><img class="mv-img" src="./assets/hero-3.jpg" alt="은은한 조명의 실내 수영장" width="1440" height="700"><div class="mv-tit"><div><h2>Night Swim</h2><div class="txt"><div><strong>아쿠아 나이트</strong></div><div><span>야간 수영장 · 루프탑 칵테일 2잔</span></div></div></div></div></a></div></div><div class="mv-ctrl"><div class="mv-pg" role="group" aria-label="슬라이드 선택"></div><button type="button" class="mv-stop" aria-label="자동 재생 정지"></button></div></div>
@@ -299,11 +299,11 @@
 <button type="submit" class="bk-go">검색</button>
 </div></form></div>
 <section class="sp-sec" id="spaces" aria-labelledby="spH"><div class="sh"><h2 id="spH">THE SPACES OF AURELLE</h2><p>도심 속 한 채의 호텔 안에 펼쳐진 아우렐만의 공간을 둘러보세요.</p></div>
-<div class="acc"><ul><li class="on"><dl><dt><button type="button" aria-label="아우렐 호텔 서울 펼치기" aria-expanded="true"><img src="./assets/space-1.jpg" alt="" width="180" height="600" loading="lazy"><span class="wm"><b>AURELLE</b><i>HOTEL SEOUL</i></span></button></dt><dd><img src="./assets/space-1.jpg" alt="도심 속 호텔 외관 전경" width="900" height="600" loading="lazy"><div class="inner"><span class="wm"><b>AURELLE</b><i>HOTEL SEOUL</i></span><p class="tit">아우렐 호텔 서울</p><p class="txt">도심 한가운데 놓인 고요한 쉼표.<br>자연광이 머무는 로비와 절제된 디자인의 객실에서<br>온전히 나를 위한 시간을 보내세요.</p><a class="btn-glass more" href="./offer.html">자세히 보기</a></div></dd></dl></li><li><dl><dt><button type="button" aria-label="스위트 &amp; 객실 펼치기" aria-expanded="false"><img src="./assets/space-2.jpg" alt="" width="180" height="600" loading="lazy"><span class="wm"><b>SUITES</b><i>ROOMS &amp; SUITES</i></span></button></dt><dd><img src="./assets/space-2.jpg" alt="스위트 객실 침실과 거실" width="900" height="600" loading="lazy"><div class="inner"><span class="wm"><b>SUITES</b><i>ROOMS &amp; SUITES</i></span><p class="tit">스위트 &amp; 객실</p><p class="txt">넉넉한 창과 부드러운 톤의 가구, 깊은 잠을 돕는 침구까지.<br>머무는 동안 집보다 편안한 하루를 약속합니다.</p><a class="btn-glass more" href="./offer.html">자세히 보기</a></div></dd></dl></li><li><dl><dt><button type="button" aria-label="스파 &amp; 인도어 풀 펼치기" aria-expanded="false"><img src="./assets/space-3.jpg" alt="" width="180" height="600" loading="lazy"><span class="wm"><b>SPA</b><i>SPA &amp; POOL</i></span></button></dt><dd><img src="./assets/space-3.jpg" alt="스파와 실내 수영장" width="900" height="600" loading="lazy"><div class="inner"><span class="wm"><b>SPA</b><i>SPA &amp; POOL</i></span><p class="tit">스파 &amp; 인도어 풀</p><p class="txt">사계절 따뜻한 실내 수영장과 프라이빗 트리트먼트 룸.<br>하루의 긴장을 천천히 풀어내는 웰니스 공간입니다.</p><a class="btn-glass more" href="./offer.html">자세히 보기</a></div></dd></dl></li><li><dl><dt><button type="button" aria-label="스카이 라운지 펼치기" aria-expanded="false"><img src="./assets/space-4.jpg" alt="" width="180" height="600" loading="lazy"><span class="wm"><b>SKY</b><i>LOUNGE &amp; BAR</i></span></button></dt><dd><img src="./assets/space-4.jpg" alt="루프탑 라운지 바 야경" width="900" height="600" loading="lazy"><div class="inner"><span class="wm"><b>SKY</b><i>LOUNGE &amp; BAR</i></span><p class="tit">스카이 라운지</p><p class="txt">도시의 불빛이 한눈에 내려다보이는 최상층 라운지.<br>시그니처 칵테일과 함께 서울의 밤을 만나보세요.</p><a class="btn-glass more" href="./index.html#dining">자세히 보기</a></div></dd></dl></li></ul></div></section>
+<div class="acc"><ul><li class="on"><dl><dt><button type="button" aria-label="아우렐 호텔 서울 펼치기" aria-expanded="true"><img src="./assets/space-1.jpg" alt="" width="180" height="600" loading="lazy"><span class="wm"><b>AURELLE</b><i>HOTEL SEOUL</i></span></button></dt><dd><img src="./assets/space-1.jpg" alt="도심 속 호텔 외관 전경" width="900" height="600" loading="lazy"><div class="inner"><span class="wm"><b>AURELLE</b><i>HOTEL SEOUL</i></span><p class="tit">아우렐 호텔 서울</p><p class="txt">도심 한가운데 놓인 고요한 쉼표.<br>자연광이 머무는 로비와 절제된 디자인의 객실에서<br>온전히 나를 위한 시간을 보내세요.</p><a class="btn-glass more" href="./offer.html">자세히 보기</a></div></dd></dl></li><li><dl><dt><button type="button" aria-label="스위트 &amp; 객실 펼치기" aria-expanded="false"><img src="./assets/space-2.jpg" alt="" width="180" height="600" loading="lazy"><span class="wm"><b>SUITES</b><i>ROOMS &amp; SUITES</i></span></button></dt><dd><img src="./assets/space-2.jpg" alt="스위트 객실 침실과 거실" width="900" height="600" loading="lazy"><div class="inner"><span class="wm"><b>SUITES</b><i>ROOMS &amp; SUITES</i></span><p class="tit">스위트 &amp; 객실</p><p class="txt">넉넉한 창과 부드러운 톤의 가구, 깊은 잠을 돕는 침구까지.<br>머무는 동안 집보다 편안한 하루를 약속합니다.</p><a class="btn-glass more" href="./offer.html">자세히 보기</a></div></dd></dl></li><li><dl><dt><button type="button" aria-label="스파 &amp; 인도어 풀 펼치기" aria-expanded="false"><img src="./assets/space-3.jpg" alt="" width="180" height="600" loading="lazy"><span class="wm"><b>SPA</b><i>SPA &amp; POOL</i></span></button></dt><dd><img src="./assets/space-3.jpg" alt="스파와 실내 수영장" width="900" height="600" loading="lazy"><div class="inner"><span class="wm"><b>SPA</b><i>SPA &amp; POOL</i></span><p class="tit">스파 &amp; 인도어 풀</p><p class="txt">사계절 따뜻한 실내 수영장과 프라이빗 트리트먼트 룸.<br>하루의 긴장을 천천히 풀어내는 웰니스 공간입니다.</p><a class="btn-glass more" href="./offer.html">자세히 보기</a></div></dd></dl></li><li><dl><dt><button type="button" aria-label="스카이 라운지 펼치기" aria-expanded="false"><img src="./assets/space-4.jpg" alt="" width="180" height="600" loading="lazy"><span class="wm"><b>SKY</b><i>LOUNGE &amp; BAR</i></span></button></dt><dd><img src="./assets/space-4.jpg" alt="루프탑 라운지 바 야경" width="900" height="600" loading="lazy"><div class="inner"><span class="wm"><b>SKY</b><i>LOUNGE &amp; BAR</i></span><p class="tit">스카이 라운지</p><p class="txt">도시의 불빛이 한눈에 내려다보이는 최상층 라운지.<br>시그니처 칵테일과 함께 서울의 밤을 만나보세요.</p><a class="btn-glass more" href="./index.html#dining">자세히 보기</a></div></dd></dl></li></ul></div><div class="sp-m"><div class="swiper" id="spSw"><div class="swiper-wrapper"><div class="swiper-slide"><img src="./assets/space-1.jpg" alt="도심 속 호텔 외관 전경" width="351" height="400" loading="lazy"><div class="inner"><span class="wm"><b>AURELLE</b><i>HOTEL SEOUL</i></span><a class="btn-glass more" href="./offer.html">자세히 보기<span class="blind"> - 아우렐 호텔 서울</span></a></div></div><div class="swiper-slide"><img src="./assets/space-2.jpg" alt="스위트 객실 침실과 거실" width="351" height="400" loading="lazy"><div class="inner"><span class="wm"><b>SUITES</b><i>ROOMS &amp; SUITES</i></span><a class="btn-glass more" href="./offer.html">자세히 보기<span class="blind"> - 스위트 &amp; 객실</span></a></div></div><div class="swiper-slide"><img src="./assets/space-3.jpg" alt="스파와 실내 수영장" width="351" height="400" loading="lazy"><div class="inner"><span class="wm"><b>SPA</b><i>SPA &amp; POOL</i></span><a class="btn-glass more" href="./offer.html">자세히 보기<span class="blind"> - 스파 &amp; 인도어 풀</span></a></div></div><div class="swiper-slide"><img src="./assets/space-4.jpg" alt="루프탑 라운지 바 야경" width="351" height="400" loading="lazy"><div class="inner"><span class="wm"><b>SKY</b><i>LOUNGE &amp; BAR</i></span><a class="btn-glass more" href="./index.html#dining">자세히 보기<span class="blind"> - 스카이 라운지</span></a></div></div></div></div></div></section>
 <section class="pr-sec" id="offers" aria-labelledby="prH"><div class="sh"><h2 id="prH">STAY OFFERS</h2><p>아우렐 호텔 서울에서만 누릴 수 있는 계절별 객실·다이닝 상품</p></div>
-<div class="pr"><div class="swiper" id="prSw"><div class="swiper-wrapper"><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-1.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge ">객실 패키지</span><p class="tit">Autumn Stay</p><p class="txt">가을 한정 객실 할인과 2인 조식이 함께하는 스테이</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-2.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge k2">다이닝</span><p class="tit">Poolside Brunch</p><p class="txt">수영장 옆 테라스에서 즐기는 주말 브런치 패키지</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-3.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge k2">다이닝</span><p class="tit">Taste of Season</p><p class="txt">제철 식재료로 완성한 셰프의 가을 코스와 소믈리에가 고른 와인 페어링을 함께 즐기는 저녁</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-4.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge ">객실 패키지</span><p class="tit">Suite Escape</p><p class="txt">스위트 객실과 클럽 라운지를 함께 누리는 1박</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-5.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge k3">클럽 회원 전용</span><p class="tit">Club Afternoon</p><p class="txt">클럽 회원을 위한 라운지 애프터눈 티 세트</p></div></a></div></div></div><div class="pr-ctrl"><div class="pr-bar" aria-hidden="true"><i></i></div><div class="pr-btns"><button type="button" class="pr-prev" aria-label="이전 프로모션"></button><button type="button" class="pr-stop" aria-label="자동 재생 정지"></button><button type="button" class="pr-next" aria-label="다음 프로모션"></button></div></div></div></section>
+<div class="pr"><div class="swiper" id="prSw"><div class="swiper-wrapper"><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-1.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge ">객실 패키지</span><p class="tit">Autumn Stay</p><p class="txt">가을 한정 객실 할인과 2인 조식이 함께하는 스테이</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-2.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge k2">다이닝</span><p class="tit">Poolside Brunch</p><p class="txt">수영장 옆 테라스에서 즐기는 주말 브런치 패키지</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-3.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge k2">다이닝</span><p class="tit">Taste of Season</p><p class="txt">제철 식재료로 완성한 셰프의 가을 코스와 소믈리에가 고른 와인 페어링을 함께 즐기는 저녁</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-4.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge ">객실 패키지</span><p class="tit">Suite Escape</p><p class="txt">스위트 객실과 클럽 라운지를 함께 누리는 1박</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-5.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge k3">클럽 회원 전용</span><p class="tit">Club Afternoon</p><p class="txt">클럽 회원을 위한 라운지 애프터눈 티 세트</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-6.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge ">객실 패키지</span><p class="tit">Spa Retreat</p><p class="txt">트리트먼트 60분과 사우나가 포함된 웰니스 스테이</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-7.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge ">객실 패키지</span><p class="tit">Winter Holiday</p><p class="txt">연말 한정 스위트와 케이크 세트가 함께하는 1박</p></div></a></div><div class="swiper-slide"><a class="pr-card" href="./offer.html"><div class="pic"><img src="./assets/promo-8.jpg" alt="" width="440" height="330" loading="lazy"></div><div class="cont"><span class="badge k2">다이닝</span><p class="tit">Sky Evening</p><p class="txt">스카이 라운지 창가석과 시그니처 칵테일 2잔</p></div></a></div></div></div><div class="pr-ctrl"><div class="pr-bar" aria-hidden="true"><i></i></div><div class="pr-btns"><button type="button" class="pr-prev" aria-label="이전 프로모션"></button><button type="button" class="pr-stop" aria-label="자동 재생 정지"></button><button type="button" class="pr-next" aria-label="다음 프로모션"></button></div></div></div></section>
 <section class="dn-sec" id="dining" aria-labelledby="dnH"><div class="sh"><h2 id="dnH">TASTE OF AURELLE</h2><p>세 곳의 레스토랑과 라운지에서 이어지는 아우렐의 미식을 경험해 보세요.</p></div>
-<div class="dn"><div class="dn-tabs" data-tabs><div role="tablist" aria-label="다이닝 선택"><button type="button" role="tab" id="dnT0" aria-controls="dnP0" aria-selected="true" tabindex="0" class="is-on">라 테라스</button><button type="button" role="tab" id="dnT1" aria-controls="dnP1" aria-selected="false" tabindex="-1">온담</button><button type="button" role="tab" id="dnT2" aria-controls="dnP2" aria-selected="false" tabindex="-1">스카이 라운지</button></div></div><div class="dn-cont" role="tabpanel" id="dnP0" aria-labelledby="dnT0" style="--pn:rgba(30,95,119,.8)"><img class="bg" src="./assets/dining-1.jpg" alt="올데이 다이닝 뷔페 카운터" width="1440" height="640" loading="lazy"><div class="dn-pn"><div><div class="top"><span class="wm"><b>LA TERRASSE</b><i>ALL DAY DINING</i></span><p class="tit">올데이 다이닝</p><p class="txt">계절마다 바뀌는 뷔페와 단품 메뉴로 아침부터 저녁까지 여유로운 식사를 즐겨보세요.</p></div><div class="info"><dl><dt>운영시간</dt><dd>기간 | 2026.1.1. - 2026.12.31.</dd><dd>조식 06:30 - 10:30 · 석식 18:00 - 21:30</dd></dl><dl><dt>위치</dt><dd>아우렐 호텔 서울 1층 라 테라스</dd></dl></div></div><div class="foot"><a class="btn-glass go" href="./login.html" data-sample="샘플 사이트입니다. 실제 예약은 진행되지 않습니다.">예약하기</a></div></div></div><div class="dn-cont" role="tabpanel" id="dnP1" aria-labelledby="dnT1" hidden style="--pn:rgba(41,66,55,.85)"><img class="bg" src="./assets/dining-2.jpg" alt="한식 코스 플레이팅" width="1440" height="640" loading="lazy"><div class="dn-pn"><div><div class="top"><span class="wm"><b>ONDAM</b><i>KOREAN CUISINE</i></span><p class="tit">한식 코스</p><p class="txt">제철 재료의 결을 살린 한식 코스를 정갈한 기물에 담아 차분한 분위기에서 선보입니다.</p></div><div class="info"><dl><dt>운영시간</dt><dd>점심 | 12:00 - 15:00 (L.O. 14:00)</dd><dd>저녁 | 18:00 - 22:00 (L.O. 20:30)</dd></dl><dl><dt>위치</dt><dd>아우렐 호텔 서울 3층 온담</dd></dl></div></div><div class="foot"><a class="btn-glass go" href="./login.html" data-sample="샘플 사이트입니다. 실제 예약은 진행되지 않습니다.">예약하기</a></div></div></div><div class="dn-cont" role="tabpanel" id="dnP2" aria-labelledby="dnT2" hidden style="--pn:rgba(61,57,54,.85)"><img class="bg" src="./assets/dining-3.jpg" alt="루프탑 바 칵테일과 야경" width="1440" height="640" loading="lazy"><div class="dn-pn"><div><div class="top"><span class="wm"><b>SKY LOUNGE</b><i>BAR &amp; LOUNGE</i></span><p class="tit">시그니처 칵테일</p><p class="txt">해 질 녘부터 이어지는 라이브 연주와 함께 바텐더가 준비한 시그니처 칵테일을 즐겨보세요.</p></div><div class="info"><dl><dt>운영시간</dt><dd>기간 | 2026.1.1. - 2026.12.31.</dd><dd>운영 | 17:00 - 24:00</dd></dl><dl><dt>위치</dt><dd>아우렐 호텔 서울 최상층 스카이 라운지</dd></dl></div></div><div class="foot"><a class="btn-glass go" href="./login.html" data-sample="샘플 사이트입니다. 실제 예약은 진행되지 않습니다.">예약하기</a></div></div></div></div></section>
+<div class="dn"><div class="dn-tabs"><div role="tablist" aria-label="다이닝 선택" id="dnTabs"><button type="button" role="tab" id="dnT0" aria-controls="dnP0" aria-selected="true" tabindex="0" class="is-on">라 테라스</button><button type="button" role="tab" id="dnT1" aria-controls="dnP1" aria-selected="false" tabindex="-1">온담</button><button type="button" role="tab" id="dnT2" aria-controls="dnP2" aria-selected="false" tabindex="-1">스카이 라운지</button></div></div><div class="dn-wrap" id="dnWrap"><div class="dn-track" id="dnTrack"><div class="dn-cont is-on" role="tabpanel" id="dnP0" aria-labelledby="dnT0" aria-hidden="false" style="--pn:rgba(30,95,119,.8)"><img class="bg" src="./assets/dining-1.jpg" alt="올데이 다이닝 뷔페 카운터" width="1440" height="640" loading="lazy"><div class="dn-pn"><div><div class="top"><span class="wm"><b>LA TERRASSE</b><i>ALL DAY DINING</i></span><p class="tit">올데이 다이닝</p><p class="txt">계절마다 바뀌는 뷔페와 단품 메뉴로 아침부터 저녁까지 여유로운 식사를 즐겨보세요.</p></div><div class="info"><dl><dt>운영시간</dt><dd>기간 | 2026.1.1. - 2026.12.31.</dd><dd>조식 06:30 - 10:30 · 석식 18:00 - 21:30</dd></dl><dl><dt>위치</dt><dd>아우렐 호텔 서울 1층 라 테라스</dd></dl></div></div><div class="foot"><a class="btn-glass go" href="./login.html" data-sample="샘플 사이트입니다. 실제 예약은 진행되지 않습니다.">예약하기</a></div></div></div><div class="dn-cont" role="tabpanel" id="dnP1" aria-labelledby="dnT1" aria-hidden="true" style="--pn:rgba(74,56,48,.8)"><img class="bg" src="./assets/dining-2.jpg" alt="한식 코스 플레이팅" width="1440" height="640" loading="lazy"><div class="dn-pn"><div><div class="top"><span class="wm"><b>ONDAM</b><i>KOREAN CUISINE</i></span><p class="tit">한식 코스</p><p class="txt">제철 재료의 결을 살린 한식 코스를 정갈한 기물에 담아 차분한 분위기에서 선보입니다.</p></div><div class="info"><dl><dt>운영시간</dt><dd>점심 | 12:00 - 15:00 (L.O. 14:00)</dd><dd>저녁 | 18:00 - 22:00 (L.O. 20:30)</dd></dl><dl><dt>위치</dt><dd>아우렐 호텔 서울 3층 온담</dd></dl></div></div><div class="foot"><a class="btn-glass go" href="./login.html" data-sample="샘플 사이트입니다. 실제 예약은 진행되지 않습니다.">예약하기</a></div></div></div><div class="dn-cont" role="tabpanel" id="dnP2" aria-labelledby="dnT2" aria-hidden="true" style="--pn:rgba(61,88,73,.8)"><img class="bg" src="./assets/dining-3.jpg" alt="루프탑 바 칵테일과 야경" width="1440" height="640" loading="lazy"><div class="dn-pn"><div><div class="top"><span class="wm"><b>SKY LOUNGE</b><i>BAR &amp; LOUNGE</i></span><p class="tit">시그니처 칵테일</p><p class="txt">해 질 녘부터 이어지는 라이브 연주와 함께 바텐더가 준비한 시그니처 칵테일을 즐겨보세요.</p></div><div class="info"><dl><dt>운영시간</dt><dd>기간 | 2026.1.1. - 2026.12.31.</dd><dd>운영 | 17:00 - 24:00</dd></dl><dl><dt>위치</dt><dd>아우렐 호텔 서울 최상층 스카이 라운지</dd></dl></div></div><div class="foot"><a class="btn-glass go" href="./login.html" data-sample="샘플 사이트입니다. 실제 예약은 진행되지 않습니다.">예약하기</a></div></div></div></div></div></div></section>
 <section class="lf-sec" aria-labelledby="lfH"><div class="sh"><h2 id="lfH">MEMBERSHIP LIFESTYLE</h2><p>머무는 방식에 맞춘 두 가지 멤버십으로 아우렐의 혜택을 더 가까이 누려보세요.</p></div>
 <div class="lf">
 <div class="lf-sp"><img class="bg" src="./assets/life-1.jpg" alt="" width="737" height="412" loading="lazy"><div class="veil"></div>
@@ -314,7 +314,7 @@
 <div class="lf-in"><div class="lf-lg tl" aria-hidden="true"><b>AURELLE</b><i>PRIVATE</i></div><div class="lf-more"><p>객실 숙박권과 다이닝·스파 이용권을 한 해 동안 함께 누리는<br class="pc">연간 유료 멤버십입니다. 가입 조건은 호텔로 문의해 주세요.<br>문의 02-000-0000</p><a class="btn-glass go" href="./rewards.html">상세보기<span class="blind"> - 아우렐 프라이빗</span></a></div></div></div>
 </div></section>
 <section class="cl-sec" id="collection" aria-labelledby="clH"><div class="sh"><h2 id="clH">AURELLE COLLECTION</h2><p>객실과 라운지에서 만난 아우렐의 감각을 일상에서도 이어가 보세요.</p></div>
-<div class="cl"><ul><li><div class="def"><img src="./assets/collection-1.jpg" alt="시그니처 향 디퓨저 정물" width="336" height="356" loading="lazy"></div><p class="top" aria-hidden="true">Signature Scent</p><div class="cov"><div class="inner"><p class="tit">시그니처 센트</p><p class="txt">로비의 향을 그대로 담은 디퓨저와 룸 스프레이</p><a class="go" href="#" data-sample="샘플 사이트입니다. 온라인 부티크는 준비 중입니다.">구매하기<span class="blind"> - 시그니처 센트</span></a></div></div></li><li><div class="def"><img src="./assets/collection-2.jpg" alt="흰 베개와 이불 클로즈업" width="336" height="356" loading="lazy"></div><p class="top" aria-hidden="true">Premium Bedding</p><div class="cov"><div class="inner"><p class="tit">프리미엄 침구</p><p class="txt">객실의 숙면을 집에서도 이어가는 침구 컬렉션</p><a class="go" href="#" data-sample="샘플 사이트입니다. 온라인 부티크는 준비 중입니다.">구매하기<span class="blind"> - 프리미엄 침구</span></a></div></div></li><li><div class="def"><img src="./assets/collection-3.jpg" alt="고메 선물 세트 연출" width="336" height="356" loading="lazy"></div><p class="top" aria-hidden="true">Gourmet</p><div class="cov"><div class="inner"><p class="tit">고메</p><p class="txt">셰프가 고른 소스와 차, 선물용 미식 세트</p><a class="go" href="#" data-sample="샘플 사이트입니다. 온라인 부티크는 준비 중입니다.">구매하기<span class="blind"> - 고메</span></a></div></div></li><li><div class="def"><img src="./assets/collection-4.jpg" alt="계절 꽃다발" width="336" height="356" loading="lazy"></div><p class="top" aria-hidden="true">Flower Atelier</p><div class="cov"><div class="inner"><p class="tit">플라워 아틀리에</p><p class="txt">호텔 플로리스트가 계절마다 엮는 꽃다발</p><a class="go" href="#" data-sample="샘플 사이트입니다. 온라인 부티크는 준비 중입니다.">구매하기<span class="blind"> - 플라워 아틀리에</span></a></div></div></li></ul></div></section>
+<div class="cl"><div class="swiper" id="clSw"><ul class="swiper-wrapper"><li class="swiper-slide"><div class="def"><img src="./assets/collection-1.jpg" alt="시그니처 향 디퓨저 정물" width="336" height="356" loading="lazy"></div><p class="top" aria-hidden="true">Signature Scent</p><div class="cov"><div class="inner"><p class="tit">시그니처 센트</p><p class="txt">로비의 향을 그대로 담은 디퓨저와 룸 스프레이</p><a class="go" href="#" data-sample="샘플 사이트입니다. 온라인 부티크는 준비 중입니다.">구매하기<span class="blind"> - 시그니처 센트</span></a></div></div></li><li class="swiper-slide"><div class="def"><img src="./assets/collection-2.jpg" alt="흰 베개와 이불 클로즈업" width="336" height="356" loading="lazy"></div><p class="top" aria-hidden="true">Premium Bedding</p><div class="cov"><div class="inner"><p class="tit">프리미엄 침구</p><p class="txt">객실의 숙면을 집에서도 이어가는 침구 컬렉션</p><a class="go" href="#" data-sample="샘플 사이트입니다. 온라인 부티크는 준비 중입니다.">구매하기<span class="blind"> - 프리미엄 침구</span></a></div></div></li><li class="swiper-slide"><div class="def"><img src="./assets/collection-3.jpg" alt="고메 선물 세트 연출" width="336" height="356" loading="lazy"></div><p class="top" aria-hidden="true">Gourmet</p><div class="cov"><div class="inner"><p class="tit">고메</p><p class="txt">셰프가 고른 소스와 차, 선물용 미식 세트</p><a class="go" href="#" data-sample="샘플 사이트입니다. 온라인 부티크는 준비 중입니다.">구매하기<span class="blind"> - 고메</span></a></div></div></li><li class="swiper-slide"><div class="def"><img src="./assets/collection-4.jpg" alt="계절 꽃다발" width="336" height="356" loading="lazy"></div><p class="top" aria-hidden="true">Flower Atelier</p><div class="cov"><div class="inner"><p class="tit">플라워 아틀리에</p><p class="txt">호텔 플로리스트가 계절마다 엮는 꽃다발</p><a class="go" href="#" data-sample="샘플 사이트입니다. 온라인 부티크는 준비 중입니다.">구매하기<span class="blind"> - 플라워 아틀리에</span></a></div></div></li></ul></div></div></section>
 </main>
 <nav class="qk" aria-label="퀵 메뉴">
   <div class="qk-list">
@@ -370,26 +370,44 @@
   lis.forEach(function(li){li.querySelector('dt button').addEventListener('click',function(){
     lis.forEach(function(x){x.classList.toggle('on',x===li);x.querySelector('dt button').setAttribute('aria-expanded',x===li?'true':'false');});
   });});
+  /* 다이닝 탭: PC 즉시 전환, 모바일 트랙 슬라이드(.35s ease) + 끌어서 넘기기 */
+  var tabs=[].slice.call(document.querySelectorAll('#dnTabs [role=tab]')), conts=[].slice.call(document.querySelectorAll('.dn-cont')), track=document.getElementById('dnTrack'), wrap=document.getElementById('dnWrap'), cur=0;
+  function dsel(i){ cur=i; tabs.forEach(function(t,j){var on=i===j;t.classList.toggle('is-on',on);t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;});
+    conts.forEach(function(c,j){c.classList.toggle('is-on',i===j);c.setAttribute('aria-hidden',i===j?'false':'true');});
+    track.style.setProperty('--di',i); track.style.transform=''; }
+  tabs.forEach(function(t,i){ t.addEventListener('click',function(){dsel(i);}); t.addEventListener('keydown',function(e){var k=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(k){e.preventDefault();var n=(i+k+tabs.length)%tabs.length;dsel(n);tabs[n].focus();}}); });
+  var mq=window.matchMedia('(max-width:1000px)'), sx=null, dx=0;
+  wrap.addEventListener('touchstart',function(e){ if(!mq.matches) return; sx=e.touches[0].clientX; dx=0; wrap.classList.add('dragging'); },{passive:true});
+  wrap.addEventListener('touchmove',function(e){ if(sx===null) return; dx=e.touches[0].clientX-sx; track.style.transform='translateX(calc('+(-cur*100)+'% + '+dx+'px))'; },{passive:true});
+  wrap.addEventListener('touchend',function(){ if(sx===null) return; wrap.classList.remove('dragging'); var n=cur; if(dx<-50&&cur<conts.length-1)n=cur+1; if(dx>50&&cur>0)n=cur-1; sx=null; dsel(n); });
   if(!window.Swiper) return;
-  /* 메인 비주얼 */
+  /* 메인 비주얼: loop · speed 1200 · delay 5000 (레퍼런스 swiper.params 실측) */
   var pg=document.querySelector('.mv-pg'), n=document.querySelectorAll('#mvSw .swiper-slide').length;
   for(var i=0;i<n;i++){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'번 슬라이드');(function(k){b.addEventListener('click',function(){mv.slideToLoop(k);});})(i);pg.appendChild(b);}
-  var mv=new Swiper('#mvSw',{loop:true,speed:300,autoplay:rm?false:{delay:5000,disableOnInteraction:false},
+  var mv=new Swiper('#mvSw',{loop:true,speed:1200,autoplay:rm?false:{delay:5000,disableOnInteraction:false},
     on:{init:function(){mark(this.realIndex);},slideChange:function(){mark(this.realIndex);}}});
   function mark(k){[].forEach.call(pg.children,function(b,j){b.classList.toggle('is-on',j===k);b.setAttribute('aria-current',j===k?'true':'false');});}
   mark(mv.realIndex);
-  toggler(document.querySelector('.mv-stop'),mv);
-  /* 스테이 프로모션 */
-  var bar=document.querySelector('.pr-bar i');
-  var pr=new Swiper('#prSw',{slidesPerView:'auto',spaceBetween:50,speed:300,autoplay:rm?false:{delay:4000,disableOnInteraction:false},
-    navigation:{prevEl:'.pr-prev',nextEl:'.pr-next'},breakpoints:{0:{spaceBetween:16},1001:{spaceBetween:50}},
-    on:{init:function(){prog(this);},slideChange:function(){prog(this);}}});
-  function prog(s){var tot=s.slides.length;bar.style.transform='scaleX('+((s.activeIndex+1)/tot)+')';}
-  prog(pr);
-  toggler(document.querySelector('.pr-stop'),pr);
-  function toggler(btn,sw){ if(!btn) return; if(rm){btn.classList.add('paused');btn.setAttribute('aria-label','자동 재생 시작');}
+  toggler(document.querySelector('.mv-stop'),mv,5000);
+  /* 스테이 프로모션: 8장 · PC 3장 보기/간격 50 · speed 800 · delay 5000 · 진행 막대(Swiper progressbar) */
+  var pr=new Swiper('#prSw',{slidesPerView:1,spaceBetween:16,speed:800,autoplay:rm?false:{delay:5000,disableOnInteraction:false},
+    navigation:{prevEl:'.pr-prev',nextEl:'.pr-next'},pagination:{el:'.pr-bar',type:'progressbar'},
+    breakpoints:{1001:{slidesPerView:3,spaceBetween:50}}});
+  toggler(document.querySelector('.pr-stop'),pr,5000);
+  /* 모바일 전용: 공간(speed 1200, 간격 1) · 컬렉션(speed 1200, delay 5000, 간격 16) */
+  var sp=null, cl=null;
+  function mob(){
+    if(mq.matches){
+      if(!sp) sp=new Swiper('#spSw',{slidesPerView:1,spaceBetween:1,speed:1200});
+      if(!cl) cl=new Swiper('#clSw',{slidesPerView:1,spaceBetween:16,speed:1200,autoplay:rm?false:{delay:5000,disableOnInteraction:false}});
+    } else {
+      if(sp){sp.destroy(true,true);sp=null;} if(cl){cl.destroy(true,true);cl=null;}
+    }
+  }
+  mob(); mq.addEventListener?mq.addEventListener('change',mob):mq.addListener(mob);
+  function toggler(btn,sw,delay){ if(!btn) return; if(rm){btn.classList.add('paused');btn.setAttribute('aria-label','자동 재생 시작');}
     btn.addEventListener('click',function(){ if(!sw.autoplay) return; var pz=btn.classList.toggle('paused');
-      if(pz){sw.autoplay.stop();btn.setAttribute('aria-label','자동 재생 시작');}else{ if(!sw.params.autoplay||!sw.params.autoplay.delay){sw.params.autoplay={delay:5000,disableOnInteraction:false};} sw.autoplay.start();btn.setAttribute('aria-label','자동 재생 정지');}});}
+      if(pz){sw.autoplay.stop();btn.setAttribute('aria-label','자동 재생 시작');}else{ if(!sw.params.autoplay||!sw.params.autoplay.delay){sw.params.autoplay={delay:delay,disableOnInteraction:false};} sw.autoplay.start();btn.setAttribute('aria-label','자동 재생 정지');}});}
 })();
 </script>
 </body>

@@ -17,6 +17,25 @@
   });
   document.addEventListener('click', function () { $$('[data-dd]').forEach(function (x) { x.classList.remove('open'); }); });
 
+  /* GNB 드롭다운: 항목에 올리면 머리 아래 흰 판 + 해당 목록 즉시 표시 (레퍼런스 실측: 전환 없음) */
+  var hd = $('.hd');
+  if (hd) {
+    var items = $$('.gnb-it', hd);
+    var close = function () { hd.classList.remove('gnb-open'); items.forEach(function (x) { x.classList.remove('open'); }); };
+    items.forEach(function (it) {
+      var open = function () {
+        close();
+        if (!$('.gnb-sub', it)) return;
+        it.classList.add('open'); hd.classList.add('gnb-open');
+      };
+      it.addEventListener('mouseenter', open);
+      it.addEventListener('focusin', open);
+    });
+    hd.addEventListener('mouseleave', close);
+    hd.addEventListener('focusout', function (e) { if (!hd.contains(e.relatedTarget)) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  }
+
   /* 전체 메뉴 */
   var am = $('#allmenu'), lastFocus = null;
   function amOpen(on) {
@@ -34,8 +53,8 @@
   var qk = $('.qk'), mt = $('.m-top');
   function onScroll() {
     var y = window.scrollY || document.documentElement.scrollTop;
-    if (qk) qk.classList.toggle('scrolled', y > 200);
-    if (mt) mt.classList.toggle('show', y > 200);
+    if (qk) qk.classList.toggle('scrolled', y > 300);
+    if (mt) mt.classList.toggle('show', y > 300);
   }
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
   $$('[data-top]').forEach(function (b) {
