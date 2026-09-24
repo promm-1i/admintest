@@ -60,6 +60,23 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "semroot-template",
+    industry: "수학학원 · 학습플랫폼 홈페이지",
+    title: "수학학원 · 학습플랫폼 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 학원 · 문제은행 · 학습관리 · 21페이지",
+    purpose:
+      "문항을 고르고 시험지를 만드는 화면으로 시작해, 기능을 한 장씩 넘겨 보는 가로 슬라이더, 마우스를 올리면 뒤집히며 설명이 나오는 솔루션 카드 6장, 검은 바탕에 숫자가 굴러 올라가는 데이터 구간, 선생님 후기 11장이 흐르는 띠, 사진 일곱 장이 차례로 떠오르는 CTA까지 일곱 장면을 담은 메인에 서비스 소개 6쪽·요금·설명회·후기·소식 4종·문의·정책을 더한 학원용 학습플랫폼 홈페이지입니다. 요금제 비교표와 무료 체험 신청 폼이 함께 들어갑니다.",
+    features: ["마우스를 올리면 뒤집히는 솔루션 카드 6장", "숫자가 굴러 올라가는 데이터 구간 · 기능 슬라이더 8칸", "요금제 6종 비교표 · 자주 묻는 질문 20문답", "운영형태·지역·학생 수를 고르는 무료 체험 신청 폼"],
+    idealFor: "수학학원, 보습학원, 공부방·교습소, 프랜차이즈 학원, 에듀테크 서비스",
+    image: "/thumbs/semroot.jpg",
+    liveUrl: "/semroot/",
+    industryKey: "academy",
+    premiumLabel: "학원 · 학습플랫폼",
+    designCode: "EDUP-1001",
+    premium: true,
+  },
+  {
     slug: "travel-b-template",
     industry: "지질공원 · 관광안내 홈페이지",
     title: "지질공원 · 관광안내 홈페이지 (프리미엄 디자인 B)",

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>바른수학교습소 | 사용 후기 | 셈루트</title>
+<meta name="description" content="바른수학교습소 — 혼자 해도 교재 부담이 없습니다">
+<meta property="og:title" content="바른수학교습소 | 사용 후기 | 셈루트">
+<meta property="og:description" content="바른수학교습소 — 혼자 해도 교재 부담이 없습니다">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+.art-desc{margin-top:16rem;font-size:var(--f07);line-height:var(--lh07);color:var(--g700)}
+
+/* 요금 */
+.pl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20rem}
+.pl-card{display:flex;flex-direction:column;padding:40rem 32rem;border:1px solid var(--g300);
+  border-radius:16rem;background:var(--white)}
+.pl-card.is-best{border-color:var(--pri);box-shadow:0 8rem 32rem rgba(14,138,95,.12)}
+.pl-name{font-size:var(--f06);font-weight:700;line-height:var(--lh06)}
+.pl-for{display:block;margin-top:4rem;font-size:var(--f11);color:var(--g600)}
+.pl-price{margin-top:24rem;font-family:var(--fd);font-size:var(--f04);font-weight:600;
+  line-height:var(--lh04);letter-spacing:0;color:var(--black)}
+.pl-price em{margin-left:6rem;font-family:var(--ff);font-size:var(--f11);font-style:normal;
+  font-weight:500;color:var(--g600)}
+.pl-feat{margin-top:24rem;padding-top:24rem;border-top:1px solid var(--g300);flex:1}
+.pl-feat li{display:flex;align-items:flex-start;gap:8rem;font-size:var(--f10);
+  line-height:var(--lh10);color:var(--g800)}
+.pl-feat li+li{margin-top:10rem}
+.pl-feat i{flex:none;width:20rem;margin-top:5rem;color:var(--pri)}
+.pl-feat svg{width:100%;height:auto}
+.pl-btn{margin-top:28rem;justify-content:center}
+
+/* 비교표 */
+.cmp-wrap{overflow-x:auto}
+.cmp-table{width:100%;border-collapse:collapse;font-size:var(--f10);text-align:center}
+.cmp-table th,.cmp-table td{padding:16rem 12rem;border-bottom:1px solid var(--g300)}
+.cmp-table thead th{font-size:var(--f11);font-weight:700;background:var(--g100);
+  border-bottom:2px solid var(--g400);white-space:nowrap}
+.cmp-table tbody th{text-align:left;font-weight:500;color:var(--g800);white-space:nowrap}
+.cmp-table .ok{display:inline-block;width:20rem;color:var(--pri)}
+.cmp-table .ok svg{width:100%;height:auto}
+.cmp-table .no{color:var(--g500)}
+
+/* 분류 탭 (후기 · FAQ) */
+.cat-tabs{margin:-24rem 0 40rem;text-align:center}
+.cat-tabs ul{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:8rem}
+.cat-tabs button{padding:10rem 22rem;border:1px solid var(--g400);border-radius:99rem;
+  font-size:var(--f11);font-weight:600;color:var(--g700);
+  transition:border-color .3s,color .3s,background .3s}
+.cat-tabs button:hover{border-color:var(--pri);color:var(--pri)}
+.cat-tabs .on button{color:var(--white);background:var(--sec);border-color:var(--sec)}
+.fq-more{margin-top:40rem;text-align:center}
+.fq-group[hidden],.rl-row[hidden]{display:none}
+
+/* 아코디언 FAQ */
+.fq-group+.fq-group{margin-top:60rem}
+.fq-gtitle{margin-bottom:20rem;font-size:var(--f06);font-weight:700;line-height:var(--lh06)}
+.fq-item{border-bottom:1px solid var(--g300)}
+.fq-q{display:flex;width:100%;gap:20rem;align-items:flex-start;justify-content:space-between;
+  padding:24rem 0;text-align:left;font-size:var(--f08);font-weight:700;line-height:var(--lh08)}
+.fq-q i{flex:none;position:relative;width:20rem;height:20rem;margin-top:6rem}
+.fq-q i::before,.fq-q i::after{content:'';position:absolute;left:50%;top:50%;width:16rem;
+  height:2rem;margin:-1rem 0 0 -8rem;background:var(--g700);transition:transform .3s}
+.fq-q i::after{transform:rotate(90deg)}
+.fq-q[aria-expanded="true"]{color:var(--pri)}
+.fq-q[aria-expanded="true"] i::before,.fq-q[aria-expanded="true"] i::after{background:var(--pri)}
+.fq-q[aria-expanded="true"] i::after{transform:rotate(180deg)}
+.fq-a{display:none;padding:0 40rem 24rem 0;font-size:var(--f10);line-height:var(--lh10);
+  color:var(--g700)}
+.fq-a.on{display:block}
+
+/* 후기 */
+.rh-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40rem 20rem}
+.rh-item a{display:block}
+.rh-media{display:block;aspect-ratio:1/0.6578;border-radius:16rem;overflow:hidden;
+  background:var(--g200)}
+.rh-media img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.rh-item a:hover .rh-media img{transform:scale(1.04)}
+.rh-body{display:block;margin-top:24rem}
+.rh-quote{display:block;font-size:var(--f07);font-weight:700;line-height:var(--lh07)}
+.rh-who{display:block;margin-top:8rem;font-size:var(--f11);color:var(--g600)}
+.rh-name{display:block;margin-top:2rem;font-size:var(--f11);font-weight:600;color:var(--pri)}
+.rl-row{border-bottom:1px solid var(--g300)}
+.rl-row a{display:flex;align-items:center;gap:20rem;padding:24rem 0;transition:color .3s}
+.rl-row a:hover .rl-title{color:var(--pri)}
+.rl-cat{flex:none;min-width:96rem;padding:4rem 12rem;border-radius:13rem;
+  background:var(--g200);font-size:var(--f12);text-align:center;color:var(--g700)}
+.rl-title{flex:1;font-size:var(--f09);font-weight:600;line-height:var(--lh09);
+  transition:color .3s}
+.rl-name{flex:none;font-size:var(--f11);color:var(--g700)}
+.rl-date{flex:none;min-width:96rem;text-align:right;font-family:var(--fd);
+  font-size:var(--f12);color:var(--g600)}
+
+/* 후기 상세 */
+.rd-hero{aspect-ratio:1/0.4587;border-radius:16rem;overflow:hidden;background:var(--g200)}
+.rd-hero img{width:100%;height:100%;object-fit:cover}
+.rd-body{display:grid;grid-template-columns:minmax(0,1fr) 340rem;gap:80rem;margin-top:60rem}
+.rd-quote{grid-column:1/-1;font-size:var(--f04);font-weight:700;line-height:var(--lh04);
+  letter-spacing:var(--ls1)}
+.rd-text{font-size:var(--f09);line-height:var(--lh09);color:var(--g800)}
+.rd-text p+p,.rd-text h3+p{margin-top:16rem}
+.rd-text h3{margin-top:40rem;font-size:var(--f07);font-weight:700;color:var(--black)}
+.rd-meta dl{padding:32rem;border-radius:16rem;background:var(--g100);font-size:var(--f11)}
+.rd-meta dt{font-weight:700;color:var(--g800)}
+.rd-meta dt+dd{margin:6rem 0 20rem;color:var(--g700)}
+.rd-meta dd:last-child{margin-bottom:0}
+
+/* 단계 폼 (설명회 · 문의 공용) */
+.sn-step+.sn-step{margin-top:60rem;padding-top:60rem;border-top:1px solid var(--g300)}
+.sn-step-title{margin-bottom:24rem;font-size:var(--f07);font-weight:700;
+  line-height:var(--lh07);display:flex;align-items:baseline;gap:12rem}
+.sn-step-title b{font-family:var(--fd);font-size:var(--f09);color:var(--pri);letter-spacing:0}
+.sn-picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12rem}
+.sn-pick input{position:absolute;opacity:0;width:0;height:0}
+.sn-pick-in{display:block;padding:20rem 24rem;border:1px solid var(--g400);border-radius:12rem;
+  cursor:pointer;transition:border-color .3s,background .3s}
+.sn-pick-in b{display:block;font-size:var(--f09);font-weight:700}
+.sn-pick-in em{display:block;margin-top:4rem;font-size:var(--f11);font-style:normal;color:var(--g600)}
+.sn-pick:has(input:checked) .sn-pick-in{border-color:var(--pri);background:rgba(10,160,106,.07)}
+.sn-pick:has(input:checked) b{color:var(--pri)}
+/* 고른 칸은 바탕이 연한 초록이라 회색 설명이 4.19 로 떨어진다 — 그 자리만 진하게 */
+.sn-pick:has(input:checked) em{color:var(--g700)}
+.sn-pick:has(input:focus-visible) .sn-pick-in{outline:2px solid var(--pri);outline-offset:2px}
+.fm-sub{margin:0 0 12rem;font-size:var(--f11);font-weight:700}
+.fm-sub+.fm-chips{margin-bottom:32rem}
+.fm-sub em{margin-left:8rem;font-size:var(--f12);font-style:normal;font-weight:400;color:var(--g600)}
+.fm-chips{display:flex;flex-wrap:wrap;gap:8rem}
+.fm-chips input{position:absolute;opacity:0;width:0;height:0}
+.fm-chips label{display:block;padding:10rem 20rem;border:1px solid var(--g400);
+  border-radius:99rem;cursor:pointer;font-size:var(--f11);
+  transition:border-color .3s,color .3s,background .3s}
+.fm-chips label:has(input:checked){border-color:var(--pri);color:var(--pri);
+  background:rgba(10,160,106,.07)}
+.fm-chips label:has(input:focus-visible){outline:2px solid var(--pri);outline-offset:2px}
+.fm-gu-wrap{margin-top:16rem;padding:20rem;border-radius:12rem;background:var(--g100)}
+.fm-gu[hidden]{display:none}
+
+/* 설명회 혜택 */
+.sn-ben-box{padding:40rem;border-radius:16rem;color:var(--white);
+  background:linear-gradient(120deg,var(--sec),var(--pri))}
+.sn-ben-title{display:block;font-size:var(--f07);font-weight:700}
+.sn-ben-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20rem;margin-top:24rem}
+.sn-ben-list b{display:block;font-size:var(--f09);font-weight:700}
+.sn-ben-list span{display:block;margin-top:6rem;font-size:var(--f11);opacity:.9}
+
+/* 문의 진행 과정 */
+.proc-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20rem}
+.proc-list li{padding:32rem 24rem;border-radius:16rem;background:var(--g100)}
+.proc-list b{display:block;font-family:var(--fd);font-size:var(--f06);font-weight:600;
+  letter-spacing:0;color:var(--pri)}
+.proc-list span{display:block;margin-top:12rem;font-size:var(--f08);font-weight:700}
+.proc-list em{display:block;margin-top:8rem;font-size:var(--f11);font-style:normal;color:var(--g700)}
+
+/* 게시판 */
+.bd-row{border-bottom:1px solid var(--g300)}
+.bd-row:first-child{border-top:1px solid var(--g400)}
+.bd-row a{display:flex;align-items:center;gap:24rem;padding:24rem 0}
+.bd-date{flex:none;min-width:110rem;font-family:var(--fd);font-size:var(--f11);color:var(--g600)}
+.bd-src{flex:none;min-width:110rem;font-size:var(--f11);color:var(--pri);font-weight:600}
+.bd-title{flex:1;font-size:var(--f09);font-weight:600;line-height:var(--lh09);
+  transition:color .3s}
+.bd-row a:hover .bd-title{color:var(--pri)}
+.pager{display:flex;justify-content:center;gap:8rem;margin-top:60rem}
+.pager a{min-width:40rem;padding:10rem 14rem;border-radius:8rem;text-align:center;
+  font-size:var(--f11);color:var(--g700);transition:background .3s,color .3s}
+.pager a:hover{background:var(--g200)}
+.pager a.on{color:var(--white);background:var(--sec)}
+
+/* 문의 폼 */
+.fm{max-width:880rem;margin:0 auto}
+.fm-set{margin:0 0 40rem;padding:0;border:0}
+.fm-legend{margin-bottom:16rem;padding:0;font-size:var(--f09);font-weight:700}
+.fm-legend em{margin-left:8rem;font-size:var(--f12);font-style:normal;font-weight:400;
+  color:var(--g600)}
+.fm-radios{display:flex;flex-wrap:wrap;gap:8rem}
+.fm-radios li{flex:0 0 auto}
+.fm-radios label{display:flex;align-items:center;gap:8rem;padding:12rem 24rem;
+  border:1px solid var(--g400);border-radius:99rem;cursor:pointer;font-size:var(--f10);
+  transition:border-color .3s,color .3s,background .3s}
+.fm-radios input{position:absolute;opacity:0;width:0;height:0}
+.fm-radios label:has(input:checked){border-color:var(--pri);color:var(--pri);
+  background:rgba(10,160,106,.07)}
+.fm-radios label:has(input:focus-visible){outline:2px solid var(--pri);outline-offset:2px}
+.fm-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24rem 20rem}
+.fm-row--wide{grid-column:1/-1}
+.fm-label{display:block;margin-bottom:8rem;font-size:var(--f11);font-weight:700}
+.fm-label em{margin-left:6rem;font-size:var(--f12);font-style:normal;font-weight:400;
+  color:var(--pri)}
+.fm-input{width:100%;padding:14rem 16rem;border:1px solid var(--g400);border-radius:8rem;
+  font:inherit;font-size:var(--f10);color:var(--black);background:var(--white);
+  transition:border-color .3s}
+.fm-input:focus{outline:none;border-color:var(--pri)}
+.fm-area{resize:vertical;min-height:120rem;line-height:var(--lh10)}
+.fm-agree{display:flex;align-items:flex-start;gap:10rem;margin-top:32rem;font-size:var(--f11);
+  color:var(--g700)}
+.fm-agree input{margin-top:3rem;width:18rem;height:18rem;accent-color:var(--pri)}
+.fm-agree a{text-decoration:underline}
+.fm-submit{margin-top:32rem;text-align:center}
+.fm-note{margin-top:24rem;text-align:center;font-size:var(--f11);color:var(--g600)}
+.fm-note b{color:var(--g800)}
+
+/* 정책 */
+.pv-box{max-width:920rem;margin:0 auto;font-size:var(--f10);line-height:var(--lh10);
+  color:var(--g800)}
+.pv-sec+.pv-sec{margin-top:40rem}
+.pv-sec h2{margin-bottom:12rem;font-size:var(--f08);font-weight:700;color:var(--black)}
+.pv-foot{margin-top:60rem;padding-top:24rem;border-top:1px solid var(--g300);
+  font-size:var(--f12);color:var(--g600)}
+
+@media (max-width:1200px){
+  .pl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sm-list{width:340rem}
+  .rd-body{grid-template-columns:minmax(0,1fr) 300rem;gap:48rem}
+}
+@media (max-width:860px){
+  .pl-grid{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .rh-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:32rem 16rem}
+  .rl-row a{flex-wrap:wrap;gap:8rem 12rem}
+  .rl-title{flex:0 0 100%;order:-1}
+  .sm-box{display:block}
+  .sm-list{width:auto;max-height:none;margin-top:32rem}
+  .rd-body{display:block}
+  .rd-meta{margin-top:40rem}
+  .fm-grid{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .sn-picks{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .sn-ben-list{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .proc-list{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .bd-row a{flex-wrap:wrap;gap:6rem 16rem}
+  .bd-title{flex:0 0 100%;order:-1}
+}
+@media (max-width:540px){
+  .rh-grid{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .fq-q{font-size:var(--f09)}
+}
+</style>
+</head>
+<body class="">
+<header id="header">
+  <div class="shell">
+    <p id="logo"><a href="./index.html" aria-label="셈루트 홈"><svg class="logo-mark" viewBox="0 0 130 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="셈루트"><path d="M2 16.5 L7 16.5 L11.5 26 L18 4 L38 4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="43" y="23" font-family="Jost,Pretendard,sans-serif" font-size="20" font-weight="600" letter-spacing="-.5" fill="currentColor">SEMROOT</text></svg></a></p>
+    <nav class="nav" aria-label="주 메뉴"><ul class="nav-list"><li class="nav-item"><a href="./s-bank.html"><span>서비스 소개</span></a><ul class="nav-sub"><li><a href="./s-bank.html"><span>문제은행</span><em>업계 최다 수학 콘텐츠 제공</em></a></li><li><a href="./s-note.html"><span>오답관리</span><em>학생별 취약유형 완벽 관리</em></a></li><li><a href="./s-exam.html"><span>내신·기출</span><em>교과서·교재·기출 전체 지원</em></a></li><li><a href="./s-textbook.html"><span>자체 교재</span><em>학생별 맞춤 교재 제작</em></a></li><li><a href="./s-consulting.html"><span>상담·홍보</span><em>데이터 기반 명확한 진단 및 상담</em></a></li><li><a href="./s-premium.html"><span>프리미엄</span><em>최고를 위한 프리미엄 서비스</em></a></li></ul></li><li class="nav-item"><a href="./seminar.html"><span>설명회</span></a><ul class="nav-sub"><li><a href="./seminar.html"><span>온라인 설명회</span></a></li></ul></li><li class="nav-item"><a href="./pricing.html"><span>요금 안내</span></a><ul class="nav-sub"><li><a href="./pricing.html"><span>요금 안내</span></a></li></ul></li><li class="nav-item is-on"><a href="./reviews.html"><span>사용 후기</span></a><ul class="nav-sub"><li><a href="./reviews.html"><span>사용 후기</span></a></li></ul></li><li class="nav-item"><a href="./news.html"><span>셈루트 소식</span></a><ul class="nav-sub"><li><a href="./news.html"><span>업데이트 소식</span></a></li><li><a href="./press.html"><span>뉴스룸</span></a></li><li><a href="./blog.html"><span>셈루트 Blog</span></a></li><li><a href="./faq.html"><span>자주 묻는 질문</span></a></li></ul></li></ul></nav>
+    <div class="hd-utils"><a class="hd-login" href="./contact.html">로그인</a><a class="hd-start" href="./contact.html">무료로 시작하기</a></div>
+    <button id="hd-toggle" type="button" aria-label="메뉴 열기"><i></i><i></i><i></i></button>
+  </div>
+</header>
+<main>
+<div class="art-head"><b class="art-cat">사용 후기</b><h1 class="art-title">바른수학교습소</h1><p class="art-desc">부산 해운대 · 교습자 · 학생 24명</p></div><div class="art-body"><section class="sec-main rd"><div class="shell"><div class="rd-hero"><img src="./assets/rvh-3.jpg" alt="바른수학교습소" width="1308" height="600" fetchpriority="high"></div><div class="rd-body"><h2 class="rd-quote">혼자 해도 교재 부담이 없습니다</h2><div class="rd-text"><p>바른수학교습소에서 셈루트를 쓰기 시작한 것은 2026년 봄입니다. 그 전에는 시험지 한 장을 만들려면 책 몇 권을 펼쳐 두고 문항을 오려 붙여야 했습니다.</p><p>지금은 단원을 고르고 난이도를 맞춘 뒤 순서만 바꾸면 끝납니다. 남는 시간은 학생 한 명 한 명을 더 보는 데 씁니다.</p><h3>가장 크게 달라진 것</h3><p>채점입니다. 답만 입력하면 통계가 같이 남으니, 어느 단원에서 반 전체가 무너졌는지 그날 바로 보입니다. 다음 수업 계획이 그 자리에서 정해집니다.</p><h3>이런 분께 권합니다</h3><p>수업 준비에 쓰는 시간이 아깝다고 느끼신다면 열흘만 써 보시길 권합니다. 열흘이면 충분히 판단이 서실 겁니다.</p></div><div class="rd-meta"><dl><dt>교육 현장</dt><dd>부산 해운대 · 교습자 · 학생 24명</dd><dt>쓰는 기능</dt><dd>문제은행 · 자동 채점 · 오답 노트</dd><dt>요금제</dt><dd>스탠다드</dd></dl></div></div></div></section><section class="sec-main sec-main--secondary rd-more"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">다른 후기도 보기</h2></div><ul class="rh-grid"><li class="rh-item"><a href="./review-1.html"><span class="rh-media"><img src="./assets/rvh-1.jpg" alt="한결수학학원" width="760" height="500" loading="lazy"></span><span class="rh-body"><b class="rh-quote">출제 시간이 3분의 1로 줄었습니다</b><span class="rh-who">서울 강남 · 원장 · 학생 180명</span></span></a></li><li class="rh-item"><a href="./review-2.html"><span class="rh-media"><img src="./assets/rvh-2.jpg" alt="이음수학" width="760" height="500" loading="lazy"></span><span class="rh-body"><b class="rh-quote">상담할 때 할 말이 생겼습니다</b><span class="rh-who">경기 수원 · 부원장 · 학생 90명</span></span></a></li></ul></div></section></div></main>
+<footer id="footer">
+  <div class="shell">
+    <div class="ft-top">
+      <p class="ft-logo"><svg class="ft-mark" viewBox="0 0 130 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="셈루트"><path d="M2 16.5 L7 16.5 L11.5 26 L18 4 L38 4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="43" y="23" font-family="Jost,Pretendard,sans-serif" font-size="20" font-weight="600" letter-spacing="-.5" fill="currentColor">SEMROOT</text></svg></p>
+      <nav class="ft-nav" aria-label="푸터 메뉴"><div class="ft-col"><h3>서비스 소개</h3><ul><li><a href="./s-bank.html">문제은행</a></li><li><a href="./s-note.html">오답관리</a></li><li><a href="./s-exam.html">내신·기출</a></li><li><a href="./s-textbook.html">자체 교재</a></li><li><a href="./s-consulting.html">상담·홍보</a></li><li><a href="./s-premium.html">프리미엄</a></li></ul></div><div class="ft-col"><h3>설명회</h3><ul><li><a href="./seminar.html">온라인 설명회</a></li></ul></div><div class="ft-col"><h3>요금 안내</h3><ul><li><a href="./pricing.html">요금 안내</a></li></ul></div><div class="ft-col"><h3>사용 후기</h3><ul><li><a href="./reviews.html">사용 후기</a></li></ul></div><div class="ft-col"><h3>셈루트 소식</h3><ul><li><a href="./news.html">업데이트 소식</a></li><li><a href="./press.html">뉴스룸</a></li><li><a href="./blog.html">셈루트 Blog</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></div></nav>
+    </div>
+    <div class="ft-mid">
+      <div class="ft-contact">
+        <p class="ft-tel">고객센터 <b>010-4894-4905</b></p>
+        <p>평일 10시~19시 (점심 13~14시)</p>
+        <p>도입 문의 6gsmake@gmail.com · 제휴 문의 6gsmake@gmail.com</p>
+      </div>
+      <div class="ft-sns"><a href="./contact.html" aria-label="인스타그램"><span aria-hidden="true">IG</span></a><a href="./contact.html" aria-label="블로그"><span aria-hidden="true">BLOG</span></a><a href="./contact.html" aria-label="유튜브"><span aria-hidden="true">YT</span></a><a href="./contact.html" aria-label="노션 가이드"><span aria-hidden="true">GUIDE</span></a><a href="./contact.html" aria-label="원격지원"><span aria-hidden="true">원격</span></a></div>
+    </div>
+    <p class="ft-biz">주식회사 셈루트 · 대표 김진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호<br>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)</p>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 SEMROOT. ALL RIGHTS RESERVED.</p>
+      <nav class="ft-policy"><a href="./terms.html">서비스 이용약관</a><a href="./privacy.html"><b>개인정보 처리방침</b></a><a href="./marketing.html">마케팅 정보 수신</a></nav>
+    </div>
+  </div>
+</footer>
+<script src="./assets/site.js"></script>
+<script>
+(function(){
+  /* FAQ 아코디언 */
+  document.querySelectorAll('.fq-q').forEach(function(b){
+    b.addEventListener('click',function(){
+      var open=b.getAttribute('aria-expanded')==='true';
+      b.setAttribute('aria-expanded',String(!open));
+      b.nextElementSibling.classList.toggle('on',!open);
+    });
+  });
+  /* 분류 탭 — 원본 reviewCategory · faqCategory */
+  document.querySelectorAll('.cat-tabs').forEach(function(nav){
+    var lis=[].slice.call(nav.querySelectorAll('li'));
+    var targets=[].slice.call(document.querySelectorAll('.rl-row[data-cat],.fq-group[data-cat]'));
+    lis.forEach(function(li){
+      li.querySelector('button').addEventListener('click',function(){
+        var c=li.querySelector('button').dataset.cat;
+        lis.forEach(function(x){x.classList.remove('on')});
+        li.classList.add('on');
+        targets.forEach(function(t){t.hidden=!(c==='전체'||t.dataset.cat===c)});
+      });
+    });
+  });
+  /* 더보기 — 원본 faqLoadmore */
+  var more=document.querySelector('.fq-more button');
+  if(more){
+    var hid=[].slice.call(document.querySelectorAll('.fq-group')).slice(2);
+    hid.forEach(function(g){g.dataset.folded='1';g.hidden=true});
+    if(!hid.length){more.parentElement.hidden=true}
+    more.addEventListener('click',function(){
+      hid.forEach(function(g){g.hidden=false;delete g.dataset.folded});
+      more.parentElement.hidden=true;
+    });
+  }
+
+  /* 문의 — 시·도를 고르면 시·군·구 목록이 바뀐다 (원본 contact[si]/contact[gu]) */
+  var si=document.querySelector('.fm-si');
+  if(si){
+    var lists=[].slice.call(document.querySelectorAll('.fm-gu'));
+    si.addEventListener('change',function(e){
+      var v=e.target.value;
+      lists.forEach(function(ul){
+        var on=ul.dataset.si===v;
+        ul.hidden=!on;
+        if(!on)ul.querySelectorAll('input').forEach(function(i){i.checked=false});
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
