@@ -1218,6 +1218,23 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "pension-a-template",
+    industry: "오션뷰 풀빌라 · 펜션 홈페이지",
+    title: "오션뷰 풀빌라 홈페이지 (프리미엄 디자인 E)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 풀빌라 · 펜션 · 객실",
+    purpose:
+      "풀스크린 인트로와 글자 등장 모션, 항공 사진 페이드 슬라이더, 사진과 제목이 따로 움직이는 스페셜 이중 슬라이더, 스크롤에 맞춰 사진 두 열이 엇갈리는 예약 콜라주, 왼쪽을 고정하고 객실 19개를 스크롤로 넘겨 보는 ROOM VIEW, 대형 워드마크 꼬리로 이어지는 메인에, 프롤로그(스크롤로 그려지는 곡선·라인 목록), 객실 상세(요금·구조·비품 아이콘·배치도·전체 객실 미리보기), 스페셜(오션뷰 소개·스크롤 곡선), 오시는 길, 예약 안내(요금표 더보기·부가 서비스·이용 규칙·환불 규정) 서브 5쪽을 갖춘 풀빌라 홈페이지입니다. 모바일은 객실 타일 그리드와 2열 스페셜 슬라이더로 따로 구성했습니다.",
+    features: ["풀스크린 인트로 · 항공 사진 슬라이더", "스크롤 고정 예약 콜라주 · 객실 19개 ROOM VIEW", "객실 상세 · 비품 아이콘 · 배치도", "요금표 더보기 · 이용 규칙 · 환불 규정"],
+    idealFor: "오션뷰 풀빌라, 객실이 많은 펜션, 독채 스테이, 소규모 리조트",
+    image: "/thumbs/pension-a.jpg",
+    liveUrl: "/yoonseul/",
+    industryKey: "stay",
+    premiumLabel: "풀빌라 · 펜션업",
+    designCode: "STAP-1005",
+    premium: true,
+  },
+  {
     slug: "pension-b-template",
     industry: "풀빌라 · 독채 펜션 홈페이지",
     title: "숲속 풀빌라 홈페이지 (프리미엄 디자인 F)",
