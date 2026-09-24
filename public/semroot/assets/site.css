@@ -3,7 +3,7 @@
   --white:#FFF; --black:#111;
   --g100:#F8F8F8; --g200:#F4F4F4; --g300:#EEE; --g400:#DDD;
   --g500:#BBB; --g600:#999; --g700:#666; --g800:#333;
-  --pri:#0E8A5F; --sec:#0A6647;
+  --pri:#0AA06A; --sec:#067A50;
   --ff:'Pretendard',system-ui,sans-serif;
   --fd:'Jost','Pretendard',sans-serif;
   --ls1:-.02em; --ls2:-.01em;
@@ -96,8 +96,13 @@ main{padding-top:calc(var(--hdr) + 81rem);padding-bottom:200rem}
 body.home main{padding-bottom:0}
 
 /* FOOTER */
-#footer{padding:90rem 0 40rem;background:var(--g100);color:var(--g700);
-  font-size:var(--f11);line-height:var(--lh11)}
+#footer{position:relative;padding:90rem 0 40rem;color:var(--g700);
+  font-size:var(--f11);line-height:var(--lh11);background:var(--g100);overflow:hidden}
+#footer::before{content:'';position:absolute;inset:auto -10% -40% -10%;height:120%;
+  background:radial-gradient(60% 100% at 50% 100%,rgba(10,160,106,.26),transparent 70%),
+             radial-gradient(90% 100% at 12% 100%,rgba(10,160,106,.12),transparent 72%);
+  pointer-events:none}
+#footer .shell{position:relative;z-index:1}
 .ft-top{display:flex;justify-content:space-between;gap:80rem}
 .ft-logo{color:var(--black)}
 .ft-logo svg{width:130rem;height:auto}
