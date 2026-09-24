@@ -18,6 +18,8 @@
 
 | 파일 | 하는 일 |
 |---|---|
+| `preflight.py <슬러그> <ref폴더>` | **마감 관문.** 자료를 다 읽었는지·쪽/섹션 수·이미지 명암 폭·산출물·공개 누수·접근성을 기계로 본다. 통과 못 하면 끝난 게 아니다 |
+| `a11y.py <슬러그>` | axe-core 로 WCAG 2.1 A/AA 전수 검사 (ref-sites/<원본>/build/ 에 있다) |
 | `extract_spec.py <소스.html> <outdir>` | 저장한 소스에서 캡처·섹션 구성표·슬롯·토큰·애니메이션·플레이스홀더를 한 번에 뽑는다 |
 | `capture_ref.py <url> <out.png>` | 라이브 전체 페이지 캡처 (소스 없이 URL 만 있을 때) |
 | `crawl_ref.py <url> <outdir> [--mobile] [--login --prefix /admin]` | 사이트를 페이지 틀별로 통째로 받는다 — 원본·렌더 HTML · 캡처 · geo TSV · CSS/JS (아래 "통째로 받아야 할 때") |
