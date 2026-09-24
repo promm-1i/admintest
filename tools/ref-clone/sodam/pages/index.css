@@ -355,3 +355,27 @@ html.js .hero.is-in .hero__chg{opacity:1}
   .hero .hero__c1{display:none}.hero .hero__c2{top:0}
   .film p{width:100%}
 }
+
+/* 공지 팝업 — 원본 layerPop: 딤 0.7 · 3장 · 간격 20 · 한 장 최소 414 · 높이 580 · 라운드 12 */
+.npop{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.7);display:grid;place-items:center;padding:20px}
+.npop[hidden]{display:none}
+.npop__wrap{width:min(1282px,100%)}
+.npop__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.npop__nav{display:flex;gap:8px}
+.npop__nav button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.6)}
+.npop__nav button::before{content:'';display:block;width:14px;height:12px;margin:auto;background:#fff;-webkit-mask:var(--arr) center/contain no-repeat;mask:var(--arr) center/contain no-repeat;transform:scaleX(-1)}
+.npop__nav button+button::before{transform:none}
+.npop__opt{display:flex;align-items:center;gap:20px}
+.npop__opt label{display:flex;align-items:center;gap:8px;font-size:14px;color:#fff;cursor:pointer}
+.npop__opt input{width:16px;height:16px;accent-color:var(--brown)}
+.npop__x{position:relative;width:30px;height:30px}
+.npop__x::before,.npop__x::after{content:'';position:absolute;left:50%;top:50%;width:22px;height:2px;background:#fff;transform:translate(-50%,-50%) rotate(45deg)}
+.npop__x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.npop__view{overflow:hidden;border-radius:12px}
+.npop__track{display:flex;gap:20px;transition:transform .8s ease}
+.npop__track li{flex:0 0 calc((100% - 40px)/3);min-width:0;border-radius:12px;overflow:hidden}
+.npop__track img{width:100%;height:auto;max-height:580px;aspect-ratio:414/580;object-fit:cover}
+@media (max-width:1000px){
+  .npop__track li{flex-basis:78%}
+  .npop__opt{gap:12px}
+}

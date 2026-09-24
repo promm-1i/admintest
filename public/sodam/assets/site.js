@@ -12,8 +12,8 @@ document.documentElement.classList.add('js');
   function mode(){
     var y=scrollY||0, H=hd.offsetHeight;
     if(overEl && overEl.getBoundingClientRect().bottom>H) hd.dataset.mode='over';
-    else hd.dataset.mode=y>10?'solid':(overEl?'solid':'top');
-    if(quick) quick.classList.toggle('is-on',quickEl?quickEl.getBoundingClientRect().bottom<=H:y>300);
+    else hd.dataset.mode=y>0?'solid':(overEl?'solid':'top');  /* 원본: 1px 만 내려도 fixed */
+    if(quick) quick.classList.toggle('is-on',quickEl?quickEl.getBoundingClientRect().bottom<=H:y>100  /* 원본 서브: 100px */);
     /* 서브에서만 아래로 내릴 때 헤더를 숨긴다 (메인은 원본처럼 항상 고정) */
     if(hd.dataset.autohide){
       hd.dataset.hide=(y>400 && y>last && hd.dataset.open!=='1')?'1':'0';
@@ -135,22 +135,66 @@ document.documentElement.classList.add('js');
   });
 })();
 
-/* 비주얼 B·C — 스크롤에 따라 곡선이 올라가고(B), 가운데 사진이 화면 가득 펼쳐진다(C) */
+/* 비주얼 B(곡선)·C(펼침) — 원본 sub.js roundBgAnimation · stickyBgAnimation 시간표 */
 (function(){
   var curve=document.querySelector('.sub-curve'), rev=document.querySelector('.sub-reveal');
+  var hl=document.querySelector('.hl'); if(hl) setTimeout(function(){hl.classList.add('on')},300);
   if(!curve&&!rev) return;
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var line=curve&&curve.querySelector('.sub-curve__line');
+  var img=rev&&rev.querySelector('.sub-reveal__img'), ov=rev&&rev.querySelector('.sub-reveal__ov'), txt=rev&&rev.querySelector('.sub-reveal__txt');
+  var cur={c:0,r:0}, tgt={c:0,r:0}, raf=0;
+  function clamp(v){return v<0?0:v>1?1:v}
+  function paint(){
+    if(line) line.style.borderRadius=(50*(1-cur.c))+'%';
+    if(rev){
+      var q=cur.r, m=innerWidth<=1000, side=(m?6:13)*(1-q), top=45*(1-q);
+      img.style.clipPath='inset('+top+'% '+side+'% 0 '+side+'%)';
+      ov.style.opacity=String(q);
+      var H=rev.querySelector('.sub-reveal__stick').offsetHeight, start=(H*.65-txt.scrollHeight)/2, end=m?H*.3:320;
+      txt.style.height='auto'; txt.style.transform='translateY('+((start+(end-start)*q))+'px)';
+      var c=Math.round(44+(255-44)*q); txt.style.color='rgb('+c+','+c+','+c+')';
+    }
+  }
+  function loop(){ var d=0; for(var k in cur){ cur[k]+=(tgt[k]-cur[k])*.18; if(Math.abs(tgt[k]-cur[k])<.001) cur[k]=tgt[k]; d+=Math.abs(tgt[k]-cur[k]) }
+    paint(); raf=d>0?requestAnimationFrame(loop):0 }
   function tick(){
     var y=scrollY||0, H=innerHeight;
-    if(curve){ var box=curve.querySelector('.sub-curve__box'); var p=Math.min(1,y/(H*.6));
-      box.style.transform='scaleY('+(1-p*.35)+')'; }
-    if(rev&&!reduce){ var st=rev.querySelector('.sub-reveal__img'); var len=rev.offsetHeight-H; var q=len>0?Math.min(1,Math.max(0,y/len)):1;
-      var m=innerWidth<=1000, top=(m?58:55)*(1-q), side=(m?6:13)*(1-q), r=(m?16:24)*(1-q);
-      st.style.clipPath='inset('+top+'% '+side+'% 0 '+side+'% round '+r+'px '+r+'px 0 0)';
-      st.style.setProperty('--dim',String(Math.max(0,(q-.35)/.65)));
-      rev.classList.toggle('is-dark',q>.45); }
+    if(curve) tgt.c=clamp((y-curve.offsetTop)/(((curve.offsetHeight-H)*.5)||1));   /* start top top → end 50% center */
+    if(rev){ var len=rev.offsetHeight-H; tgt.r=clamp((y-rev.offsetTop)/(len||1)) }
+    if(reduce){ cur.c=tgt.c; cur.r=tgt.r; paint(); return }
+    if(!raf) raf=requestAnimationFrame(loop);
   }
-  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick();
+  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick(); if(reduce&&rev){ cur.r=1; paint() }
+})();
+
+/* 로그인 팝업 — 원본 popup_member (로그인 · 아이디 찾기 · 비밀번호 찾기) */
+(function(){
+  var pop=document.getElementById('loginPop'); if(!pop) return;
+  var opener=null;
+  function pane(k){ pop.querySelectorAll('.lpop__pane').forEach(function(p){p.hidden=p.dataset.pane!==k});
+    var f=pop.querySelector('[data-pane="'+k+'"] input'); if(f) f.focus() }
+  function open(){ opener=document.activeElement; pop.hidden=false; document.documentElement.style.overflow='hidden'; pane('login') }
+  function close(){ pop.hidden=true; document.documentElement.style.overflow=''; if(opener&&opener.focus) opener.focus() }
+  document.addEventListener('click',function(e){
+    if(e.target.closest('[data-login]')){ e.preventDefault(); open() }
+    var k=e.target.closest('[data-lpop]'); if(k) pane(k.dataset.lpop);
+    if(e.target.closest('[data-lpop-close]')||e.target===pop) close();
+  });
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&!pop.hidden) close() });
+})();
+
+/* 다이어트 환 신청 — 원본 diet_modal (하단 버튼으로 열고 닫기 · 2단계 폼) */
+(function(){
+  var btn=document.querySelector('[data-dmodal]'), md=document.getElementById('dietModal'); if(!btn||!md) return;
+  var f1=md.querySelector('[data-dstep="1"]'), f2=md.querySelector('[data-dstep="2"]');
+  function set(on){ md.hidden=!on; btn.setAttribute('aria-expanded',on?'true':'false'); document.documentElement.style.overflow=on?'hidden':'';
+    if(on){ f1.hidden=false; f2.hidden=true; f1.querySelector('select').focus() } }
+  btn.addEventListener('click',function(){ set(md.hidden) });
+  md.addEventListener('click',function(e){ if(e.target===md||e.target.closest('[data-dmodal-close]')) set(false) });
+  f1.addEventListener('submit',function(e){ e.preventDefault(); if(!f1.checkValidity()){f1.reportValidity();return}
+    f1.hidden=true; f2.hidden=false; f2.querySelector('input').focus() });
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&!md.hidden) set(false) });
 })();
 
 /* 둘러보기 — 큰 사진 + 썸네일 */
@@ -196,5 +240,168 @@ document.documentElement.classList.add('js');
       its.forEach(function(x){x.classList.toggle('open',x===it); x.querySelector('.hacc__btn').setAttribute('aria-expanded',x===it?'true':'false')});
       var h=it.querySelector('h3'); if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}) }
     }) });
+  });
+})();
+
+/* ══ 원본 부품 동작 (kakkai sub.js · 쪽별 스크립트) ══ */
+/* arrow_image_sync — 제목에 마우스를 올리면(또는 초점) 그 항목이 열리고 오른쪽 사진이 바뀐다 */
+(function(){
+  document.querySelectorAll('[data-sync]').forEach(function(box){
+    var lis=[].slice.call(box.querySelectorAll('.sync__list>li')), imgs=[].slice.call(box.querySelectorAll('.sync__r li'));
+    function on(k){ lis.forEach(function(li,i){li.classList.toggle('on',i===k); li.querySelector('.sync__t').setAttribute('aria-expanded',i===k?'true':'false')});
+      imgs.forEach(function(im,i){im.classList.toggle('on',i===k)}) }
+    lis.forEach(function(li,k){ var t=li.querySelector('.sync__t');
+      t.addEventListener('mouseenter',function(){on(k)}); t.addEventListener('focus',function(){on(k)}); t.addEventListener('click',function(){on(k)}) });
+    on(0);
+  });
+})();
+
+/* program_cont — 흰 알약을 누르면 설명이 펼쳐진다 · 첫 묶음은 4장씩 넘기는 슬라이더 */
+(function(){
+  document.querySelectorAll('.prg__tt').forEach(function(b){
+    b.setAttribute('aria-expanded','false');
+    b.addEventListener('click',function(){ var tx=b.parentElement, on=!tx.classList.contains('on'); tx.classList.toggle('on',on); b.setAttribute('aria-expanded',on?'true':'false') });
+  });
+  document.querySelectorAll('[data-prg]').forEach(function(box){
+    var tr=box.querySelector('.prg__track'), pv=box.querySelector('[data-pprev]'), nx=box.querySelector('[data-pnext]');
+    function sync(){ pv.disabled=tr.scrollLeft<=2; nx.disabled=tr.scrollLeft>=tr.scrollWidth-tr.clientWidth-2 }
+    pv.addEventListener('click',function(){tr.scrollBy({left:-tr.clientWidth-12})});
+    nx.addEventListener('click',function(){tr.scrollBy({left:tr.clientWidth+12})});
+    tr.addEventListener('scroll',sync,{passive:true}); sync();
+  });
+})();
+
+/* overflow_step — 200% 고정 동안 2·3번 카드가 150% 아래에서 차례로 올라와 겹친다 (scrub 1) */
+(function(){
+  var pins=[].slice.call(document.querySelectorAll('.ostep-pin')); if(!pins.length) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  pins.forEach(function(pin){
+    var sec=pin.querySelector('.ostep'), its=[].slice.call(pin.querySelectorAll('.ostep__it')).slice(1), cur=0, tgt=0, raf=0;
+    function size(){ pin.style.height=(innerWidth>1000&&!reduce)?(sec.offsetHeight+innerHeight*2)+'px':'' }
+    function paint(){ var n=its.length; its.forEach(function(it,i){ var f=Math.min(1,Math.max(0,cur*n-i)); it.style.transform='translateY('+(150*(1-f))+'%)' }) }
+    function loop(){ cur+=(tgt-cur)*.15; if(Math.abs(tgt-cur)<.001) cur=tgt; paint(); raf=cur!==tgt?requestAnimationFrame(loop):0 }
+    function tick(){ if(innerWidth<=1000||reduce){ its.forEach(function(it){it.style.transform=''}); return }
+      var r=pin.getBoundingClientRect(), len=pin.offsetHeight-sec.offsetHeight; tgt=Math.min(1,Math.max(0,-r.top/(len||1)));
+      if(!raf) raf=requestAnimationFrame(loop) }
+    size(); addEventListener('resize',function(){size();tick()}); addEventListener('scroll',tick,{passive:true}); tick();
+  });
+})();
+
+/* click_btn — 누르면 설명이 펼쳐지고 다른 항목은 닫힌다 ([data-clk] 묶음) · hover_cont 는 올리면 열린다([data-hov]) */
+(function(){
+  document.querySelectorAll('[data-clk]').forEach(function(box){
+    var bs=[].slice.call(box.querySelectorAll('.clk'));
+    bs.forEach(function(b){ var h=b.querySelector('.clk__h'); h.setAttribute('aria-expanded','false');
+      h.addEventListener('click',function(){ var on=!b.classList.contains('on');
+        bs.forEach(function(x){x.classList.remove('on'); x.querySelector('.clk__h').setAttribute('aria-expanded','false')});
+        if(on){ b.classList.add('on'); h.setAttribute('aria-expanded','true') } });
+      if(box.hasAttribute('data-hov')){ b.addEventListener('mouseenter',function(){b.classList.add('on');h.setAttribute('aria-expanded','true')});
+        b.addEventListener('mouseleave',function(){b.classList.remove('on');h.setAttribute('aria-expanded','false')}) }
+    });
+  });
+})();
+
+/* 흐르는 글자 — 섹션에 들어오면 40초 선형 반복 시작 */
+(function(){
+  var els=[].slice.call(document.querySelectorAll('.flowt')); if(!els.length) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  /* 관찰 대상은 부모 섹션 — 클래스는 흐르는 글자에 */
+  els.forEach(function(e){ new IntersectionObserver(function(es){ e.classList.toggle('on',es[0].isIntersecting) }).observe(e.parentElement) });
+})();
+
+/* 체크 목록 — 누르면 체크 표시 (원본 0403 click_ul) */
+(function(){
+  document.querySelectorAll('[data-check] button').forEach(function(b){
+    b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',function(){ var on=b.getAttribute('aria-pressed')!=='true'; b.setAttribute('aria-pressed',on?'true':'false') });
+  });
+})();
+
+/* 탭에 따라 섹션 배경색이 바뀐다 (원본 0202 · 0304 · 0305) — 탭 버튼의 data-bg */
+(function(){
+  document.querySelectorAll('[data-tabs][data-bgsec]').forEach(function(box){
+    var sec=box.closest('section');
+    box.querySelectorAll('[role="tab"]').forEach(function(t){ t.addEventListener('click',function(){ sec.dataset.bg=t.dataset.bg||'' }) });
+  });
+})();
+
+/* 끌어서 넘기기 — 원본 Swiper grab (마우스로 트랙을 잡아 끈다) */
+(function(){
+  document.querySelectorAll('[data-drag]').forEach(function(tr){
+    var down=false, x0=0, s0=0, moved=false;
+    tr.addEventListener('mousedown',function(e){ down=true; moved=false; x0=e.pageX; s0=tr.scrollLeft; tr.style.scrollSnapType='none'; tr.style.cursor='grabbing'; e.preventDefault() });
+    addEventListener('mousemove',function(e){ if(!down) return; var d=e.pageX-x0; if(Math.abs(d)>4) moved=true; tr.scrollLeft=s0-d });
+    addEventListener('mouseup',function(){ if(!down) return; down=false; tr.style.cursor=''; tr.style.scrollSnapType='' });
+    tr.addEventListener('click',function(e){ if(moved){ e.preventDefault(); e.stopPropagation() } },true);
+  });
+})();
+
+/* 넓어지는 카드 — 올린(또는 초점) 카드만 .on (원본 0201 box01 · 마지막으로 올린 카드가 유지된다) */
+(function(){
+  document.querySelectorAll('[data-grow]').forEach(function(box){
+    var its=[].slice.call(box.children);
+    its.forEach(function(it){ function on(){ its.forEach(function(x){x.classList.toggle('on',x===it)}) }
+      it.addEventListener('mouseenter',on); it.addEventListener('focusin',on) });
+  });
+})();
+
+/* 누르면 펼치는 판 — [data-pick] 안의 항목 하나만 .on (원본 0203 · 0304 가로 아코디언) */
+(function(){
+  document.querySelectorAll('[data-pick]').forEach(function(box){
+    var its=[].slice.call(box.children);
+    its.forEach(function(it){ var b=it.querySelector('button'); if(b) b.setAttribute('aria-expanded',it.classList.contains('on')?'true':'false');
+      it.addEventListener('click',function(){ its.forEach(function(x){ x.classList.toggle('on',x===it); var bb=x.querySelector('button'); if(bb) bb.setAttribute('aria-expanded',x===it?'true':'false') }) }) });
+  });
+})();
+
+/* 바닥에서 멈추고 다음 섹션이 덮어 올라온다 — 원본 0201 sec03 pin(bottom bottom) + sec04 yPercent 100→0 */
+(function(){
+  var els=[].slice.call(document.querySelectorAll('[data-stickbottom]')); if(!els.length) return;
+  function set(){ els.forEach(function(e){ e.style.top=innerWidth>1000?Math.min(0,innerHeight-e.offsetHeight)+'px':'' }) }
+  set(); addEventListener('resize',set); addEventListener('load',set);
+})();
+
+/* 슬라이더 점 — [data-slider] 안의 [data-dots] 에 장수만큼 점을 만들고, 가운데 온 장을 표시 */
+(function(){
+  document.querySelectorAll('[data-slider]').forEach(function(box){
+    var dots=box.querySelector('[data-dots]'), tr=box.querySelector('[data-track]'); if(!dots||!tr) return;
+    var its=[].slice.call(tr.children);
+    its.forEach(function(it,k){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label',(k+1)+'번째 장');
+      b.addEventListener('click',function(){ tr.scrollTo({left:it.offsetLeft-(tr.clientWidth-it.offsetWidth)/2,behavior:'smooth'}) }); dots.appendChild(b) });
+    var bs=[].slice.call(dots.children);
+    function sync(){ var c=tr.scrollLeft+tr.clientWidth/2, best=0, d=1e9;
+      its.forEach(function(it,k){ var m=Math.abs(it.offsetLeft+it.offsetWidth/2-c); if(m<d){d=m;best=k} });
+      its.forEach(function(it,k){ it.classList.toggle('on',k===best) }); bs.forEach(function(b,k){ b.setAttribute('aria-current',k===best?'true':'false') }) }
+    tr.addEventListener('scroll',sync,{passive:true}); addEventListener('resize',sync); sync();
+  });
+})();
+
+/* 무한 자동 캐러셀 — 원본 Swiper(loop · autoplay · centeredSlides). [data-loop] 안의 [data-ltrack] ·
+   data-delay(ms) · [data-lprev]/[data-lnext] · [data-lnames] 이름표 버튼(원본 0604 탭 페이지 표시) */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-loop]').forEach(function(box){
+    var tr=box.querySelector('[data-ltrack]'), orig=[].slice.call(tr.children), n=orig.length, i=0, timer=0, busy=false;
+    var delay=+box.dataset.delay||3000, speed=+box.dataset.speed||1000;
+    function clone(c){ var x=c.cloneNode(true); x.setAttribute('aria-hidden','true'); x.querySelectorAll('img').forEach(function(m){m.alt=''}); x.querySelectorAll('a,button').forEach(function(a){a.tabIndex=-1}); return x }
+    orig.forEach(function(c){ tr.appendChild(clone(c)) }); orig.slice().reverse().forEach(function(c){ tr.insertBefore(clone(c),tr.firstChild) });
+    var all=[].slice.call(tr.children), names=[].slice.call(box.querySelectorAll('[data-lnames] button'));
+    function gap(){ return parseFloat(getComputedStyle(tr).columnGap)||0 }
+    function place(anim){
+      var w=all[0].offsetWidth, g=gap(), k=i+n, x=-(k*(w+g))+(tr.parentElement.clientWidth-w)/2;
+      tr.style.transition=anim?'transform '+speed+'ms ease':'none'; tr.style.transform='translateX('+x+'px)';
+      all.forEach(function(s,j){ s.classList.toggle('on',j===k) });
+      names.forEach(function(b,j){ b.setAttribute('aria-current',j===((i%n)+n)%n?'true':'false') });
+    }
+    function go(d){ if(busy) return; busy=true; i+=d; place(true);
+      setTimeout(function(){ if(i>=n||i<0){ i=(i%n+n)%n; place(false) } busy=false },speed+20); }
+    function to(k){ var d=k-(((i%n)+n)%n); if(d) { busy=false; i+=d; place(true); setTimeout(function(){busy=false},speed) } restart() }
+    function restart(){ clearInterval(timer); if(!reduce) timer=setInterval(function(){go(1)},delay) }
+    var pv=box.querySelector('[data-lprev]'), nx=box.querySelector('[data-lnext]');
+    if(pv) pv.addEventListener('click',function(){go(-1);restart()}); if(nx) nx.addEventListener('click',function(){go(1);restart()});
+    names.forEach(function(b,k){ b.addEventListener('click',function(){to(k)}) });
+    box.addEventListener('mouseenter',function(){clearInterval(timer)}); box.addEventListener('mouseleave',restart);
+    box.addEventListener('focusin',function(){clearInterval(timer)});
+    addEventListener('resize',function(){place(false)}); place(false); restart();
   });
 })();

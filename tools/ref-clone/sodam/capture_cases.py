@@ -19,8 +19,8 @@ PAGES = ['index', 'diagnosis', 'neck-pain', 'diet-principle', 'beauty-skin', 'tr
          'before-after', 'about', 'doctors', 'location']
 POINTS = [('diff', 'index', '#diff .diff__body'), ('proof', 'index', '#proof'), ('diet', 'index', '#diet'),
           ('promise', 'index', '.promise'), ('special', 'index', '.special__row'), ('story', 'index', '#story'),
-          ('orbit', 'diagnosis', 'section:has(.orbit)'), ('steps', 'neck-pain', '.steps'), ('hacc', 'diet-body-type', '.hacc'),
-          ('glass', 'mental-health', '.glass')]
+          ('orbit', 'diagnosis', '.dx'), ('steps', 'neck-pain', '.ostep'), ('hacc', 'diet-body-type', '.bacc'),
+          ('glass', 'mental-health', '.sym4')]
 MOBILE = ['index', 'neck-pain', 'diet-principle', 'location']
 FREEZE = ('html{scroll-behavior:auto!important}*,*::before,*::after{animation-delay:0s!important;'
           'animation-duration:0s!important;transition-delay:0s!important;transition-duration:0s!important}'
@@ -28,11 +28,12 @@ FREEZE = ('html{scroll-behavior:auto!important}*,*::before,*::after{animation-de
 
 def page(b, name, vp, dpr=1):
     ctx = b.new_context(viewport=vp, device_scale_factor=dpr, reduced_motion='reduce', is_mobile=vp['width'] < 600)
+    ctx.add_init_script("try{localStorage.setItem('sodam_notice_hide',String(Date.now()+864e5))}catch(e){}")  # 공지 팝업을 닫은 상태로
     pg = ctx.new_page()
     pg.goto(BASE + ('' if name == 'index' else name + '.html'), wait_until='networkidle')
     pg.add_style_tag(content=FREEZE)
-    pg.evaluate("document.querySelectorAll('.rv').forEach(e=>e.classList.add('on'))")
-    pg.wait_for_timeout(400)
+    pg.evaluate("document.querySelectorAll('.rv').forEach(e=>e.classList.add('on'));document.querySelectorAll('img[loading=lazy]').forEach(i=>i.loading='eager')")
+    pg.wait_for_load_state('networkidle'); pg.wait_for_timeout(400)
     return ctx, pg
 
 def webp(png, keep_sm=True):
@@ -59,7 +60,7 @@ with sync_playwright() as p:
         webp(OUT / f'page-{n}.png')
     for key, n, sel in POINTS:
         ctx, pg = page(b, n, {'width': 1280, 'height': 900})
-        pg.add_style_tag(content='.hd,.quick,.mbar,.lnb,.fcta{visibility:hidden!important}')
+        pg.add_style_tag(content='.hd,.quick,.mbar,.skip,.dmbtn{visibility:hidden!important}')
         el = pg.locator(sel).first; el.scroll_into_view_if_needed(); pg.wait_for_timeout(900)
         el.screenshot(path=str(OUT / f'point-{key}.png')); webp(OUT / f'point-{key}.png'); ctx.close()
     for n in MOBILE:

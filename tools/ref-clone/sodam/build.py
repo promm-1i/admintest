@@ -9,8 +9,8 @@ pages/<파일>.html 조각(본문만)에 공통 머리·헤더·메가메뉴·�
   desc    meta description
   over    흰 글자 헤더를 유지할 요소 선택자 (히어로가 어두운 쪽)
   quick   퀵 메뉴를 띄울 기준 요소 선택자 (없으면 300px 스크롤)
-  hero    서브 비주얼: {"img":..., "t":..., "d":...} · "flat" 이면 사진 없는 440 띠
-  lnb     true 면 같은 묶음 메뉴 띠를 비주얼 아래에 붙인다
+  hero    서브 비주얼 {"type": photo|curve|reveal|bbs|member, "img", "t", "d", ...} — reveal 은 "sand":true 면 모래색 바탕
+  diet    true 면 다이어트 환 신청 버튼·모달을 붙인다
   css/js  이 쪽에서만 쓰는 스타일·스크립트 파일(pages/ 기준) — 인라인으로 넣는다
 공통 부분을 고칠 때는 여기와 assets/site.css · site.js 만 고치고 다시 돌린다.
 """
@@ -86,13 +86,12 @@ def header(cur_g, meta):
     attrs = ''
     if meta.get('over'): attrs += ' data-over="%s"' % esc(meta['over'])
     if meta.get('quick'): attrs += ' data-quick="%s"' % esc(meta['quick'])
-    if meta.get('autohide'): attrs += ' data-autohide="1"'
     mode = 'over' if meta.get('over') else 'top'
     return ('<a class="skip" href="#main">본문 바로가기</a>\n'
             '<header class="hd" data-mode="%s"%s>\n<div class="hd__in">\n'
             '<a href="./index.html" aria-label="%s 홈으로">%s</a>\n'
             '<nav aria-label="주 메뉴" style="margin-left:auto"><ul class="gnb">%s</ul></nav>\n'
-            '<div class="hd__rt"><div class="hd__acc"><a href="./join.html">로그인</a><a href="./join.html">회원가입</a></div>'
+            '<div class="hd__rt"><div class="hd__acc"><button type="button" data-login>로그인</button><a href="./join.html">회원가입</a></div>'
             '<button class="hd__burger" type="button" data-smap aria-expanded="false" aria-label="전체 메뉴 열기"><i></i><i></i><i></i><i></i></button></div>\n'
             '</div>\n<div class="mega">%s</div>\n</header>\n') % (mode, attrs, BRAND, logo(), gnb, panes)
 
@@ -136,37 +135,70 @@ def footer():
             '</footer>\n') % (ICON['phone'], TEL, TEL_DOT, BRAND, ICON['clock'], BRAND, ICON['pin'], BRAND, logo())
 
 def sub_hero(fn, meta, gi, name):
+    """원본 서브 비주얼 5종 — photo(sub_bg01·06) · curve(sub_bg02) · reveal(sticky_bg) · bbs(sub_bg_bbs) · member(sub_bg07)"""
     h = meta.get('hero')
     if not h: return ''
-    if h == 'flat': h = {'type': 'flat'}
     typ = h.get('type', 'photo')
     title = h.get('t') or esc(name or meta.get('title', ''))
-    desc = ('<p class="%s__d">%s</p>' % ('sub-hero' if typ in ('photo', 'flat', 'flatc') else 'sub-' + typ, h['d'])) if h.get('d') else ''
-    crumb = '<nav class="crumb" aria-label="현재 위치"><a href="./index.html" aria-label="홈">%s</a><i></i><span>%s</span><i></i><span>%s</span></nav>' % (
-        ICON['home'], esc(MENU[gi][0]) if gi is not None else '안내', esc(name or meta.get('title', '')))
-    img = lambda: '<img src="./assets/%s" alt="" width="1440" height="900" fetchpriority="high" data-shot="%s">' % (h['img'], esc(h.get('shot', '')))
-    if typ in ('flat', 'flatc'):
-        return ('<section class="sub-hero sub-hero--flat%s"><div class="wrap sub-hero__txt">%s<h1 class="sub-hero__t">%s</h1>%s</div></section>\n') % (
-            ' sub-hero--flatc' if typ == 'flatc' else '', crumb, title, desc)
+    crumb = ('<nav class="crumb" aria-label="현재 위치"><a href="./index.html" aria-label="홈">%s</a><i></i><span>%s</span><i></i><span>%s</span></nav>'
+             % (ICON['home'], esc(MENU[gi][0]) if gi is not None else '안내', esc(name or meta.get('title', ''))))
+    desc = ('<p class="sub-hero__d">%s</p>' % h['d']) if h.get('d') else ''
+    img = lambda cls: '<img class="%s" src="./assets/%s" alt="" width="1440" height="900" fetchpriority="high" data-shot="%s">' % (cls, h['img'], esc(h.get('shot', '')))
+    if typ in ('bbs', 'member'):
+        return ('<section class="sub-hero sub-hero--%s%s"><div class="wrap sub-hero__txt">%s<h1 class="sub-hero__t">%s</h1>%s</div></section>\n'
+                % (typ, ' sub-hero--dot' if h.get('dot') else '', crumb, title, desc))
     if typ == 'curve':
-        return ('<section class="sub-curve" id="subHero">%s<div class="sub-curve__box" aria-hidden="true"></div>'
-                '<div class="wrap sub-curve__txt"><h1 class="sub-curve__t">%s</h1>%s%s</div></section>\n') % (
-            img().replace('<img ', '<img class="sub-curve__img" '), title, desc, crumb)
+        return ('<section class="sub-curve" id="subHero"><div class="sub-curve__img">%s</div>'
+                '<div class="wrap sub-curve__txt"><h1 class="sub-hero__t">%s</h1>%s</div>%s'
+                '<div class="sub-curve__line" aria-hidden="true"></div></section>\n'
+                % (img(''), title, desc, crumb.replace('class="crumb"', 'class="crumb sub-curve__crumb"')))
     if typ == 'reveal':
-        return ('<section class="sub-reveal" id="subHero"><div class="sub-reveal__stick"><div class="sub-reveal__img">%s</div>'
-                '<div class="sub-reveal__txt"><h1 class="sub-reveal__t">%s</h1>%s%s</div></div></section>\n') % (img(), title, desc, crumb)
-    ring = ('<span class="rot" aria-hidden="true"><svg class="rot__ring" viewBox="0 0 120 120"><defs><path id="rp" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs>'
-            '<text font-family="Cormorant, serif" font-size="11.5" letter-spacing="3.2" fill="#fff"><textPath href="#rp">SODAM · CLOSER TO THE CAUSE · SODAM · CARE ·</textPath></text></svg>'
-            '<span class="rot__mark">%s</span></span>') % ICON['mark'].replace('class="logo__mark"', '')
-    return ('<section class="sub-hero" id="subHero">%s'
-            '<div class="wrap sub-hero__txt">%s<h1 class="sub-hero__t">%s</h1>%s</div>%s</section>\n') % (
-        img().replace('<img ', '<img class="sub-hero__img" '), crumb, title, desc, ring)
+        return ('<section class="sub-reveal%s" id="subHero"><div class="sub-reveal__stick"><div class="sub-reveal__img">%s<span class="sub-reveal__ov"></span></div>'
+                '<div class="wrap sub-reveal__txt"><h1 class="sub-hero__t">%s</h1>%s%s</div></div></section>\n' % (' sub-reveal--sand' if h.get('sand') else '', img(''), title, desc, crumb))
+    ring = ''
+    if h.get('ring', True):
+        ring = ('<span class="rot" aria-hidden="true"><svg class="rot__ring" viewBox="0 0 120 120"><defs><path id="rp" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs>'
+                '<text font-family="Cormorant, serif" font-size="11.5" letter-spacing="3.2" fill="#fff"><textPath href="#rp">SODAM · CLOSER TO THE CAUSE · SODAM · CARE ·</textPath></text></svg>'
+                '<span class="rot__mark">%s</span></span>') % ICON['mark'].replace('class="logo__mark"', '')
+    lead = ('<p class="sub-hero__lead">%s</p>' % h['lead']) if h.get('lead') else ''
+    return ('<section class="sub-hero%s" id="subHero">%s'
+            '<div class="wrap sub-hero__txt">%s<h1 class="sub-hero__t">%s</h1>%s%s</div>%s</section>\n'
+            % (' sub-hero--dim' if h.get('dim', True) else '', img('sub-hero__img'), crumb, title, lead, desc, ring))
 
-def lnb(fn, gi):
-    if gi is None: return ''
-    items = MENU[gi][2]
-    lis = ''.join('<li><a href="./%s"%s>%s</a></li>' % (f, ' aria-current="page"' if (f == fn or (fn == 'community-view.html' and f == 'community.html')) else '', esc(n)) for n, f in items)
-    return '<nav class="lnb" aria-label="%s 메뉴"><ul>%s</ul></nav>\n' % (esc(MENU[gi][0]), lis)
+DIET_MODAL = ('''<button class="dmbtn" type="button" data-dmodal aria-expanded="false" aria-controls="dietModal">다이어트 환 신청하기<svg viewBox="0 0 14 8" aria-hidden="true"><path d="m1 7 6-6 6 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></button>
+<div class="dmodal" id="dietModal" role="dialog" aria-modal="true" aria-labelledby="dmodalT" hidden>
+<div class="dmodal__box"><img class="dmodal__bg" src="./assets/diet-modal.jpg" alt="" width="450" height="550" loading="lazy">
+<div class="dmodal__in"><span class="dmodal__mark" aria-hidden="true"></span><p class="dmodal__t" id="dmodalT">소담 다이어트 환</p>
+<p class="dmodal__d">소담한의원에서 체질에 맞춰 짓는 다이어트 한약으로<br>건강한 감량을 돕는 맞춤 처방입니다.</p>
+<p class="dmodal__chips"><span>다이어트</span><span>체지방 관리</span><span>체질 맞춤</span><span>식욕 조절</span><span>대사 효율</span><span>순환 개선</span></p>
+<form class="dmodal__form" data-dstep="1" novalidate><label class="dmodal__row"><span>프로그램 선택</span><select required><option value="">선택</option><option>4주 집중 리셋</option><option>12주 바디 체인지</option><option>24주 체질 완성</option></select></label>
+<button class="dmodal__next" type="submit">다음</button></form>
+<form class="dmodal__form" data-dstep="2" data-demo-form novalidate hidden><label class="dmodal__row"><span>이름</span><input required autocomplete="name"></label>
+<label class="dmodal__row"><span>전화번호</span><input type="tel" required autocomplete="tel"></label><button class="dmodal__next" type="submit">신청하기</button></form>
+</div><button class="dmodal__x" type="button" data-dmodal-close aria-label="닫기"></button></div></div>
+''')
+
+LOGIN = ('''<div class="lpop" id="loginPop" role="dialog" aria-modal="true" aria-labelledby="lpopT" hidden>
+<div class="lpop__box">
+<button class="lpop__x" type="button" data-lpop-close aria-label="닫기"></button>
+<form class="lpop__pane" data-pane="login" data-demo-form novalidate><h2 class="lpop__t" id="lpopT">로그인</h2>
+<label class="lpop__row"><span>아이디</span><input required autocomplete="username" placeholder="아이디를 입력해 주세요."></label>
+<label class="lpop__row"><span>비밀번호</span><input type="password" required autocomplete="current-password" placeholder="비밀번호를 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn" type="submit">로그인</button><a class="lpop__btn lpop__btn--navy" href="./join.html">회원가입</a></div>
+<p class="lpop__links"><button type="button" data-lpop="findid">아이디 찾기</button><span></span><button type="button" data-lpop="findpw">비밀번호 찾기</button></p></form>
+<form class="lpop__pane" data-pane="findid" data-demo-form novalidate hidden><h2 class="lpop__t">아이디 찾기</h2>
+<label class="lpop__row"><span>이름</span><input required autocomplete="name" placeholder="이름을 입력해 주세요."></label>
+<label class="lpop__row"><span>이메일</span><input type="email" required autocomplete="email" placeholder="가입한 이메일을 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn lpop__btn--lg" type="submit">아이디 찾기</button></div>
+<p class="lpop__links"><button type="button" data-lpop="login">로그인으로 돌아가기</button></p></form>
+<form class="lpop__pane" data-pane="findpw" data-demo-form novalidate hidden><h2 class="lpop__t">비밀번호 찾기</h2>
+<label class="lpop__row"><span>이름</span><input required autocomplete="name" placeholder="이름을 입력해 주세요."></label>
+<label class="lpop__row"><span>아이디</span><input required autocomplete="username" placeholder="아이디를 입력해 주세요."></label>
+<label class="lpop__row"><span>이메일</span><input type="email" required autocomplete="email" placeholder="가입한 이메일을 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn lpop__btn--lg" type="submit">비밀번호 찾기</button></div>
+<p class="lpop__links"><button type="button" data-lpop="login">로그인으로 돌아가기</button></p></form>
+</div></div>
+''')
 
 HEAD = '''<!doctype html>
 <html lang="ko">
@@ -204,14 +236,11 @@ def build(fn):
     js = ''
     for j in meta.get('js', []):
         js += '<script>\n%s\n</script>\n' % io.open(os.path.join(ROOT, 'pages', j), encoding='utf-8').read().strip()
-    htype = meta['hero'].get('type', 'photo') if isinstance(meta.get('hero'), dict) else meta.get('hero')
-    if htype in ('photo', 'curve'):
-        meta.setdefault('over', '#subHero')
+    htype = meta['hero'].get('type', 'photo') if isinstance(meta.get('hero'), dict) else None
     if htype in ('photo', 'curve', 'reveal'):
-        meta.setdefault('quick', '#subHero')
+        meta.setdefault('over', '#subHero')   # 원본: 비주얼 구간에서는 흰 글자 헤더
     if fn != 'index.html':
         css = '<link rel="stylesheet" href="./assets/sub.css">\n' + css
-    if fn != 'index.html': meta.setdefault('autohide', True)
     out = HEAD.format(title=esc(full_title), desc=esc(desc), css=css, bodycls=(' class="%s"' % meta['body']) if meta.get('body') else '')
     out += header(gi, meta) + sitemap()
     # 모바일에서 <br> 을 숨겨도 앞뒤 낱말이 붙지 않도록 줄바꿈 앞에 빈칸을 둔다(줄 끝 빈칸은 보이지 않는다)
@@ -219,10 +248,10 @@ def build(fn):
     for k in ('t', 'd'):
         if isinstance(meta.get('hero'), dict) and meta['hero'].get(k):
             meta['hero'][k] = re.sub(r'(?<=[^\s>])<br>', ' <br>', meta['hero'][k])
-    out += '<main id="main">\n' + sub_hero(fn, meta, gi, name) + (lnb(fn, gi) if meta.get('lnb') else '') + body.strip() + '\n</main>\n'
-    out += footer() + quick()
-    if meta.get('cta'):
-        out += '<a class="fcta" href="%s">%s</a>\n' % (meta['cta'][1], esc(meta['cta'][0]))
+    out += '<main id="main">\n' + sub_hero(fn, meta, gi, name) + body.strip() + '\n</main>\n'
+    out += footer() + quick() + LOGIN
+    if meta.get('diet'):
+        out += DIET_MODAL
     out += '<script src="./assets/site.js"></script>\n' + js
     out += ('<script>document.addEventListener("click",function(e){var a=e.target.closest("[data-demo]");'
             'if(a){e.preventDefault();alert("디자인 예시 화면입니다. 실제 납품 시 병원 채널로 연결됩니다.");}});</script>\n')

@@ -16,28 +16,240 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="stylesheet" href="./assets/site.css">
 <link rel="stylesheet" href="./assets/sub.css">
+<style>
+/* 병원 소개 · 게시판 · 회원 — 원본 sub0601~0605 · 0501/0502 · member 실측값 */
+
+/* 0601 sec01 — 300% 고정 · 진행률 3등분으로 장면 교체 (사진이 세로·가로로 밀려 들어오고 큰 영문이 옆에서) */
+.spin{position:relative}
+.spin>.spin__sec{position:sticky;top:0;height:100vh;min-height:760px;overflow:hidden;background:var(--sand);padding-top:240px}
+.spin__h{position:absolute;left:0;top:-130px;z-index:2}
+.spin__h p:first-child{font-size:30px;font-weight:300}
+.spin__h p:first-child b{font-weight:500;color:var(--brown)}
+.spin__h .sh__t{font-size:50px;line-height:70px}
+.spin__st{position:relative;height:calc(100% - 60px);min-height:576px}
+.spin__sl{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:40px;padding-left:290px;height:100%;opacity:0;transition:opacity .6s;width:max-content}
+.spin__sl.on{opacity:1;z-index:1}
+.spin__img{position:relative;width:443px;flex:none}
+.spin__lg{height:100%;overflow:hidden;background:var(--sand)}
+.spin__lg img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease-in-out}
+.spin__sm{position:absolute;bottom:30px;left:0;width:198px;height:151px;transform:translateX(-50%);overflow:hidden}
+.spin__sm img{width:100%;height:100%;object-fit:cover;transition:transform .8s ease-in-out}
+.spin__tx{display:flex;flex-direction:column;justify-content:flex-end;gap:30px}
+.spin__en{width:335px;overflow:hidden}
+.spin__en span{display:block;font-family:var(--play);font-size:90px;line-height:1;color:#fff;transition:transform .8s ease-in-out,opacity .8s}
+.spin__cap{width:335px;transition:opacity .8s ease-in-out}
+.spin__cap p{font-size:20px;line-height:32px;color:#555}
+.spin__cap b{color:var(--ink)}
+.spin__sl .spin__en span{transform:translateX(-100%);opacity:0}
+.spin__sl .spin__cap{opacity:0}
+.spin__sl[data-dir=Y] .spin__lg img{transform:translateY(100%)}
+.spin__sl[data-dir=X] .spin__lg img{transform:translateX(-100%)}
+.spin__sl .spin__sm img{transform:translateX(100%)}
+.spin__sl.on .spin__en span,.spin__sl.on .spin__lg img,.spin__sl.on .spin__sm img{transform:none;opacity:1}
+.spin__sl.on .spin__cap{opacity:1}
+
+/* 0601 sec02 — 갈색 · 큰 흐르는 글자 · 선이 그려지는 장식 · 원칙 5 */
+.spec{position:relative;padding:140px 0 0;overflow:hidden}
+.spec .flowt{top:-18px;bottom:auto}
+.spec .flowt p{font-size:120px;color:var(--cream);opacity:.2;text-transform:uppercase}
+.spec__top{position:relative}
+.spec__vl{position:absolute;left:50%;top:0;transform:translateX(-50%);height:calc(100% - 100px);width:1px}
+.spec__vl i,.spec__hl i{display:block;background:var(--cream)}
+.spec__vl i{width:1px;height:0;margin:0 auto}
+.spec__vl.on i{animation:lineH 2s forwards}
+.spec__it{position:relative;padding:100px 0}
+.spec__it .wrap{display:flex;align-items:center;gap:66px}
+.spec__it .wrap>*{flex:1;min-width:0}
+.spec__it img{width:100%;aspect-ratio:560/380;object-fit:cover;border-radius:16px}
+.spec__no{font-family:var(--play);font-style:italic;font-size:40px;color:var(--cream);margin-bottom:10px}
+.spec__t{font-family:var(--serif);font-size:34px;line-height:48px;font-weight:200;color:#fff}
+.spec__d{font-size:18px;line-height:30px;margin-top:30px;color:#fff}
+.spec__d b{font-weight:700}
+.spec__it--02{padding:20px 0 140px}
+.spec__it--03{text-align:left}
+.spec__hl{position:absolute;left:0;width:100%;height:1px}
+.spec__hl i{height:1px;width:0}
+.spec__hl--t{top:0}.spec__hl--b{bottom:0}
+.spec__it--03.on .spec__hl i{animation:lineW 1.5s forwards}
+.spec__it--03 .wrap{display:grid;grid-template-columns:1fr 1fr;gap:66px}
+.spec__it--04 .wrap{justify-content:space-between;align-items:flex-end}
+.spec__it--04 .wrap>div{flex:none;width:512px}
+.spec__it--04 .wrap>div:last-child{text-align:right}
+.spec__it--04 .spec__vl{height:100%}
+.spec__it--04.on .spec__vl i{animation:lineH 1.5s forwards}
+@keyframes lineH{from{height:0}to{height:100%}}
+@keyframes lineW{from{width:0}to{width:100%}}
+
+/* 0602 의료진 — 사진 · 글 557 · 경력 2단 · 진료 시간 표 */
+.drs{padding:140px 0 84px}
+.drs:nth-of-type(3n+2){background:#fff}
+.drs:nth-of-type(3n+3){background:var(--brown);color:#fff}
+.drs:nth-of-type(3n+1){background:var(--sand)}
+.dr{display:flex;justify-content:space-between;gap:60px}
+.drs:nth-of-type(even) .dr{flex-direction:row-reverse}
+.dr__pic{width:520px;flex:none;align-self:flex-start;position:sticky;top:120px}
+.dr__pic img{width:100%;aspect-ratio:520/660;object-fit:cover;border-radius:260px 260px 16px 16px}
+.dr__txt{width:557px}
+.dr__name{font-size:40px;font-weight:600}
+.dr__name span{font-family:var(--serif);color:var(--brown);margin-right:8px}
+.dr__name small{font-size:18px;font-weight:400;color:var(--brown);margin-left:10px}
+.drs:nth-of-type(3n+3) .dr__name span,.drs:nth-of-type(3n+3) .dr__name small{color:var(--cream)}
+.dr__msg{margin-top:40px}
+.dr__msg .quo{font-family:var(--serif);font-size:60px;font-weight:900;line-height:0;color:var(--point);height:24px}
+.dr__msg p.q{font-family:var(--serif);font-size:24px;line-height:36px;color:var(--point);margin:15px 0}
+.drs:nth-of-type(3n+3) .dr__msg p.q,.drs:nth-of-type(3n+3) .dr__msg .quo{color:var(--cream)}
+.dr__msg p.d{font-size:18px;line-height:30px}
+.dr__h{font-size:24px;font-weight:700;line-height:1;padding-bottom:17px;border-bottom:1px solid var(--brown);margin:60px 0 20px}
+.drs:nth-of-type(3n+3) .dr__h{border-color:#fff}
+.dr__cv{display:flex;gap:45px}
+.dr__cv li{font-size:18px;line-height:30px;letter-spacing:-1px;padding-left:10px;position:relative}
+.dr__cv li::before{content:'';position:absolute;left:0;top:14px;width:3px;height:3px;background:currentColor}
+.dr__tb{width:100%;font-size:16px;table-layout:fixed;border-collapse:collapse}
+.dr__tb th{background:#FBF9F6;height:40px;font-weight:400;border:1px solid #EEE;color:#555;border-top:2px solid var(--brown)}
+.dr__tb td{height:40px;text-align:center;border:1px solid #EEE;font-weight:700}
+.drs:nth-of-type(3n+3) .dr__tb th{color:var(--ink)}
+.dr__tb td b{display:inline-block;width:10px;height:10px;border-radius:50%;background:#CDA269}
+.dr__tb th:first-child,.dr__tb td:first-child{border-left:0}.dr__tb th:last-child,.dr__tb td:last-child{border-right:0}
+
+/* 게시판 카드 — 커뮤니티 2열(395) · 후기 3열(480) */
+.cml{display:flex;flex-wrap:wrap;gap:40px}
+.cml>li{width:calc(50% - 20px);height:395px;border-radius:12px;background:var(--sand);border:1px solid rgba(203,170,120,.2);box-shadow:3px 3px 10px #CBAA7833;transition:transform .4s,box-shadow .4s}
+.cml>li:hover{transform:translateY(-6px);box-shadow:6px 10px 20px #CBAA7855}
+.cml a{display:flex;justify-content:space-between;gap:20px;height:100%;padding:45px 48px}
+.cml a>div{position:relative;flex:1}
+.cml__cat{display:inline-block;padding:0 20px;height:34px;line-height:34px;font-size:18px;font-weight:500;border-radius:20px;background:var(--brown);color:#fff;margin-bottom:24px}
+.cml>li[data-cat=notice] .cml__cat{background:var(--blue)}
+.cml>li[data-cat=health] .cml__cat{background:#80735F}
+.cml__t{font-size:28px;line-height:1.45;font-weight:500;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.cml__d{position:absolute;bottom:0;font-size:17px;color:#897E6C}
+.cml__img{position:relative;width:300px;min-width:300px;height:305px;border-radius:20px 20px 20px 0;overflow:hidden}
+.cml__img img{width:100%;height:100%;object-fit:cover;transition:transform .8s}
+.cml>li:hover .cml__img img{transform:scale(1.06)}
+.cml__img::after{content:'';position:absolute;left:0;bottom:0;width:48px;height:48px;background:var(--sand);border-radius:0 20px 0 0}
+.cml__img i{position:absolute;left:7px;bottom:7px;z-index:1;width:30px;height:30px;border-radius:50%;background:var(--brown);display:grid;place-items:center}
+.cml__img i::before{content:'';width:14px;height:11px;background:#fff;-webkit-mask:var(--arr) center/contain no-repeat;mask:var(--arr) center/contain no-repeat}
+.rvl{display:flex;flex-wrap:wrap;gap:40px}
+.rvl>a{width:calc(33.33% - 27px);height:480px;border-radius:12px;background:var(--sand);border:1px solid rgba(203,170,120,.2);box-shadow:3px 3px 10px #CBAA7833;padding:30px 30px 35px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .4s,box-shadow .4s}
+.rvl>a:hover{transform:translateY(-6px);box-shadow:6px 10px 20px #CBAA7855}
+.rvl__chip{display:inline-flex;align-items:center;height:26px;padding:0 14px;border-radius:30px;background:var(--blue);color:#fff;font-size:15px;font-weight:600;margin-bottom:10px}
+.rvl__t{font-size:24px;line-height:1.4;font-weight:600;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.rvl__tag{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.rvl__tag span{font-size:16px;color:var(--blue)}
+.rvl__tag span::before{content:'#'}
+.rvl__img{position:relative;height:250px;border-radius:5px;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:0 40px}
+.rvl__img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rvl__img::after{content:'';position:absolute;inset:0;background:rgba(46,34,22,.55)}
+.rvl__img p{position:relative;z-index:1;font-size:19px;line-height:30px;color:#fff;font-weight:600;text-align:center;word-break:keep-all}
+.rvl__img p::before{content:'“';display:block;font-family:var(--serif);font-size:44px;line-height:30px;color:var(--cream)}
+.bnote{font-size:15px;color:#8D897D;margin-bottom:30px}
+
+/* 0604 둘러보기 — 이름표 페이지 + 무한 자동(4초 · 800ms) */
+.tour{padding:100px 0 140px}
+.tour__names{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 30px;margin-bottom:50px}
+.tour__names button{font-size:18px;color:#B4AA9B;padding:8px 0;border-bottom:2px solid transparent;transition:color .3s,border-color .3s}
+.tour__names button[aria-current="true"]{color:var(--ink);font-weight:600;border-color:var(--brown)}
+.tour__v{position:relative;overflow:hidden;border-radius:20px}
+.tour__track{display:flex;gap:0}
+.tour__it{flex:0 0 100%;aspect-ratio:1280/680;position:relative}
+.tour__it img{width:100%;height:100%;object-fit:cover}
+.tour__nav{position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);display:flex;justify-content:space-between;padding:0 30px;z-index:2;pointer-events:none}
+.tour__nav .navi{pointer-events:auto;background:rgba(255,255,255,.85);border-color:#fff}
+
+/* 0605 오시는 길 — 주소 복사 · 지도 버튼 */
+.mapbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.mapbtns a,.mapbtns button{display:inline-flex;align-items:center;gap:8px;height:52px;padding:0 24px;border-radius:30px;font-size:16px;font-weight:600;border:1px solid #E4DACB;background:#fff}
+.mapbtns .nv i{width:20px;height:20px;border-radius:4px;background:#03C75A;color:#fff;font-style:normal;font-size:12px;display:grid;place-items:center}
+.mapbtns .kk i{width:20px;height:20px;border-radius:50%;background:#FEE500;color:#3A1D1D;font-style:normal;font-size:11px;display:grid;place-items:center}
+.mapbtns button{background:var(--brown);color:#fff;border-color:var(--brown)}
+
+/* 회원가입 — 생년월일 · 이메일 도메인 · 약관 보기 팝업 */
+.fsel{display:flex;gap:8px;flex-wrap:wrap}
+.fsel select,.fsel input{height:50px;border:1px solid #DDD;border-radius:6px;padding:0 14px;font-size:16px;background:#fff}
+.fsel select{min-width:110px}
+.fsel .at{align-self:center;color:#888}
+.tpop{position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.5);display:grid;place-items:center;padding:20px}
+.tpop[hidden]{display:none}
+.tpop__box{position:relative;width:min(640px,100%);max-height:80vh;overflow:auto;background:#fff;border-radius:15px;padding:50px 40px 40px}
+.tpop__box h2{font-size:26px;font-weight:700;margin-bottom:20px}
+.tpop__box p,.tpop__box li{font-size:15px;line-height:26px;color:#555}
+.tpop__box ol{margin:10px 0 0 18px;list-style:decimal}
+.tpop__x{position:absolute;right:20px;top:20px;width:36px;height:36px}
+.tpop__x::before,.tpop__x::after{content:'';position:absolute;left:8px;top:17px;width:20px;height:1.6px;background:#333;transform:rotate(45deg)}
+.tpop__x::after{transform:rotate(-45deg)}
+
+@media (max-width:1280px){
+  .spin__sl{padding-left:120px}
+  .dr__pic{width:420px}
+}
+@media (max-width:1000px){
+  .spin>.spin__sec{position:relative;height:auto;min-height:0;padding:calc(var(--hd) + 20px) 0 60px}
+  .spin__h{position:static;margin-bottom:28px}.spin__h p:first-child{font-size:18px}.spin__h .sh__t{font-size:28px;line-height:40px}
+  .spin__st{height:auto;min-height:0;display:flex;flex-direction:column;gap:48px}
+  .spin__sl{position:relative;left:auto;transform:none;opacity:1;flex-direction:column;padding:0;width:auto;gap:18px}
+  .spin__img{width:100%;height:auto}.spin__lg{aspect-ratio:4/3}.spin__sm{width:120px;height:92px;left:auto;right:12px;bottom:-20px;transform:none}
+  .spin__sl .spin__en span,.spin__sl .spin__lg img,.spin__sl .spin__sm img{transform:none!important;opacity:1!important}.spin__sl .spin__cap{opacity:1}
+  .spin__en{width:auto}.spin__en span{font-size:48px;color:var(--brown)}.spin__cap{width:auto}.spin__cap p{font-size:15px;line-height:26px}
+  .spec{padding-top:72px}.spec .flowt p{font-size:56px}
+  .spec__vl{display:none}
+  .spec__it,.spec__it--02{padding:32px 0}
+  .spec__it .wrap,.spec__it--03 .wrap{display:flex;flex-direction:column;gap:18px;align-items:stretch}
+  .spec__it--04 .wrap>div{width:auto}.spec__it--04 .wrap>div:last-child{text-align:left}
+  .spec__no{font-size:28px}.spec__t{font-size:22px;line-height:32px}.spec__d{font-size:14px;line-height:24px;margin-top:12px}
+  .drs{padding:72px 0 56px}
+  .dr,.drs:nth-of-type(even) .dr{flex-direction:column;gap:28px}
+  .dr__pic{width:100%;position:static}.dr__txt{width:auto}
+  .dr__name{font-size:26px}.dr__name small{font-size:14px}
+  .dr__msg{margin-top:20px}.dr__msg p.q{font-size:18px;line-height:28px}.dr__msg p.d{font-size:14px;line-height:24px}
+  .dr__h{font-size:18px;margin:36px 0 14px}
+  .dr__cv{flex-direction:column;gap:0}.dr__cv li{font-size:14px;line-height:24px}.dr__cv li::before{top:11px}
+  .dr__tb{font-size:13px}
+  .cml{gap:14px}.cml>li{width:100%;height:auto}
+  .cml a{padding:22px 20px;flex-direction:column-reverse}
+  .cml__img{width:100%;min-width:0;height:200px}
+  .cml__cat{font-size:14px;height:28px;line-height:28px;padding:0 14px;margin-bottom:12px}
+  .cml__t{font-size:18px}.cml__d{position:static;margin-top:12px;font-size:14px}
+  .rvl{gap:14px}.rvl>a{width:100%;height:auto;gap:16px;padding:22px 20px}
+  .rvl__t{font-size:18px}.rvl__tag span{font-size:14px}.rvl__img{height:200px}.rvl__img p{font-size:15px;line-height:24px}
+  .tour{padding:40px 0 72px}
+  .tour__names{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;gap:20px;margin:0 calc(var(--gut) * -1) 24px;padding:0 var(--gut);scrollbar-width:none}
+  .tour__names::-webkit-scrollbar{display:none}
+  .tour__names button{font-size:15px;white-space:nowrap}
+  .tour__it{aspect-ratio:4/3}.tour__nav{padding:0 10px}.tour__nav .navi{width:40px;height:40px}
+  .mapbtns a,.mapbtns button{height:44px;padding:0 16px;font-size:14px}
+  .fsel select{min-width:0;flex:1}
+  .tpop__box{padding:40px 20px 24px}
+}
+@media (prefers-reduced-motion:reduce){
+  .spin>.spin__sec{position:relative;height:auto}
+  .spin__st{height:auto;display:flex;flex-direction:column;gap:60px}
+  .spin__sl{position:relative;left:auto;transform:none;opacity:1}
+  .spin__sl .spin__en span,.spin__sl .spin__lg img,.spin__sl .spin__sm img{transform:none!important;opacity:1!important}.spin__sl .spin__cap{opacity:1}
+  .spin__lg{height:560px}
+}
+.drs:nth-of-type(3n+3) .dr__tb td{background:#fff;color:var(--ink)}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">본문 바로가기</a>
-<header class="hd" data-mode="top" data-autohide="1">
+<header class="hd" data-mode="top">
 <div class="hd__in">
 <a href="./index.html" aria-label="소담한의원 홈으로"><span class="logo"><svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4.5c-4.4 3.3-6.6 7-6.6 11 0 3.9 2.9 6.9 6.6 6.9s6.6-3 6.6-6.9c0-4-2.2-7.7-6.6-11Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 11v17.5M16 17.5l3.4-3M16 21.5l-3.4-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6 27.5c3.2-1.6 6.5-2.4 10-2.4s6.8.8 10 2.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="logo__txt"><span class="logo__ko">소담한의원</span><span class="logo__en">SODAM KOREAN MEDICINE CLINIC</span></span></span></a>
 <nav aria-label="주 메뉴" style="margin-left:auto"><ul class="gnb"><li><a href="./diagnosis.html">통증 · 추나클리닉</a></li><li><a href="./diet-principle.html">다이어트 프로그램</a></li><li><a href="./beauty-skin.html">스페셜 클리닉</a></li><li><a href="./traffic-injury.html">교통사고 후유증</a></li><li><a href="./before-after.html">치료 사례</a></li><li><a href="./about.html">소담한의원</a></li></ul></nav>
-<div class="hd__rt"><div class="hd__acc"><a href="./join.html">로그인</a><a href="./join.html">회원가입</a></div><button class="hd__burger" type="button" data-smap aria-expanded="false" aria-label="전체 메뉴 열기"><i></i><i></i><i></i><i></i></button></div>
+<div class="hd__rt"><div class="hd__acc"><button type="button" data-login>로그인</button><a href="./join.html">회원가입</a></div><button class="hd__burger" type="button" data-smap aria-expanded="false" aria-label="전체 메뉴 열기"><i></i><i></i><i></i><i></i></button></div>
 </div>
 <div class="mega"><div class="mega__pane"><img class="mega__bg" src="./assets/mega-1.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">통증 · 추나클리닉</p><ul><li><a href="./diagnosis.html">검사부터 다릅니다</a></li><li><a href="./neck-pain.html">목 통증</a></li><li><a href="./shoulder-pain.html">어깨 통증</a></li><li><a href="./back-pain.html">허리 통증</a></li><li><a href="./limb-pain.html">팔다리 · 관절 통증</a></li><li><a href="./posture.html">체형 교정</a></li><li><a href="./rehab.html">외상 · 수술 후 재활</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-2.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">다이어트 프로그램</p><ul><li><a href="./diet-principle.html">소담 다이어트 원리</a></li><li><a href="./diet-situation.html">상황별 맞춤 다이어트</a></li><li><a href="./diet-body-type.html">체형별 다이어트</a></li><li><a href="./lipolysis-injection.html">지방분해 약침</a></li><li><a href="./detox.html">소담 디톡스 프로그램</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-3.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">스페셜 클리닉</p><ul><li><a href="./beauty-skin.html">피부 · 미용 클리닉</a></li><li><a href="./custom-herbal.html">1:1 맞춤 치료 한약</a></li><li><a href="./immune-tonic.html">면역 보약</a></li><li><a href="./internal-medicine.html">내과 질환 클리닉</a></li><li><a href="./mental-health.html">한방 마음건강 클리닉</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-4.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">교통사고 후유증</p><ul><li><a href="./traffic-injury.html">교통사고 후유증</a></li><li><a href="./traffic-symptoms.html">증상별 후유증 관리</a></li><li><a href="./bruise-care.html">어혈 집중 관리</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-5.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">치료 사례</p><ul><li><a href="./before-after.html">전후 사진</a></li><li><a href="./reviews.html">치료 후기</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-6.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">소담한의원</p><ul><li><a href="./about.html">소담의 특별함</a></li><li><a href="./doctors.html">의료진 소개</a></li><li><a href="./community.html">커뮤니티</a></li><li><a href="./tour.html">병원 둘러보기</a></li><li><a href="./location.html">오시는 길</a></li></ul></div></div></div>
 </header>
 <div class="smap" role="dialog" aria-modal="true" aria-label="전체 메뉴"><div class="smap__bg"><img src="./assets/sitemap-bg.jpg" alt="" loading="lazy"></div><div class="smap__list"><div class="smap__cols"><div class="smap__grp"><p>통증 · 추나클리닉</p><ul><li><a href="./diagnosis.html">검사부터 다릅니다</a></li><li><a href="./neck-pain.html">목 통증</a></li><li><a href="./shoulder-pain.html">어깨 통증</a></li><li><a href="./back-pain.html">허리 통증</a></li><li><a href="./limb-pain.html">팔다리 · 관절 통증</a></li><li><a href="./posture.html">체형 교정</a></li><li><a href="./rehab.html">외상 · 수술 후 재활</a></li></ul></div><div class="smap__grp"><p>다이어트 프로그램</p><ul><li><a href="./diet-principle.html">소담 다이어트 원리</a></li><li><a href="./diet-situation.html">상황별 맞춤 다이어트</a></li><li><a href="./diet-body-type.html">체형별 다이어트</a></li><li><a href="./lipolysis-injection.html">지방분해 약침</a></li><li><a href="./detox.html">소담 디톡스 프로그램</a></li></ul></div><div class="smap__grp"><p>스페셜 클리닉</p><ul><li><a href="./beauty-skin.html">피부 · 미용 클리닉</a></li><li><a href="./custom-herbal.html">1:1 맞춤 치료 한약</a></li><li><a href="./immune-tonic.html">면역 보약</a></li><li><a href="./internal-medicine.html">내과 질환 클리닉</a></li><li><a href="./mental-health.html">한방 마음건강 클리닉</a></li></ul></div><div class="smap__grp"><p>교통사고 후유증</p><ul><li><a href="./traffic-injury.html">교통사고 후유증</a></li><li><a href="./traffic-symptoms.html">증상별 후유증 관리</a></li><li><a href="./bruise-care.html">어혈 집중 관리</a></li></ul></div><div class="smap__grp"><p>치료 사례</p><ul><li><a href="./before-after.html">전후 사진</a></li><li><a href="./reviews.html">치료 후기</a></li></ul></div><div class="smap__grp"><p>소담한의원</p><ul><li><a href="./about.html">소담의 특별함</a></li><li><a href="./doctors.html">의료진 소개</a></li><li><a href="./community.html">커뮤니티</a></li><li><a href="./tour.html">병원 둘러보기</a></li><li><a href="./location.html">오시는 길</a></li></ul></div></div><div class="smap__pic"><button class="smap__x" type="button" data-smap-close aria-label="전체 메뉴 닫기"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="m1 1 12 12M13 1 1 13" stroke="#2C2C2C" stroke-width="1.6"/></svg></button><img src="./assets/mega-6.jpg" alt="" loading="lazy" width="380" height="560"></div></div><button class="smap__x" type="button" data-smap-close aria-label="전체 메뉴 닫기" style="position:fixed;right:24px;top:24px;z-index:3"><svg viewBox="0 0 14 14" aria-hidden="true"><path d="m1 1 12 12M13 1 1 13" stroke="#2C2C2C" stroke-width="1.6"/></svg></button></div>
 <main id="main">
-<section class="sub-hero sub-hero--flat sub-hero--flatc"><div class="wrap sub-hero__txt"><nav class="crumb" aria-label="현재 위치"><a href="./index.html" aria-label="홈"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 2 2 8.6V18h5.5v-5h5v5H18V8.6Z"/></svg></a><i></i><span>안내</span><i></i><span>회원가입</span></nav><h1 class="sub-hero__t">회원가입</h1></div></section>
+<section class="sub-hero sub-hero--member"><div class="wrap sub-hero__txt"><nav class="crumb" aria-label="현재 위치"><a href="./index.html" aria-label="홈"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 2 2 8.6V18h5.5v-5h5v5H18V8.6Z"/></svg></a><i></i><span>안내</span><i></i><span>회원가입</span></nav><h1 class="sub-hero__t">회원가입</h1></div></section>
 <div class="wrap bwrap">
   <form class="fwrap" data-demo-form novalidate>
     <div class="fstep"><p class="on"><span>1</span>약관 동의 및 정보 입력</p><p>가입 완료</p></div>
     <h3 class="fh">이용 약관 동의</h3>
     <div class="fbox">
       <div class="agree agree--all"><label><input type="checkbox" data-all>전체 동의</label></div>
-      <div class="agree"><label><input type="checkbox" data-agree required>이용약관 동의 (필수)</label><a href="./terms.html">내용 보기</a></div>
-      <div class="agree"><label><input type="checkbox" data-agree required>개인정보 수집 · 이용 동의 (필수)</label><a href="./privacy.html">내용 보기</a></div>
+      <div class="agree"><label><input type="checkbox" data-agree required>이용약관 동의 (필수)</label><button type="button" data-tpop="tpTerms">내용 보기</button></div>
+      <div class="agree"><label><input type="checkbox" data-agree required>개인정보 수집 · 이용 동의 (필수)</label><button type="button" data-tpop="tpPriv">내용 보기</button></div>
       <div class="agree"><label><input type="checkbox" data-agree>마케팅 정보 수신 동의 (선택)</label></div>
     </div>
     <h3 class="fh">개인정보 입력 <small>* 필수 입력</small></h3>
@@ -47,11 +259,12 @@
       <div class="frow"><label class="req" for="pw2">비밀번호 확인</label><div class="finp"><input id="pw2" type="password" required autocomplete="new-password" placeholder="한 번 더 입력"></div></div>
       <div class="frow"><label class="req" for="nm">이름</label><div class="finp"><input id="nm" required autocomplete="name" placeholder="이름"></div></div>
       <div class="frow"><label class="req" for="tel">휴대폰 번호</label><div class="finp"><input id="tel" type="tel" required autocomplete="tel" placeholder="- 없이 숫자만"></div></div>
-      <div class="frow"><label for="em">이메일</label><div class="finp"><input id="em" type="email" autocomplete="email" placeholder="example@email.com"></div></div>
+      <div class="frow"><span class="lb" id="bdL">생년월일</span><div class="finp"><div class="fsel" role="group" aria-labelledby="bdL"><select aria-label="태어난 해"><option value="">년</option><option>2012</option><option>2011</option><option>2010</option><option>2009</option><option>2008</option><option>2007</option><option>2006</option><option>2005</option><option>2004</option><option>2003</option><option>2002</option><option>2001</option><option>2000</option><option>1999</option><option>1998</option><option>1997</option><option>1996</option><option>1995</option><option>1994</option><option>1993</option><option>1992</option><option>1991</option><option>1990</option><option>1989</option><option>1988</option><option>1987</option><option>1986</option><option>1985</option><option>1984</option><option>1983</option><option>1982</option><option>1981</option><option>1980</option><option>1979</option><option>1978</option><option>1977</option><option>1976</option><option>1975</option><option>1974</option><option>1973</option><option>1972</option><option>1971</option><option>1970</option><option>1969</option><option>1968</option><option>1967</option><option>1966</option><option>1965</option><option>1964</option><option>1963</option><option>1962</option><option>1961</option><option>1960</option><option>1959</option><option>1958</option><option>1957</option><option>1956</option><option>1955</option><option>1954</option><option>1953</option><option>1952</option><option>1951</option><option>1950</option><option>1949</option><option>1948</option><option>1947</option><option>1946</option><option>1945</option><option>1944</option><option>1943</option><option>1942</option><option>1941</option><option>1940</option><option>1939</option><option>1938</option><option>1937</option><option>1936</option><option>1935</option><option>1934</option><option>1933</option><option>1932</option><option>1931</option><option>1930</option></select><select aria-label="태어난 달"><option value="">월</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select><select aria-label="태어난 날"><option value="">일</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>13</option><option>14</option><option>15</option><option>16</option><option>17</option><option>18</option><option>19</option><option>20</option><option>21</option><option>22</option><option>23</option><option>24</option><option>25</option><option>26</option><option>27</option><option>28</option><option>29</option><option>30</option><option>31</option></select></div></div></div><div class="frow"><label for="em">이메일</label><div class="finp"><div class="fsel"><input id="em" autocomplete="email" placeholder="아이디" style="flex:1;min-width:120px"><span class="at">@</span><input id="emDomain" aria-label="이메일 도메인" placeholder="직접 입력" style="flex:1;min-width:120px"><select id="emSel" aria-label="이메일 도메인 선택"><option value="">직접 입력</option><option>naver.com</option><option>gmail.com</option><option>daum.net</option><option>kakao.com</option></select></div></div></div>
     </div>
     <div class="fbtns"><a class="pbtn pbtn--line" href="./index.html">취소</a><button class="pbtn" type="submit">가입하기</button></div>
   </form>
 </div>
+<div class="tpop" id="tpTerms" role="dialog" aria-modal="true" aria-labelledby="tpTermsT" hidden><div class="tpop__box"><button class="tpop__x" type="button" aria-label="닫기"></button><h2 id="tpTermsT">이용약관</h2><p>소담한의원 홈페이지 이용에 관한 기본 사항입니다.</p><ol><li>회원은 가입 시 정확한 정보를 입력해야 합니다.</li><li>게시물의 저작권은 작성자에게 있습니다.</li><li>서비스 운영에 필요한 공지는 홈페이지에 게시합니다.</li></ol><p style="margin-top:14px"><a href="./terms.html" style="color:var(--point);text-decoration:underline">전문 보기</a></p></div></div><div class="tpop" id="tpPriv" role="dialog" aria-modal="true" aria-labelledby="tpPrivT" hidden><div class="tpop__box"><button class="tpop__x" type="button" aria-label="닫기"></button><h2 id="tpPrivT">개인정보 수집 · 이용 동의</h2><p>회원 가입과 상담 안내를 위해 아래 정보를 수집합니다.</p><ol><li>수집 항목: 아이디, 비밀번호, 이름, 휴대폰 번호, 이메일, 생년월일</li><li>이용 목적: 회원 관리, 상담 · 예약 안내</li><li>보유 기간: 회원 탈퇴 시까지</li></ol><p style="margin-top:14px"><a href="./privacy.html" style="color:var(--point);text-decoration:underline">전문 보기</a></p></div></div>
 </main>
 <footer class="ft">
 <img class="ft__bg" src="./assets/footer-bg.jpg" alt="" loading="lazy"><span class="ft__bg-tint"></span>
@@ -67,7 +280,42 @@
 </footer>
 <aside class="quick" aria-label="빠른 상담"><ul class="quick__list"><li><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><path fill="currentColor" d="M13 3C6.9 3 2 6.9 2 11.7c0 3.1 2 5.8 5.1 7.3l-1.1 4 4.5-2.9c.8.1 1.6.2 2.5.2 6.1 0 11-3.9 11-8.6S19.1 3 13 3Z"/><text x="13" y="14.6" font-size="6.2" font-weight="800" text-anchor="middle" fill="#F3F1EC" font-family="Arial">TALK</text></svg>카톡 상담</a></li><li><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><rect x="3" y="3" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M9 8h3l3 5V8h2.9v10H15l-3-5v5H9z"/></svg>네이버 예약</a></li><li><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><path fill="currentColor" d="M5 4h2.6v6.3c.8-.9 1.9-1.4 3.2-1.4 2.8 0 4.6 2.2 4.6 5.3S13.6 19.6 10.8 19.6c-1.3 0-2.4-.5-3.2-1.4v1.1H5Zm5.2 7.3c-1.5 0-2.6 1.2-2.6 2.9s1.1 3 2.6 3 2.5-1.2 2.5-3-1-2.9-2.5-2.9ZM19 4h2.6v15.4H19z"/></svg>블로그</a></li><li class="tel"><a href="tel:031-000-0000"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>031.000<br>0000</a></li></ul><button class="quick__top" type="button" data-top aria-label="맨 위로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5M6 11l6-6 6 6" fill="none" stroke="#2C2C2C" stroke-width="1.6"/></svg></button></aside>
 <nav class="mbar" aria-label="빠른 상담"><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><path fill="currentColor" d="M13 3C6.9 3 2 6.9 2 11.7c0 3.1 2 5.8 5.1 7.3l-1.1 4 4.5-2.9c.8.1 1.6.2 2.5.2 6.1 0 11-3.9 11-8.6S19.1 3 13 3Z"/><text x="13" y="14.6" font-size="6.2" font-weight="800" text-anchor="middle" fill="#F3F1EC" font-family="Arial">TALK</text></svg>카톡 상담</a><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><rect x="3" y="3" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M9 8h3l3 5V8h2.9v10H15l-3-5v5H9z"/></svg>네이버 예약</a><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><path fill="currentColor" d="M5 4h2.6v6.3c.8-.9 1.9-1.4 3.2-1.4 2.8 0 4.6 2.2 4.6 5.3S13.6 19.6 10.8 19.6c-1.3 0-2.4-.5-3.2-1.4v1.1H5Zm5.2 7.3c-1.5 0-2.6 1.2-2.6 2.9s1.1 3 2.6 3 2.5-1.2 2.5-3-1-2.9-2.5-2.9ZM19 4h2.6v15.4H19z"/></svg>블로그</a><a class="mbar__call" href="tel:031-000-0000"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>전화 상담</a></nav>
+<div class="lpop" id="loginPop" role="dialog" aria-modal="true" aria-labelledby="lpopT" hidden>
+<div class="lpop__box">
+<button class="lpop__x" type="button" data-lpop-close aria-label="닫기"></button>
+<form class="lpop__pane" data-pane="login" data-demo-form novalidate><h2 class="lpop__t" id="lpopT">로그인</h2>
+<label class="lpop__row"><span>아이디</span><input required autocomplete="username" placeholder="아이디를 입력해 주세요."></label>
+<label class="lpop__row"><span>비밀번호</span><input type="password" required autocomplete="current-password" placeholder="비밀번호를 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn" type="submit">로그인</button><a class="lpop__btn lpop__btn--navy" href="./join.html">회원가입</a></div>
+<p class="lpop__links"><button type="button" data-lpop="findid">아이디 찾기</button><span></span><button type="button" data-lpop="findpw">비밀번호 찾기</button></p></form>
+<form class="lpop__pane" data-pane="findid" data-demo-form novalidate hidden><h2 class="lpop__t">아이디 찾기</h2>
+<label class="lpop__row"><span>이름</span><input required autocomplete="name" placeholder="이름을 입력해 주세요."></label>
+<label class="lpop__row"><span>이메일</span><input type="email" required autocomplete="email" placeholder="가입한 이메일을 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn lpop__btn--lg" type="submit">아이디 찾기</button></div>
+<p class="lpop__links"><button type="button" data-lpop="login">로그인으로 돌아가기</button></p></form>
+<form class="lpop__pane" data-pane="findpw" data-demo-form novalidate hidden><h2 class="lpop__t">비밀번호 찾기</h2>
+<label class="lpop__row"><span>이름</span><input required autocomplete="name" placeholder="이름을 입력해 주세요."></label>
+<label class="lpop__row"><span>아이디</span><input required autocomplete="username" placeholder="아이디를 입력해 주세요."></label>
+<label class="lpop__row"><span>이메일</span><input type="email" required autocomplete="email" placeholder="가입한 이메일을 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn lpop__btn--lg" type="submit">비밀번호 찾기</button></div>
+<p class="lpop__links"><button type="button" data-lpop="login">로그인으로 돌아가기</button></p></form>
+</div></div>
 <script src="./assets/site.js"></script>
+<script>
+/* 회원가입 — 이메일 도메인 선택 · 약관 보기 팝업 (원본 member_join) */
+(function(){
+  var dom=document.getElementById('emDomain'), sel=document.getElementById('emSel');
+  if(dom&&sel) sel.addEventListener('change',function(){ dom.value=sel.value; dom.readOnly=!!sel.value; if(!sel.value) dom.focus() });
+  var opener=null;
+  document.querySelectorAll('[data-tpop]').forEach(function(b){ b.addEventListener('click',function(){
+    var p=document.getElementById(b.dataset.tpop); opener=b; p.hidden=false; p.querySelector('.tpop__x').focus() }) });
+  function close(p){ p.hidden=true; if(opener) opener.focus() }
+  document.querySelectorAll('.tpop').forEach(function(p){
+    p.addEventListener('click',function(e){ if(e.target===p||e.target.closest('.tpop__x')) close(p) });
+    addEventListener('keydown',function(e){ if(e.key==='Escape'&&!p.hidden) close(p) });
+  });
+})();
+</script>
 <script>document.addEventListener("click",function(e){var a=e.target.closest("[data-demo]");if(a){e.preventDefault();alert("디자인 예시 화면입니다. 실제 납품 시 병원 채널로 연결됩니다.");}});</script>
 </body>
 </html>

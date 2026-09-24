@@ -373,6 +373,30 @@ html.js .hero.is-in .hero__chg{opacity:1}
   .hero .hero__c1{display:none}.hero .hero__c2{top:0}
   .film p{width:100%}
 }
+
+/* 공지 팝업 — 원본 layerPop: 딤 0.7 · 3장 · 간격 20 · 한 장 최소 414 · 높이 580 · 라운드 12 */
+.npop{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.7);display:grid;place-items:center;padding:20px}
+.npop[hidden]{display:none}
+.npop__wrap{width:min(1282px,100%)}
+.npop__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.npop__nav{display:flex;gap:8px}
+.npop__nav button{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.6)}
+.npop__nav button::before{content:'';display:block;width:14px;height:12px;margin:auto;background:#fff;-webkit-mask:var(--arr) center/contain no-repeat;mask:var(--arr) center/contain no-repeat;transform:scaleX(-1)}
+.npop__nav button+button::before{transform:none}
+.npop__opt{display:flex;align-items:center;gap:20px}
+.npop__opt label{display:flex;align-items:center;gap:8px;font-size:14px;color:#fff;cursor:pointer}
+.npop__opt input{width:16px;height:16px;accent-color:var(--brown)}
+.npop__x{position:relative;width:30px;height:30px}
+.npop__x::before,.npop__x::after{content:'';position:absolute;left:50%;top:50%;width:22px;height:2px;background:#fff;transform:translate(-50%,-50%) rotate(45deg)}
+.npop__x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.npop__view{overflow:hidden;border-radius:12px}
+.npop__track{display:flex;gap:20px;transition:transform .8s ease}
+.npop__track li{flex:0 0 calc((100% - 40px)/3);min-width:0;border-radius:12px;overflow:hidden}
+.npop__track img{width:100%;height:auto;max-height:580px;aspect-ratio:414/580;object-fit:cover}
+@media (max-width:1000px){
+  .npop__track li{flex-basis:78%}
+  .npop__opt{gap:12px}
+}
 </style>
 </head>
 <body class="is-main">
@@ -381,7 +405,7 @@ html.js .hero.is-in .hero__chg{opacity:1}
 <div class="hd__in">
 <a href="./index.html" aria-label="소담한의원 홈으로"><span class="logo"><svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M16 4.5c-4.4 3.3-6.6 7-6.6 11 0 3.9 2.9 6.9 6.6 6.9s6.6-3 6.6-6.9c0-4-2.2-7.7-6.6-11Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 11v17.5M16 17.5l3.4-3M16 21.5l-3.4-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M6 27.5c3.2-1.6 6.5-2.4 10-2.4s6.8.8 10 2.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span class="logo__txt"><span class="logo__ko">소담한의원</span><span class="logo__en">SODAM KOREAN MEDICINE CLINIC</span></span></span></a>
 <nav aria-label="주 메뉴" style="margin-left:auto"><ul class="gnb"><li><a href="./diagnosis.html">통증 · 추나클리닉</a></li><li><a href="./diet-principle.html">다이어트 프로그램</a></li><li><a href="./beauty-skin.html">스페셜 클리닉</a></li><li><a href="./traffic-injury.html">교통사고 후유증</a></li><li><a href="./before-after.html">치료 사례</a></li><li><a href="./about.html">소담한의원</a></li></ul></nav>
-<div class="hd__rt"><div class="hd__acc"><a href="./join.html">로그인</a><a href="./join.html">회원가입</a></div><button class="hd__burger" type="button" data-smap aria-expanded="false" aria-label="전체 메뉴 열기"><i></i><i></i><i></i><i></i></button></div>
+<div class="hd__rt"><div class="hd__acc"><button type="button" data-login>로그인</button><a href="./join.html">회원가입</a></div><button class="hd__burger" type="button" data-smap aria-expanded="false" aria-label="전체 메뉴 열기"><i></i><i></i><i></i><i></i></button></div>
 </div>
 <div class="mega"><div class="mega__pane"><img class="mega__bg" src="./assets/mega-1.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">통증 · 추나클리닉</p><ul><li><a href="./diagnosis.html">검사부터 다릅니다</a></li><li><a href="./neck-pain.html">목 통증</a></li><li><a href="./shoulder-pain.html">어깨 통증</a></li><li><a href="./back-pain.html">허리 통증</a></li><li><a href="./limb-pain.html">팔다리 · 관절 통증</a></li><li><a href="./posture.html">체형 교정</a></li><li><a href="./rehab.html">외상 · 수술 후 재활</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-2.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">다이어트 프로그램</p><ul><li><a href="./diet-principle.html">소담 다이어트 원리</a></li><li><a href="./diet-situation.html">상황별 맞춤 다이어트</a></li><li><a href="./diet-body-type.html">체형별 다이어트</a></li><li><a href="./lipolysis-injection.html">지방분해 약침</a></li><li><a href="./detox.html">소담 디톡스 프로그램</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-3.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">스페셜 클리닉</p><ul><li><a href="./beauty-skin.html">피부 · 미용 클리닉</a></li><li><a href="./custom-herbal.html">1:1 맞춤 치료 한약</a></li><li><a href="./immune-tonic.html">면역 보약</a></li><li><a href="./internal-medicine.html">내과 질환 클리닉</a></li><li><a href="./mental-health.html">한방 마음건강 클리닉</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-4.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">교통사고 후유증</p><ul><li><a href="./traffic-injury.html">교통사고 후유증</a></li><li><a href="./traffic-symptoms.html">증상별 후유증 관리</a></li><li><a href="./bruise-care.html">어혈 집중 관리</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-5.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">치료 사례</p><ul><li><a href="./before-after.html">전후 사진</a></li><li><a href="./reviews.html">치료 후기</a></li></ul></div></div><div class="mega__pane"><img class="mega__bg" src="./assets/mega-6.jpg" alt="" loading="lazy" width="576" height="480"><div class="mega__in"><p class="mega__t">소담한의원</p><ul><li><a href="./about.html">소담의 특별함</a></li><li><a href="./doctors.html">의료진 소개</a></li><li><a href="./community.html">커뮤니티</a></li><li><a href="./tour.html">병원 둘러보기</a></li><li><a href="./location.html">오시는 길</a></li></ul></div></div></div>
 </header>
@@ -639,6 +663,23 @@ html.js .hero.is-in .hero__chg{opacity:1}
     </ul>
   </div>
 </section>
+
+<!-- 공지 팝업 — 원본 layerPop: 3장씩 · 이전/다음 · 4장 이상이면 3초 자동 · 오늘 열지 않기(하루) -->
+<div class="npop" id="noticePop" role="dialog" aria-modal="true" aria-label="공지 팝업" hidden>
+  <div class="npop__wrap">
+    <div class="npop__top">
+      <div class="npop__nav"><button type="button" data-np="-1" aria-label="이전 공지"></button><button type="button" data-np="1" aria-label="다음 공지"></button></div>
+      <div class="npop__opt"><label><input type="checkbox" data-np-today>오늘 열지 않기</label><button class="npop__x" type="button" data-np-close aria-label="공지 닫기"></button></div>
+    </div>
+    <div class="npop__view"><ul class="npop__track">
+      <li><a href="./community-view.html"><img src="./assets/notice-1.jpg" alt="추석 연휴 진료 안내" width="414" height="580" data-tone="light"></a></li>
+      <li><a href="./community-view.html"><img src="./assets/notice-2.jpg" alt="가을맞이 체형 분석 무료 체험" width="414" height="580" data-tone="light"></a></li>
+      <li><a href="./diet-principle.html"><img src="./assets/notice-3.jpg" alt="다이어트 첫 상담 체성분 검사 안내" width="414" height="580" data-tone="light"></a></li>
+      <li><a href="./diagnosis.html"><img src="./assets/notice-4.jpg" alt="통증 정밀 검사 안내" width="414" height="580" data-tone="light"></a></li>
+      <li><a href="./traffic-injury.html"><img src="./assets/notice-5.jpg" alt="교통사고 치료 자동차 보험 안내" width="414" height="580" data-tone="light"></a></li>
+    </ul></div>
+  </div>
+</div>
 </main>
 <footer class="ft">
 <img class="ft__bg" src="./assets/footer-bg.jpg" alt="" loading="lazy"><span class="ft__bg-tint"></span>
@@ -654,6 +695,26 @@ html.js .hero.is-in .hero__chg{opacity:1}
 </footer>
 <aside class="quick" aria-label="빠른 상담"><ul class="quick__list"><li><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><path fill="currentColor" d="M13 3C6.9 3 2 6.9 2 11.7c0 3.1 2 5.8 5.1 7.3l-1.1 4 4.5-2.9c.8.1 1.6.2 2.5.2 6.1 0 11-3.9 11-8.6S19.1 3 13 3Z"/><text x="13" y="14.6" font-size="6.2" font-weight="800" text-anchor="middle" fill="#F3F1EC" font-family="Arial">TALK</text></svg>카톡 상담</a></li><li><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><rect x="3" y="3" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M9 8h3l3 5V8h2.9v10H15l-3-5v5H9z"/></svg>네이버 예약</a></li><li><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><path fill="currentColor" d="M5 4h2.6v6.3c.8-.9 1.9-1.4 3.2-1.4 2.8 0 4.6 2.2 4.6 5.3S13.6 19.6 10.8 19.6c-1.3 0-2.4-.5-3.2-1.4v1.1H5Zm5.2 7.3c-1.5 0-2.6 1.2-2.6 2.9s1.1 3 2.6 3 2.5-1.2 2.5-3-1-2.9-2.5-2.9ZM19 4h2.6v15.4H19z"/></svg>블로그</a></li><li class="tel"><a href="tel:031-000-0000"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>031.000<br>0000</a></li></ul><button class="quick__top" type="button" data-top aria-label="맨 위로"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V5M6 11l6-6 6 6" fill="none" stroke="#2C2C2C" stroke-width="1.6"/></svg></button></aside>
 <nav class="mbar" aria-label="빠른 상담"><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><path fill="currentColor" d="M13 3C6.9 3 2 6.9 2 11.7c0 3.1 2 5.8 5.1 7.3l-1.1 4 4.5-2.9c.8.1 1.6.2 2.5.2 6.1 0 11-3.9 11-8.6S19.1 3 13 3Z"/><text x="13" y="14.6" font-size="6.2" font-weight="800" text-anchor="middle" fill="#F3F1EC" font-family="Arial">TALK</text></svg>카톡 상담</a><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><rect x="3" y="3" width="20" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path fill="currentColor" d="M9 8h3l3 5V8h2.9v10H15l-3-5v5H9z"/></svg>네이버 예약</a><a href="#" data-demo><svg viewBox="0 0 26 26" aria-hidden="true"><path fill="currentColor" d="M5 4h2.6v6.3c.8-.9 1.9-1.4 3.2-1.4 2.8 0 4.6 2.2 4.6 5.3S13.6 19.6 10.8 19.6c-1.3 0-2.4-.5-3.2-1.4v1.1H5Zm5.2 7.3c-1.5 0-2.6 1.2-2.6 2.9s1.1 3 2.6 3 2.5-1.2 2.5-3-1-2.9-2.5-2.9ZM19 4h2.6v15.4H19z"/></svg>블로그</a><a class="mbar__call" href="tel:031-000-0000"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg>전화 상담</a></nav>
+<div class="lpop" id="loginPop" role="dialog" aria-modal="true" aria-labelledby="lpopT" hidden>
+<div class="lpop__box">
+<button class="lpop__x" type="button" data-lpop-close aria-label="닫기"></button>
+<form class="lpop__pane" data-pane="login" data-demo-form novalidate><h2 class="lpop__t" id="lpopT">로그인</h2>
+<label class="lpop__row"><span>아이디</span><input required autocomplete="username" placeholder="아이디를 입력해 주세요."></label>
+<label class="lpop__row"><span>비밀번호</span><input type="password" required autocomplete="current-password" placeholder="비밀번호를 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn" type="submit">로그인</button><a class="lpop__btn lpop__btn--navy" href="./join.html">회원가입</a></div>
+<p class="lpop__links"><button type="button" data-lpop="findid">아이디 찾기</button><span></span><button type="button" data-lpop="findpw">비밀번호 찾기</button></p></form>
+<form class="lpop__pane" data-pane="findid" data-demo-form novalidate hidden><h2 class="lpop__t">아이디 찾기</h2>
+<label class="lpop__row"><span>이름</span><input required autocomplete="name" placeholder="이름을 입력해 주세요."></label>
+<label class="lpop__row"><span>이메일</span><input type="email" required autocomplete="email" placeholder="가입한 이메일을 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn lpop__btn--lg" type="submit">아이디 찾기</button></div>
+<p class="lpop__links"><button type="button" data-lpop="login">로그인으로 돌아가기</button></p></form>
+<form class="lpop__pane" data-pane="findpw" data-demo-form novalidate hidden><h2 class="lpop__t">비밀번호 찾기</h2>
+<label class="lpop__row"><span>이름</span><input required autocomplete="name" placeholder="이름을 입력해 주세요."></label>
+<label class="lpop__row"><span>아이디</span><input required autocomplete="username" placeholder="아이디를 입력해 주세요."></label>
+<label class="lpop__row"><span>이메일</span><input type="email" required autocomplete="email" placeholder="가입한 이메일을 입력해 주세요."></label>
+<div class="lpop__btns"><button class="lpop__btn lpop__btn--lg" type="submit">비밀번호 찾기</button></div>
+<p class="lpop__links"><button type="button" data-lpop="login">로그인으로 돌아가기</button></p></form>
+</div></div>
 <script src="./assets/site.js"></script>
 <script>
 /* 메인 연출 — 원본 main.js(GSAP ScrollTrigger) 타임라인을 같은 시간표로 옮겼다. 라이브러리 없이 스크롤 진행률로 계산한다. */
@@ -788,6 +849,30 @@ html.js .hero.is-in .hero__chg{opacity:1}
     addEventListener('resize',function(){place(false)});
     place(false); restart();
   }
+})();
+
+/* 공지 팝업 — 원본 main.js funcMain: 쿠키 c_main_popup 이 N 이면 열지 않음(하루) */
+(function(){
+  var pop=document.getElementById('noticePop'); if(!pop) return;
+  var KEY='sodam_notice_hide';
+  try{ var until=+localStorage.getItem(KEY)||0; if(Date.now()<until) return }catch{}
+  var track=pop.querySelector('.npop__track'), items=[].slice.call(track.children), i=0, timer=0;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function per(){ return innerWidth<=1000?1:3 }
+  function go(d){
+    var max=Math.max(0,items.length-per()); i=i+d; if(i>max) i=0; if(i<0) i=max;
+    var w=items[0].getBoundingClientRect().width+20; track.style.transform='translateX('+(-i*w)+'px)';
+  }
+  function close(){ pop.hidden=true; document.documentElement.style.overflow=''; clearInterval(timer) }
+  pop.hidden=false; document.documentElement.style.overflow='hidden';
+  pop.querySelectorAll('[data-np]').forEach(function(b){ b.addEventListener('click',function(){ go(+b.dataset.np) }) });
+  pop.querySelector('[data-np-close]').addEventListener('click',close);
+  pop.querySelector('[data-np-today]').addEventListener('change',function(e){
+    if(e.target.checked){ try{ localStorage.setItem(KEY,String(Date.now()+864e5)) }catch{} close() } });
+  pop.addEventListener('click',function(e){ if(e.target===pop) close() });
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&!pop.hidden) close() });
+  if(items.length>=4&&!reduce) timer=setInterval(function(){go(1)},3000);
+  addEventListener('resize',function(){go(0)});
 })();
 </script>
 <script>document.addEventListener("click",function(e){var a=e.target.closest("[data-demo]");if(a){e.preventDefault();alert("디자인 예시 화면입니다. 실제 납품 시 병원 채널로 연결됩니다.");}});</script>

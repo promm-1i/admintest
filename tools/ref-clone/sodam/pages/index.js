@@ -131,3 +131,27 @@
     place(false); restart();
   }
 })();
+
+/* 공지 팝업 — 원본 main.js funcMain: 쿠키 c_main_popup 이 N 이면 열지 않음(하루) */
+(function(){
+  var pop=document.getElementById('noticePop'); if(!pop) return;
+  var KEY='sodam_notice_hide';
+  try{ var until=+localStorage.getItem(KEY)||0; if(Date.now()<until) return }catch{}
+  var track=pop.querySelector('.npop__track'), items=[].slice.call(track.children), i=0, timer=0;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function per(){ return innerWidth<=1000?1:3 }
+  function go(d){
+    var max=Math.max(0,items.length-per()); i=i+d; if(i>max) i=0; if(i<0) i=max;
+    var w=items[0].getBoundingClientRect().width+20; track.style.transform='translateX('+(-i*w)+'px)';
+  }
+  function close(){ pop.hidden=true; document.documentElement.style.overflow=''; clearInterval(timer) }
+  pop.hidden=false; document.documentElement.style.overflow='hidden';
+  pop.querySelectorAll('[data-np]').forEach(function(b){ b.addEventListener('click',function(){ go(+b.dataset.np) }) });
+  pop.querySelector('[data-np-close]').addEventListener('click',close);
+  pop.querySelector('[data-np-today]').addEventListener('change',function(e){
+    if(e.target.checked){ try{ localStorage.setItem(KEY,String(Date.now()+864e5)) }catch{} close() } });
+  pop.addEventListener('click',function(e){ if(e.target===pop) close() });
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&!pop.hidden) close() });
+  if(items.length>=4&&!reduce) timer=setInterval(function(){go(1)},3000);
+  addEventListener('resize',function(){go(0)});
+})();
