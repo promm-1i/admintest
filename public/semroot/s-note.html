@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>오답관리 | 셈루트</title>
+<meta name="description" content="어디를 어려워하는지 한눈에 보이는 오답관리">
+<meta property="og:title" content="오답관리 | 셈루트">
+<meta property="og:description" content="어디를 어려워하는지 한눈에 보이는 오답관리">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* 서비스 공통 */
+.sv-box{position:relative;padding-top:37.5%;border-radius:16rem;overflow:hidden;background:var(--g200)}
+.sv-box img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* BANNER */
+.bn-img{position:relative;padding-top:37.5%;border-radius:16rem;overflow:hidden;
+  background:var(--g200)}
+.bn-slider li{position:absolute;inset:0;opacity:0;transition:opacity 1s}
+.bn-slider li.on{opacity:1}
+.bn-img img{width:100%;height:100%;object-fit:cover}
+
+/* COLUMN */
+.cl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:80rem 20rem}
+.cl--02 .cl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cl-media{position:relative;aspect-ratio:1/1;border-radius:16rem;overflow:hidden;background:var(--g200)}
+.cl--02 .cl-media{aspect-ratio:1/0.7594}
+.cl-media img{width:100%;height:100%;object-fit:cover}
+.cl-content{text-align:center;margin-top:32rem}
+.cl-title{display:block;font-size:var(--f06);font-weight:700;line-height:var(--lh06)}
+.cl-desc{margin-top:12rem;font-size:var(--f09);line-height:var(--lh09);color:var(--g800)}
+
+/* ACCORDION */
+.ac-box{display:flex;justify-content:space-between;align-items:center;gap:100rem}
+.ac-ctrls{width:520rem;flex:none}
+.ac-ctrl{display:block;padding:32rem 0 24rem;box-shadow:0 1px 0 0 var(--g400)}
+.ac-ctrl:first-child{padding-top:0}
+.ac-title{position:relative;display:flex;align-items:center;font-size:var(--f06);
+  font-weight:700;line-height:var(--lh06);color:var(--g600);transition:color .3s,padding .3s}
+.ac-ico{position:absolute;left:0;width:32rem;color:var(--pri);transform:scale(0);
+  transition:transform .3s}
+.ac-ico svg{display:block;width:100%;height:auto}
+.ac-desc{display:block;overflow:hidden;max-height:0;margin-top:0;font-size:var(--f09);
+  line-height:var(--lh09);color:var(--g800);opacity:0;
+  transition:max-height .5s ease,margin-top .5s ease,opacity .5s ease}
+.ac-ctrl.on .ac-title{color:var(--black);padding-left:44rem}
+.ac-ctrl.on .ac-ico{transform:scale(1)}
+.ac-ctrl.on .ac-desc{max-height:200rem;margin-top:12rem;opacity:1}
+.ac-list{position:relative;width:790rem;aspect-ratio:1/0.9113;flex:none}
+.ac-item{position:absolute;inset:0;border-radius:16rem;overflow:hidden;opacity:0;
+  visibility:hidden;transition:opacity .5s,visibility .5s;background:var(--g200)}
+.ac-item.on{opacity:1;visibility:visible}
+.ac-item img{width:100%;height:100%;object-fit:cover}
+
+/* REVIEW */
+.rvw{background:var(--g100)}
+.rvw-box{display:flex;gap:100rem;justify-content:space-between;align-items:center;
+  padding-right:105rem}
+.rvw-quote{margin:0;flex:1}
+.rvw-quote p{font-size:var(--f04);font-weight:700;line-height:var(--lh04);
+  letter-spacing:var(--ls1)}
+.rvw-quote footer{margin-top:24rem;font-size:var(--f09);color:var(--g700)}
+.rvw-media{width:550rem;flex:none;aspect-ratio:1/0.6727;border-radius:16rem;overflow:hidden;
+  background:var(--g300)}
+.rvw-media img{width:100%;height:100%;object-fit:cover}
+
+/* CTA */
+.sv-cta{padding-bottom:160rem}
+.sv-cta-box{padding:100rem 40rem;border-radius:16rem;text-align:center;color:var(--white);
+  background:linear-gradient(120deg,var(--sec),var(--pri))}
+.sv-cta-title{font-size:var(--f03);font-weight:700;line-height:var(--lh03);
+  letter-spacing:var(--ls1)}
+.sv-cta-desc{margin-top:16rem;font-size:var(--f08);opacity:.9}
+.sv-cta-ctrl{display:flex;justify-content:center;gap:10rem;margin-top:40rem}
+.sv-cta .btn--line{border-color:rgba(255,255,255,.6);color:var(--white)}
+.sv-cta .btn--line:hover{border-color:var(--white);color:var(--white);
+  background:rgba(255,255,255,.12)}
+.sv-cta .btn--fill{color:var(--sec);background:var(--white)}
+.sv-cta .btn--fill:hover{background:var(--g200)}
+
+@media (max-width:1480px){
+  .cl-content{margin-top:28rem}
+  .ac-box{gap:80rem}
+  .ac-ctrls{flex:1;width:auto}
+  .ac-ctrl{padding:28rem 0 20rem}
+  .ac-list{flex:1;width:auto}
+  .rvw-box{padding-right:80rem;gap:80rem}
+}
+@media (max-width:1200px){
+  .cl-content{margin-top:24rem}
+  .cl-desc{margin-top:10rem}
+  .ac-box{gap:60rem}
+  .ac-ico{width:28rem}
+  .ac-ctrl{padding:24rem 0 18rem}
+  .ac-ctrl.on .ac-title{padding-left:36rem}
+  .rvw-box{padding-right:40rem;gap:60rem}
+  .rvw-quote{max-width:500rem}
+}
+@media (max-width:860px){
+  .cl-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:48rem 16rem}
+  .cl--02 .cl-grid{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .cl-content{margin-top:24rem}
+  .ac-box{display:block}
+  .ac-ctrls{width:auto}
+  .ac-list{width:auto;margin-top:40rem}
+  .rvw-box{display:block}
+  .rvw-media{width:auto;margin-top:40rem}
+  .sv-cta-box{padding:60rem 24rem}
+  .sv-cta-ctrl{flex-wrap:wrap}
+}
+@media (max-width:540px){
+  .cl-grid{grid-template-columns:repeat(1,minmax(0,1fr))}
+}
+</style>
+</head>
+<body class="">
+<header id="header">
+  <div class="shell">
+    <p id="logo"><a href="./index.html" aria-label="셈루트 홈"><svg class="logo-mark" viewBox="0 0 130 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="셈루트"><path d="M2 16.5 L7 16.5 L11.5 26 L18 4 L38 4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="43" y="23" font-family="Jost,Pretendard,sans-serif" font-size="20" font-weight="600" letter-spacing="-.5" fill="currentColor">SEMROOT</text></svg></a></p>
+    <nav class="nav" aria-label="주 메뉴"><ul class="nav-list"><li class="nav-item is-on"><a href="./s-bank.html"><span>서비스 소개</span></a><ul class="nav-sub"><li><a href="./s-bank.html"><span>문제은행</span><em>업계 최다 수학 콘텐츠 제공</em></a></li><li><a href="./s-note.html"><span>오답관리</span><em>학생별 취약유형 완벽 관리</em></a></li><li><a href="./s-exam.html"><span>내신·기출</span><em>교과서·교재·기출 전체 지원</em></a></li><li><a href="./s-textbook.html"><span>자체 교재</span><em>학생별 맞춤 교재 제작</em></a></li><li><a href="./s-consulting.html"><span>상담·홍보</span><em>데이터 기반 명확한 진단 및 상담</em></a></li><li><a href="./s-premium.html"><span>프리미엄</span><em>최고를 위한 프리미엄 서비스</em></a></li></ul></li><li class="nav-item"><a href="./seminar.html"><span>설명회</span></a><ul class="nav-sub"><li><a href="./seminar.html"><span>온라인 설명회</span></a></li></ul></li><li class="nav-item"><a href="./pricing.html"><span>요금 안내</span></a><ul class="nav-sub"><li><a href="./pricing.html"><span>요금 안내</span></a></li></ul></li><li class="nav-item"><a href="./reviews.html"><span>사용 후기</span></a><ul class="nav-sub"><li><a href="./reviews.html"><span>사용 후기</span></a></li></ul></li><li class="nav-item"><a href="./news.html"><span>셈루트 소식</span></a><ul class="nav-sub"><li><a href="./news.html"><span>업데이트 소식</span></a></li><li><a href="./press.html"><span>뉴스룸</span></a></li><li><a href="./blog.html"><span>셈루트 Blog</span></a></li><li><a href="./faq.html"><span>자주 묻는 질문</span></a></li></ul></li></ul></nav>
+    <div class="hd-utils"><a class="hd-login" href="./contact.html">로그인</a><a class="hd-start" href="./contact.html">무료로 시작하기</a></div>
+    <button id="hd-toggle" type="button" aria-label="메뉴 열기"><i></i><i></i><i></i></button>
+  </div>
+</header>
+<main>
+<div class="art-head"><b class="art-cat">서비스 소개</b><h1 class="art-title">오답관리</h1></div>
+<nav class="art-tabs" aria-label="서비스 메뉴"><ul><li><a href="./s-bank.html">문제은행</a></li><li class="on"><a href="./s-note.html">오답관리</a></li><li><a href="./s-exam.html">내신·기출</a></li><li><a href="./s-textbook.html">자체 교재</a></li><li><a href="./s-consulting.html">상담·홍보</a></li><li><a href="./s-premium.html">프리미엄</a></li></ul></nav>
+<div class="art-body">
+<section class="sec-main sv"><div class="shell"><div class="sv-box"><img src="./assets/sv-note.jpg" alt="오답관리" width="1600" height="600" fetchpriority="high"></div></div></section>
+<section class="sec-main bn"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">틀린 문항이<br>저절로 모입니다</h2><p class="sec-p">채점만 하면 오답이 학생별로 쌓입니다. 따로 정리하지 않아도 취약한 단원이 드러납니다.</p></div><div class="bn-img" data-rv><ul class="bn-slider"><li><img src="./assets/bn-note.jpg" alt="오답 노트 화면" width="1600" height="600" loading="lazy"></li></ul></div></div></section>
+<section class="sec-main ac"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">선생님의 기준에 맞춘<br>스마트한 관리</h2><p class="sec-p">채점부터 재출제까지 한 흐름으로 이어집니다.</p></div><div class="ac-box"><div class="ac-ctrls"><a class="ac-ctrl on" href="#ac-0" data-i="0"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>자동 채점</span><span class="ac-desc">답만 입력하면 채점과 통계가 같이 남습니다</span></a><a class="ac-ctrl" href="#ac-1" data-i="1"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>취약 유형 진단</span><span class="ac-desc">틀린 문항을 유형으로 묶어 약한 곳을 짚어 줍니다</span></a><a class="ac-ctrl" href="#ac-2" data-i="2"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>재출제</span><span class="ac-desc">틀린 유형만 골라 다시 시험지를 만듭니다</span></a></div><ul class="ac-list"><li class="ac-item on" id="ac-0"><img src="./assets/nt-a1.jpg" alt="자동 채점" width="1580" height="1440" loading="lazy"></li><li class="ac-item" id="ac-1"><img src="./assets/nt-a2.jpg" alt="취약 유형 진단" width="1580" height="1440" loading="lazy"></li><li class="ac-item" id="ac-2"><img src="./assets/nt-a3.jpg" alt="재출제" width="1580" height="1440" loading="lazy"></li></ul></div></div></section>
+<section class="sec-main cl cl--02 sec-main--secondary"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">원하는 조건만 쏙<br>1:1 맞춤 오답 학습지</h2><p class="sec-p">학생과 기간을 고르면 학습지가 만들어집니다.</p></div><ul class="cl-grid"><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/nt-c1.jpg" alt="학생별로" width="680" height="517" loading="lazy"></div><div class="cl-content"><b class="cl-title">학생별로</b><p class="cl-desc">학생 한 명이 틀린 문항만 모아 그 학생만을 위한 학습지를 만듭니다</p></div></li><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/nt-c2.jpg" alt="기간·유형별로" width="680" height="517" loading="lazy"></div><div class="cl-content"><b class="cl-title">기간·유형별로</b><p class="cl-desc">최근 한 달, 특정 단원, 특정 유형처럼 조건을 걸어 필요한 만큼만 뽑습니다</p></div></li></ul></div></section>
+<section class="sec-main sec-main--secondary rvw"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">오답관리를 써 본 선생님들</h2></div><div class="rvw-box" data-rv><blockquote class="rvw-quote"><p>학생이 어디서 막히는지 숫자로 보이니 상담할 때 할 말이 생깁니다.</p><footer>경기 · 보습학원 부원장</footer></blockquote><div class="rvw-media"><img src="./assets/rvw-note.jpg" alt="" width="1100" height="740" loading="lazy" aria-hidden="true"></div></div></div></section>
+</div>
+<section class="sec-main sv-cta"><div class="shell"><div class="sv-cta-box"><h2 class="sv-cta-title">지금 셈루트를 10일 동안 무료로 써 보세요</h2><p class="sv-cta-desc">카드 등록도, 약정도 없습니다.</p><div class="sv-cta-ctrl"><a class="btn btn--fill btn--lg" href="./contact.html">무료로 시작하기</a><a class="btn btn--line btn--lg" href="./seminar.html">설명회 신청하기</a></div></div></div></section></main>
+<footer id="footer">
+  <div class="shell">
+    <div class="ft-top">
+      <p class="ft-logo"><svg class="ft-mark" viewBox="0 0 130 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="셈루트"><path d="M2 16.5 L7 16.5 L11.5 26 L18 4 L38 4" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="43" y="23" font-family="Jost,Pretendard,sans-serif" font-size="20" font-weight="600" letter-spacing="-.5" fill="currentColor">SEMROOT</text></svg></p>
+      <nav class="ft-nav" aria-label="푸터 메뉴"><div class="ft-col"><h3>서비스 소개</h3><ul><li><a href="./s-bank.html">문제은행</a></li><li><a href="./s-note.html">오답관리</a></li><li><a href="./s-exam.html">내신·기출</a></li><li><a href="./s-textbook.html">자체 교재</a></li><li><a href="./s-consulting.html">상담·홍보</a></li><li><a href="./s-premium.html">프리미엄</a></li></ul></div><div class="ft-col"><h3>설명회</h3><ul><li><a href="./seminar.html">온라인 설명회</a></li></ul></div><div class="ft-col"><h3>요금 안내</h3><ul><li><a href="./pricing.html">요금 안내</a></li></ul></div><div class="ft-col"><h3>사용 후기</h3><ul><li><a href="./reviews.html">사용 후기</a></li></ul></div><div class="ft-col"><h3>셈루트 소식</h3><ul><li><a href="./news.html">업데이트 소식</a></li><li><a href="./press.html">뉴스룸</a></li><li><a href="./blog.html">셈루트 Blog</a></li><li><a href="./faq.html">자주 묻는 질문</a></li></ul></div></nav>
+    </div>
+    <div class="ft-mid">
+      <div class="ft-contact">
+        <p class="ft-tel">고객센터 <b>010-4894-4905</b></p>
+        <p>평일 10시~19시 (점심 13~14시)</p>
+        <p>도입 문의 6gsmake@gmail.com · 제휴 문의 6gsmake@gmail.com</p>
+      </div>
+      <div class="ft-sns"><a href="./contact.html" aria-label="인스타그램"><span aria-hidden="true">IG</span></a><a href="./contact.html" aria-label="블로그"><span aria-hidden="true">BLOG</span></a><a href="./contact.html" aria-label="유튜브"><span aria-hidden="true">YT</span></a><a href="./contact.html" aria-label="노션 가이드"><span aria-hidden="true">GUIDE</span></a><a href="./contact.html" aria-label="원격지원"><span aria-hidden="true">원격</span></a></div>
+    </div>
+    <p class="ft-biz">주식회사 셈루트 · 대표 김진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호<br>서울특별시 강남구 테헤란로 152, 11층 (역삼동, 강남파이낸스플라자)</p>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 SEMROOT. ALL RIGHTS RESERVED.</p>
+      <nav class="ft-policy"><a href="./terms.html">서비스 이용약관</a><a href="./privacy.html"><b>개인정보 처리방침</b></a><a href="./marketing.html">마케팅 정보 수신</a></nav>
+    </div>
+  </div>
+</footer>
+<script src="./assets/site.js"></script>
+<script>
+(function(){
+  /* 원본 serviceAccordion — 호버가 아니라 '클릭'으로만 바뀐다.
+     설명은 500ms 로 펼쳐지고, 바뀔 때 아코디언 윗선으로 스크롤을 맞춘다. */
+  var boxes=[].slice.call(document.querySelectorAll('.ac-box'));
+  boxes.forEach(function(box){
+    var ctrls=[].slice.call(box.querySelectorAll('.ac-ctrl'));
+    var panes=[].slice.call(box.querySelectorAll('.ac-item'));
+    var sliding=false;
+    ctrls.forEach(function(c,i){
+      c.addEventListener('click',function(e){
+        e.preventDefault();
+        if(sliding||c.classList.contains('on'))return;
+        sliding=true;
+        var hd=document.getElementById('header');
+        var y=scrollY+box.getBoundingClientRect().top-(hd?hd.offsetHeight:0);
+        ctrls.forEach(function(x){x.classList.remove('on')});
+        panes.forEach(function(x){x.classList.remove('on')});
+        c.classList.add('on');
+        if(panes[i])panes[i].classList.add('on');
+        scrollTo({top:y,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+        setTimeout(function(){sliding=false},500);
+      });
+    });
+  });
+
+  /* 원본 serviceBanner — loop · speed 1000 · autoplay 3000 · fade crossFade */
+  [].forEach.call(document.querySelectorAll('.bn-slider'),function(sl){
+    var items=[].slice.call(sl.children);
+    if(items.length<2)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){items[0].classList.add('on');return}
+    var i=0;
+    items[0].classList.add('on');
+    setInterval(function(){
+      items[i].classList.remove('on');
+      i=(i+1)%items.length;
+      items[i].classList.add('on');
+    },3000);
+  });
+})();
+</script>
+</body>
+</html>

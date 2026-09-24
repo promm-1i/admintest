@@ -620,6 +620,14 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
   .renewal-editorial .tomorrow{margin-top:96px;padding:34px 20px 80px}.renewal-editorial .tomorrow-glow.type-1{left:50%;width:250px;height:250px;margin-top:-200px;margin-left:-125px;filter:blur(77px)}.renewal-editorial .tomorrow-glow.type-2{right:auto;bottom:400px;left:50%;width:300px;height:300px;margin-top:-150px;margin-left:-150px;filter:blur(77px);opacity:.4}.renewal-editorial .tomorrow-heading{position:static;width:auto;margin:0 0 160px;padding:0 8px;font-size:100px}.renewal-editorial .tomorrow.active .tomorrow-heading{opacity:1;filter:none}.renewal-editorial .tomorrow-message{margin-bottom:80px;font-size:34px}.renewal-editorial .tomorrow-list,.renewal-editorial .tomorrow.init .tomorrow-list{width:100%;max-width:400px;margin:0 auto;flex-direction:column;align-items:center}.renewal-editorial .tomorrow-item{width:100%;height:auto;padding-bottom:66%}.renewal-editorial .tomorrow-item+.tomorrow-item{margin-top:0}.renewal-editorial .tomorrow-link{left:50%;padding:24px;transform:translateX(-50%)}.renewal-editorial .tomorrow-title{font-size:30px;line-height:1.35}.renewal-editorial .tomorrow-desc{font-size:20px;line-height:1.5;letter-spacing:-.02em}.renewal-editorial .recruit{margin-top:120px}.renewal-editorial .recruit-category{font-size:18px}.renewal-editorial .recruit-heading{font-size:20px;line-height:1.4}.renewal-editorial .recruit-action{margin-top:24px}.renewal-editorial .recruit-link{padding:8px 20px;font-size:14px;font-weight:500}
 }
 
+/* 휴대폰 — 위 1023px 블록은 태블릿 기준으로 잡은 고정 폭(256px·320px)을 쓴다.
+   그대로 두면 390 화면에서 좌우가 67px·35px 씩 비어 답답해 보인다. */
+@media(max-width:600px){
+  .renewal-editorial .first-fixer{width:calc(100% - 8px)}
+  .renewal-editorial .now-value-list{max-width:none;margin-left:0;margin-right:0}
+  .renewal-editorial .now-value-text{padding:20px}
+}
+
 @media(max-width:600px){
   .renewal-editorial .first-docs{visibility:hidden;opacity:0}.renewal-editorial .first-heading{font-size:64px}.renewal-editorial .first-action{width:auto}.renewal-editorial .first-story{height:auto;padding-bottom:74px;flex-direction:column}.renewal-editorial .first-before{display:block}.renewal-editorial .first-after{display:block;margin-top:100px;padding:0}.renewal-editorial .first-year{position:static;margin-bottom:12px}.renewal-editorial .first-title{position:static;width:auto;padding-left:8px}.renewal-editorial .first-desc{width:auto;font-size:20px;line-height:1.4}.renewal-editorial .now-value-item+.now-value-item{margin-top:0}
   .renewal-editorial .latest-list{height:915px}.renewal-editorial .latest-item{height:25%}.renewal-editorial .latest-link{height:100%}
@@ -795,6 +803,9 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-contact-band svg{width:17px;height:17px}
 
 @media (max-width:1023px){
+  /* 좌우 60px 은 데스크톱 기준이다. 390 화면에서는 화면의 31% 가 여백이 된다. */
+  .re-page-info{padding:0 32px}
+  .re-hero__step{margin-left:0}
   .re-page-align{padding-top:56px}
   .re-page-category{padding-left:4px;font-size:16px}
   .re-page-heading{margin-top:8px;padding-left:4px;font-size:40px}
@@ -1349,6 +1360,20 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
   .renewal-editorial #re-main :is(.max-w-7xl,.max-w-6xl,.max-w-\[1536px\],.max-w-\[1280px\]).mx-auto{
     padding-left:20px;padding-right:20px;
   }
+}
+/* 위 width:calc(100% - 120px) 는 데스크톱(1440 에서 좌우 60) 기준이다.
+   좁은 화면까지 그대로 두면 390 에서 60(여백) + 20(안쪽) = 좌우 80px 씩 먹어
+   본문이 화면의 59% 만 쓴다. 태블릿 아래부터는 폭을 다 쓰고 안쪽 여백만 남긴다. */
+@media (max-width:1023px){
+  .renewal-editorial #re-main :is(.max-w-7xl,.max-w-6xl,.max-w-\[1536px\],.max-w-\[1280px\]).mx-auto{
+    width:100%;padding-left:32px;padding-right:32px;
+  }
+}
+@media (max-width:600px){
+  .renewal-editorial #re-main :is(.max-w-7xl,.max-w-6xl,.max-w-\[1536px\],.max-w-\[1280px\]).mx-auto{
+    padding-left:20px;padding-right:20px;
+  }
+  .re-page-info{padding:0 20px}
 }
 
 /* 좁게 두는 쪽(문답 · 폼 · 글)도 폭이 640 · 768 · 896 · 992 로 갈려 있었다.
