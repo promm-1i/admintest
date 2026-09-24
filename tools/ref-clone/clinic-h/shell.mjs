@@ -10,14 +10,15 @@ export const BRAND = {
   ceo: "김진수",
   biz: "266-07-03678",
   hours: [["MON-FRI", "10:00 - 19:00"], ["SAT", "10:00 - 16:00"], ["SUN", "CLOSED"]],
+  kakao: "https://pf.kakao.com/_xiPziX", // NOVERIQ 상담 채널 (전화번호와 같은 원칙 — 데모 문의는 제작사로)
 };
 
 export const NAV = [
-  { href: "first.html", num: "01", label: "첫 눈성형" },
-  { href: "revision.html", num: "02", label: "눈 재수술" },
-  { href: "about.html", num: "03", label: "병원 소개" },
-  { href: "reviews.html", num: "04", label: "수술 후기" },
-  { href: "column.html", num: "05", label: "여울 칼럼" },
+  { href: "first.html", num: "01", label: "첫눈성형" },
+  { href: "revision.html", num: "02", label: "눈재수술" },
+  { href: "about.html", num: "03", label: "병원소개" },
+  { href: "reviews.html", num: "04", label: "후기" },
+  { href: "column.html", num: "05", label: "여울의 생각" },
 ];
 
 // 워드마크: 로고 이미지 대신 글자로 그린다. 색은 currentColor.
@@ -79,8 +80,8 @@ export function header(current) {
         <dl class="menu__hours">${BRAND.hours.map(([d, t]) => `<div><dt>${d}</dt><dd>${t}</dd></div>`).join("")}</dl>
         <div class="menu__acts">
           <a class="pill" href="${BRAND.telHref}">${ico.call}<span>전화 예약</span></a>
-          <a class="pill" href="consult.html">${ico.chat}<span>온라인 상담</span></a>
-          <a class="pill" href="about.html#location">${ico.pin}<span>오시는 길</span></a>
+          <a class="pill" href="${BRAND.kakao}" target="_blank" rel="noopener">${ico.chat}<span>카톡 상담/예약</span></a>
+          <a class="pill" href="consult.html">${ico.pin}<span>온라인 상담</span></a>
         </div>
       </div>
     </div>
@@ -113,18 +114,16 @@ export function footer() {
       </div>
       <div class="foot-right">
         <ul class="foot-nav">
-          <li><a href="first.html">진료 분야</a><ul><li><a href="first.html">첫 눈성형</a></li><li><a href="revision.html">눈 재수술</a></li></ul></li>
-          <li><a href="reviews.html">여울의 기록</a><ul><li><a href="reviews.html">수술 후기</a></li><li><a href="column.html">여울 칼럼</a></li></ul></li>
-          <li><a href="about.html">병원 안내</a><ul><li><a href="about.html#doctor">원장 소개</a></li><li><a href="about.html#location">오시는 길</a></li><li><a href="about.html#hours">진료 시간</a></li></ul></li>
-          <li><a href="consult.html">상담 예약</a><ul><li><a href="consult.html">온라인 상담</a></li><li><a href="${BRAND.telHref}">전화 상담</a></li></ul></li>
+          <li><a href="first.html">진료분야</a><ul><li><a href="first.html">첫눈성형</a></li><li><a href="revision.html">눈재수술</a></li></ul></li>
+          <li><a href="reviews.html">여울의 기록</a><ul><li><a href="reviews.html">수술 후기</a></li><li><a href="column.html">여울의 생각</a></li></ul></li>
+          <li><a href="about.html">병원안내</a><ul><li><a href="about.html#doctor">원장소개</a></li><li><a href="about.html#location">오시는 길</a></li><li><a href="about.html#hours">진료시간</a></li></ul></li>
+          <li><a href="consult.html">상담 예약</a><ul><li><a href="consult.html">온라인 상담</a></li><li><a href="${BRAND.kakao}" target="_blank" rel="noopener">카카오톡 상담</a></li><li><a href="${BRAND.telHref}">전화 상담</a></li></ul></li>
         </ul>
       </div>
     </div>
     <div class="foot-bottom">
       <p>© 2026 ${BRAND.ko}. All rights reserved.</p>
-      <nav aria-label="약관"><a href="privacy.html">개인정보처리방침</a><a href="terms.html">이용약관</a></nav>
     </div>
-    <p class="foot-note">이 사이트는 홈페이지 제작 포트폴리오용 가상 병원입니다. 사진은 연출 이미지이며, 의료 정보는 진단을 대신하지 않습니다.</p>
   </div>
 </footer>
 <button class="to-top" type="button" aria-label="맨 위로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 20V5M6 11l6-6 6 6"/></svg></button>`;

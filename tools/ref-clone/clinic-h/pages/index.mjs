@@ -18,6 +18,18 @@ export default {
   current: "",
   main: true,
   body: () => `
+<div class="pop" id="pop" role="dialog" aria-label="진료 안내" hidden>
+  <div class="pop__box">
+    <div class="pop__card">
+      <div class="pop__logo">${logo()}</div>
+      <p class="pop__title">진료 시간 안내</p>
+      <p class="pop__rule" aria-hidden="true">✦</p>
+      <dl class="pop__rows"><div><dt>평일</dt><dd>10:00 – 19:00</dd></div><div><dt>토요일</dt><dd>10:00 – 16:00</dd></div><div><dt>일 · 공휴일</dt><dd>휴진</dd></div></dl>
+      <p class="pop__note">모든 상담은 예약제로 운영합니다.<br>내원 전 예약 일정을 확인해 주세요.</p>
+    </div>
+    <div class="pop__foot"><button type="button" class="pop__today">오늘 하루 열지 않기</button><button type="button" class="pop__close">닫기</button></div>
+  </div>
+</div>
 <div class="intro" id="intro" aria-hidden="true">
   <div class="intro__split">
     <svg class="intro__shape top" viewBox="0 0 1920 575" preserveAspectRatio="none"><path d="M0 0h1920v566c-58-31-139-72-247-99-121-30-262-43-420-38-199 7-384 42-575 72-211 33-437 58-678 39z"/></svg>
@@ -29,7 +41,7 @@ export default {
     <div class="intro__face">
       <div class="intro__copy">
         <p class="intro__sub">EYELID DESIGN CLINIC</p>
-        <p class="intro__title">여울처럼<em>자연스럽게</em></p>
+        <p class="intro__title">흐르는 대로, 자연스럽게<br><em>여울처럼</em></p>
         <p class="intro__desc">눈매의 흐름을 먼저 읽고,<br class="mo-br"> 얼굴에 맞는 변화를 그립니다.</p>
         <span class="intro__bar"></span>
       </div>

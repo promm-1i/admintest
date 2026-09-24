@@ -243,14 +243,39 @@
     });
   }
 
-  /* ── 목록 거르기 (후기 · 칼럼) ── */
+  /* ── 목록 거르기 (후기 · 칼럼) + 후기 쪽 넘김(5개씩) ── */
   $$("[data-filter]").forEach((bar) => {
-    const list = bar.parentElement.querySelectorAll("[data-cats]");
+    const scope = bar.closest("section, .think-list") || document;
+    const items = $$("[data-cats]", scope);
+    const listEl = $("[data-page]", scope);
+    const per = listEl ? +listEl.dataset.page : 0;
+    const pager = $(".pager", scope);
+    let cat = "전체", page = 1;
+    const render = () => {
+      const hit = items.filter((it) => cat === "전체" || it.dataset.cats.split(",").includes(cat));
+      const pages = per ? Math.max(1, Math.ceil(hit.length / per)) : 1;
+      page = Math.min(page, pages);
+      items.forEach((it) => { it.hidden = true; });
+      hit.forEach((it, k) => { it.hidden = per ? Math.floor(k / per) + 1 !== page : false; });
+      if (!pager) return;
+      pager.innerHTML = "";
+      for (let n = 1; n <= pages; n++) {
+        const b = document.createElement("button");
+        b.type = "button"; b.textContent = n; b.setAttribute("aria-label", `${n}쪽`);
+        if (n === page) b.setAttribute("aria-current", "page");
+        b.addEventListener("click", () => { page = n; render(); scope.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); });
+        pager.appendChild(b);
+      }
+      const nx = document.createElement("button");
+      nx.type = "button"; nx.textContent = "›"; nx.setAttribute("aria-label", "다음 쪽"); nx.disabled = page >= pages;
+      nx.addEventListener("click", () => { page += 1; render(); });
+      pager.appendChild(nx);
+    };
     $$("button", bar).forEach((b) => b.addEventListener("click", () => {
       $$("button", bar).forEach((x) => { x.classList.toggle("on", x === b); x.setAttribute("aria-pressed", String(x === b)); });
-      const c = b.dataset.cat;
-      list.forEach((it) => { it.hidden = !(c === "전체" || it.dataset.cats.split(",").includes(c)); });
+      cat = b.dataset.cat; page = 1; render();
     }));
+    render();
   });
 
   /* ── 상담 신청서: 입력 확인만 하고 전송하지 않는다(포트폴리오 데모) ── */
@@ -307,7 +332,9 @@
     let t; addEventListener("resize", () => { clearTimeout(t); t = setTimeout(apply, 120); });
   })();
 
-  // 가로 패널: 스크롤 500vh 동안 main 이 고정되고, 인트로는 왼쪽으로 빠지고 본문이 오른쪽에서 들어온다
+  // 가로 패널: 스크롤 500px 동안 main 이 고정되고, 인트로는 왼쪽으로 빠지고 본문이 오른쪽에서 들어온다.
+  // 레퍼런스 코드는 end:'+=500vh' 지만 ScrollTrigger 가 단위를 버려 실제로는 500px 이다(라이브 문서높이 3679→4179 실측).
+  const PANEL = 500;
   let panelOn = false;
   const setPanel = (p) => {
     inner.style.transform = p >= 1 ? "" : `translate3d(${(1 - p) * 100}%,0,0)`;
@@ -318,8 +345,8 @@
     intro.style.visibility = gone ? "hidden" : "visible";
     intro.style.pointerEvents = gone ? "none" : "auto";
   };
-  const sizePin = () => { pin.style.height = `${main.offsetHeight + innerHeight * 5}px`; };
-  const onPanelScroll = () => setPanel(clamp(scrollY / (innerHeight * 5)));
+  const sizePin = () => { pin.style.height = `${main.offsetHeight + PANEL}px`; };
+  const onPanelScroll = () => setPanel(clamp(scrollY / PANEL));
   function enablePanel() {
     if (panelOn) return;
     panelOn = true;
@@ -331,12 +358,31 @@
     ring.arm();
     queueHead();
   }
+  // 공지 팝업: 인트로가 끝나면 0.6초에 나타난다. "오늘 하루 열지 않기" 는 24시간 숨김
+  const pop = $("#pop");
+  let popShown = false;
+  function showPop() {
+    if (!pop || popShown) return;
+    popShown = true;
+    try { if (+localStorage.getItem("yeoul-pop-hide") > Date.now()) return; } catch { /* 저장 불가면 매번 보인다 */ }
+    pop.hidden = false;
+    requestAnimationFrame(() => pop.classList.add("show"));
+    $(".pop__close", pop).focus({ preventScroll: true });
+  }
+  if (pop) {
+    const hide = () => { pop.hidden = true; pop.classList.remove("show"); };
+    $(".pop__close", pop).addEventListener("click", hide);
+    $(".pop__today", pop).addEventListener("click", () => { try { localStorage.setItem("yeoul-pop-hide", String(Date.now() + 864e5)); } catch { /* 무시 */ } hide(); });
+    pop.addEventListener("keydown", (e) => { if (e.key === "Escape") hide(); });
+  }
+
   function skipIntro() {
     intro.style.display = "none";
     body.classList.add("head-ready");
     setPanel(1);
     ring.arm();
     probeHead();
+    showPop();
   }
 
   // 인트로 타임라인 (초): 점 0.5–2.5 · 물결 2–5 · 로고 흰색 3–4 · 얼굴 면 3.5–8.5 → 첫 휠/터치에 마퀴 등장 → 패널
@@ -368,6 +414,7 @@
       face.style.clipPath = `inset(0px ${s}px 0px ${s}px)`;
       copy.forEach((c) => { c.style.opacity = k; c.style.paddingTop = `${lerp(500, 0, k)}px`; });
     }, { delay: 3.5, done: () => {
+      showPop();
       let popped = false;
       const pop = (e) => {
         if (popped) return;

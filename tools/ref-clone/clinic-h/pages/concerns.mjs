@@ -21,12 +21,12 @@ export default CONCERNS.map((c) => {
     title: `${c.qText} | ${first ? "첫 눈성형" : "눈 재수술"} | 여울성형외과`,
     desc: `‘${c.qText}’ 고민에서 여울성형외과가 먼저 확인하는 것과 함께 검토하는 수술, 진료 과정, 자주 묻는 질문을 정리했습니다.`,
     bodyClass: "page-concern",
-    consultDesc: "내 눈에 맞는 설계는<br class=\"mo-br\"> 원장과 직접 나누는 대화에서 시작됩니다.<br>지금 고른 고민으로 상담을 예약해 보세요.",
+    consultDesc: "내 눈에 맞는 설계는 원장과 직접 나누는 대화에서 시작됩니다.<br>고른 고민을 가지고 상담을 예약해 보세요.",
     body: () => `
 <section class="r-visual" data-head="light">
   <div class="r-visual__bg" style="background-image:url('./assets/${c.slug}.jpg')" aria-hidden="true"></div>
   <div class="wrap in-1688">
-    <p class="p-en">${first ? "First Surgery" : "Revision"} · Concern 0${c.n}</p>
+    <p class="p-en">Survey result</p>
     <h1 class="p-title">${c.title}</h1>
     <ul class="tags" aria-label="함께 검토하는 수술">${c.tags.map((t) => `<li class="tag">${t}</li>`).join("")}</ul>
   </div>
@@ -34,13 +34,13 @@ export default CONCERNS.map((c) => {
 </section>
 <section class="sec explain" data-bg="#F5EFE6">
   <div class="explain__wr">
-    <img src="./assets/${c.slug}.jpg" alt="${c.qText} 고민을 표현한 눈매 사진" width="1920" height="1080" loading="lazy" decoding="async" data-rv>
+    <img src="./assets/${c.slug}.jpg" alt="${c.qText} 고민을 표현한 눈매 사진" width="2016" height="720" loading="lazy" decoding="async" data-rv>
     <div class="explain__text" data-rv>${c.explain.map((p) => `<p>${p}</p>`).join("")}</div>
   </div>
 </section>
 <section class="sec acc-sec" aria-labelledby="ov-title">
   <div class="in-1400">
-    <div class="center" data-rv><p class="s-en">Surgery Overview</p><h2 class="s-title" id="ov-title">함께 검토하는 수술 간단히 보기</h2></div>
+    <div class="center" data-rv><p class="s-en">Surgery Overview</p><h2 class="s-title" id="ov-title">관련 수술 항목 간단히 보기</h2></div>
     ${accordion(c.overview)}
   </div>
 </section>
@@ -49,7 +49,6 @@ ${process(first ? PROCESS_FIRST : PROCESS_REVISION)}
   <div class="in-1400">
     <div class="center" data-rv><p class="s-en">FAQ</p><h2 class="s-title" id="faq-title">자주 묻는 질문</h2></div>
     ${accordion(first ? FAQ_FIRST : FAQ_REVISION, { faq: true })}
-    <p class="back-link"><a href="${back}">← 다른 고민 다시 고르기</a></p>
   </div>
 </section>`,
   };

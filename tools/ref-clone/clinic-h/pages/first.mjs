@@ -3,6 +3,7 @@ import { subVisual, approach, pick } from "../parts.mjs";
 
 export default {
   path: "first.html",
+  noConsult: true, // 레퍼런스 sub_1·sub_2 는 상담 띠 없이 평평한 푸터
   title: "첫 눈성형 | 여울성형외과",
   desc: "처음 하는 눈성형일수록 오래 보아도 편안한 결과를 기준으로 설계합니다. 고민에 맞는 안내를 골라 보세요.",
   body: () => `
