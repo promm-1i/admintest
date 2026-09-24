@@ -48,7 +48,7 @@ const posts = COLUMNS.map((c, i) => {
     </header>
     <article class="tview__atc">
       <p class="tview__intro">${c.d}</p>
-      <div class="tview__con"><p><br></p><p><br></p>${c.body.map((l) => `<p>${l}</p>`).join("<p><br></p>")}<p><br></p><p><br></p><p><br></p><p><br></p><p>${img(`${c.slug}.jpg`, "", 600, 450)}</p><p><br></p><p><br></p></div>
+      <div class="tview__con"><p><br></p><p><br></p>${c.body.map((l) => `<p>${l}</p>`).join("<p><br></p>")}<p><br></p><p class="tview__fig">${img(`${c.slug}.jpg`, "", 600, 450)}</p><div class="tview__end"></div></div>
     </article>
     <nav class="rview__nb tview__nb" aria-label="이전 글 · 다음 글">${cell(prev, "이전글")}${cell(next, "다음글")}</nav>
     <div class="rview__back tview__back"><a href="column.html">${arrow("rview__arrow")}<span>전체 목록으로</span></a></div>
