@@ -47,6 +47,17 @@
 .cmp-table .ok svg{width:100%;height:auto}
 .cmp-table .no{color:var(--g500)}
 
+/* 분류 탭 (후기 · FAQ) */
+.cat-tabs{margin:-24rem 0 40rem;text-align:center}
+.cat-tabs ul{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:8rem}
+.cat-tabs button{padding:10rem 22rem;border:1px solid var(--g400);border-radius:99rem;
+  font-size:var(--f11);font-weight:600;color:var(--g700);
+  transition:border-color .3s,color .3s,background .3s}
+.cat-tabs button:hover{border-color:var(--pri);color:var(--pri)}
+.cat-tabs .on button{color:var(--white);background:var(--sec);border-color:var(--sec)}
+.fq-more{margin-top:40rem;text-align:center}
+.fq-group[hidden],.rl-row[hidden]{display:none}
+
 /* 아코디언 FAQ */
 .fq-group+.fq-group{margin-top:60rem}
 .fq-gtitle{margin-bottom:20rem;font-size:var(--f06);font-weight:700;line-height:var(--lh06)}
@@ -270,6 +281,31 @@
       b.nextElementSibling.classList.toggle('on',!open);
     });
   });
+  /* 분류 탭 — 원본 reviewCategory · faqCategory */
+  document.querySelectorAll('.cat-tabs').forEach(function(nav){
+    var lis=[].slice.call(nav.querySelectorAll('li'));
+    var targets=[].slice.call(document.querySelectorAll('.rl-row[data-cat],.fq-group[data-cat]'));
+    lis.forEach(function(li){
+      li.querySelector('button').addEventListener('click',function(){
+        var c=li.querySelector('button').dataset.cat;
+        lis.forEach(function(x){x.classList.remove('on')});
+        li.classList.add('on');
+        targets.forEach(function(t){t.hidden=!(c==='전체'||t.dataset.cat===c)});
+      });
+    });
+  });
+  /* 더보기 — 원본 faqLoadmore */
+  var more=document.querySelector('.fq-more button');
+  if(more){
+    var hid=[].slice.call(document.querySelectorAll('.fq-group')).slice(2);
+    hid.forEach(function(g){g.dataset.folded='1';g.hidden=true});
+    if(!hid.length){more.parentElement.hidden=true}
+    more.addEventListener('click',function(){
+      hid.forEach(function(g){g.hidden=false;delete g.dataset.folded});
+      more.parentElement.hidden=true;
+    });
+  }
+
   /* 문의 — 시·도를 고르면 시·군·구 목록이 바뀐다 (원본 contact[si]/contact[gu]) */
   var si=document.querySelector('.fm-si');
   if(si){
