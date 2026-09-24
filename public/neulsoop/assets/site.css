@@ -280,7 +280,7 @@ a:hover .zoom img,.zoom:hover img{transform:scale(1.15)}
 .strip::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(24,28,26,.72) 0%,rgba(24,28,26,.28) 60%,rgba(24,28,26,.12) 100%)}
 .strip-t{position:absolute;left:100px;right:100px;bottom:40px;z-index:1}
 .strip-t h3{font-size:26px;line-height:31.2px;font-weight:700;color:var(--chip)}
-.strip-t p{margin-top:12px;font-size:16px;line-height:24px;color:#fff;opacity:.8;white-space:pre-line}
+.strip-t p{max-width:730px;margin-top:12px;font-size:16px;line-height:24px;color:#fff;opacity:.8;white-space:pre-line}
 .strips.dk .strip-t p{margin-top:24px}
 
 /* ---- 브랜드 소개 ---- */
@@ -296,8 +296,9 @@ a:hover .zoom img,.zoom:hover img{transform:scale(1.15)}
 .stat-v{display:flex;align-items:flex-end;gap:8px;color:var(--ink)}
 .stat-v strong{font-size:80px;line-height:100px;font-weight:900}
 .stat-u{margin-bottom:16px;font-size:20px;line-height:30px}
+.stat:nth-child(n+3){padding-top:40px}
 .stat-d{max-width:540px;margin-top:40px;font-size:20px;line-height:30px;color:var(--ink)}
-.infos{padding:150px 20px 0}
+.infos{padding:110px 20px 0}
 .inf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto}
 .inf{min-height:269px;padding:48px 28px;border-bottom:1px solid var(--line)}
 .inf-ic{width:70px;height:70px}
@@ -329,7 +330,7 @@ a:hover .zoom img,.zoom:hover img{transform:scale(1.15)}
 .sy-txt{flex:0 0 301px;padding-top:58px}
 .sy-k{font-size:16px;line-height:24px;font-weight:500;color:var(--chip-t)}
 .sy-t{margin-top:4px;font-size:26px;line-height:39px;font-weight:700;color:var(--ink);white-space:pre-line}
-.sy-d{margin-top:24px;font-size:16px;line-height:24px;color:var(--ink);display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.sy-d{margin-top:24px;font-size:16px;line-height:24px;color:var(--ink);display:-webkit-box;-webkit-line-clamp:7;-webkit-box-orient:vertical;overflow:hidden}
 .sy-txt .bb{margin-top:48px}
 .sy-nav{position:absolute;right:-6px;top:-8px;z-index:2;display:flex}
 .sy-nav .arw,.walk-nav .arw,.lev .arw{color:var(--ink)}
@@ -348,10 +349,10 @@ a:hover .zoom img,.zoom:hover img{transform:scale(1.15)}
 .ls-bar{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:45px auto 0}
 .ls-sort{font-size:14px;line-height:21px;font-weight:700;color:var(--ink)}
 .ls-search{display:flex;align-items:center;width:230px;border-bottom:1px solid var(--ink)}
-.ls-search input{flex:1;min-width:0;height:30px;padding:0 4px;border:0;background:none;font:inherit;font-size:13px;color:var(--ink);outline:0}
+.ls-search input{flex:1;min-width:0;height:24px;padding:0 4px;border:0;background:none;font:inherit;font-size:13px;color:var(--ink);outline:0}
 .ls-search:focus-within{outline:2px solid #8FA98B;outline-offset:3px}
 .ls-search svg{flex:none;width:20px;height:20px;color:var(--ink)}
-.br-grid{display:grid;grid-template-columns:repeat(4,minmax(0,285px));gap:40px 20px;justify-content:center;margin-top:24px}
+.br-grid{display:grid;grid-template-columns:repeat(4,minmax(0,285px));gap:40px 20px;justify-content:center;margin-top:20px}
 .br a{display:block}
 .br-img{position:relative;aspect-ratio:285/345;overflow:hidden}
 .br-img img{width:100%;height:100%;object-fit:cover;transition:all .7s ease-in-out}
@@ -372,19 +373,22 @@ a:hover .zoom img,.zoom:hover img{transform:scale(1.15)}
 /* ---- Stay ---- */
 .after-kv.forest{background:var(--forest)}
 .rooms{padding-top:120px}
-.pn-row{display:flex;justify-content:center;height:600px;margin-top:110px}
+.pn-wrap{margin-top:110px;overflow-x:clip}
+.pn-row{display:flex;height:600px;margin-left:-140px}
 .pn{position:relative;flex:0 0 280px;height:600px;transition:transform 1s var(--ease)}
-.pn-card{position:absolute;left:50%;top:0;z-index:1;display:block;width:500px;height:600px;margin-left:-250px;overflow:hidden;clip-path:inset(0 110px);transition:clip-path .6s var(--ease),transform .6s var(--ease),box-shadow .6s}
+.pn-card{position:absolute;left:0;top:0;z-index:1;display:block;width:500px;height:600px;overflow:hidden;clip-path:inset(0 220px 0 0);transform-origin:140px 50%;transition:clip-path .6s var(--ease),transform .6s var(--ease),box-shadow .6s}
 .pn-card img{width:100%;height:100%;object-fit:cover}
-.pn-l{position:absolute;left:140px;bottom:30px;font-family:var(--serif);font-size:36px;line-height:54px;font-weight:600;color:var(--chip);text-shadow:0 2px 12px rgba(0,0,0,.35);transition:left .6s var(--ease)}
+.pn-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,24,22,.6) 0%,rgba(20,24,22,0) 45%),linear-gradient(90deg,rgba(20,24,22,.25) 0,rgba(20,24,22,0) 12px)}
+.pn-l{z-index:1}
+.pn-l{position:absolute;left:30px;bottom:30px;font-family:var(--serif);font-size:36px;line-height:54px;font-weight:600;color:var(--chip);text-shadow:0 2px 12px rgba(0,0,0,.35)}
 .pn:hover{z-index:3}
-.pn-card:hover,.pn-card:focus-visible{clip-path:inset(0 0);transform:scale(1.1);box-shadow:0 20px 40px rgba(0,0,0,.35)}
-.pn-card:hover .pn-l,.pn-card:focus-visible .pn-l{left:30px}
-html.js [data-panels]:not(.spread) .pn:nth-child(1){transform:translateX(560px)}
-html.js [data-panels]:not(.spread) .pn:nth-child(2){transform:translateX(280px)}
-html.js [data-panels]:not(.spread) .pn:nth-child(4){transform:translateX(-280px)}
-html.js [data-panels]:not(.spread) .pn:nth-child(5){transform:translateX(-560px)}
-html.js [data-panels]:not(.spread) .pn:nth-child(3){z-index:2}
+.pn-card:hover,.pn-card:focus-visible{clip-path:inset(0);transform:scale(1.08);box-shadow:0 20px 40px rgba(0,0,0,.35)}
+html.js [data-panels]:not(.spread) .pn:nth-child(2){transform:translateX(560px)}
+html.js [data-panels]:not(.spread) .pn:nth-child(3){transform:translateX(280px)}
+html.js [data-panels]:not(.spread) .pn:nth-child(5){transform:translateX(-280px)}
+html.js [data-panels]:not(.spread) .pn:nth-child(6){transform:translateX(-560px)}
+html.js [data-panels]:not(.spread) .pn:nth-child(1){opacity:0}
+html.js [data-panels]:not(.spread) .pn:nth-child(4){z-index:2}
 .stay-life{padding-top:150px}
 .stay-life .strips{margin-top:60px}
 .partners{padding:150px 20px 214px}
@@ -395,8 +399,8 @@ html.js [data-panels]:not(.spread) .pn:nth-child(3){z-index:2}
 /* ---- 오시는 길 ---- */
 .gh{max-width:1240px;margin:0 auto;padding:120px 20px}
 .tabs{display:flex}
-.tab{flex:1;height:60px;padding-bottom:12px;border-bottom:1px solid #ccc;font-size:16px;line-height:24px;font-weight:600;color:#ccc}
-.tab[aria-selected="true"]{border-bottom:4px solid var(--ink);padding-bottom:9px;font-weight:700;color:var(--ink)}
+.tab{flex:1;height:60px;padding-bottom:4px;border-bottom:1px solid #ccc;font-size:16px;line-height:24px;font-weight:600;color:#ccc}
+.tab[aria-selected="true"]{border-bottom:4px solid var(--ink);padding-bottom:1px;font-weight:700;color:var(--ink)}
 .tp{display:flex;gap:60px;margin-top:80px}
 .tp[hidden]{display:none}
 .tp-map{flex:0 1 600px;aspect-ratio:600/394}
@@ -410,7 +414,7 @@ html.js [data-panels]:not(.spread) .pn:nth-child(3){z-index:2}
 /* 1024~1279 사이: 고정폭 카드가 넘치지 않게 */
 @media (max-width:1279px) and (min-width:1024px){
   .newto-in{gap:60px}
-  .pn-row{transform:scale(.8);transform-origin:top center;height:480px;margin-bottom:-120px}
+
 }
 
 /* ================= 페이지별 모바일 (≤1023) ================= */
@@ -517,12 +521,14 @@ html.js [data-panels]:not(.spread) .pn:nth-child(3){z-index:2}
   .lev-t{font-size:18px;line-height:27px}
 
   .rooms{padding-top:60px}
-  .pn-row{height:auto;justify-content:flex-start;gap:10px;margin-top:32px;padding:0 20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none}
+  .pn-wrap{margin-top:32px;overflow:visible}
+  .pn-row{height:auto;margin-left:0;justify-content:flex-start;gap:10px;padding:0 20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 20px;scrollbar-width:none}
   .pn-row::-webkit-scrollbar{display:none}
   .pn{flex:0 0 calc(100% - 40px);height:auto;aspect-ratio:350/490;scroll-snap-align:start;transform:none!important}
+  .pn-clone{display:none}
   .pn-card{position:relative;left:0;width:100%;height:100%;margin:0;clip-path:none}
   .pn-card:hover,.pn-card:focus-visible{transform:none;box-shadow:none;clip-path:none}
-  .pn-l,.pn-card:hover .pn-l{left:30px;font-size:32px;line-height:48px}
+  .pn-l{font-size:32px;line-height:48px}
   .stay-life{padding-top:90px}
   .stay-life .strips{margin-top:32px}
   .partners{padding:90px 20px 110px}

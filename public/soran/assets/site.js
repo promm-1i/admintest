@@ -28,7 +28,7 @@
   });
 
   /* 스크롤 등장: 요소 상단 + 100px 이 화면 하단에 닿으면 .in */
-  var items = $$('.sr, .sr-mask, .sr-rot, .sr-roll, .intro-title, .sp-list, .round-top, .guide-pic, .sp-txt h3');
+  var items = $$('.sr, .sr-line, .sr-mask, .sr-rot, .sr-roll, .intro-title, .sp-list, .round-top, .guide-pic, .sp-txt h3');
   function reveal() {
     var vh = window.innerHeight;
     for (var i = items.length - 1; i >= 0; i--) {
