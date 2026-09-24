@@ -67,7 +67,7 @@
   function setMenu(open) {
     if (!hd) return;
     hd.classList.toggle('menu-open', open);
-    body.classList.toggle('lock', open);
+    body.classList.toggle('lock', open && mq('(max-width: 767px)'));
     if (menuBtn) menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (menu) menu.setAttribute('aria-hidden', open ? 'false' : 'true');
     swapBg(1);

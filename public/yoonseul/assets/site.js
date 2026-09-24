@@ -59,15 +59,15 @@
   /* ---------- 전체 메뉴 (열기: 원 scale 150 .8s · 내용 1.4s/.8s 지연, 닫기: closing 600ms) ---------- */
   var sm = $('#screenMenu'), smBtn = $('.hd-menu'), smClose = $('.sm-close'), lastFocus = null, smTimer;
   function openMenu() {
-    lastFocus = document.activeElement; clearTimeout(smTimer);
+    lastFocus = document.activeElement; clearTimeout(smTimer); sm.classList.remove('is-closing');
     sm.hidden = false;
     requestAnimationFrame(function () { requestAnimationFrame(function () { sm.classList.add('is-open'); }); });
     smBtn.setAttribute('aria-expanded', 'true'); stopScroll();
     setTimeout(function () { smClose.focus(); }, 50);
   }
   function closeMenu() {
-    sm.classList.remove('is-open'); smBtn.setAttribute('aria-expanded', 'false'); startScroll();
-    smTimer = setTimeout(function () { sm.hidden = true; }, reduce ? 0 : 600);
+    sm.classList.remove('is-open'); sm.classList.add('is-closing'); smBtn.setAttribute('aria-expanded', 'false'); startScroll();
+    smTimer = setTimeout(function () { sm.classList.remove('is-closing'); sm.hidden = true; }, reduce ? 0 : 600);
     if (lastFocus) lastFocus.focus();
   }
   if (sm && smBtn) {
