@@ -11,7 +11,6 @@
     body.classList.toggle('menu-open', open);
     if (toggle) {
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      $('.lbl', toggle).textContent = open ? 'CLOSE' : 'MENU';
     }
     if (panel) panel.setAttribute('aria-hidden', open ? 'false' : 'true');
     if (open && panel) { var f = $('a', panel); if (f) setTimeout(function () { f.focus(); }, 300); }
