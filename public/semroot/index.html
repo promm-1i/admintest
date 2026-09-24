@@ -8,7 +8,7 @@
 <meta property="og:title" content="수학 문제은행 · 학습관리 | 셈루트">
 <meta property="og:description" content="교과서·기출·유형을 한곳에 담은 수학 문제은행. 시험지 출제, 자동 채점, 오답 관리, 맞춤 교재까지 셈루트 하나로 끝냅니다.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="./assets/og.jpg">
+<meta property="og:image" content="./og.jpg">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -33,10 +33,24 @@
 .in-link{position:relative;display:block;height:100%;border-radius:16rem;overflow:hidden}
 .in-slide:not(:first-child) .in-link{position:absolute;inset:0}
 .in-link img{width:100%;height:100%;object-fit:cover}
-.in-dots{position:absolute;left:50%;bottom:24rem;transform:translateX(-50%);display:flex;gap:8rem}
-.in-dots button{width:8rem;height:8rem;border-radius:50%;background:rgba(255,255,255,.5);
-  transition:width .3s,background .3s}
-.in-dots button.on{width:48rem;border-radius:4rem;background:var(--white)}
+.in-ctrl-row{position:absolute;left:50%;bottom:24rem;transform:translateX(-50%);
+  display:flex;align-items:center;gap:12rem}
+.in-dots{display:flex;gap:8rem}
+.in-dot{width:8rem;height:8rem;border-radius:50%;background:rgba(255,255,255,.5);
+  overflow:hidden;transition:width .3s,background .3s}
+.in-dot.on{width:48rem;border-radius:4rem;background:rgba(255,255,255,.4)}
+.in-bar{display:block;width:100%;height:100%}
+.in-bar>i{display:block;width:0;height:100%;background:var(--white)}
+.in-state{position:relative;width:20rem;height:20rem;border-radius:50%;
+  background:rgba(255,255,255,.35)}
+.in-state::before,.in-state::after{content:'';position:absolute;top:50%;
+  width:2.5rem;height:9rem;margin-top:-4.5rem;background:var(--white);border-radius:1rem}
+.in-state::before{left:6rem}
+.in-state::after{right:6rem}
+.in-state.is-pause::before{left:7rem;width:0;height:0;margin-top:-5rem;background:none;
+  border-left:8rem solid var(--white);border-top:5rem solid transparent;
+  border-bottom:5rem solid transparent;border-radius:0}
+.in-state.is-pause::after{display:none}
 
 /* 2 BANK */
 .bk-wrap{position:relative;overflow:hidden}
@@ -89,6 +103,7 @@
 .sl-more{display:inline-block;padding:4rem 0;color:var(--white);
   box-shadow:inset 0 -2rem 0 0 currentColor}
 @media (hover:hover) and (pointer:fine){.sl-link:hover .sl-inner{transform:rotateY(180deg)}}
+.sl-item.is-flip .sl-inner{transform:rotateY(180deg)}
 
 /* 4 DATA */
 .dt.sec-main{padding:120rem 0;background:#000}
@@ -103,11 +118,10 @@
   line-height:1.3;letter-spacing:0;color:var(--white);font-variant-numeric:tabular-nums}
 .dg-list{display:block;height:calc(var(--f01)*1.3);overflow:hidden}
 .dg-roll{display:block;transform:translateY(0)}
-.dt.on .dg-roll{transition:transform 1.6s cubic-bezier(.2,.8,.2,1);
-  transform:translateY(calc(var(--f01)*1.3*-9))}
-.dg-roll span{display:block;height:calc(var(--f01)*1.3)}
+.dg-roll span{display:block;height:calc(var(--f01)*1.3);transform:rotate(-1deg)}
 .dt-item b{display:block;margin-top:8rem;font-size:var(--f07);line-height:var(--lh07);font-weight:500;color:var(--white)}
-@media (prefers-reduced-motion:reduce){.dt.on .dg-roll{transition:none}}
+.dt.on .dg-roll span{transform:rotate(0deg)}
+@media (prefers-reduced-motion:reduce){.dg-roll,.dg-roll span{transition:none!important}}
 
 /* 5 REVIEW */
 .rv-wrap{overflow:hidden;padding-top:20rem}
@@ -134,7 +148,8 @@
 
 /* 6 CTA */
 .ct-motion{position:relative;display:flex;align-items:center;justify-content:center;gap:20rem;
-  margin:0 -27rem;z-index:1}
+  margin:0 -27rem;z-index:1;opacity:0}
+.ct-item{will-change:transform}
 .ct-col{display:flex;flex-direction:column;gap:20rem}
 .ct-col:nth-child(1),.ct-col:nth-child(2),.ct-col:nth-child(4),.ct-col:nth-child(5){width:360rem}
 .ct-col:nth-child(3){width:454rem}
@@ -148,7 +163,9 @@
 
 /* 7 EPILOGUE */
 .ep.sec-main{padding-top:0;display:flex;align-items:center;justify-content:center;height:800rem}
-.ep-bg{position:absolute;inset:0;background:var(--sec) url(./assets/ep-bg.jpg) no-repeat center/cover}
+.ep-bg{position:absolute;inset:0;background:var(--sec) url(./assets/ep-bg.jpg) no-repeat center/cover;
+  clip-path:inset(16.68% 39.58% round 32rem);will-change:clip-path}
+.ep-content{opacity:0}
 .ep-bg::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.3)}
 .ep-content{position:relative;text-align:center;color:var(--white)}
 .ep-title{font-size:var(--f02);font-weight:700;line-height:var(--lh02);letter-spacing:var(--ls1)}
@@ -242,7 +259,10 @@
       </div>
     </div>
     <div class="in-visual"><ul class="in-slider"><li class="in-slide"><a class="in-link" href="./s-bank.html"><img src="./assets/intro-1.jpg" alt="문항을 고르고 시험지를 만드는 화면" width="1240" height="395" fetchpriority="high"></a></li><li class="in-slide"><a class="in-link" href="./s-bank.html"><img src="./assets/intro-2.jpg" alt="학생별 오답이 쌓인 관리 화면" width="1240" height="395" loading="lazy"></a></li></ul>
-      <div class="in-dots" role="tablist" aria-label="화면 넘기기"></div>
+      <div class="in-ctrl-row">
+        <div class="in-dots" aria-label="화면 넘기기"></div>
+        <button class="in-state" type="button" aria-label="자동 넘김 멈춤"></button>
+      </div>
     </div>
   </div>
 </section>
@@ -329,67 +349,239 @@
 <script src="./assets/site.js"></script>
 <script>
 (function(){
-  /* 인트로 슬라이드 */
-  var slides=[].slice.call(document.querySelectorAll('.in-slide'));
-  var dots=document.querySelector('.in-dots'), cur=0;
-  if(slides.length>1){
-    slides.forEach(function(_,i){
-      var b=document.createElement('button'); b.type='button';
-      b.setAttribute('aria-label',(i+1)+'번째 화면');
-      b.addEventListener('click',function(){go(i)}); dots.appendChild(b);
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var E3 = 'cubic-bezier(.165,.84,.44,1)';   /* gsap power3.out */
+  var E4 = 'cubic-bezier(.165,.84,.44,1)';   /* power4.out — 끝이 더 눕는다 */
+
+  /* ── 1 인트로 슬라이더 ──────────────────────────────────────
+     원본 mainIntroSlider: 자동 5000ms, 불릿 안 진행 막대가 0→100%,
+     재생/일시정지 상태 버튼. 막대가 다 차면 다음 장으로. */
+  (function(){
+    var slides = [].slice.call(document.querySelectorAll('.in-slide'));
+    var dots = document.querySelector('.in-dots');
+    var state = document.querySelector('.in-state');
+    if (slides.length < 2 || !dots) return;
+    var SPEED = 5000, cur = 0, timer = null, playing = true;
+
+    slides.forEach(function(_, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'in-dot';
+      b.setAttribute('aria-label', (i + 1) + '번째 화면');
+      b.innerHTML = '<span class="in-bar"><i></i></span>';
+      b.addEventListener('click', function(){ go(i); });
+      dots.appendChild(b);
     });
-    var go=function(i){cur=i;slides.forEach(function(s,k){s.classList.toggle('on',k===i)});
-      [].forEach.call(dots.children,function(b,k){b.classList.toggle('on',k===i)})};
-    go(0); setInterval(function(){go((cur+1)%slides.length)},5200);
-  }
+    var bars = [].slice.call(dots.querySelectorAll('.in-bar > i'));
 
-  /* 문제은행 슬라이더 */
-  var sl=document.querySelector('.bk-slider');
-  if(sl){
-    var idx=0, n=sl.children.length, num=document.querySelector('.bk-num b');
-    var draw=function(){
-      var w=sl.children[0].getBoundingClientRect().width+
-            parseFloat(getComputedStyle(sl.children[0]).marginLeft)*2;
-      sl.style.transform='translateX(calc(50% - '+(w*idx+w/2)+'px))';
-      num.textContent=idx+1;
-    };
-    document.querySelector('.bk-prev').addEventListener('click',function(){idx=(idx-1+n)%n;draw()});
-    document.querySelector('.bk-next').addEventListener('click',function(){idx=(idx+1)%n;draw()});
-    addEventListener('resize',draw); draw();
-  }
-
-  /* 후기 가로 흐름 */
-  var rs=document.querySelector('.rv-slider');
-  if(rs){
-    var dragging=false,sx=0,st=0,off=0;
-    var wrap=rs.parentElement;
-    wrap.style.cursor='grab';
-    wrap.addEventListener('pointerdown',function(e){dragging=true;sx=e.clientX;st=off;
-      wrap.setPointerCapture(e.pointerId);wrap.style.cursor='grabbing'});
-    wrap.addEventListener('pointermove',function(e){if(!dragging)return;
-      var max=rs.scrollWidth-wrap.clientWidth;
-      off=Math.min(0,Math.max(-max,st+e.clientX-sx));
-      rs.style.transform='translateX('+off+'px)'});
-    ['pointerup','pointercancel'].forEach(function(t){
-      wrap.addEventListener(t,function(){dragging=false;wrap.style.cursor='grab'})});
-  }
-
-  /* 숫자 굴림 · CTA 이미지 등장 */
-  var dt=document.querySelector('.dt');
-  if(dt){new IntersectionObserver(function(es,o){es.forEach(function(e){
-    if(e.isIntersecting){dt.classList.add('on');o.disconnect()}})},{threshold:.4}).observe(dt)}
-
-  var cm=document.querySelector('.ct-motion');
-  if(cm){
-    [].forEach.call(cm.querySelectorAll('.ct-item'),function(el,i){
-      el.style.opacity=0; el.style.transform='translateY(40rem)';
-      el.style.transition='opacity .8s '+(i*0.07)+'s,transform .8s '+(i*0.07)+'s';
+    function go(i){
+      cur = i;
+      slides.forEach(function(s, k){ s.classList.toggle('on', k === i); });
+      [].forEach.call(dots.children, function(b, k){ b.classList.toggle('on', k === i); });
+      bars.forEach(function(x){ x.style.transition = 'none'; x.style.width = '0%'; });
+      if (RM) return;
+      void bars[i].offsetWidth;
+      if (playing) run();
+    }
+    function run(){
+      clearTimeout(timer);
+      bars[cur].style.transition = 'width ' + (SPEED / 1000) + 's linear';
+      bars[cur].style.width = '100%';
+      timer = setTimeout(function(){ go((cur + 1) % slides.length); }, SPEED);
+    }
+    if (state) state.addEventListener('click', function(){
+      playing = !playing;
+      state.classList.toggle('is-pause', !playing);
+      state.setAttribute('aria-label', playing ? '자동 넘김 멈춤' : '자동 넘김 재생');
+      if (playing) run();
+      else {
+        clearTimeout(timer);
+        var w = getComputedStyle(bars[cur]).width;
+        bars[cur].style.transition = 'none';
+        bars[cur].style.width = w;
+      }
     });
-    new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){
-      [].forEach.call(cm.querySelectorAll('.ct-item'),function(el){
-        el.style.opacity=1;el.style.transform='none'});o.disconnect()}})},
-      {threshold:.2}).observe(cm);
-  }
+    go(0);
+  })();
+
+  /* ── 2 문제은행 슬라이더 ────────────────────────────────────
+     원본 mainBankSlider: Swiper centeredSlides, 좌우 슬라이드가 살짝 보인다.
+     원본은 슬라이드마다 배경 영상을 켜고 끄지만 우리는 이미지다. */
+  (function(){
+    var sl = document.querySelector('.bk-slider');
+    if (!sl) return;
+    var n = sl.children.length, idx = 0;
+    var num = document.querySelector('.bk-num b');
+    function draw(){
+      var first = sl.children[0];
+      var cs = getComputedStyle(first);
+      var w = first.getBoundingClientRect().width + parseFloat(cs.marginLeft) * 2;
+      sl.style.transform = 'translateX(calc(50% - ' + (w * idx + w / 2) + 'px))';
+      if (num) num.textContent = idx + 1;
+      [].forEach.call(sl.children, function(li, k){ li.classList.toggle('is-on', k === idx); });
+    }
+    function move(d){ idx = (idx + d + n) % n; draw(); }
+    var p = document.querySelector('.bk-prev'), x = document.querySelector('.bk-next');
+    if (p) p.addEventListener('click', function(){ move(-1); });
+    if (x) x.addEventListener('click', function(){ move(1); });
+    var sx = null;
+    sl.addEventListener('pointerdown', function(e){ sx = e.clientX; });
+    addEventListener('pointerup', function(e){
+      if (sx === null) return;
+      var d = e.clientX - sx; sx = null;
+      if (Math.abs(d) > 60) move(d < 0 ? 1 : -1);
+    });
+    addEventListener('resize', draw);
+    draw();
+  })();
+
+  /* ── 3 솔루션 카드 ─────────────────────────────────────────
+     원본 mainSolutionClick: 터치 기기에서는 탭으로 뒤집고(hover 없음),
+     첫 카드는 화면에 들어올 때 한 번 저절로 뒤집혔다 돌아온다. */
+  (function(){
+    var links = [].slice.call(document.querySelectorAll('.sl-link'));
+    if (!links.length) return;
+    var touch = 'ontouchstart' in window;
+    links.forEach(function(a){
+      a.addEventListener('click', function(e){
+        if (!touch) return;
+        var li = a.closest('.sl-item');
+        if (li.classList.contains('is-flip')) return;   /* 두 번째 탭이면 이동 */
+        e.preventDefault();
+        links.forEach(function(x){ x.closest('.sl-item').classList.remove('is-flip'); });
+        li.classList.add('is-flip');
+      });
+    });
+    if (touch && !RM) {
+      var first = links[0].closest('.sl-item');
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(en){
+          if (!en.isIntersecting) return;
+          io.disconnect();
+          first.classList.add('is-flip');
+          setTimeout(function(){ first.classList.remove('is-flip'); }, 1400);
+        });
+      }, { threshold: 0.6 });
+      io.observe(first);
+    }
+  })();
+
+  /* ── 4 데이터 숫자 굴림 ────────────────────────────────────
+     원본 mainDataMotion: 목록을 두 번 이어 붙이고 yPercent -50 · repeat 2,
+     자리마다 0.1s 씩 늦게 시작, duration 3s power4.out.
+     span 은 rotate(-1deg) 로 기울어 있다가 0 으로 펴진다.
+     발동 지점 ScrollTrigger start '50% bottom' — 섹션 절반이 화면에 들어올 때. */
+  (function(){
+    var dt = document.querySelector('.dt');
+    if (!dt) return;
+    var rolls = [].slice.call(dt.querySelectorAll('.dg-roll'));
+    rolls.forEach(function(r){ r.innerHTML = r.innerHTML + r.innerHTML; });
+    if (RM) { dt.classList.add('on'); return; }
+    /* 원본 ScrollTrigger start '50% bottom' — 섹션의 절반 지점이 화면 바닥에 닿으면 한 번.
+       IntersectionObserver 로는 빠르게 지나갈 때 놓친다. */
+    var fired = false;
+    function check(){
+      if (fired) return;
+      var r = dt.getBoundingClientRect();
+      if (r.top + r.height * 0.5 > innerHeight) return;
+      fired = true;
+      removeEventListener('scroll', check);
+      rolls.forEach(function(r2, i){
+        r2.style.transition = 'transform 3s ' + E4 + ' ' + (i * 0.1) + 's';
+        r2.style.transform = 'translateY(-50%)';
+        [].forEach.call(r2.children, function(sp){
+          sp.style.transition = 'transform 3s ' + E3 + ' ' + (i * 0.1) + 's';
+          sp.style.transform = 'rotate(0deg)';
+        });
+      });
+      dt.classList.add('on');
+    }
+    addEventListener('scroll', check, { passive: true });
+    check();
+  })();
+
+  /* ── 5 후기 띠 ─────────────────────────────────────────── */
+  (function(){
+    var rs = document.querySelector('.rv-slider');
+    if (!rs) return;
+    var wrap = rs.parentElement, drag = false, sx = 0, st = 0, off = 0;
+    wrap.style.cursor = 'grab';
+    wrap.addEventListener('pointerdown', function(e){
+      drag = true; sx = e.clientX; st = off;
+      wrap.setPointerCapture(e.pointerId); wrap.style.cursor = 'grabbing';
+    });
+    wrap.addEventListener('pointermove', function(e){
+      if (!drag) return;
+      var max = rs.scrollWidth - wrap.clientWidth;
+      off = Math.min(0, Math.max(-max, st + e.clientX - sx));
+      rs.style.transform = 'translateX(' + off + 'px)';
+    });
+    ['pointerup', 'pointercancel'].forEach(function(t){
+      wrap.addEventListener(t, function(){ drag = false; wrap.style.cursor = 'grab'; });
+    });
+  })();
+
+  /* ── 6 CTA 이미지 모임 (스크럽) ────────────────────────────
+     원본 mainCtaMotion: ScrollTrigger scrub 1, start '30% bottom' end 'bottom bottom'.
+     일곱 장이 제각기 다른 곳에서 가운데로 모이고 4번째는 1.4배에서 줄어든다.
+     rem 단위라 화면 폭에 따라 이동 거리가 달라진다. */
+  (function(){
+    var motion = document.querySelector('.ct-motion');
+    if (!motion) return;
+    var items = [].slice.call(motion.querySelectorAll('.ct-item'));
+    if (items.length < 7 || RM) { motion.style.opacity = 1; return; }
+    var FROM = [
+      { x: -300, y: 0, s: 1 }, { x: -200, y: -200, s: 1 }, { x: -200, y: 200, s: 1 },
+      { x: 0, y: 0, s: 1.4 },
+      { x: 200, y: -200, s: 1 }, { x: 200, y: 200, s: 1 }, { x: 300, y: 0, s: 1 }
+    ];
+    var rem = 1;
+    function unit(){ rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 1; }
+    function draw(){
+      var r = motion.getBoundingClientRect();
+      var vh = innerHeight;
+      /* start '30% bottom' : 요소 30% 지점이 화면 바닥에 닿을 때 0
+         end   'bottom bottom' : 요소 바닥이 화면 바닥에 닿을 때 1 */
+      var s0 = r.top + r.height * 0.3 - vh;
+      var s1 = r.bottom - vh;
+      var p = (0 - s0) / (s1 - s0);
+      p = Math.max(0, Math.min(1, p));
+      motion.style.opacity = p;
+      items.forEach(function(el, i){
+        var f = FROM[i];
+        var x = f.x * (1 - p) * rem, y = f.y * (1 - p) * rem;
+        var sc = f.s + (1 - f.s) * p;
+        el.style.transform = 'translate(' + x + 'px,' + y + 'px) scale(' + sc + ')';
+      });
+    }
+    unit(); draw();
+    addEventListener('scroll', draw, { passive: true });
+    addEventListener('resize', function(){ unit(); draw(); });
+  })();
+
+  /* ── 7 마무리 배경 펼침 (스크럽) ───────────────────────────
+     원본 mainEpilogueMotion: clipPath inset(16.68% 39.58% round 32rem) → inset(0 round 0),
+     내용은 뒤따라 나타난다. start 'top bottom' end 'bottom+=50% bottom', scrub 1. */
+  (function(){
+    var ep = document.querySelector('.ep');
+    if (!ep) return;
+    var bg = ep.querySelector('.ep-bg'), ct = ep.querySelector('.ep-content');
+    if (!bg || RM) { if (bg) bg.style.clipPath = 'none'; return; }
+    function draw(){
+      var r = ep.getBoundingClientRect(), vh = innerHeight;
+      var s0 = r.top - vh;
+      var s1 = r.bottom + r.height * 0.5 - vh;
+      var p = (0 - s0) / (s1 - s0);
+      p = Math.max(0, Math.min(1, p));
+      var e = 1 - Math.pow(1 - p, 3);                       /* power3.out */
+      bg.style.clipPath = 'inset(' + (16.68 * (1 - e)).toFixed(2) + '% '
+        + (39.58 * (1 - e)).toFixed(2) + '% round ' + (32 * (1 - e)).toFixed(1) + 'rem)';
+      if (ct) ct.style.opacity = Math.max(0, Math.min(1, (e - 0.3) / 0.7));
+    }
+    draw();
+    addEventListener('scroll', draw, { passive: true });
+    addEventListener('resize', draw);
+  })();
 })();
 </script>
 </body>

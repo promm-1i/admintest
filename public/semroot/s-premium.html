@@ -8,7 +8,7 @@
 <meta property="og:title" content="프리미엄 | 셈루트">
 <meta property="og:description" content="차원이 다른 맞춤 학습 셈루트 프리미엄">
 <meta property="og:type" content="website">
-<meta property="og:image" content="./assets/og.jpg">
+<meta property="og:image" content="./og.jpg">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -22,7 +22,9 @@
 /* BANNER */
 .bn-img{position:relative;padding-top:37.5%;border-radius:16rem;overflow:hidden;
   background:var(--g200)}
-.bn-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bn-slider li{position:absolute;inset:0;opacity:0;transition:opacity 1s}
+.bn-slider li.on{opacity:1}
+.bn-img img{width:100%;height:100%;object-fit:cover}
 
 /* COLUMN */
 .cl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:80rem 20rem}
@@ -44,10 +46,12 @@
 .ac-ico{position:absolute;left:0;width:32rem;color:var(--pri);transform:scale(0);
   transition:transform .3s}
 .ac-ico svg{display:block;width:100%;height:auto}
-.ac-desc{display:none;margin-top:12rem;font-size:var(--f09);line-height:var(--lh09);color:var(--g800)}
+.ac-desc{display:block;overflow:hidden;max-height:0;margin-top:0;font-size:var(--f09);
+  line-height:var(--lh09);color:var(--g800);opacity:0;
+  transition:max-height .5s ease,margin-top .5s ease,opacity .5s ease}
 .ac-ctrl.on .ac-title{color:var(--black);padding-left:44rem}
 .ac-ctrl.on .ac-ico{transform:scale(1)}
-.ac-ctrl.on .ac-desc{display:block}
+.ac-ctrl.on .ac-desc{max-height:200rem;margin-top:12rem;opacity:1}
 .ac-list{position:relative;width:790rem;aspect-ratio:1/0.9113;flex:none}
 .ac-item{position:absolute;inset:0;border-radius:16rem;overflow:hidden;opacity:0;
   visibility:hidden;transition:opacity .5s,visibility .5s;background:var(--g200)}
@@ -129,7 +133,7 @@
 <nav class="art-tabs" aria-label="서비스 메뉴"><ul><li><a href="./s-bank.html">문제은행</a></li><li><a href="./s-note.html">오답관리</a></li><li><a href="./s-exam.html">내신·기출</a></li><li><a href="./s-textbook.html">자체 교재</a></li><li><a href="./s-consulting.html">상담·홍보</a></li><li class="on"><a href="./s-premium.html">프리미엄</a></li></ul></nav>
 <div class="art-body">
 <section class="sec-main sv"><div class="shell"><div class="sv-box"><img src="./assets/sv-premium.jpg" alt="프리미엄" width="1600" height="600" fetchpriority="high"></div></div></section>
-<section class="sec-main bn"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">선생님의 빈자리를 채우는<br>완벽한 영상 강의</h2></div><div class="bn-img" data-rv><img src="./assets/bn-premium.jpg" alt="영상 강의 화면" width="1600" height="600" loading="lazy"></div></div></section>
+<section class="sec-main bn"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">선생님의 빈자리를 채우는<br>완벽한 영상 강의</h2></div><div class="bn-img" data-rv><ul class="bn-slider"><li><img src="./assets/bn-premium.jpg" alt="영상 강의 화면" width="1600" height="600" loading="lazy"></li></ul></div></div></section>
 <section class="sec-main cl cl--02"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">프리미엄에만<br>있는 것</h2><p class="sec-p">영상 강의와 복습 과제가 함께 옵니다.</p></div><ul class="cl-grid"><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/pm-c1.jpg" alt="개념·풀이 강의" width="680" height="517" loading="lazy"></div><div class="cl-content"><b class="cl-title">개념·풀이 강의</b><p class="cl-desc">단원 개념 강의와 모든 문항의 풀이 영상이 붙어 있어 결석생도 따라옵니다</p></div></li><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/pm-c2.jpg" alt="복습 과제" width="680" height="517" loading="lazy"></div><div class="cl-content"><b class="cl-title">복습 과제</b><p class="cl-desc">강의를 본 뒤 복습 과제가 자동으로 배정되고 수행 여부가 기록됩니다</p></div></li></ul></div></section>
 <section class="sec-main ac sec-main--secondary"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">프리미엄 전용<br>독점 콘텐츠</h2><p class="sec-p">프리미엄에서만 열리는 콘텐츠입니다.</p></div><div class="ac-box"><div class="ac-ctrls"><a class="ac-ctrl on" href="#ac-0" data-i="0"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>경시 대비</span><span class="ac-desc">경시·영재 대비 문항을 독점으로 제공합니다</span></a><a class="ac-ctrl" href="#ac-1" data-i="1"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>AI 추천</span><span class="ac-desc">학생 기록을 보고 다음에 풀 문항을 추천합니다</span></a><a class="ac-ctrl" href="#ac-2" data-i="2"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>학습 리포트</span><span class="ac-desc">주간 리포트가 자동으로 만들어집니다</span></a></div><ul class="ac-list"><li class="ac-item on" id="ac-0"><img src="./assets/pm-a1.jpg" alt="경시 대비" width="1580" height="1440" loading="lazy"></li><li class="ac-item" id="ac-1"><img src="./assets/pm-a2.jpg" alt="AI 추천" width="1580" height="1440" loading="lazy"></li><li class="ac-item" id="ac-2"><img src="./assets/pm-a3.jpg" alt="학습 리포트" width="1580" height="1440" loading="lazy"></li></ul></div></div></section>
 <section class="sec-main sec-main--secondary rvw"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">프리미엄을 써 본 선생님들</h2></div><div class="rvw-box" data-rv><blockquote class="rvw-quote"><p>영상 강의 덕분에 결석생 관리가 됩니다. 한 발 앞서 있다는 느낌입니다.</p><footer>제주 · 온라인 수업 강사</footer></blockquote><div class="rvw-media"><img src="./assets/rvw-premium.jpg" alt="" width="1100" height="740" loading="lazy" aria-hidden="true"></div></div></div></section>
@@ -159,20 +163,42 @@
 <script src="./assets/site.js"></script>
 <script>
 (function(){
-  var ctrls=[].slice.call(document.querySelectorAll('.ac-ctrl'));
-  if(!ctrls.length)return;
-  ctrls.forEach(function(c){
-    var pick=function(e){
-      if(e)e.preventDefault();
-      var box=c.closest('.ac-box');
-      box.querySelectorAll('.ac-ctrl').forEach(function(x){x.classList.remove('on')});
-      box.querySelectorAll('.ac-item').forEach(function(x){x.classList.remove('on')});
-      c.classList.add('on');
-      var pane=box.querySelectorAll('.ac-item')[+c.dataset.i];
-      if(pane)pane.classList.add('on');
-    };
-    c.addEventListener('click',pick);
-    c.addEventListener('mouseenter',function(){pick()});
+  /* 원본 serviceAccordion — 호버가 아니라 '클릭'으로만 바뀐다.
+     설명은 500ms 로 펼쳐지고, 바뀔 때 아코디언 윗선으로 스크롤을 맞춘다. */
+  var boxes=[].slice.call(document.querySelectorAll('.ac-box'));
+  boxes.forEach(function(box){
+    var ctrls=[].slice.call(box.querySelectorAll('.ac-ctrl'));
+    var panes=[].slice.call(box.querySelectorAll('.ac-item'));
+    var sliding=false;
+    ctrls.forEach(function(c,i){
+      c.addEventListener('click',function(e){
+        e.preventDefault();
+        if(sliding||c.classList.contains('on'))return;
+        sliding=true;
+        var hd=document.getElementById('header');
+        var y=scrollY+box.getBoundingClientRect().top-(hd?hd.offsetHeight:0);
+        ctrls.forEach(function(x){x.classList.remove('on')});
+        panes.forEach(function(x){x.classList.remove('on')});
+        c.classList.add('on');
+        if(panes[i])panes[i].classList.add('on');
+        scrollTo({top:y,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+        setTimeout(function(){sliding=false},500);
+      });
+    });
+  });
+
+  /* 원본 serviceBanner — loop · speed 1000 · autoplay 3000 · fade crossFade */
+  [].forEach.call(document.querySelectorAll('.bn-slider'),function(sl){
+    var items=[].slice.call(sl.children);
+    if(items.length<2)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){items[0].classList.add('on');return}
+    var i=0;
+    items[0].classList.add('on');
+    setInterval(function(){
+      items[i].classList.remove('on');
+      i=(i+1)%items.length;
+      items[i].classList.add('on');
+    },3000);
   });
 })();
 </script>

@@ -8,7 +8,7 @@
 <meta property="og:title" content="문제은행 | 셈루트">
 <meta property="og:description" content="자체 제작 문항 110만 개 이상 가장 방대한 수학 문제은행">
 <meta property="og:type" content="website">
-<meta property="og:image" content="./assets/og.jpg">
+<meta property="og:image" content="./og.jpg">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -22,7 +22,9 @@
 /* BANNER */
 .bn-img{position:relative;padding-top:37.5%;border-radius:16rem;overflow:hidden;
   background:var(--g200)}
-.bn-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.bn-slider li{position:absolute;inset:0;opacity:0;transition:opacity 1s}
+.bn-slider li.on{opacity:1}
+.bn-img img{width:100%;height:100%;object-fit:cover}
 
 /* COLUMN */
 .cl-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:80rem 20rem}
@@ -44,10 +46,12 @@
 .ac-ico{position:absolute;left:0;width:32rem;color:var(--pri);transform:scale(0);
   transition:transform .3s}
 .ac-ico svg{display:block;width:100%;height:auto}
-.ac-desc{display:none;margin-top:12rem;font-size:var(--f09);line-height:var(--lh09);color:var(--g800)}
+.ac-desc{display:block;overflow:hidden;max-height:0;margin-top:0;font-size:var(--f09);
+  line-height:var(--lh09);color:var(--g800);opacity:0;
+  transition:max-height .5s ease,margin-top .5s ease,opacity .5s ease}
 .ac-ctrl.on .ac-title{color:var(--black);padding-left:44rem}
 .ac-ctrl.on .ac-ico{transform:scale(1)}
-.ac-ctrl.on .ac-desc{display:block}
+.ac-ctrl.on .ac-desc{max-height:200rem;margin-top:12rem;opacity:1}
 .ac-list{position:relative;width:790rem;aspect-ratio:1/0.9113;flex:none}
 .ac-item{position:absolute;inset:0;border-radius:16rem;overflow:hidden;opacity:0;
   visibility:hidden;transition:opacity .5s,visibility .5s;background:var(--g200)}
@@ -129,7 +133,7 @@
 <nav class="art-tabs" aria-label="서비스 메뉴"><ul><li class="on"><a href="./s-bank.html">문제은행</a></li><li><a href="./s-note.html">오답관리</a></li><li><a href="./s-exam.html">내신·기출</a></li><li><a href="./s-textbook.html">자체 교재</a></li><li><a href="./s-consulting.html">상담·홍보</a></li><li><a href="./s-premium.html">프리미엄</a></li></ul></nav>
 <div class="art-body">
 <section class="sec-main sv"><div class="shell"><div class="sv-box"><img src="./assets/sv-bank.jpg" alt="문제은행" width="1600" height="600" fetchpriority="high"></div></div></section>
-<section class="sec-main bn"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">무려 4,000여 권<br>가장 많은 시중 교재 지원</h2><p class="sec-p">많이 쓰는 부교재 4,000여 권을 페이지 단위로 연동해, 교재 몇 쪽이라고만 하면 문항이 따라옵니다.</p></div><div class="bn-img" data-rv><img src="./assets/bn-bank.jpg" alt="교재 목록 화면" width="1600" height="600" loading="lazy"></div></div></section>
+<section class="sec-main bn"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">무려 4,000여 권<br>가장 많은 시중 교재 지원</h2><p class="sec-p">많이 쓰는 부교재 4,000여 권을 페이지 단위로 연동해, 교재 몇 쪽이라고만 하면 문항이 따라옵니다.</p></div><div class="bn-img" data-rv><ul class="bn-slider"><li><img src="./assets/bn-bank.jpg" alt="교재 목록 화면" width="1600" height="600" loading="lazy"></li></ul></div></div></section>
 <section class="sec-main cl"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">어떤 문항이<br>들어 있나요</h2><p class="sec-p">교과서부터 학교 기출까지 한곳에 모았습니다.</p></div><ul class="cl-grid"><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/bk-c1.jpg" alt="교과서·부교재" width="680" height="680" loading="lazy"></div><div class="cl-content"><b class="cl-title">교과서·부교재</b><p class="cl-desc">출판사별 교과서와 시중 부교재 4,000여 권을 단원과 페이지 그대로 담았습니다</p></div></li><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/bk-c2.jpg" alt="학교 기출" width="680" height="680" loading="lazy"></div><div class="cl-content"><b class="cl-title">학교 기출</b><p class="cl-desc">전국 중·고등학교 기출을 학교·학년·학기로 걸러 몇 번의 클릭으로 찾습니다</p></div></li><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/bk-c3.jpg" alt="자체 제작 문항" width="680" height="680" loading="lazy"></div><div class="cl-content"><b class="cl-title">자체 제작 문항</b><p class="cl-desc">셈루트가 직접 만든 110만 문항이 매달 늘어나고, 오탈자는 바로 고쳐집니다</p></div></li></ul></div></section>
 <section class="sec-main ac"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">압도적인 콘텐츠를<br>선생님 수업에 맞게 커스텀</h2><p class="sec-p">네 단계면 시험지 한 장이 완성됩니다.</p></div><div class="ac-box"><div class="ac-ctrls"><a class="ac-ctrl on" href="#ac-0" data-i="0"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>단원으로 찾기</span><span class="ac-desc">교과 과정 그대로 단원을 눌러 내려가면 원하는 문항이 나옵니다</span></a><a class="ac-ctrl" href="#ac-1" data-i="1"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>유형으로 찾기</span><span class="ac-desc">같은 유형을 난이도 순으로 이어 붙여 한 번에 출제합니다</span></a><a class="ac-ctrl" href="#ac-2" data-i="2"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>난이도 조절</span><span class="ac-desc">문항마다 5단계 난이도가 붙어 있어 반 수준에 맞춰 고릅니다</span></a><a class="ac-ctrl" href="#ac-3" data-i="3"><span class="ac-title"><i class="ac-ico" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="none" stroke="currentColor" stroke-width="2"/><path d="M11 16.5l3.5 3.5 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>시험지 완성</span><span class="ac-desc">고른 문항을 끌어 옮겨 순서를 바꾸고 바로 인쇄합니다</span></a></div><ul class="ac-list"><li class="ac-item on" id="ac-0"><img src="./assets/bk-a1.jpg" alt="단원으로 찾기" width="1580" height="1440" loading="lazy"></li><li class="ac-item" id="ac-1"><img src="./assets/bk-a2.jpg" alt="유형으로 찾기" width="1580" height="1440" loading="lazy"></li><li class="ac-item" id="ac-2"><img src="./assets/bk-a3.jpg" alt="난이도 조절" width="1580" height="1440" loading="lazy"></li><li class="ac-item" id="ac-3"><img src="./assets/bk-a4.jpg" alt="시험지 완성" width="1580" height="1440" loading="lazy"></li></ul></div></div></section>
 <section class="sec-main cl cl--02 sec-main--secondary"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">만든 시험지는<br>이렇게 쓰입니다</h2><p class="sec-p">종이로도, 앱으로도 그대로 나갑니다.</p></div><ul class="cl-grid"><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/bk-d1.jpg" alt="인쇄해서 배부" width="680" height="517" loading="lazy"></div><div class="cl-content"><b class="cl-title">인쇄해서 배부</b><p class="cl-desc">여백과 단 수, 정답지 위치를 고르면 그대로 인쇄해 바로 나눠 줄 수 있습니다</p></div></li><li class="cl-item" data-rv><div class="cl-media"><img src="./assets/bk-d2.jpg" alt="앱으로 배포" width="680" height="517" loading="lazy"></div><div class="cl-content"><b class="cl-title">앱으로 배포</b><p class="cl-desc">학생 앱으로 보내면 푼 시간과 채점 결과가 자동으로 쌓여 다음 수업에 쓰입니다</p></div></li></ul></div></section>
@@ -160,20 +164,42 @@
 <script src="./assets/site.js"></script>
 <script>
 (function(){
-  var ctrls=[].slice.call(document.querySelectorAll('.ac-ctrl'));
-  if(!ctrls.length)return;
-  ctrls.forEach(function(c){
-    var pick=function(e){
-      if(e)e.preventDefault();
-      var box=c.closest('.ac-box');
-      box.querySelectorAll('.ac-ctrl').forEach(function(x){x.classList.remove('on')});
-      box.querySelectorAll('.ac-item').forEach(function(x){x.classList.remove('on')});
-      c.classList.add('on');
-      var pane=box.querySelectorAll('.ac-item')[+c.dataset.i];
-      if(pane)pane.classList.add('on');
-    };
-    c.addEventListener('click',pick);
-    c.addEventListener('mouseenter',function(){pick()});
+  /* 원본 serviceAccordion — 호버가 아니라 '클릭'으로만 바뀐다.
+     설명은 500ms 로 펼쳐지고, 바뀔 때 아코디언 윗선으로 스크롤을 맞춘다. */
+  var boxes=[].slice.call(document.querySelectorAll('.ac-box'));
+  boxes.forEach(function(box){
+    var ctrls=[].slice.call(box.querySelectorAll('.ac-ctrl'));
+    var panes=[].slice.call(box.querySelectorAll('.ac-item'));
+    var sliding=false;
+    ctrls.forEach(function(c,i){
+      c.addEventListener('click',function(e){
+        e.preventDefault();
+        if(sliding||c.classList.contains('on'))return;
+        sliding=true;
+        var hd=document.getElementById('header');
+        var y=scrollY+box.getBoundingClientRect().top-(hd?hd.offsetHeight:0);
+        ctrls.forEach(function(x){x.classList.remove('on')});
+        panes.forEach(function(x){x.classList.remove('on')});
+        c.classList.add('on');
+        if(panes[i])panes[i].classList.add('on');
+        scrollTo({top:y,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});
+        setTimeout(function(){sliding=false},500);
+      });
+    });
+  });
+
+  /* 원본 serviceBanner — loop · speed 1000 · autoplay 3000 · fade crossFade */
+  [].forEach.call(document.querySelectorAll('.bn-slider'),function(sl){
+    var items=[].slice.call(sl.children);
+    if(items.length<2)return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches){items[0].classList.add('on');return}
+    var i=0;
+    items[0].classList.add('on');
+    setInterval(function(){
+      items[i].classList.remove('on');
+      i=(i+1)%items.length;
+      items[i].classList.add('on');
+    },3000);
   });
 })();
 </script>

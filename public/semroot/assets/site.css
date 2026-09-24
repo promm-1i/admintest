@@ -59,7 +59,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:poin
 
 /* HEADER */
 #header{position:fixed;inset:0 0 auto;height:var(--hdr);background:var(--white);
-  border-bottom:1px solid transparent;z-index:100;transition:border-color .3s}
+  border-bottom:1px solid transparent;z-index:100;
+  transition:border-color .3s,transform .4s cubic-bezier(.165,.84,.44,1),
+             opacity .4s cubic-bezier(.165,.84,.44,1)}
 #header.is-stuck{border-bottom-color:var(--g300)}
 #header .shell{height:100%;display:flex;align-items:center}
 #logo{width:130rem;flex:none;color:var(--black)}
@@ -159,8 +161,8 @@ body.home main{padding-bottom:0}
 .art-cat{display:inline-block;margin-bottom:4rem;font-size:var(--f08);font-weight:700;
   color:var(--pri)}
 .art-title{font-size:var(--f01);font-weight:700;line-height:var(--lh01);letter-spacing:var(--ls1)}
-.art-tabs{position:sticky;top:calc(var(--hdr) + 20rem);z-index:2;text-align:center;
-  margin:0 auto 80rem}
+.art-tabs{position:sticky;top:calc(var(--hdr) - var(--minimize-height,0px) + 20rem);
+  z-index:2;text-align:center;margin:0 auto 80rem;transition:top .4s cubic-bezier(.165,.84,.44,1)}
 .art-tabs ul{display:inline-flex;max-width:100%;padding:10rem 12rem;border-radius:99rem;
   background:rgba(248,248,248,.8);backdrop-filter:blur(20rem);overflow-x:auto;
   scrollbar-width:none}

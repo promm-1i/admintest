@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>온라인 설명회 | 셈루트</title>
-<meta name="description" content="영상 10편으로 셈루트 사용법을 처음부터 끝까지 익히실 수 있습니다.">
+<meta name="description" content="셈루트 온라인 설명회를 신청하세요. 참석 일자를 고르고 기본 정보만 남기시면 됩니다.">
 <meta property="og:title" content="온라인 설명회 | 셈루트">
-<meta property="og:description" content="영상 10편으로 셈루트 사용법을 처음부터 끝까지 익히실 수 있습니다.">
+<meta property="og:description" content="셈루트 온라인 설명회를 신청하세요. 참석 일자를 고르고 기본 정보만 남기시면 됩니다.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="./assets/og.jpg">
+<meta property="og:image" content="./og.jpg">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -100,35 +100,49 @@
 .rd-meta dt+dd{margin:6rem 0 20rem;color:var(--g700)}
 .rd-meta dd:last-child{margin-bottom:0}
 
-/* 설명회 */
-.sm-box{display:flex;gap:40rem}
-.sm-view{flex:1;min-width:0}
-.sm-screen{position:relative;aspect-ratio:16/9;border-radius:16rem;overflow:hidden;
-  background:var(--black)}
-.sm-screen img{width:100%;height:100%;object-fit:cover;opacity:.75}
-.sm-bigplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:80rem;
-  height:80rem;border-radius:50%;background:rgba(255,255,255,.92)}
-.sm-bigplay::after{content:'';position:absolute;left:52%;top:50%;transform:translate(-50%,-50%);
-  border-left:22rem solid var(--pri);border-top:14rem solid transparent;
-  border-bottom:14rem solid transparent}
-.sm-title{margin-top:28rem;font-size:var(--f05);font-weight:700;line-height:var(--lh05)}
-.sm-desc{margin-top:8rem;font-size:var(--f09);color:var(--g700)}
-.sm-list{width:420rem;flex:none;max-height:620rem;overflow-y:auto;padding-right:8rem}
-.sm-item button{display:flex;gap:16rem;width:100%;padding:12rem;border-radius:12rem;
-  text-align:left;transition:background .3s}
-.sm-item button:hover{background:var(--g100)}
-.sm-item.on button{background:var(--g200)}
-.sm-thumb{position:relative;flex:none;width:128rem;aspect-ratio:16/9;border-radius:8rem;
-  overflow:hidden;background:var(--g300)}
-.sm-thumb img{width:100%;height:100%;object-fit:cover}
-.sm-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:28rem;
-  height:28rem;border-radius:50%;background:rgba(255,255,255,.9)}
-.sm-play::after{content:'';position:absolute;left:54%;top:50%;transform:translate(-50%,-50%);
-  border-left:9rem solid var(--pri);border-top:6rem solid transparent;
-  border-bottom:6rem solid transparent}
-.sm-item b{display:block;font-size:var(--f11);font-weight:700;line-height:var(--lh11)}
-.sm-item span{display:block;margin-top:4rem;font-size:var(--f12);color:var(--g600)}
-.iq-box{text-align:center}
+/* 단계 폼 (설명회 · 문의 공용) */
+.sn-step+.sn-step{margin-top:60rem;padding-top:60rem;border-top:1px solid var(--g300)}
+.sn-step-title{margin-bottom:24rem;font-size:var(--f07);font-weight:700;
+  line-height:var(--lh07);display:flex;align-items:baseline;gap:12rem}
+.sn-step-title b{font-family:var(--fd);font-size:var(--f09);color:var(--pri);letter-spacing:0}
+.sn-picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12rem}
+.sn-pick input{position:absolute;opacity:0;width:0;height:0}
+.sn-pick-in{display:block;padding:20rem 24rem;border:1px solid var(--g400);border-radius:12rem;
+  cursor:pointer;transition:border-color .3s,background .3s}
+.sn-pick-in b{display:block;font-size:var(--f09);font-weight:700}
+.sn-pick-in em{display:block;margin-top:4rem;font-size:var(--f11);font-style:normal;color:var(--g600)}
+.sn-pick:has(input:checked) .sn-pick-in{border-color:var(--pri);background:rgba(14,138,95,.06)}
+.sn-pick:has(input:checked) b{color:var(--pri)}
+.sn-pick:has(input:focus-visible) .sn-pick-in{outline:2px solid var(--pri);outline-offset:2px}
+.fm-sub{margin:0 0 12rem;font-size:var(--f11);font-weight:700}
+.fm-sub+.fm-chips{margin-bottom:32rem}
+.fm-sub em{margin-left:8rem;font-size:var(--f12);font-style:normal;font-weight:400;color:var(--g600)}
+.fm-chips{display:flex;flex-wrap:wrap;gap:8rem}
+.fm-chips input{position:absolute;opacity:0;width:0;height:0}
+.fm-chips label{display:block;padding:10rem 20rem;border:1px solid var(--g400);
+  border-radius:99rem;cursor:pointer;font-size:var(--f11);
+  transition:border-color .3s,color .3s,background .3s}
+.fm-chips label:has(input:checked){border-color:var(--pri);color:var(--pri);
+  background:rgba(14,138,95,.06)}
+.fm-chips label:has(input:focus-visible){outline:2px solid var(--pri);outline-offset:2px}
+.fm-gu-wrap{margin-top:16rem;padding:20rem;border-radius:12rem;background:var(--g100)}
+.fm-gu[hidden]{display:none}
+
+/* 설명회 혜택 */
+.sn-ben-box{padding:40rem;border-radius:16rem;color:var(--white);
+  background:linear-gradient(120deg,var(--sec),var(--pri))}
+.sn-ben-title{display:block;font-size:var(--f07);font-weight:700}
+.sn-ben-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20rem;margin-top:24rem}
+.sn-ben-list b{display:block;font-size:var(--f09);font-weight:700}
+.sn-ben-list span{display:block;margin-top:6rem;font-size:var(--f11);opacity:.9}
+
+/* 문의 진행 과정 */
+.proc-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20rem}
+.proc-list li{padding:32rem 24rem;border-radius:16rem;background:var(--g100)}
+.proc-list b{display:block;font-family:var(--fd);font-size:var(--f06);font-weight:600;
+  letter-spacing:0;color:var(--pri)}
+.proc-list span{display:block;margin-top:12rem;font-size:var(--f08);font-weight:700}
+.proc-list em{display:block;margin-top:8rem;font-size:var(--f11);font-style:normal;color:var(--g700)}
 
 /* 게시판 */
 .bd-row{border-bottom:1px solid var(--g300)}
@@ -201,6 +215,9 @@
   .rd-body{display:block}
   .rd-meta{margin-top:40rem}
   .fm-grid{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .sn-picks{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .sn-ben-list{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .proc-list{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bd-row a{flex-wrap:wrap;gap:6rem 16rem}
   .bd-title{flex:0 0 100%;order:-1}
 }
@@ -220,7 +237,7 @@
   </div>
 </header>
 <main>
-<div class="art-head"><b class="art-cat">설명회</b><h1 class="art-title">온라인 설명회</h1><p class="art-desc">열 개의 영상으로 셈루트의 처음부터 끝까지 따라 하실 수 있습니다.</p></div><div class="art-body"><section class="sec-main sm"><div class="shell"><div class="sm-box"><div class="sm-view"><div class="sm-screen"><img id="sm-now" src="./assets/sm-1.jpg" alt="현재 재생 중인 영상" width="1280" height="720" fetchpriority="high"><button class="sm-bigplay" type="button" aria-label="재생"></button></div><h2 class="sm-title" id="sm-title">01 셈루트 시작하기</h2><p class="sm-desc" id="sm-desc">가입부터 첫 시험지까지 12분</p></div><ol class="sm-list"><li class="sm-item on"><button type="button" data-i="0"><span class="sm-thumb"><img src="./assets/sm-1.jpg" alt="01 셈루트 시작하기" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>01 셈루트 시작하기</b><span>가입부터 첫 시험지까지 12분</span></button></li><li class="sm-item"><button type="button" data-i="1"><span class="sm-thumb"><img src="./assets/sm-2.jpg" alt="02 문제은행 둘러보기" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>02 문제은행 둘러보기</b><span>단원·유형·난이도로 찾는 법</span></button></li><li class="sm-item"><button type="button" data-i="2"><span class="sm-thumb"><img src="./assets/sm-3.jpg" alt="03 시험지 만들기" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>03 시험지 만들기</b><span>끌어 옮기고 인쇄까지</span></button></li><li class="sm-item"><button type="button" data-i="3"><span class="sm-thumb"><img src="./assets/sm-4.jpg" alt="04 자동 채점 쓰기" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>04 자동 채점 쓰기</b><span>답 입력과 통계 보기</span></button></li><li class="sm-item"><button type="button" data-i="4"><span class="sm-thumb"><img src="./assets/sm-5.jpg" alt="05 오답 노트 활용" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>05 오답 노트 활용</b><span>취약 유형 진단과 재출제</span></button></li><li class="sm-item"><button type="button" data-i="5"><span class="sm-thumb"><img src="./assets/sm-6.jpg" alt="06 학생 앱 배포" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>06 학생 앱 배포</b><span>숙제 보내고 확인하기</span></button></li><li class="sm-item"><button type="button" data-i="6"><span class="sm-thumb"><img src="./assets/sm-7.jpg" alt="07 내신·기출 DB" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>07 내신·기출 DB</b><span>학교별 기출 모으기</span></button></li><li class="sm-item"><button type="button" data-i="7"><span class="sm-thumb"><img src="./assets/sm-8.jpg" alt="08 자체 교재 만들기" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>08 자체 교재 만들기</b><span>표지·목차·해설까지</span></button></li><li class="sm-item"><button type="button" data-i="8"><span class="sm-thumb"><img src="./assets/sm-9.jpg" alt="09 상담 보고서" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>09 상담 보고서</b><span>학부모에게 보내는 법</span></button></li><li class="sm-item"><button type="button" data-i="9"><span class="sm-thumb"><img src="./assets/sm-10.jpg" alt="10 분원 관리" width="640" height="360" loading="lazy"><i class="sm-play" aria-hidden="true"></i></span><b>10 분원 관리</b><span>여러 교실을 한 화면에서</span></button></li></ol></div></div></section><section class="sec-main sec-main--secondary sm-iq"><div class="shell"><div class="sec-head" data-rv><h2 class="sec-h2">방문 설명회를 신청하시겠어요?</h2><p class="sec-p">원하시는 날짜에 찾아가 직접 보여 드립니다.</p></div><div class="iq-box"><a class="btn btn--fill btn--lg" href="./contact.html">방문 설명회 신청하기</a></div></div></section></div></main>
+<div class="art-head"><b class="art-cat">설명회</b><h1 class="art-title">온라인 설명회 신청하기</h1><p class="art-desc">셈루트를 처음부터 끝까지 보여 드립니다. 40분이면 충분합니다.</p></div><div class="art-body"><section class="sec-main sn-benefit"><div class="shell"><div class="sn-ben-box" data-rv><b class="sn-ben-title">온라인 설명회 신청자 한정 혜택</b><ul class="sn-ben-list"><li><b>나만의 내신 기출 자료실</b><span>주변 학교 기출을 학원 계정에 그대로 옮겨 드립니다</span></li><li><b>첫 시험지 대행 제작</b><span>원하시는 범위로 첫 시험지 세 장을 만들어 드립니다</span></li><li><b>체험 기간 10일 → 20일</b><span>설명회 참석자에게만 체험 기간을 두 배로 드립니다</span></li></ul></div></div></section><section class="sec-main sec-main--secondary sn"><div class="shell"><form class="fm sn-form" action="#none" method="post" novalidate><section class="sn-step"><h2 class="sn-step-title"><b>01</b> 원하는 참석 일자를 선택하세요</h2><ul class="sn-picks"><li><label class="sn-pick"><input type="radio" name="session" value="0" checked><span class="sn-pick-in"><b>10월 8일 (수) 오전 11:00</b><em>마감까지 12자리</em></span></label></li><li><label class="sn-pick"><input type="radio" name="session" value="1"><span class="sn-pick-in"><b>10월 15일 (수) 오전 11:00</b><em>마감까지 24자리</em></span></label></li><li><label class="sn-pick"><input type="radio" name="session" value="2"><span class="sn-pick-in"><b>10월 22일 (수) 오후 8:00</b><em>마감까지 30자리</em></span></label></li><li><label class="sn-pick"><input type="radio" name="session" value="3"><span class="sn-pick-in"><b>10월 29일 (수) 오전 11:00</b><em>마감까지 30자리</em></span></label></li><li><label class="sn-pick"><input type="radio" name="session" value="4"><span class="sn-pick-in"><b>날짜미지정</b><em>연락을 드리고 시간을 조율해요</em></span></label></li></ul></section><section class="sn-step"><h2 class="sn-step-title"><b>02</b> 기본 정보 입력</h2><div class="fm-grid"><div class="fm-row"><label class="fm-label" for="sn-name">선생님 성함 <em>필수</em></label><input class="fm-input" id="sn-name" name="name" type="text" required autocomplete="name" placeholder="홍길동"></div><div class="fm-row"><label class="fm-label" for="sn-mail">E-mail <em>필수</em></label><input class="fm-input" id="sn-mail" name="email" type="email" required autocomplete="email" placeholder="teacher@example.com"></div><div class="fm-row"><label class="fm-label" for="sn-tel">휴대폰 번호 <em>필수</em></label><input class="fm-input" id="sn-tel" name="tel" type="tel" required autocomplete="tel" inputmode="numeric" placeholder="010-0000-0000"></div><div class="fm-row"><label class="fm-label" for="sn-know">설명회를 알게 된 경로</label><select class="fm-input" id="sn-know" name="known"><option>검색</option><option>지인 소개</option><option>유튜브 · 블로그</option><option>학원 커뮤니티</option><option>광고</option><option>기타</option></select></div></div></section><section class="sn-step"><h2 class="sn-step-title"><b>03</b> 최종 확인</h2><label class="fm-agree"><input type="checkbox" name="agree_term" required><span>개인정보 수집·이용에 동의합니다. <a href="./privacy.html">내용 보기</a></span></label><label class="fm-agree"><input type="checkbox" name="agree_mkt"><span>설명회·혜택 안내 수신에 동의합니다. (선택) <a href="./marketing.html">내용 보기</a></span></label><div class="fm-submit"><button class="btn btn--fill btn--lg" type="submit">설명회 신청하기</button></div><p class="fm-note">신청 뒤 하루 안에 참석 링크를 문자로 보내 드립니다. 문의 <b>010-4894-4905</b></p></section></form></div></section></div></main>
 <footer id="footer">
   <div class="shell">
     <div class="ft-top">
@@ -253,18 +270,16 @@
       b.nextElementSibling.classList.toggle('on',!open);
     });
   });
-  /* 설명회 목록 */
-  var items=[].slice.call(document.querySelectorAll('.sm-item'));
-  if(items.length){
-    var img=document.getElementById('sm-now'),
-        ttl=document.getElementById('sm-title'), dsc=document.getElementById('sm-desc');
-    items.forEach(function(li,i){
-      li.querySelector('button').addEventListener('click',function(){
-        items.forEach(function(x){x.classList.remove('on')});
-        li.classList.add('on');
-        img.src='./assets/sm-'+(i+1)+'.jpg';
-        ttl.textContent=li.querySelector('b').textContent;
-        dsc.textContent=li.querySelector('span:last-child').textContent;
+  /* 문의 — 시·도를 고르면 시·군·구 목록이 바뀐다 (원본 contact[si]/contact[gu]) */
+  var si=document.querySelector('.fm-si');
+  if(si){
+    var lists=[].slice.call(document.querySelectorAll('.fm-gu'));
+    si.addEventListener('change',function(e){
+      var v=e.target.value;
+      lists.forEach(function(ul){
+        var on=ul.dataset.si===v;
+        ul.hidden=!on;
+        if(!on)ul.querySelectorAll('input').forEach(function(i){i.checked=false});
       });
     });
   }

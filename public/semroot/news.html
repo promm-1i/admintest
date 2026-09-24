@@ -8,7 +8,7 @@
 <meta property="og:title" content="업데이트 소식 | 셈루트">
 <meta property="og:description" content="새로 들어온 기능과 콘텐츠를 알려 드립니다.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="./assets/og.jpg">
+<meta property="og:image" content="./og.jpg">
 <link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
@@ -100,35 +100,49 @@
 .rd-meta dt+dd{margin:6rem 0 20rem;color:var(--g700)}
 .rd-meta dd:last-child{margin-bottom:0}
 
-/* 설명회 */
-.sm-box{display:flex;gap:40rem}
-.sm-view{flex:1;min-width:0}
-.sm-screen{position:relative;aspect-ratio:16/9;border-radius:16rem;overflow:hidden;
-  background:var(--black)}
-.sm-screen img{width:100%;height:100%;object-fit:cover;opacity:.75}
-.sm-bigplay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:80rem;
-  height:80rem;border-radius:50%;background:rgba(255,255,255,.92)}
-.sm-bigplay::after{content:'';position:absolute;left:52%;top:50%;transform:translate(-50%,-50%);
-  border-left:22rem solid var(--pri);border-top:14rem solid transparent;
-  border-bottom:14rem solid transparent}
-.sm-title{margin-top:28rem;font-size:var(--f05);font-weight:700;line-height:var(--lh05)}
-.sm-desc{margin-top:8rem;font-size:var(--f09);color:var(--g700)}
-.sm-list{width:420rem;flex:none;max-height:620rem;overflow-y:auto;padding-right:8rem}
-.sm-item button{display:flex;gap:16rem;width:100%;padding:12rem;border-radius:12rem;
-  text-align:left;transition:background .3s}
-.sm-item button:hover{background:var(--g100)}
-.sm-item.on button{background:var(--g200)}
-.sm-thumb{position:relative;flex:none;width:128rem;aspect-ratio:16/9;border-radius:8rem;
-  overflow:hidden;background:var(--g300)}
-.sm-thumb img{width:100%;height:100%;object-fit:cover}
-.sm-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:28rem;
-  height:28rem;border-radius:50%;background:rgba(255,255,255,.9)}
-.sm-play::after{content:'';position:absolute;left:54%;top:50%;transform:translate(-50%,-50%);
-  border-left:9rem solid var(--pri);border-top:6rem solid transparent;
-  border-bottom:6rem solid transparent}
-.sm-item b{display:block;font-size:var(--f11);font-weight:700;line-height:var(--lh11)}
-.sm-item span{display:block;margin-top:4rem;font-size:var(--f12);color:var(--g600)}
-.iq-box{text-align:center}
+/* 단계 폼 (설명회 · 문의 공용) */
+.sn-step+.sn-step{margin-top:60rem;padding-top:60rem;border-top:1px solid var(--g300)}
+.sn-step-title{margin-bottom:24rem;font-size:var(--f07);font-weight:700;
+  line-height:var(--lh07);display:flex;align-items:baseline;gap:12rem}
+.sn-step-title b{font-family:var(--fd);font-size:var(--f09);color:var(--pri);letter-spacing:0}
+.sn-picks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12rem}
+.sn-pick input{position:absolute;opacity:0;width:0;height:0}
+.sn-pick-in{display:block;padding:20rem 24rem;border:1px solid var(--g400);border-radius:12rem;
+  cursor:pointer;transition:border-color .3s,background .3s}
+.sn-pick-in b{display:block;font-size:var(--f09);font-weight:700}
+.sn-pick-in em{display:block;margin-top:4rem;font-size:var(--f11);font-style:normal;color:var(--g600)}
+.sn-pick:has(input:checked) .sn-pick-in{border-color:var(--pri);background:rgba(14,138,95,.06)}
+.sn-pick:has(input:checked) b{color:var(--pri)}
+.sn-pick:has(input:focus-visible) .sn-pick-in{outline:2px solid var(--pri);outline-offset:2px}
+.fm-sub{margin:0 0 12rem;font-size:var(--f11);font-weight:700}
+.fm-sub+.fm-chips{margin-bottom:32rem}
+.fm-sub em{margin-left:8rem;font-size:var(--f12);font-style:normal;font-weight:400;color:var(--g600)}
+.fm-chips{display:flex;flex-wrap:wrap;gap:8rem}
+.fm-chips input{position:absolute;opacity:0;width:0;height:0}
+.fm-chips label{display:block;padding:10rem 20rem;border:1px solid var(--g400);
+  border-radius:99rem;cursor:pointer;font-size:var(--f11);
+  transition:border-color .3s,color .3s,background .3s}
+.fm-chips label:has(input:checked){border-color:var(--pri);color:var(--pri);
+  background:rgba(14,138,95,.06)}
+.fm-chips label:has(input:focus-visible){outline:2px solid var(--pri);outline-offset:2px}
+.fm-gu-wrap{margin-top:16rem;padding:20rem;border-radius:12rem;background:var(--g100)}
+.fm-gu[hidden]{display:none}
+
+/* 설명회 혜택 */
+.sn-ben-box{padding:40rem;border-radius:16rem;color:var(--white);
+  background:linear-gradient(120deg,var(--sec),var(--pri))}
+.sn-ben-title{display:block;font-size:var(--f07);font-weight:700}
+.sn-ben-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20rem;margin-top:24rem}
+.sn-ben-list b{display:block;font-size:var(--f09);font-weight:700}
+.sn-ben-list span{display:block;margin-top:6rem;font-size:var(--f11);opacity:.9}
+
+/* 문의 진행 과정 */
+.proc-list{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20rem}
+.proc-list li{padding:32rem 24rem;border-radius:16rem;background:var(--g100)}
+.proc-list b{display:block;font-family:var(--fd);font-size:var(--f06);font-weight:600;
+  letter-spacing:0;color:var(--pri)}
+.proc-list span{display:block;margin-top:12rem;font-size:var(--f08);font-weight:700}
+.proc-list em{display:block;margin-top:8rem;font-size:var(--f11);font-style:normal;color:var(--g700)}
 
 /* 게시판 */
 .bd-row{border-bottom:1px solid var(--g300)}
@@ -201,6 +215,9 @@
   .rd-body{display:block}
   .rd-meta{margin-top:40rem}
   .fm-grid{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .sn-picks{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .sn-ben-list{grid-template-columns:repeat(1,minmax(0,1fr))}
+  .proc-list{grid-template-columns:repeat(2,minmax(0,1fr))}
   .bd-row a{flex-wrap:wrap;gap:6rem 16rem}
   .bd-title{flex:0 0 100%;order:-1}
 }
@@ -253,18 +270,16 @@
       b.nextElementSibling.classList.toggle('on',!open);
     });
   });
-  /* 설명회 목록 */
-  var items=[].slice.call(document.querySelectorAll('.sm-item'));
-  if(items.length){
-    var img=document.getElementById('sm-now'),
-        ttl=document.getElementById('sm-title'), dsc=document.getElementById('sm-desc');
-    items.forEach(function(li,i){
-      li.querySelector('button').addEventListener('click',function(){
-        items.forEach(function(x){x.classList.remove('on')});
-        li.classList.add('on');
-        img.src='./assets/sm-'+(i+1)+'.jpg';
-        ttl.textContent=li.querySelector('b').textContent;
-        dsc.textContent=li.querySelector('span:last-child').textContent;
+  /* 문의 — 시·도를 고르면 시·군·구 목록이 바뀐다 (원본 contact[si]/contact[gu]) */
+  var si=document.querySelector('.fm-si');
+  if(si){
+    var lists=[].slice.call(document.querySelectorAll('.fm-gu'));
+    si.addEventListener('change',function(e){
+      var v=e.target.value;
+      lists.forEach(function(ul){
+        var on=ul.dataset.si===v;
+        ul.hidden=!on;
+        if(!on)ul.querySelectorAll('input').forEach(function(i){i.checked=false});
       });
     });
   }
