@@ -224,11 +224,11 @@ html.js .mi-t3 i{animation:miChar .5s var(--ease-o) both}
 .rg-item.is-active{opacity:1;transform:scale(1)}
 .rg-item a{display:block}
 .rg-pic img{width:100%;aspect-ratio:570/394;object-fit:cover}
-.rg-info{position:relative;display:flex;flex-direction:column;margin-top:-40px;color:#fff;font-family:var(--disp)}
+.rg-info{position:relative;display:flex;flex-direction:column;margin-top:-40px;color:var(--navy);font-family:var(--disp)}
 .rg-tit{font-size:clamp(25px,2.6042vw,50px);line-height:1.2;letter-spacing:4px;white-space:nowrap;text-align:center}
 .rg-tit span{display:inline-block;margin-right:15px;font:400 80px/1.2 'Aboreto',var(--disp)}
 .rg-more{position:relative;display:flex;justify-content:flex-end;align-items:center;height:20px;padding-right:30%;font-size:clamp(16px,1.0417vw,20px);line-height:1.25}
-.rg-more::before{content:"";position:absolute;right:0;top:50%;width:28%;height:1px;background:#fff;transition:all .3s cubic-bezier(.445,.05,.55,.95)}
+.rg-more::before{content:"";position:absolute;right:0;top:50%;width:28%;height:1px;background:var(--navy);transition:all .3s cubic-bezier(.445,.05,.55,.95)}
 
 /* =================================================================== 서브 공용 */
 .sh{position:relative;height:var(--vh);overflow:hidden;z-index:0;background:#233}
@@ -694,3 +694,13 @@ html:not(.js) .st-circle circle{stroke-dashoffset:0;opacity:.4}
 #smooth-content{overflow:visible;width:100%}
 .lenis.lenis-smooth{scroll-behavior:auto!important}
 .lenis.lenis-stopped{overflow:hidden}
+
+/* ---------- 사진 위 흰 글자 가독성 덮개 (레퍼런스엔 없음 — 자리/실사진이 밝은 칸이라 흰 글자 대비 1.1~2.9 → 3:1·4.5:1 이상으로) ---------- */
+.mi-media{position:relative}
+.mi-media::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.28);pointer-events:none}
+.rm-img{position:relative}
+.rm-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.45) 30%,rgba(0,0,0,0) 55%);pointer-events:none}
+.rg-pic{position:relative}
+.sp-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 45% at 50% 50%,rgba(0,0,0,.5),rgba(0,0,0,.28));pointer-events:none}
+.sh-media::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.3) 25%,rgba(0,0,0,0) 45%);pointer-events:none}
+.sh-ind,.sh-vind{z-index:3}
