@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&amp;display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
 <link rel="stylesheet" href="./assets/site.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
@@ -27,23 +28,28 @@
   </div>
   <div class="hd-r">
    <a class="rbtn" href="#">로그인</a><a class="rbtn" href="stay.html#rooms">스테이 예약</a>
-   <button type="button" class="hd-lang" aria-label="언어 선택: 한국어">KR</button>
+   <div class="hd-lang-w"><button type="button" class="hd-lang" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-list" aria-label="언어 선택: 한국어">KR</button>
+    <ul class="lang-list" id="lang-list" role="listbox" aria-label="언어"><li role="option" aria-selected="true"><a href="./index.html">KR</a></li><li role="option" aria-selected="false"><a href="#" title="영문 페이지는 샘플에 포함되지 않았습니다">EN</a></li></ul></div>
    <a class="hd-ic first" href="location.html" aria-label="오시는 길"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.2c-4 0-7.2 3.1-7.2 7 0 5.2 6.1 11.6 6.4 11.9.4.4 1 .4 1.4 0 .3-.3 6.4-6.7 6.4-11.9 0-3.9-3.2-7-7-7Zm0 9.6a2.6 2.6 0 1 1 0-5.2 2.6 2.6 0 0 1 0 5.2Z"/></svg></a>
-   <a class="hd-ic" href="lifestyle.html#brand-search" aria-label="브랜드 검색"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5.5 5.5" stroke-linecap="round"/></svg></a>
+   <button type="button" class="hd-ic hd-search" aria-label="검색 열기" aria-expanded="false" aria-controls="hd-sch"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5.5 5.5" stroke-linecap="round"/></svg></button>
    <button type="button" class="hd-ic hd-menu" aria-label="전체 메뉴 열기" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
   </div>
  </nav>
+ <form class="hd-sch" id="hd-sch" action="lifestyle.html" role="search" hidden>
+  <label class="hd-sch-in"><span class="blind">검색어</span><input type="search" name="q" placeholder="검색어를 입력해주세요" autocomplete="off"><button type="submit" aria-label="검색"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5.5 5.5" stroke-linecap="round"/></svg></button></label>
+ </form>
 </header>
+<div class="sch-dim" hidden></div>
 <div class="mnav" id="mnav" aria-label="모바일 메뉴">
  <ul><li><button type="button" class="mnav-t" aria-expanded="false" aria-controls="mn0">What's On<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 8 5 5 5-5"/></svg></button><ul class="mnav-sub" id="mn0"><li><a href="whatson.html">What's On 전체</a></li><li><a href="whatson.html#events">Event &amp; Promotion</a></li><li><a href="whatson.html#stories">Stories of Neulsoop</a></li><li><a href="#">Neighborhood</a></li><li><a href="#">Brand News</a></li></ul></li><li><button type="button" class="mnav-t" aria-expanded="false" aria-controls="mn1">Lifestyle<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 8 5 5 5-5"/></svg></button><ul class="mnav-sub" id="mn1"><li><a href="lifestyle.html">Lifestyle 전체</a></li><li><a href="lifestyle.html#all">All</a></li><li><a href="lifestyle.html#shop">Shop</a></li><li><a href="lifestyle.html#eat">Eat &amp; Drink</a></li><li><a href="lifestyle.html#culture">Culture</a></li><li><a href="lifestyle.html#wellness">Wellness</a></li></ul></li><li><button type="button" class="mnav-t" aria-expanded="false" aria-controls="mn2">Stay<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 8 5 5 5-5"/></svg></button><ul class="mnav-sub" id="mn2"><li><a href="stay.html">Stay 전체</a></li><li><a href="stay.html">Stay in Neulsoop</a></li><li><a href="stay.html#rooms">Rooms</a></li><li><a href="stay.html#stay-life">Stay Lifestyle</a></li><li><a href="#">Guest Services</a></li></ul></li><li><button type="button" class="mnav-t" aria-expanded="false" aria-controls="mn3">About<svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m5 8 5 5 5-5"/></svg></button><ul class="mnav-sub" id="mn3"><li><a href="about.html">About 전체</a></li><li><a href="about.html">Brand of Neulsoop</a></li><li><a href="#">FAQ</a></li><li><a href="#">Contact Us</a></li><li><a href="location.html">Getting Here</a></li></ul></li></ul>
  <a class="mnav-cta" href="stay.html#rooms">스테이 예약</a>
 </div>
 <main id="main">
-<div class="kv-pin" style="--pin:507px">
+<div class="kv-pin" style="--pin:507px" data-kv="main">
  <section class="kv" aria-roledescription="carousel" aria-label="늘숲 대표 이미지">
   <div class="kv-slide is-on"><div class="kv-zoom"><img src="./assets/hero-1.jpg" alt="숲길 계단 난간 너머로 뻗은 나뭇가지" width="1440" height="900" fetchpriority="high"></div></div><div class="kv-slide"><div class="kv-zoom"><img src="./assets/hero-2.jpg" alt="새벽 안개가 내려앉은 늘숲 전경" width="1440" height="900"></div></div><div class="kv-slide"><div class="kv-zoom"><img src="./assets/hero-3.jpg" alt="객실 창가 너머로 보이는 초록 정원" width="1440" height="900"></div></div><div class="kv-slide"><div class="kv-zoom"><img src="./assets/hero-4.jpg" alt="저녁 조명이 켜진 늘숲 라운지" width="1440" height="900"></div></div>
   <div class="kv-dim"></div>
-  <div class="kv-txt"><div class="kv-in"><div class="kv-in2"><h1 class="kv-logo">NEULSOOP</h1><p class="kv-sub">숲의 시간으로 머무는 곳, 늘숲</p></div></div></div>
+  <div class="kv-txt"><h1 class="kv-logo kv-a">NEULSOOP</h1><div class="kv-subw kv-b"><p class="kv-sub">숲의 시간으로 머무는 곳, 늘숲</p></div></div>
  </section>
 </div>
 <div class="after-kv">
@@ -60,23 +66,23 @@
  </section>
  <section class="walk" aria-labelledby="walk-h">
   <div class="walk-head"><h2 id="walk-h">Stay, walk, eat and rest in Neulsoop</h2><p>머물고 걷고 맛보는 하루, 오직 늘숲에서</p></div>
-  <div class="walk-sc" data-scroller>
-   <ul class="walk-track sc-track"><li class="walk-card"><a href="lifestyle.html">
+  <div class="walk-sc">
+   <div class="swiper walk-sw"><ul class="swiper-wrapper walk-track"><li class="walk-card swiper-slide"><a href="lifestyle.html">
  <div class="zoom walk-img"><img src="./assets/walk-1.jpg" alt="숲속 베이커리 카페의 커피잔" width="384" height="466" loading="lazy"></div>
- <h3 class="walk-t">숲결 베이커리</h3><p class="walk-d">갓 구운 빵과 드립 커피로 여는 아침</p></a></li><li class="walk-card"><a href="lifestyle.html">
+ <h3 class="walk-t">숲결 베이커리</h3><p class="walk-d">갓 구운 빵과 드립 커피로 여는 아침</p></a></li><li class="walk-card swiper-slide"><a href="lifestyle.html">
  <div class="zoom walk-img"><img src="./assets/walk-2.jpg" alt="서가가 둘러싼 북라운지" width="384" height="466" loading="lazy"></div>
- <h3 class="walk-t">늘숲 북라운지</h3><p class="walk-d">책장 사이에서 보내는 조용한 오후</p></a></li><li class="walk-card"><a href="lifestyle.html">
+ <h3 class="walk-t">늘숲 북라운지</h3><p class="walk-d">책장 사이에서 보내는 조용한 오후</p></a></li><li class="walk-card swiper-slide"><a href="lifestyle.html">
  <div class="zoom walk-img"><img src="./assets/walk-3.jpg" alt="리넨과 도자기가 놓인 리빙 편집숍" width="384" height="466" loading="lazy"></div>
- <h3 class="walk-t">결 리빙</h3><p class="walk-d">손으로 만든 리넨과 그릇, 머무는 방을 닮은 살림을 고르는 리빙 편집숍</p></a></li></ul>
-   <div class="sc-nav walk-nav"><button type="button" class="arw sc-prev" aria-label="이전"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m17 6-8 8 8 8"/></svg></button><button type="button" class="arw sc-next" aria-label="다음"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m11 6 8 8-8 8"/></svg></button></div>
+ <h3 class="walk-t">결 리빙</h3><p class="walk-d">손으로 만든 리넨과 그릇, 머무는 방을 닮은 살림을 고르는 리빙 편집숍</p></a></li></ul></div>
+   <div class="walk-nav"><button type="button" class="arw walk-prev" aria-label="이전"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m17 6-8 8 8 8"/></svg></button><button type="button" class="arw walk-next" aria-label="다음"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m11 6 8 8-8 8"/></svg></button></div>
   </div>
  </section>
  <section class="rest" aria-labelledby="rest-h">
   <div class="st lt"><h2 id="rest-h" class="rest-h">Rest in Excellence</h2><p class="rest-p">쉼과 머묾이 한 공간에 있는 새로운 스테이 라이프</p></div>
-  <div class="rs" data-loop>
-   <ul class="rs-track sc-track"><li class="rs-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-1.jpg" alt="우드톤 라운지의 낮은 소파" width="600" height="400" loading="lazy"></a></li><li class="rs-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-2.jpg" alt="낮은 조명의 티 룸" width="600" height="400" loading="lazy"></a></li><li class="rs-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-3.jpg" alt="창가 다이닝 테이블" width="600" height="400" loading="lazy"></a></li><li class="rs-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-4.jpg" alt="숲이 내다보이는 욕조" width="600" height="400" loading="lazy"></a></li><li class="rs-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-5.jpg" alt="테라스 데크 체어" width="600" height="400" loading="lazy"></a></li></ul>
-   <button type="button" class="arw rs-prev sc-prev" aria-label="이전 사진"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m17 6-8 8 8 8"/></svg></button>
-   <button type="button" class="arw rs-next sc-next" aria-label="다음 사진"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m11 6 8 8-8 8"/></svg></button>
+  <div class="rs">
+   <div class="swiper rs-sw"><ul class="swiper-wrapper rs-track"><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-1.jpg" alt="우드톤 라운지의 낮은 소파" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-2.jpg" alt="낮은 조명의 티 룸" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-3.jpg" alt="창가 다이닝 테이블" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-4.jpg" alt="숲이 내다보이는 욕조" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-5.jpg" alt="테라스 데크 체어" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-1.jpg" alt="우드톤 라운지의 낮은 소파" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-2.jpg" alt="낮은 조명의 티 룸" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-3.jpg" alt="창가 다이닝 테이블" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-4.jpg" alt="숲이 내다보이는 욕조" width="600" height="400" loading="lazy"></a></li><li class="rs-slide swiper-slide"><a href="stay.html" class="zoom"><img src="./assets/rest-5.jpg" alt="테라스 데크 체어" width="600" height="400" loading="lazy"></a></li></ul></div>
+   <button type="button" class="arw rs-prev" aria-label="이전 사진"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m17 6-8 8 8 8"/></svg></button>
+   <button type="button" class="arw rs-next" aria-label="다음 사진"><svg viewBox="0 0 28 28" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m11 6 8 8-8 8"/></svg></button>
   </div>
  </section>
  <section class="newto" aria-labelledby="new-h">
@@ -110,7 +116,10 @@
   </div>
  </div>
 </footer>
-<button type="button" class="totop" aria-label="맨 위로"><svg viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m5 12.5 5-5 5 5"/></svg></button>
+<button type="button" class="totop" aria-label="맨 위로"><svg viewBox="0 0 40 40" fill="none" aria-hidden="true"><rect width="40" height="40" rx="3.2" fill="#3C3A34"/><path d="M12 24L20 16L28 24" stroke="#E6E2E1" stroke-width="2.4"/></svg></button>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
 <script src="./assets/site.js"></script>
 </body>
 </html>

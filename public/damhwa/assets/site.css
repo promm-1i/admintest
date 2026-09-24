@@ -42,15 +42,14 @@ body.lock{overflow:hidden}
 /* ---------- 머리 ---------- */
 #hd{position:relative;width:100%;z-index:9998}
 .hd-logo{position:fixed;top:10px;left:5%;width:168px;height:64px;z-index:9998}
-.hd-logo a{display:block;width:100%;height:100%}
-.hd-logo .logo{transition:opacity 4s ease,transform 4s ease}
+.hd-logo a{display:block;width:100%;height:100%;transition:opacity 4s ease,transform 4s ease;will-change:opacity,transform}
+.hd-logo a.is-logo-fading{opacity:.25;transform:translateY(1px)}
 .hd-logo .logo-small{display:none;width:40px;height:40px}
 .hd-logo.is-small .logo{display:none}
 .hd-logo.is-small .logo-small{display:block}
 .hd-inner{position:fixed;right:10%;top:15px;display:flex;align-items:center;justify-content:center}
 .hd-gnb-list{display:flex;gap:25px;align-items:center;padding-top:10px}
 .hd-gnb-list a{display:block;font-family:var(--serif);font-size:14px;font-weight:200;line-height:20px;color:#fff}
-.hd-gnb-list a:hover{text-decoration:underline;text-underline-offset:4px}
 .menu-btn{position:fixed;top:30px;right:5%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:20px;height:18px;z-index:9998}
 .menu-btn .dot{width:4px;height:4px;border-radius:50%;background:#fff}
 /* 전체 메뉴 */
@@ -71,7 +70,6 @@ body.lock{overflow:hidden}
 .hd-nav-list{display:flex;gap:90px;justify-content:flex-end}
 .hd-nav-link{display:block;margin-bottom:25px;font-family:var(--ivy);font-size:13px;font-weight:300;line-height:26px;letter-spacing:1.3px;color:#fff}
 .hd-nav-sub a{font-family:var(--serif);font-size:13px;font-weight:300;line-height:26px;color:#fff}
-.hd-nav-sub a:hover,.hd-nav-link:hover{text-decoration:underline;text-underline-offset:4px}
 
 /* ---------- 꼬리 ---------- */
 #ft{position:relative;width:100%}
@@ -84,7 +82,6 @@ body.lock{overflow:hidden}
 .ft-nav-list{display:flex;gap:60px}
 .ft-nav-link{display:block;margin-bottom:25px;font-family:var(--ivy);font-size:13px;font-weight:300;line-height:26px;letter-spacing:1.3px;color:#fff}
 .ft-nav-sub a{font-family:var(--serif);font-size:13px;font-weight:300;line-height:26px;color:#fff}
-.ft-nav a:hover{text-decoration:underline;text-underline-offset:4px}
 .ft-info{display:flex;flex-direction:column;align-items:center;width:35%}
 .ft-logo{display:flex;flex-direction:column;align-items:center;width:108px;height:134px;margin-bottom:27px}
 .ft-logo .logo-mark{width:58px;height:58px;flex:none}
@@ -97,10 +94,10 @@ body.lock{overflow:hidden}
 .ft-bot{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#000}
 .ft-bot-txt{display:block;text-align:center;font-family:"Lato",sans-serif;font-size:12px;font-weight:300;line-height:28px;color:#999}
 
-/* ---------- 등장 모션 (AOS fade-up/down: 100px · 2s · ease-in-out-back · once:false) ---------- */
+/* ---------- 등장 모션 (레퍼런스 aos.css 수정본: fade-up/down 20px · 2s · ease-in-out-back · once:false) ---------- */
 html.js .rv{opacity:0;transition:opacity 2s var(--ease-back),transform 2s var(--ease-back)}
-html.js .rv.up{transform:translate3d(0,100px,0)}
-html.js .rv.down{transform:translate3d(0,-100px,0)}
+html.js .rv.up{transform:translate3d(0,20px,0)}
+html.js .rv.down{transform:translate3d(0,-20px,0)}
 html.js .rv.on{opacity:1;transform:translate3d(0,0,0)}
 
 /* ---------- 인트로 (메인 전용) ---------- */
@@ -122,7 +119,7 @@ html.intro-lock,html.intro-lock body{overflow:hidden;height:100%}
 
 /* ---------- 메인: 첫 화면(영상 → 포스터) ---------- */
 .mn-top{width:100%;height:100vh;overflow:hidden;background:transparent}
-.mn-top .cover{z-index:1}
+.mn-top .cover{z-index:1;top:-90px;height:56.25vw;bottom:auto}
 
 /* ---------- 메인: 슬라이드 + 소개 + 스페셜 ---------- */
 .mn-slide{width:100%;overflow:hidden}
@@ -171,6 +168,7 @@ html.intro-lock,html.intro-lock body{overflow:hidden;height:100%}
 .sp-nav{position:absolute;left:10px;bottom:-50px;z-index:20;display:flex;align-items:center;gap:8px}
 .sp-nav button{display:inline-flex;align-items:center;justify-content:center;opacity:.92;transition:opacity .2s}
 .sp-nav button:hover{opacity:1}
+.sp-nav button:focus-visible{outline:2px solid rgba(255,255,255,.85);outline-offset:4px}
 .sp-nav svg{width:32px;height:32px}
 
 /* ---------- 객실 미리보기 (메인·객실 공통) ---------- */
@@ -210,6 +208,8 @@ html.intro-lock,html.intro-lock body{overflow:hidden;height:100%}
 .sub-top{width:100%;height:100vh}
 .sub-top-img{position:relative;width:100%;height:100%;overflow:hidden}
 .sub-top-img .cover{z-index:0}
+.sub-top.vdo .sub-top-img{background:var(--bg)}
+.sub-top.vdo .sub-top-img .cover{top:-60px;height:56.25vw;bottom:auto}
 .sub-tit-wrap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}
 .sub-tit-hj{display:block;width:80px;height:25px;font-family:var(--jp);font-size:20px;font-weight:300;line-height:25px;letter-spacing:2px;color:#fff;white-space:nowrap}
 .sub-tit{font-family:var(--serif);font-size:24px;font-weight:300;line-height:24px;letter-spacing:.48px;color:#fff;white-space:nowrap}
@@ -245,7 +245,7 @@ html.intro-lock,html.intro-lock body{overflow:hidden;height:100%}
 .ab-vdo-img .cover{z-index:0}
 .ab-vdo-img::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(0,0,0,0) 48%,rgba(0,0,0,.35) 72%,rgba(0,0,0,.7) 100%);pointer-events:none}
 .ab-vdo-txt{position:absolute;right:10%;top:37%;transform:translateY(-50%);z-index:2}
-html.js .ab-vdo-txt.rv.up{transform:translateY(calc(-50% + 100px))}
+html.js .ab-vdo-txt.rv.up{transform:translateY(calc(-50% + 20px))}
 html.js .ab-vdo-txt.rv.on{transform:translateY(-50%)}
 .ab-vdo-hj{display:block;width:86px;height:27px;margin-bottom:19px;font-family:var(--jp);font-size:21px;font-weight:300;line-height:27px;letter-spacing:2px;white-space:nowrap}
 .ab-vdo-txt h2{margin-bottom:32px;font-family:var(--serif);font-size:24px;font-weight:300;line-height:24px;letter-spacing:1.2px}
@@ -298,6 +298,7 @@ html.js .ab-vdo-txt.rv.on{transform:translateY(-50%)}
 .rm-gal-thumb img{width:100%;height:100%;object-fit:cover}
 .rm-gal-thumb.is-active{position:relative;z-index:1;opacity:1;border-color:rgba(255,255,255,.98);box-shadow:0 0 0 2px rgba(255,255,255,.55),0 10px 28px rgba(0,0,0,.5)}
 .rm-gal-thumb:hover:not(.is-active){opacity:1;border-color:rgba(255,255,255,.85)}
+.rm-gal-thumb.is-active:hover{border-color:#fff}
 .rm-gal-txt{position:absolute;left:20%;bottom:10%;z-index:30;opacity:1;transition:opacity .45s ease}
 .rm-gal-txt.is-fading{opacity:0}
 .rm-gal-txt h3{margin-bottom:20px;font-family:var(--serif);font-size:30px;font-weight:300;line-height:60px;letter-spacing:1.5px}
@@ -347,7 +348,6 @@ html.js .ab-vdo-txt.rv.on{transform:translateY(-50%)}
 .rm-book select{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0h10L5 6z' fill='%23333'/%3E%3C/svg%3E") no-repeat right 14px center}
 .rm-book .code input{text-align:center}
 .rm-book button{flex:0 0 165px;height:45px;background:#333;color:#fff;font-family:var(--sans);font-size:14px}
-.rm-book button:hover{background:#111}
 .rm-plan{position:fixed;inset:0;z-index:12000;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s ease,visibility .3s ease}
 .rm-plan.open{opacity:1;visibility:visible;pointer-events:auto}
 .rm-plan-dim{position:absolute;inset:0;background:rgba(0,0,0,.68)}
@@ -386,6 +386,7 @@ html.js .ab-vdo-txt.rv.on{transform:translateY(-50%)}
 .rs-left-img{position:relative;width:371px;height:371px;margin-bottom:40px}
 .rs-left-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .42s ease}
 .rs-left-img img.is-active{opacity:1}
+.rs-left-img.is-swapping img.is-active{opacity:.2}
 .rs-left h2{margin-bottom:74px;font-family:var(--serif);font-size:28px;font-weight:300;line-height:24px;letter-spacing:-.56px}
 .rs-left h2 .jp{display:inline-block;margin-right:10px;font-weight:400}
 .rs-contact{display:flex;flex-direction:column;justify-content:center;gap:20px;width:80%}
@@ -443,6 +444,7 @@ html.js .ab-vdo-txt.rv.on{transform:translateY(-50%)}
   .hd-nav-sub a{color:rgba(255,255,255,.5);line-height:1.2}
   .hd-nav-sub li+li{margin-top:8px}
   .mn-top{height:100svh}
+  .mn-top .cover,.sub-top.vdo .sub-top-img .cover{top:0;height:100%;bottom:0}
   .hit-area,.slide-cursor{display:none!important}
   .mn-slide-box{height:auto;padding-top:90px}
   .mn-slide-box .mount.m1{width:48vw;height:auto;top:420px;left:-20px}
@@ -596,7 +598,7 @@ html.js .ab-vdo-txt.rv.on{transform:translateY(-50%)}
   .ab-vdo-img{height:420px}
   .ab-vdo-img::before{background:rgba(0,0,0,.35)}
   .ab-vdo-txt{left:24px;right:24px;top:58px;transform:none;text-align:center}
-  html.js .ab-vdo-txt.rv.up{transform:translateY(100px)}
+  html.js .ab-vdo-txt.rv.up{transform:translateY(20px)}
   html.js .ab-vdo-txt.rv.on{transform:none}
   .ab-vdo-hj{margin:0 auto 16px}
   .ab-vdo-txt h2{font-size:18px;margin-bottom:12px}
@@ -609,7 +611,6 @@ html.js .ab-vdo-txt.rv.on{transform:translateY(-50%)}
   .season-box.summer{left:159px;top:0;width:171px;height:196px}
   .season-box.autumn{left:0;top:208px;width:147px;height:160px}
   .season-box.winter{left:159px;top:208px;width:105px;height:121px}
-  .season-box.is-active{transform:none}
   .season-name{font-size:12px;line-height:14.4px;letter-spacing:.4px;opacity:1}
   .season-sub{position:absolute;left:4px;top:417px;width:300px;font-size:14px;line-height:24px}
   /* 객실 */

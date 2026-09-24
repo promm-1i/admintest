@@ -21,11 +21,15 @@
     var safety = setTimeout(finish, 12000);
     if (line) { line.style.width = Math.ceil(line.scrollWidth) + 'px'; line.textContent = ''; }
     var done = function () { clearTimeout(safety); setTimeout(finish, 900); };
-    if (reduce) {
-      intro.classList.add('step-c1', 'step-c2', 'step-text');
-      if (line) line.textContent = full;
-      setTimeout(done, 180);
-    } else {
+    var started = false;
+    var start = function () {
+      if (started) return; started = true;
+      if (reduce) {
+        intro.classList.add('step-c1', 'step-c2', 'step-text');
+        if (line) line.textContent = full;
+        setTimeout(done, 180);
+        return;
+      }
       setTimeout(function () { intro.classList.add('step-c1'); }, 380);
       setTimeout(function () { intro.classList.add('step-c2'); }, 820);
       setTimeout(function () {
@@ -35,17 +39,38 @@
           if (i >= full.length) { clearInterval(t); setTimeout(done, 180); }
         }, 35);
       }, 1180);
-    }
+    };
+    /* 레퍼런스는 첫 화면 영상이 준비(ready→play→pause)되면 시작, 최대 2.8초 대기. 여기서는 첫 화면 포스터 로드로 대신한다 */
+    var heroImg = $('.mn-top .cover');
+    var fallback = setTimeout(start, 2800);
+    var ready = function () { clearTimeout(fallback); start(); };
+    if (!heroImg || heroImg.complete) ready();
+    else { heroImg.addEventListener('load', ready); heroImg.addEventListener('error', ready); }
   } else if (intro) { intro.classList.add('done'); }
 
   /* ---------- 머리 ---------- */
   var hd = $('#hd'), menu = $('#hdMenu'), menuBtn = $('.menu-btn'), menuClose = $('.hd-menu-close');
+  /* 전체메뉴 띠 배경: 항목 hover/focus 시 페이드(0.35s) 후 180ms 에 교체, 열기·닫기·목록 이탈 시 1번으로 */
+  var bgImg = $('.hd-menu-bg img'), bgBox = $('.hd-menu-bg'), bgTimer = null, bgCur = 1;
+  function swapBg(n) {
+    if (!bgImg) return;
+    if (n === bgCur && !bgBox.classList.contains('is-fading')) return;
+    clearTimeout(bgTimer); bgBox.classList.add('is-fading');
+    bgTimer = setTimeout(function () { bgImg.src = './assets/menu-bg-' + n + '.jpg'; bgBox.classList.remove('is-fading'); bgCur = n; }, 180);
+  }
+  $$('.hd-nav-item').forEach(function (it) {
+    var go = function () { swapBg(Number(it.getAttribute('data-bg')) || 1); };
+    it.addEventListener('mouseenter', go); it.addEventListener('focusin', go);
+  });
+  var navList = $('.hd-nav-list');
+  if (navList) navList.addEventListener('mouseleave', function () { swapBg(1); });
   function setMenu(open) {
     if (!hd) return;
     hd.classList.toggle('menu-open', open);
     body.classList.toggle('lock', open);
     if (menuBtn) menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (menu) menu.setAttribute('aria-hidden', open ? 'false' : 'true');
+    swapBg(1);
     if (open && menuClose) setTimeout(function () { menuClose.focus(); }, 60);
     if (!open && menuBtn) menuBtn.focus();
   }
@@ -57,18 +82,7 @@
       closePlan();
     }
   });
-  /* 전체메뉴 항목에 올리면 띠 배경 교체 (0.35s 페이드) */
-  var bgImg = $('.hd-menu-bg img'), bgBox = $('.hd-menu-bg'), bgTimer = null, bgCur = 1;
-  $$('.hd-nav-item').forEach(function (it) {
-    var go = function () {
-      var n = Number(it.getAttribute('data-bg')) || 1;
-      if (!bgImg || n === bgCur) return;
-      bgCur = n; bgBox.classList.add('is-fading');
-      clearTimeout(bgTimer);
-      bgTimer = setTimeout(function () { bgImg.src = './assets/menu-bg-' + n + '.jpg'; bgBox.classList.remove('is-fading'); }, 350);
-    };
-    it.addEventListener('mouseenter', go); it.addEventListener('focusin', go);
-  });
+  if (menu) menu.addEventListener('click', function (e) { if (e.target === menu) setMenu(false); });
 
   /* 모바일: 100px 내려가면 머리 검정 고정 */
   function onScrollHd() {
@@ -86,15 +100,21 @@
     if (!subNav) return;
     var fixed = subNav.classList.contains('is-fixed');
     if (fixed) subNav.classList.remove('is-fixed');
-    navTop = subNav.getBoundingClientRect().top + window.scrollY;
     spacer.style.height = '0px';
+    /* 등장 모션 transform 영향을 받지 않도록 흐름상 위치(스페이서) 기준 */
+    navTop = spacer.getBoundingClientRect().top + window.scrollY - subNav.offsetHeight;
     if (fixed) { subNav.classList.add('is-fixed'); spacer.style.height = subNav.dataset.h + 'px'; }
+  }
+  var logoA = hdLogo ? $('a', hdLogo) : null, logoTimer = null;
+  function setSmallLogo(small) {
+    if (!hdLogo || hdLogo.classList.contains('is-small') === small) return;
+    clearTimeout(logoTimer);
+    logoA.classList.add('is-logo-fading');
+    logoTimer = setTimeout(function () { hdLogo.classList.toggle('is-small', small); logoA.classList.remove('is-logo-fading'); }, 120);
   }
   function onScrollNav() {
     if (!subNav) return;
-    var mob = mq('(max-width: 767px)');
-    var offset = mob ? 70 : 0;
-    var should = window.scrollY + offset > navTop + subNav.offsetHeight * 0.5;
+    var should = window.scrollY >= navTop;
     if (should && !subNav.classList.contains('is-fixed')) {
       subNav.dataset.h = subNav.offsetHeight;
       spacer.style.height = subNav.offsetHeight + 'px';
@@ -103,7 +123,7 @@
       subNav.classList.remove('is-fixed');
       spacer.style.height = '0px';
     }
-    if (hdLogo) hdLogo.classList.toggle('is-small', !mq('(max-width: 1024px)') && subNav.classList.contains('is-fixed'));
+    setSmallLogo(!mq('(max-width: 1024px)') && subNav.classList.contains('is-fixed'));
   }
   measureNav();
   window.addEventListener('resize', function () { measureNav(); onScrollNav(); onScrollHd(); });
@@ -111,18 +131,27 @@
   window.addEventListener('scroll', function () { onScrollHd(); onScrollNav(); }, { passive: true });
   onScrollHd(); onScrollNav();
 
-  /* ---------- 등장 모션: 요소 윗변이 화면 아래에 닿으면 on, 다시 아래로 벗어나면 해제 (AOS once:false) ---------- */
+  /* ---------- 등장 모션: AOS 규칙 그대로 — anchorPlacement top-bottom · offset 0 · once:false
+     (transform 을 뺀 문서상 윗변이 화면 아래 끝을 넘으면 on, 다시 아래로 내려가면 해제) ---------- */
   var rvs = $$('.rv');
   if (rvs.length) {
-    if ('IntersectionObserver' in window && !reduce) {
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          if (e.isIntersecting) e.target.classList.add('on');
-          else if (e.boundingClientRect.top > 0) e.target.classList.remove('on');
-        });
-      }, { rootMargin: '0px' });
-      rvs.forEach(function (r) { io.observe(r); });
-    } else { rvs.forEach(function (r) { r.classList.add('on'); }); }
+    if (reduce) { rvs.forEach(function (r) { r.classList.add('on'); }); }
+    else {
+      var tops = [];
+      var docTop = function (el) { var y = 0; while (el) { y += el.offsetTop; el = el.offsetParent; } return y; };
+      var measure = function () { tops = rvs.map(function (r) { return docTop(r); }); };
+      var tick = false;
+      var check = function () {
+        tick = false;
+        var edge = (window.scrollY || 0) + window.innerHeight;
+        rvs.forEach(function (r, i) { r.classList.toggle('on', tops[i] < edge); });
+      };
+      var req = function () { if (!tick) { tick = true; requestAnimationFrame(check); } };
+      measure(); check();
+      window.addEventListener('scroll', req, { passive: true });
+      window.addEventListener('resize', function () { measure(); req(); });
+      window.addEventListener('load', function () { setTimeout(function () { measure(); req(); }, 200); });
+    }
   }
 
   /* ---------- 커서 PREV/NEXT 영역 ---------- */
@@ -131,16 +160,19 @@
     if (!prev || !next) return;
     var txt = cur ? $('span', cur) : null;
     var canHover = mq('(hover: hover) and (pointer: fine)');
-    [[prev, 'PREV'], [next, 'NEXT']].forEach(function (p) {
-      p[0].addEventListener('click', function () { p[1] === 'PREV' ? sw.slidePrev() : sw.slideNext(); });
+    [[prev, 'prev'], [next, 'next']].forEach(function (p) {
+      p[0].addEventListener('click', function () { p[1] === 'prev' ? sw.slidePrev() : sw.slideNext(); });
       if (!canHover || !cur) return;
-      p[0].addEventListener('mousemove', function (e) {
+      var move = function (e) {
         var r = wrap.getBoundingClientRect();
         cur.style.left = (e.clientX - r.left) + 'px'; cur.style.top = (e.clientY - r.top) + 'px';
-        txt.textContent = p[1]; cur.classList.add('is-on');
-      });
-      p[0].addEventListener('mouseleave', function () { cur.classList.remove('is-on'); });
+        txt.textContent = '[ ' + p[1] + ' ]';
+      };
+      p[0].addEventListener('mouseenter', function (e) { cur.classList.add('is-on'); move(e); });
+      p[0].addEventListener('mousemove', move);
     });
+    if (canHover && cur) wrap.addEventListener('mouseleave', function () { cur.classList.remove('is-on'); });
+    if (!canHover) { prev.style.display = next.style.display = 'none'; if (cur) cur.style.display = 'none'; }
   }
 
   /* ---------- 슬라이드 (Swiper 11) ---------- */
@@ -177,7 +209,7 @@
     breakpoints: { 0: { slidesPerView: 1.4, spaceBetween: 10 }, 1025: { slidesPerView: 5.5, spaceBetween: 20 } }
   });
 
-  var rmSw = sw('.rm-slide .swiper', { loop: true, speed: 800, autoplay: { delay: 3000, disableOnInteraction: false } });
+  var rmSw = sw('.rm-slide .swiper', { loop: true, speed: 900, effect: 'fade', fadeEffect: { crossFade: true }, autoplay: { delay: 2800, disableOnInteraction: false, pauseOnMouseEnter: false } });
   if (rmSw) hitArea($('.rm-slide'), rmSw);
 
   /* ---------- 객실 갤러리: 다음 장이 62% 아래에서 올라오며(2.5s) 현재 장은 0.4s 페이드, 3.2s 자동 ---------- */
@@ -268,25 +300,43 @@
     var boxes = $$('.season-box', season);
     var order = ['spring', 'summer', 'autumn', 'winter'];
     var hl = function () {
-      if (mq('(max-width: 767px)')) { boxes.forEach(function (b) { b.classList.remove('is-active'); }); return; }
       var r = season.getBoundingClientRect();
       var range = Math.max(1, r.height - window.innerHeight);
       var p = Math.max(0, Math.min(0.9999, -r.top / range));
-      var idx = r.top > window.innerHeight * 0.5 ? -1 : Math.floor(p * 4);
+      var idx = (r.top >= window.innerHeight || r.bottom <= 0) ? -1 : Math.min(3, Math.floor(p * 4));
       boxes.forEach(function (b) { b.classList.toggle('is-active', idx >= 0 && b.classList.contains(order[idx])); });
     };
     window.addEventListener('scroll', hl, { passive: true }); window.addEventListener('resize', hl); hl();
   }
 
   /* ---------- 예약: 오른쪽 블록이 화면 중앙에 오면 왼쪽 사진 교체 (0.42s) ---------- */
-  var rsImgs = $$('.rs-left-img img'), blocks = $$('.rs-block');
+  var rsBox = $('.rs-left-img'), rsImgs = $$('.rs-left-img img'), blocks = $$('.rs-block');
   if (rsImgs.length && blocks.length) {
-    var rsCur = 0;
+    var rsCur = 0, rsTimer = null;
     var rsSync = function () {
-      var mid = window.innerHeight * 0.45, idx = 0;
-      blocks.forEach(function (b, k) { if (b.getBoundingClientRect().top < mid) idx = k; });
-      if (idx !== rsCur) { rsCur = idx; rsImgs.forEach(function (im, k) { im.classList.toggle('is-active', k === idx); }); }
+      var trig = window.innerHeight * 0.5, idx = 0, best = Infinity;
+      blocks.forEach(function (b, k) { var r = b.getBoundingClientRect(); var d = Math.abs(r.top + r.height * 0.5 - trig); if (d < best) { best = d; idx = k; } });
+      if (idx === rsCur) return;
+      rsCur = idx; clearTimeout(rsTimer);
+      rsBox.classList.add('is-swapping');
+      rsTimer = setTimeout(function () {
+        rsImgs.forEach(function (im, k) { im.classList.toggle('is-active', k === idx); });
+        requestAnimationFrame(function () { rsBox.classList.remove('is-swapping'); });
+      }, 180);
     };
-    window.addEventListener('scroll', rsSync, { passive: true }); rsSync();
+    window.addEventListener('scroll', rsSync, { passive: true }); window.addEventListener('resize', rsSync); rsSync();
+  }
+
+  /* 예약 하단 사진: 영역이 화면 아래(진행 0)→위(1)로 갈 때 1번 top 0→170px, 3번 bottom 22→100px (1250 폭 기준 비례) */
+  var thum = $('.rs-thum'), ti1 = $('.rs-thum-imgs .i1'), ti3 = $('.rs-thum-imgs .i3'), tBox = $('.rs-thum-imgs');
+  if (thum && ti1 && ti3) {
+    var tMove = function () {
+      if (mq('(max-width: 767px)')) { ti1.style.top = ''; ti3.style.bottom = ''; return; }
+      var r = thum.getBoundingClientRect(), vh = window.innerHeight;
+      var pr = Math.max(0, Math.min(1, (vh - r.top) / vh)), k = tBox.offsetWidth / 1250;
+      ti1.style.top = (170 * pr * k) + 'px';
+      ti3.style.bottom = ((22 + 78 * pr) * k) + 'px';
+    };
+    window.addEventListener('scroll', tMove, { passive: true }); window.addEventListener('resize', tMove); tMove();
   }
 })();
