@@ -30,7 +30,7 @@
 ### 06. ring-1..4 — `assets/ring-1.jpg ~ ring-4.jpg` (1920x1200)
 기준 4개(RESPECT·SUBTLE·PRECISE·HARMONY)를 표현한 추상 이미지: 피부결, 얇은 실크, 물결 반사, 균형 잡힌 얼굴 옆선. warm beige and soft brown palette, natural window light, photorealistic, editorial beauty clinic photography, no text.
 
-### 07. consult-band — `assets/consult.jpg` (1920x2000)
+### 07. consult-band — `assets/consult.jpg · consult-2.jpg` (1920x2000)
 입술과 턱선 클로즈업, 따뜻한 역광. warm beige and soft brown palette, natural window light, photorealistic, editorial beauty clinic photography, no text.
 
 ### 08. sub-heroes — `assets/sub-first.jpg · sub-revision.jpg · sub-about.jpg` (2560x800)
@@ -39,7 +39,7 @@
 ### 09. approach — `assets/approach-first.jpg · approach-revision.jpg` (1088x1538)
 정면 인물 반신 크롭, 차분한 표정. warm beige and soft brown palette, natural window light, photorealistic, editorial beauty clinic photography, no text.
 
-### 10. concern-1..10 — `assets/first-1~5.jpg · revision-1~5.jpg` (1920x1080)
+### 10. concern-1..10 — `assets/first-1~5.jpg · revision-1~5.jpg` (2016x720)
 고민별 눈매 연출 사진(작은 눈·비대칭·강한 눈매·처진 눈꺼풀·눈밑 / 풀린 라인·짝눈·두꺼운 라인·효과 감소·전반적 아쉬움) — 과장 없는 자연광 인물. warm beige and soft brown palette, natural window light, photorealistic, editorial beauty clinic photography, no text.
 
 ### 11. director — `assets/director.jpg` (1200x1200)
@@ -57,6 +57,6 @@
 ### 15. case-1..6 — `assets/case-1~6.jpg` (740x296)
 동의받은 전후 눈 사진 — 실제 사례로만 교체. warm beige and soft brown palette, natural window light, photorealistic, editorial beauty clinic photography, no text.
 
-### 16. column-1..3 — `assets/column-1~3.jpg` (960x960)
+### 16. column-1..3 — `assets/column-1~2.jpg` (960x960)
 상담실·기록지·회복 장면 등 칼럼 대표 사진. warm beige and soft brown palette, natural window light, photorealistic, editorial beauty clinic photography, no text.
 

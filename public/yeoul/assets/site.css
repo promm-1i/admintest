@@ -82,7 +82,7 @@ body.menu-lock{overflow:hidden}
 .consult-band{position:relative;overflow:hidden;height:985px}
 .consult-band__bg{position:absolute;inset:-50% 0;background:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),url("./consult.jpg") calc(50% + 30px) center/cover no-repeat;will-change:transform}
 .consult-band{--cb-pad:160px}
-.consult-band__wr{position:absolute;top:calc(var(--cb-pad) + (100% - var(--cb-pad) * 2) * .3);left:50%;transform:translate(-50%,-50%);width:max-content;max-width:100%;color:#fff}
+.consult-band__wr{position:absolute;top:calc(var(--cb-pad) + (100% - var(--cb-pad) * 2) * .3);left:50%;transform:translate(-50%,-50%);color:#fff}
 .consult-band__title{font-family:var(--latin);font-weight:400;font-size:72px;line-height:normal}
 .consult-band__title a{display:flex;align-items:center;justify-content:center;letter-spacing:15px;color:#fff}
 .consult-band__letters{display:inline-flex;align-items:center}
@@ -611,10 +611,10 @@ fieldset.field .field__title,.field--area .field__title{margin-bottom:16px}
 .rview__btitle{font-family:var(--serif);font-weight:400;font-size:32px;line-height:43.2px;color:#372c24;margin-bottom:24px}
 .rview__body{font-size:16px;line-height:28px;color:#3d342e}
 .rview__nb{display:flex;margin-top:120px}
-.rview__nb .nb{flex:1;height:247px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:13px;border-top:2px solid rgba(0,0,0,.06);border-bottom:2px solid rgba(0,0,0,.06);text-align:center}
+.rview__nb .nb{flex:1;min-width:0;height:247px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:13px;border-top:2px solid rgba(0,0,0,.06);border-bottom:2px solid rgba(0,0,0,.06);text-align:center}
 .rview__nb .nb+.nb{border-left:2px solid rgba(0,0,0,.06)}
 .nb__lab{font-size:18px;color:#191919}
-.nb__tit{font-size:24px;line-height:28px;font-weight:500;color:#372c24}
+.nb__tit{max-width:100%;font-size:24px;line-height:28px;font-weight:500;color:#372c24;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 a.nb:hover .nb__tit{text-decoration:underline;text-underline-offset:5px}
 .rview__back a{display:flex;align-items:center;justify-content:center;gap:12px;padding:80px 0;margin-bottom:80px;min-height:215px;font-size:20px;color:#191919}
 .rview__arrow{width:28px;height:28px;transform:scaleX(-1)}
@@ -640,7 +640,8 @@ a.nb:hover .nb__tit{text-decoration:underline;text-underline-offset:5px}
 .tview__date{font-size:16px;line-height:28px;color:#52463a}
 .tview__atc{margin-top:195px}
 .tview__intro{font-family:var(--serif);font-size:24px;line-height:36px;color:#372c24;text-align:center}
-.tview__con{margin:10px 0 30px;font-size:16px;line-height:22px;color:#191919}
+/* 레퍼런스 본문: 14pt(18.67px) 명조를 20.4px 행간 문단에 — 데스크톱에선 한 줄 22px, 모바일에선 여러 줄로 꺾인다 */
+.tview__con{margin:10px 0 30px;font-family:var(--serif);font-size:18.67px;line-height:20.4px;color:#191919}
 .tview__con img{width:600px;max-width:100%;height:450px;object-fit:cover}
 .tview__nb,.tview__back{width:calc(100% - 68px);margin-left:auto;margin-right:auto}
 .tview__nb{margin-top:0}
@@ -709,6 +710,7 @@ a.nb:hover .nb__tit{text-decoration:underline;text-underline-offset:5px}
   .standard__title{font-size:24px}
   .standard__lead,.standard__desc{font-size:16px}
   .nav-btn{display:none}
+  .space{overflow-x:clip}
   .space .tabs{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;width:100vw;margin-left:calc(50% - 50vw);padding:0 2.5vw 6px}
   .contact__info{display:flex;flex-direction:column;gap:40px}
   .contact__map{margin-top:56px;height:450px}
@@ -814,10 +816,14 @@ a.nb:hover .nb__tit{text-decoration:underline;text-underline-offset:5px}
   .rview__nb .nb{height:120px}
   .nb__tit{font-size:18px}
   .rview__back a{padding:48px 0;margin-bottom:40px;font-size:16px}
-  .tview__head{padding:40px 0 0}
-  .tview__atc{margin-top:80px}
-  .tview__intro{font-size:18px;line-height:1.6}
-  .tview__nb,.tview__back{width:100%}
+  .tview__head{padding:90px 0 0}
+  .tview__cat{font-size:14px;padding:8px 20px}
+  .tview__title{font-size:32px;line-height:48px}
+  .tview__date{font-size:14px;line-height:14px}
+  .tview__atc{margin-top:60px}
+  .tview__intro{font-size:24px;line-height:36px}
+  .tview__con img{width:100%;height:auto;aspect-ratio:600/450}
+  .tview__nb,.tview__back{width:calc(100% - 38px)}
 }
 @media (prefers-reduced-motion:reduce){
   html.js [data-rv]{opacity:1;transform:none;transition:none}
@@ -828,4 +834,94 @@ a.nb:hover .nb__tit{text-decoration:underline;text-underline-offset:5px}
 .no-band .site-foot__curve{display:none}
 /* 고민 결과 쪽 상담 띠: 다른 사진 · 설명 행간 28 (레퍼런스 .page-sub-result) */
 .page-concern .consult-band__bg{background-image:linear-gradient(rgba(0,0,0,.4),rgba(0,0,0,.4)),url("./consult-2.jpg");background-position:center}
-.page-concern .consult-band__desc{line-height:28px}
+@media (min-width:821px){.page-concern .consult-band__desc{line-height:28px}}
+
+/* ═════════ 모바일 — 레퍼런스 390 실측으로 맞춘 값 (sub.css · review_page 스킨 · paz_layout) ═════════ */
+.pick__dots{display:none}
+@media (max-width:1200px){
+  /* 고민 고르기: 번호 줄 + 한 장씩 넘기는 카드 (레퍼런스 resultSwiper) */
+  .pick__dots{display:flex;justify-content:center;gap:34px;margin-top:80px}
+  .pick__dots button{width:35px;height:35px;font-family:var(--latin);font-size:32px;line-height:1.1;letter-spacing:-1.2px;color:rgba(82,70,58,.3);transition:color .3s}
+  .pick__dots button[aria-selected="true"]{color:#52463a}
+  .pick__row{display:flex;flex-wrap:nowrap;gap:0;margin-top:80px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .pick__row::-webkit-scrollbar{display:none}
+  .pick__item{flex:0 0 100%;min-width:0;max-width:none;scroll-snap-align:center;gap:0;padding:0}
+  .pick__num{display:none}
+  .pick__box{width:311px;padding:0 32px;gap:24px}
+  .pick__face{width:219px;max-width:none}
+  .pick__item.on .pick__face{opacity:1}
+  .pick__item.on .pick__go{color:#52463a}
+  .pick__go{margin:20px 0 16px;font-size:16px}
+}
+@media (max-width:820px){
+  .site-head .home{height:46px}
+  .foot-logo .logo-mark{width:112px;height:48px}
+  .process__desc{font-size:clamp(10px,1vw + 8px,16px)}
+}
+@media (max-width:570px){
+  .pick__dots{gap:34px;margin-top:32px}
+  .pick__dots button{width:26px;height:26px;font-size:24px}
+  .pick__row{margin-top:40px}
+  .pick__item{padding:0 38px}
+  .pick__box{gap:16px}
+  .pick__face{width:239px}
+  .pick__q{font-size:20px}
+  .pick__tags .tag{font-size:10px;padding:8px 16px}
+  .pick__go{margin:10px 0 16px}
+  /* 진료 과정 */
+  .process__grid{padding:0 20px;gap:8px;margin-top:80px}
+  .process__item{margin:24px 0;padding:0}
+  .process__num{width:50px;height:50px;font-size:24px}
+  .process__desc{font-size:12px;line-height:1.5}
+  /* 원장 사진은 화면보다 넓게(510) 가운데 */
+  .director__photo{width:510px;max-width:none;align-self:flex-start;margin-left:calc((100% - 510px) / 2)}
+  /* 공간 사진 비율 · 전화번호 */
+  .contact__val.contact__tel{font-size:40px;line-height:1.1}
+  /* 상담 신청 */
+  .cform__left{padding:100px 30px 120px}
+  .cform__right{padding:60px 30px 60px}
+  .field__title,fieldset.field .field__title,.field--area .field__title{margin-bottom:12px}
+  .textarea{min-height:375px}
+  .cform__bottom{margin-top:40px}
+  .cform__submit svg{width:28px;height:28px}
+  /* 후기 목록 */
+  .rv-sec{padding:160px 0}
+  .rv-sec .center{margin-bottom:70px}
+  .rv-sec__title{margin:16px 0 40px!important}
+  .rv-filter{margin:0;padding:16px 0 32px;gap:0;flex-direction:row;overflow-x:auto;scrollbar-width:none}
+  .rv-filter__row{flex-wrap:nowrap;gap:12px;overflow:visible}
+  .rv-filter__row+.rv-filter__row{margin-left:12px}
+  .rv-filter button{font-size:16px;padding:10px 24px;flex-shrink:0}
+  .rv-list{margin-top:20px}
+  .rv-item{flex-direction:column-reverse;align-items:stretch;gap:20px;padding:24px 1px}
+  .rv-item__img{flex:none;width:100%;height:147px}
+  .rv-item__chips span{font-size:10px;padding:4px 14px}
+  .rv-item__chips{margin-bottom:4px}
+  .rv-item h3{font-size:18px;line-height:21.6px;margin:12px 0 8px}
+  .rv-item__sum{font-size:14px;line-height:22.4px;min-height:0;margin:4px 0 12px;-webkit-line-clamp:2}
+  .rv-item__meta{margin-top:0}
+  /* 후기 상세 */
+  .rview{padding-top:100px}
+  .rview__head{padding-bottom:60px;margin-bottom:60px}
+  .rview__title{font-size:32px;line-height:68px;margin:16px 0}
+  .rview__date{font-size:14px}
+  .in-832{width:calc(100% - 38px)}
+  .rview__img{height:auto;aspect-ratio:832/333}
+  .rview__lab{left:4px;top:4px;font-size:12px;line-height:12px;padding:6px 14px}
+  .rview__lock{padding:32px 16px 16px}
+  .rview__lock p{font-size:12px;line-height:18px;margin-bottom:8px}
+  .rview__lock span{font-size:12px}
+  .rview__meta{padding:40px 0}
+  .rview__story{margin-top:40px}
+  .rview__block+.rview__block{margin-top:40px;padding-top:40px}
+  .rview__kicker{margin-bottom:16px}
+  .rview__btitle{font-size:24px;line-height:32.4px;margin-bottom:12px}
+  .rview__body{font-size:14px}
+  .rview__nb{flex-direction:row;margin-top:80px}
+  .rview__nb .nb{height:167px}
+  .rview__nb .nb+.nb{border-left:2px solid rgba(0,0,0,.06)}
+  .nb__tit{font-size:18px}
+  .rview__back a{padding:40px 0;margin-bottom:40px;min-height:111px}
+  .rview__arrow{width:27px;height:27px}
+}
+@media (max-width:870px){.space__track img{height:auto;aspect-ratio:1354/485}}

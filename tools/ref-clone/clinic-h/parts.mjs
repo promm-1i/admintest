@@ -38,6 +38,7 @@ export const pick = (group, { title, desc }) => `
       <h2 class="s-title" id="pick-title">${title}</h2>
       <p class="s-desc">${desc}</p>
     </div>
+    <div class="pick__dots" role="tablist" aria-label="고민 선택">${CONCERNS.filter((c) => c.group === group).map((c, i) => `<button type="button" role="tab" aria-selected="${i === 0}" aria-label="${c.qText}">0${c.n}</button>`).join("")}</div>
     <div class="pick__row">
       ${CONCERNS.filter((c) => c.group === group).map((c) => `
       <a class="pick__item" href="${c.slug}.html" data-rv>

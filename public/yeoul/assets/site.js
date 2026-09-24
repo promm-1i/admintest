@@ -222,6 +222,21 @@
     go(0);
   });
 
+  /* ── 고민 고르기(1200 이하): 번호 줄 ↔ 가로 스냅 카드 ── */
+  $$(".pick").forEach((sec) => {
+    const row = $(".pick__row", sec), dots = $$(".pick__dots button", sec), cards = $$(".pick__item", sec);
+    if (!dots.length) return;
+    const mark = (k) => {
+      dots.forEach((d, j) => d.setAttribute("aria-selected", String(j === k)));
+      cards.forEach((c, j) => c.classList.toggle("on", j === k));
+    };
+    dots.forEach((d, k) => d.addEventListener("click", () => {
+      row.scrollTo({ left: cards[k].offsetLeft - row.offsetLeft, behavior: reduce ? "auto" : "smooth" }); mark(k);
+    }));
+    let t; row.addEventListener("scroll", () => { clearTimeout(t); t = setTimeout(() => mark(Math.round(row.scrollLeft / row.clientWidth)), 60); }, { passive: true });
+    mark(0);
+  });
+
   /* ── 공간 탭 ── */
   const tablist = $(".space [role=tablist]");
   if (tablist) {
