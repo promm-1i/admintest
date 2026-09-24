@@ -1,0 +1,166 @@
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --white:#FFF; --black:#111;
+  --g100:#F8F8F8; --g200:#F4F4F4; --g300:#EEE; --g400:#DDD;
+  --g500:#BBB; --g600:#999; --g700:#666; --g800:#333;
+  --pri:#0E8A5F; --sec:#0A6647;
+  --ff:'Pretendard',system-ui,sans-serif;
+  --fd:'Jost','Pretendard',sans-serif;
+  --ls1:-.02em; --ls2:-.01em;
+  --f01:64rem; --f02:56rem; --f03:48rem; --f04:40rem;
+  --f05:32rem; --f06:26rem; --f07:24rem; --f08:20rem;
+  --f09:18rem; --f10:16rem; --f11:14rem; --f12:13rem;
+  --lh01:1.25; --lh02:1.3; --lh03:1.3; --lh04:1.35;
+  --lh05:1.4; --lh06:1.4; --lh07:1.4; --lh08:1.6;
+  --lh09:1.5; --lh10:1.7; --lh11:1.6; --lh12:1.4;
+  --hdr:74rem; --shell:1600rem; --gut:0rem; --rad:16rem;
+  --sp1:8rem; --sp2:16rem; --sp3:24rem; --sp4:32rem; --sp5:36rem;
+  --sp6:40rem; --sp7:48rem; --sp8:80rem; --sp9:120rem;
+}
+/* 타입 스케일도 구간마다 값이 바뀐다 (원본 rwd-layout.css :root) —
+   루트 사다리만 옮기고 이걸 빠뜨리면 글자 크기가 전 구간에서 어긋난다. */
+@media (max-width:1480px){:root{
+  --f01:60rem; --f02:54rem; --f03:46rem; --f04:38rem; --f05:30rem;
+  --shell:none; --gut:60rem;
+}}
+@media (max-width:1200px){:root{
+  --f01:56rem; --f02:50rem; --f03:42rem; --f04:34rem; --f05:28rem;
+  --f06:24rem; --f07:22rem; --gut:40rem;
+}}
+@media (max-width:860px){:root{
+  --f01:52rem; --f02:46rem; --f03:38rem; --f04:30rem; --f05:26rem;
+  --f06:22rem; --f07:20rem; --f08:18rem; --f09:16rem; --f10:15rem;
+  --f11:13rem; --f12:12rem; --hdr:72rem; --gut:30rem;
+}}
+@media (max-width:540px){:root{
+  --f01:48rem; --f02:40rem; --f03:32rem; --f04:26rem; --f05:22rem;
+  --f06:20rem; --f07:17rem; --f08:16rem; --f09:15rem; --f10:14rem;
+  --f11:12rem; --f12:11rem; --gut:21rem;
+  --lh04:1.5; --lh05:1.5; --lh06:1.3; --lh07:1.4;
+  --lh10:1.5; --lh11:1.5; --lh12:1.5;
+}}
+html{font-size:6.25%}
+@media (max-width:1900px){html{font-size:0.0526vw}}
+@media (max-width:1480px){html{font-size:0.0675676vw}}
+@media (max-width:1200px){html{font-size:0.0833333vw}}
+@media (max-width:860px){html{font-size:0.130208vw}}
+@media (max-width:540px){html{font-size:0.25641vw}}
+body{margin:0;font-family:var(--ff);font-size:var(--f10);line-height:var(--lh10);
+  color:var(--black);letter-spacing:var(--ls2);background:var(--white);
+  -webkit-font-smoothing:antialiased;word-break:keep-all}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+ul,ol{margin:0;padding:0;list-style:none}
+h1,h2,h3,h4,p{margin:0}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.shell{max-width:var(--shell);margin:0 auto;position:relative}
+@media (max-width:1480px){.shell{margin:0 var(--gut)}}
+.blind{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* HEADER */
+#header{position:fixed;inset:0 0 auto;height:var(--hdr);background:var(--white);
+  border-bottom:1px solid transparent;z-index:100;transition:border-color .3s}
+#header.is-stuck{border-bottom-color:var(--g300)}
+#header .shell{height:100%;display:flex;align-items:center}
+#logo{width:130rem;flex:none;color:var(--black)}
+#logo svg{width:100%;height:auto}
+.nav{flex:1;display:flex;justify-content:center;height:100%}
+.nav-list{display:flex;height:100%}
+.nav-item>a{display:flex;align-items:center;height:100%;padding:0 24rem;
+  font-size:var(--f10);font-weight:600;transition:color .3s}
+.nav-item:hover>a,.nav-item.is-on>a{color:var(--pri)}
+.nav-sub{position:absolute;left:0;right:0;top:100%;display:flex;gap:40rem;
+  padding:28rem 0 32rem;background:var(--white);border-top:1px solid var(--g300);
+  opacity:0;visibility:hidden;transform:translateY(-6rem);
+  transition:opacity .25s,transform .25s,visibility .25s}
+.nav-item:hover .nav-sub,.nav-item:focus-within .nav-sub{opacity:1;visibility:visible;transform:none}
+.nav-sub a{display:block;font-size:var(--f11);font-weight:600;transition:color .3s}
+.nav-sub a:hover{color:var(--pri)}
+.nav-sub em{display:block;margin-top:4rem;font-size:var(--f12);font-weight:400;
+  font-style:normal;color:var(--g600)}
+.hd-utils{flex:none;display:flex;gap:32rem;align-items:center;font-size:var(--f11);font-weight:600}
+.hd-login{color:var(--g800)}
+.hd-start{padding:10rem 28rem;border-radius:8rem;color:var(--white);background:var(--g800);
+  transition:background .3s}
+.hd-start:hover{background:var(--pri)}
+#hd-toggle{display:none;width:44rem;height:44rem;flex:none;flex-direction:column;
+  justify-content:center;gap:5rem;align-items:center}
+#hd-toggle i{display:block;width:20rem;height:2rem;background:var(--black);border-radius:2rem;
+  transition:transform .3s,opacity .3s}
+body.nav-open #hd-toggle i:nth-child(1){transform:translateY(7rem) rotate(45deg)}
+body.nav-open #hd-toggle i:nth-child(2){opacity:0}
+body.nav-open #hd-toggle i:nth-child(3){transform:translateY(-7rem) rotate(-45deg)}
+main{padding-top:calc(var(--hdr) + 81rem);padding-bottom:200rem}
+body.home main{padding-bottom:0}
+
+/* FOOTER */
+#footer{padding:90rem 0 40rem;background:var(--g100);color:var(--g700);
+  font-size:var(--f11);line-height:var(--lh11)}
+.ft-top{display:flex;justify-content:space-between;gap:80rem}
+.ft-logo{color:var(--black)}
+.ft-logo svg{width:130rem;height:auto}
+.ft-nav{display:flex;gap:56rem}
+.ft-col h3{margin-bottom:16rem;font-size:var(--f11);font-weight:700;color:var(--g800)}
+.ft-col li+li{margin-top:10rem}
+.ft-col a{transition:color .3s}
+.ft-col a:hover{color:var(--pri)}
+.ft-mid{display:flex;justify-content:space-between;align-items:flex-end;gap:80rem;
+  margin-top:160rem}
+.ft-tel b{font-size:var(--f07);font-weight:700;line-height:var(--lh07);color:var(--g800)}
+.ft-contact p+p{margin-top:2rem}
+.ft-sns{display:flex;gap:8rem;flex:none}
+.ft-sns a{display:flex;align-items:center;justify-content:center;min-width:44rem;height:32rem;
+  padding:0 12rem;border:1px solid var(--g400);border-radius:16rem;font-family:var(--fd);
+  font-size:var(--f12);font-weight:600;transition:border-color .3s,color .3s}
+.ft-sns a:hover{border-color:var(--pri);color:var(--pri)}
+.ft-biz{margin-top:24rem;font-size:var(--f12);line-height:var(--lh12);color:var(--g600)}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;gap:80rem;
+  margin-top:30rem;font-size:var(--f12)}
+.ft-policy{display:flex;gap:20rem}
+.ft-policy b{font-weight:700;color:var(--g800)}
+
+/* 공통 조각 */
+.sec{padding:120rem 0}
+.sec-label{font-family:var(--fd);font-size:var(--f11);font-weight:600;
+  letter-spacing:.04em;color:var(--pri);text-transform:uppercase}
+.sec-title{margin-top:12rem;font-size:var(--f03);font-weight:700;
+  line-height:var(--lh03);letter-spacing:var(--ls1)}
+.sec-desc{margin-top:20rem;font-size:var(--f09);line-height:var(--lh09);color:var(--g700)}
+.btn{display:inline-flex;align-items:center;gap:8rem;padding:14rem 40rem;border-radius:8rem;
+  font-size:var(--f10);font-weight:600;transition:background .3s,color .3s,border-color .3s}
+.btn--fill{color:var(--white);background:var(--pri)}
+.btn--fill:hover{background:var(--sec)}
+.btn--line{border:1px solid var(--g400);color:var(--g800)}
+.btn--lg{padding:16rem 40rem;font-size:var(--f08)}
+.btn--line:hover{border-color:var(--pri);color:var(--pri)}
+
+/* 등장 */
+[data-rv]{opacity:0;transform:translateY(24rem);
+  transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+[data-rv].on{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){[data-rv]{opacity:1;transform:none;transition:none}}
+
+@media (max-width:1200px){
+  .nav-item>a{padding:0 18rem}
+}
+@media (max-width:860px){
+  #hd-toggle{display:flex;margin-left:auto}
+  .nav{position:fixed;left:0;right:0;top:var(--hdr);bottom:0;display:block;
+    padding:24rem 32rem 60rem;background:var(--white);overflow-y:auto;
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  body.nav-open .nav{opacity:1;visibility:visible}
+  .nav-list{display:block;height:auto}
+  .nav-item>a{height:auto;padding:16rem 0;font-size:var(--f07)}
+  .nav-sub{position:static;display:block;padding:0 0 16rem;border:0;opacity:1;
+    visibility:visible;transform:none}
+  .nav-sub li+li{margin-top:12rem}
+  .nav-sub a{font-size:var(--f09)}
+  .hd-utils{display:none}
+  .ft-top,.ft-mid,.ft-bot{display:block}
+  .ft-nav{flex-wrap:wrap;gap:32rem;margin-top:40rem}
+  .ft-mid{margin-top:60rem}
+  .ft-sns{margin-top:24rem;flex-wrap:wrap}
+  .ft-bot{margin-top:24rem}
+  .ft-policy{flex-wrap:wrap;margin-top:12rem}
+  .sec{padding:80rem 0}
+}
