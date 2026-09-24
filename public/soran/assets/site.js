@@ -40,7 +40,53 @@
 
   /* 맨 위로 */
   $$('.to-top').forEach(function (b) {
-    b.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' }); });
+    b.addEventListener('click', function () {
+      var from = window.scrollY, t0 = null;
+      if (reduce || !from) { window.scrollTo(0, 0); return; }
+      var step = function (ts) {
+        if (t0 === null) t0 = ts;
+        var p = Math.min(1, (ts - t0) / 1200), e = 0.5 - Math.cos(p * Math.PI) / 2; /* jQuery swing */
+        window.scrollTo(0, from * (1 - e));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  });
+
+  /* 공지 팝업: 닫기 / 하루 동안 보지 않기(브라우저 저장) / 끌어서 옮기기 */
+  var pop = $('#noticePop');
+  if (pop) {
+    var key = 'soranPopHide', hideUntil = 0;
+    try { hideUntil = +localStorage.getItem(key) || 0; } catch (e) {}
+    if (Date.now() > hideUntil) pop.hidden = false;
+    $$('[data-pop]', pop).forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        if (btn.getAttribute('data-pop') === 'day') { try { localStorage.setItem(key, String(Date.now() + 864e5)); } catch (e) {} }
+        pop.hidden = true;
+      });
+    });
+    var drag = null, handle = $('.pop-body', pop);
+    handle.addEventListener('pointerdown', function (e) {
+      if (window.innerWidth <= 700) return;
+      drag = { x: e.clientX - pop.offsetLeft, y: e.clientY - pop.offsetTop }; handle.setPointerCapture(e.pointerId);
+    });
+    handle.addEventListener('pointermove', function (e) {
+      if (!drag) return;
+      pop.style.left = Math.max(0, Math.min(window.innerWidth - pop.offsetWidth, e.clientX - drag.x)) + 'px';
+      pop.style.top = Math.max(0, e.clientY - drag.y) + 'px';
+    });
+    handle.addEventListener('pointerup', function () { drag = null; });
+  }
+
+  /* 흐르는 문구: 레퍼런스 속도 0.515em/s (150px 기준 77px/s) */
+  $$('.ticker-track').forEach(function (tr) {
+    var sp = tr.querySelector('span');
+    var set = function () {
+      var fs = parseFloat(getComputedStyle(sp).fontSize) || 150;
+      tr.style.animationDuration = (sp.offsetWidth / (fs * 0.515)).toFixed(2) + 's';
+    };
+    set(); window.addEventListener('resize', set);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(set);
   });
 
   /* 객실 요금 아코디언 */
@@ -64,18 +110,6 @@
     };
     window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
   } else if (small) { small.style.setProperty('--ty', '0%'); }
-
-  /* 전경 사진 넘기기 (앞/뒤 교체, 3초 자동) */
-  var stack = $('.pro-stack');
-  if (stack) {
-    var imgs = $$('img', stack), cur = 0;
-    var swap = function () {
-      cur = (cur + 1) % imgs.length;
-      imgs.forEach(function (im, k) { im.classList.toggle('front', k === cur); im.classList.toggle('back', k !== cur); });
-    };
-    var next = $('.pro-next'); var timer = reduce ? null : setInterval(swap, 3000);
-    if (next) next.addEventListener('click', function () { swap(); if (timer) { clearInterval(timer); timer = setInterval(swap, 3000); } });
-  }
 
   /* 슬라이더 (Swiper) */
   if (typeof Swiper === 'undefined') return;
@@ -108,11 +142,23 @@
   var offers = $('.offers-slider');
   if (offers) new Swiper(offers, { speed: 500, loop: true, autoplay: auto, slidesPerView: 'auto' });
 
+  var cover = $('.pro-cover');
+  if (cover) {
+    new Swiper(cover, {
+      effect: 'coverflow', speed: 500, loop: true, loopAdditionalSlides: 1, slidesPerView: 1, autoplay: auto,
+      coverflowEffect: { rotate: 0, stretch: 0, depth: 100, modifier: 4, slideShadows: false },
+      navigation: { nextEl: '.pro-next' },
+      breakpoints: { 0: { coverflowEffect: { rotate: 0, stretch: 0, depth: 200, modifier: 2, slideShadows: false } },
+                     901: { coverflowEffect: { rotate: 0, stretch: 0, depth: 100, modifier: 4, slideShadows: false } } }
+    });
+  }
+
   var gallery = $('.room-gallery');
   if (gallery) {
     var num = $('.room-num');
     new Swiper(gallery, {
-      effect: 'fade', fadeEffect: { crossFade: true }, speed: 800, loop: true, autoplay: auto,
+      effect: 'creative', speed: 800, loop: true, autoplay: auto, allowTouchMove: false,
+      creativeEffect: { limitProgress: 2, prev: { translate: [0, 0, -1] }, next: { translate: ['100%', 0, 0] } },
       navigation: { nextEl: '.room-next' },
       on: { slideChange: function () { if (num) num.textContent = pad(this.realIndex + 1); } }
     });

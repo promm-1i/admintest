@@ -46,9 +46,9 @@ body.menu-open .burger i:nth-child(1){transform:rotate(45deg)}
 body.menu-open .burger i:nth-child(2){transform:rotate(-45deg)}
 
 /* 전체 메뉴 */
-.gnb-panel{position:fixed;top:0;left:0;z-index:50;width:100%;padding-top:144px;background:var(--bg);transform:translateY(-100%);transition:transform .8s;visibility:hidden}
+.gnb-panel{position:fixed;top:0;left:0;z-index:50;width:100%;padding-top:144px;background:var(--bg);transform:translateY(-100%);transition:transform .8s,visibility 0s .8s;visibility:hidden}
 .gnb-panel>.wrap{display:flex;justify-content:space-between;padding:50px 0 25px;opacity:0;transition:opacity .8s}
-body.menu-open .gnb-panel{transform:translateY(0);visibility:visible}
+body.menu-open .gnb-panel{transform:translateY(0);visibility:visible;transition:transform .8s,visibility 0s}
 body.menu-open .gnb-panel>.wrap{opacity:1;transition-delay:.65s}
 .gnb-col-wrap{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}
 .gnb-list{display:flex;align-items:flex-start}
@@ -191,7 +191,6 @@ body.menu-open .gnb-panel>.wrap{opacity:1;transition-delay:.65s}
 .foot-nav>li>a{font-family:var(--f-pop);font-size:15px;line-height:1.4;color:var(--moss);opacity:.6}
 .foot-nav ul{margin-top:10px}
 .foot-nav ul a{font-size:14px;line-height:1.6;color:var(--gray)}
-.foot-nav ul a:hover,.foot-nav>li>a:hover{text-decoration:underline}
 .foot-txt{text-align:right}
 .foot-logo{display:block;width:190px;height:80px;margin-left:auto;color:var(--ink)}
 .foot-logo svg{display:block;width:100%;height:100%}
@@ -210,10 +209,6 @@ body.menu-open .gnb-panel>.wrap{opacity:1;transition-delay:.65s}
 .pro-txt h2{margin-bottom:45px;font-family:var(--f-script);font-size:75px;line-height:123px}
 .pro-txt p{font-size:15px;line-height:1.4;letter-spacing:-.02em;transition-delay:.2s}
 .pro-thumb{position:relative;width:calc(50% - 85px);margin-right:85px}
-.pro-stack{position:relative;width:calc(100% - 75px);aspect-ratio:510/598}
-.pro-stack img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;transition:transform .5s,opacity .5s}
-.pro-stack img.front{z-index:2}
-.pro-stack img.back{transform:translateX(75px) scale(.75);transform-origin:right center;left:0}
 .pro-ring{position:absolute;bottom:0;left:0;z-index:3;width:150px;transform:translate(-45%,35%) rotate(220deg);overflow:visible;font-family:var(--f-cap);font-size:16px;letter-spacing:.08em;fill:var(--deep)}
 .pro-next{position:absolute;right:0;bottom:0;display:flex;align-items:center;width:45px;height:15px;transition:transform .6s}
 .pro-next:hover{transform:translateX(10%)}
@@ -307,7 +302,7 @@ body.menu-open .gnb-panel>.wrap{opacity:1;transition-delay:.65s}
 
 /* ---------- 오시는 길 · 예약 공통 ---------- */
 .info-row{display:flex;align-items:flex-start}
-.round-top{flex:none;width:300px;overflow:hidden;isolation:isolate;transition:border-radius .8s}
+.round-top{flex:none;width:300px;overflow:hidden;isolation:isolate;transition:border-radius 1.8s}
 .round-top.in{border-radius:50px 50px 0 0}
 .round-top img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
 .info-txt{padding:30px 0 0 30px}
@@ -356,7 +351,7 @@ body.menu-open .gnb-panel>.wrap{opacity:1;transition-delay:.65s}
 .js .sr-fx:not(.in){opacity:0;transform:translateX(30px)}
 .js .sr-line{transform-origin:top;transition:transform 1.8s}
 .js .sr-line:not(.in){transform:scaleY(0)}
-.js .crumb .sr-line{transition-delay:.7s;transform-origin:center}
+.js .crumb .sr-line{transition:transform .6s .7s;transform-origin:center}
 .sr-mask{display:block;overflow:hidden}
 .js .sr-mask>span{display:block;transition:transform 1.2s}
 .js .sr-mask:not(.in)>span{transform:translateY(1.2em)}
@@ -527,8 +522,6 @@ body.menu-open .gnb-panel>.wrap{opacity:1;transition-delay:.65s}
   .pro-txt h2{margin-bottom:20px;font-size:32px;line-height:52px}
   .pro-txt p{font-size:13px}
   .pro-thumb{width:80%}
-  .pro-stack{width:calc(100% - 50px)}
-  .pro-stack img.back{transform:translateX(50px) scale(.75)}
   .pro-ring{width:80px}
   .ticker{margin:65px 0 -2em;font-size:3vw}
   .pro-grid .wrap{align-items:flex-start}
@@ -616,3 +609,38 @@ body.menu-open .gnb-panel>.wrap{opacity:1;transition-delay:.65s}
 .map-pin{position:absolute;left:44%;top:43%;display:flex;flex-direction:column;align-items:center;transform:translate(-50%,-100%);pointer-events:none}
 .map-pin b{margin-bottom:8px;padding:6px 10px;border:1px solid #cfcfcf;background:#fff;font-size:12px;font-weight:700;color:#222;white-space:nowrap}
 .map-pin i{display:block;width:26px;height:26px;border-radius:50% 50% 50% 0;background:var(--deep);transform:rotate(-45deg)}
+
+/* ===== 갭 보완 (2차) ===== */
+/* 서브 CTA 버튼 호버: 레퍼런스 .reser-section 은 #cdb9a1 */
+.cta-dark .bell-btn:hover .bi,.cta-dark .bell-btn:hover::after,.cta-dark .bell-btn:hover::before{background:var(--tan)}
+/* 세로 제목 마스크: 회전 좌표계 기준 translateY(1.2em) → 화면상 오른쪽에서 들어옴 */
+.js .sr-mask.vert:not(.in)>span{transform:translateX(-1.2em)}
+/* 전경 coverflow */
+.pro-clip{overflow:hidden;width:100%}
+.pro-cover{width:calc(100% - 75px);overflow:visible;margin:0}
+.pro-cover .swiper-slide{background:var(--bg)}
+.pro-cover img{width:100%;height:auto;aspect-ratio:510/598;object-fit:cover}
+/* 객실 갤러리: 새 사진이 오른쪽에서 덮으며 들어옴 */
+.room-gallery .swiper-slide{background:var(--bg)}
+/* 알림 팝업 (레퍼런스 메인 공지 레이어 형식) */
+.pop{position:absolute;left:0;top:150px;z-index:60;width:400px;background:#fff;touch-action:none}
+.pop[hidden]{display:none}
+.pop-body{position:relative;height:400px;overflow:hidden;cursor:move}
+.pop-body img{width:100%;height:100%;object-fit:cover}
+.pop-txt{position:absolute;inset:auto 0 0;padding:28px 28px 30px;color:#fff;background:linear-gradient(transparent,rgba(33,48,43,.85))}
+.pop-txt .en{display:inline-block;margin-bottom:12px;padding:2px 10px;border:1px solid #fff;border-radius:50%;font-family:var(--f-myeong);font-size:11px}
+.pop-txt strong{display:block;font-family:var(--f-myeong);font-size:24px;font-weight:700;line-height:1.5}
+.pop-bar{display:flex;border:1px solid #e3e3e3;background:#fff;font-size:14px;line-height:45px;color:#333}
+.pop-bar button{width:50%;text-align:center;color:#333}
+.pop-bar button:first-child{border-right:1px solid #e3e3e3}
+.pop-bar button:last-child{font-weight:700}
+/* 꼬리 민박 표시 아이콘 */
+.foot-txt address span.mark{display:flex;justify-content:flex-end;align-items:flex-start}
+.foot-txt address svg{display:block;width:30px;height:27px;margin-left:5px;fill:none;stroke:#8a8a8a;stroke-width:1.1}
+@media (max-width:900px){.foot-txt address span.mark{justify-content:center}}
+@media (max-width:700px){
+  .pop{left:63px;top:100px;width:312px}
+  .pop-body{height:312px}
+  .pop-bar{line-height:40px}
+  .pro-cover{width:calc(100% - 50px)}
+}
