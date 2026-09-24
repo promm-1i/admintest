@@ -124,9 +124,10 @@
   if (SW) {
     var sp = reduce ? 0 : 600;
     if ($('.walk-sw')) new SW('.walk-sw', {
-      loop: true, spaceBetween: 16, slidesPerView: 'auto', slidesPerGroup: 1, speed: sp,
+      loop: false, spaceBetween: 16, slidesPerView: 'auto', slidesPerGroup: 1, speed: sp, // 레퍼런스는 loop:true 이나 카드 3장이라 Swiper 가 스스로 끄므로 같은 동작
+
       navigation: { prevEl: '.walk-prev', nextEl: '.walk-next' },
-      breakpoints: { 960: { loop: true, slidesPerView: 3, spaceBetween: 24 } }
+      breakpoints: { 960: { slidesPerView: 3, spaceBetween: 24 } }
     });
     if ($('.rs-sw')) new SW('.rs-sw', {
       loop: true, spaceBetween: 8, slidesPerView: 'auto', centeredSlides: true, speed: sp, grabCursor: true,
