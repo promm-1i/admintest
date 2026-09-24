@@ -123,10 +123,12 @@
   /* ---- Swiper (레퍼런스 설정) ---- */
   if (SW) {
     var sp = reduce ? 0 : 600;
+    // ul>li 구조라 슬라이드 역할을 listitem 으로 (기본 group 은 목록 규칙 위반)
+    var A11Y = { slideRole: 'listitem' };
     if ($('.walk-sw')) new SW('.walk-sw', {
       loop: false, spaceBetween: 16, slidesPerView: 'auto', slidesPerGroup: 1, speed: sp, // 레퍼런스는 loop:true 이나 카드 3장이라 Swiper 가 스스로 끄므로 같은 동작
 
-      navigation: { prevEl: '.walk-prev', nextEl: '.walk-next' },
+      navigation: { prevEl: '.walk-prev', nextEl: '.walk-next' }, a11y: A11Y,
       breakpoints: { 960: { slidesPerView: 3, spaceBetween: 24 } }
     });
     if ($('.rs-sw')) new SW('.rs-sw', {
@@ -134,11 +136,11 @@
       navigation: { prevEl: '.rs-prev', nextEl: '.rs-next' },
       autoplay: reduce ? false : { delay: 2500, disableOnInteraction: false },
       breakpoints: { 1024: { slidesPerView: 'auto', spaceBetween: 16, centeredSlides: true } },
-      a11y: { prevSlideMessage: '이전 사진', nextSlideMessage: '다음 사진' }
+      a11y: { slideRole: 'listitem', prevSlideMessage: '이전 사진', nextSlideMessage: '다음 사진' }
     });
     if ($('.sy-sw')) new SW('.sy-sw', {
       slidesPerView: 1, spaceBetween: 8, speed: sp, autoHeight: true,
-      navigation: { prevEl: '.sy-prev', nextEl: '.sy-next' }
+      navigation: { prevEl: '.sy-prev', nextEl: '.sy-next' }, a11y: A11Y
     });
   }
 

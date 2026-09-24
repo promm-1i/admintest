@@ -277,7 +277,7 @@
     gsap.set(dot, { opacity: 0, scale: 0, transformOrigin: '50% 50%' });
     gsap.set('.spc-ib--l', { opacity: 0, x: -50 }); gsap.set('.spc-ib--r', { opacity: 0, x: 50 });
     gsap.to(sec, { backgroundColor: '#f7f9fb', duration: 0.8, ease: 'power2.inOut', scrollTrigger: { trigger: sec, start: 'top 0%', toggleActions: 'play none none reverse' } });
-    gsap.to('.spc-head', { color: '#85BFC1', duration: 0.8, ease: 'power2.inOut', scrollTrigger: { trigger: sec, start: 'top 0%', toggleActions: 'play none none reverse' } });
+    gsap.to('.spc-head', { color: '#367a7c', duration: 0.8, ease: 'power2.inOut', scrollTrigger: { trigger: sec, start: 'top 0%', toggleActions: 'play none none reverse' } });
     ScrollTrigger.create({ trigger: '.spc-path', start: 'top top', endTrigger: '.spc-scroll', end: 'bottom 90%', pin: true, pinSpacing: false });
     gsap.to(wave, { strokeDashoffset: 0, duration: 1.5, ease: 'power2.inOut', scrollTrigger: { trigger: '.spc-scroll', start: 'top 80%', end: '20% top', scrub: 0.5 } });
     var tl = gsap.timeline({ scrollTrigger: { trigger: '.spc-scroll', start: 'top 70%', end: 'bottom top', scrub: 1 } });
