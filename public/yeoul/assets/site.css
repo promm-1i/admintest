@@ -383,6 +383,7 @@ html.js .s-visual__img.pre{width:52%}
 .pick .s-title{margin:38px 0 15px}
 .pick__row{display:flex;gap:20px;margin-top:80px}
 .pick__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:40px;text-align:center}
+.pick__num::before{content:attr(data-n)}
 .pick__num{font-family:var(--latin);font-size:48px;line-height:1.1;letter-spacing:-2.4px;color:rgba(82,70,58,.13);transition:color .3s}
 .pick__box{display:flex;flex-direction:column;align-items:center;gap:24px;width:100%}
 .pick__face{width:240px;max-width:90%;height:auto;opacity:.4;transition:opacity .3s;color:#8b7a69}
@@ -468,12 +469,15 @@ html.js .s-visual__img.pre{width:52%}
 .standard .s-title{margin:40px 0 60px}
 .standard__wr{position:relative;margin-top:80px}
 .standard__track{display:flex;gap:24px;transition:transform .6s cubic-bezier(.25,.46,.45,.94);will-change:transform}
-.standard__card{flex:0 0 1242px;max-width:calc(100vw - 120px);opacity:.45;transition:opacity .3s ease}
-.standard__card.on{opacity:1}
+.standard__card{flex:0 0 1242px;max-width:calc(100vw - 120px)}
+/* 옆 카드는 흐리게 — 글자는 대비 4.5 를 지키는 선(.75)까지만 */
+.standard__img,.standard__body{transition:opacity .3s ease}
+.standard__card:not(.on) .standard__img{opacity:.45}
+.standard__card:not(.on) .standard__body{opacity:.75}
 .standard__img{height:480px;overflow:hidden}
 .standard__img img{width:100%;height:100%;object-fit:cover}
 .standard__body{margin-top:40px;color:var(--t)}
-.standard__en{font-family:var(--latin);font-size:14px;letter-spacing:4px;margin-bottom:12px;opacity:.6}
+.standard__en{font-family:var(--latin);font-size:14px;letter-spacing:4px;margin-bottom:12px;opacity:.72}
 .standard__title{font-family:var(--serif);font-weight:400;font-size:36px;line-height:1.25}
 .standard__lead{font-weight:700;margin-top:24px;font-size:20px;line-height:1.8}
 .standard__desc{margin-top:16px;font-size:18px;line-height:28px}
@@ -568,7 +572,7 @@ fieldset.field .field__title,.field--area .field__title{margin-bottom:16px}
 .rv-sec__title{margin-top:40px}
 .rv-filter{max-width:900px;margin:135px auto 0;display:flex;flex-direction:column;gap:12px}
 .rv-filter__row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
-.rv-filter button,.think-tabs button{font-size:16px;line-height:16px;padding:10px 24px;border-radius:999px;background:#ece3d6;color:#a49a8e;transition:background .2s,color .2s}
+.rv-filter button,.think-tabs button{font-size:16px;line-height:16px;padding:10px 24px;border-radius:999px;background:#ece3d6;color:#6d6359;transition:background .2s,color .2s}
 .rv-filter button.on,.think-tabs button.on{background:#4f443b;color:#fff}
 .rv-list{margin-top:50px;border-top:1px solid #ddd3c5}
 .rv-item{position:relative;display:flex;justify-content:space-between;align-items:center;padding:40px 1px;border-bottom:1px solid #ddd3c5}
@@ -603,7 +607,7 @@ fieldset.field .field__title,.field--area .field__title{margin-bottom:16px}
 .rview__lock span{font-size:14px;color:rgba(245,239,230,.75)}
 .rview__meta{padding:60px 0;border-bottom:1px solid rgba(55,44,36,.12)}
 .rview__meta div+div{margin-top:32px}
-.rview__meta dt{font-size:13px;color:#8f8882;margin-bottom:8px}
+.rview__meta dt{font-size:13px;color:#726a63;margin-bottom:8px}
 .rview__meta dd{font-size:18px;line-height:25.2px;font-weight:600;color:#2f2a26}
 .rview__story{margin-top:60px}
 .rview__block+.rview__block{margin-top:60px;padding-top:60px;border-top:1px solid rgba(55,44,36,.12)}

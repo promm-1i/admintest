@@ -42,7 +42,7 @@ export const pick = (group, { title, desc }) => `
     <div class="pick__row">
       ${CONCERNS.filter((c) => c.group === group).map((c) => `
       <a class="pick__item" href="${c.slug}.html" data-rv>
-        <span class="pick__num" aria-hidden="true">0${c.n}</span>
+        <span class="pick__num" aria-hidden="true" data-n="0${c.n}"></span>
         <span class="pick__box">
           ${face(c.face, `${c.qText} — 얼굴 선화`)}
           <span class="pick__q">${c.q}</span>

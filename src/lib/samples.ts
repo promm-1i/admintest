@@ -1291,13 +1291,13 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
-    slug: "clinic-h-template",
+    slug: "yeoul-template",
     industry: "성형외과 · 눈성형 중심 의원 홈페이지",
     title: "눈성형 중심 성형외과 홈페이지 (프리미엄 디자인 E)",
     type: ["premium-template", "small-business"],
     tag: "프리미엄 디자인 · 병원 · 성형외과 · 눈성형",
     purpose:
-      "물결 두 장이 위아래로 갈라지며 얼굴 사진 면이 올라오는 인트로로 시작해, 스크롤하면 본문이 오른쪽에서 밀려 들어오는 가로 패널, 사진이 펼쳐지는 두 갈래 카드, 원형 링이 5초마다 채워지며 네 가지 기준이 바뀌는 장면, 글자가 차례로 들어오는 상담 띠로 이어지는 메인에, 첫 눈성형·눈 재수술과 고민별 결과 10쪽, 병원 소개·상담 신청·수술 사례·칼럼·약관까지 서브 21쪽을 갖춘 눈성형 중심 성형외과 홈페이지입니다. 스크롤에 따라 쪽 배경이 짙은 갈색에서 베이지로 바뀝니다.",
+      "물결 두 장이 위아래로 갈라지며 얼굴 사진 면이 올라오는 인트로로 시작해, 스크롤하면 본문이 오른쪽에서 밀려 들어오는 가로 패널, 사진이 펼쳐지는 두 갈래 카드, 원형 링이 5초마다 채워지며 네 가지 기준이 바뀌는 장면, 글자가 차례로 들어오는 상담 띠로 이어지는 메인에, 첫 눈성형·눈 재수술과 고민별 결과 10쪽, 병원 소개·상담 신청, 수술 사례 목록과 상세 15쪽, 칼럼 목록과 글 2쪽까지 서브 33쪽을 갖춘 눈성형 중심 성형외과 홈페이지입니다. 스크롤에 따라 쪽 배경이 짙은 갈색에서 베이지로 바뀝니다.",
     features: [
       "물결 분할 인트로 · 가로 패널 전환 · 원형 링 4단계",
       "고민 고르기 얼굴 선화 5종 → 고민별 결과 쪽 10개",
@@ -1305,7 +1305,7 @@ export const SAMPLES: Sample[] = [
       "대표원장 · 네 가지 기준 슬라이드 · 공간 탭 · 상담 신청서",
     ],
     idealFor: "눈성형·재수술 중심 성형외과, 한 원장이 상담부터 회복까지 맡는 예약제 의원, 고민별 안내가 필요한 미용 의원",
-    image: "/thumbs/clinic-h.jpg",
+    image: "/thumbs/yeoul.jpg",
     liveUrl: "/yeoul/",
     industryKey: "hospital",
     premiumLabel: "성형외과",
@@ -5713,7 +5713,7 @@ export const SAMPLES: Sample[] = [
  * 새 프리미엄을 등록하면 슬러그를 맨 앞에 넣는다. 여기 없는 프리미엄은 그 뒤, 나머지는 SAMPLES 순서.
  */
 const PREMIUM_RECENT_ORDER = [
-  "clinic-h-template",
+  "yeoul-template",
   "corporate-t-template",
   "clinic-f-template",
   "corporate-r-template",
