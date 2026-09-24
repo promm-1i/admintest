@@ -117,3 +117,84 @@ document.documentElement.classList.add('js');
     track.addEventListener('scroll',sync,{passive:true}); addEventListener('resize',sync); sync();
   });
 })();
+
+/* ── 서브 ── */
+/* 아코디언 — [data-acc] 안에서 하나만 연다 */
+(function(){
+  document.querySelectorAll('[data-acc]').forEach(function(box){
+    var its=[].slice.call(box.querySelectorAll('.acc__it'));
+    its.forEach(function(it){
+      var b=it.querySelector('.acc__btn');
+      b.setAttribute('aria-expanded',it.classList.contains('open')?'true':'false');
+      b.addEventListener('click',function(){
+        var on=!it.classList.contains('open');
+        its.forEach(function(x){ x.classList.remove('open'); x.querySelector('.acc__btn').setAttribute('aria-expanded','false') });
+        if(on){ it.classList.add('open'); b.setAttribute('aria-expanded','true') }
+      });
+    });
+  });
+})();
+
+/* 비주얼 B·C — 스크롤에 따라 곡선이 올라가고(B), 가운데 사진이 화면 가득 펼쳐진다(C) */
+(function(){
+  var curve=document.querySelector('.sub-curve'), rev=document.querySelector('.sub-reveal');
+  if(!curve&&!rev) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function tick(){
+    var y=scrollY||0, H=innerHeight;
+    if(curve){ var box=curve.querySelector('.sub-curve__box'); var p=Math.min(1,y/(H*.6));
+      box.style.transform='scaleY('+(1-p*.35)+')'; }
+    if(rev&&!reduce){ var st=rev.querySelector('.sub-reveal__img'); var len=rev.offsetHeight-H; var q=len>0?Math.min(1,Math.max(0,y/len)):1;
+      var m=innerWidth<=1000, top=(m?58:55)*(1-q), side=(m?6:13)*(1-q), r=(m?16:24)*(1-q);
+      st.style.clipPath='inset('+top+'% '+side+'% 0 '+side+'% round '+r+'px '+r+'px 0 0)';
+      st.style.setProperty('--dim',String(Math.max(0,(q-.35)/.65)));
+      rev.classList.toggle('is-dark',q>.45); }
+  }
+  addEventListener('scroll',tick,{passive:true}); addEventListener('resize',tick); tick();
+})();
+
+/* 둘러보기 — 큰 사진 + 썸네일 */
+(function(){
+  var v=document.querySelector('[data-tourv]'); if(!v) return;
+  var main=v.querySelector('.tourv__main img'), cap=v.querySelector('.tourv__cap');
+  var th=[].slice.call(v.querySelectorAll('.tourv__thumbs button')), i=0;
+  function show(k){ i=(k+th.length)%th.length; var b=th[i], im=b.querySelector('img');
+    main.src=im.src; main.alt=b.dataset.cap; cap.textContent=b.dataset.cap;
+    th.forEach(function(x,n){x.setAttribute('aria-current',n===i?'true':'false')}); }
+  th.forEach(function(b,k){ b.addEventListener('click',function(){show(k)}) });
+  v.querySelector('.tourv__btn--p').addEventListener('click',function(){show(i-1)});
+  v.querySelector('.tourv__btn--n').addEventListener('click',function(){show(i+1)});
+})();
+
+/* 게시판 분류 버튼 — [data-filter] 로 목록 항목의 data-cat 을 거른다 */
+(function(){
+  var f=document.querySelector('[data-filter]'); if(!f) return;
+  var tabs=[].slice.call(f.querySelectorAll('[role="tab"]')), items=[].slice.call(document.querySelectorAll('[data-cat]'));
+  tabs.forEach(function(t){ t.addEventListener('click',function(){
+    tabs.forEach(function(x){x.setAttribute('aria-selected',x===t?'true':'false')});
+    items.forEach(function(it){ it.hidden=!(t.dataset.v==='all'||it.dataset.cat===t.dataset.v) });
+    var c=document.querySelector('[data-count]'); if(c) c.textContent=items.filter(function(x){return !x.hidden}).length;
+  }) });
+})();
+
+/* 데모 폼 — 실제 전송 없이 안내만 */
+(function(){
+  document.querySelectorAll('form[data-demo-form]').forEach(function(fm){
+    fm.addEventListener('submit',function(e){ e.preventDefault();
+      if(!fm.checkValidity()){ fm.reportValidity(); return }
+      alert('디자인 예시 화면입니다. 실제 납품 시 병원 회원·상담 시스템과 연결됩니다.'); });
+    var all=fm.querySelector('[data-all]');
+    if(all) all.addEventListener('change',function(){ fm.querySelectorAll('[data-agree]').forEach(function(c){c.checked=all.checked}) });
+  });
+})();
+
+/* 가로 아코디언 — [data-hacc] 안에서 하나만 펼친다 */
+(function(){
+  document.querySelectorAll('[data-hacc]').forEach(function(box){
+    var its=[].slice.call(box.querySelectorAll('.hacc__it'));
+    its.forEach(function(it){ it.querySelector('.hacc__btn').addEventListener('click',function(){
+      its.forEach(function(x){x.classList.toggle('open',x===it); x.querySelector('.hacc__btn').setAttribute('aria-expanded',x===it?'true':'false')});
+      var h=it.querySelector('h3'); if(h){ h.setAttribute('tabindex','-1'); h.focus({preventScroll:true}) }
+    }) });
+  });
+})();

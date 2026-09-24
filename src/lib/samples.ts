@@ -1167,6 +1167,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "clinic-h-template",
+    industry: "한의원 · 통증 · 다이어트 홈페이지",
+    title: "한의원 홈페이지 (프리미엄 디자인 E)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 한의원 · 통증 · 다이어트",
+    purpose:
+      "스크롤하면 문장이 바뀌며 원장 사진이 원으로 번지는 첫 화면, 사진이 붙은 채 네 가지 차별점을 진행선으로 넘기는 구간, 겹쳐 있다 펼쳐지며 영상 전후를 보여주는 사례 카드, 배경 세 장이 아래에서 차오르는 약속 구간, 넓어지는 공간 필름과 건강 이야기로 이어지는 메인에, 통증 · 추나 7쪽, 다이어트 5쪽, 스페셜 클리닉 5쪽, 교통사고 3쪽, 전후 사진 · 후기, 병원 소개 6쪽, 회원가입 · 약관까지 서브 32쪽을 갖춘 한의원 홈페이지입니다.",
+    features: [
+      "스크롤 고정 연출 3곳 · 라이브러리 없이 동작",
+      "통증 · 다이어트 · 스페셜 · 교통사고 묶음별 비주얼 4종",
+      "검사 궤도 · 단계 · 가로 아코디언 · 핫스팟 등 서브 부품 30여 종",
+      "전후 사진 분류 · 커뮤니티 · 둘러보기 · 회원가입 폼 · 서브 32쪽",
+    ],
+    idealFor: "통증 · 추나 중심 한의원, 다이어트 · 교통사고 클리닉을 함께 운영하는 한의원, 진료 과목이 많은 로컬 의원",
+    image: "/thumbs/clinic-h.jpg",
+    liveUrl: "/sodam/",
+    industryKey: "hospital",
+    premiumLabel: "한의원",
+    designCode: "HOSP-1005",
+    premium: true,
+  },
+  {
     slug: "clinic-g-template",
     industry: "이비인후과 · 코 중점 병원 홈페이지",
     title: "이비인후과 네트워크 홈페이지 (프리미엄 디자인 D)",

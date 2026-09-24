@@ -138,17 +138,29 @@ def footer():
 def sub_hero(fn, meta, gi, name):
     h = meta.get('hero')
     if not h: return ''
+    if h == 'flat': h = {'type': 'flat'}
+    typ = h.get('type', 'photo')
+    title = h.get('t') or esc(name or meta.get('title', ''))
+    desc = ('<p class="%s__d">%s</p>' % ('sub-hero' if typ in ('photo', 'flat', 'flatc') else 'sub-' + typ, h['d'])) if h.get('d') else ''
     crumb = '<nav class="crumb" aria-label="현재 위치"><a href="./index.html" aria-label="홈">%s</a><i></i><span>%s</span><i></i><span>%s</span></nav>' % (
         ICON['home'], esc(MENU[gi][0]) if gi is not None else '안내', esc(name or meta.get('title', '')))
-    if h == 'flat':
-        return ('<section class="sub-hero sub-hero--flat"><div class="wrap sub-hero__txt">%s<h1 class="sub-hero__t">%s</h1>%s</div></section>\n') % (
-            crumb, meta.get('h1', esc(name or meta['title'])), ('<p class="sub-hero__d">%s</p>' % meta['hd']) if meta.get('hd') else '')
+    img = lambda: '<img src="./assets/%s" alt="" width="1440" height="900" fetchpriority="high" data-shot="%s">' % (h['img'], esc(h.get('shot', '')))
+    if typ in ('flat', 'flatc'):
+        return ('<section class="sub-hero sub-hero--flat%s"><div class="wrap sub-hero__txt">%s<h1 class="sub-hero__t">%s</h1>%s</div></section>\n') % (
+            ' sub-hero--flatc' if typ == 'flatc' else '', crumb, title, desc)
+    if typ == 'curve':
+        return ('<section class="sub-curve" id="subHero">%s<div class="sub-curve__box" aria-hidden="true"></div>'
+                '<div class="wrap sub-curve__txt"><h1 class="sub-curve__t">%s</h1>%s%s</div></section>\n') % (
+            img().replace('<img ', '<img class="sub-curve__img" '), title, desc, crumb)
+    if typ == 'reveal':
+        return ('<section class="sub-reveal" id="subHero"><div class="sub-reveal__stick"><div class="sub-reveal__img">%s</div>'
+                '<div class="sub-reveal__txt"><h1 class="sub-reveal__t">%s</h1>%s%s</div></div></section>\n') % (img(), title, desc, crumb)
     ring = ('<span class="rot" aria-hidden="true"><svg class="rot__ring" viewBox="0 0 120 120"><defs><path id="rp" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs>'
             '<text font-family="Cormorant, serif" font-size="11.5" letter-spacing="3.2" fill="#fff"><textPath href="#rp">SODAM · CLOSER TO THE CAUSE · SODAM · CARE ·</textPath></text></svg>'
             '<span class="rot__mark">%s</span></span>') % ICON['mark'].replace('class="logo__mark"', '')
-    return ('<section class="sub-hero" id="subHero"><img class="sub-hero__img" src="./assets/%s" alt="" width="1920" height="1200" fetchpriority="high">'
+    return ('<section class="sub-hero" id="subHero">%s'
             '<div class="wrap sub-hero__txt">%s<h1 class="sub-hero__t">%s</h1>%s</div>%s</section>\n') % (
-        h['img'], crumb, h['t'], ('<p class="sub-hero__d">%s</p>' % h['d']) if h.get('d') else '', ring)
+        img().replace('<img ', '<img class="sub-hero__img" '), crumb, title, desc, ring)
 
 def lnb(fn, gi):
     if gi is None: return ''
@@ -192,13 +204,25 @@ def build(fn):
     js = ''
     for j in meta.get('js', []):
         js += '<script>\n%s\n</script>\n' % io.open(os.path.join(ROOT, 'pages', j), encoding='utf-8').read().strip()
-    if meta.get('hero') and meta['hero'] != 'flat':
-        meta.setdefault('over', '#subHero'); meta.setdefault('quick', '#subHero')
+    htype = meta['hero'].get('type', 'photo') if isinstance(meta.get('hero'), dict) else meta.get('hero')
+    if htype in ('photo', 'curve'):
+        meta.setdefault('over', '#subHero')
+    if htype in ('photo', 'curve', 'reveal'):
+        meta.setdefault('quick', '#subHero')
+    if fn != 'index.html':
+        css = '<link rel="stylesheet" href="./assets/sub.css">\n' + css
     if fn != 'index.html': meta.setdefault('autohide', True)
     out = HEAD.format(title=esc(full_title), desc=esc(desc), css=css, bodycls=(' class="%s"' % meta['body']) if meta.get('body') else '')
     out += header(gi, meta) + sitemap()
+    # 모바일에서 <br> 을 숨겨도 앞뒤 낱말이 붙지 않도록 줄바꿈 앞에 빈칸을 둔다(줄 끝 빈칸은 보이지 않는다)
+    body = re.sub(r'(?<=[^\s>])<br>', ' <br>', body)
+    for k in ('t', 'd'):
+        if isinstance(meta.get('hero'), dict) and meta['hero'].get(k):
+            meta['hero'][k] = re.sub(r'(?<=[^\s>])<br>', ' <br>', meta['hero'][k])
     out += '<main id="main">\n' + sub_hero(fn, meta, gi, name) + (lnb(fn, gi) if meta.get('lnb') else '') + body.strip() + '\n</main>\n'
     out += footer() + quick()
+    if meta.get('cta'):
+        out += '<a class="fcta" href="%s">%s</a>\n' % (meta['cta'][1], esc(meta['cta'][0]))
     out += '<script src="./assets/site.js"></script>\n' + js
     out += ('<script>document.addEventListener("click",function(e){var a=e.target.closest("[data-demo]");'
             'if(a){e.preventDefault();alert("디자인 예시 화면입니다. 실제 납품 시 병원 채널로 연결됩니다.");}});</script>\n')
@@ -206,9 +230,39 @@ def build(fn):
     io.open(os.path.join(OUT, fn), 'w', encoding='utf-8', newline='\n').write(out)
     return fn
 
+MAP = os.path.normpath(os.path.join(ROOT, '..', 'photo-map-clinic-h.txt'))
+
+def sync_photos():
+    """쪽마다 쓰인 ./assets/*.jpg 를 모아 사진 대응표에 없는 것은 덧붙이고, 파일이 없으면 임시 그림을 만든다.
+    설명은 alt(없으면 data-shot), 톤은 data-tone(warm·dark·light, 기본 warm), 원본 크기는 표시 크기의 2배."""
+    rows, known = [], {}
+    for line in io.open(MAP, encoding='utf-8'):
+        if line.startswith('#') or not line.strip(): continue
+        c = line.rstrip('\n').split('\t'); rows.append(c); known[c[2]] = c
+    found = {}
+    for fn in sorted(os.listdir(OUT)):
+        if not fn.endswith('.html'): continue
+        for tag in re.findall(r'<img\b[^>]*>', io.open(os.path.join(OUT, fn), encoding='utf-8').read()):
+            m = re.search(r'src="\./assets/([^"]+\.jpg)"', tag)
+            if not m or m.group(1) in known or m.group(1) in found: continue
+            a = lambda k: (re.search(r'\b%s="([^"]*)"' % k, tag) or [None, ''])[1]
+            w, h = int(a('width') or 800), int(a('height') or 600)
+            found[m.group(1)] = [m.group(1), w, h, a('data-tone') or 'warm', html.unescape(a('alt') or a('data-shot') or '장식 사진'), fn]
+    n = len(rows)
+    for f, (name, w, h, tone, desc, page) in found.items():
+        n += 1
+        rows.append(['%03d' % n, 'clinic-h', name, str(w), str(h), str(w * 2), str(h * 2), tone, '%s (%s)' % (desc, page)])
+    with io.open(MAP, 'w', encoding='utf-8', newline='\n') as o:
+        o.write('# 번호\t슬러그\t파일\t표시폭\t표시높이\t원본폭\t원본높이\t톤\t무엇을 찍은 사진인가\n')
+        for k, r in enumerate(rows, 1): r[0] = '%03d' % k; o.write('\t'.join(r) + '\n')
+    import subprocess, sys as _s
+    subprocess.run([_s.executable, os.path.join(ROOT, '..', 'make_placeholders.py'), MAP, os.path.join(OUT, 'assets'), 'SODAM'], check=True)
+    return len(found)
+
 if __name__ == '__main__':
     import sys
     only = sys.argv[1:]
     done = [build(f) for f in sorted(os.listdir(os.path.join(ROOT, 'pages')))
             if f.endswith('.html') and (not only or f in only)]
     print('%d쪽 → %s' % (len(done), OUT))
+    print('사진 대응표에 새로 올린 사진 %d장' % sync_photos())

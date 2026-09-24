@@ -9,7 +9,8 @@
   /* ① 히어로 — 총 11 단위: 1~3 첫 문장 위로(-100) · 3~6 둘째 문장 제자리 · 3~9 사진 원형 확장(0→100%) · 9~11 여백.
         원본 scrub:3 은 3초 따라잡기라서 여기서도 진행률을 부드럽게 따라가게 한다. */
   var heroPin=document.getElementById('heroPin'), hero=heroPin&&heroPin.querySelector('.hero');
-  if(hero){
+  if(hero&&reduce){ hero.classList.add('is-in') }   /* 움직임 줄이기: 고정 연출 없이 CSS 가 최종 상태를 그린다 */
+  else if(hero){
     var c1=hero.querySelector('.hero__c1'), c2=hero.querySelector('.hero__c2'), doc=hero.querySelector('.hero__doc');
     var cur=0, target=0, raf=0;
     function paint(t){
@@ -21,7 +22,7 @@
       doc.style.clipPath='circle('+(100*seg(t,3,9))+'% at 50% 50%)';
     }
     function loop(){ cur+= (target-cur)*0.12; if(Math.abs(target-cur)<0.002) cur=target; paint(cur); raf=cur!==target?requestAnimationFrame(loop):0 }
-    function onScroll(){ target=pinProgress(heroPin)*11; if(reduce){cur=target;paint(cur);return} if(!raf) raf=requestAnimationFrame(loop) }
+    function onScroll(){ target=pinProgress(heroPin)*11; if(!raf) raf=requestAnimationFrame(loop) }
     addEventListener('scroll',onScroll,{passive:true}); addEventListener('resize',onScroll);
     requestAnimationFrame(function(){ hero.classList.add('is-in') });
     onScroll();
