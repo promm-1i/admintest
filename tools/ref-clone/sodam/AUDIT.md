@@ -1,4 +1,4 @@
-# 소담한의원(clinic-h) ↔ 원본(kakkai.co.kr) 누락 점검표
+# 소담한의원(clinic-i) ↔ 원본(kakkai.co.kr) 누락 점검표
 
 1차 결과물(2100444)을 원본 소스(common.js · sub.js · main.js · 쪽별 인라인 스크립트 · sub.css hover 규칙 · 쪽별 섹션 구성)와
 대조해 뽑은 목록. `[x]` 는 반영 완료.

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 """모델링용으로 사이트를 페이지 틀별로 받는다.
 
-  python crawl_ref.py <시작URL> <저장폴더> [--max 60] [--per 2] [--prefix /admin] [--login] [--mobile] [--wait 1800]
+  python crawl_ref.py <시작URL> <저장폴더> [--max 60] [--per 2] [--prefix /admin] [--login] [--mobile]
+                      [--wait 1800] [--chromium]
 
 페이지마다 남기는 것
   raw/<이름>.html     서버가 보낸 원본 HTML (소스 보기와 같다)
@@ -13,6 +14,7 @@
   _index.json · _skipped.json · _menu.json(--login)
 
 --login   창을 띄워 시작URL 에서 사람이 직접 로그인할 때까지 기다린다. 비밀번호는 스크립트가 넣지 않는다.
+--chromium  설치된 크롬 대신 번들 크로미엄으로 연다. 크롬에서 전체 캡처가 끝나지 않는 쪽(bonif)이 있다.
 --prefix  이 경로로 시작하는 링크만 따라간다.
 --per     숫자만 다른 주소(매물 상세 1, 2, 3…)는 몇 개까지 받을지.
 
@@ -48,7 +50,8 @@ SCROLL = """async()=>{
   const el=pick(); const step=Math.round(innerHeight*0.8);
   for(let y=0;y<el.scrollHeight&&y<60000;y+=step){el.scrollTop=y;window.scrollTo(0,y);
     await new Promise(r=>setTimeout(r,140));}
-  el.scrollTop=0;window.scrollTo(0,0);await new Promise(r=>setTimeout(r,700));
+  await new Promise(r=>setTimeout(r,1200));
+  el.scrollTop=0;window.scrollTo(0,0);await new Promise(r=>setTimeout(r,1200));
   window.__sc = el===document.scrollingElement ? null : el;
   return {scroller:el===document.scrollingElement?'window':el.tagName+'.'+String(el.className).split(' ')[0],
           height:el.scrollHeight, title:document.title};}"""
@@ -136,8 +139,13 @@ def shoot(pg, base):
     for y in range(0, max(h, 1), seg):
         n += 1
         kw = {} if h <= seg else {'clip': {'x': 0, 'y': y, 'width': w, 'height': min(seg, h - y)}}
-        pg.screenshot(path='%s%s.png' % (base, '' if n == 1 else '-%d' % n),
-                      full_page=True, animations='disabled', **kw)
+        f = '%s%s.png' % (base, '' if n == 1 else '-%d' % n)
+        try:
+            pg.screenshot(path=f, full_page=True, animations='disabled', timeout=45_000, **kw)
+        except Exception:
+            # AOS 처럼 스크롤 때마다 새 애니메이션이 붙는 쪽은 'disabled' 가 끝나지 않는다.
+            # 이미 한 번 훑어 등장이 끝난 상태이므로 그대로 찍는다.
+            pg.screenshot(path=f, full_page=True, timeout=120_000, **kw)
     return n
 
 
@@ -178,6 +186,7 @@ def main():
     start, out = a[0], a[1]
     MAX, PER, WAIT = int(opt('--max', 60)), int(opt('--per', 2)), int(opt('--wait', 1800))
     PREFIX, LOGIN, MOBILE = opt('--prefix', '/'), '--login' in a, '--mobile' in a
+    CHROMIUM = '--chromium' in a
     if not PREFIX.startswith('/'):      # Git Bash 는 /admin 을 C:/Program Files/Git/admin 으로 바꿔 넘긴다
         sys.exit('--prefix 가 %s 로 들어왔다. MSYS_NO_PATHCONV=1 을 앞에 붙여 실행할 것' % PREFIX)
     host = urlparse(start).netloc
@@ -188,7 +197,8 @@ def main():
     name = Names()
     seen, count, saved, skipped, got = set(), {}, [], [], set()
     with sync_playwright() as p:
-        b = p.chromium.launch(channel='chrome', headless=not LOGIN)
+        b = (p.chromium.launch(headless=not LOGIN) if CHROMIUM
+             else p.chromium.launch(channel='chrome', headless=not LOGIN))
         ctx = b.new_context(viewport={'width': 1440, 'height': 900}, device_scale_factor=1,
                             accept_downloads=False, locale='ko-KR')
         pg = ctx.new_page()

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-"""소담한의원(clinic-h) 사례 소개용 캡처 — capture_premium_cases.mjs 와 같은 규격.
+"""소담한의원(clinic-i) 사례 소개용 캡처 — capture_premium_cases.mjs 와 같은 규격.
 
   (public 폴더를 8765 로 띄운 뒤) python tools/ref-clone/sodam/capture_cases.py
 
-public/cases/clinic-h/ 에 main.webp(1440×900) · page-*.webp(960×600) · point-*.webp(1280 폭 요소)
-· m-*.webp(390×844 @1.5) 와 각 -sm.webp(800 폭) 를, public/thumbs/clinic-h.jpg(1280×960) 를 만든다.
+public/cases/clinic-i/ 에 main.webp(1440×900) · page-*.webp(960×600) · point-*.webp(1280 폭 요소)
+· m-*.webp(390×844 @1.5) 와 각 -sm.webp(800 폭) 를, public/thumbs/clinic-i.jpg(1280×960) 를 만든다.
 움직임 줄이기 상태로 찍는다(고정 연출이 풀려 첫 화면에 원장 사진과 문장이 함께 보인다).
 """
 import os
@@ -14,7 +14,7 @@ from playwright.sync_api import sync_playwright
 
 BASE = 'http://127.0.0.1:8765/sodam/'
 ROOT = Path(__file__).resolve().parents[3] / 'public'
-OUT = ROOT / 'cases' / 'clinic-h'
+OUT = ROOT / 'cases' / 'clinic-i'
 PAGES = ['index', 'diagnosis', 'neck-pain', 'diet-principle', 'beauty-skin', 'traffic-injury',
          'before-after', 'about', 'doctors', 'location']
 POINTS = [('diff', 'index', '#diff .diff__body'), ('proof', 'index', '#proof'), ('diet', 'index', '#diet'),
@@ -51,7 +51,7 @@ with sync_playwright() as p:
     ctx, pg = page(b, 'index', {'width': 1440, 'height': 900})
     pg.screenshot(path=str(OUT / 'main.png')); webp(OUT / 'main.png'); ctx.close()
     ctx, pg = page(b, 'index', {'width': 1280, 'height': 960})
-    pg.screenshot(path=str(ROOT / 'thumbs' / 'clinic-h.jpg'), type='jpeg', quality=74); ctx.close()
+    pg.screenshot(path=str(ROOT / 'thumbs' / 'clinic-i.jpg'), type='jpeg', quality=74); ctx.close()
     for n in PAGES:
         # 960 폭은 이 디자인의 모바일 구간(1000 미만)이라 1440×900 으로 찍고 960×600 으로 줄인다
         ctx, pg = page(b, n, {'width': 1440, 'height': 900})

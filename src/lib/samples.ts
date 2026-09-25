@@ -60,6 +60,62 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "yeoul-template",
+    industry: "성형외과 · 눈성형 중심 의원 홈페이지",
+    title: "눈성형 중심 성형외과 홈페이지 (프리미엄 디자인 E)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 병원 · 성형외과 · 눈성형",
+    purpose:
+      "물결 두 장이 위아래로 갈라지며 얼굴 사진 면이 올라오는 인트로로 시작해, 스크롤하면 본문이 오른쪽에서 밀려 들어오는 가로 패널, 사진이 펼쳐지는 두 갈래 카드, 원형 링이 5초마다 채워지며 네 가지 기준이 바뀌는 장면, 글자가 차례로 들어오는 상담 띠로 이어지는 메인에, 첫 눈성형·눈 재수술과 고민별 결과 10쪽, 병원 소개·상담 신청, 수술 사례 목록과 상세 15쪽, 칼럼 목록과 글 2쪽까지 서브 33쪽을 갖춘 눈성형 중심 성형외과 홈페이지입니다. 스크롤에 따라 쪽 배경이 짙은 갈색에서 베이지로 바뀝니다.",
+    features: [
+      "물결 분할 인트로 · 가로 패널 전환 · 원형 링 4단계",
+      "고민 고르기 얼굴 선화 5종 → 고민별 결과 쪽 10개",
+      "수술 간단히 보기 · 진료 과정 · FAQ 접이식",
+      "대표원장 · 네 가지 기준 슬라이드 · 공간 탭 · 상담 신청서",
+    ],
+    idealFor: "눈성형·재수술 중심 성형외과, 한 원장이 상담부터 회복까지 맡는 예약제 의원, 고민별 안내가 필요한 미용 의원",
+    image: "/thumbs/yeoul.jpg",
+    liveUrl: "/yeoul/",
+    industryKey: "hospital",
+    premiumLabel: "성형외과",
+    designCode: "HOSP-1005",
+    premium: true,
+  },
+  {
+    slug: "harin-template",
+    industry: "헤어 · 메이크업 · 네일 살롱 홈페이지",
+    title: "헤어 · 메이크업 · 네일 살롱 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 뷰티살롱 · 지점 14 · 예약 · 회원 · 32페이지",
+    purpose:
+      "전면 화면이 5초마다 바뀌고 그 아래로 분홍 띠가 흘러갑니다. 셀럽 스타일 카드를 옆으로 넘겨 본 다음, 화면에 고정된 채 사진 석 장이 위아래에서 모이는 장면이 세 번 이어집니다. 지점 14곳을 지도에서 찾고, 아티스트 12명을 골라 예약하며, 헤어·메이크업·네일·맨즈 스타일을 각 열두 장씩 봅니다. 웨딩은 상담부터 폐백까지 다섯 단계로 따로 두었고, 예약 상품·후기·문의·FAQ까지 들어갑니다.",
+    features: ["화면에 고정된 채 사진이 모이는 장면 3개", "지점 14곳 지도 찾기 · 아티스트 12명 지정 예약", "헤어·메이크업·네일·맨즈 스타일 48장", "로그인 · 회원가입 · 마이페이지 · 장바구니까지 32쪽"],
+    idealFor: "헤어살롱 체인, 뷰티살롱, 웨딩 헤어·메이크업 숍, 네일숍, 메이크업 스튜디오",
+    image: "/thumbs/harin.jpg",
+    liveUrl: "/harin/",
+    industryKey: "beauty",
+    premiumLabel: "뷰티살롱 · 헤어",
+    designCode: "BEAP-1001",
+    premium: true,
+  },
+  {
+    slug: "ondam-template",
+    industry: "한식 프랜차이즈 본사 홈페이지",
+    title: "한식 프랜차이즈 본사 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 외식 · 브랜드 4종 · 창업 · 고객센터 · 49페이지",
+    purpose:
+      "배너 6장이 도는 메인에서 시작해 브랜드 네 곳을 세로 탭으로 넘겨 보고, 화면 아래에 브랜드 퀵바가 따라다닙니다. 브랜드마다 소개·메뉴·매장 찾기 세 쪽을 두고, 창업 쪽은 절차 10단계·선배 사장님 이야기·좌우로 엇갈리는 강점 다섯 단·담당자 인터뷰로 이어집니다. 창업 상담 신청서, 설명회 일정, 추천 상권 표, 창업 FAQ, 이벤트, 모바일 상품권, 단체 주문까지 외식 본사에 필요한 화면을 모았습니다.",
+    features: ["브랜드 4종 × 소개·메뉴·매장 찾기 12쪽", "창업 8쪽 · 고객센터 7쪽 · 서비스 안내 5쪽", "화면 아래 따라다니는 브랜드 퀵바 · 지도 매장 찾기", "로그인 · 마이페이지 · 주문 방식 · 설문까지 49쪽"],
+    idealFor: "한식·분식 프랜차이즈 본사, 다브랜드 외식기업, 단체 급식·도시락 업체, 가맹 모집 중인 외식 브랜드",
+    image: "/thumbs/ondam.jpg",
+    liveUrl: "/ondam/",
+    industryKey: "restaurant",
+    premiumLabel: "외식 프랜차이즈",
+    designCode: "RESP-1001",
+    premium: true,
+  },
+  {
     slug: "semroot-template",
     industry: "수학학원 · 학습플랫폼 홈페이지",
     title: "수학학원 · 학습플랫폼 홈페이지 (프리미엄 디자인 A)",
@@ -1184,9 +1240,9 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
-    slug: "clinic-h-template",
+    slug: "clinic-i-template",
     industry: "한의원 · 통증 · 다이어트 홈페이지",
-    title: "한의원 홈페이지 (프리미엄 디자인 E)",
+    title: "한의원 홈페이지 (프리미엄 디자인 F)",
     type: ["premium-template", "small-business"],
     tag: "프리미엄 디자인 · 한의원 · 통증 · 다이어트",
     purpose:
@@ -1198,11 +1254,11 @@ export const SAMPLES: Sample[] = [
       "전후 사진 분류 · 커뮤니티 · 둘러보기 · 회원가입 폼 · 서브 32쪽",
     ],
     idealFor: "통증 · 추나 중심 한의원, 다이어트 · 교통사고 클리닉을 함께 운영하는 한의원, 진료 과목이 많은 로컬 의원",
-    image: "/thumbs/clinic-h.jpg",
+    image: "/thumbs/clinic-i.jpg",
     liveUrl: "/sodam/",
     industryKey: "hospital",
     premiumLabel: "한의원",
-    designCode: "HOSP-1005",
+    designCode: "HOSP-1006",
     premium: true,
   },
   {
@@ -5713,6 +5769,7 @@ export const SAMPLES: Sample[] = [
  * 새 프리미엄을 등록하면 슬러그를 맨 앞에 넣는다. 여기 없는 프리미엄은 그 뒤, 나머지는 SAMPLES 순서.
  */
 const PREMIUM_RECENT_ORDER = [
+  "yeoul-template",
   "corporate-t-template",
   "clinic-f-template",
   "corporate-r-template",

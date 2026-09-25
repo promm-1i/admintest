@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""소담한의원(clinic-h) 페이지 조립기.
+"""소담한의원(clinic-i) 페이지 조립기.
 
   python tools/ref-clone/sodam/build.py
 
@@ -259,7 +259,7 @@ def build(fn):
     io.open(os.path.join(OUT, fn), 'w', encoding='utf-8', newline='\n').write(out)
     return fn
 
-MAP = os.path.normpath(os.path.join(ROOT, '..', 'photo-map-clinic-h.txt'))
+MAP = os.path.normpath(os.path.join(ROOT, '..', 'photo-map-clinic-i.txt'))
 
 def sync_photos():
     """쪽마다 쓰인 ./assets/*.jpg 를 모아 사진 대응표에 없는 것은 덧붙이고, 파일이 없으면 임시 그림을 만든다.
@@ -280,7 +280,7 @@ def sync_photos():
     n = len(rows)
     for f, (name, w, h, tone, desc, page) in found.items():
         n += 1
-        rows.append(['%03d' % n, 'clinic-h', name, str(w), str(h), str(w * 2), str(h * 2), tone, '%s (%s)' % (desc, page)])
+        rows.append(['%03d' % n, 'clinic-i', name, str(w), str(h), str(w * 2), str(h * 2), tone, '%s (%s)' % (desc, page)])
     with io.open(MAP, 'w', encoding='utf-8', newline='\n') as o:
         o.write('# 번호\t슬러그\t파일\t표시폭\t표시높이\t원본폭\t원본높이\t톤\t무엇을 찍은 사진인가\n')
         for k, r in enumerate(rows, 1): r[0] = '%03d' % k; o.write('\t'.join(r) + '\n')
