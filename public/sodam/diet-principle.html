@@ -33,7 +33,9 @@
 .fail__it p{position:absolute;left:30px;bottom:60px;font-family:var(--serif);font-size:34px;line-height:48px;color:#fff;z-index:2}
 .fail__it:last-child p{color:var(--ink)}
 .fail__it p b{font-weight:600}
-.fail__arr{display:block;margin:30px auto 18px;width:2px;height:80px;background:linear-gradient(var(--brown),transparent)}
+.fail__arr{position:relative;display:grid;place-items:center;width:420px;height:200px;margin:32px auto 30px}
+.fail__arr svg{position:absolute;left:50%;top:0;width:162px;height:200px;transform:translateX(-50%)}
+.fail__arr span{position:relative;font-family:var(--play);font-size:40px;letter-spacing:6px;font-weight:600;color:var(--point);white-space:nowrap}
 .bax__h{position:relative;text-align:center;margin-bottom:50px}
 .bax__h .sh{margin:0}
 .bax__h .bax__nav{position:absolute;right:0;bottom:0;display:flex;gap:6px}
@@ -52,11 +54,11 @@
 /* 0201 sec02 — 갈색 · 쉬운 이유 4 (원형 아이콘 · 지그재그 높이) */
 .why4 .sh{margin-bottom:40px}
 .why4__g{position:relative;display:flex;justify-content:space-between;gap:30px;padding-left:90px}
-.why4__g svg.why4__line{position:absolute;left:0;top:40px;width:100%;height:140px;pointer-events:none}
+.why4__g svg.why4__line{position:absolute;left:0;top:0;width:100%;height:260px;pointer-events:none;overflow:visible;filter:drop-shadow(0 4px 4px rgba(120,86,40,.35))}
 .why4__it{position:relative;z-index:1;flex:1;margin-top:47px}
 .why4__it:nth-child(odd){margin-top:107px}
 .why4__ico{width:120px;height:120px;border-radius:50%;background:#FDF0E2;box-shadow:2px 10px 10px #9F7F4E;display:grid;place-items:center;color:var(--brown);margin-bottom:26px}
-.why4__ico svg{width:48px;height:48px}
+.why4__ico svg{width:58px;height:58px}
 .why4__k{font-size:18px;font-weight:600;color:var(--cream)}
 .why4__t{font-family:var(--serif);font-size:34px;line-height:1.2;margin:20px 0;color:#fff}
 .why4__t b{font-weight:600}
@@ -106,7 +108,7 @@
 .dots{display:flex;gap:12px}
 .dots button{width:20px;height:20px;border-radius:300px;background:#E8C999;transition:width .3s,background .3s}
 .dots button[aria-current="true"]{width:50px;background:var(--cream)}
-.navysec{background:var(--navy);color:#fff}
+.navysec{position:relative;z-index:1;background:var(--navy);color:#fff}
 .navysec .sh__t{color:#fff}
 .mq{margin-top:120px;overflow:hidden}
 .mq__row{display:flex;gap:30px;width:max-content;animation:mq 70s linear infinite}
@@ -114,6 +116,24 @@
 .mq__row img{width:360px;height:240px;object-fit:cover;border-radius:12px;flex:none}
 @keyframes mq{to{transform:translateX(-50%)}}
 .navysec .hbw{margin-top:120px}
+/* 0201 sec05 — 대사량·체중 개념 그래프 카드 · 요요 방지 단계 그래프 */
+.dtg{max-width:1028px;margin:120px auto 0;background:#D9B887;border:1px solid #E8D2AE;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.25);padding:14px 0 10px}
+.dtg__svg{display:block;width:100%;height:auto}
+.dtg__ft{display:flex;justify-content:space-between;align-items:center;gap:10px 20px;flex-wrap:wrap;padding:0 36px 14px;color:#fff;font-size:15px}
+.dtg__lg{display:flex;gap:22px}
+.dtg__lg span{display:inline-flex;align-items:center;gap:8px}
+.dtg__lg span::before{content:'';width:26px;height:4px;border-radius:2px;background:#9A6A2E}
+.dtg__lg .dtg__b::before{background:#FCC873}
+.dtg__cap{opacity:.95}
+.dtmq__h{margin-top:140px}
+.navysec .mq{margin-top:60px}
+.navysec .mq+.wrap{margin-top:140px}
+.navysec .dtyo{grid-template-columns:1fr 1fr}
+.navysec .dtyo>div:first-child{padding-right:40px}
+.navysec .dtyo>div:last-child{padding-left:70px}
+.dtyo__g{background:var(--brown);border-radius:20px;overflow:hidden}
+.dtyo__g svg{display:block;width:100%;height:auto}
+.dtyo .hbw__t{font-size:34px;line-height:50px}
 .navysec .chip{background:#fff;color:var(--navy);box-shadow:0 2px 4px rgba(183,147,93,.5);min-width:200px;justify-content:center}
 
 /* 0202 — 탭 · 알약 3 · 설명판 */
@@ -148,6 +168,45 @@ section[data-bg="white"] .pills3>div{background:#fff}
 .bgtx h3{font-family:var(--serif);font-size:44px;line-height:60px;font-weight:300}
 .bgtx p{font-size:18px;line-height:30px;margin-top:24px;max-width:640px}
 
+/* 0202 — 탭 머리 사진(오른쪽 반원) · 사진 + 글 1줄 */
+.dt-eyb{font-family:var(--play);font-size:24px;letter-spacing:2px;color:#CFB288;font-weight:600;margin-bottom:12px}
+.dt-tf{gap:64px;justify-content:flex-start}
+.dt-tf__img{position:relative;isolation:isolate;flex:0 0 58%;max-width:780px}
+.dt-tf__img::after{content:'';position:absolute;left:30px;right:90px;bottom:-28px;height:28px;background:linear-gradient(90deg,#EDD6AE,rgba(237,214,174,0));z-index:-1}
+.dt-tf__img img{display:block;width:100%;height:374px;object-fit:cover;border-radius:0 187px 187px 0}
+.dt-tf>div:last-child{flex:1;min-width:0}
+.dt-tf .tf__t{white-space:normal}
+.dt-tf .tf__d{margin-top:20px}
+.dt-hbp>div:first-child{padding-right:40px}
+.dt-hbp>div:first-child img{display:block;width:100%;aspect-ratio:6/5;object-fit:cover;border-radius:20px}
+.dt-hbp>div:last-child{padding-left:70px}
+.sec--brown .dt-hbp .hbw__t,.sec--brown .dt-hbp .hbw__d{color:#fff}
+.dt-hbp .chip{background:var(--brown);border:1px solid #CFA95C;color:#fff;box-shadow:0 2px 4px rgba(183,147,93,.5)}
+
+/* 0203 sec01 — 단계 카드 3(오른쪽 볼록 연결 + 가운데 점) · 흰 원 채색 아이콘 */
+.dt-tf+.dt-st{margin-top:90px}
+.dt-st{gap:15px}
+.dt-st>div{position:relative;min-height:400px;padding:32px 40px 40px;border:1px solid #FBEFDC;box-shadow:4.78px 0 4.78px #DDD1BE}
+.dt-st>div:nth-child(1){background:#F1EADF;z-index:3}
+.dt-st>div:nth-child(2){z-index:2}
+.dt-st>div:nth-child(3){background:#A69479;border-color:#F2D19E;z-index:1}
+.dt-st>div:not(:last-child)::before{content:'';position:absolute;right:-30px;top:50%;width:60px;height:96px;transform:translateY(-50%);background:inherit;border-radius:50%/50%;box-shadow:4px 0 4px rgba(190,170,140,.45);clip-path:inset(-10px -10px -10px 50%)}
+.dt-st>div:not(:last-child)::after{content:'';position:absolute;right:-8px;top:50%;width:16px;height:16px;margin-top:-8px;border-radius:50%;background:#D8CBB6}
+.dt-st>div:nth-child(2)::after{background:#E8D9C1}
+.dt-st small{font-family:var(--serif);font-size:18px;font-weight:400}
+.dt-st h3{font-size:34px;margin:10px 0 24px}
+.dt-st .st3__ico{position:absolute;right:37px;bottom:30px;width:96px;height:96px;border:0;background:#fff;opacity:1;box-shadow:0 2px 8px rgba(120,90,50,.12)}
+.dt-st .st3__ico svg{width:52px;height:52px}
+
+/* 0203 sec03 — 사진 카드 3 · 번호 원 */
+.dt-n3{display:flex;gap:40px;padding:10px}
+.dt-n3>div{position:relative;flex:1;min-width:0;background:#fff;border:1px solid #F0E9E4;border-radius:12px;box-shadow:0 0 13px rgba(217,207,196,.5);padding:30px 30px 100px;transition:transform .4s,box-shadow .4s}
+.dt-n3>div:hover{transform:translateY(-8px);box-shadow:0 10px 24px rgba(190,170,140,.45)}
+.dt-n3 img{display:block;width:100%;aspect-ratio:332/196;height:auto;object-fit:cover;border-radius:8px}
+.dt-n3 h3{font-size:28px;font-weight:700;line-height:1.2;margin:30px 0 20px;padding-bottom:20px;border-bottom:1px solid #DBDBDB}
+.dt-n3 p{font-size:18px;line-height:30px;letter-spacing:-.5px;color:#444}
+.dt-n3 b{position:absolute;right:30px;bottom:30px;width:45px;height:45px;border-radius:50%;background:var(--brown);color:#fff;font-family:var(--cormo);font-variant-numeric:lining-nums;font-size:22px;font-weight:700;display:grid;place-items:center;line-height:1}
+
 /* 0203 sec02 — 누르면 펼쳐지는 판 5 (100 → 전체 · 배경 사진) */
 
 /* 0204 — 원리 카드 4 (색 단계 · 마지막 반원) · 모자이크 · 부위 표시 */
@@ -168,12 +227,52 @@ section[data-bg="white"] .pills3>div{background:#fff}
 .lpbody{text-align:center}
 .lpbody .clkmap{margin-top:50px}
 .lpbody .clkmap>img{width:420px}
-.lpbody .clk:nth-of-type(1){top:110px;left:-190px}
-.lpbody .clk:nth-of-type(2){top:30px;left:360px}
-.lpbody .clk:nth-of-type(3){top:50%;transform:translateY(-50%);left:-150px}
-.lpbody .clk:nth-of-type(4){top:52%;left:390px}
-.lpbody .clk:nth-of-type(5){bottom:60px;left:-150px}
-.lpbody .clk:nth-of-type(6){bottom:40px;left:350px}
+.lpbody .clk:nth-of-type(1){top:90px;left:-120px}
+.lpbody .clk:nth-of-type(2){top:40px;left:340px}
+.lpbody .clk:nth-of-type(3){top:297px;left:-170px}
+.lpbody .clk:nth-of-type(4){top:50%;transform:translateY(-50%);left:400px}
+.lpbody .clk:nth-of-type(5){bottom:56px;left:-120px}
+.lpbody .clk:nth-of-type(6){bottom:120px;left:340px}
+
+/* 0204 sec01 — 밝은 사진 배경 */
+.dt-lp::before{background:linear-gradient(180deg,rgba(248,243,235,.55) 0%,rgba(248,243,235,.25) 45%,rgba(248,243,235,0) 100%)}
+.dt-lp .sh__t{color:var(--ink)}
+.dt-lp .sh__d{color:#4A3F33}
+.dt-lp .lp__g>div:nth-child(1) .lp__t,.dt-lp .lp__g>div:nth-child(1) .lp__d{color:var(--point)}
+
+/* 0204 sec02 — 선으로 나눈 엇갈린 격자 · 이탤릭 번호 */
+.dtl{color:#fff;border-bottom:1px solid var(--cream)}
+.dtl__no{font-family:var(--cormo);font-variant-numeric:lining-nums;font-size:80px;font-style:italic;line-height:34px;color:rgba(255,255,255,.45);letter-spacing:-5px;margin-bottom:40px;padding-top:20px}
+.dtl__tx h3{font-family:var(--serif);font-size:34px;line-height:48px;font-weight:400;margin-bottom:50px}
+.dtl__tx>p:last-child{font-size:18px;line-height:30px;letter-spacing:-.5px}
+.dtl img{display:block;object-fit:cover;border-radius:0}
+.dtl__r1{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;padding:60px 0;border-top:1px solid var(--cream);border-bottom:1px solid var(--cream)}
+.dtl__r1 img{width:890px;max-width:65%;height:316px}
+.dtl__r2{display:flex}
+.dtl__c2{flex:0 0 460px;padding:70px 57px 55px 0;border-right:1px solid var(--cream);display:flex;flex-direction:column;justify-content:space-between;gap:100px}
+.dtl__c2 img{width:100%;height:790px;max-height:none}
+.dtl__col{flex:1;min-width:0}
+.dtl__col>div{padding:60px 0 60px 45px}
+.dtl__c3{display:flex;align-items:flex-end;gap:48px;border-bottom:1px solid var(--cream)}
+.dtl__c3 img{width:412px;height:485px;flex:none}
+.dtl__c3 .dtl__tx{padding-bottom:30px}
+.dtl__c4 img{width:100%;height:316px}
+.dtl__tx--in{display:grid;grid-template-columns:auto 1fr;column-gap:45px;margin-top:40px}
+.dtl__tx--in .dtl__no{grid-row:span 2;margin:0}
+.dtl__tx--in h3{margin-bottom:20px}
+
+/* 0204 sec03 — 갈색 알약 버튼(오른쪽 흰 원) · 아치 사진 · 흐린 영문 */
+.dt-lps{position:relative;overflow:hidden}
+.dt-lpb .clkmap{margin-top:80px;z-index:1}
+.dt-lpb .clkmap>img{width:460px;height:630px;object-fit:cover;border-radius:230px 230px 0 0}
+.dt-lpb .clk,.dt-lpb .clk:nth-child(even){flex-direction:row}
+.dt-lpb .clk::before{display:none}
+.dt-lpb .clk__h{justify-content:space-between;width:240px;height:66px;padding:0 20px 0 24px;border-radius:50px;background:var(--brown);color:#fff;font-weight:600;box-shadow:0 0 4px #D5C9B9;transition:color .3s}
+.dt-lpb .clk__h i{width:38px;height:38px;box-shadow:none}
+.dt-lpb .clk.on .clk__h{color:var(--cream)}
+.dt-lpb .clk.on .clk__h i{background:var(--cream)}
+.dt-lpb .clk__d{position:absolute;left:0;top:calc(100% + 16px);border-radius:30px;padding:20px 30px;box-shadow:0 0 4px #D5C9B9;min-width:0;width:max-content}
+.dt-en{position:absolute;left:50%;bottom:100px;transform:translateX(-50%);font-family:var(--play);font-size:120px;font-weight:500;line-height:1;color:#DCC9AC;opacity:.2;text-transform:uppercase;white-space:nowrap;pointer-events:none;z-index:0}
 
 /* 0205 — 경우별 행 · 효과 타일(올리면 사진 · 설명, 아이콘 사라짐) */
 .dxr{display:flex;gap:60px;align-items:center;padding:50px 0;border-bottom:1px solid #E4DACB}
@@ -200,6 +299,19 @@ section[data-bg="white"] .pills3>div{background:#fff}
 .eff__g>div:hover .eff__ico,.eff__g>div:focus-within .eff__ico{opacity:0}
 .eff__g>div:hover .eff__d,.eff__g>div:focus-within .eff__d{opacity:1;max-height:200px;margin-top:14px}
 .eff__en{position:absolute;left:0;right:0;bottom:30px;text-align:center;font-family:var(--play);font-size:90px;line-height:1;color:#E6DCCB;white-space:nowrap;overflow:hidden;z-index:1}
+
+/* 0205 sec02 — 행마다 다른 카드 머리색 · 아래 ▼ 표시 */
+.dt-dx .dxr>div{flex:1;min-width:0}
+.dt-dx .dxr__c{gap:10px}
+.dt-dx .dxr__c>div{overflow:visible;border:0;border-radius:0;display:flex;flex-direction:column}
+.dt-dx .dxr__c b{position:relative;z-index:1;border-radius:8px;padding:26px 8px 30px;font-size:20px;font-weight:600;background:var(--brown)}
+.dt-dx .dxr__c>div:nth-child(2) b{background:var(--point)}
+.dt-dx .dxr:nth-child(3) .dxr__c b{background:#5377A2}
+.dt-dx .dxr:nth-child(3) .dxr__c>div:nth-child(2) b{background:var(--blue)}
+.dt-dx .dxr__c b::after{content:'';position:absolute;left:50%;bottom:-16px;width:46px;height:24px;margin-left:-23px;border-radius:0 0 23px 23px;background:inherit}
+.dt-dx .dxr__c b::before{content:'';position:absolute;left:50%;bottom:-9px;z-index:2;width:14px;height:14px;margin-left:-7px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='m2 2 5 4.5L12 2M2 7.5 7 12l5-4.5' fill='none' stroke='%23fff' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+.dt-dx .dxr__c p{flex:1;margin-top:-7px;padding:34px 12px 26px;min-height:150px;display:flex;align-items:center;justify-content:center;background:var(--ivory);border-radius:8px;box-shadow:0 0 6px rgba(24,60,47,.25);color:#6C5128}
+.eff__ico svg{width:44px;height:44px}
 
 @media (max-width:1280px){
   .fail__it{width:260px}.fail__it.on{width:480px}
@@ -235,7 +347,28 @@ section[data-bg="white"] .pills3>div{background:#fff}
   .dprog__c b{font-size:15px;margin-bottom:4px}.dprog__c p{font-size:13px}
   .dprog__nav .navi{display:none}.dots button{width:10px;height:10px}.dots button[aria-current="true"]{width:26px}
   .mq{margin-top:60px}.mq__row img{width:200px;height:134px}.mq__row{gap:12px}.mq__row+.mq__row{margin-top:12px}
-  .navysec .hbw{margin-top:60px}.navysec .chip{min-width:0}
+  .navysec .hbw{margin-top:60px}
+  .fail__arr{width:100%;height:120px;margin:20px auto}.fail__arr svg{width:98px;height:120px}.fail__arr span{font-size:22px;letter-spacing:3px}
+  .dtg{margin-top:60px;border-radius:14px;padding:6px 0}.dtg__ft{font-size:12px;padding:0 14px 10px}.dtg__lg{gap:14px}.dtg text{font-size:30px}.dtyo__g text{font-size:28px}
+  .navysec .dtyo{grid-template-columns:1fr}
+  .dtmq__h{margin-top:72px}.navysec .mq{margin-top:28px}.navysec .mq+.wrap{margin-top:72px}
+  .navysec .dtyo>div:first-child,.navysec .dtyo>div:last-child{padding:0}.dtyo__g{border-radius:14px}.dtyo .hbw__t{font-size:22px;line-height:34px}.navysec .chip{min-width:0}
+  .dt-eyb{font-size:16px;margin-bottom:6px}.dt-tf{gap:30px}.dt-tf__img{flex:none;width:calc(100% - 12px);max-width:none}.dt-tf__img img{height:auto;aspect-ratio:720/374;border-radius:0 120px 120px 0}.dt-tf__img::after{left:16px;right:40px;bottom:-14px;height:14px}.dt-tf .tf__d{margin-top:10px}
+  .dt-hbp>div:first-child,.dt-hbp>div:last-child{padding:0}.dt-hbp>div:first-child img{border-radius:14px}
+  .dt-tf+.dt-st{margin-top:40px}.dt-st{gap:10px}.dt-st>div{min-height:0;padding:24px 20px 24px 20px}.dt-st>div:not(:last-child)::before{top:auto;bottom:-24px;right:50%;width:72px;height:44px;transform:translateX(50%);clip-path:inset(50% -10px -10px -10px)}.dt-st>div:not(:last-child)::after{top:auto;bottom:-14px;right:50%;margin:0 -7px 0 0;width:14px;height:14px}
+  .dt-st h3{font-size:20px;margin:6px 0 10px}.dt-st small{font-size:15px}.dt-st>div{padding-right:92px}.dt-st .st3__ico{display:grid;width:60px;height:60px;right:16px;bottom:auto;top:50%;transform:translateY(-50%)}.dt-st .st3__ico svg{width:34px;height:34px}
+  .dt-n3{flex-direction:column;gap:16px;padding:0}.dt-n3>div{padding:16px 16px 70px}.dt-n3 h3{font-size:20px;margin:18px 0 12px;padding-bottom:12px}.dt-n3 p{font-size:14px;line-height:24px}.dt-n3 b{width:38px;height:38px;right:16px;bottom:16px;font-size:18px}
+  .dtl__no{font-size:48px;line-height:1;margin-bottom:14px;padding-top:0}.dtl__tx h3{font-size:22px;line-height:32px;margin-bottom:12px}.dtl__tx>p:last-child{font-size:14px;line-height:24px}
+  .dtl__r1,.dtl__r2,.dtl__c3{flex-direction:column;align-items:stretch;gap:20px}.dtl__r1{padding:32px 0}.dtl__r1 img{max-width:none;width:100%;height:auto;aspect-ratio:890/316}
+  .dtl__c2{flex:none;padding:32px 0;border-right:0;border-bottom:1px solid var(--cream);gap:20px}.dtl__c2 img{height:auto;aspect-ratio:4/3}
+  .dtl__col>div{padding:32px 0}.dtl__c3 img{width:100%;height:auto;aspect-ratio:4/3}.dtl__c3 .dtl__tx{padding:0}.dtl__c4 img{height:auto;aspect-ratio:760/316}
+  .dtl__tx--in{column-gap:16px;margin-top:20px}
+  .dt-lpb .clkmap{margin-top:40px}.dt-lpb .clkmap>img{width:min(300px,80vw);height:auto;aspect-ratio:460/630;border-radius:200px 200px 0 0}
+  .dt-lpb .clk{border-top:0;padding:6px 0}.dt-lpb .clk__h{flex:1;width:auto;height:52px;font-size:16px}.dt-lpb .clk__h i{width:32px;height:32px}
+  .dt-lpb .clk__d{position:static;width:auto;border-radius:18px;padding:14px 18px}
+  .dt-en{font-size:44px;bottom:30px}
+  .dt-dx .dxr__c b{padding:14px 8px 18px;font-size:15px}.dt-dx .dxr__c p{min-height:0;padding:22px 12px 14px}
+  .eff__ico svg{width:30px;height:30px}
   .situ{padding-top:calc(var(--hd) + 24px)}.situ .tabs{margin-bottom:36px}.situ__p{padding-bottom:72px}
   .pills3{flex-direction:column;gap:10px;margin:30px 0 40px}.pills3::before{display:none}
   .pills3>div{height:auto;padding:22px;border-radius:60px}.pills3>div+div{margin:0}.pills3 p{font-size:17px;line-height:26px}
@@ -273,17 +406,25 @@ section[data-bg="white"] .pills3>div{background:#fff}
 <section class="sub-curve" id="subHero"><div class="sub-curve__img"><img class="" src="./assets/h-diet.jpg" alt="" width="1440" height="900" fetchpriority="high" data-shot="허리를 줄자로 재는 여성, 밝은 거실, 얼굴 없이"></div><div class="wrap sub-curve__txt"><h1 class="sub-hero__t"><span class="hl"><span>건강하게 · 쉽게 · 가볍게</span></span><br>소담 다이어트</h1><p class="sub-hero__d">같은 식단으로도 누구는 빠지고 누구는 그대로입니다. 차이는 체질과 대사에 있습니다. <br>소담은 몸의 반응을 매주 확인하며 목표 체중까지 함께 갑니다.</p></div><nav class="crumb sub-curve__crumb" aria-label="현재 위치"><a href="./index.html" aria-label="홈"><svg viewBox="0 0 20 20" aria-hidden="true"><path fill="currentColor" d="M10 2 2 8.6V18h5.5v-5h5v5H18V8.6Z"/></svg></a><i></i><span>다이어트 프로그램</span><i></i><span>소담 다이어트 원리</span></nav><div class="sub-curve__line" aria-hidden="true"></div></section>
 <section class="sec sec--sand">
 <div class="wrap">
-<div class="fail__h rv rv--up"><div class="sh  "><h2 class="sh__t">이런 다이어트, <br><b>오래 가지 못합니다.</b></h2></div><p>의지가 약해서가 아닙니다. <br><b>방법이 몸과 맞지 않았을 뿐</b>입니다.</p></div><div class="fail__g rv rv--up" data-grow><div class="fail__it on" tabindex="0"><img src="./assets/fail-1.jpg" alt="똑같은 알약이 줄지어 놓인 모습" width="604" height="539" loading="lazy"><p>체질을 보지 않은 <br><b>같은 처방</b></p></div><div class="fail__it" tabindex="0"><img src="./assets/fail-2.jpg" alt="빈 접시 앞에 앉은 사람" width="604" height="539" loading="lazy"><p>무작정 <b>굶는</b><br>다이어트</p></div><div class="fail__it" tabindex="0"><img src="./assets/fail-3.jpg" alt="지친 표정으로 소파에 기댄 사람" width="604" height="539" loading="lazy"><p><b>몸의 반응</b>을 살피지 <br>않는 처방</p></div></div><span class="fail__arr" aria-hidden="true"></span><div data-slider><div class="bax__h rv rv--up"><div class="sh sh--c "><h2 class="sh__t"><b>방법</b>이 다르면, <b>결과</b>도 다릅니다.</h2><p class="sh__d">사례 사진은 회원에게만 공개합니다. 카드를 누르면 로그인 창이 열립니다. (예시 카드)</p></div><div class="bax__nav"><button class="navi navi--prev" type="button" data-prev aria-label="이전 사례"></button><button class="navi" type="button" data-next aria-label="다음 사례"></button></div></div><div class="bax__track rv rv--up" data-track><button class="bax__it" type="button" data-login aria-label="감량 사례 예시 01 — 회원 전용 사례 보기"><div class="bax__img"><img src="./assets/bax-1a.jpg" alt="" width="200" height="308" loading="lazy"><img src="./assets/bax-1b.jpg" alt="" width="200" height="308" loading="lazy"><span></span></div><div class="bax__info"><p class="bax__t">감량 사례 예시 01</p><p class="bax__m"><span>40대 · 여성</span><span>12주</span><span>회원 공개</span></p></div></button><button class="bax__it" type="button" data-login aria-label="감량 사례 예시 02 — 회원 전용 사례 보기"><div class="bax__img"><img src="./assets/bax-2a.jpg" alt="" width="200" height="308" loading="lazy"><img src="./assets/bax-2b.jpg" alt="" width="200" height="308" loading="lazy"><span></span></div><div class="bax__info"><p class="bax__t">감량 사례 예시 02</p><p class="bax__m"><span>30대 · 여성</span><span>8주</span><span>회원 공개</span></p></div></button><button class="bax__it" type="button" data-login aria-label="감량 사례 예시 03 — 회원 전용 사례 보기"><div class="bax__img"><img src="./assets/bax-3a.jpg" alt="" width="200" height="308" loading="lazy"><img src="./assets/bax-3b.jpg" alt="" width="200" height="308" loading="lazy"><span></span></div><div class="bax__info"><p class="bax__t">감량 사례 예시 03</p><p class="bax__m"><span>50대 · 여성</span><span>24주</span><span>회원 공개</span></p></div></button><button class="bax__it" type="button" data-login aria-label="감량 사례 예시 04 — 회원 전용 사례 보기"><div class="bax__img"><img src="./assets/bax-4a.jpg" alt="" width="200" height="308" loading="lazy"><img src="./assets/bax-4b.jpg" alt="" width="200" height="308" loading="lazy"><span></span></div><div class="bax__info"><p class="bax__t">감량 사례 예시 04</p><p class="bax__m"><span>30대 · 남성</span><span>12주</span><span>회원 공개</span></p></div></button></div></div>
+<div class="fail__h rv rv--up"><div class="sh  "><h2 class="sh__t">이런 다이어트, <br><b>오래 가지 못합니다.</b></h2></div><p>의지가 약해서가 아닙니다. <br><b>방법이 몸과 맞지 않았을 뿐</b>입니다.</p></div><div class="fail__g rv rv--up" data-grow><div class="fail__it on" tabindex="0"><img src="./assets/fail-1.jpg" alt="똑같은 알약이 줄지어 놓인 모습" width="604" height="539" loading="lazy"><p>체질을 보지 않은 <br><b>같은 처방</b></p></div><div class="fail__it" tabindex="0"><img src="./assets/fail-2.jpg" alt="빈 접시 앞에 앉은 사람" width="604" height="539" loading="lazy"><p>무작정 <b>굶는</b><br>다이어트</p></div><div class="fail__it" tabindex="0"><img src="./assets/fail-3.jpg" alt="지친 표정으로 소파에 기댄 사람" width="604" height="539" loading="lazy"><p><b>몸의 반응</b>을 살피지 <br>않는 처방</p></div></div><div class="fail__arr" aria-hidden="true"><svg viewBox="-14 0 162 200"><defs><linearGradient id="dtArrG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3E7D4"/><stop offset=".55" stop-color="#E2CBA6"/><stop offset="1" stop-color="#CBAA78"/></linearGradient></defs><path d="M0 0 67 32 134 0 110 128 148 128 67 200-14 128 24 128Z" fill="url(#dtArrG)"/></svg><span>SODAM DIET</span></div><div data-slider><div class="bax__h rv rv--up"><div class="sh sh--c "><h2 class="sh__t"><b>방법</b>이 다르면, <b>결과</b>도 다릅니다.</h2><p class="sh__d">사례 사진은 회원에게만 공개합니다. 카드를 누르면 로그인 창이 열립니다. (예시 카드)</p></div><div class="bax__nav"><button class="navi navi--prev" type="button" data-prev aria-label="이전 사례"></button><button class="navi" type="button" data-next aria-label="다음 사례"></button></div></div><div class="bax__track rv rv--up" data-track><button class="bax__it" type="button" data-login aria-label="감량 사례 예시 01 — 회원 전용 사례 보기"><div class="bax__img"><img src="./assets/bax-1a.jpg" alt="" width="200" height="308" loading="lazy"><img src="./assets/bax-1b.jpg" alt="" width="200" height="308" loading="lazy"><span></span></div><div class="bax__info"><p class="bax__t">감량 사례 예시 01</p><p class="bax__m"><span>40대 · 여성</span><span>12주</span><span>회원 공개</span></p></div></button><button class="bax__it" type="button" data-login aria-label="감량 사례 예시 02 — 회원 전용 사례 보기"><div class="bax__img"><img src="./assets/bax-2a.jpg" alt="" width="200" height="308" loading="lazy"><img src="./assets/bax-2b.jpg" alt="" width="200" height="308" loading="lazy"><span></span></div><div class="bax__info"><p class="bax__t">감량 사례 예시 02</p><p class="bax__m"><span>30대 · 여성</span><span>8주</span><span>회원 공개</span></p></div></button><button class="bax__it" type="button" data-login aria-label="감량 사례 예시 03 — 회원 전용 사례 보기"><div class="bax__img"><img src="./assets/bax-3a.jpg" alt="" width="200" height="308" loading="lazy"><img src="./assets/bax-3b.jpg" alt="" width="200" height="308" loading="lazy"><span></span></div><div class="bax__info"><p class="bax__t">감량 사례 예시 03</p><p class="bax__m"><span>50대 · 여성</span><span>24주</span><span>회원 공개</span></p></div></button><button class="bax__it" type="button" data-login aria-label="감량 사례 예시 04 — 회원 전용 사례 보기"><div class="bax__img"><img src="./assets/bax-4a.jpg" alt="" width="200" height="308" loading="lazy"><img src="./assets/bax-4b.jpg" alt="" width="200" height="308" loading="lazy"><span></span></div><div class="bax__info"><p class="bax__t">감량 사례 예시 04</p><p class="bax__m"><span>30대 · 남성</span><span>12주</span><span>회원 공개</span></p></div></button></div></div>
 </div>
 </section>
 <section class="sec sec--brown">
 <div class="wrap">
-<div class="why4"><div class="sh sh--c sh--w rv rv--up"><h2 class="sh__t">소담 다이어트는 <br>왜 <b>꾸준히</b> 빠질까요?</h2></div><div class="why4__g"><svg class="why4__line" viewBox="0 0 1200 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 100C150 0 300 0 450 70S750 140 900 50 1100 20 1200 60" fill="none" stroke="#E8D6B8" stroke-width="1.5" stroke-dasharray="6 8"/></svg><div class="why4__it rv"><span class="why4__ico"><svg viewBox="0 0 48 48"><path d="M6 22h36c0 10-8 17-18 17S6 32 6 22Z M16 14c0-3 3-3 3-6M24 14c0-3 3-3 3-6M32 14c0-3 3-3 3-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><div><p class="why4__k">폭식 방지 · 필요할 때 추가 처방</p><p class="why4__t"><b>식욕</b>은 낮추고</p><p class="why4__d">식욕을 안정시키는 기초 처방으로 <br>억지로 참지 않아도 자연스럽게 덜 먹게 돕습니다.</p></div></div><div class="why4__it rv"><span class="why4__ico"><svg viewBox="0 0 48 48"><path d="M24 6c2 8 10 11 10 21a10 10 0 0 1-20 0c0-6 4-8 4-13 3 2 4 5 4 8 2-4 2-10 2-16Z" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><div><p class="why4__k">대사 활성 · 체지방 연소</p><p class="why4__t"><b>대사</b>는 높이고</p><p class="why4__d">몸이 쓰는 에너지를 늘려 <br>같은 식사량에도 체지방이 줄도록 돕습니다.</p></div></div><div class="why4__it rv"><span class="why4__ico"><svg viewBox="0 0 48 48"><path d="M8 10h32v22H20l-8 7v-7H8Z M16 19h16M16 25h10" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><div><p class="why4__k">1:1 코칭 · 주기적 점검</p><p class="why4__t"><b>습관</b>은 바꾸고</p><p class="why4__d">식단과 생활 리듬을 함께 점검해 <br>감량이 끊기지 않도록 이끌어 드립니다.</p></div></div><div class="why4__it rv"><span class="why4__ico"><svg viewBox="0 0 48 48"><path d="M24 6 38 12v11c0 9-6 16-14 19-8-3-14-10-14-19V12Z M18 24l5 5 8-9" fill="none" stroke="currentColor" stroke-width="2"/></svg></span><div><p class="why4__k">체질 진단 · 처방 강도 조절</p><p class="why4__t"><b>부담</b>은 줄이고</p><p class="why4__d">몸의 신호를 살펴 처방을 조절하며 <br>무리 없는 속도로 감량합니다.</p></div></div></div></div>
+<div class="why4"><div class="sh sh--c sh--w rv rv--up"><h2 class="sh__t">소담 다이어트는 <br>왜 <b>꾸준히</b> 빠질까요?</h2></div><div class="why4__g"><svg class="why4__line" viewBox="0 0 1280 260" preserveAspectRatio="none" aria-hidden="true"><path d="M0 110C60 150 100 170 150 167C260 160 360 107 455 107C560 107 650 167 760 167C870 167 960 130 1065 107C1140 90 1190 58 1240 34" fill="none" stroke="#FCEBCF" stroke-width="5" stroke-linecap="round" vector-effect="non-scaling-stroke"/><path d="M1268 20 1245 50 1230 22Z" fill="#FCEBCF"/></svg><div class="why4__it rv"><span class="why4__ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 23h38c0 9.4-8.5 17-19 17S5 32.4 5 23Z" fill="var(--navy)"/><rect x="15" y="40" width="18" height="3" rx="1.5" fill="var(--navy)"/><path d="M11 27.5c1.8 4.6 6.5 7.8 12 8.3" fill="none" stroke="var(--brown)" stroke-width="2" stroke-linecap="round"/><circle cx="35" cy="11" r="8" fill="var(--brown)"/><path d="M35 6.5v8M31.8 11.5l3.2 3.2 3.2-3.2" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M15 17c0-2.5 2.4-2.5 2.4-5M22 17c0-2.5 2.4-2.5 2.4-5" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"/></svg></span><div><p class="why4__k">폭식 방지 · 필요할 때 추가 처방</p><p class="why4__t"><b>식욕</b>은 낮추고</p><p class="why4__d">식욕을 안정시키는 기초 처방으로 <br>억지로 참지 않아도 자연스럽게 덜 먹게 돕습니다.</p></div></div><div class="why4__it rv"><span class="why4__ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4c3 9 13 13 13 24.5A13 13 0 0 1 11 28.5c0-6.8 4.4-9.6 4.6-15.5 3.8 2.4 5.4 6 5.4 9.6C23.6 17.4 25 11.5 24 4Z" fill="var(--navy)"/><path d="M24 25c2.2 3.4 6 5.3 6 9.4a6 6 0 0 1-12 0c0-2.8 1.8-4.2 2.4-6.6 1.3 1 2 2.3 2.2 3.8.9-2 1.6-4 1.4-6.6Z" fill="var(--brown)"/></svg></span><div><p class="why4__k">대사 활성 · 체지방 연소</p><p class="why4__t"><b>대사</b>는 높이고</p><p class="why4__d">몸이 쓰는 에너지를 늘려 <br>같은 식사량에도 체지방이 줄도록 돕습니다.</p></div></div><div class="why4__it rv"><span class="why4__ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 8h36a2 2 0 0 1 2 2v22a2 2 0 0 1-2 2H22l-9 8v-8H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2Z" fill="var(--navy)"/><path d="m11 16 2.4 2.4L17 14.6M11 25l2.4 2.4L17 23.6" fill="none" stroke="var(--brown)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M21 16.5h15M21 25.5h11" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg></span><div><p class="why4__k">1:1 코칭 · 주기적 점검</p><p class="why4__t"><b>습관</b>은 바꾸고</p><p class="why4__d">식단과 생활 리듬을 함께 점검해 <br>감량이 끊기지 않도록 이끌어 드립니다.</p></div></div><div class="why4__it rv"><span class="why4__ico"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42S5 30.5 5 17.5A9.6 9.6 0 0 1 24 13a9.6 9.6 0 0 1 19 4.5C43 30.5 24 42 24 42Z" fill="var(--navy)"/><path d="M24 15.5v9M19.5 20h9" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><path d="M24 38c0-5 1.5-8 6-9.5-.3 4.6-2.6 7.6-6 9.5ZM24 38c0-4-1.4-6.6-5.2-7.8.3 3.8 2.2 6.2 5.2 7.8Z" fill="var(--brown)"/></svg></span><div><p class="why4__k">체질 진단 · 처방 강도 조절</p><p class="why4__t"><b>부담</b>은 줄이고</p><p class="why4__d">몸의 신호를 살펴 처방을 조절하며 <br>무리 없는 속도로 감량합니다.</p></div></div></div></div>
 </div>
 </section>
 <section class="sec sec--white dif" data-stickbottom><div class="wrap"><div class="sh sh--c rv rv--up"><h2 class="sh__t">소담 다이어트가 <b>다른 이유</b></h2></div><div class="dif__it rv rv--up"><div><p class="dif__t">정확한 진단</p><p class="dif__d">체성분 · 체형 · 체질을 함께 보고 <br>억지로 참는 다이어트가 아니라 <br>자연스럽게 덜 먹는 몸을 만듭니다.</p></div><div class="dif__img"><img src="./assets/dif-1a.jpg" alt="체성분 검사를 받는 모습" width="431" height="340" loading="lazy"><img src="./assets/dif-1b.jpg" alt="체성분 검사를 받는 모습" width="431" height="340" loading="lazy"></div></div><div class="dif__it rv rv--up"><div><p class="dif__t">1:1 다이어트 코칭</p><p class="dif__d">개인 식단 안내와 <br>정기적인 감량 점검으로 <br>목표까지 함께 걷습니다.</p></div><div class="dif__img"><img src="./assets/dif-2.jpg" alt="식단 기록을 함께 보는 상담" width="862" height="340" loading="lazy"></div></div><div class="dif__it rv rv--up"><div><p class="dif__t">부작용 최소화</p><p class="dif__d">몸의 반응을 빠르게 살펴 <br>처방과 강도를 조절하는 <br>안전한 감량을 지향합니다.</p></div><div class="dif__img"><img src="./assets/dif-3a.jpg" alt="맥을 짚는 한의사의 손" width="431" height="340" loading="lazy"><img src="./assets/dif-3b.jpg" alt="맥을 짚는 한의사의 손" width="431" height="340" loading="lazy"></div></div></div></section>
 <section class="sec sec--brown cover"><div class="wrap"><div class="sh sh--c sh--w rv rv--up"><h2 class="sh__t">언제든 간편하게 이어 가는 <b>소담 다이어트 환</b></h2></div><div class="tc"><div class="tc__l rv rv--right"><p>Sodam Diet</p><img src="./assets/pill-1.jpg" alt="작은 유리병에 담긴 한방 환" width="540" height="400" loading="lazy"></div><div class="tc__r rv rv--left"><img src="./assets/pill-2.jpg" alt="환을 손바닥에 올린 모습" width="466" height="260" loading="lazy"><div><p><b>소담 다이어트 환은 <span class="bp">지방 분해</span>와 <span class="bp">대사 활성</span>에 필요한 몸 상태를 꾸준히 유지하도록 설계한 처방</b>입니다. <br>몸에 무리를 주지 않으면서 체지방이 줄어드는 흐름을 이어 가도록 돕습니다.</p></div></div><span class="rot" aria-hidden="true"><svg class="rot__ring" viewBox="0 0 120 120"><defs><path id="rpd93" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><text font-family="Cormorant, serif" font-size="11.5" letter-spacing="3.2" fill="#fff"><textPath href="#rpd93">SODAM · CLOSER TO THE CAUSE · SODAM · CARE ·</textPath></text></svg><span class="rot__mark"><svg viewBox="0 0 32 32"><path d="M16 4.5c-4.4 3.3-6.6 7-6.6 11 0 3.9 2.9 6.9 6.6 6.9s6.6-3 6.6-6.9c0-4-2.2-7.7-6.6-11Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 11v17.5M16 17.5l3.4-3M16 21.5l-3.4-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></span></div><div class="pill__ttl rv rv--up"><h3 class="sh__t" style="color:#fff">소담 다이어트 환 <b>하루 루틴</b></h3><img src="./assets/pill-routine.jpg" alt="아침·점심·저녁 복용 시간을 나타낸 그림" width="420" height="260" loading="lazy"></div><div class="dprog" data-slider><div class="sh sh--c sh--w rv rv--up"><h2 class="sh__t">상황에 맞춘 <b>환 프로그램</b></h2></div><div class="dprog__track rv rv--up" data-track><div class="dprog__it"><img src="./assets/dprog-1.jpg" alt="" width="380" height="550" loading="lazy"><p class="dprog__s">몸이 가벼워지는 첫 30일</p><p class="dprog__t">4주 집중 리셋</p><div class="dprog__c"><div><b>붓기 정리 &amp; <br>노폐물 배출</b><p>몸을 무겁게 하는 <br>노폐물을 먼저 <br>비워 냅니다.</p></div><div><b>식욕 조절 <br>습관 만들기</b><p>늘어난 식사량을 줄이고 <br>가짜 배고픔을 <br>다스립니다.</p></div><div><b>대사 <br>깨우기</b><p>지방을 태우는 <br>몸으로 <br>바꿔 갑니다.</p></div></div></div><div class="dprog__it"><img src="./assets/dprog-2.jpg" alt="" width="380" height="550" loading="lazy"><p class="dprog__s">라인이 달라지는 100일</p><p class="dprog__t">12주 바디 체인지</p><div class="dprog__c"><div><b>체지방 <br>집중 감량</b><p>수분과 근육이 아닌 <br>묵은 체지방을 <br>줄여 갑니다.</p></div><div><b>몸 선 <br>정돈</b><p>체중보다 <br>옷맵시가 <br>먼저 달라집니다.</p></div><div><b>줄어든 식사량 <br>습관화</b><p>적게 먹는 일이 <br>자연스러운 <br>일상이 됩니다.</p></div></div></div><div class="dprog__it"><img src="./assets/dprog-3.jpg" alt="" width="380" height="550" loading="lazy"><p class="dprog__s">체질을 바꾸는 반년</p><p class="dprog__t">24주 체질 완성</p><div class="dprog__c"><div><b>기준 체중 <br>낮추기</b><p>몸이 기억하는 <br>체중을 천천히 <br>낮춥니다.</p></div><div><b>요요 <br>방지</b><p>감량 뒤에도 <br>체중이 쉽게 <br>돌아오지 않게 합니다.</p></div><div><b>건강한 <br>생활 리듬</b><p>수면 · 식사 · 활동 <br>리듬을 함께 <br>바로잡습니다.</p></div></div></div></div><div class="dprog__nav"><button class="navi navi--prev" type="button" data-prev aria-label="이전 프로그램"></button><div class="dots" data-dots></div><button class="navi" type="button" data-next aria-label="다음 프로그램"></button></div></div></div></section>
-<section class="sec navysec"><div class="wrap"><div class="sh sh--c sh--w rv rv--up"><h2 class="sh__t">몸의 불편함까지 함께 살피는 <b>소담 맞춤 탕약</b></h2></div><div class="tc"><div class="tc__l rv rv--right"><p>Sodam Diet</p><img src="./assets/tang-1.jpg" alt="약탕기에서 달이는 한약" width="540" height="400" loading="lazy"></div><div class="tc__r rv rv--left"><img src="./assets/tang-2.jpg" alt="한약 재료를 계량하는 손" width="466" height="260" loading="lazy"><div><p>갱년기 증상, 호르몬 변화, 소화 불편처럼 다이어트와 함께 돌봐야 할 문제가 있다면, <br><b>한 사람의 상태에 맞춘 탕약으로 세심하게 관리합니다.</b></p></div></div><span class="rot" aria-hidden="true"><svg class="rot__ring" viewBox="0 0 120 120"><defs><path id="rpd90" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><text font-family="Cormorant, serif" font-size="11.5" letter-spacing="3.2" fill="#fff"><textPath href="#rpd90">SODAM · CLOSER TO THE CAUSE · SODAM · CARE ·</textPath></text></svg><span class="rot__mark"><svg viewBox="0 0 32 32"><path d="M16 4.5c-4.4 3.3-6.6 7-6.6 11 0 3.9 2.9 6.9 6.6 6.9s6.6-3 6.6-6.9c0-4-2.2-7.7-6.6-11Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 11v17.5M16 17.5l3.4-3M16 21.5l-3.4-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></span></div></div><div class="mq" aria-hidden="true"><div class="mq__row"><img src="./assets/mq-1.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-2.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-3.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-4.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-5.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-6.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-1.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-2.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-3.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-4.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-5.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-6.jpg" alt="" width="360" height="240" loading="lazy"></div><div class="mq__row"><img src="./assets/mq-7.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-8.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-9.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-10.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-11.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-12.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-7.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-8.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-9.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-10.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-11.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-12.jpg" alt="" width="360" height="240" loading="lazy"></div></div><div class="wrap"><div class="sh sh--c sh--w rv rv--up"><h2 class="sh__t">소담 <b>요요 관리</b></h2></div><div class="hbw rv rv--up"><div><p class="hbw__t">목표 체중 이후까지 <br>함께하는 유지 관리</p></div><div><p class="hbw__d">목표 체중에 도달한 뒤에도 정기적으로 상태를 점검합니다. <br>체중이 다시 오르지 않도록 유지용 처방과 생활 관리를 이어 갑니다.</p><div class="chips"><span class="chip ">유지 관리</span><span class="chip ">완만한 식욕 조절</span><span class="chip ">꾸준한 체질 관리</span></div></div></div></div></section>
+<section class="sec navysec"><div class="wrap"><div class="sh sh--c sh--w rv rv--up"><h2 class="sh__t">몸의 불편함까지 함께 살피는 <b>소담 맞춤 탕약</b></h2></div><div class="tc"><div class="tc__l rv rv--right"><p>Sodam Diet</p><img src="./assets/tang-1.jpg" alt="약탕기에서 달이는 한약" width="540" height="400" loading="lazy"></div><div class="tc__r rv rv--left"><img src="./assets/tang-2.jpg" alt="한약 재료를 계량하는 손" width="466" height="260" loading="lazy"><div><p>갱년기 증상, 호르몬 변화, 소화 불편처럼 다이어트와 함께 돌봐야 할 문제가 있다면, <br><b>한 사람의 상태에 맞춘 탕약으로 세심하게 관리합니다.</b></p></div></div><span class="rot" aria-hidden="true"><svg class="rot__ring" viewBox="0 0 120 120"><defs><path id="rpd90" d="M60 60m-48 0a48 48 0 1 1 96 0a48 48 0 1 1-96 0"/></defs><text font-family="Cormorant, serif" font-size="11.5" letter-spacing="3.2" fill="#fff"><textPath href="#rpd90">SODAM · CLOSER TO THE CAUSE · SODAM · CARE ·</textPath></text></svg><span class="rot__mark"><svg viewBox="0 0 32 32"><path d="M16 4.5c-4.4 3.3-6.6 7-6.6 11 0 3.9 2.9 6.9 6.6 6.9s6.6-3 6.6-6.9c0-4-2.2-7.7-6.6-11Z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M16 11v17.5M16 17.5l3.4-3M16 21.5l-3.4-3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></span></div><div class="dtg rv rv--up"><svg class="dtg__svg" viewBox="0 0 1028 505" role="img" aria-labelledby="dtgT dtgD"><title id="dtgT">감량 단계별 대사량과 체중의 흐름 개념도</title><desc id="dtgD">준비기에는 대사량과 체중이 함께 유지되고, 감량기에 체중이 내려가면서 대사량도 잠시 떨어집니다. 안정기부터 대사량을 다시 끌어올려 유지기에는 대사량이 회복되고 체중은 낮은 상태로 유지됩니다. 수치 없는 개념도입니다.</desc>
+<g stroke="#FCEBCF" stroke-width="1" stroke-dasharray="5 5" opacity=".8"><path d="M281 64V440M465 64V440M649 64V440M907 64V440"/></g>
+<path d="M167 64V440M86 438H950" stroke="#FCEBCF" stroke-width="5" stroke-linecap="round" fill="none"/>
+<path d="M170 111C300 104 400 120 470 170S540 250 560 250 630 200 700 160 860 122 900 147" fill="none" stroke="#9A6A2E" stroke-width="4" stroke-linecap="round"/>
+<path d="M170 143H281L465 280H907" fill="none" stroke="#FCC873" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M283 158 450 285" stroke="#FCEBCF" stroke-width="1.5"/><path d="m462 294-15-3 6-8Z" fill="#FCEBCF"/>
+<g font-family="Pretendard Variable, Pretendard, sans-serif" font-weight="700" fill="#fff"><text x="154" y="116" font-size="17" text-anchor="end">대사량</text><text x="154" y="287" font-size="17" text-anchor="end">체중</text>
+<g font-size="19" text-anchor="middle"><text x="224" y="362">준비기</text><text x="373" y="362">감량기</text><text x="557" y="362">안정기</text><text x="778" y="362">유지기</text></g></g>
+</svg><div class="dtg__ft"><p class="dtg__lg"><span class="dtg__a">대사량 흐름</span><span class="dtg__b">체중 흐름</span></p><p class="dtg__cap">개념도 · 실제 변화는 사람마다 다릅니다.</p></div></div></div><div class="wrap"><div class="sh sh--c sh--w rv rv--up dtmq__h"><h2 class="sh__t">몸이 달라지는 과정을 <b>곁에서</b> 함께합니다.</h2></div></div><div class="mq" aria-hidden="true"><div class="mq__row"><img src="./assets/mq-1.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-2.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-3.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-4.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-5.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-6.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-1.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-2.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-3.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-4.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-5.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-6.jpg" alt="" width="360" height="240" loading="lazy"></div><div class="mq__row"><img src="./assets/mq-7.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-8.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-9.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-10.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-11.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-12.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-7.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-8.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-9.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-10.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-11.jpg" alt="" width="360" height="240" loading="lazy"><img src="./assets/mq-12.jpg" alt="" width="360" height="240" loading="lazy"></div></div><div class="wrap"><div class="sh sh--c sh--w rv rv--up"><h2 class="sh__t">소담 <b>요요 관리</b></h2></div><div class="hbw dtyo rv rv--up"><div><div class="dtyo__g"><svg viewBox="0 0 600 490" role="img" aria-label="감량기, 요요 방지기, 유지기로 이어지는 체중 흐름 개념도: 감량 뒤 잠시 오르는 체중을 요요 방지기에 다시 잡아 유지기에는 일정하게 유지합니다."><g stroke="#FCEBCF" stroke-dasharray="4 5" opacity=".8"><path d="M143 46V438M329 46V438"/></g><path d="M0 150 128 247" stroke="#B0482C" stroke-width="2.5"/><path d="m136 253-15-2 6-9Z" fill="#B0482C"/><path d="M144 252C160 200 185 195 205 205S240 250 280 252H574" fill="none" stroke="#B0482C" stroke-width="3.5" stroke-linecap="round"/><g stroke="#fff" stroke-width="2"><path d="M346 213h56M508 213h56"/></g><path d="m344 213 10-5v10ZM568 213l-10-5v10Z" fill="#fff"/><path d="M0 442H572" stroke="#FCEBCF" stroke-width="4" stroke-linecap="round"/><g font-family="Pretendard Variable, Pretendard, sans-serif" font-size="17" font-weight="600" fill="#fff" text-anchor="middle"><text x="455" y="219">체중 유지</text><text x="70" y="344">감량기</text><text x="236" y="344">요요 방지기</text><text x="455" y="344">유지기</text></g></svg></div></div><div><p class="hbw__t">목표 체중 이후까지 <br>함께하는 유지 관리</p><p class="hbw__d">목표 체중에 도달한 뒤에도 정기적으로 상태를 점검합니다. <br>체중이 다시 오르지 않도록 유지용 처방과 생활 관리를 이어 갑니다.</p><div class="chips"><span class="chip ">유지 관리</span><span class="chip ">완만한 식욕 조절</span><span class="chip ">꾸준한 체질 관리</span></div></div></div></div></section>
 </main>
 <footer class="ft">
 <img class="ft__bg" src="./assets/footer-bg.jpg" alt="" loading="lazy"><span class="ft__bg-tint"></span>
