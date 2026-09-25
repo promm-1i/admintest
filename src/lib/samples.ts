@@ -60,6 +60,23 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "harin-template",
+    industry: "헤어 · 메이크업 · 네일 살롱 홈페이지",
+    title: "헤어 · 메이크업 · 네일 살롱 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 뷰티살롱 · 지점 14 · 예약 · 22페이지",
+    purpose:
+      "전면 화면이 5초마다 바뀌고 그 아래로 분홍 띠가 흘러갑니다. 셀럽 스타일 카드를 옆으로 넘겨 본 다음, 화면에 고정된 채 사진 석 장이 위아래에서 모이는 장면이 세 번 이어집니다. 지점 14곳을 지도에서 찾고, 아티스트 12명을 골라 예약하며, 헤어·메이크업·네일·맨즈 스타일을 각 열두 장씩 봅니다. 웨딩은 상담부터 폐백까지 다섯 단계로 따로 두었고, 예약 상품·후기·문의·FAQ까지 들어갑니다.",
+    features: ["화면에 고정된 채 사진이 모이는 장면 3개", "지점 14곳 지도 찾기 · 아티스트 12명 지정 예약", "헤어·메이크업·네일·맨즈 스타일 48장", "웨딩 5단계 프로그램 · 예약 상품 9종 · 후기 · 문의"],
+    idealFor: "헤어살롱 체인, 뷰티살롱, 웨딩 헤어·메이크업 숍, 네일숍, 메이크업 스튜디오",
+    image: "/thumbs/harin.jpg",
+    liveUrl: "/harin/",
+    industryKey: "beauty",
+    premiumLabel: "뷰티살롱 · 헤어",
+    designCode: "BEAP-1001",
+    premium: true,
+  },
+  {
     slug: "ondam-template",
     industry: "한식 프랜차이즈 본사 홈페이지",
     title: "한식 프랜차이즈 본사 홈페이지 (프리미엄 디자인 A)",
