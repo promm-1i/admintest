@@ -9,18 +9,18 @@ const dot = (d) => d.replaceAll("-", ".");
 const list = {
   path: "reviews.html",
   title: "수술 후기 | 여울성형외과",
-  desc: "고민과 눈의 조건이 모두 다른 만큼, 수술 전 고민에서 회복까지 한 분 한 분의 기록을 사례로 정리합니다.",
+  desc: "수술 전 고민, 수술 방법, 회복 경과를 사례별로 정리했습니다.",
   body: () => `
 <section class="board-head" data-head="light">
   <div class="in-1680">
     <p class="p-en">Cases &amp; Reviews</p>
-    <h1 class="p-title">여울의 눈성형은,<br>사람마다 다른 설계에서<br>시작됩니다.</h1>
-    <p class="p-desc">같은 수술이라도 고민과 눈의 조건은<br class="mo-br"> 모두 다릅니다.<br class="pc-br"> 수술 전 고민에서 회복까지,<br class="mo-br"> 한 분 한 분의 기록을 담았습니다.</p>
+    <h1 class="p-title">수술 사례를<br>고민과 수술 방법별로<br>정리했습니다.</h1>
+    <p class="p-desc">같은 수술이라도 눈꺼풀 두께와 처짐에 따라<br class="mo-br"> 방법이 다릅니다.<br class="pc-br"> 수술 전 고민부터 회복 경과까지<br class="mo-br"> 사례마다 적었습니다.</p>
   </div>
 </section>
 <section class="rv-sec" data-bg="#F5EFE6" aria-labelledby="rv-title">
   <div class="in-1400">
-    <div class="center"><p class="s-en">Patient Reviews</p><h2 class="s-title rv-sec__title" id="rv-title">사례로 보는 여울의 기록</h2></div>
+    <div class="center"><p class="s-en">Patient Reviews</p><h2 class="s-title rv-sec__title" id="rv-title">수술 사례</h2></div>
     <div class="rv-filter" role="toolbar" aria-label="수술 종류로 거르기" data-filter="rv">
       ${[REVIEW_CATS.slice(0, 6), REVIEW_CATS.slice(6)].map((row) => `<div class="rv-filter__row">${row.map((c) => `<button type="button" data-cat="${c}" aria-pressed="${c === "전체"}" class="${c === "전체" ? "on" : ""}">${c}</button>`).join("")}</div>`).join("")}
     </div>
@@ -52,10 +52,10 @@ const views = REVIEWS.map((r, i) => {
     ["수술 전에 라인 위치와 폭을 거울로 함께 보며 한 번 더 맞췄습니다.", "필요하지 않은 수술은 계획에서 뺐습니다.", "가능한 범위와 한계를 먼저 설명드린 뒤 방향을 정했습니다."],
     ["정해진 날에 다시 만나 붓기와 절개선 상태를 살폈습니다.", "회복 단계마다 찜질과 생활 습관을 따로 안내했습니다.", "붓기가 빠지는 속도에는 개인차가 있어 경과를 사진으로 남겨 비교했습니다."],
     ["일상 사진에서도 수술한 티가 크게 나지 않는 것을 목표로 했습니다.", "처음 상담에서 정한 방향에서 벗어나지 않았습니다.", "사진은 동의를 받은 경우에만 공개합니다."],
-    ["같은 고민이라도 눈 구조에 따라 답은 달라질 수 있어, 직접 보고 판단하는 과정이 중요합니다.", "결과만큼 과정이 편안했는지도 여울이 중요하게 보는 기준입니다.", "필요한 만큼만 하는 것이 오래 편안한 결과로 이어진다고 생각합니다."],
+    ["같은 고민이라도 눈 구조에 따라 수술 방법이 달라질 수 있어, 상담에서 직접 보고 정했습니다.", "회복 중에 불편한 점이 있으면 바로 연락하시도록 안내했습니다.", "수술 범위는 상담에서 정한 만큼으로 지켰습니다."],
   ];
   const heads = ["01 Concern", "02 Design", "03 Recovery", "04 After", "05 Director"];
-  const titles = ["어떤 고민이 있었나요", "여울은 어떻게 설계했나요", "회복은 어떻게 진행되었나요", "그 후의 이야기", "한서율 원장"];
+  const titles = ["어떤 고민이 있었나요", "어떻게 수술했나요", "회복은 어떻게 진행되었나요", "그 후의 이야기", "한서율 원장"];
   return {
     path: `review-${i + 1}.html`,
     current: "reviews.html",

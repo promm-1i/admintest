@@ -5,9 +5,9 @@ export default {
   path: "first.html",
   noConsult: true, // 레퍼런스 sub_1·sub_2 는 상담 띠 없이 평평한 푸터
   title: "첫 눈성형 | 여울성형외과",
-  desc: "처음 하는 눈성형일수록 오래 보아도 편안한 결과를 기준으로 설계합니다. 고민에 맞는 안내를 골라 보세요.",
+  desc: "쌍꺼풀, 눈매교정, 트임처럼 처음 받는 눈 수술을 안내합니다. 고민에 맞는 안내를 골라 보세요.",
   body: () => `
-${subVisual({ en: "First Eye Surgery", title: "처음이라서<br>더 신중하게", desc: "첫 수술이라고 가볍게 다루지 않습니다.<br>오래 지나도 자연스러운 모습을<br class=\"mo-br\"> 기준으로 설계합니다.", photo: "sub-first.jpg", alt: "눈을 감은 옆얼굴 사진" })}
-${approach({ en: "Our Approach", title: "수술 방법보다 먼저,<br>무엇을 바꾸고 싶은지<br class=\"pc-br\"> 이해하는 일.", texts: ["여울은 수술 방법부터 권하지 않습니다.<br>어떤 점이 불편한지,<br>어떤 눈매를 원하는지 먼저 듣습니다.", "방법은 그다음입니다.<br>방향이 맞으면 방법은 자연스럽게 정해집니다."], photo: "approach-first.jpg", alt: "정면을 바라보는 얼굴 사진" })}
-${pick("first", { title: "어떤 눈매를 원하시나요?", desc: "가까운 고민을 고르면 설계 방향을 안내해 드립니다." })}`,
+${subVisual({ en: "First Eye Surgery", title: "처음 받는<br>눈 수술", desc: "쌍꺼풀, 눈매교정, 트임처럼 처음 받는 눈 수술입니다.<br>눈꺼풀 두께와 눈뜨는 힘을 확인한 뒤<br class=\"mo-br\"> 방법을 정합니다.", photo: "sub-first.jpg", alt: "눈을 감은 옆얼굴 사진" })}
+${approach({ en: "Our Approach", title: "상담에서는<br>불편한 점과 원하는 모양을<br class=\"pc-br\"> 먼저 여쭙니다.", texts: ["사진을 보며 원하시는 라인 높이와 모양,<br>지금 불편한 점을 여쭙고<br>눈꺼풀 두께와 눈뜨는 힘을 확인합니다.", "그다음 어떤 수술이 맞는지 설명드립니다.<br>필요하지 않은 수술은 권하지 않습니다."], photo: "approach-first.jpg", alt: "정면을 바라보는 얼굴 사진" })}
+${pick("first", { title: "어떤 눈매를 원하시나요?", desc: "가까운 고민을 고르면 관련 수술을 안내해 드립니다." })}`,
 };

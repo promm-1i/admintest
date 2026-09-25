@@ -3,10 +3,10 @@ import { subVisual, img } from "../parts.mjs";
 import { BRAND } from "../shell.mjs";
 
 const STANDARD = [
-  ["RESPECT", "타고난 결을 존중합니다", "무엇을 더할지보다, 무엇을 남길지 먼저 정합니다.", "여울은 눈꺼풀의 구조와 조직을 가능한 한 보존하고, 원래의 인상이 살아 있는 설계를 합니다."],
-  ["SUBTLE", "흔적은 옅게 남깁니다", "변화는 분명하게, 수술한 티는 덜 나게.", "절개 위치와 봉합 간격까지 계산해 시간이 지날수록 자연스럽게 가라앉는 결과를 봅니다."],
-  ["PRECISE", "필요한 수술만 권합니다", "수술을 여러 개 더한다고 결과가 좋아지지는 않습니다.", "하지 않아도 되는 것은 권하지 않는 것, 여울이 지키는 절제의 기준입니다."],
-  ["HARMONY", "만족할 만큼 바꿉니다", "소극적인 수술이 늘 정답은 아닙니다.", "과함과 부족함 사이, 얼굴 전체의 균형이 맞는 지점을 찾습니다."],
+  ["PRESERVE", "조직을 가능한 한 남깁니다", "피부와 지방, 근육은 필요한 만큼만 잘라 냅니다.", "조직이 충분히 남아 있어야 나중에 교정이 필요할 때 쓸 수 있는 방법이 많습니다."],
+  ["INCISION", "절개선은 접히는 선 안에 둡니다", "눈을 떴을 때 보이지 않는 위치를 자릅니다.", "봉합은 가는 실로 촘촘하게 하고, 실밥을 푼 뒤에도 정해진 날에 흉터를 확인합니다."],
+  ["ESSENTIAL", "필요한 수술만 권합니다", "필요 없다고 보면 그렇게 말씀드립니다.", "여러 수술을 함께 받으실 때는 각각 왜 필요한지 따로 설명드립니다."],
+  ["CONSULT", "원하시는 모양을 먼저 여쭙니다", "사진을 보며 라인 높이와 모양을 정합니다.", "눈 구조상 어려운 모양이면 그 이유와 다른 방법을 설명드립니다."],
 ];
 const SPACE = [
   ["entrance", "입구", 1], ["lobby", "로비", 2], ["waiting", "대기 공간", 2], ["consult", "상담실", 3], ["care", "처치실", 2],
@@ -15,11 +15,11 @@ const SPACE = [
 export default {
   path: "about.html",
   title: "병원 소개 | 여울성형외과",
-  desc: "눈의 구조와 인상의 균형을 함께 보는 여울성형외과의 대표원장, 네 가지 기준, 공간과 오시는 길을 안내합니다.",
+  desc: "여울성형외과의 대표원장 약력, 진료 원칙 네 가지, 병원 공간과 오시는 길을 안내합니다.",
   body: () => `
-${subVisual({ en: "About Yeoul", title: "흐름대로,<br>자연스럽게.", desc: "여울성형외과는 눈의 구조와 인상의 균형을 함께 보고,<br class=\"mo-br\"> 그 사람다운 변화를 설계하는 곳입니다.<br>빠른 결과보다 오래 편안한 결과를<br class=\"mo-br\"> 기준으로 합니다.", photo: "sub-about.jpg", alt: "빛이 드는 옆얼굴 사진" })}
+${subVisual({ en: "About Yeoul", title: "여울성형외과를<br>소개합니다.", desc: "여울성형외과는 눈성형과 눈 재수술을 주로 하는<br class=\"mo-br\"> 서울 강남구의 성형외과입니다.<br>대표원장 한 명이 상담부터 수술,<br class=\"mo-br\"> 회복 경과 확인까지<br class=\"mo-br\"> 직접 진료합니다.", photo: "sub-about.jpg", alt: "빛이 드는 옆얼굴 사진" })}
 <section class="sec director" id="doctor" aria-labelledby="doctor-name">
-  <div class="director__mq" aria-hidden="true"><div class="director__track"><span>Reading the natural flow of your eyes &nbsp;&nbsp;·&nbsp;&nbsp;</span><span>Reading the natural flow of your eyes &nbsp;&nbsp;·&nbsp;&nbsp;</span></div></div>
+  <div class="director__mq" aria-hidden="true"><div class="director__track"><span>Han Seoyul, M.D. &nbsp;·&nbsp; Yeoul Plastic Surgery &nbsp;&nbsp;·&nbsp;&nbsp;</span><span>Han Seoyul, M.D. &nbsp;·&nbsp; Yeoul Plastic Surgery &nbsp;&nbsp;·&nbsp;&nbsp;</span></div></div>
   <div class="in-1110">
     <div class="director__head">
       <div class="director__photo">${img("director.jpg", "여울성형외과 대표원장 프로필 사진", 1200, 1200)}</div>
@@ -38,13 +38,13 @@ ${subVisual({ en: "About Yeoul", title: "흐름대로,<br>자연스럽게.", des
 </section>
 <section class="sec quote" aria-label="원장의 한마디">
   <div data-rv>
-    <p class="quote__text">“ 좋은 변화는<br>더 많이 바꾸는 데서 오지 않고,<br>그 사람에게 어울리는<br class="mo-br"> 균형에서 시작됩니다.”</p>
+    <p class="quote__text">“ 수술 전에 원하시는 모양을<br>충분히 여쭙고, 가능한 것과<br>어려운 것을 있는 그대로<br class="mo-br"> 말씀드리겠습니다.”</p>
     <p class="quote__by">- 한서율 원장 -</p>
   </div>
 </section>
 <section class="sec standard" aria-labelledby="std-title">
   <div class="in-1680">
-    <div class="center" data-rv><p class="s-en">Our Standard</p><h2 class="s-title standard-t" id="std-title">여울이 지키는 네 가지</h2><p class="s-desc">빠른 결과보다 오래가는 결과를 고릅니다.<br>여울이 모든 수술에서 같은 무게로 지키는 기준입니다.</p></div>
+    <div class="center" data-rv><p class="s-en">Our Standard</p><h2 class="s-title standard-t" id="std-title">진료 원칙 네 가지</h2><p class="s-desc">여울성형외과가 모든 수술에 적용하는 원칙입니다.<br>상담할 때 이 네 가지를 함께 설명드립니다.</p></div>
     <div class="standard__wr" data-slider>
       <button class="nav-btn prev" type="button" aria-label="이전 기준"></button>
       <div class="standard__view"><div class="standard__track">
@@ -56,7 +56,7 @@ ${subVisual({ en: "About Yeoul", title: "흐름대로,<br>자연스럽게.", des
 </section>
 <section class="sec space" data-bg="#ECE3D6" aria-labelledby="space-title">
   <div class="in-1680">
-    <div class="center" data-rv><p class="s-en">Our Space</p><h2 class="s-title" id="space-title">여울의 공간</h2><p class="s-desc">편안한 상담과 차분한 수술을 위해 꾸민 공간입니다.</p></div>
+    <div class="center" data-rv><p class="s-en">Our Space</p><h2 class="s-title" id="space-title">여울의 공간</h2><p class="s-desc">입구부터 상담실, 처치실까지 병원 내부 사진입니다.</p></div>
     <div class="tabs" role="tablist" aria-label="공간 선택">${SPACE.map(([k, l], i) => `<button type="button" role="tab" id="tab-${k}" aria-controls="panel-${k}" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ""}>${l}</button>`).join("")}</div>
     <div class="space__panels">
       ${SPACE.map(([k, l, n], i) => `<div class="space__panel" role="tabpanel" id="panel-${k}" aria-labelledby="tab-${k}"${i ? " hidden" : ""} data-slider>

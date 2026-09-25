@@ -21,7 +21,7 @@ export default CONCERNS.map((c) => {
     title: `${c.qText} | ${first ? "첫 눈성형" : "눈 재수술"} | 여울성형외과`,
     desc: `‘${c.qText}’ 고민에서 여울성형외과가 먼저 확인하는 것과 함께 검토하는 수술, 진료 과정, 자주 묻는 질문을 정리했습니다.`,
     bodyClass: "page-concern",
-    consultDesc: "내 눈에 맞는 설계는 원장과 직접 나누는 대화에서 시작됩니다.<br>고른 고민을 가지고 상담을 예약해 보세요.",
+    consultDesc: "수술 방법은 원장이 직접 눈 상태를 확인한 뒤에 정합니다.<br>고른 고민을 가지고 상담을 예약해 보세요.",
     body: () => `
 <section class="r-visual" data-head="light">
   <div class="r-visual__bg" style="background-image:url('./assets/${c.slug}.jpg')" aria-hidden="true"></div>

@@ -6,14 +6,14 @@ import { arrow } from "../shell.mjs";
 const list = {
   path: "column.html",
   title: "여울의 생각 | 여울성형외과",
-  desc: "상담과 수술, 회복의 과정에서 여울성형외과가 중요하게 생각하는 이야기를 전합니다.",
+  desc: "상담과 수술, 회복에 대해 자주 받는 질문을 여울성형외과 원장이 정리한 글입니다.",
   bodyClass: "page-column",
   body: () => `
 <div class="in-1688" data-bg="#F5EFE6">
   <section class="think-head">
     <p class="p-en">Our Perspective</p>
     <h1 class="p-title">여울의 생각</h1>
-    <p class="p-desc">상담과 수술, 회복의 과정 속에서<br>여울이 중요하게 생각하는 이야기를 전합니다.</p>
+    <p class="p-desc">상담과 수술, 회복에 대해<br>자주 받는 질문을 원장이 직접 정리했습니다.</p>
   </section>
   <div class="think-list">
     <div class="think-tabs" role="toolbar" aria-label="주제로 거르기" data-filter="gall">${COLUMN_CATS.map((c) => `<button type="button" data-cat="${c}" aria-pressed="${c === "전체"}" class="${c === "전체" ? "on" : ""}">${c}</button>`).join("")}</div>

@@ -89,7 +89,7 @@ export function header(current) {
 </div>`;
 }
 
-export const consultBand = (desc = "수술 이야기보다 먼저,<br class=\"mo-br\"> 지금 무엇이 불편한지부터 듣겠습니다.") => `
+export const consultBand = (desc = "상담은 예약제로 진행하며,<br class=\"mo-br\"> 원장이 직접 눈 상태를 확인합니다.") => `
 <section class="consult-band" data-head="light" aria-labelledby="consult-band-title">
   <div class="consult-band__bg" aria-hidden="true"></div>
   <div class="consult-band__wr">

@@ -15,7 +15,7 @@ export default {
     <div>
       <p class="cform__en">CONSULTATION</p>
       <h1 class="cform__title" id="cf-title">궁금한 점을<br>편하게 남겨 주세요</h1>
-      <p class="cform__desc">여울은 상담에서부터 차분하게 시작합니다.<br>고민과 수술 이력을 남겨 주시면<br>상담 전에 미리 살펴보고 안내드립니다.</p>
+      <p class="cform__desc">상담은 예약제로 진행합니다.<br>고민과 수술 이력을 남겨 주시면<br>상담 전에 미리 살펴보고 안내드립니다.</p>
     </div>
     <div class="cform__card">
       <p class="addr">${BRAND.addr}</p>
