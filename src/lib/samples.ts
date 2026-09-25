@@ -60,6 +60,23 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "ondam-template",
+    industry: "한식 프랜차이즈 본사 홈페이지",
+    title: "한식 프랜차이즈 본사 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 외식 · 브랜드 4종 · 창업 · 26페이지",
+    purpose:
+      "배너 6장이 도는 메인에서 시작해 브랜드 네 곳을 세로 탭으로 넘겨 보고, 화면 아래에 브랜드 퀵바가 따라다닙니다. 브랜드마다 소개·메뉴·매장 찾기 세 쪽을 두고, 창업 쪽은 절차 10단계·선배 사장님 이야기·좌우로 엇갈리는 강점 다섯 단·담당자 인터뷰로 이어집니다. 창업 상담 신청서, 설명회 일정, 추천 상권 표, 창업 FAQ, 이벤트, 모바일 상품권, 단체 주문까지 외식 본사에 필요한 화면을 모았습니다.",
+    features: ["브랜드 4종 × 소개·메뉴·매장 찾기 12쪽", "화면 아래 따라다니는 브랜드 퀵바 · 지도 매장 찾기", "창업 절차 10단계 · 추천 상권 표 · 창업 상담 신청서", "메뉴 탭별 가격표 · 단체 주문 · 모바일 상품권"],
+    idealFor: "한식·분식 프랜차이즈 본사, 다브랜드 외식기업, 단체 급식·도시락 업체, 가맹 모집 중인 외식 브랜드",
+    image: "/thumbs/ondam.jpg",
+    liveUrl: "/ondam/",
+    industryKey: "restaurant",
+    premiumLabel: "외식 프랜차이즈",
+    designCode: "RESP-1001",
+    premium: true,
+  },
+  {
     slug: "semroot-template",
     industry: "수학학원 · 학습플랫폼 홈페이지",
     title: "수학학원 · 학습플랫폼 홈페이지 (프리미엄 디자인 A)",
