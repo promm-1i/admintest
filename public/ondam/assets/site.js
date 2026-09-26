@@ -1,4 +1,11 @@
 (function(){
+  /* 슬라이더 뒷장은 보일 때 받아온다 */
+  window.__hy=function(el){ if(!el) return;
+    var i=el.querySelector?el.querySelector('img[data-src]'):null;
+    (el.querySelectorAll?el.querySelectorAll('img[data-src]'):[]).forEach(function(m){
+      m.src=m.dataset.src; m.removeAttribute('data-src'); });
+  };
+
   /* 등장 — 원본 ScrollMagic triggerHook 0.75 (뷰포트 75% 지점) */
   var io=new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } });
