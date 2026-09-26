@@ -479,7 +479,7 @@ English: Minimal still life on a bright white plaster wall, a small handcrafted 
    PY
    ```
 5. 슬라이드 묶음(메인 1~6, 객실 1~6, 스페셜 1~7, 소개 1~8, 스토리 1~3, 전체메뉴 띠 1~6, 객실 호버 1~4)의 색온도·그레인·톤이 한 시리즈로 보이는지, 장면이 서로 겹치지 않는지 확인.
-6. 재검사: `python3 /tmp/claude-0/preflight_linux.py damhwa` (없으면 `python3 tools/ref-clone/preflight.py damhwa`).
+6. 재검사: `python3 tools/ref-clone/preflight.py damhwa stay-sadamjae` (두 번째 인자는 `ref-sites/` 폴더명. ref-sites 는 커밋하지 않으므로 크롤링한 PC에서 실행하고, 스크립트 안의 `REFS`·`ROOT` 경로를 그 PC에 맞춘다).
 7. 썸네일 `public/thumbs/damhwa.jpg` 와 사례 캡처 `public/cases/damhwa/` 를 새 이미지로 다시 촬영한다(1440px·768px·390px).
 
 ---

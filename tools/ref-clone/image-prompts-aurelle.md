@@ -306,7 +306,7 @@ English: Ultra-wide banner still life, very light sky-blue to ivory seamless gra
    PY
    ```
 5. 시리즈 톤: 메인 비주얼 3장, 공간 아코디언 4장, 프로모션 8장, 다이닝 3장, 컬렉션 4장, 오퍼 구성 5장, 리워즈 카드 6장이 각각 같은 색온도·질감으로 이어지는지 나란히 놓고 확인한다. 같은 묶음 안에서 장면이 겹치지 않는지도 본다.
-6. 재검사: `python3 /tmp/claude-0/preflight_linux.py aurelle` 실행, 없으면 `python3 tools/ref-clone/preflight.py aurelle`.
+6. 재검사: `python3 tools/ref-clone/preflight.py aurelle hotel-parnas` (두 번째 인자는 `ref-sites/` 폴더명. ref-sites 는 커밋하지 않으므로 크롤링한 PC에서 실행하고, 스크립트 안의 `REFS`·`ROOT` 경로를 그 PC에 맞춘다).
 7. 재촬영: 썸네일 `public/thumbs/aurelle.jpg`와 사례 캡처 `public/cases/aurelle/`를 새 사진 기준으로 다시 촬영한다.
 
 ## 부록 · og.jpg(1200×630) 참고 프롬프트

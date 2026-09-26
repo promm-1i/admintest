@@ -421,7 +421,7 @@ English: Dusk, two sun loungers at the end of a softly lit pool, sky fading from
    EOF
    ```
 5. 톤 일관성: 슬라이드 묶음(`hero-1~5`, `prologue-hero-1~4`, `room-hero-1~4`·`room-slide-1~3`, `special-hero-1~3`, `menu-1~6`)을 나란히 놓고 색온도·채도가 한 시리즈로 보이는지 확인. 객실(D) 사진은 같은 가구·벽색으로 이어지는지 확인.
-6. 재검사: `python3 /tmp/claude-0/preflight_linux.py soran` (없으면 `python3 tools/ref-clone/preflight.py soran`).
+6. 재검사: `python3 tools/ref-clone/preflight.py soran pension-lepavilion` (두 번째 인자는 `ref-sites/` 폴더명. ref-sites 는 커밋하지 않으므로 크롤링한 PC에서 실행하고, 스크립트 안의 `REFS`·`ROOT` 경로를 그 PC에 맞춘다).
 7. 재촬영: 썸네일 `public/thumbs/soran.jpg` 와 사례 캡처 `public/cases/soran/` 를 새 사진 기준으로 다시 찍는다.
 
 ## og.jpg(1200×630) 참고 프롬프트

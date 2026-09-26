@@ -488,7 +488,7 @@ English: Extremely high-key near-white image of a white linen tablecloth with a 
    E
    ```
 5. 시리즈 톤: 항공 5장(A02–A06), 스페셜 6장(A07–A12), 서브 히어로 묶음(E01–E03, F01–F03, G01–G03), 객실 19장, 메뉴 6장, 팝업 5장이 각각 같은 색감으로 보이는지 접촉 시트로 비교.
-6. 재검사: `python3 /tmp/claude-0/preflight_linux.py yoonseul` (없으면 `python3 tools/ref-clone/preflight.py yoonseul`).
+6. 재검사: `python3 tools/ref-clone/preflight.py yoonseul pension-coraltree` (두 번째 인자는 `ref-sites/` 폴더명. ref-sites 는 커밋하지 않으므로 크롤링한 PC에서 실행하고, 스크립트 안의 `REFS`·`ROOT` 경로를 그 PC에 맞춘다).
 7. 썸네일 `public/thumbs/yoonseul.jpg` 와 사례 캡처 `public/cases/yoonseul/` 를 새 사진 기준으로 다시 촬영.
 
 ## og.jpg(1200×630) 참고 프롬프트

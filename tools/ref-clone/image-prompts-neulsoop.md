@@ -523,7 +523,7 @@ map-1 과 같은 방식. 실제 지도 API/캡처 또는 단지 주차 동선도
    EOF
    ```
 5. 슬라이드 묶음의 톤 일관성: 메인 히어로 4장(hero-1~4), Rest 5장(rest-1~5), 늘숲 이야기 4장(story-1~4), 객실 패널 6장(room-1~6), 띠 이미지(loc-1~4, life-1~3), 브랜드 카드 32장이 계절·색온도·그레인에서 튀지 않는지 나란히 놓고 본다.
-6. 재검사: `python3 /tmp/claude-0/preflight_linux.py neulsoop` (없으면 `python3 tools/ref-clone/preflight.py neulsoop`).
+6. 재검사: `python3 tools/ref-clone/preflight.py neulsoop stay-onegrove` (두 번째 인자는 `ref-sites/` 폴더명. ref-sites 는 커밋하지 않으므로 크롤링한 PC에서 실행하고, 스크립트 안의 `REFS`·`ROOT` 경로를 그 PC에 맞춘다).
 7. 사진이 바뀌었으므로 썸네일 `public/thumbs/neulsoop.jpg` 와 사례 캡처 `public/cases/neulsoop/` 를 다시 촬영한다.
 
 ---
