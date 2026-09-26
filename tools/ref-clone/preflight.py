@@ -129,6 +129,24 @@ def check_pages(slug, ref):
     else:
         ok('모든 쪽에 섹션이 있음')
 
+    # 크롤이 닿은 쪽만 보고 만들면 절반을 빠뜨린다(온담 26/37 · 하린 22/31).
+    # 원본이 스스로 내건 내부 링크를 세어 그 수와 비교한다.
+    raws = sorted(glob.glob('%s/%s/raw/index*.html' % (REFS, ref))) or \
+        sorted(glob.glob('%s/%s/raw/*.html' % (REFS, ref)))[:1]
+    if raws:
+        t = io.open(raws[0], encoding='utf-8', errors='replace').read()
+        links = {l.split('#')[0].rstrip('/') or '/'
+                 for l in re.findall(r'href="(/[^"#?]*)', t)}
+        links = {l for l in links
+                 if not re.search(r'\.(css|js|png|jpe?g|svg|ico|webp|pdf|zip)$', l, re.I)}
+        print('       원본이 내건 내부 링크 %d개' % len(links))
+        if len(links) >= 8 and len(mypages) < len(links) * 0.7:
+            bad('원본은 쪽을 %d개 내걸었는데 내 것은 %d개다 — 크롤이 닿은 쪽만 '
+                '보고 만들지 않았는지 링크 목록과 표로 대조할 것' % (len(links), len(mypages)))
+        elif len(links) >= 8:
+            ok('원본이 내건 링크 수에 견줘 쪽이 모자라지 않음 (%d ≥ %d×0.7)'
+               % (len(mypages), len(links)))
+
 
 # ── 3. 자리 이미지가 화면을 밍밍하게 만들지 않나 ──────────────────
 def check_images(slug):
