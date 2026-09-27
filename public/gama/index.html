@@ -3,148 +3,110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Gama 가마 유리조명</title>
-<meta name="description" content="경기도 이천 공방에서 입으로 불어 만드는 유리 펜던트 조명.">
-<meta name="theme-color" content="#cdd1cf">
+<title>가마 유리조명</title>
+<meta name="description" content="입으로 불어 만드는 유리 조명, 경기도 이천.">
+<meta name="theme-color" content="#adaaa3">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap">
 <link rel="preload" href="assets/fonts/GowunBatang-Bold.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 @font-face { font-family: 'Gowun Batang'; src: url('assets/fonts/GowunBatang-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
 @font-face { font-family: 'Pretendard'; src: url('assets/fonts/Pretendard-Regular.subset.woff2') format('woff2'); font-weight: 400; font-display: swap; }
 @font-face { font-family: 'Pretendard'; src: url('assets/fonts/Pretendard-Medium.subset.woff2') format('woff2'); font-weight: 500; font-display: swap; }
 
-/* 3D 벽이 어두워지면 스크립트가 data-tone 을 바꾸고, 글자색이 따라 넘어간다 */
-@property --fg    { syntax: '<color>'; inherits: true; initial-value: #161b21; }
-@property --fg2   { syntax: '<color>'; inherits: true; initial-value: rgba(22, 27, 33, .66); }
-@property --fg3   { syntax: '<color>'; inherits: true; initial-value: rgba(22, 27, 33, .52); }
-@property --scrim { syntax: '<color>'; inherits: true; initial-value: rgba(205, 209, 207, .9); }
+/* 3D 벽이 어두워지면 스크립트가 data-tone 을 바꾸고 글자색이 따라 넘어간다 */
+@property --fg    { syntax: '<color>'; inherits: true; initial-value: #15191e; }
+@property --fg2   { syntax: '<color>'; inherits: true; initial-value: rgba(21, 25, 30, .64); }
+@property --scrim { syntax: '<color>'; inherits: true; initial-value: rgba(173, 170, 163, .9); }
 :root {
-  --bg: #cdd1cf;
-  --fg: #161b21; --fg2: rgba(22, 27, 33, .66); --fg3: rgba(22, 27, 33, .52);
-  --scrim: rgba(205, 209, 207, .9);
-  --lamp: #f5ab66;
-  --la: 'Newsreader', 'Gowun Batang', Georgia, serif;
+  --bg: #adaaa3;
+  --fg: #15191e; --fg2: rgba(21, 25, 30, .64);
+  --scrim: rgba(173, 170, 163, .9);
+  --lamp: #f2a664;
   --ko: 'Gowun Batang', serif;
   --sans: 'Pretendard', -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   --gut: clamp(22px, 4.6vw, 76px);
-  --low: clamp(44px, 9vh, 112px);
+  --low: clamp(44px, 9vh, 108px);
   --ease: cubic-bezier(.2, .7, .15, 1);
-  transition: --fg 1s ease, --fg2 1s ease, --fg3 1s ease, --scrim 1s ease;
+  transition: --fg 1s ease, --fg2 1s ease, --scrim 1s ease;
 }
-:root[data-tone="dark"] {
-  --fg: #ebe8e1; --fg2: rgba(235, 232, 225, .66); --fg3: rgba(235, 232, 225, .5);
-  --scrim: rgba(9, 13, 21, .88);
-}
+:root[data-tone="dark"] { --fg: #ece8e0; --fg2: rgba(236, 232, 224, .62); --scrim: rgba(9, 12, 20, .88); }
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--bg); color: var(--fg);
-  font: 400 15px/1.75 var(--sans); letter-spacing: -0.005em;
+  font: 400 14px/1.75 var(--sans);
   word-break: keep-all; -webkit-font-smoothing: antialiased;
 }
-h1, h2, h3, p { margin: 0; font-weight: inherit; }
-a { color: inherit; }
-i { font-family: var(--la); }
+h1, h2, h3, p, address { margin: 0; font-weight: inherit; font-style: normal; }
+a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 1px solid var(--lamp); outline-offset: 4px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
-#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.8s ease; }
+#scene { position: fixed; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 2s ease; }
 .gl #scene { opacity: 1; }
 main, footer { position: relative; z-index: 1; }
 
 .top {
   position: fixed; inset: 0 0 auto; z-index: 5;
-  display: flex; justify-content: space-between; align-items: baseline;
-  padding: 28px var(--gut);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 26px var(--gut);
 }
-.mark { display: flex; align-items: baseline; gap: 12px; text-decoration: none; }
-.mark i { font: italic 400 27px/1 var(--la); letter-spacing: -0.01em; }
-.mark span { font-size: 12px; color: var(--fg2); }
-.clock { display: flex; align-items: center; gap: 10px; font: 400 17px/1 var(--la); font-variant-numeric: tabular-nums lining-nums; }
-.clock b { width: 6px; height: 6px; border-radius: 50%; background: var(--fg3); transition: background-color 1s; }
+.mark { font: 700 20px/1 var(--ko); letter-spacing: -0.02em; }
+.clock { display: flex; align-items: center; gap: 9px; font-size: 13px; font-variant-numeric: tabular-nums; color: var(--fg2); }
+.clock b { width: 5px; height: 5px; border-radius: 50%; background: currentColor; transition: background-color 1s; }
 [data-lit="on"] .clock b { background: var(--lamp); }
 
-/* 첫 화면 */
 .hero {
   min-height: 100vh; min-height: 100svh;
   display: flex; flex-direction: column; justify-content: flex-end;
   padding: 0 var(--gut) var(--low);
 }
-.hero h1 { font: 700 clamp(44px, 5.2vw, 86px)/1.12 var(--ko); letter-spacing: -0.05em; }
-.hero p { margin-top: 30px; color: var(--fg2); }
+.hero h1 { font: 700 clamp(84px, 11.5vw, 184px)/.9 var(--ko); letter-spacing: -0.04em; }
+.hero p { margin-top: 26px; color: var(--fg2); }
 @media (prefers-reduced-motion: no-preference) {
-  .hero h1, .hero p { animation: rise 1.6s var(--ease) both; animation-delay: .9s; }
-  .hero p { animation-delay: 1.15s; }
+  .hero h1, .hero p { animation: rise 1.8s var(--ease) both; animation-delay: 1s; }
+  .hero p { animation-delay: 1.25s; }
 }
-@keyframes rise { from { opacity: 0; transform: translateY(16px); } }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
 
-/* 고정 장면 */
 #collection { height: 420vh; }
 #process { height: 460vh; }
 #night { height: 340vh; }
 .pin { position: sticky; top: 0; height: 100vh; height: 100svh; }
-.caps {
-  position: absolute; left: var(--gut); bottom: var(--low);
-  width: min(390px, calc(100% - var(--gut) * 2));
-  display: grid;
-}
-.caps > * { grid-area: 1 / 1; align-self: end; opacity: 0; transform: translateY(10px); transition: opacity .7s ease, transform .9s var(--ease); }
-.caps > .on { opacity: 1; transform: none; }
-.caps h3 { display: flex; align-items: baseline; gap: 14px; font: 700 28px/1.3 var(--ko); letter-spacing: -0.035em; }
-.caps h3 i { font: italic 300 38px/1 var(--la); letter-spacing: -0.015em; }
-.caps p { margin-top: 12px; color: var(--fg2); }
-.caps .meta { margin-top: 16px; font-size: 12.5px; color: var(--fg3); font-variant-numeric: tabular-nums; }
-.caps .where { margin: 0 0 6px; font-size: 13px; color: var(--fg2); }
+.label { position: absolute; left: var(--gut); bottom: var(--low); width: min(360px, calc(100% - var(--gut) * 2)); display: grid; }
+.label > * { grid-area: 1 / 1; align-self: end; opacity: 0; transform: translateY(8px); transition: opacity .7s ease, transform .9s var(--ease); }
+.label > .on { opacity: 1; transform: none; }
+.label h3 { font: 700 30px/1.25 var(--ko); letter-spacing: -0.03em; }
+.label p { margin-top: 10px; color: var(--fg2); font-variant-numeric: tabular-nums; }
+.temp { position: absolute; left: var(--gut); bottom: calc(var(--low) - 30px); color: var(--fg2); font-variant-numeric: tabular-nums; }
 
-.proc { position: absolute; left: var(--gut); bottom: var(--low); width: min(420px, calc(100% - var(--gut) * 2)); }
-.proc .caps { position: relative; left: auto; bottom: auto; width: 100%; }
-.deg {
-  --heat: 1;
-  margin-bottom: 26px;
-  font: 300 clamp(104px, 13vw, 210px)/.82 var(--la); letter-spacing: -0.055em;
-  font-variant-numeric: tabular-nums lining-nums;
-  color: color-mix(in oklab, var(--fg), #ff8c3c calc(var(--heat) * 92%));
-}
-.deg sup { position: relative; top: -.05em; margin-left: .05em; font-size: .26em; letter-spacing: 0; vertical-align: top; }
-
-/* 쇼룸 */
 .showroom {
   min-height: 100vh; min-height: 100svh;
-  display: flex; justify-content: space-between; align-items: flex-end; gap: 48px;
+  display: flex; flex-direction: column; justify-content: flex-end;
   padding: 0 var(--gut) var(--low);
 }
-.showroom h2 { font: 700 clamp(34px, 3.6vw, 58px)/1.2 var(--ko); letter-spacing: -0.045em; }
-.showroom address { margin-top: 28px; font-style: normal; color: var(--fg2); }
-.call { text-align: right; text-decoration: none; }
-.call span { display: block; font-size: 13px; color: var(--fg2); }
-.call i { display: block; margin-top: 6px; font: italic 300 clamp(30px, 3vw, 46px)/1 var(--la); letter-spacing: -0.02em; font-variant-numeric: lining-nums; background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat; padding-bottom: 6px; transition: background-size .6s var(--ease); }
-.call:hover i, .call:focus-visible i { background-size: 100% 1px; }
+.showroom h2 { font: 700 clamp(30px, 3vw, 44px)/1.2 var(--ko); letter-spacing: -0.03em; }
+.showroom address { margin-top: 18px; color: var(--fg2); }
+.showroom address a { border-bottom: 1px solid transparent; transition: border-color .4s; }
+.showroom address a:hover { border-color: currentColor; }
 
-footer { display: flex; justify-content: space-between; gap: 16px; padding: 0 var(--gut) 26px; font-size: 12px; color: var(--fg3); }
+footer { padding: 0 var(--gut) 24px; font-size: 12px; color: var(--fg2); }
 
 @media (max-width: 759px) {
   .top { padding: 18px var(--gut); }
-  .mark span { display: none; }
   .hero::before, .pin::before, .showroom::before {
-    content: ''; position: absolute; inset: 46% 0 0; pointer-events: none;
-    background: linear-gradient(to top, var(--scrim) 58%, transparent);
+    content: ''; position: absolute; inset: 50% 0 0; pointer-events: none;
+    background: linear-gradient(to top, var(--scrim) 55%, transparent);
   }
   .hero, .showroom { position: relative; }
   .hero > *, .showroom > * { position: relative; }
-  .caps h3 { font-size: 24px; }
-  .caps h3 i { font-size: 32px; }
-  .deg { margin-bottom: 14px; font-size: 96px; }
-  .showroom { flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: 32px; }
-  .call { text-align: left; }
-  footer { flex-direction: column; gap: 2px; }
+  .hero h1 { font-size: 84px; }
+  .label h3 { font-size: 26px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .caps > * { transition: none; }
+  .label > * { transition: none; }
 }
 </style>
 <script type="importmap">
@@ -158,40 +120,24 @@ footer { display: flex; justify-content: space-between; gap: 16px; padding: 0 va
 <canvas id="scene" aria-hidden="true"></canvas>
 
 <header class="top">
-  <a class="mark" href="#hero"><i>Gama</i><span>가마 유리조명</span></a>
-  <p class="clock" title="스크롤을 내리면 시각이 흐릅니다"><b aria-hidden="true"></b><time data-clock>16:30</time></p>
+  <a class="mark" href="#hero">가마</a>
+  <p class="clock"><b aria-hidden="true"></b><time data-clock>16:30</time></p>
 </header>
 
 <main>
   <section id="hero" class="hero" data-sec>
-    <h1>입으로 불어 만든<br>유리 조명</h1>
-    <p>경기도 이천 공방에서 한 점씩 붑니다.<br>아래로 내리면 해가 지고, 조명이 켜집니다.</p>
+    <h1>가마</h1>
+    <p>입으로 불어 만드는 유리 조명<br>경기도 이천</p>
   </section>
 
   <section id="collection" data-sec aria-labelledby="h-col">
-    <h2 id="h-col" class="sr">컬렉션</h2>
+    <h2 id="h-col" class="sr">조명</h2>
     <div class="pin">
-      <div class="caps">
-        <article data-i="0" class="on">
-          <h3><i>Dal</i>달</h3>
-          <p>지름 280mm 구. 아래를 열어 두어 빛이 식탁으로 곧게 떨어집니다.</p>
-          <p class="meta">Ø280 × H270mm · 투명 유리 · 480,000원</p>
-        </article>
-        <article data-i="1">
-          <h3><i>Jong</i>종</h3>
-          <p>아래로 벌어지는 종. 두세 점을 한 줄로 달 때 가장 많이 고릅니다.</p>
-          <p class="meta">Ø320 × H200mm · 호박 유리 · 590,000원</p>
-        </article>
-        <article data-i="2">
-          <h3><i>Bak</i>박</h3>
-          <p>허리가 들어간 조롱박. 폭이 좁아 계단실에 여러 점을 내릴 때 씁니다.</p>
-          <p class="meta">Ø180 × H280mm · 연기 유리 · 450,000원</p>
-        </article>
-        <article data-i="3">
-          <h3><i>Gol</i>골</h3>
-          <p>나무틀 안쪽의 홈 16줄이 유리에 그대로 옮겨진 원통입니다.</p>
-          <p class="meta">Ø160 × H280mm · 올리브 유리 · 440,000원</p>
-        </article>
+      <div class="label">
+        <article data-i="0" class="on"><h3>달</h3><p>28 × 27 cm<br>투명 유리</p></article>
+        <article data-i="1"><h3>종</h3><p>32 × 20 cm<br>호박 유리</p></article>
+        <article data-i="2"><h3>박</h3><p>18 × 28 cm<br>연기 유리</p></article>
+        <article data-i="3"><h3>골</h3><p>16 × 28 cm<br>올리브 유리</p></article>
       </div>
     </div>
   </section>
@@ -199,46 +145,38 @@ footer { display: flex; justify-content: space-between; gap: 16px; padding: 0 va
   <section id="process" data-sec aria-labelledby="h-pro">
     <h2 id="h-pro" class="sr">만드는 과정</h2>
     <div class="pin">
-      <div class="proc">
-        <p class="deg" aria-hidden="true"><span data-temp>1,150</span><sup>℃</sup></p>
-        <div class="caps">
-          <article data-i="0" class="on"><h3>떠내기</h3><p>1,150℃ 가마에서 녹은 유리를 쇠 대롱 끝에 감아올립니다.</p></article>
-          <article data-i="1"><h3>불기</h3><p>대롱을 돌리면서 입으로 불어 크기를 키웁니다.</p></article>
-          <article data-i="2"><h3>틀 잡기</h3><p>물에 적신 나무틀 안에서 불어 모양을 정합니다.</p></article>
-          <article data-i="3"><h3>서냉</h3><p>480℃ 서냉로에 넣고 14시간 동안 천천히 식힙니다.</p></article>
-          <article data-i="4"><h3>점등</h3><p>황동 소켓을 달고 불을 켜 기포와 두께를 확인합니다.</p></article>
-        </div>
+      <div class="label">
+        <article data-i="0" class="on"><h3>떠내기</h3></article>
+        <article data-i="1"><h3>불기</h3></article>
+        <article data-i="2"><h3>틀 잡기</h3></article>
+        <article data-i="3"><h3>서냉</h3></article>
+        <article data-i="4"><h3>점등</h3></article>
       </div>
+      <p class="temp"><span data-temp>1,150</span>℃</p>
     </div>
   </section>
 
   <section id="night" data-sec aria-labelledby="h-nig">
-    <h2 id="h-nig" class="sr">설치 사례</h2>
+    <h2 id="h-nig" class="sr">거는 방법</h2>
     <div class="pin">
-      <div class="caps">
-        <article data-i="0" class="on"><p class="where">서울 성수동 · 카페</p><h3>7m 테이블 위에 종 다섯 점</h3></article>
-        <article data-i="1"><p class="where">경주 · 한옥 스테이</p><h3>서까래 한 곳에서 달 세 점</h3></article>
-        <article data-i="2"><p class="where">판교 · 단독주택 계단실</p><h3>3층 높이에 박 일곱 점</h3></article>
+      <div class="label">
+        <article data-i="0" class="on"><h3>다섯 점, 한 줄로</h3></article>
+        <article data-i="1"><h3>세 점, 높이를 달리해</h3></article>
+        <article data-i="2"><h3>일곱 점, 나선으로</h3></article>
       </div>
     </div>
   </section>
 
   <section id="showroom" class="showroom" data-sec aria-labelledby="h-sho">
-    <div>
-      <h2 id="h-sho">불 켜진 조명을<br>직접 보고 고르세요</h2>
-      <address>경기도 이천시 신둔면 도자예술로 12<br>화–토 11:00–18:00 · 토요일 14:00 불기 시연</address>
-    </div>
-    <a class="call" href="tel:0316341150"><span>방문 예약</span><i>031 634 1150</i></a>
+    <h2 id="h-sho">쇼룸</h2>
+    <address>경기도 이천시 신둔면 도자예술로 12<br>화요일–토요일, 11시–18시<br><a href="tel:0316341150">031-634-1150</a></address>
   </section>
 </main>
 
-<footer>
-  <span>© 2026 Gama Glass Studio</span>
-  <span>studio@gama-glass.kr</span>
-</footer>
+<footer>© 2026 가마 유리조명</footer>
 
 <script>
-// 화면 글자: 시계, 장면별 문구, 유리 온도. 3D 가 못 떠도 이건 돈다
+// 글자 쪽: 시계, 장면별 이름, 유리 온도. 3D 가 못 떠도 돈다
 (() => {
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const smooth = (a, b, v) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
@@ -258,11 +196,10 @@ footer { display: flex; justify-content: space-between; gap: 16px; padding: 0 va
     if (f < 0.8) return 480 - 455 * smooth(0.7, 0.8, f);
     return 25;
   }
-  window.GAMA = { clamp, smooth, lerp, measure, prog, glassTemp };
+  window.GAMA = { clamp, smooth, lerp, measure, glassTemp };
 
   let M = measure(), queued = false;
-  const clock = document.querySelector('[data-clock]');
-  const deg = document.querySelector('.deg'), num = document.querySelector('[data-temp]');
+  const clock = document.querySelector('[data-clock]'), num = document.querySelector('[data-temp]');
   const groups = [['collection', [0.25, 0.51, 0.77]], ['process', [0.2, 0.4, 0.6, 0.8]], ['night', [0.39, 0.72]]]
     .map(([id, cuts]) => ({ id, cuts, items: [...document.querySelectorAll(`#${id} [data-i]`)], i: 0 }));
 
@@ -272,14 +209,12 @@ footer { display: flex; justify-content: space-between; gap: 16px; padding: 0 va
     const min = Math.round(990 + clamp(y / M.max) * 340);   // 16:30 → 22:10
     clock.textContent = `${String(Math.floor(min / 60)).padStart(2, '0')}:${String(min % 60).padStart(2, '0')}`;
     for (const g of groups) {
-      const f = prog(M, g.id, y), i = g.cuts.filter((c) => f >= c).length;
+      const i = g.cuts.filter((c) => prog(M, g.id, y) >= c).length;
       if (i === g.i) continue;
       g.i = i;
       for (const n of g.items) n.classList.toggle('on', +n.dataset.i === i);
     }
-    const t = glassTemp(prog(M, 'process', y));
-    num.textContent = Math.round(t).toLocaleString('ko-KR');
-    deg.style.setProperty('--heat', clamp((t - 520) / 630).toFixed(3));
+    num.textContent = Math.round(glassTemp(prog(M, 'process', y))).toLocaleString('ko-KR');
   }
   const request = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
   const remeasure = () => { M = measure(); request(); };
@@ -320,7 +255,7 @@ pmrem.dispose();
 const camera = new THREE.PerspectiveCamera(32, innerWidth / innerHeight, 0.1, 600);
 
 /* ---------- 유리 갓: 네 모양과 가마에서 막 떠낸 덩어리를 같은 정점 수로 만들어 서로 바뀌게 한다 ---------- */
-const N = 90, SEG = 128, WALL = 0.045;
+const N = 90, SEG = 128, THICK = 0.045;
 function sample(ctrl) {
   const curve = new THREE.CatmullRomCurve3(ctrl.map(([x, y]) => new THREE.Vector3(x, y, 0)), false, 'centripetal');
   return curve.getSpacedPoints(N - 1).map((p) => new THREE.Vector2(p.x, p.y));
@@ -339,11 +274,13 @@ function dalCtrl() {
   for (let i = 0; i <= 16; i++) { const a = lerp(a0, a1, i / 16); pts.push([R * Math.sin(a), -R * (c0 - Math.cos(a))]); }
   return pts;
 }
-const CTRL = {
-  jong: [[0.2, 0], [0.55, -0.08], [0.88, -0.3], [1.06, -0.62], [1.16, -1.05], [1.3, -1.5], [1.5, -1.82], [1.6, -1.95]],
-  bak: [[0.2, 0], [0.5, -0.12], [0.7, -0.4], [0.66, -0.75], [0.42, -1.02], [0.4, -1.12], [0.72, -1.42], [0.92, -1.85], [0.86, -2.35], [0.58, -2.68], [0.42, -2.75]],
-  gol: [[0.2, 0], [0.55, -0.08], [0.76, -0.28], [0.8, -0.6], [0.8, -2.2], [0.76, -2.55], [0.62, -2.72], [0.5, -2.76]],
-};
+const OUTER = [
+  sample(dalCtrl()),
+  sample([[0.2, 0], [0.55, -0.08], [0.88, -0.3], [1.06, -0.62], [1.16, -1.05], [1.3, -1.5], [1.5, -1.82], [1.6, -1.95]]),
+  sample([[0.2, 0], [0.5, -0.12], [0.7, -0.4], [0.66, -0.75], [0.42, -1.02], [0.4, -1.12], [0.72, -1.42], [0.92, -1.85], [0.86, -2.35], [0.58, -2.68], [0.42, -2.75]]),
+  sample([[0.2, 0], [0.55, -0.08], [0.76, -0.28], [0.8, -0.6], [0.8, -2.2], [0.76, -2.55], [0.62, -2.72], [0.5, -2.76]]),
+  sample([[0.14, 0], [0.34, -0.1], [0.5, -0.34], [0.56, -0.62], [0.5, -0.9], [0.34, -1.08], [0.14, -1.17], [0.01, -1.19]]),
+];
 const CENTER_Y = [-1.35, -1.0, -1.4, -1.4];
 function lathe(profile, ribs = 0) {
   const g = new THREE.LatheGeometry(profile, SEG);
@@ -363,16 +300,32 @@ function lathe(profile, ribs = 0) {
   }
   return g;
 }
-const gOuter = sample([[0.14, 0], [0.34, -0.1], [0.5, -0.34], [0.56, -0.62], [0.5, -0.9], [0.34, -1.08], [0.14, -1.17], [0.01, -1.19]]);
+const gOuter = OUTER[4];
 const glassGeo = lathe(gOuter.map((p) => new THREE.Vector2(Math.max(0.01, p.x * 0.5), p.y * 0.8 - 0.05)).concat(gOuter.slice().reverse()));
-const targets = [
-  lathe(shell(sample(dalCtrl()), WALL)),
-  lathe(shell(sample(CTRL.jong), WALL)),
-  lathe(shell(sample(CTRL.bak), WALL)),
-  lathe(shell(sample(CTRL.gol), WALL * 1.2), 0.035),
-];
+const targets = [0, 1, 2, 3].map((i) => lathe(shell(OUTER[i], i === 3 ? THICK * 1.2 : THICK), i === 3 ? 0.035 : 0));
 glassGeo.morphAttributes.position = targets.map((g) => g.attributes.position);
 glassGeo.morphAttributes.normal = targets.map((g) => g.attributes.normal);
+
+// 벽 그림자용: 모양별 높이→반지름 표 (64단 × 5줄, 0~3 아래)
+const PROF = (() => {
+  const data = new Uint8Array(64 * 5);
+  OUTER.forEach((o, row) => {
+    for (let i = 0; i < 64; i++) {
+      const y = -(i / 63) * 3;
+      let r = 0;
+      for (let j = 0; j < o.length - 1; j++) {
+        const a = o[j], b = o[j + 1];
+        if (a.y >= y && b.y <= y) r = Math.max(r, lerp(a.x, b.x, (a.y - y) / Math.max(1e-6, a.y - b.y)));
+      }
+      data[row * 64 + i] = Math.round(clamp(r / 2) * 255);
+    }
+  });
+  const t = new THREE.DataTexture(data, 64, 5, THREE.RedFormat, THREE.UnsignedByteType);
+  t.magFilter = t.minFilter = THREE.LinearFilter;
+  t.unpackAlignment = 1;
+  t.needsUpdate = true;
+  return t;
+})();
 
 /* ---------- 부속 ---------- */
 const capGeo = new THREE.CylinderGeometry(0.21, 0.28, 0.42, 48);
@@ -385,7 +338,7 @@ class Helix extends THREE.Curve {
 const filGeo = new THREE.TubeGeometry(new Helix(), 160, 0.012, 6);
 const brass = new THREE.MeshStandardMaterial({ color: '#b98b4e', metalness: 1, roughness: 0.3 });
 const socketMat = new THREE.MeshStandardMaterial({ color: '#2a2521', metalness: 0.6, roughness: 0.5 });
-const FABRIC = C('#1d1b19'), STEEL = C('#9ea4aa'), WIRE = C('#3a2c20'), BULB = C('#ffa95e');
+const FABRIC = C('#1d1b19'), STEEL = C('#9ea4aa'), WIRE = C('#3a2c20'), BULB = C('#ffa95e'), WHITE = C('#ffffff');
 const HALO = (() => {
   const c = document.createElement('canvas'); c.width = c.height = 128;
   const g = c.getContext('2d'), r = g.createRadialGradient(64, 64, 0, 64, 64, 64);
@@ -409,10 +362,7 @@ const HOT_LO = C('#5a0800'), HOT_MID = C('#ff3d0a'), HOT_HI = C('#ff8a2a');
 const lamps = [];
 for (let i = 0; i < 8; i++) {
   const g = new THREE.Group();
-  const mat = new THREE.MeshPhysicalMaterial({
-    transmission: 1, thickness: 0.2, roughness: 0.03, ior: 1.5, specularIntensity: 1,
-    dispersion: narrow() ? 0 : 0.15,
-  });
+  const mat = new THREE.MeshPhysicalMaterial({ transmission: 1, thickness: 0.2, roughness: 0.03, ior: 1.5, specularIntensity: 1, dispersion: narrow() ? 0 : 0.15 });
   // 빛나는 유리는 정면이 밝고 노랗게, 가장자리는 검붉게
   mat.onBeforeCompile = (sh) => {
     sh.fragmentShader = sh.fragmentShader.replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
@@ -427,34 +377,34 @@ for (let i = 0; i < 8; i++) {
   const socket = new THREE.Mesh(socketGeo, socketMat); socket.position.y = -0.12;
   const filMat = new THREE.MeshBasicMaterial({ color: WIRE.clone() });
   const fil = new THREE.Mesh(filGeo, filMat); fil.position.y = -0.5;
+  fitting.add(cap, ring, socket, fil);
   // 불투명 쪽에 그려야 유리가 굴절해서 보여 준다
   const haloMat = new THREE.SpriteMaterial({ map: HALO, color: 0x000000, blending: THREE.AdditiveBlending, transparent: false, depthWrite: false });
   const halo = new THREE.Sprite(haloMat); halo.position.y = -0.5; halo.scale.setScalar(2.1); halo.renderOrder = 1;
-  fitting.add(cap, ring, socket, fil);
   const cordMat = new THREE.MeshStandardMaterial({ color: FABRIC.clone(), roughness: 0.85 });
   const cord = new THREE.Mesh(cordGeo, cordMat); cord.position.y = 30.3; cord.scale.set(0.028, 1, 0.028);
   g.add(glass, fitting, halo, cord);
   scene.add(g);
-  lamps.push({ g, glass, mat, fitting, filMat, halo, haloMat, cord, cordMat, em: new THREE.Color(), phase: i * 1.7, spin: i * 0.9, on: 0 });
+  lamps.push({ g, glass, mat, fitting, filMat, halo, haloMat, cord, cordMat, em: new THREE.Color(), phase: i * 1.7, spin: i * 0.9 });
 }
 
-// 0~3 컬렉션, 4 공방에서 만드는 한 점(종·호박), 5~7 천장 위에 올려 둔 예비
+// 0~3 한 점씩 보는 조명, 4 가마에서 만드는 한 점(종·호박), 5~7 천장 위에 올려 둔 예비
 const HOME = [
   { pos: [0, 1.2, 0], shape: 0, color: 0 },
-  { pos: [11, 1.8, -1.6], shape: 1, color: 1 },
-  { pos: [22, 1.0, 0.4], shape: 2, color: 2 },
-  { pos: [33, 1.5, -0.8], shape: 3, color: 4 },
-  { pos: [45, 1.3, 0], shape: -1, color: 1 },
+  { pos: [14, 1.8, -1.2], shape: 1, color: 1 },
+  { pos: [28, 1.0, 0.3], shape: 2, color: 2 },
+  { pos: [42, 1.5, -0.6], shape: 3, color: 4 },
+  { pos: [56, 1.3, 0], shape: -1, color: 1 },
   { pos: [5, 34, -9], shape: 0, color: 3 },
   { pos: [12, 34, -12], shape: 2, color: 0 },
   { pos: [17, 34, -9], shape: 1, color: 2 },
 ];
 const CX = 10, CZ = -7;
 const LAYOUTS = [
-  [0, 1, 2, 3, 4].map((k) => ({ pos: [12.5 - k * 1.9, 0.8, -2 - k * 3], shape: 1, color: 1 })),                 // 카페
-  [[8.4, 2.8, -5.5], [11.5, 1.3, -7.2], [9.3, -0.1, -9.4]].map((pos) => ({ pos, shape: 0, color: 0 })),        // 한옥
-  Array.from({ length: 7 }, (_, k) => ({ pos: [CX + Math.cos(k * 0.96) * 3, 4.3 - k * 1.25, CZ + Math.sin(k * 0.96) * 3], shape: 2, color: 2 })),  // 계단실
-  [                                                                                                               // 쇼룸
+  [0, 1, 2, 3, 4].map((k) => ({ pos: [12.5 - k * 1.9, 0.8, -2 - k * 3], shape: 1, color: 1 })),
+  [[8.4, 2.8, -5.5], [11.5, 1.3, -7.2], [9.3, -0.1, -9.4]].map((pos) => ({ pos, shape: 0, color: 0 })),
+  Array.from({ length: 7 }, (_, k) => ({ pos: [CX + Math.cos(k * 0.96) * 3, 4.3 - k * 1.25, CZ + Math.sin(k * 0.96) * 3], shape: 2, color: 2 })),
+  [
     { pos: [4, 3.0, -6], shape: 0, color: 0 }, { pos: [7.5, 2.2, -9], shape: 1, color: 1 },
     { pos: [10.5, 3.4, -5], shape: 2, color: 2 }, { pos: [13.5, 2.4, -8], shape: 3, color: 4 },
     { pos: [16.5, 3.0, -5.5], shape: 1, color: 1 }, { pos: [6, 3.6, -12], shape: 0, color: 3 },
@@ -471,88 +421,126 @@ const lightC = new THREE.PointLight('#ffa860', 0, 40, 2);
 lightC.position.set(CX, 0, CZ + 2);
 scene.add(lightP, lightC);
 
-/* ---------- 벽: 석회 미장, 오후 창빛, 모델 이름, 밤에는 조명마다 벽에 번지는 빛 ---------- */
-const WALL_Z = -22;
-const WALL_C = [C('#c3c6c2'), C('#2c3452'), C('#0b0f18')];
-const WORDS = ['Dal', 'Jong', 'Bak', 'Gol'];
-const atlas = document.createElement('canvas');
-atlas.width = 2048; atlas.height = 2048;
-const atlasTex = new THREE.CanvasTexture(atlas);
-function drawWords() {
-  const g = atlas.getContext('2d');
-  g.clearRect(0, 0, 2048, 2048);
-  g.fillStyle = '#fff'; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
-  g.font = 'italic 300 440px Newsreader, Georgia, serif';
-  WORDS.forEach((w, i) => g.fillText(w, 1024, i * 512 + 360));
-  atlasTex.needsUpdate = true;
-}
-drawWords();
-document.fonts.load('italic 300 100px Newsreader').then(drawWords, () => {});
-const wordC = [0, 1, 2, 3].map((i) => new THREE.Vector2(HOME[i].pos[0] - 1.2, HOME[i].pos[1] + CENTER_Y[i] + 0.2));
+/* ---------- 벽: 석회 미장. 창으로 든 햇빛, 그 안에 떨어지는 유리 그림자와 초점 빛, 밤에는 조명마다 번지는 빛 ---------- */
+const WALL_C = [C('#adaaa3'), C('#1c2742'), C('#0a0e17')];
+const vec4s = () => Array.from({ length: 8 }, () => new THREE.Vector4());
 const wallMat = new THREE.ShaderMaterial({
   uniforms: {
-    uBase: { value: WALL_C[0].clone() }, uSun: { value: C('#fff3e2') }, uGlow: { value: C('#ff9f55') },
-    uT: { value: 0 }, uSunAmt: { value: 0.42 }, uGlowAmt: { value: 0 }, uWordAmt: { value: 0.16 }, uWordA: { value: [1, 0, 0, 0] },
-    uLamps: { value: Array.from({ length: 8 }, () => new THREE.Vector4()) },
-    uWords: { value: atlasTex }, uWordC: { value: wordC }, uWordS: { value: new THREE.Vector2(34, 8.5) },
+    uBase: { value: WALL_C[0].clone() }, uSun: { value: C('#fff4e6') }, uGlow: { value: C('#ffa85e') },
+    uSunD: { value: new THREE.Vector3(0.32, -0.28, -1).normalize() },
+    uSunAmt: { value: 0.55 }, uSoft: { value: 0.06 }, uShear: { value: 0.3 }, uGlowAmt: { value: 0 },
+    uWallZ: { value: -7 }, uTime: { value: 0 },
+    uLA: { value: vec4s() }, uLW: { value: vec4s() }, uLT: { value: vec4s() }, uLG: { value: vec4s() },
+    uProf: { value: PROF },
   },
   vertexShader: /* glsl */`
     varying vec3 vW;
     void main() { vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
   fragmentShader: /* glsl */`
-    uniform vec3 uBase, uSun, uGlow;
-    uniform float uT, uSunAmt, uGlowAmt, uWordAmt;
-    uniform vec4 uLamps[8];
-    uniform sampler2D uWords;
-    uniform vec2 uWordC[4], uWordS;
-    uniform float uWordA[4];
+    uniform vec3 uBase, uSun, uGlow, uSunD;
+    uniform float uSunAmt, uSoft, uShear, uGlowAmt, uWallZ, uTime;
+    uniform vec4 uLA[8], uLW[8], uLT[8], uLG[8];
+    uniform sampler2D uProf;
     varying vec3 vW;
+
     float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
     float noise(vec2 p) {
       vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
       return mix(mix(hash(i), hash(i + vec2(1, 0)), f.x), mix(hash(i + vec2(0, 1)), hash(i + vec2(1, 1)), f.x), f.y);
     }
     float box(vec2 q, vec2 h, float s) { vec2 d = abs(q) - h; return 1.0 - smoothstep(-s, s, max(d.x, d.y)); }
-    // 창 하나: 세로 창살 1, 가로 창살 2. 해가 낮아질수록 기울고 아래로 늘어진다
-    float windowLight(vec2 p, float t) {
-      vec2 q = p;
-      q.x -= (q.y - 2.0) * mix(0.35, 1.3, t);
-      q.y = (q.y - mix(3.2, -1.5, t)) / mix(1.0, 0.5, t);
-      q.x = mod(q.x + 18.0, 26.0) - 13.0;
-      float s = mix(0.12, 0.55, t);
-      float m = box(q, vec2(3.0, 4.6), s);
-      m *= smoothstep(0.14 - s, 0.14 + s, abs(q.x));
-      m *= smoothstep(0.1 - s, 0.1 + s, abs(q.y - 1.5));
-      m *= smoothstep(0.1 - s, 0.1 + s, abs(q.y + 1.5));
+
+    // 조명 자리(14 간격)마다 창 하나. 조명 그림자는 오른쪽 아래 칸에 떨어진다
+    float windowLight(vec2 p) {
+      vec2 off = uSunD.xy * ((uWallZ + 0.5) / uSunD.z);
+      vec2 q = p - off - vec2(0.0, 1.4);
+      q.x -= floor(q.x / 14.0 + 0.5) * 14.0;
+      q -= vec2(0.2, -0.8);
+      q.x -= q.y * uShear;
+      float s = uSoft;
+      float m = box(q, vec2(2.8, 3.2), s);
+      m *= smoothstep(0.08, 0.1 + s * 1.2, abs(q.x + 2.1));
+      m *= smoothstep(0.07, 0.09 + s * 1.2, abs(q.y - 2.0));
       return m;
     }
+
+    // 유리를 지난 빛이 벽에 맺는 무늬
+    float caustic(vec2 p, float t) {
+      vec2 i = p;
+      float c = 1.0;
+      for (int n = 0; n < 4; n++) {
+        float tt = t * (1.0 - (3.5 / float(n + 1)));
+        i = p + vec2(cos(tt - i.x) + sin(tt + i.y), sin(tt - i.y) + cos(tt + i.x));
+        c += 1.0 / length(vec2(p.x / (sin(i.x + tt) / 0.005), p.y / (cos(i.y + tt) / 0.005)));
+      }
+      c /= 4.0;
+      c = 1.17 - pow(c, 1.4);
+      return pow(abs(c), 8.0);
+    }
+
+    float radius(float h, vec4 w) {
+      float x = clamp(h / 3.0, 0.0, 1.0) * (63.0 / 64.0) + 0.5 / 64.0;
+      vec4 r = vec4(texture2D(uProf, vec2(x, 0.1)).r, texture2D(uProf, vec2(x, 0.3)).r,
+                    texture2D(uProf, vec2(x, 0.5)).r, texture2D(uProf, vec2(x, 0.7)).r) * 2.0;
+      float g = texture2D(uProf, vec2(x, 0.9)).r * 2.0;
+      return dot(w, r) + max(0.0, 1.0 - w.x - w.y - w.z - w.w) * g;
+    }
+
+    // 햇빛에 곱해지는 값: 캡·전선은 막고, 유리는 색을 입히고 초점을 맺는다
+    vec3 lampShadows(vec2 p) {
+      vec3 light = vec3(1.0);
+      vec2 dxy = uSunD.xy / -uSunD.z;
+      float k = length(dxy);
+      vec2 dd = dxy / max(k, 1e-4);
+      for (int i = 0; i < 8; i++) {
+        vec4 A = uLA[i], T = uLT[i];
+        if (T.w < 0.01) continue;
+        vec2 u = p - (A.xy + dxy * (A.z - uWallZ));
+        if (abs(u.x) > 3.5 || u.y < -3.6) continue;
+        float sd = 0.02 + uSoft * 0.5 + 0.015 * (A.z - uWallZ);
+        float cord = u.y > 0.3 ? 1.0 - smoothstep(0.02, 0.03 + sd, abs(u.x)) : 0.0;
+        vec2 v = u - dd * dot(u, dd) * (1.0 - 1.0 / sqrt(1.0 + k * k));
+        float h = -v.y;
+        float r = (h > 0.0 && h < 3.0) ? radius(h, uLW[i]) : 0.0;
+        float inGlass = r > 0.03 ? 1.0 - smoothstep(r - sd, r + sd, abs(v.x)) : 0.0;
+        float cap = box(v - vec2(0.0, 0.12), vec2(0.27, 0.24), sd);
+        float s = clamp(abs(v.x) / max(r, 0.05), 0.0, 1.0);
+        float ring = exp(-pow((s - 0.8) / 0.09, 2.0));
+        float edge = smoothstep(0.84, 1.0, s);
+        float cau = caustic(v * 2.4 - 250.0 + A.w, uTime * 0.3 + A.w);
+        vec3 through = T.rgb * (0.46 - 0.3 * edge + cau * 1.5 * (1.0 - 0.6 * s) + ring * 0.75);
+        light *= mix(vec3(1.0), through, inGlass * T.w);
+        light *= 1.0 - max(cap, cord) * T.w;
+      }
+      return light;
+    }
+
     void main() {
       vec2 p = vW.xy;
       float n = noise(p * 0.8) * 0.55 + noise(p * 2.9) * 0.3 + noise(p * 10.0) * 0.15;
-      vec3 c = uBase * (0.78 + 0.22 * smoothstep(-16.0, 10.0, p.y)) * (0.96 + 0.08 * n);
-      c += uSun * windowLight(p, uT) * uSunAmt * (0.9 + 0.12 * n);
-      float ink = 0.0;
-      for (int i = 0; i < 4; i++) {
-        vec2 uv = (p - uWordC[i]) / uWordS + 0.5;
-        if (uv.x > 0.0 && uv.x < 1.0 && uv.y > 0.0 && uv.y < 1.0) ink += uWordA[i] * texture2D(uWords, vec2(uv.x, (float(3 - i) + uv.y) * 0.25)).a;
-      }
-      c *= 1.0 - uWordAmt * ink * (0.85 + 0.3 * n);
+      vec3 c = uBase * (0.8 + 0.2 * smoothstep(-12.0, 8.0, p.y)) * (0.95 + 0.1 * n);
+      float win = windowLight(p) * uSunAmt;
+      if (win > 0.001) c += uSun * win * lampShadows(p) * (0.9 + 0.14 * n);
       vec3 g = vec3(0.0);
       for (int i = 0; i < 8; i++) {
-        vec4 L = uLamps[i];
-        float s = 1.8 + 0.22 * L.w;
-        vec2 d = p - L.xy;
-        g += L.z * exp(-dot(d, d) / (s * s)) / (1.0 + 0.05 * L.w);
+        vec4 G = uLG[i];
+        if (G.z < 0.01) continue;
+        vec2 d = p - G.xy;
+        float s = 1.5 + 0.2 * G.w;
+        d.y /= d.y < 0.0 ? 1.6 : 0.8;   // 갓이 아래로 열려 있어 빛이 아래로 더 번진다
+        float r2 = dot(d, d) / (s * s);
+        g += G.z * (exp(-r2) * 0.75 + 0.25 / (1.0 + r2 * 3.0)) / (1.0 + 0.05 * G.w);
       }
       c += uGlow * g * uGlowAmt * (0.9 + 0.2 * n);
       gl_FragColor = vec4(c, 1.0);
     }`,
 });
 const wall = new THREE.Mesh(new THREE.PlaneGeometry(420, 200), wallMat);
-wall.position.set(20, 0, WALL_Z);
+wall.position.set(20, 0, -7);
 wall.renderOrder = -1;
 scene.add(wall);
-const sunDay = C('#fff3e2'), sunDusk = C('#ff8a48');
+const SUN = { day: C('#fff2df'), dusk: C('#ff8a48'), moon: C('#6a84b8') };
+const SUND = [new THREE.Vector3(0.32, -0.28, -1), new THREE.Vector3(0.95, -0.1, -1)];
 
 /* ---------- 필름 입자 · 비네트 ---------- */
 const grain = new ShaderPass({
@@ -564,52 +552,51 @@ const grain = new ShaderPass({
     void main() {
       vec4 c = texture2D(tDiffuse, vUv);
       vec2 d = vUv - 0.5;
-      c.rgb *= 1.0 - 0.55 * dot(d, d);
-      c.rgb += (h(gl_FragCoord.xy) - 0.5) * 0.045;
+      c.rgb *= 1.0 - 0.6 * dot(d, d);
+      c.rgb += (h(gl_FragCoord.xy) - 0.5) * 0.04;
       gl_FragColor = c;
     }`,
 });
-
 const composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(1, 1, { type: THREE.HalfFloatType, samples: 4 }));
 composer.addPass(new RenderPass(scene, camera));
-const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.7, 0.5, 1.0);
+const bloom = new UnrealBloomPass(new THREE.Vector2(1, 1), 0.6, 0.4, 1.0);
 composer.addPass(bloom);
 composer.addPass(new OutputPass());
 composer.addPass(grain);
 
-/* ---------- 스크롤 기준점 ---------- */
+/* ---------- 스크롤 기준점. yaw 는 조명을 중심으로 도는 각도 ---------- */
 let M, KEYS;
 const posOf = (id, f) => Math.min(M.max, M[id].top + f * Math.max(0, M[id].h - M.vh));
 const centerOf = (k) => V([HOME[k].pos[0], HOME[k].pos[1] + CENTER_Y[k], HOME[k].pos[2]]);
 function buildKeys() {
   M = measure();
-  const c = [0, 1, 2, 3].map(centerOf), cp = V([45, 0.4, 0]);
-  const k = (id, f, look, d, sx, sy, n) => ({ y: posOf(id, f), look, d, sx, sy, n });
+  const c = [0, 1, 2, 3].map(centerOf), cp = V([56, 0.4, 0]);
+  const k = (id, f, look, d, yaw, sx, sy, n) => ({ y: posOf(id, f), look, d, yaw, sx, sy, n });
   KEYS = [
-    k('hero', 0, c[0], 10.5, 0.17, 0.2, 0),
-    k('collection', 0.06, c[0], 11, 0.1, 0.2, 0.02),
-    k('collection', 0.18, c[0], 11, 0.1, 0.2, 0.05),
-    k('collection', 0.32, c[1], 11, 0.1, 0.2, 0.08),
-    k('collection', 0.44, c[1], 11, 0.1, 0.2, 0.11),
-    k('collection', 0.58, c[2], 11, 0.1, 0.2, 0.14),
-    k('collection', 0.7, c[2], 11, 0.1, 0.2, 0.17),
-    k('collection', 0.84, c[3], 11, 0.1, 0.2, 0.2),
-    k('collection', 1, c[3], 11, 0.1, 0.2, 0.23),
-    k('process', 0, cp, 9, 0.15, 0.22, 0.5),
-    k('process', 1, cp, 9.6, 0.15, 0.22, 0.6),
-    k('night', 0, V([10, -0.8, -7]), 21, 0.14, 0.14, 1),
-    k('night', 1, V([10.4, -0.6, -7]), 20, 0.14, 0.14, 1),
-    k('showroom', 0, V([10.8, -1.4, -8]), 24, 0, 0.1, 1),
+    k('hero', 0, c[0], 10.5, 0.14, 0.16, 0.2, 0),
+    k('collection', 0.06, c[0], 10.5, -0.16, 0.12, 0.2, 0.02),
+    k('collection', 0.18, c[0], 10.5, 0.16, 0.12, 0.2, 0.05),
+    k('collection', 0.32, c[1], 10.5, -0.16, 0.12, 0.2, 0.08),
+    k('collection', 0.44, c[1], 10.5, 0.16, 0.12, 0.2, 0.11),
+    k('collection', 0.58, c[2], 10.5, -0.16, 0.12, 0.2, 0.14),
+    k('collection', 0.7, c[2], 10.5, 0.16, 0.12, 0.2, 0.17),
+    k('collection', 0.84, c[3], 10.5, -0.16, 0.12, 0.2, 0.2),
+    k('collection', 1, c[3], 10.5, 0.16, 0.12, 0.2, 0.23),
+    k('process', 0, cp, 9, -0.1, 0.14, 0.22, 0.5),
+    k('process', 1, cp, 9.6, 0.12, 0.14, 0.22, 0.6),
+    k('night', 0, V([10, -0.8, -7]), 21, 0.08, 0.14, 0.14, 1),
+    k('night', 1, V([10.4, -0.6, -7]), 20, -0.08, 0.14, 0.14, 1),
+    k('showroom', 0, V([10.8, -1.4, -8]), 24, 0, 0, 0.1, 1),
   ];
 }
-const look = new THREE.Vector3(), cam = { d: 10, sx: 0, sy: 0, n: 0 };
+const look = new THREE.Vector3(), cam = { d: 10, yaw: 0, sx: 0, sy: 0, n: 0 };
 function sampleKeys(y) {
   let i = 0;
   while (i < KEYS.length - 2 && y > KEYS[i + 1].y) i++;
   const a = KEYS[i], b = KEYS[i + 1];
   const t = b.y > a.y ? smooth(a.y, b.y, y) : (y >= b.y ? 1 : 0);
   look.lerpVectors(a.look, b.look, t);
-  cam.d = lerp(a.d, b.d, t); cam.sx = lerp(a.sx, b.sx, t); cam.sy = lerp(a.sy, b.sy, t); cam.n = lerp(a.n, b.n, t);
+  for (const key of ['d', 'yaw', 'sx', 'sy', 'n']) cam[key] = lerp(a[key], b[key], t);
 }
 
 let W = 0, H = 0;
@@ -633,9 +620,10 @@ if (!reduce) addEventListener('pointermove', (e) => { mouse.x = (e.clientX / inn
 
 /* ---------- 매 프레임 ---------- */
 const damp = (a, b, rate, dt) => lerp(a, b, 1 - Math.exp(-rate * dt));
-const S0 = [0, 0, 0, 0], S1 = [0, 0, 0, 0], PS = [0, 0, 0, 0], hot = new THREE.Color(), tmpC = new THREE.Color();
+const S0 = [0, 0, 0, 0], S1 = [0, 0, 0, 0], PS = [0, 0, 0, 0], hot = new THREE.Color(), tmpC = new THREE.Color(), sunD = new THREE.Vector3();
+const U = wallMat.uniforms;
 const t0 = performance.now();
-let sScroll = scrollY, last = t0, time = 0, lastN = -1, tone = '', lit = '';
+let sScroll = scrollY, last = t0, time = 0, tone = '', lit = '';
 const shapeInto = (e, out) => { for (let s = 0; s < 4; s++) out[s] = e.shape === -1 ? PS[s] : (e.shape === s ? 1 : 0); };
 
 function frame(now) {
@@ -653,7 +641,7 @@ function frame(now) {
   PS[1] = 0.55 * smooth(0.2, 0.4, fP) + 0.45 * smooth(0.4, 0.58, fP);
   const capP = smooth(0.8, 0.92, fP), onP = smooth(0.86, 0.97, fP), onDay = smooth(0.3, 0.72, night);
 
-  // 배치 0 제자리 → 1 카페 → 2 한옥 → 3 계단실 → 4 쇼룸
+  // 배치 0 제자리 → 1 한 줄 → 2 세 점 → 3 나선 → 4 쇼룸. 벽은 밤 배치를 위해 뒤로 물러난다
   const nightTop = posOf('night', 0);
   let lay;
   if (sy < nightTop) lay = smooth(posOf('process', 1), nightTop, sy);
@@ -661,6 +649,9 @@ function frame(now) {
     const f = clamp((sy - nightTop) / Math.max(1, M.night.h - M.vh));
     lay = 1 + smooth(0.33, 0.45, f) + smooth(0.66, 0.78, f) + smooth(posOf('night', 1), posOf('showroom', 0), sy);
   }
+  const wallZ = lerp(-7, -24, clamp(lay));
+  wall.position.z = wallZ;
+  U.uWallZ.value = wallZ;
   const i0 = Math.min(4, Math.floor(lay)), i1 = Math.min(4, i0 + 1), lt = lay - i0;
   const intro = reduce ? 1 : clamp((now - t0 - 200) / 2600);
 
@@ -682,7 +673,6 @@ function frame(now) {
     const on = i0 === 0 ? lerp(isP ? onP : onDay, 1, t) : 1;
     const heat = i0 === 0 && isP ? heatP * (1 - t) : 0;
     const cap = i0 === 0 && isP ? lerp(capP, 1, t) : 1;
-    L.on = Math.max(on, heat);
 
     const ca = PAL[a.color], cb = PAL[b.color];
     L.mat.color.lerpColors(ca.color, cb.color, t);
@@ -698,7 +688,6 @@ function frame(now) {
     L.mat.roughness = 0.03 + 0.3 * heat;
 
     L.filMat.color.copy(WIRE).lerp(tmpC.copy(BULB).multiplyScalar(9), on);
-    // 켜진 전구, 또는 달군 유리 속의 붉은 심
     L.haloMat.color.copy(BULB).multiplyScalar(on * 1.8).add(tmpC.copy(hot).multiplyScalar(heat * 4.5));
     L.halo.position.y = lerp(-0.5, -0.62, smooth(0, 0.2, heat));
     L.fitting.visible = cap > 0.02;
@@ -714,36 +703,42 @@ function frame(now) {
       lightP.color.lerpColors(BULB, HOT_MID, heat);
       lightP.intensity = on * 5 + heat * 3;
     }
-    const cy = L.g.position.y + (isP && i0 === 0 ? -0.8 : CENTER_Y[Math.max(0, b.shape)]);
-    wallMat.uniforms.uLamps.value[k].set(L.g.position.x, cy, L.on, L.g.position.z - WALL_Z);
+
+    // 벽에 넘길 값: 그림자 모양·색, 밤의 번짐
+    const p = L.g.position, raised = p.y > 12 ? 0 : 1;
+    U.uLA.value[k].set(p.x, p.y, p.z, k * 3.1 + L.spin * 0.6);
+    U.uLW.value[k].set(infl[0], infl[1], infl[2], infl[3]);
+    tmpC.copy(WHITE).lerp(L.mat.attenuationColor, 0.88);
+    const near = 1 - smooth(7, 10, Math.abs(p.x - look.x));   // 화면 밖 조명의 그림자만 떠 보이지 않게
+    U.uLT.value[k].set(tmpC.r, tmpC.g, tmpC.b, raised * near * (1 - smooth(0, 0.15, heat)));
+    const cy = p.y + (isP && i0 === 0 ? -0.8 : CENTER_Y[Math.max(0, b.shape)]);
+    U.uLG.value[k].set(p.x, cy, raised * Math.max(on, heat), p.z - wallZ);
   }
   lightC.intensity = smooth(0, 1, lay) * 30;
-  scene.environmentIntensity = lerp(1, 0.14, smooth(0.1, 0.9, night));
+  scene.environmentIntensity = lerp(1, 0.16, smooth(0.5, 0.95, night));
 
-  // 벽과 해
-  if (Math.abs(night - lastN) > 0.002) {
-    const u = wallMat.uniforms;
-    if (night < 0.5) u.uBase.value.lerpColors(WALL_C[0], WALL_C[1], smooth(0, 0.5, night));
-    else u.uBase.value.lerpColors(WALL_C[1], WALL_C[2], smooth(0.5, 1, night));
-    u.uT.value = smooth(0, 0.55, night);
-    u.uSun.value.lerpColors(sunDay, sunDusk, smooth(0.1, 0.55, night));
-    u.uSunAmt.value = lerp(0.42, 0.75, smooth(0, 0.5, night)) * (1 - smooth(0.58, 0.85, night));
-    u.uGlowAmt.value = smooth(0.35, 0.9, night) * 0.3 + 0.3 * smooth(0.3, 0.5, night) * (1 - smooth(0.6, 0.9, night));
-    u.uWordAmt.value = 0.16 * (1 - smooth(0.25, 0.45, night));
-    bloom.strength = lerp(0.7, 0.5, smooth(0.6, 1, night));
-    root.style.setProperty('--bg', '#' + u.uBase.value.getHexString());
-    lastN = night;
-  }
+  // 해: 오후의 흰빛 → 해 질 녘 주황, 낮아지며 옆으로 길게 → 밤에는 옅은 달빛
+  const sunT = smooth(0, 0.55, night), moon = smooth(0.58, 0.85, night);
+  if (night < 0.5) U.uBase.value.lerpColors(WALL_C[0], WALL_C[1], smooth(0, 0.5, night));
+  else U.uBase.value.lerpColors(WALL_C[1], WALL_C[2], smooth(0.5, 1, night));
+  U.uSun.value.lerpColors(SUN.day, SUN.dusk, smooth(0.1, 0.55, night)).lerp(SUN.moon, moon);
+  U.uSunAmt.value = lerp(lerp(0.55, 0.8, smooth(0, 0.5, night)), 0.12, moon);
+  U.uSunD.value.copy(sunD.lerpVectors(SUND[0], SUND[1], sunT)).normalize();
+  U.uShear.value = lerp(0.3, 0.95, sunT);
+  U.uSoft.value = lerp(lerp(0.06, 0.32, sunT), 0.5, moon);
+  U.uGlowAmt.value = smooth(0.35, 0.9, night) * 0.3 + 0.3 * smooth(0.3, 0.5, night) * (1 - smooth(0.6, 0.9, night));
+  U.uTime.value = reduce ? 0 : time;
+  bloom.strength = lerp(0.6, 0.5, smooth(0.6, 1, night));
+  root.style.setProperty('--bg', '#' + U.uBase.value.getHexString());
 
-  // 카메라: 화면 폭이 좁으면 뒤로 물러나고, 조명을 위쪽으로 올린다
+  // 카메라: 조명을 중심으로 조금씩 돈다. 화면 폭이 좁으면 뒤로 물러나고 조명을 위로 올린다
   mouse.sx = damp(mouse.sx, mouse.x, 2.5, dt); mouse.sy = damp(mouse.sy, mouse.y, 2.5, dt);
-  const aspect = W / H, dolly = aspect < 1.1 ? Math.min(2.6, 1.15 / aspect) : 1, par = cam.d / 8;
-  camera.position.set(look.x + mouse.sx * 0.4 * par, look.y + 0.25 - mouse.sy * 0.22 * par, look.z + cam.d * dolly);
+  const aspect = W / H, dolly = aspect < 1.1 ? Math.min(2.6, 1.15 / aspect) : 1;
+  const yaw = cam.yaw + mouse.sx * 0.06, D = cam.d * dolly;
+  camera.position.set(look.x + Math.sin(yaw) * D, look.y + 0.25 - mouse.sy * 0.25 * (cam.d / 8), look.z + Math.cos(yaw) * D);
   camera.lookAt(look);
   if (narrow()) camera.setViewOffset(W, H, 0, cam.sy * H, W, H);
   else camera.setViewOffset(W, H, -cam.sx * W, 0, W, H);
-
-  for (let i = 0; i < 4; i++) wallMat.uniforms.uWordA.value[i] = 1 - smooth(3, 7, Math.abs(look.x - HOME[i].pos[0]));
 
   const nt = night > 0.3 ? 'dark' : 'light';
   if (nt !== tone) root.dataset.tone = tone = nt;
