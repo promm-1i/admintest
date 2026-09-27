@@ -43,7 +43,7 @@
 .kv-progress i{position:absolute;left:0;top:0;height:100%;background:#fff;transition:width .3s}
 .kv-frac{font-size:12px;line-height:21px;color:#fff;letter-spacing:.04em}
 .kv-nav{display:flex;align-items:center;gap:10px}
-.kv-nav button{width:22px;height:22px;background:center/10px no-repeat;opacity:.85}
+.kv-nav button{width:22px;height:22px;background-position:center;background-size:10px;background-repeat:no-repeat;opacity:.85}
 .kv-nav button:hover{opacity:1}
 .kv-prev{background-image:url(./assets/ic/pg-prev.svg);filter:invert(1)}
 .kv-next{background-image:url(./assets/ic/pg-next.svg);filter:invert(1)}
@@ -54,14 +54,14 @@
 .kv-play.paused::after{display:none}
 /* 리워즈 */
 .ma-rewards{margin-top:75px}
-.rewards-list{display:flex;gap:12px;margin-top:25px;padding:41px 0}
+.rewards-list{display:flex;gap:15px;margin-top:24px}
 .rewards-list li{flex:1;background:var(--bg)}
-.rewards-item{display:flex;flex-direction:column;align-items:center;justify-content:center;height:149px;padding:0 14px;text-align:center}
-.rewards-item .ico{width:34px;height:34px;background:center/contain no-repeat}
+.rewards-item{display:flex;flex-direction:column;align-items:center;height:231px;padding:41px 12px;text-align:center}
+.rewards-item .ico{width:54px;height:54px;margin:6px 0 12px;background-position:center;background-size:contain;background-repeat:no-repeat}
 .ri-room{background-image:url(./assets/ic/rw-room.svg)}.ri-dining{background-image:url(./assets/ic/rw-dining.svg)}.ri-shopping{background-image:url(./assets/ic/rw-shopping.svg)}.ri-point{background-image:url(./assets/ic/rw-point.svg)}.ri-donate{background-image:url(./assets/ic/rw-donate.svg)}
-.rewards-item .tit{margin-top:10px;font-size:13.5px;line-height:22.5px;font-weight:600}
-.rewards-item .txt{margin-top:2px;font-size:12px;line-height:19px;color:var(--g1)}
-.rewards-item .txt em{display:block;color:var(--g1)}
+.rewards-item .tit{font-size:18px;line-height:30px;font-weight:600}
+.rewards-item .txt{margin-top:2px;font-size:14px;line-height:23px;color:var(--g1)}
+.rewards-item .txt em{display:block;font-weight:600;color:var(--pri)}
 /* 프로모션 */
 .ma-promotion{margin-top:75px}
 .ma-chips{margin-top:15px;height:48px;align-items:center}
@@ -88,20 +88,22 @@
 .sp-bg{position:absolute;left:0;top:0;width:100%;height:299px;overflow:hidden}
 .sp-bg::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.4)}
 .sp-bg img{width:100%;height:100%;object-fit:cover}
-.ma-sp .ma-inner{position:relative;z-index:2;padding-top:90px}
-.sp-region{margin-top:22px}
-.sp-chips{margin-top:14px}
-.sp-cards{display:flex;gap:27px;margin-top:66px}
-.sp-card{flex:1}
+.ma-sp .ma-inner{position:relative;z-index:2;padding-top:68px}
+.sp-region{display:flex;justify-content:center;margin-top:3px}
+.sp-region .sel-head span{font-size:18px;line-height:30px;font-weight:600}
+.sp-chips{justify-content:center;margin-top:35px}
+.sp-cards{display:flex;gap:27px}
+.sp-swiper{margin-top:109px}
+.sp-card{width:242px;flex:0 0 242px}
 .sp-card .card-img{height:161px}
-.sp-card .badge-row{display:flex;gap:4px;margin-top:12px}
-.sp-card .sp-name{margin-top:8px;font-size:13.5px;line-height:22.5px;font-weight:500}
-.sp-card .sp-hotel{margin-top:2px;font-size:12px;line-height:19px;color:var(--g1)}
-.sp-ctrl{display:flex;align-items:center;gap:14px;margin-top:30px}
+.sp-card .badge-row{display:flex;gap:4px;margin-top:22px}
+.sp-card .badge{height:20px;line-height:20px;font-weight:500}
+.sp-card .sp-name{margin-top:15px;font-size:15px;line-height:27px;font-weight:600}
+.sp-ctrl{display:flex;align-items:center;gap:14px;margin-top:26px}
 .sp-ctrl .bar{position:relative;flex:1;height:2px;background:var(--g3)}
 .sp-ctrl .bar i{position:absolute;left:0;top:0;width:34%;height:100%;background:var(--bk)}
 .sp-ctrl .navs{display:flex;gap:8px}
-.sp-ctrl .navs button{width:32px;height:32px;border:1px solid var(--g3);border-radius:50%;background:center/12px no-repeat}
+.sp-ctrl .navs button{width:32px;height:32px;border:1px solid var(--g3);border-radius:50%;background-position:center;background-size:12px;background-repeat:no-repeat}
 .sp-ctrl .prev{background-image:url(./assets/ic/pg-prev.svg)}
 .sp-ctrl .next{background-image:url(./assets/ic/pg-next.svg)}
 /* 여행지 */
@@ -109,7 +111,9 @@
 .ma-destination .ma-tit-wrap{height:70px;align-items:center}
 .dest-head{display:flex;align-items:center;justify-content:space-between;height:61px;padding-bottom:14px;border-bottom:1px solid var(--g3)}
 .dest-cards{display:flex;gap:16px}
-.dest-card{position:relative;flex:1}
+.ma-sp,.ma-destination,.ma-banner{overflow:hidden}
+.sp-swiper,.dest-swiper,.banner-swiper{overflow:visible}
+.dest-card{position:relative;width:339px;flex:0 0 339px}
 .dest-card .card-img{height:488px}
 .dest-card .card-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 55%,rgba(0,0,0,.6) 100%)}
 .dest-name{position:absolute;left:30px;bottom:24px;z-index:2;font-size:18px;line-height:30px;font-weight:600;color:#fff}
@@ -122,13 +126,13 @@
 .brand-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.35),rgba(20,38,31,.9))}
 .ma-brand .ma-inner{position:relative;z-index:2;height:100%;padding-top:91px}
 .brand-tit-wrap{position:relative}
-.brand-tabs{margin-top:20px}
-.brand-tab-list{display:flex;flex-direction:column;gap:2px;width:320px}
-.brand-tab{display:flex;align-items:center;gap:8px;height:28px;font-size:15px;line-height:27px;font-weight:400;color:rgba(255,255,255,.6);text-align:left;transition:.2s}
+.brand-tabs{margin-top:33px}
+.brand-tab-list{display:flex;flex-direction:column;gap:0;width:320px}
+.brand-tab{display:flex;align-items:center;gap:8px;height:40px;font-size:15px;line-height:27px;font-weight:400;color:#fff;text-align:left;transition:.2s}
 .brand-tab.on{font-weight:700;color:#fff}
 .brand-tab.on::after{content:"";width:12px;height:10px;background:url(./assets/ic/arrow-w.svg) center/contain no-repeat}
-.brand-panel{position:absolute;left:448px;top:91px;width:calc(var(--cont) - 448px)}
-.brand-slogan{font-family:"Playfair Display",serif;font-size:24px;line-height:34px}
+.brand-panel{position:absolute;left:448px;top:98px;width:calc(var(--cont) - 448px)}
+.brand-slogan{font-family:"Playfair Display",serif;font-size:27px;line-height:36px}
 .brand-slogan-ko{margin-top:6px;font-size:12px;line-height:21px;color:rgba(255,255,255,.7)}
 .brand-cards{position:relative;height:320px;margin-top:22px}
 .brand-card{position:absolute;width:336px}
@@ -142,7 +146,7 @@
 .brand-ctrl .bar{position:relative;width:216px;height:2px;background:rgba(255,255,255,.3)}
 .brand-ctrl .bar i{position:absolute;left:0;top:0;width:50%;height:100%;background:#fff}
 .brand-ctrl .navs{display:flex;gap:8px}
-.brand-ctrl .navs button{width:32px;height:32px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background:center/12px no-repeat;filter:invert(1)}
+.brand-ctrl .navs button{width:32px;height:32px;border:1px solid rgba(255,255,255,.4);border-radius:50%;background-position:center;background-size:12px;background-repeat:no-repeat;filter:invert(1)}
 .brand-ctrl .prev{background-image:url(./assets/ic/pg-prev.svg)}
 .brand-ctrl .next{background-image:url(./assets/ic/pg-next.svg)}
 /* 기획 배너 */
@@ -151,19 +155,19 @@
 .ma-ad .ad-img img{width:100%;height:100%;object-fit:cover}
 /* 배너 3 */
 .ma-banner{margin-top:74px}
-.banner-row{display:flex;gap:16px}
-.banner-card{position:relative;flex:1}
+.banner-row{display:flex;gap:8px}
+.banner-card{position:relative;width:521px;flex:0 0 521px}
 .banner-card .card-img{height:255px}
 .banner-card .card-img::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.28)}
 .banner-info{position:absolute;left:28px;bottom:26px;z-index:2;color:#fff}
 .banner-info .bt{font-size:18px;line-height:28px;font-weight:600}
 .banner-info .bs{margin-top:4px;font-size:12px;line-height:21px;opacity:.9}
-.banner-ctrl{display:flex;align-items:center;justify-content:flex-end;gap:14px;height:54px}
+.banner-ctrl{display:flex;align-items:center;justify-content:flex-end;gap:14px;height:36px;margin-top:18px}
 .banner-ctrl .bar{position:relative;width:132px;height:2px;background:var(--g3)}
 .banner-ctrl .bar i{position:absolute;left:0;top:0;width:33%;height:100%;background:var(--bk)}
 .banner-ctrl .frac{font-size:12px;color:var(--g1)}
 .banner-ctrl .navs{display:flex;gap:8px}
-.banner-ctrl .navs button{width:32px;height:32px;border:1px solid var(--g3);border-radius:50%;background:center/12px no-repeat}
+.banner-ctrl .navs button{width:32px;height:32px;border:1px solid var(--g3);border-radius:50%;background-position:center;background-size:12px;background-repeat:no-repeat}
 .banner-ctrl .prev{background-image:url(./assets/ic/pg-prev.svg)}
 .banner-ctrl .next{background-image:url(./assets/ic/pg-next.svg)}
 /* 공지 */
@@ -172,19 +176,19 @@
 .notice-swiper{flex:1;height:54px;overflow:hidden}
 .notice-item{display:flex;align-items:center;gap:16px;height:54px}
 .notice-left{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.notice-txt01{display:inline-flex;align-items:center;height:22px;padding:0 8px;border:1px solid var(--g3);font-size:11px;line-height:22px;color:var(--g1)}
+.notice-txt01{display:inline-flex;align-items:center;height:21px;font-size:12px;line-height:21px;font-weight:500;color:var(--pri)}
 .notice-txt02{font-size:12px;line-height:21px;font-weight:500;color:var(--g1)}
-.notice-info-txt{flex:1;font-size:13.5px;line-height:22.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.notice-date{font-size:12px;line-height:21px;color:var(--g2)}
+.notice-info-txt{flex:1;font-size:12px;line-height:21px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.notice-date{font-size:12px;line-height:24px;color:var(--g1)}
 .notice-ctrl{display:flex;align-items:center;gap:8px;margin-left:22px}
 .notice-ctrl .frac{font-size:12px;color:var(--g2)}
-.notice-ctrl button{width:20px;height:20px;background:center/10px no-repeat}
+.notice-ctrl button{width:20px;height:20px;background-position:center;background-size:10px;background-repeat:no-repeat}
 .notice-up{background-image:url(./assets/ic/chev-down.svg);transform:rotate(180deg)}
 .notice-down{background-image:url(./assets/ic/chev-down.svg)}
 /* SEO 문단 */
 .ma-seo{margin-top:60px;margin-bottom:60px;height:120px;display:flex;align-items:center;background:var(--bg)}
 .ma-seo .ma-inner{width:var(--cont)}
-.seo-txt{font-size:12px;line-height:20px;color:var(--g2)}
+.seo-txt{font-size:12px;line-height:21px;color:var(--g1)}
 @media(max-width:1100px){
 .kv-info{padding:0 24px}
 .brand-panel{left:auto;right:24px;width:52%}
@@ -203,7 +207,7 @@
 .rewards-list{flex-wrap:wrap;gap:8px;margin-top:28px}
 .rewards-list li{flex:0 0 calc(50% - 4px)}
 .rewards-list li:last-child{flex:1 0 100%}
-.rewards-item{height:124px}
+.rewards-item{height:196px;padding:28px 12px}
 .promo-body{flex-direction:column;gap:12px;margin-top:34px}
 .promo-main{width:100%}
 .promo-main .card-img{height:240px}
@@ -320,18 +324,28 @@
 <div class="ma-inner" data-motion>
   <div class="ma-tit-wrap"><div class="ma-tit-row"><div class="ma-tit01 white">Special Offers</div><div class="ma-sub-tit02 white">스페셜 오퍼</div></div></div>
   <div class="sp-region"><div class="sel white"><button type="button" class="sel-head"><span>한국</span></button><div class="sel-body"><button type="button" class="on">한국</button><button type="button">아시아</button><button type="button">미국</button></div></div></div>
-  <div class="sp-chips chips white"><button type="button" class="chip on">서울/광명</button><button type="button" class="chip">부산</button><button type="button" class="chip">제주</button><button type="button" class="chip">부여</button><button type="button" class="chip">대전</button><button type="button" class="chip">광주</button><button type="button" class="chip">김해</button><button type="button" class="chip">속초</button><button type="button" class="chip">평산</button></div>
+  <div class="sp-chips chips white"><button type="button" class="chip on">서울/광명</button><button type="button" class="chip">부산</button><button type="button" class="chip">제주</button><button type="button" class="chip">부여</button><button type="button" class="chip">대전</button><button type="button" class="chip">광주</button><button type="button" class="chip">김해</button><button type="button" class="chip">속초</button><button type="button" class="chip">울산</button></div>
   <div class="swiper sp-swiper"><div class="swiper-wrapper"><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-1.jpg" alt="" loading="lazy"></div>
-      <div class="badge-row"><span class="badge">리워즈 포인트 사용</span></div>
-      <div class="sp-name">룸 온리</div><div class="sp-hotel">서라 시그니처 바이 서라호텔</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-2.jpg" alt="" loading="lazy"></div>
-      <div class="badge-row"><span class="badge">리워즈 포인트 사용</span></div>
-      <div class="sp-name">Lounge Special</div><div class="sp-hotel">더그랜드서라 서울</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-3.jpg" alt="" loading="lazy"></div>
-      <div class="badge-row"><span class="badge">리워즈 포인트 사용</span></div>
-      <div class="sp-name">얼리버드 14일 전</div><div class="sp-hotel">서라 시그니처 바이 서라호텔</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-4.jpg" alt="" loading="lazy"></div>
-      <div class="badge-row"><span class="badge">리워즈 포인트 사용</span></div>
-      <div class="sp-name">WORLD Signature</div><div class="sp-hotel">서라호텔 월드</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-5.jpg" alt="" loading="lazy"></div>
-      <div class="badge-row"><span class="badge">리워즈 포인트 사용</span></div>
-      <div class="sp-name">Autumn Strolls at STAY</div><div class="sp-hotel">서라호텔 제주</div></a></div></div></div>
+      <div class="badge-row"><span class="badge">서라 시그니처 바이 서라호텔</span></div>
+      <div class="sp-name">룸 온리</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-2.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">더그랜드서라 서울</span></div>
+      <div class="sp-name">Lounge Special</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-3.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">서라 시그니처 바이 서라호텔</span></div>
+      <div class="sp-name">얼리버드 14일 전</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-4.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">서라호텔 월드</span></div>
+      <div class="sp-name">WORLD Signature</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-5.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">서라호텔 제주</span></div>
+      <div class="sp-name">Autumn Strolls at STAY</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-6.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">시그나라 서울</span></div>
+      <div class="sp-name">스위트 업그레이드</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-7.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">서라시티호텔 마포</span></div>
+      <div class="sp-name">브렉퍼스트 인클루드</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-8.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">서라호텔 월드</span></div>
+      <div class="sp-name">연박 3박 특가</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-9.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">아르테 빌라스 제주</span></div>
+      <div class="sp-name">위크데이 리트릿</div></a></div><div class="swiper-slide sp-card"><a href="./offer-view.html"><div class="card-img"><img src="./assets/sp-10.jpg" alt="" loading="lazy"></div>
+      <div class="badge-row"><span class="badge">더그랜드서라 서울</span></div>
+      <div class="sp-name">다이닝 크레딧</div></a></div></div></div>
   <div class="sp-ctrl"><div class="bar"><i></i></div><div class="navs"><button type="button" class="prev" aria-label="이전"></button><button type="button" class="next" aria-label="다음"></button></div></div>
 </div></section><section class="ma-wrap ma-destination" id="destination"><div class="ma-inner" data-motion>
   <div class="ma-tit-wrap">
@@ -339,10 +353,10 @@
     <div class="ma-btns chips sm"><button type="button" class="chip on">국내</button><button type="button" class="chip">해외</button></div>
   </div>
   <div class="dest-head">
-    <div class="sel"><button type="button" class="sel-head"><span>서울/광명</span></button><div class="sel-body"><button type="button" class="on">서울/광명</button><button type="button">부산</button><button type="button">제주</button><button type="button">부여</button><button type="button">대전</button><button type="button">광주</button></div></div>
+    <div class="sel"><button type="button" class="sel-head"><span>서울/광명</span></button><div class="sel-body"><button type="button" class="on">서울/광명</button><button type="button">부산</button><button type="button">제주</button><button type="button">부여</button><button type="button">대전</button><button type="button">광주</button><button type="button">김해</button><button type="button">속초</button><button type="button">울산</button></div></div>
     <div class="navs sp-ctrl"><div class="navs"><button type="button" class="prev dest-prev" aria-label="이전"></button><button type="button" class="next dest-next" aria-label="다음"></button></div></div>
   </div>
-  <div class="swiper dest-swiper"><div class="swiper-wrapper"><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-1.jpg" alt="" loading="lazy"></div><div class="dest-name">서울/광명</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-2.jpg" alt="" loading="lazy"></div><div class="dest-name">부산</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-3.jpg" alt="" loading="lazy"></div><div class="dest-name">제주</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-4.jpg" alt="" loading="lazy"></div><div class="dest-name">부여</div></a></div></div></div>
+  <div class="swiper dest-swiper"><div class="swiper-wrapper"><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-1.jpg" alt="" loading="lazy"></div><div class="dest-name">서울/광명</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-2.jpg" alt="" loading="lazy"></div><div class="dest-name">부산</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-3.jpg" alt="" loading="lazy"></div><div class="dest-name">제주</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-4.jpg" alt="" loading="lazy"></div><div class="dest-name">부여</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-5.jpg" alt="" loading="lazy"></div><div class="dest-name">대전</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-6.jpg" alt="" loading="lazy"></div><div class="dest-name">광주</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-7.jpg" alt="" loading="lazy"></div><div class="dest-name">김해</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-8.jpg" alt="" loading="lazy"></div><div class="dest-name">속초</div></a></div><div class="swiper-slide dest-card"><a href="./hotel-search.html"><div class="card-img"><img src="./assets/dest-9.jpg" alt="" loading="lazy"></div><div class="dest-name">울산</div></a></div></div></div>
 </div></section><section class="ma-wrap ma-brand" id="brand"><div class="brand-bg"><div class="bg-img on"><img src="./assets/brand-bg-signara.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-the-grand.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-seora-hotels.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-s7.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-breez.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-city.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-arte-villas.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-resort.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-vela.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-affiliated.jpg" alt="" loading="lazy"></div><div class="bg-img"><img src="./assets/brand-bg-skyhill.jpg" alt="" loading="lazy"></div></div>
 <div class="ma-inner">
   <div class="brand-tit-wrap">
@@ -471,7 +485,7 @@
   var $=function(s,c){return (c||document).querySelector(s)},$$=function(s,c){return Array.prototype.slice.call((c||document).querySelectorAll(s))};
   /* 히어로 (fade, 5초 자동) */
   var kvTotal=8;
-  var kv=new Swiper('.kv-swiper',{effect:'fade',fadeEffect:{crossFade:true},speed:800,loop:true,
+  var kv=new Swiper('.kv-swiper',{speed:500,loop:true,
     autoplay:{delay:5000,disableOnInteraction:false},
     navigation:{nextEl:'.kv-next',prevEl:'.kv-prev'},
     on:{slideChange:function(){var i=this.realIndex+1;$('.kv-frac .cur').textContent=('0'+i).slice(-1);$('.kv-progress i').style.width=(i/kvTotal*100)+'%'}}});
@@ -481,16 +495,16 @@
     if(play.classList.contains('paused')){kv.autoplay.start();play.classList.remove('paused');play.setAttribute('aria-label','일시 정지')}
     else{kv.autoplay.stop();play.classList.add('paused');play.setAttribute('aria-label','재생')}});
   /* 프로모션 */
-  var pr=new Swiper('.promo-swiper',{slidesPerView:'auto',spaceBetween:16,
+  var pr=new Swiper('.promo-swiper',{slidesPerView:'auto',spaceBetween:28,speed:500,
     on:{progress:function(p){$('.promo-ctrl .bar i').style.width=(20+p*80)+'%'},
         slideChange:function(){$('.promo-ctrl .frac .cur').textContent=this.activeIndex+1}}});
   /* 스페셜 오퍼 */
-  new Swiper('.sp-swiper',{slidesPerView:'auto',spaceBetween:27,navigation:{nextEl:'.sp-ctrl .next',prevEl:'.sp-ctrl .prev'},
-    on:{progress:function(p){$('.sp-ctrl .bar i').style.width=(34+p*66)+'%'}}});
+  new Swiper('.sp-swiper',{slidesPerView:'auto',spaceBetween:27,speed:500,navigation:{nextEl:'.sp-ctrl .next',prevEl:'.sp-ctrl .prev'},
+    on:{progress:function(p){$('.sp-ctrl .bar i').style.width=(40+p*60)+'%'}}});
   /* 여행지 */
-  new Swiper('.dest-swiper',{slidesPerView:'auto',spaceBetween:16,navigation:{nextEl:'.dest-next',prevEl:'.dest-prev'}});
+  new Swiper('.dest-swiper',{slidesPerView:'auto',spaceBetween:16,speed:500,navigation:{nextEl:'.dest-next',prevEl:'.dest-prev'}});
   /* 배너 */
-  var bn=new Swiper('.banner-swiper',{slidesPerView:'auto',spaceBetween:16,loop:false,
+  var bn=new Swiper('.banner-swiper',{slidesPerView:'auto',spaceBetween:8,speed:500,loop:false,
     on:{slideChange:function(){$('.banner-ctrl .frac .cur').textContent=this.activeIndex+1;$('.banner-ctrl .bar i').style.width=((this.activeIndex+1)/3*100)+'%'}}});
   /* 공지 세로 슬라이드 */
   var nt=new Swiper('.notice-swiper',{direction:'vertical',loop:true,autoplay:{delay:4000,disableOnInteraction:false},
