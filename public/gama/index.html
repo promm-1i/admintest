@@ -228,7 +228,6 @@ footer { padding: 0 var(--gut) 24px; font-size: 12px; color: var(--fg2); }
 
 <script type="module">
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
@@ -249,9 +248,44 @@ const dpr = () => Math.min(devicePixelRatio || 1, narrow() ? 1.5 : 1.75);
 
 const scene = new THREE.Scene();
 scene.background = C('#0b0f18');
+// 반사에 비칠 방: 앞쪽 왼편 위에 창이 있다 (벽에 떨어지는 햇빛과 같은 방향)
 const pmrem = new THREE.PMREMGenerator(renderer);
-scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+function roomEnv(win, room, floor, lampGlow, patch) {
+  const s = new THREE.Scene();
+  const box = new THREE.Mesh(new THREE.BoxGeometry(40, 20, 40), new THREE.MeshBasicMaterial({ color: room, side: THREE.BackSide }));
+  box.position.y = 5;
+  const fl = new THREE.Mesh(new THREE.PlaneGeometry(40, 40), new THREE.MeshBasicMaterial({ color: floor }));
+  fl.rotation.x = -Math.PI / 2; fl.position.y = -4.9;
+  s.add(box, fl);
+  const w = new THREE.Group(), pane = new THREE.MeshBasicMaterial({ color: win, side: THREE.DoubleSide });
+  for (const [x, y] of [[-1.85, 2.3], [1.85, 2.3], [-1.85, -2.3], [1.85, -2.3]]) {
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(3.5, 4.4), pane); m.position.set(x, y, 0); w.add(m);
+  }
+  w.position.set(-6.5, 5, 19.8);
+  s.add(w);
+  if (patch) {   // 맞은편 벽에 떨어진 볕
+    const m = new THREE.Mesh(new THREE.PlaneGeometry(8, 10), new THREE.MeshBasicMaterial({ color: patch }));
+    m.position.set(5, -1, -19.8);
+    s.add(m);
+  }
+  if (lampGlow) {
+    const bulb = new THREE.MeshBasicMaterial({ color: lampGlow });
+    for (const [x, y, z] of [[-6, 4, -8], [5, 6, -10], [9, 3, 6], [-10, 5, 4], [0, 7, -14]]) {
+      const b = new THREE.Mesh(new THREE.SphereGeometry(0.8, 16, 8), bulb); b.position.set(x, y, z); s.add(b);
+    }
+  }
+  return pmrem.fromScene(s, 0.02).texture;
+}
+const hdr = (h, k) => C(h).multiplyScalar(k);
+const ENV = [
+  roomEnv(hdr('#fff3e4', 12), hdr('#403d38', 1), hdr('#211e1b', 1), null, hdr('#fff0dc', 2.6)),
+  roomEnv(hdr('#ff8a48', 7), hdr('#1d2336', 1), hdr('#141418', 1), null, hdr('#ff8a48', 1.6)),
+  roomEnv(hdr('#33456e', 0.5), hdr('#07090f', 1), hdr('#050507', 1), hdr('#ffa860', 7)),
+];
 pmrem.dispose();
+scene.environment = ENV[0];
+const sunLight = new THREE.DirectionalLight('#fff2df', 0);
+scene.add(sunLight, sunLight.target);
 const camera = new THREE.PerspectiveCamera(32, innerWidth / innerHeight, 0.1, 600);
 
 /* ---------- 유리 갓: 네 모양과 가마에서 막 떠낸 덩어리를 같은 정점 수로 만들어 서로 바뀌게 한다 ---------- */
@@ -336,7 +370,7 @@ class Helix extends THREE.Curve {
   getPoint(t, out = new THREE.Vector3()) { const a = t * Math.PI * 7; return out.set(Math.cos(a) * 0.075, 0.15 - t * 0.3, Math.sin(a) * 0.075); }
 }
 const filGeo = new THREE.TubeGeometry(new Helix(), 160, 0.012, 6);
-const brass = new THREE.MeshStandardMaterial({ color: '#b98b4e', metalness: 1, roughness: 0.3 });
+const brass = new THREE.MeshStandardMaterial({ color: '#a47e45', metalness: 1, roughness: 0.38 });
 const socketMat = new THREE.MeshStandardMaterial({ color: '#2a2521', metalness: 0.6, roughness: 0.5 });
 const FABRIC = C('#1d1b19'), STEEL = C('#9ea4aa'), WIRE = C('#3a2c20'), BULB = C('#ffa95e'), WHITE = C('#ffffff');
 const HALO = (() => {
@@ -346,6 +380,38 @@ const HALO = (() => {
   r.addColorStop(0.5, 'rgba(255,255,255,0.1)'); r.addColorStop(1, 'rgba(255,255,255,0)');
   g.fillStyle = r; g.fillRect(0, 0, 128, 128);
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+})();
+
+// 입으로 불어 만든 유리의 표면: 대롱을 돌리며 생긴 가로 물결, 약한 얼룩, 작은 기포
+const RIPPLE = (() => {
+  const w = 256, h = 512, c = document.createElement('canvas');
+  c.width = w; c.height = h;
+  const H = new Float32Array(w * h);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const u = (x / w) * Math.PI * 2, v = y / h;
+    H[y * w + x] = Math.sin(v * 140 + Math.sin(u * 3) * 1.6) * 0.5 + Math.sin(v * 57 + u * 2) * 0.35 + Math.sin(u * 5 + v * 21) * 0.25;
+  }
+  let seed = 7;
+  const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+  for (let k = 0; k < 90; k++) {
+    const cx = rnd() * w, cy = rnd() * h, r = 1.2 + rnd() * 2.2;
+    for (let y = Math.floor(cy - r); y <= cy + r; y++) for (let x = Math.floor(cx - r); x <= cx + r; x++) {
+      const d = Math.hypot(x - cx, y - cy);
+      if (d < r && y >= 0 && y < h) H[y * w + ((x + w) % w)] += 1.6 * Math.cos((d / r) * Math.PI * 0.5);
+    }
+  }
+  const g = c.getContext('2d'), img = g.createImageData(w, h);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const dx = H[y * w + (x + 1) % w] - H[y * w + (x - 1 + w) % w];
+    const dy = H[Math.min(h - 1, y + 1) * w + x] - H[Math.max(0, y - 1) * w + x];
+    const nx = -dx, ny = -dy, nz = 2, l = Math.hypot(nx, ny, nz), i = (y * w + x) * 4;
+    img.data[i] = (nx / l * 0.5 + 0.5) * 255; img.data[i + 1] = (ny / l * 0.5 + 0.5) * 255;
+    img.data[i + 2] = (nz / l * 0.5 + 0.5) * 255; img.data[i + 3] = 255;
+  }
+  g.putImageData(img, 0, 0);
+  const t = new THREE.CanvasTexture(c);
+  t.wrapS = t.wrapT = THREE.RepeatWrapping;
+  return t;
 })();
 
 /* ---------- 유리색 ---------- */
@@ -362,12 +428,25 @@ const HOT_LO = C('#5a0800'), HOT_MID = C('#ff3d0a'), HOT_HI = C('#ff8a2a');
 const lamps = [];
 for (let i = 0; i < 8; i++) {
   const g = new THREE.Group();
-  const mat = new THREE.MeshPhysicalMaterial({ transmission: 1, thickness: 0.2, roughness: 0.03, ior: 1.5, specularIntensity: 1, dispersion: narrow() ? 0 : 0.15 });
-  // 빛나는 유리는 정면이 밝고 노랗게, 가장자리는 검붉게
+  const mat = new THREE.MeshPhysicalMaterial({
+    transmission: 1, thickness: 0.22, roughness: 0.03, ior: 1.5, specularIntensity: 1, dispersion: narrow() ? 0 : 0.15,
+    normalMap: RIPPLE, normalScale: new THREE.Vector2(0.14, 0.14),
+  });
+  // 빛나는 유리: 전구에 가까울수록 밝고, 정면은 노랗게, 가장자리는 검붉게
   mat.onBeforeCompile = (sh) => {
-    sh.fragmentShader = sh.fragmentShader.replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
+    sh.vertexShader = sh.vertexShader
+      .replace('#include <common>', '#include <common>\nvarying vec3 vLocalP;')
+      .replace('#include <morphtarget_vertex>', '#include <morphtarget_vertex>\nvLocalP = transformed;');
+    // 비스듬히 볼수록 유리를 길게 지나므로 가장자리가 짙고 더 휘어 보인다
+    const tf = THREE.ShaderChunk.transmission_fragment.replace('material.thickness = thickness;',
+      'material.thickness = thickness / max(0.22, abs(dot(normalize(normal), normalize(vViewPosition))));');
+    sh.fragmentShader = sh.fragmentShader
+      .replace('#include <transmission_fragment>', tf)
+      .replace('#include <common>', '#include <common>\nvarying vec3 vLocalP;')
+      .replace('#include <emissivemap_fragment>', `#include <emissivemap_fragment>
       float facing = pow(abs(dot(normalize(normal), normalize(vViewPosition))), 1.4);
-      totalEmissiveRadiance *= mix(vec3(0.5, 0.2, 0.1), vec3(1.4, 1.22, 1.0), facing);`);
+      float db = length(vLocalP - vec3(0.0, -0.55, 0.0));
+      totalEmissiveRadiance *= mix(vec3(0.5, 0.2, 0.1), vec3(1.4, 1.22, 1.0), facing) * mix(0.3, 1.8, 1.0 / (1.0 + db * db * 1.2));`);
   };
   mat.customProgramCacheKey = () => 'gama-glass';
   const glass = new THREE.Mesh(glassGeo, mat);
@@ -429,7 +508,7 @@ const wallMat = new THREE.ShaderMaterial({
     uBase: { value: WALL_C[0].clone() }, uSun: { value: C('#fff4e6') }, uGlow: { value: C('#ffa85e') },
     uSunD: { value: new THREE.Vector3(0.32, -0.28, -1).normalize() },
     uSunAmt: { value: 0.55 }, uSoft: { value: 0.06 }, uShear: { value: 0.3 }, uGlowAmt: { value: 0 },
-    uWallZ: { value: -7 }, uTime: { value: 0 },
+    uWallZ: { value: -7 }, uTime: { value: 0 }, uDefocus: { value: 0.08 },
     uLA: { value: vec4s() }, uLW: { value: vec4s() }, uLT: { value: vec4s() }, uLG: { value: vec4s() },
     uProf: { value: PROF },
   },
@@ -438,7 +517,7 @@ const wallMat = new THREE.ShaderMaterial({
     void main() { vec4 w = modelMatrix * vec4(position, 1.0); vW = w.xyz; gl_Position = projectionMatrix * viewMatrix * w; }`,
   fragmentShader: /* glsl */`
     uniform vec3 uBase, uSun, uGlow, uSunD;
-    uniform float uSunAmt, uSoft, uShear, uGlowAmt, uWallZ, uTime;
+    uniform float uSunAmt, uSoft, uShear, uGlowAmt, uWallZ, uTime, uDefocus;
     uniform vec4 uLA[8], uLW[8], uLT[8], uLG[8];
     uniform sampler2D uProf;
     varying vec3 vW;
@@ -451,31 +530,16 @@ const wallMat = new THREE.ShaderMaterial({
     float box(vec2 q, vec2 h, float s) { vec2 d = abs(q) - h; return 1.0 - smoothstep(-s, s, max(d.x, d.y)); }
 
     // 조명 자리(14 간격)마다 창 하나. 조명 그림자는 오른쪽 아래 칸에 떨어진다
-    float windowLight(vec2 p) {
+    float windowLight(vec2 p, float s) {
       vec2 off = uSunD.xy * ((uWallZ + 0.5) / uSunD.z);
       vec2 q = p - off - vec2(0.0, 1.4);
       q.x -= floor(q.x / 14.0 + 0.5) * 14.0;
       q -= vec2(0.2, -0.8);
       q.x -= q.y * uShear;
-      float s = uSoft;
       float m = box(q, vec2(2.8, 3.2), s);
       m *= smoothstep(0.08, 0.1 + s * 1.2, abs(q.x + 2.1));
       m *= smoothstep(0.07, 0.09 + s * 1.2, abs(q.y - 2.0));
       return m;
-    }
-
-    // 유리를 지난 빛이 벽에 맺는 무늬
-    float caustic(vec2 p, float t) {
-      vec2 i = p;
-      float c = 1.0;
-      for (int n = 0; n < 4; n++) {
-        float tt = t * (1.0 - (3.5 / float(n + 1)));
-        i = p + vec2(cos(tt - i.x) + sin(tt + i.y), sin(tt - i.y) + cos(tt + i.x));
-        c += 1.0 / length(vec2(p.x / (sin(i.x + tt) / 0.005), p.y / (cos(i.y + tt) / 0.005)));
-      }
-      c /= 4.0;
-      c = 1.17 - pow(c, 1.4);
-      return pow(abs(c), 8.0);
     }
 
     float radius(float h, vec4 w) {
@@ -497,30 +561,38 @@ const wallMat = new THREE.ShaderMaterial({
         if (T.w < 0.01) continue;
         vec2 u = p - (A.xy + dxy * (A.z - uWallZ));
         if (abs(u.x) > 3.5 || u.y < -3.6) continue;
-        float sd = 0.02 + uSoft * 0.5 + 0.015 * (A.z - uWallZ);
+        float sd = 0.02 + uSoft * 0.5 + uDefocus + 0.015 * (A.z - uWallZ);
         float cord = u.y > 0.3 ? 1.0 - smoothstep(0.02, 0.03 + sd, abs(u.x)) : 0.0;
         vec2 v = u - dd * dot(u, dd) * (1.0 - 1.0 / sqrt(1.0 + k * k));
         float h = -v.y;
         float r = (h > 0.0 && h < 3.0) ? radius(h, uLW[i]) : 0.0;
         float inGlass = r > 0.03 ? 1.0 - smoothstep(r - sd, r + sd, abs(v.x)) : 0.0;
         float cap = box(v - vec2(0.0, 0.12), vec2(0.27, 0.24), sd);
+        float socket = box(v - vec2(0.0, -0.13), vec2(0.1, 0.17), sd) + 0.35 * box(v - vec2(0.0, -0.5), vec2(0.075, 0.15), sd);
+        // 얇은 유리 껍질: 안쪽은 대부분 통과하고, 유리가 빛과 나란해지는 가장자리에 어두운 테,
+        // 그 바로 안쪽에 빛이 모인 밝은 선, 손으로 분 물결이 만든 일렁이는 무늬
         float s = clamp(abs(v.x) / max(r, 0.05), 0.0, 1.0);
-        float ring = exp(-pow((s - 0.8) / 0.09, 2.0));
-        float edge = smoothstep(0.84, 1.0, s);
-        float cau = caustic(v * 2.4 - 250.0 + A.w, uTime * 0.3 + A.w);
-        vec3 through = T.rgb * (0.46 - 0.3 * edge + cau * 1.5 * (1.0 - 0.6 * s) + ring * 0.75);
+        float rim = smoothstep(0.86, 0.97, s);
+        float arc = exp(-pow((s - 0.82) / 0.05, 2.0)) * (0.7 + 0.3 * sign(v.x * dd.x));
+        float wave = noise(vec2(v.y * 7.0 + A.w, v.x * 1.6 + A.w * 0.3)) * 0.65 + noise(v * 13.0 - A.w) * 0.35;
+        float ripple = smoothstep(0.5, 0.92, wave);
+        vec3 through = T.rgb * (0.8 - 0.6 * rim + 0.85 * arc + 0.6 * ripple * (1.0 - s * 0.7));
         light *= mix(vec3(1.0), through, inGlass * T.w);
-        light *= 1.0 - max(cap, cord) * T.w;
+        light *= 1.0 - clamp(max(cap, cord) + socket * inGlass, 0.0, 1.0) * T.w;
       }
       return light;
     }
 
     void main() {
       vec2 p = vW.xy;
+      // 석회 미장: 크게 번진 얼룩, 흙손 자국, 고운 결
+      float lf = noise(p * 0.12) * 0.6 + noise(p * 0.31 + 7.0) * 0.4;
+      float trowel = noise(vec2(p.x * 0.55 + p.y * 0.35, p.y * 2.2 - p.x * 0.4));
       float n = noise(p * 0.8) * 0.55 + noise(p * 2.9) * 0.3 + noise(p * 10.0) * 0.15;
-      vec3 c = uBase * (0.8 + 0.2 * smoothstep(-12.0, 8.0, p.y)) * (0.95 + 0.1 * n);
-      float win = windowLight(p) * uSunAmt;
-      if (win > 0.001) c += uSun * win * lampShadows(p) * (0.9 + 0.14 * n);
+      vec3 c = uBase * (0.8 + 0.2 * smoothstep(-12.0, 8.0, p.y)) * (0.9 + 0.14 * lf) * (0.97 + 0.05 * trowel) * (0.97 + 0.06 * n);
+      float win = windowLight(p, uSoft + uDefocus) * uSunAmt;
+      if (win > 0.001) c += uSun * win * lampShadows(p) * (0.9 + 0.1 * lf + 0.06 * n);
+      c += uSun * uBase * windowLight(p, 2.4) * uSunAmt * 0.35;   // 볕 든 자리에서 번지는 반사광
       vec3 g = vec3(0.0);
       for (int i = 0; i < 8; i++) {
         vec4 G = uLG[i];
@@ -550,8 +622,11 @@ const grain = new ShaderPass({
     uniform sampler2D tDiffuse; uniform float uTime; varying vec2 vUv;
     float h(vec2 p) { return fract(sin(dot(p, vec2(12.9898, 78.233)) + uTime) * 43758.5453); }
     void main() {
-      vec4 c = texture2D(tDiffuse, vUv);
       vec2 d = vUv - 0.5;
+      vec2 ca = d * dot(d, d) * 0.012;
+      vec4 c = texture2D(tDiffuse, vUv);
+      c.r = texture2D(tDiffuse, vUv + ca).r;
+      c.b = texture2D(tDiffuse, vUv - ca).b;
       c.rgb *= 1.0 - 0.6 * dot(d, d);
       c.rgb += (h(gl_FragCoord.xy) - 0.5) * 0.04;
       gl_FragColor = c;
@@ -715,7 +790,8 @@ function frame(now) {
     U.uLG.value[k].set(p.x, cy, raised * Math.max(on, heat), p.z - wallZ);
   }
   lightC.intensity = smooth(0, 1, lay) * 30;
-  scene.environmentIntensity = lerp(1, 0.16, smooth(0.5, 0.95, night));
+  scene.environment = ENV[night < 0.35 ? 0 : night < 0.8 ? 1 : 2];
+  scene.environmentIntensity = night < 0.35 ? 1 : night < 0.8 ? 1.1 : 0.9;
 
   // 해: 오후의 흰빛 → 해 질 녘 주황, 낮아지며 옆으로 길게 → 밤에는 옅은 달빛
   const sunT = smooth(0, 0.55, night), moon = smooth(0.58, 0.85, night);
@@ -728,6 +804,11 @@ function frame(now) {
   U.uSoft.value = lerp(lerp(0.06, 0.32, sunT), 0.5, moon);
   U.uGlowAmt.value = smooth(0.35, 0.9, night) * 0.3 + 0.3 * smooth(0.3, 0.5, night) * (1 - smooth(0.6, 0.9, night));
   U.uTime.value = reduce ? 0 : time;
+  U.uDefocus.value = lerp(0.08, 0.03, moon);
+  sunLight.color.copy(U.uSun.value);
+  sunLight.intensity = U.uSunAmt.value * lerp(4, 1.2, moon);
+  sunLight.position.copy(look).addScaledVector(U.uSunD.value, -20);
+  sunLight.target.position.copy(look);
   bloom.strength = lerp(0.6, 0.5, smooth(0.6, 1, night));
   root.style.setProperty('--bg', '#' + U.uBase.value.getHexString());
 
