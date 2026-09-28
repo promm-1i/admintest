@@ -23,11 +23,19 @@
 .bd.h-story{min-height:1535px}
 .bd.h-guest{min-height:1430px}
 .bd.h-nview{min-height:835px}
-@media (max-width:1000px){.bd.h-news{min-height:1747px}}
 @media (max-width:889px){.bd.h-guest{min-height:1683px}}
-@media (max-width:866px){.bd.h-news{min-height:4076px}.bd.h-story{min-height:5007px}}
 @media (max-width:361px){.bd.h-guest{min-height:1725px}}
-@media (max-width:375px){.bd.h-notice{min-height:686px}.bd.h-news{min-height:3693px}.bd.h-story{min-height:3296px}}
+@media (max-width:375px){.bd.h-notice{min-height:686px}}
+/* 언론보도 · 스토리북: 원본은 썸네일이 폭 따라 늘어 iframe 높이가 폭에 비례한다(2026-09-29 새로 불러 잰 값을 구간별 직선으로).
+   스토리북 360~1440 ±3px · 언론보도 600~1440 ±8px. 언론보도 600 미만은 원본이 불러올 때마다 수십 px 흔들려 평균값. */
+@media (max-width:1279px){.bd.h-news{min-height:calc(1651px + 10vw)}}
+@media (max-width:1099px){.bd.h-news{min-height:calc(1605.9px + 14.1vw)}}
+@media (max-width:927px){.bd.h-news{min-height:calc(2076.1px + 22.8vw)}}
+@media (max-width:867px){.bd.h-news{min-height:calc(2486.8px + 208.2vw)}}
+@media (max-width:599px){.bd.h-news{min-height:3760px}}
+@media (max-width:375px){.bd.h-news{min-height:3770px}}
+@media (max-width:853px){.bd.h-story{min-height:calc(1657.25px + 437vw)}}
+@media (max-width:374px){.bd.h-story{min-height:calc(2321px + 260vw)}}
 
 /* 공지 목록 (basic_simple) */
 .nt-tb{width:100%;border-collapse:collapse;border-top:1px solid #383838}
@@ -71,7 +79,8 @@
 .gl-list h3{margin:15px 0 0;font-size:17px;font-weight:700;color:#000;line-height:23px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:330px}
 .gl-list p{margin-top:21px;font-size:12px;color:#666}
 .gl-list p span{margin-right:3px}
-@media (max-width:866px){.gl-list>li{width:100%;height:auto;margin-bottom:28px}.gl-list img{width:100%;height:auto;aspect-ratio:3/2}}
+/* 좁은 화면: 원본 gall_li — 안쪽 목록 90% 가운데, 사진은 그 90%(=81%) 3:2, 제목 10px 아래, 빈 두 줄 뒤 날짜, 항목 사이 20px. 853 이하(원본 iframe 767) */
+@media (max-width:853px){.gl-list>li{width:100%;height:auto;margin-bottom:20px;padding:0 0 4px 10%;box-sizing:border-box}.gl-list img{width:90%;height:auto;aspect-ratio:3/2}.gl-list h3{margin-top:10px;line-height:24px}.gl-list p{margin-top:38px;line-height:17px}}
 
 /* 쪽번호 */
 .pgn{clear:both;margin:0 0 20px;padding:20px 0 0;text-align:center;font-size:12px}
