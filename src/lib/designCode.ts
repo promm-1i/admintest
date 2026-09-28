@@ -42,6 +42,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   estate: "EST",
   artist: "ART",
   brew: "BRE",
+  lighting: "LIG",
 };
 
 export function getDesignCode(sample: Sample): string {
@@ -71,6 +72,7 @@ const OPTION_INDUSTRY_LABELS: Record<string, string> = {
   perfume: "향수·코스메틱",
   video: "영상 편집",
   stay: "호텔·펜션·스테이",
+  lighting: "조명·유리 공예",
 };
 
 const LINE_ORDER: Record<DesignLine, number> = { 프리미엄: 0, 랜딩형: 1, 기본형: 2 };

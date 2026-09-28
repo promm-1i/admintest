@@ -60,6 +60,23 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "gama-template",
+    industry: "유리 공방 · 조명 브랜드 홈페이지",
+    title: "유리 공방 · 조명 브랜드 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 유리 조명 · 3D · 한 페이지",
+    purpose:
+      "유리 조명 여덟 점을 3D로 그려 걸어 둔 한 페이지입니다. 스크롤을 내리면 오른쪽 위 시계가 16:30에서 22:10으로 가고, 벽에 든 햇빛이 기울다 사라지며 조명이 켜집니다. 조명 4종은 화면이 멈춘 채 한 점씩 보여 주고, 만드는 과정에서는 달군 유리 덩어리가 종 모양으로 부풀었다 식은 뒤 불이 켜집니다. 밤에는 조명들이 한 줄 · 높이 차 · 나선으로 자리를 옮기고, 마지막에 쇼룸 주소와 전화가 나옵니다.",
+    features: ["3D로 그린 유리 조명 8점 · 모양 4 · 유리색 5", "스크롤에 따라 낮 → 해 질 녘 → 밤", "햇빛에 비친 유리 그림자 · 유리색이 든 그림자", "덩어리에서 종으로 부푸는 만드는 과정 5단계"],
+    idealFor: "유리 · 도자 · 금속 공방, 조명 · 가구 브랜드, 제품의 모양과 재질을 보여 줘야 하는 곳",
+    image: "/thumbs/gama.jpg",
+    liveUrl: "/gama/",
+    industryKey: "lighting",
+    premiumLabel: "유리 공방 · 조명",
+    designCode: "LIGP-1001",
+    premium: true,
+  },
+  {
     slug: "yeoul-template",
     industry: "성형외과 · 눈성형 중심 의원 홈페이지",
     title: "눈성형 중심 성형외과 홈페이지 (프리미엄 디자인 E)",
@@ -5972,7 +5989,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "shop",
     label: "쇼핑몰 · 브랜드",
     desc: "상품을 진열하고 장바구니 · 구매로 잇는 구성",
-    industryKeys: ["shop", "perfume", "brew"],
+    industryKeys: ["shop", "perfume", "brew", "lighting"],
   },
   {
     key: "corporate",
