@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Shippori+Mincho+B1:wght@400;500;600;700;800&family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css");
+/* lenis 1.3.4 lenis.css (원본과 동일) */
+html.lenis,html.lenis body{height:auto}.lenis:not(.lenis-autoToggle).lenis-stopped{overflow:clip}.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}.lenis.lenis-smooth iframe{pointer-events:none}.lenis.lenis-autoToggle{transition-property:overflow;transition-duration:1ms;transition-behavior:allow-discrete}
 
 :root{
   --ff-noto:"Noto Sans",Pretendard,sans-serif;
@@ -29,7 +31,7 @@ h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit;line-height:inherit} /* 
 body{background:var(--bg);min-height:100vh}
 ul,ol,li{list-style:none}
 a{color:inherit;text-decoration:none;font-size:inherit;font-weight:inherit;font-family:inherit}
-img{border:0;vertical-align:top}
+img{border:0}
 button{background:none;border:0;cursor:pointer;color:inherit}
 address{font-style:normal}
 em{font-style:normal}
@@ -152,7 +154,7 @@ textarea:focus,input:focus{outline:2px solid var(--c);outline-offset:1px}
 .os-layer .os-fitem+.os-fitem{margin-top:40px}
 .os-layer .os-fitem .fc .os-area{height:200px;padding:20px 15px}
 .os-layer .os-form .cap .row>*{height:54px}
-.os-layer .os-form .cap .row .input-box{width:calc(100% - 225px);min-width:370px}
+.os-layer .os-form .cap .row .inp{width:calc(100% - 225px);min-width:370px}
 .os-layer .os-form .fb{border-top:1px solid var(--c5);margin-top:60px}
 .os-layer .os-form .fb .privacy{display:flex;justify-content:center;align-items:center;font-size:var(--f16);padding:30px 0 50px;gap:1em}
 .os-layer .os-form .fb .privacy button{font-weight:700;text-decoration:underline;font-size:inherit;color:inherit}
@@ -160,7 +162,7 @@ textarea:focus,input:focus{outline:2px solid var(--c);outline-offset:1px}
 @media screen and (max-width:768px){
   .os-layer .os-form .cap .row>*{height:48px}
   .os-layer input[type=text],.os-layer input[type=email],.os-layer input[type=tel]{height:48px;padding:0 16px;font-size:14px}
-  .os-layer .os-form .cap .row .input-box{width:100%;min-width:unset}
+  .os-layer .os-form .cap .row .inp{width:100%;min-width:unset}
 }
 @media screen and (max-width:480px){.os-layer input[type=checkbox]{width:24px;height:24px}}
 
@@ -173,7 +175,8 @@ textarea:focus,input:focus{outline:2px solid var(--c);outline-offset:1px}
 .os-fitem .fc .os-radios{padding-top:5px}
 .os-fitem .fc .note{margin-top:20px;font-size:var(--f18)}
 .os-form .cap{margin-top:30px}
-.os-form .cap .code{width:140px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--c5);background:var(--c2);border-radius:10px;overflow:hidden;font-family:var(--ff-jost);font-size:var(--f20);font-weight:600;letter-spacing:.12em}
+.os-form .cap .code{width:140px;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--c5);background:var(--c2);border-radius:10px;overflow:hidden}
+.os-form .cap .code span{font-weight:700}
 .os-form .cap .row{display:flex;gap:15px;flex-wrap:wrap}
 .os-form .cap .re{background-color:var(--c);aspect-ratio:1;border-radius:10px;background-image:url(./ic/refresh.svg);background-position:center;background-repeat:no-repeat;background-size:28px;flex-shrink:0}
 .os-form .cap .row>*{height:65px}
@@ -253,6 +256,7 @@ textarea:focus,input:focus{outline:2px solid var(--c);outline-offset:1px}
 .os-ft .l address{margin-top:40px}
 .os-ft .l address li{display:inline-block;width:100%;font-size:var(--f16);line-height:1.6}
 .os-ft .l address li.inl{margin-right:var(--g80);width:fit-content}
+@media screen and (max-width:449px){.os-ft .l address .mo-br{display:block}}  /* 원본 영문 주소가 두 줄로 넘어가는 폭(449 이하) */
 .os-ft .l .pv{margin-top:var(--f16)}
 .os-ft .l .pv a{font-weight:600;font-size:var(--f18);display:inline-block}
 .os-ft .r{flex-shrink:0}
@@ -266,12 +270,14 @@ textarea:focus,input:focus{outline:2px solid var(--c);outline-offset:1px}
 .os-ft .lic .seal{margin-bottom:10px;display:inline-block}
 .os-ft .lic .seal img{max-width:100%}
 .os-ft .lic .copy{font-size:var(--f16)}
-.os-ft .lic .asset{font-size:var(--f14);color:rgba(43,74,217,.62);margin-top:4px}
+.os-ft .lic .asset{font-size:var(--f14);color:var(--c);margin-top:4px}  /* 원본은 20% 투명도라 대비 미달 — 4.5:1 넘게 */
 .os-ft .lic .asset a{text-decoration:underline}
 .os-ft .lic .os-modal{position:absolute;right:0;top:-25px;transform:translateY(-100%);box-shadow:0 0 4px rgba(43,74,217,.13);left:unset;width:fit-content;height:fit-content}
 .os-ft .lic .os-layer{padding:28px 22px;width:100%}
 .os-ft .lic .src{font-size:var(--f14)}
 .os-ft .lic .src li{display:flex;gap:30px}
+.os-ft .lic .src li+li{margin-top:10px}
+.os-ft .lic .src li .link{text-decoration:underline}
 .os-ft .lic .src li .nm{position:relative}
 .os-ft .lic .src li .nm::before{content:"";width:1px;height:12px;position:absolute;right:-14px;top:50%;transform:translateY(-50%);background:rgba(43,74,217,.3)}
 .os-ft .lic .os-modal.on{background:rgba(0,0,0,0)}
@@ -296,7 +302,7 @@ textarea:focus,input:focus{outline:2px solid var(--c);outline-offset:1px}
 .os-float .in{width:100%;margin:auto;position:relative}
 .os-float a{position:absolute;right:0;display:flex;background:var(--c);box-shadow:0 0 5px rgba(20,34,110,.4);align-items:center;justify-content:center}
 .os-quick a{bottom:30px;height:55px;border-radius:28px;font-size:var(--f18);font-weight:700;color:var(--bg);padding:0 25px}
-.os-topb a{bottom:30px;width:60px;aspect-ratio:1;border-radius:50%;display:none}
+.os-topb a{bottom:30px;width:60px;aspect-ratio:1;border-radius:50%}
 .os-topb a svg{max-height:26px;height:50%}
 @media screen and (max-width:1024px){.os-quick a{height:42px;bottom:85px;padding:0 20px}.os-topb a{width:42px}}
 @media screen and (max-width:480px){.os-quick a{height:38px;bottom:61px;padding:0 14px;font-size:14px}.os-topb a{width:38px;bottom:16px}}
@@ -667,7 +673,7 @@ textarea:focus,input:focus{outline:2px solid var(--c);outline-offset:1px}
 /* 작품 상세 */
 .os-wv .top{padding-top:calc(var(--g100)*.3)}
 .os-wv .top .tt{font-size:calc(var(--f25)*2);border:solid var(--c5);border-width:1px 0;margin-bottom:1em;padding:.5em 0;text-align:center}
-.os-wv .top .tt h1{font-size:inherit;font-weight:500;font-family:var(--ff-jost);letter-spacing:-.02em;line-height:1.5}
+.os-wv .top .tt h1{font-size:inherit;font-weight:500;font-family:var(--ff-jost);letter-spacing:-.02em}
 .os-wv .top .main{width:100%;font-size:0;text-align:center}
 .os-wv .top .main img{width:100%}
 .os-wv .top .info{margin-top:calc(var(--g100)*.6);display:flex;justify-content:space-between;align-items:start;gap:var(--g80)}
@@ -1032,3 +1038,7 @@ textarea:focus,input:focus{outline:2px solid var(--c);outline-offset:1px}
   .ct .form .fl .att .note{font-size:14px}
   .ct .form .fl .fb .pv{gap:8px;padding:calc(var(--g100)*.8) 0;font-size:16px}
 }
+/* 원본 style.css 모바일 줄바꿈 */
+@media screen and (max-width:768px){.ab .mission .sd .en .br{display:none}.ab .where .tb .ko .mo-br{display:block}}
+@media screen and (max-width:480px){.ab .philo .tb .head .ko .mo-br{display:block}}
+@media screen and (min-width:382px) and (max-width:391px){.os-wv .det .de .mo-br{display:block}}  /* 26번: 원본은 391 이하에서 마지막 단어가 여섯째 줄로 */
