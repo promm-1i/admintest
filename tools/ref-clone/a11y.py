@@ -3,14 +3,18 @@
 
   python a11y.py              전 쪽 검사
   python a11y.py s-bank       한 쪽만
+  python a11y.py --dir bodien --out C:/_tmp/claude/a11y-fitness-f.json
+                              다른 템플릿 — public/<폴더>/ 의 모든 쪽. preflight [6] 은 a11y-<슬러그>.json 을 읽는다
 
 로컬 파일로 열어 검사한다. 위반은 쪽·규칙·요소까지 찍는다.
 """
-import io, json, os, sys
+import glob, io, json, os, sys
 from playwright.sync_api import sync_playwright
 
 sys.stdout.reconfigure(encoding='utf-8', errors='replace')
-AXE = 'C:/_tmp/claude/C--web-project/f705668a-99f9-434b-be37-ed60b1b03504/scratchpad/axe.min.js'
+AXE = next((p for p in ('C:/_tmp/claude/axe.min.js',
+                        'C:/_tmp/claude/C--web-project/f705668a-99f9-434b-be37-ed60b1b03504/scratchpad/axe.min.js')
+            if os.path.exists(p)), 'C:/_tmp/claude/axe.min.js')
 SRC = 'file:///C:/web-project/mintcl-netlify-spa/public/semroot/'
 PAGES = ['index', 's-bank', 's-note', 's-exam', 's-textbook', 's-consulting', 's-premium',
          'seminar', 'pricing', 'reviews', 'review-1', 'review-2', 'review-3',
@@ -32,9 +36,20 @@ RUN = """
 """
 
 
+def flag(name):
+    return sys.argv[sys.argv.index(name) + 1] if name in sys.argv else None
+
+
 def main():
-    only = [a for a in sys.argv[1:] if not a.startswith('-')]
-    pages = only or PAGES
+    global SRC
+    folder, out = flag('--dir'), flag('--out')
+    vals = {folder, out}
+    only = [a for a in sys.argv[1:] if not a.startswith('-') and a not in vals]
+    pages = PAGES
+    if folder:
+        SRC = 'file:///C:/web-project/mintcl-netlify-spa/public/%s/' % folder
+        pages = sorted(os.path.basename(f)[:-5] for f in glob.glob('C:/web-project/mintcl-netlify-spa/public/%s/*.html' % folder))
+    pages = only or pages
     axe_src = io.open(AXE, encoding='utf-8').read()
     total = 0
     rows = []
@@ -47,6 +62,9 @@ def main():
             # 등장 전환(.7s)이 끝난 뒤에 재야 반투명 상태로 잘못 계산되지 않는다
             pg.evaluate("document.querySelectorAll('[data-rv]').forEach(e=>{"
                         "e.style.transition='none';e.classList.add('on')})")
+            # 등장 표시를 in-view 로 붙이는 템플릿(바디언 등)도 같은 이유로 미리 붙인다
+            pg.evaluate("document.querySelectorAll('[data-view],[data-view] *').forEach(e=>{"
+                        "e.style.transition='none';e.classList.add('in-view')})")
             pg.wait_for_timeout(900)
             pg.add_script_tag(content=axe_src)
             vs = pg.evaluate(RUN)
@@ -63,7 +81,7 @@ def main():
                 rows.append({'page': name, **v})
         b.close()
     print('\n합계 위반 %d건 · 검사 %d쪽' % (total, len(pages)))
-    out = 'C:/_tmp/claude/C--web-project/f705668a-99f9-434b-be37-ed60b1b03504/scratchpad/a11y.json'
+    out = out or 'C:/_tmp/claude/C--web-project/f705668a-99f9-434b-be37-ed60b1b03504/scratchpad/a11y.json'
     io.open(out, 'w', encoding='utf-8').write(json.dumps(rows, ensure_ascii=False, indent=1))
     print('상세:', out)
 
