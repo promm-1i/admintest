@@ -7,13 +7,13 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   "corporate-r": [
     { img: "/thumbs/sections/corporate-r-1.webp", title: "화면 1", width: 1280, height: 960 },
     { img: "/thumbs/sections/corporate-r-2.webp", title: "화면 2", width: 1280, height: 428 },
-    { img: "/thumbs/sections/corporate-r-3.webp", title: "물류 넥스하버은 1948년 창사 이래 오랜 역사와 노하우를 바탕으로 국내 최대 규모의 물류 네트워크를 구축하", width: 1280, height: 960 },
+    { img: "/thumbs/sections/corporate-r-3.webp", title: "물류 넥스하버는 1962년 첫 하역을 시작한 뒤 부두·창고·운송을 하나씩 넓혀 항만에서", width: 1280, height: 960 },
     { img: "/thumbs/sections/corporate-r-4.webp", title: "화면 4", width: 1280, height: 970 },
     { img: "/thumbs/sections/corporate-r-5.webp", title: "화면 5", width: 1280, height: 974 },
     { img: "/thumbs/sections/corporate-r-6.webp", title: "RECENT NEWS 뉴스 더보기", width: 1280, height: 740 },
     { img: "/thumbs/sections/corporate-r-7.webp", title: "WITH NEXHARBOR", width: 1280, height: 740 },
     { img: "/thumbs/sections/corporate-r-8.webp", title: "화면 8", width: 1280, height: 700 },
-    { img: "/thumbs/sections/corporate-r-9.webp", title: "넥스하버과 함께 할 역량있는 인재를 모집합니다. 인재채용 바로가기", width: 1280, height: 646 },
+    { img: "/thumbs/sections/corporate-r-9.webp", title: "넥스하버와 함께 할 역량있는 인재를 모집합니다. 인재채용 바로가기", width: 1280, height: 646 },
   ],
   "rentcar-g": [
     { img: "/thumbs/sections/rentcar-g-1.webp", title: "단기 렌터카 — 빌릴 곳을 고르세요", width: 1280, height: 720 },
