@@ -77,6 +77,11 @@
         var p=d.getElementById(x.getAttribute('data-tab')); if(p)p.classList.toggle('on',on);});
       if(w.AR.onTab)AR.onTab(id); AR.reveal();});});
   });
+  /* ?tab=판id 로 들어오면 그 탭을 연다(원본 system.html?tab=view2 와 같은 동작) */
+  w.addEventListener('load',function(){
+    var id=new URLSearchParams(w.location.search).get('tab');
+    var t=id&&d.querySelector('[data-tab="'+id.replace(/[^\w-]/g,'')+'"]'); if(t)t.click();
+  });
 
   /* 페이드 슬라이더 (원본 Swiper effect:fade · loop · thumbs) */
   AR.fader=function(root){
