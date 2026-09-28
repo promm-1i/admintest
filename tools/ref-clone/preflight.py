@@ -44,10 +44,20 @@ def warn(msg):
     warns.append(msg)
 
 
+def brand_dir(slug):
+    """슬러그와 브랜드 폴더 이름이 다를 때(real-estate-f → artiel) samples.ts 의 liveUrl 로 찾는다."""
+    src = io.open('%s/src/lib/samples.ts' % ROOT, encoding='utf-8').read()
+    m = re.search(r'slug: "%s-template",[^{}]*?liveUrl: "/([a-z0-9-]+)/"' % re.escape(slug), src)
+    return m.group(1) if m else None
+
+
 def tpl_dir(slug):
     for p in ('%s/public/%s' % (ROOT, slug), '%s/public/templates/%s' % (ROOT, slug)):
         if os.path.isdir(p):
             return p
+    d = brand_dir(slug)
+    if d and os.path.isdir('%s/public/%s' % (ROOT, d)):
+        return '%s/public/%s' % (ROOT, d)
     return None
 
 
@@ -191,8 +201,8 @@ def check_outputs(slug):
     ]
     src = io.open('%s/src/lib/samples.ts' % ROOT, encoding='utf-8').read()
     sep = chr(10) + '  {' + chr(10)
-    blocks = [b for b in src.split(sep)
-              if ('"/%s/"' % slug) in b or ('/templates/%s/' % slug) in b]
+    mine = ('"/%s/"' % slug, '/templates/%s/' % slug, 'slug: "%s-template",' % slug)
+    blocks = [b for b in src.split(sep) if any(k in b for k in mine)]
     img = re.search(r'image:\s*"([^"]+)"', blocks[0]) if blocks else None
     if img:
         f = ROOT + '/public' + img.group(1)
@@ -206,7 +216,7 @@ def check_outputs(slug):
             ok('%s %d개' % (name, len(got)))
         else:
             bad('%s 없음' % name)
-    if ('"/%s/"' % slug) in src or ('/templates/%s/' % slug) in src:
+    if any(k in src for k in mine):
         ok('samples.ts 에 등록됨')
     else:
         bad('samples.ts 에 등록 안 됨')
@@ -244,6 +254,7 @@ def main():
         sys.exit(2)
     slug = sys.argv[1]
     ref = sys.argv[2] if len(sys.argv) > 2 else slug
+    ref = os.path.basename(os.path.normpath(ref))   # C:/web-project/ref-sites/<이름> 으로 줘도 된다
     print('=== 클론 마감 점검 · %s (레퍼런스 %s) ===' % (slug, ref))
     check_sources(slug, ref)
     check_pages(slug, ref)

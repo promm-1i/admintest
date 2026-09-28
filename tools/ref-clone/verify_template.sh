@@ -1,32 +1,43 @@
 #!/usr/bin/env bash
 # 정적 템플릿 마무리 검증 — 기본형 재생성 · CSS 일치 · 3 뷰포트 · 썸네일 · tsc 를 한 번에.
-#   bash verify_template.sh <slug>      예) bash verify_template.sh travel-a
+#   bash verify_template.sh <slug> [브랜드폴더]   예) bash verify_template.sh travel-a
 # 전제: <slug>/index.html (랜딩형) 이 완성돼 있고, 기본형은 <slug>-basic 폴더.
 # 폴더 위치는 프리미엄 디자인이면 public/<브랜드>/, 나머지는 public/templates/<slug>/ 다.
+# 슬러그와 브랜드 폴더 이름이 다르면(real-estate-f → public/artiel/) 두 번째 인자로 주거나,
+# samples.ts 의 "<slug>-template" 항목 liveUrl 에서 찾는다. 그때 기본형은 공개 경로 밖
+# public/templates/<slug>-basic/ 에 두고 자산은 ../../<브랜드>/ 를 가리킨다.
 set -euo pipefail
 SLUG="${1:?slug 필요}"
 cd /c/web-project/mintcl-netlify-spa
 OUT="C:/_tmp/claude/ref-clone-out"; mkdir -p "$OUT"
 TPLDIR="public/templates/${SLUG}"; [ -d "public/${SLUG}" ] && TPLDIR="public/${SLUG}"
-export PYTHONIOENCODING=utf-8 SLUG OUT TPLDIR
+BASIC="${TPLDIR}-basic"; APFX="../${SLUG}/"
+DIR="${2:-}"
+if [ -z "$DIR" ] && [ ! -d "$TPLDIR" ]; then
+  DIR=$(python -c "import re,sys; s=open('src/lib/samples.ts',encoding='utf-8').read(); m=re.search(r'slug: \"%s-template\",[^{}]*?liveUrl: \"/([a-z0-9-]+)/\"' % re.escape(sys.argv[1]), s); print(m.group(1) if m else '')" "$SLUG")
+fi
+if [ -n "$DIR" ]; then TPLDIR="public/${DIR}"; BASIC="public/templates/${SLUG}-basic"; APFX="../../${DIR}/"; fi
+[ -f "${TPLDIR}/index.html" ] || { echo "랜딩형을 못 찾음: ${TPLDIR}/index.html"; exit 1; }
+echo "  랜딩형 ${TPLDIR} · 기본형 ${BASIC}"
+export PYTHONIOENCODING=utf-8 SLUG OUT TPLDIR BASIC APFX
 
 echo "=== A. 기본형 재생성 (${SLUG}-basic) ==="
 python - <<'PY'
 import re, os
-slug=os.environ['SLUG']; tdir=os.environ['TPLDIR']
+slug=os.environ['SLUG']; tdir=os.environ['TPLDIR']; basic=os.environ['BASIC']; ap=os.environ['APFX']
 s=open(f'{tdir}/index.html',encoding='utf-8').read()
 n=0
 s,k=re.subn(r'\(디자인 ([A-Z])\)</title>', r'(기본형 · 디자인 \1)</title>', s); n+=k
 s,k=re.subn(r'content="([^"]*)\(디자인 ([A-Z])\)"', r'content="\1(기본형 · 디자인 \2)"', s); n+=k
 s=s.replace('원페이지 랜딩입니다.','원페이지 기본형입니다.')
 assert '<meta property="og:image" content="./og.jpg">' in s, 'og:image 없음'
-s=s.replace('<meta property="og:image" content="./og.jpg">', f'<meta property="og:image" content="../{slug}/og.jpg">')
+s=s.replace('<meta property="og:image" content="./og.jpg">', f'<meta property="og:image" content="{ap}og.jpg">')
 assert 'src="./assets/' in s, 'assets 참조 없음'
-s=s.replace('src="./assets/', f'src="../{slug}/assets/')   # data-src 도 함께 걸린다
-s=s.replace('srcset="./assets/', f'srcset="../{slug}/assets/').replace(', ./assets/', f', ../{slug}/assets/').replace('poster="./assets/', f'poster="../{slug}/assets/')   # srcset 후보·poster 도 기본형 경로로
-s=s.replace('href="./assets/', f'href="../{slug}/assets/')   # preload 링크도
+s=s.replace('src="./assets/', f'src="{ap}assets/')   # data-src 도 함께 걸린다
+s=s.replace('srcset="./assets/', f'srcset="{ap}assets/').replace(', ./assets/', f', {ap}assets/').replace('poster="./assets/', f'poster="{ap}assets/')   # srcset 후보·poster 도 기본형 경로로
+s=s.replace('href="./assets/', f'href="{ap}assets/')   # preload 링크도
 for q in ('url(./assets/', "url('./assets/", 'url("./assets/'):     # CSS 배경 이미지도 (video-a 의 grain·glow)
-    s=s.replace(q, q.replace('./assets/', f'../{slug}/assets/'))
+    s=s.replace(q, q.replace('./assets/', f'{ap}assets/'))
 s=s.replace('</style>','''
 /* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
 .rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
@@ -34,20 +45,20 @@ s=s.replace('</style>','''
 </style>''',1)
 s=re.sub(r'\n<script>.*?</script>\n','\n',s,flags=re.S)
 assert 'IntersectionObserver' not in s, '스크립트 제거 실패'
-os.makedirs(f'{tdir}-basic', exist_ok=True)
-open(f'{tdir}-basic/index.html','w',encoding='utf-8').write(s)
+os.makedirs(basic, exist_ok=True)
+open(f'{basic}/index.html','w',encoding='utf-8').write(s)
 print(f'  재생성 완료 (제목 치환 {n}건)')
 PY
-[ -f "${TPLDIR}-basic/favicon.svg" ] || cp "${TPLDIR}/favicon.svg" "${TPLDIR}-basic/favicon.svg"
+[ -f "${BASIC}/favicon.svg" ] || cp "${TPLDIR}/favicon.svg" "${BASIC}/favicon.svg"
 
 echo "=== B. 랜딩형 ↔ 기본형 CSS 일치 ==="
 python - <<'PY'
 import re, os
-slug=os.environ['SLUG']; tdir=os.environ['TPLDIR']
+slug=os.environ['SLUG']; tdir=os.environ['TPLDIR']; basic=os.environ['BASIC']; ap=os.environ['APFX']
 css=lambda p: re.search(r'<style>(.*?)</style>', open(p,encoding='utf-8').read(), re.S).group(1)
-a=css(f'{tdir}/index.html'); b=css(f'{tdir}-basic/index.html')
+a=css(f'{tdir}/index.html'); b=css(f'{basic}/index.html')
 # 기본형은 assets 경로만 상위로 바꾼다 — 비교 전에 되돌려 놓는다
-b=b.replace(f'../{slug}/assets/', './assets/')
+b=b.replace(f'{ap}assets/', './assets/')
 extra="\n/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */\n.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}\n.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}\n"
 assert b == a + extra, '기본형 CSS 가 랜딩형과 다르다 — 기본형을 직접 고치지 말고 랜딩형을 고친 뒤 이 스크립트를 다시 돌릴 것'
 print('  일치 — 기본형은 랜딩형 CSS + 모션 차단뿐')
@@ -60,7 +71,7 @@ from playwright.sync_api import sync_playwright
 slug=os.environ['SLUG']; out=os.environ['OUT']; tdir=os.environ['TPLDIR']; ok=True
 with sync_playwright() as p:
     b=p.chromium.launch()
-    for folder in [tdir, tdir+'-basic']:
+    for folder in [tdir, os.environ['BASIC']]:
         for w,h in [(1440,900),(768,1024),(390,844)]:
             pg=b.new_page(viewport={'width':w,'height':h}); errs=[]
             pg.on('console', lambda m: errs.append(m.text) if m.type=='error' else None)
