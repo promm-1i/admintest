@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "real-estate-f-template",
+    industry: "아파트 분양 · 홍보관 홈페이지",
+    title: "아파트 분양 홍보관 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 아파트 분양 · 홍보관 · 56페이지",
+    purpose:
+      "선이 그려지며 단지 표지가 떠오르는 인트로 뒤로, 휠 한 번에 한 장면씩 넘어가는 메인 10장면(입지 · 브랜드 · 커뮤니티 · 주택형 · 분양 일정)과 서브 55쪽을 갖춘 아파트 분양 홍보관 홈페이지입니다. 사업개요 · 입지환경 · 오시는 길, 단지배치도 · 동호수 배치도 · 커뮤니티 · 컨시어지, 주택형 11타입 평면과 입체도 · e모델하우스 · 인테리어, 특별공급부터 청약가점표까지 청약 안내 6쪽, 분양 일정 달력 · 입주자모집공고 · 서류 안내까지 분양안내 9쪽, 이벤트 12쪽 · 공지 · 언론보도 · 관심고객등록 · 셔틀버스 예약까지 분양 홍보에 필요한 쪽을 모두 담았습니다.",
+    features: [
+      "인트로 · 휠 한 번에 한 장면씩 넘어가는 메인 10장면 · 첫 방문 팝업",
+      "단지배치도 · 동호수 배치도 · 주택형 11타입 평면 · 입체도 · e모델하우스",
+      "청약안내 6쪽 · 청약가점 자동 합계 · 분양 일정 달력 · 분양안내 9쪽",
+      "이벤트 12쪽 · 공지 · 언론보도 · 관심고객등록 폼 · 셔틀버스 예약 달력",
+    ],
+    idealFor: "아파트 · 오피스텔 분양 대행사, 시행 · 시공사의 분양 홍보관, 지역주택조합 · 도시형 생활주택 분양 홍보",
+    image: "/thumbs/real-estate-f.jpg",
+    liveUrl: "/artiel/",
+    industryKey: "real-estate",
+    premiumLabel: "분양 · 부동산업",
+    designCode: "REAP-1001",
+    premium: true,
+  },
+  {
     slug: "fitness-f-template",
     industry: "피트니스 · 헬스장 프랜차이즈 홈페이지",
     title: "피트니스 · 헬스장 프랜차이즈 홈페이지 (프리미엄 디자인 A)",
@@ -6031,7 +6053,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "estate",
     label: "부동산",
     desc: "매물을 지도·목록으로 보여주고 상담으로 잇는 구성",
-    industryKeys: ["estate"],
+    industryKeys: ["estate", "real-estate"],
   },
   {
     key: "rentcar",

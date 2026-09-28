@@ -119,6 +119,7 @@
   /* 배경음악 — 원본과 같이 막대 5개가 300ms 마다 무작위 높이로 춤춘다 */
   var au=d.getElementById('bgm'), bb=d.querySelector('.hd-bgm button'), eq=[].slice.call(d.querySelectorAll('.hd-eq i')), ti=null;
   AR.bgm=function(on){ if(!au)return;
+    if(on&&!au.getAttribute('src')){ AR.toast('배경음악 파일(assets/bgm.mp3)을 넣으면 이 단추로 재생됩니다.'); return; }
     if(on){ var pr=au.play(); if(pr&&pr.catch)pr.catch(function(){});
       clearInterval(ti); ti=setInterval(function(){eq.forEach(function(e){e.style.height=(Math.random()*10)+'px';});},300);
       bb.setAttribute('aria-pressed','true'); }
