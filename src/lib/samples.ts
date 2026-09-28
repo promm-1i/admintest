@@ -77,6 +77,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "kids-g-template",
+    industry: "유아 매트 · 층간소음 매트 시공 홈페이지",
+    title: "유아 매트·층간소음 시공 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 유아용품 · 매트 시공 · 층간소음",
+    purpose:
+      "거실 사진 앞으로 아이들이 한 겹 떠 있는 첫 화면, 스크롤하면 매트 8겹이 한 장씩 벌어지는 3D 단면, 내려갈수록 소음 수치가 100dB에서 27dB까지 줄어드는 장면, 올린 칸이 넓어지는 솔루션 세 칸으로 이어지는 메인에 브랜드·제품 상세·시공 사례 31건·자주 묻는 질문·견적 계산기·견적 문의·샘플 신청·약관 2쪽까지 10개 페이지를 갖춘 유아 매트 시공 홈페이지입니다.",
+    features: [
+      "스크롤로 한 겹씩 벌어지는 8겹 단면 3D 장면",
+      "100dB → 27dB 소음 장면 · 숫자 세기 · 테두리가 그려지는 카드",
+      "방마다 가로·세로로 매트 장수를 세는 견적 계산기",
+      "시공 사례 31건 분류 · 사진 넘김 창 · 견적 문의 · 샘플 신청 폼",
+    ],
+    idealFor: "유아 매트·층간소음 매트 시공 업체, 바닥재·놀이방 매트 브랜드, 방문 실측과 견적 상담이 중요한 시공업",
+    image: "/thumbs/kids-g.jpg",
+    liveUrl: "/sobok/",
+    industryKey: "kids",
+    premiumLabel: "유아용품업",
+    designCode: "KIDP-1001",
+    premium: true,
+  },
+  {
     slug: "yeoul-template",
     industry: "성형외과 · 눈성형 중심 의원 홈페이지",
     title: "눈성형 중심 성형외과 홈페이지 (프리미엄 디자인 E)",
@@ -5781,6 +5803,7 @@ export const SAMPLES: Sample[] = [
  * 새 프리미엄을 등록하면 슬러그를 맨 앞에 넣는다. 여기 없는 프리미엄은 그 뒤, 나머지는 SAMPLES 순서.
  */
 const PREMIUM_RECENT_ORDER = [
+  "kids-g-template",
   "yeoul-template",
   "corporate-t-template",
   "clinic-f-template",
