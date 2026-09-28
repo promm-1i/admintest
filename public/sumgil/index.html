@@ -347,14 +347,28 @@
   .perf__grid{grid-template-columns:repeat(2,1fr);grid-template-rows:auto}
   .card--tall{grid-row:auto;min-height:320px}
   .card--wide{grid-column:span 2}
-  .field__row{flex-direction:column}
-  .field__l,.field__r{width:100%}
-  .field__acc{margin-top:4rem}
+  /* 진료분야 — 레퍼런스는 1040 까지 좌우 배치를 유지한다(1080 실측: 왼쪽 목록 + 오른쪽 카드).
+     줄 높이 598 고정은 풀어 카드가 커져도 다음 섹션(TV)을 덮지 않게 한다. */
+  .field__row{height:auto;min-height:598px}
+  .field__l{width:auto;flex:0 0 40%}
+  .field__r{width:auto;flex:1 1 0;min-width:0;min-height:0;padding:40px}
+  .field__txt{width:auto}
+  .field__chips{gap:12px 16px;margin-top:40px}
+  .field__chip{width:calc(50% - 8px);padding:0 18px}
   .tvbox--short{flex:0 0 380px}
   .team__track{padding:0 var(--inPd)}
   .net__in{flex-direction:column}
   .net__l,.net__chips{width:100%}
   .net__pins{display:none}
+}
+@media screen and (max-width:1040px){
+  /* 진료분야 — 레퍼런스 ≤1040: 목록과 카드를 세로로 쌓고 섹션이 내용만큼 늘어난다. 카드 안 링크 3열 */
+  .field__row{flex-direction:column;min-height:0}
+  .field__l,.field__r{width:100%;flex:none}
+  .field__r{margin-top:var(--contMt4)}
+  .field__chips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem 2rem;
+    margin-top:var(--contMt3)}
+  .field__chip{width:auto}
 }
 @media screen and (max-width:1024px){
   .mv{height:76vh;min-height:520px}
@@ -364,10 +378,15 @@
   /* 모바일에서는 의료진 컨트롤 고정폭을 푼다(390 에서 넘침) */
   .team__ctrl{gap:8px;margin-bottom:0;flex-wrap:wrap;justify-content:flex-end}
   .team__ctrl .btn{margin-left:12px;width:auto;min-width:0;padding:0 16px}
-  .since{height:auto;padding:9rem 0}
-  .since__in{flex-direction:column;gap:3rem}
-  .since__num{font-size:9rem}
-  .since__r{padding-top:0;text-align:left;font-size:var(--h6)}
+  /* SINCE — 레퍼런스(≤1040·768·600)는 세 문장을 위아래로 쌓는다. 390 실측: 설명→회색 문단 10px,
+     회색 문단→파란 문장 16px(오른쪽 정렬), 좌우 여백 15rem, 연도는 기본 clamp 그대로(72px).
+     레퍼런스는 절대배치+오프셋이지만 섹션이 100vh 라 안 겹친다. 우리는 PC 용 절대배치가
+     그대로 남아 세 문장이 한 자리에 겹쳤다 → 흐름에 넣어 같은 모양을 만든다. */
+  .since{height:auto;min-height:100vh;padding:9rem 0}
+  .since__in{flex-direction:column;gap:0;transform:none;padding:0 15rem}
+  .since__t{position:static;margin-top:10px;font-size:var(--p1)}
+  .since__r{position:static;margin-top:16px;padding-top:0;align-self:stretch;text-align:right;
+    font-size:var(--h1)}
   .perf,.field,.tv,.ba,.rev,.team,.net,.comm{padding-top:9rem}
   .net,.comm{padding-bottom:9rem}
   .ba__track{padding-bottom:9rem}
@@ -387,6 +406,25 @@
   .tv__side{flex-direction:row;width:auto}
   .comm__grid{grid-template-columns:1fr}
   .ba__pair{gap:6px}
+  /* 진료분야 — 레퍼런스 ≤768: 목록이 가로 탭이 되고 설명은 숨긴다. 카드 안 링크 2열 */
+  .field__acc{display:flex;margin-top:3rem}
+  .field__item{flex:1;margin:0;padding:0 0 2rem;border-bottom-width:2px;text-align:center}
+  .field__d{display:none}
+  .field__t{font-size:var(--p3)}
+  .field__r{padding:24px;border-radius:16px}
+  .field__chips{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .field__chip{height:48px;padding:0 14px;font-size:var(--p4)}
+  /* SINCE — 레퍼런스 ≤768: 설명 위 20px · 파란 문장 24px(390 실측) */
+  .since__h{margin-top:20px}
+  .since__r{font-size:24px}
+}
+@media screen and (max-width:600px){
+  /* 레퍼런스 ≤600: 카드 머리(사진·제목)를 세로로, SINCE 작은 글자 18px · 회색 문단 13px */
+  .field__head{display:block;height:auto}
+  .field__txt{margin-top:16px;text-align:left}
+  .since__since{font-size:18px}
+  .since__h{line-height:1.4}
+  .since__t{font-size:13px}
 }
 
 </style>
