@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>윈드밸리 골프 & 리조트 | 치앙마이 63홀 골프 리조트 (기본형 · 디자인 A)</title>
+<meta name="description" content="치앙마이 고원에 들어선 63홀 골프 코스와 골프호텔, 윈드밸리 골프 & 리조트 홈페이지 원페이지 기본형입니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="윈드밸리 골프 & 리조트 | 치앙마이 63홀 골프 리조트 (기본형 · 디자인 A)">
+<meta property="og:description" content="치앙마이 고원에 들어선 63홀 골프 코스와 골프호텔, 윈드밸리 골프 & 리조트 홈페이지 원페이지 기본형입니다.">
+<meta property="og:image" content="../../windvalley/og.jpg">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
+<link rel="stylesheet" href="../../windvalley/assets/site.css">
+<style>
+html,body{height:100%}
+.pg-main{overflow:hidden}
+.fp{position:relative;height:100%;transform:translate3d(0,0,0);transition:transform 1.4s ease}
+.sc{position:relative;height:100dvh;overflow:hidden}
+.sc>div{height:100%}
+/* ── 1 인트로 · 히어로 ── */
+.intro{position:absolute;inset:0;background:var(--paper2);overflow:hidden}
+.intro .ln{position:absolute;height:100%;transition:1s;transition-timing-function:cubic-bezier(.8,0,.1,1);transition-delay:.5s}
+.intro .bold{width:4px;background:var(--ink);top:0}
+.intro .cen{width:1px;height:calc(50% - 3.6458vw);background:var(--line2);left:50%}
+.intro .l{left:7.2%;transform-origin:0 100%}
+.intro .r{right:7.2%;transform-origin:0 0}
+.intro .cen.t{top:0;transform-origin:0 0}
+.intro .cen.b{bottom:0;transform-origin:0 100%}
+.intro-logo{position:absolute;left:50%;top:50%;width:10.0521vw;margin-top:-2.6563vw;margin-left:-4.7917vw;color:var(--ink)}
+.intro-logo svg{display:block;width:100%;height:auto;fill:currentColor;transition:.5s;transition-delay:1s;overflow:visible}
+.intro-logo .em{transform-box:fill-box;transform-origin:50% 50%;transition:1s;transition-timing-function:cubic-bezier(.8,0,.2,1);transition-delay:.5s}
+.is-open .intro .ln{transform:scaleY(0)}
+.is-open .intro-logo svg{opacity:0}
+.is-open .intro-logo .em{transform:rotate(180deg)}
+.vis{position:absolute;inset:0;background:var(--black);clip-path:inset(0 50% 0 50%);transition:1.3s;transition-timing-function:cubic-bezier(.9,0,.2,1);transition-delay:1.7s}
+.vis-area{height:100%;position:relative;overflow:hidden}
+.vis-move{height:100%;position:relative;overflow:hidden;transition:1.4s}
+.vis-vd{position:absolute;inset:0;opacity:0;transition:3s;transition-delay:2.8s;transition-timing-function:ease-in;background:url(../../windvalley/assets/vis.jpg) no-repeat center/cover}
+.vis-vd video{position:absolute;bottom:0;left:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:1.2s}
+.vis-dim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,7,3,.35) 0%,rgba(10,7,3,0) 28%,rgba(10,7,3,0) 52%,rgba(10,7,3,.62) 100%)}
+.vis-txt{position:absolute;left:2.6042vw;bottom:4.1667vw;transform-origin:0 0;transition:1s;transition-delay:.6s;color:var(--cream)}
+.vis-t{display:flex;align-items:flex-end;gap:0 1.0417vw;transform-origin:0 0;transition:1s;transition-delay:4.5s}
+.vis-wm{width:73.4375vw;position:relative;aspect-ratio:1057.5/145}
+.vis-wm svg{position:absolute;left:0;bottom:0;width:100%;height:auto;overflow:visible}
+.vis-wm .wm-line path{transition:2.3s;transition-timing-function:cubic-bezier(.9,0,.3,1);transition-delay:2s}
+.vis-wm .wm-fill path{fill:transparent;transition:1s;transition-timing-function:ease-in;transition-delay:3.3s}
+.vis-txt p{font-size:1.5625vw;font-family:var(--disp);overflow:hidden;white-space:nowrap}
+.vis-txt p span{display:block;transform:translate(0,100%);transition:1s;transition-delay:3.6s}
+.vis-scroll{position:absolute;bottom:0;right:2vw;width:1px;height:8.3333dvh;overflow:hidden;background:rgba(255,255,255,.3);transform:translate(0,100%);transition:.8s;transition-delay:3.8s}
+.vis-scroll span{background:#fff;position:absolute;inset:0;transform:translate(0,-101%);animation:wv-scr 3s 4.5s linear infinite}
+@keyframes wv-scr{0%{transform:translate(0,-101%)}75%{transform:translate(0,101%)}100%{transform:translate(0,101%)}}
+.is-open .vis{clip-path:inset(0 0 0 0)}
+.is-open .vis-vd{opacity:1}
+.is-open .vis-t{transform:translate(0,-45%) scale(.78)}
+.is-open .vis-wm .wm-line path{stroke-dashoffset:0!important}
+.is-open .vis-wm .wm-fill path{fill:currentColor}
+.is-open .vis-txt p span{transform:none}
+.is-open .vis-scroll{transform:none}
+.past-1 .vis-move{opacity:0;transform:translate(0,100%)}
+.past-1 .vis-txt{opacity:0;transform:translate(0,100%);transition-delay:0s}
+/* 빠른예약 — 원본 .fast_rsv */
+.fr{position:absolute;bottom:4.1667vw;width:100%;padding:0 3.3333vw 0 2.5vw;z-index:15;opacity:0;transform:translate(0,200%);transition:1s;transition-delay:4.6s}
+.fr-items{background:var(--paper);border-radius:4px;display:flex;justify-content:space-between;align-items:center;transition:.8s}
+.fr-l{width:73%;display:flex}
+.fr-l>li{width:33.33%;position:relative}
+.fr-l>li~li{border-left:1px solid #E3E6DB}
+.fr-t{display:flex;gap:0 .8333vw;padding:1.3542vw 1.25vw;width:100%;text-align:left;transition:.5s}
+.fr-t i{width:.8333vw;flex:none}
+.fr-t dt{margin-bottom:.5208vw;color:var(--ink);font-size:.8333vw;font-weight:500}
+.fr-t dt p{display:flex;align-items:center}
+.fr-t dt strong{font-family:var(--disp);font-weight:500;font-size:1.1979vw;line-height:.7em;margin:0 .15em}
+.fr-t dt em{width:1px;height:.9em;background:var(--ink);margin:0 .4167vw}
+.fr-t dd{color:var(--muted-t);font-size:.6771vw}
+.fr-t:hover,.fr-t[aria-expanded="true"]{background:#E3E6DB}
+.fr-pop{display:none;position:absolute;left:0;bottom:113%;z-index:1;background:var(--paper);box-shadow:0 2px 16px 0 rgba(0,0,0,.3);min-width:100%;border-radius:2px}
+.fr-pop.on{display:block}
+.fr-mb button{display:block;width:100%;height:3.75vw;text-align:left;padding:0 1.25vw;font-size:.8333vw;transition:.4s}
+.fr-mb .no{border-bottom:1px solid #DDE0D5}
+.fr-mb .no button{color:var(--ink);font-weight:500}
+.fr-mb dt{font-family:var(--disp);font-size:1.0417vw;font-weight:500;color:var(--ink)}
+.fr-mb dd{color:var(--muted-t);font-size:.7292vw;display:flex;margin-top:.2604vw}
+.fr-mb dd em{background:var(--muted);margin:0 .4167vw;width:1px}
+.fr-mb button:hover{background:#E3E6DB}
+.fr-cal{width:33.3333vw;padding:1.25vw}
+.fr-cal .cal-in{display:flex;justify-content:space-between;position:relative}
+.fr-cal .page{width:48%}
+.fr-cal .arr{position:absolute;top:0;width:1.875vw;height:1.875vw;display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.fr-cal .arr.prev{left:.2083vw}.fr-cal .arr.next{right:.2083vw}
+.fr-cal .date{margin-bottom:1.25vw;text-align:center}
+.fr-cal .date p{font-size:1.0417vw;line-height:1.8em;color:var(--ink);font-family:var(--ui);font-weight:500}
+.fr-cal table{width:100%;border-collapse:collapse}
+.fr-cal th{padding-bottom:.625vw;font-size:.8333vw;font-weight:400;color:var(--muted-t)}
+.fr-cal td{padding:.2083vw 0;text-align:center}
+.fr-cal td button{width:100%;padding:0 .2083vw;font-size:.8333vw;line-height:2.2em;color:var(--ink);border-radius:2px}
+.fr-cal td button:disabled{color:#C2C6BC;cursor:default}
+.fr-cal td button.in{background:#E3E6DB}
+.fr-cal td button.sel{background:var(--ink);color:var(--cream)}
+.fr-num{padding:1.25vw 1.0417vw 1.0417vw;min-width:22vw}
+.fr-num .sel{display:flex;justify-content:space-between;align-items:center}
+.fr-num .sel~.sel{margin-top:1.4583vw}
+.fr-num .sel dt{color:var(--ink);font-weight:500;font-size:.7813vw}
+.fr-num .sel dd{color:var(--muted-t);font-size:.6771vw;line-height:1.62em;margin-top:.5208vw}
+.fr-num .ch{display:flex;align-items:center;gap:0 .8333vw}
+.fr-num .ch p{font-weight:600;color:var(--ink);font-size:.8333vw;min-width:1.2em;text-align:center}
+.fr-num .ch .b{display:flex;gap:0 .3125vw}
+.fr-num .ch .b button{width:1.6667vw;height:1.6667vw;background:no-repeat center/contain;transition:.3s}
+.fr-num .ch .m{background-image:url(../../windvalley/assets/ic/count-minus.svg)}
+.fr-num .ch .p{background-image:url(../../windvalley/assets/ic/count-plus.svg)}
+.fr-num .ch .m:hover{background-image:url(../../windvalley/assets/ic/count-minus-on.svg)}
+.fr-num .ch .p:hover{background-image:url(../../windvalley/assets/ic/count-plus-on.svg)}
+.fr-num .ori{background:#E3E6DB;border-radius:4px;padding:.7292vw .7292vw .9375vw;display:flex;align-items:flex-start;gap:0 .5208vw;margin-top:1.25vw}
+.fr-num .ori i{width:.9375vw;position:relative;top:.15vw;flex:none}
+.fr-num .ori dl{flex-grow:1}
+.fr-num .ori dt{color:var(--ink);font-size:.7813vw;font-weight:500;line-height:1.53em;margin-bottom:.625vw}
+.fr-num .ori dd p{display:flex;align-items:center;justify-content:space-between}
+.fr-num .ori dd p~p{margin-top:.5208vw}
+.fr-num .ori dd span{color:var(--muted-t);font-size:.6771vw}
+.fr-num .ori dd strong{color:var(--ink);font-size:.6771vw;font-weight:400}
+.fr-r{padding-right:.8333vw}
+.fr-r button{background:var(--ink);border-radius:2px;padding:0 1.9358vw;position:relative;overflow:hidden}
+.fr-r button::before{content:"";position:absolute;inset:0;background:#15201A;transform:translate(-100%,0);transition:.5s}
+.fr-r button p{color:var(--cream);font-size:.8333vw;font-weight:500;line-height:3.5em;letter-spacing:-.06em;position:relative;z-index:1}
+.fr-r button:hover::before{transform:none}
+.is-open .fr{opacity:1;transform:none}
+.past-1 .fr-items{opacity:0}
+/* 세로 화면 빠른 예약 — 원본 .m_rsv */
+.m-rsv{display:none;opacity:0;transform:translate(0,200%);transition:1s;transition-delay:4.6s;z-index:15}
+.m-rsv a{display:block;width:100%;border-radius:2px;background:var(--paper);box-shadow:0 1px 16px 0 rgba(0,0,0,.3);color:var(--ink);font-weight:500;text-align:center;transition:.8s}
+.is-open .m-rsv{opacity:1;transform:none}
+.past-1 .m-rsv a{opacity:0}
+/* ── 2 golf ── */
+.golf{height:100%;overflow:hidden;position:relative;background:var(--paper)}
+.m-br{display:none}
+.g-txt{position:absolute;left:6.25%;bottom:48%;opacity:0;transform:translate(15%,0);transition:1.2s}
+.g-txt dl{transform:scale(1.1);transition:1s;will-change:transform;transform-origin:0 100%}
+.g-txt dt{font-family:var(--disp);font-size:4.6875vw;line-height:1.05em;transition:1s}
+.g-txt.bl dt,.g-txt.bl dd{color:var(--ink)}
+.g-txt.co dt,.g-txt.co dd{color:var(--cream)}
+.g-txt dt span{font-size:4.1667vw}
+.g-txt dd{font-size:.7813vw;letter-spacing:-.05em;line-height:1.67em;margin-top:.6771vw;transition:1s}
+.g-img{height:100%;position:relative;overflow:hidden;transition:1.4s}
+.g-img::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:1;opacity:0;transition:1.4s}
+.g-img::after{content:"";position:absolute;left:0;top:61%;width:100%;height:39%;background:var(--paper);transform-origin:0 0;transition:1.4s}
+.g-box{position:absolute;left:0;bottom:0;width:100%;height:100%;overflow:hidden;clip-path:inset(62% 0 0 0);transition:1s}
+.g-bg{position:absolute;inset:0;background:#000;transition:1.4s}
+.g-bg span{display:block;height:100%;background:url(../../windvalley/assets/golf-bg.jpg) no-repeat center/cover;opacity:.5;transition:1s}
+.g-dim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.2) 45%,rgba(0,0,0,0) 70%);opacity:0;transition:1s}
+.past-1 .g-txt{opacity:1;transform:none;transition-delay:.3s}
+.past-1 .g-txt dl{transform:none;transition-delay:1.5s}
+.past-1 .g-img::after{transform:scaleY(0);transition-delay:.2s}
+.past-1 .g-box{clip-path:inset(0 0 0 0);transition-delay:1.5s}
+.past-1 .g-bg{transform:scale(1.2);transition-delay:1.5s}
+.past-1 .g-bg span{opacity:.4;transition-delay:1.8s}
+.past-1 .g-dim{opacity:1;transition-delay:1.8s}
+.past-2 .g-txt dt,.past-2 .g-txt dd{opacity:0;transform:translate(0,15dvh)}
+.past-2 .g-img{transform:scale(1.1)}
+.past-2 .g-img::before{opacity:1}
+/* ── 3 resort ── */
+.resort{height:100%;position:relative;overflow:hidden;background:#000}
+.resort .swiper-slide{overflow:hidden}
+.r-img{position:absolute;left:0;bottom:0;width:100%;height:100%;opacity:.4;transform:scale(1.2);transition:1.4s}
+.r-img span{display:block;height:100%;background:no-repeat center/cover;transform:scale(1.2);transition:1.5s}
+.resort .sd1 .r-img span{background-image:url(../../windvalley/assets/resort-1.jpg)}
+.resort .sd2 .r-img span{background-image:url(../../windvalley/assets/resort-2.jpg)}
+.resort .sd3 .r-img span{background-image:url(../../windvalley/assets/resort-3.jpg)}
+.resort .sd1 .r-img::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.4);transition:1.2s}
+.r-dim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 45%,rgba(0,0,0,.55) 100%);opacity:0;transition:1.4s}
+.resort .sd1 .r-dim{display:none}
+.r-txt{position:absolute;left:6.25vw;bottom:14.0625dvh;opacity:0;transform:translate(50%,0);transition:1.4s;color:var(--cream)}
+.resort .sd1 .r-txt{bottom:15.625dvh}
+.r-txt .t1{font-family:var(--disp);font-size:2.0833vw;line-height:1.16em;margin-bottom:1.5625vw}
+.r-txt .t2{font-family:var(--serif);font-size:1.25vw;line-height:1.67em;margin-bottom:1.3021vw}
+.r-txt .t3{font-size:.7813vw;letter-spacing:-.05em;line-height:1.67em}
+.r-txt p{overflow:hidden}
+.r-txt p span{display:block;transform:translate(0,100%);transition:1.1s}
+.resort .swiper-slide-active .r-img span{transform:none}
+.resort .swiper-slide-active.sd1 .r-img::after{opacity:0}
+.resort .swiper-slide-active .r-dim{opacity:1}
+.resort .swiper-slide-active .r-txt{opacity:1;transform:none;transition-delay:.4s}
+.at-2 .r-img{opacity:1;transform:none}
+.at-2 .r-txt p span{transform:none;transition-delay:.5s}
+/* ── 4 course ── */
+.course{height:100%;position:relative;overflow:hidden;background:var(--paper)}
+.c-area{height:100%;position:relative;transition:1.4s}
+.c-clip{height:100%;position:relative;z-index:1;overflow:hidden;clip-path:inset(0 0 0 0);transition:1.2s}
+.c-vd{position:absolute;inset:0;background:#000 url(../../windvalley/assets/course.jpg) no-repeat center/cover;transition:1s}
+.c-vd video{width:100%;height:100%;object-fit:cover;opacity:.6;transform:scale(1.2);transition:1.4s}
+.c-txt{position:absolute;left:53%;top:calc(50% + 9.375dvh);transform:translate(0,-50%);transition:1.2s}
+.c-txt.lt{color:transparent}
+.c-txt.dk{color:var(--ink);z-index:0}
+.c-txt .t1{font-family:var(--disp);font-size:7.8125vw;margin-bottom:1.0417vw}
+.c-txt.lt .t1 p{background-clip:text;-webkit-background-clip:text;background-image:linear-gradient(90deg,var(--cream) 0%,var(--cream) 50%,transparent 50%,transparent 100%);background-repeat:no-repeat;background-size:200% 100%;opacity:0;transition:1.4s}
+.c-txt.lt .t1 p.l{background-position:100% 50%}
+.c-txt.lt .t1 p.r{background-position:-100% 50%}
+.c-txt .t2{font-family:var(--serif);font-size:1.0417vw;letter-spacing:-.05em;margin-bottom:.7813vw;overflow:hidden}
+.c-txt.lt .t2{color:var(--cream)}
+.c-txt .t2 span{display:block;transform:translate(0,100%);transition:.8s}
+.c-txt .t3{font-size:.7813vw;line-height:1.67em;letter-spacing:-.05em}
+.c-txt .t3 p{overflow:hidden}
+.c-txt .t3 p span{display:block;transform:translate(0,100%);transition:.8s}
+.c-num{position:absolute;left:50%;bottom:0;width:50%;height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:7.8125vw 0;padding-top:10.4167dvh;pointer-events:none;z-index:3}
+.c-num a{display:block;cursor:pointer;opacity:0;transform:scale(1.2);transition:1s;will-change:transform}
+.c-num dt{font-family:var(--disp);font-size:7.8125vw;color:var(--cream);line-height:.8em}
+.c-num dd{font-family:var(--disp);font-size:1.5625vw;color:var(--cream)}
+.c-num .arr{margin-top:.5vw}
+.c-num .arr span{display:block;margin:0 auto;width:1vw;height:1vw;border-radius:50%;background:var(--cream) url(../../windvalley/assets/ic/arrow-ink.svg) no-repeat center/40%}
+.c-ho{position:absolute;right:0;bottom:0;width:100%;height:100%;transition:1.2s;z-index:2;pointer-events:none}
+.c-ho ul{overflow:hidden;height:100%;opacity:0;transition:.8s;position:relative;background:#000}
+.c-ho li{position:absolute;inset:0;opacity:0;transition:.8s}
+.c-ho li span{display:block;height:100%;background:no-repeat center/cover;transform:scale(1.2);transition:1s}
+.c-ho .i1 span{background-image:url(../../windvalley/assets/course-27.jpg)}
+.c-ho .i2 span{background-image:url(../../windvalley/assets/course-36.jpg)}
+.c-ho li.on{opacity:1}.c-ho li.on span{transform:none}
+.c-sd{position:absolute;inset:0;z-index:-1}
+.past-3 .c-txt.lt .t1 p{opacity:1;background-position:0 50%;transition-delay:.3s}
+.past-3 .c-txt .t2 span{transform:none;transition-delay:.8s}
+.past-3 .course.s2 .c-clip{clip-path:inset(0 0 0 50%)}
+.past-3 .course.s2 .c-vd{left:25%;transform:scale(1.1)}
+.past-3 .course.s2 .c-txt{left:6.25%;top:calc(50% + 3.5dvh)}
+.past-3 .course.s2 .c-txt .t3 p span{transform:none;transition-delay:.6s}
+.past-3 .course.s2 .c-num{pointer-events:auto}
+.past-3 .course.s2 .c-num a{opacity:1;transform:none;transition-delay:.7s}
+.past-3 .course.s2 .c-ho{width:50%}
+.past-3 .course.s2 .c-ho ul{opacity:1}
+.past-4 .c-area{transform:translate(0,100%)}
+.at-3 .c-vd video{transform:none}
+.course .c-txt.dk{clip-path:inset(0 0 0 0)}
+/* ── 5 introduce ── */
+.introduce{height:100%;display:flex;overflow:hidden}
+.introduce .box{width:50%;overflow:hidden}
+.i-img{height:100%;overflow:hidden;transform:translate(0,-100%);transition:1.4s}
+.i-img span{display:block;height:100%;background:url(../../windvalley/assets/intro-img.jpg) no-repeat center/cover;transform:scale(1.2);transition:1.4s}
+.introduce .r{display:flex;align-items:center;justify-content:center;background:var(--paper)}
+.i-txt{text-align:center;margin-bottom:-18dvh;opacity:0;transform:translate(0,-40%);transition:1s;color:var(--ink)}
+.i-txt strong{display:block;font-family:var(--disp);font-weight:400;font-size:3.125vw;letter-spacing:-.05em;height:.6vw}
+.i-txt blockquote{margin:.7813vw 0}
+.i-txt blockquote p{font-size:.7813vw;line-height:1.67em;letter-spacing:-.05em}
+.i-txt .sign{margin-top:1.1458vw}
+.i-txt .sign img{width:7.1875vw;height:auto;margin:0 auto;aspect-ratio:151/117}
+.past-4 .i-img{transform:none}
+.past-4 .i-txt{opacity:1;transform:none;transition-delay:.4s}
+.past-5 .i-img{transform:translate(0,100%)}
+.at-4 .i-img span{transform:none}
+/* ── 6 room ── */
+.room{height:100%;display:flex}
+.room .box{width:50%;overflow:hidden}
+.room .l{display:flex;align-items:center;justify-content:center;background:var(--paper)}
+.rm-img{height:100%;transform:translate(0,-100%);transition:1.4s}
+.rm-img span{display:block;height:100%;background:url(../../windvalley/assets/room-img.jpg) no-repeat center/cover;transform:scale(1.2);transition:1.4s}
+.rm-txt{text-align:center;margin-bottom:-8.3333dvh;opacity:0;transform:translate(0,-20%);transition:1s;color:var(--ink)}
+.rm-txt dt{font-family:var(--serif);font-size:1.5625vw;letter-spacing:-.05em;line-height:1.6em}
+.rm-txt dd{font-size:.7813vw;line-height:1.67em;letter-spacing:-.05em;margin-top:1.5625vw}
+.rm-txt .type{font-family:var(--ui);font-weight:500;font-size:.6771vw;letter-spacing:.025em;margin-top:4.6875vw}
+.rm-txt .link{margin-top:1.0417vw}
+.rm-txt .link a{display:block;padding:1.8229vw 0 2.0833vw}
+.rm-txt .link a:first-child{border-bottom:1px solid rgba(38,53,44,.4)}
+.rm-txt .link strong{display:block;font-weight:400;font-size:1.5625vw;font-family:var(--disp);margin-bottom:1.0417vw}
+.rm-txt .link p{font-size:.8333vw;letter-spacing:-.05em;display:flex;justify-content:center;position:relative;width:max-content;margin:0 auto}
+.rm-txt .link p em{position:absolute;top:50%;right:-1.5625vw;width:.9375vw;height:.9375vw;border-radius:50%;background:var(--ink) url(../../windvalley/assets/ic/arrow-cream.svg) no-repeat center/40%;transform:translate(0,-50%);transition:.6s}
+.rm-txt .link a:hover p em{transform:translate(30%,-50%)}
+.past-5 .rm-img{transform:none}
+.past-5 .rm-txt{opacity:1;transform:none;transition-delay:.4s}
+.at-5 .rm-img span{transform:none}
+/* ── 7 package_bg ── */
+.pkg-bg{height:100%;position:relative;overflow:hidden;transition:1.4s}
+.pb-bg{position:absolute;inset:0;overflow:hidden;transition:1.4s}
+.pb-bg span{display:block;height:100%;transition:1.4s}
+.pb-bg span::before{content:"";position:absolute;inset:0;background:url(../../windvalley/assets/package-bg.jpg) no-repeat center/cover;transform:scale(1.2);transition:1.4s}
+.pb-txt{position:absolute;left:66.9271%;top:27.0833dvh;transition:1.2s;color:var(--ink)}
+.pb-wrap{opacity:0;transform:translate(0,40%);transition:1s}
+.pb-txt .t1{display:flex;padding-bottom:.2083vw}
+.pb-txt .t1 span{font-size:.6771vw;font-family:var(--ui);font-weight:500;letter-spacing:.025em;padding-bottom:.2083vw;border-bottom:1px solid var(--ink)}
+.pb-txt .t2{font-size:.7813vw;letter-spacing:-.05em;margin-top:.7813vw}
+.pb-txt .t3{font-size:1.5625vw;font-family:var(--disp);line-height:1.2em;margin-top:2.6042vw}
+.past-6 .pb-bg span::before{transform:none}
+.past-6 .pb-wrap{opacity:1;transform:none;transition-delay:.4s}
+.past-7 .pkg-bg{transform:translate(0,100%)}
+.past-7 .pb-bg{transform:translate(-100%,0)}
+.past-7 .pb-bg span{transform:translate(40%,0)}
+.past-7 .pb-txt{left:6.25vw}
+/* ── 8 package_sd ── */
+.s-pkg{background:var(--paper)}
+.pkg-sd{height:100%;position:relative;overflow:hidden;transform:translate(100%,-100%);transition:1.4s}
+.p-tit{position:absolute;right:calc(50% + 1.8229vw);bottom:5.6dvh;opacity:0;transform:translate(0,40%);transition:1s}
+.p-tit dt{width:7.3438vw;margin:0 0 0 auto}
+.p-tit dt img{width:100%;height:auto}
+.p-tit dd{color:var(--ink);font-family:var(--disp);font-size:5.2083vw;margin-top:.7813vw}
+.p-sd{position:absolute;right:0;top:0;width:50%;height:100%;overflow:hidden}
+.p-sd .swiper-slide{overflow:hidden}
+.p-box{position:relative;height:100%}
+.p-img{position:absolute;left:0;bottom:0;width:100%;height:100%;overflow:hidden;transform:scale(1.3);transition:1.2s}
+.p-img span{display:block;height:100%;background:no-repeat center/cover;transform:scale(1.3);transition:1.4s}
+.p-sd .sd1 .p-img span{background-image:url(../../windvalley/assets/package-1.jpg)}
+.p-sd .sd2 .p-img span{background-image:url(../../windvalley/assets/package-2.jpg)}
+.p-sd .sd3 .p-img span{background-image:url(../../windvalley/assets/package-3.jpg)}
+.p-txt{position:absolute;left:5.7292%;bottom:7.2917%;opacity:0;transform:translate(0,-30%);transition:1s;color:var(--cream)}
+.p-txt .t1{display:block;font-weight:400;font-size:3.6458vw;font-family:var(--disp);margin-bottom:1.8229vw;overflow:hidden}
+.p-txt .t2{display:block;font-size:1.5625vw;letter-spacing:-.05em;font-weight:300;margin-bottom:.7813vw;overflow:hidden}
+.p-txt .t3{font-size:.7813vw;letter-spacing:-.05em;line-height:1.47em}
+.p-txt .t3 p{overflow:hidden}
+.p-txt ._m{display:none}
+.p-txt .t1 span,.p-txt .t2 span,.p-txt .t3 p span{display:block;transform:translate(0,100%);transition:.8s}
+.p-sd .swiper-slide-active .p-img span{transform:none}
+.p-sd .swiper-slide-active .p-txt .t1 span,.p-sd .swiper-slide-active .p-txt .t2 span,.p-sd .swiper-slide-active .p-txt .t3 p span{transform:none;transition-delay:.7s}
+.past-7 .pkg-sd{transform:none}
+.past-7 .p-tit{opacity:1;transform:none;transition-delay:.6s}
+.past-7 .p-img{transform:none;transition-delay:.6s}
+.past-7 .p-txt{opacity:1;transform:none;transition-delay:.6s}
+/* ── 9 press_faq ── */
+.press-faq{height:100%;position:relative;overflow:hidden;display:flex;align-items:center;background:var(--ink)}
+.pf-bg{position:absolute;inset:0;transform:scale(1.2);transition:1.4s}
+.pf-bg::before{content:"";position:absolute;inset:0;background:url(../../windvalley/assets/press-faq-bg.jpg) no-repeat center/cover;transition:1.2s}
+.pf-bg::after{content:"";position:absolute;inset:0;background:rgba(10,14,11,.55)}
+.pf-area{width:100%;padding:0 2.5vw;position:relative;display:flex;justify-content:space-between}
+.pf-box{width:47.369%;opacity:0;transform:translate(0,10%);transition:1.2s}
+.pf-tit{text-align:center;margin-bottom:.7813vw}
+.pf-tit h2{font-family:var(--disp);font-weight:400;color:#F4EDD6;font-size:2.3438vw}
+.pf-tit p{color:#F4EDD6;font-size:.7813vw;letter-spacing:-.05em;margin-top:1.3021vw;opacity:.55;margin-bottom:1.0417vw}
+.pf-tit a{display:flex;justify-content:flex-end}
+.pf-tit a span{font-family:var(--ui);color:var(--cream);font-size:.5729vw;letter-spacing:.075em;border-bottom:1px solid var(--cream)}
+.pf-press ul,.pf-faq ul{display:flex;flex-wrap:wrap;gap:.4168vw}
+.pf-press li,.pf-faq li{width:calc(50% - .2084vw);position:relative;transition:.4s}
+.pf-press li::before,.pf-faq li::before{content:"";position:absolute;left:0;top:0;width:100%;height:1px;background:var(--cream);transform:scaleX(0);transform-origin:0 0;transition:.6s}
+.pf-press li::after,.pf-faq li::after{content:"";position:absolute;left:0;top:0;width:1px;height:100%;background:var(--cream);transform:scaleY(0);transform-origin:0 100%;transition:.6s}
+.pf-press a,.pf-faq a{display:block;border:1px solid rgba(244,237,214,.2);position:relative}
+.pf-press a{padding:1.3021vw}
+.pf-press a::before,.pf-faq a::before{content:"";position:absolute;right:0;bottom:0;width:100%;height:1px;background:var(--cream);transform:scaleX(0);transform-origin:100% 0;transition:.6s}
+.pf-press a::after,.pf-faq a::after{content:"";position:absolute;right:0;bottom:0;width:1px;height:100%;background:var(--cream);transform:scaleY(0);transform-origin:0 0;transition:.6s}
+.pf-press .t1{color:rgba(244,237,214,.58);font-size:.7292vw;letter-spacing:-.05em;margin-bottom:.7813vw}
+.pf-press .t2{color:#fff;font-size:.9375vw;letter-spacing:-.05em;line-height:1.39em;margin-bottom:.5208vw;min-height:2.60625vw;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pf-press .t3{color:#F4EDD6;font-size:.7292vw;line-height:1.43em;min-height:2.085512vw;margin-bottom:1.3021vw;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pf-press .t4{color:rgba(244,237,214,.58);font-size:.7292vw}
+.pf-faq a{display:flex;align-items:center;justify-content:space-between;padding:1.7188vw 1.8229vw}
+.pf-faq p{color:#F4EDD6;font-size:.7813vw;letter-spacing:-.05em;padding-left:1.8229vw;position:relative}
+.pf-faq p::before{content:"";position:absolute;left:0;top:50%;width:1.0938vw;height:1.0938vw;transform:translate(0,-50%);background:no-repeat center/contain}
+.pf-faq em{width:.3646vw;color:#F4EDD6;display:block}
+.pf-faq .f1 p::before{background-image:url(../../windvalley/assets/ic/faq-1.svg)}.pf-faq .f2 p::before{background-image:url(../../windvalley/assets/ic/faq-2.svg)}.pf-faq .f3 p::before{background-image:url(../../windvalley/assets/ic/faq-3.svg)}.pf-faq .f4 p::before{background-image:url(../../windvalley/assets/ic/faq-4.svg)}.pf-faq .f5 p::before{background-image:url(../../windvalley/assets/ic/faq-5.svg)}.pf-faq .f6 p::before{background-image:url(../../windvalley/assets/ic/faq-6.svg)}.pf-faq .f7 p::before{background-image:url(../../windvalley/assets/ic/faq-7.svg)}.pf-faq .f8 p::before{background-image:url(../../windvalley/assets/ic/faq-8.svg)}.pf-faq .f9 p::before{background-image:url(../../windvalley/assets/ic/faq-9.svg)}.pf-faq .f10 p::before{background-image:url(../../windvalley/assets/ic/faq-10.svg)}
+.pf-faq em .chev{width:100%;height:auto}
+.pf-press li:hover,.pf-faq li:hover{box-shadow:.2vw .2vw 1vw rgba(0,0,0,.5)}
+.pf-press li:hover::before,.pf-press li:hover::after,.pf-press li:hover a::before,.pf-press li:hover a::after,
+.pf-faq li:hover::before,.pf-faq li:hover::after,.pf-faq li:hover a::before,.pf-faq li:hover a::after{transform:none}
+.pf-page{display:none}
+.past-8 .pf-bg{transform:none}
+.past-8 .pf-box{opacity:1;transform:none;transition-delay:.4s}
+/* ── 10 코스 지도 ── */
+.cmap{height:100%;position:relative;overflow:hidden;transition:1.4s;background:var(--paper)}
+.cm-area{overflow:hidden;height:100%;position:relative}
+.cm-img{position:absolute;inset:0;background:#000}
+.cm-img span{position:absolute;inset:0;background:no-repeat center top/cover;transition:2.5s}
+.cm-img .bg{background-image:url(../../windvalley/assets/course-map.jpg)}
+.cm-img .zone{background-image:url(../../windvalley/assets/course-zone.png)}
+.cmap .dot{position:absolute;width:1.4063vw}
+.cmap .d-t{position:relative;z-index:2}
+.cmap .d{position:relative;display:block;width:100%;padding-bottom:100%;cursor:pointer;opacity:0;transform:scale(.3);transition:.8s}
+.cmap .pl-x{display:none}
+.cm-txt{display:none}
+.cmap .d1{left:24.3%;bottom:30.3vw}.cmap .d2{left:17.2%;bottom:16.3vw}
+.cmap .d3{left:45%;bottom:17vw}.cmap .d4{left:51.8%;bottom:29.4vw}
+.cmap .d span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;height:100%}
+.cmap .d span em{display:block;width:100%;height:100%;position:relative}
+.cmap .d span em::before{content:"";position:absolute;inset:0}
+.cmap .b1{z-index:4}.cmap .b2{z-index:3}.cmap .b3{z-index:2}.cmap .b4{z-index:1}
+.cmap .b1 em{background:var(--cream);border-radius:50%}
+.cmap .b1::after{content:"";position:absolute;inset:0;background:url(../../windvalley/assets/ic/plus.svg) no-repeat center/contain;transition:.3s}
+.cmap .b2 em{animation:wv-dots 3.3s linear infinite}
+.cmap .b3 em{animation:wv-dots 3.3s 1.1s linear infinite}
+.cmap .b4 em{animation:wv-dots 3.3s 2.2s linear infinite}
+.cmap .b2 em::before,.cmap .b3 em::before,.cmap .b4 em::before{border:1px solid var(--cream);border-radius:50%}
+@keyframes wv-dots{0%{transform:scale(1)}80%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+.cmap .pl{position:absolute;left:2.3438vw;top:0;width:28.4896vw;pointer-events:none;opacity:0;transform:translate(0,20%);transition:.6s;z-index:10}
+.cmap .pl.bot{top:2.5vw;left:calc(50% - 20vw);width:40vw}
+.cmap .pl-box{display:flex;position:relative}
+.cmap .pl .i{width:50%;overflow:hidden;border-radius:.5208vw 0 0 .5208vw}
+.cmap .pl .i img{transform:scale(1.2);transition:1.2s;width:100%;height:100%;object-fit:cover}
+.cmap .pl .t{padding-left:1.7188vw;display:flex;align-items:center;flex-grow:1;background:var(--paper);border-radius:0 .5208vw .5208vw 0;color:var(--ink)}
+.cmap .pl .t dt{font-family:var(--disp);font-weight:600;font-size:.9375vw;line-height:1.3em}
+.cmap .pl .t dd{font-size:.7292vw;line-height:1.29em;margin-top:.7813vw}
+.cmap .pl .vd-wrap{width:65%;position:relative}
+.cmap .pl .vd{width:100%;position:relative;padding-bottom:56.25%;overflow:hidden;border-radius:.5208vw 0 0 .5208vw;background:#000}
+.cmap .pl .vd video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cmap .dot.on .pl{opacity:1;transform:none;pointer-events:auto}
+.cmap .dot.on .b1::after{transform:rotate(45deg)}
+.cmap .dot.on .pl .i img{transform:none}
+.past-9 .cmap{padding:18.75dvh 2.5vw 6.25dvh}
+.past-9 .cm-img span{background-position:center bottom}
+.past-9 .cmap .d{opacity:1;transform:none;transition-delay:1.6s}
+/* ── 11 contact ── */
+.contact{height:100%;overflow:hidden;position:relative}
+.ct-bg{position:absolute;inset:0;background:url(../../windvalley/assets/contact-bg.jpg) no-repeat center/cover;opacity:0;transform:scale(1.2);transform-origin:50% 100%;transition:1.4s}
+.ct-box{background:#fff;position:absolute;right:2.5vw;bottom:3vw;padding:2.8646vw 1.8229vw 1.8229vw;width:42.4479%;opacity:0;transform:translate(0,15%);transition:1s;color:var(--ink)}
+.ct-box .tit{font-family:var(--disp);font-weight:400;font-size:1.5625vw;margin-bottom:1.5625vw;overflow:hidden}
+.ct-box .tit span{display:block;transform:translate(0,100%);transition:.8s}
+.ct-box .flex{display:flex;align-items:center;gap:0 8.5938vw;margin-bottom:3.9063vw}
+.ct-box .t1{font-size:.6771vw;display:flex;font-weight:600;letter-spacing:.025em;overflow:hidden;font-family:var(--ui)}
+.ct-box .t1 span{border-bottom:1px solid var(--ink);padding-bottom:.1042vw;display:block;transform:translate(0,100%);transition:.8s}
+.ct-box .flex .t1{font-family:initial;font-size:.7813vw;font-weight:500;letter-spacing:-.05em}
+/* 원본 주소 한 줄 폭(글자 25.6자 분)을 기준 폭으로 — 원본처럼 버튼 글이 두 줄로 접힌다 */
+.ct-box .flex .txt{flex-basis:18.668vw}
+.ct-box .t2{font-size:.7292vw;letter-spacing:.05em;margin-top:.9896vw;overflow:hidden}
+.ct-box .t2+.t2{margin-top:.2vw}
+.ct-box .t2 span{display:block;transform:translate(0,100%);transition:.8s}
+.ct-box .flex .t2{letter-spacing:-.05em}
+.ct-box .t3{font-family:var(--ui);font-weight:500;font-size:.7813vw;margin-top:.7813vw;letter-spacing:.01em;position:relative;overflow:hidden}
+.ct-box .t3 span{position:relative;padding-left:.8333vw;display:block;transform:translate(0,100%);transition:.8s}
+.ct-box .t3 span::before{content:"";position:absolute;width:.5208vw;height:.5208vw;background:url(../../windvalley/assets/ic/tel.svg) no-repeat center/contain;left:0;top:50%;transform:translate(0,-50%)}
+.ct-box .link{opacity:0;transform:translate(20%,0);transition:.8s}
+.ct-box .link a{display:block;background:var(--ink);border-radius:.2604vw;padding:0 2.6042vw}
+.ct-box .link p{display:flex;align-items:center;gap:0 .5208vw}
+.ct-box .link em{width:.8854vw}
+.ct-box .link span{font-size:.8333vw;color:var(--paper);letter-spacing:-.05em;line-height:4.38em}
+.ct-box .map{margin-top:1.8229vw;overflow:hidden;position:relative;padding-bottom:40.2685%}
+.ct-box .map img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.past-10 .ct-bg{opacity:1;transform:none}
+.past-10 .ct-box{opacity:1;transform:none;transition-delay:.6s}
+.past-10 .ct-box .tit span,.past-10 .ct-box .t1 span,.past-10 .ct-box .t2 span,.past-10 .ct-box .t3 span{transform:none;transition-delay:.9s}
+.past-10 .ct-box .link{opacity:1;transform:none;transition-delay:1.2s}
+/* ── 12 발 — 섹션 안에서 100dvh ── */
+.s-foot .ft{height:100%}
+.at-11 .s-foot .ft{}
+/* ── 오른쪽 점 내비 — 원본 .full_menu ── */
+.dots{position:fixed;right:3vw;top:45%;z-index:20;transform:translate(0,-50%);transition:.6s}
+.dots li{position:relative}
+.dots li~li{margin-top:.2083vw}
+.dots button{width:.8333vw;height:.8333vw;position:relative;display:flex;align-items:center;justify-content:center}
+.dots span{display:contents}
+.dots em{width:.2083vw;height:.2083vw;border-radius:50%;background:var(--cream);transition:.6s}
+.dots button::before{content:"";position:absolute;inset:0;border:1px solid var(--cream);border-radius:50%;transform:scale(0);opacity:0;transition:.6s}
+.dots p{position:absolute;right:1.1vw;top:50%;transform:translate(-1.5vw,-50%);color:var(--cream);letter-spacing:-.075em;font-size:.7292vw;white-space:nowrap;opacity:0;transition:.6s;pointer-events:none}
+.dots li.on p{opacity:1;transform:translate(0,-50%)}
+.dots li.on button::before{transform:none;opacity:1}
+.dots li:hover p{opacity:1;transform:translate(0,-50%)}
+.at-8 .dots,.at-10 .dots,.at-11 .dots{opacity:0;pointer-events:none}
+.at-4 .dots p,.at-6 .dots p{color:var(--ink)}
+.at-4 .dots em,.at-6 .dots em{background:var(--ink)}
+.at-4 .dots button::before,.at-6 .dots button::before{border-color:var(--ink)}
+/* 빠른 링크 — 메인 섹션별 */
+.at-4 .qk li a{color:var(--ink)}
+.at-4 .qk .ln::before{background:var(--ink)}
+.at-4 .qk li a>em{background-image:url(../../windvalley/assets/ic/quick-arrow-ink.svg)}
+.at-0 .qk,.at-8 .qk,.at-10 .qk,.at-11 .qk{opacity:0;pointer-events:none;transition-delay:0s}
+.at-11 .hd{opacity:0;pointer-events:none}
+
+/* ── 화면 비율 구간 ── */
+@media all and (max-aspect-ratio:17/10){
+  .intro-logo{width:13vw;margin-top:-3.4375vw;margin-left:-6.2vw}
+  .intro .cen{height:calc(50% - 5vw)}
+  .vis-txt{bottom:5.2vw}
+  .fr-l{width:80%}
+  .fr-t{padding:1.7vw 1.5vw;gap:0 1vw}
+  .fr-t i{width:1.2vw}
+  .fr-t dt{font-size:1vw;margin-bottom:.7vw}
+  .fr-t dt strong{font-size:1.4vw}
+  .fr-t dd{font-size:.85vw}
+  .fr-r{padding-right:1.5vw}
+  .fr-mb button{height:4.8vw;padding:0 1.5vw;font-size:1vw}.fr-mb dt{font-size:1.2vw}.fr-mb dd{font-size:.9vw;margin-top:.3vw}
+  .fr-num{padding:1.5vw;width:29vw;min-width:0}.fr-num .sel~.sel{margin-top:2vw}
+  .fr-num .sel dt{font-size:1vw}.fr-num .sel dd{font-size:.9vw}.fr-num .ch p{font-size:1.1vw}
+  .fr-num .ch .b{gap:0 .4vw}.fr-num .ch .b button{width:2.2vw;height:2.2vw}
+  .fr-num .ori{margin-top:2vw;padding:1vw;gap:0 .7vw}.fr-num .ori i{width:1.1vw;top:.25vw}
+  .fr-num .ori dt{font-size:1vw}.fr-num .ori dd p~p{margin-top:.7vw}
+  .fr-num .ori dd span,.fr-num .ori dd strong{font-size:.9vw}
+  .g-txt dt{font-size:5.2vw;line-height:1.08em}
+  .g-txt dt span{font-size:4.7vw}
+  .g-txt dd{font-size:.9vw;margin-top:1vw}
+  .r-txt .t1{font-size:2.4vw}.r-txt .t2{font-size:1.4vw}.r-txt .t3{font-size:.9vw}
+  .c-txt{left:50%;top:calc(50% + 5dvh)}
+  .c-txt .t1{font-size:8vw;margin-bottom:1.5vw}
+  .c-txt .t2{font-size:1.25vw;margin-bottom:1vw}
+  .c-txt .t3{font-size:.95vw}
+  .c-num{padding-top:0;gap:17dvh 0}
+  .c-num dt{font-size:9vw;line-height:.9em}
+  .c-num dd{font-size:1.9vw}
+  .c-num .arr{margin-top:.8vw}
+  .c-num .arr span{width:1.2vw;height:1.2vw}
+  .i-txt{margin-bottom:-6dvh}
+  .i-txt strong{font-size:3.8vw}
+  .i-txt blockquote{margin:1.5vw 0}.i-txt blockquote p{font-size:1vw}
+  .i-txt .sign{margin-top:1.8vw}.i-txt .sign img{width:10.5vw}
+  .rm-txt{margin-bottom:-7dvh}
+  .rm-txt dt{font-size:1.8vw}.rm-txt dd{font-size:.9vw}.rm-txt .type{font-size:.8vw}
+  .rm-txt .link{margin-top:1.5vw}.rm-txt .link a{padding:2.1vw 0 2.3vw}
+  .rm-txt .link strong{font-size:1.85vw}.rm-txt .link p{font-size:1vw}
+  .rm-txt .link p em{width:1.1vw;height:1.1vw;right:-1.8vw}
+  .pb-txt{top:25dvh;left:58%}
+  .pb-txt .t1 span{font-size:.8vw;padding-bottom:.3vw}
+  .pb-txt .t2{font-size:.95vw;margin-top:.9vw}
+  .pb-txt .t3{font-size:1.9vw}
+  .p-tit{right:calc(50% + 3vw)}
+  .p-tit dt{width:9vw}
+  .p-tit dd{font-size:6.5vw;margin-top:1.2vw}
+  .p-txt{left:7%}
+  .p-txt .t1{font-size:4.2vw}.p-txt .t2{font-size:1.9vw;margin-bottom:1vw}.p-txt .t3{font-size:.95vw}
+  .pf-box{width:48.5%}
+  .pf-tit{margin-bottom:1.5vw}
+  .pf-tit h2{font-size:2.7vw}
+  .pf-tit p{font-size:.9vw;margin:1.6vw 0}
+  .pf-tit a span{font-size:.8vw}
+  .pf-press ul{gap:.8vw}.pf-press li{width:calc(50% - .4vw)}
+  .pf-press a{padding:1.6vw}
+  .pf-press .t1{font-size:.9vw;margin-bottom:1vw}
+  .pf-press .t2{font-size:1.15vw;margin-bottom:.7vw;min-height:3.197vw}
+  .pf-press .t3{font-size:.9vw;min-height:2.574vw}
+  .pf-press .t4{font-size:.9vw}
+  .pf-faq ul{gap:.8vw}.pf-faq li{width:calc(50% - .4vw)}
+  .pf-faq a{padding:2.02vw 2vw}
+  .pf-faq p{font-size:.9vw;padding-left:2vw}
+  .pf-faq p::before{width:1.2vw;height:1.2vw}
+  .pf-faq em{width:.4vw}
+  .cmap .dot{width:2vw}
+  .cmap .pl{width:35vw;left:3vw}
+  .cmap .pl.bot{top:3vw;left:calc(50% - 22vw);width:44vw}
+  .cmap .pl .t{padding-left:2.2vw}
+  .cmap .pl .t dt{font-size:1.2vw}
+  .cmap .pl .t dd{font-size:.9vw;margin-top:1vw}
+  .past-9 .cmap{padding:20dvh 2.5vw 5dvh}
+  .ct-box{padding:3.5vw 2.5vw 2.5vw;width:50%}
+  .ct-box .flex{margin-bottom:4vw}
+  .ct-box .tit{font-size:1.9vw;margin-bottom:2.3vw}
+  .ct-box .t1{font-size:.85vw}
+  .ct-box .flex .t1{font-size:.95vw}
+  .ct-box .t2{font-size:.9vw;margin-top:1.1vw}
+  .ct-box .flex .txt{flex-basis:23.04vw}
+  .ct-box .t3{font-size:1vw;margin-top:1vw}
+  .ct-box .link span{font-size:1.1vw;line-height:4em}
+  .ct-box .link em{width:1.1vw}
+  .ct-box .map{margin-top:2.6vw;padding-bottom:45%}
+  .dots li~li{margin-top:.5vw}
+  .dots button{width:1.3vw;height:1.3vw}
+  .dots em{width:.3vw;height:.3vw}
+  .dots p{right:2vw;font-size:1vw}
+}
+
+@media all and (max-aspect-ratio:145/100){
+  .cmap .d1{left:calc(50% - 36dvh);bottom:57.5%}
+  .cmap .d2{left:calc(50% - 45dvh);bottom:30%}
+  .cmap .d3{left:calc(50% - 7dvh);bottom:33%}
+  .cmap .d4{left:calc(50% + 1.5dvh);bottom:55.5%}
+}
+@media all and (max-aspect-ratio:13/10){
+  .intro-logo{width:16vw;margin-left:-7.6vw;margin-top:-4.2vw}
+  .intro .cen{height:calc(50% - 6vw)}
+  .vis-txt p{font-size:2vw}
+  .fr{display:none}
+  .m-rsv{display:block;position:absolute;left:0;bottom:4vw;padding:0 2.6042vw;width:100%}
+  .m-rsv a{font-size:1.6vw;line-height:3.2em}
+  .g-txt dt{font-size:6vw}
+  .g-txt dt span{font-size:5.4vw}
+  .g-txt dd{font-size:1.1vw;margin-top:1.5vw}
+  .r-txt .t1{font-size:2.9vw;margin-bottom:2vw}.r-txt .t2{font-size:1.7vw}.r-txt .t3{font-size:1.1vw}
+  .c-txt .t1{font-size:9vw}
+  .c-txt .t2{font-size:1.5vw;margin-bottom:1.5vw}
+  .c-txt .t3{font-size:1.1vw}
+  .c-num{gap:15dvh 0}
+  .c-num dt{font-size:11vw}
+  .c-num dd{font-size:2.4vw}
+  .c-num .arr{margin-top:1vw}
+  .c-num .arr span{width:1.5vw;height:1.5vw}
+  .past-3 .course.s2 .c-txt{left:4%}
+  .i-txt strong{font-size:4.8vw}
+  .i-txt blockquote{margin:1.7vw 0}.i-txt blockquote p{font-size:1.3vw}
+  .i-txt .sign{margin-top:2.5vw}.i-txt .sign img{width:13vw}
+  .rm-txt dt{font-size:2.3vw}
+  .rm-txt dd{font-size:1.2vw;margin-top:3vw}
+  .rm-txt .type{font-size:1vw;margin-top:6vw}
+  .rm-txt .link{margin-top:2vw}
+  .rm-txt .link strong{font-size:2.2vw;margin-bottom:1.5vw}
+  .rm-txt .link p{font-size:1.3vw}
+  .rm-txt .link p em{width:1.4vw;height:1.4vw;right:-2.4vw}
+  .pb-txt{left:50%}
+  .pb-txt .t1 span{font-size:1vw;padding-bottom:.4vw}
+  .pb-txt .t2{font-size:1.2vw;margin-top:1.2vw}
+  .pb-txt .t3{font-size:2.3vw;margin-top:3.4vw}
+  .past-7 .pb-txt{left:5vw}
+  .p-tit dt{width:10vw}
+  .p-tit dd{font-size:7.5vw;margin-top:1.5vw}
+  .p-txt .t1{font-size:5vw}.p-txt .t2{font-size:2.3vw;margin-bottom:1.5vw}.p-txt .t3{font-size:1.2vw}
+  .pf-tit{margin-bottom:2vw}
+  .pf-tit h2{font-size:3.2vw}
+  .pf-tit p{font-size:1.1vw;margin:2vw 0}
+  .pf-tit a span{font-size:1vw}
+  .pf-press .t1{font-size:1.1vw;margin-bottom:1.4vw}
+  .pf-press .t2{font-size:1.3vw;margin-bottom:.8vw;min-height:3.614vw}
+  .pf-press .t3{font-size:1.1vw;margin-bottom:2vw;min-height:3.146vw}
+  .pf-press .t4{font-size:1.1vw}
+  .pf-faq a{padding:2.38vw 2vw}
+  .pf-faq p{font-size:1.2vw;padding-left:2.5vw}
+  .pf-faq p::before{width:1.5vw;height:1.5vw}
+  .pf-faq em{width:.5vw}
+  .cmap .dot,.cmap .pl-x{width:3vw}
+  .cmap .pl{width:40vw;left:5vw}
+  .cmap .pl.bot{top:5vw;left:calc(50% - 25vw);width:50vw}
+  .cmap .pl .t{padding-left:2.5vw}
+  .cmap .pl .t dt{font-size:1.4vw}
+  .cmap .pl .t dd{font-size:1.1vw}
+  .ct-box{width:60%;padding:4vw 3vw 3vw}
+  .ct-box .tit{font-size:2.4vw}
+  .ct-box .flex{margin-bottom:5vw;gap:0 10vw}
+  .ct-box .t1{font-size:1.1vw}
+  .ct-box .flex .t1{font-size:1.2vw}
+  .ct-box .t2{font-size:1.1vw;margin-top:1.4vw}
+  .ct-box .flex .txt{flex-basis:28.16vw}
+  .ct-box .t3{font-size:1.2vw;margin-top:1.2vw}
+  .ct-box .link a{padding:0 3vw}
+  .ct-box .link span{font-size:1.3vw}
+  .ct-box .link em{width:1.3vw}
+  .ct-box .map{margin-top:3.5vw}
+  .dots li~li{margin-top:.7vw}
+  .dots button{width:1.7vw;height:1.7vw}
+  .dots em{width:.4vw;height:.4vw}
+  .dots p{right:2.5vw;font-size:1.3vw}
+  /* 빠른 링크 — 원본: 객실 구역은 짙게, 3번째 구역부터는 위 2개만 남기고 반 칸 내린다 */
+  .at-5 .qk li a{color:var(--ink)}
+  .at-5 .qk .ln::before{background:var(--ink)}
+  .at-5 .qk li a>em{background-image:url(../../windvalley/assets/ic/quick-arrow-ink.svg)}
+  .past-2 .qk li:nth-child(n+3){opacity:0;pointer-events:none}
+  .past-2 .qk ul{transform:translate(0,50%)}
+}
+@media all and (max-aspect-ratio:1/1){
+  .m-br{display:block}
+  .intro .cen{height:calc(50% - 9vw)}
+  .intro-logo{width:24vw;margin-left:-11.4vw;margin-top:-6.25vw}
+  .vis-scroll{display:none}
+  .vis-txt{left:5vw;bottom:7vw}
+  .vis-t{display:block}
+  .vis-wm{width:80vw}
+  .vis-txt p{margin-top:3.5vw;font-size:3.8vw}
+  .vis-vd video{transition:1s}
+  .m-rsv{padding:0 5vw;bottom:5vw}
+  .m-rsv a{font-size:2vw}
+  .is-open .vis-t{transform:translate(0,-70%)}
+  /* 2 */
+  .g-txt{left:5%;bottom:55dvh}
+  .g-txt dt,.g-txt dt span{font-size:7vw}
+  .g-txt dd{font-size:1.7vw}
+  .g-img::after{top:50%;height:50%}
+  .g-box{height:50%;clip-path:inset(0 0 0 0)}
+  .g-bg span{background-image:url(../../windvalley/assets/golf-bg-m.jpg);background-position:left 25% center;opacity:1}
+  .g-dim{background:linear-gradient(180deg,rgba(0,0,0,.5) 0%,rgba(0,0,0,.45) 10%,rgba(0,0,0,.18) 20%,rgba(0,0,0,0) 30%,rgba(0,0,0,0) 80%,rgba(0,0,0,.22) 100%)}
+  .past-1 .g-bg{transform:none}
+  .past-1 .g-bg span{opacity:1}
+  .past-1 .g-box{height:100%;clip-path:inset(0 0 0 0)}
+  /* 3 */
+  .resort,.resort .swiper-slide{background:var(--paper)}
+  .r-txt{transform:translate(20%,0)}
+  .r-txt .t1{color:var(--ink);font-size:3.8vw;margin-bottom:3vw}
+  .r-txt .t2{color:var(--ink);font-size:3.5vw;margin-bottom:3vw;line-height:1.29em}
+  .r-txt .t3{color:var(--ink);font-size:2.1vw}
+  .resort .sd1 .r-txt,.resort .sd2 .r-txt,.resort .sd3 .r-txt{left:5%;bottom:50%}
+  .resort .sd1 .r-img span{background-image:url(../../windvalley/assets/resort-1-m.jpg)}
+  .resort .sd2 .r-img span{background-image:url(../../windvalley/assets/resort-2-m.jpg)}
+  .resort .sd3 .r-img span{background-image:url(../../windvalley/assets/resort-3-m.jpg)}
+  .r-dim{display:none}
+  .r-img{overflow:hidden}
+  .r-img,.r-dim{height:40%}
+  /* 4 */
+  .c-txt{left:5%;transform:none;top:auto;bottom:55%}
+  .c-txt .t1{font-size:9.4vw;line-height:1.1em;margin-bottom:2vw}
+  .c-txt .t2{font-size:3.1vw;margin-bottom:0}
+  .c-txt .t3{display:none}
+  .c-num{left:0;height:45%;width:100%;flex-direction:row;gap:0;justify-content:space-evenly}
+  .c-num dt{font-size:16vw}
+  .c-num dd{font-size:3.5vw}
+  .c-num .arr{margin-top:1.4vw}
+  .c-num .arr span{width:2.3vw;height:2.3vw}
+  .past-3 .course.s2 .c-clip{clip-path:inset(55% 0 0 0)}
+  .past-3 .course.s2 .c-ho{width:100%;height:45%}
+  .past-3 .course.s2 .c-txt{top:auto;left:5%}
+  .past-3 .course.s2 .c-vd{left:0}
+  .past-4 .c-area{transform:none}
+  /* 5 */
+  .introduce{flex-direction:column}
+  .introduce .box{width:100%;height:50%}
+  .i-txt{margin-bottom:0;transform:translate(0,20%)}
+  .i-txt strong{font-size:6.3vw}
+  .i-txt blockquote{margin:2vw 0}.i-txt blockquote p{font-size:1.8vw;line-height:1.5em}
+  .i-img span{background-image:url(../../windvalley/assets/intro-img-m.jpg)}
+  .i-img,.past-5 .i-img{transform:none}
+  .past-4 .i-txt{transition-delay:.6s}
+  /* 6 */
+  .room{flex-direction:column-reverse}
+  .room .l{width:100%;height:60%}
+  .rm-img span{background-image:url(../../windvalley/assets/room-img-m.jpg)}
+  .room .r{width:100%;height:40%}
+  .rm-txt{margin-bottom:0}
+  .rm-txt dt{font-size:3.2vw}
+  .rm-txt dd{font-size:1.8vw}
+  .rm-txt .type{font-size:1.8vw;margin-top:6vw}
+  .rm-txt .link{margin-top:4vw;display:flex;flex-direction:column;align-items:center}
+  .rm-txt .link a{padding:2.5vw 0 3vw}
+  .rm-txt .link strong{font-size:3.2vw}
+  .rm-txt .link p{font-size:1.8vw}
+  .rm-txt .link p em{width:2vw;height:2vw;right:-2.8vw}
+  /* 7 */
+  .pb-txt{top:16%;left:5%}
+  .pb-txt .t1 span{font-size:1.8vw}
+  .pb-txt .t2{margin-top:2vw;font-size:1.9vw}
+  .pb-txt .t3{font-size:2.7vw;margin-top:4.7vw}
+  .past-7 .pb-txt{opacity:0;transform:translate(-100%,0)}
+  /* 8 */
+  .p-sd{width:100%}
+  .p-tit{display:none}
+  .p-img{height:50%;transition:1.4s}
+  .p-txt{bottom:60%;left:5%}
+  .p-txt ._p{display:none}.p-txt ._m{display:block}
+  .p-txt .t1{color:var(--ink);font-size:7.2vw;margin-bottom:5vw}
+  .p-txt .t2{color:var(--ink);font-size:3.6vw;margin-bottom:2.5vw}
+  .p-txt .t3{color:var(--ink);font-size:2vw}
+  .p-sd .sd1 .p-img span{background-image:url(../../windvalley/assets/package-1-m.jpg)}
+  .p-sd .sd2 .p-img span{background-image:url(../../windvalley/assets/package-2-m.jpg)}
+  .p-sd .sd3 .p-img span{background-image:url(../../windvalley/assets/package-3-m.jpg)}
+  .past-7 .p-img{transition-delay:0s}
+  /* 9 — 세로 슬라이드 2장(보도 2행 · FAQ 5행 격자) */
+  .press-faq{padding:0 5vw}
+  .pf-bg::before{background-image:url(../../windvalley/assets/press-faq-bg-1.jpg)}
+  .pf-bg::after{background:url(../../windvalley/assets/press-faq-bg-2.jpg) no-repeat center/cover;transition:1.2s;opacity:0}
+  .press-faq.s2 .pf-bg::after{opacity:1}
+  .pf-area{padding:0}
+  .pf-box{width:100%;display:flex;flex-direction:column;justify-content:center;padding-top:5vw}
+  .pf-tit{width:100%;margin-bottom:4vw}
+  .pf-tit h2{font-size:4.6vw}
+  .pf-tit p{font-size:2vw;margin:2vw 0 4vw;line-height:1.5em}
+  .pf-tit a span{font-size:2vw}
+  /* .swiper 의 좌우 auto 여백이 세로 flex 안에서 늘이기를 끊어 폭이 내용에 끌려간다 — 폭을 못박는다 */
+  .pf-press,.pf-faq{width:100%}
+  .pf-press{height:60vw;overflow:hidden}
+  .pf-press ul{gap:0}
+  .pf-press li{width:100%}
+  .pf-press a{padding:0 3vw;height:100%;display:flex;flex-direction:column;justify-content:center}
+  .pf-press .t1{font-size:1.9vw;margin-bottom:2vw}
+  .pf-press .t2{font-size:2.5vw;margin-bottom:2vw;min-height:6.95vw}
+  .pf-press .t3{font-size:1.9vw;margin-bottom:4vw;min-height:5.434vw}
+  .pf-press .t4{font-size:1.9vw}
+  .pf-faq{height:55vw;overflow:hidden}
+  .pf-faq ul{gap:0}
+  .pf-faq a{padding:0 5vw;height:100%}
+  .pf-faq p{font-size:2vw;padding-left:4.5vw}
+  .pf-faq p::before{width:2.5vw;height:2.5vw}
+  .pf-faq em{width:.8vw}
+  .pf-page{display:flex;justify-content:center;gap:0 1.5vw;margin-top:4vw}
+  .pf-page span{width:2vw;height:2vw;margin:0!important;background:var(--cream);opacity:.3;transition:.4s}
+  .pf-page .swiper-pagination-bullet-active{opacity:1}
+  /* 10 */
+  .cm-area{position:absolute;left:0;bottom:0;width:100%;height:50%;clip-path:inset(100% 0 0 0);transition:1.6s}
+  .cm-txt{display:block;position:absolute;left:5%;bottom:55dvh;opacity:0;transform:translate(15%,0);transition:1.2s}
+  .cm-txt dl{transform:scale(1.1);transition:1s;will-change:transform}
+  .cm-txt dt{color:var(--ink);font-family:var(--disp);font-size:7vw;line-height:1.08em;transition:1s}
+  .cm-txt dt span{font-size:7vw}
+  .cm-txt dd{color:var(--ink);font-size:1.7vw;letter-spacing:-.05em;line-height:1.67em;margin-top:.6771vw;transition:1s}
+  .cm-img .bg{background-image:url(../../windvalley/assets/course-map-m.jpg)}
+  .cm-img .zone{background-image:url(../../windvalley/assets/course-zone-m.png)}
+  .cmap .dot,.cmap .pl-x{width:4.5vw}
+  .cmap .dot{position:static}
+  .cmap .d1 .d-t{transform:translate(calc(50vw - 25vw),14dvh)}
+  .cmap .d2 .d-t{transform:translate(calc(50vw - 33vw),calc(25dvh + 6vw - 100%))}
+  .cmap .d3 .d-t{transform:translate(calc(50vw + 2vw),calc(25dvh + 3vw - 200%))}
+  .cmap .d4 .d-t{transform:translate(calc(50vw + 11vw),calc(25dvh - 13vw - 300%))}
+  .cmap .pl{left:0;top:20%;width:100%;padding:0 8vw}
+  .cmap .pl.bot{left:0;top:5%;width:80%}
+  .cmap .pl.bot .pl-box{display:block}
+  .cmap .pl.bot .t{border-radius:0 0 1.5vw 1.5vw;padding-top:4vw;padding-bottom:4vw}
+  .cmap .pl .vd{border-radius:1.5vw 1.5vw 0 0}
+  .cmap .pl .vd-wrap{width:100%}
+  .cmap .pl-x{display:block;position:absolute;left:0;top:0}
+  .cmap .pl-box{padding-left:7vw}
+  .cmap .pl .i{border-radius:1.5vw 0 0 1.5vw}
+  .cmap .pl .t{padding-left:4vw;border-radius:0 1.5vw 1.5vw 0}
+  .cmap .pl .t dt{font-size:2.6vw}
+  .cmap .pl .t dd{font-size:2vw;margin-top:2vw}
+  .past-9 .cm-txt{opacity:1;transform:none;transition-delay:.3s}
+  .past-9 .cm-txt dl{transform:none;transition-delay:1.5s}
+  .past-9 .cmap{padding:0}
+  .past-9 .cm-area{clip-path:inset(0 0 0 0);transition-delay:.4s}
+  .past-9 .cm-img span{background-position:center}
+  .past-10 .cm-txt dt,.past-10 .cm-txt dd{opacity:0;transform:translate(0,15dvh)}
+  /* 11 */
+  .ct-bg{background-image:url(../../windvalley/assets/contact-bg-m.jpg)}
+  .ct-box{right:5%;bottom:auto;top:15%;width:90%;padding:5vw 4vw 4vw}
+  .ct-box .tit{font-size:3.4vw;margin-bottom:3vw}
+  .ct-box .flex{gap:0;justify-content:space-between}
+  .ct-box .flex .t1,.ct-box .t1{font-size:2vw}
+  .ct-box .t1 span{padding-bottom:.5vw}
+  .ct-box .t2{font-size:2vw;margin-top:2vw;line-height:1.4em}
+  .ct-box .flex .txt{flex-basis:51.2vw}
+  .ct-box .t3{font-size:2vw;margin-top:2vw}
+  .ct-box .t3 span{padding-left:2vw}
+  .ct-box .t3 span::before{width:1.4vw;height:1.4vw}
+  .ct-box .link a{padding:0 4.5vw;border-radius:.8vw}
+  .ct-box .link p{gap:0 1vw}
+  .ct-box .link span{font-size:2vw}
+  .ct-box .link em{width:2vw}
+  /* 점 내비 */
+  .dots{top:35%}
+  .dots li~li{margin-top:1vw}
+  .dots button{width:2vw;height:2vw}
+  .dots em{width:.6vw;height:.6vw}
+  .dots p{display:none}
+  .at-2 .dots em,.at-3 .dots em,.at-5 .dots .p9 em,.at-5 .dots .p10 em,.at-5 .dots .p11 em,.at-7 .dots em,.at-9 .dots em{background:var(--ink)}
+  .at-2 .dots button::before,.at-3 .dots button::before,.at-5 .dots .p9 button::before,.at-5 .dots .p10 button::before,
+  .at-5 .dots .p11 button::before,.at-7 .dots button::before,.at-9 .dots button::before{border-color:var(--ink)}
+  .at-3 .qk.remove,.at-4 .qk,.at-5 .qk,.at-9 .qk{opacity:0;pointer-events:none}
+}
+@media all and (max-aspect-ratio:7/10){
+  .intro .bold{width:3px}
+  .intro .cen{height:calc(50% - 11vw)}
+  .intro-logo{width:30vw;margin-left:-14vw;margin-top:-8.25vw}
+  .vis-txt{left:5.5556vw}
+  .vis-wm{width:86.5278vw}
+  .vis-txt p{font-size:4.1667vw;margin-top:4vw}
+  .m-rsv{padding:0 5.5556vw}
+  .m-rsv a{font-size:3.8889vw;line-height:2.8em}
+  .g-txt{left:5.5556%}
+  .g-txt dt,.g-txt dt span{font-size:9.7222vw}
+  .g-txt dt{line-height:1.2em}
+  .g-txt dd{font-size:2.7778vw;margin-top:2.5vw}
+  .resort .sd1 .r-txt,.resort .sd2 .r-txt,.resort .sd3 .r-txt{left:5.5556%}
+  .r-txt .t1,.r-txt .t2{font-size:4.8611vw;margin-bottom:5.5556vw}
+  .r-txt .t3{font-size:2.7778vw}
+  .c-vd video{object-position:left center}
+  .c-txt{left:5.5556%}
+  .c-txt .t1{font-size:9.7222vw;line-height:1.2em}
+  .c-txt .t2{font-size:3.3333vw}
+  .c-num{height:50%}
+  .c-num dt{font-size:20.8333vw}
+  .c-num dd{font-size:4.1667vw}
+  .c-num .arr{margin-top:2.2vw}
+  .c-num .arr span{width:3.8vw;height:3.8vw}
+  .past-3 .course.s2 .c-txt{left:5.5556%}
+  .past-3 .course.s2 .c-clip{clip-path:inset(50% 0 0 0)}
+  .past-3 .course.s2 .c-ho{height:50%}
+  .i-txt strong{font-size:8.3333vw;height:2vw}
+  .i-txt blockquote{margin:1.5vw 0}.i-txt blockquote p{font-size:2.7778vw}
+  .i-txt .sign{margin-top:2vw}.i-txt .sign img{width:20vw}
+  .rm-txt{margin-bottom:-4vw}
+  .rm-txt dt{font-size:4.8611vw;line-height:1.37em}
+  .rm-txt dd{font-size:2.7778vw;margin-top:5.5vw}
+  .rm-txt .type{font-size:2.7778vw;margin-top:8vw}
+  .rm-txt .link{margin-top:5vw}
+  .rm-txt .link a{padding:4.1667vw 0 5.5556vw}
+  .rm-txt .link strong{font-size:4.8611vw;margin-bottom:2.7778vw}
+  .rm-txt .link p{font-size:2.7778vw}
+  .rm-txt .link p em{width:3.3333vw;height:3.3333vw;right:-4.8611vw}
+  .pb-bg span::before{background-image:url(../../windvalley/assets/package-bg-m.jpg)}
+  .pb-txt{left:5.5556%;top:20%}
+  .pb-txt .t1 span{font-size:2.7778vw;padding-bottom:.6vw}
+  .pb-txt .t2{font-size:3.0556vw;margin-top:2.7778vw}
+  .pb-txt .t3{font-size:4.1667vw;margin-top:5.5556vw}
+  .p-txt{bottom:55%}
+  .p-txt .t1{font-size:9.7222vw;margin-bottom:6.5vw}
+  .p-txt .t2{font-size:4.8611vw;margin-bottom:2.7778vw}
+  .p-txt .t3{font-size:2.7778vw}
+  .p-img{height:45%}
+  .pf-tit{margin-bottom:6.25vw}
+  .pf-tit h2{font-size:6.25vw}
+  .pf-tit p{font-size:2.7778vw;margin:2.7778vw 0 6.9444vw}
+  .pf-tit a span{font-size:2.7778vw}
+  .pf-press{height:90vw}
+  .pf-press a{padding:0 4.8611vw}
+  .pf-press .t1{font-size:2.7778vw;margin-bottom:2.7778vw}
+  .pf-press .t2{font-size:3.4722vw;margin-bottom:2.7778vw;min-height:9.652716vw}
+  .pf-press .t3{font-size:2.7778vw;margin-bottom:4.8611vw;min-height:7.944508vw}
+  .pf-press .t4{font-size:2.7778vw}
+  .pf-page{margin-top:6.9444vw;gap:0 2.7778vw}
+  .pf-page span{width:2.7778vw;height:2.7778vw}
+  .pf-faq{height:90vw}
+  .pf-faq a{padding:0 5.5556vw}
+  .pf-faq p{font-size:3.0556vw;padding-left:5.5556vw}
+  .pf-faq p::before{width:4.1667vw;height:4.1667vw}
+  .pf-faq em{width:.9722vw}
+  .cm-area{height:45%}
+  .cm-txt{left:5.5556%}
+  .cm-txt dt,.cm-txt dt span{font-size:9.7222vw}
+  .cm-txt dt{line-height:1.2em}
+  .cm-txt dd{font-size:2.7778vw;margin-top:2.5vw}
+  .cmap .d1 .d-t{transform:translate(calc(50vw - 27vw),14dvh)}
+  .cmap .d2 .d-t{transform:translate(calc(50vw - 37vw),calc(25dvh + 2.5vw - 100%))}
+  .cmap .d3 .d-t{transform:translate(calc(50vw + 2vw),calc(25dvh - 200%))}
+  .cmap .d4 .d-t{transform:translate(calc(50vw + 13vw),calc(25dvh - 18vw - 300%))}
+  .cmap .pl{padding:0 5.5556vw}
+  .cmap .pl-box{padding-left:7vw}
+  .cmap .pl .t{padding-left:4.8611vw}
+  .cmap .pl .t dt{font-size:3.6111vw}
+  .cmap .pl .t dd{font-size:2.7778vw;margin-top:3.4722vw}
+  .cmap .pl.bot{left:calc(10% - 3vw)}
+  .ct-box{padding:6.9444vw 5.5556vw 5.5556vw}
+  .ct-box .tit{font-size:4.8611vw;margin-bottom:4.1667vw}
+  .ct-box .flex{display:block;margin-bottom:8vw}
+  .ct-box .t1,.ct-box .flex .t1{font-size:2.7778vw}
+  .ct-box .t2{font-size:2.7778vw;margin-top:2.4vw}
+  .ct-box .t3{font-size:2.7778vw;margin-top:2.7778vw}
+  .ct-box .t3 span{padding-left:2.7778vw}
+  .ct-box .t3 span::before{width:1.9444vw;height:1.9444vw}
+  .ct-box .link{margin-top:5vw;display:flex}
+  .ct-box .link a{padding:0 6vw;border-radius:1vw}
+  .ct-box .link p{gap:0 1.5vw}
+  .ct-box .link span{font-size:3vw;line-height:3.5em}
+  .ct-box .link em{width:3vw}
+  .dots li~li{margin-top:1.2vw}
+  .dots button{width:3vw;height:3vw}
+  .dots em{width:.8vw;height:.8vw}
+  .at-4 .dots em{background:var(--cream)}
+  .at-4 .dots button::before{border-color:var(--cream)}
+}
+/* ── 스크립트 없이(기본형) — 섹션을 세로로 흘리고 등장 연출은 끝난 상태로 ── */
+.no-js.pg-main,.no-js .pg-main,html.no-js,html.no-js body{overflow:auto;height:auto}
+.no-js .intro{display:none}
+.no-js .vis{clip-path:none}
+.no-js .vis-vd{opacity:1}
+.no-js .vis-t{transform:translate(0,-45%) scale(.78)}
+.no-js .vis-wm .wm-line path{stroke-dashoffset:0!important}
+.no-js .vis-wm .wm-fill path{fill:currentColor}
+.no-js .vis-txt p span,.no-js .vis-scroll,.no-js .fr{transform:none;opacity:1}
+.no-js .g-txt{opacity:1;transform:none}.no-js .g-txt dl{transform:none}
+.no-js .g-img::after{transform:scaleY(0)}.no-js .g-box{clip-path:none}.no-js .g-dim{opacity:1}.no-js .g-bg span{opacity:.4}
+.no-js .r-img{opacity:1;transform:none}
+.no-js .resort .swiper-wrapper,.no-js .p-sd .swiper-wrapper{display:block}
+.no-js .resort .swiper-slide:not(.sd1),.no-js .p-sd .swiper-slide:not(.sd1){display:none}
+.no-js .resort .sd1 .r-txt,.no-js .p-sd .sd1 .p-txt{opacity:1;transform:none}
+.no-js .r-txt p span,.no-js .p-txt span,.no-js .p-txt .t3 p span{transform:none}
+.no-js .resort .sd1 .r-img span{transform:none}
+.no-js .c-txt.lt .t1 p{opacity:1;background-position:0 50%}.no-js .c-txt .t2 span{transform:none}
+.no-js .c-vd video{transform:none}
+.no-js .i-img,.no-js .rm-img{transform:none}.no-js .i-txt,.no-js .rm-txt{opacity:1;transform:none}
+.no-js .pb-wrap{opacity:1;transform:none}.no-js .pb-bg span::before{transform:none}
+.no-js .pkg-sd{transform:none}.no-js .p-tit,.no-js .p-txt{opacity:1;transform:none}.no-js .p-img{transform:none}
+.no-js .pf-bg{transform:none}.no-js .pf-box{opacity:1;transform:none}
+.no-js .cmap .d{opacity:1;transform:none}
+.no-js .ct-bg{opacity:1;transform:none}.no-js .ct-box,.no-js .ct-box .link{opacity:1;transform:none}
+.no-js .ct-box span{transform:none}
+.no-js .dots{display:none}
+.no-js .s-foot .ft .ft-logo,.no-js .s-foot .ft .ft-link{opacity:1;transform:none}
+
+/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
+.rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
+.hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
+</style>
+</head>
+<body class="pg-main">
+<a class="skip" href="#main">본문 바로가기</a>
+<header class="hd" id="hd">
+<div class="hd-in">
+<div class="hd-l"><a class="hd-logo" href="./index.html" aria-label="윈드밸리 골프 & 리조트 홈"><img class="w" src="../../windvalley/assets/ic/logo-wh.svg" alt="윈드밸리 골프 & 리조트" width="126" height="66"><img class="d" src="../../windvalley/assets/ic/logo-co.svg" alt="" width="126" height="66"></a><nav class="hd-gnb" aria-label="주 메뉴"><ul><li><div class="g1"><a href="./story.html"><span>WINDVALLEY</span></a><em></em></div><div class="g2"><a href="./story.html"><span>윈드밸리 스토리</span></a><a href="./clubhouse.html"><span>클럽하우스</span></a></div></li><li><div class="g1"><a href="./course.html"><span>COURSE</span></a><em></em></div><div class="g2"><a href="./course.html"><span>27 Hole</span></a><a href="./course-36.html"><span>36 Hole</span></a></div></li><li><div class="g1"><a href="./room.html"><span>ROOM</span></a><em></em></div><div class="g2"><a href="./room.html"><span>디럭스 트윈룸</span></a><a href="./room-suite.html"><span>스위트룸</span></a></div></li><li><div class="g1"><a href="./guide.html"><span>RESERVATION</span></a><em></em></div><div class="g2"><a href="./guide.html"><span>이용가이드 & 요금</span></a><a href="./reservation.html"><span>실시간예약</span></a><a href="./group-event.html"><span>단체행사</span></a><a href="./reservation-check.html"><span>예약조회 & 변경</span></a></div></li><li><div class="g1"><a href="./construction.html"><span>EXPERIENCE</span></a><em></em></div><div class="g2"><a href="./construction.html"><span>공사현장</span></a><a href="./tour.html"><span>외부 즐길거리</span></a><a href="./scenery.html"><span>윈드밸리 전경</span></a></div></li><li><div class="g1"><a href="./spa.html"><span>FACILITY</span></a><em></em></div><div class="g2"><a href="./spa.html"><span>스파 & 마사지</span></a><a href="./billiard.html"><span>당구장 & 노래방</span></a></div></li><li><div class="g1"><a href="./location.html"><span>CONTACT</span></a><em></em></div><div class="g2"><a href="./location.html"><span>오시는 길</span></a><a href="./faq.html"><span>FAQ</span></a><a href="./press.html"><span>PRESS</span></a><a href="./notice.html"><span>NOTICE</span></a><a href="./immigration.html"><span>태국 입국신고서</span></a></div></li></ul></nav></div>
+<div class="hd-r"><div class="hd-util"><p><a href="./login.html"><span>Login</span></a></p><p><a href="./join.html"><span>Join</span></a></p><p><a href="./login.html"><span>My Page</span></a></p></div><button class="hd-burger" type="button" aria-label="전체 메뉴 열기" aria-expanded="false" aria-controls="gnav"><i class="b"></i><i class="b"></i><i class="b m"></i><i class="a"></i><i class="a"></i><span class="lb">MENU</span></button></div>
+</div>
+</header>
+<div class="gnav" id="gnav" aria-hidden="true">
+<div class="gn-img"><span></span></div>
+<div class="gn-area"><div class="gn-box">
+<img class="gn-logo" src="../../windvalley/assets/ic/logo-wh.svg" alt="" width="126" height="66">
+<ul class="gn-menu"><li><a class="t" href="./story.html"><span>WINDVALLEY</span></a><div class="dep"><a href="./story.html">윈드밸리 스토리</a><a href="./clubhouse.html">클럽하우스</a></div></li><li><a class="t" href="./course.html"><span>COURSE</span></a><div class="dep"><a href="./course.html">27 Hole</a><a href="./course-36.html">36 Hole</a></div></li><li><a class="t" href="./room.html"><span>ROOM</span></a><div class="dep"><a href="./room.html">디럭스 트윈룸</a><a href="./room-suite.html">스위트룸</a></div></li><li><a class="t" href="./guide.html"><span>RESERVATION</span></a><div class="dep"><a href="./guide.html">이용가이드 & 요금</a><a href="./reservation.html">실시간예약</a><a href="./group-event.html">단체행사</a><a href="./reservation-check.html">예약조회 & 변경</a></div></li><li><a class="t" href="./construction.html"><span>EXPERIENCE</span></a><div class="dep"><a href="./construction.html">공사현장</a><a href="./tour.html">외부 즐길거리</a><a href="./scenery.html">윈드밸리 전경</a></div></li><li><a class="t" href="./spa.html"><span>FACILITY</span></a><div class="dep"><a href="./spa.html">스파 & 마사지</a><a href="./billiard.html">당구장 & 노래방</a></div></li><li><a class="t" href="./location.html"><span>CONTACT</span></a><div class="dep"><a href="./location.html">오시는 길</a><a href="./faq.html">FAQ</a><a href="./press.html">PRESS</a><a href="./notice.html">NOTICE</a><a href="./immigration.html">태국 입국신고서</a></div></li></ul>
+<div class="gn-member"><a href="./login.html"><em></em><span>Login</span></a><a href="./join.html"><em></em><span>Join</span></a><a href="./login.html"><em></em><span>My Page</span></a></div>
+<div class="gn-link"><ul><li><a href="#" data-qp="film"><span class="flip"><span class="f-t">골프호텔 신축공사 현장 영상</span><span class="f-b" aria-hidden="true">골프호텔 신축공사 현장 영상</span></span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13M9 2.5 14.5 8 9 13.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a></li><li><a href="#" data-qp="member"><span class="flip"><span class="f-t"><em>Membership</em>(회원권 상담)</span><span class="f-b" aria-hidden="true"><em>Membership</em>(회원권 상담)</span></span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13M9 2.5 14.5 8 9 13.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a></li></ul><ul><li><a href="#" data-qp="prize"><span class="flip"><span class="f-t"><em>Hole-in-One Prize</em></span><span class="f-b" aria-hidden="true"><em>Hole-in-One Prize</em></span></span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13M9 2.5 14.5 8 9 13.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a></li><li><a href="#" data-qp="brochure"><span class="flip"><span class="f-t"><em>View Brochure</em></span><span class="f-b" aria-hidden="true"><em>View Brochure</em></span></span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13M9 2.5 14.5 8 9 13.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a></li></ul></div>
+<div class="gn-typo"><strong><svg class="typo-svg" viewBox="-2.0 -2.0 700.2 77.2" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.3 2.4H14.4L33 62.1L31.3 73ZM51.1 0.2 51.9 8.3 34.3 61.9Q34.3 61.9 33.8 63.65Q33.3 65.4 32.8 67.95Q32.3 70.5 32.2 73H31.3L29.5 64.1L50.2 0.2ZM51.1 0.3 72.1 59.2 69.9 73 47.7 11.1ZM91.7 2.4 73 61.9Q73 61.9 72.5 63.7Q72 65.5 71.45 68.05Q70.9 70.6 70.8 73H69.9L68.7 63.1L86.1 2.4ZM84.2 9Q85 6 83.7 4.4Q82.4 2.8 80.4 2.8H79.5V1.8H99.2V2.8Q99.2 2.8 98.8 2.8Q98.4 2.8 98.4 2.8Q96.1 2.8 93.4 4.25Q90.7 5.7 89.6 9ZM16.5 9H8.6Q7.4 5.7 4.75 4.25Q2.1 2.8 -0.2 2.8Q-0.2 2.8 -0.6 2.8Q-1 2.8 -1 2.8V1.8H21.2V2.8H20.3Q18.4 2.8 16.95 4.4Q15.5 6 16.5 9Z"/><path d="M120.4 1.8V71.8H113.9V1.8ZM114.2 64.5V71.8H106.2V70.8Q106.2 70.8 106.85 70.8Q107.5 70.8 107.5 70.8Q110.1 70.8 111.95 68.95Q113.8 67.1 113.9 64.5ZM114.2 9.1H113.9Q113.8 6.5 111.95 4.65Q110.1 2.8 107.5 2.8Q107.5 2.8 106.85 2.8Q106.2 2.8 106.2 2.8V1.8H114.2ZM120.1 64.5H120.4Q120.5 67.1 122.35 68.95Q124.2 70.8 126.8 70.8Q126.8 70.8 127.4 70.8Q128 70.8 128.1 70.8V71.8H120.1ZM120.1 9.1V1.8H128.1V2.8Q128 2.8 127.4 2.8Q126.8 2.8 126.8 2.8Q124.2 2.8 122.35 4.65Q120.5 6.5 120.4 9.1Z"/><path d="M148.6 0.3 206.7 62.3 207.6 73.2 149.5 11.3ZM148.8 64.7V71.8H140.5V70.8Q140.5 70.8 141.4 70.8Q142.3 70.8 142.4 70.8Q144.9 70.8 146.7 69Q148.5 67.2 148.5 64.7ZM153.1 64.7Q153.1 67.2 154.9 69Q156.7 70.8 159.2 70.8Q159.3 70.8 160.2 70.8Q161.1 70.8 161.1 70.8V71.8H152.8V64.7ZM148.6 0.3 153 5.9 153.1 71.8H148.5V12.8Q148.5 7.7 148.05 4Q147.6 0.3 147.6 0.3ZM207.6 1.8V60.4Q207.6 63.6 207.8 66.55Q208 69.5 208.25 71.35Q208.5 73.2 208.5 73.2H207.6L203.1 67.9V1.8ZM215.6 1.8V2.8Q215.6 2.8 214.7 2.8Q213.8 2.8 213.8 2.8Q211.3 2.8 209.5 4.55Q207.7 6.3 207.6 8.9H207.3V1.8ZM195 1.8H203.3V8.9H203.1Q203 6.3 201.25 4.55Q199.5 2.8 196.9 2.8Q196.9 2.8 196 2.8Q195.1 2.8 195 2.8Z"/><path d="M262 1.8Q272.7 1.8 280.75 6.15Q288.8 10.5 293.35 18.4Q297.9 26.3 297.9 36.8Q297.9 47.3 293.35 55.15Q288.8 63 280.75 67.4Q272.7 71.8 262 71.8H240.6L240.5 68.8Q240.5 68.8 242.65 68.8Q244.8 68.8 248.05 68.8Q251.3 68.8 254.5 68.8Q257.7 68.8 259.85 68.8Q262 68.8 262 68.8Q270.6 68.8 276.95 64.8Q283.3 60.8 286.85 53.6Q290.4 46.4 290.4 36.8Q290.4 27.2 286.85 20Q283.3 12.8 276.9 8.8Q270.5 4.8 262 4.8Q262 4.8 259.75 4.8Q257.5 4.8 254.15 4.8Q250.8 4.8 247.45 4.8Q244.1 4.8 241.8 4.8Q239.5 4.8 239.5 4.8V1.8ZM242.3 1.8V71.8H235.8V1.8ZM236.1 64.5V71.8H228.1V70.8Q228.1 70.8 228.75 70.8Q229.4 70.8 229.4 70.8Q232 70.8 233.85 68.95Q235.7 67.1 235.8 64.5ZM236.1 9.1H235.8Q235.8 6.5 233.9 4.65Q232 2.8 229.4 2.8Q229.4 2.8 228.8 2.8Q228.2 2.8 228.2 2.8L228.1 1.8H236.1Z"/><path d="M341.5 73.2 310.5 2.4H319L343.5 63.7ZM341.5 73.2 340.6 66.2 367.2 2.1H373.2L346.1 62.9Q346.1 62.9 345.55 64.15Q345 65.4 344.25 67.2Q343.5 69 342.95 70.7Q342.4 72.4 342.4 73.2ZM364.4 9Q365.5 6 364 4.4Q362.5 2.8 360.6 2.8H359.7V1.8H379.8V2.8Q379.8 2.8 379.35 2.8Q378.9 2.8 378.9 2.8Q376.7 2.8 374.2 4.25Q371.7 5.7 370.1 9.1ZM321.7 9 313.4 9.1Q311.9 5.7 309.4 4.25Q306.9 2.8 304.6 2.8Q304.6 2.8 304.2 2.8Q303.8 2.8 303.8 2.8V1.8H326.3V2.8H325.4Q323.5 2.8 322.05 4.4Q320.6 6 321.7 9Z"/><path d="M416.7 0.4 446.3 71.2H437.8L414.7 9.9ZM395.2 64.5Q394.5 66.5 395 67.9Q395.5 69.3 396.65 70.05Q397.8 70.8 399 70.8H399.9V71.8H379.8V70.8Q379.8 70.8 380.25 70.8Q380.7 70.8 380.7 70.8Q383 70.8 385.45 69.35Q387.9 67.9 389.5 64.5ZM416.7 0.4 417.6 7.4 392.5 71.5H386.5L412.1 10.7Q412.1 10.7 412.65 9.45Q413.2 8.2 413.95 6.4Q414.7 4.6 415.25 2.9Q415.8 1.2 415.8 0.4ZM430.8 44.5V47.5H399.5V44.5ZM435.3 64.5H443.5Q445 67.9 447.5 69.35Q450 70.8 452.3 70.8Q452.3 70.8 452.7 70.8Q453.1 70.8 453.1 70.8V71.8H430.6V70.8H431.5Q433.4 70.8 434.9 69.15Q436.4 67.5 435.3 64.5Z"/><path d="M474.2 1.8V71.8H467.7V1.8ZM501.2 68.7V71.8H473.9V68.7ZM507.3 55.6 501.5 71.8H484.9L488.5 68.7Q493.8 68.7 497.15 67.05Q500.5 65.4 502.6 62.4Q504.7 59.4 506.3 55.6ZM468 64.5V71.8H460V70.8Q460 70.8 460.65 70.8Q461.3 70.8 461.3 70.8Q463.9 70.8 465.75 68.95Q467.6 67.1 467.7 64.5ZM468 9.1H467.7Q467.6 6.5 465.75 4.65Q463.9 2.8 461.3 2.8Q461.3 2.8 460.65 2.8Q460 2.8 460 2.8V1.8H468ZM473.9 9.1V1.8H481.9V2.8Q481.8 2.8 481.2 2.8Q480.6 2.8 480.6 2.8Q478 2.8 476.15 4.65Q474.3 6.5 474.2 9.1Z"/><path d="M532.4 1.8V71.8H525.9V1.8ZM559.4 68.7V71.8H532.1V68.7ZM565.5 55.6 559.7 71.8H543.1L546.7 68.7Q552 68.7 555.35 67.05Q558.7 65.4 560.8 62.4Q562.9 59.4 564.5 55.6ZM526.2 64.5V71.8H518.2V70.8Q518.2 70.8 518.85 70.8Q519.5 70.8 519.5 70.8Q522.1 70.8 523.95 68.95Q525.8 67.1 525.9 64.5ZM526.2 9.1H525.9Q525.8 6.5 523.95 4.65Q522.1 2.8 519.5 2.8Q519.5 2.8 518.85 2.8Q518.2 2.8 518.2 2.8V1.8H526.2ZM532.1 9.1V1.8H540.1V2.8Q540 2.8 539.4 2.8Q538.8 2.8 538.8 2.8Q536.2 2.8 534.35 4.65Q532.5 6.5 532.4 9.1Z"/><path d="M590.6 1.8V71.8H584.1V1.8ZM617.6 68.7V71.8H590.3V68.7ZM613.3 35.8V38.8H590.3V35.8ZM617.6 1.8V4.9H590.3V1.8ZM623.7 55.6 617.9 71.8H601.3L604.9 68.7Q610.2 68.7 613.55 67.05Q616.9 65.4 619 62.4Q621.1 59.4 622.7 55.6ZM613.3 38.6V45.2H612.3V43.7Q612.3 41.7 610.9 40.25Q609.5 38.8 607.5 38.8V38.6ZM613.3 29.4V36H607.5V35.8Q609.5 35.7 610.9 34.25Q612.3 32.8 612.3 30.8V29.4ZM617.6 4.6V12.6H616.6V10.8Q616.6 8.4 614.9 6.65Q613.2 4.9 610.7 4.8V4.6ZM617.6 0V2.9L605.4 1.8Q607.6 1.8 610.05 1.5Q612.5 1.2 614.6 0.8Q616.7 0.4 617.6 0ZM584.4 64.5V71.8H576.4V70.8Q576.4 70.8 577.05 70.8Q577.7 70.8 577.7 70.8Q580.3 70.8 582.15 68.95Q584 67.1 584.1 64.5ZM584.4 9.1H584.1Q584.1 6.5 582.2 4.65Q580.3 2.8 577.7 2.8Q577.7 2.8 577.1 2.8Q576.5 2.8 576.5 2.8L576.4 1.8H584.4Z"/><path d="M645.1 1.9 664.7 38.4 660.4 41.9 636.5 1.9ZM666.1 39.6V71.8H659.6V39.6ZM683.9 1.9H690L665.4 41.7L661.8 40.6ZM679.8 9Q680.7 7.6 680.3 6.15Q679.9 4.7 678.8 3.75Q677.7 2.8 676.3 2.8Q676.3 2.8 675.7 2.8Q675.1 2.8 675.1 2.8V1.8H697.3V2.8H695.9Q692.8 2.8 690.1 4.6Q687.4 6.4 685.8 8.7ZM648.9 9 640.5 8.7Q639.1 6.4 636.4 4.6Q633.7 2.8 630.5 2.8H629.1V1.8H653.7V2.8Q653.7 2.8 653.05 2.8Q652.4 2.8 652.4 2.8Q650.2 2.8 649.05 4.85Q647.9 6.9 648.9 9ZM659.8 64.5V71.8H651.9V70.8Q651.9 70.8 652.5 70.8Q653.1 70.8 653.2 70.8Q655.8 70.8 657.65 68.95Q659.5 67.1 659.6 64.5ZM665.8 64.5H666.1Q666.1 67.1 668 68.95Q669.9 70.8 672.5 70.8Q672.5 70.8 673.1 70.8Q673.7 70.8 673.7 70.8V71.8H665.8Z"/></svg></strong><span>GOLF & RESORT</span></div>
+</div></div>
+</div>
+<aside class="qk" id="qk" aria-label="빠른 링크"><ul><li><i class="ln"></i><a href="#" data-qp="film"><span class="flip"><span class="f-t">골프호텔 신축공사 현장 영상</span><span class="f-b" aria-hidden="true">골프호텔 신축공사 현장 영상</span></span><span class="q-m">공사현장 영상</span><em></em></a></li><li><i class="ln"></i><a href="#" data-qp="member"><span class="flip"><span class="f-t"><em>Membership</em>(회원권 상담)</span><span class="f-b" aria-hidden="true"><em>Membership</em>(회원권 상담)</span></span><span class="q-m">회원권 상담</span><em></em></a></li><li><i class="ln"></i><a href="#" data-qp="prize"><span class="flip"><span class="f-t"><em>Hole-in-One Prize</em></span><span class="f-b" aria-hidden="true"><em>Hole-in-One Prize</em></span></span><span class="q-m"><em>Hole-in-One</em></span><em></em></a></li><li><i class="ln"></i><a href="#" data-qp="brochure"><span class="flip"><span class="f-t"><em>View Brochure</em></span><span class="f-b" aria-hidden="true"><em>View Brochure</em></span></span><span class="q-m"><em>Brochure</em></span><em></em></a></li></ul><div class="qk-rsv"><a href="./reservation.html"><dl><dt aria-hidden="true"></dt><dd>예약하기</dd></dl></a></div></aside>
+<div class="qp" id="qp-film" role="dialog" aria-modal="true" aria-label="골프호텔 신축공사 현장 영상"><button class="qp-x" type="button" aria-label="닫기"><i></i><i></i></button><div class="qp-film"><video src="../../windvalley/assets/film-site.mp4" poster="../../windvalley/assets/film-site.jpg" controls playsinline preload="none"></video></div></div>
+<div class="qp" id="qp-prize" role="dialog" aria-modal="true" aria-label="홀인원 상금"><button class="qp-x" type="button" aria-label="닫기"><i></i><i></i></button><div class="qp-prize"><p class="qt">HOLE-IN-ONE PRIZE</p><p class="qs">윈드밸리 전 코스 파3 홀에서 홀인원을 기록하시면 상금과 기념패를 드립니다.</p><img src="../../windvalley/assets/prize.jpg" alt="홀인원 상금 안내 이미지" width="900" height="1200" loading="lazy"></div></div>
+<div class="qp" id="qp-member" role="dialog" aria-modal="true" aria-label="회원권 상담 신청"><button class="qp-x" type="button" aria-label="닫기"><i></i><i></i></button><div class="qp-member"><div class="qm-l"><p class="qt">MEMBERSHIP</p><p class="qs">윈드밸리 골프 & 리조트는 멤버십 회원에게<br>합리적인 이용료와 가장 좋은 라운드를 약속합니다.</p></div><form class="qm-f" action="#" onsubmit="return false"><label>이름<input type="text" name="name" placeholder="이름을 입력해주세요" autocomplete="name"></label><label>연락처<input type="tel" name="tel" placeholder="숫자만 입력해주세요" autocomplete="tel"></label><label>희망 상담 시간<select name="time"><option>오전 (10:00~12:00)</option><option>오후 (13:00~17:00)</option><option>저녁 (17:00~19:00)</option></select></label><label class="chk"><input type="checkbox" name="agree"> 개인정보 수집 및 이용에 동의합니다.</label><button type="submit">상담 신청하기</button></form></div></div>
+<main id="main">
+<div class="fp"><section class="sc s-vis" id="s1" aria-label="첫 화면"><div class="intro" aria-hidden="true"><i class="ln bold l"></i><i class="ln cen t"></i><i class="ln cen b"></i><i class="ln bold r"></i><div class="intro-logo"><svg viewBox="0 0 700 233" aria-hidden="true"><g class="em"><g transform="translate(245.0 -20) scale(2.1)"><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M30 30 L50 58 L70 30"/><path d="M38 30 L50 47 L62 30"/><path d="M31 20 C40 13, 47 25, 56 18 S69 12, 71 17"/><path d="M37 12 C44 7, 50 15, 57 10"/></g></g></g><g class="tx" transform="translate(0 118.0) scale(0.9560)"><path d="M6.3 2.4H14.4L33 62.1L31.3 73ZM51.1 0.2 51.9 8.3 34.3 61.9Q34.3 61.9 33.8 63.65Q33.3 65.4 32.8 67.95Q32.3 70.5 32.2 73H31.3L29.5 64.1L50.2 0.2ZM51.1 0.3 72.1 59.2 69.9 73 47.7 11.1ZM91.7 2.4 73 61.9Q73 61.9 72.5 63.7Q72 65.5 71.45 68.05Q70.9 70.6 70.8 73H69.9L68.7 63.1L86.1 2.4ZM84.2 9Q85 6 83.7 4.4Q82.4 2.8 80.4 2.8H79.5V1.8H99.2V2.8Q99.2 2.8 98.8 2.8Q98.4 2.8 98.4 2.8Q96.1 2.8 93.4 4.25Q90.7 5.7 89.6 9ZM16.5 9H8.6Q7.4 5.7 4.75 4.25Q2.1 2.8 -0.2 2.8Q-0.2 2.8 -0.6 2.8Q-1 2.8 -1 2.8V1.8H21.2V2.8H20.3Q18.4 2.8 16.95 4.4Q15.5 6 16.5 9Z"/><path d="M124.4 1.8V71.8H117.9V1.8ZM118.2 64.5V71.8H110.2V70.8Q110.2 70.8 110.85 70.8Q111.5 70.8 111.5 70.8Q114.1 70.8 115.95 68.95Q117.8 67.1 117.9 64.5ZM118.2 9.1H117.9Q117.8 6.5 115.95 4.65Q114.1 2.8 111.5 2.8Q111.5 2.8 110.85 2.8Q110.2 2.8 110.2 2.8V1.8H118.2ZM124.1 64.5H124.4Q124.5 67.1 126.35 68.95Q128.2 70.8 130.8 70.8Q130.8 70.8 131.4 70.8Q132 70.8 132.1 70.8V71.8H124.1ZM124.1 9.1V1.8H132.1V2.8Q132 2.8 131.4 2.8Q130.8 2.8 130.8 2.8Q128.2 2.8 126.35 4.65Q124.5 6.5 124.4 9.1Z"/><path d="M156.6 0.3 214.7 62.3 215.6 73.2 157.5 11.3ZM156.8 64.7V71.8H148.5V70.8Q148.5 70.8 149.4 70.8Q150.3 70.8 150.4 70.8Q152.9 70.8 154.7 69Q156.5 67.2 156.5 64.7ZM161.1 64.7Q161.1 67.2 162.9 69Q164.7 70.8 167.2 70.8Q167.3 70.8 168.2 70.8Q169.1 70.8 169.1 70.8V71.8H160.8V64.7ZM156.6 0.3 161 5.9 161.1 71.8H156.5V12.8Q156.5 7.7 156.05 4Q155.6 0.3 155.6 0.3ZM215.6 1.8V60.4Q215.6 63.6 215.8 66.55Q216 69.5 216.25 71.35Q216.5 73.2 216.5 73.2H215.6L211.1 67.9V1.8ZM223.6 1.8V2.8Q223.6 2.8 222.7 2.8Q221.8 2.8 221.8 2.8Q219.3 2.8 217.5 4.55Q215.7 6.3 215.6 8.9H215.3V1.8ZM203 1.8H211.3V8.9H211.1Q211 6.3 209.25 4.55Q207.5 2.8 204.9 2.8Q204.9 2.8 204 2.8Q203.1 2.8 203 2.8Z"/><path d="M274 1.8Q284.7 1.8 292.75 6.15Q300.8 10.5 305.35 18.4Q309.9 26.3 309.9 36.8Q309.9 47.3 305.35 55.15Q300.8 63 292.75 67.4Q284.7 71.8 274 71.8H252.6L252.5 68.8Q252.5 68.8 254.65 68.8Q256.8 68.8 260.05 68.8Q263.3 68.8 266.5 68.8Q269.7 68.8 271.85 68.8Q274 68.8 274 68.8Q282.6 68.8 288.95 64.8Q295.3 60.8 298.85 53.6Q302.4 46.4 302.4 36.8Q302.4 27.2 298.85 20Q295.3 12.8 288.9 8.8Q282.5 4.8 274 4.8Q274 4.8 271.75 4.8Q269.5 4.8 266.15 4.8Q262.8 4.8 259.45 4.8Q256.1 4.8 253.8 4.8Q251.5 4.8 251.5 4.8V1.8ZM254.3 1.8V71.8H247.8V1.8ZM248.1 64.5V71.8H240.1V70.8Q240.1 70.8 240.75 70.8Q241.4 70.8 241.4 70.8Q244 70.8 245.85 68.95Q247.7 67.1 247.8 64.5ZM248.1 9.1H247.8Q247.8 6.5 245.9 4.65Q244 2.8 241.4 2.8Q241.4 2.8 240.8 2.8Q240.2 2.8 240.2 2.8L240.1 1.8H248.1Z"/><path d="M357.5 73.2 326.5 2.4H335L359.5 63.7ZM357.5 73.2 356.6 66.2 383.2 2.1H389.2L362.1 62.9Q362.1 62.9 361.55 64.15Q361 65.4 360.25 67.2Q359.5 69 358.95 70.7Q358.4 72.4 358.4 73.2ZM380.4 9Q381.5 6 380 4.4Q378.5 2.8 376.6 2.8H375.7V1.8H395.8V2.8Q395.8 2.8 395.35 2.8Q394.9 2.8 394.9 2.8Q392.7 2.8 390.2 4.25Q387.7 5.7 386.1 9.1ZM337.7 9 329.4 9.1Q327.9 5.7 325.4 4.25Q322.9 2.8 320.6 2.8Q320.6 2.8 320.2 2.8Q319.8 2.8 319.8 2.8V1.8H342.3V2.8H341.4Q339.5 2.8 338.05 4.4Q336.6 6 337.7 9Z"/><path d="M436.7 0.4 466.3 71.2H457.8L434.7 9.9ZM415.2 64.5Q414.5 66.5 415 67.9Q415.5 69.3 416.65 70.05Q417.8 70.8 419 70.8H419.9V71.8H399.8V70.8Q399.8 70.8 400.25 70.8Q400.7 70.8 400.7 70.8Q403 70.8 405.45 69.35Q407.9 67.9 409.5 64.5ZM436.7 0.4 437.6 7.4 412.5 71.5H406.5L432.1 10.7Q432.1 10.7 432.65 9.45Q433.2 8.2 433.95 6.4Q434.7 4.6 435.25 2.9Q435.8 1.2 435.8 0.4ZM450.8 44.5V47.5H419.5V44.5ZM455.3 64.5H463.5Q465 67.9 467.5 69.35Q470 70.8 472.3 70.8Q472.3 70.8 472.7 70.8Q473.1 70.8 473.1 70.8V71.8H450.6V70.8H451.5Q453.4 70.8 454.9 69.15Q456.4 67.5 455.3 64.5Z"/><path d="M498.2 1.8V71.8H491.7V1.8ZM525.2 68.7V71.8H497.9V68.7ZM531.3 55.6 525.5 71.8H508.9L512.5 68.7Q517.8 68.7 521.15 67.05Q524.5 65.4 526.6 62.4Q528.7 59.4 530.3 55.6ZM492 64.5V71.8H484V70.8Q484 70.8 484.65 70.8Q485.3 70.8 485.3 70.8Q487.9 70.8 489.75 68.95Q491.6 67.1 491.7 64.5ZM492 9.1H491.7Q491.6 6.5 489.75 4.65Q487.9 2.8 485.3 2.8Q485.3 2.8 484.65 2.8Q484 2.8 484 2.8V1.8H492ZM497.9 9.1V1.8H505.9V2.8Q505.8 2.8 505.2 2.8Q504.6 2.8 504.6 2.8Q502 2.8 500.15 4.65Q498.3 6.5 498.2 9.1Z"/><path d="M560.4 1.8V71.8H553.9V1.8ZM587.4 68.7V71.8H560.1V68.7ZM593.5 55.6 587.7 71.8H571.1L574.7 68.7Q580 68.7 583.35 67.05Q586.7 65.4 588.8 62.4Q590.9 59.4 592.5 55.6ZM554.2 64.5V71.8H546.2V70.8Q546.2 70.8 546.85 70.8Q547.5 70.8 547.5 70.8Q550.1 70.8 551.95 68.95Q553.8 67.1 553.9 64.5ZM554.2 9.1H553.9Q553.8 6.5 551.95 4.65Q550.1 2.8 547.5 2.8Q547.5 2.8 546.85 2.8Q546.2 2.8 546.2 2.8V1.8H554.2ZM560.1 9.1V1.8H568.1V2.8Q568 2.8 567.4 2.8Q566.8 2.8 566.8 2.8Q564.2 2.8 562.35 4.65Q560.5 6.5 560.4 9.1Z"/><path d="M622.6 1.8V71.8H616.1V1.8ZM649.6 68.7V71.8H622.3V68.7ZM645.3 35.8V38.8H622.3V35.8ZM649.6 1.8V4.9H622.3V1.8ZM655.7 55.6 649.9 71.8H633.3L636.9 68.7Q642.2 68.7 645.55 67.05Q648.9 65.4 651 62.4Q653.1 59.4 654.7 55.6ZM645.3 38.6V45.2H644.3V43.7Q644.3 41.7 642.9 40.25Q641.5 38.8 639.5 38.8V38.6ZM645.3 29.4V36H639.5V35.8Q641.5 35.7 642.9 34.25Q644.3 32.8 644.3 30.8V29.4ZM649.6 4.6V12.6H648.6V10.8Q648.6 8.4 646.9 6.65Q645.2 4.9 642.7 4.8V4.6ZM649.6 0V2.9L637.4 1.8Q639.6 1.8 642.05 1.5Q644.5 1.2 646.6 0.8Q648.7 0.4 649.6 0ZM616.4 64.5V71.8H608.4V70.8Q608.4 70.8 609.05 70.8Q609.7 70.8 609.7 70.8Q612.3 70.8 614.15 68.95Q616 67.1 616.1 64.5ZM616.4 9.1H616.1Q616.1 6.5 614.2 4.65Q612.3 2.8 609.7 2.8Q609.7 2.8 609.1 2.8Q608.5 2.8 608.5 2.8L608.4 1.8H616.4Z"/><path d="M681.1 1.9 700.7 38.4 696.4 41.9 672.5 1.9ZM702.1 39.6V71.8H695.6V39.6ZM719.9 1.9H726L701.4 41.7L697.8 40.6ZM715.8 9Q716.7 7.6 716.3 6.15Q715.9 4.7 714.8 3.75Q713.7 2.8 712.3 2.8Q712.3 2.8 711.7 2.8Q711.1 2.8 711.1 2.8V1.8H733.3V2.8H731.9Q728.8 2.8 726.1 4.6Q723.4 6.4 721.8 8.7ZM684.9 9 676.5 8.7Q675.1 6.4 672.4 4.6Q669.7 2.8 666.5 2.8H665.1V1.8H689.7V2.8Q689.7 2.8 689.05 2.8Q688.4 2.8 688.4 2.8Q686.2 2.8 685.05 4.85Q683.9 6.9 684.9 9ZM695.8 64.5V71.8H687.9V70.8Q687.9 70.8 688.5 70.8Q689.1 70.8 689.2 70.8Q691.8 70.8 693.65 68.95Q695.5 67.1 695.6 64.5ZM701.8 64.5H702.1Q702.1 67.1 704 68.95Q705.9 70.8 708.5 70.8Q708.5 70.8 709.1 70.8Q709.7 70.8 709.7 70.8V71.8H701.8Z"/></g><g class="tx" transform="translate(133.0 200.0) scale(0.4178)"><path d="M70.9 43.9V60.4Q68.6 63.4 64.7 66.4Q60.8 69.4 55.15 71.35Q49.5 73.3 41.9 73.3Q31.3 73.2 23.2 68.65Q15.1 64.1 10.55 55.95Q6 47.8 6 36.9Q6 26 10.55 17.8Q15.1 9.6 23.2 5.05Q31.3 0.5 41.9 0.5Q47.4 0.5 51.8 1.4Q56.2 2.3 59.75 3.85Q63.3 5.4 66.2 7.3L68.2 21.4H67.3Q65.8 15.6 62.35 11.65Q58.9 7.7 53.7 5.6Q48.5 3.5 41.9 3.5Q33.5 3.5 27.1 7.7Q20.7 11.9 17.1 19.4Q13.5 26.9 13.5 36.9Q13.5 46.9 17.1 54.4Q20.7 61.9 27.1 66.05Q33.5 70.2 41.9 70.3Q46.3 70.3 50.35 69.25Q54.4 68.2 58 66.25Q61.6 64.3 64.4 61.6L64.5 43.9Q64.5 39.4 59.4 39.4H57.8V38.4H77.4V39.4H75.9Q70.7 39.4 70.9 43.9Z"/><path d="M144.7 0.5Q155.4 0.5 163.5 5.05Q171.6 9.6 176.15 17.8Q180.7 26 180.7 36.9Q180.7 47.8 176.15 56Q171.6 64.2 163.5 68.75Q155.4 73.3 144.7 73.3Q134.1 73.3 126 68.75Q117.9 64.2 113.35 56Q108.8 47.8 108.8 36.9Q108.8 26 113.35 17.8Q117.9 9.6 126 5.05Q134.1 0.5 144.7 0.5ZM144.7 70.3Q153.2 70.3 159.55 66.1Q165.9 61.9 169.45 54.4Q173 46.9 173 36.9Q173 26.9 169.45 19.4Q165.9 11.9 159.55 7.7Q153.2 3.5 144.7 3.5Q136.3 3.5 129.95 7.7Q123.6 11.9 120.05 19.4Q116.5 26.9 116.5 36.9Q116.5 46.9 120.05 54.4Q123.6 61.9 129.95 66.1Q136.3 70.3 144.7 70.3Z"/><path d="M227.8 1.9V71.9H221.3V1.9ZM254.8 68.8V71.9H227.5V68.8ZM260.9 55.7 255.1 71.9H238.5L242.1 68.8Q247.4 68.8 250.75 67.15Q254.1 65.5 256.2 62.5Q258.3 59.5 259.9 55.7ZM221.6 64.6V71.9H213.6V70.9Q213.6 70.9 214.25 70.9Q214.9 70.9 214.9 70.9Q217.5 70.9 219.35 69.05Q221.2 67.2 221.3 64.6ZM221.6 9.2H221.3Q221.2 6.6 219.35 4.75Q217.5 2.9 214.9 2.9Q214.9 2.9 214.25 2.9Q213.6 2.9 213.6 2.9V1.9H221.6ZM227.5 9.2V1.9H235.5V2.9Q235.4 2.9 234.8 2.9Q234.2 2.9 234.2 2.9Q231.6 2.9 229.75 4.75Q227.9 6.6 227.8 9.2Z"/><path d="M306 1.9V71.9H299.5V1.9ZM328.7 35.9V38.9H305.7V35.9ZM333 1.9V5H305.7V1.9ZM328.7 38.7V45.3H327.7V43.8Q327.7 41.8 326.3 40.35Q324.9 38.9 322.9 38.9V38.7ZM328.7 29.5V36.1H322.9V35.9Q324.9 35.8 326.3 34.35Q327.7 32.9 327.7 30.9V29.5ZM333 4.7V11.4H332V9.9Q332 7.9 330.55 6.45Q329.1 5 327.1 5V4.7ZM333 0.1V3L320.8 1.9Q323 1.9 325.45 1.6Q327.9 1.3 330 0.9Q332.1 0.5 333 0.1ZM299.8 64.6V71.9H291.8V70.9Q291.8 70.9 292.45 70.9Q293.1 70.9 293.1 70.9Q295.7 70.9 297.55 69.05Q299.4 67.2 299.5 64.6ZM299.8 9.2H299.5Q299.5 6.6 297.6 4.75Q295.7 2.9 293.1 2.9Q293.1 2.9 292.5 2.9Q291.9 2.9 291.9 2.9L291.8 1.9H299.8ZM305.7 64.6H306Q306.1 67.2 307.95 69.05Q309.8 70.9 312.4 70.9Q312.4 70.9 313 70.9Q313.6 70.9 313.7 70.9V71.9H305.7Z"/><path d="M440.3 0.5Q443.7 0.5 446.9 1.4Q450.1 2.3 452.8 3.85Q455.5 5.4 457.3 7.6L455.5 18.9H454.5Q454.5 14.1 452.7 10.65Q450.9 7.2 447.75 5.35Q444.6 3.5 440.3 3.5Q434.6 3.5 430.85 7.5Q427.1 11.5 427.1 17.6Q427.1 23.9 431.2 29.3Q435.3 34.7 443 41.6Q445.2 43.5 447.85 45.95Q450.5 48.4 453.95 51.4Q457.4 54.4 461.7 58Q464.9 60.6 468.25 63.5Q471.6 66.4 475.15 68.5Q478.7 70.6 482.5 70.9V71.9Q480.6 71.9 477.05 71.8Q473.5 71.7 469.2 70.4Q464.9 69.1 460.6 65.6Q456.8 62.5 453.65 59.85Q450.5 57.2 447.85 54.95Q445.2 52.7 442.9 50.65Q440.6 48.6 438.4 46.6Q432.6 41.2 428.55 36.85Q424.5 32.5 422.35 27.95Q420.2 23.4 420.2 17.6Q420.2 13.9 421.6 10.8Q423 7.7 425.65 5.4Q428.3 3.1 432 1.8Q435.7 0.5 440.3 0.5ZM467.9 39Q469 44.5 468.5 49.5Q468 54.5 466.05 58.75Q464.1 63 460.75 66.2Q457.4 69.4 452.8 71.15Q448.2 72.9 442.5 72.9Q436.7 72.9 431.85 71.9Q427 70.9 423.3 68.95Q419.6 67 417.05 64.15Q414.5 61.3 413.2 57.65Q411.9 54 411.9 49.5Q411.9 46.6 412.55 44.15Q413.2 41.7 414.4 39.6Q415.6 37.5 417.25 35.85Q418.9 34.2 420.9 32.8Q422.9 31.4 425.2 30.4L426.6 32.6Q424.6 34.2 423.2 36.15Q421.8 38.1 420.9 40.25Q420 42.4 419.6 44.75Q419.2 47.1 419.2 49.5Q419.2 54 420.75 57.75Q422.3 61.5 425.25 64.2Q428.2 66.9 432.55 68.4Q436.9 69.9 442.5 69.9Q447.6 69.9 451.55 67.85Q455.5 65.8 458.15 62.45Q460.8 59.1 462.1 55Q463.4 50.9 463.2 46.75Q463 42.6 461.2 39Q460.2 37 458.65 35.7Q457.1 34.4 454.7 34.4H453.2V33.4H473.1V34.4H471.6Q469.4 34.4 468.45 35.7Q467.5 37 467.9 39Z"/><path d="M561.4 1.9H575.5Q580 1.9 583.65 3.2Q587.3 4.5 589.8 6.95Q592.3 9.4 593.65 12.85Q595 16.3 595 20.7Q595 25.5 592.75 29.9Q590.5 34.3 586.65 37.05Q582.8 39.8 578 39.8Q579.7 40.5 581.7 42.65Q583.7 44.8 585.2 46.8Q585.2 46.8 586.55 48.75Q587.9 50.7 589.95 53.5Q592 56.3 594.1 59Q596.2 61.7 597.7 63.3Q599.7 65.5 601.7 67.2Q603.7 68.9 606.05 69.9Q608.4 70.9 611.3 70.9V71.9H605.8Q601.2 71.9 597.85 70.5Q594.5 69.1 592.2 67.05Q589.9 65 588.3 63.1Q588 62.7 586.65 60.8Q585.3 58.9 583.45 56.25Q581.6 53.6 579.8 51Q578 48.4 576.7 46.55Q575.4 44.7 575.2 44.4Q573.3 41.9 571 39.8Q568.7 37.7 566 37.7V36.7Q566 36.7 567.55 36.75Q569.1 36.8 571.3 36.7Q573.9 36.6 577 35.9Q580.1 35.2 582.8 33Q585.5 30.8 586.9 26.3Q587.2 25.2 587.4 23.55Q587.6 21.9 587.5 20.3Q587.4 13.5 584.05 9.45Q580.7 5.4 575.1 5.1Q572.3 4.9 569.35 4.95Q566.4 5 564.4 5Q562.4 5 562.4 5Q562.4 4.9 562.15 4.15Q561.9 3.4 561.65 2.65Q561.4 1.9 561.4 1.9ZM562.7 1.9V71.9H556.2V1.9ZM556.5 64.6V71.9H548.5V70.9Q548.5 70.9 549.15 70.9Q549.8 70.9 549.8 70.9Q552.4 70.9 554.25 69.05Q556.1 67.2 556.2 64.6ZM556.5 9.2H556.2Q556.1 6.6 554.25 4.75Q552.4 2.9 549.8 2.9Q549.8 2.9 549.15 2.9Q548.5 2.9 548.5 2.9V1.9H556.5ZM562.4 64.6H562.7Q562.7 67.2 564.6 69.05Q566.5 70.9 569.1 70.9Q569.1 70.9 569.7 70.9Q570.3 70.9 570.3 70.9V71.9H562.4Z"/><path d="M652.4 1.9V71.9H645.9V1.9ZM679.4 68.8V71.9H652.1V68.8ZM675.1 35.9V38.9H652.1V35.9ZM679.4 1.9V5H652.1V1.9ZM685.5 55.7 679.7 71.9H663.1L666.7 68.8Q672 68.8 675.35 67.15Q678.7 65.5 680.8 62.5Q682.9 59.5 684.5 55.7ZM675.1 38.7V45.3H674.1V43.8Q674.1 41.8 672.7 40.35Q671.3 38.9 669.3 38.9V38.7ZM675.1 29.5V36.1H669.3V35.9Q671.3 35.8 672.7 34.35Q674.1 32.9 674.1 30.9V29.5ZM679.4 4.7V12.7H678.4V10.9Q678.4 8.5 676.7 6.75Q675 5 672.5 4.9V4.7ZM679.4 0.1V3L667.2 1.9Q669.4 1.9 671.85 1.6Q674.3 1.3 676.4 0.9Q678.5 0.5 679.4 0.1ZM646.2 64.6V71.9H638.2V70.9Q638.2 70.9 638.85 70.9Q639.5 70.9 639.5 70.9Q642.1 70.9 643.95 69.05Q645.8 67.2 645.9 64.6ZM646.2 9.2H645.9Q645.9 6.6 644 4.75Q642.1 2.9 639.5 2.9Q639.5 2.9 638.9 2.9Q638.3 2.9 638.3 2.9L638.2 1.9H646.2Z"/><path d="M737 0.5Q738.6 0.5 740.45 0.7Q742.3 0.9 744.05 1.25Q745.8 1.6 747.25 1.95Q748.7 2.3 749.5 2.7V13.8H748.6Q748.6 9 745.3 6.25Q742 3.5 737.3 3.5Q731.8 3.5 728.4 6.95Q725 10.4 725 15Q725 16.9 725.85 19.45Q726.7 22 729 24.2L748.7 42.4Q751.7 45.2 752.7 48.4Q753.7 51.6 753.7 54.6Q753.7 62.9 748.65 68.1Q743.6 73.3 735 73.3Q732.6 73.3 729.35 72.8Q726.1 72.3 723.05 71.05Q720 69.8 718 67.8Q717.7 66.2 717.7 63.8Q717.7 61.4 718.1 58.75Q718.5 56.1 719.2 53.9H720.1Q719.6 59 721.4 62.8Q723.2 66.6 726.65 68.55Q730.1 70.5 734.5 70.3Q740 70 743.95 66.45Q747.9 62.9 747.9 56.9Q747.9 54 746.9 51.65Q745.9 49.3 744 47.6L724.8 29.8Q721.8 27 720.6 23.65Q719.4 20.3 719.4 17.4Q719.4 13.2 721.4 9.3Q723.4 5.4 727.35 2.95Q731.3 0.5 737 0.5ZM749.5 1.5V3.6H741.9V1.5Z"/><path d="M824.3 0.5Q835 0.5 843.1 5.05Q851.2 9.6 855.75 17.8Q860.3 26 860.3 36.9Q860.3 47.8 855.75 56Q851.2 64.2 843.1 68.75Q835 73.3 824.3 73.3Q813.7 73.3 805.6 68.75Q797.5 64.2 792.95 56Q788.4 47.8 788.4 36.9Q788.4 26 792.95 17.8Q797.5 9.6 805.6 5.05Q813.7 0.5 824.3 0.5ZM824.3 70.3Q832.8 70.3 839.15 66.1Q845.5 61.9 849.05 54.4Q852.6 46.9 852.6 36.9Q852.6 26.9 849.05 19.4Q845.5 11.9 839.15 7.7Q832.8 3.5 824.3 3.5Q815.9 3.5 809.55 7.7Q803.2 11.9 799.65 19.4Q796.1 26.9 796.1 36.9Q796.1 46.9 799.65 54.4Q803.2 61.9 809.55 66.1Q815.9 70.3 824.3 70.3Z"/><path d="M906.1 1.9H920.2Q924.7 1.9 928.35 3.2Q932 4.5 934.5 6.95Q937 9.4 938.35 12.85Q939.7 16.3 939.7 20.7Q939.7 25.5 937.45 29.9Q935.2 34.3 931.35 37.05Q927.5 39.8 922.7 39.8Q924.4 40.5 926.4 42.65Q928.4 44.8 929.9 46.8Q929.9 46.8 931.25 48.75Q932.6 50.7 934.65 53.5Q936.7 56.3 938.8 59Q940.9 61.7 942.4 63.3Q944.4 65.5 946.4 67.2Q948.4 68.9 950.75 69.9Q953.1 70.9 956 70.9V71.9H950.5Q945.9 71.9 942.55 70.5Q939.2 69.1 936.9 67.05Q934.6 65 933 63.1Q932.7 62.7 931.35 60.8Q930 58.9 928.15 56.25Q926.3 53.6 924.5 51Q922.7 48.4 921.4 46.55Q920.1 44.7 919.9 44.4Q918 41.9 915.7 39.8Q913.4 37.7 910.7 37.7V36.7Q910.7 36.7 912.25 36.75Q913.8 36.8 916 36.7Q918.6 36.6 921.7 35.9Q924.8 35.2 927.5 33Q930.2 30.8 931.6 26.3Q931.9 25.2 932.1 23.55Q932.3 21.9 932.2 20.3Q932.1 13.5 928.75 9.45Q925.4 5.4 919.8 5.1Q917 4.9 914.05 4.95Q911.1 5 909.1 5Q907.1 5 907.1 5Q907.1 4.9 906.85 4.15Q906.6 3.4 906.35 2.65Q906.1 1.9 906.1 1.9ZM907.4 1.9V71.9H900.9V1.9ZM901.2 64.6V71.9H893.2V70.9Q893.2 70.9 893.85 70.9Q894.5 70.9 894.5 70.9Q897.1 70.9 898.95 69.05Q900.8 67.2 900.9 64.6ZM901.2 9.2H900.9Q900.8 6.6 898.95 4.75Q897.1 2.9 894.5 2.9Q894.5 2.9 893.85 2.9Q893.2 2.9 893.2 2.9V1.9H901.2ZM907.1 64.6H907.4Q907.4 67.2 909.3 69.05Q911.2 70.9 913.8 70.9Q913.8 70.9 914.4 70.9Q915 70.9 915 70.9V71.9H907.1Z"/><path d="M1011.1 2.2V71.9H1004.6V2.2ZM1036.8 1.8V4.8H978.9V1.8ZM1036.8 4.5V12.6L1035.8 12.5V10.8Q1035.8 8.3 1034.05 6.6Q1032.3 4.9 1029.9 4.8V4.5ZM1036.8 0V2.9L1024.6 1.8Q1026.8 1.8 1029.25 1.5Q1031.7 1.2 1033.8 0.8Q1035.9 0.4 1036.8 0ZM1004.9 64.6V71.9H996.9V70.9Q996.9 70.9 997.55 70.9Q998.2 70.9 998.2 70.9Q1000.8 70.9 1002.65 69.05Q1004.5 67.2 1004.6 64.6ZM1010.8 64.6H1011.1Q1011.2 67.2 1013.05 69.05Q1014.9 70.9 1017.5 70.9Q1017.5 70.9 1018.15 70.9Q1018.8 70.9 1018.8 70.9V71.9H1010.8ZM985.8 4.5V4.8Q983.3 4.9 981.6 6.6Q979.9 8.3 979.9 10.8V12.5L978.9 12.6V4.5ZM978.9 0Q979.9 0.4 981.95 0.8Q984 1.2 986.5 1.5Q989 1.8 991.1 1.8L978.9 2.9Z"/></g></svg></div></div><div class="vis"><div class="vis-area"><div class="vis-move"><div class="vis-vd"><video src="../../windvalley/assets/vis.mp4" poster="../../windvalley/assets/vis.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div><div class="vis-dim"></div><div class="vis-txt"><div class="vis-t"><div class="vis-wm"><h1 class="blind">윈드밸리 골프 & 리조트</h1><svg class="wm-line" viewBox="-2.0 -2.0 700.2 77.2" stroke="currentColor" fill="none" stroke-width="1" aria-hidden="true" focusable="false"><path class="p1" d="M6.3 2.4H14.4L33 62.1L31.3 73ZM51.1 0.2 51.9 8.3 34.3 61.9Q34.3 61.9 33.8 63.65Q33.3 65.4 32.8 67.95Q32.3 70.5 32.2 73H31.3L29.5 64.1L50.2 0.2ZM51.1 0.3 72.1 59.2 69.9 73 47.7 11.1ZM91.7 2.4 73 61.9Q73 61.9 72.5 63.7Q72 65.5 71.45 68.05Q70.9 70.6 70.8 73H69.9L68.7 63.1L86.1 2.4ZM84.2 9Q85 6 83.7 4.4Q82.4 2.8 80.4 2.8H79.5V1.8H99.2V2.8Q99.2 2.8 98.8 2.8Q98.4 2.8 98.4 2.8Q96.1 2.8 93.4 4.25Q90.7 5.7 89.6 9ZM16.5 9H8.6Q7.4 5.7 4.75 4.25Q2.1 2.8 -0.2 2.8Q-0.2 2.8 -0.6 2.8Q-1 2.8 -1 2.8V1.8H21.2V2.8H20.3Q18.4 2.8 16.95 4.4Q15.5 6 16.5 9Z"/><path class="p2" d="M120.4 1.8V71.8H113.9V1.8ZM114.2 64.5V71.8H106.2V70.8Q106.2 70.8 106.85 70.8Q107.5 70.8 107.5 70.8Q110.1 70.8 111.95 68.95Q113.8 67.1 113.9 64.5ZM114.2 9.1H113.9Q113.8 6.5 111.95 4.65Q110.1 2.8 107.5 2.8Q107.5 2.8 106.85 2.8Q106.2 2.8 106.2 2.8V1.8H114.2ZM120.1 64.5H120.4Q120.5 67.1 122.35 68.95Q124.2 70.8 126.8 70.8Q126.8 70.8 127.4 70.8Q128 70.8 128.1 70.8V71.8H120.1ZM120.1 9.1V1.8H128.1V2.8Q128 2.8 127.4 2.8Q126.8 2.8 126.8 2.8Q124.2 2.8 122.35 4.65Q120.5 6.5 120.4 9.1Z"/><path class="p3" d="M148.6 0.3 206.7 62.3 207.6 73.2 149.5 11.3ZM148.8 64.7V71.8H140.5V70.8Q140.5 70.8 141.4 70.8Q142.3 70.8 142.4 70.8Q144.9 70.8 146.7 69Q148.5 67.2 148.5 64.7ZM153.1 64.7Q153.1 67.2 154.9 69Q156.7 70.8 159.2 70.8Q159.3 70.8 160.2 70.8Q161.1 70.8 161.1 70.8V71.8H152.8V64.7ZM148.6 0.3 153 5.9 153.1 71.8H148.5V12.8Q148.5 7.7 148.05 4Q147.6 0.3 147.6 0.3ZM207.6 1.8V60.4Q207.6 63.6 207.8 66.55Q208 69.5 208.25 71.35Q208.5 73.2 208.5 73.2H207.6L203.1 67.9V1.8ZM215.6 1.8V2.8Q215.6 2.8 214.7 2.8Q213.8 2.8 213.8 2.8Q211.3 2.8 209.5 4.55Q207.7 6.3 207.6 8.9H207.3V1.8ZM195 1.8H203.3V8.9H203.1Q203 6.3 201.25 4.55Q199.5 2.8 196.9 2.8Q196.9 2.8 196 2.8Q195.1 2.8 195 2.8Z"/><path class="p4" d="M262 1.8Q272.7 1.8 280.75 6.15Q288.8 10.5 293.35 18.4Q297.9 26.3 297.9 36.8Q297.9 47.3 293.35 55.15Q288.8 63 280.75 67.4Q272.7 71.8 262 71.8H240.6L240.5 68.8Q240.5 68.8 242.65 68.8Q244.8 68.8 248.05 68.8Q251.3 68.8 254.5 68.8Q257.7 68.8 259.85 68.8Q262 68.8 262 68.8Q270.6 68.8 276.95 64.8Q283.3 60.8 286.85 53.6Q290.4 46.4 290.4 36.8Q290.4 27.2 286.85 20Q283.3 12.8 276.9 8.8Q270.5 4.8 262 4.8Q262 4.8 259.75 4.8Q257.5 4.8 254.15 4.8Q250.8 4.8 247.45 4.8Q244.1 4.8 241.8 4.8Q239.5 4.8 239.5 4.8V1.8ZM242.3 1.8V71.8H235.8V1.8ZM236.1 64.5V71.8H228.1V70.8Q228.1 70.8 228.75 70.8Q229.4 70.8 229.4 70.8Q232 70.8 233.85 68.95Q235.7 67.1 235.8 64.5ZM236.1 9.1H235.8Q235.8 6.5 233.9 4.65Q232 2.8 229.4 2.8Q229.4 2.8 228.8 2.8Q228.2 2.8 228.2 2.8L228.1 1.8H236.1Z"/><path class="p5" d="M341.5 73.2 310.5 2.4H319L343.5 63.7ZM341.5 73.2 340.6 66.2 367.2 2.1H373.2L346.1 62.9Q346.1 62.9 345.55 64.15Q345 65.4 344.25 67.2Q343.5 69 342.95 70.7Q342.4 72.4 342.4 73.2ZM364.4 9Q365.5 6 364 4.4Q362.5 2.8 360.6 2.8H359.7V1.8H379.8V2.8Q379.8 2.8 379.35 2.8Q378.9 2.8 378.9 2.8Q376.7 2.8 374.2 4.25Q371.7 5.7 370.1 9.1ZM321.7 9 313.4 9.1Q311.9 5.7 309.4 4.25Q306.9 2.8 304.6 2.8Q304.6 2.8 304.2 2.8Q303.8 2.8 303.8 2.8V1.8H326.3V2.8H325.4Q323.5 2.8 322.05 4.4Q320.6 6 321.7 9Z"/><path class="p6" d="M416.7 0.4 446.3 71.2H437.8L414.7 9.9ZM395.2 64.5Q394.5 66.5 395 67.9Q395.5 69.3 396.65 70.05Q397.8 70.8 399 70.8H399.9V71.8H379.8V70.8Q379.8 70.8 380.25 70.8Q380.7 70.8 380.7 70.8Q383 70.8 385.45 69.35Q387.9 67.9 389.5 64.5ZM416.7 0.4 417.6 7.4 392.5 71.5H386.5L412.1 10.7Q412.1 10.7 412.65 9.45Q413.2 8.2 413.95 6.4Q414.7 4.6 415.25 2.9Q415.8 1.2 415.8 0.4ZM430.8 44.5V47.5H399.5V44.5ZM435.3 64.5H443.5Q445 67.9 447.5 69.35Q450 70.8 452.3 70.8Q452.3 70.8 452.7 70.8Q453.1 70.8 453.1 70.8V71.8H430.6V70.8H431.5Q433.4 70.8 434.9 69.15Q436.4 67.5 435.3 64.5Z"/><path class="p7" d="M474.2 1.8V71.8H467.7V1.8ZM501.2 68.7V71.8H473.9V68.7ZM507.3 55.6 501.5 71.8H484.9L488.5 68.7Q493.8 68.7 497.15 67.05Q500.5 65.4 502.6 62.4Q504.7 59.4 506.3 55.6ZM468 64.5V71.8H460V70.8Q460 70.8 460.65 70.8Q461.3 70.8 461.3 70.8Q463.9 70.8 465.75 68.95Q467.6 67.1 467.7 64.5ZM468 9.1H467.7Q467.6 6.5 465.75 4.65Q463.9 2.8 461.3 2.8Q461.3 2.8 460.65 2.8Q460 2.8 460 2.8V1.8H468ZM473.9 9.1V1.8H481.9V2.8Q481.8 2.8 481.2 2.8Q480.6 2.8 480.6 2.8Q478 2.8 476.15 4.65Q474.3 6.5 474.2 9.1Z"/><path class="p8" d="M532.4 1.8V71.8H525.9V1.8ZM559.4 68.7V71.8H532.1V68.7ZM565.5 55.6 559.7 71.8H543.1L546.7 68.7Q552 68.7 555.35 67.05Q558.7 65.4 560.8 62.4Q562.9 59.4 564.5 55.6ZM526.2 64.5V71.8H518.2V70.8Q518.2 70.8 518.85 70.8Q519.5 70.8 519.5 70.8Q522.1 70.8 523.95 68.95Q525.8 67.1 525.9 64.5ZM526.2 9.1H525.9Q525.8 6.5 523.95 4.65Q522.1 2.8 519.5 2.8Q519.5 2.8 518.85 2.8Q518.2 2.8 518.2 2.8V1.8H526.2ZM532.1 9.1V1.8H540.1V2.8Q540 2.8 539.4 2.8Q538.8 2.8 538.8 2.8Q536.2 2.8 534.35 4.65Q532.5 6.5 532.4 9.1Z"/><path class="p9" d="M590.6 1.8V71.8H584.1V1.8ZM617.6 68.7V71.8H590.3V68.7ZM613.3 35.8V38.8H590.3V35.8ZM617.6 1.8V4.9H590.3V1.8ZM623.7 55.6 617.9 71.8H601.3L604.9 68.7Q610.2 68.7 613.55 67.05Q616.9 65.4 619 62.4Q621.1 59.4 622.7 55.6ZM613.3 38.6V45.2H612.3V43.7Q612.3 41.7 610.9 40.25Q609.5 38.8 607.5 38.8V38.6ZM613.3 29.4V36H607.5V35.8Q609.5 35.7 610.9 34.25Q612.3 32.8 612.3 30.8V29.4ZM617.6 4.6V12.6H616.6V10.8Q616.6 8.4 614.9 6.65Q613.2 4.9 610.7 4.8V4.6ZM617.6 0V2.9L605.4 1.8Q607.6 1.8 610.05 1.5Q612.5 1.2 614.6 0.8Q616.7 0.4 617.6 0ZM584.4 64.5V71.8H576.4V70.8Q576.4 70.8 577.05 70.8Q577.7 70.8 577.7 70.8Q580.3 70.8 582.15 68.95Q584 67.1 584.1 64.5ZM584.4 9.1H584.1Q584.1 6.5 582.2 4.65Q580.3 2.8 577.7 2.8Q577.7 2.8 577.1 2.8Q576.5 2.8 576.5 2.8L576.4 1.8H584.4Z"/><path class="p10" d="M645.1 1.9 664.7 38.4 660.4 41.9 636.5 1.9ZM666.1 39.6V71.8H659.6V39.6ZM683.9 1.9H690L665.4 41.7L661.8 40.6ZM679.8 9Q680.7 7.6 680.3 6.15Q679.9 4.7 678.8 3.75Q677.7 2.8 676.3 2.8Q676.3 2.8 675.7 2.8Q675.1 2.8 675.1 2.8V1.8H697.3V2.8H695.9Q692.8 2.8 690.1 4.6Q687.4 6.4 685.8 8.7ZM648.9 9 640.5 8.7Q639.1 6.4 636.4 4.6Q633.7 2.8 630.5 2.8H629.1V1.8H653.7V2.8Q653.7 2.8 653.05 2.8Q652.4 2.8 652.4 2.8Q650.2 2.8 649.05 4.85Q647.9 6.9 648.9 9ZM659.8 64.5V71.8H651.9V70.8Q651.9 70.8 652.5 70.8Q653.1 70.8 653.2 70.8Q655.8 70.8 657.65 68.95Q659.5 67.1 659.6 64.5ZM665.8 64.5H666.1Q666.1 67.1 668 68.95Q669.9 70.8 672.5 70.8Q672.5 70.8 673.1 70.8Q673.7 70.8 673.7 70.8V71.8H665.8Z"/></svg><svg class="wm-fill" viewBox="-2.0 -2.0 700.2 77.2" fill="currentColor" aria-hidden="true" focusable="false"><path class="p1" d="M6.3 2.4H14.4L33 62.1L31.3 73ZM51.1 0.2 51.9 8.3 34.3 61.9Q34.3 61.9 33.8 63.65Q33.3 65.4 32.8 67.95Q32.3 70.5 32.2 73H31.3L29.5 64.1L50.2 0.2ZM51.1 0.3 72.1 59.2 69.9 73 47.7 11.1ZM91.7 2.4 73 61.9Q73 61.9 72.5 63.7Q72 65.5 71.45 68.05Q70.9 70.6 70.8 73H69.9L68.7 63.1L86.1 2.4ZM84.2 9Q85 6 83.7 4.4Q82.4 2.8 80.4 2.8H79.5V1.8H99.2V2.8Q99.2 2.8 98.8 2.8Q98.4 2.8 98.4 2.8Q96.1 2.8 93.4 4.25Q90.7 5.7 89.6 9ZM16.5 9H8.6Q7.4 5.7 4.75 4.25Q2.1 2.8 -0.2 2.8Q-0.2 2.8 -0.6 2.8Q-1 2.8 -1 2.8V1.8H21.2V2.8H20.3Q18.4 2.8 16.95 4.4Q15.5 6 16.5 9Z"/><path class="p2" d="M120.4 1.8V71.8H113.9V1.8ZM114.2 64.5V71.8H106.2V70.8Q106.2 70.8 106.85 70.8Q107.5 70.8 107.5 70.8Q110.1 70.8 111.95 68.95Q113.8 67.1 113.9 64.5ZM114.2 9.1H113.9Q113.8 6.5 111.95 4.65Q110.1 2.8 107.5 2.8Q107.5 2.8 106.85 2.8Q106.2 2.8 106.2 2.8V1.8H114.2ZM120.1 64.5H120.4Q120.5 67.1 122.35 68.95Q124.2 70.8 126.8 70.8Q126.8 70.8 127.4 70.8Q128 70.8 128.1 70.8V71.8H120.1ZM120.1 9.1V1.8H128.1V2.8Q128 2.8 127.4 2.8Q126.8 2.8 126.8 2.8Q124.2 2.8 122.35 4.65Q120.5 6.5 120.4 9.1Z"/><path class="p3" d="M148.6 0.3 206.7 62.3 207.6 73.2 149.5 11.3ZM148.8 64.7V71.8H140.5V70.8Q140.5 70.8 141.4 70.8Q142.3 70.8 142.4 70.8Q144.9 70.8 146.7 69Q148.5 67.2 148.5 64.7ZM153.1 64.7Q153.1 67.2 154.9 69Q156.7 70.8 159.2 70.8Q159.3 70.8 160.2 70.8Q161.1 70.8 161.1 70.8V71.8H152.8V64.7ZM148.6 0.3 153 5.9 153.1 71.8H148.5V12.8Q148.5 7.7 148.05 4Q147.6 0.3 147.6 0.3ZM207.6 1.8V60.4Q207.6 63.6 207.8 66.55Q208 69.5 208.25 71.35Q208.5 73.2 208.5 73.2H207.6L203.1 67.9V1.8ZM215.6 1.8V2.8Q215.6 2.8 214.7 2.8Q213.8 2.8 213.8 2.8Q211.3 2.8 209.5 4.55Q207.7 6.3 207.6 8.9H207.3V1.8ZM195 1.8H203.3V8.9H203.1Q203 6.3 201.25 4.55Q199.5 2.8 196.9 2.8Q196.9 2.8 196 2.8Q195.1 2.8 195 2.8Z"/><path class="p4" d="M262 1.8Q272.7 1.8 280.75 6.15Q288.8 10.5 293.35 18.4Q297.9 26.3 297.9 36.8Q297.9 47.3 293.35 55.15Q288.8 63 280.75 67.4Q272.7 71.8 262 71.8H240.6L240.5 68.8Q240.5 68.8 242.65 68.8Q244.8 68.8 248.05 68.8Q251.3 68.8 254.5 68.8Q257.7 68.8 259.85 68.8Q262 68.8 262 68.8Q270.6 68.8 276.95 64.8Q283.3 60.8 286.85 53.6Q290.4 46.4 290.4 36.8Q290.4 27.2 286.85 20Q283.3 12.8 276.9 8.8Q270.5 4.8 262 4.8Q262 4.8 259.75 4.8Q257.5 4.8 254.15 4.8Q250.8 4.8 247.45 4.8Q244.1 4.8 241.8 4.8Q239.5 4.8 239.5 4.8V1.8ZM242.3 1.8V71.8H235.8V1.8ZM236.1 64.5V71.8H228.1V70.8Q228.1 70.8 228.75 70.8Q229.4 70.8 229.4 70.8Q232 70.8 233.85 68.95Q235.7 67.1 235.8 64.5ZM236.1 9.1H235.8Q235.8 6.5 233.9 4.65Q232 2.8 229.4 2.8Q229.4 2.8 228.8 2.8Q228.2 2.8 228.2 2.8L228.1 1.8H236.1Z"/><path class="p5" d="M341.5 73.2 310.5 2.4H319L343.5 63.7ZM341.5 73.2 340.6 66.2 367.2 2.1H373.2L346.1 62.9Q346.1 62.9 345.55 64.15Q345 65.4 344.25 67.2Q343.5 69 342.95 70.7Q342.4 72.4 342.4 73.2ZM364.4 9Q365.5 6 364 4.4Q362.5 2.8 360.6 2.8H359.7V1.8H379.8V2.8Q379.8 2.8 379.35 2.8Q378.9 2.8 378.9 2.8Q376.7 2.8 374.2 4.25Q371.7 5.7 370.1 9.1ZM321.7 9 313.4 9.1Q311.9 5.7 309.4 4.25Q306.9 2.8 304.6 2.8Q304.6 2.8 304.2 2.8Q303.8 2.8 303.8 2.8V1.8H326.3V2.8H325.4Q323.5 2.8 322.05 4.4Q320.6 6 321.7 9Z"/><path class="p6" d="M416.7 0.4 446.3 71.2H437.8L414.7 9.9ZM395.2 64.5Q394.5 66.5 395 67.9Q395.5 69.3 396.65 70.05Q397.8 70.8 399 70.8H399.9V71.8H379.8V70.8Q379.8 70.8 380.25 70.8Q380.7 70.8 380.7 70.8Q383 70.8 385.45 69.35Q387.9 67.9 389.5 64.5ZM416.7 0.4 417.6 7.4 392.5 71.5H386.5L412.1 10.7Q412.1 10.7 412.65 9.45Q413.2 8.2 413.95 6.4Q414.7 4.6 415.25 2.9Q415.8 1.2 415.8 0.4ZM430.8 44.5V47.5H399.5V44.5ZM435.3 64.5H443.5Q445 67.9 447.5 69.35Q450 70.8 452.3 70.8Q452.3 70.8 452.7 70.8Q453.1 70.8 453.1 70.8V71.8H430.6V70.8H431.5Q433.4 70.8 434.9 69.15Q436.4 67.5 435.3 64.5Z"/><path class="p7" d="M474.2 1.8V71.8H467.7V1.8ZM501.2 68.7V71.8H473.9V68.7ZM507.3 55.6 501.5 71.8H484.9L488.5 68.7Q493.8 68.7 497.15 67.05Q500.5 65.4 502.6 62.4Q504.7 59.4 506.3 55.6ZM468 64.5V71.8H460V70.8Q460 70.8 460.65 70.8Q461.3 70.8 461.3 70.8Q463.9 70.8 465.75 68.95Q467.6 67.1 467.7 64.5ZM468 9.1H467.7Q467.6 6.5 465.75 4.65Q463.9 2.8 461.3 2.8Q461.3 2.8 460.65 2.8Q460 2.8 460 2.8V1.8H468ZM473.9 9.1V1.8H481.9V2.8Q481.8 2.8 481.2 2.8Q480.6 2.8 480.6 2.8Q478 2.8 476.15 4.65Q474.3 6.5 474.2 9.1Z"/><path class="p8" d="M532.4 1.8V71.8H525.9V1.8ZM559.4 68.7V71.8H532.1V68.7ZM565.5 55.6 559.7 71.8H543.1L546.7 68.7Q552 68.7 555.35 67.05Q558.7 65.4 560.8 62.4Q562.9 59.4 564.5 55.6ZM526.2 64.5V71.8H518.2V70.8Q518.2 70.8 518.85 70.8Q519.5 70.8 519.5 70.8Q522.1 70.8 523.95 68.95Q525.8 67.1 525.9 64.5ZM526.2 9.1H525.9Q525.8 6.5 523.95 4.65Q522.1 2.8 519.5 2.8Q519.5 2.8 518.85 2.8Q518.2 2.8 518.2 2.8V1.8H526.2ZM532.1 9.1V1.8H540.1V2.8Q540 2.8 539.4 2.8Q538.8 2.8 538.8 2.8Q536.2 2.8 534.35 4.65Q532.5 6.5 532.4 9.1Z"/><path class="p9" d="M590.6 1.8V71.8H584.1V1.8ZM617.6 68.7V71.8H590.3V68.7ZM613.3 35.8V38.8H590.3V35.8ZM617.6 1.8V4.9H590.3V1.8ZM623.7 55.6 617.9 71.8H601.3L604.9 68.7Q610.2 68.7 613.55 67.05Q616.9 65.4 619 62.4Q621.1 59.4 622.7 55.6ZM613.3 38.6V45.2H612.3V43.7Q612.3 41.7 610.9 40.25Q609.5 38.8 607.5 38.8V38.6ZM613.3 29.4V36H607.5V35.8Q609.5 35.7 610.9 34.25Q612.3 32.8 612.3 30.8V29.4ZM617.6 4.6V12.6H616.6V10.8Q616.6 8.4 614.9 6.65Q613.2 4.9 610.7 4.8V4.6ZM617.6 0V2.9L605.4 1.8Q607.6 1.8 610.05 1.5Q612.5 1.2 614.6 0.8Q616.7 0.4 617.6 0ZM584.4 64.5V71.8H576.4V70.8Q576.4 70.8 577.05 70.8Q577.7 70.8 577.7 70.8Q580.3 70.8 582.15 68.95Q584 67.1 584.1 64.5ZM584.4 9.1H584.1Q584.1 6.5 582.2 4.65Q580.3 2.8 577.7 2.8Q577.7 2.8 577.1 2.8Q576.5 2.8 576.5 2.8L576.4 1.8H584.4Z"/><path class="p10" d="M645.1 1.9 664.7 38.4 660.4 41.9 636.5 1.9ZM666.1 39.6V71.8H659.6V39.6ZM683.9 1.9H690L665.4 41.7L661.8 40.6ZM679.8 9Q680.7 7.6 680.3 6.15Q679.9 4.7 678.8 3.75Q677.7 2.8 676.3 2.8Q676.3 2.8 675.7 2.8Q675.1 2.8 675.1 2.8V1.8H697.3V2.8H695.9Q692.8 2.8 690.1 4.6Q687.4 6.4 685.8 8.7ZM648.9 9 640.5 8.7Q639.1 6.4 636.4 4.6Q633.7 2.8 630.5 2.8H629.1V1.8H653.7V2.8Q653.7 2.8 653.05 2.8Q652.4 2.8 652.4 2.8Q650.2 2.8 649.05 4.85Q647.9 6.9 648.9 9ZM659.8 64.5V71.8H651.9V70.8Q651.9 70.8 652.5 70.8Q653.1 70.8 653.2 70.8Q655.8 70.8 657.65 68.95Q659.5 67.1 659.6 64.5ZM665.8 64.5H666.1Q666.1 67.1 668 68.95Q669.9 70.8 672.5 70.8Q672.5 70.8 673.1 70.8Q673.7 70.8 673.7 70.8V71.8H665.8Z"/></svg></div><p><span>GOLF & RESORT</span></p></div></div><div class="vis-scroll"><span></span></div></div><form class="fr" action="./reservation.html" method="get" aria-label="빠른 예약"><div class="fr-items"><ul class="fr-l"><li><button class="fr-t" type="button" aria-haspopup="true" aria-expanded="false"><i><img src="../../windvalley/assets/ic/fr-member.svg" alt=""></i><dl><dt data-v="member">비회원/회원</dt><dd>회원권 사용 여부를 선택해주세요</dd></dl></button><div class="fr-pop fr-mb"><div class="no"><button type="button" data-set="비회원 예약">비회원 예약</button></div><ul><li><button type="button" data-set="VALLEY 회원"><dl><dt>VALLEY</dt><dd>평일<em></em>주말 그린피 우대</dd></dl></button></li><li><button type="button" data-set="WIND 회원"><dl><dt>WIND</dt><dd>그린피<em></em>객실 우대</dd></dl></button></li><li><button type="button" data-set="FAMILY 회원"><dl><dt>FAMILY</dt><dd>가족 4인<em></em>동반 우대</dd></dl></button></li></ul></div></li><li><button class="fr-t" type="button" aria-haspopup="true" aria-expanded="false"><i><img src="../../windvalley/assets/ic/fr-date.svg" alt=""></i><dl><dt data-v="date">일정 선택</dt><dd>체크인-체크아웃 날짜를 선택해주세요</dd></dl></button><div class="fr-pop fr-cal" data-cal></div></li><li><button class="fr-t" type="button" aria-haspopup="true" aria-expanded="false"><i><img src="../../windvalley/assets/ic/fr-guest.svg" alt=""></i><dl><dt data-v="num"><p>인원 수&nbsp;&nbsp;&nbsp;<span data-n="p">0</span> 인<em></em>객실 수&nbsp;&nbsp;&nbsp;<span data-n="r">0</span> 실</p></dt><dd>성인/아동 구분없이 이용 인원과 객실 수를 선택해주세요</dd></dl></button><div class="fr-pop fr-num"><div class="sel"><dl><dt>인원 수</dt><dd>성인·아동 구분 없이 선택해주세요</dd></dl><div class="ch"><p data-show="p">0</p><div class="b"><button class="m" type="button" data-k="p" data-d="-1" aria-label="인원 줄이기"></button><button class="p" type="button" data-k="p" data-d="1" aria-label="인원 늘리기"></button></div></div></div><div class="sel"><dl><dt>객실 수</dt><dd>한 객실 최대 2인까지 이용할 수 있습니다</dd></dl><div class="ch"><p data-show="r">0</p><div class="b"><button class="m" type="button" data-k="r" data-d="-1" aria-label="객실 줄이기"></button><button class="p" type="button" data-k="r" data-d="1" aria-label="객실 늘리기"></button></div></div></div><div class="ori"><i><img src="../../windvalley/assets/ic/fr-info.svg" alt=""></i><dl><dt>객실 배정 안내</dt><dd><p><span>2인 1실 기준</span><strong>추가 인원 1실 배정</strong></p><p><span>1인 이용</span><strong>1인 추가요금 적용</strong></p></dd></dl></div></div></li></ul><div class="fr-r"><button type="submit"><p>빠른 예약하기</p></button></div></div></form><div class="m-rsv"><a href="./reservation.html">빠른 예약하기</a></div></div></div><style>.vis-wm .wm-line .p1{stroke-dasharray:722px;stroke-dashoffset:722px}.vis-wm .wm-line .p2{stroke-dasharray:266px;stroke-dashoffset:266px}.vis-wm .wm-line .p3{stroke-dasharray:607px;stroke-dashoffset:607px}.vis-wm .wm-line .p4{stroke-dasharray:514px;stroke-dashoffset:514px}.vis-wm .wm-line .p5{stroke-dasharray:429px;stroke-dashoffset:429px}.vis-wm .wm-line .p6{stroke-dasharray:495px;stroke-dashoffset:495px}.vis-wm .wm-line .p7{stroke-dasharray:363px;stroke-dashoffset:363px}.vis-wm .wm-line .p8{stroke-dasharray:363px;stroke-dashoffset:363px}.vis-wm .wm-line .p9{stroke-dasharray:548px;stroke-dashoffset:548px}.vis-wm .wm-line .p10{stroke-dasharray:450px;stroke-dashoffset:450px}</style></section><section class="sc s-golf" id="s2" aria-label="코스 소개"><div class="golf"><div class="g-txt bl" aria-hidden="true"><dl><dt>THAI NO.1 <br class="m-br">COURSE<br><span>63 HOLE</span></dt><dd>바람이 골짜기를 따라 흐르는 치앙마이 북쪽 고원에 들어선 윈드밸리 골프 리조트는<br>계곡과 숲이 겹겹이 이어지는 코스 위에서 매 홀 다른 풍경과 마주하는<br>라운드의 즐거움을 선사합니다</dd></dl></div><div class="g-img"><div class="g-box"><div class="g-bg"><span></span></div><div class="g-dim"></div><div class="g-txt co"><dl><dt>THAI NO.1 <br class="m-br">COURSE<br><span>63 HOLE</span></dt><dd>바람이 골짜기를 따라 흐르는 치앙마이 북쪽 고원에 들어선 윈드밸리 골프 리조트는<br>계곡과 숲이 겹겹이 이어지는 코스 위에서 매 홀 다른 풍경과 마주하는<br>라운드의 즐거움을 선사합니다</dd></dl></div></div></div></div></section><section class="sc s-resort" id="s3" aria-label="리조트"><div class="resort swiper"><div class="swiper-wrapper"><div class="swiper-slide sd1"><div class="r-img"><span></span></div><div class="r-dim"></div><div class="r-txt"><div class="t1"><p><span>WINDVALLEY GOLF & RESORT</span></p><p><span>CHIANG MAI, <br class="m-br">THAILAND</span></p></div><div class="t3"><p><span>안개가 걷히는 아침마다 새로 그려지는 계곡 위의 리조트,</span></p><p><span>바람과 시간이 다듬어 온 이 풍경으로 향하는 길은</span></p><p><span>당신의 가장 느긋한 여행이 시작되는 곳입니다</span></p></div></div></div><div class="swiper-slide sd2"><div class="r-img"><span></span></div><div class="r-dim"></div><div class="r-txt"><div class="t1"><p><span>NORTHERN NO.1</span></p><p><span>GOLF HOTEL</span></p><p><span>PREMIER NEW LUXURY</span></p></div><div class="t3"><p><span>63홀 규모의 필드와 <br class="m-br">새로 지은 골프호텔을 함께 갖춘 윈드밸리 타이에서</span></p><p><span>한 단계 높은 휴식을 시작하세요</span></p></div></div></div><div class="swiper-slide sd3"><div class="r-img"><span></span></div><div class="r-dim"></div><div class="r-txt"><div class="t2"><p><span>계곡의 바람과 <br class="m-br">호수의 고요가 만나는 곳,</span></p><p><span>윈드밸리 골프 리조트</span></p></div><div class="t3"><p><span>낮에는 햇살 가득한 페어웨이에서 여유를,</span></p><p><span>밤에는 별이 쏟아지는 치앙마이의 밤하늘 아래에서 온전한 쉼을 누리세요</span></p></div></div></div></div></div></section><section class="sc s-course" id="s4" aria-label="코스"><div class="course" id="course"><div class="c-area"><div class="c-clip"><div class="c-vd"><video src="../../windvalley/assets/course.mp4" poster="../../windvalley/assets/course.jpg" autoplay muted loop playsinline preload="metadata" aria-hidden="true"></video></div><div class="c-txt lt"><div class="t1"><p class="l">THAI NO.1</p><p class="r">COURSE</p><p class="l">63 HOLE</p></div><div class="t2"><span>계곡 속, 가장 편안한 리조트 라이프</span></div><div class="t3" aria-hidden="true"><p><span>윈드밸리 골프 리조트는 태국 치앙마이의</span></p><p><span>고원과 숲 속에서 골프, 웰니스, 문화를 함께 누리는 복합 리조트입니다.</span></p><p><br><br></p><p><span>총 63홀, 지형을 살린 프리미엄 코스</span></p><p><span>신규 27홀 / 기존 36홀</span></p></div></div></div><div class="c-txt dk" aria-hidden="true"><div class="t1"><p>THAI NO.1</p><p>COURSE</p><p>63 HOLE</p></div><div class="t2"><span>계곡 속, 가장 편안한 리조트 라이프</span></div><div class="t3"><p><span>윈드밸리 골프 리조트는 태국 치앙마이의</span></p><p><span>고원과 숲 속에서 골프, 웰니스, 문화를 함께 누리는 복합 리조트입니다.</span></p><p><br><br></p><p><span>총 63홀, 지형을 살린 프리미엄 코스</span></p><p><span>신규 27홀 / 기존 36홀</span></p></div></div><div class="c-ho"><ul><li class="i1"><span></span></li><li class="i2"><span></span></li></ul></div><div class="c-num"><a class="n1" href="./course.html"><dl><dt>27</dt><dd>HOLE</dd></dl><p class="arr"><span></span></p></a><a class="n2" href="./course-36.html"><dl><dt>36</dt><dd>HOLE</dd></dl><p class="arr"><span></span></p></a></div><div class="c-sd swiper"><div class="swiper-wrapper"><div class="swiper-slide sd1"></div><div class="swiper-slide sd2"></div></div></div></div></div></section><section class="sc s-intro" id="s5" aria-label="헤드 프로의 한마디"><div class="introduce"><div class="box l"><div class="i-img"><span></span></div></div><div class="box r"><div class="i-txt"><strong aria-hidden="true">“</strong><blockquote><p>해마다 겨울이면 태국 북부의 골프장을 찾습니다.</p><p>서울의 추위를 피해</p><p>한적한 고원 코스에서</p><p>한 달 가까이 머물다 돌아오곤 합니다.</p><p>&nbsp;</p><p>윈드밸리 골프 & 리조트는</p><p>제가 돌아본 동남아 골프 클럽 가운데</p><p>코스와 쉼이 가장 잘 어우러진 곳입니다.</p><p>&nbsp;</p><p>여러분,</p><p>이곳 윈드밸리에서 함께 라운드하시길 바랍니다.</p></blockquote><strong aria-hidden="true">”</strong><div class="sign"><img src="../../windvalley/assets/ic/sign.svg" alt="윈드밸리 헤드 프로 서명" width="151" height="117"></div></div></div></div></section><section class="sc s-room" id="s6" aria-label="객실"><div class="room"><div class="box l"><div class="rm-txt"><dl><dt>머무름(留, Stay),<br>그것은 우리의 '약속'입니다.</dt><dd>당신이 태국 윈드밸리 골프 리조트에 들어서는 그 순간부터,<br>조용하고 깊은 쉼으로 그 여정을 맞이합니다.</dd></dl><p class="type">WINDVALLEY GOLF &amp; RESORT ROOM TYPE</p><div class="link"><a href="./room.html"><strong>DELUXE TWIN ROOM</strong><p><span class="flip"><span class="f-t">총 객실수 120실</span><span class="f-b" aria-hidden="true">총 객실수 120실</span></span><em></em></p></a><a href="./room-suite.html"><strong>SUITE ROOM</strong><p><span class="flip"><span class="f-t">총 객실수 10실</span><span class="f-b" aria-hidden="true">총 객실수 10실</span></span><em></em></p></a></div></div></div><div class="box r"><div class="rm-img"><span></span></div></div></div></section><section class="sc s-pkgbg" id="s7" aria-label="패키지 소개"><div class="pkg-bg"><div class="pb-bg"><span></span></div><div class="pb-txt"><div class="pb-wrap"><p class="t1"><span>WELLNESS FESTIVAL WINDVALLEY PACKAGE</span></p><p class="t2">몸과 마음을 가볍게, 치앙마이에서 시작하는 특별한 여정</p><p class="t3">LET THE VALLEY WIND<br>CARRY YOU INTO A SLOWER,<br>DEEPER KIND OF REST IN<br>CHIANG MAI</p></div></div></div></section><section class="sc s-pkg" id="s8" aria-label="패키지"><div class="pkg-sd"><div class="p-tit"><dl><dt><img src="../../windvalley/assets/ic/logo-co.svg" alt="" width="141" height="74"></dt><dd>PACKAGE</dd></dl></div><div class="p-sd swiper"><div class="swiper-wrapper"><div class="swiper-slide sd1"><div class="p-box" data-swiper-parallax-y="20%"><div class="p-img"><span></span></div></div><div class="p-txt"><strong class="t1"><span>GOLF</span></strong><strong class="t2"><span>골프 클리닉 & 토너먼트</span></strong><div class="t3 _p"><p><span>프로 코치의 1:1 맞춤 레슨</span></p><p><span>계곡 코스를 따라 도는 라운딩 체험과</span></p><p><span>미니 토너먼트</span></p></div><div class="t3 _m"><p><span>프로 코치의 1:1 맞춤 레슨</span></p><p><span>계곡 코스를 따라 도는 라운딩 체험과 미니 토너먼트</span></p></div></div></div><div class="swiper-slide sd2"><div class="p-box" data-swiper-parallax-y="20%"><div class="p-img"><span></span></div></div><div class="p-txt"><strong class="t1"><span>WELLNESS</span></strong><strong class="t2"><span>웰니스 프로그램</span></strong><div class="t3"><p><span>요가, 명상과 스트레칭</span></p><p><span>태국 전통 마사지 & 허브 스파</span></p><p><span>건강 식단 워크숍과 쿠킹 클래스</span></p></div></div></div><div class="swiper-slide sd3"><div class="p-box" data-swiper-parallax-y="20%"><div class="p-img"><span></span></div></div><div class="p-txt"><strong class="t1"><span>TOUR</span></strong><strong class="t2"><span>투어 및 문화체험</span></strong><div class="t3 _p"><p><span>치앙마이 올드시티와 사원,</span></p><p><span>야시장 탐방</span></p><p><span>란나 전통 공예와 도자기 체험 프로그램</span></p></div><div class="t3 _m"><p><span>치앙마이 올드시티와 사원,</span></p><p><span>야시장 탐방 란나 전통 공예와 도자기 체험 프로그램</span></p></div></div></div></div></div></div></section><section class="sc s-press" id="s9" aria-label="보도자료와 FAQ"><div class="press-faq"><div class="pf-bg"></div><div class="pf-area"><div class="pf-box b1"><div class="pf-tit"><h2>PRESS REPORT</h2><p>믿을 수 있는 언론 보도를 통해 윈드밸리 골프 리조트의 <br class="m-br">가치와 계획을 투명하게 알려드립니다.</p><a href="./press.html"><span>VIEW MORE</span></a></div><div class="pf-press"><ul><li><a href="./press.html"><p class="t1">경제 일간지</p><p class="t2">윈드밸리 홀딩스, 태국 치앙마이 골프&리조트 조성 본격화…회원권 출시</p><p class="t3">윈드밸리 홀딩스가 태국 치앙마이 고원에 조성 중인 ‘윈드밸리 골프&리조트’ 개발을 차근차근 진행하며 첫 골프 회원권을 새로 선보였다.</p><p class="t4">2026-01-07</p></a></li><li><a href="./press.html"><p class="t1">스포츠 신문</p><p class="t2">윈드밸리 골프&리조트 26년 준공 목표…63홀 규모 골프호텔 함께 연다</p><p class="t3">윈드밸리 홀딩스는 태국 치앙마이 고원에 조성 중인 ‘윈드밸리 골프&리조트’ 개발에 속도를 내며 회원권 프로그램을 내놓았다고 5일 밝혔다.</p><p class="t4">2026-01-05</p></a></li><li><a href="./press.html"><p class="t1">레저 월간지</p><p class="t2">치앙마이 고원에 들어서는 63홀 골프 리조트, 겨울 전지훈련 수요 겨냥</p><p class="t3">윈드밸리 홀딩스는 태국 치앙마이 고원에 조성 중인 ‘윈드밸리 골프&리조트’ 개발에 속도를 내며 회원권 프로그램을 내놓았다고 5일 밝혔다.</p><p class="t4">2026-01-05</p></a></li><li><a href="./press.html"><p class="t1">지역 소식지</p><p class="t2">윈드밸리그룹, 태국 북부에 K-골프 문화레저 단지 계약</p><p class="t3">윈드밸리그룹이 태국 치앙마이에서 골프와 한류 문화체험을 묶은 레저 단지 계약을 맺었다.</p><p class="t4">2025-07-22</p></a></li></ul></div><div class="pf-page"></div></div><div class="pf-box b2"><div class="pf-tit"><h2>FAQ</h2><p>윈드밸리 골프 & 리조트에 관해 <br class="m-br">자주 묻는 질문을 모았습니다.</p><a href="./faq.html"><span>VIEW MORE</span></a></div><div class="pf-faq"><ul><li class="f1"><a href="./faq.html?faq=1" target="_blank"><p>회원권 및 요금 안내</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f2"><a href="./faq.html?faq=2" target="_blank"><p>회원권 양도 · 명의변경</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f3"><a href="./faq.html?faq=3" target="_blank"><p>계약 및 증빙 서류</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f4"><a href="./faq.html?faq=4" target="_blank"><p>예약 및 취소 규정</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f5"><a href="./faq.html?faq=5" target="_blank"><p>객실 및 숙박 안내</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f6"><a href="./faq.html?faq=6" target="_blank"><p>골프 관련 비용</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f7"><a href="./faq.html?faq=7" target="_blank"><p>교통 및 이동</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f8"><a href="./faq.html?faq=8" target="_blank"><p>부대 시설 및 서비스</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f9"><a href="./faq.html?faq=9" target="_blank"><p>여행 · 관광 정보</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li><li class="f10"><a href="./faq.html?faq=10" target="_blank"><p>기타 안내 사항</p><em><svg class="chev" viewBox="0 0 6 11" aria-hidden="true"><path d="M.6.6 5.4 5.5.6 10.4" fill="none" stroke="currentColor" stroke-width="1.1"/></svg></em></a></li></ul></div><div class="pf-page"></div></div></div></div></section><section class="sc s-map" id="s10" aria-label="코스 지도"><div class="cmap"><div class="cm-txt" aria-hidden="true"><dl><dt>THAI NO.1<br>COURSE<br><span>63 HOLE</span></dt><dd>바람이 골짜기를 따라 흐르는 치앙마이 북쪽 고원에 들어선 윈드밸리 골프 리조트는<br>계곡과 숲이 겹겹이 이어지는 코스 위에서 매 홀 다른 풍경과 마주하는<br>라운드의 즐거움을 선사합니다</dd></dl></div><div class="cm-area"><div class="cm-img"><span class="bg"></span><span class="zone"></span></div><div class="dot d1"><div class="d-t"><button class="d" type="button" aria-label="GOLF HOTEL 보기" aria-expanded="false"><span class="b1"><em></em></span><span class="b2"><em></em></span><span class="b3"><em></em></span><span class="b4"><em></em></span></button></div><div class="pl"><div class="pl-box"><button class="pl-x" type="button" aria-label="닫기"><span class="d"><span class="b1"><em></em></span><span class="b2"><em></em></span><span class="b3"><em></em></span><span class="b4"><em></em></span></span></button><div class="i"><img src="../../windvalley/assets/map-pop1.jpg" alt="" width="546" height="384" loading="lazy"></div><div class="t"><dl><dt>GOLF HOTEL</dt><dd>계곡 바람과 호수 물결이<br>함께 머무는 곳,<br>윈드밸리 골프 리조트</dd></dl></div></div></div></div><div class="dot d2"><div class="d-t"><button class="d" type="button" aria-label="PARK GOLF 보기" aria-expanded="false"><span class="b1"><em></em></span><span class="b2"><em></em></span><span class="b3"><em></em></span><span class="b4"><em></em></span></button></div><div class="pl"><div class="pl-box"><button class="pl-x" type="button" aria-label="닫기"><span class="d"><span class="b1"><em></em></span><span class="b2"><em></em></span><span class="b3"><em></em></span><span class="b4"><em></em></span></span></button><div class="i"><img src="../../windvalley/assets/map-pop2.jpg" alt="" width="546" height="384" loading="lazy"></div><div class="t"><dl><dt>PARK GOLF</dt><dd>조성 예정부지</dd></dl></div></div></div></div><div class="dot d3"><div class="d-t"><button class="d" type="button" aria-label="WATER LEISURE 보기" aria-expanded="false"><span class="b1"><em></em></span><span class="b2"><em></em></span><span class="b3"><em></em></span><span class="b4"><em></em></span></button></div><div class="pl"><div class="pl-box"><button class="pl-x" type="button" aria-label="닫기"><span class="d"><span class="b1"><em></em></span><span class="b2"><em></em></span><span class="b3"><em></em></span><span class="b4"><em></em></span></span></button><div class="i"><img src="../../windvalley/assets/map-pop3.jpg" alt="" width="546" height="384" loading="lazy"></div><div class="t"><dl><dt>WATER LEISURE</dt><dd>호수를 따라 이어지는<br>수상 레저 구역</dd></dl></div></div></div></div><div class="dot d4"><div class="d-t"><button class="d" type="button" aria-label="윈드밸리 골프&리조트의 2차 사업부지 계획 보기" aria-expanded="false"><span class="b1"><em></em></span><span class="b2"><em></em></span><span class="b3"><em></em></span><span class="b4"><em></em></span></button></div><div class="pl bot"><div class="pl-box"><button class="pl-x" type="button" aria-label="닫기"><span class="d"><span class="b1"><em></em></span><span class="b2"><em></em></span><span class="b3"><em></em></span><span class="b4"><em></em></span></span></button><div class="vd-wrap"><div class="vd"><video src="../../windvalley/assets/map-film.mp4" poster="../../windvalley/assets/map-film.jpg" muted playsinline preload="none" loop></video></div></div><div class="t"><dl><dt>윈드밸리 골프&amp;리조트의<br>2차 사업부지 계획</dt><dd>숙박과 레저를 아우르는 복합 단지가 들어섭니다.<br>영상으로 먼저 둘러보세요.</dd></dl></div></div></div></div></div></div></section><section class="sc s-contact" id="s11" aria-label="오시는 길"><div class="contact"><div class="ct-bg"></div><div class="ct-box"><h2 class="tit"><span>WHERE TO FIND US?</span></h2><div class="flex"><div class="txt"><p class="t1"><span>윈드밸리 골프 &amp; 리조트 홍보관</span></p><p class="t2"><span>서울특별시 강남구 테헤란로 123 민트클빌딩 5층</span></p><p class="t3"><span>02-000-2370</span></p></div><div class="link"><a href="./location.html"><p><em><img src="../../windvalley/assets/ic/pin-wh.svg" alt=""></em><span>홍보관 오시는길</span></p></a></div></div><div class="txt"><p class="t1 en"><span>WINDVALLEY GOLF&amp;RESORT THAILAND</span></p><p class="t2"><span>88/8 Moo 4, Mae Rim, <br class="m-br">Chiang Mai 50180, Thailand</span></p></div><div class="map"><img src="../../windvalley/assets/map-static.jpg" alt="윈드밸리 골프 & 리조트 위치 약도" width="1104" height="444" loading="lazy"></div></div></div></section><section class="sc s-foot" id="s12" aria-label="회사 정보"><footer class="ft" id="ft">
+<div class="ft-top"><img class="ft-logo" src="../../windvalley/assets/ic/logo-wh.svg" alt="윈드밸리 골프 & 리조트" width="126" height="66"><button class="ft-up" type="button" aria-label="맨 위로"><svg viewBox="0 0 8 44" aria-hidden="true"><path d="M4 44V8" stroke="currentColor" stroke-width="1.6"/><path d="M4 0 8 9H0z" fill="currentColor"/></svg></button></div>
+<div class="ft-bot">
+<div class="ft-pv"><a href="./privacy.html">개인정보처리방침</a>&nbsp;&nbsp;<a href="./terms.html">이용약관</a></div>
+<address><p><span><strong>윈드밸리 골프 & 리조트 본사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><br class="_m">주소&nbsp;&nbsp;&nbsp;서울특별시 강남구 테헤란로 123 민트클빌딩 5층</span></p><p><span><strong>윈드밸리 골프 & 리조트 홍보관&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><br class="_m">상호&nbsp;&nbsp;&nbsp;민트클&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;대표&nbsp;&nbsp;&nbsp;김진수&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;전화&nbsp;&nbsp;&nbsp;010-4894-4905&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br class="_m">사업자등록번호&nbsp;&nbsp;&nbsp;266-07-03678&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이메일&nbsp;&nbsp;&nbsp;6gsmake@gmail.com&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br class="_m">통신판매업신고&nbsp;&nbsp;&nbsp;제2026-서울강남-00480호</span></p><p><span><em>WINDVALLEY GOLF&amp;RESORT THAILAND&nbsp;&nbsp;<br class="_m">88/8 Moo 4, Mae Rim, Chiang Mai 50180, <br class="_m">Thailand</em></span></p></address>
+<div class="ft-copy"><span>COPYRIGHT&copy;2026 WINDVALLEY GOLF &amp; RESORT. <em class="_p">ALL RIGHTS RESERVED.</em></span></div>
+<div class="ft-link"><ul><li><a href="#" data-qp="film"><span class="flip"><span class="f-t">골프호텔 신축공사 현장 영상</span><span class="f-b" aria-hidden="true">골프호텔 신축공사 현장 영상</span></span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13M9 2.5 14.5 8 9 13.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a></li><li><a href="#" data-qp="member"><span class="flip"><span class="f-t"><em>Membership</em>(회원권 상담)</span><span class="f-b" aria-hidden="true"><em>Membership</em>(회원권 상담)</span></span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13M9 2.5 14.5 8 9 13.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a></li></ul><ul><li><a href="#" data-qp="prize"><span class="flip"><span class="f-t"><em>Hole-in-One Prize</em></span><span class="f-b" aria-hidden="true"><em>Hole-in-One Prize</em></span></span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13M9 2.5 14.5 8 9 13.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a></li><li><a href="#" data-qp="brochure"><span class="flip"><span class="f-t"><em>View Brochure</em></span><span class="f-b" aria-hidden="true"><em>View Brochure</em></span></span><svg class="ar" viewBox="0 0 16 16" aria-hidden="true"><path d="M1.5 8h13M9 2.5 14.5 8 9 13.5" fill="none" stroke="currentColor" stroke-width="1.3"/></svg></a></li></ul></div>
+</div>
+<div class="ft-wm"><div class="wm-box"><svg class="wm-line" viewBox="-2.0 -2.0 700.2 77.2" stroke="currentColor" fill="none" stroke-width="0.4" aria-hidden="true" focusable="false"><path class="p1" d="M6.3 2.4H14.4L33 62.1L31.3 73ZM51.1 0.2 51.9 8.3 34.3 61.9Q34.3 61.9 33.8 63.65Q33.3 65.4 32.8 67.95Q32.3 70.5 32.2 73H31.3L29.5 64.1L50.2 0.2ZM51.1 0.3 72.1 59.2 69.9 73 47.7 11.1ZM91.7 2.4 73 61.9Q73 61.9 72.5 63.7Q72 65.5 71.45 68.05Q70.9 70.6 70.8 73H69.9L68.7 63.1L86.1 2.4ZM84.2 9Q85 6 83.7 4.4Q82.4 2.8 80.4 2.8H79.5V1.8H99.2V2.8Q99.2 2.8 98.8 2.8Q98.4 2.8 98.4 2.8Q96.1 2.8 93.4 4.25Q90.7 5.7 89.6 9ZM16.5 9H8.6Q7.4 5.7 4.75 4.25Q2.1 2.8 -0.2 2.8Q-0.2 2.8 -0.6 2.8Q-1 2.8 -1 2.8V1.8H21.2V2.8H20.3Q18.4 2.8 16.95 4.4Q15.5 6 16.5 9Z"/><path class="p2" d="M120.4 1.8V71.8H113.9V1.8ZM114.2 64.5V71.8H106.2V70.8Q106.2 70.8 106.85 70.8Q107.5 70.8 107.5 70.8Q110.1 70.8 111.95 68.95Q113.8 67.1 113.9 64.5ZM114.2 9.1H113.9Q113.8 6.5 111.95 4.65Q110.1 2.8 107.5 2.8Q107.5 2.8 106.85 2.8Q106.2 2.8 106.2 2.8V1.8H114.2ZM120.1 64.5H120.4Q120.5 67.1 122.35 68.95Q124.2 70.8 126.8 70.8Q126.8 70.8 127.4 70.8Q128 70.8 128.1 70.8V71.8H120.1ZM120.1 9.1V1.8H128.1V2.8Q128 2.8 127.4 2.8Q126.8 2.8 126.8 2.8Q124.2 2.8 122.35 4.65Q120.5 6.5 120.4 9.1Z"/><path class="p3" d="M148.6 0.3 206.7 62.3 207.6 73.2 149.5 11.3ZM148.8 64.7V71.8H140.5V70.8Q140.5 70.8 141.4 70.8Q142.3 70.8 142.4 70.8Q144.9 70.8 146.7 69Q148.5 67.2 148.5 64.7ZM153.1 64.7Q153.1 67.2 154.9 69Q156.7 70.8 159.2 70.8Q159.3 70.8 160.2 70.8Q161.1 70.8 161.1 70.8V71.8H152.8V64.7ZM148.6 0.3 153 5.9 153.1 71.8H148.5V12.8Q148.5 7.7 148.05 4Q147.6 0.3 147.6 0.3ZM207.6 1.8V60.4Q207.6 63.6 207.8 66.55Q208 69.5 208.25 71.35Q208.5 73.2 208.5 73.2H207.6L203.1 67.9V1.8ZM215.6 1.8V2.8Q215.6 2.8 214.7 2.8Q213.8 2.8 213.8 2.8Q211.3 2.8 209.5 4.55Q207.7 6.3 207.6 8.9H207.3V1.8ZM195 1.8H203.3V8.9H203.1Q203 6.3 201.25 4.55Q199.5 2.8 196.9 2.8Q196.9 2.8 196 2.8Q195.1 2.8 195 2.8Z"/><path class="p4" d="M262 1.8Q272.7 1.8 280.75 6.15Q288.8 10.5 293.35 18.4Q297.9 26.3 297.9 36.8Q297.9 47.3 293.35 55.15Q288.8 63 280.75 67.4Q272.7 71.8 262 71.8H240.6L240.5 68.8Q240.5 68.8 242.65 68.8Q244.8 68.8 248.05 68.8Q251.3 68.8 254.5 68.8Q257.7 68.8 259.85 68.8Q262 68.8 262 68.8Q270.6 68.8 276.95 64.8Q283.3 60.8 286.85 53.6Q290.4 46.4 290.4 36.8Q290.4 27.2 286.85 20Q283.3 12.8 276.9 8.8Q270.5 4.8 262 4.8Q262 4.8 259.75 4.8Q257.5 4.8 254.15 4.8Q250.8 4.8 247.45 4.8Q244.1 4.8 241.8 4.8Q239.5 4.8 239.5 4.8V1.8ZM242.3 1.8V71.8H235.8V1.8ZM236.1 64.5V71.8H228.1V70.8Q228.1 70.8 228.75 70.8Q229.4 70.8 229.4 70.8Q232 70.8 233.85 68.95Q235.7 67.1 235.8 64.5ZM236.1 9.1H235.8Q235.8 6.5 233.9 4.65Q232 2.8 229.4 2.8Q229.4 2.8 228.8 2.8Q228.2 2.8 228.2 2.8L228.1 1.8H236.1Z"/><path class="p5" d="M341.5 73.2 310.5 2.4H319L343.5 63.7ZM341.5 73.2 340.6 66.2 367.2 2.1H373.2L346.1 62.9Q346.1 62.9 345.55 64.15Q345 65.4 344.25 67.2Q343.5 69 342.95 70.7Q342.4 72.4 342.4 73.2ZM364.4 9Q365.5 6 364 4.4Q362.5 2.8 360.6 2.8H359.7V1.8H379.8V2.8Q379.8 2.8 379.35 2.8Q378.9 2.8 378.9 2.8Q376.7 2.8 374.2 4.25Q371.7 5.7 370.1 9.1ZM321.7 9 313.4 9.1Q311.9 5.7 309.4 4.25Q306.9 2.8 304.6 2.8Q304.6 2.8 304.2 2.8Q303.8 2.8 303.8 2.8V1.8H326.3V2.8H325.4Q323.5 2.8 322.05 4.4Q320.6 6 321.7 9Z"/><path class="p6" d="M416.7 0.4 446.3 71.2H437.8L414.7 9.9ZM395.2 64.5Q394.5 66.5 395 67.9Q395.5 69.3 396.65 70.05Q397.8 70.8 399 70.8H399.9V71.8H379.8V70.8Q379.8 70.8 380.25 70.8Q380.7 70.8 380.7 70.8Q383 70.8 385.45 69.35Q387.9 67.9 389.5 64.5ZM416.7 0.4 417.6 7.4 392.5 71.5H386.5L412.1 10.7Q412.1 10.7 412.65 9.45Q413.2 8.2 413.95 6.4Q414.7 4.6 415.25 2.9Q415.8 1.2 415.8 0.4ZM430.8 44.5V47.5H399.5V44.5ZM435.3 64.5H443.5Q445 67.9 447.5 69.35Q450 70.8 452.3 70.8Q452.3 70.8 452.7 70.8Q453.1 70.8 453.1 70.8V71.8H430.6V70.8H431.5Q433.4 70.8 434.9 69.15Q436.4 67.5 435.3 64.5Z"/><path class="p7" d="M474.2 1.8V71.8H467.7V1.8ZM501.2 68.7V71.8H473.9V68.7ZM507.3 55.6 501.5 71.8H484.9L488.5 68.7Q493.8 68.7 497.15 67.05Q500.5 65.4 502.6 62.4Q504.7 59.4 506.3 55.6ZM468 64.5V71.8H460V70.8Q460 70.8 460.65 70.8Q461.3 70.8 461.3 70.8Q463.9 70.8 465.75 68.95Q467.6 67.1 467.7 64.5ZM468 9.1H467.7Q467.6 6.5 465.75 4.65Q463.9 2.8 461.3 2.8Q461.3 2.8 460.65 2.8Q460 2.8 460 2.8V1.8H468ZM473.9 9.1V1.8H481.9V2.8Q481.8 2.8 481.2 2.8Q480.6 2.8 480.6 2.8Q478 2.8 476.15 4.65Q474.3 6.5 474.2 9.1Z"/><path class="p8" d="M532.4 1.8V71.8H525.9V1.8ZM559.4 68.7V71.8H532.1V68.7ZM565.5 55.6 559.7 71.8H543.1L546.7 68.7Q552 68.7 555.35 67.05Q558.7 65.4 560.8 62.4Q562.9 59.4 564.5 55.6ZM526.2 64.5V71.8H518.2V70.8Q518.2 70.8 518.85 70.8Q519.5 70.8 519.5 70.8Q522.1 70.8 523.95 68.95Q525.8 67.1 525.9 64.5ZM526.2 9.1H525.9Q525.8 6.5 523.95 4.65Q522.1 2.8 519.5 2.8Q519.5 2.8 518.85 2.8Q518.2 2.8 518.2 2.8V1.8H526.2ZM532.1 9.1V1.8H540.1V2.8Q540 2.8 539.4 2.8Q538.8 2.8 538.8 2.8Q536.2 2.8 534.35 4.65Q532.5 6.5 532.4 9.1Z"/><path class="p9" d="M590.6 1.8V71.8H584.1V1.8ZM617.6 68.7V71.8H590.3V68.7ZM613.3 35.8V38.8H590.3V35.8ZM617.6 1.8V4.9H590.3V1.8ZM623.7 55.6 617.9 71.8H601.3L604.9 68.7Q610.2 68.7 613.55 67.05Q616.9 65.4 619 62.4Q621.1 59.4 622.7 55.6ZM613.3 38.6V45.2H612.3V43.7Q612.3 41.7 610.9 40.25Q609.5 38.8 607.5 38.8V38.6ZM613.3 29.4V36H607.5V35.8Q609.5 35.7 610.9 34.25Q612.3 32.8 612.3 30.8V29.4ZM617.6 4.6V12.6H616.6V10.8Q616.6 8.4 614.9 6.65Q613.2 4.9 610.7 4.8V4.6ZM617.6 0V2.9L605.4 1.8Q607.6 1.8 610.05 1.5Q612.5 1.2 614.6 0.8Q616.7 0.4 617.6 0ZM584.4 64.5V71.8H576.4V70.8Q576.4 70.8 577.05 70.8Q577.7 70.8 577.7 70.8Q580.3 70.8 582.15 68.95Q584 67.1 584.1 64.5ZM584.4 9.1H584.1Q584.1 6.5 582.2 4.65Q580.3 2.8 577.7 2.8Q577.7 2.8 577.1 2.8Q576.5 2.8 576.5 2.8L576.4 1.8H584.4Z"/><path class="p10" d="M645.1 1.9 664.7 38.4 660.4 41.9 636.5 1.9ZM666.1 39.6V71.8H659.6V39.6ZM683.9 1.9H690L665.4 41.7L661.8 40.6ZM679.8 9Q680.7 7.6 680.3 6.15Q679.9 4.7 678.8 3.75Q677.7 2.8 676.3 2.8Q676.3 2.8 675.7 2.8Q675.1 2.8 675.1 2.8V1.8H697.3V2.8H695.9Q692.8 2.8 690.1 4.6Q687.4 6.4 685.8 8.7ZM648.9 9 640.5 8.7Q639.1 6.4 636.4 4.6Q633.7 2.8 630.5 2.8H629.1V1.8H653.7V2.8Q653.7 2.8 653.05 2.8Q652.4 2.8 652.4 2.8Q650.2 2.8 649.05 4.85Q647.9 6.9 648.9 9ZM659.8 64.5V71.8H651.9V70.8Q651.9 70.8 652.5 70.8Q653.1 70.8 653.2 70.8Q655.8 70.8 657.65 68.95Q659.5 67.1 659.6 64.5ZM665.8 64.5H666.1Q666.1 67.1 668 68.95Q669.9 70.8 672.5 70.8Q672.5 70.8 673.1 70.8Q673.7 70.8 673.7 70.8V71.8H665.8Z"/></svg><svg class="wm-fill" viewBox="-2.0 -2.0 700.2 77.2" fill="currentColor" aria-hidden="true" focusable="false"><path d="M6.3 2.4H14.4L33 62.1L31.3 73ZM51.1 0.2 51.9 8.3 34.3 61.9Q34.3 61.9 33.8 63.65Q33.3 65.4 32.8 67.95Q32.3 70.5 32.2 73H31.3L29.5 64.1L50.2 0.2ZM51.1 0.3 72.1 59.2 69.9 73 47.7 11.1ZM91.7 2.4 73 61.9Q73 61.9 72.5 63.7Q72 65.5 71.45 68.05Q70.9 70.6 70.8 73H69.9L68.7 63.1L86.1 2.4ZM84.2 9Q85 6 83.7 4.4Q82.4 2.8 80.4 2.8H79.5V1.8H99.2V2.8Q99.2 2.8 98.8 2.8Q98.4 2.8 98.4 2.8Q96.1 2.8 93.4 4.25Q90.7 5.7 89.6 9ZM16.5 9H8.6Q7.4 5.7 4.75 4.25Q2.1 2.8 -0.2 2.8Q-0.2 2.8 -0.6 2.8Q-1 2.8 -1 2.8V1.8H21.2V2.8H20.3Q18.4 2.8 16.95 4.4Q15.5 6 16.5 9Z"/><path d="M120.4 1.8V71.8H113.9V1.8ZM114.2 64.5V71.8H106.2V70.8Q106.2 70.8 106.85 70.8Q107.5 70.8 107.5 70.8Q110.1 70.8 111.95 68.95Q113.8 67.1 113.9 64.5ZM114.2 9.1H113.9Q113.8 6.5 111.95 4.65Q110.1 2.8 107.5 2.8Q107.5 2.8 106.85 2.8Q106.2 2.8 106.2 2.8V1.8H114.2ZM120.1 64.5H120.4Q120.5 67.1 122.35 68.95Q124.2 70.8 126.8 70.8Q126.8 70.8 127.4 70.8Q128 70.8 128.1 70.8V71.8H120.1ZM120.1 9.1V1.8H128.1V2.8Q128 2.8 127.4 2.8Q126.8 2.8 126.8 2.8Q124.2 2.8 122.35 4.65Q120.5 6.5 120.4 9.1Z"/><path d="M148.6 0.3 206.7 62.3 207.6 73.2 149.5 11.3ZM148.8 64.7V71.8H140.5V70.8Q140.5 70.8 141.4 70.8Q142.3 70.8 142.4 70.8Q144.9 70.8 146.7 69Q148.5 67.2 148.5 64.7ZM153.1 64.7Q153.1 67.2 154.9 69Q156.7 70.8 159.2 70.8Q159.3 70.8 160.2 70.8Q161.1 70.8 161.1 70.8V71.8H152.8V64.7ZM148.6 0.3 153 5.9 153.1 71.8H148.5V12.8Q148.5 7.7 148.05 4Q147.6 0.3 147.6 0.3ZM207.6 1.8V60.4Q207.6 63.6 207.8 66.55Q208 69.5 208.25 71.35Q208.5 73.2 208.5 73.2H207.6L203.1 67.9V1.8ZM215.6 1.8V2.8Q215.6 2.8 214.7 2.8Q213.8 2.8 213.8 2.8Q211.3 2.8 209.5 4.55Q207.7 6.3 207.6 8.9H207.3V1.8ZM195 1.8H203.3V8.9H203.1Q203 6.3 201.25 4.55Q199.5 2.8 196.9 2.8Q196.9 2.8 196 2.8Q195.1 2.8 195 2.8Z"/><path d="M262 1.8Q272.7 1.8 280.75 6.15Q288.8 10.5 293.35 18.4Q297.9 26.3 297.9 36.8Q297.9 47.3 293.35 55.15Q288.8 63 280.75 67.4Q272.7 71.8 262 71.8H240.6L240.5 68.8Q240.5 68.8 242.65 68.8Q244.8 68.8 248.05 68.8Q251.3 68.8 254.5 68.8Q257.7 68.8 259.85 68.8Q262 68.8 262 68.8Q270.6 68.8 276.95 64.8Q283.3 60.8 286.85 53.6Q290.4 46.4 290.4 36.8Q290.4 27.2 286.85 20Q283.3 12.8 276.9 8.8Q270.5 4.8 262 4.8Q262 4.8 259.75 4.8Q257.5 4.8 254.15 4.8Q250.8 4.8 247.45 4.8Q244.1 4.8 241.8 4.8Q239.5 4.8 239.5 4.8V1.8ZM242.3 1.8V71.8H235.8V1.8ZM236.1 64.5V71.8H228.1V70.8Q228.1 70.8 228.75 70.8Q229.4 70.8 229.4 70.8Q232 70.8 233.85 68.95Q235.7 67.1 235.8 64.5ZM236.1 9.1H235.8Q235.8 6.5 233.9 4.65Q232 2.8 229.4 2.8Q229.4 2.8 228.8 2.8Q228.2 2.8 228.2 2.8L228.1 1.8H236.1Z"/><path d="M341.5 73.2 310.5 2.4H319L343.5 63.7ZM341.5 73.2 340.6 66.2 367.2 2.1H373.2L346.1 62.9Q346.1 62.9 345.55 64.15Q345 65.4 344.25 67.2Q343.5 69 342.95 70.7Q342.4 72.4 342.4 73.2ZM364.4 9Q365.5 6 364 4.4Q362.5 2.8 360.6 2.8H359.7V1.8H379.8V2.8Q379.8 2.8 379.35 2.8Q378.9 2.8 378.9 2.8Q376.7 2.8 374.2 4.25Q371.7 5.7 370.1 9.1ZM321.7 9 313.4 9.1Q311.9 5.7 309.4 4.25Q306.9 2.8 304.6 2.8Q304.6 2.8 304.2 2.8Q303.8 2.8 303.8 2.8V1.8H326.3V2.8H325.4Q323.5 2.8 322.05 4.4Q320.6 6 321.7 9Z"/><path d="M416.7 0.4 446.3 71.2H437.8L414.7 9.9ZM395.2 64.5Q394.5 66.5 395 67.9Q395.5 69.3 396.65 70.05Q397.8 70.8 399 70.8H399.9V71.8H379.8V70.8Q379.8 70.8 380.25 70.8Q380.7 70.8 380.7 70.8Q383 70.8 385.45 69.35Q387.9 67.9 389.5 64.5ZM416.7 0.4 417.6 7.4 392.5 71.5H386.5L412.1 10.7Q412.1 10.7 412.65 9.45Q413.2 8.2 413.95 6.4Q414.7 4.6 415.25 2.9Q415.8 1.2 415.8 0.4ZM430.8 44.5V47.5H399.5V44.5ZM435.3 64.5H443.5Q445 67.9 447.5 69.35Q450 70.8 452.3 70.8Q452.3 70.8 452.7 70.8Q453.1 70.8 453.1 70.8V71.8H430.6V70.8H431.5Q433.4 70.8 434.9 69.15Q436.4 67.5 435.3 64.5Z"/><path d="M474.2 1.8V71.8H467.7V1.8ZM501.2 68.7V71.8H473.9V68.7ZM507.3 55.6 501.5 71.8H484.9L488.5 68.7Q493.8 68.7 497.15 67.05Q500.5 65.4 502.6 62.4Q504.7 59.4 506.3 55.6ZM468 64.5V71.8H460V70.8Q460 70.8 460.65 70.8Q461.3 70.8 461.3 70.8Q463.9 70.8 465.75 68.95Q467.6 67.1 467.7 64.5ZM468 9.1H467.7Q467.6 6.5 465.75 4.65Q463.9 2.8 461.3 2.8Q461.3 2.8 460.65 2.8Q460 2.8 460 2.8V1.8H468ZM473.9 9.1V1.8H481.9V2.8Q481.8 2.8 481.2 2.8Q480.6 2.8 480.6 2.8Q478 2.8 476.15 4.65Q474.3 6.5 474.2 9.1Z"/><path d="M532.4 1.8V71.8H525.9V1.8ZM559.4 68.7V71.8H532.1V68.7ZM565.5 55.6 559.7 71.8H543.1L546.7 68.7Q552 68.7 555.35 67.05Q558.7 65.4 560.8 62.4Q562.9 59.4 564.5 55.6ZM526.2 64.5V71.8H518.2V70.8Q518.2 70.8 518.85 70.8Q519.5 70.8 519.5 70.8Q522.1 70.8 523.95 68.95Q525.8 67.1 525.9 64.5ZM526.2 9.1H525.9Q525.8 6.5 523.95 4.65Q522.1 2.8 519.5 2.8Q519.5 2.8 518.85 2.8Q518.2 2.8 518.2 2.8V1.8H526.2ZM532.1 9.1V1.8H540.1V2.8Q540 2.8 539.4 2.8Q538.8 2.8 538.8 2.8Q536.2 2.8 534.35 4.65Q532.5 6.5 532.4 9.1Z"/><path d="M590.6 1.8V71.8H584.1V1.8ZM617.6 68.7V71.8H590.3V68.7ZM613.3 35.8V38.8H590.3V35.8ZM617.6 1.8V4.9H590.3V1.8ZM623.7 55.6 617.9 71.8H601.3L604.9 68.7Q610.2 68.7 613.55 67.05Q616.9 65.4 619 62.4Q621.1 59.4 622.7 55.6ZM613.3 38.6V45.2H612.3V43.7Q612.3 41.7 610.9 40.25Q609.5 38.8 607.5 38.8V38.6ZM613.3 29.4V36H607.5V35.8Q609.5 35.7 610.9 34.25Q612.3 32.8 612.3 30.8V29.4ZM617.6 4.6V12.6H616.6V10.8Q616.6 8.4 614.9 6.65Q613.2 4.9 610.7 4.8V4.6ZM617.6 0V2.9L605.4 1.8Q607.6 1.8 610.05 1.5Q612.5 1.2 614.6 0.8Q616.7 0.4 617.6 0ZM584.4 64.5V71.8H576.4V70.8Q576.4 70.8 577.05 70.8Q577.7 70.8 577.7 70.8Q580.3 70.8 582.15 68.95Q584 67.1 584.1 64.5ZM584.4 9.1H584.1Q584.1 6.5 582.2 4.65Q580.3 2.8 577.7 2.8Q577.7 2.8 577.1 2.8Q576.5 2.8 576.5 2.8L576.4 1.8H584.4Z"/><path d="M645.1 1.9 664.7 38.4 660.4 41.9 636.5 1.9ZM666.1 39.6V71.8H659.6V39.6ZM683.9 1.9H690L665.4 41.7L661.8 40.6ZM679.8 9Q680.7 7.6 680.3 6.15Q679.9 4.7 678.8 3.75Q677.7 2.8 676.3 2.8Q676.3 2.8 675.7 2.8Q675.1 2.8 675.1 2.8V1.8H697.3V2.8H695.9Q692.8 2.8 690.1 4.6Q687.4 6.4 685.8 8.7ZM648.9 9 640.5 8.7Q639.1 6.4 636.4 4.6Q633.7 2.8 630.5 2.8H629.1V1.8H653.7V2.8Q653.7 2.8 653.05 2.8Q652.4 2.8 652.4 2.8Q650.2 2.8 649.05 4.85Q647.9 6.9 648.9 9ZM659.8 64.5V71.8H651.9V70.8Q651.9 70.8 652.5 70.8Q653.1 70.8 653.2 70.8Q655.8 70.8 657.65 68.95Q659.5 67.1 659.6 64.5ZM665.8 64.5H666.1Q666.1 67.1 668 68.95Q669.9 70.8 672.5 70.8Q672.5 70.8 673.1 70.8Q673.7 70.8 673.7 70.8V71.8H665.8Z"/></svg></div><p>GOLF & RESORT</p></div>
+<style>.ft-wm .wm-line .p1{stroke-dasharray:722px;stroke-dashoffset:722px}.ft-wm .wm-line .p2{stroke-dasharray:266px;stroke-dashoffset:266px}.ft-wm .wm-line .p3{stroke-dasharray:607px;stroke-dashoffset:607px}.ft-wm .wm-line .p4{stroke-dasharray:514px;stroke-dashoffset:514px}.ft-wm .wm-line .p5{stroke-dasharray:429px;stroke-dashoffset:429px}.ft-wm .wm-line .p6{stroke-dasharray:495px;stroke-dashoffset:495px}.ft-wm .wm-line .p7{stroke-dasharray:363px;stroke-dashoffset:363px}.ft-wm .wm-line .p8{stroke-dasharray:363px;stroke-dashoffset:363px}.ft-wm .wm-line .p9{stroke-dasharray:548px;stroke-dashoffset:548px}.ft-wm .wm-line .p10{stroke-dasharray:450px;stroke-dashoffset:450px}</style>
+</footer>
+</section></div>
+<nav class="dots" aria-label="섹션 이동"><ul><li data-go="0" class="p1"><button type="button" aria-label="홈"><span><em></em></span></button><p>홈</p></li><li data-go="1" class="p2"><button type="button" aria-label="윈드밸리 골프"><span><em></em></span></button><p>윈드밸리 골프</p></li><li data-go="2" class="p3"><button type="button" aria-label="윈드밸리 리조트"><span><em></em></span></button><p>윈드밸리 리조트</p></li><li data-go="3" class="p4"><button type="button" aria-label="코스 소개"><span><em></em></span></button><p>코스 소개</p></li><li data-go="4" class="p5"><button type="button" aria-label="헤드 프로"><span><em></em></span></button><p>헤드 프로</p></li><li data-go="5" class="p6"><button type="button" aria-label="룸소개"><span><em></em></span></button><p>룸소개</p></li><li data-go="6" class="p7"><button type="button" aria-label="패키지"><span><em></em></span></button><p>패키지</p></li><li data-go="8" class="p9"><button type="button" aria-label="FAQ / PRESS"><span><em></em></span></button><p>FAQ / PRESS</p></li><li data-go="9" class="p10"><button type="button" aria-label="윈드밸리 골프 & 리조트"><span><em></em></span></button><p>윈드밸리 골프 &amp; 리조트</p></li><li data-go="10" class="p11"><button type="button" aria-label="오시는 길"><span><em></em></span></button><p>오시는 길</p></li></ul></nav>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+
+</body>
+</html>
