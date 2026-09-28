@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아르티엘 레이크 | 분양 홍보관</title>
+<meta name="description" content="아르티엘 레이크 분양 홍보관 — 한울호수 앞 총 2,876세대 최고 49층">
+<meta property="og:type" content="website">
+<meta property="og:title" content="아르티엘 레이크 | 분양 홍보관">
+<meta property="og:description" content="아르티엘 레이크 분양 홍보관 — 한울호수 앞 총 2,876세대 최고 49층">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Lexend:wght@600&family=Marcellus&family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Sans+KR:wght@100..900&family=Pinyon+Script&display=swap">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+/* ── 메인 공통 ─────────────────────────────────────────── */
+body.main .all{width:100%;position:relative;left:0;top:0;text-align:center}
+body.fp-on{overflow:hidden;height:100%}
+body.locked{touch-action:none;overflow:hidden;overscroll-behavior:none}
+html.fp-html{overflow:hidden;height:100%}
+body.fp-on .all{height:100vh}
+body.fp-on .fp{transition:transform 1.5s ease;will-change:transform}
+.fp-sec{background:#fff;width:100%;height:100vh;position:relative;overflow:hidden;z-index:1}
+.fp-sec.fp-auto{height:auto;overflow:visible}
+.vwrap{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;padding-bottom:56.25%;height:0}
+.vwrap video{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:100%;height:100%;object-fit:cover;z-index:2}
+
+/* 커서 · 건너뛰기 (원본 #cursor · cursor_skip2 · main_skip_wrap) */
+.cur{position:fixed;z-index:9999999;left:0;top:0;pointer-events:none;will-change:transform;width:70px;height:70px;display:none}
+.cur-skip{width:70px;height:70px;background:#888;display:flex;justify-content:center;align-items:center;border-radius:100%;
+  left:0;top:0;transform:translate(-50%,-50%);transition:opacity 1s;opacity:0;position:absolute}
+.cur-skip.show{opacity:1}
+.cur-skip p{font-family:'Lexend',sans-serif;color:#fff;font-size:14px;line-height:100%;font-weight:600;letter-spacing:0;
+  text-transform:uppercase;position:relative}
+.cur-skip::before{content:'';width:94px;height:94px;position:absolute;left:-12px;top:-12px;background:#888;opacity:.6;
+  border-radius:100%;animation:skipScale 2.1s ease infinite both,skipFade 2.1s ease infinite both}
+@keyframes skipScale{0%{transform:scale(.7)}30%{transform:scale(.7)}80%{transform:scale(1)}100%{transform:scale(1)}}
+@keyframes skipFade{0%{opacity:0}20%{opacity:.4}70%{opacity:.4}100%{opacity:0}}
+@media (hover:hover) and (pointer:fine) and (min-width:1401px){.cur{display:block}}
+.skip-area{width:100%;height:100%;position:absolute;left:0;top:0;z-index:99998;display:none;opacity:0;transition:opacity 1s}
+.skip-area.show{display:block}
+.skip-area.show.in{opacity:1}
+.skip-area button{width:100%;height:100%;position:absolute;left:0;top:0;cursor:pointer;color:transparent}
+
+/* ── 인트로 ───────────────────────────────────────────── */
+.ia{width:100%;height:100%;position:absolute;left:0;top:0;z-index:9999;display:flex;justify-content:center;align-items:center;
+  transition:opacity 1s}
+.ia.out{opacity:0}
+.ia.gone,.no-js .ia{display:none}
+.ia::before{content:'';width:100%;height:100%;position:absolute;left:0;top:0;background:#000;z-index:7;transition:.8s;opacity:1}
+.ia-img{width:100%;height:100%;position:absolute;left:0;top:0;z-index:5;transition:.8s;background:#000;overflow:hidden}
+.ia-img img{width:100%;height:100%;position:absolute;left:0;top:0;object-fit:cover;object-position:center bottom;z-index:2;transition:1.5s}
+.ia-img .pad{display:none}
+.ia-t{width:100%;height:100%;position:absolute;z-index:10;text-align:center;display:flex;justify-content:center;align-items:center;transition:.8s}
+.ia-t h2{font-size:2.0625rem;line-height:100%;display:flex;justify-content:center;align-items:center;color:#fff;gap:.368rem;font-weight:400}
+.ia-t h2 b{display:flex;justify-content:center;align-items:center;overflow:hidden;padding-bottom:.125rem;font-weight:400}
+.ia-t h2 i{font-weight:400;font-style:normal;display:inline-block;opacity:0;transform:translateY(101%);transition-duration:1.2s;
+  transition-delay:calc(var(--i) * .06s);transition-timing-function:ease}
+.ia-t4{opacity:0;flex-direction:column;color:#fff;font-family:var(--ft)}
+.ia-t4 p{font-size:1.75rem;line-height:100%;text-transform:uppercase}
+.ia-t4 strong{font-size:7.625rem;line-height:100%;margin-top:1.375rem;font-weight:400}
+.ia-mk{width:100%;height:100%;position:absolute;left:0;top:0;z-index:10}
+.ia-mark{width:377px;height:443px;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;overflow:visible}
+.ia-fill{opacity:0}
+.ia-lines path{stroke-dasharray:1;stroke-dashoffset:1}
+.ia-tiles{width:100%;height:100%;position:absolute;opacity:0;left:0;top:0;z-index:7;display:flex;justify-content:center;
+  align-items:center;flex-wrap:wrap}
+.ia-tiles i{width:20%;height:25%;background:var(--pri);opacity:1;transition-duration:.5s}
+.ia-tiles i:nth-child(11){transition-delay:0s}.ia-tiles i:nth-child(5){transition-delay:.1s}
+.ia-tiles i:nth-child(19){transition-delay:.2s}.ia-tiles i:nth-child(1){transition-delay:.3s}
+.ia-tiles i:nth-child(15){transition-delay:.4s}.ia-tiles i:nth-child(7){transition-delay:.5s}
+.ia-tiles i:nth-child(17){transition-delay:.6s}.ia-tiles i:nth-child(3){transition-delay:.7s}
+.ia-tiles i:nth-child(13){transition-delay:.8s}.ia-tiles i:nth-child(9){transition-delay:.9s}
+.ia-tiles i:nth-child(8){transition-delay:1s}.ia-tiles i:nth-child(2){transition-delay:1.1s}
+.ia-tiles i:nth-child(20){transition-delay:1.2s}.ia-tiles i:nth-child(12){transition-delay:1.3s}
+.ia-tiles i:nth-child(6){transition-delay:1.4s}.ia-tiles i:nth-child(14){transition-delay:1.5s}
+.ia-tiles i:nth-child(4){transition-delay:1.6s}.ia-tiles i:nth-child(18){transition-delay:1.7s}
+.ia-tiles i:nth-child(10){transition-delay:1.8s}.ia-tiles i:nth-child(16){transition-delay:1.9s}
+.ia-vbox{position:absolute;left:0;top:0;width:100%;height:100%;background:#000;overflow:hidden;z-index:5;opacity:0}
+.ia-v{opacity:.7}
+.ia-v::after{content:'';position:absolute;inset:0;z-index:1}
+@media (max-width:1640px){.ia-v video{width:140%;height:140%}}
+@media (max-width:1440px){.ia-v video{width:200%;height:200%}}
+@media screen and (min-width:767px) and (max-width:1440px) and (orientation:portrait){.ia-v video{width:260%;height:260%}}
+@media (max-width:767px){.ia-v video{width:350%;height:350%}}
+
+/* 시간표 (원본 intro3~intro12) */
+.mv.i3 .ia::before{opacity:0;transition:1.5s 0s}
+.mv.i4 .ia-img img{opacity:.3;transition:1.5s .6s}
+.mv.i5 .ia-lines .l1{stroke-dashoffset:0;transition:stroke-dashoffset 1.5s .2s}
+.mv.i5 .ia-lines .l2{stroke-dashoffset:0;transition:stroke-dashoffset 1s .7s}
+.mv.i6 .ia-lines{opacity:0;transition:1.5s 0s}
+.mv.i6 .ia-fill{opacity:1;transition:1.5s 0s}
+.mv.i6 .ia-img img{opacity:.15;transition:1.5s .5s}
+.mv.i7 .ia-tiles{opacity:1;transition:1.5s 0s}
+.mv.i7 .ia-mk{opacity:0;transition:1.4s 1.8s}
+.mv.i7 .ia-vbox{opacity:1;transition:1.5s 1.5s}
+.mv.i8 .ia-t4{opacity:1;transition:2s 0s}
+.mv.i9 .ia-tiles i{opacity:0}
+.mv.i10 .ia-t4{opacity:0;transition:1.8s 0s}
+.mv.i11 .ia-t5 i{opacity:1;transform:none;transition-duration:2s;transition-timing-function:cubic-bezier(.19,1,.22,1)}
+.mv.i12 .ia-v{opacity:.1;transition:1.5s 0s}
+
+/* ── 1. 메인 비주얼 · 분양 일정 ───────────────────────── */
+.mv{width:100%;height:100vh;position:relative;display:flex;justify-content:center;align-items:center;background:#000}
+.mv-a,.mv-b{width:100%;height:100%;position:absolute;left:0;top:0}
+.mv-vbox{position:absolute;left:0;top:0;width:100%;height:100%;background:#000;overflow:hidden;z-index:5}
+.mv-v{top:53%;z-index:2;opacity:1;transition:.8s}
+.mv-vbox::before{content:'';width:100%;height:100%;left:0;top:0;position:absolute;z-index:7;opacity:0;transition:.8s;
+  background:linear-gradient(180deg,rgba(0,0,0,.59) 0,rgba(0,0,0,.37) 20%,rgba(0,0,0,.28) 32%,rgba(0,0,0,.25) 50%,
+  rgba(0,0,0,.2) 70%,rgba(0,0,0,.25) 100%),linear-gradient(90deg,rgba(0,0,0,.4) 0,rgba(0,0,0,0) 14%)}
+@media (max-width:1640px){.mv-v video{width:140%;height:140%}}
+@media (max-width:1440px){.mv-v video{width:200%;height:200%}}
+@media screen and (min-width:767px) and (max-width:1440px) and (orientation:portrait){.mv-v video{width:260%;height:260%}}
+@media (max-width:767px){.mv-v video{width:370%;height:370%}}
+.mv-txt{width:100%;height:100%;position:absolute;left:0;top:0;z-index:9;display:flex;justify-content:center;align-items:center;padding-top:1px}
+.mv-txt>div{text-align:center;color:#fff;position:relative;transform:translateY(-16rem)}
+.mv-txt ul{display:flex;justify-content:center;align-items:center;gap:1.625rem;opacity:0;transform:translateY(-3rem)}
+.mv-txt li{font-size:18px;line-height:100%;position:relative;font-weight:300;letter-spacing:0}
+.mv-txt li b{font-weight:600}
+.mv-txt li::before{content:'';width:1px;height:.75rem;position:absolute;left:-.8125rem;top:1px;bottom:0;margin:auto;background:#fff}
+.mv-txt li:first-child::before{display:none}
+.mv-txt h1{font-size:3.5rem;line-height:100%;margin-top:.5rem;font-weight:200;letter-spacing:0}
+.mv-txt h1 b{font-weight:600}
+.mv-txt>div>div{opacity:0;transform:translateY(3rem);display:flex;justify-content:center;align-items:center;gap:1.5rem}
+.mv-txt img{width:4.75rem}
+.mv-note{position:absolute;text-align:center;width:100%;bottom:2.375rem;z-index:9;font-size:.75rem;color:#fff;opacity:0;line-height:1.5}
+.quick{width:28.75rem;height:3.75rem;position:absolute;left:0;bottom:31.5rem;z-index:90;display:flex;justify-content:center;
+  align-items:flex-end;transform:rotate(90deg) translateY(100%);transform-origin:left bottom}
+.quick a{display:flex;justify-content:flex-start;align-items:center;width:100%;height:100%;color:#fff;text-align:left;gap:.5rem;
+  position:relative;border:1px solid rgba(255,255,255,.3);border-bottom:none;padding-left:1.25rem;box-sizing:border-box}
+.quick a:last-child{border-left:none}
+.quick-ic{border-radius:100%;display:flex;justify-content:center;align-items:center}
+.quick-ic.i1 svg{width:30px;height:32px;margin-top:.25rem}
+.quick-ic.i2{width:1.875rem;height:1.875rem;background:#fff}
+.quick-ic.i2 svg{width:.75rem;height:.875rem}
+.quick p{font-size:.875rem;line-height:100%}
+.quick .pl{width:12px;height:12px;position:absolute;right:1.25rem;top:0;bottom:0;margin:auto}
+.quick .pl::before{content:'';width:1px;height:100%;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;background:#fff}
+.quick .pl::after{content:'';height:1px;width:100%;position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;background:#fff}
+
+.mv-b{display:flex;justify-content:center;align-items:center}
+.cal{position:relative;z-index:10;color:#fff;transform:translateY(3rem)}
+.cal-ttl{opacity:0;transform:translateY(-5rem);transition:.8s}
+.cal-ttl h2{font-family:var(--fd);font-size:3.4375rem;line-height:100%;font-weight:700;letter-spacing:0}
+.cal-ttl h2 b{color:transparent;-webkit-text-stroke:1px #fff}
+.cal-list{position:relative;z-index:4;width:100%;max-width:1130px;display:flex;justify-content:flex-start;align-items:flex-start;
+  flex-direction:column;gap:7.5rem;opacity:0;transform:translateY(3rem);transition:.8s;margin-top:2.875rem}
+.cal-list ul{width:100%;display:flex;justify-content:flex-start;align-items:flex-start;gap:.75rem;flex-wrap:wrap}
+.cal-list li{width:calc(16.666% - .75rem);height:10.9375rem;text-align:center;transition:.3s;border:1px solid rgba(255,255,255,.3);
+  box-sizing:border-box;position:relative;display:flex;justify-content:center;align-items:center}
+.cal-list h3{font-family:var(--fm);font-size:1.25rem;line-height:100%;font-weight:600;white-space:nowrap}
+.cal-list p{font-size:.875rem;line-height:128%;margin-top:.375rem}
+.cal-list li:nth-child(n+7){width:calc(50% - .75rem);height:7.125rem}
+.cal-in{width:100%;height:100%;margin:0 auto;display:flex;justify-content:center;align-items:center;padding:0 2rem}
+.cal-list li:nth-child(n+7) .cal-in>div{display:flex;align-items:center;gap:1.25rem}
+.cal-list li:nth-child(n+7) p{transform:translateY(-2px)}
+.cal-in span{width:2px;height:.75rem;background:#fff;display:inline-block}
+.cal-ln{width:100%;height:100%;position:absolute;left:0;top:0;z-index:9}
+.cal-ln::before{content:'';width:1px;height:0;position:absolute;left:-1px;bottom:-1px;background:var(--acc);transition:.5s}
+.cal-ln::after{content:'';width:1px;height:0;position:absolute;right:-1px;top:-1px;background:var(--acc);transition:.5s}
+.cal-ln span{width:100%;height:100%;position:absolute;left:0;top:0}
+.cal-ln span::before{content:'';width:0;height:1px;position:absolute;left:-1px;top:-1px;background:var(--acc);transition:.5s}
+.cal-ln span::after{content:'';width:0;height:1px;position:absolute;right:-1px;bottom:-1px;background:var(--acc);transition:.5s}
+.cal-list li:hover{color:#c9a57c}
+.cal-list li:hover .cal-ln::before,.cal-list li:hover .cal-ln::after{height:calc(100% + 2px)}
+.cal-list li:hover .cal-ln span::before,.cal-list li:hover .cal-ln span::after{width:calc(100% + 2px)}
+.cal-list li:hover .cal-in span{background:#c9a57c}
+.cal-btn{opacity:0;transform:translateY(2rem);transition:.4s;margin:4.25rem auto 0;z-index:10;position:relative}
+.cal-btn ul{display:flex;justify-content:center;gap:1rem;margin:0 auto}
+.cal-btn a{width:12.375rem;font-size:1rem;padding:1.2rem 2.5rem;border:1px solid rgba(255,255,255,.3);border-radius:100px;
+  transition:.2s;display:flex;justify-content:space-between;align-items:center}
+.cal-btn .arr{width:12px;height:7px;color:#fff;transition:.2s}
+.cal-btn li:hover a,.cal-btn a:focus-visible{background:#fff;color:#000}
+.cal-btn li:hover .arr,.cal-btn a:focus-visible .arr{color:#000}
+
+.mv.p1 .mv-vbox::before{opacity:1}
+.mv.p1 .mv-txt ul{transform:none;opacity:1;transition:1.5s .2s}
+.mv.p1 .mv-txt>div>div{transform:none;opacity:1;transition:1.5s .7s}
+.mv.p1 .quick,.mv.p2 .quick{transform:rotate(90deg) translateY(0);transition:1.2s .7s}
+.mv.p1 .mv-note,.mv.p2 .mv-note{opacity:.7;transition:1.5s 1.2s}
+.mv.p2 .mv-v{opacity:.2}
+.mv.p2 .cal-ttl{opacity:1;transform:none;transition:1.2s .8s}
+.mv.p2 .cal-list{opacity:1;transform:none;transition:1.2s .8s}
+.mv.p2 .cal-btn{opacity:1;transform:none;transition:1.2s 1.2s}
+
+/* ── 2. 사업개요 ──────────────────────────────────────── */
+.sm{width:100%;height:100vh;position:relative;overflow:hidden;display:flex;justify-content:center;align-items:center;color:#000}
+.sm-box{width:100%;height:100%;position:absolute;left:0;top:0}
+.sm-bg{width:100%;height:100%;position:relative;overflow:hidden}
+.sm-bg img{width:100%;height:100%;position:absolute;left:0;top:0;object-fit:cover;object-position:50% 100%;transform:scale(1.1);
+  transition:transform 3s,object-position 1.2s}
+.sm-tit{width:29%;height:100%;position:absolute;left:0;top:0;text-align:left;display:flex;justify-content:flex-end;opacity:0;
+  transform:translateX(-4rem);transition:1.2s}
+.sm-tit>div{transform:translateY(13.5625rem)}
+.sm-tit h2,.ovw-tit h2,.lc-tit h2,.ld-tb2 h2{font-family:var(--fs);font-size:2.1875rem;color:var(--pri);line-height:128%;font-weight:400}
+.sm-tit p,.ovw-tit p,.lc-tit p,.ld-tb2 p{font-size:.9375rem;line-height:190%;opacity:.7;margin-top:1.875rem}
+.sm-con{width:100%;height:100%;position:absolute;left:0;top:0;display:flex;justify-content:center;align-items:center;z-index:9;color:#000}
+.sm-con>div{max-width:1510px;display:flex;justify-content:center;align-items:center;position:relative;gap:8rem}
+.sm-h{text-align:left}
+.sm-h>div{display:inline-block;transition:.8s;opacity:0;transform:translateX(-5rem)}
+.sm-h h2{font-family:var(--fd);font-size:5rem;line-height:100%;position:relative;font-weight:700;white-space:nowrap;transition:.8s;letter-spacing:3.2px}
+.sm-h p{font-size:1.25rem;margin-top:.625rem;line-height:100%;font-weight:500;margin-left:.25rem;white-space:nowrap}
+.sm-list{width:100%;max-width:1100px;display:flex;justify-content:flex-end;align-items:center;flex-direction:column;gap:7.5rem;
+  opacity:0;transform:translateY(3rem);transition:.8s}
+.sm-list ul{width:100%;display:flex;justify-content:flex-end;align-items:flex-start;gap:4.625rem 3.5rem;flex-wrap:wrap}
+.sm-list li{width:calc(33.33% - 2.375rem);text-align:left}
+.sm-list h3{font-size:1.375rem;line-height:100%;font-weight:600}
+.sm-list p{font-size:.875rem;line-height:128%;opacity:.7;border-top:1px solid #000;margin-top:.875rem;padding-top:1.25rem}
+.sm-note{width:100%;font-size:.75rem;line-height:166%;position:absolute;bottom:3.85rem;transition:.8s;color:#000;text-align:center;opacity:0}
+.sm.p1 .sm-tit{opacity:1;transform:none;transition:1.5s .6s}
+.sm.p1 .sm-bg img,.sm.p2 .sm-bg img{transform:scale(1)}
+.sm.p2 .sm-bg img{object-position:50% 0}
+.sm.p2 .sm-h>div{opacity:1;transform:none;transition:1.2s .4s}
+.sm.p2 .sm-list{opacity:1;transform:none;transition:1.2s .8s}
+.sm.p2 .sm-note{opacity:.7;transform:none;transition:1.2s .8s}
+
+/* ── 3. 호수 전경 ─────────────────────────────────────── */
+.ovw{width:100%;height:100%;display:flex;justify-content:center;align-items:center;position:relative;overflow:hidden}
+.ovw-bg{position:absolute;inset:0;transform:scale(1.1)}
+.ovw-bg img{width:100%;height:100%;object-fit:cover}
+.ovw-tit{width:29%;height:100%;position:absolute;left:0;top:0;text-align:left;display:flex;justify-content:flex-end;opacity:0;
+  transform:translateX(-4rem);transition:1.2s}
+.ovw-tit>div{transform:translateY(13.5625rem)}
+.ovw.p1 .ovw-tit{opacity:1;transform:none;transition:1.5s .6s}
+.ovw.p1 .ovw-bg{transform:scale(1);transition:3s 0s}
+
+/* ── 4. 입지 (141vw 가로 띠) ─────────────────────────── */
+.lc{width:141vw;height:100%;position:relative}
+.lc-track{width:100%;height:100%;position:relative;display:flex;justify-content:flex-start;align-items:center;transition:1.5s}
+.lc-a{width:89vw;height:100%;position:relative;display:flex;justify-content:center;align-items:center}
+.lc-b{width:52vw;height:100%;position:relative;display:flex;justify-content:space-between;align-items:center}
+.lc-a>div{width:100%;display:flex;justify-content:center;transform:translateY(4rem)}
+.lc-tit{text-align:left;margin-bottom:3.875rem;opacity:0;transform:translateX(-4rem);transition:1s}
+.lc-row{display:flex;gap:5.875rem}
+.lc-b>div{position:relative}
+.lc-item{position:relative;transition:.8s}
+.lc-img img{vertical-align:top}
+.lc-cap{position:absolute;display:flex;gap:1.25rem;align-items:center}
+.lc-cap strong{font-family:var(--ft);color:var(--pri);font-size:1.75rem;line-height:130%;font-weight:400;display:block;letter-spacing:.077em}
+.lc-cap em{font-family:var(--ft);color:var(--pri);font-size:.9375rem;line-height:130%;text-transform:uppercase;font-style:normal;display:block;letter-spacing:.077em}
+.lc-cap span{width:1px;height:2.9375rem;background:var(--pri);display:block}
+.lc-cap p{font-size:.9375rem;opacity:.7;line-height:190%;text-align:left}
+.lc-item.c1{opacity:0;transform:translateY(-4rem)}
+.lc-item.c2{opacity:0;transform:translate(-4rem,-3.25rem);height:fit-content}
+.lc-item.c3{opacity:0;transform:translateX(-4rem);height:fit-content}
+.lc-item.c4{opacity:0;transform:translateY(-4rem);position:absolute;right:-7.875rem;top:-4.0625rem;white-space:nowrap;z-index:-1}
+.lc-item.c5{opacity:0;transform:translateX(4rem);margin-top:auto}
+.lc-cap.b1{right:-29.25rem;bottom:1.6875rem}
+.lc-cap.b2{right:-7.625rem;bottom:-5rem}
+.lc-cap.b3{left:-19.56rem;bottom:-4.875rem}
+.lc-cap.b4{left:-2.75rem;top:-6.75rem}
+.lc-cap.b5{left:-32rem;top:5rem}
+.lc-note{position:absolute;text-align:center;bottom:2.375rem;width:100vw}
+.lc-note p{font-size:.75rem;line-height:100%;opacity:.7}
+.lc.p1 .lc-tit,.lc.p2 .lc-tit{opacity:1;transform:none;transition:1.2s .6s}
+.lc.p1 .lc-item.c1,.lc.p2 .lc-item.c1{opacity:1;transform:none;transition:1.2s .8s}
+.lc.p1 .lc-item.c2,.lc.p2 .lc-item.c2{opacity:1;transform:translate(0,-3.25rem);transition:1.2s 1s}
+.lc.p1 .lc-item.c3,.lc.p2 .lc-item.c3{opacity:1;transform:none;transition:1.2s 1.2s}
+.lc.p1 .lc-note,.lc.p2 .lc-note{opacity:1;transition:1.2s .6s}
+.lc.p2 .lc-track{transform:translateX(-41vw)}
+.lc.p2 .lc-item.c4{opacity:1;transform:none;transition:1.2s .2s}
+.lc.p2 .lc-item.c5{opacity:1;transform:none;transition:1.2s .4s}
+
+/* ── 5. 조경 (233vw 가로 띠) ─────────────────────────── */
+.ld{width:233vw;height:100vh;display:flex;justify-content:flex-start;align-items:center;position:relative;color:#fff;transition:1.6s}
+.ld-a{width:100vw;height:100%;position:relative;transition:.8s;display:flex;justify-content:center;align-items:center;background:#fff}
+.ld-b{width:133vw;height:100%;position:relative;transition:.8s;color:#000;display:flex;justify-content:flex-start;align-items:flex-end}
+.ld-vbox{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;background:#000;overflow:hidden;transition:1.5s}
+.ld-v video{opacity:.5;transition:1.2s}
+@media (max-width:1640px){.ld-v video{width:140%;height:140%}}
+@media (max-width:1440px){.ld-v video{width:150%;height:150%}}
+@media (max-width:1000px){.ld-v video{width:200%;height:200%}}
+@media screen and (min-width:767px) and (max-width:1440px) and (orientation:portrait){.ld-v video{width:260%;height:260%}}
+@media (max-width:767px){.ld-v video{width:350%;height:350%}}
+.ld-note{width:100%;text-align:center;position:absolute;bottom:2.375rem;z-index:2;opacity:0;transition:1s}
+.ld-note p,.ld-bg p,.ld-imgs>p{font-size:.75rem;line-height:100%;opacity:.7}
+.ld-tb{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;white-space:nowrap;width:90%;
+  max-width:1497px;gap:2.5rem}
+.ld-tt{opacity:0;transform:translateX(-5rem);text-align:left;transition:1s}
+.ld-tt h2{font-family:var(--fd);font-weight:700;font-size:5rem;line-height:100%;letter-spacing:.2px}
+.ld-tt p{font-size:1.25rem;line-height:100%;margin-top:.9375rem}
+.ld-line{width:100%;height:1px;position:relative}
+.ld-line::after{content:'';width:0;height:100%;position:absolute;left:0;right:0;margin:auto;top:-1rem;background:#a8a8a8;transition:1s}
+.ld-logo{opacity:0;transform:translateX(5rem);transition:1s}
+.ld-logo img{width:144px}
+.ld-bg{width:100%;max-width:960px;height:calc(100% - 7.1875rem);position:relative;overflow:hidden}
+.ld-bg figure{position:absolute;inset:0;transform:scale(1.2);transition:1.5s}
+.ld-bg figure img{width:100%;height:100%;object-fit:cover}
+.ld-bg figcaption{font-size:.75rem;color:#fff;line-height:100%;position:absolute;right:.75rem;top:1.125rem;transform:scale(.8333);
+  transform-origin:right top}
+.ld-bg p{color:#fff;position:absolute;bottom:2.375rem;width:100%;text-align:center}
+.ld-con{width:83%;height:100%;display:flex;justify-content:center;align-items:center}
+.ld-con>div{width:90%;max-width:1386px;display:flex;justify-content:space-between;align-items:flex-start;transform:translateY(1rem)}
+.ld-tb2{text-align:left;opacity:0;transform:translateX(-5rem);transition:1.5s}
+.ld-list{margin-top:6.25rem;text-align:left;opacity:0;transform:translateY(5rem);transition:1.5s}
+.ld-list li{margin-bottom:2.5rem}
+.ld-list li:last-child{margin-bottom:0}
+.ld-list h3{font-family:var(--ft);font-size:1rem;color:var(--pri);line-height:100%;font-weight:400;letter-spacing:.077em}
+.ld-list p{font-size:.875rem;opacity:.7;margin-top:.625rem}
+.ld-imgs{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;width:100%;max-width:810px;opacity:0;
+  transform:translate(5rem,6.8125rem);transition:1.5s}
+.ld-imgs>div{width:calc(50% - .5rem);height:17.625rem;position:relative}
+.ld-imgs img{width:100%;height:100%;object-fit:cover;display:block}
+.ld-imgs em{color:#fff;font-size:.75rem;line-height:100%;position:absolute;bottom:.375rem;right:.5rem;font-style:normal}
+.ld-imgs>p{margin-top:2.3125rem;text-align:center;width:100%}
+.ld.p1 .ld-tt,.ld.p1 .ld-logo{opacity:1;transform:none;transition:1.5s .6s}
+.ld.p1 .ld-line::after{width:100%;transition:1.8s 0s}
+.ld.p1 .ld-note,.ld.p2 .ld-note{opacity:1;transition:1.2s .6s}
+.ld.p2{transform:translateX(-100vw)}
+.ld.p2 .ld-bg figure,.ld.p3 .ld-bg figure{transform:scale(1);transition:2.5s 0s}
+.ld.p2 .ld-list,.ld.p3 .ld-list{opacity:1;transform:none;transition:1.5s 0s}
+.ld.p2 .ld-tb2,.ld.p3 .ld-tb2{opacity:1;transform:none;transition:1.5s .4s}
+.ld.p2 .ld-imgs,.ld.p3 .ld-imgs{opacity:1;transform:translate(0,6.8125rem);transition:1.5s .8s}
+.ld.p3{transform:translateX(-133vw)}
+
+/* ── 6. 커뮤니티 (페이드 5장 · 5초) ─────────────────── */
+.cm{width:100%;height:100%;position:relative;background:#000;color:#fff}
+.cm-box{width:100%;height:100%;position:absolute;left:0;top:0}
+.cm-box>div{width:100%;height:100%}
+.cm-tit{position:absolute;width:37%;height:100%;display:flex;justify-content:flex-end;text-align:left;z-index:5;opacity:1;transform:none;
+  transition:1.5s .6s}
+.cm-tit>div{transform:translateY(12.625rem)}
+.cm-tit h2{font-family:var(--fs);font-size:2.1875rem;line-height:128%;font-weight:400}
+.cm-tit p{font-size:.9375rem;line-height:190%;opacity:.5;margin-top:1.875rem}
+.cm-slides{width:100%;height:100%;position:relative}
+.cm-slide{position:absolute;inset:0;overflow:hidden;opacity:0;transition:opacity 1s;z-index:1}
+.cm-slide.on{opacity:1;z-index:2}
+.cm-vbox{position:absolute;left:0;bottom:0;width:100%;height:100%;background:#000;overflow:hidden}
+.cm-v::before{content:'';width:100%;height:100%;position:absolute;left:0;top:0;z-index:7}
+.cm-shade{position:absolute;inset:0;z-index:7;
+  background:radial-gradient(ellipse 60% 62% at 50% 55%,rgba(0,0,0,.05) 25%,rgba(0,0,0,.3) 70%,rgba(0,0,0,.6) 100%)}
+@media (max-width:1640px){.cm-v video{width:140%;height:140%}}
+@media (max-width:1440px){.cm-v video{width:150%;height:150%}}
+@media (max-width:1000px){.cm-v video{width:200%;height:200%}}
+@media (max-width:767px){.cm-v video{width:360%;height:360%}}
+.cm-img{width:100%;height:100%;transform:scale(1.2)}
+.cm-img img{width:100%;height:100%;object-fit:cover}
+.cm-txt{text-align:right;position:absolute;right:0;top:0;z-index:10;width:22.5%;height:100%;display:flex;justify-content:flex-start;
+  align-items:flex-end;opacity:0;transform:translateY(5rem)}
+.cm-txt>div{margin-bottom:11.875rem;position:relative}
+.cm-txt>div::before{content:'';width:.25rem;height:100%;background:#fff;display:block;position:absolute;right:-1.6875rem;top:0}
+.cm-txt h3{font-size:1.375rem;line-height:100%;font-weight:600}
+.cm-txt p{font-size:.875rem;line-height:170%;opacity:.7;margin-top:1.1875rem}
+.cm-slide.on .cm-img{transform:scale(1);transition:3s 0s}
+.cm-slide.on .cm-txt{opacity:1;transform:none;transition:1.5s 0s}
+.cm-thumbs{position:absolute;z-index:99;width:50%;max-width:400px;left:0;right:0;margin:auto;bottom:5.625rem;display:flex;
+  justify-content:space-between;gap:.375rem}
+.cm-thumbs button{width:75px;height:75px;cursor:pointer;overflow:hidden;position:relative;flex:none}
+.cm-thumbs img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);transform:scale(1.2)}
+.cm-thumbs button.on img{filter:grayscale(0)}
+.cm-thumbs button.on::after{content:'';width:100%;height:100%;position:absolute;left:0;top:0;border:4px solid #fff;box-sizing:border-box}
+.cm-note{position:absolute;width:100%;text-align:center;color:#fff;font-size:.75rem;bottom:1.875rem;z-index:10;line-height:168%;font-weight:300}
+
+/* ── 7. 시스템 3단 ────────────────────────────────────── */
+.sy{width:100%;height:100%;position:relative;background:#000;color:#fff}
+.sy-row{width:100%;height:100%;display:flex;justify-content:space-between}
+.sy-col{width:100%;height:100%;position:relative;display:flex;justify-content:center;align-items:flex-start;overflow:hidden}
+.sy-col::before{content:'';position:absolute;width:100%;height:100%;left:0;top:0;z-index:5;background:var(--pri-d);opacity:0;transition:1s}
+.sy-col::after{content:'';position:absolute;width:100%;height:100%;left:0;top:0;z-index:3;
+  background:linear-gradient(180deg,rgba(0,0,0,.5) 0,rgba(0,0,0,.49) 40%,rgba(0,0,0,.34) 60%,rgba(0,0,0,.08) 80%,rgba(0,0,0,0) 100%)}
+.sy-img{width:100%;height:100%;position:absolute;left:0;top:0}
+.sy-img img{width:100%;height:100%;object-fit:cover;position:absolute;left:0;top:0;z-index:1;opacity:.8;transition:2s}
+.sy-txt{position:relative;z-index:10;margin-top:12.9375rem;text-align:left;margin-left:-3rem;opacity:0;transform:translateY(-4rem)}
+.sy-txt.b2{transform:translateY(4rem)}
+.sy-txt h2{font-family:var(--fs);font-size:1.625rem;line-height:150%;font-weight:400}
+.sy-txt>p{font-size:.9375rem;line-height:190%;opacity:.4;margin-top:2.875rem}
+.sy-btn{margin-top:4.25rem}
+.sy-btn a{width:16.875rem;font-size:1rem;padding:1.375rem 2.3125rem;box-sizing:border-box;border:1px solid rgba(255,255,255,.3);
+  border-radius:100px;transition:.2s;display:flex;justify-content:space-between;align-items:center}
+.sy-btn p{line-height:100%;font-size:1.0625rem}
+.sy-btn .arr{width:12px;height:7px;color:#fff;transition:.2s}
+.sy-col:hover a,.sy-btn a:focus-visible{background:#fff;color:#000}
+.sy-col:hover .arr,.sy-btn a:focus-visible .arr{color:#000}
+.sy-col:hover .sy-img img{transform:scale(1.1)}
+.sy-col:hover::before{opacity:.85}
+.sy-note{width:100%;position:absolute;text-align:center;font-size:.75rem;line-height:100%;bottom:1.875rem;z-index:10}
+.sy.p1 .sy-txt.b1{opacity:1;transform:none;transition:1.5s .6s}
+.sy.p1 .sy-txt.b2{opacity:1;transform:none;transition:1.5s .8s}
+.sy.p1 .sy-txt.b3{opacity:1;transform:none;transition:1.5s 1s}
+
+/* ── 8. 상품 ─────────────────────────────────────────── */
+.un{width:100vw;height:100vh;position:relative;display:flex;justify-content:flex-start;align-items:center;transition:1.6s;background:#000}
+.un-a{width:100vw;height:100vh;position:relative;display:flex;justify-content:center;align-items:center}
+.un-b{width:67vw;height:100vh;position:absolute;right:-67vw;top:0;display:flex;justify-content:center;align-items:center;
+  background:#2a2a2a;transition:1.6s}
+.un-b>div:last-child{width:90%;max-width:1000px;transform:translateY(2rem);position:relative;z-index:9}
+.un-bg{position:absolute;left:0;top:0;width:100%;height:100%;z-index:2;background:#000;overflow:hidden}
+.un-bg img{width:100%;height:100%;object-fit:cover;position:absolute;left:0;top:0;z-index:1;transform:scale(1.2);transition:1.5s;opacity:.7}
+.un-bg::after{content:'';width:100%;height:100%;position:absolute;left:0;top:0;z-index:2;
+  background:linear-gradient(180deg,rgba(0,0,0,0) 65%,rgba(0,0,0,.09) 80%,rgba(0,0,0,.29) 90%,rgba(0,0,0,.49) 100%),
+  linear-gradient(90deg,rgba(0,0,0,.24) 0,rgba(0,0,0,.18) 20%,rgba(0,0,0,.08) 30%,rgba(0,0,0,0) 42%)}
+.un-tb{width:90%;max-width:720px;height:100%;display:flex;justify-content:center;align-items:flex-start;position:absolute;left:0;top:0;
+  z-index:9;color:#fff}
+.un-tb>div{text-align:left;transform:translateY(12.625rem)}
+.un-tb h2{font-family:var(--fs);font-size:2.1875rem;line-height:128%;font-weight:400}
+.un-tb p{font-size:.9375rem;line-height:190%;opacity:.5;margin-top:1.625rem}
+.un-tt{width:90%;height:100%;max-width:824px;position:absolute;right:0;top:0;display:flex;justify-content:center;align-items:center;
+  z-index:9;text-align:left;color:#fff;white-space:nowrap;transform:translateX(5rem);opacity:0;transition:.8s}
+.un-tt strong{font-family:var(--fd);font-weight:700;font-size:5rem;line-height:100%;margin-left:-.25rem;display:block;letter-spacing:1.9px}
+.un-tt p{font-size:1.25rem;line-height:100%;margin-top:.5rem}
+.un-shade{width:100%;height:100%;position:absolute;left:0;top:0;z-index:2;background:#000;transition:1.5s;overflow:hidden;opacity:.6}
+.un-card{text-align:left;color:#fff;position:relative;transition:.8s;display:inline-block;opacity:0}
+.un-card>div{display:flex;justify-content:flex-start;align-items:flex-end;gap:1.75rem;position:relative}
+.un-card.c1{justify-content:flex-start;transform:translate(-5rem,-4rem)}
+.un-card.c1>div{flex-direction:column;align-items:flex-start;transform:translate(-6.75rem,-2.1875rem)}
+.un-card.c2{justify-content:flex-end;margin-top:-8.125rem;transform:translate(5rem,4rem)}
+.un-card.c2>div{flex-direction:column-reverse;align-items:flex-start;transform:translate(6.75rem,10.625rem)}
+.un-card.c3{justify-content:center;margin-top:-6rem;transform:translate(-4rem,5rem)}
+.un-card.c3>div{flex-direction:row;transform:translate(0,2.25rem)}
+.un-imgbox{position:relative}
+.un-imgbox>div{overflow:hidden}
+.un-img{width:100%;height:auto}
+.un-img.g1{max-width:25.375rem}.un-img.g2{max-width:23.375rem}.un-img.g3{max-width:14rem}
+.un-cap h3{font-size:1.25rem;line-height:100%;font-weight:600}
+.un-cap p{font-size:.875rem;line-height:100%;opacity:.4;margin-top:.75rem}
+.un-go{position:absolute;width:52px;height:52px;cursor:pointer}
+.un-go::after{content:'';width:100%;height:100%;position:absolute;left:0;top:0;border-radius:100%;background:var(--unit);z-index:1;opacity:.22}
+.un-go>i{position:absolute;z-index:9;width:8px;height:8px;left:0;right:4px;top:0;bottom:0;margin:auto}
+.un-go>i::before{content:'';width:46px;height:1px;position:absolute;left:-37px;top:0;bottom:0;margin:auto;background:#fff}
+.un-go>i::after{content:'';width:100%;height:100%;border-right:1px solid #fff;border-bottom:1px solid #fff;position:absolute;left:0;right:0;
+  top:0;bottom:0;margin:auto;transform:rotate(-45deg)}
+.un-go.g1{right:-.125rem;bottom:0}.un-go.g2{right:-.25rem;top:-3.75rem}.un-go.g3{right:-.25rem;bottom:2.75rem}
+.un-note{width:100%;position:absolute;left:0;right:0;margin:auto;bottom:1.875rem;text-align:center;z-index:9;color:#fff;
+  transform:translateY(3rem);opacity:0;transition:.8s}
+.un-note p{font-size:.75rem;line-height:100%}
+.un.p1 .un-bg img{transform:scale(1);transition:2.5s 0s}
+.un.p1 .un-tt,.un.p1 .un-note,.un.p2 .un-note{opacity:1;transform:none;transition:1.2s .4s}
+.un.p2 .un-b{right:0}
+.un.p2 .un-card{opacity:1;transform:none;transition:1.2s .6s}
+
+/* ── 9. 브랜드 ────────────────────────────────────────── */
+.bd{width:100%;height:100%;display:flex;justify-content:center;align-items:center;position:relative;background:#000}
+.bd-bgs{width:100%;height:100%;position:absolute;left:0;top:0;z-index:1;background:#000}
+.bd-bg{width:100%;height:100%;position:absolute;left:0;top:0;opacity:0;animation:bdZoom 9s 0s infinite;transition:1.2s}
+.bd-bg img{width:100%;height:100%;object-fit:cover}
+.bd-bg.on{opacity:.3}
+@keyframes bdZoom{0%{transform:scale(1)}50%{transform:scale(1.08)}100%{transform:scale(1)}}
+.bd-shade{width:100%;height:100%;position:absolute;left:0;top:0;z-index:2;
+  background:linear-gradient(180deg,rgba(0,0,0,.64) 0,rgba(0,0,0,.49) 10%,rgba(0,0,0,.25) 20%,rgba(0,0,0,.07) 30%,rgba(0,0,0,0) 45%,
+  rgba(0,0,0,0) 62%,rgba(0,0,0,.15) 80%,rgba(0,0,0,.37) 90%,rgba(0,0,0,.57) 100%)}
+.bd-txt{width:50%;height:100%;display:flex;justify-content:center;align-items:center;position:absolute;left:0;top:0;z-index:9}
+.bd-txt>div{transform:translateY(-10rem);color:#fff;text-align:left}
+.bd-txt h3{font-size:1.375rem;line-height:100%;font-weight:400;opacity:0;transform:translateX(5rem)}
+.bd-txt h2{font-size:2.25rem;line-height:125%;font-weight:200;margin-top:1.875rem;opacity:0;transform:translateX(5rem)}
+.bd-txt h2 b{font-weight:600}
+.bd-txt p{font-size:.875rem;line-height:215%;margin-top:3.25rem;opacity:0;transform:translateX(5rem)}
+.bd-list{position:absolute;width:55%;height:43%;right:0;bottom:0;z-index:9;display:flex;justify-content:center;align-items:center;gap:0 2.75rem}
+.bd-list>div{opacity:0;transform:translateY(3rem)}
+.bd-list h3{font-size:.8125rem;line-height:100%;color:#fff;margin-top:1.125rem;font-weight:400}
+.bd-list p{font-size:.8125rem;line-height:100%;color:#757575;margin-top:.625rem}
+.bd-list p span{color:#c9a57c}
+.bd-img{position:relative}
+.bd-img img{filter:grayscale(1);transition:.6s}
+.bd-img span{position:absolute;left:0;top:0;width:100%;height:100%}
+.bd-img::after{content:'';width:0;height:1px;position:absolute;left:0;top:0;background:#fff;transition:.5s;z-index:9}
+.bd-img::before{content:'';width:0;height:1px;position:absolute;right:0;bottom:0;background:#fff;transition:.5s;z-index:9}
+.bd-img span::after{content:'';width:1px;height:0;position:absolute;right:0;top:0;background:#fff;transition:.5s;z-index:9}
+.bd-img span::before{content:'';width:1px;height:0;position:absolute;left:0;bottom:0;background:#fff;transition:.5s;z-index:9}
+.bd-list>div.on img{filter:grayscale(0)}
+.bd-list>div.on .bd-img::after,.bd-list>div.on .bd-img::before{width:100%}
+.bd-list>div.on .bd-img span::after,.bd-list>div.on .bd-img span::before{height:100%}
+.bd.p1 .bd-txt h3,.bd.p1 .bd-txt h2{opacity:1;transform:none;transition:1.5s .4s}
+.bd.p1 .bd-txt p{opacity:.3;transform:none;transition:1.5s .7s}
+.bd.p1 .bd-list>div:nth-child(1){opacity:1;transform:none;transition:1.5s .9s}
+.bd.p1 .bd-list>div:nth-child(2){opacity:1;transform:none;transition:1.5s 1.1s}
+.bd.p1 .bd-list>div:nth-child(3){opacity:1;transform:none;transition:1.5s 1.3s}
+
+/* ── 10. 아웃트로 ─────────────────────────────────────── */
+.ot{width:100vw;height:100vh;display:flex;justify-content:center;align-items:center;position:relative;color:#fff;transition:1.6s}
+.ot-vbox{position:absolute;left:0;bottom:0;width:100%;height:100%;z-index:1;background:#000;overflow:hidden;transition:1.5s}
+.ot-v video{opacity:.3;transition:1.2s}
+@media (max-width:1640px){.ot-v video{width:140%;height:140%}}
+@media (max-width:1440px){.ot-v video{width:150%;height:150%}}
+@media (max-width:1000px){.ot-v video{width:200%;height:200%}}
+@media (max-width:767px){.ot-v video{width:350%;height:350%}}
+.ot-tb{position:relative;z-index:10;display:flex;justify-content:space-between;align-items:center;white-space:nowrap;width:90%;
+  max-width:1500px;gap:2.5rem}
+.ot-tt{opacity:0;transform:translateX(-5rem);text-align:left;transition:1s;margin-right:5.25rem}
+.ot-tt h2{font-family:var(--fs);font-size:2.1875rem;line-height:140%;font-weight:400}
+.ot-tt p{font-size:.9375rem;line-height:190%;margin-top:2.25rem;opacity:.4}
+.ot-line{width:100%;height:1px;position:relative}
+.ot-line::after{content:'';width:0;height:100%;position:absolute;left:0;right:0;margin:auto;top:-1rem;background:#a8a8a8;transition:1s}
+.ot-logo{opacity:0;transform:translateX(5rem);transition:1s}
+.ot-logo img{width:144px}
+.ot.p1 .ot-tt,.ot.p1 .ot-logo{opacity:1;transform:none;transition:1.5s .6s}
+.ot.p1 .ot-line::after{width:100%;transition:1.8s 0s}
+
+/* 발 (메인은 흰 바탕) */
+#sft{overflow:visible}
+body.main .ft{background:#fff}
+
+/* ── 첫 방문 팝업 ─────────────────────────────────────── */
+.layer-popup{position:fixed;left:0;top:0;width:100%;height:100%;z-index:999999999;display:none}
+.layer-popup.show{display:block;animation:popDrop 1.2s 2s both}
+.layer-popup.pop-n.show{animation-delay:1s}
+@keyframes popDrop{from{top:-100vh}}
+.pop-in{width:100%;height:100%;display:flex;justify-content:center;align-items:center;color:#fff}
+.pop-dim{position:absolute;width:100%;height:100vh;background:#000;opacity:.7;left:0;top:0;z-index:99999998;cursor:default}
+.pop-box{width:90%;position:relative;text-align:center;margin:0 auto;z-index:99999999}
+.pop-v .pop-box{max-width:1100px;transform:translateY(-.625rem)}
+.pop-n .pop-box{max-width:1030px}
+.pop-x{color:#fff;text-align:center;font-size:16px;margin:0 auto 20px;display:block;letter-spacing:-.5px}
+.pop-player{position:relative;width:100%;padding-bottom:56.25%;height:0;z-index:999;background:#000}
+.pop-player video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pop-n ul{position:relative;width:100%;display:flex;justify-content:space-between;gap:5px}
+.pop-n li{width:100%;text-align:center}
+.pop-card{position:relative;display:block;aspect-ratio:340/519;overflow:hidden;text-align:left;color:#fff;background:#111}
+.pop-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.pop-card div{position:absolute;left:0;right:0;padding:0 26px}
+.pop-card .t{top:38px}
+.pop-card small{display:block;font-family:var(--ft);font-size:13px;letter-spacing:.18em;color:#e4cda8}
+.pop-card strong{display:block;margin-top:14px;font-family:var(--fs);font-size:27px;line-height:1.28;font-weight:700}
+.pop-card .b{bottom:30px}
+.pop-card dl{border-top:1px solid rgba(255,255,255,.4);padding-top:14px;font-size:13px;line-height:1.75}
+.pop-card dt{float:left;width:58px;color:#e4cda8}
+.pop-card dd{margin:0 0 0 58px}
+.pop-card .cta{display:inline-block;margin-top:16px;border:1px solid rgba(255,255,255,.7);border-radius:30px;padding:6px 16px;font-size:12px}
+.pop-check{width:100%;display:block;margin-top:12px;text-align:left;font-size:14px}
+.pop-check label{font-size:14px;line-height:100%;margin-left:5px;cursor:pointer}
+.pop-nav{display:none}
+
+/* 1400 이하 · JS 없음: 원본 pad.css 세로 흐름 */
+:where(.flow) .all,:where(.flow) .fp{height:auto}
+:where(.flow) .fp-sec{height:auto}
+:where(.flow) .ia{height:100dvh}
+:where(.flow) .ia-img .pc{display:none}
+:where(.flow) .ia-img .pad{display:block;object-position:center top}
+:where(.flow) .ia-mark{width:400px;height:470px}
+:where(.flow) .mv{height:auto;flex-direction:column}
+:where(.flow) .mv-a,:where(.flow) .mv-b{position:relative}
+:where(.flow) .mv-a{height:100dvh}
+:where(.flow) .mv-b{height:auto;padding:8rem 0;background:#000}
+:where(.flow) .mv-b::before{content:'';width:100%;height:100%;position:absolute;left:0;top:0;opacity:.3;
+  background:var(--mvb-bg) center bottom/cover no-repeat}
+:where(.flow) .mv-txt>div{transform:translateY(-27rem)}
+:where(.flow) .mv-txt>div>div{flex-direction:column}
+:where(.flow) .mv-txt h1{font-size:4.5rem}
+:where(.flow) .mv-txt img{width:6.5rem}
+:where(.flow) .quick{top:55vh;bottom:auto}
+:where(.flow) .cal{transform:none}
+:where(.flow) .cal-list{width:80%;margin:2.875rem auto 0}
+:where(.flow) .cal-list ul{justify-content:space-between}
+:where(.flow) .cal-list li{width:calc(33% - .375rem)}
+:where(.flow) .cal-list li:nth-child(n+7){width:calc(50% - .375rem)}
+:where(.flow) .mv-b.active .cal-ttl,:where(.flow) .mv-b.active .cal-list{opacity:1;transform:none;transition:1.2s .8s}
+:where(.flow) .mv-b.active .cal-btn{opacity:1;transform:none;transition:1.2s 1.2s}
+:where(.flow) .sm{height:auto;display:block;padding:8rem 0 47rem}
+:where(.flow) .sm::before{content:'';width:100%;height:100%;position:absolute;left:0;top:0;background:var(--sm-bg) no-repeat bottom/cover}
+:where(.flow) .sm-bg{display:none}
+:where(.flow) .sm-box{position:relative}
+:where(.flow) .sm-tit{position:relative;width:100%;text-align:center;justify-content:center;transform:translateY(-4rem)}
+:where(.flow) .sm-tit>div{transform:none}
+:where(.flow) .sm-con{position:relative;margin-top:8rem}
+:where(.flow) .sm-con>div{flex-direction:column;max-width:80%;gap:6rem;margin:0 auto}
+:where(.flow) .sm-h{text-align:center}
+:where(.flow) .sm-tit h2{font-size:2.625rem}
+:where(.flow) .sm-h p{margin-left:0}
+:where(.flow) .sm-tit p{font-size:1rem}
+:where(.flow) .sm-h>div{transform:translateY(-5rem)}
+:where(.flow) .sm-note{position:relative;bottom:auto;margin-top:6rem}
+:where(.flow) .sm.active .sm-tit{opacity:1;transform:none;transition:1.5s .6s}
+:where(.flow) .sm.active .sm-h>div{opacity:1;transform:none;transition:1.2s .4s}
+:where(.flow) .sm.active .sm-list{opacity:1;transform:none;transition:1.2s .8s}
+:where(.flow) .sm.active .sm-note{opacity:.7;transform:none;transition:1.2s .8s}
+:where(.flow) .ovw{height:auto;padding:8rem 0 33rem}
+:where(.flow) .ovw-tit{position:relative;width:100%;justify-content:center;text-align:center;transform:translateY(-4rem)}
+:where(.flow) .ovw-tit>div{transform:none}
+:where(.flow) .ovw-tit p{font-size:1rem}
+:where(.flow) .ovw.active .ovw-tit{opacity:1;transform:none;transition:1.5s .6s}
+:where(.flow) .ovw.active .ovw-bg{transform:scale(1);transition:3s 0s}
+:where(.flow) .lc{height:auto;display:block;padding:8rem 0 10rem;width:100vw}
+:where(.flow) .lc-track{display:block;padding:0 4rem;box-sizing:border-box}
+:where(.flow) .lc-a,:where(.flow) .lc-b{width:100%}
+:where(.flow) .lc-b{flex-direction:column;align-items:flex-start;margin-top:7rem;gap:6rem}
+:where(.flow) .lc-b>div:first-child{width:100%}
+:where(.flow) .lc-a>div{transform:none;justify-content:flex-start}
+:where(.flow) .lc-row{flex-direction:column;align-items:flex-start;width:100%}
+:where(.flow) .lc-tit p{font-size:1.0625rem}
+:where(.flow) .lc-cap{position:relative;left:auto;right:auto;bottom:auto;top:auto;margin-top:2rem}
+:where(.flow) .lc-cap.b2{margin-left:-4rem}
+:where(.flow) .lc-cap.b4{margin-bottom:2rem}
+:where(.flow) .lc-cap.b5{margin-top:0;margin-bottom:3rem}
+:where(.flow) .lc-item.c2{margin-left:auto;transform:translate(-4rem,0)}
+:where(.flow) .lc-item.c3 .lc-img,:where(.flow) .lc-item.c4 .lc-img{text-align:left}
+:where(.flow) .lc-item.c4{right:auto;top:auto;position:relative;display:flex;gap:2rem;margin-top:6rem;justify-content:flex-end;align-items:flex-end}
+:where(.flow) .lc-item.c5{display:flex;gap:2rem;align-items:flex-end}
+:where(.flow) .lc.active .lc-tit{opacity:1;transform:none;transition:1.2s .6s}
+:where(.flow) .lc.active .lc-item.c1{opacity:1;transform:none;transition:1.2s .8s}
+:where(.flow) .lc.active .lc-item.c2{opacity:1;transform:none;transition:1.2s 1s}
+:where(.flow) .lc.active .lc-item.c3{opacity:1;transform:none;transition:1.2s 1.2s}
+:where(.flow) .lc.active .lc-note{opacity:1;transition:1.2s .6s}
+:where(.flow) .lc.active .lc-item.c4{opacity:1;transform:none;transition:1.2s .2s}
+:where(.flow) .lc.active .lc-item.c5{opacity:1;transform:none;transition:1.2s .4s}
+:where(.flow) .lc-note{position:relative;bottom:auto;width:100%;margin-top:4rem}
+:where(.flow) .ld{width:100vw;height:auto;display:block}
+:where(.flow) .ld-a,:where(.flow) .ld-b{width:100vw}
+:where(.flow) .ld-a{height:80vw}
+:where(.flow) .ld-b{height:auto;justify-content:center;align-items:flex-start;flex-direction:column}
+:where(.flow) .ld-tb{width:80%}
+:where(.flow) .ld-logo img{max-width:120px}
+:where(.flow) .ld-bg{height:60vw;max-width:100%}
+:where(.flow) .ld-con{width:100%}
+:where(.flow) .ld-con>div{flex-direction:column;justify-content:center;align-items:center;transform:none;padding:8rem 0;margin:0 auto}
+:where(.flow) .ld-tb2{transform:translateY(-5rem);text-align:center}
+:where(.flow) .ld-tb2 p{font-size:1.0625rem}
+:where(.flow) .ld-list{text-align:center}
+:where(.flow) .ld-list h3{font-size:1.125rem}
+:where(.flow) .ld-list p{font-size:1rem}
+:where(.flow) .ld-imgs{transform:translateY(5rem);margin-top:6rem}
+:where(.flow) .ld.active .ld-tt,:where(.flow) .ld.active .ld-logo{opacity:1;transform:none;transition:1.5s .6s}
+:where(.flow) .ld.active .ld-line::after{width:100%;transition:1.8s 0s}
+:where(.flow) .ld.active .ld-note{opacity:1;transition:1.2s .6s}
+:where(.flow) .ld-b.active .ld-bg figure{transform:scale(1);transition:2.5s 0s}
+:where(.flow) .ld-b.active .ld-list{opacity:1;transform:none;transition:1.5s 0s}
+:where(.flow) .ld-b.active .ld-tb2{opacity:1;transform:none;transition:1.5s .4s}
+:where(.flow) .ld-b.active .ld-imgs{opacity:1;transform:none;transition:1.5s .8s}
+:where(.flow) .cm{height:100vw}
+:where(.flow) .cm-v{height:100%}
+:where(.flow) .cm-tit{width:100%;justify-content:flex-start;padding-left:4rem;box-sizing:border-box}
+:where(.flow) .cm-tit>div{height:fit-content;transform:translateY(8rem)}
+:where(.flow) .cm-tit p{font-size:1.0625rem}
+:where(.flow) .cm-txt{width:100%;justify-content:flex-end;padding-right:6rem;box-sizing:border-box;height:fit-content;top:auto;bottom:8rem}
+:where(.flow) .cm-txt p{font-size:1rem}
+:where(.flow) .cm-thumbs{bottom:8.625rem}
+:where(.flow) .cm-note{bottom:2.875rem;padding:0 4rem;box-sizing:border-box}
+:where(.flow) .sy{height:auto}
+:where(.flow) .sy-row{flex-direction:column}
+:where(.flow) .sy-img img{object-position:center 70%}
+:where(.flow) .sy-col{align-items:center;padding:8rem 0}
+:where(.flow) .sy-txt{margin-top:0;margin-left:0;text-align:center}
+:where(.flow) .sy-btn a{margin:auto}
+:where(.flow) .sy-txt>p{font-size:1rem}
+:where(.flow) .sy-note{position:relative;bottom:auto;padding:2rem 0}
+:where(.flow) .sy.active .sy-txt.b1{opacity:1;transform:none;transition:1.5s .6s}
+:where(.flow) .sy.active .sy-txt.b2{opacity:1;transform:none;transition:1.5s .8s}
+:where(.flow) .sy.active .sy-txt.b3{opacity:1;transform:none;transition:1.5s 1s}
+:where(.flow) .un{height:auto;flex-direction:column}
+:where(.flow) .un-a{flex-direction:column-reverse;width:100%;right:0;position:relative;height:auto;padding:8rem 0}
+:where(.flow) .un-b{width:100%;height:auto;position:relative;right:0;padding:8rem 0 12rem}
+:where(.flow) .un-b>div:last-child{width:90%;max-width:800px;transform:none;display:flex;justify-content:center;align-items:flex-start;
+  gap:5rem;flex-direction:column}
+:where(.flow) .un-tb{width:85%;height:auto;max-width:none;position:relative;white-space:nowrap;margin-top:5rem;text-align:center}
+:where(.flow) .un-tb>div{width:100%;transform:translateY(-1rem);display:block}
+:where(.flow) .un-tb h2{font-size:1.375rem;transition:0s;transform:translateY(3rem);text-align:center;opacity:0}
+:where(.flow) .un-tb p{font-size:1rem;margin-top:1.5rem;transition:0s;transform:translateY(3rem);text-align:center;opacity:0}
+:where(.flow) .un-tt{width:90%;height:auto;max-width:none;position:relative;transform:translateY(-3rem);text-align:center;transition:0s}
+:where(.flow) .un-tt strong{font-size:4.5rem;margin-left:0}
+:where(.flow) .un-shade{background:linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),var(--un-bg) no-repeat center/cover;opacity:1}
+:where(.flow) .un-card{width:100%;transition:0s;display:flex;justify-content:center!important;align-items:center!important}
+:where(.flow) .un-card>div{gap:1.75rem;flex-direction:column!important;align-items:center!important}
+:where(.flow) .un-card.c1,:where(.flow) .un-card.c2,:where(.flow) .un-card.c3{margin-top:0;transform:translateY(5rem)}
+:where(.flow) .un-card.c1>div,:where(.flow) .un-card.c2>div,:where(.flow) .un-card.c3>div{transform:none}
+:where(.flow) .un-cap{width:100%;text-align:center}
+:where(.flow) .un-cap h3{font-size:1.375rem}
+:where(.flow) .un-cap p{font-size:1rem;margin-top:.75rem}
+:where(.flow) .un-go{position:relative;right:-.5rem!important}
+:where(.flow) .un-go.g1,:where(.flow) .un-go.g2,:where(.flow) .un-go.g3{right:0;bottom:0;top:0}
+:where(.flow) .un-note{bottom:7.5rem}
+:where(.flow) .un-a.active .un-bg img{transform:scale(1);transition:2.5s 0s}
+:where(.flow) .un-a.active .un-tb h2,:where(.flow) .un-a.active .un-tt,:where(.flow) .un.active .un-note{opacity:1;transform:none;transition:1.2s .4s}
+:where(.flow) .un-a.active .un-tb p{opacity:.7;transform:none;transition:1.2s .4s}
+:where(.flow) .un-card.active{opacity:1;transform:none;transition:1.2s .6s}
+:where(.flow) #s9{height:100vw}
+:where(.flow) .bd-txt{left:4rem;width:55%}
+:where(.flow) .bd-txt>div{transform:translateY(-12rem)}
+:where(.flow) .bd-list{width:73%;right:4rem}
+:where(.flow) .bd-img img{width:100%}
+:where(.flow) .bd.active .bd-txt h3,:where(.flow) .bd.active .bd-txt h2{opacity:1;transform:none;transition:1.5s .4s}
+:where(.flow) .bd.active .bd-txt p{opacity:.3;transform:none;transition:1.5s .7s}
+:where(.flow) .bd.active .bd-list>div:nth-child(1){opacity:1;transform:none;transition:1.5s .9s}
+:where(.flow) .bd.active .bd-list>div:nth-child(2){opacity:1;transform:none;transition:1.5s 1.1s}
+:where(.flow) .bd.active .bd-list>div:nth-child(3){opacity:1;transform:none;transition:1.5s 1.3s}
+:where(.flow) .ot{height:auto;padding:9rem 0}
+:where(.flow) .ot-tb{flex-direction:column}
+:where(.flow) .ot-tt{margin-right:0;text-align:center;transform:translateY(-5rem)}
+:where(.flow) .ot-line{display:none}
+:where(.flow) .ot-logo{transform:translateY(5rem)}
+:where(.flow) .ot-logo img{max-width:120px}
+:where(.flow) .ot-tt p{font-size:1rem}
+:where(.flow) .ot.active .ot-tt,:where(.flow) .ot.active .ot-logo{opacity:1;transform:none;transition:1.5s .6s}
+@media (max-width:1400px){
+  .skip-area button{width:70px;height:70px;position:fixed;right:5%;bottom:5%;left:auto;top:auto;animation:skipIn 1s 1s both;color:inherit}
+  .skip-area button span{width:70px;height:70px;background:#888;display:flex;justify-content:center;align-items:center;
+    border-radius:100%;left:0;top:0;position:absolute;font-family:'Lexend',sans-serif;color:#fff;font-size:14px;font-weight:600;
+    letter-spacing:0;text-transform:uppercase}
+  .skip-area button span::before{content:'';width:94px;height:94px;position:absolute;left:-12px;top:-12px;background:#888;opacity:.3;
+    border-radius:100%;animation:skipScale 2.1s ease infinite both,skipFade 2.1s ease infinite both}
+}
+@keyframes skipIn{from{opacity:0}}
+@media (min-width:1401px){.skip-area button span{display:none}}
+@media (max-width:1000px){
+  :where(.flow) .mv-txt>div{transform:translateY(-22rem)}
+  :where(.flow) .mv-txt h1{font-size:3.5rem}
+  :where(.flow) .ld-tb{flex-direction:column;justify-content:center}
+  :where(.flow) .ld-tt{text-align:center;transform:translateY(-5rem)}
+  :where(.flow) .ld-line{display:none}
+  :where(.flow) .ld-logo{transform:translateY(5rem)}
+}
+@media (max-width:767px){
+  .ia-t h2{font-size:1.25rem}
+  .ia-t4 p{font-size:1.375rem}
+  .ia-t4 strong{font-size:4.25rem;margin-top:1rem}
+  .ia-mark{width:250px!important;height:294px!important}
+  .mv-txt img{width:5rem}
+  :where(.flow) .mv-txt>div{transform:translateY(-35vw)}
+  .mv-txt ul{gap:1.25rem}
+  .mv-txt li{font-size:1rem;letter-spacing:-1px}
+  .mv-txt li::before{left:-.625rem}
+  :where(.flow) .mv-txt h1{font-size:2rem;line-height:110%}
+  .quick{width:25.75rem}
+  .quick-ic.i1 svg{max-width:20px}
+  .cal{width:100%}
+  .cal-ttl h2{width:80%;margin:auto;word-break:keep-all;font-size:3.4375rem}
+  :where(.flow) .cal-list{width:85%}
+  :where(.flow) .cal-list li{width:calc(32.8% - .375rem)}
+  .cal-list li:nth-child(n+7) .cal-in>div{display:block}
+  .cal-in span{display:none}
+  .cal-btn ul{flex-direction:column;align-items:center}
+  :where(.flow) .sm{padding:8rem 0 40rem}
+  :where(.flow) .sm::before{background-image:var(--sm-bg-m)}
+  :where(.flow) .sm-tit h2{font-size:2.375rem}
+  .sm-h h2{font-size:4rem}
+  :where(.flow) .sm-con>div{max-width:85%;gap:4rem}
+  .sm-list li{width:100%}
+  :where(.flow) .sm-note{word-break:keep-all;width:90%;margin:5rem auto 0}
+  :where(.flow) .lc{padding:8rem 0 9rem}
+  :where(.flow) .lc-track{padding:0;width:90%;margin:auto}
+  .lc-row>div{width:100%}
+  :where(.flow) .lc-tit{text-align:center;transform:translateY(-4rem)}
+  .lc-item{display:flex;flex-direction:column;justify-content:center;align-items:center}
+  :where(.flow) .lc-item.c4{align-items:center;gap:0}
+  :where(.flow) .lc-cap.b4{margin-bottom:0}
+  :where(.flow) .lc-item.c5{width:100%;align-items:center}
+  .lc-img img{width:100%;height:auto}
+  :where(.flow) .lc-item.c4 img{width:auto}
+  :where(.flow) .lc-cap.b2{margin-left:0}
+  :where(.flow) .ld-a{height:auto;padding:8rem 0 9rem}
+  .ld-tt h2{font-size:4rem}
+  :where(.flow) .ld-logo img{max-width:80px}
+  :where(.flow) .ld-bg{height:80vw}
+  .ld-imgs{width:90%}
+  .ld-imgs>div{width:100%}
+  :where(.flow) .cm{height:200vw}
+  :where(.flow) .cm-tit{padding-left:0;width:90%;margin:auto;text-align:center;left:0;right:0}
+  .cm-thumbs{width:80%;max-width:274px;bottom:11.625rem!important}
+  .cm-thumbs button{width:50px;height:50px}
+  .cm-note{padding:0!important;width:90%;left:0;right:0;margin:auto;word-break:keep-all}
+  :where(.flow) .ot-logo img{max-width:80px}
+  :where(.flow) #s9{height:240vw}
+  .bd{height:100%;padding:8rem 0;flex-direction:column;justify-content:flex-start;box-sizing:border-box}
+  .bd-txt{width:100%!important;left:0!important;padding:0 3.1rem;box-sizing:border-box;position:relative;align-items:flex-start;height:auto}
+  .bd-txt>div{transform:none!important}
+  .bd-txt h3{font-size:1.125rem}
+  .bd-txt h2{font-size:2rem}
+  .bd-txt p{word-break:keep-all;font-size:.9375rem}
+  .bd-list{width:100%!important;right:0!important;padding:0 2rem;box-sizing:border-box;flex-wrap:wrap;position:relative;margin-top:3rem;
+    gap:0 2.75rem;bottom:0;height:auto}
+  .bd-list>div{max-width:120px}
+  .bd-list h3{font-size:.75rem;letter-spacing:-1px}
+  .bd-list p{line-height:120%}
+  .pop-n .pc{display:none!important}
+  .pop-nav{display:flex}
+  .pop-n .pop-box{max-width:350px;width:85%}
+  .pop-n ul.mo{display:block!important;position:relative}
+  .pop-n ul.mo li{display:none}
+  .pop-n ul.mo li.on{display:block}
+  .pop-nav{width:90px;height:32px;position:relative;margin-top:12px;float:right;background:#fff;border-radius:50px;justify-content:center;
+    padding:0 2px;box-sizing:border-box;color:#000;font-size:13px;font-weight:500;align-items:center}
+  .pop-nav button{width:25px;height:100%;color:#000}
+  .pop-check{display:flex;justify-content:flex-start;align-items:center;transform:translateY(-25px)}
+  .pop-v .pop-check{justify-content:center;transform:none}
+}
+
+:root{--mvb-bg:url(./assets/img/intro-bg.jpg);--sm-bg:url(./assets/img/sum-bg.jpg);--sm-bg-m:url(./assets/img/sum-bg-m.jpg);
+  --un-bg:url(./assets/img/unit-bg.jpg)}
+.ld-figcap{font-size:.75rem;color:#fff;line-height:100%;position:absolute;right:.75rem;top:1.125rem;z-index:2}
+</style>
+</head>
+<body class="main flow">
+<a class="skip-nav" href="#content">본문 바로가기</a><header class="hd"><div class="hd-bar"><div class="hd-left"><div class="hd-logo"><a href="./index.html" aria-label="아르티엘 레이크 홈"><img class="lg-d" src="./assets/logo.svg" alt=""><img class="lg-w" src="./assets/logo-w.svg" alt=""></a></div><div class="hd-bgm"><audio id="bgm" src="./assets/bgm.mp3" loop preload="none"></audio><button type="button" aria-pressed="false" aria-label="배경음악 켜기·끄기"><span class="hd-eq" aria-hidden="true"><span><i></i><i></i><i></i><i></i><i></i></span></span><span class="hd-bgm-t">ON/OFF</span></button></div></div><nav class="gnb" aria-label="주 메뉴"><ul><li><a href="./project.html" class="gnb-d1">사업안내<i aria-hidden="true"></i></a><ul class="gnb-d2"><li><a href="./project.html">사업개요</a></li><li><a href="./brand.html">브랜드 소개</a></li><li><a href="./location.html">입지환경</a></li><li><a href="./premium.html">프리미엄</a></li><li><a href="./contact.html">오시는 길</a></li></ul></li><li><a href="./garden.html" class="gnb-d1">단지안내<i aria-hidden="true"></i></a><ul class="gnb-d2"><li><a href="./siteplan.html">단지배치도</a></li><li><a href="./dongho.html">동·호수 배치도</a></li><li><a href="./garden.html">단지설계</a></li><li><a href="./community.html">커뮤니티</a></li><li><a href="./concierge.html">컨시어지</a></li><li><a href="./system.html">시스템</a></li></ul></li><li><a href="./unit.html" class="gnb-d1">상품안내<i aria-hidden="true"></i></a><ul class="gnb-d2"><li><a href="./unit.html">주택형 안내</a></li><li><a href="./vr.html">e모델하우스</a></li><li><a href="./interior.html">인테리어</a></li></ul></li><li><a href="./special.html" class="gnb-d1">청약안내<i aria-hidden="true"></i></a><ul class="gnb-d2"><li><a href="./special.html">특별공급</a></li><li><a href="./general.html">일반공급</a></li><li><a href="./checkpoint.html">청약체크포인트</a></li><li><a href="./rules.html">변경된 청약제도</a></li><li><a href="./points.html">청약가점표</a></li><li><a href="./transfer.html">명의변경 안내문</a></li></ul></li><li><a href="./schedule.html" class="gnb-d1">분양안내<i aria-hidden="true"></i></a><ul class="gnb-d2"><li><a href="./schedule.html">분양일정</a></li><li><a href="./notice-doc.html">모집공고</a></li><li><a href="./telecom.html">이동통신설비</a></li><li><a href="./papers.html">자격확인서류</a></li><li><a href="./stamp.html">인지세 안내문</a></li><li><a href="./funding.html">주택취득자금 조달계획</a></li><li><a href="./draw.html">예비당첨자 추첨 안내</a></li><li><a href="./unranked.html">무순위 구비서류 안내</a></li></ul></li><li><a href="./event.html" class="gnb-d1">홍보센터<i aria-hidden="true"></i></a><ul class="gnb-d2"><li><a href="./event.html">이벤트</a></li><li><a href="./notice.html">공지사항</a></li><li><a href="./news.html">언론보도</a></li><li><a href="./story.html">아르티엘 스토리북</a></li><li><a href="./tv.html">아르티엘 TV</a></li><li><a href="./register.html">관심고객등록</a></li><li><a href="./magazine.html">매거진</a></li><li><a href="./shuttle.html">셔틀버스 예약</a></li></ul></li></ul></nav><div class="hd-util"><div class="hd-tel"><a href="tel:031-000-2800"><span class="hd-tel-ic"><svg viewBox="0 0 15 15" aria-hidden="true"><path d="M3.4 1.2 5.3 3.6c.3.4.3.9 0 1.3L4.4 6c.9 1.8 2.3 3.2 4.1 4.1l1.1-.9c.4-.3.9-.3 1.3 0l2.4 1.9c.4.3.5.9.1 1.3l-1.1 1.1c-.7.7-1.8.9-2.7.5C6.2 12.7 2.3 8.8 1 5.4c-.4-.9-.2-2 .5-2.7l1.1-1.1c.3-.4.5-.5.8-.4z" fill="none" stroke="currentColor" stroke-width="1"/><path d="M9.4 1.6a4.6 4.6 0 0 1 4 4M9.1 3.6a2.6 2.6 0 0 1 2.3 2.3" fill="none" stroke="currentColor" stroke-width="1"/></svg></span><span class="hd-tel-no">031.000.2800</span></a></div><a class="hd-sq" href="#" data-toast="아르티엘 스퀘어몰(상업시설) 홈페이지는 준비 중입니다."><span>아르티엘 스퀘어몰</span></a></div><div class="hd-panel" aria-hidden="true"><div></div></div></div></header><button class="hd-dots" type="button" aria-label="전체 메뉴" aria-expanded="false" aria-controls="smap"><span><i></i><i></i><i></i></span></button><div class="smap" id="smap" aria-hidden="true"><div class="smap-in"><div class="smap-box"><ul class="smap-list"><li><a class="smap-g" href="./project.html"><span>사업안내</span><span aria-hidden="true">사업안내</span></a><ul class="smap-sub"><li><a href="./project.html">사업개요</a></li><li><a href="./brand.html">브랜드 소개</a></li><li><a href="./location.html">입지환경</a></li><li><a href="./premium.html">프리미엄</a></li><li><a href="./contact.html">오시는 길</a></li></ul></li><li><a class="smap-g" href="./garden.html"><span>단지안내</span><span aria-hidden="true">단지안내</span></a><ul class="smap-sub"><li><a href="./siteplan.html">단지배치도</a></li><li><a href="./dongho.html">동·호수 배치도</a></li><li><a href="./garden.html">단지설계</a></li><li><a href="./community.html">커뮤니티</a></li><li><a href="./concierge.html">컨시어지</a></li><li><a href="./system.html">시스템</a></li></ul></li><li><a class="smap-g" href="./unit.html"><span>상품안내</span><span aria-hidden="true">상품안내</span></a><ul class="smap-sub"><li><a href="./unit.html">주택형 안내</a></li><li><a href="./vr.html">e모델하우스</a></li><li><a href="./interior.html">인테리어</a></li></ul></li><li><a class="smap-g" href="./special.html"><span>청약안내</span><span aria-hidden="true">청약안내</span></a><ul class="smap-sub"><li><a href="./special.html">특별공급</a></li><li><a href="./general.html">일반공급</a></li><li><a href="./checkpoint.html">청약체크포인트</a></li><li><a href="./rules.html">변경된 청약제도</a></li><li><a href="./points.html">청약가점표</a></li><li><a href="./transfer.html">명의변경 안내문</a></li></ul></li><li><a class="smap-g" href="./schedule.html"><span>분양안내</span><span aria-hidden="true">분양안내</span></a><ul class="smap-sub"><li><a href="./schedule.html">분양일정</a></li><li><a href="./notice-doc.html">모집공고</a></li><li><a href="./telecom.html">이동통신설비</a></li><li><a href="./papers.html">자격확인서류</a></li><li><a href="./stamp.html">인지세 안내문</a></li><li><a href="./funding.html">주택취득자금 조달계획</a></li><li><a href="./draw.html">예비당첨자 추첨 안내</a></li><li><a href="./unranked.html">무순위 구비서류 안내</a></li></ul></li><li><a class="smap-g" href="./event.html"><span>홍보센터</span><span aria-hidden="true">홍보센터</span></a><ul class="smap-sub"><li><a href="./event.html">이벤트</a></li><li><a href="./notice.html">공지사항</a></li><li><a href="./news.html">언론보도</a></li><li><a href="./story.html">아르티엘 스토리북</a></li><li><a href="./tv.html">아르티엘 TV</a></li><li><a href="./register.html">관심고객등록</a></li><li><a href="./magazine.html">매거진</a></li><li><a href="./shuttle.html">셔틀버스 예약</a></li></ul></li></ul></div></div></div><div class="smap-bg"></div>
+<main id="content"><div class="cur" aria-hidden="true"><div class="cur-skip"><p>skip</p></div></div><div class="layer-popup pop-v" role="dialog" aria-modal="true" aria-label="홍보 영상"><div class="pop-in"><div class="pop-box"><button type="button" class="pop-x">영상닫기 X</button><div class="pop-player"><video class="" muted loop playsinline autoplay preload="none" poster="./assets/img/pop-vd.jpg"></video></div><p class="pop-check"><input type="checkbox" id="pc1"><label for="pc1">오늘 하루동안 보지 않기</label></p></div><div class="pop-dim"></div></div></div><div class="layer-popup pop-n" role="dialog" aria-modal="true" aria-label="분양 알림"><div class="pop-in"><div class="pop-box"><button type="button" class="pop-x">팝업닫기 X</button><ul class="pc"><li><a class="pop-card" href="./shuttle.html"><img src="./assets/img/pop-1.jpg" alt=""><div class="t"><small>GRAND OPEN</small><strong>견본주택<br>그랜드 오픈</strong></div><div class="b"><dl><dt>일시</dt><dd>2026. 10. 23(금) 10:00</dd><dt>장소</dt><dd>한울시 호수동 견본주택</dd></dl><span class="cta">방문 예약</span></div></a></li><li><a class="pop-card" href="./schedule.html"><img src="./assets/img/pop-2.jpg" alt=""><div class="t"><small>SALES SCHEDULE</small><strong>청약 일정<br>안내</strong></div><div class="b"><dl><dt>특별공급</dt><dd>10. 26(월)</dd><dt>1순위</dt><dd>10. 27(화)</dd><dt>2순위</dt><dd>10. 28(수)</dd></dl><span class="cta">일정 보기</span></div></a></li><li><a class="pop-card" href="./register.html"><img src="./assets/img/pop-3.jpg" alt=""><div class="t"><small>EVENT</small><strong>관심고객<br>등록 이벤트</strong></div><div class="b"><dl><dt>기간</dt><dd>2026. 10. 01 ~ 10. 22</dd><dt>경품</dt><dd>추첨 30명 모바일 상품권</dd></dl><span class="cta">등록하기</span></div></a></li></ul><ul class="mo"><li><a class="pop-card" href="./shuttle.html"><img src="./assets/img/pop-1.jpg" alt=""><div class="t"><small>GRAND OPEN</small><strong>견본주택<br>그랜드 오픈</strong></div><div class="b"><dl><dt>일시</dt><dd>2026. 10. 23(금) 10:00</dd><dt>장소</dt><dd>한울시 호수동 견본주택</dd></dl><span class="cta">방문 예약</span></div></a></li><li><a class="pop-card" href="./schedule.html"><img src="./assets/img/pop-2.jpg" alt=""><div class="t"><small>SALES SCHEDULE</small><strong>청약 일정<br>안내</strong></div><div class="b"><dl><dt>특별공급</dt><dd>10. 26(월)</dd><dt>1순위</dt><dd>10. 27(화)</dd><dt>2순위</dt><dd>10. 28(수)</dd></dl><span class="cta">일정 보기</span></div></a></li><li><a class="pop-card" href="./register.html"><img src="./assets/img/pop-3.jpg" alt=""><div class="t"><small>EVENT</small><strong>관심고객<br>등록 이벤트</strong></div><div class="b"><dl><dt>기간</dt><dd>2026. 10. 01 ~ 10. 22</dd><dt>경품</dt><dd>추첨 30명 모바일 상품권</dd></dl><span class="cta">등록하기</span></div></a></li></ul><div class="pop-nav"><button type="button" aria-label="이전 알림">&lsaquo;</button><em>1 I 3</em><button type="button" aria-label="다음 알림">&rsaquo;</button></div><p class="pop-check"><input type="checkbox" id="pc2"><label for="pc2">오늘 하루동안 보지 않기</label></p></div><div class="pop-dim"></div></div></div><div class="skip-area"><button type="button" aria-label="인트로 건너뛰기"><span>skip</span></button></div><div class="all"><div class="fp"><section class="fp-sec" id="s1" aria-label="메인"><div class="mv p1 p1e"><div class="ia intro-splash" aria-hidden="true"><div class="ia-img"><img class="pc" src="./assets/img/intro-bg.jpg" alt=""><img class="pad" src="./assets/img/intro-bg-pad.jpg" alt=""></div><div class="ia-mk"><svg class="ia-mark" viewBox="0 0 377 443" aria-hidden="true"><defs><linearGradient id="imf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7fa597"/><stop offset="1" stop-color="#1d3a33"/></linearGradient><linearGradient id="ims" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b2cbbf"/><stop offset="1" stop-color="#4a6f63"/></linearGradient></defs><g class="ia-fill"><g transform="translate(0.00 0.00) scale(1.0000)"><polygon points="98.0,170.0 124.0,155.0 124.0,389.0 98.0,404.0" fill="url(#ims)"/><polygon points="34.0,170.0 60.0,155.0 124.0,155.0 98.0,170.0" fill="#d6e3dc"/><polygon points="34.0,170.0 98.0,170.0 98.0,404.0 34.0,404.0" fill="url(#imf)"/><polygon points="220.0,22.0 246.0,7.0 246.0,415.0 220.0,430.0" fill="url(#ims)"/><polygon points="156.0,22.0 182.0,7.0 246.0,7.0 220.0,22.0" fill="#d6e3dc"/><polygon points="156.0,22.0 220.0,22.0 220.0,430.0 156.0,430.0" fill="url(#imf)"/><polygon points="342.0,150.0 368.0,135.0 368.0,389.0 342.0,404.0" fill="url(#ims)"/><polygon points="278.0,150.0 304.0,135.0 368.0,135.0 342.0,150.0" fill="#d6e3dc"/><polygon points="278.0,150.0 342.0,150.0 342.0,404.0 278.0,404.0" fill="url(#imf)"/><polygon points="98.0,258.0 124.0,243.0 156.0,243.0 156.0,258.0" fill="#cdb089"/><polygon points="98.0,258.0 156.0,258.0 156.0,272.0 98.0,272.0" fill="#a8845a"/><polygon points="220.0,258.0 246.0,243.0 278.0,243.0 278.0,258.0" fill="#cdb089"/><polygon points="220.0,258.0 278.0,258.0 278.0,272.0 220.0,272.0" fill="#a8845a"/></g></g><g class="ia-lines" fill="none" stroke="#fff" stroke-width="1"><path class="l1" pathLength="1" d="M34.0 404.0L34.0 170.0"/><path class="l1" pathLength="1" d="M34.0 170.0L98.0 170.0"/><path class="l1" pathLength="1" d="M98.0 170.0L98.0 404.0"/><path class="l1" pathLength="1" d="M156.0 430.0L156.0 22.0"/><path class="l1" pathLength="1" d="M156.0 22.0L220.0 22.0"/><path class="l1" pathLength="1" d="M220.0 22.0L220.0 430.0"/><path class="l1" pathLength="1" d="M278.0 404.0L278.0 150.0"/><path class="l1" pathLength="1" d="M278.0 150.0L342.0 150.0"/><path class="l1" pathLength="1" d="M342.0 150.0L342.0 404.0"/><path class="l2" pathLength="1" d="M98.0 170.0L124.0 155.0"/><path class="l2" pathLength="1" d="M124.0 155.0L124.0 389.0"/><path class="l2" pathLength="1" d="M34.0 170.0L60.0 155.0"/><path class="l2" pathLength="1" d="M60.0 155.0L124.0 155.0"/><path class="l2" pathLength="1" d="M34.0 404.0L98.0 404.0"/><path class="l2" pathLength="1" d="M220.0 22.0L246.0 7.0"/><path class="l2" pathLength="1" d="M246.0 7.0L246.0 415.0"/><path class="l2" pathLength="1" d="M156.0 22.0L182.0 7.0"/><path class="l2" pathLength="1" d="M182.0 7.0L246.0 7.0"/><path class="l2" pathLength="1" d="M156.0 430.0L220.0 430.0"/><path class="l2" pathLength="1" d="M342.0 150.0L368.0 135.0"/><path class="l2" pathLength="1" d="M368.0 135.0L368.0 389.0"/><path class="l2" pathLength="1" d="M278.0 150.0L304.0 135.0"/><path class="l2" pathLength="1" d="M304.0 135.0L368.0 135.0"/><path class="l2" pathLength="1" d="M278.0 404.0L342.0 404.0"/><path class="l2" pathLength="1" d="M98.0 258.0L156.0 258.0"/><path class="l2" pathLength="1" d="M98.0 272.0L156.0 272.0"/><path class="l2" pathLength="1" d="M220.0 258.0L278.0 258.0"/><path class="l2" pathLength="1" d="M220.0 272.0L278.0 272.0"/></g></svg></div><div class="ia-tiles"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="ia-t ia-t4"><p>Art by the Lake</p><strong>ARTIEL</strong></div><div class="ia-vbox"><div class="vwrap ia-v"><video class="" muted loop playsinline autoplay preload="none" poster="./assets/img/intro-vd.jpg"></video></div></div><div class="ia-t ia-t5"><div><h2><b><i style="--i:1">호</i><i style="--i:2">수</i><i style="--i:3">를</i></b><b><i style="--i:4">품</i><i style="--i:5">은</i></b><b><i style="--i:6">아</i><i style="--i:7">르</i><i style="--i:8">티</i><i style="--i:9">엘</i></b></h2></div></div></div><div class="mv-a"><div class="mv-vbox"><div class="vwrap mv-v"><video class="" muted loop playsinline autoplay preload="none" poster="./assets/img/main-vd.jpg"></video></div></div><div class="mv-txt"><div><ul><li><b>총 2,876세대</b> 대단지!</li><li><b>최고 49층</b> 스카이라인!</li><li>바로 <b>앞 한울호수공원!</b></li></ul><div><h1>한울호수 너머 <b>가장 드높은 하늘</b></h1><img src="./assets/logo-main.svg" alt="아르티엘 레이크"></div></div></div><p class="mv-note">ⓘ 위 CG와 이미지는 이해를 돕기 위해 제작한 것으로 실제와 다를 수 있습니다.</p><div class="quick"><a href="#" data-toast="카카오톡 채널 주소를 연결해 주세요."><span class="quick-ic i1"><svg viewBox="0 0 30 32" aria-hidden="true"><path d="M15 4C8 4 2.5 8.4 2.5 13.9c0 3.5 2.3 6.6 5.8 8.4l-1.2 5.2 5.4-3.6c.8.1 1.6.2 2.5.2 7 0 12.5-4.4 12.5-10.2S22 4 15 4z" fill="#f7d54a"/><circle cx="10" cy="14" r="1.4" fill="#3b2f16"/><circle cx="15" cy="14" r="1.4" fill="#3b2f16"/><circle cx="20" cy="14" r="1.4" fill="#3b2f16"/></svg></span><p>카카오톡 채널</p><span class="pl"></span></a><a href="./register.html"><span class="quick-ic i2"><svg viewBox="0 0 12 14" aria-hidden="true"><circle cx="6" cy="4" r="3" fill="none" stroke="#1d3a33"/><path d="M.8 13.5c.6-3 2.7-4.6 5.2-4.6s4.6 1.6 5.2 4.6" fill="none" stroke="#1d3a33"/></svg></span><p>관심고객등록</p><span class="pl"></span></a></div></div><div class="mv-b active" data-active><div class="cal"><div class="cal-ttl"><h2><b>SALES</b> CALENDAR</h2></div><div class="cal-list active" data-active><ul><li><div class="cal-in"><div><h3>10.16</h3><p>입주자 모집공고</p></div></div><div class="cal-ln"><span></span></div></li><li><div class="cal-in"><div><h3>10.23</h3><p>GRAND OPEN</p></div></div><div class="cal-ln"><span></span></div></li><li><div class="cal-in"><div><h3>10.26</h3><p>특별공급</p></div></div><div class="cal-ln"><span></span></div></li><li><div class="cal-in"><div><h3>10.27</h3><p>1순위 접수</p></div></div><div class="cal-ln"><span></span></div></li><li><div class="cal-in"><div><h3>10.28</h3><p>2순위 접수</p></div></div><div class="cal-ln"><span></span></div></li><li><div class="cal-in"><div><h3>11.04</h3><p>당첨자 발표</p></div></div><div class="cal-ln"><span></span></div></li><li><div class="cal-in"><div><h3>11.10 - 11.14</h3><span></span><p>서류접수</p></div></div><div class="cal-ln"><span></span></div></li><li><div class="cal-in"><div><h3>11.17 - 11.19</h3><span></span><p>계약체결</p></div></div><div class="cal-ln"><span></span></div></li></ul></div><div class="cal-btn active" data-active><ul><li><a href="./notice-doc.html"><span>입주자 모집공고</span><svg class="arr" viewBox="0 0 12 7" aria-hidden="true"><path d="M0 3.5h11M8 .5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1"/></svg></a></li><li><a href="./rules.html"><span>청약안내</span><svg class="arr" viewBox="0 0 12 7" aria-hidden="true"><path d="M0 3.5h11M8 .5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1"/></svg></a></li><li><a href="https://www.applyhome.co.kr" target="_blank" rel="noopener" title="새 창"><span>청약홈 바로가기</span><svg class="arr" viewBox="0 0 12 7" aria-hidden="true"><path d="M0 3.5h11M8 .5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1"/></svg></a></li></ul></div></div></div></div></section><section class="fp-sec" id="s2" aria-label="사업개요"><div class="sm active" data-active><div class="sm-box"><div class="sm-bg"><img src="./assets/img/sum-bg.jpg" alt=""></div><div class="sm-tit"><div><h2>가장 빛나는 호수의 상징,<br>아르티엘 레이크</h2><p>아르티엘에서 비롯된 한울지구의 새로운 변화!<br>도시의 가치를 끌어올리고 도시의 내일을 넓혀가는<br>단 하나의 이름, 아르티엘 레이크는<br>호수 위에서 가장 빛나는 이름으로 태어납니다.</p></div></div><div class="sm-con"><div><div class="sm-h active" data-active><div><h2>SUMMARY</h2><p>아르티엘 레이크 사업개요</p></div></div><div class="sm-list active" data-active><ul><li><h3>대지위치</h3><p>경기도 한울시 호수동 일원 C2-1블록(1단지)</p></li><li><h3>세대정보</h3><p>총 2,876세대 중 1차 1,428세대(84㎡~149㎡)</p></li><li><h3>규모</h3><p>지하 5층 ~ 지상 49층</p></li><li><h3>주차대수</h3><p>2,964(법정 2,712대)</p></li><li><h3>건축면적</h3><p>24,815.3200㎡</p></li><li><h3>연면적</h3><p>412,508.4420㎡</p></li></ul></div></div></div><p class="sm-note">ⓘ 위 내용은 인·허가 과정이나 실제 시공 과정의 현장 여건에 따라 일부 달라질 수 있으니 견본주택을 방문하시어 직접 확인하시기 바랍니다.<br>ⓘ 사용된 CG는 이해를 돕기 위한 것으로 실제와 차이가 있을 수 있으며, 건축물의 외관·색채, 부대시설, 창호·조경, 문주 등 기타 시설은 인허가 과정에서 달라질 수 있습니다.</p></div></div></section><section class="fp-sec" id="s3" aria-label="호수 전경"><div class="ovw active" data-active><div class="ovw-bg"><img src="./assets/img/over-bg.jpg" alt="호숫가에 선 단지 전경"></div><div class="ovw-tit"><div><h2>눈부신 한울호수를 누리는<br>오직 하나의 일상</h2><p>30,000여 평의 넉넉한 한울호수공원이 단지 바로 곁에 펼쳐진<br>아르티엘 레이크만의 호수 라이프!<br>그 어디서도 만나본 적 없던, 이 눈부신 물빛과 넉넉한 하루가<br>날마다 당신의 하루를 물들입니다.</p></div></div></div></section><section class="fp-sec" id="s4" aria-label="입지"><div class="lc active" data-active><div class="lc-track"><div class="lc-a"><div><div class="lc-row"><div><div class="lc-tit"><h2>모두가 바라던 풍경,<br>높은 일상이 머무는 한울호수 최중심</h2><p>누구에게나 꿈이 될 만큼 빛나는 가치와 모두가 바라는 품격을 담아낸<br>새롭고 눈부신 풍경, 한울호수 최중심에서 더 높은 삶이 펼쳐집니다.</p></div><div class="lc-item c1"><div class="lc-img"><img src="./assets/img/loc-1.jpg" width="720" height="459" alt="호수공원 산책로"></div><div class="lc-cap b1"><div><strong>A</strong><em>Nature</em></div><span></span><p>단지 바로 곁 넉넉한 한울호수와 푸른 수변공원을 누리는<br>사계절 호수 라이프, 매봉산, 버들숲 등 푸른 휴식 자연</p></div></div></div><div class="lc-item c2"><div class="lc-img"><img src="./assets/img/loc-2.jpg" width="463" height="295" alt="중심상업지구 거리"></div><div class="lc-cap b2"><div><strong>A</strong><em>LIFE</em></div><span></span><p>한울지구 중심상업지구와 대형 복합쇼핑몰(예정)은 물론,<br>서원구와 한울시의 편의시설을 가까이 누리는 생활환경</p></div></div></div></div></div><div class="lc-b"><div><div class="lc-item c3"><div class="lc-img"><img src="./assets/img/loc-3.jpg" width="463" height="295" alt="도서관에서 책을 고르는 손"></div><div class="lc-cap b3"><div><strong>A</strong><em>EDUCATION</em></div><span></span><p>호수동과 서원구 학원가를 잇는 짜임새 있는 학습 여건,<br>호수초, 한울중(예정) 등 아이 걸음으로 닿는 교육환경</p></div></div><div class="lc-item c4"><div class="lc-img"><img src="./assets/img/loc-4.jpg" width="193" height="192" alt="광역철도 역사"></div><div class="lc-cap b4"><div><strong>A</strong><em>TRAFFIC</em></div><span></span><p>한울2호선 호수역, 한울중앙대로, 호반순환도로를 비롯해<br>도심-한울-신항을 잇는 광역급행철도(예정) 등 빠른 교통</p></div></div></div><div class="lc-item c5"><div class="lc-img"><img src="./assets/img/loc-5.jpg" width="220" height="325" alt="노을 지는 도시 원경"></div><div class="lc-cap b5"><div><strong>A</strong><em>VISION</em></div><span></span><p>인구 30만 호수자족도시로 나아가는 한울시의 넓은 미래와<br>아르티엘 레이크로 완성될 1만여 세대 한울 호수신도시 비전</p></div></div></div></div><div class="lc-note"><p>ⓘ 위 CG와 이미지는 이해를 돕기 위해 제작한 것으로 실제와 다를 수 있습니다.</p></div></div></section><section class="fp-sec" id="s5" aria-label="조경"><div class="ld active" data-active><div class="ld-a active" data-active><div class="ld-vbox"><div class="vwrap ld-v"><video class="" muted loop playsinline autoplay preload="none" poster="./assets/img/land-vd.jpg"></video></div></div><div class="ld-tb"><div class="ld-tt"><h2>LANDSCAPE</h2><p>아르티엘 레이크 단지안내</p></div><span class="ld-line"></span><div class="ld-logo"><img src="./assets/logo-land.svg" alt="아르티엘 레이크"></div></div><div class="ld-note"><p>ⓘ 위 CG와 이미지는 이해를 돕기 위해 제작한 것으로 실제와 다를 수 있습니다.</p></div></div><div class="ld-b active" data-active><div class="ld-bg"><figure><img src="./assets/img/land-bg.jpg" alt="호숫가 수변 데크 광장"></figure><p>ⓘ 위 CG와 이미지는 이해를 돕기 위해 제작한 것으로 실제와 다를 수 있습니다.</p><span class="ld-figcap" aria-hidden="true">WATERFRONT DECK</span></div><div class="ld-con"><div><div class="ld-txt"><div class="ld-tb2"><h2>호수를 닮아간 정원,<br>사계절의 빛으로 물들인<br class="mo"> 호수 가든</h2><p>잔잔한 수경관을 시작으로 대단지의 곳곳에 짙푸른 숲과 조형 작품들이 함께<br class="pc">어우러진 호숫가 단지 정원은 그 자체로 거대한 야외 미술관이 됩니다</p></div><div class="ld-list"><ul><li><h3>WATERFRONT DECK</h3><p>한울호수의 잔잔한 물빛을 매일 가장 가까이서 바라보는 수변 데크 광장</p></li><li><h3>PLAY FOREST</h3><p>숲길을 누비며 아이들의 호기심과 상상력을 키워주는 숲속 놀이터</p></li><li><h3>CULTURE GARDEN</h3><p>전시관과 공연장, 쇼핑과 휴식을 한 곳에서 누릴 수 있는 문화 정원</p></li><li><h3>LAKE STREET</h3><p>물빛 호숫가를 따라 이어진 카페거리의 여유를 즐기는 레이크 스트리트</p></li><li><h3>PET MEADOW</h3><p>반려동물과 함께 마음껏 뛰놀고 교감하며 쉬어가는 넓고 푸른 잔디 초원</p></li></ul></div></div><div class="ld-imgs"><div><img src="./assets/img/land-1.jpg" alt="PLAY FOREST 전경"><em>PLAY FOREST</em></div><div><img src="./assets/img/land-2.jpg" alt="CULTURE GARDEN 전경"><em>CULTURE GARDEN</em></div><div><img src="./assets/img/land-3.jpg" alt="LAKE STREET 전경"><em>LAKE STREET</em></div><div><img src="./assets/img/land-4.jpg" alt="PET MEADOW 전경"><em>PET MEADOW</em></div><p>ⓘ 위 CG와 이미지는 이해를 돕기 위해 제작한 것으로 실제와 다를 수 있습니다.</p></div></div></div></div></div></section><section class="fp-sec" id="s6" aria-label="커뮤니티"><div class="cm active" data-active><div class="cm-box active" data-active data-fader data-auto="5000"><div><div class="cm-tit"><div><h2>하루를 채운 여유,<br>입주민만을 위한 프라이빗 커뮤니티</h2><p>평범한 시간조차 여유롭고 깊이 있게 흘러가는 아르티엘 레이크에서의<br>여가와 휴식은 단순한 편의를 넘어 한 단계 높은 삶의 결을 보여줍니다.</p></div></div><div class="cm-slides"><div class="cm-slide" data-slide><div class="cm-vbox"><div class="vwrap cm-v"><video class="" muted loop playsinline autoplay preload="none" poster="./assets/img/commu-1.jpg"></video></div><div class="cm-shade"></div></div><div class="cm-txt"><div><h3>피트니스클럽</h3><p>최신식 운동기구로 입주민 누구나<br>활기찬 하루를 채워나가는 피트니스</p></div></div></div><div class="cm-slide" data-slide><div class="cm-img"><img src="./assets/img/commu-2.jpg" alt=""></div><div class="cm-shade"></div><div class="cm-txt"><div><h3>아쿠아클럽</h3><p>하루에 상쾌한 쉼표를 더해주는 25m 4개 레인의<br>프라이빗 실내수영장</p></div></div></div><div class="cm-slide" data-slide><div class="cm-vbox"><div class="vwrap cm-v"><video class="" muted loop playsinline autoplay preload="none" poster="./assets/img/commu-3.jpg"></video></div><div class="cm-shade"></div></div><div class="cm-txt"><div><h3>카페라운지</h3><p>책 한 권과 함께 느긋하게 브런치를 즐길 수 있는<br>입주민 전용 라운지</p></div></div></div><div class="cm-slide" data-slide><div class="cm-img"><img src="./assets/img/commu-4.jpg" alt=""></div><div class="cm-shade"></div><div class="cm-txt"><div><h3>아르티엘라운지</h3><p>호텔 로비처럼 차분하고 격조 있는 하루를 여는<br>단지 초입의 웰컴라운지</p></div></div></div><div class="cm-slide" data-slide><div class="cm-vbox"><div class="vwrap cm-v"><video class="" muted loop playsinline autoplay preload="none" poster="./assets/img/commu-5.jpg"></video></div><div class="cm-shade"></div></div><div class="cm-txt"><div><h3>실내골프라운지</h3><p>계절과 날씨에 상관없이 스윙 감각을 다듬는<br>스크린 연동 실내골프장</p></div></div></div></div><div class="cm-thumbs"><button type="button" data-thumb aria-label="피트니스클럽 보기"><img src="./assets/img/commu-t1.jpg" alt=""></button><button type="button" data-thumb aria-label="아쿠아클럽 보기"><img src="./assets/img/commu-t2.jpg" alt=""></button><button type="button" data-thumb aria-label="카페라운지 보기"><img src="./assets/img/commu-t3.jpg" alt=""></button><button type="button" data-thumb aria-label="아르티엘라운지 보기"><img src="./assets/img/commu-t4.jpg" alt=""></button><button type="button" data-thumb aria-label="실내골프라운지 보기"><img src="./assets/img/commu-t5.jpg" alt=""></button></div><p class="cm-note active" data-active>ⓘ 사용된 CG와 이미지는 이해를 돕기 위해 제작한 것으로 실제와 차이가 있을 수 있으며, 인허가 과정에서 달라질 수 있습니다.     ⓘ 커뮤니티 기본시설과 기본마감재는 제공되며, 내부 집기류와 이동가구 등은 제외됩니다. 각 시설의 설치 개소와 장소는 달라질 수 있습니다.<br>ⓘ 단지 내 주민공동시설의 세부시설은 변경될 수 있으며, 주민공동시설은 입주자대표회의 구성 후 입주민이 자체적으로 유지·관리·운영하여야 합니다.</p></div></div></div></section><section class="fp-sec" id="s7" aria-label="시스템"><div class="sy active" data-active><div class="sy-row"><div class="sy-col"><div class="sy-img"><img src="./assets/img/sys-1.jpg" alt=""></div><div class="sy-txt b1"><h2>여유로운 삶의 결,<br>품격이 느껴지는 프리미엄 컨시어지</h2><p>일상의 아주 사소한 순간까지 한결 섬세하게 살펴주는<br>아르티엘 레이크만의 맞춤형 컨시어지 서비스로 하이엔드 라이프의<br>새로운 기준을 제시합니다.</p><div class="sy-btn"><a href="./concierge.html"><p>컨시어지 바로가기</p><svg class="arr" viewBox="0 0 12 7" aria-hidden="true"><path d="M0 3.5h11M8 .5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1"/></svg></a></div></div></div><div class="sy-col"><div class="sy-img"><img src="./assets/img/sys-2.jpg" alt=""></div><div class="sy-txt b2"><h2>간편한 모든 순간,<br>스마트하게 일상을 잇는 IoT 시스템</h2><p>아르티엘 레이크만의 전용 앱 하나로<br>집 안의 모든 기기를 손쉽게 다루고 일상의 크고 작은 부분까지<br>IoT 시스템이 똑똑하게 챙겨 드립니다.</p><div class="sy-btn"><a href="./system.html#iot"><p>IoT 시스템 바로가기</p><svg class="arr" viewBox="0 0 12 7" aria-hidden="true"><path d="M0 3.5h11M8 .5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1"/></svg></a></div></div></div><div class="sy-col"><div class="sy-img"><img src="./assets/img/sys-3.jpg" alt=""></div><div class="sy-txt b3"><h2>내일의 주거 문화,<br>하루를 앞서는 스마트 라이프 시스템</h2><p>쾌적한 공기와 철저한 보안, 에너지 절감에서<br>친환경 라이프에 이르기까지<br>아르티엘 레이크만의 스마트 주거 기술로 한걸음 앞선 생활을 누립니다.</p><div class="sy-btn"><a href="./system.html#life"><p>라이프 시스템 바로가기</p><svg class="arr" viewBox="0 0 12 7" aria-hidden="true"><path d="M0 3.5h11M8 .5l3 3-3 3" fill="none" stroke="currentColor" stroke-width="1"/></svg></a></div></div></div></div><p class="sy-note">ⓘ 위 이미지는 이해를 돕기 위한 것으로 실제와 차이가 있을 수 있습니다.</p></div></section><section class="fp-sec" id="s8" aria-label="상품"><div class="un active" data-active><div class="un-a active" data-active><div class="un-bg active" data-active><img src="./assets/img/unit-bg.jpg" alt=""></div><div class="un-tb active" data-active><div><div><h2>공간 너머의 공간,<br>다시 새롭게 그려지는<br>일상의 품격</h2><p>라이프스타일마다 달라지는 일상의 필요를<br>빈틈없이 채우는 공간설계와<br>클래스부터 남다른 3면 발코니(서비스 면적)<br>구조가 삶에 여백을 더합니다.</p></div></div></div><div class="un-tt active" data-active><div><strong>UNIT PLAN</strong><p>아르티엘 레이크 상품안내</p></div></div></div><div class="un-b"><div class="un-shade"></div><div><div class="un-card c1 active" data-active><div><div class="un-imgbox"><div><img class="un-img g1" src="./assets/img/unit-1.jpg" width="406" height="262" alt=""></div></div><div class="un-cap"><div><h3>인테리어</h3><p>머무는 순간이 특별해지는 공간 - 아르티엘 레이크</p></div></div><a class="un-go g1" href="./interior.html" aria-label="인테리어 보기"><i></i></a></div></div><div class="un-card c2 active" data-active><div><div class="un-imgbox"><div><img class="un-img g2" src="./assets/img/unit-2.jpg" width="374" height="223" alt=""></div></div><div class="un-cap"><div><h3>e모델하우스</h3><p>아르티엘 레이크의 견본주택 건립세대를 VR로 보실 수 있습니다.</p></div></div><a class="un-go g2" href="./vr.html" aria-label="e모델하우스 보기"><i></i></a></div></div><div class="un-card c3 active" data-active><div><div class="un-imgbox"><div><img class="un-img g3" src="./assets/img/unit-3.jpg" width="224" height="275" alt=""></div></div><div class="un-cap"><div><h3>유니트</h3><p>아르티엘 레이크의 다채로운 주택형을 확인하세요.</p></div></div><a class="un-go g3" href="./unit.html" aria-label="유니트 보기"><i></i></a></div></div></div></div><div class="un-note active" data-active><p>ⓘ 위 CG와 이미지는 이해를 돕기 위해 제작한 것으로 실제와 다를 수 있습니다.</p></div></div></section><section class="fp-sec" id="s9" aria-label="브랜드"><div class="bd active" data-active><div class="bd-bgs"><div class="bd-bg on"><img src="./assets/img/brand-bg-1.jpg" alt=""></div><div class="bd-bg"><img src="./assets/img/brand-bg-2.jpg" alt=""></div><div class="bd-bg"><img src="./assets/img/brand-bg-3.jpg" alt=""></div></div><div class="bd-shade"></div><div class="bd-txt"><div><h3>호수와 하늘을 잇는 도시의 랜드마크!</h3><h2>예술을 일상으로 들인<br><b>초고층 하이엔드 호수주거의 <br class="mo">자부심</b></h2><p>‘아르티엘(A)’은 호수 도시의 초고층 주상복합 브랜드로 ‘작품처럼 머무는 <br class="mo">최고의 품격을<br class="pc"> 누리는 공간’을 의미합니다. <br class="mo">‘예술을 일상으로 들인 초고층 하이엔드 호수주거’라는 새 기준을<br class="pc"> 세우며, 가장 높은 곳에서 누릴 수 있는 자부심을 선사합니다. <br class="mo">‘아르티엘(A)’은 하늘을 담은<br class="pc"> 아름다운 디자인으로 도시의 랜드마크를 완성합니다.</p></div></div><div class="bd-list"><div class="on"><div class="bd-img"><img src="./assets/img/brand-1.jpg" width="227" height="146" alt=""><span></span></div><h3>아르티엘 _ [한빛시 해안동]</h3><p>1,396세대, 4개동, 최고 62층  <span>2019.03</span></p></div><div><div class="bd-img"><img src="./assets/img/brand-2.jpg" width="227" height="146" alt=""><span></span></div><h3>서원센트럴 A _ [한울 서원구 중앙동]</h3><p>1,752세대, 5개동, 최고 54층  <span>2023.09</span></p></div><div><div class="bd-img"><img src="./assets/img/brand-3.jpg" width="227" height="146" alt=""><span></span></div><h3>한울역오페라 A _ <br class="mo">[한울 동림구 예술동1가]</h3><p>1,024세대, 6개동, 최고 45층  <span>2024.02</span></p></div></div></div></section><section class="fp-sec" id="s10" aria-label="마무리"><div class="ot active" data-active><div class="ot-vbox"><div class="vwrap ot-v"><video class="" muted loop playsinline autoplay preload="none" poster="./assets/img/out-vd.jpg"></video></div></div><div class="ot-tb"><div class="ot-tt"><h2>아르티엘이라 가능한<br>호수 위 하이엔드 라이프</h2><p>가까워서 편리한 쇼핑부터 풍성하면서 즐거운 휴식, 여가, 문화, 예술까지,<br>하나의 단지 안에 이 모든 것을 담아낸 아르티엘만의<br>특별한 일상은 하이엔드 라이프 그 이상을 선사합니다.</p></div><span class="ot-line"></span><div class="ot-logo"><img src="./assets/logo-land.svg" alt="아르티엘 레이크"></div></div></div></section><section class="fp-sec fp-auto" id="sft" aria-label="바닥글"><footer class="ft"><div class="ft-left"><img class="ft-logo" src="./assets/logo-foot.svg" alt="아르티엘 레이크"><div><ul><li><span>시행사(주).</span> 서울특별시 강남구 테헤란로 123 민트클빌딩 5층(역삼동), <br class="mo">민트클 대표 김진수</li><li>사업자등록번호. 266-07-03678</li></ul><ul><li><span>온라인대행.</span> 통신판매업신고 제2026-서울강남-00480호,<br class="mo"> 대표번호 010-4894-4905</li><li>개인정보 보호책임자. 김진수</li></ul><p>※ 홈페이지에 사용된 일러스트 및 이미지는 소비자의 <br class="mo">이해를 돕기 위한 것으로 실제와 차이가 있으며 <br class="mo">설계 및 개발계획 관련 내용은 <br class="pc">인허가 과정 및 <br class="mo">해당기관 또는 지자체의 사정에 따라 변경될 수 있습니다.</p><p class="ft-copy">COPYRIGHT © MINTCL. ALL RIGHT RESERVED. · 6gsmake@gmail.com</p><button class="ft-top" type="button" aria-label="맨 위로"></button></div></div><ul class="ft-links"><li class="pc">시행·시공</li><li class="pc"><img class="ft-dev" src="./assets/dev-logo.svg" alt="민트클"></li><li class="mo">시행·시공 민트클</li><li><button type="button" data-dlg="dlg-terms">이용약관</button></li><li><button type="button" data-dlg="dlg-mail">이메일무단수집거부</button></li><li><button type="button" data-dlg="dlg-privacy">개인정보처리방침</button></li></ul></footer></section></div></div></main>
+<div class="dlg" id="dlg-terms" role="dialog" aria-modal="true" aria-label="이용약관"><div class="dlg-box"><button class="dlg-x" type="button" aria-label="닫기"></button><h2>이용약관</h2><h3>제1조 (목적)</h3><p>이 약관은 아르티엘 레이크 분양 홍보 홈페이지(이하 "홈페이지")가 제공하는 분양 정보 서비스의 이용 조건과 절차를 정합니다.</p><h3>제2조 (정보의 성격)</h3><p>홈페이지의 분양 조건·일정·도면·이미지는 이해를 돕기 위한 자료이며, 입주자모집공고와 다를 경우 입주자모집공고가 우선합니다.</p><h3>제3조 (서비스 변경)</h3><p>인허가 과정이나 사업 여건에 따라 게시 내용은 예고 없이 바뀔 수 있습니다.</p><h3>제4조 (책임)</h3><p>이용자가 홈페이지 정보만으로 청약·계약을 결정해 생긴 손해에 대해 시행사는 책임지지 않습니다. 반드시 견본주택에서 확인해 주십시오.</p></div></div><div class="dlg" id="dlg-mail" role="dialog" aria-modal="true" aria-label="이메일무단수집거부"><div class="dlg-box"><button class="dlg-x" type="button" aria-label="닫기"></button><h2>이메일무단수집거부</h2><h3></h3><p>이 홈페이지에 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치로 무단 수집되는 것을 거부합니다. 이를 어기면 정보통신망법에 따라 처벌받을 수 있습니다.</p></div></div><div class="dlg" id="dlg-privacy" role="dialog" aria-modal="true" aria-label="개인정보처리방침"><div class="dlg-box"><button class="dlg-x" type="button" aria-label="닫기"></button><h2>개인정보처리방침</h2><h3>1. 수집 항목</h3><p>성명, 휴대전화번호, 거주 지역, 연령대, 관심 주택형, 방문 예정일</p><h3>2. 이용 목적</h3><p>분양 정보 안내, 견본주택 방문 예약 확인, 이벤트 응모 처리</p><h3>3. 보유 기간</h3><p>분양 완료 시까지 (삭제 요청 시 즉시 파기)</p><h3>4. 보호책임자</h3><p>김진수 · 010-4894-4905 · 6gsmake@gmail.com</p></div></div>
+<script src="./assets/site.js"></script>
+<script>
+document.documentElement.classList.remove('no-js');
+
+(function(){
+  var d=document, w=window, b=d.body, mv=d.querySelector('.mv'), fp=d.querySelector('.fp'),
+      secs=[].slice.call(d.querySelectorAll('.fp-sec')), hd=d.querySelector('.hd'), bar=d.querySelector('.hd-bar'),
+      dots=d.querySelector('.hd-dots'), ia=d.querySelector('.ia'), skip=d.querySelector('.skip-area'),
+      cur=d.querySelector('.cur'), curSkip=d.querySelector('.cur-skip'), T=1500;
+  var q=function(s){return d.querySelector(s);};
+  var S=[{el:mv,n:2},{el:q('.sm'),n:2},{el:q('.ovw'),n:1},{el:q('.lc'),n:2},{el:q('.ld'),n:3},{el:q('.cm'),n:1},
+         {el:q('.sy'),n:1},{el:q('.un'),n:2},{el:q('.bd'),n:1},{el:q('.ot'),n:1},{el:q('.ft'),n:1}];
+  var WHITE=[0,4,5,6,7,8,9];
+  var idx=0, step=0, busy=true, done=false, cancel=false;
+  var ST=['p1','p1e','p2','p2e','p3','p3e'];
+  var pc=function(){return w.innerWidth>1400;};
+  var fpMode=false;
+
+  /* 머리글 흰 글자 (원본 isWhiteSection · 조경 1단계만 흰색) */
+  function paint(k,st){ var wht=WHITE.indexOf(k)>-1 && !(k===4&&st>0);
+    hd.classList.toggle('white',wht); dots.classList.toggle('white',wht); }
+  function enter(k,st){ var e=S[k].el; clearTimeout(e._t);
+    ST.forEach(function(c){e.classList.remove(c);}); e.classList.add('p'+(st+1));
+    e._t=setTimeout(function(){e.classList.add('p'+(st+1)+'e');},T); }
+  function leave(k){ var e=S[k].el; clearTimeout(e._t);
+    ['p1e','p2e','p3e'].forEach(function(c){e.classList.remove(c);});
+    e._t=setTimeout(function(){['p1','p2','p3'].forEach(function(c){e.classList.remove(c);});},T); }
+  function offset(k){ var vh=w.innerHeight, last=secs.length-1;
+    return k<last ? k*vh : (last-1)*vh+secs[last].offsetHeight; }
+  function place(){ fp.style.transform='translate3d(0,'+(-offset(idx))+'px,0)'; }
+  function lock(ms){ busy=true; clearTimeout(lock._t); lock._t=setTimeout(function(){busy=false;},ms); }
+  function go(k,st){ if(k<0||k>=S.length)return; var from=idx; leave(from); idx=k; step=st; enter(k,st); paint(k,st);
+    var foot=k===S.length-1; hd.classList.toggle('hide',foot); dots.classList.toggle('hide',foot);
+    place(); lock(T+200); }
+  function goStep(st){ step=st; enter(idx,st); paint(idx,st); lock(T); }
+  function next(){ if(step<S[idx].n-1)goStep(step+1); else if(idx<S.length-1)go(idx+1,0); }
+  function prev(){ if(step>0)goStep(step-1); else if(idx>0)go(idx-1,S[idx-1].n-1); }
+  w.AR=w.AR||{};
+  AR.fpGo=function(k,st){ go(k,st||0); };
+  AR.fpTop=function(){ if(fpMode){ go(0,0); } else { w.scrollTo({top:0,behavior:'smooth'}); } };
+
+  function setMode(){ var on=pc(); if(on===fpMode)return; fpMode=on;
+    b.classList.toggle('fp-on',on); b.classList.toggle('flow',!on); d.documentElement.classList.toggle('fp-html',on);
+    if(on){ place(); } else { fp.style.transform=''; hd.classList.remove('hide'); dots.classList.remove('hide'); } }
+  setMode();
+  /* 1400 이하: 21px 넘게 내리면 흰 막대 (원본 전역 스크롤 처리) */
+  w.addEventListener('scroll',function(){ if(fpMode)return; var on=w.pageYOffset>21;
+    hd.classList.toggle('active',on); dots.classList.toggle('active2',on); },{passive:true});
+  w.addEventListener('resize',function(){ setMode(); if(fpMode){ fp.style.transition='none'; place(); fp.offsetHeight; fp.style.transition=''; } });
+
+  w.addEventListener('wheel',function(e){ if(!fpMode)return; e.preventDefault(); if(!done||busy)return;
+    if(Math.abs(e.deltaY)<2)return; if(e.deltaY>0)next(); else prev(); },{passive:false});
+  var ty=null;
+  w.addEventListener('touchstart',function(e){ty=e.touches[0].clientY;},{passive:true});
+  w.addEventListener('touchmove',function(e){ if(!fpMode||ty===null)return; e.preventDefault();
+    var dy=ty-e.touches[0].clientY; if(!done||busy||Math.abs(dy)<w.innerHeight*.05)return; ty=null; if(dy>0)next(); else prev(); },{passive:false});
+  d.addEventListener('keydown',function(e){ if(!fpMode||!done||busy)return; if(e.target.closest('input,textarea,select'))return;
+    if(e.key==='ArrowDown'||e.key==='PageDown'){e.preventDefault();next();}
+    else if(e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();prev();}
+    else if(e.key==='Home'){e.preventDefault();go(0,0);} else if(e.key==='End'){e.preventDefault();go(S.length-1,0);} });
+
+  /* 커뮤니티 페이드 (원본 Swiper fade · loop · 5000 · 1000) · 브랜드 호버 */
+  var cm=q('.cm-box'); if(cm)AR.fader(cm);
+  [].slice.call(d.querySelectorAll('.bd-list>div')).forEach(function(it,i,all){
+    var on=function(){ all.forEach(function(x,j){x.classList.toggle('on',j===i);});
+      d.querySelectorAll('.bd-bg').forEach(function(g,j){g.classList.toggle('on',j===i);}); };
+    it.addEventListener('mouseenter',on); it.addEventListener('focusin',on); });
+
+  /* 쿠키 (오늘 하루 보지 않기 24시간) */
+  function setCk(n){ var t=new Date(); t.setHours(t.getHours()+24); d.cookie=n+'=Y; path=/; expires='+t.toUTCString(); }
+  function getCk(n){ return (d.cookie.match('(^|;) ?'+n+'=([^;]*)(;|$)')||[])[2]; }
+  var popV=q('.pop-v'), popN=q('.pop-n');
+  function showPops(){ if(getCk('ar_pop1')!=='Y'){ popV.classList.add('show'); var v=popV.querySelector('video'); if(v&&v.play)v.play().catch(function(){}); }
+    else if(getCk('ar_pop2')!=='Y'){ popN.classList.add('show'); } }
+  popV.querySelector('.pop-x').addEventListener('click',function(){ if(q('#pc1').checked)setCk('ar_pop1');
+    var v=popV.querySelector('video'); if(v)v.pause(); popV.classList.remove('show');
+    if(getCk('ar_pop2')!=='Y')popN.classList.add('show'); });
+  popN.querySelector('.pop-x').addEventListener('click',function(){ if(q('#pc2').checked)setCk('ar_pop2'); popN.classList.remove('show'); });
+  [popV,popN].forEach(function(p){ p.querySelector('.pop-dim').addEventListener('click',function(){ p.querySelector('.pop-x').click(); }); });
+  var mi=0, ms=[].slice.call(popN.querySelectorAll('ul.mo li')), mc=popN.querySelector('.pop-nav em');
+  function mgo(k){ mi=(k+ms.length)%ms.length; ms.forEach(function(x,j){x.classList.toggle('on',j===mi);}); if(mc)mc.textContent=(mi+1)+' I '+ms.length; }
+  popN.querySelectorAll('.pop-nav button').forEach(function(bt,j){ bt.addEventListener('click',function(){ mgo(mi+(j?1:-1)); }); }); mgo(0);
+
+  /* 인트로 — 원본 시간표(ms) 그대로. 1.5s 뒤 화면 어디든 누르면 건너뛴다 */
+  var TL=[['i3',200],['i4',800],['i5',1200],['i6',2500],['i7',1600],['i8',2000],['i9',1500],['i10',800],['i11',1400],['i12',2400]];
+  function reveal(){ if(done)return; done=true; cancel=true;
+    bar.classList.add('show'); dots.classList.add('show'); curSkip.classList.remove('show'); skip.classList.remove('show','in');
+    ia.classList.add('out'); setTimeout(function(){ia.classList.add('gone');},1000);
+    b.classList.remove('locked'); enter(0,0); paint(0,0); showPops(); lock(T); AR.reveal(); }
+  function run(){ var t=0; mv.classList.remove('p1','p1e'); b.classList.add('locked');
+    TL.forEach(function(s){ t+=s[1]; setTimeout(function(){ if(!cancel)mv.classList.add(s[0]); },t); });
+    setTimeout(function(){ if(!cancel)reveal(); },t+1000);
+    setTimeout(function(){ if(done)return; skip.classList.add('show'); requestAnimationFrame(function(){skip.classList.add('in');});
+      curSkip.classList.add('show'); },1500); }
+  skip.querySelector('button').addEventListener('click',function(){ if(done)return; if(AR.bgm)AR.bgm(true); reveal(); });
+  var qs=new URLSearchParams(location.search);
+  if(qs.get('devskip')==='1'||w.matchMedia('(prefers-reduced-motion: reduce)').matches){ mv.classList.remove('p1','p1e'); reveal(); }
+  else run();
+
+  /* 따라오는 SKIP 원 (원본 speed 0.2) */
+  var mx=-100,my=-100,px=0,py=0;
+  w.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+  (function loop(){ px+=(mx-px)*.2; py+=(my-py)*.2; cur.style.transform='translate3d('+px+'px,'+py+'px,0)';
+    if(!done||curSkip.classList.contains('show'))requestAnimationFrame(loop); })();
+})();
+
+</script>
+</body>
+</html>
