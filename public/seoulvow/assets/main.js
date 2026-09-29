@@ -1,4 +1,4 @@
-/* wedding-a 메인 — 원본 main.js 동작 (인트로 → 히어로 fade 5s · 고정 4단계 · 후기 뒤 글자 · FAQ) */
+/* 메인 동작 (인트로 → 히어로 fade 5s · 고정 4단계 · 후기 뒤 글자 · FAQ) */
 (function(){
   var W = window, D = document, B = D.body;
   var reduce = W.matchMedia('(prefers-reduced-motion: reduce)').matches;

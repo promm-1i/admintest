@@ -22,14 +22,6 @@ h1,h2,h3{font:inherit}
 ul{list-style:none}
 address,small{font-style:normal}
 
-/* ── 레퍼런스 실측 (ref-sites/ipark: scene-1440 · scrub-1440 · probe-pc · probe-vh · probe-th · probe-m 1~4)
-   PC: 1025~1439 는 1440 값 그대로, 1440~2560 은 화면 폭에 비례 → --u (1920 시안 × 0.75)
-   모바일 ≤1024: 390 실측값
-   잉크 rgb(33,33,33) · 본문2 rgb(67,67,67) · 흐림 rgb(101,101,101) · 카드면 rgb(249,249,250) · 칩 rgb(237,237,237)
-   테두리 rgb(204,204,204) · 헤더 선·맨위로 테두리 rgb(237,237,237) · 브랜드 카드2 rgb(242,240,235)
-   푸터 #000 · rgb(185,185,185) · rgb(204,204,204) · rgb(134,134,134)
-   글자 올라오기 110% → 0, 1s cubic-bezier(.43,.2,.02,1) · 번호/제목 칸 .6s cubic-bezier(.65,0,.35,1)
-   일부러 다르게: 강조 막대색(원본 빨강=상표색) · 로고 · 문구 · 사진 ── */
 :root{--u:1px;--ink:rgb(33,33,33);--ink2:rgb(67,67,67);--dim:rgb(101,101,101);--face:rgb(249,249,250);
   --chip:rgb(237,237,237);--line:rgb(204,204,204);--hair:rgb(237,237,237);--accent:rgb(0,122,104);
   --out:cubic-bezier(.43,.2,.02,1);--slot:cubic-bezier(.65,0,.35,1);--soft:cubic-bezier(.22,.61,.36,1);
@@ -41,13 +33,11 @@ body{font-family:"Pretendard Variable",Pretendard,system-ui,sans-serif;color:var
 .lat{font-family:Inter,"Pretendard Variable",Pretendard,sans-serif}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* 글자 줄 올라오기 — 줄마다 가림막 (지연은 --d) */
 .ln{display:block;overflow:clip}
 .ln>span{display:block}
 html.js .rv .ln>span{transform:translateY(110%);transition:transform 1s var(--out) var(--d,0s)}
 html.js .rv.on .ln>span{transform:none}
 
-/* 라벨 (PC 13.5/20.25 · 막대 3.375x12 · 간격 9 / 모바일 13/19.5 · 3.5x12 · 8) */
 .eb{display:flex;overflow:clip;font-size:calc(13.5 * var(--u));line-height:calc(20.25 * var(--u));letter-spacing:-.5px}
 .eb span{display:inline-flex;align-items:center;gap:calc(9 * var(--u))}
 .eb span::before{content:"";width:calc(3.375 * var(--u));height:calc(12 * var(--u));background:var(--accent)}
@@ -55,14 +45,10 @@ html.js .rv .eb span{transform:translateY(110%);transition:transform 1s var(--ou
 html.js .rv.on .eb span{transform:none}
 .h2{font-size:calc(36 * var(--u));line-height:calc(50.4 * var(--u));font-weight:600;letter-spacing:-.5px}
 
-/* 링크 (13.5/20.25 500 · 아래 여백 1.5 · 화살표 18 · 간격 3) */
 .lk{display:inline-flex;align-items:center;gap:calc(3 * var(--u));font-size:calc(13.5 * var(--u));line-height:calc(20.25 * var(--u));font-weight:500;letter-spacing:-.5px}
 .lk>span{padding-bottom:calc(1.5 * var(--u))}
 .lk svg{width:calc(18 * var(--u));height:calc(18 * var(--u))}
 
-/* ── 헤더 (h65 · 좌우 45 · 로고 162x17 · 메뉴 6칸 105 간격 18 · 13.5/20.25 600)
-   흰 글자 → 스크롤 0.71×히어로 지점부터 흰 바탕 · 80 넘게 내리면 숨김, 올리면 나옴
-   메뉴에 마우스 → 흰 바탕(.3s) + 아래 선 1px rgb(237) + 펼침판(패딩 24 45 36 · 칸 105 · 12/19.2 500 간격 18 · 올리면 600) ── */
 .hd{position:fixed;inset:0 0 auto;z-index:100;background:#fff;color:var(--ink);transition:transform .3s ease,background .5s ease,color .5s ease}
 .hd.clear{background:transparent;color:#fff}
 .hd.hide{transform:translateY(-100%)}
@@ -88,7 +74,6 @@ html.js .rv.on .eb span{transform:none}
 .lang button[aria-pressed=false]{opacity:.3}
 .burger,.mnav{display:none}
 
-/* ── 히어로 (100vh · 흰 바탕 짙은 제목 위로 사진·흰 제목 층이 inset(100%→0) 1s · 패딩 150 45 · 간격 36 · 제목 50.25/65.325 500 -1.5) ── */
 .hero{position:relative;height:100vh;background:#fff;overflow:clip}
 .hero .box{position:absolute;inset:0;padding:calc(150 * var(--u)) var(--pad) 0;display:flex;flex-direction:column;align-items:flex-start;gap:calc(36 * var(--u))}
 .hero .shade{position:absolute;inset:0;clip-path:inset(100% 0 0);transition:clip-path 1s var(--out)}
@@ -102,8 +87,6 @@ html.js .rv.on .eb span{transform:none}
 .box:not(.w) .cta>span{color:rgba(0,0,0,.9)}
 .cta svg{width:calc(18 * var(--u));height:calc(18 * var(--u))}
 .box:not(.w) .cta{opacity:0}
-/* 브랜드 안내 (자리 315x48 오른쪽 45 아래 30 · 말풍선 211x33 r3 패딩 9 9 9 12 간격 6 · 10.5/13.86 · 꼬리 11x9 오른쪽 18 · 닫기 15
-   + 버튼 48 원 흰30% 아이콘 22.5 → 열리면 45° · 판 315 간격 12, 카드 73 패딩 22.5 15 간격 6 r4.5 · 닫힘 op0 +20px) */
 .util{position:absolute;right:var(--pad);bottom:calc(30 * var(--u));z-index:2;width:calc(315 * var(--u));height:calc(48 * var(--u));transition:opacity .4s}
 .tip{position:absolute;right:0;bottom:calc(54 * var(--u));padding-bottom:calc(9 * var(--u));transition:opacity .3s,visibility 0s}
 .tip .bx{display:flex;align-items:center;gap:calc(6 * var(--u));padding:calc(9 * var(--u)) calc(9 * var(--u)) calc(9 * var(--u)) calc(12 * var(--u));border-radius:calc(3 * var(--u));
@@ -125,7 +108,6 @@ html.js .rv.on .eb span{transform:none}
 .panel .bc span{display:flex;align-items:center;gap:calc(6 * var(--u));font-size:calc(9 * var(--u));line-height:calc(9 * var(--u));font-weight:700;letter-spacing:.3px;white-space:nowrap}
 .panel .bc svg{width:calc(18 * var(--u));height:calc(18 * var(--u));transform:rotate(90deg)}
 
-/* ── 회사 소개 (위 165 · 머리 좌우45 간격15 · 무대 3×100vh 머리와 135 · 끈적 패딩45 간격84 · 사진 600×(100vh-90)) ── */
 .ess{padding-top:calc(165 * var(--u))}
 .ess .head{padding:0 var(--pad);display:flex;flex-direction:column;gap:calc(15 * var(--u))}
 .ess .head .tb{display:flex;flex-direction:column;gap:calc(13 * var(--u))}
@@ -147,9 +129,6 @@ html.js .rv.on .eb span{transform:none}
 .slot.tt{height:calc(37.8 * var(--u));font-size:calc(27 * var(--u));line-height:calc(37.8 * var(--u));font-weight:600}
 .slot.ds{height:calc(72 * var(--u));font-size:calc(15 * var(--u));line-height:calc(24 * var(--u));color:var(--ink2)}
 
-/* ── 사업 분야 (머리 끈적 100vh · 무대 5×100vh, 머리 뒤 10vh · 끈적 패딩 90 45 60 · 사진 3장 · 어둠 30%)
-   카드 438 간격 12 아래 기준 · r6 · 닫힘 rgba(0,0,0,.4) 흐림0 / 열림 흰 흐림16 (.3s) · 제목 18/27 600 · 설명 15/24 500 rgb(101)
-   칩 패딩 6 12 간격 3 r4 · 10.5/13.86 · 화살표 12 · 올리면 잉크 (.2s) ── */
 .biz{position:relative}
 .biz .head{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(15 * var(--u));text-align:center}
 .biz .head .s1,.biz .head .s2{position:relative;overflow:hidden}
@@ -181,7 +160,6 @@ html.js .rv.on .eb span{transform:none}
   mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6h8M6.8 2.8 10 6 6.8 9.2' fill='none' stroke='%23000' stroke-width='1.1'/%3E%3C/svg%3E") center/contain no-repeat}
 .chips a:hover{background:var(--ink);color:#fff}
 
-/* ── 실적 + 품질·안전 겹치기 (실적 1013 · 화면 아래에 붙어 200vh 멈춤 · 품질은 실적 뒤 90vh 에서 시작해 덮고 50vh 멈춤) ── */
 .stack{--pjh:calc(1013 * var(--u));position:relative;height:calc(var(--pjh) + 240vh)}
 .stack .a{position:absolute;inset:0 0 auto;height:calc(var(--pjh) + 200vh)}
 .pj{position:sticky;top:calc(100vh - var(--pjh));background:#fff;padding:calc(165 * var(--u)) var(--pad) calc(120 * var(--u))}
@@ -215,7 +193,6 @@ html.js .qs .l.on .lk{opacity:1;transform:none}
 .qs .r h3{font-size:calc(24 * var(--u));line-height:calc(33.6 * var(--u));font-weight:600}
 .qs .r p{font-size:calc(15 * var(--u));line-height:calc(24 * var(--u));font-weight:500}
 
-/* ── 소식 (패딩 165 45 120 · 좌 666 / 우 651 간격 18 · 카드 187 r4.5 패딩 30 45 36 간격 36 · 등장 +40px .8s) ── */
 .up{padding:calc(165 * var(--u)) var(--pad) calc(120 * var(--u));letter-spacing:-.5px}
 .up .in{display:grid;grid-template-columns:666fr 651fr;gap:calc(18 * var(--u))}
 .up .l{display:flex;flex-direction:column;gap:calc(15 * var(--u))}
@@ -229,7 +206,6 @@ html.js .up.on .cd{opacity:1;transform:none}
 .up .cd h3{font-size:calc(27 * var(--u));line-height:calc(37.8 * var(--u));font-weight:600;color:#000}
 .up .cd .lk{color:#000}
 
-/* ── 맨위로 (본문 끝 높이 0 끈적 · 버튼 36 흰 r4 테두리 1 rgb(237) · 오른쪽 45 아래 24 · 한 화면 넘게 내리면 나옴) ── */
 .totop{position:sticky;bottom:calc(6 * var(--u));height:0;z-index:50}
 .totop button{position:absolute;right:var(--pad);bottom:calc(24 * var(--u));width:calc(36 * var(--u));height:calc(36 * var(--u));border:1px solid var(--hair);border-radius:calc(4 * var(--u));
   background:#fff;color:var(--ink);display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(10px);
@@ -237,8 +213,6 @@ html.js .up.on .cd{opacity:1;transform:none}
 .totop button.on{opacity:1;visibility:visible;transform:none}
 .totop svg{width:calc(18 * var(--u));height:calc(18 * var(--u))}
 
-/* ── 푸터 (#000 · 폭 1350 패딩 67.5 30 52.5 · 로고 212x23 · 관계사 210x45 r8 패딩 12 18 · 목록 위로 6 떨어져 패딩 6 0, 항목 6 18
-   오른쪽 415 · 묶음 간격 75 · 메뉴 15/24 500 간격 15 · 지원 13.5/20.25 rgb185 간격 12 아이콘 15 · SNS 15/24 rgb185 간격 6 · 아래 간격 27 · 약관 간격 30) ── */
 .ft{background:#000;color:#fff;letter-spacing:-.5px}
 .ft .in{max-width:calc(1350 * var(--u));margin:0 auto;padding:calc(67.5 * var(--u)) calc(30 * var(--u)) calc(52.5 * var(--u));min-height:calc(518 * var(--u));display:flex;justify-content:space-between}
 .ft .left{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start}
@@ -272,15 +246,12 @@ html.js .up.on .cd{opacity:1;transform:none}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .mb{display:none}
 
-/* ══ 1024 이하 — 레퍼런스 390x844 실측 (probe-m 1~4). 장면 구조는 PC 와 같다 ══ */
 @media (max-width:1024px){
   :root{--u:1px;--pad:20px;--hdr:80px}
   .mb{display:inline}
   .eb{font-size:13px;line-height:19.5px}
   .eb span{gap:8px}
   .eb span::before{width:3.5px;height:12px}
-  /* 헤더 80 · 로고 170x18 · 메뉴 버튼 28 (선 20·20·15 / 닫기 X) · 펼침판 흰 80 아래 전체 · 목록 패딩 20
-     1단 20/30 600 간격 36 · 화살표 24 열리면 180° · 2단 패딩 20 0 0 20 간격 20 · 15/21 500 rgb(101) · 아래 언어 82 */
   .gnb,.hd .in>.lang,.panel-d{display:none}
   .logo{width:170px;height:18px;font-size:18px;gap:7px}
   .logo svg{width:18px;height:18px}
@@ -304,8 +275,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .mnav .lg2 i{width:1px;height:9px;background:currentColor;opacity:.3}
   .mnav .lg2 button[aria-pressed=false]{opacity:.3}
 
-  /* 히어로: 패딩 140 20 간격 30 · 제목 34/44.2 600 -.21 · 링크 14/21 간격 6 화살표 20
-     안내 자리 좌우 20 아래 40 · 말풍선 패딩 8 8 8 12 간격 8 r4 12/16.8 · 버튼 48 아이콘 24 · 판 350 카드 74 패딩 20 16 간격 8 r4 12/16.8 */
   .hero .box{padding:140px 20px 0;gap:30px}
   .hero .t{font-size:34px;line-height:44.2px;font-weight:600;letter-spacing:-.21px}
   .cta{gap:6px;font-size:14px;line-height:21px}
@@ -322,8 +291,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .panel .bc span{gap:4px;font-size:10px;line-height:10px}
   .panel .bc svg{width:16px;height:16px}
 
-  /* 회사 소개: 위 100 · 머리 좌우 20 간격 16 · 제목칸 간격 12 · 제목 20/30 600 · 설명 14/19.6 500 · 무대 머리 바로 뒤
-     끈적 패딩 120 20 219 세로 간격 40 · 사진 350×(100vh-582) · 글 간격 24 · 머리 간격 16 · 번호 16/22.4 600 · 제목 18/27 600 · 설명 14/19.6 rgb(67) 4줄 */
   .ess{padding-top:100px}
   .ess .head{padding:0 20px;gap:16px}
   .ess .head .tb{gap:12px;max-width:320px}
@@ -338,9 +305,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .slot.tt{height:27px;font-size:18px;line-height:27px}
   .slot.ds{height:78.4px;font-size:14px;line-height:19.6px}
 
-  /* 사업 분야: 머리 끈적 · 라벨·제목 칸은 가려져 있고, 섹션 위에서 0.5~1.5 화면 사이에 라벨·제목이 칸 높이만큼 올라가고 부제가 그 자리로 들어온다
-     라벨 13/19.5 · 제목 34/44.88 600 폭 304 · 부제 18/23.4 600 · 무대 머리 뒤 250vh · 끈적 패딩 30 20
-     카드 350 간격 12 아래 30 · r4 · 열림 버튼 패딩 20 20 8 간격 4 · 닫힘 20 · 제목 16/21.12 600 · 설명 패딩 0 20 20 14/19.6 400 rgb(67) · 칩 위 24 간격 8 패딩 6 12 간격 2 12/16.8 500 화살표 16 */
   .biz .head{gap:16px;padding:0 43px}
   .biz .head .h2{font-size:34px;line-height:44.88px}
   .biz .head .s2{width:304px}
@@ -360,8 +324,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .chips a span{font-size:12px;line-height:16.8px;font-weight:500}
   .chips a::after{width:16px;height:16px}
 
-  /* 실적: 패딩 100 20 · 머리 간격 16 · 제목 24/36 600 · 화살표 없음 · 머리와 80 · 카드 300×524 간격 16 · 사진 440 · 글 간격 6 · 16/22.4 600 · 14/19.6
-     겹치기: 실적 화면 아래 붙어 200vh · 품질은 실적 뒤 54vh 에서 시작 · 50vh 멈춤 */
   .stack{--pjh:985px;height:calc(var(--pjh) + 204vh)}
   .stack .a{height:calc(var(--pjh) + 200vh)}
   .pj{padding:100px 0}
@@ -378,7 +340,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .pj li p{font-size:14px;line-height:19.6px}
   .stack .b{top:calc(var(--pjh) + 54vh)}
 
-  /* 품질: 안쪽 패딩 80 20 · 위아래 끝으로 · 제목칸 간격 16 · 제목 24/36 · 링크까지 30 · 링크 14/21 간격 4 화살표 20 · 오른쪽 문장 간격 16 · 18/25.2 600 · 14/19.6 500 왼쪽 정렬 */
   .qs .in{padding:80px 20px;flex-direction:column;justify-content:space-between;align-items:stretch}
   .qs .l{gap:30px}
   .qs .l .tb{gap:16px}
@@ -390,7 +351,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .qs .r h3{font-size:18px;line-height:25.2px}
   .qs .r p{font-size:14px;line-height:19.6px}
 
-  /* 소식: 패딩 100 20 · 세로 간격 80 · 머리 간격 16 · 라벨 13/18.2 · 제목 24/36 · 목록 간격 12 · 카드 패딩 30 간격 40 r0 · 글 간격 8 · 12/16.8 500 · 20/30 600 잉크 */
   .up{padding:100px 20px}
   .up .in{grid-template-columns:1fr;gap:80px}
   .up .l{gap:16px}
@@ -406,8 +366,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .totop button{right:20px;bottom:24px;width:40px;height:40px}
   .totop svg{width:20px;height:20px}
 
-  /* 푸터: 패딩 60 24 세로 간격 40 · 왼쪽 간격 24 로고 170x18 · 관계사 342x56 패딩 14 24 r8 16/25.6 500 아이콘 24 · 항목 8 24 15/21
-     오른쪽 간격 32 · 묶음 세로 간격 40 · 메뉴 16/22.4 500 간격 20 · 지원 15/21 간격 14 아이콘 16 · SNS 가로 간격 16 16/22.4 · 아래 간격 24 · 약관 14/19.6 간격 20 · 정보 14/19.6 간격 4 */
   .ft .in{flex-direction:column;justify-content:flex-start;gap:40px;padding:60px 24px;min-height:0}
   .ft .left{justify-content:flex-start;gap:24px;align-items:stretch}
   .ft .logo{width:170px;height:18px;font-size:18px}
@@ -436,7 +394,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .slot>*,.card,.biz .sub,.biz .nav,.util .panel,.pj ul{transition:none}
 }
 
-/* 기본형: 스크롤 등장 애니메이션 없이 처음부터 보이게 한다 */
 .rv{opacity:1!important;transform:none!important;filter:none!important;transition-property:none!important}
 .hero img.bg,.hero-frame img.bg{transform:none!important;transition:none!important}
 </style>
@@ -479,7 +436,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 </header>
 
 <main id="main">
-<!-- 히어로 -->
 <section class="hero" id="hero">
   <div class="box" aria-hidden="true">
     <p class="t"><span>공간의 기준을 세우고</span><span>오래 쓰일 건물을 짓습니다</span></p>
@@ -489,7 +445,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
     <img src="../corporate-f/assets/hero.jpg" alt="" fetchpriority="high">
     <div class="box w">
       <h1 class="t"><span>공간의 기준을 세우고</span><span>오래 쓰일 건물을 짓습니다</span></h1>
-      <!-- 레퍼런스는 새 창으로 홍보 영상을 연다: 영상 주소를 href 에 넣는다 -->
       <a class="cta" href="#ess" target="_blank" rel="noopener"><span>회사 소개 영상</span><svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="9" cy="9" r="8.4" fill="none" stroke="currentColor" stroke-opacity=".6"/><path d="M7.4 5.9v6.2L12 9z" fill="currentColor"/></svg></a>
     </div>
   </div>
@@ -508,7 +463,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   </div>
 </section>
 
-<!-- 회사 소개 -->
 <section class="ess" id="ess">
   <div class="head rv">
     <p class="eb"><span>Company Essence</span></p>
@@ -539,7 +493,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   </div>
 </section>
 
-<!-- 사업 분야 -->
 <section class="biz" id="biz">
   <div class="head rv" id="bizHead">
     <div class="s1"><p class="eb" id="bizEb"><span>Our Businesses</span></p></div>
@@ -577,7 +530,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   </div>
 </section>
 
-<!-- 실적 → 품질·안전이 덮는다 -->
 <div class="stack">
   <div class="a">
     <section class="pj" id="pj">
@@ -622,7 +574,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   </div>
 </div>
 
-<!-- 소식 -->
 <section class="up rv" id="up">
   <div class="in">
     <div class="l">

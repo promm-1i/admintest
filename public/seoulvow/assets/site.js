@@ -1,4 +1,4 @@
-/* wedding-a 공통 — 원본 common.js·ani.js 의 동작(옆 메뉴·모달·80% 등장·패럴랙스·커서)을 gsap 없이 */
+/* 공통 동작 (옆 메뉴·모달·80% 등장·패럴랙스·커서) */
 (function(){
   var W = window, D = document, header = D.querySelector('header');
   var mob = function(){ return W.innerWidth <= 768; };
@@ -53,7 +53,7 @@
     submit.addEventListener('click', function(e){ e.preventDefault(); f.dataset.touched = '1'; if (!check()) return; var steps = f.querySelectorAll('.step-box'); steps[0].classList.remove('on'); steps[1].classList.add('on'); f.querySelectorAll('.indi .dot').forEach(function(d, i){ d.classList.toggle('active', i === 1); }); });
     check();
   }
-  // 등장: 요소 위가 화면 80% 선 (원본 ScrollTrigger start "top 80%")
+  // 등장: 요소 위가 화면 80% 선
   var items = [].slice.call(D.querySelectorAll('[data-ani]'));
   var px = [].slice.call(D.querySelectorAll('.parallax-cont')).map(function(c){ return { el: c, box: c.parentNode }; });
   var reduce = W.matchMedia('(prefers-reduced-motion: reduce)').matches;

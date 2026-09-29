@@ -5,7 +5,7 @@
   var hd = $('#header'), dim = $('#hdDim'), body = document.body;
   var isPC = function () { return window.innerWidth > 767; };
 
-  /* 머리: 12px 넘게 내리면 PC 는 유틸 줄을 숨기고 메뉴 줄만 검게(scroll), 모바일은 흰색(solid) — 원본 .scroll · .invert-mo */
+  /* 머리: 12px 넘게 내리면 PC 는 유틸 줄을 숨기고 메뉴 줄만 검게(scroll), 모바일은 흰색(solid) */
   var transparent = hd && hd.classList.contains('transparent');
   function onScroll() {
     var t = window.scrollY || document.documentElement.scrollTop;
@@ -93,7 +93,7 @@
     document.addEventListener('click', function () { fam.classList.remove('on'); });
   }
 
-  /* 등장 모션 (원본 dataMotion: 화면 아래 20% 지점) */
+  /* 등장 모션 (화면 아래 20% 지점) */
   var ms = $$('[data-motion]');
   if (ms.length) {
     if ('IntersectionObserver' in window) {
