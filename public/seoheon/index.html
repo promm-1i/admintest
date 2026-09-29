@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ko" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script>document.documentElement.classList.remove('no-js');</script>
+<title>법무법인 서헌</title>
+<meta name="description" content="건설·부동산, 금융·기업, 가사, 형사·민사 사건을 분야별 변호사가 맡는 법무법인 서헌 홈페이지입니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="법무법인 서헌">
+<meta property="og:description" content="건설·부동산, 금융·기업, 가사, 형사·민사 사건을 분야별 변호사가 맡는 법무법인 서헌 홈페이지입니다.">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+<link rel="stylesheet" href="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+.main .wrap{width:var(--w-main)}
+/* 등장 제목(원본 main_tit_box) */
+.mt .en{font-size:var(--b1);font-weight:700;opacity:0;transform:translateY(100px);transition:opacity 1s ease-in-out,transform 1s ease-in-out}
+.mt .en+.h{margin-top:.3em;transition:opacity 1s ease-in-out .2s,transform 1s ease-in-out .2s}
+.mt .h{font-size:6rem;font-weight:700;opacity:0;transform:translateY(100px);transition:opacity 1s ease-in-out,transform 1s ease-in-out;line-height:1.5}
+.mt .vb-box{display:flex;justify-content:center;margin-top:5rem}
+.mt .vb{display:flex;align-items:center;border:1px solid #1c1c1c;border-radius:1rem;font-size:var(--b4);font-weight:600;padding:1em 1.25em;
+  transition:background-color .3s ease-in-out,color .3s ease-in-out,border-color .3s ease-in-out;line-height:1.7}
+.mt .vb .ic{display:block;margin-left:2.5em;width:1em;height:1em;line-height:0}
+.mt .vb .ic svg{width:100%;height:100%}
+.mt .vb:hover{background-color:var(--c-deep);color:#fff;border-color:var(--c-deep)}
+.mt.c{text-align:center}
+.mt.is-in>*,.no-js .mt>*{opacity:1;transform:none}
+
+/* 인트로 */
+.intro{display:flex;align-items:center;justify-content:center;position:fixed;left:0;top:0;width:100%;height:100%;z-index:100;
+  clip-path:inset(0 0 0 0);transition:clip-path 1.5s cubic-bezier(.68,.05,.32,.97) 2.4s}
+.intro .bg{position:absolute;inset:0;background-color:var(--c-deep)}
+.intro .ib{position:relative;width:100%}
+.intro .ic{position:absolute;width:100%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:1s ease-in-out 1s}
+.intro .logo{width:32rem;transition:width 1s ease-in-out 1.25s}
+.intro .logo svg{width:100%;height:auto;stroke:#fff}
+.intro .tx{color:#fff;font-weight:700;margin-top:.9em;font-size:6rem;transition:font-size 1s ease-in-out 1.25s;padding:0 20px;line-height:1.7}
+.intro .tx span{opacity:0;transition-property:opacity}
+.intro .tx span:nth-child(1){transition-delay:1.0s}
+.intro .tx span:nth-child(2){transition-delay:1.1s}
+.intro .tx span:nth-child(3){transition-delay:1.2s}
+.intro .tx span:nth-child(4){transition-delay:1.3s}
+.intro .tx span:nth-child(5){transition-delay:1.4s}
+.intro .tx span:nth-child(6){transition-delay:1.5s}
+.intro .tx span:nth-child(7){transition-delay:1.6s}
+.intro .tx span:nth-child(8){transition-delay:1.7s}
+.intro .tx span:nth-child(9){transition-delay:1.8s}
+.intro .tx span:nth-child(10){transition-delay:1.9s}
+.intro .tx span:nth-child(11){transition-delay:2.0s}
+.intro .tx span:nth-child(12){transition-delay:2.1s}
+.intro .tx span:nth-child(13){transition-delay:2.2s}
+.intro .tx span:nth-child(14){transition-delay:2.3s}
+.intro .tx span:nth-child(15){transition-delay:2.4s}
+.intro .tx span:nth-child(16){transition-delay:2.5s}
+.intro .tx span:nth-child(17){transition-delay:2.5s}
+.intro .tx span:nth-child(18){transition-delay:2.5s}
+.intro.act{clip-path:inset(0 0 100% 0);pointer-events:none}
+.intro.act .tx span{opacity:1}
+.no-js .intro{display:none}
+
+/* 첫 화면 */
+.hero{position:relative;width:100%;height:100svh}
+.hero .slide{position:absolute;left:0;top:0;width:100%;height:100%}
+.hero .bg{position:absolute;left:0;top:0;width:100%;height:100%}
+.hero .bg video,.hero .bg img{display:block;width:100%;height:100%;object-fit:cover;object-position:center}
+.hero .bg::before{content:"";position:absolute;inset:0;background-color:rgba(0,0,0,.15);z-index:2}
+.main .hero .wrap{position:absolute;left:0;top:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hero .hb{display:flex;align-items:center;justify-content:center;flex-direction:column;z-index:3;position:relative}
+.hero .hs{position:relative}
+.hero .hs input{background:rgba(0,0,0,.5);height:4.5em;font-size:var(--b2);color:#fff;border:.2rem solid rgba(255,255,255,.5);padding:0 6em 0 1.5em;width:84rem;
+  font-weight:700;max-width:100%;transition:background-color .3s ease,border-color .3s ease,color .3s ease}
+.hero .hs:focus-within input{background-color:#fff;border-color:#fff;color:#101010}
+.hero .hs .kwf-clear{position:absolute;right:4.3em;top:50%;transform:translateY(-50%);display:flex;align-items:center;justify-content:center;width:1.5em;height:1.5em;
+  background-color:rgba(255,255,255,.2);border-radius:50%;font-size:var(--b2);color:#fff;padding:0;transition:.3s ease}
+.hero .hs .kwf-clear svg{width:10px;height:10px}
+.hero .hs:focus-within .kwf-clear{background-color:rgba(23,98,79,.2);color:var(--c-pri)}
+.hero .hs .kwf-clear.hide{opacity:0;pointer-events:none}
+.hero .hs .kwf-go{position:absolute;right:1.5em;top:50%;transform:translateY(-50%);width:1.75em;height:1.75em;font-size:var(--b2);padding:0;color:#fff;transition:color .3s ease}
+.hero .hs .kwf-go svg{display:block;width:100%;height:100%}
+.hero .hs:focus-within .kwf-go{color:var(--c-deep)}
+.hero .scroll{position:absolute;left:50%;bottom:0;transform:translateX(-50%);color:#fff;display:flex;flex-direction:column;align-items:center;z-index:4;transition:opacity 1s ease-in-out 1.2s}
+.hero .scroll .tx{font-weight:700;font-size:var(--b4);margin-bottom:.8rem;line-height:1.7}
+.hero .scroll .ln{position:relative;width:1px;height:13rem;background-color:rgba(255,255,255,.3);overflow:hidden}
+.hero .scroll .ln::after{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background-color:#fff;transform:scaleY(0);transform-origin:top;animation:grow 1.5s ease-in-out infinite}
+@keyframes grow{0%{transform:scaleY(0);opacity:1}80%{transform:scaleY(1);opacity:1}100%{transform:scaleY(1);opacity:0}}
+
+/* 로고 판 · 사진 3장 */
+.main .sol .wrap{width:var(--w)}
+.sol .lb{height:100svh;display:flex;align-items:center;justify-content:center}
+.sol .lb .logo{width:40rem;position:relative}
+.sol .lb svg{width:100%;height:auto;stroke:var(--c-deep)}
+.sol .lb .mk{stroke-dasharray:var(--l);stroke-dashoffset:var(--l);transition:stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715)}
+.sol .lb .m1{transition-delay:0.00s}
+.sol .lb .m2{transition-delay:0.12s}
+.sol .lb .m3{transition-delay:0.24s}
+.sol .lb .m4{transition-delay:0.36s}
+.sol .lb .m5{transition-delay:0.48s}
+.sol .lb .m6{transition-delay:0.60s}
+.sol .lb .m7{transition-delay:0.72s}
+.sol .lb .m8{transition-delay:0.84s}
+.sol .lb .m9{transition-delay:0.96s}
+.sol .lb.is-in .mk{stroke-dashoffset:0}
+.no-js .sol .lb .mk{stroke-dashoffset:0}
+.intro .mk{stroke-dasharray:var(--l);stroke-dashoffset:var(--l);transition:stroke-dashoffset 1s cubic-bezier(0.47, 0, 0.745, 0.715)}
+.intro .m1{transition-delay:0.00s}
+.intro .m2{transition-delay:0.12s}
+.intro .m3{transition-delay:0.24s}
+.intro .m4{transition-delay:0.36s}
+.intro .m5{transition-delay:0.48s}
+.intro .m6{transition-delay:0.60s}
+.intro .m7{transition-delay:0.72s}
+.intro .m8{transition-delay:0.84s}
+.intro .m9{transition-delay:0.96s}
+.intro.act .mk{stroke-dashoffset:0}
+.no-js .intro .mk{stroke-dashoffset:0}
+
+.sol .imgs{display:flex;justify-content:flex-end;padding-bottom:7%}
+.sol .imgs .im{width:19%;overflow:hidden;border-radius:2rem;opacity:0;transition:opacity 1s ease-in-out,transform 1s ease-in-out}
+.sol .imgs .im:nth-child(1){transform:translateY(65%);transition-delay:.3s}
+.sol .imgs .im:nth-child(2){transform:translateY(50%);transition-delay:.6s}
+.sol .imgs .im:nth-child(3){transform:translateY(35%);transition-delay:.9s}
+.sol .imgs .im::before{content:"";position:absolute;left:0;top:0;width:100%;height:100%;background-color:var(--c-deep);z-index:1;transition:1s ease-in-out}
+.sol .imgs .im:nth-child(1)::before{transition-delay:.3s}
+.sol .imgs .im:nth-child(2)::before{transition-delay:.6s}
+.sol .imgs .im:nth-child(3)::before{transition-delay:.9s}
+.sol .imgs .im img{display:block;width:100%;height:auto}
+.sol .imgs .im+.im{margin-left:3rem}
+.sol .imgs.is-in .im,.no-js .sol .imgs .im{opacity:1}
+.sol .imgs.is-in .im:nth-child(1),.no-js .sol .imgs .im:nth-child(1){transform:translateY(15%)}
+.sol .imgs.is-in .im:nth-child(2),.no-js .sol .imgs .im:nth-child(2){transform:translateY(0%)}
+.sol .imgs.is-in .im:nth-child(3),.no-js .sol .imgs .im:nth-child(3){transform:translateY(-15%)}
+.sol .imgs.is-in .im::before,.no-js .sol .imgs .im::before{height:0}
+
+/* 분야 */
+.biz{padding-top:var(--pad2);overflow:hidden}
+.biz .tabc{margin-top:var(--mcmt)}
+.biz .tabs{position:relative;opacity:0;transition:opacity 1s ease-in-out .2s}
+.biz .tabs::before{content:"";position:absolute;right:0;top:0;width:10rem;height:100%;background:linear-gradient(90deg,rgba(255,255,255,0) 0%,#fff 100%);z-index:2;pointer-events:none}
+.biz .tabs::after{content:"";position:absolute;left:0;top:0;width:10rem;height:100%;background:linear-gradient(270deg,rgba(255,255,255,0) 0%,#fff 100%);z-index:2;pointer-events:none}
+.biz .tabs.lf::after{display:none}
+.biz .tabs.rf::before{display:none}
+.biz .tabs .swiper-slide{width:auto}
+.biz .tabs .tab{position:relative;display:inline;font-size:var(--t6);font-weight:700;color:rgba(0,0,0,.2);padding-bottom:.25em;transition:color .3s ease-in-out;line-height:1.7}
+.biz .tabs .tab::before{content:"";position:absolute;left:0;bottom:0;width:0%;height:3px;background-color:var(--c-deep);transition:.3s ease-in-out}
+.biz .tabs .tab.act{color:var(--c-deep)}
+.biz .tabs .tab.act::before{width:100%}
+.biz .tabs .t-pv,.biz .tabs .t-nx{position:absolute;top:50%;width:1rem;height:2rem;margin-top:-1rem;z-index:10;cursor:pointer;padding:0;color:#1C1C1C;display:flex;align-items:center;justify-content:center}
+.biz .tabs .t-pv svg,.biz .tabs .t-nx svg{display:block;width:100%;height:100%}
+.biz .tabs .t-pv{left:-2%}
+.biz .tabs .t-nx{right:-2%}
+.biz .tabs .swiper-button-disabled{opacity:.35;cursor:auto;pointer-events:none}
+.biz .sl{margin-top:5rem;opacity:0;transform:translateX(25%);transition:opacity 1s ease-in-out .4s,transform 1s ease-in-out .4s;position:relative}
+.biz .sl .swiper-container{overflow:visible}
+.biz .sl .swiper-slide{transition:opacity .3s ease-in-out}
+.biz .sl .swiper-slide-prev{opacity:0}
+.biz .sl .cont{display:grid;align-items:center;grid-template-columns:minmax(50%,0) minmax(50%,0);cursor:pointer}
+.biz .sl .cont .im{position:relative;display:block;padding-top:66%;border-radius:4rem;overflow:hidden}
+.biz .sl .cont .im img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.biz .sl .cont .tb{margin-left:10rem;padding-bottom:6rem}
+.biz .sl .cont .tt{font-size:var(--t3);font-weight:700;line-height:1.7}
+.biz .sl .cont .tt a{display:block}
+.biz .sl .cont .tx{margin-top:.5em;width:80%}
+.biz .sl .cont .tags{display:flex;flex-wrap:wrap;margin-top:4rem;gap:10px;width:80%}
+.biz .sl .cont .tag{font-size:var(--b6);font-weight:600;border:1px solid #CFCFCF;border-radius:10em;height:2.3em;line-height:2.3em;padding:0 .8em}
+.biz .sl .sc{position:absolute;left:calc(50% + 10rem);bottom:8rem;z-index:3}
+.biz .tabc.is-in .tabs,.no-js .biz .tabs{opacity:1}
+.biz .tabc.is-in .sl,.no-js .biz .sl{opacity:1;transform:none}
+.biz .ptr{position:fixed;left:0;top:0;z-index:10;pointer-events:none}
+.biz .ptr .pb{background:rgba(16,53,46,.4);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:50%;transition:all .3s ease-out;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;color:#fff;width:16rem;height:16rem;opacity:0}
+.biz .ptr svg{width:15%;height:auto}
+.biz .ptr .en{font-weight:600;font-size:var(--b4);margin-top:1rem;line-height:1.7}
+.biz .ptr.on .pb{opacity:1}
+@media screen and (min-width:1241px){.biz .tabs .tab:hover{color:var(--c-deep)}.biz .tabs .tab:hover::before{width:100%}}
+
+/* 변호사 */
+.law{padding:var(--pad2) 0}
+.law .sl{margin-top:var(--mcmt);opacity:0;transform:translateY(100px);transition:opacity 1s ease-in-out .4s,transform 1s ease-in-out .4s}
+.law .sl.is-in,.no-js .law .sl{opacity:1;transform:none}
+.law .sl .swiper-container{padding:0 var(--hd-pad)}
+.law .card{display:block;border-radius:3rem;overflow:hidden;position:relative;color:#fff;width:25%}
+.law .card .im{display:block;position:relative;padding-top:85%;width:100%;background:var(--grad-card)}
+.law .card .im img{position:absolute;right:0;bottom:0;width:66%;height:auto;z-index:1}
+.law .card .im .bgt{position:absolute;bottom:5%;left:50%;transform:translateX(-50%);width:100%;height:123px;display:block}
+.law .card .nm{display:block;position:absolute;inset:0;padding:6rem 0 0 6rem;z-index:2}
+.law .card .nt{display:block}
+.law .card .name{font-size:var(--t4);font-weight:700;line-height:1.7}
+.law .card .pos{font-size:var(--b2);font-weight:700;line-height:1.7}
+.law .card .hv{display:flex;flex-direction:column;position:absolute;inset:0;z-index:3;padding:6rem;background:var(--c-deep);opacity:0;transition:opacity .3s ease-in-out}
+.law .card .hv .dl{font-size:var(--b3);margin-top:2rem}
+.law .card .hv .arr{display:flex;align-items:center;justify-content:center;margin-top:auto;width:6rem;height:6rem;background-color:#fff;border-radius:1rem;flex-shrink:0;color:var(--c-deep)}
+.law .card .hv .arr svg{width:30%;height:auto}
+.law .card:hover .hv,.law .card:focus-visible .hv{opacity:1}
+.law .sl .sc{justify-content:center;margin-top:3rem}
+
+/* 가치 */
+.val{position:relative;padding:var(--pad2) 0;background:#0E3F33;overflow:hidden}
+.val .vbg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.val::before{content:'';position:absolute;inset:0;width:100%;height:100%;background:linear-gradient(180deg,#000 4.9%,rgba(0,0,0,0) 137.19%);z-index:1}
+.val .wrap{position:relative;z-index:3}
+.val .mt{color:#fff}
+.val .cont{margin-top:var(--mcmt)}
+.val .cont .swiper-container{overflow:visible}
+.val .cont .swiper-wrapper{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2rem}
+.val .cont .item{background-color:#fff;height:auto;border-radius:3rem;padding:4rem 4rem 6rem 5rem;opacity:0;transform:translateY(100px);transition:opacity .6s ease-in-out,transform .6s ease-in-out;color:#1c1c1c}
+.val.is-in .cont .item,.no-js .val .cont .item{opacity:1;transform:none}
+.val .cont .item:nth-child(1){transition-delay:.2s;background:#E0F1EC}
+.val .cont .item:nth-child(2){transition-delay:.4s;background:#D2E3DD}
+.val .cont .item:nth-child(3){transition-delay:.6s;background:#D5DFDE}
+.val .cont .item:nth-child(4){transition-delay:.8s;background:#ECF0EA}
+.val .cont .item:nth-child(5){transition-delay:1s;background:#EAECF1}
+.val .cont .item:nth-child(6){transition-delay:1.2s;background:#EDE6DB}
+.val .cont .item .num{text-align:right;font-size:10rem;font-weight:500;color:rgba(28,28,28,.1);line-height:1}
+.val .cont .item .tb{margin-top:2.5rem}
+.val .cont .item .tt{font-size:var(--t5);font-weight:700;line-height:1.4}
+.val .cont .item .tx{margin-top:1.2rem;font-size:var(--b3)}
+.val .cont .sc{display:none;justify-content:center;margin-top:3rem;color:#fff}
+.val .cont .sc .num{color:#fff}
+.val .cont .sc .bar{background-color:rgba(255,255,255,.4)}
+.val .cont .sc .bar .swiper-pagination-progressbar-fill{background-color:#fff}
+
+/* 오시는 길 */
+.loc{margin-top:var(--pad2);padding-bottom:var(--pad2)}
+.loc .lbx{margin-top:var(--mcmt)}
+.loc .bnr{margin-top:6rem;position:relative;border-radius:3rem;overflow:hidden}
+.loc .bnr .bg{padding-top:25%}
+.loc .bnr .bg img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;object-position:center}
+.loc .bnr .tb{position:absolute;left:8rem;top:50%;transform:translateY(-50%);z-index:2}
+.loc .bnr .tt{font-size:var(--t4);font-weight:700;line-height:1.5}
+.loc .bnr .tx{font-size:var(--b2);margin-top:3rem}
+
+@media screen and (max-width:2200px){.law .card .hv .dl{font-size:var(--b4)}}
+@media screen and (max-width:1640px){
+  .law .card .hv{padding:4rem}
+  .law .card .nm{padding:4rem 0 0 4rem}
+  .biz .sl .cont .tb{padding-bottom:12rem}
+}
+@media screen and (max-width:1440px){
+  .law .sc .num,.val .cont .sc .num{display:none}
+  .law .card{width:31.25%}
+  .biz .tabs{width:calc(100% + var(--gut) * 2);margin-left:calc(var(--gut) * -1);padding:0 calc(var(--gut) + 20px);overflow:hidden}
+  .biz .tabs .swiper-container{overflow:visible}
+  .biz .tabs .t-pv,.biz .tabs .t-nx{width:2.2rem;height:3.2rem;margin-top:-1.6rem}
+  .biz .tabs .t-pv{left:5px}
+  .biz .tabs .t-nx{right:5px}
+}
+@media screen and (max-width:1240px){
+  .mt .h{font-size:var(--t2)}
+  .biz .sl .cont{grid-template-columns:minmax(40%,0) minmax(60%,0)}
+  .biz .sl .cont .tb{margin-left:30px;padding-bottom:50px}
+  .biz .sl .cont .tx{width:100%}
+  .biz .sl .cont .tags{width:100%}
+  .biz .sl .cont .tag{font-size:var(--b5)}
+  .biz .sl .sc{left:calc(40% + 30px);bottom:0}
+  .sol .imgs{margin-top:var(--cmt)}
+  .sol .imgs .im{width:22%}
+  .law .card{width:38.46%;height:auto;display:flex;flex-direction:column}
+  .law .card .nm{display:none}
+  .law .card .hv{position:relative;opacity:1;padding:20px 25px;flex:1}
+  .law .card .hv .dl{margin-bottom:30px}
+  .intro .tx{font-size:var(--t2);text-align:center}
+  .val .cont .item .tx{margin-top:1rem}
+}
+@media screen and (max-width:1024px){
+  .loc .bnr .bg{padding-top:max(35%,250px)}
+  .loc .bnr .tb{left:30px}
+  .loc .bnr .tt{font-size:var(--t5)}
+  .loc .bnr .tx{font-size:var(--b3);margin-top:1em}
+  .law .card .nm{opacity:0}
+  .law .card{width:45.45%}
+  .val .cont .swiper-wrapper{display:flex;gap:0}
+  .val .cont .sc{display:flex}
+  .val .cont .sc.none{display:none}
+}
+@media screen and (max-width:768px){
+  .hero{margin-top:-1px;height:calc(100svh + 1px)}
+  .hero .hs input{width:75rem;padding:0 5.5em 0 1em}
+  .hero .hs .kwf-go{right:1em}
+  .hero .hs .kwf-clear{right:3.5em}
+  .mt .en{font-size:var(--b3)}
+  .val .cont .item{padding:3rem 3rem 4rem 3rem}
+  .val .cont .item .tb{margin-top:1.5rem}
+}
+@media screen and (max-width:600px){
+  .hero .hb,.hero .hb form{width:100%}
+  .hero .hs input{width:100%;height:4.2em;font-size:var(--b3)}
+  .hero .hs input::placeholder{font-size:var(--b4)}
+  .sol .lb{height:50svh}
+  .sol .lb .logo{width:50%}
+  .biz .sl .cont{display:block}
+  .biz .sl .cont .tb{margin-left:0;margin-top:20px}
+  .biz .sl .sc{left:50%;transform:translateX(-50%)}
+  .loc .bnr .tb{left:20px}
+  .law .card .nm{padding:15px 0 0 20px}
+  .law .card .name{font-size:var(--t5)}
+  .law .card .pos{font-size:var(--b3)}
+  .law .card .im img{width:62%}
+  .law .card .im .bgt{bottom:-5%}
+  .law .card{width:91%}
+  .sol .imgs{margin-top:50px}
+  .sol .imgs .im{width:26%;border-radius:10px}
+  .sol .imgs .im+.im{margin-left:15px}
+  .biz .sl .cont .tags{gap:5px}
+  .biz .sl .cont .tag{font-size:var(--b6);padding:0 .8em}
+  .intro .logo{max-width:40%}
+  .loc .bnr{border-radius:var(--rad)}
+  .loc .bnr .tb{top:20px;transform:none}
+  .loc .bnr .tt{font-size:var(--t7)}
+  .biz .tabs::after,.biz .tabs::before{width:5rem}
+  .law .card .hv{padding:15px}
+  .law .card .im{padding-top:90%}
+  .law .card .im img{width:70%}
+}
+</style>
+</head>
+<body class="main">
+<a class="skip" href="#main">본문 바로가기</a>
+<div class="pg">
+<header class="hd" id="hd"><h1 class="blind">법무법인 서헌</h1><div class="hd-in"><a class="hd-logo" href="./index.html"><svg class="logo-svg" viewBox="0 0 302 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="법무법인 서헌"><g class="lg-mk" fill="none" stroke-width="7.2" transform="scale(0.3987)"><path d="M3.60 3.60H139.05V146.90H3.60Z"/><path d="M71.33 36V118"/><path d="M26 42H116.65"/><path d="M36.00 42L24.00 78"/><path d="M36.00 42L48.00 78"/><path d="M20.00 78A16.00 16.00 0 0 0 52.00 78"/><path d="M94.65 78L106.65 42L118.65 78"/><path d="M90.65 78A16.00 16.00 0 0 0 122.65 78"/><path d="M44 124H98.65"/></g><text class="lg-tx" x="72" y="45" textLength="228" lengthAdjust="spacingAndGlyphs" font-family="Pretendard,sans-serif" font-weight="700" font-size="42">법무법인 서헌</text></svg></a><nav class="gnb" aria-label="주 메뉴"><ul class="gnb-ul"><li class="d1"><a href="./about.html"><span>서헌 소개</span></a></li><li class="d1"><a href="./team.html"><span>구성원 소개</span></a></li><li class="d1"><a href="./practice.html"><span>업무분야</span></a></li><li class="d1"><a href="./cases.html"><span>업무사례</span></a></li><li class="d1"><a href="./press.html"><span>미디어센터</span></a><ul class="d2"><li><a href="./press.html"><span>언론보도</span></a><ul class="d3"><li><a href="./press.html"><span>언론보도</span></a></li></ul></li><li><a href="./news.html"><span>서헌소식</span></a><ul class="d3"><li><a href="./news.html"><span>서헌소식</span></a></li></ul></li></ul></li><li class="d1"><a href="./contact.html"><span>상담문의</span></a></li></ul></nav><div class="hd-util"><a class="hd-ic is-home" href="./index.html" aria-label="처음으로"><svg viewBox="0 0 35 35" aria-hidden="true"><path d="M17.5 6 5 16.2V29h8.4v-7.6h8.2V29H30V16.2Z" fill="currentColor"/></svg></a><button class="hd-ic is-srch" type="button" aria-label="통합검색 열기" aria-expanded="false" aria-controls="srch"><svg viewBox="0 0 35 35" fill="none" aria-hidden="true"><path d="M32 32l-7.25-7.25M28.67 15.33A13.33 13.33 0 1 1 2 15.33a13.33 13.33 0 0 1 26.67 0Z" stroke="currentColor" stroke-width="3" stroke-linecap="square"/></svg></button><button class="hd-ic is-ham" type="button" aria-label="전체메뉴 열기" aria-expanded="false" aria-controls="smap"><svg viewBox="0 0 35 35" aria-hidden="true"><rect x="4" y="8" width="27" height="3" fill="currentColor"/><rect x="4" y="16" width="27" height="3" fill="currentColor"/><rect x="4" y="24" width="27" height="3" fill="currentColor"/></svg></button></div></div><div class="srch" id="srch"><div class="kwf"><div class="kwf-head"><p class="tt">통합검색</p><p class="tx">사건 유형이나 분야를 입력하시면 관련 안내를 모아 보여 드립니다.</p></div><form class="kwf-form" action="./search.html" method="get" role="search"><div class="kwf-bar"><label class="blind" for="kwHd">검색어</label><input type="text" id="kwHd" name="q" placeholder="" autocomplete="off"><button type="button" class="kwf-clear hide" aria-label="검색어 지우기"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.2 0 5 3.8 8.8 0 10 1.2 6.2 5 10 8.8 8.8 10 5 6.2 1.2 10 0 8.8 3.8 5 0 1.2Z" fill="currentColor"/></svg></button><button type="submit" class="kwf-go" aria-label="검색"><svg viewBox="0 0 35 35" fill="none" aria-hidden="true"><path d="M32 32l-7.25-7.25M28.67 15.33A13.33 13.33 0 1 1 2 15.33a13.33 13.33 0 0 1 26.67 0Z" stroke="currentColor" stroke-width="3" stroke-linecap="square"/></svg></button></div><div class="kwf-tags"><p class="tt">추천검색어</p><div class="kw"><button type="button" class="tag"><span>하자</span></button><button type="button" class="tag"><span>금융</span></button><button type="button" class="tag"><span>건설</span></button><button type="button" class="tag"><span>이혼</span></button><button type="button" class="tag"><span>상속</span></button><button type="button" class="tag"><span>부동산</span></button><button type="button" class="tag"><span>형사</span></button><button type="button" class="tag"><span>민사</span></button></div></div></form></div><button class="srch-x" type="button" aria-label="통합검색 닫기"><svg viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M3 3l24 24M27 3 3 27" stroke="currentColor" stroke-width="3"/></svg></button></div></header><div class="srch-dim"></div>
+<div class="smap" id="smap" role="dialog" aria-modal="true" aria-label="전체메뉴"><div class="smap-top"><div class="smap-logo"><a href="./index.html"><svg class="logo-svg" viewBox="0 0 302 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="법무법인 서헌"><g class="lg-mk" fill="none" stroke-width="7.2" transform="scale(0.3987)"><path d="M3.60 3.60H139.05V146.90H3.60Z"/><path d="M71.33 36V118"/><path d="M26 42H116.65"/><path d="M36.00 42L24.00 78"/><path d="M36.00 42L48.00 78"/><path d="M20.00 78A16.00 16.00 0 0 0 52.00 78"/><path d="M94.65 78L106.65 42L118.65 78"/><path d="M90.65 78A16.00 16.00 0 0 0 122.65 78"/><path d="M44 124H98.65"/></g><text class="lg-tx" x="72" y="45" textLength="228" lengthAdjust="spacingAndGlyphs" font-family="Pretendard,sans-serif" font-weight="700" font-size="42">법무법인 서헌</text></svg></a></div><button class="smap-x" type="button" aria-label="전체메뉴 닫기"><svg viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M3 3l24 24M27 3 3 27" stroke="currentColor" stroke-width="3"/></svg></button></div><div class="smap-body"><div class="wrap"><ul class="smap-ul"><li class="s1"><a href="./about.html"><span>서헌 소개</span></a></li><li class="s1"><a href="./team.html"><span>구성원 소개</span></a></li><li class="s1"><a href="./practice.html"><span>업무분야</span></a></li><li class="s1"><a href="./cases.html"><span>업무사례</span></a></li><li class="s1 has"><a href="./press.html" aria-expanded="false"><span>미디어센터</span></a><ul class="s2"><li><a href="./press.html"><span>언론보도</span></a></li><li><a href="./news.html"><span>서헌소식</span></a></li></ul></li><li class="s1"><a href="./contact.html"><span>상담문의</span></a></li></ul></div></div></div>
+<main class="container" id="main"><div class="intro" aria-hidden="true"><div class="bg"></div><div class="ib"><div class="ic"><div class="logo"><svg class="" viewBox="0 0 142.65 150.50" fill="none" stroke-width="7.2" stroke-linecap="square" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="mk m1" d="M3.60 3.60H139.05V146.90H3.60Z" style="--l:557.50"/><path class="mk m2" d="M71.33 36V118" style="--l:82.00"/><path class="mk m3" d="M26 42H116.65" style="--l:90.65"/><path class="mk m4" d="M36.00 42L24.00 78" style="--l:37.95"/><path class="mk m5" d="M36.00 42L48.00 78" style="--l:37.95"/><path class="mk m6" d="M20.00 78A16.00 16.00 0 0 0 52.00 78" style="--l:50.27"/><path class="mk m7" d="M94.65 78L106.65 42L118.65 78" style="--l:75.89"/><path class="mk m8" d="M90.65 78A16.00 16.00 0 0 0 122.65 78" style="--l:50.27"/><path class="mk m9" d="M44 124H98.65" style="--l:54.65"/></svg></div><p class="tx"><span>첫</span>
+<span>상</span><span>담</span><span>부</span><span>터</span>
+<span>판</span><span>결</span><span>까</span><span>지</span><br class="mini-on">
+<span>곁</span><span>에</span>
+<span>있</span><span>는</span>
+<span>변</span><span>호</span><span>사</span></p></div></div></div><section class="hero" aria-label="첫 화면"><div class="slide"><div class="bg"><video class="hv" src="./assets/hero.mp4" poster="./assets/hero.jpg" muted loop playsinline preload="metadata" aria-hidden="true"></video></div></div><div class="wrap"><div class="hb"><form action="./search.html" method="get" role="search" class="kwf hsf"><div class="hs"><label class="blind" for="kwMain">검색어</label><input type="text" id="kwMain" name="q" autocomplete="off"><button type="button" class="kwf-clear hide" aria-label="검색어 지우기"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.2 0 5 3.8 8.8 0 10 1.2 6.2 5 10 8.8 8.8 10 5 6.2 1.2 10 0 8.8 3.8 5 0 1.2Z" fill="currentColor"/></svg></button><button type="submit" class="kwf-go" aria-label="검색"><svg viewBox="0 0 35 35" fill="none" aria-hidden="true"><path d="M32 32l-7.25-7.25M28.67 15.33A13.33 13.33 0 1 1 2 15.33a13.33 13.33 0 0 1 26.67 0Z" stroke="currentColor" stroke-width="3" stroke-linecap="square"/></svg></button></div></form></div><div class="scroll" aria-hidden="true"><div class="tx">SCROLL</div><div class="ln"></div></div></div></section><section class="sol" aria-labelledby="solH"><div class="wrap"><div class="lb"><div class="logo"><svg class="" viewBox="0 0 142.65 150.50" fill="none" stroke-width="7.2" stroke-linecap="square" xmlns="http://www.w3.org/2000/svg" role="img"><title>법무법인 서헌 로고</title><path class="mk m1" d="M3.60 3.60H139.05V146.90H3.60Z" style="--l:557.50"/><path class="mk m2" d="M71.33 36V118" style="--l:82.00"/><path class="mk m3" d="M26 42H116.65" style="--l:90.65"/><path class="mk m4" d="M36.00 42L24.00 78" style="--l:37.95"/><path class="mk m5" d="M36.00 42L48.00 78" style="--l:37.95"/><path class="mk m6" d="M20.00 78A16.00 16.00 0 0 0 52.00 78" style="--l:50.27"/><path class="mk m7" d="M94.65 78L106.65 42L118.65 78" style="--l:75.89"/><path class="mk m8" d="M90.65 78A16.00 16.00 0 0 0 122.65 78" style="--l:50.27"/><path class="mk m9" d="M44 124H98.65" style="--l:54.65"/></svg></div></div><div class="cb"><div class="mt"><h2 class="h" id="solH">사실부터 확인하는 원칙 <br>쌓아 온 경험으로 내놓는 <br class="mini-on">사건별 해법 <br>서헌이 함께 찾습니다</h2></div><div class="imgs"><div class="im"><img src="./assets/sol-1.jpg" alt="책상 위 서류와 만년필" width="280" height="670" loading="lazy"></div><div class="im"><img src="./assets/sol-2.jpg" alt="상담실 창가의 법전" width="280" height="670" loading="lazy"></div><div class="im"><img src="./assets/sol-3.jpg" alt="검토 중인 계약서와 손" width="280" height="670" loading="lazy"></div></div></div></div></section><section class="biz" aria-labelledby="bizH"><div class="wrap"><div class="mt"><p class="en">PRACTICE AREAS</p><h2 class="h" id="bizH">분야마다 쌓아 온 경험으로 <br>의뢰인의 권리를 지킵니다</h2></div><div class="tabc"><div class="tabs lf"><button type="button" class="t-pv" aria-label="이전 분야"><svg viewBox="0 0 14 25" fill="none" aria-hidden="true"><path d="M11 22 2 12.1 11 2.1" stroke="currentColor" stroke-width="3" stroke-linecap="square"/></svg></button><div class="swiper-container"><div class="swiper-wrapper"><div class="swiper-slide"><a class="tab act" href="#none" role="button">건설·부동산</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">금융·증권범죄 전담센터</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">금융·기업법무</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">공정거래</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">이혼·상속·가사</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">마약·도박</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">디지털포렌식·증거분석</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">음주운전·교통사고</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">민사</a></div><div class="swiper-slide"><a class="tab" href="#none" role="button">형사</a></div></div></div><button type="button" class="t-nx" aria-label="다음 분야"><svg viewBox="0 0 14 25" fill="none" aria-hidden="true"><path d="M3 22l9-9.9L3 2.1" stroke="currentColor" stroke-width="3" stroke-linecap="square"/></svg></button></div><div class="sl"><div class="swiper-container"><div class="swiper-wrapper"><div class="swiper-slide"><div class="cont"><a class="im" href="./field-construction.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-1.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-construction.html">건설·부동산</a></p><p class="tx">공사대금과 하자 분쟁부터 재개발·재건축, 인허가와 형사 사건까지 현장 자료와 판례를 함께 검토해 대응합니다.</p><div class="tags"><div class="tag">하자소송</div><div class="tag">공사대금 청구</div><div class="tag">분양·입주 분쟁</div><div class="tag">재개발·재건축</div><div class="tag">임대차 분쟁</div><div class="tag">부동산 개발·정비사업 분쟁</div><div class="tag">하도급 분쟁</div><div class="tag">건설 관련 형사 사건</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-financial-crime.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-2.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-financial-crime.html">금융·증권범죄 전담센터</a></p><p class="tx">금융·증권·가상자산 사건에서 수사 초기부터 자료를 정리하고 방어 방향을 함께 세웁니다.</p><div class="tags"><div class="tag">가상자산(코인·토큰) 범죄</div><div class="tag">시세조종</div><div class="tag">자본시장법 위반</div><div class="tag">미공개정보 이용</div><div class="tag">유사수신·다단계 범죄</div><div class="tag">불법 리딩방 사건</div><div class="tag">불법 공매도 사건</div><div class="tag">보험사기</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-finance.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-3.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-finance.html">금융·기업법무</a></p><p class="tx">금융 분쟁과 투자 계약, 스타트업 자금 조달, 기업 구조조정까지 회사에 필요한 법률 문제를 미리 점검하고 정리합니다.</p><div class="tags"><div class="tag">금융분쟁</div><div class="tag">투자계약</div><div class="tag">스타트업 자문</div><div class="tag">기업법무</div><div class="tag">기업구조조정</div><div class="tag">금융 규제 해석</div><div class="tag">사내 비위 조사</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-antitrust.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-4.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-antitrust.html">공정거래</a></p><p class="tx">공정거래위원회 조사 대응과 과징금 불복, 거래 구조 자문을 맡습니다.</p><div class="tags"><div class="tag">공정거래법 위반</div><div class="tag">공정위 조사 대응 자문</div><div class="tag">하도급법 위반</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-family.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-5.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-family.html">이혼·상속·가사</a></p><p class="tx">이혼과 재산분할, 양육권, 상속재산 분할까지 가족 사건을 함께 풉니다.</p><div class="tags"><div class="tag">협의이혼</div><div class="tag">위자료</div><div class="tag">양육권 분쟁</div><div class="tag">양육비</div><div class="tag">상속 분쟁</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-drug.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-6.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-drug.html">마약·도박</a></p><p class="tx">마약·도박 사건은 첫 조사에서 방향이 갈리는 경우가 많아, 연락을 받은 날부터 진술 준비와 재판 대응까지 곁에서 함께 합니다.</p><div class="tags"><div class="tag">향정신성의약품 투약·소지</div><div class="tag">불법 도박 사이트 운영</div><div class="tag">도박장 개설·상습도박 사건</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-forensics.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-7.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-forensics.html">디지털포렌식·증거분석</a></p><p class="tx">휴대폰과 컴퓨터에 남은 기록을 복원·분석해 사건에 필요한 증거를 찾아 법정 제출까지 돕습니다.</p><div class="tags"><div class="tag">휴대폰 포렌식</div><div class="tag">삭제 기록 복원</div><div class="tag">메신저 대화 분석</div><div class="tag">전자증거 감정</div><div class="tag">증거보전 신청</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-traffic.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-8.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-traffic.html">음주운전·교통사고</a></p><p class="tx">음주운전·교통사고 사건에서 처분 기준을 따져 면허와 형량을 지킬 방법을 찾습니다.</p><div class="tags"><div class="tag">음주운전</div><div class="tag">면허취소</div><div class="tag">뺑소니</div><div class="tag">교통사고처리특례법 위반</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-civil.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-9.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-civil.html">민사</a></p><p class="tx">대여금·물품대금 청구와 손해배상, 가압류·강제집행까지 받아야 할 돈을 끝까지 찾아 드립니다.</p><div class="tags"><div class="tag">계약서 검토 및 계약 분쟁</div><div class="tag">손해배상 청구</div><div class="tag">대여금 반환 청구</div></div></div></div></div><div class="swiper-slide"><div class="cont"><a class="im" href="./field-criminal.html" tabindex="-1" aria-hidden="true"><img src="./assets/biz-10.jpg" alt="" width="1350" height="900" loading="lazy"></a><div class="tb"><p class="tt"><a href="./field-criminal.html">형사</a></p><p class="tx">경찰 출석부터 검찰 조사, 공판까지 사건마다 진술과 증거 계획을 미리 세워 대응합니다.</p><div class="tags"><div class="tag">경찰 조사 대응</div><div class="tag">검찰 송치 대응</div><div class="tag">고소·고발 대리</div></div></div></div></div></div></div><div class="sc "><button type="button" class="sb pv" aria-label="이전"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M.6 10 7.8 18l.7.7 1.5-1.3-.7-.8-5.7-6.2H20v-2H3.6L9.3 2.1 10 1.3 8.5 0l-.7.7-7.2 8Z" fill="currentColor"/></svg></button><div class="num cur">1</div><div class="bar"></div><div class="num tot">10</div><button type="button" class="sb nx" aria-label="다음"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M19.4 10 12.2 18l-.7.7-1.5-1.3.7-.8 5.7-6.2H0v-2h16.4L10.7 2.1 10 1.3 11.5 0l.7.7 7.2 8Z" fill="currentColor"/></svg></button></div><div class="ptr" aria-hidden="true"><div class="pb"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6.8 6.8V12H5.2V6.8H0V5.2h5.2V0h1.6v5.2H12v1.6Z" fill="currentColor"/></svg><span class="en">View More</span></div></div></div></div></div></section><section class="law" aria-labelledby="lawH"><div class="wrap"><div class="mt c"><p class="en">OUR LAWYERS</p><h2 class="h" id="lawH">분야마다 사건을 끝까지 맡는 <br class="mini-on">변호사들</h2><div class="vb-box"><a class="vb" href="./team.html">구성원 소개<span class="ic"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M19.4 10 12.2 18l-.7.7-1.5-1.3.7-.8 5.7-6.2H0v-2h16.4L10.7 2.1 10 1.3 11.5 0l.7.7 7.2 8Z" fill="currentColor"/></svg></span></a></div></div></div><div class="sl"><div class="swiper-container"><div class="swiper-wrapper"><a class="swiper-slide card" href="./lawyer-1.html"><span class="im"><img src="./assets/lawyer-1.png" alt="강민재 대표변호사" width="730" height="886" loading="lazy"><svg class="bgt" viewBox="0 0 635 123" aria-hidden="true"><text x="317.5" y="104" text-anchor="middle" textLength="600" lengthAdjust="spacingAndGlyphs" font-family="Pretendard,sans-serif" font-weight="600" font-size="124" fill="#fff" opacity=".2">SEOHEON</text></svg></span><span class="nm"><span class="name">강민재</span> <span class="pos">대표변호사</span></span><span class="hv"><span class="nt"><span class="name">강민재</span> <span class="pos">대표변호사</span></span><span class="dl" style="display:block"><span class="dot-li" style="display:block">변호사시험 합격, 법조 경력 14년</span><span class="dot-li" style="display:block">금융회사 법무팀 사내변호사 출신</span><span class="dot-li" style="display:block">기업 구조조정 TF 법률 자문 변호사</span><span class="dot-li" style="display:block">금융당국 법률 자문관</span></span><span class="arr"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M19.4 10 12.2 18l-.7.7-1.5-1.3.7-.8 5.7-6.2H0v-2h16.4L10.7 2.1 10 1.3 11.5 0l.7.7 7.2 8Z" fill="currentColor"/></svg></span></span></a><a class="swiper-slide card" href="./lawyer-2.html"><span class="im"><img src="./assets/lawyer-2.png" alt="윤태오 대표변호사" width="730" height="886" loading="lazy"><svg class="bgt" viewBox="0 0 635 123" aria-hidden="true"><text x="317.5" y="104" text-anchor="middle" textLength="600" lengthAdjust="spacingAndGlyphs" font-family="Pretendard,sans-serif" font-weight="600" font-size="124" fill="#fff" opacity=".2">SEOHEON</text></svg></span><span class="nm"><span class="name">윤태오</span> <span class="pos">대표변호사</span></span><span class="hv"><span class="nt"><span class="name">윤태오</span> <span class="pos">대표변호사</span></span><span class="dl" style="display:block"><span class="dot-li" style="display:block">변호사시험 합격, 법조 경력 12년</span><span class="dot-li" style="display:block">건설·부동산·민사 분쟁 소송 전담 변호사</span><span class="dot-li" style="display:block">관할 경찰서 두 곳의 수사민원 상담센터 외부 자문변호사</span><span class="dot-li" style="display:block">중소기업 불공정거래피해신고센터 법률자문위원</span></span><span class="arr"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M19.4 10 12.2 18l-.7.7-1.5-1.3.7-.8 5.7-6.2H0v-2h16.4L10.7 2.1 10 1.3 11.5 0l.7.7 7.2 8Z" fill="currentColor"/></svg></span></span></a><a class="swiper-slide card" href="./lawyer-3.html"><span class="im"><img src="./assets/lawyer-3.png" alt="한서윤 파트너 변호사" width="730" height="886" loading="lazy"><svg class="bgt" viewBox="0 0 635 123" aria-hidden="true"><text x="317.5" y="104" text-anchor="middle" textLength="600" lengthAdjust="spacingAndGlyphs" font-family="Pretendard,sans-serif" font-weight="600" font-size="124" fill="#fff" opacity=".2">SEOHEON</text></svg></span><span class="nm"><span class="name">한서윤</span> <span class="pos">파트너 변호사</span></span><span class="hv"><span class="nt"><span class="name">한서윤</span> <span class="pos">파트너 변호사</span></span><span class="dl" style="display:block"><span class="dot-li" style="display:block">변호사시험 합격</span><span class="dot-li" style="display:block">금융 분쟁·금융범죄 사건 전담 변호사</span><span class="dot-li" style="display:block">형사 사건 수사 단계 대응 전담 변호사</span><span class="dot-li" style="display:block">금융·경제 전문지 칼럼</span></span><span class="arr"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M19.4 10 12.2 18l-.7.7-1.5-1.3.7-.8 5.7-6.2H0v-2h16.4L10.7 2.1 10 1.3 11.5 0l.7.7 7.2 8Z" fill="currentColor"/></svg></span></span></a><a class="swiper-slide card" href="./lawyer-4.html"><span class="im"><img src="./assets/lawyer-4.png" alt="정다은 변호사" width="730" height="886" loading="lazy"><svg class="bgt" viewBox="0 0 635 123" aria-hidden="true"><text x="317.5" y="104" text-anchor="middle" textLength="600" lengthAdjust="spacingAndGlyphs" font-family="Pretendard,sans-serif" font-weight="600" font-size="124" fill="#fff" opacity=".2">SEOHEON</text></svg></span><span class="nm"><span class="name">정다은</span> <span class="pos">변호사</span></span><span class="hv"><span class="nt"><span class="name">정다은</span> <span class="pos">변호사</span></span><span class="dl" style="display:block"><span class="dot-li" style="display:block">해오름대학교 공공행정학과 졸업</span><span class="dot-li" style="display:block">청람대학교 법학전문대학원 졸업</span><span class="dot-li" style="display:block">변호사회 성년후견인 양성 실무 교육 과정 수료</span><span class="dot-li" style="display:block">지방변호사회 조세 실무 연수원 수료</span></span><span class="arr"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M19.4 10 12.2 18l-.7.7-1.5-1.3.7-.8 5.7-6.2H0v-2h16.4L10.7 2.1 10 1.3 11.5 0l.7.7 7.2 8Z" fill="currentColor"/></svg></span></span></a></div></div><div class="wrap"><div class="sc none"><button type="button" class="sb pv" aria-label="이전"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M.6 10 7.8 18l.7.7 1.5-1.3-.7-.8-5.7-6.2H20v-2H3.6L9.3 2.1 10 1.3 8.5 0l-.7.7-7.2 8Z" fill="currentColor"/></svg></button><div class="num cur">1</div><div class="bar"></div><div class="num tot">1</div><button type="button" class="sb nx" aria-label="다음"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M19.4 10 12.2 18l-.7.7-1.5-1.3.7-.8 5.7-6.2H0v-2h16.4L10.7 2.1 10 1.3 11.5 0l.7.7 7.2 8Z" fill="currentColor"/></svg></button></div></div></div></section><section class="val" aria-labelledby="valH"><img class="vbg" src="./assets/val-bg.jpg" alt="" width="1920" height="1120" loading="lazy"><div class="wrap"><div class="mt"><p class="en">ABOUT US</p><h2 class="h" id="valH"><span class="text">서헌은 의뢰인의 사정부터 <br>먼저 듣고 움직입니다</span></h2></div><div class="cont"><div class="swiper-container"><div class="swiper-wrapper"><div class="swiper-slide item"><div class="num">01</div><div class="tb"><h3 class="tt">사건 기록부터 확인</h3><p class="tx">상담 전에 계약서와 문자, 사진을 먼저 받아<br>사건의 쟁점을 정리한 뒤 설명드립니다.</p></div></div><div class="swiper-slide item"><div class="num">02</div><div class="tb"><h3 class="tt">진행 상황 공유</h3><p class="tx">기일이 잡히거나 서면이 나가면 그날 알려 드리고,<br>다음 단계에서 할 일을 함께 정합니다.</p></div></div><div class="swiper-slide item"><div class="num">03</div><div class="tb"><h3 class="tt">담당 변호사 직접 상담</h3><p class="tx">처음 상담한 변호사가 사건을 끝까지 맡아 챙기며,<br class="pc-on"> 중간에 담당이 바뀌지 않습니다.</p></div></div><div class="swiper-slide item"><div class="num">04</div><div class="tb"><h3 class="tt">비용은 미리 안내</h3><p class="tx">착수금과 성공보수, 인지대 같은 실비를 먼저 알려<br>예상하지 못한 비용이 없도록 합니다.</p></div></div><div class="swiper-slide item"><div class="num">05</div><div class="tb"><h3 class="tt">끝까지 책임지는 변론</h3><p class="tx">1심에서 끝나지 않는 사건은 항소와 상고까지<br>같은 팀이 이어서 맡습니다.</p></div></div><div class="swiper-slide item"><div class="num">06</div><div class="tb"><h3 class="tt">판결 뒤 절차까지</h3><p class="tx">승소 판결을 받은 뒤에도 강제집행과 채권 회수까지<br>필요한 절차를 함께 진행합니다.</p></div></div></div></div><div class="sc "><button type="button" class="sb pv" aria-label="이전"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M.6 10 7.8 18l.7.7 1.5-1.3-.7-.8-5.7-6.2H20v-2H3.6L9.3 2.1 10 1.3 8.5 0l-.7.7-7.2 8Z" fill="currentColor"/></svg></button><div class="num cur">1</div><div class="bar"></div><div class="num tot"></div><button type="button" class="sb nx" aria-label="다음"><svg viewBox="0 0 20 19" aria-hidden="true"><path d="M19.4 10 12.2 18l-.7.7-1.5-1.3.7-.8 5.7-6.2H0v-2h16.4L10.7 2.1 10 1.3 11.5 0l.7.7 7.2 8Z" fill="currentColor"/></svg></button></div></div></div></section><section class="loc" id="way" aria-labelledby="locH"><div class="wrap"><div class="mt"><p class="en">LOCATION</p><h2 class="h" id="locH">상담 예약 뒤 방문하실 때 <br>법무법인 서헌 오시는 길</h2></div><div class="lbx"><div class="info cont"><div class="tcb"><p class="ctt">오시는 길</p><div class="tlist"><ul><li><span class="ic"><svg viewBox="0 0 20 24" aria-hidden="true"><path d="M10 0C4.5 0 0 4.3 0 9.6 0 16.8 10 24 10 24s10-7.2 10-14.4C20 4.3 15.5 0 10 0Zm0 13.2a3.6 3.6 0 1 1 0-7.2 3.6 3.6 0 0 1 0 7.2Z" fill="currentColor"/></svg></span><p class="tx">서울 강남구 테헤란로 123, 민트클빌딩 5층 <span class="stx">＊역삼역 3번 출구 도보 2분</span></p></li><li><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3.1a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3.1a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" fill="currentColor"/></svg></span><p class="tx ph-off">010-4894-4905</p><a class="tx ph-on" href="tel:01048944905">010-4894-4905</a></li><li class="sm"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17.2V21h3.8L17.8 9.9l-3.7-3.7L3 17.2ZM20.7 7c.4-.4.4-1 0-1.4l-2.3-2.3a1 1 0 0 0-1.4 0l-1.8 1.8 3.7 3.7L20.7 7Z" fill="currentColor"/></svg></span><p class="tx">간편 상담 신청은 밤과 주말에도 <br class="mini-on">받고, 다음 날 연락드립니다.</p></li></ul></div></div><div class="apps"><a class="box" href="https://map.naver.com/p/search/서울%20강남구%20테헤란로%20123,%20민트클빌딩%205층" target="_blank" rel="noopener"><span class="ic naver"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 3h4.6l5.2 7.4V3H17v14h-4.6L7.2 9.6V17H3Z" fill="#fff"/></svg></span><span class="tx">네이버 지도</span></a><a class="box" href="https://map.kakao.com/?q=서울%20강남구%20테헤란로%20123,%20민트클빌딩%205층" target="_blank" rel="noopener"><span class="ic kakao"><svg viewBox="0 0 20 24" aria-hidden="true"><path d="M10 1C5.3 1 1.5 4.6 1.5 9.1 1.5 15.2 10 23 10 23s8.5-7.8 8.5-13.9C18.5 4.6 14.7 1 10 1Zm0 11.4a3.3 3.3 0 1 1 0-6.6 3.3 3.3 0 0 1 0 6.6Z" fill="#1c1c1c"/></svg></span><span class="tx">카카오 지도</span></a><a class="box" href="https://www.google.com/maps/search/서울+강남구+테헤란로+123,+민트클빌딩+5층" target="_blank" rel="noopener"><span class="ic google"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.5h3.2c1.9-1.7 3-4.3 3-7.4Z" fill="#4A7BD9"/><path d="M12 22c2.7 0 5-.9 6.6-2.4l-3.2-2.5c-.9.6-2 1-3.4 1-2.6 0-4.8-1.8-5.6-4.1H3.1v2.6A10 10 0 0 0 12 22Z" fill="#3D9A5B"/><path d="M6.4 14a6 6 0 0 1 0-3.9V7.5H3.1a10 10 0 0 0 0 9Z" fill="#E6B32E"/><path d="M12 6c1.5 0 2.8.5 3.8 1.5l2.9-2.9A10 10 0 0 0 3.1 7.5L6.4 10c.8-2.3 3-4 5.6-4Z" fill="#D5503F"/></svg></span><span class="tx">구글 지도</span></a><a class="box" href="https://tmap.life/" target="_blank" rel="noopener"><span class="ic t"><svg viewBox="0 0 30 20" aria-hidden="true"><path d="M3 3h13v3.4h-4.6V17H7.6V6.4H3Z" fill="#E5323F"/><path d="M17.5 3h9.5v3.4h-3V17h-3.6V6.4h-2.9Z" fill="#2E6BE6"/></svg></span><span class="tx">TMAP</span></a></div></div><div class="map cont"><div class="mapc"><img class="mapi" src="./assets/map.svg" alt="법무법인 서헌 주변 약도 — 역삼역 3번 출구에서 테헤란로를 따라 도보 2분" width="700" height="360"><span class="pin" aria-hidden="true"><svg class="pm" viewBox="0 0 142.65 150.50" fill="none" stroke-width="7.2" stroke-linecap="square" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path class="m1" d="M3.60 3.60H139.05V146.90H3.60Z" style="--l:557.50"/><path class="m2" d="M71.33 36V118" style="--l:82.00"/><path class="m3" d="M26 42H116.65" style="--l:90.65"/><path class="m4" d="M36.00 42L24.00 78" style="--l:37.95"/><path class="m5" d="M36.00 42L48.00 78" style="--l:37.95"/><path class="m6" d="M20.00 78A16.00 16.00 0 0 0 52.00 78" style="--l:50.27"/><path class="m7" d="M94.65 78L106.65 42L118.65 78" style="--l:75.89"/><path class="m8" d="M90.65 78A16.00 16.00 0 0 0 122.65 78" style="--l:50.27"/><path class="m9" d="M44 124H98.65" style="--l:54.65"/></svg><span>법무법인 서헌</span></span></div></div></div><div class="bnr"><div class="tb"><p class="tt">한 장의 기록도 그냥 넘기지 않는 <br>법무법인 서헌의 일하는 방식</p><p class="tx">법무법인 서헌은 사건 기록을 처음부터 끝까지 읽고, <br>쟁점마다 판례와 근거를 붙여 의뢰인께 알기 쉽게 설명드립니다.</p></div><div class="bg"><img class="mini-off" src="./assets/banner.jpg" alt="" width="1800" height="450" loading="lazy"><img class="mini-on" src="./assets/banner-m.jpg" alt="" width="750" height="544" loading="lazy"></div></div></div></section></main>
+<footer class="ft"><div class="wrap"><div class="qf" id="quickForm"><div class="qf-head"><p class="tt">전화번호를 남겨 주시면 확인하는 대로<br>담당 변호사가 바로 연락드립니다</p><div class="num ph-off"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3.1a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3.1a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" fill="currentColor"/></svg></span>010-4894-4905</div><div class="num ph-on flex"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3.1a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3.1a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" fill="currentColor"/></svg></span><a href="tel:01048944905">010-4894-4905</a></div></div><div class="qf-form"><form class="js-cs" novalidate data-kind="quick"><div class="qf-grid"><div class="cell"><p class="lb" id="qfCate-lb">상담 항목 <span class="req">*</span></p><div class="nsel form"><select id="qfCate" name="cate" tabindex="-1" aria-hidden="true"><option value="">선택</option><option value="건설·부동산">건설·부동산</option><option value="금융·증권범죄 대응센터">금융·증권범죄 대응센터</option><option value="금융·기업법무">금융·기업법무</option><option value="공정거래">공정거래</option><option value="이혼·상속·가사">이혼·상속·가사</option><option value="마약·도박">마약·도박</option><option value="디지털포렌식·증거수집">디지털포렌식·증거수집</option><option value="음주운전·교통사고">음주운전·교통사고</option><option value="형사">형사</option><option value="민사">민사</option><option value="기타">기타</option></select><button type="button" class="ns-btn" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="qfCate-lb qfCate-cur"><span class="cur">선택</span></button><ul class="ns-list" role="listbox" tabindex="-1" aria-labelledby="qfCate-lb"></ul></div></div><div class="cell"><label class="lb" for="qfName">이름 <span class="req">*</span></label><div class="inp"><input type="text" id="qfName" name="name" autocomplete="name" data-need="이름을 입력해 주세요."></div></div><div class="cell"><label class="lb" for="qfTel">연락처 <span class="req">*</span></label><div class="inp"><input type="tel" id="qfTel" name="tel" autocomplete="tel" data-need="연락처를 입력해 주세요."></div></div><div class="cell solo"><button type="submit" class="go">신청하기</button></div></div><div class="agree"><div class="cb"><input type="checkbox" id="qfAgree" name="agree"><label for="qfAgree"><span class="box"><svg viewBox="0 0 12 9" fill="none" aria-hidden="true"><path d="M1 4.5 4.3 7.8 11 1" stroke="currentColor" stroke-width="2"/></svg></span><span class="tx">개인정보 수집 · 이용에 동의</span></label></div><button class="view" type="button" data-md="privacy">자세히보기</button></div></form></div></div><div class="ft-info"><div class="lc"><div class="ft-logo"><svg class="logo-svg" viewBox="0 0 302 60" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="법무법인 서헌"><g class="lg-mk" fill="none" stroke-width="7.2" transform="scale(0.3987)"><path d="M3.60 3.60H139.05V146.90H3.60Z"/><path d="M71.33 36V118"/><path d="M26 42H116.65"/><path d="M36.00 42L24.00 78"/><path d="M36.00 42L48.00 78"/><path d="M20.00 78A16.00 16.00 0 0 0 52.00 78"/><path d="M94.65 78L106.65 42L118.65 78"/><path d="M90.65 78A16.00 16.00 0 0 0 122.65 78"/><path d="M44 124H98.65"/></g><text class="lg-tx" x="72" y="45" textLength="228" lengthAdjust="spacingAndGlyphs" font-family="Pretendard,sans-serif" font-weight="700" font-size="42">법무법인 서헌</text></svg></div><div class="ft-links"><a href="#privacy" data-md="privacy"><strong>개인정보처리방침</strong></a><a href="#terms" data-md="terms">이용약관</a><a href="#notice" data-md="notice">면책공고</a><a href="./about.html#way">오시는 길</a></div><ul class="ft-co"><li>법무법인 서헌</li><li>서울 강남구 테헤란로 123, 민트클빌딩 5층</li><li>광고책임변호사: 강민재, 윤태오</li><li>상담문의 010-4894-4905</li></ul><div class="ft-copy">&copy; 법무법인 서헌 All Rights Reserved. 예시용 가상 법인입니다.</div></div></div></div></footer>
+</div>
+<div class="qk"><div class="call ph-off"><p class="tt">전화상담</p><div class="cn"><span class="ic"><svg viewBox="0 0 36 30" fill="none" aria-hidden="true"><path d="M7 17v-3a11 11 0 0 1 22 0v3" stroke="currentColor" stroke-width="2.6"/><rect x="4" y="15" width="7" height="10" rx="2.5" fill="currentColor"/><rect x="25" y="15" width="7" height="10" rx="2.5" fill="currentColor"/><path d="M29 25c0 2.6-3 3.8-8 3.8" stroke="currentColor" stroke-width="2.2"/></svg></span><p class="tx" id="qkTel">010)4894 <br><span class="dash">-</span>4905</p></div></div><a class="btn cs" href="#quickForm"><span class="ic"><svg viewBox="0 0 26 26" aria-hidden="true"><path class="bx" d="M3 3h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H9l-5 4v-4H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" fill="currentColor"/><path class="ln" d="M7 9h12M7 13h8" stroke="#fff" stroke-width="2"/></svg></span><span class="tx"><span>간편상담</span></span></a><a class="btn ph-on flex" href="tel:01048944905"><span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3.1a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3.1a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z" fill="currentColor"/></svg></span><span class="tx"><span>전화상담</span></span></a><a class="btn ph-on flex" href="./about.html#way"><span class="ic"><svg viewBox="0 0 26 26" aria-hidden="true"><path d="M13 1.5c-4.7 0-8.5 3.6-8.5 8.1C4.5 16 13 24.5 13 24.5s8.5-8.5 8.5-14.9c0-4.5-3.8-8.1-8.5-8.1Zm0 11.4a3.2 3.2 0 1 1 0-6.4 3.2 3.2 0 0 1 0 6.4Z" fill="currentColor"/></svg></span><span class="tx"><span>오시는 길</span></span></a><a class="btn ph-on flex" href="./team.html"><span class="ic"><svg viewBox="0 0 26 26" aria-hidden="true"><circle cx="9" cy="8" r="4" fill="currentColor"/><circle cx="18" cy="9" r="3.2" fill="currentColor"/><path d="M1.5 22c0-4.4 3.4-7.5 7.5-7.5s7.5 3.1 7.5 7.5Z" fill="currentColor"/><path d="M17.5 22c0-2.8-.9-5-2.3-6.4a6 6 0 0 1 9.3 6.4Z" fill="currentColor"/></svg></span><span class="tx"><span>구성원 소개</span></span></a><button class="btn top" type="button" aria-label="맨 위로"><span class="ic"><svg viewBox="0 0 16 10" aria-hidden="true"><path d="M8 0 16 10H0Z" fill="currentColor"/></svg></span><span class="tx"><span>TOP</span></span></button></div>
+<div class="md" id="md-privacy" role="dialog" aria-modal="true" aria-labelledby="md-privacy-t"><div class="md-wrap"><div class="md-cell"><div class="md-box terms"><div class="md-head"><p class="tt" id="md-privacy-t">개인정보처리방침</p><button class="md-x" type="button" aria-label="닫기"><svg viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M3 3l24 24M27 3 3 27" stroke="currentColor" stroke-width="3"/></svg></button></div><div class="md-body" data-lenis-prevent><div class="sect"><p class="h3">1. 수집하는 항목</p><p>상담 신청 시 이름, 연락처, 상담 항목을 받습니다. 상담문의 쪽에서는 이메일, 제목, 내용과 첨부파일을 더 받을 수 있습니다.</p></div><div class="sect"><p class="h3">2. 이용 목적</p><p>상담 신청 확인과 회신, 상담 일정 안내에만 씁니다.</p></div><div class="sect"><p class="h3">3. 보유 기간</p><p>상담이 끝난 날부터 1년간 보관한 뒤 지웁니다. 법령에 따로 정한 기간이 있으면 그 기간을 따릅니다.</p></div><div class="sect"><p class="h3">4. 동의를 거부할 권리</p><p>동의하지 않으실 수 있으며, 이 경우 온라인 상담 신청은 접수되지 않습니다. 전화로는 상담하실 수 있습니다.</p></div><div class="sect"><p class="h3">5. 개인정보 보호책임자</p><p>성명 김진수 · 연락처 010-4894-4905 · 이메일 6gsmake@gmail.com</p></div></div></div></div></div></div><div class="md" id="md-terms" role="dialog" aria-modal="true" aria-labelledby="md-terms-t"><div class="md-wrap"><div class="md-cell"><div class="md-box terms"><div class="md-head"><p class="tt" id="md-terms-t">이용약관</p><button class="md-x" type="button" aria-label="닫기"><svg viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M3 3l24 24M27 3 3 27" stroke="currentColor" stroke-width="3"/></svg></button></div><div class="md-body" data-lenis-prevent><div class="sect"><p class="h3">제1조 목적</p><p>이 약관은 법무법인 서헌 홈페이지에서 제공하는 정보와 상담 신청 기능을 이용하는 조건을 정합니다.</p></div><div class="sect"><p class="h3">제2조 게시 정보</p><p>홈페이지의 글은 일반 안내이며 개별 사건에 대한 법률 의견이 아닙니다.</p></div><div class="sect"><p class="h3">제3조 상담 신청</p><p>신청 내용은 담당자가 확인한 뒤 연락드리며, 신청만으로 사건 위임 계약이 맺어지지 않습니다.</p></div><div class="sect"><p class="h3">제4조 사업자 정보</p><p>상호 민트클 · 대표 김진수 · 사업자등록번호 266-07-03678 · 통신판매업신고 제2026-서울강남-00480호 · 주소 서울특별시 강남구 테헤란로 123 민트클빌딩 5층</p></div></div></div></div></div></div><div class="md" id="md-notice" role="dialog" aria-modal="true" aria-labelledby="md-notice-t"><div class="md-wrap"><div class="md-cell"><div class="md-box terms"><div class="md-head"><p class="tt" id="md-notice-t">면책공고</p><button class="md-x" type="button" aria-label="닫기"><svg viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M3 3l24 24M27 3 3 27" stroke="currentColor" stroke-width="3"/></svg></button></div><div class="md-body" data-lenis-prevent><div class="sect"><p class="h3">예시 사이트 안내</p><p>이 홈페이지는 법무법인 홈페이지 제작 예시입니다. 법무법인 서헌과 구성원, 사례, 기사는 모두 가상이며 실제 법인·인물·사건과 관계가 없습니다.</p></div><div class="sect"><p class="h3">정보의 한계</p><p>게시된 글은 일반적인 안내이므로 구체적인 사건은 반드시 변호사와 상담하신 뒤 판단하시기 바랍니다.</p></div></div></div></div></div></div><div class="alert" role="alertdialog" aria-modal="true" aria-labelledby="alMsg"><div class="al-box"><p id="alMsg"></p><div class="al-btns"><button type="button">확인</button></div></div></div>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.33/dist/lenis.min.js"></script>
+<script src="https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js"></script>
+<script>
+(function(){
+  var H=document.getElementById('hd'), root=document.documentElement, W=window;
+  /* Lenis — 원본 basic.js: duration 1.0, 1240 초과에서만 */
+  W.lenis=null;
+  function lenisOn(){ if(W.lenis||innerWidth<=1240||!W.Lenis) return;
+    W.lenis=new Lenis({duration:1.0,infinite:false,gestureOrientation:'vertical',normalizeWheel:false,smoothTouch:true});
+    (function raf(t){ if(!W.lenis) return; W.lenis.raf(t); W._lr=requestAnimationFrame(raf); })(performance.now()); }
+  function lenisOff(){ if(!W.lenis) return; cancelAnimationFrame(W._lr); W.lenis.destroy(); W.lenis=null; }
+  lenisOn(); addEventListener('resize',function(){ innerWidth>1240?lenisOn():lenisOff(); });
+  W.lockScroll=function(on){ root.classList.toggle('lock',on); if(W.lenis){ on?W.lenis.stop():W.lenis.start(); } };
+  document.querySelectorAll('[data-lenis-prevent-auto]').forEach(function(e){ if(e.scrollHeight>e.clientHeight) e.setAttribute('data-lenis-prevent',''); });
+
+  /* 머리 — 100 넘으면 흰 바탕, 내려가면 숨김 */
+  var prev=scrollY;
+  function onScroll(){ var y=scrollY; H.classList.toggle('scrolled',y>100);
+    if(y>prev){ if(y>10) H.classList.add('down'); } else H.classList.remove('down'); prev=y; }
+  onScroll(); addEventListener('scroll',onScroll,{passive:true});
+
+  /* 메뉴 호버(1241 이상) */
+  var d1s=[].slice.call(H.querySelectorAll('.gnb .d1'));
+  d1s.forEach(function(li){
+    function open(){ if(innerWidth<=1240) return; li.classList.add('on'); H.classList.add('hover'); }
+    function close(){ li.classList.remove('on'); H.classList.remove('hover');
+      li.querySelectorAll('.d2>li').forEach(function(x){ x.classList.remove('on'); }); }
+    li.addEventListener('mouseenter',open); li.addEventListener('mouseleave',close);
+    li.addEventListener('focusin',open); li.addEventListener('focusout',function(e){ if(!li.contains(e.relatedTarget)) close(); });
+    li.querySelectorAll('.d2>li>a').forEach(function(a){
+      function on(){ [].forEach.call(a.parentNode.parentNode.children,function(x){ x.classList.remove('on'); }); a.parentNode.classList.add('on'); }
+      a.addEventListener('mouseenter',on); a.addEventListener('focus',on); });
+  });
+
+  /* 통합검색 */
+  var srBtn=H.querySelector('.is-srch'), dim=document.querySelector('.srch-dim');
+  function srch(on){ H.classList.toggle('srch-on',on); dim.classList.toggle('on',on); srBtn.setAttribute('aria-expanded',on?'true':'false');
+    if(!on) H.classList.remove('hover'); lockScroll(on); if(on) setTimeout(function(){ var i=document.getElementById('kwHd'); i&&i.focus(); },300); else srBtn.focus(); }
+  srBtn.addEventListener('click',function(){ srch(true); });
+  H.querySelector('.srch-x').addEventListener('click',function(){ srch(false); });
+  dim.addEventListener('click',function(){ srch(false); });
+  document.querySelectorAll('.kwf').forEach(function(f){
+    var inp=f.querySelector('input'), clr=f.querySelector('.kwf-clear');
+    function tg(){ clr.classList.toggle('hide',!inp.value.trim()); }
+    inp.addEventListener('input',tg); tg();
+    clr.addEventListener('click',function(){ inp.value=''; tg(); inp.focus(); });
+    var tags=[].slice.call(f.querySelectorAll('.kw .tag'));
+    tags.forEach(function(b){ b.addEventListener('click',function(){ tags.forEach(function(x){ x.classList.remove('act'); }); b.classList.add('act');
+      inp.value=b.textContent.trim(); inp.focus(); tg(); }); });
+    var kw=f.querySelector('.kw');
+    function more(){ var m=document.createElement('button'); m.type='button'; m.className='more'; m.setAttribute('aria-label','추천검색어 더보기');
+      m.innerHTML='<svg viewBox="0 0 42 40" fill="none" aria-hidden="true"><rect x=".5" y=".5" width="41" height="39" rx="19.5" stroke="#CFCFCF"/><path d="M21.9 19.1H27v1.8h-5.1V26h-1.8v-5.1H15v-1.8h5.1V14h1.8Z" fill="#1C1C1C"/></svg>';
+      m.addEventListener('click',function(){ kw.dataset.open='1'; rows(); }); return m; }
+    function rows(){ var old=kw.querySelector('.more'); if(old) old.remove(); tags.forEach(function(b){ b.classList.remove('none'); });
+      if(kw.dataset.open||tags.length<=1) return;
+      var n=innerWidth<=768?2:1, tops=[]; tags.forEach(function(b){ var t=Math.round(b.offsetTop); if(tops.indexOf(t)<0) tops.push(t); });
+      if(tops.length<=n) return; var last=tops[n-1], vis=tags.filter(function(b){ return Math.round(b.offsetTop)<=last; });
+      tags.forEach(function(b){ if(Math.round(b.offsetTop)>last) b.classList.add('none'); });
+      var m=more(); kw.appendChild(m);
+      while(vis.length&&Math.round(m.offsetTop)>last){ vis.pop().classList.add('none'); m.remove(); m=more(); kw.appendChild(m); } }
+    if(f.closest('.tv')){ kw.classList.add('coll'); requestAnimationFrame(rows); addEventListener('load',rows); addEventListener('resize',function(){ requestAnimationFrame(rows); }); }
+    else if(tags.length>8){ tags.forEach(function(b,i){ if(i>=8) b.classList.add('none'); });
+      var m=document.createElement('button'); m.type='button'; m.className='more'; m.setAttribute('aria-label','추천검색어 더보기');
+      m.innerHTML='<svg viewBox="0 0 42 40" fill="none" aria-hidden="true"><rect x=".5" y=".5" width="41" height="39" rx="19.5" stroke="#CFCFCF"/><path d="M21.9 19.1H27v1.8h-5.1V26h-1.8v-5.1H15v-1.8h5.1V14h1.8Z" fill="#1C1C1C"/></svg>';
+      tags[7].after(m); m.addEventListener('click',function(){ tags.forEach(function(b){ b.classList.remove('none'); }); m.remove(); }); }
+    (f.tagName==='FORM'?f:f.querySelector('form')).addEventListener('submit',function(e){ if(!inp.value.trim()){ e.preventDefault(); alertMsg('검색어를 입력해 주세요.',function(){ inp.focus(); }); } });
+  });
+  addEventListener('keydown',function(e){ if(e.key==='Escape'&&H.classList.contains('srch-on')) srch(false); });
+
+  /* 전체메뉴 */
+  var sm=document.getElementById('smap'), ham=H.querySelector('.is-ham');
+  function smap(on){ sm.classList.toggle('on',on); ham.setAttribute('aria-expanded',on?'true':'false'); lockScroll(on); (on?sm.querySelector('.smap-x'):ham).focus(); }
+  ham.addEventListener('click',function(){ smap(true); });
+  sm.querySelector('.smap-x').addEventListener('click',function(){ smap(false); });
+  sm.querySelectorAll('.s1.has>a').forEach(function(a){ a.addEventListener('click',function(e){
+    if(innerWidth>1240) return; e.preventDefault(); var li=a.parentNode, open=!li.classList.contains('open');
+    sm.querySelectorAll('.s1.open').forEach(function(o){ if(o!==li){ o.classList.remove('open'); o.firstElementChild.setAttribute('aria-expanded','false'); slide(o.querySelector('.s2'),false,300); } });
+    li.classList.toggle('open',open); a.setAttribute('aria-expanded',open?'true':'false'); slide(li.querySelector('.s2'),open,300); }); });
+
+  /* 접고 펴기 — jQuery slideDown/Up(swing, 기본 400ms)과 같은 곡선 */
+  W.slide=function(el,open,dur){ dur=dur||400; cancelAnimationFrame(el._raf||0);
+    var cs=getComputedStyle(el), shown=cs.display!=='none', from=shown?el.getBoundingClientRect().height:0;
+    el.style.display='block'; el.style.height=''; el.style.paddingTop=el.style.paddingBottom='';
+    var full=el.getBoundingClientRect().height, pt=parseFloat(getComputedStyle(el).paddingTop), pb=parseFloat(getComputedStyle(el).paddingBottom),
+        to=open?full:0, t0=performance.now();
+    el.style.overflow='hidden';
+    function set(h){ var k=full?h/full:0; el.style.height=h+'px'; el.style.paddingTop=pt*k+'px'; el.style.paddingBottom=pb*k+'px'; }
+    set(from);
+    (function st(now){ var p=Math.min(1,(now-t0)/dur), e=.5-Math.cos(p*Math.PI)/2; set(from+(to-from)*e);
+      if(p<1){ el._raf=requestAnimationFrame(st); return; }
+      el.style.height=el.style.paddingTop=el.style.paddingBottom=el.style.overflow='';
+      el.style.display=open?'block':'none'; })(t0);
+  };
+
+  /* 셀렉트(원본 nice-select 자리) */
+  W.initSel=function(scope){ (scope||document).querySelectorAll('.nsel').forEach(function(w){ if(w._ok) return; w._ok=1;
+    var sel=w.querySelector('select'), btn=w.querySelector('.ns-btn'), cur=btn.querySelector('.cur'), ul=w.querySelector('.ns-list'), fi=-1;
+    if(!cur.id&&sel.id) cur.id=sel.id+'-cur';
+    [].forEach.call(sel.options,function(o,i){ var li=document.createElement('li'); li.setAttribute('role','option'); li.id=(sel.id||'ns')+'-o'+i;
+      li.textContent=o.text; li.dataset.v=o.value; li.setAttribute('aria-selected',o.selected?'true':'false'); if(i===0&&!o.value) li.className='dis'; ul.appendChild(li); });
+    var items=[].slice.call(ul.children);
+    function close(){ w.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+    function pick(li){ if(li.classList.contains('dis')) return; items.forEach(function(x){ x.setAttribute('aria-selected','false'); }); li.setAttribute('aria-selected','true');
+      sel.value=li.dataset.v; cur.textContent=li.textContent; sel.dispatchEvent(new Event('change',{bubbles:true})); close(); btn.focus(); }
+    function focus(i){ items.forEach(function(x){ x.classList.remove('focus'); }); fi=i; if(items[i]){ items[i].classList.add('focus'); ul.setAttribute('aria-activedescendant',items[i].id); } }
+    btn.addEventListener('click',function(e){ e.stopPropagation(); var o=!w.classList.contains('open');
+      document.querySelectorAll('.nsel.open').forEach(function(x){ x.classList.remove('open'); x.querySelector('.ns-btn').setAttribute('aria-expanded','false'); });
+      w.classList.toggle('open',o); btn.setAttribute('aria-expanded',o?'true':'false'); if(o){ focus(Math.max(0,sel.selectedIndex)); ul.focus(); } });
+    ul.addEventListener('click',function(e){ var li=e.target.closest('li'); if(li) pick(li); });
+    ul.addEventListener('keydown',function(e){ if(e.key==='ArrowDown'){ e.preventDefault(); focus(Math.min(items.length-1,fi+1)); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); focus(Math.max(0,fi-1)); }
+      else if(e.key==='Enter'||e.key===' '){ e.preventDefault(); if(items[fi]) pick(items[fi]); }
+      else if(e.key==='Escape'||e.key==='Tab'){ close(); if(e.key==='Escape') btn.focus(); } });
+    if(W.lenis!==undefined) ul.setAttribute('data-lenis-prevent','');
+  }); };
+  initSel();
+  document.addEventListener('click',function(e){ if(!e.target.closest('.nsel')) document.querySelectorAll('.nsel.open').forEach(function(x){ x.classList.remove('open'); x.querySelector('.ns-btn').setAttribute('aria-expanded','false'); }); });
+
+  /* 알림창 · 약관 모달 */
+  var al=document.querySelector('.alert'), alCb=null, alBack=null;
+  W.alertMsg=function(msg,cb){ alBack=document.activeElement; document.getElementById('alMsg').textContent=msg; alCb=cb||null; al.classList.add('open'); lockScroll(true); al.querySelector('button').focus(); };
+  function alClose(){ al.classList.remove('open'); lockScroll(false); var c=alCb; alCb=null; if(c) c(); else if(alBack) alBack.focus(); }
+  al.querySelector('button').addEventListener('click',alClose);
+  var mdBack=null;
+  function md(id,on){ var m=document.getElementById('md-'+id); if(!m) return; m.classList.toggle('open',on); lockScroll(on);
+    if(on){ mdBack=document.activeElement; m.querySelector('.md-x').focus(); } else if(mdBack) mdBack.focus(); }
+  document.querySelectorAll('[data-md]').forEach(function(a){ a.addEventListener('click',function(e){ e.preventDefault(); md(a.dataset.md,true); }); });
+  document.querySelectorAll('.md').forEach(function(m){ var id=m.id.slice(3);
+    m.querySelector('.md-x').addEventListener('click',function(){ md(id,false); });
+    m.addEventListener('click',function(e){ if(e.target===m||e.target.classList.contains('md-cell')||e.target.classList.contains('md-wrap')) md(id,false); }); });
+  addEventListener('keydown',function(e){ if(e.key!=='Escape') return; var o=document.querySelector('.md.open'); if(o) md(o.id.slice(3),false);
+    else if(sm.classList.contains('on')) smap(false); else if(al.classList.contains('open')) alClose(); });
+
+  /* 상담 신청 — 칸 확인 후 NOVERIQ 문의폼(디자인 코드)으로 */
+  document.querySelectorAll('form.js-cs').forEach(function(f){ f.addEventListener('submit',function(e){ e.preventDefault();
+    var s=f.querySelector('select[name=cate]'); if(s&&!s.value){ alertMsg('상담 항목을 선택해 주세요.',function(){ var b=s.parentNode.querySelector('.ns-btn'); b&&b.focus(); }); return; }
+    var need=f.querySelectorAll('[data-need]'); for(var i=0;i<need.length;i++){ if(!need[i].value.trim()){ var el=need[i]; alertMsg(el.dataset.need,function(){ el.focus(); }); return; } }
+    var ag=f.querySelector('input[name=agree]'); if(ag&&!ag.checked){ alertMsg('개인정보 수집 · 이용에 동의해 주세요.',function(){ ag.focus(); }); return; }
+    alertMsg('상담 신청 화면으로 이동합니다.',function(){ location.href='/contact?design=LAWP-1001'; }); }); });
+
+  /* 맨 위로 — 400ms */
+  document.querySelector('.qk .top').addEventListener('click',function(){
+    if(W.lenis){ W.lenis.scrollTo(0,{duration:.4,easing:function(p){ return .5-Math.cos(p*Math.PI)/2; }}); return; }
+    var y0=scrollY, t0=performance.now(); (function st(now){ var p=Math.min(1,(now-t0)/400); scrollTo(0,y0*(1-(.5-Math.cos(p*Math.PI)/2))); if(p<1) requestAnimationFrame(st); })(t0); });
+
+  /* 화면에 들어오면 is-in — 원본 IntersectionObserver 판정값 그대로 */
+  W.watch=function(sel,th,repeat,skipMo){ if(skipMo&&innerWidth<768) return;
+    var io=new IntersectionObserver(function(es){ es.forEach(function(en){ if(en.isIntersecting) en.target.classList.add('is-in'); else if(repeat) en.target.classList.remove('is-in'); }); },{threshold:th});
+    document.querySelectorAll(sel).forEach(function(e){ io.observe(e); }); };
+  /* 영상은 보일 때만 재생(10%) */
+  var vio=new IntersectionObserver(function(es){ es.forEach(function(en){ var v=en.target; if(en.isIntersecting){ var p=v.play(); p&&p.catch&&p.catch(function(){}); } else v.pause(); }); },{threshold:.1});
+  document.querySelectorAll('video.auto').forEach(function(v){ vio.observe(v); });
+})();
+
+
+(function(){
+  var intro=document.querySelector('.intro'), W=window;
+  /* 인트로 — 첫 화면 글 상자 높이로 맞추고 2초 동안 스크롤을 잠근다 */
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  scrollTo(0,0); lockScroll(true);
+  intro.querySelector('.ib').style.height=document.querySelector('.hero .hb').offsetHeight+'px';
+  requestAnimationFrame(function(){ intro.classList.add('act'); });
+  var hv=document.querySelector('.hero video');
+  setTimeout(function(){ lockScroll(false); var p=hv.play(); p&&p.catch&&p.catch(function(){}); },2000);
+
+  /* 분야 — 탭(자유 넘김)과 본문(1s) 맞물림 */
+  var tabBox=document.querySelector('.biz .tabs');
+  var tabSw=new Swiper('.biz .tabs .swiper-container',{slidesPerView:'auto',spaceBetween:45,freeMode:true,freeModeMomentum:false,watchOverflow:true,
+    navigation:{nextEl:'.biz .tabs .t-nx',prevEl:'.biz .tabs .t-pv'},breakpoints:{0:{spaceBetween:20},768:{spaceBetween:25},1240:{spaceBetween:45}}});
+  function edge(){ if(tabSw.isBeginning){ tabBox.classList.remove('rf'); tabBox.classList.add('lf'); }
+    else if(tabSw.isEnd){ tabBox.classList.remove('lf'); tabBox.classList.add('rf'); } else tabBox.classList.remove('lf','rf'); }
+  tabSw.on('reachBeginning reachEnd fromEdge',edge);
+  var tabs=[].slice.call(document.querySelectorAll('.biz .tabs .tab'));
+  function setTab(i){ tabs.forEach(function(t,k){ t.classList.toggle('act',k===i); t.setAttribute('aria-pressed',k===i?'true':'false'); }); }
+  var biz=document.querySelector('.biz .sl');
+  var bizSw=new Swiper('.biz .sl .swiper-container',{speed:1000,spaceBetween:120,
+    navigation:{nextEl:'.biz .sl .sc .nx',prevEl:'.biz .sl .sc .pv'},pagination:{el:'.biz .sl .sc .bar',type:'progressbar'},
+    on:{init:function(){ setTab(this.realIndex); biz.querySelector('.sc .cur').textContent=this.realIndex+1; },
+      slideChange:function(){ var i=this.realIndex; biz.querySelector('.sc .cur').textContent=i+1; setTab(i);
+        var s=tabSw.slides[i], L=s.offsetLeft, R=L+s.offsetWidth, tr=-tabSw.getTranslate(), cw=tabSw.width, nt=null;
+        if(L<tr){ nt=-L; tabBox.classList.remove('rf'); tabBox.classList.add('lf'); }
+        else if(R>tr+cw){ nt=-(R-cw); tabBox.classList.remove('lf'); tabBox.classList.add('rf'); }
+        if(nt!==null){ tabSw.setTransition(300); tabSw.setTranslate(nt); } }}});
+  tabs.forEach(function(t,i){ t.addEventListener('click',function(e){ e.preventDefault(); bizSw.slideTo(i); tabSw.slideTo(i); }); });
+  /* View More 원 — 마우스를 따라다니다 사진 위에서만 보인다 */
+  var ptr=document.querySelector('.biz .ptr'), half=ptr.querySelector('.pb').offsetWidth/2||56;
+  document.addEventListener('pointermove',function(e){ half=ptr.querySelector('.pb').offsetWidth/2; ptr.style.transform='translate3d('+(e.clientX-half)+'px,'+(e.clientY-half)+'px,0)'; });
+  document.querySelectorAll('.biz .sl .cont .im').forEach(function(im){ im.addEventListener('mouseenter',function(){ ptr.classList.add('on'); });
+    im.addEventListener('mouseleave',function(){ ptr.classList.remove('on'); }); });
+  document.querySelectorAll('.biz .sl .cont').forEach(function(c){ c.addEventListener('click',function(e){ if(e.target.closest('a')) return; location.href=c.querySelector('.tt a').href; }); });
+
+  /* 변호사 — 폭별 장수 */
+  var law=document.querySelector('.law .sl');
+  function lawCount(sw){ var n=sw.slides.length, pv=sw.params.slidesPerView, tot=Math.max(1,Math.ceil(n-pv+1));
+    law.querySelector('.sc .tot').textContent=tot; law.querySelector('.sc .cur').textContent=sw.realIndex+1;
+    law.querySelector('.sc').classList.toggle('none',n<=pv); }
+  new Swiper('.law .sl .swiper-container',{speed:1000,navigation:{nextEl:'.law .sc .nx',prevEl:'.law .sc .pv'},pagination:{el:'.law .sc .bar',type:'progressbar'},
+    breakpoints:{0:{slidesPerView:1.7,spaceBetween:15},600:{slidesPerView:1.8,spaceBetween:20},768:{slidesPerView:2.2,spaceBetween:20},
+      1024:{slidesPerView:2.6,spaceBetween:20},1240:{slidesPerView:3.2,spaceBetween:20},1440:{slidesPerView:4,spaceBetween:20}},
+    on:{init:function(){ lawCount(this); },slideChange:function(){ lawCount(this); },resize:function(){ lawCount(this); },breakpoint:function(){ lawCount(this); }}});
+
+  /* 가치 카드 — 1024 이하에서만 슬라이더 */
+  var val=document.querySelector('.val .cont'), vsw=null;
+  function valCount(sw){ var n=sw.slides.length, pv=sw.params.slidesPerView, tot=Math.max(1,Math.ceil(n-pv+1));
+    val.querySelector('.sc .tot').textContent=tot; val.querySelector('.sc .cur').textContent=sw.realIndex+1; val.querySelector('.sc').classList.toggle('none',n<=pv); }
+  function valSw(){ var mo=innerWidth<=1024;
+    if(mo&&!vsw){ vsw=new Swiper('.val .cont .swiper-container',{speed:1000,navigation:{nextEl:'.val .sc .nx',prevEl:'.val .sc .pv'},pagination:{el:'.val .sc .bar',type:'progressbar'},
+        breakpoints:{0:{slidesPerView:1.1,spaceBetween:15},600:{slidesPerView:1.8,spaceBetween:20},768:{slidesPerView:2.2,spaceBetween:20}},
+        on:{init:function(){ valCount(this); },slideChange:function(){ valCount(this); },resize:function(){ valCount(this); },breakpoint:function(){ valCount(this); }}}); }
+    else if(!mo&&vsw){ vsw.destroy(true,true); vsw=null; val.querySelector('.sc').classList.remove('none'); } }
+  valSw(); addEventListener('resize',valSw);
+
+  watch('.mt',.5); watch('.law .sl',.1); watch('.sol .lb',.5); watch('.sol .imgs',.5); watch('.biz .tabc',.5); watch('.val',.5);
+})();
+</script>
+</body>
+</html>
