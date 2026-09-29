@@ -197,7 +197,7 @@ const study: CaseStudy = {
       name: "주문 방식",
       file: "order.html",
       img: "/cases/ondam/page-order.webp",
-      desc: "주문 채널을 고르는 좁은 화면입니다. 원본과 같이 가운데 625px만 씁니다.",
+      desc: "주문 채널을 고르는 좁은 화면입니다. 가운데 좁은 폭만 써서 고를 것만 보이게 했습니다.",
       items: ["로고 + 안내 한 줄", "채널 4개 (앱 · 전화 · 단체 · 배달 앱)", "매장마다 되는 방식이 다르다는 안내"],
     },
     {

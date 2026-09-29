@@ -154,7 +154,7 @@ const study: CaseStudy = {
       name: "로그인",
       file: "login.html",
       img: "/cases/harin/page-login.webp",
-      desc: "408px 좁은 폭입니다. 원본과 같이 간편 로그인을 아래에 붙였습니다.",
+      desc: "좁은 폭에 입력 칸을 모으고, 간편 로그인을 아래에 붙였습니다.",
       items: ["아이디 · 비밀번호 · 아이디 저장", "아이디 찾기 · 비밀번호 찾기 · 회원가입 링크", "네이버 · 카카오 간편 로그인"],
     },
     {
