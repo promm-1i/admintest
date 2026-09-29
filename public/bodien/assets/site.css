@@ -111,6 +111,8 @@ svg{display:block}
 .fullnav-img{overflow:hidden;position:relative;border-radius:10px;width:100%;height:38vh}
 .fullnav-img img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:all .6s}
 .fullnav-img img.is-on{opacity:1}
+/* 닫힌 메뉴(visibility:hidden)의 사진은 화면 안으로 쳐서 lazy 여도 받는다 → 열리기 전엔 display:none 으로 받지 않게 */
+.mega:not(.is-on) .mega-img img,.fullnav:not(.is-on) .fullnav-img img{display:none}
 .fullnav-info{padding:48px 0 70px}
 .fullnav-info .tit{margin-bottom:25px;font-size:17px;color:#000;font-weight:600}
 .fullnav-info .tit + div{display:flex;flex-wrap:wrap}
@@ -328,7 +330,7 @@ svg{display:block}
 .sv-bg img{width:100%;height:100%;object-fit:cover}
 .sv-tit{position:absolute;left:0;top:50%;z-index:100;display:flex;justify-content:space-between;align-items:center;
   width:100%;padding:0 3%;transform:translateY(-50%)}
-.sv-tit h2{font-family:var(--fe);font-size:9vw;font-weight:700;color:#fff;line-height:1em}
+.sv-tit h2{font-family:var(--ff);font-size:9vw;font-weight:700;color:#fff;line-height:1em}
 .sv-tit p{position:relative;font-size:2vw;font-weight:400;color:#fff;line-height:1.7em;text-align:right}
 .sv-tit p::after{display:block;content:"";width:100%;height:1px;background:rgba(255,255,255,.4);position:absolute;right:0;top:50%}
 .sv-tit p span{display:block}
@@ -353,7 +355,7 @@ svg{display:block}
 .ptl ul{display:flex}
 .ptl ul li{display:flex;align-items:center;padding-right:16px;margin-right:15px;font-size:17px;color:#666;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='10' viewBox='0 0 6 10'%3E%3Cpath d='M1 1l4 4-4 4' fill='none' stroke='%23999' stroke-width='1.3'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right center}
-.ptl ul li:first-child svg{margin-right:14px}
+.ptl ul li:first-child svg{margin-right:calc(14px + .25em)}   /* 원본 <img> Home — 여백 14 + 빈칸 한 칸(flex 라 빈칸이 지워져 여백에 더함) */
 .ptl ul li:last-child{padding:0;margin:0;background-image:none}
 .pt2{font-size:54px;color:#000;font-weight:700;line-height:1.4em}
 .pt3{font-size:29px;color:#000;font-weight:700;line-height:1.4em}
@@ -422,7 +424,7 @@ svg{display:block}
   .ptl h3{font-size:18px;margin-top:50px}
   .ptl ul{align-items:center}
   .ptl ul li{padding-right:12px;margin-right:9px;font-size:12px}
-  .ptl ul li:first-child svg{margin-right:5px}
+  .ptl ul li:first-child svg{margin-right:calc(5px + .25em)}
   .pt2{font-size:36px}
   .pt3{font-size:24px}
   .pin{padding:0 0 60px}
