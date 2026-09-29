@@ -435,7 +435,13 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
             {study.detailsTitle ?? "화면에 잘 안 보이지만 들어 있는 것"}
           </h2>
         </Reveal>
-        <div className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
+        {/* 3의 배수가 아닌 짝수(4개 등)는 2열 — 3열에 두면 남는 칸이 회색으로 비어 보인다 */}
+        <div
+          className={cn(
+            "mt-10 grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2",
+            (study.details.length % 3 === 0 || study.details.length % 2 === 1) && "lg:grid-cols-3",
+          )}
+        >
           {study.details.map((d, i) => (
             <div key={d.title} className="bg-card p-6 sm:p-7">
               <span className="font-mono text-xs font-bold" style={{ color: study.brandColor }}>
