@@ -182,10 +182,35 @@ document.documentElement.classList.remove('no-js');
 })();
 
 (function(){
-  [].forEach.call(document.querySelectorAll('.fq .question button'),function(b){
+  // 원본 qna 쪽 인라인 스크립트: 누른 질문의 답은 slideToggle, 나머지 답은 slideUp(하나만 열림), active 는 누른 것만 토글.
+  // jQuery 3.6 기본 400ms — 'swing' 은 jquery.easing 1.3 이 easeOutQuad 로 덮어 쓴다(원본에서 swing(.5)=.75 로 확인). 높이·위아래 패딩을 함께 편다.
+  var qs=[].slice.call(document.querySelectorAll('.fq .question')),
+      DUR=matchMedia('(prefers-reduced-motion: reduce)').matches?0:400;
+  function isOpen(a){ return a._open===undefined?!a.hidden:a._open; }
+  function slide(a,open){
+    cancelAnimationFrame(a._raf||0);
+    var from=a.hidden?0:a.getBoundingClientRect().height;
+    a.hidden=false; a.style.height=a.style.paddingTop=a.style.paddingBottom='';
+    var full=a.getBoundingClientRect().height, pad=parseFloat(getComputedStyle(a).paddingTop), to=open?full:0, t0=performance.now();
+    function set(h){ var k=full?h/full:0; a.style.height=h+'px'; a.style.paddingTop=a.style.paddingBottom=(pad*k)+'px'; }
+    a._open=open; a.style.overflow='hidden'; set(from);
+    function step(now){
+      var p=DUR?Math.min(1,(now-t0)/DUR):1, e=p*(2-p);
+      set(from+(to-from)*e);
+      if(p<1){ a._raf=requestAnimationFrame(step); return; }
+      a.style.height=a.style.paddingTop=a.style.paddingBottom=a.style.overflow='';
+      if(!open) a.hidden=true;
+    }
+    a._raf=requestAnimationFrame(step);
+  }
+  qs.forEach(function(q){
+    var b=q.querySelector('button'), a=q.nextElementSibling;
     b.addEventListener('click',function(){
-      var q=b.parentNode, a=q.nextElementSibling, open=b.getAttribute('aria-expanded')!=='true';
-      q.classList.toggle('active',open); b.setAttribute('aria-expanded',open?'true':'false'); a.hidden=!open;
+      var open=!isOpen(a);
+      qs.forEach(function(o){ if(o===q) return; var oa=o.nextElementSibling;
+        o.classList.remove('active'); o.querySelector('button').setAttribute('aria-expanded','false');
+        if(isOpen(oa)) slide(oa,false); });
+      q.classList.toggle('active',open); b.setAttribute('aria-expanded',open?'true':'false'); slide(a,open);
     });
   });
 })();
