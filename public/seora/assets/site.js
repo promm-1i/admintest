@@ -5,20 +5,15 @@
   var hd = $('#header'), dim = $('#hdDim'), body = document.body;
   var isPC = function () { return window.innerWidth > 767; };
 
-  /* 머리: 투명 히어로 위에서는 투명, 내려가면 흰색 고정 */
+  /* 머리: 12px 넘게 내리면 PC 는 유틸 줄을 숨기고 메뉴 줄만 검게(scroll), 모바일은 흰색(solid) — 원본 .scroll · .invert-mo */
   var transparent = hd && hd.classList.contains('transparent');
   function onScroll() {
     var t = window.scrollY || document.documentElement.scrollTop;
     if (!hd) return;
-    if (transparent) {
-      hd.classList.toggle('solid', t > 80);
-      hd.classList.toggle('fixed', t > 80);
-    } else {
-      hd.classList.add('solid', 'fixed');
-      hd.classList.add('fixed');
-    }
+    if (transparent) hd.classList.toggle('solid', t > 12);
+    hd.classList.toggle('scroll', t > 12);
   }
-  if (hd && !transparent) { hd.classList.add('solid', 'fixed'); }
+  if (hd && !transparent) { hd.classList.add('solid'); }
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
