@@ -164,9 +164,9 @@ const study: CaseStudy = {
     body: "첫 화면 제목과 사진은 그대로 두고, About Us 장면은 세로로 풀립니다. 브랜드 목록 카드와 사회공헌 카드는 한 줄씩 쌓이고, 연혁과 사회공헌 탭은 옆으로 밀어서 고릅니다.",
     shots: [
       { img: "/cases/corporate-k/m-index.webp", caption: "홈" },
-      { img: "/cases/corporate-k/m-brand.webp", caption: "브랜드 소개" },
+      { img: "/cases/corporate-k/m-history.webp", caption: "연혁 — 탭은 옆으로" },
       { img: "/cases/corporate-k/m-balance.webp", caption: "균형영양식" },
-      { img: "/cases/corporate-k/m-csr.webp", caption: "사회공헌 — 탭은 옆으로" },
+      { img: "/cases/corporate-k/m-csr.webp", caption: "사회공헌" },
     ],
   },
   faq: [
