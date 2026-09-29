@@ -6,8 +6,8 @@
 - 생성 이미지: 88장
 - 적용 위치: `public/neia/assets/`
 - 검증 결과: 파일명·규격·CSS 연결 88/88 통과, 중복 이미지 0, 저대비 임시 이미지 의심 0
-- 검증 리포트: `public/neia/assets/_work/image-validation-report.json`
-- 검수 시트: `public/neia/assets/_검수/contact_corporate_q_88.jpg`
+- 검증 리포트: `C:\web-project\ref-sites\ketep\_photo_qa\_work\image-validation-report.json`
+- 검수 시트: `C:\web-project\ref-sites\ketep\_photo_qa\_검수\contact_corporate_q_88.jpg`
 
 ## 납품 기준
 
