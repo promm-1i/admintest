@@ -105,12 +105,20 @@ html=open(f'{tdir}/index.html',encoding='utf-8').read()
 ids=[i for i in re.findall(r'<section[^>]*id="([^"]+)"', html) if i not in ('top',)][:4]
 with sync_playwright() as p:
     b=p.chromium.launch(); pg=b.new_page(viewport={'width':1280,'height':960})
-    pg.goto(f'file:///C:/web-project/mintcl-netlify-spa/{tdir}/index.html'); pg.wait_for_timeout(2500)
+    pg.goto(f'file:///C:/web-project/mintcl-netlify-spa/{tdir}/index.html?devskip=1'); pg.wait_for_timeout(2500)   # devskip: 긴 인트로가 있는 템플릿(artiel)은 첫 장면부터 — 없는 템플릿은 무시
     pg.evaluate("document.querySelectorAll('video.bg').forEach(v=>v.remove())")
     pg.evaluate("document.querySelectorAll('.main-popup,.intro-splash,.layer-popup').forEach(v=>v.remove())")  # 첫 방문 팝업은 썸네일에서 뺀다
     pg.evaluate("document.querySelectorAll('.rv').forEach(e=>e.classList.add('on'))"); pg.wait_for_timeout(1200)
     pg.screenshot(path=f'public/thumbs/{slug}.jpg', type='jpeg', quality=74)
-    from PIL import Image; im=Image.open(f'public/thumbs/{slug}.jpg'); os.makedirs('public/thumbs/sm', exist_ok=True); im.resize((640, round(im.height*640/im.width)), Image.LANCZOS).save(f'public/thumbs/sm/{slug}.jpg', 'JPEG', quality=72, optimize=True, progressive=True)  # 히어로 캐러셀용 축소본
+    from PIL import Image
+    VP={'real-estate-f':(1440,1080)}   # 1280×960 이 흐름 모드라 원본대로 제목이 머리글에 겹치는 템플릿 — 대표 사진만 이 크기(4:3)로 찍어 줄인다
+    if slug in VP:
+        pg2=b.new_page(viewport={'width':VP[slug][0],'height':VP[slug][1]})
+        pg2.goto(f'file:///C:/web-project/mintcl-netlify-spa/{tdir}/index.html?devskip=1'); pg2.wait_for_timeout(2500)
+        pg2.evaluate("document.querySelectorAll('.main-popup,.intro-splash,.layer-popup').forEach(v=>v.remove())"); pg2.wait_for_timeout(1200)
+        pg2.screenshot(path=f"{os.environ['OUT']}/{slug}-thumb.png"); pg2.close()
+        Image.open(f"{os.environ['OUT']}/{slug}-thumb.png").convert('RGB').resize((1280,960), Image.LANCZOS).save(f'public/thumbs/{slug}.jpg', 'JPEG', quality=74)
+    im=Image.open(f'public/thumbs/{slug}.jpg'); os.makedirs('public/thumbs/sm', exist_ok=True); im.resize((640, round(im.height*640/im.width)), Image.LANCZOS).save(f'public/thumbs/sm/{slug}.jpg', 'JPEG', quality=72, optimize=True, progressive=True)  # 히어로 캐러셀용 축소본
     os.makedirs('public/thumbs/sections', exist_ok=True)
     for i,sid in enumerate(ids,1):
         el=pg.query_selector('#'+sid); el.scroll_into_view_if_needed(); pg.wait_for_timeout(500)

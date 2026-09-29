@@ -3,11 +3,11 @@
       dots=d.querySelector('.hd-dots'), sub=d.body.classList.contains('sub');
   w.AR=w.AR||{};
 
-  /* 머리 — 원본은 서브 쪽에서 1초 페이드로 나타난다 */
+  
   if(sub){ hd.classList.add('white'); dots.classList.add('white');
     setTimeout(function(){bar.classList.add('show');dots.classList.add('show');},30); }
 
-  /* 메뉴 호버 → 흰 판 (원본 gnb mouseenter/leave · mouseover) */
+  
   var gnb=d.querySelector('.gnb');
   if(gnb){
     var open=function(){hd.classList.add('open','over-menu');dots.classList.add('menu-over');},
@@ -17,7 +17,7 @@
     gnb.addEventListener('focusout',function(e){if(!gnb.contains(e.relatedTarget))close();});
   }
 
-  /* 서브: 비주얼 높이-300 을 넘기면 흰 막대 (1400 이하는 21) */
+  
   var kv=d.querySelector('.kv');
   var onScroll=function(){
     var y=w.pageYOffset, lim=(w.innerWidth>1400&&kv)?kv.offsetHeight-300:21, on=y>lim;
@@ -25,7 +25,7 @@
   };
   if(sub){w.addEventListener('scroll',onScroll,{passive:true}); onScroll();}
 
-  /* 사이트맵 */
+  
   var map=d.querySelector('.smap'), mapBg=d.querySelector('.smap-bg');
   AR.closeMap=function(){map.classList.remove('active');mapBg.classList.remove('active');
     dots.classList.remove('active');hd.classList.remove('over-map');dots.setAttribute('aria-expanded','false');
@@ -43,7 +43,7 @@
       if(!was)s.classList.add('open'); }});
   });
 
-  /* 브레드크럼 드롭다운 (호버 + 누름) */
+  
   d.querySelectorAll('.crumb-dd>button').forEach(function(b){
     b.addEventListener('click',function(){var li=b.parentNode, o=li.classList.toggle('open');
       b.setAttribute('aria-expanded',o?'true':'false');});
@@ -51,7 +51,7 @@
   d.addEventListener('click',function(e){d.querySelectorAll('.crumb-dd.open').forEach(function(li){
     if(!li.contains(e.target)){li.classList.remove('open');li.querySelector('button').setAttribute('aria-expanded','false');}});});
 
-  /* 등장 — 요소 높이의 5% 가 화면 안이면 active, 아니면 inactive (되돌림 있음) */
+  
   var rv=[].slice.call(d.querySelectorAll('[data-active]'));
   AR.reveal=function(){
     var vh=w.innerHeight;
@@ -64,11 +64,11 @@
   w.addEventListener('scroll',AR.reveal,{passive:true}); w.addEventListener('resize',AR.reveal);
   AR.reveal();
 
-  /* 맨 위로 */
+  
   d.querySelectorAll('.ft-top').forEach(function(b){b.addEventListener('click',function(){
     if(AR.fpTop){AR.fpTop();return;} w.scrollTo({top:0,behavior:'smooth'});});});
 
-  /* 탭 — 원본 tabcontent.js 와 같은 동작(누른 탭의 판만 보인다) */
+  
   d.querySelectorAll('[data-tabs]').forEach(function(box){
     var tabs=[].slice.call(box.querySelectorAll('[data-tab]'));
     tabs.forEach(function(t){t.addEventListener('click',function(e){e.preventDefault();
@@ -77,13 +77,13 @@
         var p=d.getElementById(x.getAttribute('data-tab')); if(p)p.classList.toggle('on',on);});
       if(w.AR.onTab)AR.onTab(id); AR.reveal();});});
   });
-  /* ?tab=판id 로 들어오면 그 탭을 연다(원본 system.html?tab=view2 와 같은 동작) */
+  
   w.addEventListener('load',function(){
     var id=new URLSearchParams(w.location.search).get('tab');
     var t=id&&d.querySelector('[data-tab="'+id.replace(/[^\w-]/g,'')+'"]'); if(t)t.click();
   });
 
-  /* 페이드 슬라이더 (원본 Swiper effect:fade · loop · thumbs) */
+  
   AR.fader=function(root){
     var slides=[].slice.call(root.querySelectorAll('[data-slide]')), thumbs=[].slice.call(root.querySelectorAll('[data-thumb]')),
         ms=+root.getAttribute('data-auto')||0, i=0, tm=null, n=slides.length;
@@ -100,7 +100,7 @@
   };
   d.querySelectorAll('[data-fader]').forEach(AR.fader);
 
-  /* 대화상자 */
+  
   AR.openDlg=function(id){var g=d.getElementById(id); if(!g)return; g.classList.add('open');
     var x=g.querySelector('.dlg-x'); if(x)x.focus();};
   d.querySelectorAll('[data-dlg]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();
@@ -109,14 +109,14 @@
     if(e.target===g||e.target.closest('.dlg-x'))g.classList.remove('open');});});
   d.addEventListener('keydown',function(e){if(e.key==='Escape')d.querySelectorAll('.dlg.open').forEach(function(g){g.classList.remove('open');});});
 
-  /* 알림 */
+  
   AR.toast=function(msg){var t=d.querySelector('.toast'); if(!t){t=d.createElement('div');t.className='toast';
     t.setAttribute('role','status');d.body.appendChild(t);} t.textContent=msg; t.classList.add('show');
     clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('show');},2200);};
   d.querySelectorAll('[data-toast]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();
     AR.toast(a.getAttribute('data-toast'));});});
 
-  /* 배경음악 — 원본과 같이 막대 5개가 300ms 마다 무작위 높이로 춤춘다 */
+  
   var au=d.getElementById('bgm'), bb=d.querySelector('.hd-bgm button'), eq=[].slice.call(d.querySelectorAll('.hd-eq i')), ti=null;
   AR.bgm=function(on){ if(!au)return;
     if(on&&!au.getAttribute('src')){ AR.toast('배경음악 파일(assets/bgm.mp3)을 넣으면 이 단추로 재생됩니다.'); return; }
