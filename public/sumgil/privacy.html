@@ -17,7 +17,6 @@
 <style>
 
 /* ══ 서브 공통 ══ */
-/* 섹션 높이는 레퍼런스 실측값을 바닥값으로 잡고 내용을 세로 가운데에 둔다 */
 .sub-main{padding-top:0}
 .sec-h{display:flex;flex-direction:column;justify-content:center}
 .kv{min-height:840px}
@@ -30,7 +29,6 @@
 .vs{min-height:804px}
 .onestep{min-height:1637px}
 .psteps{min-height:1456px}
-/* .sba 는 내용이 높이를 정한다 — 4쌍이면 875, 2쌍이면 581 로 원본과 같아진다 */
 .media{min-height:662px}
 .ytb{min-height:526px}
 .faq{min-height:686px}
@@ -52,16 +50,12 @@
 .kv__d{flex-shrink:0;text-align:right;font-size:var(--p5);line-height:1.8;color:rgba(255,255,255,.85)}
 .kv__media{position:relative;margin:3.4rem auto 0;width:var(--in2);max-width:100%;padding:0 var(--inPd)}
 .kv__media img{width:100%;aspect-ratio:1400/520;object-fit:cover;border-radius:16px}
-/* 레퍼런스는 서브 KV 안에 폼이 없다 — 하단 고정 바 하나뿐 */
 .kv__form{position:fixed;z-index:10;left:50%;bottom:24px;transform:translateX(-50%);
   margin:0;width:var(--in2);max-width:100%;padding:0 var(--inPd)}
 .kv__pad{height:60px}
 
 /* 센터 머리 + 워터마크 띠 */
-/* 실측: 라벨 22/700 · 본문 블록 섹션+160 · 말풍선 덱 +393 */
 .chead{position:relative;justify-content:flex-start;padding:160px 0 0;text-align:center;overflow:hidden;background:#fff}
-/* 레퍼런스 .gradient_cir — 893x1181 타원 두 개, 섹션이 보이면 1s ease-in-out 로 떠오른다.
-   위치·크기는 그대로, 색만 우리 CI 로 */
 .chead__blob{position:absolute;width:62%;height:135%;border-radius:50%;opacity:0;pointer-events:none;
   transition:opacity 1s ease-in-out,transform 1s ease-in-out}
 .chead__blob--a{left:68%;top:-54%;
@@ -72,7 +66,6 @@
 .chead__blob.rv.on{opacity:1;transform:none}
 .chead__k{font-size:var(--h8);font-weight:700;color:var(--point01)}
 .chead__h{margin-top:1.8rem;font-size:var(--h3);font-weight:700;line-height:1.5;letter-spacing:-.03em}
-/* 레퍼런스 워터마크는 흐름 밖 — 섹션+723 에 절대배치, 높이를 먹지 않는다 */
 .chead__mark{position:absolute;left:0;top:723px;width:100%;margin:0;font-family:var(--numFont);font-size:17rem;font-weight:700;
   line-height:1;white-space:nowrap;color:var(--pointBg);user-select:none}
 .chead__mark::before{content:attr(data-t)}
@@ -106,8 +99,6 @@
 .graph__src{margin-top:1.2rem;font-size:var(--p8);color:var(--gray60)}
 
 /* 칩 3~4칸 */
-/* 증상 말풍선 덱 — 레퍼런스 .sub_text_motion04 .card_slide 실측값 그대로.
-   카드 5장이 11s ease-in-out 무한 루프를 -2.2s 씩 어긋나게 돌며 앞으로 나온다. */
 .bub{--exit:-2.5rem;--hidden:15rem;--back:10rem;--gap:5rem;--enter:6.2rem;
   position:relative;margin:12rem auto 18rem;width:min(25.8em,100%);height:7.5em;
   font-size:var(--h5);list-style:none}
@@ -146,7 +137,6 @@
   border-bottom:7px solid transparent;margin-left:3px}
 .vblock__h{margin-top:2rem;font-size:var(--h4);font-weight:700}
 .vblock__d{margin-top:12px;font-size:var(--p3);line-height:1.7;color:var(--gray60)}
-/* 실측: 영상칸 800x450 at (320,373) */
 .vblock__f{margin:41px auto 0;width:800px;max-width:100%}
 .vblock__f img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:16px;background:var(--gray90)}
 
@@ -189,8 +179,6 @@
   background:var(--gray90);border-radius:50%;transform:translate(-50%,-50%)}
 
 /* ONE-STEP */
-/* 실측(정착): 대형글자 섹션+240 · 제목 +520(30.4/700) · 설명 +578(16/400)
-   · 스탯 줄 +673 h141 · 아이콘 64x64 · 항목 폭은 내용폭(고정 아님) */
 .onestep{justify-content:flex-start;padding:240px 0 10rem;color:#fff;text-align:center;
   background:linear-gradient(140deg,#0B5670 0%,#0E6E8F 42%,#1FA39B 100%)}
 .onestep__big{font-family:var(--numFont);font-size:20rem;font-weight:700;letter-spacing:.06em;line-height:1}
@@ -218,9 +206,6 @@
 .pstep__d{margin-top:1rem;font-size:var(--p5);line-height:1.8;color:var(--gray60)}
 
 /* 전후 */
-/* 실측: 제목 +160(30.4/700) · 설명 +218(16/400) · 목록 +313 1200x563
-   항목 588x269 radius8 배경 #F6F6F6 · 안쪽 568x245(패딩 10/14) · 사진 284x245
-   라벨 100x26 radius5 13/600, 왼쪽은 회색·오른쪽은 포인트색 */
 .sba{justify-content:flex-start;padding:160px 0 0;background:#fff}
 .sba__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3rem;margin-top:var(--contMt3)}
 .sba__pair{padding:10px;background:var(--grayBg1);border-radius:1rem}
@@ -253,7 +238,6 @@
 .faq{justify-content:flex-start;padding:160px 0 0;background:var(--grayBg2)}
 .faq .stit__h{font-size:var(--h4);margin-top:0}
 .faq__list{margin-top:24px}
-/* 실측: 항목 1200x92 · 라운드 없음 · 질문 18/700 좌패딩 32 */
 .faq__i{background:#fff}
 .faq__i+.faq__i{margin-top:0}
 .faq__q{display:flex;align-items:center;justify-content:space-between;gap:2rem;width:100%;
@@ -359,7 +343,6 @@
 .g3{grid-template-columns:repeat(3,1fr)}
 .g4{grid-template-columns:repeat(4,1fr)}
 .tile{background:#fff;border-radius:16px;overflow:hidden}
-/* 레퍼런스 영상 목록 썸네일은 16:9 */
 .tile img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--grayBg2)}
 .tile__b{padding:2.4rem 2.6rem 2.8rem}
 .tile__t{font-size:var(--p2);font-weight:700;line-height:1.5}
@@ -421,7 +404,6 @@
 .viewer__t{font-size:var(--h7);font-weight:700}
 .viewer__m{margin-top:1.2rem;font-size:var(--p6);color:var(--gray60)}
 .viewer__b{padding:4rem 1rem;font-size:var(--p3);line-height:2;color:var(--gray70)}
-/* 레퍼런스 상세 본문 이미지 칸: 공지 900x900(정사각 포스터) · 영상 900x506(16:9) */
 .viewer__b img{display:block;margin:2.4rem auto;width:900px;max-width:100%;border-radius:12px}
 .viewer__b img.sq{aspect-ratio:1/1;object-fit:cover}
 .viewer__b img.wide{aspect-ratio:16/9;object-fit:cover}
@@ -595,11 +577,6 @@
 </div>
 <script>
 
-/* 등장 모션 — 레퍼런스 landing-common.js 의 landingObserverAutoScan 과 같은 방식.
-   관찰 대상은 개별 요소가 아니라 [data-landing-observe] 가 붙어 있던 자리, 즉 섹션 컨테이너다.
-   섹션이 임계값만큼 보이면 그 안의 요소를 한꺼번에 켜고, CSS 지연(.d2/.d4/.d6)이 계단을 만든다.
-   임계값은 레퍼런스 실측: 기본 0.5 · 긴 목록/스텝 0.2 · 배너 0.3, ≤768 은 data-observe-mo 0.1.
-   한 번 켜면 되돌리지 않는다. */
 (function(){
   var els=[].slice.call(document.querySelectorAll('.rv')); if(!els.length) return;
   if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('on')}); return; }

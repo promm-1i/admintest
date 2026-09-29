@@ -1,5 +1,4 @@
 // 한벡스금속 공용 — 부드러운 스크롤 · 머리 · 전체 메뉴 · 언어 · 등장 · 제목 글자 · 굴림 버튼 · TOP
-// 레퍼런스 설정값: Lenis duration 1.1 (터치 기기 제외) · 머리 숨김 문턱 6px / 맨 위 10px · AOS offset 120 · mirror
 (() => {
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;

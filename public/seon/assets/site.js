@@ -1,4 +1,3 @@
-/* 세온기계 corporate-j — 공통 동작 (원본 common.js 의 규칙: Lenis 1.2/1, 머리글 숨김·표시, 전체 메뉴, 꼬리글 장면, 맨 위로 300, 등장 85%) */
 (function(){
   gsap.registerPlugin(ScrollTrigger);
   var isMain = document.getElementById('wrap').classList.contains('is-main');

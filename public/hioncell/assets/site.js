@@ -1,7 +1,3 @@
-/* 하이온셀 공통 동작 — 레퍼런스 com-ui.js · pub-ui.js 의 동작을 값만 따라 새로 씀
-   머리: 메뉴 영역에 마우스 → 하위 목록 전부 높이 0→실제 .3s, 머리 높이 = 가장 긴 목록 + 124
-   섹션 active: 스크롤 ≥ 섹션 위 − (PC 850 · 모바일 552) 이면 붙고 떼지 않음
-   위로 버튼: 스크롤 > 화면 30% 에서 .5s 로 나타남, 꼬리 근처면 아래 520(모바일 390) */
 (() => {
   const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const HX = window.HX = {};

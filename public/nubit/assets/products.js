@@ -1,5 +1,3 @@
-/* 제품 데이터 + 목록 그리기 — 원본 m31_list.php?cate=&cate2= 와 같은 마크업을 쿼리로 만든다.
-   사진은 ./assets/p/prd-<cate>-<cate2>.jpg (분류 소개) · ./assets/p/prd-<idx>.jpg (제품 썸네일) 자리 이미지 */
 var PRODUCTS = {
   '1': { name: 'Lens Assembly', subs: [
     { code: '001', name: 'Objective Lens', img: [1241, 700],
@@ -82,7 +80,6 @@ function renderProductList(root) {
     }).join('') + '</ul><div class="paging">' + paging(r) + '</div></div>';
   }
   root.innerHTML = html;
-  // 원본처럼 선택된 탭이 가운데 오도록 탭 줄을 가로로 밀어 둔다 (넘칠 때만 의미가 있다)
   window.addEventListener('load', function () {
     var ul = root.querySelector('.tabs ul'), li = ul && ul.querySelector('li.on');
     if (!li) return;
@@ -92,7 +89,6 @@ function renderProductList(root) {
 }
 
 
-/* 제품 상세 — 원본 m31_view.php?cate=&cate2=&idx= . body 는 원본의 웹에디터 칸(자유 서식) 자리 */
 var PRODUCT_VIEWS = {
   226: { thumb: [291, 260], timg: 'prdv-226-t', p: '무편심 조립 기술',
     body: '<p>&nbsp;</p><p>무편심 조립 기술은 렌즈마다 광학 중심축(Optical Axis)을 경통의 기계 중심축(Mechanical Axis)과 한 축 위에 맞춰 정렬하고 고정하는 기술입니다.</p><p>렌즈 중심 편차(Decenter)와 기울어짐(Tilt)을 거의 없애는 것이 목표입니다. 미세 패턴을 검사하고 측정하는 광학계는 수 µm 만 어긋나도 MTF 가 떨어지고 왜곡과 비대칭 수차가 커지기 때문에, 편심을 재 가며 조립하는 과정이 꼭 필요합니다.<br><img src="./assets/p/prdv-226-1.jpg" alt="" width="1100" height="565"></p>' },
@@ -125,7 +121,6 @@ function renderProductView(root) {
 }
 
 
-/* 통합검색 — 원본 _research.php?keyword= : 제품명·분류명으로 찾아 목록과 같은 카드로 보여 준다 */
 function renderProductSearch(root) {
   var kw = (new URLSearchParams(location.search).get('keyword') || '').trim();
   var input = document.querySelector('.prdSearch input[name=keyword]');

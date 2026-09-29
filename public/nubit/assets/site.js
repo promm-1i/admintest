@@ -1,4 +1,3 @@
-/* 누빛광학 공통 동작 — 레퍼런스 common.js 와 같은 동작 (jQuery) */
 $(function () {
   var $hd = $('#hd');
   // PC 메뉴: 대메뉴에 올리면 머리글이 흰 판으로, 해당 하위 메뉴 slideDown
@@ -32,7 +31,6 @@ $(function () {
     $li.toggleClass('act').siblings('li').removeClass('act').find('ul').slideUp();
   });
 
-  // 화면에 들어오면 seen (레퍼런스 .ani → in-view, 한 번 붙으면 떼지 않음)
   var $rv = $('.rv');
   function check() {
     var top = $(window).scrollTop(), bottom = top + $(window).height();
@@ -52,6 +50,5 @@ $(function () {
   });
   $('.lpop.terms .x').on('click', function () { $('#dim').hide(); $('.lpop.terms').hide(); });
 
-  // 부드러운 휠 (레퍼런스 SmoothScroll 설정)
   if (window.SmoothScroll) SmoothScroll({ animationTime: 1000, stepSize: 60, accelerationDelta: 50, accelerationMax: 2, keyboardSupport: true, arrowScroll: 40, pulseAlgorithm: true, pulseScale: 4, pulseNormalize: 1, touchpadSupport: false, fixedBackground: true });
 });
