@@ -40,7 +40,7 @@ function BrowserFrame({ src, alt, url }: { src: string; alt: string; url: string
           {url}
         </span>
       </div>
-      <img src={src} srcSet={shotSrcSet(src, 1440)} sizes="(min-width: 1100px) 1040px, 92vw" alt={alt} className="block w-full" />
+      <img src={src} srcSet={shotSrcSet(src, 1440)} sizes="(min-width: 1360px) 1280px, 94vw" alt={alt} className="block w-full" />
     </div>
   );
 }
@@ -199,8 +199,8 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
 
   return (
     <div className="pb-20">
-      {/* ① 머리 — 브랜드 이름을 크게 */}
-      <section className="mx-auto max-w-[1280px] px-4 pt-10 sm:px-6 lg:px-8 lg:pt-14">
+      {/* ① 머리 — 제목은 낮게, 요약·버튼은 오른쪽 칸으로 모아 목업이 첫 화면에 크게 들어오게 */}
+      <section className="mx-auto max-w-[1280px] px-4 pt-6 sm:px-6 lg:px-8 lg:pt-8">
         <Link
           to="/web-solutions"
           className="inline-flex items-center text-xs font-semibold text-primary hover:underline"
@@ -208,44 +208,52 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
           <ArrowLeft className="mr-1 h-3.5 w-3.5" />
           프리미엄 디자인 목록으로
         </Link>
-        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
+        <div className="mt-5 grid gap-5 lg:mt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:items-end lg:gap-12">
           <div>
             <p className="font-mono text-xs font-semibold tracking-widest text-muted-foreground">
               PREMIUM DESIGN · {code}
             </p>
-            <h1 className="mt-3 text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+            <h1 className="mt-2 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               {study.brand}
             </h1>
-            <p className="mt-4 text-xl font-semibold text-foreground sm:text-2xl">{study.headline}</p>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground break-keep">
+            <p className="mt-3 text-lg font-semibold text-foreground sm:text-xl lg:text-2xl">{study.headline}</p>
+          </div>
+          <div>
+            <p className="hidden text-[15px] leading-relaxed text-muted-foreground break-keep sm:block">
               {study.summary}
             </p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Button asChild size="lg" variant="outline" className="gap-1.5 font-semibold">
-              <a href={liveUrl} target="_blank" rel="noopener noreferrer">
-                실제 화면 보기
-                <ArrowUpRight className="h-4 w-4" />
-              </a>
-            </Button>
-            <Button size="lg" className="gap-2 font-bold" onClick={() => setConsultOpen(true)}>
-              <Send className="h-4 w-4" />이 디자인으로 상담
-            </Button>
+            <div className="flex gap-2.5 sm:mt-5">
+              <Button asChild size="lg" variant="outline" className="flex-1 gap-1.5 px-4 font-semibold sm:flex-none sm:px-8">
+                <a href={liveUrl} target="_blank" rel="noopener noreferrer">
+                  실제 화면 보기
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </Button>
+              <Button size="lg" className="flex-1 gap-2 px-4 font-bold sm:flex-none sm:px-8" onClick={() => setConsultOpen(true)}>
+                <Send className="h-4 w-4" />이 디자인으로 상담
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ② 대표색 띠 위 PC 화면 — 띠는 목업 가운데까지만 깔린다 */}
+      {/* ② 대표색 띠 위 PC 화면 — 본문 폭(1280) 가득, 띠는 목업 가운데까지만 깔린다 */}
       <section
-        className="mt-12 px-4 sm:px-6 lg:px-8"
+        className="mt-8 px-5 sm:px-8 lg:mt-10 lg:px-0"
         style={{
           background: `linear-gradient(to bottom, transparent 0 14%, ${study.brandColor} 14% 72%, transparent 72%)`,
         }}
       >
-        <RevealScale className="mx-auto max-w-[1040px] py-6">
+        {/* 리뉴얼 CSS 가 max-w-[1280px] 상자를 본문 글 폭(1440 에서 좌우 60)에 맞춘다 — 목업도 같은 선에 서게 둔다.
+            1023 이하는 그 상자에 안쪽 여백이 붙어 목업이 줄어서 0 으로 하고, 바깥 여백(20·32)은 섹션이 맡는다 */}
+        <RevealScale className="mx-auto max-w-[1280px] py-6 max-lg:px-0!">
           <BrowserFrame src={study.mainShot} alt={`${study.brand} 메인 화면`} url={`noveriq.co.kr${liveUrl}`} />
         </RevealScale>
       </section>
+      {/* 휴대폰은 요약을 목업 아래로 — 첫 화면에 목업이 먼저 들어오게 */}
+      <p className="mx-auto mt-4 max-w-[1280px] px-4 text-[15px] leading-relaxed text-muted-foreground break-keep sm:hidden">
+        {study.summary}
+      </p>
 
       {/* ③ Overview + 번호 3칸 */}
       <section className="mx-auto mt-16 grid max-w-[1280px] gap-12 px-4 sm:px-6 lg:mt-24 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:px-8">
