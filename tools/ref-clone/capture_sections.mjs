@@ -9,14 +9,17 @@
  *
  *   node tools/ref-clone/capture_sections.mjs              프리미엄 24종
  *   node tools/ref-clone/capture_sections.mjs corporate-k   한 종만
+ *
+ * 시험할 땐 CAPTURE_OUT_DIR(이미지 폴더) · CAPTURE_DATA(templateSections.ts 사본)를 임시 경로로 준다.
+ * sections_to_webp.py 도 같은 두 값을 읽는다.
  */
 import { chromium } from "playwright";
 import fs from "node:fs/promises";
 import path from "node:path";
 
 const ROOT = "C:/web-project/mintcl-netlify-spa";
-const OUT_DIR = path.join(ROOT, "public/thumbs/sections");
-const DATA = path.join(ROOT, "src/lib/templateSections.ts");
+const OUT_DIR = process.env.CAPTURE_OUT_DIR || path.join(ROOT, "public/thumbs/sections");
+const DATA = process.env.CAPTURE_DATA || path.join(ROOT, "src/lib/templateSections.ts");
 const BASE = process.env.CAPTURE_BASE || "http://127.0.0.1:4179"; // 개발 서버. file:// 은 fetch 하는 템플릿에서 빈 화면이 된다
 const VIEWPORT = { width: 1280, height: 960 };
 const MAX_SECTION_HEIGHT = Math.round(VIEWPORT.height * 2.5); // 이보다 길면 한 장에 담아도 안 읽힌다
@@ -28,6 +31,17 @@ const PREMIUM = ["hospital-a", "dental-f", "clinic-f", "artist-a", "rentcar-g", 
 
 const targets = process.argv.slice(2).length ? process.argv.slice(2) : PREMIUM;
 
+// 프리미엄 디자인은 2026-09-24 부터 public/<브랜드>/ 에 있다(corporate-k → nuriwell). verify_template.sh 와 같은 규칙으로
+// samples.ts 의 "<slug>-template" 항목 liveUrl 에서 브랜드 폴더를 찾고, 없으면 public/templates/<slug>/ 다.
+const samples = await fs.readFile(path.join(ROOT, "src/lib/samples.ts"), "utf8");
+const pagePath = (slug) => {
+  const brand = samples.match(new RegExp(`slug: "${slug}-template",[^{}]*?liveUrl: "/([a-z0-9-]+)/"`))?.[1];
+  return brand ? `/${brand}/index.html` : `/templates/${slug}/index.html`;
+};
+// 없는 경로도 개발 서버는 200 으로 SPA 셸(NOVERIQ 홈)을 준다. 그대로 찍으면 홈 화면이 그 템플릿 캡처로 들어간다.
+// 셸 제목은 React 가 뜨자마자 바꾸므로 화면 제목이 아니라 받은 HTML 로 본다.
+const SHELL_TITLE = (await fs.readFile(path.join(ROOT, "index.html"), "utf8")).match(/<title>.*?<\/title>/)[0];
+
 await fs.mkdir(OUT_DIR, { recursive: true });
 const browser = await chromium.launch({ channel: "chrome", headless: true });
 const captured = {};
@@ -35,7 +49,12 @@ const captured = {};
 for (const slug of targets) {
   const page = await browser.newPage({ viewport: VIEWPORT });
   try {
-    await page.goto(`${BASE}/templates/${slug}/index.html`, { waitUntil: "networkidle", timeout: 60000 });
+    const url = pagePath(slug);
+    const response = await page.goto(`${BASE}${url}`, { waitUntil: "networkidle", timeout: 60000 });
+    if ((await response.text()).includes(SHELL_TITLE)) {
+      console.log(`${slug.padEnd(14)} 건너뜀 ${url} 이 SPA 셸로 열림 — 기존 목록 유지`);
+      continue;
+    }
     await page.waitForTimeout(2200);
     await page.evaluate(() => {
       for (const v of document.querySelectorAll("video")) v.remove();
@@ -101,10 +120,6 @@ for (const slug of targets) {
       return kept;
     }, [MIN_SECTION_HEIGHT, MAX_SECTION_HEIGHT]);
 
-    // 지난 회차에 더 많이 찍었을 수 있으니 이 슬러그의 옛 파일은 먼저 지운다
-    for (const old of await fs.readdir(OUT_DIR)) {
-      if (old.startsWith(`${slug}-`) && /^\d+\.jpg$/.test(old.slice(slug.length + 1))) await fs.rm(path.join(OUT_DIR, old), { force: true });
-    }
     await page.evaluate(() => scrollTo(0, 0));
     await page.waitForTimeout(400);
     const shots = [];
@@ -118,21 +133,35 @@ for (const slug of targets) {
         shots.push({ img: `/thumbs/sections/${file}`, title: block.title || `화면 ${i + 1}`, h: clipH });
       } catch { /* 찍히지 않는 구간은 건너뛴다 */ }
     }
+    if (shots.length === 0) {
+      console.log(`${slug.padEnd(14)} 건너뜀 찍힌 구간 0장(찾은 구간 ${blocks.length}개) — 기존 목록 유지`);
+      continue;
+    }
     captured[slug] = shots;
     console.log(`${slug.padEnd(14)} ${String(shots.length).padStart(2)}장  ${shots.map((s) => s.h).join("/")}`);
   } catch (error) {
     console.log(`${slug.padEnd(14)} 실패 ${String(error).slice(0, 70)}`);
+  } finally {
+    await page.close();
   }
-  await page.close();
 }
 await browser.close();
 
 // 이번에 다시 찍지 않은 슬러그는 기존 내용을 그대로 옮긴다
 const previous = (await fs.readFile(DATA, "utf8")).split("\r\n").join("\n");
 const keep = {};
+// 다시 찍은 슬러그는 지난 회차에 더 많이 찍었을 수 있다. 옛 목록에만 있고 이번에 다시 만들지 않은 파일을 모은다.
+// 옛 목록이 가리키던 파일만 지우므로 verify_template.sh 가 같은 폴더에 남기는 <slug>-N.jpg 는 건드리지 않는다.
+const stale = [];
 const entry = new RegExp('\\n {2}"?([a-z0-9-]+)"?: \\[\\n([\\s\\S]*?)\\n {2}\\],', "g");
 for (const match of previous.matchAll(entry)) {
-  if (!(match[1] in captured)) keep[match[1]] = match[2];
+  if (!(match[1] in captured)) { keep[match[1]] = match[2]; continue; }
+  const fresh = new Set(captured[match[1]].map((shot) => shot.img.replace(/\.jpg$/, "")));
+  for (const [, stem, ext] of match[2].matchAll(/img: "(\/thumbs\/sections\/[^"]+)\.(jpg|webp)"/g)) {
+    if (fresh.has(stem)) continue; // 같은 이름은 새 JPEG 가 있고 sections_to_webp.py 가 WebP 를 덮어쓴다
+    stale.push(`${stem}.${ext}`);
+    if (ext === "webp") stale.push(`${stem}-640.webp`); // sections_to_webp.py 가 만든 축소본
+  }
 }
 if (Object.keys(keep).length === 0 && previous.includes(": [")) {
   throw new Error("기존 templateSections.ts 를 읽지 못했습니다. 덮어쓰지 않고 멈춥니다.");
@@ -158,5 +187,8 @@ for (const [slug, body] of Object.entries(keep)) {
 }
 lines.push("};", "");
 await fs.writeFile(DATA, lines.join("\n"), "utf8");
+// 새 목록을 쓴 뒤에 지운다. 도중에 멈춰도 목록이 없는 파일을 가리키지 않게.
+for (const file of stale) await fs.rm(path.join(OUT_DIR, path.basename(file)), { force: true });
 console.log("갱신", Object.keys(captured).length, "종 / 유지", Object.keys(keep).length, "종");
+if (stale.length) console.log("옛 파일 삭제:", stale.map((file) => path.basename(file)).join(" "));
 console.log("다음으로 python tools/ref-clone/sections_to_webp.py 를 돌려 WebP 로 바꾸세요.");

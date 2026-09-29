@@ -6,7 +6,11 @@
   - 640w 축소본 → WebP (모바일용)
   - 원본 JPEG 는 지운다 (데이터 파일이 더 이상 참조하지 않는다)
 
+templateSections.ts 가 가리키는 JPEG 만 바꾼다. verify_template.sh 도 같은 폴더에 <slug>-N.jpg 를
+남기는데, 그걸 바꾸면 이름이 같은 게시 WebP(hotel-e-1~4 등)를 다른 그림으로 덮어쓴다.
+
   python tools/ref-clone/sections_to_webp.py
+  시험할 땐 capture_sections.mjs 와 같은 CAPTURE_OUT_DIR · CAPTURE_DATA 를 준다.
 """
 import io
 import os
@@ -16,18 +20,16 @@ from PIL import Image
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 ROOT = "C:/web-project/mintcl-netlify-spa"
-DIR = os.path.join(ROOT, "public/thumbs/sections")
-DATA = os.path.join(ROOT, "src/lib/templateSections.ts")
+DIR = os.environ.get("CAPTURE_OUT_DIR") or os.path.join(ROOT, "public/thumbs/sections")
+DATA = os.environ.get("CAPTURE_DATA") or os.path.join(ROOT, "src/lib/templateSections.ts")
 SMALL_WIDTH = 640
 
 before = sum(os.path.getsize(os.path.join(DIR, f)) for f in os.listdir(DIR))
 converted, removed = 0, 0
+source = io.open(DATA, encoding="utf-8").read()
 
-for name in sorted(os.listdir(DIR)):
-    if not name.lower().endswith(".jpg"):
-        continue
-    src = os.path.join(DIR, name)
-    stem = name[:-4]
+for stem in sorted(set(re.findall(r'"/thumbs/sections/([^"/]+)\.jpg"', source))):
+    src = os.path.join(DIR, stem + ".jpg")
     image = Image.open(src).convert("RGB")
     image.save(os.path.join(DIR, stem + ".webp"), "WEBP", quality=78, method=5)
     width, height = image.size
@@ -40,7 +42,6 @@ for name in sorted(os.listdir(DIR)):
 
 after = sum(os.path.getsize(os.path.join(DIR, f)) for f in os.listdir(DIR))
 
-source = io.open(DATA, encoding="utf-8").read()
 source = source.replace("/thumbs/sections/", "/thumbs/sections/").replace('.jpg"', '.webp"')
 io.open(DATA, "w", encoding="utf-8", newline="\n").write(source)
 
