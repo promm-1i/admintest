@@ -9,7 +9,7 @@ const study: CaseStudy = {
   brandColor: "rgb(0, 112, 239)",
   tintColor: "rgb(232, 243, 255)",
   overview:
-    "FLOVEX는 반도체 · 이차전지 공장과 데이터센터에 배관 · 냉각 · 환경 제어 설비를 설계하고 시공하는 산업설비 기업을 가정하고 만든 디자인입니다. 첫 화면은 설비 영상 위에 영문 슬로건을 크게 두고, 흰 바탕에 파랑 한 가지를 강조색으로 써서 기술 회사다운 차분한 인상을 냈습니다.\n\n메인은 여섯 사업을 넘겨 보는 Solutions & Services, 검은 화면에서 다섯 가치가 차례로 바뀌는 Vision & Mission, 매출 · 생산시설 · 업력 숫자를 담은 Global Network, 고객 후기와 미디어, 고객사 이름 띠, 채용 배너로 이어집니다.\n\n서브는 회사소개 6쪽, 사업 6쪽, 채용 4쪽, 미디어 · 자료 · 고객지원 7쪽과 약관 2쪽입니다. 사업 쪽은 같은 틀에 산업별 설비 영상과 기술 설명을 담았고, 자료실에서는 브로슈어 여섯 종을 내려받습니다.",
+    "FLOVEX는 반도체 · 이차전지 공장과 데이터센터에 배관 · 냉각 · 환경 제어 설비를 설계하고 시공하는 산업설비 기업을 가정하고 만든 디자인입니다. 첫 화면은 설비 영상 위에 영문 슬로건을 크게 두고, 흰 바탕에 파랑 한 가지를 강조색으로 썼습니다.\n\n메인은 여섯 사업을 넘겨 보는 Solutions & Services, 검은 화면에서 다섯 가치가 차례로 바뀌는 Vision & Mission, 매출 · 생산시설 · 업력 숫자를 담은 Global Network, 고객 후기와 미디어, 고객사 이름 띠, 채용 배너로 이어집니다.\n\n서브는 회사소개 6쪽, 사업 6쪽, 채용 4쪽, 미디어 · 자료 · 고객지원 7쪽과 약관 2쪽입니다. 사업 쪽은 같은 틀에 산업별 설비 영상과 기술 설명이 들어가고, 자료실에서는 브로슈어 여섯 종을 내려받습니다.",
   meta: [
     { label: "업종", value: "산업설비 · 유틸리티 엔지니어링 · 클린룸 · 냉각 설비" },
     { label: "페이지 구성", value: "26쪽 · 메인, 회사소개 6(비전 · CEO · 연혁 · 인증 · 조직도 · CI), 사업 6, 채용 4, 미디어 · 뉴스 · 자료실 · 리포트 · 고객지원 · 문의 · 오시는 길, 약관 2" },
@@ -18,21 +18,21 @@ const study: CaseStudy = {
   mainShot: "/cases/corporate-m/main.webp",
   capabilities: {
     label: "26-PAGE ENGINEERING SYSTEM",
-    title: "여섯 사업의 기술·인증·자료·문의 흐름을 26개 화면으로 구축했습니다",
-    body: "긴 메인 장면뿐 아니라 사업별 기술 설명, 검증 자료, 미디어와 채용, 카탈로그와 문의까지 산업설비 기업의 실제 영업·운영 범위를 보여 줍니다.",
+    title: "여섯 사업과 인증·자료·문의까지 26개 화면",
+    body: "메인 뒤로 사업 상세 여섯 쪽, 인증 · 연혁 등 회사소개 여섯 쪽, 미디어 · 자료실 · 문의, 채용 네 쪽이 이어집니다.",
     stats: [
-      { value: "26", label: "실제 구축 화면", note: "회사·사업·홍보·지원·채용" },
+      { value: "26", label: "화면 수", note: "회사·사업·홍보·지원·채용" },
       { value: "6", label: "사업 상세", note: "반도체부터 데이터센터까지" },
       { value: "4", label: "검증·자료 영역", note: "자격·카탈로그·리포트·미디어" },
       { value: "4", label: "인재 화면", note: "인재상·채용·복지·스토리" },
     ],
     groups: [
-      { label: "사업 6분야", title: "산업별 설비와 공정 역량을 여섯 개 상세 화면으로 분리했습니다", body: "반도체·이차전지·극저온·불소수지·드라이룸·데이터센터 사업을 각 산업의 요구와 공정 이미지에 맞춰 설명합니다.", items: ["사업 분야 6개 독립 상세", "산업별 기술·공정 설명", "메인 솔루션에서 상세 연결"], img: "/cases/corporate-m/page-semiconductor.webp", caption: "사업 · 반도체 유틸리티", file: "business-semiconductor.html" },
-      { label: "데이터센터", title: "데이터센터 냉각과 유틸리티 역량을 별도 사업 화면으로 제공합니다", body: "설비 구조와 운영 안정성, 적용 영역을 전용 이미지와 문장으로 구성해 신규 산업 역량을 명확히 보여 줍니다.", items: ["데이터센터 설비 개요", "냉각·배관 적용 영역", "관련 기술과 상담 연결"], img: "/cases/corporate-m/page-datacenter.webp", caption: "사업 · 데이터센터", file: "business-datacenter.html" },
-      { label: "자격·인증", title: "보유 자격과 검증 자료를 프로젝트 신뢰의 근거로 제시합니다", body: "산업설비 발주자가 확인하는 등록 · 인증 · 면허를 증서 모양 카드로 모았습니다. 제작할 때 실제 증서 스캔본으로 바꿔 넣습니다.", items: ["인증 6 · 면허 4", "증서 모양 카드 · 이름 · 분류", "휴대폰에서는 2열"], img: "/cases/corporate-m/page-qualification.webp", caption: "기술 · 자격 및 인증", file: "qualification.html" },
-      { label: "미디어·실적", title: "뉴스와 프로젝트 미디어를 운영형 아카이브로 제공합니다", body: "현장 수행 사례와 기업 소식을 사진 카드로 모으고, 검색 칸으로 찾게 했습니다.", items: ["소식 카드 · 사진 · 제목 · 날짜", "미디어센터 · 회사 뉴스 두 쪽", "검색 칸"], img: "/cases/corporate-m/page-media.webp", caption: "홍보 · 미디어 아카이브", file: "media.html" },
-      { label: "인재·복지", title: "인재상·채용·복지와 구성원 이야기를 네 화면으로 연결합니다", body: "채용 공고만 두지 않고 조직문화와 복지, 실제 구성원 스토리를 함께 제공해 지원자가 회사를 이해하게 합니다.", items: ["인재상과 채용 정보", "복리후생 항목", "구성원 인터뷰·스토리"], img: "/cases/corporate-m/page-benefits.webp", caption: "채용 · 복리후생", file: "benefits.html" },
-      { label: "자료·상담", title: "카탈로그와 고객지원, 문의·제보 접수를 목적별로 분리했습니다", body: "브로슈어를 내려받는 자료실, 고객지원 · 제보 쪽, 문의 폼을 목적별로 나눴습니다.", items: ["브로슈어 6 · 다운로드", "필수 4칸 문의 폼", "고객지원 · 제보 쪽"], img: "/cases/corporate-m/page-inquiry.webp", caption: "고객지원 · 사업 문의", file: "inquiry.html" },
+      { label: "사업 6분야", title: "사업 상세 여섯 쪽", body: "반도체 · 이차전지 · 극저온 · 불소수지 · 드라이룸 · 데이터센터 사업마다 설비 영상과 기술 설명이 같은 틀로 들어갑니다.", items: ["사업 분야 6개 독립 상세", "산업별 기술·공정 설명", "메인 솔루션에서 상세 연결"], img: "/cases/corporate-m/page-semiconductor.webp", caption: "사업 · 반도체 유틸리티", file: "business-semiconductor.html" },
+      { label: "데이터센터", title: "데이터센터 쪽 기술 설명 다섯 갈래", body: "열관리 · 액체냉각 · 이중화 · 운영 데이터 최적화 · 통합 관리 다섯 갈래를 사진과 번갈아 적었습니다.", items: ["설비 영상", "기술 설명 5갈래", "사진과 글 번갈아"], img: "/cases/corporate-m/page-datacenter.webp", caption: "사업 · 데이터센터", file: "business-datacenter.html" },
+      { label: "자격·인증", title: "인증 6 · 면허 4 증서 카드", body: "등록 · 인증 · 면허를 증서 모양 카드로 모았습니다. 제작할 때 실제 증서 스캔본으로 바꿔 넣습니다.", items: ["인증 6 · 면허 4", "증서 모양 카드 · 이름 · 분류", "휴대폰에서는 2열"], img: "/cases/corporate-m/page-qualification.webp", caption: "기술 · 자격 및 인증", file: "qualification.html" },
+      { label: "미디어·실적", title: "소식 사진 카드와 검색", body: "현장 수행 사례와 회사 소식을 사진 카드로 모으고, 검색 칸을 두었습니다.", items: ["소식 카드 · 사진 · 제목 · 날짜", "미디어센터 · 회사 뉴스 두 쪽", "검색 칸"], img: "/cases/corporate-m/page-media.webp", caption: "홍보 · 미디어 아카이브", file: "media.html" },
+      { label: "인재·복지", title: "인재상 · 채용 · 복지 · 구성원 이야기 네 쪽", body: "인재상, 채용 정보, 복리후생 항목과 사내 공간 사진, 구성원 인터뷰를 쪽마다 나눴습니다.", items: ["인재상과 채용 정보", "복리후생 항목", "구성원 인터뷰·스토리"], img: "/cases/corporate-m/page-benefits.webp", caption: "채용 · 복리후생", file: "benefits.html" },
+      { label: "자료·상담", title: "자료실 · 고객지원 · 문의 폼", body: "브로슈어를 내려받는 자료실, 고객지원 · 제보 쪽, 문의 폼을 따로 두었습니다.", items: ["브로슈어 6 · 다운로드", "필수 4칸 문의 폼", "고객지원 · 제보 쪽"], img: "/cases/corporate-m/page-inquiry.webp", caption: "고객지원 · 사업 문의", file: "inquiry.html" },
     ],
   },
   pagesLabel: "페이지",
@@ -49,7 +49,7 @@ const study: CaseStudy = {
       name: "경영 비전",
       file: "vision.html",
       img: "/cases/corporate-m/page-vision.webp",
-      desc: "회사가 지향하는 방향과 핵심가치를 큰 문장과 사진으로 풀었습니다.",
+      desc: "비전 문장과 핵심가치를 사진과 번갈아 놓았습니다.",
       items: ["비전 문장", "핵심가치", "사진과 번갈아 배치"],
     },
     {
@@ -125,7 +125,7 @@ const study: CaseStudy = {
       caption: "홈 · Vision & Mission",
     },
     {
-      title: "규모는 숫자 넷,\n신뢰는 고객 후기로",
+      title: "숫자 네 개와\n넘겨 보는 고객 후기",
       body: "Global Network 구역은 매출 · 생산시설 면적 · 협력사 평가 · 사업 업력 네 숫자를 기준 연도와 함께 크게 놓습니다. 이어지는 Client Reviews 구역은 고객사 담당 부서가 남긴 후기를 한 장씩 넘겨 보고, 아래에서는 고객사 이름이 띠로 흘러갑니다.",
       items: ["숫자 4 · 단위 · 기준 연도", "고객 후기 · 다음 버튼으로 넘김", "고객사 이름 띠"],
       img: "/cases/corporate-m/point-reach.webp",
@@ -133,7 +133,7 @@ const study: CaseStudy = {
     },
     {
       title: "사업 쪽은 설비 영상과\n기술 설명 다섯 갈래",
-      body: "데이터센터 쪽을 예로 들면, 맨 위에 설비 영상을 깔고 열관리 기술 · 액체냉각 인프라 · 이중화 · 운영 데이터 최적화 · 설계부터 시운전까지 통합 관리 다섯 갈래로 설명을 이어 갑니다. 여섯 사업 쪽이 같은 틀이라 사업을 더하거나 빼기 쉽습니다.",
+      body: "데이터센터 쪽을 예로 들면, 맨 위에 설비 영상을 깔고 열관리 기술 · 액체냉각 인프라 · 이중화 · 운영 데이터 최적화 · 설계부터 시운전까지 통합 관리 다섯 갈래로 설명을 이어 갑니다. 여섯 사업 쪽이 같은 틀입니다.",
       items: ["사업마다 설비 영상 1", "기술 설명 5갈래 · 사진과 번갈아", "사업 6쪽 · 같은 틀"],
       img: "/cases/corporate-m/point-business.webp",
       caption: "사업영역 · 데이터센터",
@@ -144,11 +144,11 @@ const study: CaseStudy = {
   details: [
     {
       title: "색은 파랑 하나만",
-      body: "흰 바탕에 파랑 한 가지만 강조색으로 쓰고, 가치 소개처럼 무게를 줄 구역만 검은 화면으로 바꿨습니다. 설비 사진과 영상이 먼저 보입니다.",
+      body: "흰 바탕에 파랑 한 가지만 강조색으로 쓰고, 가치 소개 구역만 검은 화면입니다.",
     },
     {
       title: "자료는 쪽을 나눠서",
-      body: "인증 · 면허와 특허를 나눠 모은 인증 쪽, 브로슈어 여섯 종을 내려받는 자료실, 검색 칸이 있는 미디어센터를 따로 두어 발주처가 찾는 자료를 바로 보게 했습니다.",
+      body: "인증 · 면허와 특허를 나눠 모은 인증 쪽, 브로슈어 여섯 종을 내려받는 자료실, 검색 칸이 있는 미디어센터를 따로 두었습니다.",
     },
     {
       title: "빠진 칸을 알려 주는 문의",
@@ -156,7 +156,7 @@ const study: CaseStudy = {
     },
     {
       title: "움직임을 줄이고 싶은 분께",
-      body: "운영체제에서 '동작 줄이기'를 켜 두면 부드러운 스크롤과 떠오르는 효과를 끄고, 가치 소개 장면과 고객사 띠도 움직이지 않고 바로 보여 줍니다.",
+      body: "운영체제에서 '동작 줄이기'를 켜 두면 관성 스크롤과 떠오르는 효과를 끄고, 가치 소개 장면과 고객사 띠도 움직이지 않고 바로 보여 줍니다.",
     },
   ],
   mobile: {
