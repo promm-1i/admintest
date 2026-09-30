@@ -11,14 +11,14 @@ const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "responsive");
 
 export const DEVICES = [
   { label: "Desktop", width: 1440, height: 900, displayWidth: 520, displayHeight: 325, note: "가장 넓은 여백, 통계 3열 배치" },
-  { label: "Tablet", width: 768, height: 1024, displayWidth: 320, displayHeight: 427, note: "데스크톱과 같은 그리드, 여백만 축소" },
+  { label: "Tablet", width: 768, height: 1024, displayWidth: 320, displayHeight: 427, note: "데스크톱과 같은 칸 배치, 여백만 줄임" },
   { label: "Mobile", width: 390, height: 844, displayWidth: 220, displayHeight: 476, note: "통계 3열 → 1열, 좌우 분할 → 세로 통합" },
 ];
 
 export const PROBLEMS_WITHOUT = [
   "글자와 버튼이 작아져 손가락으로 누르기 어려워집니다.",
   "가로 스크롤이 생겨 내용을 온전히 보기 어려워집니다.",
-  "방문자 대부분이 모바일인데, 정작 모바일 경험이 가장 불편해집니다.",
+  "휴대폰으로 들어온 방문자가 가장 불편한 화면을 보게 됩니다.",
   "검색엔진이 모바일 친화적이지 않은 페이지로 판단해 노출에도 불리합니다.",
 ];
 
@@ -134,7 +134,7 @@ export default function ResponsiveService() {
           CUSTOM SERVICE — 반응형 웹 제작
         </p>
         <h1 className="mx-auto mt-4 max-w-xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          하나의 홈페이지가, 모든 화면에서 자연스럽습니다
+          한 홈페이지를 PC · 태블릿 · 모바일에 맞춰 다시 배치합니다
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
           PC, 태블릿, 모바일 화면 크기에 맞춰 콘텐츠 배치와 크기가 자동으로 바뀝니다. 아래는 실제
@@ -232,7 +232,7 @@ export default function ResponsiveService() {
       {/* 다른 맞춤형 서비스 + 마무리 CTA (하나의 이어진 section) */}
       <NextStepsSection
         otherServices={OTHER_SERVICES}
-        ctaTitle="모바일 방문자가 더 많다면, 더 중요합니다."
+        ctaTitle="모바일 방문자가 많은 업종이면 모바일 화면부터 봅니다."
         ctaDesc="업종별 방문 기기 비율을 고려해 반응형 우선순위를 함께 설계합니다."
       />
     </div>

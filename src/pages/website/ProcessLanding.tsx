@@ -74,7 +74,7 @@ export const STEPS = [
 export const REQUIRED_MATERIALS = [
   {
     title: "회사 로고",
-    desc: "사용하고 있는 로고 파일을 보내주세요. PNG, SVG, AI 등 원본 파일이 있으면 가장 좋습니다.",
+    desc: "사용하고 있는 로고 파일을 보내주세요. PNG, SVG, AI 등 원본 파일이 있으면 그대로 보내 주세요.",
   },
   {
     title: "회사 기본정보",

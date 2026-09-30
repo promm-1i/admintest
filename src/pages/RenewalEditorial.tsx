@@ -106,7 +106,7 @@ const PAGE_DATA: Record<PageKey, ContentPage> = {
     { title: "예약 상태", text: "접수, 확인, 확정과 취소 상태를 관리자 화면에서 관리합니다", points: ["상태 변경", "일정 확인", "메모"] },
     { title: "알림", text: "새 문의가 들어오면 담당자가 바로 확인할 수 있도록 연결합니다", points: ["문자 알림", "이메일", "접수 안내"] },
   ] },
-  "search-filter": { eyebrow: "SEARCH & FILTER", title: "검색 · 필터 기능", intro: "매물, 제품과 게시물이 많을 때 방문자가 원하는 항목을 빠르게 찾습니다", group: "기술력", image: SUBPAGE_MEDIA["search-filter"], sections: [
+  "search-filter": { eyebrow: "SEARCH & FILTER", title: "검색 · 필터 기능", intro: "매물, 제품과 게시물이 많을 때 방문자가 조건을 골라 원하는 항목을 찾습니다", group: "기술력", image: SUBPAGE_MEDIA["search-filter"], sections: [
     { title: "조건 검색", text: "가격, 지역, 분류처럼 실제 선택에 필요한 조건을 정합니다", points: ["다중 조건", "범위 선택", "검색 초기화"] },
     { title: "목록 정렬", text: "최신순, 가격순과 추천순처럼 목록을 보는 기준을 제공합니다", points: ["정렬", "페이지 이동", "결과 수"] },
     { title: "상세 연결", text: "검색 결과에서 상세 정보와 문의 화면으로 이동합니다", points: ["상세 페이지", "관심 항목", "문의 연결"] },
@@ -121,7 +121,7 @@ const PAGE_DATA: Record<PageKey, ContentPage> = {
     { title: "외부 연동", text: "지도, 문자와 업무 시스템에서 제공하는 API를 연결합니다", points: ["지도", "문자", "외부 업무 데이터"] },
     { title: "보안과 백업", text: "접근 권한을 나누고 운영 중 필요한 백업 기준을 정합니다", points: ["접근 제어", "환경 변수", "백업"] },
   ] },
-  responsive: { eyebrow: "RESPONSIVE WEB", title: "반응형 웹 제작", intro: "PC 화면을 줄여 놓지 않고 태블릿과 모바일의 읽기 순서를 다시 맞춥니다", group: "기술력", image: SUBPAGE_MEDIA["responsive"], sections: [
+  responsive: { eyebrow: "RESPONSIVE WEB", title: "반응형 웹 제작", intro: "태블릿과 모바일에서 읽는 순서를 PC와 따로 맞춥니다", group: "기술력", image: SUBPAGE_MEDIA["responsive"], sections: [
     { title: "화면 너비", text: "콘텐츠 폭과 여백을 기기별로 조정해 가로 스크롤을 막습니다", points: ["PC", "태블릿", "모바일"] },
     { title: "메뉴와 터치", text: "모바일 메뉴, 버튼 크기와 손가락으로 누르는 영역을 확인합니다", points: ["모바일 메뉴", "터치 영역", "고정 버튼"] },
     { title: "이미지와 글", text: "사진 잘림과 글자 크기를 화면 비율에 맞춰 따로 설정합니다", points: ["이미지 크롭", "줄바꿈", "읽기 순서"] },

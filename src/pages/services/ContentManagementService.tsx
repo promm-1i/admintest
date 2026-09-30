@@ -197,7 +197,7 @@ export default function ContentManagementService() {
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">관리자 → 홈페이지</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">작성한 그대로, 공지사항 페이지에 반영됩니다</h2>
             <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">
-              아래 작성 화면은 실제 조작 화면이 아니라 구조를 보여주는 미리보기입니다. 저장·수정·삭제는
+              아래 작성 화면은 구조를 보여 주는 미리보기이고, 실제 저장·수정·삭제는
               관리자 계정으로 로그인했을 때만 동작합니다.
             </p>
           </Reveal>

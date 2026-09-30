@@ -46,8 +46,8 @@ export const FEATURED_ITEMS = [
   },
   {
     title: "상품 / 매물 / 차량 관리",
-    scenario: "새 매물이나 상품이 생길 때마다 제작자에게 연락하는 대신",
-    benefit: "관리자가 직접 등록하고, 즉시 홈페이지에 반영할 수 있습니다.",
+    scenario: "새 매물이나 상품이 생기면",
+    benefit: "관리자가 직접 등록하고, 저장하면 바로 홈페이지에 올라갑니다.",
   },
   {
     title: "공개 / 비공개",
@@ -177,17 +177,17 @@ export default function AdminSystemService() {
             왜 필요한가
           </p>
           <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
-            새 상품 하나 올리는데, 왜 매번 개발자를 거쳐야 할까요
+            관리자 화면이 없으면 공지 한 줄도 제작자가 고칩니다
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground break-keep">
             홈페이지에 관리자 화면이 없으면, 공지 하나 수정하는 일도 제작자에게 연락하고 기다려야
-            합니다. 바쁜 시기일수록 이런 사소한 수정이 늦어지고, 홈페이지는 점점 방치됩니다.
+            합니다. 요청이 밀리는 달에는 지난 공지가 몇 주씩 그대로 걸려 있기도 합니다.
           </p>
           <div className="mt-6 flex items-start gap-3 rounded-lg border border-primary/20 bg-primary/5 p-4">
             <MessagesSquare className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
             <p className="text-base font-medium text-foreground break-keep">
-              관리자 시스템이 있으면, 운영자가 필요한 순간 직접 바꿉니다. 개발자를 기다릴 필요가
-              없습니다.
+              관리자 시스템이 있으면, 운영자가 로그인해서 공지 · 상품 · 사진을 바로
+              고칩니다.
             </p>
           </div>
         </div>
@@ -291,7 +291,7 @@ export default function AdminSystemService() {
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
               관리자 화면에서 매물을 등록하고 공개 상태로 전환하면, 별도 작업 없이 고객이 보는
-              홈페이지에 실시간으로 노출됩니다.
+              홈페이지에 바로 나타납니다.
             </p>
             <div className="mt-6">
               <RealEstateAdminProvider>

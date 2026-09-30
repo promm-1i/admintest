@@ -9,7 +9,7 @@ import { useLazyMount, Reveal, RevealScale, NextStepsSection } from "@/pages/ser
 const OTHER_SERVICES = CUSTOM_SERVICES.filter((s) => s.slug !== "seo");
 
 export const APPLIED_ITEMS = [
-  { name: "<title>", desc: "페이지마다 다른 제목을 실시간으로 설정합니다." },
+  { name: "<title>", desc: "페이지에 들어갈 때마다 그 페이지 제목으로 바꿉니다." },
   { name: "<meta name=\"description\">", desc: "페이지마다 다른 요약 설명을 설정합니다." },
   { name: "og:title / og:description / og:image", desc: "카카오톡, 페이스북 등에 링크를 공유할 때 보이는 정보입니다." },
   { name: "<html lang=\"ko\">", desc: "검색엔진에 페이지의 기본 언어를 명시합니다." },
@@ -102,8 +102,8 @@ export default function SeoService() {
           검색엔진이 페이지를 이해할 수 있도록 구조를 만듭니다
         </h1>
         <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground break-keep">
-          검색 상위 노출이나 순위 상승을 보장하는 작업이 아닙니다. 검색엔진이 페이지의 제목, 설명,
-          구조를 정확히 읽고 수집할 수 있도록 기본기를 갖추는 작업입니다.
+          검색 상위 노출이나 순위 상승은 보장하지 않습니다. 검색엔진이 페이지의 제목, 설명,
+          구조를 읽고 수집할 수 있도록 기본 설정을 하는 작업입니다.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
@@ -169,7 +169,7 @@ export default function SeoService() {
         <div className="mx-auto max-w-6xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">페이지마다 다르게</p>
-            <h2 className="mt-3 text-3xl font-bold text-foreground">모든 페이지가 같은 제목을 쓰지 않습니다</h2>
+            <h2 className="mt-3 text-3xl font-bold text-foreground">페이지마다 제목이 다릅니다</h2>
             <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">
               페이지 진입 시 제목과 설명이 그 페이지 내용에 맞게 바뀝니다. 실제로 이 사이트에 적용된
               제목입니다.
@@ -268,7 +268,7 @@ export default function SeoService() {
       {/* 다른 맞춤형 서비스 + 마무리 CTA (하나의 이어진 section) */}
       <NextStepsSection
         otherServices={OTHER_SERVICES}
-        ctaTitle="기본 구조부터 정확하게 갖추고 싶으신가요?"
+        ctaTitle="페이지 제목과 설명부터 정리하고 싶으신가요?"
         ctaDesc="페이지 구조, 제목, 설명 설정부터 검색엔진 등록까지 기본 작업을 함께 안내드립니다."
       />
     </div>

@@ -55,7 +55,7 @@ export const TEMPLATE_PACKAGES: TemplatePackage[] = [
     total: BASE_TOTAL,
     badge: "가성비 패키지",
     badgeTone: "value",
-    desc: "필요한 정보를 한 페이지에 정직하게 담는 구성",
+    desc: "필요한 정보를 한 페이지에 넣는 구성",
   },
   {
     key: "landing",
@@ -65,7 +65,7 @@ export const TEMPLATE_PACKAGES: TemplatePackage[] = [
     total: BASE_TOTAL + LANDING_COST,
     badge: "추천 패키지",
     badgeTone: "recommended",
-    desc: "스크롤 연출과 인터랙션을 더한 한 페이지 구성",
+    desc: "스크롤하면 구역이 떠오르는 연출을 더한 한 페이지 구성",
   },
   {
     key: "basic-sub",
@@ -73,7 +73,7 @@ export const TEMPLATE_PACKAGES: TemplatePackage[] = [
     designCost: 0,
     subpageCost: SUBPAGE_COST,
     total: BASE_TOTAL + SUBPAGE_COST,
-    desc: "메뉴별로 페이지를 나눠 내용을 넉넉하게",
+    desc: "메뉴별로 페이지를 나눈 구성",
   },
   {
     key: "landing-sub",

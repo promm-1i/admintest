@@ -118,10 +118,10 @@ export default function InquiryReservationService() {
           CUSTOM SERVICE — 문의 · 예약 관리
         </p>
         <h1 className="mx-auto mt-4 max-w-2xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          문의가 접수되면, 끝까지 놓치지 않고 관리합니다
+          접수된 문의를 상담 상태까지 한 화면에서 관리합니다
         </h1>
         <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
-          고객이 남긴 문의는 관리자 화면에 실시간으로 쌓이고, 상담 진행 상태를 그때그때 바꿔가며
+          고객이 남긴 문의는 관리자 화면에 바로 쌓이고, 상담 진행 상태를 그때그때 바꿔가며
           이력을 관리할 수 있습니다.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
@@ -154,7 +154,7 @@ export default function InquiryReservationService() {
             왜 필요한가
           </p>
           <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
-            전화, 문자, 카카오톡 — 문의가 흩어지면 놓칩니다
+            전화, 문자, 카카오톡 — 문의가 채널마다 따로 쌓입니다
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground break-keep">
             채널마다 따로 확인하다 보면 어떤 문의가 처리됐는지, 누가 담당인지 헷갈리기 쉽습니다.

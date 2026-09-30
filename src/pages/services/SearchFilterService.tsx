@@ -59,7 +59,7 @@ function CyclingHeroCounter() {
 export default function SearchFilterService() {
   usePageTitle(
     "검색 · 필터 기능 — NOVERIQ",
-    "조건을 선택하면 결과가 실시간으로 좁혀지는 검색·필터 기능을 실제 데모 데이터로 확인하세요.",
+    "조건을 선택하면 결과가 바로 좁혀지는 검색·필터 기능을 실제 데모 데이터로 확인하세요.",
   );
 
   return (
@@ -81,7 +81,7 @@ function SearchFilterContent() {
           CUSTOM SERVICE — 검색 · 필터 기능
         </p>
         <h1 className="mx-auto mt-4 max-w-xl text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          조건을 좁힐수록, 원하는 결과만 남습니다
+          조건을 고르면 맞는 결과만 남습니다
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
           매물, 상품, 차량처럼 목록이 많은 홈페이지에서 고객이 조건을 선택하면 결과가 그 자리에서
@@ -121,12 +121,12 @@ function SearchFilterContent() {
             조건은 어떻게 설계할까
           </p>
           <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
-            목록이 많을수록, 고객은 끝까지 넘겨보지 않습니다
+            목록이 수십 건을 넘으면 끝까지 넘겨 보는 고객은 드뭅니다
           </h2>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground break-keep">
             매물이나 상품이 수십, 수백 건이면 고객은 원하는 것을 찾다가 포기하기 쉽습니다. 실제로
-            자주 찾는 기준(가격대, 지역, 종류)을 조건으로 만들어두면, 고객이 몇 번의 클릭만으로
-            원하는 결과에 도달합니다.
+            자주 찾는 기준(가격대, 지역, 종류)을 조건으로 만들어두면, 고객이 몇 번 눌러서
+            원하는 목록을 봅니다.
           </p>
           <div className="mt-6 flex items-start gap-3 rounded-lg border border-primary/20 bg-primary/5 p-4">
             <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
@@ -148,7 +148,7 @@ function SearchFilterContent() {
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
               아래는 실제로 작동하는 고객용 검색 화면입니다. 조건 버튼을 조합할 때마다 결과 목록이
-              실시간으로 바뀝니다.
+              바로 바뀝니다.
             </p>
           </Reveal>
           <RevealScale delay={120} className="mt-8">
