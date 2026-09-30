@@ -139,7 +139,7 @@ export type SiteSettings = {
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   companyName: "NOVERIQ 인테리어",
-  tagline: "설계부터 시공까지, 믿을 수 있는 리모델링",
+  tagline: "아파트 부분 수리 · 전체 리모델링",
   phone: "02-000-0000",
   address: "서울특별시 강남구 테헤란로 123",
   hours: "평일 09:00 - 18:00 / 토 09:00 - 15:00",

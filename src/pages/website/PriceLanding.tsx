@@ -147,8 +147,8 @@ export default function PriceLanding() {
         <Reveal className="mt-20">
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">왜 홈페이지마다 가격이 다를까요?</h2>
           <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted-foreground break-keep">
-            같은 유형이어도 아래 항목에 따라 최종 견적이 달라질 수 있습니다. 디자인비만이 아니라, 관리자
-            기능과 데이터 처리 범위가 가격 대부분을 결정합니다.
+            같은 유형이어도 아래 항목에 따라 최종 견적이 달라질 수 있습니다. 금액 차이는 대부분 관리자
+            기능과 데이터 처리 범위에서 납니다.
           </p>
         </Reveal>
         <Reveal delay={100}>
@@ -209,8 +209,8 @@ export default function PriceLanding() {
         <Reveal className="mx-auto max-w-3xl px-4 text-center">
           <h2 className="text-3xl font-bold sm:text-4xl">관리자 시스템까지 필요하신가요?</h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
-            홈페이지뿐 아니라 관리자, 고객관리, 업무 흐름까지 하나로 구축하는 업종별 맞춤 솔루션을
-            제공합니다.
+            홈페이지와 관리자, 고객관리, 업무 흐름을 한 시스템으로 만드는 업종별 솔루션을
+            안내합니다.
           </p>
           <div className="mt-7">
             <Button asChild className="gap-1.5 font-bold">

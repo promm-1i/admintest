@@ -141,7 +141,7 @@ const CONSIDERATION_POINTS = [
     num: "08",
     icon: Building2,
     title: "업종별 관리 시스템",
-    desc: "단순 홈페이지가 아니라 실제 업무에 사용할 관리자 시스템까지 구축할 수 있습니다.",
+    desc: "필요하면 실제 업무에 쓰는 관리자 시스템까지 같이 만듭니다.",
     examples: [
       { icon: Building2, label: "부동산", flow: "매물 → 고객 → 임장 → 계약" },
       { icon: Car, label: "렌트카", flow: "차량 → 예약 → 고객 → 계약" },
@@ -226,8 +226,8 @@ export default function ProcessLanding() {
               사업에 필요한 구조와 기능부터 새롭게 설계합니다.
             </p>
             <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
-              기존 템플릿에 맞추는 것이 아니라 업체의 서비스, 고객 흐름, 운영방식에 맞춰 홈페이지를
-              제작합니다. 필요에 따라 아래 기능도 함께 구축할 수 있습니다.
+              업체의 서비스와 고객 흐름, 운영 방식을 먼저 듣고 그에 맞춰 홈페이지를
+              만듭니다. 필요하면 아래 기능도 함께 만들 수 있습니다.
             </p>
             <ul className="mt-5 grid grid-cols-2 gap-x-5 gap-y-2.5">
               {["관리자 페이지", "문의 / 예약", "상품·매물 관리", "검색 / 필터", "고객 관리", "DB 구축", "외부 API 연동"].map(

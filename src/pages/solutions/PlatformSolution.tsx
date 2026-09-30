@@ -44,8 +44,8 @@ export default function PlatformSolution() {
       </p>
       <h1 className="mt-3 text-3xl font-semibold">플랫폼형 웹서비스</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        홈페이지를 넘어 회원, 권한, 데이터베이스까지 갖춘 실제 업무용 플랫폼을 구축합니다. 정해진
-        틀 없이 필요한 업무 흐름에 맞춰 기능을 설계합니다.
+        회원, 권한, 데이터베이스까지 갖춘 업무용 플랫폼을 만듭니다. 기능은 지금 쓰시는 업무
+        순서를 먼저 듣고 그 순서에 맞춰 설계합니다.
       </p>
 
       <h2 className="mt-12 text-xl font-semibold">주요 기능</h2>

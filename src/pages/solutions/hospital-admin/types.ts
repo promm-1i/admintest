@@ -94,7 +94,7 @@ export type SiteSettings = {
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   hospitalName: "NOVERIQ 의원",
-  tagline: "믿을 수 있는 진료, 편안한 병원",
+  tagline: "평일 야간 · 토요일 진료 내과",
   phone: "02-000-0000",
   address: "서울특별시 강남구 테헤란로 123",
   hours: "평일 09:00 - 18:00 / 토 09:00 - 13:00",

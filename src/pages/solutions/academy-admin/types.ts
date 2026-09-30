@@ -125,7 +125,7 @@ export type SiteSettings = {
 
 export const DEFAULT_SITE_SETTINGS: SiteSettings = {
   academyName: "NOVERIQ 학원",
-  tagline: "결과로 증명하는 학습 관리",
+  tagline: "중·고등 수학·영어 내신 전문",
   phone: "02-000-0000",
   address: "서울특별시 강남구 테헤란로 123",
   hours: "평일 14:00 - 22:00 / 토 10:00 - 18:00",
