@@ -122,7 +122,7 @@ const study: CaseStudy = {
   ],
   mobile: {
     title: "휴대폰에서는 한 줄씩 쌓고 표는 가로로 밉니다",
-    body: "여러 칸으로 나뉜 구역은 한 줄씩 쌓고, 표는 가로로 밀어 보게 했습니다. 입력칸 이름표는 칸 위로 올렸습니다.",
+    body: "여러 칸으로 나뉜 구역은 한 줄씩 쌓고, 표는 가로로 밀어서 봅니다. 입력칸 이름표는 칸 위로 올렸습니다.",
     shots: [
       { img: "/cases/corporate-t/m-index.webp", caption: "메인" },
       { img: "/cases/corporate-t/m-business.webp", caption: "사업내용" },

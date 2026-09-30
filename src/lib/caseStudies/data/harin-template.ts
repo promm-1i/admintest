@@ -77,7 +77,7 @@ const study: CaseStudy = {
       name: "메이크업",
       file: "style-makeup.html",
       img: "/cases/harin/page-makeup.webp",
-      desc: "헤어와 같은 틀에 메이크업 열두 가지를 담았습니다.",
+      desc: "헤어와 같은 틀에 메이크업 열두 가지를 넣었습니다.",
       items: ["데일리 · 상견례 · 면접 · 웨딩 · 본식 · 무대", "자리별 조건 한 줄"],
     },
     {
