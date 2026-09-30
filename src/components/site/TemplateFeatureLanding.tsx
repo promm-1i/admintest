@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { getDesignCode } from "@/lib/designCode";
 import type { Sample } from "@/lib/samples";
 import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
+import { getTemplateFolder } from "@/lib/templateFolder";
 
 type IndustryContent = {
   label: string;
@@ -165,9 +166,9 @@ const BUILD_STEPS = [
  */
 export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
   const isLanding = sample.type.includes("landing-template");
-  // liveUrl의 템플릿 폴더명으로 섹션 캡처를 찾는다.
+  // 템플릿 폴더명으로 섹션 캡처를 찾는다.
   // 기본형 · 랜딩형(A 시안)은 업종 단위로 한 벌을 공유하고, B~E 시안은 폴더별로 따로 가진다.
-  const folder = sample.liveUrl?.match(/\/templates\/([a-z0-9-]+)\//)?.[1];
+  const folder = getTemplateFolder(sample);
   const sectionKey = folder?.replace(/-(?:basic|landing)$/, "");
   // 태블릿 · 모바일 목업 캡처는 A 시안(<업종>-basic · <업종>-landing)에만 있다.
   // tax-c-basic 같은 B~E 기본형은 여기 걸리면 안 되므로 업종명만 오는 형태로 한정한다.

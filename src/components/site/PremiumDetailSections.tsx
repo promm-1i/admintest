@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import type { Sample } from "@/lib/samples";
 import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
+import { getTemplateFolder } from "@/lib/templateFolder";
 import { Reveal } from "@/pages/services/previewKit";
 
 /** 프리미엄 라인에 공통으로 들어가는 제작 사양 — 기본형·랜딩형과 구분되는 지점만 적는다 */
@@ -91,7 +92,7 @@ const PREMIUM_FAQ = [
 ];
 
 export function PremiumDetailSections({ sample }: { sample: Sample }) {
-  const folder = sample.liveUrl?.match(/\/templates\/([a-z0-9-]+)\//)?.[1];
+  const folder = getTemplateFolder(sample);
   const shots = folder ? (TEMPLATE_SECTIONS[folder] ?? []) : [];
 
   return (

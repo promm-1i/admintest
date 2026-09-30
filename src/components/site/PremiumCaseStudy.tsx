@@ -11,6 +11,7 @@ import { getDesignCode } from "@/lib/designCode";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
 import { cn } from "@/lib/utils";
 import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
+import { getTemplateFolder } from "@/lib/templateFolder";
 
 /** 줄바꿈(\n)을 살려 제목을 끊는다 — 한글 제목은 끊는 자리를 문구에서 정한다 */
 function Lines({ text }: { text: string }) {
@@ -188,7 +189,7 @@ function CapabilityShowcase({
 }
 
 export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sample; study: CaseStudy }) {
-  const sectionShots = TEMPLATE_SECTIONS[sample.liveUrl?.match(/\/templates\/([a-z0-9-]+)\//)?.[1] ?? ""] ?? [];
+  const sectionShots = TEMPLATE_SECTIONS[getTemplateFolder(sample) ?? ""] ?? [];
   const study = toCustomerFacingCaseStudy(sourceStudy);
   const code = getDesignCode(sample);
   const liveUrl = sample.liveUrl ?? "";
