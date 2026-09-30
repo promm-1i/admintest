@@ -14,6 +14,7 @@
   _index.json · _skipped.json · _menu.json(--login)
 
 --login   창을 띄워 시작URL 에서 사람이 직접 로그인할 때까지 기다린다. 비밀번호는 스크립트가 넣지 않는다.
+--insecure  인증서 오류(만료·불일치)를 무시하고 연다.
 --chromium  설치된 크롬 대신 번들 크로미엄으로 연다. 크롬에서 전체 캡처가 끝나지 않는 쪽(bonif)이 있다.
 --prefix  이 경로로 시작하는 링크만 따라간다.
 --per     숫자만 다른 주소(매물 상세 1, 2, 3…)는 몇 개까지 받을지.
@@ -187,6 +188,7 @@ def main():
     MAX, PER, WAIT = int(opt('--max', 60)), int(opt('--per', 2)), int(opt('--wait', 1800))
     PREFIX, LOGIN, MOBILE = opt('--prefix', '/'), '--login' in a, '--mobile' in a
     CHROMIUM = '--chromium' in a
+    INSECURE = '--insecure' in a      # 인증서가 만료·불일치인 사이트(조세마루)
     if not PREFIX.startswith('/'):      # Git Bash 는 /admin 을 C:/Program Files/Git/admin 으로 바꿔 넘긴다
         sys.exit('--prefix 가 %s 로 들어왔다. MSYS_NO_PATHCONV=1 을 앞에 붙여 실행할 것' % PREFIX)
     host = urlparse(start).netloc
@@ -200,7 +202,7 @@ def main():
         b = (p.chromium.launch(headless=not LOGIN) if CHROMIUM
              else p.chromium.launch(channel='chrome', headless=not LOGIN))
         ctx = b.new_context(viewport={'width': 1440, 'height': 900}, device_scale_factor=1,
-                            accept_downloads=False, locale='ko-KR')
+                            accept_downloads=False, locale='ko-KR', ignore_https_errors=INSECURE)
         pg = ctx.new_page()
         bucket = []
         pg.on('response', lambda r: bucket.append(r))
@@ -306,7 +308,8 @@ def main():
 
         if MOBILE:
             mctx = b.new_context(viewport={'width': 390, 'height': 844}, device_scale_factor=1, is_mobile=True,
-                                 has_touch=True, user_agent=MOBILE_UA, accept_downloads=False, locale='ko-KR')
+                                 has_touch=True, user_agent=MOBILE_UA, accept_downloads=False, locale='ko-KR',
+                                 ignore_https_errors=INSECURE)
             mp = mctx.new_page()
             mb = []
             mp.on('response', lambda r: mb.append(r))
