@@ -63,7 +63,7 @@ const SITE = {
   // 프로그램
   programs: [
     { name: '기구 필라테스', en: 'Reformer', desc: '리포머 · 캐딜락 · 체어. 자세 교정과 코어 강화 중심의 그룹 수업.', level: '입문 – 심화' },
-    { name: '웨이트 트레이닝', en: 'Weight', desc: '프리웨이트 존 상시 이용. 머신이 아니라 바벨 중심으로 가르칩니다.', level: '회원 전용' },
+    { name: '웨이트 트레이닝', en: 'Weight', desc: '프리웨이트 존 상시 이용. 바벨과 덤벨 위주로 자세부터 가르칩니다.', level: '회원 전용' },
     { name: '1:1 퍼스널', en: 'Personal', desc: '체형 분석 후 필라테스 · 웨이트를 섞어 설계하는 개인 수업.', level: '맞춤' },
     { name: '재활 · 산전후', en: 'Rehab', desc: '통증 이력이 있는 분을 위한 저강도 프로그램. 의뢰서 지참 시 상담.', level: '전문' },
   ],
@@ -379,7 +379,7 @@ function Program() {
   return (
     <section id="program" ref={ref as React.RefObject<HTMLElement>} className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5">
-        <Head en="Programs" title="한 공간, 두 가지 운동" sub="필라테스로 정렬을 잡고 웨이트로 힘을 쌓습니다. 서로 다른 운동이 아니라 같은 몸의 순서입니다." inView={inView} />
+        <Head en="Programs" title="한 공간, 두 가지 운동" sub="필라테스로 정렬을 잡고 웨이트로 힘을 쌓습니다. 처음 두 달은 필라테스를 더 많이 합니다." inView={inView} />
         <div className="grid sm:grid-cols-2 gap-5">
           {SITE.programs.map((p, i) => (
             <article
