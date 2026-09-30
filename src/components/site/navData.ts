@@ -394,7 +394,7 @@ export const MAIN_NAV: MainNavEntry[] = [
     href: "/services/custom",
     groups: [
       { key: "custom", label: "커스텀 개발", href: "/services/custom", items: [
-        { label: "커스텀 개발이란?", href: "/services/custom", desc: "정해진 틀이 아니라 설계부터" },
+        { label: "커스텀 개발이란?", href: "/services/custom", desc: "업무에 맞춰 처음부터 설계" },
       ] },
       { key: "feature", label: "기능별 개발", href: "/website/features", items: [
         { label: "관리자 시스템", href: "/services/admin-system", desc: "공지 · 문의 · 콘텐츠를 직접 관리" },

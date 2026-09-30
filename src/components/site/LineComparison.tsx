@@ -126,7 +126,7 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
             <tr className="bg-card">
               <th scope="col" className="w-[5rem] px-2 py-3 text-left align-bottom sm:w-[9.5rem] sm:px-4 sm:py-4">
                 <span className="text-[11px] font-semibold text-muted-foreground break-keep sm:text-xs">
-                  여기가 갈립니다
+                  비교 항목
                 </span>
               </th>
               <th scope="col" className="px-2 py-3 text-left align-bottom sm:px-4 sm:py-4">

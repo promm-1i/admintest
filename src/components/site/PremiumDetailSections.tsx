@@ -21,7 +21,7 @@ const PREMIUM_SPECS: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Ruler,
     title: "픽셀 단위 실측 설계",
-    body: "레이아웃·여백·라운드·그림자를 눈대중이 아니라 값으로 정하고, 세 가지 화면 폭에서 다시 재서 맞춥니다.",
+    body: "레이아웃·여백·라운드·그림자를 원본에서 잰 값으로 정하고, 세 가지 화면 폭에서 다시 재서 맞춥니다.",
   },
   {
     icon: Type,
@@ -180,8 +180,8 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
         <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">How We Build</p>
         <h2 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">프리미엄 라인은 이렇게 만듭니다</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-          만들어 둔 화면에 내용만 채우는 방식이 아니라, 섹션 구성과 색 · 글꼴 · 사진을 브랜드에 맞춰
-          다시 잡습니다.
+          섹션 구성과 색 · 글꼴 · 사진을 브랜드에 맞춰 다시 잡습니다. 쪽마다 들어갈
+          문구와 사진 자리도 새로 정합니다.
         </p>
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PREMIUM_SPECS.map((f, i) => {

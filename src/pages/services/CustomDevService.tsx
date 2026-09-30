@@ -73,7 +73,7 @@ export const COST_FACTORS = [
 export default function CustomDevService() {
   usePageTitle(
     "커스텀 개발 안내 — NOVERIQ",
-    "템플릿이 아니라 업종의 업무 방식에 맞춰 화면과 기능을 처음부터 설계하는 커스텀 개발의 진행 절차와 비용 기준을 안내합니다.",
+    "업종의 업무 방식에 맞춰 화면과 기능을 처음부터 설계하는 커스텀 개발의 진행 절차와 비용 기준을 안내합니다.",
   );
 
   return (
@@ -88,7 +88,7 @@ export default function CustomDevService() {
           커스텀 개발이란?
         </h1>
         <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground break-keep">
-          정해진 템플릿이나 프리미엄 시안에서 출발하는 것이 아니라, 업종의 업무 방식에 맞춰 화면
+          미리 만들어 둔 템플릿이나 프리미엄 시안을 쓰지 않고, 업종의 업무 방식에 맞춰 화면
           구성과 기능을 처음부터 설계하는 방식입니다. 홈페이지와 관리자 시스템, 데이터베이스까지
           하나로 구축합니다.
         </p>
@@ -232,8 +232,8 @@ export default function CustomDevService() {
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">비용 기준</p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">비용은 이렇게 정해집니다</h2>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground break-keep">
-              커스텀 개발은 정찰가가 아니라, 아래 기준에 따라 상담 후 견적이 확정됩니다. 디자인비만이
-              아니라 관리자 기능과 데이터 처리 범위가 가격의 대부분을 결정합니다.
+              커스텀 개발은 정해진 가격이 없고, 아래 여섯 가지 기준으로 상담한 뒤 견적을 냅니다.
+              금액 차이는 대부분 관리자 기능과 데이터 처리 범위에서 납니다.
             </p>
           </Reveal>
           <Reveal delay={100}>
@@ -274,7 +274,7 @@ export default function CustomDevService() {
             </h2>
             <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground break-keep">
               부동산 · 렌트카 · 병원 등 업종별로 이미 이런 방식으로 구축해 둔 관리자 시스템과 고객
-              홈페이지가 있습니다. 설명 대신 실제 화면으로 확인해 보세요.
+              홈페이지가 있습니다. 아래 버튼으로 실제 화면을 직접 눌러 보실 수 있습니다.
             </p>
           </Reveal>
           <div className="mt-8 grid gap-4 sm:grid-cols-2">

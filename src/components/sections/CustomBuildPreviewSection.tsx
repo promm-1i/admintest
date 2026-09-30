@@ -131,7 +131,7 @@ export function CustomBuildPreviewSection() {
         <Reveal>
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">개발 방식</p>
           <h2 className="mt-3 text-3xl font-bold text-foreground break-keep">
-            정해진 틀이 아니라, 설계부터 만드는 방식
+            업무에 맞춰 화면부터 설계하는 방식
           </h2>
           <p className="mt-3 max-w-2xl text-base leading-relaxed text-muted-foreground break-keep">
             아래 네 가지가 커스텀 개발에서 실제로 일어나는 일입니다. 카드에 마우스를 올리면(모바일은

@@ -12,7 +12,7 @@ export function InteriorPreview() {
       title: "한남 파르크 68평 아파트 리노베이션",
       location: "서울 용산구 한남동",
       concept: "미니멀 미드센추리 & 월넛 원목",
-      desc: "공간의 구조를 가로지르는 간접 조명과 고급 이탈리아 천연석 상판으로 완성한 럭셔리 주거 공간",
+      desc: "거실 천장을 가로지르는 간접 조명을 넣고, 주방 상판을 이탈리아산 천연석으로 바꾼 아파트",
       afterImg: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
       beforeImg: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
     },
@@ -22,7 +22,7 @@ export function InteriorPreview() {
       title: "성수 아뜰리에 로스터리 카페 공간 컨설팅",
       location: "서울 성동구 성수동",
       concept: "노출 콘크리트 & 매트 스틸",
-      desc: "탁 트인 층고를 활용하여 로스팅 존과 커스텀 바를 유기적으로 배치한 인더스트리얼 상업 공간",
+      desc: "높은 층고를 살려 로스팅 존과 커스텀 바를 한 동선으로 묶은 노출 콘크리트 마감 카페",
       afterImg: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80",
       beforeImg: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
     },
@@ -32,7 +32,7 @@ export function InteriorPreview() {
       title: "판교 서판교 타운하우스 80평 전체 시공",
       location: "경기도 성남시 분당구",
       concept: "모던 파사드 & 히든 라인 라인조명",
-      desc: "자연광의 동선을 고려한 통창 배치와 서재, 와인 셀러를 수용하는 하이엔드 단독주택 디자인",
+      desc: "해가 드는 방향에 맞춰 거실 통창을 내고, 서재와 와인 셀러까지 들인 타운하우스 전체 시공",
       afterImg: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80",
       beforeImg: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80",
     },
@@ -90,11 +90,11 @@ export function InteriorPreview() {
             HIGH-END SPATIAL ARCHITECTURE
           </span>
           <h1 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight break-keep font-sans">
-            공간이 주는 감동과 가치를 <br />
-            디테일로 완성하는 아틀리에
+            설계부터 시공과 감리까지 <br />
+            한 팀이 끝까지 맡는 인테리어
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed font-sans break-keep">
-            동선 설계부터 3D 도면, 자재 선토까지 한 회사에서 맞습니다.
+            공사를 시작하기 전에 3D 도면으로 완성된 모습을 먼저 보여 드립니다.
           </p>
 
           <div className="pt-4 flex flex-wrap justify-center gap-4">
@@ -233,7 +233,7 @@ export function InteriorPreview() {
             <div className="p-5 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
               <span className="text-2xl font-mono font-bold text-amber-500">04</span>
               <h4 className="font-bold text-sm text-white">2년 무상 A/S 보증</h4>
-              <p className="text-xs text-slate-400 leading-relaxed">시공 완료 후 안심 정기 사후 관리 케어</p>
+              <p className="text-xs text-slate-400 leading-relaxed">준공 후 1년간 두 번 찾아가 점검합니다</p>
             </div>
           </div>
         </div>

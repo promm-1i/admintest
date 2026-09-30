@@ -35,7 +35,7 @@ export function BeautyPreview() {
       name: "시그니처 은하수 시럽 젤 네일",
       price: "65,000원",
       time: "60분",
-      desc: "은은하고 영롱하게 빛나는 수제 글리터 파츠 조합과 오랫동안 유지되는 안심 케어",
+      desc: "손으로 하나씩 붙이는 수제 글리터 파츠와 3~4주 유지되는 젤 코팅, 제거 시 손톱 보호",
       image: nailImg,
       tag: "인기 네일",
     },
@@ -95,11 +95,11 @@ export function BeautyPreview() {
               ✦ PRIVATE BEAUTY ATELIER
             </span>
             <h1 className="text-3xl sm:text-5xl font-serif font-bold text-rose-950 leading-tight">
-              당신의 본연의 빛을 <br />
-              가장 아름답게 깨우는 시간
+              피부 톤에 맞는 색을 <br />
+              원장이 직접 골라 드립니다
             </h1>
             <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-serif break-keep">
-              바쁜 일상에서 벗어나 감각적인 프라이빗 전용 공간에서 나만을 위한 섬세한 뷰티 테라피를 경험해 보세요.
+              예약한 손님 한 분만 1인 룸에서 받고, 상담부터 마무리까지 원장이 직접 합니다. 앞뒤 예약은 비워 둡니다.
             </p>
             <div className="pt-2 flex items-center gap-4">
               <a
@@ -227,7 +227,7 @@ export function BeautyPreview() {
             <span className="text-xs font-mono text-rose-700 uppercase tracking-widest">DIRECTOR</span>
             <h3 className="text-2xl font-bold text-rose-950">아티스트 유진 원장</h3>
             <p className="text-xs text-stone-600 leading-relaxed break-keep">
-              "피부는 감춰야 할 대상이 아닌, 자신감을 더해주는 가장 아름다운 바탕입니다. 한 분 한 분과의 정성스런 소통을 통해 가장 잘 어울리는 화사함을 찾아드리겠습니다."
+              "첫 방문 때는 시술 전에 20분쯤 피부 톤과 평소 화장 습관을 여쭤봅니다. 색은 그 이야기를 듣고 두세 가지로 좁혀서 손등에 직접 발라 보며 같이 고릅니다."
             </p>
             <div className="text-xs text-rose-900 space-y-1">
               <p>· 국가 공인 피부미용/메이크업 자격 보유</p>

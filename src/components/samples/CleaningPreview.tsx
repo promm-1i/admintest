@@ -47,14 +47,14 @@ export function CleaningPreview() {
       <section className="relative px-6 py-20 lg:py-28 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
         <div className="max-w-5xl mx-auto text-center space-y-6">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-semibold">
-            <ShieldCheck className="h-4 w-4 text-cyan-400" /> 하청 없는 100% 본사 직영 전문 팀 구속
+            <ShieldCheck className="h-4 w-4 text-cyan-400" /> 하청 없는 100% 본사 직영 전문 팀 구성
           </span>
           <h1 className="text-3xl sm:text-5xl font-extrabold text-white leading-tight break-keep">
             새집증후군 고민 끝! <br />
-            구석구석 완벽하게 케어하는 프리미엄 입주청소
+            뜯어낼 수 있는 곳은 전부 뜯어내서 닦는 입주청소
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed break-keep">
-            싱크대 걸레받이 하부, 환기구, 전등 갓 내부까지 전면 탈거 후 친환경 스팀 및 피톤치드로 말끔하게 케어해 드립니다.
+            싱크대 걸레받이 하부, 환기구, 전등 갓 내부까지 떼어 내고 친환경 스팀으로 닦은 뒤 피톤치드로 탈취합니다.
           </p>
 
           <div className="pt-2 flex flex-wrap justify-center gap-4">
@@ -80,7 +80,7 @@ export function CleaningPreview() {
           <div className="text-center space-y-2">
             <span className="text-xs font-mono text-cyan-400 font-bold uppercase">ESTIMATION</span>
             <h2 className="text-2xl font-bold text-white">실시간 입주청소 예상 견적기</h2>
-            <p className="text-xs text-slate-400">평수와 청소 유형을 선택하시면 투명한 맞춤 단가를 계산해 드립니다.</p>
+            <p className="text-xs text-slate-400">평수와 청소 유형을 고르시면 탈취 비용까지 넣은 예상 금액이 나옵니다.</p>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-6">

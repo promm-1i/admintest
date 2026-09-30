@@ -244,7 +244,7 @@ export default function InquiryReservationService() {
             예약 · 일정도 함께
           </p>
           <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
-            문의뿐 아니라 예약 · 일정도 같은 화면에서 관리합니다
+            문의와 예약 · 일정을 같은 화면에서 관리합니다
           </h2>
           <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
             임장, 계약, 상담, 전화, 입주처럼 업종에 필요한 일정 유형을 만들고, 담당자별로 배정해

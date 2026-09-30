@@ -96,7 +96,7 @@ const REASONS = [
   {
     icon: Handshake,
     title: "잔금·등기까지 동행",
-    desc: "계약이 끝이 아닙니다. 잔금 지급과 소유권 이전 등기 완료까지 담당 중개사가 함께합니다.",
+    desc: "잔금 지급과 소유권 이전 등기가 끝날 때까지 계약한 중개사가 직접 챙깁니다.",
   },
 ];
 
@@ -277,7 +277,7 @@ export function RealEstateLandingPreview() {
             className="mt-4 max-w-lg text-3xl font-bold leading-tight motion-safe:animate-[hero-text-fade_700ms_ease-out_150ms_both] sm:text-[2.6rem]"
             style={{ textWrap: "balance" }}
           >
-            당신의 다음 공간을
+            다음에 살 집을
             <br />
             가장 정확하게 찾아드립니다
           </h1>
@@ -381,7 +381,7 @@ export function RealEstateLandingPreview() {
         <Reveal className="text-center">
           <p className="text-[11px] font-semibold tracking-widest text-amber-400">WHY MARU</p>
           <h2 className="mt-2.5 text-2xl font-bold sm:text-3xl">
-            싸게 파는 곳이 아니라, 안전하게 끝내는 곳
+            등기 이전까지 확인하는 중개사무소
           </h2>
         </Reveal>
 

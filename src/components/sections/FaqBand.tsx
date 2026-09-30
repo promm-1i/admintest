@@ -27,7 +27,7 @@ const RECOMMENDED_FOR = [
   {
     icon: Gem,
     title: "브랜드를 제대로 보여주고 싶은 분",
-    desc: "단순 정보 전달을 넘어 브랜드 분위기에 맞춰 구성합니다.",
+    desc: "색과 글꼴, 사진 톤을 브랜드에 맞춰 정합니다.",
   },
   {
     icon: MessageSquareWarning,

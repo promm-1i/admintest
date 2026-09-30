@@ -98,16 +98,16 @@ export function HospitalPreview() {
       <section className="relative px-6 py-16 lg:py-24 overflow-hidden bg-gradient-to-b from-teal-50/90 via-white to-slate-50 border-b border-slate-200">
         <div className="relative max-w-5xl mx-auto text-center space-y-6">
           <div className="inline-flex items-center gap-2 rounded-full border border-teal-200 bg-teal-100/80 px-4 py-1.5 text-xs font-semibold text-teal-800">
-            <Shield className="h-3.5 w-3.5 text-teal-600" /> 대학병원급 최첨단 3D 정밀 검사 장비 도입
+            <Shield className="h-3.5 w-3.5 text-teal-600" /> 3D 피부 분석 장비 · 검사 당일 결과 상담
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight break-keep">
-            정확한 데이터 기반 진단과 <br />
-            환자 중심의 맞춤 정밀 케어
+            검사 결과를 화면으로 보며 <br />
+            치료 방법을 같이 정합니다
           </h1>
 
           <p className="max-w-2xl mx-auto text-sm sm:text-base leading-relaxed text-slate-600 break-keep">
-            과잉 진료 없는 정직한 마음으로, 분야별 전문의가 첫 진찰부터 치료 후 관리까지 1:1 전담으로 책임지고 함께합니다.
+            분야별 전문의가 첫 진찰부터 치료 후 관리까지 한 환자를 계속 맡습니다. 필요 없는 검사는 권하지 않습니다.
           </p>
 
           <div className="pt-2 flex flex-wrap justify-center gap-4">
@@ -154,7 +154,7 @@ export function HospitalPreview() {
           <div className="text-center space-y-2">
             <span className="text-xs font-mono text-teal-700 font-bold uppercase tracking-widest">MEDICAL CENTERS</span>
             <h2 className="text-3xl font-bold text-slate-900">센터별 맞춤 진료 과목</h2>
-            <p className="text-xs sm:text-sm text-slate-600">최첨단 의료 장비를 활용하여 신속하고 정확하게 원인을 진단합니다.</p>
+            <p className="text-xs sm:text-sm text-slate-600">센터마다 담당 전문의가 따로 있고, 진료 과목별로 예약을 받습니다.</p>
           </div>
 
           {/* Department Filter Tabs */}
@@ -221,7 +221,7 @@ export function HospitalPreview() {
           <div className="text-center space-y-2">
             <span className="text-xs font-mono text-teal-700 font-bold uppercase tracking-widest">REAL PATIENT REVIEWS</span>
             <h2 className="text-3xl font-bold text-slate-900">환자분들이 직접 남겨주신 후기</h2>
-            <p className="text-xs text-slate-600">민트 정밀의원을 다녀가신 환자분들의 진솔한 경험담입니다.</p>
+            <p className="text-xs text-slate-600">민트 정밀의원에서 진료를 받은 환자분들이 남긴 글을 옮겼습니다.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">

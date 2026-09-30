@@ -112,7 +112,7 @@ export function RestaurantPreview() {
     <div className="w-full bg-[#fcf9f2] text-stone-900 font-sans rounded-2xl overflow-hidden border border-amber-900/10 shadow-2xl">
       {/* Top Banner Header */}
       <div className="bg-amber-950 text-amber-200 text-xs py-2 px-6 text-center font-serif tracking-wider border-b border-amber-900/40">
-        🌿 당일 아침 산지 직송 식재료로 정갈하게 지어내는 단정한 한식당
+        🌿 서울 종로구 인사동길 45 · 매일 11:30 – 21:30 · 단독 룸 예약 가능
       </div>
 
       {/* Navigation Header */}
@@ -161,11 +161,11 @@ export function RestaurantPreview() {
             <Sparkles className="h-3.5 w-3.5 text-amber-400" /> TRADITIONAL KOREAN TABLE
           </div>
           <h1 className="text-3xl sm:text-5xl font-extrabold font-serif tracking-tight text-amber-50 leading-tight break-keep">
-            정성껏 지어내는 한 그릇의 온기,<br />
-            제철 식재료로 차려낸 깊은 정갈함
+            주문이 들어오면 짓는 가마솥 밥과<br />
+            강원도 농가에서 받는 산나물 반상
           </h1>
           <p className="text-sm text-stone-300 max-w-xl mx-auto break-keep leading-relaxed font-serif">
-            방앗간에서 직접 짜낸 고소한 들기름, 강원도 산지의 무농약 나물, 정성껏 다린 가마솥 밥. 다온에서 소중한 사람들과 따뜻한 정성을 나누세요.
+            들기름은 동네 방앗간에서 짜 오고, 국물은 멸치와 다시마로만 우립니다. 조미료는 넣지 않고, 간은 집에서 담근 간장과 소금으로 맞춥니다.
           </p>
           <div className="pt-3 flex flex-wrap justify-center gap-4">
             <a
@@ -190,10 +190,10 @@ export function RestaurantPreview() {
           <div className="space-y-6">
             <span className="text-xs font-mono text-amber-800 font-bold uppercase tracking-widest">BRAND PHILOSOPHY</span>
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-stone-900 leading-snug">
-              "음식은 곧 만드는 사람의 <br />마음가짐입니다."
+              "생선과 고기는 매일 새벽 <br />직접 고릅니다."
             </h2>
             <p className="text-sm text-stone-700 leading-relaxed break-keep font-serif">
-              다온 한식당은 인공조미료의 자극적인 맛을 내려놓고, 원재료 본연의 자연스러운 단맛과 고소함을 살려냅니다. 매일 새벽 장을 보고 식재료를 엄선하는 고집스러운 정성이 한 상 위의 감동으로 이어집니다.
+              다온 한식당의 반찬 구성은 그날 들어온 재료로 정합니다. 생선이 좋은 날은 구이를 한 가지 더 올리고, 나물이 적게 들어온 날은 전을 부칩니다. 그래서 같은 상이라도 차림이 날마다 조금씩 다릅니다.
             </p>
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="p-4 rounded-xl bg-amber-100/60 border border-amber-200/80">
@@ -228,7 +228,7 @@ export function RestaurantPreview() {
           <span className="text-xs font-mono text-amber-800 font-bold uppercase tracking-widest">DAON MENU CATALOG</span>
           <h2 className="text-3xl font-serif font-bold text-stone-900">다온 정갈한 차림표</h2>
           <p className="text-xs text-stone-600 max-w-lg mx-auto">
-            각 메뉴 이름에 꼭 맞는 정갈하고 정성스런 음식 사진입니다. 클릭하여 담아보세요.
+            사진은 실제로 나가는 차림 그대로 찍었습니다. 포장은 '포장 담기'로 골라 주세요.
           </p>
         </div>
 
@@ -300,12 +300,12 @@ export function RestaurantPreview() {
             <span className="text-xs font-mono text-amber-400 font-bold uppercase tracking-widest">ONLINE RESERVATION</span>
             <h2 className="text-3xl font-serif font-bold text-amber-50">프라이빗 룸 & 단체 예약</h2>
             <p className="text-xs text-stone-300 leading-relaxed font-serif">
-              상견례, 돌잔치, 정갈한 가족 모임을 위한 단독 룸이 준비되어 있습니다. 사전에 예약하시면 맞춤 세팅을 도와드립니다.
+              상견례·돌잔치·가족 모임에 쓰실 수 있는 단독 룸이 있습니다. 미리 예약하시면 인원에 맞춰 상을 차려 둡니다.
             </p>
             <div className="pt-2 space-y-2 text-xs text-amber-200 font-serif">
               <p className="flex items-center gap-2"><Check className="h-4 w-4 text-amber-400" /> 4인 ~ 24인 프라이빗 방음 룸</p>
               <p className="flex items-center gap-2"><Check className="h-4 w-4 text-amber-400" /> 주차 가능 (1시간 무료 지원)</p>
-              <p className="flex items-center gap-2"><Check className="h-4 w-4 text-amber-400" /> 콜키지 프립 문의 가능</p>
+              <p className="flex items-center gap-2"><Check className="h-4 w-4 text-amber-400" /> 콜키지 프리 문의 가능</p>
             </div>
           </div>
 

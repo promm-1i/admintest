@@ -687,7 +687,7 @@ function HeroVideo() {
       <div className="greeting-swiper re-greeting__slides" aria-live="polite">
         <div className="swiper">
           <div className="swiper-wrapper">
-            <div className={`swiper-slide${slide === 0 ? " swiper-slide-active" : ""}`} style={{ transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><h1 className="greeting-slogan"><span>고객님의 비즈니스</span><span>우리가 함께합니다</span></h1></div>
+            <div className={`swiper-slide${slide === 0 ? " swiper-slide-active" : ""}`} style={{ transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><h1 className="greeting-slogan"><span>소상공인·기업</span><span>홈페이지를 만듭니다</span></h1></div>
             <div className={`swiper-slide${slide === 1 ? " swiper-slide-active" : ""}`} style={{ transform: "translate3d(-100%, 0, 0)", transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><p className="greeting-message">처음 상담부터<br />오픈 이후까지</p></div>
           </div>
         </div>
