@@ -9,7 +9,7 @@ const study: CaseStudy = {
   brandColor: "rgb(14, 58, 92)",
   tintColor: "rgb(247, 247, 251)",
   overview:
-    "국립하람대학교 K-모빌리티 국제교육센터 디자인은 교육모델을 해외에 내보내고 교육과정 인증제도를 운영하는 대학 부설 센터를 가정해 구성했습니다. 첫 화면은 14초 배경 영상과 참여국 띠로 하는 일을 먼저 알리고, 이어서 미션·교육 콘텐츠·숫자·인증제도 순으로 내려갑니다.\n\n총장 인사말, 대학 소개와 연혁, 사업내용과 성과, 국가별 추진현황, 인증제도 여섯 쪽, 참여학과, 교육과정 아카이브와 상세, 문의하기까지 서브 17쪽을 갖췄습니다. 표와 폼이 많은 기관 사이트라 표 머리·행 높이·입력칸 규격을 한 벌로 맞췄습니다.\n\n대학명, 센터명, 국가별 현황, 위원 명단, 연락처와 화면 이미지는 디자인 예시이며 실제 기관의 사업 내용과 규정에 맞춰 바꿉니다.",
+    "국립하람대학교 K-모빌리티 국제교육센터 디자인은 교육모델을 해외에 내보내고 교육과정 인증제도를 운영하는 대학 부설 센터를 가정해 구성했습니다. 첫 화면에는 14초 배경 영상과 참여국 이름이 흐르는 띠가 있고, 그 아래로 미션·교육 콘텐츠·숫자·인증제도가 차례로 이어집니다.\n\n총장 인사말, 대학 소개와 연혁, 사업내용과 성과, 국가별 추진현황, 인증제도 여섯 쪽, 참여학과, 교육과정 아카이브와 상세, 문의하기까지 서브 17쪽을 갖췄습니다. 표 머리와 행 높이, 입력칸 규격은 모든 쪽에서 같습니다.\n\n대학명, 센터명, 국가별 현황, 위원 명단, 연락처와 화면 이미지는 디자인 예시이며 실제 기관의 사업 내용과 규정에 맞춰 바꿉니다.",
   meta: [
     { label: "적합 업종", value: "대학 부설 센터 · 사업단 · 공공기관 · 협회 · 재단" },
     { label: "주요 구성", value: "기관소개 · 사업내용 · 성과 · 인증제도 6쪽 · 게시판 · 신청·문의 폼" },
@@ -18,8 +18,8 @@ const study: CaseStudy = {
   mainShot: "/cases/corporate-t/main.webp",
   capabilities: {
     label: "PAGES",
-    title: "기관 사이트에 필요한 화면을 18개로 나눴습니다",
-    body: "소개·사업·성과·제도·게시판·문의를 따로 두고, 메뉴 한 단계 안에서 바로 닿게 했습니다. 표가 많은 쪽은 머리·행 높이를 한 벌로 맞추고, 신청과 문의는 같은 폼 규격을 씁니다.",
+    title: "소개부터 문의까지 18개 화면",
+    body: "소개·사업·성과·제도·게시판·문의를 따로 나눴고, 어느 화면이든 머리 메뉴에서 바로 들어갑니다. 표는 머리와 행 높이가 모두 같고, 신청 폼과 문의 폼은 입력칸 규격이 같습니다.",
     stats: [
       { value: "18", label: "실제 구축 화면", note: "게시판 목록·상세 포함" },
       { value: "6", label: "인증제도 화면", note: "소개·절차·기준·위원회·일정·신청" },
@@ -30,7 +30,7 @@ const study: CaseStudy = {
       {
         label: "스크롤 고정 장면",
         title: "성과 숫자와 인증 카드가 화면을 채우며 열립니다",
-        body: "가운데 좁은 띠로 시작한 화면이 스크롤에 따라 좌우로 열려 전체를 채우고, 그 위에서 숫자가 올라갑니다. 다 읽고 내려가면 아래에 깔린 인증제도 화면이 드러납니다.",
+        body: "가운데 좁은 띠로 시작한 화면이 스크롤에 따라 좌우로 열려 전체를 채우고, 그 위에서 숫자가 올라갑니다. 더 내리면 아래에 겹쳐 둔 인증제도 화면이 나옵니다.",
         items: ["좌우로 열리는 화면 전환", "네 개 숫자 세기", "겹쳐 둔 두 장면 교체"],
         img: "/cases/corporate-t/point-impact.webp",
         caption: "메인 · 성과 숫자 장면",
@@ -66,7 +66,7 @@ const study: CaseStudy = {
       {
         label: "연혁",
         title: "글과 사진을 좌우로 갈라 연도순으로 내려갑니다",
-        body: "가운데 세로선을 두고 한쪽에 연도와 한 일, 반대쪽에 그 시기 사진을 놓았습니다. 다음 구간은 좌우를 바꿔 같은 방향으로만 읽히지 않게 했습니다.",
+        body: "가운데 세로선을 두고 한쪽에 연도와 한 일, 반대쪽에 그 시기 사진을 놓았습니다. 다음 구간은 좌우를 바꿔 놓았습니다.",
         items: ["좌우 교차 배치", "구간마다 사진 한 장", "가운데 세로선"],
         img: "/cases/corporate-t/point-timeline.webp",
         caption: "히스토리 · 연혁",
@@ -75,7 +75,7 @@ const study: CaseStudy = {
       {
         label: "표와 폼",
         title: "명단·일정·신청서를 같은 규격으로 맞췄습니다",
-        body: "기관 사이트는 표와 폼이 본문입니다. 표 머리는 검은 바탕 흰 글자, 행 높이는 한 값으로 맞췄고, 신청 폼과 문의 폼은 같은 입력칸 규격을 씁니다.",
+        body: "표 머리는 검은 바탕에 흰 글자이고 행 높이는 모두 같습니다. 신청 폼과 문의 폼은 같은 입력칸 규격을 씁니다.",
         items: ["위원회 명단표 · 학과별 전문위원", "단계별 일정표", "신청·문의 폼 같은 규격"],
         img: "/cases/corporate-t/page-committee.webp",
         caption: "위원회 구성 · 명단표",
@@ -86,14 +86,14 @@ const study: CaseStudy = {
   pagesLabel: "PREVIEW",
   pagesTitle: "전체 화면",
   pages: [
-    { name: "홈", file: "index.html", img: "/cases/corporate-t/page-index.webp", desc: "하는 일과 참여국을 먼저 알리고 미션·콘텐츠·숫자·인증제도·소식 순으로 내려갑니다.", items: ["14초 배경 영상 히어로", "참여국 흐름 띠", "성과 숫자 장면", "인증제도 카드 다섯"] },
+    { name: "홈", file: "index.html", img: "/cases/corporate-t/page-index.webp", desc: "배경 영상과 참여국 띠 아래로 미션·콘텐츠·숫자·인증제도·소식이 차례로 이어집니다.", items: ["14초 배경 영상 히어로", "참여국 흐름 띠", "성과 숫자 장면", "인증제도 카드 다섯"] },
     { name: "총장 인사말", file: "greeting.html", img: "/cases/corporate-t/page-greeting.webp", desc: "총장과 센터장의 글을 사진과 나란히 두 구간으로 나눠 실었습니다.", items: ["인사말 두 구간", "인물 사진", "영문 워드마크 띠"] },
     { name: "대학 소개", file: "university.html", img: "/cases/corporate-t/page-university.webp", desc: "탭으로 히스토리·대학·모빌리티대학을 나누고 인재상 세 갈래를 설명합니다.", items: ["탭 내비 세 칸", "인재상 목록 고정", "항목별 사진"] },
     { name: "히스토리", file: "history.html", img: "/cases/corporate-t/page-history.webp", desc: "개교부터 지금까지를 좌우 교차 연표로 내려가며 보여 줍니다.", items: ["좌우 교차 연표", "구간별 사진", "연도와 한 일"] },
     { name: "사업내용", file: "business.html", img: "/cases/corporate-t/page-business.webp", desc: "추진과정과 성과, 국제적 위상, 차별성을 왼쪽 목차와 함께 정리합니다.", items: ["왼쪽 목차 고정", "단계 카드", "성과·위상·차별성"] },
     { name: "센터소개", file: "center.html", img: "/cases/corporate-t/page-center.webp", desc: "센터가 하려는 일을 큰 문장과 넓은 사진, 다섯 갈래 추진방향으로 설명합니다.", items: ["대형 문장", "넓은 사진", "추진방향 다섯"] },
     { name: "조직도", file: "organization.html", img: "/cases/corporate-t/page-organization.webp", desc: "의사결정 구조를 도표로 보이고 구성원 연락처를 표로 정리합니다.", items: ["조직 도표", "구성원 표", "분장업무·연락처"] },
-    { name: "센터역할", file: "role.html", img: "/cases/corporate-t/page-role.webp", desc: "사진 위 한 문장으로 성격을 밝히고 일곱 가지 기능을 네 칸으로 나눕니다.", items: ["사진 위 문장", "7대 기능 네 칸", "기능별 설명"] },
+    { name: "센터역할", file: "role.html", img: "/cases/corporate-t/page-role.webp", desc: "사진 위에 한 문장을 얹고, 일곱 가지 기능을 네 칸에 나눠 적었습니다.", items: ["사진 위 문장", "7대 기능 네 칸", "기능별 설명"] },
     { name: "사업 성과", file: "performance.html", img: "/cases/corporate-t/page-performance.webp", desc: "무엇을·어디서·어떻게·언제 네 갈래로 나눠 성과와 협력 기관을 정리합니다.", items: ["네 갈래 구성", "협력 기관 표", "단계별 로드맵"] },
     { name: "국가별 추진 현황", file: "progress.html", img: "/cases/corporate-t/page-progress.webp", desc: "나라별 협력 단계를 펼침 목록으로 두어 필요한 나라만 열어 봅니다.", items: ["나라별 펼침 목록", "협력 단계 표시", "세부 실적"] },
     { name: "인증제도 소개", file: "cert.html", img: "/cases/corporate-t/page-cert.webp", desc: "제도를 만든 배경과 비전, 세 가지 목표를 순서대로 설명합니다.", items: ["배경과 필요성", "사진 위 비전 밴드", "목표 세 칸"] },
@@ -106,10 +106,10 @@ const study: CaseStudy = {
     { name: "문의하기", file: "contact.html", img: "/cases/corporate-t/page-contact.webp", desc: "문의 유형을 고르는 폼과 캠퍼스 세 곳의 위치를 함께 둡니다.", items: ["문의 유형 선택", "연락처 입력", "캠퍼스 세 곳"] },
   ],
   points: [
-    { title: "하는 일을\n첫 화면에서 바로 알립니다", body: "옛 정비 공장에서 지금의 캠퍼스로 이어지는 14초 영상 위에 한 문장을 크게 놓고, 연도가 1952에서 2030으로 넘어갑니다.", items: ["대형 히어로 문장", "참여국 흐름 띠", "교육과정 보기 버튼"], img: "/cases/corporate-t/point-mission.webp", caption: "홈 · 첫 화면" },
-    { title: "숫자는 화면이 열리면서\n올라갑니다", body: "가운데 띠로 시작한 화면이 좌우로 열려 전체를 채우고, 그 위에서 협약 건수와 참여국 수가 세어 올라갑니다.", items: ["좌우로 열리는 전환", "네 개 숫자 세기", "1500 이상에서 네 칸"], img: "/cases/corporate-t/point-impact.webp", caption: "홈 · 성과 숫자" },
-    { title: "인증제도 다섯 화면을\n카드로 나눠 놓습니다", body: "제도 소개·절차·기준·위원회·일정을 반투명 카드 다섯 장으로 두고, 마우스를 올리면 흰 배경으로 바뀌며 어디로 가는지 분명해집니다.", items: ["유리 질감 카드 다섯", "호버 시 흰 배경", "각 화면으로 연결"], img: "/cases/corporate-t/point-accred.webp", caption: "홈 · 인증제도" },
-    { title: "소식 목록은\n올린 항목의 사진을 띄웁니다", body: "오른쪽 목록에서 한 줄에 마우스를 올리면 왼쪽 빈 자리에 그 소식의 사진이 떠오릅니다. 목록만으로는 알기 어려운 내용을 먼저 보여 줍니다.", items: ["다섯 줄 소식 목록", "호버 사진 미리보기", "전체보기 연결"], img: "/cases/corporate-t/point-news.webp", caption: "홈 · 소식" },
+    { title: "14초 영상 위에\n큰 문장 한 줄", body: "옛 정비 공장에서 지금의 캠퍼스로 이어지는 14초 영상 위에 한 문장을 크게 놓고, 연도가 1952에서 2030으로 넘어갑니다.", items: ["대형 히어로 문장", "참여국 흐름 띠", "교육과정 보기 버튼"], img: "/cases/corporate-t/point-mission.webp", caption: "홈 · 첫 화면" },
+    { title: "좌우로 열리는 화면과\n네 개의 숫자", body: "가운데 띠로 시작한 화면이 좌우로 열려 전체를 채우고, 그 위에서 협약 건수와 참여국 수가 세어 올라갑니다.", items: ["좌우로 열리는 전환", "네 개 숫자 세기", "1500 이상에서 네 칸"], img: "/cases/corporate-t/point-impact.webp", caption: "홈 · 성과 숫자" },
+    { title: "인증제도 화면으로 가는\n카드 다섯 장", body: "제도 소개·절차·기준·위원회·일정을 반투명 카드 다섯 장으로 두고, 마우스를 올린 카드는 흰 배경으로 바뀌고, 누르면 그 화면으로 갑니다.", items: ["유리 질감 카드 다섯", "호버 시 흰 배경", "각 화면으로 연결"], img: "/cases/corporate-t/point-accred.webp", caption: "홈 · 인증제도" },
+    { title: "소식에 마우스를 올리면\n왼쪽에 사진이 뜹니다", body: "오른쪽 목록에서 한 줄에 마우스를 올리면 왼쪽 빈 자리에 그 소식의 사진이 떠오릅니다.", items: ["다섯 줄 소식 목록", "호버 사진 미리보기", "전체보기 연결"], img: "/cases/corporate-t/point-news.webp", caption: "홈 · 소식" },
   ],
   details: [
     { title: "메뉴 구조 조정", body: "실제 사업 단위에 맞춰 1단계 메뉴와 하위 항목, 화면 수를 다시 나눕니다." },
@@ -121,8 +121,8 @@ const study: CaseStudy = {
     { title: "첫 화면 영상 교체", body: "기관이 가진 영상으로 바꿉니다. 휴대폰에는 가벼운 판을 따로 내보내 데이터 부담을 줄입니다." },
   ],
   mobile: {
-    title: "휴대폰에서는 표와 폼을 먼저 읽히게 바꿉니다",
-    body: "여러 칸으로 나뉜 구역은 한 줄씩 쌓고, 표는 가로로 밀어 보게 했습니다. 입력칸은 이름표를 위에 올려 좁은 화면에서도 무엇을 적는 칸인지 보이게 했습니다.",
+    title: "휴대폰에서는 한 줄씩 쌓고 표는 가로로 밉니다",
+    body: "여러 칸으로 나뉜 구역은 한 줄씩 쌓고, 표는 가로로 밀어 보게 했습니다. 입력칸 이름표는 칸 위로 올렸습니다.",
     shots: [
       { img: "/cases/corporate-t/m-index.webp", caption: "메인" },
       { img: "/cases/corporate-t/m-business.webp", caption: "사업내용" },
