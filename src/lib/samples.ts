@@ -419,6 +419,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "interior-h-template",
+    industry: "아파트 인테리어 설계 · 시공 회사 홈페이지",
+    title: "아파트 인테리어 설계 · 시공 회사 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 인테리어 · 시공사례 · 상담문의 · 30페이지",
+    purpose:
+      "연필 스케치가 실제 거실로 바뀌는 첫 화면 영상이 스크롤하면 화면 가운데로 작아지고, 화면에 붙은 채 시공 과정 사진이 한 장씩 열리며 겹치는 메인에, 회사소개 · 시공사례 목록 2쪽과 상세 25쪽 · 상담문의 쪽을 담은 아파트 인테리어 회사 홈페이지입니다.",
+    features: [
+      "스케치 → 사진 첫 화면 영상 · 스크롤하면 가운데로 작아지는 영상 · 첫 방문 알림창",
+      "화면에 붙은 채 열리는 시공 과정 사진 5장 · 끊김 없이 흐르는 시공 사진 띠",
+      "시공사례 25건(위치 · 평형 · 키워드 표 · 사진 줄) · 목록 검색",
+      "상담 신청 양식 · 시공 문의 쓰기(날짜 · 지역 고르기 · 자동등록방지)",
+    ],
+    idealFor: "아파트 · 주거 인테리어 설계 · 시공 회사, 리모델링 · 부분 시공 업체, 시공 사례를 차곡차곡 보여 주려는 인테리어 스튜디오",
+    image: "/thumbs/interior-h.jpg",
+    liveUrl: "/noul/",
+    industryKey: "interior",
+    premiumLabel: "아파트 인테리어",
+    designCode: "INTP-1002",
+    premium: true,
+  },
+  {
     slug: "semroot-template",
     industry: "수학학원 · 학습플랫폼 홈페이지",
     title: "수학학원 · 학습플랫폼 홈페이지 (프리미엄 디자인 A)",
