@@ -441,6 +441,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "fitness-g-template",
+    industry: "프리미엄 피트니스 · 위탁운영 회사 홈페이지",
+    title: "프리미엄 피트니스 · 위탁운영 회사 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 피트니스 · 위탁운영 · 트레이너 · 7페이지",
+    purpose:
+      "사진 여섯 장이 엇갈려 올라오고 브랜드 이름이 화면 폭을 채우는 첫 화면, 가는 원 위로 점이 도는 운동 솔루션 네 가지, 화면에 붙은 채 바뀌는 운영 사례, 마우스를 대면 펼쳐지는 전문성 카드로 이어지는 메인에, 회사 소개 · 위탁운영 · 프로그램 · 문의 쪽을 담은 피트니스 회사 홈페이지입니다.",
+    features: [
+      "화면 폭을 채우는 브랜드 이름 · 엇갈려 올라오는 첫 화면 사진 6장",
+      "원 위로 점이 도는 솔루션 그림 4종 · 화면에 붙은 채 바뀌는 운영 사례",
+      "트레이너 소개 · 저절로 흐르는 라이프스타일 사진 · 연도별 연혁",
+      "위탁운영 5단계 · 프로그램 목록 표시선 · 문의 양식 창",
+    ],
+    idealFor: "프리미엄 피트니스 센터 · PT 스튜디오, 호텔 · 기업 · 아파트 커뮤니티 피트니스 위탁운영 회사, 트레이너 팀을 앞세우려는 웰니스 브랜드",
+    image: "/thumbs/fitness-g.jpg",
+    liveUrl: "/baymotion/",
+    industryKey: "fitness",
+    premiumLabel: "피트니스 · 위탁운영",
+    designCode: "FITP-1002",
+    premium: true,
+  },
+  {
     slug: "semroot-template",
     industry: "수학학원 · 학습플랫폼 홈페이지",
     title: "수학학원 · 학습플랫폼 홈페이지 (프리미엄 디자인 A)",
