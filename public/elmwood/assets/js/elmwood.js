@@ -16,6 +16,14 @@
   function kids(el) { return el ? [].slice.call(el.children) : []; }
   function pad(n) { return (n < 10 ? '0' : '') + n; }
   var HIDDEN = "hidden";
+  /* 빈 결과 칸 — 원본은 결과가 없을 때만 그린다. 쪽에는 <template> 로 두고(목록 칸 형제 순번이 원본과 같게) 처음 필요할 때 그 자리에 꺼낸다 */
+  function nodata() {
+    var t = $('template[data-ew="nodata"]');
+    if (!t) return null;
+    var el = t.content.firstElementChild.cloneNode(true);
+    t.parentNode.replaceChild(el, t);
+    return el;
+  }
 
   /* ── 본문 스크롤 잠금(앤트 창이 열릴 때 body 에 거는 것과 같은 값) ── */
   var locks = 0;
@@ -661,7 +669,7 @@
     if (EW.page !== 'whatson') return;
     var cards = $$('a[data-id]').filter(function (a) { return /^event-\d+\.html/.test(a.getAttribute('href')); });
     if (!cards.length) return;
-    var grid = cards[0].parentNode, nod = $('[data-ew="nodata"]');
+    var grid = cards[0].parentNode, nod = null;
     var row = $$('button').filter(function (b) { return b.textContent.trim() === 'All'; })[0];
     if (!row) return;
     var chips = kids(row.parentNode);
@@ -674,7 +682,9 @@
         if (show) n++;
       });
       swap(grid, !n, HIDDEN, '');
-      if (grid.nextElementSibling && grid.nextElementSibling !== nod) swap(grid.nextElementSibling, !n, HIDDEN, '');
+      var nx = grid.nextElementSibling;
+      if (nx && nx !== nod && nx.tagName !== 'TEMPLATE') swap(nx, !n, HIDDEN, '');
+      if (!n && !nod) nod = nodata();
       if (nod) swap(nod, !!n, HIDDEN, '');
     }
     chips.forEach(function (b, i) {
@@ -691,7 +701,7 @@
   function lifestyleList() {
     if (!/^lifestyle/.test(EW.page || '')) return;
     var cards = $$('a[data-id]').filter(function (a) { return /^shop-\d+\.html/.test(a.getAttribute('href')); });
-    var grid = cards.length ? cards[0].parentNode : null, nod = $('[data-ew="nodata"]');
+    var grid = cards.length ? cards[0].parentNode : null, nod = null;
     var all = $$('button').filter(function (b) { return b.textContent.trim() === 'All'; })[0];
     if (all) {
       kids(all.parentNode).forEach(function (b, i) {
@@ -728,6 +738,7 @@
         shown = PER;
         var n = paint();
         swap(grid.parentNode, !n, HIDDEN, '');
+        if (!n && !nod) nod = nodata();
         if (nod) swap(nod, !!n, HIDDEN, '');
         var cat = { 'lifestyle-shop': 'br0101', 'lifestyle-eat': 'br0102', 'lifestyle-wellness': 'br0103', 'lifestyle-culture': 'br0104' }[EW.page] || '';
         W.history.replaceState(null, '', W.location.pathname + '?lang=ko&currentPageNo=1&category=' + cat + '&order=createDt&name=' + inp.value);
@@ -750,7 +761,7 @@
     function run() { W.location.href = 'search.html?keyword=' + encodeURIComponent(inp.value); }
     on(inp, 'keydown', function (e) { if (e.key === 'Enter') run(); });
     on(go, 'click', run);
-    var cw = $(".ewcntx-wr"), nod = $('[data-ew="nodata"]');
+    var cw = $(".ewcntx-wr");
     var bar = cw.children[0], allA = bar.querySelector('[data-ew="all"]'), tabT = bar.querySelector('[data-ew="tab"]');
     var KINDS = [['brand', 'Lifestyle', 4], ['event', 'Event & Promotion', 3], ['press', 'Press & Media', 3], ['stories', 'Stories of Elmwood', 3]];
     var k = kw.toLowerCase(), found = {}, total = 0;
@@ -763,7 +774,7 @@
     tabT.remove();
     if (!total) {
       cw.style.display = 'none';
-      if (nod) delc(nod, HIDDEN);
+      delc(nodata(), HIDDEN);
       return;
     }
     var tabsA = [allA];
