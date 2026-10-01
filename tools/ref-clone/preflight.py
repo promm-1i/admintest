@@ -168,7 +168,7 @@ def check_images(slug):
         warn('Pillow 없음 — 건너뜀')
         return
     mine = tpl_dir(slug)
-    files = glob.glob(mine + '/assets/*.jpg') + glob.glob(mine + '/assets/*.png')
+    files = glob.glob(mine + '/assets/**/*.jpg', recursive=True) + glob.glob(mine + '/assets/**/*.png', recursive=True)   # assets/img/ 아래도
     if not files:
         warn('이미지 없음')
         return
