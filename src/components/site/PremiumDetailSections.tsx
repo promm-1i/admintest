@@ -105,7 +105,7 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
           </p>
           <h2 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">이 디자인에 담긴 화면들</h2>
           <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-            실제 배포된 화면을 구간째로 담았습니다. 자르지 않아 각 화면이 끝까지 보입니다. 이 화면이 출발점이고, 여기서 섹션 순서와 브랜드
+            실제 배포된 화면을 구간째로 찍었습니다. 자르지 않아 화면마다 아래 끝까지 보입니다. 이 화면이 출발점이고, 여기서 섹션 순서와 브랜드
             색 · 글꼴을 사장님 사업에 맞춰 다시 잡은 뒤 사진을 새로 만들어 채웁니다.
           </p>
           {/* grid-cols-1: 없으면 모바일 암시적 열이 캡션의 min-content(376px)로 잡혀 컨테이너를 넘친다 */}

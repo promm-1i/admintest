@@ -98,7 +98,7 @@ export default function WebSolutions() {
         프리미엄 디자인 홈페이지 제작
       </h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        완성된 템플릿을 고르는 것이 아니라, 프리미엄 등급 시안을 출발점으로 섹션 구성부터 브랜드에 맞춰
+        프리미엄 등급 시안을 출발점으로 섹션 구성부터 브랜드에 맞춰
         다시 잡는 라인입니다. 사진도 브랜드에 맞춰 새로 제작하고, 관리자는 사장님 사업 데이터에 맞춰
         설계합니다. 정확한 기능 구성과 견적은 상담 후 확정됩니다.
       </p>

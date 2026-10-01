@@ -44,7 +44,7 @@ export default function ProductQuoteSolution() {
       </p>
       <h1 className="mt-3 text-3xl font-semibold">제품 / 견적관리 웹 솔루션</h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        제품을 체계적으로 관리하고, 고객이 필요한 제품에 바로 견적을 요청할 수 있는 웹 솔루션입니다.
+        제품을 분류별로 관리하고, 고객이 필요한 제품에 바로 견적을 요청할 수 있는 웹 솔루션입니다.
         카탈로그형 홈페이지가 필요한 제조·유통·B2B 기업에 적합합니다.
       </p>
 

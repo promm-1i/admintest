@@ -91,7 +91,7 @@ export function InteriorPreview() {
           </span>
           <h1 className="text-3xl sm:text-6xl font-extrabold text-white tracking-tight leading-tight break-keep font-sans">
             설계부터 시공과 감리까지 <br />
-            한 팀이 끝까지 맡는 인테리어
+            한 팀이 철거부터 마감까지 맡는 인테리어
           </h1>
           <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto leading-relaxed font-sans break-keep">
             공사를 시작하기 전에 3D 도면으로 완성된 모습을 먼저 보여 드립니다.

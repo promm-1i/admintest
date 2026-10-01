@@ -414,7 +414,7 @@ function HomeHelp() {
   const root = useRoot();
   return <section className="re-nhn re-nhn--help">
     <div className="re-nhn__frame">
-      <h2 className="re-nhn__heading">도움 되는 정보 한눈에 보기</h2>
+      <h2 className="re-nhn__heading">도움 되는 정보 모아 보기</h2>
       <p className="re-nhn__lead">지금 가장 필요한 정보부터 살펴보세요.</p>
       <ul className="re-help-list">{HELP_CARDS.map((card) => <li className={`re-help re-help--${card.tone}`} key={card.title}>
         <Link to={`${root}${card.href}`}>
@@ -1047,8 +1047,8 @@ function FaqPage() {
 }
 
 const ABOUT_VALUES = [
-  { num: "01", title: "담당자와 직접 소통", desc: "기획 대행을 거치지 않고 제작 담당자와 바로 주고받습니다. 고칠 곳을 말하면 그날 반영합니다.", points: ["중간 전달 단계 없음", "요청한 수정은 진행 중에도 반영", "어려운 용어 대신 화면으로 설명"] },
-  { num: "02", title: "문의로 이어지는 구조", desc: "화면을 화려하게 만드는 대신, 방문자가 서비스와 위치, 가격을 한눈에 보고 바로 연락하도록 동선을 짭니다.", points: ["대표 서비스와 가격을 위쪽에 배치", "전화·지도·카카오톡 버튼 상시 노출", "모바일에서 누르기 쉬운 크기"] },
+  { num: "01", title: "담당자와 직접 소통", desc: "기획 대행을 거치지 않고 제작 담당자와 바로 주고받습니다. 고칠 곳을 말하면 그날 반영합니다.", points: ["중간 전달 단계 없음", "요청한 수정은 진행 중에도 반영", "어려운 용어는 화면으로 설명"] },
+  { num: "02", title: "문의로 이어지는 구조", desc: "방문자가 서비스와 위치, 가격을 첫 화면에서 보고 바로 연락하도록 메뉴 순서와 버튼 위치를 짭니다.", points: ["대표 서비스와 가격을 위쪽에 배치", "전화·지도·카카오톡 버튼 상시 노출", "모바일에서 누르기 쉬운 크기"] },
   { num: "03", title: "오픈 뒤에도 이어지는 관리", desc: "배포하고 끝내지 않습니다. 문구 수정, 사진 교체, 공지 등록을 오픈 이후에도 도와드립니다.", points: ["오픈 후 1개월 무상 수정", "운영 중 문구·사진 교체 지원", "관리자 화면에서 직접 관리"] },
 ];
 
@@ -1070,7 +1070,7 @@ function AboutPage() {
 
 // 호스팅은 따로 받지 않는다. 첫 해 호스팅료 240,000원을 네 항목에 60,000원씩 균등하게 녹여
 // 총액은 기존 /estimate 와 같게 유지한다. 기본형·원페이지 640,000 / 랜딩형·서브 1,140,000.
-const EST_STYLES = [{ key: "basic", name: "기본형", cost: 60_000, desc: "핵심 정보만 담백하게, 스크롤 연출 없음" }, { key: "landing", name: "랜딩형", cost: 260_000, desc: "스크롤 연출과 움직임이 더해진 구성" }] as const;
+const EST_STYLES = [{ key: "basic", name: "기본형", cost: 60_000, desc: "필요한 정보 위주, 스크롤 연출 없음" }, { key: "landing", name: "랜딩형", cost: 260_000, desc: "스크롤 연출과 움직임이 더해진 구성" }] as const;
 const EST_SCOPES = [{ key: "one", name: "원페이지", cost: 60_000, desc: "소개부터 문의까지 한 화면에서 이어집니다" }, { key: "sub", name: "서브페이지 분리", cost: 360_000, desc: "소개·서비스·사례·문의를 메뉴별로 나눕니다" }] as const;
 const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com·co.kr·kr 중 원하시는 것으로, 첫 1년 무료" }, { key: "own", name: "보유 도메인 연동", desc: "이미 쓰시는 도메인을 그대로 연결합니다" }] as const;
 const EST_FIXED = { feature: 360_000, setup: 160_000 };

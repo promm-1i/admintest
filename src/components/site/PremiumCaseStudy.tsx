@@ -518,7 +518,7 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
           <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">Inside This Design</p>
           <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">이 디자인에 담긴 화면 {sectionShots.length}개</h2>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-            실제 배포된 화면을 구간째로 담았습니다. 중간에서 자르지 않아 각 화면이 끝까지 보입니다.
+            실제 배포된 화면을 구간째로 찍었습니다. 중간에서 자르지 않아 화면마다 아래 끝까지 보입니다.
             여기서 섹션 순서와 브랜드 색 · 글꼴을 사업에 맞춰 다시 잡고 사진을 새로 만들어 채웁니다.
           </p>
           {/* 구간마다 높이가 다르다. 격자에 맞춰 자르면 내용이 끊겨 컬럼 배치로 원래 비율 그대로 둔다. */}

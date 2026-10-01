@@ -31,7 +31,7 @@ export function DashboardView() {
     <div>
       <PanelHeader
         title="대시보드"
-        description="차량·문의·예약 현황을 한눈에 확인합니다. 아래 숫자는 이 데모에서 실제로 조작한 데이터를 기준으로 계산됩니다."
+        description="차량·문의·예약 현황을 한 화면에서 확인합니다. 아래 숫자는 이 데모에서 실제로 조작한 데이터를 기준으로 계산됩니다."
       />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (

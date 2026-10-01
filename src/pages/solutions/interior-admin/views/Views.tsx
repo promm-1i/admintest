@@ -23,7 +23,7 @@ export function DashboardView() {
   ];
   return (
     <div>
-      <PanelHeader title="대시보드" description="견적·프로젝트·결제 현황을 한눈에 확인합니다. 아래 숫자는 이 데모에서 실제로 조작한 데이터를 기준으로 계산됩니다." />
+      <PanelHeader title="대시보드" description="견적·프로젝트·결제 현황을 한 화면에서 확인합니다. 아래 숫자는 이 데모에서 실제로 조작한 데이터를 기준으로 계산됩니다." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((s) => (
           <StatCard key={s.label} label={s.label} value={s.value} icon={s.icon} />

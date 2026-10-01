@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 const SMS_PHONE = "01048944905";
 
 const STYLES = [
-  { key: "basic", name: "기본형", design: 0, desc: "핵심 정보만 담백하게, 애니메이션 없음" },
+  { key: "basic", name: "기본형", design: 0, desc: "필요한 정보 위주, 애니메이션 없음" },
   { key: "landing", name: "랜딩형", design: 200_000, desc: "스크롤 연출과 인터랙션이 더해진 구성", hot: true },
 ] as const;
 

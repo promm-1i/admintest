@@ -50,9 +50,9 @@ export default function About() {
         </h1>
         <div className="mt-6 h-1 w-14 bg-primary" aria-hidden />
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground break-keep sm:text-lg">
-          NOVERIQ은 블로그나 SNS만으로는 부족했던 비즈니스의 신뢰감을 채워주는 맞춤형 홈페이지 제작
-          스튜디오입니다. 복잡한 거품을 빼고, 실제 고객 문의로 이어지는 실용적인 사이트를 함께
-          만듭니다.
+          NOVERIQ은 블로그나 SNS와 따로, 회사 소개와 문의를 받을 홈페이지를 맞춤으로 만드는 제작
+          스튜디오입니다. 업종에 필요한 메뉴와 기능을 골라, 전화 · 카카오톡 · 문의 폼으로 연락이
+          오게 만듭니다.
         </p>
       </Reveal>
 

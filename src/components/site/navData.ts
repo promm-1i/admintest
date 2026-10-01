@@ -435,7 +435,7 @@ export const MAIN_NAV: MainNavEntry[] = [
         { label: "프리미엄 디자인", href: "/web-solutions", desc: "실제 사이트를 그대로 모델링한 구성" },
       ] },
       { key: "template", label: "템플릿", href: "/templates", items: [
-        { label: "기본형 디자인", href: "/templates?style=basic-template", desc: "핵심 정보만 담백하게" },
+        { label: "기본형 디자인", href: "/templates?style=basic-template", desc: "필요한 정보 위주 한 페이지" },
         { label: "랜딩형 디자인", href: "/templates?style=landing-template", desc: "스크롤 연출과 인터랙션" },
       ] },
     ],

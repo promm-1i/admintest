@@ -36,7 +36,7 @@ const INDUSTRY_CONTENT: Record<string, IndustryContent> = {
   "real-estate": {
     label: "부동산",
     designNote:
-      "부동산 업종에 맞는 디자인 컨셉으로, 매물 정보와 연락처처럼 중요한 요소는 눈에 띄게 하고 가독성은 높였습니다. 문장의 위치와 크기, 색상까지 모두 고려해 제작해 드립니다.",
+      "매물 정보와 연락처는 크게, 나머지 글은 읽기 편한 크기로 두었습니다. 문장의 위치와 크기, 색상은 상담에서 정해 제작합니다.",
     subPages: ["매물 관리", "조건별 매물 검색", "상담 문의", "공지사항"],
     dedicated: [
       {
@@ -60,7 +60,7 @@ const INDUSTRY_CONTENT: Record<string, IndustryContent> = {
   hospital: {
     label: "병원 · 의원",
     designNote:
-      "병원·의원에 맞는 차분하고 신뢰감 있는 디자인 컨셉으로, 진료과목과 예약 동선처럼 중요한 요소는 눈에 띄게 하고 가독성은 높였습니다. 문장의 위치와 크기, 색상까지 모두 고려해 제작해 드립니다.",
+      "차분한 색을 쓰고, 진료과목과 예약 버튼은 크게 두었습니다. 문장의 위치와 크기, 색상은 상담에서 정해 제작합니다.",
     subPages: ["진료과목 안내", "의료진 소개", "온라인 예약 문의", "공지사항"],
     dedicated: [
       {
@@ -189,7 +189,7 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
           </h2>
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep sm:text-base">
             {industry?.designNote ??
-              "업종에 맞는 디자인 컨셉으로 중요한 요소는 눈에 띄게, 가독성은 높게 제작해 드립니다."}
+              "업종에서 자주 찾는 정보는 크게, 나머지는 읽기 편한 크기로 제작합니다."}
           </p>
         </Reveal>
 
@@ -233,7 +233,7 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
                 {isLanding
                   ? "스크롤에 따라 내용이 한 덩이씩 나타나고, 읽다 보면 상담 버튼이 나오게 순서를 짰습니다."
-                  : "필요한 정보를 한 화면에 정직하게 정리해, 방문자가 원하는 내용을 빠르게 찾을 수 있게 구성했습니다."}
+                  : "필요한 정보를 한 화면에 모아, 위에서부터 차례로 읽게 짰습니다."}
               </p>
             </div>
           </RevealScale>

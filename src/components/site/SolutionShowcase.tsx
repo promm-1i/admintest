@@ -56,7 +56,7 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
         ))}
       </ul>
 
-      <h2 className="mt-14 text-xl font-semibold">핵심 기능</h2>
+      <h2 className="mt-14 text-xl font-semibold">주요 기능</h2>
       <ul className="mt-5 grid gap-x-8 gap-y-3 border-t border-border pt-5 sm:grid-cols-2 lg:grid-cols-3">
         {industry.features.map((f, i) => {
           const Icon = f.icon;

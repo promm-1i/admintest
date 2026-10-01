@@ -90,7 +90,7 @@ export function CorporatePreview() {
       <section id="solutions" className="max-w-6xl mx-auto px-6 py-20 space-y-10 border-t border-slate-800">
         <div className="text-center space-y-2">
           <span className="text-xs font-mono text-blue-400 uppercase tracking-widest">OUR CAPABILITIES</span>
-          <h2 className="text-3xl font-bold font-mono text-white">엔터프라이즈 핵심 솔루션</h2>
+          <h2 className="text-3xl font-bold font-mono text-white">기업용 주요 솔루션</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">

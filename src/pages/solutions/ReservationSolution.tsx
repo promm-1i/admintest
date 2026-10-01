@@ -12,7 +12,7 @@ const FEATURES = [
   {
     icon: CalendarDays,
     title: "일정관리",
-    desc: "예약 현황을 달력 형태로 한눈에 확인하고 관리합니다.",
+    desc: "예약 현황을 달력에서 확인하고 관리합니다.",
   },
   {
     icon: Users,
