@@ -397,6 +397,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "real-estate-g-template",
+    industry: "복합쇼핑몰 · 오피스 단지 홈페이지",
+    title: "복합쇼핑몰 · 오피스 단지 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 복합쇼핑몰 · 오피스 · 매장 안내 · 201페이지",
+    purpose:
+      "쇼핑몰과 오피스가 한 단지에 있는 복합시설 홈페이지입니다. 천천히 당겨지며 바뀌는 첫 화면 사진, What's On · 입점 브랜드 · 오피스 사진 넘김으로 이어지는 메인에, 입점 매장 91곳 상세와 층별 안내 창, 이벤트 · 이야기 29편 · 보도 45건, 동네 지도, 오피스 임대 안내, 입주사 어메니티 예약 쪽과 방문 등록, 자주 묻는 질문과 문의 양식, 통합 검색까지 201쪽이 들어 있습니다.",
+    features: [
+      "스크롤하면 멈춘 채 로고가 올라가는 첫 화면 · 내리면 숨는 머리글 · 통합 검색",
+      "입점 매장 91곳 상세 · 분류별 목록 · 층별 안내 창(층 탭 · 평면도 끌어 보기 · 매장 위치 핀)",
+      "이벤트 분류 단추 · 남은 날 표시 · 이야기 29편 · 보도 45건 · 동네 지도와 장소 창",
+      "오피스 임대 안내 탭 · 안내서 내려받기 · 방문 등록 달력 · 문의 양식",
+    ],
+    idealFor: "쇼핑몰과 오피스가 함께 있는 복합단지, 입점 매장이 많은 쇼핑몰 · 아웃렛, 입주사 편의시설 예약을 함께 안내하는 오피스 빌딩",
+    image: "/thumbs/real-estate-g.jpg",
+    liveUrl: "/elmwood/",
+    industryKey: "real-estate",
+    premiumLabel: "복합단지 · 쇼핑몰",
+    designCode: "REAP-1002",
+    premium: true,
+  },
+  {
     slug: "semroot-template",
     industry: "수학학원 · 학습플랫폼 홈페이지",
     title: "수학학원 · 학습플랫폼 홈페이지 (프리미엄 디자인 A)",

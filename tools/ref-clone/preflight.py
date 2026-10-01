@@ -79,7 +79,9 @@ def check_sources(slug, ref):
         os.path.exists(mine + '/assets/site.css') else ''
     mypages = ''.join(io.open(f, encoding='utf-8').read() for f in glob.glob(mine + '/*.html')) \
         if mine else ''
-    allmine = mycss + mypages
+    # 스크립트를 쪽 밖 파일로 뺀 클론(엘름우드 assets/js/elmwood.js)도 센다 — 쪽 안 인라인만 세면 장면 함수 검사가 오탐한다
+    myjs_files = [f for f in glob.glob(mine + '/assets/**/*.js', recursive=True) if '.min.' not in f] if mine else []
+    allmine = mycss + mypages + ''.join(io.open(f, encoding='utf-8', errors='replace').read() for f in myjs_files)
 
     # 원본이 쓰는 중단점이 내 CSS 에도 있는가
     # 반응형 전용 파일이 있을 때만 본다. clamp() 로 푸는 원본은 이 파일이 없어 의미가 없다.
