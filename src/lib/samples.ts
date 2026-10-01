@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "tax-f-template",
+    industry: "세무법인 · 세무회계 홈페이지",
+    title: "세무법인 · 세무회계 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 세무법인 · 조세불복 · 60페이지",
+    purpose:
+      "한자 제목이 붓 획을 따라 그려지는 첫 화면, 휠 한 번에 한 화면씩 넘어가는 일곱 장면 메인(구름처럼 번지는 소개 글 · 올라가는 구성원 수 · 성공사례 · 칼럼 넘김 · 문의)에 구성원 46명 목록과 상세, 성공사례 6건, 칼럼, 소식, 문의까지 60쪽이 있는 조세불복 전문 세무 단체 홈페이지입니다.",
+    features: [
+      "붓 획을 따라 그려지는 한자 제목 · 한 화면씩 넘어가는 일곱 장면 · 한자 숫자 장면 표시",
+      "구름처럼 번지며 드러나는 소개 글 · 0부터 올라가는 구성원 수 · 5초마다 넘어가는 칼럼 카드",
+      "구성원 46명 — 분류 탭 · 이름 검색 · 쪽 번호, 상세는 더보기 소개 글과 바로가기",
+      "결정서 그림을 담은 성공사례 · 칼럼 상세 · 개인정보 처리방침 창이 있는 문의 양식",
+    ],
+    idealFor: "조세불복 · 세무조사 대응을 하는 세무법인, 심판관 · 국세청 출신 전문가가 모인 세무 단체, 칼럼과 사례로 전문성을 보여 주고 싶은 세무회계사무소",
+    image: "/thumbs/tax-f.jpg",
+    liveUrl: "/daecheong/",
+    industryKey: "tax",
+    premiumLabel: "세무법인 · 조세불복",
+    designCode: "TAXP-1001",
+    premium: true,
+  },
+  {
     slug: "dental-g-template",
     industry: "치과 홈페이지",
     title: "치과 홈페이지 (프리미엄 디자인 A)",
