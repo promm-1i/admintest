@@ -231,6 +231,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "kids-h-template",
+    industry: "유아동 체육 · 신체활동 교육 홈페이지",
+    title: "유아동 체육 · 신체활동 교육 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 유아 체육 · 신체활동 프로그램 · 21페이지",
+    purpose:
+      "큰 로고가 스크롤을 따라 머리 메뉴 자리로 줄어드는 첫 화면, 커지는 ACTIVE WELLNESS 제목, 화면이 고정된 채 세 번 바뀌는 문구 장면, 프로그램 카드 · 티처 소개 · 문의 카드로 이어지는 메인에 소개 · 커리큘럼 · ABOUT, Wellness · Active · Fitness 프로그램, 티처 모집 · 자격증 · 코칭 · 지원, 자료실 3, 문의 · 제휴문의 · FAQ · 오시는 길, 약관 2쪽까지 21쪽이 있는 유아동 신체활동 교육 홈페이지입니다.",
+    features: [
+      "스크롤에 맞춰 줄어드는 로고 · 커지는 제목 · 고정된 채 바뀌는 문구 장면",
+      "신체활동 가치 도식 — 누르면 열리는 설명 카드 넘김 창",
+      "결과지 예시 다섯 종 창 · 원스톱 서비스 화면 넘김",
+      "분류 · 쪽 번호 · 검색이 있는 자료실 3종 · FAQ · 티처 지원 양식",
+    ],
+    idealFor: "기관에 체육 프로그램을 공급하는 유아 체육 회사, 강사 모집과 자격 과정을 함께 운영하는 곳, 영상 · 학습지 자료실이 필요한 어린이 교육 브랜드",
+    image: "/thumbs/kids-h.jpg",
+    liveUrl: "/hopkids/",
+    industryKey: "kids",
+    premiumLabel: "유아 체육 · 신체활동 교육",
+    designCode: "KIDP-1002",
+    premium: true,
+  },
+  {
     slug: "kids-g-template",
     industry: "유아 매트 · 층간소음 매트 시공 홈페이지",
     title: "유아 매트·층간소음 시공 홈페이지 (프리미엄 디자인 A)",

@@ -134,8 +134,28 @@ def check_pages(slug, ref):
             ok('쪽 수 규모가 원본과 비슷함')
     empty = [os.path.basename(f) for f in mypages
              if len(re.findall(r'<section', io.open(f, encoding='utf-8').read())) == 0]
-    if empty:
-        bad('섹션이 하나도 없는 쪽: %s' % ', '.join(empty))
+    # 원본 DOM 을 그대로 옮긴 클론(_clone 엔진)은 원본 쪽이 <section> 없이 div 로만 짜여 있으면 우리 쪽도 0 이다(홉키즈 12쪽).
+    # 빌드 설정(PAGES: 원본 raw ↔ 우리 파일)이 있으면 원본 쪽의 section 수와 견줘, 원본보다 적을 때만 실패로 친다.
+    same = {}
+    cfgp = '%s/%s/build/cfg.py' % (REFS, ref)
+    if empty and os.path.exists(cfgp):
+        try:
+            import importlib.util
+            spec = importlib.util.spec_from_file_location('ref_cfg_' + ref, cfgp)
+            sys.path.insert(0, os.path.dirname(cfgp))
+            rc = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(rc)
+            for row in getattr(rc, 'PAGES', []):
+                rawf = os.path.join(rc.SRC, row[0])
+                if os.path.exists(rawf):
+                    same[row[1]] = len(re.findall(r'<section', io.open(rawf, encoding='utf-8', errors='replace').read()))
+        except Exception as e:
+            print('       (빌드 설정을 못 읽음: %s)' % str(e)[:80])
+    really = [f for f in empty if same.get(f) != 0]
+    if really:
+        bad('섹션이 하나도 없는 쪽: %s' % ', '.join(really))
+    elif empty:
+        ok('section 이 없는 %d쪽은 원본 쪽에도 section 이 없음(원본 구조 그대로): %s' % (len(empty), ', '.join(empty)))
     else:
         ok('모든 쪽에 섹션이 있음')
 
