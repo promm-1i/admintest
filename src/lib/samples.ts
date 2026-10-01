@@ -375,6 +375,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "restaurant-n-template",
+    industry: "치킨 프랜차이즈 본사 홈페이지",
+    title: "치킨 프랜차이즈 본사 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 외식 · 치킨 · 매장 찾기 · 메뉴 · 18페이지",
+    purpose:
+      "검정 바탕에 숯불 주황을 쓴 숯불치킨 프랜차이즈 홈페이지입니다. 스크롤을 따라 큰 글자가 칠해지고 카드가 화면에 멈춘 채 차례로 올라오는 메인, 기울어진 넘김으로 보는 대표 메뉴와 영상 12편, 메뉴 창이 열리는 메뉴 7쪽, 약도와 가까운 매장 목록이 있는 매장 찾기, 공지와 정책 쪽까지 18쪽이 있습니다.",
+    features: [
+      "오늘 열지 않기 · 끌어 옮기는 첫 화면 알림창 · 쪽 번호가 붙은 뉴스 넘김",
+      "스크롤에 묶여 칠해지는 큰 문장 · 화면이 멈춘 채 올라오는 카드 · 괄호가 열리는 숯 장면",
+      "기울어진 넘김의 대표 메뉴 · 사진 · 알레르기 정보가 든 메뉴 창",
+      "시도 · 시군구 고르기와 검색, 약도와 정보창이 있는 매장 찾기",
+    ],
+    idealFor: "메뉴 사진이 많고 메뉴마다 설명 창이 필요한 외식 브랜드, 전국 매장 찾기를 운영하는 프랜차이즈 본사, 어두운 바탕에 움직임이 많은 첫인상을 원하는 곳",
+    image: "/thumbs/restaurant-n.jpg",
+    liveUrl: "/sutmaru/",
+    industryKey: "restaurant",
+    premiumLabel: "치킨 프랜차이즈",
+    designCode: "RESP-1003",
+    premium: true,
+  },
+  {
     slug: "semroot-template",
     industry: "수학학원 · 학습플랫폼 홈페이지",
     title: "수학학원 · 학습플랫폼 홈페이지 (프리미엄 디자인 A)",
