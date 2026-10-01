@@ -353,6 +353,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "restaurant-m-template",
+    industry: "피자 프랜차이즈 본사 홈페이지",
+    title: "피자 프랜차이즈 본사 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 외식 · 피자 · 매장 찾기 · 가맹 · 88페이지",
+    purpose:
+      "그림책 같은 동네 거리에서 CLICK 을 누르면 토핑이 하나씩 내려앉아 피자가 완성되는 첫 화면, 나무판 위에서 돌며 바뀌는 메뉴, 화면이 멈춘 채 배달 스쿠터가 길을 올라가는 브랜드 장면으로 이어지는 메인에 브랜드 스토리 · BI · 오시는 길, 메뉴 목록 9 · 메뉴 상세 49, 매장 찾기, 가맹 안내 · 비용 및 절차 · 가맹 문의 · 인테리어, 이벤트와 뉴스까지 88쪽이 있는 피자 프랜차이즈 홈페이지입니다.",
+    features: [
+      "누르면 토핑이 내려앉는 첫 화면 · 돌아가는 메뉴 판 · 고정된 채 움직이는 거리 장면",
+      "메뉴 상세 49쪽 · 원산지 · 영양성분 · 알레르기 안내 창",
+      "지역 지도 · 고르기 상자 · 검색으로 거르는 매장 찾기와 약도 창",
+      "가맹 안내 · 비용 표 · 창업 절차 · 문의 양식 · 이벤트와 뉴스",
+    ],
+    idealFor: "메뉴가 많고 영양 성분 · 알레르기 안내가 필요한 외식 브랜드, 매장 찾기와 가맹 모집을 함께 운영하는 프랜차이즈 본사, 일러스트로 브랜드 분위기를 보여 주고 싶은 곳",
+    image: "/thumbs/restaurant-m.jpg",
+    liveUrl: "/osolgil/",
+    industryKey: "restaurant",
+    premiumLabel: "피자 프랜차이즈",
+    designCode: "RESP-1002",
+    premium: true,
+  },
+  {
     slug: "semroot-template",
     industry: "수학학원 · 학습플랫폼 홈페이지",
     title: "수학학원 · 학습플랫폼 홈페이지 (프리미엄 디자인 A)",
