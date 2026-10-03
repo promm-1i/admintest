@@ -117,6 +117,14 @@ def check_sources(slug, ref):
 
 
 # ── 2. 페이지·섹션 수를 원본과 맞췄나 ───────────────────────────
+# 쪽 수를 사용자가 일부러 줄이라고 정한 원본만 적는다(스스로 좁힌 범위는 여기 넣지 않는다).
+# 2026-09-15 사용자: 대기업 레퍼런스는 디자인은 원본대로, 쪽 구성만 중소기업 규모(15쪽 안팎 대표 틀)로 — 메모 feedback_corporate_ref_smb_scale
+SCOPE_DECIDED = {
+    'lgensol': '2026-09-15 사용자 결정, LG에너지솔루션 89쪽 → 중소기업 규모 대표 틀',
+    'ktng': '2026-09-15 같은 결정(대기업 KT&G) → 중소기업 규모 대표 틀',
+}
+
+
 def check_pages(slug, ref):
     """메인만 맞추고 서브를 안 본 실수를 막는다."""
     print('\n[2] 쪽 수와 섹션 수')
@@ -154,7 +162,11 @@ def check_pages(slug, ref):
         except Exception as e:
             print('       (빌드 설정을 못 읽음: %s)' % str(e)[:80])
     really = [f for f in empty if same.get(f) != 0]
-    if really:
+    # 손으로 짠 생성기라 쪽 짝(PAGES)이 없는 클론: 원본 크롤 전 쪽이 section 을 안 쓰면(keoc 60쪽 · daesang 36쪽 전부 0) 우리 쪽 0 도 원본 구조다.
+    if really and not same and refhtml and not any(
+            '<section' in io.open(f, encoding='utf-8', errors='replace').read() for f in refhtml):
+        ok('section 이 없는 %d쪽 — 원본 크롤 %d쪽도 전부 section 을 안 씀(원본 구조 그대로)' % (len(really), len(refhtml)))
+    elif really:
         bad('섹션이 하나도 없는 쪽: %s' % ', '.join(really))
     elif empty:
         ok('section 이 없는 %d쪽은 원본 쪽에도 section 이 없음(원본 구조 그대로): %s' % (len(empty), ', '.join(empty)))
@@ -172,7 +184,9 @@ def check_pages(slug, ref):
         links = {l for l in links
                  if not re.search(r'\.(css|js|png|jpe?g|svg|ico|webp|pdf|zip)$', l, re.I)}
         print('       원본이 내건 내부 링크 %d개' % len(links))
-        if len(links) >= 8 and len(mypages) < len(links) * 0.7:
+        if len(links) >= 8 and len(mypages) < len(links) * 0.7 and ref in SCOPE_DECIDED:
+            ok('원본 %d쪽 → 내 것 %d쪽은 사용자가 정한 축약 — %s' % (len(links), len(mypages), SCOPE_DECIDED[ref]))
+        elif len(links) >= 8 and len(mypages) < len(links) * 0.7:
             bad('원본은 쪽을 %d개 내걸었는데 내 것은 %d개다 — 크롤이 닿은 쪽만 '
                 '보고 만들지 않았는지 링크 목록과 표로 대조할 것' % (len(links), len(mypages)))
         elif len(links) >= 8:
