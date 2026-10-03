@@ -81,7 +81,7 @@ const study: CaseStudy = {
       name: "비용 및 절차",
       file: "price.html",
       img: "/cases/restaurant-m/page-price.webp",
-      desc: "가맹금 표와 가맹사업 비용 표, 별도 비용 안내, 창업 절차 여섯 단계를 담았습니다.",
+      desc: "가맹금 표와 가맹사업 비용 표, 별도 비용 안내, 창업 절차 여섯 단계가 있습니다.",
       items: ["가맹금 · 사업 비용 표 · 합계", "길처럼 이어지는 창업 절차 여섯 단계"],
     },
     {
