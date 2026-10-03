@@ -114,9 +114,9 @@ const study: CaseStudy = {
   ],
   mobile: {
     title: "좁은 화면에서는 이렇게 됩니다",
-    body: "배너 아래에 예약 위젯이 바로 이어집니다. 차량 예약은 조건 바와 카드를 한 줄씩 쌓고, 견적 내기는 버튼을 두 칸씩 놓은 뒤 예상 금액 상자를 아래로 옮겼습니다. 이용 안내의 목차는 가로 한 줄로 바뀝니다.",
+    body: "휴대폰 메인은 PC와 따로 짰습니다. 배너 아래에 단기 · 장기렌터카, 중고차, 차량관리 바로가기를 칸으로 나눠 놓았습니다. 차량 예약은 조건 바와 카드를 한 줄씩 쌓고, 견적 내기는 버튼을 두 칸씩 놓은 뒤 예상 금액 상자를 아래로 옮겼습니다. 이용 안내의 목차는 가로 한 줄로 바뀝니다.",
     shots: [
-      { img: "/cases/rentcar-g/m-index.webp", caption: "메인 — 배너 아래 예약" },
+      { img: "/cases/rentcar-g/m-index.webp", caption: "메인 — 배너 아래 바로가기 칸" },
       { img: "/cases/rentcar-g/m-reserve.webp", caption: "차량 예약" },
       { img: "/cases/rentcar-g/m-estimate.webp", caption: "견적 내기" },
       { img: "/cases/rentcar-g/m-guide.webp", caption: "이용 안내" },
