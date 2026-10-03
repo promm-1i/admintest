@@ -53,7 +53,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   ],
   "rentcar-f": [
     { img: "/thumbs/sections/rentcar-f-1.webp", title: "어디로 가시나요?", width: 1280, height: 531 },
-    { img: "/thumbs/sections/rentcar-f-2.webp", title: "기차역 근처 차고지", width: 1280, height: 440 },
+    { img: "/thumbs/sections/rentcar-f-2.webp", title: "기차역 근처 차고지", width: 1280, height: 464 },
     { img: "/thumbs/sections/rentcar-f-3.webp", title: "이번 주말 어디 가실래요", width: 1280, height: 496 },
     { img: "/thumbs/sections/rentcar-f-4.webp", title: "두루카 잘 쓰는 법", width: 1280, height: 479 },
   ],
