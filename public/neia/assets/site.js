@@ -308,7 +308,7 @@ if (promo) {
     current = (next + cards.length) % cards.length;
     track.style.transform = `translateX(-${current * 100}%)`;
     if (counter) counter.textContent = String(current + 1);
-    cards.forEach((card, index) => card.setAttribute('aria-hidden', String(index !== current)));
+    cards.forEach((card, index) => { card.setAttribute('aria-hidden', String(index !== current)); card.inert = index !== current; });   // 숨긴 카드 링크에 초점이 안 가게
   };
   const autoplay = createAutoplay(promo, 3000, () => show(current + 1));
   promo.querySelector('.promo-prev')?.addEventListener('click', () => {
