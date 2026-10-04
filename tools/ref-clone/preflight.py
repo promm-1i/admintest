@@ -135,7 +135,8 @@ def check_pages(slug, ref):
         return
     mypages = sorted(glob.glob(mine + '/*.html'))
     print('       내 쪽 %d개' % len(mypages))
-    refhtml = sorted(glob.glob('%s/%s/html/*.html' % (REFS, ref)))
+    refdir = next((d for d in ('%s/%s/html' % (REFS, ref), '%s/%s/crawl/html' % (REFS, ref)) if os.path.isdir(d)), '')   # 선광처럼 crawl/ 아래 둔 곳도
+    refhtml = sorted(glob.glob(refdir + '/*.html')) if refdir else []
     if refhtml:
         print('       원본 크롤 %d쪽' % len(refhtml))
         if len(mypages) < len(refhtml) * 0.4:
@@ -164,7 +165,7 @@ def check_pages(slug, ref):
             print('       (빌드 설정을 못 읽음: %s)' % str(e)[:80])
     # 빌드 설정이 없어도 원본 크롤에 같은 이름 쪽이 있으면 그 쪽의 section 수로 본다(서울바우 offer.html — 원본도 0)
     for f in empty:
-        rawf = '%s/%s/html/%s' % (REFS, ref, f)
+        rawf = '%s/%s' % (refdir, f)
         if f not in same and os.path.exists(rawf):
             same[f] = len(re.findall(r'<section', io.open(rawf, encoding='utf-8', errors='replace').read()))
     really = [f for f in empty if same.get(f) != 0]
@@ -173,7 +174,7 @@ def check_pages(slug, ref):
     refmain = [f for f in refhtml if re.search(r'(^|_)(index|main)[._]', os.path.basename(f), re.I)]   # kr_index.html 같은 크롤 이름도
     refsub = [f for f in refhtml if f not in refmain]
     nosec = lambda fs: bool(fs) and not any('<section' in io.open(f, encoding='utf-8', errors='replace').read() for f in fs)
-    if really and not same and nosec(refsub) and ('index.html' not in really or nosec(refmain)):
+    if really and nosec(refsub) and ('index.html' not in really or nosec(refmain)):   # 원본 서브가 전부 section 0 이면 짝 유무와 상관없이 원본 구조
         ok('section 이 없는 %d쪽 — 원본 서브 %d쪽도 전부 section 을 안 씀(원본 구조 그대로)' % (len(really), len(refsub)))
     elif really:
         bad('섹션이 하나도 없는 쪽: %s' % ', '.join(really))
