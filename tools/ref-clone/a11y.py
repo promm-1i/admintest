@@ -30,10 +30,17 @@ RUN = """
     id: v.id, impact: v.impact, help: v.help,
     n: v.nodes.length,
     targets: v.nodes.slice(0, 3).map(n => n.target.join(' ')),
+    all: v.id === 'color-contrast' && v.nodes.length <= 80 ? v.nodes.map(n => n.target.join(' ')) : [],
     msg: (v.nodes[0] && v.nodes[0].failureSummary || '').split('\\n').slice(0,2).join(' ')
   }));
 })()
 """
+# 스크롤에 따라 바탕 톤이 바뀌거나(여울) 스크롤로 밝아지는 글(프리즘)은 한 상태로 재면 화면에 없는 글을 엉뚱한 바탕에 견준다.
+# 대비 위반이 적은 쪽(80곳 이하)만, 걸린 요소를 화면 가운데로 스크롤해 보이는 상태에서 그 요소만 다시 잰다.
+INVIEW = """async (sel) => { const el = document.querySelector(sel); if (!el) return false;
+  el.scrollIntoView({block: 'center'}); await new Promise(r => setTimeout(r, 1200));
+  const r = await axe.run(el, {runOnly: {type: 'rule', values: ['color-contrast']}, resultTypes: ['violations']});
+  return r.violations.length === 0; }"""
 
 
 def flag(name):
@@ -68,7 +75,19 @@ def main():
             pg.wait_for_timeout(900)
             pg.add_script_tag(content=axe_src)
             vs = pg.evaluate(RUN)
+            for v in vs:
+                if v['all']:
+                    seen = [t for t in v['all'] if pg.evaluate(INVIEW, t)]
+                    if seen:
+                        v['n'] -= len(seen)
+                        v['inview_ok'] = len(seen)
+                        v['targets'] = [t for t in v['all'] if t not in seen][:3]
+                del v['all']
+            ok_inview = sum(v.get('inview_ok', 0) for v in vs)
+            vs = [v for v in vs if v['n'] > 0]
             n = sum(v['n'] for v in vs)
+            if ok_inview:
+                print('     (%s: 화면에 들어왔을 때 다시 재서 통과 %d곳 — 스크롤 상태에 따른 오탐)' % (name, ok_inview))
             total += n
             mark = 'OK ' if n == 0 else '!! '
             print('%s%-14s 위반 %d건 (규칙 %d개)' % (mark, name, n, len(vs)))
