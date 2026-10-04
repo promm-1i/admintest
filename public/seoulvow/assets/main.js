@@ -29,7 +29,7 @@
   var spans = change.querySelectorAll('span');
   items.forEach(function(li, i){ li.addEventListener('mouseenter', function(){ if (W.innerWidth <= 768) return; back.classList.add('on'); spans.forEach(function(s, k){ s.classList.toggle('on', k === i); }); }); });
   D.querySelector('.review .review-list').addEventListener('mouseleave', function(){ back.classList.remove('on'); spans.forEach(function(s){ s.classList.remove('on'); }); });
-  new Swiper('.review-list', { slidesPerView: 1, spaceBetween: 20, breakpoints: { 768: { slidesPerView: 'auto', spaceBetween: 32 }, 1260: { slidesPerView: 'auto', spaceBetween: 60 } } });
+  new Swiper('.review-list', { a11y: { slideRole: 'listitem' }, slidesPerView: 1, spaceBetween: 20, breakpoints: { 768: { slidesPerView: 'auto', spaceBetween: 32 }, 1260: { slidesPerView: 'auto', spaceBetween: 60 } } });
   // FAQ
   D.querySelectorAll('.faq .sect-cont .item').forEach(function(it){ it.addEventListener('click', function(){ var open = it.classList.toggle('open'); D.querySelectorAll('.faq .sect-cont .item').forEach(function(o){ if (o !== it) o.classList.remove('open'); }); }); });
   var more = D.querySelector('.faq .more-btn button'); if (more) more.addEventListener('click', function(){ D.querySelector('.faq .sect-cont').classList.add('more'); });

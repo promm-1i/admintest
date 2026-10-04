@@ -162,6 +162,11 @@ def check_pages(slug, ref):
                     same[row[1]] = len(re.findall(r'<section', io.open(rawf, encoding='utf-8', errors='replace').read()))
         except Exception as e:
             print('       (빌드 설정을 못 읽음: %s)' % str(e)[:80])
+    # 빌드 설정이 없어도 원본 크롤에 같은 이름 쪽이 있으면 그 쪽의 section 수로 본다(서울바우 offer.html — 원본도 0)
+    for f in empty:
+        rawf = '%s/%s/html/%s' % (REFS, ref, f)
+        if f not in same and os.path.exists(rawf):
+            same[f] = len(re.findall(r'<section', io.open(rawf, encoding='utf-8', errors='replace').read()))
     really = [f for f in empty if same.get(f) != 0]
     # 손으로 짠 생성기라 쪽 짝(PAGES)이 없는 클론: 원본 크롤의 서브 쪽(메인 index·*_main 제외)이 모두 section 을 안 쓰면
     # (keoc 60쪽 · daesang 36쪽 · eumcblood 서브 64쪽 — section 은 메인에만) 우리 서브 쪽 0 도 원본 구조다.
