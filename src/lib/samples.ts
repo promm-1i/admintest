@@ -463,6 +463,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "video-b-template",
+    industry: "영상 · VFX · 디지털 콘텐츠 제작사 홈페이지",
+    title: "영상 · VFX 제작사 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 영상 제작 · VFX · 포트폴리오 · 77페이지",
+    purpose:
+      "휠을 한 번 굴릴 때마다 한 화면씩 넘어가는 일곱 장면 메인(글자가 쳐지는 첫 화면 · 원 세 개 · 마우스를 대면 열리는 작업 분야 · 저절로 넘어가는 포트폴리오 · 채용 · 의뢰 양식)에 포트폴리오 목록과 분류 18쪽, 작품 53쪽을 담은 영상 제작사 홈페이지입니다.",
+    features: [
+      "한 화면씩 넘어가는 일곱 장면 메인 · 한 글자씩 쳐지는 첫 화면 문장",
+      "마우스를 대면 열리는 작업 분야 네 칸 · 3초마다 넘어가는 포트폴리오",
+      "분류 17개로 나눈 포트폴리오 목록 · 영상 칸이 있는 작품 53쪽",
+      "첨부 파일 칸이 있는 의뢰 양식 · 채용안내 창 · 따라오는 커서",
+    ],
+    idealFor: "영상 · VFX 제작사, 미디어 파사드 · 전시 콘텐츠 제작사, 광고 · 뮤직비디오 프로덕션, 3D · 모션그래픽 스튜디오",
+    image: "/thumbs/video-b.jpg",
+    liveUrl: "/ozlab/",
+    industryKey: "video",
+    premiumLabel: "영상 · VFX 제작사",
+    designCode: "VIDP-1001",
+    premium: true,
+  },
+  {
     slug: "fitness-g-template",
     industry: "프리미엄 피트니스 · 위탁운영 회사 홈페이지",
     title: "프리미엄 피트니스 · 위탁운영 회사 홈페이지 (프리미엄 디자인 B)",
