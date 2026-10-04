@@ -122,6 +122,7 @@ def check_sources(slug, ref):
 SCOPE_DECIDED = {
     'lgensol': '2026-09-15 사용자 결정, LG에너지솔루션 89쪽 → 중소기업 규모 대표 틀',
     'ktng': '2026-09-15 같은 결정(대기업 KT&G) → 중소기업 규모 대표 틀',
+    'hwacheon': '2026-10-04 사용자 승인, 화천기계 46쪽 → 23쪽 대표 틀 그대로',
 }
 
 
@@ -162,10 +163,13 @@ def check_pages(slug, ref):
         except Exception as e:
             print('       (빌드 설정을 못 읽음: %s)' % str(e)[:80])
     really = [f for f in empty if same.get(f) != 0]
-    # 손으로 짠 생성기라 쪽 짝(PAGES)이 없는 클론: 원본 크롤 전 쪽이 section 을 안 쓰면(keoc 60쪽 · daesang 36쪽 전부 0) 우리 쪽 0 도 원본 구조다.
-    if really and not same and refhtml and not any(
-            '<section' in io.open(f, encoding='utf-8', errors='replace').read() for f in refhtml):
-        ok('section 이 없는 %d쪽 — 원본 크롤 %d쪽도 전부 section 을 안 씀(원본 구조 그대로)' % (len(really), len(refhtml)))
+    # 손으로 짠 생성기라 쪽 짝(PAGES)이 없는 클론: 원본 크롤의 서브 쪽(메인 index·*_main 제외)이 모두 section 을 안 쓰면
+    # (keoc 60쪽 · daesang 36쪽 · eumcblood 서브 64쪽 — section 은 메인에만) 우리 서브 쪽 0 도 원본 구조다.
+    refmain = [f for f in refhtml if re.search(r'^(index|main)|_main\.', os.path.basename(f), re.I)]
+    refsub = [f for f in refhtml if f not in refmain]
+    nosec = lambda fs: bool(fs) and not any('<section' in io.open(f, encoding='utf-8', errors='replace').read() for f in fs)
+    if really and not same and nosec(refsub) and ('index.html' not in really or nosec(refmain)):
+        ok('section 이 없는 %d쪽 — 원본 서브 %d쪽도 전부 section 을 안 씀(원본 구조 그대로)' % (len(really), len(refsub)))
     elif really:
         bad('섹션이 하나도 없는 쪽: %s' % ', '.join(really))
     elif empty:
@@ -233,7 +237,8 @@ def check_outputs(slug):
     print('\n[4] 산출물')
     items = [
         ('사례형 상세', glob.glob('%s/src/lib/caseStudies/data/*%s*.ts' % (ROOT, slug))),
-        ('사례 캡처', glob.glob('%s/public/cases/%s/*.webp' % (ROOT, slug))),
+        ('사례 캡처', glob.glob('%s/public/cases/%s/*.webp' % (ROOT, slug)) or   # 브랜드 폴더로 옮긴 프리미엄(한울 cases/hanul)
+                    glob.glob('%s/public/cases/%s/*.webp' % (ROOT, brand_dir(slug) or slug))),
     ]
     src = io.open('%s/src/lib/samples.ts' % ROOT, encoding='utf-8').read()
     sep = chr(10) + '  {' + chr(10)
