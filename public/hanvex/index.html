@@ -469,7 +469,7 @@
   // 첫 화면: 페이드 .8s · 10초 · 전환 끝나면 글자 올라옴 · 부제는 글자 끝나기 .25s 전에 (0.5 + 0.05×(글자수-1) + 0.05 - 0.25)
   const slides = $$('#hero .sl');
   slides.forEach(sl => $$('.hs', sl).forEach(el => {
-    let i = 0; const t = el.textContent, w = document.createElement('span'); el.setAttribute('aria-label', t); el.textContent = ''; el.append(w);   // 줄이 flex 라서 글자를 한 번 감싸야 띄어쓰기가 남는다
+    let i = 0; const t = el.textContent, w = document.createElement('span'); el.textContent = ''; el.append(w); const sr = document.createElement('span'); sr.className = 'sr-only'; sr.textContent = t; el.append(sr);   // 줄이 flex 라서 글자를 한 번 감싸야 띄어쓰기가 남는다
     t.split(' ').forEach((word, k) => {   // 단어는 한 덩어리로 (글자 사이에서 줄이 안 끊기게)
       if (k) w.append(' ');
       const wd = document.createElement('span'); wd.style.whiteSpace = 'nowrap'; w.append(wd);

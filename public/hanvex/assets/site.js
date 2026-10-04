@@ -27,9 +27,11 @@
         n.replaceWith(f);
       } else if (n.nodeType === 1 && n.tagName !== 'BR') walk(n);
     });
-    el.setAttribute('aria-label', el.textContent.replace(/\s+/g, ' ').trim());
+    const cl = el.cloneNode(true); cl.querySelectorAll('br').forEach(b => b.replaceWith(' '));   // <br> 줄바꿈도 띄어 읽게
+    const label = cl.textContent.replace(/\s+/g, ' ').trim();
     walk(el);
     $$('.ch', el).forEach(s => s.setAttribute('aria-hidden', 'true'));
+    const sr = document.createElement('span'); sr.className = 'sr-only'; sr.textContent = label; el.append(sr);   // div · p 엔 aria-label 을 못 써서
   });
 
   // 굴림 버튼 글자
