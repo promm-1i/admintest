@@ -39,14 +39,13 @@
 .sm-con{width:calc(100% - 42.22%);padding-right:5%}
 .sm-con h4{font-size:41px;color:#222;font-weight:500;line-height:140%}
 .sm-con h4 strong{display:block;font-size:80px;color:#000;font-weight:700;line-height:140%}
-.sm-con p{margin:40px 0;font-size:21px;color:#767676;line-height:34px}   /* 원본 #7c7c7c — 대비 4.17 */
+.sm-con p{margin:40px 0;font-size:21px;color:#767676;line-height:34px}
 .sm-con a{display:block;width:194px;height:56px;background:var(--pri);border-radius:12px;font-size:18px;color:#fff;text-align:center;line-height:56px}
 .sm-img{width:42.22%}
 .sm-img img{width:100%;height:auto;border-radius:0}
 .sm-s2{padding:225px 0 190px;background:#ededed url(./assets/smart-mark.svg) no-repeat center calc(100% - 70px);background-size:contain}
 .sm-ttl{text-align:center}
 .sm-ttl h4{display:inline-block;position:relative;font-size:78px;color:#000;font-weight:700}
-/* 원본 'Smart' 붓글씨 그림(334×122, 가운데) 자리 — 글꼴로 쓴다 */
 .sm-h-smart::before{display:block;content:"Smart";position:absolute;width:334px;height:122px;left:50%;bottom:100%;transform:translateX(-50%);
   font-family:"Kaushan Script",cursive;font-size:108px;font-weight:400;line-height:1.05;color:var(--pri);text-align:center;letter-spacing:-3px}
 .sm-bsw{margin:140px 0 100px}
@@ -206,7 +205,6 @@
 <script>
 document.documentElement.classList.remove('no-js');
 (function(){
-  /* 원본 common.js: .ani 가 화면과 겹치면 in-view, 벗어나면 뗀다(되돌림 있음) */
   var views=[].slice.call(document.querySelectorAll('[data-view]'));
   function inView(){
     var wt=window.pageYOffset, wb=wt+window.innerHeight;
@@ -220,7 +218,6 @@ document.documentElement.classList.remove('no-js');
   window.addEventListener('resize',inView);
   inView();
 
-  /* 머리: 스크롤>0 이면 판이 내려온다 · pcNav 호버판 · 햄버거 */
   var hd=document.querySelector('.hdr'), mega=document.querySelector('.mega');
   function sc(){ hd.classList.toggle('is-scroll', window.pageYOffset>0); }
   window.addEventListener('scroll',sc,{passive:true}); sc();
@@ -260,7 +257,6 @@ document.documentElement.classList.remove('no-js');
     b.addEventListener('mouseleave',function(){ r.style.transform='scale(0)'; });
   });
 
-  /* 떠 있는 버튼 — 푸터에 닿으면 그만큼 올라간다(원본 35 / 35+66) */
   var qk=document.querySelector('.qk'), top=document.querySelector('.totop'), ft=document.querySelector('.ftr');
   function fl(){
     var ftTop=ft.getBoundingClientRect().top+window.pageYOffset, st=window.pageYOffset, wh=window.innerHeight;
@@ -286,7 +282,6 @@ document.documentElement.classList.remove('no-js');
       else document.documentElement.style.scrollBehavior=''; })(t0);
   }
 
-  /* 빠른상담 팝업 (원본 fadeIn) */
   var dim=document.querySelector('.ov-dim'), cs=document.querySelector('.pop-cs');
   function fade(el,show){ if(show){ el.style.opacity=0; el.style.display='block';
       requestAnimationFrame(function(){ el.style.transition='opacity .4s'; el.style.opacity=1; }); }
@@ -309,7 +304,6 @@ document.documentElement.classList.remove('no-js');
   });
   function alertBox(msg){ var n=form.querySelector('.form-msg'); n.textContent=msg; }
 
-  /* 원본 SmoothScroll 1.4.9 설정 그대로 (휠 한 번 60px, 1000ms) */
   if(window.SmoothScroll){ SmoothScroll({animationTime:1000,stepSize:60,accelerationDelta:50,accelerationMax:2,
     keyboardSupport:true,arrowScroll:40,pulseAlgorithm:true,pulseScale:4,pulseNormalize:1,
     touchpadSupport:false,fixedBackground:true,excluded:''}); }
@@ -318,13 +312,11 @@ document.documentElement.classList.remove('no-js');
 
 (function(){
   document.documentElement.classList.add('js');
-  /* 게시판 검색 — PC 에선 앞 선택지(원본 frontSelect), 태블릿·모바일은 기본 select */
   [].forEach.call(document.querySelectorAll('.fsel'),function(f){
     var b=f.querySelector('button'), ul=f.querySelector('ul'), sel=f.previousElementSibling;
     if(!sel||sel.tagName!=='SELECT') sel=f.parentNode.querySelector('select');
     b.addEventListener('click',function(){ var on=!ul.classList.contains('on'); ul.classList.toggle('on',on); b.classList.toggle('on',on);
       b.setAttribute('aria-expanded',on?'true':'false'); });
-    /* 고른 뒤 목록만 닫히고 단추의 on(위 화살표)은 남는다 — 원본 common.js 그대로 */
     ul.addEventListener('click',function(e){ var o=e.target.closest('button'); if(!o) return;
       b.textContent=o.textContent; sel.value=o.getAttribute('data-v'); ul.classList.remove('on'); b.setAttribute('aria-expanded','false');
       sel.dispatchEvent(new Event('change',{bubbles:true})); });
@@ -335,7 +327,6 @@ document.documentElement.classList.remove('no-js');
   if(!window.Swiper) return;
   new Swiper('.sm-bsw',{slidesPerView:1,spaceBetween:0,speed:1200,loop:true,watchSlidesProgress:true,
     pagination:{el:'.sm-pag',type:'bullets',clickable:true},autoplay:{delay:5000}});
-  /* 원본(Swiper 4) breakpoints{812:{spaceBetween:10}} 은 '812 이하' 뜻 — Swiper 11 에선 813 이상을 32 로 */
   new Swiper('.sm-ss',{slidesPerView:'auto',spaceBetween:10,speed:1200,loop:true,watchSlidesProgress:true,
     navigation:{nextEl:'.sm-next',prevEl:'.sm-prev'},breakpoints:{813:{spaceBetween:32}}});
 })();

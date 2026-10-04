@@ -30,7 +30,6 @@ li{list-style:none}
 }
 .serif{font-family:'Cormorant Garamond',serif}
 
-/* 배경 큰 원 두 개 — 원본과 같은 160.8vw, 1px 테두리, 불투명도 .06 */
 #bg-line{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
 #bg-line .circ{position:absolute;width:160.8vw;height:160.8vw;border:1px solid #000;border-radius:50%;opacity:.06;
   transition:transform .6s cubic-bezier(.2,.8,.2,1);will-change:transform}
@@ -123,7 +122,6 @@ li{list-style:none}
 [data-rv][data-d="3"]{transition-delay:.54s}
 
 
-/* 페이지 전환 — 원본은 흰 시트가 아래에서 올라오고 위에 진행 막대가 뜬다 */
 .ps-body{opacity:0;min-height:100%;transition:opacity .35s}
 .ps-body.is-loaded{opacity:1}
 .ps-bar{position:fixed;top:0;left:0;z-index:200;width:100%;height:6px;opacity:0;pointer-events:none;
@@ -134,7 +132,6 @@ li{list-style:none}
   transition:transform 1.2s cubic-bezier(.2,1.1,.3,1);will-change:transform;backface-visibility:hidden}
 .ps-sheet.on{visibility:visible;transform:translateY(0)}
 
-/* 커서 라벨 — 원본 13px/700, 흰 글자, .2s 등장 */
 .cursor-label{position:fixed;top:0;left:0;z-index:120;display:flex;align-items:center;justify-content:center;
   width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:rgba(62,63,68,.82);backdrop-filter:blur(2px);
   color:#fff;font-size:13px;font-weight:700;line-height:1.15;text-align:center;letter-spacing:.01em;
@@ -463,7 +460,6 @@ li{list-style:none}
 var $=function(s,r){return (r||document).querySelector(s)},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
 var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-/* ── 부드러운 스크롤 — 원본 Lenis({lerp:0.09, smoothWheel:true}) 와 같은 값 ── */
 var SS={target:scrollY,current:scrollY,on:false,lock:null};
 window.__ss=SS;
 if(!reduce && matchMedia('(pointer:fine)').matches){
@@ -496,7 +492,6 @@ if(!reduce && matchMedia('(pointer:fine)').matches){
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -8% 0px'});
 $$('[data-rv]').forEach(function(el){io.observe(el)});
 
-/* 배경 원 — 스크롤에 따라 아주 천천히 */
 var c1=$('#bg-line .circ-1'),c2=$('#bg-line .circ-2');
 if(c1){var raf1=0;addEventListener('scroll',function(){if(raf1)return;raf1=requestAnimationFrame(function(){raf1=0;
   var y=scrollY*.02;c1.style.transform='translate3d(0,'+(-y)+'px,0)';c2.style.transform='translate3d(0,'+(y*.6)+'px,0)'})},{passive:true})}
@@ -507,7 +502,6 @@ function tone(){var y=innerHeight*.06,on=darks.some(function(d){var r=d.getBound
   fixed.forEach(function(el){el.classList.toggle('on-dark',on)})}
 if(darks.length){addEventListener('scroll',tone,{passive:true});addEventListener('resize',tone);tone()}
 
-/* 스크롤 힌트 */
 var hint=$('#scroll-hint');
 if(hint)addEventListener('scroll',function(){hint.classList.toggle('is-hidden',scrollY>innerHeight*.6)},{passive:true});
 
@@ -516,7 +510,6 @@ if(hint)addEventListener('scroll',function(){hint.classList.toggle('is-hidden',s
 
 
 
-/* ── 살아 움직이는 배경 넷 — 원본은 WebGL 셰이더, 여기서는 캔버스로 같은 크기·속도로 그린다 ── */
 (function(){
 var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 var G1=[47,214,201], G2=[91,75,255], G3=[179,107,255];
@@ -537,7 +530,6 @@ function runner(cv,draw){
   loop(performance.now());
 }
 
-/* 1. 히어로 덩어리 — 8개 점이 일렁이는 한 덩어리 (원본 sWarp 20 / lPoints 8) */
 var blob=document.querySelector('canvas.fx-blob');
 if(blob)runner(blob,function(c,w,h,t){
   c.clearRect(0,0,w,h);
@@ -697,17 +689,14 @@ var clamp=function(v,a,b){a=a===undefined?0:a;b=b===undefined?1:b;return v<a?a:v
 var lerp=function(a,b,t){return a+(b-a)*t};
 var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
-/* 히어로 등장 — 원본은 글꼴이 준비된 뒤 켠다 */
 var hero=$('#hero'),go=function(){requestAnimationFrame(function(){hero.classList.add('in')})};
 if(document.fonts&&document.fonts.ready){document.fonts.ready.then(go);setTimeout(go,800)}else go();
 
-/* 히어로 시차 — 원본 rate: 블롭 +120, 소제목 -130, 대제목 -250 */
 var pl=[[$('.hero-blob'),120],[$('.head-sub'),-130],[$('#head-title'),-250]].filter(function(l){return l[0]});
 if(!reduce&&pl.length){var pt=0;var pup=function(){pt=0;var p=Math.min(1,(scrollY||0)/innerHeight);
   pl.forEach(function(l){l[0].style.setProperty('--plx',(p*l[1]).toFixed(1)+'px')})};
   addEventListener('scroll',function(){if(!pt){pt=1;requestAnimationFrame(pup)}},{passive:true});pup()}
 
-/* Beyond 선언 — 원본 수식 그대로 */
 (function(){
   var ch=$('.pin-beyond'); if(!ch)return;
   var bl=$$('.beyond-title .line-1,.beyond-title .line-2',ch), fl=$$('.beyond-statement span',ch);
@@ -736,7 +725,6 @@ if(!reduce&&pl.length){var pt=0;var pup=function(){pt=0;var p=Math.min(1,(scroll
   })},{threshold:[0,0.5]}).observe(stage);
 })();
 
-/* 인사이트 3단계 — 원본 수식(0.75/0.5 창, blur 16, 빠질 때 48px, 스태거 .10) */
 (function(){
   var sec=$('.pin-insight'), steps=$$('.insight-step'); if(!sec||!steps.length)return;
   var N=steps.length, EXIT_Y=48, STAGGER=0.10, easeIn=function(x){return x*x};
@@ -765,7 +753,6 @@ if(!reduce&&pl.length){var pt=0;var pup=function(){pt=0;var p=Math.min(1,(scroll
   addEventListener('resize',update); update();
 })();
 
-/* 제목이 작은 라벨로 줄어드는 스크럽 — 서비스·프로젝트 공통 (원본 labelSize/restTop) */
 var labelSize=function(w){return w<=1024?32:w<=1920?lerp(32,48,(w-1024)/896):w<=2560?lerp(48,56,(w-1920)/640):56};
 var restTop=function(w){return w<=1024?160:w<=1920?lerp(160,240,(w-1024)/896):240};
 function titleScrub(title,q){
@@ -794,7 +781,6 @@ function titleScrub(title,q){
 (function(){var io2=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target)}})},{threshold:.2});
  $$('.svc-card').forEach(function(c){io2.observe(c)})})();
 
-/* 파트너 — 원본 임계값 그대로 */
 (function(){
   var sec=$('.partners'), inner=$('.partners-inner'), title=$('.partners-title'), desc=$('.partners-desc'), grid=$('.partner-grid');
   if(!sec||!inner||!grid)return;

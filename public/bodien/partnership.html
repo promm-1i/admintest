@@ -27,8 +27,8 @@
 .pf .sec1 dl dd textarea{width:100%;height:171px;padding:25px;border:1px solid #ccc;border-radius:12px;background:0;outline:0;resize:none;
   font-size:17px}
 .pf .filebox{display:flex;align-items:center}
-.pf .filebox input[type=file]{width:1px;height:1px}   /* dd input{width:100%} 가 숨긴 파일칸을 넓혀 좁은 폭에서 가로 스크롤이 생겼다 */
-.pf .filebox .upload-name{color:#767676}   /* 원본 #999 — 대비 2.85 */
+.pf .filebox input[type=file]{width:1px;height:1px}
+.pf .filebox .upload-name{color:#767676}
 .pf .filebox label{display:inline-block;vertical-align:top;flex:none;width:107px;height:56px;margin:0 10px 0 20px;background:#222;
   border-radius:12px;font-size:17px;color:#fff;text-align:center;line-height:56px}
 .pf .filebox .ftip{font-size:14px;color:#666;white-space:nowrap}
@@ -79,7 +79,6 @@
 <script>
 document.documentElement.classList.remove('no-js');
 (function(){
-  /* 원본 common.js: .ani 가 화면과 겹치면 in-view, 벗어나면 뗀다(되돌림 있음) */
   var views=[].slice.call(document.querySelectorAll('[data-view]'));
   function inView(){
     var wt=window.pageYOffset, wb=wt+window.innerHeight;
@@ -93,7 +92,6 @@ document.documentElement.classList.remove('no-js');
   window.addEventListener('resize',inView);
   inView();
 
-  /* 머리: 스크롤>0 이면 판이 내려온다 · pcNav 호버판 · 햄버거 */
   var hd=document.querySelector('.hdr'), mega=document.querySelector('.mega');
   function sc(){ hd.classList.toggle('is-scroll', window.pageYOffset>0); }
   window.addEventListener('scroll',sc,{passive:true}); sc();
@@ -133,7 +131,6 @@ document.documentElement.classList.remove('no-js');
     b.addEventListener('mouseleave',function(){ r.style.transform='scale(0)'; });
   });
 
-  /* 떠 있는 버튼 — 푸터에 닿으면 그만큼 올라간다(원본 35 / 35+66) */
   var qk=document.querySelector('.qk'), top=document.querySelector('.totop'), ft=document.querySelector('.ftr');
   function fl(){
     var ftTop=ft.getBoundingClientRect().top+window.pageYOffset, st=window.pageYOffset, wh=window.innerHeight;
@@ -159,7 +156,6 @@ document.documentElement.classList.remove('no-js');
       else document.documentElement.style.scrollBehavior=''; })(t0);
   }
 
-  /* 빠른상담 팝업 (원본 fadeIn) */
   var dim=document.querySelector('.ov-dim'), cs=document.querySelector('.pop-cs');
   function fade(el,show){ if(show){ el.style.opacity=0; el.style.display='block';
       requestAnimationFrame(function(){ el.style.transition='opacity .4s'; el.style.opacity=1; }); }
@@ -182,7 +178,6 @@ document.documentElement.classList.remove('no-js');
   });
   function alertBox(msg){ var n=form.querySelector('.form-msg'); n.textContent=msg; }
 
-  /* 원본 SmoothScroll 1.4.9 설정 그대로 (휠 한 번 60px, 1000ms) */
   if(window.SmoothScroll){ SmoothScroll({animationTime:1000,stepSize:60,accelerationDelta:50,accelerationMax:2,
     keyboardSupport:true,arrowScroll:40,pulseAlgorithm:true,pulseScale:4,pulseNormalize:1,
     touchpadSupport:false,fixedBackground:true,excluded:''}); }
@@ -191,13 +186,11 @@ document.documentElement.classList.remove('no-js');
 
 (function(){
   document.documentElement.classList.add('js');
-  /* 게시판 검색 — PC 에선 앞 선택지(원본 frontSelect), 태블릿·모바일은 기본 select */
   [].forEach.call(document.querySelectorAll('.fsel'),function(f){
     var b=f.querySelector('button'), ul=f.querySelector('ul'), sel=f.previousElementSibling;
     if(!sel||sel.tagName!=='SELECT') sel=f.parentNode.querySelector('select');
     b.addEventListener('click',function(){ var on=!ul.classList.contains('on'); ul.classList.toggle('on',on); b.classList.toggle('on',on);
       b.setAttribute('aria-expanded',on?'true':'false'); });
-    /* 고른 뒤 목록만 닫히고 단추의 on(위 화살표)은 남는다 — 원본 common.js 그대로 */
     ul.addEventListener('click',function(e){ var o=e.target.closest('button'); if(!o) return;
       b.textContent=o.textContent; sel.value=o.getAttribute('data-v'); ul.classList.remove('on'); b.setAttribute('aria-expanded','false');
       sel.dispatchEvent(new Event('change',{bubbles:true})); });

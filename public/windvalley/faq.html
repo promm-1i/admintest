@@ -106,26 +106,20 @@ document.documentElement.classList.remove('no-js');
 
 (function(){
   var H=document.getElementById('hd'),D=document.documentElement;
-  // 원본: .svis 높이 = 창 높이(처음 한 번)
   [].forEach.call(document.querySelectorAll('.sv'),function(v){v.style.height=D.clientHeight+'px'});
-  // 원본: .mypage_vis .bg span 높이 = .mypage_vis 높이
   function mv(){var m=document.querySelector('.mv'),s=m&&m.querySelector('.bg span');if(s)s.style.height=m.offsetHeight+'px'}
   mv();addEventListener('resize',mv);
-  // 원본: .mo 가 창 높이 80% 선 위로 오면 active
   function mo(){[].forEach.call(document.querySelectorAll('.mo'),function(e){
     if(e.getBoundingClientRect().top<D.clientHeight*.8)e.classList.add('active')})}
-  // 원본: 50px 넘게 내리면 머리에 co
   function hd(){H.classList.toggle('dark',scrollY>50)}
   addEventListener('scroll',function(){mo();hd()},{passive:true});mo();hd();
   window.wvMo=mo;
-  // 알림 창 — 원본 mp_pop type1
   var A=document.getElementById('al');
   window.wvAlert=function(t,m){A.querySelector('dt').textContent=t;A.querySelector('dd').textContent=m;
     A.classList.add('on');A.querySelector('.btn button').focus()};
   function off(){A.classList.remove('on')}
   [].forEach.call(A.querySelectorAll('.close button,.btn button,.dim'),function(b){b.addEventListener('click',off)});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')off()});
-  // 쪽 안 탭 — 원본: 누른 번호의 탭 상자 on, 주소에 ?tab=번호(1부터)
   window.wvTabs=function(o){o=o||{};
     var L=[].slice.call(document.querySelectorAll('.tabs li')),X=[].slice.call(document.querySelectorAll('.tab-con .tab-box'));
     function go(i,push){L.forEach(function(x){x.classList.remove('on')});X.forEach(function(x){x.classList.remove('on')});

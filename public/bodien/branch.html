@@ -162,7 +162,6 @@
   .bf-dim{background:rgba(0,0,0,.4)}
 }
 
-/* 앱 설치 팝업 — 원본 #bgBlack(.7, 3000) + .layerPop.infoPop(최대 1000, 5000) */
 .apop-bg{position:fixed;left:0;top:0;z-index:3000;width:100%;height:100%;background:rgba(0,0,0,.7)}
 .apop{position:fixed;left:50%;top:50%;z-index:5000;width:94%;max-width:1000px;transform:translate(-50%,-50%)}
 .apop[hidden],.apop-bg[hidden]{display:none}
@@ -213,7 +212,6 @@
 <script>
 document.documentElement.classList.remove('no-js');
 (function(){
-  /* 원본 common.js: .ani 가 화면과 겹치면 in-view, 벗어나면 뗀다(되돌림 있음) */
   var views=[].slice.call(document.querySelectorAll('[data-view]'));
   function inView(){
     var wt=window.pageYOffset, wb=wt+window.innerHeight;
@@ -227,7 +225,6 @@ document.documentElement.classList.remove('no-js');
   window.addEventListener('resize',inView);
   inView();
 
-  /* 머리: 스크롤>0 이면 판이 내려온다 · pcNav 호버판 · 햄버거 */
   var hd=document.querySelector('.hdr'), mega=document.querySelector('.mega');
   function sc(){ hd.classList.toggle('is-scroll', window.pageYOffset>0); }
   window.addEventListener('scroll',sc,{passive:true}); sc();
@@ -267,7 +264,6 @@ document.documentElement.classList.remove('no-js');
     b.addEventListener('mouseleave',function(){ r.style.transform='scale(0)'; });
   });
 
-  /* 떠 있는 버튼 — 푸터에 닿으면 그만큼 올라간다(원본 35 / 35+66) */
   var qk=document.querySelector('.qk'), top=document.querySelector('.totop'), ft=document.querySelector('.ftr');
   function fl(){
     var ftTop=ft.getBoundingClientRect().top+window.pageYOffset, st=window.pageYOffset, wh=window.innerHeight;
@@ -293,7 +289,6 @@ document.documentElement.classList.remove('no-js');
       else document.documentElement.style.scrollBehavior=''; })(t0);
   }
 
-  /* 빠른상담 팝업 (원본 fadeIn) */
   var dim=document.querySelector('.ov-dim'), cs=document.querySelector('.pop-cs');
   function fade(el,show){ if(show){ el.style.opacity=0; el.style.display='block';
       requestAnimationFrame(function(){ el.style.transition='opacity .4s'; el.style.opacity=1; }); }
@@ -316,7 +311,6 @@ document.documentElement.classList.remove('no-js');
   });
   function alertBox(msg){ var n=form.querySelector('.form-msg'); n.textContent=msg; }
 
-  /* 원본 SmoothScroll 1.4.9 설정 그대로 (휠 한 번 60px, 1000ms) */
   if(window.SmoothScroll){ SmoothScroll({animationTime:1000,stepSize:60,accelerationDelta:50,accelerationMax:2,
     keyboardSupport:true,arrowScroll:40,pulseAlgorithm:true,pulseScale:4,pulseNormalize:1,
     touchpadSupport:false,fixedBackground:true,excluded:''}); }
@@ -325,13 +319,11 @@ document.documentElement.classList.remove('no-js');
 
 (function(){
   document.documentElement.classList.add('js');
-  /* 게시판 검색 — PC 에선 앞 선택지(원본 frontSelect), 태블릿·모바일은 기본 select */
   [].forEach.call(document.querySelectorAll('.fsel'),function(f){
     var b=f.querySelector('button'), ul=f.querySelector('ul'), sel=f.previousElementSibling;
     if(!sel||sel.tagName!=='SELECT') sel=f.parentNode.querySelector('select');
     b.addEventListener('click',function(){ var on=!ul.classList.contains('on'); ul.classList.toggle('on',on); b.classList.toggle('on',on);
       b.setAttribute('aria-expanded',on?'true':'false'); });
-    /* 고른 뒤 목록만 닫히고 단추의 on(위 화살표)은 남는다 — 원본 common.js 그대로 */
     ul.addEventListener('click',function(e){ var o=e.target.closest('button'); if(!o) return;
       b.textContent=o.textContent; sel.value=o.getAttribute('data-v'); ul.classList.remove('on'); b.setAttribute('aria-expanded','false');
       sel.dispatchEvent(new Event('change',{bubbles:true})); });
@@ -344,7 +336,6 @@ var BF=[["가락동점",0,"서울","송파구","서울 송파구 송파대로 17
   var lists=[{items:pcList, shown:10, more:document.querySelector('.bf-pl').nextElementSibling, total:document.getElementById('bf-tp'), pc:true},
              {items:moList, shown:10, more:document.querySelector('.bf-mlst').nextElementSibling, total:document.getElementById('bf-tm'), pc:false}];
   var match=BF.map(function(){ return true; });
-  /* 원본 initList — 10개 보이고 더보기마다 10개씩 */
   function render(L){
     var n=0, vis=0;
     L.items.forEach(function(li){ var ok=match[+li.getAttribute('data-b')];
@@ -368,7 +359,6 @@ var BF=[["가락동점",0,"서울","송파구","서울 송파구 송파대로 17
     });
   });
 
-  /* 옵션 펼침(원본 slideToggle 400) */
   function slide(box,open){ box.classList.add('on'); var h=box.scrollHeight;
     if(box.animate){ var a=box.animate(open?[{height:'0px',overflow:'hidden'},{height:h+'px',overflow:'hidden'}]:[{height:h+'px',overflow:'hidden'},{height:'0px',overflow:'hidden'}],{duration:400,easing:'cubic-bezier(.36,0,.64,1)'});
       if(!open) a.onfinish=function(){ box.classList.remove('on'); }; }
@@ -395,7 +385,6 @@ var BF=[["가락동점",0,"서울","송파구","서울 송파구 송파대로 17
   [].forEach.call(document.querySelectorAll('.bf-form'),function(form){
     form.addEventListener('submit',function(e){ e.preventDefault(); apply(form); });
   });
-  /* 모바일 판은 바꾸는 즉시(원본 change → submit) */
   var fm=document.getElementById('bf-fm');
   [].forEach.call(fm.querySelectorAll('[name=fac],select'),function(x){ x.addEventListener('change',function(){ apply(fm); }); });
 
@@ -429,7 +418,6 @@ var BF=[["가락동점",0,"서울","송파구","서울 송파구 송파대로 17
   document.querySelector('.bf-zin').addEventListener('click',function(){ zoom(1); });
   document.querySelector('.bf-zout').addEventListener('click',function(){ zoom(-1); });
 
-  /* 원본 '스크롤 이슈' — 목록 안에서 굴리면 목록만, 끝에 닿으면 창으로 */
   var lw=document.querySelector('.bf-sec .bf-lw');
   lw.addEventListener('wheel',function(e){ var top=lw.scrollTop===0, bot=lw.scrollTop>=lw.scrollHeight-lw.clientHeight-1;
     if((top&&e.deltaY<0)||(bot&&e.deltaY>0)) return; e.stopPropagation(); },{passive:true});

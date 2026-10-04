@@ -2,8 +2,6 @@
   var RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
   var hd=document.getElementById('header');
 
-  /* 원본 minimizeHeader — 10px 넘게 움직여야 반응하고, 한 화면을 지나서 내릴 때만
-     헤더를 감춘다. 감춘 만큼 --minimize-height 가 커지고 서브 고정 탭이 따라 올라간다. */
   (function(){
     var last=0, MOVE=10, hidden=false;
     function h(){

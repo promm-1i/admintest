@@ -62,7 +62,6 @@ html,body{height:100%}
 .is-open .vis-scroll{transform:none}
 .past-1 .vis-move{opacity:0;transform:translate(0,100%)}
 .past-1 .vis-txt{opacity:0;transform:translate(0,100%);transition-delay:0s}
-/* 빠른예약 — 원본 .fast_rsv */
 .fr{position:absolute;bottom:4.1667vw;width:100%;padding:0 3.3333vw 0 2.5vw;z-index:15;opacity:0;transform:translate(0,200%);transition:1s;transition-delay:4.6s}
 .fr-items{background:var(--paper);border-radius:4px;display:flex;justify-content:space-between;align-items:center;transition:.8s}
 .fr-l{width:73%;display:flex}
@@ -127,7 +126,6 @@ html,body{height:100%}
 .fr-r button:hover::before{transform:none}
 .is-open .fr{opacity:1;transform:none}
 .past-1 .fr-items{opacity:0}
-/* 세로 화면 빠른 예약 — 원본 .m_rsv */
 .m-rsv{display:none;opacity:0;transform:translate(0,200%);transition:1s;transition-delay:4.6s;z-index:15}
 .m-rsv a{display:block;width:100%;border-radius:2px;background:var(--paper);box-shadow:0 1px 16px 0 rgba(0,0,0,.3);color:var(--ink);font-weight:500;text-align:center;transition:.8s}
 .is-open .m-rsv{opacity:1;transform:none}
@@ -398,7 +396,6 @@ html,body{height:100%}
 .ct-box .t1{font-size:.6771vw;display:flex;font-weight:600;letter-spacing:.025em;overflow:hidden;font-family:var(--ui)}
 .ct-box .t1 span{border-bottom:1px solid var(--ink);padding-bottom:.1042vw;display:block;transform:translate(0,100%);transition:.8s}
 .ct-box .flex .t1{font-family:initial;font-size:.7813vw;font-weight:500;letter-spacing:-.05em}
-/* 원본 주소 한 줄 폭(글자 25.6자 분)을 기준 폭으로 — 원본처럼 버튼 글이 두 줄로 접힌다 */
 .ct-box .flex .txt{flex-basis:18.668vw}
 .ct-box .t2{font-size:.7292vw;letter-spacing:.05em;margin-top:.9896vw;overflow:hidden}
 .ct-box .t2+.t2{margin-top:.2vw}
@@ -421,7 +418,6 @@ html,body{height:100%}
 /* ── 12 발 — 섹션 안에서 100dvh ── */
 .s-foot .ft{height:100%}
 .at-11 .s-foot .ft{}
-/* ── 오른쪽 점 내비 — 원본 .full_menu ── */
 .dots{position:fixed;right:3vw;top:45%;z-index:20;transform:translate(0,-50%);transition:.6s}
 .dots li{position:relative}
 .dots li~li{margin-top:.2083vw}
@@ -612,7 +608,6 @@ html,body{height:100%}
   .dots button{width:1.7vw;height:1.7vw}
   .dots em{width:.4vw;height:.4vw}
   .dots p{right:2.5vw;font-size:1.3vw}
-  /* 빠른 링크 — 원본: 객실 구역은 짙게, 3번째 구역부터는 위 2개만 남기고 반 칸 내린다 */
   .at-5 .qk li a{color:var(--ink)}
   .at-5 .qk .ln::before{background:var(--ink)}
   .at-5 .qk li a>em{background-image:url(./assets/ic/quick-arrow-ink.svg)}
@@ -1011,7 +1006,6 @@ document.documentElement.classList.remove('no-js');
     [].forEach.call(document.querySelectorAll('.dots li'),function(li){
       var g=+li.getAttribute('data-go');li.classList.toggle('on',g===i||(g===6&&i===7));});
   }
-  // 머리 색 — 원본 onLeave/afterLoad·슬라이드 전환 규칙
   function head(i){
     var dark=false;
     if(i===2){dark=portrait()?true:(sw.resort?sw.resort.activeIndex===0:true);}
@@ -1058,10 +1052,8 @@ document.documentElement.classList.remove('no-js');
     W.offsetHeight;W.style.transition='';});
   [].forEach.call(document.querySelectorAll('.dots li'),function(li){li.querySelector('button').addEventListener('click',function(){
     var g=+li.getAttribute('data-go');
-    // 원본 full_menu: 앞 섹션 슬라이더는 끝 장으로, 뒤 섹션 슬라이더는 첫 장으로 맞춰 둔다
     if(sw.resort)sw.resort.slideTo(g>2?2:0,0);if(sw.course)sw.course.slideTo(g>3?1:0,0);if(sw.pkg)sw.pkg.slideTo(g>7?2:0,0);
     allow=true;go(g);});});
-  // 안쪽 슬라이더 — 원본 설정값
   var sw={};
   function ends(s){s.slides.forEach(function(x){x.classList.remove('end')});s.slides[s.activeIndex].classList.add('end');}
   sw.resort=new Swiper('.resort',{speed:1400,allowTouchMove:false,effect:'creative',
@@ -1077,14 +1069,12 @@ document.documentElement.classList.remove('no-js');
     on:{slideChangeTransitionEnd:function(){ends(this)}}});
   inner={2:sw.resort,3:sw.course,7:sw.pkg};
   if(portrait()){
-    // 원본처럼 감싸개·장에 swiper 클래스를 붙여 세로 슬라이더로(세로 화면에서만)
     var pf=document.querySelector('.press-faq');pf.classList.add('swiper');pf.querySelector('.pf-area').classList.add('swiper-wrapper');
     [].forEach.call(pf.querySelectorAll('.pf-box'),function(x){x.classList.add('swiper-slide')});
     sw.pf=new Swiper(pf,{speed:1400,direction:'vertical',allowTouchMove:false,
       on:{slideChangeTransitionStart:function(){pf.classList.toggle('s2',this.activeIndex===1);},
           slideChangeTransitionEnd:function(){ends(this)}}});
     inner[8]=sw.pf;
-    // 원본: 보도 2행 · FAQ 5행 격자, 페이지 점, 넘김 1000
     [['.pf-press',2,'.b1 .pf-page'],['.pf-faq',5,'.b2 .pf-page']].forEach(function(o){
       var el=document.querySelector(o[0]);el.classList.add('swiper');el.querySelector('ul').classList.add('swiper-wrapper');
       [].forEach.call(el.querySelectorAll('li'),function(li){li.classList.add('swiper-slide')});
@@ -1108,7 +1098,6 @@ document.documentElement.classList.remove('no-js');
   document.addEventListener('click',function(){[].forEach.call(document.querySelectorAll('.cmap .dot'),function(o){o.classList.remove('on');
     o.querySelector('.d').setAttribute('aria-expanded','false');});
     [].forEach.call(document.querySelectorAll('.cmap video'),function(x){x.pause()});});
-  // 빠른예약 팝업 — 원본 fadeToggle 300
   var T=[].slice.call(document.querySelectorAll('.fr-t'));
   T.forEach(function(t){t.addEventListener('click',function(e){e.stopPropagation();var p=t.nextElementSibling;
     var was=p.classList.contains('on');T.forEach(function(o){o.nextElementSibling.classList.remove('on');o.setAttribute('aria-expanded','false');});

@@ -19,7 +19,6 @@
 .ptp{padding:0 0 150px}
 .ptp .banner{position:relative;container-type:inline-size}
 .ptp .banner img{display:block;width:100%}
-/* 원본 배너는 글자가 그림에 박혀 그림째 줄어든다 — 우리는 사진에 글자를 넣지 않고 배너 폭 기준(cqw)으로 얹어 같이 줄인다 */
 .ptp .btxt{position:absolute;left:9.51cqw;top:10.56cqw;color:#fff}
 .ptp .btxt p{color:#fff}
 .ptp .btxt .t1{font-size:2.5cqw;font-weight:500;line-height:1.4}
@@ -32,7 +31,6 @@
 .ptp .tr-filter{margin:20px 0}
 .ptp .tr-filter .input{margin-bottom:10px}
 .ptp .tr-filter .input.row2{display:flex;gap:6px}
-/* 원본 PC 는 셀렉트 대신 앞 선택지(frontSelect, 높이 50)를 보인다 */
 @media (min-width:1400px){.ptp .tr-filter .input select{height:50px}}
 .ptp .tr-filter .input:last-child{margin:0}
 .ptp .tr-filter select{width:100%;height:56px;padding:0 20px;border:1px solid #ccc;outline:0;border-radius:12px;font-size:16px;color:#666;
@@ -123,7 +121,6 @@
 <script>
 document.documentElement.classList.remove('no-js');
 (function(){
-  /* 원본 common.js: .ani 가 화면과 겹치면 in-view, 벗어나면 뗀다(되돌림 있음) */
   var views=[].slice.call(document.querySelectorAll('[data-view]'));
   function inView(){
     var wt=window.pageYOffset, wb=wt+window.innerHeight;
@@ -137,7 +134,6 @@ document.documentElement.classList.remove('no-js');
   window.addEventListener('resize',inView);
   inView();
 
-  /* 머리: 스크롤>0 이면 판이 내려온다 · pcNav 호버판 · 햄버거 */
   var hd=document.querySelector('.hdr'), mega=document.querySelector('.mega');
   function sc(){ hd.classList.toggle('is-scroll', window.pageYOffset>0); }
   window.addEventListener('scroll',sc,{passive:true}); sc();
@@ -177,7 +173,6 @@ document.documentElement.classList.remove('no-js');
     b.addEventListener('mouseleave',function(){ r.style.transform='scale(0)'; });
   });
 
-  /* 떠 있는 버튼 — 푸터에 닿으면 그만큼 올라간다(원본 35 / 35+66) */
   var qk=document.querySelector('.qk'), top=document.querySelector('.totop'), ft=document.querySelector('.ftr');
   function fl(){
     var ftTop=ft.getBoundingClientRect().top+window.pageYOffset, st=window.pageYOffset, wh=window.innerHeight;
@@ -203,7 +198,6 @@ document.documentElement.classList.remove('no-js');
       else document.documentElement.style.scrollBehavior=''; })(t0);
   }
 
-  /* 빠른상담 팝업 (원본 fadeIn) */
   var dim=document.querySelector('.ov-dim'), cs=document.querySelector('.pop-cs');
   function fade(el,show){ if(show){ el.style.opacity=0; el.style.display='block';
       requestAnimationFrame(function(){ el.style.transition='opacity .4s'; el.style.opacity=1; }); }
@@ -226,7 +220,6 @@ document.documentElement.classList.remove('no-js');
   });
   function alertBox(msg){ var n=form.querySelector('.form-msg'); n.textContent=msg; }
 
-  /* 원본 SmoothScroll 1.4.9 설정 그대로 (휠 한 번 60px, 1000ms) */
   if(window.SmoothScroll){ SmoothScroll({animationTime:1000,stepSize:60,accelerationDelta:50,accelerationMax:2,
     keyboardSupport:true,arrowScroll:40,pulseAlgorithm:true,pulseScale:4,pulseNormalize:1,
     touchpadSupport:false,fixedBackground:true,excluded:''}); }
@@ -235,13 +228,11 @@ document.documentElement.classList.remove('no-js');
 
 (function(){
   document.documentElement.classList.add('js');
-  /* 게시판 검색 — PC 에선 앞 선택지(원본 frontSelect), 태블릿·모바일은 기본 select */
   [].forEach.call(document.querySelectorAll('.fsel'),function(f){
     var b=f.querySelector('button'), ul=f.querySelector('ul'), sel=f.previousElementSibling;
     if(!sel||sel.tagName!=='SELECT') sel=f.parentNode.querySelector('select');
     b.addEventListener('click',function(){ var on=!ul.classList.contains('on'); ul.classList.toggle('on',on); b.classList.toggle('on',on);
       b.setAttribute('aria-expanded',on?'true':'false'); });
-    /* 고른 뒤 목록만 닫히고 단추의 on(위 화살표)은 남는다 — 원본 common.js 그대로 */
     ul.addEventListener('click',function(e){ var o=e.target.closest('button'); if(!o) return;
       b.textContent=o.textContent; sel.value=o.getAttribute('data-v'); ul.classList.remove('on'); b.setAttribute('aria-expanded','false');
       sel.dispatchEvent(new Event('change',{bubbles:true})); });

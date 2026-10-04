@@ -354,9 +354,6 @@
   var E3 = 'cubic-bezier(.165,.84,.44,1)';   /* gsap power3.out */
   var E4 = 'cubic-bezier(.165,.84,.44,1)';   /* power4.out — 끝이 더 눕는다 */
 
-  /* ── 1 인트로 슬라이더 ──────────────────────────────────────
-     원본 mainIntroSlider: 자동 5000ms, 불릿 안 진행 막대가 0→100%,
-     재생/일시정지 상태 버튼. 막대가 다 차면 다음 장으로. */
   (function(){
     var slides = [].slice.call(document.querySelectorAll('.in-slide'));
     var dots = document.querySelector('.in-dots');
@@ -405,9 +402,6 @@
     go(0);
   })();
 
-  /* ── 2 문제은행 슬라이더 ────────────────────────────────────
-     원본 mainBankSlider: Swiper centeredSlides, 좌우 슬라이드가 살짝 보인다.
-     원본은 슬라이드마다 배경 영상을 켜고 끄지만 우리는 이미지다. */
   (function(){
     var sl = document.querySelector('.bk-slider');
     if (!sl) return;
@@ -436,9 +430,6 @@
     draw();
   })();
 
-  /* ── 3 솔루션 카드 ─────────────────────────────────────────
-     원본 mainSolutionClick: 터치 기기에서는 탭으로 뒤집고(hover 없음),
-     첫 카드는 화면에 들어올 때 한 번 저절로 뒤집혔다 돌아온다. */
   (function(){
     var links = [].slice.call(document.querySelectorAll('.sl-link'));
     if (!links.length) return;
@@ -467,19 +458,12 @@
     }
   })();
 
-  /* ── 4 데이터 숫자 굴림 ────────────────────────────────────
-     원본 mainDataMotion: 목록을 두 번 이어 붙이고 yPercent -50 · repeat 2,
-     자리마다 0.1s 씩 늦게 시작, duration 3s power4.out.
-     span 은 rotate(-1deg) 로 기울어 있다가 0 으로 펴진다.
-     발동 지점 ScrollTrigger start '50% bottom' — 섹션 절반이 화면에 들어올 때. */
   (function(){
     var dt = document.querySelector('.dt');
     if (!dt) return;
     var rolls = [].slice.call(dt.querySelectorAll('.dg-roll'));
     rolls.forEach(function(r){ r.innerHTML = r.innerHTML + r.innerHTML; });
     if (RM) { dt.classList.add('on'); return; }
-    /* 원본 ScrollTrigger start '50% bottom' — 섹션의 절반 지점이 화면 바닥에 닿으면 한 번.
-       IntersectionObserver 로는 빠르게 지나갈 때 놓친다. */
     var fired = false;
     function check(){
       if (fired) return;
@@ -506,7 +490,6 @@
     var rs = document.querySelector('.rv-slider');
     if (!rs) return;
     var wrap = rs.parentElement, drag = false, sx = 0, st = 0, off = 0;
-    /* 원본은 가운데 슬라이드를 화면 중앙에 두고 좌우가 조금씩 보인다 */
     var center = function(){
       var one = rs.children[0];
       if (!one) return;
@@ -532,10 +515,6 @@
     });
   })();
 
-  /* ── 6 CTA 이미지 모임 (스크럽) ────────────────────────────
-     원본 mainCtaMotion: ScrollTrigger scrub 1, start '30% bottom' end 'bottom bottom'.
-     일곱 장이 제각기 다른 곳에서 가운데로 모이고 4번째는 1.4배에서 줄어든다.
-     rem 단위라 화면 폭에 따라 이동 거리가 달라진다. */
   (function(){
     var motion = document.querySelector('.ct-motion');
     if (!motion) return;
@@ -570,9 +549,6 @@
     addEventListener('resize', function(){ unit(); draw(); });
   })();
 
-  /* ── 7 마무리 배경 펼침 (스크럽) ───────────────────────────
-     원본 mainEpilogueMotion: clipPath inset(16.68% 39.58% round 32rem) → inset(0 round 0),
-     내용은 뒤따라 나타난다. start 'top bottom' end 'bottom+=50% bottom', scrub 1. */
   (function(){
     var ep = document.querySelector('.ep');
     if (!ep) return;

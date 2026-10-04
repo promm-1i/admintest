@@ -61,7 +61,7 @@
 .bb-txt li strong.bb-c{color:var(--pri)}
 .bb-txt li::before{display:block;content:"";width:8px;height:8px;border:2px solid var(--pri);border-radius:50%;position:absolute;left:0;top:12px}
 .bb-tip{padding:0 30px}
-.bb-tip li{position:relative;padding-left:14px;margin-bottom:10px;font-size:17px;color:rgba(34,34,34,.63)}   /* 원본 .6 — #f9f9f9 바탕 대비 4.19 */
+.bb-tip li{position:relative;padding-left:14px;margin-bottom:10px;font-size:17px;color:rgba(34,34,34,.63)}
 .bb-tip li::before{display:block;content:"*";position:absolute;left:0;top:0}
 .bb-tag{display:flex;flex-wrap:wrap;gap:7px;padding:0 30px;margin-top:20px}
 .bb-tag span{display:flex;align-items:center;justify-content:center;padding:0 25px;height:46px;border-radius:23px;font-size:17px;color:#fff;font-weight:600;text-align:center}
@@ -138,7 +138,6 @@
 .bb-btx{margin:0 15px;font-size:21px;color:#000;font-weight:700;text-align:center}
 .bb-btx img{display:inline;margin-top:10px}
 .bb-set{display:flex;align-items:center;padding:40px 35px 40px 80px;margin-left:-80px;background:url(./assets/bb-set.svg) no-repeat right top;background-size:cover}
-/* 등장 모션(원본 PC 시트) */
 @media (min-width:1400px){
   .js .bb-imgs .bb-i1{opacity:0}
   .js .bb-imgs .bb-i2{opacity:0;transform-origin:bottom;transform:scaleY(0)}
@@ -277,7 +276,6 @@
 <script>
 document.documentElement.classList.remove('no-js');
 (function(){
-  /* 원본 common.js: .ani 가 화면과 겹치면 in-view, 벗어나면 뗀다(되돌림 있음) */
   var views=[].slice.call(document.querySelectorAll('[data-view]'));
   function inView(){
     var wt=window.pageYOffset, wb=wt+window.innerHeight;
@@ -291,7 +289,6 @@ document.documentElement.classList.remove('no-js');
   window.addEventListener('resize',inView);
   inView();
 
-  /* 머리: 스크롤>0 이면 판이 내려온다 · pcNav 호버판 · 햄버거 */
   var hd=document.querySelector('.hdr'), mega=document.querySelector('.mega');
   function sc(){ hd.classList.toggle('is-scroll', window.pageYOffset>0); }
   window.addEventListener('scroll',sc,{passive:true}); sc();
@@ -331,7 +328,6 @@ document.documentElement.classList.remove('no-js');
     b.addEventListener('mouseleave',function(){ r.style.transform='scale(0)'; });
   });
 
-  /* 떠 있는 버튼 — 푸터에 닿으면 그만큼 올라간다(원본 35 / 35+66) */
   var qk=document.querySelector('.qk'), top=document.querySelector('.totop'), ft=document.querySelector('.ftr');
   function fl(){
     var ftTop=ft.getBoundingClientRect().top+window.pageYOffset, st=window.pageYOffset, wh=window.innerHeight;
@@ -357,7 +353,6 @@ document.documentElement.classList.remove('no-js');
       else document.documentElement.style.scrollBehavior=''; })(t0);
   }
 
-  /* 빠른상담 팝업 (원본 fadeIn) */
   var dim=document.querySelector('.ov-dim'), cs=document.querySelector('.pop-cs');
   function fade(el,show){ if(show){ el.style.opacity=0; el.style.display='block';
       requestAnimationFrame(function(){ el.style.transition='opacity .4s'; el.style.opacity=1; }); }
@@ -380,7 +375,6 @@ document.documentElement.classList.remove('no-js');
   });
   function alertBox(msg){ var n=form.querySelector('.form-msg'); n.textContent=msg; }
 
-  /* 원본 SmoothScroll 1.4.9 설정 그대로 (휠 한 번 60px, 1000ms) */
   if(window.SmoothScroll){ SmoothScroll({animationTime:1000,stepSize:60,accelerationDelta:50,accelerationMax:2,
     keyboardSupport:true,arrowScroll:40,pulseAlgorithm:true,pulseScale:4,pulseNormalize:1,
     touchpadSupport:false,fixedBackground:true,excluded:''}); }
@@ -389,13 +383,11 @@ document.documentElement.classList.remove('no-js');
 
 (function(){
   document.documentElement.classList.add('js');
-  /* 게시판 검색 — PC 에선 앞 선택지(원본 frontSelect), 태블릿·모바일은 기본 select */
   [].forEach.call(document.querySelectorAll('.fsel'),function(f){
     var b=f.querySelector('button'), ul=f.querySelector('ul'), sel=f.previousElementSibling;
     if(!sel||sel.tagName!=='SELECT') sel=f.parentNode.querySelector('select');
     b.addEventListener('click',function(){ var on=!ul.classList.contains('on'); ul.classList.toggle('on',on); b.classList.toggle('on',on);
       b.setAttribute('aria-expanded',on?'true':'false'); });
-    /* 고른 뒤 목록만 닫히고 단추의 on(위 화살표)은 남는다 — 원본 common.js 그대로 */
     ul.addEventListener('click',function(e){ var o=e.target.closest('button'); if(!o) return;
       b.textContent=o.textContent; sel.value=o.getAttribute('data-v'); ul.classList.remove('on'); b.setAttribute('aria-expanded','false');
       sel.dispatchEvent(new Event('change',{bubbles:true})); });
@@ -403,7 +395,6 @@ document.documentElement.classList.remove('no-js');
 })();
 
 (function(){
-  /* 장면1 — PC 에서만 고정해 카드를 올리며 모은다(원본 techTl) */
   if(window.gsap&&window.ScrollTrigger&&!matchMedia('(prefers-reduced-motion: reduce)').matches){
     gsap.registerPlugin(ScrollTrigger);
     gsap.matchMedia().add('(min-width: 1400px)',function(){

@@ -20,7 +20,7 @@
 /* ── 공통 ── */
 .pcbr{display:block}.tbbr,.mbbr{display:none}
 .ttl h3{opacity:0;transform:translateY(40px);transition:all 1s}
-.ttl h4 span{position:relative;display:block;color:transparent}   /* 원본 #fff — 채워지기 전 밑글은 안 보이는 게 목적이라 투명(#f9f9f9 바탕에서 대비 1.05 로 걸림) */
+.ttl h4 span{position:relative;display:block;color:transparent}
 .ttl h4 span::before{content:attr(data-text);position:absolute;top:0;left:0;color:#000;
   clip-path:polygon(0 0,0 0,0 100%,0 100%);transition:clip-path 1.2s cubic-bezier(.25,.46,.45,.94)}
 .ttl.in-view h3{opacity:1;transform:translateY(0)}
@@ -221,7 +221,6 @@
   width:120px;height:120px;border-radius:50%;pointer-events:none;opacity:0}
 .md .hv-go::before{border:2px solid rgba(255,255,255,.7);animation:bdWave1 2.5s ease-out infinite}
 .md .hv-go::after{border:2px solid rgba(255,255,255,.5);animation:bdWave2 2.5s ease-out infinite .8s}
-/* 원본은 평소 물결(wooferWave1/2)을 정의하지 않아 안 보이고, 호버 물결만 돈다 — 그대로 둔다 */
 .md .hv-go:hover::before{animation:bdWaveHover1 1.8s ease-out infinite}
 .md .hv-go:hover::after{animation:bdWaveHover2 1.8s ease-out infinite .6s}
 @keyframes bdWaveHover1{0%{width:120px;height:120px;opacity:.7}100%{width:140px;height:140px;opacity:0}}
@@ -615,7 +614,6 @@
 <script>
 document.documentElement.classList.remove('no-js');
 (function(){
-  /* 원본 common.js: .ani 가 화면과 겹치면 in-view, 벗어나면 뗀다(되돌림 있음) */
   var views=[].slice.call(document.querySelectorAll('[data-view]'));
   function inView(){
     var wt=window.pageYOffset, wb=wt+window.innerHeight;
@@ -629,7 +627,6 @@ document.documentElement.classList.remove('no-js');
   window.addEventListener('resize',inView);
   inView();
 
-  /* 머리: 스크롤>0 이면 판이 내려온다 · pcNav 호버판 · 햄버거 */
   var hd=document.querySelector('.hdr'), mega=document.querySelector('.mega');
   function sc(){ hd.classList.toggle('is-scroll', window.pageYOffset>0); }
   window.addEventListener('scroll',sc,{passive:true}); sc();
@@ -669,7 +666,6 @@ document.documentElement.classList.remove('no-js');
     b.addEventListener('mouseleave',function(){ r.style.transform='scale(0)'; });
   });
 
-  /* 떠 있는 버튼 — 푸터에 닿으면 그만큼 올라간다(원본 35 / 35+66) */
   var qk=document.querySelector('.qk'), top=document.querySelector('.totop'), ft=document.querySelector('.ftr');
   function fl(){
     var ftTop=ft.getBoundingClientRect().top+window.pageYOffset, st=window.pageYOffset, wh=window.innerHeight;
@@ -695,7 +691,6 @@ document.documentElement.classList.remove('no-js');
       else document.documentElement.style.scrollBehavior=''; })(t0);
   }
 
-  /* 빠른상담 팝업 (원본 fadeIn) */
   var dim=document.querySelector('.ov-dim'), cs=document.querySelector('.pop-cs');
   function fade(el,show){ if(show){ el.style.opacity=0; el.style.display='block';
       requestAnimationFrame(function(){ el.style.transition='opacity .4s'; el.style.opacity=1; }); }
@@ -718,7 +713,6 @@ document.documentElement.classList.remove('no-js');
   });
   function alertBox(msg){ var n=form.querySelector('.form-msg'); n.textContent=msg; }
 
-  /* 원본 SmoothScroll 1.4.9 설정 그대로 (휠 한 번 60px, 1000ms) */
   if(window.SmoothScroll){ SmoothScroll({animationTime:1000,stepSize:60,accelerationDelta:50,accelerationMax:2,
     keyboardSupport:true,arrowScroll:40,pulseAlgorithm:true,pulseScale:4,pulseNormalize:1,
     touchpadSupport:false,fixedBackground:true,excluded:''}); }
@@ -727,7 +721,6 @@ document.documentElement.classList.remove('no-js');
 
 (function(){
   var mob=function(){ return window.innerWidth<=813; };
-  /* 전면 영상 — 원본은 영상이 끝나면 다음 장(1장뿐이라 같은 장)으로, 진행 막대는 남은 시간만큼 linear */
   var paging=document.querySelector('.hv-paging'), bar=paging.querySelector('.g'), paused=false;
   function vid(){ return document.querySelector(mob()?'.hv-mo video':'.hv-pc video'); }
   function barRun(ms){ bar.style.transition='none'; bar.style.width='0%'; bar.offsetWidth;
@@ -755,7 +748,6 @@ document.documentElement.classList.remove('no-js');
   gsap.registerPlugin(ScrollTrigger);
   window.addEventListener('load',function(){ ScrollTrigger.refresh(); });
 
-  /* Merit — 원본 sec2: pin +=400%, 4단계, 원 -60°씩 */
   ScrollTrigger.matchMedia({
     '(min-width: 814px)': function(){
       var last=0, lis=document.querySelectorAll('.mr-circle ul li');
@@ -809,7 +801,6 @@ document.documentElement.classList.remove('no-js');
   pop.querySelector('.js-vod-x').addEventListener('click',closeVod);
   dim.addEventListener('click',function(){ if(pop.style.display==='block') closeVod(); });
 
-  /* 소식 — 큰 글자는 top 80% 에서 act, 카드는 스크롤바 */
   gsap.timeline({scrollTrigger:{trigger:'.nw .big-words',start:'top 80%',end:'+=100%',pin:false,pinSpacing:false,
     scrub:true,toggleClass:'act'}});
   var nw=new Swiper('.nw-swiper',{slidesPerView:'auto',spaceBetween:20,speed:1200,loop:false,
