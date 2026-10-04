@@ -441,6 +441,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "perfume-b-template",
+    industry: "향수 · 코스메틱 브랜드 홈페이지",
+    title: "향수 · 코스메틱 브랜드 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 화장품 · 시그니처 향 · 제품 상세 · 19페이지",
+    purpose:
+      "영상 첫 화면, 스크롤에 맞춰 선이 그려지며 글이 올라오는 소개, 저절로 넘어가는 제품 여섯 개, 흐릿하다 선명해지는 연구 영상, 흐르는 큰 글자로 이어지는 메인에 브랜드 · BI · 제품 목록 4쪽 · 제품 상세 6쪽 · 연구 3쪽 · 보도자료 · 문의를 담은 화장품 브랜드 홈페이지입니다.",
+    features: [
+      "영상 첫 화면 · 스크롤에 맞춰 그려지는 소개 · 7초마다 넘어가는 제품 6개",
+      "화면에 붙은 채 사진이 차오르는 브랜드 이름 네 글자 장면 · 향 노트 세 단계",
+      "라인별 제품 목록 · 성분 · 가격 · 특징을 담은 제품 상세 6쪽",
+      "테크놀로지 · 연구분야 · 생산시설 · 보도자료 · 문의 양식",
+    ],
+    idealFor: "화장품 · 스킨케어 브랜드, 향수 · 바디케어 브랜드, 비건 · 클린 뷰티 브랜드, 쇼핑몰과 따로 브랜드 소개 홈페이지를 두려는 곳",
+    image: "/thumbs/perfume-b.jpg",
+    liveUrl: "/elor/",
+    industryKey: "perfume",
+    premiumLabel: "향수 · 코스메틱 브랜드",
+    designCode: "PERP-1001",
+    premium: true,
+  },
+  {
     slug: "fitness-g-template",
     industry: "프리미엄 피트니스 · 위탁운영 회사 홈페이지",
     title: "프리미엄 피트니스 · 위탁운영 회사 홈페이지 (프리미엄 디자인 B)",
