@@ -165,7 +165,7 @@ def check_pages(slug, ref):
     really = [f for f in empty if same.get(f) != 0]
     # 손으로 짠 생성기라 쪽 짝(PAGES)이 없는 클론: 원본 크롤의 서브 쪽(메인 index·*_main 제외)이 모두 section 을 안 쓰면
     # (keoc 60쪽 · daesang 36쪽 · eumcblood 서브 64쪽 — section 은 메인에만) 우리 서브 쪽 0 도 원본 구조다.
-    refmain = [f for f in refhtml if re.search(r'^(index|main)|_main\.', os.path.basename(f), re.I)]
+    refmain = [f for f in refhtml if re.search(r'(^|_)(index|main)[._]', os.path.basename(f), re.I)]   # kr_index.html 같은 크롤 이름도
     refsub = [f for f in refhtml if f not in refmain]
     nosec = lambda fs: bool(fs) and not any('<section' in io.open(f, encoding='utf-8', errors='replace').read() for f in fs)
     if really and not same and nosec(refsub) and ('index.html' not in really or nosec(refmain)):
