@@ -417,7 +417,7 @@ def cta_card(sp: dict, n: int, total: int, with_url: bool = True) -> str:
     return shell(sp, f"""<p style="font-size:28px;font-weight:700;color:{a}">{esc(sp['brand'])} 디자인으로 제작</p>
   <h2 style="margin-top:14px;font-size:64px;font-weight:800;letter-spacing:-.035em;line-height:1.25">이 디자인으로<br>{esc(sp['cta_line'])} 만들어요</h2>
   <p style="margin-top:60px;font-size:34px;color:#6b645d">프리미엄 제작</p>
-  <p style="margin-top:6px;font-size:130px;font-weight:800;letter-spacing:-.04em;line-height:1;color:{a}">300<span style="font-size:62px;margin-left:8px">만 원부터</span></p>
+  <p style="margin-top:6px;font-size:130px;font-weight:800;letter-spacing:-.04em;line-height:1;color:{a}">150<span style="font-size:62px;margin-left:8px">만 원부터</span></p>
   <ul style="margin-top:48px;list-style:none;font-size:34px;line-height:1.8;color:#3d3833">
     <li>· 색과 메뉴를 회사에 맞게 바꿔요</li>
     <li>· 사진은 새로 만들어 넣어요</li>

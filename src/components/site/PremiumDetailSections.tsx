@@ -266,7 +266,7 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
         <h2 className="mt-3 text-lg font-bold text-foreground">제작 비용</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
           이 디자인을 기반으로 문구 · 이미지 · 구성을 맞춰 제작하며,{" "}
-          <strong className="font-mono text-base text-foreground">300만원</strong>부터 시작합니다 (부가세 별도).
+          <strong className="font-mono text-base text-foreground">150만원</strong>부터 시작합니다 (부가세 별도).
           도메인 1개가 포함된 금액이고, 사진 수량과 서브페이지 수에 따라 달라집니다.
         </p>
         <Link

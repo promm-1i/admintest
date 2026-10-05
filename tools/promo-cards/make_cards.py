@@ -197,7 +197,7 @@ def build_cards(slug: str, s: dict) -> list[tuple[str, str]]:
   <p class="mono" style="color:{brand_c}">{esc(code)} · {esc(s['brand'])}</p>
   <h2 style="margin-top:34px;font-size:72px;font-weight:800;letter-spacing:-.035em;line-height:1.2">이 디자인으로<br>우리 브랜드 홈페이지를</h2>
   <p style="margin-top:64px;font-size:30px;color:#6b645d">프리미엄 제작</p>
-  <p style="margin-top:6px;font-size:132px;font-weight:800;letter-spacing:-.04em;line-height:1;color:{brand_c}">300<span style="font-size:64px;margin-left:8px">만 원부터</span></p>
+  <p style="margin-top:6px;font-size:132px;font-weight:800;letter-spacing:-.04em;line-height:1;color:{brand_c}">150<span style="font-size:64px;margin-left:8px">만 원부터</span></p>
   <ul style="margin-top:48px;list-style:none;font-size:30px;line-height:1.9;color:#3d3833">
     <li>· 브랜드 색 · 메뉴 · 섹션 구성을 사업에 맞춰 다시</li>
     <li>· 사진 새로 제작 · 휴대폰 화면까지</li>

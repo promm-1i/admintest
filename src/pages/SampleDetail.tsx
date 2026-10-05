@@ -106,7 +106,7 @@ export default function SampleDetail() {
 
   // 템플릿 항목은 포트폴리오가 아니라 /templates 목록에서 넘어오므로 되돌아가는 링크도 그쪽으로 보낸다.
   const isTemplate = Boolean(sample.industryKey);
-  // 프리미엄 디자인은 템플릿 가격표(64만~)가 아니라 /web-solutions의 프리미엄 라인(300만~)을 따른다.
+  // 프리미엄 디자인은 템플릿 가격표(64만~)가 아니라 /web-solutions의 프리미엄 라인(150만~)을 따른다.
   const isPremium = sample.type.includes("premium-template");
   const templateStyle = sample.type.includes("landing-template") ? "landing-template" : "basic-template";
   const backHref = isPremium ? "/web-solutions" : isTemplate ? `/templates?style=${templateStyle}` : "/samples";

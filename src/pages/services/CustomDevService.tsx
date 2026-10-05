@@ -32,7 +32,7 @@ export const COMPARE = [
     desc: "이미 만들어 둔 화면이나 프리미엄 시안에서 출발합니다. 템플릿 라인은 문구와 사진만 바꿔 열고, 프리미엄 라인은 그 시안을 브랜드에 맞춰 다시 잡습니다.",
     points: [
       "완성된 화면 · 시안에서 출발",
-      "가격이 정해져 있음 (64만원~ · 300만원~)",
+      "가격이 정해져 있음 (64만원~ · 150만원~)",
       "영업일 7일 ~ 10일 이내",
     ],
     href: "/website/price",
@@ -250,7 +250,7 @@ export default function CustomDevService() {
             <p className="text-sm font-medium text-foreground break-keep">
               커스텀 개발은 기능 범위와 다루는 자료의 양에 따라 달라져{" "}
               <strong className="font-bold text-primary">상담에서 견적을 냅니다</strong>. 금액을 먼저 보고
-              시작하고 싶으시면 프리미엄 라인(300만원부터)을 보세요.
+              시작하고 싶으시면 프리미엄 라인(150만원부터)을 보세요.
             </p>
             <Button asChild variant="outline" className="shrink-0 gap-1.5">
               <Link to="/web-solutions">

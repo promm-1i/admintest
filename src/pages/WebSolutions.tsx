@@ -27,13 +27,13 @@ type Tier = {
 const TIERS: Tier[] = [
   {
     name: "브랜드 페이지",
-    setupFee: "300만원",
+    setupFee: "150만원",
     tagline: "디자인과 사진까지 새로 만드는 브랜드 사이트 — 서브페이지 확장 가능",
     recommended: true,
   },
   {
     name: "쇼핑몰",
-    setupFee: "400만원~",
+    setupFee: "200만원~",
     tagline: "상품 등록부터 결제·회원까지 직접 판매하는 구성",
   },
   {
@@ -129,12 +129,12 @@ export default function WebSolutions() {
             같은 기능 위에서, 섹션 구성과 브랜드 색·글꼴을 다시 잡고 사진을 새로 제작합니다. 조건
             검색과 직원별 권한, 예약 접수 관리가 값에 포함됩니다.
           </p>
-          <p className="mt-3 text-xs font-semibold text-primary">300만원부터</p>
+          <p className="mt-3 text-xs font-semibold text-primary">150만원부터</p>
         </div>
         </FadeIn>
       </div>
 
-      {/* 프리미엄 디자인 — 최근 제작한 디자인부터, 별도 가격 정책(300만원부터) */}
+      {/* 프리미엄 디자인 — 최근 제작한 디자인부터, 별도 가격 정책(150만원부터) */}
       <div className="mt-14 flex flex-wrap items-end justify-between gap-3">
         <FadeIn>
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
@@ -145,7 +145,7 @@ export default function WebSolutions() {
             최근 제작한 프리미엄 등급 디자인입니다. 이 디자인을 기반으로 문구 · 이미지 · 구성을
             맞춰 제작하며,
             <br />
-            <strong className="text-foreground">300만원부터</strong> 시작합니다
+            <strong className="text-foreground">150만원부터</strong> 시작합니다
             <span className="text-xs"> (부가세 별도)</span>.
           </p>
         </FadeIn>
@@ -287,7 +287,7 @@ export default function WebSolutions() {
         </FadeIn>
       </div>
 
-      {/* 300만원을 본 직후 "템플릿 114만과 뭐가 다른가"에 스스로 답하게 하는 자리 */}
+      {/* 150만원을 본 직후 "템플릿 114만과 뭐가 다른가"에 스스로 답하게 하는 자리 */}
       <div className="mt-16">
         <LineComparison />
       </div>

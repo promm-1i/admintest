@@ -135,7 +135,7 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
               </th>
               <th scope="col" className="bg-primary/[0.06] px-2 py-3 text-left align-bottom sm:px-4 sm:py-4">
                 <span className="block text-sm font-bold text-primary sm:text-base">프리미엄 라인</span>
-                <span className="mt-0.5 block text-[11px] font-bold text-primary/80 sm:text-sm">300만원 ~</span>
+                <span className="mt-0.5 block text-[11px] font-bold text-primary/80 sm:text-sm">150만원 ~</span>
               </th>
             </tr>
           </thead>
