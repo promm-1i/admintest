@@ -61,11 +61,6 @@ const DIFF_ROWS: DiffRow[] = [
     premium: "사업 데이터에 맞춰 설계 · 조건 검색 · 직원별 권한",
   },
   {
-    label: "셋팅 · 도메인 연결",
-    template: "항목별로 더해집니다",
-    premium: "포함",
-  },
-  {
     label: "예약 접수 · 관리",
     template: "별도 협의",
     premium: "포함",
