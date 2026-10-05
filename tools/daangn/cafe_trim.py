@@ -28,6 +28,8 @@ CUT = [
     ("홈페이지 만들 때 사장님들이 자주 헷갈리는 것 2가지", "혹시 홈페이지 준비 중이시거나"),
     # 글 끝에 서비스 소개 블록이 통째로 붙어 있던 글
     ("소상공인 홈페이지 제작, 처음부터 쇼핑몰까지 필요할까?", "홈페이지 제작이 필요하신가요?"),
+    # 기능 설명은 좋은 글이라 두고, 끝의 '구성해드립니다' 두 문단만 자른다
+    ("부동산 홈페이지, 매물관리까지 한 번에 구축할 수 있습니다", "단순 홈페이지가 아니라"),
 ]
 
 SELECT = """(mark)=>{
@@ -86,8 +88,11 @@ def trim(pg, url: str, title: str, mark: str) -> bool:
     return ok
 
 
-rows = json.loads(AUDIT.read_text(encoding="utf-8"))
-by = {r["title"]: r["url"] for r in rows}
+by = {r["title"]: r["url"] for r in json.loads(AUDIT.read_text(encoding="utf-8"))}
+# 게시판 목록에 안 뜨는 글은 find_hidden.py 가 따로 받아 둔다
+HIDDEN = AUDIT.parent / "audit_hidden.json"
+if HIDDEN.exists():
+    by.update({r["title"]: r["url"] for r in json.loads(HIDDEN.read_text(encoding="utf-8"))})
 
 with sync_playwright() as p:
     b = p.chromium.connect_over_cdp("http://localhost:9222")

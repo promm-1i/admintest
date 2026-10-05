@@ -249,4 +249,29 @@ JOBS = [
          new_title="템플릿형과 맞춤형 홈페이지 화면입니다",
          new_body="템플릿으로 만든 화면과 처음부터 짠 화면을 같이 올립니다.\n\n"
                   "둘이 어떻게 다른지 화면으로 볼 수 있습니다.\n\n" + TAIL),
+
+    # ── 게시판 목록에 안 뜨던 글 (관리 화면 검색으로 찾음) ───────────────
+    dict(url="https://cafe.daangn.com/hompeiji-jejags/posts/바로-제작가능한-템플릿-daWY5VnA",
+         old_title="바로 제작가능한 템플릿",
+         new_title="업종별 홈페이지 템플릿 화면입니다",
+         new_body="업종별로 만든 홈페이지 템플릿 화면입니다.\n\n"
+                  "템플릿마다 첫 화면과 메뉴 구성을 다르게 잡았습니다.\n\n" + TAIL),
+
+    dict(url="https://cafe.daangn.com/hompeiji-jejags/posts/렌트카-업체-포트폴리오-PWDZGxzd",
+         old_title="렌트카 업체 포트폴리오",
+         new_title="렌트카 업체 홈페이지 화면입니다",
+         new_body="렌터카 업체 홈페이지 화면입니다.\n\n"
+                  "차량 목록과 조건 거르기, 예약 화면이 이어지게 뒀습니다.\n\n" + TAIL),
+
+    dict(url="https://cafe.daangn.com/hompeiji-jejags/posts/욕실-인테리어-업체-포트폴리오-PnzoL1OP",
+         old_title="욕실 인테리어 업체 포트폴리오",
+         new_title="욕실 인테리어 업체 홈페이지 화면입니다",
+         new_body="욕실 인테리어 업체 홈페이지 화면입니다.\n\n"
+                  "시공 전후 사진을 공간별로 나눠 두고 시공 범위를 같이 적었습니다.\n\n" + TAIL),
+
+    dict(url="https://cafe.daangn.com/hompeiji-jejags/posts/이삿짐-센터-포트폴리오-PWDZGBxd",
+         old_title="이삿짐 센터 포트폴리오",
+         new_title="이삿짐 센터 홈페이지 화면입니다",
+         new_body="이삿짐 센터 홈페이지 화면입니다.\n\n"
+                  "이사 종류와 진행 순서를 단계로 끊어 두고 신청 양식을 아래에 뒀습니다.\n\n" + TAIL),
 ]
