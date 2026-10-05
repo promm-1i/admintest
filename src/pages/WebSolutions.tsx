@@ -287,7 +287,7 @@ export default function WebSolutions() {
         </FadeIn>
       </div>
 
-      {/* 150만원을 본 직후 "템플릿 114만과 뭐가 다른가"에 스스로 답하게 하는 자리 */}
+      {/* 150만원을 본 직후 "템플릿 84만과 뭐가 다른가"에 스스로 답하게 하는 자리 */}
       <div className="mt-16">
         <LineComparison />
       </div>

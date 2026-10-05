@@ -57,7 +57,7 @@ function InfoTip({ lines, side = "bottom" }: { lines: string[]; side?: "top" | "
 type Frame = { left: number; top: number; width: number; height: number };
 
 /**
- * 템플릿 요금제 4구조 비교표.
+ * 템플릿 요금제(기본형 · 랜딩형) 비교표.
  * 열 강조는 셀 테두리 대신 절대배치 프레임 하나가 열 사이를 미끄러져 이동하는 방식이라
  * hover 시 레이아웃이 전혀 흔들리지 않는다.
  */
@@ -99,7 +99,7 @@ export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
         <div className="relative">
           <table
             ref={tableRef}
-            className="w-full min-w-[880px] border-separate border-spacing-0 text-sm"
+            className="w-full min-w-[560px] border-separate border-spacing-0 text-sm"
             onMouseLeave={() => setActive(null)}
           >
             <caption className="sr-only">템플릿 패키지별 제공 항목과 제작 비용 비교</caption>

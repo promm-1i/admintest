@@ -19,8 +19,6 @@ function landingSampleOf(key: string) {
 const PACKAGES = [
   { name: "기본형", price: "64만원~", note: "가성비 패키지" },
   { name: "랜딩형", price: "84만원~", note: "추천" },
-  { name: "기본형 + 서브페이지", price: "94만원~", note: "" },
-  { name: "랜딩형 + 서브페이지", price: "114만원~", note: "" },
 ];
 
 /**

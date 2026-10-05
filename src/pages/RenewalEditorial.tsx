@@ -1068,12 +1068,12 @@ function AboutPage() {
   </Contents></main>;
 }
 
-// 호스팅은 따로 받지 않는다. 첫 해 호스팅료 240,000원을 네 항목에 60,000원씩 균등하게 녹여
-// 총액은 기존 /estimate 와 같게 유지한다. 기본형·원페이지 640,000 / 랜딩형·서브 1,140,000.
+// 호스팅은 따로 받지 않는다. 첫 해 호스팅료 240,000원을 항목에 60,000원씩 녹여
+// 총액은 기존 /estimate 와 같게 유지한다. 기본형 640,000 / 랜딩형 840,000.
+// 2026-10-05 서브페이지 분리를 없애며 그 항목의 60,000원은 셋팅 비용으로 옮겼다(160,000 → 220,000).
 const EST_STYLES = [{ key: "basic", name: "기본형", cost: 60_000, desc: "필요한 정보 위주, 스크롤 연출 없음" }, { key: "landing", name: "랜딩형", cost: 260_000, desc: "스크롤 연출과 움직임이 더해진 구성" }] as const;
-const EST_SCOPES = [{ key: "one", name: "원페이지", cost: 60_000, desc: "소개부터 문의까지 한 화면에서 이어집니다" }, { key: "sub", name: "서브페이지 분리", cost: 360_000, desc: "소개·서비스·사례·문의를 메뉴별로 나눕니다" }] as const;
 const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com·co.kr·kr 중 원하시는 것으로, 첫 1년 무료" }, { key: "own", name: "보유 도메인 연동", desc: "이미 쓰시는 도메인을 그대로 연결합니다" }] as const;
-const EST_FIXED = { feature: 360_000, setup: 160_000 };
+const EST_FIXED = { feature: 360_000, setup: 220_000 };
 const won = (value: number) => value.toLocaleString("ko-KR");
 
 // 커스텀 탭은 항목별 단가를 보여주지 않는다. 낱개로 쪼개면 흥정이 붙고,
@@ -1105,7 +1105,6 @@ function EstimatePage() {
   const root = useRoot();
   const [mode, setMode] = useState<"package" | "custom">("package");
   const [style, setStyle] = useState<string>("basic");
-  const [scope, setScope] = useState<string>("one");
   const [domain, setDomain] = useState<string>("free");
   const [pages, setPages] = useState<string>("one");
   const [picked, setPicked] = useState<string[]>([]);
@@ -1114,7 +1113,6 @@ function EstimatePage() {
     { label: "업종 전용 기능", cost: EST_FIXED.feature },
     { label: "셋팅 비용", cost: EST_FIXED.setup },
     { label: `화면 형태 · ${EST_STYLES.find((x) => x.key === style)?.name}`, cost: EST_STYLES.find((x) => x.key === style)?.cost ?? 0 },
-    { label: `페이지 구성 · ${EST_SCOPES.find((x) => x.key === scope)?.name}`, cost: EST_SCOPES.find((x) => x.key === scope)?.cost ?? 0 },
   ];
   const total = rows.reduce((sum, row) => sum + row.cost, 0);
 
@@ -1137,18 +1135,17 @@ function EstimatePage() {
         <button type="button" role="tab" aria-selected={mode === "package"} onClick={() => setMode("package")}>패키지로 고르기</button>
         <button type="button" role="tab" aria-selected={mode === "custom"} onClick={() => setMode("custom")}>기능 골라 담기</button>
       </div>
-      <p className="re-estimate__lead">{mode === "package" ? "형태와 구성만 고르면 총액이 바로 나옵니다." : "쪽 수와 필요한 기능을 고르면 예상 구간이 나옵니다. 커스텀은 같은 기능이라도 범위에 따라 비용이 달라져 정확한 금액은 상담에서 확정합니다."}</p>
+      <p className="re-estimate__lead">{mode === "package" ? "화면 형태만 고르면 총액이 바로 나옵니다." : "쪽 수와 필요한 기능을 고르면 예상 구간이 나옵니다. 커스텀은 같은 기능이라도 범위에 따라 비용이 달라져 정확한 금액은 상담에서 확정합니다."}</p>
     </Section>
 
     {mode === "package" ? <>
       <Section split title="01 화면 형태">{pick(EST_STYLES, style, setStyle)}</Section>
-      <Section split title="02 페이지 구성">{pick(EST_SCOPES, scope, setScope)}</Section>
-      <Section split title="03 도메인">{pick(EST_DOMAINS, domain, setDomain)}</Section>
+      <Section split title="02 도메인">{pick(EST_DOMAINS, domain, setDomain)}</Section>
       <Section split title="예상 비용">
         <div className="re-estimate__result">
           <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{won(row.cost)}원</dd></div>)}</dl>
           <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
-          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다.</p>
+          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다. 메뉴별로 페이지를 나눈 홈페이지는 프리미엄 디자인(150만원부터)에서 제작합니다.</p>
           <div className="re-estimate__actions"><Link to={`${root}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
         </div>
       </Section>

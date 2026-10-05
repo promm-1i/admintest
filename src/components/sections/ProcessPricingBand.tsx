@@ -55,7 +55,7 @@ export function ProcessPricingBand() {
 
         {/* 가격 — 비교가 목적이라 같은 크기 카드가 맞다 */}
         <div className="mt-16 border-t border-border pt-12">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             {TEMPLATE_PACKAGES.map((p, i) => (
               <FadeIn key={p.key} delay={i * 60} className="h-full">
                 <div

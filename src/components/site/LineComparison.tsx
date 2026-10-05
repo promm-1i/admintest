@@ -36,6 +36,11 @@ const DIFF_ROWS: DiffRow[] = [
     premium: "섹션 순서 · 개수를 사업에 맞춰 재배치",
   },
   {
+    label: "페이지 수",
+    template: "템플릿에 있는 페이지 그대로",
+    premium: "메뉴별로 필요한 만큼 나눠 제작",
+  },
+  {
     label: "브랜드 색 · 글꼴",
     template: "템플릿에 정해진 값",
     premium: "브랜드에 맞춰 교체",
@@ -131,7 +136,7 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
               </th>
               <th scope="col" className="px-2 py-3 text-left align-bottom sm:px-4 sm:py-4">
                 <span className="block text-sm font-bold text-foreground sm:text-base">템플릿 라인</span>
-                <span className="mt-0.5 block text-[11px] font-bold text-muted-foreground sm:text-sm">64만원 ~ 114만원</span>
+                <span className="mt-0.5 block text-[11px] font-bold text-muted-foreground sm:text-sm">64만원 ~ 84만원</span>
               </th>
               <th scope="col" className="bg-primary/[0.06] px-2 py-3 text-left align-bottom sm:px-4 sm:py-4">
                 <span className="block text-sm font-bold text-primary sm:text-base">프리미엄 라인</span>

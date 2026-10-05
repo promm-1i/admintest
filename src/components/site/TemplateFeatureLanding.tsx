@@ -254,8 +254,8 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
               ))}
             </ul>
             <p className="mt-5 border-t border-border pt-4 text-xs leading-relaxed text-muted-foreground break-keep">
-              기본 10개 페이지 안에서 메뉴 구성을 자유롭게 바꿀 수 있고, 페이지가 더 필요하면 상담 시
-              추가할 수 있습니다.
+              업종 기능에 딸린 페이지는 그대로 들어갑니다. 소개 · 서비스 · 사례를 메뉴별 페이지로 더
+              나누려면 프리미엄 라인(150만원부터)에서 제작합니다.
             </p>
           </Reveal>
         </div>

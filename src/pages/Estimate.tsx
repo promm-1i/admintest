@@ -16,17 +16,6 @@ const STYLES = [
   { key: "landing", name: "랜딩형", design: 200_000, desc: "스크롤 연출과 인터랙션이 더해진 구성", hot: true },
 ] as const;
 
-/** 페이지 수 축 — templatePackages.ts 의 subpageCost 와 같은 값이어야 한다 */
-const SCOPES = [
-  { key: "one", name: "원페이지", cost: 0, desc: "소개부터 문의까지 한 화면에서 이어집니다" },
-  {
-    key: "sub",
-    name: "서브페이지 분리",
-    cost: 300_000,
-    desc: "소개 · 서비스 · 사례 · 문의를 메뉴별 페이지로 나눕니다",
-  },
-] as const;
-
 const DOMAINS = [
   { key: "free", name: "무료 도메인 제공", desc: "com · co.kr · kr 등 여러 도메인 중 원하시는 것으로 — 첫 1년 무료" },
   { key: "own", name: "보유 도메인 연동", desc: "이미 쓰고 계신 도메인이 있다면 그대로 연결해 드립니다" },
@@ -60,24 +49,21 @@ export default function Estimate() {
 
   const [industry, setIndustry] = useState(industries[0]?.key ?? "");
   const [style, setStyle] = useState<(typeof STYLES)[number]["key"]>("landing");
-  const [scope, setScope] = useState<(typeof SCOPES)[number]["key"]>("one");
   const [domain, setDomain] = useState<(typeof DOMAINS)[number]["key"]>("free");
 
   const styleInfo = STYLES.find((s) => s.key === style)!;
-  const scopeInfo = SCOPES.find((s) => s.key === scope)!;
   const industryLabel = industries.find((i) => i.key === industry)?.label ?? "";
 
   const domainInfo = DOMAINS.find((d) => d.key === domain)!;
   const rows = [
     { name: `랜딩형 연출 (${styleInfo.name})`, cost: styleInfo.design, note: styleInfo.design === 0 ? "연출 없음" : "" },
-    { name: `페이지 구성 (${scopeInfo.name})`, cost: scopeInfo.cost, note: scopeInfo.cost === 0 ? "한 화면" : "메뉴별 분리" },
     { name: domain === "free" ? "도메인 (신규)" : "보유 도메인 연동", cost: 0, note: domain === "free" ? "첫 1년 무료" : "연동 무료" },
     { name: "업종 전용 기능", cost: FIXED.feature, note: `${industryLabel} 맞춤` },
     { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 서버 설정 · 초기 등록" },
   ];
   const total = rows.reduce((a, r) => a + r.cost, 0);
 
-  const summary = `${industryLabel} · ${styleInfo.name} · ${scopeInfo.name} · ${domainInfo.name}`;
+  const summary = `${industryLabel} · ${styleInfo.name} · ${domainInfo.name}`;
   const smsBody = `[견적상담] ${summary} / 예상 ${won(total)}원(VAT별도) — 이 구성으로 상담받고 싶습니다.`;
 
   return (
@@ -146,32 +132,7 @@ export default function Estimate() {
           </div>
 
           <div>
-            <p className="text-sm font-bold text-foreground">03 · 페이지 구성</p>
-            <div className="mt-3 grid gap-3 sm:grid-cols-2">
-              {SCOPES.map((sc) => (
-                <button
-                  key={sc.key}
-                  type="button"
-                  onClick={() => setScope(sc.key)}
-                  className={cn(
-                    "rounded-xl border p-4 text-left transition-colors",
-                    scope === sc.key
-                      ? "border-primary bg-primary/5 ring-1 ring-primary/30"
-                      : "border-border hover:border-primary/40",
-                  )}
-                >
-                  <p className="text-sm font-bold text-foreground">{sc.name}</p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">{sc.desc}</p>
-                  <p className="mt-2 text-xs font-bold text-primary">
-                    {sc.cost === 0 ? "추가 없음" : `+${won(sc.cost)}원`}
-                  </p>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div>
-            <p className="text-sm font-bold text-foreground">04 · 도메인</p>
+            <p className="text-sm font-bold text-foreground">03 · 도메인</p>
             <div className="mt-3 grid gap-3 sm:grid-cols-2">
               {DOMAINS.map((d) => (
                 <button
@@ -203,6 +164,13 @@ export default function Estimate() {
               <span className="ml-1 text-base font-bold text-background/70">원~</span>
             </p>
             <p className="mt-1 text-xs text-background/55">VAT 별도 · 제작 기간 영업일 7일~</p>
+            <p className="mt-2 text-xs leading-relaxed text-background/55 break-keep">
+              메뉴별로 페이지를 나눈 홈페이지는{" "}
+              <Link to="/web-solutions" className="font-semibold text-background/80 underline underline-offset-2">
+                프리미엄 라인(150만원부터)
+              </Link>
+              에서 제작합니다.
+            </p>
 
             <ul className="mt-5 space-y-2 border-t border-background/15 pt-5">
               {rows.map((r) => (
@@ -231,7 +199,7 @@ export default function Estimate() {
               </Button>
             </div>
             <p className="mt-4 text-[11px] leading-relaxed text-background/50 break-keep">
-              페이지 추가 · 촬영 · 로고 등은 상담에서 범위를 정한 뒤 서면으로 확정합니다. 계약서에
+              촬영 · 로고 등은 상담에서 범위를 정한 뒤 서면으로 확정합니다. 계약서에
               없는 비용은 청구하지 않습니다.
             </p>
           </div>
