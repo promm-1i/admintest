@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>오시는 길 | 이로한의원</title>
+<meta name="description" content="왕십리역 3번 출구 도보 4분. 지하 주차장 2시간 무료.">
+<meta property="og:title" content="오시는 길 | 이로한의원">
+<meta property="og:description" content="왕십리역 3번 출구 도보 4분. 지하 주차장 2시간 무료.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="./og.jpg">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="./assets/site.css">
+<style>
+
+.pg{padding-bottom:40rem}
+.pg-lead{max-width:760rem;margin:0 auto 80rem;text-align:center;
+  font-size:var(--f08);line-height:var(--lh08);color:var(--g700)}
+.blk+.blk{margin-top:120rem}
+.blk-h{margin-bottom:40rem}
+.blk-h h2{font-size:var(--f04);font-weight:700;line-height:var(--lh04);letter-spacing:var(--ls1)}
+.blk-h p{margin-top:12rem;font-size:var(--f09);line-height:var(--lh09);color:var(--g700)}
+
+/* 소개 — 사진 + 글 두 단 */
+.duo{display:flex;gap:80rem;align-items:flex-start}
+.duo>figure{flex:0 0 46%;margin:0}
+.duo img{width:100%;height:auto;border-radius:8rem}
+.duo figcaption{margin-top:12rem;font-size:var(--f11);color:var(--g600)}
+.duo-body p+p{margin-top:20rem}
+.duo-body p{font-size:var(--f09);line-height:var(--lh09);color:var(--g800)}
+.duo--flip{flex-direction:row-reverse}
+
+/* 정의 목록 (진료 시간 · 약도 정보) */
+.dl{border-top:1px solid var(--g400)}
+.dl>div{display:flex;gap:24rem;padding:20rem 0;border-bottom:1px solid var(--g300)}
+.dl dt{flex:0 0 160rem;font-size:var(--f10);font-weight:700;color:var(--g800)}
+.dl dd{flex:1;margin:0;font-size:var(--f10);line-height:var(--lh10);color:var(--g700)}
+
+/* 진료 과목 목록 */
+.tr-list>li{display:flex;gap:48rem;padding:48rem 0;border-bottom:1px solid var(--g300)}
+.tr-list>li:first-child{border-top:1px solid var(--g400)}
+.tr-list figure{flex:0 0 320rem;margin:0}
+.tr-list img{width:100%;height:auto;border-radius:8rem}
+.tr-body{flex:1}
+.tr-body h3{font-size:var(--f05);font-weight:700;line-height:var(--lh05);letter-spacing:var(--ls1)}
+.tr-body .tr-sum{margin-top:10rem;font-size:var(--f09);color:var(--pri);font-weight:600}
+.tr-body p{margin-top:16rem;font-size:var(--f10);line-height:var(--lh10);color:var(--g700)}
+
+/* 후기 목록 */
+.rv-list{display:flex;flex-wrap:wrap;gap:24rem}
+.rv-list li{width:calc((100% - 48rem) / 3);padding:32rem;border:1px solid var(--g300);border-radius:8rem;
+  transition:border-color .3s}
+.rv-list li:hover{border-color:var(--pri)}
+.rv-list .rc-cat{display:inline-block;padding:4rem 12rem;border-radius:99rem;
+  background:var(--g100);font-size:var(--f12);font-weight:600;color:var(--pri)}
+.rv-list .rc-t{margin-top:16rem;font-size:var(--f08);font-weight:700;line-height:var(--lh08)}
+.rv-list .rc-b{margin-top:12rem;font-size:var(--f10);line-height:var(--lh10);color:var(--g700)}
+.rv-list .rc-m{margin-top:20rem;font-size:var(--f11);color:var(--g600)}
+
+/* 오시는 길 — 지도 자리 */
+.map{position:relative;aspect-ratio:16/7;border-radius:8rem;overflow:hidden;background:var(--g200)}
+.map img{width:100%;height:100%;object-fit:cover}
+
+/* 예약 폼 */
+.form{max-width:760rem;margin:0 auto}
+.form .row+.row{margin-top:24rem}
+.form label{display:block;margin-bottom:8rem;font-size:var(--f10);font-weight:600}
+.form .req{color:var(--pri)}
+.form input,.form select,.form textarea{width:100%;padding:14rem 16rem;border:1px solid var(--g400);
+  border-radius:8rem;font:inherit;font-size:var(--f10);color:var(--black);background:var(--white)}
+.form textarea{min-height:160rem;resize:vertical}
+.form input:focus,.form select:focus,.form textarea:focus{outline:2rem solid var(--pri);outline-offset:1rem}
+.form .two{display:flex;gap:24rem}
+.form .two>*{flex:1}
+.form .agree{display:flex;gap:10rem;align-items:flex-start;margin-top:24rem;
+  font-size:var(--f11);line-height:var(--lh11);color:var(--g700)}
+.form .agree input{width:18rem;height:18rem;flex:none;margin-top:2rem;padding:0}
+.form .submit{margin-top:40rem;text-align:center}
+
+@media (max-width:1200px){
+  .rv-list li{width:calc((100% - 24rem) / 2)}
+}
+@media (max-width:860px){
+  .blk+.blk{margin-top:80rem}
+  .duo,.duo--flip{display:block}
+  .duo>figure{margin-bottom:32rem}
+  .tr-list>li{display:block;padding:32rem 0}
+  .tr-list figure{margin-bottom:24rem}
+  .dl>div{display:block}
+  .dl dd{margin-top:8rem}
+  .rv-list li{width:100%}
+  .form .two{display:block}
+  .form .two>*+*{margin-top:24rem}
+}
+
+/* ── 이식 1 · 진료 진행 단계 (출처: ondam .steps) ──────────────────
+   같은 1rem=1px 체계라 치수는 1:1. --f13→--f10, --f14→--f11,
+   --lh13 26rem(=1.625)→--lh11, --blush(브랜드 틴트)→--tint 만 바꿨다. */
+.steps ul{display:flex;gap:40rem}
+.steps ul+ul{margin-top:41rem}
+.steps li{flex:1 1 0;height:183rem;border-radius:100rem;border:1px solid var(--g300);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:0 16rem;transition:border-color .3s,background .3s}
+.steps li:hover{border-color:var(--pri);background:var(--tint)}
+/* 출처는 .steps em/b/span 이었지만 이 베이스의 섹션 제목에도 span(.mk 강조)이 있다.
+   그대로 두면 h2 안의 .mk 가 14rem 으로 쪼그라든다 — li 안으로 가둔다. */
+.steps li em{font-family:var(--fd);font-style:normal;font-size:var(--f11);font-weight:700;color:var(--pri)}
+.steps li b{margin-top:10rem;font-size:var(--f10);line-height:var(--lh11);font-weight:600}
+.steps li span{margin-top:6rem;font-size:var(--f11);color:var(--g600)}
+
+/* ── 이식 2 · 치료 사례 그리드 (출처: haesol .pg-works .lst) ───────
+   16px 루트 + px 표기였다. px 숫자를 그대로 rem 으로 옮겼다(=같은 크기).
+   #767676 은 --g600 과 값이 정확히 같고, #000→--black, Poppins→--fd. */
+.cs-list{display:flex;flex-wrap:wrap;column-gap:20rem;row-gap:100rem}
+.cs-list li{width:calc((100% - 40rem) / 3)}
+.cs-list a{display:block}
+.cs-th{display:block;position:relative;width:100%;overflow:hidden;border-radius:4rem}
+.cs-th img{width:100%;height:auto;transition:transform 1s}
+.cs-list li:hover .cs-th img{transform:scale(1.1)}
+.cs-more{display:block;position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;transition:opacity .3s}
+.cs-list li:hover .cs-more{opacity:1}
+.cs-more span{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  white-space:nowrap;font-family:var(--fd);font-size:var(--f09);font-weight:500;
+  color:var(--white);border-bottom:1px solid var(--white)}
+.cs-txs{display:block;margin-top:20rem}
+.cs-cat{display:block;font-family:var(--fd);font-size:var(--f10);color:var(--g600)}
+.cs-nm{display:block;margin-top:4rem;font-size:var(--f08);font-weight:600;line-height:var(--lh08);color:var(--black)}
+
+/* ── 이식 3 · 자주 묻는 질문 (출처: bodien .faq) ───────────────────
+   16px 루트 + px 표기 → 그대로 rem. 21→--f08, 19→--f09, 17→--f10, 14→--f11.
+   #ccc→--g400, #ddd→--g300, #777→--g600, #f9f9f9 는 중립을 살려 --g100. */
+.fq{border-top:1px solid var(--g400);word-break:keep-all}
+.fq-q{border-bottom:1px solid var(--g300);transition:background .24s}
+.fq-q button{display:flex;align-items:flex-start;justify-content:space-between;
+  width:100%;padding:25rem 0;text-align:left}
+.fq-mark{flex:none;width:112rem;text-align:center}
+.fq-mark span{display:inline-flex;align-items:center;justify-content:center;
+  width:42rem;height:42rem;border:1px solid var(--g400);border-radius:50%;
+  font-family:var(--fd);font-size:var(--f08);font-weight:600;color:var(--pri)}
+.fq-tit{flex:1;padding:8rem 0 0;font-size:var(--f09);font-weight:600;color:var(--black)}
+.fq-arr{flex:none;width:80rem;text-align:center}
+.fq-arr::after{display:inline-block;content:"";width:8rem;height:8rem;margin-top:16rem;
+  border-right:2rem solid var(--g600);border-bottom:2rem solid var(--g600);
+  transform:rotate(45deg);transition:transform .24s}
+.fq-q.on{background:var(--g100)}
+.fq-q.on .fq-arr::after{transform:rotate(225deg)}
+.fq-a{display:none;padding:25rem 0;background:var(--g100);border-bottom:1px solid var(--g300)}
+.fq-a.on{display:block}
+.fq-a>div{display:flex}
+.fq-a .fq-mark span{color:var(--white);background:var(--sec);border-color:var(--sec)}
+.fq-txt{flex:1;padding:6rem 112rem 0 0;font-size:var(--f10);line-height:1.8;color:var(--g800)}
+
+@media (max-width:1200px){
+  .cs-list li{width:calc((100% - 20rem) / 2)}
+}
+@media (max-width:860px){
+  .steps ul{flex-wrap:wrap;gap:16rem}
+  .steps ul+ul{margin-top:16rem}
+  .steps li{flex:0 0 calc(50% - 8rem);height:120rem;border-radius:16rem}
+  .cs-list{row-gap:60rem}
+  .cs-list li{width:100%}
+  .fq-mark,.fq-a .fq-mark{width:80rem}
+  .fq-tit{font-size:var(--f10)}
+  .fq-txt{padding:6rem 40rem 0 0;font-size:var(--f11)}
+}
+
+</style>
+</head>
+<body>
+<header id="header">
+  <div class="shell">
+    <p id="logo"><a href="./index.html" aria-label="이로한의원 홈"><svg viewBox="0 0 130 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="이로한의원"><path d="M4 21 C4 9 12 5 18 11 C24 17 30 13 30 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><text x="36" y="22" font-family="Cormorant Garamond,Pretendard,serif" font-size="19" font-weight="600" letter-spacing="1.5" fill="currentColor">IRO</text><text x="74" y="22" font-family="Pretendard,sans-serif" font-size="13" font-weight="600" fill="currentColor">한의원</text></svg></a></p>
+    <nav class="nav" aria-label="주 메뉴"><ul class="nav-list"><li class="nav-item"><a href="./about.html"><span>한의원 소개</span></a></li><li class="nav-item"><a href="./treatment.html"><span>진료 안내</span></a><ul class="nav-sub"><li><a href="./treatment.html"><span>진료 과목 전체</span><em>침·약침부터 한약까지 여섯 가지</em></a></li><li><a href="./t-chimgu.html"><span>침·약침 치료</span><em>통증의 원인 자리를 직접 풉니다</em></a></li></ul></li><li class="nav-item"><a href="./cases.html"><span>치료 사례</span></a></li><li class="nav-item"><a href="./reviews.html"><span>환자 후기</span></a></li><li class="nav-item is-on"><a href="./location.html"><span>오시는 길</span></a></li><li class="nav-item"><a href="./contact.html"><span>예약·상담</span></a></li></ul></nav>
+    <div class="hd-utils"><a class="hd-login" href="./location.html">오시는 길</a><a class="hd-start" href="./contact.html">진료 예약</a></div>
+    <button id="hd-toggle" type="button" aria-label="메뉴 열기"><i></i><i></i><i></i></button>
+  </div>
+</header>
+<main>
+<div class="shell"><div class="art-head" data-rv><p class="art-cat">LOCATION</p><h1 class="art-title">오시는 길</h1></div><p class="pg-lead">2호선 · 5호선 왕십리역 3번 출구에서 걸어서 4분입니다.</p></div><section class="sec-main sec-main--secondary" aria-label="오시는 길 안내"><div class="shell"><div class="blk" data-rv><div class="map"><img src="./assets/map.jpg" alt="이로한의원 약도" width="1600" height="700" loading="lazy"></div></div><div class="blk" data-rv><div class="blk-h"><h2>찾아오시는 방법</h2></div><dl class="dl"><div><dt>주소</dt><dd>서울특별시 성동구 왕십리로 123 민트클빌딩 4층</dd></div><div><dt>지하철</dt><dd>2 · 5호선 왕십리역 3번 출구 도보 4분</dd></div><div><dt>버스</dt><dd>왕십리역 정류장 하차 · 간선 121, 420 · 지선 2012, 2014</dd></div><div><dt>주차</dt><dd>건물 지하 주차장 2시간 무료 (접수 시 차량 번호를 말씀해 주세요)</dd></div><div><dt>전화</dt><dd>010-4894-4905</dd></div></dl></div><div class="blk" data-rv><div class="blk-h"><h2>진료 시간</h2></div><dl class="dl"><div><dt>평일</dt><dd>09:30 ~ 19:00</dd></div><div><dt>토요일</dt><dd>09:30 ~ 14:00</dd></div><div><dt>목요일 야간</dt><dd>21:00까지 (예약자에 한함)</dd></div><div><dt>휴진</dt><dd>일요일 · 공휴일</dd></div></dl></div></div></section>
+</main>
+<footer id="footer">
+  <div class="shell">
+    <div class="ft-top">
+      <p class="ft-logo"><svg viewBox="0 0 130 30" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="이로한의원"><path d="M4 21 C4 9 12 5 18 11 C24 17 30 13 30 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><text x="36" y="22" font-family="Cormorant Garamond,Pretendard,serif" font-size="19" font-weight="600" letter-spacing="1.5" fill="currentColor">IRO</text><text x="74" y="22" font-family="Pretendard,sans-serif" font-size="13" font-weight="600" fill="currentColor">한의원</text></svg></p>
+      <nav class="ft-nav" aria-label="푸터 메뉴"><div class="ft-col"><h3>한의원 소개</h3><ul><li><a href="./about.html">한의원 소개</a></li></ul></div><div class="ft-col"><h3>진료 안내</h3><ul><li><a href="./treatment.html">진료 과목 전체</a></li><li><a href="./t-chimgu.html">침·약침 치료</a></li></ul></div><div class="ft-col"><h3>치료 사례</h3><ul><li><a href="./cases.html">치료 사례</a></li></ul></div><div class="ft-col"><h3>환자 후기</h3><ul><li><a href="./reviews.html">환자 후기</a></li></ul></div><div class="ft-col"><h3>오시는 길</h3><ul><li><a href="./location.html">오시는 길</a></li></ul></div><div class="ft-col"><h3>예약·상담</h3><ul><li><a href="./contact.html">예약·상담</a></li></ul></div></nav>
+    </div>
+    <div class="ft-mid">
+      <div class="ft-contact">
+        <p class="ft-tel">진료 예약 <b>010-4894-4905</b></p>
+        <p>평일 09:30~19:00 · 토요일 09:30~14:00 (일·공휴일 휴진)</p>
+        <p>진료 문의 6gsmake@gmail.com</p>
+      </div>
+      <div class="ft-sns"><a href="./contact.html" aria-label="인스타그램"><span aria-hidden="true">IG</span></a><a href="./contact.html" aria-label="네이버 블로그"><span aria-hidden="true">BLOG</span></a><a href="./contact.html" aria-label="카카오톡 상담"><span aria-hidden="true">KAKAO</span></a><a href="./contact.html" aria-label="네이버 예약"><span aria-hidden="true">예약</span></a></div>
+    </div>
+    <p class="ft-biz">이로한의원 · 대표자 김진수 · 사업자등록번호 266-07-03678<br>서울특별시 성동구 왕십리로 123 민트클빌딩 4층</p>
+    <div class="ft-bot">
+      <p class="ft-copy">© 2026 IRO. ALL RIGHTS RESERVED.</p>
+      <nav class="ft-policy"><a href="./contact.html">진료 안내</a><a href="./contact.html"><b>개인정보 처리방침</b></a><a href="./location.html">오시는 길</a></nav>
+    </div>
+  </div>
+</footer>
+<script src="./assets/site.js"></script>
+<script>
+
+(function(){
+  var RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var E3 = 'cubic-bezier(.165,.84,.44,1)';   /* gsap power3.out */
+  var E4 = 'cubic-bezier(.165,.84,.44,1)';   /* power4.out — 끝이 더 눕는다 */
+
+  (function(){
+    var slides = [].slice.call(document.querySelectorAll('.in-slide'));
+    var dots = document.querySelector('.in-dots');
+    var state = document.querySelector('.in-state');
+    if (slides.length < 2 || !dots) return;
+    var SPEED = 5000, cur = 0, timer = null, playing = true;
+
+    slides.forEach(function(_, i){
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'in-dot';
+      b.setAttribute('aria-label', (i + 1) + '번째 화면');
+      b.innerHTML = '<span class="in-bar"><i></i></span>';
+      b.addEventListener('click', function(){ go(i); });
+      dots.appendChild(b);
+    });
+    var bars = [].slice.call(dots.querySelectorAll('.in-bar > i'));
+
+    function go(i){
+      cur = i;
+      slides.forEach(function(s, k){ s.classList.toggle('on', k === i); });
+      [].forEach.call(dots.children, function(b, k){ b.classList.toggle('on', k === i); });
+      bars.forEach(function(x){ x.style.transition = 'none'; x.style.width = '0%'; });
+      if (RM) return;
+      void bars[i].offsetWidth;
+      if (playing) run();
+    }
+    function run(){
+      clearTimeout(timer);
+      bars[cur].style.transition = 'width ' + (SPEED / 1000) + 's linear';
+      bars[cur].style.width = '100%';
+      timer = setTimeout(function(){ go((cur + 1) % slides.length); }, SPEED);
+    }
+    if (state) state.addEventListener('click', function(){
+      playing = !playing;
+      state.classList.toggle('is-pause', !playing);
+      state.setAttribute('aria-label', playing ? '자동 넘김 멈춤' : '자동 넘김 재생');
+      if (playing) run();
+      else {
+        clearTimeout(timer);
+        var w = getComputedStyle(bars[cur]).width;
+        bars[cur].style.transition = 'none';
+        bars[cur].style.width = w;
+      }
+    });
+    go(0);
+  })();
+
+  (function(){
+    var sl = document.querySelector('.bk-slider');
+    if (!sl) return;
+    var n = sl.children.length, idx = 0;
+    var num = document.querySelector('.bk-num b');
+    function draw(){
+      var first = sl.children[0];
+      var cs = getComputedStyle(first);
+      var w = first.getBoundingClientRect().width + parseFloat(cs.marginLeft) * 2;
+      sl.style.transform = 'translateX(calc(50% - ' + (w * idx + w / 2) + 'px))';
+      if (num) num.textContent = idx + 1;
+      [].forEach.call(sl.children, function(li, k){ li.classList.toggle('is-on', k === idx); });
+    }
+    function move(d){ idx = (idx + d + n) % n; draw(); }
+    var p = document.querySelector('.bk-prev'), x = document.querySelector('.bk-next');
+    if (p) p.addEventListener('click', function(){ move(-1); });
+    if (x) x.addEventListener('click', function(){ move(1); });
+    var sx = null;
+    sl.addEventListener('pointerdown', function(e){ sx = e.clientX; });
+    addEventListener('pointerup', function(e){
+      if (sx === null) return;
+      var d = e.clientX - sx; sx = null;
+      if (Math.abs(d) > 60) move(d < 0 ? 1 : -1);
+    });
+    addEventListener('resize', draw);
+    draw();
+  })();
+
+  (function(){
+    var links = [].slice.call(document.querySelectorAll('.sl-link'));
+    if (!links.length) return;
+    var touch = 'ontouchstart' in window;
+    links.forEach(function(a){
+      a.addEventListener('click', function(e){
+        if (!touch) return;
+        var li = a.closest('.sl-item');
+        if (li.classList.contains('is-flip')) return;   /* 두 번째 탭이면 이동 */
+        e.preventDefault();
+        links.forEach(function(x){ x.closest('.sl-item').classList.remove('is-flip'); });
+        li.classList.add('is-flip');
+      });
+    });
+    if (touch && !RM) {
+      var first = links[0].closest('.sl-item');
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(en){
+          if (!en.isIntersecting) return;
+          io.disconnect();
+          first.classList.add('is-flip');
+          setTimeout(function(){ first.classList.remove('is-flip'); }, 1400);
+        });
+      }, { threshold: 0.6 });
+      io.observe(first);
+    }
+  })();
+
+  (function(){
+    var dt = document.querySelector('.dt');
+    if (!dt) return;
+    var rolls = [].slice.call(dt.querySelectorAll('.dg-roll'));
+    rolls.forEach(function(r){ r.innerHTML = r.innerHTML + r.innerHTML; });
+    if (RM) { dt.classList.add('on'); return; }
+    var fired = false;
+    function check(){
+      if (fired) return;
+      var r = dt.getBoundingClientRect();
+      if (r.top + r.height * 0.5 > innerHeight) return;
+      fired = true;
+      removeEventListener('scroll', check);
+      rolls.forEach(function(r2, i){
+        r2.style.transition = 'transform 3s ' + E4 + ' ' + (i * 0.1) + 's';
+        r2.style.transform = 'translateY(-50%)';
+        [].forEach.call(r2.children, function(sp){
+          sp.style.transition = 'transform 3s ' + E3 + ' ' + (i * 0.1) + 's';
+          sp.style.transform = 'rotate(0deg)';
+        });
+      });
+      dt.classList.add('on');
+    }
+    addEventListener('scroll', check, { passive: true });
+    check();
+  })();
+
+  /* ── 5 후기 띠 ─────────────────────────────────────────── */
+  (function(){
+    var rs = document.querySelector('.rv-slider');
+    if (!rs) return;
+    var wrap = rs.parentElement, drag = false, sx = 0, st = 0, off = 0;
+    var center = function(){
+      var one = rs.children[0];
+      if (!one) return;
+      var cs = getComputedStyle(one);
+      var w = one.getBoundingClientRect().width + parseFloat(cs.marginLeft) * 2;
+      off = Math.min(0, (wrap.clientWidth - w) / 2 - w);
+      rs.style.transform = 'translateX(' + off + 'px)';
+    };
+    center(); addEventListener('resize', center);
+    wrap.style.cursor = 'grab';
+    wrap.addEventListener('pointerdown', function(e){
+      drag = true; sx = e.clientX; st = off;
+      wrap.setPointerCapture(e.pointerId); wrap.style.cursor = 'grabbing';
+    });
+    wrap.addEventListener('pointermove', function(e){
+      if (!drag) return;
+      var max = rs.scrollWidth - wrap.clientWidth;
+      off = Math.min(0, Math.max(-max, st + e.clientX - sx));
+      rs.style.transform = 'translateX(' + off + 'px)';
+    });
+    ['pointerup', 'pointercancel'].forEach(function(t){
+      wrap.addEventListener(t, function(){ drag = false; wrap.style.cursor = 'grab'; });
+    });
+  })();
+
+  (function(){
+    var ep = document.querySelector('.ep');
+    if (!ep) return;
+    var bg = ep.querySelector('.ep-bg'), ct = ep.querySelector('.ep-content');
+    if (!bg || RM) { if (bg) bg.style.clipPath = 'none'; return; }
+    function draw(){
+      var r = ep.getBoundingClientRect(), vh = innerHeight;
+      var s0 = r.top - vh;
+      var s1 = r.bottom + r.height * 0.5 - vh;
+      var p = (0 - s0) / (s1 - s0);
+      p = Math.max(0, Math.min(1, p));
+      var e = 1 - Math.pow(1 - p, 3);                       /* power3.out */
+      bg.style.clipPath = 'inset(' + (16.68 * (1 - e)).toFixed(2) + '% '
+        + (39.58 * (1 - e)).toFixed(2) + '% round ' + (32 * (1 - e)).toFixed(1) + 'rem)';
+      if (ct) ct.style.opacity = Math.max(0, Math.min(1, (e - 0.3) / 0.7));
+    }
+    draw();
+    addEventListener('scroll', draw, { passive: true });
+    addEventListener('resize', draw);
+  })();
+})();
+
+(function(){
+  /* 이식 3 · FAQ 아코디언 — 출처 bodien 은 jQuery slideToggle 이었다.
+     이 템플릿은 라이브러리가 없어 aria-expanded 로 직접 여닫는다. */
+  document.querySelectorAll('.fq-q button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var q = btn.parentElement;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      q.classList.toggle('on', !open);
+      var a = q.nextElementSibling;
+      if (a && a.classList.contains('fq-a')) a.classList.toggle('on', !open);
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
