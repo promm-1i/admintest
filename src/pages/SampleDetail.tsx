@@ -81,7 +81,7 @@ export default function SampleDetail() {
               image: sample.image,
               path: `/samples/${sample.slug}`,
               designCode: sample.designCode,
-              priceFrom: sample.premium ? 3_000_000 : 640_000,
+              priceFrom: sample.premium ? 1_500_000 : 640_000,
             }),
             breadcrumbSchema([
               { name: "홈", path: "/" },

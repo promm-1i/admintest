@@ -18,7 +18,7 @@ function landingSampleOf(key: string) {
 /** 가격 오름차순. 반응형은 전 등급 기본 제공이라 구분 축이 아니다 — templatePackages.ts 참고 */
 const PACKAGES = [
   { name: "기본형", price: "64만원~", note: "가성비 패키지" },
-  { name: "랜딩형", price: "84만원~", note: "추천" },
+  { name: "랜딩형", price: "114만원~", note: "추천" },
 ];
 
 /**
