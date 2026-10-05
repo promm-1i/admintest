@@ -124,6 +124,13 @@ SCOPE_DECIDED = {
     'ktng': '2026-09-15 같은 결정(대기업 KT&G) → 중소기업 규모 대표 틀',
     'ejelaw': '2026-10-04 사용자 결정(권장안 승인) — 뉴스 12쪽·약 100개 중 목록 1쪽·기사 9개로 축약, 나머지는 원본대로',
     'hwacheon': '2026-10-04 사용자 승인, 화천기계 46쪽 → 23쪽 대표 틀 그대로',
+    'ipark': '2026-10-05 사용자 결정(권장안) — 대기업 아이파크 37쪽 → 하온디앤씨 7쪽 대표 틀 그대로',
+    'daesangwellife': '2026-10-05 사용자 결정(권장안) — 대기업 대상웰라이프 33쪽 → 누리웰 22쪽 대표 틀 그대로(빌더는 ref-sites/daesang)',
+    'daesang': '2026-10-05 사용자 결정(권장안) — 대기업 대상웰라이프 33쪽 → 누리웰 22쪽 대표 틀 그대로',
+}
+# 원본 캡처 없이 흐름만 빌린 템플릿 — 원본 크롤이 없어 [2] section 대조가 성립하지 않는다(사용자가 예외로 정한 것만)
+NO_REF_STRUCT = {
+    'withmane': '2026-10-05 사용자 결정(권장안) — 온채(estate-g)는 회원제 흐름만 빌린 템플릿, 원본 캡처 없음',
 }
 
 
@@ -177,6 +184,8 @@ def check_pages(slug, ref):
     nosec = lambda fs: bool(fs) and not any('<section' in io.open(f, encoding='utf-8', errors='replace').read() for f in fs)
     if really and nosec(refsub) and ('index.html' not in really or nosec(refmain)):   # 원본 서브가 전부 section 0 이면 짝 유무와 상관없이 원본 구조
         ok('section 이 없는 %d쪽 — 원본 서브 %d쪽도 전부 section 을 안 씀(원본 구조 그대로)' % (len(really), len(refsub)))
+    elif really and not refhtml and ref in NO_REF_STRUCT:
+        ok('section 이 없는 %d쪽(%s) — 원본 대조 해당 없음: %s' % (len(really), ', '.join(really), NO_REF_STRUCT[ref]))
     elif really:
         bad('섹션이 하나도 없는 쪽: %s' % ', '.join(really))
     elif empty:
