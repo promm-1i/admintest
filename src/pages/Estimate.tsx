@@ -55,11 +55,13 @@ export default function Estimate() {
   const industryLabel = industries.find((i) => i.key === industry)?.label ?? "";
 
   const domainInfo = DOMAINS.find((d) => d.key === domain)!;
+  // 항목별 단가는 화면에 내지 않는다 (templatePackages.ts 머리말 2026-10-05 참고).
+  // cost 는 총액 계산에만 쓰고, 손님에게는 들어가는지 아닌지(show)만 보여준다.
   const rows = [
-    { name: `랜딩형 연출 (${styleInfo.name})`, cost: styleInfo.design, note: styleInfo.design === 0 ? "연출 없음" : "" },
-    { name: domain === "free" ? "도메인 (신규)" : "보유 도메인 연동", cost: 0, note: domain === "free" ? "첫 1년 무료" : "연동 무료" },
-    { name: "업종 전용 기능", cost: FIXED.feature, note: `${industryLabel} 맞춤` },
-    { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 서버 설정 · 초기 등록" },
+    { name: `랜딩형 연출 (${styleInfo.name})`, cost: styleInfo.design, note: styleInfo.design === 0 ? "연출 없음" : "", show: styleInfo.design === 0 ? "없음" : "포함" },
+    { name: domain === "free" ? "도메인 (신규)" : "보유 도메인 연동", cost: 0, note: domain === "free" ? "첫 1년 무료" : "연동 무료", show: "포함" },
+    { name: "업종 전용 기능", cost: FIXED.feature, note: `${industryLabel} 맞춤`, show: "포함" },
+    { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 서버 설정 · 초기 등록", show: "포함" },
   ];
   const total = rows.reduce((a, r) => a + r.cost, 0);
 
@@ -124,7 +126,7 @@ export default function Estimate() {
                   <p className="text-sm font-bold text-foreground">{s.name}</p>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">{s.desc}</p>
                   <p className="mt-2 text-xs font-bold text-primary">
-                    {s.design === 0 ? "디자인 무료" : `디자인 +${won(s.design)}원`}
+                    {`${won(FIXED.feature + FIXED.setup + s.design)}원~`}
                   </p>
                 </button>
               ))}
@@ -179,7 +181,7 @@ export default function Estimate() {
                     {r.name}
                     {r.note && <span className="ml-1.5 text-[11px] text-background/45">{r.note}</span>}
                   </span>
-                  <span className="font-bold tabular-nums">{r.cost === 0 ? "무료" : `${won(r.cost)}원`}</span>
+                  <span className="font-bold">{r.show}</span>
                 </li>
               ))}
             </ul>

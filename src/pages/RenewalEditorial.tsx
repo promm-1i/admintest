@@ -1109,6 +1109,8 @@ function EstimatePage() {
   const [pages, setPages] = useState<string>("one");
   const [picked, setPicked] = useState<string[]>([]);
 
+  // 패키지 탭도 커스텀 탭과 똑같이 항목별 단가를 내지 않는다 (templatePackages.ts 머리말 2026-10-05).
+  // cost 는 합계 계산에만 쓴다.
   const rows = [
     { label: "업종 전용 기능", cost: EST_FIXED.feature },
     { label: "셋팅 비용", cost: EST_FIXED.setup },
@@ -1143,7 +1145,7 @@ function EstimatePage() {
       <Section split title="02 도메인">{pick(EST_DOMAINS, domain, setDomain)}</Section>
       <Section split title="예상 비용">
         <div className="re-estimate__result">
-          <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>{won(row.cost)}원</dd></div>)}</dl>
+          <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>포함</dd></div>)}</dl>
           <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
           <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다. 메뉴별로 페이지를 나눈 홈페이지는 프리미엄 디자인(150만원부터)에서 제작합니다.</p>
           <div className="re-estimate__actions"><Link to={`${root}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
