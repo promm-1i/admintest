@@ -23,6 +23,10 @@ RULES = [
 
 LIST_JS = """()=>[...document.querySelectorAll('a[href*="/posts/"]')].map(a=>a.getAttribute('href')).filter(Boolean)"""
 
+BOARDS_JS = """()=>[...document.querySelectorAll('a[href]')]
+  .map(a=>[(a.innerText||'').trim(), a.getAttribute('href')])
+  .filter(x=>x[1] && x[1].includes('/boards/'))"""
+
 POST_JS = """()=>{const nl=String.fromCharCode(10);
  const h1=document.querySelector('h1');
  const scope=h1&&h1.parentElement&&h1.parentElement.parentElement;
@@ -42,25 +46,38 @@ with sync_playwright() as p:
     pg.goto(CAFE, wait_until="domcontentloaded")
     pg.wait_for_timeout(2500)
 
-    hrefs, stale = set(), 0
-    for _ in range(80):
-        before = len(hrefs)
-        hrefs.update(pg.evaluate(LIST_JS))
-        pg.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        pg.wait_for_timeout(1000)
-        # 보이는 '더보기'는 전부 눌러 본다
-        for i in range(pg.locator("text=더보기").count()):
-            try:
-                el = pg.locator("text=더보기").nth(i)
-                if el.is_visible():
-                    el.click(timeout=2500)
-                    pg.wait_for_timeout(1200)
-            except Exception:
-                pass
-        hrefs.update(pg.evaluate(LIST_JS))
-        stale = stale + 1 if len(hrefs) == before else 0
-        if stale >= 3:
-            break
+    # 카페 홈 피드는 43개에서 더 안 펼쳐진다(글은 91개였다).
+    # 게시판마다 따로 들어가야 전부 잡힌다.
+    boards = {}
+    for name, href in pg.evaluate(BOARDS_JS):
+        boards.setdefault(href, name)
+    print("게시판", len(boards), "개", flush=True)
+
+    hrefs = set()
+    for href, name in boards.items():
+        url = href if href.startswith("http") else "https://cafe.daangn.com" + href
+        pg.goto(url, wait_until="domcontentloaded")
+        pg.wait_for_timeout(2000)
+        got, stale = set(), 0
+        for _ in range(60):
+            before = len(got)
+            got.update(pg.evaluate(LIST_JS))
+            pg.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            pg.wait_for_timeout(900)
+            for i in range(pg.locator("text=더보기").count()):
+                try:
+                    el = pg.locator("text=더보기").nth(i)
+                    if el.is_visible():
+                        el.click(timeout=2500)
+                        pg.wait_for_timeout(1200)
+                except Exception:
+                    pass
+            got.update(pg.evaluate(LIST_JS))
+            stale = stale + 1 if len(got) == before else 0
+            if stale >= 3:
+                break
+        print(f"  {name[:16]:18s} {len(got):3d} 개", flush=True)
+        hrefs.update(got)
     hrefs = sorted(hrefs)
     print("찾은 글", len(hrefs), "개", flush=True)
 
