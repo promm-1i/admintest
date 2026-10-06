@@ -970,7 +970,7 @@ function StandardPage({ page, path }: { page: ContentPage; path: string }) {
 
 function PriceDetail({ page, path }: { page: ContentPage; path: string }) {
   const root = useRoot();
-  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="프리미엄 디자인"><div className="re-premium-price"><h3>150만원부터</h3><span>프리미엄 시안에서 출발해 섹션 구성과 브랜드 색 · 글꼴을 다시 잡고 사진을 새로 만듭니다</span><Link to={`${root}/web-solutions`}>프리미엄 사례 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="프리미엄 디자인"><div className="re-premium-price"><h3>150만원부터</h3><span>메뉴별 상세 페이지가 있고 나중에 더 늘릴 수 있습니다. 프리미엄 시안에서 출발해 섹션 구성과 브랜드 색 · 글꼴을 다시 잡고 사진을 새로 만듭니다</span><Link to={`${root}/web-solutions`}>프리미엄 사례 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
 }
 
 const BOARD_PAGE_SIZE = 10;
@@ -1071,7 +1071,7 @@ function AboutPage() {
 // 호스팅은 따로 받지 않는다. 첫 해 호스팅료 240,000원을 항목에 60,000원씩 녹여
 // 총액은 기존 /estimate 와 같게 유지한다. 기본형 640,000 / 랜딩형 1,140,000.
 // 2026-10-05 서브페이지 분리를 없애며 그 항목의 60,000원은 셋팅 비용으로 옮겼다(160,000 → 220,000).
-const EST_STYLES = [{ key: "basic", name: "기본형", cost: 60_000, desc: "필요한 정보 위주, 스크롤 연출 없음" }, { key: "landing", name: "랜딩형", cost: 560_000, desc: "스크롤 연출과 움직임이 더해진 구성" }] as const;
+const EST_STYLES = [{ key: "basic", name: "원페이지 기본", cost: 60_000, desc: "소개부터 문의까지 한 페이지, 연출 없음" }, { key: "landing", name: "원페이지 랜딩", cost: 560_000, desc: "한 페이지에 스크롤 연출과 움직임을 더함" }] as const;
 const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com·co.kr·kr 중 원하시는 것으로, 첫 1년 무료" }, { key: "own", name: "보유 도메인 연동", desc: "이미 쓰시는 도메인을 그대로 연결합니다" }] as const;
 const EST_FIXED = { feature: 360_000, setup: 220_000 };
 const won = (value: number) => value.toLocaleString("ko-KR");

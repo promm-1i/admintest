@@ -4,6 +4,7 @@ import { Send, ShieldCheck, LayoutGrid, Link2, ExternalLink, Check } from "lucid
 import { Button } from "@/components/ui/button";
 import { TEMPLATE_PACKAGES, formatMan, PRODUCTION_PERIOD } from "@/lib/templatePackages";
 import { getDesignCode } from "@/lib/designCode";
+import { templatePageCount } from "@/lib/templateFolder";
 import type { Sample } from "@/lib/samples";
 
 /** 업종별 전용 기능과 관리자 데모 경로 */
@@ -45,6 +46,7 @@ export function TemplateSpecPanel({ sample }: { sample: Sample }) {
   const pkg = TEMPLATE_PACKAGES.find((p) => p.key === (isLanding ? "landing" : "basic"))!;
   const industry = sample.industryKey ? INDUSTRY_SPEC[sample.industryKey] : undefined;
   const designCode = getDesignCode(sample);
+  const pages = templatePageCount(sample);
 
   const copyLink = () => {
     void navigator.clipboard.writeText(window.location.href);
@@ -86,6 +88,12 @@ export function TemplateSpecPanel({ sample }: { sample: Sample }) {
         <p className="mt-1.5 text-[11px] leading-relaxed text-muted-foreground">
           셋팅 · 업종 전용 기능{pkg.designCost > 0 && " · 랜딩형 연출"} · 반응형 제작 · 도메인 1년 포함
         </p>
+        {pages ? (
+          /* 원페이지로 파는 줄인데 이 시안만 서브가 들어 있다 — 상세에서 먼저 밝힌다 */
+          <p className="mt-2 rounded-md border border-primary/25 bg-primary/[0.05] px-3 py-2 text-[11px] font-medium text-foreground">
+            이 시안은 <strong className="font-bold text-primary">{pages}쪽</strong>이 그대로 포함됩니다 (서브 페이지 포함)
+          </p>
+        ) : null}
         <p className="mt-2 rounded-md bg-secondary/60 px-3 py-2 text-[11px] text-muted-foreground">
           제작 기간 {PRODUCTION_PERIOD}
         </p>

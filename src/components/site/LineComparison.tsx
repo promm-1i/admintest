@@ -37,8 +37,8 @@ const DIFF_ROWS: DiffRow[] = [
   },
   {
     label: "페이지 수",
-    template: "템플릿에 있는 페이지 그대로",
-    premium: "메뉴별로 필요한 만큼 나눠 제작",
+    template: "한 페이지 (시안에 서브가 있으면 그대로 포함)",
+    premium: "메뉴별 상세 페이지 · 나중에 더 늘릴 수 있음",
   },
   {
     label: "브랜드 색 · 글꼴",
