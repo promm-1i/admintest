@@ -207,7 +207,7 @@ export default function FAQ() {
         <div className="mt-8 grid gap-8 sm:grid-cols-3">
           {INTENTS.map((intent) => (
             <Link key={intent.num} to={intent.to} className="group border-t-2 border-foreground pt-4">
-              <span className="font-mono text-2xl font-bold text-primary/30">{intent.num}</span>
+              <span aria-hidden="true" className="font-mono text-2xl font-bold text-primary/80">{intent.num}</span>
               <h3 className="mt-2 text-base font-bold text-foreground">{intent.title}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground break-keep">{intent.desc}</p>
               <span className="mt-3 flex items-center gap-1 text-sm font-medium text-primary">

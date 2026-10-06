@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Check, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -69,11 +69,72 @@ const COMMON_FEATURES = [
  */
 const PREMIUM_GROUPS = getPremiumCategories();
 
+/**
+ * 묶음이 14개로 늘어 세로로 계속 내려야 했다. 위에 붙는 칸을 두고
+ * 지금 보고 있는 묶음을 켜 준다. 누르면 그 묶음으로 넘어간다.
+ * 각 묶음에 이미 id="cat-<key>" 와 scroll-mt-24 가 있어 그대로 쓴다.
+ */
+function CategoryBar({ active }: { active: string }) {
+  return (
+    <nav
+      aria-label="프리미엄 디자인 분류"
+      className="sticky top-16 z-30 -mx-4 mt-6 border-y border-border bg-background/95 px-4 py-2 backdrop-blur supports-[backdrop-filter]:bg-background/80"
+    >
+      <ul className="flex gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {PREMIUM_GROUPS.map((group) => (
+          <li key={group.key} className="shrink-0">
+            <a
+              href={`#cat-${group.key}`}
+              aria-current={active === group.key ? "true" : undefined}
+              className={cn(
+                "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors",
+                active === group.key
+                  ? "border-primary bg-primary text-primary-foreground"
+                  : "border-border text-foreground/70 hover:border-primary/50 hover:text-primary",
+              )}
+            >
+              {group.label}
+              <span className={cn("font-mono text-[10px]", active === group.key ? "text-primary-foreground" : "text-muted-foreground")}>
+                {group.items.length}
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+}
+
+/** 화면 위쪽에 걸린 묶음을 현재 분류로 본다 */
+function useActiveCategory() {
+  const [active, setActive] = useState(PREMIUM_GROUPS[0]?.key ?? "");
+  useEffect(() => {
+    const sections = PREMIUM_GROUPS
+      .map((g) => document.getElementById(`cat-${g.key}`))
+      .filter((el): el is HTMLElement => Boolean(el));
+    if (!sections.length) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const shown = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (shown) setActive(shown.target.id.replace("cat-", ""));
+      },
+      { rootMargin: "-120px 0px -70% 0px", threshold: 0 },
+    );
+    sections.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+  return active;
+}
+
 export default function WebSolutions() {
   usePageTitle(
     "프리미엄 디자인 홈페이지 제작 — NOVERIQ",
     "프리미엄 등급 디자인을 기반으로 관리자 시스템과 업종 기능까지 갖춰 제작하는 프리미엄 라인의 범위와 요금을 안내합니다.",
   );
+
+  const activeCategory = useActiveCategory();
 
   // 헤더에서 ?cat=<key> 로 들어오면 해당 카테고리로 스크롤한다.
   const [params] = useSearchParams();
@@ -149,18 +210,11 @@ export default function WebSolutions() {
             <span className="text-xs"> (부가세 별도)</span>.
           </p>
         </FadeIn>
-        <FadeIn delay={80}>
-          <Link
-            to="/templates?style=landing-template"
-            className="text-sm font-medium text-primary hover:underline"
-          >
-            디자인 전체 보기 →
-          </Link>
-        </FadeIn>
       </div>
 
       {/* 카테고리별 진열 — 헤더 플라이아웃(홈페이지 템플릿 → 프리미엄 디자인)과 같은 분류를 쓴다.
           ?cat=<key> 로 들어오면 해당 묶음으로 스크롤된다. */}
+      <CategoryBar active={activeCategory} />
       {PREMIUM_GROUPS.map((group, gi) => (
         <section key={group.key} id={`cat-${group.key}`} className={gi === 0 ? "mt-6 scroll-mt-24" : "mt-10 scroll-mt-24"}>
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-2">

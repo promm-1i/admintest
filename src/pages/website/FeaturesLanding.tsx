@@ -207,7 +207,7 @@ export default function FeaturesLanding() {
         <div className="border-b border-border py-16 sm:py-24">
           <div className="grid gap-10 lg:grid-cols-12">
             <Reveal className="lg:col-span-4">
-              <span className="font-mono text-5xl font-bold text-primary/25">01</span>
+              <span aria-hidden="true" className="font-mono text-5xl font-bold text-primary/80">01</span>
               <h2 className="mt-2 text-3xl font-bold text-foreground">기본 웹사이트 기능</h2>
               <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">
                 홈페이지를 구성하는 기본적인 기능입니다. 모든 홈페이지에 기본으로 포함됩니다.
@@ -257,7 +257,7 @@ export default function FeaturesLanding() {
         <div className="border-b border-border py-16 sm:py-24">
           <div className="grid gap-10 lg:grid-cols-12">
             <Reveal className="lg:col-span-7">
-              <span className="font-mono text-5xl font-bold text-primary/25">02</span>
+              <span aria-hidden="true" className="font-mono text-5xl font-bold text-primary/80">02</span>
               <h2 className="mt-2 text-3xl font-bold text-foreground">고객이 홈페이지에서 직접 할 수 있습니다</h2>
 
               <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1.5">
@@ -305,7 +305,7 @@ export default function FeaturesLanding() {
         {/* 05 관리자 기능 — 메인 하이라이트 */}
         <div className="border-b border-border py-16 sm:py-24">
           <Reveal>
-            <span className="font-mono text-5xl font-bold text-primary/25">03</span>
+            <span aria-hidden="true" className="font-mono text-5xl font-bold text-primary/80">03</span>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
               홈페이지를 직접 운영할 수 있는 관리자 시스템
             </h2>
@@ -342,7 +342,7 @@ export default function FeaturesLanding() {
         {/* 06 확장 기능 */}
         <div className="py-16 sm:py-24">
           <Reveal>
-            <span className="font-mono text-5xl font-bold text-primary/25">04</span>
+            <span aria-hidden="true" className="font-mono text-5xl font-bold text-primary/80">04</span>
             <h2 className="mt-2 text-3xl font-bold text-foreground">다른 서비스와 연결할 수 있습니다</h2>
             <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
               필요한 경우 데이터베이스, 결제, 지도, 문자, 외부 서비스까지 홈페이지와 연결해 구축할 수

@@ -494,7 +494,7 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
           {BUILD_STEPS.map((s, i) => (
             <FadeIn key={s.no} direction="up" delay={i * 110}>
               <div className="relative h-full rounded-xl border border-border bg-background p-5">
-                <span className="font-mono text-2xl font-bold text-primary/25">{s.no}</span>
+                <span aria-hidden="true" className="font-mono text-2xl font-bold text-primary/80">{s.no}</span>
                 <h3 className="mt-1 text-sm font-bold text-foreground">{s.title}</h3>
                 <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground break-keep">
                   {s.desc}

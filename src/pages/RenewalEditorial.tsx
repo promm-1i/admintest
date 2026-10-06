@@ -355,10 +355,13 @@ function HomeCases() {
   const STEP = 330;
   const [index, setIndex] = useState(0);
   const [drag, setDrag] = useState(0);
+  const [jump, setJump] = useState(false);   // 되감는 순간만 전환을 끈다
   const dragging = useRef<{ id: number; x: number; moved: boolean } | null>(null);
-  const maxIndex = Math.max(0, cases.length - PER_VIEW);
-  const clamp = (value: number) => Math.min(maxIndex, Math.max(0, value));
-  const go = (delta: number) => setIndex((current) => clamp(current + delta * PER_VIEW));
+  /* 끝에서 멈추지 않고 처음으로 이어진다. 목록을 두 벌 깔아 두고, 한 벌을 넘어가면
+     전환 없이 같은 자리로 되감아 경계가 보이지 않게 한다. */
+  const LEN = cases.length;
+  const loop = cases.concat(cases);
+  const go = (delta: number) => setIndex((current) => current + delta * PER_VIEW);
 
   const onDown = (event: React.PointerEvent<HTMLUListElement>) => {
     if (event.pointerType === "mouse" && event.button !== 0) return;
@@ -378,24 +381,41 @@ function HomeCases() {
     dragging.current = null;
     // 한 칸의 1/4 을 넘게 끌면 넘긴다
     const moved = Math.round(-drag / STEP + (Math.abs(drag) > STEP / 4 ? (drag < 0 ? 0.5 : -0.5) : 0));
-    setIndex((current) => clamp(current + moved));
+    setIndex((current) => current + moved);
     setDrag(0);
   };
   const offset = index * STEP - drag;
+
+  /* 한 벌을 벗어나면 전환을 끄고 같은 화면이 되는 자리로 돌려놓는다 */
+  useEffect(() => {
+    if (index >= LEN || index < 0) {
+      const id = window.setTimeout(() => {
+        setJump(true);
+        setIndex((current) => ((current % LEN) + LEN) % LEN);
+      }, 320);
+      return () => window.clearTimeout(id);
+    }
+    if (jump) {
+      const id = window.requestAnimationFrame(() => setJump(false));
+      return () => window.cancelAnimationFrame(id);
+    }
+    return undefined;
+  }, [index, LEN, jump]);
 
   return <section className="re-nhn re-nhn--cases">
     <div className="re-nhn__frame">
       <h2 className="re-nhn__heading">프리미엄 디자인</h2>
       <p className="re-nhn__lead">실제 사이트를 그대로 모델링한 구성입니다. 좌우로 끌어 보세요.</p>
       <div className="re-case-nav">
-        <button type="button" onClick={() => go(-1)} disabled={index === 0} aria-label="이전 사례"><ChevronLeft /></button>
-        <button type="button" onClick={() => go(1)} disabled={index >= maxIndex} aria-label="다음 사례"><ArrowRight /></button>
+        <button type="button" onClick={() => go(-1)} aria-label="이전 사례"><ChevronLeft /></button>
+        <button type="button" onClick={() => go(1)} aria-label="다음 사례"><ArrowRight /></button>
       </div>
       <div className="re-case-viewport">
-        <ul className="re-case-list" data-dragging={dragging.current ? "true" : "false"}
+        <ul className="re-case-list" data-dragging={dragging.current || jump ? "true" : "false"}
           style={{ transform: `translate3d(${-offset}px,0,0)` }}
           onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
-          {cases.map((sample) => <li className="re-case" key={sample.slug}>
+          {loop.map((sample, i) => <li className="re-case" key={`${sample.slug}-${i}`}
+            aria-hidden={i >= LEN ? true : undefined}>
             <Link to={`${root}/samples/${sample.slug}`} draggable={false}
               onClick={(event) => { if (dragging.current?.moved) event.preventDefault(); }}>
               <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" draggable={false} /></figure>
@@ -780,6 +800,10 @@ function ContactBand() {
  *   grid 580px 580px 580px · gap 40px 30px
  *   .img01 은 두 칸(1190) · .img02 는 한 칸(580) · 둘 다 radius 30
  * 사진은 public/cases 의 실제 캡처에서 쪽 내용에 맞는 것으로 직접 골랐다.
+ * 전부 템플릿 시안(가상 브랜드) 캡처다 — 실제 고객사가 운영 중인 사이트가 아니다.
+ * 2026-10-06 에 머리말이 "제작해 운영 중인 사이트"라고 단언하고 있어 바로잡았다.
+ * 경로를 바꿀 때는 파일 존재를 반드시 기계로 확인할 것 — point-* 를 상상해 적어
+ * 네 장이 깨진 채 올라가 있었다(corporate-g/point-news 등, 같은 날 수리).
  * 22장 모두 서로 다른 화면이다. 반응형 쪽만 같은 사이트의 PC/모바일을
  * 일부러 짝지었다 — 그게 그 쪽이 말하는 내용이라서다.
  */
@@ -788,12 +812,12 @@ const PAGE_PHOTOS: Record<string, { file: string; wide: string; side: string; wi
     wideAlt: "인테리어 사이트의 시공 진행 단계 화면", sideAlt: "법률사무소 사이트의 상담 절차 화면" },
   features: { file: "features", wide: "clinic-a/point-services", side: "fitness-a/point-services",
     wideAlt: "의원 사이트의 진료 항목 화면", sideAlt: "피트니스 사이트의 프로그램 항목 화면" },
-  maintenance: { file: "maintenance", wide: "corporate-g/point-news", side: "estate-f/page-notice",
+  maintenance: { file: "maintenance", wide: "corporate-g/page-news", side: "estate-f/page-notice",
     wideAlt: "금속기업 사이트의 공지 목록 화면", sideAlt: "부동산 사이트의 공지 상세 화면" },
-  custom: { file: "custom", wide: "corporate-j/point-automation", side: "corporate-g/point-solution",
-    wideAlt: "기계기업 사이트의 자동화 소개 화면", sideAlt: "금속기업 사이트의 솔루션 구성 화면" },
-  "admin-system": { file: "admin", wide: "estate-f/page-listings", side: "estate-g/point-membership",
-    wideAlt: "부동산 사이트에 등록된 매물 목록", sideAlt: "회원제 부동산 사이트의 등급·권한 화면" },
+  custom: { file: "custom", wide: "corporate-j/page-automation", side: "corporate-g/page-technology",
+    wideAlt: "기계기업 사이트의 자동화 소개 화면", sideAlt: "금속기업 사이트의 기술 소개 화면" },
+  "admin-system": { file: "admin", wide: "estate-f/page-listings", side: "estate-g/point-featured",
+    wideAlt: "부동산 사이트에 등록된 매물 목록", sideAlt: "회원제 부동산 사이트의 추천 매물 화면" },
   "inquiry-reservation": { file: "inquiry", wide: "rentcar-g/point-reserve", side: "interior-f/point-contact",
     wideAlt: "렌터카 사이트의 예약 접수 화면", sideAlt: "인테리어 사이트의 상담 문의 화면" },
   "search-filter": { file: "search", wide: "rentcar-f/point-search", side: "estate-g/point-listings",
@@ -958,7 +982,7 @@ function StandardPage({ page, path }: { page: ContentPage; path: string }) {
     <LocalNav group={group} path={path} />
     <PageSections page={page} />
     {PAGE_PHOTOS[key] && <Section wide title="실제로 만든 화면">
-      <p className="re-photoband__lead">노베릭이 제작해 운영 중인 사이트의 화면입니다.</p>
+      <p className="re-photoband__lead">노베릭이 직접 만든 디자인에서 그대로 캡처한 화면입니다.</p>
       <PhotoBand page={key} />
     </Section>}
     {Legacy

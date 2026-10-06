@@ -179,7 +179,7 @@ export default function Estimate() {
                 <li key={r.name} className="flex items-baseline justify-between gap-3 text-sm">
                   <span className="text-background/75">
                     {r.name}
-                    {r.note && <span className="ml-1.5 text-[11px] text-background/45">{r.note}</span>}
+                    {r.note && <span className="ml-1.5 text-[11px] text-background/60">{r.note}</span>}
                   </span>
                   <span className="font-bold">{r.show}</span>
                 </li>

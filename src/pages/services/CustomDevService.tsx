@@ -213,7 +213,7 @@ export default function CustomDevService() {
                       <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-primary/10">
                         <Icon className="h-4 w-4 text-primary" />
                       </span>
-                      <span className="font-mono text-xl font-bold text-primary/25">{s.no}</span>
+                      <span aria-hidden="true" className="font-mono text-xl font-bold text-primary/80">{s.no}</span>
                     </div>
                     <h3 className="mt-3 text-sm font-bold text-foreground">{s.title}</h3>
                     <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground break-keep">{s.desc}</p>

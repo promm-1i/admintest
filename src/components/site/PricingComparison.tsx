@@ -125,7 +125,7 @@ export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
                       <span
                         className={cn(
                           "mb-2 inline-block rounded-full px-3 py-1 text-[11px] font-bold text-white shadow-sm",
-                          p.badgeTone === "recommended" ? "bg-primary" : "bg-emerald-500",
+                          p.badgeTone === "recommended" ? "bg-primary" : "bg-emerald-700",
                         )}
                       >
                         {p.badge}

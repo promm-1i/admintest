@@ -76,7 +76,7 @@ export default function About() {
             <FadeIn key={item.num} direction="left" delay={i * 150} className="py-9">
               <div className="grid gap-4 sm:grid-cols-12 sm:gap-8">
                 <div className="sm:col-span-4">
-                  <span className="font-mono text-4xl font-bold text-primary/20">{item.num}</span>
+                  <span aria-hidden="true" className="font-mono text-4xl font-bold text-primary/80">{item.num}</span>
                   <h3 className="mt-1.5 text-xl font-bold text-foreground break-keep">{item.title}</h3>
                 </div>
                 <div className="sm:col-span-8">

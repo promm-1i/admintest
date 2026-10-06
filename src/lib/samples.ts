@@ -6405,9 +6405,15 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
   },
   {
     key: "care",
-    label: "병원 · 뷰티 · 피트니스",
-    desc: "진료 · 시술 항목을 안내하고 상담 예약을 받는 구성",
-    industryKeys: ["hospital", "beauty", "fitness"],
+    label: "병원 · 의원",
+    desc: "진료 과목을 안내하고 상담 · 진료 예약을 받는 구성",
+    industryKeys: ["hospital", "dental", "vet"],
+  },
+  {
+    key: "beauty",
+    label: "뷰티 · 피트니스",
+    desc: "시술 · 프로그램을 보여주고 회원 · 예약으로 잇는 구성",
+    industryKeys: ["beauty", "fitness"],
   },
   {
     key: "edu",
@@ -6419,7 +6425,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "build",
     label: "인테리어 · 시공",
     desc: "시공 사례와 진행 방식을 보여주고 견적 문의를 받는 구성",
-    industryKeys: ["interior", "moving", "law"],
+    industryKeys: ["interior", "moving"],
   },
   {
     key: "shop",
@@ -6438,6 +6444,18 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     label: "예식 · 웨딩",
     desc: "예식장과 연회 공간을 보여주고 상담 예약을 받는 구성",
     industryKeys: ["wedding"],
+  },
+  {
+    key: "office",
+    label: "법률 · 세무 사무소",
+    desc: "업무 분야와 해결 사례를 보여주고 상담 예약을 받는 구성",
+    industryKeys: ["law", "tax"],
+  },
+  {
+    key: "leisure",
+    label: "레저 · 관광",
+    desc: "시설과 코스를 보여주고 이용 안내 · 예약으로 잇는 구성",
+    industryKeys: ["golf", "travel"],
   },
   {
     key: "portfolio",

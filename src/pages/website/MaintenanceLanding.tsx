@@ -83,7 +83,7 @@ export default function MaintenanceLanding() {
           {GLOSSARY.map((g, i) => (
             <Reveal key={g.num} delay={i * 100} className="grid gap-3 py-10 sm:grid-cols-12 sm:gap-6">
               <div className="sm:col-span-3">
-                <span className="font-mono text-4xl font-bold text-primary/25">{g.num}</span>
+                <span aria-hidden="true" className="font-mono text-4xl font-bold text-primary/80">{g.num}</span>
                 <p className="mt-1.5 text-sm font-semibold uppercase tracking-widest text-muted-foreground/70">
                   {g.eyebrow}
                 </p>

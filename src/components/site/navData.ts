@@ -350,14 +350,6 @@ export type NavMenuItem = { label: string; href: string; desc?: string };
 export type NavMenuGroup = { key: string; label: string; href: string; items: NavMenuItem[] };
 export type MainNavEntry = { key: string; label: string; href: string; groups: NavMenuGroup[] };
 
-/** 업종 26종을 소메뉴로 쓴다. "맞춤형" 꼬리표는 메뉴에서 뺀다. */
-const industryMenuItems = (): NavMenuItem[] =>
-  INDUSTRY_ITEMS.filter((item) => item.href).map((item) => ({
-    label: item.title.replace(/ ?맞춤형$/, ""),
-    href: item.href as string,
-    desc: item.desc,
-  }));
-
 export const MAIN_NAV: MainNavEntry[] = [
   {
     key: "about",
@@ -374,17 +366,6 @@ export const MAIN_NAV: MainNavEntry[] = [
       ] },
       { key: "result", label: "결과물", href: "/samples", items: [
         { label: "제작 사례", href: "/samples", desc: "실제로 만든 홈페이지 모음" },
-      ] },
-    ],
-  },
-  {
-    key: "solution",
-    label: "솔루션",
-    href: "/web-solutions",
-    groups: [
-      { key: "industry", label: "업종별 홈페이지", href: "/homepage", items: industryMenuItems() },
-      { key: "demo", label: "체험", href: "/web-solutions/demos", items: [
-        { label: "솔루션 · 데모 체험", href: "/web-solutions/demos", desc: "관리자 화면을 직접 눌러 보기" },
       ] },
     ],
   },
@@ -421,8 +402,13 @@ export const MAIN_NAV: MainNavEntry[] = [
         { label: "제작 비용", href: "/website/price", desc: "형태와 구성별 정해진 금액" },
         { label: "견적 계산기", href: "/estimate", desc: "기능을 골라 예상 금액 확인" },
       ] },
-      { key: "included", label: "포함 항목", href: "/website/features", items: [
+      /* 요금 쪽을 열면 안쪽 탭에 제작 방법 · 기능 소개 · 유지보수가 함께 뜬다.
+         대메뉴에 그 셋이 없으면 "메뉴에 없던 탭이 왜 있지"가 된다 — 같은 묶음을 여기도 둔다.
+         (LOCAL_GROUPS 의 "홈페이지 제작" 네 쪽과 같은 목록이다) */
+      { key: "included", label: "함께 보기", href: "/website/features", items: [
         { label: "기능 소개", href: "/website/features", desc: "금액 안에 무엇이 들어가는지" },
+        { label: "제작 방법", href: "/website/process", desc: "상담에서 오픈까지 순서" },
+        { label: "유지보수", href: "/website/maintenance", desc: "오픈 뒤 수정과 운영" },
       ] },
     ],
   },
