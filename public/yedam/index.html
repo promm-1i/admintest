@@ -514,16 +514,6 @@
 @keyframes introUp{to{opacity:1;transform:none}}
 @media(max-width:768px){.intro2-bx .title{font-size:28px}}
 /* ===== 메인 팝업 ===== */
-.main-popup{position:fixed;inset:0;z-index:8000;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center}
-.main-popup.on{display:flex}
-.main-popup .inner{width:min(1100px,92vw)}
-.main-popup .slides{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-.main-popup .slide{background:#fff;border-radius:12px;overflow:hidden}
-.main-popup .slide img{width:100%;aspect-ratio:420/560;object-fit:cover}
-.main-popup .ctrl{display:flex;justify-content:space-between;align-items:center;margin-top:14px;color:#fff;font-size:.9375rem}
-.main-popup .ctrl label{display:flex;align-items:center;gap:6px;cursor:pointer}
-.main-popup .ctrl button{color:#fff;font-size:.9375rem}
-@media(max-width:768px){.main-popup .slides{grid-template-columns:1fr}.main-popup .slide:nth-child(n+2){display:none}}
 </style>
 </head>
 <body class="main-page">
@@ -549,14 +539,7 @@
  <div class="nav-mobile__foot"><a href="tel:010-4894-4905">전화상담</a><a class="pri-btn" href="inquiry.html">진료예약</a></div>
 </aside>
 <div class="intro2-bx"><div class="bg-bx"><img src="./assets/intro-bg.jpg" alt=""></div>
- <p class="title line1">치료를 넘어,</p><p class="title line2">신뢰를 심는</p><p class="title line3">365서울예담치과</p></div><div class="main-popup"><div class="inner">
- <div class="slides">
-  <div class="slide"><img src="./assets/popup-1.jpg" alt="추석 연휴 진료 안내"></div>
-  <div class="slide"><img src="./assets/popup-2.jpg" alt="임플란트 상담 이벤트"></div>
-  <div class="slide"><img src="./assets/popup-3.jpg" alt="예담치과 2호점 오픈 안내"></div>
- </div>
- <div class="ctrl"><label><input type="checkbox" class="today">오늘 하루 그만 보기</label><button type="button" class="close">닫기 ✕</button></div>
-</div></div><main id="contents" class="main"><section class="dental-visual" id="visual"><div class="slides"><div class="slide on"><div class="img-bx"><img src="./assets/visual-1.jpg" alt=""></div>
+ <p class="title line1">치료를 넘어,</p><p class="title line2">신뢰를 심는</p><p class="title line3">365서울예담치과</p></div><main id="contents" class="main"><section class="dental-visual" id="visual"><div class="slides"><div class="slide on"><div class="img-bx"><img src="./assets/visual-1.jpg" alt=""></div>
   <div class="visual-txt-bx"><div class="mask"><p class="title">한 분의 진료가 아닌</p></div><div class="mask"><p class="title title2">분과 전문의 공동진료</p></div><p>분과별 협진 · 보건복지부 인증 전문의</p></div></div><div class="slide"><div class="img-bx"><img src="./assets/visual-2.jpg" alt=""></div>
   <div class="visual-txt-bx"><div class="mask"><p class="title">통증의 두려움을 덜어내는</p></div><div class="mask"><p class="title title2">편안한 임플란트</p></div><p>의식하진정법 · 전체 임플란트 · 뼈이식</p></div></div><div class="slide"><div class="img-bx"><img src="./assets/visual-3.jpg" alt=""></div>
   <div class="visual-txt-bx"><div class="mask"><p class="title">시작부터 마지막까지</p></div><div class="mask"><p class="title title2">한 원장이 보는 교정</p></div><p>교정과 전문의 · 1:1 맞춤 교정 · 투명교정</p></div></div><div class="slide"><div class="img-bx"><img src="./assets/visual-4.jpg" alt=""></div>
@@ -813,11 +796,6 @@ if(slides.length)go(0);
 /* 인트로 */
 var intro=document.querySelector('.intro2-bx');
 if(intro){try{if(sessionStorage.getItem('f_intro')==='1'){intro.remove()}else{sessionStorage.setItem('f_intro','1');setTimeout(function(){intro.classList.add('hide')},2200);setTimeout(function(){intro.remove()},3200)}}catch(e){setTimeout(function(){intro.classList.add('hide')},2200)}}
-/* 팝업 */
-var pop=document.querySelector('.main-popup');
-if(pop){try{if(localStorage.getItem('f_pop')!==new Date().toDateString())pop.classList.add('on')}catch(e){pop.classList.add('on')}
- pop.querySelector('.today').addEventListener('click',function(){try{localStorage.setItem('f_pop',new Date().toDateString())}catch(e){}pop.classList.remove('on')});
- pop.querySelector('.close').addEventListener('click',function(){pop.classList.remove('on')});}
 /* 신뢰 수치 등장 */
 var s1=document.querySelector('.hy-section1');
 if(s1){new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)s1.classList.add('on')})},{threshold:.25}).observe(s1)}

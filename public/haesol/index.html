@@ -26,26 +26,8 @@
 </head>
 <body>
 
-<div class="layer-popup" id="notice2" style="position:absolute;left:500px;top:10px;width:480px;height:619px;z-index:99991">
-<div>
-<div class="notice-body" style=";background:#fff">
-<a class="notice-link" data-pop_idx="4" href="location.html"><img alt="준공 뒤 1년 무상 점검 접수 안내" src="./assets/img/pop/notice-2.jpg" width="480"/></a>
-</div>
-<div class="notice-bar" style="text-align:right;background:#000000;height:35px;padding-right:10px;padding-top:10px;">
-<span><button class="notice-btn" data-notice-today="2" type="button">오늘 하루 이 알림을 띄우지 않습니다.</button></span>    <span><button class="notice-btn" data-notice-close="2" type="button">닫기</button></span>
-</div>
-</div>
-</div>
-<div class="layer-popup" id="notice1" style="position:absolute;left:10px;top:10px;width:480px;height:619px;z-index:99991">
-<div>
-<div class="notice-body" style=";background:#fff">
-<a class="notice-link" data-pop_idx="3" href="location.html"><img alt="안전 관리 무사고 현장 운영 알림" src="./assets/img/pop/notice-1.jpg" width="480"/></a>
-</div>
-<div class="notice-bar" style="text-align:right;background:#000000;height:35px;padding-right:10px;padding-top:10px;">
-<span><button class="notice-btn" data-notice-today="1" type="button">오늘 하루 이 알림을 띄우지 않습니다.</button></span>    <span><button class="notice-btn" data-notice-close="1" type="button">닫기</button></span>
-</div>
-</div>
-</div>
+
+
 <div id="hs">
 <ul class="sr">
 <li><a href="#contents">본문 바로가기(Skip Contents)</a></li>
@@ -652,16 +634,6 @@ $(function(){
     place();
   });
   $top.hide(); place();
-});
-})(jQuery);
-(function($){
-function setCookie(name, value, days){ var d = new Date(); d.setDate(d.getDate() + days);
-  document.cookie = name + '=' + escape(value) + '; path=/; expires=' + d.toGMTString() + ';'; }
-$(function(){
-  $('.layer-popup').each(function(){ var k = this.id.replace('notice', ''); if (document.cookie.indexOf('hs_notice_' + k + '=done') > -1) $(this).hide(); });
-  $('[data-notice-today]').click(function(e){ e.preventDefault(); var k = $(this).data('notice-today'); setCookie('hs_notice_' + k, 'done', 1); $('#notice' + k).hide(); });
-  $('[data-notice-close]').click(function(e){ e.preventDefault(); $('#notice' + $(this).data('notice-close')).hide(); });
-  $('.layer-popup .notice-link').click(function(){ $(this).closest('.layer-popup').hide(); });
 });
 })(jQuery);
 (function($){
