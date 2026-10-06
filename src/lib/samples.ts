@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "auto-f-template",
+    industry: "자동차 썬팅 필름 브랜드 홈페이지",
+    title: "자동차 썬팅 필름 브랜드 홈페이지 (프리미엄 디자인 F)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 썬팅 필름 · 제품 상세 · 시공점 찾기 · 시공 예약 · 61페이지",
+    purpose:
+      "스크롤에 따라 장면이 바뀌는 첫 화면과 제품 포스터가 흘러가는 필름 목록, 나노 세라믹 · 반사 세라믹 · PPF 제품 상세 17쪽, 시공 갤러리, 지도에서 고르는 시공점 찾기, 시공점 프로그램 · 품질보증 · OEM, 설립자 · 역사 · 미디어, 블로그, 문의 · 시공 예약까지 61쪽이 있는 자동차 썬팅 필름 브랜드 홈페이지입니다.",
+    features: [
+      "스크롤에 따라 바뀌는 첫 화면 장면 · 고정된 채 흘러가는 제품 포스터",
+      "제품마다 성능 표 · 확대 보기 · 느낌 사진 · 시공 예약으로 잇는 상세",
+      "지도 위 시공점 묶음 · 등급 거르기 · 시/도 고르기 · 시공점 창",
+      "설립자 서명이 그려지는 장면 · 시공 갤러리 넘김 · 시/도와 시공점을 고르는 예약 폼",
+    ],
+    idealFor: "자동차 썬팅 · PPF 필름 브랜드, 전국 시공점을 둔 자동차 용품 제조사, 제품 등급과 시공 사례를 함께 보여 줘야 하는 브랜드",
+    image: "/thumbs/auto-f.jpg",
+    liveUrl: "/haloveil/",
+    industryKey: "auto",
+    premiumLabel: "자동차 썬팅 필름",
+    designCode: "AUTP-1001",
+    premium: true,
+  },
+  {
     slug: "bike-a-template",
     industry: "자전거 브랜드 홈페이지",
     title: "자전거 브랜드 홈페이지 (프리미엄 디자인 A)",
@@ -6475,7 +6497,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "shop",
     label: "쇼핑몰 · 브랜드",
     desc: "상품을 진열하고 장바구니 · 구매로 잇는 구성",
-    industryKeys: ["shop", "perfume", "brew", "lighting", "bicycle"],
+    industryKeys: ["shop", "perfume", "brew", "lighting", "bicycle", "auto"],
   },
   {
     key: "corporate",
