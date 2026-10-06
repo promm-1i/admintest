@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "bike-a-template",
+    industry: "자전거 브랜드 홈페이지",
+    title: "자전거 브랜드 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 자전거 브랜드 · 제품 목록 · 비교하기 · 대리점 찾기 · 59페이지",
+    purpose:
+      "3초마다 넘어가는 첫 화면과 갈래별 시리즈 메뉴, 필터 · 정렬 · 비교하기가 되는 제품 목록, 색상별 사진 · 상세스펙 탭 · 지오메트리 도면이 있는 자전거 상세 16쪽, 대리점 찾기, 라이딩 챌린지, 하이라이트 글, 고객지원까지 59쪽이 있는 자전거 브랜드 홈페이지입니다.",
+    features: [
+      "3초마다 넘어가는 첫 화면 · 갈래를 누르면 펼쳐지는 시리즈 사진 메뉴",
+      "시리즈 · 프레임 · 휠 · 가격 필터와 결과 수 · 가격순 정렬 · 2 · 3열 보기",
+      "최대 3대를 담는 비교하기 창 · 색상별 사진 · 상세스펙 탭 · 지오메트리 도면",
+      "대리점 367곳 검색 · 라이딩 챌린지 GPS 코스 52곳 · 자주 묻는 질문 · 회원가입 단계",
+    ],
+    idealFor: "자전거 · 전동 이동장치 제조사, 여러 시리즈와 색상을 가진 스포츠용품 브랜드, 전국 대리점을 둔 제품 브랜드",
+    image: "/thumbs/bike-a.jpg",
+    liveUrl: "/solva/",
+    industryKey: "bicycle",
+    premiumLabel: "자전거 브랜드",
+    designCode: "BICP-1001",
+    premium: true,
+  },
+  {
     slug: "clinic-i-template",
     industry: "소아청소년과 · 성장클리닉 홈페이지",
     title: "소아청소년과 · 성장클리닉 홈페이지 (프리미엄 디자인 G)",
@@ -6453,7 +6475,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "shop",
     label: "쇼핑몰 · 브랜드",
     desc: "상품을 진열하고 장바구니 · 구매로 잇는 구성",
-    industryKeys: ["shop", "perfume", "brew", "lighting"],
+    industryKeys: ["shop", "perfume", "brew", "lighting", "bicycle"],
   },
   {
     key: "corporate",

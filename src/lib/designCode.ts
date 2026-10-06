@@ -43,6 +43,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   artist: "ART",
   brew: "BRE",
   lighting: "LIG",
+  bicycle: "BIC",
 };
 
 export function getDesignCode(sample: Sample): string {
@@ -73,6 +74,7 @@ const OPTION_INDUSTRY_LABELS: Record<string, string> = {
   video: "영상 편집",
   stay: "호텔·펜션·스테이",
   lighting: "조명·유리 공예",
+  bicycle: "자전거 브랜드",
 };
 
 const LINE_ORDER: Record<DesignLine, number> = { 프리미엄: 0, 랜딩형: 1, 기본형: 2 };
