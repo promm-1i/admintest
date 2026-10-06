@@ -2,8 +2,8 @@
  * 당근 비즈프로필 가격 메뉴에 올리는 가격표 사진을 사이트에서 그대로 찍는다.
  *
  * 요금을 바꾸면 사이트만 고치고 당근 가격표를 놓치기 쉬워서 만들었다.
- * 03_프리미엄_라인_요금.png 은 /web-solutions 의 프리미엄 카드라 템플릿 요금과
- * 무관하게 안 바뀐다 — 프리미엄 값을 손댈 때만 따로 다시 찍는다.
+ * 03_프리미엄_라인_요금.png 은 /web-solutions 의 프리미엄 카드다. 템플릿 요금과는
+ * 무관하지만 버튼 글자색·브랜드 파랑이 바뀌면 같이 다시 찍어야 한다.
  *
  *   npm run dev   (5173 이 떠 있어야 한다)
  *   node tools/promo-cards/shot_price_cards.mjs
@@ -16,6 +16,7 @@ const JOBS = [
   { file: '01_템플릿_요금표.png',       url: 'http://localhost:5173/website/price', find: 'table', w: 1280 },
   // lg:grid-cols-4 가 1024px 부터라 그 아래에서 찍어야 체크 목록이 원본과 같은 2열이 된다.
   { file: '02_템플릿_프리미엄_비교.png', url: 'http://localhost:5173/web-solutions', find: 'diff',  w: 1000 },
+  { file: '03_프리미엄_라인_요금.png',   url: 'http://localhost:5173/web-solutions', find: 'tiers', w: 1280 },
 ];
 
 const b = await chromium.launch();
@@ -33,6 +34,11 @@ for (const job of JOBS) {
     let n;
     if (find === 'table') {
       n = document.querySelector('table');
+    } else if (find === 'tiers') {
+      // 프리미엄 요금 카드 세 장(브랜드 페이지 · 쇼핑몰 · 리뉴얼)을 감싼 격자
+      const h = [...document.querySelectorAll('h3,strong,p,span')]
+        .find(x => x.textContent.trim() === '브랜드 페이지');
+      n = h?.closest('div.grid') ?? null;
     } else {
       const h = [...document.querySelectorAll('h2,h3')].find(x => x.textContent.includes('무엇이 다를까요'));
       n = h?.closest('section') ?? h?.parentElement?.parentElement;

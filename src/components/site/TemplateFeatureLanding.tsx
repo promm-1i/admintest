@@ -106,7 +106,7 @@ const COMMON_FEATURES: { icon: LucideIcon; title: string; points: [string, strin
   {
     icon: Smartphone,
     title: "반응형 제작",
-    points: ["기본형부터 전 등급 무료 제공", "PC · 태블릿 · 모바일에서 배치가 자동으로 맞춰집니다"],
+    points: ["원페이지 기본부터 전 등급 무료 제공", "PC · 태블릿 · 모바일에서 배치가 자동으로 맞춰집니다"],
   },
   {
     icon: LayoutDashboard,

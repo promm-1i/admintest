@@ -31,7 +31,7 @@ export default function IndustryIndex() {
         <h1 className="mt-3 text-3xl font-bold leading-tight sm:text-4xl">업종별 홈페이지 제작</h1>
         <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep sm:text-base">
           업종마다 손님이 궁금해하는 것이 다릅니다. 23개 업종 각각에 맞게 설계된 실제 화면을 보고
-          시작하세요 — 기본형 64만원부터, 영업일 7일이면 오픈합니다.
+          시작하세요 — 원페이지 기본 64만원부터, 영업일 7일이면 오픈합니다.
         </p>
       </Reveal>
 

@@ -102,7 +102,7 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
         <div className="mt-7 rounded-2xl border border-border bg-secondary/30 p-6 sm:p-7">
           <p className="text-base font-bold text-foreground">두 라인 모두 기본으로 들어가는 것</p>
           <p className="mt-1.5 text-sm text-muted-foreground break-keep">
-            관리자 기능과 반응형이 프리미엄에만 있는 것이 아닙니다. 아래는 64만원 기본형에도 그대로
+            관리자 기능과 반응형이 프리미엄에만 있는 것이 아닙니다. 아래는 64만원 원페이지 기본에도 그대로
             들어갑니다.
           </p>
           <ul className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">

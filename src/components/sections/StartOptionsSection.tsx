@@ -56,7 +56,7 @@ export function StartOptionsSection() {
               </p>
               <h3 className="mt-3 text-xl font-bold text-foreground">완성된 디자인으로 빠르게</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground break-keep">
-                업종마다 기본형 · 랜딩형 시안이 이미 만들어져 있습니다. 문구 · 사진 · 회사정보만
+                업종마다 원페이지 기본 · 원페이지 랜딩 시안이 이미 만들어져 있습니다. 문구 · 사진 · 회사정보만
                 바꿔 여는 방식이라 제작 기간이 짧고 비용이 낮습니다.
               </p>
               <Link
