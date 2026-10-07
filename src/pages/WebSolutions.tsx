@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Check, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -70,42 +70,89 @@ const COMMON_FEATURES = [
 const PREMIUM_GROUPS = getPremiumCategories();
 
 /**
- * 묶음이 14개로 늘어 세로로 계속 내려야 했다. 위에 붙는 칸을 두고
+ * 묶음이 15개로 늘어 한 줄 띠에서는 뒤쪽 칸이 화면 밖으로 밀렸다. 두 줄 격자로 놓고
  * 지금 보고 있는 묶음을 켜 준다. 누르면 그 묶음으로 넘어간다.
- * 각 묶음에 이미 id="cat-<key>" 와 scroll-mt-24 가 있어 그대로 쓴다.
+ * 열 수 = 묶음 수의 절반(올림). 넓은 화면에선 열이 폭을 나눠 갖고, 좁으면 두 줄 그대로 옆으로 민다.
+ * 위에 붙는 높이는 머리글(1024 이상 110px, 그 아래 56px) 바로 밑.
+ * 1280 이상은 두 줄 안에 다 들어가고, 그보다 좁으면 오른쪽 끝을 흐리게 해 옆에 더 있음을 알린다.
  */
 function CategoryBar({ active }: { active: string }) {
+  const cols = Math.ceil(PREMIUM_GROUPS.length / 2);
+  const listRef = useRef<HTMLUListElement>(null);
+  const [more, setMore] = useState(false);
+  useEffect(() => {
+    const ul = listRef.current;
+    if (!ul) return;
+    const update = () => setMore(ul.scrollLeft + ul.clientWidth < ul.scrollWidth - 2);
+    update();
+    ul.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      ul.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
+  // 켜진 칸이 가려져 있으면 보이게 옆으로 민다(좁은 화면)
+  useEffect(() => {
+    const ul = listRef.current;
+    const el = ul?.querySelector<HTMLElement>("[aria-current]");
+    if (!ul || !el || ul.scrollWidth <= ul.clientWidth) return;
+    const l = el.offsetLeft - ul.offsetLeft;
+    if (l < ul.scrollLeft || l + el.offsetWidth > ul.scrollLeft + ul.clientWidth) {
+      ul.scrollTo({ left: Math.max(0, l - 16), behavior: "smooth" });
+    }
+  }, [active]);
   return (
     <nav
       aria-label="프리미엄 디자인 분류"
-      className="sticky top-16 z-30 -mx-4 mt-6 border-y border-border bg-background/95 px-4 py-2 backdrop-blur supports-[backdrop-filter]:bg-background/80"
+      data-cat-bar
+      className="sticky top-14 z-30 -mx-4 mt-8 border-y border-border bg-background px-4 py-3 lg:top-[110px]"
     >
-      <ul className="flex gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {PREMIUM_GROUPS.map((group) => (
-          <li key={group.key} className="shrink-0">
-            <a
-              href={`#cat-${group.key}`}
-              aria-current={active === group.key ? "true" : undefined}
-              className={cn(
-                "inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 text-xs font-semibold transition-colors",
-                active === group.key
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border text-foreground/70 hover:border-primary/50 hover:text-primary",
-              )}
-            >
-              {group.label}
-              <span className={cn("font-mono text-[10px]", active === group.key ? "text-primary-foreground" : "text-muted-foreground")}>
-                {group.items.length}
-              </span>
-            </a>
-          </li>
-        ))}
+      <div
+        aria-hidden
+        className={cn(
+          "pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-background to-transparent transition-opacity duration-200",
+          more ? "opacity-100" : "opacity-0",
+        )}
+      />
+      <ul
+        ref={listRef}
+        className="grid gap-1.5 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        style={{ gridTemplateColumns: `repeat(${cols}, minmax(max-content, 1fr))` }}
+      >
+        {PREMIUM_GROUPS.map((group) => {
+          const on = active === group.key;
+          return (
+            <li key={group.key}>
+              <a
+                href={`#cat-${group.key}`}
+                aria-current={on ? "true" : undefined}
+                className={cn(
+                  "flex h-11 items-center justify-between gap-2 rounded-xl px-2.5 text-[15px] font-semibold tracking-tight whitespace-nowrap transition-colors duration-200 min-[1440px]:gap-3 min-[1440px]:px-4",
+                  on
+                    ? "bg-primary text-primary-foreground shadow-sm shadow-primary/25"
+                    : "bg-secondary/60 text-foreground/80 hover:bg-primary/10 hover:text-primary",
+                )}
+              >
+                {group.label}
+                <span
+                  className={cn(
+                    "min-w-6 rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums",
+                    on ? "bg-white/20 text-primary-foreground" : "bg-background text-muted-foreground",
+                  )}
+                >
+                  {group.items.length}
+                </span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   );
 }
 
-/** 화면 위쪽에 걸린 묶음을 현재 분류로 본다 */
+/** 화면 위쪽(머리글 + 분류 칸 바로 아래)에 걸린 묶음을 현재 분류로 본다 */
 function useActiveCategory() {
   const [active, setActive] = useState(PREMIUM_GROUPS[0]?.key ?? "");
   useEffect(() => {
@@ -113,14 +160,18 @@ function useActiveCategory() {
       .map((g) => document.getElementById(`cat-${g.key}`))
       .filter((el): el is HTMLElement => Boolean(el));
     if (!sections.length) return;
+    const bar = document.querySelector<HTMLElement>("[data-cat-bar]");
+    const barBottom = bar ? parseFloat(getComputedStyle(bar).top) + bar.offsetHeight : 120;
+    // 콜백에는 이번에 바뀐 묶음만 온다. 멀리 건너뛰면 지나친 묶음이 마지막에 남으므로
+    // 지금 걸려 있는 묶음 전체를 들고 있다가 그중 맨 위(문서 순서 첫째)를 켠다.
+    const inZone = new Set<Element>();
     const io = new IntersectionObserver(
       (entries) => {
-        const shown = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
-        if (shown) setActive(shown.target.id.replace("cat-", ""));
+        entries.forEach((e) => (e.isIntersecting ? inZone.add(e.target) : inZone.delete(e.target)));
+        const shown = sections.find((el) => inZone.has(el));
+        if (shown) setActive(shown.id.replace("cat-", ""));
       },
-      { rootMargin: "-120px 0px -70% 0px", threshold: 0 },
+      { rootMargin: `-${Math.round(barBottom) + 8}px 0px -55% 0px`, threshold: 0 },
     );
     sections.forEach((el) => io.observe(el));
     return () => io.disconnect();
@@ -216,7 +267,11 @@ export default function WebSolutions() {
           ?cat=<key> 로 들어오면 해당 묶음으로 스크롤된다. */}
       <CategoryBar active={activeCategory} />
       {PREMIUM_GROUPS.map((group, gi) => (
-        <section key={group.key} id={`cat-${group.key}`} className={gi === 0 ? "mt-6 scroll-mt-24" : "mt-10 scroll-mt-24"}>
+        <section
+          key={group.key}
+          id={`cat-${group.key}`}
+          className={cn(gi === 0 ? "mt-8" : "mt-10", "scroll-mt-48 lg:scroll-mt-[250px]")}
+        >
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-2">
             <h3 className="text-sm font-bold text-foreground">{group.label}</h3>
             <p className="text-xs text-muted-foreground break-keep">{group.desc}</p>
