@@ -305,17 +305,54 @@ const HELP_CARDS = [
  *   접힌 칸은 글자를 세로로 (c-writing-lr)
  *   본문은 접혀 있을 때 opacity 0, 펼치면 1 (.5s ease-out)
  * 사진은 그 업종 템플릿 썸네일을 쓴다.
+ *
+ * 2026-10-07 칸이 6개뿐이라 넓은 화면에서 펼친 칸이 1200px 넘게 늘어나 사진(4:3) 오른쪽이
+ * 통째로 비었다. 프리미엄 분류에서 큰 업종 6개를 더 붙여 12칸으로 — 1280 이상에서만 보인다
+ * (그보다 좁으면 접힌 칸이 글자 폭보다 좁아져 원래 6칸 그대로). 누르면 그 분류 진열로 간다.
  */
+const HOME_EXTRA_INDUSTRIES = [
+  { cat: "food", eng: "RESTAURANT", name: "카페 · 음식점",
+    rows: ["메뉴·가격 등록과 품절 표시", "매장 위치·영업시간 정보 관리", "예약·단체 주문 문의 접수 관리"] },
+  { cat: "beauty", eng: "BEAUTY · FITNESS", name: "뷰티 · 피트니스",
+    rows: ["시술·프로그램과 요금표 관리", "예약 접수와 담당자별 일정 관리", "전후 사진과 후기 게시 관리"] },
+  { cat: "stay", eng: "HOTEL · STAY", name: "호텔 · 숙박",
+    rows: ["객실 정보·요금과 사진 관리", "예약 문의 접수와 일정 확인", "부대시설·이벤트 소식 게시"] },
+  { cat: "corporate", eng: "CORPORATE", name: "기업",
+    rows: ["사업 분야·제품 정보 관리", "공지·보도자료 게시판 운영", "제휴·채용 문의 접수 관리"] },
+  { cat: "office", eng: "LAW · TAX", name: "법률 · 세무 사무소",
+    rows: ["업무 분야와 구성원 소개 관리", "해결 사례·칼럼 게시", "상담 예약 접수와 이력 관리"] },
+  { cat: "shop", eng: "SHOP · BRAND", name: "쇼핑몰 · 브랜드",
+    rows: ["상품 등록과 재고·노출 관리", "주문 접수와 배송 상태 관리", "회원 정보와 문의 응대 관리"] },
+] as const;
+
 function HomeIndustries() {
   const root = useRoot();
-  const items = INDUSTRY_SHOWCASES.slice(0, 6);
-  const shots = useMemo(() => {
+  const items = useMemo(() => {
     const byIndustry = new Map<string, string>();
     for (const sample of SAMPLES) {
       if (!sample.image || !sample.industryKey || byIndustry.has(sample.industryKey)) continue;
       byIndustry.set(sample.industryKey, sample.image);
     }
-    return byIndustry;
+    const base = INDUSTRY_SHOWCASES.slice(0, 6).map((item) => ({
+      key: item.key,
+      eng: item.key.replace(/-/g, " ").toUpperCase(),
+      name: item.name,
+      rows: item.manageables.slice(0, 3),
+      href: item.solutionHref,
+      shot: byIndustry.get(item.key) ?? byIndustry.get(item.key.replace("-", "")) ?? "",
+      extra: false,
+    }));
+    const groups = getPremiumCategories();
+    const extra = HOME_EXTRA_INDUSTRIES.map((item) => ({
+      key: `cat-${item.cat}`,
+      eng: item.eng,
+      name: item.name,
+      rows: [...item.rows],
+      href: `/web-solutions?cat=${item.cat}`,
+      shot: groups.find((g) => g.key === item.cat)?.items[0]?.sample.image ?? "",
+      extra: true,
+    }));
+    return [...base, ...extra];
   }, []);
   const [open, setOpen] = useState(0);
   return <section className="re-nhn re-nhn--industry">
@@ -324,17 +361,16 @@ function HomeIndustries() {
       <p className="re-nhn__lead">업종마다 손님이 찾는 것이 다릅니다. 그 업종에 맞춘 화면과 기능을 넣습니다.</p>
       <ul className="re-acc">{items.map((item, index) => {
         const active = index === open;
-        const shot = shots.get(item.key) ?? shots.get(item.key.replace("-", "")) ?? "";
-        return <li key={item.key} className="re-acc__panel" data-open={active}
-          style={shot ? { backgroundImage: `url(${shot})` } as CSSProperties : undefined}
+        return <li key={item.key} className="re-acc__panel" data-open={active} data-extra={item.extra || undefined}
+          style={item.shot ? { backgroundImage: `url(${item.shot})` } as CSSProperties : undefined}
           onPointerEnter={() => setOpen(index)} onFocusCapture={() => setOpen(index)}>
-          <Link to={hrefIn(root, item.solutionHref)} aria-expanded={active}>
+          <Link to={hrefIn(root, item.href)} aria-expanded={active}>
             <i className="re-acc__dim" aria-hidden="true" />
             <span className="re-acc__side" aria-hidden={active}>{item.name}</span>
             <span className="re-acc__body">
-              <span className="re-acc__eng">{item.key.replace(/-/g, " ").toUpperCase()}</span>
+              <span className="re-acc__eng">{item.eng}</span>
               <strong>{item.name}</strong>
-              <span className="re-acc__rows">{item.manageables.slice(0, 3).map((point) => <span key={point}>{point}</span>)}</span>
+              <span className="re-acc__rows">{item.rows.map((point) => <span key={point}>{point}</span>)}</span>
               <span className="re-acc__link">자세히 보기<ArrowRight aria-hidden="true" /></span>
             </span>
           </Link>

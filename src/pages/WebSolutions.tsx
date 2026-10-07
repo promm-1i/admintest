@@ -190,10 +190,13 @@ export default function WebSolutions() {
   // 헤더에서 ?cat=<key> 로 들어오면 해당 카테고리로 스크롤한다.
   const [params] = useSearchParams();
   const cat = params.get("cat");
+  // 쪽이 열릴 때 바깥 껍데기(ScrollToTop · 편집 껍데기)가 뒤이어 맨 위로 되돌리므로 한 박자 늦게 민다.
   useEffect(() => {
     if (!cat) return;
-    const el = document.getElementById(`cat-${cat}`);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const id = window.setTimeout(() => {
+      document.getElementById(`cat-${cat}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 150);
+    return () => window.clearTimeout(id);
   }, [cat]);
 
   return (
