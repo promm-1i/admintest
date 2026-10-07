@@ -60,13 +60,22 @@ const SelectScrollDownButton = React.forwardRef<
 ));
 SelectScrollDownButton.displayName = SelectPrimitive.ScrollDownButton.displayName;
 
+function headerBottom() {
+  if (typeof document === "undefined") return 0;
+  const header = document.querySelector(".header-frame");
+  return header ? Math.max(0, Math.round(header.getBoundingClientRect().bottom)) : 0;
+}
+
 const SelectContent = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Content>
->(({ className, children, position = "popper", ...props }, ref) => (
+>(({ className, children, position = "popper", collisionPadding, ...props }, ref) => (
   <SelectPrimitive.Portal>
     <SelectPrimitive.Content
       ref={ref}
+      // 고정 머리글(.header-frame, PC 110px · 모바일 56px)이 목록보다 위에 떠 있어서,
+      // 위로 펼쳐진 긴 목록의 윗부분이 머리글 뒤에 가려졌다 → 머리글 아래부터만 쓰게 한다.
+      collisionPadding={collisionPadding ?? { top: headerBottom() + 8, bottom: 8 }}
       className={cn(
         "relative z-50 max-h-(--radix-select-content-available-height) min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-(--radix-select-content-transform-origin)",
         position === "popper" &&
