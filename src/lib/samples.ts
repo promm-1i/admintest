@@ -148,6 +148,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "laundry-a-template",
+    industry: "무인세탁 · 세탁 프랜차이즈 홈페이지",
+    title: "무인세탁 · 세탁 프랜차이즈 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 무인 빨래방 · 드라이클리닝 · 창업 안내 · 매장 찾기 · 4페이지",
+    purpose:
+      "영상 첫 화면과 숫자가 올라가는 창업 경쟁력, 매장별 월 매출 넘김 카드, 점주 인터뷰 영상 넘김, 매장 유형 세 가지 탭으로 보는 창업 비용, 장점 · 드라이클리닝 스테이션 이용 방법 · 빨래방 소개, 일곱 단계 창업 절차, 창업 · 입점 문의 폼, 자주 묻는 질문, 지도에서 고르는 매장 찾기까지 한 장에 담은 메인과 개인정보 처리방침 · 이용약관 · 영상정보처리기기 방침까지 4쪽이 있는 무인세탁 프랜차이즈 창업 안내 홈페이지입니다.",
+    features: [
+      "영상 첫 화면 · 화면에 들어오면 올라가는 매장 수 · 월 매출 · 가입자 숫자",
+      "매장별 평수 · 월 매출 넘김 카드 · 점주 인터뷰 영상 세 편 넘김과 진행 막대",
+      "빨래+드라이 · 빨래방만 · 드라이만 세 가지 탭으로 보는 창업 비용 표 · 일곱 단계 창업 절차",
+      "시/도 · 구/군 · 이름으로 거르는 매장 40곳 목록과 지도 위 표시 · 안내창 · 창업 문의 폼",
+    ],
+    idealFor: "무인 빨래방 · 코인세탁 프랜차이즈 본사, 드라이클리닝 · 세탁 체인, 가맹점 모집과 매장 찾기를 함께 보여 줘야 하는 생활 서비스 브랜드",
+    image: "/thumbs/laundry-a.jpg",
+    liveUrl: "/bosong/",
+    industryKey: "laundry",
+    premiumLabel: "무인세탁 프랜차이즈",
+    designCode: "LAUP-1001",
+    premium: true,
+  },
+  {
     slug: "care-f-template",
     industry: "장기요양 · 어르신 돌봄 서비스 홈페이지",
     title: "장기요양 · 어르신 돌봄 홈페이지 (프리미엄 디자인 F)",
@@ -6560,6 +6582,12 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     label: "법률 · 세무 사무소",
     desc: "업무 분야와 해결 사례를 보여주고 상담 예약을 받는 구성",
     industryKeys: ["law", "tax"],
+  },
+  {
+    key: "life",
+    label: "생활 서비스",
+    desc: "서비스와 비용을 안내하고 가까운 센터 · 매장 찾기와 상담으로 잇는 구성",
+    industryKeys: ["care", "laundry"],
   },
   {
     key: "leisure",
