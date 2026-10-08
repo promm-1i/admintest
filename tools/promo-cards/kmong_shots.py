@@ -28,7 +28,7 @@ from make_page_shots import (  # noqa: E402
 
 SERVER = __import__("os").environ.get("TPL_SERVER", "http://127.0.0.1:8771")
 REPO = Path(__file__).resolve().parents[2]
-OUT_W = 1000          # 크몽 가로 600 이상
+OUT_W = 1440          # 사이트가 그려지는 폭 그대로 — 줄이면 글씨가 작아져 흐려 보인다
 MAX_H = 3000          # 크몽 세로 상한
 MAX_CUT = 24000
 N_DETAIL = 10
@@ -132,8 +132,21 @@ def grab(pg, key_dir: Path, name: str, folder: str, max_cut: int = MAX_CUT) -> I
     pg.evaluate("window.ScrollTrigger && ScrollTrigger.getAll().forEach(t=>t.kill(true))")
     pg.add_style_tag(content="[data-aos],.rv,.ani,.fadeUp,.fadeLeft,.fadeRight{opacity:1!important;transform:none!important;transition:none!important}")
     pg.evaluate(REVEAL_JS)
-    pg.evaluate("""()=>{for(const e of document.querySelectorAll('.promo-popup,.layer-popup,[class*=popup],[class*=agegate],[id*=agegate],[class*=dimm],.dim')){
-      const b=e.getBoundingClientRect();if(b.width>200&&b.height>150)e.style.setProperty('display','none','important')}}""")
+    # 팝업은 클래스 이름이 템플릿마다 달라 이름으로는 못 잡는다 →
+    # '닫기 / 하루동안 / 오늘 하루' 단추를 품은 떠 있는 상자를 지운다.
+    pg.evaluate("""()=>{
+      const kill=e=>e.style.setProperty('display','none','important');
+      for(const e of document.querySelectorAll('.promo-popup,.layer-popup,[class*=popup],[id*=popup],[class*=agegate],[id*=agegate],[class*=dimm],.dim')){
+        const b=e.getBoundingClientRect(); if(b.width>200&&b.height>150) kill(e);
+      }
+      for(const e of document.querySelectorAll('div,aside,section')){
+        const s=getComputedStyle(e);
+        if(s.position!=='fixed'&&s.position!=='absolute')continue;
+        const b=e.getBoundingClientRect();
+        if(b.width<200||b.height<150||b.width>1500&&b.height>1200)continue;
+        const t=(e.innerText||'');
+        if(/닫기|하루ㅤ?동안|오늘 하루|다시 보지|그만 보기/.test(t)) kill(e);
+      }}""")
     pg.wait_for_timeout(700)
     # body 가 스크롤 상자인 템플릿(윤슬 계열)은 전체 캡처가 한 화면만 찍히고 푸터 좌표도 틀린다 → 풀어 준다
     locked = pg.evaluate("""()=>{const s=getComputedStyle(document.body);
