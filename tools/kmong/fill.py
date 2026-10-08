@@ -42,6 +42,30 @@ COUNT_JS = """()=>{const o={};
  return o}"""
 
 
+# 크몽 업종 선택지에 우리 코드를 맞춘 표 (선택지는 17개로 고정)
+INDUSTRY = {
+    "HOSP": "병원·제약", "DENP": "병원·제약", "CARP": "병원·제약",
+    "VETP": "반려동물",
+    "LAWP": "법률·세무", "TAXP": "법률·세무",
+    "REAP": "부동산·분양", "ESTP": "부동산·분양",
+    "INTP": "가구·인테리어·이사", "LIGP": "가구·인테리어·이사",
+    "RESP": "식당·카페", "BREP": "음료·식품",
+    "STAP": "여행·숙박", "TRVL": "여행·숙박",
+    "GOLP": "건강·스포츠", "FITP": "건강·스포츠", "BICP": "건강·스포츠",
+    "KIDP": "학원·교육", "EDUP": "학원·교육",
+    "BEAP": "미용·뷰티", "PERP": "미용·뷰티",
+    "AGEP": "IT·미디어", "VIDP": "IT·미디어", "PHOP": "IT·미디어",
+    "LAUP": "생활·가전",
+    "AUTP": "일반·기타", "CORP": "일반·기타", "ARTP": "일반·기타",
+}
+INDUSTRY_BY_CODE = {"CORP-1015": "공기업·공공기관", "CORP-1012": "공기업·공공기관"}
+KEYWORDS = ["홈페이지", "홈페이지제작", "홈페이지개발", "웹사이트", "반응형홈페이지"]
+
+
+def industry_of(code: str) -> str:
+    return INDUSTRY_BY_CODE.get(code) or INDUSTRY.get(code.split("-")[0], "일반·기타")
+
+
 def clean_title(t: str) -> str:
     t = t.replace("·", "/").replace("—", "-").replace("~", "-").replace(",", "")
     t = re.sub(r"[^0-9A-Za-z가-힣ㄱ-ㅎㅏ-ㅣ\s:+\-#/.()]", "", t)
@@ -120,6 +144,26 @@ def pick_option(pg, button_name: str, option: str) -> bool:
     return False
 
 
+def pick_select(pg, current: str, option: str) -> bool:
+    """react-select 칸 — 지금 글자(자리표시 또는 고른 값)로 상자를 찾아 열고 목록에서 고른다.
+    타자는 안 먹고 첫 항목이 골라지므로 반드시 목록에서 클릭해야 한다."""
+    cont = pg.locator("div[class*='-container']").filter(has_text=current).last
+    if not cont.count():
+        return False
+    cont.click()
+    pg.wait_for_timeout(1000)
+    menu = pg.locator("[class*='-menu']")
+    target = pg.get_by_role("option", name=option, exact=True)
+    if not target.count() and menu.count():
+        target = menu.get_by_text(option, exact=True)
+    if not target.count():
+        pg.keyboard.press("Escape")
+        return False
+    target.first.click()
+    pg.wait_for_timeout(900)
+    return option in pg.evaluate("document.body.innerText")
+
+
 def upload(pg, kind: str, path: Path, crop: bool) -> bool:
     pg.evaluate(TAG_JS)
     btn = pg.locator(f"button[data-pick={kind}]").first
@@ -192,8 +236,33 @@ def run(code: str) -> None:
                 print("   상세 실패:", f.name)
                 break
         print(f"  상세: {ok}/{len(dets)}장")
-        print("  남은 칸(업종·설명·고객사·키워드)은 화면 보고 이어서 채웁니다.")
-        print("  등록 버튼은 누르지 않았습니다.")
+
+        ind = industry_of(code)
+        print("  업종:", ind, pick_select(pg, "업종을 선택해 주세요", ind))
+
+        desc = describe(r)
+        ta = pg.locator("textarea").first
+        ta.click()
+        ta.fill(desc)
+        print(f"  설명: {len(desc)}자")
+
+        # 고객사는 가상 브랜드라 비공개로 둔다
+        for cb in pg.locator("input[type=checkbox]").all():
+            lab = cb.evaluate("""e=>{let n=e,t='';for(let i=0;i<4&&n;i++,n=n.parentElement){
+              t=(n.innerText||'').trim(); if(t)break} return t.slice(0,20)}""")
+            if "비공개" in lab and not cb.is_checked():
+                cb.click(force=True)
+                print("  고객사: 비공개 체크")
+                break
+
+        kw = pg.locator("input[placeholder*='키워드']").first
+        for w in KEYWORDS:
+            kw.click()
+            kw.fill(w)
+            kw.press("Enter")
+            pg.wait_for_timeout(400)
+        print("  키워드:", ", ".join(KEYWORDS))
+        print("  등록 버튼은 누르지 않았습니다. 참여 기간은 화면에서 확인하세요.")
 
 
 if __name__ == "__main__":

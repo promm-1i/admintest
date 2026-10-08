@@ -32,6 +32,10 @@ OUT_W = 1440          # 사이트가 그려지는 폭 그대로 — 줄이면 �
 MAX_H = 3000          # 크몽 세로 상한
 MAX_CUT = 24000
 N_DETAIL = 10
+COVER_ONLY = "--cover-only" in sys.argv
+
+# 첫 조각이 배너·로고뿐이라 대표로 못 쓰는 템플릿 — 쓸 상세 번호를 직접 지정한다
+COVER_FROM = {"CARP-1001": 9, "LAWP-1001": 1, "STAP-1005": 2}
 
 # 푸터가 position:fixed 인 템플릿(윤슬)은 rect 가 화면 기준이라 문서 좌표로 쓸 수 없다 → 문서 높이로.
 CUT_JS = """(()=>{const f=document.querySelector('footer,#footer,.footer,#ft,.ft');
@@ -42,8 +46,23 @@ CUT_JS = """(()=>{const f=document.querySelector('footer,#footer,.footer,#ft,.ft
  return (y<300&&doc>1200)?doc:y})()"""
 
 # 떠 있는 푸터·퀵메뉴는 전체 캡처에서 본문을 덮는다 (머리글은 맨 위에 한 번만 그려져 그대로 둔다)
-HIDE_FIXED_JS = """()=>{for(const e of document.querySelectorAll('footer,[class*=quick],[class*=gotop],[class*=float],[id*=quick],[class*=sticky-bar]')){
-  if(getComputedStyle(e).position==='fixed')e.style.setProperty('display','none','important')}}"""
+HIDE_FIXED_JS = """()=>{
+ const kill=e=>e.style.setProperty('display','none','important');
+ for(const e of document.querySelectorAll('footer,[class*=quick],[class*=gotop],[class*=float],[id*=quick],[class*=sticky-bar]')){
+   if(getComputedStyle(e).position==='fixed')kill(e)}
+ // 화면을 덮는 고정 레이어 중 ① z-index 높은 것(인트로·로딩) ② 전체메뉴(내 reveal 이 열어 버린다).
+ // 조건을 넓히면 히어로까지 지워진다 — 둘 다 해당할 때만 지운다.
+ for(const e of document.querySelectorAll('div,section,aside')){
+   const s=getComputedStyle(e);
+   if(s.position!=='fixed')continue;
+   if(e.closest('header'))continue;
+   const b=e.getBoundingClientRect();
+   if(b.width<innerWidth*0.9||b.height<innerHeight*0.85||b.top>10)continue;
+   // 장면형 메인은 본문 자체가 고정 레이어라 z-index 로 지우면 사이트가 통째로 사라진다.
+   // 내 reveal 이 열어 버린 전체메뉴만 지운다.
+   const key=((e.id||'')+' '+(e.className||'')).toLowerCase();
+   if(/menu|mega|allm|gnb|-mn|hdx/.test(key))kill(e);
+ }}"""
 
 
 SKIP = re.compile(r"(privacy|terms|policy|login|signup|join|sitemap|agree|email|member|error|404)", re.I)
@@ -116,7 +135,8 @@ def page_list(pg, folder: str, want: int) -> list[str]:
     return (["index"] + order)[:want]
 
 
-def grab(pg, key_dir: Path, name: str, folder: str, max_cut: int = MAX_CUT) -> Image.Image | None:
+def grab(pg, key_dir: Path, name: str, folder: str, max_cut: int = MAX_CUT,
+         viewport_only: bool = False) -> Image.Image | None:
     url = f"{SERVER}/{'templates/' + folder if (REPO / 'public' / 'templates' / folder).is_dir() else folder}/{name}.html"
     try:
         pg.goto(url, wait_until="networkidle", timeout=60000)
@@ -153,6 +173,12 @@ def grab(pg, key_dir: Path, name: str, folder: str, max_cut: int = MAX_CUT) -> I
       return (s.overflowY==='auto'||s.overflowY==='scroll'||s.overflowY==='hidden')
              && document.body.scrollHeight > document.body.clientHeight + 50}""")
     pg.evaluate(HIDE_FIXED_JS)
+    if viewport_only:   # 장면형 메인(문서 높이가 한 화면)은 통짜 캡처가 안 된다 → 화면 한 장
+        pg.evaluate("scrollTo(0,0)")
+        pg.wait_for_timeout(600)
+        from io import BytesIO
+        im = Image.open(BytesIO(pg.screenshot())).convert("RGB")
+        return im.resize((OUT_W, round(im.height * OUT_W / im.width)), Image.LANCZOS)
     cut = min(pg.evaluate(CUT_JS), max_cut)
     if locked or cut < 400:
         pg.add_style_tag(content=SMOOTH_CSS)
@@ -241,25 +267,52 @@ def run(slugs: list[str]) -> None:
             brand = brand_of(r["code"]) or re.split(r"[|—\-·]", (pg.title() or slug))[0].strip()[:24] or slug
             outdir = root / f"{r['code']}_{brand}"
             outdir.mkdir(parents=True, exist_ok=True)
-            for old in outdir.glob("*.png"):
-                old.unlink()
+            if not COVER_ONLY:
+                for old in outdir.glob("*.png"):
+                    old.unlink()
             names = page_list(pg, r["folder"], 14)
             # 쪽이 적은 템플릿은 한 쪽에서 더 잘라 10장을 채운다
             per_cap = max(2, -(-N_DETAIL // max(1, len(names))) + 2)
 
-            # 대표 1:1 — 첫 화면 가운데를 정사각으로
-            pg.evaluate("scrollTo(0,0)")
-            pg.wait_for_timeout(500)
-            hero = outdir / "_hero.png"
-            pg.screenshot(path=str(hero))
-            hi = Image.open(hero).convert("RGB")
-            side = min(hi.width, hi.height)
-            hi.crop(((hi.width - side) // 2, 0, (hi.width + side) // 2, side)).resize((1080, 1080), Image.LANCZOS).save(outdir / "00_대표_1x1.png")
-            hero.unlink(missing_ok=True)
+            # 대표 1:1 — 메인 캡처(인트로·팝업 걷어낸 것)의 윗부분을 정사각으로.
+            # goto 직후 바로 찍으면 본문이 드러나기 전 인트로 문구가 찍힌다.
+            per: list[list[Image.Image]] = []
+            idx = grab(pg, outdir, "index", r["folder"])
+            chunks = pick(idx, idx.info.get("secs", []), per_cap) if idx is not None else []
+            # 대표 1:1 — 전처리(인트로·팝업 제거) 끝낸 첫 화면 한 장의 가운데를 정사각으로
+            # 대표 1:1 — 이미 잘 나온 메인 조각 중 사진이 가장 많이 든 곳의 윗부분.
+            # 첫 화면을 따로 찍으면 장면형 메인은 문구만 있는 첫 장면이 잡힌다.
+            # 첫 조각이 곧 첫 화면이다 — 그걸 먼저 쓰고, 거의 빈 화면일 때만 다음 조각으로 넘어간다.
+            # 점수로만 고르면 사진 한 장으로 꽉 찬 히어로가 '민짜'로 밀린다.
+            sqs = []
+            for c in chunks[:4]:
+                side = min(c.width, c.height)
+                sq = (c.crop((0, 0, c.width, side)) if c.height >= side else c).resize((1080, 1080), Image.LANCZOS)
+                sqs.append(sq)
+            cover_im = next((q for q in sqs if content_ratio(q) >= 0.05 and band_ratio(q) <= 0.6), None)
+            if cover_im is None and sqs:
+                cover_im = max(sqs, key=lambda q: content_ratio(q) - band_ratio(q))
+            if cover_im is not None:
+                cover_im.save(outdir / "00_대표_1x1.png")
+            if chunks:
+                per.append(chunks)
+
+            if COVER_ONLY:
+                cov = outdir / "00_대표_1x1.png"
+                if not cov.exists():
+                    dets0 = sorted(outdir.glob("*_상세.png"))
+                    if dets0:
+                        c = Image.open(dets0[0]).convert("RGB")
+                        side = min(c.width, c.height)
+                        c.crop((0, 0, c.width, side)).resize((1080, 1080), Image.LANCZOS).save(cov)
+                print(f"{r['code']} {brand} — 대표만 다시", cov.exists(), flush=True)
+                ctx.close()
+                continue
 
             # 상세 — 쪽마다 한 장씩 먼저 돌리고, 모자라면 같은 쪽의 다음 조각으로 채운다
-            per: list[list[Image.Image]] = []
             for nm in names:
+                if nm == "index":
+                    continue
                 im = grab(pg, outdir, nm, r["folder"])
                 if im is None:
                     continue
@@ -283,6 +336,15 @@ def run(slugs: list[str]) -> None:
                     for im in vs:
                         if len(picked) < N_DETAIL and not any(diff(q, im) < 5 for q in picked):
                             picked.append(im)
+            cov = outdir / "00_대표_1x1.png"
+            if code in COVER_FROM and len(picked) >= COVER_FROM[code]:
+                c = picked[COVER_FROM[code] - 1]
+                side = min(c.width, c.height)
+                c.crop((0, 0, c.width, side)).resize((1080, 1080), Image.LANCZOS).save(cov)
+            elif not cov.exists() and picked:   # 메인 조각이 안 나온 템플릿은 첫 상세로
+                c = picked[0]
+                side = min(c.width, c.height)
+                c.crop((0, 0, c.width, side)).resize((1080, 1080), Image.LANCZOS).save(cov)
             for i, im in enumerate(picked, 1):
                 im.save(outdir / f"{i:02d}_상세.png")
             print(f"{r['code']} {brand} — 쪽 {len(per)} · 상세 {len(picked)}장", flush=True)
