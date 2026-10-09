@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "restaurant-o-template",
+    industry: "커피 프랜차이즈 본사 홈페이지",
+    title: "커피 프랜차이즈 본사 홈페이지 (프리미엄 디자인 D)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 커피 · 베이글 · 매장 찾기 · 창업 · 35페이지",
+    purpose:
+      "한 화면씩 넘어가는 첫 화면과 팝업 세 장, 커피 · 베이글 메뉴, 두 브랜드의 매장 찾기와 대표 매장 상세, 브랜드 · 회사 · 앱 소개, 창업 절차 · 비용 · 인테리어 · 상담, 뉴스 · 공지 · 브랜드 소식과 고객 문의까지 35쪽이 있는 커피 프랜차이즈 본사 홈페이지입니다.",
+    features: [
+      "한 화면씩 넘어가는 첫 화면 · 행사 팝업 세 장 · 모바일 펼침 메뉴",
+      "커피와 베이글 메뉴 2쪽 · 누르면 열리는 원재료 · 알레르기 상세",
+      "정적 지도와 지역 검색이 있는 매장 찾기 · 대표 매장 상세 2쪽",
+      "창업 절차 · 비용 · 인테리어 · FAQ · 상담과 세 가지 문의 양식",
+    ],
+    idealFor: "커피 · 베이커리 프랜차이즈 본사, 두 가지 매장 형태를 함께 운영하는 카페 브랜드, 가맹 모집과 매장 안내가 필요한 외식기업",
+    image: "/thumbs/restaurant-o.jpg",
+    liveUrl: "/lowmel/",
+    industryKey: "restaurant",
+    premiumLabel: "커피 · 베이글 프랜차이즈",
+    designCode: "RESP-1004",
+    premium: true,
+  },
+  {
     slug: "beauty-h-template",
     industry: "에스테틱 · 피부관리실 홈페이지",
     title: "에스테틱 · 피부관리실 홈페이지 (프리미엄 디자인 B)",
