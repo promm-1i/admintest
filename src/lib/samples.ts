@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "dental-h-template",
+    industry: "치과 홈페이지",
+    title: "치과 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 치과 · 심미 레진 · 재치료 · 수면치료 · 24페이지",
+    purpose:
+      "세 장의 첫 화면, 진료 분야 · 진료 철학 · 치료 사례 · 치과 정보 탭 · 다국어 상담 안내로 이어지는 메인에 치과 소개, 의료진, 진료안내, 심미 레진, 고난도 재치료, 수면치료, 일반진료, 아티클 · 공지 · 사례 · 회원 · 약관 · 검색까지 24쪽이 있는 치과 홈페이지입니다.",
+    features: [
+      "세 장이 자동으로 바뀌는 첫 화면 · 화면을 덮는 전체 메뉴 · 빠른 메뉴",
+      "심미 레진 · 고난도 재치료 · 수면치료 · 일반진료를 긴 설명형 화면으로 구성",
+      "교육용 치아 모형 사례 넘김 · 전문 지식/알아두기 탭 · 치과 아티클 목록과 상세",
+      "의료진 약력 · 진료 시간과 약도 · 공지 · 보호된 사례 · 회원 · 약관 · 통합 검색",
+    ],
+    idealFor: "진료 과정을 자세히 설명하고 싶은 치과, 심미 레진과 재치료를 중심으로 운영하는 치과, 게시판과 회원 안내까지 갖춘 홈페이지가 필요한 치과",
+    image: "/thumbs/dental-h.jpg",
+    liveUrl: "/areumgyeol/",
+    industryKey: "dental",
+    premiumLabel: "치과 · 정밀진료",
+    designCode: "DENP-1002",
+    premium: true,
+  },
+  {
     slug: "restaurant-o-template",
     industry: "커피 프랜차이즈 본사 홈페이지",
     title: "커피 프랜차이즈 본사 홈페이지 (프리미엄 디자인 D)",
