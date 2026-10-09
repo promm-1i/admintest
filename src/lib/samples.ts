@@ -1727,6 +1727,23 @@ export const SAMPLES: Sample[] = [
     designCode: "REAB-1006",
   },
   {
+    slug: "rentcar-h-template",
+    industry: "수입차 구독 홈페이지",
+    title: "수입차 구독 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 렌터카 · 수입차 구독 · 차량 큐레이션",
+    purpose:
+      "월 단위 수입차 구독을 안내하는 홈페이지입니다. 넓은 배너와 네 칸 바로가기로 시작해 브랜드별 차량 목록, 입고 예정 차량, 차량 상세의 구독 기간 선택 · 상품 비교 · 이용 절차 · FAQ로 이어집니다. 고객센터와 1:1 문의, 공지, 로그인 · 회원가입, 약관 화면까지 한 흐름으로 구성했습니다.",
+    features: ["브랜드별 차량 목록 · 정렬 이동", "입고 예정 차량 큐레이션", "구독 기간 선택 · 상품 비교 · 이용 절차", "FAQ · 1:1 문의 · 로그인/회원가입 · 약관"],
+    idealFor: "수입차 구독 업체, 장기 렌터카·리스 상담사, 프리미엄 중고차 업체, 차량 큐레이션 서비스",
+    image: "/thumbs/rentcar-h.jpg",
+    liveUrl: "/carcena/",
+    industryKey: "rentcar",
+    premiumLabel: "수입차 구독",
+    designCode: "RENP-1003",
+    premium: true,
+  },
+  {
     slug: "rentcar-g-template",
     industry: "렌터카 · 장기 · 법인 홈페이지",
     title: "종합 렌터카 홈페이지 (프리미엄 디자인 B)",
