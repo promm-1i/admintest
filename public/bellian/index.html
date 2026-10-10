@@ -262,8 +262,8 @@
 </div>
 </header>
 <div class="bl-ar-kv">
-<ul class="bl-ls bl-sl2">
-<li class="bl-kv bl-kv-sl-01">
+<ul class="bl-ls bl-sl2" role="presentation">
+<li class="bl-kv bl-kv-sl-01" role="presentation">
 <div class="bl-kv-ct-bxx">
 <div class="bl-kv-ct">
 <h2><strong>균형있고 볼륨감있는 얼굴</strong>과</h2>
@@ -273,18 +273,18 @@
 </div>
 </div>
 </li>
-<li class="bl-kv bl-kv-sl-02">
+<li class="bl-kv bl-kv-sl-02" role="presentation">
 <div class="bl-kv-ct-bxx">
 <div class="bl-kv-ct">
 <h2><strong>부담 없이 꾸준히 관리하세요</strong></h2>
 <h2><strong>벨리안은 차분히 </strong>관리합니다</h2>
 <span class="bl-kv-sbtx"> 이마꺼짐, 광대, 볼꺼짐, 사각턱, 주걱턱, 돌출입, 다크서클, 눈밑주름 등<br/>
-<strong>무리 없이 이어지는 관리 과정</strong>을 느낄 수 있습니다. </span>
+<strong>비수술 관리로 차분히 달라지는 얼굴선</strong>을 느낄 수 있습니다. </span>
 <a class="bl-bt-mr" href="facial-1.html">자세히보기</a>
 </div>
 </div>
 </li>
-<li class="bl-kv bl-kv-sl-03">
+<li class="bl-kv bl-kv-sl-03" role="presentation">
 <div class="bl-kv-ct-bxx">
 <div class="bl-kv-ct">
 <h2><strong>단정한 인상</strong>과</h2>
@@ -417,7 +417,7 @@
 <div class="bl-cmmx-ct-smx">
 <span class="bl-cmmx-tx"> 1:1 <span class="bl-fntx-26">문의</span>
 </span>
-<span class="bl-cmmx-sbtx-smx"> 선택한 지점에서 문의 내용을 확인한 뒤 안내드립니다. </span>
+<span class="bl-cmmx-sbtx-smx"> 선택하신 지점에서 문의 내용을 확인하고 친절하게 안내드립니다. </span>
 <a class="bl-vwx-mr" href="qna.html">view more</a>
 </div>
 </div>
@@ -464,7 +464,7 @@
 <strong>통화량이 많을 때는 1:1문의를 이용</strong>해주세요. </span>
 <ul class="bl-scdx-ar">
 <li>
-<span class="bl-scdx-tt"> 평 일 </span>
+<span class="bl-scdx-tt">평    일</span>
 <span class="bl-scdx-ct"> 10:00 ~ 22:00 </span>
 </li>
 <li>
@@ -888,7 +888,7 @@ function responsive(){
 			});
 		} else if (param.attr("class") == "mob"){ 
 			$('#bl-i-hd .bl-gn li').off('mouseenter mouseleave');
-			$('#bl-i-hd.bl-mbx .bl-gn > li').each(function(){
+			$('#bl-i-hd.mob .bl-gn > li').each(function(){
 				var gnbLink = $(this).children('a');
 				if($(this).children('ul').length > 0){
 					gnbLink.on('click',function(e){
@@ -1071,6 +1071,22 @@ function smoothScroll_scrolling(event){
 		overwrite: 5
 	});		
 }
+;(function(){
+  var hero = document.querySelector('.bl-ar-kv .bl-ls');
+  if (!hero) return;
+  function syncHeroFocus(){
+    hero.querySelectorAll('.slick-slide[aria-hidden="true"]').forEach(function(slide){
+      slide.setAttribute('tabindex', '-1');
+      slide.querySelectorAll('a,button').forEach(function(el){el.setAttribute('tabindex', '-1');});
+    });
+    hero.querySelectorAll('.slick-slide[aria-hidden="false"]').forEach(function(slide){
+      slide.setAttribute('tabindex', '0');
+      slide.querySelectorAll('a').forEach(function(el){el.setAttribute('tabindex', '0');});
+    });
+  }
+  new MutationObserver(syncHeroFocus).observe(hero, {subtree:true, attributes:true, attributeFilter:['aria-hidden']});
+  window.setTimeout(syncHeroFocus, 800);
+})();
 $(function(){
   $('form').on('submit', function(e){
     e.preventDefault();
