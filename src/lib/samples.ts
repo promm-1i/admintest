@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "vet-g-template",
+    industry: "동물병원 · 동물의료센터 홈페이지",
+    title: "동물병원 · 동물의료센터 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 24시 동물병원 · 동물의료센터 · 19페이지",
+    purpose:
+      "진료비 안내와 행사 팝업, 인트로 뒤로 자동 전환되는 첫 화면과 특화진료 9개 카드, 진료 원칙 · 오시는 길이 이어지는 메인에 의료진 · 조직도 · 원내 안내 · 특화진료 10쪽 · 일반진료 4쪽 · 건강검진 · 오시는 길까지 19쪽이 있는 24시간 동물의료센터 홈페이지입니다.",
+    features: [
+      "인트로 · 행사 팝업 2장 · 진료비 안내 표 · 자동으로 한 장씩 넘어가는 첫 화면",
+      "의료진 10명 — 사진을 누르면 학력 · 경력 · 학술활동 약력 창",
+      "원내 안내 8개 탭 — 대기실부터 MRI·CT센터, 재활치료실, 입원실, 수술실까지 사진 넘김",
+      "특화진료 9개 탭과 상세 9쪽 · 외과 · 내과 · 영상의학과 · 건강검진 · 오시는 길",
+    ],
+    idealFor: "야간과 응급 진료를 함께 운영하는 24시간 동물병원, 정형외과 · 신경외과 · 영상진단 · 재활을 나눠 진료하는 동물의료센터, 원내 시설과 검진 프로그램을 자세히 보여 줄 동물병원",
+    image: "/thumbs/vet-g.jpg",
+    liveUrl: "/onyuldam/",
+    industryKey: "vet",
+    premiumLabel: "동물병원 · 동물의료센터",
+    designCode: "VETP-1002",
+    premium: true,
+  },
+  {
     slug: "dental-h-template",
     industry: "치과 홈페이지",
     title: "치과 홈페이지 (프리미엄 디자인 B)",
