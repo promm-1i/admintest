@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-m-template",
+    industry: "피부과 · 리프팅 홈페이지",
+    title: "피부과 · 리프팅 홈페이지 (프리미엄 디자인 K)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 피부과 · 리프팅 · 피부 톤 · 보습 · 예약 · 라운지 · 45페이지",
+    purpose:
+      "큰 사진과 바로 예약 상자, 피부 고민별 진료 항목, 의료진 · 진료 원칙 · 활동 카드로 이어지는 메인에 리프팅 9쪽, 피부 톤 · 보습 · 볼륨 관리 7쪽, 진료 항목 · 예약 · 의료진 · 진료 안내, 활동 · 공지 · 후기 게시판, 회원 · 약관 · 검색, 별도 라운지까지 45쪽이 있는 피부과 홈페이지입니다.",
+    features: [
+      "사진 넘김 첫 화면 · 바로 예약 입력 상자 · 첫 화면 알림창",
+      "리프팅과 피부 컨디션 관리 카드 · 의료진 넘김 · 네 단계 진료 원칙",
+      "장비 상표를 일반 명칭으로 정리한 진료 상세 16쪽 · 비급여 항목 표",
+      "활동 · 공지 · 후기 게시판 · 회원 · 검색 · 별도 상담 라운지 8쪽",
+    ],
+    idealFor: "리프팅과 피부 컨디션 진료를 함께 안내하는 피부과, 의료진과 상담 과정을 앞세우는 의원, 별도 상담 라운지를 운영하는 곳",
+    image: "/thumbs/clinic-m.jpg",
+    liveUrl: "/onyeon/",
+    industryKey: "hospital",
+    premiumLabel: "피부과 · 리프팅",
+    designCode: "HOSP-1011",
+    premium: true,
+  },
+  {
     slug: "restaurant-p-template",
     industry: "한식 다이닝 · 한옥 웨딩 홈페이지",
     title: "한식 다이닝 · 한옥 웨딩 홈페이지 (프리미엄 디자인 E)",
