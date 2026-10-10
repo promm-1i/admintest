@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "restaurant-p-template",
+    industry: "한식 다이닝 · 한옥 웨딩 홈페이지",
+    title: "한식 다이닝 · 한옥 웨딩 홈페이지 (프리미엄 디자인 E)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 한식 다이닝 · 한옥 · 웨딩 · 연회 · 39페이지",
+    purpose:
+      "한옥 전경이 천천히 바뀌는 첫 화면에서 공간 · 웨딩 · 다이닝으로 이어지는 복합 외식 공간 홈페이지입니다. 여섯 채의 한옥과 정자 · 마당, 한식당 홀과 독립실, 점심 반상 · 코스 · 단품 차림, 야외 웨딩 · 한옥 웨딩 · 전통 혼례, 연회와 문화 프로그램을 각각 안내하고 소식 · 갤러리 · 예약 · 문의 · 오시는 길까지 39쪽으로 구성했습니다.",
+    features: [
+      "자동 전환 첫 화면 · 화면을 덮는 전체 메뉴 · 행사 알림",
+      "한옥과 마당 9쪽 · 공간별 사진 넘김과 시설 정보",
+      "다이닝 9쪽 · 웨딩과 연회 6쪽 · 문화 프로그램 3쪽",
+      "소식 · 갤러리 · FAQ · 예약 · 문의 양식 · 정적 약도",
+    ],
+    idealFor: "한정식집, 한옥 다이닝, 야외 웨딩과 연회장을 함께 운영하는 복합 외식 공간",
+    image: "/thumbs/restaurant-p.jpg",
+    liveUrl: "/damongak/",
+    industryKey: "restaurant",
+    premiumLabel: "한식 다이닝 · 한옥 웨딩",
+    designCode: "RESP-1005",
+    premium: true,
+  },
+  {
     slug: "vet-g-template",
     industry: "동물병원 · 동물의료센터 홈페이지",
     title: "동물병원 · 동물의료센터 홈페이지 (프리미엄 디자인 B)",

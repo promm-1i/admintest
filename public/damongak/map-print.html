@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>약도 인쇄 | 담온각</title>
+<meta name="description" content="담온각은 한옥과 정원에서 한식 다이닝, 웨딩, 연회와 전통문화 프로그램을 운영하는 가상 프리미엄 공간입니다.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="약도 인쇄 | 담온각">
+<meta property="og:description" content="담온각은 한옥과 정원에서 한식 다이닝, 웨딩, 연회와 전통문화 프로그램을 운영하는 가상 프리미엄 공간입니다.">
+<meta property="og:image" content="./og.jpg">
+<meta name="format-detection" content="telephone=no">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Gothic+A1:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@300;400;500;600&family=Raleway:wght@300;400;500;600&family=Song+Myung&display=swap">
+<link rel="stylesheet" href="./assets/site.css">
+<link rel="stylesheet" href="./assets/damongak.css">
+<link rel="canonical" href="https://example.com/damongak/map-print.html"><meta name="theme-color" content="#3d3329">
+<script>document.documentElement.classList.remove('no-js');document.documentElement.classList.add('js')</script>
+</head>
+<body class="dg-page-map-print" tabindex="0">
+
+<div style="text-align:center">
+<img alt="" src="./assets/img/map.svg"/>
+</div>
+
+<script>
+
+(function(){
+  const q=(s,r=document)=>r.querySelector(s), qa=(s,r=document)=>[...r.querySelectorAll(s)];
+  const body=document.body;
+  const menuButtons=qa('[data-act="menu"]');
+  const openMenu=(on)=>{body.classList.toggle('dg-menu-open',on);menuButtons.forEach(b=>b.setAttribute('aria-expanded',String(on)));};
+  qa('[data-act="menu"]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openMenu(!body.classList.contains('dg-menu-open'));}));
+  qa('[data-act="menu-close"]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();openMenu(false);}));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')openMenu(false);});
+  body.classList.add('dg-menu-ready');
+  qa('[data-act="popup-close"]').forEach(b=>{const close=()=>{const p=b.closest('article');if(p)p.hidden=true;};b.addEventListener('click',close);b.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')close();});});
+  qa('[data-act="faq"]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const li=b.closest('li');const on=!li.classList.contains('on');li.classList.toggle('on',on);b.setAttribute('aria-expanded',String(on));}));
+  qa('[data-act="top"]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();scrollTo({top:0,behavior:'smooth'});}));
+  qa('form[data-act="form"]').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();let bad=false;qa('[required]',f).forEach(x=>{if(!String(x.value||'').trim()){bad=true;x.setAttribute('aria-invalid','true');}else{x.removeAttribute('aria-invalid');}});let m=q('.dg-form-message',f);if(!m){m=document.createElement('p');m.className='dg-form-message';m.setAttribute('role','status');f.appendChild(m);}m.textContent=bad?'필수 입력 항목을 확인해 주세요.':'예시 화면입니다. 실제 접수는 대표전화로 안내해 드립니다.';}));
+  const hero=q('[data-dg-slider="hero"]');
+  if(hero){const items=qa('.owl-item:not(.cloned)',hero);if(items.length>1){hero.classList.add('dg-simple-slider');let i=Math.min(1,items.length-1),timer;const show=n=>{i=(n+items.length)%items.length;items.forEach((x,k)=>x.classList.toggle('dg-slide-active',k===i));const c=q('[data-dg-counter]',hero);if(c)c.textContent=(i+1)+' / '+items.length;};const start=()=>{clearInterval(timer);timer=setInterval(()=>show(i+1),4000);};show(i);start();qa('[data-act="slide-prev"]',hero).forEach(b=>b.addEventListener('click',()=>{show(i-1);start();}));qa('[data-act="slide-next"]',hero).forEach(b=>b.addEventListener('click',()=>{show(i+1);start();}));}}
+  const motion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!motion&&'IntersectionObserver'in window){const show=e=>{e.classList.remove('dg-await');e.classList.add('aos-animate');};const reveal=()=>qa('[data-aos].dg-await').forEach(e=>{if(e.getBoundingClientRect().top<innerHeight+80)show(e);});const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){show(e.target);obs.unobserve(e.target);}}),{rootMargin:'50px 0px',threshold:.05});qa('[data-aos]').forEach(e=>{if(e.getBoundingClientRect().top>innerHeight){e.classList.remove('aos-animate');e.classList.add('dg-await');obs.observe(e);}else show(e);});addEventListener('scroll',reveal,{passive:true});qa('*').filter(e=>/(auto|scroll)/.test(getComputedStyle(e).overflowY)).forEach(e=>e.addEventListener('scroll',reveal,{passive:true}));let ticks=0;const revealTimer=setInterval(()=>{reveal();if(++ticks>200||!q('[data-aos].dg-await'))clearInterval(revealTimer);},100);reveal();}
+})();
+
+</script>
+</body>
+</html>
