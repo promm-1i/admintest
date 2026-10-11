@@ -1,31 +1,152 @@
 
+@font-face{font-family:'Spoqa Han Sans Neo';src:url('fonts/spoqa-han-sans-neo-300.woff2') format('woff2');font-style:normal;font-weight:300;font-display:swap}
+@font-face{font-family:'Spoqa Han Sans Neo';src:url('fonts/spoqa-han-sans-neo-400.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'Spoqa Han Sans Neo';src:url('fonts/spoqa-han-sans-neo-500.woff2') format('woff2');font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:'Spoqa Han Sans Neo';src:url('fonts/spoqa-han-sans-neo-700.woff2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:'NanumSquare';src:url('fonts/nanum-square-300.woff2') format('woff2');font-style:normal;font-weight:300;font-display:swap}
+@font-face{font-family:'NanumSquare';src:url('fonts/nanum-square-400.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'NanumSquare';src:url('fonts/nanum-square-700.woff2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
+@font-face{font-family:'NanumSquare';src:url('fonts/nanum-square-800.woff2') format('woff2');font-style:normal;font-weight:800 900;font-display:swap}
+@font-face{font-family:'Montserrat';src:url('fonts/montserrat-400-800.woff2') format('woff2');font-style:normal;font-weight:400 800;font-display:swap}
 :root{--lm-orange:#c93a18;--lm-ink:#222;--lm-muted:#666;--lm-cream:#f7f4ee}
-html{scroll-behavior:smooth}body{font-family:Pretendard,sans-serif;color:var(--lm-ink);overflow-x:hidden}
+html{scroll-behavior:smooth}body{font-family:'Spoqa Han Sans Neo',sans-serif;color:var(--lm-ink)}
 .lm-skip{position:fixed;top:-70px;left:12px;z-index:10020;background:#111;color:#fff;padding:12px 18px}.lm-skip:focus{top:12px}
-.lm-main-anchor{display:block;position:relative;width:0;height:0;overflow:hidden}
-html:has(.lm-page-index),body:has(.lm-page-index){height:100%;overflow:hidden}.lm-page-index{height:100%;overflow:hidden}.lm-page-index #lm-i-ft{display:none!important}
-.lm-page-franchise-guide #lm-i-ct{padding-bottom:680px}.lm-page-franchise-guide-n #lm-i-ct{padding-bottom:1040px}
+.lm-main-anchor{display:block;position:absolute;width:0;height:0;overflow:hidden}
+html:has(#lm-i-hm-pp-wr.active),html:has(body.lm-popup-open){height:100%;overflow:hidden}
 body.lm-menu-open{overflow:hidden}.lm-toast{position:fixed;left:50%;bottom:28px;z-index:10020;transform:translateX(-50%);background:#222;color:#fff;padding:13px 20px}
-.lm-dialog{position:fixed;inset:0;z-index:10010;display:grid;place-items:center;background:rgba(0,0,0,.62);padding:20px}.lm-dialog[hidden]{display:none}.lm-dialog-box{position:relative;width:min(620px,100%);max-height:82vh;overflow:auto;background:#fff;padding:34px}.lm-dialog-close{position:absolute;right:12px;top:12px;border:0;background:#fff;font-size:28px}
+.lm-dialog{position:fixed;inset:0;z-index:10010;display:grid;place-items:center;background:rgba(0,0,0,.62);padding:20px}.lm-dialog[hidden]{display:none}.lm-dialog-box{position:relative;width:min(280px,100%);max-height:82vh;overflow:auto;background:transparent;padding:0}.lm-dialog-content{background:#fff;padding:28px 20px}.lm-dialog-close{position:static;display:block;width:100%;height:50px;border:0;background:#222;color:#fff;font-size:14px}.lm-hm-pp-sl[hidden],.lm-hm-pp-cd[hidden],#lm-i-hm-pp-wr[hidden]{display:none!important}
 img[src$="map.svg"]{width:100%;height:100%;min-height:420px;object-fit:cover}input,select,textarea{color:#666!important}input::placeholder,textarea::placeholder{color:#6a6a6a!important;opacity:1}
 #lm-i-ft .lm-plyx .lm-bt2.lm-qrx img{height:auto!important;aspect-ratio:1/1}
 #lm-i-ct.lm-sto .lm-sec.lm-lg-tp .lm-pic-wr img{height:auto!important;aspect-ratio:682/530}
 .swiper-container{overflow:hidden}.swiper-wrapper{display:flex}.swiper-slide{flex:0 0 100%;display:none}.swiper-slide.swiper-slide-active{display:block}
+#lm-i-tbl-scr .swiper-slide{display:block!important}
 .lm-page-menu #lm-i-tb-fltx,.lm-page-menu-n #lm-i-tb-fltx{overflow-x:auto!important;overflow-y:hidden!important;scrollbar-width:none;touch-action:pan-x}
 .lm-page-menu #lm-i-tb-fltx::-webkit-scrollbar,.lm-page-menu-n #lm-i-tb-fltx::-webkit-scrollbar{display:none}
 .lm-page-menu #lm-i-tb-fltx .swiper-wrapper,.lm-page-menu-n #lm-i-tb-fltx .swiper-wrapper{width:max-content!important;transform:none!important;transition:none!important}
 .lm-page-menu #lm-i-tb-fltx .swiper-slide,.lm-page-menu-n #lm-i-tb-fltx .swiper-slide{display:list-item!important;flex:0 0 auto!important;width:auto!important}
-.lm-page-menu #lm-i-ct .lm-dtx-ls>li:nth-child(n+9),.lm-page-menu-n #lm-i-ct .lm-dtx-ls>li:nth-child(n+9){display:none!important}
-.lm-page-stories #lm-i-ct .lm-dtx-ls>li:nth-child(n+4){display:none!important}
+.lm-page-menu #lm-i-ct .lm-dtx-ls .lm-pic-wr,.lm-page-menu-n #lm-i-ct .lm-dtx-ls .lm-pic-wr{aspect-ratio:480/472;overflow:hidden}
+.lm-page-menu #lm-i-ct .lm-dtx-ls .lm-pic,.lm-page-menu-n #lm-i-ct .lm-dtx-ls .lm-pic{width:100%;height:100%!important;object-fit:cover}
+.lm-page-brand #lm-i-ct .lm-br-sec-pic,.lm-page-story-lowmel-n #lm-i-ct .lm-sto-sec-pic{height:auto!important}
+.lm-page-story-brand #lm-i-ct img{height:auto!important}
+.lm-page-story-brand #lm-i-ct img[src$="brandintro-03.png"],.lm-page-story-brand #lm-i-ct img[src$="brandintro-05.png"]{width:auto!important;height:47px!important}
+.lm-page-app #lm-i-ct img{height:auto!important}
+.lm-page-app #lm-i-ct img.lm-cd{aspect-ratio:424/253;object-fit:cover}
+.lm-page-app #lm-i-ct img[src$="appintro-11.jpg"]{width:460px!important;max-width:none}
+.lm-page-stories #lm-i-ct img.lm-pic{height:auto!important}
+.lm-page-stores #lm-i-ct{margin-bottom:-24px}
+.lm-page-franchise #lm-i-ct{margin-bottom:-4px}
+.lm-page-franchise-faq #lm-i-ct::after{content:"";display:block;height:40px}
+.lm-page-privacy #lm-i-ct::after{content:"";display:block;height:164px}
+.lm-page-terms #lm-i-ct::after{content:"";display:block;height:217px}
+@media(min-width:1201px) and (max-width:1360px){
+ .lm-page-story-brand #lm-i-ct::after{content:"";display:block;height:9px}
+ .lm-page-menu #lm-i-ct::after,.lm-page-menu-n #lm-i-ct::after{content:"";display:block;height:29px}
+ .lm-page-privacy #lm-i-ct::after{height:79px}
+ .lm-page-terms #lm-i-ct::after{height:53px}
+}
+@media(min-width:901px) and (max-width:1100px){
+ .lm-page-story-brand #lm-i-ct::after{content:"";display:block;height:22px}
+ .lm-page-company #lm-i-ct::after{content:"";display:block;height:26px}
+ .lm-page-news-2 #lm-i-ct::after{content:"";display:block;height:34px}
+ .lm-page-franchise #lm-i-ct{margin-bottom:15px}
+ .lm-page-franchise-guide-n #lm-i-ct{margin-bottom:-73px}
+ .lm-page-franchise-guide #lm-i-ct::after{content:"";display:block;height:47px}
+ .lm-page-privacy #lm-i-ct::after{height:187px}
+ .lm-page-terms #lm-i-ct::after{height:161px}
+ .lm-page-video-policy #lm-i-ct::after{content:"";display:block;height:117px}
+}
+@media(min-width:751px) and (max-width:900px){
+ .lm-page-story-brand #lm-i-ct::after{content:"";display:block;height:22px}
+ .lm-page-company #lm-i-ct::after{content:"";display:block;height:26px}
+ .lm-page-news-2 #lm-i-ct::after{content:"";display:block;height:54px}
+ .lm-page-franchise-guide-n #lm-i-ct{margin-bottom:-337px}
+ .lm-page-franchise-guide #lm-i-ct{margin-bottom:-70px}
+ .lm-page-franchise-contact #lm-i-ct{margin-bottom:-45px}
+ .lm-page-privacy #lm-i-ct::after{height:133px}
+ .lm-page-terms #lm-i-ct::after{height:53px}
+ .lm-page-video-policy #lm-i-ct::after{content:"";display:block;height:52px}
+}
 #lm-i-hd .lm-lg{display:block;width:120px!important;height:auto!important}
+#lm-i-hd .lm-lg{position:relative;top:-3px}
+.lm-ic.lm-sr{background-image:url(img/icon-search.svg)!important}
+.lm-ic.lm-pplx{background-image:url(img/icon-apple.svg)!important}.lm-ic.lm-gglx{background-image:url(img/icon-play.svg)!important}
+.lm-ic.lm-rrx{background-image:url(img/icon-arrow.svg)!important}.lm-ic.lm-rrx.lm-rngx{background-image:url(img/icon-arrow-orange.svg)!important}.lm-ic.lm-rrx.lm-whtx{background-image:url(img/icon-arrow-white.svg)!important}
+.lm-ic.lm-rrx-shrx{background-image:url(img/icon-arrow-short.svg)!important}.lm-ic.lm-rrx-shrx.lm-whtx{filter:invert(1)}
+.lm-ic.lm-plsx{background-image:url(img/icon-plus.svg)!important}.lm-ic.lm-sptx{background-image:url(img/icon-location.svg)!important}.lm-ic.lm-tmx{background-image:url(img/icon-time.svg)!important}
+.lm-ic.lm-ph{background-image:url(img/icon-phone.svg)!important}.lm-ic.lm-prkx{background-image:url(img/icon-car.svg)!important}.lm-ic.lm-wfx{background-image:url(img/icon-wifi.svg)!important}.lm-ic.lm-kskx{background-image:url(img/icon-kiosk.svg)!important}
+.lm-ic.lm-pldx{background-image:url(img/icon-upload.svg)!important}.lm-ic.lm-dwnx{background-image:url(img/icon-download.svg)!important}.lm-ic.lm-chcx{background-image:url(img/icon-check.svg)!important}.lm-ic.lm-cls{background-image:url(img/icon-close.svg)!important}.lm-ic.lm-slcx-rrx{background-image:url(img/icon-chevron.svg)!important}
+.lm-pgnx>a .lm-ic{background-image:url(img/icon-pagination.svg)!important}.lm-jsx-ccrx-swtx .lm-ic{background-image:url(img/icon-plus.svg)!important}.active>.lm-jsx-ccrx-swtx .lm-ic{background-image:url(img/icon-minus.svg)!important}
+#lm-i-hd nav>ul>li>a:not([data-empty-child="true"])::after,#lm-i-ft>.lm-mxx-wr>ul strong a.lm-bt2.lm-mr .lm-ic{background-image:url(img/icon-chevron.svg)!important}
+#lm-i-ft>.lm-mxx-wr.lm-flxx-bthx-tp .lm-slcx,.lm-brdx .lm-slcx{background-image:url(img/icon-chevron.svg)!important}.swiper-button-next,.swiper-button-prev{background-image:url(img/icon-arrow.svg)!important}
+#lm-i-ct.lm-glbx .lm-mp-wr .lm-sptx strong{background-image:url(img/icon-location.svg)!important}
+#lm-i-ct.lm-frnx .lm-sec.lm-lgsx-sysx .lm-ls-wr .lm-flxx-ls li:nth-of-type(1) .lm-ic{background-image:url(img/logistics-01.svg)!important}
+#lm-i-ct.lm-frnx .lm-sec.lm-lgsx-sysx .lm-ls-wr .lm-flxx-ls li:nth-of-type(2) .lm-ic{background-image:url(img/logistics-02.svg)!important}
+#lm-i-ct.lm-frnx .lm-sec.lm-lgsx-sysx .lm-ls-wr .lm-flxx-ls li:nth-of-type(3) .lm-ic{background-image:url(img/logistics-03.svg)!important}
+#lm-i-ct.lm-frnx .lm-sec.lm-lgsx-sysx .lm-ls-wr .lm-flxx-ls li:nth-of-type(4) .lm-ic{background-image:url(img/logistics-04.svg)!important}
 .lm-quick-menu{position:fixed;right:24px;top:50%;transform:translateY(50%);z-index:999;width:130px;height:252px;padding:13px 15px 11px;border-radius:8px;background:#ddd;box-sizing:border-box;color:#fff;text-align:center}
 .lm-quick-menu a,.lm-quick-menu button{box-sizing:border-box;width:100%;border:0;border-radius:7px;background:#b33212;color:#fff;text-decoration:none}
 .lm-quick-icon{height:45px;position:relative}.lm-quick-icon:before{content:'';position:absolute;left:33px;top:4px;width:31px;height:25px;border:5px solid #fff;border-bottom:0;border-radius:19px 19px 0 0}.lm-quick-icon:after{content:'';position:absolute;left:29px;top:21px;width:8px;height:17px;border-radius:5px;background:#fff;box-shadow:32px 0 0 #fff}.lm-quick-icon span{position:absolute;left:48px;top:35px;width:23px;height:5px;border-radius:4px;background:#fff}
-.lm-quick-consult{display:flex;flex-direction:column;justify-content:center;height:59px;line-height:1.18}.lm-quick-consult span{font-size:12px;font-weight:700}.lm-quick-consult strong{margin-top:4px;font:700 15px/1 Montserrat,Pretendard,sans-serif;letter-spacing:-.4px}
-.lm-quick-shop{display:flex;height:57px;margin-top:7px;align-items:center;justify-content:center;gap:10px}.lm-quick-shop strong{font:800 19px/1 Montserrat,sans-serif}.lm-quick-shop span{font-size:23px;font-weight:300}
+.lm-quick-consult{display:flex;flex-direction:column;justify-content:center;height:59px;line-height:1.18}.lm-quick-consult span{font-size:12px;font-weight:700}.lm-quick-consult strong{margin-top:4px;font:700 15px/1 'Spoqa Han Sans Neo',sans-serif;letter-spacing:-.4px}
+.lm-quick-shop{display:flex;height:57px;margin-top:7px;align-items:center;justify-content:center;gap:10px}.lm-quick-shop strong::before{content:'SHOP';font:700 19px/1 'Spoqa Han Sans Neo',sans-serif}.lm-quick-shop span{font-size:23px;font-weight:300}
 .lm-quick-top{display:flex!important;height:57px!important;min-height:0!important;margin-top:7px;align-items:center;justify-content:center;flex-direction:column;gap:0;cursor:pointer}.lm-quick-top i{display:block;width:14px;height:14px;border-left:3px solid #fff;border-top:3px solid #fff;transform:rotate(45deg);margin-bottom:-7px}
 .lm-open .lm-jsx-ccrx-ct{display:block}.lm-open .lm-jsx-ccrx-swtx .lm-ic{transform:rotate(0deg)}#lm-i-ft li.lm-open strong+ul{display:block}#lm-i-ft li.lm-open strong{color:var(--orangey-red)}
+.lm-panel-enter{animation:lm-panel-enter 300ms ease both}@keyframes lm-panel-enter{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.lm-fqx-it.open .lm-fqx-nswx{display:block;animation:lm-faq-open 300ms ease both}@keyframes lm-faq-open{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 .lm-strx3,.lm-emx,.lm-mex,.lm-cpyx,.lm-plcx,.lm-bdrx-rngx,.lm-bdgx,.lm-opx-40,.lm-tggx-bt.active,td strong,.lm-ddx,.lm-tx.en{color:#202020!important;opacity:1!important}.lm-crrx>a,.active>a,.lm-stx-sec-ds>a{color:#661d0b!important}#lm-i-bt-sbmx,.lm-bdrx[aria-label="SHOP"]{background:#85260f!important;color:#fff!important}
 @media(max-width:960px){.lm-dialog-box{padding:28px 20px}img[src$="map.svg"]{min-height:300px}}
-@media(max-width:750px){button,a,input,select,textarea{min-height:44px}.lm-page-menu #lm-i-ct .lm-dtx-ls>li:nth-child(n+6),.lm-page-menu-n #lm-i-ct .lm-dtx-ls>li:nth-child(n+6){display:none!important}.lm-page-stories #lm-i-ct .lm-dtx-ls>li:nth-child(4){display:list-item!important}.lm-page-franchise-guide #lm-i-ct{padding-bottom:638px}.lm-page-franchise-guide-n #lm-i-ct{padding-bottom:1001px}.lm-quick-menu{right:12px;width:95px;height:184px;padding:8px 10px 7px;border-radius:6px}.lm-quick-icon{height:34px}.lm-quick-icon:before{left:22px;top:3px;width:25px;height:19px;border-width:4px}.lm-quick-icon:after{left:19px;top:16px;width:7px;height:13px;box-shadow:27px 0 0 #fff}.lm-quick-icon span{left:35px;top:27px;width:18px;height:4px}.lm-quick-consult{height:44px}.lm-quick-consult span{font-size:9px}.lm-quick-consult strong{font-size:11px;margin-top:3px}.lm-quick-shop{height:40px;margin-top:5px;gap:6px}.lm-quick-shop strong{font-size:14px}.lm-quick-shop span{font-size:17px}.lm-quick-top{height:40px!important;margin-top:5px}.lm-quick-top i{width:10px;height:10px;border-width:2px;margin-bottom:-5px}}
+@media(max-width:750px){.lm-page-index .lm-hm-pp-cd{max-width:calc(100vw - 40px)}.lm-page-index .lm-hm-pp-trcx{gap:12px!important}.lm-page-stories #lm-i-ct .lm-dtx-ls>li{min-height:469px}.lm-page-story-brand #lm-i-ct img[src$="brandintro-03.png"],.lm-page-story-brand #lm-i-ct img[src$="brandintro-05.png"]{height:40px!important}.lm-page-app #lm-i-ct img[src$="appintro-11.jpg"]{width:308px!important}.lm-page-stores #lm-i-ct{margin-bottom:0}.lm-page-stores #lm-i-ct::after{content:"";display:block;height:12px}.lm-page-news-2 #lm-i-ct::after{content:"";display:block;height:192px}.lm-page-notice-2 #lm-i-ct::after{content:"";display:block;height:55px}.lm-page-story-1 #lm-i-ct::after{content:"";display:block;height:27px}.lm-page-franchise #lm-i-ct{margin-bottom:-6px}.lm-page-franchise-cost #lm-i-ct::after{content:"";display:block;height:58px}.lm-page-franchise-faq #lm-i-ct::after{height:33px}.lm-page-franchise-inquiry #lm-i-ct::after{content:"";display:block;height:27px}.lm-page-privacy #lm-i-ct::after{height:226px}.lm-page-terms #lm-i-ct::after{height:357px}.lm-page-video-policy #lm-i-ct::after{content:"";display:block;height:22px}.lm-quick-menu{right:12px;width:95px;height:184px;padding:8px 10px 7px;border-radius:6px}.lm-quick-icon{height:34px}.lm-quick-icon:before{left:22px;top:3px;width:25px;height:19px;border-width:4px}.lm-quick-icon:after{left:19px;top:16px;width:7px;height:13px;box-shadow:27px 0 0 #fff}.lm-quick-icon span{left:35px;top:27px;width:18px;height:4px}.lm-quick-consult{height:44px}.lm-quick-consult span{font-size:9px}.lm-quick-consult strong{font-size:11px;margin-top:3px}.lm-quick-shop{height:40px;margin-top:5px;gap:6px}.lm-quick-shop strong{font-size:14px}.lm-quick-shop span{font-size:17px}.lm-quick-top{height:40px!important;margin-top:5px}.lm-quick-top i{width:10px;height:10px;border-width:2px;margin-bottom:-5px}}
+@media(min-width:1361px){
+ .lm-page-company #lm-i-ct{margin-bottom:-27px}
+ .lm-page-news-1 #lm-i-ct,.lm-page-news-2 #lm-i-ct{margin-bottom:-37px}
+ .lm-page-franchise-faq #lm-i-ct{margin-bottom:-8px}
+ .lm-page-privacy #lm-i-ct{margin-bottom:-191px}
+ .lm-page-terms #lm-i-ct{margin-bottom:-379px}
+}
+@media(min-width:1201px) and (max-width:1360px){
+ .lm-page-story-brand #lm-i-ct{margin-bottom:-12px}
+ .lm-page-company #lm-i-ct{margin-bottom:-27px}
+ .lm-page-menu #lm-i-ct,.lm-page-menu-n #lm-i-ct{margin-bottom:-29px}
+ .lm-page-news-2 #lm-i-ct{margin-bottom:-37px}
+ .lm-page-franchise-faq #lm-i-ct{margin-bottom:-8px}
+ .lm-page-privacy #lm-i-ct{margin-bottom:-160px}
+ .lm-page-terms #lm-i-ct{margin-bottom:-107px}
+}
+@media(min-width:901px) and (max-width:1100px){
+ .lm-page-story-brand #lm-i-ct{margin-bottom:-107px}
+ .lm-page-company #lm-i-ct{margin-bottom:-26px}
+ .lm-page-news-1 #lm-i-ct{margin-bottom:-109px}
+ .lm-page-news-2 #lm-i-ct{margin-bottom:-71px}
+ .lm-page-franchise #lm-i-ct{margin-bottom:-3px}
+ .lm-page-franchise-faq #lm-i-ct{margin-bottom:-8px}
+ .lm-page-franchise-guide-n #lm-i-ct{margin-bottom:-96px}
+ .lm-page-franchise-contact #lm-i-ct,.lm-page-contact #lm-i-ct,.lm-page-partner #lm-i-ct,.lm-page-marketing #lm-i-ct{margin-bottom:-23px}
+ .lm-page-privacy #lm-i-ct{margin-bottom:-241px}
+ .lm-page-terms #lm-i-ct{margin-bottom:-350px}
+ .lm-page-video-policy #lm-i-ct{margin-bottom:-144px}
+}
+@media(min-width:751px) and (max-width:900px){
+ .lm-page-story-brand #lm-i-ct{margin-bottom:-26px}
+ .lm-page-company #lm-i-ct{margin-bottom:-80px}
+ .lm-page-news-1 #lm-i-ct{margin-bottom:-28px}
+ .lm-page-news-2 #lm-i-ct{margin-bottom:-27px}
+ .lm-page-franchise-faq #lm-i-ct{margin-bottom:-8px}
+ .lm-page-franchise-guide-n #lm-i-ct{margin-bottom:-360px}
+ .lm-page-franchise-guide #lm-i-ct{margin-bottom:-93px}
+ .lm-page-privacy #lm-i-ct{margin-bottom:-160px}
+ .lm-page-terms #lm-i-ct{margin-bottom:-215px}
+ .lm-page-video-policy #lm-i-ct{margin-bottom:-52px}
+}
+@media(max-width:750px){
+ .lm-page-story-brand #lm-i-ct{margin-bottom:-28px}
+ .lm-page-company #lm-i-ct{margin-bottom:-24px}
+ .lm-page-news-1 #lm-i-ct,.lm-page-news-2 #lm-i-ct{margin-bottom:-55px}
+ .lm-page-notice-2 #lm-i-ct{margin-bottom:-56px}
+ .lm-page-story-1 #lm-i-ct{margin-bottom:-55px}
+ .lm-page-franchise-cost #lm-i-ct{margin-bottom:-58px}
+ .lm-page-franchise-faq #lm-i-ct{margin-bottom:-17px}
+ .lm-page-franchise-inquiry #lm-i-ct{margin-bottom:-26px}
+ .lm-page-privacy #lm-i-ct{margin-bottom:-394px}
+ .lm-page-terms #lm-i-ct{margin-bottom:-693px}
+ .lm-page-video-policy #lm-i-ct{margin-bottom:-64px}
+}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}

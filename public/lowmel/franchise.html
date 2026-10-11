@@ -12,8 +12,6 @@
 <meta content="./og.jpg" property="og:image"/>
 <meta content="telephone=no" name="format-detection"/>
 <link href="./favicon.svg" rel="icon" type="image/svg+xml"/>
-<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/swiper@6.8.4/swiper-bundle.min.css" rel="stylesheet"/>
 <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
 <link href="./assets/site.css" rel="stylesheet"/>
@@ -30,7 +28,7 @@
 <div class="lm-mxx-wr">
 <h1><a aria-label="바로가기" href="index.html"><img alt="LOWMEL" class="lm-lg" src="./assets/img/logo-dark.svg" style="width:120px;"/></a></h1>
 <button aria-expanded="false" aria-label="전체 메뉴 열기" class="lm-bt2 lm-mn-tggx" data-act="menu" title="menu toggle" type="button">
-<svg aria-hidden="true" fill="none" height="20" id="lm-i-hmbx" viewbox="0 0 120 80" width="20" xmlns="http://www.w3.org/2000/svg"><g opacity=".22" stroke="#c96a4f" stroke-width="1.8"><path d="M35 28h36v22c0 12-8 20-18 20s-18-8-18-20V28Z"></path><path d="M71 34h9c13 0 13 18 0 18h-9M30 72h60"></path><path d="M47 22c-4-7 5-9 0-16M61 22c-4-7 5-9 0-16"></path></g></svg>
+<svg aria-hidden="true" height="20" id="lm-i-hmbx" viewbox="0 0 20 20" width="20" xmlns="http://www.w3.org/2000/svg"><path class="lm-rl" d="M0 0h20v1.667H0z"></path><path class="lm-rl" d="M0 0h20v1.667H0z"></path><path class="lm-rl" d="M0 0h20v1.667H0z"></path></svg>
 </button>
 <nav class="lm-nv" id="lm-i-nv">
 <ul style="height:121px;">
@@ -295,7 +293,7 @@
 <aside aria-label="빠른 상담 메뉴" class="lm-quick-menu">
 <div aria-hidden="true" class="lm-quick-icon"><span></span></div>
 <a aria-label="창업 상담 02-000-1399" class="lm-quick-consult" href="tel:02-000-1399"><span>창업상담신청</span><strong>02-000-1399</strong></a>
-<a aria-label="온라인 숍 안내" class="lm-quick-shop" data-act="demo" href="#"><strong>SHOP</strong><span aria-hidden="true">＋</span></a>
+<a aria-label="온라인 숍 안내" class="lm-quick-shop" data-act="demo" href="#"><strong aria-hidden="true"></strong><span aria-hidden="true">＋</span></a>
 <button aria-label="맨 위로" class="lm-quick-top" data-act="top" type="button"><i></i><i></i></button>
 </aside>
 </div>
@@ -306,21 +304,40 @@
 
 (function(){'use strict';
 var qa=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
+document.body.classList.add(innerWidth<=750?'lm-isx-mo':'lm-isx-dskx');
 document.body.insertAdjacentHTML('afterbegin','<a class="lm-skip" href="#main">본문 바로가기</a>');
 function toast(t){var x=document.createElement('div');x.className='lm-toast';x.setAttribute('role','status');x.textContent=t;document.body.appendChild(x);setTimeout(function(){x.remove();},2200);}
 function menu(btn){var on=!document.body.classList.contains('lm-pndx-mox-nv');document.body.classList.toggle('lm-pndx-mox-nv',on);document.body.classList.toggle('lm-menu-open',on);btn.classList.toggle('lm-isx-ctvx',on);btn.setAttribute('aria-expanded',String(on));}
-function dialog(html){var d=document.createElement('div');d.className='lm-dialog';d.setAttribute('role','dialog');d.setAttribute('aria-modal','true');d.innerHTML='<div class="lm-dialog-box"><button class="lm-dialog-close" data-act="close" aria-label="창 닫기">×</button>'+html+'</div>';document.body.appendChild(d);d.querySelector('button').focus();}
+function dialog(html){var d=document.createElement('div');d.className='lm-dialog';d.setAttribute('role','dialog');d.setAttribute('aria-modal','true');d.innerHTML='<div class="lm-dialog-box"><div class="lm-dialog-content">'+html+'</div><button class="lm-dialog-close" data-act="close" aria-label="창 닫기">닫기</button></div>';document.body.appendChild(d);d.querySelector('button').focus();}
+function cookieGet(n){return document.cookie.split(';').map(function(x){return x.trim();}).some(function(x){return x.indexOf(n+'=Y')===0;});}
+function cookieSet(n){document.cookie=n+'=Y; Max-Age=86400; Path=/; SameSite=Lax';}
+function popupCookie(id){return 'lowmel_popup_'+String(id||'').replace(/[^a-z0-9_-]/gi,'');}
+function popupUnlock(wrap){if(!wrap)return;wrap.classList.remove('active');wrap.hidden=true;wrap.style.display='none';document.body.classList.remove('lm-popup-open');}
+function popupDismiss(el,today){var target=(el.getAttribute('data-target')||'').replace(/^#/,'');var card=(target&&document.getElementById(target))||el.closest('.lm-hm-pp-cd');if(!card)return;if(today)cookieSet(popupCookie(card.id));var slide=card.closest('.lm-hm-pp-sl');if(slide)slide.remove();else card.remove();var wrap=document.getElementById('lm-i-hm-pp-wr');if(!wrap||!wrap.querySelector('.lm-hm-pp-sl'))popupUnlock(wrap);}
+var popupWrap=document.getElementById('lm-i-hm-pp-wr');
+if(popupWrap){qa('.lm-hm-pp-cd',popupWrap).forEach(function(card){if(cookieGet(popupCookie(card.id))){var slide=card.closest('.lm-hm-pp-sl');if(slide)slide.remove();else card.remove();}});if(popupWrap.querySelector('.lm-hm-pp-sl')){popupWrap.hidden=false;popupWrap.classList.add('active');document.body.classList.add('lm-popup-open');}else popupUnlock(popupWrap);}
+qa('#lm-i-hd nav>ul>li>a').forEach(function(a){var sub=a.nextElementSibling;if(!sub||sub.tagName!=='UL')return;a.setAttribute('aria-expanded','false');a.addEventListener('click',function(e){if(innerWidth>960||!document.body.classList.contains('lm-menu-open'))return;var li=a.parentElement;if(li.classList.contains('active'))return;e.preventDefault();qa('#lm-i-hd nav>ul>li.active').forEach(function(x){x.classList.remove('active');var z=x.querySelector(':scope>a');if(z)z.setAttribute('aria-expanded','false');});li.classList.add('active');a.setAttribute('aria-expanded','true');});});
+qa('.lm-fqx-qstx').forEach(function(btn){btn.setAttribute('aria-expanded','false');btn.addEventListener('click',function(){var item=btn.closest('.lm-fqx-it'),on=!item.classList.contains('open');qa('.lm-fqx-it.open').forEach(function(x){x.classList.remove('open');var z=x.querySelector('.lm-fqx-qstx');if(z)z.setAttribute('aria-expanded','false');});item.classList.toggle('open',on);btn.setAttribute('aria-expanded',String(on));});});
+qa('.lm-jsx-ccrx-swtx').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('li'),on=!item.classList.contains('active');qa('.lm-ccrx-ls>li.active').forEach(function(x){x.classList.remove('active');var z=x.querySelector(':scope>.lm-jsx-ccrx-swtx');if(z)z.setAttribute('aria-expanded','false');});item.classList.toggle('active',on);btn.setAttribute('aria-expanded',String(on));});});
+qa('[data-act="model-detail"]').forEach(function(btn){btn.addEventListener('click',function(){var summary=document.querySelector('#lm-i-mdlx-smmx'),detail=document.querySelector('#lm-i-mdlx-dtlx');if(!summary||!detail)return;var on=getComputedStyle(detail).display==='none';summary.style.display=on?'none':'grid';detail.style.display=on?'grid':'none';detail.classList.toggle('lm-panel-enter',on);qa('[data-act="model-detail"]').forEach(function(x){x.setAttribute('aria-expanded',String(on));});});});
+qa('[data-act="interior-tab"]').forEach(function(btn,n){btn.addEventListener('click',function(){qa('[data-act="interior-tab"]').forEach(function(x,i){var on=i===n;x.classList.toggle('active',on);x.setAttribute('aria-pressed',String(on));});qa('.lm-ntrx-ct').forEach(function(x,i){var on=i===n;x.classList.toggle('active',on);x.setAttribute('aria-hidden',String(!on));});});});
 document.addEventListener('click',function(e){var el=e.target.closest('[data-act]');if(!el)return;var a=el.dataset.act;
  if(a==='menu'){e.preventDefault();menu(el)}
- else if(a==='toggle'){e.preventDefault();var li=el.closest('li');if(li){var on=!li.classList.contains('lm-open');li.classList.toggle('lm-open',on);el.setAttribute('aria-expanded',String(on));}}
- else if(a==='close'){e.preventDefault();var d=el.closest('.lm-dialog,.lm-hm-pp-cd,.lm-vrlx');if(d){if(d.classList.contains('lm-dialog'))d.remove();else d.hidden=true;}}
+ else if(a==='toggle'){e.preventDefault();var li=el.closest('li');if(li){var on=!li.classList.contains('active');qa('#lm-i-ft>div>ul>li.active').forEach(function(x){x.classList.remove('active');var z=x.querySelector(':scope>strong [data-act="toggle"]');if(z)z.setAttribute('aria-expanded','false');});li.classList.toggle('active',on);el.setAttribute('aria-expanded',String(on));}}
+ else if(a==='popup-close'){e.preventDefault();popupDismiss(el,false);}
+ else if(a==='popup-today'){e.preventDefault();popupDismiss(el,true);}
+ else if(a==='close'){e.preventDefault();var d=el.closest('.lm-dialog,.lm-vrlx');if(d){if(d.classList.contains('lm-dialog'))d.remove();else{d.hidden=true;d.style.display='none';}}}
  else if(a==='product'){e.preventDefault();var h=el.parentElement&&el.parentElement.querySelector('.hover-info');dialog(h?h.innerHTML:'<p>선택한 메뉴의 상세 정보를 확인하는 예시 화면입니다.</p>');}
  else if(a==='top'){e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});}
  else if(a==='demo'){e.preventDefault();toast('템플릿 화면에서는 외부 연결이 동작하지 않습니다.');}
 });
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){qa('.lm-dialog').forEach(function(x){x.remove()});document.body.classList.remove('lm-pndx-mox-nv','lm-menu-open');qa('[data-act="menu"]').forEach(function(x){x.classList.remove('lm-isx-ctvx');x.setAttribute('aria-expanded','false');});}if((e.key==='Enter'||e.key===' ')&&e.target.matches('[role="button"]')){e.preventDefault();e.target.click();}});
 qa('form[data-act="demo-form"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var bad=qa('[required]',f).find(function(x){return !String(x.value||'').trim()});if(bad){bad.focus();toast('필수 항목을 확인해 주세요.');return;}toast('템플릿 화면에서는 문의가 전송되지 않습니다.');});});
-if(window.AOS)AOS.init({easing:'ease-out-back',duration:1500,once:true,disable:function(){return matchMedia('(prefers-reduced-motion:reduce)').matches;}});
+var aos=qa('[data-aos]');
+if('IntersectionObserver' in window){
+ var reveal=new IntersectionObserver(function(entries){entries.forEach(function(v){if(v.isIntersecting){v.target.classList.add('aos-animate');reveal.unobserve(v.target);}});},{rootMargin:'100px 0px',threshold:.01});
+ aos.forEach(function(x){if(x.getBoundingClientRect().top<innerHeight+100)x.classList.add('aos-animate');else x.classList.remove('aos-animate');reveal.observe(x);});
+}else aos.forEach(function(x){x.classList.add('aos-animate');});
 qa('.swiper-container').forEach(function(el){var slides=qa('.swiper-slide',el);if(!slides.length)return;slides.forEach(function(x,i){x.classList.toggle('swiper-slide-active',i===0);x.setAttribute('aria-hidden',String(i!==0));});var i=0;if(slides.length>1)setInterval(function(){slides[i].classList.remove('swiper-slide-active');slides[i].setAttribute('aria-hidden','true');i=(i+1)%slides.length;slides[i].classList.add('swiper-slide-active');slides[i].setAttribute('aria-hidden','false');},4200);});
 qa('#lm-i-tb-fltx').forEach(function(el){requestAnimationFrame(function(){el.scrollLeft=innerWidth<=750?323:614;});});
 qa('.lm-vrlx').forEach(function(x){x.setAttribute('role','dialog');x.setAttribute('aria-modal','true');});
