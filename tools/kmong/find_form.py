@@ -24,7 +24,7 @@ BTN_JS = """()=>[...document.querySelectorAll('button,a[role=button],[class*=btn
  .filter(o=>o.t && o.보임).slice(0,40)"""
 
 with sync_playwright() as p:
-    b = p.chromium.connect_over_cdp("http://localhost:9223")
+    b = p.chromium.connect_over_cdp("http://127.0.0.1:9223")
     pg = [x for x in b.contexts[0].pages if "about:blank" not in x.url][-1]
     for url in CANDIDATES:
         try:

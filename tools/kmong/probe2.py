@@ -10,7 +10,7 @@ from fill import CAT1, CAT2, clean_title, close_dialog, pick_option  # noqa: E40
 TITLE = clean_title("동물병원 · 동물의료센터 홈페이지 (프리미엄 디자인 A)")
 
 with sync_playwright() as p:
-    b = p.chromium.connect_over_cdp("http://localhost:9223")
+    b = p.chromium.connect_over_cdp("http://127.0.0.1:9223")
     pg = [x for x in b.contexts[0].pages if "about:blank" not in x.url][-1]
     if "이미지 등록" not in pg.evaluate("document.body.innerText"):
         pg.goto("https://kmong.com/seller/portfolios/new", wait_until="domcontentloaded", timeout=60000)

@@ -10,7 +10,7 @@ def page(b):
 
 
 with sync_playwright() as p:
-    b = p.chromium.connect_over_cdp("http://localhost:9223")
+    b = p.chromium.connect_over_cdp("http://127.0.0.1:9223")
     pg = page(b)
     if len(sys.argv) > 1:
         pg.goto(sys.argv[1], wait_until="domcontentloaded")

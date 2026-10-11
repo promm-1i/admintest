@@ -13,7 +13,9 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 REPO = Path(__file__).resolve().parents[2]
-CDP = "http://localhost:9223"
+_F = Path("C:/_tmp/claude/kmong_facts.json")
+FACTS = __import__("json").loads(_F.read_text(encoding="utf-8")) if _F.exists() else {}
+CDP = "http://127.0.0.1:9223"
 NEW = "https://kmong.com/seller/portfolios/new"
 CAT1, CAT2 = "IT·프로그래밍", "홈페이지 신규 제작"
 DESC_MAX = 500
@@ -164,6 +166,91 @@ def pick_select(pg, current: str, option: str) -> bool:
     return option in pg.evaluate("document.body.innerText")
 
 
+
+# 선택 칸 — 실제로 쓰는 것만. 근거: package.json(React·Vite·Tailwind·TypeScript·Supabase),
+# 템플릿 실측(jQuery 18종·SCSS), 도구가 전부 Python, 블로그 자동화가 Node.js,
+# 지도 API 10개 파일, 문자 알림·분석 도구 흔적.
+TECH = ["HTML/CSS", "JavaScript/TypeScript", "jQuery", "SCSS", "Tailwind CSS",
+        "React/Next.js", "Vue/Nuxt", "Vite", "Node.js", "Python", "Supabase", "PostgreSQL"]
+# 기획부터 버그수정까지 혼자 다 한다 (사용자 확인 2026-10-08)
+ROLES = ["기획", "디자인", "프론트엔드", "백엔드", "개선·버그수정"]
+PRODUCTS = ["반응형 웹사이트", "관리자 페이지/Admin", "커머스/쇼핑몰", "콘텐츠/미디어형", "B2C 플랫폼형"]
+LINKS = ["지도/위치 API", "메신저/알림 연동", "파일 업로드/저장소", "마케팅/분석 도구 연동", "소셜 로그인/인증"]
+
+MULTI = {"기술 스택": TECH, "참여 작업 영역": ROLES, "제품 유형": PRODUCTS, "외부 연동": LINKS}
+
+FIND_BOX_JS = """(label)=>{
+ document.querySelectorAll('[data-pick]').forEach(e=>e.removeAttribute('data-pick'));
+ const hs=[...document.querySelectorAll('h3,h4,label,span,div')]
+   .filter(e=>e.children.length===0&&(e.textContent||'').trim()===label);
+ if(!hs.length)return false;
+ let n=hs[0];
+ for(let i=0;i<7&&n;i++,n=n.parentElement){
+   const c=n.querySelector("div[class*='-container']");
+   if(c){c.setAttribute('data-pick','x');return true}}
+ return false}"""
+
+
+def pick_multi(pg, label: str, wants: list[str]) -> int:
+    """여러 개 고르는 칸. 눌러서 열리는 목록에서 하나씩 누른다(타자는 안 먹는다)."""
+    done = 0
+    for w in wants:
+        if not pg.evaluate(FIND_BOX_JS, label):
+            break
+        box = pg.locator("[data-pick=x]").first
+        try:
+            box.scroll_into_view_if_needed()
+            pg.wait_for_timeout(200)
+            ctrl = box.locator("div[class*='-control']").first
+            (ctrl if ctrl.count() else box).click()
+            pg.wait_for_timeout(700)
+            ok = pg.evaluate("""(t)=>{
+              for(const e of document.querySelectorAll("[id^='react-select'][id*='option'],[role=option]")){
+                if((e.textContent||'').trim()===t){e.click();return true}}
+              return false}""", w)
+            pg.wait_for_timeout(500)
+            pg.keyboard.press("Escape")
+            pg.wait_for_timeout(250)
+            done += 1 if ok else 0
+        except Exception:
+            pg.keyboard.press("Escape")
+    return done
+
+
+def set_month(pg, idx: int, ym: str) -> bool:
+    """참여 기간 — 읽기 전용 칸을 눌러 열리는 < 2026년 > · 1~12월 격자에서 고른다.
+    idx 0=시작일, 1=종료일. ym 은 '2026-09' 꼴."""
+    year, month = ym.split("-")
+    inp = pg.locator("input[readonly]").nth(idx)
+    if not inp.count():
+        return False
+    inp.scroll_into_view_if_needed()
+    pg.wait_for_timeout(300)
+    inp.click()
+    pg.wait_for_timeout(900)
+    for _ in range(12):
+        shown = pg.evaluate("""()=>{const m=[...document.querySelectorAll('div,span')]
+          .map(e=>(e.children.length?'':(e.textContent||'').trim()))
+          .find(t=>/^\d{4}년$/.test(t)); return m||''}""")
+        if shown.startswith(year):
+            break
+        arrow = "<" if int(year) < int(shown[:4] or year) else ">"
+        btn = pg.get_by_role("button", name=arrow, exact=True)
+        if not btn.count():
+            break
+        btn.first.click()
+        pg.wait_for_timeout(500)
+    # react-datepicker — 누르는 순간 다시 그려져 요소를 놓친다. aria-label 로 집어 JS 로 누른다.
+    ok = pg.evaluate("""(want)=>{
+      const el=document.querySelector(`[role=option][aria-label*="${want}"]`);
+      if(!el)return false; el.click(); return true}""", f"{int(month)}월 {year}")
+    pg.wait_for_timeout(900)
+    if not ok:
+        pg.keyboard.press("Escape")
+        return False
+    return inp.input_value() == ym
+
+
 def upload(pg, kind: str, path: Path, crop: bool) -> bool:
     pg.evaluate(TAG_JS)
     btn = pg.locator(f"button[data-pick={kind}]").first
@@ -262,6 +349,15 @@ def run(code: str) -> None:
             kw.press("Enter")
             pg.wait_for_timeout(400)
         print("  키워드:", ", ".join(KEYWORDS))
+
+        for lab, wants in MULTI.items():
+            n = pick_multi(pg, lab, wants)
+            print(f"  {lab}: {n}/{len(wants)}개")
+
+        fx = FACTS.get(code, {})
+        if fx.get("start"):
+            print("  시작일:", fx["start"], set_month(pg, 0, fx["start"]))
+            print("  종료일:", fx["end"], set_month(pg, 1, fx["end"]))
         print("  등록 버튼은 누르지 않았습니다. 참여 기간은 화면에서 확인하세요.")
 
 

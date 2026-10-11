@@ -27,7 +27,7 @@ LABEL_JS = """()=>[...document.querySelectorAll('label,h2,h3,legend,p')]
 
 out = Path("C:/_tmp/claude/kmong_form.json")
 with sync_playwright() as p:
-    b = p.chromium.connect_over_cdp("http://localhost:9223")
+    b = p.chromium.connect_over_cdp("http://127.0.0.1:9223")
     pg = [x for x in b.contexts[0].pages if "about:blank" not in x.url][-1]
     pg.goto("https://kmong.com/seller/portfolios/new", wait_until="domcontentloaded", timeout=60000)
     pg.wait_for_timeout(2500)
