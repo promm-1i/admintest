@@ -6,14 +6,15 @@
 이거만 있어서 별로야."
 
 카페는 주소·가격·문의 유도가 전부 금지다(feedback_karrot_post_titles).
-그래서 비즈 본문에서 주소 줄과 마무리 영업 문단만 떼고, 감상 한 줄로 닫는다.
+그래서 비즈 본문에서 주소 줄과 마무리 영업 문단만 뗀다.
 가운데 설명(화면에 실제로 있는 것)은 그대로 쓴다.
 
   python cafe_body.py <키>     biz_post_new.POSTS 의 그 건을 카페용으로 찍어 본다
 """
 import sys
 
-CLOSE = "이렇게 구현하면 이쁩니다."
+# 2026-10-11 사용자: "이렇게 구현하면 이쁩니다는 빼" — 감상 한 줄로 닫지 않는다.
+# 설명이 끝나는 자리에서 그냥 끝낸다.
 # 영업은 늘 마지막 문단에만 있다. 가운데 '문의하기 폼'·'온라인상담 쪽' 은
 # 화면에 있는 기능 이름이라 남긴다 — 낱말로 훑어 지우면 설명이 통째로 날아간다.
 SALES = ("문의해 주세요", "문의해주세요", "상담해 드립니다", "상담 가능합니다",
@@ -33,7 +34,7 @@ def to_cafe(body: str) -> str:
             keep.append(p)
     while keep and any(w in keep[-1] for w in SALES):   # 마무리 영업 문단만 뗀다
         keep.pop()
-    return "\n\n".join(keep + [CLOSE])
+    return "\n\n".join(keep)
 
 
 def warn(text: str) -> None:
