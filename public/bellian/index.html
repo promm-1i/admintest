@@ -299,7 +299,7 @@
 <section id="bl-i-cont">
 <div id="bl-i-ct">
 <article class="bl-ar-ab">
-<svg aria-hidden="true" id="bl-i-rl02" style="enable-background:new 0 0 628.6 460.7;" viewbox="0 0 628.6 460.7" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="1.2"><path d="M73 322C126 193 228 92 345 79c91-10 166 35 205 108-66-31-137-34-205-4-78 34-141 102-186 198"></path><path d="M139 353c89-31 175-41 258-23 51 11 91 31 121 58-104-18-201-5-292 40"></path><circle cx="401" cy="165" r="44"></circle><path d="M379 165c13-17 31-25 53-20-6 27-24 44-53 50 5-10 5-20 0-30Z"></path></g></svg>
+<svg aria-hidden="true" id="bl-i-rl02" style="enable-background:new 0 0 628.6 460.7;" viewbox="0 0 628.6 460.7" xmlns="http://www.w3.org/2000/svg"><path class="bl-st1x" d="M0 457C167 481 514 462 628.6 0"></path></svg>
 <div class="bl-ab-bxx">
 <div class="bl-ab-bxx-tp">
 <div class="bl-ab-it-01" data-aos="fade-up" data-aos-delay="0" data-aos-duration="1000" data-aos-easing="ease-in-out">
@@ -316,7 +316,7 @@
 <a class="bl-bt-mr" href="before.html">자세히 보기</a>
 </div>
 <div class="bl-ab-it-02">
-<svg aria-hidden="true" id="bl-i-rl01" style="enable-background:new 0 0 496.1 727.8;" viewbox="0 0 496.1 727.8" xmlns="http://www.w3.org/2000/svg"><g fill="none" stroke="currentColor" stroke-width="1.1"><path d="M93 650c-8-103 7-204 45-302 37-96 91-174 163-233 39-32 76-49 112-51-56 45-92 101-109 168-18 72-17 145 3 221 15 60 13 117-6 171"></path><path d="M146 604c58-28 116-37 176-27 40 7 71 22 94 45-82-12-155 5-219 52"></path><path d="M166 390c55-3 101-26 138-69"></path><circle cx="291" cy="250" r="36"></circle></g></svg>
+<svg aria-hidden="true" id="bl-i-rl01" style="enable-background:new 0 0 496.1 727.8;" viewbox="0 0 496.1 727.8" xmlns="http://www.w3.org/2000/svg"><path class="bl-st0x" d="M.5 727.8V248C.5 111 111 .5 248 .5S495.6 111 495.6 248v479.8"></path></svg>
 <img alt="" decoding="async" sizes="(max-width: 768px) 100vw, 572px" src="./assets/img/index-02.png" srcset="./assets/img/index-02-sm.png 286w, ./assets/img/index-02.png 572w"/>
 </div>
 </div>
@@ -1088,17 +1088,22 @@ function smoothScroll_scrolling(event){
   window.setTimeout(syncHeroFocus, 800);
 })();
 $(function(){
-  $('form').on('submit', function(e){
+  $('form').not('#bl-i-grx-fm').on('submit', function(e){
+    if(e.isDefaultPrevented()) return false;
     e.preventDefault();
     alert('예시 화면이라 실제로 전송되지는 않습니다. 010-4894-4905로 문의해 주세요.');
     return false;
   });
   $('#bl-i-grx-fm').on('submit', function(e){
+    if(e.isDefaultPrevented()) return false;
     if(!$('#bl-i-gr0x').is(':checked') || !$('#bl-i-gr0x2').is(':checked')){
       e.preventDefault();
       alert('약관에 동의해 주세요.');
       return false;
     }
+    e.preventDefault();
+    alert('예시 화면이라 실제 회원가입은 진행되지 않습니다.');
+    return false;
   });
 });
 

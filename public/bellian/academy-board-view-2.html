@@ -1165,17 +1165,22 @@ $(document).ready(function() {
 	});
 });
 $(function(){
-  $('form').on('submit', function(e){
+  $('form').not('#bl-i-grx-fm').on('submit', function(e){
+    if(e.isDefaultPrevented()) return false;
     e.preventDefault();
     alert('예시 화면이라 실제로 전송되지는 않습니다. 010-4894-4905로 문의해 주세요.');
     return false;
   });
   $('#bl-i-grx-fm').on('submit', function(e){
+    if(e.isDefaultPrevented()) return false;
     if(!$('#bl-i-gr0x').is(':checked') || !$('#bl-i-gr0x2').is(':checked')){
       e.preventDefault();
       alert('약관에 동의해 주세요.');
       return false;
     }
+    e.preventDefault();
+    alert('예시 화면이라 실제 회원가입은 진행되지 않습니다.');
+    return false;
   });
 });
 
