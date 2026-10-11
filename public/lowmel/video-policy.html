@@ -350,6 +350,18 @@
 (function(){'use strict';
 var qa=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
 document.body.classList.add(innerWidth<=750?'lm-isx-mo':'lm-isx-dskx');
+var lmHeader=document.getElementById('lm-i-hd'),lmHeaderFix=innerWidth<1200?80:120,lmHeaderLast=0,lmHeaderDelta=80;
+function lmHeaderScroll(){
+ if(!lmHeader)return;
+ var st=window.pageYOffset||document.documentElement.scrollTop||0;
+ if(Math.abs(lmHeaderLast-st)<=lmHeaderDelta)return;
+ lmHeader.classList.toggle('lm-fx',st>lmHeaderFix);
+ if(st>lmHeaderLast&&lmHeaderLast>0){document.body.classList.add('lm-scr-dwnx');document.body.classList.remove('lm-scr-upx');}
+ else{document.body.classList.add('lm-scr-upx');document.body.classList.remove('lm-scr-dwnx');}
+ lmHeaderLast=st;
+}
+addEventListener('load',lmHeaderScroll);
+addEventListener('scroll',lmHeaderScroll,{passive:true});
 var policyMain=document.querySelector('.lm-page-privacy #lm-i-ct,.lm-page-terms #lm-i-ct');
 if(policyMain){var adjustPolicy=function(){var policyGap=parseFloat(getComputedStyle(policyMain).marginBottom)||0;if(policyGap<0){policyMain.style.height=Math.max(0,policyMain.getBoundingClientRect().height+policyGap)+'px';policyMain.style.overflow='hidden';policyMain.style.marginBottom=(innerWidth<=750?20:100)+'px';}};if(document.fonts&&document.fonts.ready)document.fonts.ready.then(adjustPolicy);else addEventListener('load',adjustPolicy,{once:true});}
 document.body.insertAdjacentHTML('afterbegin','<a class="lm-skip" href="#main">본문 바로가기</a>');
