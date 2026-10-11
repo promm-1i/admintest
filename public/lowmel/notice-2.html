@@ -166,7 +166,7 @@
 <aside aria-label="빠른 상담 메뉴" class="lm-quick-menu">
 <div aria-hidden="true" class="lm-quick-icon"><span></span></div>
 <a aria-label="창업 상담 02-000-1399" class="lm-quick-consult" href="tel:02-000-1399"><span>창업상담신청</span><strong>02-000-1399</strong></a>
-<a aria-label="온라인 숍 안내" class="lm-quick-shop" data-act="demo" href="#"><strong aria-hidden="true"></strong><span aria-hidden="true">＋</span></a>
+<a aria-label="온라인 숍 안내" class="lm-quick-shop" data-act="demo" href="#"><strong aria-hidden="true"></strong></a>
 <button aria-label="맨 위로" class="lm-quick-top" data-act="top" type="button"><i></i><i></i></button>
 </aside>
 </div>
@@ -178,6 +178,8 @@
 (function(){'use strict';
 var qa=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));};
 document.body.classList.add(innerWidth<=750?'lm-isx-mo':'lm-isx-dskx');
+var policyMain=document.querySelector('.lm-page-privacy #lm-i-ct,.lm-page-terms #lm-i-ct');
+if(policyMain){var adjustPolicy=function(){var policyGap=parseFloat(getComputedStyle(policyMain).marginBottom)||0;if(policyGap<0){policyMain.style.height=Math.max(0,policyMain.getBoundingClientRect().height+policyGap)+'px';policyMain.style.overflow='hidden';policyMain.style.marginBottom=(innerWidth<=750?20:100)+'px';}};if(document.fonts&&document.fonts.ready)document.fonts.ready.then(adjustPolicy);else addEventListener('load',adjustPolicy,{once:true});}
 document.body.insertAdjacentHTML('afterbegin','<a class="lm-skip" href="#main">본문 바로가기</a>');
 function toast(t){var x=document.createElement('div');x.className='lm-toast';x.setAttribute('role','status');x.textContent=t;document.body.appendChild(x);setTimeout(function(){x.remove();},2200);}
 function menu(btn){var on=!document.body.classList.contains('lm-pndx-mox-nv');document.body.classList.toggle('lm-pndx-mox-nv',on);document.body.classList.toggle('lm-menu-open',on);btn.classList.toggle('lm-isx-ctvx',on);btn.setAttribute('aria-expanded',String(on));}
