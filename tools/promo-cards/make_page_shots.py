@@ -255,9 +255,16 @@ def load_sections(fdir: Path, name: str, scale: float, height: int) -> list[int]
 
 
 FOOT_JS = "(()=>{const f=document.querySelector('footer,#footer,.footer,#ft,.ft');return f?Math.round(f.getBoundingClientRect().top+scrollY):document.documentElement.scrollHeight})()"
-REVEAL_JS = """()=>{for(const e of document.querySelectorAll('main *, #contents *, .page *, section *')){
+# 돌아가며 한 장씩 보이는 겹친 문구(아름결 .ag-hm-ntrx-tx 3개)는 다 켜면 글자가 포개진다
+# → 같은 자리(absolute)에 보이는/켜진(on·active) 형제가 있으면 그대로 둔다. 먼저 다 고른 뒤에 켠다.
+REVEAL_JS = """()=>{const L=[];
+ const shown=s=>{const k=getComputedStyle(s);return ['on','active','is-active'].some(n=>s.classList.contains(n))||(k.opacity!=='0'&&k.visibility!=='hidden')};
+ for(const e of document.querySelectorAll('main *, #contents *, .page *, section *')){
  if(e.closest('header,nav,.modal,[class*=menu],[class*=mega],[class*=allm],[class*=dim],[class*=popup],[class*=layer]'))continue;
- const c=getComputedStyle(e);if((c.opacity==='0'||c.visibility==='hidden')&&e.getBoundingClientRect().height>10){e.style.setProperty('opacity','1','important');e.style.setProperty('visibility','visible','important');e.style.setProperty('transform','none','important')}}}"""
+ const c=getComputedStyle(e);if(!((c.opacity==='0'||c.visibility==='hidden')&&e.getBoundingClientRect().height>10))continue;
+ if(c.position==='absolute'&&e.parentElement&&[...e.parentElement.children].some(s=>s!==e&&s.tagName===e.tagName&&getComputedStyle(s).position==='absolute'&&shown(s)))continue;
+ L.push(e)}
+ for(const e of L){e.style.setProperty('opacity','1','important');e.style.setProperty('visibility','visible','important');e.style.setProperty('transform','none','important')}}"""
 
 
 MAX_CUT = 24000      # 너무 긴 페이지는 여기까지만 (60000px 짜리 문서함 페이지가 있었다)
