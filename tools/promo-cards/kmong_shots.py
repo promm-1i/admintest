@@ -185,6 +185,13 @@ def grab(pg, key_dir: Path, name: str, folder: str, max_cut: int = MAX_CUT,
         if(b.width<200||b.height<150||b.width>1500&&b.height>1200)continue;
         const t=(e.innerText||'');
         if(/닫기|하루ㅤ?동안|오늘 하루|다시 보지|그만 보기/.test(t)) kill(e);
+      }
+      // 노을 팝업은 position:relative 라 위 조건에 안 걸려 대표 이미지 히어로를 가렸다 →
+      // '다시 열람/보지 않기' 문구가 든 1000px 이하 상자는 위치 방식과 상관없이 지운다(본문 큰 상자는 크기로 빠진다)
+      for(const e of document.querySelectorAll('div,aside,section')){
+        const b=e.getBoundingClientRect();
+        if(b.width<200||b.height<150||b.width>1000||b.height>1000)continue;
+        if(/다시 열람|다시 보지|하루ㅤ?동안 (보지|열지|안)|오늘 하루 (보지|열지|그만)|그만 보기/.test(e.innerText||'')) kill(e);
       }}""")
     pg.wait_for_timeout(700)
     # body 가 스크롤 상자인 템플릿(윤슬 계열)은 전체 캡처가 한 화면만 찍히고 푸터 좌표도 틀린다 → 풀어 준다
