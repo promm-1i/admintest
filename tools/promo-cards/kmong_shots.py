@@ -165,6 +165,9 @@ def grab(pg, key_dir: Path, name: str, folder: str, max_cut: int = MAX_CUT,
         pg.evaluate(f"scrollTo(0,{y})")
         pg.wait_for_timeout(90)
     pg.evaluate("scrollTo(0,0)")
+    # ScrollSmoother 래퍼 id 를 바꿔 둔 템플릿(오솔길 #ogi-smtx-wr)은 SMOOTH_CSS 로 못 풀어 문서가 한 화면 높이로 잡힌다
+    # → 이름 대신 인스턴스를 죽여 래퍼를 원래대로 되돌린다
+    pg.evaluate("window.ScrollSmoother && ScrollSmoother.get() && ScrollSmoother.get().kill()")
     pg.evaluate("window.ScrollTrigger && ScrollTrigger.getAll().forEach(t=>t.kill(true))")
     pg.add_style_tag(content="[data-aos],.rv,.ani,.fadeUp,.fadeLeft,.fadeRight{opacity:1!important;transform:none!important;transition:none!important}")
     pg.evaluate(REVEAL_JS)
