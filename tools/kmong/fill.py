@@ -96,6 +96,14 @@ def premium_by_code() -> dict:
     return rows
 
 
+# 크몽 설명 칸 금지어(10-12 실측) — 네이트(외부 메신저)는 '라미네이트' 안에서도, 띄어 써도 걸린다.
+# 비밀번호 · 카톡 · 카카오톡 · 전화도 걸린다. 온라인상담 · 예약 · 상담 · 블로그 · 번호는 통과.
+BANNED = {
+    "비밀번호 확인 창이 있는": "비밀글로 쓰는",
+    "라미네이트": "앞니 심미 보철",
+}
+
+
 def describe(r: dict) -> str:
     """상세 설명 500자 — 가격·주소 없이, 화면에 있는 기능만."""
     parts = [f"{r['industry']} 시안입니다. 실제 납품 건이 아니라 업종 콘셉트로 만든 디자인입니다.", ""]
@@ -104,6 +112,8 @@ def describe(r: dict) -> str:
     if r["idealFor"]:
         parts += ["", f"이런 곳에 맞습니다: {r['idealFor']}"]
     out = "\n".join(parts)
+    for a, b in BANNED.items():
+        out = out.replace(a, b)
     if len(out) > DESC_MAX:
         out = out[:DESC_MAX - 1].rsplit("\n", 1)[0]
     return out

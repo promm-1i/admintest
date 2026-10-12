@@ -263,7 +263,8 @@ def run(slugs: list[str]) -> None:
     rows = {r["slug"]: r for r in premium()}
     root = out_root()
     with sync_playwright() as p:
-        b = p.chromium.launch()
+        # Playwright 기본 Chromium 은 H.264(mp4)를 못 틀어 영상 칸이 회색으로 찍힌다(보송24 히어로) → 설치된 Chrome
+        b = p.chromium.launch(channel="chrome")
         for slug in slugs:
           try:
             r = rows.get(slug)
