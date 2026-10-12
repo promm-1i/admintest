@@ -17,8 +17,8 @@ from playwright.sync_api import sync_playwright
 sys.path.insert(0, str(Path(__file__).parent))
 import fill as F  # noqa: E402
 
-# 사진이 자리 그림이라 아직 올리면 안 되는 것
-SKIP = {"HOSP-1008"}
+# 사진이 자리 그림이라 아직 올리면 안 되는 것 (빛결 HOSP-1008 은 10-08 사진 설치로 풀었다)
+SKIP: set[str] = set()
 CDP = "http://127.0.0.1:9223"
 
 
@@ -54,10 +54,19 @@ def listed_codes(pg) -> set[str]:
     """이미 올라간 포트폴리오 제목으로 코드를 되짚는다."""
     pg.goto("https://kmong.com/seller/portfolios", wait_until="domcontentloaded", timeout=60000)
     pg.wait_for_timeout(4000)
-    text = pg.evaluate("document.body.innerText")
+    last = -1
+    for _ in range(30):                 # 첫 화면은 20개만 — 끝까지 내려 다 불러온다
+        pg.mouse.wheel(0, 2500)
+        pg.wait_for_timeout(500)
+        n = pg.evaluate("document.body.innerText.length")
+        if n == last:
+            break
+        last = n
+    text = "".join(pg.evaluate("document.body.innerText").split())
     out = set()
     for code, r in F.premium_by_code().items():
-        if F.clean_title(r["title"])[:24] in text:
+        # 띄어쓰기가 달라도('작가 / 아티스트' ↔ '작가/아티스트') 같은 글로 본다
+        if "".join(F.clean_title(r["title"]).split())[:22] in text:
             out.add(code)
     return out
 
@@ -103,12 +112,14 @@ def fill_one(pg, code: str) -> bool:
     ta = pg.locator("textarea").first
     ta.click()
     ta.fill(desc)
-    for cb in pg.locator("input[type=checkbox]").all():
-        lab = cb.evaluate("""e=>{let n=e,t='';for(let i=0;i<4&&n;i++,n=n.parentElement){
-          t=(n.innerText||'').trim(); if(t)break} return t.slice(0,20)}""")
-        if "비공개" in lab and not cb.is_checked():
-            cb.click(force=True)
-            break
+    lab = pg.get_by_text("비공개", exact=True).first   # 체크박스를 직접 누르면 안 먹는다(10-12)
+    lab.scroll_into_view_if_needed()
+    if not pg.evaluate("""()=>{const l=[...document.querySelectorAll('label,span,p,div')]
+        .find(e=>e.children.length<=2&&(e.innerText||'').trim()==='비공개');
+        const c=l&&(l.closest('label')||l.parentElement).querySelector('input[type=checkbox]');
+        return !!(c&&c.checked)}"""):
+        lab.click()
+        pg.wait_for_timeout(400)
     kw = pg.locator("input[placeholder*='키워드']").first
     for w in F.KEYWORDS:
         kw.click()
@@ -119,8 +130,10 @@ def fill_one(pg, code: str) -> bool:
         F.pick_multi(pg, lab, wants)
     fx = F.FACTS.get(code, {})
     if fx.get("start"):
-        F.set_month(pg, 0, fx["start"])
-        F.set_month(pg, 1, fx["end"] or fx["start"])
+        m0 = F.set_month(pg, 0, fx["start"])
+        m1 = F.set_month(pg, 1, fx["end"] or fx["start"])
+        if not (m0 and m1):
+            print(f"  작업 기간 못 넣음 (시작 {m0} · 끝 {m1}) — 선택 칸이라 그대로 진행")
     print(f"  제목 {title[:30]} · 업종 {ind} · 상세 {ok}/{len(dets)} · 기간 {fx.get('start')}~{fx.get('end')}")
     return True
 
@@ -130,15 +143,17 @@ def submit(pg) -> bool:
     pg.wait_for_timeout(400)
     pg.get_by_role("button", name="다음").first.click()
     pg.wait_for_timeout(3500)
-    svc = pg.get_by_role("button", name="IT·프로그래밍").first
-    if svc.count():
-        svc.click()
-        pg.wait_for_timeout(800)
-    for cb in pg.locator("input[type=checkbox]").all():
-        lab = cb.evaluate("""e=>{let n=e,t='';for(let i=0;i<5&&n;i++,n=n.parentElement){
-          t=(n.innerText||'').trim(); if(t)break} return t.slice(0,30)}""")
-        if "동의" in lab and not cb.is_checked():
-            cb.click(force=True)
+    agree = pg.locator("input[type=checkbox]").first
+    if agree.count() and not agree.is_checked():
+        pg.get_by_text("안내 사항을 확인했고 동의합니다", exact=False).first.click()
+        pg.wait_for_timeout(500)
+    # 노출할 서비스 카드(가격 '원~' 이 붙은 카드). 내 서비스는 하나 — 기존 글은 전부 '1개의 서비스에 노출중'.
+    btn = pg.get_by_role("button", name="제출하기").first
+    if btn.count() and not btn.is_enabled():
+        card = pg.locator("text=/원~$/").first
+        if card.count():
+            card.click()
+            pg.wait_for_timeout(700)
     btn = pg.get_by_role("button", name="제출하기").first
     if not btn.count() or not btn.is_enabled():
         print("  제출 단추가 안 열림")

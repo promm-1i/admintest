@@ -62,7 +62,17 @@ HIDE_FIXED_JS = """()=>{
    // 내 reveal 이 열어 버린 전체메뉴만 지운다.
    const key=((e.id||'')+' '+(e.className||'')).toLowerCase();
    if(/menu|mega|allm|gnb|-mn|hdx/.test(key))kill(e);
- }}"""
+ }
+ // 크몽은 외부 연락처(전화·이메일)가 보이면 반려한다. 푸터 이름이 제각각이라 자르기로는 다 못 막고,
+ // 본문 '오시는 길·INFORMATION' 칸에도 있다(할로베일 OEM 쪽) → 찍기 직전 글자만 지운다.
+ // 1588-xxxx 꼴은 연혁의 연도 범위(1989-2009)와 모양이 같다 → 뒤가 앞보다 200 안쪽으로 크면 연도로 보고 둔다.
+ const RX=/\\(?0\\d{1,2}\\)?[\\s.-]?\\d{3,4}[\\s.-]\\d{4}|[\\w.+-]+@[\\w-]+\\.[\\w.]+|\\b1[5-8]\\d{2}-\\d{4}\\b/g;
+ const keep=m=>{const y=m.match(/^(1\\d{3})-(\\d{4})$/); if(!y)return false; const a=+y[1],b=+y[2]; return b>a&&b-a<200};
+ const scrub=s=>s.replace(RX,m=>keep(m)?m:'');
+ const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ for(let n;(n=w.nextNode());){ const v=scrub(n.nodeValue); if(v!==n.nodeValue) n.nodeValue=v }
+ for(const i of document.querySelectorAll('input,textarea')){ if(i.placeholder) i.placeholder=scrub(i.placeholder) }
+}"""
 
 
 SKIP = re.compile(r"(privacy|terms|policy|login|signup|join|sitemap|agree|email|member|error|404)", re.I)
@@ -337,8 +347,8 @@ def run(slugs: list[str]) -> None:
                         if len(picked) < N_DETAIL and not any(diff(q, im) < 5 for q in picked):
                             picked.append(im)
             cov = outdir / "00_대표_1x1.png"
-            if code in COVER_FROM and len(picked) >= COVER_FROM[code]:
-                c = picked[COVER_FROM[code] - 1]
+            if r["code"] in COVER_FROM and len(picked) >= COVER_FROM[r["code"]]:
+                c = picked[COVER_FROM[r["code"]] - 1]
                 side = min(c.width, c.height)
                 c.crop((0, 0, c.width, side)).resize((1080, 1080), Image.LANCZOS).save(cov)
             elif not cov.exists() and picked:   # 메인 조각이 안 나온 템플릿은 첫 상세로
