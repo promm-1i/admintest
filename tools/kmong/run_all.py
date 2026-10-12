@@ -54,12 +54,20 @@ def listed_codes(pg) -> set[str]:
     """이미 올라간 포트폴리오 제목으로 코드를 되짚는다."""
     pg.goto("https://kmong.com/seller/portfolios", wait_until="domcontentloaded", timeout=60000)
     pg.wait_for_timeout(4000)
-    last = -1
-    for _ in range(30):                 # 첫 화면은 20개만 — 끝까지 내려 다 불러온다
-        pg.mouse.wheel(0, 2500)
-        pg.wait_for_timeout(500)
-        n = pg.evaluate("document.body.innerText.length")
-        if n == last:
+    # 첫 화면은 20개만 — '총 N개' 만큼 카드(편집하기 단추)가 그려질 때까지 내린다.
+    # 길이가 한 번 그대로면 멈추던 때는 로딩이 0.5초보다 느리면 끊겨 48개 중 40개만 셌다(10-12).
+    total = pg.evaluate("(()=>{const m=document.body.innerText.match(/총\\s*(\\d+)개/);return m?+m[1]:0})()")
+    same, last = 0, -1
+    for _ in range(80):
+        pg.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        pg.mouse.wheel(0, 1500)
+        pg.wait_for_timeout(700)
+        n = pg.get_by_role("button", name="편집하기").count()
+        if total and n >= total:
+            break
+        same = same + 1 if n == last else 0
+        if same >= 4:
+            print(f"  목록이 {n}/{total} 에서 더 안 늘어남", flush=True)
             break
         last = n
     text = "".join(pg.evaluate("document.body.innerText").split())
