@@ -257,11 +257,15 @@ def load_sections(fdir: Path, name: str, scale: float, height: int) -> list[int]
 FOOT_JS = "(()=>{const f=document.querySelector('footer,#footer,.footer,#ft,.ft');return f?Math.round(f.getBoundingClientRect().top+scrollY):document.documentElement.scrollHeight})()"
 # 돌아가며 한 장씩 보이는 겹친 문구(아름결 .ag-hm-ntrx-tx 3개)는 다 켜면 글자가 포개진다
 # → 같은 자리(absolute)에 보이는/켜진(on·active) 형제가 있으면 그대로 둔다. 먼저 다 고른 뒤에 켠다.
+# 숨은 fixed 층(소복소복 사례 모달 #cm)·작은 떠 있는 위젯(상담 패널) 안은 켜지 않는다 — 켜면 어두운 막과 창이 대표 이미지를 덮는다.
+# 본문 자체가 fixed 인 장면형 메인은 보이는 큰 층이라 그대로 켠다.
 REVEAL_JS = """()=>{const L=[];
+ const fixedOf=e=>{for(let p=e;p&&p!==document.body;p=p.parentElement){if(getComputedStyle(p).position==='fixed')return p}return null};
  const shown=s=>{const k=getComputedStyle(s);return ['on','active','is-active'].some(n=>s.classList.contains(n))||(k.opacity!=='0'&&k.visibility!=='hidden')};
  for(const e of document.querySelectorAll('main *, #contents *, .page *, section *')){
  if(e.closest('header,nav,.modal,[class*=menu],[class*=mega],[class*=allm],[class*=dim],[class*=popup],[class*=layer]'))continue;
  const c=getComputedStyle(e);if(!((c.opacity==='0'||c.visibility==='hidden')&&e.getBoundingClientRect().height>10))continue;
+ const f=fixedOf(e);if(f){const k=getComputedStyle(f),r=f.getBoundingClientRect();if(k.opacity==='0'||k.visibility==='hidden'||r.width*r.height<innerWidth*innerHeight*0.5)continue}
  if(c.position==='absolute'&&e.parentElement&&[...e.parentElement.children].some(s=>s!==e&&s.tagName===e.tagName&&getComputedStyle(s).position==='absolute'&&shown(s)))continue;
  L.push(e)}
  for(const e of L){e.style.setProperty('opacity','1','important');e.style.setProperty('visibility','visible','important');e.style.setProperty('transform','none','important')}}"""
