@@ -4,7 +4,13 @@ import sys
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
-PROFILE = Path.home() / '.daangn' / 'profile'
+# --chrome: 설치된 Chrome 으로 띄운다. Playwright 기본 Chromium 은 H.264 를 못 풀어
+# 카페에 mp4 를 올리면 편집기 썸네일이 검고 길이가 0 으로 잡힌다(2026-10-12).
+# 프로필은 따로 둔다 — 같은 폴더를 두 브라우저가 번갈아 쓰면 깨질 수 있다. 로그인은 cookies.json 으로 복원.
+CHROME = '--chrome' in sys.argv
+if CHROME:
+    sys.argv.remove('--chrome')
+PROFILE = Path.home() / '.daangn' / ('profile-chrome' if CHROME else 'profile')
 PROFILE.mkdir(parents=True, exist_ok=True)
 
 # 비즈프로필 로그인은 만료 없는 세션 쿠키라 프로필에 안 남는다(카페는 남는다).
@@ -38,7 +44,7 @@ def load_cookies(ctx) -> None:
 url = sys.argv[1] if len(sys.argv) > 1 else "https://cafe.daangn.com/"
 with sync_playwright() as p:
     ctx = p.chromium.launch_persistent_context(
-        str(PROFILE), headless=False,
+        str(PROFILE), headless=False, channel='chrome' if CHROME else None,
         viewport=None, no_viewport=True,
         args=["--remote-debugging-port=9222", "--disable-blink-features=AutomationControlled",
               "--window-size=1400,950"])
