@@ -2,6 +2,9 @@
 """새 프리미엄 5곳을 당근 비즈니스 소식(작업 사례)으로 채운다. 올리기는 biz_publish.py.
 
   python biz_post_new.py <키>        한 건 채우기
+  python biz_post_new.py --folder <글 폴더> <사진 폴더>
+        글 폴더의 biz.txt(첫 줄 제목 · '===' 뒤 본문, 본문 첫 줄이 주소)와 사진 폴더 앞 10장으로 새 탭에서 채운다.
+        2026-10-12 영상 소식 — 비즈는 웹에서 동영상을 못 올려(사진 파일만 받음) 영상 장면 사진(noveriq-video upload_stills.py)을 쓴다.
 사진은 카페용 캡처(Desktop\\개발\\카페_캡처_늘리기\\<코드>_<이름>\\)의 앞 10장.
 옛 biz_post.py 는 프리미엄_상세페이지_캡처의 01·04·05·07 을 쓰는데, 새 템플릿은
 그 폴더에 첫화면·모바일밖에 없어서 카페용 벌을 그대로 쓴다.
@@ -174,19 +177,27 @@ def check_lines(body: str) -> None:
 
 
 def main() -> None:
-    key = sys.argv[1]
-    folder, title, body = POSTS[key]
+    new_tab = sys.argv[1] == "--folder"
+    if new_tab:  # 글 폴더(biz.txt) + 사진 폴더 — 본문 첫 줄이 이미 주소
+        raw = (Path(sys.argv[2]) / "biz.txt").read_text(encoding="utf-8")
+        title, body = (x.strip() for x in raw.split("\n===\n", 1))
+        files = sorted(Path(sys.argv[3]).glob("*.jpg"))[:10]
+        text = body
+    else:
+        key = sys.argv[1]
+        folder, title, body = POSTS[key]
+        files = sorted((CAP / folder).glob("*.jpg"))[:10]
+        text = "https://noveriq.co.kr/%s/\n\n%s" % (key, body)
     if len(title) > TITLE_MAX:
         sys.exit(f"제목 {len(title)}자 — {TITLE_MAX}자에서 잘린다. 줄이고 다시 돌려라:\n  {title}")
     if len(title) > TITLE_MAX - 2:
         print(f"주의: 제목 {len(title)}자 — 자르는 선({TITLE_MAX})에 붙었다")
     check_lines(body)
-    files = sorted((CAP / folder).glob("*.jpg"))[:10]
-    text = "https://noveriq.co.kr/%s/\n\n%s" % (key, body)
 
     with sync_playwright() as p:
         b = p.chromium.connect_over_cdp("http://localhost:9222")
-        pg = b.contexts[0].pages[-1]
+        # 글 폴더 방식은 새 탭에서 — 마지막 탭이 다른 일(카페 글쓰기 등)일 수 있다(10-12)
+        pg = b.contexts[0].new_page() if new_tab else b.contexts[0].pages[-1]
         pg.goto(NEW, wait_until="domcontentloaded", timeout=90000)
         pg.wait_for_timeout(3500)
         close_dialogs(pg)

@@ -64,7 +64,9 @@ def main():
 
         box = pg.locator("[role=listbox]")
         if not box.is_visible():
-            pg.locator("button.flex.items-center.justify-between").first.click()
+            # 2026-10-12 게시판 고르는 단추가 seed-select combobox 로 바뀌었다(옛 button.flex… 는 못 찾아 30초 멈춤)
+            trig = pg.locator("button[role=combobox][aria-haspopup=listbox]")
+            (trig if trig.count() else pg.locator("button.flex.items-center.justify-between")).first.click()
             box.wait_for(state="visible", timeout=10000)
         box.get_by_text(BOARD, exact=True).first.click()
         pg.wait_for_timeout(700)
@@ -75,7 +77,7 @@ def main():
 
         # 1) 동영상 — 빈 편집기 맨 앞에 넣는다
         pg.locator(".ProseMirror").first.click()
-        pg.locator("input[type=file][accept*='video']").first.set_input_files(str(video))
+        pg.locator("input[type=file][accept*='video']").first.set_input_files(str(video), timeout=180000)  # 28MB 를 CDP 로 넘기니 30초를 넘겼다(10-12)
         for _ in range(600):                       # 업로드·처리 최대 5분
             pg.wait_for_timeout(500)
             # 편집기 안 동영상 칸 = .video-container, 썸네일 img 에 업로드 상태·길이가 붙는다.

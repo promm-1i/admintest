@@ -60,6 +60,10 @@ def publish(pg) -> bool:
 
 with sync_playwright() as p:
     b = p.chromium.connect_over_cdp("http://localhost:9222")
-    pg = b.contexts[0].pages[-1]
+    # 소식 작성 탭을 찾아서 — CDP 로 붙을 때 탭 순서가 바뀌어 pages[-1] 이 카페 글쓰기 탭일 때가 있었다(10-12)
+    tabs = [t for t in b.contexts[0].pages if "/manager/posts/new" in t.url]
+    if len(tabs) != 1:
+        sys.exit("소식 작성 탭이 %d개 — 하나만 남기고 다시" % len(tabs))
+    pg = tabs[0]
     ok = publish(pg)
     print(("올림 · " + pg.url[-40:]) if ok else "못 올림 — 화면 확인 필요")
