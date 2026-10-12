@@ -63,6 +63,12 @@ HIDE_FIXED_JS = """()=>{
    const key=((e.id||'')+' '+(e.className||'')).toLowerCase();
    if(/menu|mega|allm|gnb|-mn|hdx/.test(key))kill(e);
  }
+ // 마우스를 따라다니는 커서 장식은 캡처 때 (0,0)에 멈춰 왼쪽 위에 검은 동그라미로 찍힌다(온새 .pntx2).
+ for(const e of document.querySelectorAll('body *')){
+   const s=getComputedStyle(e);
+   if(s.position!=='fixed'||s.pointerEvents!=='none')continue;
+   const b=e.getBoundingClientRect();
+   if(b.width>0&&b.width<=200&&b.height<=200)kill(e)}
  // 크몽은 외부 연락처(전화·이메일)가 보이면 반려한다. 푸터 이름이 제각각이라 자르기로는 다 못 막고,
  // 본문 '오시는 길·INFORMATION' 칸에도 있다(할로베일 OEM 쪽) → 찍기 직전 글자만 지운다.
  // 1588-xxxx 꼴은 연혁의 연도 범위(1989-2009)와 모양이 같다 → 뒤가 앞보다 200 안쪽으로 크면 연도로 보고 둔다.
