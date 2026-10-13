@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "travel-c-template",
+    industry: "농촌체험 · 마을여행 홈페이지",
+    title: "농촌체험 · 통합예약 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 농촌체험 · 마을여행 · 숙박·체험 예약 · 26페이지",
+    purpose:
+      "한 지역의 농촌체험휴양마을 열한 곳을 지도에서 찾고, 마을별 숙소와 체험·관광 코스를 확인한 뒤 숙박 또는 체험을 예약할 수 있도록 구성한 26쪽 통합 안내 홈페이지입니다.",
+    features: [
+      "fullPage 구간 이동 · Slick 대표 화면과 마을 사진 넘김",
+      "열한 마을 지도 · 대표 마을 상세 · 체험 분류와 관광 코스",
+      "숙박·체험 날짜 선택 · 인원 선택 · 신청 정보 정적 흐름",
+      "공지·FAQ·사진관 · 로그인·회원가입·약관 · 5단계 반응형 배치",
+    ],
+    idealFor: "농촌체험휴양마을 협의체, 지역 관광조직, 체험마을 공동 예약센터, 숙박과 계절 프로그램을 함께 운영하는 마을 네트워크",
+    image: "/thumbs/travel-c.jpg",
+    liveUrl: "/ondeul/",
+    industryKey: "travel",
+    premiumLabel: "농촌체험 · 통합예약",
+    designCode: "TRVP-1001",
+    premium: true,
+  },
+  {
     slug: "clinic-m-template",
     industry: "피부과 · 리프팅 홈페이지",
     title: "피부과 · 리프팅 홈페이지 (프리미엄 디자인 K)",
