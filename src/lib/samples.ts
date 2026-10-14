@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "artist-b-template",
+    industry: "갤러리 · 전시 공간 홈페이지",
+    title: "갤러리 · 전시 공간 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "portfolio", "small-business"],
+    tag: "프리미엄 디자인 · 갤러리 · 전시 · 공간 대관 · 16페이지",
+    purpose:
+      "화면을 크게 쓰는 전시 비주얼과 부드러운 스크롤 장면으로 시작해 갤러리 소개, 두 층의 공간 안내, 현재 · 예정 · 지난 전시, 대관 일정과 신청 조회, 문의, 뉴스와 FAQ까지 16쪽으로 구성한 갤러리 홈페이지입니다.",
+    features: [
+      "Lenis 부드러운 스크롤 · 스크롤 연동 전환 장면",
+      "현재 전시 상세 · 지난 전시 목록 · 예정 전시 빈 상태",
+      "6층·7층 공간 전환 · 사진 갤러리 · 시설 규격",
+      "대관 일정 · 신청 조회 · 문의 폼 · 뉴스 · FAQ",
+    ],
+    idealFor: "갤러리, 미술관, 복합 전시 공간, 전시 대관을 함께 운영하는 문화 공간",
+    image: "/thumbs/artist-b.jpg",
+    liveUrl: "/novarque/",
+    industryKey: "artist",
+    premiumLabel: "갤러리 · 전시공간",
+    designCode: "ARTP-1002",
+    premium: true,
+  },
+  {
     slug: "craft-f-template",
     industry: "공방 · 사립박물관 홈페이지",
     title: "공방 · 문방 공예 박물관 홈페이지 (프리미엄 디자인 F)",
