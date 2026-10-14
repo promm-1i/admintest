@@ -223,7 +223,7 @@
 </div>
 <div class="section fp-auto-height" id="od-i-sec2">
 <div class="od-in-ct">
-<p class="od-tx-tp-3 od-clrx-1"><strong>함께 가요</strong> 산과 들이 만나는 <span class="od-bngx-tx">온들</span>마을로</p>
+<p class="od-tx-tp-3 od-clrx-1"><strong>쉬러 와요</strong> 산골 <span class="od-bngx-tx">온들</span>마을!</p>
 <p class="od-tx-tp-4">둘러볼 온들군 마을을 선택해 주세요</p>
 <div class="od-dmmx"></div>
 <div class="od-vllx-wr">
@@ -566,7 +566,7 @@
 </div>
 <div class="section fp-auto-height" id="od-i-sec3">
 <div class="od-in-ct">
-<p class="od-tx-tp-3 od-clrx-2"><span class="od-bngx-tx">온들</span>한곳에서 고르는 <strong>쉬어 가는 길</strong></p>
+<p class="od-tx-tp-3 od-clrx-2"><span class="od-bngx-tx">온들</span>에서 고르는 <strong>쉼표 여행</strong></p>
 <p class="od-tx-tp-4">산촌의 숙소와 계절 체험이<br class="od-pcx-hdx"/> 모인 온들군으로 오세요</p>
 <ul class="od-xprx-ls">
 <li class="od-ls-1">
@@ -879,6 +879,8 @@ $('.od-bt-plyx').on('click',function(){$('.od-sl-ctrx-1').addClass('od-plyx');$(
 $('.od-bt-psx').on('click',function(){$('.od-sl-ctrx-1').removeClass('od-plyx');$('.od-hm-sl-01').slick('slickPause');});
 $('.od-in-sl-1').each(function(i){$(this).attr('id','odx-village-'+i).slick({draggable:true,dots:false,arrows:true,infinite:true,autoplay:false,speed:400,slidesToShow:1,slidesToScroll:1,pauseOnHover:false});});
 $('.od-rcx-sl').slick({draggable:true,dots:false,infinite:true,autoplay:true,speed:400,slidesToShow:1,slidesToScroll:1,pauseOnHover:false,fade:true,cssEase:'linear'});
+function syncSlickA11y(root){$(root).find('.slick-slide').each(function(){var hidden=this.getAttribute('aria-hidden')==='true',$focus=$(this).find('a,button,input,select,textarea,[tabindex]');if(hidden)$focus.attr('tabindex','-1');else $focus.removeAttr('tabindex');});}
+$('.slick-slider').each(function(){var root=this;syncSlickA11y(root);new MutationObserver(function(){syncSlickA11y(root);}).observe(root,{subtree:true,attributes:true,attributeFilter:['aria-hidden']});});
 })(jQuery);
 
 </script>
