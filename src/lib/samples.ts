@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "tax-g-template",
+    industry: "세무법인 · 가업승계 홈페이지",
+    title: "세무법인 · 가업승계 홈페이지 (프리미엄 디자인 B)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 세무법인 · 가업승계 · 상속 · 업무사례 · 25페이지",
+    purpose:
+      "야간 건축 사진을 쓰는 첫 화면과 청색 정보 구획으로 시작해 법인소개, 연혁, 수상, CI, 지점, 구성원, 일곱 업무 분야, 분야별 사례, 영상 포스터, 세무소식, 문의까지 25쪽으로 구성한 세무법인 홈페이지입니다.",
+    features: [
+      "화면을 채우는 첫 장면 · 스크롤 상태 헤더 · PC 하위 메뉴 · 모바일 펼침 메뉴",
+      "지역별 지점 탭 · 구성원 목록과 상세 · 일곱 업무 분야와 상세",
+      "분야별 사례 목록 · 대표 사례 상세 3쪽 · 세무소식 목록과 본문",
+      "영상 재생 · 상담 현황과 후기 게시판 · 필수값 검증 문의 양식 · 5단계 반응형 배치",
+    ],
+    idealFor: "가업승계, 상속·증여, 법인자문, 조세불복을 함께 안내하는 세무법인과 여러 지역 상담센터를 운영하는 세무회계 사무소",
+    image: "/thumbs/tax-g.jpg",
+    liveUrl: "/yuldamwon/",
+    industryKey: "tax",
+    premiumLabel: "세무법인 · 가업승계",
+    designCode: "TAXP-1002",
+    premium: true,
+  },
+  {
     slug: "academy-g-template",
     industry: "스피치 · 보이스 · 면접 학원 홈페이지",
     title: "스피치 · 보이스 · 면접 학원 홈페이지 (프리미엄 디자인 G)",
