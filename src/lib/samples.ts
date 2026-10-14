@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "academy-g-template",
+    industry: "스피치 · 보이스 · 면접 학원 홈페이지",
+    title: "스피치 · 보이스 · 면접 학원 홈페이지 (프리미엄 디자인 G)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 스피치 · 보이스 · 면접 · 기업교육 · 26페이지",
+    purpose:
+      "스피치와 보이스, 취업·대학·공무원 면접 과정을 한곳에서 안내하고 교육 일정, 수강 전후 사례, 기업 출강, 강사진, 상담과 수강 신청까지 26쪽으로 구성한 학원 홈페이지입니다.",
+    features: [
+      "네 갈래 대표 화면 · 자동 넘김 배너 · 스크롤 상태 헤더 · 모바일 전체 메뉴",
+      "스피치·보이스·면접 대표 과정 10쪽 · 공무원 면접 별도 첫 화면",
+      "수강 전후 사례 목록·상세 · 기업교육·구독형 교육 · 공지·포토·영상 포스터",
+      "수강료·온라인 상담·과정 찾기 · 학원·강사·오시는 길 · 5단계 반응형 배치",
+    ],
+    idealFor: "스피치, 보이스 트레이닝, 취업·대학·공무원 면접 코칭과 기업 출강을 함께 운영하는 학원 및 교육센터",
+    image: "/thumbs/academy-g.jpg",
+    liveUrl: "/malbom/",
+    industryKey: "academy",
+    premiumLabel: "스피치 · 보이스 · 면접",
+    designCode: "EDUP-1002",
+    premium: true,
+  },
+  {
     slug: "artist-b-template",
     industry: "갤러리 · 전시 공간 홈페이지",
     title: "갤러리 · 전시 공간 홈페이지 (프리미엄 디자인 B)",
