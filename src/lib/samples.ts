@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "craft-f-template",
+    industry: "공방 · 사립박물관 홈페이지",
+    title: "공방 · 문방 공예 박물관 홈페이지 (프리미엄 디자인 F)",
+    type: ["premium-template", "small-business", "portfolio"],
+    tag: "프리미엄 디자인 · 문방 공예 · 박물관 · 전시 · 교육 체험 · 21페이지",
+    purpose:
+      "붓과 문방 공예의 역사, 제작 과정과 장인 기록을 깊이 있게 보여주면서 상설·기획전, 교육 프로그램, 대관과 공지까지 함께 운영하는 21쪽 박물관 홈페이지입니다.",
+    features: [
+      "대표 슬라이드 · 관람 안내 · 빠른 메뉴 · 전시와 프로그램",
+      "박물관 소개 · 관장 이야기 · 연혁 · 관람 규칙",
+      "붓의 역사 · 25단계 제작 과정 · 장인 · 재료와 종류",
+      "상설·기획전 · 교육 신청 · 대관 신청 · 공지와 소식",
+    ],
+    idealFor: "전통 공예 박물관, 장인 공방, 지역 문화 공간, 체험 교육을 함께 운영하는 소규모 기관",
+    image: "/thumbs/craft-f.jpg",
+    liveUrl: "/dammuk/",
+    industryKey: "craft",
+    premiumLabel: "공방 · 사립박물관",
+    designCode: "CRAP-1001",
+    premium: true,
+  },
+  {
     slug: "travel-c-template",
     industry: "농촌체험 · 마을여행 홈페이지",
     title: "농촌체험 · 통합예약 홈페이지 (프리미엄 디자인 C)",
