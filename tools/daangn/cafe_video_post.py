@@ -3,6 +3,7 @@
 
   python cafe_video_post.py <글 폴더>          채우기만 하고 화면을 찍는다(등록 안 누름)
   python cafe_video_post.py <글 폴더> --post   채운 뒤 등록까지 — 사용자가 그 글을 확인한 뒤에만
+  --no-pics                                 사진 없이(광고 영상 글)
 
 <글 폴더> = ref-sites/_cafe_video/<코드>_<이름>/
   post.txt   첫 줄 제목, '===' 줄 뒤가 본문(한 줄에 한 문장, 주제 바뀔 때만 빈 줄)
@@ -49,9 +50,10 @@ def main():
     post = "--post" in sys.argv
     title, body = read_post(folder)
     video = folder / "video.mp4"
-    pics = sorted((CAP / folder.name).glob("*.jpg"))
+    nopics = "--no-pics" in sys.argv          # 광고 영상 글은 동영상 + 본문만(10-14)
+    pics = [] if nopics else sorted((CAP / folder.name).glob("*.jpg"))
     assert video.exists(), video
-    assert 1 <= len(pics) <= 20, len(pics)
+    assert nopics or 1 <= len(pics) <= 20, len(pics)
     OUT.mkdir(parents=True, exist_ok=True)
 
     with sync_playwright() as p:
