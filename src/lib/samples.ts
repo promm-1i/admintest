@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "academy-h-template",
+    industry: "아동·가족 심리상담 및 치료교육 홈페이지",
+    title: "아동·가족 심리상담 및 치료교육 홈페이지 (프리미엄 디자인 H)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 아동상담 · 가족상담 · 부모교육 · 18페이지",
+    purpose:
+      "아동의 기질과 발달, 가족의 관계를 이해하는 상담·치료교육 프로그램을 소개하고 연구소 안내, 연구진, 교육 활동, 협력 네트워크, 자료와 문의까지 18페이지로 구성한 홈페이지입니다.",
+    features: [
+      "월간 일정과 핵심 프로그램을 연결한 메인 화면 · PC·태블릿·모바일 반응형",
+      "연구소 소개·연혁·연구진·교육 활동·협력 네트워크를 분리한 소개 체계",
+      "기질·발달 평가, 심리상담, 특별 프로그램, 전문가 교육, 부모교육 상세",
+      "안내 자료·특별 강의·문의·오시는 길 · 실제 전송 없는 시연용 양식",
+    ],
+    idealFor: "아동·청소년 상담센터, 가족상담기관, 발달지원기관, 부모교육 및 치료교육 연구소",
+    image: "/thumbs/academy-h.jpg",
+    liveUrl: "/aramgyeol/",
+    industryKey: "academy",
+    premiumLabel: "심리상담 · 치료교육",
+    designCode: "EDUP-1003",
+    premium: true,
+  },
+  {
     slug: "tax-g-template",
     industry: "세무법인 · 가업승계 홈페이지",
     title: "세무법인 · 가업승계 홈페이지 (프리미엄 디자인 B)",
