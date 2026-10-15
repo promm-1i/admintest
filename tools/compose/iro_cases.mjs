@@ -14,7 +14,7 @@ import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { chromium } from 'playwright';
 
-const BASE = 'http://localhost:5173/iro';
+const BASE = process.env.IRO_BASE || 'http://localhost:5173/iro';
 const DIR = join(process.cwd(), 'public', 'cases', 'iro');
 
 const PAGES = ['index', 'about', 'treatment', 't-chimgu', 'cases', 'reviews', 'location', 'contact'];
