@@ -46,6 +46,12 @@
   }
   if ($('#allmenuBtn')) $('#allmenuBtn').addEventListener('click', function () { amOpen(true); });
   if ($('#allmenuClose')) $('#allmenuClose').addEventListener('click', function () { amOpen(false); });
+  /* 전체 메뉴에서 지금 쪽의 #앵커를 누르면 쪽이 새로 안 열려 메뉴가 덮은 채 남는다 — 직접 닫는다 */
+  if (am) am.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href*="#"]');
+    var pn = function (p) { return p.replace(/(index)?\.html$/, '').replace(/\/$/, ''); };
+    if (a && a.hash.length > 1 && pn(a.pathname) === pn(location.pathname)) amOpen(false);
+  });
 
   /* 예약 모달 */
   var rm = $('#reserveModal');
