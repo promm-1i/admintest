@@ -19,6 +19,12 @@
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && body.classList.contains('menu-open')) { setMenu(false); toggle && toggle.focus(); }
   });
+  /* 전체 메뉴에서 지금 쪽의 #앵커를 누르면 쪽이 새로 안 열려 메뉴가 덮은 채 남는다 — 직접 닫는다 */
+  if (panel) panel.addEventListener('click', function (e) {
+    var a = e.target.closest('a[href*="#"]');
+    var pn = function (p) { return p.replace(/(index)?\.html$/, '').replace(/\/$/, ''); };
+    if (a && a.hash.length > 1 && pn(a.pathname) === pn(location.pathname)) setMenu(false);
+  });
   /* 메뉴 항목에 올리면 오른쪽 사진 교체 */
   var pics = $$('.gnb-pics li');
   $$('.gnb-group').forEach(function (g, i) {
