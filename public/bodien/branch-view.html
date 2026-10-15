@@ -303,6 +303,12 @@ document.documentElement.classList.remove('no-js');
     burger.setAttribute('aria-expanded',open?'true':'false');
     burger.setAttribute('aria-label',open?'전체 메뉴 닫기':'전체 메뉴 열기');
   });
+  /* 전체 메뉴에서 지금 쪽의 #앵커를 누르면 쪽이 새로 안 열려 메뉴가 화면을 덮은 채 남는다 — 직접 닫는다 */
+  function pn(p){ return p.replace(/(index)?\.html$/,'').replace(/\/$/,''); }
+  full.addEventListener('click',function(e){
+    var a=e.target.closest('a[href*="#"]');
+    if(a && a.hash.length>1 && pn(a.pathname)===pn(location.pathname) && full.classList.contains('is-on')) burger.click();
+  });
   var imgs=[].slice.call(document.querySelectorAll('.fullnav-img img'));
   [].forEach.call(document.querySelectorAll('.fullnav-menu>ul>li'),function(li,i){
     li.addEventListener('mouseover',function(){ imgs.forEach(function(m,j){ m.classList.toggle('is-on',j===i); }); });
