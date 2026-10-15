@@ -62,14 +62,15 @@ function PropertyListPreview() {
   return (
     <div>
       <PanelHeader title="전체 매물 목록" description="등록된 모든 매물을 검색·필터·일괄관리합니다." />
+      {/* 휴대폰 모형 틀(약 260px)에 다섯 열이 안 들어가 '상태' 열이 잘렸다 — 640px 미만은 지역·담당자를 뺀다 */}
       <div className="overflow-hidden rounded-lg border border-border">
         <table className="w-full text-left text-xs">
           <thead className="bg-secondary/50 text-muted-foreground">
             <tr>
               <th className="px-3 py-2 font-medium">매물명</th>
-              <th className="px-3 py-2 font-medium">지역</th>
+              <th className="hidden px-3 py-2 font-medium sm:table-cell">지역</th>
               <th className="px-3 py-2 font-medium">가격</th>
-              <th className="px-3 py-2 font-medium">담당자</th>
+              <th className="hidden px-3 py-2 font-medium sm:table-cell">담당자</th>
               <th className="px-3 py-2 font-medium">상태</th>
             </tr>
           </thead>
@@ -79,9 +80,9 @@ function PropertyListPreview() {
                 <td className="px-3 py-2 font-medium text-foreground">
                   {l.image} {l.title}
                 </td>
-                <td className="px-3 py-2 text-muted-foreground">{l.region}</td>
+                <td className="hidden px-3 py-2 text-muted-foreground sm:table-cell">{l.region}</td>
                 <td className="px-3 py-2 font-semibold text-foreground">{l.price}</td>
-                <td className="px-3 py-2 text-muted-foreground">{l.manager}</td>
+                <td className="hidden px-3 py-2 text-muted-foreground sm:table-cell">{l.manager}</td>
                 <td className="px-3 py-2">
                   <StatusBadge label={l.status} tone={l.status === "공개" ? "success" : "neutral"} />
                 </td>
