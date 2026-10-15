@@ -19,6 +19,8 @@ var menuButton=$('.header__menu-icon'),sideClose=$('.side-menu__close');
 menuButton.addEventListener('click',function(){side.classList.add('is-open');side.setAttribute('aria-hidden','false');menuButton.setAttribute('aria-expanded','true');d.body.style.overflow='hidden';sideClose.focus()});
 function closeSide(){side.classList.remove('is-open');side.setAttribute('aria-hidden','true');menuButton.setAttribute('aria-expanded','false');d.body.style.overflow='';menuButton.focus()}
 sideClose.addEventListener('click',closeSide);back.addEventListener('click',closeSide);
+/* 사이드 메뉴에서 지금 쪽의 #앵커(IR → 지배구조 등)를 누르면 쪽이 새로 안 열려 메뉴가 덮은 채 남는다 — 직접 닫는다 */
+side.addEventListener('click',function(e){var a=e.target.closest('a[href*="#"]'),pn=function(p){return p.replace(/(index)?\.html$/,'').replace(/\/$/,'')};if(a&&a.hash.length>1&&pn(a.pathname)===pn(location.pathname)&&side.classList.contains('is-open'))closeSide()});
 $$('.side-menu__item-toggle').forEach(function(button){button.addEventListener('click',function(){var it=button.closest('.side-menu__item'),on=it.classList.contains('is-open');$$('.side-menu__item').forEach(function(o){o.classList.remove('is-open');var b=$('.side-menu__item-toggle',o);if(b)b.setAttribute('aria-expanded','false')});if(!on){it.classList.add('is-open');button.setAttribute('aria-expanded','true')}})});
 d.addEventListener('keydown',function(e){if(e.key==='Escape'){closeMenu();if(side.classList.contains('is-open'))closeSide()}});
 $$('[data-language]').forEach(function(button){button.addEventListener('click',function(e){e.stopPropagation();var value=button.dataset.language;if(value==='ko'){announce('한국어 페이지입니다.')}else{announce('영문 페이지는 준비 중입니다.')}lang&&lang.classList.remove('is-open')})});
