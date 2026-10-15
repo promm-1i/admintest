@@ -51,7 +51,17 @@ def brand_dir(slug):
     return m.group(1) if m else None
 
 
+# 고객 납품 사이트 — 민트클 public 밖에 있고 포트폴리오(samples.ts · 사례 상세 · 썸네일)에 올리지 않는다.
+# [4] 산출물만 해당 없음으로 넘기고 나머지 검사는 그 폴더로 똑같이 돌린다(사용자가 정한 것만 적는다).
+CLIENT_SITES = {
+    'thechic': ('C:/web-project/thechic/site',
+                '2026-10-15 사용자 결정(권장안) — 더시크댄스학원 고객 납품 사이트, 포트폴리오 등록 대상 아님'),
+}
+
+
 def tpl_dir(slug):
+    if slug in CLIENT_SITES:
+        return CLIENT_SITES[slug][0]
     for p in ('%s/public/%s' % (ROOT, slug), '%s/public/templates/%s' % (ROOT, slug)):
         if os.path.isdir(p):
             return p
@@ -77,6 +87,8 @@ def check_sources(slug, ref):
     mine = tpl_dir(slug)
     mycss = io.open(mine + '/assets/site.css', encoding='utf-8').read() if mine and \
         os.path.exists(mine + '/assets/site.css') else ''
+    if slug in CLIENT_SITES:      # 고객 사이트는 쪽 종류별 CSS 묶음(assets/*.css)으로 나뉘어 있다
+        mycss = ''.join(io.open(f, encoding='utf-8').read() for f in glob.glob(mine + '/assets/*.css'))
     mypages = ''.join(io.open(f, encoding='utf-8').read() for f in glob.glob(mine + '/*.html')) \
         if mine else ''
     # 스크립트를 쪽 밖 파일로 뺀 클론(엘름우드 assets/js/elmwood.js)도 센다 — 쪽 안 인라인만 세면 장면 함수 검사가 오탐한다
@@ -251,6 +263,9 @@ def check_images(slug):
 def check_outputs(slug):
     """사례형 상세·썸네일처럼 '다른 데는 다 있는데 이번만 없는' 누락을 막는다."""
     print('\n[4] 산출물')
+    if slug in CLIENT_SITES:
+        ok('해당 없음 — %s' % CLIENT_SITES[slug][1])
+        return
     items = [
         ('사례형 상세', glob.glob('%s/src/lib/caseStudies/data/*%s*.ts' % (ROOT, slug))),
         ('사례 캡처', glob.glob('%s/public/cases/%s/*.webp' % (ROOT, slug)) or   # 브랜드 폴더로 옮긴 프리미엄(한울 cases/hanul)
