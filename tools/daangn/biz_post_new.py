@@ -5,7 +5,7 @@
   python biz_post_new.py --folder <글 폴더> <사진 폴더>
         글 폴더의 biz.txt(첫 줄 제목 · '===' 뒤 본문, 본문 첫 줄이 주소)와 사진 폴더 앞 10장으로 새 탭에서 채운다.
         2026-10-12 영상 소식 — 비즈는 웹에서 동영상을 못 올려(사진 파일만 받음) 영상 장면 사진(noveriq-video upload_stills.py)을 쓴다.
-사진은 카페용 캡처(Desktop\\개발\\카페_캡처_늘리기\\<코드>_<이름>\\)의 앞 10장.
+사진은 카페용 캡처(Desktop\\개발\\카페_캡처_늘리기\\<코드>_<이름>\\)에서 글마다 골라 PHOTOS 에 적는다(앞 10장 자동 아님).
 옛 biz_post.py 는 프리미엄_상세페이지_캡처의 01·04·05·07 을 쓰는데, 새 템플릿은
 그 폴더에 첫화면·모바일밖에 없어서 카페용 벌을 그대로 쓴다.
 """
@@ -306,6 +306,41 @@ ESG, 뉴스룸, 채용 세 쪽, 문의까지 모두 19쪽입니다.
 피부과 원장님들 궁금한 거 있으시면 편하게 채팅 주세요😊"""),
 }
 
+# 2026-10-15 사용자: "폴더 앞 10장이 붙으면 안 되지." — 아름결 제목이 수면치료인데 그 사진이 11번이라 빠졌다.
+# 글마다 사진 번호(파일 이름 앞 두 자리)를 본문 순서대로 골라 적는다. 맨 앞이 대표 사진(피드 썸네일).
+# 여기 없는 키는 채우지 않고 멈춘다.
+PHOTOS = {
+    "hangyeol": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+    "areumgyeol": ["11", "01", "02", "09", "10", "12", "04", "14", "07", "13"],
+    "onyeon": ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+}
+
+
+def photo_files(key: str) -> list:
+    folder = CAP / POSTS[key][0]
+    have = {f.name[:2]: f for f in sorted(folder.glob("*.jpg"))}
+    if key not in PHOTOS:
+        sys.exit("사진을 안 골랐다 — 본문 순서대로 번호를 PHOTOS[%r] 에 적어라(맨 앞이 대표).\n  %s"
+                 % (key, "\n  ".join(f.name for f in have.values())))
+    nums = PHOTOS[key]
+    if len(nums) > 10 or len(set(nums)) != len(nums) or any(n not in have for n in nums):
+        sys.exit("사진 번호가 이상하다: %s" % nums)
+    return [have[n] for n in nums]
+
+
+def type_body(pg, text: str) -> None:
+    """원고의 빈 줄(\\n\\n)은 문단, \\n 은 문단 안 줄바꿈."""
+    for bi, block in enumerate(text.split("\n\n")):
+        if bi:
+            # 2026-10-15: Enter 한 번은 저장될 때 줄바꿈 하나로만 남아 문단 사이 빈 줄이 없었다
+            # (10-11 ~ 10-15 소식 전부). 두 번 쳐야 빈 문단이 생겨 빈 줄로 보인다.
+            pg.keyboard.press("Enter")
+            pg.keyboard.press("Enter")
+        for li, line in enumerate(block.split("\n")):
+            if li:
+                pg.keyboard.press("Shift+Enter")
+            pg.keyboard.insert_text(line)
+
 
 def photo_count(pg) -> int:
     loc = pg.locator("text=/^\\d+\\/10$/")
@@ -338,7 +373,7 @@ TITLE_MAX = 30   # 피드 카드가 30자에서 자른다(2026-10-11 자 눈금�
 LINE_MAX = 55    # 2026-10-11 사용자 지시 — 한 줄에 한 문장, 폰에서 벽처럼 안 보이게
 
 # 본문 쓰는 틀 (2026-10-11 부터)
-#   문단 사이는 빈 줄(Enter), 문단 안 줄바꿈은 Shift+Enter → 원고에서는 \n\n 과 \n.
+#   문단 사이는 빈 줄(Enter 두 번 — type_body), 문단 안 줄바꿈은 Shift+Enter → 원고에서는 \n\n 과 \n.
 #   한 줄에 한 문장. 주제가 바뀔 때만 빈 줄.
 #   쪽 수 나열처럼 끊을 수 없는 줄만 길어도 둔다.
 
@@ -359,7 +394,7 @@ def main() -> None:
     else:
         key = sys.argv[1]
         folder, title, body = POSTS[key]
-        files = sorted((CAP / folder).glob("*.jpg"))[:10]
+        files = photo_files(key)
         text = "https://noveriq.co.kr/%s/\n\n%s" % (key, body)
     if len(title) > TITLE_MAX:
         sys.exit(f"제목 {len(title)}자 — {TITLE_MAX}자에서 잘린다. 줄이고 다시 돌려라:\n  {title}")
@@ -402,14 +437,9 @@ def main() -> None:
 
         ed = pg.locator("[contenteditable=true]").first
         ed.click()
-        for bi, block in enumerate(text.split("\n\n")):
-            if bi:
-                pg.keyboard.press("Enter")
-            for li, line in enumerate(block.split("\n")):
-                if li:
-                    pg.keyboard.press("Shift+Enter")
-                pg.keyboard.insert_text(line)
+        type_body(pg, text)
         print("본문:", len(text), "자 — 등록은 biz_publish.py")
 
 
-main()
+if __name__ == "__main__":   # biz_photos.py 가 PHOTOS · photo_files 를 가져다 쓴다
+    main()

@@ -72,6 +72,7 @@ with sync_playwright() as p:
     for bi, block in enumerate(NEW_BODY.split(chr(10) + chr(10))):
         if bi:
             pg.keyboard.press("Enter")
+            pg.keyboard.press("Enter")   # 10-15: 한 번이면 문단 사이 빈 줄이 저장 안 됨(biz_post_new.type_body)
         for li, line in enumerate(block.split(chr(10))):
             if li:
                 pg.keyboard.press("Shift+Enter")
