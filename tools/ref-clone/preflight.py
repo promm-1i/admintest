@@ -140,6 +140,11 @@ SCOPE_DECIDED = {
     'daesangwellife': '2026-10-05 사용자 결정(권장안) — 대기업 대상웰라이프 33쪽 → 누리웰 22쪽 대표 틀 그대로(빌더는 ref-sites/daesang)',
     'daesang': '2026-10-05 사용자 결정(권장안) — 대기업 대상웰라이프 33쪽 → 누리웰 22쪽 대표 틀 그대로',
 }
+# 원본이 링크는 걸었지만 라이브에서도 404 인 쪽 — 만들 대상이 아니라 [2] 쪽 수에서 뺀다(라이브로 확인한 것만)
+ORIGIN_404 = {
+    'helloludi': {'/ko/trial', '/programs/architect', '/programs/artist', '/programs/astronaut', '/programs/chef',
+                  '/programs/detective', '/programs/doctor', '/programs/reporter', '/programs/scientist'},   # 10-15 curl 전부 404
+}
 # 원본 캡처 없이 흐름만 빌린 템플릿 — 원본 크롤이 없어 [2] section 대조가 성립하지 않는다(사용자가 예외로 정한 것만)
 NO_REF_STRUCT = {
     'withmane': '2026-10-05 사용자 결정(권장안) — 온채(estate-g)는 회원제 흐름만 빌린 템플릿, 원본 캡처 없음',
@@ -215,6 +220,10 @@ def check_pages(slug, ref):
                  for l in re.findall(r'href="(/[^"#?]*)', t)}
         links = {l for l in links
                  if not re.search(r'\.(css|js|png|jpe?g|svg|ico|webp|pdf|zip)$', l, re.I)}
+        if ref in ORIGIN_404:
+            dead = links & ORIGIN_404[ref]
+            links -= dead
+            print('       원본 링크 중 원본도 404 인 %d개는 뺌' % len(dead))
         print('       원본이 내건 내부 링크 %d개' % len(links))
         if len(links) >= 8 and len(mypages) < len(links) * 0.7 and ref in SCOPE_DECIDED:
             ok('원본 %d쪽 → 내 것 %d쪽은 사용자가 정한 축약 — %s' % (len(links), len(mypages), SCOPE_DECIDED[ref]))
