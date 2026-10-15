@@ -641,6 +641,9 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
    그대로 두면 390 화면에서 좌우가 67px·35px 씩 비어 답답해 보인다. */
 @media(max-width:600px){
   .renewal-editorial .first-fixer{width:calc(100% - 8px)}
+  /* 사진이 넓어진 만큼 높아져(폭-48 × 90/143) 카드 아래로 (높이-50)px 삐져나온다.
+     174px 고정 간격이면 412폭부터 다음 카드 제목을 덮으니, 그 아래 24px 를 남기게 간격을 늘린다. */
+  .renewal-editorial .first-stories{gap:max(174px,calc((100vw - 48px) * .6294 - 26px));padding-bottom:max(250px,calc((100vw - 48px) * .6294 + 24px))}
   .renewal-editorial .now-value-list{max-width:none;margin-left:0;margin-right:0}
   .renewal-editorial .now-value-text{padding:20px}
 }
