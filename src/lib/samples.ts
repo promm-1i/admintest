@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "academy-i-template",
+    industry: "수학 문제은행 · 학원 솔루션 홈페이지",
+    title: "수학 문제은행 · 학원 솔루션 홈페이지 (프리미엄 디자인 I)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 수학 문제은행 · 수준별 학습 · 성적 관리 · 20페이지",
+    purpose:
+      "문제은행 서비스의 핵심인 수준 진단, 맞춤 문제 구성, 내신·수능 대비, 성적 관리와 전국수학평가를 20개 화면으로 구분해 소개하고 학원 운영자가 필요한 정보를 빠르게 찾을 수 있도록 구성한 홈페이지입니다.",
+    features: [
+      "AI 맞춤 학습 · 수준 진단 · 기초 완성 · 내신 향상 · 수능 대비 과정 안내",
+      "성적 관리 · 이용 요금 · 전국수학평가 일정과 수상·후기 콘텐츠",
+      "학원 후기 · 설명회 · 무료 체험 · 자주 묻는 질문과 상담 입력 화면",
+      "PC 상위 메뉴 · 모바일 슬라이드 메뉴 · 탭 · 아코디언 · 반응형 배치",
+    ],
+    idealFor: "수학학원, 교습소, 공부방, 문제은행과 수준별 학습·성적 관리 서비스를 함께 소개하려는 교육 브랜드",
+    image: "/thumbs/academy-i.jpg",
+    liveUrl: "/semdawoom/",
+    industryKey: "academy",
+    premiumLabel: "수학 문제은행 · 학원 솔루션",
+    designCode: "EDUP-1004",
+    premium: true,
+  },
+  {
     slug: "academy-h-template",
     industry: "아동·가족 심리상담 및 치료교육 홈페이지",
     title: "아동·가족 심리상담 및 치료교육 홈페이지 (프리미엄 디자인 H)",
