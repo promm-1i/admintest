@@ -104,7 +104,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "휴대폰에서는 카드가 한 장씩",
+    title: "트레이너 소개가 펼쳐진 채",
     body: "휴대폰 첫 화면은 영상 위 제목과 JOIN US 버튼이 들어오고, 서비스는 번호와 사진이 한 줄씩 켜지며 내려갑니다. 트레이너 카드는 소개가 펼쳐진 채 한 장씩 쌓이고, 시작 단계와 멤버십 카드도 위아래로 이어지며, 후기는 옆으로 밀어 넘깁니다.",
     shots: [
       { img: "/cases/fitness-a/m-index.webp", caption: "첫 화면" },

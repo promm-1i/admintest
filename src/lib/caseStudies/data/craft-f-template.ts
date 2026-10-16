@@ -41,7 +41,7 @@ const study: CaseStudy = {
   ],
   mobile: {
     title: "긴 설명도 한 줄로 이어집니다",
-    body: "큰 사진과 긴 설명은 한 열로 쌓이고, 카드와 신청 항목은 옆으로 밀리는 일 없이 화면 크기에 맞춰 배치됩니다.",
+    body: "큰 사진과 긴 설명은 한 줄로 쌓이고, 카드와 신청 항목은 옆으로 밀리는 일 없이 화면 크기에 맞춰 배치됩니다.",
     shots: [
       { img: "/cases/craft-f/m-index.webp", caption: "홈" },
       { img: "/cases/craft-f/m-museum.webp", caption: "박물관" },

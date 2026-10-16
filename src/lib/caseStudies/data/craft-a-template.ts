@@ -83,7 +83,7 @@ const study: CaseStudy = {
       body: "제목은 기울어진 Instrument Serif로 적었습니다.",
     },
     {
-      title: "한 페이지 안에서 바로 이동",
+      title: "커리큘럼 · 장소로 곧장",
       body: "커리큘럼 · 강사 · 포함 사항 · 장소 · FAQ와 신청하기 버튼을 누르면 해당 구간으로 곧장 내려갑니다.",
     },
     {

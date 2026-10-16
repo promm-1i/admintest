@@ -133,7 +133,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "휴대폰에서는 한 줄씩 쌓입니다",
+    title: "진행 단계만 2열로 접힙니다",
     body: "메뉴는 햄버거 버튼 안으로 들어가고, 가로로 늘어놓던 진료 과목과 치료 사례는 한 줄씩 세로로 쌓입니다. 진행 단계만 2열로 접힙니다.",
     shots: [
       { img: "/cases/iro/m-index.webp", caption: "메인" },

@@ -39,7 +39,7 @@ const study: CaseStudy = {
   ],
   mobile: {
     title: "작은 화면에서는 일정과 긴 정보를 한 줄 흐름으로 읽습니다",
-    body: "390px 화면에서 메뉴를 탭으로 열고, 달력은 날짜별 일정 목록으로 전환합니다. 소개와 프로그램 카드는 한 열로 배치하며 옆으로 밀리는 일 없이 전체 내용을 확인하도록 점검했습니다.",
+    body: "휴대폰 폭(390px) 화면에서 메뉴를 탭으로 열고, 달력은 날짜별 일정 목록으로 전환합니다. 소개와 프로그램 카드는 한 줄로 배치하며 옆으로 밀리는 일 없이 전체 내용을 확인하도록 점검했습니다.",
     shots: [
       { img: "/cases/academy-h/m-index.webp", caption: "모바일 메인" },
       { img: "/cases/academy-h/m-introduction.webp", caption: "모바일 연구소 소개" },

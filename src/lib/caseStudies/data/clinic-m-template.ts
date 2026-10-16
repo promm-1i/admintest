@@ -44,7 +44,7 @@ const study: CaseStudy = {
   ],
   mobile: {
     title: "모바일에서는 메뉴와 카드가 한 줄로 정리됩니다",
-    body: "전체 메뉴는 햄버거 단추로 열고, 예약 입력은 두 열에서 한 열로 바뀌며, 진료 카드와 게시판은 손가락으로 넘겨 볼 수 있습니다.",
+    body: "전체 메뉴는 햄버거 단추로 열고, 예약 입력은 두 줄에서 한 줄로 바뀌며, 진료 카드와 게시판은 손가락으로 넘겨 볼 수 있습니다.",
     shots: [
       { img: "/cases/clinic-m/m-index.webp", caption: "메인" },
       { img: "/cases/clinic-m/m-ultrasound-lifting.webp", caption: "집속 초음파 리프팅" },

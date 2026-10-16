@@ -126,7 +126,7 @@ const study: CaseStudy = {
   ],
   details: [
     {
-      title: "위에 붙어 따라오는 메뉴",
+      title: "자리 예약 버튼이 늘 위에",
       body: "다섯 쪽 모두 상단 메뉴와 자리 예약 버튼이 화면 위에 붙어 있습니다.",
     },
     {

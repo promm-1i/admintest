@@ -104,7 +104,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "휴대폰에서는 카드가 한 장씩",
+    title: "문제 카드가 크게 한 장씩",
     body: "휴대폰 첫 화면은 밤하늘 위 제목과 버튼 아래로 영상 카드가 이어지고, 문제 카드는 그림이 크게 한 장씩 쌓입니다. 플랫폼 카드와 요금 카드도 위아래로 이어지며, 후기 숫자와 크리에이터 사진이 한 화면에 들어옵니다.",
     shots: [
       { img: "/cases/video-a/m-index.webp", caption: "첫 화면" },

@@ -63,7 +63,7 @@ const study: CaseStudy = {
     { title: "다국어·글로벌 확장", body: "해외 고객 비중에 맞춰 영문 페이지와 국가별 문의 폼을 추가할 수 있습니다." },
   ],
   mobile: {
-    title: "휴대폰에서는 한 줄씩 쌓입니다",
+    title: "산지 이야기와 원료 카드가 한 줄씩",
     body: "산지 이야기와 원료 카드는 한 줄씩 쌓이고, 메뉴는 오른쪽 위 버튼으로 열고 Esc로 닫습니다.",
     shots: [
       { img: "/cases/corporate-o/m-index.webp", caption: "메인" },

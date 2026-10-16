@@ -41,7 +41,7 @@ const study: CaseStudy = {
   ],
   mobile: {
     title: "제목과 사진이 한 줄로",
-    body: "큰 제목과 사진은 한 열로 바뀌고, 전체 메뉴는 화면을 덮어 탭으로 조작합니다. 공간 정보와 대관 폼도 옆으로 밀리는 일 없이 한 줄씩 쌓입니다.",
+    body: "큰 제목과 사진은 한 줄로 바뀌고, 전체 메뉴는 화면을 덮어 탭으로 조작합니다. 공간 정보와 대관 폼도 옆으로 밀리는 일 없이 한 줄씩 쌓입니다.",
     shots: [
       { img: "/cases/artist-b/m-index.webp", caption: "홈" },
       { img: "/cases/artist-b/m-space.webp", caption: "공간 소개" },
