@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "kids-i-template",
+    industry: "유아 영어 · 말하기 놀이 홈페이지",
+    title: "유아 영어 · 말하기 놀이 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 유아 영어 · 대화형 학습 · 이용 가이드 · 8페이지",
+    purpose:
+      "놀이 장면에서 듣고 답하는 유아 영어 프로그램을 소개하고, 단계별 교육과정과 기본·학습·콘텐츠 가이드, 소식, 도입 문의까지 8쪽으로 구성한 홈페이지입니다.",
+    features: [
+      "영상을 크게 쓰는 첫 화면 · 세 단계 학습 흐름 · 대화 활동 카드",
+      "교육 철학 · 단계별 말하기 과정 · 개인별 학습 경로 안내",
+      "기본 이용법 · 학습 방법 · 콘텐츠별 설명을 나눈 긴 형식의 가이드 3쪽",
+      "PC 하위 메뉴 · 모바일 펼침 메뉴 · 문의 유형 전환 · 필수값 확인 양식",
+    ],
+    idealFor: "유아 영어 프로그램, 말하기 중심 교육센터, 영어 놀이 수업, 교육 앱 및 기관 도입 서비스를 운영하는 브랜드",
+    image: "/thumbs/kids-i.jpg",
+    liveUrl: "/picolingo/",
+    industryKey: "kids",
+    premiumLabel: "유아 영어 · 말하기 놀이",
+    designCode: "KIDP-1003",
+    premium: true,
+  },
+  {
     slug: "academy-i-template",
     industry: "수학 문제은행 · 학원 솔루션 홈페이지",
     title: "수학 문제은행 · 학원 솔루션 홈페이지 (프리미엄 디자인 I)",
