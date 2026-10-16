@@ -160,7 +160,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "사업 카드는 한 장씩 밀어서",
     body: "첫 화면 영상과 슬로건은 그대로 두고, 사업 카드는 한 장씩 밀어서 넘깁니다. 숫자 네 개는 두 칸씩 쌓이고, 사업 쪽의 기술 설명은 사진 아래로 한 줄씩 이어집니다. 메뉴는 오른쪽 위 버튼으로 엽니다.",
     shots: [
       { img: "/cases/corporate-m/m-index.webp", caption: "홈" },

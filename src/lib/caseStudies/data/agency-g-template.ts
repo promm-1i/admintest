@@ -139,7 +139,7 @@ const study: CaseStudy = {
       body: "We Are Orbitlab · Our Services 같은 구역 제목은 Cormorant Garamond 세리프로 크게, 본문 한글은 Pretendard로 씁니다.",
     },
     {
-      title: "크기를 화면 폭에 맞춰 계산합니다",
+      title: "크기를 화면 크기에 맞춰 계산합니다",
       body: "글자와 여백 크기를 화면 폭에 비례해 계산하고, 1023px 한 곳에서만 배치를 바꿉니다. 큰 모니터에서 본 비율이 노트북에서도 그대로 유지됩니다.",
     },
     {
@@ -148,7 +148,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "네 칸 요약은 두 줄로 접힙니다",
     body: "첫 화면 덩어리와 제목은 그대로 두고, 고정 구역의 문장도 한 화면씩 바뀝니다. 서비스 태그는 줄바꿈되고, 프로젝트 카드는 한 칸씩 쌓입니다. 상세의 고객사 · 분류 · 오픈 · 수행기간 네 칸은 두 줄로 접힙니다.",
     shots: [
       { img: "/cases/orbitlab/m-index.webp", caption: "홈" },

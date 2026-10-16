@@ -34,10 +34,10 @@ const study: CaseStudy = {
   detailsTitle: "구현 기준",
   details: [
     { title: "메뉴도 창업 안내도 두 벌", body: "일반 매장과 소형 매장의 메뉴 · 소개 · 창업 안내를 각각 살펴볼 수 있습니다." },
-    { title: "문의 양식은 데모로 안전하게 동작합니다", body: "필수값을 확인하고 실제 외부 전송 대신 템플릿 안내를 보여 줍니다." },
+    { title: "문의 양식은 데모로 안전하게 동작합니다", body: "꼭 넣어야 하는 칸을 확인하고 실제 외부 전송 대신 템플릿 안내를 보여 줍니다." },
     { title: "사진은 교체 가능한 자리 그림입니다", body: "사진 칸 86개와 칸마다 쓸 생성 요청서를 마련했습니다." },
   ],
-  mobile: { title: "좁은 화면에서는 이렇게 됩니다", body: "머리 메뉴는 누르면 열리는 형태로 바뀌고, 메뉴 카드와 문의 양식은 한 줄씩 쌓입니다.", shots: [
+  mobile: { title: "메뉴 카드가 한 줄씩 쌓입니다", body: "위쪽 메뉴는 누르면 열리는 형태로 바뀌고, 메뉴 카드와 문의 양식은 한 줄씩 쌓입니다.", shots: [
     { img: "/cases/restaurant-o/m-index.webp", caption: "메인" }, { img: "/cases/restaurant-o/m-menu.webp", caption: "메뉴" }, { img: "/cases/restaurant-o/m-stores.webp", caption: "매장 찾기" }, { img: "/cases/restaurant-o/m-franchise.webp", caption: "창업 안내" },
   ] },
   faq: [

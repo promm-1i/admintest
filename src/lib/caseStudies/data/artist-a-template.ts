@@ -106,7 +106,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "작품은 두 칸, 크게 보면 손가락으로",
     body: "홈 피드의 사진은 화면 폭을 거의 다 쓰고, 작품 격자는 두 칸으로 줄어듭니다. 크게 보기 창에서는 손가락으로 옆으로 밀어 넘기고, 전시 카드와 문의 폼은 한 줄씩 쌓입니다.",
     shots: [
       { img: "/cases/artist-a/m-index.webp", caption: "홈" },

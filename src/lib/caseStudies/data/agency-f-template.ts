@@ -78,7 +78,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "포트폴리오는 한 칸씩 쌓입니다",
     body: "첫 화면 슬로건은 줄을 나눠 화면을 채우고, 포트폴리오는 한 칸씩 쌓입니다. 프로세스 카드는 옆으로 밀어서 넘기고, 숫자와 흐르는 띠는 그대로 움직입니다.",
     shots: [
       { img: "/cases/prizm/m-index.webp", caption: "첫 화면" },

@@ -26,7 +26,7 @@ const study: CaseStudy = {
     { name: "온연의 활동", file: "activities.html", img: "/cases/clinic-m/page-activities.webp", desc: "학술 활동과 병원 소식을 카드 목록과 상세 화면으로 보여 줍니다.", items: ["활동 목록", "게시물 상세"] },
     { name: "비급여 항목", file: "nonbenefit.html", img: "/cases/clinic-m/page-nonbenefit.webp", desc: "항목과 금액을 표로 확인하는 화면입니다.", items: ["분류별 비용 표", "모바일 가로 스크롤"] },
     { name: "온연 라운지", file: "lounge.html", img: "/cases/clinic-m/page-lounge.webp", desc: "별도 상담 라운지의 소개와 위치, 예약, 소식을 한 묶음으로 구성했습니다.", items: ["라운지 소개", "위치 · 예약 · 소식"] },
-    { name: "온라인 예약", file: "reservation.html", img: "/cases/clinic-m/page-reservation.webp", desc: "필수값과 개인정보 동의를 확인하는 예약 신청 화면입니다.", items: ["의료진 · 날짜 선택", "필수값 확인"] },
+    { name: "온라인 예약", file: "reservation.html", img: "/cases/clinic-m/page-reservation.webp", desc: "꼭 넣어야 하는 칸과 개인정보 동의를 확인하는 예약 신청 화면입니다.", items: ["의료진 · 날짜 선택", "꼭 넣어야 하는 칸 확인"] },
   ],
   points: [
     { title: "첫 화면과 바로 예약", body: "사진이 천천히 바뀌는 첫 화면 아래에 이름, 연락처, 진료 항목을 넣는 예약 상자를 붙였습니다.", items: ["자동 넘김 사진", "예약 입력 상자"], img: "/cases/clinic-m/point-reservation.webp", caption: "메인 — 바로 예약" },
@@ -39,7 +39,7 @@ const study: CaseStudy = {
   details: [
     { title: "상표 대신 진료 원리로", body: "장비와 약품 상표를 일반적인 진료 원리와 피부 고민 중심 이름으로 바꿨습니다." },
     { title: "팝업과 메뉴의 숨은 상태", body: "첫 화면 알림창, 전체 메뉴, 하위 메뉴, 탭과 카드 넘김을 키보드와 터치에서도 사용할 수 있게 연결했습니다." },
-    { title: "화면 폭마다 이어지는 배치", body: "데스크톱, 태블릿, 모바일에서 예약 폼과 카드가 겹치지 않습니다." },
+    { title: "화면 크기마다 이어지는 배치", body: "데스크톱, 태블릿, 모바일에서 예약 폼과 카드가 겹치지 않습니다." },
     { title: "사진 교체를 전제로 한 자리", body: "사진마다 파일명과 크기, 밝기를 정해 두어 실제 병원 사진으로 바꿀 때 배치가 흐트러지지 않습니다." },
   ],
   mobile: {

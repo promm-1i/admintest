@@ -25,7 +25,7 @@ const study: CaseStudy = {
     { name: "현재 전시", file: "exhibition-current.html", img: "/cases/artist-b/page-exhibition.webp", desc: "대표 이미지, 전시 글, 참여 작가와 작품을 한 페이지에 담았습니다.", items: ["전시 대표 이미지", "전시 소개", "참여 작가 · 작품"] },
     { name: "지난 전시", file: "exhibition-past.html", img: "/cases/artist-b/page-past.webp", desc: "지난 전시를 날짜와 전시장 정보가 있는 카드로 정리했습니다.", items: ["지난 전시 카드", "기간 · 공간", "더 보기 버튼"] },
     { name: "대관", file: "rent-schedule.html", img: "/cases/artist-b/page-rent.webp", desc: "대관 기준과 유의사항, 일정 선택 화면을 함께 보여 줍니다.", items: ["대관 안내 · 유의사항", "월별 일정", "신청 · 조회 · 문의"] },
-    { name: "뉴스 · FAQ", file: "notice-list.html", img: "/cases/artist-b/page-notice.webp", desc: "공지 목록과 펼쳐 보는 질문 답변으로 운영 정보를 전달합니다.", items: ["뉴스 · 공지 목록", "공지 상세 대표 2쪽", "FAQ 아코디언"] },
+    { name: "뉴스 · FAQ", file: "notice-list.html", img: "/cases/artist-b/page-notice.webp", desc: "공지 목록과 펼쳐 보는 질문 답변으로 운영 정보를 전달합니다.", items: ["뉴스 · 공지 목록", "공지 상세 대표 2쪽", "FAQ 펼침 목록"] },
   ],
   points: [
     { title: "스크롤에 맞춰\n장면이 이어집니다", body: "Lenis 스크롤과 GSAP 장면을 사용해 큰 이미지와 문구가 차례로 이어집니다. 모바일에서는 같은 내용을 짧은 이동 거리로 조정했습니다.", items: ["부드러운 휠 감쇠", "스크롤 연동 등장", "모바일 이동 거리 조정"], img: "/cases/artist-b/point-scroll.webp", caption: "홈 · 스크롤 장면" },
@@ -35,13 +35,13 @@ const study: CaseStudy = {
   detailsLabel: "자세히",
   detailsTitle: "만들 때 신경 쓴 것",
   details: [
-    { title: "사진이 바뀌어도 비율이 유지됩니다", body: "전시와 공간 사진 칸마다 지정 비율을 유지해 실제 사진으로 교체해도 레이아웃이 흔들리지 않게 구성했습니다." },
+    { title: "사진이 바뀌어도 비율이 유지됩니다", body: "전시와 공간 사진 칸마다 지정 비율을 유지해 실제 사진으로 교체해도 배치가 흔들리지 않게 구성했습니다." },
     { title: "폼은 상태를 분명히 보여 줍니다", body: "필수 입력, 오류, 제출 중, 완료 상태를 구분할 수 있으며 현재 미리보기에서는 실제 전송 없이 안내만 표시합니다." },
-    { title: "모바일 메뉴와 FAQ를 손가락으로 조작합니다", body: "모바일 메뉴와 질문 답변은 탭으로 열고 닫으며, 버튼의 열림 상태도 보조 기술에 전달합니다." },
+    { title: "모바일 메뉴와 FAQ를 손가락으로 조작합니다", body: "모바일 메뉴와 질문 답변은 탭으로 열고 닫으며, 버튼의 열림 상태도 읽어 주는 프로그램에도 알려 줍니다." },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
-    body: "큰 제목과 사진은 한 열로 바뀌고, 전체 메뉴는 화면을 덮어 탭으로 조작합니다. 공간 정보와 대관 폼도 가로 스크롤 없이 한 줄씩 쌓입니다.",
+    title: "제목과 사진이 한 줄로",
+    body: "큰 제목과 사진은 한 열로 바뀌고, 전체 메뉴는 화면을 덮어 탭으로 조작합니다. 공간 정보와 대관 폼도 옆으로 밀리는 일 없이 한 줄씩 쌓입니다.",
     shots: [
       { img: "/cases/artist-b/m-index.webp", caption: "홈" },
       { img: "/cases/artist-b/m-space.webp", caption: "공간 소개" },

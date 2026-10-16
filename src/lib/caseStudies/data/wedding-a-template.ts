@@ -127,7 +127,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "진행 4단계는 그대로 바뀝니다",
     body: "서비스 카드 6장과 블로그 카드는 한 줄씩 쌓이고, 진행 4단계는 화면에 붙은 채 그대로 바뀝니다. 서비스 목록의 태그는 위로 올라가 옆으로 밀어서 고르고, 포트폴리오는 2열이 됩니다.",
     shots: [
       { img: "/cases/wedding-a/m-index.webp", caption: "홈" },

@@ -179,7 +179,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "글 많은 칸은 눌러서 창으로",
     body: "카드는 한 줄에 하나씩 놓이고, 분야 탭은 옆으로 밀어서 넘깁니다. 상담 폼은 칸 이름이 위로 올라가고, 분쟁 유형처럼 글이 많은 칸은 눌러서 창으로 봅니다.",
     shots: [
       { img: "/cases/law-f/m-index.webp", caption: "메인 — 업무분야 탭은 옆으로" },

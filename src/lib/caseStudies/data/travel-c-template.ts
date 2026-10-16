@@ -39,7 +39,7 @@ const study: CaseStudy = {
   ],
   mobile: {
     title: "390px에서는 세로로 이어집니다",
-    body: "마을 지도와 체험 카드는 한 열로 정리되고, 달력은 일곱 칸을 유지하면서 마을 선택과 다음 단계 단추가 화면 폭에 맞춰 배치됩니다.",
+    body: "마을 지도와 체험 카드는 한 열로 정리되고, 달력은 일곱 칸을 유지하면서 마을 선택과 다음 단계 단추가 화면 크기에 맞춰 배치됩니다.",
     shots: [
       { img: "/cases/ondeul/m-index.webp", caption: "홈" },
       { img: "/cases/ondeul/m-village.webp", caption: "마을 상세" },

@@ -114,7 +114,7 @@ const study: CaseStudy = {
   detailsTitle: "만들 때 신경 쓴 것",
   details: [
     {
-      title: "화면 폭마다 따로 짠 배치",
+      title: "화면 크기마다 따로 짠 배치",
       body: "넓은 화면, 태블릿, 모바일 배치를 따로 짰습니다. 좁은 화면에서는 포트폴리오 넘김이 한 장씩 크게 보이고, 목록은 한 줄로 쌓입니다.",
     },
     {
@@ -127,7 +127,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "포트폴리오가 세로로 쌓입니다",
     body: "메뉴는 MENU 단추로 열고, 포트폴리오 목록과 작품 정보는 세로로 쌓이며, 의뢰 양식 칸도 한 줄씩 놓입니다.",
     shots: [
       { img: "/cases/video-b/m-index.webp", caption: "메인" },

@@ -129,7 +129,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "인트로는 건너뜁니다",
     body: "인트로는 건너뛰고, 스크롤을 조금 내리면 위에 검은 머리줄이 붙습니다. 객실 네 칸은 사진 한 장과 목록으로 바뀌고, 예약 안내의 왼쪽 고정 영역은 위로 올라가 한 줄로 이어집니다.",
     shots: [
       { img: "/cases/damhwa/m-index.webp", caption: "메인 — 소개글과 스페셜 카드" },

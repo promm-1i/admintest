@@ -36,7 +36,7 @@ const study: CaseStudy = {
       name: "로아 소개",
       file: "introduce.html",
       img: "/cases/law-g/page-introduce.webp",
-      desc: "세 가지 약속, 가치를 담은 붓글씨와 머리글자, 연혁, 약도와 교통편을 한 쪽에 담았습니다.",
+      desc: "세 가지 약속, 가치를 담은 붓글씨와 맨 위 메뉴 줄자, 연혁, 약도와 교통편을 한 쪽에 담았습니다.",
       items: ["연혁 7개 해 · 오시는 길(약도 · 자동차 · 지하철 · 버스)", "왼쪽 메뉴로 소개 · 오시는 길 이동"],
     },
     {
@@ -123,7 +123,7 @@ const study: CaseStudy = {
   detailsTitle: "만들 때 신경 쓴 것",
   details: [
     {
-      title: "화면 폭마다 따로 짠 배치",
+      title: "화면 크기마다 따로 짠 배치",
       body: "넓은 화면에서는 메인이 두 장면으로 넘어가고, 좁은 화면에서는 커버와 뉴스가 세로로 이어집니다. 구성원 목록은 4칸 · 3칸 · 2칸으로, 왼쪽 메뉴는 좁은 화면에서 위쪽 가로 메뉴로 바뀝니다.",
     },
     {
@@ -136,7 +136,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "메인은 손으로 넘깁니다",
     body: "메뉴는 오른쪽 위 단추로 열고, 메인 커버는 손으로 넘기며, 구성원 목록과 소개 쪽 단락은 세로로 쌓입니다.",
     shots: [
       { img: "/cases/law-g/m-index.webp", caption: "메인" },

@@ -160,7 +160,7 @@ const study: CaseStudy = {
     },
   ],
   mobile: {
-    title: "좁은 화면에서는 이렇게 됩니다",
+    title: "산업은 옆으로 밀어서 고릅니다",
     body: "첫 화면 영상과 슬로건은 그대로 두고, 산업별 솔루션 항목은 옆으로 밀어서 고릅니다. 원통형 쪽의 왼쪽 메뉴는 사라지고 구역이 세로로 이어지며, 뉴스 목록은 사진 위에 제목이 놓이는 카드가 됩니다.",
     shots: [
       { img: "/cases/corporate-h/m-index.webp", caption: "홈" },

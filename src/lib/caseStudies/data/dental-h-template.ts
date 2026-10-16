@@ -21,7 +21,7 @@ const study: CaseStudy = {
   pages: [
     { name: "메인", file: "index.html", img: "/cases/dental-h/page-index.webp", desc: "세 장의 첫 화면부터 진료 시간까지 열 개 구간이 길게 이어집니다.", items: ["자동으로 바뀌는 첫 화면 세 장", "진료 분야 · 진료 철학 · 영상 · 치료 사례", "전문 지식/알아두기 탭 · 해외 환자 상담 · 진료 시간"] },
     { name: "치과 이야기", file: "story.html", img: "/cases/dental-h/page-story.webp", desc: "치과의 생각, 대표원장 인사, 공간과 진료 원칙을 큰 사진과 함께 소개합니다.", items: ["대표원장 인사와 서명", "공간 사진 넘김", "진료 원칙과 약속"] },
-    { name: "의료진 소개", file: "doctors.html", img: "/cases/dental-h/page-doctors.webp", desc: "의료진별 사진과 학력·경력을 긴 세로 화면으로 정리했습니다.", items: ["의료진 세 명", "학력·경력 목록", "화면 폭에 따라 바뀌는 인물 배치"] },
+    { name: "의료진 소개", file: "doctors.html", img: "/cases/dental-h/page-doctors.webp", desc: "의료진별 사진과 학력·경력을 긴 세로 화면으로 정리했습니다.", items: ["의료진 세 명", "학력·경력 목록", "화면 크기에 따라 바뀌는 인물 배치"] },
     { name: "진료안내/오시는 길", file: "location.html", img: "/cases/dental-h/page-location.webp", desc: "진료 시간, 주소와 교통편, 약도를 한 화면에서 확인합니다.", items: ["요일별 진료 시간", "주소·전화·교통편", "가상 약도"] },
     { name: "심미 레진", file: "esthetic.html", img: "/cases/dental-h/page-esthetic.webp", desc: "심미 진료의 대상과 재료, 과정, 관리, 교육용 사례를 자세히 설명합니다.", items: ["진료 대상과 특징", "과정·관리 안내", "교육용 치아 모형 사례"] },
     { name: "고난도 재치료", file: "retreatment.html", img: "/cases/dental-h/page-retreatment.webp", desc: "확대 장비와 정밀 진단을 중심으로 재치료 과정을 안내합니다.", items: ["정밀 진단과 장비", "단계별 재치료 과정", "교육용 치아 모형 사례"] },
@@ -39,8 +39,8 @@ const study: CaseStudy = {
   detailsLabel: "자세히",
   detailsTitle: "구현에서 확인한 것",
   details: [
-    { title: "다섯 화면 폭을 따로 확인했습니다", body: "1440·1280·1024·768·390px에서 모든 페이지의 문서 높이와 가로 넘침을 대조하고, 긴 메인 화면은 화면 폭마다 섹션 높이를 맞췄습니다." },
-    { title: "접근성과 키보드 사용", body: "이미지 대체 글, 이름 없는 아이콘 링크와 폼 입력 이름, 키보드 초점 표시를 보완하고 전체 페이지를 WCAG 2.1 AA 기준으로 검사했습니다." },
+    { title: "다섯 화면 폭을 따로 확인했습니다", body: "1440·1280·1024·768·390px에서 모든 페이지의 문서 높이와 옆으로 삐져나오는 곳을 대조하고, 긴 메인 화면은 화면 크기마다 구역 높이를 맞췄습니다." },
+    { title: "접근성과 키보드 사용", body: "이미지 대체 글, 이름 없는 아이콘 링크와 폼 입력 이름, 키보드로 짚은 자리 표시를 보완하고 전체 페이지를 WCAG 2.1 AA 기준으로 검사했습니다." },
     { title: "회원과 게시판은 데모 화면입니다", body: "로그인·회원정보 찾기·가입 약관·검색과 게시판 양식은 화면과 입력 상태를 보여 주는 데모입니다. 실제 접수·회원 기능은 제작할 때 서버와 연결해야 합니다." },
   ],
   mobile: {
