@@ -21,14 +21,14 @@ const study: CaseStudy = {
   pages: [
     { name: "홈", file: "index.html", img: "/cases/craft-f/page-index.webp", desc: "대표 장면에서 관람 안내, 전시, 프로그램과 소식으로 이어집니다.", items: ["대표 슬라이드", "관람 · 빠른 메뉴", "전시 · 프로그램 · 소식"] },
     { name: "박물관", file: "museum.html", img: "/cases/craft-f/page-museum.webp", desc: "설립 취지, 공간과 연혁, 관람 규칙을 한 흐름으로 설명합니다.", items: ["박물관 소개", "공간 · 연혁", "관람시간 · 유의사항"] },
-    { name: "붓 이야기", file: "history.html", img: "/cases/craft-f/page-history.webp", desc: "역사, 제작 과정, 장인과 종류를 네 갈래로 깊이 있게 소개합니다.", items: ["붓의 역사", "25단계 제작 과정", "장인 · 재료 · 쓰임"] },
+    { name: "붓 이야기", file: "history.html", img: "/cases/craft-f/page-history.webp", desc: "역사, 제작 과정, 장인과 종류를 네 갈래로 깊이 있게 소개합니다.", items: ["붓의 역사", "15단계 제작 과정", "장인 · 재료 · 쓰임"] },
     { name: "전시", file: "exhibitions.html", img: "/cases/craft-f/page-exhibitions.webp", desc: "상설전과 기획·특별전을 목록과 대표 상세 화면으로 연결합니다.", items: ["상설전 목록 · 상세", "기획전 목록 · 상세", "전시 기간 · 장소"] },
     { name: "교육", file: "programs.html", img: "/cases/craft-f/page-programs.webp", desc: "문방 체험을 비교하고 날짜와 인원을 골라 신청하는 화면입니다.", items: ["프로그램 목록 · 상세", "달력 · 인원 선택", "신청자 정보 · 동의"] },
     { name: "대관", file: "rental.html", img: "/cases/craft-f/page-rental.webp", desc: "전시 기간과 신청자·전시 정보를 순서대로 입력하도록 구성했습니다.", items: ["기간 선택", "신청자 · 전시 정보", "파일 · 개인정보 동의"] },
     { name: "알림마당", file: "notice.html", img: "/cases/craft-f/page-notice.webp", desc: "공지와 박물관 소식을 목록과 상세로 확인합니다.", items: ["공지 목록 · 상세", "소식 카드", "신청내역 확인"] },
   ],
   points: [
-    { title: "제작 과정을\n손의 순서로 보여 줍니다", body: "털을 고르는 일부터 필관 결합과 마무리까지 긴 공정을 단계별 사진 칸과 짧은 설명으로 나눴습니다.", items: ["도구와 구조", "25단계 공정", "다음 이야기 연결"], img: "/cases/craft-f/point-craft.webp", caption: "붓 제작 과정" },
+    { title: "제작 과정을\n손의 순서로 보여 줍니다", body: "털을 고르는 일부터 필관 결합과 마무리까지 긴 공정을 단계별 사진 칸과 짧은 설명으로 나눴습니다.", items: ["도구와 구조", "15단계 공정", "다음 이야기 연결"], img: "/cases/craft-f/point-craft.webp", caption: "붓 제작 과정" },
     { title: "재료와 쓰임을\n한눈에 비교합니다", body: "붓촉과 필관 재료, 한글필·채색필·장봉필처럼 쓰임이 다른 붓을 같은 규칙으로 비교할 수 있습니다.", items: ["붓촉 재료", "필관 재료", "길이 · 쓰임별 종류"], img: "/cases/craft-f/point-collection.webp", caption: "붓의 종류" },
     { title: "관람에서 신청까지\n같은 흐름으로 잇습니다", body: "프로그램 소개 뒤에 날짜, 시간, 인원과 신청자 정보를 이어 배치해 다음 행동을 찾기 쉽습니다.", items: ["프로그램 비교", "달력 · 수량 조절", "필수값 안내"], img: "/cases/craft-f/point-program.webp", caption: "교육 · 체험" },
   ],
