@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "dental-i-template",
+    industry: "임플란트 · 어르신 진료 치과 홈페이지",
+    title: "임플란트 · 어르신 진료 치과 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 임플란트 · 어르신 진료 · 평생 구강관리 · 20페이지",
+    purpose:
+      "어르신과 가족이 함께 진료 정보를 살펴볼 수 있도록 치과 소개, 의료진, 오시는 길, 교육 · 인증 · 저서, 구강관리, 자연치아, 임플란트, 평생관리와 기록 프로젝트까지 20쪽으로 구성한 치과 홈페이지입니다.",
+    features: [
+      "치과 소개 · 의료진 · 진료 시간 · 교통편을 나눈 안내",
+      "구강관리 · 어르신 진료 · 자연치아 · 임플란트 · 평생관리 상세 페이지",
+      "교육 활동 · 인증 및 협력 · 가상 저서 · 디지털 기공 시스템 소개",
+      "PC 하위 메뉴 · 모바일 펼침 메뉴 · 탭 전환 · 시연용 로그인 · 상담 양식",
+    ],
+    idealFor: "임플란트와 자연치아 관리를 함께 안내하는 치과, 어르신 환자와 보호자에게 진료 과정을 차분하게 설명하고 싶은 치과",
+    image: "/thumbs/dental-i.jpg",
+    liveUrl: "/ondamgil/",
+    industryKey: "dental",
+    premiumLabel: "임플란트 · 어르신 진료",
+    designCode: "DENP-1003",
+    premium: true,
+  },
+  {
     slug: "kids-i-template",
     industry: "유아 영어 · 말하기 놀이 홈페이지",
     title: "유아 영어 · 말하기 놀이 홈페이지 (프리미엄 디자인 C)",
