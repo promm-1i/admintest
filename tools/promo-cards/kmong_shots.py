@@ -63,6 +63,12 @@ HIDE_FIXED_JS = """()=>{
    const key=((e.id||'')+' '+(e.className||'')).toLowerCase();
    if(/menu|mega|allm|gnb|-mn|hdx/.test(key))kill(e);
  }
+ // 화면 아래에 붙은 넓고 낮은 고정 띠(말봄 '빠른 수강신청' aside#mb-i-ft-qk-nqrx)는 전체 캡처에서 본문 한가운데에 박힌다.
+ // 이름이 줄임말이라 quick 으로 못 잡는다 → 위치로 지운다.
+ for(const e of document.querySelectorAll('body *')){
+   if(getComputedStyle(e).position!=='fixed')continue;
+   const b=e.getBoundingClientRect();
+   if(b.width>=innerWidth*0.8&&b.height<innerHeight*0.3&&b.top>innerHeight*0.5&&b.bottom>=innerHeight-8)kill(e)}
  // 마우스를 따라다니는 커서 장식은 캡처 때 (0,0)에 멈춰 왼쪽 위에 검은 동그라미로 찍힌다(온새 .pntx2).
  for(const e of document.querySelectorAll('body *')){
    const s=getComputedStyle(e);
@@ -167,15 +173,22 @@ def grab(pg, key_dir: Path, name: str, folder: str, max_cut: int = MAX_CUT,
     pg.evaluate("scrollTo(0,0)")
     # ScrollSmoother 래퍼 id 를 바꿔 둔 템플릿(오솔길 #ogi-smtx-wr)은 SMOOTH_CSS 로 못 풀어 문서가 한 화면 높이로 잡힌다
     # → 이름 대신 인스턴스를 죽여 래퍼를 원래대로 되돌린다
-    pg.evaluate("window.ScrollSmoother && ScrollSmoother.get() && ScrollSmoother.get().kill()")
-    pg.evaluate("window.ScrollTrigger && ScrollTrigger.getAll().forEach(t=>t.kill(true))")
+    # 율담원은 되돌리는 중 사이트 스크립트가 '_this.paused is not a function' 을 던져 캡처가 통째로 실패했다 → 하나씩 감싼다
+    # kill() 이 중간에 던지면(율담원) 래퍼가 fixed 로 남아 문서가 한 화면 높이가 된다 → 잡아 둔 래퍼·내용을 직접 푼다
+    pg.evaluate("""()=>{let s=null,w=null,c=null;
+      try{s=window.ScrollSmoother&&ScrollSmoother.get();if(s){w=s.wrapper();c=s.content()}}catch(e){}
+      try{s&&s.kill()}catch(e){}
+      if(w)for(const [k,v] of [['position','static'],['height','auto'],['overflow','visible'],['transform','none']])w.style.setProperty(k,v,'important');
+      if(c)for(const [k,v] of [['transform','none'],['translate','none']])c.style.setProperty(k,v,'important')}""")
+    pg.evaluate("window.ScrollTrigger && ScrollTrigger.getAll().forEach(t=>{try{t.kill(true)}catch(e){}})")
     pg.add_style_tag(content="[data-aos],.rv,.ani,.fadeUp,.fadeLeft,.fadeRight{opacity:1!important;transform:none!important;transition:none!important}")
     pg.evaluate(REVEAL_JS)
     # 팝업은 클래스 이름이 템플릿마다 달라 이름으로는 못 잡는다 →
     # '닫기 / 하루동안 / 오늘 하루' 단추를 품은 떠 있는 상자를 지운다.
     pg.evaluate("""()=>{
       const kill=e=>e.style.setProperty('display','none','important');
-      for(const e of document.querySelectorAll('.promo-popup,.layer-popup,[class*=popup],[id*=popup],[class*=agegate],[id*=agegate],[class*=dimm],.dim')){
+      // .mfp-* 는 Magnific Popup — 온들군 예약 쪽은 열자마자 로그인 안내 창이 떠서 달력 위를 덮었다
+      for(const e of document.querySelectorAll('.promo-popup,.layer-popup,[class*=popup],[id*=popup],[class*=agegate],[id*=agegate],[class*=dimm],.dim,.mfp-wrap,.mfp-bg')){
         const b=e.getBoundingClientRect(); if(b.width>200&&b.height>150) kill(e);
       }
       for(const e of document.querySelectorAll('div,aside,section')){
