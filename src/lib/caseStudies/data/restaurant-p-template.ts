@@ -27,16 +27,16 @@ const study: CaseStudy = {
   ],
   points: [
     { title: "한 장씩 보이는 첫 화면", body: "첫 장면은 4초마다 다음 장으로 넘어가며 이전·다음 버튼과 현재 순서를 함께 보여 줍니다.", items: ["전환 1초", "자동재생 4초", "모바일 동일 동작"], img: "/cases/restaurant-p/point-hero.webp", caption: "메인 — 첫 장면" },
-    { title: "공간별 사진과 시설 정보", body: "각 한옥은 원본의 사진 배열과 시설 수치, 안내 순서를 유지하고 서로 다른 가상 공간명으로 구성했습니다.", items: ["건물별 갤러리", "시설 규모", "연관 공간 이동"], img: "/cases/restaurant-p/point-space.webp", caption: "공간 안내" },
+    { title: "공간별 사진과 시설 정보", body: "한옥마다 사진 배열과 시설 수치, 안내 순서를 같은 틀로 두고 이름만 다르게 붙였습니다.", items: ["건물별 갤러리", "시설 규모", "연관 공간 이동"], img: "/cases/restaurant-p/point-space.webp", caption: "공간 안내" },
     { title: "다이닝 차림과 독립실", body: "홀과 룸을 고르고 점심 반상, 코스, 단품 차림을 각각 살펴볼 수 있습니다.", items: ["룸 선택", "차림 분류", "사진 넘김"], img: "/cases/restaurant-p/point-dining.webp", caption: "한식 다이닝" },
     { title: "문의 양식의 실제 상태", body: "필수값을 확인하고 외부로 전송하지 않는 템플릿 안내를 보여 주도록 만들었습니다.", items: ["필수값 오류", "접수 안내", "키보드 접근"], img: "/cases/restaurant-p/point-form.webp", caption: "고객 문의" },
   ],
   detailsLabel: "자세히",
   detailsTitle: "구현 기준",
   details: [
-    { title: "39쪽의 원본 흐름을 보존했습니다", body: "원본 메뉴와 본문이 내건 링크를 기준으로 공간 · 웨딩 · 연회 · 다이닝 · 소식 페이지를 빠짐없이 연결했습니다." },
+    { title: "39쪽이 전부 이어져 있습니다", body: "메뉴와 본문이 내건 링크를 따라 공간 · 웨딩 · 연회 · 다이닝 · 소식 페이지를 모두 이었습니다." },
     { title: "정적 페이지에서도 숨은 상태가 작동합니다", body: "전체 메뉴, 행사 알림 닫기, FAQ 펼침, 자동 넘김과 문의 양식을 별도 서버 없이 확인할 수 있습니다." },
-    { title: "사진은 교체 가능한 자리 그림입니다", body: "원본 사진을 쓰지 않고 실사 사진 256칸과 글자 조판 10칸, 총 266칸의 요청서를 마련했습니다." },
+    { title: "사진은 교체 가능한 자리 그림입니다", body: "실사 사진 256칸과 글자 조판 10칸, 모두 266칸에 쓸 요청서를 마련했습니다." },
   ],
   mobile: { title: "좁은 화면에서는 이렇게 됩니다", body: "전체 메뉴는 누르면 열리고, 공간 카드와 갤러리·차림표·문의 양식은 화면 너비에 맞춰 재배치됩니다.", shots: [
     { img: "/cases/restaurant-p/m-index.webp", caption: "메인" },

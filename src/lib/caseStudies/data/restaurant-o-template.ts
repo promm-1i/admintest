@@ -28,14 +28,14 @@ const study: CaseStudy = {
   points: [
     { title: "첫 화면 행사 알림", body: "세 장의 알림을 나란히 열고 각 알림을 따로 닫거나 오늘 하루 보지 않기를 고를 수 있습니다.", items: ["개별 닫기", "모바일 겹침 배치"], img: "/cases/restaurant-o/point-popup.webp", caption: "메인 — 알림" },
     { title: "메뉴 상세 창", body: "메뉴 카드를 누르면 설명과 원재료 · 알레르기 정보가 같은 화면 위에 열립니다.", items: ["키보드 닫기", "모바일 탭 동작"], img: "/cases/restaurant-o/point-menu.webp", caption: "메뉴" },
-    { title: "지도와 매장 목록", body: "지도 옆에서 지역을 고르고 검색해 매장을 찾는 원본 구성을 정적 지도 예시로 구현했습니다.", items: ["지역 선택", "매장 상세 연결"], img: "/cases/restaurant-o/point-store.webp", caption: "매장 찾기" },
+    { title: "지도와 매장 목록", body: "지도 옆에서 지역을 고르고 검색해 매장을 찾습니다. 지도는 정적 이미지 예시입니다.", items: ["지역 선택", "매장 상세 연결"], img: "/cases/restaurant-o/point-store.webp", caption: "매장 찾기" },
   ],
   detailsLabel: "자세히",
   detailsTitle: "구현 기준",
   details: [
     { title: "두 브랜드 흐름을 보존했습니다", body: "일반 매장과 소형 매장의 메뉴 · 소개 · 창업 안내를 각각 살펴볼 수 있습니다." },
     { title: "문의 양식은 데모로 안전하게 동작합니다", body: "필수값을 확인하고 실제 외부 전송 대신 템플릿 안내를 보여 줍니다." },
-    { title: "사진은 교체 가능한 자리 그림입니다", body: "원본 사진을 쓰지 않고 86개 사진 칸과 개별 생성 요청서를 마련했습니다." },
+    { title: "사진은 교체 가능한 자리 그림입니다", body: "사진 칸 86개와 칸마다 쓸 생성 요청서를 마련했습니다." },
   ],
   mobile: { title: "좁은 화면에서는 이렇게 됩니다", body: "머리 메뉴는 누르면 열리는 형태로 바뀌고, 메뉴 카드와 문의 양식은 한 줄씩 쌓입니다.", shots: [
     { img: "/cases/restaurant-o/m-index.webp", caption: "메인" }, { img: "/cases/restaurant-o/m-menu.webp", caption: "메뉴" }, { img: "/cases/restaurant-o/m-stores.webp", caption: "매장 찾기" }, { img: "/cases/restaurant-o/m-franchise.webp", caption: "창업 안내" },
