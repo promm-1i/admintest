@@ -32,7 +32,7 @@ const study: CaseStudy = {
     { name: "이용약관", file: "terms.html", img: "/cases/kids-i/page-terms.webp", desc: "가상 서비스 이용에 필요한 기본 기준과 책임 범위를 안내합니다.", items: ["이용 자격과 계정", "서비스 이용 기준", "변경·분쟁 안내"] },
   ],
   points: [
-    { title: "긴 화면을 잇는 학습 이야기", body: "첫 화면에서 바로 기능을 나열하지 않고, 아이가 준비하고 탐색한 뒤 오늘의 경험을 말로 정리하는 순서로 내용을 이어 갑니다.", items: ["세 단계 흐름", "활동 카드 · 기반 역량"], img: "/cases/kids-i/point-flow.webp", caption: "메인 — 학습 흐름" },
+    { title: "기능 목록 대신 아이가 하는 순서로", body: "첫 화면에서 바로 기능을 나열하지 않고, 아이가 준비하고 탐색한 뒤 오늘의 경험을 말로 정리하는 순서로 내용을 이어 갑니다.", items: ["세 단계 흐름", "활동 카드 · 기반 역량"], img: "/cases/kids-i/point-flow.webp", caption: "메인 — 학습 흐름" },
     { title: "필요한 항목을 빠르게 찾는 가이드", body: "기본 사용법, 학습 방법, 콘텐츠 설명을 세 쪽으로 나누고 머리 메뉴와 각 안내의 목차에서 바로 해당 위치로 이동할 수 있게 했습니다.", items: ["세 갈래 하위 메뉴", "항목별 바로가기"], img: "/cases/kids-i/point-guide.webp", caption: "가이드 — 목차와 본문" },
     { title: "화면 폭에 맞춘 메뉴", body: "넓은 화면에서는 세 칸 하위 메뉴를 보여 주고, 좁은 화면에서는 전체 메뉴 안에서 필요한 안내만 펼칩니다. 키보드와 Esc 키로도 닫을 수 있습니다.", items: ["PC 하위 메뉴", "모바일 펼침 · 키보드 닫기"], img: "/cases/kids-i/point-menu.webp", caption: "머리 메뉴" },
     { title: "제출 전 입력을 확인하는 문의", body: "제휴 문의와 이용 지원 유형을 고르고 이름, 연락처, 기관 정보, 동의를 확인합니다. 현재 디자인에서는 실제 서버로 보내지 않고 화면에서만 접수 확인을 보여 줍니다.", items: ["문의 유형 선택", "필수값 · 형식 확인", "실제 전송 없음"], img: "/cases/kids-i/point-contact.webp", caption: "문의" },

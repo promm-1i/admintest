@@ -3,7 +3,7 @@ import type { CaseStudy } from "../types";
 const study: CaseStudy = {
   customerCopyReady: true,
   brand: "아람결 치료교육연구소",
-  headline: "아이의 결을 살피고 가족의 다음 걸음을 함께 찾는 상담·치료교육 홈페이지",
+  headline: "상담 · 발달평가 · 부모교육을 나눈 치료교육 연구소 홈페이지",
   summary:
     "아동의 기질과 발달을 이해하는 첫 안내부터 심리상담, 특별 프로그램, 전문가 교육과 부모교육까지 이어지는 18페이지 구성입니다. 연구소 소개, 연구진, 교육 활동과 협력 네트워크는 각각의 화면으로 나누고 일정·자료·문의 정보를 함께 배치했습니다.",
   brandColor: "rgb(145,189,32)",
@@ -27,7 +27,7 @@ const study: CaseStudy = {
   ],
   points: [
     { title: "일정과 프로그램이 이어지는 첫 화면", body: "월간 일정에서 교육과 상담 프로그램을 확인한 뒤 관련 안내로 이동할 수 있습니다. 모바일에서는 달력 대신 읽기 쉬운 일정 목록을 사용합니다.", items: ["PC 월간 달력", "모바일 일정 목록", "프로그램 연결"], img: "/cases/academy-h/point-home.webp", caption: "메인 일정과 프로그램" },
-    { title: "기관 정보를 나눈 소개 체계", body: "연구소 소개, 연혁, 연구진, 교육 활동과 협력 네트워크를 각각의 화면으로 분리했습니다. 방문자는 필요한 소개 항목으로 바로 이동할 수 있습니다.", items: ["7개 소개 화면", "연혁과 연구진", "협력 분야 안내"], img: "/cases/academy-h/point-about.webp", caption: "연구소 소개 화면" },
+    { title: "소개 · 연혁 · 연구진을 각각 한 쪽씩", body: "연구소 소개, 연혁, 연구진, 교육 활동과 협력 네트워크를 각각의 화면으로 분리했습니다. 방문자는 필요한 소개 항목으로 바로 이동할 수 있습니다.", items: ["7개 소개 화면", "연혁과 연구진", "협력 분야 안내"], img: "/cases/academy-h/point-about.webp", caption: "연구소 소개 화면" },
     { title: "목적에 따라 구분한 상담·교육 안내", body: "기질·발달 평가, 심리상담, 특별 프로그램, 전문가 교육, 부모교육을 별도 페이지로 구성해 필요한 정보를 바로 찾을 수 있습니다.", items: ["5개 프로그램 화면", "단계별 설명", "과장 없는 안내 문구"], img: "/cases/academy-h/point-program.webp", caption: "프로그램 상세 화면" },
   ],
   detailsLabel: "운영 범위",

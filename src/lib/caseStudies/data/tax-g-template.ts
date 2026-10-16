@@ -3,7 +3,7 @@ import type { CaseStudy } from "../types";
 const study: CaseStudy = {
   customerCopyReady: true,
   brand: "세무법인 율담원",
-  headline: "기업과 가족의 판단 기준을 정리하는 세무법인 홈페이지",
+  headline: "가업승계 · 상속 · 기업자문을 나눈 세무법인 홈페이지",
   summary:
     "어두운 건축 장면으로 시작해 업무사례, 일곱 가지 업무분야, 지역별 지점, 구성원, 세무소식과 문의로 이어지는 25페이지 구성입니다. 가업승계와 상속·증여, 기업자문을 함께 다루는 세무법인의 정보 구조를 기준으로 만들었습니다.",
   brandColor: "rgb(11,65,104)",
@@ -26,7 +26,7 @@ const study: CaseStudy = {
     { name: "상담 문의", file: "inquiry.html", img: "/cases/tax-g/page-inquiry.webp", desc: "필수값과 동의 여부를 확인하는 문의 양식입니다.", items: ["필수값 오류 표시", "상담 분야 선택", "개인정보 동의 확인"] },
   ],
   points: [
-    { title: "세무법인의 신뢰도를 만드는 첫 화면", body: "딥 네이비와 건축 이미지 영역을 넓게 쓰고 브랜드명과 핵심 문장만 남겼습니다. 스크롤하면 헤더 배경이 짙어져 긴 페이지에서도 메뉴가 또렷합니다.", items: ["전체 화면 첫 장면", "세 단계 헤더 상태", "모바일 전체 메뉴"], img: "/cases/tax-g/point-home.webp", caption: "메인 첫 화면과 주요 구획" },
+    { title: "남색 바탕에 이름과 한 문장만", body: "딥 네이비와 건축 이미지 영역을 넓게 쓰고 브랜드명과 핵심 문장만 남겼습니다. 스크롤하면 헤더 배경이 짙어져 긴 페이지에서도 메뉴가 또렷합니다.", items: ["전체 화면 첫 장면", "세 단계 헤더 상태", "모바일 전체 메뉴"], img: "/cases/tax-g/point-home.webp", caption: "메인 첫 화면과 주요 구획" },
     { title: "지역별로 이어지는 지점 안내", body: "지역 분류에서 각 상담센터의 주소와 연락처, 담당 구성원을 한 흐름으로 확인합니다.", items: ["지역 분류", "센터 정보", "담당 구성원"], img: "/cases/tax-g/point-offices.webp", caption: "지점 안내" },
     { title: "과정을 설명하는 사례 본문", body: "대표 사례는 확인한 사실과 검토 과정, 정리한 내용을 순서대로 읽을 수 있게 구성했습니다.", items: ["분야별 목록", "사례 상세", "목록·문의 이동"], img: "/cases/tax-g/point-case.webp", caption: "사례 상세" },
   ],

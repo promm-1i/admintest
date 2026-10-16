@@ -3,7 +3,7 @@ import type { CaseStudy } from "../types";
 const study: CaseStudy = {
   customerCopyReady: true,
   brand: "셈다움",
-  headline: "진단부터 성적 관리까지 연결되는 수학 학습 솔루션 홈페이지",
+  headline: "진단 · 문제 출제 · 성적 관리를 잇는 수학 문제은행 홈페이지",
   summary:
     "수준 진단과 맞춤 문제 구성, 기초·내신·수능 학습, 성적 관리와 전국수학평가까지 학원 운영에 필요한 정보를 20개 화면으로 나누어 보여 주는 수학 문제은행 홈페이지입니다.",
   brandColor: "rgb(39, 152, 128)",
@@ -27,8 +27,8 @@ const study: CaseStudy = {
   ],
   points: [
     { title: "학습 과정을 한 번에 훑는 메인", body: "첫 화면에서 학습 과정과 서비스 특징을 순서대로 살펴보고 필요한 상세 화면으로 바로 이동할 수 있습니다.", items: ["자동 전환 첫 화면", "과정별 바로가기", "후기 더보기"], img: "/cases/academy-i/point-home.webp", caption: "셈다움 메인" },
-    { title: "문제은행의 핵심 기능을 나눈 정보 구조", body: "수준 진단부터 성적 관리까지 서로 다른 목적을 별도 화면으로 나누어 설명하므로 원하는 정보를 빠르게 찾을 수 있습니다.", items: ["진단과 맞춤", "내신·수능 대비", "성적 관리"], img: "/cases/academy-i/point-system.webp", caption: "AI 맞춤 학습" },
-    { title: "평가 일정과 후기까지 이어지는 운영 정보", body: "전국수학평가 일정, 수상 내역, 참가 후기와 학원 후기를 독립 화면으로 구성해 운영 자료의 성격을 분명히 했습니다.", items: ["평가 일정", "수상 내역", "참가·학원 후기"], img: "/cases/academy-i/point-assessment.webp", caption: "전국수학평가 일정" },
+    { title: "수준 진단과 성적 관리를 따로", body: "수준 진단부터 성적 관리까지 서로 다른 목적을 별도 화면으로 나누어 설명하므로 원하는 정보를 빠르게 찾을 수 있습니다.", items: ["진단과 맞춤", "내신·수능 대비", "성적 관리"], img: "/cases/academy-i/point-system.webp", caption: "AI 맞춤 학습" },
+    { title: "평가 일정 · 수상 · 후기를 각각", body: "전국수학평가 일정, 수상 내역, 참가 후기와 학원 후기를 각각 따로 두어 서로 섞이지 않게 했습니다.", items: ["평가 일정", "수상 내역", "참가·학원 후기"], img: "/cases/academy-i/point-assessment.webp", caption: "전국수학평가 일정" },
   ],
   detailsLabel: "세부 구현",
   detailsTitle: "화면에서 직접 확인할 수 있는 동작",

@@ -21,7 +21,7 @@ const study: CaseStudy = {
   pages: [
     { name: "홈", file: "index.html", img: "/cases/craft-f/page-index.webp", desc: "대표 장면에서 관람 안내, 전시, 프로그램과 소식으로 이어집니다.", items: ["대표 슬라이드", "관람 · 빠른 메뉴", "전시 · 프로그램 · 소식"] },
     { name: "박물관", file: "museum.html", img: "/cases/craft-f/page-museum.webp", desc: "설립 취지, 공간과 연혁, 관람 규칙을 한 흐름으로 설명합니다.", items: ["박물관 소개", "공간 · 연혁", "관람시간 · 유의사항"] },
-    { name: "붓 이야기", file: "history.html", img: "/cases/craft-f/page-history.webp", desc: "역사, 제작 과정, 장인과 종류를 네 갈래로 깊이 있게 소개합니다.", items: ["붓의 역사", "15단계 제작 과정", "장인 · 재료 · 쓰임"] },
+    { name: "붓 이야기", file: "history.html", img: "/cases/craft-f/page-history.webp", desc: "역사, 제작 과정, 장인과 종류를 네 갈래로 나눠 소개합니다.", items: ["붓의 역사", "15단계 제작 과정", "장인 · 재료 · 쓰임"] },
     { name: "전시", file: "exhibitions.html", img: "/cases/craft-f/page-exhibitions.webp", desc: "상설전과 기획·특별전을 목록과 대표 상세 화면으로 연결합니다.", items: ["상설전 목록 · 상세", "기획전 목록 · 상세", "전시 기간 · 장소"] },
     { name: "교육", file: "programs.html", img: "/cases/craft-f/page-programs.webp", desc: "문방 체험을 비교하고 날짜와 인원을 골라 신청하는 화면입니다.", items: ["프로그램 목록 · 상세", "달력 · 인원 선택", "신청자 정보 · 동의"] },
     { name: "대관", file: "rental.html", img: "/cases/craft-f/page-rental.webp", desc: "전시 기간과 신청자·전시 정보를 순서대로 입력하도록 구성했습니다.", items: ["기간 선택", "신청자 · 전시 정보", "파일 · 개인정보 동의"] },

@@ -20,7 +20,7 @@ const study: CaseStudy = {
   pagesTitle: "45쪽의 대표 화면",
   pages: [
     { name: "메인", file: "index.html", img: "/cases/clinic-m/page-index.webp", desc: "큰 사진과 예약 상자 뒤로 진료 항목, 의료진, 진료 원칙, 활동 카드가 이어집니다.", items: ["사진 넘김 첫 화면", "바로 예약 입력 상자", "진료 항목 · 의료진 넘김"] },
-    { name: "집속 초음파 리프팅", file: "ultrasound-lifting.html", img: "/cases/clinic-m/page-ultrasound-lifting.webp", desc: "진료 특징, 적용 부위, 과정, 주의사항을 긴 호흡으로 설명하는 대표 진료 쪽입니다.", items: ["진료 특징 · 적용 부위", "상담부터 사후 관리까지"] },
+    { name: "집속 초음파 리프팅", file: "ultrasound-lifting.html", img: "/cases/clinic-m/page-ultrasound-lifting.webp", desc: "진료 특징, 적용 부위, 과정, 주의사항을 길게 설명하는 대표 진료 쪽입니다.", items: ["진료 특징 · 적용 부위", "상담부터 사후 관리까지"] },
     { name: "진료 항목", file: "treatments.html", img: "/cases/clinic-m/page-treatments.webp", desc: "피부 고민과 관리 방법을 분류해 찾아볼 수 있는 진료 항목 목록입니다.", items: ["분류별 진료 카드", "상세 쪽 연결"] },
     { name: "의료진", file: "doctors.html", img: "/cases/clinic-m/page-doctors.webp", desc: "가상의 피부과 전문의 여섯 명과 진료 원칙을 소개합니다.", items: ["의료진 프로필", "진료 철학 · 약력"] },
     { name: "온연의 활동", file: "activities.html", img: "/cases/clinic-m/page-activities.webp", desc: "학술 활동과 병원 소식을 카드 목록과 상세 화면으로 보여 줍니다.", items: ["활동 목록", "게시물 상세"] },

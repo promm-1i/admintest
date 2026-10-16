@@ -32,7 +32,7 @@ const study: CaseStudy = {
   ],
   points: [
     { title: "진료 분야를 한눈에", body: "메인에서 심미 레진, 고난도 재치료, 편안한 수면치료, 일반진료 네 분야를 큰 이미지와 짧은 설명으로 나눴습니다.", items: ["네 가지 진료 분야", "넓은 화면과 모바일의 별도 배치"], img: "/cases/dental-h/point-services.webp", caption: "메인 — 진료 분야" },
-    { title: "긴 화면 속 진료 철학", body: "사진, 숫자, 짧은 문장을 넓은 여백 사이에 배치해 치과가 중요하게 여기는 원칙을 순서대로 읽도록 구성했습니다.", items: ["스크롤에 맞춘 구간 전환", "사진과 문장의 교차 배치"], img: "/cases/dental-h/point-philosophy.webp", caption: "메인 — 진료 철학" },
+    { title: "넓은 여백에 사진과 숫자, 짧은 문장", body: "사진, 숫자, 짧은 문장을 넓은 여백 사이에 배치해 치과가 중요하게 여기는 원칙을 순서대로 읽도록 구성했습니다.", items: ["스크롤에 맞춘 구간 전환", "사진과 문장의 교차 배치"], img: "/cases/dental-h/point-philosophy.webp", caption: "메인 — 진료 철학" },
     { title: "환자 사진 대신 교육용 모형", body: "치료 사례 자리는 실제 환자 사진을 쓰지 않고 같은 조명과 각도로 촬영한 교육용 치아 모형 이미지가 들어가도록 준비했습니다.", items: ["사례 카드 넘김", "개인정보가 없는 자리 사진"], img: "/cases/dental-h/point-cases.webp", caption: "메인 — 치료 사례" },
     { title: "두 갈래 치과 정보 탭", body: "전문 지식과 알아두기 두 탭을 눌러 카드 묶음을 바꿔 볼 수 있습니다. 영상 자리에는 외부 영상을 걸지 않고 포스터 이미지를 넣었습니다.", items: ["두 개의 탭", "각 탭 세 개의 정보 카드"], img: "/cases/dental-h/point-media.webp", caption: "메인 — 치과 정보" },
   ],
