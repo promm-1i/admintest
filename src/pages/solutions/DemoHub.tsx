@@ -161,7 +161,7 @@ export default function DemoHub() {
         <FadeIn className="mt-16">
           <h2 className="text-xl font-semibold sm:text-2xl">그 외 업종은 홈페이지 템플릿으로 보실 수 있습니다</h2>
           <p className="mt-2.5 max-w-3xl text-sm leading-relaxed text-muted-foreground break-keep">
-            아래 업종은 관리자 시스템 없이 홈페이지만 제작한 시안입니다. 업종당 디자인이 여러 종이며,
+            아래 업종은 관리자 시스템 없이 홈페이지만 만든 것입니다. 업종당 디자인이 여러 종이며,
             클릭하면 실제 화면을 그대로 보실 수 있습니다. 이 업종도 관리자 시스템이 필요하시면 위 여섯 개와
             같은 방식으로 구축해 드립니다.
           </p>

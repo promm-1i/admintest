@@ -100,7 +100,7 @@ const study: CaseStudy = {
   points: [
     {
       title: "첫 화면은 흰 바탕에\n덩어리 하나와 붉은 점",
-      body: "흰 바탕에 보라에서 파랑으로 번지는 덩어리를 하나 띄우고, 그 위에 We Are Orbitlab을 세리프로 크게 겹쳤습니다. 덩어리 가운데에는 붉은 점 하나만 찍혀 있습니다. 메뉴 자리에는 Let's Talk와 전체메뉴 단추만 있습니다.",
+      body: "흰 바탕에 보라에서 파랑으로 번지는 덩어리를 하나 띄우고, 그 위에 We Are Orbitlab을 세리프로 크게 겹쳤습니다. 덩어리 가운데에는 붉은 점 하나만 찍혀 있습니다. 메뉴 자리에는 Let's Talk와 전체메뉴 버튼만 있습니다.",
       items: ["흰 바탕 · 그러데이션 덩어리 · 붉은 점", "세리프 대문자 제목 · 두 줄 소개", "메뉴는 Let's Talk · 전체메뉴"],
       img: "/cases/orbitlab/main.webp",
       caption: "첫 화면",
@@ -136,7 +136,7 @@ const study: CaseStudy = {
     },
     {
       title: "세리프 영문 제목, 고딕 본문",
-      body: "We Are Orbitlab · Our Services 같은 구역 제목은 Cormorant Garamond 세리프로 크게, 본문 한글은 Pretendard로 씁니다.",
+      body: "We Are Orbitlab · Our Services 같은 구역 제목을 명조체로 크게 뒀습니다.",
     },
     {
       title: "크기를 화면 크기에 맞춰 계산합니다",
@@ -177,10 +177,6 @@ const study: CaseStudy = {
     {
       q: "문의는 어디로 오나요?",
       a: "문의 폼을 지정한 메일로 받아 보시게 연결하고, 관리자 화면에 쌓아 두는 방식도 가능합니다.",
-    },
-    {
-      q: "오빗랩은 실제 회사인가요?",
-      a: "아닙니다. 디자인을 보여 드리려고 만든 가상 회사입니다. 프로젝트와 고객사 이름도 모두 가상이며, 실제 실적과 사진으로 바꿔 드립니다.",
     },
   ],
 };
