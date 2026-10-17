@@ -37,6 +37,10 @@ COVER_ONLY = "--cover-only" in sys.argv
 # 첫 조각이 배너·로고뿐이라 대표로 못 쓰는 템플릿 — 쓸 상세 번호를 직접 지정한다
 COVER_FROM = {"CARP-1001": 9, "LAWP-1001": 1, "STAP-1005": 2}
 
+# 스크롤로 '켜짐' 클래스가 붙어야 그림이 다 나오는 템플릿 — 빠른 훑기로는 안 붙는다(폴더 → JS)
+# 셈다움: 화면 그림 4장을 겹쳐 두고 .sd-pic-wr.active 일 때 2~4장이 들어온다(첫 칸만 HTML 에 active, 나머지는 반쯤 빈 화면으로 찍혔다)
+ON_JS = {"semdawoom": "document.querySelectorAll('.sd-pic-wr').forEach(e=>e.classList.add('active'))"}
+
 # 푸터가 position:fixed 인 템플릿(윤슬)은 rect 가 화면 기준이라 문서 좌표로 쓸 수 없다 → 문서 높이로.
 CUT_JS = """(()=>{const f=document.querySelector('footer,#footer,.footer,#ft,.ft');
  const doc=document.documentElement.scrollHeight;
@@ -182,6 +186,9 @@ def grab(pg, key_dir: Path, name: str, folder: str, max_cut: int = MAX_CUT,
       if(c)for(const [k,v] of [['transform','none'],['translate','none']])c.style.setProperty(k,v,'important')}""")
     pg.evaluate("window.ScrollTrigger && ScrollTrigger.getAll().forEach(t=>{try{t.kill(true)}catch(e){}})")
     pg.add_style_tag(content="[data-aos],.rv,.ani,.fadeUp,.fadeLeft,.fadeRight{opacity:1!important;transform:none!important;transition:none!important}")
+    if folder in ON_JS:
+        pg.evaluate(ON_JS[folder])
+        pg.wait_for_timeout(1500)
     pg.evaluate(REVEAL_JS)
     # 팝업은 클래스 이름이 템플릿마다 달라 이름으로는 못 잡는다 →
     # '닫기 / 하루동안 / 오늘 하루' 단추를 품은 떠 있는 상자를 지운다.
