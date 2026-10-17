@@ -1,7 +1,7 @@
 import type React from "react";
 import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigationType } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, type MainNavEntry } from "@/components/site/navData";
@@ -155,8 +155,12 @@ function hrefIn(root: string, href: string) { return /^(https?:|tel:|mailto:|#)/
 function pathFromLocation(pathname: string, root: string) { const value = pathname.slice(root.length) || "/"; return value.startsWith("/") ? value : `/${value}`; }
 
 function useEditorialMotion(pathname: string) {
+  const navType = useNavigationType();
   useEffect(() => {
-    if (window.location.hash) requestAnimationFrame(() => document.querySelector(window.location.hash)?.scrollIntoView()); else window.scrollTo(0, 0);
+    // 뒤로·앞으로 가기는 ScrollToTop 이 보던 위치로 되돌린다 — 여기서 맨 위로 올리면 그걸 덮는다
+    if (navType !== "POP") {
+      if (window.location.hash) requestAnimationFrame(() => document.querySelector(window.location.hash)?.scrollIntoView()); else window.scrollTo(0, 0);
+    }
     const reveal = [...document.querySelectorAll<HTMLElement>("[data-reveal]")];
     const revealObserver = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: .14, rootMargin: "0px 0px -8%" });
     reveal.forEach((node) => revealObserver.observe(node));

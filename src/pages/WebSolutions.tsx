@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
+import { wasScrollRestored } from "@/components/ScrollToTop";
 import { Check, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -190,9 +191,12 @@ export default function WebSolutions() {
   // 헤더에서 ?cat=<key> 로 들어오면 해당 카테고리로 스크롤한다.
   const [params] = useSearchParams();
   const cat = params.get("cat");
+  const navType = useNavigationType();
+  const { key } = useLocation();
   // 쪽이 열릴 때 바깥 껍데기(ScrollToTop · 편집 껍데기)가 뒤이어 맨 위로 되돌리므로 한 박자 늦게 민다.
+  // 뒤로 가기로 돌아와 보던 위치가 있으면 ScrollToTop 이 그리로 되돌리므로 건너뛴다.
   useEffect(() => {
-    if (!cat) return;
+    if (!cat || (navType === "POP" && wasScrollRestored(key))) return;
     const id = window.setTimeout(() => {
       document.getElementById(`cat-${cat}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 150);
