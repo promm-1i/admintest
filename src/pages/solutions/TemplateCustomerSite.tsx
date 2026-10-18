@@ -27,7 +27,8 @@ export default function TemplateCustomerSite({
     `${name} — 고객 홈페이지 데모`,
     `NOVERIQ ${name} 맞춤형 웹 솔루션의 고객용 홈페이지 예시 화면입니다.`,
   );
-  const [notice, setNotice] = useState(true);
+  // 서비스 소개 쪽에 미리보기로 끼워 넣을 땐 안내 팝업이 미리보기를 덮어 버려서 처음엔 띄우지 않는다
+  const [notice, setNotice] = useState(() => window.self === window.top);
 
   return (
     <div className="fixed inset-0 z-40 flex flex-col bg-neutral-950">

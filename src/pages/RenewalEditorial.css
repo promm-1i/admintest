@@ -980,6 +980,7 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-search__field{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid #e8e8e8}
 .re-search__field svg{width:20px;height:20px;color:var(--re-muted,#767676);flex:none}
 .re-search__field input{flex:1;min-width:0;border:0;outline:none;font-size:18px;color:#1a1a1a;background:none}
+.re-search__field input:focus-visible{outline:2px solid var(--re-blue,#0d6efd);outline-offset:1px}
 .re-search__field button{width:32px;height:32px;display:grid;place-items:center;border:0;border-radius:50%;background:none;color:var(--re-muted,#767676);cursor:pointer}
 .re-search__hint{margin:0;padding:28px 22px;font-size:15px;line-height:1.7;color:var(--re-muted,#767676);word-break:keep-all}
 .re-search__hint a{color:var(--re-blue-ink,#1468d8);text-decoration:underline}
@@ -990,6 +991,8 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 .re-search__list small{display:block;font-size:12px;color:var(--re-blue-ink,#1468d8)}
 .re-search__list strong{display:block;margin-top:2px;font-size:16px;font-weight:600}
 .re-search__list em{display:block;margin-top:2px;font-style:normal;font-size:14px;color:var(--re-muted,#767676);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* 글자 칸이 flex 기본값(min-width:auto)이라 한 줄로 묶인 em 이 칸을 밀어 휴대폰에서 오른쪽으로 잘렸다 */
+.re-search__list a>:not(img){min-width:0;flex:1}
 @media (max-width:1023px){.re-search{padding:60px 12px}.re-search__field input{font-size:16px}}
 
 /* ------------------------------------------------------------------
@@ -1194,10 +1197,11 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 /* ------------------------------------------------------------------
    좁은 폭 메뉴 — 768~1023 은 2단 드로어(좌 대메뉴 / 우 항목),
    768 미만은 접었다 펴는 목록. 원본도 좁은 폭에서 2단 드로어를 쓴다.
+   1024 이상 햄버거도 같은 2단 드로어를 오른쪽 판으로 띄운다(맨 아래).
    ------------------------------------------------------------------ */
 .re-drawer{display:none}
 .re-stack{display:block}
-@media (min-width:768px) and (max-width:1023px){
+@media (min-width:768px){
   .re-drawer{display:grid;grid-template-columns:200px minmax(0,1fr);min-height:60svh}
   .re-stack{display:none}
   .re-drawer__side{margin:0;padding:12px 0;list-style:none;border-right:1px solid var(--re-line,#e8eaee);background:#f7f9fb}
@@ -1403,3 +1407,18 @@ html:has(.renewal-editorial){scroll-behavior:smooth}
 /* 좁게 두는 쪽(문답 · 폼 · 글)도 폭이 640 · 768 · 896 · 992 로 갈려 있었다.
    읽기 좋은 폭 하나(896)로 모은다. */
 .renewal-editorial #re-main :is(.max-w-2xl,.max-w-3xl,.max-w-5xl).mx-auto{max-width:896px}
+
+/* ------------------------------------------------------------------
+   전체 메뉴(햄버거) — 10-18 QA
+   · 1024 이상에도 햄버거가 보이는데 여는 판이 display:none 이라 X 로만 바뀌고 아무것도 안 떴다
+   · 휴대폰에선 판이 내용 높이만큼만 내려와 아래 본문이 비치고, 열린 채 뒤 페이지가 굴러갔다
+   ------------------------------------------------------------------ */
+html:has(#re-mobile-menu:not([aria-hidden="true"])){overflow:hidden}
+@media(max-width:1023px){
+  .renewal-editorial .header-mnb{bottom:0;max-height:none;overscroll-behavior:contain}
+}
+@media(min-width:1024px){
+  .renewal-editorial .header-mnb{position:fixed;z-index:101;top:110px;right:0;bottom:0;width:min(600px,100vw);padding:0;display:block;overflow:auto;overscroll-behavior:contain;background:#fff;border-top:1px solid var(--re-border,#e8eaee);box-shadow:0 0 0 100vmax rgba(10,14,24,.35);clip-path:inset(0 0 0 -100vmax);visibility:hidden;opacity:0;pointer-events:none;transition:opacity .2s,visibility .2s}
+  .renewal-editorial .header-mnb:not([aria-hidden="true"]){visibility:visible;opacity:1;pointer-events:auto}
+  .renewal-editorial .header-mnb .re-drawer{min-height:100%}
+}

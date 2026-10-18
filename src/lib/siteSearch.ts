@@ -41,7 +41,12 @@ function buildIndex(): SearchHit[] {
     if (!sample.image) continue;
     hits.push({
       kind: "디자인",
-      title: sample.premiumLabel ? `${sample.premiumLabel} · ${sample.industry}` : sample.industry,
+      // 업종 이름에 프리미엄 이름이 이미 들어 있으면('스피치 · 보이스 · 면접 학원 홈페이지') 이어 붙이면 같은 말이 두 번 나온다
+      title: !sample.premiumLabel || sample.industry.includes(sample.premiumLabel)
+        ? sample.industry
+        : sample.premiumLabel.includes(sample.industry)
+          ? sample.premiumLabel
+          : `${sample.premiumLabel} · ${sample.industry}`,
       desc: sample.tag ?? sample.type.join(" · "),
       href: `/samples/${sample.slug}`,
       image: sample.image,
