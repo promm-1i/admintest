@@ -45,6 +45,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   lighting: "LIG",
   bicycle: "BIC",
   laundry: "LAU",
+  garden: "GAR",
 };
 
 export function getDesignCode(sample: Sample): string {
@@ -77,6 +78,7 @@ const OPTION_INDUSTRY_LABELS: Record<string, string> = {
   lighting: "조명·유리 공예",
   bicycle: "자전거 브랜드",
   laundry: "무인세탁 · 세탁 프랜차이즈",
+  garden: "정원·수목원",
 };
 
 const LINE_ORDER: Record<DesignLine, number> = { 프리미엄: 0, 랜딩형: 1, 기본형: 2 };

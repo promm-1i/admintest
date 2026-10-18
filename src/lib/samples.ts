@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "garden-a-template",
+    industry: "정원 · 수목원 홈페이지",
+    title: "정원 · 수목원 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 정원 · 수목원 · 관람 안내 · 예약 · 29페이지",
+    purpose:
+      "두 정원과 건축물 소개, 관람 요금과 가이드 투어, 식당과 주변 볼거리, 프로그램과 공지, 예약까지 방문 전에 찾는 정보를 넓은 정원 사진과 함께 담은 정원 홈페이지입니다.",
+    features: [
+      "정원 소개 · 정원의 시간 · 함께한 사람들 · 지속가능성 · 한국정원 · 현대정원",
+      "방문자센터 · 아르보하우스 · 솔비원 · 관람안내 요금표 · 가이드 투어 · 식당 · 주변 볼거리 · 오시는 길",
+      "공지 · 진행 상태별 프로그램 · 언론뉴스 · 정원풍경 · 분류 탭이 있는 자주 묻는 질문",
+      "전체 메뉴 · 첫 화면 알림 다섯 장 · 오늘은 다시 열지 않기 · 숲속 소리 · 정원 미리보기 영상 · 예약과 로그인 화면",
+    ],
+    idealFor: "정원, 수목원, 식물원, 숲 체험장처럼 입장권과 계절 프로그램을 함께 안내하는 곳",
+    image: "/thumbs/garden-a.jpg",
+    liveUrl: "/arveongarden/",
+    industryKey: "garden",
+    premiumLabel: "정원 · 수목원",
+    designCode: "GARP-1001",
+    premium: true,
+  },
+  {
     slug: "dental-i-template",
     industry: "임플란트 · 어르신 진료 치과 홈페이지",
     title: "임플란트 · 어르신 진료 치과 홈페이지 (프리미엄 디자인 C)",
@@ -6984,7 +7006,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "leisure",
     label: "레저 · 관광",
     desc: "시설과 코스를 보여주고 이용 안내 · 예약으로 잇는 구성",
-    industryKeys: ["golf", "travel"],
+    industryKeys: ["golf", "travel", "garden"],
   },
   {
     key: "portfolio",
