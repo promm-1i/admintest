@@ -28,7 +28,7 @@ function routesFromSitemap() {
   const xml = readFileSync(join(root, "public/sitemap.xml"), "utf8");
   return [...xml.matchAll(/<loc>https?:\/\/[^/]+([^<]*)<\/loc>/g)]
     .map((m) => m[1] || "/")
-    .filter((p) => !p.startsWith("/samples/"));
+    .filter((p) => !/^\/samples\/./.test(p)); // 목록 /samples/ 는 남기고 상세만 뺀다
 }
 
 const MIME = {
