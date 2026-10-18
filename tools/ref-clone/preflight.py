@@ -53,10 +53,8 @@ def brand_dir(slug):
 
 # 고객 납품 사이트 — 민트클 public 밖에 있고 포트폴리오(samples.ts · 사례 상세 · 썸네일)에 올리지 않는다.
 # [4] 산출물만 해당 없음으로 넘기고 나머지 검사는 그 폴더로 똑같이 돌린다(사용자가 정한 것만 적는다).
-CLIENT_SITES = {
-    'thechic': ('C:/web-project/thechic/site',
-                '2026-10-15 사용자 결정(권장안) — 더시크댄스학원 고객 납품 사이트, 포트폴리오 등록 대상 아님'),
-}
+# 이 저장소는 공개라 고객 이름은 여기 적지 않고 LOCAL_DECISIONS(저장소 밖)에 둔다.
+CLIENT_SITES = {}
 
 
 def tpl_dir(slug):
@@ -139,9 +137,13 @@ SCOPE_DECIDED = {
     'ipark': '2026-10-05 사용자 결정(권장안) — 대기업 아이파크 37쪽 → 하온디앤씨 7쪽 대표 틀 그대로',
     'daesangwellife': '2026-10-05 사용자 결정(권장안) — 대기업 대상웰라이프 33쪽 → 누리웰 22쪽 대표 틀 그대로(빌더는 ref-sites/daesang)',
     'daesang': '2026-10-05 사용자 결정(권장안) — 대기업 대상웰라이프 33쪽 → 누리웰 22쪽 대표 틀 그대로',
-    'noadance': '2026-10-18 사용자 결정 — 더시크댄스학원(학원 한 곳) 35쪽: 지점·지점노트 34와 쪽 아닌 링크 8은 해당 없음, '
-                '장르별 11쪽은 장르 쪽 하나로 합침, 채용·운영사·대관·발표회·휴강·캠페인·검색용 글 13쪽은 뺌',
 }
+# 고객 사이트 결정(CLIENT_SITES · SCOPE_DECIDED)은 공개 저장소 밖 파일에서 더한다.
+LOCAL_DECISIONS = 'C:/web-project/ref-sites/_preflight_local.json'
+if os.path.exists(LOCAL_DECISIONS):
+    _local = json.load(io.open(LOCAL_DECISIONS, encoding='utf-8'))
+    CLIENT_SITES.update({k: tuple(v) for k, v in _local.get('CLIENT_SITES', {}).items()})
+    SCOPE_DECIDED.update(_local.get('SCOPE_DECIDED', {}))
 # 원본이 링크는 걸었지만 라이브에서도 404 인 쪽 — 만들 대상이 아니라 [2] 쪽 수에서 뺀다(라이브로 확인한 것만)
 ORIGIN_404 = {
     'helloludi': {'/ko/trial', '/programs/architect', '/programs/artist', '/programs/astronaut', '/programs/chef',
