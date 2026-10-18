@@ -681,7 +681,7 @@ function Header() {
         </div>
       </div>}
     </div>
-    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen}>
+    <div id="re-mobile-menu" className="header-mnb re-mobile" aria-hidden={!mobileOpen} onClick={(e) => { if ((e.target as HTMLElement).closest("a")) setMobileOpen(false); }}>
       {/* 좁은 폭 — 왼쪽 대메뉴 / 오른쪽 그 메뉴의 항목 */}
       <div className="re-drawer">
         <ul className="re-drawer__side">{MAIN_NAV.map((item) => <li key={item.key}>
