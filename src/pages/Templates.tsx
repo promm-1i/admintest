@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -27,16 +26,19 @@ const STYLES = [
 const TEMPLATES = SAMPLES.filter((s) => s.industryKey);
 
 export default function Templates() {
-  const [searchParams] = useSearchParams();
-  const [page, setPage] = useState(1);
-  const [style, setStyle] = useState<string>(() => {
-    const s = searchParams.get("style");
-    return STYLES.some((v) => v.value === s) ? s! : "basic-template";
-  });
-  const [industry, setIndustry] = useState(() => {
-    const i = searchParams.get("industry");
-    return i && TEMPLATE_INDUSTRY_FILTERS.some((f) => f.value === i) ? i : "all";
-  });
+  // 형식 · 업종 · 쪽을 주소(?style=&industry=&page=)에 두어 상세에서 뒤로가기해도 보던 목록으로 돌아온다
+  const [searchParams, setSearchParams] = useSearchParams();
+  const styleParam = searchParams.get("style");
+  const style = STYLES.some((v) => v.value === styleParam) ? styleParam! : "basic-template";
+  const industryParam = searchParams.get("industry");
+  const industry = industryParam && TEMPLATE_INDUSTRY_FILTERS.some((f) => f.value === industryParam) ? industryParam : "all";
+  const setQuery = (key: string, value: string | null) => {
+    const p = new URLSearchParams(searchParams);
+    if (value === null) p.delete(key);
+    else p.set(key, value);
+    if (key !== "page") p.delete("page");
+    setSearchParams(p);
+  };
 
   usePageTitle(
     "홈페이지 템플릿 — NOVERIQ",
@@ -48,33 +50,18 @@ export default function Templates() {
   );
 
   const totalPages = Math.max(1, Math.ceil(filteredSamples.length / PAGE_SIZE));
+  const page = Math.min(Math.max(1, Number(searchParams.get("page")) || 1), totalPages);
   const pageSamples = filteredSamples.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   const handlePageChange = (next: number) => {
     if (next < 1 || next > totalPages) return;
-    setPage(next);
+    setQuery("page", next <= 1 ? null : String(next));
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSelectStyle = (value: string) => {
-    setStyle(value);
-    setPage(1);
-  };
+  const handleSelectStyle = (value: string) => setQuery("style", value);
 
-  const handleSelectIndustry = (value: string) => {
-    setIndustry(value);
-    setPage(1);
-  };
-
-  // 이미 이 페이지에 있는 상태에서 메뉴로 다른 업종을 고르면 주소만 바뀌고
-  // 목록은 그대로였다. 주소의 필터를 화면에 다시 맞춘다.
-  useEffect(() => {
-    const s = searchParams.get("style");
-    if (STYLES.some((v) => v.value === s)) setStyle(s!);
-    const i = searchParams.get("industry");
-    setIndustry(i && TEMPLATE_INDUSTRY_FILTERS.some((f) => f.value === i) ? i : "all");
-    setPage(1);
-  }, [searchParams]);
+  const handleSelectIndustry = (value: string) => setQuery("industry", value === "all" ? null : value);
 
   return (
     <div className="mx-auto max-w-[1536px] px-4 py-14">

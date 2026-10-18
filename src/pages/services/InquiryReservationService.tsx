@@ -185,7 +185,7 @@ export default function InquiryReservationService() {
               <p className="mb-3 font-mono text-xs font-bold text-primary">01 · 고객 접수</p>
               <BrowserFrame label="고객 홈페이지 — 상담 문의" heightClassName="h-[340px]">
                 <LazyIframePreview
-                  src="/web-solutions/real-estate/demo/site#contact"
+                  src="/web-solutions/interior/demo/site#consult"
                   scale={0.6}
                   title="NOVERIQ 고객용 문의 폼 데모"
                 />

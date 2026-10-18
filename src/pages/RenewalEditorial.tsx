@@ -1,7 +1,7 @@
 import type React from "react";
 import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, Route, Routes, useLocation, useNavigationType } from "react-router-dom";
+import { Link, Route, Routes, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, type MainNavEntry } from "@/components/site/navData";
@@ -818,9 +818,18 @@ function Contents({ children }: { children: ReactNode }) { return <div className
 function LocalNav({ group, path }: { group: keyof typeof LOCAL_GROUPS; path: string }) {
   const root = useRoot(); return <nav className="re-local-nav" aria-label={`${group} 하위 메뉴`}>{LOCAL_GROUPS[group].map(([label, href]) => <Link key={href} to={hrefIn(root, href)} aria-current={path === href ? "page" : undefined}>{label}</Link>)}</nav>; }
 function Pagination({ total, current, onSelect }: { total: number; current: number; onSelect: (page: number) => void }) {
+  const ref = useRef<HTMLElement>(null);
   const start = Math.max(0, Math.min(current - 3, total - 5));
   const pages = Array.from({ length: total }, (_, index) => index + 1).slice(start, start + 5);
-  return <nav className="re-pagination" aria-label="페이지 이동"><ul className="re-pagination__list">{pages.map((page) => <li key={page} className="re-pagination__page"><button type="button" aria-current={page === current ? "page" : undefined} onClick={() => onSelect(page)}>{page}</button></li>)}<li className="re-pagination__page re-pagination__page--next"><button type="button" aria-label="다음 페이지" disabled={current >= total} onClick={() => onSelect(current + 1)}><ArrowRight /></button></li></ul></nav>;
+  // 쪽을 바꾸면 목록 위로 올린다 — 그대로 두면 새 목록의 끝과 쪽 번호만 보인다
+  const select = (page: number) => {
+    onSelect(page);
+    const section = ref.current?.closest("section"); if (!section) return;
+    // 하위 쪽 머리글은 따라 내려오지 않으니 화면에 걸쳐 있을 때만 그 아래로 맞춘다
+    const top = section.getBoundingClientRect().top - Math.max(0, document.querySelector(".re-header")?.getBoundingClientRect().bottom ?? 0);
+    if (top < 0) window.scrollBy({ top, behavior: "smooth" });
+  };
+  return <nav ref={ref} className="re-pagination" aria-label="페이지 이동"><ul className="re-pagination__list">{pages.map((page) => <li key={page} className="re-pagination__page"><button type="button" aria-current={page === current ? "page" : undefined} onClick={() => select(page)}>{page}</button></li>)}<li className="re-pagination__page re-pagination__page--next"><button type="button" aria-label="다음 페이지" disabled={current >= total} onClick={() => select(current + 1)}><ArrowRight /></button></li></ul></nav>;
 }
 function BoardSearch({ value, onChange, label }: { value: string; onChange: (value: string) => void; label: string }) { return <div className="re-board-util"><div className="re-board-search"><label className="re-blind" htmlFor="re-board-keyword">{label}</label><input id="re-board-keyword" value={value} placeholder="검색어를 입력하세요" onChange={(event) => onChange(event.target.value)} /><button type="button" aria-label="검색"><Search /></button></div></div>; }
 function DetailArticle({ category, title, date, children, listHref, prev, next }: { category: string; title: string; date?: string; children: ReactNode; listHref: string; prev?: { label: string; href: string }; next?: { label: string; href: string } }) {
@@ -1040,9 +1049,17 @@ function PriceDetail({ page, path }: { page: ContentPage; path: string }) {
 
 const BOARD_PAGE_SIZE = 10;
 function useBoardPage<T>(items: T[]) {
-  const [page, setPage] = useState(1);
+  // 쪽 번호를 주소(?page=)에 둬야 상세에 들어갔다 뒤로 와도 보던 쪽으로 돌아온다
+  const [params, setParams] = useSearchParams();
+  const page = Math.max(1, Number(params.get("page")) || 1);
   const total = Math.max(1, Math.ceil(items.length / BOARD_PAGE_SIZE));
   const safe = Math.min(page, total);
+  const setPage = (next: number) => {
+    if (next === page) return;
+    const query = new URLSearchParams(params);
+    if (next <= 1) query.delete("page"); else query.set("page", String(next));
+    setParams(query);
+  };
   return { page: safe, total, setPage, slice: items.slice((safe - 1) * BOARD_PAGE_SIZE, safe * BOARD_PAGE_SIZE) };
 }
 

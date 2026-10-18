@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ArrowLeft, Info, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -29,6 +29,8 @@ export default function TemplateCustomerSite({
   );
   // 서비스 소개 쪽에 미리보기로 끼워 넣을 땐 안내 팝업이 미리보기를 덮어 버려서 처음엔 띄우지 않는다
   const [notice, setNotice] = useState(() => window.self === window.top);
+  // 서비스 소개 쪽 링크가 붙인 #listings 같은 위치를 안쪽 템플릿까지 넘긴다
+  const { hash } = useLocation();
 
   return (
     <div className="fixed inset-0 z-40 flex flex-col bg-neutral-950">
@@ -57,7 +59,19 @@ export default function TemplateCustomerSite({
 
       {/* 실제 랜딩형 템플릿 */}
       <iframe
-        src={`/templates/${slug}-landing/`}
+        src={`/templates/${slug}-landing/${hash}`}
+        onLoad={(e) => {
+          // 템플릿은 자바스크립트로 그려져서 브라우저가 #위치를 못 찾고 맨 위에 멈춘다 — 칸이 그려질 때까지 기다렸다 내린다
+          const doc = e.currentTarget.contentDocument;
+          if (!hash || !doc) return;
+          let tries = 0;
+          const go = () => {
+            const el = doc.getElementById(decodeURIComponent(hash.slice(1)));
+            if (el) el.scrollIntoView({ behavior: "instant" });
+            else if (tries++ < 30) setTimeout(go, 100);
+          };
+          go();
+        }}
         title={`${name} 고객 홈페이지 데모`}
         className="w-full flex-1 border-0 bg-white"
       />
