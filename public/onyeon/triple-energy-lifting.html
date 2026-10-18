@@ -896,6 +896,8 @@
   var headerY=scrollY;function headerDirection(){var nextY=scrollY,isLounge=location.pathname.indexOf('lounge')>-1;if(header){if(innerWidth>1023&&isLounge){if(nextY>headerY)header.classList.add('oy-scr-dwnx');else if(nextY<headerY)header.classList.remove('oy-scr-dwnx');}else header.classList.remove('oy-scr-dwnx');}headerY=nextY;}addEventListener('scroll',headerDirection,{passive:true});addEventListener('resize',headerDirection,{passive:true});headerDirection();
   var quick=document.getElementById('oy-i-qk');function quickState(){if(quick)quick.classList.toggle('on',scrollY>300);}addEventListener('scroll',quickState,{passive:true});quickState();
   if(window.AOS)AOS.init({duration:700,easing:'ease-out-cubic',once:true,disable:function(){return matchMedia('(prefers-reduced-motion: reduce)').matches;}});
+  /* 원본은 스크롤로 사진 칸에 oy-nmtx, 글 상자에 on 을 붙여 드러냈는데 그 스크립트가 빠져 시술 쪽 사진 · 설명이 끝내 투명했다 */
+  var reveal=q('.oy-cd-mtnx,.oy-sl-shwx-upx');if(reveal.length){var mark=function(x){x.classList.add(x.classList.contains('oy-cd-mtnx')?'oy-nmtx':'on');};var rio='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(en){if(!en.isIntersecting)return;mark(en.target);rio.unobserve(en.target);});},{threshold:.15}):null;reveal.forEach(function(x){if(rio)rio.observe(x);else mark(x);});}
   if(window.Swiper)q('.swiper-container').forEach(function(el){if(el.swiper)return;try{
     var slides=el.querySelectorAll('.swiper-slide').length,id=el.id||'',root=el.closest('[id]')||el.parentElement||el,opts;
     var nav={nextEl:root.querySelector('.swiper-next,.swiper-button-next'),prevEl:root.querySelector('.swiper-prev,.swiper-button-prev')};

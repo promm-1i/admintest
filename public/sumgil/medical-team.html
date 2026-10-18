@@ -612,18 +612,17 @@
     if(/onestep|psteps|srev|split--g/.test(c)) return 0.2; /* ref main_cont_sorting23·cont_wrap·info_cont */
     return 0.5;
   }
-  var ios={};
-  function obs(t){
-    if(!ios[t]) ios[t]=new IntersectionObserver(function(es){ es.forEach(function(en){
-      if(!en.isIntersecting) return;
-      var r=en.target;
-      if(r.classList.contains('rv')) r.classList.add('on');
-      [].forEach.call(r.querySelectorAll('.rv'),function(e){e.classList.add('on')});
-      ios[t].unobserve(r);
-    }); },{threshold:+t});
-    return ios[t];
-  }
-  roots.forEach(function(r){ obs(String(th(r))).observe(r) });
+  /* 비율 하나로만 걸면 화면 두 배보다 긴 섹션은 0.5 를 영영 못 넘어 사진이 끝내 안 보였다 → 보이는 높이를 화면 80% 로 상한 */
+  var steps=[]; for(var i=0;i<=100;i++) steps.push(i/100);
+  var io=new IntersectionObserver(function(es){ es.forEach(function(en){
+    if(!en.isIntersecting) return;
+    var r=en.target;
+    if(en.intersectionRect.height<Math.min(th(r)*en.boundingClientRect.height, innerHeight*.8)) return;
+    if(r.classList.contains('rv')) r.classList.add('on');
+    [].forEach.call(r.querySelectorAll('.rv'),function(e){e.classList.add('on')});
+    io.unobserve(r);
+  }); },{threshold:steps});
+  roots.forEach(function(r){ io.observe(r) });
 })();
 
 /* 헤더 — 스크롤 방향 숨김 · 배경 전환 · 메가메뉴 · 전체메뉴 · 검색 */

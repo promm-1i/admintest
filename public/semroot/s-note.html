@@ -187,7 +187,7 @@
 
   [].forEach.call(document.querySelectorAll('.bn-slider'),function(sl){
     var items=[].slice.call(sl.children);
-    if(items.length<2)return;
+    if(items.length<2){if(items[0])items[0].classList.add('on');return}  /* 한 장짜리 띠 그림은 on 이 안 붙어 투명했다 */
     if(matchMedia('(prefers-reduced-motion: reduce)').matches){items[0].classList.add('on');return}
     var i=0;
     items[0].classList.add('on');

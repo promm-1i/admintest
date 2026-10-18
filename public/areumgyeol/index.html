@@ -1788,6 +1788,10 @@
   reveal.forEach(x=>io?io.observe(x):x.classList.add('active'));
   const finishReveals=()=>{if(window.scrollY>window.innerHeight*.5||window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-8)reveal.forEach(x=>x.classList.add('active'));};
   addEventListener('scroll',finishReveals,{passive:true}); finishReveals();
+  const caseDark=q('.ag-hm-cntx-wr06');
+  if(caseDark){const darken=()=>qa('.ag-hm-cntx-bk,.ag-hm-cntx-bk2',caseDark).forEach(x=>{x.style.opacity='1';});
+    const dio='IntersectionObserver' in window?new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){darken();dio.disconnect();}},{threshold:.15}):null;
+    dio?dio.observe(caseDark):darken();}
   const headerInner=q('.ag-htx-in'),header=q('.ag-hm-hd'); let lastScrollY=window.scrollY;
   const syncHeader=()=>{const y=window.scrollY,moved=y>24;if(headerInner)headerInner.classList.toggle('ag-scrx',moved);qa('.ag-qk-wr,.ag-tp-bt-wr').forEach(e=>e.classList.toggle('ag-scrx',moved));if(header&&Math.abs(y-lastScrollY)>4){header.classList.toggle('ag-nv-upx',y>lastScrollY&&moved);header.classList.toggle('ag-nv-dwnx',y<lastScrollY||!moved);}if(body.dataset.page==='index.html')body.classList.toggle('ag-intro-scrolled',moved);lastScrollY=y;};
   addEventListener('scroll',syncHeader,{passive:true}); syncHeader();
