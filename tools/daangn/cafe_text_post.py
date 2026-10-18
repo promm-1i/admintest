@@ -28,7 +28,7 @@ def main():
 
     with sync_playwright() as p:
         ctx = p.chromium.connect_over_cdp("http://localhost:9222").contexts[0]
-        pg = ctx.pages[0] if ctx.pages else ctx.new_page()
+        pg = ctx.new_page()   # 2026-10-18 사용자 웨일에 붙는다 — 사용자 탭은 건드리지 않고 새 탭에서
         pg.set_viewport_size({"width": 1280, "height": 900})
         pg.goto(NEW, wait_until="domcontentloaded", timeout=90000)
         pg.wait_for_selector(".ProseMirror", timeout=30000)

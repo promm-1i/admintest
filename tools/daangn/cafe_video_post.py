@@ -9,7 +9,7 @@
   post.txt   첫 줄 제목, '===' 줄 뒤가 본문(한 줄에 한 문장, 주제 바뀔 때만 빈 줄)
   video.mp4  세로 영상(noveriq-video TemplateFilm)
 사진은 Desktop\\개발\\카페_캡처_늘리기\\<코드>_<이름>\\ 의 순서 그대로 한 장씩(한꺼번에 던지면 뒤섞인다).
-하루에 한 글. serve.py 로 띄운 창(CDP 9222)에 붙는다.
+하루에 한 글. 사용자가 쓰는 웨일(원격 디버깅 허용, CDP 9222)에 붙는다 — 10-18부터 serve.py 창 대신.
 """
 import sys
 from pathlib import Path
@@ -58,7 +58,7 @@ def main():
 
     with sync_playwright() as p:
         ctx = p.chromium.connect_over_cdp("http://localhost:9222").contexts[0]
-        pg = ctx.pages[0] if ctx.pages else ctx.new_page()
+        pg = ctx.new_page()   # 2026-10-18 사용자 웨일에 붙는다 — 사용자 탭은 건드리지 않고 새 탭에서
         pg.set_viewport_size({"width": 1280, "height": 900})
         pg.goto(NEW, wait_until="domcontentloaded", timeout=90000)
         pg.wait_for_selector(".ProseMirror", timeout=30000)
