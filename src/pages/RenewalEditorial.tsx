@@ -14,6 +14,7 @@ import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 import { searchSite, type SearchHit } from "@/lib/siteSearch";
 import { PAGE_EXTRAS, type ExtraBlock } from "@/lib/renewalExtras";
+import { usePageTitle } from "@/hooks/usePageTitle";
 // 커스텀 개발의 호버 영상 카드 4개. 라우트를 리뉴얼 본문으로 돌리면서 화면에서 사라졌던 것을 되살린다.
 /**
  * 서비스 상세 8쪽의 알맹이. 리뉴얼로 갈아엎으면서 데모 절들이 통째로 빠져
@@ -1410,10 +1411,16 @@ function RenewalEditorialInner() {
   return <div className="renewal-editorial"><Header /><div id="re-main" tabIndex={-1}><RouteContent path={path} /></div><Footer /></div>;
 }
 
+/** 옛 쪽들은 usePageTitle 로 제목 · canonical · og:url 을 굽는데 리뉴얼 본문은 안 불러서 홈 기본값으로 남았다. */
+function PageMeta({ page }: { page: ContentPage }) { usePageTitle(`${page.title} — NOVERIQ`, page.intro); return null; }
+
 /** 본 사이트 루트에서 쓰는 리뉴얼 본문들. 껍데기는 SiteLayout 이 이미 씌운다. */
 export function RenewalHomeBody() { return <EditorialHome />; }
-export function RenewalPriceBody() { return <PriceDetail page={PAGE_DATA.price} path="/website/price" />; }
-export function RenewalSamplesBody() { return <PortfolioPage />; }
+export function RenewalPriceBody() { return <><PageMeta page={PAGE_DATA.price} /><PriceDetail page={PAGE_DATA.price} path="/website/price" /></>; }
+export function RenewalSamplesBody() {
+  usePageTitle("제작 사례 — NOVERIQ", "병원, 뷰티샵, 식당 등 업종별 홈페이지 제작 포트폴리오를 확인하세요.");
+  return <PortfolioPage />;
+}
 export function RenewalPrivacyBody() { return <PrivacyPage />; }
 
 /** 제작 안내·기술력 12쪽을 본 사이트에서도 리뉴얼 본문으로 그린다. 경로로 어느 쪽인지 고른다. */
@@ -1428,7 +1435,8 @@ export function RenewalContentBody() {
   const path = pathname.replace(/\/+$/, "") || "/";
   const key = CONTENT_ROUTES[path];
   if (!key) return <NotFound />;
-  return <StandardPage page={PAGE_DATA[key]} path={path} />;
+  // 서비스 8쪽은 안에 넣는 옛 본문(LEGACY_SERVICE_BODY)이 이미 usePageTitle 을 부른다
+  return <>{!LEGACY_SERVICE_BODY[key] && <PageMeta page={PAGE_DATA[key]} />}<StandardPage page={PAGE_DATA[key]} path={path} /></>;
 }
 
 export default function RenewalEditorial() {
