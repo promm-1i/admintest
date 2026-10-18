@@ -90,7 +90,7 @@ export default function IndustryLanding() {
               alt={`${label} 홈페이지 실제 화면`}
               className="w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             />
-            <span className="absolute left-4 top-4 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
+            <span className="absolute bottom-4 right-4 rounded-full bg-black/65 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-xs">
               실제 배포된 화면
             </span>
           </Link>

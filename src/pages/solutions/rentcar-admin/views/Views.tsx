@@ -43,7 +43,7 @@ export function DashboardView() {
       <div className="mt-3 space-y-2">
         {activityLog.length === 0 && (
           <p className="rounded-lg border border-dashed border-border bg-secondary/30 p-6 text-center text-xs text-muted-foreground break-keep">
-            아직 작업 내역이 없습니다. 왼쪽 메뉴에서 차량을 등록하거나 상태를 변경해보면 여기에
+            아직 작업 내역이 없습니다. 메뉴에서 차량을 등록하거나 상태를 변경해보면 여기에
             기록됩니다.
           </p>
         )}
