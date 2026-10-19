@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "furniture-a-template",
+    industry: "소파 · 가구 브랜드 홈페이지",
+    title: "소파 · 가구 브랜드 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 소파 · 리빙 가구 · 소재 안내 · 제작 공정 · 25페이지",
+    purpose:
+      "브랜드 이야기와 연혁, 속재료와 가죽 · 패브릭, 여섯 단계 제작 공정, 아시아 쇼룸 지도, 고객 후기와 공지까지 소파를 고르기 전에 궁금한 것을 넓은 사진과 함께 담은 가구 홈페이지입니다.",
+    features: [
+      "소개 · 스토리(돌아가는 연도 원판 · 시기별 연혁) · 제품 철학 · BI",
+      "R&D 센터 · 콜라보레이션 · 아트·컬처 · 나눔 활동 · 공간 협찬",
+      "검증 내장재 펼침 목록 · 가죽 · 패브릭 탭 · 소재 상세 색 칩 · 여섯 공정 탭 · 소파 아카데미",
+      "전체 메뉴 · 첫 화면 영상 세 장 · 아시아 열 개 도시 쇼룸 지도 · 후기 · 공지 검색 · 준비 중 알림",
+    ],
+    idealFor: "소파 브랜드, 가구 제조사, 리빙 가구 쇼룸처럼 소재와 만드는 기준을 함께 보여 주려는 가구 회사",
+    image: "/thumbs/furniture-a.jpg",
+    liveUrl: "/lavernoa/",
+    industryKey: "furniture",
+    premiumLabel: "소파 · 가구 브랜드",
+    designCode: "FURP-1001",
+    premium: true,
+  },
+  {
     slug: "garden-a-template",
     industry: "정원 · 수목원 홈페이지",
     title: "정원 · 수목원 홈페이지 (프리미엄 디자인 A)",
@@ -6976,7 +6998,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "shop",
     label: "쇼핑몰 · 브랜드",
     desc: "상품을 진열하고 장바구니 · 구매로 잇는 구성",
-    industryKeys: ["shop", "perfume", "brew", "lighting", "bicycle", "auto"],
+    industryKeys: ["shop", "perfume", "brew", "lighting", "bicycle", "auto", "furniture"],
   },
   {
     key: "corporate",
