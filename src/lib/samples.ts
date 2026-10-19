@@ -6992,7 +6992,7 @@ export const PREMIUM_CATEGORIES: { key: string; label: string; desc: string; ind
     key: "build",
     label: "인테리어 · 시공",
     desc: "시공 사례와 진행 방식을 보여주고 견적 문의를 받는 구성",
-    industryKeys: ["interior", "moving"],
+    industryKeys: ["interior", "moving", "inspection"],
   },
   {
     key: "shop",

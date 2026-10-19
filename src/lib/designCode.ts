@@ -46,6 +46,7 @@ const INDUSTRY_PREFIX: Record<string, string> = {
   bicycle: "BIC",
   laundry: "LAU",
   garden: "GAR",
+  inspection: "INS",
   furniture: "FUR",
 };
 
@@ -80,6 +81,7 @@ const OPTION_INDUSTRY_LABELS: Record<string, string> = {
   bicycle: "자전거 브랜드",
   laundry: "무인세탁 · 세탁 프랜차이즈",
   garden: "정원·수목원",
+  inspection: "사전점검·하자진단",
   furniture: "소파·가구 브랜드",
 };
 
