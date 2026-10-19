@@ -64,9 +64,9 @@ for (const entry of samplesSrc.split(/\n  \{/).slice(1)) {
 // /about/ 로 301 한다. sitemap 이 슬래시 없는 주소를 내면 canonical 도 /about 으로 구워져
 // "정본은 /about → /about 은 /about/ 로 리디렉션" 고리가 되어 둘 다 색인이 안 된다
 // (2026-10-18 Search Console: 리디렉션 23 · 대체 페이지 9). 그래서 슬래시를 붙인다.
-// /samples/:slug 는 프리렌더하지 않아 리디렉션이 없으므로 그대로 둔다.
+// /samples/:slug 도 sample-meta.mjs 가 dist/samples/<slug>/index.html 을 구워 똑같이 301 되므로 붙인다.
 const withSlash = (u) => (u.endsWith("/") ? u : `${u}/`);
-const urls = [...[...CORE_ROUTES, ...industryRoutes].map(withSlash), ...sampleRoutes];
+const urls = [...CORE_ROUTES, ...industryRoutes, ...sampleRoutes].map(withSlash);
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
