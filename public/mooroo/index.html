@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mooroo — 쇼핑몰 시안 선택</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="mooroo 쇼핑몰 프로토타입 시안 5개. 시안을 골라 버튼을 직접 눌러 보세요.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="mooroo — 쇼핑몰 시안 선택">
+<meta property="og:description" content="레트로 윈도우 쇼핑몰 프로토타입 시안 5개">
+<meta property="og:url" content="https://noveriq.co.kr/mooroo/">
+<meta property="og:image" content="https://noveriq.co.kr/mooroo-assets/img/draft-1.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/galmuri@2.40.3/dist/galmuri.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  :root {
+    --ui: 'Galmuri11', ui-monospace, monospace; --ko: 'Pretendard', system-ui, sans-serif; --logo: 'Bagel Fat One', sans-serif;
+    --win: #E3E9F4; --hi: #fff; --lo: #9AA7C2; --dk: #46526F; --ink: #1D2436; --ink2: #56607A; --navy: #1E2436; --navy-fg: #E6ECF8; --accent: #86ABEE;
+    --star: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 0C13 8 16 11 24 12C16 13 13 16 12 24C11 16 8 13 0 12C8 11 11 8 12 0Z'/%3E%3C/svg%3E");
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { background: #8fb0e4; }
+  body { margin: 0; min-height: 100vh; word-break: keep-all; font-family: var(--ko); color: var(--ink); background: url(/mooroo-assets/img/p27.jpg) center / cover fixed, linear-gradient(#8fb0e4, #c9dbf4 55%, #7d9fd2); -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px dashed #3E63B3; outline-offset: 3px; }
+  .wrap { min-height: 100vh; display: grid; place-items: center; padding: 28px 20px; }
+  .win { width: min(1180px, 100%); background: var(--win); border: 1px solid var(--dk); border-radius: 6px; box-shadow: inset 1px 1px 0 var(--hi), inset -1px -1px 0 var(--lo), 7px 9px 0 rgba(10, 16, 40, .22); }
+  .bar { display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 6px 0 12px; background: linear-gradient(#F8FAFD, #C8D5ED); border-bottom: 1px solid var(--lo); border-radius: 5px 5px 0 0; font: 700 15px var(--ui); }
+  .bar i { margin-left: auto; display: flex; gap: 4px; font-style: normal; }
+  .bar i b { width: 24px; height: 22px; display: grid; place-items: center; background: #fff; border: 1px solid var(--dk); border-radius: 3px; font: 700 12px/1 var(--ui); }
+  .body { position: relative; padding: 30px 34px 34px; background: linear-gradient(rgba(255,255,255,.62), rgba(255,255,255,.62)), url(/mooroo-assets/img/p27.jpg) center 30% / cover; border-radius: 0 0 5px 5px; }
+  .head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 14px 30px; margin-bottom: 26px; }
+  .logo { font: 64px/0.95 var(--logo); text-shadow: 3px 3px 0 #fff, 6px 6px 0 rgba(0, 0, 0, .13); }
+  .tag { margin-top: 8px; font: 14px var(--ui); letter-spacing: .06em; }
+  .note { max-width: 420px; padding: 12px 14px; border: 1px solid var(--lo); border-radius: 4px; background: rgba(255,255,255,.7); font: 13.5px/1.7 var(--ko); }
+  .note b { font: 700 11px var(--ui); background: #FFD84A; padding: 2px 6px; margin-right: 4px; }
+  .grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 28px 26px; }
+  .card { grid-column: span 2; display: flex; flex-direction: column; text-decoration: none; background: var(--win); border: 1px solid var(--dk); border-radius: 3px; box-shadow: inset 1px 1px 0 var(--hi), 5px 6px 0 rgba(10, 16, 40, .25); transform: rotate(var(--r)); transition: transform .28s cubic-bezier(.2, .8, .25, 1.25), box-shadow .28s; }
+  .card:nth-child(4) { grid-column: 2 / span 2; }
+  .card:hover, .card:focus-visible { transform: rotate(0) translateY(-8px); box-shadow: inset 1px 1px 0 var(--hi), 9px 13px 0 rgba(10, 16, 40, .2); }
+  .c-bar { display: flex; justify-content: space-between; align-items: center; padding: 4px 8px; background: linear-gradient(var(--ta), var(--tb)); color: var(--tf); border-bottom: 1px solid var(--lo); font: 700 12px var(--ui); letter-spacing: .04em; }
+  .c-bar em { font-style: normal; width: 13px; height: 12px; display: grid; place-items: center; border: 1px solid var(--dk); background: #fff; color: var(--ink); font: 9px/1 var(--ui); }
+  .shot { margin: 7px 7px 0; aspect-ratio: 960 / 670; overflow: hidden; border: 1px solid var(--lo); background: #dfe5f0; }
+  .shot img { width: 100%; height: 100%; object-fit: cover; transition: transform .45s; }
+  .card:hover .shot img { transform: scale(1.03); }
+  .c-foot { display: flex; align-items: center; gap: 10px; margin: 7px; padding: 8px 10px; border: 1px solid var(--lo); background: #fff; }
+  .c-foot strong { font: 700 15px var(--ui); }
+  .c-foot span { font: 13px var(--ko); color: var(--ink2); }
+  .sw { display: flex; gap: 3px; margin-left: auto; }
+  .sw i { width: 14px; height: 14px; border: 1px solid var(--dk); }
+  .go { font: 700 12px var(--ui); padding: 5px 9px; background: var(--navy); color: var(--navy-fg); }
+  .foot { margin-top: 28px; font: 12.5px/1.7 var(--ko); color: var(--ink2); text-align: center; }
+  .spark { position: absolute; width: 28px; height: 28px; background: var(--navy); -webkit-mask: var(--star) center / contain no-repeat; mask: var(--star) center / contain no-repeat; animation: tw 3.2s ease-in-out infinite; }
+  @keyframes tw { 50% { transform: scale(.7); opacity: .5; } }
+  .s1 { right: 4%; top: 30px; } .s2 { left: 46%; top: 22px; width: 18px; height: 18px; animation-delay: 1.2s; }
+  @media (max-width: 860px) {
+    .wrap { padding: 12px 8px; place-items: start center; }
+    .body { padding: 22px 14px 24px; }
+    .logo { font-size: 50px; }
+    .grid { grid-template-columns: 1fr; gap: 22px; }
+    .card, .card:nth-child(4) { grid-column: auto; }
+    .s2 { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <main class="win">
+    <div class="bar">mooroo_시안선택.exe<i aria-hidden="true"><b>_</b><b>□</b><b>×</b></i></div>
+    <div class="body">
+      <i class="spark s1" aria-hidden="true"></i><i class="spark s2" aria-hidden="true"></i>
+      <div class="head">
+        <div><h1 class="logo" style="margin:0">mooroo</h1><p class="tag" style="margin:8px 0 0">— 쇼핑몰 시안 5개 · 보고 싶은 시안을 고르세요 -</p></div>
+        <p class="note"><b>PROTOTYPE</b> 버튼은 실제로 눌러 볼 수 있어요. 결제 · 회원가입은 아직 연결 전이고, 상품 사진과 문구는 예시예요. 뒤로가기를 누르면 이 화면으로 돌아옵니다.</p>
+      </div>
+      <nav class="grid" aria-label="시안 목록">
+        <a class="card" href="/mooroo-1/" style="--r:-2deg;--ta:#F8FAFD;--tb:#C8D5ED;--tf:#1D2436"><span class="c-bar">DRAFT_01.exe<em>×</em></span><span class="shot"><img src="/mooroo-assets/img/draft-1.jpg" alt="시안 01 하늘 첫 화면"></span><span class="c-foot"><strong>01</strong><span>하늘 · 첨부 시안 톤</span><span class="sw"><i style="background:#A9C4EB"></i><i style="background:#E3E9F4"></i><i style="background:#1E2436"></i></span><b class="go">열기 ›</b></span></a>
+        <a class="card" href="/mooroo-2/" style="--r:1.5deg;--ta:#FFF6FA;--tb:#EBCBDD;--tf:#3A2036"><span class="c-bar">DRAFT_02.exe<em>×</em></span><span class="shot"><img src="/mooroo-assets/img/draft-2.jpg" alt="시안 02 노을 첫 화면" loading="lazy"></span><span class="c-foot"><strong>02</strong><span>노을 · 분홍 라벤더</span><span class="sw"><i style="background:#F6C3CF"></i><i style="background:#F3E7EF"></i><i style="background:#3A2340"></i></span><b class="go">열기 ›</b></span></a>
+        <a class="card" href="/mooroo-3/" style="--r:-1deg;--ta:#2C3868;--tb:#121A3B;--tf:#EAF0FF"><span class="c-bar">DRAFT_03.exe<em>×</em></span><span class="shot"><img src="/mooroo-assets/img/draft-3.jpg" alt="시안 03 밤 첫 화면" loading="lazy"></span><span class="c-foot"><strong>03</strong><span>밤 · 남색 별하늘</span><span class="sw"><i style="background:#1d2a5c"></i><i style="background:#C9D0E6"></i><i style="background:#A6D4FF"></i></span><b class="go">열기 ›</b></span></a>
+        <a class="card" href="/mooroo-4/" style="--r:2deg;--ta:#F2FFFD;--tb:#B7EAE4;--tf:#0D3A40"><span class="c-bar">DRAFT_04.exe<em>×</em></span><span class="shot"><img src="/mooroo-assets/img/draft-4.jpg" alt="시안 04 아쿠아 첫 화면" loading="lazy"></span><span class="c-foot"><strong>04</strong><span>아쿠아 · 민트 유리창</span><span class="sw"><i style="background:#5CC8E8"></i><i style="background:#EAFAF8"></i><i style="background:#0B4750"></i></span><b class="go">열기 ›</b></span></a>
+        <a class="card" href="/mooroo-5/" style="--r:-1.5deg;--ta:#FFFFFF;--tb:#C5C5CC;--tf:#111114"><span class="c-bar">DRAFT_05.exe<em>×</em></span><span class="shot"><img src="/mooroo-assets/img/draft-5.jpg" alt="시안 05 크롬 첫 화면" loading="lazy"></span><span class="c-foot"><strong>05</strong><span>크롬 · 흑백 실버</span><span class="sw"><i style="background:#9a9aa2"></i><i style="background:#E7E7EA"></i><i style="background:#CFFF3D"></i></span><b class="go">열기 ›</b></span></a>
+      </nav>
+      <p class="foot">장바구니 · 문의 · 주문 같은 데모 기록은 보고 계신 브라우저에만 저장돼요.</p>
+    </div>
+  </main>
+</div>
+<script>
+  /* 시안에서 '← 시안 선택'을 누르면 기록을 되돌아오게 표시만 남긴다 */
+  document.querySelector('.grid').addEventListener('click', function (e) {
+    if (e.target.closest('a.card')) { try { sessionStorage.setItem('moo_from_select', '1'); } catch (x) { } }
+  });
+</script>
+</body>
+</html>

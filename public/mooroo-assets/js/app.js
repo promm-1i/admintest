@@ -7,6 +7,8 @@
   var BASE = window.MOO_BASE || '';
 
   /* ---------- 공용 ---------- */
+  /* 시안은 시안 선택 쪽에서 들어온다 — 안에서 움직인 쪽은 기록에 쌓지 않아 뒤로가기 한 번이면 선택 쪽으로 돌아간다 */
+  var go = function (h) { if (location.hash !== h) location.replace(h); };
   var won = function (n) { return n.toLocaleString('ko-KR') + '원'; };
   var P = function (id) { return M.products.filter(function (p) { return p.id === id; })[0]; };
   var cat = function (id) { return M.cats.filter(function (c) { return c.id === id; })[0]; };
@@ -271,7 +273,7 @@
   var checkoutItems = null;
   function checkout() {
     var items = checkoutItems || S.cart;
-    if (!items.length) { location.hash = '#/cart'; return ''; }
+    if (!items.length) { go('#/cart'); return ''; }
     var sub = subtotal(items), ship = shipOf(sub), m = S.login ? S.member : {};
     var coupons = S.login ? M.coupons.filter(function (c) { return S.usedCoupons.indexOf(c.name) < 0; }) : [];
     var list = items.map(function (c) {
@@ -328,7 +330,7 @@
     checkoutItems = null;
     save();
     closeModal();
-    location.hash = '#/order/' + no;
+    go('#/order/' + no);
   }
   function orderDone(no) {
     var o = allOrders().filter(function (x) { return x.no === no; })[0];
@@ -548,6 +550,9 @@
     if (mb) { var it = mb.parentNode, was = it.classList.contains('open'); closeMenus(); if (!was) it.classList.add('open'); return; }
     if (!e.target.closest('.mitem')) closeMenus();
 
+    var ln = e.target.closest('a[href^="#"]');
+    if (ln && !e.defaultPrevented && !e.ctrlKey && !e.metaKey && !e.shiftKey) { e.preventDefault(); if (!ln.hasAttribute('data-act')) go(ln.getAttribute('href')); }
+
     var a = e.target.closest('[data-act]');
     if (!a) return;
     var act = a.getAttribute('data-act');
@@ -567,7 +572,7 @@
     if (act === 'addcart' || act === 'buynow') {
       if (!pd.color || !pd.size) return toast('색상과 사이즈를 골라 주세요');
       var item = { id: pd.id, color: pd.color, size: pd.size, qty: pd.qty };
-      if (act === 'buynow') { checkoutItems = [item]; location.hash = '#/checkout'; return; }
+      if (act === 'buynow') { checkoutItems = [item]; go('#/checkout'); return; }
       addCart(item);
       return toast('장바구니에 담았어요 <a href="#/cart">장바구니 보기 ›</a>');
     }
@@ -582,7 +587,7 @@
       save(); return route();
     }
     if (act === 'clear') { S.cart = []; save(); return route(); }
-    if (act === 'tocheckout') { checkoutItems = null; location.hash = '#/checkout'; return; }
+    if (act === 'tocheckout') { checkoutItems = null; go('#/checkout'); return; }
     if (act === 'lookcart') {
       var lk = M.coordi.filter(function (x) { return x.id === a.getAttribute('data-id'); })[0];
       lk.items.forEach(function (pid) { var p = P(pid); addCart({ id: pid, color: p.colors[0], size: p.sizes[Math.floor(p.sizes.length / 2)], qty: 1 }); });
@@ -600,7 +605,7 @@
     if (act === 'pwchange') return toast('비밀번호 변경은 실제 회원 기능을 붙일 때 연결해요.');
     if (act === 'qdel') {
       S.qna = S.qna.filter(function (x) { return x.id !== a.getAttribute('data-id'); });
-      save(); toast('문의를 지웠어요'); location.hash = '#/qna'; return;
+      save(); toast('문의를 지웠어요'); go('#/qna'); return;
     }
     if (act === 'track') {
       var o = allOrders().filter(function (x) { return x.no === a.getAttribute('data-no'); })[0];
@@ -622,7 +627,7 @@
 
   document.addEventListener('change', function (e) {
     var t = e.target;
-    if (t.getAttribute('data-act') === 'sort') { location.hash = t.getAttribute('data-base') + '?s=' + t.value; return; }
+    if (t.getAttribute('data-act') === 'sort') { go(t.getAttribute('data-base') + '?s=' + t.value); return; }
     if (t.getAttribute('data-act') === 'recalc') coCalc();
   });
   document.addEventListener('input', function (e) { if (e.target.getAttribute('data-act') === 'recalc') coCalc(); });
@@ -647,7 +652,7 @@
       S.qna.unshift({ id: id, type: f.type.value, title: f.title.value.trim(), body: f.body.value.trim(), author: S.login ? S.member.name : f.author.value.trim(), date: M.today, secret: f.secret.checked, pw: S.login ? '' : f.pw.value, product: f.product.value || undefined, answer: '', mine: true });
       S.unlocked[id] = true;
       save(); toast('문의를 등록했어요. 답변이 달리면 이 글에서 볼 수 있어요.');
-      location.hash = '#/qna/' + id; return;
+      go('#/qna/' + id); return;
     }
     if (f.id === 'pwForm') {
       var qid = f.getAttribute('data-id'), q = allQna().filter(function (x) { return x.id === qid; })[0];
@@ -698,11 +703,20 @@
     $$('#draftBar button').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-t') === t); b.setAttribute('aria-pressed', b.getAttribute('data-t') === t); });
     try { var u = new URL(location.href); u.searchParams.set('t', t); history.replaceState(null, '', u); } catch (e) { }
   }
+  /* ← 시안 선택: 선택 쪽에서 들어왔으면 기록을 하나 되돌아가고(쌓지 않음), 주소로 바로 들어온 사람만 새로 연다 */
+  $('#draftBar').addEventListener('click', function (e) {
+    var bk = e.target.closest('.db-back');
+    if (!bk) return;
+    var from = false;
+    try { from = sessionStorage.getItem('moo_from_select') === '1'; } catch (x) { }
+    if (from && history.length > 1) { e.preventDefault(); history.back(); }
+  });
+
   /* 배포본은 시안마다 주소가 따로(/mooroo-1/ …) — 버튼을 누르면 같은 화면(#)을 유지한 채 그 주소로 간다 */
   $('#draftBar').addEventListener('click', function (e) {
     var b = e.target.closest('button[data-t]');
     if (!b) return;
-    if (window.MOO_DRAFT) { location.href = '/mooroo-' + (THEMES.indexOf(b.getAttribute('data-t')) + 1) + '/' + location.hash; return; }
+    if (window.MOO_DRAFT) { location.replace('/mooroo-' + (THEMES.indexOf(b.getAttribute('data-t')) + 1) + '/' + location.hash); return; }
     setTheme(b.getAttribute('data-t'));
   });
 
