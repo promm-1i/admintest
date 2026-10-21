@@ -688,15 +688,18 @@ def squash_gaps(im: Image.Image, secs: list[int], min_run: int = 320, keep: int 
     자르기 전에 줄여야 텅 빈 장이 안 생긴다. 섹션 경계 좌표도 같이 옮긴다."""
     g = im.convert("L").resize((60, im.height), Image.NEAREST)
     px = g.load()
-    runs, run = [], 0
+    # 색이 바뀌는 줄(흰 여백 → 회색 띠)에서 끊는다 — 안 끊으면 두 여백을 한 덩어리로 접어
+    # 회색 띠 첫 제목이 띠 경계에 붙는다(온하임 파트너사 10-22)
+    runs, run, col = [], 0, -99
     for y in range(im.height):
         row = [px[x, y] for x in range(60)]
-        if max(row) - min(row) < 6:
+        flat = max(row) - min(row) < 6
+        if flat and run and abs(row[0] - col) < 6:
             run += 1
             continue
         if run > min_run:
             runs.append((y - run, y))
-        run = 0
+        run, col = (1, row[0]) if flat else (0, -99)
     if run > min_run:
         runs.append((im.height - run, im.height))
     if not runs:
