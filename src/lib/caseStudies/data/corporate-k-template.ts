@@ -5,7 +5,7 @@ const study: CaseStudy = {
   brand: "누리웰",
   headline: "건강기능식품 · 헬스케어 기업 홈페이지",
   summary:
-    "우유빛 사진과 올리브 초록을 쓴 건강기능식품 기업 홈페이지입니다. 메인 한 쪽에 회사 5 · 브랜드 6 · 연구개발 2 · 미디어 4 · 고객지원 4 · 개인정보, 모두 22쪽으로 구성했습니다.",
+    "우유빛 사진과 올리브 초록을 쓴 건강기능식품 기업 홈페이지입니다. 메인 한 쪽에 회사 5 · 브랜드 6 · 연구개발 2 · 미디어 4 · 고객지원 4 · 개인정보, 모두 구성했습니다.",
   brandColor: "rgb(58,125,80)",
   tintColor: "rgb(240,243,236)",
   overview:
@@ -28,7 +28,7 @@ const study: CaseStudy = {
     ],
     groups: [
       { label: "브랜드 6화면", title: "브랜드 소개와 제품 쪽 다섯 개", body: "브랜드 소개 쪽 뒤로 균형영양식 · 당케어 · 키즈 · 프로틴이 같은 틀의 쪽으로 이어지고, 건강기능식품은 제품을 옆으로 넘겨 보는 쪽입니다.", items: ["브랜드 소개 · 제품 쪽 5", "화면에 붙어 바뀌는 브랜드 장면", "권하는 상황 3 · 브랜드 목록"], img: "/cases/corporate-k/page-brand.webp", caption: "브랜드 · 전체 브랜드", file: "brand.html" },
-      { label: "제품 상세", title: "제품 장면과 권하는 상황 세 가지", body: "제품 장면 아래로 권하는 상황 세 가지, 흘러가는 문구 띠, 다른 브랜드 목록이 이어집니다.", items: ["제품 장면", "권하는 상황 3 · 아이콘", "흘러가는 띠 · 브랜드 목록"], img: "/cases/corporate-k/page-brand-balance.webp", caption: "브랜드 · 균형영양식", file: "brand-balance.html" },
+      { label: "제품 상세", title: "제품 장면과 권하는 상황 세 가지", body: "제품 장면 아래로 권하는 상황 세 가지, 흘러가는 문구 줄, 다른 브랜드 목록이 이어집니다.", items: ["제품 장면", "권하는 상황 3 · 아이콘", "흘러가는 줄 · 브랜드 목록"], img: "/cases/corporate-k/page-brand-balance.webp", caption: "브랜드 · 균형영양식", file: "brand-balance.html" },
       { label: "R&D·특허", title: "특허 카드 넘김 · 소재 10개 펼침 목록 · 공장 인증", body: "R&D 성과 쪽에 특허 카드 넘김, 소재 10개 펼침 목록, 공장별 인증 현황이 차례로 있습니다.", items: ["R&D센터와 연구 분야", "특허 카드 넘김", "보유 소재 10개·공장 인증"], img: "/cases/corporate-k/page-rnd-result.webp", caption: "R&D · 연구 성과", file: "rnd-result.html" },
       { label: "맞춤 제품 추천", title: "나이 · 성별 · 고민을 고르면 제품을 추천하는 문답", body: "밸런스케어는 네 단계, 건강기능식품은 세 단계 질문에 답하면 추천 제품이 나옵니다. 단계마다 이전으로 버튼이 있습니다.", items: ["밸런스케어 4단계 · 건강기능식품 3단계", "연령 · 성별 · 섭취 대상 · 건강 고민", "추천 결과 · 처음으로"], img: "/cases/corporate-k/point-recommend.webp", caption: "고객지원 · 맞춤 제품 추천", file: "solution.html" },
       { label: "사회공헌 4탭", title: "재단 네 곳을 나눈 탭", body: "위에 붙는 재단 탭 네 개를 고르면 재단별 사업 소개, 로고판, 활동 사진 두 장이 바뀝니다.", items: ["재단 탭 4개", "사업 소개와 로고", "활동 사진 2장"], img: "/cases/corporate-k/page-csr.webp", caption: "지속가능경영 · 사회공헌", file: "csr.html" },
@@ -70,8 +70,8 @@ const study: CaseStudy = {
       name: "밸런스케어 균형영양식",
       file: "brand-balance.html",
       img: "/cases/corporate-k/page-brand-balance.webp",
-      desc: "제품 장면, 이런 때 권해요 3가지, 흘러가는 띠, 다른 브랜드 목록입니다. 당케어 · 키즈 · 프로틴이 같은 틀입니다.",
-      items: ["제품 장면", "권하는 상황 3 · 아이콘", "흘러가는 띠 · 브랜드 목록"],
+      desc: "제품 장면, 이런 때 권해요 3가지, 흘러가는 줄, 다른 브랜드 목록입니다. 당케어 · 키즈 · 프로틴이 같은 틀입니다.",
+      items: ["제품 장면", "권하는 상황 3 · 아이콘", "흘러가는 줄 · 브랜드 목록"],
     },
     {
       name: "건강기능식품",
@@ -112,7 +112,7 @@ const study: CaseStudy = {
   points: [
     {
       title: "About Us는 둥근 사진들이\n가운데로 모여듭니다",
-      body: "메인 첫 화면 아래 About Us 장면은 화면에 붙은 채, 흩어져 있던 둥근 사진들이 스크롤에 따라 가운데 'Total Healthcare Solution Company' 원으로 모여듭니다. 원 아래에는 생애주기에 맞춘 영양 솔루션을 만드는 회사라는 한 줄과 회사소개 버튼이 있습니다.",
+      body: "메인 첫 화면 아래 About Us 장면은 화면에 붙은 채, 흩어져 있던 둥근 사진들이 내리는 만큼 가운데 'Total Healthcare Solution Company' 원으로 모여듭니다. 원 아래에는 생애주기에 맞춘 영양 솔루션을 만드는 회사라는 한 줄과 회사소개 버튼이 있습니다.",
       items: ["화면 고정 · 둥근 사진이 모여듦", "가운데 원 · 슬로건", "회사소개 버튼"],
       img: "/cases/corporate-k/point-about.webp",
       caption: "홈 · About Us",
@@ -152,7 +152,7 @@ const study: CaseStudy = {
     },
     {
       title: "화면에 붙어 바뀌는 장면",
-      body: "휠 스크롤에 관성이 붙어 있고, About Us · 브랜드 · 가치체계의 Respect Tree 구역은 화면에 붙은 채 사진과 글이 바뀝니다. 브랜드 · 가치체계 쪽에는 문구가 흘러가는 띠가 있습니다.",
+      body: "휠에서 손을 떼도 조금 더 미끄러지고, About Us · 브랜드 · 가치체계의 Respect Tree 구역은 화면에 붙은 채 사진과 글이 바뀝니다. 브랜드 · 가치체계 쪽에는 문구가 흘러가는 줄이 있습니다.",
     },
     {
       title: "공식몰과 계열사로 잇는 자리",
@@ -183,7 +183,7 @@ const study: CaseStudy = {
       a: "제작할 때 관리자 화면에서 글과 분류를 올리면 목록 · 상세 · 메인 카드에 반영되게 만듭니다.",
     },
     {
-      q: "22쪽보다 적게도 되나요?",
+      q: "쪽 수를 줄일 수도 있나요?",
       a: "네. 회사 · 브랜드 · 연구개발 · 미디어 · 고객지원 묶음에서 필요한 쪽만 골라 만들 수 있습니다.",
     },
     {

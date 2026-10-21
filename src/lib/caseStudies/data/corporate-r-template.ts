@@ -5,11 +5,11 @@ const study: CaseStudy = {
   brand: "NEXHARBOR",
   headline: "항만 물류·터미널 운영기업 홈페이지",
   summary:
-    "항만 사진 첫 화면, 옆으로 흐르는 관계사 장면, 화면에 붙어 바뀌는 사업 다섯 가지로 시작하는 항만 물류그룹 홈페이지입니다. 투자정보 · 관계사 9곳 · 뉴스 108쪽 · 갤러리 103쪽 · 영문까지 모두 290쪽입니다.",
+    "항만 사진 첫 화면, 옆으로 흐르는 관계사 장면, 화면에 붙어 바뀌는 사업 다섯 가지로 시작하는 항만 물류그룹 홈페이지입니다. 투자정보 · 관계사 9곳 · 뉴스 · 갤러리 · 영문까지",
   brandColor: "rgb(0, 109, 115)",
   tintColor: "rgb(224, 239, 239)",
   overview:
-    "NEXHARBOR 디자인은 항만 터미널을 중심으로 하역, 운송, 보관, 통관과 3PL을 함께 제공하는 종합물류그룹을 가정해 구성했습니다. 첫 화면 아래로 관계사 장면은 화면에 붙은 채 옆으로 흐르고, 사업 장면은 화면에 붙은 채 사진과 설명이 다섯 번 바뀝니다. 화면 아래에는 Home · Group · Business · News · Career 알약 메뉴가 떠 있습니다.\n\n회사소개, 투자정보, 다섯 개 핵심 사업, 역사관과 홍보자료, 윤리·안전·ESG, 인재경영, 아홉 개 관계사와 영문 사이트까지 290쪽입니다. 뉴스 108쪽과 갤러리 103쪽, 재무표, 공시, 채용, 입찰과 브로슈어 쪽이 들어 있습니다.\n\n회사명, 사업장, 재무수치, 공시, 뉴스와 화면 이미지는 디자인 예시이며 실제 기업 자료와 공개 기준에 맞춰 변경합니다.",
+    "NEXHARBOR 디자인은 항만 터미널을 중심으로 하역, 운송, 보관, 통관과 3PL을 함께 제공하는 종합물류그룹을 가정해 구성했습니다. 첫 화면 아래로 관계사 장면은 화면에 붙은 채 옆으로 흐르고, 사업 장면은 화면에 붙은 채 사진과 설명이 다섯 번 바뀝니다. 화면 아래에는 Home · Group · Business · News · Career 알약 메뉴가 떠 있습니다.\n\n회사소개, 투자정보, 다섯 개 핵심 사업, 역사관과 홍보자료, 윤리·안전·ESG, 인재경영, 아홉 개 관계사와 영문 사이트까지 있습니다. 뉴스와 갤러리, 재무표, 공시, 채용, 입찰과 브로슈어 쪽이 들어 있습니다.\n\n회사명, 사업장, 재무수치, 공시, 뉴스와 화면 이미지는 디자인 예시이며 실제 기업 자료와 공개 기준에 맞춰 변경합니다.",
   meta: [
     { label: "적합 업종", value: "항만 운영 · 터미널 · 하역 · 운송 · 보관 · 통관 · 3PL 종합물류기업" },
     { label: "주요 구성", value: "회사소개 · 투자정보 · 사업 5분야 · 홍보관 · ESG · 인재 · 관계사 9개 · 영문" },
@@ -18,11 +18,11 @@ const study: CaseStudy = {
   mainShot: "/cases/corporate-r/main.webp",
   capabilities: {
     label: "290-PAGE ENTERPRISE SYSTEM",
-    title: "그룹사 홈페이지 290쪽",
+    title: "그룹사 홈페이지",
     body: "사업, 관계사, 투자정보, 지속가능경영, 홍보관, 채용, 영문 사이트까지 목록과 상세 쪽이 모두 있습니다. 아래 묶음을 누르면 대표 화면과 들어간 내용을 볼 수 있습니다.",
     stats: [
       { value: "290", label: "화면 수", note: "국문·영문·목록·상세 포함" },
-      { value: "108", label: "뉴스 화면", note: "목록 10쪽과 기사 상세 아카이브" },
+      { value: "108", label: "뉴스 화면", note: "목록과 기사 상세 아카이브" },
       { value: "103", label: "갤러리 화면", note: "분류별 목록과 콘텐츠 상세" },
       { value: "21", label: "영문 화면", note: "그룹사·뉴스를 포함한 글로벌 구성" },
     ],
@@ -56,8 +56,8 @@ const study: CaseStudy = {
       },
       {
         label: "뉴스·갤러리",
-        title: "뉴스 108쪽 · 갤러리 103쪽",
-        body: "뉴스는 목록 10쪽과 기사 상세로, 갤러리는 분류별 목록과 사진 상세 쪽으로 나뉩니다. 홍보동영상과 e-브로슈어 쪽도 있습니다.",
+        title: "뉴스 · 갤러리",
+        body: "뉴스는 목록과 기사 상세로, 갤러리는 분류별 목록과 사진 상세 쪽으로 나뉩니다. 홍보동영상과 e-브로슈어 쪽도 있습니다.",
         items: ["108개 뉴스 목록·상세 화면", "103개 갤러리 목록·상세 화면", "영상·브로슈어 홍보자료 연결"],
         img: "/cases/corporate-r/page-gallery.webp",
         caption: "홍보관 · 기업 갤러리 아카이브",
@@ -74,7 +74,7 @@ const study: CaseStudy = {
       },
       {
         label: "영문·글로벌",
-        title: "영문 21쪽",
+        title: "영문",
         body: "영문 메인과 회사 · 사업 소개, 관계사 9곳, 영문 뉴스 목록과 상세 쪽이 국문과 같은 구조로 있습니다.",
         items: ["영문 메인과 회사·사업 소개", "영문 관계사 9개 화면", "영문 뉴스 목록·상세"],
         img: "/cases/corporate-r/page-en.webp",
@@ -97,11 +97,11 @@ const study: CaseStudy = {
     { name: "채용", file: "careers.html", img: "/cases/corporate-r/page-careers.webp", desc: "채용 공고 목록과 상세, 인재상, 복리후생 쪽입니다.", items: ["채용 공고 목록·상세", "인재상과 복리후생", "지원 안내"] },
   ],
   points: [
-    { title: "첫 화면은 항만 사진과\n영문 네 단어", body: "첫 화면은 항만 사진 위에 Innovate. · Dream. · Grow · Together. 네 단어와 NEXHARBOR · SINCE 1962를 크게 얹었습니다.", items: ["전체 화면 항만 사진", "영문 네 단어 · SINCE 1962", "아래 떠 있는 알약 메뉴"], img: "/cases/corporate-r/point-hero.webp", caption: "홈 · 항만 히어로" },
-    { title: "관계사 장면은\n옆으로 흐릅니다", body: "GROUP COMPANY 구역은 화면에 붙은 채 스크롤을 내리는 동안 물류 · 금융 · 투자 · 제조 · 트레이딩 · 지역사회공헌 네 갈래가 옆으로 지나갑니다. 갈래마다 소개 글과 관계사 이름 링크가 붙습니다.", items: ["화면 고정 · 옆으로 흐름", "갈래 4 · 소개 글", "관계사 9곳 링크"], img: "/cases/corporate-r/point-group.webp", caption: "홈 · 그룹사" },
-    { title: "사업 다섯 가지는\n화면에 붙은 채 바뀝니다", body: "BUSINESS AREA 구역은 한 화면 높이로 붙은 채, 스크롤에 따라 그레인터미널 · 정선 · 컨테이너터미널 · 물류 · 3PL 사진과 번호, 두세 줄 설명이 차례로 바뀝니다.", items: ["사업 5장면", "사진 · 번호 · 설명 전환", "사업 쪽 연결"], img: "/cases/corporate-r/point-business.webp", caption: "홈 · 사업 영역" },
+    { title: "첫 화면은 항만 사진과\n영문 네 단어", body: "첫 화면은 항만 사진 위에 Innovate. · Dream. · Grow · Together. 네 단어와 NEXHARBOR · SINCE 1962를 크게 놓았습니다.", items: ["전체 화면 항만 사진", "영문 네 단어 · SINCE 1962", "아래 떠 있는 알약 메뉴"], img: "/cases/corporate-r/point-hero.webp", caption: "홈 · 항만 첫 화면" },
+    { title: "관계사 장면은\n옆으로 흐릅니다", body: "GROUP COMPANY 구역은 화면에 붙은 채 화면을 내리는 동안 물류 · 금융 · 투자 · 제조 · 트레이딩 · 지역사회공헌 네 갈래가 옆으로 지나갑니다. 갈래마다 소개 글과 관계사 이름 링크가 붙습니다.", items: ["화면 고정 · 옆으로 흐름", "갈래 4 · 소개 글", "관계사 9곳 링크"], img: "/cases/corporate-r/point-group.webp", caption: "홈 · 그룹사" },
+    { title: "사업 다섯 가지는\n화면에 붙은 채 바뀝니다", body: "BUSINESS AREA 구역은 한 화면 높이로 붙은 채, 내리는 만큼 그레인터미널 · 정선 · 컨테이너터미널 · 물류 · 3PL 사진과 번호, 두세 줄 설명이 차례로 바뀝니다.", items: ["사업 5장면", "사진 · 번호 · 설명 전환", "사업 쪽 연결"], img: "/cases/corporate-r/point-business.webp", caption: "홈 · 사업 영역" },
     { title: "RECENT NEWS\n다섯 줄", body: "왼쪽에 RECENT NEWS 큰 글자와 뉴스 더보기 버튼, 오른쪽에 최근 소식 다섯 줄을 제목 · 연도 · 월일로 적었습니다.", items: ["RECENT NEWS · 뉴스 더보기", "소식 5줄", "제목 · 연도 · 월일"] , img: "/cases/corporate-r/point-news.webp", caption: "홈 · 뉴스" },
-    { title: "WITH NEXHARBOR\n사진 한 장", body: "뉴스 아래에 부두 사진 한 장을 둥근 모서리로 크게 깔고, 가운데에 WITH NEXHARBOR를 흰 글자로 얹었습니다.", items: ["부두 사진 · 둥근 모서리", "WITH NEXHARBOR 큰 글자", "아래 알약 메뉴"], img: "/cases/corporate-r/point-with.webp", caption: "홈 · WITH NEXHARBOR" },
+    { title: "WITH NEXHARBOR\n사진 한 장", body: "뉴스 아래에 부두 사진 한 장을 둥근 모서리로 크게 깔고, 가운데에 WITH NEXHARBOR를 흰 글자로 놓았습니다.", items: ["부두 사진 · 둥근 모서리", "WITH NEXHARBOR 큰 글자", "아래 알약 메뉴"], img: "/cases/corporate-r/point-with.webp", caption: "홈 · WITH NEXHARBOR" },
     { title: "채용 바로가기 세 칸과\n항만 선화", body: "‘넥스하버와 함께 할 역량있는 인재를 모집합니다.’ 옆에 넥스하버인재상 · 복리후생 · 채용 세 칸을 아이콘과 함께 두고, 아래에 배 · 크레인 · 사일로 · 트럭을 선으로 그린 그림을 깔았습니다.", items: ["인재상 · 복리후생 · 채용 3칸", "칸마다 아이콘", "항만 선화 그림"], img: "/cases/corporate-r/point-recruit.webp", caption: "홈 · 채용" },
   ],
   details: [

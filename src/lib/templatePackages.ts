@@ -89,7 +89,7 @@ export const TEMPLATE_PACKAGES: TemplatePackage[] = [
     total: BASE_TOTAL + LANDING_COST,
     badge: "추천 패키지",
     badgeTone: "recommended",
-    desc: "한 페이지에 스크롤 연출과 움직임을 더한 구성",
+    desc: "한 페이지에 내릴 때 나타나는 연출과 움직임을 더한 구성",
   },
 ];
 
@@ -123,14 +123,14 @@ export const PRICING_ROWS: PricingRow[] = [
   },
   {
     label: "랜딩형 연출",
-    note: "스크롤 등장 · 인터랙션",
+    note: "내릴 때 나타나는 효과 · 눌렀을 때 반응",
     values: ["없음", "포함"],
   },
   {
     label: "페이지 구성",
     note: "한 페이지에 모두 담습니다",
     info: [
-      "소개 · 서비스 · 후기 · 문의를 한 페이지에서 스크롤로 이어 보여 줍니다.",
+      "소개 · 서비스 · 후기 · 문의를 한 페이지에서 차례로 이어 보여 줍니다.",
       "시안에 따라 서브 페이지가 이미 들어 있는 경우가 있고, 그때는 그 페이지까지 그대로 제작합니다.",
       "메뉴별로 페이지를 나누거나 나중에 더 늘리시려면 프리미엄 디자인(150만원부터)에서 제작합니다.",
     ],

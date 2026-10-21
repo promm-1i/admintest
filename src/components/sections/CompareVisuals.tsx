@@ -89,7 +89,7 @@ export function CustomBuildVisual() {
             style={{ animation: "cv-slide 5.6s cubic-bezier(.32,.72,0,1) infinite" }}
           />
         </div>
-        {/* 나중에 얹히는 기능 블록 */}
+        {/* 나중에 놓이는 기능 블록 */}
         <div
           className="cv-anim cv-hide flex items-center gap-1.5 rounded bg-secondary/70 px-1.5 py-1"
           style={{ animation: "cv-drop 5.6s cubic-bezier(.32,.72,0,1) infinite" }}

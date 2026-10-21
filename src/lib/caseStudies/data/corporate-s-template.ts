@@ -5,7 +5,7 @@ const study: CaseStudy = {
   brand: "온결산업기록관",
   headline: "산업 역사관·기업 기록관 홈페이지",
   summary:
-    "전시동 세 곳 카드, 시설 사진 넘김, 사진이 긴 역사 스토리, 공지 검색과 FAQ가 있는 기업 기록관 홈페이지입니다. 모두 11쪽입니다.",
+    "전시동 세 곳 카드, 시설 사진 넘김, 사진이 긴 역사 스토리, 공지 검색과 FAQ가 있는 기업 기록관 홈페이지입니다.",
   brandColor: "rgb(126, 67, 42)",
   tintColor: "rgb(238, 229, 219)",
   overview:
@@ -18,7 +18,7 @@ const study: CaseStudy = {
   mainShot: "/cases/corporate-s/main.webp",
   capabilities: {
     label: "PAGES",
-    title: "11쪽, 쪽마다 다른 움직임",
+    title: "쪽마다 다른 움직임",
     body: "전시동은 탭으로, 시설은 옆으로 넘겨 보고, 산업사는 긴 사진 스토리로 이어집니다. 공지 검색 · FAQ · 관람 안내 쪽도 있습니다.",
     stats: [
       { value: "11", label: "화면 수", note: "전시·스토리·공지 상세 포함" },
@@ -31,7 +31,7 @@ const study: CaseStudy = {
         label: "전시동 탐색",
         title: "전시동 세 곳을 탭과 썸네일로",
         body: "메인의 전시동 카드는 마우스를 올리거나 누르면 넓어지고, 전시안내 쪽은 위에 붙은 기록의 전당 · 복원 공방 · 기억의 채플 탭으로 넘어갑니다.",
-        items: ["메인 전시 카드 호버·클릭 확장", "전시동 3개 고정 탭", "대표 이미지와 썸네일 갤러리"],
+        items: ["메인 전시 카드는 마우스를 올리거나 누르면 커짐", "전시동 3개 고정 탭", "대표 이미지와 썸네일 갤러리"],
         img: "/cases/corporate-s/page-exhibitions.webp",
         caption: "전시동 · 탭과 이미지 갤러리",
         file: "exhibitions.html",
@@ -46,7 +46,7 @@ const study: CaseStudy = {
         file: "facility.html",
       },
       {
-        label: "역사 스크롤",
+        label: "연혁 이야기",
         title: "태동과 성장 · 긴 사진 스토리",
         body: "1948년 수리점부터의 이야기를 큰 기록 사진과 문단으로 번갈아 적었고, 사진은 원래 비율대로 길게 둡니다.",
         items: ["큰 기록 사진", "문단과 번갈아", "사진 원래 비율 그대로"],
@@ -97,7 +97,7 @@ const study: CaseStudy = {
   ],
   points: [
     { title: "아치형 전경 사진과\n소개 두 줄", body: "About Ongyeol Industrial Archive 제목 아래에 아치형 건물 전경 사진을 크게 두고, 기록관을 소개하는 두 줄과 view more 링크를 붙였습니다.", items: ["기록관 소개 문장", "대형 건축 이미지", "설립배경 화면 연결"], img: "/cases/corporate-s/point-about.webp", caption: "홈 · 기록관 소개" },
-    { title: "전시동 세 곳 카드는\n올리면 넓어집니다", body: "기록의 전당 · 복원 공방 · 기억의 채플 카드를 나란히 두고, 마우스를 올리거나 누른 카드가 넓어집니다. 카드마다 영문 이름과 화살표가 붙습니다.", items: ["전시동 3개", "호버·클릭 확장", "전시 상세 연결"], img: "/cases/corporate-s/point-exhibition.webp", caption: "홈 · 전시동" },
+    { title: "전시동 세 곳 카드는\n올리면 넓어집니다", body: "기록의 전당 · 복원 공방 · 기억의 채플 카드를 나란히 두고, 마우스를 올리거나 누른 카드가 넓어집니다. 카드마다 영문 이름과 화살표가 붙습니다.", items: ["전시동 3개", "마우스를 올리거나 누르면 커짐", "전시 상세 연결"], img: "/cases/corporate-s/point-exhibition.webp", caption: "홈 · 전시동" },
     { title: "관람시간 · 휴관일 · 오시는 길\n세 줄", body: "‘방문에 관하여 안내드립니다.’ 아래에 관람시간 · 휴관일 · 오시는 길을 한 줄씩 적고, 이어서 공지 두 건을 두었습니다.", items: ["운영시간·휴관일", "오시는 길", "관람 안내 연결"], img: "/cases/corporate-s/point-news.webp", caption: "홈 · 관람 안내" },
     { title: "태동과 성장은\n큰 사진과 문단을 번갈아", body: "‘수리점 벽에 붙어 있던 “치수는 꼭 적어 둔다”는 규칙’ 제목 아래로 기록 사진과 문단이 번갈아 이어지고, 사진은 원래 비율대로 길게 둡니다.", items: ["큰 기록 사진", "문단과 번갈아", "Founder Archive 이야기"], img: "/cases/corporate-s/point-story.webp", caption: "태동과 성장 · 역사 스토리" },
   ],

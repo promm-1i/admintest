@@ -232,7 +232,7 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
               </p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
                 {isLanding
-                  ? "스크롤에 따라 내용이 한 덩이씩 나타나고, 읽다 보면 상담 버튼이 나오게 순서를 짰습니다."
+                  ? "내리는 만큼 내용이 한 덩이씩 나타나고, 읽다 보면 상담 버튼이 나오게 순서를 짰습니다."
                   : "필요한 정보를 한 화면에 모아, 위에서부터 차례로 읽게 짰습니다."}
               </p>
             </div>
@@ -411,7 +411,7 @@ export function TemplateFeatureLanding({ sample }: { sample: Sample }) {
                 버튼 크기까지 손가락에 맞게 조정된 실제 화면 그대로입니다.
               </p>
               <ul className="mt-6 space-y-2">
-                {["전화 · 문자 버튼이 항상 손 닿는 곳에", "표와 가격도 가로 스크롤 없이", "하단 고정 상담 바 기본 제공"].map((t) => (
+                {["전화 · 문자 버튼이 항상 손 닿는 곳에", "표와 가격도 옆으로 밀지 않고", "하단 고정 상담 바 기본 제공"].map((t) => (
                   <li key={t} className="flex items-center gap-2.5 text-sm text-background/80">
                     <Check className="h-4 w-4 shrink-0 text-primary-foreground/70" />
                     {t}

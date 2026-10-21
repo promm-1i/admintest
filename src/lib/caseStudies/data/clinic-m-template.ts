@@ -5,7 +5,7 @@ const study: CaseStudy = {
   brand: "온연피부과의원",
   headline: "리프팅 · 피부 컨디션 진료와 예약을 담은 피부과 홈페이지",
   summary:
-    "큰 사진과 진료 예약 상자, 의료진 · 진료 항목 넘김으로 이어지는 메인에 리프팅 9쪽, 피부 톤 · 보습 · 볼륨 관리 7쪽, 의료진 · 진료 안내, 활동 · 공지 · 후기 게시판, 예약 · 회원, 별도 라운지까지 모두 45쪽을 담은 피부과 홈페이지입니다.",
+    "큰 사진과 진료 예약 상자, 의료진 · 진료 항목 넘김으로 이어지는 메인에 리프팅, 피부 톤 · 보습 · 볼륨 관리, 의료진 · 진료 안내, 활동 · 공지 · 후기 게시판, 예약 · 회원, 별도 라운지까지 모두 담은 피부과 홈페이지입니다.",
   brandColor: "rgb(93,73,59)",
   tintColor: "rgb(246,243,237)",
   overview:
@@ -24,7 +24,7 @@ const study: CaseStudy = {
     { name: "진료 항목", file: "treatments.html", img: "/cases/clinic-m/page-treatments.webp", desc: "피부 고민과 관리 방법을 분류해 찾아볼 수 있는 진료 항목 목록입니다.", items: ["분류별 진료 카드", "상세 쪽 연결"] },
     { name: "의료진", file: "doctors.html", img: "/cases/clinic-m/page-doctors.webp", desc: "피부과 전문의 여섯 명과 진료 원칙을 소개합니다.", items: ["의료진 프로필", "진료 철학 · 약력"] },
     { name: "온연의 활동", file: "activities.html", img: "/cases/clinic-m/page-activities.webp", desc: "학술 활동과 병원 소식을 카드 목록과 상세 화면으로 보여 줍니다.", items: ["활동 목록", "게시물 상세"] },
-    { name: "비급여 항목", file: "nonbenefit.html", img: "/cases/clinic-m/page-nonbenefit.webp", desc: "항목과 금액을 표로 확인하는 화면입니다.", items: ["분류별 비용 표", "모바일 가로 스크롤"] },
+    { name: "비급여 항목", file: "nonbenefit.html", img: "/cases/clinic-m/page-nonbenefit.webp", desc: "항목과 금액을 표로 확인하는 화면입니다.", items: ["분류별 비용 표", "휴대폰에서 옆으로 넘기기"] },
     { name: "온연 라운지", file: "lounge.html", img: "/cases/clinic-m/page-lounge.webp", desc: "별도 상담 라운지의 소개와 위치, 예약, 소식을 한 묶음으로 구성했습니다.", items: ["라운지 소개", "위치 · 예약 · 소식"] },
     { name: "온라인 예약", file: "reservation.html", img: "/cases/clinic-m/page-reservation.webp", desc: "꼭 넣어야 하는 칸과 개인정보 동의를 확인하는 예약 신청 화면입니다.", items: ["의료진 · 날짜 선택", "꼭 넣어야 하는 칸 확인"] },
   ],

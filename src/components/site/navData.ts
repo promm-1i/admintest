@@ -422,7 +422,7 @@ export const MAIN_NAV: MainNavEntry[] = [
       ] },
       { key: "template", label: "템플릿", href: "/templates", items: [
         { label: "기본형 디자인", href: "/templates?style=basic-template", desc: "필요한 정보 위주 한 페이지" },
-        { label: "랜딩형 디자인", href: "/templates?style=landing-template", desc: "스크롤 연출과 인터랙션" },
+        { label: "랜딩형 디자인", href: "/templates?style=landing-template", desc: "내릴 때 나타나는 연출과 움직임" },
       ] },
     ],
   },

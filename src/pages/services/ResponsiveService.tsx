@@ -17,7 +17,7 @@ export const DEVICES = [
 
 export const PROBLEMS_WITHOUT = [
   "글자와 버튼이 작아져 손가락으로 누르기 어려워집니다.",
-  "가로 스크롤이 생겨 내용을 온전히 보기 어려워집니다.",
+  "옆으로 밀어야 해서 내용을 온전히 보기 어려워집니다.",
   "휴대폰으로 들어온 방문자가 가장 불편한 화면을 보게 됩니다.",
   "검색엔진이 모바일 친화적이지 않은 페이지로 판단해 노출에도 불리합니다.",
 ];
@@ -99,7 +99,7 @@ function BreathingPreview() {
         <span className="h-2.5 w-2.5 rounded-full bg-border" />
         <span className="h-2.5 w-2.5 rounded-full bg-border" />
         <span className="ml-2 truncate font-mono text-[11px] text-muted-foreground">
-          noveriq.app/about — 화면 폭 실시간 변화
+          noveriq.app/about — 화면 크기 실시간 변화
         </span>
       </div>
       <div className="flex justify-center bg-secondary/20 px-4 py-8">
@@ -138,7 +138,7 @@ export default function ResponsiveService() {
         </h1>
         <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted-foreground break-keep">
           PC, 태블릿, 모바일 화면 크기에 맞춰 콘텐츠 배치와 크기가 자동으로 바뀝니다. 아래는 실제
-          NOVERIQ 소개 페이지가 화면 폭에 따라 실시간으로 재배치되는 모습입니다.
+          NOVERIQ 소개 페이지가 화면 크기에 따라 실시간으로 다시 놓이는 모습입니다.
         </p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <Button asChild size="lg" className="gap-2 font-bold">
@@ -167,7 +167,7 @@ export default function ResponsiveService() {
         <div className="mx-auto max-w-5xl px-4">
           <Reveal className="mb-8 text-center">
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실시간으로 보기</p>
-            <h2 className="mt-3 text-3xl font-bold text-foreground">화면 폭이 줄어들면, 이렇게 반응합니다</h2>
+            <h2 className="mt-3 text-3xl font-bold text-foreground">화면이 좁아지면 이렇게 바뀝니다</h2>
           </Reveal>
           <Reveal delay={100}>
             <BreathingPreview />
@@ -181,7 +181,7 @@ export default function ResponsiveService() {
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">실제 화면 비교</p>
             <h2 className="mt-3 max-w-xl text-3xl font-bold text-foreground">
-              같은 페이지, 화면 폭에 따라 다르게 배치됩니다
+              같은 쪽인데 화면 크기에 따라 다르게 놓입니다
             </h2>
             <p className="mt-3 max-w-xl text-base leading-relaxed text-muted-foreground break-keep">
               세 화면 모두 실제 NOVERIQ 소개 페이지를 기기별 논리 해상도로 그대로 불러온 결과입니다.

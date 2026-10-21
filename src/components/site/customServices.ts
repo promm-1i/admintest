@@ -66,7 +66,7 @@ export const CUSTOM_SERVICES: CustomService[] = [
     title: "검색 · 필터 기능",
     tagline: "고객이 원하는 조건으로 빠르게 찾을 수 있게",
     desc: "매물, 차량, 상품처럼 목록이 많은 홈페이지에서 조건별 검색과 필터로 원하는 결과를 쉽게 찾을 수 있도록 구축합니다.",
-    includes: ["조건별 필터링", "지도 기반 검색", "가격 · 지역별 정렬", "주소 검색 연동"],
+    includes: ["조건별로 골라 보기", "지도 기반 검색", "가격 · 지역별 정렬", "주소 검색 연동"],
     examples: [
       { label: "부동산 맞춤형 홈페이지 보기", href: "/web-solutions/real-estate" },
       { label: "렌트카 맞춤형 홈페이지 보기", href: "/web-solutions/rentcar" },

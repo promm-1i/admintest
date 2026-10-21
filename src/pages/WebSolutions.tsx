@@ -71,7 +71,7 @@ const COMMON_FEATURES = [
 const PREMIUM_GROUPS = getPremiumCategories();
 
 /**
- * 묶음이 15개로 늘어 한 줄 띠에서는 뒤쪽 칸이 화면 밖으로 밀렸다. 두 줄 격자로 놓고
+ * 묶음이 15개로 늘어 한 줄 줄에서는 뒤쪽 칸이 화면 밖으로 밀렸다. 두 줄 격자로 놓고
  * 지금 보고 있는 묶음을 켜 준다. 누르면 그 묶음으로 넘어간다.
  * 열 수 = 묶음 수의 절반(올림). 넓은 화면에선 열이 폭을 나눠 갖고, 좁으면 두 줄 그대로 옆으로 민다.
  * 위에 붙는 높이는 머리글(1024 이상 110px, 그 아래 56px) 바로 밑.
@@ -270,7 +270,7 @@ export default function WebSolutions() {
         </FadeIn>
       </div>
 
-      {/* 카테고리별 진열 — 헤더 플라이아웃(홈페이지 템플릿 → 프리미엄 디자인)과 같은 분류를 쓴다.
+      {/* 카테고리별 진열 — 맨 위 메뉴에서 펼쳐지는 칸(홈페이지 템플릿 → 프리미엄 디자인)과 같은 분류를 쓴다.
           ?cat=<key> 로 들어오면 해당 묶음으로 스크롤된다. */}
       <CategoryBar active={activeCategory} />
       {PREMIUM_GROUPS.map((group, gi) => (

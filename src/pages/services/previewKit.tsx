@@ -43,7 +43,7 @@ export function LiveComponentPreview({ scale, children }: { scale: number; child
 }
 
 /**
- * 뷰포트 근처에 올 때까지 true를 반환하지 않는 훅. iframe처럼 무거운 것을 실제로 스크롤해서
+ * 뷰포트 근처에 올 때까지 true를 반환하지 않는 훅. iframe처럼 무거운 것을 실제로 내려서
  * 볼 때만 마운트하기 위한 공용 IntersectionObserver 로직이다.
  *
  * Reveal이 이 값으로 opacity를 걸기 때문에 관찰에 실패하면 본문이 영구히 투명해진다.

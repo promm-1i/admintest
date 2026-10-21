@@ -13,7 +13,7 @@ const SMS_PHONE = "01048944905";
 
 const STYLES = [
   { key: "basic", name: "원페이지 기본", design: 0, desc: "소개부터 문의까지 한 페이지, 연출 없음" },
-  { key: "landing", name: "원페이지 랜딩", design: 500_000, desc: "한 페이지에 스크롤 연출과 움직임을 더함", hot: true },
+  { key: "landing", name: "원페이지 랜딩", design: 500_000, desc: "한 페이지에 내릴 때 나타나는 연출과 움직임을 더함", hot: true },
 ] as const;
 
 const DOMAINS = [

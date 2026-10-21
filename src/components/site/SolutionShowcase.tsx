@@ -116,7 +116,7 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
                 <span className="size-2.5 rounded-full bg-border" />
                 <span className="size-2.5 rounded-full bg-border" />
                 <span className="ml-2 text-[11px] font-medium text-muted-foreground">
-                  실제 구축 예시 — 스크롤해서 둘러보세요
+                  실제 구축 예시 — 내려서 둘러보세요
                 </span>
               </div>
               <iframe

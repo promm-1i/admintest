@@ -52,8 +52,8 @@ const DIFF_ROWS: DiffRow[] = [
   },
   {
     label: "화면 연출",
-    template: "스크롤 등장 · 기본 인터랙션",
-    premium: "고정 히어로 · 스크롤 확대 · 겹쳐 쌓이는 배치",
+    template: "내릴 때 나타나는 효과 · 기본 움직임",
+    premium: "멈춰 있는 첫 화면 · 내릴수록 커지는 사진 · 겹쳐 쌓이는 배치",
   },
   {
     label: "관리 항목",

@@ -26,7 +26,7 @@ const study: CaseStudy = {
     { name: "글로벌 쇼룸", file: "showroom.html", img: "/cases/furniture-a/page-showroom.webp", desc: "첫 해외 쇼룸 이야기를 세 장으로 나눠 보여 주고, 아래 지도에서 아시아 열 개 도시를 골라 볼 수 있습니다.", items: ["장 탭이 내리는 대로 켜짐", "사진 줄이 펼쳐지며 영상으로", "도시 선택칸과 지도 핀"] },
   ],
   points: [
-    { title: "마우스를 올리면 펼쳐지는 전체 메뉴", body: "머리글의 큰 메뉴에 마우스를 올리면 여섯 묶음 아래의 페이지가 한 번에 펼쳐지고, 올린 묶음 줄이 색으로 표시됩니다. 휴대폰에서는 묶음을 누르면 그 아래만 열리고 다른 묶음은 접힙니다.", items: ["여섯 묶음을 한눈에", "휴대폰은 묶음별로 펼침"], img: "/cases/furniture-a/point-menu.webp", caption: "메인 — 전체 메뉴" },
+    { title: "마우스를 올리면 펼쳐지는 전체 메뉴", body: "맨 위 줄의 큰 메뉴에 마우스를 올리면 여섯 묶음 아래의 페이지가 한 번에 펼쳐지고, 올린 묶음 줄이 색으로 표시됩니다. 휴대폰에서는 묶음을 누르면 그 아래만 열리고 다른 묶음은 접힙니다.", items: ["여섯 묶음을 한눈에", "휴대폰은 묶음별로 펼침"], img: "/cases/furniture-a/point-menu.webp", caption: "메인 — 전체 메뉴" },
     { title: "내리면 돌아가는 연도 원판", body: "메인 중간에서 화면을 내리면 100까지 올라가는 숫자 다음에 1998부터 2026까지 적힌 원판이 나타나 돌아가고, 가운데에 시기별 이야기가 차례로 바뀝니다.", items: ["0에서 100으로 올라가는 숫자", "원판 가운데 시기별 이야기"], img: "/cases/furniture-a/point-dial.webp", caption: "메인 — 연도 원판" },
     { title: "누르면 펼쳐지는 내장재 목록", body: "합판, 건조목, 코일 밴드처럼 소파 속에 들어가는 재료를 한 줄씩 두고, 줄을 누르면 사진과 설명이 그 자리에서 펼쳐집니다. 한 번에 한 줄만 열립니다.", items: ["재료별 사진 넘기기", "재료마다 특징 태그"], img: "/cases/furniture-a/point-inside.webp", caption: "검증 내장재" },
     { title: "색 칩을 누르면 바뀌는 색 이름", body: "소재 상세에서는 색 칩을 누르면 위에 적힌 색 이름이 바로 바뀌어, 같은 소재의 여러 색을 차례로 살펴볼 수 있습니다.", items: ["소재마다 색 칩 모음", "시험 항목과 품질 안내"], img: "/cases/furniture-a/point-chips.webp", caption: "소재 상세 — 노바" },
@@ -42,7 +42,7 @@ const study: CaseStudy = {
   ],
   mobile: {
     title: "좁은 화면에서는 이렇게 됩니다",
-    body: "휴대폰에서는 메뉴가 오른쪽 위 버튼 하나로 모이고, 큰 제목과 사진이 화면 폭에 맞게 위아래로 이어집니다. 고객 후기는 두 줄로 엇갈려 다시 놓입니다.",
+    body: "휴대폰에서는 메뉴가 오른쪽 위 버튼 하나로 모이고, 큰 제목과 사진이 화면 크기에 맞게 위아래로 이어집니다. 고객 후기는 두 줄로 엇갈려 다시 놓입니다.",
     shots: [
       { img: "/cases/furniture-a/m-main.webp", caption: "모바일 메인" },
       { img: "/cases/furniture-a/m-materials.webp", caption: "모바일 정직한 겉감" },

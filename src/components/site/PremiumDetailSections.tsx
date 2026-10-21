@@ -21,7 +21,7 @@ const PREMIUM_SPECS: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Ruler,
     title: "픽셀 단위 실측 설계",
-    body: "레이아웃·여백·라운드·그림자를 원본에서 잰 값으로 정하고, 세 가지 화면 폭에서 다시 재서 맞춥니다.",
+    body: "레이아웃·여백·라운드·그림자를 원본에서 잰 값으로 정하고, 화면 크기 세 가지에서 다시 재서 맞춥니다.",
   },
   {
     icon: Type,
@@ -41,7 +41,7 @@ const PREMIUM_SPECS: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Gauge,
     title: "움직임이 있는 화면",
-    body: "스크롤에 따라 나타나는 요소, 흐르는 띠, 열리고 닫히는 목록을 넣되 속도를 줄이는 설정도 함께 지원합니다.",
+    body: "내리는 만큼 나타나는 요소, 흐르는 줄, 열리고 닫히는 목록을 넣되 속도를 줄이는 설정도 함께 지원합니다.",
   },
   {
     icon: Search,

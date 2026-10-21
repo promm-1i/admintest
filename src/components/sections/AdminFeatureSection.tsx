@@ -127,7 +127,7 @@ function VisibilityView() {
           </Row>
         ))}
       </div>
-      <p className="mt-3 text-[10px] text-neutral-500">토글 한 번으로 홈페이지에 즉시 반영</p>
+      <p className="mt-3 text-[10px] text-neutral-500">한 번 켜면 홈페이지에 바로 반영</p>
     </Panel>
   );
 }

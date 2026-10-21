@@ -238,7 +238,7 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
         </div>
       </section>
 
-      {/* ② 대표색 띠 위 PC 화면 — 본문 폭(1280) 가득, 띠는 목업 가운데까지만 깔린다 */}
+      {/* ② 대표색 줄 위 PC 화면 — 본문 폭(1280) 가득, 줄은 목업 가운데까지만 깔린다 */}
       <section
         className="mt-8 px-5 sm:px-8 lg:mt-10 lg:px-0"
         style={{

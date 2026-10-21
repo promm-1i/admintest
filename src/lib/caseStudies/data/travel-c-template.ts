@@ -4,7 +4,7 @@ const study: CaseStudy = {
   customerCopyReady: true,
   brand: "온들군 농촌체험휴양마을",
   headline: "농촌체험 · 마을여행 · 통합예약 홈페이지",
-  summary: "열한 마을의 숙소와 체험, 가까운 여행지를 한곳에서 보고 날짜와 인원을 골라 신청하는 26쪽 홈페이지입니다.",
+  summary: "열한 마을의 숙소와 체험, 가까운 여행지를 한곳에서 보고 날짜와 인원을 골라 신청하는 홈페이지입니다.",
   brandColor: "rgb(0,166,81)",
   tintColor: "rgb(239,245,234)",
   overview:
@@ -26,8 +26,8 @@ const study: CaseStudy = {
     { name: "사진관", file: "gallery.html", img: "/cases/ondeul/page-gallery.webp", desc: "마을 사진을 목록과 상세 화면으로 구성했습니다.", items: ["사진 격자", "마을 분류", "이전·다음 글"] },
   ],
   points: [
-    { title: "첫 화면을 여섯 장면으로\n나눴습니다", body: "여행지, 마을, 체험, 코스, 소식, 이용 안내를 한 화면씩 보여 줍니다. 화면 안의 사진 넘김과 구간 이동은 fullPage·Slick 으로 구성했습니다.", items: ["fullPage.js", "Slick 자동·수동 넘김", "스크롤 상태 헤더"], img: "/cases/ondeul/main.webp", caption: "홈 첫 화면" },
-    { title: "열한 마을을 지도에서\n바로 찾습니다", body: "지도 위 마을 이름을 누르면 대표 상세로 이동합니다. 같은 상세 틀을 반복하지 않고 서로 다른 정보량을 가진 두 마을을 대표로 구성했습니다.", items: ["열한 마을 이름", "대표 상세 2쪽", "숙박·체험 바로가기"], img: "/cases/ondeul/point-map.webp", caption: "마을 지도" },
+    { title: "첫 화면을 여섯 장면으로\n나눴습니다", body: "여행지, 마을, 체험, 코스, 소식, 이용 안내를 한 화면씩 보여 줍니다. 화면 안의 사진 넘김과 구간 이동은 fullPage·Slick 으로 구성했습니다.", items: ["fullPage.js", "Slick 자동·수동 넘김", "내리면 바뀌는 맨 위 메뉴"], img: "/cases/ondeul/main.webp", caption: "홈 첫 화면" },
+    { title: "열한 마을을 지도에서\n바로 찾습니다", body: "지도 위 마을 이름을 누르면 대표 상세로 이동합니다. 같은 상세 틀을 반복하지 않고 서로 다른 정보량을 가진 두 마을을 대표로 구성했습니다.", items: ["열한 마을 이름", "대표 상세", "숙박·체험 바로가기"], img: "/cases/ondeul/point-map.webp", caption: "마을 지도" },
     { title: "예약은 세 단계로\n확인합니다", body: "마을과 날짜를 먼저 고른 뒤 성인·어린이 인원을 선택하고 신청자 정보를 확인합니다. 포트폴리오 화면에서는 저장과 결제가 일어나지 않습니다.", items: ["마을 · 날짜", "인원", "신청 정보"], img: "/cases/ondeul/point-reserve.webp", caption: "숙박 예약" },
   ],
   detailsLabel: "구성",

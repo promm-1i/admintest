@@ -123,7 +123,7 @@ const PAGE_DATA: Record<PageKey, ContentPage> = {
     { title: "보안과 백업", text: "접근 권한을 나누고 운영 중 필요한 백업 기준을 정합니다", points: ["접근 제어", "환경 변수", "백업"] },
   ] },
   responsive: { eyebrow: "RESPONSIVE WEB", title: "반응형 웹 제작", intro: "태블릿과 모바일에서 읽는 순서를 PC와 따로 맞춥니다", group: "기술력", image: SUBPAGE_MEDIA["responsive"], sections: [
-    { title: "화면 너비", text: "콘텐츠 폭과 여백을 기기별로 조정해 가로 스크롤을 막습니다", points: ["PC", "태블릿", "모바일"] },
+    { title: "기기마다 다른 화면", text: "글과 사진 폭을 기기에 맞춰 옆으로 밀리지 않게 합니다", points: ["PC", "태블릿", "모바일"] },
     { title: "메뉴와 터치", text: "모바일 메뉴, 버튼 크기와 손가락으로 누르는 영역을 확인합니다", points: ["모바일 메뉴", "터치 영역", "고정 버튼"] },
     { title: "이미지와 글", text: "사진 잘림과 글자 크기를 화면 비율에 맞춰 따로 설정합니다", points: ["이미지 크롭", "줄바꿈", "읽기 순서"] },
   ] },
@@ -261,7 +261,7 @@ function SiteSearch() {
   </>;
 }
 
-/* 푸터 채널 아이콘. 글자 한 자로는 무엇인지 알 수 없어 실제 마크를 그린다. */
+/* 맨 아래 채널 아이콘. 글자 한 자로는 무엇인지 알 수 없어 실제 마크를 그린다. */
 function NaverBlogMark() {
   return <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
     <rect width="24" height="24" rx="7" fill="#03C75A" />
@@ -703,7 +703,7 @@ function Header() {
 
 function Footer() {
   const root = useRoot();
-  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="푸터 메뉴">{MAIN_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.groups.flatMap((group) => group.items).slice(0, 6).map((item) => <Link key={item.href + item.label} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>대표자 <b>김진수</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
+  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="맨 아래 메뉴">{MAIN_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.groups.flatMap((group) => group.items).slice(0, 6).map((item) => <Link key={item.href + item.label} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>대표자 <b>김진수</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -1153,7 +1153,7 @@ function AboutPage() {
 // 호스팅은 따로 받지 않는다. 첫 해 호스팅료 240,000원을 항목에 60,000원씩 녹여
 // 총액은 기존 /estimate 와 같게 유지한다. 기본형 640,000 / 랜딩형 1,140,000.
 // 2026-10-05 서브페이지 분리를 없애며 그 항목의 60,000원은 셋팅 비용으로 옮겼다(160,000 → 220,000).
-const EST_STYLES = [{ key: "basic", name: "원페이지 기본", cost: 60_000, desc: "소개부터 문의까지 한 페이지, 연출 없음" }, { key: "landing", name: "원페이지 랜딩", cost: 560_000, desc: "한 페이지에 스크롤 연출과 움직임을 더함" }] as const;
+const EST_STYLES = [{ key: "basic", name: "원페이지 기본", cost: 60_000, desc: "소개부터 문의까지 한 페이지, 연출 없음" }, { key: "landing", name: "원페이지 랜딩", cost: 560_000, desc: "한 페이지에 내릴 때 나타나는 연출과 움직임을 더함" }] as const;
 const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com·co.kr·kr 중 원하시는 것으로, 첫 1년 무료" }, { key: "own", name: "보유 도메인 연동", desc: "이미 쓰시는 도메인을 그대로 연결합니다" }] as const;
 const EST_FIXED = { feature: 360_000, setup: 220_000 };
 const won = (value: number) => value.toLocaleString("ko-KR");
@@ -1169,7 +1169,7 @@ const EST_PAGES = [
 ] as const;
 
 const EST_FEATURES = [
-  { key: "landing", name: "스크롤 연출", weight: 200_000, desc: "화면이 움직이며 나타나는 구성" },
+  { key: "landing", name: "내릴 때 나타나는 연출", weight: 200_000, desc: "화면이 움직이며 나타나는 구성" },
   { key: "industry", name: "업종 전용 기능", weight: 300_000, desc: "매물 · 차량 · 시술처럼 업종에 맞춘 화면" },
   { key: "inquiry", name: "문의 · 예약 접수", weight: 300_000, desc: "접수부터 관리자 확인, 알림까지" },
   { key: "search", name: "검색 · 필터", weight: 300_000, desc: "조건으로 걸러 보는 목록" },
@@ -1251,7 +1251,7 @@ function EstimatePage() {
   </Contents></main>;
 }
 
-// 업종 솔루션과 업종 랜딩은 본 사이트 컴포넌트를 그대로 쓰고 리뉴얼 헤더·푸터 안에서 그린다.
+// 업종 솔루션과 업종 랜딩은 본 사이트 컴포넌트를 그대로 쓰고 리뉴얼 헤더·맨 아래 안에서 그린다.
 // 안쪽 화면까지 다시 짜지 않고 껍데기만 리뉴얼로 맞추는 방식이다.
 const SKINNED_SOLUTIONS: Record<string, ReturnType<typeof lazy>> = {
   "real-estate": lazy(() => import("@/pages/solutions/RealEstateSolution")),
@@ -1415,7 +1415,7 @@ function RouteContent({ path }: { path: string }) {
   return key ? <StandardPage page={PAGE_DATA[key]} path={path} /> : <NotFound />;
 }
 
-/** 본 사이트 루트에 리뉴얼 헤더·푸터만 씌울 때 쓴다. 안쪽 화면은 각 페이지가 그린다. */
+/** 본 사이트 루트에 리뉴얼 헤더·맨 아래만 씌울 때 쓴다. 안쪽 화면은 각 페이지가 그린다. */
 export function RenewalShell({ children }: { children: ReactNode }) {
   const { pathname } = useLocation();
   useEditorialMotion(pathname);

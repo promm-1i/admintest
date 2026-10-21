@@ -10,7 +10,7 @@ export type CaseStudy = {
   brand: string;
   headline: string;
   summary: string;
-  /** 템플릿 대표색 — 목업 띠·번호 원·체크 표시에만 쓴다 */
+  /** 템플릿 대표색 — 목업 줄·번호 원·체크 표시에만 쓴다 */
   brandColor: string;
   /** 모바일 판 배경. 어두운 템플릿이면 짙은 색을 주고 mobileDark 를 켠다 */
   tintColor: string;
