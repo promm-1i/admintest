@@ -563,44 +563,9 @@
 </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/swiper@6.8.4/swiper-bundle.min.js"></script>
-<script>
-
-(function(){
-  const q=(s,r=document)=>r.querySelector(s), qa=(s,r=document)=>[...r.querySelectorAll(s)];
-  const body=document.body;
-  qa('[data-act="menu"]').forEach(b=>b.addEventListener('click',()=>{const open=body.classList.toggle('ag-menu-open');b.setAttribute('aria-expanded',String(open));}));
-  qa('[data-act="quick"]').forEach(b=>b.addEventListener('click',()=>{const p=b.closest('[data-quick]');const open=p&&p.classList.toggle('open');b.setAttribute('aria-expanded',String(!!open));}));
-  qa('[data-tab]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();const root=b.closest('[data-tabs]')||document;qa('[data-tab]',root).forEach(x=>x.classList.toggle('active',x===b));qa('[data-panel]',root).forEach(x=>x.classList.toggle('active',x.dataset.panel===b.dataset.tab));}));
-  qa('form').forEach(f=>f.addEventListener('submit',e=>{e.preventDefault();if(!f.checkValidity()){f.reportValidity();return;}alert('템플릿 예시 화면입니다. 실제 전송 기능은 제작 시 연결됩니다.');}));
-  const reveal=qa('.ag-rvlx,[data-aos]');
-  const io='IntersectionObserver' in window?new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('active');io.unobserve(x.target);}}),{threshold:.06,rootMargin:'0px 0px 8% 0px'}):null;
-  reveal.forEach(x=>io?io.observe(x):x.classList.add('active'));
-  const finishReveals=()=>{if(window.scrollY>window.innerHeight*.5||window.scrollY+window.innerHeight>=document.documentElement.scrollHeight-8)reveal.forEach(x=>x.classList.add('active'));};
-  addEventListener('scroll',finishReveals,{passive:true}); finishReveals();
-  const headerInner=q('.ag-htx-in'),header=q('.ag-hm-hd'); let lastScrollY=window.scrollY;
-  const syncHeader=()=>{const y=window.scrollY,moved=y>24;if(headerInner)headerInner.classList.toggle('ag-scrx',moved);qa('.ag-qk-wr,.ag-tp-bt-wr').forEach(e=>e.classList.toggle('ag-scrx',moved));if(header&&Math.abs(y-lastScrollY)>4){header.classList.toggle('ag-nv-upx',y>lastScrollY&&moved);header.classList.toggle('ag-nv-dwnx',y<lastScrollY||!moved);}if(body.dataset.page==='index.html')body.classList.toggle('ag-intro-scrolled',moved);lastScrollY=y;};
-  addEventListener('scroll',syncHeader,{passive:true}); syncHeader();
-  const questionSelector='.ag-hm-cntx-quex,.ag-s21x-c10x-quex,.ag-s41x-c06x-quex,.ag-s51x-c09x-quex',questions=qa(questionSelector);
-  document.addEventListener('click',e=>{const question=e.target.closest&&e.target.closest(questionSelector);if(!question)return;e.preventDefault();const group=question.parentElement&&question.parentElement.parentElement;const wasOpen=question.classList.contains('on');if(group)qa(questionSelector,group).forEach(other=>{other.classList.remove('on');if(other.nextElementSibling)other.nextElementSibling.classList.remove('on');});question.classList.toggle('on',!wasOpen);if(question.nextElementSibling)question.nextElementSibling.classList.toggle('on',!wasOpen);},true);
-  const introSlides=qa('.ag-hm-ntrx-sl-bx');
-  const introTexts=qa('.ag-hm-ntrx-tx');
-  qa('.ag-hm-ntrx-swpx-bx-gd').forEach(line=>line.classList.add('on'));
-  if(introSlides.length>1){let n=0;const showIntro=i=>{introSlides.forEach((slide,j)=>{slide.style.transform=j<=i?'translateY(0)':'translateY(100%)';slide.classList.toggle('on',j===i);});introTexts.forEach((item,j)=>item.classList.toggle('on',j===i));};showIntro(0);setInterval(()=>{n=(n+1)%introSlides.length;showIntro(n);},3500);}
-  const counterTargets=[['.ag-cntx,.ag-cntx3',47],['.ag-cntx2,.ag-cntx4',28],['.ag-cntx5,.ag-cntx-mx',18],['.ag-cntx6,.ag-cntx-mx2',5],['.ag-cntx7',486],['.ag-cntx8',917],['.ag-cntx9',431]], counterRuns=[];
-  counterTargets.forEach(([selector,end])=>qa(selector).forEach(el=>{const run=()=>{if(el.dataset.done)return;el.dataset.done='1';const start=performance.now();const tick=now=>{const p=Math.min(1,(now-start)/900);el.textContent=String(Math.round(1+(end-1)*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(tick);};requestAnimationFrame(tick);};counterRuns.push(run);if('IntersectionObserver'in window){const ci=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){run();ci.disconnect();}}),{threshold:.2});ci.observe(el);}else run();}));
-  const finishCounters=()=>{if(window.scrollY>window.innerHeight*.5)counterRuns.forEach(run=>run());};
-  addEventListener('scroll',finishCounters,{passive:true}); finishCounters();
-  qa('a[href="#"]').forEach(a=>a.addEventListener('click',e=>{if(a.dataset.act!=='menu')e.preventDefault();}));
-  qa('.ag-tp-bt-wr,#ag-i-tp-bt').forEach(button=>button.addEventListener('click',e=>{e.preventDefault();window.scrollTo({top:0,behavior:'smooth'});}));
-  if(window.Swiper){qa('.swiper-container').forEach(el=>{if(el.swiper)return;try{
-    let options={loop:el.querySelectorAll('.swiper-slide').length>1,autoplay:{delay:4200,disableOnInteraction:false},speed:900,pagination:{el:q('.swiper-pagination',el),clickable:true},navigation:{nextEl:q('.swiper-button-next',el),prevEl:q('.swiper-button-prev',el)}};
-    if(el.classList.contains('ag-hm-tp-sl')) options={slidesPerView:'auto',spaceBetween:0,speed:1200,loop:true,loopAdditionalSlides:1,observer:true,observeParents:true,effect:'fade',fadeEffect:{crossFade:true},autoplay:{delay:3500,disableOnInteraction:false},pagination:{el:q('.ag-hm-sl-pgnx'),clickable:true,renderBullet:(index,className)=>'<span class="'+className+' active"><svg class="ag-crcx" width="14" height="14" aria-hidden="true"><circle class="ag-crcx2" cx="8" cy="8" r="5" stroke="rgb(255,255,255)" stroke-width="2" fill="none"></circle><circle class="ag-crcx3" cx="8" cy="8" r="5" stroke="rgba(255,255,255,.2)" stroke-width="2" fill="none"></circle></svg></span>'}};
-    if(el.classList.contains('ag-hm-cntx-swpx')) options={slidesPerView:'auto',spaceBetween:0,speed:1000,loop:false,loopAdditionalSlides:1,observer:true,observeParents:true,autoplay:{delay:3500,disableOnInteraction:false},pagination:{el:q('.ag-hm-cntx-pgnx'),type:'progressbar'}};
-    if(el.classList.contains('ag-hm-cntx-swpx-mx')) options={slidesPerView:'auto',spaceBetween:0,speed:5000,loop:true,loopAdditionalSlides:1,observer:true,observeParents:true,centeredSlides:true,autoplay:{delay:0,disableOnInteraction:false},pagination:{el:q('.ag-hm-cntx-pgnx-mx'),type:'progressbar'}};
-    new Swiper(el,options);
-  }catch(_){}})}
-})();
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Observer.min.js"></script>
+<script src="./assets/areumgyeol.js"></script>
 </body>
 </html>
