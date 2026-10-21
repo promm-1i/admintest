@@ -46,7 +46,7 @@
   /* scrolled: 메인은 첫 본문 구간 위끝부터, 서브는 조금이라도 내리면. 맨 위로 돌아오면 퀵메뉴를 다시 연다 */
   const scrolledTargets = qa('.ag-htx-in, .ag-hm-hd, .ag-qk-wr, .ag-tp-bt-wr');
   const syncScrolled = () => {
-    const on = wr01 ? scrollY >= wr01.getBoundingClientRect().top + scrollY - 1 : scrollY > 0;
+    const on = wr01 ? scrollY > wr01.getBoundingClientRect().top + scrollY : scrollY > 0;
     const was = scrolledTargets[0] && scrolledTargets[0].classList.contains('ag-scrx');
     scrolledTargets.forEach(x => x.classList.toggle('ag-scrx', on));
     if (was && !on) qa('#ag-i-qk, #ag-i-qk-mx').forEach(x => x.classList.add('open'));
@@ -174,6 +174,12 @@
   };
   videoZone('.ag-hm-cntx-wr04', '#ag-i-hm-cntx-mv-pcx, #ag-i-hm-cntx-mv-mx');
   videoZone('.ag-s21x-c07x-cntx-bx', '#ag-i-s21x-c07x-mv');
+
+  /* 원본의 유튜브·비메오 임베드 자리: 포스터 + 가운데 재생 단추, 누르면 소리 켜고 재생 */
+  qa('.ag-vplay').forEach(b => b.addEventListener('click', () => {
+    const v = b.previousElementSibling; v.controls = true; v.muted = false;
+    const p = v.play(); p && p.catch(() => {}); b.classList.add('is-on');
+  }));
 
   ST.matchMedia({
     '(min-width: 961px)': () => {
