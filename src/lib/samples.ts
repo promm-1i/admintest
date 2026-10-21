@@ -104,6 +104,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "inspection-a-template",
+    industry: "입주 사전점검 · 건축진단 홈페이지",
+    title: "입주 사전점검 · 건축진단 홈페이지 (프리미엄 디자인 A)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 입주 사전점검 · 건축물 점검 · 하자 진단 · 점검 사례 · 상담",
+    purpose:
+      "입주 전 세대 점검부터 건축물 상태 확인, 구조 검토, 하자 기록과 기업용 현장 관리까지 서비스 범위를 분명하게 나누고 상담으로 연결하는 홈페이지입니다.",
+    features: [
+      "입주 사전점검 · 임대주택 · 주택 매매 · 인테리어 준공 점검",
+      "시설물 · 정밀점검 · 정밀진단 · 공사 현장 · 구조와 내진 검토",
+      "하자 진단 · 소송 기술지원 · 공용부 하자 관리 · 유지보수 감리와 현장 기록 솔루션",
+      "컴퓨터 펼침 메뉴 · 휴대폰 전체 메뉴 · 자주 묻는 질문 · 상담 현황 목록",
+    ],
+    idealFor: "입주 사전점검 업체, 건축물 진단과 현장 조사 회사, 하자 점검과 유지관리 서비스를 함께 소개하려는 전문 서비스 기업",
+    image: "/thumbs/inspection-a.jpg",
+    liveUrl: "/onhaim/",
+    industryKey: "inspection",
+    premiumLabel: "입주 사전점검 · 건축진단",
+    designCode: "INSP-1001",
+    premium: true,
+  },
+  {
     slug: "dental-i-template",
     industry: "임플란트 · 어르신 진료 치과 홈페이지",
     title: "임플란트 · 어르신 진료 치과 홈페이지 (프리미엄 디자인 C)",
