@@ -146,6 +146,13 @@ def fill_one(pg, code: str) -> bool:
     return True
 
 
+# 서비스 카드 왼쪽 위 체크 칸에 체크 아이콘(svg)이 있으면 골라진 것
+CARD_CHECKED_JS = r"""()=>{const t=[...document.querySelectorAll('*')].find(e=>e.children.length===0&&/원~$/.test((e.innerText||'').trim()));
+ let c=t; for(let k=0;k<8&&c;k++){c=c.parentElement; if(c&&c.getBoundingClientRect().height>200)break}
+ const box=c&&[...c.querySelectorAll('*')].find(e=>{const r=e.getBoundingClientRect();return r.width>=16&&r.width<=32&&Math.abs(r.width-r.height)<3});
+ return !!(box&&box.querySelector('svg'))}"""
+
+
 def submit(pg) -> bool:
     pg.keyboard.press("Escape")
     pg.wait_for_timeout(400)
@@ -155,13 +162,17 @@ def submit(pg) -> bool:
     if agree.count() and not agree.is_checked():
         pg.get_by_text("안내 사항을 확인했고 동의합니다", exact=False).first.click()
         pg.wait_for_timeout(500)
-    # 노출할 서비스 카드(가격 '원~' 이 붙은 카드). 내 서비스는 하나 — 기존 글은 전부 '1개의 서비스에 노출중'.
-    btn = pg.get_by_role("button", name="제출하기").first
-    if btn.count() and not btn.is_enabled():
+    # 노출할 서비스 카드(가격 '원~' 이 붙은 카드). 내 서비스는 하나.
+    # 제출하기는 카드를 안 골라도 켜져 있다 — 단추 상태로 판단하던 때 10-13~10-22 27건이
+    # '0개의 서비스에 노출중'으로 올라갔다(10-22 편집으로 연결). 카드 체크 표시로 본다.
+    if not pg.evaluate(CARD_CHECKED_JS):
         card = pg.locator("text=/원~$/").first
         if card.count():
             card.click()
             pg.wait_for_timeout(700)
+    if not pg.evaluate(CARD_CHECKED_JS):
+        print("  서비스 카드 체크 안 됨")
+        return False
     btn = pg.get_by_role("button", name="제출하기").first
     if not btn.count() or not btn.is_enabled():
         print("  제출 단추가 안 열림")
