@@ -86,7 +86,7 @@ export const SAMPLES: Sample[] = [
     industry: "정원 · 수목원 홈페이지",
     title: "정원 · 수목원 홈페이지 (프리미엄 디자인 A)",
     type: ["premium-template", "small-business"],
-    tag: "프리미엄 디자인 · 정원 · 수목원 · 관람 안내 · 예약 · 29페이지",
+    tag: "프리미엄 디자인 · 정원 · 수목원 · 관람 안내 · 예약 · 37페이지",
     purpose:
       "두 정원과 건축물 소개, 관람 요금과 가이드 투어, 식당과 주변 볼거리, 프로그램과 공지, 예약까지 방문 전에 찾는 정보를 넓은 정원 사진과 함께 담은 정원 홈페이지입니다.",
     features: [
