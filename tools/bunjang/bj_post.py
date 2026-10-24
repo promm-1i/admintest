@@ -40,6 +40,11 @@ def call(t, fn, arg):
 with Tab(bg=False) as t:
     t.cmd("Emulation.setDeviceMetricsOverride", {"width": 1280, "height": 1000, "deviceScaleFactor": 1, "mobile": False})
     t.go("https://m.bunjang.co.kr/products/new", 6)
+    for _ in range(20):   # 등록 화면이 늦게 그려지는 때가 있다(10-24) — 사진 칸이 생길 때까지
+        if t.js("!!document.querySelector('#media-input')"):
+            break
+        t.wait(1)
+    assert "/products/new" in t.js("location.href"), "등록 화면이 아님(로그인 풀림?) " + t.js("location.href")
     t.cmd("DOM.enable")
     root = t.cmd("DOM.getDocument", {"depth": 1})["root"]["nodeId"]
     node = t.cmd("DOM.querySelector", {"nodeId": root, "selector": "#media-input"})["nodeId"]
