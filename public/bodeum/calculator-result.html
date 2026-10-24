@@ -139,35 +139,36 @@ Object.keys(NAME).forEach(function (k) {
 });
 var won = function (n) { return n.toLocaleString('ko-KR'); };
 var h3 = $$('h3, h2');
-function setAfter(label, val) {
-  for (var i = 0; i < h3.length; i++) {
-    if (h3[i].textContent.replace(/\s+/g, '').indexOf(label) === 0) {
-      var box = h3[i].closest('div').nextElementSibling;
-      var v = box && $('h3, h2', box);
-      if (v) v.textContent = val;
-      return;
-    }
-  }
+function setAll(test, val) {
+  h3.forEach(function (h) {
+    if (!test(h.textContent.replace(/\s+/g, ''))) return;
+    var box = h.closest('div').nextElementSibling;
+    var v = box && $('h3, h2', box);
+    if (v) v.textContent = val;
+  });
 }
-setAfter('총이용', won(S) + ' 원');
-setAfter('공단지원금', won(S - D) + ' 원');
-setAfter('본인부담금', won(D) + ' 원');
-setAfter(g + '등급수가', won(max) + ' 원');
-setAfter(g + '등급수가남은', won(max - S) + ' 원');
+h3.forEach(function (h) {
+  var t = h.textContent;
+  if (/^\d등급\s*수가/.test(t)) h.textContent = t.replace(/^\d/, g);
+  else if (/^공단\s*지원금\s*\(/.test(t)) h.textContent = t.replace(/\(\s*\d+\s*%\)/, '(' + (100 - T) + '%)');
+  else if (/^본인\s*부담금\s*\(/.test(t)) h.textContent = t.replace(/\(\s*\d+\s*%\)/, '(' + T + '%)');
+});
+setAll(function (t) { return t.indexOf('총이용') === 0; }, won(S) + '원');
+setAll(function (t) { return t.indexOf('공단지원금') === 0; }, won(S - D) + '원');
+setAll(function (t) { return t.indexOf('본인부담금(') === 0; }, won(D) + '원');
+setAll(function (t) { return /^\d등급수가$/.test(t); }, won(max) + '원');
+setAll(function (t) { return /^\d등급수가남은/.test(t); }, won(max - S) + '원');
 var line = $('.bd-sv-smmx-bx1-ipx-i4x');
 if (line && rows.length) {
   var parent = line.parentNode, ref = line.nextSibling;
   rows.forEach(function (r, i) {
     var el = i === 0 ? line : line.cloneNode(true);
     var hs = $$('h3', el);
-    if (hs[0]) hs[0].textContent = '( ' + r[0] + ' ) 방문당 수가 * 이용 일수';
-    if (hs[1]) hs[1].textContent = won(r[1]) + ' 원 *  ' + r[2] + ' 일';
+    if (hs[0]) hs[0].textContent = '(' + r[0] + ') 방문당 수가 * 이용 일수';
+    if (hs[1]) hs[1].textContent = won(r[1]) + '원 * ' + r[2] + '일';
     if (i) parent.insertBefore(el, ref);
   });
 }
-$$('h2, h3, span, p').forEach(function (x) {
-  if (/^\(\s*\d+\s*%\)$/.test(x.textContent.trim())) return;
-});
 })();
 
 </script>
