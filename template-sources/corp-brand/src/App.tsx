@@ -101,7 +101,7 @@ const SITE = {
   values: [
     { title: '납기는 약속', desc: '지난 3년 납기 준수율 99.2%. 늦어질 것 같으면 먼저 전화드립니다.' },
     { title: '문제는 문서로', desc: '불량 · 이슈는 숨기지 않고 8D 리포트로 공유합니다. 같은 문제는 두 번 없습니다.' },
-    { title: '사람이 오래 다니는 회사', desc: '평균 근속 9.4년. 숙련이 품질이라고 믿습니다.' },
+    { title: '사람이 오래 다니는 회사', desc: '평균 근속 9.4년입니다.' },
   ],
 
   // 뉴스룸 — 여기에 실제 소식 교체
@@ -351,7 +351,7 @@ function Business() {
   return (
     <section id="business" className="py-20 md:py-28">
       <div ref={ref} className="max-w-6xl mx-auto px-5 md:px-6">
-        <Head title="세 가지만 합니다" sub="넓게 벌리지 않습니다. 잘하는 것을 더 잘하게 — 그게 바움의 성장 방식입니다." inView={inView} />
+        <Head title="세 가지만 합니다" sub="정밀 가공부터 금형, 조립 · 품질 검사까지 직접 합니다." inView={inView} />
         <div className="grid md:grid-cols-3 border-t border-l border-line">
           {SITE.business.map((b, i) => (
             <div key={b.title} className={`biz anim-fade-up ${['', 'd80', 'd160'][i]} ${inView ? 'in-view' : ''} border-r border-b border-line p-8 md:p-10`}>

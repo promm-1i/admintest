@@ -15,7 +15,7 @@ const SITE = {
   name: '스터디카페 몰입',
   nameEn: 'MOLIP STUDY',
   tagline: '24시간 무인 · 노량진',
-  slogan: '조용함도\n시설입니다',
+  slogan: '소리까지\n줄인 열람실',
   sloganSub: '칸막이 높이 1.2m, 백색소음 42dB, 좌석 간격 광폭. 문 닫히는 소리까지 줄이려고 흡음재를 댔습니다.',
 
   phone: '02-1234-5678',

@@ -982,7 +982,7 @@ function Checklist() {
   return (
     <section className="py-20 md:py-28">
       <div ref={ref} className="max-w-6xl mx-auto px-5 md:px-6">
-        <Head no="항목 09" title="이사 준비표" sub="고객님 칸은 짧고, 저희 칸은 깁니다. 그게 정상입니다." inView={inView} />
+        <Head no="항목 09" title="이사 준비표" sub="고객님이 하실 일과 저희가 할 일을 시기별로 나눴습니다." inView={inView} />
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-x-8 gap-y-10">
           {SITE.checklist.map((c, i) => (
             <div key={c.when} className={`anim-fade-up ${['', 'd80', 'd160', 'd240'][i]} ${inView ? 'in-view' : ''}`}>
