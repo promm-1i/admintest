@@ -12,12 +12,16 @@ const now = document.getElementById('now');
 const pages = [...book.querySelectorAll('.page')];
 const last = pages.length - 1;
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const touch = matchMedia('(pointer: coarse)').matches;
 let flip;
 let land = true;
+let lastW = 0;
 
 /* 크기 — 화면에 책 전체가 들어오게 쪽 너비를 정한다 */
 function layout() {
   const vw = document.documentElement.clientWidth;
+  if (!land && vw === lastW) return;   // 폰 주소창이 접히고 펴질 때(높이만 바뀜)는 책 크기를 그대로 둔다
+  lastW = vw;
   const vh = window.innerHeight;
   let pw = Math.min((vw - 2 * 72) / 2, MAX_W, (vh - 40 - 56) / R);
   land = pw >= MIN_W;
@@ -59,10 +63,19 @@ function sync(e) {
   placeTabs();
 }
 
+/* 한 쪽 보기(폰)에서는 종이 말림 대신 쪽을 통째로 넘긴다 — 말림은 넘길 때마다 쪽을 복제해 사진이 깜빡인다 */
+function setDensity() {
+  const portrait = flip.getOrientation() === 'portrait';
+  pages.forEach((el, i) => flip.getPage(i).setDensity(portrait || el.dataset.density === 'hard' ? 'hard' : 'soft'));
+}
+
 function go(n) {
   n = Math.max(0, Math.min(last, n));
-  if (visible(flip.getCurrentPageIndex()).includes(n)) return;
-  if (reduce) { flip.turnToPage(n); sync(); } else flip.flip(n);
+  const v = visible(flip.getCurrentPageIndex());
+  if (v.includes(n)) return;
+  // 바로 옆 장만 넘김 효과로. 멀리 건너뛸 때 라이브러리는 목표 앞 장을 한 번 띄웠다 넘겨서 엉뚱한 쪽이 번쩍인다
+  const near = visible(v[v.length - 1] + 1).includes(n) || visible(v[0] - 1).includes(n);
+  if (reduce || !near) { flip.turnToPage(n); sync(); } else flip.flip(n);
 }
 
 /* 진행 상황 — CSV 한 줄 = 활동 하나: 분야, 제목, 상태, 기간, 기관 */
@@ -199,13 +212,26 @@ document.addEventListener('keydown', e => {
     minWidth: MIN_W, maxWidth: MAX_W, minHeight: Math.round(MIN_W * R) - 200, maxHeight: Math.round(MAX_W * R),
     showCover: true, usePortrait: true, autoSize: false,
     maxShadowOpacity: 0.35, flippingTime: reduce ? 300 : 800,
-    mobileScrollSupport: false, startPage: m ? Math.min(+m[1], last) : 0,
+    mobileScrollSupport: false, showPageCorners: false, useMouseEvents: !touch, startPage: m ? Math.min(+m[1], last) : 0,
   });
   flip.loadFromHTML(pages);
+  setDensity();
   flip.on('flip', sync);
-  flip.on('changeOrientation', () => { sync(); });
+  flip.on('changeOrientation', () => { setDensity(); sync(); });
+
+  /* 터치 기기 — 밀면 빠르든 느리든 한 장 넘긴다(라이브러리는 0.25초가 넘으면 끌기로 보고 되돌린다) */
+  if (touch) {
+    let sx = 0, sy = 0;
+    book.addEventListener('touchstart', e => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+    book.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+      dx < 0 ? flip.flipNext() : flip.flipPrev();
+    }, { passive: true });
+  }
   window.addEventListener('resize', () => requestAnimationFrame(placeTabs));
 
+  book.querySelectorAll('img').forEach(img => img.decode().catch(() => {}));   // 숨은 쪽 사진도 미리 풀어 둔다
   book.classList.add('is-ready');
   tabs.classList.add('is-ready');
   sync();
