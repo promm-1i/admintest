@@ -67,10 +67,10 @@ function go(n) {
 
 /* 진행 상황 — CSV 한 줄 = 활동 하나: 분야, 제목, 상태, 기간, 기관 */
 const FIELDS = [
-  { key: '기획', cls: 'c-plan', test: /공연|축제|행사|문화|엔터/ },
-  { key: '연결', cls: 'c-link', test: /농업|치유|체험|관광/ },
-  { key: '탐구', cls: 'c-seek', test: /언론|취재|기사/ },
-  { key: '성장', cls: 'c-grow', test: /컨설팅|브랜딩|코칭|평가|자문/ },
+  { key: '공연, 축제, 행사', cls: 'c-plan', test: /공연|축제|행사|문화|엔터/ },
+  { key: '농업', cls: 'c-link', test: /농업|치유|체험|관광/ },
+  { key: '언론', cls: 'c-seek', test: /언론|취재|기사/ },
+  { key: '컨설팅, 평가 자문', cls: 'c-grow', test: /컨설팅|브랜딩|코칭|평가|자문/ },
 ];
 const ON = /중$/;            // 진행중 · 운영중 · 취재중
 const PLAN = /^기획중$/;
@@ -118,7 +118,7 @@ function renderStatus(rows) {
       const kind = ['on', 'plan', 'done'][rank(x.state)];
       const meta = [x.org, x.when].filter(Boolean).map(esc).join(', ');
       const cls = [k === 0 && 'first', k === shown.length - 1 && 'last'].filter(Boolean).join(' ');
-      const field = k === 0 ? `<th scope="rowgroup" rowspan="${shown.length}"><i class="dot"></i>${f.key}${more}</th>` : '';
+      const field = k === 0 ? `<th scope="rowgroup" rowspan="${shown.length}"><i class="dot"></i>${f.key.replace(/, /g, ',<br>')}${more}</th>` : '';
       return `<tr class="${cls}">${field}<td class="what"><p>${esc(x.title)}</p>${meta ? `<p>${meta}</p>` : ''}</td><td class="state state--${kind}">${esc(x.state)}</td></tr>`;
     }).join('');
     return `<tbody class="${f.cls}">${rows}</tbody>`;
