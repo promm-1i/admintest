@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "hospital-b-template",
+    industry: "척추 · 관절 병원 홈페이지",
+    title: "척추 · 관절 병원 홈페이지 (프리미엄 디자인 L)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 척추 · 관절 · 뇌혈관 · 심혈관 · 예약 · 64페이지",
+    purpose:
+      "병원 소식 포스터가 넘어가는 알림창과 전문센터 · 의료진 · 진료 원칙 · 학술·사회공헌 · 미디어로 이어지는 메인에 척추·관절·뇌혈관·심혈관·내과·영상 진료, 의료진, 진료시간·시설·입퇴원·비급여·서류·예약, 공지·FAQ·식단, 병원소개·연구까지 담은 병원 홈페이지입니다.",
+    features: [
+      "독감 접종 · 새 검사 · 진료 예약 소식 포스터 9장이 넘어가는 알림창",
+      "척추 · 관절 · 뇌혈관 · 심혈관 · 내과 · 마취 · 영상 · 정밀의료 화면",
+      "의료진 목록과 상세 · 진료시간 · 시설 · 입퇴원 · 비급여 · 서류 · 정적 예약 폼",
+      "공지 · 언론 · FAQ · 식단 · 연구 · 사회공헌 목록과 대표 상세 · 5단계 반응형",
+    ],
+    idealFor: "척추 · 관절 병원, 여러 전문센터를 운영하는 병원, 의료진과 이용안내·예약·게시판을 한 홈페이지에 구성하려는 전문병원",
+    image: "/thumbs/hospital-b.jpg",
+    liveUrl: "/bareunsup/",
+    industryKey: "hospital",
+    premiumLabel: "척추 · 관절 병원",
+    designCode: "HOSP-1012",
+    premium: true,
+  },
+  {
     slug: "furniture-a-template",
     industry: "소파 · 가구 브랜드 홈페이지",
     title: "소파 · 가구 브랜드 홈페이지 (프리미엄 디자인 A)",
