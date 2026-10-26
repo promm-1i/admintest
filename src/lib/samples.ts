@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "corporate-u-template",
+    industry: "로봇 · 자동화 기업 홈페이지",
+    title: "로봇 · 자동화 기업 홈페이지 (프리미엄 디자인 P)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 로봇 · 휴머노이드 · AMR · AIoT · 52페이지",
+    purpose:
+      "휴머노이드와 물류 로봇, 센서로 건물을 관리하는 사업을 한 브랜드 안에서 보여 주는 메인에 회사 소개 · 연혁 · 특허와 인증 · 사업장 · 로봇 모델 · 물류 로봇 시리즈 · 공간 관리 사업 · 제품 · 시공사례 · 소식 · 공지 · 자료실 · 문의까지 담은 로봇 기업 홈페이지입니다.",
+    features: [
+      "로봇이 움직이는 영상으로 시작하는 첫 화면과 행사 포스터 알림창",
+      "휴머노이드 · 물류 로봇 시리즈 · 공간 관리 사업 상세 화면과 로봇 제원표",
+      "센서 제품 · 시공사례 · 보도자료 · 공지 목록과 상세 화면 · 특허와 인증",
+      "어느 화면에서든 펼쳐 보는 메뉴와 문의하기 바로가기",
+    ],
+    idealFor: "산업용 로봇 제조사, 로봇 SI·렌탈 기업, 물류 자동화·AMR 기업, 센서·AIoT 솔루션 기업",
+    image: "/thumbs/corporate-u.jpg",
+    liveUrl: "/kynovia/",
+    industryKey: "corporate",
+    premiumLabel: "로봇 · 자동화",
+    designCode: "CORP-1016",
+    premium: true,
+  },
+  {
     slug: "hospital-b-template",
     industry: "척추 · 관절 병원 홈페이지",
     title: "척추 · 관절 병원 홈페이지 (프리미엄 디자인 L)",
@@ -70,8 +92,8 @@ export const SAMPLES: Sample[] = [
     features: [
       "독감 접종 · 새 검사 · 진료 예약 소식 포스터 9장이 넘어가는 알림창",
       "척추 · 관절 · 뇌혈관 · 심혈관 · 내과 · 마취 · 영상 · 정밀의료 화면",
-      "의료진 목록과 상세 · 진료시간 · 시설 · 입퇴원 · 비급여 · 서류 · 정적 예약 폼",
-      "공지 · 언론 · FAQ · 식단 · 연구 · 사회공헌 목록과 대표 상세 · 5단계 반응형",
+      "의료진 목록과 상세 · 진료시간 · 시설 · 입퇴원 · 비급여 · 서류 · 예약 칸",
+      "공지 · 언론 보도 · 자주 묻는 질문 · 식단 · 연구 · 사회공헌 목록과 상세",
     ],
     idealFor: "척추 · 관절 병원, 여러 전문센터를 운영하는 병원, 의료진과 이용안내·예약·게시판을 한 홈페이지에 구성하려는 전문병원",
     image: "/thumbs/hospital-b.jpg",
