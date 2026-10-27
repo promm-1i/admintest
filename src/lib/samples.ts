@@ -214,6 +214,28 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
+    slug: "academy-j-template",
+    industry: "댄스학원 · 댄스아카데미 홈페이지",
+    title: "댄스학원 · 댄스아카데미 홈페이지 (프리미엄 디자인 J)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 댄스학원 · 장르별 클래스 · 시간표 · 강사 소개 · 39페이지",
+    purpose:
+      "장르별 수업과 강사진, 요일별 시간표, 체험 수업, 팝업 특강과 입시·전문반을 39개 화면으로 나누어 소개하고 처음 방문한 수강생도 원하는 수업을 찾기 쉽게 구성한 댄스학원 홈페이지입니다.",
+    features: [
+      "장르별 클래스 · 강사 프로필 · 요일별 시간표를 서로 연결한 탐색 구조",
+      "체험 수업 · 수강 안내 · 자주 묻는 질문 · 신청 양식을 나눈 등록 안내",
+      "팝업 특강 · 입시·전문반 · 공지사항과 짧은 수업 미리보기",
+      "PC 전체 메뉴 · 모바일 메뉴 · 요일 탭 · 펼침 목록 · 반응형 39페이지",
+    ],
+    idealFor: "스트릿댄스학원, K-POP 댄스학원, 입시·전문반과 키즈반을 함께 운영하며 강사·시간표·특강을 상세히 안내하려는 댄스아카데미",
+    image: "/thumbs/academy-j.jpg",
+    liveUrl: "/grooveon/",
+    industryKey: "academy",
+    premiumLabel: "댄스학원",
+    designCode: "EDUP-1005",
+    premium: true,
+  },
+  {
     slug: "academy-i-template",
     industry: "수학 문제은행 · 학원 솔루션 홈페이지",
     title: "수학 문제은행 · 학원 솔루션 홈페이지 (프리미엄 디자인 I)",
