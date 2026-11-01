@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "hospital-d-template",
+    industry: "정신건강의학과 병원 홈페이지",
+    title: "정신건강의학과 병원 홈페이지 (프리미엄 디자인 D)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 정신건강의학과 · 입원 · 재활 프로그램 · 상담 신청",
+    purpose:
+      "외래와 입원 진료, 병동 생활과 재활 프로그램을 차례로 안내하고 빠른 상담 신청으로 이어지는 정신건강의학과 병원 홈페이지입니다.",
+    features: [
+      "의료진 · 치료 프로그램 슬라이드",
+      "입원 유형별 절차와 병동 생활 안내",
+      "증명서 양식 다운로드 · 비급여 안내",
+      "소식 상세 · 자주 묻는 질문 펼침",
+    ],
+    idealFor: "외래와 병동을 함께 운영하는 정신건강의학과 병원",
+    image: "/thumbs/onsaebom.jpg",
+    liveUrl: "/onsaebom/",
+    industryKey: "hospital",
+    premiumLabel: "정신건강의학과",
+    designCode: "HOSP-1020",
+    premium: true,
+  },
+  {
     slug: "corporate-u-template",
     industry: "로봇 · 자동화 기업 홈페이지",
     title: "로봇 · 자동화 기업 홈페이지 (프리미엄 디자인 P)",
