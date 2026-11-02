@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-x-template",
+    industry: "피부 · 웰니스 의원 홈페이지",
+    title: "피부 · 웰니스 의원 홈페이지 (프리미엄 디자인 X)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 피부 진료 · 웰니스 프로그램 · 상담 예약",
+    purpose:
+      "진료 철학과 얼굴 · 피부 · 바디 프로그램을 주제별로 안내하고, 예약과 비급여 비용 안내로 이어지는 피부 · 웰니스 의원 홈페이지입니다.",
+    features: [
+      "시그니처 케어와 프로그램별 안내",
+      "의료진과 공간을 담은 의원 소개",
+      "예약 · 진료 시간 · 오시는 길 한 화면",
+      "칼럼 · 이벤트 목록과 비급여 비용표",
+    ],
+    idealFor: "리프팅부터 스킨 부스터 · 바디 관리까지 함께 안내하는 피부 · 웰니스 의원",
+    image: "/thumbs/aureline.jpg",
+    liveUrl: "/aureline/",
+    industryKey: "hospital",
+    premiumLabel: "피부 · 웰니스",
+    designCode: "HOSP-1026",
+    premium: true,
+  },
+  {
     slug: "hospital-d-template",
     industry: "정신건강의학과 병원 홈페이지",
     title: "정신건강의학과 병원 홈페이지 (프리미엄 디자인 D)",
