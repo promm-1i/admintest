@@ -5,10 +5,14 @@
 <title>Artis Σ Creative &amp; Co. · 시안 3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Source+Serif+4:wght@400;600;700&display=swap">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
+@font-face{font-family:"Pretendard Variable";src:url(/magicsample/fonts/pretendard-ks.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Gowun Batang KS";src:url(/magicsample/fonts/gowunbatang-bold-ks.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Gmarket Sans KS";src:url(/magicsample/fonts/gmarketsans-bold-ks.woff2) format("woff2");font-weight:700;font-display:swap}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&text=%CE%A3&display=swap"><style>
 :root{--navy:rgb(5,10,24);--slate:#1b2533;--panel:#0b1120;--cream:rgb(244,235,221);--dim:#bebbb3;--gold:#e8b45a;--blue:rgb(44,61,129);
- --disp:Outfit,"Pretendard Variable",Pretendard,sans-serif;--body:"Source Serif 4","Noto Serif KR","Pretendard Variable",Pretendard,serif}
+ --disp:Outfit,Manrope,"Gmarket Sans KS","Pretendard Variable",sans-serif;--body:"Source Serif 4",Manrope,"Pretendard Variable",serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--navy);color:var(--cream);font:400 16px/1.65 var(--body);word-break:keep-all}
 img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
@@ -16,7 +20,8 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .util{background:#000;font:400 11px/1 var(--disp)}
 .util .in{display:flex;justify-content:flex-end;gap:16px;height:30px;align-items:center}
 .util a:hover{color:var(--gold)}
-header{background:linear-gradient(#0a1222,rgba(10,18,34,.92));position:sticky;top:0;z-index:30}
+header{background:linear-gradient(#0a1222,rgba(10,18,34,.92));position:sticky;top:0;z-index:30;transition:transform .3s ease-in-out}
+header.hid{transform:translate3d(0,calc(-40px - 100%),0)}
 header .in{display:flex;align-items:center;justify-content:space-between;height:86px}
 .emb{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle,#24356f 0 58%,#fff 58% 61%,#24356f 61% 100%);display:flex;align-items:center;justify-content:center;
  box-shadow:0 0 0 3px #fff inset}
@@ -24,6 +29,7 @@ header .in{display:flex;align-items:center;justify-content:space-between;height:
 .menu{display:flex;align-items:center;gap:26px;font:700 13px/1 var(--disp);text-transform:uppercase}
 .menu a:hover{color:var(--gold)}
 .btn{display:inline-flex;align-items:center;gap:6px;background:var(--gold);color:#111;padding:9px 12px;border-radius:2px;font:600 12px/1 var(--disp);text-transform:uppercase;letter-spacing:.02em}
+.btn{transition:background-color .15s ease-in-out,opacity .15s ease-in-out}
 .btn:hover{background:#f3c97c}
 .hero{height:520px;background:linear-gradient(90deg,rgba(5,10,24,.9),rgba(5,10,24,.6) 55%,rgba(5,10,24,.25)),url(/magicsample/img/cards.jpg) center/cover;display:flex;align-items:center}
 .hero .in{width:100%}
@@ -47,9 +53,12 @@ header .in{display:flex;align-items:center;justify-content:space-between;height:
 .sec-h p{margin:12px auto 0;max-width:640px;font-size:16px}
 .car{position:relative;margin-top:36px}
 .car .view{overflow:hidden}
-.car .rail{display:flex;gap:16px;transition:transform .45s ease}
-.ev{flex:0 0 calc((100% - 32px)/3);background:#000}
+.car .rail{display:flex;gap:30px;transition:transform .3s ease}
+.ev{flex:0 0 calc((100% - 60px)/3);background:#000}
+.ev .im,.three .im{overflow:hidden}
 .ev img{width:100%;aspect-ratio:16/9;object-fit:cover}
+.ev img,.three img{transition:transform .5s cubic-bezier(.65,0,.35,1)}
+.ev:hover img,.three article:hover img{transform:scale(1.05)}
 .ev .t{padding:20px 20px 24px}
 .ev h3{margin:0;font:700 22px/1.2 var(--disp);text-transform:uppercase;min-height:54px}
 .ev .d{display:flex;gap:8px;align-items:center;margin:10px 0 10px;font:600 12px/1 var(--disp);color:var(--dim)}
@@ -94,6 +103,19 @@ footer .emb{margin:40px auto 0}
 .sns a:hover{background:var(--gold);color:#111}
 .flinks{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 22px;margin-top:26px;font:600 12px/1 var(--disp)}
 .cp{margin-top:30px;font-size:12px;color:var(--dim)}
+
+/* 원본 heading-fx word-reveal-up: 낱말이 115% 아래에서 올라옴, .5s cubic-bezier(.34,1.56,.64,1), 지연 .5s+.1s×순서, 제목끼리 .5s 간격 */
+.hfx{opacity:0}
+.hfx .w{display:inline-flex;margin:-.2em;padding:.2em;overflow:hidden;vertical-align:top}
+.hfx .wi{display:inline-block;margin:-.2em;padding:.2em;transform:translate3d(0,115%,0);transition:transform .5s cubic-bezier(.34,1.56,.64,1);will-change:transform}
+.hfx.reveal{opacity:1}
+.hfx.reveal .wi{transform:translateZ(0);transition-delay:calc(.5s + .1s*var(--i))}
+/* 원본 smoke-fx: 화면 고정 캔버스, lighten 섞기, 1s 동안 나타남 */
+@keyframes smoke-in{0%{opacity:0}to{opacity:1}}
+.fixed-bg{position:fixed;inset:0;z-index:1;background:url(/magicsample/img/stage.jpg) center/cover}
+.site{position:relative;z-index:2}
+#smoke{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:1;mix-blend-mode:lighten;animation:smoke-in 1s linear forwards}
+@media (prefers-reduced-motion:reduce){.hfx{opacity:1}.hfx .wi{transform:none;transition:none}#smoke{display:none}}
 @media (max-width:900px){
  .util .in{justify-content:center;gap:12px;overflow-x:auto}
  header .in{height:70px}.emb{width:56px;height:56px}.emb img{height:32px}
@@ -103,6 +125,7 @@ footer .emb{margin:40px auto 0}
  .welcome{padding:64px 0}.box{padding:28px 22px}
  .sec-h h2{font-size:26px}
  .ev{flex:0 0 86%}.arr{display:none}
+ .car .rail{gap:16px}
  .alt{grid-template-columns:1fr}
  .alt .tx,.alt.left .tx,.alt.right .tx{margin:0;padding:28px 22px;order:2}
  .alt .ph,.alt.right .ph{order:1}
@@ -117,64 +140,103 @@ footer .emb{margin:40px auto 0}
   border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .ms-bar a:hover{background:#000}
 .ms-bar span{padding:11px 12px;border-radius:999px;background:rgba(255,255,255,.9);color:#111}
+.ko{letter-spacing:normal}
 </style></head>
 <body id="top">
+<div class="fixed-bg" aria-hidden="true"></div>
+<div class="site">
 <div class="util"><div class="in"><a href="https://www.instagram.com/artism__official/" target="_blank" rel="noopener">Instagram</a><a href="https://www.youtube.com/@TV-gp6zv" target="_blank" rel="noopener">YouTube</a><a href="https://blog.naver.com/artis_cnc" target="_blank" rel="noopener">Blog</a><a href="https://www.facebook.com/uniquemagic" target="_blank" rel="noopener">Facebook</a><a href="https://www.tiktok.com/@_l.choi" target="_blank" rel="noopener">TikTok</a><a href="tel:01090508642">010-9050-8642</a></div></div>
-<header><div class="in"><a class="emb" href="#top" aria-label="처음으로"><img src="/magicsample/img/face-white.png" alt=""></a><nav class="menu"><a href="#about">About</a><a href="#academy">Academy</a><a href="#concert">For Concert</a><a href="#item">Magic Item</a><a class="btn" href="#contact">수강 · 공연 문의</a></nav></div></header>
+<header><div class="in"><a class="emb" href="#top" aria-label="처음으로"><img src="/magicsample/img/face-white.png" alt=""></a><nav class="menu"><a href="#about">About</a><a href="#academy">Academy</a><a href="#concert">For Concert</a><a href="#item">Magic Item</a><a class="btn" href="#contact"><span class="ko">수강 · 공연 문의</span></a></nav></div></header>
 
-<section class="hero"><div class="in"><div><h1>Artis Σ Creative &amp; Co.</h1><p>마술, 당신의 삶에 마법을 더하다.</p></div></div></section>
+<section class="hero"><div class="in"><div><h1>Artis Σ Creative &amp; Co.</h1><p><span class="ko">마술, 당신의 삶에 마법을 더하다.</span></p></div></div></section>
 <nav class="feat">
- <a href="#academy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><h3>Academy</h3><p>마술을 활용한 교육 콘텐츠로 창의력, 소통 능력, 자기 표현 능력 향상을 돕습니다.</p></a>
- <a href="#concert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg><h3>For Concert</h3><p>공연 7종 · 퍼블릭부터 웨딩까지</p></a>
- <a href="#item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19L17 7"/><path d="M15 5l4 4M19 3v2M21 5h-2M8 4v2M7 5h2M19 15v2M18 16h2"/></svg><h3>Magic Item</h3><p>마술의 모든 것, 이곳에서 시작하세요!</p></a>
+ <a href="#academy"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c3 2 9 2 12 0v-5"/></svg><h3>Academy</h3><p><span class="ko">마술을 활용한 교육 콘텐츠로 창의력, 소통 능력, 자기 표현 능력 향상을 돕습니다.</span></p></a>
+ <a href="#concert"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20h16M6 20V9l6-5 6 5v11"/><path d="M10 20v-5h4v5"/></svg><h3>For Concert</h3><p><span class="ko">공연 7종 · 퍼블릭부터 웨딩까지</span></p></a>
+ <a href="#item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 19L17 7"/><path d="M15 5l4 4M19 3v2M21 5h-2M8 4v2M7 5h2M19 15v2M18 16h2"/></svg><h3>Magic Item</h3><p><span class="ko">마술의 모든 것, 이곳에서 시작하세요!</span></p></a>
 </nav>
 
 <section class="welcome" id="about"><div class="in"><div class="box">
- <small>Programs for Kids</small><h2>아티스 크리에이티브 앤코</h2><p>저희 아티스 Σ 크리에이티브 앤코는 항상 새로운 도전과 창의적인 발상으로 여러분에게 더 좋은 컨텐츠로 보답해 드리겠습니다.</p><p>마술은 단지 신기함만 전달하는 요소가 아니라 상대방과 소통하고 교감하는 지구상에 존재하는 최고의 이벤트 언어입니다. 마술을 배워 일상 생활에서나 특별한 장소에서 주목받는 멋진 주인공이 되어보세요!</p>
+ <small>Programs for Kids</small><h2><span class="ko">아티스 크리에이티브 앤코</span></h2><p><span class="ko">저희 아티스</span> Σ <span class="ko">크리에이티브 앤코는 항상 새로운 도전과 창의적인 발상으로 여러분에게 더 좋은 컨텐츠로 보답해 드리겠습니다.</span></p><p><span class="ko">마술은 단지 신기함만 전달하는 요소가 아니라 상대방과 소통하고 교감하는 지구상에 존재하는 최고의 이벤트 언어입니다. 마술을 배워 일상 생활에서나 특별한 장소에서 주목받는 멋진 주인공이 되어보세요!</span></p>
 </div></div></section>
 
 <section id="concert"><div class="in">
- <div class="sec-h"><h2>For Concert</h2><p>관객의 눈앞에서 펼쳐지는 신기함과 즐거움, 그리고 오래도록 기억될 특별한 무대를 선사합니다.</p></div>
- <div class="car"><button class="arr l" aria-label="이전">‹</button><div class="view"><div class="rail"><article class="ev"><img src="/magicsample/img/c-public.jpg" alt="퍼블릭 마술공연"><div class="t"><h3>퍼블릭 마술공연</h3><div class="d"><i></i>Public</div><p>퍼블릭 마술 공연만 보아도 그 팀의 구성과 완성도를 가늠할 수 있습니다.</p><a class="btn" href="#contact">공연 문의 →</a></div></article><article class="ev"><img src="/magicsample/img/c-kids.jpg" alt="어린이 공연"><div class="t"><h3>어린이 공연</h3><div class="d"><i></i>Kids</div><p>즐거움과 경험의 균형을 고려한 완성도있는 어린이 마술 공연을 지향합니다.</p><a class="btn" href="#contact">공연 문의 →</a></div></article><article class="ev"><img src="/magicsample/img/c-festival.jpg" alt="축제 공연"><div class="t"><h3>축제 공연</h3><div class="d"><i></i>Festival</div><p>지역 주민과 방문객 모두가 함께 즐길 수 있는 공연을 제공합니다.</p><a class="btn" href="#contact">공연 문의 →</a></div></article><article class="ev"><img src="/magicsample/img/c-church.jpg" alt="교회 공연"><div class="t"><h3>교회 공연</h3><div class="d"><i></i>Gospel</div><p>마술을 의미와 메시지를 담아낼 수 있는 예술적 매체로 소개합니다.</p><a class="btn" href="#contact">공연 문의 →</a></div></article><article class="ev"><img src="/magicsample/img/c-planned.jpg" alt="기획 공연"><div class="t"><h3>기획 공연</h3><div class="d"><i></i>Planned</div><p>현실 속에서 가능한 마술을 기반으로, 상상 이상의 경험을 만들어갑니다.</p><a class="btn" href="#contact">공연 문의 →</a></div></article><article class="ev"><img src="/magicsample/img/c-wedding.jpg" alt="웨딩 공연"><div class="t"><h3>웨딩 공연</h3><div class="d"><i></i>Wedding</div><p>결혼식의 특별한 순간을 더욱 특별하게 만들어주는 맞춤형 공연입니다.</p><a class="btn" href="#contact">공연 문의 →</a></div></article><article class="ev"><img src="/magicsample/img/c-bubble.jpg" alt="The Real 벌룬/버블 매직"><div class="t"><h3>The Real 벌룬/버블 매직</h3><div class="d"><i></i>Bubble</div><p>버블과 벌룬을 활용한 시각적 퍼포먼스로 관객에게 즐거움을 선사합니다.</p><a class="btn" href="#contact">공연 문의 →</a></div></article></div></div><button class="arr r" aria-label="다음">›</button>
+ <div class="sec-h"><h2>For Concert</h2><p><span class="ko">관객의 눈앞에서 펼쳐지는 신기함과 즐거움, 그리고 오래도록 기억될 특별한 무대를 선사합니다.</span></p></div>
+ <div class="car"><button class="arr l" aria-label="이전">‹</button><div class="view"><div class="rail"><article class="ev"><div class="im"><img src="/magicsample/img/c-public.jpg" alt="퍼블릭 마술공연"></div><div class="t"><h3><span class="ko">퍼블릭 마술공연</span></h3><div class="d"><i></i>Public</div><p><span class="ko">퍼블릭 마술 공연만 보아도 그 팀의 구성과 완성도를 가늠할 수 있습니다.</span></p><a class="btn" href="#contact"><span class="ko">공연 문의</span> →</a></div></article><article class="ev"><div class="im"><img src="/magicsample/img/c-kids.jpg" alt="어린이 공연"></div><div class="t"><h3><span class="ko">어린이 공연</span></h3><div class="d"><i></i>Kids</div><p><span class="ko">즐거움과 경험의 균형을 고려한 완성도있는 어린이 마술 공연을 지향합니다.</span></p><a class="btn" href="#contact"><span class="ko">공연 문의</span> →</a></div></article><article class="ev"><div class="im"><img src="/magicsample/img/c-festival.jpg" alt="축제 공연"></div><div class="t"><h3><span class="ko">축제 공연</span></h3><div class="d"><i></i>Festival</div><p><span class="ko">지역 주민과 방문객 모두가 함께 즐길 수 있는 공연을 제공합니다.</span></p><a class="btn" href="#contact"><span class="ko">공연 문의</span> →</a></div></article><article class="ev"><div class="im"><img src="/magicsample/img/c-church.jpg" alt="교회 공연"></div><div class="t"><h3><span class="ko">교회 공연</span></h3><div class="d"><i></i>Gospel</div><p><span class="ko">마술을 의미와 메시지를 담아낼 수 있는 예술적 매체로 소개합니다.</span></p><a class="btn" href="#contact"><span class="ko">공연 문의</span> →</a></div></article><article class="ev"><div class="im"><img src="/magicsample/img/c-planned.jpg" alt="기획 공연"></div><div class="t"><h3><span class="ko">기획 공연</span></h3><div class="d"><i></i>Planned</div><p><span class="ko">현실 속에서 가능한 마술을 기반으로, 상상 이상의 경험을 만들어갑니다.</span></p><a class="btn" href="#contact"><span class="ko">공연 문의</span> →</a></div></article><article class="ev"><div class="im"><img src="/magicsample/img/c-wedding.jpg" alt="웨딩 공연"></div><div class="t"><h3><span class="ko">웨딩 공연</span></h3><div class="d"><i></i>Wedding</div><p><span class="ko">결혼식의 특별한 순간을 더욱 특별하게 만들어주는 맞춤형 공연입니다.</span></p><a class="btn" href="#contact"><span class="ko">공연 문의</span> →</a></div></article><article class="ev"><div class="im"><img src="/magicsample/img/c-bubble.jpg" alt="The Real 벌룬/버블 매직"></div><div class="t"><h3>The Real <span class="ko">벌룬/버블 매직</span></h3><div class="d"><i></i>Bubble</div><p><span class="ko">버블과 벌룬을 활용한 시각적 퍼포먼스로 관객에게 즐거움을 선사합니다.</span></p><a class="btn" href="#contact"><span class="ko">공연 문의</span> →</a></div></article></div></div><button class="arr r" aria-label="다음">›</button>
   <div class="dots"></div></div>
 </div></section>
 
 <section id="academy" style="padding-top:100px"><div class="in">
- <div class="alt left"><div class="tx"><h2>Our Academy</h2><p>아티스 크리에이티브 아카데미는 마술을 단순히 배우는 기술이 아닌, 각자의 환경과 목적에 맞게 활용할 수 있는 교육으로 설계합니다. 어린이, 청소년, 직장인, 주부, 실버 세대 등 연령과 생활 환경이 다른 만큼 마술을 배우는 목적과 방식 또한 다르다고 생각합니다.</p><a class="btn" href="#courses">강좌 보기 →</a></div>
+ <div class="alt left"><div class="tx"><h2>Our Academy</h2><p><span class="ko">아티스 크리에이티브 아카데미는 마술을 단순히 배우는 기술이 아닌, 각자의 환경과 목적에 맞게 활용할 수 있는 교육으로 설계합니다. 어린이, 청소년, 직장인, 주부, 실버 세대 등 연령과 생활 환경이 다른 만큼 마술을 배우는 목적과 방식 또한 다르다고 생각합니다.</span></p><a class="btn" href="#courses"><span class="ko">강좌 보기</span> →</a></div>
   <div class="ph"><img src="/magicsample/img/rings.jpg" alt="무대에서 링 마술을 하는 최현빈 마술사" style="aspect-ratio:16/11"></div></div>
- <div class="alt right"><div class="tx"><h2>Enjoy Unique = Happy Magic</h2><ul><li><b>두뇌개발</b>마술을 접하다보면 생각하고 개발하는 능력이 향상됩니다. “제 2의 뇌” 라고 불리는 손의 대근육은 물론, 세밀한 훈련으로만 향상된다는 소근육도 함께 향상되어 좌뇌/우뇌 향상에 도움이 됩니다.</li><li><b>학습능력</b>마술에는 과학과 수학에 관련된 원리들이 내포되어 있어 마술을 하는 동안 자연스럽게 학습되고, 마술의 흥미로움을 통하여 집중력이 향상됩니다. 또한, 음악과 동작, 언어 등 표현에 대한 전반적인 능력 향상에도 도움을 줍니다.</li><li><b>인성개발</b>관객의 존재를 이해하고, 예의 바르게 행동하는 법을 배우는 동시에, 전달하고자 하는 내용을 자신감있고 즐겁게 표현. 소극적인 성격을 적극적인 성격으로 바뀌는 등 긍정적인 변화가 일어납니다.</li></ul></div>
+ <div class="alt right"><div class="tx"><h2>Enjoy Unique = Happy Magic</h2><ul><li><b><span class="ko">두뇌개발</span></b><span class="ko">마술을 접하다보면 생각하고 개발하는 능력이 향상됩니다. “제 2의 뇌” 라고 불리는 손의 대근육은 물론, 세밀한 훈련으로만 향상된다는 소근육도 함께 향상되어 좌뇌/우뇌 향상에 도움이 됩니다.</span></li><li><b><span class="ko">학습능력</span></b><span class="ko">마술에는 과학과 수학에 관련된 원리들이 내포되어 있어 마술을 하는 동안 자연스럽게 학습되고, 마술의 흥미로움을 통하여 집중력이 향상됩니다. 또한, 음악과 동작, 언어 등 표현에 대한 전반적인 능력 향상에도 도움을 줍니다.</span></li><li><b><span class="ko">인성개발</span></b><span class="ko">관객의 존재를 이해하고, 예의 바르게 행동하는 법을 배우는 동시에, 전달하고자 하는 내용을 자신감있고 즐겁게 표현. 소극적인 성격을 적극적인 성격으로 바뀌는 등 긍정적인 변화가 일어납니다.</span></li></ul></div>
   <div class="ph"><img src="/magicsample/img/c-kids.jpg" alt="뛰어노는 아이들"></div></div>
- <div class="alt left"><div class="tx"><h2>최현빈 마술사와 함께하는</h2><p>Artis creative Academy는 ‘예술을 위한 예술’이라는 아티스의 의미처럼, 마술을 하나의 예술로 바라보는 창작자들이 모여 순수한 표현과 창의성을 교육하는 아카데미입니다.</p><a class="btn" href="#contact">상담 문의 →</a></div>
+ <div class="alt left"><div class="tx"><h2><span class="ko">최현빈 마술사와 함께하는</span></h2><p>Artis creative Academy<span class="ko">는 ‘예술을 위한 예술’이라는 아티스의 의미처럼, 마술을 하나의 예술로 바라보는 창작자들이 모여 순수한 표현과 창의성을 교육하는 아카데미입니다.</span></p><a class="btn" href="#contact"><span class="ko">상담 문의</span> →</a></div>
   <div class="ph"><img src="/magicsample/img/portrait-bw.jpg" alt="최현빈 마술사" style="object-position:50% 25%"></div></div>
- <div class="three" id="courses"><article><img src="/magicsample/img/mag-1.jpg" alt="최현빈 마술사"><div class="t"><h3>정규 강좌</h3><p>S클래스 [대회] · 스테이지 A, B, C · 스피치 클래스[팔러] A, B, C · 클로즈업 A, B, C · 멘탈 A, B, C</p><a class="btn" href="#contact">수강 문의 →</a></div></article><article><img src="/magicsample/img/mag-2.jpg" alt="최현빈 마술사"><div class="t"><h3>테마 강좌</h3><p>자격증 · 비즈니스 · 내 나이가 어때서 [실버] · 맘스터치 [주부] · 엄마 아빠와 함께 하는 마술 놀이 · 매직트리즈 · 핸드메이드 일루젼 · 우리 선생님은 마술사 · 가스펠</p><a class="btn" href="#contact">수강 문의 →</a></div></article><article><img src="/magicsample/img/mag-3.jpg" alt="최현빈 마술사"><div class="t"><h3>특강</h3><p>프로포즈 · 언텍트 [5, 6, 7세] · 스트리퍼 덱 · 스벵갈리덱 · 단기 특강(방학, 시즌)</p><a class="btn" href="#contact">수강 문의 →</a></div></article></div>
+ <div class="three" id="courses"><article><div class="im"><img src="/magicsample/img/mag-1.jpg" alt="최현빈 마술사"></div><div class="t"><h3><span class="ko">정규 강좌</span></h3><p>S<span class="ko">클래스 [대회] · 스테이지</span> A, B, C · <span class="ko">스피치 클래스[팔러</span>] A, B, C · <span class="ko">클로즈업</span> A, B, C · <span class="ko">멘탈</span> A, B, C</p><a class="btn" href="#contact"><span class="ko">수강 문의</span> →</a></div></article><article><div class="im"><img src="/magicsample/img/mag-2.jpg" alt="최현빈 마술사"></div><div class="t"><h3><span class="ko">테마 강좌</span></h3><p><span class="ko">자격증 · 비즈니스 · 내 나이가 어때서 [실버] · 맘스터치 [주부] · 엄마 아빠와 함께 하는 마술 놀이 · 매직트리즈 · 핸드메이드 일루젼 · 우리 선생님은 마술사 · 가스펠</span></p><a class="btn" href="#contact"><span class="ko">수강 문의</span> →</a></div></article><article><div class="im"><img src="/magicsample/img/mag-3.jpg" alt="최현빈 마술사"></div><div class="t"><h3><span class="ko">특강</span></h3><p><span class="ko">프로포즈 · 언텍트 [5, 6, 7세] · 스트리퍼 덱 · 스벵갈리덱 · 단기 특강(방학, 시즌</span>)</p><a class="btn" href="#contact"><span class="ko">수강 문의</span> →</a></div></article></div>
 </div></section>
 
 <section id="item" style="padding-top:100px"><div class="in">
- <div class="sec-h"><h2>Magic Item</h2><p>마술의 모든 것, 이곳에서 시작하세요!</p></div>
- <div class="three"><article><img src="/magicsample/img/i-stage.jpg" alt="스테이지 아이템" style="background:#fff;object-fit:contain"><div class="t"><h3>스테이지 아이템</h3><p>카드 매니퓰레이션 · 볼 매니퓰레이션 · 파이어 · 케인 · 좀비볼</p></div></article><article><img src="/magicsample/img/i-closeup.jpg" alt="클로즈업 아이템" style="background:#fff;object-fit:contain"><div class="t"><h3>클로즈업 아이템</h3><p>카드 · 동전 · 닌자링 · 컵앤볼 · 스펀지볼</p></div></article><article><img src="/magicsample/img/i-mental.jpg" alt="멘탈 아이템" style="background:#fff;object-fit:contain"><div class="t"><h3>멘탈 아이템</h3><p>마스터 프리딕션 · 임파서블 아칸 · 틱택토 · 투데이 · 북테스트</p></div></article></div>
+ <div class="sec-h"><h2>Magic Item</h2><p><span class="ko">마술의 모든 것, 이곳에서 시작하세요!</span></p></div>
+ <div class="three"><article><img src="/magicsample/img/i-stage.jpg" alt="스테이지 아이템" style="background:#fff;object-fit:contain"><div class="t"><h3><span class="ko">스테이지 아이템</span></h3><p><span class="ko">카드 매니퓰레이션 · 볼 매니퓰레이션 · 파이어 · 케인 · 좀비볼</span></p></div></article><article><img src="/magicsample/img/i-closeup.jpg" alt="클로즈업 아이템" style="background:#fff;object-fit:contain"><div class="t"><h3><span class="ko">클로즈업 아이템</span></h3><p><span class="ko">카드 · 동전 · 닌자링 · 컵앤볼 · 스펀지볼</span></p></div></article><article><img src="/magicsample/img/i-mental.jpg" alt="멘탈 아이템" style="background:#fff;object-fit:contain"><div class="t"><h3><span class="ko">멘탈 아이템</span></h3><p><span class="ko">마스터 프리딕션 · 임파서블 아칸 · 틱택토 · 투데이 · 북테스트</span></p></div></article></div>
 </div></section>
 
-<div class="insta"><div class="in"><h2>@artism_academy on Instagram</h2><a class="btn" href="https://www.instagram.com/artism__official/" target="_blank" rel="noopener">인스타그램 보기 →</a></div></div>
+<div class="insta"><div class="in"><h2>@artism_academy on Instagram</h2><a class="btn" href="https://www.instagram.com/artism__official/" target="_blank" rel="noopener"><span class="ko">인스타그램 보기</span> →</a></div></div>
 <div class="strip"><img src="/magicsample/img/rings.jpg" alt="링 마술"><img src="/magicsample/img/i-fire.jpg" alt="파이어 마술"><img src="/magicsample/img/c-public.jpg" alt="퍼블릭 공연"><img src="/magicsample/img/i-mental.jpg" alt="멘탈 마술"><img src="/magicsample/img/c-kids.jpg" alt="어린이 공연"><img src="/magicsample/img/i-closeup.jpg" alt="컵앤볼"></div>
 
 <footer id="contact"><div class="in">
- <div class="mail"><p><b>Contact Us</b></p><p>Artis creative Academy는 교육, 공연, 출강 및 협업에 대한 다양한 문의를 환영합니다. 아래 연락처를 통해 편하게 문의해 주세요.</p><a class="tel" href="tel:01090508642">010-9050-8642</a><a class="btn" href="tel:01090508642">전화 걸기</a></div>
+ <div class="mail"><p><b>Contact Us</b></p><p>Artis creative Academy<span class="ko">는 교육, 공연, 출강 및 협업에 대한 다양한 문의를 환영합니다. 아래 연락처를 통해 편하게 문의해 주세요.</span></p><a class="tel" href="tel:01090508642">010-9050-8642</a><a class="btn" href="tel:01090508642"><span class="ko">전화 걸기</span></a></div>
  <div class="emb"><img src="/magicsample/img/face-white.png" alt=""></div>
  <div class="sns"><a href="https://www.instagram.com/artism__official/" target="_blank" rel="noopener" aria-label="Instagram">In</a><a href="https://www.youtube.com/@TV-gp6zv" target="_blank" rel="noopener" aria-label="YouTube">Yo</a><a href="https://blog.naver.com/artis_cnc" target="_blank" rel="noopener" aria-label="Blog">Bl</a><a href="https://www.facebook.com/uniquemagic" target="_blank" rel="noopener" aria-label="Facebook">Fa</a><a href="https://www.tiktok.com/@_l.choi" target="_blank" rel="noopener" aria-label="TikTok">Ti</a></div>
  <div class="flinks"><a href="#about">About</a><a href="#academy">Academy</a><a href="#concert">For Concert</a><a href="#item">Magic Item</a><a href="#contact">Contact Us</a></div>
- <div class="cp">서울 양천구 신정동 980-8 · © Artis Σ Creative &amp; Co.</div>
+ <div class="cp"><span class="ko">서울 양천구 신정동 980-8</span> · © Artis Σ Creative &amp; Co.</div>
 </div></footer>
+</div>
 <script>
 (function(){var rail=document.querySelector('.rail'),cards=rail.children,dots=document.querySelector('.dots'),i=0;
  function per(){return innerWidth<=900?1:3}
  function max(){return cards.length-per()}
- function go(n){i=Math.max(0,Math.min(max(),n));var w=cards[0].getBoundingClientRect().width+16;rail.style.transform='translateX('+(-i*w)+'px)';
+ function go(n){var m=max();i=n>m?0:(n<0?m:n);var w=cards[0].getBoundingClientRect().width+(innerWidth<=900?16:30);rail.style.transform='translateX('+(-i*w)+'px)';
   [].forEach.call(dots.children,function(d,k){d.className=k===i?'on':''});}
  function mk(){dots.innerHTML='';for(var k=0;k<=max();k++)dots.appendChild(document.createElement('i'));go(i)}
  document.querySelector('.arr.l').onclick=function(){go(i-1)};document.querySelector('.arr.r').onclick=function(){go(i+1)};
  var sx=null;rail.addEventListener('touchstart',function(ev){sx=ev.touches[0].clientX},{passive:true});
  rail.addEventListener('touchend',function(ev){if(sx===null)return;var dx=ev.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)go(i+(dx<0?1:-1));sx=null});
  addEventListener('resize',mk);mk();})();
+</script>
+<script>
+(function(){
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ /* 제목 낱말 올라오기 */
+ var hs=[].slice.call(document.querySelectorAll('body h1, body h2')).filter(function(h){return !h.closest('footer')&&!h.closest('header');});
+ var queue=[],busy=false;
+ hs.forEach(function(h){var words=h.textContent.trim().split(/\s+/);h.setAttribute('aria-label',h.textContent.trim());
+  h.innerHTML=words.map(function(w,k){return '<span class="w" aria-hidden="true"><span class="wi" style="--i:'+k+'">'+w.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span></span>';}).join(' ');
+  h.classList.add('hfx');});
+ function next(){if(!queue.length){busy=false;return;}busy=true;queue.shift().classList.add('reveal');setTimeout(next,500);}
+ var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){io.unobserve(x.target);queue.push(x.target);if(!busy)next();}});},{threshold:0});
+ hs.forEach(function(h){io.observe(h);});
+ /* 머리글: 내리면 숨김, 올리면 보임 */
+ var hd=document.querySelector('header'),last=scrollY;
+ addEventListener('scroll',function(){var y=scrollY;if(y>300&&y>last+2)hd.classList.add('hid');else if(y<last-2||y<=300)hd.classList.remove('hid');last=y;},{passive:true});
+ /* 연기: 바닥 가장자리에서 피어오름(원본 값: 세기 .5 → 1.125s 마다, 이동 .5, 흰색) */
+ var cv=document.createElement('canvas');cv.id='smoke';cv.setAttribute('aria-hidden','true');document.body.appendChild(cv);
+ var ctx=cv.getContext('2d'),RGB=[255,255,255],INT=.5,TRAVEL=.5,SZ=20,ps=[],gap;
+ function sprite(){var c=document.createElement('canvas');c.width=c.height=SZ;var g=c.getContext('2d'),im=g.createImageData(SZ,SZ),d=im.data,raw=[],sum=0;
+  for(var y=0;y<SZ;y++)for(var x=0;x<SZ;x++){var r2=(x-9.5)*(x-9.5)+(y-9.2)*(y-9.2);var v=Math.exp(-r2/(2*3.5*3.5))*(0.45+Math.random()*1.1);raw.push(v);sum+=v;}
+  var k=77.5*SZ*SZ/sum;for(var i=0;i<raw.length;i++){d[i*4]=RGB[0];d[i*4+1]=RGB[1];d[i*4+2]=RGB[2];d[i*4+3]=Math.min(255,raw[i]*k);}
+  g.putImageData(im,0,0);return c;}
+ var img=sprite();
+ function rnd(a,b){return a+Math.random()*(b-a);}
+ function size(div){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;gap=cv.width/Math.ceil(cv.width/div);}
+ size(200);var rt=null;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){size(300);},150);});
+ function add(x,y,n){for(var k=0;k<n;k++){var s0=rnd(0,.5),p={x:x,y:y,vx:rnd(-.08,.08),sv:rnd(-.4,.1),life:rnd(2000,8000),age:0,scale:s0};p.fin=rnd(25+s0,30+s0);p.vy=p.sv;ps.push(p);}}
+ function emit(){if(!document.hidden){add(0,cv.height,3);for(var x=gap;x<=cv.width;x+=gap)add(x,cv.height,3);}setTimeout(emit,2000-1750*INT);}
+ function step(dt){ctx.clearRect(0,0,cv.width,cv.height);var keep=[];
+  for(var i=0;i<ps.length;i++){var p=ps[i];p.x+=p.vx*dt;p.y+=p.vy*dt;var f=Math.sqrt(p.age/p.life);p.vy=(1.8*TRAVEL-f)*p.sv;p.age+=dt;p.scale=f*p.fin;if(p.age<p.life)keep.push(p);}
+  ps=keep;for(var j=0;j<ps.length;j++){var q=ps[j];ctx.globalAlpha=(1-Math.abs(1-2*q.age/q.life))/8;var h=q.scale*SZ/2;ctx.drawImage(img,q.x-h,q.y-h,3*h,2*h);}}
+ var lt=performance.now();function frame(t){step(t-lt);lt=t;requestAnimationFrame(frame);}
+ step(200);emit();requestAnimationFrame(frame);
+})();
 </script>
 <div class="ms-bar"><a href="/magicsample/" data-replace>← 다른 시안 보기</a><span>시안 3 / 4</span></div>
 <script>
