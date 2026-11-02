@@ -21,7 +21,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   ],
   "hospital-a": [
     { img: "/thumbs/sections/hospital-a-1.webp", title: "한울혈액암병원 혈액암병원혈 액BLOOD암CANCER병 원HOSPITAL", width: 1280, height: 960 },
-    { img: "/thumbs/sections/hospital-a-2.webp", title: "From Intractable To Complete Cure한울혈액암병원 의료진 소개", width: 1280, height: 960 },
+    { img: "/thumbs/sections/hospital-a-2.webp", title: "Our Doctors한울혈액암병원 의료진 소개", width: 1280, height: 960 },
     { img: "/thumbs/sections/hospital-a-3.webp", title: "Why? 한울혈액암병원인가", width: 1280, height: 960 },
     { img: "/thumbs/sections/hospital-a-4.webp", title: "BLOOD HEALTH TV혈액건강 TV", width: 1280, height: 960 },
     { img: "/thumbs/sections/hospital-a-5.webp", title: "한울혈액암병원 소식", width: 1280, height: 960 },
@@ -102,7 +102,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-i-9.webp", title: "Career", width: 1280, height: 968 },
   ],
   "corporate-s": [
-    { img: "/thumbs/sections/corporate-s-1.webp", title: "온결의 역사와 스토리가 시작되는 곳,온결산업기록관입니다.온결의역사와 스토리가시작되는 곳,온결산업기록관입니다.", width: 1280, height: 900 },
+    { img: "/thumbs/sections/corporate-s-1.webp", title: "1948년부터의 산업 기록을 모은온결산업기록관입니다.", width: 1280, height: 900 },
     { img: "/thumbs/sections/corporate-s-2.webp", title: "About Ongyeol Industrial ArchiveAbout OngyeolIndustrial Arch", width: 1280, height: 859 },
     { img: "/thumbs/sections/corporate-s-3.webp", title: "Exhibitions", width: 1280, height: 695 },
     { img: "/thumbs/sections/corporate-s-4.webp", title: "온결산업기록관방문에 관하여 안내드립니다.", width: 1280, height: 474 },
@@ -120,9 +120,9 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-n-4.webp", title: "Latest News Release", width: 1280, height: 928 },
   ],
   "corporate-m": [
-    { img: "/thumbs/sections/corporate-m-1.webp", title: "We do more than build industrial utilities.We orchestrate in", width: 1280, height: 967 },
+    { img: "/thumbs/sections/corporate-m-1.webp", title: "Utility piping for semiconductor,battery and data center pla", width: 1280, height: 967 },
     { img: "/thumbs/sections/corporate-m-2.webp", title: "Solutions & Services", width: 1280, height: 932 },
-    { img: "/thumbs/sections/corporate-m-3.webp", title: "Powering intelligent flowacross industries, globally.", width: 1280, height: 1020 },
+    { img: "/thumbs/sections/corporate-m-3.webp", title: "FLOVEXin numbers", width: 1280, height: 1020 },
     { img: "/thumbs/sections/corporate-m-4.webp", title: "Client Reviews", width: 1280, height: 678 },
     { img: "/thumbs/sections/corporate-m-5.webp", title: "Media", width: 1280, height: 841 },
     { img: "/thumbs/sections/corporate-m-6.webp", title: "With FLOVEX, 현장에서 같이 일할 인재를 기다립니다.", width: 1280, height: 493 },
@@ -134,7 +134,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-l-4.webp", title: "With HANGYEOL", width: 1280, height: 879 },
   ],
   "corporate-k": [
-    { img: "/thumbs/sections/corporate-k-1.webp", title: "매일의 건강을채우는 한 잔,누리웰", width: 1280, height: 1920 },
+    { img: "/thumbs/sections/corporate-k-1.webp", title: "1988년부터영양식을 만드는누리웰", width: 1280, height: 1920 },
     { img: "/thumbs/sections/corporate-k-2.webp", title: "R&D", width: 1280, height: 725 },
     { img: "/thumbs/sections/corporate-k-3.webp", title: "CSR", width: 1280, height: 792 },
     { img: "/thumbs/sections/corporate-k-4.webp", title: "화면 4", width: 1280, height: 429 },
@@ -164,9 +164,9 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-g-6.webp", title: "hanvex news", width: 1280, height: 1468 },
   ],
   "corporate-f": [
-    { img: "/thumbs/sections/corporate-f-1.webp", title: "공간의 기준을 세우고오래 쓰일 건물을 짓습니다", width: 1280, height: 960 },
-    { img: "/thumbs/sections/corporate-f-2.webp", title: "직접 짓고 관리해 온 현장으로하온디앤씨의 시공 역량을 증명합니다.", width: 1280, height: 1012 },
-    { img: "/thumbs/sections/corporate-f-3.webp", title: "무재해 현장 위에신뢰를 차곡차곡 쌓아 올립니다.", width: 1280, height: 960 },
+    { img: "/thumbs/sections/corporate-f-1.webp", title: "설계·시공·관리를한 회사가 맡습니다", width: 1280, height: 960 },
+    { img: "/thumbs/sections/corporate-f-2.webp", title: "직접 짓고 관리해 온 현장여덟 곳을 소개합니다.", width: 1280, height: 1012 },
+    { img: "/thumbs/sections/corporate-f-3.webp", title: "ISO 인증 기준으로품질과 안전을 관리합니다.", width: 1280, height: 960 },
     { img: "/thumbs/sections/corporate-f-4.webp", title: "하온디앤씨의 현장 소식과채용 공고도 함께 올립니다.", width: 1280, height: 677 },
   ],
   "restaurant-a": [
@@ -253,8 +253,8 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   ],
   "hotel-b": [
     { img: "/thumbs/sections/hotel-b-1.webp", title: "우리의 철학" },
-    { img: "/thumbs/sections/hotel-b-2.webp", title: "머무름의 이유" },
-    { img: "/thumbs/sections/hotel-b-3.webp", title: "머무름의 방식" },
+    { img: "/thumbs/sections/hotel-b-2.webp", title: "별하의 서비스" },
+    { img: "/thumbs/sections/hotel-b-3.webp", title: "투숙 안내" },
     { img: "/thumbs/sections/hotel-b-4.webp", title: "객실" },
   ],
   "hotel-c": [
@@ -491,7 +491,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-b-4.webp", title: "우리 공장에 맞을지,30분 화상 진단으로 확인하세요" },
   ],
   "corporate-c": [
-    { img: "/thumbs/sections/corporate-c-1.webp", title: "발전소를 짓는 일은땅을 빌리는 일입니다" },
+    { img: "/thumbs/sections/corporate-c-1.webp", title: "20년 운영 뒤 철거까지 맡습니다" },
     { img: "/thumbs/sections/corporate-c-2.webp", title: "사업영역" },
     { img: "/thumbs/sections/corporate-c-3.webp", title: "숫자로 남는 환경 성과" },
     { img: "/thumbs/sections/corporate-c-4.webp", title: "부지 진단부터 준공까지" },
@@ -552,7 +552,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   "dental-c": [
     { img: "/thumbs/sections/dental-c-1.webp", title: "문서로 남기는 세 가지 약속" },
     { img: "/thumbs/sections/dental-c-2.webp", title: "디지털로 오차를 줄입니다" },
-    { img: "/thumbs/sections/dental-c-3.webp", title: "바른 진료가 결국 빠릅니다" },
+    { img: "/thumbs/sections/dental-c-3.webp", title: "필요한 치료만 권합니다" },
     { img: "/thumbs/sections/dental-c-4.webp", title: "수술은 원장이 직접" },
   ],
   "dental-d": [
@@ -695,7 +695,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/kids-b-4.webp", title: "우리 아이 자리,남아 있는지 물어보세요" },
   ],
   "kids-c": [
-    { img: "/thumbs/sections/kids-c-1.webp", title: "계절이 커리큘럼입니다" },
+    { img: "/thumbs/sections/kids-c-1.webp", title: "계절마다 하는 활동" },
     { img: "/thumbs/sections/kids-c-2.webp", title: "서두르지 않는 하루" },
     { img: "/thumbs/sections/kids-c-3.webp", title: "부모님께 드리는 약속" },
     { img: "/thumbs/sections/kids-c-4.webp", title: "숲으로 오세요,아이와 함께" },
@@ -750,7 +750,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   ],
   "moving-b": [
     { img: "/thumbs/sections/moving-b-1.webp", title: "딱 세 단계, 값은 그대로" },
-    { img: "/thumbs/sections/moving-b-2.webp", title: "정리까지가 이사입니다" },
+    { img: "/thumbs/sections/moving-b-2.webp", title: "입주 정리까지 합니다" },
     { img: "/thumbs/sections/moving-b-3.webp", title: "깨지면 물어드립니다" },
     { img: "/thumbs/sections/moving-b-4.webp", title: "이번 주 작업" },
   ],
