@@ -28,7 +28,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/hospital-a-6.webp", title: "고맙습니다", width: 1280, height: 960 },
   ],
   "dental-f": [
-    { img: "/thumbs/sections/dental-f-1.webp", title: "한 분의 진료가 아닌", width: 1280, height: 960 },
+    { img: "/thumbs/sections/dental-f-1.webp", title: "분과 전문의가", width: 1280, height: 960 },
     { img: "/thumbs/sections/dental-f-2.webp", title: "365서울예담치과의 특화진료", width: 1280, height: 836 },
     { img: "/thumbs/sections/dental-f-3.webp", title: "65세 이상 보험 적용 시니어 임플란트", width: 1280, height: 1195 },
     { img: "/thumbs/sections/dental-f-4.webp", title: "365서울예담치과 실제 치료 사례", width: 1280, height: 1409 },
@@ -85,7 +85,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   ],
   "brew-a": [
     { img: "/thumbs/sections/brew-a-1.webp", title: "화면 1", width: 1280, height: 960 },
-    { img: "/thumbs/sections/brew-a-2.webp", title: "시간이 빚은 한 잔의 프리미엄 1936년부터, 해담", width: 1280, height: 1049 },
+    { img: "/thumbs/sections/brew-a-2.webp", title: "맥아 100%, 1.3배 긴 숙성 1936년부터, 해담", width: 1280, height: 1049 },
     { img: "/thumbs/sections/brew-a-3.webp", title: "해담은 더욱 맛있어졌습니다.", width: 1280, height: 960 },
     { img: "/thumbs/sections/brew-a-4.webp", title: "PremiumHAEDAMMaster", width: 1280, height: 1115 },
     { img: "/thumbs/sections/brew-a-5.webp", title: "해담은 올해로아흔 번째 해를 맞았습니다.", width: 1280, height: 720 },
@@ -111,7 +111,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-q-1.webp", title: "지역 실증 거점세 곳이 문을 엽니다", width: 1280, height: 715 },
     { img: "/thumbs/sections/corporate-q-2.webp", title: "에너지기술 R&D", width: 1280, height: 527 },
     { img: "/thumbs/sections/corporate-q-3.webp", title: "Youtube", width: 1280, height: 527 },
-    { img: "/thumbs/sections/corporate-q-4.webp", title: "미래 에너지기술,현장에서 답을 찾다", width: 1280, height: 477 },
+    { img: "/thumbs/sections/corporate-q-4.webp", title: "이달의 이슈브리프,수소 저장 기술", width: 1280, height: 477 },
   ],
   "corporate-n": [
     { img: "/thumbs/sections/corporate-n-1.webp", title: "Core Tech Company →", width: 1280, height: 900 },
@@ -147,7 +147,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-j-4.webp", title: "Video Gallery", width: 1280, height: 971 },
   ],
   "corporate-h": [
-    { img: "/thumbs/sections/corporate-h-1.webp", title: "POWERINGEVERY TOMORROW", width: 1280, height: 860 },
+    { img: "/thumbs/sections/corporate-h-1.webp", title: "CELLS TO BATTERY PACKS", width: 1280, height: 860 },
     { img: "/thumbs/sections/corporate-h-2.webp", title: "전동공구부터 ESS까지, 하이온셀 배터리는곳곳에서 일합니다", width: 1280, height: 1440 },
     { img: "/thumbs/sections/corporate-h-3.webp", title: "원통형 배터리", width: 1280, height: 800 },
     { img: "/thumbs/sections/corporate-h-4.webp", title: "NCM과 LFP, 양극재 두 가지로 만듭니다", width: 1280, height: 900 },
@@ -157,9 +157,9 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   ],
   "corporate-g": [
     { img: "/thumbs/sections/corporate-g-1.webp", title: "화면 1", width: 1280, height: 960 },
-    { img: "/thumbs/sections/corporate-g-2.webp", title: "쇳물에 담는기술의 무게", width: 1280, height: 1382 },
+    { img: "/thumbs/sections/corporate-g-2.webp", title: "특수강주조 부품", width: 1280, height: 1382 },
     { img: "/thumbs/sections/corporate-g-3.webp", title: "Casting solution", width: 1280, height: 955 },
-    { img: "/thumbs/sections/corporate-g-4.webp", title: "Builtwithsolidquality", width: 1280, height: 2297 },
+    { img: "/thumbs/sections/corporate-g-4.webp", title: "Tested before it ships", width: 1280, height: 2297 },
     { img: "/thumbs/sections/corporate-g-5.webp", title: "GLOBAL PARTNERS,PROVEN QUALITY", width: 1280, height: 850 },
     { img: "/thumbs/sections/corporate-g-6.webp", title: "hanvex news", width: 1280, height: 1468 },
   ],
@@ -728,7 +728,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/law-c-1.webp", title: "업무 분야" },
     { img: "/thumbs/sections/law-c-2.webp", title: "사건은 이렇게 대응합니다" },
     { img: "/thumbs/sections/law-c-3.webp", title: "전원이 법정에 섭니다" },
-    { img: "/thumbs/sections/law-c-4.webp", title: "지금이 골든타임입니다" },
+    { img: "/thumbs/sections/law-c-4.webp", title: "긴급 상담" },
   ],
   "law-d": [
     { img: "/thumbs/sections/law-d-1.webp", title: "신청부터 면책까지" },
