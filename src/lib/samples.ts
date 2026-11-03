@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "dental-j-template",
+    industry: "치과 홈페이지",
+    title: "치과 홈페이지 (프리미엄 디자인 J)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 임플란트 · 교정 · 심미 · 보존",
+    purpose:
+      "임플란트 · 교정 · 심미 · 보존 · 잇몸 · 턱관절 · 사랑니 진료를 나누어 안내하고, 의료진 · 공지 · 문의까지 연결하는 치과 홈페이지입니다.",
+    features: [
+      "진료 분야별 안내와 치료 전 주의사항",
+      "의료진 · 진료 장비 · 병원 소개 · 오시는 길 안내",
+      "공지 · 상담 문의와 모바일 메뉴",
+      "진료 정보를 짧은 단락으로 나눈 안내",
+    ],
+    idealFor: "임플란트부터 예방 · 보존 진료까지 폭넓게 안내하고 싶은 치과 의원",
+    image: "/thumbs/saeromdent.jpg",
+    liveUrl: "/saeromdent/",
+    industryKey: "dental",
+    premiumLabel: "치과 · 종합진료",
+    designCode: "DENP-1004",
+    premium: true,
+  },
+  {
     slug: "hospital-f-template",
     industry: "비만 · 줄기세포 클리닉 홈페이지",
     title: "비만 · 줄기세포 클리닉 홈페이지 (프리미엄 디자인 F)",
