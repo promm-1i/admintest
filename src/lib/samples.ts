@@ -60,6 +60,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-t-template",
+    industry: "난임 · 여성의원 홈페이지",
+    title: "난임 · 여성의원 홈페이지 (프리미엄 디자인 T)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 시험관 · 인공수정 · 여성검진",
+    purpose:
+      "난임 진료의 흐름과 여성 건강 정보를 안내하고 상담 · 예약으로 이어지는 여성의원 홈페이지입니다.",
+    features: [
+      "시험관 · 인공수정 · 가임력 보존 안내",
+      "의료진 · 검사 · 진료시간 안내",
+      "사례 · 공지 · 상담 예약 연결",
+    ],
+    idealFor: "난임센터, 여성의원, 시험관 · 인공수정 중심의 전문 클리닉",
+    image: "/thumbs/nuvia.jpg",
+    liveUrl: "/nuvia/",
+    industryKey: "hospital",
+    premiumLabel: "난임 · 여성의원",
+    designCode: "HOSP-1022",
+    premium: true,
+  },
+  {
     slug: "dental-j-template",
     industry: "치과 홈페이지",
     title: "치과 홈페이지 (프리미엄 디자인 J)",
