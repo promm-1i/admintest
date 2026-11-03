@@ -60,6 +60,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-r-template",
+    industry: "피부 · 미용 의원 홈페이지",
+    title: "피부 · 미용 의원 홈페이지 (프리미엄 디자인 R)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 리프팅 · 피부결 · 색소 · 여드름",
+    purpose:
+      "리프팅과 탄력, 피부결과 색소, 여드름 · 모공 · 흉터를 고민별로 안내하고 상담과 방문 정보로 이어지는 피부 · 미용 의원 홈페이지입니다.",
+    features: [
+      "고민별 진료 · 시술 탭 안내",
+      "의료진 · 전후 사진 · 이벤트",
+      "진료시간 · 상담 채널 · 오시는 길",
+    ],
+    idealFor: "피부과 · 미용 의원, 리프팅 · 색소 진료 중심 클리닉",
+    image: "/thumbs/selvarin.jpg",
+    liveUrl: "/selvarin/",
+    industryKey: "hospital",
+    premiumLabel: "피부 · 미용",
+    designCode: "HOSP-1017",
+    premium: true,
+  },
+  {
     slug: "clinic-q-template",
     industry: "망막 · 백내장 안과 홈페이지",
     title: "망막 · 백내장 안과 홈페이지 (프리미엄 디자인 Q)",
