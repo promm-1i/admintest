@@ -60,6 +60,22 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-v-template",
+    industry: "안과 홈페이지",
+    title: "안과 홈페이지 (프리미엄 디자인 V)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 백내장 · 망막 · 녹내장 · 검사 안내",
+    purpose: "진료 분야와 검사 흐름을 차분하게 안내하고 예약과 방문 정보로 연결하는 안과 홈페이지 템플릿입니다.",
+    features: ["진료 분야 및 검사 안내", "병원 소개·의료진·장비 소개", "예약·오시는 길 연결"],
+    idealFor: "안과의원, 백내장·망막 중심 클리닉, 검사와 상담을 함께 운영하는 병원",
+    image: "/thumbs/aerovia.jpg",
+    liveUrl: "/aerovia/",
+    industryKey: "hospital",
+    designCode: "HOSP-1024",
+    premiumLabel: "안과 · 백내장 · 망막",
+    premium: true,
+  },
+  {
     slug: "hospital-e-template",
     industry: "정형외과 병원 홈페이지",
     title: "정형외과 병원 홈페이지 (프리미엄 디자인 E)",
