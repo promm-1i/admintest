@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-y-template",
+    industry: "피부 의원 홈페이지",
+    title: "피부 의원 홈페이지 (프리미엄 디자인 Y)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 피부 · 필링 · 주사",
+    purpose:
+      "피부 관리의 목적과 진행 과정을 안내하고 진료시간과 상담 연락처를 연결하는 의원 홈페이지입니다.",
+    features: [
+      "시술별 목적과 진행 과정",
+      "전체 메뉴와 빠른 메뉴",
+      "상담 전 개인정보 동의 안내",
+      "게시판 제목 · 내용 검색",
+    ],
+    idealFor: "시술 정보와 방문 안내를 차분하게 전달하려는 피부 의원",
+    image: "/thumbs/saelune.jpg",
+    liveUrl: "/saelune/",
+    industryKey: "hospital",
+    premiumLabel: "피부 · 필링 · 주사",
+    designCode: "HOSP-1027",
+    premium: true,
+  },
+  {
     slug: "clinic-x-template",
     industry: "피부 · 웰니스 의원 홈페이지",
     title: "피부 · 웰니스 의원 홈페이지 (프리미엄 디자인 X)",

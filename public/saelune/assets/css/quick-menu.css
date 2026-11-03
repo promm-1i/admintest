@@ -1,0 +1,133 @@
+
+.saelune-rail { position:fixed; z-index:90; right:24px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; align-items:center; gap:10px; max-height:calc(100dvh - 100px); }
+.saelune-rail-items { display:flex; flex-direction:column; gap:8px; overflow:auto; scrollbar-width:none; }
+.saelune-rail-items[hidden] { display:none; }
+.saelune-rail .saelune-rail-link { display:flex; align-items:center; justify-content:center; flex-shrink:0; width:48px; height:48px; border-radius:50%; background:rgb(73 59 46 / 90%); color:#fff; text-decoration:none; transition:background .2s; }
+.saelune-rail-link img { display:block; width:28px; height:28px; object-fit:contain; }
+.saelune-rail-link span { max-width:42px; text-align:center; font-size:10px; line-height:1.3; word-break:keep-all; }
+.saelune-rail .saelune-rail-link:hover { background:#89624b; }
+.saelune-rail-toggle { display:grid; place-items:center; flex-shrink:0; width:48px; height:48px; padding:0; border:0; border-radius:50%; background:#fff; color:#493b32; box-shadow:0 3px 14px rgb(0 0 0 / 8%); font:300 30px/1 sans-serif; cursor:pointer; }
+.saelune-rail-toggle[aria-expanded=false] { font-size:12px; font-weight:600; }
+.saelune-rail :focus-visible { outline:1px solid #89624b; outline-offset:3px; }
+@media (max-width:640px) {
+    .saelune-rail { right:12px; top:auto; bottom:calc(20px + env(safe-area-inset-bottom)); transform:none; }
+    .saelune-rail .saelune-rail-link, .saelune-rail-toggle { width:44px; height:44px; }
+}
+.saelune-rail button.saelune-rail-link { padding:0; border:0; font:inherit; cursor:pointer; }
+.rail-booking-panel { position:absolute; right:calc(100% + 14px); bottom:58px; width:264px; max-width:calc(100vw - 88px); overflow:hidden; border-radius:18px; background:#fff; color:#493b32; box-shadow:0 8px 32px rgb(0 0 0 / 12%); }
+.rail-booking-panel[hidden] { display:none; }
+.rail-booking-panel header { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-bottom:1px solid #eee; font-size:13px; }
+.rail-booking-panel header button { border:0; background:transparent; color:inherit; width:30px; height:30px; padding:0; font-size:22px; cursor:pointer; }
+.rail-booking-panel > a, .rail-booking-pending { display:flex; flex-direction:column; gap:4px; padding:14px 16px; color:inherit; text-decoration:none; border-bottom:1px solid #f2efeb; }
+.rail-booking-panel strong { font-size:14px; font-weight:500; }
+.rail-booking-panel span { font-size:12px; }
+.rail-booking-panel > a:hover { background:#faf4eb; }
+.rail-booking-pending { color:#91877f; background:#f8f7f5; cursor:default; }
+.rail-booking-pending small { margin-left:8px; padding:3px 6px; border-radius:6px; background:#ece8e2; font-size:11px; }
+.saelune-rail { z-index:110; font-family:inherit; }
+.saelune-rail .saelune-rail-link { border:0; padding:0; cursor:pointer; box-shadow:0 4px 12px #34281e12; transition:transform .25s,background .25s,box-shadow .25s; }
+.saelune-rail .saelune-rail-link:hover { transform:translateY(-3px); box-shadow:0 8px 18px #34281e25; }
+.saelune-rail-link[data-icon=consult] { --icon-size:32px; }
+.saelune-rail-link[data-icon=kakao] { --icon-size:30px; }
+.saelune-rail-link[data-icon=instagram] { --icon-size:26px; }
+.saelune-rail-link[data-icon=location] { --icon-size:22px; }
+.saelune-rail-link[data-icon=booking] { --icon-size:25px; }
+.saelune-rail-link[data-icon=faq] { --icon-size:29px; }
+.saelune-rail .saelune-rail-link img { width:var(--icon-size,28px); height:var(--icon-size,28px); object-fit:contain; }
+.saelune-rail-toggle { transition:transform .3s,box-shadow .3s; }
+.saelune-rail-toggle:hover { transform:rotate(8deg); }
+.saelune-rail-toggle[aria-expanded=false] { font-size:10px; letter-spacing:1px; }
+.saelune-rail-items { overflow:visible; }
+.saelune-rail-items > * { animation:rail-enter .4s cubic-bezier(.2,.8,.2,1) both; animation-delay:calc(var(--order,0) * 40ms); }
+@keyframes rail-enter { from { opacity:0; transform:translateY(12px) scale(.85); } to { opacity:1; transform:none; } }
+.rail-faq { position:absolute; right:calc(100% + 18px); bottom:0; width:340px; max-width:calc(100vw - 90px); max-height:calc(100dvh - 100px); display:flex; flex-direction:column; overflow:hidden; border:1px solid #e7dfd6; border-radius:22px; background:#faf7f2; color:#493b32; box-shadow:0 18px 60px #30251e26; animation:rail-enter .3s ease both; }
+.rail-faq[hidden], .rail-booking-panel[hidden] { display:none; }
+.rail-faq header { display:flex; align-items:center; justify-content:space-between; padding:20px; border-bottom:1px solid #e7dfd6; background:#fff; }
+.rail-faq header small { display:block; font-size:10px; letter-spacing:3px; color:#89624b; margin-bottom:6px; }
+.rail-faq header strong { font-size:15px; }
+.saelune-rail .rail-faq header button[data-faq-close] { position:relative; box-sizing:border-box; display:block; flex:0 0 32px; width:32px; min-width:32px; max-width:32px; height:32px; min-height:32px; max-height:32px; margin:0; padding:0; border:0; border-radius:50%; background:#f4efe8; color:#655345; font-size:0; line-height:1; box-shadow:none; cursor:pointer; appearance:none; transition:background .2s; }
+.saelune-rail .rail-faq header button[data-faq-close]::before, .saelune-rail .rail-faq header button[data-faq-close]::after { content:""; position:absolute; top:50%; left:50%; width:13px; height:1.5px; margin:0; border:0; border-radius:1px; background:currentColor; pointer-events:none; }
+.saelune-rail .rail-faq header button[data-faq-close]::before { transform:translate(-50%,-50%) rotate(45deg); }
+.saelune-rail .rail-faq header button[data-faq-close]::after { transform:translate(-50%,-50%) rotate(-45deg); }
+.saelune-rail .rail-faq header button[data-faq-close]:hover { background:#eae2d8; }
+.saelune-rail .rail-faq header button[data-faq-close]:focus-visible { outline:1px solid #89624b; outline-offset:3px; }
+.rail-chat { overflow:auto; padding:16px; min-height:70px; max-height:230px; }
+.rail-answer,.rail-user { font-size:13px; line-height:1.8; padding:12px 14px; margin:0 0 10px; border-radius:14px; white-space:pre-line; }
+.rail-answer { background:#eee7de; margin-right:16px; }
+.rail-user { background:#655345; color:#fff; margin-left:30px; }
+.rail-answer a { display:block; margin-top:8px; color:#69513e; text-decoration:underline; }
+.rail-topics { padding:0 16px 12px; display:grid; gap:6px; }
+.rail-topics button { display:flex; justify-content:space-between; padding:10px 12px; border:1px solid #e5ddd3; border-radius:11px; background:transparent; color:inherit; text-align:left; font:inherit; font-size:12px; cursor:pointer; transition:background .2s; }
+.rail-topics button:hover { background:#eee7de; }
+.rail-question { display:flex; gap:8px; border-top:1px solid #e7dfd6; padding:12px 12px 6px; margin:0; }
+.rail-question input { min-width:0; flex:1; width:0; border:1px solid #ded4c8; border-radius:12px; padding:10px; background:transparent; font:inherit; font-size:12px; color:inherit; }
+.rail-question button { flex:0 0 36px; border:0; border-radius:12px; background:#655345; color:white; font-size:22px; cursor:pointer; }
+.rail-note { padding:4px 12px 12px; text-align:center; font-size:10px; color:#8a7e72; }
+@media(max-width:640px) { .rail-faq { position:fixed; right:58px; bottom:0; max-height:calc(100dvh - 110px); } }
+@media(prefers-reduced-motion:reduce) { .saelune-rail *, .saelune-rail *::before { animation:none!important; transition:none!important; } }
+.saelune-rail .rail-faq .rail-question { display:flex; align-items:center; gap:8px; margin:0; padding:10px 12px 4px; }
+.saelune-rail .rail-faq .rail-question input { box-sizing:border-box; flex:1 1 0; width:0; min-width:0; height:40px; min-height:0; margin:0; padding:0 12px; border:1px solid #e5ddd3; border-radius:10px; background:#fff9; color:#493b32; font:inherit; font-size:12px; line-height:normal; box-shadow:none; }
+.saelune-rail .rail-faq .rail-question input::placeholder { color:#9a9086; }
+.saelune-rail .rail-faq .rail-question input:focus { border-color:#a89481; outline:none; }
+.saelune-rail .rail-faq .rail-question button { box-sizing:border-box; display:grid; place-items:center; flex:0 0 40px; width:40px; min-width:0; height:40px; min-height:0; margin:0; padding:0; border:0; border-radius:10px; background:#756354; color:#fff; font:400 20px/1 sans-serif; box-shadow:none; transition:background .2s; }
+.saelune-rail .rail-faq .rail-question button:hover { background:#594a3e; }
+.saelune-rail .rail-faq .rail-question button:focus-visible { outline:1px solid #89624b; outline-offset:2px; }
+.saelune-rail .rail-faq .rail-note { display:block; margin:0; padding:4px 12px 9px; font-size:9px; line-height:1.4; color:#a09589; }
+.saelune-rail-top { box-sizing:border-box; display:grid; place-items:center; flex:0 0 48px; width:48px; min-width:0; height:48px; min-height:0; margin:0; padding:0; border:0px solid #d9cfc3; border-radius:50%; background:#faf7f2; color:#655345; box-shadow:0 3px 12px #34281e0a; cursor:pointer; transition:background .2s,transform .2s; }
+.saelune-rail-top svg { display:block; width:20px; height:20px; transition:transform .2s; }
+.saelune-rail-top:hover { background:#fff; }
+.saelune-rail-top:hover svg { transform:translateY(-2px); }
+@media(max-width:640px) { .saelune-rail-top { flex-basis:44px; width:44px; height:44px; } }
+@media(prefers-reduced-motion:reduce) { .saelune-rail-top, .saelune-rail-top svg { transition:none; } }
+button.saelune-rail-top { position:fixed; right:24px; bottom:24px; z-index:109; }
+button.saelune-rail-top:focus-visible { outline:1px solid #89624b; outline-offset:3px; }
+@media(max-width:640px) {
+    button.saelune-rail-top { right:12px; bottom:calc(16px + env(safe-area-inset-bottom)); }
+    .saelune-rail { bottom:calc(72px + env(safe-area-inset-bottom)); }
+}
+@media (max-width:640px) {
+    .saelune-rail { right:8px; top:auto; bottom:calc(53px + env(safe-area-inset-bottom)); width:34px; gap:5px; max-height:calc(100dvh - 130px); transform:none; }
+    .saelune-rail .saelune-rail-items { min-height:0; gap:5px; overflow-y:auto; overflow-x:hidden; scrollbar-width:none; }
+    .saelune-rail .saelune-rail-items::-webkit-scrollbar { display:none; }
+    .saelune-rail .saelune-rail-link { box-sizing:border-box; flex:0 0 34px; width:34px; height:34px; min-width:0; min-height:0; margin:0; padding:0; }
+    .saelune-rail .saelune-rail-link img { width:20px; height:20px; }
+    .saelune-rail .saelune-rail-link[data-icon="consult"] img { width:23px; height:23px; }
+    .saelune-rail .saelune-rail-link[data-icon="kakao"] img { width:22px; height:22px; }
+    .saelune-rail .saelune-rail-link[data-icon="location"] img { width:17px; height:17px; }
+    .saelune-rail .saelune-rail-link span { max-width:30px; font-size:9px; line-height:1.2; }
+    .saelune-rail .saelune-rail-toggle { box-sizing:border-box; flex:0 0 34px; width:34px; height:34px; min-width:0; min-height:0; padding:0; font-size:23px; }
+    .saelune-rail .saelune-rail-toggle[aria-expanded="false"] { font-size:9px; letter-spacing:0; }
+    button.saelune-rail-top { right:8px; bottom:calc(12px + env(safe-area-inset-bottom)); flex-basis:34px; width:34px; height:34px; }
+    button.saelune-rail-top svg { width:16px; height:16px; }
+    .saelune-rail .saelune-rail-link:hover, .saelune-rail .saelune-rail-toggle:hover { transform:none; }
+}
+.rail-schedule { position:absolute; right:calc(100% + 18px); bottom:0; width:340px; max-width:calc(100vw - 90px); max-height:calc(100dvh - 110px); overflow:auto; padding:20px; box-sizing:border-box; border:1px solid #e7dfd6; border-radius:22px; background:#faf7f2; color:#493b32; box-shadow:0 18px 60px #30251e26; }
+.rail-schedule[hidden] { display:none; }
+.rail-schedule header,.rail-month-nav { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.rail-schedule header strong { font-size:15px; }
+.saelune-rail .rail-schedule header button,.saelune-rail .rail-month-nav button { box-sizing:border-box; flex:0 0 30px; width:30px; min-width:0; height:30px; min-height:0; padding:0; border:0; border-radius:50%; background:transparent; color:inherit; font:400 22px/1 sans-serif; cursor:pointer; }
+.rail-month-nav { margin:12px 0 16px; font-size:14px; }
+.rail-month-nav button:disabled { opacity:.25; cursor:default; }
+.rail-calendar-week,.rail-calendar-days { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; text-align:center; }
+.rail-calendar-week { margin-bottom:8px; font-size:11px; color:#8a7e72; }
+.rail-calendar-week span:first-child { color:#b66a65; }
+.rail-calendar-week span:last-child { color:#6483a0; }
+.saelune-rail .rail-schedule .rail-date { box-sizing:border-box; display:flex; align-items:center; flex-direction:column; justify-content:flex-start; gap:3px; min-width:0; min-height:0; height:49px; margin:0; padding:3px 0; background:transparent; color:inherit; border:1px solid transparent; border-radius:9px; font:400 12px/1.4 sans-serif; cursor:pointer; }
+.rail-date span { display:grid; place-items:center; width:24px; height:24px; border-radius:50%; }
+.rail-date.closed span { background:#ac7068; color:#fff; }
+.rail-date small { font-size:9px; color:#94877a; }
+.saelune-rail .rail-schedule .rail-date[aria-pressed=true] { border-color:#b19a82; background:#efe8de; }
+.rail-date[aria-current=date] span { font-weight:700; text-decoration:underline; text-underline-offset:3px; }
+.rail-day-info { border-top:1px solid #e4dcd2; margin-top:16px; padding-top:14px; font-size:12px; line-height:1.7; }
+.rail-day-info p { margin:6px 0; }
+.rail-schedule-note { font-size:10px; line-height:1.6; color:#918478; }
+.rail-schedule > a { font-size:12px; color:#795f48; }
+@media(max-width:640px) { .rail-schedule { position:fixed; right:58px; bottom:0; } }
+.rail-date.special span { background:#557ea6; color:#fff; }
+nav.saelune-rail { width:48px; box-sizing:border-box; }
+.saelune-rail .rail-schedule { flex:none; margin:0; }
+.saelune-rail .rail-calendar-week, .saelune-rail .rail-calendar-days { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); }
+@media(max-width:640px) {
+    nav.saelune-rail { width:34px; }
+    .saelune-rail .rail-schedule { right:46px; width:340px; max-width:calc(100vw - 62px); }
+}
