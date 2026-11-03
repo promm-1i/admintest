@@ -1,0 +1,494 @@
+<style>
+    /*.map{border-radius:3.33rem; overflow:hidden; border:1px solid #E8E8E8; }*/
+    .map_cont {
+        height: 100%;
+    }
+
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+
+    .radius_border {
+        box-shadow: 0 0 0 1px #919191;
+        border-radius: 5px;
+    }
+
+    .custom_typecontrol {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        overflow: hidden;
+        width: auto;
+        max-width: 140px;
+        height: 30px;
+        margin: 0;
+        padding: 0;
+        z-index: 9;
+        font-size: 12px;
+        font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+    }
+
+    .custom_typecontrol span {
+        display: block;
+        width: 64px;
+        height: 30px;
+        float: left;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+    }
+
+    .custom_typecontrol .sky_btn {
+        background: #fff;
+        background: linear-gradient(#fff, #e6e6e6);
+        color: #000;
+    }
+
+    .custom_typecontrol .sky_btn:hover {
+        background: #f5f5f5;
+        background: linear-gradient(#f5f5f5, #e3e3e3);
+    }
+
+    .custom_typecontrol .sky_btn:active {
+        background: #e6e6e6;
+        background: linear-gradient(#e6e6e6, #fff);
+    }
+
+    .custom_typecontrol .selected_btn {
+        color: #fff;
+        background: #425470;
+        background: linear-gradient(#425470, #5b6d8a);
+    }
+
+    .custom_typecontrol .selected_btn:hover {
+        color: #fff;
+    }
+
+    .custom_zoomcontrol {
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        width: 35px;
+        height: 80px;
+        overflow: hidden;
+        z-index: 9;
+        background-color: #f5f5f5;
+    }
+
+    .custom_zoomcontrol span {
+        display: block;
+        height: 40px;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+
+    .custom_zoomcontrol span svg {
+        width: 20px;
+        height: 20px;
+        border: none;
+    }
+
+    .custom_zoomcontrol span:first-child {
+        border-bottom: 1px solid #bfbfbf;
+    }
+
+    .custom_refreshcontrol {
+        position: absolute;
+        top: 140px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        overflow: hidden;
+        z-index: 9;
+        background-color: #f5f5f5;
+    }
+
+    .custom_refreshcontrol span {
+        display: block;
+        height: 35px;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+
+    .custom_refreshcontrol span svg {
+        width: 18px;
+        height: 18px;
+        border: none;
+    }
+
+
+    .custom_linkcontrol {
+        position: absolute;
+        top: 182px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+        overflow: hidden;
+        z-index: 9;
+        background-color: #f5f5f5;
+    }
+
+    .custom_linkcontrol span {
+        display: block;
+        height: 35px;
+        text-align: center;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center
+    }
+
+    .custom_linkcontrol span svg {
+        width: 18px;
+        height: 18px;
+        border: none;
+    }
+
+
+    @media screen and (max-width: 500px) {
+        .custom_zoomcontrol {
+            width: 30px;
+            height: 60px
+        }
+
+        .custom_refreshcontrol,
+        .custom_linkcontrol {
+            width: 30px;
+            height: 30px
+        }
+
+        .custom_zoomcontrol span,
+        .custom_refreshcontrol span,
+        .custom_linkcontrol span {
+            width: 30px;
+            height: 30px
+        }
+
+        .custom_refreshcontrol {
+            top: 117px
+        }
+
+        .custom_linkcontrol {
+            top: 154px
+        }
+    }
+
+    /* 커스텀 마커 스타일 */
+    .custom_marker {
+        position: relative;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        background: #000;
+        border-radius: 10px;
+        padding: 1.2em 1.6em;
+    }
+
+    .custom_marker:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 2em;
+        bottom: -1em;
+        left: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="26" height="21" viewBox="0 0 26 21" fill="none"><path d="M15.0258 19.6314C14.2371 20.8447 12.4608 20.8447 11.6721 19.6314L1.1996 3.52125C0.334699 2.19074 1.28953 0.431202 2.87644 0.431203L23.8215 0.431205C25.4084 0.431205 26.3632 2.19075 25.4983 3.52125L15.0258 19.6314Z" fill="black"/></svg>') no-repeat center / contain;
+    }
+
+    .marker_logo {
+        width: 5em;
+    }
+
+    .marker_label {
+        position: relative;
+        color: rgba(255, 255, 255, 0.70);
+        font-weight: 600;
+    }
+
+</style>
+
+<div class="view_more_btn_box">
+    <button type="button" class="view_more_btn" onclick="location.href='stem-cell-center_branches__tabcode=_EC_84_9C_EC_9A_B8_20_C2_B7_20_EC_88_98_EB_8F_84_EA_B6_.html'">
+        지점 안내 바로가기
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+            <path
+                    d="M566.6 342.6C579.1 330.1 579.1 309.8 566.6 297.3L406.6 137.3C394.1 124.8 373.8 124.8 361.3 137.3C348.8 149.8 348.8 170.1 361.3 182.6L466.7 288L96 288C78.3 288 64 302.3 64 320C64 337.7 78.3 352 96 352L466.7 352L361.3 457.4C348.8 469.9 348.8 490.2 361.3 502.7C373.8 515.2 394.1 515.2 406.6 502.7L566.6 342.7z" />
+        </svg>
+    </button>
+</div>
+<div class="cont_box">
+    <div class="map_cont cont">
+        <div class="map_box">
+
+            
+
+
+            <div id="map" class="stem_map"><img src="assets/img/map/map-34-1.webp" alt="스테모리아 인천 송도점 약도"></div>
+
+            <div class="custom_typecontrol radius_border">
+                <span id="btnRoadmap" class="selected_btn" onclick="setMapType('roadmap')">지도</span>
+                <span id="btnSkyview" class="sky_btn" onclick="setMapType('skyview')">스카이뷰</span>
+            </div>
+            
+            <div class="custom_zoomcontrol radius_border">
+                <span onclick="zoomIn()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path
+                                d="M248 72c0-13.3-10.7-24-24-24s-24 10.7-24 24V232H40c-13.3 0-24 10.7-24 24s10.7 24 24 24H200V440c0 13.3 10.7 24 24 24s24-10.7 24-24V280H408c13.3 0 24-10.7 24-24s-10.7-24-24-24H248V72z" />
+                    </svg>
+                </span>
+                <span onclick="zoomOut()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path
+                                d="M432 256c0 13.3-10.7 24-24 24L40 280c-13.3 0-24-10.7-24-24s10.7-24 24-24l368 0c13.3 0 24 10.7 24 24z" />
+                    </svg>
+                </span>
+            </div>
+
+            <div class="custom_refreshcontrol radius_border">
+                <span onclick="mapRefresh()">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path
+                                d="M472 224c13.3 0 24-10.7 24-24V56c0-13.3-10.7-24-24-24s-24 10.7-24 24v80.1l-20-23.5C387 63.4 325.1 32 256 32C132.3 32 32 132.3 32 256s100.3 224 224 224c50.4 0 97-16.7 134.4-44.8c10.6-8 12.7-23 4.8-33.6s-23-12.7-33.6-4.8C332.2 418.9 295.7 432 256 432c-97.2 0-176-78.8-176-176s78.8-176 176-176c54.3 0 102.9 24.6 135.2 63.4l.1 .2 0 0L418.9 176H328c-13.3 0-24 10.7-24 24s10.7 24 24 24H472z" />
+                    </svg>
+                </span>
+            </div>
+
+
+        </div>
+        <div class="link_btn_box">
+            
+                <a class="btn" href="#none">
+                    <span class="ico">
+                        <img src="assets/img/map_btn_ico02.svg" alt="네이버지도 아이콘">
+                    </span>
+                    <span class="txt">
+                        네이버 지도
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                        <path
+                                d="M241.5 239c9.4 9.4 9.4 24.6 0 33.9L81.5 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143-143-143c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l160 160z" />
+                    </svg>
+                </a>
+
+            
+                            <a class="btn" href="#none">
+                    <span class="ico">
+                        <img src="assets/img/map_btn_ico01.svg" alt="카카오지도 아이콘">
+                    </span>
+                    <span class="txt">
+                        카카오 지도
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                        <path
+                                d="M241.5 239c9.4 9.4 9.4 24.6 0 33.9L81.5 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143-143-143c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l160 160z" />
+                    </svg>
+                </a>
+            
+                            <a class="btn" href="#none">
+                    <span class="ico">
+                        <img src="assets/img/map_btn_ico03.png" alt="구글 아이콘">
+                    </span>
+                    <span class="txt">
+                        구글 지도
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                        <path
+                                d="M241.5 239c9.4 9.4 9.4 24.6 0 33.9L81.5 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143-143-143c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l160 160z" />
+                    </svg>
+                </a>
+            
+                            <a class="btn" href="#none">
+                    <span class="ico">
+                        <img src="assets/img/map_btn_ico04.png" alt="TMAP 아이콘">
+                    </span>
+                    <span class="txt">
+                        TMAP
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                        <path
+                                d="M241.5 239c9.4 9.4 9.4 24.6 0 33.9L81.5 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143-143-143c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l160 160z" />
+                    </svg>
+                </a>
+            
+            <a class="btn" href="javascript:void(0)" onclick="window.open('#none','momedi','width=500,height=441');">
+                    <span class="txt">
+                        문자로 약도 받기
+                    </span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512">
+                    <path d="M241.5 239c9.4 9.4 9.4 24.6 0 33.9L81.5 433c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l143-143-143-143c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l160 160z"/>
+                </svg>
+            </a>
+
+
+        </div>
+    </div>
+    <div class="store_cont cont">
+        <div class="store">
+        <div class="store_slide">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                                            <div class="swiper-slide">
+                            <div class="img">
+                                <img src="assets/img/listfile_1780547781_0.jpg" alt="">
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+
+            <div class="paging"></div>
+
+        </div>
+            <div class="txt_box">
+                <div class="tit">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                        <path
+                                d="M128 252.6C128 148.4 214 64 320 64C426 64 512 148.4 512 252.6C512 371.9 391.8 514.9 341.6 569.4C329.8 582.2 310.1 582.2 298.3 569.4C248.1 514.9 127.9 371.9 127.9 252.6zM320 320C355.3 320 384 291.3 384 256C384 220.7 355.3 192 320 192C284.7 192 256 220.7 256 256C256 291.3 284.7 320 320 320z" />
+                    </svg>
+인천광역시 연수구 송도과학로 26 송도메디컬타워 4층</div>
+                <p class="txt"></p>
+            </div>
+        </div>
+        <div class="info_box">
+            <div class="info">
+                <div class="tit">
+
+                    <svg class="call" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path
+                                d="M160.2 25C152.3 6.1 131.7-3.9 112.1 1.4l-5.5 1.5c-64.6 17.6-119.8 80.2-103.7 156.4 37.1 175 174.8 312.7 349.8 349.8 76.3 16.2 138.8-39.1 156.4-103.7l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2C233.9 335.4 177.3 277 144.8 205.3L189 169.3c13.9-11.3 18.6-30.4 11.8-47L160.2 25z" />
+                    </svg>
+032 - 000 - 1034</div>
+            </div>
+
+            <div class="info">
+                <div class="tit">
+
+                    <svg class="clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                        <path
+                                d="M320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320C64 178.6 178.6 64 320 64zM296 184L296 320C296 328 300 335.5 306.7 340L402.7 404C413.7 411.4 428.6 408.4 436 397.3C443.4 386.2 440.4 371.4 429.3 364L344 307.2L344 184C344 170.7 333.3 160 320 160C306.7 160 296 170.7 296 184z" />
+                    </svg>
+
+                    진료시간
+                    <span class="vacation_txt">
+                        12월 - 17(수), 25(목) 휴진합니다.                    </span>
+                </div>
+
+                <ul class="list">
+                                            <li>
+                            <span class="day">
+                                · 월/화/목/금                            </span>
+                                                            11:00 ~ 20:00                        </li>
+                    
+                                            <li>
+                            <span class="day">· 수                            </span>
+                                                            11:00 ~ 19:00                        </li>
+                    
+                                            <li>
+                            <span class="day">· 토                            </span>
+                                                            10:00 ~ 15:00                        </li>
+                    
+                                            <li>
+                            <span class="day">· 일/공휴일                            </span>
+                                                            휴진
+                                                    </li>
+                                    </ul>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    function initStoreSwiper(panel) {
+        if (!panel) return;
+        const container = panel.querySelector('.swiper-container');
+        const paging = panel.querySelector('.paging');
+        const slides = container?.querySelectorAll('.swiper-slide') || [];
+
+        if (slides.length <= 1) {
+            paging && (paging.style.display = 'none');
+            return;
+        }else {
+            paging && (paging.style.display = '');
+        }
+
+        if (panel._swiper) {
+            panel._swiper.update();
+            panel._swiper.autoplay && panel._swiper.autoplay.start();
+            return;
+        }
+
+        panel._swiper = new Swiper(container, {
+            slidesPerView: 1,
+            loop: true,
+            autoplay: {delay: 5000, disableOnInteraction: false},
+            pagination: {el: paging, clickable: true, type: 'bullets'},
+            observer: true,
+            observeParents: true
+        });
+    }
+
+    function showTab(targetSel) {
+        const panels = document.querySelectorAll('.store_slide');
+        const target = document.querySelector(targetSel);
+        panels.forEach(p => p.classList.toggle('is-active', p === target));
+        requestAnimationFrame(() => initStoreSwiper(target));
+    }
+
+    document.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-target]');
+        if (!btn) return;
+        showTab(btn.dataset.target);
+    });
+
+    initStoreSwiper(document.querySelector('.store_slide.is-active') || document.querySelector('.store_slide'));
+
+
+    //
+    //    const storeSwiper = new Swiper('.store_slide .swiper-container', {
+    //        slidesPerView : 1,
+    //        autoplay:{
+    //            delay: 5000,
+    //            disableOnInteraction: false,
+    //        },
+    //        pagination: {
+    //            el: '.store_slide .paging',
+    //            clickable: true,
+    //            type: 'bullets',
+    //        }
+    //    });
+
+
+    $(document).ready(function () {
+        moveCalendar('', '', '34');
+    });
+
+    function moveCalendar(cYear, cMonth, code) {
+        var selectedDate = $('#selectedDate').val();
+        var pa = 'curYear=' + cYear + '&curMonth=' + cMonth;
+        if (selectedDate != undefined) {
+            pa += '&selectedDate=' + selectedDate;
+        }
+
+        if (code) {
+            pa += '&code=' + code
+        }
+        ajaxProc('calendarArea', '', '/_Prog/calendar/calendarHtml.php', pa, function () {
+            // ajaxProc('scheduleArea', '', '/_Prog/calendar/scheduleHtml.php', pa, '');
+        });
+
+    }
+
+
+    </script>
