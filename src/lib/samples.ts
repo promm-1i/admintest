@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "hospital-f-template",
+    industry: "비만 · 줄기세포 클리닉 홈페이지",
+    title: "비만 · 줄기세포 클리닉 홈페이지 (프리미엄 디자인 F)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 비만 · 줄기세포 클리닉",
+    purpose:
+      "센터와 보관 프로그램 정보를 안내하고 온라인 · 전화 상담 경로를 제공하는 클리닉 홈페이지입니다.",
+    features: [
+      "센터 · 프로그램 · 상담 메뉴",
+      "보관 프로그램 항목별 안내",
+      "의료진과 진료 전 안내",
+      "온라인 · 전화 상담 안내 화면",
+    ],
+    idealFor: "센터와 프로그램 정보를 나누어 소개하고 상담 경로를 안내하려는 클리닉",
+    image: "/thumbs/stemoria.jpg",
+    liveUrl: "/stemoria/",
+    industryKey: "hospital",
+    premiumLabel: "비만 · 줄기세포 클리닉",
+    designCode: "HOSP-1028",
+    premium: true,
+  },
+  {
     slug: "clinic-y-template",
     industry: "피부 의원 홈페이지",
     title: "피부 의원 홈페이지 (프리미엄 디자인 Y)",
