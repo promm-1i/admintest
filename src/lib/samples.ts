@@ -60,6 +60,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-q-template",
+    industry: "망막 · 백내장 안과 홈페이지",
+    title: "망막 · 백내장 안과 홈페이지 (프리미엄 디자인 Q)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 망막 · 백내장 · 근시 · 건성안",
+    purpose:
+      "망막 질환과 백내장·노안, 근시와 건성안 진료를 분야별로 설명하고 예약과 방문 정보로 이어지는 안과 홈페이지입니다.",
+    features: [
+      "질환별 진료 안내와 자가테스트",
+      "의료진 · 장비 · 병원 둘러보기",
+      "공지 검색 · 진료시간 · 오시는 길",
+    ],
+    idealFor: "망막 진료 중심 안과, 백내장 · 노안 수술 안과, 근시 · 건성안 클리닉",
+    image: "/thumbs/siyaretina.jpg",
+    liveUrl: "/siyaretina/",
+    industryKey: "hospital",
+    premiumLabel: "망막 · 백내장 · 근시",
+    designCode: "HOSP-1016",
+    premium: true,
+  },
+  {
     slug: "clinic-v-template",
     industry: "안과 홈페이지",
     title: "안과 홈페이지 (프리미엄 디자인 V)",
