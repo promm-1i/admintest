@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "hospital-e-template",
+    industry: "정형외과 병원 홈페이지",
+    title: "정형외과 병원 홈페이지 (프리미엄 디자인 E)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 정형외과 · 관절 진료 · 입퇴원 안내 · 재활센터",
+    purpose:
+      "관절과 척추 진료, 의료진과 병원 공간을 소개하고 방문 준비와 재활 정보를 함께 안내하는 정형외과 병원 홈페이지입니다.",
+    features: [
+      "진료과목별 질환 · 치료 안내",
+      "의료진 소개 · 진료 일정 · 예약 양식",
+      "층별 병원 둘러보기 · 재활센터 갤러리",
+      "분야별 FAQ 펼침 · 입퇴원 · 증명서 안내",
+    ],
+    idealFor: "관절 진료와 입원, 재활센터를 함께 안내하려는 정형외과 병원",
+    image: "/thumbs/orvella.jpg",
+    liveUrl: "/orvella/",
+    industryKey: "hospital",
+    premiumLabel: "정형외과 병원",
+    designCode: "HOSP-1021",
+    premium: true,
+  },
+  {
     slug: "clinic-t-template",
     industry: "난임 · 여성의원 홈페이지",
     title: "난임 · 여성의원 홈페이지 (프리미엄 디자인 T)",
