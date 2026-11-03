@@ -60,6 +60,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-p-template",
+    industry: "유방 · 갑상선 외과 홈페이지",
+    title: "유방 · 갑상선 외과 홈페이지 (프리미엄 디자인 P)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 유방 · 갑상선 · 검진 · 피부클리닉",
+    purpose:
+      "유방 · 갑상선 진료와 검진, 피부 관리 정보를 나눠 안내하고 온라인 상담과 방문 정보로 이어지는 외과 홈페이지입니다.",
+    features: [
+      "유방 · 갑상선 진료와 검진 안내",
+      "피부클리닉 · 시술 가격 안내",
+      "온라인 상담 · 진료시간 · 오시는 길",
+    ],
+    idealFor: "유방 · 갑상선 외과, 여성 검진 중심 의원, 피부 관리를 함께 하는 외과",
+    image: "/thumbs/lumian.jpg",
+    liveUrl: "/lumian/",
+    industryKey: "hospital",
+    premiumLabel: "유방 · 갑상선 외과",
+    designCode: "HOSP-1015",
+    premium: true,
+  },
+  {
     slug: "clinic-r-template",
     industry: "피부 · 미용 의원 홈페이지",
     title: "피부 · 미용 의원 홈페이지 (프리미엄 디자인 R)",
