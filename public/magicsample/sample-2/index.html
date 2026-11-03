@@ -46,9 +46,9 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-100%)}
 .count{font:500 64px/1 var(--disp);letter-spacing:-.03em}
 .count+p{margin:14px 0 0;max-width:300px;font-size:14px;color:var(--ink)}
 .meta{display:grid;grid-template-columns:repeat(3,1fr);margin-top:auto;font:400 11px/1 var(--mono);letter-spacing:.04em;text-transform:uppercase}
-.meta span{display:flex;justify-content:space-between;padding:0 12px 0 0}
-.meta span:before{content:"["}.meta span:after{content:"]"}
-.meta span{gap:8px}.meta span em{font-style:normal;flex:1;text-align:center}
+.meta>span{display:flex;justify-content:space-between;padding:0 12px 0 0}
+.meta>span:before{content:"["}.meta>span:after{content:"]"}
+.meta>span{gap:8px}.meta>span em{font-style:normal;flex:1;text-align:center}
 .hero h1{margin:26px 0 0;font:600 clamp(48px,11.8vw,170px)/.92 var(--disp);letter-spacing:-.03em;text-transform:uppercase;white-space:nowrap}
 .under{display:flex;justify-content:space-between;align-items:flex-end;margin-top:26px;gap:24px}
 .under p{margin:0;max-width:420px;font:500 11px/1.7 var(--disp);letter-spacing:.06em;text-transform:uppercase}
@@ -71,7 +71,7 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-100%)}
 .ticket{background:#fff;padding:8px 8px 22px;-webkit-mask:radial-gradient(circle 7px at 50% 100%,#0000 98%,#000) 0 0/16px 100% repeat-x;mask:radial-gradient(circle 7px at 50% 100%,#0000 98%,#000) 0 0/16px 100% repeat-x}
 .ticket img{width:100%;aspect-ratio:16/10;object-fit:cover}
 .row h3{margin:0;font:600 clamp(24px,3.2vw,46px)/1.05 var(--disp);letter-spacing:-.02em;text-transform:uppercase}
-.row .ko{margin:10px 0 0;font:500 18px/1.4 var(--disp)}
+.row .kt{margin:10px 0 0;font:500 18px/1.4 var(--disp)}
 .row p{margin:14px 0 0;max-width:420px;color:var(--dim);font-size:14px}
 .row .side{display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;text-align:right}
 .row .n{font:500 clamp(48px,6.2vw,90px)/1 var(--disp);letter-spacing:-.03em}
@@ -79,11 +79,11 @@ a:hover .roll>span,button:hover .roll>span{transform:translateY(-100%)}
 .panel[hidden]{display:none}
 .ap{opacity:0;transition:opacity .6s var(--ez)}
 .ap.n7{transition-duration:.7s}
-.ap.in{opacity:1}
+.ap.vis{opacity:1}
 .rows{border-top:0;position:relative}
 .row{border-bottom:0;position:relative}
 .row:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--line);transform:scale(0);transition:transform .6s var(--ez) .2s}
-.row.in:after{transform:none}
+.row.vis:after{transform:none}
 .py{will-change:transform}
 .marq{position:relative;height:2700px;overflow-x:clip}
 .stick{position:sticky;top:0;height:100vh;overflow:hidden}
@@ -154,6 +154,7 @@ footer .in>*{position:relative}
  .copy{flex-direction:column;gap:10px}
 }
 
+.card small{font-size:11px;color:#b84400}
 .menu a.on .roll>span:first-child{text-decoration:underline;text-underline-offset:6px}
 .mbtn{all:unset;display:none;cursor:pointer;font:500 12px/1 var(--disp);letter-spacing:.1em;text-transform:uppercase;padding:10px 0}
 .mnav{position:fixed;inset:0;z-index:40;background:#000;display:none;flex-direction:column;justify-content:center;padding:80px 24px 40px}
@@ -163,6 +164,7 @@ footer .in>*{position:relative}
 body.mopen .mnav{display:flex}
 .hero.sub{min-height:900px}
 .hero.sub .ph{background:var(--ph) center/cover}
+.hero.sub.dim .ph{filter:grayscale(.35) contrast(1.1) brightness(.3)}
 .hero.sub .in{min-height:790px}
 .hero.sub .count{font:600 86px/1.4 var(--disp);letter-spacing:0;text-transform:uppercase}
 .hero.sub .count+p{max-width:360px}
@@ -207,7 +209,7 @@ body.mopen .mnav{display:flex}
 .cf .tel3{display:grid;grid-template-columns:84px 1fr 1fr;gap:6px}
 .cf .agree{max-height:110px;overflow:auto;border:1px solid #d9d9d9;padding:10px 12px;font:400 12px/1.6 var(--mono);color:#444}
 .cf .agree p{margin:0 0 6px}
-.cf .chk{display:flex;gap:8px;align-items:center;margin:10px 0 0;font:400 13px/1.4 var(--mono)}
+.cf .chk{display:flex;gap:8px;align-items:center;margin:10px 0 0;padding:4px 0;font:400 13px/1.4 var(--mono)}
 .cf .chk input{width:16px;height:16px;margin:0;accent-color:#000}
 .cf button{all:unset;box-sizing:border-box;cursor:pointer;width:100%;height:54px;display:flex;align-items:center;justify-content:center;background:#000;color:#fff;font:500 12px/1 var(--disp);letter-spacing:.08em;text-transform:uppercase}
 .cf button:hover{background:#222}
@@ -219,8 +221,11 @@ body.mopen .mnav{display:flex}
 .next p{position:relative;max-width:420px;margin:18px auto 26px;font:400 14px/1.6 var(--mono);color:var(--dim)}
 .next .btn{position:relative}
 .rows .row p{max-width:none}
+.row .ticket{align-self:start}
+body .ms-bar{left:auto;right:16px}
 .row .full p{margin:12px 0 0;max-width:640px;color:var(--dim);font:400 15px/1.7 var(--mono);letter-spacing:-.3px}
-.items em{display:inline-block;margin:0 0 8px;font:400 10.5px/1 var(--mono);font-style:normal;letter-spacing:.04em;color:#000;background:#fff;padding:5px 6px}
+.items em{display:inline-block;margin:0 0 8px;font:400 11.5px/1 var(--mono);font-style:normal;letter-spacing:.04em;color:#000;background:#fff;padding:5px 6px}
+.items{gap:0;background:none;border:0;border-left:1px solid var(--line);border-top:1px solid var(--line)}.items a{border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
 .items .k{display:block;margin:14px 0 6px;font:600 18px/1.3 var(--disp)}
 @media (max-width:900px){
  .mbtn{display:block}
@@ -241,7 +246,7 @@ body.mopen .mnav{display:flex}
 .ms-bar a{display:inline-flex;align-items:center;gap:6px;padding:11px 14px;border-radius:999px;background:rgba(20,20,24,.86);color:#fff;text-decoration:none;
   border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
 .ms-bar a:hover{background:#000}
-.ms-bar span{padding:11px 12px;border-radius:999px;background:rgba(255,255,255,.9);color:#111}
+.ms-bar>span{padding:11px 12px;border-radius:999px;background:rgba(255,255,255,.9);color:#111}
 .ko{letter-spacing:normal}
 </style></head>
 <body id="top">
@@ -278,11 +283,11 @@ body.mopen .mnav{display:flex}
  </div>
 </div></section>
 <div class="in" style="text-align:left">
- <div class="panel rows" id="p-concert"><a class="row ap" href="/magicsample/sample-2/concert/#c-public"><div class="ticket"><img src="/magicsample/img/c-public.jpg" alt="퍼블릭 마술공연"></div><div><h3>Public</h3><div class="ko"><span class="ko">퍼블릭 마술공연</span></div><p><span class="ko">퍼블릭 마술 공연만 보아도 그 팀의 구성과 완성도를 가늠할 수 있습니다.</span></p></div><div class="side"><span class="n">01/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-kids"><div class="ticket"><img src="/magicsample/img/c-kids.jpg" alt="어린이 공연"></div><div><h3>Kids</h3><div class="ko"><span class="ko">어린이 공연</span></div><p><span class="ko">즐거움과 경험의 균형을 고려한 완성도있는 어린이 마술 공연을 지향합니다.</span></p></div><div class="side"><span class="n">02/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-festival"><div class="ticket"><img src="/magicsample/img/c-festival.jpg" alt="축제 공연"></div><div><h3>Festival</h3><div class="ko"><span class="ko">축제 공연</span></div><p><span class="ko">지역 주민과 방문객 모두가 함께 즐길 수 있는 공연을 제공합니다.</span></p></div><div class="side"><span class="n">03/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-church"><div class="ticket"><img src="/magicsample/img/c-church.jpg" alt="교회 공연"></div><div><h3>Gospel</h3><div class="ko"><span class="ko">교회 공연</span></div><p><span class="ko">마술을 의미와 메시지를 담아낼 수 있는 예술적 매체로 소개합니다.</span></p></div><div class="side"><span class="n">04/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-planned"><div class="ticket"><img src="/magicsample/img/c-planned.jpg" alt="기획 공연"></div><div><h3>Planned</h3><div class="ko"><span class="ko">기획 공연</span></div><p><span class="ko">현실 속에서 가능한 마술을 기반으로, 상상 이상의 경험을 만들어갑니다.</span></p></div><div class="side"><span class="n">05/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-wedding"><div class="ticket"><img src="/magicsample/img/c-wedding.jpg" alt="웨딩 공연"></div><div><h3>Wedding</h3><div class="ko"><span class="ko">웨딩 공연</span></div><p><span class="ko">결혼식의 특별한 순간을 더욱 특별하게 만들어주는 맞춤형 공연입니다.</span></p></div><div class="side"><span class="n">06/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-bubble"><div class="ticket"><img src="/magicsample/img/c-bubble.jpg" alt="The Real 벌룬/버블 매직"></div><div><h3>Bubble</h3><div class="ko">The Real <span class="ko">벌룬/버블 매직</span></div><p><span class="ko">버블과 벌룬을 활용한 시각적 퍼포먼스로 관객에게 즐거움을 선사합니다.</span></p></div><div class="side"><span class="n">07/07</span><span class="mono">[ For Concert ]</span></div></a></div>
- <div class="panel rows" id="p-academy" hidden><a class="row ap" href="/magicsample/sample-2/academy/regular/"><div class="ticket"><img src="/magicsample/img/portrait-bw.jpg" alt="정규 강좌"></div><div><h3>Regular Classes</h3><div class="ko"><span class="ko">정규 강좌</span></div><p>S<span class="ko">클래스 [대회] · 스테이지</span> A, B, C · <span class="ko">스피치 클래스[팔러</span>] A, B, C · <span class="ko">클로즈업</span> A, B, C · <span class="ko">멘탈</span> A, B, C</p></div><div class="side"><span class="n">13</span><span class="mono">[ <span class="ko">과정 13개</span> ]</span></div></a><a class="row ap" href="/magicsample/sample-2/academy/theme/"><div class="ticket"><img src="/magicsample/img/rings-bw.jpg" alt="테마 강좌"></div><div><h3>Theme Classes</h3><div class="ko"><span class="ko">테마 강좌</span></div><p><span class="ko">자격증 · 비즈니스 · 내 나이가 어때서 [실버] · 맘스터치 [주부] · 엄마 아빠와 함께 하는 마술 놀이 · 매직트리즈 · 핸드메이드 일루젼 · 우리 선생님은 마술사 · 가스펠</span></p></div><div class="side"><span class="n">09</span><span class="mono">[ <span class="ko">과정 9개</span> ]</span></div></a><a class="row ap" href="/magicsample/sample-2/academy/special/"><div class="ticket"><img src="/magicsample/img/cards.jpg" alt="특강"></div><div><h3>Special Classes</h3><div class="ko"><span class="ko">특강</span></div><p><span class="ko">프로포즈 · 언텍트 [5, 6, 7세] · 스트리퍼 덱 · 스벵갈리덱 · 단기 특강(방학, 시즌</span>)</p></div><div class="side"><span class="n">05</span><span class="mono">[ <span class="ko">과정 5개</span> ]</span></div></a></div>
- <div class="panel rows" id="p-item" hidden><a class="row ap" href="/magicsample/sample-2/item/stage/"><div class="ticket"><img src="/magicsample/img/i-stage.jpg" alt="스테이지 아이템" style="object-fit:contain;background:#fff"></div><div><h3>Stage</h3><div class="ko"><span class="ko">스테이지 아이템</span></div><p><span class="ko">카드 매니퓰레이션 · 볼 매니퓰레이션 · 파이어 · 케인 · 좀비볼</span></p></div><div class="side"><span class="n">01/04</span><span class="mono">[ Magic Item ]</span></div></a><a class="row ap" href="/magicsample/sample-2/item/closeup/"><div class="ticket"><img src="/magicsample/img/i-closeup.jpg" alt="클로즈업 아이템" style="object-fit:contain;background:#fff"></div><div><h3>Close-up</h3><div class="ko"><span class="ko">클로즈업 아이템</span></div><p><span class="ko">카드 · 동전 · 닌자링 · 컵앤볼 · 스펀지볼</span></p></div><div class="side"><span class="n">02/04</span><span class="mono">[ Magic Item ]</span></div></a><a class="row ap" href="/magicsample/sample-2/item/mental/"><div class="ticket"><img src="/magicsample/img/i-mental.jpg" alt="멘탈 아이템" style="object-fit:contain;background:#fff"></div><div><h3>Mental</h3><div class="ko"><span class="ko">멘탈 아이템</span></div><p><span class="ko">마스터 프리딕션 · 임파서블 아칸 · 틱택토 · 투데이 · 북테스트</span></p></div><div class="side"><span class="n">03/04</span><span class="mono">[ Magic Item ]</span></div></a><a class="row ap" href="/magicsample/sample-2/item/parlour/"><div class="ticket"><img src="/magicsample/img/i-parlour.jpg" alt="팔러 아이템" style="object-fit:contain;background:#fff"></div><div><h3>Parlour</h3><div class="ko"><span class="ko">팔러 아이템</span></div><p><span class="ko">큐브 · 할아버지의 모자 · 스플릿 덱 · 슬러쉬 파우더 · 실크</span></p></div><div class="side"><span class="n">04/04</span><span class="mono">[ Magic Item ]</span></div></a></div>
+ <div class="panel rows" id="p-concert"><a class="row ap" href="/magicsample/sample-2/concert/#c-public"><div class="ticket"><img src="/magicsample/img/c-public.jpg" alt="퍼블릭 마술공연"></div><div><h3>Public</h3><div class="kt"><span class="ko">퍼블릭 마술공연</span></div><p><span class="ko">퍼블릭 마술 공연만 보아도 그 팀의 구성과 완성도를 가늠할 수 있습니다.</span></p></div><div class="side"><span class="n">01/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-kids"><div class="ticket"><img src="/magicsample/img/c-kids.jpg" alt="어린이 공연"></div><div><h3>Kids</h3><div class="kt"><span class="ko">어린이 공연</span></div><p><span class="ko">즐거움과 경험의 균형을 고려한 완성도있는 어린이 마술 공연을 지향합니다.</span></p></div><div class="side"><span class="n">02/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-festival"><div class="ticket"><img src="/magicsample/img/c-festival.jpg" alt="축제 공연"></div><div><h3>Festival</h3><div class="kt"><span class="ko">축제 공연</span></div><p><span class="ko">지역 주민과 방문객 모두가 함께 즐길 수 있는 공연을 제공합니다.</span></p></div><div class="side"><span class="n">03/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-church"><div class="ticket"><img src="/magicsample/img/c-church.jpg" alt="교회 공연"></div><div><h3>Gospel</h3><div class="kt"><span class="ko">교회 공연</span></div><p><span class="ko">마술을 의미와 메시지를 담아낼 수 있는 예술적 매체로 소개합니다.</span></p></div><div class="side"><span class="n">04/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-planned"><div class="ticket"><img src="/magicsample/img/c-planned.jpg" alt="기획 공연"></div><div><h3>Planned</h3><div class="kt"><span class="ko">기획 공연</span></div><p><span class="ko">현실 속에서 가능한 마술을 기반으로, 상상 이상의 경험을 만들어갑니다.</span></p></div><div class="side"><span class="n">05/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-wedding"><div class="ticket"><img src="/magicsample/img/c-wedding.jpg" alt="웨딩 공연"></div><div><h3>Wedding</h3><div class="kt"><span class="ko">웨딩 공연</span></div><p><span class="ko">결혼식의 특별한 순간을 더욱 특별하게 만들어주는 맞춤형 공연입니다.</span></p></div><div class="side"><span class="n">06/07</span><span class="mono">[ For Concert ]</span></div></a><a class="row ap" href="/magicsample/sample-2/concert/#c-bubble"><div class="ticket"><img src="/magicsample/img/c-bubble.jpg" alt="The Real 벌룬/버블 매직"></div><div><h3>Bubble</h3><div class="kt">The Real <span class="ko">벌룬/버블 매직</span></div><p><span class="ko">버블과 벌룬을 활용한 시각적 퍼포먼스로 관객에게 즐거움을 선사합니다.</span></p></div><div class="side"><span class="n">07/07</span><span class="mono">[ For Concert ]</span></div></a></div>
+ <div class="panel rows" id="p-academy" hidden><a class="row ap" href="/magicsample/sample-2/academy/regular/"><div class="ticket"><img src="/magicsample/img/portrait-bw.jpg" alt="정규 강좌"></div><div><h3>Regular Classes</h3><div class="kt"><span class="ko">정규 강좌</span></div><p>S<span class="ko">클래스 [대회] · 스테이지</span> A, B, C · <span class="ko">스피치 클래스[팔러</span>] A, B, C · <span class="ko">클로즈업</span> A, B, C · <span class="ko">멘탈</span> A, B, C</p></div><div class="side"><span class="n">13</span><span class="mono">[ <span class="ko">과정 13개</span> ]</span></div></a><a class="row ap" href="/magicsample/sample-2/academy/theme/"><div class="ticket"><img src="/magicsample/img/rings-bw.jpg" alt="테마 강좌"></div><div><h3>Theme Classes</h3><div class="kt"><span class="ko">테마 강좌</span></div><p><span class="ko">자격증 · 비즈니스 · 내 나이가 어때서 [실버] · 맘스터치 [주부] · 엄마 아빠와 함께 하는 마술 놀이 · 매직트리즈 · 핸드메이드 일루젼 · 우리 선생님은 마술사 · 가스펠</span></p></div><div class="side"><span class="n">09</span><span class="mono">[ <span class="ko">과정 9개</span> ]</span></div></a><a class="row ap" href="/magicsample/sample-2/academy/special/"><div class="ticket"><img src="/magicsample/img/cards.jpg" alt="특강"></div><div><h3>Special Classes</h3><div class="kt"><span class="ko">특강</span></div><p><span class="ko">프로포즈 · 언텍트 [5, 6, 7세] · 스트리퍼 덱 · 스벵갈리덱 · 단기 특강(방학, 시즌</span>)</p></div><div class="side"><span class="n">05</span><span class="mono">[ <span class="ko">과정 5개</span> ]</span></div></a></div>
+ <div class="panel rows" id="p-item" hidden><a class="row ap" href="/magicsample/sample-2/item/stage/"><div class="ticket"><img src="/magicsample/img/i-stage.jpg" alt="스테이지 아이템" style="object-fit:contain;background:#fff"></div><div><h3>Stage</h3><div class="kt"><span class="ko">스테이지 아이템</span></div><p><span class="ko">카드 매니퓰레이션 · 볼 매니퓰레이션 · 파이어 · 케인 · 좀비볼</span></p></div><div class="side"><span class="n">01/04</span><span class="mono">[ Magic Item ]</span></div></a><a class="row ap" href="/magicsample/sample-2/item/closeup/"><div class="ticket"><img src="/magicsample/img/i-closeup.jpg" alt="클로즈업 아이템" style="object-fit:contain;background:#fff"></div><div><h3>Close-up</h3><div class="kt"><span class="ko">클로즈업 아이템</span></div><p><span class="ko">카드 · 동전 · 닌자링 · 컵앤볼 · 스펀지볼</span></p></div><div class="side"><span class="n">02/04</span><span class="mono">[ Magic Item ]</span></div></a><a class="row ap" href="/magicsample/sample-2/item/mental/"><div class="ticket"><img src="/magicsample/img/i-mental.jpg" alt="멘탈 아이템" style="object-fit:contain;background:#fff"></div><div><h3>Mental</h3><div class="kt"><span class="ko">멘탈 아이템</span></div><p><span class="ko">마스터 프리딕션 · 임파서블 아칸 · 틱택토 · 투데이 · 북테스트</span></p></div><div class="side"><span class="n">03/04</span><span class="mono">[ Magic Item ]</span></div></a><a class="row ap" href="/magicsample/sample-2/item/parlour/"><div class="ticket"><img src="/magicsample/img/i-parlour.jpg" alt="팔러 아이템" style="object-fit:contain;background:#fff"></div><div><h3>Parlour</h3><div class="kt"><span class="ko">팔러 아이템</span></div><p><span class="ko">큐브 · 할아버지의 모자 · 스플릿 덱 · 슬러쉬 파우더 · 실크</span></p></div><div class="side"><span class="n">04/04</span><span class="mono">[ Magic Item ]</span></div></a></div>
  <div class="panel rows" id="p-contact" hidden><a class="row ap" href="/magicsample/sample-2/contact/"><div class="ticket"><img src="/magicsample/img/portrait-bw.jpg" alt="최현빈 마술사"></div>
-  <div><h3>Contact Us</h3><div class="ko"><span class="ko">교육 · 공연 · 출강 · 협업</span></div><p>Artis creative Academy<span class="ko">는 교육, 공연, 출강 및 협업에 대한 다양한 문의를 환영합니다. 아래 연락처를 통해 편하게 문의해 주세요.</span></p></div>
+  <div><h3>Contact Us</h3><div class="kt"><span class="ko">교육 · 공연 · 출강 · 협업</span></div><p>Artis creative Academy<span class="ko">는 교육, 공연, 출강 및 협업에 대한 다양한 문의를 환영합니다. 아래 연락처를 통해 편하게 문의해 주세요.</span></p></div>
   <div class="side"><span class="n" style="font-size:clamp(28px,3vw,44px)">010-9050-8642</span><span class="mono">[ <span class="ko">문의하기</span> ]</span></div></a></div>
 </div>
 
@@ -324,8 +329,8 @@ document.querySelectorAll('.tabs button').forEach(function(b){b.addEventListener
 })();
 (function(){
  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
- var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:0});
- [].forEach.call(document.querySelectorAll('.ap'),function(el){if(reduce)el.classList.add('in');else io.observe(el);});
+ var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('vis');io.unobserve(x.target);}});},{threshold:0});
+ [].forEach.call(document.querySelectorAll('.ap'),function(el){if(reduce)el.classList.add('vis');else io.observe(el);});
  var pys=[].slice.call(document.querySelectorAll('.py')).map(function(el){var v=el.dataset.py.split(',').map(Number);return {el:el,a:v[0],b:v[1]};});
  var track=document.querySelector('.track'),marq=document.querySelector('.marq'),cards=[].slice.call(document.querySelectorAll('.card'));
  var tx=0;
