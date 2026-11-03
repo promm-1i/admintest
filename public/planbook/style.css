@@ -103,7 +103,7 @@ body {
   line-height: 1.25;
   letter-spacing: -0.01em;
 }
-.role { margin: 0 0 5.5cqw; font: 400 max(11px, 2.9cqw)/1.4 var(--sans); color: var(--muted); }
+.ask { margin: 0 0 1.6cqw; font-size: max(12px, 3.4cqw); line-height: 1.45; color: var(--muted); }   /* 고객이 준 소개 · 안내 물음 */
 .body {
   margin: 0 0 6cqw;
   font-size: max(13px, 3.65cqw);
@@ -131,12 +131,6 @@ body {
 .cv--kind th { width: 22cqw; font: 400 max(11px, 2.8cqw)/1.5 var(--sans); color: var(--muted); }
 .cv--kind td { text-align: left; color: var(--ink); font-family: var(--serif); font-size: max(12px, 3.25cqw); }
 
-/* 프로필 이력 — 두 칸 */
-.cv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4cqw; margin: 0; border-top: 1px solid var(--rule); }
-.cv-grid div { padding: 1.9cqw 0; border-bottom: 1px solid var(--rule); }
-.cv-grid dt { font-size: max(12px, 3.15cqw); line-height: 1.4; }
-.cv-grid dd { margin: .4cqw 0 0; font: 400 max(10.5px, 2.6cqw)/1.4 var(--sans); color: var(--muted); }
-
 /* 장 제목 */
 .chapter__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 3cqw; margin: 0 0 3.4cqw; font-weight: 400; }
 .chapter__head b { font-weight: 700; font-size: 7.4cqw; line-height: 1.2; }
@@ -155,31 +149,45 @@ body {
 .items { margin: 0; padding: 0; list-style: none; }
 .items li + li { margin-top: .9cqw; }
 
-/* 표지 */
+/* 표지 — 위는 사진, 아래는 소개 · 연락처 */
 .cover { background: var(--back); color: #fff; }
+.cover__in { position: absolute; inset: 0; display: flex; flex-direction: column; }
+.cover__photo { position: relative; flex: 1 1 0; min-height: 40cqw; }
 .cover__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 60%; }
-.cover--front::before {
+.cover__photo::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   background:
-    linear-gradient(to bottom, rgba(16, 22, 32, .62) 0%, rgba(16, 22, 32, .18) 34%, rgba(16, 22, 32, 0) 52%),
-    linear-gradient(to top, rgba(16, 22, 32, .66) 0%, rgba(16, 22, 32, 0) 28%);
+    linear-gradient(to bottom, rgba(16, 22, 32, .62) 0%, rgba(16, 22, 32, .18) 40%, rgba(16, 22, 32, 0) 62%),
+    linear-gradient(to top, var(--back) 0%, rgba(31, 43, 58, 0) 30%);
 }
 .cover__title {
   position: absolute;
   z-index: 2;
-  top: 11cqw; left: 9cqw; right: 9cqw;
+  top: 10cqw; left: 9cqw; right: 9cqw;
   margin: 0;
   font-weight: 700;
-  font-size: 7.6cqw;
+  font-size: 6.6cqw;
   line-height: 1.42;
   letter-spacing: -0.015em;
   text-shadow: 0 1px 14px rgba(0, 0, 0, .25);
 }
-.cover__foot { position: absolute; z-index: 2; left: 9cqw; right: 9cqw; bottom: 8.5cqw; }
-.cover__name { margin: 0; font-weight: 700; font-size: 5.2cqw; }
+.cover__info { flex: none; padding: 1cqw 9cqw 8cqw; }
+.cover__name { margin: 0 0 4.5cqw; font-weight: 700; font-size: 9cqw; line-height: 1.1; letter-spacing: -0.01em; }
+.cover__fields { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4cqw; margin: 0; border-top: 1px solid rgba(255, 255, 255, .24); }
+.cover__fields div { padding: 2cqw 0; border-bottom: 1px solid rgba(255, 255, 255, .24); }
+.cover__fields dt { display: flex; align-items: center; gap: 1.6cqw; font-weight: 700; font-size: max(12px, 3.3cqw); line-height: 1.35; }
+.cover__fields dt::before { content: ""; flex: none; width: 1.5cqw; height: 1.5cqw; background: var(--tint); }
+.cover__fields dd { margin: .5cqw 0 0 3.1cqw; font: 400 max(10.5px, 2.7cqw)/1.4 var(--sans); color: rgba(255, 255, 255, .72); }
+.cover__fields .is-key dd { color: #fff; font-weight: 600; }   /* 고객이 꼽은 차별성 */
+.cover__contact { display: grid; gap: 1.2cqw; margin: 4.5cqw 0 0; font: 400 max(11.5px, 3.1cqw)/1.45 var(--sans); }
+.cover__contact div { display: grid; grid-template-columns: 11cqw 1fr; gap: 2cqw; }
+.cover__contact dt { color: rgba(255, 255, 255, .62); font-size: max(10px, 2.5cqw); line-height: 1.8; }
+.cover__contact dd { margin: 0; }
+.cover__contact a { color: #fff; text-decoration: none; }
+.cover__contact a:hover { text-decoration: underline; text-underline-offset: .2em; }
 
 /* 핵심 역량(차례) */
 .toc { margin: 4cqw 0 0; padding: 0; list-style: none; }
@@ -190,7 +198,7 @@ body {
   grid-template-columns: 15cqw 1fr auto;
   align-items: baseline;
   gap: 3cqw;
-  padding: 3cqw 0;
+  padding: 2.4cqw 0;
   color: inherit;
   text-decoration: none;
 }
@@ -198,9 +206,10 @@ body {
 .toc b { font-weight: 700; font-size: 5.6cqw; line-height: 1.2; display: flex; align-items: center; gap: 1.8cqw; }
 .toc b::before { content: ""; flex: none; width: 1.6cqw; height: 1.6cqw; background: var(--c); }
 .toc span { font-size: max(12px, 3.2cqw); line-height: 1.55; }
+.toc small { display: block; font: 400 max(10.5px, 2.6cqw)/1.45 var(--sans); color: var(--muted); }
 .toc i { font: 400 max(10.5px, 2.6cqw)/1 var(--sans); font-style: normal; color: var(--muted); }
 .toc a:hover span { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .25em; }
-.toc--more { margin-top: 6cqw; }
+.toc--more { margin-top: 4.5cqw; }
 .toc--more a { grid-template-columns: 1fr auto; padding: 2.5cqw 0; }
 .toc--more span { font-size: max(12px, 3.3cqw); }
 
@@ -229,7 +238,7 @@ body {
 .sheet .what p + p { font: 400 max(10px, 2.45cqw)/1.5 var(--sans); color: var(--muted); }
 .sheet .state { text-align: right; font: 400 max(10.5px, 2.6cqw)/1.6 var(--sans); white-space: nowrap; }
 .state--on { color: var(--ink); font-weight: 600 !important; }
-.state--on::before, .state--plan::before {
+.state--on::before {
   content: "";
   display: inline-block;
   width: .55em; height: .55em;
@@ -238,8 +247,6 @@ body {
   vertical-align: .1em;
 }
 .state--on::before { background: var(--c); }
-.state--plan { color: var(--ink); }
-.state--plan::before { box-shadow: inset 0 0 0 1.5px var(--c); }
 .state--done { color: var(--muted); }
 .status-msg { margin: 4cqw 0 0; font-size: max(12px, 3.3cqw); color: var(--muted); }
 
@@ -279,7 +286,9 @@ body {
 .card__lines dd { margin: 0; }
 .card__lines a { color: inherit; text-decoration: none; }
 .card__lines a:hover { text-decoration: underline; text-underline-offset: .2em; }
-.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2cqw; margin: 6cqw 0 0; }
+.back__msg { margin: 0 0 6cqw; font-weight: 700; font-size: 6.4cqw; line-height: 1.4; }
+.back__ask { margin: 6cqw 0 0; font: 400 max(10.5px, 2.7cqw)/1.4 var(--sans); color: rgba(255, 255, 255, .7); }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 2.2cqw; margin: 2.4cqw 0 0; }
 .btn {
   display: block;
   padding: 3.1cqw 2cqw;
@@ -363,8 +372,8 @@ body {
   .bleed--top.bleed--low { height: 42cqw; }
   .sheet td, .sheet tbody th { padding-top: 1.2cqw; }
   .sheet tbody tr.last > * { padding-bottom: 1.4cqw; }
-  .toc a { padding: 2.6cqw 0; }
-  .toc--more { margin-top: 5cqw; }
+  .toc a { padding: 2.3cqw 0; }
+  .toc--more { margin-top: 4cqw; }
   .toc--more a { padding: 1.8cqw 0; }
   .run { margin-bottom: 5cqw; }
 }
