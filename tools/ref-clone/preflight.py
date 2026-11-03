@@ -77,8 +77,8 @@ def check_sources(slug, ref):
     if not os.path.isdir(base):
         warn('레퍼런스 폴더 없음: %s — 이 항목 건너뜀' % base)
         return
-    css = [f for f in glob.glob(base + '/**/*.css', recursive=True) if '.min.' not in f]
-    js = [f for f in glob.glob(base + '/**/*.js', recursive=True) if '.min.' not in f]
+    css = [f for f in glob.glob(base + '/**/*.css', recursive=True) if '.min.' not in f and os.path.isfile(f)]  # three.js 같은 폴더 이름 제외
+    js = [f for f in glob.glob(base + '/**/*.js', recursive=True) if '.min.' not in f and os.path.isfile(f)]  # three.js 같은 폴더 이름 제외
     rwd = [f for f in css if re.search(r'(rwd|responsive|mobile)', os.path.basename(f), re.I)]
     print('       원본 CSS %d개(그중 반응형 %d) · JS %d개' % (len(css), len(rwd), len(js)))
 
