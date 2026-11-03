@@ -60,6 +60,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "dental-k-template",
+    industry: "임플란트 치과 홈페이지",
+    title: "임플란트 치과 홈페이지 (프리미엄 디자인 K)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 중장년 임플란트 · 수면 진료 · 라미네이트 · 교정",
+    purpose:
+      "중장년 임플란트와 수면 진료, 라미네이트 · 성인 교정을 진료별로 안내하고 비용 문의와 상담 예약으로 이어지는 치과 홈페이지입니다.",
+    features: [
+      "중장년 임플란트 · 수면 진료 · 라미네이트 · 성인 교정 안내",
+      "의료진 · 원내 둘러보기 · 지점 안내",
+      "임플란트 비용 문의 · 상담 예약 · 비급여 안내",
+    ],
+    idealFor: "임플란트 중심 치과, 지점이 여럿인 치과, 중장년 환자가 많은 치과",
+    image: "/thumbs/saebomdent.jpg",
+    liveUrl: "/saebomdent/",
+    industryKey: "dental",
+    premiumLabel: "치과 · 임플란트",
+    designCode: "DENP-1005",
+    premium: true,
+  },
+  {
     slug: "clinic-p-template",
     industry: "유방 · 갑상선 외과 홈페이지",
     title: "유방 · 갑상선 외과 홈페이지 (프리미엄 디자인 P)",
