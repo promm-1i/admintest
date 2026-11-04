@@ -1,3 +1,7 @@
+// 진행 상황 시트 — 구글 시트 [파일 > 공유 > 웹에 게시 > CSV] 주소를 넣으면 그걸 읽는다.
+// 비어 있으면 data/status.csv(예시)를 읽는다.
+const STATUS_CSV_URL = '';
+
 const R = 707 / 500;          // 쪽 세로/가로
 const MIN_W = 330;            // 쪽이 이보다 좁으면 한 쪽씩
 const MAX_W = 560;
@@ -74,6 +78,84 @@ function go(n) {
   if (reduce || !near) { flip.turnToPage(n); sync(); } else flip.flip(n);
 }
 
+/* 현재 상태 — CSV 한 줄 = 활동 하나: 분야, 내용, 상태(진행 중 · 진행 완료), 기간, 기관 */
+const FIELDS = [
+  { key: '공연, 축제, 행사', cls: 'c-plan', test: /공연|축제|행사|문화|엔터/ },
+  { key: '농업', cls: 'c-link', test: /농업|치유|체험|관광/ },
+  { key: '언론', cls: 'c-seek', test: /언론|취재|기사/ },
+  { key: '컨설팅, 평가 자문', cls: 'c-grow', test: /컨설팅|브랜딩|코칭|평가|자문/ },
+];
+const ON = /중$/;            // 진행 중
+const SHOW = 2;
+
+function parseCSV(text) {
+  const rows = [];
+  let row = [], cell = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (q) {
+      if (ch === '"' && text[i + 1] === '"') { cell += '"'; i++; }
+      else if (ch === '"') q = false;
+      else cell += ch;
+    } else if (ch === '"') q = true;
+    else if (ch === ',') { row.push(cell); cell = ''; }
+    else if (ch === '\n' || ch === '\r') {
+      if (ch === '\r' && text[i + 1] === '\n') i++;
+      row.push(cell); rows.push(row); row = []; cell = '';
+    } else cell += ch;
+  }
+  if (cell || row.length) { row.push(cell); rows.push(row); }
+  return rows.map(r => r.map(c => c.trim())).filter(r => r.some(Boolean));
+}
+
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function renderStatus(rows) {
+  const head = rows.shift() || [];
+  const col = name => head.findIndex(h => h.replace(/\s/g, '') === name);
+  const at = { field: col('분야'), title: col('내용'), state: col('상태'), when: col('기간'), org: col('기관') };
+  const items = rows.map(r => ({
+    field: r[at.field] || '', title: r[at.title] || '', state: r[at.state] || '',
+    when: at.when < 0 ? '' : r[at.when] || '', org: at.org < 0 ? '' : r[at.org] || '',
+  })).filter(x => x.title);
+
+  const rank = s => ON.test(s) ? 0 : 1;
+  const groups = FIELDS.map(f => {
+    const mine = items.filter(x => f.test.test(x.field))
+      .map((x, n) => ({ ...x, n })).sort((a, b) => rank(a.state) - rank(b.state) || a.n - b.n);
+    if (!mine.length) return '';
+    const shown = mine.slice(0, SHOW);
+    const more = mine.length > SHOW ? `<span>외 ${mine.length - SHOW}건</span>` : '';
+    const rows = shown.map((x, k) => {
+      const kind = ['on', 'done'][rank(x.state)];
+      const meta = [x.org, x.when].filter(Boolean).map(esc).join(', ');
+      const cls = [k === 0 && 'first', k === shown.length - 1 && 'last'].filter(Boolean).join(' ');
+      const field = k === 0 ? `<th scope="rowgroup" rowspan="${shown.length}"><i class="dot"></i>${f.key.replace(/, /g, ',<br>')}${more}</th>` : '';
+      return `<tr class="${cls}">${field}<td class="what"><p>${esc(x.title)}</p>${meta ? `<p>${meta}</p>` : ''}</td><td class="state state--${kind}">${esc(x.state)}</td></tr>`;
+    }).join('');
+    return `<tbody class="${f.cls}">${rows}</tbody>`;
+  }).join('');
+  document.getElementById('status').innerHTML = groups
+    ? `<table class="sheet"><colgroup><col class="f"><col><col class="s"></colgroup><thead><tr><th scope="col">분야</th><th scope="col">내용</th><th scope="col">상태</th></tr></thead>${groups}</table>`
+    : '<p class="status-msg">지금 올라온 활동이 없습니다.</p>';
+}
+
+async function loadStatus() {
+  const url = STATUS_CSV_URL || 'data/status.csv';
+  const ctl = new AbortController();
+  const timer = setTimeout(() => ctl.abort(), 5000);
+  try {
+    const res = await fetch(url, { signal: ctl.signal, cache: 'no-store' });
+    if (!res.ok) throw new Error(res.status);
+    renderStatus(parseCSV(await res.text()));
+  } catch (e) {
+    document.getElementById('status').innerHTML =
+      '<p class="status-msg">현재 상태를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</p>';
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /* 명함 — 연락처 저장 · 주소 복사 */
 function saveVCard() {
   const card = document.querySelector('.card');
@@ -115,10 +197,11 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') flip.flipPrev();
 });
 
-/* 시작 */
-(function start() {
+/* 시작 — 현재 상태를 먼저 채우고 책을 만든다(한 쪽 보기는 쪽을 복제해서 넘기기 때문) */
+(async function start() {
   layout();
   window.addEventListener('resize', layout);
+  await loadStatus();
 
   const m = location.hash.match(/^#p(\d+)$/);
   flip = new St.PageFlip(book, {
