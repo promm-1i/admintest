@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "corporate-v-template",
+    industry: "주방가전 · 빌트인 가전 기업 홈페이지",
+    title: "주방가전 기업 홈페이지 (프리미엄 디자인 Q)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 주방가전 · 후드 · 쿡탑 · 욕실 · 환기",
+    purpose:
+      "후드와 쿡탑, 싱크볼 · 수전 같은 주방 제품을 종류별 목록과 제품 상세로 보여 주고, 회사 소개 · 연혁 · 투자 정보 · 자주 묻는 질문 · 사용설명서 · A/S 신청&조회 · 뉴스까지 담은 주방가전 기업 홈페이지입니다.",
+    features: [
+      "글자 사이 사진 칸이 화면 가득 커지는 첫 장면과 주방 영상 슬라이드",
+      "상세필터 · 종류 탭 · 검색칸으로 좁혀 보는 제품 목록과 제품 상세",
+      "자주 묻는 질문 · 유지관리 가이드 · 사용설명서 · A/S 신청&조회 · 구매처",
+      "회사 소개 · 연혁 · CI · 투자 정보 · 윤리경영 · 뉴스 · 홍보영상 · 공지",
+    ],
+    idealFor: "빌트인 주방가전 제조사, 후드 · 쿡탑 · 수전 브랜드, 욕실 · 환기 제품 기업, 대리점을 둔 생활가전 기업",
+    image: "/thumbs/luminoa.jpg",
+    liveUrl: "/luminoa/",
+    industryKey: "corporate",
+    premiumLabel: "주방가전",
+    designCode: "CORP-1017",
+    premium: true,
+  },
+  {
     slug: "clinic-o-template",
     industry: "정형외과 홈페이지",
     title: "정형외과 홈페이지 (프리미엄 디자인 O)",
