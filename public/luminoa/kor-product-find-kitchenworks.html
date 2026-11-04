@@ -2109,13 +2109,13 @@
 <div class="hatp">
 <ul class="happ-lk-bxx">
 <li>
-<a aria-label="이용약관" class="happ-lk" href="#"> 이용약관 </a>
+<a aria-label="이용약관" class="happ-lk" href="kor-pop-term-popup.html"> 이용약관 </a>
 </li>
 <li>
-<a aria-label="개인정보처리방침" class="happ-lk" href="#"> 개인정보처리방침 </a>
+<a aria-label="개인정보처리방침" class="happ-lk" href="kor-pop-privacy-popup.html"> 개인정보처리방침 </a>
 </li>
 <li>
-<a aria-label="이메일 무단 수집 거부" class="happ-lk" href="#"> 이메일 무단 수집 거부 </a>
+<a aria-label="이메일 무단 수집 거부" class="happ-lk" href="kor-pop-email-popup.html"> 이메일 무단 수집 거부 </a>
 </li>
 </ul>
 <div class="hafmlx-bt">
@@ -2277,6 +2277,10 @@ $(document).on('click', '[data-act=pop]', function (e) {
     callbacks: { close: function () { $('body').removeClass('habdyx-fx'); } } });
 });
 $(document).on('click', '[data-act=mclose]', function () { $.magnificPopup.close(); });
+if ($.fn.magnificPopup) $('.happ-lk').magnificPopup({ type: 'ajax', closeOnBgClick: false, mainClass: 'mfp-fade',
+  callbacks: { parseAjax: function (r) { r.data = $('<div>').append($.parseHTML(r.data)).find('.happ').first(); },
+    open: function () { $('body').addClass('habdyx-fx'); }, close: function () { $('body').removeClass('habdyx-fx'); } } });
+$(document).on('click', '.mfp-content .mfp-close', function () { $.magnificPopup.close(); });
 $('.haqnx .haqnx-bdyx').hide();
 $(document).on('click', '.haqnx-hd', function (e) {
   e.preventDefault();
