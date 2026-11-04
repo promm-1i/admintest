@@ -60,6 +60,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-o-template",
+    industry: "정형외과 홈페이지",
+    title: "정형외과 홈페이지 (프리미엄 디자인 O)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 정형외과 · 어깨 · 척추 · 재활",
+    purpose:
+      "어깨 · 팔꿈치, 척추 · 관절 통증을 클리닉마다 나눠 안내하고 예약 · 상담과 방문 정보로 이어지는 정형외과 홈페이지입니다.",
+    features: [
+      "어깨 · 척추 · 관절 클리닉별 질환 안내",
+      "치료 과정 · 교정 · 재활 · 영양수액 안내",
+      "예약 · 상담 · 진료시간 · 오시는 길",
+    ],
+    idealFor: "어깨 · 척추 중심 정형외과, 통증 · 재활 의원, 도수치료를 함께 하는 의원",
+    image: "/thumbs/neulbomgyeol.jpg",
+    liveUrl: "/neulbomgyeol/",
+    industryKey: "hospital",
+    premiumLabel: "정형외과",
+    designCode: "HOSP-1014",
+    premium: true,
+  },
+  {
     slug: "hospital-c-template",
     industry: "암 요양 · 한방병원 홈페이지",
     title: "암 요양 · 한방병원 홈페이지 (프리미엄 디자인 C)",
