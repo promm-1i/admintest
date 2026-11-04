@@ -87,6 +87,9 @@ def check_sources(slug, ref):
         os.path.exists(mine + '/assets/site.css') else ''
     if slug in CLIENT_SITES:      # 고객 사이트는 쪽 종류별 CSS 묶음(assets/*.css)으로 나뉘어 있다
         mycss = ''.join(io.open(f, encoding='utf-8').read() for f in glob.glob(mine + '/assets/*.css'))
+    elif mine and not mycss:      # site.css 없이 원본 폴더 꼴(assets/theme/…/css/*.css)로 둔 클론 — 11-04 G27 라온피부
+        mycss = ''.join(io.open(f, encoding='utf-8', errors='replace').read()
+                        for f in glob.glob(mine + '/assets/**/*.css', recursive=True) if '.min.' not in f)
     mypages = ''.join(io.open(f, encoding='utf-8').read() for f in glob.glob(mine + '/*.html')) \
         if mine else ''
     # 스크립트를 쪽 밖 파일로 뺀 클론(엘름우드 assets/js/elmwood.js)도 센다 — 쪽 안 인라인만 세면 장면 함수 검사가 오탐한다

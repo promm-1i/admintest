@@ -60,6 +60,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-s-template",
+    industry: "피부과 홈페이지",
+    title: "피부과 홈페이지 (프리미엄 디자인 S)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 특수 질환 · 항노화 · 흉터 · 여드름 · 홍조",
+    purpose:
+      "특수 질환과 항노화, 흉터, 여드름, 색소, 홍조 · 혈관 진료를 질환별로 나눠 설명하고 시술 장비와 의료진, 진료시간을 함께 보여 주는 피부과 홈페이지입니다.",
+    features: [
+      "특수 질환 · 항노화 · 흉터 · 여드름 · 색소 · 홍조 진료 안내",
+      "의료진 약력 · 논문 · 시술 장비 소개",
+      "공지 · 이벤트 · 유튜브 게시판 · 진료시간 · 오시는 길",
+    ],
+    idealFor: "피부 질환 진료와 미용 시술을 함께 하는 피부과, 예약제로 운영하는 1인 원장 피부과",
+    image: "/thumbs/raonderm.jpg",
+    liveUrl: "/raonderm/",
+    industryKey: "hospital",
+    premiumLabel: "피부과 · 피부 질환",
+    designCode: "HOSP-1018",
+    premium: true,
+  },
+  {
     slug: "dental-k-template",
     industry: "임플란트 치과 홈페이지",
     title: "임플란트 치과 홈페이지 (프리미엄 디자인 K)",
