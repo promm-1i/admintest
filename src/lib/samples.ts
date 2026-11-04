@@ -60,6 +60,27 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "hospital-c-template",
+    industry: "암 요양 · 한방병원 홈페이지",
+    title: "암 요양 · 한방병원 홈페이지 (프리미엄 디자인 C)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 암 클리닉 · 고압산소 · 한방 협진 · 환자 식단",
+    purpose:
+      "암 치료 중 입원과 회복기 생활을 돕는 한방병원의 암 클리닉, 의료진, 환자 식단, 병원 시설을 나눠 보여 주고 상담 신청으로 이어지는 홈페이지입니다.",
+    features: [
+      "싸이모신 · 골전이 · CTC 검사 · 고압산소 · 고주파온열 · 미슬토 클리닉과 난치성 질환 안내",
+      "대표원장 · 의료진 소개와 진료 철학 · 차별점",
+      "환자 식단 · 병원 시설 · 건강 칼럼 · 환자 후기 · 상담 예약",
+    ],
+    idealFor: "암 환자 입원과 회복기 진료를 하는 한방병원, 요양병원, 의학 · 한의학 협진 병원",
+    image: "/thumbs/haeumsaem.jpg",
+    liveUrl: "/haeumsaem/",
+    industryKey: "hospital",
+    premiumLabel: "암 요양 · 한방병원",
+    designCode: "HOSP-1019",
+    premium: true,
+  },
+  {
     slug: "clinic-s-template",
     industry: "피부과 홈페이지",
     title: "피부과 홈페이지 (프리미엄 디자인 S)",
