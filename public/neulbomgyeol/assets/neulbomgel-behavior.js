@@ -427,3 +427,37 @@
     if (t && t.tagName === 'SELECT' && t.closest && t.closest('.doo-slx-wr')) go(t.value);
   });
 })();
+
+// 자가테스트 — 1단계를 고르면 2단계가 열리고, 고른 항목에 맞는 그림으로 바뀐다. 결과 확인하기는 두 답으로 결과를 알림창에 띄운다
+(function () {
+  var sec = document.querySelector('.doo-tstx-sec');
+  if (!sec) return;
+  function pick(name) {
+    var rs = sec.querySelectorAll('input[name="' + name + '"]');
+    for (var i = 0; i < rs.length; i++) if (rs[i].checked) return { i: i, t: rs[i].parentNode.querySelector('strong').textContent };
+    return null;
+  }
+  sec.addEventListener('change', function (e) {
+    var t = e.target;
+    if (!t.classList || !t.classList.contains('doo-tstx-rdx')) return;
+    var pics = t.closest('.doo-it').querySelectorAll('.doo-pic-sec > div'), p = pick(t.name);
+    // 넓은 화면은 첫 칸이 사진(communitys-0N.jpg)이고 각도 그림이 한 칸 뒤에 있다
+    var n = Math.min(p.i + (/communitys/.test(getComputedStyle(pics[0]).backgroundImage) ? 1 : 0), pics.length - 1);
+    for (var i = 0; i < pics.length; i++) pics[i].classList.toggle('active', i === n);
+    if (t.name === 'ra1') document.getElementById('doo-i-st02').classList.add('active');
+  });
+  var btn = document.querySelector('.doo-cmmx-btnx .doo-bt-tp1');
+  if (!btn) return;
+  btn.addEventListener('click', function () {
+    var a = pick('ra1'), b = pick('ra2');
+    if (!a || !b) { IE.alert(a ? '2단계 항목을 골라 주세요.' : '1단계 항목부터 골라 주세요.'); return; }
+    var lv = Math.max(Math.min(a.i, 3), b.i);
+    var msg = [
+      '앞으로 올리기와 뒤로 보내기 모두 정상 범위에 가깝습니다.<br>통증이 없다면 지금처럼 스트레칭을 이어 가세요.',
+      '어깨 움직임이 조금 줄어 있습니다.<br>같은 동작에서 걸리거나 아픈 느낌이 이어지면 진료로 원인을 확인해 보세요.',
+      '어깨 움직임이 꽤 줄어 있습니다.<br>오십견, 회전근개 손상 같은 원인이 있을 수 있어 진료를 권합니다.',
+      '팔을 들고 뒤로 보내기가 많이 어려운 상태입니다.<br>통증이 심해지기 전에 진료를 받아 보세요.'
+    ][lv];
+    IE.alert('<strong>앞으로 ' + a.t + ' · 뒤로 ' + b.t + '</strong><br><br>' + msg + '<br><br><small>이 결과는 참고용이며 진단을 대신하지 않습니다.</small>');
+  });
+})();
