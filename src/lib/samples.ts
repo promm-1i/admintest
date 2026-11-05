@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-n-template",
+    industry: "비뇨의학과 홈페이지",
+    title: "비뇨의학과 홈페이지 (프리미엄 디자인 M)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 비뇨의학과 · 전립선 · 요로결석 · 배뇨장애 · 여성비뇨",
+    purpose:
+      "전립선, 요로결석, 배뇨장애와 남녀 비뇨기질환을 분야별로 자세히 안내하고 의료진 · 진료 사례 · 검사와 치료 과정 · 지점 안내 · 예약과 상담까지 한 사이트에서 확인할 수 있도록 구성한 비뇨의학과 홈페이지입니다.",
+    features: [
+      "세 장 알림 팝업 · 오늘 하루 보지 않기 · 전체 메뉴와 모바일 메뉴",
+      "전립선 · 요로결석 · 성병 · 배뇨장애 · 남성 · 여성 클리닉 상세 안내",
+      "관련 안내로 이어지는 AI 증상 검색 · 자가진단 · 비급여 안내",
+      "의료진 · 진료 사례 · 건강 영상 · 공지 · 예약 · 상담 · 지점별 오시는 길",
+    ],
+    idealFor: "세부 진료 분야가 많은 비뇨의학과, 검사와 치료 과정을 충분히 설명하려는 의원, 여러 진료실이나 지점을 함께 안내하는 의료기관",
+    image: "/thumbs/clinic-n.jpg",
+    liveUrl: "/onrium/",
+    industryKey: "hospital",
+    premiumLabel: "비뇨의학과",
+    designCode: "HOSP-1013",
+    premium: true,
+  },
+  {
     slug: "clinic-w-template",
     industry: "한의원 홈페이지",
     title: "한의원 홈페이지 (프리미엄 디자인 W)",
