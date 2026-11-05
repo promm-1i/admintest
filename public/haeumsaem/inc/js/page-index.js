@@ -382,7 +382,9 @@ var players=[];
                     next = next % total
                 }
                 next = ('0' + (next)).slice(-2);
-                document.querySelector('.visual_sect .second').innerText = next;
+                // 슬라이드를 켜는 중(쪽 번호 칸이 생기기 전)에도 불려 null 오류로 자동 넘김 · 쪽 번호까지 멈췄다
+                var sec = document.querySelector('.visual_sect .second');
+                if (sec) sec.innerText = next;
             }
         }
     });
