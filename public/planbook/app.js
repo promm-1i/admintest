@@ -78,7 +78,7 @@ function go(n) {
   if (reduce || !near) { flip.turnToPage(n); sync(); } else flip.flip(n);
 }
 
-/* 현재 상태 — CSV 한 줄 = 활동 하나: 분야, 내용, 상태(진행 중 · 진행 완료), 기간, 기관 */
+/* 업무 상태 — CSV 한 줄 = 활동 하나: 분야, 내용, 상태(진행 중 · 진행 완료), 기간, 기관. 분야는 색으로만 보이고 색 설명은 표 위에 */
 const FIELDS = [
   { key: '공연, 축제, 행사', cls: 'c-plan', test: /공연|축제|행사|문화|엔터/ },
   { key: '농업', cls: 'c-link', test: /농업|치유|체험|관광/ },
@@ -125,18 +125,18 @@ function renderStatus(rows) {
       .map((x, n) => ({ ...x, n })).sort((a, b) => rank(a.state) - rank(b.state) || a.n - b.n);
     if (!mine.length) return '';
     const shown = mine.slice(0, SHOW);
-    const more = mine.length > SHOW ? `<span>외 ${mine.length - SHOW}건</span>` : '';
+    const more = mine.length > SHOW ? ` <span class="more">외 ${mine.length - SHOW}건</span>` : '';
     const rows = shown.map((x, k) => {
       const kind = ['on', 'done'][rank(x.state)];
       const meta = [x.org, x.when].filter(Boolean).map(esc).join(', ');
-      const cls = [k === 0 && 'first', k === shown.length - 1 && 'last'].filter(Boolean).join(' ');
-      const field = k === 0 ? `<th scope="rowgroup" rowspan="${shown.length}"><i class="dot"></i>${f.key.replace(/, /g, ',<br>')}${more}</th>` : '';
-      return `<tr class="${cls}">${field}<td class="what"><p>${esc(x.title)}</p>${meta ? `<p>${meta}</p>` : ''}</td><td class="state state--${kind}">${esc(x.state)}</td></tr>`;
+      const tail = k === shown.length - 1 ? more : '';
+      return `<tr><th scope="row" class="mark"><span class="sr-only">${f.key}</span></th><td class="what"><p>${esc(x.title)}${tail}</p>${meta ? `<p>${meta}</p>` : ''}</td><td class="state state--${kind}">${esc(x.state)}</td></tr>`;
     }).join('');
     return `<tbody class="${f.cls}">${rows}</tbody>`;
   }).join('');
+  const legend = FIELDS.map(f => `<li class="${f.cls}">${f.key}</li>`).join('');
   document.getElementById('status').innerHTML = groups
-    ? `<table class="sheet"><colgroup><col class="f"><col><col class="s"></colgroup><thead><tr><th scope="col">분야</th><th scope="col">내용</th><th scope="col">상태</th></tr></thead>${groups}</table>`
+    ? `<ul class="legend" aria-label="색 설명">${legend}</ul><table class="sheet"><colgroup><col class="m"><col><col class="s"></colgroup><thead><tr><th scope="col"><span class="sr-only">분야</span></th><th scope="col">내용</th><th scope="col">상태</th></tr></thead>${groups}</table>`
     : '<p class="status-msg">지금 올라온 활동이 없습니다.</p>';
 }
 
@@ -150,7 +150,7 @@ async function loadStatus() {
     renderStatus(parseCSV(await res.text()));
   } catch (e) {
     document.getElementById('status').innerHTML =
-      '<p class="status-msg">현재 상태를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</p>';
+      '<p class="status-msg">업무 상태를 불러오지 못했습니다. 잠시 뒤 다시 열어 주세요.</p>';
   } finally {
     clearTimeout(timer);
   }
