@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-w-template",
+    industry: "한의원 홈페이지",
+    title: "한의원 홈페이지 (프리미엄 디자인 W)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 한의원 · 리프팅 · 피부 · 8체질 · 체중 관리 · 여러 지점",
+    purpose:
+      "리프팅, 피부, 8체질, 체중과 체형 관리 진료를 항목별로 안내하고 지점 소개 · 지점별 진료 비용 · 예약 안내 · 소식까지 한 사이트에서 확인할 수 있도록 구성한 한의원 홈페이지입니다.",
+    features: [
+      "영상 첫 화면 · 진료 분야 사진 카드 · 대표 진료 소개",
+      "리프팅 · 피부 · 체중 · 체질 · 체형 교정 진료 상세",
+      "지점 소개와 지점별 진료 비용 · 지점 버튼으로 바꿔 보기",
+      "메신저 상담 · 예약 문의 · 진료 비용 빠른 메뉴와 모바일 하단 메뉴",
+    ],
+    idealFor: "리프팅과 피부 진료를 함께 하는 한의원, 체질 상담과 체중 관리를 운영하는 한의원, 여러 지점을 하나의 사이트로 안내하려는 의료기관",
+    image: "/thumbs/onur.jpg",
+    liveUrl: "/onur/",
+    industryKey: "hospital",
+    premiumLabel: "한의원",
+    designCode: "HOSP-1025",
+    premium: true,
+  },
+  {
     slug: "clinic-z-template",
     industry: "시력교정 · 안과 병원 홈페이지",
     title: "안과 병원 홈페이지 (프리미엄 디자인 Z)",
