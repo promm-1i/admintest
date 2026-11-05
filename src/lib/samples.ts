@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "clinic-z-template",
+    industry: "시력교정 · 안과 병원 홈페이지",
+    title: "안과 병원 홈페이지 (프리미엄 디자인 Z)",
+    type: ["premium-template", "small-business"],
+    tag: "프리미엄 디자인 · 안과 · 시력교정 · 노안 · 백내장",
+    purpose:
+      "시력교정 수술과 노안 · 백내장, 안질환 진료와 안검진 정보를 메뉴별로 안내하고 온라인 진료 예약과 상담 문의를 받는 안과 홈페이지입니다.",
+    features: [
+      "수술센터 · 진료센터 · 안검진센터로 나눈 진료 안내",
+      "수술 종류별 후기 · 이벤트 · 병원소식 · 언론보도 게시판",
+      "예약 시간과 상담 분야를 고르는 온라인 진료 예약",
+      "화면 옆 빠른 메뉴와 휴대폰 아래 간편예약 · 상담 버튼",
+    ],
+    idealFor: "수술과 진료, 검진 정보를 나누어 안내하고 온라인 예약을 받으려는 안과",
+    image: "/thumbs/clearview.jpg",
+    liveUrl: "/clearview/",
+    industryKey: "hospital",
+    premiumLabel: "안과 · 시력교정",
+    designCode: "HOSP-1029",
+    premium: true,
+  },
+  {
     slug: "corporate-v-template",
     industry: "주방가전 · 빌트인 가전 기업 홈페이지",
     title: "주방가전 기업 홈페이지 (프리미엄 디자인 Q)",

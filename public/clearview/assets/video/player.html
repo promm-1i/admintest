@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>영상</title>
+<style>html,body{margin:0;height:100%;background:#d9dde3;overflow:hidden}video{width:100%;height:100%;object-fit:cover;display:block}</style></head>
+<body><video id="v" autoplay muted loop playsinline preload="auto"></video>
+<script>
+var n=(new URLSearchParams(location.search).get('v')||'').replace(/[^a-z0-9-]/g,''),v=document.getElementById('v');
+v.poster=n+'.jpg';['webm','mp4'].forEach(function(e){var s=document.createElement('source');s.src=n+'.'+e;s.type='video/'+e;v.appendChild(s)});
+v.load();var p=v.play();if(p&&p.catch)p.catch(function(){});
+</script></body></html>
