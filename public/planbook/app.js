@@ -119,6 +119,13 @@ function renderStatus(rows) {
     when: at.when < 0 ? '' : r[at.when] || '', org: at.org < 0 ? '' : r[at.org] || '',
   })).filter(x => x.title);
 
+  // 표지 숫자 — 이 표에 올라온 활동을 센다(진행 중이 아니면 운영 실적)
+  const counted = items.filter(x => FIELDS.some(f => f.test.test(x.field)));
+  const on = counted.filter(x => ON.test(x.state)).length;
+  document.getElementById('n-done').textContent = counted.length - on;
+  document.getElementById('n-on').textContent = on;
+  document.getElementById('stats').hidden = !counted.length;
+
   const rank = s => ON.test(s) ? 0 : 1;
   const groups = FIELDS.map(f => {
     const mine = items.filter(x => f.test.test(x.field))
