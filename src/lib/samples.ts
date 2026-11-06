@@ -510,7 +510,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "furniture-a-template",
     industry: "소파 · 가구 브랜드 홈페이지",
-    title: "소파 · 가구 브랜드 홈페이지",
+    title: "가온소파 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 소파 · 리빙 가구 · 소재 안내 · 제작 공정",
     purpose:
@@ -523,7 +523,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "소파 브랜드, 가구 제조사, 리빙 가구 쇼룸처럼 소재와 만드는 기준을 함께 보여 주려는 가구 회사",
     image: "/thumbs/furniture-a.jpg",
-    liveUrl: "/lavernoa/",
+    liveUrl: "/gaonsofa/",
     industryKey: "furniture",
     premiumLabel: "소파 · 가구 브랜드",
     designCode: "FURP-1001",
@@ -532,7 +532,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "garden-a-template",
     industry: "정원 · 수목원 홈페이지",
-    title: "정원 · 수목원 홈페이지",
+    title: "가평 솔향정원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 정원 · 수목원 · 관람 안내 · 예약",
     purpose:
@@ -545,7 +545,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "정원, 수목원, 식물원, 숲 체험장처럼 입장권과 계절 프로그램을 함께 안내하는 곳",
     image: "/thumbs/garden-a.jpg",
-    liveUrl: "/arveongarden/",
+    liveUrl: "/solhyang/",
     industryKey: "garden",
     premiumLabel: "정원 · 수목원",
     designCode: "GARP-1001",
@@ -554,7 +554,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "inspection-a-template",
     industry: "입주 사전점검 · 건축진단 홈페이지",
-    title: "입주 사전점검 · 건축진단 홈페이지",
+    title: "집지킴 하자진단 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 입주 사전점검 · 건축물 점검 · 하자 진단 · 점검 사례 · 상담",
     purpose:
@@ -567,7 +567,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "입주 사전점검 업체, 건축물 진단과 현장 조사 회사, 하자 점검과 유지관리 서비스를 함께 소개하려는 전문 서비스 기업",
     image: "/thumbs/inspection-a.jpg",
-    liveUrl: "/onhaim/",
+    liveUrl: "/jipjikim/",
     industryKey: "inspection",
     premiumLabel: "입주 사전점검 · 건축진단",
     designCode: "INSP-1001",
@@ -1358,7 +1358,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "golf-f-template",
     industry: "골프장 · 골프 리조트 홈페이지",
-    title: "골프장 · 골프 리조트 홈페이지",
+    title: "그린힐 골프 & 리조트 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 골프장 · 해외 골프 리조트",
     purpose:
@@ -1371,7 +1371,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "해외 골프 리조트, 회원권을 파는 골프장, 골프 투어 여행사, 골프텔 · 리조트 운영사",
     image: "/thumbs/golf-f.jpg",
-    liveUrl: "/windvalley/",
+    liveUrl: "/greenhill/",
     industryKey: "golf",
     premiumLabel: "골프장 · 리조트업",
     designCode: "GOLP-1001",
@@ -2663,7 +2663,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "estate-g-template",
     industry: "부동산 중개법인 · 회원제 매물 홈페이지",
-    title: "회원제 부동산 중개법인 홈페이지",
+    title: "두레부동산중개법인 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 부동산 · 회원제 · 매물",
     purpose:
@@ -2671,7 +2671,7 @@ export const SAMPLES: Sample[] = [
     features: ["사진 3장 첫 화면 · 4칸 조건 검색", "금액 비공개 매물 카드 (회원 공개 표시)", "회원 안내 3단계 · 지역 담당 중개사 소개", "의뢰 3종 · 펼치는 FAQ · 워드마크 맨 아래"],
     idealFor: "부동산 중개법인, 고급 주택 · 빌딩 전문 중개사무소, 비공개 매물을 다루는 자산관리 회사, 분양 대행사",
     image: "/thumbs/estate-g.jpg",
-    liveUrl: "/onchae/",
+    liveUrl: "/dure/",
     industryKey: "estate",
     premiumLabel: "부동산 중개업",
     designCode: "ESTP-1003",
