@@ -18,7 +18,13 @@ ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
 
 
 def git(*a, data=None):
-    return subprocess.run(['git', '-C', ROOT] + list(a), input=data, capture_output=True, check=True).stdout
+    # 다른 세션 · 일꾼의 git 이 index.lock 을 잡고 있으면 128 로 실패한다 — 잠깐 쉬고 다시
+    for n in range(20):
+        r = subprocess.run(['git', '-C', ROOT] + list(a), input=data, capture_output=True)
+        if r.returncode == 0 or b'index.lock' not in r.stderr or n == 19:
+            r.check_returncode()
+            return r.stdout
+        time.sleep(1)
 
 
 def t_samples(s, a, pairs):

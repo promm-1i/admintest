@@ -730,7 +730,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "artist-b-template",
     industry: "갤러리 · 전시 공간 홈페이지",
-    title: "갤러리 · 전시 공간 홈페이지",
+    title: "갤러리 소소 홈페이지 포트폴리오",
     type: ["premium-template", "portfolio", "small-business"],
     tag: "홈페이지 포트폴리오 · 갤러리 · 전시 · 공간 대관",
     purpose:
@@ -743,7 +743,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "갤러리, 미술관, 복합 전시 공간, 전시 대관을 함께 운영하는 문화 공간",
     image: "/thumbs/artist-b.jpg",
-    liveUrl: "/novarque/",
+    liveUrl: "/gallerysoso/",
     industryKey: "artist",
     premiumLabel: "갤러리 · 전시공간",
     designCode: "ARTP-1002",
@@ -945,7 +945,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "auto-f-template",
     industry: "자동차 썬팅 필름 브랜드 홈페이지",
-    title: "자동차 썬팅 필름 브랜드 홈페이지",
+    title: "선쉴드 윈도우필름 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 썬팅 필름 · 제품 상세 · 시공점 찾기 · 시공 예약",
     purpose:
@@ -958,7 +958,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "자동차 썬팅 · PPF 필름 브랜드, 전국 시공점을 둔 자동차 용품 제조사, 제품 등급과 시공 사례를 함께 보여 줘야 하는 브랜드",
     image: "/thumbs/auto-f.jpg",
-    liveUrl: "/haloveil/",
+    liveUrl: "/sunshield/",
     industryKey: "auto",
     premiumLabel: "자동차 썬팅 필름",
     designCode: "AUTP-1001",
@@ -1821,7 +1821,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "agency-g-template",
     industry: "디지털 에이전시 홈페이지",
-    title: "디지털 에이전시 홈페이지",
+    title: "웹스튜디오 다락 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 에이전시 · 디지털 프로덕트 · UI/UX",
     purpose:
@@ -1829,7 +1829,7 @@ export const SAMPLES: Sample[] = [
     features: ["화면이 멈춘 채 바뀌는 장면 8개 · 카드가 펼쳐지는 3단계 장면", "제목이 줄어들며 붙는 서비스 카드 4장 · 파트너 로고 25칸", "분류 · 상태로 거르는 프로젝트 목록 42건과 상세", "업무 범위 · 성격 · 예산 · 기간을 고르는 문의 폼"],
     idealFor: "디지털 프로덕트 에이전시, UI/UX 스튜디오, SI 협력사, 브랜딩 스튜디오",
     image: "/thumbs/agency-g.jpg",
-    liveUrl: "/orbitlab/",
+    liveUrl: "/darak/",
     industryKey: "agency",
     premiumLabel: "에이전시",
     designCode: "AGEP-1001",
@@ -2464,7 +2464,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "artist-a-template",
     industry: "작가 · 아티스트 포트폴리오 홈페이지",
-    title: "작가 · 아티스트 포트폴리오 홈페이지",
+    title: "아틀리에 소담 홈페이지 포트폴리오",
     type: ["premium-template", "portfolio", "small-business"],
     tag: "홈페이지 포트폴리오 · 작가 · 아티스트",
     purpose:
@@ -2477,7 +2477,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "회화 · 조각 작가, 사진작가, 공예 · 텍스타일 작가, 일러스트레이터 · 디자이너, 갤러리",
     image: "/thumbs/artist-a.jpg",
-    liveUrl: "/atelier/",
+    liveUrl: "/ateliersodam/",
     industryKey: "artist",
     premiumLabel: "예술 · 창작업",
     designCode: "ARTP-1001",
@@ -2680,7 +2680,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "wedding-a-template",
     industry: "웨딩 · 컨시어지 홈페이지",
-    title: "웨딩 촬영 컨시어지 홈페이지",
+    title: "마이웨딩 컨시어지 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 웨딩 · 촬영 · 여행",
     purpose:
@@ -2688,7 +2688,7 @@ export const SAMPLES: Sample[] = [
     features: ["필기체 제목 사진 넘김 · 흘러가는 큰 글자 줄", "화면에 붙어 넘어가는 진행 4단계 · 뒤 글자가 바뀌는 후기", "태그로 거르는 서비스 목록 · 포트폴리오와 패키지 창이 있는 상세", "2단계 문의 창 · 블로그 · 후기 · 로그인 · 서브"],
     idealFor: "웨딩 촬영 컨시어지, 스튜디오·드레스·메이크업 패키지 업체, 외국인 고객을 받는 웨딩·여행 서비스",
     image: "/thumbs/wedding-a.jpg",
-    liveUrl: "/seoulvow/",
+    liveUrl: "/mywedding/",
     industryKey: "wedding",
     premiumLabel: "웨딩업",
     designCode: "WEDP-1001",
