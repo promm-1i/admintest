@@ -28,7 +28,7 @@ const DIFF_ROWS: DiffRow[] = [
   {
     label: "화면 시작점",
     template: "완성된 템플릿에서 고릅니다",
-    premium: "프리미엄 등급 시안에서 다시 구성합니다",
+    premium: "포트폴리오에서 출발해 다시 구성합니다",
   },
   {
     label: "화면 구성",
@@ -75,7 +75,7 @@ const DIFF_ROWS: DiffRow[] = [
 /** 라인별 상세 페이지 — 지금 보고 있는 페이지로 가는 버튼은 빼고 보여준다 */
 const LINE_LINKS = [
   { to: "/templates", label: "템플릿 라인 보기" },
-  { to: "/web-solutions", label: "프리미엄 라인 보기" },
+  { to: "/web-solutions", label: "포트폴리오 보기" },
 ];
 
 /**
@@ -90,7 +90,7 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
   return (
     <div>
       <h2 className="text-3xl font-bold text-foreground break-keep sm:text-4xl">
-        템플릿 라인과 프리미엄 라인, 무엇이 다를까요?
+        템플릿 라인과 맞춤 제작, 무엇이 다를까요?
       </h2>
       <p className="mt-3 max-w-3xl text-lg leading-relaxed text-muted-foreground break-keep">
         기능은 양쪽 다 똑같이 들어갑니다. 다른 것은 완성된 화면을 <strong className="font-semibold text-foreground">고르시는지</strong>,
@@ -100,9 +100,9 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
       {/* 같은 것을 먼저 밝힌다 */}
       {showSameBlock && (
         <div className="mt-7 rounded-2xl border border-border bg-secondary/30 p-6 sm:p-7">
-          <p className="text-base font-bold text-foreground">두 라인 모두 기본으로 들어가는 것</p>
+          <p className="text-base font-bold text-foreground">템플릿 · 맞춤 제작 모두 기본으로 들어가는 것</p>
           <p className="mt-1.5 text-sm text-muted-foreground break-keep">
-            관리자 기능과 반응형이 프리미엄에만 있는 것이 아닙니다. 아래는 64만원 원페이지 기본에도 그대로
+            관리자 기능과 반응형이 맞춤 제작에만 있는 것이 아닙니다. 아래는 64만원 원페이지 기본에도 그대로
             들어갑니다.
           </p>
           <ul className="mt-4 grid gap-2.5 sm:grid-cols-2 lg:grid-cols-4">
@@ -120,7 +120,7 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
       <div className="mt-6 overflow-x-auto rounded-2xl border border-border">
         <table className="w-full border-collapse text-xs sm:min-w-[42rem] sm:text-sm">
           <caption className="sr-only">
-            템플릿 라인과 프리미엄 라인에서 실제로 달라지는 항목 비교
+            템플릿 라인과 맞춤 제작에서 실제로 달라지는 항목 비교
           </caption>
           <thead>
             <tr className="bg-card">
@@ -134,7 +134,7 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
                 <span className="mt-0.5 block text-[11px] font-bold text-muted-foreground sm:text-sm">64만원 ~ 114만원</span>
               </th>
               <th scope="col" className="bg-primary/[0.06] px-2 py-3 text-left align-bottom sm:px-4 sm:py-4">
-                <span className="block text-sm font-bold text-primary sm:text-base">프리미엄 라인</span>
+                <span className="block text-sm font-bold text-primary sm:text-base">맞춤 제작</span>
                 <span className="mt-0.5 block text-[11px] font-bold text-primary sm:text-sm">150만원 ~</span>
               </th>
             </tr>
@@ -162,11 +162,11 @@ export function LineComparison({ showSameBlock = true }: { showSameBlock?: boole
 
       <p className="mt-4 text-sm leading-relaxed text-muted-foreground break-keep">
         올릴 내용이 계속 늘어나거나(매물 · 객실 · 시술 · 메뉴 · 작품), 손님이 조건으로 골라야 하거나,
-        브랜드 사진부터 새로 만들어야 한다면 프리미엄 라인이 맞습니다. 그렇지 않다면 템플릿 라인으로
+        브랜드 사진부터 새로 만들어야 한다면 맞춤 제작이 맞습니다. 그렇지 않다면 템플릿 라인으로
         시작하시는 편이 낫습니다.
       </p>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground break-keep">
-        유지보수는 두 라인이 같습니다. 오픈 후 1개월은 무상이고, 이후에는 월 3만원 계약(간단 수정
+        유지보수는 둘 다 같습니다. 오픈 후 1개월은 무상이고, 이후에는 월 3만원 계약(간단 수정
         월 3회)이나 건별 협의로 진행합니다.{" "}
         <Link to="/website/maintenance" className="font-semibold text-primary hover:underline">
           유지보수 안내 보기

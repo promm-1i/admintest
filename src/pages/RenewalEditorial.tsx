@@ -445,7 +445,7 @@ function HomeCases() {
 
   return <section className="re-nhn re-nhn--cases">
     <div className="re-nhn__frame">
-      <h2 className="re-nhn__heading">프리미엄 디자인</h2>
+      <h2 className="re-nhn__heading">홈페이지 포트폴리오</h2>
       <p className="re-nhn__lead">실제 사이트를 그대로 모델링한 구성입니다. 좌우로 끌어 보세요.</p>
       <div className="re-case-nav">
         <button type="button" onClick={() => go(-1)} aria-label="이전 사례"><ChevronLeft /></button>
@@ -466,7 +466,7 @@ function HomeCases() {
           </li>)}
         </ul>
       </div>
-      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/web-solutions`}>프리미엄 디자인 전체 보기</Link></div>
+      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/web-solutions`}>포트폴리오 전체 보기</Link></div>
     </div>
   </section>;
 }
@@ -1044,7 +1044,7 @@ function StandardPage({ page, path }: { page: ContentPage; path: string }) {
 
 function PriceDetail({ page, path }: { page: ContentPage; path: string }) {
   const root = useRoot();
-  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="프리미엄 디자인"><div className="re-premium-price"><h3>150만원부터</h3><span>메뉴별 상세 페이지가 있고 나중에 더 늘릴 수 있습니다. 프리미엄 시안에서 출발해 섹션 구성과 브랜드 색 · 글꼴을 다시 잡고 사진을 새로 만듭니다</span><Link to={`${root}/web-solutions`}>프리미엄 사례 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="맞춤 제작"><div className="re-premium-price"><h3>150만원부터</h3><span>메뉴별 상세 페이지가 있고 나중에 더 늘릴 수 있습니다. 포트폴리오에서 출발해 섹션 구성과 브랜드 색 · 글꼴을 다시 잡고 사진을 새로 만듭니다</span><Link to={`${root}/web-solutions`}>포트폴리오 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
 }
 
 const BOARD_PAGE_SIZE = 10;
@@ -1072,7 +1072,7 @@ function CatalogPage({ mode }: { mode: "templates" | "premium" }) {
   const source = mode === "premium" ? getPremiumDesigns().map((item) => item.sample) : SAMPLES;
   const items = source.filter((sample) => (!style || sample.type.includes(style)) && (!industry || sample.industryKey === industry) && (!active || active.items.some((d) => d.sample.slug === sample.slug)) && sample.image && (sample.industry + sample.tag).toLowerCase().includes(keyword.trim().toLowerCase()));
   const board = useBoardPage(items);
-  const title = mode === "premium" ? "프리미엄 디자인" : "디자인 템플릿";
+  const title = mode === "premium" ? "홈페이지 포트폴리오" : "디자인 템플릿";
   const groupTitle = active ? active.label : mode === "premium" ? "전체 디자인" : style === "basic-template" ? "기본형 템플릿" : style === "landing-template" ? "랜딩형 템플릿" : "전체 템플릿";
   return <main className="re-sub-page"><PageInfo category="디자인" title={title} /><Contents><Section wide title={groupTitle}><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label={`${title} 검색`} />{mode === "premium" && <nav className="re-board-filter" aria-label="업종"><Link to={`${root}/web-solutions`} aria-current={!cat ? "page" : undefined}>전체</Link>{categories.filter((group) => group.items.length > 0).map((group) => <Link key={group.key} to={`${root}/web-solutions?cat=${group.key}`} aria-current={cat === group.key ? "page" : undefined}>{group.label}</Link>)}</nav>}{mode === "templates" && <nav className="re-board-filter" aria-label="제작 방식"><Link to={`${root}/templates`} aria-current={!style ? "page" : undefined}>전체</Link><Link to={`${root}/templates?style=basic-template`} aria-current={style === "basic-template" ? "page" : undefined}>기본형</Link><Link to={`${root}/templates?style=landing-template`} aria-current={style === "landing-template" ? "page" : undefined}>랜딩형</Link></nav>}<ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${root}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">해당 조건의 디자인이 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
 }
@@ -1229,7 +1229,7 @@ function EstimatePage() {
         <div className="re-estimate__result">
           <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>포함</dd></div>)}</dl>
           <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
-          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다. 메뉴별로 페이지를 나눈 홈페이지는 프리미엄 디자인(150만원부터)에서 제작합니다.</p>
+          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다. 메뉴별로 페이지를 나눈 홈페이지는 맞춤 제작(150만원부터)으로 만듭니다.</p>
           <div className="re-estimate__actions"><Link to={`${root}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
         </div>
       </Section>

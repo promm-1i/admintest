@@ -101,15 +101,15 @@ export function StartOptionsSection() {
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">
               <div>
                 <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">
-                  Premium Design
+                  Portfolio
                 </p>
-                <h3 className="mt-2 text-xl font-bold text-foreground">프리미엄 디자인 미리보기</h3>
+                <h3 className="mt-2 text-xl font-bold text-foreground">홈페이지 포트폴리오 미리보기</h3>
               </div>
               <Link
                 to="/web-solutions"
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
               >
-                프리미엄 라인 전체 보기
+                포트폴리오 전체 보기
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>

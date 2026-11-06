@@ -105,7 +105,7 @@ function CategoryBar({ active }: { active: string }) {
   }, [active]);
   return (
     <nav
-      aria-label="프리미엄 디자인 분류"
+      aria-label="홈페이지 포트폴리오 분류"
       data-cat-bar
       className="sticky top-14 z-30 -mx-4 mt-8 border-y border-border bg-background px-4 py-3 lg:top-[110px]"
     >
@@ -129,21 +129,13 @@ function CategoryBar({ active }: { active: string }) {
                 href={`#cat-${group.key}`}
                 aria-current={on ? "true" : undefined}
                 className={cn(
-                  "flex h-11 items-center justify-between gap-2 rounded-xl px-2.5 text-[15px] font-semibold tracking-tight whitespace-nowrap transition-colors duration-200 min-[1440px]:gap-3 min-[1440px]:px-4",
+                  "flex h-11 items-center justify-center gap-2 rounded-xl px-2.5 text-[15px] font-semibold tracking-tight whitespace-nowrap transition-colors duration-200 min-[1440px]:gap-3 min-[1440px]:px-4",
                   on
                     ? "bg-primary text-primary-foreground shadow-sm shadow-primary/25"
                     : "bg-secondary/60 text-foreground/80 hover:bg-primary/10 hover:text-primary",
                 )}
               >
                 {group.label}
-                <span
-                  className={cn(
-                    "min-w-6 rounded-full px-1.5 py-0.5 text-center text-xs font-bold tabular-nums",
-                    on ? "bg-white/20 text-primary-foreground" : "bg-background text-muted-foreground",
-                  )}
-                >
-                  {group.items.length}
-                </span>
               </a>
             </li>
           );
@@ -182,8 +174,8 @@ function useActiveCategory() {
 
 export default function WebSolutions() {
   usePageTitle(
-    "프리미엄 디자인 홈페이지 제작 — NOVERIQ",
-    "프리미엄 등급 디자인을 기반으로 관리자 시스템과 업종 기능까지 갖춰 제작하는 프리미엄 라인의 범위와 요금을 안내합니다.",
+    "홈페이지 포트폴리오 — NOVERIQ",
+    "병원 · 학원 · 기업 등 업종별로 만든 홈페이지 포트폴리오와, 같은 구성으로 관리자 시스템과 업종 기능까지 갖춰 짓는 맞춤 제작의 범위와 요금을 안내합니다.",
   );
 
   const activeCategory = useActiveCategory();
@@ -207,18 +199,18 @@ export default function WebSolutions() {
     <div className="mx-auto max-w-7xl px-3 py-14 sm:px-5">
       <div className="flex items-center gap-2">
         <span className="rounded-full border border-primary/40 bg-primary/[0.07] px-3 py-1 text-[11px] font-bold tracking-wide text-primary">
-          PREMIUM LINE
+          CUSTOM
         </span>
         <p className="text-xs font-mono font-semibold uppercase tracking-widest text-muted-foreground">
-          PREMIUM DESIGN
+          PORTFOLIO
         </p>
       </div>
       <h1 className="mt-4 text-3xl font-semibold break-keep">
-        프리미엄 디자인 홈페이지 제작
+        홈페이지 포트폴리오
       </h1>
       <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
-        프리미엄 등급 시안을 출발점으로 섹션 구성부터 브랜드에 맞춰
-        다시 잡는 라인입니다. 사진도 브랜드에 맞춰 새로 제작하고, 관리자는 사장님 사업 데이터에 맞춰
+        업종별로 만든 홈페이지를 모았습니다. 마음에 드는 구성에서 출발해 섹션 구성부터 브랜드에 맞춰
+        다시 잡는 맞춤 제작은 150만원부터입니다. 사진도 브랜드에 맞춰 새로 제작하고, 관리자는 사장님 사업 데이터에 맞춰
         설계합니다. 정확한 기능 구성과 견적은 상담 후 확정됩니다.
       </p>
 
@@ -242,7 +234,7 @@ export default function WebSolutions() {
         </FadeIn>
         <FadeIn direction="right" delay={100}>
         <div className="h-full rounded-2xl border border-primary/40 bg-primary/[0.04] p-5">
-          <p className="text-xs font-bold text-primary">프리미엄 라인</p>
+          <p className="text-xs font-bold text-primary">맞춤 제작</p>
           <p className="mt-1.5 text-sm font-semibold text-foreground">브랜드에 맞춰 짓습니다</p>
           <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
             같은 기능 위에서, 섹션 구성과 브랜드 색·글꼴을 다시 잡고 사진을 새로 제작합니다. 조건
@@ -257,11 +249,11 @@ export default function WebSolutions() {
       <div className="mt-14 flex flex-wrap items-end justify-between gap-3">
         <FadeIn>
           <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
-            PREMIUM DESIGN
+            PORTFOLIO
           </p>
-          <h2 className="mt-2 text-xl font-semibold">프리미엄 디자인</h2>
+          <h2 className="mt-2 text-xl font-semibold">업종별 포트폴리오</h2>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground break-keep">
-            최근 제작한 프리미엄 등급 디자인입니다. 이 디자인을 기반으로 문구 · 이미지 · 구성을
+            최근 제작한 홈페이지입니다. 이 구성을 기반으로 문구 · 이미지 · 구성을
             맞춰 제작하며,
             <br />
             <strong className="text-foreground">150만원부터</strong> 시작합니다
@@ -282,7 +274,6 @@ export default function WebSolutions() {
           <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 border-b border-border pb-2">
             <h3 className="text-sm font-bold text-foreground">{group.label}</h3>
             <p className="text-xs text-muted-foreground break-keep">{group.desc}</p>
-            <span className="ml-auto shrink-0 text-xs text-muted-foreground">{group.items.length}종</span>
           </div>
 
           <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -295,7 +286,7 @@ export default function WebSolutions() {
                   <div className="overflow-hidden">
                     <img
                       src={d.sample.image}
-                      alt={`${d.label} 프리미엄 디자인`}
+                      alt={`${d.label} 홈페이지 포트폴리오`}
                       loading="lazy"
                       className="aspect-[16/10] w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.03]"
                     />
@@ -318,7 +309,7 @@ export default function WebSolutions() {
       <p className="mt-14 text-xs font-mono font-semibold uppercase tracking-widest text-primary">
         PRICING
       </p>
-      <h2 className="mt-2 text-xl font-semibold">프리미엄 라인 구축 비용</h2>
+      <h2 className="mt-2 text-xl font-semibold">맞춤 제작 비용</h2>
       <p className="mt-2 text-sm text-muted-foreground break-keep">
         구축비에 셋팅비용과 도메인 1개(1년)가 모두 포함됩니다. 아래 금액 외에 오픈까지
         더 드는 비용은 없습니다.
@@ -408,7 +399,7 @@ export default function WebSolutions() {
         <LineComparison />
       </div>
 
-      <h3 className="mt-16 text-base font-semibold">프리미엄 라인에 모두 포함되는 기능</h3>
+      <h3 className="mt-16 text-base font-semibold">맞춤 제작에 모두 포함되는 기능</h3>
       <FadeIn>
       <ul className="mt-4 grid gap-2.5 rounded-2xl border border-border bg-card p-6 sm:grid-cols-2">
         {COMMON_FEATURES.map((f) => (

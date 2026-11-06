@@ -302,11 +302,6 @@ export const HEADER_NAV: NavEntry[] = [
     label: "홈페이지 템플릿",
     items: [
       {
-        label: "프리미엄 디자인",
-        href: "/web-solutions",
-        children: premiumGroups(),
-      },
-      {
         label: "기본형 디자인 템플릿",
         href: "/templates?style=basic-template",
         children: templateGroups("basic-template"),
@@ -322,7 +317,14 @@ export const HEADER_NAV: NavEntry[] = [
     type: "dropdown",
     key: "portfolio",
     label: "포트폴리오",
-    items: [{ label: "제작 사례", href: "/samples" }],
+    items: [
+      {
+        label: "홈페이지 포트폴리오",
+        href: "/web-solutions",
+        children: premiumGroups(),
+      },
+      { label: "제작 사례", href: "/samples" },
+    ],
   },
   {
     type: "dropdown",
@@ -413,13 +415,21 @@ export const MAIN_NAV: MainNavEntry[] = [
     ],
   },
   {
-    key: "design",
-    label: "디자인",
+    key: "portfolio",
+    label: "포트폴리오",
     href: "/web-solutions",
     groups: [
-      { key: "premium", label: "프리미엄", href: "/web-solutions", items: [
-        { label: "프리미엄 디자인", href: "/web-solutions", desc: "실제 사이트를 그대로 모델링한 구성" },
+      { key: "work", label: "포트폴리오", href: "/web-solutions", items: [
+        { label: "홈페이지 포트폴리오", href: "/web-solutions", desc: "병원 · 학원 · 기업 등 업종별로 만든 홈페이지" },
+        { label: "제작 사례", href: "/samples", desc: "관리자 · 플랫폼까지 갖춘 홈페이지" },
       ] },
+    ],
+  },
+  {
+    key: "design",
+    label: "템플릿",
+    href: "/templates",
+    groups: [
       { key: "template", label: "템플릿", href: "/templates", items: [
         { label: "기본형 디자인", href: "/templates?style=basic-template", desc: "필요한 정보 위주 한 페이지" },
         { label: "랜딩형 디자인", href: "/templates?style=landing-template", desc: "내릴 때 나타나는 연출과 움직임" },

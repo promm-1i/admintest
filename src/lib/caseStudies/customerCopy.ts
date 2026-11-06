@@ -538,7 +538,7 @@ export function toCustomerFacingCaseStudy(study: CaseStudy): CaseStudy {
 
   return {
     ...study,
-    summary: `${industry} 홈페이지에 필요한 화면을 갖춘 프리미엄 디자인입니다. ${sections} 화면이 들어가고, ${profile.journey}.`,
+    summary: `${industry} 홈페이지에 필요한 화면을 갖춰 만든 포트폴리오입니다. ${sections} 화면이 들어가고, ${profile.journey}.`,
     overview: `${study.brand}는 ${industry} 분야에 맞춘 디자인입니다. 소개 → 서비스 → 근거 자료 → 문의 순서로 놓아, 처음 온 사람도 위에서부터 읽으면 되게 했습니다.\n\n${multiPage ? "내용이 많은 쪽은 목적별로 화면을 나눠 필요한 것만 찾아 봅니다." : "한 페이지 안에서 소개부터 서비스, 근거 자료, 문의까지 위에서 아래로 이어집니다."} 회사명, 색상, 사진, 메뉴, 문구는 브랜드와 운영 방식에 맞게 바꾸고, PC·태블릿·휴대폰에서 모두 편하게 보이도록 만듭니다.`,
     meta: [
       { label: "적합 업종", value: industry },
@@ -623,7 +623,7 @@ export function toCustomerFacingCaseStudy(study: CaseStudy): CaseStudy {
       },
       {
         q: "제작 기간과 비용은 어떻게 정해지나요?",
-        a: "프리미엄 디자인은 부가세 별도 150만원부터이며, 도메인 1개가 포함됩니다. 정확한 기간과 비용은 페이지 구성, 관리자 기능, 제공 자료를 확인한 뒤 안내합니다.",
+        a: "맞춤 제작은 부가세 별도 150만원부터이며, 도메인 1개가 포함됩니다. 정확한 기간과 비용은 페이지 구성, 관리자 기능, 제공 자료를 확인한 뒤 안내합니다.",
       },
       {
         q: "도메인·호스팅·유지보수도 지원하나요?",

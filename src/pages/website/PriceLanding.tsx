@@ -128,7 +128,7 @@ export default function PriceLanding() {
             </p>
           </Reveal>
           <Reveal delay={160} className="rounded-xl border border-primary/40 bg-primary/[0.04] p-6">
-            <p className="text-xs font-bold tracking-wide text-primary">CUSTOM · PREMIUM</p>
+            <p className="text-xs font-bold tracking-wide text-primary">CUSTOM</p>
             <h3 className="mt-1.5 text-lg font-bold text-foreground">처음부터 맞춤 제작</h3>
             <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">
               사업에 필요한 구조와 기능부터 새롭게 설계합니다.
@@ -185,7 +185,7 @@ export default function PriceLanding() {
         <Reveal className="mt-20">
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">필요하면 추가할 수 있는 기능</h2>
           <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted-foreground break-keep">
-            템플릿 라인에 더하실 경우의 기준입니다. 예약 접수 · 관리는 프리미엄 라인에는 기본으로
+            템플릿 라인에 더하실 경우의 기준입니다. 예약 접수 · 관리는 맞춤 제작에는 기본으로
             포함되어 있습니다.
           </p>
         </Reveal>

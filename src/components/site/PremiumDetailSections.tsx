@@ -71,7 +71,7 @@ const PREMIUM_STEPS = [
 const PREMIUM_FAQ = [
   {
     q: "원페이지 기본 · 랜딩과 무엇이 다른가요?",
-    a: "기능은 같습니다. 관리자 모드 · 반응형 제작 · 데이터베이스 · 문자 알림은 64만원 원페이지 기본에도 그대로 들어갑니다. 다른 것은 완성된 화면을 고르시는지, 브랜드에 맞춰 짓는지입니다. 원페이지 기본과 랜딩은 만들어 둔 화면에 문구 · 사진만 바꿔 한 페이지로 엽니다. 프리미엄은 섹션 순서와 개수를 사장님 사업에 맞춰 다시 잡고, 브랜드 색 · 글꼴을 바꾸고, 사진을 새로 만듭니다. 관리자도 다루실 데이터에 맞춰 설계해 조건 검색과 직원별 권한까지 넣습니다. 예약 접수 관리도 프리미엄에만 들어갑니다.",
+    a: "기능은 같습니다. 관리자 모드 · 반응형 제작 · 데이터베이스 · 문자 알림은 64만원 원페이지 기본에도 그대로 들어갑니다. 다른 것은 완성된 화면을 고르시는지, 브랜드에 맞춰 짓는지입니다. 원페이지 기본과 랜딩은 만들어 둔 화면에 문구 · 사진만 바꿔 한 페이지로 엽니다. 맞춤 제작은 섹션 순서와 개수를 사장님 사업에 맞춰 다시 잡고, 브랜드 색 · 글꼴을 바꾸고, 사진을 새로 만듭니다. 관리자도 다루실 데이터에 맞춰 설계해 조건 검색과 직원별 권한까지 넣습니다. 예약 접수 관리도 맞춤 제작에만 들어갑니다.",
   },
   {
     q: "이 디자인에서 색이나 구성을 바꿀 수 있나요?",
@@ -178,7 +178,7 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
       {/* 프리미엄 제작 사양 */}
       <section>
         <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">How We Build</p>
-        <h2 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">프리미엄 라인은 이렇게 만듭니다</h2>
+        <h2 className="mt-2 text-xl font-bold text-foreground sm:text-2xl">맞춤 제작은 이렇게 진행합니다</h2>
         <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground break-keep">
           섹션 구성과 색 · 글꼴 · 사진을 브랜드에 맞춰 다시 잡습니다. 쪽마다 들어갈
           문구와 사진 자리도 새로 정합니다.
@@ -256,7 +256,7 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
         <div className="flex flex-wrap items-center gap-3">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold text-primary">
             <ShieldCheck className="h-3.5 w-3.5" />
-            PREMIUM DESIGN
+            PORTFOLIO
           </span>
           <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-muted-foreground">
             <Palette className="h-3.5 w-3.5" />
@@ -273,7 +273,7 @@ export function PremiumDetailSections({ sample }: { sample: Sample }) {
           to="/web-solutions"
           className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:underline"
         >
-          프리미엄 라인 안내 보기 →
+          맞춤 제작 안내 보기 →
         </Link>
       </section>
     </div>

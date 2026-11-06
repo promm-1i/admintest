@@ -85,7 +85,7 @@ export default function SampleDetail() {
             }),
             breadcrumbSchema([
               { name: "홈", path: "/" },
-              { name: sample.premium ? "프리미엄 디자인" : "제작 사례", path: sample.premium ? "/web-solutions" : "/samples" },
+              { name: sample.premium ? "홈페이지 포트폴리오" : "제작 사례", path: sample.premium ? "/web-solutions" : "/samples" },
               { name: sample.premiumLabel ?? sample.industry, path: `/samples/${sample.slug}` },
             ]),
           ],
@@ -110,7 +110,7 @@ export default function SampleDetail() {
   const isPremium = sample.type.includes("premium-template");
   const templateStyle = sample.type.includes("landing-template") ? "landing-template" : "basic-template";
   const backHref = isPremium ? "/web-solutions" : isTemplate ? `/templates?style=${templateStyle}` : "/samples";
-  const backLabel = isPremium ? "프리미엄 디자인 목록으로" : isTemplate ? "전체 템플릿 목록으로" : "전체 포트폴리오 목록으로";
+  const backLabel = isPremium ? "포트폴리오 목록으로" : isTemplate ? "전체 템플릿 목록으로" : "전체 포트폴리오 목록으로";
 
   const renderSamplePreview = () => {
     if (sample.liveUrl) return <ExternalSitePreview url={sample.liveUrl} />;
@@ -400,7 +400,7 @@ export default function SampleDetail() {
           <div className="mt-1 flex justify-center">
             <Button asChild variant="ghost" size="lg" className="font-semibold text-muted-foreground hover:text-foreground">
               <Link to={backHref}>
-                {isPremium ? "다른 프리미엄 디자인 보기" : isTemplate ? "다른 템플릿 보기" : "다른 포트폴리오 보기"}
+                {isPremium ? "다른 포트폴리오 보기" : isTemplate ? "다른 템플릿 보기" : "다른 포트폴리오 보기"}
               </Link>
             </Button>
           </div>

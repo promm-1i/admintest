@@ -220,7 +220,7 @@ export default function ProcessLanding() {
             </Link>
           </Reveal>
           <Reveal delay={160} className="h-full rounded-2xl border border-primary/40 bg-primary/[0.04] p-7 sm:p-8">
-            <p className="text-xs font-bold tracking-wide text-primary">CUSTOM · PREMIUM</p>
+            <p className="text-xs font-bold tracking-wide text-primary">CUSTOM</p>
             <h3 className="mt-2 text-2xl font-bold text-foreground">맞춤형 홈페이지 제작</h3>
             <p className="mt-3 text-lg font-medium text-foreground break-keep">
               사업에 필요한 구조와 기능부터 새롭게 설계합니다.

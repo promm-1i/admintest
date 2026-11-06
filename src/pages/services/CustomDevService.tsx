@@ -28,8 +28,8 @@ import { TemplatePickVisual, CustomBuildVisual } from "@/components/sections/Com
  */
 export const COMPARE = [
   {
-    name: "템플릿 라인 · 프리미엄 라인",
-    desc: "이미 만들어 둔 화면이나 프리미엄 시안에서 출발합니다. 템플릿 라인은 문구와 사진만 바꿔 열고, 프리미엄 라인은 그 시안을 브랜드에 맞춰 다시 잡습니다.",
+    name: "템플릿 라인 · 맞춤 제작",
+    desc: "이미 만들어 둔 화면이나 포트폴리오에서 출발합니다. 템플릿 라인은 문구와 사진만 바꿔 열고, 맞춤 제작은 그 구성을 브랜드에 맞춰 다시 잡습니다.",
     points: [
       "완성된 화면 · 시안에서 출발",
       "가격이 정해져 있음 (64만원~ · 150만원~)",
@@ -88,7 +88,7 @@ export default function CustomDevService() {
           커스텀 개발이란?
         </h1>
         <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-muted-foreground break-keep">
-          미리 만들어 둔 템플릿이나 프리미엄 시안을 쓰지 않고, 업종의 업무 방식에 맞춰 화면
+          미리 만들어 둔 템플릿이나 포트폴리오 구성을 쓰지 않고, 업종의 업무 방식에 맞춰 화면
           구성과 기능을 처음부터 설계하는 방식입니다. 홈페이지와 관리자 시스템, 데이터베이스까지
           하나로 구축합니다.
         </p>
@@ -250,11 +250,11 @@ export default function CustomDevService() {
             <p className="text-sm font-medium text-foreground break-keep">
               커스텀 개발은 기능 범위와 다루는 자료의 양에 따라 달라져{" "}
               <strong className="font-bold text-primary">상담에서 견적을 냅니다</strong>. 금액을 먼저 보고
-              시작하고 싶으시면 프리미엄 라인(150만원부터)을 보세요.
+              시작하고 싶으시면 맞춤 제작(150만원부터)을 보세요.
             </p>
             <Button asChild variant="outline" className="shrink-0 gap-1.5">
               <Link to="/web-solutions">
-                프리미엄 라인 보기
+                맞춤 제작 보기
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </Button>
@@ -291,7 +291,7 @@ export default function CustomDevService() {
                     업종별 솔루션 안내
                   </span>
                   <span className="mt-1 block text-xs leading-relaxed text-muted-foreground break-keep">
-                    업종별 구축 범위와 프리미엄 라인 요금을 확인합니다.
+                    업종별 구축 범위와 맞춤 제작 요금을 확인합니다.
                   </span>
                 </span>
               </Link>

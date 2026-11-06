@@ -169,7 +169,7 @@ export default function Estimate() {
             <p className="mt-2 text-xs leading-relaxed text-background/55 break-keep">
               메뉴별로 페이지를 나눈 홈페이지는{" "}
               <Link to="/web-solutions" className="font-semibold text-background/80 underline underline-offset-2">
-                프리미엄 라인(150만원부터)
+                맞춤 제작(150만원부터)
               </Link>
               에서 제작합니다.
             </p>

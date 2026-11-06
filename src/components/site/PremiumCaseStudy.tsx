@@ -207,12 +207,12 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
           className="inline-flex items-center text-xs font-semibold text-primary hover:underline"
         >
           <ArrowLeft className="mr-1 h-3.5 w-3.5" />
-          프리미엄 디자인 목록으로
+          포트폴리오 목록으로
         </Link>
         <div className="mt-5 grid gap-5 lg:mt-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,440px)] lg:items-end lg:gap-12">
           <div>
             <p className="font-mono text-xs font-semibold tracking-widest text-muted-foreground">
-              PREMIUM DESIGN · {code}
+              PORTFOLIO · {code}
             </p>
             <h1 className="mt-2 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
               {study.brand}
@@ -569,7 +569,7 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
       {/* ⑦ 비용 · 상담 */}
       <section className="mx-auto mt-24 max-w-[1040px] px-4 sm:px-6 lg:px-8">
         <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-xs sm:p-12">
-          <p className="font-mono text-xs font-semibold tracking-widest text-primary">PREMIUM DESIGN</p>
+          <p className="font-mono text-xs font-semibold tracking-widest text-primary">PORTFOLIO</p>
           <h2 className="mt-3 text-2xl font-bold text-foreground break-keep">
             이 디자인으로 제작하면 150만원부터입니다
           </h2>
@@ -597,7 +597,7 @@ export function PremiumCaseStudy({ sample, study: sourceStudy }: { sample: Sampl
             to="/web-solutions"
             className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-muted-foreground hover:text-foreground"
           >
-            프리미엄 라인 제작 방식 · 포함 사항 보기 →
+            맞춤 제작 방식 · 포함 사항 보기 →
           </Link>
         </div>
       </section>

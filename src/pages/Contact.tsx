@@ -206,7 +206,7 @@ export default function Contact() {
                     {industry}
                     <span className="ml-1.5 text-xs text-muted-foreground">{options.length}종</span>
                     {options.some((o) => o.line === "프리미엄") && (
-                      <span className="ml-1.5 text-[10px] font-bold text-primary">프리미엄</span>
+                      <span className="ml-1.5 text-[10px] font-bold text-primary">포트폴리오</span>
                     )}
                   </SelectItem>
                 ))}
@@ -233,7 +233,7 @@ export default function Contact() {
                   if (items.length === 0) return null;
                   return (
                     <SelectGroup key={line}>
-                      <SelectLabel className="text-[11px] font-bold text-primary">{line}</SelectLabel>
+                      <SelectLabel className="text-[11px] font-bold text-primary">{line === "프리미엄" ? "포트폴리오" : line}</SelectLabel>
                       {items.map((o) => (
                         <SelectItem key={o.code} value={o.code}>
                           {o.label}
