@@ -686,7 +686,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "tax-g-template",
     industry: "세무법인 · 가업승계 홈페이지",
-    title: "세무법인 · 가업승계 홈페이지",
+    title: "세무법인 바른셈 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 세무법인 · 가업승계 · 상속 · 업무사례",
     purpose:
@@ -699,7 +699,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "가업승계, 상속·증여, 법인자문, 조세불복을 함께 안내하는 세무법인과 여러 지역 상담센터를 운영하는 세무회계 사무소",
     image: "/thumbs/tax-g.jpg",
-    liveUrl: "/yuldamwon/",
+    liveUrl: "/bareunsem/",
     industryKey: "tax",
     premiumLabel: "세무법인 · 가업승계",
     designCode: "TAXP-1002",
@@ -818,7 +818,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "restaurant-p-template",
     industry: "한식 다이닝 · 한옥 웨딩 홈페이지",
-    title: "한식 다이닝 · 한옥 웨딩 홈페이지",
+    title: "청연각 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 한식 다이닝 · 한옥 · 웨딩 · 연회",
     purpose:
@@ -831,7 +831,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "한정식집, 한옥 다이닝, 야외 웨딩과 연회장을 함께 운영하는 복합 외식 공간",
     image: "/thumbs/restaurant-p.jpg",
-    liveUrl: "/damongak/",
+    liveUrl: "/cheongyeon/",
     industryKey: "restaurant",
     premiumLabel: "한식 다이닝 · 한옥 웨딩",
     designCode: "RESP-1005",
@@ -884,7 +884,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "restaurant-o-template",
     industry: "커피 프랜차이즈 본사 홈페이지",
-    title: "커피 프랜차이즈 본사 홈페이지",
+    title: "모닝빈커피 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 커피 · 베이글 · 매장 찾기 · 창업",
     purpose:
@@ -897,7 +897,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "커피 · 베이커리 프랜차이즈 본사, 두 가지 매장 형태를 함께 운영하는 카페 브랜드, 가맹 모집과 매장 안내가 필요한 외식기업",
     image: "/thumbs/restaurant-o.jpg",
-    liveUrl: "/lowmel/",
+    liveUrl: "/morningbean/",
     industryKey: "restaurant",
     premiumLabel: "커피 · 베이글 프랜차이즈",
     designCode: "RESP-1004",
@@ -1546,7 +1546,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "video-b-template",
     industry: "영상 · VFX · 디지털 콘텐츠 제작사 홈페이지",
-    title: "영상 · VFX 제작사 홈페이지",
+    title: "모션팩토리 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 영상 제작 · VFX · 포트폴리오",
     purpose:
@@ -1559,7 +1559,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "영상 · VFX 제작사, 미디어 파사드 · 전시 콘텐츠 제작사, 광고 · 뮤직비디오 프로덕션, 3D · 모션그래픽 스튜디오",
     image: "/thumbs/video-b.jpg",
-    liveUrl: "/ozlab/",
+    liveUrl: "/motionfactory/",
     industryKey: "video",
     premiumLabel: "영상 · VFX 제작사",
     designCode: "VIDP-1001",
@@ -2729,17 +2729,17 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
-    slug: "aurelle-template",
+    slug: "hotelgrace-template",
     industry: "단일 럭셔리 호텔 홈페이지",
-    title: "도심 럭셔리 호텔 홈페이지",
+    title: "호텔 그레이스 서울 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 호텔 · 멤버십 · 예약",
     purpose:
       "첫 화면 사진 넘김 아래로 화면을 내리면 머리 밑에 붙는 객실 예약 바, 넓은 한 칸과 좁은 세 칸으로 된 공간 소개, 진행 막대가 달린 스테이 오퍼 넘김, 레스토랑 세 곳을 탭으로 넘기며 오른쪽 판에 운영시간 · 위치를 적은 다이닝, 마우스를 올리면 넓어지는 멤버십 두 칸, 마우스를 올리면 구매 카드가 올라오는 컬렉션 네 칸이 있는 메인에, 패키지 상세(구성 5항목 · 유의사항 · 추천 프로모션), 클럽 멤버십(등급 비교표 · 선택형 혜택 · 공간별 혜택 · 등급 탭), 분류 탭 FAQ, 로그인까지 서브 있는 단일 호텔 홈페이지입니다. 휴대폰에서는 아래 바로가기 줄과 옆으로 밀어 넘기는 카드로 바뀝니다.",
     features: ["첫 화면 사진 넘김 · 머리 밑에 붙는 예약 바", "넓은 한 칸과 좁은 세 칸의 공간 소개 · 진행 막대 오퍼 넘김", "다이닝 탭 판 · 마우스를 올리면 넓어지는 멤버십", "등급 비교표 멤버십 · FAQ · 로그인 · 서브"],
     idealFor: "단일 럭셔리 호텔, 부티크 호텔, 멤버십을 운영하는 도심 호텔, 레스토랑·스파를 함께 운영하는 숙박 시설",
-    image: "/thumbs/aurelle.jpg",
-    liveUrl: "/aurelle/",
+    image: "/thumbs/hotelgrace.jpg",
+    liveUrl: "/hotelgrace/",
     industryKey: "stay",
     premiumLabel: "호텔업",
     designCode: "STAP-1002",
