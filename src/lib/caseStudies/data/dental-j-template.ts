@@ -2,7 +2,7 @@ import type { CaseStudy } from "../types";
 
 const study: CaseStudy = {
   customerCopyReady: true,
-  brand: "새롬결치과",
+  brand: "말끔치과",
   headline: "진료 분야와 병원 정보를 함께 살펴보는 치과 홈페이지",
   summary: "임플란트·치아 보존·심미 진료 안내에서 의료진, 진료 공간, 상담 문의로 이어집니다.",
   brandColor: "#514638",
@@ -13,21 +13,21 @@ const study: CaseStudy = {
     { label: "페이지 구성", value: "첫 화면 · 진료 분야 · 의료진 · 병원 소개 · 공지 · 오시는 길 · 상담 문의" },
     { label: "이런 곳에 맞습니다", value: "여러 진료 분야와 의료진, 병원 이용 정보를 한 곳에서 안내하려는 치과" },
   ],
-  mainShot: "/cases/saeromdent/main.webp",
+  mainShot: "/cases/malkkeum/main.webp",
   pagesLabel: "주요 화면",
   pagesTitle: "진료 안내와 병원 소개를 분야별로",
   pages: [
-    { name: "메인", file: "index.html", img: "/cases/saeromdent/main.webp", desc: "층별 공간과 주요 진료 분야를 보여주는 첫 화면", items: ["층별 공간", "진료 분야", "의료진"] },
-    { name: "디지털 임플란트", file: "digital.html", img: "/cases/saeromdent/digital.webp", desc: "검사와 치료 계획, 관리 과정을 설명하는 진료 화면", items: ["검사 자료", "치료 과정", "진료 안내"] },
-    { name: "투명교정", file: "clear-aligner.html", img: "/cases/saeromdent/clear-aligner.webp", desc: "장치의 제작 방식과 착용·관리 내용을 안내", items: ["장치 안내", "진료 대상", "자주 묻는 질문"] },
-    { name: "의료진", file: "doctors.html", img: "/cases/saeromdent/doctors.webp", desc: "의료진 소개에서 개별 약력과 진료 일정으로 이동", items: ["의료진 소개", "약력", "진료 일정"] },
-    { name: "진료 공간", file: "facilities.html", img: "/cases/saeromdent/facilities.webp", desc: "접수·대기·상담·촬영·기공 공간을 사진으로 확인", items: ["접수와 대기", "개별 진료실", "기공 공간"] },
-    { name: "상담 문의", file: "inquiry.html", img: "/cases/saeromdent/inquiry.webp", desc: "문의할 내용과 연락 정보를 입력하는 상담 화면", items: ["상담 내용", "연락 정보", "동의 항목"] },
+    { name: "메인", file: "index.html", img: "/cases/malkkeum/main.webp", desc: "층별 공간과 주요 진료 분야를 보여주는 첫 화면", items: ["층별 공간", "진료 분야", "의료진"] },
+    { name: "디지털 임플란트", file: "digital.html", img: "/cases/malkkeum/digital.webp", desc: "검사와 치료 계획, 관리 과정을 설명하는 진료 화면", items: ["검사 자료", "치료 과정", "진료 안내"] },
+    { name: "투명교정", file: "clear-aligner.html", img: "/cases/malkkeum/clear-aligner.webp", desc: "장치의 제작 방식과 착용·관리 내용을 안내", items: ["장치 안내", "진료 대상", "자주 묻는 질문"] },
+    { name: "의료진", file: "doctors.html", img: "/cases/malkkeum/doctors.webp", desc: "의료진 소개에서 개별 약력과 진료 일정으로 이동", items: ["의료진 소개", "약력", "진료 일정"] },
+    { name: "진료 공간", file: "facilities.html", img: "/cases/malkkeum/facilities.webp", desc: "접수·대기·상담·촬영·기공 공간을 사진으로 확인", items: ["접수와 대기", "개별 진료실", "기공 공간"] },
+    { name: "상담 문의", file: "inquiry.html", img: "/cases/malkkeum/inquiry.webp", desc: "문의할 내용과 연락 정보를 입력하는 상담 화면", items: ["상담 내용", "연락 정보", "동의 항목"] },
   ],
   points: [
-    { title: "층별 공간을 보여주는 첫 화면", body: "스크롤에 따라 건물의 층별 구성이 펼쳐지고, 각 공간과 주요 진료 안내를 차례로 볼 수 있습니다.", items: ["스크롤 장면", "층별 공간 안내"], img: "/cases/saeromdent/main.webp", caption: "메인 — 층별 공간 안내" },
-    { title: "진료 항목마다 이어지는 상세 안내", body: "진료의 대상과 과정, 관리 방법을 섹션별로 배치했습니다. 투명교정 화면에서는 장치 안내와 자주 묻는 질문을 함께 읽을 수 있습니다.", items: ["진료 과정", "관리 안내", "자주 묻는 질문"], img: "/cases/saeromdent/clear-aligner.webp", caption: "투명교정 — 장치와 진료 안내" },
-    { title: "공간과 장비를 사진으로 확인", body: "입구와 대기실부터 개별 진료실, 촬영실, 기공 작업 공간까지 살펴볼 수 있습니다. 장비 화면에서는 각 장비의 용도도 볼 수 있습니다.", items: ["공간별 사진", "진료 장비 안내"], img: "/cases/saeromdent/facilities.webp", caption: "병원 소개 — 진료 공간" },
+    { title: "층별 공간을 보여주는 첫 화면", body: "스크롤에 따라 건물의 층별 구성이 펼쳐지고, 각 공간과 주요 진료 안내를 차례로 볼 수 있습니다.", items: ["스크롤 장면", "층별 공간 안내"], img: "/cases/malkkeum/main.webp", caption: "메인 — 층별 공간 안내" },
+    { title: "진료 항목마다 이어지는 상세 안내", body: "진료의 대상과 과정, 관리 방법을 섹션별로 배치했습니다. 투명교정 화면에서는 장치 안내와 자주 묻는 질문을 함께 읽을 수 있습니다.", items: ["진료 과정", "관리 안내", "자주 묻는 질문"], img: "/cases/malkkeum/clear-aligner.webp", caption: "투명교정 — 장치와 진료 안내" },
+    { title: "공간과 장비를 사진으로 확인", body: "입구와 대기실부터 개별 진료실, 촬영실, 기공 작업 공간까지 살펴볼 수 있습니다. 장비 화면에서는 각 장비의 용도도 볼 수 있습니다.", items: ["공간별 사진", "진료 장비 안내"], img: "/cases/malkkeum/facilities.webp", caption: "병원 소개 — 진료 공간" },
   ],
   details: [
     { title: "상단 메뉴와 화면별 이동 메뉴", body: "병원 소개와 진료 분류를 상단에서 선택하고, 상세 화면의 이동 메뉴로 다른 항목을 확인할 수 있습니다." },
@@ -38,9 +38,9 @@ const study: CaseStudy = {
     title: "휴대폰에서는 전체 메뉴로 항목 선택",
     body: "분류를 펼쳐 진료 항목을 찾고, 사진과 설명을 화면 폭에 맞춰 읽을 수 있습니다.",
     shots: [
-      { img: "/cases/saeromdent/mobile-main.webp", caption: "메인" },
-      { img: "/cases/saeromdent/mobile-menu.webp", caption: "전체 메뉴" },
-      { img: "/cases/saeromdent/mobile-facilities.webp", caption: "진료 공간" },
+      { img: "/cases/malkkeum/mobile-main.webp", caption: "메인" },
+      { img: "/cases/malkkeum/mobile-menu.webp", caption: "전체 메뉴" },
+      { img: "/cases/malkkeum/mobile-facilities.webp", caption: "진료 공간" },
     ],
   },
   faq: [

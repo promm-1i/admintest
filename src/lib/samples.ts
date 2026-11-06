@@ -106,7 +106,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-z-template",
     industry: "시력교정 · 안과 병원 홈페이지",
-    title: "안과 병원 홈페이지",
+    title: "서울시원안과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 안과 · 시력교정 · 노안 · 백내장",
     purpose:
@@ -118,8 +118,8 @@ export const SAMPLES: Sample[] = [
       "화면 옆 빠른 메뉴와 휴대폰 아래 간편예약 · 상담 버튼",
     ],
     idealFor: "수술과 진료, 검진 정보를 나누어 안내하고 온라인 예약을 받으려는 안과",
-    image: "/thumbs/clearview.jpg",
-    liveUrl: "/clearview/",
+    image: "/thumbs/siwoneye.jpg",
+    liveUrl: "/siwoneye/",
     industryKey: "hospital",
     premiumLabel: "안과 · 시력교정",
     designCode: "HOSP-1029",
@@ -356,7 +356,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "dental-j-template",
     industry: "치과 홈페이지",
-    title: "치과 홈페이지",
+    title: "말끔치과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 임플란트 · 교정 · 심미 · 보존",
     purpose:
@@ -368,8 +368,8 @@ export const SAMPLES: Sample[] = [
       "진료 정보를 짧은 단락으로 나눈 안내",
     ],
     idealFor: "임플란트부터 예방 · 보존 진료까지 폭넓게 안내하고 싶은 치과 의원",
-    image: "/thumbs/saeromdent.jpg",
-    liveUrl: "/saeromdent/",
+    image: "/thumbs/malkkeum.jpg",
+    liveUrl: "/malkkeum/",
     industryKey: "dental",
     premiumLabel: "치과 · 종합진료",
     designCode: "DENP-1004",
@@ -576,7 +576,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "dental-i-template",
     industry: "임플란트 · 어르신 진료 치과 홈페이지",
-    title: "임플란트 · 어르신 진료 치과 홈페이지",
+    title: "차분한치과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 임플란트 · 어르신 진료 · 평생 구강관리",
     purpose:
@@ -589,7 +589,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "임플란트와 자연치아 관리를 함께 안내하는 치과, 어르신 환자와 보호자에게 진료 과정을 차분하게 설명하고 싶은 치과",
     image: "/thumbs/dental-i.jpg",
-    liveUrl: "/ondamgil/",
+    liveUrl: "/chabun/",
     industryKey: "dental",
     premiumLabel: "임플란트 · 어르신 진료",
     designCode: "DENP-1003",
@@ -862,7 +862,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "dental-h-template",
     industry: "치과 홈페이지",
-    title: "치과 홈페이지",
+    title: "역삼고른치과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 치과 · 심미 레진 · 재치료 · 수면치료",
     purpose:
@@ -875,7 +875,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "진료 과정을 자세히 설명하고 싶은 치과, 심미 레진과 재치료를 중심으로 운영하는 치과, 게시판과 회원 안내까지 갖춘 홈페이지가 필요한 치과",
     image: "/thumbs/dental-h.jpg",
-    liveUrl: "/areumgyeol/",
+    liveUrl: "/goreun/",
     industryKey: "dental",
     premiumLabel: "치과 · 정밀진료",
     designCode: "DENP-1002",
@@ -1143,20 +1143,20 @@ export const SAMPLES: Sample[] = [
   {
     slug: "dental-g-template",
     industry: "치과 홈페이지",
-    title: "치과 홈페이지",
+    title: "서초웃는치과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 치과 · 임플란트 · 구강스파",
     purpose:
       "사진 두 장이 번갈아 바뀌는 첫 화면, 진료분야 넘김 · 원장 소개 · 장비 넘김 · 둘러보기 · 전후 사례 · 미디어룸 · 그림 약도로 이어지는 메인에 병원 소개, 구강스파, 임플란트, 미백 · 라미네이트, 사랑니 발치, 잇몸 · 충치 · 신경치료, 공지사항 · 미디어룸 · 치료후기 · 온라인상담까지 있는 치과 홈페이지입니다.",
     features: [
       "사진이 번갈아 바뀌는 첫 화면 · 하루 동안 안 보기 알림창 · 오른쪽 빠른 메뉴와 간편 예약 창",
-      "큰 사진과 작은 사진이 함께 넘어가는 '왜 온새치과' · 마우스를 따라오는 장비 넘김 · 전후 사례",
+      "큰 사진과 작은 사진이 함께 넘어가는 '왜 서초웃는치과' · 마우스를 따라오는 장비 넘김 · 전후 사례",
       "진료마다 대상 · 과정 넘김 · 치료 뒤 관리 · 펼치는 질문 — 임플란트 · 미백 · 라미네이트 · 사랑니 · 잇몸 · 충치 · 신경치료",
       "벽돌처럼 쌓이는 미디어룸 · 분류 탭 치료후기 · 비밀번호 확인 창이 있는 온라인상담 · 확대 · 축소되는 그림 약도",
     ],
     idealFor: "자연치아를 살리는 진료를 앞세우는 치과, 임플란트 · 사랑니 발치를 하는 치과, 미백 · 라미네이트 같은 심미 진료를 함께 하는 치과",
     image: "/thumbs/dental-g.jpg",
-    liveUrl: "/onsae/",
+    liveUrl: "/utneun/",
     industryKey: "dental",
     premiumLabel: "치과 · 구강스파",
     designCode: "DENP-1001",
