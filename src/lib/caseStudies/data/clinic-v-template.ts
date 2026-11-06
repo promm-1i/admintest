@@ -2,7 +2,7 @@ import type { CaseStudy } from "../types";
 
 const study: CaseStudy = {
   customerCopyReady: true,
-  brand: "에어로비아안과",
+  brand: "서울또렷안과",
   headline: "눈 건강 정보를 충분히 읽고 방문을 준비하는 안과 홈페이지",
   summary: "백내장, 드림렌즈, 망막·녹내장과 안구건조증을 분야별로 안내합니다. 질환의 이해부터 검사와 관리 방법까지 연결하고, 진료시간과 방문 정보를 함께 제공합니다.",
   brandColor: "#176c65",
