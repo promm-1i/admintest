@@ -84,7 +84,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-w-template",
     industry: "한의원 홈페이지",
-    title: "한의원 홈페이지",
+    title: "모과나무한의원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 한의원 · 리프팅 · 피부 · 8체질 · 체중 관리 · 여러 지점",
     purpose:
@@ -96,8 +96,8 @@ export const SAMPLES: Sample[] = [
       "메신저 상담 · 예약 문의 · 진료 비용 빠른 메뉴와 모바일 하단 메뉴",
     ],
     idealFor: "리프팅과 피부 진료를 함께 하는 한의원, 체질 상담과 체중 관리를 운영하는 한의원, 여러 지점을 하나의 사이트로 안내하려는 의료기관",
-    image: "/thumbs/onur.jpg",
-    liveUrl: "/onur/",
+    image: "/thumbs/mogwanamu.jpg",
+    liveUrl: "/mogwanamu/",
     industryKey: "hospital",
     premiumLabel: "한의원",
     designCode: "HOSP-1025",
@@ -335,7 +335,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-t-template",
     industry: "난임 · 여성의원 홈페이지",
-    title: "난임 · 여성의원 홈페이지",
+    title: "봄날여성의원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 시험관 · 인공수정 · 여성검진",
     purpose:
@@ -346,8 +346,8 @@ export const SAMPLES: Sample[] = [
       "사례 · 공지 · 상담 예약 연결",
     ],
     idealFor: "난임센터, 여성의원, 시험관 · 인공수정 중심의 전문 클리닉",
-    image: "/thumbs/nuvia.jpg",
-    liveUrl: "/nuvia/",
+    image: "/thumbs/bomnal.jpg",
+    liveUrl: "/bomnal/",
     industryKey: "hospital",
     premiumLabel: "난임 · 여성의원",
     designCode: "HOSP-1022",
@@ -400,7 +400,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-y-template",
     industry: "피부 의원 홈페이지",
-    title: "피부 의원 홈페이지",
+    title: "가로수피부과의원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 피부 · 필링 · 주사",
     purpose:
@@ -412,8 +412,8 @@ export const SAMPLES: Sample[] = [
       "게시판 제목 · 내용 검색",
     ],
     idealFor: "시술 정보와 방문 안내를 차분하게 전달하려는 피부 의원",
-    image: "/thumbs/saelune.jpg",
-    liveUrl: "/saelune/",
+    image: "/thumbs/garosu.jpg",
+    liveUrl: "/garosu/",
     industryKey: "hospital",
     premiumLabel: "피부 · 필링 · 주사",
     designCode: "HOSP-1027",
@@ -422,7 +422,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-x-template",
     industry: "피부 · 웰니스 의원 홈페이지",
-    title: "피부 · 웰니스 의원 홈페이지",
+    title: "청담예원의원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 피부 진료 · 웰니스 프로그램 · 상담 예약",
     purpose:
@@ -434,8 +434,8 @@ export const SAMPLES: Sample[] = [
       "칼럼 · 이벤트 목록과 비급여 비용표",
     ],
     idealFor: "리프팅부터 스킨 부스터 · 바디 관리까지 함께 안내하는 피부 · 웰니스 의원",
-    image: "/thumbs/aureline.jpg",
-    liveUrl: "/aureline/",
+    image: "/thumbs/yewon.jpg",
+    liveUrl: "/yewon/",
     industryKey: "hospital",
     premiumLabel: "피부 · 웰니스",
     designCode: "HOSP-1026",
@@ -444,7 +444,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "hospital-d-template",
     industry: "정신건강의학과 병원 홈페이지",
-    title: "정신건강의학과 병원 홈페이지",
+    title: "평안숲병원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 정신건강의학과 · 입원 · 재활 프로그램 · 상담 신청",
     purpose:
@@ -456,8 +456,8 @@ export const SAMPLES: Sample[] = [
       "소식 상세 · 자주 묻는 질문 펼침",
     ],
     idealFor: "외래와 병동을 함께 운영하는 정신건강의학과 병원",
-    image: "/thumbs/onsaebom.jpg",
-    liveUrl: "/onsaebom/",
+    image: "/thumbs/pyeongansoop.jpg",
+    liveUrl: "/pyeongansoop/",
     industryKey: "hospital",
     premiumLabel: "정신건강의학과",
     designCode: "HOSP-1020",

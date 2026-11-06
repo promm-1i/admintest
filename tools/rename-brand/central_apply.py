@@ -61,7 +61,8 @@ def t_redirects(s, a):
 def t_toml(s, a, pairs):
     pat = re.compile(r'\[\[redirects\]\][^\n]*\n  from = "/%s/\*"\n  to = "/%s/:splat"\n  status = 200\n' % ((re.escape(a.old_dir),) * 2))
     m = pat.search(s)
-    assert m, 'netlify.toml 에 200 묶음 없음'
+    if not m:  # 최근 사이트는 _redirects 에만 규칙이 있다(_redirects 가 먼저 읽혀 301 은 거기서 충분)
+        return re.sub(r'(to = ")/%s/' % re.escape(a.old_dir), r'\1/%s/' % a.new_dir, s)
     head = m.group(0).split('\n')[0]
     for o, n in pairs:
         head = head.replace(o, n)
@@ -89,7 +90,8 @@ def main():
             ('public/_redirects', lambda s: t_redirects(s, a)),
             ('netlify.toml', lambda s: t_toml(s, a, pairs))]
     for path, fn in jobs:
-        head = git('show', 'HEAD:' + path).decode('utf-8')
+        # --stage 는 인덱스 판(처음엔 HEAD 와 같음)에 건다 — 여러 곳을 연달아 올려도 앞 곳 변경이 쌓인다
+        head = git('show', (':' if a.stage else 'HEAD:') + path).decode('utf-8')
         h2 = fn(head)
         if a.stage:
             # 작업 판은 --apply 로 이미 고쳐 둔 상태. HEAD+변환만 인덱스에 올린다.
