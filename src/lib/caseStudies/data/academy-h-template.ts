@@ -2,7 +2,7 @@ import type { CaseStudy } from "../types";
 
 const study: CaseStudy = {
   customerCopyReady: true,
-  brand: "아람결 치료교육연구소",
+  brand: "아람 아동상담센터",
   headline: "상담 · 발달평가 · 부모교육을 나눈 치료교육 연구소 홈페이지",
   summary:
     "아동의 기질과 발달을 이해하는 첫 안내부터 심리상담, 특별 프로그램, 전문가 교육과 부모교육까지 이어지는 18페이지 구성입니다. 연구소 소개, 연구진, 교육 활동과 협력 네트워크는 각각의 화면으로 나누고 일정·자료·문의 정보를 함께 배치했습니다.",

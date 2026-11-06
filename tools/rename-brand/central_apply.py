@@ -49,8 +49,13 @@ def redirect_lines(a, sep):
 def t_redirects(s, a):
     pat = re.compile(r'^/%s/\*(\s+)/%s/:splat\s+200[^\n]*$' % ((re.escape(a.old_dir),) * 2), re.M)
     m = pat.search(s)
-    assert m, '_redirects 에 200 규칙 없음'
-    s = s[:m.start()] + '\n'.join(redirect_lines(a, m.group(1))) + s[m.end():]
+    if m:
+        s = s[:m.start()] + '\n'.join(redirect_lines(a, m.group(1))) + s[m.end():]
+    else:  # 규칙 없이 폴더로만 열리던 곳(bodien) — SPA 폴백(/* /app.html) 앞에 넣는다(먼저 걸린 규칙이 이김)
+        k = s.find('\n# SPA 폴백')
+        if k < 0:
+            k = re.search(r'\n/\*\s+/app\.html', s).start()
+        s = s[:k] + '\n' + '\n'.join(redirect_lines(a, '  ')) + s[k:]
     # 다른 규칙(옛 코드명 → 옛 브랜드 주소)의 목적지도 새 주소로 — 두 번 넘기지 않게
     s = re.sub(r'(\s)/%s/(:splat|\s|$)' % re.escape(a.old_dir), lambda x: x.group(1) + '/%s/' % a.new_dir + x.group(2), s, flags=re.M)
     # 위 치환이 방금 넣은 '옛 → 새' 301 의 출발지는 건드리지 않았는지 확인

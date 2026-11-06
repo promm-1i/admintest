@@ -598,7 +598,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "kids-i-template",
     industry: "유아 영어 · 말하기 놀이 홈페이지",
-    title: "유아 영어 · 말하기 놀이 홈페이지",
+    title: "꼬마영어 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 유아 영어 · 대화형 학습 · 이용 가이드",
     purpose:
@@ -611,7 +611,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "유아 영어 프로그램, 말하기 중심 교육센터, 영어 놀이 수업, 교육 앱 및 기관 도입 서비스를 운영하는 브랜드",
     image: "/thumbs/kids-i.jpg",
-    liveUrl: "/picolingo/",
+    liveUrl: "/kkomaenglish/",
     industryKey: "kids",
     premiumLabel: "유아 영어 · 말하기 놀이",
     designCode: "KIDP-1003",
@@ -664,7 +664,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "academy-h-template",
     industry: "아동·가족 심리상담 및 치료교육 홈페이지",
-    title: "아동·가족 심리상담 및 치료교육 홈페이지",
+    title: "아람 아동상담센터 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 아동상담 · 가족상담 · 부모교육",
     purpose:
@@ -677,7 +677,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "아동·청소년 상담센터, 가족상담기관, 발달지원기관, 부모교육 및 치료교육 연구소",
     image: "/thumbs/academy-h.jpg",
-    liveUrl: "/aramgyeol/",
+    liveUrl: "/aramcenter/",
     industryKey: "academy",
     premiumLabel: "심리상담 · 치료교육",
     designCode: "EDUP-1003",
@@ -708,7 +708,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "academy-g-template",
     industry: "스피치 · 보이스 · 면접 학원 홈페이지",
-    title: "스피치 · 보이스 · 면접 학원 홈페이지",
+    title: "말솜씨스피치 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 스피치 · 보이스 · 면접 · 기업교육",
     purpose:
@@ -721,7 +721,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "스피치, 보이스 트레이닝, 취업·대학·공무원 면접 코칭과 기업 출강을 함께 운영하는 학원 및 교육센터",
     image: "/thumbs/academy-g.jpg",
-    liveUrl: "/malbom/",
+    liveUrl: "/malsomssi/",
     industryKey: "academy",
     premiumLabel: "스피치 · 보이스 · 면접",
     designCode: "EDUP-1002",
@@ -1275,7 +1275,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "fitness-f-template",
     industry: "피트니스 · 헬스장 프랜차이즈 홈페이지",
-    title: "피트니스 · 헬스장 프랜차이즈 홈페이지",
+    title: "몸짓 피트니스 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 피트니스 · 헬스장 프랜차이즈",
     purpose:
@@ -1288,7 +1288,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "헬스장·피트니스 프랜차이즈 본사, 여러 지점을 운영하는 PT샵·필라테스 체인, 24시간 운영하는 헬스장 브랜드",
     image: "/thumbs/fitness-f.jpg",
-    liveUrl: "/bodien/",
+    liveUrl: "/momjit/",
     industryKey: "fitness",
     premiumLabel: "피트니스업",
     designCode: "FITP-1001",
@@ -1568,7 +1568,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "fitness-g-template",
     industry: "프리미엄 피트니스 · 위탁운영 회사 홈페이지",
-    title: "프리미엄 피트니스 · 위탁운영 회사 홈페이지",
+    title: "웰핏 피트니스 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 피트니스 · 위탁운영 · 트레이너",
     purpose:
@@ -1581,7 +1581,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "프리미엄 피트니스 센터 · PT 스튜디오, 호텔 · 기업 · 아파트 커뮤니티 피트니스 위탁운영 회사, 트레이너 팀을 앞세우려는 웰니스 브랜드",
     image: "/thumbs/fitness-g.jpg",
-    liveUrl: "/baymotion/",
+    liveUrl: "/wellfit/",
     industryKey: "fitness",
     premiumLabel: "피트니스 · 위탁운영",
     designCode: "FITP-1002",
