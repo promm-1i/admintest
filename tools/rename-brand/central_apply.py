@@ -10,7 +10,7 @@
   _redirects   : '/옛/* /옛/:splat 200' 줄을 새 주소 200 + 옛 주소 301 + 옛 상세 301 로, 다른 규칙의 /옛/ 목적지도 새로
   netlify.toml : 같은 내용을 [[redirects]] 묶음으로
 """
-import sys, os, re, io, subprocess, argparse
+import sys, os, re, io, subprocess, argparse, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import rename_brand as rb
 
@@ -108,7 +108,15 @@ def main():
         w2 = fn(work)
         print('%-20s HEAD %+d자 · 작업판 %+d자' % (path, len(h2) - len(head), len(w2) - len(work)))
         if a.apply:
-            io.open(os.path.join(ROOT, path), 'w', encoding='utf-8', newline='').write(w2)
+            # 다른 프로세스(git grep 등)가 파일을 매핑 중이면 비우기가 Errno 22 로 막힌다 — 잠깐 쉬고 다시
+            for n in range(30):
+                try:
+                    io.open(os.path.join(ROOT, path), 'w', encoding='utf-8', newline='').write(w2)
+                    break
+                except OSError:
+                    if n == 29:
+                        raise
+                    time.sleep(1)
     if a.stage:
         print('스테이징됨:', git('diff', '--cached', '--stat').decode('utf-8', 'replace').strip().split('\n')[-1])
 

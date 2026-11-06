@@ -2,14 +2,14 @@ import type { CaseStudy } from "../types";
 
 const study: CaseStudy = {
   customerCopyReady: true,
-  brand: "엘름우드",
+  brand: "그린스퀘어",
   headline: "복합쇼핑몰 · 오피스 단지 홈페이지",
   summary:
     "쇼핑몰과 오피스가 한 단지에 있는 복합시설 홈페이지입니다. 천천히 당겨지며 바뀌는 첫 화면 사진 4장, 입점 매장 91곳 상세와 층별 안내 창, 이벤트 · 이야기 · 보도, 동네 지도, 오피스 임대 안내, 어메니티 예약 · 방문 등록, 자주 묻는 질문과 통합 검색까지 있습니다.",
   brandColor: "rgb(31,40,35)",
   tintColor: "rgb(230,226,225)",
   overview:
-    "엘름우드는 도심 업무지구에 들어선 쇼핑몰 · 오피스 복합단지입니다. 베이지 바탕에 짙은 숲색과 먹색을 썼습니다.\n\n메인은 천천히 당겨지며 겹쳐 바뀌는 첫 화면 사진 4장으로 시작하고, 내리면 화면이 멈춘 채 로고와 문구가 위로 사라집니다. 그 아래로 What's On 카드, 입점 브랜드 넘김, 저절로 넘어가는 오피스 사진 넘김, 새 소식 소개가 이어집니다. 맨 위 메뉴 줄은 내리면 숨고 올리면 다시 나타나며, 돋보기를 누르면 검색 칸이 열립니다.\n\n서브 쪽은 사진 위 큰 제목이 내리는 만큼 올라가는 첫 화면 뒤로 본문이 이어집니다. Lifestyle 에는 전체와 Shop · Eat & Drink · Culture · Wellness 목록, 매장 91곳 상세(운영 시간 · 전화 · 위치 · 사진 · 관련 이벤트)가 있고, 매장 위치 버튼을 누르면 그 층 평면도에 핀이 꽂힌 층별 안내 창이 열립니다. What's On 에는 이벤트 분류 버튼과 남은 날 표시, 동네 지도, 이야기 29편, 보도 45건이 있습니다. Work 에는 오피스 라이프 · 게스트 서비스 · 임대 안내와 어메니티 예약 쪽이, About 에는 건물 소개 · 오시는 길 · 자주 묻는 질문 · 문의처가 있습니다. 방문 등록 · 문의 · 회원가입 양식은 입력 확인과 안내 문구까지만 하고 어디에도 보내지 않으며, 어메니티 예약 쪽은 입주사 로그인 창이 먼저 뜹니다.",
+    "그린스퀘어는 도심 업무지구에 들어선 쇼핑몰 · 오피스 복합단지입니다. 베이지 바탕에 짙은 숲색과 먹색을 썼습니다.\n\n메인은 천천히 당겨지며 겹쳐 바뀌는 첫 화면 사진 4장으로 시작하고, 내리면 화면이 멈춘 채 로고와 문구가 위로 사라집니다. 그 아래로 What's On 카드, 입점 브랜드 넘김, 저절로 넘어가는 오피스 사진 넘김, 새 소식 소개가 이어집니다. 맨 위 메뉴 줄은 내리면 숨고 올리면 다시 나타나며, 돋보기를 누르면 검색 칸이 열립니다.\n\n서브 쪽은 사진 위 큰 제목이 내리는 만큼 올라가는 첫 화면 뒤로 본문이 이어집니다. Lifestyle 에는 전체와 Shop · Eat & Drink · Culture · Wellness 목록, 매장 91곳 상세(운영 시간 · 전화 · 위치 · 사진 · 관련 이벤트)가 있고, 매장 위치 버튼을 누르면 그 층 평면도에 핀이 꽂힌 층별 안내 창이 열립니다. What's On 에는 이벤트 분류 버튼과 남은 날 표시, 동네 지도, 이야기 29편, 보도 45건이 있습니다. Work 에는 오피스 라이프 · 게스트 서비스 · 임대 안내와 어메니티 예약 쪽이, About 에는 건물 소개 · 오시는 길 · 자주 묻는 질문 · 문의처가 있습니다. 방문 등록 · 문의 · 회원가입 양식은 입력 확인과 안내 문구까지만 하고 어디에도 보내지 않으며, 어메니티 예약 쪽은 입주사 로그인 창이 먼저 뜹니다.",
   meta: [
     { label: "업종", value: "쇼핑몰과 오피스가 함께 있는 복합단지, 입점 매장이 많은 쇼핑몰 · 아웃렛, 입주사 편의시설 예약을 함께 안내하는 오피스 빌딩" },
     {
@@ -62,7 +62,7 @@ const study: CaseStudy = {
       items: ["지하철 노선 · 장소 핀", "장소에 마우스를 대면 지도 구역이 밝아짐", "장소를 누르면 사진과 설명 창"],
     },
     {
-      name: "Life in Elmwood",
+      name: "Life in Green Square",
       file: "work.html",
       img: "/cases/real-estate-g/page-work.webp",
       desc: "부채처럼 펼쳐지는 오피스 라이프 카드 아래로 센트럴 가든 · 지하 보행로 · 쇼핑몰과 입주사 소개가 이어집니다.",
@@ -131,7 +131,7 @@ const study: CaseStudy = {
       body: "오피스 라이프 카드는 화면에 들어오면 한 장씩 부채처럼 펼쳐집니다.",
       items: ["카드 6장 · 펼침 장면"],
       img: "/cases/real-estate-g/point-cards.webp",
-      caption: "Life in Elmwood",
+      caption: "Life in Green Square",
     },
     {
       title: "분류로 거르는 이벤트",
@@ -171,7 +171,7 @@ const study: CaseStudy = {
       { img: "/cases/real-estate-g/m-index.webp", caption: "메인" },
       { img: "/cases/real-estate-g/m-lifestyle.webp", caption: "Lifestyle" },
       { img: "/cases/real-estate-g/m-shop-5.webp", caption: "매장 상세" },
-      { img: "/cases/real-estate-g/m-work.webp", caption: "Life in Elmwood" },
+      { img: "/cases/real-estate-g/m-work.webp", caption: "Life in Green Square" },
     ],
   },
   faq: [

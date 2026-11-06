@@ -928,7 +928,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "rentcar-h-template",
     industry: "수입차 구독 홈페이지",
-    title: "수입차 구독 홈페이지",
+    title: "오토픽 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 렌터카 · 수입차 구독 · 차량 큐레이션",
     purpose:
@@ -936,7 +936,7 @@ export const SAMPLES: Sample[] = [
     features: ["브랜드별 차량 목록 · 정렬 이동", "입고 예정 차량 큐레이션", "구독 기간 선택 · 상품 비교 · 이용 절차", "FAQ · 1:1 문의 · 로그인/회원가입 · 약관"],
     idealFor: "수입차 구독 업체, 장기 렌터카·리스 상담사, 프리미엄 중고차 업체, 차량 큐레이션 서비스",
     image: "/thumbs/rentcar-h.jpg",
-    liveUrl: "/carcena/",
+    liveUrl: "/autopick/",
     industryKey: "rentcar",
     premiumLabel: "수입차 구독",
     designCode: "RENP-1003",
@@ -1253,7 +1253,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "real-estate-f-template",
     industry: "아파트 분양 · 홍보관 홈페이지",
-    title: "아파트 분양 홍보관 홈페이지",
+    title: "호수공원 센트럴파크 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 아파트 분양 · 홍보관",
     purpose:
@@ -1266,7 +1266,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "아파트 · 오피스텔 분양 대행사, 시행 · 시공사의 분양 홍보관, 지역주택조합 · 도시형 생활주택 분양 홍보",
     image: "/thumbs/real-estate-f.jpg",
-    liveUrl: "/artiel/",
+    liveUrl: "/centralpark/",
     industryKey: "real-estate",
     premiumLabel: "분양 · 부동산업",
     designCode: "REAP-1001",
@@ -1417,17 +1417,17 @@ export const SAMPLES: Sample[] = [
     premium: true,
   },
   {
-    slug: "ondam-template",
+    slug: "jeongdam-template",
     industry: "한식 프랜차이즈 본사 홈페이지",
-    title: "한식 프랜차이즈 본사 홈페이지",
+    title: "정담푸드 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 외식 · 브랜드 4종 · 창업 · 고객센터",
     purpose:
       "배너 6장이 도는 메인에서 시작해 브랜드 네 곳을 세로 탭으로 넘겨 보고, 화면 아래에 브랜드 퀵바가 따라다닙니다. 브랜드마다 소개 · 메뉴 · 매장 찾기 세 쪽을 두고, 창업 쪽은 절차 10단계 · 선배 사장님 이야기 · 좌우로 엇갈리는 강점 다섯 단 · 담당자 인터뷰로 이어집니다. 창업 상담 신청서, 설명회 일정, 추천 상권 표, 창업 FAQ, 이벤트, 모바일 상품권, 단체 주문 쪽까지 있습니다.",
     features: ["브랜드 4종 × 소개·메뉴·매장 찾기", "창업 · 고객센터 · 서비스 안내", "화면 아래 따라다니는 브랜드 퀵바 · 지도 매장 찾기", "로그인 · 마이페이지 · 주문 방식 · 설문까지"],
     idealFor: "한식·분식 프랜차이즈 본사, 다브랜드 외식기업, 단체 급식·도시락 업체, 가맹 모집 중인 외식 브랜드",
-    image: "/thumbs/ondam.jpg",
-    liveUrl: "/ondam/",
+    image: "/thumbs/jeongdam.jpg",
+    liveUrl: "/jeongdam/",
     industryKey: "restaurant",
     premiumLabel: "외식 프랜차이즈",
     designCode: "RESP-1001",
@@ -1480,7 +1480,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "real-estate-g-template",
     industry: "복합쇼핑몰 · 오피스 단지 홈페이지",
-    title: "복합쇼핑몰 · 오피스 단지 홈페이지",
+    title: "그린스퀘어 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 복합쇼핑몰 · 오피스 · 매장 안내",
     purpose:
@@ -1493,7 +1493,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "쇼핑몰과 오피스가 함께 있는 복합단지, 입점 매장이 많은 쇼핑몰 · 아웃렛, 입주사 편의시설 예약을 함께 안내하는 오피스 빌딩",
     image: "/thumbs/real-estate-g.jpg",
-    liveUrl: "/elmwood/",
+    liveUrl: "/greensquare/",
     industryKey: "real-estate",
     premiumLabel: "복합단지 · 쇼핑몰",
     designCode: "REAP-1002",
@@ -1607,7 +1607,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "photo-f-template",
     industry: "디자인 스튜디오 · 포트폴리오 홈페이지",
-    title: "디자인 스튜디오 · 포트폴리오 홈페이지",
+    title: "스튜디오 하루 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 스튜디오 · 포트폴리오 · 작품 상세",
     purpose:
@@ -1615,7 +1615,7 @@ export const SAMPLES: Sample[] = [
     features: ["작품 28점 · 분류 5종 목록 · 작품 상세", "구멍에서 물체가 흩어지는 서비스 장면 · 펼쳐지는 카드 4장", "지구본에서 세 거점으로 선이 뻗는 소개 쪽 · 연혁 탭 3개", "일정·예산 선택과 파일 첨부·보안문자가 있는 문의 폼 · 작품별 견적 팝업"],
     idealFor: "사진·영상 스튜디오, 패키지·브랜드 디자인 스튜디오, 제품 촬영 스튜디오, 작업물을 보여 주는 제작사",
     image: "/thumbs/photo-f.jpg",
-    liveUrl: "/onsum/",
+    liveUrl: "/studioharu/",
     industryKey: "photo",
     premiumLabel: "사진 · 영상 제작업",
     designCode: "PHOP-1001",
