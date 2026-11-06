@@ -15,7 +15,7 @@ sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 AXE = next((p for p in ('C:/_tmp/claude/axe.min.js',
                         'C:/_tmp/claude/C--web-project/f705668a-99f9-434b-be37-ed60b1b03504/scratchpad/axe.min.js')
             if os.path.exists(p)), 'C:/_tmp/claude/axe.min.js')
-SRC = 'file:///C:/web-project/mintcl-netlify-spa/public/semroot/'
+SRC = 'file:///C:/web-project/mintcl-netlify-spa/public/hanbitmath/'
 PAGES = ['index', 's-bank', 's-note', 's-exam', 's-textbook', 's-consulting', 's-premium',
          'seminar', 'pricing', 'reviews', 'review-1', 'review-2', 'review-3',
          'news', 'press', 'blog', 'faq', 'contact', 'terms', 'privacy', 'marketing']
