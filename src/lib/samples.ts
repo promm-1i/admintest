@@ -213,7 +213,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "dental-k-template",
     industry: "임플란트 치과 홈페이지",
-    title: "임플란트 치과 홈페이지",
+    title: "여문치과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 중장년 임플란트 · 수면 진료 · 라미네이트 · 교정",
     purpose:
@@ -224,8 +224,8 @@ export const SAMPLES: Sample[] = [
       "임플란트 비용 문의 · 상담 예약 · 비급여 안내",
     ],
     idealFor: "임플란트 중심 치과, 지점이 여럿인 치과, 중장년 환자가 많은 치과",
-    image: "/thumbs/saebomdent.jpg",
-    liveUrl: "/saebomdent/",
+    image: "/thumbs/yeomun.jpg",
+    liveUrl: "/yeomun/",
     industryKey: "dental",
     premiumLabel: "치과 · 임플란트",
     designCode: "DENP-1005",
@@ -234,7 +234,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-p-template",
     industry: "유방 · 갑상선 외과 홈페이지",
-    title: "유방 · 갑상선 외과 홈페이지",
+    title: "서울하나유방갑상선외과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 유방 · 갑상선 · 검진 · 피부클리닉",
     purpose:
@@ -245,8 +245,8 @@ export const SAMPLES: Sample[] = [
       "온라인 상담 · 진료시간 · 오시는 길",
     ],
     idealFor: "유방 · 갑상선 외과, 여성 검진 중심 의원, 피부 관리를 함께 하는 외과",
-    image: "/thumbs/lumian.jpg",
-    liveUrl: "/lumian/",
+    image: "/thumbs/hanabreast.jpg",
+    liveUrl: "/hanabreast/",
     industryKey: "hospital",
     premiumLabel: "유방 · 갑상선 외과",
     designCode: "HOSP-1015",
@@ -620,7 +620,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "academy-j-template",
     industry: "댄스학원 · 댄스아카데미 홈페이지",
-    title: "댄스학원 · 댄스아카데미 홈페이지",
+    title: "리듬댄스학원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 댄스학원 · 장르별 클래스 · 시간표 · 강사 소개",
     purpose:
@@ -633,7 +633,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "스트릿댄스학원, K-POP 댄스학원, 입시·전문반과 키즈반을 함께 운영하며 강사·시간표·특강을 상세히 안내하려는 댄스아카데미",
     image: "/thumbs/academy-j.jpg",
-    liveUrl: "/grooveon/",
+    liveUrl: "/rhythmdance/",
     industryKey: "academy",
     premiumLabel: "댄스학원",
     designCode: "EDUP-1005",
@@ -642,7 +642,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "academy-i-template",
     industry: "수학 문제은행 · 학원 솔루션 홈페이지",
-    title: "수학 문제은행 · 학원 솔루션 홈페이지",
+    title: "셈하나 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 수학 문제은행 · 수준별 학습 · 성적 관리",
     purpose:
@@ -655,7 +655,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "수학학원, 교습소, 공부방, 문제은행과 수준별 학습·성적 관리 서비스를 함께 소개하려는 교육 브랜드",
     image: "/thumbs/academy-i.jpg",
-    liveUrl: "/semdawoom/",
+    liveUrl: "/semhana/",
     industryKey: "academy",
     premiumLabel: "수학 문제은행 · 학원 솔루션",
     designCode: "EDUP-1004",
@@ -840,7 +840,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "vet-g-template",
     industry: "동물병원 · 동물의료센터 홈페이지",
-    title: "동물병원 · 동물의료센터 홈페이지",
+    title: "도란동물의료센터 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 24시 동물병원 · 동물의료센터",
     purpose:
@@ -853,7 +853,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "야간과 응급 진료를 함께 운영하는 24시간 동물병원, 정형외과 · 신경외과 · 영상진단 · 재활을 나눠 진료하는 동물의료센터, 원내 시설과 검진 프로그램을 자세히 보여 줄 동물병원",
     image: "/thumbs/vet-g.jpg",
-    liveUrl: "/onyuldam/",
+    liveUrl: "/doran/",
     industryKey: "vet",
     premiumLabel: "동물병원 · 동물의료센터",
     designCode: "VETP-1002",
