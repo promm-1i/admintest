@@ -1184,11 +1184,11 @@
     else if(act==='close-modal'){e.preventDefault();modalClose(el);}
     else if(act==='toggle-counsel'){e.preventDefault();var f=el.closest('.oy-cnsx-fm');if(f){var folded=f.classList.toggle('oy-collapsed');el.setAttribute('aria-expanded',String(!folded));el.textContent=folded?'상담 열기':'접어두기';}}
     else if(act==='top'){e.preventDefault();window.scrollTo(0,0);}
-    else if(act==='demo'){e.preventDefault();toast('템플릿 화면에서는 외부 연결이 동작하지 않습니다.');}
+    else if(act==='demo'){e.preventDefault();toast('연결할 페이지는 현재 준비 중입니다.');}
   });
   q('.oy-ic-sr').forEach(function(x){x.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();modalOpen('search');});});
   document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches('[role="button"],[role="tab"]')){e.preventDefault();e.target.click();}if(e.key==='Escape'){document.body.classList.remove('oy-menu-open');var n=document.getElementById('oy-i-gn-llx');if(n)n.classList.remove('open');q('[data-act="menu"]').forEach(function(x){x.classList.remove('open');x.setAttribute('aria-expanded','false');});var m=document.querySelector('.oy-mdlx[aria-hidden="false"]');if(m)modalClose(m);}});
-  q('form[data-act="demo-form"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var req=q('[required]',f),bad=req.find(function(x){return !String(x.value||'').trim();});if(bad){bad.focus();toast('필수 항목을 확인해 주세요.');return;}toast('템플릿 화면에서는 신청 내용이 전송되지 않습니다.');});});
+  q('form[data-act="demo-form"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var req=q('[required]',f),bad=req.find(function(x){return !String(x.value||'').trim();});if(bad){bad.focus();toast('필수 항목을 확인해 주세요.');return;}toast('온라인 신청은 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.');});});
   ['skin','tune','account'].forEach(function(group){var first=document.querySelector('[data-act="panel-tab"][data-target="'+group+'"][aria-pressed="true"]')||document.querySelector('[data-act="panel-tab"][data-target="'+group+'"]');if(first)panels(group,first.dataset.arg);});
   if(q('.oy-pnlx-tt').length){var p=location.pathname;accordion(p.indexOf('lounge-video-policy')>-1?3:(p.indexOf('lounge-terms')>-1?1:0),true);}
   q('.oy-cntx4').forEach(function(x){var v=x.getAttribute('data-count');if(v)x.textContent=v;});

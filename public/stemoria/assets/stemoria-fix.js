@@ -2,8 +2,8 @@ window.STEM_FRAGS = {"bbs/ajaxBbsListHtml.php": {"d": "bbs_press", "v": {}}, "bb
 /* STEMORIA — 원본 common.js 바로 뒤에 읽힌다.
    서버에서 불러오던 목록·팝업은 assets/frags.js 에 미리 담은 조각으로 채우고, 접수·로그인은 예시 알림으로 바꾼다. */
 (function () {
-  var NOTICE = '예시 화면이라 실제로 접수되지 않습니다.<br>상담은 010-4894-4905 로 연락해 주세요.';
-  var MEMBER = '예시 화면이라 회원 기능은 동작하지 않습니다.';
+  var NOTICE = '온라인 접수는 준비 중입니다.<br>상담은 010-4894-4905 로 연락해 주세요.';
+  var MEMBER = '회원 기능은 준비 중입니다.';
 
   // 온라인 예약 달력 — 원본 달력 조각과 같은 마크업을 달마다 만든다(오늘 다음 날부터, 일요일 빼고 예약 가능)
   function calHtml(pa) {

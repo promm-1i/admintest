@@ -256,7 +256,7 @@ document.addEventListener('click',function(e){var el=e.target.closest('[data-act
  else if(a==='demo'){e.preventDefault();toast('연결할 페이지는 현재 준비 중입니다.');}
 });
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){qa('.lm-dialog').forEach(function(x){x.remove()});document.body.classList.remove('lm-pndx-mox-nv','lm-menu-open');qa('[data-act="menu"]').forEach(function(x){x.classList.remove('lm-isx-ctvx');x.setAttribute('aria-expanded','false');});}if((e.key==='Enter'||e.key===' ')&&e.target.matches('[role="button"]')){e.preventDefault();e.target.click();}});
-qa('form[data-act="demo-form"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var bad=qa('[required]',f).find(function(x){return !String(x.value||'').trim()});if(bad){bad.focus();toast('필수 항목을 확인해 주세요.');return;}toast('문의 내용을 확인했습니다.');});});
+qa('form[data-act="demo-form"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var bad=qa('[required]',f).find(function(x){return !String(x.value||'').trim()});if(bad){bad.focus();toast('필수 항목을 확인해 주세요.');return;}toast('온라인 문의는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.');});});
 var aos=qa('[data-aos]');
 if('IntersectionObserver' in window){
  var reveal=new IntersectionObserver(function(entries){entries.forEach(function(v){if(v.isIntersecting){v.target.classList.add('aos-animate');reveal.unobserve(v.target);}});},{rootMargin:'100px 0px',threshold:.01});

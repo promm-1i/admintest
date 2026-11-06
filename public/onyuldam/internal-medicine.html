@@ -578,9 +578,9 @@ document.addEventListener('click',function(e){var el=e.target.closest('[data-act
  else if(a==='doctor-close'){e.preventDefault();var box=el.closest('.oy-dr-mdlx-bx');if(box)box.hidden=true;}
  else if(a==='submenu'){e.preventDefault();var item=el.parentElement,panel=item&&item.querySelector('.oy-sl-mn');if(panel){var opening=panel.hidden;q('#oy-i-stmx .oy-sl-mn').forEach(function(x){x.hidden=true;});q('#oy-i-stmx [data-act="submenu"]').forEach(function(x){x.setAttribute('aria-expanded','false');});panel.hidden=!opening;el.setAttribute('aria-expanded',String(opening));}}
  else if(a==='toggle'){var ul=el.parentElement&&el.parentElement.querySelector('ul');if(ul){e.preventDefault();var on=ul.hidden;ul.hidden=!on;el.setAttribute('aria-expanded',String(on));}}
- else if(a==='demo'){e.preventDefault();toast('템플릿 화면에서는 외부 연결이 동작하지 않습니다.');}});
+ else if(a==='demo'){e.preventDefault();toast('연결할 페이지는 현재 준비 중입니다.');}});
 document.addEventListener('keydown',function(e){if((e.key==='Enter'||e.key===' ')&&e.target.matches('[role="button"]')){e.preventDefault();e.target.click();}if(e.key==='Escape'){document.body.classList.remove('oy-menu-open');q('.oy-dr-mdlx-bx').forEach(function(x){x.hidden=true;});q('#oy-i-stmx .oy-sl-mn').forEach(function(x){x.hidden=true;});q('#oy-i-stmx [data-act="submenu"]').forEach(function(x){x.setAttribute('aria-expanded','false');});}});
-q('form[data-act="demo-form"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();toast('템플릿 화면에서는 내용이 전송되지 않습니다.');});});
+q('form[data-act="demo-form"]').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();toast('온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.');});});
 q('.oy-pp').forEach(function(p){if(cookieGet(popupKey(p))==='Y'){p.hidden=true;p.style.display='none';}});popupSync();
 var head=document.querySelector('#oy-i-hd');function hs(){if(head&&!window.oyFullpage?.active)head.classList.toggle('oy-chnx',scrollY>60);}addEventListener('scroll',hs,{passive:true});hs();var sh=document.querySelector('#oy-i-sb-hd');if(sh)sh.classList.add('oy-mtnx');q('.oy-sec').forEach(function(x){x.classList.add('oy-mtnx');});
 var fpRoot=document.querySelector('#oy-i-fllx'),fpSections=[],fpNav=null,fpIndex=0,fpBusy=false,fpReady=false,fpTimer=0;

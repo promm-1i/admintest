@@ -10,14 +10,14 @@ function setCookie(name, value, expiredays) {
   document.cookie = name + '=' + encodeURIComponent(value) + '; path=/; expires=' + d.toUTCString();
 }
 function deleteCookie(name) { setCookie(name, '', -1); }
-var BG_NOTICE = '예시 화면이라 실제로 접수되지 않습니다. 상담은 010-4894-4905 로 연락해 주세요.';
+var BG_NOTICE = '온라인 접수는 준비 중입니다. 상담은 010-4894-4905 로 연락해 주세요.';
 function ajaxProc(divid, frmnm, urlLink, pa, returnData) {
   if (/Proc\.php$/.test(urlLink)) alert(BG_NOTICE);
 }
 function ajaxJsonProc() {}
 function openModal(name) {
   if (name === 'privacy') { location.href = 'privacy.html'; return; }
-  alert('예시 화면이라 로그인·회원 기능은 동작하지 않습니다.');
+  alert('로그인·회원 기능은 준비 중입니다.');
 }
 function openOverModal() { alert(BG_NOTICE); }
 function modalClose() {

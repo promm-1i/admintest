@@ -398,12 +398,12 @@
     $('.dmx-demo-message').remove();
     $('<div class="dmx-demo-message" role="status"></div>').text(message).appendTo('body').delay(2400).fadeOut(250, function(){ $(this).remove(); });
   }
-  $(document).on('click', '[data-act="demo-action"]', function (e) { e.preventDefault(); toast('예시 화면으로 실제 접수나 전송은 되지 않습니다.'); });
+  $(document).on('click', '[data-act="demo-action"]', function (e) { e.preventDefault(); toast('온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.'); });
   $(document).on('submit', 'form[data-act="demo-form"]', function (e) {
     e.preventDefault(); var first = null;
     $(this).find('[required]').each(function () { var bad = !String($(this).val() || '').trim(); $(this).toggleClass('dmx-field-error', bad); if (bad && !first) first = this; });
     if (first) { first.focus(); toast('필수 항목을 확인해 주세요.'); }
-    else toast('예시 화면으로 입력 내용은 저장되지 않습니다.');
+    else toast('온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.');
   });
   $(document).on('input change', '.dmx-field-error', function(){ $(this).removeClass('dmx-field-error'); });
   var $hist = $('#dm-i-hs-ls > li'), shown = 5;

@@ -14,7 +14,7 @@
   qa('[data-act="menu"]').forEach(b => b.addEventListener('click', () => { const open = body.classList.toggle('ag-menu-open'); b.setAttribute('aria-expanded', String(open)); }));
   qa('[data-act="quick"]').forEach(b => b.addEventListener('click', () => { const p = b.closest('[data-quick]'); const open = p && p.classList.toggle('open'); b.setAttribute('aria-expanded', String(!!open)); }));
   qa('[data-tab]').forEach(b => b.addEventListener('click', e => { e.preventDefault(); const root = b.closest('[data-tabs]') || document; qa('[data-tab]', root).forEach(x => x.classList.toggle('active', x === b)); qa('[data-panel]', root).forEach(x => x.classList.toggle('active', x.dataset.panel === b.dataset.tab)); }));
-  qa('form').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); if (!f.checkValidity()) { f.reportValidity(); return; } alert('템플릿 예시 화면입니다. 실제 전송 기능은 제작 시 연결됩니다.'); }));
+  qa('form').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); if (!f.checkValidity()) { f.reportValidity(); return; } alert('온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.'); }));
   qa('a[href="#"]').forEach(a => a.addEventListener('click', e => { if (a.dataset.act !== 'menu') e.preventDefault(); }));
   qa('.ag-tp-bt-wr,#ag-i-tp-bt').forEach(b => b.addEventListener('click', e => { e.preventDefault(); scrollTo({ top: 0, behavior: 'smooth' }); }));
 

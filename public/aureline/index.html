@@ -13,126 +13,234 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.css">
-<style>
-.main-popup-sect{display: block; opacity: 1; visibility: visible;}
-.main-m-popup-sect{display: none; opacity: 0; visibility: hidden;}
-.main-popup-bg, .main-m-popup-bg{position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 1001; background: rgba(0,0,0,.4); cursor: pointer;}
-.main-popup-content{position: fixed; left: 50%; top: 50%; width: 90%; max-width: 500px; transform: translate(-50%, -50%); z-index: 1010;}
-#hd_pops_pc .main-popup-pagination{position: relative; bottom: unset; flex-wrap: wrap; width: 100%; display: flex; align-items: center; background-color: #ffffff; z-index: 1020;}
-#hd_pops_pc .swiper-pagination-bullet{border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; height: 52px; font-size: 15px; border-radius: 0; margin: 0; padding: 0 0.5rem; background-color: #ffffff !important; opacity: 1; color: #888888; display: flex; align-items: center; justify-content: center; line-height: 1.3; cursor: pointer; box-sizing: border-box;}
-#hd_pops_pc .swiper-pagination-bullet > span{display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-#hd_pops_pc .swiper-pagination-bullet-active{color: #444; font-weight: 600;}
-.modal-footer{position: relative; width: 100%; height: 34px; background-color: #000000; border-radius: 0 0 10px 10px; z-index: 1025; display: flex; align-items: center; justify-content: space-between;}
-.hd_pops_reject, .hd_pops_reject_m{padding: 0 0.8rem; height: 100%; font-size: 13px; color: #ffffff; background: none; border: 0; cursor: pointer; line-height: 34px; position: relative; z-index: 1030; touch-action: manipulation;}
-.main-popup-close, .main-m-popup-close{position: relative; right: 10px; height: 100%; font-size: 13px; color: #ffffff; background-color: transparent; border: 0; cursor: pointer; z-index: 1030; touch-action: manipulation; line-height: 34px; padding: 0 0.5rem;}
-.swiper-container, .swiper{overflow: hidden; border-radius: 10px 10px 0 0; position: relative; width: 100%;}
-.swiper-slide{width: 100%; display: block; flex-shrink: 0;}
-.main-popup-content img{ width: 100%;max-height: 700px;object-fit: cover;display: block;aspect-ratio: 1 / 1.4;}
-
-@media(max-width: 1024px){
-    .main-popup-sect{display: none !important;}
-    .main-m-popup-sect{display: block; opacity: 1; visibility: visible;}
-    .main-popup-content{max-width: 480px;}
-    #hd_pops_m .main-popup-pagination{position: absolute; bottom: 8px; height: 11px; display: flex; align-items: center; justify-content: center; width: 100%; z-index: 1020;}
-    #hd_pops_m .swiper-pagination-bullet{width: 6px !important; height: 6px; margin: 0 4px; background-color: #ffffff; border-radius: 50%; opacity: 0.8; padding: 0; cursor: pointer;}
-    #hd_pops_m .swiper-pagination-bullet-active{width: 10px !important; height: 10px; background-color: #444; opacity: 1;}
-}
+<style>
+
+.main-popup-sect{display: block; opacity: 1; visibility: visible;}
+
+.main-m-popup-sect{display: none; opacity: 0; visibility: hidden;}
+
+.main-popup-bg, .main-m-popup-bg{position: fixed; left: 0; top: 0; width: 100%; height: 100%; z-index: 1001; background: rgba(0,0,0,.4); cursor: pointer;}
+
+.main-popup-content{position: fixed; left: 50%; top: 50%; width: 90%; max-width: 500px; transform: translate(-50%, -50%); z-index: 1010;}
+
+#hd_pops_pc .main-popup-pagination{position: relative; bottom: unset; flex-wrap: wrap; width: 100%; display: flex; align-items: center; background-color: #ffffff; z-index: 1020;}
+
+#hd_pops_pc .swiper-pagination-bullet{border-right: 1px solid #dddddd; border-bottom: 1px solid #dddddd; height: 52px; font-size: 15px; border-radius: 0; margin: 0; padding: 0 0.5rem; background-color: #ffffff !important; opacity: 1; color: #888888; display: flex; align-items: center; justify-content: center; line-height: 1.3; cursor: pointer; box-sizing: border-box;}
+
+#hd_pops_pc .swiper-pagination-bullet > span{display: block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
+#hd_pops_pc .swiper-pagination-bullet-active{color: #444; font-weight: 600;}
+
+.modal-footer{position: relative; width: 100%; height: 34px; background-color: #000000; border-radius: 0 0 10px 10px; z-index: 1025; display: flex; align-items: center; justify-content: space-between;}
+
+.hd_pops_reject, .hd_pops_reject_m{padding: 0 0.8rem; height: 100%; font-size: 13px; color: #ffffff; background: none; border: 0; cursor: pointer; line-height: 34px; position: relative; z-index: 1030; touch-action: manipulation;}
+
+.main-popup-close, .main-m-popup-close{position: relative; right: 10px; height: 100%; font-size: 13px; color: #ffffff; background-color: transparent; border: 0; cursor: pointer; z-index: 1030; touch-action: manipulation; line-height: 34px; padding: 0 0.5rem;}
+
+.swiper-container, .swiper{overflow: hidden; border-radius: 10px 10px 0 0; position: relative; width: 100%;}
+
+.swiper-slide{width: 100%; display: block; flex-shrink: 0;}
+
+.main-popup-content img{ width: 100%;max-height: 700px;object-fit: cover;display: block;aspect-ratio: 1 / 1.4;}
+
+
+
+@media(max-width: 1024px){
+
+    .main-popup-sect{display: none !important;}
+
+    .main-m-popup-sect{display: block; opacity: 1; visibility: visible;}
+
+    .main-popup-content{max-width: 480px;}
+
+    #hd_pops_m .main-popup-pagination{position: absolute; bottom: 8px; height: 11px; display: flex; align-items: center; justify-content: center; width: 100%; z-index: 1020;}
+
+    #hd_pops_m .swiper-pagination-bullet{width: 6px !important; height: 6px; margin: 0 4px; background-color: #ffffff; border-radius: 50%; opacity: 0.8; padding: 0; cursor: pointer;}
+
+    #hd_pops_m .swiper-pagination-bullet-active{width: 10px !important; height: 10px; background-color: #444; opacity: 1;}
+
+}
+
 </style>
-<style>
-.eq-list-wrap{width: 92%; max-width: 1200px; margin: 0 auto; padding: 40px 0;}
-.eq-tabs{display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 40px;}
-.eq-tabs button{padding: 10px 24px; border: 1px solid #e5e5e5; border-radius: 30px; background-color: transparent; color: #555555; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s ease;}
-.eq-tabs button:hover{background-color: #f8f9fa; border-color: #cccccc;}
-.eq-tabs button.active{background-color: #222222; color: #ffffff; border-color: #222222;}
-.eq-list{display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;}
-.eq-card{background-color: #ffffff; border-radius: 12px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center;}
-.eq-card:hover{transform: translateY(-5px);}
-.eq-thumb{width: 100%; aspect-ratio: 1/1; overflow: hidden;}
-.eq-thumb img{width: 100%; height: 100%; object-fit: contain;}
-.eq-info{padding: 24px;}
-.eq-title{margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #222222; word-break: keep-all;}
-.eq-short{margin: 0 0 12px 0; font-size: 14px; color: #222; font-weight: 500; word-break: keep-all;}
-.eq-desc{margin: 0; font-size: 14px; color: #666666; line-height: 1.6; word-break: keep-all;}
-.eq-empty{grid-column: 1 / -1; padding: 60px 0; text-align: center; color: #888888; font-size: 15px; background-color: #fcfcfc; border: 1px dashed #dddddd; border-radius: 12px;}
-
-@media(max-width: 1024px){
-    .eq-tabs{justify-content: center; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch;}
-    .eq-tabs::-webkit-scrollbar{display: none;}
-    .eq-tabs button{white-space: nowrap;}
-    .eq-list{grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); gap: 16px;}
-}
+<style>
+
+.eq-list-wrap{width: 92%; max-width: 1200px; margin: 0 auto; padding: 40px 0;}
+
+.eq-tabs{display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 40px;}
+
+.eq-tabs button{padding: 10px 24px; border: 1px solid #e5e5e5; border-radius: 30px; background-color: transparent; color: #555555; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s ease;}
+
+.eq-tabs button:hover{background-color: #f8f9fa; border-color: #cccccc;}
+
+.eq-tabs button.active{background-color: #222222; color: #ffffff; border-color: #222222;}
+
+.eq-list{display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;}
+
+.eq-card{background-color: #ffffff; border-radius: 12px; overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; text-align: center;}
+
+.eq-card:hover{transform: translateY(-5px);}
+
+.eq-thumb{width: 100%; aspect-ratio: 1/1; overflow: hidden;}
+
+.eq-thumb img{width: 100%; height: 100%; object-fit: contain;}
+
+.eq-info{padding: 24px;}
+
+.eq-title{margin: 0 0 8px 0; font-size: 18px; font-weight: 600; color: #222222; word-break: keep-all;}
+
+.eq-short{margin: 0 0 12px 0; font-size: 14px; color: #222; font-weight: 500; word-break: keep-all;}
+
+.eq-desc{margin: 0; font-size: 14px; color: #666666; line-height: 1.6; word-break: keep-all;}
+
+.eq-empty{grid-column: 1 / -1; padding: 60px 0; text-align: center; color: #888888; font-size: 15px; background-color: #fcfcfc; border: 1px dashed #dddddd; border-radius: 12px;}
+
+
+
+@media(max-width: 1024px){
+
+    .eq-tabs{justify-content: center; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch;}
+
+    .eq-tabs::-webkit-scrollbar{display: none;}
+
+    .eq-tabs button{white-space: nowrap;}
+
+    .eq-list{grid-template-columns: repeat(auto-fill, minmax(100%, 1fr)); gap: 16px;}
+
+}
+
 </style>
-<style>
-.ba-list-wrap{width: 92%; max-width: 1200px; margin: 0 auto; padding: 40px 0;}
-.ba-tabs{display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 40px;}
-.ba-tabs button{padding: 10px 24px; border: 1px solid #e5e5e5; border-radius: 30px; background-color: transparent; color: #555555; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s ease;}
-.ba-tabs button:hover{background-color: #f8f9fa; border-color: #cccccc;}
-.ba-tabs button.active{background-color: #222222; color: #ffffff; border-color: #222222;}
-.ba-list{display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px;}
-.ba-item{background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 12px; overflow: hidden; padding: 24px; transition: transform 0.3s ease, box-shadow 0.3s ease;}
-.ba-item:hover{transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);}
-.ba-common-title{margin: 0 0 20px 0; font-size: 20px; font-weight: 600; color: #222222; text-align: center; word-break: keep-all;}
-.ba-comparison{display: flex; gap: 16px; margin-bottom: 20px;}
-.ba-side{flex: 1; display: flex; flex-direction: column; align-items: center;}
-.ba-label{display: inline-block; padding: 4px 12px; margin-bottom: 12px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #ffffff;}
-.ba-side.before .ba-label{background-color: #888888;}
-.ba-side.after .ba-label{background-color: #007bff;}
-.ba-img{width: 100%; aspect-ratio: 1/1; overflow: hidden; margin-bottom: 12px;}
-.ba-img img{width: 100%; height: 100%; object-fit: cover;}
-.ba-side-title{margin: 0; font-size: 16px; font-weight: 500; color: #444444; text-align: center;}
-.ba-details{display: flex; gap: 16px; background-color: #f8f9fa; padding: 16px; border-radius: 8px;}
-.detail-box{flex: 1;}
-.detail-box p{margin: 0; font-size: 14px; color: #666666; line-height: 1.6; word-break: keep-all;}
-.no-data{grid-column: 1 / -1; padding: 60px 0; text-align: center; color: #888888; font-size: 15px; background-color: #fcfcfc; border: 1px dashed #dddddd; border-radius: 12px;}
-
-@media(max-width: 1024px){
-    .ba-tabs{justify-content: center; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch;}
-    .ba-tabs::-webkit-scrollbar{display: none;}
-    .ba-tabs button{white-space: nowrap;}
-    .ba-list{grid-template-columns: 1fr; gap: 24px;}
-    .ba-comparison{flex-direction: column;}
-    .ba-details{flex-direction: column; gap: 12px;}
-}
+<style>
+
+.ba-list-wrap{width: 92%; max-width: 1200px; margin: 0 auto; padding: 40px 0;}
+
+.ba-tabs{display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 40px;}
+
+.ba-tabs button{padding: 10px 24px; border: 1px solid #e5e5e5; border-radius: 30px; background-color: transparent; color: #555555; font-size: 15px; font-weight: 500; cursor: pointer; transition: all 0.2s ease;}
+
+.ba-tabs button:hover{background-color: #f8f9fa; border-color: #cccccc;}
+
+.ba-tabs button.active{background-color: #222222; color: #ffffff; border-color: #222222;}
+
+.ba-list{display: grid; grid-template-columns: repeat(auto-fill, minmax(480px, 1fr)); gap: 32px;}
+
+.ba-item{background-color: #ffffff; border: 1px solid #eeeeee; border-radius: 12px; overflow: hidden; padding: 24px; transition: transform 0.3s ease, box-shadow 0.3s ease;}
+
+.ba-item:hover{transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);}
+
+.ba-common-title{margin: 0 0 20px 0; font-size: 20px; font-weight: 600; color: #222222; text-align: center; word-break: keep-all;}
+
+.ba-comparison{display: flex; gap: 16px; margin-bottom: 20px;}
+
+.ba-side{flex: 1; display: flex; flex-direction: column; align-items: center;}
+
+.ba-label{display: inline-block; padding: 4px 12px; margin-bottom: 12px; border-radius: 20px; font-size: 13px; font-weight: 600; color: #ffffff;}
+
+.ba-side.before .ba-label{background-color: #888888;}
+
+.ba-side.after .ba-label{background-color: #007bff;}
+
+.ba-img{width: 100%; aspect-ratio: 1/1; overflow: hidden; margin-bottom: 12px;}
+
+.ba-img img{width: 100%; height: 100%; object-fit: cover;}
+
+.ba-side-title{margin: 0; font-size: 16px; font-weight: 500; color: #444444; text-align: center;}
+
+.ba-details{display: flex; gap: 16px; background-color: #f8f9fa; padding: 16px; border-radius: 8px;}
+
+.detail-box{flex: 1;}
+
+.detail-box p{margin: 0; font-size: 14px; color: #666666; line-height: 1.6; word-break: keep-all;}
+
+.no-data{grid-column: 1 / -1; padding: 60px 0; text-align: center; color: #888888; font-size: 15px; background-color: #fcfcfc; border: 1px dashed #dddddd; border-radius: 12px;}
+
+
+
+@media(max-width: 1024px){
+
+    .ba-tabs{justify-content: center; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 10px; -webkit-overflow-scrolling: touch;}
+
+    .ba-tabs::-webkit-scrollbar{display: none;}
+
+    .ba-tabs button{white-space: nowrap;}
+
+    .ba-list{grid-template-columns: 1fr; gap: 24px;}
+
+    .ba-comparison{flex-direction: column;}
+
+    .ba-details{flex-direction: column; gap: 12px;}
+
+}
+
 </style>
 <link rel="stylesheet" href="assets/css/aureline-fix.css">
-<script>
-var g5_url       = "";
-var g5_bbs_url   = "";
-var g5_is_member = "";
-var g5_is_admin  = "";
-var g5_is_mobile = "";
-var g5_bo_table  = "";
-var g5_sca       = "";
-var g5_editor    = "";
-var g5_cookie_domain = "";
-jQuery = { migrateMute: true };
+<script>
+
+var g5_url       = "";
+
+var g5_bbs_url   = "";
+
+var g5_is_member = "";
+
+var g5_is_admin  = "";
+
+var g5_is_mobile = "";
+
+var g5_bo_table  = "";
+
+var g5_sca       = "";
+
+var g5_editor    = "";
+
+var g5_cookie_domain = "";
+
+jQuery = { migrateMute: true };
+
 </script>
 <script src="assets/js/jquery-4.0.0.min.js"></script>
-<script>
-    (function() {
-        var _log = console.log;
-        console.log = function(...args) {
-            if (args[0] && typeof args[0] === "string" && args[0].indexOf("JQMIGRATE") !== -1) return;
-            _log.apply(console, args);
-        };
-    })();
+<script>
+
+    (function() {
+
+        var _log = console.log;
+
+        console.log = function(...args) {
+
+            if (args[0] && typeof args[0] === "string" && args[0].indexOf("JQMIGRATE") !== -1) return;
+
+            _log.apply(console, args);
+
+        };
+
+    })();
+
     </script>
 <script src="assets/js/jquery-migrate-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11.2.10/swiper-bundle.min.js"></script>
-<script>
-document.addEventListener('click', function(e) {
-    const link = e.target.closest('a');
-    if (link) {
-        const href = link.getAttribute('href');
-        if (!href || href === '#' || href.trim() === '') {
-            e.preventDefault();
-            alert('준비중입니다.');
-        }
-    }
-});
+<script>
+
+document.addEventListener('click', function(e) {
+
+    const link = e.target.closest('a');
+
+    if (link) {
+
+        const href = link.getAttribute('href');
+
+        if (!href || href === '#' || href.trim() === '') {
+
+            e.preventDefault();
+
+            alert('준비중입니다.');
+
+        }
+
+    }
+
+});
+
 </script>
 <script src="assets/js/jquery.menu.js"></script>
 <script src="assets/js/common.js"></script>
@@ -1267,1153 +1375,2290 @@ document.addEventListener('click', function(e) {
 
 </main>
 <script src="https://cdn.jsdelivr.net/npm/swiper@8.4.7/swiper-bundle.min.js"></script>
-<script>
-/* 쿠키 제어 함수 */
-const setPopCookie = (name, value, days) => {
-    const date = new Date();
-    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/;SameSite=Lax`;
-};
-
-const getPopCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
-    return null;
-};
-
-/* 즉시 닫기 및 쿠키 저장 전역 함수 */
-function closePcPopup() {
-    const el = document.getElementById('hd_pops_pc');
-    if (el) {
-        el.style.setProperty('display', 'none', 'important');
-        el.style.visibility = 'hidden';
-        el.style.opacity = '0';
-    }
-}
-
-function rejectPcPopup() {
-    setPopCookie('hd_pops_pc', '1', 1);
-    closePcPopup();
-}
-
-function closeMobilePopup() {
-    const el = document.getElementById('hd_pops_m');
-    if (el) {
-        el.style.setProperty('display', 'none', 'important');
-        el.style.visibility = 'hidden';
-        el.style.opacity = '0';
-    }
-}
-
-function rejectMobilePopup() {
-    setPopCookie('hd_pops_m', '1', 1);
-    closeMobilePopup();
-}
-
-/* 모바일 버튼 직접 이벤트 리스너 등록 보장 */
-document.addEventListener('DOMContentLoaded', function() {
-    const mRejectBtn = document.querySelector('.hd_pops_reject_m');
-    if (mRejectBtn) {
-        mRejectBtn.addEventListener('click', rejectMobilePopup);
-    }
-    const mCloseBtn = document.querySelector('.main-m-popup-close');
-    if (mCloseBtn) {
-        mCloseBtn.addEventListener('click', closeMobilePopup);
-    }
-});
-
-/* Swiper 라이브러리 동적 로드 및 슬라이더 100% 실행 보장 */
-(function() {
-    function loadSwiperAssets(callback) {
-        if (typeof Swiper !== 'undefined') {
-            callback();
-            return;
-        }
-
-        /* Swiper CSS 주입 */
-        if (!document.querySelector('link[href*="swiper"]')) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css';
-            document.head.appendChild(link);
-        }
-
-        /* Swiper JS 주입 */
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js';
-        script.onload = function() {
-            callback();
-        };
-        document.head.appendChild(script);
-    }
-
-    function runSwiperInit() {
-        try {
-            if (getPopCookie('hd_pops_pc') === '1') closePcPopup();
-            if (getPopCookie('hd_pops_m') === '1') closeMobilePopup();
-
-            const pcTitles = ["아우렐라인의원 오픈이벤트","아우렐라인의원 개원이벤트 올리핏 주사 런칭","더욱 안전하고 섬세하게 아우렐라인의원 리투오 파인 런칭이벤트"];
-
-            /* PC 슬라이더 */
-            const pcContainer = document.querySelector('#hd_pops_pc .main-popup-slide');
-            if (pcContainer) {
-                const pcSlidesCount = pcContainer.querySelectorAll('.swiper-slide').length;
-                new Swiper('#hd_pops_pc .main-popup-slide', {
-                    speed: 600,
-                    loop: pcSlidesCount > 1,
-                    observer: true,
-                    observeParents: true,
-                    autoplay: pcSlidesCount > 1 ? { delay: 4000, disableOnInteraction: false } : false,
-                    pagination: {
-                        el: '#hd_pops_pc .main-popup-pagination',
-                        clickable: true,
-                        renderBullet: function (index, className) {
-                            const widthPercent = pcSlidesCount > 0 ? (100 / pcSlidesCount) : 100;
-                            const titleText = pcTitles[index] || '';
-                            return '<div class="' + className + '" style="width:' + widthPercent + '%; cursor:pointer;"><span>' + titleText + '</span></div>';
-                        }
-                    }
-                });
-            }
-
-            /* 모바일 슬라이더 */
-            const mContainer = document.querySelector('#hd_pops_m .main-m-popup-slide');
-            if (mContainer) {
-                const mSlidesCount = mContainer.querySelectorAll('.swiper-slide').length;
-                new Swiper('#hd_pops_m .main-m-popup-slide', {
-                    speed: 600,
-                    loop: mSlidesCount > 1,
-                    observer: true,
-                    observeParents: true,
-                    autoplay: mSlidesCount > 1 ? { delay: 4000, disableOnInteraction: false } : false,
-                    pagination: {
-                        el: '#hd_pops_m .main-popup-pagination',
-                        clickable: true
-                    }
-                });
-            }
-        } catch(e) {
-            console.error('Swiper 팝업 초기화 오류:', e);
-        }
-    }
-
-    loadSwiperAssets(function() {
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', runSwiperInit);
-        } else {
-            runSwiperInit();
-        }
-    });
-})();
+<script>
+
+/* 쿠키 제어 함수 */
+
+const setPopCookie = (name, value, days) => {
+
+    const date = new Date();
+
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+
+    document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/;SameSite=Lax`;
+
+};
+
+
+
+const getPopCookie = (name) => {
+
+    const value = `; ${document.cookie}`;
+
+    const parts = value.split(`; ${name}=`);
+
+    if (parts.length === 2) return parts.pop().split(';').shift();
+
+    return null;
+
+};
+
+
+
+/* 즉시 닫기 및 쿠키 저장 전역 함수 */
+
+function closePcPopup() {
+
+    const el = document.getElementById('hd_pops_pc');
+
+    if (el) {
+
+        el.style.setProperty('display', 'none', 'important');
+
+        el.style.visibility = 'hidden';
+
+        el.style.opacity = '0';
+
+    }
+
+}
+
+
+
+function rejectPcPopup() {
+
+    setPopCookie('hd_pops_pc', '1', 1);
+
+    closePcPopup();
+
+}
+
+
+
+function closeMobilePopup() {
+
+    const el = document.getElementById('hd_pops_m');
+
+    if (el) {
+
+        el.style.setProperty('display', 'none', 'important');
+
+        el.style.visibility = 'hidden';
+
+        el.style.opacity = '0';
+
+    }
+
+}
+
+
+
+function rejectMobilePopup() {
+
+    setPopCookie('hd_pops_m', '1', 1);
+
+    closeMobilePopup();
+
+}
+
+
+
+/* 모바일 버튼 직접 이벤트 리스너 등록 보장 */
+
+document.addEventListener('DOMContentLoaded', function() {
+
+    const mRejectBtn = document.querySelector('.hd_pops_reject_m');
+
+    if (mRejectBtn) {
+
+        mRejectBtn.addEventListener('click', rejectMobilePopup);
+
+    }
+
+    const mCloseBtn = document.querySelector('.main-m-popup-close');
+
+    if (mCloseBtn) {
+
+        mCloseBtn.addEventListener('click', closeMobilePopup);
+
+    }
+
+});
+
+
+
+/* Swiper 라이브러리 동적 로드 및 슬라이더 100% 실행 보장 */
+
+(function() {
+
+    function loadSwiperAssets(callback) {
+
+        if (typeof Swiper !== 'undefined') {
+
+            callback();
+
+            return;
+
+        }
+
+
+
+        /* Swiper CSS 주입 */
+
+        if (!document.querySelector('link[href*="swiper"]')) {
+
+            const link = document.createElement('link');
+
+            link.rel = 'stylesheet';
+
+            link.href = 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css';
+
+            document.head.appendChild(link);
+
+        }
+
+
+
+        /* Swiper JS 주입 */
+
+        const script = document.createElement('script');
+
+        script.src = 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js';
+
+        script.onload = function() {
+
+            callback();
+
+        };
+
+        document.head.appendChild(script);
+
+    }
+
+
+
+    function runSwiperInit() {
+
+        try {
+
+            if (getPopCookie('hd_pops_pc') === '1') closePcPopup();
+
+            if (getPopCookie('hd_pops_m') === '1') closeMobilePopup();
+
+
+
+            const pcTitles = ["아우렐라인의원 오픈이벤트","아우렐라인의원 개원이벤트 올리핏 주사 런칭","더욱 안전하고 섬세하게 아우렐라인의원 리투오 파인 런칭이벤트"];
+
+
+
+            /* PC 슬라이더 */
+
+            const pcContainer = document.querySelector('#hd_pops_pc .main-popup-slide');
+
+            if (pcContainer) {
+
+                const pcSlidesCount = pcContainer.querySelectorAll('.swiper-slide').length;
+
+                new Swiper('#hd_pops_pc .main-popup-slide', {
+
+                    speed: 600,
+
+                    loop: pcSlidesCount > 1,
+
+                    observer: true,
+
+                    observeParents: true,
+
+                    autoplay: pcSlidesCount > 1 ? { delay: 4000, disableOnInteraction: false } : false,
+
+                    pagination: {
+
+                        el: '#hd_pops_pc .main-popup-pagination',
+
+                        clickable: true,
+
+                        renderBullet: function (index, className) {
+
+                            const widthPercent = pcSlidesCount > 0 ? (100 / pcSlidesCount) : 100;
+
+                            const titleText = pcTitles[index] || '';
+
+                            return '<div class="' + className + '" style="width:' + widthPercent + '%; cursor:pointer;"><span>' + titleText + '</span></div>';
+
+                        }
+
+                    }
+
+                });
+
+            }
+
+
+
+            /* 모바일 슬라이더 */
+
+            const mContainer = document.querySelector('#hd_pops_m .main-m-popup-slide');
+
+            if (mContainer) {
+
+                const mSlidesCount = mContainer.querySelectorAll('.swiper-slide').length;
+
+                new Swiper('#hd_pops_m .main-m-popup-slide', {
+
+                    speed: 600,
+
+                    loop: mSlidesCount > 1,
+
+                    observer: true,
+
+                    observeParents: true,
+
+                    autoplay: mSlidesCount > 1 ? { delay: 4000, disableOnInteraction: false } : false,
+
+                    pagination: {
+
+                        el: '#hd_pops_m .main-popup-pagination',
+
+                        clickable: true
+
+                    }
+
+                });
+
+            }
+
+        } catch(e) {
+
+            console.error('Swiper 팝업 초기화 오류:', e);
+
+        }
+
+    }
+
+
+
+    loadSwiperAssets(function() {
+
+        if (document.readyState === 'loading') {
+
+            document.addEventListener('DOMContentLoaded', runSwiperInit);
+
+        } else {
+
+            runSwiperInit();
+
+        }
+
+    });
+
+})();
+
 </script>
-<script>
-function checkTr() {
-    var scrollTop = $(window).scrollTop();
-    var $header = $('#main_header');
-    
-    if ($header.hasClass('is-hover') || $('#side_menu').hasClass('open')) {
-        $header.removeClass('tr');
-        return;
-    }
-
-    if ($('.sec-mn-visual').length) {
-        var visualTop = $('.sec-mn-visual').offset().top;
-        var visualBottom = visualTop + $('.sec-mn-visual').outerHeight();
-        
-        if (scrollTop >= visualTop && scrollTop < visualBottom) {
-            $header.addClass('tr');
-        } else {
-            $header.removeClass('tr');
-        }
-    }
-}
-var checkHeaderTransparency = checkTr;
-
-var lastToggleTime = 0;
-function toggleSideMenu(e) {
-    var now = new Date().getTime();
-    if (now - lastToggleTime < 200) {
-        return;
-    }
-    lastToggleTime = now;
-
-    if (e) {
-        if (e.preventDefault) e.preventDefault();
-        if (e.stopPropagation) e.stopPropagation();
-    }
-    var btn = document.getElementById('menu_trigger');
-    var header = document.getElementById('main_header');
-    var side = document.getElementById('side_menu');
-    
-    var isOpening = side ? !side.classList.contains('open') : false;
-    
-    if (btn) {
-        if (isOpening) {
-            btn.classList.add('is-active');
-        } else {
-            btn.classList.remove('is-active');
-        }
-    }
-    if (header) {
-        if (isOpening) {
-            header.classList.remove('hide');
-            header.classList.add('menu-open');
-            header.classList.add('is-active');
-            header.classList.remove('tr');
-        } else {
-            header.classList.remove('menu-open');
-            header.classList.remove('is-active');
-        }
-    }
-    if (side) {
-        if (isOpening) {
-            side.classList.add('open');
-        } else {
-            side.classList.remove('open');
-        }
-    }
-    if (document.body) {
-        if (isOpening) {
-            document.body.classList.add('menu-open');
-        } else {
-            document.body.classList.remove('menu-open');
-        }
-    }
-    
-    checkTr();
-}
-window.toggleSideMenu = toggleSideMenu;
-
-$(function() {
-    let lastScrollTop = 0;
-    const delta = 5;
-
-    // PC GNB 2뎁스 드롭다운 동작 (로고 및 KR/EN 호버 시 메뉴창 열리지 않음)
-    function openGnb() {
-        if ($(window).width() > 1024) {
-            $('#main_header').addClass('is-hover');
-            checkTr();
-        }
-    }
-
-    function closeGnb() {
-        if ($(window).width() > 1024) {
-            $('#main_header').removeClass('is-hover');
-            checkTr();
-        }
-    }
-
-    // 오직 1뎁스 메뉴 항목(.menu-item)에 마우스가 진입했을 때만 메뉴창 열기 (헤더 빈 공간 호버 방지)
-    $('#main_header .menu-item').on('mouseenter', function() {
-        openGnb();
-    });
-
-    // 로고 및 언어 선택 버튼 영역에 마우스 진입 시 메뉴창 즉시 닫기
-    $('.logo-area, .hd-info-wrap').on('mouseenter', function() {
-        closeGnb();
-    });
-
-    // 헤더 영역 바깥으로 벗어날 때 즉시 닫기
-    $('#main_header').on('mouseleave', function() {
-        closeGnb();
-    });
-
-    // 언어 선택 드롭다운 토글 및 바깥 영역 터치/클릭 시 닫기
-    $(document).on('click', '.global-btn .lang-btn', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const $wrap = $(this).closest('.global-btn');
-        const isOpen = $wrap.hasClass('is-open');
-        $('.global-btn').removeClass('is-open');
-        if (!isOpen) {
-            $wrap.addClass('is-open');
-        }
-        $(this).blur();
-    });
-
-    $(document).on('click touchstart', function(e) {
-        if (!$(e.target).closest('.global-btn').length) {
-            $('.global-btn').removeClass('is-open');
-        }
-    });
-
-    // 다국어 링크 클릭 시 현재 페이지의 앵커 해시 위치 유지
-    $(document).on('click', '.lang-dropdown-item', function(e) {
-        var targetUrl = $(this).attr('href');
-        if (targetUrl && targetUrl !== '#' && window.location.hash) {
-            if (targetUrl.indexOf('#') === -1) {
-                e.preventDefault();
-                window.location.href = targetUrl + window.location.hash;
-            }
-        }
-    });
-
-    // 사이드 메뉴 아코디언 토글
-    $('.side-depth1-wrap').on('click', function() {
-        const $item = $(this).closest('.side-menu-item');
-        $item.toggleClass('active').siblings().removeClass('active');
-    });
-
-    $(window).on('scroll', function() {
-        const scrollTop = $(this).scrollTop();
-        const isMobileOpen = $('#side_menu').hasClass('open') || $('#main_header').hasClass('menu-open');
-
-        if (isMobileOpen) {
-            $('#main_header').removeClass('hide');
-            return;
-        }
-
-        if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
-
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-            $('#main_header').addClass('hide');
-        } else {
-            $('#main_header').removeClass('hide');
-        }
-
-        checkTr();
-        lastScrollTop = scrollTop;
-    });
-
-    // 해시 앵커 링크 클릭 시 부드러운 스크롤 및 모바일 메뉴 닫기
-    $(document).on('click', 'a[href*="#"]', function(e) {
-        var href = $(this).attr('href');
-        if (!href || href === '#') return;
-        
-        var hashIndex = href.indexOf('#');
-        if (hashIndex !== -1) {
-            var hash = href.substring(hashIndex);
-            if (!hash || hash === '#') return;
-            
-            try {
-                var $target = $(hash);
-                if ($target.length) {
-                    e.preventDefault();
-                    
-                    if (typeof toggleSideMenu === 'function' && $('#side_menu').hasClass('open')) {
-                        toggleSideMenu();
-                    }
-                    
-                    $('#main_header').removeClass('is-hover');
-                    
-                    var headerHeight = $('#main_header').outerHeight() || 80;
-                    var targetTop = $target.offset().top - headerHeight;
-                    if (targetTop < 0) targetTop = 0;
-                    
-                    $('html, body').stop().animate({
-                        scrollTop: targetTop
-                    }, 500);
-                    
-                    if (window.history && window.history.pushState) {
-                        window.history.pushState(null, null, hash);
-                    }
-                }
-            } catch (err) {}
-        }
-    });
-
-    checkTr();
-});
+<script>
+
+function checkTr() {
+
+    var scrollTop = $(window).scrollTop();
+
+    var $header = $('#main_header');
+
+    
+
+    if ($header.hasClass('is-hover') || $('#side_menu').hasClass('open')) {
+
+        $header.removeClass('tr');
+
+        return;
+
+    }
+
+
+
+    if ($('.sec-mn-visual').length) {
+
+        var visualTop = $('.sec-mn-visual').offset().top;
+
+        var visualBottom = visualTop + $('.sec-mn-visual').outerHeight();
+
+        
+
+        if (scrollTop >= visualTop && scrollTop < visualBottom) {
+
+            $header.addClass('tr');
+
+        } else {
+
+            $header.removeClass('tr');
+
+        }
+
+    }
+
+}
+
+var checkHeaderTransparency = checkTr;
+
+
+
+var lastToggleTime = 0;
+
+function toggleSideMenu(e) {
+
+    var now = new Date().getTime();
+
+    if (now - lastToggleTime < 200) {
+
+        return;
+
+    }
+
+    lastToggleTime = now;
+
+
+
+    if (e) {
+
+        if (e.preventDefault) e.preventDefault();
+
+        if (e.stopPropagation) e.stopPropagation();
+
+    }
+
+    var btn = document.getElementById('menu_trigger');
+
+    var header = document.getElementById('main_header');
+
+    var side = document.getElementById('side_menu');
+
+    
+
+    var isOpening = side ? !side.classList.contains('open') : false;
+
+    
+
+    if (btn) {
+
+        if (isOpening) {
+
+            btn.classList.add('is-active');
+
+        } else {
+
+            btn.classList.remove('is-active');
+
+        }
+
+    }
+
+    if (header) {
+
+        if (isOpening) {
+
+            header.classList.remove('hide');
+
+            header.classList.add('menu-open');
+
+            header.classList.add('is-active');
+
+            header.classList.remove('tr');
+
+        } else {
+
+            header.classList.remove('menu-open');
+
+            header.classList.remove('is-active');
+
+        }
+
+    }
+
+    if (side) {
+
+        if (isOpening) {
+
+            side.classList.add('open');
+
+        } else {
+
+            side.classList.remove('open');
+
+        }
+
+    }
+
+    if (document.body) {
+
+        if (isOpening) {
+
+            document.body.classList.add('menu-open');
+
+        } else {
+
+            document.body.classList.remove('menu-open');
+
+        }
+
+    }
+
+    
+
+    checkTr();
+
+}
+
+window.toggleSideMenu = toggleSideMenu;
+
+
+
+$(function() {
+
+    let lastScrollTop = 0;
+
+    const delta = 5;
+
+
+
+    // PC GNB 2뎁스 드롭다운 동작 (로고 및 KR/EN 호버 시 메뉴창 열리지 않음)
+
+    function openGnb() {
+
+        if ($(window).width() > 1024) {
+
+            $('#main_header').addClass('is-hover');
+
+            checkTr();
+
+        }
+
+    }
+
+
+
+    function closeGnb() {
+
+        if ($(window).width() > 1024) {
+
+            $('#main_header').removeClass('is-hover');
+
+            checkTr();
+
+        }
+
+    }
+
+
+
+    // 오직 1뎁스 메뉴 항목(.menu-item)에 마우스가 진입했을 때만 메뉴창 열기 (헤더 빈 공간 호버 방지)
+
+    $('#main_header .menu-item').on('mouseenter', function() {
+
+        openGnb();
+
+    });
+
+
+
+    // 로고 및 언어 선택 버튼 영역에 마우스 진입 시 메뉴창 즉시 닫기
+
+    $('.logo-area, .hd-info-wrap').on('mouseenter', function() {
+
+        closeGnb();
+
+    });
+
+
+
+    // 헤더 영역 바깥으로 벗어날 때 즉시 닫기
+
+    $('#main_header').on('mouseleave', function() {
+
+        closeGnb();
+
+    });
+
+
+
+    // 언어 선택 드롭다운 토글 및 바깥 영역 터치/클릭 시 닫기
+
+    $(document).on('click', '.global-btn .lang-btn', function(e) {
+
+        e.preventDefault();
+
+        e.stopPropagation();
+
+        const $wrap = $(this).closest('.global-btn');
+
+        const isOpen = $wrap.hasClass('is-open');
+
+        $('.global-btn').removeClass('is-open');
+
+        if (!isOpen) {
+
+            $wrap.addClass('is-open');
+
+        }
+
+        $(this).blur();
+
+    });
+
+
+
+    $(document).on('click touchstart', function(e) {
+
+        if (!$(e.target).closest('.global-btn').length) {
+
+            $('.global-btn').removeClass('is-open');
+
+        }
+
+    });
+
+
+
+    // 다국어 링크 클릭 시 현재 페이지의 앵커 해시 위치 유지
+
+    $(document).on('click', '.lang-dropdown-item', function(e) {
+
+        var targetUrl = $(this).attr('href');
+
+        if (targetUrl && targetUrl !== '#' && window.location.hash) {
+
+            if (targetUrl.indexOf('#') === -1) {
+
+                e.preventDefault();
+
+                window.location.href = targetUrl + window.location.hash;
+
+            }
+
+        }
+
+    });
+
+
+
+    // 사이드 메뉴 아코디언 토글
+
+    $('.side-depth1-wrap').on('click', function() {
+
+        const $item = $(this).closest('.side-menu-item');
+
+        $item.toggleClass('active').siblings().removeClass('active');
+
+    });
+
+
+
+    $(window).on('scroll', function() {
+
+        const scrollTop = $(this).scrollTop();
+
+        const isMobileOpen = $('#side_menu').hasClass('open') || $('#main_header').hasClass('menu-open');
+
+
+
+        if (isMobileOpen) {
+
+            $('#main_header').removeClass('hide');
+
+            return;
+
+        }
+
+
+
+        if (Math.abs(lastScrollTop - scrollTop) <= delta) return;
+
+
+
+        if (scrollTop > lastScrollTop && scrollTop > 100) {
+
+            $('#main_header').addClass('hide');
+
+        } else {
+
+            $('#main_header').removeClass('hide');
+
+        }
+
+
+
+        checkTr();
+
+        lastScrollTop = scrollTop;
+
+    });
+
+
+
+    // 해시 앵커 링크 클릭 시 부드러운 스크롤 및 모바일 메뉴 닫기
+
+    $(document).on('click', 'a[href*="#"]', function(e) {
+
+        var href = $(this).attr('href');
+
+        if (!href || href === '#') return;
+
+        
+
+        var hashIndex = href.indexOf('#');
+
+        if (hashIndex !== -1) {
+
+            var hash = href.substring(hashIndex);
+
+            if (!hash || hash === '#') return;
+
+            
+
+            try {
+
+                var $target = $(hash);
+
+                if ($target.length) {
+
+                    e.preventDefault();
+
+                    
+
+                    if (typeof toggleSideMenu === 'function' && $('#side_menu').hasClass('open')) {
+
+                        toggleSideMenu();
+
+                    }
+
+                    
+
+                    $('#main_header').removeClass('is-hover');
+
+                    
+
+                    var headerHeight = $('#main_header').outerHeight() || 80;
+
+                    var targetTop = $target.offset().top - headerHeight;
+
+                    if (targetTop < 0) targetTop = 0;
+
+                    
+
+                    $('html, body').stop().animate({
+
+                        scrollTop: targetTop
+
+                    }, 500);
+
+                    
+
+                    if (window.history && window.history.pushState) {
+
+                        window.history.pushState(null, null, hash);
+
+                    }
+
+                }
+
+            } catch (err) {}
+
+        }
+
+    });
+
+
+
+    checkTr();
+
+});
+
 </script>
-<script>
-        document.addEventListener('DOMContentLoaded', function() {
-            /* 모바일 DOCTOR'S PHILOSOPHY 무한 슬라이드 및 부드러운 스와이프 스냅 */
-            (function() {
-                const philoList = document.querySelector('.philo-list.mo');
-                if (!philoList) return;
-
-                const originalItems = Array.from(philoList.querySelectorAll('.philo-item'));
-                const originalCount = originalItems.length;
-                if (originalCount === 0) return;
-
-                /* 원본 아이템에 실제 인덱스 부여 */
-                originalItems.forEach((item, idx) => {
-                    item.setAttribute('data-real-index', idx);
-                });
-
-                /* 무한 루프를 위한 복제본 생성 */
-                const cloneBefore = originalItems[originalCount - 1].cloneNode(true);
-                cloneBefore.setAttribute('data-clone', 'true');
-                cloneBefore.setAttribute('data-real-index', originalCount - 1);
-                cloneBefore.classList.remove('active');
-                philoList.insertBefore(cloneBefore, originalItems[0]);
-
-                const cloneAfter1 = originalItems[0].cloneNode(true);
-                cloneAfter1.setAttribute('data-clone', 'true');
-                cloneAfter1.setAttribute('data-real-index', 0);
-                cloneAfter1.classList.remove('active');
-                philoList.appendChild(cloneAfter1);
-
-                const cloneAfter2 = originalItems[1].cloneNode(true);
-                cloneAfter2.setAttribute('data-clone', 'true');
-                cloneAfter2.setAttribute('data-real-index', 1);
-                cloneAfter2.classList.remove('active');
-                philoList.appendChild(cloneAfter2);
-
-                let allItems = Array.from(philoList.querySelectorAll('.philo-item'));
-
-                /* 초기 위치: 첫번째 원본 카드 인덱스 1 */
-                let currentIndex = 1;
-                let autoSlideTimer = null;
-                let autoResumeTimer = null;
-                let isAnimating = false;
-                let isTouching = false;
-                let touchStartX = 0;
-                let touchStartY = 0;
-                let touchStartTime = 0;
-                let touchMoved = false;
-
-                function getTargetScrollLeft(index) {
-                    const item = allItems[index];
-                    if (!item) return 0;
-                    const containerRect = philoList.getBoundingClientRect();
-                    const itemRect = item.getBoundingClientRect();
-                    const currentScroll = philoList.scrollLeft;
-                    const offsetLeft = (itemRect.left - containerRect.left) + currentScroll;
-                    return offsetLeft - (philoList.clientWidth - item.clientWidth) / 2;
-                }
-
-                function updateActiveClass(targetIdx) {
-                    const targetItem = allItems[targetIdx];
-                    if (!targetItem) return;
-                    const targetRealIdx = parseInt(targetItem.getAttribute('data-real-index'), 10);
-                    const isClone = targetItem.hasAttribute('data-clone');
-
-                    allItems.forEach((item, idx) => {
-                        const itemRealIdx = parseInt(item.getAttribute('data-real-index'), 10);
-                        /* 복제본으로 이동 시 같은 실제 인덱스를 가진 원본 카드도 미리 active 상태로 동기화하여 리셋 시 재실행 방지 */
-                        if (idx === targetIdx || (isClone && !item.hasAttribute('data-clone') && itemRealIdx === targetRealIdx)) {
-                            item.classList.add('active');
-                        } else {
-                            item.classList.remove('active');
-                        }
-                    });
-                }
-
-                let preventClick = false;
-
-                function moveToSlide(index, smooth = true) {
-                    if (index < 0 || index >= allItems.length) return;
-                    currentIndex = index;
-
-                    /* 목표 카드를 즉시 활성화하여 스크롤과 동시에 부드럽게 1회만 크기 전환 */
-                    updateActiveClass(currentIndex);
-
-                    const targetLeft = getTargetScrollLeft(currentIndex);
-                    if (smooth) {
-                        isAnimating = true;
-                        philoList.scrollTo({
-                            left: targetLeft,
-                            behavior: 'smooth'
-                        });
-
-                        /* 스크롤 애니메이션 종료 후 복제본 위치 즉시 재배치 */
-                        setTimeout(function() {
-                            checkAndResetClonePosition();
-                            isAnimating = false;
-                        }, 450);
-                    } else {
-                        philoList.scrollLeft = targetLeft;
-                        checkAndResetClonePosition();
-                    }
-                }
-
-                function checkAndResetClonePosition() {
-                    /* 마지막 복제본(clone 1번)에 도달했을 때 원래 첫번째 카드로 순간 이동 */
-                    if (currentIndex === originalCount + 1) {
-                        currentIndex = 1;
-                        philoList.scrollLeft = getTargetScrollLeft(currentIndex);
-                        /* 복제본의 active만 정리하고 원본 1번은 active 상태 그대로 유지 (크기 변화 없음) */
-                        allItems.forEach((item, idx) => {
-                            if (idx === 1) {
-                                item.classList.add('active');
-                            } else {
-                                item.classList.remove('active');
-                            }
-                        });
-                    }
-                    /* 맨 앞 복제본(clone 마지막 번호)에 도달했을 때 원래 마지막 카드로 순간 이동 */
-                    else if (currentIndex === 0) {
-                        currentIndex = originalCount;
-                        philoList.scrollLeft = getTargetScrollLeft(currentIndex);
-                        /* 복제본의 active만 정리하고 원본은 active 상태 그대로 유지 (크기 변화 없음) */
-                        allItems.forEach((item, idx) => {
-                            if (idx === originalCount) {
-                                item.classList.add('active');
-                            } else {
-                                item.classList.remove('active');
-                            }
-                        });
-                    }
-                }
-
-                function startPhiloAutoSlide() {
-                    stopPhiloAutoSlide();
-                    autoSlideTimer = setInterval(function() {
-                        if (window.innerWidth > 1024 || isTouching || isAnimating) return;
-                        moveToSlide(currentIndex + 1, true);
-                    }, 4800);
-                }
-
-                function stopPhiloAutoSlide() {
-                    if (autoSlideTimer) {
-                        clearInterval(autoSlideTimer);
-                        autoSlideTimer = null;
-                    }
-                    if (autoResumeTimer) {
-                        clearTimeout(autoResumeTimer);
-                        autoResumeTimer = null;
-                    }
-                }
-
-                function scheduleResumeAutoSlide() {
-                    if (autoResumeTimer) clearTimeout(autoResumeTimer);
-                    autoResumeTimer = setTimeout(function() {
-                        if (!isTouching && window.innerWidth <= 1024) {
-                            startPhiloAutoSlide();
-                        }
-                    }, 5500);
-                }
-
-                /* 초기 1번 카드 위치 정렬 */
-                setTimeout(function() {
-                    moveToSlide(1, false);
-                }, 80);
-
-                function getClosestIndex() {
-                    const listCenter = philoList.scrollLeft + philoList.clientWidth / 2;
-                    let closestIdx = currentIndex;
-                    let minDiff = Infinity;
-                    allItems.forEach((item, idx) => {
-                        const itemCenter = item.offsetLeft + item.clientWidth / 2;
-                        const diff = Math.abs(listCenter - itemCenter);
-                        if (diff < minDiff) {
-                            minDiff = diff;
-                            closestIdx = idx;
-                        }
-                    });
-                    return closestIdx;
-                }
-
-                /* 터치 시작 */
-                philoList.addEventListener('touchstart', function(e) {
-                    stopPhiloAutoSlide();
-                    isAnimating = false;
-                    isTouching = true;
-                    touchMoved = false;
-                    if (e.touches && e.touches[0]) {
-                        touchStartX = e.touches[0].clientX;
-                        touchStartY = e.touches[0].clientY;
-                        touchStartTime = Date.now();
-                    }
-                }, { passive: true });
-
-                /* 터치 이동 */
-                philoList.addEventListener('touchmove', function(e) {
-                    if (!isTouching || !e.touches || !e.touches[0]) return;
-                    const diffX = e.touches[0].clientX - touchStartX;
-                    const diffY = e.touches[0].clientY - touchStartY;
-                    if (Math.abs(diffX) > 8 && Math.abs(diffX) > Math.abs(diffY)) {
-                        touchMoved = true;
-                    }
-                }, { passive: true });
-
-                /* 터치 종료 시 한 장 단위 스냅 페이징 */
-                philoList.addEventListener('touchend', function(e) {
-                    if (!isTouching) return;
-                    isTouching = false;
-
-                    if (touchMoved && e.changedTouches && e.changedTouches[0]) {
-                        preventClick = true;
-                        setTimeout(function() {
-                            preventClick = false;
-                        }, 400);
-
-                        const diffX = e.changedTouches[0].clientX - touchStartX;
-                        const duration = Date.now() - touchStartTime;
-                        const isQuickSwipe = duration < 300 && Math.abs(diffX) > 25;
-                        const threshold = isQuickSwipe ? 25 : 45;
-
-                        if (diffX < -threshold) {
-                            /* 왼쪽으로 넘겼을 때 다음 카드로 정확히 안착 */
-                            moveToSlide(currentIndex + 1, true);
-                        } else if (diffX > threshold) {
-                            /* 오른쪽으로 넘겼을 때 이전 카드로 정확히 안착 */
-                            moveToSlide(currentIndex - 1, true);
-                        } else {
-                            /* 이동 거리가 짧을 때 가장 가까운 카드로 부드럽게 정렬 */
-                            moveToSlide(getClosestIndex(), true);
-                        }
-                    } else if (touchMoved) {
-                        preventClick = true;
-                        setTimeout(function() {
-                            preventClick = false;
-                        }, 400);
-                        moveToSlide(getClosestIndex(), true);
-                    }
-
-                    scheduleResumeAutoSlide();
-                }, { passive: true });
-
-                /* 카드 탭이나 클릭 시 해당 카드로 부드럽게 이동 */
-                allItems.forEach((item, idx) => {
-                    item.addEventListener('click', function(e) {
-                        if (window.innerWidth <= 1024) {
-                            if (preventClick || touchMoved) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                return;
-                            }
-                            moveToSlide(idx, true);
-                            stopPhiloAutoSlide();
-                            scheduleResumeAutoSlide();
-                        }
-                    });
-                });
-
-                /* 화면에 보일 때만 자동 슬라이드 실행 */
-                const philoSec = document.querySelector('.mn-sec-03');
-                if (philoSec && 'IntersectionObserver' in window) {
-                    const observer = new IntersectionObserver(function(entries) {
-                        entries.forEach(function(entry) {
-                            if (entry.isIntersecting && window.innerWidth <= 1024) {
-                                startPhiloAutoSlide();
-                            } else {
-                                stopPhiloAutoSlide();
-                            }
-                        });
-                    }, { threshold: 0.1 });
-                    observer.observe(philoSec);
-                } else if (window.innerWidth <= 1024) {
-                    startPhiloAutoSlide();
-                }
-
-                window.addEventListener('resize', function() {
-                    if (window.innerWidth <= 1024) {
-                        moveToSlide(currentIndex, false);
-                    } else {
-                        stopPhiloAutoSlide();
-                    }
-                });
-            })();
-
-            /* 스크롤 등장 애니메이션 (animation.css 연동) */
-            const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-bg, .reveal-zoom-in');
-            if (revealElements.length > 0) {
-                const revealObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                        }
-                    });
-                }, { threshold: 0.15 });
-
-                revealElements.forEach(el => revealObserver.observe(el));
-            }
-
-            const journeyBox = document.querySelector('.journey-box');
-            const journeyItems = document.querySelectorAll('.journey-item');
-            const navItems = document.querySelectorAll('.step-nav li');
-            let currentNavIndex = 0;
-            let autoTimer = null;
-            let loopStartTimer = null;
-            let hasEntered = false;
-
-            if (journeyBox && journeyItems.length > 0) {
-                /* 모바일 전용: 스크롤 시 순차 등장 및 화면 중심 카드 강조 */
-                const journeyScrollObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                        }
-                    });
-                }, { threshold: 0.15 });
-
-                journeyItems.forEach(item => journeyScrollObserver.observe(item));
-
-                /* 모바일 스크롤 시 중심에 위치한 카드 하이라이트 감지 (requestAnimationFrame 최적화) */
-                let isHighlightTicking = false;
-
-                function handleMobileJourneyHighlight() {
-                    if (window.innerWidth > 1024) return;
-                    
-                    if (!isHighlightTicking) {
-                        window.requestAnimationFrame(function() {
-                            const viewportCenter = window.innerHeight / 2;
-                            let closestItem = null;
-                            let minDistance = Infinity;
-
-                            journeyItems.forEach(item => {
-                                const rect = item.getBoundingClientRect();
-                                const itemCenter = rect.top + rect.height / 2;
-                                const distance = Math.abs(viewportCenter - itemCenter);
-                                
-                                /* 화면 안에 걸쳐 있는 카드 중 중심과 가장 가까운 카드 선정 */
-                                if (rect.top < window.innerHeight && rect.bottom > 0) {
-                                    if (distance < minDistance) {
-                                        minDistance = distance;
-                                        closestItem = item;
-                                    }
-                                }
-                            });
-
-                            journeyItems.forEach(item => {
-                                if (item === closestItem) {
-                                    if (!item.classList.contains('highlight')) {
-                                        item.classList.add('highlight');
-                                    }
-                                } else {
-                                    if (item.classList.contains('highlight')) {
-                                        item.classList.remove('highlight');
-                                    }
-                                }
-                            });
-
-                            isHighlightTicking = false;
-                        });
-                        isHighlightTicking = true;
-                    }
-                }
-
-                window.addEventListener('scroll', handleMobileJourneyHighlight, { passive: true });
-
-                /* PC 전용: 상단 스텝 네비게이션 자동 루프 및 마우스 호버 처리 */
-                const pcJourneyObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            if (window.innerWidth > 1024) {
-                                if (!hasEntered) {
-                                    hasEntered = true;
-                                    journeyItems.forEach(item => item.classList.add('is-active'));
-                                    startAutoLoop();
-                                } else {
-                                    startAutoLoop();
-                                }
-                            }
-                        } else {
-                            if (loopStartTimer) clearTimeout(loopStartTimer);
-                            stopAutoLoop();
-                        }
-                    });
-                }, { threshold: 0.05 });
-
-                pcJourneyObserver.observe(journeyBox);
-
-                function highlightNavStep(navIndex, isHover = false) {
-                    currentNavIndex = navIndex;
-                    navItems.forEach((item, idx) => {
-                        item.classList.remove('active', 'is-filled', 'hovered');
-                        if (idx < navIndex) {
-                            item.classList.add('is-filled');
-                        } else if (idx === navIndex) {
-                            if (isHover) {
-                                item.classList.add('hovered');
-                            } else {
-                                item.classList.add('active');
-                            }
-                        }
-                    });
-
-                    let cardIndex = Math.floor(navIndex / 2);
-                    journeyItems.forEach((item, idx) => {
-                        if (idx === cardIndex) {
-                            item.classList.add('highlight');
-                        } else {
-                            item.classList.remove('highlight');
-                        }
-                    });
-                }
-
-                function startAutoLoop() {
-                    if (window.innerWidth <= 1024) return;
-                    runNextStep();
-                }
-
-                function runNextStep() {
-                    if (window.innerWidth <= 1024) return;
-                    stopAutoLoop();
-                    highlightNavStep(currentNavIndex, false);
-                    
-                    let isLine = navItems[currentNavIndex].classList.contains('line');
-                    let duration = isLine ? 1000 : 2000;
-
-                    autoTimer = setTimeout(() => {
-                        currentNavIndex = (currentNavIndex + 1) % navItems.length;
-                        runNextStep();
-                    }, duration);
-                }
-
-                function stopAutoLoop() {
-                    if (autoTimer) {
-                        clearTimeout(autoTimer);
-                        autoTimer = null;
-                    }
-                }
-
-                journeyItems.forEach((item, cardIdx) => {
-                    item.addEventListener('mouseenter', () => {
-                        if (window.innerWidth > 1024) {
-                            stopAutoLoop();
-                            highlightNavStep(cardIdx * 2, true);
-                        }
-                    });
-                    item.addEventListener('mouseleave', () => {
-                        if (window.innerWidth > 1024) {
-                            stopAutoLoop();
-                            autoTimer = setTimeout(() => {
-                                currentNavIndex = (cardIdx * 2 + 1) % navItems.length;
-                                runNextStep();
-                            }, 600);
-                        }
-                    });
-                });
-
-                navItems.forEach((item, idx) => {
-                    if (!item.classList.contains('line')) {
-                        item.addEventListener('mouseenter', () => {
-                            if (window.innerWidth > 1024) {
-                                stopAutoLoop();
-                                highlightNavStep(idx, true);
-                            }
-                        });
-                        item.addEventListener('mouseleave', () => {
-                            if (window.innerWidth > 1024) {
-                                stopAutoLoop();
-                                autoTimer = setTimeout(() => {
-                                    currentNavIndex = (idx + 1) % navItems.length;
-                                    runNextStep();
-                                }, 600);
-                            }
-                        });
-                    }
-                });
-
-                window.addEventListener('resize', () => {
-                    if (window.innerWidth <= 1024) {
-                        stopAutoLoop();
-                        handleMobileJourneyHighlight();
-                    } else {
-                        journeyItems.forEach(item => item.classList.remove('is-visible'));
-                        startAutoLoop();
-                    }
-                });
-            }
-        });
+<script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+
+            /* 모바일 DOCTOR'S PHILOSOPHY 무한 슬라이드 및 부드러운 스와이프 스냅 */
+
+            (function() {
+
+                const philoList = document.querySelector('.philo-list.mo');
+
+                if (!philoList) return;
+
+
+
+                const originalItems = Array.from(philoList.querySelectorAll('.philo-item'));
+
+                const originalCount = originalItems.length;
+
+                if (originalCount === 0) return;
+
+
+
+                /* 원본 아이템에 실제 인덱스 부여 */
+
+                originalItems.forEach((item, idx) => {
+
+                    item.setAttribute('data-real-index', idx);
+
+                });
+
+
+
+                /* 무한 루프를 위한 복제본 생성 */
+
+                const cloneBefore = originalItems[originalCount - 1].cloneNode(true);
+
+                cloneBefore.setAttribute('data-clone', 'true');
+
+                cloneBefore.setAttribute('data-real-index', originalCount - 1);
+
+                cloneBefore.classList.remove('active');
+
+                philoList.insertBefore(cloneBefore, originalItems[0]);
+
+
+
+                const cloneAfter1 = originalItems[0].cloneNode(true);
+
+                cloneAfter1.setAttribute('data-clone', 'true');
+
+                cloneAfter1.setAttribute('data-real-index', 0);
+
+                cloneAfter1.classList.remove('active');
+
+                philoList.appendChild(cloneAfter1);
+
+
+
+                const cloneAfter2 = originalItems[1].cloneNode(true);
+
+                cloneAfter2.setAttribute('data-clone', 'true');
+
+                cloneAfter2.setAttribute('data-real-index', 1);
+
+                cloneAfter2.classList.remove('active');
+
+                philoList.appendChild(cloneAfter2);
+
+
+
+                let allItems = Array.from(philoList.querySelectorAll('.philo-item'));
+
+
+
+                /* 초기 위치: 첫번째 원본 카드 인덱스 1 */
+
+                let currentIndex = 1;
+
+                let autoSlideTimer = null;
+
+                let autoResumeTimer = null;
+
+                let isAnimating = false;
+
+                let isTouching = false;
+
+                let touchStartX = 0;
+
+                let touchStartY = 0;
+
+                let touchStartTime = 0;
+
+                let touchMoved = false;
+
+
+
+                function getTargetScrollLeft(index) {
+
+                    const item = allItems[index];
+
+                    if (!item) return 0;
+
+                    const containerRect = philoList.getBoundingClientRect();
+
+                    const itemRect = item.getBoundingClientRect();
+
+                    const currentScroll = philoList.scrollLeft;
+
+                    const offsetLeft = (itemRect.left - containerRect.left) + currentScroll;
+
+                    return offsetLeft - (philoList.clientWidth - item.clientWidth) / 2;
+
+                }
+
+
+
+                function updateActiveClass(targetIdx) {
+
+                    const targetItem = allItems[targetIdx];
+
+                    if (!targetItem) return;
+
+                    const targetRealIdx = parseInt(targetItem.getAttribute('data-real-index'), 10);
+
+                    const isClone = targetItem.hasAttribute('data-clone');
+
+
+
+                    allItems.forEach((item, idx) => {
+
+                        const itemRealIdx = parseInt(item.getAttribute('data-real-index'), 10);
+
+                        /* 복제본으로 이동 시 같은 실제 인덱스를 가진 원본 카드도 미리 active 상태로 동기화하여 리셋 시 재실행 방지 */
+
+                        if (idx === targetIdx || (isClone && !item.hasAttribute('data-clone') && itemRealIdx === targetRealIdx)) {
+
+                            item.classList.add('active');
+
+                        } else {
+
+                            item.classList.remove('active');
+
+                        }
+
+                    });
+
+                }
+
+
+
+                let preventClick = false;
+
+
+
+                function moveToSlide(index, smooth = true) {
+
+                    if (index < 0 || index >= allItems.length) return;
+
+                    currentIndex = index;
+
+
+
+                    /* 목표 카드를 즉시 활성화하여 스크롤과 동시에 부드럽게 1회만 크기 전환 */
+
+                    updateActiveClass(currentIndex);
+
+
+
+                    const targetLeft = getTargetScrollLeft(currentIndex);
+
+                    if (smooth) {
+
+                        isAnimating = true;
+
+                        philoList.scrollTo({
+
+                            left: targetLeft,
+
+                            behavior: 'smooth'
+
+                        });
+
+
+
+                        /* 스크롤 애니메이션 종료 후 복제본 위치 즉시 재배치 */
+
+                        setTimeout(function() {
+
+                            checkAndResetClonePosition();
+
+                            isAnimating = false;
+
+                        }, 450);
+
+                    } else {
+
+                        philoList.scrollLeft = targetLeft;
+
+                        checkAndResetClonePosition();
+
+                    }
+
+                }
+
+
+
+                function checkAndResetClonePosition() {
+
+                    /* 마지막 복제본(clone 1번)에 도달했을 때 원래 첫번째 카드로 순간 이동 */
+
+                    if (currentIndex === originalCount + 1) {
+
+                        currentIndex = 1;
+
+                        philoList.scrollLeft = getTargetScrollLeft(currentIndex);
+
+                        /* 복제본의 active만 정리하고 원본 1번은 active 상태 그대로 유지 (크기 변화 없음) */
+
+                        allItems.forEach((item, idx) => {
+
+                            if (idx === 1) {
+
+                                item.classList.add('active');
+
+                            } else {
+
+                                item.classList.remove('active');
+
+                            }
+
+                        });
+
+                    }
+
+                    /* 맨 앞 복제본(clone 마지막 번호)에 도달했을 때 원래 마지막 카드로 순간 이동 */
+
+                    else if (currentIndex === 0) {
+
+                        currentIndex = originalCount;
+
+                        philoList.scrollLeft = getTargetScrollLeft(currentIndex);
+
+                        /* 복제본의 active만 정리하고 원본은 active 상태 그대로 유지 (크기 변화 없음) */
+
+                        allItems.forEach((item, idx) => {
+
+                            if (idx === originalCount) {
+
+                                item.classList.add('active');
+
+                            } else {
+
+                                item.classList.remove('active');
+
+                            }
+
+                        });
+
+                    }
+
+                }
+
+
+
+                function startPhiloAutoSlide() {
+
+                    stopPhiloAutoSlide();
+
+                    autoSlideTimer = setInterval(function() {
+
+                        if (window.innerWidth > 1024 || isTouching || isAnimating) return;
+
+                        moveToSlide(currentIndex + 1, true);
+
+                    }, 4800);
+
+                }
+
+
+
+                function stopPhiloAutoSlide() {
+
+                    if (autoSlideTimer) {
+
+                        clearInterval(autoSlideTimer);
+
+                        autoSlideTimer = null;
+
+                    }
+
+                    if (autoResumeTimer) {
+
+                        clearTimeout(autoResumeTimer);
+
+                        autoResumeTimer = null;
+
+                    }
+
+                }
+
+
+
+                function scheduleResumeAutoSlide() {
+
+                    if (autoResumeTimer) clearTimeout(autoResumeTimer);
+
+                    autoResumeTimer = setTimeout(function() {
+
+                        if (!isTouching && window.innerWidth <= 1024) {
+
+                            startPhiloAutoSlide();
+
+                        }
+
+                    }, 5500);
+
+                }
+
+
+
+                /* 초기 1번 카드 위치 정렬 */
+
+                setTimeout(function() {
+
+                    moveToSlide(1, false);
+
+                }, 80);
+
+
+
+                function getClosestIndex() {
+
+                    const listCenter = philoList.scrollLeft + philoList.clientWidth / 2;
+
+                    let closestIdx = currentIndex;
+
+                    let minDiff = Infinity;
+
+                    allItems.forEach((item, idx) => {
+
+                        const itemCenter = item.offsetLeft + item.clientWidth / 2;
+
+                        const diff = Math.abs(listCenter - itemCenter);
+
+                        if (diff < minDiff) {
+
+                            minDiff = diff;
+
+                            closestIdx = idx;
+
+                        }
+
+                    });
+
+                    return closestIdx;
+
+                }
+
+
+
+                /* 터치 시작 */
+
+                philoList.addEventListener('touchstart', function(e) {
+
+                    stopPhiloAutoSlide();
+
+                    isAnimating = false;
+
+                    isTouching = true;
+
+                    touchMoved = false;
+
+                    if (e.touches && e.touches[0]) {
+
+                        touchStartX = e.touches[0].clientX;
+
+                        touchStartY = e.touches[0].clientY;
+
+                        touchStartTime = Date.now();
+
+                    }
+
+                }, { passive: true });
+
+
+
+                /* 터치 이동 */
+
+                philoList.addEventListener('touchmove', function(e) {
+
+                    if (!isTouching || !e.touches || !e.touches[0]) return;
+
+                    const diffX = e.touches[0].clientX - touchStartX;
+
+                    const diffY = e.touches[0].clientY - touchStartY;
+
+                    if (Math.abs(diffX) > 8 && Math.abs(diffX) > Math.abs(diffY)) {
+
+                        touchMoved = true;
+
+                    }
+
+                }, { passive: true });
+
+
+
+                /* 터치 종료 시 한 장 단위 스냅 페이징 */
+
+                philoList.addEventListener('touchend', function(e) {
+
+                    if (!isTouching) return;
+
+                    isTouching = false;
+
+
+
+                    if (touchMoved && e.changedTouches && e.changedTouches[0]) {
+
+                        preventClick = true;
+
+                        setTimeout(function() {
+
+                            preventClick = false;
+
+                        }, 400);
+
+
+
+                        const diffX = e.changedTouches[0].clientX - touchStartX;
+
+                        const duration = Date.now() - touchStartTime;
+
+                        const isQuickSwipe = duration < 300 && Math.abs(diffX) > 25;
+
+                        const threshold = isQuickSwipe ? 25 : 45;
+
+
+
+                        if (diffX < -threshold) {
+
+                            /* 왼쪽으로 넘겼을 때 다음 카드로 정확히 안착 */
+
+                            moveToSlide(currentIndex + 1, true);
+
+                        } else if (diffX > threshold) {
+
+                            /* 오른쪽으로 넘겼을 때 이전 카드로 정확히 안착 */
+
+                            moveToSlide(currentIndex - 1, true);
+
+                        } else {
+
+                            /* 이동 거리가 짧을 때 가장 가까운 카드로 부드럽게 정렬 */
+
+                            moveToSlide(getClosestIndex(), true);
+
+                        }
+
+                    } else if (touchMoved) {
+
+                        preventClick = true;
+
+                        setTimeout(function() {
+
+                            preventClick = false;
+
+                        }, 400);
+
+                        moveToSlide(getClosestIndex(), true);
+
+                    }
+
+
+
+                    scheduleResumeAutoSlide();
+
+                }, { passive: true });
+
+
+
+                /* 카드 탭이나 클릭 시 해당 카드로 부드럽게 이동 */
+
+                allItems.forEach((item, idx) => {
+
+                    item.addEventListener('click', function(e) {
+
+                        if (window.innerWidth <= 1024) {
+
+                            if (preventClick || touchMoved) {
+
+                                e.preventDefault();
+
+                                e.stopPropagation();
+
+                                return;
+
+                            }
+
+                            moveToSlide(idx, true);
+
+                            stopPhiloAutoSlide();
+
+                            scheduleResumeAutoSlide();
+
+                        }
+
+                    });
+
+                });
+
+
+
+                /* 화면에 보일 때만 자동 슬라이드 실행 */
+
+                const philoSec = document.querySelector('.mn-sec-03');
+
+                if (philoSec && 'IntersectionObserver' in window) {
+
+                    const observer = new IntersectionObserver(function(entries) {
+
+                        entries.forEach(function(entry) {
+
+                            if (entry.isIntersecting && window.innerWidth <= 1024) {
+
+                                startPhiloAutoSlide();
+
+                            } else {
+
+                                stopPhiloAutoSlide();
+
+                            }
+
+                        });
+
+                    }, { threshold: 0.1 });
+
+                    observer.observe(philoSec);
+
+                } else if (window.innerWidth <= 1024) {
+
+                    startPhiloAutoSlide();
+
+                }
+
+
+
+                window.addEventListener('resize', function() {
+
+                    if (window.innerWidth <= 1024) {
+
+                        moveToSlide(currentIndex, false);
+
+                    } else {
+
+                        stopPhiloAutoSlide();
+
+                    }
+
+                });
+
+            })();
+
+
+
+            /* 스크롤 등장 애니메이션 (animation.css 연동) */
+
+            const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-bg, .reveal-zoom-in');
+
+            if (revealElements.length > 0) {
+
+                const revealObserver = new IntersectionObserver((entries) => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add('active');
+
+                        }
+
+                    });
+
+                }, { threshold: 0.15 });
+
+
+
+                revealElements.forEach(el => revealObserver.observe(el));
+
+            }
+
+
+
+            const journeyBox = document.querySelector('.journey-box');
+
+            const journeyItems = document.querySelectorAll('.journey-item');
+
+            const navItems = document.querySelectorAll('.step-nav li');
+
+            let currentNavIndex = 0;
+
+            let autoTimer = null;
+
+            let loopStartTimer = null;
+
+            let hasEntered = false;
+
+
+
+            if (journeyBox && journeyItems.length > 0) {
+
+                /* 모바일 전용: 스크롤 시 순차 등장 및 화면 중심 카드 강조 */
+
+                const journeyScrollObserver = new IntersectionObserver((entries) => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            entry.target.classList.add('is-visible');
+
+                        }
+
+                    });
+
+                }, { threshold: 0.15 });
+
+
+
+                journeyItems.forEach(item => journeyScrollObserver.observe(item));
+
+
+
+                /* 모바일 스크롤 시 중심에 위치한 카드 하이라이트 감지 (requestAnimationFrame 최적화) */
+
+                let isHighlightTicking = false;
+
+
+
+                function handleMobileJourneyHighlight() {
+
+                    if (window.innerWidth > 1024) return;
+
+                    
+
+                    if (!isHighlightTicking) {
+
+                        window.requestAnimationFrame(function() {
+
+                            const viewportCenter = window.innerHeight / 2;
+
+                            let closestItem = null;
+
+                            let minDistance = Infinity;
+
+
+
+                            journeyItems.forEach(item => {
+
+                                const rect = item.getBoundingClientRect();
+
+                                const itemCenter = rect.top + rect.height / 2;
+
+                                const distance = Math.abs(viewportCenter - itemCenter);
+
+                                
+
+                                /* 화면 안에 걸쳐 있는 카드 중 중심과 가장 가까운 카드 선정 */
+
+                                if (rect.top < window.innerHeight && rect.bottom > 0) {
+
+                                    if (distance < minDistance) {
+
+                                        minDistance = distance;
+
+                                        closestItem = item;
+
+                                    }
+
+                                }
+
+                            });
+
+
+
+                            journeyItems.forEach(item => {
+
+                                if (item === closestItem) {
+
+                                    if (!item.classList.contains('highlight')) {
+
+                                        item.classList.add('highlight');
+
+                                    }
+
+                                } else {
+
+                                    if (item.classList.contains('highlight')) {
+
+                                        item.classList.remove('highlight');
+
+                                    }
+
+                                }
+
+                            });
+
+
+
+                            isHighlightTicking = false;
+
+                        });
+
+                        isHighlightTicking = true;
+
+                    }
+
+                }
+
+
+
+                window.addEventListener('scroll', handleMobileJourneyHighlight, { passive: true });
+
+
+
+                /* PC 전용: 상단 스텝 네비게이션 자동 루프 및 마우스 호버 처리 */
+
+                const pcJourneyObserver = new IntersectionObserver((entries) => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+
+                            if (window.innerWidth > 1024) {
+
+                                if (!hasEntered) {
+
+                                    hasEntered = true;
+
+                                    journeyItems.forEach(item => item.classList.add('is-active'));
+
+                                    startAutoLoop();
+
+                                } else {
+
+                                    startAutoLoop();
+
+                                }
+
+                            }
+
+                        } else {
+
+                            if (loopStartTimer) clearTimeout(loopStartTimer);
+
+                            stopAutoLoop();
+
+                        }
+
+                    });
+
+                }, { threshold: 0.05 });
+
+
+
+                pcJourneyObserver.observe(journeyBox);
+
+
+
+                function highlightNavStep(navIndex, isHover = false) {
+
+                    currentNavIndex = navIndex;
+
+                    navItems.forEach((item, idx) => {
+
+                        item.classList.remove('active', 'is-filled', 'hovered');
+
+                        if (idx < navIndex) {
+
+                            item.classList.add('is-filled');
+
+                        } else if (idx === navIndex) {
+
+                            if (isHover) {
+
+                                item.classList.add('hovered');
+
+                            } else {
+
+                                item.classList.add('active');
+
+                            }
+
+                        }
+
+                    });
+
+
+
+                    let cardIndex = Math.floor(navIndex / 2);
+
+                    journeyItems.forEach((item, idx) => {
+
+                        if (idx === cardIndex) {
+
+                            item.classList.add('highlight');
+
+                        } else {
+
+                            item.classList.remove('highlight');
+
+                        }
+
+                    });
+
+                }
+
+
+
+                function startAutoLoop() {
+
+                    if (window.innerWidth <= 1024) return;
+
+                    runNextStep();
+
+                }
+
+
+
+                function runNextStep() {
+
+                    if (window.innerWidth <= 1024) return;
+
+                    stopAutoLoop();
+
+                    highlightNavStep(currentNavIndex, false);
+
+                    
+
+                    let isLine = navItems[currentNavIndex].classList.contains('line');
+
+                    let duration = isLine ? 1000 : 2000;
+
+
+
+                    autoTimer = setTimeout(() => {
+
+                        currentNavIndex = (currentNavIndex + 1) % navItems.length;
+
+                        runNextStep();
+
+                    }, duration);
+
+                }
+
+
+
+                function stopAutoLoop() {
+
+                    if (autoTimer) {
+
+                        clearTimeout(autoTimer);
+
+                        autoTimer = null;
+
+                    }
+
+                }
+
+
+
+                journeyItems.forEach((item, cardIdx) => {
+
+                    item.addEventListener('mouseenter', () => {
+
+                        if (window.innerWidth > 1024) {
+
+                            stopAutoLoop();
+
+                            highlightNavStep(cardIdx * 2, true);
+
+                        }
+
+                    });
+
+                    item.addEventListener('mouseleave', () => {
+
+                        if (window.innerWidth > 1024) {
+
+                            stopAutoLoop();
+
+                            autoTimer = setTimeout(() => {
+
+                                currentNavIndex = (cardIdx * 2 + 1) % navItems.length;
+
+                                runNextStep();
+
+                            }, 600);
+
+                        }
+
+                    });
+
+                });
+
+
+
+                navItems.forEach((item, idx) => {
+
+                    if (!item.classList.contains('line')) {
+
+                        item.addEventListener('mouseenter', () => {
+
+                            if (window.innerWidth > 1024) {
+
+                                stopAutoLoop();
+
+                                highlightNavStep(idx, true);
+
+                            }
+
+                        });
+
+                        item.addEventListener('mouseleave', () => {
+
+                            if (window.innerWidth > 1024) {
+
+                                stopAutoLoop();
+
+                                autoTimer = setTimeout(() => {
+
+                                    currentNavIndex = (idx + 1) % navItems.length;
+
+                                    runNextStep();
+
+                                }, 600);
+
+                            }
+
+                        });
+
+                    }
+
+                });
+
+
+
+                window.addEventListener('resize', () => {
+
+                    if (window.innerWidth <= 1024) {
+
+                        stopAutoLoop();
+
+                        handleMobileJourneyHighlight();
+
+                    } else {
+
+                        journeyItems.forEach(item => item.classList.remove('is-visible'));
+
+                        startAutoLoop();
+
+                    }
+
+                });
+
+            }
+
+        });
+
         </script>
-<script>
-$(document).ready(function() {
-    $('.eq-tabs button').on('click', function() {
-        $('.eq-tabs button').removeClass('active');
-        $(this).addClass('active');
-
-        var caId = String($(this).data('id'));
-        
-        if (caId === '0') {
-            $('.eq-card').show();
-        } else {
-            $('.eq-card').hide();
-            $('.eq-card[data-ca-id="' + caId + '"]').show();
-        }
-
-        if ($('#eq-empty-msg').length > 0) {
-            var visibleCount = $('.eq-card:visible').length;
-            if (visibleCount === 0) {
-                $('#eq-empty-msg').show();
-            } else {
-                $('#eq-empty-msg').hide();
-            }
-        }
-    });
-});
+<script>
+
+$(document).ready(function() {
+
+    $('.eq-tabs button').on('click', function() {
+
+        $('.eq-tabs button').removeClass('active');
+
+        $(this).addClass('active');
+
+
+
+        var caId = String($(this).data('id'));
+
+        
+
+        if (caId === '0') {
+
+            $('.eq-card').show();
+
+        } else {
+
+            $('.eq-card').hide();
+
+            $('.eq-card[data-ca-id="' + caId + '"]').show();
+
+        }
+
+
+
+        if ($('#eq-empty-msg').length > 0) {
+
+            var visibleCount = $('.eq-card:visible').length;
+
+            if (visibleCount === 0) {
+
+                $('#eq-empty-msg').show();
+
+            } else {
+
+                $('#eq-empty-msg').hide();
+
+            }
+
+        }
+
+    });
+
+});
+
 </script>
-<script>
-$(document).ready(function() {
-    $('.ba-tabs button').on('click', function() {
-        $('.ba-tabs button').removeClass('active');
-        $(this).addClass('active');
-
-        var caId = String($(this).data('id'));
-        
-        if (caId === '0') {
-            $('.ba-item').show();
-        } else {
-            $('.ba-item').hide();
-            $('.ba-item[data-ca-id="' + caId + '"]').show();
-        }
-
-        if ($('#ba-empty-msg').length > 0) {
-            var visibleCount = $('.ba-item:visible').length;
-            if (visibleCount === 0) {
-                $('#ba-empty-msg').show();
-            } else {
-                $('#ba-empty-msg').hide();
-            }
-        }
-    });
-});
+<script>
+
+$(document).ready(function() {
+
+    $('.ba-tabs button').on('click', function() {
+
+        $('.ba-tabs button').removeClass('active');
+
+        $(this).addClass('active');
+
+
+
+        var caId = String($(this).data('id'));
+
+        
+
+        if (caId === '0') {
+
+            $('.ba-item').show();
+
+        } else {
+
+            $('.ba-item').hide();
+
+            $('.ba-item[data-ca-id="' + caId + '"]').show();
+
+        }
+
+
+
+        if ($('#ba-empty-msg').length > 0) {
+
+            var visibleCount = $('.ba-item:visible').length;
+
+            if (visibleCount === 0) {
+
+                $('#ba-empty-msg').show();
+
+            } else {
+
+                $('#ba-empty-msg').hide();
+
+            }
+
+        }
+
+    });
+
+});
+
 </script>
 <script src="assets/js/common_animation.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-    AOS.init();
+<script>
+
+    AOS.init();
+
 </script>
-<script>
-    $(function() {
-        // 상단 이동 스크롤 동작
-        $("#top_btn, .btn-scroll-top").on("click", function(e) {
-            e.preventDefault();
-            $("html, body").animate({
-                scrollTop: 0
-            }, '500');
-            return false;
-        });
-
-        let isQuickAnimating = false;
-
-        // 퀵메뉴 닫기 동작: 위에서부터 아래로 또로록 들어간 후 닫힘
-        $("#quickCloseBtn").on("click", function(e) {
-            e.preventDefault();
-            if (isQuickAnimating) return;
-            isQuickAnimating = true;
-
-            const $wrap = $(".quick-floating-wrap");
-            $wrap.addClass("is_closing");
-
-            setTimeout(function() {
-                $wrap.removeClass("is_closing").addClass("is_closed");
-                isQuickAnimating = false;
-                checkAndUnlockBodyScroll();
-            }, 460);
-        });
-
-        // 퀵메뉴 열기 동작: 아래에서부터 위로 또로록 튀어나옴
-        $("#quickOpenBtn").on("click", function(e) {
-            e.preventDefault();
-            if (isQuickAnimating) return;
-            const $wrap = $(".quick-floating-wrap");
-            $wrap.removeClass("is_closing is_closed");
-        });
-
-        let savedBodyScrollY = 0;
-        let isBodyScrollLocked = false;
-
-        /* 모달 열릴 때 현재 스크롤 위치를 유지하며 뒷배경 스크롤 완벽 차단 */
-        function lockBodyScroll() {
-            if (isBodyScrollLocked) return;
-            savedBodyScrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-            document.body.style.position = 'fixed';
-            document.body.style.top = `${-savedBodyScrollY}px`;
-            document.body.style.left = '0';
-            document.body.style.width = '100%';
-            isBodyScrollLocked = true;
-        }
-
-        /* 모달 닫힐 때 원래 스크롤 위치로 복원 */
-        function unlockBodyScroll() {
-            if (!isBodyScrollLocked) return;
-            document.body.style.position = '';
-            document.body.style.top = '';
-            document.body.style.left = '';
-            document.body.style.width = '';
-            window.scrollTo(0, savedBodyScrollY);
-            isBodyScrollLocked = false;
-        }
-
-        /* 열려있는 모달이 없을 때만 안전하게 스크롤 잠금 해제 */
-        function checkAndUnlockBodyScroll() {
-            const isConsultOpen = $("#quick_consult_modal").length > 0 && $("#quick_consult_modal").is(":visible");
-            const isPrivacyOpen = $("#quick_privacy_modal").length > 0 && $("#quick_privacy_modal").is(":visible");
-            const isWechatOpen = $("#quick_wechat_modal").length > 0 && $("#quick_wechat_modal").is(":visible");
-            const isPhoneOpen = $("#phone_modal").length > 0 && $("#phone_modal").hasClass("active");
-
-            if (!isConsultOpen && !isPrivacyOpen && !isWechatOpen && !isPhoneOpen) {
-                unlockBodyScroll();
-            }
-        }
-
-        // 빠른 상담 신청 모달 열기
-        $(document).on("click", ".btn-open-quick-consult, a[href='#quick_consult_modal']", function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            lockBodyScroll();
-            $("#quick_consult_modal").fadeIn(220).css("display", "flex");
-            return false;
-        });
-
-        // 빠른 상담 신청 모달 닫기
-        $(document).on("click", "#quick_consult_modal .btn-popup-close, #quick_consult_modal .modal-dim", function(e) {
-            e.preventDefault();
-            $("#quick_consult_modal").fadeOut(180, function() {
-                checkAndUnlockBodyScroll();
-            });
-        });
-
-        // 딤 배경 터치 및 휠 스크롤 방지
-        $(document).on("touchmove wheel", "#quick_consult_modal .modal-dim, #quick_privacy_modal .modal-dim, #quick_wechat_modal .modal-dim", function(e) {
-            e.preventDefault();
-        });
-
-        // 진료과목 커스텀 셀렉트 드롭다운 토글
-        $(document).on("click", "#consult_select_btn", function(e) {
-            e.stopPropagation();
-            $("#consult_select_wrap").toggleClass("is-open");
-        });
-
-        // 진료과목 항목 선택
-        $(document).on("click", "#consult_select_options .select-option-item", function(e) {
-            e.stopPropagation();
-            const val = $(this).data("value");
-            $("#consult_select_options .select-option-item").removeClass("active");
-            $(this).addClass("active");
-            $("#consult_select_btn span").text(val).removeClass("placeholder");
-            $("#qs_subject").val(val);
-            $("#consult_select_wrap").removeClass("is-open");
-        });
-
-        // 외부 영역 클릭 시 드롭다운 닫기
-        $(document).on("click", function(e) {
-            if (!$(e.target).closest("#consult_select_wrap").length) {
-                $("#consult_select_wrap").removeClass("is-open");
-            }
-        });
-
-        // 개인정보 수집 및 이용 동의 모달 열기
-        $(document).on("click", "#btn_open_privacy_modal, .btn-agree-detail", function(e) {
-            e.preventDefault();
-            lockBodyScroll();
-            const consultHeight = $("#quick_consult_modal .modal-content").outerHeight();
-            if (consultHeight > 0) {
-                $("#quick_privacy_modal .modal-content").css("height", consultHeight + "px");
-            }
-            $("#quick_privacy_modal").fadeIn(200).css("display", "flex");
-        });
-
-        // 개인정보 수집 및 이용 동의 모달 닫기
-        $(document).on("click", "#quick_privacy_modal .btn-privacy-close, #quick_privacy_modal .btn-privacy-confirm, #quick_privacy_modal .modal-dim", function(e) {
-            e.preventDefault();
-            $("#quick_privacy_modal").fadeOut(180, function() {
-                $("#quick_privacy_modal .modal-content").css("height", "");
-                checkAndUnlockBodyScroll();
-            });
-        });
-
-        // WeChat 안내 모달 열기
-        $(document).on("click", ".btn-open-wechat-modal, a[href='#quick_wechat_modal']", function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            if (!$("#quick_wechat_modal").length) {
-                return false;
-            }
-            lockBodyScroll();
-            $("#quick_wechat_modal").fadeIn(220).css("display", "flex");
-            return false;
-        });
-
-        // WeChat 안내 모달 닫기
-        $(document).on("click", "#quick_wechat_modal .btn-popup-close, #quick_wechat_modal .modal-dim", function(e) {
-            e.preventDefault();
-            $("#quick_wechat_modal").fadeOut(180, function() {
-                checkAndUnlockBodyScroll();
-            });
-        });
-
-        // 전화상담 모달 열기 함수 (PC 전용)
-        function openPhoneModal() {
-            lockBodyScroll();
-            $("#phone_modal").addClass("active");
-        }
-
-        // 전화상담 모달 닫기 함수
-        function closePhoneModal() {
-            $("#phone_modal").removeClass("active");
-            checkAndUnlockBodyScroll();
-        }
-
-        // 퀵메뉴 전화문의 클릭 시: PC(화면 너비 1024px 초과)에서만 모달 열림, 모바일 기기/화면에서는 기본 tel: 전화걸기 동작 유지
-        $(document).on("click", ".btn-quick-tel, a[href^='tel:02-549-9990']", function(e) {
-            if (window.innerWidth > 1024) {
-                e.preventDefault();
-                openPhoneModal();
-                return false;
-            }
-        });
-
-        // 전화상담 모달 닫기 버튼 클릭
-        $(document).on("click", "#phone_modal_close", function(e) {
-            e.preventDefault();
-            closePhoneModal();
-        });
-
-        // 전화상담 모달 바깥 어두운 배경 클릭 시 닫기
-        $(document).on("click", "#phone_modal", function(e) {
-            if (e.target === this) {
-                closePhoneModal();
-            }
-        });
-
-        // ESC 키 입력 시 열려있는 모달 닫기
-        $(document).on("keydown", function(e) {
-            if (e.key === "Escape") {
-                if ($("#phone_modal").hasClass("active")) {
-                    closePhoneModal();
-                }
-                if ($("#quick_wechat_modal").is(":visible")) {
-                    $("#quick_wechat_modal .btn-popup-close").trigger("click");
-                }
-            }
-        });
-
-        let isConsultSubmitting = false;
-        $("#quick_consult_form").on("submit", function(e) {
-            e.preventDefault();
-
-            if (isConsultSubmitting) {
-                return false;
-            }
-
-            const name = $.trim($("#qs_name").val());
-            const hp = $.trim($("#qs_hp").val());
-            const subject = $.trim($("#qs_subject").val());
-            const agree = $("#qs_agree").is(":checked");
-            const lang = $("#qs_lang").val() || "ko";
-
-            if (!name) {
-                alert(lang === "en" ? "Please enter your name." : (lang === "cn" ? "请输入姓名。" : "이름을 입력해주세요."));
-                $("#qs_name").focus();
-                return false;
-            }
-
-            if (!hp) {
-                alert(lang === "en" ? "Please enter your contact number." : (lang === "cn" ? "请输入联系方式。" : "연락처를 입력해주세요."));
-                $("#qs_hp").focus();
-                return false;
-            }
-
-            if (!subject) {
-                alert(lang === "en" ? "Please select a treatment." : (lang === "cn" ? "请选择诊疗项目。" : "진료과목을 선택해주세요."));
-                $("#consult_select_btn").focus();
-                return false;
-            }
-
-            if (!agree) {
-                alert(lang === "en" ? "Please agree to the privacy policy." : (lang === "cn" ? "请同意个人信息收集与使用。" : "개인정보 수집 및 이용에 동의해주세요."));
-                $("#qs_agree").focus();
-                return false;
-            }
-
-            isConsultSubmitting = true;
-            const $btnSubmit = $("#btn_consult_submit");
-            $btnSubmit.prop("disabled", true);
-
-            alert('예시 화면이라 실제로 접수되지 않습니다. 상담은 010-4894-4905 로 연락해 주세요.');
+<script>
+
+    $(function() {
+
+        // 상단 이동 스크롤 동작
+
+        $("#top_btn, .btn-scroll-top").on("click", function(e) {
+
+            e.preventDefault();
+
+            $("html, body").animate({
+
+                scrollTop: 0
+
+            }, '500');
+
+            return false;
+
+        });
+
+
+
+        let isQuickAnimating = false;
+
+
+
+        // 퀵메뉴 닫기 동작: 위에서부터 아래로 또로록 들어간 후 닫힘
+
+        $("#quickCloseBtn").on("click", function(e) {
+
+            e.preventDefault();
+
+            if (isQuickAnimating) return;
+
+            isQuickAnimating = true;
+
+
+
+            const $wrap = $(".quick-floating-wrap");
+
+            $wrap.addClass("is_closing");
+
+
+
+            setTimeout(function() {
+
+                $wrap.removeClass("is_closing").addClass("is_closed");
+
+                isQuickAnimating = false;
+
+                checkAndUnlockBodyScroll();
+
+            }, 460);
+
+        });
+
+
+
+        // 퀵메뉴 열기 동작: 아래에서부터 위로 또로록 튀어나옴
+
+        $("#quickOpenBtn").on("click", function(e) {
+
+            e.preventDefault();
+
+            if (isQuickAnimating) return;
+
+            const $wrap = $(".quick-floating-wrap");
+
+            $wrap.removeClass("is_closing is_closed");
+
+        });
+
+
+
+        let savedBodyScrollY = 0;
+
+        let isBodyScrollLocked = false;
+
+
+
+        /* 모달 열릴 때 현재 스크롤 위치를 유지하며 뒷배경 스크롤 완벽 차단 */
+
+        function lockBodyScroll() {
+
+            if (isBodyScrollLocked) return;
+
+            savedBodyScrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+
+            document.body.style.position = 'fixed';
+
+            document.body.style.top = `${-savedBodyScrollY}px`;
+
+            document.body.style.left = '0';
+
+            document.body.style.width = '100%';
+
+            isBodyScrollLocked = true;
+
+        }
+
+
+
+        /* 모달 닫힐 때 원래 스크롤 위치로 복원 */
+
+        function unlockBodyScroll() {
+
+            if (!isBodyScrollLocked) return;
+
+            document.body.style.position = '';
+
+            document.body.style.top = '';
+
+            document.body.style.left = '';
+
+            document.body.style.width = '';
+
+            window.scrollTo(0, savedBodyScrollY);
+
+            isBodyScrollLocked = false;
+
+        }
+
+
+
+        /* 열려있는 모달이 없을 때만 안전하게 스크롤 잠금 해제 */
+
+        function checkAndUnlockBodyScroll() {
+
+            const isConsultOpen = $("#quick_consult_modal").length > 0 && $("#quick_consult_modal").is(":visible");
+
+            const isPrivacyOpen = $("#quick_privacy_modal").length > 0 && $("#quick_privacy_modal").is(":visible");
+
+            const isWechatOpen = $("#quick_wechat_modal").length > 0 && $("#quick_wechat_modal").is(":visible");
+
+            const isPhoneOpen = $("#phone_modal").length > 0 && $("#phone_modal").hasClass("active");
+
+
+
+            if (!isConsultOpen && !isPrivacyOpen && !isWechatOpen && !isPhoneOpen) {
+
+                unlockBodyScroll();
+
+            }
+
+        }
+
+
+
+        // 빠른 상담 신청 모달 열기
+
+        $(document).on("click", ".btn-open-quick-consult, a[href='#quick_consult_modal']", function(e) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+            lockBodyScroll();
+
+            $("#quick_consult_modal").fadeIn(220).css("display", "flex");
+
+            return false;
+
+        });
+
+
+
+        // 빠른 상담 신청 모달 닫기
+
+        $(document).on("click", "#quick_consult_modal .btn-popup-close, #quick_consult_modal .modal-dim", function(e) {
+
+            e.preventDefault();
+
+            $("#quick_consult_modal").fadeOut(180, function() {
+
+                checkAndUnlockBodyScroll();
+
+            });
+
+        });
+
+
+
+        // 딤 배경 터치 및 휠 스크롤 방지
+
+        $(document).on("touchmove wheel", "#quick_consult_modal .modal-dim, #quick_privacy_modal .modal-dim, #quick_wechat_modal .modal-dim", function(e) {
+
+            e.preventDefault();
+
+        });
+
+
+
+        // 진료과목 커스텀 셀렉트 드롭다운 토글
+
+        $(document).on("click", "#consult_select_btn", function(e) {
+
+            e.stopPropagation();
+
+            $("#consult_select_wrap").toggleClass("is-open");
+
+        });
+
+
+
+        // 진료과목 항목 선택
+
+        $(document).on("click", "#consult_select_options .select-option-item", function(e) {
+
+            e.stopPropagation();
+
+            const val = $(this).data("value");
+
+            $("#consult_select_options .select-option-item").removeClass("active");
+
+            $(this).addClass("active");
+
+            $("#consult_select_btn span").text(val).removeClass("placeholder");
+
+            $("#qs_subject").val(val);
+
+            $("#consult_select_wrap").removeClass("is-open");
+
+        });
+
+
+
+        // 외부 영역 클릭 시 드롭다운 닫기
+
+        $(document).on("click", function(e) {
+
+            if (!$(e.target).closest("#consult_select_wrap").length) {
+
+                $("#consult_select_wrap").removeClass("is-open");
+
+            }
+
+        });
+
+
+
+        // 개인정보 수집 및 이용 동의 모달 열기
+
+        $(document).on("click", "#btn_open_privacy_modal, .btn-agree-detail", function(e) {
+
+            e.preventDefault();
+
+            lockBodyScroll();
+
+            const consultHeight = $("#quick_consult_modal .modal-content").outerHeight();
+
+            if (consultHeight > 0) {
+
+                $("#quick_privacy_modal .modal-content").css("height", consultHeight + "px");
+
+            }
+
+            $("#quick_privacy_modal").fadeIn(200).css("display", "flex");
+
+        });
+
+
+
+        // 개인정보 수집 및 이용 동의 모달 닫기
+
+        $(document).on("click", "#quick_privacy_modal .btn-privacy-close, #quick_privacy_modal .btn-privacy-confirm, #quick_privacy_modal .modal-dim", function(e) {
+
+            e.preventDefault();
+
+            $("#quick_privacy_modal").fadeOut(180, function() {
+
+                $("#quick_privacy_modal .modal-content").css("height", "");
+
+                checkAndUnlockBodyScroll();
+
+            });
+
+        });
+
+
+
+        // WeChat 안내 모달 열기
+
+        $(document).on("click", ".btn-open-wechat-modal, a[href='#quick_wechat_modal']", function(e) {
+
+            e.preventDefault();
+
+            e.stopPropagation();
+
+            if (!$("#quick_wechat_modal").length) {
+
+                return false;
+
+            }
+
+            lockBodyScroll();
+
+            $("#quick_wechat_modal").fadeIn(220).css("display", "flex");
+
+            return false;
+
+        });
+
+
+
+        // WeChat 안내 모달 닫기
+
+        $(document).on("click", "#quick_wechat_modal .btn-popup-close, #quick_wechat_modal .modal-dim", function(e) {
+
+            e.preventDefault();
+
+            $("#quick_wechat_modal").fadeOut(180, function() {
+
+                checkAndUnlockBodyScroll();
+
+            });
+
+        });
+
+
+
+        // 전화상담 모달 열기 함수 (PC 전용)
+
+        function openPhoneModal() {
+
+            lockBodyScroll();
+
+            $("#phone_modal").addClass("active");
+
+        }
+
+
+
+        // 전화상담 모달 닫기 함수
+
+        function closePhoneModal() {
+
+            $("#phone_modal").removeClass("active");
+
+            checkAndUnlockBodyScroll();
+
+        }
+
+
+
+        // 퀵메뉴 전화문의 클릭 시: PC(화면 너비 1024px 초과)에서만 모달 열림, 모바일 기기/화면에서는 기본 tel: 전화걸기 동작 유지
+
+        $(document).on("click", ".btn-quick-tel, a[href^='tel:02-549-9990']", function(e) {
+
+            if (window.innerWidth > 1024) {
+
+                e.preventDefault();
+
+                openPhoneModal();
+
+                return false;
+
+            }
+
+        });
+
+
+
+        // 전화상담 모달 닫기 버튼 클릭
+
+        $(document).on("click", "#phone_modal_close", function(e) {
+
+            e.preventDefault();
+
+            closePhoneModal();
+
+        });
+
+
+
+        // 전화상담 모달 바깥 어두운 배경 클릭 시 닫기
+
+        $(document).on("click", "#phone_modal", function(e) {
+
+            if (e.target === this) {
+
+                closePhoneModal();
+
+            }
+
+        });
+
+
+
+        // ESC 키 입력 시 열려있는 모달 닫기
+
+        $(document).on("keydown", function(e) {
+
+            if (e.key === "Escape") {
+
+                if ($("#phone_modal").hasClass("active")) {
+
+                    closePhoneModal();
+
+                }
+
+                if ($("#quick_wechat_modal").is(":visible")) {
+
+                    $("#quick_wechat_modal .btn-popup-close").trigger("click");
+
+                }
+
+            }
+
+        });
+
+
+
+        let isConsultSubmitting = false;
+
+        $("#quick_consult_form").on("submit", function(e) {
+
+            e.preventDefault();
+
+
+
+            if (isConsultSubmitting) {
+
+                return false;
+
+            }
+
+
+
+            const name = $.trim($("#qs_name").val());
+
+            const hp = $.trim($("#qs_hp").val());
+
+            const subject = $.trim($("#qs_subject").val());
+
+            const agree = $("#qs_agree").is(":checked");
+
+            const lang = $("#qs_lang").val() || "ko";
+
+
+
+            if (!name) {
+
+                alert(lang === "en" ? "Please enter your name." : (lang === "cn" ? "请输入姓名。" : "이름을 입력해주세요."));
+
+                $("#qs_name").focus();
+
+                return false;
+
+            }
+
+
+
+            if (!hp) {
+
+                alert(lang === "en" ? "Please enter your contact number." : (lang === "cn" ? "请输入联系方式。" : "연락처를 입력해주세요."));
+
+                $("#qs_hp").focus();
+
+                return false;
+
+            }
+
+
+
+            if (!subject) {
+
+                alert(lang === "en" ? "Please select a treatment." : (lang === "cn" ? "请选择诊疗项目。" : "진료과목을 선택해주세요."));
+
+                $("#consult_select_btn").focus();
+
+                return false;
+
+            }
+
+
+
+            if (!agree) {
+
+                alert(lang === "en" ? "Please agree to the privacy policy." : (lang === "cn" ? "请同意个人信息收集与使用。" : "개인정보 수집 및 이용에 동의해주세요."));
+
+                $("#qs_agree").focus();
+
+                return false;
+
+            }
+
+
+
+            isConsultSubmitting = true;
+
+            const $btnSubmit = $("#btn_consult_submit");
+
+            $btnSubmit.prop("disabled", true);
+
+
+
+            alert('온라인 접수는 준비 중입니다. 상담은 010-4894-4905 로 연락해 주세요.');
             isConsultSubmitting = false;
-            $btnSubmit.prop("disabled", false);
-        });
-    });
-    $(function() {
-        font_resize("container", get_cookie("ck_font_resize_rmv_class"), get_cookie("ck_font_resize_add_class"));
-    });
+            $btnSubmit.prop("disabled", false);
+
+        });
+
+    });
+
+    $(function() {
+
+        font_resize("container", get_cookie("ck_font_resize_rmv_class"), get_cookie("ck_font_resize_add_class"));
+
+    });
+
 </script>
 </body>
 </html>

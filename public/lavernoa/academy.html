@@ -890,7 +890,7 @@ ready(function(){
     var lens=form.querySelector('.lv-schx-bx a');
     if(lens){lens.setAttribute('role','button');lens.addEventListener('click',function(e){e.preventDefault();form.dispatchEvent(new Event('submit',{cancelable:true}));});}
   });
-  document.querySelectorAll('form').forEach(function(form){form.addEventListener('submit',function(e){e.preventDefault();var required=[].slice.call(form.querySelectorAll('[required]'));var bad=required.find(function(x){return !String(x.value||'').trim();});if(bad){bad.focus();notice('필수 항목을 확인해 주세요.');return;}var submit=form.querySelector('[type="submit"]');if(submit)submit.disabled=true;setTimeout(function(){if(submit)submit.disabled=false;form.reset();notice('예시 화면이라 실제로 접수되지 않습니다.');},450);});});
+  document.querySelectorAll('form').forEach(function(form){form.addEventListener('submit',function(e){e.preventDefault();var required=[].slice.call(form.querySelectorAll('[required]'));var bad=required.find(function(x){return !String(x.value||'').trim();});if(bad){bad.focus();notice('필수 항목을 확인해 주세요.');return;}var submit=form.querySelector('[type="submit"]');if(submit)submit.disabled=true;setTimeout(function(){if(submit)submit.disabled=false;form.reset();notice('온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.');},450);});});
   if(window.Swiper){
     document.querySelectorAll('.lv-kv-sctx > .swiper-container').forEach(function(el){
       var box=el.parentElement, pg=box.querySelector('.lv-sl-mvx .swiper-pagination'), paused=false;
