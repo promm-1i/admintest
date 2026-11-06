@@ -150,7 +150,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-o-template",
     industry: "정형외과 홈페이지",
-    title: "정형외과 홈페이지",
+    title: "일산늘봄정형외과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 정형외과 · 어깨 · 척추 · 재활",
     purpose:
@@ -161,8 +161,8 @@ export const SAMPLES: Sample[] = [
       "예약 · 상담 · 진료시간 · 오시는 길",
     ],
     idealFor: "어깨 · 척추 중심 정형외과, 통증 · 재활 의원, 도수치료를 함께 하는 의원",
-    image: "/thumbs/neulbomgyeol.jpg",
-    liveUrl: "/neulbomgyeol/",
+    image: "/thumbs/neulbom.jpg",
+    liveUrl: "/neulbom/",
     industryKey: "hospital",
     premiumLabel: "정형외과",
     designCode: "HOSP-1014",
@@ -255,7 +255,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-r-template",
     industry: "피부 · 미용 의원 홈페이지",
-    title: "피부 · 미용 의원 홈페이지",
+    title: "압구정봄빛의원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 리프팅 · 피부결 · 색소 · 여드름",
     purpose:
@@ -266,8 +266,8 @@ export const SAMPLES: Sample[] = [
       "진료시간 · 상담 채널 · 오시는 길",
     ],
     idealFor: "피부과 · 미용 의원, 리프팅 · 색소 진료 중심 클리닉",
-    image: "/thumbs/selvarin.jpg",
-    liveUrl: "/selvarin/",
+    image: "/thumbs/bombit.jpg",
+    liveUrl: "/bombit/",
     industryKey: "hospital",
     premiumLabel: "피부 · 미용",
     designCode: "HOSP-1017",
@@ -796,7 +796,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-m-template",
     industry: "피부과 · 리프팅 홈페이지",
-    title: "피부과 · 리프팅 홈페이지",
+    title: "분당하얀피부과의원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 피부과 · 리프팅 · 피부 톤 · 보습 · 예약 · 라운지",
     purpose:
@@ -809,7 +809,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "리프팅과 피부 컨디션 진료를 함께 안내하는 피부과, 의료진과 상담 과정을 앞세우는 의원, 별도 상담 라운지를 운영하는 곳",
     image: "/thumbs/clinic-m.jpg",
-    liveUrl: "/onyeon/",
+    liveUrl: "/hayanderm/",
     industryKey: "hospital",
     premiumLabel: "피부과 · 리프팅",
     designCode: "HOSP-1011",
@@ -1011,7 +1011,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-j-template",
     industry: "안과 · 시력교정 홈페이지",
-    title: "안과 · 시력교정 홈페이지",
+    title: "강남선명안과 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 안과 · 시력교정 · 노안백내장",
     purpose:
@@ -1024,7 +1024,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "스마일라식 · 라섹 · 렌즈삽입술을 하는 시력교정 안과, 노안 · 백내장 수술을 앞세우는 안과, 망막 · 녹내장 진료까지 보는 안과",
     image: "/thumbs/clinic-j.jpg",
-    liveUrl: "/bitgyeol/",
+    liveUrl: "/seonmyeong/",
     industryKey: "hospital",
     premiumLabel: "안과 · 시력교정",
     designCode: "HOSP-1008",
@@ -2447,7 +2447,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "clinic-f-template",
     industry: "피부미용 · 바디 컨투어링 의원 홈페이지",
-    title: "바디 컨투어링 의원 홈페이지",
+    title: "청담단아의원 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 병원 · 의원 · 바디 컨투어링",
     purpose:
@@ -2455,7 +2455,7 @@ export const SAMPLES: Sample[] = [
     features: ["화면에 붙는 시술 장면 2개 · 사진 두 장이 바뀌는 첫 화면", "크기가 다른 사진 세 장 · 진료 원칙 카드 4장", "시술별 진행 네 단계 · 시술 부위 · 추천 대상 · 자주 묻는 질문", "대표원장 · 시설 사진 넘김 · 지도 · 예약 · 약관 포함 서브"],
     idealFor: "피부과·성형외과·비만클리닉, 체형관리와 바디 컨투어링에 집중하는 예약제 의원",
     image: "/thumbs/clinic-f.jpg",
-    liveUrl: "/gyeolon/",
+    liveUrl: "/danaclinic/",
     industryKey: "hospital",
     premiumLabel: "피부 · 미용의원",
     designCode: "HOSP-1001",

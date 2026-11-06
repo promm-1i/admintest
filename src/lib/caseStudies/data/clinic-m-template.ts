@@ -2,14 +2,14 @@ import type { CaseStudy } from "../types";
 
 const study: CaseStudy = {
   customerCopyReady: true,
-  brand: "온연피부과의원",
+  brand: "분당하얀피부과의원",
   headline: "리프팅 · 피부 컨디션 진료와 예약을 담은 피부과 홈페이지",
   summary:
     "큰 사진과 진료 예약 상자, 의료진 · 진료 항목 넘김으로 이어지는 메인에 리프팅, 피부 톤 · 보습 · 볼륨 관리, 의료진 · 진료 안내, 활동 · 공지 · 후기 게시판, 예약 · 회원, 별도 라운지까지 모두 담은 피부과 홈페이지입니다.",
   brandColor: "rgb(93,73,59)",
   tintColor: "rgb(246,243,237)",
   overview:
-    "온연피부과의원은 피부 상태를 먼저 살피고 필요한 범위를 차분하게 설명하는 피부과입니다.\n\n메인은 사진이 바뀌는 첫 화면과 바로 예약하는 입력 상자, 피부 고민별 진료 항목, 의료진 소개, 숫자로 보는 진료 원칙, 소식 카드가 이어집니다. 첫 화면 알림창과 전체 메뉴, 진료 항목 탭, 카드 넘김, 모바일 메뉴도 같은 방식으로 움직입니다.\n\n진료 항목은 장비 상표 대신 고강도 집속 초음파, 고주파, 복합 에너지처럼 일반 명칭으로 정리했습니다. 별도 라운지는 소개 · 위치 · 예약 · 소식 · 운영 방침까지 같은 브랜드 안에서 다른 분위기로 이어집니다.",
+    "분당하얀피부과의원은 피부 상태를 먼저 살피고 필요한 범위를 차분하게 설명하는 피부과입니다.\n\n메인은 사진이 바뀌는 첫 화면과 바로 예약하는 입력 상자, 피부 고민별 진료 항목, 의료진 소개, 숫자로 보는 진료 원칙, 소식 카드가 이어집니다. 첫 화면 알림창과 전체 메뉴, 진료 항목 탭, 카드 넘김, 모바일 메뉴도 같은 방식으로 움직입니다.\n\n진료 항목은 장비 상표 대신 고강도 집속 초음파, 고주파, 복합 에너지처럼 일반 명칭으로 정리했습니다. 별도 라운지는 소개 · 위치 · 예약 · 소식 · 운영 방침까지 같은 브랜드 안에서 다른 분위기로 이어집니다.",
   meta: [
     { label: "업종", value: "피부과 의원 · 리프팅 · 피부 톤과 보습 · 볼륨 개선 관리" },
     { label: "페이지 구성", value: "45쪽 · 메인, 리프팅 안내 10, 피부 톤·보습·볼륨 관리 7, 진료 항목·예약·의료진·진료 안내, 활동·공지·후기, 회원·약관·검색, 라운지 8" },
@@ -23,16 +23,16 @@ const study: CaseStudy = {
     { name: "집속 초음파 리프팅", file: "ultrasound-lifting.html", img: "/cases/clinic-m/page-ultrasound-lifting.webp", desc: "진료 특징, 적용 부위, 과정, 주의사항을 길게 설명하는 대표 진료 쪽입니다.", items: ["진료 특징 · 적용 부위", "상담부터 사후 관리까지"] },
     { name: "진료 항목", file: "treatments.html", img: "/cases/clinic-m/page-treatments.webp", desc: "피부 고민과 관리 방법을 분류해 찾아볼 수 있는 진료 항목 목록입니다.", items: ["분류별 진료 카드", "상세 쪽 연결"] },
     { name: "의료진", file: "doctors.html", img: "/cases/clinic-m/page-doctors.webp", desc: "피부과 전문의 여섯 명과 진료 원칙을 소개합니다.", items: ["의료진 프로필", "진료 철학 · 약력"] },
-    { name: "온연의 활동", file: "activities.html", img: "/cases/clinic-m/page-activities.webp", desc: "학술 활동과 병원 소식을 카드 목록과 상세 화면으로 보여 줍니다.", items: ["활동 목록", "게시물 상세"] },
+    { name: "하얀의 활동", file: "activities.html", img: "/cases/clinic-m/page-activities.webp", desc: "학술 활동과 병원 소식을 카드 목록과 상세 화면으로 보여 줍니다.", items: ["활동 목록", "게시물 상세"] },
     { name: "비급여 항목", file: "nonbenefit.html", img: "/cases/clinic-m/page-nonbenefit.webp", desc: "항목과 금액을 표로 확인하는 화면입니다.", items: ["분류별 비용 표", "휴대폰에서 옆으로 넘기기"] },
-    { name: "온연 라운지", file: "lounge.html", img: "/cases/clinic-m/page-lounge.webp", desc: "별도 상담 라운지의 소개와 위치, 예약, 소식을 한 묶음으로 구성했습니다.", items: ["라운지 소개", "위치 · 예약 · 소식"] },
+    { name: "하얀 라운지", file: "lounge.html", img: "/cases/clinic-m/page-lounge.webp", desc: "별도 상담 라운지의 소개와 위치, 예약, 소식을 한 묶음으로 구성했습니다.", items: ["라운지 소개", "위치 · 예약 · 소식"] },
     { name: "온라인 예약", file: "reservation.html", img: "/cases/clinic-m/page-reservation.webp", desc: "꼭 넣어야 하는 칸과 개인정보 동의를 확인하는 예약 신청 화면입니다.", items: ["의료진 · 날짜 선택", "꼭 넣어야 하는 칸 확인"] },
   ],
   points: [
     { title: "첫 화면과 바로 예약", body: "사진이 천천히 바뀌는 첫 화면 아래에 이름, 연락처, 진료 항목을 넣는 예약 상자를 붙였습니다.", items: ["자동 넘김 사진", "예약 입력 상자"], img: "/cases/clinic-m/point-reservation.webp", caption: "메인 — 바로 예약" },
     { title: "피부 고민별 진료 항목", body: "리프팅과 피부 컨디션 관리 항목을 카드로 나눠 필요한 내용을 빠르게 찾게 했습니다.", items: ["항목 카드 넘김", "상세 쪽 연결"], img: "/cases/clinic-m/point-program.webp", caption: "메인 — 진료 항목" },
     { title: "의료진과 진료 원칙", body: "의료진 사진과 소개 뒤에 상담부터 사후 관리까지의 원칙을 큰 숫자로 보여 줍니다.", items: ["의료진 카드", "네 단계 진료 원칙"], img: "/cases/clinic-m/point-doctors.webp", caption: "메인 — 의료진" },
-    { title: "별도 라운지", body: "상담 라운지는 같은 기능을 유지하면서 더 절제된 세로형 화면으로 구분했습니다.", items: ["라운지 전용 메뉴", "소개 · 예약 · 운영 방침"], img: "/cases/clinic-m/point-lounge.webp", caption: "온연 라운지" },
+    { title: "별도 라운지", body: "상담 라운지는 같은 기능을 유지하면서 더 절제된 세로형 화면으로 구분했습니다.", items: ["라운지 전용 메뉴", "소개 · 예약 · 운영 방침"], img: "/cases/clinic-m/point-lounge.webp", caption: "하얀 라운지" },
   ],
   detailsLabel: "자세히",
   detailsTitle: "만들 때 신경 쓴 것",
@@ -49,7 +49,7 @@ const study: CaseStudy = {
       { img: "/cases/clinic-m/m-index.webp", caption: "메인" },
       { img: "/cases/clinic-m/m-ultrasound-lifting.webp", caption: "집속 초음파 리프팅" },
       { img: "/cases/clinic-m/m-treatments.webp", caption: "진료 항목" },
-      { img: "/cases/clinic-m/m-lounge.webp", caption: "온연 라운지" },
+      { img: "/cases/clinic-m/m-lounge.webp", caption: "하얀 라운지" },
       { img: "/cases/clinic-m/m-reservation.webp", caption: "온라인 예약" },
     ],
   },
