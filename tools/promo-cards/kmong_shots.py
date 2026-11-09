@@ -11,10 +11,13 @@
   00_대표_1x1.png · 01~10_상세.png
 푸터에 실제 연락처가 있어 푸터 위에서 자른다.
 """
+import hashlib
 import re
+import subprocess
 import sys
 import unicodedata
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 from PIL import Image
 from playwright.sync_api import sync_playwright
@@ -28,7 +31,8 @@ from make_page_shots import (  # noqa: E402
 
 SERVER = __import__("os").environ.get("TPL_SERVER", "http://127.0.0.1:8771")
 REPO = Path(__file__).resolve().parents[2]
-OUT_W = 1440          # 사이트가 그려지는 폭 그대로 — 줄이면 글씨가 작아져 흐려 보인다
+VP9_DIR = Path.home() / ".kmong" / "vp9"
+OUT_W = 1440         # 사이트가 그려지는 폭 그대로 — 줄이면 글씨가 작아져 흐려 보인다
 MAX_H = 3000          # 크몽 세로 상한
 MAX_CUT = 24000
 N_DETAIL = 10
@@ -62,6 +66,8 @@ HIDE_FIXED_JS = """()=>{
    if(e.closest('header'))continue;
    const b=e.getBoundingClientRect();
    if(b.width<innerWidth*0.9||b.height<innerHeight*0.85||b.top>10)continue;
+   // 팝업 상자만 지우면 뒤를 흐리는 막(서울시원안과 .pop_bg)이 남아 쪽 전체가 뿌옇게 찍힌다
+   if(s.backdropFilter!=='none'&&!(+s.zIndex<0)){kill(e);continue}
    // 장면형 메인은 본문 자체가 고정 레이어라 z-index 로 지우면 사이트가 통째로 사라진다.
    // 내 reveal 이 열어 버린 전체메뉴만 지운다.
    const key=((e.id||'')+' '+(e.className||'')).toLowerCase();
@@ -72,7 +78,7 @@ HIDE_FIXED_JS = """()=>{
  for(const e of document.querySelectorAll('body *')){
    if(getComputedStyle(e).position!=='fixed')continue;
    const b=e.getBoundingClientRect();
-   if(b.width>=innerWidth*0.8&&b.height<innerHeight*0.3&&b.top>innerHeight*0.5&&b.bottom>=innerHeight-8)kill(e)}
+   if(b.width>=innerWidth*0.8&&b.height<innerHeight*0.3&&b.top>innerHeight*0.5&&b.bottom>=innerHeight-60)kill(e)}
  // 마우스를 따라다니는 커서 장식은 캡처 때 (0,0)에 멈춰 왼쪽 위에 검은 동그라미로 찍힌다(온새 .pntx2).
  for(const e of document.querySelectorAll('body *')){
    const s=getComputedStyle(e);
@@ -289,12 +295,29 @@ def viewport_shots(pg, n: int, step: int = 820) -> list[Image.Image]:
     return out
 
 
+def vp9_route(route) -> None:
+    """내장 Chromium 은 H.264 mp4 를 못 틀어 영상 칸이 회색으로 찍힌다(보송24 히어로) → 앞 8초만 VP9 로 바꿔 돌려준다."""
+    src = REPO / "public" / unquote(urlparse(route.request.url).path).lstrip("/")
+    out = VP9_DIR / (hashlib.md5(str(src).encode()).hexdigest() + ".mp4")
+    if src.is_file() and not out.exists():
+        VP9_DIR.mkdir(parents=True, exist_ok=True)
+        tmp = out.with_suffix(".tmp.mp4")
+        r = subprocess.run(["ffmpeg", "-nostdin", "-y", "-i", str(src), "-t", "8", "-an", "-vf", r"scale=min(1600\,iw):-2",
+                            "-c:v", "libvpx-vp9", "-crf", "36", "-b:v", "0", "-deadline", "realtime", "-cpu-used", "8", str(tmp)],
+                           capture_output=True)
+        if r.returncode == 0:
+            tmp.replace(out)
+    if out.exists():
+        route.fulfill(path=str(out), content_type="video/mp4")
+    else:
+        route.continue_()
+
+
 def run(slugs: list[str]) -> None:
     rows = {r["slug"]: r for r in premium()}
     root = out_root()
     with sync_playwright() as p:
-        # Playwright 기본 Chromium 은 H.264(mp4)를 못 틀어 영상 칸이 회색으로 찍힌다(보송24 히어로) → 설치된 Chrome
-        b = p.chromium.launch(channel="chrome")
+        b = p.chromium.launch()     # channel="chrome" 은 윈도우 계정을 잠근다(11-01) — mp4 는 vp9_route 로
         for slug in slugs:
           try:
             r = rows.get(slug)
@@ -302,6 +325,7 @@ def run(slugs: list[str]) -> None:
                 print("프리미엄 아님:", slug)
                 continue
             ctx = b.new_context(viewport={"width": 1440, "height": 900}, device_scale_factor=2)
+            ctx.route(re.compile(r"\.mp4(\?|$)", re.I), vp9_route)
             pg = ctx.new_page()
             base = f"{SERVER}/{'templates/' + r['folder'] if (REPO / 'public' / 'templates' / r['folder']).is_dir() else r['folder']}/index.html"
             try:

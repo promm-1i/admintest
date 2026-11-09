@@ -74,7 +74,7 @@ def listed_codes(pg) -> set[str]:
     out = set()
     for code, r in F.premium_by_code().items():
         # 띄어쓰기가 달라도('작가 / 아티스트' ↔ '작가/아티스트') 같은 글로 본다
-        if "".join(F.clean_title(r["title"]).split())[:22] in text:
+        if "".join(F.kmong_title(code, r).split())[:22] in text:
             out.add(code)
     return out
 
@@ -97,7 +97,7 @@ def fill_one(pg, code: str) -> bool:
     pg.goto(F.NEW, wait_until="domcontentloaded", timeout=60000)
     pg.wait_for_timeout(2500)
     F.close_dialog(pg)
-    title = F.clean_title(r["title"])
+    title = F.kmong_title(code, r)
     t = pg.locator("input[placeholder*='제목']").first
     t.click()
     t.fill(title)

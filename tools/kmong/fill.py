@@ -6,6 +6,7 @@
 제목 규칙: 50자 이내, 특수문자는 : + - # / . ( ) 만. 가운뎃점(·)이 들어가면 '다음'이 막힌다.
 """
 import re
+import subprocess
 import sys
 import unicodedata
 from pathlib import Path
@@ -83,8 +84,19 @@ def out_root() -> Path:
     return (dev or Path.home() / "Desktop" / "개발") / "크몽_업로드"
 
 
-def premium_by_code() -> dict:
-    src = (REPO / "src" / "lib" / "samples.ts").read_text(encoding="utf-8")
+_OLD_TITLES: dict = {}
+
+
+def kmong_title(code: str, r: dict) -> str:
+    """samples.ts 제목은 11-06 부터 '<상호> 홈페이지 포트폴리오'다. 크몽 글은 그 직전의 업종형 제목으로 올린다."""
+    if not _OLD_TITLES:
+        src = subprocess.run(["git", "show", "a4bea2434~1:src/lib/samples.ts"], capture_output=True, cwd=REPO).stdout
+        _OLD_TITLES.update(premium_by_code(src.decode("utf-8")))
+    return clean_title(_OLD_TITLES.get(code, r)["title"])
+
+
+def premium_by_code(src: str | None = None) -> dict:
+    src = src or (REPO / "src" / "lib" / "samples.ts").read_text(encoding="utf-8")
     rows = {}
     for b in src.split("    slug: ")[1:]:
         head = b.split("\n  },")[0]
@@ -110,6 +122,7 @@ BANNED = {
     "개인별 학습 경로": "아이마다 다른 학습 경로",
     "개인별": "맞춤형",
     "문제은행": "문항 DB",
+    "온라인 · 전화 상담": "온라인 상담",
 }
 
 
@@ -310,7 +323,7 @@ def run(code: str) -> None:
         return
     cover = d / "00_대표_1x1.png"
     dets = sorted(d.glob("*_상세.png"))
-    title = clean_title(r["title"])
+    title = kmong_title(code, r)
     print(f"{code} {unicodedata.normalize('NFC', d.name)}")
     print(f"  제목: {title} ({len(title)}자)")
     print(f"  사진: 대표 {cover.exists()} · 상세 {len(dets)}장")
