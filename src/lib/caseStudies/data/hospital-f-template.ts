@@ -20,7 +20,7 @@ const study: CaseStudy = {
     { name: "홈", file: "index.html", img: "/cases/seoulslim/page-index.webp", desc: "영상 슬라이드와 보관 세포 수로 시작해 줄기세포 수 비교, 프로그램 6가지, 뉴스룸과 지점 지도까지 이어집니다.", items: ["영상 슬라이드", "프로그램 6가지", "뉴스룸·지점 지도"] },
     { name: "센터 소개", file: "stem-cell-center_about-center.html", img: "/cases/seoulslim/page-about.webp", desc: "세포를 다루며 지키는 세 가지와 채취·분리·보관·시술 네 단계, 숫자로 본 센터를 보여 줍니다.", items: ["기록·온도·설명", "네 단계 과정", "숫자로 본 센터"] },
     { name: "서울슬림 뱅킹", file: "programs_stem-banking.html", img: "/cases/seoulslim/page-banking.webp", desc: "보관 기간과 온도 기록, 나누어 보관하는 방식, 상담부터 보관 증서 발송까지 여섯 단계를 안내합니다.", items: ["진행 방식", "여섯 단계 과정", "문의가 많은 경우"] },
-    { name: "의료진 소개", file: "stem-cell-center_medical-staff.html", img: "/cases/seoulslim/page-staff.webp", desc: "센터장 인사말 아래로 신사 본원 의료진 네 명을 사진과 함께 소개합니다.", items: ["센터장 인사말", "의료진 네 명", "의료진 상세"] },
+    { name: "의료진 소개", file: "stem-cell-center_medical-staff.html", img: "/cases/seoulslim/page-staff.webp", desc: "센터장 인사말 아래로 서울 본원 의료진 네 명을 사진과 함께 소개합니다.", items: ["센터장 인사말", "의료진 네 명", "의료진 상세"] },
     { name: "온라인 예약", file: "consultation_online-booking.html", img: "/cases/seoulslim/page-online-consult.webp", desc: "지점과 희망 프로그램, 예약 날짜를 고르고 이름·생년월일·연락처를 적는 예약 화면입니다.", items: ["지점·프로그램 선택", "예약 날짜 달력", "전화·카톡·네이버 예약"] },
     { name: "전화 상담", file: "consultation_phone-booking.html", img: "/cases/seoulslim/page-phone-consult.webp", desc: "이름과 연락처, 상담 내용을 남기면 전화로 연락받는 신청 화면입니다.", items: ["이름·연락처", "상담 내용", "개인정보 동의"] },
   ],
