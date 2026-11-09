@@ -12,8 +12,12 @@ class Tab:
         v = json.load(urllib.request.urlopen("http://127.0.0.1:%d/json/version" % self.port))
         self.ws = self.loop.run_until_complete(websockets.connect(v["webSocketDebuggerUrl"], max_size=None))
         self.tid = self._send("Target.createTarget", {"url": "about:blank", "background": self.bg})["targetId"]
-        self.sid = self._send("Target.attachToTarget", {"targetId": self.tid, "flatten": True})["sessionId"]
-        self.cmd("Page.enable"); self.cmd("Runtime.enable")
+        try:
+            self.sid = self._send("Target.attachToTarget", {"targetId": self.tid, "flatten": True})["sessionId"]
+            self.cmd("Page.enable"); self.cmd("Runtime.enable")
+        except Exception:   # 뒤쪽 탭이 잠들면 여기서 멈춘다(11-09) — 빈 탭을 남기지 않는다
+            self.__exit__()
+            raise
         return self
 
     def __exit__(self, *a):

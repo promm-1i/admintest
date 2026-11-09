@@ -59,9 +59,17 @@ with Tab(bg=False) as t:
     print("  하위", call(t, CLICK, "기타 티켓/쿠폰/이용권")); t.wait(1.5)
     # 가격은 오른쪽 창에서 입력하고 '입력 완료'
     t.js("document.querySelector('#productPrice').scrollIntoView({block:'center'}); document.querySelector('#productPrice').click()"); t.wait(1.5)
-    t.js("document.querySelector('input[placeholder=\"가격을 입력해 주세요.\"]').focus()")
-    t.cmd("Input.insertText", {"text": PRICE}); t.wait(0.8)
-    print("가격 창", t.mclick_text("입력 완료")); t.wait(1.2)
+    PBOX = "document.querySelector('input[placeholder=\"가격을 입력해 주세요.\"]')"
+    for _ in range(4):   # 입력이나 '입력 완료'가 안 먹어 값이 비는 때가 있다(11-09) — 값이 들어갈 때까지
+        if not t.js("!!%s&&%s.getBoundingClientRect().width>0" % (PBOX, PBOX)):
+            t.js("document.querySelector('#productPrice').click()"); t.wait(1.5)
+        t.js(PBOX + ".focus()")
+        if not t.js(PBOX + ".value"):
+            t.cmd("Input.insertText", {"text": PRICE})
+        t.wait(0.8)
+        print("가격 창", t.mclick_text("입력 완료")); t.wait(1.5)
+        if t.js("document.querySelector('#productPrice').value"):
+            break
     print("가격 창 닫힘", not t.js("!!document.querySelector('input[placeholder=\"가격을 입력해 주세요.\"]')&&document.querySelector('input[placeholder=\"가격을 입력해 주세요.\"]').getBoundingClientRect().width>0"))
     print("가격", t.js("document.querySelector('#productPrice').value"))
     print("설명", call(t, SETVAL, ["#product-description", body]))
@@ -85,6 +93,7 @@ with Tab(bg=False) as t:
     t.shot(str(OUT / "jn_fill.png"))
     print("화면", OUT / "jn_fill.png")
     if POST:
+        assert state["price"] == "{:,}".format(int(PRICE)), "가격이 안 들어갔다 — 올리지 않는다"
         if state["agree"] is False:
             print("동의 칸", call(t, CLICK_START, "판매 정보가 실제 상품과")); t.wait(0.8)
         print("판매하기", t.mclick_text("판매하기")); t.wait(8)

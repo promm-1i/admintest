@@ -6,7 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "joongna"))
 from cdp_tab import Tab
 pid, folder = sys.argv[1], Path(sys.argv[2])
 title, body = (x.strip() for x in (folder / "post.txt").read_text(encoding="utf-8").split("\n===\n", 1))
-with Tab() as t:
+with Tab(bg=False) as t:
     t.go("https://m.bunjang.co.kr/products/%s" % pid, 5)
     p = t.js("fetch('https://api.bunjang.co.kr/api/pms/v1/products/%s/detail/web').then(r=>r.json())" % pid)["data"]["product"]
     print("제목", p["name"] == title, "| 본문", p["description"].strip() == body, "| 가격", p["price"])

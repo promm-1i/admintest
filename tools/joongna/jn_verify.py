@@ -6,7 +6,7 @@ from cdp_tab import Tab
 pid, folder = sys.argv[1], Path(sys.argv[2])
 title, body = (x.strip() for x in (folder / "post.txt").read_text(encoding="utf-8").split("\n===\n", 1))
 want = [l.strip() for l in body.split("\n") if l.strip()]
-with Tab() as t:
+with Tab(bg=False) as t:
     t.go("https://web.joongna.com/product/%s" % pid, 5)
     t.js("[...document.querySelectorAll('button')].filter(b=>(b.innerText||'').trim()==='펼치기').forEach(b=>b.click())"); t.wait(1)
     txt = t.js("document.body.innerText")
