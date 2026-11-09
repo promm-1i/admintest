@@ -14,7 +14,7 @@ const study: CaseStudy = {
     { label: "업종", value: "프리미엄 피트니스 센터 · PT 스튜디오, 호텔 · 기업 · 아파트 커뮤니티 피트니스 위탁운영 회사, 웰니스 · 리커버리 프로그램 운영사" },
     {
       label: "페이지 구성",
-      value: "7쪽 · 메인, 회사 소개, 위탁운영, 프로그램, 문의(양식 창), 이용약관, 개인정보 처리방침",
+      value: "메인, 회사 소개, 위탁운영, 프로그램, 문의(양식 창), 이용약관, 개인정보 처리방침",
     },
     {
       label: "이런 곳에 맞습니다",
@@ -23,7 +23,7 @@ const study: CaseStudy = {
   ],
   mainShot: "/cases/fitness-g/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "7쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

@@ -14,7 +14,7 @@ const study: CaseStudy = {
     { label: "업종", value: "법무법인, 로펌, 법률사무소, 특허 · 노무 · 세무 같은 전문직 사무소" },
     {
       label: "페이지 구성",
-      value: "54쪽 · 메인(두 장면), 로아 소개 · 오시는 길, 전문분야 목록과 4분야, 구성원 목록과 31명 소개, 뉴스 목록과 기사 9개, 통합검색, 인재채용, 약관",
+      value: "메인(두 장면), 로아 소개 · 오시는 길, 전문분야 목록과 4분야, 구성원 목록과 31명 소개, 뉴스 목록과 기사 9개, 통합검색, 인재채용, 약관",
     },
     {
       label: "이런 곳에 맞습니다",
@@ -23,7 +23,7 @@ const study: CaseStudy = {
   ],
   mainShot: "/cases/law-g/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "54쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",
@@ -51,7 +51,7 @@ const study: CaseStudy = {
       file: "member-01.html",
       img: "/cases/law-g/page-member-01.webp",
       desc: "사진과 직함 · 전문분야 · 연락처 아래로 경력 · 학력 · 주요 업무 · 논문 · 수상 · 언어가 이어집니다.",
-      items: ["31쪽", "PDF · 인쇄 · 공유 버튼"],
+      items: ["PDF · 인쇄 · 공유 버튼"],
     },
     {
       name: "전문분야",

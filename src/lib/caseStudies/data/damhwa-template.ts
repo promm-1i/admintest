@@ -15,13 +15,13 @@ const study: CaseStudy = {
     { label: "업종", value: "한옥 스테이, 독채 펜션, 풀빌라, 온천 · 다례 체험을 함께 하는 소규모 숙소" },
     {
       label: "페이지 구성",
-      value: "5쪽 · 메인, 담화재 이야기(소개), 객실 상세(청연), 오시는 길, 예약 안내",
+      value: "메인, 담화재 이야기(소개), 객실 상세(청연), 오시는 길, 예약 안내",
     },
     { label: "이런 곳에 맞습니다", value: "사진과 분위기로 머무는 경험을 보여 주고 싶은 숙소, 객실 수가 적고 체험 프로그램이 있는 숙소" },
   ],
   mainShot: "/cases/damhwa/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "5쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

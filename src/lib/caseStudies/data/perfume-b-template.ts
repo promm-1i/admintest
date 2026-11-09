@@ -14,7 +14,7 @@ const study: CaseStudy = {
     { label: "업종", value: "화장품 · 스킨케어 브랜드, 향수 · 바디케어 브랜드, 비건 · 클린 뷰티 브랜드, 화장품 제조사 브랜드관" },
     {
       label: "페이지 구성",
-      value: "19쪽 · 메인, 브랜드 소개, BI 소개, 제품 전체보기 · 페이셜 · 바디 · 헤어, 제품 상세 6, 테크놀로지, 연구분야, 생산시설, 보도자료 목록 · 보기, 문의",
+      value: "메인, 브랜드 소개, BI 소개, 제품 전체보기 · 페이셜 · 바디 · 헤어, 제품 상세, 테크놀로지, 연구분야, 생산시설, 보도자료 목록 · 보기, 문의",
     },
     {
       label: "이런 곳에 맞습니다",
@@ -23,7 +23,7 @@ const study: CaseStudy = {
   ],
   mainShot: "/cases/perfume-b/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "19쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

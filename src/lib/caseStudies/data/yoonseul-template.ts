@@ -14,13 +14,13 @@ const study: CaseStudy = {
     { label: "업종", value: "풀빌라 · 펜션, 오션뷰 독채 스테이, 소규모 리조트" },
     {
       label: "페이지 구성",
-      value: "6쪽 · 메인, 프롤로그, 객실 상세(템플릿 · 19개 호실 연결), 스페셜, 오시는 길, 예약 안내",
+      value: "메인, 프롤로그, 객실 상세(템플릿 · 19개 호실 연결), 스페셜, 오시는 길, 예약 안내",
     },
     { label: "이런 곳에 맞습니다", value: "객실 수가 많아 호실별 안내가 필요한 숙소, 사진으로 분위기를 먼저 보여 주고 싶은 곳" },
   ],
   mainShot: "/cases/yoonseul/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "6쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

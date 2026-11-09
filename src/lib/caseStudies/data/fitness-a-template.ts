@@ -12,7 +12,7 @@ const study: CaseStudy = {
     "펄스핏은 퍼스널 트레이닝 · 식단 · 요가를 함께 운영하는 피트니스 스튜디오입니다.\n\n페이지는 운동 영상 위 ‘TRAIN LIKE YOU PERFORM’ 첫 화면과 14일 환불 보장 안내로 시작합니다. 이어서 운영 숫자와 사진 두 장의 소개, 내리는 만큼 01~05가 차례로 켜지는 서비스 목록, 마우스를 올리면 사진과 소개가 펼쳐지는 트레이너 세 명, 몸 사진 둘레에 설명이 달린 선택 이유, 다섯 단계 시작 방법, 월 · 연 결제로 가격이 바뀌는 멤버십 카드 세 장, 넘기는 후기 카드 더미, 하나씩 열리는 질문, 문의 폼, 앱 다운로드 배너, 맨 아래로 이어집니다.\n\n색은 검정 바탕에 주황 한 가지, 요금 카드에만 노란 금색을 섞었습니다. 영문 제목은 굵게, 한글은 고딕으로 뒀습니다.",
   meta: [
     { label: "업종", value: "피트니스 · PT · 요가 · 필라테스" },
-    { label: "페이지 구성", value: "1쪽 원페이지 · About, Services, Pricing, Testimonials, FAQ로 바로 이동" },
+    { label: "페이지 구성", value: "원페이지 · About, Services, Pricing, Testimonials, FAQ로 바로 이동" },
     { label: "이런 곳에 맞습니다", value: "PT 스튜디오, 헬스장, 필라테스 · 요가원, 크로스핏 박스, 온라인 코칭" },
   ],
   mainShot: "/cases/fitness-a/main.webp",

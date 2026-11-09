@@ -14,7 +14,7 @@ const study: CaseStudy = {
     { label: "업종", value: "아파트 · 주거 인테리어 설계 · 시공 회사, 리모델링 · 부분 시공 업체, 시공 사례를 많이 보여 줘야 하는 인테리어 스튜디오" },
     {
       label: "페이지 구성",
-      value: "30쪽 · 메인, 회사소개, 시공사례 목록(15건씩) · 상세, 상담문의(시공 문의 양식)",
+      value: "메인, 회사소개, 시공사례 목록(15건씩) · 상세, 상담문의(시공 문의 양식)",
     },
     {
       label: "이런 곳에 맞습니다",
@@ -23,7 +23,7 @@ const study: CaseStudy = {
   ],
   mainShot: "/cases/interior-h/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "30쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

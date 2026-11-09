@@ -14,13 +14,13 @@ const study: CaseStudy = {
     { label: "업종", value: "풀빌라 · 독채 펜션, 부티크 스테이, 글램핑, 소규모 리조트" },
     {
       label: "페이지 구성",
-      value: "6쪽 · 메인, 전경, 객실 상세(객실 다섯 곳이 함께 쓰는 틀), 야외수영장, 오시는 길, 예약 안내",
+      value: "메인, 전경, 객실 상세(객실 다섯 곳이 함께 쓰는 틀), 야외수영장, 오시는 길, 예약 안내",
     },
     { label: "이런 곳에 맞습니다", value: "사진이 많은 숙소, 객실별 요금과 이용 규칙을 한 쪽에 모아 보여 줘야 하는 곳" },
   ],
   mainShot: "/cases/soran/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "6쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

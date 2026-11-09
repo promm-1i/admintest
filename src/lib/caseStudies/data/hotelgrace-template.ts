@@ -14,13 +14,13 @@ const study: CaseStudy = {
     { label: "업종", value: "도심 호텔, 부티크 호텔, 레스토랑과 스파를 함께 운영하는 숙박 시설" },
     {
       label: "페이지 구성",
-      value: "5쪽 · 메인, 패키지 상세, 멤버십 안내(등급 비교), 자주 묻는 질문, 로그인 · 가입 안내",
+      value: "메인, 패키지 상세, 멤버십 안내(등급 비교), 자주 묻는 질문, 로그인 · 가입 안내",
     },
     { label: "이런 곳에 맞습니다", value: "객실 패키지와 다이닝을 함께 알려야 하는 호텔, 자체 멤버십을 운영하는 숙박 브랜드" },
   ],
   mainShot: "/cases/hotelgrace/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "5쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

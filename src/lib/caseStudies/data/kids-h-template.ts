@@ -15,13 +15,13 @@ const study: CaseStudy = {
     {
       label: "페이지 구성",
       value:
-        "21쪽 · 메인, 홉키즈 소개 · 커리큘럼 · ABOUT, Wellness · Active · Fitness 프로그램, 티처 모집 · 자격증 · 코칭 · 지원 2, 자료실 3, 문의 · 제휴문의 · FAQ · 오시는 길, 이용약관 · 개인정보처리방침",
+        "메인, 홉키즈 소개 · 커리큘럼 · ABOUT, Wellness · Active · Fitness 프로그램, 티처 모집 · 자격증 · 코칭 · 지원, 자료실, 문의 · 제휴문의 · FAQ · 오시는 길, 이용약관 · 개인정보처리방침",
     },
     { label: "이런 곳에 맞습니다", value: "기관에 프로그램을 공급하는 유아 체육 회사, 강사(티처) 모집과 자격 과정을 함께 운영하는 곳, 영상 · 학습지 자료실이 필요한 교육 브랜드" },
   ],
   mainShot: "/cases/kids-h/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "21쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

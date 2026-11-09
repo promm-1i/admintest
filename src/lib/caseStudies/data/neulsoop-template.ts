@@ -14,13 +14,13 @@ const study: CaseStudy = {
     { label: "업종", value: "숲속 스테이 · 부티크 리조트, 북스테이 · 웰니스 숙소, 복합 라이프스타일 공간" },
     {
       label: "페이지 구성",
-      value: "6쪽 · 메인, 브랜드 소개, What's On(이야기 · 이벤트), Lifestyle(입점 브랜드), Stay(객실 · 스테이 라이프), 오시는 길",
+      value: "메인, 브랜드 소개, What's On(이야기 · 이벤트), Lifestyle(입점 브랜드), Stay(객실 · 스테이 라이프), 오시는 길",
     },
     { label: "이런 곳에 맞습니다", value: "사진이 좋은 숙소, 객실 타입과 부대 공간을 함께 보여 줘야 하는 스테이, 입점 매장이나 프로그램이 많은 복합 공간" },
   ],
   mainShot: "/cases/neulsoop/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "6쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

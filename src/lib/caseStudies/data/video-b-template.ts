@@ -14,7 +14,7 @@ const study: CaseStudy = {
     { label: "업종", value: "영상 · VFX 제작사, 미디어 파사드 · 전시 콘텐츠 제작사, 광고 · 뮤직비디오 프로덕션, 3D · 모션그래픽 스튜디오" },
     {
       label: "페이지 구성",
-      value: "77쪽 · 메인(일곱 장면), 포트폴리오 전체, 분류별 목록, 작품",
+      value: "메인(일곱 장면), 포트폴리오 전체, 분류별 목록, 작품",
     },
     {
       label: "이런 곳에 맞습니다",
@@ -23,7 +23,7 @@ const study: CaseStudy = {
   ],
   mainShot: "/cases/video-b/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "77쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

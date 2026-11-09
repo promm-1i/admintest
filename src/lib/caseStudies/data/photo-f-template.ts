@@ -15,13 +15,13 @@ const study: CaseStudy = {
     {
       label: "페이지 구성",
       value:
-        "41쪽 · 메인, 소개, 문의, 작품 목록(전체 · 주얼리 · 화장품 · 음료 · 패션 · 기타), 작품 상세",
+        "메인, 소개, 문의, 작품 목록(전체 · 주얼리 · 화장품 · 음료 · 패션 · 기타), 작품 상세",
     },
     { label: "이런 곳에 맞습니다", value: "작업물 사진이 곧 영업 자료인 스튜디오, 분류별로 작품을 모아 보여 줘야 하는 제작사" },
   ],
   mainShot: "/cases/photo-f/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "41쪽이 어떻게 이어지는지",
+  pagesTitle: "페이지가 어떻게 이어지는지",
   pages: [
     {
       name: "메인",

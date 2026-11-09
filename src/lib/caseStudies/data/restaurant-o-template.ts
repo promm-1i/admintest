@@ -10,12 +10,12 @@ const study: CaseStudy = {
   overview: "모닝빈커피는 커피와 베이글을 함께 내는 프랜차이즈 브랜드입니다. 첫 화면에는 행사 알림 세 장과 브랜드 갈래를 두고, 메뉴 · 매장 · 창업 · 소식 · 문의로 자연스럽게 이어지도록 구성했습니다.\n\n메뉴는 일반 매장과 소형 매장 두 갈래로 나뉘며 카드를 누르면 원재료와 알레르기 안내가 열립니다. 매장 찾기는 정적 지도와 지역 검색, 대표 매장 상세 두 쪽으로 구성했습니다. 창업 영역에는 절차 · 예상 비용 · 인테리어 · 자주 묻는 질문 · 상담 양식을 담았습니다.",
   meta: [
     { label: "업종", value: "커피 · 베이커리 프랜차이즈 본사, 카페 브랜드" },
-    { label: "페이지 구성", value: "35쪽 · 메인, 브랜드 5, 메뉴 2, 매장 4, 소식 9, 창업 9, 문의 3, 정책 3" },
+    { label: "페이지 구성", value: "메인, 브랜드, 메뉴, 매장, 소식, 창업, 문의, 정책" },
     { label: "이런 곳에 맞습니다", value: "메뉴와 매장을 안내하면서 가맹 상담까지 한 사이트에서 받아야 하는 외식기업" },
   ],
   mainShot: "/cases/restaurant-o/main.webp",
   pagesLabel: "페이지",
-  pagesTitle: "35쪽의 주요 구성",
+  pagesTitle: "주요 구성",
   pages: [
     { name: "메인", file: "index.html", img: "/cases/restaurant-o/page-index.webp", desc: "팝업 세 장과 브랜드 갈래가 있는 장면형 첫 화면입니다.", items: ["행사 알림 세 장", "일반 · 소형 매장 갈래", "창업 상담 · 쇼핑 바로가기"] },
     { name: "브랜드", file: "story-brand.html", img: "/cases/restaurant-o/page-brand.webp", desc: "브랜드의 원두와 공간 철학을 소개합니다.", items: ["브랜드 이야기", "로고와 색상", "회사 · 앱 소개"] },

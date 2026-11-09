@@ -11,7 +11,7 @@ const study: CaseStudy = {
     "세레인 호텔 앤 리조트는 조용한 곳에 지은 소규모 고급 호텔입니다.\n\n페이지는 영상 위에서 메뉴가 먼저 내려오고, 이어서 ‘Stay Somewhere Beautiful.’ 글자가 한 자씩 뒤집히며 나타나고, 오른쪽 아래 원형 문구가 천천히 도는 첫 화면으로 시작합니다. 이어서 양옆 사진 사이 가운데 정렬 소개와 약속 세 가지, 양옆이 화면 밖으로 이어지는 객실 사진, 마우스를 올린 패널만 넓게 펼쳐지는 경험 네 가지, 넘기는 후기와 진행선, 하나만 열리는 질문, 예약 문의 폼, 맨 아래로 이어집니다.\n\n색은 연한 크림색 바탕과 짙은 남색 두 가지뿐입니다. 영문 제목은 명조체, 한글은 붓맛이 남은 글자입니다.",
   meta: [
     { label: "업종", value: "호텔 · 리조트 · 펜션 · 스테이" },
-    { label: "페이지 구성", value: "1쪽 원페이지 · About, Rooms, Experiences, FAQ, Contact로 바로 이동" },
+    { label: "페이지 구성", value: "원페이지 · About, Rooms, Experiences, FAQ, Contact로 바로 이동" },
     { label: "이런 곳에 맞습니다", value: "고급 호텔 · 리조트, 풀빌라 · 펜션, 외국인 손님이 많은 스테이, 웨딩 · 행사 공간" },
   ],
   mainShot: "/cases/hotel-a/main.webp",
