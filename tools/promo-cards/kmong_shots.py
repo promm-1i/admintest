@@ -79,6 +79,11 @@ HIDE_FIXED_JS = """()=>{
    if(getComputedStyle(e).position!=='fixed')continue;
    const b=e.getBoundingClientRect();
    if(b.width>=innerWidth*0.8&&b.height<innerHeight*0.3&&b.top>innerHeight*0.5&&b.bottom>=innerHeight-60)kill(e)}
+ // 오른쪽 끝에 붙은 좁은 고정 메뉴(키친마스터 A/S 세로 메뉴 · 에이스로보틱스 문의하기)는 전체 캡처에서 제목 글자를 가린다.
+ for(const e of document.querySelectorAll('body *')){
+   if(getComputedStyle(e).position!=='fixed')continue;
+   const b=e.getBoundingClientRect();
+   if(b.width>0&&b.width<=200&&b.height<innerHeight*0.8&&b.right>=innerWidth-60)kill(e)}
  // 마우스를 따라다니는 커서 장식은 캡처 때 (0,0)에 멈춰 왼쪽 위에 검은 동그라미로 찍힌다(온새 .pntx2).
  for(const e of document.querySelectorAll('body *')){
    const s=getComputedStyle(e);
