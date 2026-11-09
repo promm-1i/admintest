@@ -7,13 +7,13 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   "corporate-r": [
     { img: "/thumbs/sections/corporate-r-1.webp", title: "화면 1", width: 1280, height: 960 },
     { img: "/thumbs/sections/corporate-r-2.webp", title: "화면 2", width: 1280, height: 428 },
-    { img: "/thumbs/sections/corporate-r-3.webp", title: "물류 넥스하버는 1962년 첫 하역을 시작한 뒤 부두·창고·운송을 하나씩 넓혀 항만에서", width: 1280, height: 960 },
+    { img: "/thumbs/sections/corporate-r-3.webp", title: "새한물류는 1962년 첫 하역을 시작한 뒤 부두·창고·운송을 하나씩 넓혀 항만에서", width: 1280, height: 960 },
     { img: "/thumbs/sections/corporate-r-4.webp", title: "화면 4", width: 1280, height: 970 },
     { img: "/thumbs/sections/corporate-r-5.webp", title: "화면 5", width: 1280, height: 974 },
     { img: "/thumbs/sections/corporate-r-6.webp", title: "RECENT NEWS 뉴스 더보기", width: 1280, height: 740 },
-    { img: "/thumbs/sections/corporate-r-7.webp", title: "WITH NEXHARBOR", width: 1280, height: 740 },
+    { img: "/thumbs/sections/corporate-r-7.webp", title: "WITH SAEHAN LOGISTICS", width: 1280, height: 740 },
     { img: "/thumbs/sections/corporate-r-8.webp", title: "화면 8", width: 1280, height: 700 },
-    { img: "/thumbs/sections/corporate-r-9.webp", title: "넥스하버와 함께 할 역량있는 인재를 모집합니다. 인재채용 바로가기", width: 1280, height: 646 },
+    { img: "/thumbs/sections/corporate-r-9.webp", title: "새한물류와 함께 할 역량있는 인재를 모집합니다. 인재채용 바로가기", width: 1280, height: 646 },
   ],
   "rentcar-g": [
     { img: "/thumbs/sections/rentcar-g-1.webp", title: "단기 렌터카 — 빌릴 곳을 고르세요", width: 1280, height: 720 },
@@ -102,10 +102,10 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-i-9.webp", title: "Career", width: 1280, height: 968 },
   ],
   "corporate-s": [
-    { img: "/thumbs/sections/corporate-s-1.webp", title: "1948년부터의 산업 기록을 모은온결산업기록관입니다.", width: 1280, height: 900 },
-    { img: "/thumbs/sections/corporate-s-2.webp", title: "About Ongyeol Industrial ArchiveAbout OngyeolIndustrial Arch", width: 1280, height: 859 },
+    { img: "/thumbs/sections/corporate-s-1.webp", title: "1948년부터의 산업 기록을 모은 동해산업기록관입니다.", width: 1280, height: 900 },
+    { img: "/thumbs/sections/corporate-s-2.webp", title: "About Donghae Industrial Archive", width: 1280, height: 859 },
     { img: "/thumbs/sections/corporate-s-3.webp", title: "Exhibitions", width: 1280, height: 695 },
-    { img: "/thumbs/sections/corporate-s-4.webp", title: "온결산업기록관방문에 관하여 안내드립니다.", width: 1280, height: 474 },
+    { img: "/thumbs/sections/corporate-s-4.webp", title: "동해산업기록관 방문에 관하여 안내드립니다.", width: 1280, height: 474 },
   ],
   "corporate-q": [
     { img: "/thumbs/sections/corporate-q-1.webp", title: "지역 실증 거점세 곳이 문을 엽니다", width: 1280, height: 715 },
@@ -116,16 +116,16 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
   "corporate-n": [
     { img: "/thumbs/sections/corporate-n-1.webp", title: "Core Tech Company →", width: 1280, height: 900 },
     { img: "/thumbs/sections/corporate-n-2.webp", title: "Business Areas", width: 1280, height: 683 },
-    { img: "/thumbs/sections/corporate-n-3.webp", title: "NEXORA’sGlobal Network", width: 1280, height: 827 },
+    { img: "/thumbs/sections/corporate-n-3.webp", title: "HANSUNG MATERIALS’ Global Network", width: 1280, height: 827 },
     { img: "/thumbs/sections/corporate-n-4.webp", title: "Latest News Release", width: 1280, height: 928 },
   ],
   "corporate-m": [
     { img: "/thumbs/sections/corporate-m-1.webp", title: "Utility piping for semiconductor,battery and data center pla", width: 1280, height: 967 },
     { img: "/thumbs/sections/corporate-m-2.webp", title: "Solutions & Services", width: 1280, height: 932 },
-    { img: "/thumbs/sections/corporate-m-3.webp", title: "FLOVEXin numbers", width: 1280, height: 1020 },
+    { img: "/thumbs/sections/corporate-m-3.webp", title: "SEWON in numbers", width: 1280, height: 1020 },
     { img: "/thumbs/sections/corporate-m-4.webp", title: "Client Reviews", width: 1280, height: 678 },
     { img: "/thumbs/sections/corporate-m-5.webp", title: "Media", width: 1280, height: 841 },
-    { img: "/thumbs/sections/corporate-m-6.webp", title: "With FLOVEX, 현장에서 같이 일할 인재를 기다립니다.", width: 1280, height: 493 },
+    { img: "/thumbs/sections/corporate-m-6.webp", title: "With SEWON, 현장에서 같이 일할 인재를 기다립니다.", width: 1280, height: 493 },
   ],
   "corporate-l": [
     { img: "/thumbs/sections/corporate-l-1.webp", title: "화면 1", width: 1280, height: 960 },
@@ -161,7 +161,7 @@ export const TEMPLATE_SECTIONS: Record<string, TemplateSectionShot[]> = {
     { img: "/thumbs/sections/corporate-g-3.webp", title: "Casting solution", width: 1280, height: 955 },
     { img: "/thumbs/sections/corporate-g-4.webp", title: "Tested before it ships", width: 1280, height: 2297 },
     { img: "/thumbs/sections/corporate-g-5.webp", title: "GLOBAL PARTNERS,PROVEN QUALITY", width: 1280, height: 850 },
-    { img: "/thumbs/sections/corporate-g-6.webp", title: "hanvex news", width: 1280, height: 1468 },
+    { img: "/thumbs/sections/corporate-g-6.webp", title: "sejin news", width: 1280, height: 1468 },
   ],
   "corporate-f": [
     { img: "/thumbs/sections/corporate-f-1.webp", title: "설계·시공·관리를한 회사가 맡습니다", width: 1280, height: 960 },

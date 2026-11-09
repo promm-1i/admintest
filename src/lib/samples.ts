@@ -128,7 +128,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "corporate-v-template",
     industry: "주방가전 · 빌트인 가전 기업 홈페이지",
-    title: "주방가전 기업 홈페이지",
+    title: "키친마스터 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 주방가전 · 후드 · 쿡탑 · 욕실 · 환기",
     purpose:
@@ -140,8 +140,8 @@ export const SAMPLES: Sample[] = [
       "회사 소개 · 연혁 · CI · 투자 정보 · 윤리경영 · 뉴스 · 홍보영상 · 공지",
     ],
     idealFor: "빌트인 주방가전 제조사, 후드 · 쿡탑 · 수전 브랜드, 욕실 · 환기 제품 기업, 대리점을 둔 생활가전 기업",
-    image: "/thumbs/luminoa.jpg",
-    liveUrl: "/luminoa/",
+    image: "/thumbs/kitchenmaster.jpg",
+    liveUrl: "/kitchenmaster/",
     industryKey: "corporate",
     premiumLabel: "주방가전",
     designCode: "CORP-1017",
@@ -466,7 +466,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "corporate-u-template",
     industry: "로봇 · 자동화 기업 홈페이지",
-    title: "로봇 · 자동화 기업 홈페이지",
+    title: "에이스로보틱스 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 로봇 · 휴머노이드 · AMR · AIoT",
     purpose:
@@ -479,7 +479,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "산업용 로봇 제조사, 로봇 SI·렌탈 기업, 물류 자동화·AMR 기업, 센서·AIoT 솔루션 기업",
     image: "/thumbs/corporate-u.jpg",
-    liveUrl: "/kynovia/",
+    liveUrl: "/acerobotics/",
     industryKey: "corporate",
     premiumLabel: "로봇 · 자동화",
     designCode: "CORP-1016",
@@ -906,7 +906,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "beauty-h-template",
     industry: "에스테틱 · 피부관리실 홈페이지",
-    title: "에스테틱 · 피부관리실 홈페이지",
+    title: "예린 에스테틱 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 에스테틱 · 얼굴 · 웨딩 · 산전산후 · 바디 관리",
     purpose:
@@ -919,7 +919,7 @@ export const SAMPLES: Sample[] = [
     ],
     idealFor: "에스테틱, 피부관리실, 웨딩 관리 전문점, 산전산후 · 바디 관리샵, 여러 지점을 운영하는 뷰티샵",
     image: "/thumbs/beauty-h.jpg",
-    liveUrl: "/bellian/",
+    liveUrl: "/yerin/",
     industryKey: "beauty",
     premiumLabel: "에스테틱 · 피부관리",
     designCode: "BEAP-1002",
@@ -2916,7 +2916,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "corporate-s-template",
     industry: "산업 역사관 · 기업 기록관 홈페이지",
-    title: "산업 역사관·기업 기록관 홈페이지",
+    title: "동해산업기록관 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 기업 · 역사관 · 전시 · 아카이브",
     purpose:
@@ -2924,7 +2924,7 @@ export const SAMPLES: Sample[] = [
     features: ["화면 가득한 첫 화면 사진 · 아치 모양 전경", "넓어지는 전시동 3칸 · 탭으로 넘기는 전시 갤러리", "시설 4곳 사진 넘김 · 관람 지도 · 긴 사진 스토리 · 네 분야 탭", "공지 검색 · 펼치는 FAQ · 공지 상세 · 전체 메뉴 · 서브"],
     idealFor: "기업 역사관·홍보관, 산업 박물관, 지역 기록관, 기술 유산과 전시·관람 정보를 함께 제공해야 하는 제조기업",
     image: "/thumbs/corporate-s.jpg",
-    liveUrl: "/ongyeol/",
+    liveUrl: "/donghaearchive/",
     industryKey: "corporate",
     premiumLabel: "전시 · 기록관",
     designCode: "CORP-1014",
@@ -2950,7 +2950,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "corporate-r-template",
     industry: "항만 물류 · 터미널 운영 기업 홈페이지",
-    title: "항만 물류·터미널 운영기업 홈페이지",
+    title: "새한물류 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 기업 · 항만 · 물류 · 터미널 · 3PL",
     purpose:
@@ -2958,7 +2958,7 @@ export const SAMPLES: Sample[] = [
     features: ["옆으로 흐르는 관계사 장면 · 화면에 붙는 사업 5장면 · 아래 떠 있는 알약 메뉴", "관계사 9곳 · 사업 · 재무표 · 공시 · 입찰공고", "뉴스 · 갤러리 · 홍보동영상 · e-브로슈어", "회사 · CI · 연혁 · 역사관 · ESG · 채용 · 영문 포함"],
     idealFor: "항만 운영사, 터미널·하역·운송·보관·통관·3PL을 함께 제공하는 종합물류기업과 다수 관계사를 보유한 산업 그룹",
     image: "/thumbs/corporate-r.jpg",
-    liveUrl: "/nexharbor/",
+    liveUrl: "/saehan/",
     industryKey: "corporate",
     premiumLabel: "물류업",
     designCode: "CORP-1013",
@@ -2967,7 +2967,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "corporate-o-template",
     industry: "화장품 원료 · 바이오 연구기업 홈페이지",
-    title: "천연물 화장품 원료기업 홈페이지",
+    title: "그린바이오랩 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 기업 · 천연물 · 화장품 원료 · R&D",
     purpose:
@@ -2975,7 +2975,7 @@ export const SAMPLES: Sample[] = [
     features: ["5초마다 넘어가는 첫 화면 사진 4장 · 산지 이야기와 어두운 연구 구역", "제품명 검색이 되는 원료 283종 · 원료 상세 · 샘플 문의", "연구 · 특허 · 인증 · 뷰티필름 · 인사이트 · 허브북 콘텐츠랩", "글로벌 네트워크 · 채용 · 회원 · 문의 · 서브"],
     idealFor: "천연물·화장품 원료 제조사, 바이오 소재 연구기업, 효능 데이터와 브랜드 콘텐츠를 함께 보여줘야 하는 B2B 뷰티기업",
     image: "/thumbs/corporate-o.jpg",
-    liveUrl: "/naturive/",
+    liveUrl: "/greenbiolab/",
     industryKey: "corporate",
     premiumLabel: "바이오업",
     designCode: "CORP-1010",
@@ -2984,7 +2984,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "corporate-n-template",
     industry: "첨단소재 · 산업인프라 그룹 홈페이지",
-    title: "글로벌 첨단소재 그룹 홈페이지",
+    title: "한성소재 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 기업 · 첨단소재 · 산업인프라 · ESG",
     purpose:
@@ -2992,7 +2992,7 @@ export const SAMPLES: Sample[] = [
     features: ["5.2초마다 넘어가는 첫 화면 사진 3장 · 마우스를 올리면 사진이 채워지는 사업 카드 5칸", "내리는 만큼 옆으로 흐르는 성과 카드 · 30개국 · 126개 거점 숫자", "10년 단위 연혁 · 10개 권역 글로벌 네트워크", "사업 · ESG · IR · 재무 · 공시 · 뉴스 · 서브"],
     idealFor: "첨단소재·산업기계·전력 인프라 기업, 다수 사업부와 해외 거점을 운영하는 중견그룹, ESG·IR 정보를 함께 제공해야 하는 제조기업",
     image: "/thumbs/corporate-n.jpg",
-    liveUrl: "/nexora/",
+    liveUrl: "/hansung/",
     industryKey: "corporate",
     premiumLabel: "소재업",
     designCode: "CORP-1009",
@@ -3001,7 +3001,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "corporate-m-template",
     industry: "산업설비 · 스마트 플로우 기업 홈페이지",
-    title: "스마트 산업설비 기업 홈페이지",
+    title: "세원엔지니어링 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 기업 · 산업설비 · 반도체 · 데이터센터",
     purpose:
@@ -3009,7 +3009,7 @@ export const SAMPLES: Sample[] = [
     features: ["화면에 붙은 채 다섯 번 바뀌는 비전 장면", "반도체 · 이차전지 · 데이터센터 등 사업", "회사소개 · 미디어 · 고객지원 폼 · 채용 · 약관", "글로벌 네트워크 숫자 · 고객 후기 · 휴대폰 메뉴"],
     idealFor: "반도체·이차전지 유틸리티 기업, 클린룸·드라이룸 설비사, 데이터센터 냉각·산업 배관 엔지니어링 기업",
     image: "/thumbs/corporate-m.jpg",
-    liveUrl: "/flovex/",
+    liveUrl: "/sewon/",
     industryKey: "corporate",
     premiumLabel: "산업설비업",
     designCode: "CORP-1008",
@@ -3086,7 +3086,7 @@ export const SAMPLES: Sample[] = [
   {
     slug: "corporate-g-template",
     industry: "제조 · 금속 주조 기업 홈페이지",
-    title: "특수강 주조 제조기업 홈페이지",
+    title: "세진특수강 홈페이지 포트폴리오",
     type: ["premium-template", "small-business"],
     tag: "홈페이지 포트폴리오 · 기업 · 제조 · 공장",
     purpose:
@@ -3094,7 +3094,7 @@ export const SAMPLES: Sample[] = [
     features: ["한 글자씩 올라오는 첫 화면 · 화면에 붙은 기술 다섯 장", "0부터 올라가는 숫자 세 개 · 제품군 네 가지", "공정 8단계 카드 · 연혁 · 인증서 · 제품 분류", "13칸 견적문의 폼 · 국내외 연락처 · 서브"],
     idealFor: "주조·단조·금속가공 공장, 부품 제조사, 설비·기계 제조기업, 수출 비중이 높은 중소 제조기업",
     image: "/thumbs/corporate-g.jpg",
-    liveUrl: "/hanvex/",
+    liveUrl: "/sejinsteel/",
     industryKey: "corporate",
     premiumLabel: "금속업",
     designCode: "CORP-1002",
