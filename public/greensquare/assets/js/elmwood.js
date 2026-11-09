@@ -1109,7 +1109,7 @@
     on(btn, 'click', function (e) {
       e.preventDefault();
       if (btn.disabled) return;
-      alert('문의가 접수되었습니다. 남겨 주신 이메일로 답변드리겠습니다.');
+      alert('온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.');
       [f.name, f.email, f.tel, f.title, f.content].forEach(function (x) { x.value = ''; });
       sels.forEach(function (s) { s.ewReset(); });
       boxes.forEach(function (c) { if (c.checked) c.click(); });
@@ -1214,7 +1214,7 @@
     on(form, 'submit', function (e) {
       e.preventDefault();
       if (btn.disabled) { alert('필수 항목을 모두 입력 후 예약하기를 눌러주세요.'); return; }
-      alert('방문 예약이 신청되었습니다. 입주사 확인 후 알림톡으로 안내해 드립니다.');
+      alert('온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.');
       W.location.reload();
     });
     check();

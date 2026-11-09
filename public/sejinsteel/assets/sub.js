@@ -67,7 +67,7 @@
       const msg = $('#formMsg');
       if (bad) { msg.textContent = (bad.dataset.name || '필수 항목') + '을(를) 확인해 주세요.'; bad.focus(); return; }
       if (key.value.trim() !== code) { msg.textContent = '자동등록방지 숫자가 틀렸습니다. 다시 입력해 주세요.'; draw(); key.focus(); return; }
-      msg.textContent = '문의가 접수되었습니다. 담당자가 영업일 기준 하루 안에 연락드리겠습니다.'; form.reset(); draw();
+      msg.textContent = '온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.'; form.reset(); draw();
     });
   }
 })();

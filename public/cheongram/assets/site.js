@@ -72,5 +72,5 @@
 
   qa('.site-categories a').forEach(link=>link.addEventListener('click',()=>{qa('.site-categories a').forEach(x=>x.classList.toggle('active',x===link))}));
   qa('form[data-filter]').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();const term=(q('input',form)?.value||'').trim().toLocaleLowerCase(),targets=qa(form.dataset.filter),params=new URLSearchParams(location.search);if(term)params.set('q',term);else params.delete('q');history.pushState({q:term},'',`${location.pathname}${params.size?'?'+params:''}${location.hash}`);let shown=0;targets.forEach(item=>{const on=!term||item.textContent.toLocaleLowerCase().includes(term);item.hidden=!on;if(on)shown++});let empty=q('.search-empty');if(!empty){empty=document.createElement('div');empty.className='search-empty';empty.textContent=isEn?'No results found.':'검색 결과가 없습니다.';(targets[0]?.parentElement||form).append(empty)}empty.classList.toggle('show',shown===0)}));
-  qa('form:not([data-filter])').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();toast(isEn?'Demo form submitted.':'포트폴리오 데모 폼이 접수되었습니다.')}));
+  qa('form:not([data-filter])').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();toast(isEn?'Demo form submitted.':'온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.')}));
 })();
