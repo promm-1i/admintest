@@ -224,7 +224,7 @@ var resultData={list:ovBookingDisplay[(param.hospital_id||'')+'-'+(param.treat_i
                     },
                     submitHandler: function(form) {
                         if(!confirm('예약을 신청하시겠습니까?')) return false;
-						alert("입력 내용을 확인했습니다. 예약 일정 확정은 고객센터로 문의해 주세요.");
+						alert("온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.");
                     }
                 });
                 $btnReserve.on('click', function(e) {

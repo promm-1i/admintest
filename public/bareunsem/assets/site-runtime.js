@@ -1840,7 +1840,7 @@ Main.utils.init();
       event.preventDefault();
       var first=[].find.call(form.querySelectorAll('[required]'),function(field){return field.type==='checkbox'?!field.checked:!String(field.value||'').trim()});
       if(first){first.focus();toast('필수 항목을 확인해 주세요.');return;}
-      toast('문의 내용을 확인했습니다.');
+      toast('온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.');
     });
   });
   try{

@@ -54,7 +54,7 @@
                     },
                     submitHandler: function(form) {
                         if(!confirm('작성하신 내용을 등록하시겠습니까?')) return false;
-                        alert("입력 내용을 확인했습니다. 접수와 처리 결과는 고객센터로 문의해 주세요.");
+                        alert("온라인 접수는 준비 중입니다. 문의는 010-4894-4905로 전화 주세요.");
                     }
                 });
 				$('#user_password').on('input', function() {
