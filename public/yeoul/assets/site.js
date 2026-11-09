@@ -276,7 +276,7 @@
       pager.innerHTML = "";
       for (let n = 1; n <= pages; n++) {
         const b = document.createElement("button");
-        b.type = "button"; b.textContent = n; b.setAttribute("aria-label", `${n}쪽`);
+        b.type = "button"; b.textContent = n;
         if (n === page) b.setAttribute("aria-current", "page");
         b.addEventListener("click", () => { page = n; render(); scope.scrollIntoView({ behavior: reduce ? "auto" : "smooth" }); });
         pager.appendChild(b);
