@@ -17,7 +17,7 @@ const study: CaseStudy = {
   ],
   mainShot: "/cases/academy-j/main.webp",
   pagesLabel: "대표 화면",
-  pagesTitle: "수업을 찾고 신청하기까지 이어지는 39개 화면",
+  pagesTitle: "수업을 찾고 신청하기까지 이어지는 화면",
   pages: [
     { name: "메인", file: "index.html", img: "/cases/academy-j/page-index.webp", desc: "대표 클래스, 학원 특징, 요일별 시간표, 강사진과 최신 소식을 긴 흐름으로 보여 줍니다.", items: ["대표 화면 전환", "시간표 바로가기", "강사·공지 연결"] },
     { name: "시간표", file: "schedule.html", img: "/cases/academy-j/page-schedule.webp", desc: "월요일부터 토요일까지 요일 탭으로 수업 시간과 강사, 홀 정보를 나누어 확인합니다.", items: ["요일 탭", "강사 상세 연결", "홀·수업 시간 안내"] },

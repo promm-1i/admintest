@@ -17,7 +17,7 @@ const study: CaseStudy = {
   ],
   mainShot: "/cases/academy-i/main.webp",
   pagesLabel: "대표 화면",
-  pagesTitle: "운영 목적에 따라 나눈 20개 화면",
+  pagesTitle: "운영 목적에 따라 나눈 화면",
   pages: [
     { name: "메인", file: "index.html", img: "/cases/academy-i/page-index.webp", desc: "핵심 학습 과정과 서비스 장점, 학원 후기와 체험 안내를 긴 흐름으로 보여 줍니다.", items: ["순환형 첫 화면", "학습 과정 안내", "후기 더보기"] },
     { name: "AI 맞춤 학습", file: "ai-customize.html", img: "/cases/academy-i/page-ai.webp", desc: "학생 수준에 맞춰 문제를 구성하는 학습 흐름과 활용 방법을 설명합니다.", items: ["진단 흐름", "맞춤 문제 구성", "운영 장점"] },
