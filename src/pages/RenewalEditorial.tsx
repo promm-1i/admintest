@@ -784,18 +784,14 @@ function HomeBusiness() {
           <img className="re-biz__photo" src={`${PHOTOS}/responsive-wide.webp`} alt="" loading="lazy" decoding="async" />
           <div className="re-biz__text">
             <p className="re-biz__kind">홈페이지 제작</p>
-            <h3 className="re-biz__title">소상공인 · 기업 홈페이지</h3>
-            <p className="re-biz__desc">템플릿으로 빠르게, 또는 처음부터 맞춤으로 만듭니다. 관리자 기능과 오픈 뒤 관리까지 맡습니다.</p>
-            <div className="re-biz__links"><Link className="re-pill" to={`${root}/samples`}>제작 사례</Link><Link className="re-biz__more" to={`${root}/contact`}>제작 문의<ArrowRight /></Link></div>
+            <h3 className="re-biz__title">소상공인 · 기업 홈페이지</h3>            <div className="re-biz__links"><Link className="re-pill" to={`${root}/samples`}>제작 사례</Link><Link className="re-biz__more" to={`${root}/contact`}>제작 문의<ArrowRight /></Link></div>
           </div>
         </article>
         <article className="re-biz__card re-biz__card--app">
           <img className="re-biz__photo" src={app.photoSmall} srcSet={`${app.photoSmall} 768w, ${app.photo} 1536w`} sizes="(max-width: 1023px) 100vw, 50vw" alt="" loading="lazy" decoding="async" />
           <div className="re-biz__text">
             <p className="re-biz__kind">앱</p>
-            <h3 className="re-biz__title">PC · 모바일 앱</h3>
-            <p className="re-biz__desc">윈도우 PC와 안드로이드 폰 · 태블릿에서 쓰는 앱을 만듭니다. 출시부터 업데이트까지 맡습니다.</p>
-            <div className="re-biz__links"><Link className="re-pill re-pill--light" to={`${root}/apps`}>출시한 앱</Link></div>
+            <h3 className="re-biz__title">PC · 모바일 앱</h3>            <div className="re-biz__links"><Link className="re-pill re-pill--light" to={`${root}/apps`}>출시한 앱</Link></div>
           </div>
         </article>
       </div>
