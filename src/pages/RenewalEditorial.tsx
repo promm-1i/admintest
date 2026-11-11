@@ -772,6 +772,14 @@ const APPS = [
     alt: "흰 USB 케이블로 이어진 노트북과 태블릿",
     facts: ["안드로이드 태블릿 앱 · 윈도우 PC 프로그램", "USB · 와이파이 · 최대 120프레임", "3일 무료 · 그다음 11,000원 한 번 결제"],
   },
+  {
+    slug: "cross", name: "크로스", href: "/cross/", icon: "/cross/icon.png",
+    line: "PC 마우스로 태블릿까지",
+    desc: "윈도우 PC의 마우스와 키보드로 USB 케이블에 연결한 안드로이드 태블릿을 씁니다. 화면 끝으로 밀면 태블릿으로 넘어갑니다.",
+    photo: "/cross/img/mouse-ko-1536.webp", photoSmall: "/cross/img/mouse-ko-768.webp",
+    alt: "흰 USB 케이블로 이어진 노트북과 태블릿, 마우스를 쥔 손",
+    facts: ["안드로이드 태블릿 앱 · 윈도우 PC 프로그램", "USB 케이블 · 마우스 · 키보드 · 클립보드", "3일 무료 · 마우스는 계속 무료 · 키보드 5,500원"],
+  },
 ] as const;
 
 function HomeBusiness() {

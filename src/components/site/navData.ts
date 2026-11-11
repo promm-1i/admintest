@@ -407,6 +407,7 @@ export const MAIN_NAV: MainNavEntry[] = [
       { key: "released", label: "출시한 앱", href: "/apps", items: [
         { label: "앱 전체", href: "/apps", desc: "출시한 앱 목록" },
         { label: "바이스크린", href: "/byscreen/", desc: "태블릿을 PC의 두 번째 모니터로" },
+        { label: "크로스", href: "/cross/", desc: "PC 마우스로 태블릿까지" },
       ] },
     ],
   },
@@ -450,5 +451,5 @@ export const MAIN_NAV: MainNavEntry[] = [
 ];
 
 /** SPA 밖에 있는 정적 페이지(public/ 아래). 라우터로 열면 없는 쪽이 되므로 문서 이동으로 연다. */
-export const STATIC_PAGES = ["/byscreen/"];
+export const STATIC_PAGES = ["/byscreen/", "/cross/"];
 export const isStaticPage = (href: string) => STATIC_PAGES.some((prefix) => href.startsWith(prefix));
