@@ -760,7 +760,8 @@ function HeroVideo() {
 
 /**
  * 사업 영역 둘(2026-11-11). 첫 화면 바로 아래에서 홈페이지 제작과 앱을 같은 크기로 나란히 보인다.
- * 앱 쪽 사진은 바이스크린 안내 페이지의 장면 사진을 그대로 쓴다(public/byscreen/img).
+ * 앱 판은 앱 사업 전체라 특정 앱을 보이지 않는다. 사진은 노트북 · 태블릿 · 폰에 글자 없는 배경화면(apps-devices).
+ * 앱마다의 사진은 /apps 목록(APPS)에서 쓴다.
  */
 const APPS = [
   {
@@ -775,7 +776,6 @@ const APPS = [
 
 function HomeBusiness() {
   const root = useRoot();
-  const app = APPS[0];
   return <section className="re-biz" aria-labelledby="re-biz-heading">
     <div className="re-biz__frame">
       <h2 id="re-biz-heading" className="re-biz__heading">사업 영역</h2>
@@ -789,7 +789,7 @@ function HomeBusiness() {
           </div>
         </article>
         <article className="re-biz__card re-biz__card--app">
-          <img className="re-biz__photo" src={app.photoSmall} srcSet={`${app.photoSmall} 768w, ${app.photo} 1536w`} sizes="(max-width: 1023px) 100vw, 50vw" alt="" loading="lazy" decoding="async" />
+          <img className="re-biz__photo" src={`${PHOTOS}/apps-devices-768.webp`} srcSet={`${PHOTOS}/apps-devices-768.webp 768w, ${PHOTOS}/apps-devices.webp 1536w`} sizes="(max-width: 1023px) 100vw, 50vw" alt="" loading="lazy" decoding="async" />
           <div className="re-biz__text">
             <p className="re-biz__kind">앱</p>
             <h3 className="re-biz__title">PC · 모바일 앱</h3>
