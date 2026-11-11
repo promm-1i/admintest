@@ -364,7 +364,7 @@ export const MAIN_NAV: MainNavEntry[] = [
       ] },
       { key: "areas", label: "사업 영역", href: "/", items: [
         { label: "홈페이지 제작", href: "/website/process", desc: "소상공인 · 기업 홈페이지" },
-        { label: "앱", href: "/apps", desc: "직접 만들어 판매하는 앱" },
+        { label: "앱", href: "/apps", desc: "PC · 모바일 앱" },
       ] },
     ],
   },
@@ -405,7 +405,7 @@ export const MAIN_NAV: MainNavEntry[] = [
     groups: [
       /* 앱 소개 페이지는 SPA 밖 정적 페이지(public/<앱>/)라 링크가 문서 이동으로 열린다(STATIC_PAGES) */
       { key: "released", label: "출시한 앱", href: "/apps", items: [
-        { label: "앱 전체", href: "/apps", desc: "노베릭이 만들어 판매하는 앱" },
+        { label: "앱 전체", href: "/apps", desc: "출시한 앱 목록" },
         { label: "바이스크린", href: "/byscreen/", desc: "태블릿을 PC의 두 번째 모니터로" },
       ] },
     ],
