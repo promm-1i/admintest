@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Byscreen - Your tablet as a second monitor for your PC</title>
+<meta name="description" content="Byscreen turns an Android tablet into a second monitor for a Windows PC, over USB or Wi-Fi, with touch and pen. Download the PC program and set it up.">
+<meta property="og:title" content="Byscreen - Your tablet as a second monitor for your PC">
+<meta property="og:description" content="An Android tablet as another screen next to your Windows PC. USB or Wi-Fi, up to 120 frames a second.">
+<meta property="og:image" content="https://noveriq.co.kr/byscreen/hero.jpg">
+<meta name="theme-color" content="#F1F3F6" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1E2024" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/byscreen/icon.png">
+<link rel="alternate" hreflang="ko" href="https://noveriq.co.kr/byscreen/">
+<link rel="alternate" hreflang="en" href="https://noveriq.co.kr/byscreen/en/">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="stylesheet" href="/byscreen/style.css">
+<script src="/byscreen/app.js" defer></script>
+</head>
+<body>
+<!--
+THESIS: The page is Windows Settings > Display, where the visitor's tablet appears as display 2 beside their PC's 1; it refuses the gradient hero, device photo and three feature cards every second-screen app ships.
+OWN-WORLD: Windows 11 Settings grammar: nav pane with selection pill, page titles, stacked setting cards on a cool gray ground, one accent blue (#0072DE) for the selected display and the primary button, Fluent icons, Pretendard.
+STORY: The visitor recognises the screen they will actually use, drags the tablet around the laptop, sees what 30 vs 120 frames look like, learns the price, then downloads the PC program and follows numbered steps.
+FIRST VIEWPORT: Nav pane left; page title; the Settings > System style device banner (laptop + tablet picture, what to install, accent download button); below it the arrangement canvas with 1 (laptop) and 2 (tablet, accent) that 2 attaches into.
+FORM: Windows display settings, grounded candidate 1 of 7 (pick), seed a5a40960.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<div class="shell">
+  <nav class="pane" aria-label="On this page">
+    <a class="who" href="#display">
+      <img src="/byscreen/icon.png" width="60" height="60" alt="">
+      <div><b>Byscreen</b><span>Your tablet as a second monitor</span></div>
+    </a>
+    <ul class="nav">
+      <li><a href="#display" aria-current="true"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#display"/></svg>Display</a></li>
+      <li><a href="#connect"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#usb"/></svg>Connection</a></li>
+      <li><a href="#rate"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#speed"/></svg>Refresh rate</a></li>
+      <li><a href="#input"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#pen"/></svg>Pen &amp; touch</a></li>
+      <li><a href="#start"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#start"/></svg>Get started</a></li>
+      <li><a href="#price"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#key"/></svg>Price</a></li>
+      <li><a href="#help"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#help"/></svg>Help</a></li>
+    </ul>
+    <p class="lang"><a href="/byscreen/" hreflang="ko" lang="ko">한국어</a></p>
+  </nav>
+
+  <main class="page">
+    <section class="sect hero" id="display">
+      <h1>Your tablet as a second monitor for your PC</h1>
+      <p class="lead">Your Android tablet becomes display 2 in Windows. Connect it with a USB cable or over the same Wi-Fi; touch and pen input on the tablet go to the PC.</p>
+
+      <div class="banner">
+        <img src="/byscreen/hero.jpg" width="680" height="440" alt="A tablet standing next to a laptop, showing more of the PC desktop">
+        <div class="banner-t">
+          <b>Install the PC program and the tablet app</b>
+          <dl class="spec"><dt>PC</dt><dd>Windows 10 (2004 or later) or 11, 64-bit · 53 MB zip</dd><dt>Tablet</dt><dd>Android 8 or later · 3 days at full frame rate, free after that too</dd></dl>
+          <div class="banner-b">
+            <a class="btn accent big" href="https://github.com/promm-1i/byscreen/releases/latest/download/Byscreen-PC.zip"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#download"/></svg>Download for PC</a>
+            <a class="btn big" href="https://play.google.com/store/apps/details?id=com.byscreen.app">Get it on Google Play<svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#open"/></svg></a>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="group">Rearrange your displays</h3>
+      <div class="arrange-card">
+        <div class="canvas static" aria-label="Display arrangement">
+          <div class="mon" data-mon="1" aria-hidden="true"><span class="n">1</span><span class="l">Laptop</span><span class="big">1</span></div>
+          <div class="mon sel" data-mon="2" tabindex="0" role="button" aria-describedby="arrange-help"
+               aria-label="Display 2, the tablet. Use the arrow keys to move it."><span class="n">2</span><span class="l">Tablet</span><span class="big">2</span></div>
+        </div>
+        <div class="arrange-foot">
+          <p id="arrange-help">Display 2 is the tablet. Drag it to a different side of the laptop. Do the same in Windows Settings and the pointer crosses over on that side.</p>
+          <button class="btn" type="button" id="identify">Identify</button>
+        </div>
+        <p class="sr" id="arrange-live" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <section class="sect" id="connect">
+      <h2>Connection</h2>
+      <p class="lead">One cable, or the same router. A tablet you've allowed once connects by itself the next time you plug it in or open the app.</p>
+      <div class="cards">
+        <div class="card">
+          <svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#usb"/></svg>
+          <div class="t"><b>USB cable</b><span>Fastest and steadiest. Needs a cable that carries data and USB debugging turned on in the tablet.</span></div>
+          <span class="v on">Recommended</span>
+        </div>
+        <div class="card">
+          <svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#wifi"/></svg>
+          <div class="t"><b>Wi-Fi</b><span>The PC and tablet just need to be on the same router. Office and café networks often keep devices apart, so a cable is better there.</span></div>
+        </div>
+        <div class="card">
+          <svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#display"/></svg>
+          <div class="t"><b>Extend or duplicate</b><span>Add the tablet as a new screen, or show a monitor you already have. Choose from the tray menu at the bottom right of the PC.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sect" id="rate">
+      <h2>Refresh rate</h2>
+      <p class="lead">Byscreen sends as many frames as the tablet's screen can show, up to 120 a second. Every row below moves the same bar at the same speed; only the frames per second differ.</p>
+      <div class="arrange-card rate">
+        <div class="rate-head">
+          <p class="hz" aria-live="polite">Measuring this screen…</p>
+          <button class="btn toggle" type="button" aria-pressed="false">Pause</button>
+        </div>
+        <div class="lane" data-fps="30"><span class="k"><b class="num">30</b><small>free, forever</small></span><span class="track"><span class="puck"></span></span></div>
+        <div class="lane" data-fps="60"><span class="k"><b class="num">60</b></span><span class="track"><span class="puck"></span></span></div>
+        <div class="lane" data-fps="90"><span class="k"><b class="num">90</b></span><span class="track"><span class="puck"></span></span></div>
+        <div class="lane" data-fps="120"><span class="k"><b class="num">120</b><small>after purchase</small></span><span class="track"><span class="puck"></span></span></div>
+      </div>
+      <p class="lead" style="margin-top:12px;font-size:14px">120 is the ceiling, not a promise: a 60 Hz tablet tops out at 60, and a slow PC graphics chip can hold it lower. The app only offers what your tablet can do.</p>
+    </section>
+
+    <section class="sect" id="input">
+      <h2>Pen &amp; touch</h2>
+      <p class="lead">Touching the tablet is touching the PC. Turn these on or off in the tablet app's settings.</p>
+      <div class="cards">
+        <div class="card"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#pen"/></svg><div class="t"><b>Pen pressure</b><span>How hard you press reaches drawing and note apps on the PC.</span></div><span class="v">On by default</span></div>
+        <div class="card"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#palm"/></svg><div class="t"><b>Palm rejection</b><span>Fingers are ignored while the pen is near the screen.</span></div><span class="v">On by default</span></div>
+        <div class="card"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#cursor"/></svg><div class="t"><b>Trackpad mode</b><span>Fingers move the pointer like a laptop touchpad; the pen still touches where it lands.</span></div><span class="v">Off by default</span></div>
+        <div class="card"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#keyboard"/></svg><div class="t"><b>Shortcut bar</b><span>Undo, copy, paste and keyboard buttons over the PC picture.</span></div><span class="v">Off by default</span></div>
+      </div>
+    </section>
+
+    <section class="sect" id="start">
+      <h2>Get started</h2>
+      <p class="lead">You only do this once. When we answer an email with "see step 3", it's these numbers.</p>
+
+      <h3 class="group">PC</h3>
+      <div class="cards">
+        <div class="card">
+          <svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#download"/></svg>
+          <div class="t"><b>PC program</b><span>Windows 10 (2004 or later) or 11, 64-bit · 53 MB zip</span></div>
+          <a class="btn accent" href="https://github.com/promm-1i/byscreen/releases/latest/download/Byscreen-PC.zip"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#download"/></svg>Download for PC</a>
+        </div>
+        <div class="card step" id="pc-1"><span class="no num">1</span><div class="t"><b>Unzip and run byscreen-host.exe</b><span>Keep the unzipped folder: it holds the driver that creates the new screen.</span></div></div>
+        <div class="card step" id="pc-2"><span class="no num">2</span><div class="t"><b>If "Windows protected your PC" appears: More info → Run anyway</b><span>The program isn't code-signed yet, so Windows asks the first time.</span></div></div>
+        <div class="card step" id="pc-3"><span class="no num">3</span><div class="t"><b>If the firewall asks, choose Allow</b><span>Needed for Wi-Fi. For USB only, you can cancel.</span></div></div>
+        <div class="card step" id="pc-4"><span class="no num">4</span><div class="t"><b>Tray icon → Screen to show on the tablet → Extend to a new screen · Set up</b><span>Choose Yes in the administrator prompt. Once per PC. Byscreen has no window; it lives in the tray at the bottom right.</span></div></div>
+      </div>
+
+      <h3 class="group">Tablet</h3>
+      <div class="cards">
+        <div class="card step" id="tab-1"><span class="no num">1</span><div class="t"><b>Install Byscreen from Google Play</b></div></div>
+        <div class="card step" id="tab-2"><span class="no num">2</span><div class="t"><b>For USB, turn on USB debugging</b><span>Settings → About tablet → Software information: tap Build number seven times to show Developer options. Then Settings → Developer options → USB debugging.</span></div></div>
+      </div>
+
+      <h3 class="group">Connect with USB</h3>
+      <div class="cards">
+        <div class="card step" id="usb-1"><span class="no num">1</span><div class="t"><b>Plug the tablet into the PC</b></div></div>
+        <div class="card step" id="usb-2"><span class="no num">2</span><div class="t"><b>When the PC finds the USB device, choose Connect</b></div></div>
+        <div class="card step" id="usb-3"><span class="no num">3</span><div class="t"><b>If it asks to install a USB driver: Install → Yes</b><span>Once per tablet.</span></div></div>
+        <div class="card step" id="usb-4"><span class="no num">4</span><div class="t"><b>When the tablet asks whether to open Byscreen, tick Always and confirm</b></div></div>
+      </div>
+
+      <h3 class="group">Connect over Wi-Fi</h3>
+      <div class="cards">
+        <div class="card step" id="wifi-1"><span class="no num">1</span><div class="t"><b>Choose Wi-Fi in the tablet app and pick your PC</b><span>PCs on the same router appear in the list.</span></div></div>
+        <div class="card step" id="wifi-2"><span class="no num">2</span><div class="t"><b>Tap Connect and allow it in the prompt on the PC</b><span>Once per tablet.</span></div></div>
+      </div>
+    </section>
+
+    <section class="sect" id="price">
+      <h2>Price</h2>
+      <p class="lead">Free to keep using. Paying buys a smoother picture.</p>
+      <div class="cards price">
+        <div class="card"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#start"/></svg><div class="t"><b>First 3 days</b><span>Try it at the highest frame rate your tablet's screen can show.</span></div><span class="v num">Free</span></div>
+        <div class="card"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#display"/></svg><div class="t"><b>After that</b><span>Keep going at 30 frames a second. Nothing else is taken away.</span></div><span class="v num">Free</span></div>
+        <div class="card"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#key"/></svg><div class="t"><b>One purchase</b><span>Your tablet's highest frame rate (up to 120) for good. Not a subscription; other tablets on the same Google account unlock too. Google Play shows the price in your currency.</span></div><span class="v">One-time</span></div>
+      </div>
+    </section>
+
+    <section class="sect" id="help">
+      <h2>Help</h2>
+      <div class="cards">
+        <details class="card"><summary><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#lightbulb"/></svg>The app asks me to turn on USB debugging<svg class="icon chev" aria-hidden="true"><use href="/byscreen/icons.svg#chevron-down"/></svg></summary>
+          <div class="body"><p>The PC program uses USB debugging to switch the tablet to cable mode. Follow <a href="#tab-2">tablet step 2</a>.</p></div></details>
+        <details class="card"><summary><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#usb"/></svg>Nothing happens when I plug in the cable<svg class="icon chev" aria-hidden="true"><use href="/byscreen/icons.svg#chevron-down"/></svg></summary>
+          <div class="body"><p>Charge-only cables don't connect; try a USB-C cable that carries data. Check that the PC program is running in the tray.</p></div></details>
+        <details class="card"><summary><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#shield"/></svg>My work PC asks for an administrator password<svg class="icon chev" aria-hidden="true"><use href="/byscreen/icons.svg#chevron-down"/></svg></summary>
+          <div class="body"><p>The two one-time setups (new screen, USB driver) need administrator rights. Ask your IT team; after that it doesn't ask again.</p></div></details>
+        <details class="card"><summary><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#help"/></svg>I want to report a problem<svg class="icon chev" aria-hidden="true"><use href="/byscreen/icons.svg#chevron-down"/></svg></summary>
+          <div class="body"><p>Type <span class="kbd">%LOCALAPPDATA%\Byscreen</span> in File Explorer's address bar and email us the host.log file there. It records the tablet model and what happened.</p></div></details>
+        <a class="card" href="mailto:6gsmake@gmail.com"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#mail"/></svg><div class="t"><b>Contact</b><span>6gsmake@gmail.com</span></div><svg class="icon chev" aria-hidden="true"><use href="/byscreen/icons.svg#chevron-right"/></svg></a>
+        <a class="card" href="/byscreen/privacy/#en"><svg class="icon" aria-hidden="true"><use href="/byscreen/icons.svg#shield"/></svg><div class="t"><b>Privacy policy</b><span>Your screen and input travel only between your PC and your tablet.</span></div><svg class="icon chev" aria-hidden="true"><use href="/byscreen/icons.svg#chevron-right"/></svg></a>
+      </div>
+      <footer class="foot">Operated by MintCL · Windows is a trademark of Microsoft Corporation. Icons: Fluent UI System Icons (MIT)</footer>
+    </section>
+  </main>
+</div>
+</body>
+</html>
