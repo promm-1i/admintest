@@ -3,7 +3,7 @@ import { trackPageView } from "@/lib/analytics";
 import { Route, Routes, Outlet, useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { RenewalShell, RenewalHomeBody, RenewalPriceBody, RenewalSamplesBody, RenewalContentBody, RenewalPrivacyBody } from "@/pages/RenewalEditorial";
+import { RenewalShell, RenewalHomeBody, RenewalPriceBody, RenewalSamplesBody, RenewalContentBody, RenewalPrivacyBody, RenewalAppsBody } from "@/pages/RenewalEditorial";
 import { organizationSchema } from "@/hooks/useStructuredData";
 import "@/pages/RenewalEditorial.css";
 import { MobileStickyCta } from "@/components/site/MobileStickyCta";
@@ -164,6 +164,7 @@ export default function App() {
           <Route element={<SiteLayout />}>
             <Route path="/" element={LEGACY_SHELL ? <Home /> : <RenewalHomeBody />} />
             <Route path="/about" element={<About />} />
+            <Route path="/apps" element={<RenewalAppsBody />} />
             <Route path="/services/custom" element={LEGACY_SHELL ? <CustomDevService /> : <RenewalContentBody />} />
             <Route path="/services/admin-system" element={LEGACY_SHELL ? <AdminSystemService /> : <RenewalContentBody />} />
             <Route path="/services/inquiry-reservation" element={LEGACY_SHELL ? <InquiryReservationService /> : <RenewalContentBody />} />

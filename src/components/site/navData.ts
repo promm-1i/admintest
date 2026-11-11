@@ -355,31 +355,37 @@ export type MainNavEntry = { key: string; label: string; href: string; groups: N
 export const MAIN_NAV: MainNavEntry[] = [
   {
     key: "about",
-    label: "소개",
+    label: "회사소개",
     href: "/about",
     groups: [
       { key: "who", label: "노베릭", href: "/about", items: [
         { label: "회사 소개", href: "/about", desc: "어떤 사람이 어떻게 만드는지" },
         { label: "블로그", href: "/blog", desc: "제작 기록과 업종별 이야기" },
       ] },
-      { key: "how", label: "만드는 방법", href: "/website/process", items: [
-        { label: "제작 방법", href: "/website/process", desc: "상담에서 오픈까지 네 단계" },
-        { label: "기능 소개", href: "/website/features", desc: "화면과 운영에 들어가는 기능" },
-      ] },
-      { key: "result", label: "결과물", href: "/samples", items: [
-        { label: "제작 사례", href: "/samples", desc: "실제로 만든 홈페이지 모음" },
+      { key: "areas", label: "사업 영역", href: "/", items: [
+        { label: "홈페이지 제작", href: "/website/process", desc: "소상공인 · 기업 홈페이지" },
+        { label: "앱", href: "/apps", desc: "직접 만들어 판매하는 앱" },
       ] },
     ],
   },
+  /* 2026-11-11 사업 영역이 둘(홈페이지 제작 · 앱)이 되며 '서비스'와 '요금'을 '홈페이지 제작' 하나로 묶고
+     그 자리에 '앱'을 넣었다. 대메뉴 여섯 칸(헤더 실측 폭)은 그대로다. */
   {
-    key: "service",
-    label: "서비스",
-    href: "/services/custom",
+    key: "build",
+    label: "홈페이지 제작",
+    href: "/website/process",
     groups: [
-      { key: "custom", label: "커스텀 개발", href: "/services/custom", items: [
-        { label: "커스텀 개발이란?", href: "/services/custom", desc: "업무에 맞춰 처음부터 설계" },
+      { key: "guide", label: "제작 안내", href: "/website/process", items: [
+        { label: "제작 방법", href: "/website/process", desc: "상담에서 오픈까지 네 단계" },
+        { label: "기능 소개", href: "/website/features", desc: "화면과 운영에 들어가는 기능" },
+        { label: "유지보수", href: "/website/maintenance", desc: "오픈 뒤 수정과 운영" },
       ] },
-      { key: "feature", label: "기능별 개발", href: "/website/features", items: [
+      { key: "cost", label: "비용", href: "/website/price", items: [
+        { label: "제작 비용", href: "/website/price", desc: "형태와 구성별 정해진 금액" },
+        { label: "견적 계산기", href: "/estimate", desc: "기능을 골라 예상 금액 확인" },
+      ] },
+      { key: "custom", label: "맞춤 개발", href: "/services/custom", items: [
+        { label: "커스텀 개발이란?", href: "/services/custom", desc: "업무에 맞춰 처음부터 설계" },
         { label: "관리자 시스템", href: "/services/admin-system", desc: "공지 · 문의 · 콘텐츠를 직접 관리" },
         { label: "문의 · 예약 관리", href: "/services/inquiry-reservation", desc: "접수부터 확인과 알림까지" },
         { label: "검색 · 필터 기능", href: "/services/search-filter", desc: "조건으로 걸러 보는 목록" },
@@ -390,27 +396,17 @@ export const MAIN_NAV: MainNavEntry[] = [
         { label: "반응형 웹 제작", href: "/services/responsive", desc: "PC · 태블릿 · 모바일" },
         { label: "검색엔진 최적화", href: "/services/seo", desc: "검색 결과에 맞춘 제목과 구조" },
       ] },
-      { key: "run", label: "운영", href: "/website/maintenance", items: [
-        { label: "유지보수", href: "/website/maintenance", desc: "오픈 뒤 수정과 운영" },
-      ] },
     ],
   },
   {
-    key: "price",
-    label: "요금",
-    href: "/website/price",
+    key: "apps",
+    label: "앱",
+    href: "/apps",
     groups: [
-      { key: "cost", label: "비용", href: "/website/price", items: [
-        { label: "제작 비용", href: "/website/price", desc: "형태와 구성별 정해진 금액" },
-        { label: "견적 계산기", href: "/estimate", desc: "기능을 골라 예상 금액 확인" },
-      ] },
-      /* 요금 쪽을 열면 안쪽 탭에 제작 방법 · 기능 소개 · 유지보수가 함께 뜬다.
-         대메뉴에 그 셋이 없으면 "메뉴에 없던 탭이 왜 있지"가 된다 — 같은 묶음을 여기도 둔다.
-         (LOCAL_GROUPS 의 "홈페이지 제작" 네 쪽과 같은 목록이다) */
-      { key: "included", label: "함께 보기", href: "/website/features", items: [
-        { label: "기능 소개", href: "/website/features", desc: "금액 안에 무엇이 들어가는지" },
-        { label: "제작 방법", href: "/website/process", desc: "상담에서 오픈까지 순서" },
-        { label: "유지보수", href: "/website/maintenance", desc: "오픈 뒤 수정과 운영" },
+      /* 앱 소개 페이지는 SPA 밖 정적 페이지(public/<앱>/)라 링크가 문서 이동으로 열린다(STATIC_PAGES) */
+      { key: "released", label: "출시한 앱", href: "/apps", items: [
+        { label: "앱 전체", href: "/apps", desc: "노베릭이 만들어 판매하는 앱" },
+        { label: "바이스크린", href: "/byscreen/", desc: "태블릿을 PC의 두 번째 모니터로" },
       ] },
     ],
   },
@@ -452,3 +448,7 @@ export const MAIN_NAV: MainNavEntry[] = [
     ],
   },
 ];
+
+/** SPA 밖에 있는 정적 페이지(public/ 아래). 라우터로 열면 없는 쪽이 되므로 문서 이동으로 연다. */
+export const STATIC_PAGES = ["/byscreen/"];
+export const isStaticPage = (href: string) => STATIC_PAGES.some((prefix) => href.startsWith(prefix));

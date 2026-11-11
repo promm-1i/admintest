@@ -12,6 +12,7 @@ const ORIGIN = "https://noveriq.co.kr"; // www는 apex로 301되므로 apex가 �
 const CORE_ROUTES = [
   "/",
   "/about",
+  "/apps",
   "/contact",
   "/faq",
   "/notices",

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Link, Route, Routes, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
-import { MAIN_NAV, type MainNavEntry } from "@/components/site/navData";
+import { MAIN_NAV, isStaticPage, type MainNavEntry } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
 import { FAQ } from "@/lib/faq";
 import { KAKAO_CHANNEL_URL, NAVER_BLOG_URL, PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
@@ -152,7 +152,7 @@ const LOCAL_GROUPS = {
   고객센터: [["문의하기", "/contact"], ["공지사항", "/notices"], ["자주 묻는 질문", "/faq"]],
 } as const;
 
-function hrefIn(root: string, href: string) { return /^(https?:|tel:|mailto:|#)/.test(href) ? href : `${root}${href}`; }
+function hrefIn(root: string, href: string) { return /^(https?:|tel:|mailto:|#)/.test(href) || isStaticPage(href) ? href : `${root}${href}`; }
 function pathFromLocation(pathname: string, root: string) { const value = pathname.slice(root.length) || "/"; return value.startsWith("/") ? value : `/${value}`; }
 
 function useEditorialMotion(pathname: string) {
@@ -677,7 +677,7 @@ function Header() {
         </div>
         <div className={`re-mega2__items${group.items.length > 8 ? " re-mega2__items--dense" : ""}`}>
           <ul>{group.items.map((item) => <li key={item.href + item.label}>
-            <Link to={hrefIn(root, item.href)}><strong>{item.label}</strong>{item.desc && <span>{item.desc}</span>}</Link>
+            <Link to={hrefIn(root, item.href)} reloadDocument={isStaticPage(item.href)}><strong>{item.label}</strong>{item.desc && <span>{item.desc}</span>}</Link>
           </li>)}</ul>
         </div>
       </div>}
@@ -691,19 +691,19 @@ function Header() {
         <div className="re-drawer__body">
           {(MAIN_NAV.find((item) => item.key === drawerKey) ?? MAIN_NAV[0]).groups.map((group) => <div key={group.key}>
             <p className="re-drawer__group">{group.label}</p>
-            {group.items.map((link) => <Link key={link.href + link.label} to={hrefIn(root, link.href)}>{link.label}</Link>)}
+            {group.items.map((link) => <Link key={link.href + link.label} to={hrefIn(root, link.href)} reloadDocument={isStaticPage(link.href)}>{link.label}</Link>)}
           </div>)}
         </div>
       </div>
       {/* 손바닥 폭 — 접었다 펴는 목록 */}
-      <div className="re-stack">{MAIN_NAV.map((item) => <details key={item.key}><summary>{item.label}<ChevronDown /></summary><div>{item.groups.flatMap((entry2) => entry2.items).map((link) => <Link key={link.href + link.label} to={hrefIn(root, link.href)}>{link.label}</Link>)}</div></details>)}</div>
+      <div className="re-stack">{MAIN_NAV.map((item) => <details key={item.key}><summary>{item.label}<ChevronDown /></summary><div>{item.groups.flatMap((entry2) => entry2.items).map((link) => <Link key={link.href + link.label} to={hrefIn(root, link.href)} reloadDocument={isStaticPage(link.href)}>{link.label}</Link>)}</div></details>)}</div>
     </div>
   </header>;
 }
 
 function Footer() {
   const root = useRoot();
-  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="맨 아래 메뉴">{MAIN_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.groups.flatMap((group) => group.items).slice(0, 6).map((item) => <Link key={item.href + item.label} to={hrefIn(root, item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>대표자 <b>김진수</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
+  return <><div className="re-footer__gap" aria-hidden="true" /><div className="re-footer__top"><button type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>TOP<span aria-hidden="true">▲</span></button></div><footer className="re-footer"><div className="re-footer__panel"><div className="re-footer__explorer"><p>상담에서 오픈까지<br />함께 만듭니다</p><nav className="re-footer__nav" aria-label="맨 아래 메뉴">{MAIN_NAV.map((entry) => <div key={entry.key}><strong>{entry.label}</strong>{entry.groups.flatMap((group) => group.items).slice(0, 6).map((item) => <Link key={item.href + item.label} to={hrefIn(root, item.href)} reloadDocument={isStaticPage(item.href)}>{item.label}</Link>)}</div>)}</nav></div><div className="re-footer__info"><Logo showMark={false} wordmarkClassName="re-wordmark" /><div className="re-footer__shortcuts"><Link to={`${root}/privacy`}><b>개인정보처리방침</b></Link><Link to={`${root}/contact`}>제작 문의</Link><Link to={`${root}/faq`}>자주 묻는 질문</Link><Link to={`${root}/notices`}>공지사항</Link></div><div className="re-footer__biz"><p><span>상호명 <b>민트클</b></span><span>대표자 <b>김진수</b></span><span>사업자등록번호 <b>266-07-03678</b></span></p><p><span>통신판매업신고번호 <b>제2026-서울강남-00480호</b></span></p><p><span>전화 <a href={PHONE_TEL_HREF}>{PHONE_NUMBER}</a></span><span>이메일 <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></span></p></div><p className="re-footer__contactline"><small>© 2026 NOVERIQ. All rights reserved.</small></p><a className="re-footer__family" href={NAVER_BLOG_URL} target="_blank" rel="noreferrer">NOVERIQ 채널<span>+</span></a><div className="re-footer__socials"><a href={NAVER_BLOG_URL} target="_blank" rel="noreferrer" aria-label="네이버 블로그"><NaverBlogMark /></a><a href={KAKAO_CHANNEL_URL} target="_blank" rel="noreferrer" aria-label="카카오톡 채널"><KakaoMark /></a></div></div></div></footer></>; }
 
 function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -748,7 +748,7 @@ function HeroVideo() {
       <div className="greeting-swiper re-greeting__slides" aria-live="polite">
         <div className="swiper">
           <div className="swiper-wrapper">
-            <div className={`swiper-slide${slide === 0 ? " swiper-slide-active" : ""}`} style={{ transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><h1 className="greeting-slogan"><span>소상공인·기업</span><span>홈페이지를 만듭니다</span></h1></div>
+            <div className={`swiper-slide${slide === 0 ? " swiper-slide-active" : ""}`} style={{ transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><h1 className="greeting-slogan"><span>홈페이지와 앱을</span><span>만듭니다</span></h1></div>
             <div className={`swiper-slide${slide === 1 ? " swiper-slide-active" : ""}`} style={{ transform: "translate3d(-100%, 0, 0)", transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><p className="greeting-message">처음 상담부터<br />오픈 이후까지</p></div>
           </div>
         </div>
@@ -758,12 +758,58 @@ function HeroVideo() {
   </>;
 }
 
+/**
+ * 사업 영역 둘(2026-11-11). 첫 화면 바로 아래에서 홈페이지 제작과 앱을 같은 크기로 나란히 보인다.
+ * 앱 쪽 사진은 바이스크린 안내 페이지의 장면 사진을 그대로 쓴다(public/byscreen/img).
+ */
+const APPS = [
+  {
+    slug: "byscreen", name: "바이스크린", href: "/byscreen/", icon: "/byscreen/icon.png",
+    line: "태블릿을 PC의 두 번째 모니터로",
+    desc: "안드로이드 태블릿을 윈도우 PC 옆 화면으로 씁니다. USB 케이블이나 와이파이로 연결하고, 펜과 터치도 PC로 갑니다.",
+    photo: "/byscreen/img/hero-ko-1536.webp", photoSmall: "/byscreen/img/hero-ko-768.webp",
+    alt: "흰 USB 케이블로 이어진 노트북과 태블릿",
+    facts: ["안드로이드 태블릿 앱 · 윈도우 PC 프로그램", "USB · 와이파이 · 최대 120프레임", "3일 무료 · 그다음 11,000원 한 번 결제"],
+  },
+] as const;
+
+function HomeBusiness() {
+  const root = useRoot();
+  const app = APPS[0];
+  return <section className="re-biz" aria-labelledby="re-biz-heading">
+    <div className="re-biz__frame">
+      <h2 id="re-biz-heading" className="re-biz__heading">사업 영역</h2>
+      <div className="re-biz__grid">
+        <article className="re-biz__card">
+          <img className="re-biz__photo" src={`${PHOTOS}/responsive-wide.webp`} alt="" loading="lazy" decoding="async" />
+          <div className="re-biz__text">
+            <p className="re-biz__kind">홈페이지 제작</p>
+            <h3 className="re-biz__title">소상공인 · 기업 홈페이지</h3>
+            <p className="re-biz__desc">템플릿으로 빠르게, 또는 처음부터 맞춤으로 만듭니다. 관리자 기능과 오픈 뒤 관리까지 맡습니다.</p>
+            <div className="re-biz__links"><Link className="re-pill" to={`${root}/samples`}>제작 사례</Link><Link className="re-biz__more" to={`${root}/contact`}>제작 문의<ArrowRight /></Link></div>
+          </div>
+        </article>
+        <article className="re-biz__card re-biz__card--app">
+          <img className="re-biz__photo" src={app.photoSmall} srcSet={`${app.photoSmall} 768w, ${app.photo} 1536w`} sizes="(max-width: 1023px) 100vw, 50vw" alt="" loading="lazy" decoding="async" />
+          <div className="re-biz__text">
+            <p className="re-biz__kind">앱</p>
+            <h3 className="re-biz__title">직접 만들어 판매하는 앱</h3>
+            <p className="re-biz__desc">첫 앱 {app.name}는 안드로이드 태블릿을 윈도우 PC의 두 번째 모니터로 씁니다.</p>
+            <div className="re-biz__links"><a className="re-pill re-pill--light" href={app.href}>{app.name} 보기</a><Link className="re-biz__more" to={`${root}/apps`}>앱 전체<ArrowRight /></Link></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>;
+}
+
 function EditorialHome() {
   const root = useRoot();
   const projects = useMemo(() => FEATURED_SLUGS.map((slug) => SAMPLES.find((sample) => sample.slug === slug)).filter((sample): sample is NonNullable<typeof sample> => Boolean(sample?.image)), []);
   const storyItems = SCOPE_SCENES.slice(0, 3);
   return <main id="top" className="re-home">
     <section className="greeting re-greeting"><div className="greeting-frame re-greeting__frame"><HeroVideo /></div></section>
+    <HomeBusiness />
     <HomeLane />
     <section id="scope" className="first re-first">
       <div className="first-intro re-first-intro init re-init">
@@ -1128,6 +1174,24 @@ function FaqPage() {
   return <main className="re-sub-page"><PageInfo category="고객센터" title="자주 묻는 질문" /><Contents><LocalNav group="고객센터" path="/faq" /><Section split title="질문 찾기"><BoardSearch value={keyword} onChange={setKeyword} label="자주 묻는 질문 검색" /><div className="re-faq">{items.map((item) => <details key={item.question}><summary><span>Q</span><strong>{item.question}</strong><i /></summary><div><span>A</span><p>{item.answer}</p></div></details>)}</div>{items.length === 0 && <p className="re-board__state">검색 결과가 없습니다</p>}</Section><ContactBand /></Contents></main>;
 }
 
+function AppsPage() {
+  return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="앱" /><Contents>
+    <Section split title="출시한 앱"><div className="re-apps">
+      {APPS.map((app) => <article className="re-app" key={app.slug}>
+        <a className="re-app__photo" href={app.href} tabIndex={-1} aria-hidden="true"><img src={app.photoSmall} srcSet={`${app.photoSmall} 768w, ${app.photo} 1536w`} sizes="(max-width: 1023px) 100vw, 900px" alt="" loading="lazy" decoding="async" /></a>
+        <div className="re-app__body">
+          <img className="re-app__icon" src={app.icon} width="64" height="64" alt="" />
+          <h3 className="re-app__name">{app.name}</h3>
+          <p className="re-app__line">{app.line}</p>
+          <p className="re-app__desc">{app.desc}</p>
+          <ul className="re-app__facts">{app.facts.map((fact) => <li key={fact}><Check />{fact}</li>)}</ul>
+          <a className="re-pill" href={app.href}>{app.name} 보기<ArrowRight /></a>
+        </div>
+      </article>)}
+    </div></Section>
+  </Contents></main>;
+}
+
 const ABOUT_VALUES = [
   { num: "01", title: "담당자와 직접 소통", desc: "기획 대행을 거치지 않고 제작 담당자와 바로 주고받습니다. 고칠 곳을 말하면 그날 반영합니다.", points: ["중간 전달 단계 없음", "요청한 수정은 진행 중에도 반영", "어려운 용어는 화면으로 설명"] },
   { num: "02", title: "문의로 이어지는 구조", desc: "방문자가 서비스와 위치, 가격을 첫 화면에서 보고 바로 연락하도록 메뉴 순서와 버튼 위치를 짭니다.", points: ["대표 서비스와 가격을 위쪽에 배치", "전화·지도·카카오톡 버튼 상시 노출", "모바일에서 누르기 쉬운 크기"] },
@@ -1402,6 +1466,7 @@ function RouteContent({ path }: { path: string }) {
   if (path === "/faq") return <FaqPage />;
   if (path === "/privacy") return <PrivacyPage />;
   if (path === "/about") return <AboutPage />;
+  if (path === "/apps") return <AppsPage />;
   if (path === "/estimate") return <EstimatePage />;
   if (path === "/web-solutions/demos" || path === "/solutions") return <SolutionsPage />;
   if (path === "/homepage") return <IndustryPage />;
@@ -1439,6 +1504,10 @@ export function RenewalSamplesBody() {
   return <PortfolioPage />;
 }
 export function RenewalPrivacyBody() { return <PrivacyPage />; }
+export function RenewalAppsBody() {
+  usePageTitle("앱 — NOVERIQ", "노베릭이 직접 만들어 판매하는 앱. 바이스크린은 안드로이드 태블릿을 윈도우 PC의 두 번째 모니터로 씁니다.");
+  return <AppsPage />;
+}
 
 /** 제작 안내·기술력 12쪽을 본 사이트에서도 리뉴얼 본문으로 그린다. 경로로 어느 쪽인지 고른다. */
 const CONTENT_ROUTES: Record<string, PageKey> = {
