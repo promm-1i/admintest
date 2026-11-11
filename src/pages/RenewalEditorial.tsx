@@ -794,8 +794,8 @@ function HomeBusiness() {
           <div className="re-biz__text">
             <p className="re-biz__kind">앱</p>
             <h3 className="re-biz__title">PC · 모바일 앱</h3>
-            <p className="re-biz__desc">윈도우 PC와 안드로이드 기기에서 쓰는 앱을 만듭니다. {app.name}으로 태블릿을 PC의 두 번째 모니터로 씁니다.</p>
-            <div className="re-biz__links"><a className="re-pill re-pill--light" href={app.href}>{app.name} 보기</a><Link className="re-biz__more" to={`${root}/apps`}>앱 전체<ArrowRight /></Link></div>
+            <p className="re-biz__desc">윈도우 PC와 안드로이드 폰 · 태블릿에서 쓰는 앱을 만듭니다. 출시부터 업데이트까지 맡습니다.</p>
+            <div className="re-biz__links"><Link className="re-pill re-pill--light" to={`${root}/apps`}>출시한 앱</Link></div>
           </div>
         </article>
       </div>
@@ -1505,7 +1505,7 @@ export function RenewalSamplesBody() {
 }
 export function RenewalPrivacyBody() { return <PrivacyPage />; }
 export function RenewalAppsBody() {
-  usePageTitle("앱 — NOVERIQ", "노베릭이 출시한 앱. 바이스크린으로 안드로이드 태블릿을 윈도우 PC의 두 번째 모니터로 씁니다.");
+  usePageTitle("앱 — NOVERIQ", "노베릭이 출시한 앱. 윈도우 PC와 안드로이드 폰 · 태블릿에서 쓰는 앱을 만듭니다.");
   return <AppsPage />;
 }
 
