@@ -780,6 +780,14 @@ const APPS = [
     alt: "흰 USB 케이블로 이어진 노트북과 태블릿, 마우스를 쥔 손",
     facts: ["안드로이드 태블릿 앱 · 윈도우 PC 프로그램", "USB 케이블 · 마우스 · 키보드 · 클립보드", "3일 무료 · 마우스는 계속 무료 · 키보드 5,500원"],
   },
+  {
+    slug: "bypad", name: "바이패드", href: "/bypad/", icon: "/bypad/icon.png",
+    line: "태블릿을 PC 단축키 버튼판으로",
+    desc: "안드로이드 태블릿을 윈도우 PC의 단축키 버튼판으로 씁니다. 단축키, 문장 입력, 프로그램 열기를 버튼 하나로 하고, 앞에 띄운 프로그램에 맞춰 버튼판이 바뀝니다.",
+    photo: "/bypad/img/press-ko-1536.webp", photoSmall: "/bypad/img/press-ko-768.webp",
+    alt: "스탠드 불빛 아래 낮게 세운 태블릿의 단축키 버튼을 누르는 손",
+    facts: ["안드로이드 태블릿 앱 · 윈도우 PC 프로그램", "USB 케이블 · 와이파이 · 단축키 · 문장 · 프로그램 열기", "무료로 시작 · 전체 기능 9,900원 한 번 결제"],
+  },
 ] as const;
 
 function HomeBusiness() {
