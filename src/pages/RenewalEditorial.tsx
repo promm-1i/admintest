@@ -788,6 +788,14 @@ const APPS = [
     alt: "스탠드 불빛 아래 낮게 세운 태블릿의 단축키 버튼을 누르는 손",
     facts: ["안드로이드 태블릿 앱 · 윈도우 PC 프로그램", "USB 케이블 · 와이파이 · 단축키 · 문장 · 프로그램 열기", "무료로 시작 · 전체 기능 9,900원 한 번 결제"],
   },
+  {
+    slug: "bypen", name: "바이펜", href: "/bypen/", icon: "/bypen/icon.png",
+    line: "태블릿 펜으로 PC에 그리기",
+    desc: "USB 케이블로 연결한 안드로이드 태블릿에 S펜으로 그리면 윈도우 PC 그림 프로그램에 그려집니다. 필압과 기울기, 지우개까지 윈도우 펜으로 들어가고, 드라이버는 깔지 않습니다.",
+    photo: "/bypen/img/draw-ko-1536.webp", photoSmall: "/bypen/img/draw-ko-768.webp",
+    alt: "흰 USB 케이블로 이어진 노트북과 태블릿, 펜으로 태블릿에 그리는 손",
+    facts: ["안드로이드 태블릿 앱 · 윈도우 PC 프로그램", "USB 케이블 · S펜 · 필압 · 기울기 · 빈 패드", "3일 무료 · 펜은 계속 무료 · 필압 5,500원"],
+  },
 ] as const;
 
 function HomeBusiness() {
