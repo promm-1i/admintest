@@ -796,6 +796,14 @@ const APPS = [
     alt: "흰 USB 케이블로 이어진 노트북과 태블릿, 펜으로 태블릿에 그리는 손",
     facts: ["안드로이드 태블릿 앱 · 윈도우 PC 프로그램", "USB 케이블 · S펜 · 필압 · 기울기 · 빈 패드", "3일 무료 · 펜은 계속 무료 · 필압 5,500원"],
   },
+  {
+    slug: "byphoto", name: "바이포토", href: "/byphoto/", icon: "/byphoto/icon.png",
+    line: "폰 사진을 집 PC로",
+    desc: "폰으로 찍은 사진과 동영상을 집 와이파이에서 윈도우 PC로 저절로 백업합니다. 원본 그대로 쌓이고, 밖에서도 집 PC 사진을 봅니다.",
+    photo: "/byphoto/img/desk-ko-1536.webp", photoSmall: "/byphoto/img/desk-ko-768.webp",
+    alt: "밤 책상의 모니터에 열린 사진 폴더와 손에 든 폰",
+    facts: ["안드로이드 폰 앱 · 윈도우 PC 프로그램", "집 와이파이 자동 백업 · 원본 · 밖에서 보기", "집에서는 무료 · 밖에서 쓰기 11,000원 한 번 결제"],
+  },
 ] as const;
 
 function HomeBusiness() {

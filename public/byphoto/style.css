@@ -1,6 +1,6 @@
-/* Cross pages, from Byscreen's (public/byscreen/style.css): the store pictures' campaign on the web. Black ground,
-   white type set large, one photographed scene per idea (the screens composited in), then the practical part
-   (steps, price, help) as type on black. Only the scenes' copy positions differ (Cross's own photos). */
+/* Byphoto pages, from Cross's (public/cross/style.css, itself Byscreen's): the store pictures' campaign on the web.
+   Black ground, white type set large, one photographed scene per idea (the screens composited in), then the practical
+   part (steps, price, help) as type on black. Only the scenes' copy positions differ (Byphoto's own photos). */
 
 :root {
   color-scheme: dark;
@@ -80,29 +80,30 @@ html { scrollbar-color: #3A3A3C var(--bg); }
 .scene .copy .lead { color: rgba(245, 245, 247, .78); }
 .scene .copy { text-shadow: 0 2px 30px rgba(0, 0, 0, .45); }
 
-.s-hero .copy.top { left: 0; right: 0; top: 6.5%; text-align: center; padding: 0 20px; }
+/* the monitor reaches high in the desk photo: the line sits above the photo, over its dark wall */
+.s-hero .copy.top { position: relative; text-align: center; padding: 64px 20px 0; }
+.s-hero > img { margin-top: -7%; }
 .s-hero .h { font-size: clamp(40px, 5.6vw, 84px); }
 .s-hero .copy.bottom { position: relative; margin-top: -3%; } /* under the photo: a hand and the mouse fill its foot */
 .s-hero .spec { margin: 16px 0 0; text-align: center; color: var(--dim); font-size: 14px; }
 
 
 .s-solo .copy { left: 7%; top: 50%; transform: translateY(-50%); }
-.s-solo > img { width: 84%; margin-left: auto; } /* the tablet to the right, room for the line (as in the store picture) */
+.s-solo > img { width: 84%; margin-left: auto; } /* the phone to the right, room for the line (as in the store picture) */
 .s-solo .h { font-size: clamp(36px, 5.2vw, 80px); }
 
-.s-type .copy { left: 7%; top: 11%; } /* under the lamp's shade, above its base, left of the tablet */
-.s-type .h { font-size: clamp(36px, 5.2vw, 80px); }
+.s-out .copy { left: 7%; top: 12%; } /* the dark upper left of the street, left of the phone */
+.s-out .h { font-size: clamp(36px, 5.2vw, 80px); }
 
-.s-dusk::after { content: ""; position: absolute; inset: 0 0 60% 0; background: linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .3) 60%, transparent); pointer-events: none; }
-.s-dusk .copy { left: 0; right: 0; top: 5%; text-align: center; z-index: 1; padding: 0 20px; }
-.s-dusk .h { font-size: clamp(32px, 5vw, 76px); }
+.s-sofa .copy { left: 7%; top: 50%; transform: translateY(-50%); } /* over the dark blanket, left of the hands */
+.s-sofa .h { font-size: clamp(32px, 4.6vw, 72px); }
 
 /* the one motion: each scene's line rises in as it comes into view (visible by default without script) */
 .js .scene:not(.s-hero) .copy > * { opacity: 0; transform: translateY(22px); transition: opacity .9s var(--ease), transform 1.1s var(--ease); }
 .js .scene.in .copy > * { opacity: 1; transform: none; }
 .js .scene.in .copy > :nth-child(2) { transition-delay: .08s; }
 .js .scene.in .copy > :nth-child(3) { transition-delay: .16s; }
-.js .s-solo .copy { transform: translateY(-50%); }
+.js .s-solo .copy, .js .s-sofa .copy { transform: translateY(-50%); }
 
 /* ---------- facts under a scene: plain columns of type ---------- */
 .facts { max-width: var(--text); margin: 0 auto; padding: 8px 20px 0; display: grid; grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr)); gap: 40px; }
@@ -174,12 +175,11 @@ footer.foot a { color: var(--dim); }
   .bar { gap: 14px; }
   .bar nav { display: none; }
   .scene { display: flex; flex-direction: column; }
-  .scene .copy, .s-solo .copy, .s-dusk .copy { position: static; transform: none; text-align: center; padding: 72px 20px 4px; text-shadow: none; }
-  .js .s-solo .copy { transform: none; }
+  .scene .copy, .s-solo .copy, .s-sofa .copy { position: static; transform: none; text-align: center; padding: 72px 20px 4px; text-shadow: none; }
+  .js .s-solo .copy, .js .s-sofa .copy { transform: none; }
   .scene > img, .s-solo > img { order: 2; margin-top: -4%; width: 100%; }
   .s-hero .copy.bottom { order: 3; padding: 0 20px; margin-top: -6%; position: relative; }
   .s-hero .copy.top { padding-top: 40px; } /* clear of the sticky bar */
-  .s-dusk::after { display: none; }
   .scene .copy .lead { color: var(--sub); }
   .facts { grid-template-columns: 1fr; gap: 0; }
   .facts > div { padding: 20px 0; }
