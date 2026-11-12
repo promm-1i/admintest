@@ -407,7 +407,7 @@ export const MAIN_NAV: MainNavEntry[] = [
       { key: "released", label: "출시한 앱", href: "/apps", items: [
         { label: "앱 전체", href: "/apps", desc: "출시한 앱 목록" },
         { label: "바이스크린", href: "/byscreen/", desc: "태블릿을 PC의 두 번째 모니터로" },
-        { label: "크로스", href: "/cross/", desc: "PC 마우스로 태블릿까지" },
+        { label: "바이크로스", href: "/cross/", desc: "PC 마우스로 태블릿까지" },
         { label: "바이패드", href: "/bypad/", desc: "태블릿을 PC 단축키 버튼판으로" },
         { label: "바이펜", href: "/bypen/", desc: "태블릿 펜으로 PC에 그리기" },
         { label: "바이포토", href: "/byphoto/", desc: "폰 사진을 집 PC로" },
