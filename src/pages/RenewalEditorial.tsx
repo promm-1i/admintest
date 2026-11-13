@@ -804,6 +804,14 @@ const APPS = [
     alt: "밤 책상의 모니터에 열린 사진 폴더와 손에 든 폰",
     facts: ["안드로이드 폰 앱 · 윈도우 PC 프로그램", "집 와이파이 자동 백업 · 원본 · 밖에서 보기", "집에서는 무료 · 밖에서 쓰기 11,000원 한 번 결제"],
   },
+  {
+    slug: "bycare", name: "바이케어", href: "/bycare/", icon: "/bycare/icon.png",
+    line: "부모님 폰 화면 보고 도와주기",
+    desc: "부모님 폰 화면을 내 폰에서 보면서 누를 곳을 짚어 드리고, 대신 눌러 드립니다. 볼 때마다 부모님이 [보여 주기]를 누르셔야 보입니다.",
+    photo: "/bycare/img/child-1536.webp", photoSmall: "/bycare/img/child-768.webp",
+    alt: "밤 책상 앞에서 손에 든 폰에 부모님 폰의 알람 화면이 보인다",
+    facts: ["안드로이드 폰 앱 · 부모님 폰과 자녀 폰", "보기 · 짚어 주기 · 대신 누르기 · 빨간 테두리", "3일 무료 · 보기는 계속 무료 · 대신 누르기 5,500원"],
+  },
 ] as const;
 
 function HomeBusiness() {

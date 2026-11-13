@@ -411,6 +411,7 @@ export const MAIN_NAV: MainNavEntry[] = [
         { label: "바이패드", href: "/bypad/", desc: "태블릿을 PC 단축키 버튼판으로" },
         { label: "바이펜", href: "/bypen/", desc: "태블릿 펜으로 PC에 그리기" },
         { label: "바이포토", href: "/byphoto/", desc: "폰 사진을 집 PC로" },
+        { label: "바이케어", href: "/bycare/", desc: "부모님 폰 화면 보고 도와주기" },
       ] },
     ],
   },
@@ -454,5 +455,5 @@ export const MAIN_NAV: MainNavEntry[] = [
 ];
 
 /** SPA 밖에 있는 정적 페이지(public/ 아래). 라우터로 열면 없는 쪽이 되므로 문서 이동으로 연다. */
-export const STATIC_PAGES = ["/byscreen/", "/cross/", "/bypad/", "/bypen/", "/byphoto/"];
+export const STATIC_PAGES = ["/byscreen/", "/cross/", "/bypad/", "/bypen/", "/byphoto/", "/bycare/"];
 export const isStaticPage = (href: string) => STATIC_PAGES.some((prefix) => href.startsWith(prefix));
