@@ -242,7 +242,7 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 :root{--g-gold:#d4b054;--g-purple:#9400d3;--g-plight:#c58cf0;--g-disp:"Josefin Sans",Manrope,"Pretendard Variable",sans-serif;--g-body:Montserrat,Manrope,"Pretendard Variable",sans-serif}
 .gh{position:relative;z-index:30;background:#000;color:#fff}
 .gh-logo{height:200px;display:flex;align-items:center;justify-content:center}
-.gh-logo img{display:block;height:118px;width:auto;max-width:92%}
+.gh-logo img{display:block;height:118px;width:auto}
 .gh-nav{height:60px;display:flex;align-items:center;justify-content:center;gap:30px;padding:0 24px;
  background:linear-gradient(90deg,#000,#1a0629 50%,#000);border-top:1px solid rgba(212,176,84,.28);border-bottom:1px solid rgba(212,176,84,.28)}
 .gh-nav a{font:700 12px/1 var(--g-disp);letter-spacing:.09em;text-transform:uppercase;color:#fff;text-decoration:none;transition:color 170ms ease-in-out,background-color 170ms ease-in-out}
@@ -264,18 +264,82 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
 .gf-fl a{font:700 13px/1 var(--g-disp);letter-spacing:.16em}
 .gf-fl a:hover{color:rgba(255,255,255,.4)}
 @media (max-width:900px){
- .gh-logo{height:110px}.gh-logo img{height:auto;width:86%}
+ .gh-logo{height:110px}.gh-lw{width:86%}.gh-logo img{height:auto;width:100%}
  .gh-nav{height:auto;flex-wrap:wrap;gap:2px 18px;padding:10px 16px 12px}
  .gh-nav a{display:inline-flex;align-items:center;min-height:44px}.gh-nav a:not(.gh-btn){padding:0 2px}
  .gh-nav .gh-btn{margin:4px 0 0}
  .gf-1 a{display:inline-block;padding:14px 4px}.gf-1>span{display:block}.gf-1>i{display:none}
  .gf-sns a,.gf-fl a{display:inline-flex;align-items:center;min-height:44px;padding:0 4px}.gf-sns,.gf-fl{gap:0 14px}
 }
+
+/* ── 움직임(merge_fx.py) ── */
+html body [data-rv]{will-change:opacity,transform}
+html body [data-rv=up]{opacity:0;transform:translate3d(0,24px,0);transition:opacity .5s cubic-bezier(.16,1,.3,1),transform .5s cubic-bezier(.16,1,.3,1);transition-delay:calc(var(--i,0)*80ms)}
+html body [data-rv=unveil]{opacity:0;transform:scale(1.12);transition:opacity .6s cubic-bezier(.65,0,.35,1),transform .6s cubic-bezier(.65,0,.35,1)}
+html body [data-rv=fade]{opacity:0;transition:opacity .48s ease-out;transition-delay:calc(var(--i,0)*60ms)}
+html body [data-rv].rv-on{opacity:1}
+html body [data-rv=up].rv-on,html body [data-rv=unveil].rv-on{transform:none}
+html body [data-rv].rv-done{will-change:auto;transition-delay:0s}
+/* 홈 카드 손 올림: 사진만 살짝 당겨지고 테가 밝아짐 */
+.card,.show{overflow:hidden}
+.card img,.show img{transition:transform .25s ease-out}
+.card:hover img,.show:hover img{transform:scale(1.05)}
+.card,.show,.col{transition:border-color .2s ease-out}
+.card:hover,.show:hover{border-color:rgba(212,176,84,.95)}
+/* 별 */
+.fx-stars{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.hero>.in,.ab-co>*:not(.fx-stars){position:relative;z-index:1}
+/* 빛 지나감 */
+.fx-shm-h{position:relative}
+.fx-shm{position:absolute;inset:0;color:transparent;-webkit-text-fill-color:transparent;pointer-events:none;opacity:0;filter:saturate(1.05);
+ background-image:linear-gradient(90deg,rgba(255,244,214,0) 0%,rgb(255,244,214) 50%,rgba(255,244,214,0) 100%);background-size:220% 100%;background-repeat:no-repeat;background-position:100% 0;
+ -webkit-background-clip:text;background-clip:text}
+.gh-lw{position:relative;display:block;max-width:92%}
+.gh-lw img{max-width:100%}
+.gh-lw .fx-shm{-webkit-background-clip:border-box;background-clip:border-box;-webkit-mask:url(/magicsample/img/logo-gold.png) center/100% 100% no-repeat;mask:url(/magicsample/img/logo-gold.png) center/100% 100% no-repeat}
+.fx-shm.shm-on{animation:fx-shm-x 5s ease-in-out infinite,fx-shm-o 5s infinite}
+@keyframes fx-shm-x{0%{background-position:100% 0}100%{background-position:0% 0}}
+@keyframes fx-shm-o{0%{opacity:0;animation-timing-function:ease-in-out}25%{opacity:1;animation-timing-function:ease-in-out}100%{opacity:0}}
+/* 금가루 */
+.fx-spk{position:fixed;inset:0;pointer-events:none;z-index:9999;overflow:hidden}
+.fx-spk i{position:absolute;left:0;top:0;border-radius:50%;will-change:transform,opacity}
+/* 연혁 진행선 */
+.hist.fx-tl{position:relative;padding-left:64px}
+.tl-track{position:absolute;left:28px;top:32px;bottom:32px;width:3px;pointer-events:none;border-radius:2px;
+ background:linear-gradient(to bottom,rgba(212,176,84,.18) 0%,rgba(212,176,84,.18) 80%,rgba(212,176,84,0) 100%)}
+.tl-fill{position:absolute;left:0;top:0;width:3px;height:100%;border-radius:2px;transform-origin:50% 0;transform:scaleY(0);transition:transform .05s linear;
+ background:linear-gradient(to bottom,#d4b054 0%,#d4b054 80%,rgba(212,176,84,.4) 100%);box-shadow:0 0 8px rgba(212,176,84,.3),0 0 16px rgba(212,176,84,.15)}
+.hist.fx-tl .yr{position:relative}
+.tl-node{position:absolute;left:-42.5px;top:49px;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-sizing:border-box;
+ background:#0b0710;border:2px solid rgba(212,176,84,.35);transition:background .3s cubic-bezier(.16,1,.3,1),border-color .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1)}
+.tl-node svg{width:8px;height:8px;display:none}
+.tl-node:before{content:"";position:absolute;left:50%;top:50%;width:36px;height:36px;margin:-18px 0 0 -18px;border-radius:50%;background:radial-gradient(circle,rgba(212,176,84,.25) 0%,transparent 70%);opacity:0;pointer-events:none}
+.tl-node:after{content:"";width:30%;height:30%;border-radius:50%;background:#fff;display:none}
+.yr.past .tl-node{background:#d4b054;border-color:#d4b054;box-shadow:0 2px 8px rgba(212,176,84,.35)}
+.yr.past .tl-node svg{display:block;animation:tl-tick .25s ease-out}
+.yr.now .tl-node{background:radial-gradient(circle,#d4b054,rgba(212,176,84,.5));border:3px solid #fff;box-shadow:0 0 0 4px rgba(212,176,84,.4),0 4px 16px rgba(212,176,84,.5);animation:tl-breath 2s ease-in-out infinite}
+.yr.now .tl-node:before{opacity:1;animation:tl-breath 2s ease-in-out infinite}
+.yr.now .tl-node:after{display:block}
+.hist.fx-tl .yr h3{transition:color .3s ease-out}
+.hist.fx-tl .yr:first-child h3,.hist.fx-tl .yr h3{color:rgba(244,235,221,.45)}
+.hist.fx-tl .yr.past h3,.hist.fx-tl .yr.now h3{color:#d4b054}
+@keyframes tl-breath{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+@keyframes tl-tick{0%{transform:scale(0);opacity:0}50%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+@media (max-width:900px){
+ .hist.fx-tl{padding-left:40px}.tl-track{left:12px}
+ .tl-node{left:-34.5px;top:35px}
+}
+@media (prefers-reduced-motion:reduce){
+ html body [data-rv]{opacity:1!important;transform:none!important;transition:none!important}
+ .fx-shm,.fx-stars,.fx-spk{display:none!important}
+ .yr.now .tl-node,.yr.now .tl-node:before,.yr.past .tl-node svg{animation:none}
+ .card img,.show img{transition:none}
+}
 </style></head>
-<body id="top">
+<body data-fx="s3" id="top">
 <div class="fixed-bg" aria-hidden="true"></div>
 <div class="site">
-<header class="gh"><a class="gh-logo" href="/magicsample/site/" aria-label="처음으로"><img src="/magicsample/img/logo-gold.png" alt="Artis Σ Creative &amp; Co." width="1199" height="146"></a><nav class="gh-nav" aria-label="주 메뉴"><a href="/magicsample/site/about/">About</a><a href="/magicsample/site/academy/">Academy</a><a href="/magicsample/site/concert/">For Concert</a><a href="/magicsample/site/item/stage/">Magic Item</a><a class="gh-btn on" aria-current="page" href="/magicsample/site/contact/"><span class="ko">수강 · 공연 문의</span></a></nav></header>
+<header class="gh"><a class="gh-logo" href="/magicsample/site/" aria-label="처음으로"><span class="gh-lw"><img src="/magicsample/img/logo-gold.png" alt="Artis Σ Creative &amp; Co." width="1199" height="146"><span class="fx-shm" aria-hidden="true"></span></span></a><nav class="gh-nav" aria-label="주 메뉴"><a href="/magicsample/site/about/">About</a><a href="/magicsample/site/academy/">Academy</a><a href="/magicsample/site/concert/">For Concert</a><a href="/magicsample/site/item/stage/">Magic Item</a><a class="gh-btn on" aria-current="page" href="/magicsample/site/contact/"><span class="ko">수강 · 공연 문의</span></a></nav></header>
 <div class="ptitle"><nav class="crumb" aria-label="현재 위치"><a href="/magicsample/site/">Home</a><i>›</i><span><span class="ko">수강 · 공연 문의</span></span></nav><h1><span class="ko">수강 · 공연 문의</span></h1></div>
 <div class="split"><div class="tx"><h2><span class="ko">아티스 크리에이티브 앤코</span></h2><p>Artis creative Academy<span class="ko">는 교육, 공연, 출강 및 협업에 대한 다양한 문의를 환영합니다. 아래 연락처를 통해 편하게 문의해 주세요.</span></p><a class="tel-b" href="tel:01090508642">010-9050-8642</a><p><span class="ko">서울 양천구 신정동 980-8</span></p><div class="navi"><p class="navi-t"><span class="ko">길 찾기</span></p><div class="navi-b"><a href="https://map.naver.com/p/search/%EC%84%9C%EC%9A%B8%20%EC%96%91%EC%B2%9C%EA%B5%AC%20%EC%8B%A0%EC%A0%95%EB%8F%99%20980-8" data-app="naver" target="_blank" rel="noopener"><span class="ko">네이버 지도</span></a><a href="https://www.google.com/maps/dir/?api=1&amp;destination=37.522776,126.8593558&amp;travelmode=driving" data-app="google" target="_blank" rel="noopener"><span class="ko">구글 지도</span></a><a href="https://map.kakao.com/link/to/%EC%95%84%ED%8B%B0%EC%8A%A4%20%ED%81%AC%EB%A6%AC%EC%97%90%EC%9D%B4%ED%8B%B0%EB%B8%8C%20%EC%95%A4%EC%BD%94,37.522776,126.8593558" data-app="kakao" target="_blank" rel="noopener"><span class="ko">카카오맵</span></a><a href="https://play.google.com/store/apps/details?id=com.skt.tmap.ku" data-app="tmap" target="_blank" rel="noopener" hidden><span class="ko">티맵</span></a></div></div></div><div class="ph"><iframe class="map-f" title="오시는 길 지도 — 서울 양천구 신정동 980-8" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EC%96%91%EC%B2%9C%EA%B5%AC%20%EC%8B%A0%EC%A0%95%EB%8F%99%20980-8&z=16&output=embed"></iframe></div></div>
 <section class="mailsec"><div class="boxb"><h2><span class="ko">문의 남기기</span></h2><p>Artis creative Academy<span class="ko">는 교육, 공연, 출강 및 협업에 대한 다양한 문의를 환영합니다. 아래 연락처를 통해 편하게 문의해 주세요.</span></p><form class="cf" novalidate>
@@ -349,6 +413,89 @@ img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
    setTimeout(function(){if(!gone&&!document.hidden)location.href=x.i;},1800);
   });
  });
+})();
+</script>
+<script>
+(function(){
+ var d=document,fx=d.body.getAttribute('data-fx')||'',reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ function $$(s,r){return [].slice.call((r||d).querySelectorAll(s));}
+ /* 1. 스크롤 등장 — 쪽 묶음마다 다르게 */
+ var SETS={
+  home:[['.hero .in>*','up'],['.cards>.card','up'],['.pair>div','up'],['.list>h2,.list>.sub','up'],['.cols>.col','up'],['.shows>.show','up']],
+  s3:[['.split .ph>img,.three .im>img,.art .ph>img,.igrid3 .im>img','unveil'],
+      ['.split .tx>p,.split .tx>h3,.three .t,.welcome .box,.cpanel,.boxb,.ab-co p,.ab-co .lg,.ab-gr .tx>p,.ab-gr .sg,.ab-gr .ph>img,.art .cols>div,.art .sch,.art .hl','fade']]
+ };
+ if(!reduce&&SETS[fx]&&'IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(es){es.forEach(function(x){if(!x.isIntersecting)return;var el=x.target;io.unobserve(el);el.classList.add('rv-on');
+   setTimeout(function(){el.classList.add('rv-done');},1200);});},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+  SETS[fx].forEach(function(g){var seen=new Map();$$(g[0]).forEach(function(el){if(el.hasAttribute('data-rv'))return;
+   var p=el.parentNode,k=seen.get(p)||0;seen.set(p,k+1);el.setAttribute('data-rv',g[1]);el.style.setProperty('--i',Math.min(k,8));io.observe(el);});});
+ }
+ /* 화면에 있을 때만 돌리기 */
+ function whenVisible(el,amount,on,off){if(!('IntersectionObserver' in window)){on();return;}
+  new IntersectionObserver(function(es){es.forEach(function(x){x.isIntersecting?on():off&&off();});},{threshold:amount}).observe(el);}
+ /* 2. 별 반짝임·별똥별 (Shooting Stars 실측) */
+ function stars(host){
+  var cv=d.createElement('canvas');cv.className='fx-stars';cv.setAttribute('aria-hidden','true');host.insertBefore(cv,host.firstChild);
+  var ctx=cv.getContext('2d'),S=[],M=[],W=0,H=0,dpr=Math.min(2,window.devicePixelRatio||1),raf=0,last=0,shot=0,run=false;
+  var COL=['#d4b054','#c58cf0','#ffffff'];
+  function hx(a){a=Math.max(0,Math.min(255,Math.floor(a)));return (a<16?'0':'')+a.toString(16);}
+  function init(){W=host.clientWidth;H=host.clientHeight;cv.width=Math.round(W*dpr);cv.height=Math.round(H*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);S=[];
+   var n=Math.round(100*W*H/(1440*900));for(var i=0;i<n;i++)S.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*2,a:Math.random()*.5+.3,t:Math.random()*.05+.02});}
+  function shoot(){var e=Math.floor(Math.random()*2);M.push({x:e===0?Math.random()*W:W,y:e===0?0:Math.random()*H*.5,len:Math.random()*80+60,sp:Math.random()*8+6,ang:Math.random()*.5+.5,a:1,w:Math.random()*1.5+.5,c:COL[Math.floor(Math.random()*3)]});}
+  function frame(t){if(!run){raf=0;return;}var k=last?Math.min(3,(t-last)/16.667):1;last=t;ctx.clearRect(0,0,W,H);
+   for(var i=0;i<S.length;i++){var s=S[i];s.a+=s.t*k;if(s.a>1){s.a=1;s.t=-s.t;}else if(s.a<.3){s.a=.3;s.t=-s.t;}ctx.beginPath();ctx.fillStyle='#ffffff'+hx(s.a*255);ctx.arc(s.x,s.y,s.r,0,6.2832);ctx.fill();}
+   if(t-shot>1500){shoot();shot=t;}
+   M=M.filter(function(m){m.x-=Math.cos(m.ang)*m.sp*k;m.y+=Math.sin(m.ang)*m.sp*k;m.a-=.01*k;if(m.a<=0||m.x<-m.len||m.y>H+m.len)return false;
+    var ex=m.x+Math.cos(m.ang)*m.len,ey=m.y-Math.sin(m.ang)*m.len,g=ctx.createLinearGradient(m.x,m.y,ex,ey);
+    g.addColorStop(0,m.c+hx(m.a*255));g.addColorStop(.3,m.c+hx(m.a*200));g.addColorStop(1,m.c+'00');
+    ctx.beginPath();ctx.strokeStyle=g;ctx.lineWidth=m.w;ctx.lineCap='round';ctx.moveTo(m.x,m.y);ctx.lineTo(ex,ey);ctx.stroke();
+    var r=ctx.createRadialGradient(m.x,m.y,0,m.x,m.y,5);r.addColorStop(0,m.c+hx(m.a*255));r.addColorStop(.4,m.c+hx(m.a*180));r.addColorStop(1,m.c+'00');
+    ctx.beginPath();ctx.fillStyle=r;ctx.arc(m.x,m.y,5,0,6.2832);ctx.fill();return true;});
+   raf=requestAnimationFrame(frame);}
+  init();var rt=0;addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(init,150);});
+  whenVisible(host,0,function(){run=true;last=0;if(!raf)raf=requestAnimationFrame(frame);},function(){run=false;});
+ }
+ /* 3. 마우스 금가루 (Sparkle Cursor 실측) — 손가락 터치 기기는 빼고 */
+ function sparkle(hosts){
+  var layer=d.createElement('div');layer.className='fx-spk';layer.setAttribute('aria-hidden','true');d.body.appendChild(layer);
+  var COL=['#d4b054','#f0d48a','#fff4d6','#c58cf0','#9400d3'],P=[],mx=0,my=0,moved=false,raf=0;
+  function rnd(a,b){return Math.random()*(b-a)+a;}
+  function tick(t){if(moved){var c=COL[Math.floor(Math.random()*COL.length)],sz=rnd(8,20),el=d.createElement('i');
+     el.style.cssText='width:'+sz+'px;height:'+sz+'px;background:'+c+';box-shadow:0 0 10px '+c;layer.appendChild(el);
+     P.push({el:el,x:mx,y:my,an:Math.random()*Math.PI*2,ds:rnd(10,60),t0:t});}
+   moved=false;
+   P=P.filter(function(p){var k=Math.min(1,(t-p.t0)/900);if(k>=1){p.el.remove();return false;}
+    p.el.style.transform='translate('+(p.x+Math.cos(p.an)*p.ds*k)+'px,'+(p.y+Math.sin(p.an)*p.ds*k)+'px) translate(-50%,-50%) scale('+(1-.5*k)+')';p.el.style.opacity=1-k;return true;});
+   raf=P.length?requestAnimationFrame(tick):0;}
+  hosts.forEach(function(h){h.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;moved=true;if(!raf)raf=requestAnimationFrame(tick);});});
+ }
+ /* 4. 금색 빛 지나감 (Line Shimmer Text 실측) */
+ function shimmer(el,overlay){
+  if(!overlay){el.classList.add('fx-shm-h');overlay=d.createElement('span');overlay.className='fx-shm';overlay.setAttribute('aria-hidden','true');overlay.textContent=el.textContent;el.appendChild(overlay);}
+  whenVisible(el,.4,function(){overlay.classList.add('shm-on');},function(){overlay.classList.remove('shm-on');});
+ }
+ /* 5. 연혁 진행선 (Timeline Animated 실측) */
+ function timeline(h){
+  var rows=$$('.yr',h);if(rows.length<2)return;h.classList.add('fx-tl');
+  var tr=d.createElement('div');tr.className='tl-track';tr.setAttribute('aria-hidden','true');tr.innerHTML='<i class="tl-fill"></i>';h.insertBefore(tr,h.firstChild);
+  var fill=tr.firstChild,nodes=rows.map(function(r){var n=d.createElement('span');n.className='tl-node';n.setAttribute('aria-hidden','true');
+   n.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#1a1206" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';r.appendChild(n);return n;});
+  var pos=[],raf=0;
+  function measure(){var b=h.getBoundingClientRect(),L=b.height-64;pos=nodes.map(function(n){var r=n.getBoundingClientRect();return L>0?Math.max(0,Math.min(1,(r.top+r.height/2-b.top-32)/L)):0;});}
+  function upd(){raf=0;var b=h.getBoundingClientRect(),vh=innerHeight,p=Math.max(0,Math.min(1,(vh-b.top)/(vh+b.height)));
+   fill.style.transform='scaleY('+p.toFixed(4)+')';var f=-1;for(var i=pos.length-1;i>=0;i--)if(p>=pos[i]){f=i;break;}
+   rows.forEach(function(r,i){r.classList.toggle('past',i<f);r.classList.toggle('now',i===f);});}
+  function req(){if(!raf)raf=requestAnimationFrame(upd);}
+  measure();upd();addEventListener('scroll',req,{passive:true});addEventListener('resize',function(){measure();req();});
+  if(d.fonts&&d.fonts.ready)d.fonts.ready.then(function(){measure();req();});
+ }
+ $$('.hist').forEach(timeline);
+ if(reduce)return;
+ $$('[data-stars]').forEach(stars);
+ if(matchMedia('(hover: hover) and (pointer: fine)').matches){var sp=$$('[data-sparkle]');if(sp.length)sparkle(sp);}
+ $$('[data-shimmer]').forEach(function(el){shimmer(el);});
+ $$('.gh-lw').forEach(function(w){shimmer(w,w.querySelector('.fx-shm'));});
 })();
 </script>
 </body></html>
