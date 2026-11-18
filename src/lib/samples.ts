@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "corporate-y-template",
+    industry: "창호 · 현관문 · 외장 자재 기업 홈페이지",
+    title: "우성창호 홈페이지 포트폴리오",
+    type: ["premium-template", "small-business"],
+    tag: "홈페이지 포트폴리오 · 창호 · 현관문 · 외장 자재 · 시공 사례",
+    purpose:
+      "창호와 현관문을 제품 이름별로 나누어 유형 · 프레임 규격 · 유리 구성을 안내하고, 외장 자재 · 시공 사례 · 기술 자료 · 제품 관리 동영상 · 온라인 상점과 모든 쪽 아래 온라인 문의를 갖춘 창호 · 도어 기업 홈페이지입니다.",
+    features: [
+      "제품 사진 슬라이드와 글자가 한 자씩 나타나는 큰 제목",
+      "창호 · 현관문 제품별 상세(유형 탭 · 프레임 규격 · 제품 자료집)",
+      "인증서류 · 기술 자료 · 관리 동영상 · 시공 사례 · 제품 사진 묶음",
+      "창 종류 탭 유지보수 안내 · 온라인 상점 분류 · 사진 첨부 온라인 문의",
+    ],
+    idealFor: "창호 · 현관문 제조사와 대리점, 건물 외장 자재 회사, 제품 종류와 시공 사례가 많은 인테리어 자재 기업",
+    image: "/thumbs/woosung.jpg",
+    liveUrl: "/woosung/",
+    industryKey: "corporate",
+    premiumLabel: "창호 · 도어",
+    designCode: "CORP-1020",
+    premium: true,
+  },
+  {
     slug: "corporate-z-template",
     industry: "자동차 진단 · 검사 장비 기업 홈페이지",
     title: "세영오토텍 홈페이지 포트폴리오",
