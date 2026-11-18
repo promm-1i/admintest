@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "corporate-x-template",
+    industry: "정수 필터 · 생활가전 제조 기업 홈페이지",
+    title: "태흥정수 홈페이지 포트폴리오",
+    type: ["premium-template", "small-business"],
+    tag: "홈페이지 포트폴리오 · 정수기 · 필터 · 생활가전 · 투자 정보",
+    purpose:
+      "정수기 · 필터 · 생활가전 제품군과 부품 소재를 갈래별로 소개하고, 기술 분야 · 연구 시설 · 특허 증서, 주가 · 공시 · 투자자 공지, 기업 소식과 기업 문의를 갖춘 제조 기업 홈페이지입니다.",
+    features: [
+      "검은 첫 장면에서 제품 사진 슬라이드로 넘어가는 메인과 사업 분야 카드",
+      "탁상형 · 싱크대 하부 · 물통형 정수기와 필터 · 부품 제품, 소재 탭",
+      "기술 분야 · 연구 시설 · 특허와 인증 증서 목록 · 국가 과제",
+      "주가 정보(거래 가격 · 호가 · 일별 탭) · 공시 자료 · 소식 게시판 · 기업 문의",
+    ],
+    idealFor: "정수기 · 필터 제조사, 생활가전 제조 기업, 연구 개발과 투자자 안내를 함께 보여 줘야 하는 상장 · 중견 제조사",
+    image: "/thumbs/taeheung.jpg",
+    liveUrl: "/taeheung/",
+    industryKey: "corporate",
+    premiumLabel: "정수 · 생활가전",
+    designCode: "CORP-1019",
+    premium: true,
+  },
+  {
     slug: "corporate-y-template",
     industry: "창호 · 현관문 · 외장 자재 기업 홈페이지",
     title: "우성창호 홈페이지 포트폴리오",
