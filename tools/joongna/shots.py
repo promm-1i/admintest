@@ -6,7 +6,7 @@ from pathlib import Path
 sys.stdout.reconfigure(encoding="utf-8")
 from playwright.sync_api import sync_playwright
 
-B = "https://noveriq.co.kr/"
+B = __import__("os").environ.get("SHOTS_BASE", "https://noveriq.co.kr/")  # 11-19: 배포 전 사이트는 http://127.0.0.1:5191/ 로
 day, slug = sys.argv[1], sys.argv[2]
 pages, mobile = sys.argv[3].split(","), sys.argv[4].split(",")
 features = [a.split("|") for a in sys.argv[5:]]

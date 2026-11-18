@@ -20,7 +20,7 @@ from playwright.sync_api import sync_playwright
 
 Image.MAX_IMAGE_PIXELS = None
 
-BASE = "http://127.0.0.1:5191"
+BASE = __import__("os").environ.get("SAMPLES_BASE", "http://127.0.0.1:5191")  # 11-19: 5191 이 정적 서버면 /samples 가 404 — vite 주소를 넘긴다
 REPO = Path(__file__).resolve().parents[2]
 PAD = 48          # 섹션 위아래로 더 담는 여백(css px)
 
