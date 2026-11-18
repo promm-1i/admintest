@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "academy-k-template",
+    industry: "로봇 · 코딩 학원 홈페이지",
+    title: "새빛로봇코딩학원 홈페이지 포트폴리오",
+    type: ["premium-template", "small-business"],
+    tag: "홈페이지 포트폴리오 · 로봇 코딩 · 어린이 과정 · 성인 교육 · 온라인 수업",
+    purpose:
+      "로봇 조립과 블록 코딩, AI 실습, 성인 디지털 교육과 온라인 과정을 안내하고 학원 소개 · 교육센터 · 소식 · 문의로 이어지는 로봇 코딩 학원 홈페이지입니다.",
+    features: [
+      "어린이 · 성인 · 온라인 과정을 목록과 상세 화면으로 구분",
+      "로봇 키트와 코딩 수업 장면을 활용한 과정 안내",
+      "교육센터 안내와 공지 · 소식 검색",
+      "모바일 메뉴와 문의 · 상담 접수 안내",
+    ],
+    idealFor: "로봇 · 코딩 학원, 어린이와 성인 과정을 함께 운영하는 교육기관, 온라인 교육과 센터 정보를 함께 안내하려는 학원",
+    image: "/thumbs/saebit.jpg",
+    liveUrl: "/saebit/",
+    industryKey: "academy",
+    premiumLabel: "로봇 · 코딩 학원",
+    designCode: "EDUP-1006",
+    premium: true,
+  },
+  {
     slug: "corporate-w-template",
     industry: "토목 · 건축 · 주택 시공 건설회사 홈페이지",
     title: "솔샘건설 홈페이지 포트폴리오",
