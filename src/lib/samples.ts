@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "hospital-h-template",
+    industry: "암 요양 · 통합 치료 병원 홈페이지",
+    title: "정우병원 홈페이지 포트폴리오",
+    type: ["premium-template", "small-business"],
+    tag: "홈페이지 포트폴리오 · 요양 병원 · 치료 안내 · 식이요법 · 병원식단",
+    purpose:
+      "병원소개, 치료 종류별 상담 · 준비 안내, 악액질 검사와 식이요법, 끼니 사진이 있는 병원식단, 공지와 협력병원 소개를 갖춘 병원 홈페이지입니다.",
+    features: [
+      "진료 안내 팝업과 구역마다 탭으로 바꿔 보는 메인",
+      "치료 다섯 가지의 상담 순서 · 방문 전 준비 · 자주 묻는 질문",
+      "식품 검사 · 암환자의 식사 · 병원식단 · 식재료 안내",
+      "사진과 함께 한 줄씩 보는 공지, 흐르는 협력병원 띠",
+    ],
+    idealFor: "치료와 검사 종류가 여러 가지이고 식사 · 생활 관리 안내를 함께 보여 줘야 하는 요양 병원",
+    image: "/thumbs/jungwoo.jpg",
+    liveUrl: "/jungwoo/",
+    industryKey: "hospital",
+    premiumLabel: "요양 병원",
+    designCode: "HOSP-1031",
+    premium: true,
+  },
+  {
     slug: "hospital-g-template",
     industry: "종합병원 홈페이지",
     title: "서해중앙병원 홈페이지 포트폴리오",
