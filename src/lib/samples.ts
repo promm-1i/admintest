@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "hospital-g-template",
+    industry: "종합병원 홈페이지",
+    title: "서해중앙병원 홈페이지 포트폴리오",
+    type: ["premium-template", "small-business"],
+    tag: "홈페이지 포트폴리오 · 종합병원 · 진료과 · 전문센터 · 진단 장비",
+    purpose:
+      "진료과와 전문센터, 의료진, 외래 · 응급 이용 안내, 진단 장비, 병원 연혁과 소식, 고객 의견 화면을 갖춘 종합병원 홈페이지입니다.",
+    features: [
+      "병원 안내 슬라이드와 진료과 · 전문센터 칸 띠가 있는 메인",
+      "연도별로 묶은 병원 연혁과 병원장 인사말",
+      "장비 사진과 자세히 보기 창이 있는 진단 장비 안내",
+      "외래 · 응급 절차, 편의시설, 오시는 길, 비급여 진료비 안내",
+    ],
+    idealFor: "진료과와 전문센터가 많고 외래 · 응급 · 입원 이용 안내를 나누어 보여 줘야 하는 지역 종합병원",
+    image: "/thumbs/seohae.jpg",
+    liveUrl: "/seohae/",
+    industryKey: "hospital",
+    premiumLabel: "종합병원",
+    designCode: "HOSP-1030",
+    premium: true,
+  },
+  {
     slug: "interior-i-template",
     industry: "건축 설계 · 건설사업관리 건축사사무소 홈페이지",
     title: "새한종합건축사사무소 홈페이지 포트폴리오",
