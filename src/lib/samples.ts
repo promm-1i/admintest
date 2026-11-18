@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "corporate-w-template",
+    industry: "토목 · 건축 · 주택 시공 건설회사 홈페이지",
+    title: "솔샘건설 홈페이지 포트폴리오",
+    type: ["premium-template", "small-business"],
+    tag: "홈페이지 포트폴리오 · 건설회사 · 토목 · 건축 · 시공실적 · 견적 문의",
+    purpose:
+      "토목 · 건축 · 주택 · 플랜트 · 클린룸 · 소방 사업을 갈래별로 소개하고, 회사개요 · 조직도 · 연혁, 사진 카드로 보는 시공실적, 공지사항과 공사 견적 문의를 갖춘 건설회사 홈페이지입니다.",
+    features: [
+      "건물 사진 세 장이 넘어가는 첫 화면과 스크롤 따라 커지는 사업 분야 사진",
+      "옆으로 흐르는 사업 카드 일곱 장과 시공 사례 슬라이드",
+      "사업 갈래 · 검색으로 고르는 시공실적 카드와 상세 창",
+      "회사개요 · CEO 인사말 · 연혁 · 조직도 · 공지사항 · 공사 견적 문의",
+    ],
+    idealFor: "토목 · 건축 시공사, 주택 · 플랜트 공사를 함께 하는 종합 건설회사, 시공실적을 사진으로 보여 줘야 하는 전문 건설업체",
+    image: "/thumbs/solsaem.jpg",
+    liveUrl: "/solsaem/",
+    industryKey: "corporate",
+    premiumLabel: "건설 · 시공",
+    designCode: "CORP-1018",
+    premium: true,
+  },
+  {
     slug: "corporate-x-template",
     industry: "정수 필터 · 생활가전 제조 기업 홈페이지",
     title: "태흥정수 홈페이지 포트폴리오",
