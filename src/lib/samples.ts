@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "interior-i-template",
+    industry: "건축 설계 · 건설사업관리 건축사사무소 홈페이지",
+    title: "새한종합건축사사무소 홈페이지 포트폴리오",
+    type: ["premium-template", "small-business"],
+    tag: "홈페이지 포트폴리오 · 건축사사무소 · 건축 설계 · 도시 설계 · 작품 · 수상",
+    purpose:
+      "대표 프로젝트를 한 화면씩 넘겨 보여 주고, 건축 설계 · 도시 설계 · BIM 설계 · 건설사업관리 업무 분야, 분류 · 지역 · 연도로 고르는 작품 목록, 연도별 수상 기록, 사람 소개와 소식을 갖춘 건축사사무소 홈페이지입니다.",
+    features: [
+      "대표 프로젝트 정보가 함께 바뀌는 첫 화면과 한 화면씩 넘어가는 메인",
+      "업무시설 · 주거시설 · 문화시설 구역과 프로젝트 목록",
+      "분류 · 지역 · 연도로 고르는 작품 목록과 연대별 수상 기록",
+      "업무 분야 네 가지 바로 이동, 팀별 사람 소개, 채용 안내 · 소식",
+    ],
+    idealFor: "건축사사무소, 설계 · 감리 · 건설사업관리를 함께 하는 설계사무소, 작품과 수상 기록을 많이 보여 줘야 하는 건축 회사",
+    image: "/thumbs/saehanarch.jpg",
+    liveUrl: "/saehanarch/",
+    industryKey: "interior",
+    premiumLabel: "건축사사무소",
+    designCode: "INTP-1003",
+    premium: true,
+  },
+  {
     slug: "academy-k-template",
     industry: "로봇 · 코딩 학원 홈페이지",
     title: "새빛로봇코딩학원 홈페이지 포트폴리오",
