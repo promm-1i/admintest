@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "kids-j-template",
+    industry: "어린이 스마트 학습 홈페이지",
+    title: "꿈나무스마트학습 어린이 학습 홈페이지",
+    type: ["premium-template", "small-business"],
+    tag: "어린이 학습 · 유아 학습 · 교과 · 읽기 · 수학 · 영어",
+    purpose:
+      "유아 학습부터 교과 복습, 읽기 · 수학 · 영어까지 과목별로 고르고, 과목 쪽마다 구독 안내 띠가 화면 아래를 따라오는 어린이 학습 서비스 홈페이지입니다.",
+    features: [
+      "첫 화면 안내 네 장과 이전 · 다음 단추, 쪽 번호",
+      "학습 메뉴 아이콘 줄과 과목 탭(교과 · 읽기 · 수학 · 영어)",
+      "학습 만화 · 학습 평가 · 꿈나무 수업 · 구독 정보 쪽",
+      "행사 · 학습 소식 · 학습 영상 · 학습 후기 쪽",
+    ],
+    idealFor: "과목과 학년이 여러 갈래이고, 구독 안내를 어느 쪽에서든 바로 보여 줘야 하는 어린이 학습 서비스",
+    image: "/thumbs/kkumnamu.jpg",
+    liveUrl: "/kkumnamu/",
+    industryKey: "kids",
+    premiumLabel: "어린이 스마트 학습",
+    designCode: "KIDP-1004",
+    premium: true,
+  },
+  {
     slug: "hospital-h-template",
     industry: "암 요양 · 통합 치료 병원 홈페이지",
     title: "정우병원 홈페이지 포트폴리오",
