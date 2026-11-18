@@ -60,6 +60,28 @@ export type Sample = {
  */
 export const SAMPLES: Sample[] = [
   {
+    slug: "corporate-z-template",
+    industry: "자동차 진단 · 검사 장비 기업 홈페이지",
+    title: "세영오토텍 홈페이지 포트폴리오",
+    type: ["premium-template", "small-business"],
+    tag: "홈페이지 포트폴리오 · 자동차 진단 장비 · 전장 검사 · 자료실 · 채용",
+    purpose:
+      "차량 진단 시스템과 전장 검사 장비를 사업 분야별로 같은 틀의 쪽에 소개하고, 회사 소개 · 사업장 안내 · 자료 받기 · 제품 정보 · 채용 절차를 갖춘 자동차 장비 기업 홈페이지입니다.",
+    features: [
+      "정비 현장 사진 슬라이드와 화면을 내리면 글자가 채워지는 큰 소개 문장",
+      "분야마다 큰 사진 · 소개 문장 · 기능 세 가지를 같은 순서로 보여 주는 사업 분야 쪽",
+      "원격 지원 프로그램 · 사용 안내서 자료실과 제품 정보 게시판",
+      "직무 탭으로 고르는 채용 안내 · 국내외 사업장 주소 탭 · 검색 창",
+    ],
+    idealFor: "자동차 진단 장비 제조사, 전장 · 부품 검사 장비 기업, 사업 분야가 여러 개인 산업 장비 회사",
+    image: "/thumbs/seyoung.jpg",
+    liveUrl: "/seyoung/",
+    industryKey: "corporate",
+    premiumLabel: "자동차 장비",
+    designCode: "CORP-1021",
+    premium: true,
+  },
+  {
     slug: "clinic-n-template",
     industry: "비뇨의학과 홈페이지",
     title: "강남튼튼비뇨의학과 홈페이지 포트폴리오",
