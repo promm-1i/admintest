@@ -44,6 +44,8 @@ COVER_FROM = {"CARP-1001": 9, "LAWP-1001": 1, "STAP-1005": 2}
 # 스크롤로 '켜짐' 클래스가 붙어야 그림이 다 나오는 템플릿 — 빠른 훑기로는 안 붙는다(폴더 → JS)
 # 셈다움: 화면 그림 4장을 겹쳐 두고 .sd-pic-wr.active 일 때 2~4장이 들어온다(첫 칸만 HTML 에 active, 나머지는 반쯤 빈 화면으로 찍혔다)
 ON_JS = {"semdawoom": "document.querySelectorAll('.sd-pic-wr').forEach(e=>e.classList.add('active'))"}
+ON_JS["taeheung"] = "(()=>{const s=document.querySelector('.cgsec-hm .swiper-container')?.swiper;if(s){s.autoplay?.stop();s.slideToLoop(0,0)}document.querySelector('#cgi-hdx-pp')?.remove()})()"
+ON_JS["saehanarch"] = "(()=>{const a=[...document.querySelectorAll('.seg-hm-kv-ct .seg-hm-kv-it')];a.forEach((e,i)=>{e.style.setProperty('display',i===0?'block':'none','important');e.style.setProperty('opacity','1','important');e.style.setProperty('transition','none','important');e.style.setProperty('z-index',i===0?'2':'1','important');e.setAttribute('aria-hidden',i===0?'false':'true')})})()"
 
 # 푸터가 position:fixed 인 템플릿(윤슬)은 rect 가 화면 기준이라 문서 좌표로 쓸 수 없다 → 문서 높이로.
 CUT_JS = """(()=>{const f=document.querySelector('footer,#footer,.footer,#ft,.ft');

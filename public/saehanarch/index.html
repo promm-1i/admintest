@@ -1035,7 +1035,7 @@
 <span class="seg-it-tt">공공 건축</span>
 <div class="seg-cn-bx">
 <strong class="seg-nmbx seg-cn-no seg-fntx-pp" id="seg-i-cntx2">0</strong>
-<em class="seg-ntx">50+</em>
+<em class="seg-ntx">+</em>
 </div>
 </div>
 </div>
@@ -1044,13 +1044,13 @@
 <span class="seg-it-tt">주거 시설</span>
 <div class="seg-cn-bx">
 <strong class="seg-nmbx seg-cn-no seg-fntx-pp" id="seg-i-cntx3">0</strong>
-<em class="seg-ntx">50+</em>
+<em class="seg-ntx">+</em>
 </div>
 </div>
 </div>
 <div class="seg-it">
 <div class="seg-ct-tt-bx">
-<span class="seg-it-tt">회사 설립 연도</span>
+<span class="seg-it-tt">업력</span>
 <div class="seg-cn-bx">
 <strong class="seg-nmbx seg-cn-no seg-fntx-pp" id="seg-i-cntx4">0</strong>
 <em class="seg-ntx">+</em>
@@ -1672,6 +1672,13 @@ $(function () {
       window.requestAnimationFrame(draw);
     });
   };
+  // 11-20 Claude: 1280px 아래는 fullPage 가 일반 스크롤이라 onLeave 가 안 불려 숫자가 0 에 멈췄다 — 화면에 들어오면 센다
+  if ('IntersectionObserver' in window) {
+    var counterBox = document.querySelector('.seg-cn-ct-bx');
+    if (counterBox) new IntersectionObserver(function (entries, observer) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { observer.disconnect(); runCompanyCounters(); }
+    }, { threshold: 0.3 }).observe(counterBox);
+  }
   $fullPage.fullpage({
     css3: true,
     fitToSection: false,
