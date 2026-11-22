@@ -46,6 +46,8 @@ COVER_FROM = {"CARP-1001": 9, "LAWP-1001": 1, "STAP-1005": 2}
 ON_JS = {"semdawoom": "document.querySelectorAll('.sd-pic-wr').forEach(e=>e.classList.add('active'))"}
 ON_JS["taeheung"] = "(()=>{const s=document.querySelector('.cgsec-hm .swiper-container')?.swiper;if(s){s.autoplay?.stop();s.slideToLoop(0,0)}document.querySelector('#cgi-hdx-pp')?.remove()})()"
 ON_JS["saehanarch"] = "(()=>{const a=[...document.querySelectorAll('.seg-hm-kv-ct .seg-hm-kv-it')];a.forEach((e,i)=>{e.style.setProperty('display',i===0?'block':'none','important');e.style.setProperty('opacity','1','important');e.style.setProperty('transition','none','important');e.style.setProperty('z-index',i===0?'2':'1','important');e.setAttribute('aria-hidden',i===0?'false':'true')})})()"
+# 11-22 Claude: 새한 회사 소개 숫자는 1440 에서 fullPage 넘김(onLeave)으로만 세어 캡처엔 '0+' — 사이트 스크립트의 끝값(18·50·50·18)으로 채운다
+ON_JS["saehanarch"] += ";[18,50,50,18].forEach((n,i)=>{const e=document.getElementById('seg-i-cntx'+(i?i+1:''));if(e){e.textContent=String(n);e.setAttribute('data-counted','true')}})"
 
 # 푸터가 position:fixed 인 템플릿(윤슬)은 rect 가 화면 기준이라 문서 좌표로 쓸 수 없다 → 문서 높이로.
 CUT_JS = """(()=>{const f=document.querySelector('footer,#footer,.footer,#ft,.ft');
