@@ -62,7 +62,7 @@ const SUBPAGE_MEDIA: Record<PageKey, string> = {
   seo: `${PHOTOS}/seo-wide.webp`,
 };
 const MEDIA_SLOTS = {
-  hero: `${MEDIA}/hero-apps.webp`,
+  hero: `${MEDIA}/hero-apps-ad.webp`,
   tomorrow: [`${MEDIA}/tomorrow-01.webp`, `${MEDIA}/tomorrow-02.webp`, `${MEDIA}/tomorrow-03.webp`],
 } as const;
 type PageKey = "process" | "price" | "features" | "maintenance" | "custom" | "admin-system" | "inquiry-reservation" | "search-filter" | "content-management" | "database-api" | "responsive" | "seo";
@@ -710,7 +710,7 @@ function HeroVideo() {
   }, [paused, inView]);
   return <>
     <div className="greeting-player">
-      <video ref={videoRef} className="greeting-video" src={`${MEDIA}/hero-apps.mp4`} poster={MEDIA_SLOTS.hero} muted loop playsInline preload="metadata" aria-hidden="true" />
+      <video ref={videoRef} className="greeting-video" src={`${MEDIA}/hero-apps-ad.mp4`} poster={MEDIA_SLOTS.hero} muted loop playsInline preload="metadata" aria-hidden="true" />
       <div className="greeting-dim re-greeting__dim" />
       <div className="greeting-swiper re-greeting__slides" aria-live="polite">
         <div className="swiper">
