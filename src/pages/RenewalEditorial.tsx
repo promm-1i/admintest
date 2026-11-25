@@ -1,7 +1,8 @@
+import type React from "react";
 import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Navigate, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Check, ChevronDown, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, isStaticPage, type MainNavEntry } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
@@ -273,6 +274,142 @@ const HELP_CARDS = [
   { title: "자주 묻는 질문", desc: "비용 · 기간 · 관리자 기능에\n대한 답", href: "/faq", tone: "d", Icon: HelpCircle },
 ] as const;
 
+/**
+ * 업종 가로 아코디언. NHN Cloud "주요 솔루션" 실측값 그대로 (2026-09-22 재측정).
+ *   패널 class 에 bg-cover · rounded-12, 배경은 사진
+ *   background-size: auto 520px · background-position: 25% 0%
+ *   접힘 79 / 펼침 865 / 높이 520 / 간격 12 / 행 폭 1320
+ *   전환 flex .5s cubic-bezier(.4,0,.2,1)
+ *   펼친 칸 본문: 여백 60 · 본문 칸 440 · 항목 사이 border-top rgba(255,255,255,.3)
+ *   접힌 칸은 글자를 세로로 (c-writing-lr)
+ *   본문은 접혀 있을 때 opacity 0, 펼치면 1 (.5s ease-out)
+ * 11-25 업종 템플릿 썸네일 → 앱 일곱 개(사진 · 사실 세 줄 · 앱 쪽 링크).
+ */
+function HomeApps() {
+  const items = APPS.map((app) => ({ key: app.slug, eng: app.slug.toUpperCase(), name: app.name, rows: app.facts, href: app.href, shot: app.photoSmall }));
+  const [open, setOpen] = useState(0);
+  return <section className="re-nhn re-nhn--industry">
+    <div className="re-nhn__frame">
+      <h2 className="re-nhn__heading">출시한 앱</h2>
+      <p className="re-nhn__lead">일곱 개 모두 안드로이드 앱이고, 다섯 개는 윈도우 PC 프로그램과 같이 씁니다.</p>
+      <ul className="re-acc">{items.map((item, index) => {
+        const active = index === open;
+        return <li key={item.key} className="re-acc__panel" data-open={active}
+          style={item.shot ? { backgroundImage: `url(${item.shot})` } as CSSProperties : undefined}
+          onPointerEnter={() => setOpen(index)} onFocusCapture={() => setOpen(index)}>
+          <a href={item.href} aria-expanded={active}>
+            <i className="re-acc__dim" aria-hidden="true" />
+            <span className="re-acc__side" aria-hidden={active}>{item.name}</span>
+            <span className="re-acc__body">
+              <span className="re-acc__eng">{item.eng}</span>
+              <strong>{item.name}</strong>
+              <span className="re-acc__rows">{item.rows.map((point) => <span key={point}>{point}</span>)}</span>
+              <span className="re-acc__link">자세히 보기<ArrowRight aria-hidden="true" /></span>
+            </span>
+          </a>
+        </li>;
+      })}</ul>
+    </div>
+  </section>;
+}
+
+/** 쓰는 모습 카드: 앱마다 아코디언 · 위쪽 칸과 겹치지 않는 사진 한 장 */
+const HOME_CASE_PHOTOS: Record<string, string> = {
+  byscreen: "/byscreen/img/cafe-ko-768.webp",
+  cross: "/cross/img/dusk-ko-768.webp",
+  bypad: "/bypad/img/stream-ko-768.webp",
+  bypen: "/bypen/img/tip-ko-768.webp",
+  byphoto: "/byphoto/img/sofa-ko-768.webp",
+  bycare: "/bycare/img/parent-768.webp",
+  byview: "/byview/img/kitchen-ko-512.webp",
+};
+
+function HomeCases() {
+  const root = useRoot();
+  // 11-25 포트폴리오 카드 → 앱 일곱 개(아코디언과 다른 사진). APPS 가 아래에 있어 렌더 때 만든다
+  const cases = APPS.map((app) => ({ slug: app.slug, name: app.name, href: app.href, image: HOME_CASE_PHOTOS[app.slug] }));
+  /* 원본 Swiper 설정 그대로 — slidesPerView 4 · spaceBetween 10 · speed 300 · slidesPerGroup 4 · loop 없음.
+     Swiper 는 allowTouchMove 가 기본 켜져 있어 좌우로 끌어서도 넘어간다. 화살표만 있으면 반쪽이다.
+     슬라이드 320 + 간격 10 = 한 칸 330. */
+  const PER_VIEW = 4;
+  const STEP = 330;
+  const [index, setIndex] = useState(0);
+  const [drag, setDrag] = useState(0);
+  const [jump, setJump] = useState(false);   // 되감는 순간만 전환을 끈다
+  const dragging = useRef<{ id: number; x: number; moved: boolean } | null>(null);
+  /* 끝에서 멈추지 않고 처음으로 이어진다. 목록을 두 벌 깔아 두고, 한 벌을 넘어가면
+     전환 없이 같은 자리로 되감아 경계가 보이지 않게 한다. */
+  const LEN = cases.length;
+  const loop = cases.concat(cases);
+  const go = (delta: number) => setIndex((current) => current + delta * PER_VIEW);
+
+  const onDown = (event: React.PointerEvent<HTMLUListElement>) => {
+    if (event.pointerType === "mouse" && event.button !== 0) return;
+    dragging.current = { id: event.pointerId, x: event.clientX, moved: false };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+  const onMove = (event: React.PointerEvent<HTMLUListElement>) => {
+    const grab = dragging.current;
+    if (!grab || grab.id !== event.pointerId) return;
+    const dx = event.clientX - grab.x;
+    if (Math.abs(dx) > 4) grab.moved = true;
+    setDrag(dx);
+  };
+  const onUp = (event: React.PointerEvent<HTMLUListElement>) => {
+    const grab = dragging.current;
+    if (!grab || grab.id !== event.pointerId) return;
+    dragging.current = null;
+    // 한 칸의 1/4 을 넘게 끌면 넘긴다
+    const moved = Math.round(-drag / STEP + (Math.abs(drag) > STEP / 4 ? (drag < 0 ? 0.5 : -0.5) : 0));
+    setIndex((current) => current + moved);
+    setDrag(0);
+  };
+  const offset = index * STEP - drag;
+
+  /* 한 벌을 벗어나면 전환을 끄고 같은 화면이 되는 자리로 돌려놓는다 */
+  useEffect(() => {
+    if (index >= LEN || index < 0) {
+      const id = window.setTimeout(() => {
+        setJump(true);
+        setIndex((current) => ((current % LEN) + LEN) % LEN);
+      }, 320);
+      return () => window.clearTimeout(id);
+    }
+    if (jump) {
+      const id = window.requestAnimationFrame(() => setJump(false));
+      return () => window.cancelAnimationFrame(id);
+    }
+    return undefined;
+  }, [index, LEN, jump]);
+
+  return <section className="re-nhn re-nhn--cases">
+    <div className="re-nhn__frame">
+      <h2 className="re-nhn__heading">쓰는 모습</h2>
+      <p className="re-nhn__lead">앱마다 한 장씩입니다. 좌우로 끌어 보세요.</p>
+      <div className="re-case-nav">
+        <button type="button" onClick={() => go(-1)} aria-label="이전 앱"><ChevronLeft /></button>
+        <button type="button" onClick={() => go(1)} aria-label="다음 앱"><ArrowRight /></button>
+      </div>
+      <div className="re-case-viewport">
+        <ul className="re-case-list" data-dragging={dragging.current || jump ? "true" : "false"}
+          style={{ transform: `translate3d(${-offset}px,0,0)` }}
+          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
+          {loop.map((sample, i) => <li className="re-case" key={`${sample.slug}-${i}`}
+            aria-hidden={i >= LEN ? true : undefined}>
+            <a href={sample.href} draggable={false}
+              onClick={(event) => { if (dragging.current?.moved) event.preventDefault(); }}>
+              <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" draggable={false} /></figure>
+              <h3>{sample.name}</h3>
+              <span className="re-case__more">자세히 보기<ArrowRight /></span>
+            </a>
+          </li>)}
+        </ul>
+      </div>
+      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/apps`}>앱 전부 보기</Link></div>
+    </div>
+  </section>;
+}
+
 function HomeHelp() {
   const root = useRoot();
   return <section className="re-nhn re-nhn--help">
@@ -288,6 +425,181 @@ function HomeHelp() {
         </Link>
       </li>)}</ul>
     </div>
+  </section>;
+}
+
+/** 흐르는 띠에 까는 앱 사진. 앱을 돌아가며 섞어 옆 칸이 같은 앱이 되지 않게 한다. */
+const HOME_LANE_PHOTOS = [
+  "/byscreen/img/hero-ko-768.webp",
+  "/cross/img/mouse-ko-768.webp",
+  "/bypad/img/press-ko-768.webp",
+  "/bypen/img/draw-ko-768.webp",
+  "/byphoto/img/desk-ko-768.webp",
+  "/bycare/img/child-768.webp",
+  "/byview/img/card-ko-768.webp",
+  "/byscreen/img/cable-ko-768.webp",
+  "/cross/img/dusk-ko-768.webp",
+  "/bypad/img/cable-ko-768.webp",
+  "/bypen/img/pad-ko-768.webp",
+  "/byphoto/img/out-ko-768.webp",
+  "/bycare/img/parent-768.webp",
+  "/byview/img/kitchen-ko-512.webp",
+  "/byscreen/img/cafe-ko-768.webp",
+  "/cross/img/type-ko-768.webp",
+  "/bypad/img/stream-ko-768.webp",
+  "/bypen/img/tip-ko-768.webp",
+  "/byphoto/img/sofa-ko-768.webp",
+  "/bycare/img/solo-768.webp",
+  "/byview/img/park-ko-512.webp",
+  "/byscreen/img/pen-ko-768.webp",
+  "/cross/img/solo-ko-768.webp",
+  "/bypad/img/twohands-ko-768.webp",
+  "/bypen/img/solo-ko-768.webp",
+  "/byphoto/img/solo-ko-768.webp",
+  "/byview/img/pair-ko-512.webp",
+  "/byscreen/img/solo-ko-768.webp",
+  "/bypad/img/solo-ko-768.webp",
+  "/byview/img/tap-ko-512.webp",
+  "/byview/img/hand-ko-512.webp",
+  "/byview/img/dark-ko-512.webp",
+  "/byview/img/solo-ko-512.webp",
+] as const;
+
+/**
+ * 앱 사진을 원근으로 눕혀 앞으로 흘려보내는 칸. (11-25 포트폴리오 화면 → 앱 사진)
+ *
+ * 지학사 초등(textbook.jihak.co.kr) 히어로의 표지 레인을 소스 그대로 옮겼다 (2026-09-21).
+ *   ROWS 8 · PER_ROW 5 · ROW_SECONDS 9 · TILT rotateX(32deg)
+ *   SOFTEN ["far","far","far","far","far","mid","near",""]
+ *   뒤쪽 줄은 세로로 크게 눌려 우글거린다. 눌리기 전에 세로 성분만 흐리게 걸러 둔다
+ *   (feGaussianBlur stdDeviation="0 6" / "0 2" / "0 1.2").
+ *   한 줄만큼 흐르면 맨 앞줄을 맨 뒤로 보내고 다음 사진을 채운다. 그래서 이음매가 없다.
+ *   1280 미만에서는 깔지 않는다. prefers-reduced-motion 이면 흐르지 않는다.
+ *
+ * 우리 것과 다른 한 가지: 표지 비율 520/700 대신 4:3 을 쓴다.
+ * 교과서는 세로 표지지만 우리 것은 가로 화면이라, 세로로 자르면 화면이 잘린다.
+ */
+const LANE_ROWS = 8;
+const LANE_PER_ROW = 5;
+const LANE_ROW_SECONDS = 9;
+const LANE_SOFTEN = ["far", "far", "far", "far", "far", "mid", "near", ""];
+
+function HomeLane() {
+  const root = useRoot();
+  const stageRef = useRef<HTMLDivElement>(null);
+  // 같은 사진은 한 번만 쓴다.
+  const covers: readonly string[] = HOME_LANE_PHOTOS;
+
+  useEffect(() => {
+    const stage = stageRef.current;
+    if (!stage || covers.length === 0) return;
+    const wide = matchMedia("(min-width: 1280px)");
+    const still = matchMedia("(prefers-reduced-motion: reduce)");
+    let lane: HTMLDivElement | null = null;
+    let next = 0;
+    let offset = 0;
+    let pitch = 0;
+    let last: number | null = null;
+    let raf = 0;
+    let seen = true;
+
+    const fillRow = (row: Element) => {
+      [...row.children].forEach((img, c) => { (img as HTMLImageElement).src = covers[(next + c) % covers.length]; });
+      next = (next + LANE_PER_ROW) % covers.length;
+    };
+    /* 줄이 앞으로 오면 덜 눌리므로 걸러내는 세기도 줄인다 */
+    const soften = () => {
+      if (!lane) return;
+      [...lane.children].forEach((row, i) => {
+        const key = LANE_SOFTEN[i] || "";
+        (row as HTMLElement).style.filter = key ? `url(#re-lane-${key})` : "none";
+      });
+    };
+    /* 줄 간격은 소수점까지 재야 한다. offsetTop 은 정수로 반올림되어 반 픽셀씩 어긋난다 */
+    const measure = () => {
+      if (!lane?.firstElementChild) return;
+      const row = getComputedStyle(lane.firstElementChild);
+      const now = parseFloat(row.height) + parseFloat(row.marginBottom);
+      if (!now) return;
+      offset = pitch ? (offset / pitch) * now : 0;
+      pitch = now;
+    };
+    /* 맨 앞줄을 맨 뒤로 돌려보내고 다음 사진을 채운다 */
+    const recycle = () => {
+      if (!lane?.lastElementChild) return;
+      const row = lane.lastElementChild;
+      lane.prepend(row);
+      fillRow(row);
+      soften();
+    };
+    const tick = (now: number) => {
+      if (last !== null && pitch && lane) {
+        offset += ((now - last) / 1000) * (pitch / LANE_ROW_SECONDS);
+        while (offset >= pitch) { offset -= pitch; recycle(); }
+        lane.style.transform = `rotateX(32deg) translateY(${offset}px)`;
+      }
+      last = now;
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; last = null; };
+    const start = () => { if (!lane || still.matches || raf || !seen || document.hidden) return; last = null; raf = requestAnimationFrame(tick); };
+
+    const build = () => {
+      if (!wide.matches || lane) return;
+      lane = document.createElement("div");
+      lane.className = "re-lane__floor";
+      /* 먼 줄부터 쌓는다. 가까운 줄이 먼저 지나가므로 사진도 그 순서로 채운다 */
+      const rows: HTMLDivElement[] = [];
+      for (let r = 0; r < LANE_ROWS; r += 1) {
+        const row = document.createElement("div");
+        row.className = "re-lane__row";
+        for (let c = 0; c < LANE_PER_ROW; c += 1) {
+          const img = document.createElement("img");
+          img.alt = ""; img.decoding = "async"; img.loading = "lazy";
+          row.appendChild(img);
+        }
+        rows.push(row);
+        lane.appendChild(row);
+      }
+      rows.reverse().forEach(fillRow);
+      stage.appendChild(lane);
+      stage.classList.add("is-live");
+      soften();
+      measure();
+      start();
+    };
+    const teardown = () => { stop(); lane?.remove(); lane = null; stage.classList.remove("is-live"); pitch = 0; offset = 0; };
+
+    build();
+    const onWide = () => { if (wide.matches) build(); else teardown(); };
+    const onResize = () => measure();
+    const onVisible = () => { if (document.hidden) stop(); else start(); };
+    const io = new IntersectionObserver(([entry]) => { seen = entry.isIntersecting; if (seen) start(); else stop(); }, { threshold: 0 });
+    io.observe(stage);
+    wide.addEventListener("change", onWide);
+    still.addEventListener("change", () => { if (still.matches) stop(); else start(); });
+    window.addEventListener("resize", onResize);
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      io.disconnect();
+      wide.removeEventListener("change", onWide);
+      window.removeEventListener("resize", onResize);
+      document.removeEventListener("visibilitychange", onVisible);
+      teardown();
+    };
+  }, [covers]);
+
+  return <section className="re-lane" aria-label="만든 앱">
+    <p className="re-lane__eyebrow">MADE BY NOVERIQ</p>
+    <h2 className="re-lane__heading">지금까지 만든 앱입니다</h2>
+    {/* 뒤쪽 줄은 세로로 눌려 우글거린다. 눌리기 전에 세로 성분만 걸러 둔다 */}
+    <svg className="re-lane__filters" aria-hidden="true" focusable="false">
+      <filter id="re-lane-far" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 6" /></filter>
+      <filter id="re-lane-mid" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 2" /></filter>
+      <filter id="re-lane-near" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 1.2" /></filter>
+    </svg>
+    <div className="re-lane__stage" ref={stageRef} aria-hidden="true" />
+    <div className="re-lane__actions"><Link className="re-pill" to={`${root}/apps`}>앱 전부 보기</Link></div>
   </section>;
 }
 
@@ -514,6 +826,7 @@ function EditorialHome() {
   return <main id="top" className="re-home">
     <section className="greeting re-greeting"><div className="greeting-frame re-greeting__frame"><HeroVideo /></div></section>
     <HomeBusiness />
+    <HomeLane />
     <section id="scope" className="first re-first">
       <div className="first-intro re-first-intro init re-init">
         <h2 className="first-heading">PC와<br />태블릿</h2>
@@ -525,7 +838,8 @@ function EditorialHome() {
     </section>
     <section className="now re-now init re-init" style={{ "--re-now-image": `url(/bypen/img/draw-ko-1536.webp)` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">하는 일</p><h2 className="now-title">윈도우 PC와<br />안드로이드 폰 · 태블릿에서<br className="mobile" /> 쓰는 앱</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
     <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{HOME_VALUE_APPS.map((app, index) => <li className="now-value-item" key={app.slug}><a className={`now-value-card type-${index + 1}`} href={app.href}><img src={app.photoSmall} alt="" /><span className="now-value-text"><span className="now-value-title">{app.name}</span><span className="now-value-desc">{app.line}</span></span></a></li>)}</ul></div></section>
-    <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">출시한<br />앱</h2><ul className="latest-list">{APPS.map((app) => <li className="latest-item" key={app.slug}><a className="latest-link" href={app.href}><span className="latest-category">{app.facts[0].startsWith("안드로이드 폰") ? "폰 앱" : "태블릿 앱"}</span><span className="latest-title re-latest__title"><span className="latest-title-text">{app.name} · {app.line}</span></span></a></li>)}</ul></div></section>
+    <HomeApps />
+    <HomeCases />
     <HomeHelp />
     <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈한 뒤에도<br className="mobile" /> 내용을 직접 바꾸고<br />계속 쓰실 수 있게<br className="mobile" /> 만듭니다</p><ul className="tomorrow-list">{["/services/responsive", "/services/content-management", "/services/inquiry-reservation"].map((href, index) => <li className="tomorrow-item" key={href}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}${href}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">어떤 홈페이지가 필요하세요?<br />연락 주시면 같이 정해 드립니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/website/price`}>제작 비용</Link></div></section></div>
   </main>;
