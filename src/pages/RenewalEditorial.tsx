@@ -62,7 +62,8 @@ const SUBPAGE_MEDIA: Record<PageKey, string> = {
   seo: `${PHOTOS}/seo-wide.webp`,
 };
 const MEDIA_SLOTS = {
-  hero: `${MEDIA}/hero-apps-caption.webp`,
+  hero: `${MEDIA}/hero-apps-wide.webp`,
+  heroTall: `${MEDIA}/hero-apps-tall.webp`,
   tomorrow: [`${MEDIA}/tomorrow-01.webp`, `${MEDIA}/tomorrow-02.webp`, `${MEDIA}/tomorrow-03.webp`],
 } as const;
 type PageKey = "process" | "price" | "features" | "maintenance" | "custom" | "admin-system" | "inquiry-reservation" | "search-filter" | "content-management" | "database-api" | "responsive" | "seo";
@@ -678,6 +679,15 @@ function HeroVideo() {
   const [inView, setInView] = useState(true);
   const [slide, setSlide] = useState(0);
   const [slideTransitioning, setSlideTransitioning] = useState(false);
+  // 폰(767px 이하)은 세로판: 제목이 가운데 가로 전체를 덮으므로 기기를 위아래에 둔 영상. 처음 그리기(프리렌더)는 가로판.
+  const [tall, setTall] = useState(false);
+  useEffect(() => {
+    const phone = window.matchMedia("(max-width: 767px)");
+    const pick = () => setTall(phone.matches);
+    pick();
+    phone.addEventListener("change", pick);
+    return () => phone.removeEventListener("change", pick);
+  }, []);
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
@@ -690,7 +700,7 @@ function HeroVideo() {
     if (!video) return;
     if (paused || !inView) video.pause(); else void video.play().catch(() => undefined);
     video.closest(".greeting")?.classList.toggle("pause", paused || !inView);
-  }, [paused, inView]);
+  }, [paused, inView, tall]);
   useEffect(() => {
     if (paused || !inView) return;
     let transitionTimer = 0;
@@ -710,7 +720,7 @@ function HeroVideo() {
   }, [paused, inView]);
   return <>
     <div className="greeting-player">
-      <video ref={videoRef} className="greeting-video" src={`${MEDIA}/hero-apps-caption.mp4`} poster={MEDIA_SLOTS.hero} muted loop playsInline preload="metadata" aria-hidden="true" />
+      <video ref={videoRef} className="greeting-video" src={`${MEDIA}/${tall ? "hero-apps-tall" : "hero-apps-wide"}.mp4`} poster={tall ? MEDIA_SLOTS.heroTall : MEDIA_SLOTS.hero} muted loop playsInline preload="metadata" aria-hidden="true" />
       <div className="greeting-dim re-greeting__dim" />
       <div className="greeting-swiper re-greeting__slides" aria-live="polite">
         <div className="swiper">
