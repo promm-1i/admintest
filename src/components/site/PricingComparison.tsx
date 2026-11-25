@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowDown, ArrowRight, Send, Info } from "lucide-react";
+import { ArrowDown, Send, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import {
-  TEMPLATE_PACKAGES,
+  WEBSITE_PACKAGES,
   PRICING_ROWS,
   PRODUCTION_PERIOD,
   PERIOD_INFO,
@@ -57,7 +57,7 @@ function InfoTip({ lines, side = "bottom" }: { lines: string[]; side?: "top" | "
 type Frame = { left: number; top: number; width: number; height: number };
 
 /**
- * 템플릿 요금제(기본형 · 랜딩형) 비교표.
+ * 홈페이지 제작 요금 비교표.
  * 열 강조는 셀 테두리 대신 절대배치 프레임 하나가 열 사이를 미끄러져 이동하는 방식이라
  * hover 시 레이아웃이 전혀 흔들리지 않는다.
  */
@@ -102,14 +102,14 @@ export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
             className="w-full min-w-[560px] border-separate border-spacing-0 text-sm"
             onMouseLeave={() => setActive(null)}
           >
-            <caption className="sr-only">템플릿 패키지별 제공 항목과 제작 비용 비교</caption>
+            <caption className="sr-only">제작 방식별 제공 항목과 제작 비용 비교</caption>
 
             <thead>
               <tr>
                 <th scope="col" className="w-[200px] px-4 pb-3 text-left align-bottom">
                   <span className="text-xs font-semibold text-muted-foreground">구분</span>
                 </th>
-                {TEMPLATE_PACKAGES.map((p, i) => (
+                {WEBSITE_PACKAGES.map((p, i) => (
                   <th
                     key={p.key}
                     ref={(el) => {
@@ -179,7 +179,7 @@ export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
               {/* 합계로 내려가는 화살표 */}
               <tr>
                 <td className="border-t border-border" />
-                {TEMPLATE_PACKAGES.map((p, i) => (
+                {WEBSITE_PACKAGES.map((p, i) => (
                   <td
                     key={`${p.key}-arrow`}
                     onMouseEnter={() => setActive(i)}
@@ -203,7 +203,7 @@ export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
                 >
                   기본 제작 비용
                 </th>
-                {TEMPLATE_PACKAGES.map((p, i) => (
+                {WEBSITE_PACKAGES.map((p, i) => (
                   <td
                     key={`${p.key}-total`}
                     onMouseEnter={() => setActive(i)}
@@ -225,7 +225,7 @@ export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
                   제작 기간
                   <InfoTip lines={PERIOD_INFO} side="top" />
                 </th>
-                {TEMPLATE_PACKAGES.map((p, i) => (
+                {WEBSITE_PACKAGES.map((p, i) => (
                   <td
                     key={`${p.key}-period`}
                     onMouseEnter={() => setActive(i)}
@@ -255,18 +255,6 @@ export function PricingComparison({ bare = false }: { bare?: boolean } = {}) {
 
       {!bare && (
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <Button asChild size="lg" variant="outline" className="gap-1.5 font-semibold">
-          <Link to="/templates?style=basic-template">
-            기본형 살펴보기
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </Button>
-        <Button asChild size="lg" variant="outline" className="gap-1.5 font-semibold">
-          <Link to="/templates?style=landing-template">
-            랜딩형 살펴보기
-            <ArrowRight className="h-3.5 w-3.5" />
-          </Link>
-        </Button>
         <Button asChild size="lg" className="gap-2 font-bold">
           <Link to="/contact">
             <Send className="h-4 w-4" />

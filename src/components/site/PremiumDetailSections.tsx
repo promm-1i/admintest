@@ -16,7 +16,7 @@ import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
 import { getTemplateFolder } from "@/lib/templateFolder";
 import { Reveal } from "@/pages/services/previewKit";
 
-/** 프리미엄 라인에 공통으로 들어가는 제작 사양 — 기본형·랜딩형과 구분되는 지점만 적는다 */
+/** 프리미엄 라인에 공통으로 들어가는 제작 사양 */
 const PREMIUM_SPECS: { icon: LucideIcon; title: string; body: string }[] = [
   {
     icon: Ruler,
@@ -69,10 +69,6 @@ const PREMIUM_STEPS = [
 ];
 
 const PREMIUM_FAQ = [
-  {
-    q: "원페이지 기본 · 랜딩과 무엇이 다른가요?",
-    a: "기능은 같습니다. 관리자 모드 · 반응형 제작 · 데이터베이스 · 문자 알림은 64만원 원페이지 기본에도 그대로 들어갑니다. 다른 것은 완성된 화면을 고르시는지, 브랜드에 맞춰 짓는지입니다. 원페이지 기본과 랜딩은 만들어 둔 화면에 문구 · 사진만 바꿔 한 페이지로 엽니다. 맞춤 제작은 섹션 순서와 개수를 사장님 사업에 맞춰 다시 잡고, 브랜드 색 · 글꼴을 바꾸고, 사진을 새로 만듭니다. 관리자도 다루실 데이터에 맞춰 설계해 조건 검색과 직원별 권한까지 넣습니다. 예약 접수 관리도 맞춤 제작에만 들어갑니다.",
-  },
   {
     q: "이 디자인에서 색이나 구성을 바꿀 수 있나요?",
     a: "네. 이 화면은 출발점입니다. 브랜드 색 · 메뉴 구성 · 섹션 순서 · 사진 분위기를 원하시는 대로 조정해 제작합니다.",

@@ -1,22 +1,17 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { ArrowLeft, Info, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { premiumSampleOf } from "@/lib/availableIndustries";
 
-/**
- * 업종별 솔루션 데모의 "고객 홈페이지" 공용 화면.
- *
- * public/templates/{slug}-landing/ 에 배포된 실제 랜딩형 템플릿을 iframe 으로
- * 그대로 보여주고, 진입 시 "이건 예시일 뿐, 실제 구축은 완전 커스텀" 안내 팝업을
- * 한 번 띄운다. (상단 바의 안내 버튼으로 언제든 다시 볼 수 있다)
- */
+/** 업종별 솔루션 데모의 고객 홈페이지 공용 화면. */
 export default function TemplateCustomerSite({
   slug,
   name,
   adminHref,
 }: {
-  /** public/templates/{slug}-landing/ 의 slug */
+  /** 솔루션 업종 키 */
   slug: string;
   /** 상단 바에 표시할 데모 업체명 */
   name: string;
@@ -31,6 +26,8 @@ export default function TemplateCustomerSite({
   const [notice, setNotice] = useState(() => window.self === window.top);
   // 서비스 소개 쪽 링크가 붙인 #listings 같은 위치를 안쪽 템플릿까지 넘긴다
   const { hash } = useLocation();
+  const sample = premiumSampleOf(slug === "realestate" ? "real-estate" : slug === "clinic" ? "hospital" : slug);
+  if (!sample?.liveUrl) return <Navigate to={adminHref} replace />;
 
   return (
     <div className="fixed inset-0 z-40 flex flex-col bg-neutral-950">
@@ -57,9 +54,9 @@ export default function TemplateCustomerSite({
         </button>
       </div>
 
-      {/* 실제 랜딩형 템플릿 */}
+      {/* 프리미엄 홈페이지 */}
       <iframe
-        src={`/templates/${slug}-landing/${hash}`}
+        src={`${sample.liveUrl}${hash}`}
         onLoad={(e) => {
           // 템플릿은 자바스크립트로 그려져서 브라우저가 #위치를 못 찾고 맨 위에 멈춘다 — 칸이 그려질 때까지 기다렸다 내린다
           const doc = e.currentTarget.contentDocument;

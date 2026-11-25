@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { MessageSquare, PenTool, Code2, Rocket, ArrowRight } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SectionHeader } from "@/components/sections/SectionHeader";
-import { TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
+import { WEBSITE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import { cn } from "@/lib/utils";
 
 /**
@@ -56,7 +56,7 @@ export function ProcessPricingBand() {
         {/* 가격 — 비교가 목적이라 같은 크기 카드가 맞다 */}
         <div className="mt-16 border-t border-border pt-12">
           <div className="grid gap-4 sm:grid-cols-2">
-            {TEMPLATE_PACKAGES.map((p, i) => (
+            {WEBSITE_PACKAGES.map((p, i) => (
               <FadeIn key={p.key} delay={i * 60} className="h-full">
                 <div
                   className={cn(

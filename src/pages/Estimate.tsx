@@ -6,23 +6,18 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { Reveal } from "@/pages/services/previewKit";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { SAMPLES } from "@/lib/samples";
-import { INDUSTRY_LANDING } from "@/lib/industryLanding";
+import { WEBSITE_PACKAGES } from "@/lib/templatePackages";
 import { cn } from "@/lib/utils";
 
 const SMS_PHONE = "01048944905";
 
-const STYLES = [
-  { key: "basic", name: "원페이지 기본", design: 0, desc: "소개부터 문의까지 한 페이지, 연출 없음" },
-  { key: "landing", name: "원페이지 랜딩", design: 500_000, desc: "한 페이지에 내릴 때 나타나는 연출과 움직임을 더함", hot: true },
-] as const;
+const STYLES = WEBSITE_PACKAGES.map((item) => ({ key: item.key, name: item.label, total: item.total, desc: item.desc }));
 
 const DOMAINS = [
   { key: "free", name: "무료 도메인 제공", desc: "com · co.kr · kr 등 여러 도메인 중 원하시는 것으로 — 첫 1년 무료" },
   { key: "own", name: "보유 도메인 연동", desc: "이미 쓰고 계신 도메인이 있다면 그대로 연결해 드립니다" },
 ] as const;
 
-/** 호스팅은 따로 받지 않는다. 기존 호스팅 1년 24만원은 아래 두 항목에 12만원씩 녹였다. */
-const FIXED = { feature: 420_000, setup: 220_000 };
 
 const won = (n: number) => n.toLocaleString("ko-KR");
 
@@ -35,33 +30,24 @@ export default function Estimate() {
 
   const industries = useMemo(
     () =>
-      Object.keys(INDUSTRY_LANDING)
-        .map((key) => {
-          const s = SAMPLES.find(
-            (x) => x.industryKey === key && x.type.includes("landing-template") && !x.designCode,
-          );
-          return s ? { key, label: s.industry.replace(" 홈페이지", "") } : null;
-        })
-        .filter((x): x is NonNullable<typeof x> => Boolean(x))
+      Array.from(new Map(SAMPLES.filter((sample) => sample.premium && sample.industryKey).map((sample) => [sample.industryKey!, { key: sample.industryKey!, label: sample.industry.replace(" 홈페이지", "") }])).values())
         .sort((a, b) => a.label.localeCompare(b.label, "ko")),
     [],
   );
 
   const [industry, setIndustry] = useState(industries[0]?.key ?? "");
-  const [style, setStyle] = useState<(typeof STYLES)[number]["key"]>("landing");
+  const [style, setStyle] = useState<(typeof STYLES)[number]["key"]>("premium");
   const [domain, setDomain] = useState<(typeof DOMAINS)[number]["key"]>("free");
 
   const styleInfo = STYLES.find((s) => s.key === style)!;
   const industryLabel = industries.find((i) => i.key === industry)?.label ?? "";
 
   const domainInfo = DOMAINS.find((d) => d.key === domain)!;
-  // 항목별 단가는 화면에 내지 않는다 (templatePackages.ts 머리말 2026-10-05 참고).
-  // cost 는 총액 계산에만 쓰고, 손님에게는 들어가는지 아닌지(show)만 보여준다.
   const rows = [
-    { name: `랜딩형 연출 (${styleInfo.name})`, cost: styleInfo.design, note: styleInfo.design === 0 ? "연출 없음" : "", show: styleInfo.design === 0 ? "없음" : "포함" },
+    { name: styleInfo.name, cost: styleInfo.total, note: "", show: "포함" },
     { name: domain === "free" ? "도메인 (신규)" : "보유 도메인 연동", cost: 0, note: domain === "free" ? "첫 1년 무료" : "연동 무료", show: "포함" },
-    { name: "업종 전용 기능", cost: FIXED.feature, note: `${industryLabel} 맞춤`, show: "포함" },
-    { name: "셋팅 비용", cost: FIXED.setup, note: "도메인 연결 · 서버 설정 · 초기 등록", show: "포함" },
+    { name: "업종 전용 기능", cost: 0, note: `${industryLabel} 맞춤`, show: "포함" },
+    { name: "셋팅 비용", cost: 0, note: "도메인 연결 · 서버 설정 · 초기 등록", show: "포함" },
   ];
   const total = rows.reduce((a, r) => a + r.cost, 0);
 
@@ -118,15 +104,10 @@ export default function Estimate() {
                     style === s.key ? "border-primary bg-primary/5 ring-1 ring-primary/30" : "border-border hover:border-primary/40",
                   )}
                 >
-                  {"hot" in s && s.hot && (
-                    <span className="absolute -top-2.5 left-4 rounded-full bg-primary px-2.5 py-0.5 text-[10px] font-bold text-primary-foreground">
-                      추천
-                    </span>
-                  )}
                   <p className="text-sm font-bold text-foreground">{s.name}</p>
                   <p className="mt-1 text-xs leading-relaxed text-muted-foreground break-keep">{s.desc}</p>
                   <p className="mt-2 text-xs font-bold text-primary">
-                    {`${won(FIXED.feature + FIXED.setup + s.design)}원~`}
+                    {`${won(s.total)}원~`}
                   </p>
                 </button>
               ))}
@@ -165,14 +146,7 @@ export default function Estimate() {
               {won(total)}
               <span className="ml-1 text-base font-bold text-background/70">원~</span>
             </p>
-            <p className="mt-1 text-xs text-background/55">VAT 별도 · 제작 기간 영업일 7일~</p>
-            <p className="mt-2 text-xs leading-relaxed text-background/55 break-keep">
-              메뉴별로 페이지를 나눈 홈페이지는{" "}
-              <Link to="/web-solutions" className="font-semibold text-background/80 underline underline-offset-2">
-                맞춤 제작(150만원부터)
-              </Link>
-              에서 제작합니다.
-            </p>
+            <p className="mt-1 text-xs text-background/55">VAT 별도 · 제작 일정 상담 후 확정</p>
 
             <ul className="mt-5 space-y-2 border-t border-background/15 pt-5">
               {rows.map((r) => (

@@ -1,101 +1,30 @@
-/**
- * 홈페이지 템플릿 요금제 구조.
- *
- * 모든 패키지에 공통으로 들어가는 필수 비용(셋팅 22만 + 업종 전용 기능 42만 = 64만)에
- * 패키지별 디자인 비용을 더해 최종 시작가가 결정된다. 모든 금액은 VAT 별도.
- *
- * 2026-09-10, 구분 축을 "반응형 유무"에서 "페이지 수"로 바꿨다. 템플릿 154종을 실측한 결과
- * 기본형 템플릿도 미디어쿼리와 viewport가 이미 다 들어 있어(moto-a-basic은 랜딩형과 @media 수가
- * 동일) 반응형을 별도로 받을 근거가 없었다. 반응형은 전 등급 기본 제공으로 올렸다.
- *
- * 2026-10-05, 프리미엄을 150만원으로 내리면서 서브페이지 분리 두 패키지(94만 · 114만)를 없앴다.
- * 프리미엄과 36만원 차이밖에 안 나서다. 템플릿은 원페이지 두 가지만 두고, 메뉴별로 페이지를
- * 나눠야 하는 손님은 프리미엄 라인으로 보낸다. 데모가 원래 여러 쪽인 템플릿(모토 · 식당 등)은
- * 그 쪽까지 그대로 포함한다 — 없어진 것은 원페이지를 나눠 주는 30만원 옵션뿐이다.
- *
- * 2026-10-05(같은 날 재조정), 사용자 결정으로 상품 줄을 세 개로 못박았다 —
- * 기본형 64만 · 랜딩형(원페이지) 114만 · 프리미엄 디자인 150만. 랜딩형 연출 비용을
- * 20만에서 50만으로 올려 랜딩형 총액을 84만 → 114만으로 맞춘 것이다.
- * 위 문단에서 없앤 114만이 이번엔 "원페이지를 나눈 값"이 아니라 "랜딩형 자체의 값"으로
- * 돌아왔다. 프리미엄과 다시 36만원 간격이 되므로, 두 줄의 차이는 금액이 아니라
- * "원페이지냐 여러 쪽이냐"로 설명해야 한다.
- *
- * 2026-10-05, 항목별 단가를 화면에서 내렸다. 요금표는 "무엇이 들어가는지"만 보이고
- * "얼마짜리인지"는 안 보인다 — 숫자는 맨 위 총액(64 · 114 · 150)만 남는다.
- * 낱개 단가를 깔면 "업종 기능 빼면 42만원 깎아주나요"가 들어오는데 못 빼는 항목이라
- * 흥정만 붙는다. 같은 판단을 RenewalEditorial 커스텀 탭에는 이미 적용해 두고 있었다.
- * 다만 **포함 범위는 그대로 공개한다** — 관리자 · 반응형 · 도메인 · 문자 · DB 가
- * 다 들어간다는 사실이 경쟁 우위이고, 이 가격대 손님이 제일 무서워하는 게 숨은 비용이다.
- * 가린 것은 원가 분해뿐이고 받는 것은 전부 보인다. designCost · total 은 계산에 계속 쓰이니
- * 지우지 말 것.
- *
- * 2026-10-06, 사용자 결정으로 세 줄을 가르는 축을 "원페이지냐 아니냐"로 못박았다.
- * 이름도 화면에서 **원페이지 기본 / 원페이지 랜딩**으로 바꿨다 — 프리미엄(150만)은
- * 상세 페이지가 있고 나중에 늘릴 수 있는 쪽이다. 요금표의 "페이지 구성" 행이
- * "템플릿에 있는 페이지 그대로"라 한 페이지 설명과 어긋나 있어 같이 고쳤다.
- *
- * 다만 **데모가 원래 여러 쪽인 시안이 18벌 있다**(moto 5쌍 · restaurant 5 · agency-a ·
- * interior-b 쌍). 10-05 결정대로 그 쪽까지 포함해 파는 건 그대로 두고, 해당 시안
- * 상세에만 "이 시안은 N쪽이 그대로 포함됩니다" 배지를 띄워 오해를 막는다
- * (TemplateSpecPanel). 템플릿 349벌의 제목에 쓰인 "기본형/랜딩형 템플릿"은
- * 카탈로그 작명이라 건드리지 않았다 — 패키지 이름과 다른 축이다.
- */
-
-const MAN = 10_000;
-
-/**
- * 패키지와 무관하게 공통으로 들어가는 필수 항목.
- *
- * 2026-09-21, 호스팅을 청구 항목에서 뺐다. 고객이 직접 하면 들지 않는 비용이라
- * 따로 받을 근거가 없다. 대신 기존 호스팅 1년 24만원을 남은 두 항목에 12만원씩
- * 균등하게 녹여 총액(64만)은 그대로 둔다. 첫 해 호스팅은 금액 안에 포함된다.
- */
-export const BASE_COST = {
-  setup: 22 * MAN,
-  industryFeature: 42 * MAN,
-};
-
-const BASE_TOTAL = BASE_COST.setup + BASE_COST.industryFeature; // 64만
-
-/** 랜딩형 연출(스크롤 등장 · 인터랙션) 추가 비용 */
-const LANDING_COST = 50 * MAN;
-
-export type TemplatePackage = {
+/** 홈페이지 제작 요금. 모든 금액은 VAT 별도. */
+export type WebsitePackage = {
   key: string;
   label: string;
-  /** 랜딩형 연출 비용 (기본형은 무료) */
-  designCost: number;
-  /** 공통 필수 비용 + 연출 비용 */
   total: number;
   badge?: string;
   badgeTone?: "value" | "recommended";
   desc: string;
 };
 
-export const TEMPLATE_PACKAGES: TemplatePackage[] = [
+export const WEBSITE_PACKAGES: WebsitePackage[] = [
   {
-    key: "basic",
-    label: "원페이지 기본",
-    designCost: 0,
-    total: BASE_TOTAL,
-    badge: "가성비 패키지",
-    badgeTone: "value",
-    desc: "소개부터 문의까지 한 페이지에 담는 구성",
+    key: "premium",
+    label: "프리미엄 디자인",
+    total: 1_500_000,
+    desc: "디자인과 사진까지 새로 만드는 브랜드 사이트 — 서브페이지 확장 가능",
   },
   {
-    key: "landing",
-    label: "원페이지 랜딩",
-    designCost: LANDING_COST,
-    total: BASE_TOTAL + LANDING_COST,
-    badge: "추천 패키지",
-    badgeTone: "recommended",
-    desc: "한 페이지에 내릴 때 나타나는 연출과 움직임을 더한 구성",
+    key: "shop",
+    label: "쇼핑몰",
+    total: 2_000_000,
+    desc: "상품 등록부터 결제·회원까지 직접 판매하는 구성",
   },
 ];
 
-/** 만원 단위로 읽기 좋게 (640000 → "64만원") */
 export function formatMan(won: number): string {
-  return `${(won / MAN).toLocaleString("ko-KR")}만원`;
+  return `${(won / 10_000).toLocaleString("ko-KR")}만원`;
 }
 
 export type PricingRow = {
@@ -107,7 +36,7 @@ export type PricingRow = {
   info?: string[];
   /** 표 아래쪽 행은 툴팁이 표 밖으로 잘리지 않도록 위로 연다 */
   infoSide?: "top" | "bottom";
-  /** TEMPLATE_PACKAGES와 같은 순서 */
+  /** WEBSITE_PACKAGES와 같은 순서 */
   values: [string, string];
 };
 
@@ -122,19 +51,8 @@ export const PRICING_ROWS: PricingRow[] = [
     values: ["1년 무료", "1년 무료"],
   },
   {
-    label: "랜딩형 연출",
-    note: "내릴 때 나타나는 효과 · 눌렀을 때 반응",
-    values: ["없음", "포함"],
-  },
-  {
     label: "페이지 구성",
-    note: "한 페이지에 모두 담습니다",
-    info: [
-      "소개 · 서비스 · 후기 · 문의를 한 페이지에서 차례로 이어 보여 줍니다.",
-      "시안에 따라 서브 페이지가 이미 들어 있는 경우가 있고, 그때는 그 페이지까지 그대로 제작합니다.",
-      "메뉴별로 페이지를 나누거나 나중에 더 늘리시려면 맞춤 제작(150만원부터)으로 만듭니다.",
-    ],
-    values: ["한 페이지", "한 페이지"],
+    values: ["메뉴별 상세 페이지 · 확장 가능", "상품 등록 · 결제 · 회원"],
   },
   {
     label: "업종 전용 기능",
@@ -173,4 +91,4 @@ export const PRICING_ROWS: PricingRow[] = [
 /** 표 맨 아래 "제작 기간" 행 툴팁 */
 export const PERIOD_INFO = ["진행 자료 전달과 수정 범위에 따라", "제작 기간이 달라질 수 있습니다."];
 
-export const PRODUCTION_PERIOD = "영업일 7일 ~";
+export const PRODUCTION_PERIOD = "상담 후 확정";

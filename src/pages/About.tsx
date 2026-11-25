@@ -29,7 +29,6 @@ const CORE_VALUES = [
 const STAT_ITEMS = [
   { value: "1:1", label: "담당자 직통 피드백" },
   { value: "100%", label: "PC · 모바일 반응형 대응" },
-  { value: "7일~", label: "템플릿 제작 기간 (영업일)" },
   { value: "24시간", label: "문의 접수 · 1일 이내 회신" },
 ];
 
@@ -57,7 +56,7 @@ export default function About() {
       </Reveal>
 
       <div className="border-y border-border bg-secondary/20 py-12">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 px-4 lg:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-x-6 gap-y-8 px-4 lg:grid-cols-3">
           {STAT_ITEMS.map((stat, i) => (
             <FadeIn key={stat.label} direction="up" delay={i * 90}>
               <p className="text-3xl font-extrabold tracking-tight text-primary sm:text-4xl">{stat.value}</p>

@@ -1,24 +1,16 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { ArrowRight, Check, Send, Smartphone, Calculator } from "lucide-react";
+import { ArrowRight, Check, Send, Calculator } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Reveal } from "@/pages/services/previewKit";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { SAMPLES } from "@/lib/samples";
+import { premiumSampleOf, AVAILABLE_INDUSTRIES } from "@/lib/availableIndustries";
+import { getTemplateFolder } from "@/lib/templateFolder";
 import { TEMPLATE_SECTIONS } from "@/lib/templateSections";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
 
-/** industryKey → 랜딩형 대표 샘플. 추가 디자인 시안(designCode 지정)은 대표에서 제외한다 */
-function landingSampleOf(key: string) {
-  return SAMPLES.find(
-    (s) => s.industryKey === key && s.type.includes("landing-template") && !s.designCode,
-  );
-}
-
-/** 가격 오름차순. 반응형은 전 등급 기본 제공이라 구분 축이 아니다 — templatePackages.ts 참고 */
 const PACKAGES = [
-  { name: "원페이지 기본", price: "64만원~", note: "가성비 패키지" },
-  { name: "원페이지 랜딩", price: "114만원~", note: "추천" },
+  { name: "프리미엄 디자인", price: "150만원~", note: "" },
 ];
 
 /**
@@ -28,23 +20,23 @@ const PACKAGES = [
 export default function IndustryLanding() {
   const { key = "" } = useParams();
   const copy = INDUSTRY_LANDING[key];
-  const sample = landingSampleOf(key);
+  const sample = premiumSampleOf(key);
 
   usePageTitle(
-    copy ? `${copy.keyword} — 64만원부터, 영업일 7일 | NOVERIQ` : "업종별 홈페이지 제작 | NOVERIQ",
+    copy ? `${copy.keyword} — 150만원부터 | NOVERIQ` : "업종별 홈페이지 제작 | NOVERIQ",
     copy
-      ? `${copy.intro} 도메인 · 관리자까지 포함, 영업일 7일 제작. 실제 화면을 보고 시작하세요.`
+      ? `${copy.intro} 도메인 · 관리자 포함.`
       : undefined,
   );
 
-  if (!copy || !sample) return <Navigate to="/homepage" replace />;
+  if (!copy || !sample) return <Navigate to="/web-solutions" replace />;
 
   const label = sample.industry.replace(" 홈페이지", "");
-  const slug = sample.liveUrl?.match(/\/templates\/([a-z]+)-/)?.[1] ?? "";
+  const slug = getTemplateFolder(sample) ?? "";
   const shots = (TEMPLATE_SECTIONS[slug] ?? []).slice(0, 2);
-  const others = Object.keys(INDUSTRY_LANDING)
+  const others = AVAILABLE_INDUSTRIES
     .filter((k) => k !== key)
-    .map((k) => ({ k, s: landingSampleOf(k) }))
+    .map((k) => ({ k, s: premiumSampleOf(k) }))
     .filter((x) => x.s)
     .slice(0, 23);
 
@@ -76,14 +68,14 @@ export default function IndustryLanding() {
             </Link>
           </Button>
           <span className="text-sm text-muted-foreground">
-            기본형 <b className="text-foreground">64만원~</b> · 영업일 7일
+            프리미엄 디자인 <b className="text-foreground">150만원~</b>
           </span>
         </div>
       </Reveal>
 
       {/* 실물 화면 */}
       <FadeIn direction="up" delay={100} className="mt-10">
-        <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+        <div className={`grid gap-4 ${shots.length ? "lg:grid-cols-[1.4fr_1fr]" : ""}`}>
           <Link to={`/samples/${sample.slug}`} className="group relative block overflow-hidden rounded-2xl border border-border shadow-xs">
             <img
               src={sample.image}
@@ -136,21 +128,7 @@ export default function IndustryLanding() {
       </section>
 
       {/* 모바일 + 가격 */}
-      <section className="mt-16 grid gap-6 lg:grid-cols-[1fr_1.1fr]">
-        <FadeIn direction="up" className="flex items-center gap-6 rounded-2xl bg-foreground p-7 text-background">
-          <div className="w-[132px] shrink-0 overflow-hidden rounded-[20px] border-[5px] border-black/80 bg-black shadow-xl">
-            <img src={`/thumbs/mobile/${slug}-1.jpg`} alt="모바일 화면" loading="lazy" className="aspect-[390/780] w-full object-cover object-top" />
-          </div>
-          <div>
-            <p className="flex items-center gap-2 text-xs font-mono font-semibold uppercase tracking-widest text-background/60">
-              <Smartphone className="h-3.5 w-3.5" /> MOBILE
-            </p>
-            <p className="mt-2 text-lg font-bold break-keep">손님 절반은 폰으로 봅니다</p>
-            <p className="mt-2 text-sm leading-relaxed text-background/70 break-keep">
-              같은 홈페이지가 모바일에 맞게 자동으로 재배치되고, 전화 · 문자 버튼이 하단에 고정됩니다.
-            </p>
-          </div>
-        </FadeIn>
+      <section className="mt-16 grid gap-6 ">
         <FadeIn direction="up" delay={90} className="rounded-2xl border border-border bg-card p-7">
           <h2 className="text-lg font-bold">제작 비용 (VAT 별도)</h2>
           <p className="mt-1 text-xs text-muted-foreground">셋팅과 업종 전용 기능이 모두 포함된 금액입니다.</p>
@@ -178,7 +156,7 @@ export default function IndustryLanding() {
       <Reveal className="mt-16 rounded-2xl border border-border bg-secondary/40 p-8 text-center sm:p-10">
         <h2 className="text-xl font-bold sm:text-2xl break-keep">{label} 홈페이지, 이 화면 그대로 시작할 수 있습니다</h2>
         <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground break-keep">
-          상호 · 주소 · 가격만 알려주시면 문구와 사진 구성은 저희가 다듬어 드립니다. 영업일 7일이면 오픈합니다.
+          상호 · 주소 · 가격만 알려주시면 문구와 사진 구성은 저희가 다듬어 드립니다. 제작 일정은 상담 후 확정합니다.
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <Button asChild className="gap-1.5 font-bold">
@@ -188,7 +166,7 @@ export default function IndustryLanding() {
             </Link>
           </Button>
           <Button asChild variant="outline" className="gap-1.5 font-bold">
-            <Link to={sample.liveUrl ?? "/templates"} target="_blank">
+            <Link to={sample.liveUrl ?? "/web-solutions"} target="_blank">
               실제 사이트 열어보기
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>

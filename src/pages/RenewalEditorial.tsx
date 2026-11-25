@@ -1,7 +1,7 @@
 import type React from "react";
 import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, Route, Routes, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
 import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, isStaticPage, type MainNavEntry } from "@/components/site/navData";
@@ -12,6 +12,7 @@ const CONTACT_EMAIL = "6gsmake@gmail.com";
 import { SAMPLES, getPremiumDesigns, getPremiumCategories } from "@/lib/samples";
 import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
+import { AVAILABLE_INDUSTRIES } from "@/lib/availableIndustries";
 import { searchSite, type SearchHit } from "@/lib/siteSearch";
 import { PAGE_EXTRAS, type ExtraBlock } from "@/lib/renewalExtras";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -34,7 +35,7 @@ const LEGACY_SERVICE_BODY: Record<string, ReturnType<typeof lazy>> = {
 };
 
 const CustomBuildPreviewSection = lazy(() => import("@/components/sections/CustomBuildPreviewSection").then((m) => ({ default: m.CustomBuildPreviewSection })));
-import { TEMPLATE_PACKAGES, formatMan } from "@/lib/templatePackages";
+import { WEBSITE_PACKAGES, formatMan } from "@/lib/templatePackages";
 import { PricingComparison } from "@/components/site/PricingComparison";
 import "./RenewalEditorial.css";
 
@@ -511,7 +512,7 @@ const LANE_SOFTEN = ["far", "far", "far", "far", "far", "mid", "near", ""];
 function HomeLane() {
   const root = useRoot();
   const stageRef = useRef<HTMLDivElement>(null);
-  // 같은 사진을 쓰는 기본형·랜딩형이 나란히 놓이면 중복으로 보인다. 사진 기준으로 한 번만 쓴다.
+  // 같은 사진은 한 번만 쓴다.
   const covers = useMemo(() => {
     const seen = new Set<string>();
     const list: string[] = [];
@@ -1136,7 +1137,7 @@ function StandardPage({ page, path }: { page: ContentPage; path: string }) {
 
 function PriceDetail({ page, path }: { page: ContentPage; path: string }) {
   const root = useRoot();
-  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{TEMPLATE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="맞춤 제작"><div className="re-premium-price"><h3>150만원부터</h3><span>메뉴별 상세 페이지가 있고 나중에 더 늘릴 수 있습니다. 포트폴리오에서 출발해 섹션 구성과 브랜드 색 · 글꼴을 다시 잡고 사진을 새로 만듭니다</span><Link to={`${root}/web-solutions`}>포트폴리오 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{WEBSITE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="맞춤 제작"><div className="re-premium-price"><h3>150만원부터</h3><span>메뉴별 상세 페이지가 있고 나중에 더 늘릴 수 있습니다. 포트폴리오에서 출발해 섹션 구성과 브랜드 색 · 글꼴을 다시 잡고 사진을 새로 만듭니다</span><Link to={`${root}/web-solutions`}>포트폴리오 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
 }
 
 const BOARD_PAGE_SIZE = 10;
@@ -1155,18 +1156,18 @@ function useBoardPage<T>(items: T[]) {
   return { page: safe, total, setPage, slice: items.slice((safe - 1) * BOARD_PAGE_SIZE, safe * BOARD_PAGE_SIZE) };
 }
 
-function CatalogPage({ mode }: { mode: "templates" | "premium" }) {
+function CatalogPage() {
   const root = useRoot();
-  const { search } = useLocation(); const query = new URLSearchParams(search); const style = query.get("style"); const industry = query.get("industry"); const cat = query.get("cat");
+  const { search } = useLocation(); const query = new URLSearchParams(search); const cat = query.get("cat");
   const [keyword, setKeyword] = useState("");
   const categories = getPremiumCategories();
   const active = cat ? categories.find((group) => group.key === cat) : undefined;
-  const source = mode === "premium" ? getPremiumDesigns().map((item) => item.sample) : SAMPLES;
-  const items = source.filter((sample) => (!style || sample.type.includes(style)) && (!industry || sample.industryKey === industry) && (!active || active.items.some((d) => d.sample.slug === sample.slug)) && sample.image && (sample.industry + sample.tag).toLowerCase().includes(keyword.trim().toLowerCase()));
+  const source = getPremiumDesigns().map((item) => item.sample);
+  const items = source.filter((sample) => (!active || active.items.some((d) => d.sample.slug === sample.slug)) && sample.image && (sample.industry + sample.tag).toLowerCase().includes(keyword.trim().toLowerCase()));
   const board = useBoardPage(items);
-  const title = mode === "premium" ? "홈페이지 포트폴리오" : "디자인 템플릿";
-  const groupTitle = active ? active.label : mode === "premium" ? "전체 디자인" : style === "basic-template" ? "기본형 템플릿" : style === "landing-template" ? "랜딩형 템플릿" : "전체 템플릿";
-  return <main className="re-sub-page"><PageInfo category="디자인" title={title} /><Contents><Section wide title={groupTitle}><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label={`${title} 검색`} />{mode === "premium" && <nav className="re-board-filter" aria-label="업종"><Link to={`${root}/web-solutions`} aria-current={!cat ? "page" : undefined}>전체</Link>{categories.filter((group) => group.items.length > 0).map((group) => <Link key={group.key} to={`${root}/web-solutions?cat=${group.key}`} aria-current={cat === group.key ? "page" : undefined}>{group.label}</Link>)}</nav>}{mode === "templates" && <nav className="re-board-filter" aria-label="제작 방식"><Link to={`${root}/templates`} aria-current={!style ? "page" : undefined}>전체</Link><Link to={`${root}/templates?style=basic-template`} aria-current={style === "basic-template" ? "page" : undefined}>기본형</Link><Link to={`${root}/templates?style=landing-template`} aria-current={style === "landing-template" ? "page" : undefined}>랜딩형</Link></nav>}<ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${root}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">해당 조건의 디자인이 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
+  const title = "홈페이지 포트폴리오";
+  const groupTitle = active ? active.label : "전체 디자인";
+  return <main className="re-sub-page"><PageInfo category="디자인" title={title} /><Contents><Section wide title={groupTitle}><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label={`${title} 검색`} />{<nav className="re-board-filter" aria-label="업종"><Link to={`${root}/web-solutions`} aria-current={!cat ? "page" : undefined}>전체</Link>{categories.filter((group) => group.items.length > 0).map((group) => <Link key={group.key} to={`${root}/web-solutions?cat=${group.key}`} aria-current={cat === group.key ? "page" : undefined}>{group.label}</Link>)}</nav>}<ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${root}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">해당 조건의 디자인이 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
 }
 
 function PortfolioPage() {
@@ -1260,12 +1261,8 @@ function AboutPage() {
   </Contents></main>;
 }
 
-// 호스팅은 따로 받지 않는다. 첫 해 호스팅료 240,000원을 항목에 60,000원씩 녹여
-// 총액은 기존 /estimate 와 같게 유지한다. 기본형 640,000 / 랜딩형 1,140,000.
-// 2026-10-05 서브페이지 분리를 없애며 그 항목의 60,000원은 셋팅 비용으로 옮겼다(160,000 → 220,000).
-const EST_STYLES = [{ key: "basic", name: "원페이지 기본", cost: 60_000, desc: "소개부터 문의까지 한 페이지, 연출 없음" }, { key: "landing", name: "원페이지 랜딩", cost: 560_000, desc: "한 페이지에 내릴 때 나타나는 연출과 움직임을 더함" }] as const;
+const EST_STYLES = WEBSITE_PACKAGES.map((item) => ({ key: item.key, name: item.label, cost: item.total, desc: item.desc }));
 const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com·co.kr·kr 중 원하시는 것으로, 첫 1년 무료" }, { key: "own", name: "보유 도메인 연동", desc: "이미 쓰시는 도메인을 그대로 연결합니다" }] as const;
-const EST_FIXED = { feature: 360_000, setup: 220_000 };
 const won = (value: number) => value.toLocaleString("ko-KR");
 
 // 커스텀 탭은 항목별 단가를 보여주지 않는다. 낱개로 쪼개면 흥정이 붙고,
@@ -1296,22 +1293,20 @@ const EST_INCLUDED = ["관리자 모드", "반응형 제작", "DB · 파일 무�
 function EstimatePage() {
   const root = useRoot();
   const [mode, setMode] = useState<"package" | "custom">("package");
-  const [style, setStyle] = useState<string>("basic");
+  const [style, setStyle] = useState<string>("premium");
   const [domain, setDomain] = useState<string>("free");
   const [pages, setPages] = useState<string>("one");
   const [picked, setPicked] = useState<string[]>([]);
 
-  // 패키지 탭도 커스텀 탭과 똑같이 항목별 단가를 내지 않는다 (templatePackages.ts 머리말 2026-10-05).
-  // cost 는 합계 계산에만 쓴다.
   const rows = [
-    { label: "업종 전용 기능", cost: EST_FIXED.feature },
-    { label: "셋팅 비용", cost: EST_FIXED.setup },
+    { label: "업종 전용 기능", cost: 0 },
+    { label: "셋팅 비용", cost: 0 },
     { label: `화면 형태 · ${EST_STYLES.find((x) => x.key === style)?.name}`, cost: EST_STYLES.find((x) => x.key === style)?.cost ?? 0 },
   ];
   const total = rows.reduce((sum, row) => sum + row.cost, 0);
 
   // 고른 기능이 많을수록 복잡도가 붙으니 구간을 넓게 잡는다
-  const base = 640_000 + (EST_PAGES.find((x) => x.key === pages)?.cost ?? 0) + picked.reduce((sum, key) => sum + (EST_FEATURES.find((f) => f.key === key)?.weight ?? 0), 0);
+  const base = (picked.includes("shop") ? 2_000_000 : 1_500_000) + (EST_PAGES.find((x) => x.key === pages)?.cost ?? 0) + picked.filter((key) => key !== "shop").reduce((sum, key) => sum + (EST_FEATURES.find((f) => f.key === key)?.weight ?? 0), 0);
   const round = (value: number) => Math.round(value / 100_000) * 100_000;
   const low = round(base);
   const high = round(base * (1.25 + picked.length * 0.03));
@@ -1339,7 +1334,7 @@ function EstimatePage() {
         <div className="re-estimate__result">
           <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>포함</dd></div>)}</dl>
           <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
-          <p className="re-estimate__note">부가세 별도이며 제작 기간은 영업일 7일부터입니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다. 메뉴별로 페이지를 나눈 홈페이지는 맞춤 제작(150만원부터)으로 만듭니다.</p>
+          <p className="re-estimate__note">부가세 별도이며 제작 일정은 상담 후 확정합니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다.</p>
           <div className="re-estimate__actions"><Link to={`${root}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
         </div>
       </Section>
@@ -1398,7 +1393,7 @@ function SolutionsPage() {
 
 function IndustryPage() {
   const root = useRoot();
-  const items = Object.entries(INDUSTRY_LANDING).map(([key, value]) => ({ key, ...value }));
+  const items = Object.entries(INDUSTRY_LANDING).filter(([key]) => AVAILABLE_INDUSTRIES.includes(key)).map(([key, value]) => ({ key, ...value }));
   return <main className="re-sub-page"><PageInfo category="홈페이지 제작" title="업종별 홈페이지" /><Contents>
     <LocalNav group="홈페이지 제작" path="/homepage" />
     <Section split title="업종에 맞춰 다르게"><div className="re-step-body"><p className="re-step-text">같은 홈페이지라도 업종마다 손님이 찾는 것이 다릅니다. 렌터카는 요금, 병원은 진료 시간, 학원은 시간표입니다. 업종별로 필요한 화면과 기능을 정리해 두었습니다.</p><ul className="re-step-list"><li><Check />{`${items.length}개 업종`}</li><li><Check />업종별 자주 겪는 문제와 해결 화면</li><li><Check />해당 업종 시안 바로 보기</li></ul></div></Section>
@@ -1501,9 +1496,10 @@ function NotFound() {
   return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="페이지를 찾을 수 없습니다" /><Contents><Section><p className="re-step-text">주소가 바뀌었거나 삭제된 페이지입니다</p><p className="re-detail__live"><Link to={root}>메인으로 돌아가기<ArrowRight /></Link></p></Section></Contents></main>; }
 
 function RouteContent({ path }: { path: string }) {
+  const root = useRoot();
   if (path === "/") return <EditorialHome />;
-  if (path === "/web-solutions") return <CatalogPage mode="premium" />;
-  if (path === "/templates") return <CatalogPage mode="templates" />;
+  if (path === "/web-solutions") return <CatalogPage />;
+  if (path === "/templates" || path.startsWith("/templates/")) return <Navigate to={`${root}/web-solutions`} replace />;
   if (path === "/samples") return <PortfolioPage />;
   if (path.startsWith("/samples/")) return <SampleDetail slug={path.split("/")[2]} />;
   if (path === "/contact") return <ContactPage />;

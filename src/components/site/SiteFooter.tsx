@@ -15,12 +15,9 @@ const FOOTER_GROUPS = [
   },
   {
     // 업종 6개를 나열하던 자리 — 업종 목록은 /homepage 에서 전체를 볼 수 있어 중복이었다.
-    // 대신 실제로 고르는 단위(프리미엄 · 기본형 · 랜딩형)를 노출한다.
     title: "디자인 · 템플릿",
     links: [
       { label: "홈페이지 포트폴리오", to: "/web-solutions" },
-      { label: "기본형 템플릿", to: "/templates?style=basic-template" },
-      { label: "랜딩형 템플릿", to: "/templates?style=landing-template" },
       { label: "업종별 홈페이지", to: "/homepage" },
       { label: "제작 사례", to: "/samples" },
     ],

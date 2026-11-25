@@ -1,5 +1,6 @@
 import { SAMPLES } from "@/lib/samples";
 import { INDUSTRY_LANDING } from "@/lib/industryLanding";
+import { AVAILABLE_INDUSTRIES } from "@/lib/availableIndustries";
 import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
 
 export type SearchHit = {
@@ -54,6 +55,7 @@ function buildIndex(): SearchHit[] {
     });
   }
   for (const [key, copy] of Object.entries(INDUSTRY_LANDING)) {
+    if (!AVAILABLE_INDUSTRIES.includes(key)) continue;
     hits.push({ kind: "업종", title: copy.keyword, desc: copy.intro, href: `/homepage/${key}` });
   }
   for (const item of INDUSTRY_SHOWCASES) {

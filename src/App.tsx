@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect } from "react";
 import { trackPageView } from "@/lib/analytics";
-import { Route, Routes, Outlet, useLocation } from "react-router-dom";
+import { Route, Routes, Navigate, Outlet, useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { RenewalShell, RenewalHomeBody, RenewalPriceBody, RenewalSamplesBody, RenewalContentBody, RenewalPrivacyBody, RenewalAppsBody } from "@/pages/RenewalEditorial";
@@ -28,7 +28,6 @@ const ResponsiveService = lazy(() => import("@/pages/services/ResponsiveService"
 const SeoService = lazy(() => import("@/pages/services/SeoService"));
 const WebSolutions = lazy(() => import("@/pages/WebSolutions"));
 const DemoHub = lazy(() => import("@/pages/solutions/DemoHub"));
-const Templates = lazy(() => import("@/pages/Templates"));
 const ProcessLanding = lazy(() => import("@/pages/website/ProcessLanding"));
 const PriceLanding = lazy(() => import("@/pages/website/PriceLanding"));
 const FeaturesLanding = lazy(() => import("@/pages/website/FeaturesLanding"));
@@ -176,7 +175,8 @@ export default function App() {
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/web-solutions" element={<WebSolutions />} />
             <Route path="/web-solutions/demos" element={<DemoHub />} />
-            <Route path="/templates" element={<Templates />} />
+            <Route path="/templates" element={<Navigate to="/web-solutions" replace />} />
+            <Route path="/templates/*" element={<Navigate to="/web-solutions" replace />} />
             <Route path="/homepage" element={<IndustryIndex />} />
             <Route path="/homepage/:key" element={<IndustryLanding />} />
             <Route path="/estimate" element={<Estimate />} />

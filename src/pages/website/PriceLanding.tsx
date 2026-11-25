@@ -6,7 +6,6 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { KAKAO_CHANNEL_URL } from "@/lib/contact";
 import { Reveal } from "@/pages/services/previewKit";
 import { PricingComparison } from "@/components/site/PricingComparison";
-import { LineComparison } from "@/components/site/LineComparison";
 
 const EXTRA_FEATURES = [
   { name: "회원 기능 (가입 · 로그인 · 마이페이지)", price: "별도 협의" },
@@ -31,7 +30,7 @@ const QUOTE_FACTORS = [
   { label: "자료 정리 정도", desc: "문구·사진 같은 원고가 정리되어 있을수록 제작 기간과 비용이 줄어듭니다." },
 ];
 
-/** 전 등급 기본 제공 — LineComparison의 SAME_IN_BOTH와 같은 목록이라 함께 고친다 */
+/** 기본 제공 항목 */
 const INCLUDED_BY_DEFAULT = [
   "관리자 모드 (공지 · 문의 · 콘텐츠 관리)",
   "반응형 제작 (PC · 태블릿 · 모바일)",
@@ -117,16 +116,9 @@ export default function PriceLanding() {
 
         {/* 제작방식 2가지 (요약, 상세는 제작 방법 페이지) */}
         <Reveal className="mt-20">
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식 2가지</h2>
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식</h2>
         </Reveal>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2">
-          <Reveal delay={80} className="rounded-xl border border-border bg-secondary/30 p-6">
-            <p className="text-xs font-bold tracking-wide text-muted-foreground">TEMPLATE</p>
-            <h3 className="mt-1.5 text-lg font-bold text-foreground">템플릿으로 빠르게 제작</h3>
-            <p className="mt-2 text-base leading-relaxed text-muted-foreground break-keep">
-              검증된 디자인을 선택해 더 빠르고 합리적인 비용으로 시작합니다.
-            </p>
-          </Reveal>
+        <div className="mt-8 grid gap-5">
           <Reveal delay={160} className="rounded-xl border border-primary/40 bg-primary/[0.04] p-6">
             <p className="text-xs font-bold tracking-wide text-primary">CUSTOM</p>
             <h3 className="mt-1.5 text-lg font-bold text-foreground">처음부터 맞춤 제작</h3>
@@ -175,18 +167,11 @@ export default function PriceLanding() {
           </ul>
         </Reveal>
 
-        {/* 템플릿 라인 ↔ 프리미엄 라인 — "기능이 다 기본이면 프리미엄은 왜?"에 바로 답하는 자리 */}
-        <Reveal className="mt-20">
-          {/* 바로 위 "기본으로 제공되는 것"과 같은 목록이 되므로 공통 항목 블록은 끈다 */}
-          <LineComparison showSameBlock={false} />
-        </Reveal>
-
         {/* 필요하면 추가할 수 있는 기능 */}
         <Reveal className="mt-20">
           <h2 className="text-3xl font-bold text-foreground sm:text-4xl">필요하면 추가할 수 있는 기능</h2>
           <p className="mt-3 max-w-2xl text-lg leading-relaxed text-muted-foreground break-keep">
-            템플릿 라인에 더하실 경우의 기준입니다. 예약 접수 · 관리는 맞춤 제작에는 기본으로
-            포함되어 있습니다.
+            예약 접수 · 관리는 맞춤 제작에 기본으로 포함되어 있습니다.
           </p>
         </Reveal>
         <Reveal delay={100}>
@@ -225,7 +210,7 @@ export default function PriceLanding() {
 
       {/* 좌우 여백을 줄여 비교표가 최대한 넓게 나오도록 별도 컨테이너를 쓴다 */}
       <div className="mx-auto max-w-7xl px-3 py-16 sm:px-5 sm:py-20">
-        {/* 템플릿 요금제 4구조 비교 */}
+        {/* 제작 비용 비교 */}
         <Reveal>
           <PricingComparison />
         </Reveal>

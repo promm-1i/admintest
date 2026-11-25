@@ -1,13 +1,6 @@
 import { SAMPLES, TEMPLATE_INDUSTRY_LABELS, type Sample } from "./samples";
 
-/**
- * 템플릿 디자인 코드 규칙.
- *
- * `{업종 3글자}{B|L}-{일련번호}` — B는 기본형, L은 랜딩형.
- * 같은 업종·유형의 첫 디자인이 1001이고, 추가 디자인 시안은 1002, 1003…으로 늘어난다.
- * 추가 시안은 samples.ts에서 designCode를 직접 지정하고, 지정이 없으면 1001로 계산한다.
- * 고객이 문의 시 이 코드를 그대로 말하면 어떤 디자인인지 특정된다.
- */
+/** 문의 시 디자인을 특정하는 코드. 명시된 코드를 우선 사용한다. */
 const INDUSTRY_PREFIX: Record<string, string> = {
   academy: "ACA",
   agency: "AGE",
@@ -53,11 +46,10 @@ const INDUSTRY_PREFIX: Record<string, string> = {
 export function getDesignCode(sample: Sample): string {
   if (sample.designCode) return sample.designCode;
   const prefix = (sample.industryKey && INDUSTRY_PREFIX[sample.industryKey]) ?? "TPL";
-  const isLanding = sample.type.includes("landing-template");
-  return `${prefix}${isLanding ? "L" : "B"}-1001`;
+  return `${prefix}P-1001`;
 }
 
-export type DesignLine = "프리미엄" | "랜딩형" | "기본형";
+export type DesignLine = "프리미엄";
 export type DesignCodeOption = {
   code: string;
   title: string;
@@ -85,7 +77,6 @@ const OPTION_INDUSTRY_LABELS: Record<string, string> = {
   furniture: "소파·가구 브랜드",
 };
 
-const LINE_ORDER: Record<DesignLine, number> = { 프리미엄: 0, 랜딩형: 1, 기본형: 2 };
 
 function shortLabel(title: string) {
   const letter = title.match(/디자인 ([A-Z])\)/)?.[1];
@@ -95,17 +86,13 @@ function shortLabel(title: string) {
 
 /**
  * 문의 폼 디자인 셀렉트에 노출할 전체 템플릿 목록.
- * 업종은 대분류로 묶고, 업종 안에서는 프리미엄 → 랜딩형 → 기본형 순으로 정렬해 돌려준다.
+ * 업종 대분류와 디자인 코드 순으로 정렬한다.
  */
 export function getDesignCodeOptions(): DesignCodeOption[] {
-  return SAMPLES.filter((s) => s.industryKey)
+  return SAMPLES.filter((s) => s.premium && s.industryKey)
     .map((s) => {
       const key = s.industryKey as string;
-      const line: DesignLine = s.type.includes("premium-template")
-        ? "프리미엄"
-        : s.type.includes("landing-template")
-          ? "랜딩형"
-          : "기본형";
+      const line: DesignLine = "프리미엄";
       return {
         code: getDesignCode(s),
         title: s.title,
@@ -117,7 +104,6 @@ export function getDesignCodeOptions(): DesignCodeOption[] {
     .sort(
       (a, b) =>
         a.industry.localeCompare(b.industry, "ko") ||
-        LINE_ORDER[a.line] - LINE_ORDER[b.line] ||
         a.code.localeCompare(b.code),
     );
 }

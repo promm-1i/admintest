@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { premiumSampleOf } from "@/lib/availableIndustries";
 import { Send, ExternalLink, ShieldCheck, Globe, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -99,16 +100,8 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
       <RevealScale className="mt-5" delay={80}>
         {(() => {
           // 실제 구축 예시가 배포된 업종은 실물 페이지를 그대로 축소해 보여준다
-          const TEMPLATE_SLUGS: Record<string, string> = {
-            "real-estate": "realestate",
-            rentcar: "rentcar",
-            hospital: "clinic",
-            academy: "academy",
-            interior: "interior",
-            moving: "moving",
-          };
-          const slug = TEMPLATE_SLUGS[industry.key];
-          if (!slug) return <CustomerSitePreview />;
+          const sample = premiumSampleOf(industry.key);
+          if (!sample?.liveUrl) return <CustomerSitePreview />;
           return (
             <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
               <div className="flex items-center gap-1.5 border-b border-border bg-secondary/50 px-4 py-2.5">
@@ -120,7 +113,7 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
                 </span>
               </div>
               <iframe
-                src={`/templates/${slug}-landing/`}
+                src={sample.liveUrl}
                 title={`${industry.heroTitle} 고객 홈페이지 실물 예시`}
                 loading="lazy"
                 className="h-[560px] w-full border-0"

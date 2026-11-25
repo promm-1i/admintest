@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { getDesignCodeOptions, type DesignLine } from "@/lib/designCode";
 
-const DESIGN_LINES: DesignLine[] = ["프리미엄", "랜딩형", "기본형"];
+const DESIGN_LINES: DesignLine[] = ["프리미엄"];
 import { createReservation, reservationSchema, type ReservationInput } from "@/lib/api/reservations";
 import { KAKAO_CHANNEL_URL, PHONE_TEL_HREF } from "@/lib/contact";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -225,7 +225,7 @@ export default function Contact() {
                 />
               </SelectTrigger>
               <SelectContent>
-                {/* 업종 안에서 프리미엄 · 랜딩형 · 기본형으로 나눠 제목을 달아 둔다 (옵션은 이미 그 순서로 정렬돼 있다) */}
+                {/* 업종별 프리미엄 디자인 */}
                 {DESIGN_LINES.map((line) => {
                   const items = (designGroups.find(([industry]) => industry === designIndustry)?.[1] ?? []).filter(
                     (o) => o.line === line,

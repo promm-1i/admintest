@@ -11,6 +11,7 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { readSamples } from "./site-data.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dist = join(root, "dist");
@@ -18,30 +19,6 @@ const ORIGIN = "https://noveriq.co.kr";
 
 const escapeHtml = (s) =>
   s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
-
-/** samples.ts 항목에서 `key: "..."` 문자열 값을 꺼낸다(값이 다음 줄로 넘어가도 된다) */
-function field(entry, key) {
-  const m = entry.match(new RegExp(`\\n {4}${key}:\\s*("(?:[^"\\\\]|\\\\.)*")`));
-  return m ? JSON.parse(m[1]) : undefined;
-}
-
-/** samples.ts 의 상세 페이지 항목 — generate-sitemap.mjs 와 같은 기준(detailHref 없는 것) */
-function readSamples() {
-  const src = readFileSync(join(root, "src/lib/samples.ts"), "utf8");
-  const out = [];
-  for (const entry of src.split(/\n {2}\{/).slice(1)) {
-    const slug = entry.match(/slug: "([^"]+)"/)?.[1];
-    if (!slug || entry.includes("detailHref:")) continue;
-    out.push({
-      slug,
-      industry: field(entry, "industry"),
-      title: field(entry, "title"),
-      purpose: field(entry, "purpose"),
-      hasIndustryKey: /\n {4}industryKey:/.test(entry),
-    });
-  }
-  return out;
-}
 
 const META_KEYS = "description|og:title|og:description|og:url|twitter:title|twitter:description";
 const OLD_META = new RegExp(`<meta[^>]*(?:name|property)="(?:${META_KEYS})"[^>]*>\\s*`, "g");
@@ -56,9 +33,9 @@ function main() {
   const shell = readFileSync(shellPath, "utf8").replace(OLD_META, "").replace(OLD_CANONICAL, "");
 
   let done = 0;
-  for (const s of readSamples()) {
+  for (const s of readSamples(root).filter((sample) => !sample.detailHref)) {
     // SampleDetail: industryKey 가 있으면 "제목 — NOVERIQ", 없으면 "업종 실시간 미리보기 — NOVERIQ"
-    const title = s.hasIndustryKey ? `${s.title} — NOVERIQ` : `${s.industry} 실시간 미리보기 — NOVERIQ`;
+    const title = s.industryKey ? `${s.title} — NOVERIQ` : `${s.industry} 실시간 미리보기 — NOVERIQ`;
     const url = `${ORIGIN}/samples/${s.slug}/`;
     const t = escapeHtml(title);
     const d = escapeHtml(s.purpose);

@@ -191,34 +191,11 @@ export default function ProcessLanding() {
           </div>
         </Reveal>
 
-        {/* 제작 방식 2가지 */}
+        {/* 제작 방식 */}
         <Reveal className="mt-20">
-          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식 2가지</h2>
+          <h2 className="text-3xl font-bold text-foreground sm:text-4xl">제작 방식</h2>
         </Reveal>
-        <div className="mt-8 grid gap-6 lg:grid-cols-2">
-          <Reveal delay={80} className="h-full rounded-2xl border border-border bg-secondary/30 p-7 sm:p-8">
-            <p className="text-xs font-bold tracking-wide text-muted-foreground">TEMPLATE</p>
-            <h3 className="mt-2 text-2xl font-bold text-foreground">템플릿형 홈페이지 제작</h3>
-            <p className="mt-3 text-lg font-medium text-foreground break-keep">
-              검증된 디자인을 선택해 더 빠르고 합리적으로 시작합니다.
-            </p>
-            <p className="mt-3 max-w-xl text-lg leading-relaxed text-muted-foreground break-keep">
-              미리 제작된 홈페이지 디자인을 기반으로 업체 정보, 이미지, 문구, 메뉴 등을 변경하여
-              제작합니다. 처음 홈페이지를 제작하거나 복잡한 기능이 필요하지 않은 경우 적합합니다.
-            </p>
-            <ul className="mt-5 space-y-2.5">
-              {["제작기간 단축", "비용 절감", "PC / 모바일 반응형", "원하는 업종 디자인 선택"].map((b) => (
-                <li key={b} className="flex items-start gap-2.5 text-base text-foreground break-keep">
-                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  {b}
-                </li>
-              ))}
-            </ul>
-            <Link to="/templates" className="mt-5 inline-flex items-center gap-1.5 text-base font-medium text-primary hover:underline">
-              홈페이지 템플릿 보기
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </Reveal>
+        <div className="mt-8 grid gap-6 ">
           <Reveal delay={160} className="h-full rounded-2xl border border-primary/40 bg-primary/[0.04] p-7 sm:p-8">
             <p className="text-xs font-bold tracking-wide text-primary">CUSTOM</p>
             <h3 className="mt-2 text-2xl font-bold text-foreground">맞춤형 홈페이지 제작</h3>

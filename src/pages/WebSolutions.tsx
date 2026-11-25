@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { getPremiumCategories } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
-import { LineComparison } from "@/components/site/LineComparison";
 
 type Tier = {
   name: string;
@@ -22,12 +21,11 @@ type Tier = {
  * 셋팅비용, 도메인 1개(1년)가 모두 포함된다.
  *
  * 2026-09-21, 호스팅을 청구 항목에서 뺐다. 고객이 직접 하면 들지 않는 비용이라
- * 따로 받을 근거가 없다. 템플릿 라인과 같은 기준이다. 2년차부터 드는 것은
  * 도메인 갱신 연 3만원뿐이다.
  */
 const TIERS: Tier[] = [
   {
-    name: "브랜드 페이지",
+    name: "프리미엄 디자인",
     setupFee: "150만원",
     tagline: "디자인과 사진까지 새로 만드는 브랜드 사이트 — 서브페이지 확장 가능",
     recommended: true,
@@ -214,24 +212,7 @@ export default function WebSolutions() {
         설계합니다. 정확한 기능 구성과 견적은 상담 후 확정됩니다.
       </p>
 
-      {/* 템플릿형과의 차이 */}
-      <div className="mt-8 grid gap-4 sm:grid-cols-2">
-        <FadeIn direction="left">
-        <div className="h-full rounded-2xl border border-border bg-secondary/30 p-5">
-          <p className="text-xs font-bold text-muted-foreground">템플릿 라인</p>
-          <p className="mt-1.5 text-sm font-semibold text-foreground">완성된 화면을 고릅니다</p>
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground break-keep">
-            이미 만들어 둔 화면에 문구·사진만 바꿔 빠르고 합리적으로 시작합니다. 관리자 모드와
-            데이터베이스, 반응형 제작도 여기에 기본으로 들어갑니다.
-          </p>
-          <Link
-            to="/templates"
-            className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
-          >
-            템플릿 보기 · 64만원부터
-          </Link>
-        </div>
-        </FadeIn>
+      <div className="mt-8 grid gap-4">
         <FadeIn direction="right" delay={100}>
         <div className="h-full rounded-2xl border border-primary/40 bg-primary/[0.04] p-5">
           <p className="text-xs font-bold text-primary">맞춤 제작</p>
@@ -394,10 +375,6 @@ export default function WebSolutions() {
         </FadeIn>
       </div>
 
-      {/* 150만원을 본 직후 "템플릿 114만과 뭐가 다른가"에 스스로 답하게 하는 자리 */}
-      <div className="mt-16">
-        <LineComparison />
-      </div>
 
       <h3 className="mt-16 text-base font-semibold">맞춤 제작에 모두 포함되는 기능</h3>
       <FadeIn>

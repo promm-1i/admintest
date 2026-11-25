@@ -1,10 +1,12 @@
 // public/sitemap.xml 생성기.
 // 실행: node scripts/generate-sitemap.mjs  (템플릿·포트폴리오를 추가/삭제했으면 다시 실행)
 // - 고정 라우트 + src/lib/samples.ts의 상세 페이지(/samples/:slug)를 합쳐서 쓴다.
-// - /templates/<dir>/ 정적 템플릿 원본과 데모(/web-solutions/*/demo)는 색인 대상이 아니라 뺀다.
-import { readFileSync, writeFileSync } from "node:fs";
+// - 데모(/web-solutions/*/demo)는 색인 대상에서 뺀다.
+import { writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { readSamples, readIndustryKeys } from "./site-data.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ORIGIN = "https://noveriq.co.kr"; // www는 apex로 301되므로 apex가 정본
@@ -20,7 +22,6 @@ const CORE_ROUTES = [
   "/estimate",
   "/homepage",
   "/samples",
-  "/templates",
   "/website/process",
   "/website/price",
   "/website/features",
@@ -48,18 +49,10 @@ const CORE_ROUTES = [
 
 // 업종별 SEO 랜딩(/homepage/:key). "{업종} 홈페이지 제작" 검색 유입을 받으려고 만든
 // 페이지라 색인이 목적인데 예전 sitemap 에는 한 건도 들어있지 않았다.
-const industrySrc = readFileSync(join(root, "src/lib/industryLanding.ts"), "utf8");
-const body = industrySrc.slice(industrySrc.indexOf("INDUSTRY_LANDING"));
-const industryRoutes = [...body.matchAll(/^ {2}"?([a-z-]+)"?: \{$/gm)].map((m) => `/homepage/${m[1]}`);
-if (industryRoutes.length === 0) throw new Error("업종 랜딩 키를 하나도 못 찾았다 — 정규식 확인");
-
-// samples.ts에서 detailHref 없는 항목만 — 그 항목들만 /samples/:slug 상세 페이지를 가진다
-const samplesSrc = readFileSync(join(root, "src/lib/samples.ts"), "utf8");
-const sampleRoutes = [];
-for (const entry of samplesSrc.split(/\n  \{/).slice(1)) {
-  const slug = entry.match(/slug: "([^"]+)"/)?.[1];
-  if (slug && !entry.includes("detailHref:")) sampleRoutes.push(`/samples/${slug}`);
-}
+const samples = readSamples(root);
+const industryRoutes = readIndustryKeys(root, samples).map((key) => `/homepage/${key}`);
+if (industryRoutes.length === 0) throw new Error("No remaining industries");
+const sampleRoutes = samples.filter((sample) => !sample.detailHref).map((sample) => `/samples/${sample.slug}`);
 
 // 프리렌더되는 라우트는 dist/<route>/index.html 로 저장되고, Netlify 는 /about 을
 // /about/ 로 301 한다. sitemap 이 슬래시 없는 주소를 내면 canonical 도 /about 으로 구워져

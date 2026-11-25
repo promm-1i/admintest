@@ -1,50 +1,6 @@
-import { Car, CarFront, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Flower2, Scale, Lamp, HeartHandshake, Blocks, Flag, Palette, Mountain, Bike, type LucideIcon } from "lucide-react";
-import { SAMPLES, getPremiumCategories } from "@/lib/samples";
+import { Car, Building2, HeartPulse, BookOpen, Hammer, PackageSearch, UtensilsCrossed, Briefcase, Scissors, Dumbbell, TreePine, Smile, PawPrint, Camera, Calculator, Wrench, Scale, HeartHandshake, Blocks, Flag, Palette, Mountain, type LucideIcon } from "lucide-react";
+import { getPremiumCategories } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
-
-/**
- * 실제 판매 중인 템플릿을 스타일별로 뽑아 **업종 → 디자인** 2단계로 묶는다.
- * 업종당 시안이 여러 개라 평면 목록으로 두면 같은 업종명이 그 수만큼 반복돼 읽기 어렵다.
- */
-function templateGroups(styleKey: "basic-template" | "landing-template"): NavTemplateGroup[] {
-  const byIndustry = new Map<string, NavTemplateGroup>();
-
-  for (const s of SAMPLES) {
-    if (!s.industryKey || !s.type.includes(styleKey)) continue;
-    const label = s.industry.replace(" 홈페이지", "");
-    let group = byIndustry.get(s.industryKey);
-    if (!group) {
-      group = {
-        key: s.industryKey,
-        label,
-        href: `/templates?style=${styleKey}&industry=${s.industryKey}`,
-        designs: [],
-      };
-      byIndustry.set(s.industryKey, group);
-    }
-    // 대표 시안(코드 1001)의 이미지를 업종 썸네일로 쓴다
-    if (!group.image && s.image && !s.designCode) group.image = s.image;
-    group.designs.push({
-      label: "",
-      code: getDesignCode(s),
-      href: `/samples/${s.slug}`,
-      ...(s.image ? { image: s.image } : {}),
-    });
-  }
-
-  const groups = [...byIndustry.values()];
-  for (const g of groups) {
-    g.designs.sort((a, b) => a.code.localeCompare(b.code));
-    // 코드 순서대로 디자인 A · B · C … 라벨을 붙인다
-    g.designs.forEach((d, i) => {
-      d.label = `디자인 ${String.fromCharCode(65 + i)}`;
-    });
-    if (!g.image) g.image = g.designs[0]?.image;
-    // 표시는 최신 시안(코드가 큰 것)이 왼쪽 위 — 나중에 만든 시안일수록 완성도가 높다
-    g.designs.reverse();
-  }
-  return groups.sort((a, b) => a.label.localeCompare(b.label, "ko"));
-}
 
 /**
  * 프리미엄 디자인 카테고리 — samples.ts의 premium 플래그가 단일 출처라
@@ -129,121 +85,97 @@ export const INDUSTRY_ITEMS: NavItem[] = [
     icon: UtensilsCrossed,
     title: "음식점 · 카페 맞춤형",
     desc: "메뉴 안내 · 실시간 영업중 · 예약 문의",
-    href: "/templates?industry=restaurant",
+    href: "/homepage/restaurant",
   },
   {
     icon: Briefcase,
     title: "기업 · 브랜드 맞춤형",
     desc: "사업영역 · 지표 · 연혁 · 견적 문의",
-    href: "/templates?industry=corporate",
+    href: "/homepage/corporate",
   },
   {
     icon: Scissors,
     title: "미용실 · 뷰티샵 맞춤형",
     desc: "시술 가격표 · 스타일 갤러리 · 지명 예약",
-    href: "/templates?industry=beauty",
+    href: "/homepage/beauty",
   },
   {
     icon: Dumbbell,
     title: "필라테스 · 헬스 맞춤형",
     desc: "주간 시간표 · 회원권 · 체험 신청",
-    href: "/templates?industry=fitness",
+    href: "/homepage/fitness",
   },
   {
     icon: TreePine,
     title: "펜션 · 스테이 맞춤형",
     desc: "객실 요금 · 이용 안내 · 예약 문의",
-    href: "/templates?industry=stay",
+    href: "/homepage/stay",
   },
   {
     icon: Smile,
     title: "치과 맞춤형",
     desc: "임플란트 안내 · 비급여 표 · 진료 예약",
-    href: "/templates?industry=dental",
+    href: "/homepage/dental",
   },
   {
     icon: PawPrint,
     title: "동물병원 맞춤형",
     desc: "요금표 · 접종 스케줄 · 예약 문의",
-    href: "/templates?industry=vet",
+    href: "/homepage/vet",
   },
   {
     icon: Camera,
     title: "사진관 · 스튜디오 맞춤형",
     desc: "갤러리 · 촬영 상품 · 촬영 예약",
-    href: "/templates?industry=photo",
+    href: "/homepage/photo",
   },
   {
     icon: Calculator,
     title: "세무사 · 회계사무소 맞춤형",
     desc: "기장료 요금표 · 세무 일정 · 상담",
-    href: "/templates?industry=tax",
+    href: "/homepage/tax",
   },
   {
     icon: Wrench,
     title: "자동차정비소 맞춤형",
     desc: "공임표 · 오일 패키지 · 정비 예약",
-    href: "/templates?industry=auto",
-  },
-  {
-    icon: Flower2,
-    title: "꽃집 · 플라워샵 맞춤형",
-    desc: "상품 가격 · 당일배달 · 주문 문의",
-    href: "/templates?industry=flower",
+    href: "/homepage/auto",
   },
   {
     icon: Scale,
     title: "법률사무소 맞춤형",
     desc: "수행 분야 · 수임료 원칙 · 비밀 상담",
-    href: "/templates?industry=law",
-  },
-  {
-    icon: Lamp,
-    title: "스터디카페 맞춤형",
-    desc: "잔여석 보드 · 요금표 · 좌석 안내",
-    href: "/templates?industry=study",
+    href: "/homepage/law",
   },
   {
     icon: HeartHandshake,
     title: "요양원 · 주간보호 맞춤형",
     desc: "등급별 비용 · 하루 일과 · 입소 상담",
-    href: "/templates?industry=care",
+    href: "/homepage/care",
   },
   {
     icon: Blocks,
     title: "어린이집 · 유치원 맞춤형",
     desc: "반별 정원 · 급식 안내 · 입소 대기",
-    href: "/templates?industry=kids",
+    href: "/homepage/kids",
   },
   {
     icon: Flag,
     title: "스크린골프 맞춤형",
     desc: "타석 요금 · 레슨 · 룸 예약",
-    href: "/templates?industry=golf",
+    href: "/homepage/golf",
   },
   {
     icon: Palette,
     title: "공방 · 클래스 맞춤형",
     desc: "클래스 가격 · 일정표 · 수강 신청",
-    href: "/templates?industry=craft",
-  },
-  {
-    icon: CarFront,
-    title: "중고차 맞춤형",
-    desc: "매물 시세 · 실차 확인 · 매입 문의",
-    href: "/templates?industry=usedcar",
+    href: "/homepage/craft",
   },
   {
     icon: Mountain,
     title: "여행 · 트레킹 맞춤형",
     desc: "코스 난이도 · 일정 요금 · 예약 문의",
-    href: "/templates?industry=travel",
-  },
-  {
-    icon: Bike,
-    title: "오토바이 · 스쿠터 맞춤형",
-    desc: "제품 상세 · 구매 상담 · 협력점 지도",
-    href: "/templates?industry=moto",
+    href: "/samples/travel-c-template",
   },
 ];
 
@@ -294,23 +226,6 @@ export const HEADER_NAV: NavEntry[] = [
       { label: "DB · API 연동", href: "/services/database-api", group: "기능별 개발" },
       { label: "반응형 웹 제작", href: "/services/responsive", group: "기능별 개발" },
       { label: "검색엔진 최적화", href: "/services/seo", group: "기능별 개발" },
-    ],
-  },
-  {
-    type: "dropdown",
-    key: "templates",
-    label: "홈페이지 템플릿",
-    items: [
-      {
-        label: "기본형 디자인 템플릿",
-        href: "/templates?style=basic-template",
-        children: templateGroups("basic-template"),
-      },
-      {
-        label: "랜딩형 디자인 템플릿",
-        href: "/templates?style=landing-template",
-        children: templateGroups("landing-template"),
-      },
     ],
   },
   {
@@ -424,17 +339,6 @@ export const MAIN_NAV: MainNavEntry[] = [
       { key: "work", label: "포트폴리오", href: "/web-solutions", items: [
         { label: "홈페이지 포트폴리오", href: "/web-solutions", desc: "병원 · 학원 · 기업 등 업종별로 만든 홈페이지" },
         { label: "제작 사례", href: "/samples", desc: "관리자 · 플랫폼까지 갖춘 홈페이지" },
-      ] },
-    ],
-  },
-  {
-    key: "design",
-    label: "템플릿",
-    href: "/templates",
-    groups: [
-      { key: "template", label: "템플릿", href: "/templates", items: [
-        { label: "기본형 디자인", href: "/templates?style=basic-template", desc: "필요한 정보 위주 한 페이지" },
-        { label: "랜딩형 디자인", href: "/templates?style=landing-template", desc: "내릴 때 나타나는 연출과 움직임" },
       ] },
     ],
   },

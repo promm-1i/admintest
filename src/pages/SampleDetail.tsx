@@ -27,12 +27,7 @@ import { InteriorPreview } from "@/components/samples/InteriorPreview";
 import { CleaningPreview } from "@/components/samples/CleaningPreview";
 import { CorporatePreview } from "@/components/samples/CorporatePreview";
 import { ExternalSitePreview } from "@/components/samples/ExternalSitePreview";
-import { RealEstateBasicPreview } from "@/components/samples/RealEstateBasicPreview";
-import { RealEstateLandingPreview } from "@/components/samples/RealEstateLandingPreview";
 import { Reveal, RevealScale } from "@/pages/services/previewKit";
-import { TemplateSpecPanel } from "@/components/site/TemplateSpecPanel";
-import { PricingComparison } from "@/components/site/PricingComparison";
-import { TemplateFeatureLanding } from "@/components/site/TemplateFeatureLanding";
 import { PremiumDetailSections } from "@/components/site/PremiumDetailSections";
 import { PremiumCaseStudy } from "@/components/site/PremiumCaseStudy";
 import { hasCaseStudy, loadCaseStudy, type CaseStudy } from "@/lib/caseStudies";
@@ -46,7 +41,6 @@ export default function SampleDetail() {
   const [device, setDevice] = useState<"desktop" | "mobile">("desktop");
 
   // 사례 소개 본문이 있는 프리미엄 디자인은 그 파일만 따로 불러와 사례형으로 그린다.
-  // 사례 소개형 상세는 프리미엄 디자인만 — 기본형·랜딩형으로 옮긴 디자인은 사례 파일이 남아 있어도 템플릿 상세로 연다
   const caseSlug = slug && sample?.premium && hasCaseStudy(slug) ? slug : null;
   const [loadedCase, setLoadedCase] = useState<{ slug: string; study: CaseStudy } | null>(null);
   useEffect(() => {
@@ -81,7 +75,7 @@ export default function SampleDetail() {
               image: sample.image,
               path: `/samples/${sample.slug}`,
               designCode: sample.designCode,
-              priceFrom: sample.premium ? 1_500_000 : 640_000,
+              priceFrom: sample.type.includes("shopping-mall") ? 2_000_000 : 1_500_000,
             }),
             breadcrumbSchema([
               { name: "홈", path: "/" },
@@ -104,13 +98,10 @@ export default function SampleDetail() {
     );
   }
 
-  // 템플릿 항목은 포트폴리오가 아니라 /templates 목록에서 넘어오므로 되돌아가는 링크도 그쪽으로 보낸다.
   const isTemplate = Boolean(sample.industryKey);
-  // 프리미엄 디자인은 템플릿 가격표(64만~)가 아니라 /web-solutions의 프리미엄 라인(150만~)을 따른다.
   const isPremium = sample.type.includes("premium-template");
-  const templateStyle = sample.type.includes("landing-template") ? "landing-template" : "basic-template";
-  const backHref = isPremium ? "/web-solutions" : isTemplate ? `/templates?style=${templateStyle}` : "/samples";
-  const backLabel = isPremium ? "포트폴리오 목록으로" : isTemplate ? "전체 템플릿 목록으로" : "전체 포트폴리오 목록으로";
+  const backHref = isPremium ? "/web-solutions" : "/samples";
+  const backLabel = isPremium ? "포트폴리오 목록으로" : "전체 포트폴리오 목록으로";
 
   const renderSamplePreview = () => {
     if (sample.liveUrl) return <ExternalSitePreview url={sample.liveUrl} />;
@@ -128,10 +119,6 @@ export default function SampleDetail() {
         return <CleaningPreview />;
       case "corporate":
         return <CorporatePreview />;
-      case "real-estate-basic-template":
-        return <RealEstateBasicPreview />;
-      case "real-estate-landing-template":
-        return <RealEstateLandingPreview />;
       default:
         return <HospitalPreview />;
     }
@@ -198,7 +185,7 @@ export default function SampleDetail() {
         <div
           className={cn(
             "mt-8",
-            isTemplate && !isPremium ? "grid gap-6 xl:grid-cols-[minmax(0,1fr)_340px] xl:items-start" : "space-y-6",
+            "space-y-6",
           )}
         >
           {/* min-w-0: grid 자식의 기본 min-width:auto 때문에 미리보기 내부의 min-width(표 등)가
@@ -311,11 +298,6 @@ export default function SampleDetail() {
           )}
           </div>
 
-          {isTemplate && !isPremium && (
-            <div className="xl:sticky xl:top-24">
-              <TemplateSpecPanel sample={sample} />
-            </div>
-          )}
         </div>
       ) : (
         /* Plan Overview Tab */
@@ -355,16 +337,6 @@ export default function SampleDetail() {
         </div>
       )}
 
-      {/* 템플릿 기능 소개 랜딩 + 요금제 비교 (템플릿 상세에서만 — 프리미엄은 가격 체계가 달라 제외) */}
-      {isTemplate && !isPremium && (
-        <>
-          <TemplateFeatureLanding sample={sample} />
-          <Reveal className="mt-16 rounded-2xl border border-border bg-card p-6 shadow-xs sm:p-8">
-            <PricingComparison />
-          </Reveal>
-        </>
-      )}
-
       {/* 프리미엄 디자인 상세 — 구성 안내 · 담긴 화면 · 제작 사양 · 제작 방식 · FAQ · 가격 */}
       {isPremium && <PremiumDetailSections sample={sample} />}
 
@@ -400,7 +372,7 @@ export default function SampleDetail() {
           <div className="mt-1 flex justify-center">
             <Button asChild variant="ghost" size="lg" className="font-semibold text-muted-foreground hover:text-foreground">
               <Link to={backHref}>
-                {isPremium ? "다른 포트폴리오 보기" : isTemplate ? "다른 템플릿 보기" : "다른 포트폴리오 보기"}
+                다른 포트폴리오 보기
               </Link>
             </Button>
           </div>

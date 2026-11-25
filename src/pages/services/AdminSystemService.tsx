@@ -369,22 +369,22 @@ export default function AdminSystemService() {
           </div>
 
           <Reveal delay={120} className="mt-8 rounded-2xl border border-border bg-card p-6">
-            <p className="text-sm font-bold text-foreground">그 외 17개 업종도 같은 방식으로 구축합니다</p>
+            <p className="text-sm font-bold text-foreground">그 외 15개 업종도 같은 방식으로 구축합니다</p>
             <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground break-keep">
-              아래 업종은 템플릿 홈페이지가 준비되어 있으며, 필요한 관리자 기능을 상담으로 정해 맞춤
+              아래 업종은 프리미엄 디자인이 준비되어 있으며, 필요한 관리자 기능을 상담으로 정해 맞춤
               구축해 드립니다.
             </p>
             <div className="mt-4 flex flex-wrap gap-2">
               {[
                 ["restaurant", "음식점 · 카페"], ["corporate", "기업 · 브랜드"], ["beauty", "미용실 · 뷰티샵"],
                 ["fitness", "필라테스 · 헬스"], ["stay", "펜션 · 스테이"], ["dental", "치과"], ["vet", "동물병원"],
-                ["photo", "사진관 · 스튜디오"], ["tax", "세무 · 회계"], ["auto", "자동차정비"], ["flower", "꽃집"],
-                ["law", "법률사무소"], ["study", "스터디카페"], ["care", "요양원 · 주간보호"],
+                ["photo", "사진관 · 스튜디오"], ["tax", "세무 · 회계"], ["auto", "자동차정비"],
+                ["law", "법률사무소"],  ["care", "요양원 · 주간보호"],
                 ["kids", "어린이집 · 유치원"], ["golf", "스크린골프"], ["craft", "공방 · 클래스"],
               ].map(([k, name]) => (
                 <Link
                   key={k}
-                  to={`/templates?industry=${k}`}
+                  to={`/homepage/${k}`}
                   className="rounded-full border border-border px-3.5 py-1.5 text-xs font-semibold text-foreground/70 transition-colors hover:border-primary/50 hover:text-primary"
                 >
                   {name}

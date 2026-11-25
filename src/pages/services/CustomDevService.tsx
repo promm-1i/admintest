@@ -22,21 +22,20 @@ import { TemplatePickVisual, CustomBuildVisual } from "@/components/sections/Com
 /**
  * 커스텀 개발과 그 밖의 라인의 차이.
  *
- * 템플릿 라인과 프리미엄 라인은 값이 달라도 둘 다 "이미 있는 화면에서 출발"하므로 한 칸에 묶는다.
  * 커스텀 개발만 출발점이 되는 시안이 없다 — 이게 프리미엄 라인과 갈리는 지점이고, 그래서
  * 커스텀 개발은 시작가를 박지 않고 상담 후 견적으로 안내한다.
  */
 export const COMPARE = [
   {
-    name: "템플릿 라인 · 맞춤 제작",
-    desc: "이미 만들어 둔 화면이나 포트폴리오에서 출발합니다. 템플릿 라인은 문구와 사진만 바꿔 열고, 맞춤 제작은 그 구성을 브랜드에 맞춰 다시 잡습니다.",
+    name: "프리미엄 디자인 · 쇼핑몰",
+    desc: "포트폴리오에서 출발해 구성을 브랜드에 맞춰 다시 잡습니다.",
     points: [
       "완성된 화면 · 시안에서 출발",
-      "가격이 정해져 있음 (64만원~ · 150만원~)",
-      "영업일 7일 ~ 10일 이내",
+      "가격이 정해져 있음 (150만원~ · 200만원~)",
+      "제작 일정은 상담 후 확정",
     ],
     href: "/website/price",
-    linkLabel: "요금 보기 · 64만원부터",
+    linkLabel: "요금 보기 · 150만원부터",
   },
   {
     name: "커스텀 개발",
@@ -108,12 +107,11 @@ export default function CustomDevService() {
         </div>
       </div>
 
-      {/* 템플릿형과 무엇이 다른가 */}
       <div className="py-14 sm:py-20">
         <div className="mx-auto max-w-4xl px-4">
           <Reveal>
             <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">
-              템플릿형과의 차이
+              프리미엄 디자인과의 차이
             </p>
             <h2 className="mt-3 text-3xl font-bold text-foreground">고르는 것과 설계하는 것</h2>
           </Reveal>

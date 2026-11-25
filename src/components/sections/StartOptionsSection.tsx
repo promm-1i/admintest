@@ -8,14 +8,7 @@ import { SAMPLES, getPremiumCategories } from "@/lib/samples";
 import { getDesignCode } from "@/lib/designCode";
 import { PremiumCategoryPicker } from "@/components/site/PremiumCategoryPicker";
 
-/**
- * 시작하는 방법은 두 가지뿐이라 한 섹션에서 대비시킨다.
- * 순서는 "두 가지 방법(결론) → 그 중 실제 결과물(증거)"이다.
- *
- * 아래 미리보기는 업종 31개 목록이 아니라 프리미엄 디자인 8종을 카테고리로 묶어 보여준다.
- * 업종 목록은 31개가 세로 스크롤에 잘려 보였고 가나다순이라 첫 항목이 대표성이 없었다.
- * 히어로 원통은 여러 장을 빠르게 훑는 자리, 여기는 한 종을 크게 보는 자리로 역할을 나눈다.
- */
+/** 맞춤 제작과 프리미엄 디자인 미리보기. */
 const PREMIUM_GROUPS = getPremiumCategories();
 const PREMIUM_FLAT = PREMIUM_GROUPS.flatMap((g) => g.items);
 
@@ -34,11 +27,10 @@ export function StartOptionsSection() {
             label="HOW TO START"
             title={
               <>
-                시작하는 방법은
-                <br />두 가지입니다
+                업무 방식에 맞춰 처음부터
               </>
             }
-            description="완성된 업종 템플릿을 골라 빠르게 열거나, 업무 방식에 맞춰 처음부터 설계하거나. 두 방식 모두 아래에서 실제 구축된 화면을 그대로 보실 수 있습니다."
+            description="관리자 시스템과 데이터베이스까지 하나로 구축합니다."
           />
           <p className="shrink-0 text-sm text-muted-foreground">
             업종 <strong className="font-mono text-base tabular-nums text-foreground">{INDUSTRY_COUNT}</strong>개
@@ -49,32 +41,14 @@ export function StartOptionsSection() {
 
         {/* 두 가지 방식 — 제목이 약속한 답을 먼저 보여준다 */}
         <FadeIn delay={80} className="mt-10">
-          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2">
-            <div className="flex flex-col bg-card p-6 sm:p-8">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-muted-foreground">
-                Template
-              </p>
-              <h3 className="mt-3 text-xl font-bold text-foreground">완성된 디자인으로 빠르게</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground break-keep">
-                업종마다 원페이지 기본 · 원페이지 랜딩 시안이 이미 만들어져 있습니다. 문구 · 사진 · 회사정보만
-                바꿔 여는 방식이라 제작 기간이 짧고 비용이 낮습니다.
-              </p>
-              <Link
-                to="/templates"
-                className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
-              >
-                템플릿 {DESIGN_COUNT}종 보기
-                <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
-            </div>
-
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border ">
             <div className="flex flex-col bg-primary/[0.04] p-6 sm:p-8">
               <p className="font-mono text-[11px] font-semibold uppercase tracking-widest text-primary">
                 Custom
               </p>
               <h3 className="mt-3 text-xl font-bold text-foreground">업무 방식에 맞춰 처음부터</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground break-keep">
-                템플릿에 없는 화면과 기능은 기획 단계부터 함께 설계합니다. 관리자 시스템과
+                화면과 기능은 기획 단계부터 함께 설계합니다. 관리자 시스템과
                 데이터베이스까지 하나로 구축합니다.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
