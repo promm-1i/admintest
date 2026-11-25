@@ -62,10 +62,6 @@ const SUBPAGE_MEDIA: Record<PageKey, string> = {
 };
 const MEDIA_SLOTS = {
   hero: `${MEDIA}/hero.webp`,
-  intro: `${MEDIA}/intro.webp`,
-  stories: [`${MEDIA}/story-01.webp`, `${MEDIA}/story-02.webp`, `${MEDIA}/story-03.webp`],
-  now: `${MEDIA}/now.webp`,
-  values: [`${MEDIA}/value-01.webp`, `${MEDIA}/value-02.webp`, `${MEDIA}/value-03.webp`],
   tomorrow: [`${MEDIA}/tomorrow-01.webp`, `${MEDIA}/tomorrow-02.webp`, `${MEDIA}/tomorrow-03.webp`],
 } as const;
 type PageKey = "process" | "price" | "features" | "maintenance" | "custom" | "admin-system" | "inquiry-reservation" | "search-filter" | "content-management" | "database-api" | "responsive" | "seo";
@@ -131,17 +127,6 @@ const PAGE_DATA: Record<PageKey, ContentPage> = {
   ] },
 };
 
-const SCOPE_SCENES = [
-  { title: "화면 구성", keyword: "메뉴부터 정합니다", text: "메뉴와 페이지를 나누고\n읽는 순서를 정합니다", image: MEDIA_SLOTS.stories[0], href: "/website/process" },
-  { title: "관리자 기능", keyword: "직접 고칩니다", text: "공지와 사례를 직접 올리고\n접수된 문의를 확인합니다", image: MEDIA_SLOTS.stories[1], href: "/services/admin-system" },
-  { title: "기기별 검수", keyword: "셋 다 확인합니다", text: "PC·태블릿·모바일에서\n글자와 이미지를 봅니다", image: MEDIA_SLOTS.stories[2], href: "/services/responsive" },
-];
-const HOME_LATEST = [
-  ["상담 전에 준비할 자료와 홈페이지 제작 순서를 안내합니다", "( 2026.09.20 )"],
-  ["디자인 템플릿과 커스텀 제작 범위를 정리했습니다", "( 2026.09.12 )"],
-  ["관리자 화면에서 직접 바꿀 수 있는 항목을 확인하세요", "( 2026.09.05 )"],
-  ["PC·태블릿·모바일 화면 검수 기준을 안내합니다", "( 2026.08.28 )"],
-] as const;
 const LOCAL_GROUPS = {
   "홈페이지 제작": [["제작 방법", "/website/process"], ["제작 비용", "/website/price"], ["기능 소개", "/website/features"], ["유지보수", "/website/maintenance"]],
   기술력: [["커스텀 개발", "/services/custom"], ["관리자 시스템", "/services/admin-system"], ["문의 · 예약 관리", "/services/inquiry-reservation"], ["검색 · 필터 기능", "/services/search-filter"], ["콘텐츠 관리", "/services/content-management"], ["DB · API 연동", "/services/database-api"], ["반응형 웹 제작", "/services/responsive"], ["검색엔진 최적화", "/services/seo"]],
@@ -293,8 +278,8 @@ function HomeHelp() {
   const root = useRoot();
   return <section className="re-nhn re-nhn--help">
     <div className="re-nhn__frame">
-      <h2 className="re-nhn__heading">도움 되는 정보 모아 보기</h2>
-      <p className="re-nhn__lead">지금 가장 필요한 정보부터 살펴보세요.</p>
+      <h2 className="re-nhn__heading">홈페이지 제작</h2>
+      <p className="re-nhn__lead">소상공인 · 기업 홈페이지를 만듭니다. 비용은 형태와 구성별로 정해져 있습니다.</p>
       <ul className="re-help-list">{HELP_CARDS.map((card) => <li className={`re-help re-help--${card.tone}`} key={card.title}>
         <Link to={`${root}${card.href}`}>
           <h3>{card.title}</h3>
@@ -419,8 +404,8 @@ function HeroVideo() {
       <div className="greeting-swiper re-greeting__slides" aria-live="polite">
         <div className="swiper">
           <div className="swiper-wrapper">
-            <div className={`swiper-slide${slide === 0 ? " swiper-slide-active" : ""}`} style={{ transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><h1 className="greeting-slogan"><span>홈페이지와 앱을</span><span>만듭니다</span></h1></div>
-            <div className={`swiper-slide${slide === 1 ? " swiper-slide-active" : ""}`} style={{ transform: "translate3d(-100%, 0, 0)", transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><p className="greeting-message">처음 상담부터<br />오픈 이후까지</p></div>
+            <div className={`swiper-slide${slide === 0 ? " swiper-slide-active" : ""}`} style={{ transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><h1 className="greeting-slogan"><span>앱과 홈페이지를</span><span>만듭니다</span></h1></div>
+            <div className={`swiper-slide${slide === 1 ? " swiper-slide-active" : ""}`} style={{ transform: "translate3d(-100%, 0, 0)", transitionDuration: slideTransitioning ? "1000ms" : "0ms" }}><p className="greeting-message">PC · 폰 · 태블릿에서<br />쓰는 앱</p></div>
           </div>
         </div>
       </div>
@@ -493,26 +478,30 @@ const APPS = [
   },
 ] as const;
 
+/** 홈 첫 칸(PC와 태블릿)과 하는 일 아래 카드 셋에 나눠 싣는다. 바이펜은 하는 일 배경 사진, 일곱 개 전부는 아래 출시한 앱 목록. */
+const HOME_STORY_APPS = APPS.filter((app) => ["byscreen", "cross", "bypad"].includes(app.slug));
+const HOME_VALUE_APPS = APPS.filter((app) => ["byphoto", "bycare", "byview"].includes(app.slug));
+
 function HomeBusiness() {
   const root = useRoot();
   return <section className="re-biz" aria-labelledby="re-biz-heading">
     <div className="re-biz__frame">
       <h2 id="re-biz-heading" className="re-biz__heading">사업 영역</h2>
       <div className="re-biz__grid">
-        <article className="re-biz__card">
-          <img className="re-biz__photo" src={`${PHOTOS}/responsive-wide.webp`} alt="" loading="lazy" decoding="async" />
-          <div className="re-biz__text">
-            <p className="re-biz__kind">홈페이지 제작</p>
-            <h3 className="re-biz__title">소상공인 · 기업 홈페이지</h3>
-            <div className="re-biz__links"><Link className="re-pill" to={`${root}/website/process`}>제작 방법</Link><Link className="re-biz__more" to={`${root}/contact`}>제작 문의<ArrowRight /></Link></div>
-          </div>
-        </article>
         <article className="re-biz__card re-biz__card--app">
           <img className="re-biz__photo" src={`${PHOTOS}/apps-devices-768.webp`} srcSet={`${PHOTOS}/apps-devices-768.webp 768w, ${PHOTOS}/apps-devices.webp 1536w`} sizes="(max-width: 1023px) 100vw, 50vw" alt="" loading="lazy" decoding="async" />
           <div className="re-biz__text">
             <p className="re-biz__kind">앱</p>
             <h3 className="re-biz__title">PC · 모바일 앱</h3>
             <div className="re-biz__links"><Link className="re-pill re-pill--light" to={`${root}/apps`}>출시한 앱</Link></div>
+          </div>
+        </article>
+        <article className="re-biz__card">
+          <img className="re-biz__photo" src={`${PHOTOS}/responsive-wide.webp`} alt="" loading="lazy" decoding="async" />
+          <div className="re-biz__text">
+            <p className="re-biz__kind">홈페이지 제작</p>
+            <h3 className="re-biz__title">소상공인 · 기업 홈페이지</h3>
+            <div className="re-biz__links"><Link className="re-pill" to={`${root}/website/process`}>제작 방법</Link><Link className="re-biz__more" to={`${root}/contact`}>제작 문의<ArrowRight /></Link></div>
           </div>
         </article>
       </div>
@@ -522,23 +511,23 @@ function HomeBusiness() {
 
 function EditorialHome() {
   const root = useRoot();
-  const storyItems = SCOPE_SCENES.slice(0, 3);
+  const storyItems = HOME_STORY_APPS;
   return <main id="top" className="re-home">
     <section className="greeting re-greeting"><div className="greeting-frame re-greeting__frame"><HeroVideo /></div></section>
     <HomeBusiness />
     <section id="scope" className="first re-first">
       <div className="first-intro re-first-intro init re-init">
-        <h2 className="first-heading">처음에<br />정하는 것</h2>
-        <div className="first-action re-first-intro__actions"><Link className="first-button" to={`${root}/website/process`}>제작 방법</Link><Link className="first-button" to={`${root}/website/features`}>기능 소개</Link><Link className="first-button" to={`${root}/website/price`}>제작 비용</Link></div>
-        <figure className="first-docs"><img src={MEDIA_SLOTS.intro} alt="제작한 홈페이지 화면 구성안" /></figure>
+        <h2 className="first-heading">PC와<br />태블릿</h2>
+        <div className="first-action re-first-intro__actions"><Link className="first-button" to={`${root}/apps`}>앱 전체</Link></div>
+        <figure className="first-docs"><img src={`${PHOTOS}/apps-devices-768.webp`} alt="노트북 · 태블릿 · 폰" /></figure>
         <div className="first-lights re-first-lights" aria-hidden="true"><div className="first-light re-first-light"><i className="light-trail blue re-light-trail"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div><div className="first-light-small re-first-light re-first-light--small"><i className="light-trail blue small reverse re-light-trail re-light-trail--small"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div></div>
       </div>
-      <div className="first-stories re-first-stories">{storyItems.map((scene, index) => <article className={`first-story type-${index + 1} re-first-story re-first-story--${index + 1} init re-init`} key={scene.title}><div className="first-before re-first-story__before"><h3 className="first-title">{scene.title}<br /><span className="first-keyword">{scene.keyword}</span></h3></div><div className="first-after re-first-story__after"><p className="first-desc">{scene.text.split("\n").map((line, lineIndex) => <Fragment key={line}>{lineIndex > 0 && <br />}{line}</Fragment>)}</p></div><figure className="first-fixer"><img src={scene.image} alt={`${scene.title} 화면`} /></figure></article>)}</div>
+      <div className="first-stories re-first-stories">{storyItems.map((scene, index) => <article className={`first-story type-${index + 1} re-first-story re-first-story--${index + 1} init re-init`} key={scene.slug}><div className="first-before re-first-story__before"><h3 className="first-title"><a href={scene.href}>{scene.name}</a><br /><span className="first-keyword">{scene.line}</span></h3></div><div className="first-after re-first-story__after"><p className="first-desc">{scene.facts.slice(1).map((line, lineIndex) => <Fragment key={line}>{lineIndex > 0 && <br />}{line}</Fragment>)}</p></div><figure className="first-fixer"><img src={scene.photoSmall} alt={scene.alt} /></figure></article>)}</div>
     </section>
-    <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">하는 일</p><h2 className="now-title">만들어 드리고,<br />사장님이 직접 고칠 수 있게<br className="mobile" /> 넘깁니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
-    <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{["/website/features", "/services/admin-system", "/services/responsive"].map((href, index) => <li className="now-value-item" key={href}><Link className={`now-value-card type-${index + 1}`} to={`${root}${href}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
+    <section className="now re-now init re-init" style={{ "--re-now-image": `url(/bypen/img/draw-ko-1536.webp)` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">하는 일</p><h2 className="now-title">윈도우 PC와<br />안드로이드 폰 · 태블릿에서<br className="mobile" /> 쓰는 앱</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
+    <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{HOME_VALUE_APPS.map((app, index) => <li className="now-value-item" key={app.slug}><a className={`now-value-card type-${index + 1}`} href={app.href}><img src={app.photoSmall} alt="" /><span className="now-value-text"><span className="now-value-title">{app.name}</span><span className="now-value-desc">{app.line}</span></span></a></li>)}</ul></div></section>
+    <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">출시한<br />앱</h2><ul className="latest-list">{APPS.map((app) => <li className="latest-item" key={app.slug}><a className="latest-link" href={app.href}><span className="latest-category">{app.facts[0].startsWith("안드로이드 폰") ? "폰 앱" : "태블릿 앱"}</span><span className="latest-title re-latest__title"><span className="latest-title-text">{app.name} · {app.line}</span></span></a></li>)}</ul></div></section>
     <HomeHelp />
-    <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">알아두면<br />좋은 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${root}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
     <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈한 뒤에도<br className="mobile" /> 내용을 직접 바꾸고<br />계속 쓰실 수 있게<br className="mobile" /> 만듭니다</p><ul className="tomorrow-list">{["/services/responsive", "/services/content-management", "/services/inquiry-reservation"].map((href, index) => <li className="tomorrow-item" key={href}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}${href}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">어떤 홈페이지가 필요하세요?<br />연락 주시면 같이 정해 드립니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/website/price`}>제작 비용</Link></div></section></div>
   </main>;
 }

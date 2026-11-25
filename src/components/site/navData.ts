@@ -278,8 +278,26 @@ export const MAIN_NAV: MainNavEntry[] = [
         { label: "블로그", href: "/blog", desc: "제작 기록과 업종별 이야기" },
       ] },
       { key: "areas", label: "사업 영역", href: "/", items: [
-        { label: "홈페이지 제작", href: "/website/process", desc: "소상공인 · 기업 홈페이지" },
         { label: "앱", href: "/apps", desc: "PC · 모바일 앱" },
+        { label: "홈페이지 제작", href: "/website/process", desc: "소상공인 · 기업 홈페이지" },
+      ] },
+    ],
+  },
+  {
+    key: "apps",
+    label: "앱",
+    href: "/apps",
+    groups: [
+      /* 앱 소개 페이지는 SPA 밖 정적 페이지(public/<앱>/)라 링크가 문서 이동으로 열린다(STATIC_PAGES) */
+      { key: "released", label: "출시한 앱", href: "/apps", items: [
+        { label: "앱 전체", href: "/apps", desc: "출시한 앱 목록" },
+        { label: "바이스크린", href: "/byscreen/", desc: "태블릿을 PC의 두 번째 모니터로" },
+        { label: "바이크로스", href: "/cross/", desc: "PC 마우스로 태블릿까지" },
+        { label: "바이패드", href: "/bypad/", desc: "태블릿을 PC 단축키 버튼판으로" },
+        { label: "바이펜", href: "/bypen/", desc: "태블릿 펜으로 PC에 그리기" },
+        { label: "바이포토", href: "/byphoto/", desc: "폰 사진을 집 PC로" },
+        { label: "바이케어", href: "/bycare/", desc: "부모님 폰 화면 보고 도와주기" },
+        { label: "바이뷰", href: "/byview/", desc: "남는 폰을 카메라 모니터로" },
       ] },
     ],
   },
@@ -310,24 +328,6 @@ export const MAIN_NAV: MainNavEntry[] = [
       { key: "screen", label: "화면과 노출", href: "/services/responsive", items: [
         { label: "반응형 웹 제작", href: "/services/responsive", desc: "PC · 태블릿 · 모바일" },
         { label: "검색엔진 최적화", href: "/services/seo", desc: "검색 결과에 맞춘 제목과 구조" },
-      ] },
-    ],
-  },
-  {
-    key: "apps",
-    label: "앱",
-    href: "/apps",
-    groups: [
-      /* 앱 소개 페이지는 SPA 밖 정적 페이지(public/<앱>/)라 링크가 문서 이동으로 열린다(STATIC_PAGES) */
-      { key: "released", label: "출시한 앱", href: "/apps", items: [
-        { label: "앱 전체", href: "/apps", desc: "출시한 앱 목록" },
-        { label: "바이스크린", href: "/byscreen/", desc: "태블릿을 PC의 두 번째 모니터로" },
-        { label: "바이크로스", href: "/cross/", desc: "PC 마우스로 태블릿까지" },
-        { label: "바이패드", href: "/bypad/", desc: "태블릿을 PC 단축키 버튼판으로" },
-        { label: "바이펜", href: "/bypen/", desc: "태블릿 펜으로 PC에 그리기" },
-        { label: "바이포토", href: "/byphoto/", desc: "폰 사진을 집 PC로" },
-        { label: "바이케어", href: "/bycare/", desc: "부모님 폰 화면 보고 도와주기" },
-        { label: "바이뷰", href: "/byview/", desc: "남는 폰을 카메라 모니터로" },
       ] },
     ],
   },
