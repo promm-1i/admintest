@@ -1,18 +1,14 @@
-import type React from "react";
-import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
+import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Link, Navigate, Route, Routes, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, ChevronLeft, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
+import { Link, Navigate, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
+import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, isStaticPage, type MainNavEntry } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
 import { FAQ } from "@/lib/faq";
 import { KAKAO_CHANNEL_URL, NAVER_BLOG_URL, PHONE_NUMBER, PHONE_TEL_HREF } from "@/lib/contact";
 const CONTACT_EMAIL = "6gsmake@gmail.com";
-import { SAMPLES, getPremiumDesigns, getPremiumCategories } from "@/lib/samples";
 import { INDUSTRY_SHOWCASES } from "@/components/site/industryShowcase";
-import { INDUSTRY_LANDING } from "@/lib/industryLanding";
-import { AVAILABLE_INDUSTRIES } from "@/lib/availableIndustries";
 import { searchSite, type SearchHit } from "@/lib/siteSearch";
 import { PAGE_EXTRAS, type ExtraBlock } from "@/lib/renewalExtras";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -135,7 +131,6 @@ const PAGE_DATA: Record<PageKey, ContentPage> = {
   ] },
 };
 
-const FEATURED_SLUGS = ["corporate-q-template", "corporate-r-template", "corporate-s-template", "corporate-i-template", "artist-a-template", "rentcar-f-template"];
 const SCOPE_SCENES = [
   { title: "화면 구성", keyword: "메뉴부터 정합니다", text: "메뉴와 페이지를 나누고\n읽는 순서를 정합니다", image: MEDIA_SLOTS.stories[0], href: "/website/process" },
   { title: "관리자 기능", keyword: "직접 고칩니다", text: "공지와 사례를 직접 올리고\n접수된 문의를 확인합니다", image: MEDIA_SLOTS.stories[1], href: "/services/admin-system" },
@@ -294,184 +289,6 @@ const HELP_CARDS = [
   { title: "자주 묻는 질문", desc: "비용 · 기간 · 관리자 기능에\n대한 답", href: "/faq", tone: "d", Icon: HelpCircle },
 ] as const;
 
-/**
- * 업종 가로 아코디언. NHN Cloud "주요 솔루션" 실측값 그대로 (2026-09-21).
- *   컨테이너 1280 · 높이 520 · 간격 12
- *   접힌 칸 79px (flex 1 1 0%) · 펼친 칸 865px (flex 0 1 auto)
- *   전환 flex .5s cubic-bezier(.4,0,.2,1) · 안쪽 글자 opacity .5s ease-out
- *   접힌 칸은 글자를 세로로 세운다.
- */
-/**
- * 업종 가로 아코디언. NHN Cloud "주요 솔루션" 실측값 그대로 (2026-09-22 재측정).
- *   패널 class 에 bg-cover · rounded-12, 배경은 사진
- *   background-size: auto 520px · background-position: 25% 0%
- *   접힘 79 / 펼침 865 / 높이 520 / 간격 12 / 행 폭 1320
- *   전환 flex .5s cubic-bezier(.4,0,.2,1)
- *   펼친 칸 본문: 여백 60 · 본문 칸 440 · 항목 사이 border-top rgba(255,255,255,.3)
- *   접힌 칸은 글자를 세로로 (c-writing-lr)
- *   본문은 접혀 있을 때 opacity 0, 펼치면 1 (.5s ease-out)
- * 사진은 그 업종 템플릿 썸네일을 쓴다.
- *
- * 2026-10-07 칸이 6개뿐이라 넓은 화면에서 펼친 칸이 1200px 넘게 늘어나 사진(4:3) 오른쪽이
- * 통째로 비었다. 프리미엄 분류에서 큰 업종 6개를 더 붙여 12칸으로 — 1280 이상에서만 보인다
- * (그보다 좁으면 접힌 칸이 글자 폭보다 좁아져 원래 6칸 그대로). 누르면 그 분류 진열로 간다.
- */
-const HOME_EXTRA_INDUSTRIES = [
-  { cat: "food", eng: "RESTAURANT", name: "카페 · 음식점",
-    rows: ["메뉴·가격 등록과 품절 표시", "매장 위치·영업시간 정보 관리", "예약·단체 주문 문의 접수 관리"] },
-  { cat: "beauty", eng: "BEAUTY · FITNESS", name: "뷰티 · 피트니스",
-    rows: ["시술·프로그램과 요금표 관리", "예약 접수와 담당자별 일정 관리", "전후 사진과 후기 게시 관리"] },
-  { cat: "stay", eng: "HOTEL · STAY", name: "호텔 · 숙박",
-    rows: ["객실 정보·요금과 사진 관리", "예약 문의 접수와 일정 확인", "부대시설·이벤트 소식 게시"] },
-  { cat: "corporate", eng: "CORPORATE", name: "기업",
-    rows: ["사업 분야·제품 정보 관리", "공지·보도자료 게시판 운영", "제휴·채용 문의 접수 관리"] },
-  { cat: "office", eng: "LAW · TAX", name: "법률 · 세무 사무소",
-    rows: ["업무 분야와 구성원 소개 관리", "해결 사례·칼럼 게시", "상담 예약 접수와 이력 관리"] },
-  { cat: "shop", eng: "SHOP · BRAND", name: "쇼핑몰 · 브랜드",
-    rows: ["상품 등록과 재고·노출 관리", "주문 접수와 배송 상태 관리", "회원 정보와 문의 응대 관리"] },
-] as const;
-
-function HomeIndustries() {
-  const root = useRoot();
-  const items = useMemo(() => {
-    const byIndustry = new Map<string, string>();
-    for (const sample of SAMPLES) {
-      if (!sample.image || !sample.industryKey || byIndustry.has(sample.industryKey)) continue;
-      byIndustry.set(sample.industryKey, sample.image);
-    }
-    const base = INDUSTRY_SHOWCASES.slice(0, 6).map((item) => ({
-      key: item.key,
-      eng: item.key.replace(/-/g, " ").toUpperCase(),
-      name: item.name,
-      rows: item.manageables.slice(0, 3),
-      href: item.solutionHref,
-      shot: byIndustry.get(item.key) ?? byIndustry.get(item.key.replace("-", "")) ?? "",
-      extra: false,
-    }));
-    const groups = getPremiumCategories();
-    const extra = HOME_EXTRA_INDUSTRIES.map((item) => ({
-      key: `cat-${item.cat}`,
-      eng: item.eng,
-      name: item.name,
-      rows: [...item.rows],
-      href: `/web-solutions?cat=${item.cat}`,
-      shot: groups.find((g) => g.key === item.cat)?.items[0]?.sample.image ?? "",
-      extra: true,
-    }));
-    return [...base, ...extra];
-  }, []);
-  const [open, setOpen] = useState(0);
-  return <section className="re-nhn re-nhn--industry">
-    <div className="re-nhn__frame">
-      <h2 className="re-nhn__heading">업종별 홈페이지</h2>
-      <p className="re-nhn__lead">업종마다 손님이 찾는 것이 다릅니다. 그 업종에 맞춘 화면과 기능을 넣습니다.</p>
-      <ul className="re-acc">{items.map((item, index) => {
-        const active = index === open;
-        return <li key={item.key} className="re-acc__panel" data-open={active} data-extra={item.extra || undefined}
-          style={item.shot ? { backgroundImage: `url(${item.shot})` } as CSSProperties : undefined}
-          onPointerEnter={() => setOpen(index)} onFocusCapture={() => setOpen(index)}>
-          <Link to={hrefIn(root, item.href)} aria-expanded={active}>
-            <i className="re-acc__dim" aria-hidden="true" />
-            <span className="re-acc__side" aria-hidden={active}>{item.name}</span>
-            <span className="re-acc__body">
-              <span className="re-acc__eng">{item.eng}</span>
-              <strong>{item.name}</strong>
-              <span className="re-acc__rows">{item.rows.map((point) => <span key={point}>{point}</span>)}</span>
-              <span className="re-acc__link">자세히 보기<ArrowRight aria-hidden="true" /></span>
-            </span>
-          </Link>
-        </li>;
-      })}</ul>
-    </div>
-  </section>;
-}
-
-function HomeCases() {
-  const root = useRoot();
-  // 프리미엄 디자인만 카드로 낸다
-  const cases = getPremiumDesigns().map((item) => item.sample).filter((sample) => sample.image).slice(0, 12);
-  /* 원본 Swiper 설정 그대로 — slidesPerView 4 · spaceBetween 10 · speed 300 · slidesPerGroup 4 · loop 없음.
-     Swiper 는 allowTouchMove 가 기본 켜져 있어 좌우로 끌어서도 넘어간다. 화살표만 있으면 반쪽이다.
-     슬라이드 320 + 간격 10 = 한 칸 330. */
-  const PER_VIEW = 4;
-  const STEP = 330;
-  const [index, setIndex] = useState(0);
-  const [drag, setDrag] = useState(0);
-  const [jump, setJump] = useState(false);   // 되감는 순간만 전환을 끈다
-  const dragging = useRef<{ id: number; x: number; moved: boolean } | null>(null);
-  /* 끝에서 멈추지 않고 처음으로 이어진다. 목록을 두 벌 깔아 두고, 한 벌을 넘어가면
-     전환 없이 같은 자리로 되감아 경계가 보이지 않게 한다. */
-  const LEN = cases.length;
-  const loop = cases.concat(cases);
-  const go = (delta: number) => setIndex((current) => current + delta * PER_VIEW);
-
-  const onDown = (event: React.PointerEvent<HTMLUListElement>) => {
-    if (event.pointerType === "mouse" && event.button !== 0) return;
-    dragging.current = { id: event.pointerId, x: event.clientX, moved: false };
-    event.currentTarget.setPointerCapture(event.pointerId);
-  };
-  const onMove = (event: React.PointerEvent<HTMLUListElement>) => {
-    const grab = dragging.current;
-    if (!grab || grab.id !== event.pointerId) return;
-    const dx = event.clientX - grab.x;
-    if (Math.abs(dx) > 4) grab.moved = true;
-    setDrag(dx);
-  };
-  const onUp = (event: React.PointerEvent<HTMLUListElement>) => {
-    const grab = dragging.current;
-    if (!grab || grab.id !== event.pointerId) return;
-    dragging.current = null;
-    // 한 칸의 1/4 을 넘게 끌면 넘긴다
-    const moved = Math.round(-drag / STEP + (Math.abs(drag) > STEP / 4 ? (drag < 0 ? 0.5 : -0.5) : 0));
-    setIndex((current) => current + moved);
-    setDrag(0);
-  };
-  const offset = index * STEP - drag;
-
-  /* 한 벌을 벗어나면 전환을 끄고 같은 화면이 되는 자리로 돌려놓는다 */
-  useEffect(() => {
-    if (index >= LEN || index < 0) {
-      const id = window.setTimeout(() => {
-        setJump(true);
-        setIndex((current) => ((current % LEN) + LEN) % LEN);
-      }, 320);
-      return () => window.clearTimeout(id);
-    }
-    if (jump) {
-      const id = window.requestAnimationFrame(() => setJump(false));
-      return () => window.cancelAnimationFrame(id);
-    }
-    return undefined;
-  }, [index, LEN, jump]);
-
-  return <section className="re-nhn re-nhn--cases">
-    <div className="re-nhn__frame">
-      <h2 className="re-nhn__heading">홈페이지 포트폴리오</h2>
-      <p className="re-nhn__lead">실제 사이트를 그대로 모델링한 구성입니다. 좌우로 끌어 보세요.</p>
-      <div className="re-case-nav">
-        <button type="button" onClick={() => go(-1)} aria-label="이전 사례"><ChevronLeft /></button>
-        <button type="button" onClick={() => go(1)} aria-label="다음 사례"><ArrowRight /></button>
-      </div>
-      <div className="re-case-viewport">
-        <ul className="re-case-list" data-dragging={dragging.current || jump ? "true" : "false"}
-          style={{ transform: `translate3d(${-offset}px,0,0)` }}
-          onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={onUp}>
-          {loop.map((sample, i) => <li className="re-case" key={`${sample.slug}-${i}`}
-            aria-hidden={i >= LEN ? true : undefined}>
-            <Link to={`${root}/samples/${sample.slug}`} draggable={false}
-              onClick={(event) => { if (dragging.current?.moved) event.preventDefault(); }}>
-              <figure className="re-case__shot"><img src={sample.image} alt="" loading="lazy" draggable={false} /></figure>
-              <h3>{sample.premiumLabel ?? sample.industry}</h3>
-              <span className="re-case__more">자세히 보기<ArrowRight /></span>
-            </Link>
-          </li>)}
-        </ul>
-      </div>
-      <div className="re-nhn__actions"><Link className="re-pill" to={`${root}/web-solutions`}>포트폴리오 전체 보기</Link></div>
-    </div>
-  </section>;
-}
-
 function HomeHelp() {
   const root = useRoot();
   return <section className="re-nhn re-nhn--help">
@@ -487,153 +304,6 @@ function HomeHelp() {
         </Link>
       </li>)}</ul>
     </div>
-  </section>;
-}
-
-/**
- * 만든 홈페이지를 원근으로 눕혀 앞으로 흘려보내는 칸.
- *
- * 지학사 초등(textbook.jihak.co.kr) 히어로의 표지 레인을 소스 그대로 옮겼다 (2026-09-21).
- *   ROWS 8 · PER_ROW 5 · ROW_SECONDS 9 · TILT rotateX(32deg)
- *   SOFTEN ["far","far","far","far","far","mid","near",""]
- *   뒤쪽 줄은 세로로 크게 눌려 우글거린다. 눌리기 전에 세로 성분만 흐리게 걸러 둔다
- *   (feGaussianBlur stdDeviation="0 6" / "0 2" / "0 1.2").
- *   한 줄만큼 흐르면 맨 앞줄을 맨 뒤로 보내고 다음 사진을 채운다. 그래서 이음매가 없다.
- *   1280 미만에서는 깔지 않는다. prefers-reduced-motion 이면 흐르지 않는다.
- *
- * 우리 것과 다른 한 가지: 표지 비율 520/700 대신 4:3 을 쓴다.
- * 교과서는 세로 표지지만 우리 것은 가로 화면이라, 세로로 자르면 화면이 잘린다.
- */
-const LANE_ROWS = 8;
-const LANE_PER_ROW = 5;
-const LANE_ROW_SECONDS = 9;
-const LANE_SOFTEN = ["far", "far", "far", "far", "far", "mid", "near", ""];
-
-function HomeLane() {
-  const root = useRoot();
-  const stageRef = useRef<HTMLDivElement>(null);
-  // 같은 사진은 한 번만 쓴다.
-  const covers = useMemo(() => {
-    const seen = new Set<string>();
-    const list: string[] = [];
-    for (const sample of [...getPremiumDesigns().map((item) => item.sample), ...SAMPLES]) {
-      if (!sample.image || seen.has(sample.image)) continue;
-      seen.add(sample.image);
-      list.push(sample.image);
-    }
-    return list;
-  }, []);
-
-  useEffect(() => {
-    const stage = stageRef.current;
-    if (!stage || covers.length === 0) return;
-    const wide = matchMedia("(min-width: 1280px)");
-    const still = matchMedia("(prefers-reduced-motion: reduce)");
-    let lane: HTMLDivElement | null = null;
-    let next = 0;
-    let offset = 0;
-    let pitch = 0;
-    let last: number | null = null;
-    let raf = 0;
-    let seen = true;
-
-    const fillRow = (row: Element) => {
-      [...row.children].forEach((img, c) => { (img as HTMLImageElement).src = covers[(next + c) % covers.length]; });
-      next = (next + LANE_PER_ROW) % covers.length;
-    };
-    /* 줄이 앞으로 오면 덜 눌리므로 걸러내는 세기도 줄인다 */
-    const soften = () => {
-      if (!lane) return;
-      [...lane.children].forEach((row, i) => {
-        const key = LANE_SOFTEN[i] || "";
-        (row as HTMLElement).style.filter = key ? `url(#re-lane-${key})` : "none";
-      });
-    };
-    /* 줄 간격은 소수점까지 재야 한다. offsetTop 은 정수로 반올림되어 반 픽셀씩 어긋난다 */
-    const measure = () => {
-      if (!lane?.firstElementChild) return;
-      const row = getComputedStyle(lane.firstElementChild);
-      const now = parseFloat(row.height) + parseFloat(row.marginBottom);
-      if (!now) return;
-      offset = pitch ? (offset / pitch) * now : 0;
-      pitch = now;
-    };
-    /* 맨 앞줄을 맨 뒤로 돌려보내고 다음 사진을 채운다 */
-    const recycle = () => {
-      if (!lane?.lastElementChild) return;
-      const row = lane.lastElementChild;
-      lane.prepend(row);
-      fillRow(row);
-      soften();
-    };
-    const tick = (now: number) => {
-      if (last !== null && pitch && lane) {
-        offset += ((now - last) / 1000) * (pitch / LANE_ROW_SECONDS);
-        while (offset >= pitch) { offset -= pitch; recycle(); }
-        lane.style.transform = `rotateX(32deg) translateY(${offset}px)`;
-      }
-      last = now;
-      raf = requestAnimationFrame(tick);
-    };
-    const stop = () => { if (raf) cancelAnimationFrame(raf); raf = 0; last = null; };
-    const start = () => { if (!lane || still.matches || raf || !seen || document.hidden) return; last = null; raf = requestAnimationFrame(tick); };
-
-    const build = () => {
-      if (!wide.matches || lane) return;
-      lane = document.createElement("div");
-      lane.className = "re-lane__floor";
-      /* 먼 줄부터 쌓는다. 가까운 줄이 먼저 지나가므로 사진도 그 순서로 채운다 */
-      const rows: HTMLDivElement[] = [];
-      for (let r = 0; r < LANE_ROWS; r += 1) {
-        const row = document.createElement("div");
-        row.className = "re-lane__row";
-        for (let c = 0; c < LANE_PER_ROW; c += 1) {
-          const img = document.createElement("img");
-          img.alt = ""; img.decoding = "async"; img.loading = "lazy";
-          row.appendChild(img);
-        }
-        rows.push(row);
-        lane.appendChild(row);
-      }
-      rows.reverse().forEach(fillRow);
-      stage.appendChild(lane);
-      stage.classList.add("is-live");
-      soften();
-      measure();
-      start();
-    };
-    const teardown = () => { stop(); lane?.remove(); lane = null; stage.classList.remove("is-live"); pitch = 0; offset = 0; };
-
-    build();
-    const onWide = () => { if (wide.matches) build(); else teardown(); };
-    const onResize = () => measure();
-    const onVisible = () => { if (document.hidden) stop(); else start(); };
-    const io = new IntersectionObserver(([entry]) => { seen = entry.isIntersecting; if (seen) start(); else stop(); }, { threshold: 0 });
-    io.observe(stage);
-    wide.addEventListener("change", onWide);
-    still.addEventListener("change", () => { if (still.matches) stop(); else start(); });
-    window.addEventListener("resize", onResize);
-    document.addEventListener("visibilitychange", onVisible);
-    return () => {
-      io.disconnect();
-      wide.removeEventListener("change", onWide);
-      window.removeEventListener("resize", onResize);
-      document.removeEventListener("visibilitychange", onVisible);
-      teardown();
-    };
-  }, [covers]);
-
-  return <section className="re-lane" aria-label="만든 홈페이지">
-    <p className="re-lane__eyebrow">MADE BY NOVERIQ</p>
-    <h2 className="re-lane__heading">지금까지 만든 화면입니다</h2>
-    {/* 뒤쪽 줄은 세로로 눌려 우글거린다. 눌리기 전에 세로 성분만 걸러 둔다 */}
-    <svg className="re-lane__filters" aria-hidden="true" focusable="false">
-      <filter id="re-lane-far" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 6" /></filter>
-      <filter id="re-lane-mid" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 2" /></filter>
-      <filter id="re-lane-near" colorInterpolationFilters="sRGB"><feGaussianBlur stdDeviation="0 1.2" /></filter>
-    </svg>
-    <div className="re-lane__stage" ref={stageRef} aria-hidden="true" />
-    <div className="re-lane__actions"><Link className="re-pill" to={`${root}/samples`}>만든 화면 전부 보기</Link></div>
   </section>;
 }
 
@@ -834,7 +504,7 @@ function HomeBusiness() {
           <div className="re-biz__text">
             <p className="re-biz__kind">홈페이지 제작</p>
             <h3 className="re-biz__title">소상공인 · 기업 홈페이지</h3>
-            <div className="re-biz__links"><Link className="re-pill" to={`${root}/samples`}>제작 사례</Link><Link className="re-biz__more" to={`${root}/contact`}>제작 문의<ArrowRight /></Link></div>
+            <div className="re-biz__links"><Link className="re-pill" to={`${root}/website/process`}>제작 방법</Link><Link className="re-biz__more" to={`${root}/contact`}>제작 문의<ArrowRight /></Link></div>
           </div>
         </article>
         <article className="re-biz__card re-biz__card--app">
@@ -852,28 +522,24 @@ function HomeBusiness() {
 
 function EditorialHome() {
   const root = useRoot();
-  const projects = useMemo(() => FEATURED_SLUGS.map((slug) => SAMPLES.find((sample) => sample.slug === slug)).filter((sample): sample is NonNullable<typeof sample> => Boolean(sample?.image)), []);
   const storyItems = SCOPE_SCENES.slice(0, 3);
   return <main id="top" className="re-home">
     <section className="greeting re-greeting"><div className="greeting-frame re-greeting__frame"><HeroVideo /></div></section>
     <HomeBusiness />
-    <HomeLane />
     <section id="scope" className="first re-first">
       <div className="first-intro re-first-intro init re-init">
         <h2 className="first-heading">처음에<br />정하는 것</h2>
-        <div className="first-action re-first-intro__actions"><Link className="first-button" to={`${root}/website/process`}>제작 방법</Link><Link className="first-button" to={`${root}/website/features`}>기능 소개</Link><Link className="first-button" to={`${root}/samples`}>제작 사례</Link></div>
+        <div className="first-action re-first-intro__actions"><Link className="first-button" to={`${root}/website/process`}>제작 방법</Link><Link className="first-button" to={`${root}/website/features`}>기능 소개</Link><Link className="first-button" to={`${root}/website/price`}>제작 비용</Link></div>
         <figure className="first-docs"><img src={MEDIA_SLOTS.intro} alt="제작한 홈페이지 화면 구성안" /></figure>
         <div className="first-lights re-first-lights" aria-hidden="true"><div className="first-light re-first-light"><i className="light-trail blue re-light-trail"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div><div className="first-light-small re-first-light re-first-light--small"><i className="light-trail blue small reverse re-light-trail re-light-trail--small"><span className="light-trail-circle" /><span className="light-trail-circle" /><span className="light-trail-circle" /></i></div></div>
       </div>
       <div className="first-stories re-first-stories">{storyItems.map((scene, index) => <article className={`first-story type-${index + 1} re-first-story re-first-story--${index + 1} init re-init`} key={scene.title}><div className="first-before re-first-story__before"><h3 className="first-title">{scene.title}<br /><span className="first-keyword">{scene.keyword}</span></h3></div><div className="first-after re-first-story__after"><p className="first-desc">{scene.text.split("\n").map((line, lineIndex) => <Fragment key={line}>{lineIndex > 0 && <br />}{line}</Fragment>)}</p></div><figure className="first-fixer"><img src={scene.image} alt={`${scene.title} 화면`} /></figure></article>)}</div>
     </section>
     <section className="now re-now init re-init" style={{ "--re-now-image": `url(${MEDIA_SLOTS.now})` } as CSSProperties}><div className="now-track re-now__track"><p className="now-heading re-now__heading">지금<br />우리는</p><div className="now-sticky re-now__sticky"><div className="now-frame re-now__frame"><div className="now-text re-now__text"><p className="now-step">하는 일</p><h2 className="now-title">만들어 드리고,<br />사장님이 직접 고칠 수 있게<br className="mobile" /> 넘깁니다</h2></div><i className="now-dim re-now__dim" /><i className="now-edge-top re-now__edge re-now__edge--top" /><i className="now-edge-bottom re-now__edge re-now__edge--bottom" /></div></div></div></section>
-    <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{projects.slice(0, 3).map((project, index) => <li className="now-value-item" key={project.slug}><Link className={`now-value-card type-${index + 1}`} to={`${root}/samples/${project.slug}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
-    <HomeIndustries />
-    <HomeCases />
+    <section className="now-value re-now-value init re-init"><div className="now-value-frame re-now-value__frame"><ul className="now-value-list">{["/website/features", "/services/admin-system", "/services/responsive"].map((href, index) => <li className="now-value-item" key={href}><Link className={`now-value-card type-${index + 1}`} to={`${root}${href}`}><img src={MEDIA_SLOTS.values[index]} alt="" /><span className="now-value-text"><span className="now-value-title">{index === 0 ? "업종에 맞는 화면" : index === 1 ? "직접 다루는 관리자" : "PC와 모바일 검수"}</span><span className="now-value-desc">{index === 0 ? "메뉴와 콘텐츠를 업종에 맞춰 구성합니다" : index === 1 ? "게시물과 문의를 운영자가 관리합니다" : "각 화면의 순서와 이미지 잘림을 확인합니다"}</span></span></Link></li>)}</ul></div></section>
     <HomeHelp />
     <section className="latest re-latest"><div className="latest-frame re-latest__frame"><h2 className="latest-heading">알아두면<br />좋은 안내</h2><ul className="latest-list">{HOME_LATEST.map(([title, date]) => <li className="latest-item" key={title}><Link className="latest-link" to={`${root}/website/process`}><span className="latest-category">제작안내</span><span className="latest-title re-latest__title"><span className="latest-title-text">{title}</span><span className="latest-date">{date}</span></span></Link></li>)}</ul></div></section>
-    <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈한 뒤에도<br className="mobile" /> 내용을 직접 바꾸고<br />계속 쓰실 수 있게<br className="mobile" /> 만듭니다</p><ul className="tomorrow-list">{projects.slice(3, 6).map((project, index) => <li className="tomorrow-item" key={project.slug}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}/samples/${project.slug}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">어떤 홈페이지가 필요하세요?<br />연락 주시면 같이 정해 드립니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/samples`}>제작 사례</Link></div></section></div>
+    <div className="tomorrow re-tomorrow init re-init"><i className="tomorrow-glow type-1 re-tomorrow__glow" /><i className="tomorrow-glow type-2 re-tomorrow__glow re-tomorrow__glow--right" /><section className="tomorrow-frame re-tomorrow__frame"><h2 className="tomorrow-heading">오픈<br />이후</h2><p className="tomorrow-message">오픈한 뒤에도<br className="mobile" /> 내용을 직접 바꾸고<br />계속 쓰실 수 있게<br className="mobile" /> 만듭니다</p><ul className="tomorrow-list">{["/services/responsive", "/services/content-management", "/services/inquiry-reservation"].map((href, index) => <li className="tomorrow-item" key={href}><Link className={`tomorrow-link type-${index + 1}`} to={`${root}${href}`}><span className="tomorrow-title">{index === 0 ? "반응형 제작" : index === 1 ? "콘텐츠 관리" : "문의·예약"}</span><span className="tomorrow-desc">{index === 0 ? <>기기마다 화면을 다시 맞추고<br />터치하기 쉽게 만듭니다</> : index === 1 ? <>공지와 사례를 직접 올리고<br />오픈 뒤에도 내용을 바꿉니다</> : <>문의와 예약을 한곳에 모아<br />접수 순서대로 확인합니다</>}</span><span className="tomorrow-image"><img src={MEDIA_SLOTS.tomorrow[index]} alt="" /></span></Link></li>)}</ul></section><section className="recruit re-recruit"><p className="recruit-category">제작 문의</p><h2 className="recruit-heading">어떤 홈페이지가 필요하세요?<br />연락 주시면 같이 정해 드립니다</h2><div className="recruit-action"><Link className="recruit-link" to={`${root}/contact`}>제작 상담</Link><Link className="recruit-link" to={`${root}/website/price`}>제작 비용</Link></div></section></div>
   </main>;
 }
 
@@ -1137,7 +803,7 @@ function StandardPage({ page, path }: { page: ContentPage; path: string }) {
 
 function PriceDetail({ page, path }: { page: ContentPage; path: string }) {
   const root = useRoot();
-  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{WEBSITE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="맞춤 제작"><div className="re-premium-price"><h3>150만원부터</h3><span>메뉴별 상세 페이지가 있고 나중에 더 늘릴 수 있습니다. 포트폴리오에서 출발해 섹션 구성과 브랜드 색 · 글꼴을 다시 잡고 사진을 새로 만듭니다</span><Link to={`${root}/web-solutions`}>포트폴리오 보기<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
+  return <main className="re-sub-page"><PageInfo category={page.group} title={page.title} /><Contents><LocalNav group="홈페이지 제작" path={path} /><Section split title="제작 방식별 비용"><div className="re-price-packages">{WEBSITE_PACKAGES.map((item) => <div className="re-price-card" key={item.key}><p>{item.badge ?? "홈페이지 제작"}</p><h3>{item.label}</h3><span>{item.desc}</span><strong>{formatMan(item.total)}<small>부터</small></strong></div>)}</div><p className="re-price-note">모든 금액은 부가세 별도이며 필요한 범위에 따라 달라집니다</p></Section><Section wide title="포함 항목 비교"><PricingComparison bare /></Section><Section split title="맞춤 제작"><div className="re-premium-price"><h3>150만원부터</h3><span>메뉴별 상세 페이지가 있고 나중에 더 늘릴 수 있습니다. 섹션 구성과 브랜드 색 · 글꼴을 잡고 사진을 새로 만듭니다</span><Link to={`${root}/contact`}>제작 문의<ArrowRight /></Link></div></Section><ContactBand /></Contents></main>;
 }
 
 const BOARD_PAGE_SIZE = 10;
@@ -1154,45 +820,6 @@ function useBoardPage<T>(items: T[]) {
     setParams(query);
   };
   return { page: safe, total, setPage, slice: items.slice((safe - 1) * BOARD_PAGE_SIZE, safe * BOARD_PAGE_SIZE) };
-}
-
-function CatalogPage() {
-  const root = useRoot();
-  const { search } = useLocation(); const query = new URLSearchParams(search); const cat = query.get("cat");
-  const [keyword, setKeyword] = useState("");
-  const categories = getPremiumCategories();
-  const active = cat ? categories.find((group) => group.key === cat) : undefined;
-  const source = getPremiumDesigns().map((item) => item.sample);
-  const items = source.filter((sample) => (!active || active.items.some((d) => d.sample.slug === sample.slug)) && sample.image && (sample.industry + sample.tag).toLowerCase().includes(keyword.trim().toLowerCase()));
-  const board = useBoardPage(items);
-  const title = "홈페이지 포트폴리오";
-  const groupTitle = active ? active.label : "전체 디자인";
-  return <main className="re-sub-page"><PageInfo category="디자인" title={title} /><Contents><Section wide title={groupTitle}><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label={`${title} 검색`} />{<nav className="re-board-filter" aria-label="업종"><Link to={`${root}/web-solutions`} aria-current={!cat ? "page" : undefined}>전체</Link>{categories.filter((group) => group.items.length > 0).map((group) => <Link key={group.key} to={`${root}/web-solutions?cat=${group.key}`} aria-current={cat === group.key ? "page" : undefined}>{group.label}</Link>)}</nav>}<ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${root}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">해당 조건의 디자인이 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
-}
-
-function PortfolioPage() {
-  const root = useRoot();
-  const [keyword, setKeyword] = useState("");
-  const items = SAMPLES.filter((sample) => sample.image && (sample.industry + (sample.tag ?? "")).toLowerCase().includes(keyword.trim().toLowerCase()));
-  const board = useBoardPage(items);
-  return <main className="re-sub-page"><PageInfo category="포트폴리오" title="제작 사례" /><Contents><Section wide title="전체 사례"><BoardSearch value={keyword} onChange={(value) => { setKeyword(value); board.setPage(1); }} label="제작 사례 검색" /><ul className="re-cards">{board.slice.map((sample) => <li className="re-cards__item" key={sample.slug}><Link to={`${root}/samples/${sample.slug}`}><figure><img src={sample.image} alt="" loading="lazy" /></figure><span className="re-cards__subject">{sample.premiumLabel ?? sample.industry}</span></Link></li>)}</ul>{items.length === 0 && <p className="re-board__state">검색 결과가 없습니다</p>}<Pagination total={board.total} current={board.page} onSelect={board.setPage} /></Section></Contents></main>;
-}
-
-function SampleDetail({ slug }: { slug: string }) {
-  const root = useRoot();
-  const list = SAMPLES.filter((item) => item.image);
-  const index = list.findIndex((item) => item.slug === slug);
-  const sample = list[index]; if (!sample) return <NotFound />;
-  const prev = list[index - 1]; const next = list[index + 1];
-  const related = list.filter((item) => item.slug !== sample.slug && item.industryKey === sample.industryKey).slice(0, 3);
-  return <main className="re-sub-page"><PageInfo category="제작 사례" title={sample.premiumLabel ?? sample.industry} /><Contents><Section wide><DetailArticle category={sample.designCode ?? "NOVERIQ"} title={sample.title} listHref={`${root}/samples`} prev={prev && { label: prev.premiumLabel ?? prev.industry, href: `${root}/samples/${prev.slug}` }} next={next && { label: next.premiumLabel ?? next.industry, href: `${root}/samples/${next.slug}` }}>
-    <figure className="re-detail__figure"><img src={sample.image} alt={`${sample.industry} 홈페이지 미리보기`} /></figure>
-    <p>{sample.purpose}</p>
-    <dl className="re-detail__spec"><div><dt>제작 유형</dt><dd>{sample.type.join(" · ")}</dd></div><div><dt>추천 업종</dt><dd>{sample.idealFor}</dd></div>{sample.designCode && <div><dt>디자인 코드</dt><dd>{sample.designCode}</dd></div>}</dl>
-    <h3>포함된 화면과 기능</h3><ol className="re-detail__features">{sample.features.map((feature) => <li key={feature}>{feature}</li>)}</ol>
-    {sample.liveUrl && <p className="re-detail__live"><a href={sample.liveUrl} target="_blank" rel="noreferrer">실제 화면 보기<ArrowUpRight /></a></p>}
-    {related.length > 0 && <><h3>같은 업종의 다른 화면</h3><ul className="re-detail__related">{related.map((item) => <li key={item.slug}><Link to={`${root}/samples/${item.slug}`}><img src={item.image} alt="" loading="lazy" /><span>{item.premiumLabel ?? item.industry}</span></Link></li>)}</ul></>}
-  </DetailArticle></Section><ContactBand /></Contents></main>;
 }
 
 function ContactPage() {
@@ -1369,7 +996,6 @@ const SKINNED_SOLUTIONS: Record<string, ReturnType<typeof lazy>> = {
   platform: lazy(() => import("@/pages/solutions/PlatformSolution")),
   "product-quotes": lazy(() => import("@/pages/solutions/ProductQuoteSolution")),
 };
-const SkinnedIndustry = lazy(() => import("@/pages/IndustryLanding"));
 
 function SkinnedPage({ category, title, children }: { category: string; title: string; children: ReactNode }) {
   return <main className="re-sub-page re-sub-page--skinned"><PageInfo category={category} title={title} /><div className="re-skinned"><Suspense fallback={<p className="re-board__state">불러오는 중입니다</p>}>{children}</Suspense></div></main>;
@@ -1386,20 +1012,6 @@ function SolutionsPage() {
         <div className="re-solutions__links"><Link to={hrefIn(root, item.solutionHref)}>자세히</Link><a href={item.adminHref}>관리자 데모</a><a href={item.siteHref}>고객 화면</a></div>
       </li>)}</ul>
       <p className="re-estimate__note">데모 화면은 기능을 보여 주기 위한 예시입니다. 실제 제작에서는 색과 글꼴, 화면 구성을 업체에 맞춰 새로 잡습니다. 데모는 리뉴얼 시안이 아닌 현재 사이트 화면으로 열립니다.</p>
-    </Section>
-    <ContactBand />
-  </Contents></main>;
-}
-
-function IndustryPage() {
-  const root = useRoot();
-  const items = Object.entries(INDUSTRY_LANDING).filter(([key]) => AVAILABLE_INDUSTRIES.includes(key)).map(([key, value]) => ({ key, ...value }));
-  return <main className="re-sub-page"><PageInfo category="홈페이지 제작" title="업종별 홈페이지" /><Contents>
-    <LocalNav group="홈페이지 제작" path="/homepage" />
-    <Section split title="업종에 맞춰 다르게"><div className="re-step-body"><p className="re-step-text">같은 홈페이지라도 업종마다 손님이 찾는 것이 다릅니다. 렌터카는 요금, 병원은 진료 시간, 학원은 시간표입니다. 업종별로 필요한 화면과 기능을 정리해 두었습니다.</p><ul className="re-step-list"><li><Check />{`${items.length}개 업종`}</li><li><Check />업종별 자주 겪는 문제와 해결 화면</li><li><Check />해당 업종 시안 바로 보기</li></ul></div></Section>
-    <Section wide title="업종 목록">
-      <ul className="re-industry">{items.map((item) => <li key={item.key}><Link to={`${root}/homepage/${item.key}`}><strong>{item.keyword}</strong><span>{item.intro}</span></Link></li>)}</ul>
-      <p className="re-estimate__note">업종 쪽은 리뉴얼 시안이 아닌 현재 사이트 화면으로 열립니다.</p>
     </Section>
     <ContactBand />
   </Contents></main>;
@@ -1498,10 +1110,8 @@ function NotFound() {
 function RouteContent({ path }: { path: string }) {
   const root = useRoot();
   if (path === "/") return <EditorialHome />;
-  if (path === "/web-solutions") return <CatalogPage />;
-  if (path === "/templates" || path.startsWith("/templates/")) return <Navigate to={`${root}/web-solutions`} replace />;
-  if (path === "/samples") return <PortfolioPage />;
-  if (path.startsWith("/samples/")) return <SampleDetail slug={path.split("/")[2]} />;
+  if (path === "/web-solutions" || path === "/templates" || path.startsWith("/templates/") || path === "/homepage" || path.startsWith("/homepage/")) return <Navigate to={`${root}/website/price`} replace />;
+  if (path === "/samples" || path.startsWith("/samples/")) return <Navigate to={`${root}/`} replace />;
   if (path === "/contact") return <ContactPage />;
   if (path === "/notices") return <NoticesPage />;
   if (path.startsWith("/notices/")) return <NoticeDetailPage id={path.split("/")[2]} />;
@@ -1511,12 +1121,10 @@ function RouteContent({ path }: { path: string }) {
   if (path === "/apps") return <AppsPage />;
   if (path === "/estimate") return <EstimatePage />;
   if (path === "/web-solutions/demos" || path === "/solutions") return <SolutionsPage />;
-  if (path === "/homepage") return <IndustryPage />;
   if (path.startsWith("/web-solutions/")) {
     const Solution = SKINNED_SOLUTIONS[path.split("/")[2]];
     if (Solution) return <SkinnedPage category="기술력" title="업종 솔루션"><Solution /></SkinnedPage>;
   }
-  if (path.startsWith("/homepage/")) return <SkinnedPage category="홈페이지 제작" title="업종별 홈페이지"><Routes><Route path="homepage/:key" element={<SkinnedIndustry />} /></Routes></SkinnedPage>;
   if (path === "/blog") return <BlogPage />;
   const key = Object.entries({ "/website/process": "process", "/website/price": "price", "/website/features": "features", "/website/maintenance": "maintenance", "/services/custom": "custom", "/services/admin-system": "admin-system", "/services/inquiry-reservation": "inquiry-reservation", "/services/search-filter": "search-filter", "/services/content-management": "content-management", "/services/database-api": "database-api", "/services/responsive": "responsive", "/services/seo": "seo" }).find(([route]) => route === path)?.[1] as PageKey | undefined;
   return key ? <StandardPage page={PAGE_DATA[key]} path={path} /> : <NotFound />;
@@ -1541,10 +1149,6 @@ function PageMeta({ page }: { page: ContentPage }) { usePageTitle(`${page.title}
 /** 본 사이트 루트에서 쓰는 리뉴얼 본문들. 껍데기는 SiteLayout 이 이미 씌운다. */
 export function RenewalHomeBody() { return <EditorialHome />; }
 export function RenewalPriceBody() { return <><PageMeta page={PAGE_DATA.price} /><PriceDetail page={PAGE_DATA.price} path="/website/price" /></>; }
-export function RenewalSamplesBody() {
-  usePageTitle("제작 사례 — NOVERIQ", "병원, 뷰티샵, 식당 등 업종별 홈페이지 제작 포트폴리오를 확인하세요.");
-  return <PortfolioPage />;
-}
 export function RenewalPrivacyBody() { return <PrivacyPage />; }
 export function RenewalAppsBody() {
   usePageTitle("앱 — NOVERIQ", "노베릭이 출시한 앱. 윈도우 PC와 안드로이드 폰 · 태블릿에서 쓰는 앱을 만듭니다.");

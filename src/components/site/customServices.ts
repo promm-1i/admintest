@@ -43,7 +43,7 @@ export const CUSTOM_SERVICES: CustomService[] = [
     ],
     examples: [
       { label: "부동산 관리자 데모 체험하기", href: "/web-solutions/real-estate/demo" },
-      { label: "업종별 맞춤 제작 보기", href: "/web-solutions" },
+      { label: "업종별 맞춤 제작 보기", href: "/website/price" },
     ],
   },
   {

@@ -146,7 +146,7 @@ export function SolutionShowcase({ industry }: { industry: IndustryShowcase }) {
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <Button asChild variant="outline">
-            <Link to="/web-solutions">요금 확인하기</Link>
+            <Link to="/website/price">요금 확인하기</Link>
           </Button>
           <Button asChild className="gap-1.5 font-bold">
             <Link to="/contact">

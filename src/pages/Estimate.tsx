@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Reveal } from "@/pages/services/previewKit";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { SAMPLES } from "@/lib/samples";
+import { TEMPLATE_INDUSTRY_LABELS } from "@/lib/samples";
 import { WEBSITE_PACKAGES } from "@/lib/templatePackages";
 import { cn } from "@/lib/utils";
 
@@ -30,7 +30,7 @@ export default function Estimate() {
 
   const industries = useMemo(
     () =>
-      Array.from(new Map(SAMPLES.filter((sample) => sample.premium && sample.industryKey).map((sample) => [sample.industryKey!, { key: sample.industryKey!, label: sample.industry.replace(" 홈페이지", "") }])).values())
+      Object.entries(TEMPLATE_INDUSTRY_LABELS).map(([key, label]) => ({ key, label }))
         .sort((a, b) => a.label.localeCompare(b.label, "ko")),
     [],
   );

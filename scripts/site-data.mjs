@@ -20,8 +20,3 @@ export function readSamples(root) {
     return item;
   }).filter((item) => item.slug);
 }
-
-export function readIndustryKeys(root, samples = readSamples(root)) {
-  const source = readFileSync(join(root, "src/lib/industryLanding.ts"), "utf8");
-  return [...source.matchAll(/^ {2}"?([a-z-]+)"?: \{$/gm)].map((match) => match[1]).filter((key) => samples.some((sample) => sample.premium && (sample.industryKey === key || (key === "real-estate" && sample.industryKey === "estate"))));
-}

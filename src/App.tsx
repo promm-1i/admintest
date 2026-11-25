@@ -3,7 +3,7 @@ import { trackPageView } from "@/lib/analytics";
 import { Route, Routes, Navigate, Outlet, useLocation } from "react-router-dom";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import { RenewalShell, RenewalHomeBody, RenewalPriceBody, RenewalSamplesBody, RenewalContentBody, RenewalPrivacyBody, RenewalAppsBody } from "@/pages/RenewalEditorial";
+import { RenewalShell, RenewalHomeBody, RenewalPriceBody, RenewalContentBody, RenewalPrivacyBody, RenewalAppsBody } from "@/pages/RenewalEditorial";
 import { organizationSchema } from "@/hooks/useStructuredData";
 import "@/pages/RenewalEditorial.css";
 import { MobileStickyCta } from "@/components/site/MobileStickyCta";
@@ -14,8 +14,6 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import Home from "@/pages/Home";
 
 const About = lazy(() => import("@/pages/About"));
-const IndustryIndex = lazy(() => import("@/pages/IndustryIndex"));
-const IndustryLanding = lazy(() => import("@/pages/IndustryLanding"));
 const Estimate = lazy(() => import("@/pages/Estimate"));
 const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
 const CustomDevService = lazy(() => import("@/pages/services/CustomDevService"));
@@ -26,7 +24,6 @@ const ContentManagementService = lazy(() => import("@/pages/services/ContentMana
 const DatabaseApiService = lazy(() => import("@/pages/services/DatabaseApiService"));
 const ResponsiveService = lazy(() => import("@/pages/services/ResponsiveService"));
 const SeoService = lazy(() => import("@/pages/services/SeoService"));
-const WebSolutions = lazy(() => import("@/pages/WebSolutions"));
 const DemoHub = lazy(() => import("@/pages/solutions/DemoHub"));
 const ProcessLanding = lazy(() => import("@/pages/website/ProcessLanding"));
 const PriceLanding = lazy(() => import("@/pages/website/PriceLanding"));
@@ -59,8 +56,6 @@ const MovingAdminDemoPage = lazy(() => import("@/pages/solutions/MovingAdminDemo
 const MovingCustomerSitePage = lazy(() => import("@/pages/solutions/MovingCustomerSitePage"));
 const ReservationSolution = lazy(() => import("@/pages/solutions/ReservationSolution"));
 const PlatformSolution = lazy(() => import("@/pages/solutions/PlatformSolution"));
-const Samples = lazy(() => import("@/pages/Samples"));
-const SampleDetail = lazy(() => import("@/pages/SampleDetail"));
 const Notices = lazy(() => import("@/pages/Notices"));
 const NoticeDetail = lazy(() => import("@/pages/NoticeDetail"));
 const Contact = lazy(() => import("@/pages/Contact"));
@@ -173,12 +168,12 @@ export default function App() {
             <Route path="/services/responsive" element={LEGACY_SHELL ? <ResponsiveService /> : <RenewalContentBody />} />
             <Route path="/services/seo" element={LEGACY_SHELL ? <SeoService /> : <RenewalContentBody />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
-            <Route path="/web-solutions" element={<WebSolutions />} />
+            <Route path="/web-solutions" element={<Navigate to="/website/price" replace />} />
             <Route path="/web-solutions/demos" element={<DemoHub />} />
-            <Route path="/templates" element={<Navigate to="/web-solutions" replace />} />
-            <Route path="/templates/*" element={<Navigate to="/web-solutions" replace />} />
-            <Route path="/homepage" element={<IndustryIndex />} />
-            <Route path="/homepage/:key" element={<IndustryLanding />} />
+            <Route path="/templates" element={<Navigate to="/website/price" replace />} />
+            <Route path="/templates/*" element={<Navigate to="/website/price" replace />} />
+            <Route path="/homepage" element={<Navigate to="/website/price" replace />} />
+            <Route path="/homepage/*" element={<Navigate to="/website/price" replace />} />
             <Route path="/estimate" element={<Estimate />} />
             <Route path="/website/process" element={LEGACY_SHELL ? <ProcessLanding /> : <RenewalContentBody />} />
             <Route path="/website/price" element={LEGACY_SHELL ? <PriceLanding /> : <RenewalPriceBody />} />
@@ -193,9 +188,9 @@ export default function App() {
             <Route path="/web-solutions/moving" element={<MovingSolution />} />
             <Route path="/web-solutions/reservations" element={<ReservationSolution />} />
             <Route path="/web-solutions/platform" element={<PlatformSolution />} />
-            <Route path="/samples" element={LEGACY_SHELL ? <Samples /> : <RenewalSamplesBody />} />
+            <Route path="/samples" element={<Navigate to="/" replace />} />
             <Route path="/privacy" element={<RenewalPrivacyBody />} />
-            <Route path="/samples/:slug" element={<SampleDetail />} />
+            <Route path="/samples/*" element={<Navigate to="/" replace />} />
             <Route path="/notices" element={<Notices />} />
             <Route path="/notices/:noticeId" element={<NoticeDetail />} />
             <Route path="/contact" element={<Contact />} />

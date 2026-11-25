@@ -1,12 +1,10 @@
 // public/sitemap.xml 생성기.
 // 실행: node scripts/generate-sitemap.mjs  (템플릿·포트폴리오를 추가/삭제했으면 다시 실행)
-// - 고정 라우트 + src/lib/samples.ts의 상세 페이지(/samples/:slug)를 합쳐서 쓴다.
+// - 고정 라우트만 쓴다(2026-11-25 포트폴리오 · 업종별 쪽 삭제).
 // - 데모(/web-solutions/*/demo)는 색인 대상에서 뺀다.
 import { writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-
-import { readSamples, readIndustryKeys } from "./site-data.mjs";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const ORIGIN = "https://noveriq.co.kr"; // www는 apex로 301되므로 apex가 정본
@@ -20,8 +18,6 @@ const CORE_ROUTES = [
   "/notices",
   "/blog",
   "/estimate",
-  "/homepage",
-  "/samples",
   "/website/process",
   "/website/price",
   "/website/features",
@@ -34,7 +30,6 @@ const CORE_ROUTES = [
   "/services/database-api",
   "/services/responsive",
   "/services/seo",
-  "/web-solutions",
   "/web-solutions/demos",
   "/web-solutions/product-quotes",
   "/web-solutions/reservations",
@@ -47,20 +42,12 @@ const CORE_ROUTES = [
   "/web-solutions/moving",
 ];
 
-// 업종별 SEO 랜딩(/homepage/:key). "{업종} 홈페이지 제작" 검색 유입을 받으려고 만든
-// 페이지라 색인이 목적인데 예전 sitemap 에는 한 건도 들어있지 않았다.
-const samples = readSamples(root);
-const industryRoutes = readIndustryKeys(root, samples).map((key) => `/homepage/${key}`);
-if (industryRoutes.length === 0) throw new Error("No remaining industries");
-const sampleRoutes = samples.filter((sample) => !sample.detailHref).map((sample) => `/samples/${sample.slug}`);
-
 // 프리렌더되는 라우트는 dist/<route>/index.html 로 저장되고, Netlify 는 /about 을
 // /about/ 로 301 한다. sitemap 이 슬래시 없는 주소를 내면 canonical 도 /about 으로 구워져
 // "정본은 /about → /about 은 /about/ 로 리디렉션" 고리가 되어 둘 다 색인이 안 된다
 // (2026-10-18 Search Console: 리디렉션 23 · 대체 페이지 9). 그래서 슬래시를 붙인다.
-// /samples/:slug 도 sample-meta.mjs 가 dist/samples/<slug>/index.html 을 구워 똑같이 301 되므로 붙인다.
 const withSlash = (u) => (u.endsWith("/") ? u : `${u}/`);
-const urls = [...CORE_ROUTES, ...industryRoutes, ...sampleRoutes].map(withSlash);
+const urls = CORE_ROUTES.map(withSlash);
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
@@ -70,7 +57,4 @@ const xml = [
 ].join("\n");
 
 writeFileSync(join(root, "public/sitemap.xml"), xml);
-console.log(
-  `sitemap.xml 생성 완료 — URL ${urls.length}개 ` +
-    `(고정 ${CORE_ROUTES.length} + 업종 ${industryRoutes.length} + 샘플 ${sampleRoutes.length})`,
-);
+console.log(`sitemap.xml 생성 완료 — URL ${urls.length}개`);

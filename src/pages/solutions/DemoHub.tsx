@@ -144,7 +144,7 @@ export default function DemoHub() {
         </p>
         <div className="mt-5 flex flex-wrap justify-center gap-3">
           <Button asChild variant="outline">
-            <Link to="/web-solutions">요금 확인하기</Link>
+            <Link to="/website/price">요금 확인하기</Link>
           </Button>
           <Button asChild className="font-bold">
             <Link to="/contact">구축 문의하기</Link>

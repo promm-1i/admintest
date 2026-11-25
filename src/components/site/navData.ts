@@ -332,17 +332,6 @@ export const MAIN_NAV: MainNavEntry[] = [
     ],
   },
   {
-    key: "portfolio",
-    label: "포트폴리오",
-    href: "/web-solutions",
-    groups: [
-      { key: "work", label: "포트폴리오", href: "/web-solutions", items: [
-        { label: "홈페이지 포트폴리오", href: "/web-solutions", desc: "병원 · 학원 · 기업 등 업종별로 만든 홈페이지" },
-        { label: "제작 사례", href: "/samples", desc: "관리자 · 플랫폼까지 갖춘 홈페이지" },
-      ] },
-    ],
-  },
-  {
     key: "support",
     label: "고객지원",
     href: "/contact",

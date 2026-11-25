@@ -28,7 +28,7 @@ import { TemplatePickVisual, CustomBuildVisual } from "@/components/sections/Com
 export const COMPARE = [
   {
     name: "프리미엄 디자인 · 쇼핑몰",
-    desc: "포트폴리오에서 출발해 구성을 브랜드에 맞춰 다시 잡습니다.",
+    desc: "구성을 브랜드에 맞춰 잡습니다.",
     points: [
       "완성된 화면 · 시안에서 출발",
       "가격이 정해져 있음 (150만원~ · 200만원~)",
@@ -251,7 +251,7 @@ export default function CustomDevService() {
               시작하고 싶으시면 맞춤 제작(150만원부터)을 보세요.
             </p>
             <Button asChild variant="outline" className="shrink-0 gap-1.5">
-              <Link to="/web-solutions">
+              <Link to="/website/price">
                 맞춤 제작 보기
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
@@ -278,7 +278,7 @@ export default function CustomDevService() {
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             <FadeIn direction="up">
               <Link
-                to="/web-solutions"
+                to="/web-solutions/demos"
                 className="group flex h-full items-start gap-4 rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-sm"
               >
                 <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-primary/10">
