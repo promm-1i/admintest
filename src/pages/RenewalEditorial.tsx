@@ -62,7 +62,7 @@ const SUBPAGE_MEDIA: Record<PageKey, string> = {
   seo: `${PHOTOS}/seo-wide.webp`,
 };
 const MEDIA_SLOTS = {
-  hero: `${MEDIA}/hero.webp`,
+  hero: `${MEDIA}/hero-apps.webp`,
   tomorrow: [`${MEDIA}/tomorrow-01.webp`, `${MEDIA}/tomorrow-02.webp`, `${MEDIA}/tomorrow-03.webp`],
 } as const;
 type PageKey = "process" | "price" | "features" | "maintenance" | "custom" | "admin-system" | "inquiry-reservation" | "search-filter" | "content-management" | "database-api" | "responsive" | "seo";
@@ -630,7 +630,7 @@ function Header() {
           onPointerEnter={() => openEntry(item)} onFocus={() => openEntry(item)}
           onKeyDown={(event) => { if (event.key === "Escape") closeMenu(event.currentTarget); }}>{item.label}</Link>)}
       </nav></div></div>
-      <div className="header-feature"><SiteSearch /><Link className="header-bank-shortcut re-header__contact" to={`${root}/contact`}>제작 문의<ArrowRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
+      <div className="header-feature"><SiteSearch /><Link className="header-bank-shortcut re-header__contact" to={`${root}/apps`}>출시한 앱<ArrowRight /></Link><span className="header-lang-select re-header__lang">KR</span><button className="header-mnb-button re-header__toggle" type="button" aria-expanded={mobileOpen} aria-controls="re-mobile-menu" onClick={() => setMobileOpen((open) => !open)}><span className="re-visually-hidden">메뉴 {mobileOpen ? "닫기" : "열기"}</span>{mobileOpen ? <X /> : <Menu />}</button></div>
     </div>
     {/* 펼침판 — 왼쪽 중메뉴 · 오른쪽 소메뉴. 여는 값은 기존 그대로(opacity .2s / max-height .3s) */}
     <div className="re-mega2" data-open={!!entry} aria-hidden={!entry}>
@@ -710,7 +710,7 @@ function HeroVideo() {
   }, [paused, inView]);
   return <>
     <div className="greeting-player">
-      <video ref={videoRef} className="greeting-video" src={`${MEDIA}/hero.mp4`} poster={MEDIA_SLOTS.hero} muted loop playsInline preload="metadata" aria-hidden="true" />
+      <video ref={videoRef} className="greeting-video" src={`${MEDIA}/hero-apps.mp4`} poster={MEDIA_SLOTS.hero} muted loop playsInline preload="metadata" aria-hidden="true" />
       <div className="greeting-dim re-greeting__dim" />
       <div className="greeting-swiper re-greeting__slides" aria-live="polite">
         <div className="swiper">

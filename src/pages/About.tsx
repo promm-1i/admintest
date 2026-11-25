@@ -5,53 +5,53 @@ import { ArrowRight, Check, Send } from "lucide-react";
 import { Reveal } from "@/pages/services/previewKit";
 import { FadeIn } from "@/components/ui/FadeIn";
 
+// 11-25 앱 먼저: 하는 일 셋 = PC · 태블릿 앱 / 폰 앱 / 홈페이지 제작. 앱 문장은 /apps(RenewalEditorial APPS) 사실 그대로.
 const CORE_VALUES = [
   {
     num: "01",
-    title: "담당자와 직접 소통",
-    desc: "복잡한 기획 대행사나 단계를 거치지 않고, 제작 담당자와 1:1로 직접 피드백을 주고받으며 원하는 방향을 신속하게 반영합니다.",
-    points: ["불필요한 커뮤니케이션 비용 제거", "요구사항 실시간 피드백 반영", "친절하고 쉬운 용어로 진행 안내"],
+    title: "PC와 태블릿 앱",
+    desc: "안드로이드 태블릿을 윈도우 PC의 두 번째 모니터, 마우스로 넘나드는 옆 화면, 단축키 버튼판, 펜 태블릿으로 씁니다. 태블릿 앱과 윈도우 PC 프로그램이 한 벌입니다.",
+    points: ["바이스크린", "바이크로스", "바이패드", "바이펜"],
   },
   {
     num: "02",
-    title: "실제 문의로 이어지는 구조",
-    desc: "방문객이 대표 서비스와 매장 위치, 가격을 첫 화면에서 보고 바로 전화·카톡 문의로 넘어가도록, 메뉴 순서와 버튼 위치를 업종에 맞춰 짭니다.",
-    points: ["주요 서비스와 메뉴를 위쪽에 정리", "전화 / 지도 / 카톡 문의 버튼 상시 노출", "모바일에서 먼저 보이는 순서로 배치"],
+    title: "폰 앱",
+    desc: "폰 사진과 동영상을 집 PC로 백업하고, 부모님 폰 화면을 내 폰에서 보며 도와 드리고, 남는 폰이나 태블릿을 카메라 모니터로 씁니다.",
+    points: ["바이포토", "바이케어", "바이뷰"],
   },
   {
     num: "03",
-    title: "제작 후 든든한 사후 관리",
-    desc: "홈페이지 배포 후 나 몰라라 하지 않습니다. 간단한 문구 수정, 이미지 교체, 공지사항 등록 등 제작 이후 운영 중에도 지속적인 수정을 도와드립니다.",
-    points: ["안정적인 배포 환경", "운영 중 문구 및 사진 수정 지원", "관리자 대시보드 확장 옵션 제공"],
+    title: "홈페이지 제작",
+    desc: "소상공인 · 기업 홈페이지를 만듭니다. 업종에 필요한 메뉴와 기능을 골라 전화 · 카카오톡 · 문의 폼으로 연락이 오게 합니다.",
+    points: ["제작 담당자와 직접 소통", "PC · 모바일 화면", "오픈 후 1개월 무상 수정"],
   },
 ];
 
 const STAT_ITEMS = [
-  { value: "1:1", label: "담당자 직통 피드백" },
-  { value: "100%", label: "PC · 모바일 반응형 대응" },
-  { value: "24시간", label: "문의 접수 · 1일 이내 회신" },
+  { value: "7", label: "출시한 앱" },
+  { value: "안드로이드", label: "폰 · 태블릿 앱" },
+  { value: "윈도우", label: "PC 프로그램" },
 ];
 
 export default function About() {
   usePageTitle(
     "노베릭 소개 — NOVERIQ",
-    "소상공인과 기업을 위한 노베릭의 홈페이지 제작 철학과 신뢰 가치를 소개합니다.",
+    "윈도우 PC와 안드로이드 폰 · 태블릿에서 쓰는 앱, 소상공인 · 기업 홈페이지를 만드는 노베릭입니다.",
   );
 
   return (
     <div>
       <Reveal className="mx-auto max-w-7xl px-4 pb-12 pt-16 sm:pt-24">
-        <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">NOVERIQ PHILOSOPHY</p>
+        <p className="text-xs font-mono font-semibold uppercase tracking-widest text-primary">ABOUT NOVERIQ</p>
         <h1 className="mt-5 text-4xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-5xl break-keep">
-          소상공인과 기업의
+          앱과 홈페이지를
           <br />
-          가장 확실한 첫인상을 만듭니다.
+          만듭니다
         </h1>
         <div className="mt-6 h-1 w-14 bg-primary" aria-hidden />
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground break-keep sm:text-lg">
-          NOVERIQ은 블로그나 SNS와 따로, 회사 소개와 문의를 받을 홈페이지를 맞춤으로 만드는 제작
-          스튜디오입니다. 업종에 필요한 메뉴와 기능을 골라, 전화 · 카카오톡 · 문의 폼으로 연락이
-          오게 만듭니다.
+          NOVERIQ은 윈도우 PC와 안드로이드 폰 · 태블릿에서 쓰는 앱을 만듭니다. 소상공인 · 기업
+          홈페이지도 만듭니다.
         </p>
       </Reveal>
 
@@ -68,7 +68,7 @@ export default function About() {
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:py-24">
         <Reveal>
-          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">NOVERIQ이 약속하는 3가지</h2>
+          <h2 className="text-2xl font-bold text-foreground sm:text-3xl">하는 일</h2>
         </Reveal>
         <div className="mt-8 divide-y divide-border border-t border-border">
           {CORE_VALUES.map((item, i) => (
@@ -101,23 +101,22 @@ export default function About() {
       <Reveal className="border-t border-border bg-secondary/30 py-16 text-center sm:py-20">
         <div className="mx-auto max-w-lg px-4">
           <h2 className="text-2xl font-bold text-foreground break-keep sm:text-3xl">
-            어떤 홈페이지가 필요한지 고민되시나요?
+            출시한 앱과 홈페이지 제작
           </h2>
           <p className="mt-3 text-base leading-relaxed text-muted-foreground break-keep">
-            업종과 갖고 계신 생각만 간단히 들려주세요. 부담 없는 맞춤 구성안과 견적을 정리해
-            드립니다.
+            홈페이지는 업종과 필요한 기능을 남겨 주시면 구성과 금액을 정리해 드립니다.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="gap-2 font-bold">
-              <Link to="/contact">
-                <Send className="h-4 w-4" />
-                무료 제작 상담하기
+              <Link to="/apps">
+                출시한 앱
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline" className="gap-2">
-              <Link to="/samples">
-                포트폴리오 확인하기
-                <ArrowRight className="h-4 w-4" />
+              <Link to="/contact">
+                <Send className="h-4 w-4" />
+                홈페이지 제작 상담
               </Link>
             </Button>
           </div>
