@@ -17,7 +17,6 @@ const CORE_ROUTES = [
   "/faq",
   "/notices",
   "/blog",
-  "/estimate",
   "/website/process",
   "/website/price",
   "/website/features",

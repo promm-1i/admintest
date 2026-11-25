@@ -16,7 +16,6 @@ export type SearchHit = {
 const PAGES: SearchHit[] = [
   { kind: "안내", title: "제작 방법", desc: "상담에서 오픈까지 순서", href: "/website/process" },
   { kind: "안내", title: "제작 비용", desc: "형태와 구성별 금액", href: "/website/price" },
-  { kind: "안내", title: "견적 계산기", desc: "기능을 골라 예상 금액 확인", href: "/estimate" },
   { kind: "안내", title: "기능 소개", desc: "화면과 운영 기능", href: "/website/features" },
   { kind: "안내", title: "유지보수", desc: "오픈 뒤 수정과 운영", href: "/website/maintenance" },
   { kind: "안내", title: "커스텀 개발", desc: "업무에 맞춘 기능 개발", href: "/services/custom" },

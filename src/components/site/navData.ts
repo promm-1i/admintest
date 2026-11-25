@@ -315,7 +315,6 @@ export const MAIN_NAV: MainNavEntry[] = [
       ] },
       { key: "cost", label: "비용", href: "/website/price", items: [
         { label: "제작 비용", href: "/website/price", desc: "형태와 구성별 정해진 금액" },
-        { label: "견적 계산기", href: "/estimate", desc: "기능을 골라 예상 금액 확인" },
       ] },
       { key: "custom", label: "맞춤 개발", href: "/services/custom", items: [
         { label: "커스텀 개발이란?", href: "/services/custom", desc: "업무에 맞춰 처음부터 설계" },

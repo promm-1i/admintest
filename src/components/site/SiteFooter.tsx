@@ -37,7 +37,6 @@ const FOOTER_GROUPS = [
     title: "고객센터",
     links: [
       { label: "문의하기", to: "/contact" },
-      { label: "견적 계산기", to: "/estimate" },
       { label: "공지사항", to: "/notices" },
       { label: "자주 묻는 질문", to: "/faq" },
       { label: "NOVERIQ 소개", to: "/about" },

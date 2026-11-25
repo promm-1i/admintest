@@ -1,7 +1,7 @@
 import { Fragment, Suspense, createContext, lazy, useContext, useEffect, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, Navigate, useLocation, useNavigationType, useSearchParams } from "react-router-dom";
-import { ArrowRight, ArrowUpRight, Calculator, Check, ChevronDown, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check, ChevronDown, HelpCircle, Menu, Receipt, Route as RouteIcon, Search, X } from "lucide-react";
 import { Logo } from "@/components/site/Logo";
 import { MAIN_NAV, isStaticPage, type MainNavEntry } from "@/components/site/navData";
 import { getNotice, listPublishedNotices } from "@/lib/api/notices";
@@ -270,7 +270,6 @@ function KakaoMark() {
 const HELP_CARDS = [
   { title: "제작 방법", desc: "상담에서 오픈까지\n무엇을 언제 하는지", href: "/website/process", tone: "a", Icon: RouteIcon },
   { title: "제작 비용", desc: "형태와 구성별로\n정해진 금액 보기", href: "/website/price", tone: "b", Icon: Receipt },
-  { title: "견적 계산기", desc: "필요한 기능을 골라\n예상 금액 확인", href: "/estimate", tone: "c", Icon: Calculator },
   { title: "자주 묻는 질문", desc: "비용 · 기간 · 관리자 기능에\n대한 답", href: "/faq", tone: "d", Icon: HelpCircle },
 ] as const;
 
@@ -877,101 +876,6 @@ function AboutPage() {
   </Contents></main>;
 }
 
-const EST_STYLES = WEBSITE_PACKAGES.map((item) => ({ key: item.key, name: item.label, cost: item.total, desc: item.desc }));
-const EST_DOMAINS = [{ key: "free", name: "무료 도메인 제공", desc: "com·co.kr·kr 중 원하시는 것으로, 첫 1년 무료" }, { key: "own", name: "보유 도메인 연동", desc: "이미 쓰시는 도메인을 그대로 연결합니다" }] as const;
-const won = (value: number) => value.toLocaleString("ko-KR");
-
-// 커스텀 탭은 항목별 단가를 보여주지 않는다. 낱개로 쪼개면 흥정이 붙고,
-// 커스텀 비용은 기능 개수가 아니라 복잡도에서 나와 정확한 숫자를 미리 못 박으면
-// 나중에 올려야 한다. 그래서 구간으로만 내고 상담으로 넘긴다.
-const EST_PAGES = [
-  { key: "one", name: "한 페이지", cost: 0, desc: "소개부터 문의까지 한 화면" },
-  { key: "small", name: "2~4쪽", cost: 300_000, desc: "소개 · 서비스 · 문의를 나눔" },
-  { key: "mid", name: "5~8쪽", cost: 600_000, desc: "메뉴를 갖춘 일반적인 기업 홈페이지" },
-  { key: "large", name: "9쪽 이상", cost: 1_000_000, desc: "업종별 분류와 자료실까지" },
-] as const;
-
-const EST_FEATURES = [
-  { key: "landing", name: "내릴 때 나타나는 연출", weight: 200_000, desc: "화면이 움직이며 나타나는 구성" },
-  { key: "industry", name: "업종 전용 기능", weight: 300_000, desc: "매물 · 차량 · 시술처럼 업종에 맞춘 화면" },
-  { key: "inquiry", name: "문의 · 예약 접수", weight: 300_000, desc: "접수부터 관리자 확인, 알림까지" },
-  { key: "search", name: "검색 · 필터", weight: 300_000, desc: "조건으로 걸러 보는 목록" },
-  { key: "content", name: "콘텐츠 관리", weight: 200_000, desc: "공지 · 사례 · 갤러리를 직접 등록" },
-  { key: "member", name: "회원 · 권한", weight: 600_000, desc: "로그인과 직원별 접근 권한" },
-  { key: "api", name: "DB · 외부 연동", weight: 600_000, desc: "외부 서비스와 자료를 주고받음" },
-  { key: "shop", name: "결제 · 주문", weight: 900_000, desc: "장바구니와 결제까지 직접 판매" },
-  { key: "seo", name: "검색엔진 최적화", weight: 150_000, desc: "검색 결과에 맞춘 제목과 구조" },
-  { key: "multi", name: "다국어", weight: 400_000, desc: "한 벌을 여러 언어로" },
-] as const;
-
-const EST_INCLUDED = ["관리자 모드", "반응형 제작", "DB · 파일 무제한", "도메인 1개", "기본 SEO 설정"];
-
-function EstimatePage() {
-  const root = useRoot();
-  const [mode, setMode] = useState<"package" | "custom">("package");
-  const [style, setStyle] = useState<string>("premium");
-  const [domain, setDomain] = useState<string>("free");
-  const [pages, setPages] = useState<string>("one");
-  const [picked, setPicked] = useState<string[]>([]);
-
-  const rows = [
-    { label: "업종 전용 기능", cost: 0 },
-    { label: "셋팅 비용", cost: 0 },
-    { label: `화면 형태 · ${EST_STYLES.find((x) => x.key === style)?.name}`, cost: EST_STYLES.find((x) => x.key === style)?.cost ?? 0 },
-  ];
-  const total = rows.reduce((sum, row) => sum + row.cost, 0);
-
-  // 고른 기능이 많을수록 복잡도가 붙으니 구간을 넓게 잡는다
-  const base = (picked.includes("shop") ? 2_000_000 : 1_500_000) + (EST_PAGES.find((x) => x.key === pages)?.cost ?? 0) + picked.filter((key) => key !== "shop").reduce((sum, key) => sum + (EST_FEATURES.find((f) => f.key === key)?.weight ?? 0), 0);
-  const round = (value: number) => Math.round(value / 100_000) * 100_000;
-  const low = round(base);
-  const high = round(base * (1.25 + picked.length * 0.03));
-
-  const toggle = (key: string) => setPicked((list) => (list.includes(key) ? list.filter((x) => x !== key) : [...list, key]));
-  const pick = (options: readonly { key: string; name: string; desc?: string }[], current: string, onPick: (value: string) => void) =>
-    <div className="re-estimate__options">{options.map((option) => <button type="button" key={option.key} className="re-estimate__option" aria-pressed={option.key === current} onClick={() => onPick(option.key)}><strong>{option.name}</strong>{option.desc && <span>{option.desc}</span>}</button>)}</div>;
-
-  const summary = [EST_PAGES.find((x) => x.key === pages)?.name, ...picked.map((key) => EST_FEATURES.find((f) => f.key === key)?.name)].filter(Boolean).join(", ");
-
-  return <main className="re-sub-page"><PageInfo category="홈페이지 제작" title="견적 계산기" /><Contents>
-    <LocalNav group="홈페이지 제작" path="/website/price" />
-    <Section wide>
-      <div className="re-estimate__tabs" role="tablist">
-        <button type="button" role="tab" aria-selected={mode === "package"} onClick={() => setMode("package")}>패키지로 고르기</button>
-        <button type="button" role="tab" aria-selected={mode === "custom"} onClick={() => setMode("custom")}>기능 골라 담기</button>
-      </div>
-      <p className="re-estimate__lead">{mode === "package" ? "화면 형태만 고르면 총액이 바로 나옵니다." : "쪽 수와 필요한 기능을 고르면 예상 구간이 나옵니다. 커스텀은 같은 기능이라도 범위에 따라 비용이 달라져 정확한 금액은 상담에서 확정합니다."}</p>
-    </Section>
-
-    {mode === "package" ? <>
-      <Section split title="01 화면 형태">{pick(EST_STYLES, style, setStyle)}</Section>
-      <Section split title="02 도메인">{pick(EST_DOMAINS, domain, setDomain)}</Section>
-      <Section split title="예상 비용">
-        <div className="re-estimate__result">
-          <dl>{rows.map((row) => <div key={row.label}><dt>{row.label}</dt><dd>포함</dd></div>)}</dl>
-          <p className="re-estimate__total"><span>합계</span><strong>{won(total)}원</strong></p>
-          <p className="re-estimate__note">부가세 별도이며 제작 일정은 상담 후 확정합니다. 도메인 1개가 위 금액에 들어 있고, 호스팅료는 따로 받지 않습니다. 2년차부터 드는 것은 도메인 갱신 연 30,000원뿐입니다.</p>
-          <div className="re-estimate__actions"><Link to={`${root}/contact`}>이 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
-        </div>
-      </Section>
-    </> : <>
-      <Section split title="01 페이지 수">{pick(EST_PAGES, pages, setPages)}</Section>
-      <Section split title="02 필요한 기능">
-        <div className="re-estimate__checks">{EST_FEATURES.map((feature) => <button type="button" key={feature.key} className="re-estimate__check" aria-pressed={picked.includes(feature.key)} onClick={() => toggle(feature.key)}><i aria-hidden="true" /><span><strong>{feature.name}</strong><em>{feature.desc}</em></span></button>)}</div>
-        <p className="re-estimate__note">아래는 고르지 않아도 모든 제작에 들어갑니다. {EST_INCLUDED.join(" · ")}</p>
-      </Section>
-      <Section split title="예상 구간">
-        <div className="re-estimate__result">
-          <p className="re-estimate__total"><span>예상</span><strong>{won(low)}~{won(high)}원</strong></p>
-          <p className="re-estimate__picked">{summary ? `고른 구성 — ${summary}` : "쪽 수와 기능을 고르면 구간이 좁혀집니다"}</p>
-          <p className="re-estimate__note">부가세 별도입니다. 커스텀은 같은 기능이라도 다루는 자료의 양과 화면 수에 따라 비용이 달라집니다. 위 구간은 시작점이고, 고른 내용을 보고 상담에서 확정합니다. 기능이 많을수록 구간이 넓어지는 것은 그만큼 확인할 것이 많다는 뜻입니다.</p>
-          <div className="re-estimate__actions"><Link to={`${root}/contact`}>고른 구성으로 상담하기<ArrowUpRight /></Link><a href={PHONE_TEL_HREF}>전화 문의<ArrowUpRight /></a></div>
-        </div>
-      </Section>
-    </>}
-  </Contents></main>;
-}
-
 // 업종 솔루션과 업종 랜딩은 본 사이트 컴포넌트를 그대로 쓰고 리뉴얼 헤더·맨 아래 안에서 그린다.
 // 안쪽 화면까지 다시 짜지 않고 껍데기만 리뉴얼로 맞추는 방식이다.
 const SKINNED_SOLUTIONS: Record<string, ReturnType<typeof lazy>> = {
@@ -1108,7 +1012,7 @@ function RouteContent({ path }: { path: string }) {
   if (path === "/privacy") return <PrivacyPage />;
   if (path === "/about") return <AboutPage />;
   if (path === "/apps") return <AppsPage />;
-  if (path === "/estimate") return <EstimatePage />;
+  if (path === "/estimate") return <Navigate to={`${root}/website/price`} replace />;
   if (path === "/web-solutions/demos" || path === "/solutions") return <SolutionsPage />;
   if (path.startsWith("/web-solutions/")) {
     const Solution = SKINNED_SOLUTIONS[path.split("/")[2]];

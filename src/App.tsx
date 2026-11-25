@@ -14,7 +14,6 @@ import { ScrollToTop } from "@/components/ScrollToTop";
 import Home from "@/pages/Home";
 
 const About = lazy(() => import("@/pages/About"));
-const Estimate = lazy(() => import("@/pages/Estimate"));
 const ServiceDetail = lazy(() => import("@/pages/ServiceDetail"));
 const CustomDevService = lazy(() => import("@/pages/services/CustomDevService"));
 const AdminSystemService = lazy(() => import("@/pages/services/AdminSystemService"));
@@ -174,7 +173,7 @@ export default function App() {
             <Route path="/templates/*" element={<Navigate to="/website/price" replace />} />
             <Route path="/homepage" element={<Navigate to="/website/price" replace />} />
             <Route path="/homepage/*" element={<Navigate to="/website/price" replace />} />
-            <Route path="/estimate" element={<Estimate />} />
+            <Route path="/estimate" element={<Navigate to="/website/price" replace />} />
             <Route path="/website/process" element={LEGACY_SHELL ? <ProcessLanding /> : <RenewalContentBody />} />
             <Route path="/website/price" element={LEGACY_SHELL ? <PriceLanding /> : <RenewalPriceBody />} />
             <Route path="/website/features" element={LEGACY_SHELL ? <FeaturesLanding /> : <RenewalContentBody />} />
