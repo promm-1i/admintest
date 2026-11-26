@@ -5,7 +5,7 @@
 // 비워두면 아무 스크립트도 로드하지 않습니다(개발 중 오염 방지).
 // 앱 안내처럼 public 에 있는 정적 쪽은 scripts/static-analytics.mjs 가 이 ID 를 읽어 빌드 때 넣습니다.
 
-export const GA_MEASUREMENT_ID = ""; // 예: "G-ABC123XYZ"
+export const GA_MEASUREMENT_ID = "G-VQDDH561MD"; // 11-26 대표님이 만든 NOVERIQ 속성
 
 declare global {
   interface Window {
