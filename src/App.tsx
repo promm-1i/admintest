@@ -117,7 +117,9 @@ function SiteLayout() {
 function AnalyticsPageView() {
   const location = useLocation();
   useEffect(() => {
-    trackPageView(location.pathname + location.search);
+    // 새 쪽의 usePageTitle 이 제목을 바꾼 뒤에 보낸다. 바로 보내면 애널리틱스에 앞 쪽 제목으로 찍힌다(11-26 확인).
+    const timer = window.setTimeout(() => trackPageView(location.pathname + location.search), 500);
+    return () => window.clearTimeout(timer);
   }, [location.pathname, location.search]);
   return null;
 }
