@@ -41,12 +41,16 @@ const CORE_ROUTES = [
   "/web-solutions/moving",
 ];
 
+// 앱 안내 쪽 — public/<앱>/ 의 정적 html(한국어 · 영어). 프리렌더 대상이 아니다(prerender.mjs 가 정적 쪽은 건너뜀).
+const APPS = ["byscreen", "cross", "bypad", "bypen", "byphoto", "bycare", "byview", "bydrive", "bycam", "bykeyboard", "bytouch", "byway"];
+const APP_PAGES = APPS.flatMap((a) => [`/${a}/`, `/${a}/en/`]);
+
 // 프리렌더되는 라우트는 dist/<route>/index.html 로 저장되고, Netlify 는 /about 을
 // /about/ 로 301 한다. sitemap 이 슬래시 없는 주소를 내면 canonical 도 /about 으로 구워져
 // "정본은 /about → /about 은 /about/ 로 리디렉션" 고리가 되어 둘 다 색인이 안 된다
 // (2026-10-18 Search Console: 리디렉션 23 · 대체 페이지 9). 그래서 슬래시를 붙인다.
 const withSlash = (u) => (u.endsWith("/") ? u : `${u}/`);
-const urls = CORE_ROUTES.map(withSlash);
+const urls = [...CORE_ROUTES.map(withSlash), ...APP_PAGES];
 const xml = [
   '<?xml version="1.0" encoding="UTF-8"?>',
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',

@@ -73,7 +73,7 @@ export function organizationSchema() {
     image: `${ORIGIN}/og-image.jpg`,
     telephone: "+82-10-4894-4905",
     email: "6gsmake@gmail.com",
-    description: "소상공인과 기업을 위한 맞춤형 홈페이지 제작 스튜디오입니다.",
+    description: "윈도우 PC와 안드로이드 폰 · 태블릿에서 쓰는 앱을 만듭니다. 소상공인 · 기업 홈페이지도 만듭니다.",
     address: { "@type": "PostalAddress", addressCountry: "KR", addressRegion: "서울" },
     areaServed: "KR",
     priceRange: "₩₩",

@@ -1364,7 +1364,11 @@ function RenewalEditorialInner() {
 function PageMeta({ page }: { page: ContentPage }) { usePageTitle(`${page.title} — NOVERIQ`, page.intro); return null; }
 
 /** 본 사이트 루트에서 쓰는 리뉴얼 본문들. 껍데기는 SiteLayout 이 이미 씌운다. */
-export function RenewalHomeBody() { return <EditorialHome />; }
+export function RenewalHomeBody() {
+  // 설명은 index.html 그대로 두고, 프리렌더에 canonical · og:url 이 구워지게 한다(안 부르면 홈만 canonical 이 없다)
+  usePageTitle("NOVERIQ — PC · 모바일 앱과 홈페이지");
+  return <EditorialHome />;
+}
 export function RenewalPriceBody() { return <><PageMeta page={PAGE_DATA.price} /><PriceDetail page={PAGE_DATA.price} path="/website/price" /></>; }
 export function RenewalPrivacyBody() { return <PrivacyPage />; }
 export function RenewalAppsBody() {

@@ -29,7 +29,8 @@ function routesFromSitemap() {
   const xml = readFileSync(join(root, "public/sitemap.xml"), "utf8");
   return [...xml.matchAll(/<loc>https?:\/\/[^/]+([^<]*)<\/loc>/g)]
     .map((m) => m[1] || "/")
-    .filter((p) => !/^\/samples\/./.test(p)); // 목록 /samples/ 는 남기고 상세만 뺀다
+    .filter((p) => !/^\/samples\/./.test(p)) // 목록 /samples/ 는 남기고 상세만 뺀다
+    .filter((p) => p === "/" || !existsSync(join(root, "public", p, "index.html"))); // 앱 안내처럼 public 에 정적 html 이 있는 쪽은 그대로 둔다
 }
 
 const MIME = {
