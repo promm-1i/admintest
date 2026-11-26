@@ -1241,7 +1241,7 @@ function BlogPage() {
   </Contents></main>;
 }
 
-const PRIVACY_UPDATED = "2026년 9월 21일";
+const PRIVACY_UPDATED = "2026년 11월 26일";
 const PRIVACY_SECTIONS: { title: string; body: string[]; list?: string[] }[] = [
   {
     title: "01 수집하는 항목과 이용 목적",
