@@ -42,7 +42,7 @@ const CORE_ROUTES = [
 ];
 
 // 앱 안내 쪽 — public/<앱>/ 의 정적 html(한국어 · 영어). 프리렌더 대상이 아니다(prerender.mjs 가 정적 쪽은 건너뜀).
-const APPS = ["byscreen", "cross", "bypad", "bypen", "byphoto", "bycare", "byview", "bydrive", "bycam", "bykeyboard", "bytouch", "byway"];
+const APPS = ["byscreen", "cross", "bypad", "bypen", "byphoto", "bycare", "byview", "bydrive", "bycam", "bykeyboard", "bytouch", "byway", "bymirror"];
 const APP_PAGES = APPS.flatMap((a) => [`/${a}/`, `/${a}/en/`]);
 
 // 프리렌더되는 라우트는 dist/<route>/index.html 로 저장되고, Netlify 는 /about 을
