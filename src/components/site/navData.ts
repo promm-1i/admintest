@@ -296,8 +296,12 @@ export const MAIN_NAV: MainNavEntry[] = [
         { label: "바이패드", href: "/bypad/", desc: "태블릿을 PC 단축키 버튼판으로" },
         { label: "바이펜", href: "/bypen/", desc: "태블릿 펜으로 PC에 그리기" },
         { label: "바이포토", href: "/byphoto/", desc: "폰 사진을 집 PC로" },
+        { label: "바이드라이브", href: "/bydrive/", desc: "집 PC를 내 클라우드로" },
+        { label: "바이키보드", href: "/bykeyboard/", desc: "폰으로 PC 키보드·마우스" },
+        { label: "바이캠", href: "/bycam/", desc: "폰 카메라를 PC 웹캠으로" },
         { label: "바이케어", href: "/bycare/", desc: "부모님 폰 화면 보고 도와주기" },
         { label: "바이뷰", href: "/byview/", desc: "남는 폰을 카메라 모니터로" },
+        { label: "바이웨이", href: "/byway/", desc: "하트·글자 모양 산책 길" },
       ] },
     ],
   },
@@ -348,5 +352,5 @@ export const MAIN_NAV: MainNavEntry[] = [
 ];
 
 /** SPA 밖에 있는 정적 페이지(public/ 아래). 라우터로 열면 없는 쪽이 되므로 문서 이동으로 연다. */
-export const STATIC_PAGES = ["/byscreen/", "/cross/", "/bypad/", "/bypen/", "/byphoto/", "/bycare/", "/byview/"];
+export const STATIC_PAGES = ["/byscreen/", "/cross/", "/bypad/", "/bypen/", "/byphoto/", "/bycare/", "/byview/", "/bydrive/", "/bykeyboard/", "/bycam/", "/byway/"];
 export const isStaticPage = (href: string) => STATIC_PAGES.some((prefix) => href.startsWith(prefix));

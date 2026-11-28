@@ -287,7 +287,7 @@ const HELP_CARDS = [
  * 11-25 업종 템플릿 썸네일 → 앱 일곱 개(사진 · 사실 세 줄 · 앱 쪽 링크).
  */
 function HomeApps() {
-  const items = APPS.map((app) => ({ key: app.slug, eng: app.slug.toUpperCase(), name: app.name, rows: app.facts, href: app.href, shot: app.photoSmall }));
+  const items = HOME_APPS.map((app) => ({ key: app.slug, eng: app.slug.toUpperCase(), name: app.name, rows: app.facts, href: app.href, shot: app.photoSmall }));
   const [open, setOpen] = useState(0);
   return <section className="re-nhn re-nhn--industry">
     <div className="re-nhn__frame">
@@ -328,7 +328,7 @@ const HOME_CASE_PHOTOS: Record<string, string> = {
 function HomeCases() {
   const root = useRoot();
   // 11-25 포트폴리오 카드 → 앱 일곱 개(아코디언과 다른 사진). APPS 가 아래에 있어 렌더 때 만든다
-  const cases = APPS.map((app) => ({ slug: app.slug, name: app.name, href: app.href, image: HOME_CASE_PHOTOS[app.slug] }));
+  const cases = HOME_APPS.map((app) => ({ slug: app.slug, name: app.name, href: app.href, image: HOME_CASE_PHOTOS[app.slug] }));
   /* 원본 Swiper 설정 그대로 — slidesPerView 4 · spaceBetween 10 · speed 300 · slidesPerGroup 4 · loop 없음.
      Swiper 는 allowTouchMove 가 기본 켜져 있어 좌우로 끌어서도 넘어간다. 화살표만 있으면 반쪽이다.
      슬라이드 320 + 간격 10 = 한 칸 330. */
@@ -781,6 +781,33 @@ const APPS = [
     alt: "밤 책상의 모니터에 열린 사진 폴더와 손에 든 폰",
     facts: ["안드로이드 폰 앱 · 윈도우 PC 프로그램", "집 와이파이 자동 백업 · 원본 · 밖에서 보기", "집에서는 무료 · 밖에서 쓰기 11,000원 한 번 결제"],
   },
+  /* 11-29 바이드라이브 · 바이키보드 · 바이캠 · 바이웨이. 소개 페이지에서 요금을 뺐으므로(11-24) 셋째 줄은 요금 대신 페이지에 적힌 사실.
+     바이드라이브 · 바이키보드 · 바이캠은 원본 합성이 1024 폭 세로라 3:2 로 잘라 1024 · 512 판(photoWidth).
+     맨 아래 메뉴가 항목 앞 여섯 개만 보여 주므로 새 앱은 바이포토 뒤부터 넣는다 */
+  {
+    slug: "bydrive", name: "바이드라이브", href: "/bydrive/", icon: "/bydrive/icon.png",
+    line: "집 PC를 내 클라우드로",
+    desc: "폰의 다운로드 파일과 메신저로 받은 파일을 집 와이파이에서 윈도우 PC로 옮겨 둡니다. 밖에서도 집 PC 폴더를 열어 필요한 파일만 받고, 큰 영상은 링크로 보냅니다.",
+    photo: "/bydrive/img/card-ko-1024.webp", photoSmall: "/bydrive/img/card-ko-512.webp", photoWidth: 1024,
+    alt: "밤 책상 앞에서 손에 든 폰에 PC로 보내고 있다는 화면이 떠 있다",
+    facts: ["안드로이드 폰 앱 · 윈도우 PC 프로그램", "집 와이파이 자동 보내기 · 밖에서 집 PC 열기 · 7일 동안 열리는 링크", "윈도우 11 · 안드로이드 11 이상"],
+  },
+  {
+    slug: "bykeyboard", name: "바이키보드", href: "/bykeyboard/", icon: "/bykeyboard/icon.png",
+    line: "폰으로 PC 키보드·마우스",
+    desc: "안드로이드 폰이나 태블릿을 윈도우 PC의 트랙패드와 자판으로 씁니다. 폰 자판으로 친 한글이 PC에 그대로 들어가고, 블루투스로 연결하면 PC에 아무것도 깔지 않습니다.",
+    photo: "/bykeyboard/img/card-ko-1024.webp", photoSmall: "/bykeyboard/img/card-ko-512.webp", photoWidth: 1024,
+    alt: "어두운 거실에서 한 손에 쥔 폰 화면을 다른 손 두 손가락으로 끄는 모습",
+    facts: ["안드로이드 폰이나 태블릿 앱 · 윈도우 PC 프로그램", "블루투스 · 와이파이 · USB 케이블 · 한글 입력 · 오른쪽 클릭 · 스크롤", "블루투스는 PC에 설치 없음 · 안드로이드 9 이상 · 윈도우 11"],
+  },
+  {
+    slug: "bycam", name: "바이캠", href: "/bycam/", icon: "/bycam/icon.png",
+    line: "폰 카메라를 PC 웹캠으로",
+    desc: "안드로이드 폰을 USB 케이블로 윈도우 PC에 꽂아 웹캠으로 씁니다. 회의나 수업 프로그램의 카메라 설정에서 ‘바이캠’을 고르면 폰 카메라가 켜지고, 와이파이가 꺼져 있어도 영상은 케이블로 PC에 갑니다.",
+    photo: "/bycam/img/card-ko-1024.webp", photoSmall: "/bycam/img/card-ko-512.webp", photoWidth: 1024,
+    alt: "노트북 옆 거치대에 세운 폰에 흰 USB 케이블을 꽂는 손",
+    facts: ["안드로이드 폰 앱 · 윈도우 PC 프로그램", "USB 케이블 · 1080p · 같은 와이파이 필요 없음", "윈도우 11(22H2 이상) · 안드로이드 8 이상"],
+  },
   {
     slug: "bycare", name: "바이케어", href: "/bycare/", icon: "/bycare/icon.png",
     line: "부모님 폰 화면 보고 도와주기",
@@ -797,7 +824,18 @@ const APPS = [
     alt: "어두운 거실에서 두 손으로 든 태블릿에 꽃을 꽂는 손이 보이고, 뒤쪽 삼각대 위에 폰이 서 있다",
     facts: ["안드로이드 폰 앱 · 폰이나 태블릿 두 대", "와이파이 다이렉트 · 녹화 · 누른 곳 초점 · 밝기", "3일 무료 · 보기와 녹화는 계속 무료 · Pro 11,000원 한 번 결제"],
   },
+  {
+    slug: "byway", name: "바이웨이", href: "/byway/", icon: "/byway/icon.png",
+    line: "하트·글자 모양 산책 길",
+    desc: "모양과 거리를 고르면 지금 있는 곳 근처의 실제 길로 그 모양의 길을 만들어 줍니다. 갈림길 앞에서 소리와 진동으로 알려 주고, 다 걸으면 지도 위 그림을 사진으로 저장합니다.",
+    photo: "/byway/img/card-ko-1536.webp", photoSmall: "/byway/img/card-ko-768.webp",
+    alt: "밤 동네 골목에서 손에 든 폰의 지도에 3.6 km 하트 길이 그려져 있다",
+    facts: ["안드로이드 폰 앱 · 폰 한 대", "하트 · 별 · 글자 · 직접 그리기 · 걷기 · 달리기 · 자전거", "한국 전국과 해외 10개 도시 · 가입 없음 · 광고 없음"],
+  },
 ] as const;
+
+/** 첫 화면 아코디언과 쓰는 모습 카드는 일곱 개에 맞춰 짰다. 11-29 에 넣은 네 앱은 /apps 목록과 메뉴에만 */
+const HOME_APPS = APPS.filter((app) => ["byscreen", "cross", "bypad", "bypen", "byphoto", "bycare", "byview"].includes(app.slug));
 
 /** 홈 첫 칸(PC와 태블릿)과 하는 일 아래 카드 셋에 나눠 싣는다. 바이펜은 하는 일 배경 사진, 일곱 개 전부는 아래 출시한 앱 목록. */
 const HOME_STORY_APPS = APPS.filter((app) => ["byscreen", "cross", "bypad"].includes(app.slug));
@@ -1163,8 +1201,8 @@ function FaqPage() {
 function AppsPage() {
   return <main className="re-sub-page"><PageInfo category="NOVERIQ" title="앱" /><Contents>
     <Section split title="출시한 앱"><div className="re-apps">
-      {APPS.map((app) => <article className="re-app" key={app.slug}>
-        <a className="re-app__photo" href={app.href} tabIndex={-1} aria-hidden="true"><img src={app.photoSmall} srcSet={`${app.photoSmall} 768w, ${app.photo} 1536w`} sizes="(max-width: 1023px) 100vw, 900px" alt="" loading="lazy" decoding="async" /></a>
+      {APPS.map((app) => { const width = "photoWidth" in app ? app.photoWidth : 1536; return <article className="re-app" key={app.slug}>
+        <a className="re-app__photo" href={app.href} tabIndex={-1} aria-hidden="true"><img src={app.photoSmall} srcSet={`${app.photoSmall} ${width / 2}w, ${app.photo} ${width}w`} sizes="(max-width: 1023px) 100vw, 900px" alt="" loading="lazy" decoding="async" /></a>
         <div className="re-app__body">
           <img className="re-app__icon" src={app.icon} width="64" height="64" alt="" />
           <h3 className="re-app__name">{app.name}</h3>
@@ -1173,7 +1211,7 @@ function AppsPage() {
           <ul className="re-app__facts">{app.facts.map((fact) => <li key={fact}><Check />{fact}</li>)}</ul>
           <a className="re-pill" href={app.href}>{app.name} 보기<ArrowRight /></a>
         </div>
-      </article>)}
+      </article>; })}
     </div></Section>
   </Contents></main>;
 }
